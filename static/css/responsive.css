@@ -1,0 +1,21 @@
+    @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+        .top-pink-bar p {
+            padding: 0px 40px;
+        }
+        .mega-dropdown-menu>li {
+            float: none;
+            margin-bottom: 20px;
+        }
+        .footer .menulist {
+            margin-bottom: 20px;
+        }
+        .footer .copyright p {
+            margin-bottom: 20px;
+        }
+        .footer .copyright {
+            margin-top: 10px;
+        }
+        .footer .ctm-logo {
+            position: static;
+        }
+    }
