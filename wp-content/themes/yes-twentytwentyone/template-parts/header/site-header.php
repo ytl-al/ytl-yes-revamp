@@ -12,12 +12,14 @@
 
 <!-- Header STARTS -->
 <header class="page-header">
+    <?php if (is_active_sidebar('yes_widget_top_page_banner')) : ?>
     <div class="top-pink-bar">
         <div class="row g-0 text-center">
-            <p>Are you an Exisiting YES user? Earn up to RM50/referral through our Refer & Earn program!</p>
+            <p><?php dynamic_sidebar('yes_widget_top_page_banner'); ?></p>
         </div>
-        <a href="#" class="close-btn"><span class="iconify" data-icon="eva:close-fill"></span></a>
+        <a href="javascript:void(0)" class="close-btn" onClick="closeTopPageBanner()"><span class="iconify" data-icon="eva:close-fill"></span></a>
     </div>
+    <?php endif; ?>
     <div class="top-tabs-container">
         <div class="container g-0">
             <div class="row g-0">

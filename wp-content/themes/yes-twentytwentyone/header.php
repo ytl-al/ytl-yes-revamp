@@ -19,9 +19,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="profile" href="https://gmpg.org/xfn/11" />
 
-	<title><?php bloginfo('name'); ?> | <?php is_front_page() ? bloginfo('description') : wp_title(''); ?></title>
+	<title><?php bloginfo('name'); ?> | <?php is_front_page() ? '' : wp_title(''); ?></title>
 
 	<?php wp_head(); ?>
+	
+	<script type="text/javascript">var $ = jQuery.noConflict();</script>
 </head>
 
 <body <?php body_class(); ?>>

@@ -17,31 +17,19 @@
             <div class="col-12 col-md-2">
                 <img src="/wp-content/themes/yes-twentytwentyone/assets/images/logo.svg" class="footer-logo mb-4" />
                 <div class="row mb-2">
-                    <ul class="icon-list">
-                        <li>
-                            <a href="#"><img src="/wp-content/themes/yes-twentytwentyone/assets/images/facebook.svg" /></a>
-                        </li>
-                        <li>
-                            <a href="#"><img src="/wp-content/themes/yes-twentytwentyone/assets/images/instagram.svg" /></a>
-                        </li>
-                        <li>
-                            <a href="#"><img src="/wp-content/themes/yes-twentytwentyone/assets/images/youtube.svg" /></a>
-                        </li>
-                        <li>
-                            <a href="#"><img src="/wp-content/themes/yes-twentytwentyone/assets/images/twitter.svg" /></a>
-                        </li>
-                    </ul>
+                    <?php 
+                        if (is_active_sidebar('yes_widget_footer_social_icons')) :
+                            dynamic_sidebar('yes_widget_footer_social_icons');
+                        endif;
+                    ?>
                 </div>
                 <div class="row">
                     <p class="mb-2">Get The MyYes App</p>
-                    <ul class="icon-list">
-                        <li>
-                            <a href="#"><img src="/wp-content/themes/yes-twentytwentyone/assets/images/logos_apple-app-store.svg" /></a>
-                        </li>
-                        <li>
-                            <a href="#"><img src="/wp-content/themes/yes-twentytwentyone/assets/images/logos_google-play-icon.svg" /></a>
-                        </li>
-                    </ul>
+                    <?php 
+                        if (is_active_sidebar('yes_widget_footer_app_icons')) :
+                            dynamic_sidebar('yes_widget_footer_app_icons');
+                        endif;
+                    ?>
                 </div>
             </div>
             <div class="col-12 col-md-9">

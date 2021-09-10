@@ -17,28 +17,10 @@ if (!function_exists('yes_enqueue_scripts')) {
 
         wp_enqueue_script('jquery', get_template_directory_uri() . '/assets/js/jquery.min.js', array(), '3.5.1', true);
         wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.bundle.js', array(), '5.1.0', true);
-        wp_enqueue_script('iconify', get_template_directory_uri() . '/assets/js/iconify.min.js', array(), '2.0', true);
+        wp_enqueue_script('iconify', get_template_directory_uri() . '/assets/js/iconify.min.js', array(), '2.0.0', true);
+        wp_enqueue_script('yes-js', get_template_directory_uri() . '/assets/js/yes.js', array(), '1.0.0', true);
     }
     add_action('wp_enqueue_scripts', 'yes_enqueue_scripts');
-}
-
-
-/**
- * Function to change the logo class when using the 'the_custom_logo()' function to display logo image
- * 
- * @since    1.0.0
- * 
- * @param    string     $html      The default HTML for the the_custom_logo() function
- * @return   string     Returning the manipulated HTML string
- */
-if (!function_exists('yes_change_logo_class')) {
-    function yes_change_logo_class($html)
-    {
-        $html = str_replace('custom-logo', 'navbar-brand', $html);
-        $html = str_replace('custom-logo-link', 'navbar-brand', $html);
-        return $html;
-    }
-    add_filter('get_custom_logo', 'yes_change_logo_class');
 }
 
 
@@ -64,9 +46,56 @@ if (!function_exists('yes_twentytwentyone_setup')) {
                 )
             );
         }
+
+        if (function_exists('register_sidebar')) {
+            register_sidebar(array(
+                'name'          => 'Top Page Banner', 
+                'id'            => 'yes_widget_top_page_banner', 
+                'before_widget' => '', 
+                'after_widget'  => '', 
+                'before_title'  => '', 
+                'after_title'   => '' 
+            ));
+            register_sidebar(array(
+                'name'          => 'Footer Social Icons', 
+                'id'            => 'yes_widget_footer_social_icons', 
+                'before_widget' => '', 
+                'after_widget'  => '', 
+                'before_title'  => '', 
+                'after_title'   => '' 
+            ));
+            register_sidebar(array(
+                'name'          => 'Footer App Icons', 
+                'id'            => 'yes_widget_footer_app_icons', 
+                'before_widget' => '', 
+                'after_widget'  => '', 
+                'before_title'  => '', 
+                'after_title'   => '' 
+            ));
+        }
     }
     add_action('after_setup_theme', 'yes_twentytwentyone_setup');
 }
+
+
+/**
+ * Function to change the logo class when using the 'the_custom_logo()' function to display logo image
+ * 
+ * @since    1.0.0
+ * 
+ * @param    string     $html      The default HTML for the the_custom_logo() function
+ * @return   string     Returning the manipulated HTML string
+ */
+if (!function_exists('yes_change_logo_class')) {
+    function yes_change_logo_class($html)
+    {
+        $html = str_replace('custom-logo', 'navbar-brand', $html);
+        $html = str_replace('custom-logo-link', 'navbar-brand', $html);
+        return $html;
+    }
+    add_filter('get_custom_logo', 'yes_change_logo_class');
+}
+
 
 /**
  * Function to register custom menus for yes.my theme
@@ -112,7 +141,6 @@ if (!function_exists('yes_nav_add_li_class')) {
     }
     add_filter('nav_menu_css_class', 'yes_nav_add_li_class', 1, 3);
 }
-
 
 
 /**
