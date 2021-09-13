@@ -17,9 +17,12 @@
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	
 	<link rel="profile" href="https://gmpg.org/xfn/11" />
 
-	<title><?php bloginfo('name'); ?> | <?php is_front_page() ? '' : wp_title(''); ?></title>
+	<title><?php bloginfo('name'); ?> <?php is_front_page() ? '' : '| '.wp_title(''); ?></title>
 
 	<?php wp_head(); ?>
 	

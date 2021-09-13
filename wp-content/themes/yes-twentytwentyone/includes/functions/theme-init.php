@@ -57,16 +57,16 @@ if (!function_exists('yes_twentytwentyone_setup')) {
                 'after_title'   => '' 
             ));
             register_sidebar(array(
-                'name'          => 'Footer Social Icons', 
-                'id'            => 'yes_widget_footer_social_icons', 
+                'name'          => 'Footer Top', 
+                'id'            => 'yes_widget_footer_top', 
                 'before_widget' => '', 
                 'after_widget'  => '', 
                 'before_title'  => '', 
                 'after_title'   => '' 
             ));
             register_sidebar(array(
-                'name'          => 'Footer App Icons', 
-                'id'            => 'yes_widget_footer_app_icons', 
+                'name'          => 'Footer Bottom', 
+                'id'            => 'yes_widget_footer_bottom', 
                 'before_widget' => '', 
                 'after_widget'  => '', 
                 'before_title'  => '', 
@@ -113,11 +113,11 @@ if (!function_exists('yes_register_menus')) {
                     'shop-broadband'    => esc_html__('Broadband', 'yes.my'),
                     'shop-existing-customers' => esc_html__('Existing Customers', 'yes.my'),
 
-                    'footer-column-1'   => esc_html__('Footer - Column 1', 'yes.my'),
-                    'footer-column-2'   => esc_html__('Footer - Column 2', 'yes.my'),
-                    'footer-column-3'   => esc_html__('Footer - Column 3', 'yes.my'),
-                    'footer-column-4'   => esc_html__('Footer - Column 4', 'yes.my'),
-                    'footer-column-5'   => esc_html__('Footer - Column 5', 'yes.my')
+                    // 'footer-column-1'   => esc_html__('Footer - Column 1', 'yes.my'),
+                    // 'footer-column-2'   => esc_html__('Footer - Column 2', 'yes.my'),
+                    // 'footer-column-3'   => esc_html__('Footer - Column 3', 'yes.my'),
+                    // 'footer-column-4'   => esc_html__('Footer - Column 4', 'yes.my'),
+                    // 'footer-column-5'   => esc_html__('Footer - Column 5', 'yes.my')
                 )
             );
         }
