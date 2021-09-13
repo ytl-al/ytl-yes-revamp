@@ -33,7 +33,8 @@ if (!function_exists('yes_twentytwentyone_setup')) {
     function yes_twentytwentyone_setup()
     {
         if (function_exists('add_theme_support')) {
-            add_theme_support( 'title-tag' );
+            /** To add the theme support for title tag for the website */
+            add_theme_support('title-tag');
             /** To add the theme support for custom logo */
             add_theme_support(
                 'custom-logo',
@@ -45,33 +46,42 @@ if (!function_exists('yes_twentytwentyone_setup')) {
                     'unlink-homepage-logo' => false,
                 )
             );
+            /** To add the theme support for post thumbnails */
+            add_theme_support('post-thumbnails');
         }
 
         if (function_exists('register_sidebar')) {
+            /** Register widget - Top Page Banner */
             register_sidebar(array(
-                'name'          => 'Top Page Banner', 
-                'id'            => 'yes_widget_top_page_banner', 
-                'before_widget' => '', 
-                'after_widget'  => '', 
-                'before_title'  => '', 
-                'after_title'   => '' 
+                'name'          => 'Top Page Banner',
+                'id'            => 'yes_widget_top_page_banner',
+                'before_widget' => '',
+                'after_widget'  => '',
+                'before_title'  => '',
+                'after_title'   => ''
             ));
+            /** Register widget - Footer Top */
             register_sidebar(array(
-                'name'          => 'Footer Top', 
-                'id'            => 'yes_widget_footer_top', 
-                'before_widget' => '', 
-                'after_widget'  => '', 
-                'before_title'  => '', 
-                'after_title'   => '' 
+                'name'          => 'Footer Top',
+                'id'            => 'yes_widget_footer_top',
+                'before_widget' => '',
+                'after_widget'  => '',
+                'before_title'  => '',
+                'after_title'   => ''
             ));
+            /** Register widget - Footer Bottom */
             register_sidebar(array(
-                'name'          => 'Footer Bottom', 
-                'id'            => 'yes_widget_footer_bottom', 
-                'before_widget' => '', 
-                'after_widget'  => '', 
-                'before_title'  => '', 
-                'after_title'   => '' 
+                'name'          => 'Footer Bottom',
+                'id'            => 'yes_widget_footer_bottom',
+                'before_widget' => '',
+                'after_widget'  => '',
+                'before_title'  => '',
+                'after_title'   => ''
             ));
+        }
+
+        if (function_exists('add_image_size')) {
+            add_image_size('page-background-image', 1920, 1080);
         }
     }
     add_action('after_setup_theme', 'yes_twentytwentyone_setup');
@@ -117,7 +127,7 @@ if (!function_exists('yes_register_menus')) {
                     // 'footer-column-2'   => esc_html__('Footer - Column 2', 'yes.my'),
                     // 'footer-column-3'   => esc_html__('Footer - Column 3', 'yes.my'),
                     // 'footer-column-4'   => esc_html__('Footer - Column 4', 'yes.my'),
-                    // 'footer-column-5'   => esc_html__('Footer - Column 5', 'yes.my')
+                    // 'footer-column-5'   => esc_html__('Footer - Column 5', 'yes.my') 
                 )
             );
         }
