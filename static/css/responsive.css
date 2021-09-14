@@ -25,6 +25,10 @@
             background-image: none;
             padding-top: 0px;
             margin: 0px;
+            text-align: center !important;
+        }
+        #wfh .wfh-visual {
+            display: none;
         }
         #amazing-things {
             padding-top: 0px;
@@ -42,5 +46,15 @@
         }
         #faq-section {
             padding-top: 0px;
+        }
+        #popular-deals {
+            padding-top: 0px;
+        }
+        #popular-deals h1 {
+            font-size: 33px;
+        }
+        #popular-deals .deal-box {
+            margin-bottom: 15px;
+            height: auto !important;
         }
     }

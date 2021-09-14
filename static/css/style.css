@@ -29,6 +29,16 @@ p {
     padding: 0;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+}
+
 a {
     text-decoration: none;
     transition: all 0.3s ease;
@@ -219,6 +229,7 @@ section {
 
 .nav-container .pink-btn:hover {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #D00072;
 }
 
 .nav-container .login-btn {
@@ -300,6 +311,11 @@ section {
 .footer .icon-list {
     width: 100%;
     display: block;
+}
+
+.footer .icon-list .store-icon {
+    width: 95px;
+    height: 31px;
 }
 
 .footer .icon-list li {
@@ -411,6 +427,7 @@ section {
 .slider-btn:hover {
     color: #FFF;
     box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.45);
+    background-color: #D00072;
 }
 
 #slider-yes-home .carousel-item {
@@ -418,7 +435,13 @@ section {
     background-repeat: no-repeat;
     background-position: center;
     position: relative;
-    min-height: 50vh;
+    min-height: 80vh;
+}
+
+#slider-yes-home .carousel-control-next,
+#slider-yes-home .carousel-control-prev {
+    opacity: 1;
+    filter: drop-shadow(0px 6.65511px 6.65511px rgba(0, 0, 0, 0.75));
 }
 
 
@@ -442,7 +465,6 @@ section {
 
 #quick-action .whitebox h1 {
     font-size: 40px;
-    font-family: 'Nunito', sans-serif;
     font-weight: 800;
     line-height: 55px;
     color: #3C3C3C;
@@ -485,16 +507,11 @@ section {
 #wfh {
     align-items: center;
     justify-content: center;
-    margin: 50px 0px;
-    padding: 57px 0px;
-    background-image: url("../images/wfh-visual.png");
-    background-repeat: no-repeat;
-    background-position: right center;
+    padding: 50px 0px;
 }
 
 #wfh h1 {
     font-size: 56px;
-    font-family: 'Nunito', sans-serif;
     font-weight: 800;
     line-height: 76px;
     color: #2B2B2B;
@@ -521,6 +538,7 @@ section {
 .pink-btn:hover {
     color: #FFF;
     box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.45);
+    background-color: #D00072;
 }
 
 
@@ -538,7 +556,6 @@ section {
 
 #amazing-things h1 {
     font-size: 56px;
-    font-family: 'Nunito', sans-serif;
     font-weight: 600;
     line-height: 76px;
     color: #00B4F0;
@@ -584,7 +601,6 @@ section {
 
 #customer-review h1 {
     font-size: 40px;
-    font-family: 'Nunito', sans-serif;
     font-weight: 700;
     line-height: 54px;
     color: #293854;
@@ -592,13 +608,15 @@ section {
 }
 
 #customer-review .reviewbox {
-    background-color: #FFF;
+    background-color: #F9F7F4;
+    border: 1px solid #DEE5EF;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
     text-align: center;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 4.56727px 15.2242px 20.4485px 1.52242px rgb(50 44 98 / 10%);
+    border-radius: 38px;
 }
 
 #customer-review .reviewbox .review-pic {
@@ -620,7 +638,7 @@ section {
 }
 
 .reviews-carousel .slick-slide {
-    margin: 0 20px;
+    margin: 30px 20px;
 }
 
 .reviews-carousel .slick-dots {
@@ -653,7 +671,6 @@ section {
 
 #faq-section h1 {
     font-size: 32px;
-    font-family: 'Nunito', sans-serif;
     font-weight: 800;
     line-height: 43px;
     color: #000;
@@ -708,4 +725,86 @@ section {
 .accordion-button:not(.collapsed)::after {
     background-image: none;
     background: url('../images/minus.svg') no-repeat center center / contain !important;
+}
+
+
+/* Home-Popular Deals styling */
+
+#popular-deals {
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0px;
+}
+
+#popular-deals h1 {
+    font-size: 66px;
+    font-weight: 800;
+    color: #2B2B2B;
+    text-align: center;
+}
+
+#popular-deals .deal-box {
+    width: 100%;
+    border-radius: 13px;
+    background-color: #FFF;
+    border: solid 4px #00B4F0;
+    overflow: hidden;
+    position: relative;
+}
+
+#popular-deals .deal-box .pink-btn-box {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    ;
+    width: 100%;
+    text-align: center;
+}
+
+#popular-deals .deal-box .pink-btn-box .pink-btn {
+    display: block;
+}
+
+#popular-deals .deal-box h2 {
+    text-align: center;
+    background-color: #00B4F0;
+    font-weight: 800;
+    font-size: 19px;
+    color: #FFF;
+    display: block;
+    padding: 10px 0px
+}
+
+#popular-deals .deal-box .content {
+    padding: 15px;
+    text-align: center;
+    height: 100%;
+}
+
+#popular-deals .deal-box .content h3 {
+    font-weight: 600;
+    color: #00B4F0;
+    text-align: center;
+    font-size: 32px;
+    line-height: 35px;
+}
+
+#popular-deals .deal-box .content h3 span {
+    font-weight: 800;
+}
+
+#popular-deals .deal-box .content h4 {
+    font-weight: 700;
+    color: #2B2B2B;
+    text-align: center;
+    font-size: 19px;
+    line-height: 26px;
+}
+
+#popular-deals .deal-box .content p {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    line-height: 22px;
+    text-align: left;
 }
