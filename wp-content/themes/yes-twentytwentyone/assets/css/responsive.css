@@ -1,21 +1,46 @@
-    @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
-        .top-pink-bar p {
-            padding: 0px 40px;
-        }
-        .mega-dropdown-menu>li {
-            float: none;
-            margin-bottom: 20px;
-        }
-        .footer .menulist {
-            margin-bottom: 20px;
-        }
-        .footer .copyright p {
-            margin-bottom: 20px;
-        }
-        .footer .copyright {
-            margin-top: 10px;
-        }
-        .footer .ctm-logo {
-            position: static;
-        }
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    .top-pink-bar p {
+        padding: 0px 40px;
     }
+    .mega-dropdown-menu>li {
+        float: none;
+        margin-bottom: 20px;
+    }
+    .footer .menulist {
+        margin-bottom: 20px;
+    }
+    .footer .copyright p {
+        margin-bottom: 20px;
+    }
+    .footer .copyright {
+        margin-top: 10px;
+    }
+    .footer .ctm-logo {
+        position: static;
+    }
+    #quick-action .whitebox {
+        padding: 37px 24px;
+    }
+    #wfh {
+        background-image: none;
+        padding-top: 0px;
+        margin: 0px;
+    }
+    #amazing-things {
+        padding-top: 0px;
+    }
+    #amazing-things h1 {
+        font-size: 42px;
+        line-height: 46px;
+    }
+    #customer-review {
+        padding-top: 0px;
+    }
+    #customer-review h1 {
+        font-size: 33px;
+        line-height: 42px;
+    }
+    #faq-section {
+        padding-top: 0px;
+    }
+}

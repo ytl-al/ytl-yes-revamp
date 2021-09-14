@@ -5,6 +5,9 @@
 !/README.md
 !/wp-config-sample.php
 
+# ignore everything in the root except the "cms-html" directory.
+!/cms-html/
+
 # ignore everything in the root except the "static" directory.
 !/static/
 

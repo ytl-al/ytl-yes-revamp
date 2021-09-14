@@ -20,16 +20,28 @@ get_header();
 	<?php 
 		if (have_posts()) :
 	?>
-
-	<header>
-		<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-	</header>
 	
 	<?php 
 			while (have_posts()) :
 				the_post();
-
+				
+				$custom_code_css    = rwmb_meta('yes_custom_css');
+				$custom_code_js     = rwmb_meta('yes_custom_js');
+				
+				if ($custom_code_css) :
+					echo '<style type="text/css">';
+					echo $custom_code_css;
+					echo '</style>';
+				endif;
+		
 				get_template_part('template-parts/content/content', get_post_type());
+
+				if ($custom_code_js) :
+					echo '<script type="text/javascript">';
+					echo $custom_code_js;
+					echo '</script>';
+				endif;
+				
 			endwhile;
 		else :
 			get_template_part('template-parts/content/content', 'none');
