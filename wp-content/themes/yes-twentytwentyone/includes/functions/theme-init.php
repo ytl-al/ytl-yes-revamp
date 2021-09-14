@@ -217,8 +217,9 @@ if (!function_exists('get_menu_by_location')) {
  * @since    1.0.0
  */
 if (!function_exists('yes_admin_remove_pages')) {
-    function yes_admin_remove_pages() {
-        remove_menu_page( 'edit-comments.php' );
+    function yes_admin_remove_pages()
+    {
+        remove_menu_page('edit-comments.php');
     }
     add_action('admin_menu', 'yes_admin_remove_pages');
 }

@@ -11,4 +11,5 @@
 define('THEME_FUNCTIONS_PATH', TEMPLATEPATH . '/includes/functions');
 
 require_once(THEME_FUNCTIONS_PATH . '/theme-init.php');
+require_once(THEME_FUNCTIONS_PATH . '/theme-disable-emoji.php');
 require_once(THEME_FUNCTIONS_PATH . '/theme-custom-meta-box.php');
