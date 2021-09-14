@@ -1,8 +1,9 @@
 # blacklist all folders and files in root
 /*
 
-# ignore everything in the root except the README.md document.
+# ignore everything in the root except the following files.
 !/README.md
+!/wp-config-sample.php
 
 # ignore everything in the root except the "static" directory.
 !/static/
@@ -22,10 +23,10 @@
 /wp-content/plugins/hello.php
 
 # ignore specific themes
-/wp-content/themes/twenty*/
+/wp-content/themes/*
 
 # except yes-revamp theme
-!/wp-content/themes/yes-revamp
+!/wp-content/themes/yes-twentytwentyone
 
 # ignore log files and databases
 *.log
