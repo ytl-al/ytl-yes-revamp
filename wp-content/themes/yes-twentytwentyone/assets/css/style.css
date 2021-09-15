@@ -1,12 +1,10 @@
 /* 
     Stylesheet Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : September 13, 2021, 03:52:31 PM
+    Last edited on  : September 15, 2021, 03:52:31 PM
     Author          : [YTL Digital Design] - Zeeshan, AL
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap');
 body {
     font-family: 'Nunito Sans', sans-serif;
     font-weight: 400;
@@ -459,7 +457,6 @@ section {
 
 #customer-review h1 {
     font-size: 40px;
-    font-family: 'Nunito', sans-serif;
     font-weight: 700;
     line-height: 54px;
     color: #293854;
@@ -467,13 +464,15 @@ section {
 }
 
 #customer-review .reviewbox {
-    background-color: #FFF;
+    background-color: #F9F7F4;
+    border: 1px solid #DEE5EF;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
     text-align: center;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 4.56727px 15.2242px 20.4485px 1.52242px rgb(50 44 98 / 10%);
+    border-radius: 38px;
 }
 
 #customer-review .reviewbox .review-pic {
@@ -495,7 +494,7 @@ section {
 }
 
 .reviews-carousel .slick-slide {
-    margin: 0 20px;
+    margin: 30px 20px;
 }
 
 .reviews-carousel .slick-dots {
