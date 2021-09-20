@@ -25,17 +25,7 @@
                     </ul>
                 </div>
                 <div class="col-2">
-                    <div class="dropdown language-drop float-end">
-                        <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="iconify" data-icon="bi:globe"></span> English
-                        </a>
-
-                        <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">English</a></li>
-                            <li><a class="dropdown-item" href="#">Bhasa Malay</a></li>
-                            <li><a class="dropdown-item" href="#">中文</a></li>
-                        </ul>
-                    </div>
+                    <?php if (function_exists('yes_language_switcher')) echo yes_language_switcher(); ?>
                 </div>
             </div>
         </div>

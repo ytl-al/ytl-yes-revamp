@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * Function yes_enqueue_scripts()
  * Function to enqueue the stylesheets and javascripts files
  * 
  * @since    1.0.0
@@ -25,6 +26,7 @@ if (!function_exists('yes_enqueue_scripts')) {
 
 
 /**
+ * Function yes_twentytwentyone_setup()
  * Function for Yes.my TwentyTwentyOne theme setup
  * 
  * @since    1.0.0
@@ -89,6 +91,7 @@ if (!function_exists('yes_twentytwentyone_setup')) {
 
 
 /**
+ * Function yes_change_logo_class()
  * Function to change the logo class when using the 'the_custom_logo()' function to display logo image
  * 
  * @since    1.0.0
@@ -108,6 +111,7 @@ if (!function_exists('yes_change_logo_class')) {
 
 
 /**
+ * Function yes_register_menus()
  * Function to register custom menus for yes.my theme
  * 
  * @since    1.0.0
@@ -137,6 +141,7 @@ if (!function_exists('yes_register_menus')) {
 
 
 /**
+ * Function yes_nav_add_li_class()
  * Function to add args in wp_nav_menu() to add custom class in <li>
  * 
  * @since    1.0.0
@@ -154,6 +159,7 @@ if (!function_exists('yes_nav_add_li_class')) {
 
 
 /**
+ * Function yes_nav_add_link_class()
  * Function to add args in wp_nav_menu() to add custom class in <a>
  * 
  * @since    1.0.0
@@ -171,6 +177,7 @@ if (!function_exists('yes_nav_add_link_class')) {
 
 
 /**
+ * Function display_yes_logo()
  * Function to display custom logo in custom markup
  * 
  * @since    1.0.0
@@ -180,10 +187,10 @@ if (!function_exists('display_yes_logo')) {
     {
         $custom_logo_id = get_theme_mod('custom_logo');
         $logo       = wp_get_attachment_image_src($custom_logo_id, 'full');
-        $site_url   = site_url();
+        $site_url   = get_home_url();
 
         if (has_custom_logo()) {
-            echo '<a href="' . $site_url . '" class="navbar-brand"><img src="' . esc_url($logo[0]) . '" alt="' . get_bloginfo('name') . '" class="logo-top" /></a>';
+            echo '<a href="' . $site_url . '" class="navbar-brand"><img src="' . esc_url($logo[0]) . '" alt="' . get_bloginfo('name') . '" title="' . get_bloginfo('name') . '" class="logo-top" /></a>';
         } else {
             echo '<h1><a href="' . $site_url . '">' . get_bloginfo('name') . '</a></h1>';
         }
@@ -192,6 +199,46 @@ if (!function_exists('display_yes_logo')) {
 
 
 /**
+ * Function yes_language_switcher()
+ * Function to get the languages from WPML and return the custom switcher
+ * 
+ * @since    1.0.0
+ */
+if (!function_exists('yes_language_switcher') && function_exists('icl_get_languages')) {
+    function yes_language_switcher($classes = [])
+    {
+        $languages      = icl_get_languages('skip_missing=0&orderby=custom&order=asc');
+        $langs          = '';
+        $active_lang    = '';
+        if (1 < count($languages)) {
+            foreach ($languages as $language) {
+                switch ($language['code']) {
+                    case 'ms':
+                        $language_name  = 'Bahasa Malaysia';
+                        break;
+                    case 'zh-hans':
+                        $language_name  = '中文';
+                        break;
+                    default:
+                        $language_name  = 'English';
+                }
+                $langs  .= '<li><a href="' . $language['url'] . '" language="' . $language['code'] . '" class="dropdown-item" >' . $language_name . '</a></li>';
+
+                ($language['active']) ? $active_lang = $language_name : '';
+            }
+        }
+        $exp_class  = join(' ', $classes);
+        $html       = " <div class='dropdown language-drop float-end $exp_class'>
+                            <a class='btn btn-secondary btn-sm dropdown-toggle' href='javascript:void(0)' role='button' id='dropdownMenuLink' data-bs-toggle='dropdown' aria-expanded='false'><span class='iconify' data-icon='bi:globe'></span> $active_lang</a>
+                            <ul class='dropdown-menu dropdown-menu-start' aria-labelledby='dropdownMenuLink'>$langs</ul>
+                        </div>";
+        return $html;
+    }
+}
+
+
+/**
+ * Function get_menu_by_location()
  * Function to get nav object
  * 
  * @since    1.0.0
@@ -212,6 +259,7 @@ if (!function_exists('get_menu_by_location')) {
 
 
 /**
+ * Function yes_admin_remove_pages()
  * Function to remove certain pages in admin
  * 
  * @since    1.0.0
