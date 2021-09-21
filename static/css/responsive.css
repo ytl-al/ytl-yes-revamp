@@ -1,4 +1,7 @@
     @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+        #slider-yes-home .carousel-item {
+            min-height: 27vh;
+        }
         .top-pink-bar p {
             padding: 0px 40px;
         }
@@ -38,7 +41,7 @@
             line-height: 46px;
         }
         #customer-review {
-            padding-top: 0px;
+            padding-top: 60px;
         }
         #customer-review h1 {
             font-size: 33px;
@@ -56,5 +59,17 @@
         #popular-deals .deal-box {
             margin-bottom: 15px;
             height: auto !important;
+        }
+        #amazing-things .hunt-yes-logo {
+            margin-top: 30px;
+        }
+        #newsletter h1 {
+            font-size: 30px;
+        }
+        #newsletter p {
+            font-size: 19px;
+        }
+        #newsletter .newsletter-check {
+            margin-top: 0px;
         }
     }
