@@ -86,4 +86,32 @@
         #inner-banner {
             margin-bottom: 50px;
         }
+        .signup-modal .signup-content {
+            padding: 40px 0px;
+        }
+    }
+    /* IPAD Portrait and Landscape */
+    
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+        #newsletter .newsletter-check {
+            margin-top: 17px;
+            margin-bottom: 20px;
+        }
+        #newsletter p {
+            margin-bottom: 20px;
+        }
+        #popular-deals .deal-box {
+            margin-bottom: 15px;
+            height: auto !important;
+        }
+        .signup-modal .signup-content {
+            padding: 40px 0px;
+        }
+        #slider-yes-home .carousel-item {
+            min-height: 32vh;
+        }
+        .mega-dropdown-menu>li {
+            float: none;
+            margin-bottom: 20px;
+        }
     }
