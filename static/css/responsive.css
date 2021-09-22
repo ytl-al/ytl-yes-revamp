@@ -40,6 +40,17 @@
             font-size: 42px;
             line-height: 46px;
         }
+        #amazing-things h2 {
+            font-size: 24px;
+            line-height: 33px;
+        }
+        #amazing-things p {
+            font-size: 18px;
+            line-height: 23px;
+        }
+        #amazing-things p.small {
+            font-size: 12px;
+        }
         #customer-review {
             padding-top: 60px;
         }
@@ -71,5 +82,8 @@
         }
         #newsletter .newsletter-check {
             margin-top: 0px;
+        }
+        #inner-banner {
+            margin-bottom: 50px;
         }
     }
