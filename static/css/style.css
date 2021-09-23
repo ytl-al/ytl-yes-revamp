@@ -228,6 +228,7 @@ section {
     font-weight: 700;
     text-transform: uppercase;
     padding: 6px 38px;
+    text-align: center;
 }
 
 .nav-container .pink-btn:hover {
@@ -536,6 +537,7 @@ section {
     text-transform: uppercase;
     color: #FFF;
     border: none;
+    text-align: center;
 }
 
 .pink-btn:hover {
@@ -553,6 +555,7 @@ section {
     text-transform: uppercase;
     color: #ED028C;
     border: none;
+    text-align: center;
 }
 
 .white-btn:hover {
@@ -973,4 +976,22 @@ section {
 .breadcrumb-section .breadcrumb-item+.breadcrumb-item::before {
     color: #00B4F0;
     padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+    .seven-cols .col-md-1,
+    .seven-cols .col-sm-1,
+    .seven-cols .col-lg-1 {
+        width: 100%;
+        *width: 100%;
+    }
+}
+
+@media (min-width: 992px) {
+    .seven-cols .col-md-1,
+    .seven-cols .col-sm-1,
+    .seven-cols .col-lg-1 {
+        width: 14.285714285714285714285714285714%;
+        *width: 14.285714285714285714285714285714%;
+    }
 }

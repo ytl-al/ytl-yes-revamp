@@ -89,6 +89,9 @@
         .signup-modal .signup-content {
             padding: 40px 0px;
         }
+        .breadcrumb-section .breadcrumb .breadcrumb-item {
+            font-size: 14px;
+        }
     }
     /* IPAD Portrait and Landscape */
     
