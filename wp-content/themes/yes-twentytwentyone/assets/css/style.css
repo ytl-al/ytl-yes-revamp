@@ -1,7 +1,7 @@
 /* 
     Stylesheet Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : September 15, 2021, 03:52:31 PM
+    Last edited on  : September 23, 2021, 03:52:31 PM
     Author          : [YTL Digital Design] - Zeeshan, AL
 */
 
@@ -186,6 +186,7 @@ section {
 
 .nav-container .pink-btn:hover {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #D00072;
 }
 
 .nav-container .login-btn {
@@ -267,6 +268,11 @@ section {
 .footer .icon-list {
     width: 100%;
     display: block;
+}
+
+.footer .icon-list .store-icon {
+    width: 95px;
+    height: 31px;
 }
 
 .footer .icon-list li {
@@ -378,6 +384,7 @@ section {
 .slider-btn:hover {
     color: #FFF;
     box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.45);
+    background-color: #D00072;
 }
 
 #slider-yes-home .carousel-item {
@@ -385,7 +392,13 @@ section {
     background-repeat: no-repeat;
     background-position: center;
     position: relative;
-    min-height: 50vh;
+    min-height: 80vh;
+}
+
+#slider-yes-home .carousel-control-next,
+#slider-yes-home .carousel-control-prev {
+    opacity: 1;
+    filter: drop-shadow(0px 6.65511px 6.65511px rgba(0, 0, 0, 0.75));
 }
 
 
@@ -409,7 +422,6 @@ section {
 
 #quick-action .whitebox h1 {
     font-size: 40px;
-    font-family: 'Nunito', sans-serif;
     font-weight: 800;
     line-height: 55px;
     color: #3C3C3C;
@@ -446,6 +458,40 @@ section {
     filter: drop-shadow(3px 4px 15px rgba(43, 43, 43, 0.173));
 }
 
+.pink-btn {
+    background-color: #ED028C;
+    border-radius: 90px;
+    padding: 14px 74px;
+    display: inline-block;
+    font-weight: 800;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #FFF;
+    border: none;
+}
+
+.pink-btn:hover {
+    color: #FFF;
+    background-color: #D00072;
+}
+
+.white-btn {
+    background-color: #FFF;
+    border-radius: 90px;
+    padding: 14px 74px;
+    display: inline-block;
+    font-weight: 800;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #ED028C;
+    border: none;
+}
+
+.white-btn:hover {
+    color: #ED028C;
+    background-color: #F8BFDB;
+}
+
 
 /* Home-Customer Review styling */
 
@@ -453,13 +499,17 @@ section {
     align-items: center;
     justify-content: center;
     padding: 50px 0px;
+    padding-top: 120px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 #customer-review h1 {
     font-size: 40px;
-    font-weight: 700;
+    font-weight: 800;
     line-height: 54px;
-    color: #293854;
+    color: #000;
     text-align: center;
 }
 
@@ -488,9 +538,11 @@ section {
 
 #customer-review .reviewbox p {
     text-align: center;
-    color: #73839C;
-    font-size: 13px;
-    line-height: 17px;
+    color: #525252;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 30px;
+    padding: 0px 34px;
 }
 
 .reviews-carousel .slick-slide {
@@ -526,17 +578,16 @@ section {
 }
 
 #faq-section h1 {
-    font-size: 32px;
-    font-family: 'Nunito', sans-serif;
+    font-size: 40px;
     font-weight: 800;
-    line-height: 43px;
+    line-height: 40px;
     color: #000;
     text-align: center;
 }
 
 #faq-section .viewall-btn {
     display: inline-block;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 800;
     text-transform: uppercase;
     color: #ED028C;
@@ -556,7 +607,7 @@ section {
     background-color: #F9F7F4;
     border: 1px solid rgba(151, 151, 151, 0.3);
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 20px;
     color: #000;
 }
 
@@ -571,7 +622,7 @@ section {
 }
 
 #faq-section .accordion-body {
-    font-size: 14px;
+    font-size: 20px;
 }
 
 #faq-section .accordion-button::after {
@@ -582,6 +633,228 @@ section {
 .accordion-button:not(.collapsed)::after {
     background-image: none;
     background: url('../images/icon-minus.png') no-repeat center center / contain !important;
+}
+
+
+/* Home-Popular Deals styling */
+
+#popular-deals {
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0px;
+}
+
+#popular-deals h1 {
+    font-size: 40px;
+    font-weight: 800;
+    color: #2B2B2B;
+    text-align: center;
+}
+
+#popular-deals .deal-box {
+    width: 100%;
+    border-radius: 13px;
+    background-color: #FFF;
+    border: solid 4px #00B4F0;
+    overflow: hidden;
+    position: relative;
+}
+
+#popular-deals .deal-box .pink-btn-box {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    ;
+    width: 100%;
+    text-align: center;
+}
+
+#popular-deals .deal-box .pink-btn-box .pink-btn {
+    display: block;
+}
+
+#popular-deals .deal-box h2 {
+    text-align: center;
+    background-color: #00B4F0;
+    font-weight: 800;
+    font-size: 24px;
+    color: #FFF;
+    display: block;
+    padding: 10px 0px
+}
+
+#popular-deals .deal-box .content {
+    padding: 15px;
+    text-align: center;
+    height: 100%;
+}
+
+#popular-deals .deal-box .content h3 {
+    font-weight: 700;
+    color: #00B4F0;
+    text-align: center;
+    font-size: 32px;
+    line-height: 35px;
+}
+
+#popular-deals .deal-box .content h3 span {
+    font-weight: 800;
+}
+
+#popular-deals .deal-box .content h4 {
+    font-weight: 800;
+    color: #2B2B2B;
+    text-align: center;
+    font-size: 24px;
+    line-height: 26px;
+}
+
+#popular-deals .deal-box .content p.pricing {
+    font-size: 24px;
+    font-weight: 800;
+    color: #00B4F0;
+    margin-bottom: 15px;
+}
+
+#popular-deals .deal-box .content p {
+    font-size: 16px;
+    font-weight: 400;
+    color: #525252;
+    line-height: 20px;
+}
+
+#popular-deals p.small {
+    font-size: 17px;
+    color: #7A7A7A;
+}
+
+
+/* Newsletter Styling */
+
+#newsletter {
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0px;
+    margin-top: 60px;
+    background: linear-gradient(270deg, rgba(0, 180, 240, 0.3) -27.92%, rgba(0, 180, 240, 0.3) -27.51%, rgba(249, 247, 244, 0.3) 108.85%);
+}
+
+#newsletter h1 {
+    color: #2B2B2B;
+    font-size: 41px;
+    line-height: 41px;
+    font-weight: 800;
+}
+
+#newsletter p {
+    font-size: 24px;
+    color: #525252;
+    line-height: 30px;
+}
+
+#newsletter input[type=email] {
+    border: none;
+    border-bottom: 1px solid #000;
+    padding: 10px 0px;
+    background-color: transparent;
+    color: #525252;
+    font-size: 20px;
+    width: 100%;
+    border-radius: 0;
+}
+
+#newsletter input[type=email]:active,
+#newsletter input[type=email]:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+#newsletter label {
+    color: #525252;
+    font-size: 16px;
+}
+
+#newsletter .newsletter-check {
+    margin-top: -30px;
+}
+
+
+/* Sign up Popup Modal Styling */
+
+.page-modal .modal-content {
+    border-radius: 0;
+    background-color: #F9F7F4;
+}
+
+.page-modal .btn-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 10px;
+    height: 10px;
+}
+
+.page-modal .modal-body {
+    padding: 0px;
+}
+
+.page-modal .pageModal-content {
+    width: 80%;
+}
+
+.page-modal .pageModal-content h1 {
+    color: #000;
+    font-weight: 700;
+    font-size: 40px;
+}
+
+.page-modal .pageModal-content p {
+    color: #000;
+    font-size: 24px;
+    line-height: 32px;
+}
+
+.page-modal input[type=email] {
+    border: solid 1px #A4B0C0;
+    padding: 10px;
+    background-color: #FFF;
+    color: #A4B0C0;
+    font-size: 20px;
+    width: 100%;
+}
+
+.page-modal input[type=email]:active,
+.page-modal input[type=email]:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.breadcrumb-section .breadcrumb {
+    margin-bottom: 0;
+    padding: 10px 0px;
+}
+
+.breadcrumb-section .breadcrumb .breadcrumb-item {
+    font-size: 18px;
+    color: #00B4F0;
+    font-family: 'Nunito', sans-serif;
+}
+
+.breadcrumb-section .breadcrumb-item+.breadcrumb-item {
+    padding-left: 1rem;
+}
+
+.breadcrumb-section .breadcrumb .breadcrumb-item.active {
+    font-weight: 800;
+}
+
+.breadcrumb-section .breadcrumb .breadcrumb-item a {
+    color: #00B4F0;
+}
+
+.breadcrumb-section .breadcrumb-item+.breadcrumb-item::before {
+    color: #00B4F0;
+    padding-right: 1rem;
 }
 
 

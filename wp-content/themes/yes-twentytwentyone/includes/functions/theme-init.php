@@ -62,6 +62,33 @@ if (!function_exists('yes_twentytwentyone_setup')) {
                 'before_title'  => '',
                 'after_title'   => ''
             ));
+            /** Register widget - Page Modal */
+            register_sidebar(array(
+                'name'          => 'Page Modal',
+                'id'            => 'yes_widget_page_modal',
+                'before_widget' => '',
+                'after_widget'  => '',
+                'before_title'  => '',
+                'after_title'   => ''
+            ));
+            /** Register widget - Footer FAQ */
+            register_sidebar(array(
+                'name'          => 'Footer FAQ',
+                'id'            => 'yes_widget_footer_faq',
+                'before_widget' => '',
+                'after_widget'  => '',
+                'before_title'  => '',
+                'after_title'   => ''
+            ));
+            /** Register widget - Footer Newsletter */
+            register_sidebar(array(
+                'name'          => 'Footer Newsletter',
+                'id'            => 'yes_widget_footer_newsletter',
+                'before_widget' => '',
+                'after_widget'  => '',
+                'before_title'  => '',
+                'after_title'   => ''
+            ));
             /** Register widget - Footer Top */
             register_sidebar(array(
                 'name'          => 'Footer Top',
@@ -270,4 +297,85 @@ if (!function_exists('yes_admin_remove_pages')) {
         remove_menu_page('edit-comments.php');
     }
     add_action('admin_menu', 'yes_admin_remove_pages');
+}
+
+
+/**
+ * Function disable_wp_auto_p()
+ * Function to prevent WP from adding <p> tags on all post types
+ * 
+ * @since    1.0.0
+ */
+if (!function_exists('disable_wp_auto_p')) {
+    function disable_wp_auto_p($content)
+    {
+        remove_filter('the_content', 'wpautop');
+        remove_filter('the_excerpt', 'wpautop');
+        remove_filter('widget_text_content', 'wpautop');
+        return $content;
+    }
+    add_filter('the_content', 'disable_wp_auto_p', 0);
+}
+
+
+/**
+ * Function yes_breadcrumbs()
+ * Function to display custom breadcrumbs
+ * 
+ * @since    1.0.0
+ */
+if (!function_exists('yes_custom_breadcrumbs')) {
+    function yes_custom_breadcrumbs()
+    {
+        global $post, $wp_query;
+
+        $html       = null;
+        $show_home  = true;
+        $home_title = esc_html__('Home', 'yes.my');
+
+        if (!is_front_page()) {
+            $html   .= '<div class="container breadcrumb-section">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">';
+
+            if ($show_home) {
+                $html   .= '<li class="breadcrumb-item page-home"><a href="' . get_home_url() . '" title="' . $home_title . '">Home</a></li>';
+            }
+
+            if (is_page()) {
+                if ($post->post_parent) {
+                    $ancestors  = get_post_ancestors($post->ID);
+                    $ancestors  = array_reverse($ancestors);
+
+                    foreach ($ancestors as $ancestor) {
+                        $parent_title   = get_the_title($ancestor);
+                        $html   .= '<li class="breadcrumb-item page-parent page-' . $ancestor . '"><a href="' . get_permalink($ancestor) . '" title="' . $parent_title . '">' . $parent_title . '</a></li>';
+                    }
+                }
+                $html   .= '        <li class="breadcrumb-item active page-current page-' . get_the_ID() . '" aria-current="page">' . get_the_title() . '</li>';
+            }
+
+            $html   .= '        </ol>
+                            </nav>
+                        </div>';
+        }
+
+        return $html;
+    }
+}
+
+
+/**
+ * Function remove_css_js_version()
+ * Function to remove the version number in CSS and JS enqueue; Only to be used during development to get the latest changes on stylesheet and javascripts
+ */
+if (!function_exists('remove_css_js_version')) {
+    function remove_css_js_version($src)
+    {
+        if (strpos($src, '?ver='))
+            $src = remove_query_arg('ver', $src);
+        return $src;
+    }
+    add_filter('style_loader_src', 'remove_css_js_version', 9999);
+    add_filter('script_loader_src', 'remove_css_js_version', 9999);
 }

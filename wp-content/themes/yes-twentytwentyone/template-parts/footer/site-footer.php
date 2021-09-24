@@ -10,6 +10,9 @@
 
 ?>
 
+<?php get_template_part('template-parts/footer/footer-faq'); ?>
+<?php get_template_part('template-parts/footer/footer-newsletter'); ?>
+
 <!-- Footer STARTS -->
 <footer class="footer">
     <div class="container g-lg-0">
@@ -34,3 +37,5 @@
     </div>
 </footer>
 <!-- Footer ENDS -->
+
+<?php get_template_part('template-parts/footer/footer-page-modal'); ?>

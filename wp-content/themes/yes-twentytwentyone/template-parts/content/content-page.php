@@ -14,6 +14,8 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<!-- Entry Content STARTS -->
 	<div class="entry-content">
+		<?php get_template_part('template-parts/content/breadcrumbs'); ?>
+
 		<?php the_content(); ?>
 	</div>
 	<!-- Entry Content ENDS -->
