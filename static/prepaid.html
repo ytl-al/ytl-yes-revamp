@@ -236,6 +236,13 @@
             right: 22px;
             top: 22px;
         }
+        
+        #prepaid-plans .plan-table tr td.empty-row {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            height: 10px;
+        }
         /* Switch Yes styling */
         
         #switch-yes {
@@ -346,7 +353,7 @@
                 left: 0;
             }
             #prepaid-plans .plan-table th.visual {
-                background-color: #ad4a84;
+                background-color: #cab02b;
                 position: sticky;
                 left: 0;
             }
@@ -526,6 +533,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr>
+                                        <td colspan="4" class="empty-row"><img src="images/spacer.gif" height="10px" /></td>
+                                    </tr>
                                     <tr>
                                         <td class="blue-col rounded-top">Data
                                             <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
