@@ -1,7 +1,7 @@
 /* 
     JavaScript Name : Yes TwentyTwentyOne 
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : September 24, 2021, 03:52:31 PM
+    Last edited on  : September 27, 2021, 03:52:31 PM
     Author          : [YTL Digital Design] - AL
 */
 const yesLocalStorageName = 'yesSession';
@@ -17,6 +17,8 @@ $(document).ready(function() {
     checkPageModalExpiry();
 
     eventListenPageModalClose();
+
+    initBootstrapTooltip();
 });
 
 
@@ -105,4 +107,18 @@ function checkPageModalExpiry() {
             $(pageModal).modal('show');
         }
     }
+}
+
+
+/**
+ * Function initBootstrapTooltip()
+ * Function to initialize Bootstrap tooltip everywhere
+ * 
+ * @since    1.0.0
+ */
+function initBootstrapTooltip() {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
 }

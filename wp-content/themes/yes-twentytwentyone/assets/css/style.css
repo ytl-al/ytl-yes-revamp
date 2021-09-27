@@ -1,7 +1,7 @@
 /* 
     Stylesheet Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : September 23, 2021, 03:52:31 PM
+    Last edited on  : September 27, 2021, 03:52:31 PM
     Author          : [YTL Digital Design] - Zeeshan, AL
 */
 
@@ -855,6 +855,248 @@ section {
 .breadcrumb-section .breadcrumb-item+.breadcrumb-item::before {
     color: #00B4F0;
     padding-right: 1rem;
+}
+
+#easy-steps {
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0px;
+    padding-bottom: 0px;
+}
+
+#easy-steps h1 {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 40px;
+    color: #2B2B2B;
+    text-align: center;
+}
+
+#easy-steps h2 {
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 25px;
+    color: #666F88;
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+#easy-steps h2 span {
+    font-weight: 800;
+}
+
+#easy-steps h3 {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 30px;
+    color: #00B4F0;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+}
+
+#easy-steps h3 img {
+    margin-right: 10px;
+    display: inline;
+}
+
+#easy-steps p {
+    font-size: 24px;
+    color: #2B2B2B;
+    line-height: 32px;
+}
+
+#easy-steps .step-box {
+    width: 100%;
+    display: inline-block;
+}
+
+#easy-steps .viewall-btn {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #ED028C;
+    text-align: center;
+    margin-bottom: 90px;
+}
+
+#easy-steps .viewall-btn svg {
+    margin-left: 5px;
+    font-size: 20px;
+}
+
+#easy-steps .viewall-btn:hover {
+    text-decoration: underline;
+}
+
+
+/* Databack Rewards styling */
+
+#databck-rewards {
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0px;
+    padding-top: 0px;
+    background-image: url("/site/wp-content/uploads/2021/09/databack-rewards-bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+}
+
+#databck-rewards h1 {
+    font-size: 56px;
+    font-weight: 600;
+    line-height: 59px;
+    color: #FFF;
+    padding-top: 60px;
+}
+
+#databck-rewards h1 span {
+    font-weight: 800;
+}
+
+#databck-rewards h2 {
+    color: #2B2B2B;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 33px;
+}
+
+#databck-rewards p {
+    font-size: 20px;
+    color: #525252;
+    font-weight: 400;
+    line-height: 30px;
+}
+
+#databck-rewards p.small {
+    color: #2B2B2B;
+    font-weight: 600;
+    font-size: 17px;
+    padding-right: 20px;
+    font-family: 'Nunito', sans-serif;
+}
+
+#switch-yes {
+    align-items: center;
+    justify-content: center;
+    padding: 70px 0px;
+    padding-top: 0px;
+    background-image: url("/site/wp-content/uploads/2021/09/switch-process-bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+}
+
+#switch-yes h1 {
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 59px;
+    color: #FFF;
+    padding-bottom: 30px;
+    text-align: center;
+    padding-top: 60px;
+}
+
+#switch-yes h2 {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 40px;
+    color: #FFF;
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+#switch-yes h3 {
+    font-size: 29px;
+    font-weight: 800;
+    line-height: 29px;
+    color: #FFF;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+#switch-yes p {
+    color: #FFF;
+    font-size: 17px;
+    line-height: 21px;
+    text-align: center;
+}
+
+#switch-yes .viewall-btn {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #FFF;
+    text-align: center;
+}
+
+#switch-yes .viewall-btn svg {
+    margin-left: 5px;
+    font-size: 20px;
+}
+
+#switch-yes .viewall-btn:hover {
+    text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+    .seven-cols .col-md-1,
+    .seven-cols .col-sm-1,
+    .seven-cols .col-lg-1 {
+        width: 100%;
+        *width: 100%;
+    }
+}
+
+@media (min-width: 992px) {
+    .seven-cols .col-md-1,
+    .seven-cols .col-sm-1,
+    .seven-cols .col-lg-1 {
+        width: 14.285714285714285714285714285714%;
+        *width: 14.285714285714285714285714285714%;
+    }
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    #databck-rewards h1 {
+        font-size: 32px;
+        line-height: 46px;
+    }
+    #databck-rewards h2 {
+        font-size: 24px;
+        line-height: 33px;
+    }
+    #databck-rewards p {
+        font-size: 18px;
+        line-height: 23px;
+    }
+    #databck-rewards p.small {
+        font-size: 12px;
+    }
+    #wfh h1 {
+        font-size: 40px;
+        line-height: 45px;
+    }
+    #inner-banner {
+        margin-bottom: 0px;
+    }
+    #switch-yes .switch-icon {
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+    #switch-yes h1 {
+        font-size: 32px;
+    }
+    #switch-yes h2 {
+        font-size: 28px;
+    }
+    #switch-yes {
+        margin-bottom: 50px;
+    }
 }
 
 
