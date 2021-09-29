@@ -1,7 +1,7 @@
 /* 
     Stylesheet Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : September 27, 2021, 03:52:31 PM
+    Last edited on  : September 29, 2021, 03:52:31 PM
     Author          : [YTL Digital Design] - Zeeshan, AL
 */
 
@@ -490,6 +490,54 @@ section {
 .white-btn:hover {
     color: #ED028C;
     background-color: #F8BFDB;
+}
+/* Home-Amazing Things styling */
+    
+#amazing-things {
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0px;
+    background-image: url("/site/wp-content/uploads/2021/09/amazing-things-bg-1.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+}
+
+#amazing-things h1 {
+    font-size: 56px;
+    font-weight: 600;
+    line-height: 76px;
+    color: #00B4F0;
+}
+
+#amazing-things h1 span {
+    font-weight: 800;
+}
+
+#amazing-things h2 {
+    color: #2B2B2B;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 33px;
+}
+
+#amazing-things p {
+    font-size: 20px;
+    color: #73839C;
+    font-weight: 400;
+    line-height: 30px;
+}
+
+#amazing-things p.small {
+    color: #2B2B2B;
+    font-weight: 600;
+    font-size: 17px;
+    padding-right: 20px;
+    font-family: 'Nunito', sans-serif;
+}
+
+#amazing-things .hunt-yes-logo {
+    width: 102px;
 }
 
 
