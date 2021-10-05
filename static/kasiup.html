@@ -14,6 +14,8 @@
     <link rel="stylesheet" type="text/css" href="css/slick.css" />
     <link rel="stylesheet" type="text/css" href="css/slick-theme.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="css/aos.css" />
+
     <style>
         #already-registered {
             align-items: center;
@@ -437,6 +439,13 @@
             .howto-tabs .nav-pills .nav-link {
                 padding: 7px 62px;
             }
+            .howto-videotabs {
+                min-height: 364px;
+            }
+            #easy-steps p {
+                font-size: 13px;
+                line-height: 22px;
+            }
         }
     </style>
 </head>
@@ -575,7 +584,7 @@
 
             <!-- Postpaid Plans Start -->
             <section id="prihatin-plans">
-                <div class="container">
+                <div class="container" data-aos="fade-up" data-aos-duration="1000">
                     <div class="row">
                         <div class="table-responsive">
                             <table class="table plan-table">
@@ -705,7 +714,7 @@
             <!-- Postpaid Plans End -->
 
             <!-- Amazing Things Start -->
-            <section id="amazing-things">
+            <section id="amazing-things" data-aos="fade-up">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
@@ -715,28 +724,28 @@
                         </div>
                     </div>
                     <div class="row row-cols-2 row-cols-lg-4 mb-4">
-                        <div class="col mb-4">
+                        <div class="col mb-4" data-aos="fade-up" data-aos-duration="500">
                             <img src="images/crisp-call-pic.jpg" class="w-100 mb-2" />
                             <h2 class="mb-2">Crisp and<br>Clear Calls</h2>
                             <p>No latency. No jitters.<br>No static. All the way.</p>
                         </div>
-                        <div class="col mb-4">
+                        <div class="col mb-4" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
                             <img src="images/4glte-pic.jpg" class="w-100 mb-2" />
                             <h2 class="mb-2">4G LTE means<br>4G LTE</h2>
                             <p>No matter where,<br>no matter what.</p>
                         </div>
-                        <div class="col mb-4">
+                        <div class="col mb-4" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
                             <img src="images/cutprices-pic.jpg" class="w-100 mb-2" />
                             <h2 class="mb-2">We Cut Prices,<br>Not Service</h2>
                             <p>Because you deserve<br>the best!</p>
                         </div>
-                        <div class="col mb-4">
+                        <div class="col mb-4" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
                             <img src="images/affordable-pic.jpg" class="w-100 mb-2" />
                             <h2 class="mb-2">Affordable and<br>Amazing Deals</h2>
                             <p>Because connectivity is a right,<br>not a privilege.</p>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" data-aos="fade-up" data-aos-duration="500">
                         <div class="col-12 col-lg-6 text-lg-start text-center">
                             <a href="#" class="pink-btn mb-4">Get Started</a>
                             <div class="d-flex align-items-center justify-content-lg-start justify-content-center">
@@ -849,7 +858,7 @@
             <!-- Amazing Things End -->
 
             <!-- How Video Tabs Start -->
-            <section class="mt-5 mb-5 mb-lg-0">
+            <section class="mt-5 mb-5 mb-lg-0" data-aos="fade-up">
                 <div class="container">
                     <div class="row">
                         <div class="howto-videotabs">
@@ -882,7 +891,7 @@
             <!-- How Video Tabs End -->
 
             <!-- FAQs Start -->
-            <section id="faq-section">
+            <section id="faq-section" data-aos="fade-up">
                 <div class="container">
                     <div class="row">
                         <h1 class="mb-5">Frequently Asked Questions about YES</h1>
@@ -1062,6 +1071,7 @@
     <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
     <script type="text/javascript" src="js/iconify.min.js"></script>
     <script type="text/javascript" src="js/slick.js"></script>
+    <script type="text/javascript" src="js/aos.js"></script>
 
     <script type="text/javascript">
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -1069,6 +1079,22 @@
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
     </script>
+
+    <script type="text/javascript">
+        AOS.init();
+    </script>
+
+    <script>
+        jQuery(function($) {
+            window.addEventListener("keydown", function(e) {
+                if (["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(e.code) > -1) {
+                    e.preventDefault();
+                }
+            }, false);
+        });
+    </script>
+
+
 </body>
 
 </html>
