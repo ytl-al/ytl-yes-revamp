@@ -17,21 +17,13 @@
 <footer class="footer">
     <div class="container g-lg-0">
         <div class="row position-relative">
-            <?php 
-                if (is_active_sidebar('yes_widget_footer_top')) :
-                    dynamic_sidebar('yes_widget_footer_top');
-                endif;
-            ?>
+            <?php display_widget_by_position('yes_widget_footer_top'); ?>
         </div>
     </div>
     <div class="copyright">
         <div class="container g-lg-0">
             <div class="row">
-                <?php 
-                    if (is_active_sidebar('yes_widget_footer_bottom')) :
-                        dynamic_sidebar('yes_widget_footer_bottom');
-                    endif;
-                ?>
+                <?php display_widget_by_position('yes_widget_footer_bottom'); ?>
             </div>
         </div>
     </div>

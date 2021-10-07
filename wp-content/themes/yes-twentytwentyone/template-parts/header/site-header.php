@@ -19,9 +19,9 @@
             <div class="row g-0">
                 <div class="col-10">
                     <ul class="tabnav">
-                        <li><a href="#" class="active">Personal</a></li>
-                        <li><a href="#">Business</a></li>
-                        <li><a href="#">Education</a></li>
+                        <li><a href="#" class="active"><?php echo esc_html__('Personal', 'yes.my'); ?></a></li>
+                        <li><a href="#"><?php echo esc_html__('Business', 'yes.my'); ?></a></li>
+                        <li><a href="#"><?php echo esc_html__('Education', 'yes.my'); ?></a></li>
                     </ul>
                 </div>
                 <div class="col-2">
@@ -43,23 +43,23 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown mega-dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shops</a>
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Shops', 'yes.my'); ?></a>
                                     <ul class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li>
                                             <ul>
-                                                <li class="dropdown-header">Mobile Plans</li>
+                                                <li class="dropdown-header"><?php echo esc_html__('Mobile Plans', 'yes.my'); ?></li>
                                                 <?php if (has_nav_menu('shop-mobile-plans')) wp_nav_menu(['theme_location' => 'shop-mobile-plans', 'container' => false, 'items_wrap' => '%3$s']); ?>
                                             </ul>
                                         </li>
                                         <li>
                                             <ul>
-                                                <li class="dropdown-header">Broadband</li>
+                                                <li class="dropdown-header"><?php echo esc_html__('Broadband', 'yes.my'); ?></li>
                                                 <?php if (has_nav_menu('shop-broadband')) wp_nav_menu(['theme_location' => 'shop-broadband', 'container' => false, 'items_wrap' => '%3$s']); ?>
                                             </ul>
                                         </li>
                                         <li>
                                             <ul>
-                                                <li class="dropdown-header">Existing Customers</li>
+                                                <li class="dropdown-header"><?php echo esc_html__('Existing Customers', 'yes.my'); ?></li>
                                                 <?php if (has_nav_menu('shop-existing-customers')) wp_nav_menu(['theme_location' => 'shop-existing-customers', 'container' => false, 'items_wrap' => '%3$s']); ?>
                                             </ul>
                                         </li>
@@ -80,8 +80,8 @@
                                 endif;
                             ?>
                             <div class="d-flex align-items-center">
-                                <a href="#" class="pink-btn me-3">Get Started</a>
-                                <a href="#" class="login-btn"><span class="iconify" data-icon="carbon:user-avatar-filled-alt"></span> Log In</a>
+                                <a href="#" class="pink-btn me-3"><?php echo esc_html__('Get Started', 'yes.my'); ?></a>
+                                <a href="#" class="login-btn"><span class="iconify" data-icon="carbon:user-avatar-filled-alt"></span> <?php echo esc_html__('Log In', 'yes.my'); ?></a>
                             </div>
                         </div>
                     </div>

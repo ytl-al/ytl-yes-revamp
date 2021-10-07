@@ -31,7 +31,7 @@
 				sprintf(
 					wp_kses(
 						/* translators: %s: Name of current post. Only visible to screen readers */
-						__('Continue reading<span class="screen-reader-text"> "%s"</span>', 'yes-twentytwentyone'),
+						__('Continue reading<span class="screen-reader-text"> "%s"</span>', 'yes.my'),
 						array(
 							'span' => array(
 								'class' => array(),

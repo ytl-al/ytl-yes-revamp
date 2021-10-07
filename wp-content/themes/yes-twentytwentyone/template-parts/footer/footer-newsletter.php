@@ -1,5 +1,1 @@
-<?php
-    if (is_active_sidebar('yes_widget_footer_newsletter')) :
-        dynamic_sidebar('yes_widget_footer_newsletter');
-    endif;
-?>
+<?php display_widget_by_position('yes_widget_footer_newsletter'); ?>

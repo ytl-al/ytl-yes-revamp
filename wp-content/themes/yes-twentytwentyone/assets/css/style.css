@@ -1,7 +1,7 @@
 /* 
     Stylesheet Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : September 29, 2021, 03:52:31 PM
+    Last edited on  : October   05, 2021, 03:52:31 PM
     Author          : [YTL Digital Design] - Zeeshan, AL
 */
 
@@ -465,6 +465,7 @@ section {
     display: inline-block;
     font-weight: 800;
     font-size: 16px;
+    text-align: center;
     text-transform: uppercase;
     color: #FFF;
     border: none;
