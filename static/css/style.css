@@ -120,7 +120,7 @@ section {
 .top-tabs-container .tabnav li {
     list-style: none;
     float: left;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 600;
 }
 
@@ -149,7 +149,7 @@ section {
 .top-tabs-container .language-drop .dropdown-toggle {
     background-color: #F9F7F4;
     border: none;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     color: #00B4F0;
 }
@@ -166,7 +166,7 @@ section {
 }
 
 .top-tabs-container .language-drop .dropdown-item {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .top-tabs-container .language-drop .dropdown-item:active {
@@ -198,7 +198,7 @@ section {
 
 .nav-container .nav-link {
     color: #FFF;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     padding-right: 1rem !important;
     padding-left: 1rem !important;
@@ -222,7 +222,6 @@ section {
     display: inline-block;
     background-color: #ED028C;
     border-radius: 90px;
-    border: solid 1px #FFF;
     font-size: 14px;
     color: #FFF;
     font-weight: 700;
@@ -237,7 +236,7 @@ section {
 }
 
 .nav-container .login-btn {
-    font-size: 14px;
+    font-size: 16px;
     color: #FFF;
     font-weight: 700;
     display: inline-block;
@@ -277,7 +276,7 @@ section {
 }
 
 .mega-dropdown-menu>li>ul>li.dropdown-header {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     color: #00B4F0;
     padding: 0px;
@@ -288,9 +287,9 @@ section {
     display: block;
     clear: both;
     font-weight: normal;
-    line-height: 26px;
+    line-height: 35px;
     color: #00B4F0;
-    font-size: 12px;
+    font-size: 16px;
     white-space: normal;
 }
 
@@ -956,7 +955,7 @@ section {
 }
 
 .breadcrumb-section .breadcrumb .breadcrumb-item {
-    font-size: 18px;
+    font-size: 15px;
     color: #00B4F0;
     font-family: 'Nunito', sans-serif;
 }
