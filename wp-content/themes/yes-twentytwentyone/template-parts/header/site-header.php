@@ -21,7 +21,7 @@
                     <ul class="tabnav">
                         <li><a href="#" class="active"><?php echo esc_html__('Personal', 'yes.my'); ?></a></li>
                         <li><a href="#"><?php echo esc_html__('Business', 'yes.my'); ?></a></li>
-                        <li><a href="#"><?php echo esc_html__('Education', 'yes.my'); ?></a></li>
+                        <li><a href="https://www.ytlfoundation.org/learnfromhome/" target="_blank"><?php echo esc_html__('Education', 'yes.my'); ?></a></li>
                     </ul>
                 </div>
                 <div class="col-2">

@@ -90,9 +90,16 @@
     }
     
     #postpaid-plans .plan-table tr td.blue-col .info-icon {
-        position: absolute;
+        /* position: absolute;
         right: 22px;
-        top: 22px;
+        top: 22px; */
+        float: right;
+    }
+
+    #postpaid-plans .plan-table tr td.blue-col:after {
+        clear: both;
+        content: '';
+        display: block;
     }
     
     #postpaid-plans .plan-table tr td.empty-row {

@@ -1,7 +1,7 @@
 /* 
     Stylesheet Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : October   05, 2021, 03:52:31 PM
+    Last edited on  : October   12, 2021, 03:52:31 PM
     Author          : [YTL Digital Design] - Zeeshan, AL
 */
 
@@ -176,7 +176,7 @@ section {
     display: inline-block;
     background-color: #ED028C;
     border-radius: 90px;
-    border: solid 1px #FFF;
+    /* border: solid 1px #FFF; */
     font-size: 14px;
     color: #FFF;
     font-weight: 700;
@@ -185,7 +185,7 @@ section {
 }
 
 .nav-container .pink-btn:hover {
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
     background-color: #D00072;
 }
 
@@ -383,7 +383,7 @@ section {
 
 .slider-btn:hover {
     color: #FFF;
-    box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.45);
+    /* box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.45); */
     background-color: #D00072;
 }
 

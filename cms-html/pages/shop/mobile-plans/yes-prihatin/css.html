@@ -214,9 +214,16 @@
     
     #prihatin-plans .plan-table tr td.yellow-col .info-icon,
     #prihatin-plans .plan-table tr td.pink-col .info-icon {
-        position: absolute;
+        /* position: absolute;
         right: 22px;
-        top: 22px;
+        top: 22px; */
+        float: right;
+    }
+    
+    #prihatin-plans .plan-table tr td:after {
+        clear: both;
+        content: '';
+        display: block;
     }
     
     #prihatin-plans .plan-table tr td.empty-row {

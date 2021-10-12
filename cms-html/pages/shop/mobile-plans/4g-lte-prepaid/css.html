@@ -97,9 +97,16 @@
     }
     
     #prepaid-plans .plan-table tr td.blue-col .info-icon {
-        position: absolute;
+        /* position: absolute;
         right: 22px;
-        top: 22px;
+        top: 22px; */
+        float: right;
+    }
+
+    #prepaid-plans .plan-table tr td.blue-col:after {
+        clear: both;
+        content: '';
+        display: block;
     }
     
     #prepaid-plans .plan-table tr td.empty-row {
