@@ -1,7 +1,7 @@
 /* 
     Stylesheet Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : October   12, 2021, 03:52:31 PM
+    Last edited on  : October   13, 2021, 03:52:31 PM
     Author          : [YTL Digital Design] - Zeeshan, AL
 */
 
@@ -74,7 +74,7 @@ section {
 .top-tabs-container .tabnav li {
     list-style: none;
     float: left;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 600;
 }
 
@@ -103,7 +103,7 @@ section {
 .top-tabs-container .language-drop .dropdown-toggle {
     background-color: #F9F7F4;
     border: none;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     color: #00B4F0;
 }
@@ -120,7 +120,7 @@ section {
 }
 
 .top-tabs-container .language-drop .dropdown-item {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .top-tabs-container .language-drop .dropdown-item:active {
@@ -152,7 +152,7 @@ section {
 
 .nav-container .nav-link {
     color: #FFF;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     padding-right: 1rem !important;
     padding-left: 1rem !important;
@@ -163,7 +163,7 @@ section {
 }
 
 .navbar-toggler-icon {
-    background-image: url(../images/icon-menu-line.png);
+    background-image: url(../images/menu-line.svg);
 }
 
 .navbar-toggler:active,
@@ -176,12 +176,12 @@ section {
     display: inline-block;
     background-color: #ED028C;
     border-radius: 90px;
-    /* border: solid 1px #FFF; */
     font-size: 14px;
     color: #FFF;
     font-weight: 700;
     text-transform: uppercase;
     padding: 6px 38px;
+    text-align: center;
 }
 
 .nav-container .pink-btn:hover {
@@ -190,7 +190,7 @@ section {
 }
 
 .nav-container .login-btn {
-    font-size: 14px;
+    font-size: 16px;
     color: #FFF;
     font-weight: 700;
     display: inline-block;
@@ -230,7 +230,7 @@ section {
 }
 
 .mega-dropdown-menu>li>ul>li.dropdown-header {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     color: #00B4F0;
     padding: 0px;
@@ -241,9 +241,9 @@ section {
     display: block;
     clear: both;
     font-weight: normal;
-    line-height: 26px;
+    line-height: 35px;
     color: #00B4F0;
-    font-size: 12px;
+    font-size: 16px;
     white-space: normal;
 }
 
@@ -486,6 +486,7 @@ section {
     text-transform: uppercase;
     color: #ED028C;
     border: none;
+    transition: all 0.3s ease;
 }
 
 .white-btn:hover {
@@ -713,7 +714,6 @@ section {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    ;
     width: 100%;
     text-align: center;
 }
@@ -1033,7 +1033,7 @@ section {
     justify-content: center;
     padding: 70px 0px;
     padding-top: 0px;
-    background-image: url("/site/wp-content/uploads/2021/09/switch-process-bg.jpg");
+    background-image: url("/site/wp-content/uploads/2021/10/switch-process-bg.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: top;
