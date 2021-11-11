@@ -1,7 +1,7 @@
 /* 
     Stylesheet Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : October   13, 2021, 03:52:31 PM
+    Last edited on  : November  11, 2021, 03:52:31 PM
     Author          : [YTL Digital Design] - Zeeshan, AL
 */
 
@@ -780,7 +780,14 @@ section {
 
 /* Newsletter Styling */
 
-#newsletter {
+/* #newsletter {
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0px;
+    margin-top: 60px;
+    background: linear-gradient(270deg, rgba(0, 180, 240, 0.3) -27.92%, rgba(0, 180, 240, 0.3) -27.51%, rgba(249, 247, 244, 0.3) 108.85%);
+} */
+#wpcf7-f630-o1, #wpcf7-f816-o1, #wpcf7-f820-o1 {
     align-items: center;
     justify-content: center;
     padding: 50px 0px;
@@ -825,6 +832,10 @@ section {
 
 #newsletter .newsletter-check {
     margin-top: -30px;
+}
+
+#newsletter .wpcf7-list-item {
+    margin-left: 0;
 }
 
 

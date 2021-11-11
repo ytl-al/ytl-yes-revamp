@@ -1,14 +1,14 @@
 /* 
     JavaScript Name : Yes TwentyTwentyOne 
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : October   13, 2021, 03:52:31 PM
+    Last edited on  : October   29, 2021, 03:52:31 PM
     Author          : [YTL Digital Design] - AL
 */
 const yesLocalStorageName = 'yesSession';
 const yesLocalStorage   = JSON.parse(localStorage.getItem(yesLocalStorageName));
 
-const expiryTopPageBanner = 1; // in minute
-const expiryPageModal = 30; // in minute
+const expiryTopPageBanner = 10; // in minute
+const expiryPageModal = 60; // in minute
 
 const pageLoadTimestamp = Date.now();
 

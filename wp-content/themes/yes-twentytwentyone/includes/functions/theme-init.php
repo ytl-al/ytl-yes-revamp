@@ -38,7 +38,7 @@ if (!function_exists('yes_twentytwentyone_setup')) {
     {
         if (function_exists('add_theme_support')) {
             /** To add the theme support for title tag for the website */
-            add_theme_support('title-tag');
+            // add_theme_support('title-tag');
             /** To add the theme support for custom logo */
             add_theme_support(
                 'custom-logo',
@@ -434,4 +434,71 @@ if (!function_exists('display_widget_by_position')) {
         }
         return;
     }
+}
+
+
+if (!function_exists('footer_newsletter_email_already_registered') && !function_exists('footer_newsletter_email_validation')) {
+    /**
+     * Function footer_newsletter_email_already_registered()
+     * Function to check if field value has been saved before
+     * 
+     * @param    integer    $cf_id              The ID for WP Contact Form 7 to be validated
+     * @param    string     $form_field_name    The field name of the field to be validated
+     * @param    string     $form_field_value   The field value of the field to be validated
+     * 
+     * @return   bool Return if field value has been registered or not
+     * 
+     * @since    1.0.0
+     */
+    function footer_newsletter_email_already_registered($cf_id, $form_field_name, $form_field_value)
+    {
+        global $wpdb;
+        $form_id    = 'cf_' . $cf_id;
+        $query      = " SELECT yvld.* 
+                        FROM yes_vxcf_leads_detail AS yvld
+                        LEFT JOIN yes_vxcf_leads AS yvl
+                            ON yvld.lead_id = yvl.id
+                        WHERE yvl.form_id = '$form_id'
+                            AND yvld.name = '$form_field_name' 
+                            AND yvld.value LIKE '%$form_field_value%'";
+        $entry      = $wpdb->get_results($query);
+        $found      = false;
+        if (!empty($entry)) {
+            $found = true;
+        }
+        return $found;
+    }
+
+
+    /**
+     * Function display_widget_by_position()
+     * Function to validate the WP Contact Form 7
+     * 
+     * @param    object $result     The widget's position ID which to be displayed. Default value is null.
+     * @param    array  $tag        Flag to check if widget is active. Default value is false.
+     * 
+     * @return  string|bool Return WPCF7_Validation
+     * 
+     * @since    1.0.0
+     */
+    function footer_newsletter_email_validation($result, $tag)
+    {
+        $wpcf7              = WPCF7_ContactForm::get_current();
+        $current_form_id    = $wpcf7->id;
+
+        if ($current_form_id == WPCF7_FOOTER_NEWSLETTER_FORM_ID) {
+            $cf_id              = WPCF7_FOOTER_NEWSLETTER_FORM_ID;
+            $form_field_name    = 'email';
+            $errorMessage       = 'This email address is already registered';
+            $name               = $tag['name'];
+            if ($name == $form_field_name) {
+                if (footer_newsletter_email_already_registered($cf_id, $form_field_name, $_POST[$name])) {
+                    $result->invalidate($tag, $errorMessage);
+                }
+            }
+        }
+        
+        return $result;
+    }
+    add_filter('wpcf7_validate_email*', 'footer_newsletter_email_validation', 10, 2);
 }

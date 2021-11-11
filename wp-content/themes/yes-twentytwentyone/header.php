@@ -22,7 +22,7 @@
 	
 	<link rel="profile" href="https://gmpg.org/xfn/11" />
 
-	<title><?php bloginfo('name'); ?> <?php is_front_page() ? '' : '| '.wp_title(''); ?></title>
+	<title><?php wp_title(''); ?></title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
