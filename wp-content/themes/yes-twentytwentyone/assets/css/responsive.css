@@ -34,60 +34,60 @@
         display: none;
     }
     #amazing-things {
-        padding-top: 0px;
+        padding-top: 0px !important;
     }
     #amazing-things h1 {
-        font-size: 42px;
-        line-height: 46px;
+        font-size: 42px !important;
+        line-height: 46px !important;
     }
     #amazing-things h2 {
-        font-size: 21px;
-        line-height: 28px;
+        font-size: 21px !important;
+        line-height: 28px !important;
     }
     #amazing-things p {
-        font-size: 16px;
-        line-height: 23px;
+        font-size: 16px !important;
+        line-height: 23px !important;
     }
     #amazing-things p.small {
-        font-size: 12px;
+        font-size: 12px !important;
     }
     #customer-review {
-        padding-top: 60px;
+        padding-top: 60px !important;
     }
     #customer-review h1 {
-        font-size: 33px;
+        font-size: 33px !important;
         line-height: 42px;
     }
     #faq-section {
-        padding-top: 0px;
+        padding-top: 0px !important;
     }
     #popular-deals {
-        padding-top: 0px;
+        padding-top: 0px !important;
     }
     #popular-deals h1 {
-        font-size: 33px;
+        font-size: 33px !important;
     }
     #popular-deals .deal-box {
         margin-bottom: 15px;
         height: auto !important;
     }
     #amazing-things .hunt-yes-logo {
-        margin-top: 30px;
+        margin-top: 30px !important;
     }
     #newsletter h1 {
-        font-size: 30px;
+        font-size: 30px !important;
     }
     #newsletter p {
-        font-size: 19px;
+        font-size: 19px !important;
     }
     #newsletter .newsletter-check {
-        margin-top: 0px;
+        margin-top: 0px !important;
     }
     .signup-modal .signup-content {
-        padding: 40px 0px;
+        padding: 40px 0px !important;
     }
     .breadcrumb-section .breadcrumb .breadcrumb-item {
-        font-size: 14px;
+        font-size: 14px !important;
     }
 }
 
@@ -96,21 +96,21 @@
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
     #newsletter .newsletter-check {
-        margin-top: 17px;
-        margin-bottom: 20px;
+        margin-top: 17px !important;
+        margin-bottom: 20px !important;
     }
     #newsletter p {
-        margin-bottom: 20px;
+        margin-bottom: 20px !important;
     }
     #popular-deals .deal-box {
-        margin-bottom: 15px;
+        margin-bottom: 15px !important;
         height: auto !important;
     }
     .signup-modal .signup-content {
-        padding: 40px 0px;
+        padding: 40px 0px !important;
     }
     #slider-yes-home .carousel-item {
-        min-height: 32vh;
+        min-height: 32vh !important;
     }
     .mega-dropdown-menu>li {
         float: none;
