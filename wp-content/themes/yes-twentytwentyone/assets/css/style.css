@@ -1,7 +1,7 @@
 /* 
     Stylesheet Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : November  11, 2021, 03:52:31 PM
+    Last edited on  : November  12, 2021, 03:52:31 PM
     Author          : [YTL Digital Design] - Zeeshan, AL
 */
 
@@ -479,7 +479,7 @@ section {
 .white-btn {
     background-color: #FFF;
     border-radius: 90px;
-    padding: 14px 74px;
+    padding: 14px 50px;
     display: inline-block;
     font-weight: 800;
     font-size: 16px;
@@ -838,6 +838,46 @@ section {
     margin-left: 0;
 }
 
+/* #wpcf7-f630-o1 .wpcf7-form-control-wrap, #wpcf7-f816-o1 .wpcf7-form-control-wrap, #wpcf7-f820-o1 .wpcf7-form-control-wrap {
+    width: 100%;
+} */
+
+#wpcf7-f630-o1 .wpcf7-response-output, #wpcf7-f816-o1 .wpcf7-response-output, #wpcf7-f820-o1 .wpcf7-response-output {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+@media (min-width: 576px) {
+    #wpcf7-f630-o1 .wpcf7-response-output, #wpcf7-f816-o1 .wpcf7-response-output, #wpcf7-f820-o1 .wpcf7-response-output {
+        width: 540px;
+    }
+}
+
+@media (min-width: 768px) {
+    #wpcf7-f630-o1 .wpcf7-response-output, #wpcf7-f816-o1 .wpcf7-response-output, #wpcf7-f820-o1 .wpcf7-response-output {
+        width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+    #wpcf7-f630-o1 .wpcf7-response-output, #wpcf7-f816-o1 .wpcf7-response-output, #wpcf7-f820-o1 .wpcf7-response-output {
+        width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    #wpcf7-f630-o1 .wpcf7-response-output, #wpcf7-f816-o1 .wpcf7-response-output, #wpcf7-f820-o1 .wpcf7-response-output {
+        width: 1140px;
+    }
+}
+
+@media (min-width: 1400px) {
+    #wpcf7-f630-o1 .wpcf7-response-output, #wpcf7-f816-o1 .wpcf7-response-output, #wpcf7-f820-o1 .wpcf7-response-output {
+        width: 1320px;
+    }
+}
+
 
 /* Sign up Popup Modal Styling */
 
@@ -1161,6 +1201,8 @@ section {
 
 
 /* Added by AL - START */
+
+.layer-page { overflow: hidden; }
 
 .wp-block-column:not(:first-child) {
     margin-left: 0;
