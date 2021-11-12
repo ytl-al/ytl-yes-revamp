@@ -137,7 +137,7 @@ section {
     background-color: #00B4F0;
 }
 
-@media (max-screen: 768px) {
+@media (max-width: 768px) {
     .top-tabs-container .tabnav li a {
         padding-left: 15px;
         padding-right: 15px;
