@@ -249,22 +249,26 @@ if (!function_exists('yes_language_switcher') && function_exists('icl_get_langua
             foreach ($languages as $language) {
                 switch ($language['code']) {
                     case 'ms':
-                        $language_name  = 'Bahasa Malaysia';
+                        $language_name      = 'Bahasa Malaysia';
+                        $lang_name_mobile   = 'BM';
                         break;
                     case 'zh-hans':
-                        $language_name  = '中文';
+                        $language_name      = '中文';
+                        $lang_name_mobile   = '中文';
                         break;
                     default:
-                        $language_name  = 'English';
+                        $language_name      = 'English';
+                        $lang_name_mobile   = 'EN';
                 }
                 $langs  .= '<li><a href="' . $language['url'] . '" language="' . $language['code'] . '" class="dropdown-item" >' . $language_name . '</a></li>';
 
                 ($language['active']) ? $active_lang = $language_name : '';
+                ($language['active']) ? $active_lang_mobile = $lang_name_mobile : '';
             }
         }
         $exp_class  = join(' ', $classes);
         $html       = " <div class='dropdown language-drop float-end $exp_class'>
-                            <a class='btn btn-secondary btn-sm dropdown-toggle' href='javascript:void(0)' role='button' id='dropdownMenuLink' data-bs-toggle='dropdown' aria-expanded='false'><span class='iconify' data-icon='bi:globe'></span> $active_lang</a>
+                            <a class='btn btn-secondary btn-sm dropdown-toggle' href='javascript:void(0)' role='button' id='dropdownMenuLink' data-bs-toggle='dropdown' aria-expanded='false'><span class='iconify' data-icon='bi:globe'></span> <span class='d-lg-none'>$active_lang_mobile</span><span class='d-none d-lg-inline-block'>$active_lang</span></a>
                             <ul class='dropdown-menu dropdown-menu-start' aria-labelledby='dropdownMenuLink'>$langs</ul>
                         </div>";
         return $html;
