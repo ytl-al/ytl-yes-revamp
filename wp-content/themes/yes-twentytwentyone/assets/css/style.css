@@ -139,6 +139,7 @@ section {
 
 @media (max-width: 768px) {
     .top-tabs-container .tabnav li a {
+        font-size: 90%;
         padding-left: 15px;
         padding-right: 15px;
     }
