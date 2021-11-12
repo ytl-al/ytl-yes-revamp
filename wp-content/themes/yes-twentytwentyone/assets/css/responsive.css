@@ -52,7 +52,7 @@
         font-size: 12px;
     }
     #customer-review {
-        padding-top: 0px;
+        padding-top: 60px;
     }
     #customer-review h1 {
         font-size: 33px;
@@ -91,8 +91,9 @@
     }
 }
 
+
 /* IPAD Portrait and Landscape */
-    
+
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
     #newsletter .newsletter-check {
         margin-top: 17px;
