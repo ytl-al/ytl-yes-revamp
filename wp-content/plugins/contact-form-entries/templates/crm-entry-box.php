@@ -35,11 +35,11 @@
 jQuery(document).ready(function($){
         var vx_crm_ajax='<?php echo wp_create_nonce("vx_crm_ajax") ?>';
  $('#vx_include_notes').on('change',function(e){
- $.post(ajaxurl,{action:'actions_<?php echo vxcf_form::$id ?>',action2:'update_print_note',status:$(this).is(':checked') ? '1' : '',vx_crm_ajax:vx_crm_ajax});
+ $.post(ajaxurl,{action:'actions_<?php echo esc_attr(vxcf_form::$id) ?>',action2:'update_print_note',status:$(this).is(':checked') ? '1' : '',vx_crm_ajax:vx_crm_ajax});
  });
  $('#vx_print_entry').on('click',function(e){
     e.preventDefault();
-   var url='<?php echo $print_link ?>';
+   var url='<?php echo esc_url($print_link) ?>';
    if($('#vx_include_notes').is(':checked')){
     url+='&notes=1';   
    }

@@ -2,7 +2,7 @@
 /**
 * Plugin Name: Contact Form Entries
 * Description: Save form submissions to the database from <a href="https://wordpress.org/plugins/contact-form-7/">Contact Form 7</a>, <a href="https://wordpress.org/plugins/ninja-forms/">Ninja Forms</a>, <a href="https://elementor.com/widgets/form-widget/">Elementor Forms</a> and <a href="https://wordpress.org/plugins/wpforms-lite/">WP Forms</a>.
-* Version: 1.2.3
+* Version: 1.2.4
 * Requires at least: 3.8
 * Tested up to: 5.8
 * Author URI: https://www.crmperks.com
@@ -26,7 +26,7 @@ class vxcf_form {
   public static $type = "vxcf_form";
   public static $path = ''; 
 
-  public static  $version = '1.2.3';
+  public static  $version = '1.2.4';
   public static $upload_folder = 'crm_perks_uploads';
   public static $db_version='';  
   public static $base_url='';  
@@ -90,7 +90,8 @@ if(!empty($_GET['vx_crm_form_action']) && $_GET['vx_crm_form_action'] == 'downlo
 
 }
 
-public  function setup_main(){ 
+public  function setup_main(){
+
   //handling post submission.
 //  add_action("gform_entry_created", array($this, 'gf_entry_created'), 40, 2);
 // add_filter('wpcf7_mail_components', array($this, 'submission'), 999, 3);
@@ -580,6 +581,7 @@ $lead[$v['id']]=$val;
 if($track){
   $upload_files=$this->copy_files($upload_files); 
 }  
+
        if(is_array($upload_files)){
        foreach($upload_files as $k=>$v){
        $lead[$k]=$v;    
@@ -1262,6 +1264,10 @@ public function copy_files($uploaded_files_form){
 $upload=self::get_upload_dir();
 $upload_path=$upload['path'];
 $folder=$upload['folder'];
+  $base_url=get_site_url();
+// ini_set('display_errors', '1');
+//ini_set('display_startup_errors', '1');
+//error_reporting(E_ALL);
         if($upload_path){
             foreach($uploaded_files_form as $k=>$file_arr){
                   if(empty($file_arr)){
@@ -1272,10 +1278,11 @@ $folder=$upload['folder'];
                 }
                 $files=array();
                 foreach($file_arr as $file){
-                  $base_url=get_site_url();
+                
                   if(strpos($file,$base_url) === 0){
                   $file=str_replace($base_url,trim(ABSPATH,'/'),$file);     
                   } 
+                  
                 $file_name_arr=explode('/',$file);
                $file_name=$file_name_arr[count($file_name_arr)-1]; 
                $file_name=sanitize_file_name($file_name);
@@ -1283,10 +1290,15 @@ $folder=$upload['folder'];
             $dest=$upload_path.'/'.$file_name;
              
            $copy=copy($file,$dest);
-           chmod($dest, 0644);
+        /*   if(!$copy){
+             $file=str_replace(ltrim(ABSPATH,'/'),'',$file);  
+             $dest=str_replace(ABSPATH,'',$dest);  
+             $copy=copy($file,$dest);
+           } */
            $uploaded_file=$file;
            $path='';
            if($copy){
+               chmod($dest, 0644);
             $uploaded_file=$folder.'/'.$file_name;
             $files[]=$uploaded_file;    
            }
@@ -1553,7 +1565,7 @@ public static function display_msg($type,$message,$id=""){
   $ver=floatval($wp_version);
   if($type == "admin"){
   ?>
-  <div class="error vx_notice below-h2 notice is-dismissible" data-id="<?php echo $id ?>"><p><span class="dashicons dashicons-megaphone"></span> <b><?php _e('Contact Form Entries Plugin','contact-form-entries') ?>. </b> <?php echo wp_kses_post($message);?> </p>
+  <div class="error vx_notice below-h2 notice is-dismissible" data-id="<?php echo esc_attr($id) ?>"><p><span class="dashicons dashicons-megaphone"></span> <b><?php _e('Contact Form Entries Plugin','contact-form-entries') ?>. </b> <?php echo wp_kses_post($message);?> </p>
   </div>    
   <?php
   }else{
@@ -2517,7 +2529,7 @@ return $data;
   */
 public static function screen_msg( $message, $level = 'updated') {
   echo '<div class="'. esc_attr( $level ) .' fade below-h2 notice is-dismissible"><p>';
-  echo $message ;
+  echo wp_kses_post($message);
   echo '</p></div>';
   }
 /**
@@ -2832,7 +2844,7 @@ if(is_array($var) && isset($var[0]) ){
 public function vx_id(){
       $vx_id='';
  if(!empty($_COOKIE['vx_user'])){
-     $vx_id=$_COOKIE['vx_user'];
+     $vx_id=self::clean($_COOKIE['vx_user']);
  }else{
      $vx_id=uniqid().time().rand(9,99999999);
    $_COOKIE['vx_user']=$vx_id;  
@@ -2860,7 +2872,7 @@ public function vx_id(){
   if(is_array($arr)){
   return isset($arr[$key][$key2])  ? $arr[$key][$key2] : "";
   }
-  return isset($_REQUEST[$key][$key2]) ? $_REQUEST[$key][$key2] : "";
+  return isset($_REQUEST[$key][$key2]) ? self::clean($_REQUEST[$key][$key2]) : "";
   }
   /**
   * Get variable from array
@@ -2873,7 +2885,7 @@ public function vx_id(){
   if(is_array($arr)){
   return isset($arr[$key][$key2][$key3])  ? $arr[$key][$key2][$key3] : "";
   }
-  return isset($_REQUEST[$key][$key2][$key3]) ? $_REQUEST[$key][$key2][$key3] : "";
+  return isset($_REQUEST[$key][$key2][$key3]) ? self::clean($_REQUEST[$key][$key2][$key3]) : "";
   }
   /**
   * get base url

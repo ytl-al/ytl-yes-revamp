@@ -71,7 +71,7 @@ public function mapping_page_settings(){
                if(isset($v['label'])){ 
                if(empty($section) && $no == 0){$section=$k;} $no++;
                $class=$section == $k ? 'current' : '';
-                   $ul[]='<li><a href="'.$link.$k.'" class="'.$class.'">'.$v['label'].'</a>';
+                   $ul[]='<li><a href="'.esc_url($link.$k).'" class="'.esc_attr($class).'">'.esc_html($v['label']).'</a>';
                } 
             }
            if(count($ul)>1){     
@@ -120,12 +120,12 @@ if(!empty(self::$related_leads)){
         $id=$v['title'];     
          }else{
              $id='# '.$v['id'];
-      echo    $v['title'];       
+      echo esc_html($v['title']);       
          }
    if(!empty($v['link'])){
-  echo '<a href="'.$v['link'].'"> '.$id.'</a>';     
+  echo '<a href="'.esc_url($v['link']).'"> '.esc_html($id).'</a>';     
    }else{
-    echo ' '.$id;   
+    echo ' '.esc_html($id);   
    }
    echo '</li>';     
      }
@@ -171,7 +171,7 @@ $email_from=$user->user_email;
 $from_name=$user->display_name;
 //$headers = array('Content-Type: text/plain; charset=UTF-8');
 $headers = "From: \"$from_name\" <$email_from> \r\n";
-wp_mail(trim($_REQUEST['note_email']),$subject, $note,$headers);    
+wp_mail(trim(vxcf_form::post('note_email')),$subject, $note,$headers);    
          }   
 }      
 }
@@ -252,27 +252,27 @@ $note_color='';
  if($note['color'] == '1'){ $note_color='vx_note_green';  }       
  if($note['color'] == '2'){ $note_color='vx_note_red';  }       
 ?>
-<div class="crm_note vx_note_temp <?php echo $note_color ?>" data-id="<?php echo $note['id'] ?>" data-color="<?php echo $note['color'] ?>">
-<div class="crm_note_img" title="<?php echo $note['display_name'] ?>">
+<div class="crm_note vx_note_temp <?php echo esc_html($note_color) ?>" data-id="<?php echo esc_html($note['id']) ?>" data-color="<?php echo esc_html($note['color']) ?>">
+<div class="crm_note_img" title="<?php echo esc_html($note['display_name']) ?>">
 <?php echo get_avatar($note['user_id'], 60 ); ?>
 </div>
 <div class="crm_arrow_left">
-<div class="crm_note_text"><?php echo nl2br($note['note']);?></div>
+<div class="crm_note_text"><?php echo nl2br(esc_html($note['note']));?></div>
 <a href="#" class="vx_edit_note_btn" title="<?php _e('Edit Note', 'contact-form-entries'); ?>"><i class="fa fa-pencil"></i></a>
 <div class="key_info">
-<span class="posted_by" title="<?php _e('Note created by', 'contact-form-entries'); ?>" ><i class="fa fa-user"></i> <span class="post_user"><?php echo $note['display_name']?></span></span>
+<span class="posted_by" title="<?php _e('Note created by', 'contact-form-entries'); ?>" ><i class="fa fa-user"></i> <span class="post_user"><?php echo esc_html($note['display_name'])?></span></span>
 
 <span class="post_time" title="<?php _e('Note created at', 'contact-form-entries'); ?>"><i class="fa fa-clock-o"></i> <span class="date_time"><?php echo date("d/M/y H:i:s",strtotime($note['created']))?></span></span>
 <?php
 if(!empty($note['email'])){
 ?>  
 <span class="post_time" title="<?php _e('Email sent to', 'contact-form-entries'); ?>">
-<i class="fa fa-envelope"></i> <?php echo $note['email']; ?></span>
+<i class="fa fa-envelope"></i> <?php echo esc_html($note['email']); ?></span>
 <?php
 }
 ?>   
   
-<span class="del_note vx_del_link" data-id="<?php echo $note['id']?>"> <a href="#" title="<?php _e("Delete", 'contact-form-entries'); ?>" class="reg_ok"><?php _e("Delete", 'contact-form-entries'); ?> </a><span class="reg_proc" style="display: none;"><i class="fa fa-circle-o-notch fa-spin"></i> <?php _e("Deleting ...", 'contact-form-entries'); ?></span></span>
+<span class="del_note vx_del_link" data-id="<?php echo esc_html($note['id'])?>"> <a href="#" title="<?php _e("Delete", 'contact-form-entries'); ?>" class="reg_ok"><?php _e("Delete", 'contact-form-entries'); ?> </a><span class="reg_proc" style="display: none;"><i class="fa fa-circle-o-notch fa-spin"></i> <?php _e("Deleting ...", 'contact-form-entries'); ?></span></span>
 </div> </div>
 <div class="crm_clear"></div>
 </div>
@@ -329,7 +329,7 @@ public function plugin_action_links( $links, $file ) {
    $slug=vxcf_form::get_slug();
       if ( $file == $slug ) {
           $settings_link=vxcf_form::link_to_settings('settings');
-            array_unshift( $links, '<a href="' .$settings_link. '&section=entries_settings">' . __('Settings', 'contact-form-entries') . '</a>' );
+            array_unshift( $links, '<a href="' .esc_url($settings_link). '&section=entries_settings">' . __('Settings', 'contact-form-entries') . '</a>' );
         }
         return $links;
    }
@@ -358,14 +358,14 @@ $classes['dup_div']=array("select","state","country","radio","checkbox"); //+inp
 public function crmperks_forms_duplicate_field($id,$field){
 ?>
    <div class="cfx_field_dup_div cfx_field_input cfx_field_row" style="<?php if(in_array($field['type'],array('file','html','hr','star','range','hidden'))){echo 'display:none;';} ?>">
-         <label class="crm_text_label" ><input type="checkbox" value="yes" class="valid_err_check" name="fields[<?php echo $id;?>][dup_check]" data-name="dup_check" <?php if(isset($field['dup_check']) && $field['dup_check'] == "yes") echo 'checked="checked"'?>> <?php _e('No Duplicates - ','contact-form-entries') ?>   </label>  <a href="javascript:void(0);" onclick="sf_colorbox('<?php _e('No Duplicate Fields Explanation','contact-form-entries') ?>','#sf_duplicate_fields_help');"><?php _e('Help','contact-form-entries') ?></a>
+         <label class="crm_text_label" ><input type="checkbox" value="yes" class="valid_err_check" name="fields[<?php echo esc_attr($id);?>][dup_check]" data-name="dup_check" <?php if(isset($field['dup_check']) && $field['dup_check'] == "yes") echo 'checked="checked"'?>> <?php _e('No Duplicates - ','contact-form-entries') ?>   </label>  <a href="javascript:void(0);" onclick="sf_colorbox('<?php _e('No Duplicate Fields Explanation','contact-form-entries') ?>','#sf_duplicate_fields_help');"><?php _e('Help','contact-form-entries') ?></a>
          
          
         <div class="valid_err_div" style="<?php if( empty($field['dup_check']) ){echo "display:none";} ?>">
         <label class="crm_text_label"><?php _e('No Duplicates Validation Message','contact-form-entries') ?></label>
            <div class="crm-panel-description">
            <?php _e('This message will be displayed to the visitor if duplicate found. You can use %field_value% to display the field value submitted by user.','contact-form-entries') ?></div>
-      <input type="text" name="fields[<?php echo $id;?>][valid_err_msg]" data-name="valid_err_msg" placeholder="Enter No Duplicates Validation Error Message"  class="text" value="<?php echo $field['valid_err_msg'];?>" /></div> 
+      <input type="text" name="fields[<?php echo esc_attr($id);?>][valid_err_msg]" data-name="valid_err_msg" placeholder="Enter No Duplicates Validation Error Message"  class="text" value="<?php echo esc_html($field['valid_err_msg']);?>" /></div> 
       </div>
 <?php  
 }  
@@ -425,7 +425,7 @@ public function forms_stats_table(){
          $entries=isset($counts['total'][$form_id]) ? $counts['total'][$form_id] : '0';
          $unread=isset($counts['unread'][$form_id]) ? $counts['unread'][$form_id] : '0'; 
          $link=vxcf_form::link_to_settings().'&form_id='.$form_id;
-  echo '<tr><td><a href="'.$link.'">'.$v.'</a></td><td class="td_number">'.$entries.'</td><td class="td_number">'.$unread.'</td></tr>';          
+  echo '<tr><td><a href="'.esc_url($link).'">'.esc_html($v).'</a></td><td class="td_number">'.esc_html($entries).'</td><td class="td_number">'.esc_html($unread).'</td></tr>';          
         }
     }    
     } ?></tbody> </table><?php }else{  ?>
@@ -500,7 +500,7 @@ public function entries_mapping_page(){
 public  function main_menu($menus){ 
   // Adding submenu if user has access
 $menu_id='vxcf_leads';  
-if(isset($_GET['tab'])){self::$tab=$_GET['tab']; } 
+if(isset($_GET['tab'])){self::$tab=vxcf_form::post('tab'); } 
 if(empty($GLOBALS['admin_page_hooks'][$menu_id])){
 $unread=$this->data->get_unread_total(); 
 if($unread > 99){ $unread='99+'; }
@@ -530,7 +530,7 @@ add_filter( 'manage_toplevel_page_'.vxcf_form::$id.'_columns', array($this,'scre
   //add form fields , if form options do not exist
 add_filter( 'get_user_option_managetoplevel_page_'.vxcf_form::$id.'columnshidden', array($this,'hide_cols') );
 add_action("load-toplevel_page_vxcf_leads", array($this,'screen_options'));
-if(!isset($_GET['tab']) || in_array($_GET['tab'],array('entries') )){
+if(!isset($_GET['tab']) || in_array(vxcf_form::post('tab'),array('entries') )){
 add_action("load-$hook", array($this,'screen_options')); //toplevel_page_vxcf_leads
 } }
 //sequence
@@ -551,16 +551,16 @@ add_action("load-$hook", array($this,'screen_options')); //toplevel_page_vxcf_le
      if(isset($_REQUEST[vxcf_form::$id.'_action'])){   
           check_admin_referer('vx_action','vx_action');
  if(current_user_can(vxcf_form::$id."_edit_settings")){
-$tab=isset($_GET['tab']) ? $_GET['tab'] : 'entries';
+$tab=isset($_GET['tab']) ? vxcf_form::post('tab') : 'entries';
   $link=vxcf_form::link_to_settings($tab);
 //
 $status_str='';
 if(isset($_GET['status'])){
- $status_str=$_GET['status'];   
+ $status_str=vxcf_form::post('status');   
 }
- $ids=array();
-if(isset($_POST['lead_id']) && is_array($_POST['lead_id']) && count($_POST['lead_id'])>0){
-    foreach($_POST['lead_id'] as $id){
+ $ids=array();  $lead_ids=vxcf_form::post('lead_id');
+if(is_array($lead_ids) && count($lead_ids)>0){
+    foreach($lead_ids as $id){
   $ids[]=(int)$id;   
  }   
 }else if(isset($_GET['id'])){
@@ -654,15 +654,15 @@ $status_str='trash';
 $this->add_msg($msg,$class);
 
 if(isset($_GET['tab'])){
- //$link.='&tab='.$_GET['tab'];   
+ //$link.='&tab='.vxcf_form::post('tab');   
 }
 
 if(isset($_GET['id'])){
- //$link.='&id='.$_GET['id']; 
+ //$link.='&id='.vxcf_form::post('id'); 
    
 }
  if(isset($_GET['form_id'])){
- $link.='&form_id='.$_GET['form_id'];   
+ $link.='&form_id='.vxcf_form::post('form_id');   
 }
 
 if(!empty($status_str)){
@@ -717,7 +717,7 @@ vxcf_form::download_csv($form_id);
   */
 public  function mapping_page(){ 
        wp_enqueue_style('fontawsome');  
-      $tab=$view = isset($_GET["tab"]) ? $_GET["tab"] : 'entries';
+      $tab=$view = isset($_GET["tab"]) ? vxcf_form::post('tab') : 'entries';
  $extra_tabs=array();
 
       $extra_tabs=apply_filters('vx_entries_plugin_tabs',$extra_tabs);
@@ -788,7 +788,7 @@ proc.hide();
     $link=admin_url('admin.php?page=vxcf_leads&tab=');
         foreach($tabs as  $k=>$v){
     ?>
-        <a href="<?php echo $link.$k ?>" class="nav-tab <?php if($k == $view){echo 'nav-tab-active';} ?>"><?php echo $v; ?></a>
+        <a href="<?php echo esc_url($link.$k) ?>" class="nav-tab <?php if($k == $view){echo 'nav-tab-active';} ?>"><?php echo esc_html($v); ?></a>
             
     <?php
         }
@@ -947,8 +947,8 @@ if(empty($status)){
     $order_icon= $order == "desc" ? "down" : "up"; 
     $order_by='';
   if(isset($_REQUEST['orderby'])){
-    $order_by= $_REQUEST['orderby']; 
-  switch($_REQUEST['orderby']){ 
+    $order_by=vxcf_form::post('orderby'); 
+  switch($order_by){ 
   case"time": $time_order=$order_icon; $time_class="";   break;    
   }          
   }
@@ -971,7 +971,7 @@ $bulk_actions["trash"]=__('Trash','contact-form-entries');
 $entry_fields=get_post_meta($form_id,'_vx_entry_fields',true);
  //$entry_fields=json_decode($entry_fields,true);
 if(isset($_POST[vxcf_form::$id.'_fields'])){
-$entry_fields=$_POST['fields'];
+$entry_fields=vxcf_form::post('fields');
  update_post_meta($form_id,'_vx_entry_fields',$entry_fields);   
 }
 $entry_fields = is_array($entry_fields) ? $entry_fields : array();
@@ -1329,7 +1329,7 @@ private function get_country_states(){
   public function tooltip($str){
   if($str == ""){return;}
   ?>
-  <i class="vx_icons vxc_tips fa fa-question-circle" data-tip="<?php echo $str ?>"></i> 
+  <i class="vx_icons vxc_tips fa fa-question-circle" data-tip="<?php echo esc_html($str) ?>"></i> 
   <?php  
   }
 public function remove_personal_data( $exporters ) {

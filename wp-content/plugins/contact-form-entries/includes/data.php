@@ -191,7 +191,7 @@ public function get_unread_total(){
    return $wpdb->get_var($sql_unread);   
 }
 public function get_leads_count_by_form($req=''){
-    if(empty($req)){ $req=$_REQUEST; }
+    if(empty($req)){ $req=vxcf_form::clean($_REQUEST); }
          global $wpdb;
 $leads = $this->get_crm_table_name();
 $sql_unread="SELECT count(distinct l.id) as total,form_id FROM {$leads} l where l.is_read=0 and l.status=0 ";
@@ -217,7 +217,7 @@ $res[$k]=$forms_k;
 return $res;      
 }
 public function get_entries($form_id,$per_page=20,$req=''){
-if(empty($req)){ $req=$_REQUEST; }
+if(empty($req)){ $req=vxcf_form::clean($_REQUEST); }
           global $wpdb;
     $leads_table = $this->get_crm_table_name();
     $detail = $this->get_crm_table_name('detail');
@@ -314,7 +314,7 @@ $sql_t="SELECT count(*) FROM {$leads_table} l where $search";
   
   if(isset($_GET['page_id']))
   {
-  $page=$_GET['page_id'];
+  $page=vxcf_form::post('page_id');
   $start = $page-1;
   $start = $start*$per_page;
   }
@@ -330,7 +330,7 @@ $sql="SELECT  $sql_fields from $leads_table l ".vxcf_form::$sql_join;
  if(!empty($_GET['orderby'])){
      $order_by='d.value';
      if(in_array($_GET['orderby'],$main_fields) ){
-     $order_by='l.'.ltrim($_GET['orderby'],'vx');     
+     $order_by='l.'.ltrim(vxcf_form::post('orderby'),'vx');     
      }else{
  $sql.=" left join $detail d on (l.id = d.lead_id)";   
  $search.=!empty(vxcf_form::$sql_field_name) ? vxcf_form::$sql_field_name : ' and d.name="'.esc_sql(vxcf_form::post('orderby')).'" ';     
@@ -387,13 +387,13 @@ if(!empty($res)){
       $range_min=$range_max=$page_links='';
        if(empty($req['vx_links'])){
 
-  $page_id=isset($_REQUEST['page_id'])&& $_REQUEST['page_id'] !="" ? $_REQUEST['page_id'] : "1";
+  $page_id=isset($_REQUEST['page_id'])&& $_REQUEST['page_id'] !="" ? vxcf_form::post('page_id') : "1";
   if(is_numeric($per_page) && !empty($per_page)){
   $range_min=(int)($per_page*($page_id-1))+1;
   $range_max=(int)($per_page*($page_id-1))+count($leads);
   }
   unset($_GET['page_id']);
-  $query_h=http_build_query($_GET);
+  $query_h=http_build_query(vxcf_form::clean($_GET));
   $page_links = paginate_links( array(
   'base' =>  admin_url("admin.php")."?".$query_h."&%_%" ,
   'format' => 'page_id=%#%',
@@ -434,7 +434,7 @@ public function add_time_sql($search,$req){
   case"custom":
   $start_date='';
    if(!is_array($req)){
-     $req=$_GET;  
+     $req=vxcf_form::clean($_GET);  
    }
   if(!empty($req['start_date'])){ 
   $start_date=strtotime(vxcf_form::post('start_date',$req).' 00:00:00');

@@ -303,7 +303,7 @@ function toggle(){
   ?>
     <div class="vx_div">
       <div class="vx_head">
-<div class="crm_head_div"> <?php echo sprintf(__('Entry # %d','contact-form-entries'),$id); ?></div>
+<div class="crm_head_div"> <?php echo sprintf(__('Entry # %d','contact-form-entries'),esc_html($id)); ?></div>
 <div class="crm_clear"></div> 
   </div>
   <div class="vx_group">
@@ -327,16 +327,16 @@ if(!empty($field['values'])){
       ?>
   <div class="vx_row <?php if($value == ''){ echo 'vx_empty_row'; } ?>">
   <div class="vx_col1">
-  <label for="vx_<?php echo $field['name']; ?>" class="left_header"><?php echo $field['label']; ?></label>
+  <label for="vx_<?php echo esc_html($field['name']); ?>" class="left_header"><?php echo esc_html($field['label']); ?></label>
   </div>
   <div class="vx_col2">
   <?php
   if($value == ''){ $value='&nbsp;'; }
     if(is_array($value)){$value=implode(', ',$value); } 
     if( filter_var($value, FILTER_VALIDATE_URL)){
-?><a href="<?php echo $value ?>" target="_blank"><?php echo $value ?></a><?php     
+?><a href="<?php echo esc_url($value) ?>" target="_blank"><?php echo esc_html($value) ?></a><?php     
 }else if(filter_var($value, FILTER_VALIDATE_EMAIL)){
-?><a href="mailto:<?php echo $value ?>"><?php echo $value ?></a><?php 
+?><a href="mailto:<?php echo esc_html($value) ?>"><?php echo esc_html($value) ?></a><?php 
 }else{
   echo $value;  
 }

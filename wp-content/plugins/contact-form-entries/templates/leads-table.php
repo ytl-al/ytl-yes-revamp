@@ -7,25 +7,25 @@ if(!empty($search)){
 <p class="vx_table_actions">
 <input type="search" placeholder="<?php _e('Search', 'contact-form-entries'); ?>"  data-column="all" class="vx_search">
 <?php
-if(!empty($export)){ ?><a class="vx_export_btn" href="?vx_crm_form_action=download_csv&vx_crm_key=<?php echo $export ?>"><?php _e('Download CSV', 'contact-form-entries'); ?></a> <?php } ?>
+if(!empty($export)){ ?><a class="vx_export_btn" href="?vx_crm_form_action=download_csv&vx_crm_key=<?php echo esc_html($export) ?>"><?php _e('Download CSV', 'contact-form-entries'); ?></a> <?php } ?>
  </p>
 <?php
 }
 ?>
- <table <?php echo $class.' '.$css ?> cellspacing="0" <?php echo $table_id ?>>
+ <table <?php echo $class.' '.$css ?> cellspacing="0" <?php echo esc_html($table_id) ?>>
   <thead>
   <tr>
   <?php
       if(!empty($atts['number-col'])){
   ?>
-<th <?php if(!empty($atts['number-col-width'])){ echo 'style="width:'.$atts['number-col-width'].' "'; } ?>><?php _e('#','contact-form-entries'); ?></th>
+<th <?php if(!empty($atts['number-col-width'])){ echo 'style="width:'.esc_html($atts['number-col-width']).' "'; } ?>><?php _e('#','contact-form-entries'); ?></th>
 <?php
       }
 $total_cols=2;
   foreach($fields as $field){  
 $total_cols++;
 ?>
-  <th><?php echo $field['label'] ?></th>
+  <th><?php echo esc_html($field['label']) ?></th>
 <?php
   }
 ?>
@@ -38,12 +38,12 @@ $total_cols++;
   <?php
       if(!empty($atts['number-col'])){
   ?>
-<th <?php if(!empty($atts['number-col-width'])){ echo 'style="width:'.$atts['number-col-width'].' "'; } ?>><?php _e('#','contact-form-entries'); ?></th>
+<th <?php if(!empty($atts['number-col-width'])){ echo 'style="width:'.esc_html($atts['number-col-width']).' "'; } ?>><?php _e('#','contact-form-entries'); ?></th>
 <?php
       }
   foreach($fields as $field){  
 ?>
-  <th><?php echo $field['label'] ?></th>
+  <th><?php echo esc_html($field['label']) ?></th>
 <?php
   }
 ?>
@@ -62,7 +62,7 @@ $total_cols++;
   <?php
       if(!empty($atts['number-col'])){
   ?>
-  <td><?php echo $sno ?></td>
+  <td><?php echo esc_html($sno) ?></td>
     <?php
       }
 foreach($fields as $field){
@@ -83,7 +83,7 @@ if($field['name'] == 'created' && !empty($lead['created'])){
 $field_label= date('M-d-Y H:i:s',$field_label);   
 }
 ?>
-<td><?php echo $field_label; ?></td>
+<td><?php echo wp_kses_post($field_label); ?></td>
   <?php
   }
   ?>
@@ -95,7 +95,7 @@ $field_label= date('M-d-Y H:i:s',$field_label);
   else {  
   ?>
   <tr>
-    <td colspan="<?php echo $total_cols ?>">
+    <td colspan="<?php echo esc_html($total_cols) ?>">
         <?php _e("No Record(s) Found", 'contact-form-entries'); ?>
     </td>
   </tr>
@@ -110,11 +110,11 @@ $field_label= date('M-d-Y H:i:s',$field_label);
   ?>
  <div class="vx_pager">
   <form>
-    <img src="<?php echo $base_url ?>images/first.png" class="vx_first"/>
-    <img src="<?php echo $base_url ?>images/prev.png" class="vx_prev"/>
+    <img src="<?php echo esc_url($base_url) ?>images/first.png" class="vx_first"/>
+    <img src="<?php echo esc_url($base_url) ?>images/prev.png" class="vx_prev"/>
     <span class="vx_pagedisplay"></span> <!-- this can be any element, including an input -->
-    <img src="<?php echo $base_url ?>images/next.png" class="vx_next"/>
-    <img src="<?php echo $base_url ?>images/last.png" class="vx_last"/>
+    <img src="<?php echo esc_url($base_url) ?>images/next.png" class="vx_next"/>
+    <img src="<?php echo esc_url($base_url) ?>images/last.png" class="vx_last"/>
     <?php
         $rows=count($leads)/$page_size;
         $pages_count=floor($rows);
@@ -125,7 +125,7 @@ $field_label= date('M-d-Y H:i:s',$field_label);
         for($i=1; $i<$pages_count; $i++ ){
     $op=$page_size*$i;
             ?>
-      <option value="<?php echo $op ?>"><?php echo $op ?></option>
+      <option value="<?php echo esc_html($op) ?>"><?php echo esc_html($op) ?></option>
 <?php
         }
 ?>
@@ -171,7 +171,7 @@ $field_label= date('M-d-Y H:i:s',$field_label);
         $table.tablesorterPager({
       // target the pager markup - see the HTML block below
       container: $pager,
-      size: <?php echo (int)$page_size ?>,
+      size: <?php echo (int)esc_html($page_size) ?>,
          // css class names of pager arrows
     cssNext: '.vx_next', // next page arrow
     cssPrev: '.vx_prev', // previous page arrow
@@ -202,6 +202,7 @@ $field_label= date('M-d-Y H:i:s',$field_label);
   padding: 5px;
 }
 .vx_entries_table{
+    display: block;
     overflow: auto;
 }
 /* pager navigation arrows */

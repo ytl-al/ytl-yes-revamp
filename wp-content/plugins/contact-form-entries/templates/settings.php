@@ -133,7 +133,7 @@ $saved_forms=!empty($meta['disable_track']) ? $meta['disable_track'] : array();
 foreach($forms_arr as $k=>$v){
 
 ?>
-<p><label for="vx_form_<?php echo $k ?>"><input type="checkbox" name="meta[disable_track][<?php echo $k ?>]" value="yes" <?php if(vxcf_form::post($k,$saved_forms) == "yes"){echo 'checked="checked"';} ?> id="vx_form_<?php echo $k ?>"><?php echo $v; ?></label></p>
+<p><label for="vx_form_<?php echo esc_html($k) ?>"><input type="checkbox" name="meta[disable_track][<?php echo esc_html($k) ?>]" value="yes" <?php if(vxcf_form::post($k,$saved_forms) == "yes"){echo 'checked="checked"';} ?> id="vx_form_<?php echo esc_html($k) ?>"><?php echo esc_html($v); ?></label></p>
 <?php 
 } 
 ?>
@@ -179,7 +179,7 @@ foreach($forms_arr as $k=>$v){
   </label>
   </th>
   <td>
-<label for="vx_sep"><input type="text" name="meta[sep]" placeholder="<?php _e(',','contact-form-entries'); ?>" value="<?php echo vxcf_form::post('sep',$meta) ?>" id="vx_sep" class="crm_text"></label>
+<label for="vx_sep"><input type="text" name="meta[sep]" placeholder="<?php _e(',','contact-form-entries'); ?>" value="<?php echo esc_html(vxcf_form::post('sep',$meta)) ?>" id="vx_sep" class="crm_text"></label>
   </td>
   </tr>
   
@@ -236,7 +236,7 @@ foreach($forms_arr as $k=>$v){
   foreach($forms as $f_key=>$platform){
      if(isset($platform['label'])){
       ?>
-      <optgroup label="<?php echo $platform['label'] ?>">
+      <optgroup label="<?php echo esc_html($platform['label']) ?>">
       <?php
     if(isset($platform['forms']) && is_array($platform['forms'])){
     foreach($platform['forms'] as  $form_id_=>$form_title){  
@@ -244,7 +244,7 @@ foreach($forms_arr as $k=>$v){
   $form_id_arr=$f_key.'_'.$form_id_;
  // if($form_id == $form_id_arr)
  // $sel="selected='selected'";
-  echo "<option value='".$form_id_arr."' $sel>".$form_title."</option>"; 
+  echo "<option value='".esc_html($form_id_arr)."' $sel>".esc_html($form_title)."</option>"; 
     }      
   }
   ?>

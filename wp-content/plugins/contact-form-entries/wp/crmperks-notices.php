@@ -50,8 +50,8 @@ $plugin_msg=__('Install Plugin','contact-form-entries');
 $msg =sprintf(__('%sCRM Perks Forms Plugin%s is a free lightweight contact form builder and designer with floating buttons and popups.','contact-form-entries'),'<a href="https://wordpress.org/plugins/crm-perks-forms/" target="_blank">','</a>');
 ?>
 <div class="notice-warning settings-error notice is-dismissible" style="font-weight: bold">
-<p><?php echo $msg; ?></p>
-<p><a href="<?php echo $url ?>"><?php echo $plugin_msg; ?></a> | <a href="<?php echo $link; ?>"><?php _e('Dismiss this notice','contact-form-entries'); ?></a></p>
+<p><?php echo wp_kses_post($msg); ?></p>
+<p><a href="<?php echo esc_url($url) ?>"><?php echo esc_html($plugin_msg); ?></a> | <a href="<?php echo esc_html($link); ?>"><?php _e('Dismiss this notice','contact-form-entries'); ?></a></p>
 </div>
 <?php
 }
@@ -111,8 +111,8 @@ public function review_notice() {
     if($time > $time_i){ 
         ?>
         <div class="notice notice-info is-dismissible vxcf-review-notice" style="margin: 14px 0 -4px 0">
-  <p><?php echo sprintf(__( 'You\'ve been using Contact Form Entries Plugin for some time now; we hope you love it!.%s If you do, please %s leave us a %s rating on WordPress.org%s to help us spread the word and boost our motivation.','contact-form-entries'),'<br/>','<a href="'.$this->review_link.'" target="_blank" rel="noopener noreferrer">','&#9733;&#9733;&#9733;&#9733;&#9733;','</a>'); ?></p>
-  <p><a href="<?php echo $this->review_link ?>" class="vxcf_close_notice_a"  target="_blank" rel="noopener noreferrer"><?php _e('Yes, you deserve it','contact-form-entries') ?></a> | <a href="#" class="vxcf_close_notice_a"><?php _e('Dismiss this notice','contact-form-entries'); ?></a></p>
+  <p><?php echo sprintf(__( 'You\'ve been using Contact Form Entries Plugin for some time now; we hope you love it!.%s If you do, please %s leave us a %s rating on WordPress.org%s to help us spread the word and boost our motivation.','contact-form-entries'),'<br/>','<a href="'.esc_html($this->review_link).'" target="_blank" rel="noopener noreferrer">','&#9733;&#9733;&#9733;&#9733;&#9733;','</a>'); ?></p>
+  <p><a href="<?php echo esc_html($this->review_link) ?>" class="vxcf_close_notice_a"  target="_blank" rel="noopener noreferrer"><?php _e('Yes, you deserve it','contact-form-entries') ?></a> | <a href="#" class="vxcf_close_notice_a"><?php _e('Dismiss this notice','contact-form-entries'); ?></a></p>
         </div>
         <script type="text/javascript">
             jQuery( document ).ready( function ( $ ) {
@@ -253,7 +253,7 @@ color: #727f30; font-size: 18px; vertical-align: middle;
 
 <p>By purchasing the premium version of the plugin you will get access to advanced marketing features and you will get one year of free updates & support</p>
 <p>
-<a href="<?php echo $plugin_url ?>" target="_blank" class="button-primary button">Go Premium</a>
+<a href="<?php echo esc_url($plugin_url) ?>" target="_blank" class="button-primary button">Go Premium</a>
 </p>
 </div>
 <div style="margin-left: -20px; margin-right: -20px;">
@@ -262,7 +262,7 @@ color: #727f30; font-size: 18px; vertical-align: middle;
   <div class="vx_row">
         <div class="vx_row_inner">
             <div class="col-1">
-                <img src="<?php echo $url ?>images/premium/entries-stats.png" alt="Entries Stats" />
+                <img src="<?php echo esc_url($url) ?>images/premium/entries-stats.png" alt="Entries Stats" />
             </div>
             <div class="col-2">
                 <div class="vx_row_title">
@@ -270,7 +270,7 @@ color: #727f30; font-size: 18px; vertical-align: middle;
                 </div>
                 <p>Compare daily entries, visitors and partial entries in graphical forms.
                 </p>
-        <p><a href="<?php echo $plugin_url ?>" target="_blank" class="button-primary button">Go Premium</a></p>
+        <p><a href="<?php echo esc_url($plugin_url) ?>" target="_blank" class="button-primary button">Go Premium</a></p>
             </div>
         </div>
     </div>
@@ -280,11 +280,11 @@ color: #727f30; font-size: 18px; vertical-align: middle;
              <div class="col-2">
                     <div class="vx_row_title"><h2>Partial Entries</h2> </div>
     <p>Don't miss out on any potential leads. Collect data in real time as it is entered on your forms.</p>
-        <p><a href="<?php echo $plugin_url ?>" target="_blank" class="button-primary button">Go Premium</a></p>
+        <p><a href="<?php echo esc_url($plugin_url) ?>" target="_blank" class="button-primary button">Go Premium</a></p>
 
             </div>
             <div class="col-1">
-                <img src="<?php echo $url ?>images/premium/partial-entries.png" alt="Partial Entries" />
+                <img src="<?php echo esc_url($url) ?>images/premium/partial-entries.png" alt="Partial Entries" />
             </div>
             
         </div>
@@ -293,13 +293,13 @@ color: #727f30; font-size: 18px; vertical-align: middle;
        <div class="vx_row">
         <div class="vx_row_inner">
             <div class="col-1">
-             <img src="<?php echo $url ?>images/premium/link-entries.png" alt="Link Entries and Contacts" />  
+             <img src="<?php echo esc_url($url) ?>images/premium/link-entries.png" alt="Link Entries and Contacts" />  
    
             </div>
             <div class="col-2">
           <div class="vx_row_title"><h2>Link Entries and Contacts</h2> </div>
     <p>You can create new Contacts. You can link multiple entries and contacts to an entry/contact.</p>
-        <p><a href="<?php echo $plugin_url ?>" target="_blank" class="button-primary button">Go Premium</a></p>
+        <p><a href="<?php echo esc_url($plugin_url) ?>" target="_blank" class="button-primary button">Go Premium</a></p>
              
        
             </div>
@@ -315,17 +315,17 @@ color: #727f30; font-size: 18px; vertical-align: middle;
                 </div>
                 <p>Google Analytics Standard Parameters (utm_source, utm_medium, utm_term, utm_content, utm_campaign) of a lead are tracked automatically. You can track custom parameters too
                 </p>
-        <p><a href="<?php echo $plugin_url ?>" target="_blank" class="button-primary button">Go Premium</a></p>
+        <p><a href="<?php echo esc_url($plugin_url) ?>" target="_blank" class="button-primary button">Go Premium</a></p>
             </div>
               <div class="col-1">
-                <img src="<?php echo $url ?>images/premium/marketing-data.png" alt="Premium Features" />
+                <img src="<?php echo esc_url($url) ?>images/premium/marketing-data.png" alt="Premium Features" />
             </div>
         </div>
     </div>
     <div class="vx_row  clear">
         <div class="vx_row_inner">
         <div class="col-1">
-                <img src="<?php echo $url  ?>images/premium/location-map.png" alt="Geolocation Tracking" />
+                <img src="<?php echo esc_url($url)  ?>images/premium/location-map.png" alt="Geolocation Tracking" />
             </div>
             <div class="col-2">
                 <div class="vx_row_title">
@@ -333,7 +333,7 @@ color: #727f30; font-size: 18px; vertical-align: middle;
                 </div>
                 <p>Geolocation of each customer includes City , State , Zip Code, Country and Geo Coordinates.This location is displayed on Google Map.
             <br>For Google Map you can set your own API key from Google console</p>
-       <p><a href="<?php echo $plugin_url ?>" target="_blank" class="button-primary button">Go Premium</a></p>
+       <p><a href="<?php echo esc_url($plugin_url) ?>" target="_blank" class="button-primary button">Go Premium</a></p>
                    
             </div>
             
@@ -347,24 +347,24 @@ color: #727f30; font-size: 18px; vertical-align: middle;
                     <h2>Capture Leads</h2>
                 </div>
                 <p>Plugins collects visitor information like IP, ISP, City and pages browsed etc.You can convert anonymous web visitors to potential leads.</p>
-       <p><a href="<?php echo $plugin_url ?>" target="_blank" class="button-primary button">Go Premium</a></p>
+       <p><a href="<?php echo esc_url($plugin_url) ?>" target="_blank" class="button-primary button">Go Premium</a></p>
             </div>
             <div class="col-1">
-                <img src="<?php echo $url ?>images/premium/analytics.png" alt="Browsing History" />
+                <img src="<?php echo esc_url($url) ?>images/premium/analytics.png" alt="Browsing History" />
             </div>
         </div>
     </div>
         <div class="vx_row  clear">
         <div class="vx_row_inner">
           <div class="col-1">
-                <img src="<?php echo $url ?>images/premium/lead-scoring.png" alt="Lead Scoring" />
+                <img src="<?php echo esc_url($url) ?>images/premium/lead-scoring.png" alt="Lead Scoring" />
             </div>
             <div class="col-2">
                 <div class="vx_row_title">
                     <h2>Lead Scoring</h2>
                 </div>
     <p>You can set a score to each page.We show aggregate score along with browsing history. Lead score is basically "interest score" of a customer</p>
-           <p><a href="<?php echo $plugin_url ?>" target="_blank" class="button-primary button">Go Premium</a></p>
+           <p><a href="<?php echo esc_url($plugin_url) ?>" target="_blank" class="button-primary button">Go Premium</a></p>
             </div>
           
         </div>
@@ -378,23 +378,23 @@ color: #727f30; font-size: 18px; vertical-align: middle;
                 </div>
                 <p>You can track customer's Browser , Operating System , Landing Page , Referer and IP Address
                 </p>
-              <p><a href="<?php echo $plugin_url ?>" target="_blank" class="button-primary button">Go Premium</a></p>         </div>
+              <p><a href="<?php echo esc_url($plugin_url) ?>" target="_blank" class="button-primary button">Go Premium</a></p>         </div>
                 <div class="col-1">
-                <img src="<?php echo $url ?>images/premium/customer-platform.png" alt="Customer Platform" />
+                <img src="<?php echo esc_url($url) ?>images/premium/customer-platform.png" alt="Customer Platform" />
             </div>
         </div>
     </div>
             <div class="vx_row  clear">
         <div class="vx_row_inner">
           <div class="col-1">
-                <img src="<?php echo $url ?>images/premium/fields-mapping.png" alt="Fields Mapping" />
+                <img src="<?php echo esc_url($url) ?>images/premium/fields-mapping.png" alt="Fields Mapping" />
             </div>
             <div class="col-2">
                 <div class="vx_row_title">
                     <h2>Fields Mapping</h2>
                 </div>
     <p>You can send all marketing data of a lead to your CRM. We have 20+ CRM Plugins</p>
-    <p><a href="<?php echo $plugin_url ?>" target="_blank" class="button-primary button">Go Premium</a></p>
+    <p><a href="<?php echo esc_url($plugin_url) ?>" target="_blank" class="button-primary button">Go Premium</a></p>
             </div>
           
         </div>
@@ -406,10 +406,10 @@ color: #727f30; font-size: 18px; vertical-align: middle;
                     <h2>Email Lookup</h2>
                 </div>
                 <p>Lookup lead's email using email lookup apis.We support all googd email lookup apis like Fullcontact , Towerdata and pipl.com API</p>
-             <p><a href="<?php echo $plugin_url ?>" target="_blank" class="button-primary button">Go Premium</a></p>          
+             <p><a href="<?php echo esc_url($plugin_url) ?>" target="_blank" class="button-primary button">Go Premium</a></p>          
             </div>
             <div class="col-1">
-                <img src="<?php echo $url ?>images/premium/email-lookup.png" alt="Email Lookup" />
+                <img src="<?php echo esc_url($url) ?>images/premium/email-lookup.png" alt="Email Lookup" />
             </div>
            
         </div>
@@ -417,14 +417,14 @@ color: #727f30; font-size: 18px; vertical-align: middle;
             <div class="vx_row  clear">
         <div class="vx_row_inner">
          <div class="col-1">
-                <img src="<?php echo $url ?>images/premium/phone-lookup.png" alt="Phone Lookup" />
+                <img src="<?php echo esc_url($url) ?>images/premium/phone-lookup.png" alt="Phone Lookup" />
             </div>
             <div class="col-2">
                 <div class="vx_row_title">
                     <h2>Phone Lookup</h2>
                 </div>
     <p>Verify lead's phone number and get detailed information about phone number using phone lookup apis, We support many good phone lookup apis like everyoneapi , whitepages api , twilio api and numverify api.</p>
-           <p><a href="<?php echo $plugin_url ?>" target="_blank" class="button-primary button">Go Premium</a></p>
+           <p><a href="<?php echo esc_url($plugin_url) ?>" target="_blank" class="button-primary button">Go Premium</a></p>
             </div>
            
         </div>
@@ -436,10 +436,10 @@ color: #727f30; font-size: 18px; vertical-align: middle;
                     <h2>Weather Information</h2>
                 </div>
                 <p>You can get weather information of a lead's geolocation using openweathermap API.</p>
-                       <p><a href="<?php echo $plugin_url ?>" target="_blank" class="button-primary button">Go Premium</a></p>
+                       <p><a href="<?php echo esc_url($plugin_url) ?>" target="_blank" class="button-primary button">Go Premium</a></p>
             </div>
             <div class="col-1">
-                <img src="<?php echo $url ?>images/premium/weather-api.png" alt="Weather Information" />
+                <img src="<?php echo esc_url($url) ?>images/premium/weather-api.png" alt="Weather Information" />
             </div>
            
         </div>
@@ -448,14 +448,14 @@ color: #727f30; font-size: 18px; vertical-align: middle;
 <div class="vx_row  clear">
         <div class="vx_row_inner">
              <div class="col-1">
-                <img src="<?php echo $url ?>images/premium/notification.png" alt="Notifications" />
+                <img src="<?php echo esc_url($url) ?>images/premium/notification.png" alt="Notifications" />
             </div>
             <div class="col-2">
                 <div class="vx_row_title">
                     <h2>Notifications</h2>
                 </div>
                 <p>Sends a notification (sms/call/email/browser push notification) for new entry.</p>
-                       <p><a href="<?php echo $plugin_url ?>" target="_blank" class="button-primary button">Go Premium</a></p>
+                       <p><a href="<?php echo esc_url($plugin_url) ?>" target="_blank" class="button-primary button">Go Premium</a></p>
             </div>
            
         </div>
@@ -468,10 +468,10 @@ color: #727f30; font-size: 18px; vertical-align: middle;
                     <h2>Incoming Webhooks</h2>
                 </div>
                 <p>Creates a entry in Contact Forms Entries Plugin from posted data.</p>
-                       <p><a href="<?php echo $plugin_url ?>" target="_blank" class="button-primary button">Go Premium</a></p>
+                       <p><a href="<?php echo esc_url($plugin_url) ?>" target="_blank" class="button-primary button">Go Premium</a></p>
             </div>
             <div class="col-1">
-                <img src="<?php echo $url ?>images/premium/entries-feeds.png" alt="Entries Feeds" />
+                <img src="<?php echo esc_url($url) ?>images/premium/entries-feeds.png" alt="Entries Feeds" />
             </div>
            
         </div>
@@ -479,14 +479,14 @@ color: #727f30; font-size: 18px; vertical-align: middle;
             <div class="vx_row  clear">
         <div class="vx_row_inner">
         <div class="col-1">
-                <img src="<?php echo $url ?>images/premium/zapier.png" alt="Zapier" />
+                <img src="<?php echo esc_url($url) ?>images/premium/zapier.png" alt="Zapier" />
             </div>
             <div class="col-2">
                 <div class="vx_row_title">
                     <h2>Outgoing Webhooks - Zapier</h2>
                 </div>
     <p>Send Contact Form Entries to Zapier or any web hook.</p>
-           <p><a href="<?php echo $plugin_url ?>" target="_blank" class="button-primary button">Go Premium</a></p>
+           <p><a href="<?php echo esc_url($plugin_url) ?>" target="_blank" class="button-primary button">Go Premium</a></p>
             </div>
             
         </div>

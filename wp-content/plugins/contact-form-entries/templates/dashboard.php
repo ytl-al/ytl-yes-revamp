@@ -65,8 +65,8 @@ background: #fff;
 </style> 
 <h2 class="vx_top_head"><?php _e('Entries Stats','contact-form-entries') ?></h2>
 <form method="get">
-                <input type="hidden" name="page" value="<?php echo vxcf_form::post('page') ?>">
-                <input type="hidden" name="tab" value="<?php echo vxcf_form::post('tab') ?>">
+                <input type="hidden" name="page" value="<?php echo esc_html(vxcf_form::post('page')) ?>">
+                <input type="hidden" name="tab" value="<?php echo esc_html(vxcf_form::post('tab')) ?>">
 <select name="form" class="crm_input_inline">
                 <option value=""><?php _e('All Forms','contact-form-entries') ?></option>
           <?php
@@ -74,7 +74,7 @@ background: #fff;
   foreach($all_forms as $f_key=>$platform){
      if(isset($platform['label'])){
       ?>
-      <optgroup label="<?php echo $platform['label'] ?>">
+      <optgroup label="<?php echo esc_html($platform['label']) ?>">
       <?php
     if(isset($platform['forms']) && is_array($platform['forms'])){
     foreach($platform['forms'] as  $form_id_=>$form_title){  
@@ -83,7 +83,7 @@ background: #fff;
   if(!empty($_REQUEST['form']) && $_REQUEST['form'] == $form_id_arr){
   $sel="selected='selected'";
   }
-  echo "<option value='".$form_id_arr."' $sel>".$form_title."</option>"; 
+  echo "<option value='".esc_html($form_id_arr)."' $sel>".esc_html($form_title)."</option>"; 
     }      
   }
   ?>
@@ -99,14 +99,14 @@ background: #fff;
                 $sel="";
                 if(isset($_REQUEST['time']) && $_REQUEST['time'] == $f_key)
                 $sel="selected='selected'";
-         echo "<option value='".$f_key."' $sel>".$f_val."</option>";       
+         echo "<option value='".esc_html($f_key)."' $sel>".esc_html($f_val)."</option>";       
             }
     ?>
                 </select>
                 
              <span style="<?php if(! (isset($_REQUEST['time']) && $_REQUEST['time'] == "custom")){echo "display:none";} ?>" class="crm_custom_range"> 
-                <input type="text" name="start_date" placeholder="From Date" value="<?php echo vxcf_form::post('start_date');?>" class="sales_date crm_input_inline">
-         <input type="text" class="sales_date crm_input_inline" value="<?php echo vxcf_form::post('end_date');?>" placeholder="To Date" name="end_date"></span>
+                <input type="text" name="start_date" placeholder="From Date" value="<?php echo esc_html(vxcf_form::post('start_date'));?>" class="sales_date crm_input_inline">
+         <input type="text" class="sales_date crm_input_inline" value="<?php echo esc_html(vxcf_form::post('end_date'));?>" placeholder="To Date" name="end_date"></span>
             
   <button type="submit" class="button-secondary button"><?php _e('Apply','contact-form-entries') ?></button>
                 

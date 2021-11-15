@@ -295,7 +295,7 @@ margin-left: 8px;
     <input type="hidden" name="order" value="<?php echo vxcf_form::post('order') ?>" />
   <input type="hidden" name="orderby" value="<?php echo vxcf_form::post('orderby') ?>" />
 
-  <input type="hidden" data-name="vx_tab_action_<?php echo vxcf_form::$id ?>" id="vx_export_log" value="" autocomplete="off" />
+  <input type="hidden" data-name="vx_tab_action_<?php echo esc_attr(vxcf_form::$id) ?>" id="vx_export_log" value="" autocomplete="off" />
   
   <input type="hidden" id="vx_nonce_field" value="<?php echo wp_create_nonce('vx_nonce'); ?>">
 
@@ -341,7 +341,7 @@ margin-left: 8px;
   
   <div class="crm_actions tablenav">
   <div class="alignleft actions">
-  <select name="<?php echo vxcf_form::$id ?>_action" id="vx_bulk_action" class="crm_input_inline" style="min-width: 100px; max-width: 250px;">
+  <select name="<?php echo esc_attr(vxcf_form::$id) ?>_action" id="vx_bulk_action" class="crm_input_inline" style="min-width: 100px; max-width: 250px;">
   <?php
    foreach($bulk_actions as $k=>$v){
    echo '<option value="'.$k.'">'.$v.'</option>';    
@@ -441,7 +441,7 @@ $total_cols=2; $n=0;
     $f_no=0;
     $status_str='';
     if(isset($_GET['status'])){
-     $status_str='&status='.$_GET['status'];   
+     $status_str='&status='.vxcf_form::post('status');   
     }
   
   foreach($fields as $field_id=> $field){   
@@ -595,11 +595,11 @@ $delete_link=$entry_link_f.'&'.vxcf_form::$id.'_action=delete&vx_action='.$nonce
 </div>
 
 <div style="padding: 20px 20px 0px 20px;">
-  <button type="submit" title="<?php _e('Save','contact-form-entries') ?>" id="vx_colorbox_save" name="<?php echo vxcf_form::$id ?>_fields" class="button-primary button">
+  <button type="submit" title="<?php _e('Save','contact-form-entries') ?>" id="vx_colorbox_save" name="<?php echo esc_attr(vxcf_form::$id) ?>_fields" class="button-primary button">
     <span class="reg_ok"><i class="fa fa-check"></i> <?php  _e('Save','contact-form-entries') ?></span>
   <span class="reg_proc"><i class="fa fa-refresh fa-spin"></i> <?php _e('Saving ...','contact-form-entries') ?></span>
   </button> 
-    &nbsp; &nbsp; &nbsp;<button type="button" title="<?php _e('Cancel','contact-form-entries') ?>" name="<?php echo vxcf_form::$id ?>_cancel" id="vx_colorbox_close" class="button"><i class="fa fa-times"></i> <?php _e('Cancel','contact-form-entries') ?></button> 
+    &nbsp; &nbsp; &nbsp;<button type="button" title="<?php _e('Cancel','contact-form-entries') ?>" name="<?php echo esc_attr(vxcf_form::$id) ?>_cancel" id="vx_colorbox_close" class="button"><i class="fa fa-times"></i> <?php _e('Cancel','contact-form-entries') ?></button> 
 </div>
 </form>
 </div>
@@ -749,7 +749,7 @@ $(document).on("click",".toggle_star",function(e){
  star.addClass('crm_star_yellow');    
  star.removeClass('crm_star_black');        
  }
-$.post(ajaxurl,{action:'actions_<?php echo vxcf_form::$id ?>',id:id,status:status,action2:'toggle_star',vx_crm_ajax:vx_crm_ajax},function(res){
+$.post(ajaxurl,{action:'actions_<?php echo esc_attr(vxcf_form::$id) ?>',id:id,status:status,action2:'toggle_star',vx_crm_ajax:vx_crm_ajax},function(res){
 
   });
 });

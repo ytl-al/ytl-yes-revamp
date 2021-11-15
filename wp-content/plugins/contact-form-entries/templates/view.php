@@ -379,7 +379,7 @@ color: #666;
 }
   </style>
   <div class="vx_wrap"> 
-    <h2  class="vx_img_head"><?php echo $this->entry_title; 
+    <h2  class="vx_img_head"><?php echo esc_html($this->entry_title); 
     if(!empty($forms)){
     ?> 
      <select name="form" id="entries_form" class="vx_sel_main">
@@ -388,7 +388,7 @@ color: #666;
   foreach($forms as $f_key=>$platform){
      if(isset($platform['label'])){
       ?>
-      <optgroup label="<?php echo $platform['label'] ?>">
+      <optgroup label="<?php echo esc_html($platform['label']) ?>">
       <?php
     if(isset($platform['forms']) && is_array($platform['forms'])){
     foreach($platform['forms'] as  $form_id_=>$form_title){  
@@ -396,7 +396,7 @@ color: #666;
   $form_id_arr=$f_key.'_'.$form_id_;
   if($form_id == $form_id_arr)
   $sel="selected='selected'";
-  echo "<option value='".$form_id_arr."' $sel>".$form_title."</option>"; 
+  echo "<option value='".esc_html($form_id_arr)."' $sel>".esc_html($form_title)."</option>"; 
     }      
   }
   ?>
@@ -408,14 +408,14 @@ color: #666;
   <?php
     }
   ?>
-  <a class="button button-default" style="vertical-align: middle" href="<?php echo $form_link; ?>"><i class="fa fa-reply"></i> <?php echo sprintf(__('Back to %s','contact-form-entries'),$this->entry_title_small) ?></a>
+  <a class="button button-default" style="vertical-align: middle" href="<?php echo esc_url($form_link); ?>"><i class="fa fa-reply"></i> <?php echo sprintf(__('Back to %s','contact-form-entries'),esc_html($this->entry_title_small)) ?></a>
   </h2>
 <form method="post" enctype="multipart/form-data" id="vx_en_form" novalidate="novalidate">
  <?php wp_nonce_field('vx_nonce') ?>
   <div class="vx_contents">
     <div class="vx_div" id="vx_box_main">
       <div class="vx_head">
-<div class="crm_head_div"><i class="fa fa-hand-o-right"></i> <?php echo $this->entry_title_single.' #'.$id; ?></div>
+<div class="crm_head_div"><i class="fa fa-hand-o-right"></i> <?php echo esc_html($this->entry_title_single.' #'.$id); ?></div>
 <div class="crm_btn_div" title="<?php _e('Expand / Collapse','contact-form-entries') ?>">
 <a href="#" class="fa crm_toggle_btn vx_action_btn fa-minus"></a>
 </div>
@@ -449,7 +449,7 @@ $date_class='';
       ?>
   <div class="entry_row">
   <div class="entry_col1">
-  <label for="vx_<?php echo $field['name']; ?>" class="left_header"><?php echo empty($field['label']) ? '&nbsp;' : $field['label']; ?></label>
+  <label for="vx_<?php echo esc_html($field['name']); ?>" class="left_header"><?php echo empty($field['label']) ? '&nbsp;' : esc_html($field['label']); ?></label>
   </div>
   <div class="entry_col2">
 <div class="vx_edit">
@@ -459,7 +459,7 @@ if(is_array($value)){
   $value=implode(',',$value);  
 }
  ?>
-  <textarea id="vx_<?php echo $field['name']; ?>" class="vx_input vx_input_100" name="lead[<?php echo $f_name ?>]" <?php echo $req ?>><?php echo htmlentities($value);  ?></textarea>
+  <textarea id="vx_<?php echo esc_html($field['name']); ?>" class="vx_input vx_input_100" name="lead[<?php echo esc_html($f_name) ?>]" <?php echo esc_html($req) ?>><?php echo htmlentities(esc_html($value));  ?></textarea>
    <?php
    $value=nl2br($value);
 }
@@ -492,8 +492,8 @@ else if(in_array($type,array('checkbox','radio'))){
    //  } 
    ?>
    <div class="vx_check">
-  <input type="<?php echo $type ?>" class="vx_input vx_check_100" name="<?php echo $n ?>" <?php echo $check ?> value="<?php echo $val ?>">
-  <span class="vx_check_label"><?php echo $text;  ?></span>
+  <input type="<?php echo esc_html($type) ?>" class="vx_input vx_check_100" name="<?php echo esc_html($n) ?>" <?php echo esc_html($check) ?> value="<?php echo esc_html($val) ?>">
+  <span class="vx_check_label"><?php echo esc_html($text);  ?></span>
   </div> <?php
    }}
 }
@@ -509,7 +509,7 @@ else if(in_array($type,array('select','multiselect','state','country'))){
     $multiple=''; $i_name="lead[$f_name]";
    if($type == 'multiselect'){$multiple='multiple="multiple"'; $i_name.='[]';} 
 ?>
-<select name="<?php echo $i_name ?>" id="vx_<?php echo $field['name']; ?>" <?php  echo $multiple  ?> class="vx_input vx_input_100" <?php echo $req ?>>
+<select name="<?php echo esc_html($i_name) ?>" id="vx_<?php echo esc_html($field['name']); ?>" <?php  echo esc_html($multiple)  ?> class="vx_input vx_input_100" <?php echo esc_html($req) ?>>
 <?php
  if(!empty($field['values']) && is_array($field['values'])){
  foreach($field['values'] as $v){
@@ -530,7 +530,7 @@ else if(in_array($type,array('select','multiselect','state','country'))){
      $sel='selected="selected"';     $key_val[]=$text;
      }
      }
- echo "<option value='{$val}' {$sel}>{$text}</option>";
+ echo '<option value="'.esc_html($val).'" '.$sel.'>'.esc_html($text).'</option>';
  }
  }   
 ?>
@@ -548,10 +548,10 @@ foreach($files_arr as $k=>$val){
 $value.=$file_value=vxcf_form::file_link($val);
     ?>
 <div class="vx_file_single">
-<?php echo $file_value; ?>  
+<?php echo wp_kses_post($file_value); ?>  
   <div>
-  <input type="hidden" name="files_<?php echo $f_name.'['.$k.']' ?>" value="<?php echo $val ?>" />
-  <input type="file" id="vx_<?php echo $field['name']; ?>" <?php echo $req ?> class="vx_input" name="<?php echo $f_name.'[]' ?>" autocomplete="off">
+  <input type="hidden" name="files_<?php echo esc_html($f_name.'['.$k.']') ?>" value="<?php echo esc_html($val) ?>" />
+  <input type="file" id="vx_<?php echo esc_html($field['name']); ?>" <?php echo esc_html($req) ?> class="vx_input" name="<?php echo esc_html($f_name).'[]' ?>" autocomplete="off">
  <a href="#" class="vx_del_link vx_float_right vx_remove_file"><?php _e('Remove','contact-form-entries') ?></a>
   </div>
   </div>
@@ -563,7 +563,7 @@ $value.=$file_value=vxcf_form::file_link($val);
    </div>
    <div class="vx_file_single_temp" style="display: none;">
    <div class="vx_file_single">
-  <input type="file" class="vx_input" name="<?php echo $f_name.'[]' ?>" autocomplete="off">
+  <input type="file" class="vx_input" name="<?php echo esc_html($f_name).'[]' ?>" autocomplete="off">
  <a href="#" class="vx_del_link vx_float_right vx_remove_file"><?php _e('Remove','contact-form-entries') ?></a>
   </div>
   </div><?php
@@ -579,7 +579,7 @@ else{
  $type=!in_array($type,array('email','url','tel')) ? 'text' : $type;
 $value=is_array($value) ? implode(', ',$value) : $value;  
     ?>
-  <input type="<?php echo $type ?>" id="vx_<?php echo $field['name']; ?>" <?php echo $req ?> class="vx_input vx_input_100 <?php echo $date_class ?>" name="lead[<?php echo $f_name ?>]" autocomplete="off" value="<?php echo htmlentities($value);  ?>" >
+  <input type="<?php echo esc_html($type) ?>" id="vx_<?php echo esc_html($field['name']); ?>" <?php echo esc_html($req) ?> class="vx_input vx_input_100 <?php echo esc_html($date_class) ?>" name="lead[<?php echo esc_html($f_name) ?>]" autocomplete="off" value="<?php echo htmlentities(esc_html($value));  ?>" >
    <?php
   }
     $type=$field['type'];   
@@ -592,15 +592,15 @@ $value=is_array($value) ? implode(', ',$value) : $value;
 //      
   if($type == 'email' && filter_var($value, FILTER_VALIDATE_EMAIL)){ //it is a url    
   ?>
-  <a href="mailto:<?php echo $value ?>"><?php echo $value ?></a>
+  <a href="mailto:<?php echo esc_html($value) ?>"><?php echo esc_html($value) ?></a>
   <?php
   }else if($type == 'url' && filter_var($value, FILTER_VALIDATE_URL)){ //it is a url    
   ?>
-  <a href="<?php echo $value ?>" target="_blank"><?php echo $value ?></a>
+  <a href="<?php echo esc_url($value) ?>" target="_blank"><?php echo esc_html($value) ?></a>
   <?php
   }else if($type == 'img' && filter_var($value, FILTER_VALIDATE_URL)){ //it is a image    
   ?>
-  <a href="<?php echo $value ?>" target="_blank"><img src="<?php echo $value ?>" class="vx_img_thumb_field" /></a>
+  <a href="<?php echo esc_url($value) ?>" target="_blank"><img src="<?php echo esc_url($value) ?>" class="vx_img_thumb_field" /></a>
   <?php
   }else if($type == 'audio' && filter_var($value, FILTER_VALIDATE_URL) ){
     // $url_parts=parse_url($value);
@@ -608,22 +608,22 @@ $value=is_array($value) ? implode(', ',$value) : $value;
   // if(!empty($url_parts['path']) && in_array(strtolower(substr($url_parts['path'],-4)),array('.mp3','.wav','.ogg','.aac')) ){
      //it is recording file
      ?>
-<audio controls src="<?php echo $value ?>" style="width: 100%" ></audio>     
+<audio controls src="<?php echo esc_html($value) ?>" style="width: 100%" ></audio>     
      <?php  
  //  }   
   ?>
-  <a href="<?php echo $value ?>" target="_blank"><?php echo $value ?></a>
+  <a href="<?php echo esc_html($value) ?>" target="_blank"><?php echo esc_html($value) ?></a>
   <?php    
   }else if($type == 'video' && filter_var($value, FILTER_VALIDATE_URL) ){
      ?>
-<video controls src="<?php echo $value ?>" style="max-width: 100%" ></video>     
+<video controls src="<?php echo esc_html($value) ?>" style="max-width: 100%" ></video>     
      <?php  
  //  }   
   ?>
-  <a href="<?php echo $value ?>" target="_blank"><?php echo $value ?></a>
+  <a href="<?php echo esc_url($value) ?>" target="_blank"><?php echo esc_html($value) ?></a>
   <?php    
   }else{
-   echo is_array($value) ? implode(', ',$value) : $value;   
+   echo is_array($value) ? wp_kses_post(implode(', ',$value)) : wp_kses_post($value);   
   }
  
  ?>
@@ -673,7 +673,7 @@ $this->note_template($note);
 <select class="crm_input_inline vx_note_color" style="margin-left: 7px;">
 <?php
  foreach($colors as $k=>$v){
-  echo "<option value='$k'>$v</option>";   
+  echo '<option value="'.esc_html($k).'">'.esc_html($v).'</option>';   
  }   
 ?>
 </select>
@@ -684,7 +684,7 @@ $this->note_template($note);
 <option value=''><?php _e('Also Send Email To', 'contact-form-entries'); ?></option>
 <?php
  foreach($emails as $email){
-  echo "<option value='$email'>$email</option>";   
+  echo '<option value="'.esc_html($email).'">'.esc_html($email).'</option>';   
  }   
 ?>
 </select>
@@ -703,15 +703,15 @@ do_action('vx_cf_add_meta_box',$lead,$detail);
 <div class="vx_detail">
 <div class="vx_div">
       <div class="vx_head">
-<div class="crm_head_div"><i class="fa fa-hand-o-right"></i> <?php echo sprintf(__('Detail','contact-form-entries') ,$id); ?></div>
+<div class="crm_head_div"><i class="fa fa-hand-o-right"></i> <?php echo sprintf(__('Detail','contact-form-entries') ,esc_html($id)); ?></div>
 <div class="crm_clear"></div> 
   </div>
   <div class="vx_group" style="border-bottom-width: 0px; padding-top: 4px; padding-bottom: 4px;">
         <div class="vx_row">
   <div class="vx_col3">
-  <label class="left_header"><?php echo $this->entry_title_single.' Id'; ?></label>
+  <label class="left_header"><?php echo esc_html($this->entry_title_single).' Id'; ?></label>
   </div>
-  <div class="vx_col4"><?php echo $lead['id']; ?></div>
+  <div class="vx_col4"><?php echo esc_html($lead['id']); ?></div>
   <div class="clear"></div>
   </div>
       <div class="vx_row">
@@ -745,7 +745,7 @@ do_action('vx_cf_add_meta_box',$lead,$detail);
   <div class="vx_col3">
   <label class="left_header"><?php _e('Screen', 'contact-form-entries'); ?></label>
   </div>
-  <div class="vx_col4"><?php echo $lead['screen'];  ?></div>
+  <div class="vx_col4"><?php echo esc_html($lead['screen']);  ?></div>
   <div class="clear"></div>
   </div>
   <?php } 
@@ -756,7 +756,7 @@ do_action('vx_cf_add_meta_box',$lead,$detail);
   <div class="vx_col3">
   <label class="left_header"><?php _e('Source Url', 'contact-form-entries'); ?></label>
   </div>
-  <div class="vx_col4"><?php echo $url  ?></div>
+  <div class="vx_col4"><?php echo wp_kses_post($url)  ?></div>
   <div class="clear"></div>
   </div>
   <?php }
@@ -768,8 +768,8 @@ do_action('vx_cf_add_meta_box',$lead,$detail);
   </div>
   <div class="vx_col4"><?php
   if(class_exists('vx_geo_location')){
-  echo '<a href="#vx_ip_detail" title="'.__('Go to IP Detail', 'contact-form-entries').'">'.$lead['ip'].'</a>';    
-  }else{ echo $lead['ip']; } ?></div>
+  echo '<a href="#vx_ip_detail" title="'.__('Go to IP Detail', 'contact-form-entries').'">'.esc_html($lead['ip']).'</a>';    
+  }else{ echo esc_html($lead['ip']); } ?></div>
   <div class="clear"></div>
   </div>
 <?php
@@ -777,13 +777,12 @@ do_action('vx_cf_add_meta_box',$lead,$detail);
 //var_dump($lead);
     if(!empty($lead['user_id'])){
           $userdata = get_userdata( $lead['user_id'] );
-  $user_link='<a href="'. get_edit_user_link( $lead['user_id'] ) .'" title="'.__('Entry Submitted By', 'contact-form-entries').'">'. esc_attr( $userdata->display_name ) .'</a>';
 ?>
        <div class="vx_row">
   <div class="vx_col3">
   <label class="left_header"><?php _e("User", 'contact-form-entries'); ?></label>
   </div>
-  <div class="vx_col4"><?php echo $user_link; ?></div>
+  <div class="vx_col4"><?php echo '<a href="'. get_edit_user_link( $lead['user_id'] ) .'" title="'.__('Entry Submitted By', 'contact-form-entries').'">'. esc_attr( $userdata->display_name ) .'</a>'; ?></div>
   <div class="clear"></div>
   </div>
   <?php
@@ -801,8 +800,8 @@ do_action('vx_cf_add_meta_box',$lead,$detail);
     if($lead['status'] == 1){
         ?>
 <div id="vx_edit_div">
-<a href="<?php echo $restore_link; ?>" title="<?php _e('Restore','contact-form-entries') ?>"><?php _e('Restore','contact-form-entries') ?></a>
-<a href="<?php echo $del_link; ?>" title="<?php _e('Delete Permanently','contact-form-entries') ?>" class="vx_del_link vx_del_lead vx_float_right"><?php _e('Delete Permanently','contact-form-entries') ?></a>
+<a href="<?php echo esc_url($restore_link); ?>" title="<?php _e('Restore','contact-form-entries') ?>"><?php _e('Restore','contact-form-entries') ?></a>
+<a href="<?php echo esc_html($del_link); ?>" title="<?php _e('Delete Permanently','contact-form-entries') ?>" class="vx_del_link vx_del_lead vx_float_right"><?php _e('Delete Permanently','contact-form-entries') ?></a>
 </div>
         <?php
     }else{
@@ -810,11 +809,11 @@ do_action('vx_cf_add_meta_box',$lead,$detail);
 <div class="vx_edit_div">
 <button type="button" class="button button-primary" id="vx_edit_button" title="<?php _e('Edit','contact-form-entries') ?>"><i class="fa fa-pencil"></i> <?php _e('Edit','contact-form-entries') ?></button>
 
-<a href="<?php echo $trash_link; ?>"  style="line-height: 26px;" title="<?php _e('Trash','contact-form-entries') ?>" class="vx_del_link vx_del_lead vx_float_right"><?php _e('Trash','contact-form-entries') ?></a>
+<a href="<?php echo esc_html($trash_link); ?>"  style="line-height: 26px;" title="<?php _e('Trash','contact-form-entries') ?>" class="vx_del_link vx_del_lead vx_float_right"><?php _e('Trash','contact-form-entries') ?></a>
 </div>
 
 <div class="vx_save_div" style="display: none;">
-  <button type="submit" autocomplete="off" name="<?php echo vxcf_form::$id ?>_submit" value="yes" class="button button-primary" id="vx_save_lead" title="<?php  _e('Save','contact-form-entries') ?>">
+  <button type="submit" autocomplete="off" name="<?php echo esc_html(vxcf_form::$id) ?>_submit" value="yes" class="button button-primary" id="vx_save_lead" title="<?php  _e('Save','contact-form-entries') ?>">
   <span class="reg_ok"><i class="fa fa-check"></i> <?php  _e('Save','contact-form-entries') ?></span>
   <span class="reg_proc"><i class="fa fa-refresh fa-spin"></i> <?php _e('Saving ...','contact-form-entries') ?></span>
   </button>
@@ -845,9 +844,9 @@ $boxes=array('payment'=>array('title'=>__('Payment Details','contact-form-entrie
 $boxes=apply_filters('vx_cf_meta_boxes_right',$boxes,$lead,$detail,'entry');
 foreach($boxes as $k=>$v){
     ?>
-<div class="vx_div" id="vxcf_<?php echo $k ?>">
+<div class="vx_div" id="vxcf_<?php echo esc_html($k) ?>">
         <div class="vx_head">
-<div class="crm_head_div"><?php echo $v['title'] ?></div>
+<div class="crm_head_div"><?php echo wp_kses_post($v['title']) ?></div>
 <div class="crm_btn_div" title="<?php _e('Expand / Collapse','contact-form-entries') ?>"><i class="fa crm_toggle_btn vx_action_btn fa-minus"></i></div>
 <div class="crm_clear"></div> 
   </div>
@@ -860,8 +859,8 @@ if(!empty($v['vals'])){
  foreach($v['vals'] as $label=>$val){   
  ?>
 <div class="vx_row">
-  <div class="vx_col3"><?php echo $label ?></div>
-  <div class="vx_col4"><?php echo $val; ?></div>
+  <div class="vx_col3"><?php echo esc_html($label) ?></div>
+  <div class="vx_col4"><?php echo esc_html($val); ?></div>
   <div class="clear"></div>
   </div>
 <?php } } ?>  
@@ -876,7 +875,7 @@ do_action('vx_cf_add_meta_box_right',$lead,$detail);
   </div>
    <script type="text/javascript">
     var vx_crm_ajax='<?php echo wp_create_nonce("vx_crm_ajax") ?>';
-    var vx_entry_id='<?php echo $id; ?>';
+    var vx_entry_id='<?php echo esc_attr($id); ?>';
         var vx_ajax=false;
   jQuery(document).ready(function($) {
         var form_val=jQuery('#vx_en_form').serialize();    
@@ -926,7 +925,7 @@ elem.before(html);
    });  
     $("#entries_form").change(function(){
       var form_id=$(this).val();
-     var link='<?php echo $link ?>'; 
+     var link='<?php echo esc_html($link) ?>'; 
       if(form_id){
       link+='&form_id='+form_id; 
       }
@@ -945,7 +944,7 @@ elem.before(html);
 <?php 
 if(!empty($date_field)){
 ?>
-  $(".<?php echo trim($date_field) ?>").datepicker({ changeMonth: true,
+  $(".<?php echo trim(esc_html($date_field)) ?>").datepicker({ changeMonth: true,
   changeYear: true,
   showButtonPanel: true,
   yearRange: "-100:+10",
@@ -999,7 +998,7 @@ var email=td.find('.vx_note_email');
 var note_subject=subject.val();
 var note_email=email.val();
 var note_color=td.find('.vx_note_color').val();
-var arr={action:'actions_<?php echo vxcf_form::$id ?>',entry_id:vx_entry_id,note:note,note_color:note_color,action2:"add_note",note_email:note_email,note_subject:note_subject,vx_crm_ajax:vx_crm_ajax};
+var arr={action:'actions_<?php echo esc_html(vxcf_form::$id) ?>',entry_id:vx_entry_id,note:note,note_color:note_color,action2:"add_note",note_email:note_email,note_subject:note_subject,vx_crm_ajax:vx_crm_ajax};
 var note_id=td.attr('data-id');
 if(note_id){ arr['id']=note_id; } 
 $.post(ajaxurl,arr,function(res){
@@ -1025,7 +1024,7 @@ var id=$(this).attr('data-id');
 var button=$(this);
 var note=$(this).parents(".crm_note");
 button_state("ajax",button);
-$.post(ajaxurl,{action:'actions_<?php echo vxcf_form::$id ?>',action2:"delete_note",id:id,vx_crm_ajax:vx_crm_ajax},function(res){
+$.post(ajaxurl,{action:'actions_<?php echo esc_html(vxcf_form::$id) ?>',action2:"delete_note",id:id,vx_crm_ajax:vx_crm_ajax},function(res){
 note.fadeOut('slow',function(){$(this).remove()});  
 //button_state("ok",button);
   });  
