@@ -29,17 +29,17 @@ get_header();
 				$custom_code_js     = rwmb_meta('yes_custom_js');
 				
 				if ($custom_code_css) :
-					echo '<style type="text/css">';
+					if (strpos($custom_code_css, '<style type="text/css">') === false) echo '<style type="text/css">';
 					echo $custom_code_css;
-					echo '</style>';
+					if (strpos($custom_code_css, '<style type="text/css">') === false) echo '</style>';
 				endif;
 		
 				get_template_part('template-parts/content/content', get_post_type());
 
 				if ($custom_code_js) :
-					echo '<script type="text/javascript">';
+					if (strpos($custom_code_js, '<script type="text/javascript">') === false) echo '<script type="text/javascript">';
 					echo $custom_code_js;
-					echo '</script>';
+					if (strpos($custom_code_js, '<script type="text/javascript">') === false) echo '</script>';
 				endif;
 				
 			endwhile;

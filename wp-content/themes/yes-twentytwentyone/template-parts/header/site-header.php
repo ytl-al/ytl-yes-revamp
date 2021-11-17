@@ -80,8 +80,8 @@
                                 endif;
                             ?>
                             <div class="d-flex align-items-center">
-                                <a href="#" class="pink-btn me-3"><?php echo esc_html__('Get Started', 'yes.my'); ?></a>
-                                <a href="#" class="login-btn"><span class="iconify" data-icon="carbon:user-avatar-filled-alt"></span> <?php echo esc_html__('Log In', 'yes.my'); ?></a>
+                                <a href="https://appstore.yes.my/ywos" class="pink-btn"><?php echo esc_html__('Get Started', 'yes.my'); ?></a>
+                                <!-- <a href="#" class="login-btn"><span class="iconify" data-icon="carbon:user-avatar-filled-alt"></span> <?php echo esc_html__('Log In', 'yes.my'); ?></a> -->
                             </div>
                         </div>
                     </div>

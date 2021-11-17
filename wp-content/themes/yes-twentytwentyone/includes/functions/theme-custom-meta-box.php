@@ -23,14 +23,16 @@ if (is_admin()) {
                         'name'  => esc_html__('Custom CSS', 'yes.my'),
                         'id'    => $prefix . 'custom_css',
                         'desc'  => esc_html__('Additional CSS code for this page', 'yes.my'),
-                        'rows'  => 10
+                        'rows'  => 10,
+                        'sanitize_callback' => 'none'
                     ],
                     [
                         'type'  => 'textarea',
                         'name'  => esc_html__('Custom JavaScript', 'yes.my'),
                         'id'    => $prefix . 'custom_js',
                         'desc'  => esc_html__('Additional JavaScript code for this page', 'yes.my'),
-                        'rows'  => 10
+                        'rows'  => 10,
+                        'sanitize_callback' => 'none'
                     ]
                 ]
             ];
