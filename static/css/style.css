@@ -562,6 +562,24 @@ section {
     background-color: #F8BFDB;
 }
 
+.white-btn2 {
+    background-color: #FFF;
+    border-radius: 90px;
+    padding: 14px 74px;
+    display: inline-block;
+    font-weight: 800;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #ED028C;
+    border: solid 2px #ED028C;
+    text-align: center;
+}
+
+.white-btn2:hover {
+    color: #FFF;
+    background-color: #ED028C;
+}
+
 
 /* Home-Amazing Things styling */
 
@@ -975,6 +993,24 @@ section {
 .breadcrumb-section .breadcrumb-item+.breadcrumb-item::before {
     color: #00B4F0;
     padding-right: 1rem;
+}
+
+textarea:focus,
+select:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=number]:focus,
+[type=text].form-control:focus,
+[type=password].form-control:focus,
+[type=email].form-control:focus,
+[type=tel].form-control:focus,
+[contenteditable].form-control:focus {
+    box-shadow: none;
+    border-color: #000 !important;
+    outline: none;
 }
 
 @media (min-width: 768px) {
