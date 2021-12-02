@@ -114,3 +114,24 @@ if (!function_exists('prevent_cf7_multiple_emails')) {
     }
     add_action('wp_footer', 'prevent_cf7_multiple_emails');
 }
+
+
+if (!function_exists('cf7_keep_vx_url')) {
+    /**
+     * Function cf7_keep_vx_url()
+     * Function to add JavaScript to remove the extra urls in input hidden "vx_url" to prevent the cross site scripting vulnerabilities
+     * 
+     * @since    1.0.0
+     */
+    function cf7_keep_vx_url()
+    { ?>
+        <script type="text/javascript">
+            setTimeout(function() {
+                var elementURL = $('input[name="vx_url"]');
+                $(elementURL).val(window.location.href.split('?')[0]);
+            }, 1000);
+        </script>
+<?php
+    }
+    add_action('wp_footer', 'cf7_keep_vx_url');
+}

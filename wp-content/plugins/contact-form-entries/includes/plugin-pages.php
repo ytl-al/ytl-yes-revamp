@@ -393,7 +393,7 @@ public function entries_link($links,$form){
     $del=$links['delete'];
     unset($links['delete']);
     $page_url=vxcf_form::link_to_settings();
-    $links['entries']='<a href="'.$page_url.'&form_id=vf_'.$form['id'].'">'.__('Entries','contact-form-entries').'</a>';
+    $links['entries']='<a href="'.esc_url($page_url.'&form_id=vf_'.$form['id']).'">'.__('Entries','contact-form-entries').'</a>';
     $links['delete']=$del;
     return $links;
 }

@@ -1,7 +1,7 @@
 /* 
     Stylesheet Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : November  12, 2021, 03:52:31 PM
+    Last edited on  : December  02, 2021, 03:52:31 PM
     Author          : [YTL Digital Design] - Zeeshan, AL
 */
 
@@ -586,7 +586,8 @@ section {
 #customer-review .reviewbox {
     background-color: #F9F7F4;
     border: 1px solid #DEE5EF;
-    display: flex;
+    /* display: flex; */
+    display: inline-block;
     align-items: center;
     justify-content: center;
     padding: 20px;
@@ -1243,6 +1244,11 @@ section {
     overflow: hidden;
 }
 
+.bg-blueYes { background-color: #0FAEF1 !important; color: #FFF; }
+
+.btn-blue, .btn-blue:active, .btn-blue:focus { background-color: #0038B3; }
+.btn-blue:hover { background-color: #016AC5; }
+
 .wp-block-column:not(:first-child) {
     margin-left: 0;
 }
@@ -1297,6 +1303,9 @@ footer.footer .wp-block-image {
     margin: 0;
 }
 
+.layer-footerFAQ ol {}
+.layer-footerFAQ ol li { margin: 0 0 15px; }
+
 @media (max-width: 781px) {
     .wp-block-column:first-child {
         flex-basis: 100% !important;
@@ -1333,5 +1342,6 @@ footer.footer .wp-block-image {
     }
 }
 
+.table.plan-table a[data-bs-toggle="tooltip"] { display: none; }
 
 /* Added by AL - END */

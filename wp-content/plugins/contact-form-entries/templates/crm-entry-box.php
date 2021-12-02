@@ -39,7 +39,7 @@ jQuery(document).ready(function($){
  });
  $('#vx_print_entry').on('click',function(e){
     e.preventDefault();
-   var url='<?php echo esc_url($print_link) ?>';
+   var url='<?php echo esc_url_raw($print_link) ?>';
    if($('#vx_include_notes').is(':checked')){
     url+='&notes=1';   
    }

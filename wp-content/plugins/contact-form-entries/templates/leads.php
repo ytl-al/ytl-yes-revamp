@@ -221,7 +221,7 @@ margin-left: 8px;
 .tablenav .tablenav-pages a,.tablenav-pages-navspan{display:inline-block;min-width:17px;border:1px solid #ccc;padding:3px 5px 7px;background:#e5e5e5;font-size:16px;line-height:1;font-weight:400;text-align:center}
   </style>
   <div class="vx_wrap">
-  <h2  class="vx_img_head"><?php echo $this->entry_title;
+  <h2  class="vx_img_head"><?php echo esc_html($this->entry_title);
  
    if(!empty($forms) ){  ?> 
      <select name="form" id="entries_form" class="vx_sel_main">
@@ -237,7 +237,7 @@ margin-left: 8px;
   $form_id_arr=$f_key.'_'.$form_id_;
   if($form_id == $form_id_arr)
   $sel="selected='selected'";
-  echo "<option value='".$form_id_arr."' $sel>".$form_title."</option>"; 
+  echo "<option value='".esc_html($form_id_arr)."' $sel>".esc_html($form_title)."</option>"; 
     }      
   }
   ?>
@@ -274,7 +274,7 @@ margin-left: 8px;
         }
        $k++; 
        ?>
-       <a href="<?php echo $entries_link_form.'&'.$field.'='.$val ?>" class="<?php echo $current ?>" title="<?php echo ucfirst($label) ?>"><?php echo ucfirst($label)?> <span class="count">(<?php echo $count ?>)</span></a> 
+       <a href="<?php echo esc_url($entries_link_form.'&'.$field.'='.$val) ?>" class="<?php echo esc_html($current) ?>" title="<?php echo ucfirst(esc_html($label)) ?>"><?php echo ucfirst(esc_html($label))?> <span class="count">(<?php echo esc_html($count) ?>)</span></a> 
        </li>     
           <?php
       }
@@ -286,14 +286,14 @@ margin-left: 8px;
 </div>
      <div style="float: right;">
 <form id="vx_form" class="crm_form" method="get"><div>
-    <input type="hidden" name="page" value="<?php echo vxcf_form::post('page') ?>" />
-  <input type="hidden" name="form_id" value="<?php echo $form_id ?>" />
+    <input type="hidden" name="page" value="<?php echo esc_html(vxcf_form::post('page')) ?>" />
+  <input type="hidden" name="form_id" value="<?php echo esc_html($form_id) ?>" />
   
-      <input type="hidden" name="status" value="<?php echo vxcf_form::post('status') ?>" />
-  <input type="hidden" name="tab" value="<?php echo $tab; ?>" />
-  <input type="text" placeholder="<?php _e('Search','contact-form-entries') ?>" value="<?php echo $search_text  ?>" name="search" class="crm_input_inline">
-    <input type="hidden" name="order" value="<?php echo vxcf_form::post('order') ?>" />
-  <input type="hidden" name="orderby" value="<?php echo vxcf_form::post('orderby') ?>" />
+      <input type="hidden" name="status" value="<?php echo esc_html(vxcf_form::post('status')) ?>" />
+  <input type="hidden" name="tab" value="<?php echo esc_html($tab); ?>" />
+  <input type="text" placeholder="<?php _e('Search','contact-form-entries') ?>" value="<?php echo esc_html($search_text)  ?>" name="search" class="crm_input_inline">
+    <input type="hidden" name="order" value="<?php echo esc_html(vxcf_form::post('order')) ?>" />
+  <input type="hidden" name="orderby" value="<?php echo esc_html(vxcf_form::post('orderby')) ?>" />
 
   <input type="hidden" data-name="vx_tab_action_<?php echo esc_attr(vxcf_form::$id) ?>" id="vx_export_log" value="" autocomplete="off" />
   
@@ -307,7 +307,7 @@ margin-left: 8px;
   $sel="";
   if( isset($_REQUEST['field']) && $_REQUEST['field'] == $f_val['name'])
   $sel="selected='selected'";
-  echo "<option value='".$f_val['name']."' $sel>".$f_val['label']."</option>";       
+  echo "<option value='".esc_html($f_val['name'])."' $sel>".esc_html($f_val['label'])."</option>";       
   }
   ?>
   </select>
@@ -321,7 +321,7 @@ margin-left: 8px;
   $sel="";
   if(isset($_REQUEST['time']) && $_REQUEST['time'] == $f_key)
   $sel="selected='selected'";
-  echo "<option value='".$f_key."' $sel>".$f_val."</option>";       
+  echo "<option value='".esc_html($f_key)."' $sel>".esc_html($f_val)."</option>";       
   }
   ?>
   </select>
@@ -344,11 +344,11 @@ margin-left: 8px;
   <select name="<?php echo esc_attr(vxcf_form::$id) ?>_action" id="vx_bulk_action" class="crm_input_inline" style="min-width: 100px; max-width: 250px;">
   <?php
    foreach($bulk_actions as $k=>$v){
-   echo '<option value="'.$k.'">'.$v.'</option>';    
+   echo '<option value="'.esc_html($k).'">'.esc_html($v).'</option>';    
    }   
   ?>
   </select>
-    <input type="hidden" name="vx_action" value="<?php echo $nonce ?>">   
+    <input type="hidden" name="vx_action" value="<?php echo esc_html($nonce) ?>">   
   <button type="submit" class="button-secondary button crm_input_inline" title="<?php _e('Apply','contact-form-entries') ?>" id="vx_apply_bulk"><i class="fa fa-check"></i> <?php _e('Apply','contact-form-entries') ?></button>
 
   <?php   
@@ -363,12 +363,12 @@ margin-left: 8px;
   <?php
 if($items>0){
   ?>
-  <div class="tablenav-pages"> <span id="paging_header" class="displaying-num"><?php _e('Displaying','contact-form-entries') ?> <span id="paging_range_min_header"><?php echo $data['min'] ?></span> - <span id="paging_range_max_header"><?php echo $data['max'] ?></span> of <span id="paging_total_header"><?php echo $data['items'] ?></span></span><?php echo $data['links'] ?></div>
+  <div class="tablenav-pages"> <span id="paging_header" class="displaying-num"><?php _e('Displaying','contact-form-entries') ?> <span id="paging_range_min_header"><?php echo esc_html($data['min']) ?></span> - <span id="paging_range_max_header"><?php echo esc_html($data['max']) ?></span> of <span id="paging_total_header"><?php echo esc_html($data['items']) ?></span></span><?php echo wp_kses_post($data['links']) ?></div>
  <?php
 }
        ?>       
   </div>
-  <input type="hidden" class="manage-column hidden" id="<?php echo $form_id.'-vxvx-vxxx' ?>"> 
+  <input type="hidden" class="manage-column hidden" id="<?php echo esc_html($form_id).'-vxvx-vxxx' ?>"> 
 <?php
   //  var_dump($leads); die();
 ?>
@@ -393,8 +393,8 @@ $total_cols=2; $n=0;
           $total_cols++;
       }
 ?>
-  <th scope="col" class="manage-column vx_sort_sql vx_sort column-<?php echo $field['_id'].$hide_col; ?>" data-sort="string" id="<?php echo $field['_id']; ?>"  data-name="<?php echo $field['name']; ?>" <?php if(isset($field['vx_width'])){ echo 'style="width: '.$field['vx_width'].'"';} ?> ><?php echo $field['label'] ?>
-  <i class="fa fa-caret-<?php if($sel){echo $order_icon;}else{echo $crm_order;} ?> vx_sort_icon <?php if(!$sel){echo 'vx_hide_sort';} ?>"></i>                          
+  <th scope="col" class="manage-column vx_sort_sql vx_sort column-<?php echo esc_html($field['_id'].$hide_col); ?>" data-sort="string" id="<?php echo esc_html($field['_id']); ?>"  data-name="<?php echo esc_html($field['name']); ?>" <?php if(isset($field['vx_width'])){ echo 'style="width: '.esc_html($field['vx_width']).'"';} ?> ><?php echo esc_html($field['label']) ?>
+  <i class="fa fa-caret-<?php if($sel){echo esc_html($order_icon);}else{echo esc_html($crm_order);} ?> vx_sort_icon <?php if(!$sel){echo 'vx_hide_sort';} ?>"></i>                          
   </th>
 <?php
   }
@@ -414,8 +414,8 @@ $total_cols=2; $n=0;
           $hide_col=' hidden';
       } 
 ?>
-  <th scope="col" class="manage-column column-<?php echo $field['_id'].$hide_col ?> vx_sort"  data-name="crm_id"><?php echo $field['label'] ?>
-  <i class="fa fa-caret-<?php echo $crm_order ?> vx_sort_icon <?php echo $crm_class ?>"></i>                          
+  <th scope="col" class="manage-column column-<?php echo esc_html($field['_id'].$hide_col) ?> vx_sort"  data-name="crm_id"><?php echo esc_html($field['label']) ?>
+  <i class="fa fa-caret-<?php echo esc_html($crm_order) ?> vx_sort_icon <?php echo esc_html($crm_class) ?>"></i>                          
   </th>
 <?php
   }
@@ -433,8 +433,8 @@ $total_cols=2; $n=0;
       foreach($leads as $lead){
   $sno++;
   ?>
-  <tr class='<?php echo 'vx_lead_'.$lead['type']; if($lead['is_read'] == 0){echo ' vx_lead_unread';}  if($lead['type'] == '1'){echo '  vx_';} ?>' id="tr_<?php echo $lead['id']  ?>" data-id="<?php echo $lead['id'] ?>" >
-  <td class="vx_check_col"><input type="checkbox" name="lead_id[]" value="<?php echo $lead['id'] ?>" class="crm_input_check"></td>
+  <tr class='<?php echo 'vx_lead_'.$lead['type']; if($lead['is_read'] == 0){echo ' vx_lead_unread';}  if($lead['type'] == '1'){echo '  vx_';} ?>' id="tr_<?php echo esc_html($lead['id'])  ?>" data-id="<?php echo esc_html($lead['id']) ?>" >
+  <td class="vx_check_col"><input type="checkbox" name="lead_id[]" value="<?php echo esc_html($lead['id']) ?>" class="crm_input_check"></td>
     <td class="vx_icon_col">
     <i class="fa fa-star toggle_star <?php echo $lead['is_star'] == 1 ? "crm_star_yellow" : "crm_star_black"; ?>"></i> </td>
     <?php
@@ -510,24 +510,24 @@ $delete_link=$entry_link_f.'&'.vxcf_form::$id.'_action=delete&vx_action='.$nonce
       }
 
       ?>
-               <td class="column-<?php echo $field['_id'].$hide_col ?>"><?php echo $field_label; 
+               <td class="column-<?php echo esc_html($field['_id'].$hide_col) ?>"><?php echo wp_kses_post($field_label); 
       if($f_no == 1){
           ?>
           <div class="row-actions">
           <?php
               if($status == 'trash'){
           ?>
-             <span class="edit"><a href="<?php echo $restore_link ?>" title="<?php _e('Restore','contact-form-entries') ?>"><?php _e('Restore','contact-form-entries') ?></a> | </span>
+             <span class="edit"><a href="<?php echo esc_url($restore_link) ?>" title="<?php _e('Restore','contact-form-entries') ?>"><?php _e('Restore','contact-form-entries') ?></a> | </span>
       
-      <span class="trash"><a class="submitdelete" title="<?php _e('Delete','contact-form-entries') ?>" href="<?php echo $delete_link ?>"><?php _e('Delete','contact-form-entries') ?></a> </span>
+      <span class="trash"><a class="submitdelete" title="<?php _e('Delete','contact-form-entries') ?>" href="<?php echo esc_url($delete_link) ?>"><?php _e('Delete','contact-form-entries') ?></a> </span>
           <?php
               }else{
           ?>
-      <span class="edit"><a href="<?php echo $entry_link ?>" title="<?php _e('View','contact-form-entries') ?>"><?php _e('View','contact-form-entries') ?></a> | </span>
+      <span class="edit"><a href="<?php echo esc_url($entry_link) ?>" title="<?php _e('View','contact-form-entries') ?>"><?php _e('View','contact-form-entries') ?></a> | </span>
       
-      <!--span class="inline"><a href="<?php echo $mark_link ?>"  title="<?php echo $mark_label ?>"><?php echo $mark_label ?></a> | </span--->
+      <!--span class="inline"><a href="<?php echo esc_url($mark_link) ?>"  title="<?php echo esc_html($mark_label) ?>"><?php echo esc_html($mark_label) ?></a> | </span--->
       
-      <span class="trash"><a class="submitdelete" title="<?php _e('Trash','contact-form-entries') ?>" href="<?php echo $trash_link ?>"><?php _e('Trash','contact-form-entries') ?></a> </span>
+      <span class="trash"><a class="submitdelete" title="<?php _e('Trash','contact-form-entries') ?>" href="<?php echo esc_url($trash_link) ?>"><?php _e('Trash','contact-form-entries') ?></a> </span>
       <?php
               }
       ?>
@@ -547,7 +547,7 @@ $delete_link=$entry_link_f.'&'.vxcf_form::$id.'_action=delete&vx_action='.$nonce
   else {  
   ?>
   <tr>
-    <td colspan="<?php echo $total_cols ?>" class="colspanchange">
+    <td colspan="<?php echo esc_html($total_cols) ?>" class="colspanchange">
         <?php _e("No Record(s) Found", 'contact-form-entries'); ?>
     </td>
   </tr>
@@ -561,7 +561,7 @@ $delete_link=$entry_link_f.'&'.vxcf_form::$id.'_action=delete&vx_action='.$nonce
   if($items>0){
   ?>
     <div class="crm_actions tablenav">
-  <div class="tablenav-pages"> <span id="paging_header" class="displaying-num"><?php _e('Displaying','contact-form-entries') ?> <span id="paging_range_min_header"><?php echo $data['min'] ?></span> - <span id="paging_range_max_header"><?php echo $data['max'] ?></span> of <span id="paging_total_header"><?php echo $data['items'] ?></span></span><?php echo $data['links'] ?></div>
+  <div class="tablenav-pages"> <span id="paging_header" class="displaying-num"><?php _e('Displaying','contact-form-entries') ?> <span id="paging_range_min_header"><?php echo esc_html($data['min']) ?></span> - <span id="paging_range_max_header"><?php echo esc_html($data['max']) ?></span> of <span id="paging_total_header"><?php echo esc_html($data['items']) ?></span></span><?php echo wp_kses_post($data['links']) ?></div>
     </div>
   <?php
   }
@@ -588,7 +588,7 @@ $delete_link=$entry_link_f.'&'.vxcf_form::$id.'_action=delete&vx_action='.$nonce
   foreach($fields_arr as $field){  
 ?>
 <div class="vx_td_border_bottom">
-<label for='vx_check_<?php echo $field['name'] ?>'><input type="checkbox" <?php if(isset($entry_fields[$field['name']])){echo 'checked="checked"';} ?> name="fields[<?php echo $field['name'] ?>]" id='vx_check_<?php echo $field['name'] ?>' > <?php echo $field['label'] ?></label></div>
+<label for='vx_check_<?php echo esc_html($field['name']) ?>'><input type="checkbox" <?php if(isset($entry_fields[$field['name']])){echo 'checked="checked"';} ?> name="fields[<?php echo esc_html($field['name']) ?>]" id='vx_check_<?php echo esc_html($field['name']) ?>' > <?php echo esc_html($field['label']) ?></label></div>
 <?php
   }}
 ?>
@@ -607,7 +607,7 @@ $delete_link=$entry_link_f.'&'.vxcf_form::$id.'_action=delete&vx_action='.$nonce
 </div>
 
  <script type="text/javascript">
-    var vx_print_link='<?php echo admin_url( 'admin-ajax.php' ).'?action=print_'.vxcf_form::$id.'&form_id='.$form_id; ?>';
+    var vx_print_link='<?php echo esc_url_raw(admin_url( 'admin-ajax.php' ).'?action=print_'.vxcf_form::$id.'&form_id='.$form_id); ?>';
     var vx_crm_ajax='<?php echo wp_create_nonce("vx_crm_ajax") ?>';
     
   (function( $ ) {
@@ -632,7 +632,7 @@ $delete_link=$entry_link_f.'&'.vxcf_form::$id.'_action=delete&vx_action='.$nonce
 
  $("#entries_form").change(function(){
       var form_id=$(this).val();
-     var link='<?php echo $entries_link ?>'; 
+     var link='<?php echo esc_url_raw($entries_link) ?>'; 
       if(form_id){
       link+='&form_id='+form_id; 
       }

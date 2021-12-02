@@ -11,8 +11,8 @@ if (!function_exists('yes_enqueue_scripts')) {
     {
         wp_enqueue_style('bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.min.css', array(), '5.1.0');
         wp_enqueue_style('aos', get_template_directory_uri() . '/assets/css/aos.css', array(), '2.3.1');
-        wp_enqueue_style('slick', get_template_directory_uri() . '/assets/css/slick.css', array(), '1.8.0');
-        wp_enqueue_style('slick-theme', get_template_directory_uri() . '/assets/css/slick-theme.css', array(), '1.8.0');
+        wp_enqueue_style('slick', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.0/slick.min.css', array(), '1.8.0');
+        wp_enqueue_style('slick-theme', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.0/slick-theme.min.css', array(), '1.8.0');
         wp_enqueue_style('yes-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.0.0');
         wp_enqueue_style('yes-styles-responsive', get_template_directory_uri() . '/assets/css/responsive.css', array(), '1.0.0');
 
@@ -20,7 +20,7 @@ if (!function_exists('yes_enqueue_scripts')) {
         wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.bundle.js', array(), '5.1.0', true);
         wp_enqueue_script('iconify', get_template_directory_uri() . '/assets/js/iconify.min.js', array(), '2.0.0', true);
         wp_enqueue_script('aos', get_template_directory_uri() . '/assets/js/aos.js', array(), '2.3.1', true);
-        wp_enqueue_script('slick', get_template_directory_uri() . '/assets/js/slick.js', array(), '1.8.0', true);
+        wp_enqueue_script('slick', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.0/slick.min.js', array(), '1.8.0', true);
         wp_enqueue_script('yes-js', get_template_directory_uri() . '/assets/js/yes.js', array(), '1.0.0', true);
     }
     add_action('wp_enqueue_scripts', 'yes_enqueue_scripts');
@@ -66,7 +66,7 @@ if (!function_exists('yes_twentytwentyone_setup')) {
 }
 
 
-$exclude_language_widgets   = ['yes_widget_page_modal', 'yes_widget_footer_faq', 'yes_widget_footer_newsletter', 'yes_widget_footer_bottom'];
+$exclude_language_widgets   = ['yes_widget_page_modal', 'yes_widget_footer_newsletter', 'yes_widget_footer_bottom'];
 
 if (!function_exists('yes_register_widgets')) {
     /**
@@ -438,4 +438,38 @@ if (!function_exists('display_widget_by_position')) {
         }
         return;
     }
+}
+
+
+if (!function_exists('update_direction_list_domain')) {
+    /**
+     * Function update_direction_list_domain()
+     * Function to update the domain in redirected urls in Redirection plugin
+     * 
+     * @param    string  $old_domain            The old domain in redirected URLs
+     * @param    string  $new_domain            The new domain in redirected URLs
+     * @param    integer $redirection_group_id  The redirection group id
+     * 
+     * @since    1.0.0
+     */
+    function update_direction_list_domain($old_domain = 'https://my.yes.my/', $new_domain = 'https://site.yes.my/', $redirection_group_id = 3)
+    {
+        global $wpdb;
+        $query      = " SELECT * 
+                        FROM yes_redirection_items
+                        WHERE group_id = $redirection_group_id 
+                            AND action_type = 'url'
+                            AND action_data LIKE '" . $old_domain . "%'";
+        $results    = $wpdb->get_results($query);
+
+        foreach ($results as $result) {
+            $id = $result->id;
+            $action_data     = $result->action_data;
+            $new_action_data = str_replace($old_domain, $new_domain, $action_data);
+            // echo '<pre>'; print_r($result); echo "$id <br />$action_data <br />$new_action_data"; echo '</pre>';
+
+            $wpdb->update('yes_redirection_items', array('action_data' => $new_action_data), array('id' => $id));
+        }
+    }
+    // update_direction_list_domain('https://my.yes.my/', 'https://site.yes.my/', 3);
 }

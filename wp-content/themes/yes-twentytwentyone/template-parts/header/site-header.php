@@ -18,9 +18,21 @@
         <div class="container g-0">
             <div class="row g-0">
                 <div class="col-10">
+                    <?php 
+                        $lang           = get_bloginfo('language');
+                        $personalLink   = '/';
+                        $bizLink        = '/biz/plans';
+                        if ($lang == 'ms-MY') {
+                            $personalLink   = '/ms'.$personalLink;
+                            $bizLink        = '/ms'.$bizLink;
+                        } else if ($lang == 'zh-CN') {
+                            $personalLink   = '/zh-hans'.$personalLink;
+                            $bizLink        = '/zh-hans'.$bizLink;
+                        }
+                    ?>
                     <ul class="tabnav">
-                        <li><a href="#" class="active"><?php echo esc_html__('Personal', 'yes.my'); ?></a></li>
-                        <li><a href="#"><?php echo esc_html__('Business', 'yes.my'); ?></a></li>
+                        <li><a href="<?php echo $personalLink; ?>" class="active"><?php echo esc_html__('Personal', 'yes.my'); ?></a></li>
+                        <li><a href="<?php echo $bizLink; ?>"><?php echo esc_html__('Business', 'yes.my'); ?></a></li>
                         <li><a href="https://www.ytlfoundation.org/learnfromhome/" target="_blank"><?php echo esc_html__('Education', 'yes.my'); ?></a></li>
                     </ul>
                 </div>
