@@ -301,6 +301,120 @@
         #switch-yes .viewall-btn:hover {
             text-decoration: underline;
         }
+        /* Cart Modal Styling START */
+        
+        #cart-modal .modal-body {
+            padding: 40px;
+        }
+        
+        #cart-modal .modal-lg {
+            max-width: 730px;
+        }
+        
+        #cart-modal h1 {
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 36px;
+            color: #2B2B2B;
+            display: block;
+            width: 100%;
+        }
+        
+        #cart-modal h2 {
+            font-size: 16px;
+            line-height: 22px;
+            font-weight: 700;
+            color: #525252;
+            display: block;
+            text-transform: uppercase;
+            width: 100%;
+        }
+        
+        #cart-modal .packagebox {
+            background: #FFFFFF;
+            box-sizing: border-box;
+            box-shadow: 2px 4px 15px rgba(112, 144, 176, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+        
+        #cart-modal .packagebox .visualbg {
+            background: linear-gradient(16.65deg, #00B4F0 -123.85%, #CF5396 74.76%);
+            text-align: center;
+            padding: 23px 12px;
+        }
+        
+        #cart-modal .packagebox h3 {
+            font-weight: 800;
+            font-size: 24px;
+            line-height: 28px;
+            color: #2B2B2B;
+        }
+        
+        #cart-modal .packagebox p {
+            font-size: 20px;
+            line-height: 24px;
+            color: #525252;
+        }
+        
+        #cart-modal .packagebox h3.price {
+            font-weight: 800;
+            font-size: 42px;
+            color: #2B2B2B;
+        }
+        
+        #cart-modal p {
+            font-size: 18px;
+            color: #2B2B2B;
+        }
+        
+        #cart-modal p span {
+            font-size: 19px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        #cart-modal .addon-box {
+            background-color: #FFF;
+            border-radius: 5px;
+            box-shadow: 0px 3.44867px 10.346px rgba(112, 144, 176, 0.2);
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            position: relative;
+            padding: 15px;
+        }
+        
+        #cart-modal .addon-box:hover {
+            box-shadow: 0px 8.45px 10.346px rgba(112, 144, 176, 0.27);
+        }
+        
+        #cart-modal .addon-box img {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+        }
+        
+        #cart-modal .addon-box h1 {
+            color: #00B4F0;
+            font-weight: 800;
+            font-size: 20px;
+        }
+        
+        #cart-modal .addon-box p {
+            color: #525252;
+            font-size: 14px;
+        }
+        
+        #cart-modal .addon-box p.small {
+            font-size: 12px;
+            color: #7A7A7A;
+        }
+        /* Cart Modal Styling END */
         
         @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
             #databck-rewards h1 {
@@ -371,6 +485,30 @@
             }
             #switch-yes {
                 margin-bottom: 50px;
+            }
+            #cart-modal h1 {
+                font-size: 25px;
+            }
+            #cart-modal h2 {
+                font-size: 12px;
+            }
+            #cart-modal .packagebox .visualbg {
+                padding: 0px 12px;
+            }
+            #cart-modal .packagebox h3 {
+                font-size: 20px;
+            }
+            #cart-modal .packagebox p {
+                font-size: 15px;
+            }
+            #cart-modal .packagebox h3.price {
+                font-size: 31px;
+            }
+            #cart-modal .addon-box {
+                margin-bottom: 10px;
+            }
+            #cart-modal .packagebox .visualbg img {
+                max-width: 55%;
             }
         }
     </style>
@@ -511,7 +649,7 @@
                                         <th>
                                             <h1>Kasi Up Postpaid 49</h1>
                                             <h2>RM49 for 100GB</h2>
-                                            <a href="#" class="pink-btn">Buy Now</a>
+                                            <a href="#" class="pink-btn" data-bs-toggle="modal" data-bs-target="#cart-modal">Buy Now</a>
                                         </th>
                                         <th>
                                             <h1>(No Contract)</h1>
@@ -900,6 +1038,77 @@
             </div>
         </footer>
     </div>
+
+    <div class="modal fade" id="cart-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row g-0 mb-4 align-items-center">
+                        <div class="col-lg-1 col-2">
+                            <img src="images/green-tick.png" alt="" class="me-3">
+                        </div>
+                        <div class="col-lg-11 col-10">
+                            <h1>Added to your cart</h1>
+                            <h2>only 1 plan per checkout</h2>
+                        </div>
+                    </div>
+                    <div class="row g-0">
+                        <div class="packagebox">
+                            <div class="row align-items-center">
+                                <div class="col-lg-3 col-12 visualbg">
+                                    <img src="images/kasiup-postpaid-visual.png" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-lg-5 col-7 ps-4">
+                                    <h3>Kasi Up<br>Postpaid 45</h3>
+                                    <p>RM45 for 100GB</p>
+                                </div>
+                                <div class="col-lg-4 col-5 text-center">
+                                    <h3 class="price">RM45</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-4">
+                        <p class="mb-3"><span>Get More Data</span> width customisable Data Add-Ons</p>
+                        <div class="col-lg-4 col-12">
+                            <a href="#" class="addon-box">
+                                <h1>RM10</h1>
+                                <p class="mb-2">10GB /month</p>
+                                <p class="small">Valid for 30 days only*</p>
+                                <img src="images/add-icon.png" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-4 col-12">
+                            <a href="#" class="addon-box">
+                                <h1>RM10</h1>
+                                <p class="mb-2">10GB /month</p>
+                                <p class="small">Valid for 30 days only*</p>
+                                <img src="images/add-icon.png" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-4 col-12">
+                            <a href="#" class="addon-box">
+                                <h1>RM10</h1>
+                                <p class="mb-2">10GB /month</p>
+                                <p class="small">Valid for 30 days only*</p>
+                                <img src="images/add-icon.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-12 mb-lg-0 mb-2">
+                            <a href="#" class="white-btn2 d-block">Close</a>
+                        </div>
+                        <div class="col-lg-6 col-12 mb-lg-0 mb-2">
+                            <a href="#" class="pink-btn d-block">Go to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
 
     <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
