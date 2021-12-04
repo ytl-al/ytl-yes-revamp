@@ -1,7 +1,7 @@
 /* 
     Stylesheet Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : December  02, 2021, 03:52:31 PM
+    Last edited on  : December  04, 2021, 03:52:31 PM
     Author          : [YTL Digital Design] - Zeeshan, AL
 */
 
@@ -379,7 +379,7 @@ section {
     z-index: 2;
     margin-right: 15%;
     margin-left: 15%;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -403,14 +403,6 @@ section {
     color: #FFF;
     /* box-shadow: 0px 12px 12px rgba(0, 0, 0, 0.45); */
     background-color: #D00072;
-}
-
-#slider-yes-home .carousel-item {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: relative;
-    min-height: 80vh;
 }
 
 #slider-yes-home .carousel-control-next,
@@ -1235,6 +1227,10 @@ section {
     #switch-yes {
         margin-bottom: 50px;
     }
+}
+
+.res-container {
+    overflow: hidden;
 }
 
 

@@ -1,7 +1,11 @@
+/* 
+    Stylesheet Name : Yes TwentyTwentyOne Responsive
+    Created on      : September 09, 2021, 03:04:23 PM
+    Last edited on  : December  04, 2021, 03:52:31 PM
+    Author          : [YTL Digital Design] - Zeeshan, AL
+*/
+
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
-    #slider-yes-home .carousel-item {
-        min-height: 27vh;
-    }
     .top-pink-bar p {
         padding: 0px 40px;
     }
@@ -89,6 +93,16 @@
     .breadcrumb-section .breadcrumb .breadcrumb-item {
         font-size: 14px !important;
     }
+    .slider-btn-container {
+        margin-bottom: 2rem;
+    }
+    .carousel-indicators {
+        margin-bottom: 0rem;
+    }
+    .slider-btn {
+        padding: 5px 25px;
+        font-size: 13px;
+    }
 }
 
 
@@ -109,11 +123,38 @@
     .signup-modal .signup-content {
         padding: 40px 0px !important;
     }
-    #slider-yes-home .carousel-item {
-        min-height: 32vh !important;
-    }
     .mega-dropdown-menu>li {
         float: none;
         margin-bottom: 20px;
+    }
+    .wpcf7-form-control-wrap {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+
+/* IPAD Portrait */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
+    .slider-btn-container {
+        margin-bottom: 2rem;
+    }
+    .carousel-indicators {
+        margin-bottom: 0rem;
+    }
+    .slider-btn {
+        padding: 5px 25px;
+        font-size: 13px;
+    }
+}
+
+
+/* ----------- iPhone 4 and 4S ----------- */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+    .top-tabs-container .tabnav li a {
+        padding-left: 10px;
+        padding-right: 10px;
     }
 }
