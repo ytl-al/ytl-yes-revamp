@@ -433,14 +433,6 @@ section {
     background-color: #D00072;
 }
 
-#slider-yes-home .carousel-item {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: relative;
-    min-height: 80vh;
-}
-
 #slider-yes-home .carousel-control-next,
 #slider-yes-home .carousel-control-prev {
     opacity: 1;

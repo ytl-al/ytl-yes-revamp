@@ -1,7 +1,4 @@
     @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
-        #slider-yes-home .carousel-item {
-            min-height: 27vh;
-        }
         .top-pink-bar p {
             padding: 0px 40px;
         }
@@ -97,6 +94,10 @@
             margin-top: 17px;
             margin-bottom: 20px;
         }
+        .wpcf7-form-control-wrap {
+            width: 100%;
+            margin-bottom: 20px;
+        }
         #newsletter p {
             margin-bottom: 20px;
         }
@@ -107,11 +108,15 @@
         .signup-modal .signup-content {
             padding: 40px 0px;
         }
-        #slider-yes-home .carousel-item {
-            min-height: 32vh;
-        }
         .mega-dropdown-menu>li {
             float: none;
             margin-bottom: 20px;
+        }
+    }
+    
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+        .top-tabs-container .tabnav li a {
+            padding-left: 10px;
+            padding-right: 10px;
         }
     }

@@ -309,6 +309,10 @@
             text-decoration: underline;
         }
         
+        .res-container {
+            overflow: hidden;
+        }
+        
         @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
             #databck-rewards h1 {
                 font-size: 32px;
@@ -350,12 +354,12 @@
                 min-width: 187px;
                 font-size: 16px;
                 position: sticky;
-                left: 0;
+                left: 0px;
             }
             #prepaid-plans .plan-table th.visual {
                 background-color: #cab02b;
                 position: sticky;
-                left: 0;
+                left: 0px;
             }
             #prepaid-plans .plan-table tr td.blue-col .info-icon {
                 display: none;
@@ -510,82 +514,84 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="table-responsive">
-                            <table class="table plan-table">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center visual"><img src="images/kasiup-prepaid-visual.png" class="img-fluid" /></th>
-                                        <th>
-                                            <h1>Kasi Up Prepaid 15</h1>
-                                            <h2>RM15 for 10GB</h2>
-                                            <a href="#" class="pink-btn">Buy Now</a>
-                                        </th>
-                                        <th>
-                                            <h1>Kasi Up Prepaid 20</h1>
-                                            <h2>RM20 for 20GB</h2>
-                                            <a href="#" class="pink-btn">Buy Now</a>
-                                        </th>
-                                        <th>
-                                            <h1>Kasi Up Prepaid Unlimited</h1>
-                                            <h2>RM30 for Unlimited</h2>
-                                            <a href="#" class="pink-btn">Buy Now</a>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td colspan="4" class="empty-row"><img src="images/spacer.gif" height="10px" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="blue-col rounded-top">Data
-                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
-                                        </td>
-                                        <td class="rounded-top">100GB</td>
-                                        <td class="rounded-top">20GB</td>
-                                        <td class="rounded-top">Unlimited GB<span>(7Mbps & 9GB Hotspot Data)</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="blue-col">Kasi Up rewards
-                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
-                                        </td>
-                                        <td><img src="images/icon-check-circle.png" /></td>
-                                        <td><img src="images/icon-check-circle.png" /></td>
-                                        <td><img src="images/icon-check-circle.png" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="blue-col">30 day validity
-                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
-                                        </td>
-                                        <td><img src="images/icon-check-circle.png" /></td>
-                                        <td><img src="images/icon-check-circle.png" /></td>
-                                        <td><img src="images/icon-check-circle.png" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="blue-col">Lowest RM per GB
-                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
-                                        </td>
-                                        <td><img src="images/icon-check-circle.png" /></td>
-                                        <td><img src="images/icon-check-circle.png" /></td>
-                                        <td><img src="images/icon-check-circle.png" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="blue-col">4G paling power
-                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
-                                        </td>
-                                        <td><img src="images/icon-check-circle.png" /></td>
-                                        <td><img src="images/icon-check-circle.png" /></td>
-                                        <td><img src="images/icon-check-circle.png" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="blue-col rounded-bottom">No hidden fees
-                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
-                                        </td>
-                                        <td class="rounded-bottom"><img src="images/icon-check-circle.png" /></td>
-                                        <td class="rounded-bottom"><img src="images/icon-check-circle.png" /></td>
-                                        <td class="rounded-bottom"><img src="images/icon-check-circle.png" /></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="res-container">
+                            <div class="table-responsive">
+                                <table class="table plan-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center visual"><img src="images/kasiup-prepaid-visual.png" class="img-fluid" /></th>
+                                            <th>
+                                                <h1>Kasi Up Prepaid 15</h1>
+                                                <h2>RM15 for 10GB</h2>
+                                                <a href="#" class="pink-btn">Buy Now</a>
+                                            </th>
+                                            <th>
+                                                <h1>Kasi Up Prepaid 20</h1>
+                                                <h2>RM20 for 20GB</h2>
+                                                <a href="#" class="pink-btn">Buy Now</a>
+                                            </th>
+                                            <th>
+                                                <h1>Kasi Up Prepaid Unlimited</h1>
+                                                <h2>RM30 for Unlimited</h2>
+                                                <a href="#" class="pink-btn">Buy Now</a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="4" class="empty-row"><img src="images/spacer.gif" height="10px" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="blue-col rounded-top">Data
+                                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                            </td>
+                                            <td class="rounded-top">100GB</td>
+                                            <td class="rounded-top">20GB</td>
+                                            <td class="rounded-top">Unlimited GB<span>(7Mbps & 9GB Hotspot Data)</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="blue-col">Kasi Up rewards
+                                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                            </td>
+                                            <td><img src="images/icon-check-circle.png" /></td>
+                                            <td><img src="images/icon-check-circle.png" /></td>
+                                            <td><img src="images/icon-check-circle.png" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="blue-col">30 day validity
+                                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                            </td>
+                                            <td><img src="images/icon-check-circle.png" /></td>
+                                            <td><img src="images/icon-check-circle.png" /></td>
+                                            <td><img src="images/icon-check-circle.png" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="blue-col">Lowest RM per GB
+                                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                            </td>
+                                            <td><img src="images/icon-check-circle.png" /></td>
+                                            <td><img src="images/icon-check-circle.png" /></td>
+                                            <td><img src="images/icon-check-circle.png" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="blue-col">4G paling power
+                                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                            </td>
+                                            <td><img src="images/icon-check-circle.png" /></td>
+                                            <td><img src="images/icon-check-circle.png" /></td>
+                                            <td><img src="images/icon-check-circle.png" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="blue-col rounded-bottom">No hidden fees
+                                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                            </td>
+                                            <td class="rounded-bottom"><img src="images/icon-check-circle.png" /></td>
+                                            <td class="rounded-bottom"><img src="images/icon-check-circle.png" /></td>
+                                            <td class="rounded-bottom"><img src="images/icon-check-circle.png" /></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

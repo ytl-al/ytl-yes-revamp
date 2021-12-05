@@ -15,6 +15,65 @@
     <link rel="stylesheet" type="text/css" href="css/slick-theme.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
 
+    <style>
+        @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+            .slider-btn-container {
+                margin-bottom: 0.9rem;
+            }
+            .carousel-indicators {
+                margin-bottom: 0.5rem;
+            }
+            .slider-btn {
+                padding: 3px 25px;
+                font-size: 11px;
+            }
+            .carousel-indicators {
+                margin-bottom: -0.2rem;
+            }
+            .carousel-indicators [data-bs-target] {
+                width: 5px;
+                height: 5px;
+            }
+        }
+        /* IPAD Portrait */
+        
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+            .slider-btn-container {
+                margin-bottom: 2rem;
+            }
+            .carousel-indicators {
+                margin-bottom: 0rem;
+            }
+            .slider-btn {
+                padding: 5px 25px;
+                font-size: 13px;
+            }
+        }
+        
+        @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+            #quick-action .whitebox {
+                padding: 35px 20px;
+            }
+            #quick-action .whitebox h1 {
+                font-size: 35px;
+            }
+            .slider-btn-container {
+                margin-bottom: 0.9rem;
+            }
+            .slider-btn {
+                padding: 3px 25px;
+                font-size: 11px;
+            }
+            .carousel-indicators {
+                margin-bottom: -0.2rem;
+            }
+            .carousel-indicators [data-bs-target] {
+                width: 5px;
+                height: 5px;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
@@ -124,11 +183,18 @@
                         <button type="button" data-bs-target="#slider-yes-home" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
                     <div class="carousel-inner">
-                        <div class="carousel-item active" data-bs-interval="3000" style="background-image:url('images/slider1.jpg');">
+                        <div class="carousel-item active" data-bs-interval="3000">
+                            <img src="images/slider1-1.png" class="d-block w-100" alt="...">
                             <div class="slider-btn-container"><a href="#" class="slider-btn">Get it Now</a></div>
                         </div>
-                        <div class="carousel-item" data-bs-interval="3000" style="background-image:url('images/slider2.jpg');"></div>
-                        <div class="carousel-item" data-bs-interval="3000" style="background-image:url('images/slider3.jpg');"></div>
+                        <div class="carousel-item" data-bs-interval="3000">
+                            <img src="images/YES_PRIHATIN_AnnoucmentsBanner_resize_2000x920_ENG.jpg" class="d-block w-100" alt="...">
+                            <div class="slider-btn-container"><a href="#" class="slider-btn">Sign Up Now</a></div>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="3000">
+                            <img src="images/YES_Keluarga_Banner_resize_2000x920-ENG.jpg" class="d-block w-100" alt="...">
+                            <div class="slider-btn-container"><a href="#" class="slider-btn">Find Out More</a></div>
+                        </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#slider-yes-home" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
@@ -152,7 +218,7 @@
                                 <p>Just purchased a plan from us?<br>We’ve got you covered!</p>
                             </div>
                             <div class="col-12 col-md-8">
-                                <div class="row row-cols-2 row-cols-lg-3">
+                                <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3">
                                     <div class="col">
                                         <a href="#" class="action-links">
                                             <img src="images/trackorder-icon.svg" />
@@ -205,24 +271,7 @@
                             <h1>Catch our popular deals</h1>
                         </div>
                     </div>
-                    <div class="row row-cols-1 row-cols-xl-4 row-cols-lg-2 row-cols-md-2">
-                        <div class="col">
-                            <div class="deal-box card h-100">
-                                <h2>Get a Samsung Galaxy<br>for only RM1</h2>
-                                <div class="content">
-                                    <h3 class="mb-3">Samsung<br>Galaxy A02</h3>
-                                    <img src="images/300px-Samsung-Galaxy-A02 1.png" class="mb-3" />
-                                    <h4 class="mb-3">Merdeka RM1 Package</h4>
-                                    <div class="row mb-4">
-                                        <div class="col-12 text-center">
-                                            <p class="pricing">RM49</p>
-                                            <p>100GB data<br>Unlimited minuites</p>
-                                        </div>
-                                    </div>
-                                    <div class="pink-btn-box"><a href="#" class="pink-btn">Learn More</a></div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="row row-cols-1 row-cols-xl-3 row-cols-lg-2 row-cols-md-2">
                         <div class="col">
                             <div class="deal-box card h-100">
                                 <h2>Claim a free YES Phone<br>worth RM200</h2>
@@ -257,19 +306,25 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="deal-box card mb-3">
-                                <img src="images/payas-visual.jpg" class="img-fluid mb-1" />
-                                <div class="content">
-                                    <h3 class="mb-3">Kasi Up <span>Prepaid</span></h3>
-                                    <div class="pink-btn-box"><a href="#" class="pink-btn">View All</a></div>
+                        <div class="col col-md-12 col-lg-12">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-6 col-md-6">
+                                    <div class="deal-box card mb-3">
+                                        <img src="images/payas-visual.jpg" class="img-fluid mb-1" />
+                                        <div class="content">
+                                            <h3 class="mb-3">Kasi Up <span>Prepaid</span></h3>
+                                            <div class="pink-btn-box"><a href="#" class="pink-btn">View All</a></div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="deal-box card">
-                                <img src="images/paymonthly-visual.jpg" class="img-fluid mb-1" />
-                                <div class="content">
-                                    <h3 class="mb-3">Kasi Up <span>Prepaid</span></h3>
-                                    <div class="pink-btn-box"><a href="#" class="pink-btn">View All</a></div>
+                                <div class="col-xl-12 col-lg-6 col-md-6">
+                                    <div class="deal-box card">
+                                        <img src="images/paymonthly-visual.jpg" class="img-fluid mb-1" />
+                                        <div class="content">
+                                            <h3 class="mb-3">Kasi Up <span>Prepaid</span></h3>
+                                            <div class="pink-btn-box"><a href="#" class="pink-btn">View All</a></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -602,7 +657,7 @@
                 prevArrow: '<a href="#" class="slide-arrow prev-arrow slick-arrow"><span class="iconify slick-prev" data-icon="eva:arrow-ios-back-fill"></span></a>',
                 nextArrow: '<a href="#" class="slide-arrow next-arrow slick-arrow"><span class="iconify slick-next" data-icon="eva:arrow-ios-forward-fill"></span></a>',
                 infinite: true,
-                slidesToShow: 3,
+                slidesToShow: 2,
                 slidesToScroll: 1,
                 autoplay: true,
                 autoplaySpeed: 3000,
@@ -610,17 +665,28 @@
                 responsive: [{
                     breakpoint: 1024,
                     settings: {
-                        slidesToShow: 2,
+                        slidesToShow: 1,
                         slidesToScroll: 1,
                         infinite: true,
                         dots: true,
-                        arrow: false
+                        arrows: false
+                    }
+                }, {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                        arrows: false,
+                        infinite: true,
+                        dots: true,
+                        slidesToScroll: 1,
                     }
                 }, {
                     breakpoint: 600,
                     settings: {
                         slidesToShow: 1,
-                        arrow: false,
+                        arrows: false,
+                        infinite: true,
+                        dots: true,
                         slidesToScroll: 1
                     }
                 }, {
@@ -629,7 +695,9 @@
                         slidesToShow: 1,
                         slidesToScroll: 1,
                         dots: true,
-                        arrow: false
+                        infinite: true,
+                        dots: true,
+                        arrows: false
                     }
                 }]
             });

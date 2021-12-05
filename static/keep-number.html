@@ -1,0 +1,671 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>YES</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/aos.css" />
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" />
+
+    <style>
+        #numbers-top-banner {
+            background-image: url('images/numbers-banner-bg.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding-top: 50px;
+            overflow: hidden;
+        }
+        
+        #numbers-top-banner h1 {
+            font-size: 60px;
+            font-weight: 800;
+            color: #F9F7F4;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+        
+        #numbers-top-banner p {
+            font-size: 28px;
+            font-weight: 600;
+            line-height: 40px;
+            color: #F9F7F4;
+        }
+        
+        #number-section {
+            background-image: url('images/keepnumbers-bodybg-large.png');
+            background-size: cover;
+            background-position: top center;
+            background-repeat: no-repeat;
+        }
+        
+        .switch-activation {
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0px;
+            padding-bottom: 0px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .switch-activation h1 {
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 40px;
+            color: #2B2B2B;
+            text-align: center;
+        }
+        
+        .switch-activation h2 {
+            font-size: 25px;
+            font-weight: 600;
+            line-height: 25px;
+            color: #666F88;
+            padding-bottom: 100px;
+            text-align: center;
+        }
+        
+        .switch-activation h2 span {
+            font-weight: 800;
+        }
+        
+        .switch-activation h3 {
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 30px;
+            color: #00B4F0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+        }
+        
+        .switch-activation h3 img {
+            margin-right: 10px;
+            display: inline;
+        }
+        
+        .switch-activation p {
+            font-size: 21px;
+            color: #2B2B2B;
+            line-height: 28px;
+            padding-bottom: 20px;
+        }
+        
+        .switch-activation .step-box {
+            width: 100%;
+            display: inline-block;
+        }
+        
+        #number-steps h1 {
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 30px;
+            color: #00B4F0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+        }
+        
+        #number-steps h1 img {
+            margin-right: 10px;
+            display: inline;
+        }
+        
+        #number-steps h2 {
+            color: #525252;
+            font-weight: 800;
+            font-size: 29px;
+            margin-bottom: 20px;
+        }
+        
+        #number-steps p {
+            font-size: 21px;
+            color: #2B2B2B;
+            line-height: 28px;
+            padding-bottom: 20px;
+        }
+        
+        #number-steps p a {
+            color: #ED028C;
+            text-decoration: underline;
+            font-weight: 700;
+        }
+        
+        #number-steps .scroll-link {
+            color: #525252;
+            font-size: 20px;
+            font-weight: 700;
+            display: block;
+        }
+        
+        #number-steps .scroll-link img {
+            margin-right: 10px;
+            display: inline;
+        }
+        /* IPAD Portrait */
+        
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+            #numbers-top-banner h1 {
+                font-size: 44px;
+            }
+            #numbers-top-banner p {
+                font-size: 24px;
+                line-height: 35px;
+            }
+        }
+        
+        @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+            #numbers-top-banner h1 {
+                font-size: 23px;
+                text-align: center;
+                margin-bottom: 5px;
+            }
+            #numbers-top-banner p {
+                font-size: 15px;
+                line-height: 20px;
+                margin-bottom: 15px;
+                text-align: center;
+                padding: 0px 14px;
+            }
+            #numbers-top-banner {
+                padding-top: 5px;
+            }
+            #numbers-top-banner .banner-visual {
+                text-align: center;
+            }
+            #numbers-top-banner .banner-visual img {
+                margin: 0 auto;
+                width: 60% !important;
+                display: inline-block !important;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="layer-page">
+        <header class="page-header">
+            <div class="top-pink-bar">
+                <div class="row g-0 text-center">
+                    <p>Are you an Exisiting YES user? Earn up to RM50/referral through our Refer & Earn program!</p>
+                </div>
+                <a href="#" class="close-btn"><span class="iconify" data-icon="eva:close-fill"></span></a>
+            </div>
+            <div class="top-tabs-container">
+                <div class="container g-0">
+                    <div class="row g-0">
+                        <div class="col-10">
+                            <ul class="tabnav">
+                                <li><a href="#" class="active">Personal</a></li>
+                                <li><a href="#">Business</a></li>
+                                <li><a href="#">Education</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-2">
+                            <div class="dropdown language-drop float-end">
+                                <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="iconify" data-icon="bi:globe"></span> English
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">English</a></li>
+                                    <li><a class="dropdown-item" href="#">Bhasa Malay</a></li>
+                                    <li><a class="dropdown-item" href="#">中文</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-container">
+                <div class="container g-lg-0">
+                    <div class="row g-0">
+                        <nav class="navbar navbar-expand-lg">
+                            <div class="container">
+                                <a class="navbar-brand" href="#"><img src="images/logo.svg" class="logo-top" /></a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <li class="nav-item dropdown mega-dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                                            <ul class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Mobile Plans</li>
+                                                        <li><a href="#">Prepaid Plans</a></li>
+                                                        <li><a href="#">Postpaid Plans</a></li>
+                                                        <li><a href="#">YES Prihatin</a></li>
+                                                        <li><a href="#">Merdeka RM1 Package</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Broadband</li>
+                                                        <li><a href="#">Home broadband</a></li>
+                                                        <li><a href="#">On-the-go broadband</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Existing Customers</li>
+                                                        <li><a href="#">How-To: Refer & Earn</a></li>
+                                                        <li><a href="#">How-To: Get Databack</a></li>
+                                                        <li><a href="#">Data & Hotspot Add-Ons</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="#">Keep Number</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Partners</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Help</a>
+                                        </li>
+                                    </ul>
+                                    <div class="d-flex align-items-center">
+                                        <a href="#" class="pink-btn me-3">Get Started</a>
+                                        <a href="#" class="login-btn"><span class="iconify" data-icon="carbon:user-avatar-filled-alt"></span> Log In</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <!-- Breadcrumb Start -->
+            <div class="container breadcrumb-section">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active"><a href="#">Keep Your Number</a></li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- Breadcrumb End -->
+
+            <!-- Banner Start -->
+            <section id="numbers-top-banner">
+                <div class="container">
+                    <div class="row justify-content-lg-center">
+                        <div class="col-12 col-md-6 col-lg-3 order-md-1 order-2 banner-visual justify-content-center" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="100">
+                            <img src="images/numbers-banner-visual.png" class="d-block w-100" alt="">
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-7 ps-lg-5 d-flex align-items-center order-md-2 order-1" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                            <div>
+                                <h1>Switch to YES while Keeping Your Number</h1>
+                                <p>Switch to YES during your SIM card activation process or anytime after that</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Banner End -->
+
+            <!-- Number Steps Start -->
+            <section id="number-steps">
+                <div class="container mt-5 mb-5">
+                    <div class="row justify-content-lg-center gx-5 mt-5 text-md-start text-center">
+                        <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
+                            <h1 class="justify-content-md-start justify-content-center"><img src="images/getaplan-icon.png" />Step 1</h1>
+                            <h2>Get a Plan</h2>
+                            <p class="mb-4 mb-auto">Get started with <a href="https://www.yes.my/">any of our plans</a> available, we have something for everyone. You’ll first recieve your SIM card with a temporary YES number.</p>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+                            <h1 class="justify-content-md-start justify-content-center"><img src="images/number-step2.png" />Step 2</h1>
+                            <h2>Activate</h2>
+                            <p class="mb-4 mb-auto">Once you receive your SIM, download our <a href="https://play.google.com/store/apps/details?id=my.yes.yes4g&hl=en&gl=US" target="_blank">MyYes app</a> to activate and verify yourself before switching to your original number.<br><br>
+                                <a href="/faq/howtoactivatesim">Learn how to activate</a>
+                            </p>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
+                            <h1 class="justify-content-md-start justify-content-center"><img src="images/switch-icon.png" />Step 3</h1>
+                            <h2>Switch</h2>
+                            <p class="mb-4 mb-auto">You can switch to your own number during the activation process or anytime after that.</p>
+                            <a href="#number-section" class="scroll-link mt-4"><img src="images/scrolldown-icon.png" />Scroll down to know more</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Number Steps End -->
+
+            <!-- Number Section Start -->
+            <section id="number-section">
+                <!-- Switch Activation Start -->
+                <div class="switch-activation mb-5 mt-5">
+                    <div class="container">
+                        <div class="row" data-aos="fade-up" data-aos-duration="500">
+                            <h1 class="mb-5">How To: Switch During Activation Process</h1>
+                        </div>
+                        <div class="row justify-content-lg-center gx-5 mt-5 text-md-start text-center">
+                            <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
+                                <h3 class="justify-content-md-start justify-content-center"><img src="images/switch-step1-icon.png" />Step 1</h3>
+                                <p class="mb-4 mb-auto">Download the MyYes app, click on ‘New User’ to get started.</p>
+                                <img src="images/switch-step1-visual.png" class="img-fluid" />
+                            </div>
+                            <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+                                <h3 class="justify-content-md-start justify-content-center"><img src="images/switch-step2-icon.png" />Step 2</h3>
+                                <p class="mb-4 mb-auto">Head over to ‘Activate SIM’ to insert your information and activate your SIM card.</p>
+                                <img src="images/switch-step2-visual.png" class="img-fluid" />
+                            </div>
+                            <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
+                                <h3 class="justify-content-md-start justify-content-center"><img src="images/swtich-step3-icon.png" />Step 3</h3>
+                                <p class="mb-4 mb-auto">You will receive a confirmation SMS from your existing service provider. Reply to confirm your switch.</p>
+                                <img src="images/switch-step3-visual.png" class="img-fluid" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Switch Activation End -->
+
+                <!-- Switch Activation Start -->
+                <div class="switch-activation mt-5 mb-5">
+                    <div class="container">
+                        <div class="row" data-aos="fade-up" data-aos-duration="500">
+                            <h1 class="mb-5">How To: Switch Anytime After Activation</h1>
+                        </div>
+                        <div class="row justify-content-lg-center gx-5 mt-5 text-md-start text-center">
+                            <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
+                                <h3 class="justify-content-md-start justify-content-center"><img src="images/switch-step1-icon.png" />Step 1</h3>
+                                <p class="mb-4 mb-auto">Download the MyYes app to Keep Your Number even long after your activation.</p>
+                                <img src="images/switch-after-visual1.png" class="img-fluid" />
+                            </div>
+                            <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+                                <h3 class="justify-content-md-start justify-content-center"><img src="images/switch-step2-icon.png" />Step 2</h3>
+                                <p class="mb-4 mb-auto">Head over to ‘Quick Access’, and select “Switch to YES” then “Keep Your Number”.</p>
+                                <img src="images/switch-after-visual2.png" class="img-fluid" />
+                            </div>
+                            <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
+                                <h3 class="justify-content-md-start justify-content-center"><img src="images/swtich-step3-icon.png" />Step 3</h3>
+                                <p class="mb-4 mb-auto">You will receive a confirmation SMS from your existing service provider. Reply to confirm your switch.</p>
+                                <img src="images/switch-after-visual3.png" class="img-fluid" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Switch Activation End -->
+
+                <!-- Popular Deals Start -->
+                <section id="popular-deals" class="mt-5">
+                    <div class="container">
+                        <div class="row mb-5">
+                            <div class="col-12">
+                                <h1>Not yet a YES user? Get Started today!</h1>
+                            </div>
+                        </div>
+                        <div class="row row-cols-1 row-cols-xl-3 row-cols-lg-2 row-cols-md-2">
+                            <div class="col" data-aos="fade-up" data-aos-duration="500">
+                                <div class="deal-box card h-100">
+                                    <h2>Data Unlimited<br>every month</h2>
+                                    <div class="content">
+                                        <h3 class="mb-3">RM49<br>( 20GB data ) </h3>
+                                        <img src="https://cdn.yes.my/site/wp-content/uploads/2021/09/sim_card_PNG101522-1.png" class="mb-3" />
+                                        <h4 class="mb-3">Kasi Up Unlimited</h4>
+                                        <div class="row mb-4">
+                                            <div class="col-12 text-center">
+                                                <p class="pricing">RM30</p>
+                                                <p>Unlimited Data<br>7Mbps & 9GB hotspot data</p>
+                                            </div>
+                                        </div>
+                                        <div class="pink-btn-box"><a href="/shop/plans/4g-lte-prepaid/" class="pink-btn">Learn More</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
+                                <div class="deal-box card h-100">
+                                    <h2>6 months free.<br>RM49 from month 7</h2>
+                                    <div class="content">
+                                        <h3 class="mb-3">24 month SIM<br>100GB data</h3>
+                                        <img src="https://cdn.yes.my/site/wp-content/uploads/2021/09/sim_card_PNG101522-1.png" class="mb-3" />
+                                        <h4 class="mb-3">Kasi Up Postpaid 49</h4>
+                                        <div class="row mb-4">
+                                            <div class="col-12 text-center">
+                                                <p class="pricing">RM49</p>
+                                                <p>100GB data<br>Unlimited minutes</p>
+                                            </div>
+                                        </div>
+                                        <div class="pink-btn-box"><a href="/shop/plans/4g-lte-postpaid/" class="pink-btn">Learn More</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-md-12 col-lg-12" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+                                <div class="row">
+                                    <div class="col-xl-12 col-lg-6 col-md-6">
+                                        <div class="deal-box card mb-3">
+                                            <img src="images/payas-visual.jpg" class="img-fluid mb-1" />
+                                            <div class="content">
+                                                <h3 class="mb-3">Kasi Up <span>Prepaid</span></h3>
+                                                <div class="pink-btn-box"><a href="/shop/plans/4g-lte-prepaid/" class="pink-btn">View All</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-lg-6 col-md-6">
+                                        <div class="deal-box card">
+                                            <img src="images/paymonthly-visual.jpg" class="img-fluid mb-1" />
+                                            <div class="content">
+                                                <h3 class="mb-3">Kasi Up <span>Postpaid</span></h3>
+                                                <div class="pink-btn-box"><a href="/shop/plans/4g-lte-postpaid/" class="pink-btn">View All</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p class="small mt-3">*Monthly payment, excluding tax</p>
+                        </div>
+                    </div>
+                </section>
+                <!-- Popular Deals End -->
+            </section>
+            <!-- Number Section End -->
+
+
+            <!-- FAQs Start -->
+            <section id="faq-section">
+                <div class="container">
+                    <div class="row">
+                        <h1 class="mb-5">Frequently Asked Questions about<br>Keeping Your Number</h1>
+                    </div>
+                    <div class="row">
+                        <div class="accordion accordion-flush mb-3" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">YES Mobile Number Portability</button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">YES ID, YES Number & Password</button>
+                                </h2>
+                                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">Billing & Payment</button>
+                                </h2>
+                                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but
+                                        just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="viewall-btn">View All FAQs <span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                    </div>
+                </div>
+            </section>
+            <!-- FAQs End -->
+
+            <!-- Newsletter Start -->
+            <section id="newsletter">
+                <div class="container">
+                    <form>
+                        <div class="row">
+                            <div class="col-12 col-lg-12 col-xl-5 d-flex flex-wrap align-items-center pe-md-5">
+                                <h1 class="mb-3">Just say YES!</h1>
+                                <p>Join our mailing list to get our best & latest deals directly to your email inbox. You’ll never miss out again</p>
+                            </div>
+                            <div class="col-12 col-lg-12 col-xl-5 d-flex flex-wrap align-items-center mt-md-0 mb-md-0 mt-3 mb-5">
+                                <input type="email" class="form-control mb-md-0 mb-3" id="newsletter-input" placeholder="Email Address">
+                                <div class="form-check newsletter-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        I’ve read and accept the Terms & Conditions
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-12 col-xl-2 d-flex align-items-center ps-xl-5">
+                                <button class="white-btn" type="submit">Subscribe</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            <!-- Newsletter End -->
+        </main>
+        <footer class="page-footer footer">
+            <div class="container g-lg-0">
+                <div class="row position-relative">
+                    <div class="col-12 col-md-3">
+                        <img src="images/logo.svg" class="footer-logo mb-4" />
+                        <div class="row mb-2">
+                            <ul class="icon-list">
+                                <li>
+                                    <a href="#"><img src="images/facebook.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/instagram.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/youtube.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/twitter.svg" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <p class="mb-2">Get The MyYes App</p>
+                            <ul class="icon-list">
+                                <li>
+                                    <a href="#"><img src="images/logos_google-play-icon.svg" class="store-icon" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/logos_apple-app-store.svg" class="store-icon" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="row g-0 row-cols-2 row-cols-sm-1 row-cols-md-5">
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Plans & Pricing</li>
+                                    <li><a href="#">Prepaid plans</a></li>
+                                    <li><a href="#">Postpaid plans</a></li>
+                                    <li><a href="#">YES Prihatin plans</a></li>
+                                    <li><a href="#">Data Add-Ons</a></li>
+                                    <li><a href="#">Merdeka RM1 Package</a></li>
+                                    <li><a href="#">On-the-go broadband</a></li>
+                                    <li><a href="#">Home broadband</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Explore</li>
+                                    <li><a href="#">Keep number</a></li>
+                                    <li><a href="#">Refer & earn</a></li>
+                                    <li><a href="#">Databack</a></li>
+                                    <li><a href="#">Partnerships</a></li>
+                                    <li><a href="#">Roaming</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Tools</li>
+                                    <li><a href="#">Device manuals</a></li>
+                                    <li><a href="#">Coverage</a></li>
+                                    <li><a href="#">Speed test</a></li>
+                                    <li><a href="#">Kiosk locations</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Company</li>
+                                    <li><a href="#">About us</a></li>
+                                    <li><a href="#">Sustainability reports</a></li>
+                                    <li><a href="#">Newsroom</a></li>
+                                    <li><a href="#">Terms & conditions</a></li>
+                                    <li><a href="#">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Help</li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Chatbot</a></li>
+                                    <li><a href="#">Email us</a></li>
+                                    <li><a href="#">Facebook messenger</a></li>
+                                    <li><a href="#">Visit our store</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-1">
+                        <img src="images/ctm.png" class="img-fluid ctm-logo" />
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-md-start justify-content-sm-center">
+                            <p>POWERED BY YTL, YTL Communications Sdn. Bhd. (793634-V)</p>
+                        </div>
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-md-end justify-content-sm-center">
+                            <img src="images/footer-icons.png" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="js/iconify.min.js"></script>
+    <script type="text/javascript" src="js/aos.js"></script>
+
+    <script type="text/javascript">
+        AOS.init();
+    </script>
+
+
+
+</body>
+
+</html>
