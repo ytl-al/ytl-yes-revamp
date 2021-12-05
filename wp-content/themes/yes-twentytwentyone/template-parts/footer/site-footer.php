@@ -10,7 +10,7 @@
 
 ?>
 
-<?php get_template_part('template-parts/footer/footer-faq'); ?>
+<?php /* get_template_part('template-parts/footer/footer-faq'); */ ?>
 <?php get_template_part('template-parts/footer/footer-newsletter'); ?>
 
 <!-- Footer STARTS -->

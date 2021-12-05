@@ -311,12 +311,12 @@ $sql_t="SELECT count(*) FROM {$leads_table} l where $search";
   }
   }
 
-  
+
   if(isset($_GET['page_id']))
   {
-  $page=vxcf_form::post('page_id');
+  $page=(int)vxcf_form::post('page_id');
   $start = $page-1;
-  $start = $start*$per_page;
+  $start = $start*intval($per_page);
   }
   $start=max($start,0);
   $sql_fields='l.*';

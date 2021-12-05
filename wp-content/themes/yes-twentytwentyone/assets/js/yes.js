@@ -1,11 +1,11 @@
 /* 
     JavaScript Name : Yes TwentyTwentyOne 
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : October   29, 2021, 03:52:31 PM
+    Last edited on  : December  05, 2021, 03:52:31 PM
     Author          : [YTL Digital Design] - AL
 */
 const yesLocalStorageName = 'yesSession';
-const yesLocalStorage   = JSON.parse(localStorage.getItem(yesLocalStorageName));
+const yesLocalStorage = JSON.parse(localStorage.getItem(yesLocalStorageName));
 
 const expiryTopPageBanner = 10; // in minute
 const expiryPageModal = 60; // in minute
@@ -19,6 +19,10 @@ $(document).ready(function() {
     eventListenPageModalClose();
 
     initBootstrapTooltip();
+
+    $('.link-jumpSection').on('click', function() {
+        jumpSection(this);
+    });
 
     AOS.init();
 });
@@ -120,7 +124,26 @@ function checkPageModalExpiry() {
  */
 function initBootstrapTooltip() {
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     })
+}
+
+
+/**
+ * Function jumpSection()
+ * Function to scroll page to section
+ * 
+ * @since    1.0.1
+ */
+function jumpSection(el) {
+    var sectionID       = $(el).attr('data-targetsection');
+    var targetSection   = $('#' + sectionID);
+    if (targetSection.length > 0) {
+        var targetOffset = $(targetSection).offset().top;
+        $('html, body').animate({
+            scrollTop: targetOffset
+        }, 100);
+    }
+    return false;
 }

@@ -808,7 +808,7 @@ section {
     align-items: center;
     justify-content: center;
     padding: 50px 0px;
-    margin-top: 60px;
+    /* margin-top: 60px; */
     background: linear-gradient(270deg, rgba(0, 180, 240, 0.3) -27.92%, rgba(0, 180, 240, 0.3) -27.51%, rgba(249, 247, 244, 0.3) 108.85%);
 }
 
