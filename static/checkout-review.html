@@ -1,0 +1,686 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>YES</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/slick.css" />
+    <link rel="stylesheet" type="text/css" href="css/slick-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" />
+    <style>
+        /* Cart Modal Styling START */
+        
+        body {
+            background-color: #FFF;
+        }
+        
+        .white-top {
+            width: 100%;
+            padding: 20px 0px;
+        }
+        
+        .white-top h1 {
+            font-size: 32px;
+            color: #2B2B2B;
+            font-weight: 700;
+        }
+        
+        .white-top .back-btn {
+            display: inline-block;
+            font-size: 20px;
+            color: #2B2B2B;
+        }
+        
+        #grey-innerbanner {
+            background-color: #F9F7F4;
+            padding: 25px 0px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.07);
+        }
+        
+        #grey-innerbanner h1 {
+            font-size: 42px;
+            color: #2B2B2B;
+            font-weight: 800;
+        }
+        
+        #cart-body {
+            padding: 30px 0px;
+            padding-bottom: 0px;
+        }
+        
+        #cart-body h1 {
+            font-size: 29px;
+            color: #2B2B2B;
+            font-weight: 800;
+        }
+        
+        #cart-body p.sub {
+            font-size: 17px;
+            color: #525252;
+        }
+        
+        #cart-body p {
+            font-size: 16px;
+            color: #525252;
+        }
+        
+        #cart-body p strong {
+            font-weight: 700;
+        }
+        
+        #cart-body .container {
+            border: 0.5px solid #ebebeb;
+            border-radius: 10px;
+        }
+        
+        #cart-body .white-btn2 {
+            padding: 5px 20px;
+            font-size: 15px;
+        }
+        
+        #cart-body .pink-btn {
+            padding: 9px 30px;
+            font-size: 15px;
+        }
+        
+        #cart-body .grey-link {
+            font-weight: 700;
+            color: #525252;
+            text-decoration: none;
+        }
+        
+        #cart-body .packagebox {
+            background: #FFFFFF;
+            box-sizing: border-box;
+            border: 2px solid #00B4F0;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+        
+        #cart-body .packagebox .visualbg {
+            background: linear-gradient(16.65deg, #00B4F0 -123.85%, #CF5396 74.76%);
+            text-align: center;
+            padding: 15px 12px;
+        }
+        
+        #cart-body .packagebox h3 {
+            font-weight: 800;
+            font-size: 24px;
+            line-height: 28px;
+            color: #2B2B2B;
+        }
+        
+        #cart-body .packagebox p {
+            font-size: 20px;
+            line-height: 24px;
+            color: #525252;
+        }
+        
+        #cart-body .packagebox h3.price {
+            font-weight: 800;
+            font-size: 42px;
+            color: #2B2B2B;
+        }
+        
+        #cart-body .packagebox .package-info {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            border-top: solid 1px #00B4F0;
+            padding-top: 15px;
+            font-size: 16px;
+            color: #2B2B2B;
+        }
+        
+        .packagebox .accordion-button {
+            width: auto;
+            padding: 0;
+            float: right;
+            padding-right: 20px;
+        }
+        
+        .packagebox .accordion-button h3 {
+            margin-right: 10px;
+        }
+        
+        .packagebox .accordion-button:not(.collapsed)::after {
+            background: url(images/cart-drop-icon-up.png) no-repeat center center / contain !important;
+            transform: rotate(0deg);
+        }
+        
+        .packagebox .accordion-button::after {
+            background: url(images/cart-drop-icon.png) no-repeat center center / contain !important;
+        }
+        
+        .packagebox .accordion-button:focus,
+        .packagebox .accordion-button:active {
+            outline: none;
+            box-shadow: none;
+            border: none;
+        }
+        
+        #cart-accordion .accordion-body {
+            padding: 1.5rem;
+            border: 1px solid #C5C5C5;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        #cart-accordion .accordion-body h1 {
+            margin: 0;
+            font-weight: 600;
+            font-size: 24px;
+            color: #2B2B2B;
+            width: 100%;
+            border-bottom: 1px solid #C5C5C5;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        
+        #cart-accordion .accordion-body h2 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2B2B2B;
+            margin-bottom: 15px;
+        }
+        
+        #cart-accordion .accordion-body p {
+            font-size: 16px;
+            color: #2B2B2B;
+        }
+        
+        #cart-accordion .accordion-body p.bold {
+            font-weight: 600;
+        }
+        
+        #cart-accordion .accordion-body p a {
+            color: #ED028C;
+            text-decoration: underline;
+        }
+        
+        #cart-accordion .accordion-body p.small {
+            font-size: 12px;
+            color: #2B2B2B;
+        }
+        
+        #cart-accordion .accordion-body p.large {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .packagebox .accordion-button:not(.collapsed) {
+            background-color: transparent;
+            box-shadow: none;
+        }
+        
+        .summary-box {
+            box-shadow: 0px 5px 15px rgba(112, 144, 176, 0.2);
+            border-radius: 8px;
+            width: 100%;
+            background-color: #FFF;
+            padding: 20px;
+        }
+        
+        .summary-box h1 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #2B2B2B;
+            margin-bottom: 20px;
+        }
+        
+        .summary-box h2 {
+            width: 100%;
+            font-size: 18px;
+            color: #525252;
+            font-weight: 700;
+            border-bottom: solid 1px #C5C5C5;
+            padding-bottom: 5px;
+        }
+        
+        .summary-box h3 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #00B4F0;
+            text-transform: uppercase;
+        }
+        
+        .summary-box .monthly {
+            width: 100%;
+            border-bottom: solid 1px #C5C5C5;
+            border-top: solid 1px #C5C5C5;
+        }
+        
+        .summary-box .monthly p {
+            font-size: 14px !important;
+            color: #525252 !important;
+        }
+        
+        .summary-box p.large {
+            font-size: 16px;
+            color: #525252;
+        }
+        
+        .summary-box p.large strong {
+            font-weight: 800;
+        }
+        
+        ul.wizard,
+        ul.wizard li {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            width: 100%;
+        }
+        
+        ul.wizard {
+            counter-reset: num;
+        }
+        
+        ul.wizard li {
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        
+        ul.wizard li::before {
+            content: '';
+            width: 1.2em;
+            height: 1.2em;
+            text-align: center;
+            line-height: 1.2em;
+            border-radius: 50%;
+            background-color: #F9F7F4;
+            border: solid 1px #00B4F0;
+            cursor: pointer;
+            z-index: 1;
+        }
+        
+        ul.wizard li~li::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            right: 50%;
+            height: 1px;
+            background-color: #00B4F0;
+            top: calc(0.75em - 3px);
+            z-index: 0;
+        }
+        
+        ul.wizard li.completed~li::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            right: 50%;
+            height: 1px;
+            background-color: #00B4F0;
+            top: calc(0.75em - 3px);
+            z-index: 0;
+        }
+        
+        ul.wizard li.active::before {
+            background: #246E9E;
+            color: white;
+        }
+        
+        ul.wizard li.active::after {
+            background: #246E9E;
+            color: white;
+        }
+        
+        ul.wizard span {
+            color: #333;
+            font-size: 16px;
+            word-break: break-all;
+            margin-top: 7px;
+        }
+        
+        ul.wizard li.completed::before {
+            background: #00B4F0;
+            color: #333;
+        }
+        
+        ul.wizard li.completed span {
+            color: #2B2B2B;
+            font-size: 16px;
+            margin-top: 7px;
+        }
+        
+        ul.wizard li.completed+li::after {
+            /*  line after circle  */
+            background: #00B4F0;
+        }
+        
+        ul.wizard li.completed::after {
+            /*  line before circle  */
+            background: #00B4F0;
+        }
+        
+        .footer {
+            background-color: #FFF;
+            padding-top: 0px;
+        }
+        
+        .footer .copyright {
+            margin-top: 0px;
+            padding: 20px 0px;
+        }
+        
+        .footer .copyright p {
+            color: #525252;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .footer .copyright p a {
+            color: #525252;
+            text-decoration: underline;
+        }
+        
+        @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+            ul.wizard span {
+                font-size: 11px;
+            }
+            ul.wizard li.completed span {
+                font-size: 11px;
+            }
+            #cart-body .packagebox .visualbg {
+                padding: 0px 12px;
+            }
+            #cart-body .packagebox h3 {
+                font-size: 20px;
+            }
+            #cart-body .packagebox p {
+                font-size: 15px;
+            }
+            #cart-body .packagebox h3.price {
+                font-size: 31px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="layer-page">
+        <header class="white-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-6">
+                        <a href="#" class="back-btn"><img src="images/back-icon.png" alt=""> Back to Cart</a>
+                    </div>
+                    <div class="col-lg-4 col-6 text-lg-center text-end">
+                        <h1>Check Out</h1>
+                    </div>
+                    <div class="col-lg-4">
+
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+
+            <!-- Banner Start -->
+            <section id="grey-innerbanner">
+                <div class="container">
+                    <ul class="wizard">
+                        <li ui-sref="firstStep">
+                            <span>1. Verification</span>
+                        </li>
+                        <li ui-sref="secondStep">
+                            <span>2. Delivery Details</span>
+                        </li>
+                        <li ui-sref="thirdStep">
+                            <span>3. Payment Info</span>
+                        </li>
+                        <li ui-sref="fourthStep" class="completed">
+                            <span>4. Review and Pay</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <!-- Banner End -->
+
+            <section id="cart-body">
+                <div class="container p-lg-5 p-3">
+                    <div class="row gx-5">
+                        <div class="col-lg-8 col-12">
+                            <h1 class="mb-4">Review & Pay</h1>
+                            <div class="accordion mb-4" id="cart-accordion">
+                                <div class="packagebox mb-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-3 col-12 visualbg">
+                                            <img src="images/kasiup-postpaid-visual.png" class="img-fluid" alt="">
+                                        </div>
+                                        <div class="col-lg-6 col-12 ps-4 pe-4">
+                                            <h3 class="mt-3 mt-lg-0">Kasi Up Postpaid 45</h3>
+                                            <p class="mb-3">RM45 for 100GB</p>
+                                            <div class="package-info">
+                                                <div class="row">
+                                                    <div class="col-6 mb-2">
+                                                        <img src="images/tickoutline.png" class="me-1" alt="">6 months free
+                                                    </div>
+                                                    <div class="col-6 mb-2">
+                                                        <img src="images/tickoutline.png" class="me-1" alt="">Unlimited Borak
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <img src="images/tickoutline.png" class="me-1" alt="">Unlimited Duit
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <img src="images/tickoutline.png" class="me-1" alt="">4G Paling Power
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-12 text-center mt-3 mb-3 mt-lg-0 mb-lg-0">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><h3 class="price">RM49</h3></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#cart-accordion">
+                                    <div class="accordion-body">
+                                        <h1>One-time charges (due now)</h1>
+                                        <h2>Rate plan</h2>
+                                        <div class="row mb-4">
+                                            <div class="col-6">
+                                                <p>Kasi Up Postpaid 49</p>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <p>RM49.00</p>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-6 pb-1 border-bottom">
+                                                <p>Add-Ons</p>
+                                            </div>
+                                            <div class="col-6 pb-1 border-bottom text-end">
+                                                <p>RM2.00</p>
+                                            </div>
+                                            <div class="col-6 pb-1 pt-1 border-bottom">
+                                                <p>Taxes</p>
+                                            </div>
+                                            <div class="col-6 pb-1 pt-1 border-bottom text-end">
+                                                <p>RM2.00</p>
+                                            </div>
+                                            <div class="col-6 pb-1 pt-1 border-bottom">
+                                                <p>Shipping fee</p>
+                                            </div>
+                                            <div class="col-6 pb-1 pt-1 border-bottom text-end">
+                                                <p>RM5.00</p>
+                                            </div>
+                                        </div>
+                                        <p class="bold mb-2">Device <a href="#">Choose a Device</a></p>
+                                        <div class="row mb-3">
+                                            <div class="col-6">
+                                                <p>Device payment</p>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <p>RM0.00</p>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-6">
+                                                <p class="fw-bold">Total charges due now</p>
+                                                <p class="small">This summary is not an invoice</p>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <p class="large">RM56.00</p>
+                                            </div>
+                                        </div>
+                                        <h1>Monthly charges</h1>
+                                        <h2>Rate plan</h2>
+                                        <div class="row mb-3">
+                                            <div class="col-6">
+                                                <p>Kasi Up Postpaid 49</p>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <p>RM49.00</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <p class="bold">Total monthly charges</p>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <p class="bold">RM49.00</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-9">
+                                    <p><strong>To: Jane Doe</strong><br> jane.doe@gmail.com<br> +60(16) 373 7799</p>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <a href="#" class="grey-link">(Edit)</a>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-9">
+                                    <p><strong>Shipping Address</strong><br> 205, Menara YTL, Jalan Bukit<br> Bintang, Kuala Lumpur, 58000,<br> Malaysia</p>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <a href="#" class="grey-link">(Edit)</a>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-9">
+                                    <p><strong>Billing Address</strong><br> 111, Menara YTL, Jalan Bukit<br> Bintang, Kuala Lumpur, 58000,<br> Malaysia</p>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <a href="#" class="grey-link">(Edit)</a>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-9">
+                                    <p><strong>Cardholder: Jane Doe</strong><br> Card Type: Visa that ends in ****4567</p>
+                                </div>
+                                <div class="col-3 text-end">
+                                    <a href="#" class="grey-link">(Edit)</a>
+                                </div>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-lg-5 col-12">
+                                    <button class="pink-btn d-block w-100" type="submit">Pay Now</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-12">
+                            <div class="summary-box">
+                                <h1>Order summary</h1>
+                                <h2>Due today after taxes and shipping</h2>
+                                <div class="row">
+                                    <div class="col-6 pt-2 pb-2">
+                                        <h3>TOTAL</h3>
+                                    </div>
+                                    <div class="col-6 pt-2 pb-2 text-end">
+                                        <h3>RM56.00</h3>
+                                    </div>
+                                </div>
+                                <div class="monthly mb-4">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p>Due Monthly</p>
+                                        </div>
+                                        <div class="col-6 text-end">
+                                            <p>RM49.00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p class="large">Kasi Up Postpaid 49</p>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <p class="large"><strong>RM49.00</strong></p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="large">Add-Ons</p>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <p class="large"><strong>RM5.00</strong></p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="large">Taxes (SST)</p>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <p class="large"><strong>RM2.00</strong></p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="large">Shipping</p>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <p class="large"><strong>RM5.00</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        <footer class="page-footer footer">
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-2 d-flex align-items-center justify-content-md-start justify-content-sm-center">
+                            <img src="images/Logo-blue.png" alt="">
+                        </div>
+                        <div class="col-12 col-md-5 d-flex align-items-center justify-content-md-start justify-content-sm-center">
+                            <p>Need help? See <a href="#">Help Pages</a> or <a href="#">Contact Us</a></p>
+                        </div>
+                        <div class="col-12 col-md-5 d-flex align-items-center justify-content-md-end justify-content-sm-center">
+                            <img src="images/footer-icons2.png" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="js/iconify.min.js"></script>
+    <script type="text/javascript" src="js/slick.js"></script>
+
+    <script type="text/javascript">
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+</body>
+
+</html>

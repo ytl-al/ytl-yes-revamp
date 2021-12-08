@@ -1,0 +1,1090 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>YES</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/slick.css" />
+    <link rel="stylesheet" type="text/css" href="css/slick-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="css/aos.css" />
+
+    <style>
+        #already-registered {
+            align-items: center;
+            justify-content: center;
+            background-color: #CA3D83;
+            padding: 40px 0px;
+        }
+        
+        #already-registered h1 {
+            color: #FFF;
+            font-size: 42px;
+            font-weight: 800;
+        }
+        
+        #already-registered p {
+            color: #FFF;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        #easy-steps {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 0px;
+            padding-bottom: 0px;
+        }
+        
+        #easy-steps h1 {
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 40px;
+            color: #2B2B2B;
+            text-align: center;
+        }
+        
+        #easy-steps h2 {
+            font-size: 25px;
+            font-weight: 600;
+            line-height: 25px;
+            color: #666F88;
+            text-align: center;
+            padding-bottom: 40px;
+        }
+        
+        #easy-steps h2 span {
+            font-weight: 800;
+        }
+        
+        #easy-steps h3 {
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 30px;
+            color: #00B4F0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+        }
+        
+        #easy-steps h3 img {
+            margin-right: 10px;
+            display: inline;
+        }
+        
+        #easy-steps p {
+            font-size: 19px;
+            color: #2B2B2B;
+            line-height: 32px;
+        }
+        
+        #easy-steps .step-box {
+            width: 100%;
+            display: inline-block;
+        }
+        
+        #easy-steps .viewall-btn {
+            display: inline-block;
+            font-size: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #ED028C;
+            text-align: center;
+            margin-bottom: 90px;
+        }
+        
+        #easy-steps .viewall-btn svg {
+            margin-left: 5px;
+            font-size: 20px;
+        }
+        
+        #easy-steps .viewall-btn:hover {
+            text-decoration: underline;
+        }
+        /* Prihatin Plans styling */
+        
+        #prihatin-plans {
+            align-items: center;
+            justify-content: center;
+            padding: 70px 0px;
+            background-image: url("images/prihatin-plans-bg.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top;
+        }
+        
+        #prihatin-plans h1 {
+            font-size: 56px;
+            font-weight: 600;
+            line-height: 59px;
+            color: #FFF;
+            padding-top: 60px;
+        }
+        
+        #prihatin-plans h1 span {
+            font-weight: 800;
+        }
+        
+        #prihatin-plans .plan-table {
+            border-spacing: 8px 0px;
+            border-collapse: initial;
+        }
+        
+        #prihatin-plans .plan-table th {
+            padding: 9px 30px;
+            vertical-align: middle;
+            background-color: #F9F7F4;
+            border: solid 4px #1B26BC;
+            border-radius: 7px;
+            position: relative;
+            text-align: center;
+        }
+        
+        #prihatin-plans .plan-table th:first-child {
+            width: 20%;
+        }
+        
+        #prihatin-plans .plan-table th .pink-btn {
+            padding: 14px 60px;
+        }
+        
+        #prihatin-plans .plan-table th.visual-prepaid {
+            background-color: #F0C024;
+            border: solid 4px #F0C024;
+            vertical-align: middle;
+            position: relative;
+        }
+        
+        #prihatin-plans .plan-table th.visual-postpaid {
+            background-color: #CF5396;
+            border: solid 4px #CF5396;
+            vertical-align: middle;
+            position: relative;
+        }
+        
+        #prihatin-plans .plan-table th h1 {
+            color: #2B2B2B;
+            font-size: 20px;
+            line-height: 24px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 15px;
+            padding-top: 0px;
+        }
+        
+        #prihatin-plans .plan-table th h2 {
+            color: #00B4F0;
+            font-size: 24px;
+            line-height: 28px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        #prihatin-plans .plan-table tr td {
+            padding: 20px;
+            text-align: center;
+            background-color: #FFF;
+            border-bottom: solid 1.5px #00B4F0;
+            color: #525252;
+            font-size: 17px;
+            font-weight: 600;
+            vertical-align: middle;
+        }
+        
+        #prihatin-plans .plan-table tr td span {
+            color: #525252;
+            font-size: 16px;
+            font-weight: 400;
+            display: block;
+        }
+        
+        #prihatin-plans .plan-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        #prihatin-plans .plan-table tr td.yellow-col {
+            background-color: #F0C024;
+            border-bottom: none;
+            position: relative;
+            color: #F9F7F4;
+            text-align: left;
+        }
+        
+        #prihatin-plans .plan-table tr td.pink-col {
+            background-color: #CF5396;
+            border-bottom: none;
+            position: relative;
+            color: #F9F7F4;
+            text-align: left;
+        }
+        
+        #prihatin-plans .plan-table tr td.yellow-col .info-icon,
+        #prihatin-plans .plan-table tr td.pink-col .info-icon {
+            position: absolute;
+            right: 22px;
+            top: 22px;
+        }
+        
+        #prihatin-plans .plan-table tr td.empty-row {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            height: 10px;
+        }
+        
+        #prihatin-plans .plan-table .new-sticker {
+            position: absolute;
+            right: -16px;
+            top: -16px;
+            z-index: 9999;
+            width: 96px;
+        }
+        
+        .howto-tabs .nav {
+            margin-bottom: 100px;
+        }
+        
+        .howto-tabs .nav-pills {
+            position: relative;
+        }
+        
+        .howto-tabs .nav-pills .nav-link {
+            background-color: #F9F7F4;
+            border-radius: 90px;
+            color: #00B4F0;
+            font-size: 18px;
+            font-weight: 600;
+            border: solid 1.4px #00B4F0;
+            padding: 7px 100px;
+            position: relative;
+        }
+        
+        .howto-tabs .nav-pills .nav-link.active {
+            background-color: #00B4F0;
+            color: #FFF;
+            font-weight: 800;
+        }
+        
+        .howto-tabs .nav-pills .nav-item {
+            position: absolute;
+        }
+        
+        .howto-tabs .nav-pills .nav-item:nth-child(1) {
+            left: 15%;
+        }
+        
+        .howto-tabs .nav-pills .nav-item:nth-child(2) {
+            left: 39%;
+        }
+        
+        .howto-tabs .nav-pills .nav-item:nth-child(3) {
+            left: 60%;
+        }
+        
+        .howto-videotabs {
+            width: 100%;
+            position: relative;
+            min-height: 560px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        
+        .howto-videotabs .tab-content .tab-pane img {
+            width: 100%;
+        }
+        
+        .howto-videotabs .tab-content {
+            position: absolute;
+            bottom: 0;
+            z-index: 0;
+        }
+        
+        .howto-videotabs .nav {
+            border-top: solid 1px #FFF;
+            z-index: 99;
+        }
+        
+        .howto-videotabs .nav-pills .nav-link {
+            border-radius: 0px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #FFF;
+            padding: 14px 10px;
+        }
+        
+        .howto-videotabs .nav-pills .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            font-weight: 800;
+        }
+        
+        .howto-videotabs .nav-pills .nav-item {
+            border-right: solid 1px #FFF;
+        }
+        
+        .howto-videotabs .nav-pills .nav-item:last-child {
+            border-right: none;
+        }
+        
+        @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+            #inner-banner {
+                margin-bottom: 0px;
+            }
+            #prihatin-plans h1 {
+                font-size: 40px;
+                line-height: 50px;
+                padding-top: 28px;
+            }
+            #prihatin-plans .plan-table tr td {
+                padding: 10px;
+            }
+            #prihatin-plans .plan-table th {
+                padding: 9px 13px;
+                position: static;
+            }
+            #prihatin-plans .plan-table th h1 {
+                font-size: 16px;
+            }
+            #prihatin-plans .plan-table tr td.yellow-col {
+                min-width: 187px;
+                font-size: 16px;
+                position: sticky;
+                left: 0;
+            }
+            #prihatin-plans .plan-table tr td.pink-col {
+                min-width: 187px;
+                font-size: 16px;
+                position: sticky;
+                left: 0;
+            }
+            #prihatin-plans .plan-table th.visual-prepaid {
+                background-color: #F0C024;
+                position: sticky !important;
+                left: 0;
+            }
+            #prihatin-plans .plan-table th.visual-postpaid {
+                background-color: #CF5396;
+                position: sticky !important;
+                left: 0;
+            }
+            #prihatin-plans .plan-table th.visual-prepaid img,
+            #prihatin-plans .plan-table th.visual-postpaid img {
+                width: 80%;
+            }
+            #prihatin-plans .plan-table tr td.yellow-col .info-icon,
+            #prihatin-plans .plan-table tr td.pink-col .info-icon {
+                display: none;
+            }
+            #prihatin-plans .plan-table tr td {
+                font-size: 16px;
+            }
+            #prihatin-plans .plan-table th h2 {
+                font-size: 17px;
+            }
+            #already-registered h1 {
+                font-size: 30px;
+            }
+            #already-registered p {
+                font-size: 20px;
+            }
+            #prihatin-plans .plan-table .new-sticker {
+                display: none;
+            }
+            #amazing-things {
+                padding-top: 50px;
+            }
+            .howto-tabs .nav-pills .nav-item {
+                position: static;
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            .howto-tabs .nav-pills .nav-link {
+                width: 100%;
+            }
+            .howto-tabs .nav {
+                margin-bottom: 39px;
+            }
+            #easy-steps {
+                padding: 79px 0px;
+            }
+            .howto-videotabs {
+                min-height: 78px;
+            }
+            .howto-videotabs .nav-pills .nav-link {
+                font-size: 12px;
+            }
+        }
+        
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 1) {
+            .howto-tabs .nav-pills .nav-item {
+                position: static;
+                margin-right: 10px;
+            }
+            .howto-tabs .nav-pills .nav-item:last-child {
+                margin-right: 0px;
+            }
+            .howto-tabs .nav-pills .nav-link {
+                padding: 7px 62px;
+            }
+            .howto-videotabs {
+                min-height: 364px;
+            }
+            #easy-steps p {
+                font-size: 13px;
+                line-height: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="layer-page">
+        <header class="page-header">
+            <div class="top-pink-bar">
+                <div class="row g-0 text-center">
+                    <p>Are you an Exisiting YES user? Earn up to RM50/referral through our Refer & Earn program!</p>
+                </div>
+                <a href="#" class="close-btn"><span class="iconify" data-icon="eva:close-fill"></span></a>
+            </div>
+            <div class="top-tabs-container">
+                <div class="container g-0">
+                    <div class="row g-0">
+                        <div class="col-10">
+                            <ul class="tabnav">
+                                <li><a href="#" class="active">Personal</a></li>
+                                <li><a href="#">Business</a></li>
+                                <li><a href="#">Education</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-2">
+                            <div class="dropdown language-drop float-end">
+                                <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="iconify" data-icon="bi:globe"></span> English
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">English</a></li>
+                                    <li><a class="dropdown-item" href="#">Bhasa Malay</a></li>
+                                    <li><a class="dropdown-item" href="#">中文</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-container">
+                <div class="container g-lg-0">
+                    <div class="row g-0">
+                        <nav class="navbar navbar-expand-lg">
+                            <div class="container">
+                                <a class="navbar-brand" href="#"><img src="images/logo.svg" class="logo-top" /></a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <li class="nav-item dropdown mega-dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                                            <ul class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Mobile Plans</li>
+                                                        <li><a href="#">Prepaid Plans</a></li>
+                                                        <li><a href="#">Postpaid Plans</a></li>
+                                                        <li><a href="#">YES Prihatin</a></li>
+                                                        <li><a href="#">Merdeka RM1 Package</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Broadband</li>
+                                                        <li><a href="#">Home broadband</a></li>
+                                                        <li><a href="#">On-the-go broadband</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Existing Customers</li>
+                                                        <li><a href="#">How-To: Refer & Earn</a></li>
+                                                        <li><a href="#">How-To: Get Databack</a></li>
+                                                        <li><a href="#">Data & Hotspot Add-Ons</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="#">Keep Number</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Partners</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Help</a>
+                                        </li>
+                                    </ul>
+                                    <div class="d-flex align-items-center">
+                                        <a href="#" class="pink-btn me-3">Get Started</a>
+                                        <a href="#" class="login-btn"><span class="iconify" data-icon="carbon:user-avatar-filled-alt"></span> Log In</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+
+            <!-- Breadcrumb Start -->
+            <div class="container breadcrumb-section">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                        <li class="breadcrumb-item"><a href="#">Mobile Plans</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">YES Prihatin</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- Breadcrumb End -->
+
+            <!-- Banner Start -->
+            <section id="inner-banner">
+                <img src="images/kasiup-banner.jpg" class="img-fluid" />
+            </section>
+            <!-- Banner End -->
+
+            <section id="already-registered">
+                <div class="container">
+                    <div class="row d-flex align-content-center">
+                        <div class="col-12 col-lg-8 text-center text-lg-start">
+                            <h1>Already registered Prihatin with us?</h1>
+                            <p class="mb-4 mb-lg-0">Check your prihatin status</p>
+                        </div>
+                        <div class="col-12 col-lg-4 text-center text-lg-end">
+                            <a href="#" class="white-btn">Check Status</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Postpaid Plans Start -->
+            <section id="prihatin-plans">
+                <div class="container" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table plan-table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center visual-prepaid w-25"><img src="images/kasiup-prepaid-title.png" /><img src="images/icon-new.png" class="new-sticker" /></th>
+                                        <th class="w-25">
+                                            <img src="images/icon-new.png" class="new-sticker" />
+                                            <h1>YES Prihatin Prepaid</h1>
+                                            <h2>RM300 subsidy</h2>
+                                            <a href="#" class="pink-btn">Claim Now</a>
+                                        </th>
+                                        <th class="w-25">
+                                            <h1>YES Prihatin Prepaid</h1>
+                                            <h2>RM180 subsidy</h2>
+                                            <a href="#" class="pink-btn">Claim Now</a>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4" class="empty-row"><img src="images/spacer.gif" height="10px" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="yellow-col rounded-top">Price
+                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                        </td>
+                                        <td class="rounded-top">FREE!</td>
+                                        <td class="rounded-top">FREE!</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="yellow-col">Gadget
+                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                        </td>
+                                        <td>Free YES TCL L7 <img src="images/icon-check-circle.png" class="float-end" /></td>
+                                        <td>Free HUddle XS <img src="images/icon-check-circle.png" class="float-end" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="yellow-col">Data
+                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                        </td>
+                                        <td>30GB Data for Free <img src="images/icon-check-circle.png" class="float-end" /></td>
+                                        <td>30GB Data for Free <img src="images/icon-check-circle.png" class="float-end" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="yellow-col">Special offers
+                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                        </td>
+                                        <td>RM50 Shopee Vouchers, Education App, Entertainment App, Free Delivery</td>
+                                        <td>Free Delivery</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="yellow-col">Validity period
+                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                        </td>
+                                        <td>12 Months</td>
+                                        <td>12 Months</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row mt-5">
+                        <div class="table-responsive">
+                            <table class="table plan-table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center visual-postpaid w-25"><img src="images/kasiup-postpaid-title.png" /><img src="images/icon-new.png" class="new-sticker" /></th>
+                                        <th class="w-25">
+                                            <img src="images/icon-new.png" class="new-sticker" />
+                                            <h1>YES Prihatin Postpaid</h1>
+                                            <h2>RM300 subsidy</h2>
+                                            <a href="#" class="pink-btn">Claim Now</a>
+                                        </th>
+                                        <th class="w-25">
+                                            <h1>YES Prihatin Postpaid</h1>
+                                            <h2>RM180 subsidy</h2>
+                                            <a href="#" class="pink-btn">Claim Now</a>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4" class="empty-row"><img src="images/spacer.gif" height="10px" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pink-col rounded-top">Price
+                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                        </td>
+                                        <td class="rounded-top">RM15/ month</td>
+                                        <td class="rounded-top">RM15/ month</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pink-col">Gadget
+                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                        </td>
+                                        <td>Free Samsung Galaxy A02 <img src="images/icon-check-circle.png" class="float-end" /></td>
+                                        <td>RM105 one-time payment for<br>Samsung Galaxy A02 RRP RM399 <img src="images/icon-check-circle.png" class="float-end" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pink-col">Data
+                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                        </td>
+                                        <td>15GB + 2GB Daily + Unlimited calls <img src="images/icon-check-circle.png" class="float-end" /></td>
+                                        <td>15GB + 2GB Daily + Unlimited calls <img src="images/icon-check-circle.png" class="float-end" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pink-col">Special offers
+                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                        </td>
+                                        <td>RM50 Shopee Vouchers, Education App, Entertainment App, Free Delivery</td>
+                                        <td>RM50 Shopee Vouchers, Education App, Entertainment App, Free Delivery</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="pink-col">Validity period
+                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                        </td>
+                                        <td>12 Months</td>
+                                        <td>12 Months</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Postpaid Plans End -->
+
+            <!-- Amazing Things Start -->
+            <section id="amazing-things" data-aos="fade-up">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1 class="mb-5">
+                                These <span>amazing</span> things happen<br>when you say <span>YES</span>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="row row-cols-2 row-cols-lg-4 mb-4">
+                        <div class="col mb-4" data-aos="fade-up" data-aos-duration="500">
+                            <img src="images/crisp-call-pic.jpg" class="w-100 mb-2" />
+                            <h2 class="mb-2">Crisp and<br>Clear Calls</h2>
+                            <p>No latency. No jitters.<br>No static. All the way.</p>
+                        </div>
+                        <div class="col mb-4" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
+                            <img src="images/4glte-pic.jpg" class="w-100 mb-2" />
+                            <h2 class="mb-2">4G LTE means<br>4G LTE</h2>
+                            <p>No matter where,<br>no matter what.</p>
+                        </div>
+                        <div class="col mb-4" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+                            <img src="images/cutprices-pic.jpg" class="w-100 mb-2" />
+                            <h2 class="mb-2">We Cut Prices,<br>Not Service</h2>
+                            <p>Because you deserve<br>the best!</p>
+                        </div>
+                        <div class="col mb-4" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
+                            <img src="images/affordable-pic.jpg" class="w-100 mb-2" />
+                            <h2 class="mb-2">Affordable and<br>Amazing Deals</h2>
+                            <p>Because connectivity is a right,<br>not a privilege.</p>
+                        </div>
+                    </div>
+                    <div class="row" data-aos="fade-up" data-aos-duration="500">
+                        <div class="col-12 col-lg-6 text-lg-start text-center">
+                            <a href="#" class="pink-btn mb-4">Get Started</a>
+                            <div class="d-flex align-items-center justify-content-lg-start justify-content-center">
+                                <p class="small me-2">In partnership with</p>
+                                <img src="images/partnership-logos.png" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 d-flex align-items-center justify-content-lg-end justify-content-center">
+                            <img src="images/hunt-yes-logo.png" class="hunt-yes-logo" />
+                        </div>
+                    </div>
+                </div>
+                <!-- How to Get Start Start -->
+                <div id="easy-steps">
+                    <div class="container">
+                        <div class="row">
+                            <h1 class="mb-5">Here’s how you get started with us!</h1>
+                        </div>
+                        <div class="howto-tabs">
+                            <ul class="nav nav-pills mt-3 justify-content-center" id="pills-tab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="pills-register-tab" data-bs-toggle="pill" data-bs-target="#how-register" type="button" role="tab" aria-controls="how-register" aria-selected="true">How to register?</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pills-claim-tab" data-bs-toggle="pill" data-bs-target="#how-claim" type="button" role="tab" aria-controls="how-claim" aria-selected="false">How to claim?</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pills-ekyc-tab" data-bs-toggle="pill" data-bs-target="#how-ekyc" type="button" role="tab" aria-controls="how-ekyc" aria-selected="false">How to eKYC?</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="how-register" role="tabpanel" aria-labelledby="pills-register-tab">
+                                    <div class="row row-cols-1 row-cols-md-4 text-md-start text-center">
+                                        <div class="col mb-md-0 mb-4">
+                                            <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step1-how-register.png" />Step 1</h3>
+                                            <p class="mb-4">Go to appstore.yes.my/ywos/signup and click Prihatin</p>
+                                            <img src="images/how-register-step1.png" class="img-fluid" />
+                                        </div>
+                                        <div class="col mb-md-0 mb-4">
+                                            <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step2-how-register.png" />Step 2</h3>
+                                            <p class="mb-4">Then, insert your ID number and click Submit</p>
+                                            <img src="images/how-register-step2.png" class="img-fluid" />
+                                        </div>
+                                        <div class="col mb-md-0 mb-4">
+                                            <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step3-how-register.png" />Step 3</h3>
+                                            <p class="mb-4">Click on your plan of choice and Select Plan</p>
+                                            <img src="images/how-register-step3.png" class="img-fluid" />
+                                        </div>
+                                        <div class="col mb-md-0 mb-4">
+                                            <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step4-how-register.png" />Step 4</h3>
+                                            <p class="mb-4">Enter your personal information and click Submit. Well done!</p>
+                                            <img src="images/how-register-step4.png" class="img-fluid" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="how-claim" role="tabpanel" aria-labelledby="pills-claim-tab">
+                                    <div class="row row-cols-1 row-cols-md-4 text-md-start text-center">
+                                        <div class="col mb-md-0 mb-4">
+                                            <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step1-how-register.png" />Step 1</h3>
+                                            <p class="mb-4">Go to appstore.yes.my/ywos/signup and click Prihatin</p>
+                                            <img src="images/how-register-step1.png" class="img-fluid" />
+                                        </div>
+                                        <div class="col mb-md-0 mb-4">
+                                            <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step2-how-register.png" />Step 2</h3>
+                                            <p class="mb-4">Then, insert your ID number and click Submit</p>
+                                            <img src="images/how-register-step2.png" class="img-fluid" />
+                                        </div>
+                                        <div class="col mb-md-0 mb-4">
+                                            <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step3-how-register.png" />Step 3</h3>
+                                            <p class="mb-4">Click on your plan of choice and Select Plan</p>
+                                            <img src="images/how-register-step3.png" class="img-fluid" />
+                                        </div>
+                                        <div class="col mb-md-0 mb-4">
+                                            <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step4-how-register.png" />Step 4</h3>
+                                            <p class="mb-4">Enter your personal information and click Submit. Well done!</p>
+                                            <img src="images/how-register-step4.png" class="img-fluid" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="how-ekyc" role="tabpanel" aria-labelledby="pills-ekyc-tab">
+                                    <div class="row row-cols-1 row-cols-md-4 text-md-start text-center">
+                                        <div class="col mb-md-0 mb-4">
+                                            <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step1-how-register.png" />Step 1</h3>
+                                            <p class="mb-4">Go to appstore.yes.my/ywos/signup and click Prihatin</p>
+                                            <img src="images/how-register-step1.png" class="img-fluid" />
+                                        </div>
+                                        <div class="col mb-md-0 mb-4">
+                                            <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step2-how-register.png" />Step 2</h3>
+                                            <p class="mb-4">Then, insert your ID number and click Submit</p>
+                                            <img src="images/how-register-step2.png" class="img-fluid" />
+                                        </div>
+                                        <div class="col mb-md-0 mb-4">
+                                            <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step3-how-register.png" />Step 3</h3>
+                                            <p class="mb-4">Click on your plan of choice and Select Plan</p>
+                                            <img src="images/how-register-step3.png" class="img-fluid" />
+                                        </div>
+                                        <div class="col mb-md-0 mb-4">
+                                            <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step4-how-register.png" />Step 4</h3>
+                                            <p class="mb-4">Enter your personal information and click Submit. Well done!</p>
+                                            <img src="images/how-register-step4.png" class="img-fluid" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- How to Get Start End -->
+            </section>
+            <!-- Amazing Things End -->
+
+            <!-- How Video Tabs Start -->
+            <section class="mt-5 mb-5 mb-lg-0" data-aos="fade-up">
+                <div class="container">
+                    <div class="row">
+                        <div class="howto-videotabs">
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="video-register" role="tabpanel" aria-labelledby="video-register-tab">
+                                    <a href="#" target="_blank"><img src="images/how-register-video-banner.jpg" /></a>
+                                </div>
+                                <div class="tab-pane fade" id="video-claim" role="tabpanel" aria-labelledby="video-claim-tab">
+                                    <a href="#" target="_blank"><img src="images/how-register-video-banner.jpg" /></a>
+                                </div>
+                                <div class="tab-pane fade" id="video-ekyc" role="tabpanel" aria-labelledby="video-ekyc-tab">
+                                    <a href="#" target="_blank"><img src="images/how-register-video-banner.jpg" /></a>
+                                </div>
+                            </div>
+                            <ul class="nav nav-pills nav-fill nav-justified" id="video-tab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="video-register-tab" data-bs-toggle="pill" data-bs-target="#video-register" type="button" role="tab" aria-controls="video-register" aria-selected="true">How to register?</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="video-claim-tab" data-bs-toggle="pill" data-bs-target="#video-claim" type="button" role="tab" aria-controls="video-claim" aria-selected="false">How to claim?</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="video-ekyc-tab" data-bs-toggle="pill" data-bs-target="#video-ekyc" type="button" role="tab" aria-controls="video-ekyc" aria-selected="false">How to eKYC?</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- How Video Tabs End -->
+
+            <!-- FAQs Start -->
+            <section id="faq-section" data-aos="fade-up">
+                <div class="container">
+                    <div class="row">
+                        <h1 class="mb-5">Frequently Asked Questions about YES</h1>
+                    </div>
+                    <div class="row">
+                        <div class="accordion accordion-flush mb-3" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">How to activate my SIM card?</button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">How do i keep my number</button>
+                                </h2>
+                                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">How do i pay for my bills?</button>
+                                </h2>
+                                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but
+                                        just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="viewall-btn">View All FAQs <span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                    </div>
+                </div>
+            </section>
+            <!-- FAQs End -->
+
+            <!-- Newsletter Start -->
+            <section id="newsletter">
+                <div class="container">
+                    <form>
+                        <div class="row">
+                            <div class="col-12 col-lg-12 col-xl-5 d-flex flex-wrap align-items-center pe-md-5">
+                                <h1 class="mb-3">Just say YES!</h1>
+                                <p>Join our mailing list to get our best & latest deals directly to your email inbox. You’ll never miss out again</p>
+                            </div>
+                            <div class="col-12 col-lg-12 col-xl-5 d-flex flex-wrap align-items-center mt-md-0 mb-md-0 mt-3 mb-5">
+                                <input type="email" class="form-control mb-md-0 mb-3" id="newsletter-input" placeholder="Email Address">
+                                <div class="form-check newsletter-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        I’ve read and accept the Terms & Conditions
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-12 col-xl-2 d-flex align-items-center ps-xl-5">
+                                <button class="white-btn" type="submit">Subscribe</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            <!-- Newsletter End -->
+        </main>
+        <footer class="page-footer footer">
+            <div class="container g-lg-0">
+                <div class="row position-relative">
+                    <div class="col-12 col-md-3">
+                        <img src="images/logo.svg" class="footer-logo mb-4" />
+                        <div class="row mb-2">
+                            <ul class="icon-list">
+                                <li>
+                                    <a href="#"><img src="images/facebook.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/instagram.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/youtube.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/twitter.svg" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <p class="mb-2">Get The MyYes App</p>
+                            <ul class="icon-list">
+                                <li>
+                                    <a href="#"><img src="images/logos_google-play-icon.svg" class="store-icon" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/logos_apple-app-store.svg" class="store-icon" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="row g-0 row-cols-2 row-cols-sm-1 row-cols-md-5">
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Plans & Pricing</li>
+                                    <li><a href="#">Prepaid plans</a></li>
+                                    <li><a href="#">Postpaid plans</a></li>
+                                    <li><a href="#">YES Prihatin plans</a></li>
+                                    <li><a href="#">Data Add-Ons</a></li>
+                                    <li><a href="#">Merdeka RM1 Package</a></li>
+                                    <li><a href="#">On-the-go broadband</a></li>
+                                    <li><a href="#">Home broadband</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Explore</li>
+                                    <li><a href="#">Keep number</a></li>
+                                    <li><a href="#">Refer & earn</a></li>
+                                    <li><a href="#">Databack</a></li>
+                                    <li><a href="#">Partnerships</a></li>
+                                    <li><a href="#">Roaming</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Tools</li>
+                                    <li><a href="#">Device manuals</a></li>
+                                    <li><a href="#">Coverage</a></li>
+                                    <li><a href="#">Speed test</a></li>
+                                    <li><a href="#">Kiosk locations</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Company</li>
+                                    <li><a href="#">About us</a></li>
+                                    <li><a href="#">Sustainability reports</a></li>
+                                    <li><a href="#">Newsroom</a></li>
+                                    <li><a href="#">Terms & conditions</a></li>
+                                    <li><a href="#">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Help</li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Chatbot</a></li>
+                                    <li><a href="#">Email us</a></li>
+                                    <li><a href="#">Facebook messenger</a></li>
+                                    <li><a href="#">Visit our store</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-1">
+                        <img src="images/ctm.png" class="img-fluid ctm-logo" />
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-md-start justify-content-sm-center">
+                            <p>POWERED BY YTL, YTL Communications Sdn. Bhd. (793634-V)</p>
+                        </div>
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-md-end justify-content-sm-center">
+                            <img src="images/footer-icons.png" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="js/iconify.min.js"></script>
+    <script type="text/javascript" src="js/slick.js"></script>
+    <script type="text/javascript" src="js/aos.js"></script>
+
+    <script type="text/javascript">
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+
+    <script type="text/javascript">
+        AOS.init();
+    </script>
+
+
+</body>
+
+</html>

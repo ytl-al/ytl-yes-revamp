@@ -1,0 +1,123 @@
+<div class="popfixed filterDiv closee" id="layer-filterDiv">
+    <div class="closee" onclick="$('#layer-filterDiv').hide();">X</div>
+
+    <div style="max-width:1100px; margin:0 auto; position:relative">
+        <div class="ttl"><b>Temporary change of operating hours.</b></div>
+
+        <p>In line with the implementation of National Recovery Plan (PPN), please be informed only selected Y E S stores will be operating at a revised hour.</p>
+
+        <p>Click <a href="/support/outletannouncement" style="color:#ec008c; text-decoration:underline">here</a> to find out more.</p>
+    </div>
+</div>
+
+<section class="dblock flexbox light">
+    <div>
+        <div class="content-sect support-sect store-locator">
+            <div class="content-body-sect">
+                <div id="store-locator-mobile-mq">&nbsp;</div>
+
+                <div class="wrapper">
+                    <div class="utilities-hdr">
+                        <div class="search-bar">
+                            <div class="search-bar-form"><input class="search-bar-field" id="storeAutocomplete" placeholder="Find a store near you" type="search" /><button class="search-bar-submit" id="toggleAutocomplete" title="Search" type="button"></button></div>
+
+                            <div class="location-btn-hdr"><button class="location-btn" id="toggleGeolocation" title="Go to your current location" type="button"></button></div>
+
+                            <div class="filters-btn-hdr"><button class="filters-btn" id="toggleFilters" type="button">Filters</button></div>
+                        </div>
+
+                        <div class="status-message-hdr" id="statusMessage"><button class="status-message-closer" id="statusMessageCloser" type="button">×</button>
+
+                            <div class="status-message" id="statusMessageBody">Sample status message.</div>
+                        </div>
+                    </div>
+
+                    <div class="filter-hdr" id="storeFilters"><button class="filter-closer" type="button">×</button>
+
+                        <div class="filter-header"><button class="textlink" id="showAllStores" type="button">Show All <span class="small-text"><span id="totalStores">-</span> stores</span></button></div>
+
+                        <div class="filter-types">
+                            <div class="filter-type"><button class="filter-type-trigger" style="color:#b4b4b4;" type="button">By State</button>
+
+                                <div class="filter-type-content-hdr">
+                                    <div class="filter-type-content">
+                                        <div class="custom-radio" id="stateInputHdr"><label for="state0"><input checked="checked" class="js-state" id="state0" name="state" type="radio" value="all" />All</label></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="filter-type"><button class="filter-type-trigger" style="color:#b4b4b4;" type="button">By Outlet</button>
+
+                                <div class="filter-type-content-hdr">
+                                    <div class="filter-type-content">
+                                        <div class="custom-radio"><label for="outlet0"><input checked="checked" class="js-outlet-type" id="outlet0" name="outlet" type="radio" value="all" />All</label> <label for="outlet6"><input class="js-outlet-type" data-url="/xml/yes-premium-stores.xml" id="outlet6" name="outlet" type="radio" value="yespremiumstores" />Yes Store &amp; Service Centre </label>
+                                            <label for="outlet7"><input class="js-outlet-type" data-url="/xml/yes-stores.xml" id="outlet7" name="outlet" type="radio" value="yestore" />Yes Store</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="filter-type"><button class="filter-type-trigger" style="color:#b4b4b4;" type="button">Products &amp; Services</button>
+
+                                <div class="filter-type-content-hdr">
+                                    <div class="filter-type-content">
+                                        <div class="custom-radio" id="serviceInputHdr"><label for="service0"><input checked="checked" class="js-service" id="service0" name="service" type="radio" value="all" />All</label></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="filter-type filter-store-list">
+                                <div class="store-list" id="storeList">&nbsp;</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="store-map-sect">
+                    <div class="infobox" id="storeInfobox">
+                        <div class="infobox-panel"><button class="infobox-closer" title="Close" type="button"></button>
+
+                            <div class="infobox-store-details">&nbsp;</div>
+                        </div>
+
+                        <div class="infobox-actions">&nbsp;</div>
+                    </div>
+
+                    <div class="store-map" id="storeMap">&nbsp;</div>
+                </div>
+
+                <div class="store-body-sect">
+                    <div class="wrapper">
+                        <div class="infobox mobile" id="storeMobileInfobox">
+                            <div class="infobox-panel"><button class="infobox-closer" title="Close" type="button"></button>
+
+                                <div class="infobox-store-details">
+                                    <div class="store-detail-header">Yes Mobile Kiosk,<br /> Digital Mall PJ</div>
+
+                                    <div class="store-detail-section">K-G19A, Ground Floor, Digital Mall PJ<br /> No.2, Jalan 14/20, Section 14,<br /> 46100 Petaling Jaya, Selangor.</div>
+
+                                    <div class="store-detail-section small-text"><i>Opens 10.30am - 9pm on Sunday till Friday<br /> Opens 10.30am - 10pm on Saturday </i></div>
+
+                                    <div class="store-detail-section uppercase">Products &amp; Services</div>
+
+                                    <div class="store-detail-section">
+                                        <ul>
+                                            <li>Smartphones</li>
+                                            <li>YesPlan + SIM Replacement</li>
+                                            <li>24-hour Payment Kiosk</li>
+                                            <li>Bill Payment</li>
+                                            <li>Credit Card Payment</li>
+                                            <li>Installment Plan</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="infobox-actions"><a class="infobox-action" href="#/">Get Directions</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

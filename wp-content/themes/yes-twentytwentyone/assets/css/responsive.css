@@ -1,0 +1,160 @@
+/* 
+    Stylesheet Name : Yes TwentyTwentyOne Responsive
+    Created on      : September 09, 2021, 03:04:23 PM
+    Last edited on  : December  04, 2021, 03:52:31 PM
+    Author          : [YTL Digital Design] - Zeeshan, AL
+*/
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    .top-pink-bar p {
+        padding: 0px 40px;
+    }
+    .mega-dropdown-menu>li {
+        float: none;
+        margin-bottom: 20px;
+    }
+    .footer .menulist {
+        margin-bottom: 20px;
+    }
+    .footer .copyright p {
+        margin-bottom: 20px;
+    }
+    .footer .copyright {
+        margin-top: 10px;
+    }
+    .footer .ctm-logo {
+        position: static;
+    }
+    #quick-action .whitebox {
+        padding: 37px 24px;
+    }
+    #wfh {
+        background-image: none;
+        padding-top: 0px;
+        margin: 0px;
+        text-align: center !important;
+    }
+    #wfh .wfh-visual {
+        display: none;
+    }
+    #amazing-things {
+        padding-top: 0px !important;
+    }
+    #amazing-things h1 {
+        font-size: 42px !important;
+        line-height: 46px !important;
+    }
+    #amazing-things h2 {
+        font-size: 21px !important;
+        line-height: 28px !important;
+    }
+    #amazing-things p {
+        font-size: 16px !important;
+        line-height: 23px !important;
+    }
+    #amazing-things p.small {
+        font-size: 12px !important;
+    }
+    #customer-review {
+        padding-top: 60px !important;
+    }
+    #customer-review h1 {
+        font-size: 33px !important;
+        line-height: 42px;
+    }
+    #faq-section {
+        padding-top: 0px !important;
+    }
+    #popular-deals {
+        padding-top: 0px !important;
+    }
+    #popular-deals h1 {
+        font-size: 33px !important;
+    }
+    #popular-deals .deal-box {
+        margin-bottom: 15px;
+        height: auto !important;
+    }
+    #amazing-things .hunt-yes-logo {
+        margin-top: 30px !important;
+    }
+    #newsletter h1 {
+        font-size: 30px !important;
+    }
+    #newsletter p {
+        font-size: 19px !important;
+    }
+    #newsletter .newsletter-check {
+        margin-top: 0px !important;
+    }
+    .signup-modal .signup-content {
+        padding: 40px 0px !important;
+    }
+    .breadcrumb-section .breadcrumb .breadcrumb-item {
+        font-size: 14px !important;
+    }
+    .slider-btn-container {
+        margin-bottom: 2rem;
+    }
+    .carousel-indicators {
+        margin-bottom: 0rem;
+    }
+    .slider-btn {
+        padding: 5px 25px;
+        font-size: 13px;
+    }
+}
+
+
+/* IPAD Portrait and Landscape */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+    #newsletter .newsletter-check {
+        margin-top: 17px !important;
+        margin-bottom: 20px !important;
+    }
+    #newsletter p {
+        margin-bottom: 20px !important;
+    }
+    #popular-deals .deal-box {
+        margin-bottom: 15px !important;
+        height: auto !important;
+    }
+    .signup-modal .signup-content {
+        padding: 40px 0px !important;
+    }
+    .mega-dropdown-menu>li {
+        float: none;
+        margin-bottom: 20px;
+    }
+    .wpcf7-form-control-wrap {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+
+/* IPAD Portrait */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
+    .slider-btn-container {
+        margin-bottom: 2rem;
+    }
+    .carousel-indicators {
+        margin-bottom: 0rem;
+    }
+    .slider-btn {
+        padding: 5px 25px;
+        font-size: 13px;
+    }
+}
+
+
+/* ----------- iPhone 4 and 4S ----------- */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+    .top-tabs-container .tabnav li a {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}

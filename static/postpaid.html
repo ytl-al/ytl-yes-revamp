@@ -1,0 +1,1127 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>YES</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/slick.css" />
+    <link rel="stylesheet" type="text/css" href="css/slick-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" />
+    <style>
+        #easy-steps {
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0px;
+            padding-bottom: 0px;
+        }
+        
+        #easy-steps h1 {
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 40px;
+            color: #2B2B2B;
+            text-align: center;
+        }
+        
+        #easy-steps h2 {
+            font-size: 25px;
+            font-weight: 600;
+            line-height: 25px;
+            color: #666F88;
+            text-align: center;
+            padding-bottom: 40px;
+        }
+        
+        #easy-steps h2 span {
+            font-weight: 800;
+        }
+        
+        #easy-steps h3 {
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 30px;
+            color: #00B4F0;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+        }
+        
+        #easy-steps h3 img {
+            margin-right: 10px;
+            display: inline;
+        }
+        
+        #easy-steps p {
+            font-size: 24px;
+            color: #2B2B2B;
+            line-height: 32px;
+        }
+        
+        #easy-steps .step-box {
+            width: 100%;
+            display: inline-block;
+        }
+        
+        #easy-steps .viewall-btn {
+            display: inline-block;
+            font-size: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #ED028C;
+            text-align: center;
+            margin-bottom: 90px;
+        }
+        
+        #easy-steps .viewall-btn svg {
+            margin-left: 5px;
+            font-size: 20px;
+        }
+        
+        #easy-steps .viewall-btn:hover {
+            text-decoration: underline;
+        }
+        /* Databack Rewards styling */
+        
+        #databck-rewards {
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0px;
+            padding-top: 0px;
+            background-image: url("images/databack-rewards-bg.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top;
+        }
+        
+        #databck-rewards h1 {
+            font-size: 56px;
+            font-weight: 600;
+            line-height: 59px;
+            color: #FFF;
+            padding-top: 60px;
+        }
+        
+        #databck-rewards h1 span {
+            font-weight: 800;
+        }
+        
+        #databck-rewards h2 {
+            color: #2B2B2B;
+            font-weight: 700;
+            font-size: 30px;
+            line-height: 33px;
+        }
+        
+        #databck-rewards p {
+            font-size: 20px;
+            color: #525252;
+            font-weight: 400;
+            line-height: 30px;
+        }
+        
+        #databck-rewards p.small {
+            color: #2B2B2B;
+            font-weight: 600;
+            font-size: 17px;
+            padding-right: 20px;
+            font-family: 'Nunito', sans-serif;
+        }
+        /* Postpaid Plans styling */
+        
+        #postpaid-plans {
+            align-items: center;
+            justify-content: center;
+            padding: 70px 0px;
+            padding-top: 0px;
+            background-image: url("images/postpaid-plan-bg.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top;
+        }
+        
+        #postpaid-plans h1 {
+            font-size: 56px;
+            font-weight: 600;
+            line-height: 59px;
+            color: #FFF;
+            padding-top: 60px;
+        }
+        
+        #postpaid-plans h1 span {
+            font-weight: 800;
+        }
+        
+        #postpaid-plans .plan-table {
+            border-spacing: 8px 0px;
+            border-collapse: initial;
+        }
+        
+        #postpaid-plans .plan-table th {
+            padding: 9px 30px;
+            vertical-align: middle;
+            background-color: #F9F7F4;
+            border: solid 4px #00B4F0;
+            border-radius: 7px;
+        }
+        
+        #postpaid-plans .plan-table th .pink-btn {
+            padding: 14px 60px;
+            display: block;
+        }
+        
+        #postpaid-plans .plan-table th.visual {
+            background-color: transparent;
+            border: none;
+        }
+        
+        #postpaid-plans .plan-table th h1 {
+            color: #2B2B2B;
+            font-size: 20px;
+            line-height: 24px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 15px;
+            padding-top: 0px;
+        }
+        
+        #postpaid-plans .plan-table th h2 {
+            color: #00B4F0;
+            font-size: 24px;
+            line-height: 28px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        #postpaid-plans .plan-table tr td {
+            padding: 20px;
+            text-align: center;
+            background-color: #FFF;
+            border-bottom: solid 1.5px #00B4F0;
+            color: #525252;
+            font-size: 20px;
+            font-weight: 600;
+            vertical-align: middle;
+        }
+        
+        #postpaid-plans .plan-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        #postpaid-plans .plan-table tr td.blue-col {
+            background-color: #00B4F0;
+            border-bottom: none;
+            position: relative;
+            color: #F9F7F4;
+            text-align: left;
+        }
+        
+        #postpaid-plans .plan-table tr td.blue-col .info-icon {
+            position: absolute;
+            right: 22px;
+            top: 22px;
+        }
+        
+        #postpaid-plans .plan-table tr td.empty-row {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            height: 10px;
+        }
+        /* Switch Yes styling */
+        
+        #switch-yes {
+            align-items: center;
+            justify-content: center;
+            padding: 70px 0px;
+            padding-top: 0px;
+            background-image: url("images/switch-process-bg.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top;
+        }
+        
+        #switch-yes h1 {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 59px;
+            color: #FFF;
+            padding-bottom: 30px;
+            text-align: center;
+            padding-top: 60px;
+        }
+        
+        #switch-yes h2 {
+            font-size: 36px;
+            font-weight: 600;
+            line-height: 40px;
+            color: #FFF;
+            padding-bottom: 50px;
+            text-align: center;
+        }
+        
+        #switch-yes h3 {
+            font-size: 29px;
+            font-weight: 800;
+            line-height: 29px;
+            color: #FFF;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+        
+        #switch-yes p {
+            color: #FFF;
+            font-size: 17px;
+            line-height: 21px;
+            text-align: center;
+        }
+        
+        #switch-yes .viewall-btn {
+            display: inline-block;
+            font-size: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #FFF;
+            text-align: center;
+        }
+        
+        #switch-yes .viewall-btn svg {
+            margin-left: 5px;
+            font-size: 20px;
+        }
+        
+        #switch-yes .viewall-btn:hover {
+            text-decoration: underline;
+        }
+        /* Cart Modal Styling START */
+        
+        #cart-modal .modal-body {
+            padding: 40px;
+        }
+        
+        #cart-modal .modal-lg {
+            max-width: 730px;
+        }
+        
+        #cart-modal h1 {
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 36px;
+            color: #2B2B2B;
+            display: block;
+            width: 100%;
+        }
+        
+        #cart-modal h2 {
+            font-size: 16px;
+            line-height: 22px;
+            font-weight: 700;
+            color: #525252;
+            display: block;
+            text-transform: uppercase;
+            width: 100%;
+        }
+        
+        #cart-modal .packagebox {
+            background: #FFFFFF;
+            box-sizing: border-box;
+            box-shadow: 2px 4px 15px rgba(112, 144, 176, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+        
+        #cart-modal .packagebox .visualbg {
+            background: linear-gradient(16.65deg, #00B4F0 -123.85%, #CF5396 74.76%);
+            text-align: center;
+            padding: 23px 12px;
+        }
+        
+        #cart-modal .packagebox h3 {
+            font-weight: 800;
+            font-size: 24px;
+            line-height: 28px;
+            color: #2B2B2B;
+        }
+        
+        #cart-modal .packagebox p {
+            font-size: 20px;
+            line-height: 24px;
+            color: #525252;
+        }
+        
+        #cart-modal .packagebox h3.price {
+            font-weight: 800;
+            font-size: 42px;
+            color: #2B2B2B;
+        }
+        
+        #cart-modal p {
+            font-size: 18px;
+            color: #2B2B2B;
+        }
+        
+        #cart-modal p span {
+            font-size: 19px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        #cart-modal .addon-box {
+            background-color: #FFF;
+            border-radius: 5px;
+            box-shadow: 0px 3.44867px 10.346px rgba(112, 144, 176, 0.2);
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            position: relative;
+            padding: 15px;
+        }
+        
+        #cart-modal .addon-box:hover {
+            box-shadow: 0px 8.45px 10.346px rgba(112, 144, 176, 0.27);
+        }
+        
+        #cart-modal .addon-box img {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+        }
+        
+        #cart-modal .addon-box h1 {
+            color: #00B4F0;
+            font-weight: 800;
+            font-size: 20px;
+        }
+        
+        #cart-modal .addon-box p {
+            color: #525252;
+            font-size: 14px;
+        }
+        
+        #cart-modal .addon-box p.small {
+            font-size: 12px;
+            color: #7A7A7A;
+        }
+        /* Cart Modal Styling END */
+        
+        @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+            #databck-rewards h1 {
+                font-size: 32px;
+                line-height: 46px;
+            }
+            #databck-rewards h2 {
+                font-size: 24px;
+                line-height: 33px;
+            }
+            #databck-rewards p {
+                font-size: 18px;
+                line-height: 23px;
+            }
+            #databck-rewards p.small {
+                font-size: 12px;
+            }
+            #wfh h1 {
+                font-size: 40px;
+                line-height: 45px;
+            }
+            #inner-banner {
+                margin-bottom: 0px;
+            }
+            #postpaid-plans h1 {
+                font-size: 40px;
+                line-height: 50px;
+                padding-top: 28px;
+            }
+            #postpaid-plans .plan-table tr td {
+                padding: 10px;
+            }
+            #postpaid-plans .plan-table th {
+                padding: 9px 13px;
+            }
+            #postpaid-plans .plan-table th h1 {
+                font-size: 16px;
+            }
+            #postpaid-plans .plan-table tr td.blue-col {
+                min-width: 187px;
+                font-size: 16px;
+                position: sticky;
+                left: 0;
+            }
+            #postpaid-plans .plan-table th.visual {
+                background-color: #ad4a84;
+                position: sticky;
+                left: 0;
+            }
+            #postpaid-plans .plan-table tr td.blue-col .info-icon {
+                display: none;
+            }
+            #postpaid-plans .plan-table tr td {
+                font-size: 16px;
+            }
+            #postpaid-plans .plan-table th h2 {
+                font-size: 17px;
+            }
+            #switch-yes .switch-icon {
+                margin-top: 20px;
+                margin-bottom: 40px;
+            }
+            #switch-yes h1 {
+                font-size: 32px;
+            }
+            #switch-yes h2 {
+                font-size: 28px;
+            }
+            #switch-yes {
+                margin-bottom: 50px;
+            }
+            #cart-modal h1 {
+                font-size: 25px;
+            }
+            #cart-modal h2 {
+                font-size: 12px;
+            }
+            #cart-modal .packagebox .visualbg {
+                padding: 0px 12px;
+            }
+            #cart-modal .packagebox h3 {
+                font-size: 20px;
+            }
+            #cart-modal .packagebox p {
+                font-size: 15px;
+            }
+            #cart-modal .packagebox h3.price {
+                font-size: 31px;
+            }
+            #cart-modal .addon-box {
+                margin-bottom: 10px;
+            }
+            #cart-modal .packagebox .visualbg img {
+                max-width: 55%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="layer-page">
+        <header class="page-header">
+            <div class="top-pink-bar">
+                <div class="row g-0 text-center">
+                    <p>Are you an Exisiting YES user? Earn up to RM50/referral through our Refer & Earn program!</p>
+                </div>
+                <a href="#" class="close-btn"><span class="iconify" data-icon="eva:close-fill"></span></a>
+            </div>
+            <div class="top-tabs-container">
+                <div class="container g-0">
+                    <div class="row g-0">
+                        <div class="col-10">
+                            <ul class="tabnav">
+                                <li><a href="#" class="active">Personal</a></li>
+                                <li><a href="#">Business</a></li>
+                                <li><a href="#">Education</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-2">
+                            <div class="dropdown language-drop float-end">
+                                <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="iconify" data-icon="bi:globe"></span> English
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">English</a></li>
+                                    <li><a class="dropdown-item" href="#">Bhasa Malay</a></li>
+                                    <li><a class="dropdown-item" href="#">中文</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-container">
+                <div class="container g-lg-0">
+                    <div class="row g-0">
+                        <nav class="navbar navbar-expand-lg">
+                            <div class="container">
+                                <a class="navbar-brand" href="#"><img src="images/logo.svg" class="logo-top" /></a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <li class="nav-item dropdown mega-dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                                            <ul class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Mobile Plans</li>
+                                                        <li><a href="#">Prepaid Plans</a></li>
+                                                        <li><a href="#">Postpaid Plans</a></li>
+                                                        <li><a href="#">YES Prihatin</a></li>
+                                                        <li><a href="#">Merdeka RM1 Package</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Broadband</li>
+                                                        <li><a href="#">Home broadband</a></li>
+                                                        <li><a href="#">On-the-go broadband</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Existing Customers</li>
+                                                        <li><a href="#">How-To: Refer & Earn</a></li>
+                                                        <li><a href="#">How-To: Get Databack</a></li>
+                                                        <li><a href="#">Data & Hotspot Add-Ons</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="#">Keep Number</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Partners</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Help</a>
+                                        </li>
+                                    </ul>
+                                    <div class="d-flex align-items-center">
+                                        <a href="#" class="pink-btn me-3">Get Started</a>
+                                        <a href="#" class="login-btn"><span class="iconify" data-icon="carbon:user-avatar-filled-alt"></span> Log In</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+
+            <!-- Breadcrumb Start -->
+            <div class="container breadcrumb-section">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                        <li class="breadcrumb-item"><a href="#">Mobile Plans</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Postpaid Plans</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- Breadcrumb End -->
+
+            <!-- Banner Start -->
+            <section id="inner-banner">
+                <img src="images/postpaid-banner.png" class="img-fluid" />
+            </section>
+            <!-- Banner End -->
+
+            <!-- Postpaid Plans Start -->
+            <section id="postpaid-plans">
+                <div class="container">
+                    <div class="row mb-5">
+                        <div class="col-12">
+                            <h1 class="text-center">Compare our <span>Kasi Up Postpaid Plans</span></h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table plan-table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center visual"><img src="images/kasiup-postpaid-visual.png" class="img-fluid" /></th>
+                                        <th>
+                                            <h1>Kasi Up Postpaid 49</h1>
+                                            <h2>RM49 for 100GB</h2>
+                                            <a href="#" class="pink-btn" data-bs-toggle="modal" data-bs-target="#cart-modal">Buy Now</a>
+                                        </th>
+                                        <th>
+                                            <h1>(No Contract)</h1>
+                                            <h2>RM49 for 100GB</h2>
+                                            <a href="#" class="pink-btn">Buy Now</a>
+                                        </th>
+                                        <th>
+                                            <h1>Kasi Up Postpaid 30</h1>
+                                            <h2>RM30 for 20GB</h2>
+                                            <a href="#" class="pink-btn">Buy Now</a>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4" class="empty-row"><img src="images/spacer.gif" height="10px" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue-col rounded-top">Data
+                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                        </td>
+                                        <td class="rounded-top">100GB</td>
+                                        <td class="rounded-top">100GB</td>
+                                        <td class="rounded-top">20GB</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue-col">Contract
+                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                        </td>
+                                        <td>24 months</td>
+                                        <td><img src="images/icon-cross-circle.png" /></td>
+                                        <td>24 Months</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue-col">Kasi Up rewards
+                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                        </td>
+                                        <td><img src="images/icon-check-circle.png" /></td>
+                                        <td><img src="images/icon-check-circle.png" /></td>
+                                        <td><img src="images/icon-check-circle.png" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue-col">6 months free
+                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                        </td>
+                                        <td><img src="images/icon-check-circle.png" /></td>
+                                        <td><img src="images/icon-cross-circle.png" /></td>
+                                        <td><img src="images/icon-cross-circle.png" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue-col">Free YES phone
+                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                        </td>
+                                        <td><img src="images/icon-cross-circle.png" /></td>
+                                        <td><img src="images/icon-cross-circle.png" /></td>
+                                        <td><img src="images/icon-check-circle.png" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue-col">4G paling power
+                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                        </td>
+                                        <td><img src="images/icon-check-circle.png" /></td>
+                                        <td><img src="images/icon-check-circle.png" /></td>
+                                        <td><img src="images/icon-check-circle.png" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue-col rounded-bottom">Unlimited borak
+                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                        </td>
+                                        <td class="rounded-bottom"><img src="images/icon-check-circle.png" /></td>
+                                        <td class="rounded-bottom"><img src="images/icon-check-circle.png" /></td>
+                                        <td class="rounded-bottom"><img src="images/icon-check-circle.png" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Postpaid Plans End -->
+
+            <!-- Easy Steps Start -->
+            <section id="easy-steps">
+                <div class="container">
+                    <div class="row">
+                        <h1 class="mb-4">Keep Your Number in these easy steps!</h1>
+                        <h2>Switch to YES <span>during</span> or even <span>after</span> activating your SIM</h2>
+                        <a href="#" class="viewall-btn">Know More <span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-3 text-md-start text-center">
+                        <div class="col mb-md-0 mb-4">
+                            <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step1.png" />Step 1</h3>
+                            <p class="mb-4">Download the MyYes app to Keep Your Number even long after your activation.</p>
+                            <img src="images/step1-visual.png" class="img-fluid" />
+                        </div>
+                        <div class="col mb-md-0 mb-4">
+                            <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step2.png" />Step 2</h3>
+                            <p class="mb-4">Head over to ‘Quick Access’, and select “Switch to YES” then “Keep Your Number”.</p>
+                            <img src="images/step2-visual.png" class="img-fluid" />
+                        </div>
+                        <div class="col mb-md-0 mb-4">
+                            <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step3.png" />Step 3</h3>
+                            <p class="mb-4">You will receive a confirmation SMS from your existing service provider. Reply to confirm your switch.</p>
+                            <img src="images/step3-visual.png" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Easy Steps End -->
+
+            <!-- Databack Rewards Start -->
+            <section id="databck-rewards">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1 class="mb-5 text-center">
+                                Get <span>Databack</span> rewards<br>the moment you say <span>YES</span>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="row row-cols-2 row-cols-xl-4 mb-4">
+                        <div class="col mb-4">
+                            <img src="images/databack-reward-visual.png" class="img-fluid mb-2" />
+                            <h2 class="mb-4">Earn Databack Rewards</h2>
+                            <p>Spend on Shopee, or complete FrogPlay challenges and earn YES data!</p>
+                        </div>
+                        <div class="col mb-4">
+                            <img src="images/myyes-account-visual.png" class="img-fluid mb-2" />
+                            <h2 class="mb-4">Have Your MyYes Account Ready</h2>
+                            <p>You can claim your databack as long as you have a YES account.</p>
+                        </div>
+                        <div class="col mb-4">
+                            <img src="images/shoppe-databack-visual.png" class="img-fluid mb-2" />
+                            <h2 class="mb-4">Shopee Databack</h2>
+                            <p>Earn 5GB for every RM50 spent on Shopee!</p>
+                        </div>
+                        <div class="col mb-4">
+                            <img src="images/frogplay-databack-visual.png" class="img-fluid mb-2" />
+                            <h2 class="mb-4">FrogPlay Databack</h2>
+                            <p>The more points you earn, the more databack you can claim!</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-lg-6 text-lg-start text-center">
+                            <a href="#" class="pink-btn mb-4">Learn More</a>
+                            <div class="d-flex align-items-center justify-content-lg-start justify-content-center">
+                                <p class="small me-2">In partnership with</p>
+                                <img src="images/partnership-logos.png" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Databack Rewards End -->
+
+            <!-- Switch Yes Start -->
+            <section id="switch-yes">
+                <div class="container">
+                    <div class="row">
+                        <h1>Ready to Switch to YES?</h1>
+                        <h2>Here’s what to expect:</h2>
+                    </div>
+                    <div class="row mb-5 row-cols-1 seven-cols d-flex align-items-center">
+                        <div class="col-md-1">
+                            <h3>Now</h3>
+                            <p>Purchase your favoured plan via the MyYES app</p>
+                        </div>
+                        <div class="col-md-1 text-center">
+                            <img src="images/icon-sim-switch.png" class="img-fluid switch-icon" />
+                        </div>
+                        <div class="col-md-1">
+                            <h3>Three Days</h3>
+                            <p>Allow 3 working days for processing</p>
+                        </div>
+                        <div class="col-md-1 text-center">
+                            <img src="images/icon-delivery-switch.png" class="img-fluid switch-icon" />
+                        </div>
+                        <div class="col-md-1">
+                            <h3>Parcel Received</h3>
+                            <p>Check our website on how to activate your SIM</p>
+                        </div>
+                        <div class="col-md-1 text-center">
+                            <img src="images/icon-switch.png" class="img-fluid switch-icon" />
+                        </div>
+                        <div class="col-md-1">
+                            <h3>The Next Day</h3>
+                            <p>Enjoy high speed connectivity!</p>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <a href="#" class="viewall-btn">See All Plans <span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                    </div>
+                </div>
+            </section>
+            <!-- Switch Yes End -->
+
+            <!-- Roam Without Borders Start -->
+            <section id="wfh">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-6 d-flex align-content-center justify-content-md-start justify-content-center flex-wrap">
+                            <h1 class="mb-3 w-100">Roam without borders</h1>
+                            <p class="mb-4 w-100">Keep your friends and family close no matter where you roam</p>
+                            <a href="#" class="pink-btn">Upgrade Now</a>
+                        </div>
+                        <div class="col-12 col-md-6 d-flex align-items-center">
+                            <img src="images/roam-border-visual.png" class="img-fluid wfh-visual" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Roam Without Borders End -->
+
+            <!-- FAQs Start -->
+            <section id="faq-section">
+                <div class="container">
+                    <div class="row">
+                        <h1 class="mb-5">Frequently Asked Questions about YES</h1>
+                    </div>
+                    <div class="row">
+                        <div class="accordion accordion-flush mb-3" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">How to activate my SIM card?</button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">How do i keep my number</button>
+                                </h2>
+                                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">How do i pay for my bills?</button>
+                                </h2>
+                                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but
+                                        just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="viewall-btn">View All FAQs <span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                    </div>
+                </div>
+            </section>
+            <!-- FAQs End -->
+
+            <!-- Newsletter Start -->
+            <section id="newsletter">
+                <div class="container">
+                    <form>
+                        <div class="row">
+                            <div class="col-12 col-lg-12 col-xl-5 d-flex flex-wrap align-items-center pe-md-5">
+                                <h1 class="mb-3">Just say YES!</h1>
+                                <p>Join our mailing list to get our best & latest deals directly to your email inbox. You’ll never miss out again</p>
+                            </div>
+                            <div class="col-12 col-lg-12 col-xl-5 d-flex flex-wrap align-items-center mt-md-0 mb-md-0 mt-3 mb-5">
+                                <input type="email" class="form-control mb-md-0 mb-3" id="newsletter-input" placeholder="Email Address">
+                                <div class="form-check newsletter-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        I’ve read and accept the Terms & Conditions
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-12 col-xl-2 d-flex align-items-center ps-xl-5">
+                                <button class="white-btn" type="submit">Subscribe</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            <!-- Newsletter End -->
+        </main>
+        <footer class="page-footer footer">
+            <div class="container g-lg-0">
+                <div class="row position-relative">
+                    <div class="col-12 col-md-3">
+                        <img src="images/logo.svg" class="footer-logo mb-4" />
+                        <div class="row mb-2">
+                            <ul class="icon-list">
+                                <li>
+                                    <a href="#"><img src="images/facebook.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/instagram.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/youtube.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/twitter.svg" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <p class="mb-2">Get The MyYes App</p>
+                            <ul class="icon-list">
+                                <li>
+                                    <a href="#"><img src="images/logos_google-play-icon.svg" class="store-icon" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/logos_apple-app-store.svg" class="store-icon" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="row g-0 row-cols-2 row-cols-sm-1 row-cols-md-5">
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Plans & Pricing</li>
+                                    <li><a href="#">Prepaid plans</a></li>
+                                    <li><a href="#">Postpaid plans</a></li>
+                                    <li><a href="#">YES Prihatin plans</a></li>
+                                    <li><a href="#">Data Add-Ons</a></li>
+                                    <li><a href="#">Merdeka RM1 Package</a></li>
+                                    <li><a href="#">On-the-go broadband</a></li>
+                                    <li><a href="#">Home broadband</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Explore</li>
+                                    <li><a href="#">Keep number</a></li>
+                                    <li><a href="#">Refer & earn</a></li>
+                                    <li><a href="#">Databack</a></li>
+                                    <li><a href="#">Partnerships</a></li>
+                                    <li><a href="#">Roaming</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Tools</li>
+                                    <li><a href="#">Device manuals</a></li>
+                                    <li><a href="#">Coverage</a></li>
+                                    <li><a href="#">Speed test</a></li>
+                                    <li><a href="#">Kiosk locations</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Company</li>
+                                    <li><a href="#">About us</a></li>
+                                    <li><a href="#">Sustainability reports</a></li>
+                                    <li><a href="#">Newsroom</a></li>
+                                    <li><a href="#">Terms & conditions</a></li>
+                                    <li><a href="#">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Help</li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Chatbot</a></li>
+                                    <li><a href="#">Email us</a></li>
+                                    <li><a href="#">Facebook messenger</a></li>
+                                    <li><a href="#">Visit our store</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-1">
+                        <img src="images/ctm.png" class="img-fluid ctm-logo" />
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-md-start justify-content-sm-center">
+                            <p>POWERED BY YTL, YTL Communications Sdn. Bhd. (793634-V)</p>
+                        </div>
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-md-end justify-content-sm-center">
+                            <img src="images/footer-icons.png" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <div class="modal fade" id="cart-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row g-0 mb-4 align-items-center">
+                        <div class="col-lg-1 col-2">
+                            <img src="images/green-tick.png" alt="" class="me-3">
+                        </div>
+                        <div class="col-lg-11 col-10">
+                            <h1>Added to your cart</h1>
+                            <h2>only 1 plan per checkout</h2>
+                        </div>
+                    </div>
+                    <div class="row g-0">
+                        <div class="packagebox">
+                            <div class="row align-items-center">
+                                <div class="col-lg-3 col-12 visualbg">
+                                    <img src="images/kasiup-postpaid-visual.png" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-lg-5 col-7 ps-4">
+                                    <h3>Kasi Up<br>Postpaid 45</h3>
+                                    <p>RM45 for 100GB</p>
+                                </div>
+                                <div class="col-lg-4 col-5 text-center">
+                                    <h3 class="price">RM45</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center mb-4">
+                        <p class="mb-3"><span>Get More Data</span> width customisable Data Add-Ons</p>
+                        <div class="col-lg-4 col-12">
+                            <a href="#" class="addon-box">
+                                <h1>RM10</h1>
+                                <p class="mb-2">10GB /month</p>
+                                <p class="small">Valid for 30 days only*</p>
+                                <img src="images/add-icon.png" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-4 col-12">
+                            <a href="#" class="addon-box">
+                                <h1>RM10</h1>
+                                <p class="mb-2">10GB /month</p>
+                                <p class="small">Valid for 30 days only*</p>
+                                <img src="images/add-icon.png" alt="">
+                            </a>
+                        </div>
+                        <div class="col-lg-4 col-12">
+                            <a href="#" class="addon-box">
+                                <h1>RM10</h1>
+                                <p class="mb-2">10GB /month</p>
+                                <p class="small">Valid for 30 days only*</p>
+                                <img src="images/add-icon.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-12 mb-lg-0 mb-2">
+                            <a href="#" class="white-btn2 d-block">Close</a>
+                        </div>
+                        <div class="col-lg-6 col-12 mb-lg-0 mb-2">
+                            <a href="#" class="pink-btn d-block">Go to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="js/iconify.min.js"></script>
+    <script type="text/javascript" src="js/slick.js"></script>
+
+    <script type="text/javascript">
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+</body>
+
+</html>
