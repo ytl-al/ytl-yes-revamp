@@ -91,6 +91,7 @@ define('WP_MAX_MEMORY_LIMIT', '256M');
 @ini_set('max_input_vars', 10000);
 
 define('WPCF7_FOOTER_NEWSLETTER_FORM_ID', 0);
+define('YWOS_PAGE_ID', 0);
 
 
 /* That's all, stop editing! Happy publishing. */

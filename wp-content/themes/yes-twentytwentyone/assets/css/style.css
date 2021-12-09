@@ -1,7 +1,7 @@
 /* 
     Stylesheet Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : December  04, 2021, 03:52:31 PM
+    Last edited on  : December  08, 2021, 03:52:31 PM
     Author          : [YTL Digital Design] - Zeeshan, AL
 */
 
@@ -489,19 +489,37 @@ section {
 .white-btn {
     background-color: #FFF;
     border-radius: 90px;
-    padding: 14px 50px;
+    padding: 14px 74px;
     display: inline-block;
     font-weight: 800;
     font-size: 16px;
     text-transform: uppercase;
     color: #ED028C;
     border: none;
-    transition: all 0.3s ease;
+    text-align: center;
 }
 
 .white-btn:hover {
     color: #ED028C;
     background-color: #F8BFDB;
+}
+
+.white-btn2 {
+    background-color: #FFF;
+    border-radius: 90px;
+    padding: 14px 74px;
+    display: inline-block;
+    font-weight: 800;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #ED028C;
+    border: solid 2px #ED028C;
+    text-align: center;
+}
+
+.white-btn2:hover {
+    color: #FFF;
+    background-color: #ED028C;
 }
 
 
