@@ -1,0 +1,172 @@
+/* 
+    Stylesheet Name : YPA
+    Created on      : December  11, 2021, 07:38:12 PM
+    Last edited on  : December  13, 2021, 08:52:31 PM
+    Author          : [YTL Digital Design] - AL
+*/
+
+
+/* html,
+body {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 400;
+} */
+
+.header { box-shadow: 1px 2px 5px #D9D9D9; }
+.header .topbar .nav-text { color: #333; font-weight: 700; }
+
+.heading-pageTitle { color: #0070D2; font-size: 22px; margin: 0; }
+
+@media (min-width: 768px) {
+    .heading-pageTitle { font-size: 30px; }
+}
+
+.marginBottom-15 { margin-bottom: 15px !important; }
+.marginBottom-30 { margin-bottom: 30px !important; }
+.marginBottom-50 { margin-bottom: 50px !important; }
+.marginTop-50 { margin-top: 50px !important; }
+.text-12 { font-size: 12px; }
+.text-black { color: #3F4254 !important; }
+
+@media (min-width: 768px) {
+    .form-register, .layer-floatWrapper { padding-top: 30px; }
+    .layer-floatWrapper.stick { position: fixed; top: 0; }
+}
+
+.section-box { background-color: #FFF; border-radius: 10px; box-shadow: 0px 3.63441px 10.9032px rgba(0, 0, 0, 0.1); font-size: 16px; margin: 0 0 25px; padding: 30px 25px; }
+.section-box.box-noShadow { box-shadow: 0 0 0 transparent; }
+.section-box.box-heightFull { height: 100%; }
+/* .section-box h2 { color: #0070D2; font-size: 24px; min-height: 36px; margin: 0 0 30px; padding: 0 0 0 50px; position: relative; }
+.section-box h2 .span-number { background-color: #002D5F; color: #FFF; border-radius: 100%; height: 36px; width: 36px; display: flex; align-items: center; -webkit-box-align: center; -ms-flex-align: center; justify-content: center; -webkit-box-pack: center; -ms-flex-pack: center; position: absolute; left: 0px; top: -5px; }
+.section-box img { position: absolute; height: 36px; width: 36px; left: 0; top: -5px; } */
+.section-box h2 { color: #0070D2; font-size: 24px; margin: 0 0 30px; }
+.section-box h2 .span-number { background-color: #002D5F; color: #FFF; border-radius: 100%; height: 36px; margin-right: 20px; width: 36px; display: flex; align-items: center; -webkit-box-align: center; -ms-flex-align: center; justify-content: center; -webkit-box-pack: center; -ms-flex-pack: center; }
+.section-box img { height: 36px; width: 36px; margin-right: 20px; }
+.section-box a img { margin-right: 0; }
+.section-box h2 .span-text { margin-right: auto; }
+.section-box a { color: #ED018C; }
+.section-box .layer-button { background-color: #0070D2; border-radius: 0 0 10px 10px; margin: 0 -25px; padding: 15px 0; text-align: center; }
+.section-box .layer-button .btn-submit { background-color: #FFD9FF; color: #0070D2; font-size: 20px; font-weight: 700; padding: 8px 50px; width: auto; }
+.section-box .layer-button .btn-submit i { color: #0070D2; }
+
+.form-fields { font-size: 16px; padding: 0 0 0 50px; }
+.form-group { margin: 0 0 15px; }
+.form-fields .form-group:last-of-type { margin-bottom: 0; }
+.form-group label { cursor: pointer; display: block; font-size: 16px; font-weight: 400; line-height: 20px; margin: 0 0 8px; }
+.form-group label .text-12 { font-size: 16px; }
+.form-group .form-control { border-radius: 8px; font-size: 16px; padding: 10px 15px; }
+.form-group .form-control.bootstrap-select { padding: 0; }
+.form-group label.error { font-style: italic; margin: 8px 0 0; text-align: right; }
+
+.form-group.form-check { position: relative; overflow: hidden; padding: 0; }
+.form-group.form-check .form-check-input { position: absolute; left: -9999px; visibility: hidden; opacity: 0; }
+.form-group.form-check label { min-height: 30px; margin: 0; padding: 0 0 0 50px; }
+.form-group.form-check label.form-check-label:before, .form-group.form-check label.form-check-label:after { content: ''; display: inline-block; position: absolute; left: 0px; top: 0px; }
+.form-group.form-check label.form-check-label:before { border: 1px solid #CCC; height: 30px; width: 30px; }
+
+.form-group.form-check.check-radio {}
+.form-group.form-check.check-radio .form-check-input {}
+.form-group.form-check.check-radio label { height: 30px; padding-top: 5px; position: relative; }
+.form-group.form-check.check-radio label.form-check-label:before, .form-group.form-check.check-radio label.form-check-label:after { content: ''; display: inline-block; position: absolute; left: 0px; top: 0px; }
+.form-group.form-check.check-radio label.form-check-label:before { border-radius: 100%; }
+.form-group.form-check.check-radio label.form-check-label:after { background-color: #FFF; border-radius: 100%; height: 24px; width: 24px; left: 3px; top: 3px; }
+.form-group.form-check.check-radio .form-check-input:checked + label.form-check-label:after { background-color: #0070D2; }
+.form-group.form-check.check-radio label img { position: relative; height: 30px; width: 30px; display: inline-block; margin: 0 5px 0 0; vertical-align: text-top; }
+
+.form-group.form-check.check-checkbox {}
+.form-group.form-check.check-checkbox .form-check-input {}
+.form-group.form-check.check-checkbox label {}
+.form-group.form-check.check-checkbox label.form-check-label:before, .form-group.form-check.check-checkbox label.form-check-label:before {}
+.form-group.form-check.check-checkbox label.form-check-label:before {}
+.form-group.form-check.check-checkbox label.form-check-label:after { color: #FFF; }
+.form-group.form-check.check-checkbox .form-check-input:checked + label.form-check-label:before { background-color: #01A4E3; }
+.form-group.form-check.check-checkbox .form-check-input:checked + label.form-check-label:after { content: "\f00c"; display: inline-block; font-family: "Font Awesome 5 Free"; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 900; text-rendering: auto; line-height: 1; left: 7px; top: 7px; }
+
+.table-summary {}
+.table-summary strong { font-weight: 700; }
+.table-summary .cell-underline { border-bottom: 1px solid #D9D9D9; }
+.table-summary .cell-nopadding { padding: 0; }
+
+.layer-orderStatus { padding-top: 0; }
+.layer-osHeaderBG { background: linear-gradient(246.21deg, #EC7AF6 15.68%, #006ED0 84.7%); min-height: 150px; width: 100%; }
+.layer-orderStatusContent { background-color: #FFF; box-shadow: 0px 3.63441px 10.9032px rgba(0, 0, 0, 0.1); border-radius: 10px; margin-top: -80px; padding: 50px 25px; }
+
+.layer-orderStatusContent .img-5g { max-width: 170px; }
+.layer-orderStatusContent h2 { color: #CC0000; font-size: 24px; }
+.layer-orderStatusContent h2 img { height: 36px; width: 36px; vertical-align: sub; }
+.layer-orderStatusContent h3 { font-size: 22px; }
+.layer-orderStatusContent p { font-size: 18px; }
+
+/* .layer-osHeader { margin: 0 0 40px; }
+.layer-osHeader .pull-left { margin: 0 30px 0 0; }
+.layer-osHeader img { width: 170px; }
+.layer-osHeader .layer-osHeaderContent {}
+.layer-osHeaderContent h2 { color: #0070D2; font-size: 30px; font-weight: 600; margin: 0 0 20px; }
+.layer-osHeaderContent h2 img { height: 36px; width: 36px; vertical-align: text-top; }
+.layer-osHeaderContent h3 { font-size: 20px; margin: 0 0 7px; }
+.layer-osHeaderContent p { font-size: 18px; }
+
+.layer-osBody {}
+
+@media (min-width: 992px) {
+    .layer-orderStatusContent { padding: 50px 90px; }
+    .layer-osHeader .pull-left { margin-right: 50px; }
+    .layer-osHeader img { width: 250px; }
+    .layer-osHeaderContent h2 { font-size: 40px; }
+    .layer-osHeaderContent h3 { font-size: 30px; }
+    .layer-osHeaderContent p { font-size: 25px; }
+} */
+
+@media (min-width: 768px) {
+    .layer-orderStatusContent .img-5g { max-width: 250px; }
+    .layer-orderStatusContent h2 { font-size: 40px; }
+    .layer-orderStatusContent h2 img { height: 45px; width: 45px; }
+    .layer-orderStatusContent h3 { font-size: 30px; }
+    .layer-orderStatusContent p { font-size: 22px; }
+}
+
+@media (max-width: 991.98px) {
+    .header-mobile-fixed { position: fixed; left: 0px; right: 0px; z-index: 10; }
+    .content { margin-top: 55px; }
+}
+
+
+.layer-pageTitle { margin: 0 0 25px; }
+.layer-pageTitle a { color: #0070D2; font-size: 20px; margin-right: 14px; }
+.layer-pageTitle a img { max-width: 30px; }
+.layer-pageTitle h1.heading-pageTitle { font-size: 18px; }
+.layer-pageTitle p { font-size: 14px; font-weight: 600; margin: 0; }
+.layer-pageTitle.pageTitle-mobile, .layer-pageTitle.layer-pageTitle.pageTitle-mobile h1.heading-pageTitle { color: #FFF; }
+
+.content.bg-5gExperience { background: linear-gradient(110.4deg, rgba(0, 110, 208, 1) 25.43%, rgba(237, 123, 247, 1) 100%); background-blend-mode: soft-light; }
+
+.layer-wizardBox { box-shadow: inset 0px 0.272034px 10.8814px #ffd9ff, inset 0px 1.08814px 4.89661px #626fe8, inset 0px 26.6593px 27.2034px rgb(255 255 255 / 30%); border-radius: 40px; margin: 0 0 25px; padding: 50px 10px; }
+.layer-wizardBox img.img-branding { margin: 0 0 40px; max-width: 160px; }
+.layer-wizardBox .layer-wizard { width: 100%; }
+.layer-wizard ul.listing-wizard { font-size: 0; margin: 0; padding: 0; width: 100%; }
+.listing-wizard li { color: #FFD9FF; font-size: 18px; font-weight: 800; line-height: 18px; list-style-type: none; text-align: center; display: flex; flex-direction: column; align-items: center; position: relative; width: 100%; }
+.listing-wizard li span { background-color: #FFD9FF; border-radius: 100%; color: #0070D2; height: 40px; margin: 0 0 10px; width: 40px; z-index: 9; display: flex; align-items: center; -webkit-box-align: center; -ms-flex-align: center; justify-content: center; -webkit-box-pack: center; -ms-flex-pack: center; }
+.listing-wizard li:before, .listing-wizard li:after { content: ''; background-color: #FFD9FF; height: 8px; width: 50%; position: absolute; left: 0; top: 16px; }
+.listing-wizard li:before {}
+.listing-wizard li:after { left: auto; right: 0; }
+.listing-wizard li.item-first:before { display: none; }
+.listing-wizard li.item-last:after { display: none; }
+.listing-wizard li.active ~ li { color: #FFF; }
+.listing-wizard li.active ~ li span { background-color: #FFF; }
+.listing-wizard li.active:after, .listing-wizard li.active ~ li:before, .listing-wizard li.active ~ li:after { background-color: #FFF; }
+
+.layer-content {}
+
+@media (min-width: 768px) {
+    .layer-pageTitle { margin-bottom: 0; }
+    .layer-pageTitle a img { max-width: 40px; }
+    .layer-pageTitle h1.heading-pageTitle { font-size: 24px; }
+    .layer-pageTitle p { font-size: 18px; font-weight: 600; margin: 0; }
+
+    .layer-wizardBox { margin-bottom: 0; padding: 50px 20px 100px 40px; }
+    .layer-wizardBox img.img-branding { margin-bottom: 0; }
+
+    .layer-content { margin-top: -50px; }
+    
+    .form-register { padding-top: 0; }
+}
