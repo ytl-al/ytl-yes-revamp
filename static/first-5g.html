@@ -709,6 +709,72 @@
                 left: 0px;
             }
         }
+        
+        .layer-phoneModels {}
+        
+        .layer-phoneModel {
+            display: none;
+        }
+        
+        .layer-phoneModel.active {
+            display: block;
+        }
+        
+        .layer-phoneColors {
+            margin: 0;
+            display: flex;
+            align-content: center;
+            justify-content: center;
+        }
+        
+        .layer-phoneColors a.item-phoneColor {
+            border: 2px solid #BBB;
+            border-radius: 100%;
+            display: inline-block;
+            height: 34px;
+            margin: 0 6px 0 0;
+            padding: 2px;
+            width: 34px;
+        }
+        
+        .layer-phoneColors a.item-phoneColor:before {
+            background-color: #333;
+            border-radius: 100%;
+            content: '';
+            display: block;
+            height: 26px;
+            width: 26px;
+        }
+        
+        .layer-phoneColors a.item-phoneColor:last-of-type {
+            margin-right: 0;
+        }
+        
+        .layer-phoneColors a.item-phoneColor:hover {
+            border-color: #DDD;
+        }
+        
+        .layer-phoneColors a.item-phoneColor.active {
+            border-color: #FFF;
+        }
+        
+        .layer-phoneColors a.item-phoneColor.phone-black {}
+        
+        .layer-phoneColors a.item-phoneColor.phone-blue:before {
+            background-color: #4B87E4;
+        }
+        
+        .layer-phoneColors a.item-phoneColor.phone-white:before { background-color: #FFF; }
+        
+        .layer-phoneColors a.item-phoneColor.phone-green:before { background-color: #A3D3C6; }
+        
+        .layer-phoneColors a.item-phoneColor.phone-pink:before { background-color: #F2CBC2; }
+        
+        .layer-phoneColors a.item-phoneColor.phone-space:before { background-color: #646C72; }
+        
+        .layer-phoneColors a.item-phoneColor.phone-grey:before { background-color: #A1B0D7; }
+        
+        .layer-phoneColors a.item-phoneColor.phone-aurora:before { background-color: #BFDCF3; }
     </style>
 
 </head>
@@ -1097,20 +1163,48 @@
                                         <div class="row">
                                             <div class="col-12 col-md-6 col-lg-4 mb-3">
                                                 <div class="sim-box phone-box">
-                                                    <div class="mb-auto">
-                                                        <h1>YES Postpaid FT5G RM99</h1>
-                                                        <h2>XIAOMI 11 LITE 5G NE 8 RAM and 128 ROM</h2>
-                                                        <div class="price-box"><img src="images/xiaomi_11lite.png" alt="">
-                                                            <p>RM99</p>
+                                                    <div class="layer-phoneModels">
+                                                        <div class="layer-phoneModel active" id="phone-xiaomi-11-lite-128-black">
+                                                            <div class="mb-auto">
+                                                                <h1>YES Postpaid FT5G RM99</h1>
+                                                                <h2>XIAOMI 11 LITE 5G NE 8 RAM and 128 ROM (Truffle Black)</h2>
+                                                                <div class="price-box"><img src="images/xiaomi_11lite-black.png" alt="">
+                                                                    <p>RM99</p>
+                                                                </div>
+                                                                <ul class="plan-points">
+                                                                    <li>250GB 4G Data </li>
+                                                                    <li>Bonus: Unlimited 5G Data* until 31st March 2022</li>
+                                                                    <li>Unlimited On-net Voice and Off-net Voice</li>
+                                                                    <li>Unlimited On-net SMS and pay-as-you-use Off-net SMS</li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="layer-phoneColors d-flex">
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-black active" data-target="phone-xiaomi-11-lite-128-black">&nbsp;</a>
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-blue" data-target="phone-xiaomi-11-lite-128-blue">&nbsp;</a>
+                                                            </div>
+                                                            <div class="btn-box"><a href="#" class="btn">Buy Now</a></div>
                                                         </div>
-                                                        <ul class="plan-points">
-                                                            <li>250GB 4G Data </li>
-                                                            <li>Bonus: Unlimited 5G Data* until 31st March 2022</li>
-                                                            <li>Unlimited On-net Voice and Off-net Voice</li>
-                                                            <li>Unlimited On-net SMS and pay-as-you-use Off-net SMS</li>
-                                                        </ul>
+                                                        <div class="layer-phoneModel" id="phone-xiaomi-11-lite-128-blue">
+                                                            <div class="mb-auto">
+                                                                <h1>YES Postpaid FT5G RM99</h1>
+                                                                <h2>XIAOMI 11 LITE 5G NE 8 RAM and 128 ROM (Bubblegum Blue)</h2>
+                                                                <div class="price-box"><img src="images/xiaomi_11lite-blue.png" alt="">
+                                                                    <p>RM99</p>
+                                                                </div>
+                                                                <ul class="plan-points">
+                                                                    <li>250GB 4G Data </li>
+                                                                    <li>Bonus: Unlimited 5G Data* until 31st March 2022</li>
+                                                                    <li>Unlimited On-net Voice and Off-net Voice</li>
+                                                                    <li>Unlimited On-net SMS and pay-as-you-use Off-net SMS</li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="layer-phoneColors">
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-black" data-target="phone-xiaomi-11-lite-128-black">&nbsp;</a>
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-blue active" data-target="phone-xiaomi-11-lite-128-blue">&nbsp;</a>
+                                                            </div>
+                                                            <div class="btn-box"><a href="#" class="btn">Buy Now</a></div>
+                                                        </div>
                                                     </div>
-                                                    <div class="btn-box"><a href="#" class="btn">Buy Now</a></div>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-4 mb-3">
@@ -1152,20 +1246,96 @@
 
                                             <div class="col-12 col-md-6 col-lg-4 mb-3">
                                                 <div class="sim-box phone-box">
-                                                    <div class="mb-auto">
-                                                        <h1>YES Postpaid FT5G RM99</h1>
-                                                        <h2>XIAOMI 11 LITE 5G NE 8 RAM and 256 ROM</h2>
-                                                        <div class="price-box"><img src="images/xiaomi_11lite.png" alt="">
-                                                            <p>RM99</p>
+                                                    <div class="layer-phoneModels">
+                                                        <div class="layer-phoneModel active" id="phone-xiaomi-11-lite-256-black">
+                                                            <div class="mb-auto">
+                                                                <h1>YES Postpaid FT5G RM99</h1>
+                                                                <h2>XIAOMI 11 LITE 5G NE 8 RAM and 256 ROM (Truffle Black)</h2>
+                                                                <div class="price-box"><img src="images/xiaomi_11lite-black.png" alt="">
+                                                                    <p>RM99</p>
+                                                                </div>
+                                                                <ul class="plan-points">
+                                                                    <li>250GB 4G Data </li>
+                                                                    <li>Bonus: Unlimited 5G Data* until 31st March 2022</li>
+                                                                    <li>Unlimited On-net Voice and Off-net Voice</li>
+                                                                    <li>Unlimited On-net SMS and pay-as-you-use Off-net SMS</li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="layer-phoneColors">
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-black active" data-target="phone-xiaomi-11-lite-256-black">&nbsp;</a>
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-white" data-target="phone-xiaomi-11-lite-256-white">&nbsp;</a>
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-blue" data-target="phone-xiaomi-11-lite-256-blue">&nbsp;</a>
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-pink" data-target="phone-xiaomi-11-lite-256-pink">&nbsp;</a>
+                                                            </div>
+                                                            <div class="btn-box"><a href="#" class="btn">Buy Now</a></div>
                                                         </div>
-                                                        <ul class="plan-points">
-                                                            <li>250GB 4G Data </li>
-                                                            <li>Bonus: Unlimited 5G Data* until 31st March 2022</li>
-                                                            <li>Unlimited On-net Voice and Off-net Voice</li>
-                                                            <li>Unlimited On-net SMS and pay-as-you-use Off-net SMS</li>
-                                                        </ul>
+                                                        <div class="layer-phoneModel" id="phone-xiaomi-11-lite-256-white">
+                                                            <div class="mb-auto">
+                                                                <h1>YES Postpaid FT5G RM99</h1>
+                                                                <h2>XIAOMI 11 LITE 5G NE 8 RAM and 256 ROM (Snowflake White)</h2>
+                                                                <div class="price-box"><img src="images/xiaomi_11lite-white.png" alt="">
+                                                                    <p>RM99</p>
+                                                                </div>
+                                                                <ul class="plan-points">
+                                                                    <li>250GB 4G Data </li>
+                                                                    <li>Bonus: Unlimited 5G Data* until 31st March 2022</li>
+                                                                    <li>Unlimited On-net Voice and Off-net Voice</li>
+                                                                    <li>Unlimited On-net SMS and pay-as-you-use Off-net SMS</li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="layer-phoneColors">
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-black" data-target="phone-xiaomi-11-lite-256-black">&nbsp;</a>
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-white active" data-target="phone-xiaomi-11-lite-256-white">&nbsp;</a>
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-blue" data-target="phone-xiaomi-11-lite-256-blue">&nbsp;</a>
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-pink" data-target="phone-xiaomi-11-lite-256-pink">&nbsp;</a>
+                                                            </div>
+                                                            <div class="btn-box"><a href="#" class="btn">Buy Now</a></div>
+                                                        </div>
+                                                        <div class="layer-phoneModel" id="phone-xiaomi-11-lite-256-blue">
+                                                            <div class="mb-auto">
+                                                                <h1>YES Postpaid FT5G RM99</h1>
+                                                                <h2>XIAOMI 11 LITE 5G NE 8 RAM and 256 ROM (Blue)</h2>
+                                                                <div class="price-box"><img src="images/xiaomi_11lite-blue.png" alt="">
+                                                                    <p>RM99</p>
+                                                                </div>
+                                                                <ul class="plan-points">
+                                                                    <li>250GB 4G Data </li>
+                                                                    <li>Bonus: Unlimited 5G Data* until 31st March 2022</li>
+                                                                    <li>Unlimited On-net Voice and Off-net Voice</li>
+                                                                    <li>Unlimited On-net SMS and pay-as-you-use Off-net SMS</li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="layer-phoneColors">
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-black" data-target="phone-xiaomi-11-lite-256-black">&nbsp;</a>
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-white" data-target="phone-xiaomi-11-lite-256-white">&nbsp;</a>
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-blue active" data-target="phone-xiaomi-11-lite-256-blue">&nbsp;</a>
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-pink" data-target="phone-xiaomi-11-lite-256-pink">&nbsp;</a>
+                                                            </div>
+                                                            <div class="btn-box"><a href="#" class="btn">Buy Now</a></div>
+                                                        </div>
+                                                        <div class="layer-phoneModel" id="phone-xiaomi-11-lite-256-pink">
+                                                            <div class="mb-auto">
+                                                                <h1>YES Postpaid FT5G RM99</h1>
+                                                                <h2>XIAOMI 11 LITE 5G NE 8 RAM and 256 ROM (Peach Pink)</h2>
+                                                                <div class="price-box"><img src="images/xiaomi_11lite-pink.png" alt="">
+                                                                    <p>RM99</p>
+                                                                </div>
+                                                                <ul class="plan-points">
+                                                                    <li>250GB 4G Data </li>
+                                                                    <li>Bonus: Unlimited 5G Data* until 31st March 2022</li>
+                                                                    <li>Unlimited On-net Voice and Off-net Voice</li>
+                                                                    <li>Unlimited On-net SMS and pay-as-you-use Off-net SMS</li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="layer-phoneColors">
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-black" data-target="phone-xiaomi-11-lite-256-black">&nbsp;</a>
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-white" data-target="phone-xiaomi-11-lite-256-white">&nbsp;</a>
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-blue" data-target="phone-xiaomi-11-lite-256-blue">&nbsp;</a>
+                                                                <a href="javascript:void(0)" class="item-phoneColor phone-pink active" data-target="phone-xiaomi-11-lite-256-pink">&nbsp;</a>
+                                                            </div>
+                                                            <div class="btn-box"><a href="#" class="btn">Buy Now</a></div>
+                                                        </div>
                                                     </div>
-                                                    <div class="btn-box"><a href="#" class="btn">Buy Now</a></div>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-6 col-lg-4 mb-3">
@@ -2026,6 +2196,47 @@
 
     <script type="text/javascript">
         AOS.init();
+
+        $(document).ready(function() {
+            initPhoneModelsHeight();
+            $(window).on('resize', function() {
+                initPhoneModelsHeight();
+            });
+            $('.item-phoneColor').on('click', function() {
+                updatePhoneColorSelection(this);
+            });
+
+            $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function(event) {
+                setTimeout(function() {
+                    initPhoneModelsHeight();
+                }, 1000);
+            });
+        });
+
+        function initPhoneModelsHeight() {
+            $('.layer-phoneModels').css('min-height', '');
+            setTimeout(function() {
+                $('.layer-phoneModels').each(function() {
+                    $(this).css('min-height', $(this).height());
+                });
+            }, 100);
+        }
+
+        function updatePhoneColorSelection(el) {
+            var itemPhoneColor = $('.item-phoneColor');
+            var itemID = $(el).attr('data-target');
+
+            if ($('#' + itemID).length) {
+                var parentLayer = $(el).closest('.layer-phoneModels');
+                var activeModel = $('.layer-phoneModel.active', parentLayer);
+                $(activeModel).fadeOut(100, function() {
+                    $(activeModel).removeClass('active');
+                    setTimeout(function() {
+                        $('#' + itemID).fadeIn().addClass('active');
+                    }, 100);
+                });
+            }
+        }
     </script>
 
 
