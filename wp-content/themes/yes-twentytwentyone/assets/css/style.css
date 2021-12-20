@@ -1,7 +1,7 @@
-/* 
+/*
     Stylesheet Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : December  04, 2021, 03:52:31 PM
+    Last edited on  : December  09, 2021, 03:52:31 PM
     Author          : [YTL Digital Design] - Zeeshan, AL
 */
 
@@ -804,7 +804,11 @@ section {
 
 #wpcf7-f630-o1,
 #wpcf7-f816-o1,
-#wpcf7-f820-o1 {
+#wpcf7-f820-o1,
+#wpcf7-f1063-o1,
+#wpcf7-f1064-o1,
+#wpcf7-f1636-o1,
+#wpcf7-f1637-o1 {
     align-items: center;
     justify-content: center;
     padding: 50px 0px;
@@ -862,7 +866,11 @@ section {
 
 #wpcf7-f630-o1 .wpcf7-response-output,
 #wpcf7-f816-o1 .wpcf7-response-output,
-#wpcf7-f820-o1 .wpcf7-response-output {
+#wpcf7-f820-o1 .wpcf7-response-output,
+#wpcf7-f1063-o1 .wpcf7-response-output,
+#wpcf7-f1064-o1 .wpcf7-response-output,
+#wpcf7-f1636-o1 .wpcf7-response-output,
+#wpcf7-f1637-o1 .wpcf7-response-output {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
@@ -871,7 +879,11 @@ section {
 @media (min-width: 576px) {
     #wpcf7-f630-o1 .wpcf7-response-output,
     #wpcf7-f816-o1 .wpcf7-response-output,
-    #wpcf7-f820-o1 .wpcf7-response-output {
+    #wpcf7-f820-o1 .wpcf7-response-output,
+    #wpcf7-f1063-o1 .wpcf7-response-output,
+    #wpcf7-f1064-o1 .wpcf7-response-output,
+    #wpcf7-f1636-o1 .wpcf7-response-output,
+    #wpcf7-f1637-o1 .wpcf7-response-output {
         width: 540px;
     }
 }
@@ -879,7 +891,11 @@ section {
 @media (min-width: 768px) {
     #wpcf7-f630-o1 .wpcf7-response-output,
     #wpcf7-f816-o1 .wpcf7-response-output,
-    #wpcf7-f820-o1 .wpcf7-response-output {
+    #wpcf7-f820-o1 .wpcf7-response-output,
+    #wpcf7-f1063-o1 .wpcf7-response-output,
+    #wpcf7-f1064-o1 .wpcf7-response-output,
+    #wpcf7-f1636-o1 .wpcf7-response-output,
+    #wpcf7-f1637-o1 .wpcf7-response-output {
         width: 720px;
     }
 }
@@ -887,7 +903,11 @@ section {
 @media (min-width: 992px) {
     #wpcf7-f630-o1 .wpcf7-response-output,
     #wpcf7-f816-o1 .wpcf7-response-output,
-    #wpcf7-f820-o1 .wpcf7-response-output {
+    #wpcf7-f820-o1 .wpcf7-response-output,
+    #wpcf7-f1063-o1 .wpcf7-response-output,
+    #wpcf7-f1064-o1 .wpcf7-response-output,
+    #wpcf7-f1636-o1 .wpcf7-response-output,
+    #wpcf7-f1637-o1 .wpcf7-response-output {
         width: 960px;
     }
 }
@@ -895,7 +915,11 @@ section {
 @media (min-width: 1200px) {
     #wpcf7-f630-o1 .wpcf7-response-output,
     #wpcf7-f816-o1 .wpcf7-response-output,
-    #wpcf7-f820-o1 .wpcf7-response-output {
+    #wpcf7-f820-o1 .wpcf7-response-output,
+    #wpcf7-f1063-o1 .wpcf7-response-output,
+    #wpcf7-f1064-o1 .wpcf7-response-output,
+    #wpcf7-f1636-o1 .wpcf7-response-output,
+    #wpcf7-f1637-o1 .wpcf7-response-output {
         width: 1140px;
     }
 }
@@ -903,7 +927,11 @@ section {
 @media (min-width: 1400px) {
     #wpcf7-f630-o1 .wpcf7-response-output,
     #wpcf7-f816-o1 .wpcf7-response-output,
-    #wpcf7-f820-o1 .wpcf7-response-output {
+    #wpcf7-f820-o1 .wpcf7-response-output,
+    #wpcf7-f1063-o1 .wpcf7-response-output,
+    #wpcf7-f1064-o1 .wpcf7-response-output,
+    #wpcf7-f1636-o1 .wpcf7-response-output,
+    #wpcf7-f1637-o1 .wpcf7-response-output {
         width: 1320px;
     }
 }

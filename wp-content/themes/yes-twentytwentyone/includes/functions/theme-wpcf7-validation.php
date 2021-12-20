@@ -16,12 +16,14 @@ if (!function_exists('footer_newsletter_email_already_registered') && !function_
     function footer_newsletter_email_already_registered($cf_id, $form_field_name, $form_field_value)
     {
         global $wpdb;
-        $form_id    = 'cf_' . $cf_id;
+        $form_id    = 'cf_' . WPCF7_FOOTER_NEWSLETTER_FORM_ID;
+        $form_id_bm = 'cf_' . WPCF7_FOOTER_NEWSLETTER_FORM_ID_BM;
+        $form_id_ch = 'cf_' . WPCF7_FOOTER_NEWSLETTER_FORM_ID_CH;
         $query      = " SELECT yvld.* 
                         FROM yes_vxcf_leads_detail AS yvld
                         LEFT JOIN yes_vxcf_leads AS yvl
                             ON yvld.lead_id = yvl.id
-                        WHERE yvl.form_id = '$form_id'
+                        WHERE yvl.form_id IN ('$form_id', '$form_id_bm', '$form_id_ch')
                             AND yvld.name = '$form_field_name' 
                             AND yvld.value LIKE '%$form_field_value%'";
         $entry      = $wpdb->get_results($query);
@@ -49,8 +51,8 @@ if (!function_exists('footer_newsletter_email_already_registered') && !function_
         $wpcf7              = WPCF7_ContactForm::get_current();
         $current_form_id    = $wpcf7->id;
 
-        if ($current_form_id == WPCF7_FOOTER_NEWSLETTER_FORM_ID) {
-            $cf_id              = WPCF7_FOOTER_NEWSLETTER_FORM_ID;
+        if ($current_form_id == WPCF7_FOOTER_NEWSLETTER_FORM_ID || $current_form_id == WPCF7_FOOTER_NEWSLETTER_FORM_ID_BM || $current_form_id == WPCF7_FOOTER_NEWSLETTER_FORM_ID_CH) {
+            $cf_id              = $current_form_id;
             $form_field_name    = 'email';
             $errorMessage       = 'This email address is already registered';
             $name               = $tag['name'];

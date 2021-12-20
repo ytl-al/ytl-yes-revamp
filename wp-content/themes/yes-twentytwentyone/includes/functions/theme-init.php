@@ -61,12 +61,14 @@ if (!function_exists('yes_twentytwentyone_setup')) {
         if (function_exists('add_image_size')) {
             add_image_size('page-background-image', 1920, 1080);
         }
+
+        // remove_theme_support( 'widgets-block-editor' );
     }
     add_action('after_setup_theme', 'yes_twentytwentyone_setup');
 }
 
 
-$exclude_language_widgets   = ['yes_widget_page_modal', 'yes_widget_footer_newsletter', 'yes_widget_footer_bottom'];
+$exclude_language_widgets   = ['yes_widget_page_modal', 'yes_widget_footer_bottom'];
 
 if (!function_exists('yes_register_widgets')) {
     /**
@@ -83,7 +85,7 @@ if (!function_exists('yes_register_widgets')) {
             $arr_widgets    = [
                 ['name' => 'Top Page Banner',   'id' => 'yes_widget_top_page_banner'],
                 ['name' => 'Page Modal',        'id' => 'yes_widget_page_modal'],
-                ['name' => 'Footer FAQ',        'id' => 'yes_widget_footer_faq'],
+                // ['name' => 'Footer FAQ',        'id' => 'yes_widget_footer_faq'],
                 ['name' => 'Footer Newsletter', 'id' => 'yes_widget_footer_newsletter'],
                 ['name' => 'Footer Top',        'id' => 'yes_widget_footer_top'],
                 ['name' => 'Footer Bottom',     'id' => 'yes_widget_footer_bottom']
