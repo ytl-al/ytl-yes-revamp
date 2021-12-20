@@ -1337,6 +1337,33 @@ footer.footer .wp-block-image {
         margin-top: 10px;
     }
 }
+    
+#section-5g-map .link-pink, #section-offering .link-pink {
+    font-size: 28px;
+    font-weight: 600;
+    color: #FFD9FF;
+    text-decoration: underline;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    transition: all 0.2s ease;
+}
+
+#section-5g-map .link-pink:hover, #section-offering .link-pink:hover {
+    text-decoration: underline;
+    color: #FFF;
+}
+    
+#section-plan .sim-box .btn-box .btn.btn-oos {
+    background-color: transparent;
+    color: #FDDBFB;
+    cursor: default;
+    font-style: italic;
+    font-weight: 600;
+}
+
+#section-plan .sim-box .btn-box .btn.btn-oos:focus {
+    box-shadow: 0 0 0 transparent;
+}
 
 .table.plan-table a[data-bs-toggle="tooltip"] { display: none; }
 
