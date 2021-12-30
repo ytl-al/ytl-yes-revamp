@@ -1146,3 +1146,18 @@
     </div>
 </section>
 <!-- FAQs End -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var url_string  = window.location.href;
+        var url         = new URL(url_string);
+        var paramRC     = url.searchParams.get('rc');
+        if (paramRC !== null) {
+            $('.btn-ypa').each(function() {
+                var href    = $(this).attr('href');
+                var newHREF = href + '&rc=' + paramRC;
+                $(this).attr('href', newHREF);
+            });
+        }
+    });
+</script>

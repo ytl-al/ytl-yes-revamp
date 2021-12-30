@@ -11,5 +11,13 @@
                 $(this).attr('href', newHREF);
             });
         }
+        var paramRC     = url.searchParams.get('rc');
+        if (paramRC !== null) {
+            $('.btn-ypa').each(function() {
+                var href    = $(this).attr('href');
+                var newHREF = href + '&rc=' + paramRC;
+                $(this).attr('href', newHREF);
+            });
+        }
     });
 </script>
