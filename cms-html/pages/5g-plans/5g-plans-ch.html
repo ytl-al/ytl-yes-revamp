@@ -255,7 +255,7 @@
                                         <div class="btn-box"><a href="https://firstto5g.yes.my/?pl=690&lang=zh-hans" class="btn btn-ypa">Buy Now</a></div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 col-lg-4 mb-3 mb-lg-0">
+                                <!--<div class="col-12 col-md-6 col-lg-4 mb-3 mb-lg-0">
                                     <div class="sim-box">
                                         <div class="mb-auto">
                                             <h1>YES FT5G<br>Prepaid Plan <img src="/wp-content/uploads/2021/12/5g-icon.png" alt=""></h1>
@@ -272,7 +272,7 @@
                                         </div>
                                         <div class="btn-box"><a href="https://firstto5g.yes.my/?pl=738&lang=zh-hans" class="btn btn-ypa">Buy Now</a></div>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                             <div class="row mt-4">
                                 <div class="note-text">
@@ -721,9 +721,6 @@
                                                     <th class="text-center">
                                                         <img src="/wp-content/uploads/2021/12/vivo_v23e.png" alt="">
                                                     </th>
-                                                    <th class="text-center">
-                                                        <img src="/wp-content/uploads/2021/12/vivo_v23.png" alt="">
-                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -731,17 +728,14 @@
                                                     <td class="blue-col rounded-top">Brand/Model</td>
                                                     <td class="rounded-top"><span>VIVO Y76 5G</span></td>
                                                     <td class="rounded-top"><span>VIVO V23e 5G</span></td>
-                                                    <td class="rounded-top"><span>VIVO V23 5G</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="blue-col">Launch</td>
                                                     <td>Nov-21</td>
                                                     <td>Dec-21</td>
-                                                    <td>Jan-22</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="blue-col">YES 4G/5G Band</td>
-                                                    <td>B20/38/40 + B28/78</td>
                                                     <td>B20/38/40 + B28/78</td>
                                                     <td>B20/38/40 + B28/78</td>
                                                 </tr>
@@ -749,17 +743,14 @@
                                                     <td class="blue-col">5G Mode</td>
                                                     <td>Dual Mode</td>
                                                     <td>Dual Mode</td>
-                                                    <td>Dual Mode</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="blue-col">Display</td>
                                                     <td>6.58"</td>
                                                     <td>6.44"</td>
-                                                    <td>-</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="blue-col">OS</td>
-                                                    <td>Android 11</td>
                                                     <td>Android 11</td>
                                                     <td>Android 11</td>
                                                 </tr>
@@ -767,17 +758,14 @@
                                                     <td class="blue-col">Camera (Main/Selfie)</td>
                                                     <td>Triple 50/2/2MP; Single 16MP</td>
                                                     <td>Triple 50/8/2MP; Single 44MP</td>
-                                                    <td>-</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="blue-col">Battery</td>
                                                     <td>4100mAh</td>
                                                     <td>4050mAh</td>
-                                                    <td>-</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="blue-col">Memory /Storage - GB</td>
-                                                    <td>8+128</td>
                                                     <td>8+128</td>
                                                     <td>8+128</td>
                                                 </tr>
@@ -785,19 +773,16 @@
                                                     <td class="blue-col">Card Slot</td>
                                                     <td>Hybrid Dual SIM (Dual stand-by)</td>
                                                     <td>Hybrid Dual SIM (Dual stand-by)</td>
-                                                    <td>-</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="blue-col">Type of Chipset</td>
                                                     <td>MediaTek MT6833 Dimensity 700<br>5G (7 nm)</td>
                                                     <td>MediaTek Dimensity 810 5G<br>(6 nm)</td>
-                                                    <td>-</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="blue-col rounded-bottom">RRP</td>
                                                     <td class="pink-bottom rounded-bottom"><span class="cross">RM1,299</span> FREE*</td>
                                                     <td class="pink-bottom rounded-bottom"><span class="cross">RM1,599</span> FREE*</td>
-                                                    <td class="pink-bottom rounded-bottom"><span class="cross">RM1,999</span> RM349*</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -1148,13 +1133,13 @@
 <!-- FAQs End -->
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        var url_string  = window.location.href;
-        var url         = new URL(url_string);
-        var paramRC     = url.searchParams.get('rc');
+    $(document).ready(function() {
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var paramRC = url.searchParams.get('rc');
         if (paramRC !== null) {
             $('.btn-ypa').each(function() {
-                var href    = $(this).attr('href');
+                var href = $(this).attr('href');
                 var newHREF = href + '&rc=' + paramRC;
                 $(this).attr('href', newHREF);
             });

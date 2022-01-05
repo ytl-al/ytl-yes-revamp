@@ -737,7 +737,6 @@
                                                     <td class="blue-col">Keluaran</td>
                                                     <td>Nov-21</td>
                                                     <td>Dec-21</td>
-                                                    <td>Jan-22</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="blue-col">YES 4G/5G Band</td>
@@ -1136,18 +1135,3 @@
     </div>
 </section>
 <!-- FAQs End -->
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        var url_string = window.location.href;
-        var url = new URL(url_string);
-        var paramRC = url.searchParams.get('rc');
-        if (paramRC !== null) {
-            $('.btn-ypa').each(function() {
-                var href = $(this).attr('href');
-                var newHREF = href + '&rc=' + paramRC;
-                $(this).attr('href', newHREF);
-            });
-        }
-    });
-</script>
