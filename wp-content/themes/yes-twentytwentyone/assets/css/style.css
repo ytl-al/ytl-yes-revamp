@@ -512,6 +512,24 @@ section {
     background-color: #F8BFDB;
 }
 
+.white-btn2 {
+    background-color: #FFF;
+    border-radius: 90px;
+    padding: 14px 74px;
+    display: inline-block;
+    font-weight: 800;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #ED028C;
+    border: solid 2px #ED028C;
+    text-align: center;
+}
+
+.white-btn2:hover {
+    color: #FFF;
+    background-color: #ED028C;
+}
+
 
 /* Home-Amazing Things styling */
 
