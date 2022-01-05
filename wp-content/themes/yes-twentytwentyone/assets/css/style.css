@@ -303,6 +303,14 @@ section {
     width: 20px;
 }
 
+.footer .icon-list.icon-appdownload {
+    max-width: 130px;
+}
+
+.footer .icon-list.icon-appdownload li {
+    margin: 0;
+}
+
 .footer .menulist {
     width: 100%;
     margin: 0;
@@ -1366,5 +1374,27 @@ footer.footer .wp-block-image {
 }
 
 .table.plan-table a[data-bs-toggle="tooltip"] { display: none; }
+
+.layer-overlay {
+    background: rgba(0, 0, 0, 0.7) url('https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/assets/images/img-loading.svg') center center no-repeat;
+    background-size: 200px;
+    display: none;
+    height: 100%;
+    left: 0px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 4;
+    transition: all 230ms ease-in-out;
+    -moz-transition: all 230ms ease-in-out;
+    -o-transition: all 230ms ease-in-out;
+    -webkit-transition: all 230ms ease-in-out;
+}
+body.show-overlay {
+    overflow: hidden;
+}
+body.show-overlay .layer-overlay {
+    display: block;
+}
 
 /* Added by AL - END */
