@@ -15,6 +15,8 @@
 		<?php get_template_part('template-parts/footer/site-footer-ywos'); ?>
 	</div>
 	<!-- Layer Page ENDS -->
+	
+	<div class="layer-overlay"></div>
 
 	<?php wp_footer(); ?>
 
