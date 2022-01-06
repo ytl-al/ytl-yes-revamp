@@ -37,9 +37,9 @@ get_header();
 				get_template_part('template-parts/content/content', get_post_type());
 
 				if ($custom_code_js) :
-					if (strpos($custom_code_js, '<script type="text/javascript">') === false) echo '<script type="text/javascript">';
+					if (strpos($custom_code_js, '<script type="text/javascript"') === false) echo '<script type="text/javascript">';
 					echo $custom_code_js;
-					if (strpos($custom_code_js, '<script type="text/javascript">') === false) echo '</script>';
+					if (strpos($custom_code_js, '<script type="text/javascript"') === false) echo '</script>';
 				endif;
 				
 			endwhile;
