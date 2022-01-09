@@ -21,6 +21,12 @@
             color: #096FD4;
         }
         
+        .slider-btn-left {
+            left: 0;
+            right: auto;
+            bottom: 10%;
+        }
+        
         @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
             .slider-btn-container {
                 margin-bottom: 0.9rem;
@@ -38,6 +44,16 @@
             .carousel-indicators [data-bs-target] {
                 width: 5px;
                 height: 5px;
+            }
+            .slider-btn-container .white-btn {
+                padding: 3px 25px;
+                font-size: 11px;
+            }
+            .slider-btn-left {
+                bottom: 5%;
+            }
+            .slider-btn-left img {
+                width: 50%;
             }
         }
         /* IPAD Portrait */
@@ -83,6 +99,12 @@
             .carousel-indicators [data-bs-target] {
                 width: 5px;
                 height: 5px;
+            }
+            .slider-btn-left img {
+                width: 50%;
+            }
+            .slider-btn-left {
+                bottom: 5%;
             }
         }
     </style>
@@ -197,6 +219,12 @@
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active" data-bs-interval="3000">
+                            <img src="images/discover5g-banner.jpg" class="d-block w-100" alt="...">
+                            <div class="slider-btn-container slider-btn-left">
+                                <a href="https://my5g-dev.azurewebsites.net/Register/DiscoverFT5G"><img src="images/claim-btn.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="3000">
                             <img src="images/5g-landing-banner.jpg" class="d-block w-100" alt="...">
                             <div class="slider-btn-container"><a href="#" class="slider-btn lightpink-btn">Get it Now</a></div>
                         </div>
