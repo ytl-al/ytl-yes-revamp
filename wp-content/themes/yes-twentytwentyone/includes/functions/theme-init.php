@@ -61,6 +61,8 @@ if (!function_exists('yes_twentytwentyone_setup')) {
         if (function_exists('add_image_size')) {
             add_image_size('page-background-image', 1920, 1080);
         }
+
+        remove_theme_support('widgets-block-editor');
     }
     add_action('after_setup_theme', 'yes_twentytwentyone_setup');
 }

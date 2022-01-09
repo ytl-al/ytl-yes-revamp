@@ -1,27 +1,57 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script type="text/javascript">
-    const arrSIMPlanIDs = [830, 831, 832];
-    const arrDevicePlanIDs = [833];
+    const arrSIMPlanIDs = [740, 741, 742];
+    const arrDevicePlanIDs = [743, 744, 745, 746, 747, 748, 749, 750, 751, 752, 753, 754, 755, 756, 771, 772, 773, 774, 775, 776, 777, 778, 779];
     $(document).ready(function() {
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var paramDC = url.searchParams.get('dc');
+        var paramDUID = url.searchParams.get('duid');
+        if (paramDC !== null && paramDUID !== null) {
+            $('.btn-ypa').each(function() {
+                var href = $(this).attr('href');
+                var newHREF = href + '&dc=' + paramDC + '&duid=' + paramDUID;
+                $(this).attr('href', newHREF);
+            });
+        }
+        var paramNRIC = url.searchParams.get('nric');
+        var paramYesNumber = url.searchParams.get('msisdn');
+        if (paramNRIC !== null && paramYesNumber !== null) {
+            runEligibilityCheck(paramNRIC, paramYesNumber)
+        }
+
         var formEligibility = $('.form-eligibilityCheck');
-        $(formEligibility).on('submit', function(e) {
-            $('#section-plan').hide();
-            var inputValues = validateFields();
+        $(formEligibility).on('submit', function(event) {
+            submitEligibilityForm(event);
 
-            if (!inputValues) {
-                $('.form-control.has-error').first().focus();
-                return false;
-            } else {
-                toggleOverlay();
-
-                updateYPALinks(inputValues.idNumber, inputValues.yesNumber);
-                checkCustomerEligibility(inputValues.idNumber, inputValues.yesNumber);
-
-                e.preventDefault();
-            }
+            event.preventDefault();
+            return false;
         });
     });
+
+    function submitEligibilityForm(event) {
+        $('#section-plan').hide();
+        var inputValues = validateFields();
+
+        if (!inputValues) {
+            $('.form-control.has-error').first().focus();
+            return false;
+        } else {
+            runEligibilityCheck(inputValues.idNumber, inputValues.yesNumber);
+        }
+        event.preventDefault();
+        return false;
+    }
+
+    function runEligibilityCheck(idNumber = '', yesNumber = '') {
+        if (idNumber != '' && yesNumber != '') {
+            toggleOverlay();
+
+            updateYPALinks(idNumber, yesNumber);
+            checkCustomerEligibility(idNumber, yesNumber);
+        }
+    }
 
     function validateFields() {
         var inputIDNumber = $('#input-idNumber');
