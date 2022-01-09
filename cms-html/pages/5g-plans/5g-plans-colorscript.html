@@ -258,6 +258,22 @@
                                 <div class="col-12 col-md-6 col-lg-4 mb-3 mb-lg-0">
                                     <div class="sim-box">
                                         <div class="mb-auto">
+                                            <h1>YES FT5G <br>Discover Plan <img src="/wp-content/uploads/2021/12/5g-icon.png" alt=""></h1>
+                                            <div class="price-box">RM0</div>
+                                            <ul class="plan-points">
+                                                <li>Valid for 30 days</li>
+                                                <li>10GB 4G Data (with hotspot)</li>
+                                                <li>FREE Unlimited 5G Data* until 31st March 2022</li>
+                                                <li>Unlimited calls and SMS to YES networks</li>
+                                                <li>Pay-as-you-use calls and SMS to other networks</li>
+                                            </ul>
+                                        </div>
+                                        <div class="btn-box"><a href="https://my5g-dev.azurewebsites.net/Register/DiscoverFT5G" class="btn btn-ypa">Claim Now</a></div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-12 col-md-6 col-lg-4 mb-3 mb-lg-0">
+                                    <div class="sim-box">
+                                        <div class="mb-auto">
                                             <h1>YES FT5G<br>Prepaid Plan <img src="/wp-content/uploads/2021/12/5g-icon.png" alt=""></h1>
                                             <div class="price-box">RM49</div>
                                             <ul class="plan-points">
@@ -272,7 +288,7 @@
                                         </div>
                                         <div class="btn-box"><a href="https://firstto5g.yes.my/?pl=738" class="btn btn-ypa">Buy Now</a></div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="row mt-4">
                                 <div class="note-text">
@@ -1401,3 +1417,18 @@
     </div>
 </section>
 <!-- FAQs End -->
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var paramRC = url.searchParams.get('rc');
+        if (paramRC !== null) {
+            $('.btn-ypa').each(function() {
+                var href = $(this).attr('href');
+                var newHREF = href + '&rc=' + paramRC;
+                $(this).attr('href', newHREF);
+            });
+        }
+    });
+</script>
