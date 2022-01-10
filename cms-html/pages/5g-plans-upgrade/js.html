@@ -94,6 +94,10 @@
         if (idNumber.length > 0 && yesNumber.length > 0) {
             $('.btn-ypa').each(function() {
                 var href = $(this).attr('href');
+                var curHref = href.indexOf('&n=');
+                if (curHref > -1) {
+                    var href = href.substring(0, curHref);
+                }
                 var newHREF = href + '&n=' + idNumber + '&m=' + yesNumber;
                 $(this).attr('href', newHREF);
             });
