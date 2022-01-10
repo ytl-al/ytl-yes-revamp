@@ -1,0 +1,73 @@
+<script type="text/javascript">
+    const ywosLocalStorageName = 'yesYWOS';
+    const ywosLocalStorage = JSON.parse(localStorage.getItem(ywosLocalStorageName));
+    const expiryYWOSCart = 60; // in minute
+
+    $(document).ready(function() {
+        $('.btn-buyplan').on('click', function() {
+            var planID = $(this).attr('data-planid');
+            ywos.buyPlan(planID);
+        });
+    });
+
+    var ywos = {
+        init: function() {},
+        generateSessionKey: function() {
+            return '_' + Math.random().toString(36).substr(2, 9);
+        },
+        saveLocalStorage: function(planID) {
+            var ywosLocalStorageData = ywosLocalStorage;
+            var storageData = {};
+            var expiryLength = expiryYWOSCart * 60000;
+            var ywosCartExpiry = Date.now() + expiryLength;
+            if (ywosLocalStorageData === null) {
+                var sessionKey = this.generateSessionKey();
+                storageData = {
+                    'expiry': ywosCartExpiry,
+                    'sessionKey': sessionKey,
+                    'meta': {
+                        'planID': planID
+                    }
+                };
+                ywosLocalStorageData = {
+                    'ywosCart': storageData
+                };
+            } else {
+                storageData = {
+                    'expiry': ywosCartExpiry,
+                    'sessionKey': ywosLocalStorageData.ywosCart.sessionKey,
+                    'meta': {
+                        'planID': planID
+                    }
+                };
+                ywosLocalStorageData.ywosCart = storageData;
+            }
+            localStorage.setItem(ywosLocalStorageName, JSON.stringify(ywosLocalStorageData));
+        },
+        redirectToCart: function() {
+            window.location.href = window.location.origin + "/ywos/cart";
+        },
+        buyPlan: function(planID) {
+            toggleOverlay();
+            this.saveLocalStorage(planID);
+            this.redirectToCart();
+        }
+    };
+
+    function buyPlan(planID) {
+        ywos.buyPlan(planID);
+    }
+
+    function toggleOverlay(toggleShow = true) {
+        if (toggleShow) {
+            $('body').addClass('show-overlay');
+            $('.layer-overlay').removeAttr('style');
+        } else {
+            $('.layer-overlay').fadeOut(500);
+            setTimeout(function() {
+                $('body').removeClass('show-overlay');
+                $('.layer-overlay').removeAttr('style');
+            })
+        }
+    }
+</script>

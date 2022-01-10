@@ -1,0 +1,436 @@
+/* Cart Modal Styling START */
+
+.nav-container .language-drop .dropdown-toggle {
+    background-color: #00B4F0;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    color: #FFF;
+}
+
+.nav-container .language-drop {
+    margin: 0px 20px;
+}
+
+.nav-container .language-drop .dropdown-toggle:active,
+.nav-container .language-drop .dropdown-toggle:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.nav-container a {
+    color: #FFF;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.nav-container .language-drop .dropdown-item {
+    font-size: 15px;
+    color: #000;
+    font-weight: 400;
+}
+
+#grey-innerbanner {
+    background-color: #F9F7F4;
+    padding: 25px 0px;
+}
+
+#grey-innerbanner h1 {
+    font-size: 42px;
+    color: #2B2B2B;
+    font-weight: 800;
+}
+
+#cart-body {
+    padding: 30px 0px;
+}
+
+#cart-body .packagebox {
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border: 2px solid #00B4F0;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+#cart-body .packagebox .visualbg {
+    background: linear-gradient(16.65deg, #00B4F0 -123.85%, #CF5396 74.76%);
+    text-align: center;
+    padding: 15px 12px;
+}
+
+#cart-body .packagebox .visualbg.prepaid {
+    background: linear-gradient(180deg, #F0C724 0%, #00B4F0 313.43%);
+}
+
+#cart-body .packagebox h3 {
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 28px;
+    color: #2B2B2B;
+}
+
+#cart-body .packagebox p {
+    font-size: 20px;
+    line-height: 24px;
+    color: #525252;
+}
+
+#cart-body .packagebox h3.price {
+    font-weight: 800;
+    font-size: 42px;
+    color: #2B2B2B;
+}
+
+#cart-body .packagebox .package-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-top: solid 1px #00B4F0;
+    padding-top: 15px;
+    font-size: 16px;
+    color: #2B2B2B;
+}
+
+#cart-body p {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+}
+
+#cart-body p a {
+    color: #00B4F0;
+    text-decoration: underline;
+}
+
+.summary-box {
+    box-shadow: 0px 5px 15px rgba(112, 144, 176, 0.2);
+    border-radius: 8px;
+    width: 100%;
+    background-color: #FFF;
+    padding: 20px;
+}
+
+.summary-box h1 {
+    font-size: 24px;
+    font-weight: 800;
+    color: #2B2B2B;
+    margin-bottom: 20px;
+}
+
+.summary-box h2 {
+    width: 100%;
+    font-size: 18px;
+    color: #525252;
+    font-weight: 700;
+    border-bottom: solid 1px #C5C5C5;
+    padding-bottom: 5px;
+}
+
+.summary-box h3 {
+    font-size: 24px;
+    font-weight: 800;
+    color: #00B4F0;
+    text-transform: uppercase;
+}
+
+.summary-box .monthly {
+    width: 100%;
+    border-bottom: solid 1px #C5C5C5;
+    border-top: solid 1px #C5C5C5;
+}
+
+.summary-box .monthly p {
+    font-size: 14px !important;
+    color: #525252 !important;
+}
+
+.summary-box .referral-box {
+    width: 100%;
+    border: 1px solid #C5C5C5;
+    border-radius: 8px;
+    position: relative;
+}
+
+.summary-box .referral-box .referral-check {
+    position: absolute;
+    right: 10px;
+    top: 6px;
+}
+
+.summary-box input.referral {
+    width: 100%;
+    font-size: 13px;
+    border: none;
+    border-radius: 8px;
+    color: #7A7A7A;
+    padding: 5px;
+    padding-left: 30px;
+    background-image: url('https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/referral-icon.png');
+    background-repeat: no-repeat;
+    background-position: 9px 6px;
+}
+
+.summary-box .pink-btn {
+    padding: 7px 10px;
+}
+
+.addons-container h1 {
+    font-size: 29px;
+    color: #2B2B2B;
+    font-weight: 800;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.addons-container .addon-box {
+    background-color: #FFF;
+    border-radius: 5px;
+    box-shadow: 0px 3.44867px 10.346px rgba(112, 144, 176, 0.2);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    padding: 15px;
+}
+
+.addons-container .addon-box:hover {
+    box-shadow: 0px 8.45px 10.346px rgba(112, 144, 176, 0.27);
+}
+
+.addons-container .addon-box img {
+    position: absolute;
+    right: 15px;
+    top: 40px;
+}
+
+.addons-container .addon-box h1 {
+    color: #00B4F0;
+    font-weight: 800;
+    font-size: 20px;
+    margin: 0px;
+}
+
+.addons-container .addon-box p {
+    color: #525252;
+    font-size: 14px;
+}
+
+.addons-container .addon-box p.small {
+    font-size: 12px;
+    color: #7A7A7A;
+}
+
+.packagebox .accordion-button:not(.collapsed) {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.packagebox .accordion-button {
+    width: auto;
+    padding: 0;
+    float: right;
+    padding-right: 20px;
+}
+
+.packagebox .accordion-button h3 {
+    margin-right: 10px;
+}
+
+.packagebox .accordion-button:not(.collapsed)::after {
+    background: url(https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cart-drop-icon-up.png) no-repeat center center / contain !important;
+    transform: rotate(0deg);
+}
+
+.packagebox .accordion-button::after {
+    background: url(https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cart-drop-icon.png) no-repeat center center / contain !important;
+}
+
+.packagebox .accordion-button:focus,
+.packagebox .accordion-button:active {
+    outline: none;
+    box-shadow: none;
+    border: none;
+}
+
+#cart-accordion .accordion-body {
+    padding: 1.5rem;
+    border: 1px solid #C5C5C5;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+#cart-accordion .accordion-body h1 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 24px;
+    color: #2B2B2B;
+    width: 100%;
+    border-bottom: 1px solid #C5C5C5;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+#cart-accordion .accordion-body h2 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2B2B2B;
+    margin-bottom: 15px;
+}
+
+#cart-accordion .accordion-body p {
+    font-size: 16px;
+    color: #2B2B2B;
+}
+
+#cart-accordion .accordion-body p.bold {
+    font-weight: 600;
+}
+
+#cart-accordion .accordion-body p a {
+    color: #ED028C;
+    text-decoration: underline;
+}
+
+#cart-accordion .accordion-body p.small {
+    font-size: 12px;
+    color: #2B2B2B;
+}
+
+#cart-accordion .accordion-body p.large {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+#login-modal .modal-body {
+    padding: 30px;
+}
+
+#login-modal .white-btn2,
+#login-modal .pink-btn {
+    padding: 5px 20px;
+}
+
+#login-modal .btn-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 999;
+}
+
+#login-modal h1 {
+    position: relative;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #2B2B2B;
+    z-index: 1;
+    overflow: hidden;
+    text-align: center;
+}
+
+#login-modal h1:before,
+#login-modal h1:after {
+    position: absolute;
+    top: 51%;
+    overflow: hidden;
+    width: 45%;
+    height: 1px;
+    content: '\a0';
+    background-color: #2B2B2B;
+}
+
+#login-modal h1:after {
+    margin-left: 5%;
+}
+
+#login-modal h1:before {
+    margin-left: -50%;
+    text-align: right;
+}
+
+#login-modal p.bold {
+    font-size: 16px;
+    color: #2B2B2B;
+    font-weight: 700;
+}
+
+#login-modal .nav-pills .nav-link.active,
+#login-modal .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #00B4F0;
+}
+
+#login-modal .nav-pills .nav-link {
+    border-radius: 90px;
+    font-size: 14px;
+    padding: 0.2rem 1.3rem;
+    background-color: #D7D7D7;
+    color: #FFF;
+    min-width: 100px;
+}
+
+#login-modal .input-box {
+    border-radius: 8px;
+    width: 100%;
+    border: 0.75px solid rgba(122, 122, 122, 0.4);
+    margin-bottom: 10px;
+}
+
+#login-modal .input-box input {
+    border: none;
+    text-align: center;
+    font-size: 15px;
+    color: #2B2B2B;
+    padding: 11px;
+    background-repeat: no-repeat;
+    background-position: 13px 9px;
+    border-radius: 8px;
+}
+
+#login-modal .input-box input:focus,
+#login-modal .input-box input:active {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+#login-modal .input-box input.userid {
+    background-image: url('https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/user-icon.png');
+}
+
+#login-modal .input-box input.password {
+    background-image: url('https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/lock-icon.png');
+    background-position: 13px 6px;
+}
+
+#login-modal .forgotpassword {
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-decoration: underline;
+    color: #525252;
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    #cart-body .packagebox .visualbg {
+        padding: 0px 12px;
+    }
+    #cart-body .packagebox h3 {
+        font-size: 20px;
+    }
+    #cart-body .packagebox p {
+        font-size: 15px;
+    }
+    #cart-body .packagebox h3.price {
+        font-size: 31px;
+    }
+    .addons-container .addon-box {
+        margin-bottom: 10px;
+    }
+}

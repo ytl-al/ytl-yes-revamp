@@ -1,5 +1,6 @@
 # blacklist all folders and files in root
 /*
+.DS_Store
 
 # ignore everything in the root except the following files.
 !/README.md

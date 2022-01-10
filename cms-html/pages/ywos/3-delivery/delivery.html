@@ -1,0 +1,188 @@
+<!-- Banner Start -->
+<section id="grey-innerbanner">
+    <div class="container">
+        <ul class="wizard">
+            <li ui-sref="firstStep">
+                <span>1. Verification</span>
+            </li>
+            <li ui-sref="secondStep" class="completed">
+                <span>2. Delivery Details</span>
+            </li>
+            <li ui-sref="thirdStep">
+                <span>3. Payment Info</span>
+            </li>
+            <li ui-sref="fourthStep">
+                <span>4. Review and Pay</span>
+            </li>
+        </ul>
+    </div>
+</section>
+<!-- Banner End -->
+
+<!-- Cart Body STARTS -->
+<section id="cart-body">
+    <div class="container p-lg-5 p-3">
+        <div class="row gx-5">
+            <form class="col-lg-8 col-12 needs-validation" novalidate>
+                <div>
+                    <h1>Delivery Details</h1>
+                    <p class="sub mb-4">Delivery only available in Malaysia</p>
+                    <div class="row mb-4">
+                        <div class="col-lg-6 col-12">
+                            <label class="form-label">* Full Name (as per IC/ Passport)</label>
+                            <div class="input-group align-items-center">
+                                <input type="text" class="form-control" id="full-name" placeholder="" required>
+                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="right" class="ms-2" title="Tooltip text here"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/info-icon.png" /></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-6 col-12">
+                            <label class="form-label">* Email address</label>
+                            <div class="input-group align-items-center">
+                                <input type="text" class="form-control" id="email" placeholder="jane.doe@gmail.com" required>
+                                <a href="#" data-bs-toggle="tooltip" data-bs-placement="right" class="ms-2" title="Tooltip text here"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/info-icon.png" /></a>
+                                <p class="info">Email is required for receipt and order confirmation</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-6 col-12">
+                            <label class="form-label">* Confirm email address</label>
+                            <div class="input-group align-items-center">
+                                <input type="text" class="form-control" id="confirm-email" placeholder="" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-6 col-12">
+                            <label class="form-label">* Address</label>
+                            <a href="#" class="grey-link float-end">Can’t find your address?</a>
+                            <div class="input-group align-items-center">
+                                <input type="text" class="form-control" id="address" placeholder="" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-6 col-12">
+                            <label class="form-label">Apartment, Office, House, Floor number (optional)</label>
+                            <div class="input-group align-items-center">
+                                <input type="text" class="form-control" id="address-more" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-2 col-12">
+                            <label class="form-label">* Postcode</label>
+                            <div class="input-group align-items-center">
+                                <select class="form-select" required>
+                                <option selected></option>
+                                <option value="1">82100</option>
+                                <option value="2">81920</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-12">
+                            <label class="form-label">* City</label>
+                            <div class="input-group align-items-center">
+                                <select class="form-select" required>
+                                <option selected></option>
+                                <option value="1">Ayer Baloi</option>
+                                <option value="2">Ayer Tawar 3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-12">
+                            <label class="form-label">* State</label>
+                            <div class="input-group align-items-center">
+                                <select class="form-select" required>
+                                <option selected></option>
+                                <option value="1">Johor</option>
+                                <option value="2">Kedah</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-6 col-12">
+                            <label class="form-label">Delivery Notes (optional)</label>
+                            <div class="input-group align-items-center">
+                                <input type="text" class="form-control" id="delivery-notes" placeholder="">
+                                <p class="info">Nearby landmarks or more detailed directions</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-6 col-12">
+                            <div class="address-accuracy">
+                                <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/info-red-icon.png" alt="" class="float-start me-3">
+                                <div class="ps-5">
+                                    <h1>Address Accuracy</h1>
+                                    <p>Addresses that are entered incorrectly may delay your oder, so please double-check for errors. If you wish to enter specific dispatch instructions, please do so under Delivery Notes.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <button class="pink-btn" type="submit">Next: Choose payment method</button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+            <div class="col-lg-4 col-12">
+                <div class="summary-box">
+                    <h1>Order summary</h1>
+                    <h2>Due today after taxes and shipping</h2>
+                    <div class="row">
+                        <div class="col-6 pt-2 pb-2">
+                            <h3>TOTAL</h3>
+                        </div>
+                        <div class="col-6 pt-2 pb-2 text-end">
+                            <h3>RM56.00</h3>
+                        </div>
+                    </div>
+                    <div class="monthly mb-4">
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Due Monthly</p>
+                            </div>
+                            <div class="col-6 text-end">
+                                <p>RM49.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="large">Kasi Up Postpaid 49</p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p class="large"><strong>RM49.00</strong></p>
+                        </div>
+                        <div class="col-6">
+                            <p class="large">Add-Ons</p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p class="large"><strong>RM5.00</strong></p>
+                        </div>
+                        <div class="col-6">
+                            <p class="large">Taxes (SST)</p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p class="large"><strong>RM2.00</strong></p>
+                        </div>
+                        <div class="col-6">
+                            <p class="large">Shipping</p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p class="large"><strong>RM5.00</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Cart Body ENDS -->

@@ -1,0 +1,167 @@
+<!-- Banner Start -->
+<section id="grey-innerbanner">
+    <div class="container">
+        <ul class="wizard">
+            <li ui-sref="firstStep">
+                <span>1. Verification</span>
+            </li>
+            <li ui-sref="secondStep">
+                <span>2. Delivery Details</span>
+            </li>
+            <li ui-sref="thirdStep" class="completed">
+                <span>3. Payment Info</span>
+            </li>
+            <li ui-sref="fourthStep">
+                <span>4. Review and Pay</span>
+            </li>
+        </ul>
+    </div>
+</section>
+<!-- Banner End -->
+
+<!-- Cart Body STARTS -->
+<section id="cart-body">
+    <div class="container p-lg-5 p-3">
+        <div class="row gx-5">
+            <form class="col-lg-8 col-12 needs-validation" novalidate>
+                <div>
+                    <h1>Payment Info</h1>
+                    <p class="sub mb-4 pe-5">This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.</p>
+                    <h2>Select payment</h2>
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-creditcard-tab" data-bs-toggle="pill" data-bs-target="#creditcard" type="button" role="tab" aria-controls="pills-creditcard" aria-selected="true"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/creditcard.png" alt=""></button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-fpx-tab" data-bs-toggle="pill" data-bs-target="#fpx" type="button" role="tab" aria-controls="pills-fpx" aria-selected="false"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/fpx-logo.png" alt=""></button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-grabpay-tab" data-bs-toggle="pill" data-bs-target="#grabpay" type="button" role="tab" aria-controls="pills-grabpay" aria-selected="false"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/grabpay.png" alt=""></button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-boost-tab" data-bs-toggle="pill" data-bs-target="#boost" type="button" role="tab" aria-controls="pills-boost" aria-selected="false"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/boost.png" alt=""></button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-touchgo-tab" data-bs-toggle="pill" data-bs-target="#touchgo" type="button" role="tab" aria-controls="pills-touchgo" aria-selected="false"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/touch&go.png" alt=""></button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="creditcard" role="tabpanel" aria-labelledby="pills-creditcard-tab">
+                            <div class="row mb-4">
+                                <div class="col-lg-6 col-12">
+                                    <label class="form-label">Cardholder Name</label>
+                                    <div class="input-group align-items-center">
+                                        <input type="text" class="form-control" id="full-name" placeholder="" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3 align-items-center g-2">
+                                <div class="col-12">
+                                    <label class="form-label">Card Number</label>
+                                </div>
+                                <div class="col-lg-6 col-12 mb-1">
+                                    <div class="input-group align-items-center">
+                                        <input class="text-center form-control me-2" type="text" id="first" maxlength="4" />
+                                        <input class="text-center form-control me-2" type="text" id="second" maxlength="4" />
+                                        <input class="text-center form-control me-2" type="text" id="third" maxlength="4" />
+                                        <input class="text-center form-control me-2" type="text" id="fourth" maxlength="4" />
+                                    </div>
+                                </div>
+                                <p class="info mb-3">Numbers must contain 16 digits</p>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-lg-3 col-12">
+                                    <label class="form-label">Exp Date</label>
+                                    <div class="input-group align-items-center">
+                                        <input type="text" class="form-control text-center" id="expiry-date" placeholder="00/00" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-12">
+                                    <label class="form-label">CVC</label>
+                                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" class="ms-2 float-end" title="Tooltip text here"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/question-icon.png" /></a>
+                                    <div class="input-group align-items-center">
+                                        <input type="text" class="form-control text-center" id="cvv" placeholder="" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-lg-6 col-12">
+                                    <label class="form-label">Issuing Country</label>
+                                    <div class="input-group align-items-center">
+                                        <input type="text" class="form-control" id="full-name" placeholder="" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <h2>Billing</h2>
+                            <div class="row mb-4">
+                                <div class="col-lg-6 col-12">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
+                                        <label class="form-check-label" for="flexSwitchCheckDefault">Same as shipping address</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="pink-btn" type="submit">Next: Review & Pay</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="col-lg-4 col-12">
+                <div class="summary-box">
+                    <h1>Order summary</h1>
+                    <h2>Due today after taxes and shipping</h2>
+                    <div class="row">
+                        <div class="col-6 pt-2 pb-2">
+                            <h3>TOTAL</h3>
+                        </div>
+                        <div class="col-6 pt-2 pb-2 text-end">
+                            <h3>RM56.00</h3>
+                        </div>
+                    </div>
+                    <div class="monthly mb-4">
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Due Monthly</p>
+                            </div>
+                            <div class="col-6 text-end">
+                                <p>RM49.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="large">Kasi Up Postpaid 49</p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p class="large"><strong>RM49.00</strong></p>
+                        </div>
+                        <div class="col-6">
+                            <p class="large">Add-Ons</p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p class="large"><strong>RM5.00</strong></p>
+                        </div>
+                        <div class="col-6">
+                            <p class="large">Taxes (SST)</p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p class="large"><strong>RM2.00</strong></p>
+                        </div>
+                        <div class="col-6">
+                            <p class="large">Shipping</p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p class="large"><strong>RM5.00</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Cart Body ENDS -->
