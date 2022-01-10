@@ -91,7 +91,14 @@ define('WP_MAX_MEMORY_LIMIT', '256M');
 @ini_set('max_input_vars', 10000);
 
 define('WPCF7_FOOTER_NEWSLETTER_FORM_ID', 0);
+define('WPCF7_FOOTER_NEWSLETTER_FORM_ID_BM', 0);
+define('WPCF7_FOOTER_NEWSLETTER_FORM_ID_CH', 0);
 define('YWOS_PAGE_ID', 0);
+
+define('STEP_CLIENT_KEY', '');
+define('STEP_URL', '');
+define('STEP_USERNAME', '');
+define('STEP_PASSWORD', '');
 
 
 /* That's all, stop editing! Happy publishing. */

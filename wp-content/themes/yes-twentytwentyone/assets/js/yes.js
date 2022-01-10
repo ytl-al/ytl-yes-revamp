@@ -132,13 +132,24 @@ function initBootstrapTooltip() {
 
 /**
  * Function jumpSection()
- * Function to scroll page to section
+ * Function to trigger the jumpToSection by passing sectionID
  * 
  * @since    1.0.1
  */
 function jumpSection(el) {
-    var sectionID       = $(el).attr('data-targetsection');
-    var targetSection   = $('#' + sectionID);
+    var sectionID = $(el).attr('data-targetsection');
+    jumpToSection(sectionID);
+}
+
+
+/**
+ * Function jumpToSection()
+ * Function to scroll page to section
+ * 
+ * @since    1.0.2
+ */
+function jumpToSection(sectionID) {
+    var targetSection = $('#' + sectionID);
     if (targetSection.length > 0) {
         var targetOffset = $(targetSection).offset().top;
         $('html, body').animate({
@@ -146,4 +157,24 @@ function jumpSection(el) {
         }, 100);
     }
     return false;
+}
+
+
+/**
+ * Function toggleOverlay()
+ * Function to toggle the overlay
+ * 
+ * @since    1.0.2
+ */
+function toggleOverlay(toggleShow = true) {
+    if (toggleShow) {
+        $('body').addClass('show-overlay');
+        $('.layer-overlay').removeAttr('style');
+    } else {
+        $('.layer-overlay').fadeOut(500);
+        setTimeout(function() {
+            $('body').removeClass('show-overlay');
+            $('.layer-overlay').removeAttr('style');
+        }, 500)
+    }
 }

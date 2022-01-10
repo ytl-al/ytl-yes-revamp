@@ -16,6 +16,17 @@
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
 
     <style>
+        .slider-btn-container .lightpink-btn {
+            background-color: #FDDBFB;
+            color: #096FD4;
+        }
+        
+        .slider-btn-left {
+            left: 0;
+            right: auto;
+            bottom: 10%;
+        }
+        
         @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
             .slider-btn-container {
                 margin-bottom: 0.9rem;
@@ -34,12 +45,22 @@
                 width: 5px;
                 height: 5px;
             }
+            .slider-btn-container .white-btn {
+                padding: 3px 25px;
+                font-size: 11px;
+            }
+            .slider-btn-left {
+                bottom: 5%;
+            }
+            .slider-btn-left img {
+                width: 50%;
+            }
         }
         /* IPAD Portrait */
         
         @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
             .slider-btn-container {
-                margin-bottom: 2rem;
+                margin-bottom: 0.9rem;
             }
             .carousel-indicators {
                 margin-bottom: 0rem;
@@ -47,6 +68,10 @@
             .slider-btn {
                 padding: 5px 25px;
                 font-size: 13px;
+            }
+            .slider-btn-container .lightpink-btn {
+                font-size: 13px;
+                padding: 5px 25px;
             }
         }
         
@@ -58,9 +83,13 @@
                 font-size: 35px;
             }
             .slider-btn-container {
-                margin-bottom: 0.9rem;
+                margin-bottom: 0.5rem;
             }
             .slider-btn {
+                padding: 3px 25px;
+                font-size: 11px;
+            }
+            .slider-btn-container .lightpink-btn {
                 padding: 3px 25px;
                 font-size: 11px;
             }
@@ -70,6 +99,12 @@
             .carousel-indicators [data-bs-target] {
                 width: 5px;
                 height: 5px;
+            }
+            .slider-btn-left img {
+                width: 50%;
+            }
+            .slider-btn-left {
+                bottom: 5%;
             }
         }
     </style>
@@ -177,13 +212,23 @@
             <!-- Slider Start -->
             <section>
                 <div id="slider-yes-home" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-touch="true" data-bs-interval="false">
-                    <div class="carousel-indicators">
+                    <div class="carousel-indicators d-none">
                         <button type="button" data-bs-target="#slider-yes-home" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target="#slider-yes-home" data-bs-slide-to="1" aria-label="Slide 2"></button>
                         <button type="button" data-bs-target="#slider-yes-home" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active" data-bs-interval="3000">
+                            <img src="images/discover5g-banner.jpg" class="d-block w-100" alt="...">
+                            <div class="slider-btn-container slider-btn-left">
+                                <a href="https://my5g-dev.azurewebsites.net/Register/DiscoverFT5G"><img src="images/claim-btn.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="3000">
+                            <img src="images/5g-landing-banner.jpg" class="d-block w-100" alt="...">
+                            <div class="slider-btn-container"><a href="#" class="slider-btn lightpink-btn">Get it Now</a></div>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="3000">
                             <img src="images/slider1-1.png" class="d-block w-100" alt="...">
                             <div class="slider-btn-container"><a href="#" class="slider-btn">Get it Now</a></div>
                         </div>
@@ -274,35 +319,37 @@
                     <div class="row row-cols-1 row-cols-xl-3 row-cols-lg-2 row-cols-md-2">
                         <div class="col">
                             <div class="deal-box card h-100">
-                                <h2>Claim a free YES Phone<br>worth RM200</h2>
-                                <div class="content">
-                                    <h3 class="mb-3">RM49<br>( 20GB data ) </h3>
-                                    <img src="images/Yes-Altitude_front-and-back-view-1-600x642 1.png" class="mb-3" />
-                                    <h4 class="mb-3">Kasi Up Postpaid 49</h4>
-                                    <div class="row mb-4">
-                                        <div class="col-12 text-center">
-                                            <p class="pricing">RM49</p>
-                                            <p>20GB data<br>Unlimited minuites</p>
+                                <h2>YES FT5G<br>Prepaid Unlimited</h2>
+                                <div class="content d-flex flex-column">
+                                    <div class="mb-auto">
+                                        <img src="images/ft5g-simpack.jpg" class="mb-5 mt-5" />
+                                        <div class="row mb-4">
+                                            <div class="col-12 text-center">
+                                                <p class="pricing">RM30</p>
+                                                <p>Unlimited 5G*/4G**<br>Unlimited Calls to All Networks</p>
+                                            </div>
                                         </div>
+                                        <div class="pink-btn-box"><a href="https://firstto5g.yes.my/?pl=689" class="pink-btn">Buy Now</a></div>
                                     </div>
-                                    <div class="pink-btn-box"><a href="#" class="pink-btn">Learn More</a></div>
+                                    <p class="small mt-3 mb-3">*subject to availability until 31st March 2022<br>** 7Mbps, 9GB Hotspot</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="deal-box card h-100">
-                                <h2>6 months free.<br>RM49 from month 7</h2>
-                                <div class="content">
-                                    <h3 class="mb-3">24 month SIM<br>100GB data</h3>
-                                    <img src="images/sim_card_PNG101522 1.png" class="mb-3" />
-                                    <h4 class="mb-3">Kasi Up Postpaid 30</h4>
-                                    <div class="row mb-4">
-                                        <div class="col-12 text-center">
-                                            <p class="pricing">RM49</p>
-                                            <p>100GB data<br>Unlimited minuites</p>
+                                <h2>YES FT5G<br>Postpaid 49</h2>
+                                <div class="content d-flex flex-column">
+                                    <div class="mb-auto">
+                                        <img src="images/ft5g-simpack.jpg" class="mb-5 mt-5" />
+                                        <div class="row mb-4">
+                                            <div class="col-12 text-center">
+                                                <p class="pricing">RM49</p>
+                                                <p>Unlimited 5G*<br>100GB Full Speed 4G<br>Unlimited Calls to All Networks </p>
+                                            </div>
                                         </div>
+                                        <div class="pink-btn-box"><a href="https://firstto5g.yes.my/?pl=690" class="pink-btn">Buy Now</a></div>
                                     </div>
-                                    <div class="pink-btn-box"><a href="#" class="pink-btn">Learn More</a></div>
+                                    <p class="small mt-3 mb-3">*subject to availability until 31st March 2022</p>
                                 </div>
                             </div>
                         </div>
@@ -329,9 +376,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <p class="small mt-3">*Monthly payment, excluding tax</p>
-                    </div>
+
                 </div>
             </section>
             <!-- Popular Deals End -->

@@ -1,0 +1,23 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+        var url_string  = window.location.href;
+        var url         = new URL(url_string);
+        var paramDC     = url.searchParams.get('dc');
+        var paramDUID   = url.searchParams.get('duid');
+        if (paramDC !== null && paramDUID !== null) {
+            $('.btn-ypa').each(function() {
+                var href    = $(this).attr('href');
+                var newHREF = href + '&dc=' + paramDC + '&duid=' + paramDUID;
+                $(this).attr('href', newHREF);
+            });
+        }
+        var paramRC     = url.searchParams.get('rc');
+        if (paramRC !== null) {
+            $('.btn-ypa').each(function() {
+                var href    = $(this).attr('href');
+                var newHREF = href + '&rc=' + paramRC;
+                $(this).attr('href', newHREF);
+            });
+        }
+    });
+</script>

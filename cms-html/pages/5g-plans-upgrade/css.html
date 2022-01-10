@@ -1,0 +1,725 @@
+<style type="text/css">
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+    body {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+    }
+    
+    h1,
+    h2,
+    h3,
+    h4,
+    p {
+        font-family: 'Montserrat', sans-serif;
+    }
+    
+    .layer-5g-bodybg {
+        background-color: #0070D2;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    /* Top Banner Start */
+    
+    #section-5g-topbanner {
+        padding: 100px 0px;
+        background-image: url('/wp-content/uploads/2021/12/5g-banner-bg.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    
+    #section-5g-topbanner h1 {
+        font-size: 72px;
+        line-height: 72px;
+        font-weight: 700;
+        color: #FFF;
+        margin-bottom: 30px;
+        text-align: left;
+    }
+    
+    #section-5g-topbanner h1 span {
+        background: linear-gradient(170.38deg, #EBCCF9 17.73%, #7771E2 157.34%, rgba(255, 255, 255, 0) 161.84%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    #section-5g-topbanner p {
+        font-size: 21px;
+        font-weight: 500;
+        line-height: 25px;
+        color: #F9F7F4;
+        margin-bottom: 30px;
+        padding-right: 50%;
+    }
+    
+    #section-5g-topbanner .btn {
+        background-color: #FDDBFB;
+        border-radius: 90px;
+        padding: 14px 30px;
+        display: inline-block;
+        font-weight: 700;
+        font-size: 24px;
+        color: #096FD4;
+        border: none;
+        text-align: center;
+    }
+    
+    #section-5g-topbanner .btn:hover {
+        background-color: #EC7AF6;
+        color: #FFF;
+    }
+    /* Top Banner End */
+    /* 5g Internet Start */
+    
+    #section-5g-internet {
+        margin-bottom: 100px;
+    }
+    
+    #section-5g-internet h1 {
+        font-size: 48px;
+        line-height: 48px;
+        font-weight: 700;
+        color: #FFF;
+        text-align: center;
+        margin-bottom: 60px;
+        margin-top: 60px;
+    }
+    
+    #section-5g-internet h1 span {
+        color: #FFD9FF;
+    }
+    
+    #section-5g-internet .section-box {
+        padding: 30px 50px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    #section-5g-internet .section-box .layer-box {
+        width: 100%;
+        display: inline-block;
+        position: relative;
+        cursor: pointer;
+        padding: 40px;
+        background: rgba(255, 255, 255, 0.01);
+        box-shadow: inset 0px 0.272034px 10.8814px #FFD9FF, inset 0px 1.08814px 4.89661px #626FE8, inset 0px 26.6593px 27.2034px rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(27.2034px);
+        /* Note: backdrop-filter has minimal browser support */
+        border-radius: 40px;
+    }
+    
+    #section-5g-internet .section-box .layer-box h1 {
+        font-size: 24px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 1);
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        text-align: left;
+        transition: all 200ms ease-in;
+        margin-top: 0;
+        line-height: 24px;
+    }
+    
+    #section-5g-internet .section-box .layer-box img.icon {
+        display: block;
+        margin-bottom: 20px;
+    }
+    
+    #section-5g-internet .section-box .time-box h2 {
+        font-size: 16px;
+        font-weight: 400;
+        color: rgba(255, 217, 255, 1);
+        text-transform: uppercase;
+        position: relative;
+        width: 100%;
+        transition: all 200ms ease-in;
+    }
+    
+    #section-5g-internet .section-box p {
+        font-size: 16px;
+        color: rgba(249, 247, 244, 1);
+        line-height: 21px;
+        font-weight: 400;
+        transition: all 200ms ease-in;
+    }
+    
+    .link-pink {
+        font-size: 28px;
+        font-weight: 600;
+        color: #FFD9FF;
+        text-decoration: underline;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        transition: all 0.2s ease;
+    }
+    
+    .link-pink:hover {
+        text-decoration: underline;
+        color: #FFF;
+    }
+    /* 5g Internet End */
+    /* Upgrade Form Start */
+    
+    #section-upgrade-form {
+        background-image: url('/wp-content/uploads/2022/01/upgrade-form-bg.jpg');
+        background-size: cover;
+        padding: 60px 0px;
+    }
+    
+    #section-upgrade-form .steps-wizard {
+        counter-reset: counter;
+        list-style-type: none;
+        width: 400px;
+        margin: 0 auto;
+        display: flex;
+        margin-bottom: 40px;
+        padding: 0px;
+    }
+    
+    #section-upgrade-form .steps-wizard li {
+        position: relative;
+        flex: 1;
+        text-align: center;
+    }
+    
+    #section-upgrade-form .steps-wizard li:before {
+        content: counter(counter);
+        counter-increment: counter;
+        display: inline-block;
+        width: 48px;
+        height: 48px;
+        border: none;
+        background-color: #FFF;
+        font-weight: 800;
+        font-size: 19px;
+        border-radius: 50%;
+        line-height: 47px;
+        color: #0070D2;
+    }
+    
+    #section-upgrade-form .steps-wizard li p {
+        font-weight: 600;
+        color: #FFF;
+        font-size: 18px;
+        line-height: 21px;
+        margin-top: 15px;
+    }
+    
+    #section-upgrade-form .steps-wizard li:after {
+        position: absolute;
+        width: calc(100% - 60px);
+        top: 23%;
+        transform: translateY(-75%);
+        left: calc(-50% + 30px);
+        content: "";
+        border-top: solid 1px #FFD9FF;
+        color: rgba(255, 255, 255, 0.2);
+        overflow: hidden;
+        font-size: 25px;
+    }
+    
+    #section-upgrade-form .steps-wizard li:first-child:after {
+        display: none;
+    }
+    
+    #section-upgrade-form .steps-wizard li.active:before {
+        background-color: #FFD9FF;
+        color: #0070D2;
+    }
+    
+    #section-upgrade-form .steps-wizard li.active p {
+        color: #FFD9FF;
+    }
+    
+    #section-upgrade-form .formbox {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        border-radius: 20px;
+        border: solid 1px #FFD9FF;
+        padding: 30px;
+    }
+    
+    #section-upgrade-form .formbox h1 {
+        font-weight: 700;
+        color: #FFF;
+        font-size: 21px;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+    }
+    
+    #section-upgrade-form .formbox label {
+        font-weight: 600;
+        color: #FFF;
+        font-size: 16px;
+    }
+    
+    #section-upgrade-form .formbox input,
+    #section-upgrade-form .formbox select {
+        padding: 10px;
+        border-radius: 10px;
+        padding-left: 20px;
+    }
+    
+    #section-upgrade-form .formbox ::placeholder {
+        color: rgba(0, 0, 0, 0.2);
+    }
+    
+    #section-upgrade-form .validate-btn {
+        background-color: #EC7AF6;
+        display: inline-block;
+        padding: 8px 70px;
+        font-weight: 600;
+        border-radius: 13px;
+        font-size: 18px;
+        color: #FFF;
+        text-align: center;
+        text-transform: uppercase;
+        border: none;
+    }
+    
+    #section-upgrade-form .validate-btn:hover {
+        background-color: #FDDBFB;
+        color: #096FD4;
+    }
+    
+    #section-upgrade-form .fiveg-experience p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 16px;
+        line-height: 19px;
+        font-weight: 700;
+    }
+    
+    #section-upgrade-form .fiveg-experience a {
+        font-size: 20px;
+        font-weight: 600;
+        color: #FFD9FF;
+        text-decoration: underline;
+    }
+    
+    #section-upgrade-form .ineligible-box {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 70px;
+        background: rgba(255, 255, 255, 0.01);
+        box-shadow: inset 0px 0.272034px 10.8814px #FFD9FF, inset 0px 1.08814px 4.89661px #626FE8, inset 0px 26.6593px 27.2034px rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(27.2034px);
+        /* Note: backdrop-filter has minimal browser support */
+        border-radius: 40px;
+    }
+    
+    #section-upgrade-form .ineligible-box h1 {
+        color: #FFD9FF;
+        font-size: 40px;
+        font-weight: 800;
+        margin-bottom: 30px;
+        line-height: 3px;
+    }
+    
+    #section-upgrade-form .ineligible-box h2 {
+        color: #FFF;
+        font-size: 28px;
+        font-weight: 700;
+        line-height: normal;
+    }
+    
+    #section-upgrade-form .ineligible-box p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 25px;
+        font-weight: 500;
+        margin-bottom: 40px;
+    }
+    
+    #section-upgrade-form .ineligible-box a {
+        background-color: #EC7AF6;
+        display: flex;
+        padding: 8px 70px;
+        font-weight: 600;
+        border-radius: 13px;
+        font-size: 18px;
+        color: #FFF;
+        text-align: center;
+        text-transform: uppercase;
+        border: none;
+        align-self: flex-start;
+    }
+    
+    #section-upgrade-form .ineligible-box a:hover {
+        background-color: #FDDBFB;
+        color: #096FD4;
+    }
+    /* Upgrade Form End */
+    /* Section Plan Start */
+    
+    #section-plan {
+        margin-bottom: 30px;
+    }
+    
+    #section-plan .tab-content {
+        padding: 90px 0px;
+    }
+    
+    #section-plan .nav-item {
+        margin: 0px 20px
+    }
+    
+    #section-plan .nav-wrapper {
+        border-bottom: solid 2px #FFD9FF;
+    }
+    
+    #section-plan .nav-pills .nav-link {
+        color: rgba(255, 255, 255, 0.2);
+        font-size: 21px;
+        font-weight: 600;
+        border-radius: 0;
+    }
+    
+    #section-plan .nav-pills .nav-link.active {
+        color: rgba(255, 217, 255, 1);
+        border-bottom: solid 4px #E779F4;
+        background-color: transparent;
+    }
+    
+    #section-plan .sim-box {
+        border-radius: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: inset 0px 0.272034px 10.8814px #FFD9FF, inset 0px 1.08814px 4.89661px #626FE8, inset 0px 26.6593px 27.2034px rgba(255, 255, 255, 0.3);
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        padding: 30px;
+    }
+    
+    #section-plan .sim-box h1 {
+        width: 100%;
+        position: relative;
+        font-size: 28px;
+        line-height: 33px;
+        font-weight: 600;
+        color: #FFF;
+    }
+    
+    #section-plan .sim-box h1 img {
+        position: absolute;
+        right: 0;
+        top: 10px;
+    }
+    
+    #section-plan .sim-box .price-box {
+        text-align: center;
+        color: #FFD9FF;
+        font-size: 48px;
+        font-weight: 700;
+        padding: 40px 0px
+    }
+    
+    #section-plan .sim-box .plan-points li {
+        font-size: 14px;
+        color: #FFF;
+        line-height: 23px;
+        font-weight: 400;
+    }
+    
+    #section-plan .sim-box .btn-box {
+        text-align: center;
+        margin-top: 30px;
+    }
+    
+    #section-plan .sim-box .btn-box .btn {
+        background-color: #FDDBFB;
+        border-radius: 90px;
+        padding: 8px 30px;
+        display: inline-block;
+        font-weight: 700;
+        font-size: 16px;
+        color: #096FD4;
+        border: none;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    
+    #section-plan .sim-box .btn-box .btn:hover {
+        background-color: #EC7AF6;
+        color: #FFF;
+    }
+    
+    #section-plan .phone-box h1 {
+        font-size: 20px;
+        font-weight: 700;
+        text-align: center;
+    }
+    
+    #section-plan .phone-box h2 {
+        font-size: 14px;
+        text-transform: uppercase;
+        color: #FFF;
+        font-weight: 600;
+        text-align: center;
+    }
+    
+    #section-plan .phone-box .price-box {
+        text-align: center;
+        padding: 20px 0px
+    }
+    
+    #section-plan .phone-box .price-box p {
+        font-size: 32px;
+        font-weight: 700;
+        color: #EBCCF9;
+        margin-top: 20px;
+    }
+    
+    #section-plan .note-text {
+        font-size: 14px;
+        font-style: italic;
+        color: #FFF;
+        line-height: 17px;
+    }
+    
+    #section-plan .pink-heading {
+        font-size: 28px;
+        font-weight: 600;
+        color: #FFD9FF;
+        justify-content: center;
+    }
+    
+    #section-plan .knowmore-btn {
+        display: inline-block;
+        font-size: 28px;
+        font-weight: 600;
+        color: #FFD9FF;
+        text-decoration: underline;
+        margin-top: 30px;
+        margin-bottom: 10px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+    }
+    
+    #section-plan .knowmore-btn svg {
+        margin-left: 5px;
+        font-size: 25px;
+        transition: all 0.2s ease;
+    }
+    
+    #section-plan .knowmore-btn:hover svg {
+        margin-left: 10px;
+    }
+    
+    #section-plan .knowmore-btn:hover {
+        text-decoration: underline;
+    }
+    
+    #section-plan .link-white {
+        color: #FFF;
+        text-decoration: none;
+    }
+    
+    #section-plan .link-white:hover {
+        text-decoration: underline;
+    }
+    
+    #section-plan .section-plan-heading h1 {
+        font-size: 40px;
+        color: #F9F7F4;
+        line-height: 42px;
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 30px;
+        padding: 0px 20%;
+    }
+    
+    #section-plan .section-plan-heading h2 {
+        color: #F9F7F4;
+        font-size: 21px;
+        line-height: 26px;
+        text-align: center;
+        font-weight: 500;
+        padding: 0px 10%;
+    }
+    
+    #section-plan .section-plan-heading h3 {
+        font-size: 28px;
+        color: #F9F7F4;
+        line-height: 28px;
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 20px;
+        padding: 0px 10%;
+    }
+    /* Section Plan End */
+    /* Phone Specs Start */
+    
+    #phone-specs h1 {
+        font-size: 36px;
+        font-weight: 700;
+        text-align: center;
+        padding: 60px 0px;
+        color: #FFF;
+    }
+    
+    #phone-specs .phone-table {
+        border-spacing: 8px 0px;
+        border-collapse: initial;
+    }
+    
+    #phone-specs .phone-table th {
+        padding: 9px 0px;
+        vertical-align: middle;
+        background-color: transparent;
+    }
+    
+    #phone-specs .phone-table tr td {
+        padding: 5px;
+        text-align: center;
+        background-color: #338DDB;
+        border-bottom: solid 1.5px #99C6ED;
+        color: #FFF;
+        font-size: 13px;
+        font-weight: 500;
+        vertical-align: middle;
+    }
+    
+    #phone-specs .phone-table tr td span {
+        font-weight: 700;
+    }
+    
+    #phone-specs .phone-table tbody,
+    #phone-specs .phone-table td,
+    #phone-specs .phone-table tfoot,
+    #phone-specs .phone-table th,
+    #phone-specs .phone-table thead,
+    #phone-specs .phone-table tr {
+        border-style: none;
+    }
+    
+    #phone-specs .phone-table tr td span.cross {
+        text-decoration: line-through;
+    }
+    
+    #phone-specs .phone-table tr td.pink-bottom {
+        background-color: #FFD9FF;
+        color: #0070D2;
+        font-weight: 600;
+    }
+    
+    #phone-specs .phone-table tr:last-child td {
+        border-bottom: none;
+    }
+    
+    #phone-specs .phone-table tr td.blue-col {
+        background-color: #BD78EF;
+        border-bottom: none;
+        color: #F9F7F4;
+        text-align: left;
+        font-size: 15px;
+        font-weight: 500;
+        padding-left: 20px;
+    }
+    
+    #phone-specs .res-container {
+        overflow: hidden;
+    }
+    /* Phone Specs End */
+    /* IPAD Portrait */
+    
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+        #section-5g-topbanner h1 {
+            font-size: 40px;
+            line-height: 44px;
+        }
+        #section-5g-topbanner p {
+            line-height: 20px;
+            font-size: 14px;
+        }
+        #section-5g-topbanner {
+            padding: 30px 0px;
+            background-image: url('/wp-content/uploads/2021/12/5g-banner-mobile-bg.jpg');
+        }
+        #section-5g-topbanner .btn {
+            font-size: 15px;
+        }
+    }
+    
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 1) {
+        #section-5g-topbanner h1 {
+            font-size: 40px;
+            line-height: 40px;
+        }
+        #section-5g-topbanner p {
+            line-height: 20px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            padding-right: 0px;
+        }
+        #section-5g-topbanner {
+            padding: 30px 0px;
+            background-image: url('/wp-content/uploads/2021/12/5g-banner-mobile-bg.jpg');
+        }
+        #section-5g-topbanner .btn {
+            font-size: 15px;
+        }
+        #section-5g-internet h1 {
+            font-size: 40px;
+            line-height: 48px;
+            margin-bottom: 36px;
+            margin-top: 9px;
+        }
+        #section-5g-internet .section-box {
+            padding: 30px 22px;
+        }
+        #section-5g-internet {
+            margin-bottom: 0px;
+        }
+        #section-5g-internet .section-box .layer-box:hover .hoverbox {
+            opacity: 0 !important;
+        }
+        #section-plan .nav-pills .nav-link {
+            padding: 1rem 0rem;
+            border-bottom: solid 4px #0070D2;
+        }
+        #phone-specs .phone-table tr td {
+            padding: 10px;
+        }
+        #phone-specs .phone-table th {
+            padding: 9px 13px;
+        }
+        #phone-specs .phone-table tr td.blue-col {
+            min-width: 170px;
+            position: sticky;
+            left: 0;
+        }
+        #phone-specs .phone-table th.visual {
+            background-color: #0070D2;
+            position: sticky;
+            left: 0px;
+        }
+    }
+    
+    #section-plan .sim-box .btn-box .btn.btn-oos {
+        background-color: transparent;
+        color: #FDDBFB;
+        cursor: default;
+        font-style: italic;
+        font-weight: 600;
+    }
+    
+    #section-plan .sim-box .btn-box .btn.btn-oos:focus {
+        box-shadow: 0 0 0 transparent;
+    }
+    
+    .layer-page .wpcf7 {
+        display: none !important;
+    }
+    
+    .invalid-feedback {
+        background-color: #DC3545;
+        border: 1px solid #DC3545;
+        border-radius: 5px;
+        color: #FFF;
+        margin: 15px 0 0;
+        padding: 3px 10px;
+    }
+</style>
