@@ -377,17 +377,17 @@
             <section id="grey-innerbanner">
                 <div class="container">
                     <ul class="wizard">
-                        <li ui-sref="firstStep">
+                        <li ui-sref="firstStep" class="completed">
                             <span>1. Verification</span>
                         </li>
-                        <li ui-sref="secondStep">
+                        <li ui-sref="secondStep" class="completed">
                             <span>2. Delivery Details</span>
                         </li>
                         <li ui-sref="thirdStep" class="completed">
-                            <span>3. Payment Info</span>
+                            <span>3. Review and Pay</span>
                         </li>
-                        <li ui-sref="fourthStep">
-                            <span>4. Review and Pay</span>
+                        <li ui-sref="fourthStep" class="completed">
+                            <span>4. Payment Info</span>
                         </li>
                     </ul>
                 </div>
@@ -466,19 +466,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <h2>Billing</h2>
-                                        <div class="row mb-4">
-                                            <div class="col-lg-6 col-12">
-                                                <div class="form-check form-switch">
-                                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
-                                                    <label class="form-check-label" for="flexSwitchCheckDefault">Same as shipping address</label>
-                                                </div>
-                                            </div>
-                                        </div>
 
                                         <div class="row">
-                                            <div class="col-12">
-                                                <button class="pink-btn" type="submit">Next: Review & Pay</button>
+                                            <div class="col-12 col-lg-6">
+                                                <!-- <button class="pink-btn" type="submit">Next: Review & Pay</button> -->
+                                                <a href="thankyou.html" class="pink-btn w-100">Pay</a>
                                             </div>
                                         </div>
                                     </div>

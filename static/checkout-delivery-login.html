@@ -377,7 +377,7 @@
                                     <div class="col-lg-6 col-12">
                                         <label class="form-label">* Full Name (as per IC/ Passport)</label>
                                         <div class="input-group align-items-center">
-                                            <input type="text" class="form-control" id="full-name" placeholder="" required>
+                                            <input type="text" class="form-control" id="full-name" placeholder="" value="John Doe" required>
                                             <a href="#" data-bs-toggle="tooltip" data-bs-placement="right" class="ms-2" title="Tooltip text here"><img src="images/info-icon.png" /></a>
                                         </div>
                                     </div>
@@ -386,7 +386,7 @@
                                     <div class="col-lg-6 col-12">
                                         <label class="form-label">* Email address</label>
                                         <div class="input-group align-items-center">
-                                            <input type="text" class="form-control" id="email" placeholder="jane.doe@gmail.com" required>
+                                            <input type="text" class="form-control" id="email" placeholder="jane.doe@gmail.com" value="john.doe@gmail.com" required>
                                             <a href="#" data-bs-toggle="tooltip" data-bs-placement="right" class="ms-2" title="Tooltip text here"><img src="images/info-icon.png" /></a>
                                             <p class="info">Email is required for receipt and order confirmation</p>
                                         </div>
@@ -396,7 +396,7 @@
                                     <div class="col-lg-6 col-12">
                                         <label class="form-label">* Confirm email address</label>
                                         <div class="input-group align-items-center">
-                                            <input type="text" class="form-control" id="confirm-email" placeholder="" required>
+                                            <input type="text" class="form-control" id="confirm-email" value="john.doe@gmail.com" placeholder="" required>
                                         </div>
                                     </div>
                                 </div>
@@ -405,7 +405,7 @@
                                         <label class="form-label">* Address</label>
                                         <a href="#" class="grey-link float-end">Can’t find your address?</a>
                                         <div class="input-group align-items-center">
-                                            <input type="text" class="form-control" id="address" placeholder="" required>
+                                            <input type="text" class="form-control" id="address" placeholder="" value="Jalan Bukit Bintang" required>
                                         </div>
                                     </div>
                                 </div>
@@ -413,7 +413,7 @@
                                     <div class="col-lg-6 col-12">
                                         <label class="form-label">Apartment, Office, House, Floor number (optional)</label>
                                         <div class="input-group align-items-center">
-                                            <input type="text" class="form-control" id="address-more" placeholder="">
+                                            <input type="text" class="form-control" id="address-more" value="205, Menara YTL," placeholder="">
                                         </div>
                                     </div>
                                 </div>
@@ -422,9 +422,10 @@
                                         <label class="form-label">* Postcode</label>
                                         <div class="input-group align-items-center">
                                             <select class="form-select" required>
-                                            <option selected></option>
+                                            <option></option>
                                             <option value="1">82100</option>
                                             <option value="2">81920</option>
+                                            <option value="3" selected>58000</option>
                                             </select>
                                         </div>
                                     </div>
@@ -432,9 +433,10 @@
                                         <label class="form-label">* City</label>
                                         <div class="input-group align-items-center">
                                             <select class="form-select" required>
-                                            <option selected></option>
+                                            <option></option>
                                             <option value="1">Ayer Baloi</option>
                                             <option value="2">Ayer Tawar 3</option>
+                                            <option value="3" selected>Sentul</option>
                                             </select>
                                         </div>
                                     </div>
@@ -442,9 +444,10 @@
                                         <label class="form-label">* State</label>
                                         <div class="input-group align-items-center">
                                             <select class="form-select" required>
-                                            <option selected></option>
+                                            <option></option>
                                             <option value="1">Johor</option>
                                             <option value="2">Kedah</option>
+                                            <option value="3" selected>Kuala Lumpur</option>
                                             </select>
                                         </div>
                                     </div>
@@ -486,7 +489,7 @@
                                         <div class="col-lg-6 col-12">
                                             <label class="form-label">* Full Name (as per IC/ Passport)</label>
                                             <div class="input-group align-items-center">
-                                                <input type="text" class="form-control" id="full-name" placeholder="" value="" required>
+                                                <input type="text" class="form-control" id="full-name" placeholder="" value="John Doe" required>
                                                 <a href="#" data-bs-toggle="tooltip" data-bs-placement="right" class="ms-2" title="Tooltip text here"><img src="images/info-icon.png" /></a>
                                             </div>
                                         </div>
@@ -495,7 +498,7 @@
                                         <div class="col-lg-6 col-12">
                                             <label class="form-label">* Email address</label>
                                             <div class="input-group align-items-center">
-                                                <input type="text" class="form-control" id="email" placeholder="jane.doe@gmail.com" value="" required>
+                                                <input type="text" class="form-control" id="email" placeholder="jane.doe@gmail.com" value="john.doe@gmail.com" required>
                                                 <a href="#" data-bs-toggle="tooltip" data-bs-placement="right" class="ms-2" title="Tooltip text here"><img src="images/info-icon.png" /></a>
                                                 <p class="info">Email is required for receipt and order confirmation</p>
                                             </div>
@@ -505,7 +508,7 @@
                                         <div class="col-lg-6 col-12">
                                             <label class="form-label">* Confirm email address</label>
                                             <div class="input-group align-items-center">
-                                                <input type="text" class="form-control" id="confirm-email" value="" placeholder="" required>
+                                                <input type="text" class="form-control" id="confirm-email" value="john.doe@gmail.com" placeholder="" required>
                                             </div>
                                         </div>
                                     </div>
@@ -514,7 +517,7 @@
                                             <label class="form-label">* Address</label>
                                             <a href="#" class="grey-link float-end">Can’t find your address?</a>
                                             <div class="input-group align-items-center">
-                                                <input type="text" class="form-control" id="address" placeholder="" value="" required>
+                                                <input type="text" class="form-control" id="address" placeholder="" value="Jalan Bukit Bintang" required>
                                             </div>
                                         </div>
                                     </div>
@@ -522,7 +525,7 @@
                                         <div class="col-lg-6 col-12">
                                             <label class="form-label">Apartment, Office, House, Floor number (optional)</label>
                                             <div class="input-group align-items-center">
-                                                <input type="text" class="form-control" id="address-more" value="" placeholder="">
+                                                <input type="text" class="form-control" id="address-more" value="111, Menara YTL," placeholder="">
                                             </div>
                                         </div>
                                     </div>
@@ -531,10 +534,10 @@
                                             <label class="form-label">* Postcode</label>
                                             <div class="input-group align-items-center">
                                                 <select class="form-select" required>
-                                                <option selected></option>
+                                                <option></option>
                                                 <option value="1">82100</option>
                                                 <option value="2">81920</option>
-                                                <option value="3">58000</option>
+                                                <option value="3" selected>58000</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -542,10 +545,10 @@
                                             <label class="form-label">* City</label>
                                             <div class="input-group align-items-center">
                                                 <select class="form-select" required>
-                                                <option selected></option>
+                                                <option></option>
                                                 <option value="1">Ayer Baloi</option>
                                                 <option value="2">Ayer Tawar 3</option>
-                                                <option value="3">Sentul</option>
+                                                <option value="3" selected>Sentul</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -553,10 +556,10 @@
                                             <label class="form-label">* State</label>
                                             <div class="input-group align-items-center">
                                                 <select class="form-select" required>
-                                                <option selected></option>
+                                                <option></option>
                                                 <option value="1">Johor</option>
                                                 <option value="2">Kedah</option>
-                                                <option value="3">Kuala Lumpur</option>
+                                                <option value="3" selected>Kuala Lumpur</option>
                                                 </select>
                                             </div>
                                         </div>
