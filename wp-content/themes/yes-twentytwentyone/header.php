@@ -51,6 +51,10 @@
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 	})(window,document,'script','dataLayer','GTM-T8K5HSR');</script>
 	<!-- END Google Tag Manager -->
+
+	<!-- Resulticks -->
+	<script resulconfig="/resulticks/resulconfig.json" src="https://sdk.rsut.io/handlers/6bed952814264982be0edbc93fde1501.sdk" defer="defer"></script>
+	<!-- END Resulticks -->
 </head>
 
 <body <?php body_class(); ?>>
