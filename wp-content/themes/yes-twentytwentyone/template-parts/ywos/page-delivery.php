@@ -1,15 +1,8 @@
 <?php include('header-ywos.php'); ?>
 
 
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css" integrity="sha512-ARJR74swou2y0Q2V9k0GbzQ/5vJ2RBSoCWokg4zkfM29Fb3vZEQyv0iWBMW/yvKgyHSR/7D64pFMmU8nYmbRkg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-<style type="text/css">
-    .layer-overlay {
-        z-index: 10000;
-    }
-</style>
-
 <!-- Vue Wrapper STARTS -->
-<div id="main-vue">
+<div id="main-vue" style="display: none;">
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
@@ -147,43 +140,46 @@
                                 <h3>TOTAL</h3>
                             </div>
                             <div class="col-6 pt-2 pb-2 text-end">
-                                <h3>RM56.00</h3>
+                                <h3>RM{{ parseFloat(orderSummary.due.total).toFixed(2) }}</h3>
                             </div>
                         </div>
-                        <div class="monthly mb-4">
-                            <div class="row">
-                                <div class="col-6">
-                                    <p>Due Monthly</p>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <p>RM49.00</p>
+                        <div v-if="orderSummary.plan.planType != 'prepaid'">
+                            <div class="monthly mb-4">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p>Due Monthly</p>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <p>RM{{ parseFloat(orderSummary.plan.monthlyCommitment).toFixed(2) }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
-                            <div class="col-6">
-                                <p class="large">Kasi Up Postpaid 49</p>
+                            <div class="col-8">
+                                <p class="large">{{ orderSummary.plan.displayName }}</p>
                             </div>
-                            <div class="col-6 text-end">
-                                <p class="large"><strong>RM49.00</strong></p>
+                            <div class="col-4 text-end">
+                                <p class="large"><strong>RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(2) }}</strong></p>
                             </div>
                             <div class="col-6">
                                 <p class="large">Add-Ons</p>
                             </div>
                             <div class="col-6 text-end">
-                                <p class="large"><strong>RM5.00</strong></p>
+                                <p class="large"><strong>RM{{ parseFloat(orderSummary.due.addOns).toFixed(2) }}</strong></p>
                             </div>
                             <div class="col-6">
                                 <p class="large">Taxes (SST)</p>
                             </div>
                             <div class="col-6 text-end">
-                                <p class="large"><strong>RM2.00</strong></p>
+                                <p class="large"><strong>RM{{ parseFloat(orderSummary.due.taxesSST).toFixed(2) }}</strong></p>
                             </div>
                             <div class="col-6">
                                 <p class="large">Shipping</p>
                             </div>
                             <div class="col-6 text-end">
-                                <p class="large"><strong>RM5.00</strong></p>
+                                <p class="large"><strong>RM{{ parseFloat(orderSummary.due.shippingFees).toFixed(2) }}</strong></p>
                             </div>
                         </div>
                     </div>
@@ -195,176 +191,195 @@
 </div>
 <!-- Vue Wrapper ENDS -->
 
-<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js" integrity="sha512-yDlE7vpGDP7o2eftkCiPZ+yuUyEcaBwoJoIhdXv71KZWugFqEphIS3PU60lEkFaz8RxaVsMpSvQxMBaKVwA5xg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
-    $(document).ready(function() {});
-    var pageDelivery = new Vue({
-        el: '#main-vue',
-        data: {
-            endpointURL: window.location.origin + '/wp-json/ywos/v1',
-            ywosLocalStorageName: 'yesYWOS',
-            ywosLocalStorageData: null,
-            expiryYWOSCart: 60,
-            selectOptions: {
-                states: [{
-                        'value': 'KL',
-                        'name': 'Wilayah Persekutuan Kuala Lumpur'
-                    },
-                    {
-                        'value': 'PUTRAJAYA',
-                        'name': 'Wilayah Persekutuan Putrajaya'
-                    },
-                    {
-                        'value': 'LABUAN',
-                        'name': 'Wilayah Persekutuan Labuan'
-                    },
-                    {
-                        'value': 'JOHOR',
-                        'name': 'Johor'
-                    },
-                    {
-                        'value': 'KEDAH',
-                        'name': 'Kedah'
-                    },
-                    {
-                        'value': 'KELANTAN',
-                        'name': 'Kelantan'
-                    },
-                    {
-                        'value': 'MELAKA',
-                        'name': 'Melaka'
-                    },
-                    {
-                        'value': 'NEGERI SEMBILAN',
-                        'name': 'Negeri Sembilan'
-                    },
-                    {
-                        'value': 'PAHANG',
-                        'name': 'Pahang'
-                    },
-                    {
-                        'value': 'PULAU PINANG',
-                        'name': 'Pulau Pinang'
-                    },
-                    {
-                        'value': 'PERAK',
-                        'name': 'Perak'
-                    },
-                    {
-                        'value': 'PERLIS',
-                        'name': 'Perlis'
-                    },
-                    {
-                        'value': 'SABAH',
-                        'name': 'Sabah'
-                    },
-                    {
-                        'value': 'SARAWAK',
-                        'name': 'Sarawak'
-                    },
-                    {
-                        'value': 'SELANGOR',
-                        'name': 'Selangor'
-                    },
-                    {
-                        'value': 'TERENGGANU',
-                        'name': 'Terengganu'
+    $(document).ready(function() {
+        toggleOverlay();
+
+        var pageDelivery = new Vue({
+            el: '#main-vue',
+            data: {
+                orderSummary: {
+                    plan: {},
+                    due: {
+                        addOns: 0.00,
+                        taxesSST: 0.00,
+                        shippingFees: 0.00,
+                        total: 0.00
                     }
-                ],
-                cities: [],
-                cityOptions: [{
-                        'state': 'KL',
-                        'list': [{
-                                'value': 'KUALA LUMPUR',
-                                'name': 'Kuala Lumpur'
-                            },
-                            {
-                                'value': 'SUNGAI BESI',
-                                'name': 'Sungai Besi'
-                            },
-                            {
-                                'value': 'OTHERS',
-                                'name': 'Others'
-                            }
-                        ]
-                    },
-                    {
-                        'state': 'JOHOR',
-                        'list': [{
-                                'value': 'AYER BALOI',
-                                'name': 'Ayer Baloi'
-                            },
-                            {
-                                'value': 'AYER HITAM',
-                                'name': 'Ayer Hitam'
-                            },
-                            {
-                                'value': 'AYER TAWAR',
-                                'name': 'Ayer Tawar'
-                            },
-                            {
-                                'value': 'CHAAH',
-                                'name': 'Chaah'
-                            }
-                        ]
-                    }
-                ]
+                },
+                selectOptions: {
+                    states: [{
+                            'stateCode': 'KUL',
+                            'value': 'KUALA LUMPUR',
+                            'name': 'Wilayah Persekutuan Kuala Lumpur'
+                        },
+                        {
+                            'stateCode': 'PJY',
+                            'value': 'PUTRAJAYA',
+                            'name': 'Wilayah Persekutuan Putrajaya'
+                        },
+                        {
+                            'stateCode': 'LBN',
+                            'value': 'LABUAN',
+                            'name': 'Wilayah Persekutuan Labuan'
+                        },
+                        {
+                            'stateCode': 'JHR',
+                            'value': 'JOHOR',
+                            'name': 'Johor'
+                        },
+                        {
+                            'stateCode': 'KDH',
+                            'value': 'KEDAH',
+                            'name': 'Kedah'
+                        },
+                        {
+                            'stateCode': 'KTN',
+                            'value': 'KELANTAN',
+                            'name': 'Kelantan'
+                        },
+                        {
+                            'stateCode': 'MLK',
+                            'value': 'MELAKA',
+                            'name': 'Melaka'
+                        },
+                        {
+                            'stateCode': 'NSN',
+                            'value': 'NEGERI SEMBILAN',
+                            'name': 'Negeri Sembilan'
+                        },
+                        {
+                            'stateCode': 'PHG',
+                            'value': 'PAHANG',
+                            'name': 'Pahang'
+                        },
+                        {
+                            'stateCode': 'PNG',
+                            'value': 'PULAU PINANG',
+                            'name': 'Pulau Pinang'
+                        },
+                        {
+                            'stateCode': 'PRK',
+                            'value': 'PERAK',
+                            'name': 'Perak'
+                        },
+                        {
+                            'stateCode': 'PLS',
+                            'value': 'PERLIS',
+                            'name': 'Perlis'
+                        },
+                        {
+                            'stateCode': 'SBH',
+                            'value': 'SABAH',
+                            'name': 'Sabah'
+                        },
+                        {
+                            'stateCode': 'SRW',
+                            'value': 'SARAWAK',
+                            'name': 'Sarawak'
+                        },
+                        {
+                            'stateCode': 'SGR',
+                            'value': 'SELANGOR',
+                            'name': 'Selangor'
+                        },
+                        {
+                            'stateCode': 'TRG',
+                            'value': 'TERENGGANU',
+                            'name': 'Terengganu'
+                        }
+                    ],
+                    cities: [],
+                    cityOptions: []
+                },
+                deliveryInfo: {
+                    name: '',
+                    email: '',
+                    emailConfirm: '',
+                    address: '',
+                    addressMore: '',
+                    postcode: '',
+                    state: '',
+                    city: '',
+                    deliveryNotes: ''
+                },
+                allowSelectCity: false,
+                currentStep: 2,
+                allowSubmit: false
             },
-            deliveryInfo: {
-                name: '',
-                email: '',
-                emailConfirm: '',
-                address: '',
-                addressMore: '',
-                postcode: '',
-                state: '',
-                city: '',
-                deliveryNotes: ''
-            },
-            allowSelectCity: false,
-            allowSubmit: false
-        },
-        mounted: function() {},
-        created: function() {
-            var self = this;
-            self.ywosLocalStorageData = JSON.parse(localStorage.getItem(self.ywosLocalStorageName));
-            self.updateFields();
-            self.watchChangeState();
-        },
-        methods: {
-            initSelectPicker: function() {
-                this.$nextTick(function() {
-                    $('.select-picker').selectpicker();
-                });
-            },
-            updateFields: function() {
+            mounted: function() {},
+            created: function() {
                 var self = this;
-                var deliveryInfo = self.deliveryInfo;
-                if (self.ywosLocalStorageData.ywosCart.meta.customerDetails) {
-                    var customerDetails = self.ywosLocalStorageData.ywosCart.meta.customerDetails;
-                    self.deliveryInfo = customerDetails;
-                }
+                setTimeout(function() {
+                    self.pageInit();
+                }, 500);
             },
-            watchChangeState: function() {
-                var self = this;
-                if (self.deliveryInfo.state.length) {
-                    var findCities = self.selectOptions.cityOptions.find(x => x.state == self.deliveryInfo.state);
-                    console.log(findCities);
-                    if (typeof findCities != 'undefined') {
-                        self.selectOptions.cities = findCities.list;
-                        self.allowSelectCity = true;
+            methods: {
+                pageInit: function() {
+                    var self = this;
+                    if (ywos.validateSession(self.currentStep)) {
+                        self.orderSummary = ywos.lsData.meta.orderSummary;
+                        self.updateFields();
+                        toggleOverlay(false);
                     } else {
-                        self.selectOptions.cities = [];
-                        self.allowSelectCity = false
+                        ywos.redirectToPage('cart');
                     }
-                } else {
-                    self.allowSelectCity = false
-                }
-            },
-            deliveryDetailsSubmit: function() {}
-        }
+                },
+                updateFields: function() {
+                    var self = this;
+                    if (ywos.lsData.meta.customerDetails) {
+                        self.deliveryInfo = ywos.lsData.meta.customerDetails;
+                        self.watchChangeState();
+                    }
+                },
+                getStateCode: function(stateVal) {
+                    var self = this;
+                    var objState = self.selectOptions.states.filter(state => state.value == stateVal);
+                    return objState[0].stateCode;
+                },
+                watchChangeState: function() {
+                    var self = this;
+                    if (typeof self.deliveryInfo.state !== 'undefined' && self.deliveryInfo.state.length) {
+                        self.ajaxGetCitiesByState(self.deliveryInfo.state);
+                    }
+                },
+                ajaxGetCitiesByState: function(state = null) {
+                    var self = this;
+                    var stateCode = self.getStateCode(state);
+                    
+                    self.allowSelectCity = false;
+                    setTimeout(function() {
+                        $('.form-select').selectpicker('refresh');
+                    }, 100);
+
+                    axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode)
+                        .then((response) => {
+                            var options = [];
+                            var data = response.data;
+                            var masterlist = data.masterDataList[0].masterList;
+                            masterlist.map((value, index) => {
+                                options.push({
+                                    value: value.masterCode,
+                                    name: value.masterValue
+                                });
+                            })
+                            self.selectOptions.cities = options;
+                            self.allowSelectCity = true;
+                            setTimeout(function() {
+                                $('.form-select').selectpicker('refresh');
+                                toggleOverlay(false);
+                            }, 500);
+                        })
+                        .catch((error) => {
+                            // console.log(error);
+                        })
+                        .finally(() => {
+                            // console.log('finally');
+                        });
+                },
+                deliveryDetailsSubmit: function() {}
+            }
+        });
     });
 </script>
 

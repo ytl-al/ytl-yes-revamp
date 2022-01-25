@@ -22,7 +22,6 @@
         flex: auto;
     }
 </style>
-<link href="<?php echo get_template_directory_uri() ?>/template-parts/ywos/assets/css/ywos.css" rel="stylesheet" />
 
 <header class="white-top">
     <div class="container">

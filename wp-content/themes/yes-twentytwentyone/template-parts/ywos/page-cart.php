@@ -1,14 +1,8 @@
 <?php include('header-no-menu.php'); ?>
 
 
-<style type="text/css">
-    .layer-overlay {
-        z-index: 10000;
-    }
-</style>
-
 <!-- Vue Wrapper STARTS -->
-<div id="main-vue">
+<div id="main-vue" style="display: none;">
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
@@ -46,15 +40,15 @@
                     <div class="accordion" id="cart-accordion">
                         <div class="packagebox mb-3">
                             <div class="row align-items-center">
-                                <div class="col-lg-3 col-12 visualbg" v-if="plan.planType == 'postpaid'">
+                                <div class="col-lg-3 col-12 visualbg" v-if="orderSummary.plan.planType == 'postpaid'">
                                     <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/kasiup-postpaid-visual.png" class="img-fluid" alt="" />
                                 </div>
-                                <div class="col-lg-3 col-12 visualbg prepaid" v-if="plan.planType == 'prepaid'">
+                                <div class="col-lg-3 col-12 visualbg prepaid" v-if="orderSummary.plan.planType == 'prepaid'">
                                     <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/kasiup-prepaid-visual.png" class="img-fluid" alt="" />
                                 </div>
                                 <div class="col-lg-5 col-12 ps-4 pe-4">
-                                    <h3 class="mt-3 mt-lg-0">{{ plan.displayName }}</h3>
-                                    <p class="mb-3">RM{{ parseFloat(plan.totalAmount).toFixed(0) }} for {{ plan.internetData }}</p>
+                                    <h3 class="mt-3 mt-lg-0">{{ orderSummary.plan.displayName }}</h3>
+                                    <p class="mb-3">RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(0) }} for {{ orderSummary.plan.internetData }}</p>
                                     <div class="package-info" v-if="!packageInfos.length">
                                         <div class="row">
                                             <div class="col-6" v-for="(packageInfo, index) in packageInfos">
@@ -65,7 +59,7 @@
                                 </div>
                                 <div class="col-lg-4 col-12 text-center mt-3 mb-3 mt-lg-0 mb-lg-0">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        <h3 class="price">RM{{ parseFloat(plan.totalAmount).toFixed(0) }}</h3>
+                                        <h3 class="price">RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(0) }}</h3>
                                     </button>
                                 </div>
                             </div>
@@ -76,10 +70,10 @@
                                 <h2>Rate plan</h2>
                                 <div class="row mb-4">
                                     <div class="col-6">
-                                        <p>{{ plan.displayName }}</p>
+                                        <p>{{ orderSummary.plan.displayName }}</p>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <p>RM{{ parseFloat(plan.totalAmount).toFixed(2) }}</p>
+                                        <p>RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(2) }}</p>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -87,19 +81,19 @@
                                         <p>Add-Ons</p>
                                     </div>
                                     <div class="col-6 pb-1 border-bottom text-end">
-                                        <p>RM{{ parseFloat(summary.due.addOns).toFixed(2) }}</p>
+                                        <p>RM{{ parseFloat(orderSummary.due.addOns).toFixed(2) }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom">
                                         <p>Taxes</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom text-end">
-                                        <p>RM{{ parseFloat(summary.due.taxesSST).toFixed(2) }}</p>
+                                        <p>RM{{ parseFloat(orderSummary.due.taxesSST).toFixed(2) }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom">
                                         <p>Shipping fee</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom text-end">
-                                        <p>RM{{ parseFloat(summary.due.shippingFees).toFixed(2) }}</p>
+                                        <p>RM{{ parseFloat(orderSummary.due.shippingFees).toFixed(2) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-none">
@@ -119,18 +113,18 @@
                                         <p class="small">This summary is not an invoice</p>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <p class="large">RM{{ parseFloat(summary.due.total).toFixed(2) }}</p>
+                                        <p class="large">RM{{ parseFloat(orderSummary.due.total).toFixed(2) }}</p>
                                     </div>
                                 </div>
-                                <div v-if="plan.planType != 'prepaid'">
+                                <div v-if="orderSummary.plan.planType != 'prepaid'">
                                     <h1>Monthly charges</h1>
                                     <h2>Rate plan</h2>
                                     <div class="row mb-3">
                                         <div class="col-6">
-                                            <p>{{ plan.displayName }}</p>
+                                            <p>{{ orderSummary.plan.displayName }}</p>
                                         </div>
                                         <div class="col-6 text-end">
-                                            <p>RM{{ parseFloat(plan.monthlyCommitment).toFixed(2) }}</p>
+                                            <p>RM{{ parseFloat(orderSummary.plan.monthlyCommitment).toFixed(2) }}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -138,7 +132,7 @@
                                             <p class="bold">Total monthly charges</p>
                                         </div>
                                         <div class="col-6 text-end">
-                                            <p class="bold">RM{{ parseFloat(plan.monthlyCommitment).toFixed(2) }}</p>
+                                            <p class="bold">RM{{ parseFloat(orderSummary.plan.monthlyCommitment).toFixed(2) }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -156,21 +150,21 @@
                                 <h3>TOTAL</h3>
                             </div>
                             <div class="col-6 pt-2 pb-2 text-end">
-                                <h3>RM{{ parseFloat(summary.due.total).toFixed(2) }}</h3>
+                                <h3>RM{{ parseFloat(orderSummary.due.total).toFixed(2) }}</h3>
                             </div>
                         </div>
-                        <div class="monthly mb-4" v-if="plan.monthlyCommitment > 0">
+                        <div class="monthly mb-4" v-if="orderSummary.plan.monthlyCommitment > 0">
                             <div class="row">
                                 <div class="col-6">
                                     <p>Due Monthly</p>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <p>RM{{ parseFloat(plan.monthlyCommitment).toFixed(2) }}</p>
+                                    <p>RM{{ parseFloat(orderSummary.plan.monthlyCommitment).toFixed(2) }}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="referral-box mb-3"><input class="form-control referral" type="text" placeholder="Enter referral code (if any)"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/referral-tick.png" class="referral-check" alt=""></div>
-                        <a href="#" class="pink-btn d-block" data-bs-toggle="modal" data-bs-target="#login-modal">Proceed to checkout</a>
+                        <div class="referral-box mb-3 d-none"><input class="form-control referral" type="text" placeholder="Enter referral code (if any)"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/referral-tick.png" class="referral-check" alt=""></div>
+                        <a href="javascript:void(0)" class="pink-btn d-block" v-on:click="checkLoggedIn">Proceed to checkout</a>
                     </div>
                 </div>
             </div>
@@ -216,7 +210,7 @@
                 <div class="modal-body pt-5 pb-5">
                     <div class="row justify-content-center mb-4">
                         <div class="col-lg-9 col-12 mb-lg-0 mb-2 align-self-center">
-                            <a href="javascript:void(0)" class="white-btn2 d-block" v-on:click="redirectToVerification">Continue checkout as Guest</a>
+                            <a href="javascript:void(0)" class="white-btn2 d-block" v-on:click="redirectLoggedIn('guest')">Continue checkout as Guest</a>
                         </div>
                     </div>
                     <div class="row justify-content-center">
@@ -237,17 +231,18 @@
                             </ul>
                             <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-loginTac" role="tabpanel" aria-labelledby="pills-loginTac-tab">
-                                    <form class="form-loginTac">
+                                    <form class="form-loginTac" @submit="otpLoginSubmit">
                                         <div class="input-box">
                                             <div class="w-100">
                                                 <input type="text" class="form-control userid" id="input-otpYesNumber" v-model="login.input.otp.yesNumber" @input="watchOTPLoginFields" placeholder="YES ID" />
                                             </div>
-                                            <div class=" w-100 border-top" id="box-otpPassword" style="display: none;">
-                                                <input type="password" class="form-control password" id="input-otpPassword" v-model="login.input.otp.password" @input="watchOTPLoginFields" placeholder="********" />
+                                            <div class=" w-100 border-top item-otpPassword" id="box-otpPassword" style="display: none;">
+                                                <input type="password" class="form-control password" id="input-otpPassword" v-model="login.input.otp.password" @input="watchOTPLoginFields" placeholder="******" maxlength="6" />
                                             </div>
                                         </div>
                                         <div class="w-100 text-center mb-4">
-                                            <p><em><a href="javascript:void(0)" v-on:click="generateOTPForLogin">Generate OTP</a></em></p>
+                                            <p class="mb-3 text-center item-otpPassword panel-otpMessage" style="display: none;"><span class="span-message">Your TAC code has been sent. TAC code is valid for</span> <span class="span-timer">5:00</span>.</p>
+                                            <button type="button" class="white-btn2 mt-3 mt-lg-0" v-on:click="generateOTPForLogin" :disabled="!allowRequestOTP">Request TAC</button>
                                             <div class="invalid-feedback mt-1" id="em-otpLogin"></div>
                                         </div>
                                         <!-- <div class="form-check mb-4">
@@ -257,7 +252,7 @@
                                         <div class="row">
                                             <div class="col-lg-8 offset-lg-2 mb-lg-0 mb-2 text-center">
                                                 <input type="submit" value="LOGIN" class="pink-btn d-block mb-3 w-100" :disabled="!login.submitButton.allowOtp" />
-                                                <a href="javascript:void(0)" class="forgotpassword">FORGOT PASSWORD?</a>
+                                                <!-- <a href="https://selfcare.yes.my/myselfcare/doForgotPasswordLink.do" class="forgotpassword">FORGOT PASSWORD?</a> -->
                                             </div>
                                         </div>
                                     </form>
@@ -275,14 +270,14 @@
                                         <div class="w-100 text-center">
                                             <div class="invalid-feedback mb-4" id="em-basicLogin"></div>
                                         </div>
-                                        <div class="form-check mb-4">
+                                        <!-- <div class="form-check mb-4">
                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                                             <label class="form-check-label" for="flexCheckDefault">Keep me logged in</label>
-                                        </div>
+                                        </div> -->
                                         <div class="row">
                                             <div class="col-lg-8 offset-lg-2 mb-lg-0 mb-2 text-center">
                                                 <input type="submit" value="LOGIN" class="pink-btn d-block mb-3 w-100" :disabled="!login.submitButton.allowBasic" />
-                                                <a href="javascript:void(0)" class="forgotpassword">FORGOT PASSWORD?</a>
+                                                <!-- <a href="https://selfcare.yes.my/myselfcare/doForgotPasswordLink.do" class="forgotpassword">FORGOT PASSWORD?</a> -->
                                             </div>
                                         </div>
                                     </form>
@@ -298,305 +293,307 @@
 </div>
 <!-- Vue Wrapper ENDS -->
 
-<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         toggleOverlay();
-    });
-    var pageCart = new Vue({
-        el: '#main-vue',
-        data: {
-            endpointURL: window.location.origin + '/wp-json/ywos/v1',
-            ywosLocalStorageName: 'yesYWOS',
-            ywosLocalStorageData: null,
-            expiryYWOSCart: 60,
-            ywosCart: null,
-            planID: null,
-            plan: {},
-            packageInfos: [],
-            summary: {
-                plan: {},
-                due: {
-                    addOns: 0.00,
-                    taxesSST: 0.00,
-                    shippingFees: 0.00,
-                    total: 0.00
-                }
-            },
-            hasFetchPlan: false,
-            isCartEmpty: false,
-            login: {
-                input: {
-                    otp: {
-                        inputYesNumber: '#input-otpYesNumber',
-                        inputPassword: '#input-otpPassword',
-                        yesNumber: '',
-                        password: ''
-                    },
-                    basic: {
-                        inputYesNumber: '#input-basicYesNumber',
-                        inputPassword: '#input-basicPassword',
-                        yesNumber: '',
-                        password: ''
-                    }
-                },
-                errorMessage: {
-                    otp: '#em-otpLogin',
-                    basic: '#em-basicLogin'
-                },
-                submitButton: {
-                    allowOtp: false,
-                    allowBasic: false
-                }
-            }
-        },
-        created: function() {
-            var self = this;
-            self.ywosLocalStorageData = JSON.parse(localStorage.getItem(self.ywosLocalStorageName));
-            self.getPlanData();
-        },
-        methods: {
-            checkExists: function() {
-                var self = this;
-                if (self.ywosLocalStorageData === null) {
-                    return false;
-                } else {
-                    self.ywosCart = (typeof self.ywosLocalStorageData.ywosCart !== 'undefined') ? self.ywosLocalStorageData.ywosCart : null;
-                    return true;
-                }
-            },
-            checkExpiryValid: function() {
-                var self = this;
-                if (self.ywosCart !== null && typeof self.ywosCart.expiry !== 'undefined') {
-                    if (Date.now() > self.ywosCart.expiry) {
-                        return false;
-                    } else {
-                        self.updateYWOSExpiry();
-                        return true;
-                    }
-                } else {
-                    return false;
-                }
-            },
-            checkItems: function() {
-                var self = this;
-                if (typeof self.ywosCart.meta !== 'undefined') {
-                    return (typeof self.ywosCart.meta.planID === 'undefined') ? false : true;
-                } else {
-                    return false;
-                }
-                return true;
-            },
-            removeYWOSStorageData: function() {
-                var self = this;
-                localStorage.removeItem(self.ywosLocalStorageName);
-            },
-            updateYWOSStorageData: function() {
-                var self = this;
-                localStorage.setItem(self.ywosLocalStorageName, JSON.stringify(self.ywosLocalStorageData));
-            },
-            updateYWOSExpiry: function() {
-                var self = this;
-                var expiryLength = self.expiryYWOSCart * 60000;
-                var ywosCartExpiry = Date.now() + expiryLength;
-                self.ywosLocalStorageData.ywosCart.expiry = ywosCartExpiry;
-                self.updateYWOSStorageData();
-            },
-            getPlanID: function() {
-                var self = this;
-                if (!self.checkExists()) {
-                    console.log('Local storage data not found!');
-                    self.removeYWOSStorageData();
-                    return false;
-                } else if (!self.checkExpiryValid()) {
-                    console.log('Local storage data has been expired!');
-                    self.removeYWOSStorageData();
-                    return false;
-                } else if (!self.checkItems()) {
-                    console.log('Plan ID is not found!');
-                    self.removeYWOSStorageData();
-                    return false;
-                } else {
-                    self.planID = self.ywosCart.meta.planID;
-                }
-                return true;
-            },
-            updateSummary: function() {
-                var self = this;
-                var total = 0;
-                self.summary.due.total = parseFloat(self.plan.totalAmount) + parseFloat(self.summary.due.addOns) + parseFloat(self.summary.due.taxesSST) + parseFloat(self.summary.due.shippingFees);
-            },
-            ajaxGetPlanData: function() {
-                var self = this;
-                axios.get(self.endpointURL + '/get-plan-by-id/' + self.planID)
-                    .then((response) => {
-                        if (typeof toggleOverlay == 'function') {
 
+        var pageCart = new Vue({
+            el: '#main-vue',
+            data: {
+                ywosLSData: null,
+                planID: null,
+                isCartEmpty: false,
+                hasFetchPlan: false,
+                loginInfo: {
+                    type: 'guest',
+                    yes_number: '',
+                    password: ''
+                },
+                login: {
+                    input: {
+                        otp: {
+                            inputYesNumber: '#input-otpYesNumber',
+                            inputPassword: '#input-otpPassword',
+                            yesNumber: '',
+                            password: ''
+                        },
+                        basic: {
+                            inputYesNumber: '#input-basicYesNumber',
+                            inputPassword: '#input-basicPassword',
+                            yesNumber: '',
+                            password: ''
                         }
-                        var data = response.data;
-                        if (data.internetData == '∞') {
-                            data.internetData = 'Unlimited';
-                        }
-                        self.plan = data;
-                        self.hasFetchPlan = true;
-                        self.updateSummary();
-                        self.summary.plan = data;
+                    },
+                    errorMessage: {
+                        otp: '#em-otpLogin',
+                        basic: '#em-basicLogin'
+                    },
+                    submitButton: {
+                        allowOtp: false,
+                        allowBasic: false
+                    }
+                },
+                orderSummary: {
+                    plan: {},
+                    due: {
+                        addOns: 0.00,
+                        taxesSST: 0.00,
+                        shippingFees: 0.00,
+                        total: 0.00
+                    }
+                },
+                packageInfos: [],
+                currentStep: 0,
+                allowRequestOTP: true,
+                ywos: null
+            },
+            created: function() {
+                var self = this;
+                setTimeout(function() {
+                    ywos.init();
+                    self.getPlanData();
+                }, 500);
+            },
+            methods: {
+                getPlanData: function() {
+                    var self = this;
+                    if (ywos.validateSession(self.currentStep)) {
+                        self.planID = ywos.lsData.meta.planID;
+                        self.ajaxGetPlanData();
+                    } else {
+                        self.isCartEmpty = true;
                         setTimeout(function() {
                             toggleOverlay(false);
-                        }, 500);
-                        self.packageInfos = data.notes.split(',');
-                    })
-                    .catch((error) => {
-                        console.log('error', error);
-                    })
-            },
-            getPlanData: function() {
-                var self = this;
-                if (self.getPlanID()) {
-                    self.ajaxGetPlanData();
-                } else {
-                    self.isCartEmpty = true;
-                    setTimeout(function() {
-                        toggleOverlay(false);
-                    }, 1500);
-                }
-            },
-            validateYesNumberOTP: function() {
-                var self = this;
-                var otpYesNumber = self.login.input.otp.yesNumber.replace(' ', '');
-                if (isNaN(otpYesNumber) || otpYesNumber.length == 0) {
-                    var inputOTPYesNumber = self.login.input.otp.inputYesNumber;
-                    var emOTPForLogin = self.login.errorMessage.otp;
+                        }, 1500);
+                    }
+                },
+                ajaxGetPlanData: function() {
+                    var self = this;
+                    axios.get(apiEndpointURL + '/get-plan-by-id/' + self.planID)
+                        .then((response) => {
+                            var data = response.data;
+                            if (data.internetData == '∞') {
+                                data.internetData = 'Unlimited';
+                            }
+                            self.hasFetchPlan = true;
 
-                    $(emOTPForLogin).html('Please insert valid YES Number').show();
-                    $(inputOTPYesNumber).focus();
-                    $(inputOTPYesNumber).on('keydown', function() {
-                        $(emOTPForLogin).hide().html('');
-                    });
-                    return false;
-                }
-                return true;
-            },
-            generateOTPForLogin: function(event) {
-                var self = this;
-                if (self.validateYesNumberOTP()) {
-                    toggleOverlay();
-                    self.ajaxGenerateOTPForLogin();
-                }
-            },
-            ajaxGenerateOTPForLogin: function() {
-                var self = this;
-                axios.post(self.endpointURL + '/generate-otp-for-login', {
-                        'yes_number': self.login.input.otp.yesNumber
-                    })
-                    .then((response) => {
-                        $('#box-otpPassword').show();
-                        $(self.login.input.otp.inputPassword).focus();
-                    })
-                    .catch((error) => {
-                        var response = error.response;
-                        var data = response.data;
-                        var errorMsg = data.message + ' Please try again later.';
-                        $(self.login.errorMessage.otp).html(errorMsg).show();
-                    })
-                    .finally(() => {
-                        console.log('finally');
-                        toggleOverlay(false);
-                    });
-            },
-            validateBasicLogin: function() {
-                var self = this;
-                var yesNumber = self.login.input.basic.yesNumber.replace(' ', '');
-                var password = self.login.input.basic.password;
-                if (isNaN(yesNumber) || yesNumber.length == 0 || password.length == 0) {
-                    self.toggleErrorMessageLoginBasic('Please insert valid login credentials.');
-                    return false;
-                }
-                return true;
-            },
-            basicLoginSubmit: function(e) {
-                var self = this;
-                if (self.validateBasicLogin()) {
-                    toggleOverlay();
-                    self.ajaxValidateLogin();
-                }
-                e.preventDefault();
-            },
-            ajaxValidateLogin: function() {
-                var self = this;
-                axios.post(self.endpointURL + '/validate-login', {
-                        'yes_number': self.login.input.basic.yesNumber,
-                        'password': self.login.input.basic.password
-                    })
-                    .then((response) => {
-                        var data = response.data;
-                        var customerDetails = data.customerDetails;
-                        var sessionId = data.sessionId;
-                        self.ywosLocalStorageData.ywosCart.meta.customerDetails = customerDetails;
-                        self.ywosLocalStorageData.ywosCart.meta.orderSummary = self.summary;
-                        self.ywosLocalStorageData.ywosCart.meta.sessionId = sessionId;
-                        self.updateYWOSStorageData();
+                            self.orderSummary.plan = data;
+                            self.updateSummary();
+
+                            setTimeout(function() {
+                                toggleOverlay(false);
+                            }, 500);
+
+                            self.packageInfos = data.notes.split(',');
+                        })
+                        .catch((error) => {
+                            console.log('error', error);
+                        })
+                },
+                updateSummary: function() {
+                    var self = this;
+                    var total = 0;
+                    self.orderSummary.due.total = parseFloat(self.orderSummary.plan.totalAmount) + parseFloat(self.orderSummary.due.addOns) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees);
+                },
+                checkLoggedIn: function() {
+                    var self = this;
+                    if (typeof ywos.lsData.meta.isLoggedIn === 'undefined' || !ywos.lsData.meta.isLoggedIn) {
+                        $('#login-modal').modal('show');
+                    } else {
                         self.redirectLoggedIn();
-                    })
-                    .catch((error) => {
-                        var response = error.response;
-                        var data = response.data;
-                        var errorMsg = data.message;
+                    }
+                },
+                validateBasicLogin: function() {
+                    var self = this;
+                    var yesNumber = self.login.input.basic.yesNumber.replace(' ', '');
+                    var password = self.login.input.basic.password;
+                    if (isNaN(yesNumber) || yesNumber.length == 0 || password.length == 0) {
+                        self.toggleErrorMessageLoginBasic('Please insert valid login credentials.');
+                        return false;
+                    }
+                    return true;
+                },
+                ajaxValidateLogin: function() {
+                    var self = this;
+                    axios.post(apiEndpointURL + '/validate-login', {
+                            'yes_number': self.loginInfo.yes_number,
+                            'password': self.loginInfo.password,
+                            'auth_type': self.loginInfo.type
+                        })
+                        .then((response) => {
+                            var data = response.data;
+                            ywos.lsData.meta.customerDetails = data.customerDetails;
+                            self.redirectLoggedIn();
+                        })
+                        .catch((error) => {
+                            // console.log(error);
+                            var response = error.response;
+                            var data = response.data;
+                            var errorMsg = data.message;
 
-                        self.toggleErrorMessageLoginBasic(errorMsg);
+                            self.toggleErrorMessageLoginBasic(errorMsg);
 
-                        toggleOverlay(false);
+                            toggleOverlay(false);
+                        });
+                },
+                basicLoginSubmit: function(e) {
+                    var self = this;
+                    if (self.validateBasicLogin()) {
+                        toggleOverlay();
+                        self.loginInfo = {
+                            type: 'password',
+                            yes_number: self.login.input.basic.yesNumber,
+                            password: self.login.input.basic.password
+                        };
+                        self.ajaxValidateLogin();
+                    }
+                    e.preventDefault();
+                },
+                validateYesNumberOTP: function() {
+                    var self = this;
+                    var otpYesNumber = self.login.input.otp.yesNumber.trim();
+                    if (isNaN(otpYesNumber) || otpYesNumber.length == 0) {
+                        var inputOTPYesNumber = self.login.input.otp.inputYesNumber;
+                        var emOTPForLogin = self.login.errorMessage.otp;
+
+                        $(emOTPForLogin).html('Please insert valid YES Number').show();
+                        $(inputOTPYesNumber).focus();
+                        $(inputOTPYesNumber).on('keydown', function() {
+                            $(emOTPForLogin).hide().html('');
+                        });
+                        return false;
+                    }
+                    return true;
+                },
+                ajaxGenerateOTPForLogin: function() {
+                    var self = this;
+                    axios.post(apiEndpointURL + '/generate-otp-for-login', {
+                            'yes_number': self.login.input.otp.yesNumber
+                        })
+                        .then((response) => {
+                            $('.item-otpPassword').show();
+                            $('.panel-otpMessage .span-message').html(response.data.displayResponseMessage);
+                            $(self.login.input.otp.inputPassword).focus();
+                            self.triggerOTPCountdown();
+                        })
+                        .catch((error) => {
+                            var response = error.response;
+                            var data = response.data;
+                            var errorMsg = data.message + ' Please try again later.';
+                            $(self.login.errorMessage.otp).html(errorMsg).show();
+
+                            $(self.login.input.otp.inputPassword).focus();
+                            $(self.login.input.otp.inputPassword).on('keydown', function() {
+                                $(self.login.errorMessage.otp).hide().html('');
+                            });
+                        })
+                        .finally(() => {
+                            toggleOverlay(false);
+                        });
+                },
+                generateOTPForLogin: function(event) {
+                    var self = this;
+                    if (self.validateYesNumberOTP()) {
+                        toggleOverlay();
+                        self.ajaxGenerateOTPForLogin();
+
+                        $(self.login.errorMessage.otp).hide().html('');
+                    }
+                },
+                triggerOTPCountdown: function() {
+                    var self = this;
+                    self.allowRequestOTP = false;
+
+                    var timer = 5 * 60,
+                        minutes, seconds;
+                    var interval = setInterval(function() {
+                        timer -= 1;
+
+                        minutes = parseInt(timer / 60, 10);
+                        seconds = parseInt(timer % 60, 10);
+
+                        minutes = minutes < 10 ? "0" + minutes : minutes;
+                        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                        $('.span-timer').html(minutes + ':' + seconds);
+                        if (timer == 0) {
+                            $('#input-otpPassword').hide();
+                            clearInterval(interval);
+                            self.allowRequestOTP = true;
+                        }
+                    }, 1000);
+                },
+                otpLoginSubmit: function(e) {
+                    var self = this;
+                    toggleOverlay();
+                    self.loginInfo = {
+                        type: 'otp',
+                        yes_number: self.login.input.otp.yesNumber,
+                        password: self.login.input.otp.password
+                    };
+                    self.ajaxValidateLogin()
+                    e.preventDefault();
+                },
+                toggleErrorMessageLoginBasic: function(errorMessage) {
+                    var self = this;
+                    var loginType = self.loginInfo.type;
+                    var inputYesNumber = (loginType == 'otp') ? self.login.input.otp.inputYesNumber : self.login.input.basic.inputYesNumber;
+                    var inputPassword = (loginType == 'otp') ? self.login.input.otp.inputPassword : self.login.input.basic.inputPassword;
+                    var emBasicLogin = (loginType == 'otp') ? self.login.errorMessage.otp : self.login.errorMessage.basic;
+
+                    $(emBasicLogin).html(errorMessage).show();
+                    $(inputPassword).focus();
+                    $(inputYesNumber).on('keydown', function() {
+                        $(emBasicLogin).hide().html('');
                     });
-            },
-            toggleErrorMessageLoginBasic: function(errorMessage) {
-                var self = this;
-                var inputYesNumber = self.login.input.basic.inputYesNumber;
-                var inputPassword = self.login.input.basic.inputPassword;
-                var emBasicLogin = self.login.errorMessage.basic;
+                    $(inputPassword).on('keydown', function() {
+                        $(emBasicLogin).hide().html('');
+                    });
+                },
+                redirectLoggedIn: function() {
+                    var self = this;
+                    var toPage = 'verification';
+                    var isLoggedIn = (ywos.lsData.meta.isLoggedIn) ? ywos.lsData.meta.isLoggedIn : true;
+                    var currentStep = self.currentStep;
+                    var loginType = (ywos.lsData.meta.loginType) ? ywos.lsData.meta.loginType : self.loginInfo.type;
 
-                $(emBasicLogin).html(errorMessage).show();
-                $(inputYesNumber).focus();
-                $(inputYesNumber).on('keydown', function() {
-                    $(emBasicLogin).hide().html('');
-                });
-                $(inputPassword).on('keydown', function() {
-                    $(emBasicLogin).hide().html('');
-                });
-            },
-            redirectLoggedIn: function() {
-                window.location.href = window.location.origin + '/ywos/verification';
-            },
-            redirectToVerification: function() {
-                toggleOverlay();
-                var self = this;
-                self.ywosLocalStorageData.ywosCart.meta.customerDetails = {};
-                self.ywosLocalStorageData.ywosCart.meta.orderSummary = self.summary;
-                self.ywosLocalStorageData.ywosCart.meta.sessionId = '';
-                self.updateYWOSStorageData();
-                window.location.href = window.location.origin + '/ywos/verification';
-            },
-            watchOTPLoginFields: function() {
-                var self = this;
-                var yesNumber = self.login.input.otp.yesNumber;
-                var password = self.login.input.otp.password;
-                if (yesNumber.length && password.length) {
-                    self.login.submitButton.allowOtp = true;
-                } else {
-                    self.login.submitButton.allowOtp = false;
-                }
-            },
-            watchBasicLoginFields: function() {
-                var self = this;
-                var yesNumber = self.login.input.basic.yesNumber;
-                var password = self.login.input.basic.password;
-                if (yesNumber.length && password.length) {
-                    self.login.submitButton.allowBasic = true;
-                } else {
-                    self.login.submitButton.allowBasic = false;
+                    if (loginType == 'otp' || loginType == 'password') {
+                        toPage = 'delivery';
+                        currentStep += 1;
+                    } else if (loginType == 'guest') {
+                        isLoggedIn = false;
+                    }
+                    
+                    ywos.lsData.meta.loginType = loginType;
+                    ywos.lsData.meta.isLoggedIn = isLoggedIn;
+                    ywos.lsData.meta.completedStep = currentStep;
+                    ywos.lsData.meta.orderSummary = self.orderSummary;
+                    ywos.updateYWOSLSData();
+
+                    ywos.redirectToPage(toPage);
+                },
+                watchOTPLoginFields: function() {
+                    var self = this;
+                    var yesNumber = self.login.input.otp.yesNumber;
+                    var password = self.login.input.otp.password;
+                    if (yesNumber.length && password.length) {
+                        self.login.submitButton.allowOtp = true;
+                    } else {
+                        self.login.submitButton.allowOtp = false;
+                    }
+                },
+                watchBasicLoginFields: function() {
+                    var self = this;
+                    var yesNumber = self.login.input.basic.yesNumber;
+                    var password = self.login.input.basic.password;
+                    if (yesNumber.length && password.length) {
+                        self.login.submitButton.allowBasic = true;
+                    } else {
+                        self.login.submitButton.allowBasic = false;
+                    }
                 }
             }
-        }
+        });
     });
 </script>
 
