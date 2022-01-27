@@ -1,0 +1,1085 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>YES</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/aos.css" />
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" />
+
+    <style>
+        #location-top-banner {
+            background: linear-gradient(253.22deg, #ED028C -28.49%, #00B4F0 84.7%);
+            padding: 50px 0px;
+            text-align: center;
+        }
+        
+        #location-top-banner h1 {
+            font-size: 60px;
+            font-weight: 800;
+            color: #F9F7F4;
+        }
+        
+        #location-top-banner p {
+            font-size: 28px;
+            font-weight: 600;
+            line-height: normal;
+            color: #F9F7F4;
+        }
+        
+        #location-top-banner p.small {
+            font-size: 15px;
+        }
+        
+        #store-locations .filter-drop {
+            border-radius: 0;
+            border: 1px solid #C5C5C5;
+            background-color: #F9F7F4;
+            font-size: 17px;
+            color: #000;
+            font-weight: 400;
+            padding: 15px 30px;
+            width: 100%;
+        }
+        
+        #store-locations .filter-drop:focus {
+            outline: none;
+            box-shadow: none;
+        }
+        
+        #store-locations .dropdown-menu {
+            border-radius: 0;
+            border: 1px solid #C5C5C5;
+            background-color: #F9F7F4;
+            width: 100%;
+            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+        }
+        
+        #store-locations .dropdown-menu .form-check {
+            padding-left: 20px;
+            margin-bottom: 5px;
+        }
+        
+        #store-locations h1 {
+            color: #2B2B2B;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 24px;
+        }
+        
+        #store-locations .store-box {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            border-radius: 27px;
+            background-color: #FFF;
+            padding: 30px;
+            padding-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        #store-locations .store-box:hover {
+            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+        }
+        
+        #store-locations .store-box h2 {
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            background-color: #00B4F0;
+            color: #FFF;
+            font-size: 15px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+        
+        #store-locations .store-box h3 {
+            color: #2B2B2B;
+            font-weight: 700;
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+        
+        #store-locations .store-box p {
+            color: #7A7A7A;
+            font-size: 19px;
+            font-weight: 400;
+            line-height: 22px;
+            padding-right: 20%;
+        }
+        
+        #store-locations .store-box p.time svg {
+            margin-top: -4px;
+            font-weight: 700;
+        }
+        
+        #store-locations .store-box p.phone {
+            color: #525252;
+            font-weight: 700;
+        }
+        
+        #store-locations .store-box .map-btn {
+            display: block;
+            color: #ED028C;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            opacity: 60%;
+        }
+        
+        #store-locations .filter-container {
+            width: 100%;
+            background-color: #f9f7f4;
+            padding: 15px 0px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #store-locations .filter-shadow {
+            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+        }
+        
+        #store-locations .store-box .map-btn:hover {
+            opacity: 100%;
+        }
+        
+        #store-locations .store-box .map-btn img {
+            vertical-align: middle;
+            display: inline;
+            margin-right: 10px;
+        }
+        
+        #store-locations .is-hidden {
+            display: none;
+        }
+        /* IPAD Portrait */
+        
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {}
+        
+        @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+            #location-top-banner h1 {
+                font-size: 40px;
+            }
+            #location-top-banner p {
+                font-size: 20px;
+            }
+            #location-top-banner p.small {
+                font-size: 13px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="layer-page">
+        <header class="page-header">
+            <div class="top-pink-bar">
+                <div class="row g-0 text-center">
+                    <p>Are you an Exisiting YES user? Earn up to RM50/referral through our Refer & Earn program!</p>
+                </div>
+                <a href="#" class="close-btn"><span class="iconify" data-icon="eva:close-fill"></span></a>
+            </div>
+            <div class="top-tabs-container">
+                <div class="container g-0">
+                    <div class="row g-0">
+                        <div class="col-10">
+                            <ul class="tabnav">
+                                <li><a href="#" class="active">Personal</a></li>
+                                <li><a href="#">Business</a></li>
+                                <li><a href="#">Education</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-2">
+                            <div class="dropdown language-drop float-end">
+                                <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="iconify" data-icon="bi:globe"></span> English
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">English</a></li>
+                                    <li><a class="dropdown-item" href="#">Bhasa Malay</a></li>
+                                    <li><a class="dropdown-item" href="#">中文</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-container">
+                <div class="container g-lg-0">
+                    <div class="row g-0">
+                        <nav class="navbar navbar-expand-lg">
+                            <div class="container">
+                                <a class="navbar-brand" href="#"><img src="images/logo.svg" class="logo-top" /></a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <li class="nav-item dropdown mega-dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                                            <ul class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Mobile Plans</li>
+                                                        <li><a href="#">Prepaid Plans</a></li>
+                                                        <li><a href="#">Postpaid Plans</a></li>
+                                                        <li><a href="#">YES Prihatin</a></li>
+                                                        <li><a href="#">Merdeka RM1 Package</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Broadband</li>
+                                                        <li><a href="#">Home broadband</a></li>
+                                                        <li><a href="#">On-the-go broadband</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Existing Customers</li>
+                                                        <li><a href="#">How-To: Refer & Earn</a></li>
+                                                        <li><a href="#">How-To: Get Databack</a></li>
+                                                        <li><a href="#">Data & Hotspot Add-Ons</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="#">Keep Number</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Partners</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Help</a>
+                                        </li>
+                                    </ul>
+                                    <div class="d-flex align-items-center">
+                                        <a href="#" class="pink-btn me-3">Get Started</a>
+                                        <a href="#" class="login-btn"><span class="iconify" data-icon="carbon:user-avatar-filled-alt"></span> Log In</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <!-- Breadcrumb Start -->
+            <div class="container breadcrumb-section">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active"><a href="#">Store Locations</a></li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- Breadcrumb End -->
+
+            <!-- Banner Start -->
+            <section id="location-top-banner">
+                <div class="container">
+                    <div class="row justify-content-lg-center">
+                        <div class="col-lg-12" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                            <div>
+                                <h1>Store locations</h1>
+                                <p>The YES stores listed below will operate daily at a revised hour.</p>
+                                <p class="small">*Subject to change depending on local government directive.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Banner End -->
+
+            <!-- Number Steps Start -->
+            <section id="store-locations">
+                <div class="filter-container sticky-top">
+                    <div class="container">
+                        <div class="row justify-content-lg-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                            <div class="col-12 col-lg-8">
+                                <div class="row">
+                                    <div class="col-12 col-lg-4 mb-2 mb-lg-0">
+                                        <div class="dropdown">
+                                            <button class="btn filter-drop dropdown-toggle" type="button" id="dropdownStates" data-bs-toggle="dropdown" aria-expanded="false">
+                                              All States
+                                            </button>
+                                            <ul class="dropdown-menu states" aria-labelledby="dropdownStates" data-filter-type="state">
+                                                <li>
+                                                    <div class="form-check"><label>
+                                                        <input class="cardCheckBoxAll" data-filter-type="state" id="checkall1" type="checkbox" value="All" checked> All</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="perlis" checked> Perlis</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="terrengganu" checked> Terrengganu</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="kedah" checked> Kedah</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="penang" checked> Penang</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="perak" checked> Perak</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="kl" checked> Kuala Lumpur</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="negeri-sembilan" checked> Negeri Sembilan</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="melaka" checked> Melaka</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="johor" checked> Johor</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="pahang" checked> Pahang</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="kelantan" checked> Kelantan</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="sabah" checked> Sabah</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check mb-0"><label><input class="cardCheckBox" type="checkbox" value="selangor" checked> Selangor</label></div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <div class="dropdown">
+                                            <button class="btn filter-drop dropdown-toggle" type="button" id="dropdownProducts" data-bs-toggle="dropdown" aria-expanded="false">
+                                              Products & Services
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownProducts" data-filter-type="product">
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBoxAll" type="checkbox" value="all" data-filter-type="product" checked> All</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="postpaid-activations" checked> Postpaid Activations</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="prepaid-activations" checked> Prepaid Activations</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="postpaid-bill-payment" checked> Postpaid Bill Payment</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="prepaid-topup" checked> Prepaid Top Up</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="prepaid-reload-card" checked> Prepaid Reload Card</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="device-sales" checked> YES Device Sales Only</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="debit-online" checked> Auto Debit Application (online)</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="change-details" checked> Change of Customer Details</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="trouble-shooting" checked> YES Device Troubleshooting</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="device-configuration" checked> YES Device Configuration</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="faulty-device" checked> Faulty Device Replacement (Yes Device only)</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="service-query" checked> Service Query</label></div>
+                                                </li>
+                                                <li>
+                                                    <div class="form-check"><label><input class="cardCheckBox" type="checkbox" value="termination" checked> Termination</label></div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container mb-5">
+                    <div class="row justify-content-lg-center">
+                        <div class="col-12 col-lg-8">
+                            <div class="row mt-5" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                                <div class="col-12 mb-4" data-category="perlis">
+                                    <h1 class="mb-4">Perlis</h1>
+                                    <div class="store-box">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE & SERVICE CENTRE</h2>
+                                                <h3 class="mb-3">PERSIARAN JUBLI EMAS</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">No. 1, Persiaran Jubli Emas 1, 01000 Kangar, Perlis</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 9am - 6pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-4" data-category="kedah">
+                                    <h1 class="mb-4">KEDAH</h1>
+                                    <div class="store-box mb-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE & SERVICE CENTRE</h2>
+                                                <h3 class="mb-3">AMAN CENTRAL MALL</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">Unit 2-K01, 2nd Floor, Aman Central Shopping Centre, Jalan Tambang Badak, 05670 Alor Setar, Kedah</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 10am - 10pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="store-box">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE</h2>
+                                                <h3 class="mb-3">BILLION SHOPPING CENTRE</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">Billion Shopping Centre (Baling), Plaza Baling, No 93, Persiaran Kota 3/5, Kota Baling Jaya, Batu 42 Pulai, 09100 Baling, Kedah</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 10am - 7pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-4" data-category="penang">
+                                    <h1 class="mb-4">PENANG</h1>
+                                    <div class="store-box mb-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE</h2>
+                                                <h3 class="mb-3">JALAN TODAK SEBERANG JAYA (MAINLAND)</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">No.51, Ground Floor, Jalan Todak 4, Pusat Bandar Seberang Jaya, 13700 Perai, Penang.</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 9am - 6pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="store-box">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE & SERVICE CENTRE</h2>
+                                                <h3 class="mb-3">GURNEY PARAGON MALL</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">L6-25, Level 6, Gurney Paragon, Persiaran Gurney, 10250 Penang.</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 11am - 9pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-344 6686</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-4" data-category="perak">
+                                    <h1 class="mb-4">PERAK</h1>
+                                    <div class="store-box mb-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE & SERVICE CENTRE</h2>
+                                                <h3 class="mb-3">IPOH GREEN TOWN</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">Ipoh Greentown Business Centre, No.38, Ground Floor, Persiaran Greentown 1, Pusat Perdagangan Greentown, 30450 Ipoh, Perak</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 9am - 6pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="store-box">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE</h2>
+                                                <h3 class="mb-3">AEON MALL KINTA CITY</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">F19, 1st Floor, AEON Mall Kinta City Shopping Centre, Jalan Teh Lean Swee,Taman Ipoh Selatan, 31400 Ipoh, Perak</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 10am - 7pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-4" data-category="kl">
+                                    <h1 class="mb-4">Kuala Lumpur</h1>
+                                    <div class="store-box mb-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE & SERVICE CENTRE</h2>
+                                                <h3 class="mb-3">LOT 10 MALL</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">Lot 10, G18 (Ground Floor), Lot 10 Shopping Centre, 50 Jalan Sultan Ismail, Bukit Bintang,50250 Kuala Lumpur.</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 10am - 7pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="store-box">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE</h2>
+                                                <h3 class="mb-3">PLAZA LOW YAT</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">Lot G-030, Ground Floor, Plaza Low Yat, No.7, Jalan Bintang, Off Jalan Bukit Bintang, Bukit Bintang Central, 55100 Kuala Lumpur</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 10am - 7pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 3-2141 5589</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-4" data-category="selangor">
+                                    <h1 class="mb-4">SELANGOR</h1>
+                                    <div class="store-box mb-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE</h2>
+                                                <h3 class="mb-3">AEON MALL SHAH ALAM</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">KS5 2nd Floor, AEON Mall Shopping Centre, No.1 Jalan Akuatik 13/62, D'Kayangan, Seksyen 13, 40150 Shah Alam, Selangor</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 10am - 7pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="store-box">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE</h2>
+                                                <h3 class="mb-3">KLANG PARADE MALL</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">S.36, 2nd Floor, Klang Parade No.2112, KM2, Jalan Meru, 41050 Klang, Selangor</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 11am - 8pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-4" data-category="negeri-sembilan">
+                                    <h1 class="mb-4">NEGERI SEMBILAN</h1>
+                                    <div class="store-box mb-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE & SERVICE CENTRE</h2>
+                                                <h3 class="mb-3">SEREMBAN PRIMA MALL</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">G-15, Ground Floor, Seremban Prima, Lot 4973, Jalan Dato’ Bandar Tunggal, Bandar Seremban, 70000 Seremban, Negeri Sembilan</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 10am - 7pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="store-box">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE</h2>
+                                                <h3 class="mb-3">AEON MALL NILAI</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">Lot KF-07, AEON Mall Nilai, No.2, Taman Persiaran Pusat Bandar, Putra Point, Putra Nilai, 71800 Nilai, Negeri Sembilan</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 10am - 10pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-4" data-category="melaka">
+                                    <h1 class="mb-4">MELAKA</h1>
+                                    <div class="store-box">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE & SERVICE CENTRE</h2>
+                                                <h3 class="mb-3">YES MELAKA</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">337, Jalan Ong Kim Wee, Taman Angkasa Nuri, 75300 Melaka, Malaysia</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 10am - 7pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-4" data-category="johor">
+                                    <h1 class="mb-4">JOHOR</h1>
+                                    <div class="store-box mb-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE & SERVICE CENTRE</h2>
+                                                <h3 class="mb-3">TAMAN MOLEK</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">No.3, Jalan Molek 1/12, Taman Molek 81100 Johor Bahru</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 9am - 6pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="store-box">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE</h2>
+                                                <h3 class="mb-3">BATU PAHAT MALL</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">GK22A & GK22B, Batu Pahat Mall Jalan Kluang, 83000 Batu Pahat, Johor.</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 10am - 7pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-4" data-category="pahang">
+                                    <h1 class="mb-4">PAHANG</h1>
+                                    <div class="store-box mb-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE & SERVICE CENTRE</h2>
+                                                <h3 class="mb-3">EAST COAST MALL</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">L3-K18, Level 3, East Coast Mall, Jalan Putra Square 6, Putra Square, 25200 Kuantan, Pahang.</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 10am - 10pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-4" data-category="terrengganu">
+                                    <h1 class="mb-4">TERENGGANU</h1>
+                                    <div class="store-box mb-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE</h2>
+                                                <h3 class="mb-3">GIANT JERTEH</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">Lot G7, Ground Floor, Giant Superstore Jerteh, PN9196, Lot No. 60000, Pekan Jerteh, 22200 Daerah Besut, Terengganu</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 10am - 10pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="store-box">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE</h2>
+                                                <h3 class="mb-3">GIANT HYPERMARKET KUALA TGANU</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">PS G28, Ground Floor, Giant Hypermarket Kuala Terengganu, Jalan Padang Hiliran Chabang 3, 21100 Kuala Terengganu, Terengganu</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 9am - 9:30pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-4" data-category="kelantan">
+                                    <h1 class="mb-4">KELANTAN</h1>
+                                    <div class="store-box mb-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE & SERVICE CENTRE</h2>
+                                                <h3 class="mb-3">KOTA BAHRU MALL</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">Lot 3.29, 3rd Floor, KB Mall, Jalan Hamzah, 15050 Kota Bharu, Kelantan.</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 10am - 7pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="store-box">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE</h2>
+                                                <h3 class="mb-3">PASARAYA ECONJAYA MACHANG</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">Main Entrance Promo Lot, Pasaraya Econjaya Machang Bangunan Majlis Daerah Machang, Jalan Dato’ Hashim 18500 Machang, Kelantan.</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 10am - 7pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-4" data-category="sabah">
+                                    <h1 class="mb-4">SABAH</h1>
+                                    <div class="store-box mb-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE & SERVICE CENTRE</h2>
+                                                <h3 class="mb-3">SURIA SABAH SHOPPING MALL</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">Lower Ground Floor Unit B-12 (in front of unit B-12), Suria Sabah Shopping Mall, 1, Jalan Tun Fuad Stephens, 88000 Kota Kinabalu, Sabah.</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 10am - 6pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="store-box">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="mb-3">YES STORE</h2>
+                                                <h3 class="mb-3">GIANT SUPERSTORE KENINGAU</h3>
+                                            </div>
+                                            <div class="col-12 col-lg-9">
+                                                <p class="mb-3">PS06, Ground Floor, Giant Superstore Keningau, Bandar Baru Keningau, Jalan Apin Apin, 89008 Keningau, Sabah.</p>
+                                                <p class="mb-3 time"><span class="iconify align-middle" data-icon="akar-icons:clock"></span> Mon - Sun, 9am - 6pm</p>
+                                                <p class="phone mb-5 mb-lg-0">+60 18-333 0000</p>
+                                            </div>
+                                            <div class="col-12 col-lg-3">
+                                                <a href="#" class="map-btn mb-3"><img src="images/waze-icon.png" alt=""> Waze</a>
+                                                <a href="#" class="map-btn mb-3"><img src="images/gmap-icon.png" alt=""> Google Maps</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Number Steps End -->
+
+            <!-- Newsletter Start -->
+            <section id="newsletter">
+                <div class="container">
+                    <form>
+                        <div class="row">
+                            <div class="col-12 col-lg-12 col-xl-5 d-flex flex-wrap align-items-center pe-md-5">
+                                <h1 class="mb-3">Just say YES!</h1>
+                                <p>Join our mailing list to get our best & latest deals directly to your email inbox. You’ll never miss out again</p>
+                            </div>
+                            <div class="col-12 col-lg-12 col-xl-5 d-flex flex-wrap align-items-center mt-md-0 mb-md-0 mt-3 mb-5">
+                                <input type="email" class="form-control mb-md-0 mb-3" id="newsletter-input" placeholder="Email Address">
+                                <div class="form-check newsletter-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        I’ve read and accept the Terms & Conditions
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-12 col-xl-2 d-flex align-items-center ps-xl-5">
+                                <button class="white-btn" type="submit">Subscribe</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            <!-- Newsletter End -->
+        </main>
+        <footer class="page-footer footer">
+            <div class="container g-lg-0">
+                <div class="row position-relative">
+                    <div class="col-12 col-md-3">
+                        <img src="images/logo.svg" class="footer-logo mb-4" />
+                        <div class="row mb-2">
+                            <ul class="icon-list">
+                                <li>
+                                    <a href="#"><img src="images/facebook.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/instagram.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/youtube.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/twitter.svg" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <p class="mb-2">Get The MyYes App</p>
+                            <ul class="icon-list">
+                                <li>
+                                    <a href="#"><img src="images/logos_google-play-icon.svg" class="store-icon" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/logos_apple-app-store.svg" class="store-icon" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="row g-0 row-cols-2 row-cols-sm-1 row-cols-md-5">
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Plans & Pricing</li>
+                                    <li><a href="#">Prepaid plans</a></li>
+                                    <li><a href="#">Postpaid plans</a></li>
+                                    <li><a href="#">YES Prihatin plans</a></li>
+                                    <li><a href="#">Data Add-Ons</a></li>
+                                    <li><a href="#">Merdeka RM1 Package</a></li>
+                                    <li><a href="#">On-the-go broadband</a></li>
+                                    <li><a href="#">Home broadband</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Explore</li>
+                                    <li><a href="#">Keep number</a></li>
+                                    <li><a href="#">Refer & earn</a></li>
+                                    <li><a href="#">Databack</a></li>
+                                    <li><a href="#">Partnerships</a></li>
+                                    <li><a href="#">Roaming</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Tools</li>
+                                    <li><a href="#">Device manuals</a></li>
+                                    <li><a href="#">Coverage</a></li>
+                                    <li><a href="#">Speed test</a></li>
+                                    <li><a href="#">Kiosk locations</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Company</li>
+                                    <li><a href="#">About us</a></li>
+                                    <li><a href="#">Sustainability reports</a></li>
+                                    <li><a href="#">Newsroom</a></li>
+                                    <li><a href="#">Terms & conditions</a></li>
+                                    <li><a href="#">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Help</li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Chatbot</a></li>
+                                    <li><a href="#">Email us</a></li>
+                                    <li><a href="#">Facebook messenger</a></li>
+                                    <li><a href="#">Visit our store</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-1">
+                        <img src="images/ctm.png" class="img-fluid ctm-logo" />
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-md-start justify-content-sm-center">
+                            <p>POWERED BY YTL, YTL Communications Sdn. Bhd. (793634-V)</p>
+                        </div>
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-md-end justify-content-sm-center">
+                            <img src="images/footer-icons.png" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="js/iconify.min.js"></script>
+    <script type="text/javascript" src="js/aos.js"></script>
+
+    <script type="text/javascript">
+        AOS.init();
+    </script>
+
+    <script type="text/javascript">
+        function handleSelectAll($dropDown, $calledFromFilter) {
+            $filterType = $dropDown.data("filter-type") || $dropDown.closest("[data-filter-type]").data("filter-type");
+
+            if ($calledFromFilter) {
+                var $cardsCkb = $("[data-filter-type='" + $filterType + "'] .cardCheckBox");
+                var $selectAll = $cardsCkb.length === $cardsCkb.filter(":checked").length;
+
+                $("[data-filter-type='" + $filterType + "'] input.cardCheckBoxAll").prop("checked", $selectAll);
+            } else {
+                $("[data-filter-type='" + $filterType + "'] .cardCheckBox").prop("checked", $dropDown.is(":checked")).change();
+            }
+        }
+
+        // Cache your elements
+        const $cards = $("[data-category]");
+        const $cardsCkb = $(".cardCheckBox");
+
+        $("input.cardCheckBoxAll").each(function($index, $dropDown) {
+            $dropDown = $($dropDown);
+
+            $dropDown.on("change", function() {
+                handleSelectAll($dropDown);
+            });
+
+        });
+
+        $cardsCkb.on("change", function($e) {
+            $checkBox = $($e.target);
+            handleSelectAll($checkBox, true);
+
+            // Create an Array of checked values
+            const checkedArr = $cardsCkb.filter(":checked").get().map(el => el.value);
+
+            // Show all and exit if no filter is active
+            if (!checkedArr.length) return $cards.removeClass("is-hidden");
+
+            // Finally, use jQuery's .toggleClass() and JS's Array.prototype.includes()
+            $cards.each(function() {
+                const category = $(this).data("category");
+                $(this).toggleClass("is-hidden", !checkedArr.includes(category));
+            });
+
+        });
+
+        $('ul.dropdown-menu').on('click', function(event) {
+            var events = $._data(document, 'events') || {};
+            events = events.click || [];
+            for (var i = 0; i < events.length; i++) {
+                if (events[i].selector) {
+
+                    //Check if the clicked element matches the event selector
+                    if ($(event.target).is(events[i].selector)) {
+                        events[i].handler.call(event.target, event);
+                    }
+
+                    // Check if any of the clicked element parents matches the 
+                    // delegated event selector (Emulating propagation)
+                    $(event.target).parents(events[i].selector).each(function() {
+                        events[i].handler.call(this, event);
+                    });
+                }
+            }
+            event.stopPropagation(); //Always stop propagation
+        });
+        $(window).scroll(function() {
+            var scroll = $(window).scrollTop();
+            if (scroll > 450) {
+                $(".filter-container").addClass("filter-shadow");
+            } else {
+                $(".filter-container").removeClass("filter-shadow");
+            }
+        });
+    </script>
+
+</body>
+
+</html>
