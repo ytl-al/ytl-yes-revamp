@@ -1,0 +1,97 @@
+<script type="text/javascript">
+    function handleSelectAll($dropDown, $calledFromFilter) {
+        $filterType = $dropDown.data("filter-type") || $dropDown.closest("[data-filter-type]").data("filter-type");
+
+        if ($calledFromFilter) {
+            var $cardsCkb = $("[data-filter-type='" + $filterType + "'] .cardCheckBox");
+            var $selectAll = $cardsCkb.length === $cardsCkb.filter(":checked").length;
+
+            $("[data-filter-type='" + $filterType + "'] input.cardCheckBoxAll").prop("checked", $selectAll);
+        } else {
+            $("[data-filter-type='" + $filterType + "'] .cardCheckBox").prop("checked", $dropDown.is(":checked")).change();
+        }
+    }
+
+    // Cache your elements
+    const $stateCards = $("[data-state]");
+    const $serviceCards = $('[data-services]');
+    const $stateCardsCkb = $(".cardCheckBox.state");
+    const $serviceCardsCkb = $('.cardCheckBox.service');
+
+    $("input.cardCheckBoxAll").each(function($index, $dropDown) {
+        $dropDown = $($dropDown);
+
+        $dropDown.on("change", function() {
+            handleSelectAll($dropDown);
+        });
+    });
+
+    $stateCardsCkb.on("change", function($e) {
+        $checkBox = $($e.target);
+        handleSelectAll($checkBox, true);
+
+        // Create an Array of checked values
+        const checkedStatesArr = $stateCardsCkb.filter(":checked").get().map(el => el.value);
+
+        // Show all and exit if no filter is active
+        if (!checkedStatesArr.length) return $stateCards.addClass("is-hidden");
+
+        // Finally, use jQuery's .toggleClass() and JS's Array.prototype.includes()
+        $stateCards.each(function() {
+            const state = $(this).data("state");
+            $(this).toggleClass("is-hidden", !checkedStatesArr.includes(state));
+        });
+    });
+
+    $serviceCardsCkb.on("change", function($e) {
+        $checkBox = $($e.target);
+        handleSelectAll($checkBox, true);
+
+        // Create an Array of checked values
+        const checkedServicesArr = $serviceCardsCkb.filter(":checked").get().map(el => el.value);
+
+        // Show all and exit if no filter is active
+        if (!checkedServicesArr.length) return $serviceCards.addClass("is-hidden");
+
+        // Finally, use jQuery's .toggleClass() and JS's Array.prototype.includes()
+        $serviceCards.each(function(idx, target) {
+            var services = $(this).data("services");
+            $(target).addClass('is-hidden');
+            for (var i = 0; i < checkedServicesArr.length; i++) {
+                if (services.indexOf(checkedServicesArr[i]) > -1) {
+                    $(target).removeClass('is-hidden');
+                    break;
+                }
+            }
+        });
+    });
+
+    $('ul.dropdown-menu').on('click', function(event) {
+        var events = $._data(document, 'events') || {};
+        events = events.click || [];
+        for (var i = 0; i < events.length; i++) {
+            if (events[i].selector) {
+
+                //Check if the clicked element matches the event selector
+                if ($(event.target).is(events[i].selector)) {
+                    events[i].handler.call(event.target, event);
+                }
+
+                // Check if any of the clicked element parents matches the 
+                // delegated event selector (Emulating propagation)
+                $(event.target).parents(events[i].selector).each(function() {
+                    events[i].handler.call(this, event);
+                });
+            }
+        }
+        event.stopPropagation(); //Always stop propagation
+    });
+    $(window).scroll(function() {
+        var scroll = $(window).scrollTop();
+        if (scroll > 450) {
+            $(".filter-container").addClass("filter-shadow");
+        } else {
+            $(".filter-container").removeClass("filter-shadow");
+        }
+    });
+</script>

@@ -84,10 +84,11 @@ define('WP_DEBUG', false);
 
 /* Add any custom values between this line and the "stop editing" line. */
 define('AUTOSAVE_INTERVAL', 86400);
+define('WP_POST_REVISIONS', false);
 define('DISALLOW_FILE_EDIT', true);
 define('WP_AUTO_UPDATE_CORE', false);
-define('WP_MEMORY_LIMIT', '256M');
-define('WP_MAX_MEMORY_LIMIT', '256M');
+define('WP_MEMORY_LIMIT', '512M');
+define('WP_MAX_MEMORY_LIMIT', '512M');
 @ini_set('max_input_vars', 10000);
 
 define('WPCF7_FOOTER_NEWSLETTER_FORM_ID', 0);
