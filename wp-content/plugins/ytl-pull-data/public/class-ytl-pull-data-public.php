@@ -114,20 +114,20 @@ class Ytl_Pull_Data_Public
 	private $path_generate_otp_for_login;
 
 	/**
-	 * The api path to get all cities by state code.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $path_get_cities_by_state_code  			The path to get all cities by state code
-	 */
-	private $path_validate_login;
-
-	/**
 	 * The api path to validate the login credentials.
 	 *
 	 * @since    1.0.0
 	 * @access   private
 	 * @var      string    $path_validate_login  				The path to validate the login service.
+	 */
+	private $path_validate_login;
+
+	/**
+	 * The api path to get all cities by state code.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $path_get_cities_by_state_code  		The path to get all cities by state code
 	 */
 	private $path_get_cities_by_state_code;
 
@@ -139,6 +139,15 @@ class Ytl_Pull_Data_Public
 	 * @var      string    $path_generate_otp_for_guest_login	The path to generate otp for guest login service.
 	 */
 	private $path_generate_otp_for_guest_login;
+
+	/**
+	 * The api path to validate the guest login credentials.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $path_validate_guest_login  			The path to validate the guest login service.
+	 */
+	private $path_validate_guest_login;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -160,6 +169,7 @@ class Ytl_Pull_Data_Public
 		$this->path_validate_login			= '/mobileyos-dev/mobile/ws/v1/json/validateLoginAndGetCustomerDetails';
 		$this->path_get_cities_by_state_code= '/mobileyos-dev/mobile/ws/v1/json/getAllCitiesByStateCode';
 		$this->path_generate_otp_for_guest_login = '/mobileyos-dev/mobile/ws/v1/json/generateOTPForGuestLogin';
+		$this->path_validate_guest_login 	= '/mobileyos-dev/mobile/ws/v1/json/validateGuestLogin';
 
 		$ytlpd_options				= get_option($this->prefix . "settings");
 		$this->api_domain 			= (!empty($ytlpd_options['ytlpd_api_domain_url'])) ? $ytlpd_options['ytlpd_api_domain_url'] : '';
@@ -224,6 +234,7 @@ class Ytl_Pull_Data_Public
 		$this->ra_reg_login_basic();
 		$this->ra_reg_get_cities_by_state();
 		$this->ra_reg_generate_otp_for_guest_login();
+		$this->ra_reg_guest_login();
 	}
 
 	public function ra_reg_add_to_cart()
@@ -546,5 +557,62 @@ class Ytl_Pull_Data_Public
 			return new WP_Error('error_generating_otp_for_guest_login', "Parameters not complete to generate OTP for guest login.", array('status' => 400));
 		}
 		return new WP_Error('error_generating_otp_for_guest_login', "There's an error in generating OTP for guest login.", array('status' => 400));
+	}
+
+	public function ra_reg_guest_login()
+	{
+		register_rest_route('ywos/v1', 'validate-guest-login', array(
+			'methods' 	=> 'POST', 
+			'callback'	=> array($this, 'validate_guest_login'), 
+			'args' 		=> [
+				'phone_number' => [
+					'validate_callback' => function ($param, $request, $key) {
+						return true;
+					}
+				], 
+				'otp_password' => [
+					'validate_callback' => function ($param, $request, $key) {
+						return true;
+					}
+				]
+			]
+		));
+	}
+
+	public function validate_guest_login(WP_REST_Request $request) 
+	{
+		$msisdn = (trim($request['phone_number'])) ? $request['phone_number'] : null;
+		$otp_password = (trim($request['otp_password'])) ? $request['otp_password'] : null;
+		return $this->ca_validate_guest_login($msisdn, $otp_password);
+	}
+
+	public function ca_validate_guest_login($msisdn = null, $otp_password = null) 
+	{
+		$session_id = $this->ca_generate_auth_token(true);
+		if ($msisdn != null && $otp_password != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
+			$params 	= ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'msisdn' => $msisdn, 'password' => $otp_password, 'sessionId' => $session_id];
+			$args 		= [
+				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
+				'body'          => json_encode($params),
+				'method'        => 'POST',
+				'data_format'   => 'body'
+			];
+			$api_url 	= $this->api_domain . $this->path_validate_guest_login;
+			$request 	= wp_remote_post($api_url, $args);
+			$data 		= json_decode($request['body']);
+
+			if ($data->responseCode > -1) {
+				$data->sessionId = $session_id;
+
+				$response 	= new WP_REST_Response($data);
+				$response->set_status(200);
+				return $response;
+			} else if ($data->displayErrorMessage) {
+				return new WP_Error('error_validating_guest_login', $data->displayErrorMessage, array('status' => 400));
+			}
+		} else {
+			return new WP_Error('error_validating_guest_login', "Parameters not complete to validate login.", array('status' => 400));
+		}
+		return new WP_Error('error_validating_guest_login', "There's an error in validating login.", array('status' => 400));
 	}
 }

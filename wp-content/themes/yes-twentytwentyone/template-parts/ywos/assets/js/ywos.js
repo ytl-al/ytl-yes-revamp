@@ -109,17 +109,17 @@ const ywos = {
             } else {
                 var toPage = 'cart';
                 switch (this.lsData.meta.completedStep) {
-                    case 0: 
+                    case 0:
                         toPage = 'cart';
                         break;
-                    case 1: 
+                    case 1:
                         toPage = 'verification';
                         break;
                     case 2:
                         toPage = 'delivery';
                         break;
                 }
-                (toPage != null) ? this.redirectToPage(toPage) : '';
+                (toPage != null) ? this.redirectToPage(toPage): '';
                 return false;
             }
         } else if (currentStep == 0) {
@@ -161,4 +161,24 @@ const ywos = {
 
 function buyPlan(planID) {
     ywos.buyPlan(planID);
+}
+
+function roundAmount(amount, decimals = 2) {
+    return Number(Math.round(amount + 'e' + decimals) + 'e-' + decimals);
+}
+
+function getRoundingAdjustmentAmount(amount) {
+    var fixAmount = parseFloat(roundAmount(amount)).toFixed(2);
+    var baseAmount = amount.toString().slice(0, -1);
+    var balance = fixAmount - baseAmount;
+        balance = parseFloat(balance.toFixed(2));
+    var roundingAmount = 0.00;
+    if (balance !== 0.00) {
+        if (balance > 0.05 || balance == 0.00) {
+            roundingAmount = 0.1 - balance;
+        } else {
+            roundingAmount = 0.05 - balance;
+        }
+    }
+    return parseFloat(roundingAmount).toFixed(2);
 }

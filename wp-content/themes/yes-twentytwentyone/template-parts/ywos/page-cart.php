@@ -90,10 +90,16 @@
                                         <p>RM{{ parseFloat(orderSummary.due.taxesSST).toFixed(2) }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom">
-                                        <p>Shipping fee</p>
+                                        <p>Shipping Fee</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.shippingFees).toFixed(2) }}</p>
+                                    </div>
+                                    <div class="col-6 pb-1 pt-1 border-bottom">
+                                        <p>Rounding Adjustment</p>
+                                    </div>
+                                    <div class="col-6 pb-1 pt-1 border-bottom text-end">
+                                        <p>RM{{ parseFloat(orderSummary.due.rounding).toFixed(2) }}</p>
                                     </div>
                                 </div>
                                 <div class="d-none">
@@ -333,12 +339,17 @@
                         allowBasic: false
                     }
                 },
+                taxRate: {
+                    sst: 0.06
+                },
                 orderSummary: {
                     plan: {},
                     due: {
                         addOns: 0.00,
                         taxesSST: 0.00,
                         shippingFees: 0.00,
+                        rounding: 0.00,
+                        foreignerDeposit: 0.00,
                         total: 0.00
                     }
                 },
@@ -393,7 +404,10 @@
                 updateSummary: function() {
                     var self = this;
                     var total = 0;
-                    self.orderSummary.due.total = parseFloat(self.orderSummary.plan.totalAmount) + parseFloat(self.orderSummary.due.addOns) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees);
+                    self.orderSummary.due.taxesSST = parseFloat(self.orderSummary.plan.totalAmount) * self.taxRate.sst;
+                    self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.plan.totalAmount) + parseFloat(self.orderSummary.due.addOns) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees));
+                    self.orderSummary.due.rounding = getRoundingAdjustmentAmount(self.orderSummary.due.total.toFixed(2));
+                    self.orderSummary.due.total += parseFloat(self.orderSummary.due.rounding);
                 },
                 checkLoggedIn: function() {
                     var self = this;
@@ -405,7 +419,7 @@
                 },
                 validateBasicLogin: function() {
                     var self = this;
-                    var yesNumber = self.login.input.basic.yesNumber.replace(' ', '');
+                    var yesNumber = self.login.input.basic.yesNumber.trim();
                     var password = self.login.input.basic.password;
                     if (isNaN(yesNumber) || yesNumber.length == 0 || password.length == 0) {
                         self.toggleErrorMessageLoginBasic('Please insert valid login credentials.');
@@ -426,10 +440,12 @@
                             self.redirectLoggedIn();
                         })
                         .catch((error) => {
-                            // console.log(error);
+                            var errorMsg = "There's an error in validating login. Please try again later.";
                             var response = error.response;
-                            var data = response.data;
-                            var errorMsg = data.message;
+                            if (typeof response !== 'undefined') {
+                                var data = response.data;
+                                errorMsg = data.message;
+                            }
 
                             self.toggleErrorMessageLoginBasic(errorMsg);
 
@@ -474,7 +490,7 @@
                             $('.item-otpPassword').show();
                             $('.panel-otpMessage .span-message').html(response.data.displayResponseMessage);
                             $(self.login.input.otp.inputPassword).focus();
-                            self.triggerOTPCountdown();
+                            self.triggerOTPCountdown(response.data.otpExpiryTime);
                         })
                         .catch((error) => {
                             var response = error.response;
@@ -500,11 +516,11 @@
                         $(self.login.errorMessage.otp).hide().html('');
                     }
                 },
-                triggerOTPCountdown: function() {
+                triggerOTPCountdown: function(timerMinute = 5) {
                     var self = this;
                     self.allowRequestOTP = false;
 
-                    var timer = 5 * 60,
+                    var timer = timerMinute * 60,
                         minutes, seconds;
                     var interval = setInterval(function() {
                         timer -= 1;
@@ -560,10 +576,16 @@
                     if (loginType == 'otp' || loginType == 'password') {
                         toPage = 'delivery';
                         currentStep += 1;
+
+                        if (ywos.lsData.meta.customerDetails.securityType == 'PASSPORT' && self.orderSummary.plan.planType == 'postpaid' && self.orderSummary.due.foreignerDeposit == 0.00) {
+                            self.orderSummary.due.foreignerDeposit = 200.00;
+                            self.orderSummary.due.total += self.orderSummary.due.foreignerDeposit;
+                        }
                     } else if (loginType == 'guest') {
                         isLoggedIn = false;
+                        ywos.lsData.meta.customerDetails = {};
                     }
-                    
+
                     ywos.lsData.meta.loginType = loginType;
                     ywos.lsData.meta.isLoggedIn = isLoggedIn;
                     ywos.lsData.meta.completedStep = currentStep;
