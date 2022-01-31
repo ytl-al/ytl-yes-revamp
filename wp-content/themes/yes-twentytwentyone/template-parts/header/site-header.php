@@ -72,6 +72,13 @@
                                         </li>
                                         <li>
                                             <ul>
+                                                <!-- <li class="dropdown-header"><?php echo esc_html__('Device Plans', 'yes.my'); ?></li> -->
+                                                <li class="dropdown-header">Device Plans</li>
+                                                <?php if (has_nav_menu('shop-device-plans')) wp_nav_menu(['theme_location' => 'shop-device-plans', 'container' => false, 'items_wrap' => '%3$s']); ?>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <ul>
                                                 <!-- <li class="dropdown-header"><?php echo esc_html__('Broadband', 'yes.my'); ?></li> -->
                                                 <li class="dropdown-header">Broadband</li>
                                                 <?php if (has_nav_menu('shop-broadband')) wp_nav_menu(['theme_location' => 'shop-broadband', 'container' => false, 'items_wrap' => '%3$s']); ?>
@@ -95,11 +102,40 @@
                                             'container'         => false,
                                             'li_class'          => 'nav-item',
                                             'link_class'        => 'nav-link',
-                                            'items_wrap'        => '<ul class="navbar-nav me-auto mb-2 mb-lg-0">%3$s</ul>',
+                                            'items_wrap'        => '<ul class="navbar-nav">%3$s</ul>',
                                         )
                                     );
                                 endif;
                             ?>
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item dropdown mega-dropdown">
+                                    <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Support', 'yes.my'); ?></a> -->
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Support</a>
+                                    <ul class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li>
+                                            <ul>
+                                                <!-- <li class="dropdown-header"><?php echo esc_html__('Help & Support', 'yes.my'); ?></li> -->
+                                                <li class="dropdown-header">Help & Support</li>
+                                                <?php if (has_nav_menu('support-help-support')) wp_nav_menu(['theme_location' => 'support-help-support', 'container' => false, 'items_wrap' => '%3$s']); ?>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <ul>
+                                                <!-- <li class="dropdown-header"><?php echo esc_html__('Tools & Services', 'yes.my'); ?></li> -->
+                                                <li class="dropdown-header">Tools & Services</li>
+                                                <?php if (has_nav_menu('support-tools-services')) wp_nav_menu(['theme_location' => 'support-tools-services', 'container' => false, 'items_wrap' => '%3$s']); ?>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <ul>
+                                                <!-- <li class="dropdown-header"><?php echo esc_html__('Contact Us', 'yes.my'); ?></li> -->
+                                                <li class="dropdown-header">Contact Us</li>
+                                                <?php if (has_nav_menu('support-contact-us')) wp_nav_menu(['theme_location' => 'support-contact-us', 'container' => false, 'items_wrap' => '%3$s']); ?>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
                             <div class="d-flex align-items-center">
                                 <!-- <a href="https://appstore.yes.my/ywos" class="pink-btn" target="_blank"><?php echo esc_html__('Get Started', 'yes.my'); ?></a> -->
                                 <a href="https://appstore.yes.my/ywos" class="pink-btn" target="_blank">Get Started</a>
