@@ -2,7 +2,7 @@
 /**
 * Plugin Name: Contact Form Entries
 * Description: Save form submissions to the database from <a href="https://wordpress.org/plugins/contact-form-7/">Contact Form 7</a>, <a href="https://wordpress.org/plugins/ninja-forms/">Ninja Forms</a>, <a href="https://elementor.com/widgets/form-widget/">Elementor Forms</a> and <a href="https://wordpress.org/plugins/wpforms-lite/">WP Forms</a>.
-* Version: 1.2.7
+* Version: 1.2.8
 * Requires at least: 3.8
 * Tested up to: 5.8
 * Author URI: https://www.crmperks.com
@@ -26,7 +26,7 @@ class vxcf_form {
   public static $type = "vxcf_form";
   public static $path = ''; 
 
-  public static  $version = '1.2.7';
+  public static  $version = '1.2.8';
   public static $upload_folder = 'crm_perks_uploads';
   public static $db_version='';  
   public static $base_url='';  
@@ -568,6 +568,7 @@ $upload_files=$lead=array();
 if(!empty($fields)){
     foreach($fields as $v){
 if($v['type'] == 'file-upload'){
+    $v['value']=array_map('trim',explode("\n",$v['value'])); 
   $upload_files[$v['id']]=$v['value'];  
 }else{
 $val=$v['value'];
@@ -578,6 +579,7 @@ if(in_array($v['type'],array('payment-select','payment-multiple'))){
 }
 $lead[$v['id']]=$val;
 }    } 
+//var_dump($upload_files); //die(); 
 if($track){
   $upload_files=$this->copy_files($upload_files); 
 }  
@@ -586,7 +588,7 @@ if($track){
        foreach($upload_files as $k=>$v){
        $lead[$k]=$v;    
        } }
-          
+         
 $form_arr=array('id'=>$form_data['id'],'name'=>'WP Forms','fields'=>$form_data['fields']);
 if(!empty($form_data['fields']['settings']['form_title'])){
     $form_arr['name']=$form_data['fields']['settings']['form_title'];

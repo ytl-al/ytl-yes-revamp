@@ -318,6 +318,8 @@ $sql_t="SELECT count(*) FROM {$leads_table} l where $search";
   $start = $page-1;
   $start = $start*intval($per_page);
   }
+  
+  if(!empty($req['start'])){ $start=vxcf_form::post('start',$req); }
   $start=max($start,0);
   $sql_fields='l.*';
 if(!empty(vxcf_form::$sql_select_fields)){ $sql_fields.=vxcf_form::$sql_select_fields; }
