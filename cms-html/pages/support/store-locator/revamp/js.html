@@ -41,7 +41,8 @@
         } else if (checkedStatesArr.length > 1) {
             selectedText = 'Multiple States';
         } else if (checkedStatesArr.length == 1) {
-            selectedText = $checkBox.closest('.form-check').find('span').html();
+            // selectedText = $checkBox.closest('.form-check').find('span').html();
+            selectedText = $('.cardCheckBox.state[value="' + checkedStatesArr[0] + '"]').closest('.form-check').find('span').html();
         }
         $('#dropdownStates').text(selectedText);
 
@@ -61,14 +62,15 @@
 
         // Create an Array of checked values
         const checkedServicesArr = $serviceCardsCkb.filter(":checked").get().map(el => el.value);
-
+        
         var selectedText = 'None';
         if (checkedServicesArr.length == $serviceCardsCkb.length) {
             selectedText = 'All Products & Services';
         } else if (checkedServicesArr.length > 1) {
             selectedText = 'Multiple Products & Services';
         } else if (checkedServicesArr.length == 1) {
-            selectedText = $checkBox.closest('.form-check').find('span').html();
+            // selectedText = $checkBox.closest('.form-check').find('span').html();
+            selectedText = $('.cardCheckBox.service[value="' + checkedServicesArr[0] + '"]').closest('.form-check').find('span').html();
         }
         $('#dropdownProducts').text(selectedText);
 
