@@ -1,6 +1,10 @@
 <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places,visualization&v=weekly&client=gme-ytlcommunications3&channel=publicyes"></script>
 
 <script type="text/javascript">
+    $(document).ready(function() {
+        $('.cardCheckBoxAll[data-filter-type="state"]').prop('checked', true).trigger('change');
+        $('.cardCheckBoxAll[data-filter-type="service"]').prop('checked', true).trigger('change');
+    });
     function handleSelectAll($dropDown, $calledFromFilter) {
         $filterType = $dropDown.data("filter-type") || $dropDown.closest("[data-filter-type]").data("filter-type");
 
@@ -35,7 +39,7 @@
         // Create an Array of checked values
         const checkedStatesArr = $stateCardsCkb.filter(":checked").get().map(el => el.value);
 
-        var selectedText = 'None';
+        var selectedText = 'No State Selected';
         if (checkedStatesArr.length == $stateCardsCkb.length) {
             selectedText = 'All States';
         } else if (checkedStatesArr.length > 1) {
@@ -63,7 +67,7 @@
         // Create an Array of checked values
         const checkedServicesArr = $serviceCardsCkb.filter(":checked").get().map(el => el.value);
         
-        var selectedText = 'None';
+        var selectedText = 'No Products & Services Selected';
         if (checkedServicesArr.length == $serviceCardsCkb.length) {
             selectedText = 'All Products & Services';
         } else if (checkedServicesArr.length > 1) {
