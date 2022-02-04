@@ -3,9 +3,11 @@ $(document).ready(function() {
     var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     });
-    $('.form-select').selectpicker({
-        liveSearch: true
-    });
+    if (typeof selectpicker === 'function') {
+        $('.form-select').selectpicker({
+            liveSearch: true
+        });
+    }
 });
 
 const ywosLSName = 'yesYWOS';
@@ -171,7 +173,7 @@ function getRoundingAdjustmentAmount(amount) {
     var fixAmount = parseFloat(roundAmount(amount)).toFixed(2);
     var baseAmount = amount.toString().slice(0, -1);
     var balance = fixAmount - baseAmount;
-        balance = parseFloat(balance.toFixed(2));
+    balance = parseFloat(balance.toFixed(2));
     var roundingAmount = 0.00;
     if (balance !== 0.00) {
         if (balance > 0.05 || balance == 0.00) {
