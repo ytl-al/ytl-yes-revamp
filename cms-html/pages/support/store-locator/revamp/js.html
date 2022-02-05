@@ -190,7 +190,7 @@
                                 break;
                             }
                         }
-                        if (locState) {
+                        if (locState && $('.cardCheckBox.state[data-state-name="' + locState + '"]').length) {
                             $('.cardCheckBoxAll[data-filter-type="state"]').prop('checked', false).trigger('change');
                             $('.cardCheckBox.state[data-state-name="' + locState + '"]');
                             $('.cardCheckBox.state[data-state-name="' + locState + '"]').prop('checked', true).trigger('change');
