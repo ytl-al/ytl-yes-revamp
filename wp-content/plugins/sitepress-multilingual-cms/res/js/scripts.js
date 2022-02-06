@@ -92,11 +92,14 @@ jQuery(function ($) {
 
     function click_on_lock() {
 		var radio_name = jQuery( this ).data( 'radio-name' ),
-			unlocked_name = jQuery( this ).data( 'unlocked-name' );
+            radio = jQuery( 'input[name="' + radio_name + '"]' ),
+			unlocked_name = jQuery( this ).data( 'unlocked-name' ),
+            slug = radio.data( 'slug' );
 
 		jQuery( this ).fadeOut();
-		jQuery( 'input[name="' + radio_name + '"]' ).prop( 'disabled', false );
+		radio.prop( 'disabled', false );
 		jQuery( 'input[name="' + unlocked_name + '"]' ).prop( 'value', '1' );
+        jQuery( 'input[name="automatic_post_type[' + slug + ']"]' ).prop( 'disabled', false );
 
 		return false;
 	}
@@ -114,6 +117,18 @@ jQuery(function ($) {
         'click',
         click_on_lock
     );
+
+    $('.js-custom-post-mode').on('change', function () {
+        var radio = $(this),
+            slug = radio.data('slug')
+            toggle = jQuery('input[name="automatic_post_type[' + slug + ']"]').closest('.otgs-toggle-group');
+
+        if (radio.val() === '1') {
+            toggle.show();
+        } else {
+            toggle.hide();
+        }
+    });
 
     $(function () {
         $('.js-type-translation-row').each(function () {
@@ -466,7 +481,7 @@ function icl_make_translatable(){
         }
     });
 
-    jQuery.post(WPML_core.sanitize(location.href),
+    jQuery.post(location.href,
         {
                 'post_id'       : WPML_core.sanitize( jQuery('#post_ID').val() ),
                 'icl_action'    : 'icl_mcs_inline',
@@ -489,9 +504,9 @@ function icl_make_translatable(){
                 var prependTo = jQuery('#side-sortables');
                 prependTo = prependTo.html() ? prependTo : jQuery('#normal-sortables');
                 prependTo.prepend(
-                    '<div id="icl_div" class="postbox">' + WPML_core.purify(jQuery(data).find('#icl_div').html()) + '</div>'
+                    '<div id="icl_div" class="postbox">' + jQuery(data).find('#icl_div').html() + '</div>'
                 );
-                jQuery('#icl_mcs_details').html(WPML_core.purify(jQuery(data).find('#icl_mcs_details').html()));
+                jQuery('#icl_mcs_details').html(jQuery(data).find('#icl_mcs_details').html());
             }else{
                 jQuery('#icl_div').hide();
                 jQuery('#icl_mcs_details').html('');

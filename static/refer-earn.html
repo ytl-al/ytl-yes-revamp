@@ -15,27 +15,27 @@
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
 
     <style>
-        #partners-top-banner {
-            background-image: url('images/partners-banner-bg.jpg');
+        #refer-top-banner {
+            background-image: url('images/refer-banner.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             padding-top: 50px;
             overflow: hidden;
         }
         
-        #partners-top-banner h1 {
+        #refer-top-banner h1 {
             font-size: 60px;
             line-height: 60px;
             font-weight: 800;
-            color: #2B2B2B;
-            text-align: center;
+            color: #FFF;
+            text-align: left;
         }
         
-        #partners-top-banner p {
+        #refer-top-banner p {
             font-size: 24px;
-            font-weight: 800;
+            font-weight: 600;
             line-height: 28px;
-            color: #2B2B2B;
+            color: #FFF;
             margin-bottom: 20px;
         }
         
@@ -104,84 +104,38 @@
             width: 100%;
             display: inline-block;
         }
-        
-        #number-steps h1 {
-            font-size: 24px;
-            font-weight: 800;
-            line-height: 30px;
-            color: #00B4F0;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-        }
-        
-        #number-steps h1 img {
-            margin-right: 10px;
-            display: inline;
-        }
-        
-        #number-steps h2 {
-            color: #525252;
-            font-weight: 800;
-            font-size: 29px;
-            margin-bottom: 20px;
-        }
-        
-        #number-steps p {
-            font-size: 21px;
-            color: #2B2B2B;
-            line-height: 28px;
-            padding-bottom: 20px;
-        }
-        
-        #number-steps p a {
-            color: #ED028C;
-            text-decoration: underline;
-            font-weight: 700;
-        }
-        
-        #number-steps .scroll-link {
-            color: #525252;
-            font-size: 20px;
-            font-weight: 700;
-            display: block;
-        }
-        
-        #number-steps .scroll-link img {
-            margin-right: 10px;
-            display: inline;
-        }
         /* IPAD Portrait */
         
         @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
-            #partners-top-banner h1 {
+            #refer-top-banner h1 {
                 font-size: 44px;
                 line-height: 44px;
             }
-            #partners-top-banner p {
+            #refer-top-banner p {
                 font-size: 24px;
                 line-height: 35px;
             }
         }
         
         @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
-            #partners-top-banner h1 {
+            #refer-top-banner {
+                background-position: top;
+                padding-top: 20px;
+            }
+            #refer-top-banner h1 {
                 font-size: 35px;
                 line-height: 35px;
                 text-align: center;
             }
-            #partners-top-banner p {
-                line-height: 20px;
+            #refer-top-banner p {
                 margin-bottom: 15px;
+                text-align: center;
+                font-size: 22px;
             }
-            #partners-top-banner {
-                padding-top: 20px;
-            }
-            #partners-top-banner .banner-visual {
+            #refer-top-banner .banner-visual {
                 text-align: center;
             }
-            #partners-top-banner .banner-visual img {
+            #refer-top-banner .banner-visual img {
                 margin: 0 auto;
                 margin-top: 20px;
                 width: 70% !important;
@@ -196,12 +150,6 @@
 
     <div class="layer-page">
         <header class="page-header">
-            <div class="top-pink-bar">
-                <div class="row g-0 text-center">
-                    <p>Are you an Exisiting YES user? Earn up to RM50/referral through our Refer & Earn program!</p>
-                </div>
-                <a href="#" class="close-btn"><span class="iconify" data-icon="eva:close-fill"></span></a>
-            </div>
             <div class="top-tabs-container">
                 <div class="container g-0">
                     <div class="row g-0">
@@ -295,57 +243,29 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="#">Keep Your Number</a></li>
+                        <li class="breadcrumb-item active"><a href="#">Refer & Earn</a></li>
                     </ol>
                 </nav>
             </div>
             <!-- Breadcrumb End -->
 
             <!-- Banner Start -->
-            <section id="partners-top-banner">
+            <section id="refer-top-banner">
                 <div class="container">
                     <div class="row justify-content-lg-center">
-                        <div class="col-12 col-md-6 col-lg-6 ps-lg-5 d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                            <div class="text-center">
-                                <p>Our partners</p>
-                                <h1>You’re in great<br>company</h1>
-                                <img src="images/partners-banner-logos.png" class="img-fluid mt-3" alt="">
+                        <div class="col-12 col-md-6 col-lg-5 ps-lg-5 d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                            <div>
+                                <h1>Refer & Earn<br>with YES</h1>
+                                <p>Bring your friends to YES and earn up to RM50 each. More friends, more DUIT. It's a Win-Win!</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-5 banner-visual justify-content-center" data-aos="flip-right" data-aos-duration="1000" data-aos-delay="100">
-                            <img src="images/partners-banner-visual.png" class="d-block w-100" alt="">
+                            <img src="images/refer-banner-visual.png" class="d-block w-100" alt="">
                         </div>
                     </div>
                 </div>
             </section>
             <!-- Banner End -->
-
-            <!-- Number Steps Start -->
-            <section id="number-steps">
-                <div class="container mt-5 mb-5">
-                    <div class="row justify-content-lg-center gx-5 mt-5 text-md-start text-center">
-                        <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
-                            <h1 class="justify-content-md-start justify-content-center"><img src="images/getaplan-icon.png" />Step 1</h1>
-                            <h2>Get a Plan</h2>
-                            <p class="mb-4 mb-auto">Get started with <a href="https://www.yes.my/">any of our plans</a> available, we have something for everyone. You’ll first recieve your SIM card with a temporary YES number.</p>
-                        </div>
-                        <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
-                            <h1 class="justify-content-md-start justify-content-center"><img src="images/number-step2.png" />Step 2</h1>
-                            <h2>Activate</h2>
-                            <p class="mb-4 mb-auto">Once you receive your SIM, download our <a href="https://play.google.com/store/apps/details?id=my.yes.yes4g&hl=en&gl=US" target="_blank">MyYes app</a> to activate and verify yourself before switching to your original number.<br><br>
-                                <a href="/faq/howtoactivatesim">Learn how to activate</a>
-                            </p>
-                        </div>
-                        <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
-                            <h1 class="justify-content-md-start justify-content-center"><img src="images/switch-icon.png" />Step 3</h1>
-                            <h2>Switch</h2>
-                            <p class="mb-4 mb-auto">You can switch to your own number during the activation process or anytime after that.</p>
-                            <a href="#number-section" class="scroll-link mt-4"><img src="images/scrolldown-icon.png" />Scroll down to know more</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Number Steps End -->
 
             <!-- Number Section Start -->
             <section id="number-section">
@@ -370,33 +290,6 @@
                                 <h3 class="justify-content-md-start justify-content-center"><img src="images/swtich-step3-icon.png" />Step 3</h3>
                                 <p class="mb-4 mb-auto">You will receive a confirmation SMS from your existing service provider. Reply to confirm your switch.</p>
                                 <img src="images/switch-step3-visual.png" class="img-fluid" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Switch Activation End -->
-
-                <!-- Switch Activation Start -->
-                <div class="switch-activation mt-5 mb-5">
-                    <div class="container">
-                        <div class="row" data-aos="fade-up" data-aos-duration="500">
-                            <h1 class="mb-5">How To: Switch Anytime After Activation</h1>
-                        </div>
-                        <div class="row justify-content-lg-center gx-5 mt-5 text-md-start text-center">
-                            <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
-                                <h3 class="justify-content-md-start justify-content-center"><img src="images/switch-step1-icon.png" />Step 1</h3>
-                                <p class="mb-4 mb-auto">Download the MyYes app to Keep Your Number even long after your activation.</p>
-                                <img src="images/switch-after-visual1.png" class="img-fluid" />
-                            </div>
-                            <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
-                                <h3 class="justify-content-md-start justify-content-center"><img src="images/switch-step2-icon.png" />Step 2</h3>
-                                <p class="mb-4 mb-auto">Head over to ‘Quick Access’, and select “Switch to YES” then “Keep Your Number”.</p>
-                                <img src="images/switch-after-visual2.png" class="img-fluid" />
-                            </div>
-                            <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
-                                <h3 class="justify-content-md-start justify-content-center"><img src="images/swtich-step3-icon.png" />Step 3</h3>
-                                <p class="mb-4 mb-auto">You will receive a confirmation SMS from your existing service provider. Reply to confirm your switch.</p>
-                                <img src="images/switch-after-visual3.png" class="img-fluid" />
                             </div>
                         </div>
                     </div>

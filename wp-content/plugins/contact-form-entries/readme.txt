@@ -3,8 +3,8 @@ Contributors: crmperks, sbazzi
 Tags: contact form 7, contact form 7 database, contact form db, save contact form, wpforms database
 Requires at least: 3.8
 Tested up to: 5.8
-Stable tag: 1.2.7
-Version: 1.2.7
+Stable tag: 1.2.8
+Version: 1.2.8
 Requires PHP: 5.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -165,6 +165,9 @@ Contact form 7 entries plugin allows you to save contact form 7 entries to local
 
 
 == Changelog ==
+
+= 1.2.8 =
+* fixed "start" parameter issue in shortcode.
 
 = 1.2.7 =
 * fixed "perpage" issue.

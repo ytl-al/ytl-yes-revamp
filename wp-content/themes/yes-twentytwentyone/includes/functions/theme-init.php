@@ -163,6 +163,11 @@ if (!function_exists('yes_register_menus')) {
                     'shop-mobile-plans' => esc_html__('Mobile Plans', 'yes.my'),
                     'shop-broadband'    => esc_html__('Broadband', 'yes.my'),
                     'shop-existing-customers' => esc_html__('Existing Customers', 'yes.my'),
+                    'shop-device-plans' => esc_html__('Device Plans', 'yes.my'),
+                    
+                    'support-help-support' => esc_html__('Support - Help & Support', 'yes.my'),
+                    'support-tools-services' => esc_html__('Support - Tools & Services', 'yes.my'),
+                    'support-contact-us' => esc_html__('Support - Contact Us', 'yes.my'),
 
                     // 'footer-column-1'   => esc_html__('Footer - Column 1', 'yes.my'),
                     // 'footer-column-2'   => esc_html__('Footer - Column 2', 'yes.my'),

@@ -9,7 +9,7 @@
  *
  * This file contains the following configurations:
  *
- * * MySQL settings
+ * * Database settings
  * * Secret keys
  * * Database table prefix
  * * ABSPATH
@@ -19,17 +19,17 @@
  * @package WordPress
  */
 
-// ** MySQL settings - You can get this info from your web host ** //
+// ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 define('DB_NAME', 'database_name_here');
 
-/** MySQL database username */
+/** Database username */
 define('DB_USER', 'username_here');
 
-/** MySQL database password */
+/** Database password */
 define('DB_PASSWORD', 'password_here');
 
-/** MySQL hostname */
+/** Database hostname */
 define('DB_HOST', 'localhost');
 
 /** Database charset to use in creating database tables. */
@@ -84,10 +84,11 @@ define('WP_DEBUG', false);
 
 /* Add any custom values between this line and the "stop editing" line. */
 define('AUTOSAVE_INTERVAL', 86400);
+define('WP_POST_REVISIONS', false);
 define('DISALLOW_FILE_EDIT', true);
 define('WP_AUTO_UPDATE_CORE', false);
-define('WP_MEMORY_LIMIT', '256M');
-define('WP_MAX_MEMORY_LIMIT', '256M');
+define('WP_MEMORY_LIMIT', '512M');
+define('WP_MAX_MEMORY_LIMIT', '512M');
 @ini_set('max_input_vars', 10000);
 
 define('WPCF7_FOOTER_NEWSLETTER_FORM_ID', 0);

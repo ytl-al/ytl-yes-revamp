@@ -24,7 +24,9 @@ $(document).ready(function() {
         jumpSection(this);
     });
 
-    AOS.init();
+    AOS.init({
+        once: true
+    });
 });
 
 
