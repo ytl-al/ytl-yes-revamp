@@ -38,25 +38,16 @@
             color: #FFF;
             margin-bottom: 20px;
         }
+        /* How it Works Start */
         
-        #number-section {
-            background-image: url('images/keepnumbers-bodybg-large.png');
-            background-size: cover;
-            background-position: top center;
-            background-repeat: no-repeat;
-        }
-        
-        .switch-activation {
+        #how-works {
             align-items: center;
             justify-content: center;
             padding: 50px 0px;
             padding-bottom: 0px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
         }
         
-        .switch-activation h1 {
+        #how-works h1 {
             font-size: 40px;
             font-weight: 800;
             line-height: 40px;
@@ -64,7 +55,7 @@
             text-align: center;
         }
         
-        .switch-activation h2 {
+        #how-works h2 {
             font-size: 25px;
             font-weight: 600;
             line-height: 25px;
@@ -73,11 +64,11 @@
             text-align: center;
         }
         
-        .switch-activation h2 span {
+        #how-works h2 span {
             font-weight: 800;
         }
         
-        .switch-activation h3 {
+        #how-works h3 {
             font-size: 24px;
             font-weight: 800;
             line-height: 30px;
@@ -88,21 +79,126 @@
             align-items: center;
         }
         
-        .switch-activation h3 img {
+        #how-works h3 img {
             margin-right: 10px;
             display: inline;
         }
         
-        .switch-activation p {
+        #how-works p {
             font-size: 21px;
             color: #2B2B2B;
             line-height: 28px;
             padding-bottom: 20px;
         }
         
-        .switch-activation .step-box {
+        #how-works p span {
+            font-weight: 700;
+        }
+        
+        #how-works .step-box {
             width: 100%;
             display: inline-block;
+        }
+        
+        #how-works .content {
+            padding: 0px 60px;
+        }
+        /* How it Works End */
+        /* How to Claim Start */
+        
+        #how-claim {
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0px;
+            padding-bottom: 0px;
+        }
+        
+        #how-claim h1 {
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 40px;
+            color: #2B2B2B;
+        }
+        
+        #how-claim p {
+            font-size: 21px;
+            color: #525252;
+            line-height: 28px;
+            padding-bottom: 20px;
+        }
+        
+        #how-claim p span {
+            font-weight: 700;
+        }
+        /* How to Claim End */
+        /* Get Rewarded Start */
+        
+        #get-rewarded {
+            align-items: center;
+            justify-content: center;
+            padding: 70px 0px;
+            padding-top: 0px;
+            background: linear-gradient(180deg, rgba(223, 244, 254, 0) 16.56%, #DFF4FE 167.9%);
+        }
+        
+        #get-rewarded h1 {
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 40px;
+            color: #2B2B2B;
+            text-align: center
+        }
+        
+        #get-rewarded .plan-table {
+            border-spacing: 20px;
+            border-collapse: initial;
+        }
+        
+        #get-rewarded .plan-table th {
+            padding: 9px 30px;
+            vertical-align: middle;
+            background-color: #F9F7F4;
+            border: 3px solid #00B4F0;
+            border-radius: 8px;
+        }
+        
+        #get-rewarded .plan-table th.visual {
+            border: none;
+        }
+        
+        #get-rewarded .plan-table th h1 {
+            color: #525252;
+            font-size: 20px;
+            line-height: 24px;
+            font-weight: 800;
+            text-align: center;
+        }
+        
+        #get-rewarded .plan-table tr td {
+            padding: 20px;
+            text-align: center;
+            background-color: #F9F7F4;
+            border: solid 1.2px #DEE5EF;
+            border-radius: 8px;
+            color: #525252;
+            font-size: 29px;
+            font-weight: 800;
+            vertical-align: middle;
+        }
+        
+        #get-rewarded .plan-table tr td.blue-col {
+            background: linear-gradient(238.42deg, #00B4F0 0.12%, #ED028C 174.16%);
+            border-bottom: none;
+            position: relative;
+            color: #F9F7F4;
+            text-align: left;
+            width: 25%;
+        }
+        
+        #get-rewarded .plan-table tr td.blue-col .info-icon {
+            position: absolute;
+            right: 22px;
+            top: 22px;
         }
         /* IPAD Portrait */
         
@@ -132,14 +228,26 @@
                 text-align: center;
                 font-size: 22px;
             }
-            #refer-top-banner .banner-visual {
-                text-align: center;
+            #get-rewarded .plan-table tr td {
+                padding: 10px;
             }
-            #refer-top-banner .banner-visual img {
-                margin: 0 auto;
-                margin-top: 20px;
-                width: 70% !important;
-                display: inline-block !important;
+            #get-rewarded .plan-table th {
+                padding: 9px 13px;
+            }
+            #get-rewarded .plan-table th h1 {
+                font-size: 16px;
+            }
+            #get-rewarded .plan-table tr td.blue-col {
+                min-width: 187px;
+                font-size: 16px;
+                position: sticky;
+                left: 0;
+            }
+            #get-rewarded .plan-table tr td.blue-col .info-icon {
+                display: none;
+            }
+            #get-rewarded .plan-table tr td {
+                font-size: 16px;
             }
         }
     </style>
@@ -267,116 +375,188 @@
             </section>
             <!-- Banner End -->
 
-            <!-- Number Section Start -->
-            <section id="number-section">
-                <!-- Switch Activation Start -->
-                <div class="switch-activation mb-5 mt-5">
-                    <div class="container">
-                        <div class="row" data-aos="fade-up" data-aos-duration="500">
-                            <h1 class="mb-5">How To: Switch During Activation Process</h1>
+            <!-- Switch Activation Start -->
+            <section id="how-works" class="mb-5 mt-5">
+                <div class="container">
+                    <div class="row" data-aos="fade-up" data-aos-duration="500">
+                        <h1 class="mb-5">How does it work?</h1>
+                    </div>
+                    <div class="row justify-content-lg-center gx-5 mt-5 text-md-start text-center">
+                        <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
+                            <div class="content mb-auto">
+                                <h3 class="justify-content-md-start justify-content-center"><img src="images/refer-step1-icon.png" />Step 1</h3>
+                                <p class="mb-4">Share your <span>YES number</span> <span>(your refferal code)</span> to your friends and family in your MyYes app.</p>
+                            </div>
+                            <img src="images/refer-step1.png" class="img-fluid" />
                         </div>
-                        <div class="row justify-content-lg-center gx-5 mt-5 text-md-start text-center">
-                            <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
-                                <h3 class="justify-content-md-start justify-content-center"><img src="images/switch-step1-icon.png" />Step 1</h3>
-                                <p class="mb-4 mb-auto">Download the MyYes app, click on ‘New User’ to get started.</p>
-                                <img src="images/switch-step1-visual.png" class="img-fluid" />
+                        <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+                            <div class="content mb-auto">
+                                <h3 class="justify-content-md-start justify-content-center"><img src="images/refer-step2-icon.png" />Step 2</h3>
+                                <p class="mb-4">With each successful sign-up, you <span>BOTH earn</span> a cash reward</p>
                             </div>
-                            <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
-                                <h3 class="justify-content-md-start justify-content-center"><img src="images/switch-step2-icon.png" />Step 2</h3>
-                                <p class="mb-4 mb-auto">Head over to ‘Activate SIM’ to insert your information and activate your SIM card.</p>
-                                <img src="images/switch-step2-visual.png" class="img-fluid" />
+                            <img src="images/refer-step2.png" class="img-fluid" />
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
+                            <div class="content mb-auto">
+                                <h3 class="justify-content-md-start justify-content-center"><img src="images/refer-step3-icon.png" />Step 3</h3>
+                                <p class="mb-4">The <span>more you refer, the more you earn!</span> No limits!</p>
                             </div>
-                            <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
-                                <h3 class="justify-content-md-start justify-content-center"><img src="images/swtich-step3-icon.png" />Step 3</h3>
-                                <p class="mb-4 mb-auto">You will receive a confirmation SMS from your existing service provider. Reply to confirm your switch.</p>
-                                <img src="images/switch-step3-visual.png" class="img-fluid" />
+                            <img src="images/refer-step3.png" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Switch Activation End -->
+
+            <!-- How to Claim Start -->
+            <section id="how-claim" class="mb-5">
+                <div class="container">
+                    <div class="row ps-2 pe-2 ps-lg-5 pe-lg-5">
+                        <div class="col-12 col-lg-7 d-flex align-items-center" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
+                            <div>
+                                <h1 class="mb-4">How do you claim<br>your referral?</h1>
+                                <p>
+                                    <span>Step 1: </span>Copy the code you received from your friends/family<br><br>
+                                    <span>Step 2: </span>Apply it at checkout
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-5" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+                            <img src="images/claim-referral.png" class="img-fluid" alt="">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- How to Claim End -->
+
+            <!-- Get Rewarded Start -->
+            <section id="get-rewarded">
+                <div class="container">
+                    <div class="row mb-5">
+                        <div class="col-12" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
+                            <h1 class="text-center">Get rewarded after every<br>successful referral</h1>
+                        </div>
+                    </div>
+                    <div class="row ps-2 pe-2 ps-lg-5 pe-lg-5" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+                        <div class="table-responsive">
+                            <table class="table plan-table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center visual">&nbsp;</th>
+                                        <th>
+                                            <h1>Kasi Up Postpaid 49</h1>
+                                        </th>
+                                        <th>
+                                            <h1>Kasi Up Postpaid 30 Phone bundle</h1>
+                                        </th>
+                                        <th>
+                                            <h1>Kasi Up Prepaid 15,20 & Unlimited</h1>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="blue-col">You
+                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                        </td>
+                                        <td>+RM50</td>
+                                        <td>+RM15</td>
+                                        <td>+RM5</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="blue-col">Them
+                                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip text here" class="info-icon"><img src="images/icon-info-circle.png" /></a>
+                                        </td>
+                                        <td>+RM50</td>
+                                        <td>+RM15</td>
+                                        <td>+RM5</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Get Rewarded End -->
+
+            <!-- Popular Deals Start -->
+            <section id="popular-deals" data-aos="fade-up">
+                <div class="container">
+                    <div class="row mb-5">
+                        <div class="col-12">
+                            <h1>Catch our popular deals</h1>
+                        </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-xl-3 row-cols-lg-2 row-cols-md-2 justify-content-center ps-2 pe-2 ps-lg-5 pe-lg-5">
+                        <div class="col" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
+                            <div class="deal-box card h-100">
+                                <h2>YES FT5G<br>Prepaid Unlimited</h2>
+                                <div class="content d-flex flex-column">
+                                    <div class="mb-auto">
+                                        <img src="/wp-content/uploads/2021/12/ft5g-simpack.jpg" class="mb-5 mt-5" />
+                                        <div class="row mb-4">
+                                            <div class="col-12 text-center">
+                                                <p class="pricing">RM30</p>
+                                                <p>Unlimited 5G*/4G**<br>Unlimited Calls to All Networks</p>
+                                            </div>
+                                        </div>
+                                        <div class="pink-btn-box"><a href="https://firstto5g.yes.my/?pl=689" class="pink-btn">Buy Now</a></div>
+                                    </div>
+                                    <p class="small mt-3 mb-3">*subject to availability until 31st March 2022<br>** 7Mbps, 9GB Hotspot</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+                            <div class="deal-box card h-100">
+                                <h2>YES FT5G<br>Postpaid 49</h2>
+                                <div class="content d-flex flex-column">
+                                    <div class="mb-auto">
+                                        <img src="/wp-content/uploads/2021/12/ft5g-simpack.jpg" class="mb-5 mt-5" />
+                                        <div class="row mb-4">
+                                            <div class="col-12 text-center">
+                                                <p class="pricing">RM49</p>
+                                                <p>Unlimited 5G*<br>100GB Full Speed 4G<br>Unlimited Calls to All Networks </p>
+                                            </div>
+                                        </div>
+                                        <div class="pink-btn-box"><a href="https://firstto5g.yes.my/?pl=690" class="pink-btn">Buy Now</a></div>
+                                    </div>
+                                    <p class="small mt-3 mb-3">*subject to availability until 31st March 2022</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-md-12 col-lg-12" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-6 col-md-6">
+                                    <div class="deal-box card mb-3">
+                                        <img src="/wp-content/uploads/2021/09/payas-visual.png" class="img-fluid mb-1">
+                                        <div class="content">
+                                            <h3 class="mb-3">Kasi Up <span>Prepaid</span></h3>
+                                            <div class="pink-btn-box"><a href="/shop/plans/4g-lte-prepaid/" class="pink-btn">View All</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 col-lg-6 col-md-6">
+                                    <div class="deal-box card">
+                                        <img src="/wp-content/uploads/2021/09/paymonthly-visual.jpg" class="img-fluid mb-1">
+                                        <div class="content">
+                                            <h3 class="mb-3">Kasi Up <span>Postpaid</span></h3>
+                                            <div class="pink-btn-box"><a href="/shop/plans/4g-lte-postpaid/" class="pink-btn">View All</a></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Switch Activation End -->
-
-                <!-- Popular Deals Start -->
-                <section id="popular-deals" class="mt-5">
-                    <div class="container">
-                        <div class="row mb-5">
-                            <div class="col-12">
-                                <h1>Not yet a YES user? Get Started today!</h1>
-                            </div>
-                        </div>
-                        <div class="row row-cols-1 row-cols-xl-3 row-cols-lg-2 row-cols-md-2">
-                            <div class="col" data-aos="fade-up" data-aos-duration="500">
-                                <div class="deal-box card h-100">
-                                    <h2>Go Unlimited<br>with only RM30</h2>
-                                    <div class="content">
-                                        <h3 class="mb-3">Data Unlimited<br>every month</h3>
-                                        <img src="https://cdn.yes.my/site/wp-content/uploads/2021/09/sim_card_PNG101522-1.png" class="mb-3" />
-                                        <h4 class="mb-3">Kasi Up Unlimited</h4>
-                                        <div class="row mb-4">
-                                            <div class="col-12 text-center">
-                                                <p class="pricing">RM30</p>
-                                                <p>Unlimited Data<br>7Mbps & 9GB hotspot data</p>
-                                            </div>
-                                        </div>
-                                        <div class="pink-btn-box"><a href="/shop/plans/4g-lte-prepaid/" class="pink-btn">Learn More</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
-                                <div class="deal-box card h-100">
-                                    <h2>6 months free<br>RM49 from month 7</h2>
-                                    <div class="content">
-                                        <h3 class="mb-3">24 month SIM<br>100GB data</h3>
-                                        <img src="https://cdn.yes.my/site/wp-content/uploads/2021/09/sim_card_PNG101522-1.png" class="mb-3" />
-                                        <h4 class="mb-3">Kasi Up Postpaid 49</h4>
-                                        <div class="row mb-4">
-                                            <div class="col-12 text-center">
-                                                <p class="pricing">RM49</p>
-                                                <p>100GB data<br>Unlimited minutes</p>
-                                            </div>
-                                        </div>
-                                        <div class="pink-btn-box"><a href="/shop/plans/4g-lte-postpaid/" class="pink-btn">Learn More</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-md-12 col-lg-12" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
-                                <div class="row">
-                                    <div class="col-xl-12 col-lg-6 col-md-6">
-                                        <div class="deal-box card mb-3">
-                                            <img src="images/payas-visual.jpg" class="img-fluid mb-1" />
-                                            <div class="content">
-                                                <h3 class="mb-3">Kasi Up <span>Prepaid</span></h3>
-                                                <div class="pink-btn-box"><a href="/shop/plans/4g-lte-prepaid/" class="pink-btn">View All</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-12 col-lg-6 col-md-6">
-                                        <div class="deal-box card">
-                                            <img src="images/paymonthly-visual.jpg" class="img-fluid mb-1" />
-                                            <div class="content">
-                                                <h3 class="mb-3">Kasi Up <span>Postpaid</span></h3>
-                                                <div class="pink-btn-box"><a href="/shop/plans/4g-lte-postpaid/" class="pink-btn">View All</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <p class="small mt-3">*Monthly payment, excluding tax</p>
-                        </div>
-                    </div>
-                </section>
-                <!-- Popular Deals End -->
             </section>
-            <!-- Number Section End -->
+            <!-- Popular Deals End -->
 
 
             <!-- FAQs Start -->
             <section id="faq-section">
                 <div class="container">
                     <div class="row">
-                        <h1 class="mb-5">Frequently Asked Questions about<br>Keeping Your Number</h1>
+                        <h1 class="mb-5">Frequently Asked Questions about YES</h1>
                     </div>
                     <div class="row">
                         <div class="accordion accordion-flush mb-3" id="accordionFlushExample">
