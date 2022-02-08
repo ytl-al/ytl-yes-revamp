@@ -150,6 +150,24 @@ class Ytl_Pull_Data_Public
 	private $path_validate_guest_login;
 
 	/**
+	 * The api path to validate the customer eligibilities against the plan.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $path_validate_customer_eligibilities 	The path to validate the customer eligibilities.
+	 */
+	private $path_validate_customer_eligibilities;
+
+	/**
+	 * The api path to verify the referral code.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $path_verify_referral_code  				The api path to verify the referral code.
+	 */
+	private $path_verify_referral_code;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -167,9 +185,11 @@ class Ytl_Pull_Data_Public
 		$this->path_generate_auth_token 	= '/mobileyos-dev/mobile/ws/v1/json/auth/getBasicAuth';
 		$this->path_generate_otp_for_login	= '/mobileyos-dev/mobile/ws/v1/json/generateOTPForLogin';
 		$this->path_validate_login			= '/mobileyos-dev/mobile/ws/v1/json/validateLoginAndGetCustomerDetails';
-		$this->path_get_cities_by_state_code= '/mobileyos-dev/mobile/ws/v1/json/getAllCitiesByStateCode';
+		$this->path_get_cities_by_state_code = '/mobileyos-dev/mobile/ws/v1/json/getAllCitiesByStateCode';
 		$this->path_generate_otp_for_guest_login = '/mobileyos-dev/mobile/ws/v1/json/generateOTPForGuestLogin';
 		$this->path_validate_guest_login 	= '/mobileyos-dev/mobile/ws/v1/json/validateGuestLogin';
+		$this->path_validate_customer_eligibilities	= '/mobileyos-dev/mobile/ws/v1/json/validateCustomerEligibilities';
+		$this->path_verify_referral_code 	= '/mobileyos-dev/mobile/ws/v1/json/verifyReferralCode';
 
 		$ytlpd_options				= get_option($this->prefix . "settings");
 		$this->api_domain 			= (!empty($ytlpd_options['ytlpd_api_domain_url'])) ? $ytlpd_options['ytlpd_api_domain_url'] : '';
@@ -235,6 +255,7 @@ class Ytl_Pull_Data_Public
 		$this->ra_reg_get_cities_by_state();
 		$this->ra_reg_generate_otp_for_guest_login();
 		$this->ra_reg_guest_login();
+		$this->ra_reg_validate_customer_eligibilities();
 	}
 
 	public function ra_reg_add_to_cart()
@@ -497,7 +518,7 @@ class Ytl_Pull_Data_Public
 			if ($data->responseCode > -1) {
 				$data->sessionId = $session_id;
 
-				
+
 
 				$response 	= new WP_REST_Response($data);
 				$response->set_status(200);
@@ -510,12 +531,12 @@ class Ytl_Pull_Data_Public
 		}
 		return new WP_Error('error_getting_cities_by_state', "There's an error in retreiving cities.", array('status' => 400));
 	}
-	
-	public function ra_reg_generate_otp_for_guest_login() 
+
+	public function ra_reg_generate_otp_for_guest_login()
 	{
 		register_rest_route('ywos/v1', 'generate-otp-for-guest-login', array(
-			'methods'	=> 'POST', 
-			'callback'	=> array($this, 'generate_otp_for_guest_login'), 
+			'methods'	=> 'POST',
+			'callback'	=> array($this, 'generate_otp_for_guest_login'),
 			'args' 		=> [
 				'phone_number' 	=> [
 					'validate_callback'	=> function ($param, $request, $key) {
@@ -526,13 +547,13 @@ class Ytl_Pull_Data_Public
 		));
 	}
 
-	public function generate_otp_for_guest_login(WP_REST_Request $request) 
+	public function generate_otp_for_guest_login(WP_REST_Request $request)
 	{
 		$msisdn = (trim($request['phone_number'])) ? $request['phone_number'] : null;
 		return $this->ca_generate_otp_for_guest_login($msisdn);
 	}
 
-	public function ca_generate_otp_for_guest_login($msisdn = null) 
+	public function ca_generate_otp_for_guest_login($msisdn = null)
 	{
 		$session_id = $this->ca_generate_auth_token(true);
 		if ($msisdn != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
@@ -562,14 +583,14 @@ class Ytl_Pull_Data_Public
 	public function ra_reg_guest_login()
 	{
 		register_rest_route('ywos/v1', 'validate-guest-login', array(
-			'methods' 	=> 'POST', 
-			'callback'	=> array($this, 'validate_guest_login'), 
+			'methods' 	=> 'POST',
+			'callback'	=> array($this, 'validate_guest_login'),
 			'args' 		=> [
 				'phone_number' => [
 					'validate_callback' => function ($param, $request, $key) {
 						return true;
 					}
-				], 
+				],
 				'otp_password' => [
 					'validate_callback' => function ($param, $request, $key) {
 						return true;
@@ -579,14 +600,14 @@ class Ytl_Pull_Data_Public
 		));
 	}
 
-	public function validate_guest_login(WP_REST_Request $request) 
+	public function validate_guest_login(WP_REST_Request $request)
 	{
 		$msisdn = (trim($request['phone_number'])) ? $request['phone_number'] : null;
 		$otp_password = (trim($request['otp_password'])) ? $request['otp_password'] : null;
 		return $this->ca_validate_guest_login($msisdn, $otp_password);
 	}
 
-	public function ca_validate_guest_login($msisdn = null, $otp_password = null) 
+	public function ca_validate_guest_login($msisdn = null, $otp_password = null)
 	{
 		$session_id = $this->ca_generate_auth_token(true);
 		if ($msisdn != null && $otp_password != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
@@ -614,5 +635,86 @@ class Ytl_Pull_Data_Public
 			return new WP_Error('error_validating_guest_login', "Parameters not complete to validate login.", array('status' => 400));
 		}
 		return new WP_Error('error_validating_guest_login', "There's an error in validating login.", array('status' => 400));
+	}
+
+	public function ra_reg_validate_customer_eligibilities()
+	{
+		register_rest_route('ywos/v1', 'validate-customer-eligibilities', array(
+			'methods'	=> 'POST',
+			'callback'	=> array($this, 'validate_customer_eligibilities')
+		));
+	}
+
+	public function validate_customer_eligibilities(WP_REST_Request $order_info)
+	{
+		return $this->ca_validate_customer_eligibilities($order_info);
+	}
+
+	public function ca_validate_customer_eligibilities($order_info = [])
+	{
+		$phone_number 	= (isset($order_info['phone_number']) && !empty(trim($order_info['phone_number']))) 	? $order_info['phone_number'] 	: null;
+		$customer_name 	= (isset($order_info['customer_name']) && !empty(trim($order_info['customer_name']))) 	? $order_info['customer_name'] 	: null;
+		$email 			= (isset($order_info['email']) && !empty(trim($order_info['email']))) 					? $order_info['email'] 			: null;
+		$security_type 	= (isset($order_info['security_type']) && !empty(trim($order_info['security_type']))) 	? $order_info['security_type'] 	: null;
+		$security_id 	= (isset($order_info['security_id']) && !empty(trim($order_info['security_id']))) 		? $order_info['security_id'] 	: null;
+		$address_line 	= (isset($order_info['address_line']) && !empty(trim($order_info['address_line']))) 	? $order_info['address_line'] 	: null;
+		$city 			= (isset($order_info['city']) && !empty(trim($order_info['city']))) 					? $order_info['city'] 			: null;
+		$city_code 		= (isset($order_info['city_code']) && !empty(trim($order_info['city_code']))) 			? $order_info['city_code'] 		: null;
+		$state 			= (isset($order_info['state']) && !empty(trim($order_info['state']))) 					? $order_info['state'] 			: null;
+		$state_code 	= (isset($order_info['state_code']) && !empty(trim($order_info['state_code']))) 		? $order_info['state_code'] 	: null;
+		$postal_code 	= (isset($order_info['postal_code']) && !empty(trim($order_info['postal_code']))) 		? $order_info['postal_code'] 	: null;
+		$country 		= (isset($order_info['country']) && !empty(trim($order_info['country']))) 				? $order_info['country'] 		: null;
+		$plan_bundle_id = (isset($order_info['plan_bundle_id']) && !empty(trim($order_info['plan_bundle_id']))) ? $order_info['plan_bundle_id'] : null;
+		$plan_type 		= (isset($order_info['plan_type']) && !empty(trim($order_info['plan_type']))) 			? $order_info['plan_type'] 		: null;
+		$plan_name 		= (isset($order_info['plan_name']) && !empty(trim($order_info['plan_name']))) 			? $order_info['plan_name'] 		: null;
+
+		$session_id 	= $this->ca_generate_auth_token(true);
+
+		if ($phone_number != null && $customer_name != null && $email != null && $security_type != null && $security_id != null && $address_line != null && $city != null && $city_code != null && $state != null && $state_code != null && $postal_code != null && $country != null && $plan_bundle_id != 0 && $plan_type != null && $plan_name != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
+			$params 	= [
+				'alternatePhoneNumber' 	=> $phone_number,
+				'customerFullName' 		=> $customer_name,
+				'email' 				=> $email,
+				'securityType' 			=> $security_type,
+				'securityId' 			=> $security_id,
+				'addressLine' 			=> $address_line,
+				'city' 					=> $city,
+				'cityCode' 				=> $city_code,
+				'state' 				=> $state,
+				'stateCode' 			=> $state_code,
+				'postalCode' 			=> $postal_code,
+				'country' 				=> $country,
+				'productBundledId' 		=> $plan_bundle_id,
+				'planType' 				=> $plan_type,
+				'planName' 				=> $plan_name,
+				'appVersion' 			=> $this->api_app_version,
+				'locale' 				=> $this->api_locale,
+				'source' 				=> 'MYOS',
+				'requestId' 			=> $this->api_request_id,
+				'sessionId' 			=> $session_id
+			];
+			$args 		= [
+				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
+				'body'          => json_encode($params),
+				'method'        => 'POST',
+				'data_format'   => 'body'
+			];
+			$api_url 	= $this->api_domain . $this->path_validate_customer_eligibilities;
+			$request 	= wp_remote_post($api_url, $args);
+			$data 		= json_decode($request['body']);
+
+			if ($data->responseCode > -1) {
+				$data->sessionId = $session_id;
+
+				$response 	= new WP_REST_Response($data);
+				$response->set_status(200);
+				return $response;
+			} else if ($data->displayErrorMessage) {
+				return new WP_Error('error_validating_customer_eligibilities', $data->displayErrorMessage, array('status' => 400));
+			}
+		} else {
+			return new WP_Error('error_validating_customer_eligibilities', "Parameters not complete to validate customer eligibilities.", array('status' => 400));
+		}
+		return new WP_Error('error_validating_customer_eligibilities', "There's an error in validating customer eligibilities.", array('status' => 400));
 	}
 }

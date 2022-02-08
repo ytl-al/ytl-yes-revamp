@@ -14,10 +14,10 @@
                     <span>2. Delivery Details</span>
                 </li>
                 <li ui-sref="thirdStep">
-                    <span>3. Payment Info</span>
+                    <span>3. Review and Pay</span>
                 </li>
                 <li ui-sref="fourthStep">
-                    <span>4. Review and Pay</span>
+                    <span>4. Payment Info</span>
                 </li>
             </ul>
         </div>
@@ -89,6 +89,17 @@
                             </div>
                             <div class="col-6 text-end">
                                 <p class="large"><strong>RM{{ parseFloat(orderSummary.due.rounding).toFixed(2) }}</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="summary-box mt-3">
+                        <div class="row">
+                            <div class="col">
+                                <div class="referral-box">
+                                    <input type="text" class="form-control referral" placeholder="Enter referral code (if any)" />
+                                    <!-- <img src="/wp-content/uploads/2022/02/referral-tick.png" class="referral-check" /> -->
+                                </div>
+                                <button type="button" class="btn-sm pink-btn mt-2 w-100">Verify Referral Code</button>
                             </div>
                         </div>
                     </div>
@@ -184,7 +195,7 @@
                                 <h2 style="color: #282828; font-size: 29px; font-weight: 800; margin-bottom: 0;">Billing</h2>
                                 <div class="form-group mb-4" style="color: 525252; font-size: 17px;">
                                     <div class="form-check form-switch">
-                                        <input type="checkbox" class="form-check-input" id="input-billingDifferent" role="switch"  v-model="isBillingDifferent" @change="watchBillingDifferent" />
+                                        <input type="checkbox" class="form-check-input" id="input-billingDifferent" role="switch" v-model="isBillingDifferent" @change="watchBillingDifferent" />
                                         <label class="form-check-label" for="input-billingDifferent">Same as shipping address</label>
                                     </div>
                                 </div>
@@ -278,7 +289,7 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
-                isBillingDifferent: false, 
+                isBillingDifferent: false,
                 customerDetails: {
                     securityType: '',
                     securityId: '',
@@ -498,7 +509,7 @@
                             // console.log('finally');
                         });
                 },
-                deliveryDetailsSubmit: function() {}, 
+                deliveryDetailsSubmit: function() {},
                 watchBillingDifferent: function() {}
             }
         });

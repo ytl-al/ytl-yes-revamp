@@ -545,6 +545,11 @@ body {
     font-size: 15px;
 }
 
+#cart-body .pink-btn.btn-sm, .pink-btn.btn-sm {
+    font-size: 14px;
+    padding: 6px 8px;
+}
+
 #cart-body .grey-link {
     font-weight: 600;
     color: #2B2B2B;

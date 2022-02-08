@@ -14,10 +14,10 @@
                     <span>2. Delivery Details</span>
                 </li>
                 <li ui-sref="thirdStep">
-                    <span>3. Payment Info</span>
+                    <span>3. Review and Pay</span>
                 </li>
                 <li ui-sref="fourthStep">
-                    <span>4. Review and Pay</span>
+                    <span>4. Payment Info</span>
                 </li>
             </ul>
         </div>
@@ -138,7 +138,7 @@
                                 </div>
                                 <div class="col-lg-4 col-7">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="input-otpPhoneNumber" maxlength="11" v-model="verify.input.phoneNumber" @input="watchAllowNext" placeholder="0181234567" />
+                                        <input type="text" class="form-control" id="input-otpPhoneNumber" maxlength="11" v-model="verify.input.phoneNumber" @input="watchAllowNext" placeholder="181234567" />
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-12">
@@ -264,7 +264,7 @@
                 ajaxVerifyGuestLogin: function() {
                     var self = this;
                     axios.post(apiEndpointURL + '/validate-guest-login', {
-                            'phone_number': self.verify.input.phoneNumber.trim(),
+                            'phone_number': '0' + self.verify.input.phoneNumber.trim(),
                             'otp_password': self.verify.input.otpPassword.trim(),
                         })
                         .then((response) => {
@@ -351,7 +351,7 @@
                 ajaxGenerateOTPForGuestLogin: function() {
                     var self = this;
                     axios.post(apiEndpointURL + '/generate-otp-for-guest-login', {
-                            'phone_number': self.verify.input.phoneNumber
+                            'phone_number': '0' + self.verify.input.phoneNumber
                         })
                         .then((response) => {
                             $('.panel-otpMessage').show();
@@ -376,6 +376,9 @@
                 },
                 generateOTPForGuestLogin: function() {
                     var self = this;
+                    
+                    $(self.verify.errorMessage.phoneNumber).hide().html('');
+
                     if (self.validateOTPNumber()) {
                         toggleOverlay();
                         self.ajaxGenerateOTPForGuestLogin();

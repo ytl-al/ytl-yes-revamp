@@ -102,8 +102,8 @@
                                         <p>RM{{ parseFloat(orderSummary.due.rounding).toFixed(2) }}</p>
                                     </div>
                                 </div>
-                                <div class="d-none">
-                                    <p class="bold mb-2">Device <a href="#">Choose a Device</a></p>
+                                <div v-if="orderSummary.plan.bundlePlan">
+                                    <p class="bold mb-2">Device Bundle: <span>{{ orderSummary.plan.bundleName }}</span></p>
                                     <div class="row mb-3">
                                         <div class="col-6">
                                             <p>Device payment</p>
