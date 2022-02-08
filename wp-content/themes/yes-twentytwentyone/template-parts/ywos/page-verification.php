@@ -138,7 +138,7 @@
                                 </div>
                                 <div class="col-lg-4 col-7">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="input-otpPhoneNumber" v-model="verify.input.phoneNumber" @input="watchAllowNext" placeholder="0181234567" />
+                                        <input type="text" class="form-control" id="input-otpPhoneNumber" maxlength="11" v-model="verify.input.phoneNumber" @input="watchAllowNext" placeholder="0181234567" />
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-12">
@@ -363,7 +363,7 @@
                             var response = error.response;
                             var data = response.data;
                             var errorMsg = data.message + ' Please try again later.';
-                            $(self.login.errorMessage.otp).html(errorMsg).show();
+                            $(self.verify.errorMessage.phoneNumber).html(errorMsg).show();
 
                             $(self.verify.input.inputOTPPassword).focus();
                             $(self.verify.input.inputOTPPassword).on('keydown', function() {

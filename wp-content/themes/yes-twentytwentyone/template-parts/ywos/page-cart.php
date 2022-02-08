@@ -240,7 +240,7 @@
                                     <form class="form-loginTac" @submit="otpLoginSubmit">
                                         <div class="input-box">
                                             <div class="w-100">
-                                                <input type="text" class="form-control userid" id="input-otpYesNumber" v-model="login.input.otp.yesNumber" @input="watchOTPLoginFields" placeholder="YES ID" />
+                                                <input type="text" class="form-control userid" id="input-otpYesNumber" maxlength="11" v-model="login.input.otp.yesNumber" @input="watchOTPLoginFields" placeholder="YES ID" />
                                             </div>
                                             <div class=" w-100 border-top item-otpPassword" id="box-otpPassword" style="display: none;">
                                                 <input type="password" class="form-control password" id="input-otpPassword" v-model="login.input.otp.password" @input="watchOTPLoginFields" placeholder="******" maxlength="6" />
@@ -267,7 +267,7 @@
                                     <form class="form-loginPassword" @submit="basicLoginSubmit">
                                         <div class="input-box">
                                             <div class="w-100 border-bottom">
-                                                <input type="text" class="form-control userid" id="input-basicYesNumber" v-model="login.input.basic.yesNumber" @input="watchBasicLoginFields" placeholder="YES ID" />
+                                                <input type="text" class="form-control userid" id="input-basicYesNumber" maxlength="11" v-model="login.input.basic.yesNumber" @input="watchBasicLoginFields" placeholder="YES ID" />
                                             </div>
                                             <div class="w-100">
                                                 <input type="password" class="form-control password" id="input-basicPassword" v-model="login.input.basic.password" @input="watchBasicLoginFields" placeholder="********" />
@@ -437,6 +437,9 @@
                         .then((response) => {
                             var data = response.data;
                             ywos.lsData.meta.customerDetails = data.customerDetails;
+                            ywos.lsData.meta.loginType = self.loginInfo.type;
+                            ywos.updateYWOSLSData();
+
                             self.redirectLoggedIn();
                         })
                         .catch((error) => {

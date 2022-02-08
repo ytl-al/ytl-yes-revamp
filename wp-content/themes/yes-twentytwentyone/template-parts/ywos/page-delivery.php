@@ -298,7 +298,7 @@
                 selectOptions: {
                     states: [{
                             'stateCode': 'KUL',
-                            'value': 'KUALA LUMPUR',
+                            'value': 'WILAYAH PERSEKUTUAN-KUALA LUMPUR',
                             'name': 'Wilayah Persekutuan Kuala Lumpur'
                         },
                         {
