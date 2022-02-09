@@ -19,3 +19,5 @@ body { color: #000; font-family: 'Montserrat', sans-serif; }
 .listing-wizard li span.nocontent { background-color: transparent !important; }
 
 .span-rounded { border: 1px solid #0070D2; border-radius: 5px; color: #0070D2; display: inline-block; font-weight: 700; padding: 10px 20px; }
+
+.page-freefire .form-group label { font-family: 'Montserrat', sans-serif; }
