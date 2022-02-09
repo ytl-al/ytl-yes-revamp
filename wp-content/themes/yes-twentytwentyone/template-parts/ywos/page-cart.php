@@ -424,6 +424,7 @@
                     if (typeof ywos.lsData.meta.isLoggedIn === 'undefined' || !ywos.lsData.meta.isLoggedIn) {
                         $('#login-modal').modal('show');
                     } else {
+                        toggleOverlay();
                         self.redirectLoggedIn();
                     }
                 },
@@ -589,14 +590,20 @@
                     if (loginType == 'otp' || loginType == 'password') {
                         toPage = 'delivery';
                         currentStep += 1;
-
-                        if (ywos.lsData.meta.customerDetails.securityType == 'PASSPORT' && self.orderSummary.plan.planType == 'postpaid' && self.orderSummary.due.foreignerDeposit == 0.00) {
+                        
+                        if (!ywos.lsData.meta.isLoggedIn && ywos.lsData.meta.customerDetails.securityType == 'PASSPORT' && self.orderSummary.plan.planType == 'postpaid' && self.orderSummary.due.foreignerDeposit == 0.00) {
                             self.orderSummary.due.foreignerDeposit = 200.00;
                             self.orderSummary.due.total += self.orderSummary.due.foreignerDeposit;
                         }
                     } else if (loginType == 'guest') {
-                        isLoggedIn = false;
-                        ywos.lsData.meta.customerDetails = {};
+                        if (!ywos.lsData.meta.isLoggedIn) {
+                            isLoggedIn = false;
+                            ywos.lsData.meta.customerDetails = {};
+                        }
+                    }
+
+                    if (ywos.lsData.meta.isLoggedIn) {
+                        self.orderSummary = ywos.lsData.meta.orderSummary;
                     }
 
                     ywos.lsData.meta.loginType = loginType;

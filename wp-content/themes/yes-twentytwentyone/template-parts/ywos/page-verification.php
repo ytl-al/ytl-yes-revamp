@@ -97,13 +97,13 @@
                     <div>
                         <h1>Verification</h1>
                         <p class="sub mb-4">Please fill in your ID information and mobile number to proceed</p>
-                        <div v-if="loginInfo.type == 'guest'">
+                        <div>
                             <h2>ID Verification</h2>
                             <div class="row mb-4">
                                 <div class="col-lg-4 col-12 mb-3 mb-lg-0">
                                     <div class="form-group">
                                         <label class="form-label" for="select-securityType">* ID Type</label>
-                                        <select class="form-select" id="select-securityType" v-model="customerDetails.securityType" @input="watchAllowNext">
+                                        <select class="form-select" id="select-securityType" v-model="customerDetails.securityType" @change="watchSecurityType" :disabled="!allowSecurityType">
                                             <option value="" disabled="disabled" selected="selected">Select ID Type</option>
                                             <option value="NRIC">NRIC</option>
                                             <option value="PASSPORT">Passport</option>
@@ -114,7 +114,7 @@
                                     <div class="form-group">
                                         <label class="form-label" for="input-securityId">* IC/Passport Number</label>
                                         <div class="input-group align-items-center">
-                                            <input type="text" class="form-control" id="input-securityId" v-model="customerDetails.securityId" @input="watchAllowNext" maxlength="14" placeholder="" />
+                                            <input type="text" class="form-control" id="input-securityId" v-model="customerDetails.securityId" @input="watchAllowNext" maxlength="14" placeholder="" :disabled="!allowSecurityId" />
                                             <!-- <a href="#" data-bs-toggle="tooltip" data-bs-placement="right" class="ms-2" title="Tooltip text here"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/info-icon.png" /></a> -->
                                         </div>
                                     </div>
@@ -122,7 +122,7 @@
                             </div>
                         </div>
 
-                        <div class="my-5" v-if="loginInfo.type == 'guest'">
+                        <div class="my-5">
                             <h2>Mobile Verification</h2>
                             <div class="row mb-4 align-items-center g-2">
                                 <div class="col-12">
@@ -138,15 +138,15 @@
                                 </div>
                                 <div class="col-lg-4 col-7">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="input-otpPhoneNumber" maxlength="11" v-model="verify.input.phoneNumber" @input="watchAllowNext" placeholder="181234567" />
+                                        <input type="text" class="form-control" id="input-otpPhoneNumber" maxlength="11" v-model="verify.input.phoneNumber" @input="watchAllowNext" placeholder="181234567" :disabled="!allowPhoneNumber" />
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-12">
+                                <div class="col-lg-3 col-12" v-if="!isLoggedIn">
                                     <button type="button" class="white-btn2 mt-3 mt-lg-0" v-on:click="generateOTPForGuestLogin" :disabled="!allowRequestOTP">{{ requestOTPText }}</button>
                                 </div>
                                 <div class="invalid-feedback mt-1" id="em-otpPhoneNumber"></div>
                             </div>
-                            <div class="row mb-3 align-items-center g-2">
+                            <div class="row mb-3 align-items-center g-2" v-if="!isLoggedIn">
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label class="form-label" for="input-otpPassword"><strong>Step 2:</strong> Insert your TAC code and verify</label>
@@ -199,6 +199,9 @@
                     securityId: '',
                     msisdn: ''
                 },
+                allowSecurityType: true,
+                allowSecurityId: true,
+                allowPhoneNumber: true,
                 orderSummary: {
                     plan: {},
                     due: {
@@ -229,6 +232,7 @@
                     yes_number: '',
                     password: ''
                 },
+                isLoggedIn: false,
                 allowNext: false,
                 isAgree: false,
                 allowRequestOTP: true
@@ -246,7 +250,18 @@
                     if (ywos.validateSession(self.currentStep)) {
                         self.orderSummary = ywos.lsData.meta.orderSummary;
                         self.loginInfo.type = ywos.lsData.meta.loginType;
-                        self.customerDetails = (ywos.lsData.meta.customerDetails.length) ? ywos.lsData.meta.customerDetails : self.customerDetails;
+                        self.isLoggedIn = ywos.lsData.meta.isLoggedIn;
+                        self.customerDetails = (ywos.lsData.meta.customerDetails) ? ywos.lsData.meta.customerDetails : self.customerDetails;
+
+                        if (self.isLoggedIn) {
+                            self.allowSecurityType = (self.customerDetails.securityType && self.loginInfo.type != 'guest') ? false : true;
+                            self.allowSecurityId = (self.customerDetails.securityId && self.loginInfo.type != 'guest') ? false : true;
+                            self.allowPhoneNumber = (self.customerDetails.mobileNumber) ? false : true;
+                            self.verify.input.phoneNumber = self.customerDetails.mobileNumber.slice(1);
+                            self.isAgree = true;
+
+                            self.watchAllowNext();
+                        }
 
                         setTimeout(function() {
                             $('.form-select').selectpicker('refresh');
@@ -263,6 +278,7 @@
                 },
                 ajaxVerifyGuestLogin: function() {
                     var self = this;
+
                     axios.post(apiEndpointURL + '/validate-guest-login', {
                             'phone_number': '0' + self.verify.input.phoneNumber.trim(),
                             'otp_password': self.verify.input.otpPassword.trim(),
@@ -296,14 +312,14 @@
                     var self = this;
 
                     if (!ywos.lsData.meta.isLoggedIn) {
-                        if (self.customerDetails.securityType == 'PASSPORT' && self.orderSummary.plan.planType == 'postpaid' && self.orderSummary.due.foreignerDeposit == 0.00) {
-                            self.orderSummary.due.foreignerDeposit = 200.00;
-                            self.orderSummary.due.total += self.orderSummary.due.foreignerDeposit;
-                        }
-
                         ywos.lsData.meta.completedStep = self.currentStep;
                         ywos.lsData.meta.isLoggedIn = true;
                         ywos.lsData.meta.orderSummary = self.orderSummary;
+
+                        self.customerDetails.mobileNumber = '0' + self.verify.input.phoneNumber.trim();
+                        ywos.lsData.meta.customerDetails = self.customerDetails;
+                        ywos.updateYWOSLSData();
+                    } else {
                         ywos.lsData.meta.customerDetails = self.customerDetails;
                         ywos.updateYWOSLSData();
                     }
@@ -376,7 +392,7 @@
                 },
                 generateOTPForGuestLogin: function() {
                     var self = this;
-                    
+
                     $(self.verify.errorMessage.phoneNumber).hide().html('');
 
                     if (self.validateOTPNumber()) {
@@ -385,6 +401,24 @@
 
                         $(self.verify.errorMessage).hide().html('');
                     }
+                },
+                checkForeignerDeposit: function() {
+                    var self = this;
+                    if (self.orderSummary.plan.planType == 'postpaid') {
+                        var foreignerDeposit = 200.00;
+                        if (self.customerDetails.securityType == 'PASSPORT' && ywos.lsData.meta.orderSummary.due.foreignerDeposit == 0.00) {
+                            self.orderSummary.due.foreignerDeposit = foreignerDeposit;
+                            self.orderSummary.due.total += foreignerDeposit;
+                        } else if (self.customerDetails.securityType == 'NRIC' && ywos.lsData.meta.orderSummary.due.foreignerDeposit != 0.00) {
+                            self.orderSummary.due.foreignerDeposit = 0.00;
+                            self.orderSummary.due.total -= foreignerDeposit;
+                        }
+                    }
+                }, 
+                watchSecurityType: function() {
+                    var self = this;
+                    self.checkForeignerDeposit();
+                    self.watchAllowNext();
                 },
                 watchAgree: function() {
                     var self = this;
@@ -396,8 +430,8 @@
 
                     if (!ywos.lsData.meta.isLoggedIn) {
                         if (
-                            !self.customerDetails.securityType.trim().length ||
-                            !self.customerDetails.securityId.trim().length ||
+                            (!self.customerDetails.securityType) ||
+                            (!self.customerDetails.securityId) ||
                             !self.isAgree ||
                             !self.verify.input.phoneNumber.trim().length ||
                             !self.verify.input.otpPassword.trim().length
