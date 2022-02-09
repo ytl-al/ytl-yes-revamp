@@ -798,3 +798,7 @@ ul.wizard li.completed::after {
 }
 
 label.form-label, label.form-check-label { cursor: pointer; }
+
+.span-checkList { display: inline-block; margin: 0; padding: 0 0 0 20px; position: relative; }
+.span-checkList:before { background-image: url('/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png'); content: ''; display: block; height: 16px; left: 0px; position: absolute; top: 3px; width: 15px; }
+.span-itemList { display: list-item; list-style-type: disc; margin: 0 0 0 15px; padding: 0 0 0 5px; }

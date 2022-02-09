@@ -39,25 +39,25 @@
                 <div class="col-lg-8 col-12">
                     <div class="accordion" id="cart-accordion">
                         <div class="packagebox mb-3">
-                            <div class="row align-items-center">
-                                <div class="col-lg-3 col-12 visualbg" v-if="orderSummary.plan.planType == 'postpaid'">
+                            <div class="row">
+                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="orderSummary.plan.planType == 'postpaid'">
                                     <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/kasiup-postpaid-visual.png" class="img-fluid" alt="" />
                                 </div>
-                                <div class="col-lg-3 col-12 visualbg prepaid" v-if="orderSummary.plan.planType == 'prepaid'">
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center" v-if="orderSummary.plan.planType == 'prepaid'">
                                     <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/kasiup-prepaid-visual.png" class="img-fluid" alt="" />
                                 </div>
-                                <div class="col-lg-5 col-12 ps-4 pe-4">
+                                <div class="col-lg-6 col-12 pt-lg-4 pb-1 px-4 px-lg-4">
                                     <h3 class="mt-3 mt-lg-0">{{ orderSummary.plan.displayName }}</h3>
                                     <p class="mb-3">RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(0) }} for {{ orderSummary.plan.internetData }}</p>
-                                    <div class="package-info" v-if="!packageInfos.length">
+                                    <div class="package-info" v-if="packageInfos.length">
                                         <div class="row">
-                                            <div class="col-6" v-for="(packageInfo, index) in packageInfos">
-                                                <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" />{{ packageInfo }}
+                                            <div class="col-6 mb-3" v-for="(packageInfo, index) in packageInfos.slice(0, 4)">
+                                                <span class="span-checkList">{{ packageInfo }}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-12 text-center mt-3 mb-3 mt-lg-0 mb-lg-0">
+                                <div class="col-lg-3 col-12 mt-3 mb-3 mt-lg-0 mb-lg-0 d-flex align-items-center justify-content-lg-end justify-content-center">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                         <h3 class="price">RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(0) }}</h3>
                                     </button>
@@ -66,7 +66,14 @@
                         </div>
                         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#cart-accordion">
                             <div class="accordion-body">
-                                <h1>One-time charges (due now)</h1>
+                                <div v-if="packageInfos.slice(3).length">
+                                    <h1>More Benefits</h1>
+                                    <div class="row mb-4">
+                                        <div class="col-lg-6 mb-3" v-for="(packageInfo, index) in packageInfos.slice(3)"><span class="span-itemList">{{ packageInfo }}</span></div>
+                                    </div>
+                                </div>
+
+                                <h1>One-time Charges (due now)</h1>
                                 <h2>Rate plan</h2>
                                 <div class="row mb-4">
                                     <div class="col-6">
@@ -123,7 +130,7 @@
                                     </div>
                                 </div>
                                 <div v-if="orderSummary.plan.planType != 'prepaid'">
-                                    <h1>Monthly charges</h1>
+                                    <h1>Monthly Charges</h1>
                                     <h2>Rate plan</h2>
                                     <div class="row mb-3">
                                         <div class="col-6">
@@ -395,7 +402,10 @@
                                 toggleOverlay(false);
                             }, 500);
 
-                            self.packageInfos = data.notes.split(',');
+                            var arrNotes = data.notes.split(',');
+                            self.packageInfos = arrNotes.sort(function(a, b) {
+                                return a.length - b.length;
+                            });
                         })
                         .catch((error) => {
                             console.log('error', error);
