@@ -1,0 +1,21 @@
+/* 
+    Stylesheet Name : YPA - Free Fire
+    Created on      : February  09, 2022, 07:38:12 PM
+    Last edited on  : February  09, 2022, 08:52:31 PM
+    Author          : [YTL Digital Design] - AL
+*/
+
+body { color: #000; font-family: 'Montserrat', sans-serif; }
+.page-freefire {}
+.page-freefire .layer-content { margin-top: 0; }
+
+.content.bg-freefire { background: url('https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/assets/ypa/images/freefire/bg-freefire.jpg') bottom right no-repeat; background-size: cover; }
+
+/* .listing-wizard li.item-first { align-items: start; }
+.listing-wizard li.item-first:after { width: 100%; }
+.listing-wizard li.item-last { align-items: end; }
+.listing-wizard li.item-last:before { width: 100%; } */
+
+.listing-wizard li span.nocontent { background-color: transparent !important; }
+
+.span-rounded { border: 1px solid #0070D2; border-radius: 5px; color: #0070D2; display: inline-block; font-weight: 700; padding: 10px 20px; }

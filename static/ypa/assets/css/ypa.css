@@ -1,7 +1,7 @@
 /* 
     Stylesheet Name : YPA
     Created on      : December  11, 2021, 07:38:12 PM
-    Last edited on  : December  13, 2021, 08:52:31 PM
+    Last edited on  : February  09, 2022, 08:52:31 PM
     Author          : [YTL Digital Design] - AL
 */
 
@@ -170,3 +170,5 @@ body {
     
     .form-register { padding-top: 0; }
 }
+
+.span-rounded { border: 1px solid #0070D2; border-radius: 5px; color: #0070D2; display: inline-block; font-weight: 700; padding: 10px 20px; }
