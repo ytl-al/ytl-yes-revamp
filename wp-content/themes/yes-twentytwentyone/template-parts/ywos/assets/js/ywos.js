@@ -105,11 +105,18 @@ const ywos = {
     },
     checkStep: function(currentStep) {
         // console.log(typeof this.lsData.meta.completedStep, this.lsData.meta.completedStep, currentStep, toPage);
+        // console.log(this.lsData.meta.completedStep, currentStep);
         if (typeof this.lsData.meta.completedStep !== 'undefined') {
-            if (currentStep == 0 || this.lsData.meta.completedStep <= currentStep) {
+            if (
+                currentStep == 0 ||
+                (this.lsData.meta.completedStep == 0 && currentStep == 0) ||
+                (this.lsData.meta.completedStep == 0 && currentStep == 1) ||
+                (this.lsData.meta.completedStep == currentStep) ||
+                (this.lsData.meta.completedStep == currentStep - 1) ||
+                (this.lsData.meta.completedStep > currentStep)
+            ) {
                 return true;
-            } else {
-                var toPage = 'cart';
+            } else if (this.lsData.meta.completedStep < currentStep) {
                 switch (this.lsData.meta.completedStep) {
                     case 0:
                         toPage = 'cart';
@@ -120,6 +127,11 @@ const ywos = {
                     case 2:
                         toPage = 'delivery';
                         break;
+                    case 3: 
+                        toPage = 'review';
+                        break;
+                    default:
+                        toPage = 'cart';
                 }
                 (toPage != null) ? this.redirectToPage(toPage): '';
                 return false;

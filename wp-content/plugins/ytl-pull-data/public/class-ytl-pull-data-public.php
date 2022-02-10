@@ -256,6 +256,7 @@ class Ytl_Pull_Data_Public
 		$this->ra_reg_generate_otp_for_guest_login();
 		$this->ra_reg_guest_login();
 		$this->ra_reg_validate_customer_eligibilities();
+		$this->ra_reg_verify_referral_code();
 	}
 
 	public function ra_reg_add_to_cart()
@@ -684,7 +685,7 @@ class Ytl_Pull_Data_Public
 				'stateCode' 			=> $state_code,
 				'postalCode' 			=> $postal_code,
 				'country' 				=> $country,
-				'productBundledId' 		=> $plan_bundle_id,
+				'productBundleId' 		=> $plan_bundle_id,
 				'planType' 				=> $plan_type,
 				'planName' 				=> $plan_name,
 				'appVersion' 			=> $this->api_app_version,
@@ -716,5 +717,51 @@ class Ytl_Pull_Data_Public
 			return new WP_Error('error_validating_customer_eligibilities', "Parameters not complete to validate customer eligibilities.", array('status' => 400));
 		}
 		return new WP_Error('error_validating_customer_eligibilities', "There's an error in validating customer eligibilities.", array('status' => 400));
+	}
+
+	public function ra_reg_verify_referral_code()
+	{
+		register_rest_route('ywos/v1', 'verify-referral-code', array(
+			'methods'	=> 'POST',
+			'callback' 	=> array($this, 'verify_referral_code')
+		));
+	}
+
+	public function verify_referral_code(WP_REST_Request $request)
+	{
+		$referral_code = (trim($request['referral_code'])) ? $request['referral_code'] : null;
+		$security_type = (trim($request['security_type'])) ? $request['security_type'] : null;
+		$security_id = (trim($request['security_id'])) ? $request['security_id'] : null;
+		return $this->ca_verify_referral_code($referral_code, $security_type, $security_id);
+	}
+
+	public function ca_verify_referral_code($referral_code = null, $security_type = null, $security_id = null)
+	{
+		$session_id = $this->ca_generate_auth_token(true);
+		if ($referral_code != null && $security_type != null && $security_id != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
+			$params		= ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'referralCode' => $referral_code, 'refereeSeucityType' => $security_type, 'refereeSecurityID' => $security_id, 'sessionId' => $session_id];
+			$args 		= [
+				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
+				'body'          => json_encode($params),
+				'method'        => 'POST',
+				'data_format'   => 'body'
+			];
+			$api_url 	= $this->api_domain . $this->path_verify_referral_code;
+			$request 	= wp_remote_post($api_url, $args);
+			$data 		= json_decode($request['body']);
+
+			if ($data->responseCode > -1) {
+				$data->sessionId = $session_id;
+
+				$response 	= new WP_REST_Response($data);
+				$response->set_status(200);
+				return $response;
+			} else if ($data->displayErrorMessage) {
+				return new WP_Error('error_verify_referral_code', $data->displayErrorMessage, array('status' => 400));
+			}
+		} else {
+			return new WP_Error('error_verify_referral_code', "Parameters not complete to verify the referral code.", array('status' => 400));
+		}
+		return new WP_Error('error_verify_referral_code', "There's an error in verifying the referral code.", array('status' => 400));
 	}
 }

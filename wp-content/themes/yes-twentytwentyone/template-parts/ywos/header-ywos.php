@@ -27,7 +27,27 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-6">
-                <a href="javascript:void(0)" class="back-btn" onclick="history.back()"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/back-icon.png" /> Back to Cart</a>
+                <?php 
+                    global $post;
+                    $page_slug = $post->post_name;
+                    switch ($page_slug) {
+                        case 'verification':
+                            $back_page = 'Cart';
+                            break;
+                        case 'delivery': 
+                            $back_page = 'Verification';
+                            break;
+                        case 'review': 
+                            $back_page = 'Delivery Details';
+                            break;
+                        case 'payment': 
+                            $back_page = 'Review and Pay';
+                            break;
+                        default: 
+                            $back_page = 'Cart';
+                    }
+                ?>
+                <a href="javascript:void(0)" class="back-btn" onclick="history.back()"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/back-icon.png" /> Back to <?php echo $back_page; ?></a>
             </div>
             <div class="col-lg-4 col-6 text-lg-center text-end">
                 <h1>Check Out</h1>

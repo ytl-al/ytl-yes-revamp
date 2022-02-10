@@ -12,7 +12,7 @@
     <!-- Banner End -->
 
 
-    <!-- Cart Body STARTS -->
+    <!-- Body STARTS -->
     <section id="cart-body">
         <div class="container" id="container-empty" v-if="isCartEmpty">
             <div class="row mb-5 gx-5">
@@ -212,7 +212,7 @@
             </div>
         </div>
     </section>
-    <!-- Cart Body ENDS -->
+    <!-- Body ENDS -->
 
 
     <!-- Login Modal STARTS -->
@@ -590,7 +590,7 @@
                     if (loginType == 'otp' || loginType == 'password') {
                         toPage = 'delivery';
                         currentStep += 1;
-                        
+
                         if (!ywos.lsData.meta.isLoggedIn && ywos.lsData.meta.customerDetails.securityType == 'PASSPORT' && self.orderSummary.plan.planType == 'postpaid' && self.orderSummary.due.foreignerDeposit == 0.00) {
                             self.orderSummary.due.foreignerDeposit = 200.00;
                             self.orderSummary.due.total += self.orderSummary.due.foreignerDeposit;
@@ -598,7 +598,29 @@
                     } else if (loginType == 'guest') {
                         if (!ywos.lsData.meta.isLoggedIn) {
                             isLoggedIn = false;
-                            ywos.lsData.meta.customerDetails = {};
+                            ywos.lsData.meta.customerDetails = {
+                                securityType: '',
+                                securityId: '',
+                                msisdn: '',
+                                nric: '',
+                                gender: '',
+                                mobileNumber: '',
+                                homeNumber: '',
+                                officeNumber: '',
+                                name: '',
+                                email: '',
+                                address: '',
+                                state: '',
+                                city: '',
+                                postcode: '',
+                                country: '',
+                                citizenship: '',
+                                yesId: '',
+                                accountNumber: '',
+                                dateOfBirth: '',
+                                salutation: '',
+                                preferredLanguage: 0
+                            };
                         }
                     }
 

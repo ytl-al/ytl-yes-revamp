@@ -24,7 +24,7 @@
     </section>
     <!-- Banner End -->
 
-    <!-- Cart Body STARTS -->
+    <!-- Body STARTS -->
     <section id="cart-body">
         <div class="container p-lg-5 p-3">
             <div class="row gx-5">
@@ -182,7 +182,7 @@
             </div>
         </div>
     </section>
-    <!-- Cart Body ENDS -->
+    <!-- Body ENDS -->
 </div>
 <!-- Vue Wrapper ENDS -->
 
@@ -321,6 +321,11 @@
                         ywos.updateYWOSLSData();
                     } else {
                         ywos.lsData.meta.customerDetails = self.customerDetails;
+                        if (ywos.lsData.meta.deliveryInfo) {
+                            ywos.lsData.meta.deliveryInfo.securityType = self.customerDetails.securityType;
+                            ywos.lsData.meta.deliveryInfo.securityId = self.customerDetails.securityId;
+                            ywos.lsData.meta.deliveryInfo.mobileNumber = '0' + self.verify.input.phoneNumber.trim();
+                        }
                         ywos.updateYWOSLSData();
                     }
 
@@ -414,7 +419,7 @@
                             self.orderSummary.due.total -= foreignerDeposit;
                         }
                     }
-                }, 
+                },
                 watchSecurityType: function() {
                     var self = this;
                     self.checkForeignerDeposit();
