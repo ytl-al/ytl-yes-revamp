@@ -604,7 +604,7 @@ body {
     margin-bottom: 20px;
 }
 
-.summary-box h2 {
+.summary-box h2, #cart-body .summary-box h2 {
     width: 100%;
     font-size: 18px;
     color: #525252;

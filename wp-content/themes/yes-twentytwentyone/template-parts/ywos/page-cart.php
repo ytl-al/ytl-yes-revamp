@@ -110,7 +110,7 @@
                                     </div>
                                 </div>
                                 <div v-if="orderSummary.plan.bundlePlan">
-                                    <p class="bold mb-2">Device Bundle: <span>{{ orderSummary.plan.bundleName }}</span></p>
+                                    <p class="bold mb-2">Device Bundle: <span class="fw-bold">{{ orderSummary.plan.bundleName }}</span></p>
                                     <div class="row mb-3">
                                         <div class="col-6">
                                             <p>Device payment</p>

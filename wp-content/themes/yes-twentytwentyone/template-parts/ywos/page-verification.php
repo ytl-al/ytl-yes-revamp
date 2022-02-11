@@ -27,6 +27,11 @@
     <!-- Body STARTS -->
     <section id="cart-body">
         <div class="container p-lg-5 p-3">
+            <div class="row d-lg-none mb-3">
+                <div class="col">
+                    <h1>Verification</h1>
+                </div>
+            </div>
             <div class="row gx-5">
                 <div class="col-lg-4 col-12 order-lg-2">
                     <div class="summary-box">
@@ -93,9 +98,9 @@
                         </div>
                     </div>
                 </div>
-                <form class="col-lg-8 col-12 order-lg-1 needs-validation" @submit="verificationSubmit">
+                <form class="col-lg-8 col-12 order-lg-1 mt-4 mt-lg-0 needs-validation" @submit="verificationSubmit">
                     <div>
-                        <h1>Verification</h1>
+                        <h1 class="d-none d-lg-block">Verification</h1>
                         <p class="sub mb-4">Please fill in your ID information and mobile number to proceed</p>
                         <div>
                             <h2>ID Verification</h2>
@@ -272,8 +277,6 @@
                             self.watchAllowNext();
                         }
                         toggleOverlay(false);
-                    } else {
-                        ywos.redirectToPage('cart');
                     }
                 },
                 ajaxVerifyGuestLogin: function() {

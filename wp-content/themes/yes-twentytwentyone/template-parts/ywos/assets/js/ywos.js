@@ -127,7 +127,7 @@ const ywos = {
                     case 2:
                         toPage = 'delivery';
                         break;
-                    case 3: 
+                    case 3:
                         toPage = 'review';
                         break;
                     default:
@@ -158,6 +158,7 @@ const ywos = {
         } else if (!this.checkStep(curStep)) {
             console.log('Previous step not yet completed!');
             // isValid = false;
+            return false;
         }
 
         $('#main-vue').show();
@@ -195,4 +196,10 @@ function getRoundingAdjustmentAmount(amount) {
         }
     }
     return parseFloat(roundingAmount).toFixed(2);
+}
+
+String.prototype.toCamelCase = function(str) {
+    return this.split(' ').map(function(word, index) {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    }).join(' ');
 }

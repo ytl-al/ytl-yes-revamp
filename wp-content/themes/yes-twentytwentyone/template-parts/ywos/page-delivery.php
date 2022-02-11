@@ -27,6 +27,12 @@
     <!-- Body STARTS -->
     <section id="cart-body">
         <div class="container p-lg-5 p-3">
+            <div class="row d-lg-none mb-3">
+                <div class="col">
+                    <h1>Delivery Details</h1>
+                    <p class="sub mb-0">Delivery only available in Malaysia</p>
+                </div>
+            </div>
             <div class="row gx-5">
                 <div class="col-lg-4 col-12 order-lg-2">
                     <div class="summary-box">
@@ -110,8 +116,10 @@
                     <div class="row gx-5">
                         <div class="col-lg-6">
                             <div class="layer-delivery">
-                                <h1>Delivery Details</h1>
-                                <p class="sub mb-4">Delivery only available in Malaysia</p>
+                                <div class="d-none d-lg-block">
+                                    <h1>Delivery Details</h1>
+                                    <p class="sub mb-4">Delivery only available in Malaysia</p>
+                                </div>
 
                                 <div class="form-group mb-4">
                                     <label class="form-label" for="input-name">* Full Name (as per IC/ Passport)</label>
@@ -453,10 +461,20 @@
                     emailConfirm: '',
                     address: '',
                     addressMore: '',
+                    addressLine: '', 
                     postcode: '',
                     state: '',
                     city: '',
-                    deliveryNotes: ''
+                    country: '',
+                    deliveryNotes: '', 
+                    sanitize: {
+                        address: '', 
+                        addressMore: '',
+                        addressLine: '',
+                        city: '', 
+                        country: '', 
+                        state: ''
+                    }
                 },
                 referralCode: {
                     code: '', 
@@ -486,28 +504,6 @@
                     state: '',
                     city: '',
                 },
-                customer: {
-                    "appVersion": "1.0",
-                    "alternatePhoneNumber": "0183040016",
-                    "customerFullName": "John Mike",
-                    "email": "iotemail@yes.my",
-                    "planName": "Yes x Frog Kasi Up Prepaid Plan",
-                    "planType": "PREPAID",
-                    "securityId": "980707837475",
-                    "securityType": "NRIC",
-                    "addressLine": "KL ARES",
-                    "city": "KUALA LUMPUR",
-                    "cityCode": "KUALA LUMPUR",
-                    "country": "Malaysia",
-                    "postalCode": "50000",
-                    "state": "WILAYAH PERSEKUTUAN-KUALA LUMPUR",
-                    "stateCode": "KUL",
-                    "productBundleId": "766",
-                    "locale": "EN",
-                    "source": "MYOS",
-                    "requestId": "88888888",
-                    "sessionId": "{{sessionId}}"
-                },
                 allowSelectCity: false,
                 currentStep: 2,
                 allowSubmit: false
@@ -530,8 +526,6 @@
                         setTimeout(function() {
                             $('.form-select').selectpicker('refresh');
                         }, 100);
-                    } else {
-                        ywos.redirectToPage('cart');
                     }
                 },
                 updateFields: function() {
@@ -550,6 +544,7 @@
                         self.deliveryInfo.emailConfirm = '';
                         self.watchChangeState();
                     }
+                    self.deliveryInfo.country = 'MALAYSIA';
 
                     if (ywos.lsData.meta.referralCode) {
                         self.referralCode.code = ywos.lsData.meta.referralCode.referral_code;
@@ -703,14 +698,27 @@
                     }
                     self.referralCode.alert = true;
                 },
+                sanitizeDeliveryInfo: function() {
+                    var self = this;
+                    self.deliveryInfo.sanitize = {
+                        address: self.deliveryInfo.address.toCamelCase(),
+                        addressMore: self.deliveryInfo.addressMore.toCamelCase(), 
+                        addressLine: (self.deliveryInfo.addressMore) ? self.deliveryInfo.address + '<br />' + self.deliveryInfo.addressMore : self.deliveryInfo.address,
+                        state: self.deliveryInfo.state.replace('-', ' ').toCamelCase(), 
+                        city: self.deliveryInfo.city.toCamelCase(), 
+                        country: self.deliveryInfo.country.toCamelCase()
+                    };
+                }, 
                 redirectVerified: function() {
                     var self = this;
+
+                    self.sanitizeDeliveryInfo();
 
                     ywos.lsData.meta.completedStep = self.currentStep;
                     ywos.lsData.meta.deliveryInfo = self.deliveryInfo;
                     ywos.updateYWOSLSData();
 
-                    // ywos.redirectToPage('review');
+                    ywos.redirectToPage('review');
                 },
                 ajaxValidateCustomerEligibility: function() {
                     toggleOverlay();
@@ -722,13 +730,13 @@
                         'email': self.deliveryInfo.email, 
                         'security_type': self.deliveryInfo.securityType, 
                         'security_id': self.deliveryInfo.securityId, 
-                        'address_line': self.deliveryInfo.address, 
+                        'address_line': self.deliveryInfo.address + ' ' + self.deliveryInfo.addressMore, 
                         'state': self.deliveryInfo.state, 
                         'state_code': self.getStateCode(self.deliveryInfo.state),
                         'city': self.deliveryInfo.city, 
                         'city_code': self.deliveryInfo.city, 
                         'postal_code': self.deliveryInfo.postcode, 
-                        'country': 'Malaysia', 
+                        'country': self.deliveryInfo.country, 
                         'plan_bundle_id': self.orderSummary.plan.mobilePlanId, 
                         'plan_type': self.orderSummary.plan.planType, 
                         'plan_name': self.orderSummary.plan.planName 
