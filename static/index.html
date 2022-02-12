@@ -27,6 +27,16 @@
             bottom: 10%;
         }
         
+        .slider-btn-freefire {
+            left: 111px;
+            right: auto;
+            bottom: 19%;
+        }
+        
+        .slider-btn-freefire img {
+            max-width: 216px;
+        }
+        
         @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
             .slider-btn-container {
                 margin-bottom: 0.9rem;
@@ -55,6 +65,10 @@
             .slider-btn-left img {
                 width: 50%;
             }
+            .slider-btn-freefire img {
+                width: 50%;
+                max-width: inherit;
+            }
         }
         /* IPAD Portrait */
         
@@ -72,6 +86,16 @@
             .slider-btn-container .lightpink-btn {
                 font-size: 13px;
                 padding: 5px 25px;
+            }
+            .slider-btn-left img {
+                width: 50%;
+            }
+            .slider-btn-freefire img {
+                width: 50%;
+                max-width: inherit;
+            }
+            .slider-btn-freefire {
+                left: 35px;
             }
         }
         
@@ -105,6 +129,13 @@
             }
             .slider-btn-left {
                 bottom: 5%;
+            }
+            .slider-btn-freefire img {
+                width: 40%;
+                max-width: inherit;
+            }
+            .slider-btn-freefire {
+                left: 16px;
             }
         }
     </style>
@@ -219,6 +250,12 @@
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active" data-bs-interval="3000">
+                            <img src="images/img-banner-free-fire.jpg" class="d-block w-100" alt="...">
+                            <div class="slider-btn-container slider-btn-freefire">
+                                <a href="https://firstto5g.yes.my/FreeFire"><img src="images/btn-banner-free-fire.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="3000">
                             <img src="images/discover5g-banner.jpg" class="d-block w-100" alt="...">
                             <div class="slider-btn-container slider-btn-left">
                                 <a href="https://my5g-dev.azurewebsites.net/Register/DiscoverFT5G"><img src="images/claim-btn.png" alt=""></a>
@@ -444,7 +481,7 @@
                     </div>
                 </div>
                 <!-- Customer Reviews Start -->
-                <div id="customer-review">
+                <div id="customer-review-new">
                     <div class="container">
                         <div class="row">
                             <div class="col-12 mb-4">
@@ -453,34 +490,112 @@
                             <div class="col-12">
                                 <div class="reviews-carousel">
                                     <div class="reviewbox">
-                                        <img src="images/review1.png" class="review-pic mb-4" />
-                                        <img src="images/4star.png" class="stars mb-3" />
-                                        <p>“YES is very good and well connected.My area for YES before that is very perfect, always supported, my online works ”</p>
+                                        <h1>David Bay</h1>
+                                        <div class="rating-box">
+                                            <img src="images/5star.png" />
+                                            <div class="date">28 Jan 2022</div>
+                                        </div>
+                                        <div class="content mb-auto">
+                                            <p>
+                                                <span>The internet has improved since early 2022 so I leave a new review.</span> The price is affordable, offers in many variations of deal. Most importantly, the app is very simple, minimal and easy to
+                                                use and I hope it keeps on that way.
+                                            </p>
+                                        </div>
+                                        <div class="source-div">Sourced from Google Playstore</div>
                                     </div>
                                     <div class="reviewbox">
-                                        <img src="images/review2.png" class="review-pic mb-4" />
-                                        <img src="images/5star.png" class="stars mb-3" />
-                                        <p>“YES is very good and well connected.My area for YES before that is very perfect, always supported, my online works ”</p>
+                                        <h1>Su Chy</h1>
+                                        <div class="rating-box">
+                                            <img src="images/5star.png" />
+                                            <div class="date">6 Jan 2022</div>
+                                        </div>
+                                        <div class="content mb-auto">
+                                            <p>
+                                                <span>Best user experience so far.</span> And bang for bucks. With the same amount for one line I paid for other operators now is able to pay for 4 lines with Yes... Its a people caring network. The speed
+                                                is fast and stable as well.
+                                            </p>
+                                        </div>
+                                        <div class="source-div">Sourced from Google Playstore</div>
                                     </div>
                                     <div class="reviewbox">
-                                        <img src="images/review3.png" class="review-pic mb-4" />
-                                        <img src="images/4star.png" class="stars mb-3" />
-                                        <p>“YES is very good and well connected.My area for YES before that is very perfect, always supported, my online works ”</p>
+                                        <h1>Anuar Ali</h1>
+                                        <div class="rating-box">
+                                            <img src="images/5star.png" />
+                                            <div class="date">5 Jan 2022</div>
+                                        </div>
+                                        <div class="content mb-auto">
+                                            <p>
+                                                <span>Hope Yes will continue this generous data plan. Thanks.</span> Since I am living and working in the city centre, and I am using the unlimited data plan, the network speed is considerably OK. And when
+                                                I buy the RM 15, plus The Prihatin plan, I received a free 9 GB hotspot data. All is valid for 30 days.
+                                            </p>
+                                        </div>
+                                        <div class="source-div">Sourced from Google Playstore</div>
                                     </div>
                                     <div class="reviewbox">
-                                        <img src="images/review1.png" class="review-pic mb-4" />
-                                        <img src="images/4star.png" class="stars mb-3" />
-                                        <p>“YES is very good and well connected.My area for YES before that is very perfect, always supported, my online works ”</p>
+                                        <h1>Yanie Lee</h1>
+                                        <div class="rating-box">
+                                            <img src="images/5star.png" />
+                                            <div class="date">20 Nov 2021</div>
+                                        </div>
+                                        <div class="content mb-auto">
+                                            <p>
+                                                <span>Been using about 5 months already...Very good coverage of internet data!</span>Friendly use. Fast networking. Worth it price & save data cost. Recommended! 👍👍👍
+                                            </p>
+                                        </div>
+                                        <div class="source-div">Sourced from Google Playstore</div>
                                     </div>
                                     <div class="reviewbox">
-                                        <img src="images/review2.png" class="review-pic mb-4" />
-                                        <img src="images/5star.png" class="stars mb-3" />
-                                        <p>“YES is very good and well connected.My area for YES before that is very perfect, always supported, my online works ”</p>
+                                        <h1>Nur Nusrah</h1>
+                                        <div class="rating-box">
+                                            <img src="images/5star.png" />
+                                            <div class="date">13 May 2019</div>
+                                        </div>
+                                        <div class="content mb-auto">
+                                            <p>
+                                                <span>I'm as a Yes user simcard is very satisfied with the service.</span>My internet is very fast and I can open everything without any problems.
+                                            </p>
+                                        </div>
+                                        <div class="source-div">Sourced from Google Playstore</div>
                                     </div>
                                     <div class="reviewbox">
-                                        <img src="images/review3.png" class="review-pic mb-4" />
-                                        <img src="images/4star.png" class="stars mb-3" />
-                                        <p>“YES is very good and well connected.My area for YES before that is very perfect, always supported, my online works ”</p>
+                                        <h1>ASP</h1>
+                                        <div class="rating-box">
+                                            <img src="images/5star.png" />
+                                            <div class="date">13 May 2019</div>
+                                        </div>
+                                        <div class="content mb-auto">
+                                            <p>
+                                                <span>GOOD JOB YES</span>Best apps, best telecom in Malaysia..in my village also got 4g besides other telecom get teribble connection..
+                                            </p>
+                                        </div>
+                                        <div class="source-div">Sourced from Google Playstore</div>
+                                    </div>
+                                    <div class="reviewbox">
+                                        <h1>Sardar Anand</h1>
+                                        <div class="rating-box">
+                                            <img src="images/5star.png" />
+                                            <div class="date">19 Nov 2019</div>
+                                        </div>
+                                        <div class="content mb-auto">
+                                            <p>
+                                                <span>The speed of internet is soo.. fast.</span>YES 4G network catch at anywhere. So i recommend to user try Yes4G.
+                                            </p>
+                                        </div>
+                                        <div class="source-div">Sourced from Google Playstore</div>
+                                    </div>
+                                    <div class="reviewbox">
+                                        <h1>Sulaiman Abu Bakar</h1>
+                                        <div class="rating-box">
+                                            <img src="images/5star.png" />
+                                            <div class="date">20 Aug 2017</div>
+                                        </div>
+                                        <div class="content mb-auto">
+                                            <p>
+                                                <span>Been using Unifi 50mbps, Webe, Digi and now YES.</span>Who would have know that the infamous ISP Yes is actually the best compared to the rest! Oh yes I used Umobile and checked with Maxis and Celcom
+                                                before. Fastest internet speed with over 30mbps at my home area and best of all that no other ISP can beat...
+                                            </p>
+                                        </div>
+                                        <div class="source-div">Sourced from Google Playstore</div>
                                     </div>
                                 </div>
                             </div>
@@ -701,8 +816,8 @@
             $('.reviews-carousel').slick({
                 prevArrow: '<a href="#" class="slide-arrow prev-arrow slick-arrow"><span class="iconify slick-prev" data-icon="eva:arrow-ios-back-fill"></span></a>',
                 nextArrow: '<a href="#" class="slide-arrow next-arrow slick-arrow"><span class="iconify slick-next" data-icon="eva:arrow-ios-forward-fill"></span></a>',
-                infinite: true,
-                slidesToShow: 2,
+                infinite: false,
+                slidesToShow: 3,
                 slidesToScroll: 1,
                 autoplay: true,
                 autoplaySpeed: 3000,
@@ -710,7 +825,7 @@
                 responsive: [{
                     breakpoint: 1024,
                     settings: {
-                        slidesToShow: 1,
+                        slidesToShow: 2,
                         slidesToScroll: 1,
                         infinite: true,
                         dots: true,
@@ -750,9 +865,9 @@
     </script>
 
     <script type="text/javascript">
-        $(window).on('load', function() {
-            $('#signup-modal').modal('show');
-        });
+        // $(window).on('load', function() {
+        //     $('#signup-modal').modal('show');
+        // });
     </script>
 
 </body>
