@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/slick.css" />
     <link rel="stylesheet" type="text/css" href="css/slick-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/aos.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
     <style>
         #easy-steps {
@@ -87,6 +88,10 @@
         
         #easy-steps .viewall-btn:hover {
             text-decoration: underline;
+        }
+        
+        #easy-steps .content {
+            padding: 0px 60px;
         }
         /* Databack Rewards styling */
         
@@ -604,23 +609,29 @@
                     <div class="row">
                         <h1 class="mb-4">Keep Your Number in these easy steps!</h1>
                         <h2>Switch to YES <span>during</span> or even <span>after</span> activating your SIM</h2>
-                        <a href="#" class="viewall-btn">Know More <span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                        <a href="/keep-your-number" class="viewall-btn">Know More <span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
                     </div>
-                    <div class="row row-cols-1 row-cols-md-3 text-md-start text-center">
-                        <div class="col mb-md-0 mb-4">
-                            <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step1.png" />Step 1</h3>
-                            <p class="mb-4">Download the MyYes app to Keep Your Number even long after your activation.</p>
-                            <img src="images/step1-visual.png" class="img-fluid" />
+                    <div class="row justify-content-lg-center gx-5 mt-5 text-md-start text-center">
+                        <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column aos-init aos-animate" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
+                            <div class="content mb-auto">
+                                <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step1.png" />Step 1</h3>
+                                <p class="mb-4">Download the MyYes app to Keep Your Number even long after your activation.</p>
+                            </div>
+                            <img src="images/keepnumber-step1-new.png" class="img-fluid" />
                         </div>
-                        <div class="col mb-md-0 mb-4">
-                            <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step2.png" />Step 2</h3>
-                            <p class="mb-4">Head over to ‘Quick Access’, and select “Switch to YES” then “Keep Your Number”.</p>
-                            <img src="images/step2-visual.png" class="img-fluid" />
+                        <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column aos-init aos-animate" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+                            <div class="content mb-auto">
+                                <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step2.png" />Step 2</h3>
+                                <p class="mb-4">Head over to ‘Quick Access’, and select “Switch to YES” then “Keep Your Number”.</p>
+                            </div>
+                            <img src="images/keepnumber-step2-new.png" class="img-fluid" />
                         </div>
-                        <div class="col mb-md-0 mb-4">
-                            <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step3.png" />Step 3</h3>
-                            <p class="mb-4">You will receive a confirmation SMS from your existing service provider. Reply to confirm your switch.</p>
-                            <img src="images/step3-visual.png" class="img-fluid" />
+                        <div class="col-12 col-md-4 col-lg-4 mb-md-0 mb-4 d-flex flex-column aos-init aos-animate" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
+                            <div class="content mb-auto">
+                                <h3 class="justify-content-md-start justify-content-center"><img src="images/icon-step3.png" />Step 3</h3>
+                                <p class="mb-4">You will receive a confirmation SMS from your existing service provider. Reply to confirm your switch.</p>
+                            </div>
+                            <img src="images/keepnumber-step3-new.png" class="img-fluid" />
                         </div>
                     </div>
                 </div>
@@ -911,12 +922,17 @@
     <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
     <script type="text/javascript" src="js/iconify.min.js"></script>
     <script type="text/javascript" src="js/slick.js"></script>
+    <script type="text/javascript" src="js/aos.js"></script>
 
     <script type="text/javascript">
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
         })
+    </script>
+
+    <script type="text/javascript">
+        AOS.init();
     </script>
 </body>
 
