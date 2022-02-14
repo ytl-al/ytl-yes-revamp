@@ -158,7 +158,7 @@ const ywos = {
         } else if (!this.checkStep(curStep)) {
             console.log('Previous step not yet completed!');
             // isValid = false;
-            return false;
+            // return false;
         }
 
         $('#main-vue').show();

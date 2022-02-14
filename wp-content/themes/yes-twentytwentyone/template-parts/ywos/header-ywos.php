@@ -41,7 +41,7 @@
                             $back_page = 'Delivery Details';
                             break;
                         case 'payment': 
-                            $back_page = 'Review and Pay';
+                            $back_page = 'Review';
                             break;
                         default: 
                             $back_page = 'Cart';

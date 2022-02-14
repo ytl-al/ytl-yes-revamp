@@ -1,5 +1,6 @@
 <?php include('header-ywos.php'); ?>
 
+
 <!-- Vue Wrapper STARTS -->
 <div id="main-vue" style="display: none;">
     <!-- Banner Start -->
@@ -13,7 +14,7 @@
                     <span>2. Delivery Details</span>
                 </li>
                 <li ui-sref="thirdStep" class="completed">
-                    <span>3. Review and Pay</span>
+                    <span>3. Review</span>
                 </li>
                 <li ui-sref="fourthStep">
                     <span>4. Payment Info</span>
@@ -31,7 +32,7 @@
                     <h1>Review & Pay</h1>
                 </div>
             </div>
-            <div class="row gx-5">
+            <div class="row gx-5" v-if="pageValid">
                 <div class="col-lg-4 col-12 order-lg-2">
                     <div class="summary-box">
                         <h1>Order summary</h1>
@@ -96,7 +97,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-8 col-12 order-lg-1 mt-3 mt-lg-0" v-if="orderSummary.plan">
+                <div class="col-lg-8 col-12 order-lg-1 mt-3 mt-lg-0">
                     <h1 class="mb-4 d-none d-lg-block">Review & Pay</h1>
                     <div class="accordion mb-4" id="cart-accordion">
                         <div class="packagebox mb-3">
@@ -246,7 +247,7 @@
                     </div>
                     <div class="row mt-5">
                         <div class="col-lg-5 col-12">
-                            <button class="pink-btn d-block w-100" type="submit">Pay Now</button>
+                            <button class="pink-btn d-block w-100" type="submit" v-on:click="validateReview">Pay Now</button>
                             <!-- <a href="checkout-payment.html" class="pink-btn d-block w-100">Pay Now</a> -->
                         </div>
                     </div>
@@ -266,6 +267,7 @@
             el: '#main-vue',
             data: {
                 currentStep: 3,
+                pageValid: false,
                 orderSummary: {
                     plan: {},
                     due: {
@@ -287,13 +289,13 @@
                     postcode: '',
                     state: '',
                     city: '',
-                    deliveryNotes: '', 
+                    deliveryNotes: '',
                     sanitize: {
-                        address: '', 
+                        address: '',
                         addressMore: '',
                         addressLine: '',
-                        city: '', 
-                        country: '', 
+                        city: '',
+                        country: '',
                         state: ''
                     }
                 },
@@ -311,8 +313,11 @@
                 pageInit: function() {
                     var self = this;
                     if (ywos.validateSession(self.currentStep)) {
+                        self.pageValid = true;
                         self.updateData();
                         toggleOverlay(false);
+                    } else {
+                        ywos.redirectToPage('cart');
                     }
                 },
                 updateData: function() {
@@ -320,15 +325,25 @@
                     self.orderSummary = ywos.lsData.meta.orderSummary;
                     self.deliveryInfo = ywos.lsData.meta.deliveryInfo;
                     self.slicedMobileNumber = self.deliveryInfo.mobileNumber.slice(1);
-                    console.log(self.deliveryInfo ,self.deliveryInfo.sanitize, self.deliveryInfo.sanitize.city);
+
                     var arrNotes = self.orderSummary.plan.notes.split(',');
                     self.packageInfos = arrNotes.sort(function(a, b) {
                         return a.length - b.length;
                     });
+                },
+                validateReview: function() {
+                    var self = this;
+                    toggleOverlay();
+
+                    ywos.lsData.meta.completedStep = self.currentStep;
+                    ywos.updateYWOSLSData();
+
+                    ywos.redirectToPage('payment');
                 }
             }
         });
     });
 </script>
+
 
 <?php include('footer-ywos.php'); ?>

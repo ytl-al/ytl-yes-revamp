@@ -14,7 +14,7 @@
                     <span>2. Delivery Details</span>
                 </li>
                 <li ui-sref="thirdStep">
-                    <span>3. Review and Pay</span>
+                    <span>3. Review</span>
                 </li>
                 <li ui-sref="fourthStep">
                     <span>4. Payment Info</span>
@@ -33,7 +33,7 @@
                     <p class="sub mb-0">Delivery only available in Malaysia</p>
                 </div>
             </div>
-            <div class="row gx-5">
+            <div class="row gx-5" v-if="pageValid">
                 <div class="col-lg-4 col-12 order-lg-2">
                     <div class="summary-box">
                         <h1>Order summary</h1>
@@ -358,6 +358,8 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
+                currentStep: 2,
+                pageValid: false, 
                 isBillingDifferent: false,
                 orderSummary: {
                     plan: {},
@@ -505,7 +507,6 @@
                     city: '',
                 },
                 allowSelectCity: false,
-                currentStep: 2,
                 allowSubmit: false
             },
             mounted: function() {},
@@ -519,6 +520,7 @@
                 pageInit: function() {
                     var self = this;
                     if (ywos.validateSession(self.currentStep)) {
+                        self.pageValid = true;
                         self.orderSummary = ywos.lsData.meta.orderSummary;
                         self.updateFields();
                         toggleOverlay(false);
@@ -526,6 +528,8 @@
                         setTimeout(function() {
                             $('.form-select').selectpicker('refresh');
                         }, 100);
+                    } else {
+                        ywos.redirectToPage('cart');
                     }
                 },
                 updateFields: function() {

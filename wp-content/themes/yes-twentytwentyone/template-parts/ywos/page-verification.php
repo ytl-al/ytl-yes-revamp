@@ -14,7 +14,7 @@
                     <span>2. Delivery Details</span>
                 </li>
                 <li ui-sref="thirdStep">
-                    <span>3. Review and Pay</span>
+                    <span>3. Review</span>
                 </li>
                 <li ui-sref="fourthStep">
                     <span>4. Payment Info</span>
@@ -32,7 +32,7 @@
                     <h1>Verification</h1>
                 </div>
             </div>
-            <div class="row gx-5">
+            <div class="row gx-5" v-if="pageValid">
                 <div class="col-lg-4 col-12 order-lg-2">
                     <div class="summary-box">
                         <h1>Order summary</h1>
@@ -199,6 +199,7 @@
             el: '#main-vue',
             data: {
                 currentStep: 1,
+                pageValid: false,
                 customerDetails: {
                     securityType: '',
                     securityId: '',
@@ -253,6 +254,7 @@
                 pageInit: function() {
                     var self = this;
                     if (ywos.validateSession(self.currentStep)) {
+                        self.pageValid = true;
                         self.orderSummary = ywos.lsData.meta.orderSummary;
                         self.loginInfo.type = ywos.lsData.meta.loginType;
                         self.isLoggedIn = ywos.lsData.meta.isLoggedIn;
@@ -277,6 +279,8 @@
                             self.watchAllowNext();
                         }
                         toggleOverlay(false);
+                    } else {
+                        ywos.redirectToPage('cart');
                     }
                 },
                 ajaxVerifyGuestLogin: function() {
