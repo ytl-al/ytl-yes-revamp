@@ -216,7 +216,7 @@
 
 
     <!-- Login Modal STARTS -->
-    <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="login-modal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -422,6 +422,16 @@
                 checkLoggedIn: function() {
                     var self = this;
                     if (typeof ywos.lsData.meta.isLoggedIn === 'undefined' || !ywos.lsData.meta.isLoggedIn) {
+                        self.login.input.otp.yesNumber = '';
+                        self.login.input.otp.password = '';
+                        self.login.input.basic.yesNumber = '';
+                        self.login.input.basic.password = '';
+
+                        $('#login-modal').on('hidden.bs.modal', function() {
+                            $('.invalid-feedback').hide();
+                            $('#pills-loginTac-tab').trigger('click');
+                        });
+
                         $('#login-modal').modal('show');
                     } else {
                         toggleOverlay();
