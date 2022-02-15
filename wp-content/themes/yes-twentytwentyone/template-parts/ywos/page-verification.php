@@ -143,7 +143,7 @@
                                 </div>
                                 <div class="col-lg-4 col-7">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="input-otpPhoneNumber" maxlength="11" v-model="verify.input.phoneNumber" @input="watchAllowNext" placeholder="181234567" :disabled="!allowPhoneNumber" />
+                                        <input type="text" class="form-control" id="input-otpPhoneNumber" maxlength="10" v-model="verify.input.phoneNumber" @input="watchAllowNext" placeholder="181234567" :disabled="!allowPhoneNumber" />
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-12" v-if="!isLoggedIn">
