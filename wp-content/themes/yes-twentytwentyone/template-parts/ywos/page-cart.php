@@ -255,7 +255,7 @@
                                         </div>
                                         <div class="w-100 text-center mb-4">
                                             <p class="mb-3 text-center item-otpPassword panel-otpMessage" style="display: none;"><span class="span-message">Your TAC code has been sent. TAC code is valid for</span> <span class="span-timer">5:00</span>.</p>
-                                            <button type="button" class="white-btn2 mt-3 mt-lg-0" v-on:click="generateOTPForLogin" :disabled="!allowRequestOTP">Request TAC</button>
+                                            <button type="button" class="white-btn2 mt-3 mt-lg-0" v-on:click="generateOTPForLogin" :disabled="!allowRequestOTP">{{ requestOTPText }}</button>
                                             <div class="invalid-feedback mt-1" id="em-otpLogin"></div>
                                         </div>
                                         <!-- <div class="form-check mb-4">
@@ -317,6 +317,7 @@
                 planID: null,
                 isCartEmpty: false,
                 hasFetchPlan: false,
+                requestOTPText: 'Request TAC',
                 loginInfo: {
                     type: 'guest',
                     yes_number: '',
@@ -430,6 +431,7 @@
                         $('#login-modal').on('hidden.bs.modal', function() {
                             $('.invalid-feedback').hide();
                             $('#pills-loginTac-tab').trigger('click');
+                            self.requestOTPText('Resend TAC');
                         });
 
                         $('#login-modal').modal('show');
@@ -560,6 +562,7 @@
                             $('#input-otpPassword').hide();
                             clearInterval(interval);
                             self.allowRequestOTP = true;
+                            self.requestOTPText('Resend TAC');
                         }
                     }, 1000);
                 },

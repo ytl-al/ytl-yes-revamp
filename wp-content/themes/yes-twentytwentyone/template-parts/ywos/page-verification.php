@@ -373,6 +373,7 @@
                         if (timer == 0) {
                             clearInterval(interval);
                             self.allowRequestOTP = true;
+                            self.requestOTPText = 'Resend TAC'
                         }
                     }, 1000);
                 },
