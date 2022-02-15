@@ -222,6 +222,7 @@
                 requestOTPText: 'Request TAC',
                 verify: {
                     input: {
+                        inputSecurityID: '#input-securityId',
                         inputPhoneNumber: '#input-otpPhoneNumber',
                         inputOTPPassword: '#input-otpPassword',
                         phoneNumber: '',
@@ -285,7 +286,7 @@
                 },
                 ajaxVerifyGuestLogin: function() {
                     var self = this;
-
+                    
                     axios.post(apiEndpointURL + '/validate-guest-login', {
                             'phone_number': '0' + self.verify.input.phoneNumber.trim(),
                             'otp_password': self.verify.input.otpPassword.trim(),
@@ -304,12 +305,30 @@
                             toggleOverlay(false);
                         });
                 },
+                validateSecurityID: function() {
+                    var self = this;
+                    if (self.customerDetails.securityType == 'NRIC') {
+                        var pregTest = self.customerDetails.securityId.match(/^(\d{12})+$/);
+                        if (pregTest == null) {
+                            toggleOverlay(false);
+                            $(self.verify.errorMessage.form).html('Please insert valid NRIC number').show();
+                            $(self.verify.input.inputSecurityID).on('keydown', function() {
+                                $(self.verify.errorMessage.form).hide().html('');
+                            });
+                            return false;
+                        }
+                    }
+                    return true;
+                },
                 verificationSubmit: function(e) {
                     var self = this;
 
                     toggleOverlay();
                     if (!ywos.lsData.meta.isLoggedIn) {
-                        self.ajaxVerifyGuestLogin();
+                        var validateSecurityID = self.validateSecurityID();
+                        if (validateSecurityID) {
+                            self.ajaxVerifyGuestLogin();
+                        }
                     } else {
                         self.redirectVerified();
                     }
