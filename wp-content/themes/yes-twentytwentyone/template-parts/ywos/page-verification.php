@@ -264,9 +264,9 @@
                         self.customerDetails = (ywos.lsData.meta.customerDetails) ? ywos.lsData.meta.customerDetails : self.customerDetails;
 
                         if (self.isLoggedIn) {
-                            self.allowSecurityType = (self.customerDetails.securityType && self.loginInfo.type != 'guest') ? false : true;
-                            self.allowSecurityId = (self.customerDetails.securityId && self.loginInfo.type != 'guest') ? false : true;
-                            self.allowPhoneNumber = (self.customerDetails.mobileNumber) ? false : true;
+                            // self.allowSecurityType = (self.customerDetails.securityType && self.loginInfo.type != 'guest') ? false : true;
+                            // self.allowSecurityId = (self.customerDetails.securityId && self.loginInfo.type != 'guest') ? false : true;
+                            // self.allowPhoneNumber = (self.customerDetails.mobileNumber) ? false : true;
                             self.verify.input.phoneNumber = self.customerDetails.mobileNumber.slice(1);
                             self.isAgree = true;
 
@@ -327,13 +327,13 @@
                     var self = this;
 
                     toggleOverlay();
-                    if (!ywos.lsData.meta.isLoggedIn) {
-                        var validateSecurityID = self.validateSecurityID();
-                        if (validateSecurityID) {
+                    var validateSecurityID = self.validateSecurityID();
+                    if (validateSecurityID) {
+                        if (!ywos.lsData.meta.isLoggedIn) {
                             self.ajaxVerifyGuestLogin();
+                        } else {
+                            self.redirectVerified();
                         }
-                    } else {
-                        self.redirectVerified();
                     }
                     e.preventDefault();
                 },
