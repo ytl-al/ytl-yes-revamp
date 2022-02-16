@@ -121,6 +121,7 @@
                                         <div class="input-group align-items-center">
                                             <input type="text" class="form-control" id="input-securityId" v-model="customerDetails.securityId" @input="watchAllowNext" maxlength="14" placeholder="" :disabled="!allowSecurityId" />
                                             <!-- <a href="#" data-bs-toggle="tooltip" data-bs-placement="right" class="ms-2" title="Tooltip text here"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/info-icon.png" /></a> -->
+                                            <div class="invalid-feedback mt-1" id="em-securityID"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -231,7 +232,8 @@
                     errorMessage: {
                         phoneNumber: '#em-otpPhoneNumber',
                         otpPassword: '#em-otpPassword',
-                        form: '#em-verification'
+                        form: '#em-verification',
+                        securityID: '#em-securityID'
                     }
                 },
                 loginInfo: {
@@ -311,9 +313,10 @@
                         var pregTest = self.customerDetails.securityId.match(/^(\d{12})+$/);
                         if (pregTest == null) {
                             toggleOverlay(false);
-                            $(self.verify.errorMessage.form).html('Please insert valid NRIC number').show();
+                            $(self.verify.errorMessage.securityID).html('Please insert valid NRIC number').show();
+                            $(self.verify.input.inputSecurityID).focus();
                             $(self.verify.input.inputSecurityID).on('keydown', function() {
-                                $(self.verify.errorMessage.form).hide().html('');
+                                $(self.verify.errorMessage.securityID).hide().html('');
                             });
                             return false;
                         }
