@@ -431,7 +431,10 @@
                         $('#login-modal').on('hidden.bs.modal', function() {
                             $('.invalid-feedback').hide();
                             $('#pills-loginTac-tab').trigger('click');
-                            self.requestOTPText = 'Request TAC';
+                            if (self.allowRequestOTP) {
+                                $('.item-otpPassword').hide();
+                                self.requestOTPText = 'Request TAC';
+                            }
                         });
 
                         $('#login-modal').modal('show');
