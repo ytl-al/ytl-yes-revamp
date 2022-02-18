@@ -20,8 +20,8 @@
                         <?php if (function_exists('display_yes_logo')) display_yes_logo(); ?>
                         <div class="justify-content-end" id="navbarSupportedContent">
                             <div class="d-flex align-items-center justify-content-end">
-                                <a href="#">Help</a>
-                                <?php if (function_exists('yes_language_switcher')) echo yes_language_switcher(); ?>
+                                <a href="#" class="mx-3">Help</a>
+                                <!-- <?php if (function_exists('yes_language_switcher')) echo yes_language_switcher(); ?> -->
                                 <a href="#" class="login-btn"><span class="iconify" data-icon="bx:bxs-cart"></span> 1 item</a>
                             </div>
                         </div>

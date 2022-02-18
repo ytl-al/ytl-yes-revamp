@@ -754,7 +754,13 @@
 
                             var response = error.response;
                             var data = response.data;
-                            var errorMsg = data.message + '<br /> Please verify your identity and phone number in verification page.';
+                            var errorMsg = '';
+                            if (error.response.status == 500 || error.response.status == 503) {
+                                errorMsg = "<p>There's an error in validating your eligibility.</p>";
+                            } else {
+                                errorMsg = data.message
+                            }
+                            errorMsg += '<br /> Please verify your identity and phone number in verification page.';
                             $('#modal-errorEligibilityCheck .panel-errMsg').html(errorMsg);
                             $('#modal-errorEligibilityCheck').modal('show');
                         })

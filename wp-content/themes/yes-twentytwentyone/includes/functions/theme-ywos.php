@@ -4,8 +4,10 @@ function check_child_page_template($template)
 {
     global $post;
     if ($post->post_parent) {
+        $ancestor_posts = get_post_ancestors($post->ID);
+        $reversed_array = array_reverse($ancestor_posts);
         $parent = get_post(
-            reset(array_reverse(get_post_ancestors($post->ID)))
+            reset($reversed_array)
         );
         if ($parent->post_name == 'ywos') {
             add_action('wp_enqueue_scripts', 'ywos_enqueue_scripts');

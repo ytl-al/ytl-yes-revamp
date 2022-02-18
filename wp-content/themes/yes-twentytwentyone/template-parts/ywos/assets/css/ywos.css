@@ -181,7 +181,7 @@
     padding: 7px 10px;
 }
 
-.addons-container h1 {
+#cart-body .addons-container h1 {
     font-size: 29px;
     color: #2B2B2B;
     font-weight: 800;
@@ -189,7 +189,7 @@
     margin-bottom: 20px;
 }
 
-.addons-container .addon-box {
+#cart-body .addons-container .addon-box {
     background-color: #FFF;
     border-radius: 5px;
     box-shadow: 0px 3.44867px 10.346px rgba(112, 144, 176, 0.2);
@@ -200,29 +200,29 @@
     padding: 15px;
 }
 
-.addons-container .addon-box:hover {
+#cart-body .addons-container .addon-box:hover {
     box-shadow: 0px 8.45px 10.346px rgba(112, 144, 176, 0.27);
 }
 
-.addons-container .addon-box img {
+#cart-body .addons-container .addon-box img {
     position: absolute;
     right: 15px;
     top: 40px;
 }
 
-.addons-container .addon-box h1 {
+#cart-body .addons-container .addon-box h1 {
     color: #00B4F0;
     font-weight: 800;
     font-size: 20px;
     margin: 0px;
 }
 
-.addons-container .addon-box p {
+#cart-body .addons-container .addon-box p {
     color: #525252;
     font-size: 14px;
 }
 
-.addons-container .addon-box p.small {
+#cart-body .addons-container .addon-box p.small {
     font-size: 12px;
     color: #7A7A7A;
 }

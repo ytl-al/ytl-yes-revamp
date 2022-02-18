@@ -62,7 +62,7 @@
                             <div class="col-8">
                                 <p class="large">{{ orderSummary.plan.displayName }}</p>
                             </div>
-                            <div class="col-4 text-end">
+                            <div class="col-4 text-end d-flex align-items-center justify-content-end">
                                 <p class="large"><strong>RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(2) }}</strong></p>
                             </div>
                             <div class="col-6">
@@ -300,7 +300,12 @@
                             // console.log(error);
                             var response = error.response;
                             var data = response.data;
-                            var errorMsg = 'Customer eligibility check failed: ' + data.message;
+                            var errorMsg = '';
+                            if (error.response.status == 500 || error.response.status == 503) {
+                                errorMsg = "There's an error in validating your eligibility. Please try again later.";
+                            } else {
+                                errorMsg = 'Customer eligibility check failed: ' + data.message;
+                            }
                             
                             $('.panel-otpMessage').hide();
                             $(self.verify.errorMessage.form).html(errorMsg).show();
@@ -414,7 +419,14 @@
                         .catch((error) => {
                             var response = error.response;
                             var data = response.data;
-                            var errorMsg = data.message + ' Please try again later.';
+                            var errorMsg = '';
+                            if (error.response.status == 500 || error.response.status == 503) {
+                                errorMsg = "<p>There's an error in generating your TAC code.</p>";
+                            } else {
+                                errorMsg = data.message
+                            }
+                            errorMsg += '<br /> Please try again later.';
+                            
                             $(self.verify.errorMessage.phoneNumber).html(errorMsg).show();
 
                             $(self.verify.input.inputOTPPassword).focus();
@@ -441,7 +453,7 @@
                 checkForeignerDeposit: function() {
                     var self = this;
                     if (self.orderSummary.plan.planType == 'postpaid') {
-                        var foreignerDeposit = 200.00;
+                        var foreignerDeposit = parseFloat(self.orderSummary.plan.foreignerDeposit);
                         if (self.customerDetails.securityType == 'PASSPORT' && ywos.lsData.meta.orderSummary.due.foreignerDeposit == 0.00) {
                             self.orderSummary.due.foreignerDeposit = foreignerDeposit;
                             self.orderSummary.due.total += foreignerDeposit;

@@ -1,6 +1,399 @@
 <?php include('header-no-menu.php'); ?>
 
 
+<style type="text/css">
+    #grey-innerbanner {
+        background-color: #F9F7F4;
+        padding: 25px 0px;
+    }
+
+    #grey-innerbanner h1 {
+        font-size: 42px;
+        color: #2B2B2B;
+        font-weight: 800;
+    }
+
+    #cart-body {
+        padding: 30px 0px;
+    }
+
+    #cart-body .packagebox {
+        background: #FFFFFF;
+        box-sizing: border-box;
+        border: 2px solid #00B4F0;
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    #cart-body .packagebox .visualbg {
+        background: linear-gradient(16.65deg, #00B4F0 -123.85%, #CF5396 74.76%);
+        text-align: center;
+        padding: 15px 12px;
+    }
+
+    #cart-body .packagebox h3 {
+        font-weight: 800;
+        font-size: 24px;
+        line-height: 28px;
+        color: #2B2B2B;
+    }
+
+    #cart-body .packagebox p {
+        font-size: 20px;
+        line-height: 24px;
+        color: #525252;
+    }
+
+    #cart-body .packagebox h3.price {
+        font-weight: 800;
+        font-size: 42px;
+        color: #2B2B2B;
+    }
+
+    #cart-body .packagebox .package-info {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        border-top: solid 1px #00B4F0;
+        padding-top: 15px;
+        font-size: 16px;
+        color: #2B2B2B;
+    }
+
+    #cart-body p {
+        font-size: 18px;
+        font-weight: 600;
+        color: #000000;
+    }
+
+    #cart-body p a {
+        color: #00B4F0;
+        text-decoration: underline;
+    }
+
+    .summary-box {
+        box-shadow: 0px 5px 15px rgba(112, 144, 176, 0.2);
+        border-radius: 8px;
+        width: 100%;
+        background-color: #FFF;
+        padding: 20px;
+    }
+
+    .summary-box h1 {
+        font-size: 24px;
+        font-weight: 800;
+        color: #2B2B2B;
+        margin-bottom: 20px;
+    }
+
+    .summary-box h2 {
+        width: 100%;
+        font-size: 18px;
+        color: #525252;
+        font-weight: 700;
+        border-bottom: solid 1px #C5C5C5;
+        padding-bottom: 5px;
+    }
+
+    .summary-box h3 {
+        font-size: 24px;
+        font-weight: 800;
+        color: #00B4F0;
+        text-transform: uppercase;
+    }
+
+    .summary-box .monthly {
+        width: 100%;
+        border-bottom: solid 1px #C5C5C5;
+        border-top: solid 1px #C5C5C5;
+    }
+
+    .summary-box .monthly p {
+        font-size: 14px !important;
+        color: #525252 !important;
+    }
+
+    .summary-box .referral-box {
+        width: 100%;
+        border: 1px solid #C5C5C5;
+        border-radius: 8px;
+        position: relative;
+    }
+
+    .summary-box .referral-box .referral-check {
+        position: absolute;
+        right: 10px;
+        top: 6px;
+    }
+
+    .summary-box input.referral {
+        width: 100%;
+        font-size: 13px;
+        border: none;
+        border-radius: 8px;
+        color: #7A7A7A;
+        padding: 5px;
+        padding-left: 30px;
+        background-repeat: no-repeat;
+        background-position: 9px 6px;
+    }
+
+    .summary-box .pink-btn {
+        padding: 7px 10px;
+    }
+
+    .addons-container h1 {
+        font-size: 29px;
+        color: #2B2B2B;
+        font-weight: 800;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .addons-container .addon-box {
+        background-color: #FFF;
+        border-radius: 5px;
+        box-shadow: 0px 3.44867px 10.346px rgba(112, 144, 176, 0.2);
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        position: relative;
+        padding: 15px;
+    }
+
+    .addons-container .addon-box:hover {
+        box-shadow: 0px 8.45px 10.346px rgba(112, 144, 176, 0.27);
+    }
+
+    .addons-container .addon-box img {
+        position: absolute;
+        right: 15px;
+        top: 40px;
+    }
+
+    .addons-container .addon-box h1 {
+        color: #00B4F0;
+        font-weight: 800;
+        font-size: 20px;
+        margin: 0px;
+    }
+
+    .addons-container .addon-box p {
+        color: #525252;
+        font-size: 14px;
+    }
+
+    .addons-container .addon-box p.small {
+        font-size: 12px;
+        color: #7A7A7A;
+    }
+
+    .packagebox .accordion-button:not(.collapsed) {
+        background-color: transparent;
+        box-shadow: none;
+    }
+
+    .packagebox .accordion-button {
+        width: auto;
+        padding: 0;
+        float: right;
+        padding-right: 20px;
+    }
+
+    .packagebox .accordion-button h3 {
+        margin-right: 10px;
+    }
+
+    .packagebox .accordion-button:focus,
+    .packagebox .accordion-button:active {
+        outline: none;
+        box-shadow: none;
+        border: none;
+    }
+
+    #cart-accordion .accordion-body {
+        padding: 1.5rem;
+        border: 1px solid #C5C5C5;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    #cart-accordion .accordion-body h1 {
+        margin: 0;
+        font-weight: 600;
+        font-size: 24px;
+        color: #2B2B2B;
+        width: 100%;
+        border-bottom: 1px solid #C5C5C5;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+    }
+
+    #cart-accordion .accordion-body h2 {
+        font-size: 16px;
+        font-weight: 700;
+        color: #2B2B2B;
+        margin-bottom: 15px;
+    }
+
+    #cart-accordion .accordion-body p {
+        font-size: 16px;
+        color: #2B2B2B;
+    }
+
+    #cart-accordion .accordion-body p.bold {
+        font-weight: 600;
+    }
+
+    #cart-accordion .accordion-body p a {
+        color: #ED028C;
+        text-decoration: underline;
+    }
+
+    #cart-accordion .accordion-body p.small {
+        font-size: 12px;
+        color: #2B2B2B;
+    }
+
+    #cart-accordion .accordion-body p.large {
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    #login-modal .modal-body {
+        padding: 30px;
+    }
+
+    #login-modal .white-btn2,
+    #login-modal .pink-btn {
+        padding: 5px 20px;
+    }
+
+    #login-modal .btn-close {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        z-index: 999;
+    }
+
+    #login-modal h1 {
+        position: relative;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 20px;
+        font-weight: 400;
+        color: #2B2B2B;
+        z-index: 1;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    #login-modal h1:before,
+    #login-modal h1:after {
+        position: absolute;
+        top: 51%;
+        overflow: hidden;
+        width: 45%;
+        height: 1px;
+        content: '\a0';
+        background-color: #2B2B2B;
+    }
+
+    #login-modal h1:after {
+        margin-left: 5%;
+    }
+
+    #login-modal h1:before {
+        margin-left: -50%;
+        text-align: right;
+    }
+
+    #login-modal p.bold {
+        font-size: 16px;
+        color: #2B2B2B;
+        font-weight: 700;
+    }
+
+    #login-modal .nav-pills .nav-link.active,
+    #login-modal .nav-pills .show>.nav-link {
+        color: #fff;
+        background-color: #00B4F0;
+    }
+
+    #login-modal .nav-pills .nav-link {
+        border-radius: 90px;
+        font-size: 14px;
+        padding: 0.2rem 1.3rem;
+        background-color: #D7D7D7;
+        color: #FFF;
+        min-width: 100px;
+    }
+
+    #login-modal .input-box {
+        border-radius: 8px;
+        width: 100%;
+        border: 0.75px solid rgba(122, 122, 122, 0.4);
+        margin-bottom: 10px;
+    }
+
+    #login-modal .input-box input {
+        border: none;
+        text-align: center;
+        font-size: 15px;
+        color: #2B2B2B;
+        padding: 11px;
+        background-repeat: no-repeat;
+        background-position: 13px 9px;
+        border-radius: 8px;
+    }
+
+    #login-modal .input-box input:focus,
+    #login-modal .input-box input:active {
+        outline: none;
+        border: none;
+        box-shadow: none;
+    }
+
+    #login-modal .forgotpassword {
+        font-size: 14px;
+        font-weight: 800;
+        text-transform: uppercase;
+        text-decoration: underline;
+        color: #525252;
+    }
+
+    #cart-body .addons-container .addon-box-disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+        #cart-body .packagebox .visualbg {
+            padding: 0px 12px;
+        }
+
+        #cart-body .packagebox h3 {
+            font-size: 20px;
+        }
+
+        #cart-body .packagebox p {
+            font-size: 15px;
+        }
+
+        #cart-body .packagebox h3.price {
+            font-size: 31px;
+        }
+
+        .addons-container .addon-box {
+            margin-bottom: 10px;
+        }
+    }
+</style>
+
+
 <!-- Vue Wrapper STARTS -->
 <div id="main-vue" style="display: none;">
     <!-- Banner Start -->
@@ -86,6 +479,7 @@
                                 <div class="row mb-3">
                                     <div class="col-6 pb-1 border-bottom">
                                         <p>Add-Ons</p>
+                                        <p v-if="orderSummary.addOn != null">{{ orderSummary.addOn.displayAddonName }} <a href="javascript:void(0)" class="btn-sm pink-btn text-white mx-lg-3" v-on:click="removeAddOn()">Remove</a></p>
                                     </div>
                                     <div class="col-6 pb-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.addOns).toFixed(2) }}</p>
@@ -116,7 +510,7 @@
                                             <p>Device payment</p>
                                         </div>
                                         <div class="col-6 text-end">
-                                            <p>RM0.00</p>
+                                            <p>RM{{ parseFloat(orderSummary.plan.totalPostpaidDevice).toFixed(2) }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -181,31 +575,20 @@
                     </div>
                 </div>
             </div>
-            <div class="addons-container border-top d-none">
-                <h1>Customise your plan with Postpaid data Add-Ons</h1>
+            <div class="addons-container border-top" v-if="planAddOns.length">
+                <h1>Customise your plan with {{ orderSummary.plan.planType }} data Add-Ons</h1>
                 <div class="row">
-                    <div class="col-lg-3 col-12">
-                        <a href="#" class="addon-box">
-                            <h1>RM10</h1>
-                            <p class="mb-2">10GB /month</p>
-                            <p class="small">Valid for 30 days only*</p>
-                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/add-icon.png" alt="" />
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-12">
-                        <a href="#" class="addon-box">
-                            <h1>RM10</h1>
-                            <p class="mb-2">10GB /month</p>
-                            <p class="small">Valid for 30 days only*</p>
-                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/add-icon.png" alt="" />
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-12">
-                        <a href="#" class="addon-box">
-                            <h1>RM10</h1>
-                            <p class="mb-2">10GB /month</p>
-                            <p class="small">Valid for 30 days only*</p>
-                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/add-icon.png" alt="" />
+                    <div class="col-lg-3 col-12 mb-3" v-for="(addOn, index) in planAddOns">
+                        <a href="javascript:void(0)" class="addon-box" v-on:click="addAddOn(index)">
+                            <h1>{{ addOn.displayTotalAmount }}</h1>
+                            <p class="mb-2">{{ addOn.displayAddonName }}</p>
+                            <p class="small">
+                                Valid for {{ addOn.validityDays }}
+                                <span v-if="addOn.validityDays > 1">days</span><span v-else="">day</span>
+                                only*
+                            </p>
+                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/add-icon.png" alt="" v-if="orderSummary.addOn == null || orderSummary.addOn.addonName != addOn.addonName" />
+                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/icon-added.png" width="38" alt="" v-if="orderSummary.addOn != null && orderSummary.addOn.addonName == addOn.addonName" />
                         </a>
                     </div>
                 </div>
@@ -303,6 +686,23 @@
         </div>
     </div>
     <!-- Login Modal ENDS -->
+
+    <div class="modal fade" id="modal-addOnRemove" tabindex="-1" aria-labelledby="modal-addOnRemove" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Remove Add-On?</h5>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="panel-message">Do you want to remove add on from this purchase?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" v-on:click="alertAddOnRemove">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- Vue Wrapper ENDS -->
 
@@ -347,6 +747,7 @@
                         allowBasic: false
                     }
                 },
+                planAddOns: [],
                 taxRate: {
                     sst: 0.06
                 },
@@ -359,12 +760,17 @@
                         rounding: 0.00,
                         foreignerDeposit: 0.00,
                         total: 0.00
-                    }
+                    },
+                    addOn: null
                 },
                 packageInfos: [],
                 currentStep: 0,
                 allowRequestOTP: true,
-                ywos: null
+                ywos: null,
+                addOn: {
+                    allowAddOn: true,
+                    modalRemove: '#modal-addOnRemove'
+                }
             },
             created: function() {
                 var self = this;
@@ -378,7 +784,14 @@
                     var self = this;
                     if (ywos.validateSession(self.currentStep)) {
                         self.planID = ywos.lsData.meta.planID;
-                        self.ajaxGetPlanData();
+
+                        if (ywos.lsData.meta.isLoggedIn) {
+                            self.orderSummary = ywos.lsData.meta.orderSummary;
+                            self.ajaxGetPlanAddOns();
+                            self.updatePlan(false);
+                        } else {
+                            self.ajaxGetPlanData();
+                        }
                     } else {
                         self.isCartEmpty = true;
                         setTimeout(function() {
@@ -394,31 +807,106 @@
                             if (data.internetData == '∞') {
                                 data.internetData = 'Unlimited';
                             }
-                            self.hasFetchPlan = true;
 
                             self.orderSummary.plan = data;
-                            self.updateSummary();
 
-                            setTimeout(function() {
-                                toggleOverlay(false);
-                            }, 500);
+                            for (var key in data) {
+                                var keyPricingComponentList = 'pricingComponentList';
+                                if (key == keyPricingComponentList) {
+                                    var pricingComponentList = data[keyPricingComponentList];
+                                    pricingComponentList.map(function(pricingComponent) {
+                                        var pricingComponentName = pricingComponent.pricingComponentName;
+                                        switch (pricingComponentName) {
+                                            case 'Postpaid Device Price':
+                                                self.orderSummary.plan.totalPostpaidDevice = pricingComponent.pricingComponentValue;
+                                                break;
+                                            case 'Plan Advanced Payment':
+                                                self.orderSummary.plan.totalAdvancedPayment = pricingComponent.pricingComponentValue;
+                                                break;
+                                            case 'Postpaid Device Upfront Payment':
+                                                self.orderSummary.plan.totalPostpaidDeviceUpfont = pricingComponent.pricingComponentValue;
+                                                break;
+                                        }
+                                    });
+                                }
+                            };
 
-                            var arrNotes = data.notes.split(',');
-                            self.packageInfos = arrNotes.sort(function(a, b) {
-                                return a.length - b.length;
-                            });
+                            self.updateAddOns(data.addOns);
+                            self.updatePlan();
                         })
                         .catch((error) => {
                             console.log('error', error);
                         })
                 },
+                ajaxGetPlanAddOns: function() {
+                    var self = this;
+                    axios.post(apiEndpointURL + '/get-add-ons-by-plan', {
+                            'plan_name': self.orderSummary.plan.planName,
+                            'plan_type': self.orderSummary.plan.planType
+                        })
+                        .then((response) => {
+                            var data = response.data;
+                            self.updateAddOns(data);
+
+                            setTimeout(function() {
+                                toggleOverlay(false);
+                            }, 500);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                },
+                updateAddOns: function(dataAddOns = {}) {
+                    var self = this;
+                    dataAddOns.map(function(data) {
+                        data.addonPackageInfoList.map(function(addOn) {
+                            addOn.taxSST = addOn.totalAmount * self.taxRate.sst;
+                            self.planAddOns.push(addOn);
+                        });
+                    });
+                    var planAddOn = self.orderSummary.addOn;
+                    self.orderSummary.due.taxesSST += planAddOn.taxSST;
+                    self.orderSummary.due.total += planAddOn.taxSST;
+
+                    setTimeout(function() {
+                        self.addOn.allowAddOn = (self.orderSummary.addOn == null) ? true : false;
+                        if (self.addOn.allowAddOn) {
+                            $('.addon-box').removeClass('addon-box-disabled');
+                        } else {
+                            $('.addon-box').addClass('addon-box-disabled');
+                        }
+                    }, 500);
+                },
+                updatePlan: function(closeOverlay = true) {
+                    var self = this;
+
+                    self.hasFetchPlan = true;
+
+                    self.updateSummary();
+
+                    if (closeOverlay) {
+                        setTimeout(function() {
+                            toggleOverlay(false);
+                        }, 500);
+                    }
+
+                    var arrNotes = self.orderSummary.plan.notes.split(',');
+                    self.packageInfos = arrNotes.sort(function(a, b) {
+                        return a.length - b.length;
+                    });
+                },
                 updateSummary: function() {
                     var self = this;
                     var total = 0;
-                    self.orderSummary.due.taxesSST = parseFloat(self.orderSummary.plan.totalAmount) * self.taxRate.sst;
-                    self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.plan.totalAmount) + parseFloat(self.orderSummary.due.addOns) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees));
-                    self.orderSummary.due.rounding = getRoundingAdjustmentAmount(self.orderSummary.due.total.toFixed(2));
-                    self.orderSummary.due.total += parseFloat(self.orderSummary.due.rounding);
+                    // self.orderSummary.due.taxesSST = parseFloat(self.orderSummary.plan.totalAmount) * self.taxRate.sst;
+                    // self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.plan.totalAmount) + parseFloat(self.orderSummary.due.addOns) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees));
+                    // self.orderSummary.due.rounding = getRoundingAdjustmentAmount(self.orderSummary.due.total.toFixed(2));
+                    // self.orderSummary.due.total += parseFloat(self.orderSummary.due.rounding);
+                    self.orderSummary.due.taxesSST = parseFloat(self.orderSummary.plan.totalSST);
+                    self.orderSummary.due.rounding = parseFloat(self.orderSummary.plan.roundingAdjustment);
+                    self.orderSummary.due.totalWithoutSST = parseFloat(self.orderSummary.plan.totalAmountWithoutSST);
+                    self.orderSummary.due.total = parseFloat(self.orderSummary.plan.totalAmountWithSST);
+                    self.orderSummary.due.total += parseFloat(self.orderSummary.due.addOns);
                 },
                 checkLoggedIn: function() {
                     var self = this;
@@ -526,7 +1014,13 @@
                         .catch((error) => {
                             var response = error.response;
                             var data = response.data;
-                            var errorMsg = data.message + ' Please try again later.';
+                            var errorMsg = '';
+                            if (error.response.status == 500 || error.response.status == 503) {
+                                errorMsg = "<p>There's an error in generating your TAC code.</p>";
+                            } else {
+                                errorMsg = data.message
+                            }
+                            errorMsg += '<br /> Please try again later.';
                             $(self.login.errorMessage.otp).html(errorMsg).show();
 
                             $(self.login.input.otp.inputPassword).focus();
@@ -643,7 +1137,9 @@
                     }
 
                     if (ywos.lsData.meta.isLoggedIn) {
+                        ywos.lsData.meta.orderSummary.addOn = self.orderSummary.addOn;
                         self.orderSummary = ywos.lsData.meta.orderSummary;
+                        currentStep = ywos.lsData.meta.completedStep;
                     }
 
                     ywos.lsData.meta.loginType = loginType;
@@ -653,6 +1149,38 @@
                     ywos.updateYWOSLSData();
 
                     ywos.redirectToPage(toPage);
+                },
+                addAddOn: function(index) {
+                    var self = this;
+                    var addOn = self.planAddOns[index];
+                    if (self.addOn.allowAddOn && self.orderSummary.addOn == null && addOn) {
+                        self.addOn.allowAddOn = false;
+                        self.orderSummary.addOn = self.planAddOns[index];
+
+                        self.orderSummary.due.addOns = addOn.totalAmount;
+                        self.orderSummary.due.taxesSST += addOn.taxSST;
+                        self.orderSummary.due.total += parseFloat(self.orderSummary.due.addOns) + addOn.taxSST;
+
+                        $('.addon-box').addClass('addon-box-disabled');
+                    }
+                },
+                removeAddOn: function() {
+                    var self = this;
+                    $(self.addOn.modalRemove).modal('show');
+                },
+                alertAddOnRemove: function(remove = true) {
+                    var self = this;
+                    self.addOn.allowAddOn = true;
+                    console.log(self.orderSummary.addOn.taxSST);
+
+                    self.orderSummary.due.addOns = 0;
+                    self.orderSummary.due.total -= parseFloat(self.orderSummary.addOn.totalAmount) + self.orderSummary.addOn.taxSST;
+                    self.orderSummary.due.taxesSST -= self.orderSummary.addOn.taxSST;
+
+                    self.orderSummary.addOn = null;
+
+                    $('.addon-box').removeClass('addon-box-disabled');
+                    $(self.addOn.modalRemove).modal('hide');
                 },
                 watchOTPLoginFields: function() {
                     var self = this;

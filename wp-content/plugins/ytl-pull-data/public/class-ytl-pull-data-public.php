@@ -51,6 +51,15 @@ class Ytl_Pull_Data_Public
 	private $prefix;
 
 	/**
+	 * The api timout.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      integer    $api_timeout 					The api timout.
+	 */
+	private $api_timeout;
+
+	/**
 	 * The api path to auth.
 	 *
 	 * @since    1.0.0
@@ -103,6 +112,15 @@ class Ytl_Pull_Data_Public
 	 * @var      string    $path_generate_auth_token      		The path to generate authentication token for service.
 	 */
 	private $path_generate_auth_token;
+
+	/**
+	 * The api path to get the add ons by plan.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $path_get_add_ons_by_plan  			The path to get the add ons by plan.
+	 */
+	private $path_get_add_ons_by_plan;
 
 	/**
 	 * The api path to generate otp for login.
@@ -180,9 +198,11 @@ class Ytl_Pull_Data_Public
 		$this->plugin_name 	= $plugin_name;
 		$this->version 		= $version;
 		$this->prefix 		= $prefix;
+		$this->api_timeout 	= 60;
 		$this->api_app_version      = '1.1';
 		$this->api_locale           = 'EN';
 		$this->path_generate_auth_token 	= '/mobileyos-dev/mobile/ws/v1/json/auth/getBasicAuth';
+		$this->path_get_add_ons_by_plan 	= '/mobileyos-dev/mobile/ws/v1/json/getEligibleAddonList';
 		$this->path_generate_otp_for_login	= '/mobileyos-dev/mobile/ws/v1/json/generateOTPForLogin';
 		$this->path_validate_login			= '/mobileyos-dev/mobile/ws/v1/json/validateLoginAndGetCustomerDetails';
 		$this->path_get_cities_by_state_code = '/mobileyos-dev/mobile/ws/v1/json/getAllCitiesByStateCode';
@@ -249,6 +269,7 @@ class Ytl_Pull_Data_Public
 	{
 		$this->ra_reg_add_to_cart();
 		$this->ra_reg_get_plan_by_id();
+		$this->ra_reg_get_add_ons_by_plan();
 		$this->ra_reg_get_auth_token();
 		$this->ra_reg_generate_otp_for_login();
 		$this->ra_reg_login_basic();
@@ -313,6 +334,7 @@ class Ytl_Pull_Data_Public
 		foreach ($plans_obj as $plans) {
 			foreach ($plans as $plan_id => $plan) {
 				if ($plan_id == $data['plan_id']) {
+					$plan->addOns = $this->ca_get_add_ons_by_plan($plan->planName, $plan->planType);
 					$return	= $plan;
 					break;
 				}
@@ -321,7 +343,71 @@ class Ytl_Pull_Data_Public
 		if (empty($return)) {
 			return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
 		}
+
 		return $return;
+	}
+
+	public function ra_reg_get_add_ons_by_plan()
+	{
+		register_rest_route('ywos/v1', '/get-add-ons-by-plan', array(
+			'methods'	=> 'POST',
+			'callback' 	=> array($this, 'get_add_ons_by_plan')
+		));
+	}
+
+	public function get_add_ons_by_plan(WP_REST_Request $request)
+	{
+		$plan_name 	= (isset($request['plan_name']) && $request['plan_name'] != null) ? $request['plan_name'] : null;
+		$plan_type 	= (isset($request['plan_type']) && $request['plan_type'] != null) ? $request['plan_type'] : null;
+
+		if ($plan_name != null && $plan_type != null) {
+			$add_ons 	= $this->ca_get_add_ons_by_plan($plan_name, $plan_type);
+			$response 	= new WP_REST_Response($add_ons);
+			$response->set_status(200);
+			return $response;
+		} else {
+			return new WP_Error('error_fetching_add_ons', "Parameters not complete to fetch the add ons.", array('status' => 400));
+		}
+		return new WP_Error('error_fetching_add_ons', "There's an error in fetching the add ons.", array('status' => 400));
+	}
+
+	public function ca_get_add_ons_by_plan($plan_name = null, $plan_type = null)
+	{
+		$session_id 	= $this->ca_generate_auth_token(true);
+		if ($plan_name && $plan_type && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
+			$params 	= [
+				'requestId'	=> $this->api_request_id,
+				'locale' 	=> $this->api_locale,
+				'sessionId' => $session_id,
+				'yesId' 	=> "",
+				'planName' 	=> $plan_name,
+				'planType' 	=> $plan_type
+			];
+			$args 		= [
+				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
+				'body'          => json_encode($params),
+				'method'        => 'POST',
+				'data_format'   => 'body',
+				'timeout'     	=> $this->api_timeout
+			];
+			$api_url 	= $this->api_domain . $this->path_get_add_ons_by_plan;
+			$request 	= wp_remote_post($api_url, $args);
+			$data 		= json_decode($request['body']);
+			if ($data->responseCode > -1) {
+				$data->sessionId = $session_id;
+
+				if (isset($data->addonListServiceTypes) && $data->addonListServiceTypes != '') {
+					$add_ons 	= $data->addonListServiceTypes;
+					return $add_ons;
+				}
+			} else if ($data->displayResponseMessage) {
+				// return new WP_Error('error_fetching_add_ons', $data->displayResponseMessage, array('status' => 400));
+			}
+		} else {
+			// return new WP_Error('error_fetching_add_ons', "Parameters not complete to fetch the add ons.", array('status' => 400));
+		}
+		// return new WP_Error('error_fetching_add_ons', "There's an error in fetching the add ons.", array('status' => 400));
+		return [];
 	}
 
 	public function ra_reg_get_auth_token()
@@ -345,7 +431,8 @@ class Ytl_Pull_Data_Public
 				'headers'       => array('Content-Type' => 'application/json; charset=utf-8', 'Authorization' => 'BASIC ' . $this->api_authorization_key),
 				'body'          => json_encode($params),
 				'method'        => 'POST',
-				'data_format'   => 'body'
+				'data_format'   => 'body',
+				'timeout'     	=> $this->api_timeout
 			];
 			$api_url    = $this->api_domain . $this->path_generate_auth_token;
 			$request    = wp_remote_post($api_url, $args);
@@ -394,7 +481,8 @@ class Ytl_Pull_Data_Public
 				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
 				'body'          => json_encode($params),
 				'method'        => 'POST',
-				'data_format'   => 'body'
+				'data_format'   => 'body',
+				'timeout'     	=> $this->api_timeout
 			];
 			$api_url 	= $this->api_domain . $this->path_generate_otp_for_login;
 			$request 	= wp_remote_post($api_url, $args);
@@ -459,7 +547,8 @@ class Ytl_Pull_Data_Public
 				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
 				'body'          => json_encode($params),
 				'method'        => 'POST',
-				'data_format'   => 'body'
+				'data_format'   => 'body',
+				'timeout'     	=> $this->api_timeout
 			];
 			$api_url 	= $this->api_domain . $this->path_validate_login;
 			$request 	= wp_remote_post($api_url, $args);
@@ -511,7 +600,8 @@ class Ytl_Pull_Data_Public
 				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
 				'body'          => json_encode($params),
 				'method'        => 'POST',
-				'data_format'   => 'body'
+				'data_format'   => 'body',
+				'timeout'     	=> $this->api_timeout
 			];
 			$api_url	= $this->api_domain . $this->path_get_cities_by_state_code;
 			$request 	= wp_remote_post($api_url, $args);
@@ -563,7 +653,8 @@ class Ytl_Pull_Data_Public
 				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
 				'body'          => json_encode($params),
 				'method'        => 'POST',
-				'data_format'   => 'body'
+				'data_format'   => 'body',
+				'timeout'     	=> $this->api_timeout
 			];
 			$api_url 	= $this->api_domain . $this->path_generate_otp_for_guest_login;
 			$request 	= wp_remote_post($api_url, $args);
@@ -617,7 +708,8 @@ class Ytl_Pull_Data_Public
 				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
 				'body'          => json_encode($params),
 				'method'        => 'POST',
-				'data_format'   => 'body'
+				'data_format'   => 'body',
+				'timeout'     	=> $this->api_timeout
 			];
 			$api_url 	= $this->api_domain . $this->path_validate_guest_login;
 			$request 	= wp_remote_post($api_url, $args);
@@ -698,7 +790,8 @@ class Ytl_Pull_Data_Public
 				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
 				'body'          => json_encode($params),
 				'method'        => 'POST',
-				'data_format'   => 'body'
+				'data_format'   => 'body',
+				'timeout'     	=> $this->api_timeout
 			];
 			$api_url 	= $this->api_domain . $this->path_validate_customer_eligibilities;
 			$request 	= wp_remote_post($api_url, $args);
@@ -744,7 +837,8 @@ class Ytl_Pull_Data_Public
 				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
 				'body'          => json_encode($params),
 				'method'        => 'POST',
-				'data_format'   => 'body'
+				'data_format'   => 'body',
+				'timeout'     	=> $this->api_timeout
 			];
 			$api_url 	= $this->api_domain . $this->path_verify_referral_code;
 			$request 	= wp_remote_post($api_url, $args);

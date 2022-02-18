@@ -184,7 +184,7 @@
                                             <p>Device payment</p>
                                         </div>
                                         <div class="col-6 text-end">
-                                            <p>RM0.00</p>
+                                            <p>RM{{ parseFloat(orderSummary.plan.totalPostpaidDevice).toFixed(2) }}</p>
                                         </div>
                                     </div>
                                 </div>
