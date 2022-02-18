@@ -148,6 +148,7 @@
                                 <div class="row mb-3">
                                     <div class="col-6 pb-1 border-bottom">
                                         <p>Add-Ons</p>
+                                        <p v-if="orderSummary.addOn != null">{{ orderSummary.addOn.displayAddonName }}</p>
                                     </div>
                                     <div class="col-6 pb-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.addOns).toFixed(2) }}</p>
@@ -277,7 +278,8 @@
                         rounding: 0.00,
                         foreignerDeposit: 0.00,
                         total: 0.00
-                    }
+                    },
+                    addOn: null
                 },
                 deliveryInfo: {
                     name: '',
