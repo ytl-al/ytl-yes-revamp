@@ -254,7 +254,7 @@
                                             </div>
                                         </div>
                                         <div class="w-100 text-center mb-4">
-                                            <p class="mb-3 text-center item-otpPassword panel-otpMessage" style="display: none;"><span class="span-message">Your TAC code has been sent. TAC code is valid for</span> <span class="span-timer">5:00</span>.</p>
+                                            <p class="mb-3 text-center item-otpPassword panel-otpMessage" style="display: none;"><span class="span-message">Your TAC code has been sent.</span><br /> TAC code is valid for <span class="span-timer">5:00</span>.</p>
                                             <button type="button" class="white-btn2 mt-3 mt-lg-0" v-on:click="generateOTPForLogin" :disabled="!allowRequestOTP">{{ requestOTPText }}</button>
                                             <div class="invalid-feedback mt-1" id="em-otpLogin"></div>
                                         </div>
@@ -423,7 +423,6 @@
                 checkLoggedIn: function() {
                     var self = this;
                     if (typeof ywos.lsData.meta.isLoggedIn === 'undefined' || !ywos.lsData.meta.isLoggedIn) {
-                        self.login.input.otp.yesNumber = '';
                         self.login.input.otp.password = '';
                         self.login.input.basic.yesNumber = '';
                         self.login.input.basic.password = '';
@@ -434,6 +433,8 @@
                             if (self.allowRequestOTP) {
                                 $('.item-otpPassword').hide();
                                 self.requestOTPText = 'Request TAC';
+                            } else {
+                                self.login.input.otp.yesNumber = '';
                             }
                         });
 
@@ -517,6 +518,7 @@
                         })
                         .then((response) => {
                             $('.item-otpPassword').show();
+                            $('#input-otpPassword').show();
                             $('.panel-otpMessage .span-message').html(response.data.displayResponseMessage);
                             $(self.login.input.otp.inputPassword).focus();
                             self.triggerOTPCountdown(response.data.otpExpiryTime);
@@ -549,7 +551,7 @@
                     var self = this;
                     self.allowRequestOTP = false;
 
-                    var timer = timerMinute * 60,
+                    var timer = 1 * 30,
                         minutes, seconds;
                     var interval = setInterval(function() {
                         timer -= 1;
