@@ -300,8 +300,9 @@
                             // console.log(error);
                             var response = error.response;
                             var data = response.data;
-                            var errorMsg = data.message;
-
+                            var errorMsg = 'Customer eligibility check failed: ' + data.message;
+                            
+                            $('.panel-otpMessage').hide();
                             $(self.verify.errorMessage.form).html(errorMsg).show();
 
                             toggleOverlay(false);
