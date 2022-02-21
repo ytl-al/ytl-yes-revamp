@@ -98,7 +98,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="summary-box mt-3">
+                    <div class="summary-box mt-3" v-if="referralCode.applicable">
                         <div class="row">
                             <div class="col">
                                 <div class="referral-box">
@@ -309,8 +309,8 @@
                     <p>Would you like to continue without a referral code?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" v-on:click="alertReferral(false)">No</button>
-                    <button type="button" class="btn btn-primary" v-on:click="alertReferral">Yes</button>
+                    <button type="button" class="btn btn-secondary" v-on:click="alertReferral">No</button>
+                    <button type="button" class="btn btn-primary" v-on:click="alertReferral(false)">Proceed without referral code</button>
                 </div>
             </div>
         </div>
@@ -326,8 +326,8 @@
                     <p>Please verify the referral code</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" v-on:click="alertReferral(false)">Proceed without referral code</button>
-                    <button type="button" class="btn btn-primary" v-on:click="alertReferral">Continue</button>
+                    <button type="button" class="btn btn-secondary" v-on:click="alertReferral">Ok</button>
+                    <button type="button" class="btn btn-primary" v-on:click="alertReferral(false)">Proceed without referral code</button>
                 </div>
             </div>
         </div>
@@ -479,6 +479,7 @@
                     }
                 },
                 referralCode: {
+                    applicable: false, 
                     code: '', 
                     alert: false, 
                     toUse: false,
@@ -549,6 +550,8 @@
                         self.watchChangeState();
                     }
                     self.deliveryInfo.country = 'MALAYSIA';
+                    
+                    // self.referralCode.applicable = (self.orderSummary.plan.referralApplicable) ? true : false;
 
                     if (ywos.lsData.meta.referralCode) {
                         self.referralCode.code = ywos.lsData.meta.referralCode.referral_code;
@@ -779,7 +782,11 @@
                         validSubmit = false;
                     }
                     if (validSubmit) {
-                        if (self.checkReferralCode()) {
+                        if (self.referralCode.application) {
+                            if (self.checkReferralCode()) {
+                                self.checkCustomerEligibility();
+                            }
+                        } else {
                             self.checkCustomerEligibility();
                         }
                     }
