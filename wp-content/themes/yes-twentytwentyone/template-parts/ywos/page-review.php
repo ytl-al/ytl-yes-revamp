@@ -223,7 +223,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-3 text-end order-2">
-                            <a href="javascript:void(0)" class="grey-link" v-on:click="ywos.redirectToPage('delivery')">(Edit)</a>
+                            <a href="javascript:void(0)" class="grey-link" style="text-decoration: none;" v-on:click="ywos.redirectToPage('delivery')">(<u>Edit</u>)</a>
                         </div>
                         <div class="col-9 order-1">
                             <p class="mb-3"><strong>To: {{ deliveryInfo.name }}</strong><br> {{ deliveryInfo.email }}<br> +60 {{ slicedMobileNumber }}</p>
