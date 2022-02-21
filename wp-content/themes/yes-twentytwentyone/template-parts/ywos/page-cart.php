@@ -865,17 +865,19 @@
                         });
                     });
                     var planAddOn = self.orderSummary.addOn;
-                    self.orderSummary.due.taxesSST += planAddOn.taxSST;
-                    self.orderSummary.due.total += planAddOn.taxSST;
+                    if (planAddOn) {
+                        self.orderSummary.due.taxesSST += planAddOn.taxSST;
+                        self.orderSummary.due.total += planAddOn.taxSST;
 
-                    setTimeout(function() {
-                        self.addOn.allowAddOn = (self.orderSummary.addOn == null) ? true : false;
-                        if (self.addOn.allowAddOn) {
-                            $('.addon-box').removeClass('addon-box-disabled');
-                        } else {
-                            $('.addon-box').addClass('addon-box-disabled');
-                        }
-                    }, 500);
+                        setTimeout(function() {
+                            self.addOn.allowAddOn = (self.orderSummary.addOn == null) ? true : false;
+                            if (self.addOn.allowAddOn) {
+                                $('.addon-box').removeClass('addon-box-disabled');
+                            } else {
+                                $('.addon-box').addClass('addon-box-disabled');
+                            }
+                        }, 500);
+                    }
                 },
                 updatePlan: function(closeOverlay = true) {
                     var self = this;
@@ -1171,7 +1173,6 @@
                 alertAddOnRemove: function(remove = true) {
                     var self = this;
                     self.addOn.allowAddOn = true;
-                    console.log(self.orderSummary.addOn.taxSST);
 
                     self.orderSummary.due.addOns = 0;
                     self.orderSummary.due.total -= parseFloat(self.orderSummary.addOn.totalAmount) + self.orderSummary.addOn.taxSST;

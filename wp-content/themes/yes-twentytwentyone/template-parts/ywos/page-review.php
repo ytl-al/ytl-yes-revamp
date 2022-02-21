@@ -227,7 +227,7 @@
                         </div>
                         <div class="col-9 order-1">
                             <p class="mb-3"><strong>To: {{ deliveryInfo.name }}</strong><br> {{ deliveryInfo.email }}<br> +60 {{ slicedMobileNumber }}</p>
-                            <p><strong>Shipping Address</strong><br> {{ deliveryInfo.sanitize.address }}, <br /><template v-if="deliveryInfo.sanitize.addressMore">{{ deliveryInfo.sanitize.addressMore }}, <br /></template>{{ deliveryInfo.sanitize.city }}, <br />{{ deliveryInfo.sanitize.state }}, <br />{{ deliveryInfo.postcode }}, {{ deliveryInfo.sanitize.country }}</p>
+                            <p><strong>Shipping Address</strong><br> {{ deliveryInfo.sanitize.address }} <br /><template v-if="deliveryInfo.sanitize.addressMore">{{ deliveryInfo.sanitize.addressMore }} <br /></template>{{ deliveryInfo.postcode }}, {{ deliveryInfo.sanitize.city }} <br />{{ deliveryInfo.sanitize.state }} <br /> {{ deliveryInfo.sanitize.country }}</p>
                         </div>
                     </div>
                     <div class="row mb-3 d-none">
