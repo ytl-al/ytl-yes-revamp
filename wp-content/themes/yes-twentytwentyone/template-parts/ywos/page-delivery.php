@@ -370,7 +370,8 @@
                         rounding: 0.00,
                         foreignerDeposit: 0.00,
                         total: 0.00
-                    }
+                    },
+                    addOn: null
                 },
                 selectOptions: {
                     states: [{
@@ -551,7 +552,7 @@
                     }
                     self.deliveryInfo.country = 'MALAYSIA';
                     
-                    // self.referralCode.applicable = (self.orderSummary.plan.referralApplicable) ? true : false;
+                    self.referralCode.applicable = (self.orderSummary.plan.referralApplicable) ? true : false;
 
                     if (ywos.lsData.meta.referralCode) {
                         self.referralCode.code = ywos.lsData.meta.referralCode.referral_code;
@@ -782,7 +783,7 @@
                         validSubmit = false;
                     }
                     if (validSubmit) {
-                        if (self.referralCode.application) {
+                        if (self.referralCode.applicable) {
                             if (self.checkReferralCode()) {
                                 self.checkCustomerEligibility();
                             }

@@ -218,7 +218,8 @@
                         rounding: 0.00,
                         foreignerDeposit: 0.00,
                         total: 0.00
-                    }
+                    },
+                    addOn: null
                 },
                 requestOTPText: 'Request TAC',
                 verify: {
