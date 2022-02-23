@@ -900,15 +900,16 @@
                 updateSummary: function() {
                     var self = this;
                     var total = 0;
-                    // self.orderSummary.due.taxesSST = parseFloat(self.orderSummary.plan.totalAmount) * self.taxRate.sst;
-                    // self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.plan.totalAmount) + parseFloat(self.orderSummary.due.addOns) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees));
-                    // self.orderSummary.due.rounding = getRoundingAdjustmentAmount(self.orderSummary.due.total.toFixed(2));
-                    // self.orderSummary.due.total += parseFloat(self.orderSummary.due.rounding);
-                    self.orderSummary.due.taxesSST = parseFloat(self.orderSummary.plan.totalSST);
-                    self.orderSummary.due.rounding = parseFloat(self.orderSummary.plan.roundingAdjustment);
-                    self.orderSummary.due.totalWithoutSST = parseFloat(self.orderSummary.plan.totalAmountWithoutSST);
-                    self.orderSummary.due.total = parseFloat(self.orderSummary.plan.totalAmountWithSST);
-                    self.orderSummary.due.total += parseFloat(self.orderSummary.due.addOns);
+                    self.orderSummary.due.taxesSST = (parseFloat(self.orderSummary.plan.totalAmount) + parseFloat(self.orderSummary.due.addOns)) * self.taxRate.sst;
+                    self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.plan.totalAmount) + parseFloat(self.orderSummary.due.addOns) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees));
+                    self.orderSummary.due.rounding = getRoundingAdjustmentAmount(self.orderSummary.due.total.toFixed(2));
+                    self.orderSummary.due.total += parseFloat(self.orderSummary.due.rounding);
+                    
+                    // self.orderSummary.due.taxesSST = parseFloat(self.orderSummary.plan.totalSST);
+                    // self.orderSummary.due.rounding = parseFloat(self.orderSummary.plan.roundingAdjustment);
+                    // self.orderSummary.due.totalWithoutSST = parseFloat(self.orderSummary.plan.totalAmountWithoutSST);
+                    // self.orderSummary.due.total = parseFloat(self.orderSummary.plan.totalAmountWithSST);
+                    // self.orderSummary.due.total += parseFloat(self.orderSummary.due.addOns);
                 },
                 checkLoggedIn: function() {
                     var self = this;
@@ -1161,7 +1162,8 @@
 
                         self.orderSummary.due.addOns = addOn.totalAmount;
                         self.orderSummary.due.taxesSST += addOn.taxSST;
-                        self.orderSummary.due.total += parseFloat(self.orderSummary.due.addOns) + addOn.taxSST;
+                        // self.orderSummary.due.total += parseFloat(self.orderSummary.due.addOns) + addOn.taxSST;
+                        self.updateSummary();
 
                         $('.addon-box').addClass('addon-box-disabled');
                     }
@@ -1175,8 +1177,10 @@
                     self.addOn.allowAddOn = true;
 
                     self.orderSummary.due.addOns = 0;
-                    self.orderSummary.due.total -= parseFloat(self.orderSummary.addOn.totalAmount) + self.orderSummary.addOn.taxSST;
+                    // self.orderSummary.due.total -= parseFloat(self.orderSummary.addOn.totalAmount) + self.orderSummary.addOn.taxSST;
                     self.orderSummary.due.taxesSST -= self.orderSummary.addOn.taxSST;
+
+                    self.updateSummary();
 
                     self.orderSummary.addOn = null;
 
