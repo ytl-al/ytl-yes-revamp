@@ -263,7 +263,7 @@
                         self.loginInfo.type = ywos.lsData.meta.loginType;
                         self.isLoggedIn = ywos.lsData.meta.isLoggedIn;
                         self.customerDetails = (ywos.lsData.meta.customerDetails) ? ywos.lsData.meta.customerDetails : self.customerDetails;
-console.log(self.customerDetails);
+
                         if (self.isLoggedIn) {
                             // self.allowSecurityType = (self.customerDetails.securityType && self.loginInfo.type != 'guest') ? false : true;
                             // self.allowSecurityId = (self.customerDetails.securityId && self.loginInfo.type != 'guest') ? false : true;
@@ -367,7 +367,6 @@ console.log(self.customerDetails);
                         }
                         ywos.updateYWOSLSData();
                     }
-                    console.log(ywos.lsData.meta.customerDetails, ywos.lsData.meta.deliveryInfo);
 
                     ywos.redirectToPage('delivery');
                 },
