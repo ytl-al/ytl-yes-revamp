@@ -263,7 +263,7 @@
                         self.loginInfo.type = ywos.lsData.meta.loginType;
                         self.isLoggedIn = ywos.lsData.meta.isLoggedIn;
                         self.customerDetails = (ywos.lsData.meta.customerDetails) ? ywos.lsData.meta.customerDetails : self.customerDetails;
-
+console.log(self.customerDetails);
                         if (self.isLoggedIn) {
                             // self.allowSecurityType = (self.customerDetails.securityType && self.loginInfo.type != 'guest') ? false : true;
                             // self.allowSecurityId = (self.customerDetails.securityId && self.loginInfo.type != 'guest') ? false : true;
@@ -347,13 +347,14 @@
                 redirectVerified: function() {
                     var self = this;
 
+
+                    self.customerDetails.mobileNumber = '0' + self.verify.input.phoneNumber.trim();
+                    self.customerDetails.msisdn = '0' + self.verify.input.phoneNumber.trim();
+
                     if (!ywos.lsData.meta.isLoggedIn) {
                         ywos.lsData.meta.completedStep = self.currentStep;
                         ywos.lsData.meta.isLoggedIn = true;
                         ywos.lsData.meta.orderSummary = self.orderSummary;
-
-                        self.customerDetails.mobileNumber = '0' + self.verify.input.phoneNumber.trim();
-                        self.customerDetails.msisdn = '0' + self.verify.input.phoneNumber.trim();
                         ywos.lsData.meta.customerDetails = self.customerDetails;
                         ywos.updateYWOSLSData();
                     } else {
@@ -362,9 +363,11 @@
                             ywos.lsData.meta.deliveryInfo.securityType = self.customerDetails.securityType;
                             ywos.lsData.meta.deliveryInfo.securityId = self.customerDetails.securityId;
                             ywos.lsData.meta.deliveryInfo.mobileNumber = '0' + self.verify.input.phoneNumber.trim();
+                            ywos.lsData.meta.deliveryInfo.msisdn = '0' + self.verify.input.phoneNumber.trim();
                         }
                         ywos.updateYWOSLSData();
                     }
+                    console.log(ywos.lsData.meta.customerDetails, ywos.lsData.meta.deliveryInfo);
 
                     ywos.redirectToPage('delivery');
                 },
