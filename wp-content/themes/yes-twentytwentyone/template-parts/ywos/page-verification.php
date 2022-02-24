@@ -268,7 +268,7 @@
                             // self.allowSecurityType = (self.customerDetails.securityType && self.loginInfo.type != 'guest') ? false : true;
                             // self.allowSecurityId = (self.customerDetails.securityId && self.loginInfo.type != 'guest') ? false : true;
                             // self.allowPhoneNumber = (self.customerDetails.mobileNumber) ? false : true;
-                            self.verify.input.phoneNumber = self.customerDetails.mobileNumber.slice(1);
+                            self.verify.input.phoneNumber = self.customerDetails.msisdn.slice(1);
                             self.isAgree = true;
 
                             self.watchAllowNext();
@@ -353,6 +353,7 @@
                         ywos.lsData.meta.orderSummary = self.orderSummary;
 
                         self.customerDetails.mobileNumber = '0' + self.verify.input.phoneNumber.trim();
+                        self.customerDetails.msisdn = '0' + self.verify.input.phoneNumber.trim();
                         ywos.lsData.meta.customerDetails = self.customerDetails;
                         ywos.updateYWOSLSData();
                     } else {

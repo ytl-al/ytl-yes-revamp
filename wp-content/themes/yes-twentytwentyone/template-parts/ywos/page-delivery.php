@@ -561,7 +561,9 @@
                         self.referralCode.verified = true;
 
                         var smReferralCode = self.input.referralCode.successMessage;
-                        $(smReferralCode).html('Referral code applied successfully.').show();
+                        setTimeout(function() {
+                            $(smReferralCode).html('Referral code applied successfully.').show();
+                        }, 300);
                     }
                 },
                 getStateCode: function(stateVal) {
@@ -733,7 +735,7 @@
 
                     var self = this;
                     var params = {
-                        'phone_number': self.deliveryInfo.mobileNumber, 
+                        'phone_number': self.deliveryInfo.msisdn, 
                         'customer_name': self.deliveryInfo.name,
                         'email': self.deliveryInfo.email, 
                         'security_type': self.deliveryInfo.securityType, 
