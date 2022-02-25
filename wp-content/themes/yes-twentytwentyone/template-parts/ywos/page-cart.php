@@ -578,9 +578,9 @@
             <div class="addons-container border-top" v-if="planAddOns.length">
                 <h1>Customise your plan with {{ orderSummary.plan.planType }} data Add-Ons</h1>
                 <div class="row">
-                    <div class="col-lg-3 col-12 mb-3" v-for="(addOn, index) in planAddOns">
+                    <div class="col-xl-3 col-lg-4 col-12 mb-3" v-for="(addOn, index) in planAddOns">
                         <a href="javascript:void(0)" class="addon-box" v-on:click="addAddOn(index)">
-                            <h1>{{ addOn.displayTotalAmount }}</h1>
+                            <h1>{{ addOn.displayAmount }}</h1>
                             <p class="mb-2">{{ addOn.displayAddonName }}</p>
                             <p class="small">
                                 Valid for {{ addOn.validityDays }}
@@ -754,7 +754,9 @@
                 orderSummary: {
                     plan: {},
                     due: {
+                        amount: 0.00,
                         addOns: 0.00,
+                        planAmount: 0.00,
                         taxesSST: 0.00,
                         shippingFees: 0.00,
                         rounding: 0.00,
@@ -900,9 +902,19 @@
                 updateSummary: function() {
                     var self = this;
                     var total = 0;
-                    self.orderSummary.due.taxesSST = (parseFloat(self.orderSummary.plan.totalAmount) + parseFloat(self.orderSummary.due.addOns)) * self.taxRate.sst;
-                    self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.plan.totalAmount) + parseFloat(self.orderSummary.due.addOns) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees));
-                    self.orderSummary.due.rounding = getRoundingAdjustmentAmount(self.orderSummary.due.total.toFixed(2));
+                    // self.orderSummary.due.amount = (self.orderSummary.addOn != null) ? parseFloat(self.orderSummary.plan.totalAmount) + parseFloat(self.orderSummary.addOn.amount) : parseFloat(self.orderSummary.plan.totalAmount);
+                    // self.orderSummary.due.planAmount = parseFloat(self.orderSummary.plan.totalAmount);
+                    // self.orderSummary.due.taxesSST = parseFloat(self.orderSummary.plan.totalSST + ((self.orderSummary.addOn != null) ? self.orderSummary.addOn.taxSST : 0));
+                    // self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.plan.totalAmount) + parseFloat(self.orderSummary.due.addOns) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees));
+                    // self.orderSummary.due.rounding = getRoundingAdjustmentAmount(self.orderSummary.due.total.toFixed(2));
+                    // self.orderSummary.due.total += parseFloat(self.orderSummary.due.rounding);
+
+                    self.orderSummary.due.addOns = (self.orderSummary.addOn != null) ? parseFloat(self.orderSummary.addOn.amount) : 0;
+                    self.orderSummary.due.planAmount = parseFloat(self.orderSummary.plan.totalAmount);
+                    self.orderSummary.due.amount = parseFloat(self.orderSummary.plan.totalAmount) + ((self.orderSummary.addOn != null) ? parseFloat(self.orderSummary.addOn.amount) : 0);
+                    self.orderSummary.due.taxesSST = self.orderSummary.due.amount * self.taxRate.sst;
+                    self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.due.amount) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees));
+                    self.orderSummary.due.rounding = parseFloat(getRoundingAdjustmentAmount(self.orderSummary.due.total.toFixed(2)));
                     self.orderSummary.due.total += parseFloat(self.orderSummary.due.rounding);
                     
                     // self.orderSummary.due.taxesSST = parseFloat(self.orderSummary.plan.totalSST);
@@ -1160,9 +1172,6 @@
                         self.addOn.allowAddOn = false;
                         self.orderSummary.addOn = self.planAddOns[index];
 
-                        self.orderSummary.due.addOns = addOn.totalAmount;
-                        self.orderSummary.due.taxesSST += addOn.taxSST;
-                        // self.orderSummary.due.total += parseFloat(self.orderSummary.due.addOns) + addOn.taxSST;
                         self.updateSummary();
 
                         $('.addon-box').addClass('addon-box-disabled');
@@ -1175,14 +1184,9 @@
                 alertAddOnRemove: function(remove = true) {
                     var self = this;
                     self.addOn.allowAddOn = true;
-
-                    self.orderSummary.due.addOns = 0;
-                    // self.orderSummary.due.total -= parseFloat(self.orderSummary.addOn.totalAmount) + self.orderSummary.addOn.taxSST;
-                    self.orderSummary.due.taxesSST -= self.orderSummary.addOn.taxSST;
+                    self.orderSummary.addOn = null;
 
                     self.updateSummary();
-
-                    self.orderSummary.addOn = null;
 
                     $('.addon-box').removeClass('addon-box-disabled');
                     $(self.addOn.modalRemove).modal('hide');
