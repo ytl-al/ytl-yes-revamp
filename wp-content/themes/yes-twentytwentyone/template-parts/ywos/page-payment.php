@@ -22,6 +22,13 @@
         margin-right: 30px;
     }
 
+    .listing-quickSelectBanks {}
+    #cart-body .listing-quickSelectBanks li.nav-item { cursor: pointer; margin-right: 10px; max-width: 60px; text-align: center; }
+    .listing-quickSelectBanks li.nav-item .img-quickSelectBank { border: 1px solid #D9D9D9; border-radius: 4px; box-shadow: 2px 2px 12px rgb(112 144 176 / 25%); margin: 0 0 10px; padding: 3px; }
+    .listing-quickSelectBanks li.nav-item.selected .img-quickSelectBank { border-color: rgb(61, 140, 255); }
+    .listing-quickSelectBanks li.nav-item img { height: 44px; margin: 0 auto; width: 44px; }
+    .listing-quickSelectBanks li.nav-item span { display: inline-block; font-size: 11px; line-height: 12px; }
+
     @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
         #cart-body .nav-pills .nav-item {
             margin-right: 10px;
@@ -63,7 +70,8 @@
         <div class="container p-lg-5 p-3">
             <div class="row d-lg-none mb-3">
                 <div class="col">
-                    <h1>Review & Pay</h1>
+                    <h1>Payment Info</h1>
+                    <p class="sub mb-4 pe-5">This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.</p>
                 </div>
             </div>
             <div class="row gx-5" v-if="pageValid">
@@ -133,23 +141,23 @@
                 </div>
                 <form class="col-lg-8 col-12 order-lg-1 mt-3 mt-lg-0" @submit="paymentSubmit">
                     <div>
-                        <h1>Payment Info</h1>
-                        <p class="sub mb-4 pe-5">This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.</p>
+                        <h1 class="mb-4 d-none d-lg-block">Payment Info</h1>
+                        <p class="sub mb-4 pe-5 d-none d-lg-block">This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.</p>
                         <h2>Select payment</h2>
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="pills-creditcard-tab" data-bs-toggle="pill" data-bs-target="#creditcard" type="button" role="tab" aria-controls="pills-creditcard" aria-selected="true"><img src="/wp-content/uploads/2022/02/creditcard.png" alt=""></button>
+                                <button class="nav-link active" id="pills-creditcard-tab" v-on:click="selectPaymentMethod('CREDIT_CARD')" data-bs-toggle="pill" data-bs-target="#creditcard" type="button" role="tab" aria-controls="pills-creditcard" aria-selected="true"><img src="/wp-content/uploads/2022/02/creditcard.png" alt=""></button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-fpx-tab" data-bs-toggle="pill" data-bs-target="#fpx" type="button" role="tab" aria-controls="pills-fpx" aria-selected="false"><img src="/wp-content/uploads/2022/02/fpx-logo.png" alt=""></button>
+                                <button class="nav-link" id="pills-fpx-tab" v-on:click="selectPaymentMethod('FPX')" data-bs-toggle="pill" data-bs-target="#fpx" type="button" role="tab" aria-controls="pills-fpx" aria-selected="false"><img src="/wp-content/uploads/2022/02/fpx-logo.png" alt=""></button>
                             </li>
-                            <li class="nav-item" role="presentation">
+                            <li class="nav-item d-none" role="presentation">
                                 <button class="nav-link" id="pills-grabpay-tab" data-bs-toggle="pill" data-bs-target="#grabpay" type="button" role="tab" aria-controls="pills-grabpay" aria-selected="false"><img src="/wp-content/uploads/2022/02/grabpay.png" alt=""></button>
                             </li>
-                            <li class="nav-item" role="presentation">
+                            <li class="nav-item d-none" role="presentation">
                                 <button class="nav-link" id="pills-boost-tab" data-bs-toggle="pill" data-bs-target="#boost" type="button" role="tab" aria-controls="pills-boost" aria-selected="false"><img src="/wp-content/uploads/2022/02/boost.png" alt=""></button>
                             </li>
-                            <li class="nav-item" role="presentation">
+                            <li class="nav-item d-none" role="presentation">
                                 <button class="nav-link" id="pills-touchgo-tab" data-bs-toggle="pill" data-bs-target="#touchgo" type="button" role="tab" aria-controls="pills-touchgo" aria-selected="false"><img src="/wp-content/uploads/2022/02/touchgo.png" alt=""></button>
                             </li>
                         </ul>
@@ -157,56 +165,78 @@
                             <div class="tab-pane fade show active" id="creditcard" role="tabpanel" aria-labelledby="pills-creditcard-tab">
                                 <div class="row mb-4">
                                     <div class="col-lg-6 col-12">
-                                        <label class="form-label">Cardholder Name</label>
+                                        <label class="form-label" for="input-chName">Cardholder Name</label>
                                         <div class="input-group align-items-center">
-                                            <input type="text" class="form-control" id="full-name" placeholder="" required>
+                                            <input type="text" class="form-control" id="input-chName" value="" v-model="cardholder.name" required="required" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3 align-items-center g-2">
                                     <div class="col-12">
-                                        <label class="form-label">Card Number</label>
+                                        <label class="form-label" for="input-chNumber1">Card Number</label>
                                     </div>
                                     <div class="col-lg-6 col-12 mb-1">
                                         <div class="input-group align-items-center">
-                                            <input class="text-center form-control me-2" type="text" id="first" maxlength="4" />
-                                            <input class="text-center form-control me-2" type="text" id="second" maxlength="4" />
-                                            <input class="text-center form-control me-2" type="text" id="third" maxlength="4" />
-                                            <input class="text-center form-control me-2" type="text" id="fourth" maxlength="4" />
+                                            <input type="text" class="form-control text-center" id="input-chNumber1" v-model="cardholder.cardNumber.number1" maxlength="4" required="required" @input="checkCardNumberInput(1, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
+                                            <input type="text" class="form-control text-center" id="input-chNumber2" v-model="cardholder.cardNumber.number2" maxlength="4" required="required" @input="checkCardNumberInput(2, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
+                                            <input type="text" class="form-control text-center" id="input-chNumber3" v-model="cardholder.cardNumber.number3" maxlength="4" required="required" @input="checkCardNumberInput(3, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
+                                            <input type="text" class="form-control text-center" id="input-chNumber4" v-model="cardholder.cardNumber.number4" maxlength="4" required="required" @keypress="checkIsNumber(event)" />
                                         </div>
                                     </div>
                                     <p class="info mb-3">Numbers must contain 16 digits</p>
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-lg-3 col-12">
-                                        <label class="form-label">Exp Date</label>
+                                        <label class="form-label" for="input-chExpiryMonth">Exp Date</label>
                                         <div class="input-group align-items-center">
-                                            <input type="text" class="form-control text-center" id="expiry-date" placeholder="00/00" required>
+                                            <input type="text" class="form-control text-center" id="input-chExpiryMonth" v-model="cardholder.expiry.month" placeholder="00" maxlength="2" required="required" /> <span class="mx-2">/</span>
+                                            <input type="text" class="form-control text-center" id="input-chExpiryYear" v-model="cardholder.expiry.year" placeholder="00" maxlength="2" required="required" />
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-12">
-                                        <label class="form-label">CVC</label>
-                                        <!-- <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" class="ms-2 float-end" title="Tooltip text here"><img src="/wp-content/uploads/2022/02/question-icon.png" /></a> -->
+                                        <label class="form-label" for="input-chCVV">CVV</label>
                                         <div class="input-group align-items-center">
-                                            <input type="text" class="form-control text-center" id="cvv" placeholder="" required>
+                                            <input type="text" class="form-control text-center" id="input-chCVV" v-model="cardholder.cvv" placeholder="000" maxlength="3" required="required" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-lg-6 col-12">
-                                        <label class="form-label">Issuing Country</label>
+                                        <label class="form-label" for="select-chCountry">Issuing Country</label>
                                         <div class="input-group align-items-center">
-                                            <input type="text" class="form-control" id="full-name" placeholder="" required>
+                                            <select class="form-control form-select" id="select-chCountry" v-model="cardholder.country" data-live-search="true">
+                                                <option value="" disabled="disabled" selected="selected">Select Issuing Country</option>
+                                                <option v-for="country in countries" :value="country.value">{{ country.name }}</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-12 col-lg-6">
-                                        <button type="submit" class="pink-btn w-100">Pay</button>
-                                        <!-- <a href="thankyou.html" class="pink-btn w-100">Pay</a> -->
+                            </div>
+                            <div class="tab-pane fade" id="fpx" role="tabpanel" aria-labelledby="pills-fpx-tab">
+                                <div class="row mb-4">
+                                    <div class="col-lg-6">
+                                        <ul class="nav nav-pills listing-quickSelectBanks">
+                                            <li class="nav-item" v-for="quickSelectBank in quickSelectBanks" v-on:click="selectBank(quickSelectBank.value, event)"><div class="img-quickSelectBank"><img :src="quickSelectBank.imgSrc" alt="{{ quickSelectBank.name }}" title="{{ quickSelectBank.name }}" /></div><span>{{ quickSelectBank.name }}</span></li>
+                                        </ul>
                                     </div>
                                 </div>
+                                <div class="row mb-4">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <select class="form-control form-select" data-live-search="true" name="fpx-bank" v-model="fpxBank">
+                                                <option value="" disabled="disabled" selected="selected">Select a Bank</option>
+                                                <option v-for="fpxBank in fpxBanks" :value="fpxBank.value">{{ fpxBank.name }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <button type="submit" class="pink-btn w-100">Pay</button>
+                                <!-- <a href="thankyou.html" class="pink-btn w-100">Pay</a> -->
                             </div>
                         </div>
                     </div>
@@ -236,7 +266,8 @@
                         rounding: 0.00,
                         foreignerDeposit: 0.00,
                         total: 0.00
-                    }
+                    },
+                    addOn: null
                 },
                 deliveryInfo: {
                     name: '',
@@ -258,6 +289,185 @@
                         state: ''
                     }
                 },
+                paymentInfo: {
+                    paymentMethod: 'CREDIT_CARD', 
+                    amount: 0.00, 
+                    sst: 0.00, 
+                    totalAmount: 0.00,
+                    bankCode: '', 
+                    bankName: '', 
+                    cardNumber: '',
+                    cardType: '', 
+                    nameOnCard: '',
+                    cardCVV: '',
+                    cardExpiryMonth: '',
+                    cardExpiryYear: '', 
+                    isAutoSubscribe: false, 
+                    isSaveMyCard: false
+                }, 
+                fpxBanks: [
+                    { value: "alliance-bank", name: "Alliance Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/alliance.png" }, 
+                    { value: "bank-islam", name: "Bank Islam", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/islam.png", quickSelect: false }, 
+                    { value: "bank-muamalat", name: "Muamalat Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/muamalat.png", quickSelect: false }, 
+                    { value: "bank-rakyat", name: "Bank Rakyat", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/rakyat.png", quickSelect: false }, 
+                    { value: "bsn", name: "BSN", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/bsn.png", quickSelect: false }, 
+
+                    { value: "cimb-bank", name: "CIMB Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/cimb.png", quickSelect: true }, 
+                    { value: "hong-leong-bank", name: "Hong Leong Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/hong-leong.png", quickSelect: true }, 
+                    { value: "hsbc-bank", name: "HSBC Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/hsbc.png", quickSelect: false }, 
+                    { value: "kfh", name: "KFH", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/kfh.png", quickSelect: false }, 
+                    { value: "maybank-2e", name: "Maybank2E", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/maybank.png", quickSelect: false }, 
+
+                    { value: "maybank-2u", name: "Maybank2U", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/maybank.png", quickSelect: true }, 
+                    { value: "ocbc-bank", name: "OCBC Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/ocbc.png", quickSelect: false }, 
+                    { value: "public-bank", name: "Public Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/public.png", quickSelect: true }, 
+                    { value: "rhb-bank", name: "RHB Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/rhb.png", quickSelect: false }, 
+                    { value: "sbi-bank-a", name: "SBI Bank A", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/sbi.png", quickSelect: false }, 
+
+                    { value: "sbi-bank-b", name: "SBI Bank B", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/sbi.png", quickSelect: false }, 
+                    { value: "sbi-bank-c", name: "SBI Bank C", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/sbi.png", quickSelect: false }, 
+                    { value: "standard-chartered", name: "Standard Chartered", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/standard-chartered.png", quickSelect: false }, 
+                    { value: "uob-bank", name: "UOB Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/uob.png", quickSelect: false } 
+                ],
+                cardholder: {
+                    name: '', 
+                    cardNumber: {
+                        number1: '', 
+                        number2: '', 
+                        number3: '',
+                        number4: '' 
+                    }, 
+                    expiry: {
+                        month: '',
+                        year: ''
+                    }, 
+                    cvv: '', 
+                    country: ''
+                },
+                countries: [
+                    { "value": "Malaysia", "name": "Malaysia" }, 
+                    { "value": "Argentina", "name": "Argentina" }, 
+                    { "value": "Australia", "name": "Australia" }, 
+                    { "value": "Austria", "name": "Austria" }, 
+                    { "value": "Azerbaijan", "name": "Azerbaijan" }, 
+                    { "value": "Bahamas", "name": "Bahamas" }, 
+                    { "value": "Bahrain", "name": "Bahrain" }, 
+                    { "value": "Bangladesh", "name": "Bangladesh" }, 
+                    { "value": "Belarus", "name": "Belarus" }, 
+                    { "value": "Belgium", "name": "Belgium" }, 
+                    { "value": "Benin", "name": "Benin" }, 
+                    { "value": "Brazil", "name": "Brazil" }, 
+                    { "value": "Brunei Darussalam", "name": "Brunei Darussalam" }, 
+                    { "value": "Bulgaria", "name": "Bulgaria" }, 
+                    { "value": "Cambodia", "name": "Cambodia" }, 
+                    { "value": "Canada", "name": "Canada" }, 
+                    { "value": "Cape Verde", "name": "Cape Verde" }, 
+                    { "value": "Chad", "name": "Chad" }, 
+                    { "value": "Chile", "name": "Chile" }, 
+                    { "value": "China", "name": "China" }, 
+                    { "value": "Colombia", "name": "Colombia" }, 
+                    { "value": "Congo", "name": "Congo" }, 
+                    { "value": "Congo, Democratic Republic of the", "name": "Congo, Democratic Republic of the" }, 
+                    { "value": "Costa Rica", "name": "Costa Rica" }, 
+                    { "value": "Cote d'Ivoire", "name": "Cote d'Ivoire" }, 
+                    { "value": "Croatia", "name": "Croatia" }, 
+                    { "value": "Cyprus", "name": "Cyprus" }, 
+                    { "value": "Czech Republic", "name": "Czech Republic" }, 
+                    { "value": "Denmark", "name": "Denmark" }, 
+                    { "value": "Ecuador", "name": "Ecuador" }, 
+                    { "value": "Egypt", "name": "Egypt" }, 
+                    { "value": "El Salvador", "name": "El Salvador" }, 
+                    { "value": "Estonia", "name": "Estonia" }, 
+                    { "value": "Fiji", "name": "Fiji" }, 
+                    { "value": "Finland", "name": "Finland" }, 
+                    { "value": "France", "name": "France" }, 
+                    { "value": "French Polynesia", "name": "French Polynesia" }, 
+                    { "value": "Gabon", "name": "Gabon" }, 
+                    { "value": "Gambia", "name": "Gambia" }, 
+                    { "value": "Germany", "name": "Germany" }, 
+                    { "value": "Ghana", "name": "Ghana" }, 
+                    { "value": "Gibraltar", "name": "Gibraltar" }, 
+                    { "value": "Greece", "name": "Greece" }, 
+                    { "value": "Guam", "name": "Guam" }, 
+                    { "value": "Guatemala", "name": "Guatemala" }, 
+                    { "value": "Guinea-Bissau", "name": "Guinea-Bissau" }, 
+                    { "value": "Guyana", "name": "Guyana" }, 
+                    { "value": "Hong Kong", "name": "Hong Kong" }, 
+                    { "value": "Hungary", "name": "Hungary" }, 
+                    { "value": "Iceland", "name": "Iceland" }, 
+                    { "value": "India", "name": "India" }, 
+                    { "value": "Indonesia", "name": "Indonesia" }, 
+                    { "value": "International Airspace", "name": "International Airspace" }, 
+                    { "value": "Iran", "name": "Iran" }, 
+                    { "value": "Ireland", "name": "Ireland" }, 
+                    { "value": "Italy", "name": "Italy" }, 
+                    { "value": "Japan", "name": "Japan" }, 
+                    { "value": "Jordan", "name": "Jordan" }, 
+                    { "value": "Kazakhstan", "name": "Kazakhstan" }, 
+                    { "value": "Kenya", "name": "Kenya" }, 
+                    { "value": "Korea, Republic of", "name": "Korea, Republic of" }, 
+                    { "value": "Latvia", "name": "Latvia" }, 
+                    { "value": "Liechtenstein", "name": "Liechtenstein" }, 
+                    { "value": "Lithuania", "name": "Lithuania" }, 
+                    { "value": "Luxembourg", "name": "Luxembourg" }, 
+                    { "value": "Macau", "name": "Macau" }, 
+                    { "value": "Madagascar", "name": "Madagascar" }, 
+                    { "value": "Malawi", "name": "Malawi" }, 
+                    { "value": "Mauritius", "name": "Mauritius" }, 
+                    { "value": "Mexico", "name": "Mexico" }, 
+                    { "value": "Montenegro, Republic of", "name": "Montenegro, Republic of" }, 
+                    { "value": "Morocco", "name": "Morocco" }, 
+                    { "value": "Myanmar", "name": "Myanmar" }, 
+                    { "value": "Netherlands", "name": "Netherlands" }, 
+                    { "value": "New Zealand", "name": "New Zealand" }, 
+                    { "value": "Nicaragua", "name": "Nicaragua" }, 
+                    { "value": "Niger", "name": "Niger" }, 
+                    { "value": "Nigeria", "name": "Nigeria" }, 
+                    { "value": "Norway", "name": "Norway" }, 
+                    { "value": "Oman", "name": "Oman" }, 
+                    { "value": "Pakistan", "name": "Pakistan" }, 
+                    { "value": "Panama", "name": "Panama" }, 
+                    { "value": "Papua New Guinea", "name": "Papua New Guinea" }, 
+                    { "value": "Paraguay", "name": "Paraguay" }, 
+                    { "value": "Peru", "name": "Peru" }, 
+                    { "value": "Philippines", "name": "Philippines" }, 
+                    { "value": "Poland", "name": "Poland" }, 
+                    { "value": "Puerto Rico", "name": "Puerto Rico" }, 
+                    { "value": "Qatar", "name": "Qatar" }, 
+                    { "value": "Romania", "name": "Romania" }, 
+                    { "value": "Russian Federation", "name": "Russian Federation" }, 
+                    { "value": "Rwanda", "name": "Rwanda" }, 
+                    { "value": "Samoa", "name": "Samoa" }, 
+                    { "value": "Saudi Arabia", "name": "Saudi Arabia" }, 
+                    { "value": "Seychelles", "name": "Seychelles" }, 
+                    { "value": "Singapore", "name": "Singapore" }, 
+                    { "value": "Slovakia (Slovak Republic)", "name": "Slovakia (Slovak Republic)" }, 
+                    { "value": "Slovenia", "name": "Slovenia" }, 
+                    { "value": "South Africa", "name": "South Africa" }, 
+                    { "value": "Spain", "name": "Spain" }, 
+                    { "value": "Sri Lanka", "name": "Sri Lanka" }, 
+                    { "value": "Suriname", "name": "Suriname" }, 
+                    { "value": "Swaziland", "name": "Swaziland" }, 
+                    { "value": "Sweden", "name": "Sweden" }, 
+                    { "value": "Switzerland", "name": "Switzerland" }, 
+                    { "value": "Taiwan", "name": "Taiwan" }, 
+                    { "value": "Tanzania, United Republic of", "name": "Tanzania, United Republic of" }, 
+                    { "value": "Thailand", "name": "Thailand" }, 
+                    { "value": "Tonga", "name": "Tonga" }, 
+                    { "value": "Trinidad and Tobago", "name": "Trinidad and Tobago" }, 
+                    { "value": "Turkey", "name": "Turkey" }, 
+                    { "value": "Uganda", "name": "Uganda" }, 
+                    { "value": "Ukraine", "name": "Ukraine" }, 
+                    { "value": "United Arab Emirates", "name": "United Arab Emirates" }, 
+                    { "value": "United Kingdom", "name": "United Kingdom" }, 
+                    { "value": "United States", "name": "United States" }, 
+                    { "value": "Uruguay", "name": "Uruguay" }, 
+                    { "value": "Vanuatu", "name": "Vanuatu" }, 
+                    { "value": "Venezuela", "name": "Venezuela" }, 
+                    { "value": "Vietnam", "name": "Vietnam" }, 
+                    { "value": "Zambia", "name": "Zambia"}
+                ],
+                fpxBank: ''
             },
             mounted: function() {},
             created: function() {
@@ -266,12 +476,24 @@
                     self.pageInit();
                 }, 500);
             },
+            computed: {
+                quickSelectBanks: function() {
+                    return this.fpxBanks.filter(function(bank) {
+                        return bank.quickSelect
+                    })
+                } 
+            }, 
             methods: {
                 pageInit: function() {
                     var self = this;
                     if (ywos.validateSession(self.currentStep)) {
                         self.pageValid = true;
                         self.updateData();
+
+                        setTimeout(function() {
+                            $('.form-select').selectpicker('refresh');
+                        }, 100);
+
                         toggleOverlay(false);
                     } else {
                         ywos.redirectToPage('cart');
@@ -281,15 +503,40 @@
                     var self = this;
                     self.orderSummary = ywos.lsData.meta.orderSummary;
                     self.deliveryInfo = ywos.lsData.meta.deliveryInfo;
-                    self.slicedMobileNumber = self.deliveryInfo.mobileNumber.slice(1);
-
-                    var arrNotes = self.orderSummary.plan.notes.split(',');
-                    self.packageInfos = arrNotes.sort(function(a, b) {
-                        return a.length - b.length;
-                    });
-                }, 
+                },
                 paymentSubmit: function() {
                     return
+                },
+                selectBank: function(bank, event) {
+                    var self = this;
+                    $('.listing-quickSelectBanks .nav-item').removeClass('selected');
+                    $(event.currentTarget).addClass('selected');
+                    self.fpxBank = bank;
+                    setTimeout(function() {
+                        $('.form-select').selectpicker('refresh');
+                    }, 100);
+                }, 
+                checkIsNumber: function(event, inputStep) {
+                    event = (event) ? event : window.event;
+                    var charCode = (event.which) ? event.which : event.keyCode;
+                    if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                        event.preventDefault();
+                    } else {
+                        return true;
+                    }
+                },
+                checkCardNumberInput: function(inputStep, event) {
+                    var self = this;
+                    var objInd = 'number' + inputStep;
+                    var inputVal = self.cardholder.cardNumber[objInd];
+
+                    if (inputVal.length > 3 && inputStep < 4) {
+                        var nextStep = inputStep + 1;
+                        $('#input-chNumber' + nextStep).focus();
+                    }
+                },
+                selectPaymentMethod: function(paymentMethod) {
+                    this.paymentInfo.paymentMethod = paymentMethod;
                 }
             }
         });

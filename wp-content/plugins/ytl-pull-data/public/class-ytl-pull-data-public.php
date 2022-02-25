@@ -186,6 +186,15 @@ class Ytl_Pull_Data_Public
 	private $path_verify_referral_code;
 
 	/**
+	 * The api path to record order with payment and addons.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $path_create_yos_order_and_payment		The api path to record order with payment and addons.
+	 */
+	private $path_create_yos_order_and_payment;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -210,6 +219,7 @@ class Ytl_Pull_Data_Public
 		$this->path_validate_guest_login 	= '/mobileyos-dev/mobile/ws/v1/json/validateGuestLogin';
 		$this->path_validate_customer_eligibilities	= '/mobileyos-dev/mobile/ws/v1/json/validateCustomerEligibilities';
 		$this->path_verify_referral_code 	= '/mobileyos-dev/mobile/ws/v1/json/verifyReferralCode';
+		$this->path_create_yos_order_and_payment = '/mobileyos-dev/mobile/ws/v1/json/createYOSOrderAndPaymentWithAddonAndReloads';
 
 		$ytlpd_options				= get_option($this->prefix . "settings");
 		$this->api_domain 			= (!empty($ytlpd_options['ytlpd_api_domain_url'])) ? $ytlpd_options['ytlpd_api_domain_url'] : '';
@@ -857,5 +867,162 @@ class Ytl_Pull_Data_Public
 			return new WP_Error('error_verify_referral_code', "Parameters not complete to verify the referral code.", array('status' => 400));
 		}
 		return new WP_Error('error_verify_referral_code', "There's an error in verifying the referral code.", array('status' => 400));
+	}
+
+	public function ra_reg_create_yos_order()
+	{
+		register_rest_route('ywos/v1', 'create_yos_order', array(
+			'methods'	=> 'POST', 
+			'callback' 	=> array($this, 'create_yos_order')
+		));
+	}
+
+	public function create_yos_order(WP_REST_Request $order_info) 
+	{
+		return $this->ca_create_yos_order($order_info);
+	}
+
+	public function ca_create_yos_order($order_info = []) 
+	{
+		$phone_number 	= $this->get_request_input($order_info, 'phone_number');
+		$customer_name	= $this->get_request_input($order_info, 'customer_name');
+		$email 			= $this->get_request_input($order_info, 'email');
+		$login_yes_id 	= $this->get_request_input($order_info, 'login_yes_id');
+		$security_type	= $this->get_request_input($order_info, 'security_type');
+		$security_id 	= $this->get_request_input($order_info, 'security_id');
+		$school_name 	= $this->get_request_input($order_info, 'school_name');
+		$school_code 	= $this->get_request_input($order_info, 'school_code');
+		$university_name= $this->get_request_input($order_info, 'university_name');
+		$dealer_code 	= $this->get_request_input($order_info, 'dealer_code');
+		$dealer_login_id= $this->get_request_input($order_info, 'dealer_login_id');
+
+		$plan_name 		= $this->get_request_input($order_info, 'plan_name');
+		$plan_type 		= $this->get_request_input($order_info, 'plan_type');
+		$product_bundle_id = $this->get_request_input($order_info, 'product_bundle_id');
+		$referral_code 	= $this->get_request_input($order_info, 'referral_code');
+		$addon_name 	= $this->get_request_input($order_info, 'addon_name');
+
+		$address_line 	= $this->get_request_input($order_info, 'address_line');
+		$city			= $this->get_request_input($order_info, 'city');
+		$city_code 		= $this->get_request_input($order_info, 'city_code');
+		$postal_code 	= $this->get_request_input($order_info, 'postal_code');
+		$state 			= $this->get_request_input($order_info, 'state');
+		$state_code 	= $this->get_request_input($order_info, 'state_code');
+		$country 		= $this->get_request_input($order_info, 'country');
+		
+		$payment_method	= $this->get_request_input($order_info, 'payment_method');
+		$process_name 	= $this->get_request_input($order_info, 'process_name');
+		$amount 		= $this->get_request_input($order_info, 'amount');
+		$amount_sst 	= $this->get_request_input($order_info, 'amount_sst');
+		$total_amount 	= $this->get_request_input($order_info, 'total_amount');
+		$bank_code 		= $this->get_request_input($order_info, 'bank_code');
+		$bank_name 		= $this->get_request_input($order_info, 'bank_name');
+		$card_number 	= $this->get_request_input($order_info, 'card_number');
+		$card_type 		= $this->get_request_input($order_info, 'card_type');
+		$name_on_card 	= $this->get_request_input($order_info, 'name_on_card');
+		$card_cvv 		= $this->get_request_input($order_info, 'card_cvv');
+		$card_expiry_month 	= $this->get_request_input($order_info, 'card_expiry_month');
+		$card_expiry_year 	= $this->get_request_input($order_info, 'card_expiry_year');
+
+		$session_id 	= $this->ca_generate_auth_token(true);
+
+		if (
+			$phone_number != null && $customer_name != null && $email != null && $security_type != null && $security_id != null && 
+			$plan_name != null && $plan_type != null && $product_bundle_id != null && 
+			$address_line != null && $city != null && $city_code != null && $postal_code != null && $state != null && $state_code != null && $country != null &&
+			$payment_method != null && $process_name != null && $amount != null && $amount_sst != null && $total_amount != null && $total_amount != null && 
+			$bank_code != null && $bank_name != null && 
+			$card_number != null && $card_type != null && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null && 
+			isset($this->api_domain) && isset($this->api_request_id) && $session_id
+		) {
+			$params 	= [
+				'eKYCCustomerDetail' 	=> [
+					'alternatePhoneNumber' 	=> $phone_number, 
+					'customerFullName' 		=> $customer_name, 
+					'email' 				=> $email, 
+					'loginYesId' 			=> $login_yes_id, 
+					'planName' 				=> $plan_name, 
+					'planType' 				=> $plan_type, 
+					'securityType' 			=> $security_type, 
+					'securityId' 			=> $security_id, 
+					'schoolName' 			=> $school_name, 
+					'schoolCode' 			=> $school_code, 
+					'universityName' 		=> $university_name, 
+					'dealerCode' 			=> $dealer_code, 
+					'dealerLoginId' 		=> $dealer_login_id, 
+					'supportingDocUniqueId'	=> 1
+				], 
+
+				'orderDetail' 			=> [
+					'planName' 			=> $plan_name, 
+					'planType' 			=> $plan_type, 
+					'productBundleId' 	=> $product_bundle_id, 
+					'referralCode' 		=> $referral_code, 
+					'addonName' 		=> $addon_name
+				], 
+
+				'deliveryAddress' 		=> [
+					'addressLine' 		=> $address_line, 
+					'city' 				=> $city, 
+					'cityCode' 			=> $city_code, 
+					'postalCode' 		=> $postal_code, 
+					'state' 			=> $state, 
+					'stateCode' 		=> $state_code, 
+					'country' 			=> $country 
+				], 
+				
+				'paymentInfo' 			=> [
+					'paymentMethod' 	=> $payment_method, 
+					'processName' 		=> $process_name, 
+					'amount' 			=> $amount, 
+					'sst' 				=> $amount_sst, 
+					'totalAmount' 		=> $total_amount, 
+					'bankCode' 			=> $bank_code, 
+					'bankName' 			=> $bank_name, 
+					'cardNumber' 		=> $card_number, 
+					'cardType' 			=> $card_type, 
+					'nameOnCard' 		=> $name_on_card, 
+					'cardCVV' 			=> $card_cvv, 
+					'cardExpiryMonth' 	=> $card_expiry_month, 
+					'cardExpiryYear' 	=> $card_expiry_year, 
+					'isAutoSubscribe' 	=> false, 
+					'isSavedCard' 		=> false 
+				], 
+
+				'appVersion' 			=> $this->api_app_version,
+				'locale' 				=> $this->api_locale,
+				'source' 				=> 'MYOS',
+				'requestId' 			=> $this->api_request_id,
+				'sessionId' 			=> $session_id
+			];
+			$args 		= [
+				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
+				'body'          => json_encode($params),
+				'method'        => 'POST',
+				'data_format'   => 'body',
+				'timeout'     	=> $this->api_timeout
+			];
+			$api_url 	= $this->api_domain . $this->path_create_yos_order_and_payment;
+			$request 	= wp_remote_post($api_url, $args);
+			$data 		= json_decode($request['body']);
+
+			if ($data->responseCode > -1) {
+				$data->sessionId = $session_id;
+
+				$response 	= new WP_REST_Response($data);
+				$response->set_status(200);
+				return $response;
+			} else if ($data->displayErrorMessage) {
+				return new WP_Error('error_creating_yos_order', $data->displayErrorMessage, array('status' => 400));
+			}
+		} else {
+			return new WP_Error('error_creating_yos_order', "Parameters not complete to create YOS order.", array('status' => 400));
+		}
+		return new WP_Error('error_creating_yos_order', "There's an error in creating YOS order.", array('status' => 400));
+	}
+
+	public function get_request_input($order_info = [], $input_name = '') 
+	{
+		return (isset($order_info[$input_name]) && !empty(trim($order_info[$input_name]))) ? $order_info[$input_name] : null;
 	}
 }
