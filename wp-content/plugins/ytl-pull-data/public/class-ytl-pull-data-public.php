@@ -186,6 +186,15 @@ class Ytl_Pull_Data_Public
 	private $path_verify_referral_code;
 
 	/**
+	 * The api path to get all FPX bank list.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $path_get_fpx_bank_list  			The path to get all FPX bank list
+	 */
+	private $path_get_fpx_bank_list;
+
+	/**
 	 * The api path to record order with payment and addons.
 	 *
 	 * @since    1.0.0
@@ -219,6 +228,7 @@ class Ytl_Pull_Data_Public
 		$this->path_validate_guest_login 	= '/mobileyos-dev/mobile/ws/v1/json/validateGuestLogin';
 		$this->path_validate_customer_eligibilities	= '/mobileyos-dev/mobile/ws/v1/json/validateCustomerEligibilities';
 		$this->path_verify_referral_code 	= '/mobileyos-dev/mobile/ws/v1/json/verifyReferralCode';
+		$this->path_get_fpx_bank_list 		= '/mobileyos-dev/mobile/ws/v1/json/getFpxBankList';
 		$this->path_create_yos_order_and_payment = '/mobileyos-dev/mobile/ws/v1/json/createYOSOrderAndPaymentWithAddonAndReloads';
 
 		$ytlpd_options				= get_option($this->prefix . "settings");
@@ -288,6 +298,8 @@ class Ytl_Pull_Data_Public
 		$this->ra_reg_guest_login();
 		$this->ra_reg_validate_customer_eligibilities();
 		$this->ra_reg_verify_referral_code();
+		$this->ra_reg_get_fpx_bank_list();
+		$this->ra_reg_create_yos_order();
 	}
 
 	public function ra_reg_add_to_cart()
@@ -618,9 +630,6 @@ class Ytl_Pull_Data_Public
 			$data 		= json_decode($request['body']);
 			if ($data->responseCode > -1) {
 				$data->sessionId = $session_id;
-
-
-
 				$response 	= new WP_REST_Response($data);
 				$response->set_status(200);
 				return $response;
@@ -869,9 +878,51 @@ class Ytl_Pull_Data_Public
 		return new WP_Error('error_verify_referral_code', "There's an error in verifying the referral code.", array('status' => 400));
 	}
 
+	public function ra_reg_get_fpx_bank_list()
+	{
+		register_rest_route('ywos/v1', 'get-fpx-bank-list', array(
+			'methods'	=> 'GET', 
+			'callback' 	=> array($this, 'get_fpx_bank_list')
+		));
+	}
+
+	public function get_fpx_bank_list() 
+	{
+		return $this->ca_get_fpx_bank_list();
+	}
+
+	public function ca_get_fpx_bank_list() 
+	{
+		$session_id 	= $this->ca_generate_auth_token(true);
+		if (isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
+			$params = ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'sessionId' => $session_id];
+			$args 	= [
+				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
+				'body'          => json_encode($params),
+				'method'        => 'POST',
+				'data_format'   => 'body',
+				'timeout'     	=> $this->api_timeout
+			];
+			$api_url	= $this->api_domain . $this->path_get_fpx_bank_list;
+			$request 	= wp_remote_post($api_url, $args);
+			$data 		= json_decode($request['body']);
+			if ($data->responseCode > -1) {
+				$data->sessionId = $session_id;
+				$response 	= new WP_REST_Response($data);
+				$response->set_status(200);
+				return $response;
+			} else {
+				return new WP_Error('error_getting_fpx_bank_list', "There's an error in retrieving the bank list.", array('status' => 400));
+			}
+		} else {
+			return new WP_Error('error_getting_fpx_bank_list', "Parameters not complete to retrieve cities.", array('status' => 400));
+		}
+		return new WP_Error('error_getting_fpx_bank_list', "There's an error in retrieving the bank list.", array('status' => 400));
+	}
+
 	public function ra_reg_create_yos_order()
 	{
-		register_rest_route('ywos/v1', 'create_yos_order', array(
+		register_rest_route('ywos/v1', 'create-yos-order', array(
 			'methods'	=> 'POST', 
 			'callback' 	=> array($this, 'create_yos_order')
 		));

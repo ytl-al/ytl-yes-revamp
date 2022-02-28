@@ -146,87 +146,86 @@
                         <h2>Select payment</h2>
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="pills-creditcard-tab" v-on:click="selectPaymentMethod('CREDIT_CARD')" data-bs-toggle="pill" data-bs-target="#creditcard" type="button" role="tab" aria-controls="pills-creditcard" aria-selected="true"><img src="/wp-content/uploads/2022/02/creditcard.png" alt=""></button>
+                                <button type="button" class="nav-link" id="nav-creditcard" role="tab" data-paymentnav="CREDIT_CARD" data-bs-toggle="pill" data-bs-target="#tab-creditcard" aria-controls="tab-creditcard" aria-selected="false" v-on:click="selectPaymentMethod('CREDIT_CARD')">
+                                    <img src="/wp-content/uploads/2022/02/creditcard.png" />
+                                </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="pills-fpx-tab" v-on:click="selectPaymentMethod('FPX')" data-bs-toggle="pill" data-bs-target="#fpx" type="button" role="tab" aria-controls="pills-fpx" aria-selected="false"><img src="/wp-content/uploads/2022/02/fpx-logo.png" alt=""></button>
-                            </li>
-                            <li class="nav-item d-none" role="presentation">
-                                <button class="nav-link" id="pills-grabpay-tab" data-bs-toggle="pill" data-bs-target="#grabpay" type="button" role="tab" aria-controls="pills-grabpay" aria-selected="false"><img src="/wp-content/uploads/2022/02/grabpay.png" alt=""></button>
-                            </li>
-                            <li class="nav-item d-none" role="presentation">
-                                <button class="nav-link" id="pills-boost-tab" data-bs-toggle="pill" data-bs-target="#boost" type="button" role="tab" aria-controls="pills-boost" aria-selected="false"><img src="/wp-content/uploads/2022/02/boost.png" alt=""></button>
-                            </li>
-                            <li class="nav-item d-none" role="presentation">
-                                <button class="nav-link" id="pills-touchgo-tab" data-bs-toggle="pill" data-bs-target="#touchgo" type="button" role="tab" aria-controls="pills-touchgo" aria-selected="false"><img src="/wp-content/uploads/2022/02/touchgo.png" alt=""></button>
+                                <button type="button" class="nav-link" id="nav-fpx" role="tab" data-paymentnav="FPX" data-bs-toggle="pill" data-bs-target="#tab-fpx" aria-controls="tab-fpx" aria-selected="false" v-on:click="selectPaymentMethod('FPX')">
+                                    <img src="/wp-content/uploads/2022/02/fpx-logo.png" />
+                                </button>
                             </li>
                         </ul>
                         <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="creditcard" role="tabpanel" aria-labelledby="pills-creditcard-tab">
-                                <div class="row mb-4">
-                                    <div class="col-lg-6 col-12">
-                                        <label class="form-label" for="input-chName">Cardholder Name</label>
-                                        <div class="input-group align-items-center">
-                                            <input type="text" class="form-control" id="input-chName" value="" v-model="cardholder.name" required="required" />
+                            <div class="tab-pane fade" id="tab-creditcard" role="tabpanel" aria-labelledby="nav-creditcard">
+                                <div class="tab-paneContent">
+                                    <div class="row mb-4">
+                                        <div class="col-lg-6 col-12">
+                                            <label class="form-label" for="input-chName">Cardholder Name</label>
+                                            <div class="input-group align-items-center">
+                                                <input type="text" class="form-control" id="input-chName" v-model="paymentInfo.nameOnCard" @input="watchAllowSubmit" placeholder="John Doe" required="required" />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row mb-3 align-items-center g-2">
-                                    <div class="col-12">
-                                        <label class="form-label" for="input-chNumber1">Card Number</label>
+                                    <div class="row mb-3 align-items-center g-2">
+                                        <div class="col-12">
+                                            <label class="form-label" for="input-chNumber1">Card Number</label>
+                                        </div>
+                                        <div class="col-lg-6 col-12 mb-1">
+                                            <div class="input-group align-items-center">
+                                                <input type="text" class="form-control text-center" id="input-chNumber1" v-model="cardholder.number1" placeholder="xxxx" maxlength="4" required="required" @input="checkCardNumberInput(1, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
+                                                <input type="text" class="form-control text-center" id="input-chNumber2" v-model="cardholder.number2" placeholder="xxxx" maxlength="4" required="required" @input="checkCardNumberInput(2, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
+                                                <input type="text" class="form-control text-center" id="input-chNumber3" v-model="cardholder.number3" placeholder="xxxx" maxlength="4" required="required" @input="checkCardNumberInput(3, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
+                                                <input type="text" class="form-control text-center" id="input-chNumber4" v-model="cardholder.number4" placeholder="xxxx" maxlength="4" required="required" @input="checkCardNumberInput(4, event)" @keypress="checkIsNumber(event)" />
+                                            </div>
+                                        </div>
+                                        <p class="info mb-3">Numbers must contain 16 digits</p>
                                     </div>
-                                    <div class="col-lg-6 col-12 mb-1">
-                                        <div class="input-group align-items-center">
-                                            <input type="text" class="form-control text-center" id="input-chNumber1" v-model="cardholder.cardNumber.number1" maxlength="4" required="required" @input="checkCardNumberInput(1, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
-                                            <input type="text" class="form-control text-center" id="input-chNumber2" v-model="cardholder.cardNumber.number2" maxlength="4" required="required" @input="checkCardNumberInput(2, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
-                                            <input type="text" class="form-control text-center" id="input-chNumber3" v-model="cardholder.cardNumber.number3" maxlength="4" required="required" @input="checkCardNumberInput(3, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
-                                            <input type="text" class="form-control text-center" id="input-chNumber4" v-model="cardholder.cardNumber.number4" maxlength="4" required="required" @keypress="checkIsNumber(event)" />
+                                    <div class="row mb-4">
+                                        <div class="col-lg-3 col-12">
+                                            <label class="form-label" for="input-chExpiryMonth">Exp Date</label>
+                                            <div class="input-group align-items-center">
+                                                <input type="text" class="form-control text-center" id="input-chExpiryMonth" v-model="paymentInfo.cardExpiryMonth" @input="watchAllowSubmit" placeholder="00" maxlength="2" required="required" /> <span class="mx-2">/</span>
+                                                <input type="text" class="form-control text-center" id="input-chExpiryYear" v-model="paymentInfo.cardExpiryYear" @input="watchAllowSubmit" placeholder="00" maxlength="2" required="required" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-12">
+                                            <label class="form-label" for="input-chCVV">CVV</label>
+                                            <div class="input-group align-items-center">
+                                                <input type="password" class="form-control text-center" id="input-chCVV" v-model="paymentInfo.cardCVV" @input="watchAllowSubmit" placeholder="***" maxlength="3" required="required" />
+                                            </div>
                                         </div>
                                     </div>
-                                    <p class="info mb-3">Numbers must contain 16 digits</p>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-lg-3 col-12">
-                                        <label class="form-label" for="input-chExpiryMonth">Exp Date</label>
-                                        <div class="input-group align-items-center">
-                                            <input type="text" class="form-control text-center" id="input-chExpiryMonth" v-model="cardholder.expiry.month" placeholder="00" maxlength="2" required="required" /> <span class="mx-2">/</span>
-                                            <input type="text" class="form-control text-center" id="input-chExpiryYear" v-model="cardholder.expiry.year" placeholder="00" maxlength="2" required="required" />
+                                    <!-- <div class="row mb-4">
+                                        <div class="col-lg-6 col-12">
+                                            <label class="form-label" for="select-chCountry">Issuing Country</label>
+                                            <div class="input-group align-items-center">
+                                                <select class="form-control form-select" id="select-chCountry" v-model="cardholder.country" data-live-search="true">
+                                                    <option value="" disabled="disabled" selected="selected">Select Issuing Country</option>
+                                                    <option v-for="country in countries" :value="country.value">{{ country.name }}</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-3 col-12">
-                                        <label class="form-label" for="input-chCVV">CVV</label>
-                                        <div class="input-group align-items-center">
-                                            <input type="text" class="form-control text-center" id="input-chCVV" v-model="cardholder.cvv" placeholder="000" maxlength="3" required="required" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-lg-6 col-12">
-                                        <label class="form-label" for="select-chCountry">Issuing Country</label>
-                                        <div class="input-group align-items-center">
-                                            <select class="form-control form-select" id="select-chCountry" v-model="cardholder.country" data-live-search="true">
-                                                <option value="" disabled="disabled" selected="selected">Select Issuing Country</option>
-                                                <option v-for="country in countries" :value="country.value">{{ country.name }}</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="fpx" role="tabpanel" aria-labelledby="pills-fpx-tab">
-                                <div class="row mb-4">
-                                    <div class="col-lg-6">
-                                        <ul class="nav nav-pills listing-quickSelectBanks">
-                                            <li class="nav-item" v-for="quickSelectBank in quickSelectBanks" v-on:click="selectBank(quickSelectBank.value, event)"><div class="img-quickSelectBank"><img :src="quickSelectBank.imgSrc" alt="{{ quickSelectBank.name }}" title="{{ quickSelectBank.name }}" /></div><span>{{ quickSelectBank.name }}</span></li>
-                                        </ul>
+                            <div class="tab-pane fade" id="tab-fpx" role="tabpanel" aria-labelledby="nav-fpx">
+                                <div class="tab-paneContent">
+                                    <div class="row mb-4">
+                                        <div class="col-lg-6">
+                                            <ul class="nav nav-pills listing-quickSelectBanks">
+                                                <li class="nav-item" v-for="quickSelectBank in quickSelectBanks" v-on:click="selectBank(quickSelectBank.value, event)"><div class="img-quickSelectBank"><img :src="quickSelectBank.imgSrc" alt="{{ quickSelectBank.name }}" title="{{ quickSelectBank.name }}" /></div><span>{{ quickSelectBank.name }}</span></li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row mb-4">
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <select class="form-control form-select" data-live-search="true" name="fpx-bank" v-model="fpxBank">
-                                                <option value="" disabled="disabled" selected="selected">Select a Bank</option>
-                                                <option v-for="fpxBank in fpxBanks" :value="fpxBank.value">{{ fpxBank.name }}</option>
-                                            </select>
+                                    <div class="row mb-4">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <select class="form-control form-select" id="select-bank" data-live-search="true" name="fpx-bank" v-model="paymentInfo.bankCode" @change="watchBankSelect">
+                                                    <option value="" disabled="disabled" selected="selected">Select a Bank</option>
+                                                    <option v-for="fpxBank in fpxBankList" :value="fpxBank.bankCode" :disabled="!fpxBank.available" :data-bankname="fpxBank.bankName">{{ fpxBank.bankName }}</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -235,8 +234,7 @@
 
                         <div class="row">
                             <div class="col-12 col-lg-6">
-                                <button type="submit" class="pink-btn w-100">Pay</button>
-                                <!-- <a href="thankyou.html" class="pink-btn w-100">Pay</a> -->
+                                <button type="submit" class="pink-btn w-100" :disabled="!allowSubmit">Pay</button>
                             </div>
                         </div>
                     </div>
@@ -248,6 +246,7 @@
 </div>
 <!-- Vue Wrapper ENDS -->
 
+
 <script type="text/javascript">
     $(document).ready(function() {
         toggleOverlay();
@@ -257,10 +256,13 @@
             data: {
                 currentStep: 4,
                 pageValid: false,
+                allowSubmit: false,
                 orderSummary: {
                     plan: {},
                     due: {
+                        amount: 0.00,
                         addOns: 0.00,
+                        planAmount: 0.00,
                         taxesSST: 0.00,
                         shippingFees: 0.00,
                         rounding: 0.00,
@@ -291,6 +293,7 @@
                 },
                 paymentInfo: {
                     paymentMethod: 'CREDIT_CARD', 
+                    processName: 'NEW_YOS_ORDER', 
                     amount: 0.00, 
                     sst: 0.00, 
                     totalAmount: 0.00,
@@ -304,7 +307,7 @@
                     cardExpiryYear: '', 
                     isAutoSubscribe: false, 
                     isSaveMyCard: false
-                }, 
+                },
                 fpxBanks: [
                     { value: "alliance-bank", name: "Alliance Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/alliance.png" }, 
                     { value: "bank-islam", name: "Bank Islam", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/islam.png", quickSelect: false }, 
@@ -312,15 +315,15 @@
                     { value: "bank-rakyat", name: "Bank Rakyat", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/rakyat.png", quickSelect: false }, 
                     { value: "bsn", name: "BSN", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/bsn.png", quickSelect: false }, 
 
-                    { value: "cimb-bank", name: "CIMB Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/cimb.png", quickSelect: true }, 
-                    { value: "hong-leong-bank", name: "Hong Leong Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/hong-leong.png", quickSelect: true }, 
+                    { value: "BCBB0235", name: "CIMB Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/cimb.png", quickSelect: true }, 
+                    { value: "HLB0224", name: "Hong Leong Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/hong-leong.png", quickSelect: true }, 
                     { value: "hsbc-bank", name: "HSBC Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/hsbc.png", quickSelect: false }, 
                     { value: "kfh", name: "KFH", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/kfh.png", quickSelect: false }, 
                     { value: "maybank-2e", name: "Maybank2E", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/maybank.png", quickSelect: false }, 
 
-                    { value: "maybank-2u", name: "Maybank2U", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/maybank.png", quickSelect: true }, 
+                    { value: "MB2U0227", name: "Maybank2U", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/maybank.png", quickSelect: true }, 
                     { value: "ocbc-bank", name: "OCBC Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/ocbc.png", quickSelect: false }, 
-                    { value: "public-bank", name: "Public Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/public.png", quickSelect: true }, 
+                    { value: "PBB0233", name: "Public Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/public.png", quickSelect: true }, 
                     { value: "rhb-bank", name: "RHB Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/rhb.png", quickSelect: false }, 
                     { value: "sbi-bank-a", name: "SBI Bank A", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/sbi.png", quickSelect: false }, 
 
@@ -329,20 +332,12 @@
                     { value: "standard-chartered", name: "Standard Chartered", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/standard-chartered.png", quickSelect: false }, 
                     { value: "uob-bank", name: "UOB Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/uob.png", quickSelect: false } 
                 ],
+                fpxBankList: [],
                 cardholder: {
-                    name: '', 
-                    cardNumber: {
-                        number1: '', 
-                        number2: '', 
-                        number3: '',
-                        number4: '' 
-                    }, 
-                    expiry: {
-                        month: '',
-                        year: ''
-                    }, 
-                    cvv: '', 
-                    country: ''
+                    number1: '', 
+                    number2: '', 
+                    number3: '',
+                    number4: '' 
                 },
                 countries: [
                     { "value": "Malaysia", "name": "Malaysia" }, 
@@ -475,6 +470,7 @@
                 setTimeout(function() {
                     self.pageInit();
                 }, 500);
+                self.initTabs();
             },
             computed: {
                 quickSelectBanks: function() {
@@ -488,32 +484,111 @@
                     var self = this;
                     if (ywos.validateSession(self.currentStep)) {
                         self.pageValid = true;
+                        self.ajaxGetFPXBankList();
                         self.updateData();
-
-                        setTimeout(function() {
-                            $('.form-select').selectpicker('refresh');
-                        }, 100);
-
-                        toggleOverlay(false);
                     } else {
                         ywos.redirectToPage('cart');
                     }
+                },
+                ajaxGetFPXBankList: function() {
+                    var self = this;
+                    axios.get(apiEndpointURL + '/get-fpx-bank-list')
+                        .then((response) => {
+                            var data = response.data;
+                            if (!data.fpxServiceDown) {
+                                var fpxBankTypeDetailList = data.fpxBankTypeDetailList;
+                                var fpxBankPersonal = fpxBankTypeDetailList.filter(list => {
+                                    return list.bankType == 'PERSONALBANKLIST';
+                                })
+                                if (fpxBankPersonal) {
+                                    fpxBankPersonal = fpxBankPersonal[0];
+                                    var fpxBankList = fpxBankPersonal.fpxDataList;
+                                    for (var i = 0; i < fpxBankList.length; i++) {
+                                        var bankName = fpxBankList[i].bankName;
+                                        fpxBankList[i].bankName = bankName.replace('(Offline)', ' (Offline)');
+                                    }
+                                    self.fpxBankList = fpxBankList;
+                                }
+                            }
+                        })
+                        .catch((error) => {
+                            // console.log(error);
+                        })
+                        .finally(() => {
+                            setTimeout(function() {
+                                $('.form-select').selectpicker('refresh');
+                                toggleOverlay(false);
+                            }, 500);
+                        });
                 },
                 updateData: function() {
                     var self = this;
                     self.orderSummary = ywos.lsData.meta.orderSummary;
                     self.deliveryInfo = ywos.lsData.meta.deliveryInfo;
+
+                    self.paymentInfo.amount = self.orderSummary.due.amount;
+                    self.paymentInfo.sst = self.orderSummary.due.taxesSST;
+                    self.paymentInfo.totalAmount = self.orderSummary.due.total;
                 },
-                paymentSubmit: function() {
-                    return
+                ajaxCreateYOSOrder: function() {
+                    var self = this;
+                    var params = {
+                        'phone_number'  : self.deliveryInfo.msisdn, 
+                        'customer_name' : self.deliveryInfo.name, 
+                        'email'         : self.deliveryInfo.email,
+                        'login_yes_id'  : '', 
+                        'security_type' : self.deliveryInfo.securityType, 
+                        'security_id'   : self.deliveryInfo.securityId,
+                        'school_name'   : '', 
+                        'school_code'   : '', 
+                        'university_name'   : '', 
+                        'dealer_code'   : '', 
+                        'dealer_login_id'   : '', 
+
+                        'plan_name'     : self.orderSummary.plan.planName, 
+                        'plan_type'     : self.orderSummary.plan.planType, 
+                        'product_bundle_id' : self.orderSummary.plan.mobilePlanId, 
+                        'referral_code' : self.deliveryInfo.referralCode, 
+                        'addon_name'    : (self.orderSummary.addOn && self.orderSummary.addOn.addonName) ? self.orderSummary.addOn.addonName : '', 
+
+                        'address_line'  : self.deliveryInfo.sanitize.address + ' ' + self.deliveryInfo.sanitize.addressMore, 
+                        'city'          : self.deliveryInfo.city, 
+                        'city_code'     : self.deliveryInfo.cityCode, 
+                        'postal_code'   : self.deliveryInfo.postcode, 
+                        'state'         : self.deliveryInfo.state, 
+                        'state_code'    : self.deliveryInfo.stateCode, 
+
+                        'payment_method': self.paymentInfo.paymentMethod, 
+                        'process_name'  : self.paymentInfo.processName, 
+                        'amount'        : self.paymentInfo.amount, 
+                        'amount_sst'    : self.paymentInfo.sst, 
+                        'total_amount'  : self.paymentInfo.totalAmount, 
+                        'bank_code'     : self.paymentInfo.bankCode, 
+                        'bank_name'     : self.paymentInfo.bankName, 
+                        'card_number'   : self.paymentInfo.cardNumber, 
+                        'card_type'     : self.paymentInfo.cardType, 
+                        'name_on_card'  : self.paymentInfo.nameOnCard, 
+                        'card_cvv'      : self.paymentInfo.cardCVV, 
+                        'card_expiry_month' : self.paymentInfo.cardExpiryMonth, 
+                        'card_expiry_year'  : self.paymentInfo.cardExpiryYear 
+                    };
+
+                    console.log(params);
+                }, 
+                paymentSubmit: function(e) {
+                    toggleOverlay();
+                    this.ajaxCreateYOSOrder();
+                    e.preventDefault();
                 },
                 selectBank: function(bank, event) {
                     var self = this;
                     $('.listing-quickSelectBanks .nav-item').removeClass('selected');
                     $(event.currentTarget).addClass('selected');
-                    self.fpxBank = bank;
+                    self.paymentInfo.bankCode = bank;
+                    self.watchBankSelect();
                     setTimeout(function() {
-                        $('.form-select').selectpicker('refresh');
+                        $('#select-bank').trigger('change');
+                        $('#select-bank').selectpicker('refresh');
                     }, 100);
                 }, 
                 checkIsNumber: function(event, inputStep) {
@@ -528,15 +603,59 @@
                 checkCardNumberInput: function(inputStep, event) {
                     var self = this;
                     var objInd = 'number' + inputStep;
-                    var inputVal = self.cardholder.cardNumber[objInd];
+                    var inputVal = self.cardholder[objInd];
 
                     if (inputVal.length > 3 && inputStep < 4) {
                         var nextStep = inputStep + 1;
                         $('#input-chNumber' + nextStep).focus();
+                    } else if (inputVal.length  == 4 && inputStep == 4) {
+                        self.paymentInfo.cardNumber = self.cardholder.number1 + self.cardholder.number2 + self.cardholder.number3 + self.cardholder.number4;
                     }
+                },
+                watchBankSelect: function(e) {
+                    var self = this;
+                    var bankListSelected = self.fpxBankList.filter(bank => { return bank.bankCode == self.paymentInfo.bankCode; });
+                    if (bankListSelected) {
+                        self.paymentInfo.bankName = bankListSelected[0].bankName;
+                    }
+                    self.watchAllowSubmit();
+                },
+                watchAllowSubmit: function() {
+                    var self = this;
+                    var isFilled = true;
+                    var paymentInfo = self.paymentInfo;
+                    var paymentMethod = self.paymentInfo.paymentMethod;
+
+                    if (paymentMethod == 'CREDIT_CARD') {
+                        if (
+                            self.paymentInfo.nameOnCard.trim() == '' || 
+                            self.paymentInfo.cardNumber.trim() == '' || 
+                            self.paymentInfo.cardExpiryMonth.trim() == '' ||
+                            self.paymentInfo.cardExpiryYear.trim() == '' ||
+                            self.paymentInfo.cardCVV.trim() == ''
+                        ) {
+                            isFilled = false;
+                        }
+                    } else if (paymentMethod == 'FPX') {
+                        if (self.paymentInfo.bankCode.trim() == '' || self.paymentInfo.bankName.trim() == '') {
+                            isFilled = false;
+                        }
+                    }
+
+                    if (isFilled) {
+                        self.allowSubmit = true;
+                    } else {
+                        self.allowSubmit = false;
+                    }
+                },
+                initTabs: function() {
+                    var self = this;
+                    var paymentMethod = self.paymentInfo.paymentMethod;
+                    $('.nav-link[data-paymentnav="' + paymentMethod + '"]').tab('show');
                 },
                 selectPaymentMethod: function(paymentMethod) {
                     this.paymentInfo.paymentMethod = paymentMethod;
+                    this.watchAllowSubmit();
                 }
             }
         });

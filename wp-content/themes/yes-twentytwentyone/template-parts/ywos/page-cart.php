@@ -370,6 +370,8 @@
         opacity: 0.6;
     }
 
+    .addon-content { padding-right: 38px; }
+
     @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
         #cart-body .packagebox .visualbg {
             padding: 0px 12px;
@@ -581,12 +583,14 @@
                     <div class="col-xl-3 col-lg-4 col-12 mb-3" v-for="(addOn, index) in planAddOns">
                         <a href="javascript:void(0)" class="addon-box" v-on:click="addAddOn(index)">
                             <h1>{{ addOn.displayAmount }}</h1>
-                            <p class="mb-2">{{ addOn.displayAddonName }}</p>
-                            <p class="small">
-                                Valid for {{ addOn.validityDays }}
-                                <span v-if="addOn.validityDays > 1">days</span><span v-else="">day</span>
-                                only*
-                            </p>
+                            <div class="addon-content">
+                                <p class="mb-2">{{ addOn.displayAddonName }}</p>
+                                <p class="small">
+                                    Valid for {{ addOn.validityDays }}
+                                    <span v-if="addOn.validityDays > 1">days</span><span v-else="">day</span>
+                                    only*
+                                </p>
+                            </div>
                             <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/add-icon.png" alt="" v-if="orderSummary.addOn == null || orderSummary.addOn.addonName != addOn.addonName" />
                             <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/icon-added.png" width="38" alt="" v-if="orderSummary.addOn != null && orderSummary.addOn.addonName == addOn.addonName" />
                         </a>
@@ -912,7 +916,7 @@
                     self.orderSummary.due.addOns = (self.orderSummary.addOn != null) ? parseFloat(self.orderSummary.addOn.amount) : 0;
                     self.orderSummary.due.planAmount = parseFloat(self.orderSummary.plan.totalAmount);
                     self.orderSummary.due.amount = parseFloat(self.orderSummary.plan.totalAmount) + ((self.orderSummary.addOn != null) ? parseFloat(self.orderSummary.addOn.amount) : 0);
-                    self.orderSummary.due.taxesSST = self.orderSummary.due.amount * self.taxRate.sst;
+                    self.orderSummary.due.taxesSST = (self.orderSummary.due.amount * self.taxRate.sst).toFixed(2);
                     self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.due.amount) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees));
                     self.orderSummary.due.rounding = parseFloat(getRoundingAdjustmentAmount(self.orderSummary.due.total.toFixed(2)));
                     self.orderSummary.due.total += parseFloat(self.orderSummary.due.rounding);

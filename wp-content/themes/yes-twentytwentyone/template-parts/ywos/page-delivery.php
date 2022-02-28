@@ -290,7 +290,7 @@
 
                     <div class="row">
                         <div class="col-12">
-                            <input type="submit" class="pink-btn" value="Next: Choose payment method" :disabled="!allowSubmit" />
+                            <input type="submit" class="pink-btn" value="Next: Review & Pay" :disabled="!allowSubmit" />
                         </div>
                     </div>
                 </form>
@@ -467,7 +467,9 @@
                     addressLine: '', 
                     postcode: '',
                     state: '',
+                    stateCode: '', 
                     city: '',
+                    cityCode: '',
                     country: '',
                     deliveryNotes: '', 
                     sanitize: {
@@ -550,6 +552,8 @@
                         self.deliveryInfo.emailConfirm = '';
                         self.watchChangeState();
                     }
+                    self.deliveryInfo.stateCode = (self.deliveryInfo.state) ? self.getStateCode(self.deliveryInfo.state) : '';
+                    self.deliveryInfo.cityCode = self.deliveryInfo.city;
                     self.deliveryInfo.country = 'MALAYSIA';
                     
                     self.referralCode.applicable = (self.orderSummary.plan.referralApplicable) ? true : false;
@@ -590,7 +594,8 @@
                             masterlist.map((value, index) => {
                                 options.push({
                                     value: value.masterCode,
-                                    name: value.masterValue
+                                    name: value.masterValue,
+
                                 });
                             })
                             self.selectOptions.cities = options;
@@ -599,6 +604,7 @@
                             var objCity = self.selectOptions.cities.filter(city => city.value == self.deliveryInfo.city);
                             if (objCity.length == 0) {
                                 self.deliveryInfo.city = '';
+                                self.deliveryInfo.cityCode = '';
                             }
 
                             setTimeout(function() {
@@ -653,6 +659,8 @@
                 }, 
                 ajaxVerifyReferralCode: function() {
                     var self = this;
+                    $(self.input.referralCode.errorMessage).hide().html('');
+
                     var params = {
                         'referral_code': self.referralCode.code, 
                         'security_type': self.deliveryInfo.securityType,
@@ -671,7 +679,12 @@
                         .catch((error) => {
                             var response = error.response;
                             var data = response.data;
-                            var errorMsg = data.message;
+                            var errorMsg = '';
+                            if (error.response.status == 500 || error.response.status == 503) {
+                                errorMsg = "<p>There's an error in verifying the referral code.</p>";
+                            } else {
+                                errorMsg = data.message
+                            }
 
                             self.validateReferralCodeField(errorMsg);
                         })
@@ -723,6 +736,8 @@
                     var self = this;
 
                     self.sanitizeDeliveryInfo();
+
+                    self.deliveryInfo.referralCode = self.referralCode.code;
 
                     ywos.lsData.meta.completedStep = self.currentStep;
                     ywos.lsData.meta.deliveryInfo = self.deliveryInfo;

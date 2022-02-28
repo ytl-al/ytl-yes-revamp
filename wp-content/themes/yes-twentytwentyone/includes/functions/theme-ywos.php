@@ -36,4 +36,5 @@ function ywos_enqueue_scripts()
     wp_enqueue_script('axios', 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js', array(), '0.24.0', true);
     wp_enqueue_script('select-picker', 'https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js', array(), '1.14.0', true);
     wp_enqueue_script('ywos-js', get_template_directory_uri() . '/template-parts/ywos/assets/js/ywos.js', array(), '1.0.0', true);
+    wp_enqueue_script('ywos-js', get_template_directory_uri() . '/template-parts/ywos/assets/xpay/js/xpaylib.js', array(), '1.0.0', true);
 }
