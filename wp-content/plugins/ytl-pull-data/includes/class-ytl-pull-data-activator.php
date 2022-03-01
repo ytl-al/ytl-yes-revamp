@@ -72,13 +72,26 @@ class Ytl_Pull_Data_Activator
 
 		global $wpdb;
 
-		$table_name			= $wpdb->prefix.'ywos_cart';
+		$table_name			= $wpdb->prefix.'ywos_orders';
 		$charset_collate 	= $wpdb->get_charset_collate();
 
 		$sql = "CREATE TABLE $table_name (
-					id mediumint(9) NOT NULL AUTO_INCREMENT,
-					session_key varchar(255) DEFAULT '' NOT NULL, 
-					meta text NOT NULL, 
+					ID mediumint(9) NOT NULL AUTO_INCREMENT, 
+					session_key VARCHAR(255) NULL DEFAULT '', 
+					msisdn VARCHAR(255) NULL DEFAULT '', 
+					plan_id VARCHAR(5) NULL DEFAULT '', 
+					yos_order_id VARCHAR(255) NULL DEFAULT '', 
+					yos_order_display_id VARCHAR(255) NULL DEFAULT '', 
+					yos_order_meta TEXT NULL DEFAULT '', 
+					yos_order_response TEXT NULL DEFAULT '', 
+					xpay_order_id VARCHAR(255) NULL DEFAULT '', 
+					xpay_order_meta TEXT NULL DEFAULT '', 
+					xpay_order_response TEXT NULL DEFAULT '', 
+					is_xpay_success INT(1) NULL DEFAULT 0, 
+					order_created_at TIMESTAMP NULL DEFAULT NULL, 
+					created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+					updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+					deleted_at TIMESTAMP NULL DEFAULT NULL, 
 					PRIMARY KEY (id)
 				) $charset_collate;";
 		

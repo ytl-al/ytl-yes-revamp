@@ -221,7 +221,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    <div class="row mb-4">
                         <div class="col-3 text-end order-2">
                             <a href="javascript:void(0)" class="grey-link" style="text-decoration: none;" v-on:click="ywos.redirectToPage('delivery')">(<u>Edit</u>)</a>
                         </div>
@@ -246,9 +246,21 @@
                             <a href="#" class="grey-link">(Edit)</a>
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="form-check mb-3">
+                                <input type="checkbox" class="form-check-input" v-model="agree.terms" id="checkbox-terms" @change="watchSubmit" />
+                                <label class="form-check-label" for="checkbox-terms">I hereby agree to subscribe to the Postpaid/Prepaid Service Plan selected in the online form submitted by me, and to be bound by the terms and conditions available at <a href="/tnc/general-tnc" target="_blank">www.yes.my/tnc/general-tnc</a>.</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" v-model="agree.privacy" id="checkbox-privacy" @change="watchSubmit" />
+                                <label class="form-check-label" for="checkbox-privacy">I further give consent to YTLC to process my personal data in accordance with the YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a>.</label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row mt-5">
                         <div class="col-lg-5 col-12">
-                            <button class="pink-btn d-block w-100" type="submit" v-on:click="validateReview">Pay Now</button>
+                            <button class="pink-btn d-block w-100" type="submit" v-on:click="validateReview" :disabled="!allowSubmit">Pay Now</button>
                             <!-- <a href="checkout-payment.html" class="pink-btn d-block w-100">Pay Now</a> -->
                         </div>
                     </div>
@@ -302,7 +314,12 @@
                     }
                 },
                 packageInfos: [],
-                slicedMobileNumber: ''
+                slicedMobileNumber: '', 
+                agree: {
+                    terms: false, 
+                    privacy: false 
+                },
+                allowSubmit: false
             },
             mounted: function() {},
             created: function() {
@@ -327,7 +344,9 @@
                     self.orderSummary = ywos.lsData.meta.orderSummary;
                     self.deliveryInfo = ywos.lsData.meta.deliveryInfo;
                     self.slicedMobileNumber = self.deliveryInfo.mobileNumber.slice(1);
-
+                    self.agree = (ywos.lsData.meta.agree) ? ywos.lsData.meta.agree : self.agree;
+                    self.watchSubmit();
+                    
                     var arrNotes = self.orderSummary.plan.notes.split(',');
                     self.packageInfos = arrNotes.sort(function(a, b) {
                         return a.length - b.length;
@@ -338,9 +357,22 @@
                     toggleOverlay();
 
                     ywos.lsData.meta.completedStep = self.currentStep;
+                    ywos.lsData.meta.agree = self.agree;
                     ywos.updateYWOSLSData();
 
                     ywos.redirectToPage('payment');
+                },
+                watchSubmit: function() {
+                    var self = this;
+                    var isValid = true;
+                    if (!self.agree.terms || !self.agree.privacy) {
+                        isValid = false;
+                    }
+                    if (isValid) {
+                        self.allowSubmit = true;
+                    } else {
+                        self.allowSubmit = false;
+                    }
                 }
             }
         });

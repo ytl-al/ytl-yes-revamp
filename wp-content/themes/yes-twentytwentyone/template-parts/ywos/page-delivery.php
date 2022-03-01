@@ -738,6 +738,8 @@
                     self.sanitizeDeliveryInfo();
 
                     self.deliveryInfo.referralCode = self.referralCode.code;
+                    self.deliveryInfo.cityCode = self.deliveryInfo.city;
+                    self.deliveryInfo.stateCode = self.getStateCode(self.deliveryInfo.state);
 
                     ywos.lsData.meta.completedStep = self.currentStep;
                     ywos.lsData.meta.deliveryInfo = self.deliveryInfo;

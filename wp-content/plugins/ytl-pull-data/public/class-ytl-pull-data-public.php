@@ -935,6 +935,8 @@ class Ytl_Pull_Data_Public
 
 	public function ca_create_yos_order($order_info = []) 
 	{
+		$session_key 	= $this->get_request_input($order_info, 'session_key');
+		
 		$phone_number 	= $this->get_request_input($order_info, 'phone_number');
 		$customer_name	= $this->get_request_input($order_info, 'customer_name');
 		$email 			= $this->get_request_input($order_info, 'email');
@@ -963,9 +965,9 @@ class Ytl_Pull_Data_Public
 		
 		$payment_method	= $this->get_request_input($order_info, 'payment_method');
 		$process_name 	= $this->get_request_input($order_info, 'process_name');
-		$amount 		= $this->get_request_input($order_info, 'amount');
-		$amount_sst 	= $this->get_request_input($order_info, 'amount_sst');
-		$total_amount 	= $this->get_request_input($order_info, 'total_amount');
+		$amount 		= $this->get_float_number($order_info['amount']);
+		$amount_sst 	= $this->get_float_number($order_info['amount_sst']);
+		$total_amount 	= $this->get_float_number($order_info['total_amount']);
 		$bank_code 		= $this->get_request_input($order_info, 'bank_code');
 		$bank_name 		= $this->get_request_input($order_info, 'bank_name');
 		$card_number 	= $this->get_request_input($order_info, 'card_number');
@@ -981,9 +983,9 @@ class Ytl_Pull_Data_Public
 			$phone_number != null && $customer_name != null && $email != null && $security_type != null && $security_id != null && 
 			$plan_name != null && $plan_type != null && $product_bundle_id != null && 
 			$address_line != null && $city != null && $city_code != null && $postal_code != null && $state != null && $state_code != null && $country != null &&
-			$payment_method != null && $process_name != null && $amount != null && $amount_sst != null && $total_amount != null && $total_amount != null && 
-			$bank_code != null && $bank_name != null && 
-			$card_number != null && $card_type != null && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null && 
+			$payment_method != null && $process_name != null && $amount != null && $amount_sst != null && $total_amount != null && 
+			($payment_method == 'FPX' && ($bank_code != null && $bank_name != null)) || 
+			($payment_method == 'CREDIT_CARD' && ($card_number != null && $card_type != null && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null)) && 
 			isset($this->api_domain) && isset($this->api_request_id) && $session_id
 		) {
 			$params 	= [
@@ -1046,6 +1048,7 @@ class Ytl_Pull_Data_Public
 				'requestId' 			=> $this->api_request_id,
 				'sessionId' 			=> $session_id
 			];
+			
 			$args 		= [
 				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
 				'body'          => json_encode($params),
@@ -1057,14 +1060,22 @@ class Ytl_Pull_Data_Public
 			$request 	= wp_remote_post($api_url, $args);
 			$data 		= json_decode($request['body']);
 
+			$yos_order_meta 		= $params;
+			unset($yos_order_meta['sessionId']);
+			$yos_order_id 			= $data->orderNumber;
+			$yos_order_display_id	= $data->displayOrderNumber;
+			$xpay_order_id 			= $data->xpayOrderId;
+			$yos_order_response 	= $data->displayResponseMessage;
+			$this->record_new_order($session_key, $phone_number, $product_bundle_id, $yos_order_meta, $yos_order_id, $yos_order_display_id, $xpay_order_id, $yos_order_response);
+			
 			if ($data->responseCode > -1) {
 				$data->sessionId = $session_id;
 
 				$response 	= new WP_REST_Response($data);
 				$response->set_status(200);
 				return $response;
-			} else if ($data->displayErrorMessage) {
-				return new WP_Error('error_creating_yos_order', $data->displayErrorMessage, array('status' => 400));
+			} else if ($data->displayResponseMessage) {
+				return new WP_Error('error_creating_yos_order', $data->displayResponseMessage, array('status' => 400));
 			}
 		} else {
 			return new WP_Error('error_creating_yos_order', "Parameters not complete to create YOS order.", array('status' => 400));
@@ -1075,5 +1086,48 @@ class Ytl_Pull_Data_Public
 	public function get_request_input($order_info = [], $input_name = '') 
 	{
 		return (isset($order_info[$input_name]) && !empty(trim($order_info[$input_name]))) ? $order_info[$input_name] : null;
+	}
+
+	public function get_float_number($amount = 0.00, $decimal_plance = 2) 
+	{
+		return number_format((float) $amount, $decimal_plance, '.', '');
+	}
+
+	public function record_new_order($session_key = '', $msisdn = '', $plan_id = 0, $yos_order_meta = [], $yos_order_id = '', $yos_order_display_id = '', $xpay_order_id = '', $yos_order_response = '') 
+	{
+		global $wpdb;
+		$table_name = $wpdb->prefix.'ywos_orders';
+
+		$checkIfExists 	= $wpdb->get_var("SELECT ID FROM $table_name WHERE session_key = '$session_key'");
+		$curTimestamp 	= current_time('mysql', 1);
+		$params 		= array(
+			'session_key'	=> $session_key, 
+			'msisdn' 		=> $msisdn, 
+			'plan_id' 		=> $plan_id, 
+			'yos_order_id' 	=> $yos_order_id, 
+			'yos_order_display_id' 	=> $yos_order_display_id, 
+			'yos_order_meta'=> serialize($yos_order_meta), 
+			'yos_order_response' 	=> $yos_order_response, 
+			'xpay_order_id'	=> $xpay_order_id, 
+			'order_created_at'		=> $curTimestamp, 
+			'created_at' 	=> $curTimestamp, 
+			'updated_at' 	=> $curTimestamp 
+		);
+		if ($checkIfExists == null) {
+			$wpdb->insert(
+				$table_name, 
+				$params
+			);
+		} else {
+			unset($params['order_created_at']);
+			unset($params['created_at']);
+			$wpdb->update(
+				$table_name,
+				$params, 
+				array(
+					'ID' => $checkIfExists
+				)
+			);
+		}
 	}
 }

@@ -40,6 +40,9 @@
             height: 60px;
         }
     }
+
+    .panel-weaccept { margin: 15px 0 10px; }
+    .panel-weaccept img { margin: 0 8px; }
 </style>
 
 <!-- Vue Wrapper STARTS -->
@@ -160,6 +163,16 @@
                             <div class="tab-pane fade" id="tab-creditcard" role="tabpanel" aria-labelledby="nav-creditcard">
                                 <div class="tab-paneContent">
                                     <div class="row mb-4">
+                                        <div class="col-lg-6">
+                                            <p class="panel-weaccept">
+                                                We accept
+                                                <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/visa.png" />
+                                                <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" />
+                                                <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/mastercard.png" />
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
                                         <div class="col-lg-6 col-12">
                                             <label class="form-label" for="input-chName">Cardholder Name</label>
                                             <div class="input-group align-items-center">
@@ -173,26 +186,26 @@
                                         </div>
                                         <div class="col-lg-6 col-12 mb-1">
                                             <div class="input-group align-items-center">
-                                                <input type="text" class="form-control text-center" id="input-chNumber1" v-model="cardholder.number1" placeholder="xxxx" maxlength="4" required="required" @input="checkCardNumberInput(1, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
-                                                <input type="text" class="form-control text-center" id="input-chNumber2" v-model="cardholder.number2" placeholder="xxxx" maxlength="4" required="required" @input="checkCardNumberInput(2, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
-                                                <input type="text" class="form-control text-center" id="input-chNumber3" v-model="cardholder.number3" placeholder="xxxx" maxlength="4" required="required" @input="checkCardNumberInput(3, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
-                                                <input type="text" class="form-control text-center" id="input-chNumber4" v-model="cardholder.number4" placeholder="xxxx" maxlength="4" required="required" @input="checkCardNumberInput(4, event)" @keypress="checkIsNumber(event)" />
+                                                <input type="text" class="form-control text-center" id="input-cardInput1" v-model="cardholder.number1" placeholder="xxxx" maxlength="4" required="required" @input="checkCardInputJump(1, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
+                                                <input type="text" class="form-control text-center" id="input-cardInput2" v-model="cardholder.number2" placeholder="xxxx" maxlength="4" required="required" @input="checkCardInputJump(2, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
+                                                <input type="text" class="form-control text-center" id="input-cardInput3" v-model="cardholder.number3" placeholder="xxxx" maxlength="4" required="required" @input="checkCardInputJump(3, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
+                                                <input type="text" class="form-control text-center" id="input-cardInput4" v-model="cardholder.number4" placeholder="xxxx" maxlength="4" required="required" @input="checkCardInputJump(4, event)" @keypress="checkIsNumber(event)" />
                                             </div>
                                         </div>
                                         <p class="info mb-3">Numbers must contain 16 digits</p>
                                     </div>
                                     <div class="row mb-4">
                                         <div class="col-lg-3 col-12">
-                                            <label class="form-label" for="input-chExpiryMonth">Exp Date</label>
+                                            <label class="form-label" for="input-cardInput5">Exp Date</label>
                                             <div class="input-group align-items-center">
-                                                <input type="text" class="form-control text-center" id="input-chExpiryMonth" v-model="paymentInfo.cardExpiryMonth" @input="watchAllowSubmit" placeholder="00" maxlength="2" required="required" /> <span class="mx-2">/</span>
-                                                <input type="text" class="form-control text-center" id="input-chExpiryYear" v-model="paymentInfo.cardExpiryYear" @input="watchAllowSubmit" placeholder="00" maxlength="2" required="required" />
+                                                <input type="text" class="form-control text-center" id="input-cardInput5" v-model="paymentInfo.cardExpiryMonth" placeholder="00" maxlength="2" required="required" @input="checkCardInputJump(5, event)" @keypress="checkIsNumber(event)" /> <span class="mx-2">/</span>
+                                                <input type="text" class="form-control text-center" id="input-cardInput6" v-model="paymentInfo.cardExpiryYear" placeholder="00" maxlength="2" required="required" @input="checkCardInputJump(6, event)" @keypress="checkIsNumber(event)" />
                                             </div>
                                         </div>
                                         <div class="col-lg-3 col-12">
-                                            <label class="form-label" for="input-chCVV">CVV</label>
+                                            <label class="form-label" for="input-cardInput7">CVV</label>
                                             <div class="input-group align-items-center">
-                                                <input type="password" class="form-control text-center" id="input-chCVV" v-model="paymentInfo.cardCVV" @input="watchAllowSubmit" placeholder="***" maxlength="3" required="required" />
+                                                <input type="password" class="form-control text-center" id="input-cardInput7" v-model="paymentInfo.cardCVV" @input="watchAllowSubmit" placeholder="***" maxlength="3" required="required" @keypress="checkIsNumber(event)" />
                                             </div>
                                         </div>
                                     </div>
@@ -246,8 +259,25 @@
 </div>
 <!-- Vue Wrapper ENDS -->
 
+<div class="modal fade" id="modal-alert" tabindex="-1" aria-labelledby="modal-alert" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title" id="modal-titleLabel"></h5>
+            </div>
+            <div class="modal-body text-center">
+                <p id="modal-bodyText"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script type="text/javascript">
+    var mainwin;
     $(document).ready(function() {
         toggleOverlay();
 
@@ -337,7 +367,10 @@
                     number1: '', 
                     number2: '', 
                     number3: '',
-                    number4: '' 
+                    number4: '', 
+                    number5: '',
+                    number6: '', 
+                    number7: '' 
                 },
                 countries: [
                     { "value": "Malaysia", "name": "Malaysia" }, 
@@ -462,7 +495,22 @@
                     { "value": "Vietnam", "name": "Vietnam" }, 
                     { "value": "Zambia", "name": "Zambia"}
                 ],
-                fpxBank: ''
+                orderResponse: {
+                    orderNumber: '', 
+                    displayOrderNumber: '', 
+                    xpayOrderId: '', 
+                    encryptedValue: '', 
+                    grandTotal: 0.00,
+                    roundingAdjustment: 0.00,
+                    gstTotal: 0.00, 
+                    totalWithOutGST: 0.00, 
+                    shippingCharges: 0.00, 
+                    shippingChargesWithGST: 0.00, 
+                    foreignerDeposit: 0.00, 
+                    deliveryFromDate: '', 
+                    deliveryToData: '', 
+                    deliveryType: ''
+                }
             },
             mounted: function() {},
             created: function() {
@@ -530,9 +578,42 @@
                     self.paymentInfo.sst = self.orderSummary.due.taxesSST;
                     self.paymentInfo.totalAmount = self.orderSummary.due.total;
                 },
+                toggleModalAlert: function(modalHeader = '', modalText = '') {
+                    $('#modal-titleLabel').html(modalHeader);
+                    $('#modal-bodyText').html(modalText);
+                    $('#modal-alert').modal('show');
+                    $('#modal-alert').on('hidden.bs.modal', function() {
+                        $('#modal-titleLabel').html('');
+                        $('#modal-bodyText').html('');
+                    });
+                }, 
+                yosPaymentResponseCheck: function(orderID = '', accountNumber = '', timeoutObj) {
+
+                }, 
+                initXpay: function() {
+                    var self = this;
+                    var xpayOrderId = self.orderResponse.xpayOrderId;
+                    var encryptedValue = self.orderResponse.encryptedValue;
+
+                    var timeoutObject = setTimeout(function() {
+                        if (mainwin != null && !mainwin.closed) {
+                            mainwin.focus();
+                            mainwin.close();
+                        }
+                        console.log('initXpay timeout');
+                    }, 300000);
+
+                    mainwin = postPayment({ order_id: xpayOrderId, encrypted_string: encryptedValue });
+                    
+                    setTimeout(function() {
+                        self.yosPaymentResponseCheck(xpayOrderId, '', timeoutObject);
+                    }, 10000);
+                }, 
                 ajaxCreateYOSOrder: function() {
                     var self = this;
                     var params = {
+                        'session_key'   : ywos.lsData.sessionKey, 
+                        
                         'phone_number'  : self.deliveryInfo.msisdn, 
                         'customer_name' : self.deliveryInfo.name, 
                         'email'         : self.deliveryInfo.email,
@@ -557,12 +638,13 @@
                         'postal_code'   : self.deliveryInfo.postcode, 
                         'state'         : self.deliveryInfo.state, 
                         'state_code'    : self.deliveryInfo.stateCode, 
+                        'country'       : 'Malaysia', 
 
                         'payment_method': self.paymentInfo.paymentMethod, 
                         'process_name'  : self.paymentInfo.processName, 
-                        'amount'        : self.paymentInfo.amount, 
-                        'amount_sst'    : self.paymentInfo.sst, 
-                        'total_amount'  : self.paymentInfo.totalAmount, 
+                        'amount'        : roundAmount(self.paymentInfo.amount, 2), 
+                        'amount_sst'    : roundAmount(self.paymentInfo.sst, 2), 
+                        'total_amount'  : roundAmount(self.paymentInfo.totalAmount, 2), 
                         'bank_code'     : self.paymentInfo.bankCode, 
                         'bank_name'     : self.paymentInfo.bankName, 
                         'card_number'   : self.paymentInfo.cardNumber, 
@@ -572,8 +654,29 @@
                         'card_expiry_month' : self.paymentInfo.cardExpiryMonth, 
                         'card_expiry_year'  : self.paymentInfo.cardExpiryYear 
                     };
+                    axios.post(apiEndpointURL + '/create-yos-order', params)
+                        .then((response) => {
+                            var data = response.data;
+                            // self.orderResponse = data;
+                            // self.initXpay();
+                        })
+                        .catch((error) => {
+                            var response = error.response;
+                            var data = response.data;
+                            var errorMsg = '';
+                            if (error.response.status == 500 || error.response.status == 503) {
+                                errorMsg = "There's an error in creating your order.<br />Please try again later.";
+                            } else {
+                                errorMsg = data.message
+                            }
+                            toggleOverlay(false);
+                            self.toggleModalAlert('Error', errorMsg);
+                        })
+                        .finally(() => {
+                            console.log('finally');
+                        });
 
-                    console.log(params);
+                    console.log(JSON.stringify(params));
                 }, 
                 paymentSubmit: function(e) {
                     toggleOverlay();
@@ -600,17 +703,27 @@
                         return true;
                     }
                 },
-                checkCardNumberInput: function(inputStep, event) {
+                checkCardInputJump: function(inputStep, event) {
                     var self = this;
                     var objInd = 'number' + inputStep;
-                    var inputVal = self.cardholder[objInd];
-
-                    if (inputVal.length > 3 && inputStep < 4) {
-                        var nextStep = inputStep + 1;
-                        $('#input-chNumber' + nextStep).focus();
-                    } else if (inputVal.length  == 4 && inputStep == 4) {
-                        self.paymentInfo.cardNumber = self.cardholder.number1 + self.cardholder.number2 + self.cardholder.number3 + self.cardholder.number4;
+                    var inputVal = '';
+                    var nextStep = inputStep + 1;
+                    if (inputStep <= 4) {
+                        inputVal = self.cardholder[objInd];
+                        if (inputVal.length > 3) {
+                            $('#input-cardInput' + nextStep).focus();
+                        }
+                        if (inputVal.length == 4 && inputStep == 4) {
+                            self.paymentInfo.cardNumber = self.cardholder.number1 + self.cardholder.number2 + self.cardholder.number3 + self.cardholder.number4;
+                            self.paymentInfo.cardType = getCreditCardType(self.paymentInfo.cardNumber);
+                        }
+                    } else {
+                        inputVal = (inputStep == 5) ? self.paymentInfo.cardExpiryMonth : self.paymentInfo.cardExpiryYear;
+                        if (inputVal.length == 2) {
+                            $('#input-cardInput' + nextStep).focus();
+                        }
                     }
+                    self.watchAllowSubmit();
                 },
                 watchBankSelect: function(e) {
                     var self = this;

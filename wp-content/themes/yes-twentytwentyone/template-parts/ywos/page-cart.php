@@ -507,12 +507,20 @@
                                 </div>
                                 <div v-if="orderSummary.plan.bundlePlan">
                                     <p class="bold mb-2">Device Bundle: <span class="fw-bold">{{ orderSummary.plan.bundleName }}</span></p>
-                                    <div class="row mb-3">
+                                    <div class="row">
                                         <div class="col-6">
                                             <p>Device payment</p>
                                         </div>
                                         <div class="col-6 text-end">
                                             <p>RM{{ parseFloat(orderSummary.plan.totalPostpaidDevice).toFixed(2) }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-6">
+                                            <p>Device Upfront Payment</p>
+                                        </div>
+                                        <div class="col-6 text-end">
+                                            <p>RM{{ parseFloat(orderSummary.plan.totalPostpaidDeviceUpfont).toFixed(2) }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -866,10 +874,16 @@
                     var self = this;
                     dataAddOns.map(function(data) {
                         data.addonPackageInfoList.map(function(addOn) {
-                            addOn.taxSST = addOn.totalAmount * self.taxRate.sst;
+                            // addOn.taxSST = addOn.totalAmount * self.taxRate.sst;
+                            var indPaymentDeduction = addOn.paymentDeductionInfoList.filter(paymentDeduction => { return paymentDeduction.type == 'SST'; });
+                            if (indPaymentDeduction) {
+                                indPaymentDeduction = indPaymentDeduction[0];
+                                addOn.taxSST = parseFloat(indPaymentDeduction.value).toFixed(2);
+                            }
                             self.planAddOns.push(addOn);
                         });
                     });
+                    
                     var planAddOn = self.orderSummary.addOn;
                     if (planAddOn) {
                         self.orderSummary.due.taxesSST += planAddOn.taxSST;
@@ -898,10 +912,12 @@
                         }, 500);
                     }
 
-                    var arrNotes = self.orderSummary.plan.notes.split(',');
-                    self.packageInfos = arrNotes.sort(function(a, b) {
-                        return a.length - b.length;
-                    });
+                    if (self.orderSummary.plan.notes) {
+                        var arrNotes = self.orderSummary.plan.notes.split(',');
+                        self.packageInfos = arrNotes.sort(function(a, b) {
+                            return a.length - b.length;
+                        });
+                    }
                 },
                 updateSummary: function() {
                     var self = this;
@@ -912,20 +928,28 @@
                     // self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.plan.totalAmount) + parseFloat(self.orderSummary.due.addOns) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees));
                     // self.orderSummary.due.rounding = getRoundingAdjustmentAmount(self.orderSummary.due.total.toFixed(2));
                     // self.orderSummary.due.total += parseFloat(self.orderSummary.due.rounding);
-
-                    self.orderSummary.due.addOns = (self.orderSummary.addOn != null) ? parseFloat(self.orderSummary.addOn.amount) : 0;
-                    self.orderSummary.due.planAmount = parseFloat(self.orderSummary.plan.totalAmount);
-                    self.orderSummary.due.amount = parseFloat(self.orderSummary.plan.totalAmount) + ((self.orderSummary.addOn != null) ? parseFloat(self.orderSummary.addOn.amount) : 0);
-                    self.orderSummary.due.taxesSST = (self.orderSummary.due.amount * self.taxRate.sst).toFixed(2);
-                    self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.due.amount) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees));
-                    self.orderSummary.due.rounding = parseFloat(getRoundingAdjustmentAmount(self.orderSummary.due.total.toFixed(2)));
-                    self.orderSummary.due.total += parseFloat(self.orderSummary.due.rounding);
                     
                     // self.orderSummary.due.taxesSST = parseFloat(self.orderSummary.plan.totalSST);
                     // self.orderSummary.due.rounding = parseFloat(self.orderSummary.plan.roundingAdjustment);
                     // self.orderSummary.due.totalWithoutSST = parseFloat(self.orderSummary.plan.totalAmountWithoutSST);
                     // self.orderSummary.due.total = parseFloat(self.orderSummary.plan.totalAmountWithSST);
                     // self.orderSummary.due.total += parseFloat(self.orderSummary.due.addOns);
+
+                    // self.orderSummary.due.addOns = (self.orderSummary.addOn != null) ? parseFloat(self.orderSummary.addOn.amount) : 0;
+                    // self.orderSummary.due.planAmount = parseFloat(self.orderSummary.plan.totalAmount);
+                    // self.orderSummary.due.amount = parseFloat(self.orderSummary.plan.totalAmount) + ((self.orderSummary.addOn != null) ? parseFloat(self.orderSummary.addOn.amount) : 0);
+                    // self.orderSummary.due.taxesSST = (self.orderSummary.due.amount * self.taxRate.sst).toFixed(2);
+                    // self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.due.amount) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees));
+                    // self.orderSummary.due.rounding = parseFloat(getRoundingAdjustmentAmount(self.orderSummary.due.total.toFixed(2)));
+                    // self.orderSummary.due.total += parseFloat(self.orderSummary.due.rounding);
+
+                    self.orderSummary.due.addOns = (self.orderSummary.addOn != null) ? roundAmount(self.orderSummary.addOn.amount) : 0;
+                    self.orderSummary.due.planAmount = parseFloat(self.orderSummary.plan.totalAmount).toFixed(2);
+                    self.orderSummary.due.amount = (parseFloat(self.orderSummary.plan.totalAmountWithoutSST.replace(/,/g, '')) + ((self.orderSummary.addOn != null) ? parseFloat(self.orderSummary.addOn.amount) : 0)).toFixed(2);
+                    self.orderSummary.due.taxesSST = (parseFloat(self.orderSummary.plan.totalSST) + ((self.orderSummary.addOn != null) ? parseFloat(self.orderSummary.addOn.taxSST) : 0)).toFixed(2);
+                    self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.due.amount) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees));
+                    self.orderSummary.due.rounding = parseFloat(getRoundingAdjustmentAmount(self.orderSummary.due.total.toFixed(2))).toFixed(2);
+                    self.orderSummary.due.total = (parseFloat(self.orderSummary.due.total) + parseFloat(self.orderSummary.due.rounding)).toFixed(2);
                 },
                 checkLoggedIn: function() {
                     var self = this;
