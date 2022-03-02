@@ -100,8 +100,8 @@ class Ytl_Pull_Data_Admin
         $this->prefix		= $prefix;
         $this->api_app_version      = '1.1';
         $this->api_locale           = 'EN';
-        $this->auth_path_auth       = '/mobileyos-dev/mobile/ws/v1/json/auth/getBasicAuth';
-        $this->get_all_plans_path   = '/mobileyos-dev/mobile/ws/v1/json/getAllPlans';
+        $this->auth_path_auth       = '/mobileyos/mobile/ws/v1/json/auth/getBasicAuth';
+        $this->get_all_plans_path   = '/mobileyos/mobile/ws/v1/json/getAllPlans';
 	}
 
 	/**

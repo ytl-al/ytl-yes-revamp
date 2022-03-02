@@ -176,7 +176,7 @@
                                         <div class="col-lg-6 col-12">
                                             <label class="form-label" for="input-chName">Cardholder Name</label>
                                             <div class="input-group align-items-center">
-                                                <input type="text" class="form-control" id="input-chName" v-model="paymentInfo.nameOnCard" @input="watchAllowSubmit" placeholder="John Doe" required="required" />
+                                                <input type="text" class="form-control" id="input-chName" v-model="paymentInfo.nameOnCard" @input="watchAllowSubmit" placeholder="John Doe" />
                                             </div>
                                         </div>
                                     </div>
@@ -186,10 +186,10 @@
                                         </div>
                                         <div class="col-lg-6 col-12 mb-1">
                                             <div class="input-group align-items-center">
-                                                <input type="text" class="form-control text-center" id="input-cardInput1" v-model="cardholder.number1" placeholder="xxxx" maxlength="4" required="required" @input="checkCardInputJump(1, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
-                                                <input type="text" class="form-control text-center" id="input-cardInput2" v-model="cardholder.number2" placeholder="xxxx" maxlength="4" required="required" @input="checkCardInputJump(2, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
-                                                <input type="text" class="form-control text-center" id="input-cardInput3" v-model="cardholder.number3" placeholder="xxxx" maxlength="4" required="required" @input="checkCardInputJump(3, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
-                                                <input type="text" class="form-control text-center" id="input-cardInput4" v-model="cardholder.number4" placeholder="xxxx" maxlength="4" required="required" @input="checkCardInputJump(4, event)" @keypress="checkIsNumber(event)" />
+                                                <input type="text" class="form-control text-center" id="input-cardInput1" v-model="cardholder.number1" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(1, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
+                                                <input type="text" class="form-control text-center" id="input-cardInput2" v-model="cardholder.number2" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(2, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
+                                                <input type="text" class="form-control text-center" id="input-cardInput3" v-model="cardholder.number3" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(3, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
+                                                <input type="text" class="form-control text-center" id="input-cardInput4" v-model="cardholder.number4" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(4, event)" @keypress="checkIsNumber(event)" />
                                             </div>
                                         </div>
                                         <p class="info mb-3">Numbers must contain 16 digits</p>
@@ -198,14 +198,14 @@
                                         <div class="col-lg-3 col-12">
                                             <label class="form-label" for="input-cardInput5">Exp Date</label>
                                             <div class="input-group align-items-center">
-                                                <input type="text" class="form-control text-center" id="input-cardInput5" v-model="paymentInfo.cardExpiryMonth" placeholder="00" maxlength="2" required="required" @input="checkCardInputJump(5, event)" @keypress="checkIsNumber(event)" /> <span class="mx-2">/</span>
-                                                <input type="text" class="form-control text-center" id="input-cardInput6" v-model="paymentInfo.cardExpiryYear" placeholder="00" maxlength="2" required="required" @input="checkCardInputJump(6, event)" @keypress="checkIsNumber(event)" />
+                                                <input type="text" class="form-control text-center" id="input-cardInput5" v-model="paymentInfo.cardExpiryMonth" placeholder="00" maxlength="2" @input="checkCardInputJump(5, event)" @keypress="checkIsNumber(event)" /> <span class="mx-2">/</span>
+                                                <input type="text" class="form-control text-center" id="input-cardInput6" v-model="paymentInfo.cardExpiryYear" placeholder="0000" maxlength="4" @input="checkCardInputJump(6, event)" @keypress="checkIsNumber(event)" />
                                             </div>
                                         </div>
                                         <div class="col-lg-3 col-12">
                                             <label class="form-label" for="input-cardInput7">CVV</label>
                                             <div class="input-group align-items-center">
-                                                <input type="password" class="form-control text-center" id="input-cardInput7" v-model="paymentInfo.cardCVV" @input="watchAllowSubmit" placeholder="***" maxlength="3" required="required" @keypress="checkIsNumber(event)" />
+                                                <input type="password" class="form-control text-center" id="input-cardInput7" v-model="paymentInfo.cardCVV" @input="watchAllowSubmit" placeholder="***" maxlength="3" @keypress="checkIsNumber(event)" />
                                             </div>
                                         </div>
                                     </div>
@@ -594,6 +594,7 @@
                     var self = this;
                     var xpayOrderId = self.orderResponse.xpayOrderId;
                     var encryptedValue = self.orderResponse.encryptedValue;
+                    console.log(self.orderResponse, self.orderResponse.xpayOrderId);
 
                     var timeoutObject = setTimeout(function() {
                         if (mainwin != null && !mainwin.closed) {
@@ -604,6 +605,7 @@
                     }, 300000);
 
                     mainwin = postPayment({ order_id: xpayOrderId, encrypted_string: encryptedValue });
+                    console.log(mainwin);
                     
                     setTimeout(function() {
                         self.yosPaymentResponseCheck(xpayOrderId, '', timeoutObject);
@@ -657,20 +659,23 @@
                     axios.post(apiEndpointURL + '/create-yos-order', params)
                         .then((response) => {
                             var data = response.data;
-                            // self.orderResponse = data;
-                            // self.initXpay();
+                            self.orderResponse = data;
+                            self.initXpay();
                         })
                         .catch((error) => {
                             var response = error.response;
-                            var data = response.data;
-                            var errorMsg = '';
-                            if (error.response.status == 500 || error.response.status == 503) {
-                                errorMsg = "There's an error in creating your order.<br />Please try again later.";
-                            } else {
-                                errorMsg = data.message
+                            if (typeof response != 'undefined') {
+                                var data = response.data;
+                                var errorMsg = '';
+                                if (error.response.status == 500 || error.response.status == 503) {
+                                    errorMsg = "There's an error in creating your order.<br />Please try again later.";
+                                } else {
+                                    errorMsg = data.message
+                                }
+                                toggleOverlay(false);
+                                self.toggleModalAlert('Error', errorMsg);
                             }
-                            toggleOverlay(false);
-                            self.toggleModalAlert('Error', errorMsg);
+                            console.log(error, response);
                         })
                         .finally(() => {
                             console.log('finally');
@@ -717,9 +722,14 @@
                             self.paymentInfo.cardNumber = self.cardholder.number1 + self.cardholder.number2 + self.cardholder.number3 + self.cardholder.number4;
                             self.paymentInfo.cardType = getCreditCardType(self.paymentInfo.cardNumber);
                         }
-                    } else {
-                        inputVal = (inputStep == 5) ? self.paymentInfo.cardExpiryMonth : self.paymentInfo.cardExpiryYear;
+                    } else if (inputStep == 5) {
+                        inputVal = self.paymentInfo.cardExpiryMonth;
                         if (inputVal.length == 2) {
+                            $('#input-cardInput' + nextStep).focus();
+                        }
+                    } else if (inputStep == 6) {
+                        inputVal = self.paymentInfo.cardExpiryYear;
+                        if (inputVal.length == 4) {
                             $('#input-cardInput' + nextStep).focus();
                         }
                     }

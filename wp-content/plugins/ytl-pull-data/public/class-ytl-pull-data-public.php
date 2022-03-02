@@ -204,6 +204,15 @@ class Ytl_Pull_Data_Public
 	private $path_create_yos_order_and_payment;
 
 	/**
+	 * The api path to check payment status.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $path_check_order_payment_status		The api path to check payment status.
+	 */
+	private $path_check_order_payment_status;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -219,17 +228,18 @@ class Ytl_Pull_Data_Public
 		$this->api_timeout 	= 60;
 		$this->api_app_version      = '1.1';
 		$this->api_locale           = 'EN';
-		$this->path_generate_auth_token 	= '/mobileyos-dev/mobile/ws/v1/json/auth/getBasicAuth';
-		$this->path_get_add_ons_by_plan 	= '/mobileyos-dev/mobile/ws/v1/json/getEligibleAddonList';
-		$this->path_generate_otp_for_login	= '/mobileyos-dev/mobile/ws/v1/json/generateOTPForLogin';
-		$this->path_validate_login			= '/mobileyos-dev/mobile/ws/v1/json/validateLoginAndGetCustomerDetails';
-		$this->path_get_cities_by_state_code = '/mobileyos-dev/mobile/ws/v1/json/getAllCitiesByStateCode';
-		$this->path_generate_otp_for_guest_login = '/mobileyos-dev/mobile/ws/v1/json/generateOTPForGuestLogin';
-		$this->path_validate_guest_login 	= '/mobileyos-dev/mobile/ws/v1/json/validateGuestLogin';
-		$this->path_validate_customer_eligibilities	= '/mobileyos-dev/mobile/ws/v1/json/validateCustomerEligibilities';
-		$this->path_verify_referral_code 	= '/mobileyos-dev/mobile/ws/v1/json/verifyReferralCode';
-		$this->path_get_fpx_bank_list 		= '/mobileyos-dev/mobile/ws/v1/json/getFpxBankList';
-		$this->path_create_yos_order_and_payment = '/mobileyos-dev/mobile/ws/v1/json/createYOSOrderAndPaymentWithAddonAndReloads';
+		$this->path_generate_auth_token 	= '/mobileyos/mobile/ws/v1/json/auth/getBasicAuth';
+		$this->path_get_add_ons_by_plan 	= '/mobileyos/mobile/ws/v1/json/getEligibleAddonList';
+		$this->path_generate_otp_for_login	= '/mobileyos/mobile/ws/v1/json/generateOTPForLogin';
+		$this->path_validate_login			= '/mobileyos/mobile/ws/v1/json/validateLoginAndGetCustomerDetails';
+		$this->path_get_cities_by_state_code = '/mobileyos/mobile/ws/v1/json/getAllCitiesByStateCode';
+		$this->path_generate_otp_for_guest_login = '/mobileyos/mobile/ws/v1/json/generateOTPForGuestLogin';
+		$this->path_validate_guest_login 	= '/mobileyos/mobile/ws/v1/json/validateGuestLogin';
+		$this->path_validate_customer_eligibilities	= '/mobileyos/mobile/ws/v1/json/validateCustomerEligibilities';
+		$this->path_verify_referral_code 	= '/mobileyos/mobile/ws/v1/json/verifyReferralCode';
+		$this->path_get_fpx_bank_list 		= '/mobileyos/mobile/ws/v1/json/getFpxBankList';
+		$this->path_create_yos_order_and_payment = '/mobileyos/mobile/ws/v1/json/createYOSOrderAndPaymentWithAddonAndReloads';
+		$this->path_check_order_payment_status 	 = '/mobileyos/mobile/ws/v1/json/orderPaymentStatus';
 
 		$ytlpd_options				= get_option($this->prefix . "settings");
 		$this->api_domain 			= (!empty($ytlpd_options['ytlpd_api_domain_url'])) ? $ytlpd_options['ytlpd_api_domain_url'] : '';
@@ -300,6 +310,7 @@ class Ytl_Pull_Data_Public
 		$this->ra_reg_verify_referral_code();
 		$this->ra_reg_get_fpx_bank_list();
 		$this->ra_reg_create_yos_order();
+		$this->ra_reg_check_order_payment_status();
 	}
 
 	public function ra_reg_add_to_cart()
@@ -1083,6 +1094,55 @@ class Ytl_Pull_Data_Public
 		return new WP_Error('error_creating_yos_order', "There's an error in creating YOS order.", array('status' => 400));
 	}
 
+	public function ra_reg_check_order_payment_status() 
+	{
+		register_rest_route('ywos/v1', 'check-order-payment-status', array(
+			'methods'	=> 'POST', 
+			'callback' 	=> array($this, 'check_order_payment_status')
+		));
+	}
+
+	public function check_order_payment_status(WP_REST_Request $request) 
+	{
+		$session_key	= $request['session_key'];
+		$yos_order_id 	= $request['yos_order_id'];
+		return $this->ca_check_order_payment_status($session_key, $yos_order_id);
+	}
+
+	public function ca_check_order_payment_status($session_key = null, $yos_order_id = 0) 
+	{
+		$session_id 	= $this->ca_generate_auth_token(true);
+		if ($session_key != null && $yos_order_id && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
+			$params = ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'orderNumber' => $yos_order_id, 'sessionId' => $session_id];
+			$args 	= [
+				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
+				'body'          => json_encode($params),
+				'method'        => 'POST',
+				'data_format'   => 'body',
+				'timeout'     	=> $this->api_timeout
+			];
+			$api_url	= $this->api_domain . $this->path_check_order_payment_status;
+			$request 	= wp_remote_post($api_url, $args);
+			$data 		= json_decode($request['body']);
+
+			$xpay_order_response 	= $data->responseMessage;
+			$xpay_order_meta 		= $data;
+			$this->update_order_record($session_key, $xpay_order_response, $xpay_order_meta);
+			
+			if ($data->responseCode == 0) {
+				$data->sessionId = $session_id;
+				$response 	= new WP_REST_Response($data);
+				$response->set_status(200);
+				return $response;
+			} else {
+				return new WP_Error('error_checking_order_payment_status', $data->responseMessage, array('status' => 400));
+			}
+		} else {
+			return new WP_Error('error_checking_order_payment_status', "Parameters not complete to check order payment status.", array('status' => 400));
+		}
+		return new WP_Error('error_checking_order_payment_status', "There's an error in checking order payment status.", array('status' => 400));
+	}
+
 	public function get_request_input($order_info = [], $input_name = '') 
 	{
 		return (isset($order_info[$input_name]) && !empty(trim($order_info[$input_name]))) ? $order_info[$input_name] : null;
@@ -1126,6 +1186,29 @@ class Ytl_Pull_Data_Public
 				$params, 
 				array(
 					'ID' => $checkIfExists
+				)
+			);
+		}
+	}
+
+	public function update_order_record($session_key = '', $xpay_order_response = '', $xpay_order_meta) 
+	{
+		global $wpdb;
+		$table_name = $wpdb->prefix.'ywos_orders';
+
+		$getRecordID 	= $wpdb->get_var("SELECT ID FROM $table_name WHERE session_key = '$session_key'");
+		$curTimestamp 	= current_time('mysql', 1);
+		
+		if ($getRecordID) {
+			$params = [
+				'xpay_order_response' 	=> $xpay_order_response, 
+				'xpay_order_meta' 		=> serialize($xpay_order_meta) 
+			];
+			$wpdb->update(
+				$table_name,
+				$params, 
+				array(
+					'ID' => $getRecordID
 				)
 			);
 		}

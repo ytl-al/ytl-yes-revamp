@@ -1088,7 +1088,7 @@
                     var self = this;
                     self.allowRequestOTP = false;
 
-                    var timer = 1 * 30,
+                    var timer = timerMinute * 60,
                         minutes, seconds;
                     var interval = setInterval(function() {
                         timer -= 1;
