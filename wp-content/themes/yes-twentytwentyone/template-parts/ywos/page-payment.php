@@ -107,7 +107,7 @@
                                 <p class="large">{{ orderSummary.plan.displayName }}</p>
                             </div>
                             <div class="col-4 text-end">
-                                <p class="large"><strong>RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(2) }}</strong></p>
+                                <p class="large"><strong>RM{{ parseFloat(orderSummary.plan.totalAmountWithoutSST).toFixed(2) }}</strong></p>
                             </div>
                             <div class="col-6">
                                 <p class="large">Add-Ons</p>
@@ -336,7 +336,8 @@
                     cardExpiryMonth: '',
                     cardExpiryYear: '', 
                     isAutoSubscribe: false, 
-                    isSaveMyCard: false
+                    isSaveMyCard: false,
+                    tenure: ''
                 },
                 fpxBanks: [
                     { value: "alliance-bank", name: "Alliance Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/alliance.png" }, 
@@ -510,7 +511,8 @@
                     deliveryFromDate: '', 
                     deliveryToData: '', 
                     deliveryType: ''
-                }
+                },
+                paymentResponse: null
             },
             mounted: function() {},
             created: function() {
@@ -587,8 +589,38 @@
                         $('#modal-bodyText').html('');
                     });
                 }, 
-                yosPaymentResponseCheck: function(orderID = '', accountNumber = '', timeoutObj) {
+                ajaxCheckOrderPaymentStatus(timeoutObj) {
+                    var self = this;
+                    var params = {
+                        'session_key': ywos.lsData.sessionKey, 
+                        'yos_order_id': self.orderResponse.orderNumber
+                    };
+                    axios.post(apiEndpointURL + '/check-order-payment-status', params)
+                        .then((response) => {
+                            console.log(response);
+                            var data = response.data;
+                            if (data != null && data.responseCode != null) {
+                                console.log('payment through');
+                                self.paymentResponse = data;
+                                clearTimeout(timeoutObj);
 
+                                if (mainwin && !mainwin.closed) {
+                                    mainwin.close();
+                                }
+
+                                self.redirectThankYou();
+                            } else {
+                                setTimeout(function() {
+                                    self.ajaxCheckOrderPaymentStatus(timeoutObj);
+                                }, 10000);
+                            }
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                            setTimeout(function() {
+                                self.ajaxCheckOrderPaymentStatus(timeoutObj);
+                            }, 10000);
+                        });
                 }, 
                 initXpay: function() {
                     var self = this;
@@ -601,14 +633,15 @@
                             mainwin.focus();
                             mainwin.close();
                         }
+                        self.redirectThankYou();
                         console.log('initXpay timeout');
                     }, 300000);
 
-                    mainwin = postPayment({ order_id: xpayOrderId, encrypted_string: encryptedValue });
+                    mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
                     console.log(mainwin);
                     
                     setTimeout(function() {
-                        self.yosPaymentResponseCheck(xpayOrderId, '', timeoutObject);
+                        self.ajaxCheckOrderPaymentStatus(timeoutObject);
                     }, 10000);
                 }, 
                 ajaxCreateYOSOrder: function() {
@@ -654,7 +687,8 @@
                         'name_on_card'  : self.paymentInfo.nameOnCard, 
                         'card_cvv'      : self.paymentInfo.cardCVV, 
                         'card_expiry_month' : self.paymentInfo.cardExpiryMonth, 
-                        'card_expiry_year'  : self.paymentInfo.cardExpiryYear 
+                        'card_expiry_year'  : self.paymentInfo.cardExpiryYear, 
+                        'tenure'        : self.paymentInfo.tenure
                     };
                     axios.post(apiEndpointURL + '/create-yos-order', params)
                         .then((response) => {
@@ -687,6 +721,17 @@
                     toggleOverlay();
                     this.ajaxCreateYOSOrder();
                     e.preventDefault();
+                },
+                redirectThankYou: function() {
+                    var self = this;
+
+                    ywos.lsData.meta.completedStep = self.currentStep;
+                    ywos.lsData.meta.paymentInfo = self.paymentInfo;
+                    ywos.lsData.meta.orderResponse = self.orderResponse;
+                    ywos.lsData.meta.paymentResponse = self.paymentResponse;
+                    ywos.updateYWOSLSData();
+
+                    ywos.redirectToPage('thank-you');
                 },
                 selectBank: function(bank, event) {
                     var self = this;

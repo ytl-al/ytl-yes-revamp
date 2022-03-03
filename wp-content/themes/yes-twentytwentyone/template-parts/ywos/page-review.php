@@ -62,7 +62,7 @@
                                 <p class="large">{{ orderSummary.plan.displayName }}</p>
                             </div>
                             <div class="col-4 text-end">
-                                <p class="large"><strong>RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(2) }}</strong></p>
+                                <p class="large"><strong>RM{{ parseFloat(orderSummary.plan.totalAmountWithoutSST).toFixed(2) }}</strong></p>
                             </div>
                             <div class="col-6">
                                 <p class="large">Add-Ons</p>
@@ -142,7 +142,7 @@
                                         <p>{{ orderSummary.plan.displayName }}</p>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <p>RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(2) }}</p>
+                                        <p>RM{{ parseFloat(orderSummary.plan.totalAmountWithoutSST).toFixed(2) }}</p>
                                     </div>
                                 </div>
                                 <div class="row mb-3">

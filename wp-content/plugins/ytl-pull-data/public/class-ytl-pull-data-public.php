@@ -987,6 +987,7 @@ class Ytl_Pull_Data_Public
 		$card_cvv 		= $this->get_request_input($order_info, 'card_cvv');
 		$card_expiry_month 	= $this->get_request_input($order_info, 'card_expiry_month');
 		$card_expiry_year 	= $this->get_request_input($order_info, 'card_expiry_year');
+		$tenure 		= $this->get_request_input($order_info, 'tenure');
 
 		$session_id 	= $this->ca_generate_auth_token(true);
 
@@ -1049,6 +1050,7 @@ class Ytl_Pull_Data_Public
 					'cardCVV' 			=> $card_cvv, 
 					'cardExpiryMonth' 	=> $card_expiry_month, 
 					'cardExpiryYear' 	=> $card_expiry_year, 
+					'tenure' 			=> $tenure, 
 					'isAutoSubscribe' 	=> false, 
 					'isSavedCard' 		=> false 
 				], 
@@ -1127,7 +1129,8 @@ class Ytl_Pull_Data_Public
 
 			$xpay_order_response 	= $data->responseMessage;
 			$xpay_order_meta 		= $data;
-			$this->update_order_record($session_key, $xpay_order_response, $xpay_order_meta);
+			$is_xpay_success 		= ($data->responseCode == 0) ? 1 : 0;
+			$this->update_order_record($session_key, $xpay_order_response, $is_xpay_success, $xpay_order_meta);
 			
 			if ($data->responseCode == 0) {
 				$data->sessionId = $session_id;
@@ -1191,7 +1194,7 @@ class Ytl_Pull_Data_Public
 		}
 	}
 
-	public function update_order_record($session_key = '', $xpay_order_response = '', $xpay_order_meta) 
+	public function update_order_record($session_key = '', $xpay_order_response = '', $is_xpay_success = 0, $xpay_order_meta) 
 	{
 		global $wpdb;
 		$table_name = $wpdb->prefix.'ywos_orders';
@@ -1202,7 +1205,8 @@ class Ytl_Pull_Data_Public
 		if ($getRecordID) {
 			$params = [
 				'xpay_order_response' 	=> $xpay_order_response, 
-				'xpay_order_meta' 		=> serialize($xpay_order_meta) 
+				'xpay_order_meta' 		=> serialize($xpay_order_meta),
+				'is_xpay_success' 		=> $is_xpay_success 
 			];
 			$wpdb->update(
 				$table_name,

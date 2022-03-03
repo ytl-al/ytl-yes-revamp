@@ -475,7 +475,7 @@
                                         <p>{{ orderSummary.plan.displayName }}</p>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <p>RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(2) }}</p>
+                                        <p>RM{{ parseFloat(orderSummary.plan.totalAmountWithoutSST).toFixed(2) }}</p>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
