@@ -182,9 +182,9 @@
                             <h1>Thank you!</h1>
                             <p class="mb-3">
                                 Tracking Number / Order Number <br />
-                                <a href="javascript:void(0)" class="grey-link">{{ orderResponse.displayOrderNumber }}</a> <br />
-                                Placed on Tuesday, 6th Feb 2021 <br />
-                                Estimated Delivery: {{ orderResponse.deliveryFromDate }} - {{ orderResponse.deliveryToDate }} <br /><br />
+                                <a href="javascript:void(0)" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br />
+                                Placed on {{ purchaseInfo.orderCreationDate }} <br />
+                                Estimated Delivery: {{ purchaseInfo.deliveryFromDate }} - {{ purchaseInfo.deliveryToDate }} <br /><br />
                                 A summary of your order has been sent to your email
                             </p>
                             <div class="offer-box d-none">
@@ -266,11 +266,11 @@
             data: {
                 currentStep: 5,
                 pageValid: false, 
-                orderResponse: {
+                purchaseInfo: {
                     displayOrderNumber: '',
                     deliveryFromDate: '',
                     deliveryToDate: '',
-                    orderPlacedAt: ''
+                    orderCreationDate: ''
                 }
             },
             mounted: function() {},
@@ -293,7 +293,23 @@
                 }, 
                 updateData: function() {
                     var self = this;
-                    self.orderResponse = (ywos.lsData.meta.orderResponse) ? ywos.lsData.meta.orderResponse : self.orderResponse;
+                    if (typeof ywos.lsData.meta.orderResponse != 'undefined') {
+                        self.purchaseInfo.displayOrderNumber = ywos.lsData.meta.orderResponse.orderInfo;
+                        self.purchaseInfo.deliveryFromDate = ywos.lsData.meta.orderResponse.deliveryFromDate;
+                        self.purchaseInfo.deliveryToDate = ywos.lsData.meta.orderResponse.deliveryToDate;
+                        self.purchaseInfo.orderCreationDate = ywos.lsData.meta.orderResponse.orderCreationDate;
+                    } else if (ywos.lsData.meta.purchaseInfo) {
+                        self.purchaseInfo = ywos.lsData.meta.purchaseInfo;
+                    }
+                    self.clearLocalData(ywos.lsData.meta.planID, ywos.lsData.meta.completedStep);
+                }, 
+                clearLocalData: function(planID = 0, completedStep = 0) {
+                    ywos.lsData.meta = {};
+                    ywos.lsData.meta.planID = planID;
+                    ywos.lsData.meta.completedStep = completedStep;
+                    ywos.lsData.meta.purchaseInfo = this.purchaseInfo;
+                    ywos.lsData.meta.purchaseCompleted = true;
+                    ywos.updateYWOSLSData();
                 }
             }
         });

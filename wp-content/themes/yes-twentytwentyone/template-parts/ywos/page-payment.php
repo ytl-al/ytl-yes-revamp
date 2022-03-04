@@ -121,17 +121,17 @@
                             <div class="col-6 text-end">
                                 <p class="large"><strong>RM{{ parseFloat(orderSummary.due.taxesSST).toFixed(2) }}</strong></p>
                             </div>
-                            <div class="col-6">
-                                <p class="large">Shipping</p>
-                            </div>
-                            <div class="col-6 text-end">
-                                <p class="large"><strong>RM{{ parseFloat(orderSummary.due.shippingFees).toFixed(2) }}</strong></p>
-                            </div>
                             <div class="col-6" v-if="deliveryInfo.securityType == 'PASSPORT' && orderSummary.due.foreignerDeposit > 0">
                                 <p class="large">Deposit for Foreigner</p>
                             </div>
                             <div class="col-6 text-end" v-if="deliveryInfo.securityType == 'PASSPORT' && orderSummary.due.foreignerDeposit > 0">
                                 <p class="large"><strong>RM{{ parseFloat(orderSummary.due.foreignerDeposit).toFixed(2) }}</strong></p>
+                            </div>
+                            <div class="col-6">
+                                <p class="large">Shipping</p>
+                            </div>
+                            <div class="col-6 text-end">
+                                <p class="large"><strong>RM{{ parseFloat(orderSummary.due.shippingFees).toFixed(2) }}</strong></p>
                             </div>
                             <div class="col-6">
                                 <p class="large">Rounding Adjustment</p>
@@ -512,6 +512,7 @@
                     deliveryToData: '', 
                     deliveryType: ''
                 },
+                checkPaymentStatusCount: 0,
                 paymentResponse: null
             },
             mounted: function() {},
@@ -595,9 +596,9 @@
                         'session_key': ywos.lsData.sessionKey, 
                         'yos_order_id': self.orderResponse.orderNumber
                     };
+                    console.log(self.orderResponse);
                     axios.post(apiEndpointURL + '/check-order-payment-status', params)
                         .then((response) => {
-                            console.log(response);
                             var data = response.data;
                             if (data != null && data.responseCode != null) {
                                 console.log('payment through');
@@ -605,6 +606,7 @@
                                 clearTimeout(timeoutObj);
 
                                 if (mainwin && !mainwin.closed) {
+                                    mainwin.focus();
                                     mainwin.close();
                                 }
 
@@ -616,17 +618,37 @@
                             }
                         })
                         .catch((error) => {
-                            console.log(error);
-                            setTimeout(function() {
-                                self.ajaxCheckOrderPaymentStatus(timeoutObj);
-                            }, 10000);
+                            var response = error.response;
+                            self.checkPaymentStatusCount++;
+                            if (typeof response != 'undefined' && self.checkPaymentStatusCount > 4) {
+                                var data = response.data;
+                                var errorMsg = '';
+                                if (error.response.status == 500 || error.response.status == 503) {
+                                    errorMsg = "There's an error in processing your payment.<br />Please try again later.";
+                                } else {
+                                    errorMsg = data.message
+                                }
+                                toggleOverlay(false);
+                                self.toggleModalAlert('Error Payment', errorMsg);
+
+                                clearTimeout(timeoutObj);
+
+                                if (mainwin && !mainwin.closed) {
+                                    mainwin.focus();
+                                    mainwin.close();
+                                }
+                            } else {
+                                setTimeout(function() {
+                                    self.ajaxCheckOrderPaymentStatus(timeoutObj);
+                                }, 10000);
+                            }
+                            console.log(error, response);
                         });
                 }, 
                 initXpay: function() {
                     var self = this;
                     var xpayOrderId = self.orderResponse.xpayOrderId;
                     var encryptedValue = self.orderResponse.encryptedValue;
-                    console.log(self.orderResponse, self.orderResponse.xpayOrderId);
 
                     var timeoutObject = setTimeout(function() {
                         if (mainwin != null && !mainwin.closed) {
@@ -634,11 +656,9 @@
                             mainwin.close();
                         }
                         self.redirectThankYou();
-                        console.log('initXpay timeout');
                     }, 300000);
 
                     mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
-                    console.log(mainwin);
                     
                     setTimeout(function() {
                         self.ajaxCheckOrderPaymentStatus(timeoutObject);
@@ -712,10 +732,10 @@
                             console.log(error, response);
                         })
                         .finally(() => {
-                            console.log('finally');
+                            // console.log('finally');
                         });
 
-                    console.log(JSON.stringify(params));
+                    // console.log(JSON.stringify(params));
                 }, 
                 paymentSubmit: function(e) {
                     toggleOverlay();

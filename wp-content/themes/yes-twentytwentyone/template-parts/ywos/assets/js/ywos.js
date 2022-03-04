@@ -141,6 +141,16 @@ const ywos = {
         }
         this.redirectToPage('cart');
     },
+    checkPurchaseCompleted: function(currentStep = 0) {
+        if (
+            typeof this.lsData.meta.purchaseCompleted != 'undefined' &&
+            this.lsData.meta.purchaseCompleted &&
+            typeof this.lsData.meta.purchaseInfo != 'undefined'
+        ) {
+            return true;
+        }
+        return false;
+    },
     redirectToPage: function(pageSlug) {
         window.location.href = window.location.origin + '/ywos/' + pageSlug;
     },
@@ -154,6 +164,9 @@ const ywos = {
             isValid = false;
         } else if (!this.checkItems()) {
             console.log('Plan ID is not found!');
+            isValid = false;
+        } else if (this.checkPurchaseCompleted(curStep)) {
+            console.log('Purchase has been completed!');
             isValid = false;
         } else if (!this.checkStep(curStep)) {
             console.log('Previous step not yet completed!');

@@ -1127,7 +1127,7 @@ class Ytl_Pull_Data_Public
 			$request 	= wp_remote_post($api_url, $args);
 			$data 		= json_decode($request['body']);
 
-			$xpay_order_response 	= $data->responseMessage;
+			$xpay_order_response 	= $data->displayResponseMessage;
 			$xpay_order_meta 		= $data;
 			$is_xpay_success 		= ($data->responseCode == 0) ? 1 : 0;
 			$this->update_order_record($session_key, $xpay_order_response, $is_xpay_success, $xpay_order_meta);
@@ -1138,7 +1138,7 @@ class Ytl_Pull_Data_Public
 				$response->set_status(200);
 				return $response;
 			} else {
-				return new WP_Error('error_checking_order_payment_status', $data->responseMessage, array('status' => 400));
+				return new WP_Error('error_checking_order_payment_status', $data->displayResponseMessage, array('status' => 400));
 			}
 		} else {
 			return new WP_Error('error_checking_order_payment_status', "Parameters not complete to check order payment status.", array('status' => 400));

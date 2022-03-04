@@ -77,17 +77,17 @@
                             <div class="col-6 text-end">
                                 <p class="large"><strong>RM{{ parseFloat(orderSummary.due.taxesSST).toFixed(2) }}</strong></p>
                             </div>
-                            <div class="col-6">
-                                <p class="large">Shipping</p>
-                            </div>
-                            <div class="col-6 text-end">
-                                <p class="large"><strong>RM{{ parseFloat(orderSummary.due.shippingFees).toFixed(2) }}</strong></p>
-                            </div>
                             <div class="col-6" v-if="customerDetails.securityType == 'PASSPORT' && orderSummary.due.foreignerDeposit > 0">
                                 <p class="large">Deposit for Foreigner</p>
                             </div>
                             <div class="col-6 text-end" v-if="customerDetails.securityType == 'PASSPORT' && orderSummary.due.foreignerDeposit > 0">
                                 <p class="large"><strong>RM{{ parseFloat(orderSummary.due.foreignerDeposit).toFixed(2) }}</strong></p>
+                            </div>
+                            <div class="col-6">
+                                <p class="large">Shipping</p>
+                            </div>
+                            <div class="col-6 text-end">
+                                <p class="large"><strong>RM{{ parseFloat(orderSummary.due.shippingFees).toFixed(2) }}</strong></p>
                             </div>
                             <div class="col-6">
                                 <p class="large">Rounding Adjustment</p>
