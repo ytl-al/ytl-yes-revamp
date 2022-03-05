@@ -443,7 +443,7 @@
                                 </div>
                                 <div class="col-lg-6 col-12 pt-lg-4 pb-1 px-4 px-lg-4">
                                     <h3 class="mt-3 mt-lg-0">{{ orderSummary.plan.displayName }}</h3>
-                                    <p class="mb-3">RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(0) }} for {{ orderSummary.plan.internetData }}</p>
+                                    <p class="mb-3" v-if="orderSummary.plan.internetData">RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(0) }} for {{ orderSummary.plan.internetData }}</p>
                                     <div class="package-info" v-if="packageInfos.length">
                                         <div class="row">
                                             <div class="col-6 mb-3" v-for="(packageInfo, index) in packageInfos.slice(0, 4)">
@@ -454,7 +454,7 @@
                                 </div>
                                 <div class="col-lg-3 col-12 mt-3 mb-3 mt-lg-0 mb-lg-0 d-flex align-items-center justify-content-lg-end justify-content-center">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        <h3 class="price">RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(0) }}</h3>
+                                        <h3 class="price">RM{{ formatPrice(parseFloat(orderSummary.plan.totalAmount)) }}</h3>
                                     </button>
                                 </div>
                             </div>
@@ -470,15 +470,18 @@
 
                                 <h1>One-time Charges (due now)</h1>
                                 <h2>Rate plan</h2>
-                                <div class="row mb-4">
-                                    <div class="col-6">
-                                        <p>{{ orderSummary.plan.displayName }}</p>
+
+                                <template v-for="(price) in orderSummary.plan.planPriceBreakdown">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p>{{ price.name }}</p>
+                                        </div>
+                                        <div class="col-6 text-end">
+                                            <p>RM{{ price.value }}</p>
+                                        </div>
                                     </div>
-                                    <div class="col-6 text-end">
-                                        <p>RM{{ parseFloat(orderSummary.plan.totalAmountWithoutSST).toFixed(2) }}</p>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
+                                </template>
+                                <div class="row mt-4 mb-3">
                                     <div class="col-10 pb-1 border-bottom">
                                         <p>Add-Ons</p>
                                         <p v-if="orderSummary.addOn != null">{{ orderSummary.addOn.displayAddonName }} <a href="javascript:void(0)" class="btn-sm pink-btn text-white mx-lg-3" v-on:click="removeAddOn()">Remove</a></p>
@@ -511,24 +514,18 @@
                                         <p>RM{{ parseFloat(orderSummary.due.rounding).toFixed(2) }}</p>
                                     </div>
                                 </div>
-                                <div v-if="orderSummary.plan.bundlePlan">
-                                    <p class="bold mb-2">Device Bundle: <span class="fw-bold">{{ orderSummary.plan.bundleName }}</span></p>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <p>Device payment</p>
+                                <div >
+                                    <p class="bold mb-2" v-if="orderSummary.plan.bundleName">Device Bundle: <span class="fw-bold">{{ orderSummary.plan.bundleName }}</span></p>
+                                    <template v-for="(price, index) in orderSummary.plan.planDevicePriceBreakdown">
+                                        <div class="row" v-bind:class="{ 'mb-3': (index == orderSummary.plan.planDevicePriceBreakdown.length - 1) }">
+                                            <div class="col-6">
+                                                <p>{{ price.name }}</p>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <p>RM{{ price.value }}</p>
+                                            </div>
                                         </div>
-                                        <div class="col-6 text-end">
-                                            <p>RM{{ parseFloat(orderSummary.plan.totalPostpaidDevice).toFixed(2) }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-6">
-                                            <p>Device Upfront Payment</p>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <p>RM{{ parseFloat(orderSummary.plan.totalPostpaidDeviceUpfont).toFixed(2) }}</p>
-                                        </div>
-                                    </div>
+                                    </template>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-6">
@@ -536,7 +533,7 @@
                                         <p class="small">This summary is not an invoice</p>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <p class="large">RM{{ parseFloat(orderSummary.due.total).toFixed(2) }}</p>
+                                        <p class="large">RM{{ formatPrice(parseFloat(orderSummary.due.total).toFixed(2)) }}</p>
                                     </div>
                                 </div>
                                 <div v-if="orderSummary.plan.planType != 'prepaid'">
@@ -573,7 +570,7 @@
                                 <h3>TOTAL</h3>
                             </div>
                             <div class="col-6 pt-2 pb-2 text-end">
-                                <h3>RM{{ parseFloat(orderSummary.due.total).toFixed(2) }}</h3>
+                                <h3>RM{{ formatPrice(parseFloat(orderSummary.due.total).toFixed(2)) }}</h3>
                             </div>
                         </div>
                         <div class="monthly mb-4" v-if="orderSummary.plan.monthlyCommitment > 0">
@@ -830,26 +827,28 @@
 
                             self.orderSummary.plan = data;
 
+                            var planPriceBreakdown = [];
+                            var planDevicePriceBreakdown = [];
                             for (var key in data) {
                                 var keyPricingComponentList = 'pricingComponentList';
                                 if (key == keyPricingComponentList) {
                                     var pricingComponentList = data[keyPricingComponentList];
                                     pricingComponentList.map(function(pricingComponent) {
-                                        var pricingComponentName = pricingComponent.pricingComponentName;
-                                        switch (pricingComponentName) {
-                                            case 'Postpaid Device Price':
-                                                self.orderSummary.plan.totalPostpaidDevice = pricingComponent.pricingComponentValue;
-                                                break;
-                                            case 'Plan Advanced Payment':
-                                                self.orderSummary.plan.totalAdvancedPayment = pricingComponent.pricingComponentValue;
-                                                break;
-                                            case 'Postpaid Device Upfront Payment':
-                                                self.orderSummary.plan.totalPostpaidDeviceUpfont = pricingComponent.pricingComponentValue;
-                                                break;
+                                        var componentName = pricingComponent.pricingComponentName;
+                                        var componentValue = formatPrice(pricingComponent.pricingComponentValue);
+                                        var objArr = { name: componentName, value: componentValue };
+                                        if (['Postpaid Device Price', 'Postpaid Device Upfront Payment'].includes(componentName)) {
+                                            planDevicePriceBreakdown.push(objArr);
+                                        } else if (['Postpaid Foreigner Deposit'].includes(componentName)) {
+                                            self.orderSummary.plan.foreignerDeposit = componentValue;
+                                        } else {
+                                            planPriceBreakdown.push(objArr);
                                         }
                                     });
                                 }
                             };
+                            self.orderSummary.plan.planPriceBreakdown = planPriceBreakdown;
+                            self.orderSummary.plan.planDevicePriceBreakdown = planDevicePriceBreakdown;
 
                             self.updateAddOns(data.addOns);
                             self.updatePlan();

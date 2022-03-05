@@ -257,3 +257,7 @@ function getCreditCardType(ccNumber) {
     }
     return undefined;
 }
+
+function formatPrice(amount) {
+    return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
