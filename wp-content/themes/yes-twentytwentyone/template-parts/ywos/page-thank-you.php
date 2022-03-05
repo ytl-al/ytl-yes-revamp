@@ -204,7 +204,7 @@
             <div class="row gx-5">
                 <div class="col-lg-4 col-12 mt-4">
                     <div class="package-box">
-                        <h1>Kasi Up<br>Postpaid 30</h1>
+                        <h1>Kasi Up Prepaid 15 <br />(Add-On)</h1>
                         <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">20GB for RM30</p>
                         <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">Unlimited refferals and earnings</p>
                         <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">Free YES Altitude phone</p>
@@ -213,14 +213,14 @@
                                 <h2>RM30.00<span>/month</span></h2>
                             </div>
                             <div class="col-2">
-                                <a href="#"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cart-pink-icon.png" alt=""></a>
+                                <a href="javascript:void(0)" onClick="buyPlan('710');"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cart-pink-icon.png" alt=""></a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-12 mt-4">
                     <div class="package-box">
-                        <h1>Merdeka<br>Device Bundle</h1>
+                        <h1>Pakej YES Peranti Keluarga Malaysia</h1>
                         <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">Free YES Altitude phone</p>
                         <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">Unlimited refferals and earnings</p>
                         <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">Unlimited Borak</p>
@@ -229,14 +229,14 @@
                                 <h2>RM49.00<span>/month</span></h2>
                             </div>
                             <div class="col-2">
-                                <a href="#"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cart-pink-icon.png" alt=""></a>
+                                <a href="javascript:void(0)" onClick="buyPlan('759');"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cart-pink-icon.png" alt=""></a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-12 mt-4">
                     <div class="package-box">
-                        <h1>Kasi Up Prepaid<br>Unlimited 30</h1>
+                        <h1>Pakej YES Remaja <br />Keluarga Malaysia</h1>
                         <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">Unlimited data for RM30</p>
                         <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">Unlimited refferals and earnings</p>
                         <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">Unlimited Borak</p>
@@ -245,7 +245,7 @@
                                 <h2>RM30.00<span>/month</span></h2>
                             </div>
                             <div class="col-2">
-                                <a href="#"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cart-pink-icon.png" alt=""></a>
+                                <a href="javascript:void(0)" onClick="buyPlan('758');"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cart-pink-icon.png" alt=""></a>
                             </div>
                         </div>
                     </div>
