@@ -213,6 +213,24 @@ class Ytl_Pull_Data_Public
 	private $path_check_order_payment_status;
 
 	/**
+	 * The api path to get Maybank IPP tenure details.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $path_get_ipp_tenure_details		The api path to get Maybank IPP tenure details.
+	 */
+	private $path_get_ipp_tenure_details;
+
+	/**
+	 * The api path to get Maybank IPP monthly installment details.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $path_get_ipp_monthly_installment		The api path to get Maybank IPP monthly installment details.
+	 */
+	private $path_get_ipp_monthly_installment;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -240,6 +258,8 @@ class Ytl_Pull_Data_Public
 		$this->path_get_fpx_bank_list 		= '/mobileyos/mobile/ws/v1/json/getFpxBankList';
 		$this->path_create_yos_order_and_payment = '/mobileyos/mobile/ws/v1/json/createYOSOrderAndPaymentWithAddonAndReloads';
 		$this->path_check_order_payment_status 	 = '/mobileyos/mobile/ws/v1/json/orderPaymentStatus';
+		$this->path_get_ipp_tenure_details		 = '/mobileyos/mobile/ws/v1/json/getIPPTenureDetails';
+		$this->path_get_ipp_monthly_installment  = '/mobileyos/mobile/ws/v1/json/getIPPMonthlyInstalment';
 
 		$ytlpd_options				= get_option($this->prefix . "settings");
 		$this->api_domain 			= (!empty($ytlpd_options['ytlpd_api_domain_url'])) ? $ytlpd_options['ytlpd_api_domain_url'] : '';
@@ -309,6 +329,8 @@ class Ytl_Pull_Data_Public
 		$this->ra_reg_validate_customer_eligibilities();
 		$this->ra_reg_verify_referral_code();
 		$this->ra_reg_get_fpx_bank_list();
+		$this->ra_reg_get_ipp_tenures();
+		$this->ra_reg_get_ipp_monthly_installments();
 		$this->ra_reg_create_yos_order();
 		$this->ra_reg_check_order_payment_status();
 	}
@@ -929,6 +951,93 @@ class Ytl_Pull_Data_Public
 			return new WP_Error('error_getting_fpx_bank_list', "Parameters not complete to retrieve cities.", array('status' => 400));
 		}
 		return new WP_Error('error_getting_fpx_bank_list', "There's an error in retrieving the bank list.", array('status' => 400));
+	}
+
+	public function ra_reg_get_ipp_tenures() 
+	{
+		register_rest_route('ywos/v1', 'get-ipp-tenures', array(
+			'methods'	=> 'POST', 
+			'callback' 	=> array($this, 'get_ipp_tenures')
+		));
+	}
+
+	public function get_ipp_tenures(WP_REST_Request $request) 
+	{
+		$plan_name	= $request['plan_name'];
+		return $this->ca_get_ipp_tenures($plan_name);
+	}
+
+	public function ca_get_ipp_tenures($plan_name = '') 
+	{
+		$session_id 	= $this->ca_generate_auth_token(true);
+		if ($plan_name && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
+			$params = ['planName' => $plan_name, 'requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'sessionId' => $session_id];
+			$args 	= [
+				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
+				'body'          => json_encode($params),
+				'method'        => 'POST',
+				'data_format'   => 'body',
+				'timeout'     	=> $this->api_timeout
+			];
+			$api_url	= $this->api_domain . $this->path_get_ipp_tenure_details;
+			$request 	= wp_remote_post($api_url, $args);
+			$data 		= json_decode($request['body']);
+
+			if ($data->responseCode > -1) {
+				$response = new WP_REST_Response($data);
+				$response->set_status(200);
+				return $response;
+			} else {
+				return new WP_Error('error_getting_ipp_tenure', "There's an error in retrieving the Maybank IPP tenure details.", array('status' => 400));
+			}
+		} else {
+			return new WP_Error('error_getting_ipp_tenure', "Parameters not complete to retrieve Maybank IPP tenure details.", array('status' => 400));
+		}
+		return new WP_Error('error_getting_ipp_tenure', "There's an error in retrieving the Maybank IPP tenure details.", array('status' => 400));
+	}
+
+	public function ra_reg_get_ipp_monthly_installments() 
+	{
+		register_rest_route('ywos/v1', 'get-ipp-monthly-installments', array(
+			'methods'	=> 'POST', 
+			'callback' 	=> array($this, 'get_ipp_monthly_installments')
+		));
+	}
+
+	public function get_ipp_monthly_installments(WP_REST_Request $request) 
+	{
+		$total_amount 	= $request['total_amount'];
+		$tenure_type 	= $request['tenure_type'];
+		return $this->ca_get_ipp_monthly_installments($total_amount, $tenure_type);
+	}
+
+	public function ca_get_ipp_monthly_installments($total_amount = 0, $tenure_type = 0) 
+	{
+		$session_id 	= $this->ca_generate_auth_token(true);
+		if ($total_amount && $tenure_type && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
+			$params = ['planAmount' => $total_amount, 'ippTenureType' => $tenure_type, 'requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'sessionId' => $session_id];
+			$args 	= [
+				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
+				'body'          => json_encode($params),
+				'method'        => 'POST',
+				'data_format'   => 'body',
+				'timeout'     	=> $this->api_timeout
+			];
+			$api_url	= $this->api_domain . $this->path_get_ipp_monthly_installment;
+			$request 	= wp_remote_post($api_url, $args);
+			$data 		= json_decode($request['body']);
+			
+			if ($data->responseCode > -1) {
+				$response = new WP_REST_Response($data);
+				$response->set_status(200);
+				return $response;
+			} else {
+				return new WP_Error('error_getting_ipp_installment', "There's an error in retrieving the Maybank IPP installment details.", array('status' => 400));
+			}
+		} else {
+			return new WP_Error('error_getting_ipp_installment', "Parameters not complete to retrieve Maybank IPP installment details.", array('status' => 400));
+		}
+		return new WP_Error('error_getting_ipp_installment', "There's an error in retrieving the Maybank IPP installment details.", array('status' => 400));
 	}
 
 	public function ra_reg_create_yos_order()

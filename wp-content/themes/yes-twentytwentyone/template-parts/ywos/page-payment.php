@@ -139,6 +139,16 @@
                             <div class="col-6 text-end">
                                 <p class="large"><strong>RM{{ parseFloat(orderSummary.due.rounding).toFixed(2) }}</strong></p>
                             </div>
+                            <template v-if="paymentInfo.paymentMethod == 'CREDIT_CARD_IPP' && maybankIPP.ippInstallmentSelected.duration && maybankIPP.ippInstallmentSelected.monthlyInstallment != ''">
+                                <div class="col-12">&nbsp;</div>
+                                <div class="col-6"><p class="large">Payment Duration</p></div>
+                                <div class="col-6 text-end"><p class="large"><strong>{{ maybankIPP.ippInstallmentSelected.duration }} months</strong></p></div>
+                                <div class="col-6"><p class="large">Administration Payment</p></div>
+                                <div class="col-6 text-end"><p class="large"><strong>RM{{ maybankIPP.ippInstallmentSelected.administrationPayment.toFixed(2) }}</strong></p></div>
+                                <div class="col-6"><p class="large">Payment Duration</p></div>
+                                <div class="col-6 text-end"><p class="large"><strong>{{ maybankIPP.ippInstallmentSelected.monthlyInstallment.replace(' ', '') }} <sup>**</sup></strong></p></div>
+                                <div class="col-12 mt-3"><p class="text-danger"><sup>**</sup> The Monthly Instalment payment amount generated is just an estimate. To confirm the exact amount. Kindly get in touch with Maybank.</p></div>
+                            </template>
                         </div>
                     </div>
                 </div>
@@ -158,18 +168,44 @@
                                     <img src="/wp-content/uploads/2022/02/fpx-logo.png" />
                                 </button>
                             </li>
+                            <li class="nav-item" role="presentation" v-if="!maybankIPP.disabled">
+                                <button type="button" class="nav-link" id="nav-creditcard" role="tab" data-paymentnav="CREDIT_CARD_IPP" data-bs-toggle="pill" data-bs-target="#tab-creditcard" aria-controls="tab-creditcard" aria-selected="false" v-on:click="selectPaymentMethod('CREDIT_CARD_IPP')">
+                                    <img src="/wp-content/uploads/2022/02/maybank-ipp-logo.png" />
+                                </button>
+                            </li>
                         </ul>
                         <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade" id="tab-creditcard" role="tabpanel" aria-labelledby="nav-creditcard">
+                            <div class="tab-pane" id="tab-creditcard" role="tabpanel" aria-labelledby="nav-creditcard">
                                 <div class="tab-paneContent">
-                                    <div class="row mb-4">
-                                        <div class="col-lg-6">
-                                            <p class="panel-weaccept">
-                                                We accept
-                                                <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/visa.png" />
-                                                <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" />
-                                                <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/mastercard.png" />
-                                            </p>
+                                    <template v-if="paymentInfo.paymentMethod == 'CREDIT_CARD'">
+                                        <div class="row mb-4">
+                                            <div class="col-lg-6">
+                                                <h4 class="my-3">Credit/Debit Card</h4>
+                                                <p class="panel-weaccept">
+                                                    We accept
+                                                    <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/visa.png" />
+                                                    <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" />
+                                                    <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/mastercard.png" />
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <div v-bind:class="{ 'd-none': (maybankIPP.disabled || paymentInfo.paymentMethod != 'CREDIT_CARD_IPP') }">
+                                        <div class="row mb-4">
+                                            <div class="col-lg-6">
+                                                <h4 class="my-3">Maybank 0% EzyPay (Instalment Payment)</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-lg-6">
+                                                <label class="form-label" for="select-tenure">Installment Type</label>
+                                                <div class="form-group">
+                                                    <select class="form-control form-select" id="select-tenure" data-live-search="false" name="ipp-tenure" v-model="paymentInfo.tenure" @change="watchTenureChange">
+                                                        <option value="" disabled="disabled" selected="selected">Select Installment Type</option>
+                                                        <option v-for="ippType in maybankIPP.ippTypeList" :value="ippType.ippTenureType">{{ ippType.ippTenureTypeDisplay }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -222,8 +258,13 @@
                                     </div> -->
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="tab-fpx" role="tabpanel" aria-labelledby="nav-fpx">
+                            <div class="tab-pane" id="tab-fpx" role="tabpanel" aria-labelledby="nav-fpx">
                                 <div class="tab-paneContent">
+                                    <div class="row mb-4">
+                                        <div class="col-lg-6">
+                                            <h4 class="my-3">Online Banking (FPX)</h4>
+                                        </div>
+                                    </div>
                                     <div class="row mb-4">
                                         <div class="col-lg-6">
                                             <ul class="nav nav-pills listing-quickSelectBanks">
@@ -373,6 +414,16 @@
                     number6: '', 
                     number7: '' 
                 },
+                maybankIPP: {
+                    disabled: true, 
+                    ippTypeList: [],
+                    ippInstallments: [],
+                    ippInstallmentSelected: {
+                        duration: 0, 
+                        administrationPayment: 0.00, 
+                        monthlyInstallment: ''
+                    }
+                }, 
                 countries: [
                     { "value": "Malaysia", "name": "Malaysia" }, 
                     { "value": "Argentina", "name": "Argentina" }, 
@@ -533,6 +584,7 @@
             methods: {
                 pageInit: function() {
                     var self = this;
+                    
                     if (ywos.validateSession(self.currentStep)) {
                         self.pageValid = true;
                         self.ajaxGetFPXBankList();
@@ -567,10 +619,65 @@
                         })
                         .finally(() => {
                             setTimeout(function() {
-                                $('.form-select').selectpicker('refresh');
+                                $('.form-select#select-bank').selectpicker('refresh');
+                                // toggleOverlay(false);
+                            }, 500);
+                        });
+                },
+                ajaxGetMaybankIPPTenures: function() {
+                    var self = this;
+                    axios.post(apiEndpointURL + '/get-ipp-tenures', {
+                            'plan_name': self.orderSummary.plan.planName 
+                        })
+                        .then((response) => {
+                            var data = response.data;
+                            self.maybankIPP.ippTypeList = data.ippTypList;
+
+                            self.getMaybankIPPInstallments();
+                        })
+                        .catch((error) => {
+                            // console.log(error.response.data);
+                        })
+                        .finally(() => {
+                            setTimeout(function() {
+                                $('.form-select#select-tenure').selectpicker('refresh');
                                 toggleOverlay(false);
                             }, 500);
                         });
+                }, 
+                ajaxGetMaybankIPPInstallments: function(totalAmount, tenure) {
+                    var self = this;
+                    var ippInstallment = {};
+                    axios.post(apiEndpointURL + '/get-ipp-monthly-installments', {
+                            'total_amount': totalAmount, 
+                            'tenure_type': tenure
+                        })
+                        .then((response) => {
+                            var data = response.data;
+                            ippInstallment = {
+                                tenure,
+                                displayIPPMonthlyInstalment: data.displayIPPMonthlyInstalment, 
+                                displayResponseMessage: data.displayResponseMessage, 
+                                ippMonthlyInstalment: data.ippMonthlyInstalment
+                            };
+                            self.maybankIPP.ippInstallments.push(ippInstallment);
+                        })
+                        .catch((error) => {
+                            // console.log(error.response.data);
+                        });
+                },
+                getMaybankIPPInstallments: function() {
+                    var self = this;
+                    var totalAmount = self.orderSummary.due.total;
+                    var tenure = '';
+                    
+                    if (self.maybankIPP.ippTypeList.length) {
+                        self.maybankIPP.disabled = false;
+                        self.maybankIPP.ippTypeList.map(function(type) {
+                            tenure = type.ippTenureType;
+                            self.ajaxGetMaybankIPPInstallments(totalAmount, tenure);
+                        });
+                    }
                 },
                 updateData: function() {
                     var self = this;
@@ -580,6 +687,8 @@
                     self.paymentInfo.amount = self.orderSummary.due.amount;
                     self.paymentInfo.sst = self.orderSummary.due.taxesSST;
                     self.paymentInfo.totalAmount = self.orderSummary.due.total;
+
+                    self.ajaxGetMaybankIPPTenures();
                 },
                 toggleModalAlert: function(modalHeader = '', modalText = '') {
                     $('#modal-titleLabel').html(modalHeader);
@@ -661,6 +770,7 @@
                     mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
                     
                     setTimeout(function() {
+                        self.checkPaymentStatusCount = 0;
                         self.ajaxCheckOrderPaymentStatus(timeoutObject);
                     }, 10000);
                 }, 
@@ -783,9 +893,12 @@
                         if (inputVal.length > 3) {
                             $('#input-cardInput' + nextStep).focus();
                         }
-                        if (inputVal.length == 4 && inputStep == 4) {
+                        if (inputVal.length == 4 && inputStep == 4 && self.cardholder.number1.length == 4 && self.cardholder.number2.length == 4 && self.cardholder.number3.length == 4 && self.cardholder.number4.length == 4) {
                             self.paymentInfo.cardNumber = self.cardholder.number1 + self.cardholder.number2 + self.cardholder.number3 + self.cardholder.number4;
                             self.paymentInfo.cardType = getCreditCardType(self.paymentInfo.cardNumber);
+                        } else {
+                            self.paymentInfo.cardNumber = '';
+                            self.paymentInfo.cardType = '';
                         }
                     } else if (inputStep == 5) {
                         inputVal = self.paymentInfo.cardExpiryMonth;
@@ -800,6 +913,25 @@
                     }
                     self.watchAllowSubmit();
                 },
+                watchTenureChange: function(e) {
+                    var self = this;
+                    var selectedTenure = self.maybankIPP.ippInstallments.filter(installment => { return installment.tenure == self.paymentInfo.tenure });
+                    if (selectedTenure) {
+                        selectedTenure = selectedTenure[0];
+                        self.maybankIPP.ippInstallmentSelected = {
+                            duration: selectedTenure.tenure, 
+                            administrationPayment: 0.00, 
+                            monthlyInstallment: selectedTenure.displayIPPMonthlyInstalment
+                        };
+                        self.watchAllowSubmit();
+                    } else {
+                        self.maybankIPP.ippInstallmentSelected = {
+                            duration: 0, 
+                            administrationPayment: 0.00, 
+                            monthlyInstallment: ''
+                        };
+                    }
+                }, 
                 watchBankSelect: function(e) {
                     var self = this;
                     var bankListSelected = self.fpxBankList.filter(bank => { return bank.bankCode == self.paymentInfo.bankCode; });
@@ -814,7 +946,7 @@
                     var paymentInfo = self.paymentInfo;
                     var paymentMethod = self.paymentInfo.paymentMethod;
 
-                    if (paymentMethod == 'CREDIT_CARD') {
+                    if (paymentMethod == 'CREDIT_CARD' || paymentMethod == 'CREDIT_CARD_IPP') {
                         if (
                             self.paymentInfo.nameOnCard.trim() == '' || 
                             self.paymentInfo.cardNumber.trim() == '' || 
@@ -828,6 +960,10 @@
                         if (self.paymentInfo.bankCode.trim() == '' || self.paymentInfo.bankName.trim() == '') {
                             isFilled = false;
                         }
+                    }
+
+                    if (paymentMethod == 'CREDIT_CARD_IPP' && self.paymentInfo.tenure == '') {
+                        isFilled = false;
                     }
 
                     if (isFilled) {
