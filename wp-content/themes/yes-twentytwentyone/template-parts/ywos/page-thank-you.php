@@ -294,7 +294,7 @@
                 updateData: function() {
                     var self = this;
                     if (typeof ywos.lsData.meta.orderResponse != 'undefined') {
-                        self.purchaseInfo.displayOrderNumber = ywos.lsData.meta.orderResponse.orderInfo;
+                        self.purchaseInfo.displayOrderNumber = ywos.lsData.meta.orderResponse.displayOrderNumber;
                         self.purchaseInfo.deliveryFromDate = ywos.lsData.meta.orderResponse.deliveryFromDate;
                         self.purchaseInfo.deliveryToDate = ywos.lsData.meta.orderResponse.deliveryToDate;
                         self.purchaseInfo.orderCreationDate = ywos.lsData.meta.orderResponse.orderCreationDate;
