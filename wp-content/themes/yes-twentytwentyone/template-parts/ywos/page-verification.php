@@ -34,69 +34,7 @@
             </div>
             <div class="row gx-5" v-if="pageValid">
                 <div class="col-lg-4 col-12 order-lg-2">
-                    <div class="summary-box">
-                        <h1>Order summary</h1>
-                        <h2>Due today after taxes and shipping</h2>
-                        <div class="row">
-                            <div class="col-6 pt-2 pb-2">
-                                <h3>TOTAL</h3>
-                            </div>
-                            <div class="col-6 pt-2 pb-2 text-end">
-                                <h3>RM{{ parseFloat(orderSummary.due.total).toFixed(2) }}</h3>
-                            </div>
-                        </div>
-                        <div v-if="orderSummary.plan.planType != 'prepaid'">
-                            <div class="monthly mb-4">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <p>Due Monthly</p>
-                                    </div>
-                                    <div class="col-6 text-end">
-                                        <p>RM{{ parseFloat(orderSummary.plan.monthlyCommitment).toFixed(2) }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-8">
-                                <p class="large">{{ orderSummary.plan.displayName }}</p>
-                            </div>
-                            <div class="col-4 text-end d-flex align-items-center justify-content-end">
-                                <p class="large"><strong>RM{{ parseFloat(orderSummary.plan.totalAmountWithoutSST).toFixed(2) }}</strong></p>
-                            </div>
-                            <div class="col-6">
-                                <p class="large">Add-Ons</p>
-                            </div>
-                            <div class="col-6 text-end">
-                                <p class="large"><strong>RM{{ parseFloat(orderSummary.due.addOns).toFixed(2) }}</strong></p>
-                            </div>
-                            <div class="col-6">
-                                <p class="large">Taxes (SST)</p>
-                            </div>
-                            <div class="col-6 text-end">
-                                <p class="large"><strong>RM{{ parseFloat(orderSummary.due.taxesSST).toFixed(2) }}</strong></p>
-                            </div>
-                            <div class="col-6" v-if="customerDetails.securityType == 'PASSPORT' && orderSummary.due.foreignerDeposit > 0">
-                                <p class="large">Deposit for Foreigner</p>
-                            </div>
-                            <div class="col-6 text-end" v-if="customerDetails.securityType == 'PASSPORT' && orderSummary.due.foreignerDeposit > 0">
-                                <p class="large"><strong>RM{{ parseFloat(orderSummary.due.foreignerDeposit).toFixed(2) }}</strong></p>
-                            </div>
-                            <div class="col-6">
-                                <p class="large">Shipping</p>
-                            </div>
-                            <div class="col-6 text-end">
-                                <p class="large"><strong>RM{{ parseFloat(orderSummary.due.shippingFees).toFixed(2) }}</strong></p>
-                            </div>
-                            <div class="col-6">
-                                <p class="large">Rounding Adjustment</p>
-                            </div>
-                            <div class="col-6 text-end">
-                                <p class="large"><strong>RM{{ parseFloat(orderSummary.due.rounding).toFixed(2) }}</strong></p>
-                            </div>
-                        </div>
-                    </div>
+                    <?php include('section-order-summary.php'); ?>
                 </div>
                 <form class="col-lg-8 col-12 order-lg-1 mt-4 mt-lg-0 needs-validation" @submit="verificationSubmit">
                     <div>
@@ -206,6 +144,9 @@
                     securityId: '',
                     msisdn: ''
                 },
+                deliveryInfo: {
+                    securityType: ''
+                },
                 allowSecurityType: true,
                 allowSecurityId: true,
                 allowPhoneNumber: true,
@@ -265,9 +206,7 @@
                         self.customerDetails = (ywos.lsData.meta.customerDetails) ? ywos.lsData.meta.customerDetails : self.customerDetails;
 
                         if (self.isLoggedIn) {
-                            // self.allowSecurityType = (self.customerDetails.securityType && self.loginInfo.type != 'guest') ? false : true;
-                            // self.allowSecurityId = (self.customerDetails.securityId && self.loginInfo.type != 'guest') ? false : true;
-                            // self.allowPhoneNumber = (self.customerDetails.mobileNumber) ? false : true;
+                            self.deliveryInfo.securityType = self.customerDetails.securityType;
                             self.verify.input.phoneNumber = self.customerDetails.msisdn.slice(1);
                             self.isAgree = true;
 
@@ -460,15 +399,16 @@
                         var foreignerDeposit = parseFloat(self.orderSummary.plan.foreignerDeposit);
                         if (self.customerDetails.securityType == 'PASSPORT' && ywos.lsData.meta.orderSummary.due.foreignerDeposit == 0.00) {
                             self.orderSummary.due.foreignerDeposit = foreignerDeposit;
-                            self.orderSummary.due.total += foreignerDeposit;
+                            self.orderSummary.due.total = parseFloat(self.orderSummary.due.total) + parseFloat(foreignerDeposit);
                         } else if (self.customerDetails.securityType == 'NRIC' && ywos.lsData.meta.orderSummary.due.foreignerDeposit != 0.00) {
                             self.orderSummary.due.foreignerDeposit = 0.00;
-                            self.orderSummary.due.total -= foreignerDeposit;
+                            self.orderSummary.due.total = parseFloat(self.orderSummary.due.total) - parseFloat(foreignerDeposit);
                         }
                     }
                 },
                 watchSecurityType: function() {
                     var self = this;
+                    self.deliveryInfo.securityType = self.customerDetails.securityType;
                     self.checkForeignerDeposit();
                     self.watchAllowNext();
                 },

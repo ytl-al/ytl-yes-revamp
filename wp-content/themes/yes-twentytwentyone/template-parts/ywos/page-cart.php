@@ -471,7 +471,7 @@
                                 <h1>One-time Charges (due now)</h1>
                                 <h2>Rate plan</h2>
 
-                                <template v-for="(price) in orderSummary.plan.planPriceBreakdown">
+                                <template v-for="(price) in orderSummary.due.priceBreakdown.plan">
                                     <div class="row">
                                         <div class="col-6">
                                             <p>{{ price.name }}</p>
@@ -481,7 +481,20 @@
                                         </div>
                                     </div>
                                 </template>
-                                <div class="row mt-4 mb-3">
+                                <div class="mt-2" v-if="orderSummary.plan.bundleName || orderSummary.plan.hasDevice">
+                                    <p class="bold mb-0" v-if="orderSummary.plan.bundleName">Device Bundle: <span class="fw-bold">{{ orderSummary.plan.bundleName }}</span></p>
+                                    <template v-for="(price, index) in orderSummary.due.priceBreakdown.device">
+                                        <div class="row" v-bind:class="{ 'mb-3': (index == orderSummary.due.priceBreakdown.device.length - 1) }">
+                                            <div class="col-6">
+                                                <p>{{ price.name }}</p>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <p>RM{{ price.value }}</p>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                                <div class="row mb-3 mt-4">
                                     <div class="col-10 pb-1 border-bottom">
                                         <p>Add-Ons</p>
                                         <p v-if="orderSummary.addOn != null">{{ orderSummary.addOn.displayAddonName }} <a href="javascript:void(0)" class="btn-sm pink-btn text-white mx-lg-3" v-on:click="removeAddOn()">Remove</a></p>
@@ -513,19 +526,6 @@
                                     <div class="col-6 pb-1 pt-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.rounding).toFixed(2) }}</p>
                                     </div>
-                                </div>
-                                <div >
-                                    <p class="bold mb-2" v-if="orderSummary.plan.bundleName">Device Bundle: <span class="fw-bold">{{ orderSummary.plan.bundleName }}</span></p>
-                                    <template v-for="(price, index) in orderSummary.plan.planDevicePriceBreakdown">
-                                        <div class="row" v-bind:class="{ 'mb-3': (index == orderSummary.plan.planDevicePriceBreakdown.length - 1) }">
-                                            <div class="col-6">
-                                                <p>{{ price.name }}</p>
-                                            </div>
-                                            <div class="col-6 text-end">
-                                                <p>RM{{ price.value }}</p>
-                                            </div>
-                                        </div>
-                                    </template>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-6">
@@ -847,8 +847,16 @@
                                     });
                                 }
                             };
-                            self.orderSummary.plan.planPriceBreakdown = planPriceBreakdown;
-                            self.orderSummary.plan.planDevicePriceBreakdown = planDevicePriceBreakdown;
+                            self.orderSummary.due.priceBreakdown = { plan: planPriceBreakdown, device: planDevicePriceBreakdown };
+
+                            var hasDevice = false;
+                            for (var i = 0; i < planDevicePriceBreakdown.length; i++) {
+                                if (parseFloat(planDevicePriceBreakdown[i].value) > 0) {
+                                    hasDevice = true;
+                                    break;
+                                }
+                            }
+                            self.orderSummary.plan.hasDevice = hasDevice;
 
                             self.updateAddOns(data.addOns);
                             self.updatePlan();

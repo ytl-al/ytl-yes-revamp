@@ -1105,8 +1105,11 @@ class Ytl_Pull_Data_Public
 			$plan_name != null && $plan_type != null && $product_bundle_id != null && 
 			$address_line != null && $city != null && $city_code != null && $postal_code != null && $state != null && $state_code != null && $country != null &&
 			$payment_method != null && $process_name != null && $amount != null && $amount_sst != null && $total_amount != null && 
-			($payment_method == 'FPX' && ($bank_code != null && $bank_name != null)) || 
-			($payment_method == 'CREDIT_CARD' && ($card_number != null && $card_type != null && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null)) && 
+			(
+				($payment_method == 'FPX' && ($bank_code != null && $bank_name != null)) || 
+				($payment_method == 'CREDIT_CARD' && ($card_number != null && $card_type != null && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null)) || 
+				($payment_method == 'CREDIT_CARD_IPP' && ($card_number != null && $card_type != null && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null && $tenure != null))
+			) &&
 			isset($this->api_domain) && isset($this->api_request_id) && $session_id
 		) {
 			$params 	= [
