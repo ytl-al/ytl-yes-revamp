@@ -1,39 +1,13 @@
-<!DOCTYPE HTML>
-
-<html>
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Personal Detail</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,500&display=swap"
-          rel="stylesheet">
-
-
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/mycart.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/slick-theme.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/responsive.css"/>
-
-    <link rel="stylesheet" type="text/css" href="../assets/select2/css/select2.min.css"/>
-
-</head>
-
-<body>
-
-<div class="layer-page">
+<?php require_once ('includes/header.php')?>
+<style type="text/css">
+    <?php require_once 'assets/css/mycart.css'?>
+</style>
     <header class="white-top">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-6">
                     <div class="mt-4">
-                        <a href="#" class="back-btn "><img src="../images/back-icon.png" alt=""> Back</a>
+                        <a href="#" class="back-btn "><img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png" alt=""> Back</a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-6 text-lg-center text-end">
@@ -85,7 +59,7 @@
                                         <a href="#" class="ms-2" data-bs-toggle="tooltip" data-bs-placement="right"
                                            data-bs-html="true"
                                            title="<div class='box'><div><i></i></div><div><div class='text-bold'></div>Your full name must match your MyKad for verification purposes for successfull SIM card activation. </div></div>"><img
-                                                src="../images/info-icon.png"/></a>
+                                                src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/info-icon.png"/></a>
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +71,7 @@
                                         <a href="#" class="ms-2" data-bs-toggle="tooltip" data-bs-placement="right"
                                            data-bs-html="true"
                                            title="<div class='box'><div><i></i></div><div><div class='text-bold'></div>Your full name must match your MyKad for verification purposes for successfull SIM card activation. </div></div>"><img
-                                                src="../images/info-icon.png"/></a>
+                                                src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/info-icon.png"/></a>
                                     </div>
                                 </div>
                             </div>
@@ -124,7 +98,7 @@
                                         <a href="#" class="ms-2" data-bs-toggle="tooltip" data-bs-placement="right"
                                            data-bs-html="true"
                                            title="<div class='box'><div><i></i></div><div><div class='text-bold'></div>Your full name must match your MyKad for verification purposes for successfull SIM card activation. </div></div>"><img
-                                                src="../images/info-icon.png"/></a>
+                                                src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/info-icon.png"/></a>
                                         <p class="note mt-2">Email is required for receipt and order confirmation</p>
                                     </div>
                                 </div>
@@ -199,7 +173,7 @@
                             <div class="row mb-4">
                                 <div class="col-lg-6 col-12">
                                     <div class="address-accuracy">
-                                        <img src="../images/info-red-icon.png" alt="" class="float-start me-3">
+                                        <img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/info-red-icon.png" alt="" class="float-start me-3">
                                         <div class="ps-5">
                                             <h1>Address Accuracy</h1>
                                             <p>Addresses that are entered incorrectly may delay your oder, so please
@@ -266,30 +240,7 @@
         </section>
 
     </main>
-    <footer class="page-footer footer">
-        <div class="copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-md-2 d-flex align-items-center justify-content-md-start justify-content-sm-center">
-                        <img src="../images/Logo-blue.png" alt="">
-                    </div>
-                    <div class="col-12 col-md-5 d-flex align-items-center justify-content-md-start justify-content-sm-center">
-                        <p>Need help? See <a href="#">Help Pages</a> or <a href="#">Contact Us</a></p>
-                    </div>
-                    <div class="col-12 col-md-5 d-flex align-items-center justify-content-md-end justify-content-sm-center">
-                        <img src="../images/footer-icons2.png" class="img-fluid"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-</div>
-
-<script type="text/javascript" src="../js/jquery-3.5.1.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
-<script type="text/javascript" src="../js/iconify.min.js"></script>
-<script type="text/javascript" src="../js/slick.js"></script>
-<script type="text/javascript" src="../assets/select2/js/select2.full.min.js"></script>
+    <?php require_once ('includes/footer.php');?>
 
 <script type="text/javascript">
     var tooltipTriggerList = [].slice.call(document.querySelectorAll("[data-bs-toggle=\"tooltip\"]"))
@@ -302,6 +253,3 @@
     })
 
 </script>
-</body>
-
-</html>
