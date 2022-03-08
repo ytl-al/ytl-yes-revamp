@@ -9,8 +9,8 @@
 .betterdocs-single-wraper p { margin-bottom: 12px; }
 .betterdocs-single-wraper .docs-single-title .betterdocs-entry-title { margin: 0 0 20px; padding: 0; text-transform: none; }
 .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content { text-align: justify; }
-.betterdocs-single-wraper .doc-single-content-wrapper ol, .betterdocs-single-wraper .doc-single-content-wrapper ul { margin: 0 0 20px; padding: 0; }
-.betterdocs-single-wraper .doc-single-content-wrapper ol li, .betterdocs-single-wraper .doc-single-content-wrapper ul li { margin: 0 0 10px; padding: 0; }
+.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ol, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ul { margin: 0 0 20px; padding: 0; }
+.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ol li, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ul li { margin: 0 0 10px; padding: 0; }
 .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content > ol > li::marker, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content > ul > li::marker { font-weight: bold; }
 .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content > ol, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content > ul { padding-left: 20px; }
 .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content img { display: block; margin: 20px auto; }
