@@ -185,9 +185,7 @@ class Ytl_Pull_Data
 		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
 		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
-		$this->loader->add_action('rest_api_init', $plugin_public, 'ra_reg_add_to_cart');
-		$this->loader->add_action('rest_api_init', $plugin_public, 'ra_reg_get_plan_by_id');
-		$this->loader->add_action('rest_api_init', $plugin_public, 'ra_reg_get_auth_token');
+		$this->loader->add_action('rest_api_init', $plugin_public, 'ra_reg_apis');
 	}
 
 	/**

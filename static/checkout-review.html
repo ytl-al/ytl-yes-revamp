@@ -434,17 +434,17 @@
             <section id="grey-innerbanner">
                 <div class="container">
                     <ul class="wizard">
-                        <li ui-sref="firstStep">
+                        <li ui-sref="firstStep" class="completed">
                             <span>1. Verification</span>
                         </li>
-                        <li ui-sref="secondStep">
+                        <li ui-sref="secondStep" class="completed">
                             <span>2. Delivery Details</span>
                         </li>
-                        <li ui-sref="thirdStep">
-                            <span>3. Payment Info</span>
+                        <li ui-sref="thirdStep" class="completed">
+                            <span>3. Review and Pay</span>
                         </li>
-                        <li ui-sref="fourthStep" class="completed">
-                            <span>4. Review and Pay</span>
+                        <li ui-sref="fourthStep">
+                            <span>4. Payment Info</span>
                         </li>
                     </ul>
                 </div>
@@ -582,7 +582,7 @@
                                     <a href="#" class="grey-link">(Edit)</a>
                                 </div>
                             </div>
-                            <div class="row mb-3">
+                            <div class="row mb-3 d-none">
                                 <div class="col-9">
                                     <p><strong>Cardholder: Jane Doe</strong><br> Card Type: Visa that ends in ****4567</p>
                                 </div>
@@ -592,7 +592,8 @@
                             </div>
                             <div class="row mt-5">
                                 <div class="col-lg-5 col-12">
-                                    <button class="pink-btn d-block w-100" type="submit">Pay Now</button>
+                                    <!-- <button class="pink-btn d-block w-100" type="submit">Pay Now</button> -->
+                                    <a href="checkout-payment.html" class="pink-btn d-block w-100">Pay Now</a>
                                 </div>
                             </div>
                         </div>
