@@ -453,13 +453,13 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-12 mt-3 mb-3 mt-lg-0 mb-lg-0 d-flex align-items-center justify-content-lg-end justify-content-center">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                         <h3 class="price">RM{{ formatPrice(parseFloat(orderSummary.plan.totalAmount)) }}</h3>
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#cart-accordion">
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#cart-accordion">
                             <div class="accordion-body">
                                 <div v-if="packageInfos.slice(3).length">
                                     <h1>More Benefits</h1>
@@ -481,10 +481,10 @@
                                         </div>
                                     </div>
                                 </template>
-                                <div class="mt-2" v-if="orderSummary.plan.bundleName || orderSummary.plan.hasDevice">
+                                <div class="mt-2 pt-2 border-top pb-2 border-bottom" v-if="orderSummary.plan.bundleName || orderSummary.plan.hasDevice">
                                     <p class="bold mb-0" v-if="orderSummary.plan.bundleName">Device Bundle: <span class="fw-bold">{{ orderSummary.plan.bundleName }}</span></p>
                                     <template v-for="(price, index) in orderSummary.due.priceBreakdown.device">
-                                        <div class="row" v-bind:class="{ 'mb-3': (index == orderSummary.due.priceBreakdown.device.length - 1) }">
+                                        <div class="row">
                                             <div class="col-6">
                                                 <p>{{ price.name }}</p>
                                             </div>
@@ -494,7 +494,7 @@
                                         </div>
                                     </template>
                                 </div>
-                                <div class="row mb-3 mt-4">
+                                <div class="row mb-3 mt-5">
                                     <div class="col-10 pb-1 border-bottom">
                                         <p>Add-Ons</p>
                                         <p v-if="orderSummary.addOn != null">{{ orderSummary.addOn.displayAddonName }} <a href="javascript:void(0)" class="btn-sm pink-btn text-white mx-lg-3" v-on:click="removeAddOn()">Remove</a></p>

@@ -130,7 +130,7 @@
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-city"></div>
                                 </div>
-                                <div class="form-group mb-4">
+                                <div class="form-group mb-4 d-none">
                                     <label class="form-label" for="textarea-deliveryNotes">Delivery Notes (optional)</label>
                                     <div class="input-group align-items-center">
                                         <textarea class="form-control" id="textarea-deliveryNotes" name="deliveryNotes" v-model="deliveryInfo.deliveryNotes" placeholder=""></textarea>
