@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-lg-4 col-6">
                 <div class="mt-4">
-                    <a href="#" class="back-btn "><img src="../images/back-icon.png" alt=""> Back</a>
+                    <a href="#" class="back-btn "><img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png" alt=""> Back</a>
                 </div>
             </div>
             <div class="col-lg-4 col-6 text-lg-center text-end">
