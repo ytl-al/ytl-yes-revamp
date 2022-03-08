@@ -129,7 +129,7 @@
                                             <div class="col-lg-6">
                                                 <label class="form-label" for="select-tenure">Installment Type</label>
                                                 <div class="form-group">
-                                                    <select class="form-control form-select" id="select-tenure" data-live-search="false" name="ipp-tenure" v-model="paymentInfo.tenure" @change="watchTenureChange">
+                                                    <select class="form-control form-select" id="select-tenure" data-live-search="false" name="ipp-tenure" v-model="paymentInfo.ippType" @change="watchTenureChange">
                                                         <option value="" disabled="disabled" selected="selected">Select Installment Type</option>
                                                         <option v-for="ippType in maybankIPP.ippTypeList" :value="ippType.ippTenureType">{{ ippType.ippTenureTypeDisplay }}</option>
                                                     </select>
@@ -307,7 +307,7 @@
                     cardExpiryYear: '', 
                     isAutoSubscribe: false, 
                     isSaveMyCard: false,
-                    tenure: ''
+                    ippType: ''
                 },
                 fpxBanks: [
                     { value: "alliance-bank", name: "Alliance Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/alliance.png" }, 
@@ -747,7 +747,7 @@
                         'card_cvv'      : self.paymentInfo.cardCVV, 
                         'card_expiry_month' : self.paymentInfo.cardExpiryMonth, 
                         'card_expiry_year'  : self.paymentInfo.cardExpiryYear, 
-                        'tenure'        : self.paymentInfo.tenure
+                        'ippType'       : self.paymentInfo.ippType
                     };
                     axios.post(apiEndpointURL + '/create-yos-order', params)
                         .then((response) => {
@@ -844,7 +844,7 @@
                 },
                 watchTenureChange: function(e) {
                     var self = this;
-                    var selectedTenure = self.maybankIPP.ippInstallments.filter(installment => { return installment.tenure == self.paymentInfo.tenure });
+                    var selectedTenure = self.maybankIPP.ippInstallments.filter(installment => { return installment.tenure == self.paymentInfo.ippType });
                     if (selectedTenure) {
                         selectedTenure = selectedTenure[0];
                         self.maybankIPP.ippInstallmentSelected = {
@@ -891,7 +891,7 @@
                         }
                     }
 
-                    if (paymentMethod == 'CREDIT_CARD_IPP' && self.paymentInfo.tenure == '') {
+                    if (paymentMethod == 'CREDIT_CARD_IPP' && self.paymentInfo.ippType == '') {
                         isFilled = false;
                     }
 

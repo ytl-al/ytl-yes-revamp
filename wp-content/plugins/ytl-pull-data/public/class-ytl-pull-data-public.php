@@ -1096,7 +1096,7 @@ class Ytl_Pull_Data_Public
 		$card_cvv 		= $this->get_request_input($order_info, 'card_cvv');
 		$card_expiry_month 	= $this->get_request_input($order_info, 'card_expiry_month');
 		$card_expiry_year 	= $this->get_request_input($order_info, 'card_expiry_year');
-		$tenure 		= $this->get_request_input($order_info, 'tenure');
+		$ippType 		= $this->get_request_input($order_info, 'ippType');
 
 		$session_id 	= $this->ca_generate_auth_token(true);
 
@@ -1108,7 +1108,7 @@ class Ytl_Pull_Data_Public
 			(
 				($payment_method == 'FPX' && ($bank_code != null && $bank_name != null)) || 
 				($payment_method == 'CREDIT_CARD' && ($card_number != null && $card_type != null && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null)) || 
-				($payment_method == 'CREDIT_CARD_IPP' && ($card_number != null && $card_type != null && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null && $tenure != null))
+				($payment_method == 'CREDIT_CARD_IPP' && ($card_number != null && $card_type != null && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null && $ippType != null))
 			) &&
 			isset($this->api_domain) && isset($this->api_request_id) && $session_id
 		) {
@@ -1162,7 +1162,7 @@ class Ytl_Pull_Data_Public
 					'cardCVV' 			=> $card_cvv, 
 					'cardExpiryMonth' 	=> $card_expiry_month, 
 					'cardExpiryYear' 	=> $card_expiry_year, 
-					'tenure' 			=> $tenure, 
+					'ippType' 			=> $ippType, 
 					'isAutoSubscribe' 	=> false, 
 					'isSavedCard' 		=> false 
 				], 
@@ -1173,7 +1173,6 @@ class Ytl_Pull_Data_Public
 				'requestId' 			=> $this->api_request_id,
 				'sessionId' 			=> $session_id
 			];
-			
 			$args 		= [
 				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
 				'body'          => json_encode($params),
