@@ -81,7 +81,7 @@
                 <div class="col-lg-4 col-12 order-lg-2">
                     <?php include('section-order-summary.php'); ?>
                 </div>
-                <form class="col-lg-8 col-12 order-lg-1 mt-3 mt-lg-0" @submit="paymentSubmit">
+                <form class="col-lg-8 col-12 order-lg-1 mt-3 mt-lg-0" autocomplete="off" @submit="paymentSubmit">
                     <div>
                         <h1 class="mb-4 d-none d-lg-block">Payment Info</h1>
                         <p class="sub mb-4 pe-5 d-none d-lg-block">This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.</p>
@@ -139,7 +139,7 @@
                                     </div>
                                     <div class="row mb-4">
                                         <div class="col-lg-6 col-12">
-                                            <label class="form-label" for="input-chName">Cardholder Name</label>
+                                            <label class="form-label" for="input-chName">* Cardholder Name</label>
                                             <div class="input-group align-items-center">
                                                 <input type="text" class="form-control" id="input-chName" v-model="paymentInfo.nameOnCard" @input="watchAllowSubmit" placeholder="John Doe" />
                                             </div>
@@ -147,7 +147,7 @@
                                     </div>
                                     <div class="row mb-3 align-items-center g-2">
                                         <div class="col-12">
-                                            <label class="form-label" for="input-chNumber1">Card Number</label>
+                                            <label class="form-label" for="input-chNumber1">* Card Number</label>
                                         </div>
                                         <div class="col-lg-6 col-12 mb-1">
                                             <div class="input-group align-items-center">
@@ -161,16 +161,16 @@
                                     </div>
                                     <div class="row mb-4">
                                         <div class="col-lg-3 col-12">
-                                            <label class="form-label" for="input-cardInput5">Exp Date</label>
+                                            <label class="form-label" for="input-cardInput5">* Exp Date</label>
                                             <div class="input-group align-items-center">
-                                                <input type="text" class="form-control text-center" id="input-cardInput5" v-model="paymentInfo.cardExpiryMonth" placeholder="00" maxlength="2" @input="checkCardInputJump(5, event)" @keypress="checkIsNumber(event)" /> <span class="mx-2">/</span>
-                                                <input type="text" class="form-control text-center" id="input-cardInput6" v-model="paymentInfo.cardExpiryYear" placeholder="0000" maxlength="4" @input="checkCardInputJump(6, event)" @keypress="checkIsNumber(event)" />
+                                                <input type="text" class="form-control text-center" id="input-cardInput5" autocomplete="off" v-model="paymentInfo.cardExpiryMonth" placeholder="00" maxlength="2" @input="checkCardInputJump(5, event)" @keypress="checkIsNumber(event)" /> <span class="mx-2">/</span>
+                                                <input type="text" class="form-control text-center" id="input-cardInput6" autocomplete="off" v-model="paymentInfo.cardExpiryYear" placeholder="0000" maxlength="4" @input="checkCardInputJump(6, event)" @keypress="checkIsNumber(event)" />
                                             </div>
                                         </div>
                                         <div class="col-lg-3 col-12">
-                                            <label class="form-label" for="input-cardInput7">CVV</label>
+                                            <label class="form-label" for="input-cardInput7">* CVV</label>
                                             <div class="input-group align-items-center">
-                                                <input type="password" class="form-control text-center" id="input-cardInput7" v-model="paymentInfo.cardCVV" @input="watchAllowSubmit" placeholder="***" maxlength="3" @keypress="checkIsNumber(event)" />
+                                                <input type="password" class="form-control text-center" id="input-cardInput7" autocomplete="off" v-model="paymentInfo.cardCVV" @input="watchAllowSubmit" placeholder="***" maxlength="3" @keypress="checkIsNumber(event)" />
                                             </div>
                                         </div>
                                     </div>
