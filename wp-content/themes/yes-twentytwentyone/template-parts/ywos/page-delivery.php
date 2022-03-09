@@ -560,7 +560,9 @@
                 },
                 validateConfirmEmail: function() {
                     var self = this;
-                    if (self.deliveryInfo.email != self.deliveryInfo.emailConfirm) {
+                    var email = self.deliveryInfo.email.toLowerCase();
+                    var emailConfirm = self.deliveryInfo.emailConfirm.toLowerCase();
+                    if (email != emailConfirm) {
                         var inputEmailConfirm = self.input.emailConfirm.field;
                         var emEmailConfirm = self.input.emailConfirm.errorMessage;
                         $(emEmailConfirm).html('Confirm email address must be same as Email address.').show();
