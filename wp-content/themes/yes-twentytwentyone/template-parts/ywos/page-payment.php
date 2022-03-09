@@ -692,7 +692,7 @@
                             mainwin.focus();
                             mainwin.close();
                         }
-                        self.redirectThankYou();
+                        // self.redirectThankYou();
                     }, 300000);
 
                     mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
