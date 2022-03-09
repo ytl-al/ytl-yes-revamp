@@ -1,13 +1,11 @@
 <?php require_once ('includes/header.php')?>
-<style type="text/css">
-    <?php require_once 'assets/css/mycart.css'?>
-</style>
+
 <header class="white-top">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-6">
                 <div class="mt-4">
-                    <a href="#" class="back-btn "><img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png" alt=""> Back</a>
+                    <a href="/elevate/cart/" class="back-btn "><img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png" alt=""> Back</a>
                 </div>
             </div>
             <div class="col-lg-4 col-6 text-lg-center text-end">

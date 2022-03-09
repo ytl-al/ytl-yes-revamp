@@ -25,6 +25,10 @@ class ElevateApi
     public $api_contact_get_by_id = 'api/Elevate/contract/Id';
     public $api_contact_get_by_nric = 'api/Elevate/contract/customerNRIC';
 
+    public $api_product = 'api/Elevate/product';
+    public $api_product_get_by_id = 'api/Elevate/product/Id';
+    public $api_product_get_by_nric = 'api/Elevate/product/productId';
+
     public function __construct(){
 
     }

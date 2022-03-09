@@ -1,7 +1,4 @@
 <?php require_once 'includes/header.php' ?>
-<style type="text/css">
-    <?php require_once 'assets/css/mycart.css'?>
-</style>
 
 <header class="page-header">
     <div class="nav-container">
@@ -9,7 +6,7 @@
             <div class="row g-0">
                 <nav class="navbar navbar-expand-lg">
                     <div class="container">
-                        <a class="navbar-brand d-flex justify-content-start" href="#"><img
+                        <a class="navbar-brand d-flex justify-content-start" href="/"><img
                                     src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/logo.svg"
                                     class="logo-top"/></a>
                         <div class="justify-content-end" id="navbarSupportedContent">
@@ -59,15 +56,15 @@
                                      data-ride="carousel" data-pause="hover">
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <img src="https://cdn.yes.my/site/wp-content/uploads/2022/02/keepnumber-step1-new.png"
+                                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/p1.png"
                                                  class="d-block w-100" alt="">
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="https://cdn.yes.my/site/wp-content/uploads/2022/02/keepnumber-step2-new.png"
+                                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/p2.png"
                                                  class="d-block w-100" alt="">
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="https://cdn.yes.my/site/wp-content/uploads/2022/02/keepnumber-step3-new.png"
+                                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/p3.png"
                                                  class="d-block w-100" alt="">
                                         </div>
                                     </div>
@@ -85,19 +82,19 @@
                                     <div class="carousel-indicators">
                                         <button type="button" data-bs-target="#productSlide" data-bs-slide-to="0"
                                                 class="active" aria-current="true" aria-label="Slide 1">
-                                            <img src="https://cdn.yes.my/site/wp-content/uploads/2022/02/keepnumber-step1-new.png"
+                                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/p1.png"
                                                  width="60" height="70" class="d-block w-100"
                                                  alt="">
                                         </button>
                                         <button type="button" data-bs-target="#productSlide" data-bs-slide-to="1"
                                                 aria-label="Slide 2">
-                                            <img src="https://cdn.yes.my/site/wp-content/uploads/2022/02/keepnumber-step2-new.png"
+                                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/p2.png"
                                                  width="60" height="70" class="d-block w-100"
                                                  alt="">
                                         </button>
                                         <button type="button" data-bs-target="#productSlide" data-bs-slide-to="2"
                                                 aria-label="Slide 3">
-                                            <img src="https://cdn.yes.my/site/wp-content/uploads/2022/02/keepnumber-step3-new.png"
+                                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/p3.png"
                                                  width="60" height="70" class="d-block w-100"
                                                  alt="">
                                         </button>
