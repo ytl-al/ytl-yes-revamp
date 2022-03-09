@@ -40,7 +40,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="referral-box">
-                                    <input type="text" class="form-control referral" id="input-referralCode" v-model="referralCode.code" placeholder="Enter referral code (if any)" />
+                                    <input type="text" class="form-control referral" id="input-referralCode" maxlength="11" v-model="referralCode.code" placeholder="Enter referral code (if any)" @keypress="checkIsNumber(event)" />
                                     <img src="/wp-content/uploads/2022/02/referral-tick.png" class="referral-check" v-if="referralCode.verified" />
                                 </div>
                                 <div class="invalid-feedback mt-1" id="em-referralCode"></div>
@@ -103,7 +103,7 @@
                                         <div class="form-group mb-4">
                                             <label class="form-label" for="input-postcode">* Postcode</label>
                                             <div class="input-group align-items-center">
-                                                <input type="text" class="form-control" id="input-postcode" name="postcode" v-model="deliveryInfo.postcode" @input="watchAllowNext" placeholder="" required />
+                                                <input type="text" class="form-control" id="input-postcode" name="postcode" maxlength="5" v-model="deliveryInfo.postcode" @input="watchAllowNext" @keypress="checkIsNumber(event)" placeholder="" required />
                                             </div>
                                             <div class="invalid-feedback mt-1" id="em-postcode"></div>
                                         </div>
@@ -778,6 +778,15 @@
                         self.allowSubmit = true;
                     } else {
                         self.allowSubmit = false;
+                    }
+                },
+                checkIsNumber: function(event) {
+                    event = (event) ? event : window.event;
+                    var charCode = (event.which) ? event.which : event.keyCode;
+                    if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                        event.preventDefault();
+                    } else {
+                        return true;
                     }
                 },
                 watchBillingDifferent: function() {},

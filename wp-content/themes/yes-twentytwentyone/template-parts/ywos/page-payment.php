@@ -22,7 +22,6 @@
         margin-right: 30px;
     }
 
-    .listing-quickSelectBanks {}
     #cart-body .listing-quickSelectBanks li.nav-item { cursor: pointer; margin-right: 10px; max-width: 60px; text-align: center; }
     .listing-quickSelectBanks li.nav-item .img-quickSelectBank { border: 1px solid #D9D9D9; border-radius: 4px; box-shadow: 2px 2px 12px rgb(112 144 176 / 25%); margin: 0 0 10px; padding: 3px; }
     .listing-quickSelectBanks li.nav-item.selected .img-quickSelectBank { border-color: rgb(61, 140, 255); }
@@ -803,7 +802,7 @@
                         $('#select-bank').selectpicker('refresh');
                     }, 100);
                 }, 
-                checkIsNumber: function(event, inputStep) {
+                checkIsNumber: function(event) {
                     event = (event) ? event : window.event;
                     var charCode = (event.which) ? event.which : event.keyCode;
                     if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
