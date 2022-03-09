@@ -16,3 +16,5 @@ require_once(THEME_FUNCTIONS_PATH . '/theme-ywos.php');
 require_once(THEME_FUNCTIONS_PATH . '/theme-disable-emoji.php');
 require_once(THEME_FUNCTIONS_PATH . '/theme-custom-meta-box.php');
 require_once(THEME_FUNCTIONS_PATH . '/theme-5g-plans-upgrade.php');
+
+require_once(THEME_FUNCTIONS_PATH . '/theme-custom-post-types.php');

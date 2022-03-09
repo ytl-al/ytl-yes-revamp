@@ -11,7 +11,7 @@ if (is_admin()) {
         function add_meta_page_post()
         {
             $prefix = 'yes_';
-            $meta_boxes[]   = [
+            $meta_boxes[] = [
                 'title'         => esc_html__('Additional Content Code', 'yes.my'),
                 'id'            => 'yes_code_meta',
                 'post_types'    => ['post', 'page'],
@@ -36,6 +36,34 @@ if (is_admin()) {
                     ]
                 ]
             ];
+
+            $meta_boxes[] = [
+                'title'         => esc_html__('Additional Info', 'yes.my'),
+                'id'            => 'yes_release_date_meta',
+                'post_types'    => ['supported-device'],
+                'context'       => 'normal',
+                'revision'      => true,
+                'fields'        => [
+                    [
+                        'type'       => 'date',
+                        'id'         =>  $prefix . 'release_date',
+                        'name'  => esc_html__('Release date', 'yes.my'),
+                    
+                        // Date picker options. See here http://api.jqueryui.com/datepicker
+                        'js_options' => array(
+                            'dateFormat'      => 'yy-mm-dd',
+                            'showButtonPanel' => false,
+                        ),
+                    
+                        // Display inline?
+                        'inline' => false,
+                    
+                        // Save value as timestamp?
+                        'timestamp' => false,
+                    ]
+                ]
+            ];
+
             return $meta_boxes;
         }
 
