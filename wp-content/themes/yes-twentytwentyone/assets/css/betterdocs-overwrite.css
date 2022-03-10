@@ -1,21 +1,22 @@
 /* 
     Stylesheet Name : Yes.my BetterDocs Overwrite
     Created on      : March     08, 2022, 11:08:23 AM
-    Last edited on  : March     08, 2022, 08:25:09 PM
+    Last edited on  : March     10, 2022, 08:25:09 PM
     Author          : [YTL Digital Design] - AL
 */
 
 .betterdocs-single-wraper {}
-.betterdocs-single-wraper p { margin-bottom: 12px; }
+.betterdocs-single-wraper p { margin-bottom: 15px; }
 .betterdocs-single-wraper .docs-single-title .betterdocs-entry-title { margin: 0 0 20px; padding: 0; text-transform: none; }
 .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content { text-align: justify; }
+.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content-heading { font-size: 35px; margin-bottom: 12px; text-align: initial; }
 .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ol, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ul { margin: 0 0 20px; padding: 0; }
-.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ol li, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ul li { margin: 0 0 10px; padding: 0; }
+.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ol li, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ul li { margin: 0 0 15px; padding: 0; }
 .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content > ol > li::marker, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content > ul > li::marker { font-weight: bold; }
 .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content > ol, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content > ul { padding-left: 20px; }
 .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content img { display: block; margin: 20px auto; }
 
-.betterdocs-single-wraper .doc-single-content-wrapper table { border-collapse: collapse; border-color: #333; border-style: solid; border-width: 1px 0 0 1px; margin: 20px 0; width: 100%; }
+.betterdocs-single-wraper .doc-single-content-wrapper table { border-collapse: collapse; border-color: #333; border-style: solid; border-width: 1px 0 0 1px; margin: 20px 0; text-align: initial; width: 100%; }
 .betterdocs-single-wraper .doc-single-content-wrapper table th, .betterdocs-single-wraper .doc-single-content-wrapper table td { border-color: #333; border-style: solid; border-width: 0 1px 1px 0; padding: 5px; }
 .betterdocs-single-wraper .doc-single-content-wrapper table th { background-color: #0EADF1; color: #FFF; }
 .betterdocs-single-wraper .doc-single-content-wrapper table td {}

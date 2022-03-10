@@ -1,7 +1,7 @@
 /* 
     JavaScript Name : Yes TwentyTwentyOne 
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : December  05, 2021, 03:52:31 PM
+    Last edited on  : March     10, 2022, 03:52:31 PM
     Author          : [YTL Digital Design] - AL
 */
 const yesLocalStorageName = 'yesSession';
@@ -19,6 +19,8 @@ $(document).ready(function() {
     eventListenPageModalClose();
 
     initBootstrapTooltip();
+
+    initBetterDocsSearch5G();
 
     $('.link-jumpSection').on('click', function() {
         jumpSection(this);
@@ -178,5 +180,25 @@ function toggleOverlay(toggleShow = true) {
             $('body').removeClass('show-overlay');
             $('.layer-overlay').removeAttr('style');
         }, 500)
+    }
+}
+
+
+/**
+ * Function initBetterDocsSearch5G()
+ * Function to init the 5g string search in BetterDocs Advanced Search
+ * 
+ * @since    1.0.2
+ */
+function initBetterDocsSearch5G() {
+    var bdSearchField = $('.betterdocs-search-field');
+    if ($(bdSearchField).length) {
+        $(bdSearchField).on('input propertychange paste', function() {
+            var bdSearchFieldVal = $(bdSearchField).val();
+            if (bdSearchFieldVal == '5g') {
+                $(bdSearchField).val('5g ');
+                $(bdSearchField).trigger('input').trigger('propertychange').trigger('paste').trigger('keyup').trigger('keypress');
+            }
+        });
     }
 }
