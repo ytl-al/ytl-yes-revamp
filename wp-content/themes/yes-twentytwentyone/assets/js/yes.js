@@ -195,8 +195,8 @@ function initBetterDocsSearch5G() {
     if ($(bdSearchField).length) {
         $(bdSearchField).on('input propertychange paste', function() {
             var bdSearchFieldVal = $(bdSearchField).val();
-            if (bdSearchFieldVal == '5g') {
-                $(bdSearchField).val('5g ');
+            if (bdSearchFieldVal == '5g' || bdSearchFieldVal == '4g') {
+                $(bdSearchField).val(bdSearchFieldVal + ' ');
                 $(bdSearchField).trigger('input').trigger('propertychange').trigger('paste').trigger('keyup').trigger('keypress');
             }
         });
