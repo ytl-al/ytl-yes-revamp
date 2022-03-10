@@ -7,9 +7,10 @@ namespace Inc;
 
 final class Init
 {
-	
+
 	private static function get_services(){
-		return [ 
+		return [
+            Pages\Admin::class,
 			Base\Enqueue::class,
 			Base\Model::class
 		];

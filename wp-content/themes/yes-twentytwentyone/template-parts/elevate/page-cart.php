@@ -35,12 +35,32 @@
         </div>
     </div>
 </header>
+<div id="main-vue">
 <main>
-
+    <div class="container" id="container-empty" v-if="isCartEmpty">
+        <div class="row mb-5 gx-5">
+            <div class="col-lg-8 col-12">
+                <div class="accordion">
+                    <div class="packagebox mb-3">
+                        <div class="row align-items-center">
+                            <div class="col-lg-3 col-12 visualbg d-none">
+                                <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/kasiup-postpaid-visual.png" class="img-fluid" alt="" />
+                            </div>
+                            <div class="col-12 p-3 px-5">
+                                <h3 class="mt-5 mt-lg-0">No item in the cart</h3>
+                                <p class="mb-3">You may browse the plans available <a href="/5gplans/">here</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="container-hasItem">
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
-            <h1 class="title">XIAOMI 11T 5G NE</h1>
+            <h1 class="title">{{ orderSummary.product.nameEN }}</h1>
         </div>
     </section>
     <!-- Banner End -->
@@ -55,18 +75,11 @@
                                 <div id="productSlide" class="carousel slide" data-bs-interval="false"
                                      data-ride="carousel" data-pause="hover">
                                     <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/p1.png"
+                                        <div v-for="(image, index) in orderSummary.product.imageURL" class="carousel-item" :class="(index==0)?'active':''">
+                                            <img :src="'/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/' + image"
                                                  class="d-block w-100" alt="">
                                         </div>
-                                        <div class="carousel-item">
-                                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/p2.png"
-                                                 class="d-block w-100" alt="">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/p3.png"
-                                                 class="d-block w-100" alt="">
-                                        </div>
+
                                     </div>
                                     <button class="carousel-control-prev" type="button"
                                             data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -80,39 +93,28 @@
                                     </button>
 
                                     <div class="carousel-indicators">
-                                        <button type="button" data-bs-target="#productSlide" data-bs-slide-to="0"
-                                                class="active" aria-current="true" aria-label="Slide 1">
-                                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/p1.png"
+                                        <button v-for="(image, index) in orderSummary.product.imageURL" type="button" data-bs-target="#productSlide" :data-bs-slide-to="index"
+                                                :class="(index==0)?'active':''" aria-current="true" aria-label="Slide 1">
+                                            <img :src="'/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/' + image"
                                                  width="60" height="70" class="d-block w-100"
                                                  alt="">
                                         </button>
-                                        <button type="button" data-bs-target="#productSlide" data-bs-slide-to="1"
-                                                aria-label="Slide 2">
-                                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/p2.png"
-                                                 width="60" height="70" class="d-block w-100"
-                                                 alt="">
-                                        </button>
-                                        <button type="button" data-bs-target="#productSlide" data-bs-slide-to="2"
-                                                aria-label="Slide 3">
-                                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/p3.png"
-                                                 width="60" height="70" class="d-block w-100"
-                                                 alt="">
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-7">
-                                <h2 class="subtitle">XIAOMI 11T 5G NE</h2>
+                                <h2 class="subtitle">{{ orderSummary.product.nameEN }}</h2>
                                 <div class="mt-3">
                                     <div class="text-bold">Capacity</div>
                                     <div class="hlv_3">
-                                        8 RAM and 256 ROM
+                                        {{ orderSummary.product.capacity }}
                                     </div>
                                 </div>
                                 <div class="mt-3">
                                     <div class="text-bold">Plan</div>
                                     <div class="accordion-wrap hlv_3">
-                                        <div class="accordion-header">Yes Postpaid FT5G <i
+                                        <div class="accordion-header"> {{ orderSummary.product.planName}} <i
                                                     class="icon icon_arrow_down"></i></div>
                                         <ul class="accordion-body list-1 mt-3" style="display: none">
                                             <li>250GB 4G Data</li>
@@ -132,21 +134,14 @@
                                 <div class="text-bold mt-3">Select color</div>
                                 <div class="selectColorWrap mt-3">
                                     <ul>
-                                        <li data-bs-target="#productSlide" data-bs-slide-to="0"
-                                            class="color_select color-black selected"><a></a></li>
-                                        <li data-bs-target="#productSlide" data-bs-slide-to="1"
-                                            class="color_select  color-silver "><a></a></li>
-                                        <li data-bs-target="#productSlide" data-bs-slide-to="2"
-                                            class="color_select color-white"><a></a></li>
+                                        <li v-for="(color, index) in orderSummary.product.color" @click="changeColor(color)"
+                                            data-bs-target="#productSlide" :data-bs-slide-to="index" class="color_select" :class="'color-'+color" :class="orderSummary.orderDetail.color.toString() == color.toString()?'selected':''"><a></a></li>
                                     </ul>
                                 </div>
                                 <div class="text-bold mt-3">Select contract type</div>
                                 <div class="selectContractWrap mt-3">
-
                                     <ul>
-                                        <li class="selected">Elevate 24 months</li>
-                                        <li class="">Elevate 36 months</li>
-                                        <li class="">Normal contract</li>
+                                        <li v-for="(contract, index) in orderSummary.product.contract" @click="changeContract(contract.id)" :data-contract-id="contract.id" :class="'contract_' + contract.id" :class="parseFloat(orderSummary.orderDetail.contract_id) == parseFloat(contract.id)?'selected':''"><a>{{contract.name}}{{orderSummary.orderDetail.contract_id}}</a></li>
                                     </ul>
                                 </div>
                                 <div class="hr_line"></div>
@@ -169,77 +164,188 @@
                                 <h3>TOTAL</h3>
                             </div>
                             <div class="col-6 pt-2 pb-2 text-end">
-                                <h3>RMxx.00/mth</h3>
+                                <h3>RM{{ formatPrice(parseFloat(orderSummary.orderDetail.total).toFixed(2)) }}/mth</h3>
                             </div>
                         </div>
                         <div class="monthly mb-4">
-                            <div class="row mt-2">
+                            <div v-for="(item, index) in orderSummary.orderDetail.orderItems" class="row mt-2">
                                 <div class="col-6">
-                                    <p>Xiaomi 11T 5G NE with Elevate 24 months</p>
+                                    <p>{{item.name}}</p>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <p>RMxx.00/ mth</p>
+                                    <p>RM{{item.price}}/ mth</p>
                                 </div>
                             </div>
-                            <div class="row mt-2">
-                                <div class="col-6">
-                                    <p>Yes Postpaid FT5G</p>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <p>RMxx.00/ mth</p>
-                                </div>
-                            </div>
+
                             <div class="hr_line"></div>
-                            <div class="row mt-2 cart_bold">
+                            <div class="row mt-2 cart_bold" v-if="isUpfront">
                                 <div class="col-6">
                                     <p>Upfront Payment</p>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <p>*RMxx.00</p>
+                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.orderDetail.upfront).toFixed(2)) }}</p>
                                 </div>
                             </div>
                             <div class="hr_line"></div>
                         </div>
 
-                        <a href="#" class="pink-btn d-block" data-bs-toggle="modal" data-bs-target="#login-modal">Order
-                            Now</a>
+                        <a href="/elevate/personal/" class="d-block" :class="isValidCart?'pink-btn':'btn-round-dark'">Order Now</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
+    </div>
 </main>
+</div>
 <?php get_footer('no-newsletter'); ?>
 </div>
 <script type="text/javascript">
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
-    ;
-
 
     $(document).ready(function () {
 
-        $('.selectColorWrap li').click(function () {
-            $('.selectColorWrap .selected').removeClass('selected');
-            $(this).addClass('selected');
-            var i = parseInt($(this).attr('data-slide-to'));
-            $("#productCarousel").carousel(i);
-        });
-
-        $('.selectContractWrap li').click(function () {
-            $('.selectContractWrap .selected').removeClass('selected');
-            $(this).addClass('selected');
-
-        });
-
-
-        $('.accordion-header').click(function () {
+        $(document).on('click','.accordion-header',function () {
             $(this).parent().toggleClass("active");
             $(this).parent().children(".accordion-body").slideToggle();
         });
     })
     ;
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        toggleOverlay();
+        var pageCart = new Vue({
+            el: '#main-vue',
+            data: {
+                elevateLSData: null,
+                productId: null,
+                isCartEmpty: false,
+                hasFetchPlan: false,
+                taxRate: {
+                    sst: 0.06
+                },
+                orderSummary: {
+                    product: {},
+                    orderDetail: {
+                        total: 0.00,
+                        color: null,
+                        contract_id: null,
+                        orderItems:[]
+                    },
+                },
+                packageInfos: [],
+                currentStep: 0,
+                elevate: null,
+            },
+            created: function() {
+                var self = this;
+                setTimeout(function() {
+                    elevate.init();
+                    self.getPlanData();
+                }, 500);
+            },
+            methods: {
+                getPlanData: function() {
+                    var self = this;
+                    if (elevate.validateSession(self.currentStep)) {
+
+                        self.productId = elevate.lsData.meta.productId;
+                        self.ajaxGetPlanData()
+                    } else {
+                        self.isCartEmpty = true;
+                        setTimeout(function() {
+                            toggleOverlay(false);
+                        }, 1500);
+                    }
+                },
+                ajaxGetPlanData: function() {
+                    var self = this;
+                    axios.get(apiEndpointURL_elevate + '/getProduct/?code=' + self.productId)
+                        .then((response) => {
+                            var data = response.data;
+                            if (data.internetData == '∞') {
+                                data.internetData = 'Unlimited';
+                            }
+
+                            self.orderSummary.product = data;
+                            /*if(elevate.lsData.orderDetail){
+                                self.orderSummary.orderDetail = elevate.lsData.orderDetail;
+                            }else{
+                                self.orderSummary.orderDetail.color = null;
+                                self.orderSummary.orderDetail.contract_id = data.contract[0].id;
+                            }*/
+                            self.updatePlan();
+
+
+                            toggleOverlay(false);
+
+                        })
+                        .catch((error) => {
+                            toggleOverlay(false);
+                            console.log('error', error);
+                        })
+                },
+                updatePlan: function() {
+                    var self = this;
+
+                    self.hasFetchPlan = true;
+
+                    self.updateSummary();
+
+
+                },
+                updateSummary: function() {
+                    var self = this;
+                    var total = 0;
+
+                    self.orderSummary.orderDetail.total = 150;
+                    self.orderSummary.orderDetail.orderItems = [
+                        {name:'Xiaomi 11T 5G NE with Elevate 24 months',price:100},
+                        {name:'Yes Postpaid FT5G',price:50},
+                    ];
+                    self.orderSummary.orderDetail.upfront = 10;
+                    //update store
+                    elevate.lsData.product = self.orderSummary.product;
+                    elevate.updateElevateLSData();
+                },
+                isUpfront: function (){
+                    var self = this;
+                    return (self.orderSummary.orderDetail.upfront > 0);
+                },
+                changeColor: function (color){
+                    var self = this;
+
+                    $('.selectColorWrap .selected').removeClass('selected');
+                    $('.selectColorWrap .color-'+color).addClass('selected');
+                    self.orderSummary.orderDetail.color = color;
+                    elevate.lsData.orderDetail =  self.orderSummary.orderDetail;
+                    elevate.updateElevateLSData();
+                },
+                changeContract: function (contract){
+                    var self = this;
+
+                    $('.selectContractWrap .selected').removeClass('selected');
+                    $('.selectContractWrap .contract_' + contract).addClass('selected');
+
+                    self.orderSummary.orderDetail.contract_id = contract;
+                    elevate.lsData.orderDetail =  self.orderSummary.orderDetail;
+                    elevate.updateElevateLSData();
+                },
+
+                isValidCart: function (){
+                    var self = this;
+                    var valid = true;
+
+                    if(!self.orderSummary.orderDetail.contract_id || !self.orderSummary.orderDetail.color){
+                        valid = false;
+                    }
+                    alert(valid);
+                    return valid;
+                }
+
+            }
+        });
+    });
 </script>

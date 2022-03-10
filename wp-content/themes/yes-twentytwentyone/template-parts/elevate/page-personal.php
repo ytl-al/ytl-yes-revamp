@@ -17,7 +17,8 @@
             </div>
         </div>
     </header>
-    <main>
+<div>
+    <main >
 
         <!-- Banner Start -->
         <section id="grey-innerbanner">
@@ -40,7 +41,7 @@
 
         <section id="cart-body">
             <div class="container p-lg-5 p-3">
-                <div class="row gx-5">
+                <div class="row gx-5" >
                     <form class="col-lg-8 col-12 needs-validation" novalidate>
                         <div>
                             <h2 class="subtitle">Personal Details</h2>
@@ -190,7 +191,7 @@
 
                         </div>
                     </form>
-                    <div class="col-lg-4 col-12">
+                    <div class="col-lg-4 col-12" id="main-vue">
                         <div class="summary-box">
                             <h1 class="subtitle">Order summary</h1>
                             <h3 class="plan_price">Monthly Payment</h3>
@@ -200,33 +201,26 @@
                                     <h3>TOTAL</h3>
                                 </div>
                                 <div class="col-6 pt-2 pb-2 text-end">
-                                    <h3>RMxx.00/mth</h3>
+                                    <h3>RM{{ formatPrice(parseFloat(orderSummary.orderDetail.total).toFixed(2)) }}/mth</h3>
                                 </div>
                             </div>
                             <div class="monthly mb-4">
-                                <div class="row mt-2">
+                                <div v-for="(item, index) in orderSummary.orderDetail.orderItems" class="row mt-2">
                                     <div class="col-6">
-                                        <p>Xiaomi 11T 5G NE with Elevate 24 months</p>
+                                        <p>{{item.name}}</p>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <p>RMxx.00/ mth</p>
+                                        <p>RM{{item.price}}/ mth</p>
                                     </div>
                                 </div>
-                                <div class="row mt-2">
-                                    <div class="col-6">
-                                        <p>Yes Postpaid FT5G</p>
-                                    </div>
-                                    <div class="col-6 text-end">
-                                        <p>RMxx.00/ mth</p>
-                                    </div>
-                                </div>
+
                                 <div class="hr_line"></div>
-                                <div class="row mt-2 cart_bold">
+                                <div class="row mt-2 cart_bold" v-if="isUpfront">
                                     <div class="col-6">
                                         <p>Upfront Payment</p>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <p>*RMxx.00</p>
+                                        <p>*RM{{ formatPrice(parseFloat(orderSummary.orderDetail.upfront).toFixed(2)) }}</p>
                                     </div>
                                 </div>
                                 <div class="hr_line"></div>
@@ -238,16 +232,63 @@
         </section>
 
     </main>
+</div>
     <?php require_once ('includes/footer.php');?>
 
 <script type="text/javascript">
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll("[data-bs-toggle=\"tooltip\"]"))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
+    $(document).ready(function() {
+        var pageCart = new Vue({
+            el: '#main-vue',
+            data: {
+                productId: null,
+                isCartEmpty: false,
+                taxRate: {
+                    sst: 0.06
+                },
+                orderSummary: {
+                    product: {},
+                    orderDetail: {
+                        total: 0.00,
+                        color: null,
+                        contract_id: null,
+                        orderItems:[]
+                    },
+                },
+                packageInfos: [],
+                currentStep: 0,
+                elevate: null,
+            },
+            created: function() {
+                var self = this;
+                setTimeout(function() {
+                    self.getPlanData();
+                }, 500);
+            },
+            methods: {
+                getPlanData: function() {
+                    var self = this;
+
+                    if (elevate.validateSession(self.currentStep)) {
+                        self.productId = elevateLSData.meta.productId;
+                        self.orderSummary.product = elevateLSData.product;
+                        self.orderSummary.orderDetail = elevateLSData.orderDetail;
+                    } else {
+                        self.isCartEmpty = true;
+                    }
+                    console.log("self",self.orderSummary);
+                },
+                isValidInfo: function (){
+                    var self = this;
+                    var valid = false;
+
+                    return valid;
+                },
+                isUpfront: function (){
+                    var self = this;
+                    return (self.orderSummary.orderDetail.upfront > 0);
+                },
+
+            }
+        });
     });
-
-    $(document).ready(function(){
-        $('.select2').select2();
-    })
-
 </script>

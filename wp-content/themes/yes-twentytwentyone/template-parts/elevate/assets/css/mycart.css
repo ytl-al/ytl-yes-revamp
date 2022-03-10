@@ -502,7 +502,7 @@ ul.wizard {
     border-radius: 30px;
     padding: 5px 18px;
     width: 100%;
-    color: #64748B;
+    color: #64748B!important;
     font-family: Montserrat;
     font-style: normal;
     font-weight: 800;
