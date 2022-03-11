@@ -37,6 +37,7 @@ if (is_admin()) {
                 ]
             ];
 
+            //for supported-devices
             $meta_boxes[] = [
                 'title'         => esc_html__('Additional Info', 'yes.my'),
                 'id'            => 'yes_release_date_meta',
@@ -60,6 +61,40 @@ if (is_admin()) {
 
                         // Save value as timestamp?
                         'timestamp' => false,
+                    ]
+                ]
+            ];
+
+            //for news room
+            $meta_boxes[]   = [
+                'title'         => esc_html__('Theme Info', 'yes.my'),
+                'id'            => 'yes_news_room_theme_opt',
+                'post_types'    => ['news-room'],
+                'context'       => 'normal',
+                'revision'      => true,
+                'fields'        => [
+                    [
+                        'type'  => 'select',
+                        'name'  => esc_html__('Style Class', 'yes.my'),
+                        'id'    => $prefix . 'theme_class',
+                        // Array of 'value' => 'Label' pairs
+                        'options' => array(
+                            'none' => 'None',
+                            'light' => 'Light'
+                        ),
+                        // Allow to select multiple value?
+                        'multiple' => false,
+                        // Placeholder text
+                        'placeholder' => 'Select an theme class',
+                        // Display "Select All / None" button?
+                        'select_all_none' => false,
+                    ],
+                    [
+                        'type'  => 'image',
+                        'name'  => esc_html__('Background Image', 'yes.my'),
+                        'id'    => $prefix . 'theme_background_image',
+                        'multiple' => false,
+                        'max_file_uploads' => 1
                     ]
                 ]
             ];
