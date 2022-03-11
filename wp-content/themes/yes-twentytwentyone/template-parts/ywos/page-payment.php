@@ -140,7 +140,7 @@
                                         <div class="col-lg-6 col-12">
                                             <label class="form-label" for="input-chName">* Cardholder Name</label>
                                             <div class="input-group align-items-center">
-                                                <input type="text" class="form-control" id="input-chName" v-model="paymentInfo.nameOnCard" @input="watchAllowSubmit" placeholder="John Doe" />
+                                                <input type="text" class="form-control" id="input-chName" v-model="paymentInfo.nameOnCard" @input="watchAllowSubmit" placeholder="John Doe" @keypress="checkInputCharacters(event, 'alpha')" />
                                             </div>
                                         </div>
                                     </div>
@@ -150,10 +150,10 @@
                                         </div>
                                         <div class="col-lg-6 col-12 mb-1">
                                             <div class="input-group align-items-center">
-                                                <input type="text" class="form-control text-center" id="input-cardInput1" v-model="cardholder.number1" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(1, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
-                                                <input type="text" class="form-control text-center" id="input-cardInput2" v-model="cardholder.number2" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(2, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
-                                                <input type="text" class="form-control text-center" id="input-cardInput3" v-model="cardholder.number3" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(3, event)" @keypress="checkIsNumber(event)" /><span class="mx-1">-</span>
-                                                <input type="text" class="form-control text-center" id="input-cardInput4" v-model="cardholder.number4" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(4, event)" @keypress="checkIsNumber(event)" />
+                                                <input type="text" class="form-control text-center" id="input-cardInput1" v-model="cardholder.number1" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(1, event)" @keypress="checkInputCharacters(event, 'numeric')" /><span class="mx-1">-</span>
+                                                <input type="text" class="form-control text-center" id="input-cardInput2" v-model="cardholder.number2" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(2, event)" @keypress="checkInputCharacters(event, 'numeric')" /><span class="mx-1">-</span>
+                                                <input type="text" class="form-control text-center" id="input-cardInput3" v-model="cardholder.number3" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(3, event)" @keypress="checkInputCharacters(event, 'numeric')" /><span class="mx-1">-</span>
+                                                <input type="text" class="form-control text-center" id="input-cardInput4" v-model="cardholder.number4" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(4, event)" @keypress="checkInputCharacters(event, 'numeric')" />
                                             </div>
                                         </div>
                                         <p class="info mb-3">Numbers must contain 16 digits</p>
@@ -162,14 +162,14 @@
                                         <div class="col-lg-3 col-12">
                                             <label class="form-label" for="input-cardInput5">* Exp Date</label>
                                             <div class="input-group align-items-center">
-                                                <input type="text" class="form-control text-center" id="input-cardInput5" autocomplete="off" v-model="paymentInfo.cardExpiryMonth" placeholder="00" maxlength="2" @input="checkCardInputJump(5, event)" @keypress="checkIsNumber(event)" /> <span class="mx-2">/</span>
-                                                <input type="text" class="form-control text-center" id="input-cardInput6" autocomplete="off" v-model="paymentInfo.cardExpiryYear" placeholder="0000" maxlength="4" @input="checkCardInputJump(6, event)" @keypress="checkIsNumber(event)" />
+                                                <input type="text" class="form-control text-center" id="input-cardInput5" autocomplete="off" v-model="paymentInfo.cardExpiryMonth" placeholder="00" maxlength="2" @input="checkCardInputJump(5, event)" @keypress="checkInputCharacters(event, 'numeric')" /> <span class="mx-2">/</span>
+                                                <input type="text" class="form-control text-center" id="input-cardInput6" autocomplete="off" v-model="paymentInfo.cardExpiryYear" placeholder="0000" maxlength="4" @input="checkCardInputJump(6, event)" @keypress="checkInputCharacters(event, 'numeric')" />
                                             </div>
                                         </div>
                                         <div class="col-lg-3 col-12">
                                             <label class="form-label" for="input-cardInput7">* CVV</label>
                                             <div class="input-group align-items-center">
-                                                <input type="password" class="form-control text-center" id="input-cardInput7" autocomplete="off" v-model="paymentInfo.cardCVV" @input="watchAllowSubmit" placeholder="***" maxlength="3" @keypress="checkIsNumber(event)" />
+                                                <input type="password" class="form-control text-center" id="input-cardInput7" autocomplete="off" v-model="paymentInfo.cardCVV" @input="watchAllowSubmit" placeholder="***" maxlength="3" @keypress="checkInputCharacters(event, 'numeric')" />
                                             </div>
                                         </div>
                                     </div>
@@ -802,15 +802,26 @@
                         $('#select-bank').selectpicker('refresh');
                     }, 100);
                 }, 
-                checkIsNumber: function(event) {
+                checkInputCharacters: function (event, type = 'numeric') {
                     event = (event) ? event : window.event;
                     var charCode = (event.which) ? event.which : event.keyCode;
-                    if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                    if (
+                        type == 'numeric' && 
+                        (charCode > 31 && (charCode < 48 || charCode > 57)) && // numeric (0-9)
+                        charCode !== 46
+                    ) {
+                        event.preventDefault();
+                    } else if (
+                        type == 'alpha' && 
+                        !(charCode == 32) &&                 // space
+                        !(charCode > 64 && charCode < 91) && // uppercase alpha
+                        !(charCode > 96 && charCode < 123)   // lowercase alpha
+                    ) {
                         event.preventDefault();
                     } else {
                         return true;
                     }
-                },
+                }, 
                 checkCardInputJump: function(inputStep, event) {
                     var self = this;
                     var objInd = 'number' + inputStep;
