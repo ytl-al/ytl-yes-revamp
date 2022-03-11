@@ -261,3 +261,16 @@ function getCreditCardType(ccNumber) {
 function formatPrice(amount) {
     return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+function toggleOverlay(toggleShow = true) {
+    if (toggleShow) {
+        $('body').addClass('show-overlay');
+        $('.layer-overlay').removeAttr('style');
+    } else {
+        $('.layer-overlay').fadeOut(500);
+        setTimeout(function() {
+            $('body').removeClass('show-overlay');
+            $('.layer-overlay').removeAttr('style');
+        }, 500)
+    }
+}
