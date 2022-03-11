@@ -57,7 +57,7 @@
                                     <div class="form-group">
                                         <label class="form-label" for="input-securityId">* IC/Passport Number</label>
                                         <div class="input-group align-items-center">
-                                            <input type="text" class="form-control" id="input-securityId" v-model="customerDetails.securityId" @input="watchAllowNext" maxlength="14" placeholder="" :disabled="!allowSecurityId" />
+                                            <input type="text" class="form-control" id="input-securityId" v-model="customerDetails.securityId" @input="watchAllowNext" @keypress="checkInput(event)" maxlength="14" placeholder="" :disabled="!allowSecurityId" />
                                             <!-- <a href="#" data-bs-toggle="tooltip" data-bs-placement="right" class="ms-2" title="Tooltip text here"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/info-icon.png" /></a> -->
                                             <div class="invalid-feedback mt-1" id="em-securityID"></div>
                                         </div>
@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="col-lg-4 col-7">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="input-otpPhoneNumber" maxlength="10" v-model="verify.input.phoneNumber" @input="watchAllowNext" placeholder="181234567" :disabled="!allowPhoneNumber" />
+                                        <input type="text" class="form-control" id="input-otpPhoneNumber" maxlength="10" v-model="verify.input.phoneNumber" @input="watchAllowNext" @keypress="checkInputCharacters(event, 'numeric', false)" placeholder="181234567" :disabled="!allowPhoneNumber" />
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-12" v-if="!isLoggedIn">
@@ -406,11 +406,30 @@
                         }
                     }
                 },
+                checkInput: function (event) {
+                    var self = this;
+                    var type = 'alphanumeric';
+                    if (self.customerDetails.securityType == 'NRIC') {
+                        type = 'numeric';
+                        if (self.customerDetails.securityId.length > 11) {
+                            event.preventDefault();
+                        } else {
+                            checkInputCharacters(event, type, false);
+                        }
+                    } else if (self.customerDetails.securityType == 'PASSPORT') {
+                        checkInputCharacters(event, type, false);
+                    } else {
+                        return true;
+                    }
+                }, 
                 watchSecurityType: function() {
                     var self = this;
                     self.deliveryInfo.securityType = self.customerDetails.securityType;
                     self.checkForeignerDeposit();
                     self.watchAllowNext();
+
+                    self.customerDetails.securityId = '';
+                    $('#input-securityId').focus();
                 },
                 watchAgree: function() {
                     var self = this;
