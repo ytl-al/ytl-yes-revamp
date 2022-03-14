@@ -177,7 +177,7 @@ body {
     border-bottom: 3px solid #FF0084!important;
 }
 
-#cart-body .nav-pills .nav-link {
+.payment .nav-pills .nav-link {
     width: 80px;
     height: 80px;
     background: #F9F7F4;

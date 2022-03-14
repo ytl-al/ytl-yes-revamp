@@ -75,6 +75,121 @@ body {
     margin: 12px 0px;
 }
 
+.bg-checkout1{
+    background-image: url("../images/checkout_bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 10px 0 0 10px;
+}
+
+.bg-checkout2{
+    background-image: url("../images/checkout_bg2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 10px 0 0 10px;
+}
+
+.checkout-left{
+    margin-top: 250px;
+}
+
+.checkout-left2{
+    margin-top: 190px;
+    min-height: 420px;
+}
+
+.flex-container {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-item {
+    background-color: tomato;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    line-height: 20px;
+    color: white;
+    font-weight: bold;
+    font-size: 2em;
+    text-align: center;
+}
+
+.btn-cancel{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 19px;
+    color: #C4C4C4;
+    cursor: pointer;
+}
+
+.plan-item{
+    border: 0.5px solid #C5C5C5;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background: #FFFFFF;
+    border: 1px solid #F4F4F3;
+    box-shadow: 0px 3.63441px 10.9032px rgb(0 0 0 / 10%);
+    border: 3px solid transparent;
+}
+
+.plan-item:hover{
+    border: 3px solid #2F3BF5;
+}
+
+.plan-item .subtitle{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 23px;
+    line-height: 28px;
+}
+
+.plan-item .plan_price{
+    color: #2F3BF5;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 40px;
+}
+.plan-item .plan-list{
+    list-style: url("../images/check-circle-regular.png");
+    margin: 0;
+    padding: 0 0 0 20px;
+}
+
+.plan_tabs .nav-link{
+    background-color: transparent!important;
+    font-weight: 600;
+    font-size: 20px;
+    color: #C4C4C4;
+    border-bottom: 3px solid #C4C4C4;
+    border-radius: 0;
+}
+
+.plan_tabs .active{
+    color: #FF0084!important;
+    border-bottom: 3px solid #FF0084!important;
+}
+
+.payment .nav-pills .nav-link {
+    width: 80px;
+    height: 80px;
+    background: #F9F7F4;
+    box-shadow: 2px 2px 12px rgb(112 144 176 / 25%);
+    border-radius: 8px;
+}
+
 #grey-innerbanner {
     background-color: #F4F4F3;
     padding: 20px 0px;
@@ -96,6 +211,8 @@ body {
     line-height: 23px;
     color: #525252;
 }
+
+#pills-tab li.nav-item{margin-right: 20px;}
 
 .hr_line{
     border-top: 1px solid #D0D5DD;
@@ -582,12 +699,14 @@ ul.wizard {
 #cart-body .pink-btn {
     padding: 9px 30px;
     font-size: 15px;
+    cursor: pointer;
 }
 
 #cart-body .grey-link {
     font-weight: 600;
     color: #2B2B2B;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 #cart-body .label-small {
