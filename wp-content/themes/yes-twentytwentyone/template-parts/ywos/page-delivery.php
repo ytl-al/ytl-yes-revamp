@@ -313,21 +313,6 @@
                 },
                 selectOptions: {
                     states: [{
-                            'stateCode': 'KUL',
-                            'value': 'WILAYAH PERSEKUTUAN-KUALA LUMPUR',
-                            'name': 'Wilayah Persekutuan Kuala Lumpur'
-                        },
-                        {
-                            'stateCode': 'PJY',
-                            'value': 'PUTRAJAYA',
-                            'name': 'Wilayah Persekutuan Putrajaya'
-                        },
-                        {
-                            'stateCode': 'LBN',
-                            'value': 'LABUAN',
-                            'name': 'Wilayah Persekutuan Labuan'
-                        },
-                        {
                             'stateCode': 'JHR',
                             'value': 'JOHOR',
                             'name': 'Johor'
@@ -391,6 +376,21 @@
                             'stateCode': 'TRG',
                             'value': 'TERENGGANU',
                             'name': 'Terengganu'
+                        },
+                        {
+                            'stateCode': 'KUL',
+                            'value': 'WILAYAH PERSEKUTUAN-KUALA LUMPUR',
+                            'name': 'Wilayah Persekutuan Kuala Lumpur'
+                        },
+                        {
+                            'stateCode': 'PJY',
+                            'value': 'PUTRAJAYA',
+                            'name': 'Wilayah Persekutuan Putrajaya'
+                        },
+                        {
+                            'stateCode': 'LBN',
+                            'value': 'LABUAN',
+                            'name': 'Wilayah Persekutuan Labuan'
                         }
                     ],
                     cities: [] 
@@ -621,7 +621,7 @@
                             var data = response.data;
                             var errorMsg = '';
                             if (error.response.status == 500 || error.response.status == 503) {
-                                errorMsg = "<p>There's an error in verifying the referral code.</p>";
+                                errorMsg = "<p>Eligibility Check. There's an error in validating customer eligibilities.</p>";
                             } else {
                                 errorMsg = data.message
                             }
