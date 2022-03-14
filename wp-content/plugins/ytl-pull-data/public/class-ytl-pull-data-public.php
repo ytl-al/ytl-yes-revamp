@@ -389,7 +389,6 @@ class Ytl_Pull_Data_Public
 		foreach ($plans_obj as $plans) {
 			foreach ($plans as $plan_id => $plan) {
 				if ($plan_id == $data['plan_id']) {
-					$plan->addOns = $this->ca_get_add_ons_by_plan($plan->planName, $plan->planType);
 					$return	= $plan;
 					break;
 				}

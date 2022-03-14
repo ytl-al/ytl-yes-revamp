@@ -370,7 +370,9 @@
         opacity: 0.6;
     }
 
-    .addon-content { padding-right: 38px; }
+    .addon-content {
+        padding-right: 38px;
+    }
 
     @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
         #cart-body .packagebox .visualbg {
@@ -804,8 +806,8 @@
 
                         if (ywos.lsData.meta.isLoggedIn) {
                             self.orderSummary = ywos.lsData.meta.orderSummary;
-                            self.ajaxGetPlanAddOns();
-                            self.updatePlan(false);
+                            self.updateAddOns(self.orderSummary.plan.addonListServiceTypes);
+                            self.updatePlan();
                         } else {
                             self.ajaxGetPlanData();
                         }
@@ -836,7 +838,10 @@
                                     pricingComponentList.map(function(pricingComponent) {
                                         var componentName = pricingComponent.pricingComponentName;
                                         var componentValue = formatPrice(pricingComponent.pricingComponentValue);
-                                        var objArr = { name: componentName, value: componentValue };
+                                        var objArr = {
+                                            name: componentName,
+                                            value: componentValue
+                                        };
                                         if (['Postpaid Device Price', 'Postpaid Device Upfront Payment'].includes(componentName)) {
                                             planDevicePriceBreakdown.push(objArr);
                                         } else if (['Postpaid Foreigner Deposit'].includes(componentName)) {
@@ -847,7 +852,10 @@
                                     });
                                 }
                             };
-                            self.orderSummary.due.priceBreakdown = { plan: planPriceBreakdown, device: planDevicePriceBreakdown };
+                            self.orderSummary.due.priceBreakdown = {
+                                plan: planPriceBreakdown,
+                                device: planDevicePriceBreakdown
+                            };
 
                             var hasDevice = false;
                             for (var i = 0; i < planDevicePriceBreakdown.length; i++) {
@@ -858,59 +866,46 @@
                             }
                             self.orderSummary.plan.hasDevice = hasDevice;
 
-                            self.updateAddOns(data.addOns);
+                            self.updateAddOns(data.addonListServiceTypes);
                             self.updatePlan();
                         })
                         .catch((error) => {
                             console.log('error', error);
                         })
                 },
-                ajaxGetPlanAddOns: function() {
-                    var self = this;
-                    axios.post(apiEndpointURL + '/get-add-ons-by-plan', {
-                            'plan_name': self.orderSummary.plan.planName,
-                            'plan_type': self.orderSummary.plan.planType
-                        })
-                        .then((response) => {
-                            var data = response.data;
-                            self.updateAddOns(data);
-
-                            setTimeout(function() {
-                                toggleOverlay(false);
-                            }, 500);
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                        });
-                },
                 updateAddOns: function(dataAddOns = {}) {
                     var self = this;
-                    dataAddOns.map(function(data) {
-                        data.addonPackageInfoList.map(function(addOn) {
-                            // addOn.taxSST = addOn.totalAmount * self.taxRate.sst;
-                            var indPaymentDeduction = addOn.paymentDeductionInfoList.filter(paymentDeduction => { return paymentDeduction.type == 'SST'; });
-                            if (indPaymentDeduction) {
-                                indPaymentDeduction = indPaymentDeduction[0];
-                                addOn.taxSST = parseFloat(indPaymentDeduction.value).toFixed(2);
-                            }
-                            self.planAddOns.push(addOn);
+                    if (dataAddOns) {
+                        dataAddOns.map(function(data) {
+                            data.addonPackageInfoList.map(function(addOn) {
+                                // addOn.taxSST = addOn.totalAmount * self.taxRate.sst;
+                                var indPaymentDeduction = addOn.paymentDeductionInfoList.filter(paymentDeduction => {
+                                    return paymentDeduction.type == 'SST';
+                                });
+                                if (indPaymentDeduction) {
+                                    indPaymentDeduction = indPaymentDeduction[0];
+                                    addOn.taxSST = parseFloat(indPaymentDeduction.value).toFixed(2);
+                                }
+                                self.planAddOns.push(addOn);
+                            });
                         });
-                    });
-                    
-                    var planAddOn = self.orderSummary.addOn;
-                    if (planAddOn) {
-                        self.orderSummary.due.taxesSST += planAddOn.taxSST;
-                        self.orderSummary.due.total += planAddOn.taxSST;
 
-                        setTimeout(function() {
-                            self.addOn.allowAddOn = (self.orderSummary.addOn == null) ? true : false;
-                            if (self.addOn.allowAddOn) {
-                                $('.addon-box').removeClass('addon-box-disabled');
-                            } else {
-                                $('.addon-box').addClass('addon-box-disabled');
-                            }
-                        }, 500);
+                        var planAddOn = self.orderSummary.addOn;
+                        if (planAddOn) {
+                            self.orderSummary.due.taxesSST += planAddOn.taxSST;
+                            self.orderSummary.due.total += planAddOn.taxSST;
+
+                            setTimeout(function() {
+                                self.addOn.allowAddOn = (self.orderSummary.addOn == null) ? true : false;
+                                if (self.addOn.allowAddOn) {
+                                    $('.addon-box').removeClass('addon-box-disabled');
+                                } else {
+                                    $('.addon-box').addClass('addon-box-disabled');
+                                }
+                            }, 500);
+                        }
                     }
+
                 },
                 updatePlan: function(closeOverlay = true) {
                     var self = this;
@@ -941,7 +936,7 @@
                     // self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.plan.totalAmount) + parseFloat(self.orderSummary.due.addOns) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees));
                     // self.orderSummary.due.rounding = getRoundingAdjustmentAmount(self.orderSummary.due.total.toFixed(2));
                     // self.orderSummary.due.total += parseFloat(self.orderSummary.due.rounding);
-                    
+
                     // self.orderSummary.due.taxesSST = parseFloat(self.orderSummary.plan.totalSST);
                     // self.orderSummary.due.rounding = parseFloat(self.orderSummary.plan.roundingAdjustment);
                     // self.orderSummary.due.totalWithoutSST = parseFloat(self.orderSummary.plan.totalAmountWithoutSST);
