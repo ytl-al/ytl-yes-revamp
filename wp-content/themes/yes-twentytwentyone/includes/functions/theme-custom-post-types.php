@@ -27,8 +27,8 @@ if (!function_exists('register_custom_post_types')) {
                 'supports'      => ['title', 'thumbnail', 'editor'],
                 'reg_taxonomy'  => ['Events', 'Announcement'],
                 'reg_tags'      => null,
-                'rewrite'       => 'news-room-category',
-                'category_names' => ['plural' => 'Categories', 'singular' => 'Category'],
+                'rewrite'       => 'news-room-location',
+                'category_names' => ['plural' => 'Locations', 'singular' => 'Location'],
                 'tag_names'     => null
             ]
         ];

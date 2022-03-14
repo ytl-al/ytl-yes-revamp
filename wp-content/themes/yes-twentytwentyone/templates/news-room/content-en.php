@@ -80,6 +80,11 @@ get_template_part('templates/news-room/filter', '', ['arr_years' => $arr_years])
             <?php get_template_part('templates/news-room/has-results', '', ['arr_posts' => $arr_posts]); ?>
         </div>
     </div>
+    <div>
+        <?php
+        the_posts_pagination();
+        ?>
+    </div>
 </section>
 
 <?php get_template_part('templates/news-room/scripts'); ?>
