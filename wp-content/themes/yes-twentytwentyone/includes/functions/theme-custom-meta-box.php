@@ -66,6 +66,7 @@ if (is_admin()) {
             ];
 
             //for news room
+            /*
             $meta_boxes[]   = [
                 'title'         => esc_html__('Theme Info', 'yes.my'),
                 'id'            => 'yes_news_room_theme_opt',
@@ -98,6 +99,7 @@ if (is_admin()) {
                     ]
                 ]
             ];
+            */
 
             return $meta_boxes;
         }

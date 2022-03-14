@@ -1,6 +1,6 @@
 <div class="row">
     <?php
-    $default_thumb_url = '/wp-content/themes/yes-twentytwentyone/assets/images/ctm.png';
+    $default_thumb_url = '/wp-content/uploads/2022/03/newsroom-placeholder.jpg';
     $arr_posts  = $args['arr_posts'];
     $i = 0;
     foreach ($arr_posts as $post) :

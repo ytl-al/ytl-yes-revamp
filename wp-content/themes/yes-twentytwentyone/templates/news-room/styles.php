@@ -96,6 +96,10 @@
         border-radius: 10px;
     }
 
+    #news-section .news-box img {
+        max-height: 280px;
+    }
+
     #news-section .news-box .news-content {
         margin-bottom: auto;
     }
