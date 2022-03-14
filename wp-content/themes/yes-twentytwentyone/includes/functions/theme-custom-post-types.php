@@ -24,10 +24,10 @@ if (!function_exists('register_custom_post_types')) {
                 'singular_name' => 'News Room',
                 'slug'          => 'news-room',
                 'menu_icon'     => 'dashicons-media-document',
-                'supports'      => ['title', 'thumbnail', 'editor'],
+                'supports'      => ['title', 'excerpt', 'thumbnail', 'editor'],
                 'reg_taxonomy'  => ['Events', 'Announcement'],
                 'reg_tags'      => null,
-                'rewrite'       => 'news-room-location',
+                'rewrite'       => 'news-room-category',
                 'category_names' => ['plural' => 'Locations', 'singular' => 'Location'],
                 'tag_names'     => null
             ]

@@ -140,6 +140,29 @@
         margin-right: 5px;
     }
 
+    .page-numbers {
+        display: inline-block;
+        padding: 1rem 1.5rem;
+        margin: 0 2px 0 0;
+        border: 1px solid #eee;
+        line-height: 1;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: 600;
+        color: #ED028C;
+        font-size: 20px;
+    }
+
+    .page-numbers.current,
+    a.page-numbers:hover {
+        background: #fefefe;
+    }
+
+    #news-section .pagination {
+        align-items: center;
+        justify-content: center;
+    }
+
     /* IPAD Portrait */
 
     @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
