@@ -40,7 +40,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="referral-box">
-                                    <input type="text" class="form-control referral" id="input-referralCode" v-model="referralCode.code" placeholder="Enter referral code (if any)" />
+                                    <input type="text" class="form-control referral" id="input-referralCode" maxlength="11" v-model="referralCode.code" placeholder="Enter referral code (if any)" @keypress="checkIsNumber(event)" />
                                     <img src="/wp-content/uploads/2022/02/referral-tick.png" class="referral-check" v-if="referralCode.verified" />
                                 </div>
                                 <div class="invalid-feedback mt-1" id="em-referralCode"></div>
@@ -103,7 +103,7 @@
                                         <div class="form-group mb-4">
                                             <label class="form-label" for="input-postcode">* Postcode</label>
                                             <div class="input-group align-items-center">
-                                                <input type="text" class="form-control" id="input-postcode" name="postcode" v-model="deliveryInfo.postcode" @input="watchAllowNext" placeholder="" required />
+                                                <input type="text" class="form-control" id="input-postcode" name="postcode" maxlength="5" v-model="deliveryInfo.postcode" @input="watchAllowNext" @keypress="checkIsNumber(event)" placeholder="" required />
                                             </div>
                                             <div class="invalid-feedback mt-1" id="em-postcode"></div>
                                         </div>
@@ -130,7 +130,7 @@
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-city"></div>
                                 </div>
-                                <div class="form-group mb-4">
+                                <div class="form-group mb-4 d-none">
                                     <label class="form-label" for="textarea-deliveryNotes">Delivery Notes (optional)</label>
                                     <div class="input-group align-items-center">
                                         <textarea class="form-control" id="textarea-deliveryNotes" name="deliveryNotes" v-model="deliveryInfo.deliveryNotes" placeholder=""></textarea>
@@ -560,7 +560,9 @@
                 },
                 validateConfirmEmail: function() {
                     var self = this;
-                    if (self.deliveryInfo.email != self.deliveryInfo.emailConfirm) {
+                    var email = self.deliveryInfo.email.toLowerCase();
+                    var emailConfirm = self.deliveryInfo.emailConfirm.toLowerCase();
+                    if (email != emailConfirm) {
                         var inputEmailConfirm = self.input.emailConfirm.field;
                         var emEmailConfirm = self.input.emailConfirm.errorMessage;
                         $(emEmailConfirm).html('Confirm email address must be same as Email address.').show();
@@ -717,11 +719,10 @@
                             var data = response.data;
                             var errorMsg = '';
                             if (error.response.status == 500 || error.response.status == 503) {
-                                errorMsg = "<p>There's an error in validating your eligibility.</p>";
+                                errorMsg = "<p>There's an error in validating your eligibility.<br /> Please verify your identity and phone number in verification page.</p>";
                             } else {
                                 errorMsg = data.message
                             }
-                            errorMsg += '<br /> Please verify your identity and phone number in verification page.';
                             $('#modal-errorEligibilityCheck .panel-errMsg').html(errorMsg);
                             $('#modal-errorEligibilityCheck').modal('show');
                         })
@@ -776,6 +777,15 @@
                         self.allowSubmit = true;
                     } else {
                         self.allowSubmit = false;
+                    }
+                },
+                checkIsNumber: function(event) {
+                    event = (event) ? event : window.event;
+                    var charCode = (event.which) ? event.which : event.keyCode;
+                    if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                        event.preventDefault();
+                    } else {
+                        return true;
                     }
                 },
                 watchBillingDifferent: function() {},

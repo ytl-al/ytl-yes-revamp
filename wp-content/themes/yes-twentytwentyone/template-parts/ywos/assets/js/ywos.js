@@ -261,3 +261,33 @@ function getCreditCardType(ccNumber) {
 function formatPrice(amount) {
     return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+function checkInputCharacters(event, type = 'alphanumeric', withSpace = true) {
+    event = (event) ? event : window.event;
+    var charCode = (event.which) ? event.which : event.keyCode;
+    var charNonNumeric = false;
+    var charNonAlpha = false;
+    var charNonSpace = (withSpace && charCode == 32) ? false : true;
+    if (
+        (charCode > 31 && (charCode < 48 || charCode > 57)) && // numeric (0-9)
+        charCode !== 46
+    ) {
+        charNonNumeric = true;
+    }
+    if (
+        !(charCode > 64 && charCode < 91) && // uppercase alpha
+        !(charCode > 96 && charCode < 123)   // lowercase alpha
+    ) {
+        charNonAlpha = true;
+    }
+
+    if (type == 'alphanumeric' && charNonNumeric && charNonAlpha && charNonSpace) {
+        event.preventDefault();
+    } else if (type == 'numeric' && charNonNumeric && charNonSpace) {
+        event.preventDefault();
+    } else if (type == 'alpha' && charNonAlpha && charNonSpace) {
+        event.preventDefault();
+    } else {
+        return true;
+    }
+}

@@ -210,7 +210,7 @@
                         <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">Free YES Altitude phone</p>
                         <div class="row mt-4">
                             <div class="col-10">
-                                <h2>RM30.00<span>/month</span></h2>
+                                <h2>RM30.00</h2>
                             </div>
                             <div class="col-2">
                                 <a href="javascript:void(0)" onClick="buyPlan('710');"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cart-pink-icon.png" alt=""></a>
@@ -242,7 +242,7 @@
                         <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">Unlimited Borak</p>
                         <div class="row mt-4">
                             <div class="col-10">
-                                <h2>RM30.00<span>/month</span></h2>
+                                <h2>RM30.00</h2>
                             </div>
                             <div class="col-2">
                                 <a href="javascript:void(0)" onClick="buyPlan('758');"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cart-pink-icon.png" alt=""></a>

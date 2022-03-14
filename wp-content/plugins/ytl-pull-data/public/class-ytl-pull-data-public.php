@@ -855,8 +855,8 @@ class Ytl_Pull_Data_Public
 				$response 	= new WP_REST_Response($data);
 				$response->set_status(200);
 				return $response;
-			} else if ($data->displayResponseMessage) {
-				return new WP_Error('error_validating_customer_eligibilities', $data->displayResponseMessage, array('status' => 400));
+			} else if ($data->displayErrorMessage) {
+				return new WP_Error('error_validating_customer_eligibilities', $data->displayErrorMessage, array('status' => 400));
 			}
 		} else {
 			return new WP_Error('error_validating_customer_eligibilities', "Parameters not complete to validate customer eligibilities.", array('status' => 400));
@@ -1273,7 +1273,7 @@ class Ytl_Pull_Data_Public
 		$table_name = $wpdb->prefix.'ywos_orders';
 
 		$checkIfExists 	= $wpdb->get_var("SELECT ID FROM $table_name WHERE session_key = '$session_key'");
-		$curTimestamp 	= current_time('mysql', 1);
+		$curTimestamp 	= current_time('mysql');
 		$params 		= array(
 			'session_key'	=> $session_key, 
 			'msisdn' 		=> $msisdn, 
@@ -1311,13 +1311,14 @@ class Ytl_Pull_Data_Public
 		$table_name = $wpdb->prefix.'ywos_orders';
 
 		$getRecordID 	= $wpdb->get_var("SELECT ID FROM $table_name WHERE session_key = '$session_key'");
-		$curTimestamp 	= current_time('mysql', 1);
+		$curTimestamp 	= current_time('mysql');
 		
 		if ($getRecordID) {
 			$params = [
 				'xpay_order_response' 	=> $xpay_order_response, 
 				'xpay_order_meta' 		=> serialize($xpay_order_meta),
-				'is_xpay_success' 		=> $is_xpay_success 
+				'is_xpay_success' 		=> $is_xpay_success, 
+				'updated_at' 			=> $curTimestamp 
 			];
 			$wpdb->update(
 				$table_name,
