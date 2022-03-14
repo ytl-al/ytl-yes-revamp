@@ -53,7 +53,12 @@
 	<!-- END Google Tag Manager -->
 
 	<!-- Resulticks -->
-	<script resulconfig="/resulticks/resulconfig.json" src="https://sdk.rsut.io/handlers/6bed952814264982be0edbc93fde1501.sdk" defer="defer"></script>
+	<!-- <script resulconfig="/resulticks/resulconfig.json" src="https://sdk.rsut.io/handlers/6bed952814264982be0edbc93fde1501.sdk" defer="defer"></script>
+	<script type="text/javascript">
+		window.addEventListener('load', (event) => {
+			window.ReWebSDK.conversionTracking();
+		});
+	</script> -->
 	<!-- END Resulticks -->
 </head>
 
