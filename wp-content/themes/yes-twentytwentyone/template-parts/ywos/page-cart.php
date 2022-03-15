@@ -463,10 +463,10 @@
                         </div>
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#cart-accordion">
                             <div class="accordion-body">
-                                <div v-if="packageInfos.slice(3).length">
+                                <div v-if="packageInfos.slice(4).length">
                                     <h1>More Benefits</h1>
                                     <div class="row mb-4">
-                                        <div class="col-lg-6 mb-3" v-for="(packageInfo, index) in packageInfos.slice(3)"><span class="span-itemList">{{ packageInfo }}</span></div>
+                                        <div class="col-lg-6 mb-3" v-for="(packageInfo, index) in packageInfos.slice(4)"><span class="span-itemList">{{ packageInfo }}</span></div>
                                     </div>
                                 </div>
 
