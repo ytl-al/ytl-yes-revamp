@@ -1,0 +1,745 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>YES</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/aos.css" />
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" />
+
+    <style>
+        /* Learn Banner Start */
+        
+        #aboutus-banner {
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0px;
+            padding-bottom: 60px;
+            background-image: url('images/aboutus-banner-bg.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 0px;
+            overflow: hidden;
+        }
+        
+        #aboutus-banner .banner-content {
+            padding-left: 33%;
+        }
+        
+        #aboutus-banner .banner-content h1 {
+            font-size: 71px;
+            font-weight: 800;
+            line-height: 71px;
+            color: #2B2B2B;
+            margin-bottom: 10px;
+            padding-top: 60px;
+        }
+        
+        #aboutus-banner .banner-content p {
+            font-size: 28px;
+            font-weight: 600;
+            color: #525252;
+            line-height: 40px;
+            margin-bottom: 20px;
+        }
+        
+        #aboutus-banner .banner-content .video-btn {
+            display: inline-block;
+            font-size: 20px;
+            font-weight: 800;
+            color: #ED028C;
+            text-transform: uppercase;
+        }
+        
+        #aboutus-banner .banner-content .video-btn svg {
+            font-size: 55px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        /* Learn Banner End */
+        
+        #yes-leaders-section {
+            padding: 60px 0px;
+        }
+        
+        #yes-leaders-section h1 {
+            text-align: center;
+            color: #2B2B2B;
+            font-size: 42px;
+            line-height: 42px;
+            font-weight: 800;
+        }
+        
+        #yes-leaders-section h1 span {
+            font-weight: 900;
+        }
+        
+        #yes-leaders-section p {
+            text-align: center;
+            color: #525252;
+            font-size: 20px;
+            line-height: 24px;
+            margin-top: 15px;
+            padding: 0px 15%;
+        }
+        
+        #yes-leaders-section .leader-box {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            background: rgba(0, 180, 240, 0.05);
+            box-shadow: 0px 4px 4px rgba(26, 31, 113, 0.25);
+            border-radius: 30px;
+            padding: 30px;
+            height: 100%;
+            text-align: center;
+        }
+        
+        #yes-leaders-section .leader-box h2 {
+            color: #2B2B2B;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        
+        #yes-leaders-section .leader-box h3 {
+            color: #525252;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        #yes-leaders-section .leader-box .social-box {
+            text-align: center;
+            padding: 20px 0px;
+        }
+        
+        #yes-leaders-section .leader-box p {
+            color: #525252;
+            font-size: 16px;
+            line-height: 20px;
+            padding: 0;
+        }
+        
+        #about-slider-section {
+            align-items: center;
+            justify-content: center;
+            background-image: url('images/about-slider-bg.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            min-height: 782px;
+        }
+        
+        #about-slider-section .year-box {
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(193.06deg, #00B4F0 -8.2%, #ED028C 230.87%);
+            padding: 50px 10%;
+            padding-left: 5%;
+            border-radius: 0px 25px 25px 0px;
+            position: absolute;
+            left: 0;
+            z-index: 0;
+            align-items: center;
+        }
+        
+        #about-slider-section .year-box .nav-link {
+            background-color: transparent;
+            background: none;
+            color: #FFFFFF;
+            font-size: 24px;
+            font-weight: 600;
+            border-left: solid 10px #F9F7F4CC;
+            padding-left: 10px;
+            margin-bottom: 25px;
+            border-radius: 0;
+            padding: 0px 1rem;
+        }
+        
+        #about-slider-section .year-box .nav-link.active {
+            font-weight: 900;
+            border-color: #ED028C;
+        }
+        
+        #about-slider-section h1 {
+            color: #00B4F0;
+            font-size: 60px;
+            line-height: 60px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        
+        #about-slider-section h2 {
+            font-size: 36px;
+            font-weight: 600;
+            color: #2B2B2B;
+            margin-bottom: 20px;
+        }
+        
+        #about-slider-section p {
+            color: #525252;
+            font-size: 24px;
+            line-height: 30px;
+            margin-bottom: 30px;
+        }
+        
+        #about-slider-section p.small {
+            color: #7A7A7A;
+            font-size: 20px;
+            margin-bottom: 40px;
+        }
+        
+        #about-slider-section .about-carousel {
+            position: absolute;
+            left: 15%;
+            z-index: 200;
+            top: 20%;
+        }
+        
+        #about-slider-section .carousel-box {
+            width: 100%;
+        }
+        
+        #about-slider-section .carousel-box .slider-visual {
+            float: left;
+            width: 460px;
+        }
+        
+        #about-slider-section .carousel-box .slider-content {
+            display: inline-block;
+            padding-left: 5%;
+            width: 50%;
+            padding-top: 50px;
+        }
+        /* IPAD Portrait */
+        
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1400px) and (-webkit-min-device-pixel-ratio: 1) {
+            #aboutus-banner .banner-content {
+                padding-left: 10%;
+            }
+            #about-slider-section .carousel-box .slider-visual {
+                display: none;
+            }
+            #about-slider-section .year-box {
+                display: none;
+            }
+            #about-slider-section .carousel-box .slider-content {
+                padding: 0;
+                width: 100%;
+            }
+            #about-slider-section .about-carousel {
+                position: static !important;
+            }
+            #about-slider-section {
+                padding: 40px 0px;
+                min-height: auto;
+            }
+        }
+        
+        @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+            #aboutus-banner .banner-content {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            #aboutus-banner {
+                padding: 30px 0px;
+            }
+            #aboutus-banner .banner-content h1 {
+                font-size: 50px;
+                line-height: normal;
+            }
+            #aboutus-banner .banner-content p {
+                font-size: 19px;
+                line-height: normal;
+            }
+            #yes-leaders-section h1 {
+                font-size: 29px;
+            }
+            #yes-leaders-section p {
+                padding: 0px 4%;
+            }
+            #about-slider-section .year-box {
+                display: none;
+            }
+            #about-slider-section .slider-visual {
+                display: none;
+            }
+            #about-slider-section {
+                padding: 40px 0px;
+                min-height: auto;
+            }
+            #about-slider-section .carousel-box .slider-content {
+                padding: 0;
+                width: 100%;
+            }
+            #about-slider-section .about-carousel {
+                position: static !important;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="layer-page">
+        <header class="page-header">
+            <div class="top-tabs-container">
+                <div class="container g-0">
+                    <div class="row g-0">
+                        <div class="col-10">
+                            <ul class="tabnav">
+                                <li><a href="#" class="active">Personal</a></li>
+                                <li><a href="#">Business</a></li>
+                                <li><a href="#">Education</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-2">
+                            <div class="dropdown language-drop float-end">
+                                <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="iconify" data-icon="bi:globe"></span> English
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">English</a></li>
+                                    <li><a class="dropdown-item" href="#">Bhasa Malay</a></li>
+                                    <li><a class="dropdown-item" href="#">中文</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-container">
+                <div class="container g-lg-0">
+                    <div class="row g-0">
+                        <nav class="navbar navbar-expand-lg">
+                            <div class="container">
+                                <a class="navbar-brand" href="#"><img src="images/logo.svg" class="logo-top" /></a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <li class="nav-item dropdown mega-dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                                            <ul class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Mobile Plans</li>
+                                                        <li><a href="#">Prepaid Plans</a></li>
+                                                        <li><a href="#">Postpaid Plans</a></li>
+                                                        <li><a href="#">YES Prihatin</a></li>
+                                                        <li><a href="#">Merdeka RM1 Package</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Broadband</li>
+                                                        <li><a href="#">Home broadband</a></li>
+                                                        <li><a href="#">On-the-go broadband</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Existing Customers</li>
+                                                        <li><a href="#">How-To: Refer & Earn</a></li>
+                                                        <li><a href="#">How-To: Get Databack</a></li>
+                                                        <li><a href="#">Data & Hotspot Add-Ons</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="#">Keep Number</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Partners</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Help</a>
+                                        </li>
+                                    </ul>
+                                    <div class="d-flex align-items-center">
+                                        <a href="#" class="pink-btn me-3">Get Started</a>
+                                        <a href="#" class="login-btn"><span class="iconify" data-icon="carbon:user-avatar-filled-alt"></span> Log In</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <!-- Breadcrumb Start -->
+            <section class="breadcrumb-section">
+                <div class="container">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active"><a href="#">About Us</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </section>
+            <!-- Breadcrumb End -->
+
+            <!-- About Us Banner Start -->
+            <section id="aboutus-banner">
+                <div class="container-fluid">
+                    <div class="row justify-content-lg-start">
+                        <div class="col-12 col-md-9 col-lg-6 col-xl-5 ps-lg-5 d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                            <div class="banner-content">
+                                <h1>Our Story</h1>
+                                <p class="mb-4">The YES journey began in 2010. Since then, YTL Communications has kept pushing the boundaries of innovation in communications technology.</p>
+                                <a href="#" class="video-btn"><span class="iconify" data-icon="ant-design:play-circle-filled"></span>Play Video</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- About Us Banner End -->
+
+            <!--Leader Section Start-->
+            <section id="yes-leaders-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 mb-5">
+                            <h1>Meet The YES Leaders</h1>
+                            <p>With over 30 years of shared experience in the telecommunications sector, YES aims to spearhead innovations that deliver the best possible services to you.</p>
+                        </div>
+                        <div class="col-12">
+                            <div class="row gx-5 gy-4">
+                                <div class="col-12 col-lg-4">
+                                    <div class="leader-box align-items-center">
+                                        <div>
+                                            <img src="images/wing-pic.png" class="mb-2" alt="">
+                                            <h2>Wing K. Lee.</h2>
+                                            <h3>Chief Executive Officer</h3>
+                                            <div class="social-box">
+                                                <a href="#"><img src="images/facebook-about-icon.png" alt=""></a>
+                                                <a href="#"><img src="images/twitter-about-icon.png" alt=""></a>
+                                                <a href="#"><img src="images/linkedin-about-icon.png" alt=""></a>
+                                            </div>
+                                            <p>Wing has led YTL Communications since its conception. With over 20 years in the telecommunications industry, Wing provides vision and leadership that empowers YES to deliver world-class products and services.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-4">
+                                    <div class="leader-box align-items-center">
+                                        <div>
+                                            <img src="images/jacob-pic.png" class="mb-2" alt="">
+                                            <h2>Jacob Yeoh</h2>
+                                            <h3>Deputy Chief Executive Officer</h3>
+                                            <div class="social-box">
+                                                <a href="#"><img src="images/facebook-about-icon.png" alt=""></a>
+                                                <a href="#"><img src="images/twitter-about-icon.png" alt=""></a>
+                                                <a href="#"><img src="images/linkedin-about-icon.png" alt=""></a>
+                                            </div>
+                                            <p>Jacob drives enterprise business growth under YES 4G LTE. He works closely with both local and international start-ups to deliver highly functional products and services for the Internet of Things.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-4">
+                                    <div class="leader-box align-items-center">
+                                        <div>
+                                            <img src="images/ali-pic.png" class="mb-2" alt="">
+                                            <h2>Ali Tabassi</h2>
+                                            <h3>Chief Operating Officer</h3>
+                                            <div class="social-box">
+                                                <a href="#"><img src="images/facebook-about-icon.png" alt=""></a>
+                                                <a href="#"><img src="images/twitter-about-icon.png" alt=""></a>
+                                                <a href="#"><img src="images/linkedin-about-icon.png" alt=""></a>
+                                            </div>
+                                            <p>Ali joined YTL Communications in 2010, bringing almost 30 years of experience in developing wireless solutions in the telecommunications, networking and IP industries.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--Leader Section End-->
+
+            <!--About Slider Start-->
+            <section id="about-slider-section">
+                <div class="year-box">
+                    <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <button class="nav-link active" id="year1-tab" data-bs-toggle="pill" data-bs-target="#year1" type="button" role="tab" aria-controls="year1" aria-selected="true">2021</button>
+                        <button class="nav-link" id="year2-tab" data-bs-toggle="pill" data-bs-target="#year2" type="button" role="tab" aria-controls="year2" aria-selected="true">2020</button>
+                        <button class="nav-link" id="year3-tab" data-bs-toggle="pill" data-bs-target="#year3" type="button" role="tab" aria-controls="year3" aria-selected="true">2019</button>
+                        <button class="nav-link" id="year4-tab" data-bs-toggle="pill" data-bs-target="#year4" type="button" role="tab" aria-controls="year4" aria-selected="true">2018</button>
+                        <button class="nav-link" id="year5-tab" data-bs-toggle="pill" data-bs-target="#year5" type="button" role="tab" aria-controls="year5" aria-selected="true">2017</button>
+                        <button class="nav-link" id="year6-tab" data-bs-toggle="pill" data-bs-target="#year6" type="button" role="tab" aria-controls="year6" aria-selected="true">2016</button>
+                        <button class="nav-link" id="year7-tab" data-bs-toggle="pill" data-bs-target="#year7" type="button" role="tab" aria-controls="year7" aria-selected="true">2015</button>
+                        <button class="nav-link" id="year8-tab" data-bs-toggle="pill" data-bs-target="#year8" type="button" role="tab" aria-controls="year8" aria-selected="true">2014</button>
+                        <button class="nav-link" id="year9-tab" data-bs-toggle="pill" data-bs-target="#year9" type="button" role="tab" aria-controls="year9" aria-selected="true">2013</button>
+                        <button class="nav-link" id="year10-tab" data-bs-toggle="pill" data-bs-target="#year10" type="button" role="tab" aria-controls="year10" aria-selected="true">2012</button>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="about-carousel">
+                        <div class="tab-content" id="v-pills-tabContent">
+                            <div class="tab-pane fade show active" id="year1" role="tabpanel" aria-labelledby="year1-tab">
+                                <div class="carousel-box">
+                                    <img src="images/about-slider-4g.png" alt="" class="img-fluid slider-visual">
+                                    <div class="slider-content">
+                                        <p class="small">05 of 12</p>
+                                        <h1>Self-Care App MyYes4G</h1>
+                                        <h2>7 AUGUST 2017</h2>
+                                        <p>Yes Releases mobile self-care app MyYes4G</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="year2" role="tabpanel" aria-labelledby="year2-tab">
+                                <div class="carousel-box">
+                                    <img src="images/about-slider-4g.png" alt="" class="img-fluid slider-visual">
+                                    <div class="slider-content">
+                                        <p class="small">05 of 12</p>
+                                        <h1>Self-Care App MyYes4G</h1>
+                                        <h2>7 AUGUST 2017</h2>
+                                        <p>Yes Releases mobile self-care app MyYes4G</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="year3" role="tabpanel" aria-labelledby="year3-tab">
+                                <div class="carousel-box">
+                                    <img src="images/about-slider-4g.png" alt="" class="img-fluid slider-visual">
+                                    <div class="slider-content">
+                                        <p class="small">05 of 12</p>
+                                        <h1>Self-Care App MyYes4G</h1>
+                                        <h2>7 AUGUST 2017</h2>
+                                        <p>Yes Releases mobile self-care app MyYes4G</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="year4" role="tabpanel" aria-labelledby="year4-tab">
+                                <div class="carousel-box">
+                                    <img src="images/about-slider-4g.png" alt="" class="img-fluid slider-visual">
+                                    <div class="slider-content">
+                                        <p class="small">05 of 12</p>
+                                        <h1>Self-Care App MyYes4G</h1>
+                                        <h2>7 AUGUST 2017</h2>
+                                        <p>Yes Releases mobile self-care app MyYes4G</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="year5" role="tabpanel" aria-labelledby="year5-tab">
+                                <div class="carousel-box">
+                                    <img src="images/about-slider-4g.png" alt="" class="img-fluid slider-visual">
+                                    <div class="slider-content">
+                                        <p class="small">05 of 12</p>
+                                        <h1>Self-Care App MyYes4G</h1>
+                                        <h2>7 AUGUST 2017</h2>
+                                        <p>Yes Releases mobile self-care app MyYes4G</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="year6" role="tabpanel" aria-labelledby="year6-tab">
+                                <div class="carousel-box">
+                                    <img src="images/about-slider-4g.png" alt="" class="img-fluid slider-visual">
+                                    <div class="slider-content">
+                                        <p class="small">05 of 12</p>
+                                        <h1>Self-Care App MyYes4G</h1>
+                                        <h2>7 AUGUST 2017</h2>
+                                        <p>Yes Releases mobile self-care app MyYes4G</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="year7" role="tabpanel" aria-labelledby="year7-tab">
+                                <div class="carousel-box">
+                                    <img src="images/about-slider-4g.png" alt="" class="img-fluid slider-visual">
+                                    <div class="slider-content">
+                                        <p class="small">05 of 12</p>
+                                        <h1>Self-Care App MyYes4G</h1>
+                                        <h2>7 AUGUST 2017</h2>
+                                        <p>Yes Releases mobile self-care app MyYes4G</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="year8" role="tabpanel" aria-labelledby="year8-tab">
+                                <div class="carousel-box">
+                                    <img src="images/about-slider-4g.png" alt="" class="img-fluid slider-visual">
+                                    <div class="slider-content">
+                                        <p class="small">05 of 12</p>
+                                        <h1>Self-Care App MyYes4G</h1>
+                                        <h2>7 AUGUST 2017</h2>
+                                        <p>Yes Releases mobile self-care app MyYes4G</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="year9" role="tabpanel" aria-labelledby="year9-tab">
+                                <div class="carousel-box">
+                                    <img src="images/about-slider-4g.png" alt="" class="img-fluid slider-visual">
+                                    <div class="slider-content">
+                                        <p class="small">05 of 12</p>
+                                        <h1>Self-Care App MyYes4G</h1>
+                                        <h2>7 AUGUST 2017</h2>
+                                        <p>Yes Releases mobile self-care app MyYes4G</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="year10" role="tabpanel" aria-labelledby="year10-tab">
+                                <div class="carousel-box">
+                                    <img src="images/about-slider-4g.png" alt="" class="img-fluid slider-visual">
+                                    <div class="slider-content">
+                                        <p class="small">05 of 12</p>
+                                        <h1>Self-Care App MyYes4G</h1>
+                                        <h2>7 AUGUST 2017</h2>
+                                        <p>Yes Releases mobile self-care app MyYes4G</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--About Slider End-->
+        </main>
+        <footer class="page-footer footer">
+            <div class="container g-lg-0">
+                <div class="row position-relative">
+                    <div class="col-12 col-md-3">
+                        <img src="images/logo.svg" class="footer-logo mb-4" />
+                        <div class="row mb-2">
+                            <ul class="icon-list">
+                                <li>
+                                    <a href="#"><img src="images/facebook.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/instagram.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/youtube.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/twitter.svg" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <p class="mb-2">Get The MyYes App</p>
+                            <ul class="icon-list">
+                                <li>
+                                    <a href="#"><img src="images/logos_google-play-icon.svg" class="store-icon" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/logos_apple-app-store.svg" class="store-icon" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="row g-0 row-cols-2 row-cols-sm-1 row-cols-md-5">
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Plans & Pricing</li>
+                                    <li><a href="#">Prepaid plans</a></li>
+                                    <li><a href="#">Postpaid plans</a></li>
+                                    <li><a href="#">YES Prihatin plans</a></li>
+                                    <li><a href="#">Data Add-Ons</a></li>
+                                    <li><a href="#">Merdeka RM1 Package</a></li>
+                                    <li><a href="#">On-the-go broadband</a></li>
+                                    <li><a href="#">Home broadband</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Explore</li>
+                                    <li><a href="#">Keep number</a></li>
+                                    <li><a href="#">Refer & earn</a></li>
+                                    <li><a href="#">Databack</a></li>
+                                    <li><a href="#">Partnerships</a></li>
+                                    <li><a href="#">Roaming</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Tools</li>
+                                    <li><a href="#">Device manuals</a></li>
+                                    <li><a href="#">Coverage</a></li>
+                                    <li><a href="#">Speed test</a></li>
+                                    <li><a href="#">Kiosk locations</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Company</li>
+                                    <li><a href="#">About us</a></li>
+                                    <li><a href="#">Sustainability reports</a></li>
+                                    <li><a href="#">Newsroom</a></li>
+                                    <li><a href="#">Terms & conditions</a></li>
+                                    <li><a href="#">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Help</li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Chatbot</a></li>
+                                    <li><a href="#">Email us</a></li>
+                                    <li><a href="#">Facebook messenger</a></li>
+                                    <li><a href="#">Visit our store</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-1">
+                        <img src="images/ctm.png" class="img-fluid ctm-logo" />
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-md-start justify-content-sm-center">
+                            <p>POWERED BY YTL, YTL Communications Sdn. Bhd. (793634-V)</p>
+                        </div>
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-md-end justify-content-sm-center">
+                            <img src="images/footer-icons.png" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="js/iconify.min.js"></script>
+    <script type="text/javascript" src="js/aos.js"></script>
+
+    <script type="text/javascript">
+        AOS.init();
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.about-carousel').slick({
+                prevArrow: '<a href="#" class="slide-arrow prev-arrow slick-arrow"><span class="iconify" data-icon="bi:arrow-left-circle"></span></a>',
+                nextArrow: '<a href="#" class="slide-arrow next-arrow slick-arrow"><span class="iconify" data-icon="bi:arrow-right-circle"></span></a>',
+                infinite: false,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: false,
+                autoplaySpeed: 3000,
+                dots: true,
+            });
+        });
+    </script>
+
+
+
+</body>
+
+</html>
