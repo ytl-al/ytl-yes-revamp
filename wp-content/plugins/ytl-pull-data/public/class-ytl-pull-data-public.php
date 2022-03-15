@@ -854,10 +854,12 @@ class Ytl_Pull_Data_Public
 				$response 	= new WP_REST_Response($data);
 				$response->set_status(200);
 				return $response;
-			} else if ($data->displayErrorMessage) {
-				return new WP_Error('error_validating_customer_eligibilities', $data->displayErrorMessage, array('status' => 400));
 			} else if ($data->displayResponseMessage) {
 				return new WP_Error('error_validating_customer_eligibilities', $data->displayResponseMessage, array('status' => 400));
+			} else if ($data->responseMessage) {
+				return new WP_Error('error_validating_customer_eligibilities', $data->responseMessage, array('status' => 400));
+			} else if ($data->displayErrorMessage) {
+				return new WP_Error('error_validating_customer_eligibilities', $data->displayErrorMessage, array('status' => 400));
 			}
 		} else {
 			return new WP_Error('error_validating_customer_eligibilities', "Parameters not complete to validate customer eligibilities.", array('status' => 400));
@@ -885,7 +887,7 @@ class Ytl_Pull_Data_Public
 	{
 		$session_id = $this->ca_generate_auth_token(true);
 		if ($referral_code != null && $security_type != null && $security_id != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
-			$params		= ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'referralCode' => $referral_code, 'refereeSeucityType' => $security_type, 'refereeSecurityID' => $security_id, 'sessionId' => $session_id];
+			$params		= ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'referralCode' => $referral_code, 'refereeSecurityType' => $security_type, 'refereeSecurityID' => $security_id, 'sessionId' => $session_id];
 			$args 		= [
 				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
 				'body'          => json_encode($params),
@@ -903,6 +905,8 @@ class Ytl_Pull_Data_Public
 				$response 	= new WP_REST_Response($data);
 				$response->set_status(200);
 				return $response;
+			} else if ($data->displayResponseMessage) {
+				return new WP_Error('error_verify_referral_code', $data->displayResponseMessage, array('status' => 400));
 			} else if ($data->displayErrorMessage) {
 				return new WP_Error('error_verify_referral_code', $data->displayErrorMessage, array('status' => 400));
 			}
