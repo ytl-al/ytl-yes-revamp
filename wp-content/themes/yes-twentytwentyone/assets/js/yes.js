@@ -1,7 +1,7 @@
 /* 
     JavaScript Name : Yes TwentyTwentyOne 
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : March     10, 2022, 03:52:31 PM
+    Last edited on  : March     15, 2022, 03:52:31 PM
     Author          : [YTL Digital Design] - AL
 */
 const yesLocalStorageName = 'yesSession';
@@ -20,7 +20,7 @@ $(document).ready(function() {
 
     initBootstrapTooltip();
 
-    initBetterDocsSearch5G();
+    initBetterDocsCustomize();
 
     $('.link-jumpSection').on('click', function() {
         jumpSection(this);
@@ -180,6 +180,57 @@ function toggleOverlay(toggleShow = true) {
             $('body').removeClass('show-overlay');
             $('.layer-overlay').removeAttr('style');
         }, 500)
+    }
+}
+
+
+/**
+ * Function initBetterDocsCustomize()
+ * Function to init the BetterDocs customization functions
+ * 
+ * @since    1.0.2
+ */
+function initBetterDocsCustomize() {
+    initBetterDocsSearchForm();
+    initBetterDocsSearchPlaceholder();
+    initBetterDocsSearch5G();
+}
+
+
+/**
+ * Function initBetterDocsSearchForm()
+ * Function to check the page and show the default hidden BetterDocs Live Search form
+ * 
+ * @since    1.0.2
+ */
+function initBetterDocsSearchForm() {
+    if ($('.betterdocs-live-search')) {
+        var urlPath = window.location.pathname;
+        var regex = /docs\/$/;
+        var matches = regex.test(urlPath);
+        if (!matches) {
+            $('.betterdocs-live-search').show();
+        }
+    }
+}
+
+
+/**
+ * Function initBetterDocsSearchPlaceholder()
+ * Function to change the BetterDocs search field
+ * 
+ * @since    1.0.2
+ */
+function initBetterDocsSearchPlaceholder() {
+    if ($('.betterdocs-search-field')) {
+        var placeholderText = 'Please enter more than 2 characters';
+        var docLang = document.documentElement.lang;
+        if (docLang == 'ms-MY') {
+            placeholderText = 'Sila masukkan lebih daripada 2 aksara ';
+        } else if (docLang == 'zh-hans') {
+            placeholderText = '请输入超过 2 个字符';
+        }
+        $('.betterdocs-search-field').attr('placeholder', placeholderText);
     }
 }
 

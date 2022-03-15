@@ -1,7 +1,7 @@
 /* 
     Stylesheet Name : Yes.my BetterDocs Overwrite
     Created on      : March     08, 2022, 11:08:23 AM
-    Last edited on  : March     10, 2022, 08:25:09 PM
+    Last edited on  : March     15, 2022, 08:25:09 PM
     Author          : [YTL Digital Design] - AL
 */
 
@@ -20,3 +20,5 @@
 .betterdocs-single-wraper .doc-single-content-wrapper table th, .betterdocs-single-wraper .doc-single-content-wrapper table td { border-color: #333; border-style: solid; border-width: 0 1px 1px 0; padding: 5px; }
 .betterdocs-single-wraper .doc-single-content-wrapper table th { background-color: #0EADF1; color: #FFF; }
 .betterdocs-single-wraper .doc-single-content-wrapper table td {}
+
+.betterdocs-search-form-wrap .betterdocs-live-search { display: none; }
