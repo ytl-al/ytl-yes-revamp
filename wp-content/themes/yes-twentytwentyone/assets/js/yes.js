@@ -192,7 +192,7 @@ function toggleOverlay(toggleShow = true) {
  */
 function initBetterDocsCustomize() {
     initBetterDocsSearchForm();
-    initBetterDocsSearchPlaceholder();
+    // initBetterDocsSearchPlaceholder();
     initBetterDocsSearch5G();
 }
 
