@@ -1,0 +1,690 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>YES</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/aos.css" />
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" />
+
+    <style>
+        /* Learn Banner Start */
+        
+        #learn-banner {
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0px;
+            padding-bottom: 0px;
+            background-image: url('images/learn-banner-bg.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow: hidden;
+        }
+        
+        #learn-banner h1 {
+            font-size: 50px;
+            font-weight: 800;
+            line-height: 50px;
+            color: #F9F7F4;
+            margin-bottom: 10px;
+        }
+        
+        #learn-banner p {
+            font-size: 24px;
+            font-weight: 800;
+            color: #FFE0AF;
+            line-height: 28px;
+            margin-bottom: 20px;
+        }
+        
+        #learn-banner hr {
+            width: 100%;
+            border-top: solid 1.5px #FFF;
+        }
+        
+        #learn-banner p.small {
+            font-size: 13px;
+            font-weight: 400;
+            color: #FFF;
+            margin: 0;
+        }
+        /* Learn Banner End */
+        
+        #opportunities-section {
+            background-color: #E31C79;
+            padding: 60px 0px;
+        }
+        
+        #opportunities-section h1 {
+            color: #F9F7F4;
+            font-size: 50px;
+            line-height: normal;
+            font-weight: 800;
+            text-align: center;
+        }
+        
+        #opportunities-section h2 {
+            color: #F9F7F4;
+            font-size: 36px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        #opportunities-section h3 {
+            color: #F9F7F4;
+            font-weight: 800;
+            font-size: 29px;
+            line-height: normal;
+            text-align: left;
+        }
+        
+        #opportunities-section p {
+            color: #F9F7F4;
+            font-size: 24px;
+            font-weight: 600;
+            line-height: normal;
+            text-align: left;
+        }
+        
+        #opportunities-section .tab-link {
+            display: inline-block;
+        }
+        
+        #nomination-section {
+            background-image: url('images/learn-nomination-bg.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-color: #78BE20;
+            padding: 60px 0px;
+        }
+        
+        #nomination-section h1 {
+            text-align: center;
+            font-weight: 800;
+            color: #F9F7F4;
+            font-size: 50px;
+            line-height: normal;
+        }
+        
+        #nomination-section p {
+            text-align: center;
+            color: #F9F7F4;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        #nomination-section p span {
+            font-weight: 800;
+        }
+        
+        #nomination-section p a {
+            text-decoration: underline;
+            color: #F9F7F4;
+        }
+        
+        #nomination-section .nomination-box {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #nomination-section .nomination-box img {
+            margin: 0 auto;
+            margin-bottom: 25px;
+        }
+        
+        #nomination-section .nomination-box h2 {
+            font-size: 29px;
+            font-weight: 800;
+            color: #F9F7F4;
+            line-height: 29px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        #nomination-section .nomination-box p {
+            font-size: 24px;
+            color: #F9F7F4;
+            line-height: 28px;
+            text-align: left;
+        }
+        
+        #nomination-section .nomination-box p a {
+            text-decoration: underline;
+            color: #F9F7F4;
+        }
+        
+        #freesim-section {
+            background-image: url('images/freesim-bg.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 60px 0px;
+        }
+        
+        #freesim-section h1 {
+            text-align: center;
+            font-weight: 800;
+            color: #2B2B2B;
+            font-size: 50px;
+            line-height: normal;
+        }
+        
+        #freesim-section p {
+            text-align: center;
+            color: #2B2B2B;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        #freesim-section .freesim-box {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #freesim-section .freesim-box img {
+            margin: 0 auto;
+            margin-bottom: 25px;
+        }
+        
+        #freesim-section .freesim-box h2 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #525252;
+            line-height: 28px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        #freesim-section .freesim-box p {
+            font-size: 20px;
+            color: #7A7A7A;
+            line-height: 24px;
+            text-align: left;
+        }
+        /* IPAD Portrait */
+        
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {}
+        
+        @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+            #learn-banner h1,
+            #freesim-section h1 {
+                font-size: 30px;
+                line-height: normal;
+            }
+            #learn-banner .banner-visual {
+                margin-top: 30px;
+            }
+            #nomination-section h1 {
+                font-size: 34px
+            }
+            #nomination-section p {
+                font-size: 20px;
+            }
+            #nomination-section .nomination-box h2,
+            #nomination-section .nomination-box p {
+                text-align: center;
+            }
+            #nomination-section .nomination-box h2 {
+                font-size: 26px;
+            }
+            #nomination-section .nomination-box img {
+                margin-bottom: 0px;
+                width: 162px;
+            }
+            #nomination-section .nomination-box {
+                padding: 0px 24px;
+            }
+            #freesim-section {
+                background-image: none;
+            }
+            #freesim-section .freesim-box {
+                margin-bottom: 20px;
+            }
+            #freesim-section .freesim-box h2,
+            #freesim-section .freesim-box p {
+                text-align: center;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="layer-page">
+        <header class="page-header">
+            <div class="top-tabs-container">
+                <div class="container g-0">
+                    <div class="row g-0">
+                        <div class="col-10">
+                            <ul class="tabnav">
+                                <li><a href="#" class="active">Personal</a></li>
+                                <li><a href="#">Business</a></li>
+                                <li><a href="#">Education</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-2">
+                            <div class="dropdown language-drop float-end">
+                                <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="iconify" data-icon="bi:globe"></span> English
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">English</a></li>
+                                    <li><a class="dropdown-item" href="#">Bhasa Malay</a></li>
+                                    <li><a class="dropdown-item" href="#">中文</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-container">
+                <div class="container g-lg-0">
+                    <div class="row g-0">
+                        <nav class="navbar navbar-expand-lg">
+                            <div class="container">
+                                <a class="navbar-brand" href="#"><img src="images/logo.svg" class="logo-top" /></a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <li class="nav-item dropdown mega-dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                                            <ul class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Mobile Plans</li>
+                                                        <li><a href="#">Prepaid Plans</a></li>
+                                                        <li><a href="#">Postpaid Plans</a></li>
+                                                        <li><a href="#">YES Prihatin</a></li>
+                                                        <li><a href="#">Merdeka RM1 Package</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Broadband</li>
+                                                        <li><a href="#">Home broadband</a></li>
+                                                        <li><a href="#">On-the-go broadband</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Existing Customers</li>
+                                                        <li><a href="#">How-To: Refer & Earn</a></li>
+                                                        <li><a href="#">How-To: Get Databack</a></li>
+                                                        <li><a href="#">Data & Hotspot Add-Ons</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="#">Keep Number</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Partners</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Help</a>
+                                        </li>
+                                    </ul>
+                                    <div class="d-flex align-items-center">
+                                        <a href="#" class="pink-btn me-3">Get Started</a>
+                                        <a href="#" class="login-btn"><span class="iconify" data-icon="carbon:user-avatar-filled-alt"></span> Log In</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <!-- Breadcrumb Start -->
+            <section class="breadcrumb-section">
+                <div class="container">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active"><a href="#">Learn from Home Campaign</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </section>
+            <!-- Breadcrumb End -->
+
+            <!-- Learn Banner Start -->
+            <section id="learn-banner">
+                <div class="container">
+                    <div class="row justify-content-lg-center">
+                        <div class="col-12 col-md-6 col-lg-7 ps-lg-5 d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                            <div>
+                                <p>learn from home</p>
+                                <h1>Help us give our FREE phones with 120GB data to B40 students</h1>
+                                <a href="#" class="pink-btn mt-3 mb-3">Learn More</a>
+                                <hr class="mb-3 mt-3">
+                                <div class="row pb-0 pb-lg-5">
+                                    <div class="col-6 col-lg-4">
+                                        <p class="small">An education Initiative by</p>
+                                        <img src="images/learn-ytlfoundation-logo.png" alt="">
+                                    </div>
+                                    <div class="col-6 col-lg-4">
+                                        <p class="small">In collaboration with</p>
+                                        <img src="images/learn-frog-logo.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-5 banner-visual d-flex justify-content-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                            <img src="images/learn-banner-visual.png" class="d-block w-100 align-self-end" alt="">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Learn Banner End -->
+
+            <!--Opportunities Start-->
+            <section id="opportunities-section">
+                <div class="container">
+                    <div class="col-12 mb-5" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                        <h1>Give Opportunities of Growth</h1>
+                        <h2>Free resources up to 5 FREE SIMs per NRIC</h2>
+                    </div>
+                    <div class="col-12" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                        <div class="row gx-5 h-100">
+                            <div class="col-12 col-lg-4 d-flex align-items-center">
+                                <div>
+                                    <a href="#" class="tab-link mb-5">
+                                        <h3>Free Phones*</h3>
+                                        <p>Get 120GB data, 3600 minutes offnet Voice plus Unlimited onnet Voice & SMS for a year</p>
+                                    </a>
+                                    <a href="#" class="tab-link">
+                                        <h3>Free 40GB*</h3>
+                                        <p>for 2 months with up to 5 FREE SIMs per NRIC</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-4 d-flex align-items-center">
+                                <img src="images/freephones.png" class="img-fluid" alt="">
+                            </div>
+                            <div class="col-12 col-lg-4 d-flex align-items-center">
+                                <div>
+                                    <a href="#" class="tab-link mb-5">
+                                        <h3>Revision Quizzes</h3>
+                                        <p>Learn from home with revision quizzes from FrogPlay Mobile and learning material from FrogAsia</p>
+                                    </a>
+                                    <a href="#" class="tab-link">
+                                        <h3>High-speed Learning</h3>
+                                        <p>Uninterrupted learning experience with Malaysia’s only 100% ALL-IP network</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--Opportunities End-->
+
+            <!--Nomination Section Start-->
+            <section id="nomination-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                            <h1>Submit Your Nomination</h1>
+                            <p><span>Already applied?</span> Click <a href="#">here</a> to check your application status</p>
+                        </div>
+                        <div class="col-12 mt-0 mt-lg-5" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                            <div class="row gx-5">
+                                <div class="col-12 col-lg-4">
+                                    <div class="nomination-box">
+                                        <img src="images/nominate-icon.png" alt="">
+                                        <h2>Nominate A Student In Need</h2>
+                                        <p>Fill in the <a href="#">form</a> with your details and the details of the nominated child and parent.</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-4">
+                                    <div class="nomination-box">
+                                        <img src="images/form-icon.png" alt="">
+                                        <h2>Parent's Complete The Form</h2>
+                                        <p>If verified, parents will receive an email notification to complete their application and upload their B40 form.</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-4">
+                                    <div class="nomination-box">
+                                        <img src="images/freephone-icon.png" alt="">
+                                        <h2>Free phone delivered to nominated student</h2>
+                                        <p>If application is successful, both teachers and parents will receive an email about the delivery.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--Nomination Section End-->
+
+            <!--FreeSim Section Start-->
+            <section id="freesim-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                            <h1>Get Your FREE SIM today!</h1>
+                            <p class="mb-5">Parents, get your FREE SIM with these simple steps</p>
+                        </div>
+                        <div class="col-12 mt-5" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                            <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-5">
+                                <div class="col">
+                                    <div class="freesim-box">
+                                        <img src="images/reg-edu-icon.png" alt="">
+                                        <h2>Register for YES to Education here</h2>
+                                        <p>by filling in your details and prepare all documents, including MyKad (yours and each child's)</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="freesim-box">
+                                        <img src="images/complete-reg-icon.png" alt="">
+                                        <h2>Complete Registration</h2>
+                                        <p>by agreeing to terms & conditions</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="freesim-box">
+                                        <img src="images/confirmation-icon.png" alt="">
+                                        <h2>Wait for confirmation</h2>
+                                        <p>through SMS or Email notification</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="freesim-box">
+                                        <img src="images/sim-delivered-icon.png" alt="">
+                                        <h2>Your SIM will be delivered to you</h2>
+                                        <p>the next business day (up to 3 business days for those not in Klang Valley)</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="freesim-box">
+                                        <img src="images/sim-activate-icon.png" alt="">
+                                        <h2>Activate your SIM here</h2>
+                                        <p>Already applied? Click here to check your application status.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--FreeSim Section End-->
+
+            <!-- FAQs Start -->
+            <section id="faq-section" class="mt-5 mt-lg-0">
+                <div class="container">
+                    <div class="row">
+                        <h1 class="mb-5">Most Searched Topics</h1>
+                    </div>
+                    <div class="row">
+                        <div class="accordion accordion-flush mb-3" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">YES Mobile Number Portability</button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">YES ID, YES Number & Password</button>
+                                </h2>
+                                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">Billing & Payment</button>
+                                </h2>
+                                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but
+                                        just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="viewall-btn">View All FAQs <span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                    </div>
+                </div>
+            </section>
+            <!-- FAQs End -->
+        </main>
+        <footer class="page-footer footer">
+            <div class="container g-lg-0">
+                <div class="row position-relative">
+                    <div class="col-12 col-md-3">
+                        <img src="images/logo.svg" class="footer-logo mb-4" />
+                        <div class="row mb-2">
+                            <ul class="icon-list">
+                                <li>
+                                    <a href="#"><img src="images/facebook.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/instagram.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/youtube.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/twitter.svg" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <p class="mb-2">Get The MyYes App</p>
+                            <ul class="icon-list">
+                                <li>
+                                    <a href="#"><img src="images/logos_google-play-icon.svg" class="store-icon" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/logos_apple-app-store.svg" class="store-icon" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="row g-0 row-cols-2 row-cols-sm-1 row-cols-md-5">
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Plans & Pricing</li>
+                                    <li><a href="#">Prepaid plans</a></li>
+                                    <li><a href="#">Postpaid plans</a></li>
+                                    <li><a href="#">YES Prihatin plans</a></li>
+                                    <li><a href="#">Data Add-Ons</a></li>
+                                    <li><a href="#">Merdeka RM1 Package</a></li>
+                                    <li><a href="#">On-the-go broadband</a></li>
+                                    <li><a href="#">Home broadband</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Explore</li>
+                                    <li><a href="#">Keep number</a></li>
+                                    <li><a href="#">Refer & earn</a></li>
+                                    <li><a href="#">Databack</a></li>
+                                    <li><a href="#">Partnerships</a></li>
+                                    <li><a href="#">Roaming</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Tools</li>
+                                    <li><a href="#">Device manuals</a></li>
+                                    <li><a href="#">Coverage</a></li>
+                                    <li><a href="#">Speed test</a></li>
+                                    <li><a href="#">Kiosk locations</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Company</li>
+                                    <li><a href="#">About us</a></li>
+                                    <li><a href="#">Sustainability reports</a></li>
+                                    <li><a href="#">Newsroom</a></li>
+                                    <li><a href="#">Terms & conditions</a></li>
+                                    <li><a href="#">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Help</li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Chatbot</a></li>
+                                    <li><a href="#">Email us</a></li>
+                                    <li><a href="#">Facebook messenger</a></li>
+                                    <li><a href="#">Visit our store</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-1">
+                        <img src="images/ctm.png" class="img-fluid ctm-logo" />
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-md-start justify-content-sm-center">
+                            <p>POWERED BY YTL, YTL Communications Sdn. Bhd. (793634-V)</p>
+                        </div>
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-md-end justify-content-sm-center">
+                            <img src="images/footer-icons.png" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="js/iconify.min.js"></script>
+    <script type="text/javascript" src="js/aos.js"></script>
+
+    <script type="text/javascript">
+        AOS.init();
+    </script>
+
+
+
+</body>
+
+</html>
