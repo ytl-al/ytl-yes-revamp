@@ -847,7 +847,7 @@ class Ytl_Pull_Data_Public
 			$api_url 	= $this->api_domain . $this->path_validate_customer_eligibilities;
 			$request 	= wp_remote_post($api_url, $args);
 			$data 		= json_decode($request['body']);
-
+			
 			if ($data->responseCode > -1) {
 				$data->sessionId = $session_id;
 
@@ -856,6 +856,8 @@ class Ytl_Pull_Data_Public
 				return $response;
 			} else if ($data->displayErrorMessage) {
 				return new WP_Error('error_validating_customer_eligibilities', $data->displayErrorMessage, array('status' => 400));
+			} else if ($data->displayResponseMessage) {
+				return new WP_Error('error_validating_customer_eligibilities', $data->displayResponseMessage, array('status' => 400));
 			}
 		} else {
 			return new WP_Error('error_validating_customer_eligibilities', "Parameters not complete to validate customer eligibilities.", array('status' => 400));
