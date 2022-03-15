@@ -64,6 +64,8 @@
                                 <p>Ensure your face is within the frame for an accurate detection</p>
                             </div></li>
                         </ul>
+
+                        <a href="/elevate/eligibility-failure/" class="pink-btn">Eligibility Failure</a>
                     </div>
 
                 </div>
@@ -71,7 +73,7 @@
 
         </main>
         <?php require_once ('includes/footer.php');?>
-
+    <script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/qrcodejs/qrcode.min.js"></script>
 
     <script type="text/javascript">
         var tooltipTriggerList = [].slice.call(document.querySelectorAll("[data-bs-toggle=\"tooltip\"]"))
@@ -89,6 +91,7 @@
 
             qrcode.makeCode(url_verification);
         }
-
-        makeCode();
+        $(document).ready(function() {
+            makeCode();
+        });
     </script>

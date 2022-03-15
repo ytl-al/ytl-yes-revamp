@@ -187,7 +187,7 @@ const elevate = {
     }
 };
 
-function buyPlan(productId) {
+function buyElevatePlan(productId) {
     elevate.buyPlan(productId);
 }
 

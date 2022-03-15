@@ -35,10 +35,17 @@
         </div>
     </div>
 </header>
-<div id="main-vue">
-<main>
-    <div class="container" id="container-empty" v-if="isCartEmpty">
-        <div class="row mb-5 gx-5">
+<div id="main-vue" style="display: none">
+<main class="clearfix site-main" id="primary" >
+    <div id="container-empty" v-if="isCartEmpty">
+        <section id="grey-innerbanner">
+            <div class="container">
+                <h1 class="title">Elevate cart</h1>
+            </div>
+        </section>
+        <section id="cart-body">
+            <div class="container no-border">
+        <div class="row mb-5">
             <div class="col-lg-8 col-12">
                 <div class="accordion">
                     <div class="packagebox mb-3">
@@ -55,8 +62,10 @@
                 </div>
             </div>
         </div>
+            </div>
+        </section>
     </div>
-    <div id="container-hasItem">
+    <div id="container-hasItem" v-if="!isCartEmpty">
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
@@ -141,7 +150,7 @@
                                 <div class="text-bold mt-3">Select contract type</div>
                                 <div class="selectContractWrap mt-3">
                                     <ul>
-                                        <li v-for="(contract, index) in orderSummary.product.contract" @click="changeContract(contract.id)" :data-contract-id="contract.id" :class="'contract_' + contract.id" :class="parseFloat(orderSummary.orderDetail.contract_id) == parseFloat(contract.id)?'selected':''"><a>{{contract.name}}{{orderSummary.orderDetail.contract_id}}</a></li>
+                                        <li v-for="(contract, index) in orderSummary.product.contract" @click="changeContract(contract.id)" :data-contract-id="contract.id" :class="'contract_' + contract.id" :class="parseFloat(orderSummary.orderDetail.contract_id) == parseFloat(contract.id)?'selected':''"><a>{{contract.name}}</a></li>
                                     </ul>
                                 </div>
                                 <div class="hr_line"></div>
@@ -189,7 +198,7 @@
                             <div class="hr_line"></div>
                         </div>
 
-                        <a href="/elevate/personal/" class="d-block" :class="isValidCart?'pink-btn':'btn-round-dark'">Order Now</a>
+                        <a href="javascript:void(0)" @click="goNext" class="d-block" :class="isValidCart()?'pink-btn':'pink-btn-disable'">Continue</a>
                     </div>
                 </div>
             </div>
@@ -202,8 +211,12 @@
 </div>
 <script type="text/javascript">
 
-    $(document).ready(function () {
+    import {setTimeout} from "../../../../../wp-includes/js/tinymce/plugins/paste/plugin";
 
+    $(document).ready(function () {
+        setTimeout(function (){
+            $('#primary').show();
+        },500);
         $(document).on('click','.accordion-header',function () {
             $(this).parent().toggleClass("active");
             $(this).parent().children(".accordion-body").slideToggle();
@@ -223,6 +236,7 @@
                 productId: null,
                 isCartEmpty: false,
                 hasFetchPlan: false,
+                ywos_contract:695,
                 taxRate: {
                     sst: 0.06
                 },
@@ -335,14 +349,34 @@
                 },
 
                 isValidCart: function (){
+
                     var self = this;
                     var valid = true;
+
 
                     if(!self.orderSummary.orderDetail.contract_id || !self.orderSummary.orderDetail.color){
                         valid = false;
                     }
-                    alert(valid);
+
+                    if(self.orderSummary.orderDetail.contract_id == self.ywos_contract){
+                        valid = true;
+                    }
+
                     return valid;
+
+                },
+
+                goNext: function(){
+                    var self = this;
+                    //check normal contract
+                    if(self.orderSummary.orderDetail.contract_id == self.ywos_contract){
+                        ywos.buyPlan(self.orderSummary.orderDetail.contract_id);
+                    }else{
+                        if(!self.orderSummary.orderDetail.contract_id || !self.orderSummary.orderDetail.color){
+                            return false;
+                        }
+                        elevate.redirectToPage('eligibilitycheck');
+                    }
                 }
 
             }

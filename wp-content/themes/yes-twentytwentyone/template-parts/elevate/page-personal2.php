@@ -18,7 +18,7 @@
         </div>
     </header>
 <div>
-    <main >
+    <main class="clearfix site-main">
 
         <!-- Banner Start -->
         <section id="grey-innerbanner">

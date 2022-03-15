@@ -17,7 +17,7 @@
         </div>
     </div>
 </header>
-    <main>
+    <main class="clearfix site-main">
         <section id="cart-body">
             <div class="container" style="border: 0">
 
@@ -45,7 +45,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div>Date & Tiem</div>
+                                    <div>Date & Time</div>
                                     <div>02/03/2022</div>
                                 </div>
                             </div>

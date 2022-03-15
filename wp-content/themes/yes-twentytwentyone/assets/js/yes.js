@@ -1,5 +1,5 @@
-/* 
-    JavaScript Name : Yes TwentyTwentyOne 
+/*
+    JavaScript Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
     Last edited on  : December  05, 2021, 03:52:31 PM
     Author          : [YTL Digital Design] - AL
@@ -20,20 +20,20 @@ $(document).ready(function() {
 
     initBootstrapTooltip();
 
+//    initBetterDocsSearch5G();
+
     $('.link-jumpSection').on('click', function() {
         jumpSection(this);
     });
 
-    AOS.init({
-        once: true
-    });
+    AOS.init();
 });
 
 
 /**
  * Function closeTopPageBanner()
  * Function to close the top page banner
- * 
+ *
  * @since    1.0.0
  */
 function closeTopPageBanner() {
@@ -55,7 +55,7 @@ function closeTopPageBanner() {
 /**
  * Function checkTopPageBannerExpiry()
  * Function to check the expiry of closed top page banner and show if expired
- * 
+ *
  * @since    1.0.0
  */
 function checkTopPageBannerExpiry() {
@@ -75,7 +75,7 @@ function checkTopPageBannerExpiry() {
 /**
  * Function eventListenPageModalClose()
  * Function add event listener to page modal on close
- * 
+ *
  * @since    1.0.0
  */
 function eventListenPageModalClose() {
@@ -100,7 +100,7 @@ function eventListenPageModalClose() {
 /**
  * Function checkPageModalExpiry()
  * Function to check the expiry of closed page modal and show if expired
- * 
+ *
  * @since    1.0.0
  */
 function checkPageModalExpiry() {
@@ -121,7 +121,7 @@ function checkPageModalExpiry() {
 /**
  * Function initBootstrapTooltip()
  * Function to initialize Bootstrap tooltip everywhere
- * 
+ *
  * @since    1.0.0
  */
 function initBootstrapTooltip() {
@@ -134,8 +134,8 @@ function initBootstrapTooltip() {
 
 /**
  * Function jumpSection()
- * Function to trigger the jumpToSection by passing sectionID
- * 
+ * Function to scroll page to section
+ *
  * @since    1.0.1
  */
 function jumpSection(el) {
@@ -147,7 +147,7 @@ function jumpSection(el) {
 /**
  * Function jumpToSection()
  * Function to scroll page to section
- * 
+ *
  * @since    1.0.2
  */
 function jumpToSection(sectionID) {
@@ -163,9 +163,28 @@ function jumpToSection(sectionID) {
 
 
 /**
+ * Function initBetterDocsSearch5G()
+ * Function to init the 5g string search in BetterDocs Advanced Search
+ *
+ * @since    1.0.2
+ */
+function initBetterDocsSearch5G() {
+    var bdSearchField = $('.betterdocs-search-field');
+    if ($(bdSearchField).length) {
+        $(bdSearchField).on('input propertychange paste', function() {
+            var bdSearchFieldVal = $(bdSearchField).val();
+            if (bdSearchFieldVal == '5g') {
+                $(bdSearchField).val('5g ');
+                $(bdSearchField).trigger('input').trigger('propertychange').trigger('paste').trigger('keyup').trigger('keypress');
+            }
+        });
+    }
+}
+
+/**
  * Function toggleOverlay()
  * Function to toggle the overlay
- * 
+ *
  * @since    1.0.2
  */
 function toggleOverlay(toggleShow = true) {

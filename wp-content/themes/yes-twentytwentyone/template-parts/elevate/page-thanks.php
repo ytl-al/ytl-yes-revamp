@@ -17,7 +17,7 @@
             </div>
         </div>
     </header>
-    <main>
+    <main class="clearfix site-main">
 
         <section id="cart-body">
             <div class="container" style="border: 0">

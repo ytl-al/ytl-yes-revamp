@@ -2,6 +2,27 @@ body {
     background-color: #FFF;
 }
 
+html,body{
+    width: 100%;
+    height: 100%;
+}
+
+.layer-page {
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    width: 100%;
+    height: 100%;
+}
+
+main.site-main {
+    flex: auto;
+}
+
+#main-vue{
+    height: 100%;
+}
+
 .nav-container .language-drop .dropdown-toggle {
     background-color: #00B4F0;
     border: none;
@@ -64,15 +85,33 @@ body {
 .pink-btn {
     background-color: #FF0084;
     border-radius: 20px;
-    padding: 12px 20px;
+    padding: 9px 30px;
     display: inline-block;
     font-weight: 800;
     font-size: 16px;
     text-transform: inherit;
-    color: #FFF;
+    color: #FFF!important;
     border: none;
     text-align: center;
     margin: 12px 0px;
+}
+
+.pink-btn-disable {
+    background-color: #D0D5DD;
+    border-radius: 20px;
+    padding: 9px 30px;
+    display: inline-block;
+    font-weight: 800;
+    font-size: 16px;
+    text-transform: inherit;
+    color: #64748B!important;
+    border: none;
+    text-align: center;
+    margin: 12px 0px;
+}
+
+.input_error{
+    border: 1px solid #ff0000!important;
 }
 
 .bg-checkout1{
@@ -288,6 +327,21 @@ body {
     border: 0!important;
 }
 
+#cart-body .packagebox {
+    background: #FFFFFF;
+    box-sizing: border-box;
+    border: 2px solid #00B4F0;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+#cart-body .form-select{
+    padding:0!important;
+}
 .btn-signup{
     background: #FFFFFF;
     border: 1px solid #E7EAEE;
@@ -624,6 +678,7 @@ ul.wizard {
     font-style: normal;
     font-weight: 800;
     font-size: 19px;
+    text-align: center;
 }
 
 .btn-pink-border{

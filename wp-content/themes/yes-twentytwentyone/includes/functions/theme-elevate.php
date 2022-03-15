@@ -31,6 +31,7 @@ function elevate_enqueue_scripts()
 
     wp_enqueue_script('vuejs', 'https://cdn.jsdelivr.net/npm/vue@2', array(), '2.6.14', true);
     wp_enqueue_script('axios', 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js', array(), '0.24.0', true);
+    wp_enqueue_script('ywos-js', get_template_directory_uri() . '/template-parts/ywos/assets/js/ywos.js', array(), '1.0.0', true);
     wp_enqueue_script('elevatelib-js', get_template_directory_uri() . '/template-parts/elevate/assets/js/elevate.js', array(), '1.0.0', true);
 //wp_enqueue_script('elevatelib-js', 'http://localhost/elevate.js', array(), '1.0.0', true);
     wp_enqueue_script('xpaylib', XPAY_LIB_PATH, array(), '1.0.0', true);
