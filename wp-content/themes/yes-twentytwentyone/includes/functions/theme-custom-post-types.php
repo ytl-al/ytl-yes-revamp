@@ -26,10 +26,10 @@ if (!function_exists('register_custom_post_types')) {
                 'menu_icon'     => 'dashicons-media-document',
                 'supports'      => ['title', 'excerpt', 'thumbnail', 'editor'],
                 'reg_taxonomy'  => ['Events', 'Announcement'],
-                'reg_tags'      => null,
+                'reg_tags'      => ['US', 'Malaysia'],
                 'rewrite'       => 'news-room-category',
-                'category_names' => ['plural' => 'Locations', 'singular' => 'Location'],
-                'tag_names'     => null
+                'category_names' => ['plural' => 'Categories', 'singular' => 'Category'],
+                'tag_names'     => ['plural' => 'Locations', 'singular' => 'Location']
             ]
         ];
 

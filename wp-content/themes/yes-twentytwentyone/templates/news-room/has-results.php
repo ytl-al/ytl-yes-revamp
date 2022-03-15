@@ -38,7 +38,7 @@
             $col_class = 'col-12 col-lg-6';
         }
     ?>
-        <div class="<?php echo $col_class ?> mt-3 aos-init aos-animate <?= $theme_class ?>" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100" category="<?= $post_category ?>" year="<?= $post_year ?>">
+        <div class="<?php echo $col_class ?> mt-3 <?= $theme_class ?>" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100" category="<?= $post_category ?>" year="<?= $post_year ?>">
             <div class="news-box">
                 <img src="<?php echo $thumb_url ?>" class="img-fluid" alt="<?php the_title(); ?>">
                 <div class="news-content">

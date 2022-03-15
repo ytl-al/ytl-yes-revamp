@@ -1,7 +1,7 @@
 <style>
     #newsroom-top-banner {
         overflow: hidden;
-        background-image: url('images/newsroom-header-bg.jpg');
+        background-image: url('/wp-content/uploads/2022/03/newsroom-header-bg.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         padding: 50px 0px;
