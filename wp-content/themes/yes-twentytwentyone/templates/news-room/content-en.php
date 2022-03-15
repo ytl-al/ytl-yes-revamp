@@ -108,9 +108,9 @@ $query_args = [
     'post_status' => 'publish',
     'posts_per_page' => -1
 ];
-$query = new WP_Query($query_args);
-while ($query->have_posts()) :
-    $query->the_post();
+$year_query = new WP_Query($query_args);
+while ($year_query->have_posts()) :
+    $year_query->the_post();
     $post_year_meta = get_post_meta($post->ID, 'yes_release_date', true);
     if (!empty($post_year_meta)) {
         $post_year = intval(date("Y", strtotime($post_year_meta)));
