@@ -30,7 +30,31 @@ if (!function_exists('register_custom_post_types')) {
                 'rewrite'       => 'news-room-category',
                 'category_names' => ['plural' => 'Categories', 'singular' => 'Category'],
                 'tag_names'     => ['plural' => 'Locations', 'singular' => 'Location']
-            ]
+            ],
+            [
+                'name'          => 'Roaming Rates',
+                'singular_name' => 'Roaming Rate',
+                'slug'          => 'roaming-rates',
+                'menu_icon'     => 'dashicons-airplane',
+                'supports'      => ['title'],
+                'reg_taxonomy'  => null,
+                'reg_tags'      => null,
+                'rewrite'       => null,
+                'category_names' => null,
+                'tag_names'     => null
+            ],
+            [
+                'name'          => 'IDD Rates',
+                'singular_name' => 'IDD Rate',
+                'slug'          => 'idd-rates',
+                'menu_icon'     => 'dashicons-phone',
+                'supports'      => ['title'],
+                'reg_taxonomy'  => null,
+                'reg_tags'      => null,
+                'rewrite'       => null,
+                'category_names' => null,
+                'tag_names'     => null
+            ],
         ];
 
         $custom_post_types->register_post_types($custom_posts_args);
