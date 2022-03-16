@@ -1,7 +1,7 @@
 /* 
     Stylesheet Name : Yes.my BetterDocs Overwrite
     Created on      : March     08, 2022, 11:08:23 AM
-    Last edited on  : March     15, 2022, 08:25:09 PM
+    Last edited on  : March     16, 2022, 08:25:09 PM
     Author          : [YTL Digital Design] - AL
 */
 
@@ -23,3 +23,5 @@
 
 .betterdocs-search-form-wrap .betterdocs-live-search { display: none; }
 .betterdocs-searchform .search-submit { border: 0; transition: all 0.3s ease-in-out; }
+
+.betterdocs-category-wraper .betterdocs-content-area #betterdocs-sidebar { display: none; }
