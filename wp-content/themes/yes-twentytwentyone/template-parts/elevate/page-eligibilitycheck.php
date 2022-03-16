@@ -172,7 +172,70 @@
                 updateFields: function () {
                     var self = this;
 
+                    self.watchAllowNext();
+                },
 
+                eligibilityCheck: function (){
+                    var self = this;
+                    var params = {
+                        "mykad": self.eligibility.mykad.trim(),
+                        "plan_type": "PREPAID"
+                    };
+                    toggleOverlay();
+                    axios.post(apiEndpointURL_elevate + '/verify-eligibility', params)
+                        .then((response) => {
+
+                            var data = response.data;
+
+                           console.log(data);
+                           if(data.data && data.data.eligibilityStatus == 'ALLOWED'){
+                               self.CAEligibility();
+                           }else{
+
+                           }
+                        })
+                        .catch((error) => {
+                            toggleOverlay(false);
+                            console.log(error, response);
+                        });
+
+                },
+
+                CAEligibility: function (){
+                    var self = this;
+                    var params = {
+                    };
+                    toggleOverlay();
+                    axios.post(apiEndpointURL_elevate + '/verify-caeligibility', params)
+                        .then((response) => {
+
+                            var data = response.data;
+                            if(data.status == 1){
+                                self.elevateCustomer();
+                            }
+                        })
+                        .catch((error) => {
+                            toggleOverlay(false);
+                            console.log(error, response);
+                        });
+                },
+
+                elevateCustomer: function (){
+                    var self = this;
+                    var params = self.eligibility;
+                    toggleOverlay();
+                    axios.post(apiEndpointURL_elevate + '/customer', params)
+                        .then((response) => {
+
+                            var data = response.data;
+                            if(data.status == 1){
+                                elevate.redirectToPage('verification');
+                            }
+                        })
+                        .catch((error) => {
+                            toggleOverlay(false);
+                            console.log(error, response);
+                        });
                 },
 
                 watchAllowNext: function () {
@@ -189,7 +252,13 @@
                         isFilled = false;
                     }
 
-                    var phone = /^[0-46-9]*[0-9]{7,8}$/g;
+                    var mykad = /[0-9]{11}$/g;
+                    if (self.eligibility.mykad.trim() && !mykad.test(self.eligibility.mykad.trim())) {
+                        isFilled = false;
+                        $('#mykad_number').addClass('input_error');
+                    }
+
+                    var phone = /^[0-46-9]*[0-9]{9,10}$/g;
                     if (self.eligibility.phone.trim() && !phone.test(self.eligibility.phone.trim())) {
                         isFilled = false;
                         $('#ic_phone_number').addClass('input_error');
@@ -214,8 +283,7 @@
                         //update store
                         elevate.lsData.eligibility = self.eligibility;
                         elevate.updateElevateLSData();
-
-                        elevate.redirectToPage('verification');
+                        self.eligibilityCheck();
                     }
                 }
 

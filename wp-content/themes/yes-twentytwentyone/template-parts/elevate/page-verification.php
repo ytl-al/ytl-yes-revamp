@@ -76,21 +76,33 @@
     <script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/qrcodejs/qrcode.min.js"></script>
 
     <script type="text/javascript">
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll("[data-bs-toggle=\"tooltip\"]"))
-        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        })
-
         var qrcode = new QRCode(document.getElementById("qrcode"), {
             width : 100,
             height : 100
         });
 
         function makeCode () {
-            var url_verification = 'yes.my/qrcode-verify?addess=123&name=Luca';
-
-            qrcode.makeCode(url_verification);
+            var eligibility = elevate.lsData.eligibility;
+            if(eligibility && eligibility.eligibility){
+                var url_verification = 'https://ekyc-dev-ui.azurewebsites.net/?mykad='+eligibility.mykad+'&fname='+eligibility.name;
+                qrcode.makeCode(url_verification);
+            }else{
+                elevate.redirectToPage('eligibilitycheck');
+            }
         }
+
+        function checkVerifyStatus(){
+            axios.post(apiEndpointURL_elevate + '/', params)
+                .then((response) => {
+
+                })
+                .catch((error) => {
+                    var response = error.response;
+
+                    console.log(error, response);
+                });
+        }
+
         $(document).ready(function() {
             makeCode();
         });

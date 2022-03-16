@@ -5,11 +5,11 @@
         <div class="row">
             <div class="col-lg-4 col-6">
                 <div class="mt-4">
-                    <a href="/elevate/cart/" class="back-btn "><img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png" alt=""> Back</a>
+                    <a href="/elevate/cart/" class="back-btn "><img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png" alt=""> Back to Cart</a>
                 </div>
             </div>
             <div class="col-lg-4 col-6 text-lg-center text-end">
-                <h1 class="title_checkout p-3">Check Out</h1>
+                <h1 class="title_checkout p-3"></h1>
             </div>
             <div class="col-lg-4">
 
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <div class="p-3 text-end">
-                        <a class="btn-cancel text-uppercase mr-2">Cancel</a> <a class="pink-btn text-uppercase">choose plan</a>
+                        <a href="/5gplans/"  class="btn-cancel text-uppercase mr-2">Cancel</a> <a class="pink-btn text-uppercase">choose plan</a>
                     </div>
                 </div>
             </div>

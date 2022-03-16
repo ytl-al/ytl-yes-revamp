@@ -23,7 +23,22 @@ class Model extends BaseController
      */
     public static function plugin_install()
     {
-
+        $table = self::$wpdb->prefix . "elevate_eligibility";
+        $sql_create = "
+		CREATE TABLE `$table` (
+          `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+          `mykad` varchar(150) NOT NULL,
+          `name` varchar(150) NOT NULL,
+          `email` varchar(150) NOT NULL,
+          `phone` varchar(150) NOT NULL, 
+          `hash` varchar(200) NOT NULL,   
+          `status` int(1) DEFAULT 0,   
+          `created_at` timestamp NOT NULL,
+          `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+          PRIMARY KEY (`id`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;		 
+		";
+        self::$wpdb->query($sql_create);
 
     }
 
@@ -125,5 +140,36 @@ class Model extends BaseController
     public static function refinde($product){
         return $product;
     }
+
+    public static function getEligibility($hash){
+        $table = self::$wpdb->prefix . "elevate_eligibility";
+        $sql = "SELECT * FROM `$table` WHERE hash='$hash'";
+
+        $rows = self::$wpdb->get_results($sql);
+        $item = $rows[0];
+        return $item;
+    }
+    public static function addEligibility($data){
+        $table = self::$wpdb->prefix . "elevate_eligibility";
+
+        $sql = "INSERT INTO `".$table."` 
+		(`mykad`,`name`,`email`,`phone`,`hash`,`status`,`created_at`)
+		VALUES 
+		('".$data['mykad']."','".$data['name']."','".$data['email']."','".$data['phone']."','".$data['hash']."',0,'".date("Y-m-d H:i:s")."')";
+
+        self::$wpdb->query($sql);
+        $lastid =  self::$wpdb->insert_id;
+        return $lastid;
+    }
+
+    public static function updateEligibility($hash,$status) {
+        $table = self::$wpdb->prefix . "elevate_eligibility";
+
+        $sql = "UPDATE ".$table." 
+		SET status='".intval($status)."' WHERE hash='".$hash."'";
+
+        self::$wpdb->query($sql);
+    }
+
 
 }

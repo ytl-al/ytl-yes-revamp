@@ -462,6 +462,11 @@
                     ) {
                         isFilled = false;
                     }
+                    var mykad = /[0-9]{11}$/g;
+                    if (self.eligibility.mykad.trim() && !mykad.test(self.eligibility.mykad.trim())) {
+                        isFilled = false;
+                        $('#mykad_number').addClass('input_error');
+                    }
 
                     var phone = /^[0-46-9]*[0-9]{7,11}$/g;
                     if(self.deliveryInfo.phone.trim() && !phone.test(self.deliveryInfo.phone.trim())){
