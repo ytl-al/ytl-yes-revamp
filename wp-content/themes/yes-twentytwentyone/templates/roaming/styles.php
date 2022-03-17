@@ -332,6 +332,10 @@
         #roaming-banner .search-box .btn {
             font-size: 11px;
         }
+
+        #roaming-banner .search-box {
+            padding: 0.6rem
+        }
     }
 
     @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
