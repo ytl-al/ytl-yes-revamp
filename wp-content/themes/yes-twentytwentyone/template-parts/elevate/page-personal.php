@@ -1,22 +1,24 @@
-<?php require_once ('includes/header.php')?>
+<?php require_once('includes/header.php') ?>
 
-    <header class="white-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-6">
-                    <div class="mt-4">
-                        <a href="/elevate/cart/" class="back-btn "><img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png" alt=""> Back</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-6 text-lg-center text-end">
-                    <h1 class="title_checkout p-3">Check Out</h1>
-                </div>
-                <div class="col-lg-4">
-
+<header class="white-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-6">
+                <div class="mt-4">
+                    <a href="/elevate/cart/" class="back-btn "><img
+                                src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
+                                alt=""> Back</a>
                 </div>
             </div>
+            <div class="col-lg-4 col-6 text-lg-center text-end">
+                <h1 class="title_checkout p-3">Check Out</h1>
+            </div>
+            <div class="col-lg-4">
+
+            </div>
         </div>
-    </header>
+    </div>
+</header>
 <div>
     <main class="clearfix site-main">
 
@@ -55,7 +57,9 @@
                                 <div class="col-lg-12 col-12">
                                     <label class="form-label">* MyKad number</label>
                                     <div class="input-group align-items-center">
-                                        <input type="text" maxlength="11" class="form-control" id="mykad_number" name="mykad" v-model="deliveryInfo.mykad" @input="watchAllowNext" @keypress="checkInputCharacters(event, 'numeric', false)" placeholder=""
+                                        <input type="text" maxlength="11" class="form-control" id="mykad_number"
+                                               name="mykad" v-model="deliveryInfo.mykad" @input="watchAllowNext"
+                                               @keypress="checkInputCharacters(event, 'numeric', false)" placeholder=""
                                                required>
 
                                     </div>
@@ -66,7 +70,9 @@
                                 <div class="col-lg-12 col-12">
                                     <label class="form-label">* Full Name (as per MyKad)</label>
                                     <div class="input-group align-items-center">
-                                        <input type="text" class="form-control" id="full_name" name="name" v-model="deliveryInfo.name" @input="watchAllowNext" placeholder="" required>
+                                        <input type="text" class="form-control" id="full_name" name="name"
+                                               v-model="deliveryInfo.name" @input="watchAllowNext" placeholder=""
+                                               required>
 
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-name"></div>
@@ -81,7 +87,9 @@
                                            placeholder="MY +60" readonly>
                                 </div>
                                 <div class="col-lg-8 col-7">
-                                    <input type="text" class="form-control" maxlength="11" id="ic_phone_number" name="phone" v-model="deliveryInfo.phone" @input="watchAllowNext" @keypress="checkInputCharacters(event, 'numeric', false)"
+                                    <input type="text" class="form-control" maxlength="11" id="ic_phone_number"
+                                           name="phone" v-model="deliveryInfo.phone" @input="watchAllowNext"
+                                           @keypress="checkInputCharacters(event, 'numeric', false)"
                                            placeholder="Phone number">
                                 </div>
                                 <div class="invalid-feedback mt-1" id="em-phone"></div>
@@ -90,15 +98,19 @@
                                 <div class="col-md-12">
                                     <label class="form-label">* Email address</label>
                                     <div class="align-items-center">
-                                        <input type="text" class="form-control" id="email" name="email" v-model="deliveryInfo.email" @input="watchAllowNext"
-                                               placeholder="jane.doe@gmail.com"  required>
+                                        <input type="text" class="form-control" id="email" name="email"
+                                               v-model="deliveryInfo.email" @input="watchAllowNext"
+                                               placeholder="jane.doe@gmail.com" required>
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-email"></div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-6">
-                                    <button class="text-uppercase"  @click="goNext" :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">check eligibility</button>
+                                    <button class="text-uppercase" @click="goNext"
+                                            :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">check
+                                        eligibility
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +120,9 @@
                                 <div class="col-lg-12">
                                     <label class="form-label">* Address</label>
                                     <div class="input-group align-items-center">
-                                        <input type="text" class="form-control" id="address" name="address" v-model="deliveryInfo.address" @input="watchAllowNext" placeholder="" required>
+                                        <input type="text" class="form-control" id="address" name="address"
+                                               v-model="deliveryInfo.address" @input="watchAllowNext" placeholder=""
+                                               required>
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-address"></div>
                                 </div>
@@ -117,7 +131,9 @@
                                 <div class="col-md-12 col-12">
                                     <label class="form-label">Apartment, Office, House, Floor number (optional)</label>
                                     <div class="input-group align-items-center">
-                                        <input type="text" class="form-control" id="address-more" name="addressMore" v-model="deliveryInfo.addressMore" @input="watchAllowNext" placeholder="">
+                                        <input type="text" class="form-control" id="address-more" name="addressMore"
+                                               v-model="deliveryInfo.addressMore" @input="watchAllowNext"
+                                               placeholder="">
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +141,10 @@
                                 <div class="col-md-4 col-12">
                                     <label class="form-label">* Postcode</label>
                                     <div class="input-group align-items-center">
-                                        <input type="text" maxlength="5" class="form-control" id="postcode" name="postcode" v-model="deliveryInfo.postcode"  @input="watchAllowNext" @keypress="checkInputCharacters(event, 'numeric', false)" placeholder="" required />
+                                        <input type="text" maxlength="5" class="form-control" id="postcode"
+                                               name="postcode" v-model="deliveryInfo.postcode" @input="watchAllowNext"
+                                               @keypress="checkInputCharacters(event, 'numeric', false)" placeholder=""
+                                               required/>
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-postcode"></div>
                                 </div>
@@ -133,9 +152,13 @@
                                     <label class="form-label">* State</label>
                                     <label class="form-label" for="select-state">* State</label>
                                     <div class="input-group align-items-center">
-                                        <select class="form-select" id="state" name="state" data-live-search="true" v-model="deliveryInfo.state" @change="watchChangeState" required>
-                                            <option value="" selected="selected" disabled="disabled">Select State</option>
-                                            <option v-for="state in selectOptions.states" :value="state.value">{{ state.name }}</option>
+                                        <select class="form-select" id="state" name="state" data-live-search="true"
+                                                v-model="deliveryInfo.state" @change="watchChangeState" required>
+                                            <option value="" selected="selected" disabled="disabled">Select State
+                                            </option>
+                                            <option v-for="state in selectOptions.states" :value="state.value">{{
+                                                state.name }}
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-state"></div>
@@ -143,8 +166,11 @@
                                 <div class="col-md-4 col-12">
                                     <label class="form-label">* City</label>
                                     <div class="input-group align-items-center">
-                                        <select class="form-select" id="city" name="city" data-live-search="true" v-model="deliveryInfo.city"  @change="watchChangeCity" required>
-                                            <option v-for="city in selectOptions.cities" :value="city.value">{{ city.name }}</option>
+                                        <select class="form-select" id="city" name="city" data-live-search="true"
+                                                v-model="deliveryInfo.city" @change="watchChangeCity" required>
+                                            <option v-for="city in selectOptions.cities" :value="city.value">{{
+                                                city.name }}
+                                            </option>
                                         </select>
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-city"></div>
@@ -155,12 +181,17 @@
                                 <div class="col-md-12 col-12">
                                     <label class="form-label">Delivery Notes (optional)</label>
                                     <div class="align-items-center">
-                                        <input type="text" class="form-control" id="delivery-notes" name="deliveryNotes" v-model="deliveryInfo.deliveryNotes" @input="watchAllowNext" placeholder="">
+                                        <input type="text" class="form-control" id="delivery-notes" name="deliveryNotes"
+                                               v-model="deliveryInfo.deliveryNotes" @input="watchAllowNext"
+                                               placeholder="">
                                         <p class="note mt-2">Nearby landmarks or more detailed directions</p>
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-note"></div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div id="error"></div>
                         </div>
                     </form>
                 </div>
@@ -169,10 +200,10 @@
 
     </main>
 </div>
-    <?php require_once ('includes/footer.php');?>
+<?php require_once('includes/footer.php'); ?>
 
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         var pageCart = new Vue({
             el: '#main-vue',
             data: {
@@ -187,10 +218,9 @@
                         total: 0.00,
                         color: null,
                         contract_id: null,
-                        orderItems:[]
+                        orderItems: []
                     },
                 },
-                packageInfos: [],
                 currentStep: 0,
                 elevate: null,
                 selectOptions: {
@@ -278,7 +308,14 @@
                     cities: []
                 },
                 customerDetails: {},
+                eligibility: {
+                    mykad: '',
+                    name: '',
+                    phone: '',
+                    email: ''
+                },
                 deliveryInfo: {
+                    uid: '',
                     mykad: '',
                     name: '',
                     phone: '',
@@ -302,27 +339,21 @@
                         state: ''
                     }
                 },
-                referralCode: {
-                    applicable: false,
-                    code: '',
-                    alert: false,
-                    toUse: false,
-                    verified: false
-                },
                 input: {
-                    mykad: { field: '#mykad_number', errorMessage: '#em-mykad' },
-                    name: { field: '#full_name', errorMessage: '#em-name' },
-                    phone: { field: '#ic_phone_number', errorMessage: '#em-phone' },
-                    email: { field: '#email', errorMessage: '#em-email' },
-                    address: { field: '#address', errorMessage: '#em-address' },
-                    addressMore: { field: '#input-addressMore', errorMessage: '#em-addressMore' },
-                    postcode: { field: '#postcode', errorMessage: '#em-postcode' },
-                    state: { field: '#select-state', errorMessage: '#em-state' },
-                    city: { field: '#select-city', errorMessage: '#em-city' },
-                    note: { field: '#delivery-notes', errorMessage: '#em-note' }
+                    mykad: {field: '#mykad_number', errorMessage: '#em-mykad'},
+                    name: {field: '#full_name', errorMessage: '#em-name'},
+                    phone: {field: '#ic_phone_number', errorMessage: '#em-phone'},
+                    email: {field: '#email', errorMessage: '#em-email'},
+                    address: {field: '#address', errorMessage: '#em-address'},
+                    addressMore: {field: '#input-addressMore', errorMessage: '#em-addressMore'},
+                    postcode: {field: '#postcode', errorMessage: '#em-postcode'},
+                    state: {field: '#select-state', errorMessage: '#em-state'},
+                    city: {field: '#select-city', errorMessage: '#em-city'},
+                    note: {field: '#delivery-notes', errorMessage: '#em-note'}
                 },
                 billingInfo: {
-                    mykad : '',
+                    uid: '',
+                    mykad: '',
                     name: '',
                     phone: '',
                     email: '',
@@ -337,65 +368,79 @@
                 allowSubmit: false
             },
 
-            created: function() {
+            created: function () {
                 var self = this;
-                setTimeout(function() {
+                setTimeout(function () {
                     self.pageInit();
                 }, 500);
             },
             methods: {
-                pageInit: function() {
+                pageInit: function () {
                     var self = this;
+
+                    console.log("self.eligibility", self.eligibility);
                     if (elevate.validateSession(self.currentStep)) {
                         self.pageValid = true;
-                        if(elevate.lsData.deliveryInfo) {
+                        if (elevate.lsData.eligibility) {
+                            self.eligibility = elevate.lsData.eligibility;
+                        }
+                        if (elevate.lsData.deliveryInfo) {
                             self.deliveryInfo = elevate.lsData.deliveryInfo;
                         }
                         self.updateFields();
                         toggleOverlay(false);
 
-                        setTimeout(function() {
+                        setTimeout(function () {
                             $('.form-select').selectpicker('refresh');
                         }, 100);
                     } else {
                         elevate.redirectToPage('cart');
                     }
                 },
-                updateFields: function() {
+                updateFields: function () {
                     var self = this;
+                    var eligibility = self.eligibility;
+                    if (eligibility && !self.deliveryInfo.mykad) {
+                        // self.deliveryInfo.uid = eligibility.uid;
+                        self.deliveryInfo.mykad = eligibility.mykad;
+                        self.deliveryInfo.name = eligibility.name;
+                        self.deliveryInfo.phone = eligibility.phone;
+                        self.deliveryInfo.email = eligibility.email;
+                    }
+
                     self.watchChangeState();
                     self.deliveryInfo.stateCode = (self.deliveryInfo.state) ? self.getStateCode(self.deliveryInfo.state) : '';
                     self.deliveryInfo.cityCode = self.deliveryInfo.city;
                     self.deliveryInfo.country = 'MALAYSIA';
 
                 },
-                watchChangeState: function(event) {
+                watchChangeState: function (event) {
                     var self = this;
-                    if(event && event.target.value){
+                    if (event && event.target.value) {
                         self.deliveryInfo.state = event.target.value;
                     }
                     if (typeof self.deliveryInfo.state !== 'undefined' && self.deliveryInfo.state.length) {
                         self.ajaxGetCitiesByState(self.deliveryInfo.state);
                     }
                 },
-                watchChangeCity: function(event) {
+                watchChangeCity: function (event) {
                     var self = this;
                     self.deliveryInfo.city = event.target.value;
                     self.watchAllowNext();
                 },
-                getStateCode: function(stateVal) {
+                getStateCode: function (stateVal) {
                     var self = this;
                     var objState = self.selectOptions.states.filter(state => state.value == stateVal);
                     return objState[0].stateCode;
                 },
-                ajaxGetCitiesByState: function(state = null) {
+                ajaxGetCitiesByState: function (state = null) {
                     var self = this;
                     var stateCode = self.getStateCode(state);
 
                     toggleOverlay();
 
                     self.allowSelectCity = false;
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $('.form-select').selectpicker('refresh');
                     }, 100);
 
@@ -420,9 +465,9 @@
                                 self.deliveryInfo.cityCode = '';
                             }
 
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 $('.form-select').selectpicker('refresh');
-                                if(self.deliveryInfo.city){
+                                if (self.deliveryInfo.city) {
                                     $('#city').val(self.deliveryInfo.city)
                                 }
                                 toggleOverlay(false);
@@ -437,7 +482,7 @@
                         });
                 },
 
-                checkIsNumber: function(event) {
+                checkIsNumber: function (event) {
                     event = (event) ? event : window.event;
                     var charCode = (event.which) ? event.which : event.keyCode;
                     if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
@@ -446,7 +491,7 @@
                         return true;
                     }
                 },
-                watchAllowNext: function() {
+                watchAllowNext: function () {
                     $('.input_error').removeClass('input_error');
                     var self = this;
                     var isFilled = true;
@@ -463,25 +508,25 @@
                         isFilled = false;
                     }
                     var mykad = /[0-9]{11}$/g;
-                    if (self.eligibility.mykad.trim() && !mykad.test(self.eligibility.mykad.trim())) {
+                    if (self.deliveryInfo.mykad.trim() && !mykad.test(self.deliveryInfo.mykad.trim())) {
                         isFilled = false;
                         $('#mykad_number').addClass('input_error');
                     }
 
                     var phone = /^[0-46-9]*[0-9]{7,11}$/g;
-                    if(self.deliveryInfo.phone.trim() && !phone.test(self.deliveryInfo.phone.trim())){
+                    if (self.deliveryInfo.phone.trim() && !phone.test(self.deliveryInfo.phone.trim())) {
                         isFilled = false;
                         $('#ic_phone_number').addClass('input_error');
                     }
 
                     var email = /\S+@\S+\.\S+/;
-                    if(self.deliveryInfo.email.trim() && !email.test(self.deliveryInfo.email.trim())){
+                    if (self.deliveryInfo.email.trim() && !email.test(self.deliveryInfo.email.trim())) {
                         isFilled = false;
                         $('#email').addClass('input_error');
                     }
 
                     var postcode = /^[0-9]{5}$/g;
-                    if(self.deliveryInfo.postcode.trim() && !postcode.test(self.deliveryInfo.postcode.trim())){
+                    if (self.deliveryInfo.postcode.trim() && !postcode.test(self.deliveryInfo.postcode.trim())) {
                         isFilled = false;
                         $('#postcode').addClass('input_error');
                     }
@@ -492,16 +537,36 @@
                         self.allowSubmit = false;
                     }
                 },
-                goNext: function(){
+                updateCustomer: function () {
+                    var self = this;
+
+                    toggleOverlay();
+                    axios.post(apiEndpointURL_elevate + '/customer/update', self.deliveryInfo)
+                        .then((response) => {
+                            var data = response.data;
+                            if(data.status == 1){
+                                elevate.redirectToPage('contract');
+                            }else{
+                                toggleOverlay(false);
+                                $('#error').html(data.data.displayResponseMessage);
+                                console.log(data);
+                            }
+                        })
+                        .catch((error) => {
+                            toggleOverlay(false);
+                            console.log(error, response);
+                        });
+
+                },
+                goNext: function () {
                     var self = this;
                     self.getStateCode(self.deliveryInfo.state);
 
-                    if(self.allowSubmit){
+                    if (self.allowSubmit) {
                         //update store
                         elevate.lsData.deliveryInfo = self.deliveryInfo;
                         elevate.updateElevateLSData();
-
-                        elevate.redirectToPage('verification');
+                        self.updateCustomer();
                     }
                 }
 

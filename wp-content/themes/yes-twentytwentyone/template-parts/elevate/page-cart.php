@@ -123,7 +123,7 @@
                                 <div class="mt-3">
                                     <div class="text-bold">Plan</div>
                                     <div class="accordion-wrap hlv_3">
-                                        <div class="accordion-header"> {{ orderSummary.product.planName}} <i
+                                        <div class="accordion-header" @click="showPlanDetail()"> {{ orderSummary.product.planName}} <i
                                                     class="icon icon_arrow_down"></i></div>
                                         <ul class="accordion-body list-1 mt-3" style="display: none">
                                             <li>250GB 4G Data</li>
@@ -211,16 +211,11 @@
 </div>
 <script type="text/javascript">
 
-    import {setTimeout} from "../../../../../wp-includes/js/tinymce/plugins/paste/plugin";
-
     $(document).ready(function () {
         setTimeout(function (){
             $('#primary').show();
         },500);
-        $(document).on('click','.accordion-header',function () {
-            $(this).parent().toggleClass("active");
-            $(this).parent().children(".accordion-body").slideToggle();
-        });
+
     })
     ;
 </script>
@@ -327,6 +322,10 @@
                 isUpfront: function (){
                     var self = this;
                     return (self.orderSummary.orderDetail.upfront > 0);
+                },
+                showPlanDetail: function(){
+                    $('.accordion-wrap').toggleClass("active");
+                    $(".accordion-body").slideToggle();
                 },
                 changeColor: function (color){
                     var self = this;

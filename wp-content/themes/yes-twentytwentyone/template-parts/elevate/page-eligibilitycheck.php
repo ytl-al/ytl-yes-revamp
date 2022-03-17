@@ -42,8 +42,10 @@
                                     <div class="col-lg-8 col-12">
                                         <label class="form-label">* MyKad number</label>
                                         <div class="input-group align-items-center">
-                                            <input type="text" minlength="11" maxlength="11" class="form-control" id="mykad_number"
-                                                   name="mykad" v-model="eligibility.mykad" @input="watchAllowNext" @keypress="checkInputCharacters(event, 'numeric', false)"
+                                            <input type="text" minlength="11" maxlength="11" class="form-control"
+                                                   id="mykad_number"
+                                                   name="mykad" v-model="eligibility.mykad" @input="watchAllowNext"
+                                                   @keypress="checkInputCharacters(event, 'numeric', false)"
                                                    placeholder=""
                                                    required>
 
@@ -69,15 +71,19 @@
                                     </div>
                                     <div class="col-lg-8 col-12">
                                         <div class="row">
-                                    <div class="col-lg-4 col-5">
-                                        <input type="text" class="form-control text-center" id="ic_passport_number"
-                                               placeholder="MY +60" readonly>
-                                    </div>
-                                    <div class="col-lg-8 col-7">
-                                        <input type="text" class="form-control" maxlength="11" id="ic_phone_number"
-                                               name="phone" v-model="eligibility.phone" @input="watchAllowNext" @keypress="checkInputCharacters(event, 'numeric', false)"
-                                               placeholder="Phone number">
-                                    </div></div>
+                                            <div class="col-lg-4 col-5">
+                                                <input type="text" class="form-control text-center"
+                                                       id="ic_passport_number"
+                                                       placeholder="MY +60" readonly>
+                                            </div>
+                                            <div class="col-lg-8 col-7">
+                                                <input type="text" class="form-control" maxlength="11"
+                                                       id="ic_phone_number"
+                                                       name="phone" v-model="eligibility.phone" @input="watchAllowNext"
+                                                       @keypress="checkInputCharacters(event, 'numeric', false)"
+                                                       placeholder="Phone number">
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-phone"></div>
 
@@ -109,6 +115,7 @@
                                                 :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">Check
                                             Eligibility
                                         </button>
+                                        <div id="error" class="mt-3"></div>
                                     </div>
                                 </div>
 
@@ -160,7 +167,7 @@
                     var self = this;
                     if (elevate.validateSession(self.currentStep)) {
                         self.pageValid = true;
-                        if(elevate.lsData.eligibility){
+                        if (elevate.lsData.eligibility) {
                             self.eligibility = elevate.lsData.eligibility;
                         }
 
@@ -175,7 +182,7 @@
                     self.watchAllowNext();
                 },
 
-                eligibilityCheck: function (){
+                eligibilityCheck: function () {
                     var self = this;
                     var params = {
                         "mykad": self.eligibility.mykad.trim(),
@@ -187,12 +194,15 @@
 
                             var data = response.data;
 
-                           console.log(data);
-                           if(data.data && data.data.eligibilityStatus == 'ALLOWED'){
-                               self.CAEligibility();
-                           }else{
 
-                           }
+                            if (data.data && data.data.eligibilityStatus == 'ALLOWED') {
+                                self.CAEligibility();
+                            } else {
+                                toggleOverlay(false);
+                                $('#error').html(data.data.displayResponseMessage);
+                                console.log(data);
+
+                            }
                         })
                         .catch((error) => {
                             toggleOverlay(false);
@@ -201,17 +211,20 @@
 
                 },
 
-                CAEligibility: function (){
+                CAEligibility: function () {
                     var self = this;
-                    var params = {
-                    };
+                    var params = {};
                     toggleOverlay();
                     axios.post(apiEndpointURL_elevate + '/verify-caeligibility', params)
                         .then((response) => {
 
                             var data = response.data;
-                            if(data.status == 1){
+                            if (data.status == 1) {
                                 self.elevateCustomer();
+                            } else {
+                                toggleOverlay(false);
+                                $('#error').html(data.data.displayResponseMessage);
+                                console.log(data);
                             }
                         })
                         .catch((error) => {
@@ -220,7 +233,7 @@
                         });
                 },
 
-                elevateCustomer: function (){
+                elevateCustomer: function () {
                     var self = this;
                     var params = self.eligibility;
                     toggleOverlay();
@@ -228,8 +241,12 @@
                         .then((response) => {
 
                             var data = response.data;
-                            if(data.status == 1){
+                            if (data.status == 1) {
                                 elevate.redirectToPage('verification');
+                            } else {
+                                toggleOverlay(false);
+                                $('#error').html(data.data.displayResponseMessage);
+                                console.log(data);
                             }
                         })
                         .catch((error) => {
@@ -278,7 +295,7 @@
                 },
                 goNext: function () {
                     var self = this;
-
+                    $('#error').html('');
                     if (self.allowSubmit) {
                         //update store
                         elevate.lsData.eligibility = self.eligibility;

@@ -24,9 +24,9 @@ class ElevateApi
     const  api_order_get_by_id = 'api/Elevate/order/Id';
     const  api_order_get_by_number = 'api/Elevate/order/orderNumber';
 
-    const  api_contact = 'api/Elevate/contract';
-    const  api_contact_get_by_id = 'api/Elevate/contract/Id';
-    const  api_contact_get_by_nric = 'api/Elevate/contract/customerNRIC';
+    const  api_contract = 'api/Elevate/contract';
+    const  api_contract_get_by_id = 'api/Elevate/contract/Id';
+    const  api_contract_get_by_nric = 'api/Elevate/contract/customerNRIC';
 
     const  api_product = 'api/Elevate/product';
     const  api_product_get_by_id = 'api/Elevate/product/Id';
@@ -37,6 +37,9 @@ class ElevateApi
 
     const mobile_api_verify_eligbility = 'mobileyos/mobile/ws/v1/json/verifyEligibility';
 
+    const  ekyc_api_url = 'https://mobileservicesiot.ytlcomms.my/';
+    const  ekyc_api_check = 'TBC';
+
     public function __construct()
     {
         $apiSetting = \Inc\Base\Model::getAPISettings();
@@ -45,71 +48,91 @@ class ElevateApi
     }
 
 
-	 public static function register()
-     {
-         add_action('rest_api_init', function () {
-             register_rest_route('/elevate/v1', '/test', array(
-                 'methods' => 'GET',
-                 'callback' => array('\Inc\Api\ElevateApi', 'do_test'),
-             ));
+    public static function register()
+    {
+        add_action('rest_api_init', function () {
+            register_rest_route('/elevate/v1', '/test', array(
+                'methods' => 'GET',
+                'callback' => array('\Inc\Api\ElevateApi', 'do_test'),
+            ));
 
-             register_rest_route('/elevate/v1', '/getProduct', array(
-                 'methods' => 'GET',
-                 'callback' => array('\Inc\Api\ElevateApi', 'getProduct'),
-             ));
+            register_rest_route('/elevate/v1', '/getProduct', array(
+                'methods' => 'GET',
+                'callback' => array('\Inc\Api\ElevateApi', 'getProduct'),
+            ));
 
-             register_rest_route('/elevate/v1', '/customer', array(
-                 'methods' => 'POST',
-                 'callback' => array('\Inc\Api\ElevateApi', 'elevate_customer'),
-             ));
+            register_rest_route('/elevate/v1', '/customer', array(
+                'methods' => 'POST',
+                'callback' => array('\Inc\Api\ElevateApi', 'elevate_customer'),
+            ));
 
-             register_rest_route('/elevate/v1', '/verify-eligibility', array(
-                 'methods' => 'POST',
-                 'callback' => array('\Inc\Api\ElevateApi', 'verify_eligbility'),
-             ));
+            register_rest_route('/elevate/v1', '/verify-eligibility', array(
+                'methods' => 'POST',
+                'callback' => array('\Inc\Api\ElevateApi', 'verify_eligbility'),
+            ));
 
-             register_rest_route('/elevate/v1', '/verify-caeligibility', array(
-                 'methods' => 'POST',
-                 'callback' => array('\Inc\Api\ElevateApi', 'verify_caeligibility'),
-             ));
+            register_rest_route('/elevate/v1', '/verify-caeligibility', array(
+                'methods' => 'POST',
+                'callback' => array('\Inc\Api\ElevateApi', 'verify_caeligibility'),
+            ));
+
+            register_rest_route('/elevate/v1', '/ekyc-init', array(
+                'methods' => 'POST',
+                'callback' => array('\Inc\Api\ElevateApi', 'ekyc_init'),
+            ));
+
+            register_rest_route('/elevate/v1', '/ekyc-check', array(
+                'methods' => 'POST',
+                'callback' => array('\Inc\Api\ElevateApi', 'ekyc_check'),
+            ));
+
+            register_rest_route('/elevate/v1', 'customer/update', array(
+                'methods' => 'POST',
+                'callback' => array('\Inc\Api\ElevateApi', 'elevate_customer_update'),
+            ));
+
+            register_rest_route('/elevate/v1', 'contract', array(
+                'methods' => 'POST',
+                'callback' => array('\Inc\Api\ElevateApi', 'elevate_contract'),
+            ));
 
 
-
-         });
-     }
-
+        });
+    }
 
 
-     public static function do_test()
-     {
+    public static function do_test()
+    {
 
-       return  self::verify_eligbility();
+        return self::verify_eligbility();
 
-     }
+    }
 
-    public static function getProduct(){
-        $code = $_REQUEST['code'];
+    public static function getProduct(WP_REST_Request $request)
+    {
+        $code = $request['code'];
         $product = \Inc\Base\Model::getProductByCode($code);
-        $response 	= new WP_REST_Response($product);
+        $response = new WP_REST_Response($product);
         $response->set_status(200);
         return $response;
     }
 
-    public static function verify_eligbility(WP_REST_Request $request){
+    public static function verify_eligbility(WP_REST_Request $request)
+    {
 
         $token = self::mobileservice_generate_auth_token();
         $mykad = $request['mykad'];
         $planType = $request['plan_type'];
 
-        $apiSetting =  get_option("ytlpd_settings");
+        $apiSetting = get_option("ytlpd_settings");
         $request_id = $apiSetting['ytlpd_api_request_id'];
         $params = array(
-            'planType'=> $planType,
-            'locale'=>"en",
-            'requestId'=> $request_id,
-            'securityId'=>$mykad,
-            'securityType'=>"NRIC",
-            'sessionId'=>$token,
+            'planType' => $planType,
+            'locale' => "en",
+            'requestId' => $request_id,
+            'securityId' => $mykad,
+            'securityType' => "NRIC",
+            'sessionId' => $token,
         );
 
         $args = [
@@ -126,79 +149,199 @@ class ElevateApi
         $request = wp_remote_post($api_url, $args);
 
 
-
         if (is_wp_error($request)) {
             $return['status'] = 0;
             $return['error'] = "Cannot connect to API server";
-        } else if ( $request['response']['code'] != 200) {
+        } else if ($request['response']['code'] != 200) {
             $code = $request['response']['code'];
             $return['status'] = 0;
             $return['error'] = @$request['response'];
         } else {
             $code = $request['response']['code'];
-            $data = json_decode($request['body'],true);
+            $data = json_decode($request['body'], true);
             $return['status'] = 1;
             $return['data'] = $data;
         }
 
-        $response 	= new WP_REST_Response($return);
+        $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
     }
 
-    public static function verify_caeligibility(){
+    public static function verify_caeligibility(WP_REST_Request $request)
+    {
         $return['status'] = 1;
-        $response 	= new WP_REST_Response($return);
+        $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
     }
 
-    public static function elevate_customer(){
+    public static function elevate_customer(WP_REST_Request $request)
+    {
         $return['status'] = 1;
-        $response 	= new WP_REST_Response($return);
+        $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
     }
 
-    public static function eligibility_init(){
-        $hash = md5(uniqid());
+    public static function elevate_customer_update(WP_REST_Request $request)
+    {
+        $return['status'] = 1;
+        $params = array();
+        $token = '';//self::get_token();
 
-        $data = array(
-            'hash'=>$hash,
-            'mykad'=>$_POST['mykad'],
-            'name'=>$_POST['name'],
-            'phone'=>$_POST['phone'],
-            'email'=>$_POST['email'],
-            'status'=>0,
-        );
-        $id= \Inc\Base\Model::addEligibility($data);
-        $qrcode= \Inc\Base\Model::getEligibility($hash);
-        $info= array();
-        $info['data'] = $qrcode;
-        $response 	= new WP_REST_Response($info);
+        $args = [
+            'headers' => array(
+                'Accept' => 'text/plain',
+                'Authorization' => 'Bearer ' . $token,
+                'Content-Type' => 'application/json'
+            ),
+            'body' => $params,
+            'method' => 'PUT'
+        ];
+
+        $api_url = self::api_url . self::api_customer;
+
+        $return['api_url'] = $api_url;
+        $return['request'] = $request;
+        /*
+         $request = wp_remote_post($api_url, $args);
+        if (is_wp_error($request)) {
+            $return['status'] = 0;
+            $return['error'] = "Cannot connect to API server";
+        } else if ($request['response']['code'] != 200) {
+            $code = $request['response']['code'];
+            $return['status'] = 0;
+            $return['error'] = @$request['response'];
+        } else {
+            $code = $request['response']['code'];
+            $data = json_decode($request['body'], true);
+            $return['status'] = 1;
+            $return['data'] = $data;
+        }*/
+
+        $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
     }
 
-    public static function eligibility_check(){
-        $hash = $_GET['hash'];
+    public static function elevate_contract(WP_REST_Request $request)
+    {
+        $return['status'] = 1;
+        $params = array();
+        $token = '';//self::get_token();
 
-        $qrcode = \Inc\Base\Model::getEligibility($hash);
+        $args = [
+            'headers' => array(
+                'Accept' => 'text/plain',
+                'Authorization' => 'Bearer ' . $token,
+                'Content-Type' => 'application/json'
+            ),
+            'body' => $params,
+            'method' => 'PUT'
+        ];
 
-        $info = array(
-            'hash'=>$hash,
-            'mykad'=>$qrcode->mykad,
-            'name'=>$qrcode->name,
-            'phone'=>$qrcode->phone,
-            'email'=>$qrcode->email,
-            'status'=>$qrcode->status,
-        );
-        $response 	= new WP_REST_Response($info);
+        $api_url = self::api_url . self::api_contract;
+
+        $return['api_url'] = $api_url;
+        $return['request'] = $request;
+        /*
+         $request = wp_remote_post($api_url, $args);
+        if (is_wp_error($request)) {
+            $return['status'] = 0;
+            $return['error'] = "Cannot connect to API server";
+        } else if ($request['response']['code'] != 200) {
+            $code = $request['response']['code'];
+            $return['status'] = 0;
+            $return['error'] = @$request['response'];
+        } else {
+            $code = $request['response']['code'];
+            $data = json_decode($request['body'], true);
+            $return['status'] = 1;
+            $return['data'] = $data;
+        }*/
+
+        $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
     }
 
+    public static function ekyc_init(WP_REST_Request $request)
+    {
+        $uid = $request['uid'];
+        $mykad = $request['mykad'];
+        $fname = $request['fname'];
+        $api_url = self::ekyc_api_url . '?uid=' . $uid . '&mykad=' . $mykad . '&fname=' . $fname;
+        $params = array();
 
+        $args = [
+            'headers' => array(
+                'Content-Type' => 'application/json'
+            ),
+            'body' => json_encode($params),
+            'method' => 'POST',
+            'data_format' => 'body'
+        ];
+        $request = wp_remote_post($api_url, $args);
+
+
+        if (is_wp_error($request)) {
+            $return['status'] = 0;
+            $return['error'] = "Cannot connect to API server";
+        } else if ($request['response']['code'] != 200) {
+            $code = $request['response']['code'];
+            $return['status'] = 0;
+            $return['error'] = @$request['response'];
+        } else {
+            $code = $request['response']['code'];
+            $data = json_decode($request['body'], true);
+            $return['status'] = 1;
+            $return['data'] = $data;
+        }
+
+        $response = new WP_REST_Response($return);
+        $response->set_status(200);
+        return $response;
+
+    }
+
+    public static function ekyc_check(WP_REST_Request $request)
+    {
+        $uid = $request['uid'];
+        $mykad = $request['mykad'];
+        $api_url = self::ekyc_api_url . self::ekyc_api_check . '?uid=' . $uid . '&mykad=' . $mykad;
+        $params = array();
+
+        $args = [
+            'headers' => array(
+                'Content-Type' => 'application/json'
+            ),
+            'body' => json_encode($params),
+            'method' => 'POST',
+            'data_format' => 'body'
+        ];
+        $request = wp_remote_post($api_url, $args);
+
+
+        if (is_wp_error($request)) {
+            $return['status'] = 0;
+            $return['error'] = "Cannot connect to API server";
+        } else if ($request['response']['code'] != 200) {
+            $code = $request['response']['code'];
+            $return['status'] = 0;
+            $return['error'] = @$request['response'];
+        } else {
+            $code = $request['response']['code'];
+            $data = json_decode($request['body'], true);
+            $return['status'] = 1;
+            $return['data'] = $data;
+        }
+
+        $response = new WP_REST_Response($return);
+        $response->set_status(200);
+        return $response;
+
+    }
 
     public function get_token()
     {
@@ -207,11 +350,11 @@ class ElevateApi
             $token = self::generate_auth_token();
         } else {
             $tokenArray = unserialize($tokenOption);
-            if(strtotime("+19 minutes",strtotime($tokenArray['requestDate'])) <  strtotime("now")){
+            if (strtotime("+19 minutes", strtotime($tokenArray['requestDate'])) < strtotime("now")) {
                 $token = self::generate_auth_token();
-            }else{
+            } else {
                 $token = $tokenArray['basicAuthToken']->access_token;
-                if(!$token){
+                if (!$token) {
                     $token = self::generate_auth_token();
                 }
             }
@@ -274,11 +417,11 @@ class ElevateApi
             $token = self::mobileservice_generate_auth_token();
         } else {
             $tokenArray = unserialize($tokenOption);
-            if(strtotime("+19 minutes",strtotime($tokenArray['requestDate'])) <  strtotime("now")){
+            if (strtotime("+19 minutes", strtotime($tokenArray['requestDate'])) < strtotime("now")) {
                 $token = self::mobileservice_generate_auth_token();
-            }else{
+            } else {
                 $token = $tokenArray['basicAuthToken']->basicAuthToken;
-                if(!$token){
+                if (!$token) {
                     $token = self::mobileservice_generate_auth_token();
                 }
             }
@@ -291,24 +434,24 @@ class ElevateApi
     {
         $return = false;
 
-        $apiSetting =  get_option("ytlpd_settings");
+        $apiSetting = get_option("ytlpd_settings");
         $domain_url = $apiSetting['ytlpd_api_domain_url'];
         $request_id = $apiSetting['ytlpd_api_request_id'];
         $authorization_key = $apiSetting['ytlpd_api_authorization_key'];
 
-        $params     = ['requestId' => $request_id, 'locale' => 60];
-        $args       = [
-            'headers'       => array('Content-Type' => 'application/json; charset=utf-8', 'Authorization' => 'BASIC '.$authorization_key),
-            'body'          => json_encode($params),
-            'method'        => 'POST',
-            'data_format'   => 'body'
+        $params = ['requestId' => $request_id, 'locale' => 60];
+        $args = [
+            'headers' => array('Content-Type' => 'application/json; charset=utf-8', 'Authorization' => 'BASIC ' . $authorization_key),
+            'body' => json_encode($params),
+            'method' => 'POST',
+            'data_format' => 'body'
         ];
-        $api_url    = self::mobile_api_url.self::mobile_auth_path_auth;
+        $api_url = self::mobile_api_url . self::mobile_auth_path_auth;
 
-        $request    = wp_remote_post($api_url, $args);
+        $request = wp_remote_post($api_url, $args);
 
-        $response   = $request['response'];
-        $res_code   = $response['code'];
+        $response = $request['response'];
+        $res_code = $response['code'];
         if (is_wp_error($request)) {
             $error_message = $response->get_error_message();
             add_settings_error('ytlpd_messages', 'ytlpd_message', __('Something went wrong on generating auth token: ', 'elevate') . $error_message, 'error');
@@ -327,14 +470,15 @@ class ElevateApi
         return $return;
     }
 
-    public static function pullProducts(){
+    public static function pullProducts()
+    {
         $params = array();
         $token = self::get_token();
 
         $args = [
             'headers' => array(
                 'Accept' => 'text/plain',
-                'Authorization' => 'Bearer '.$token,
+                'Authorization' => 'Bearer ' . $token,
                 'Content-Type' => 'application/json'
             ),
             'body' => $params,
@@ -358,7 +502,7 @@ class ElevateApi
                 add_settings_error('ytlpd_messages', 'ytlpd_message', __('Something went wrong on full data: ', 'elevate') . "<strong><em>$error_message</em></strong>", 'error');
             }
         } else {
-            $data = json_decode($request['body'],true);
+            $data = json_decode($request['body'], true);
             $return = $data;
         }
         return $return;

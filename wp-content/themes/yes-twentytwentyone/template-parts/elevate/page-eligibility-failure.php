@@ -1,11 +1,13 @@
-<?php require_once ('includes/header.php')?>
+<?php require_once('includes/header.php') ?>
 
 <header class="white-top">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-6">
                 <div class="mt-4">
-                    <a href="/elevate/cart/" class="back-btn "><img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png" alt=""> Back to Cart</a>
+                    <a href="/elevate/cart/" class="back-btn "><img
+                                src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
+                                alt=""> Back to Cart</a>
                 </div>
             </div>
             <div class="col-lg-4 col-6 text-lg-center text-end">
@@ -25,7 +27,8 @@
                 <div class="text-center">
                     <h2 class="subtitle">You’re not eligible, but here’s what we can offer you!</h2>
                     <p style="max-width: 750px; margin: auto">
-                        You are currently not elligible for our current plan with Elevate, however we’ve picked out some amanzing plans more suited to your needs!
+                        You are currently not elligible for our current plan with Elevate, however we’ve picked out some
+                        amanzing plans more suited to your needs!
                     </p>
                 </div>
                 <div class="tabs_content mt-5">
@@ -77,7 +80,8 @@
                         </div>
                     </div>
                     <div class="p-3 text-end">
-                        <a href="/5gplans/"  class="btn-cancel text-uppercase mr-2">Cancel</a> <a class="pink-btn text-uppercase">choose plan</a>
+                        <a href="/5gplans/" class="btn-cancel text-uppercase mr-2">Cancel</a> <a
+                                class="pink-btn text-uppercase">choose plan</a>
                     </div>
                 </div>
             </div>
@@ -86,7 +90,7 @@
     </section>
 
 </main>
-<?php require_once ('includes/footer.php');?>
+<?php require_once('includes/footer.php'); ?>
 <script type="text/javascript">
     var tooltipTriggerList = [].slice.call(document.querySelectorAll("[data-bs-toggle=\"tooltip\"]"))
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {

@@ -1,109 +1,191 @@
-<?php require_once ('includes/header.php')?>
-        <header class="white-top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-6">
-                        <div class="mt-4">
-                        <a href="/elevate/cart/" class="back-btn "><img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png" alt=""> Back</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-6 text-lg-center text-end">
-                        <h1 class="title_checkout p-3">Check Out</h1>
-                    </div>
-                    <div class="col-lg-4">
-
-                    </div>
+<?php require_once('includes/header.php') ?>
+<header class="white-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-6">
+                <div class="mt-4">
+                    <a href="/elevate/cart/" class="back-btn "><img
+                                src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
+                                alt=""> Back</a>
                 </div>
             </div>
-        </header>
-        <main>
+            <div class="col-lg-4 col-6 text-lg-center text-end">
+                <h1 class="title_checkout p-3">Check Out</h1>
+            </div>
+            <div class="col-lg-4">
 
-            <!-- Banner Start -->
-            <section id="grey-innerbanner">
-                <div class="container">
-                    <ul class="wizard">
-                        <li ui-sref="firstStep" class="completed">
-                            <span>1. Personal Details</span>
-                        </li>
-                        <li ui-sref="secondStep" class="completed">
-                            <span>2. Yes Face ID</span>
-                        </li>
-                        <li ui-sref="thirdStep">
-                            <span>3. Review & Order</span>
-                        </li>
+            </div>
+        </div>
+    </div>
+</header>
+<main>
 
-                    </ul>
+    <!-- Banner Start -->
+    <section id="grey-innerbanner">
+        <div class="container">
+            <ul class="wizard">
+                <li ui-sref="firstStep" class="completed">
+                    <span>1. Personal Details</span>
+                </li>
+                <li ui-sref="secondStep" class="completed">
+                    <span>2. Yes Face ID</span>
+                </li>
+                <li ui-sref="thirdStep">
+                    <span>3. Review & Order</span>
+                </li>
+
+            </ul>
+        </div>
+    </section>
+    <!-- Banner End -->
+
+    <section id="cart-body">
+        <div class="container  p-lg-5 p-3" style="border: 0">
+            <div class="row gx-5">
+                <h2 class="subtitle">ID Verification</h2>
+                <p>
+                    A few steps to verify your identity before we continue.
+                </p>
+            </div>
+            <div class="verify-body mt-3">
+                <h3 class="subtitle2">Scan the QR code to begin verification</h3>
+                <div class="mt-5 mb-5">
+                    <div id="qrcode"></div>
                 </div>
-            </section>
-            <!-- Banner End -->
+                <h3 class="subtitle2">Complete the verification in 2 simple steps!</h3>
 
-            <section id="cart-body">
-                <div class="container  p-lg-5 p-3" style="border: 0">
-                    <div class="row gx-5">
-                        <h2 class="subtitle">ID Verification</h2>
-                        <p>
-                            A few steps to verify your identity before we continue.
-                        </p>
-                    </div>
-                    <div class="verify-body mt-3">
-                        <h3 class="subtitle2">Scan the QR code to begin verification</h3>
-                        <div class="mt-5 mb-5">
-                            <div id="qrcode"></div>
+                <ul class="list-2 mt-5">
+                    <li>
+                        <div><span class="number">1</span></div>
+                        <div>
+                            <div class="subtitle2">ID Validateion</div>
+                            <p>Scan your ID with the object in a well lit room facing on a flat surface with minimum
+                                reflection</p>
                         </div>
-                        <h3 class="subtitle2">Complete the verification in 2 simple steps!</h3>
+                    </li>
+                    <li>
+                        <div><span class="number">2</span></div>
+                        <div>
+                            <div class="subtitle2">Face Verification</div>
+                            <p>Ensure your face is within the frame for an accurate detection</p>
+                        </div>
+                    </li>
+                </ul>
 
-                        <ul class="list-2 mt-5">
-                            <li><div><span class="number">1</span></div>
-                                <div>
-                                <div class="subtitle2">ID Validateion</div>
-                                <p>Scan your ID with the object in a well lit room facing on a flat surface with minimum reflection</p>
-                                </div></li>
-                            <li><div><span class="number">2</span></div>
-                            <div>
-                                <div class="subtitle2">Face Verification</div>
-                                <p>Ensure your face is within the frame for an accurate detection</p>
-                            </div></li>
-                        </ul>
+                <a href="/elevate/personal/" class="btn btn-defalt mr-2">Passed</a>
+                <a href="/elevate/eligibility-failure/" class="btn btn-defalt">Failure</a>
+            </div>
 
-                        <a href="/elevate/eligibility-failure/" class="pink-btn">Eligibility Failure</a>
-                    </div>
+        </div>
+    </section>
+    <div id="main-vue"></div>
+</main>
+<?php require_once('includes/footer.php'); ?>
+<script type="text/javascript"
+        src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/qrcodejs/qrcode.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var pageCart = new Vue({
+            el: '#main-vue',
+            data: {
+                ekyc_url: 'https://ekyc-dev-ui.azurewebsites.net/',
+                qrcode: null,
+                eligibility: {
+                    uid: '',
+                    mykad: '',
+                    name: '',
+                    phone: '',
+                    email: ''
+                }
+            },
 
-                </div>
-            </section>
+            created: function () {
+                var self = this;
+                setTimeout(function () {
+                    self.qrcode = new QRCode(document.getElementById("qrcode"), {
+                        width: 100,
+                        height: 100
+                    });
+                    self.pageInit();
 
-        </main>
-        <?php require_once ('includes/footer.php');?>
-    <script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/qrcodejs/qrcode.min.js"></script>
+                }, 500);
+            },
+            methods: {
+                pageInit: function () {
+                    var self = this;
+                    if (elevate.validateSession(self.currentStep)) {
+                        if (elevate.lsData.eligibility) {
+                            self.eligibility = elevate.lsData.eligibility;
+                        }
+                        self.eKYC_init();
+                    } else {
+                        elevate.redirectToPage('cart');
+                    }
+                },
+                eKYC_init: function () {
+                    var self = this;
+                    self.eligibility.uid = self.generateUUID();
+                    var params = {
+                        uid: self.eligibility.uid,
+                        mykad: self.eligibility.mykad,
+                        fname: self.eligibility.name
+                    };
+                    self.makeCode(self.eligibility.uid);
+                    toggleOverlay();
+                    axios.post(apiEndpointURL_elevate + 'ekyc-init', params)
+                        .then((response) => {
+                            var data = response.data;
+                            console.log(data);
+                            toggleOverlay(false);
+                            self.eKYC_check();
+                        })
+                        .catch((error) => {
+                            toggleOverlay(false);
+                            console.log(error, response);
+                        });
 
-    <script type="text/javascript">
-        var qrcode = new QRCode(document.getElementById("qrcode"), {
-            width : 100,
-            height : 100
-        });
+                },
+                eKYC_check: function () {
+                    var self = this;
+                    var params = {
+                        uid: self.eligibility.uid,
+                        mykad: self.eligibility.mykad,
+                        fname: self.eligibility.name
+                    };
+                    axios.post(apiEndpointURL_elevate + 'ekyc-check', params)
+                        .then((response) => {
+                            var data = response.data;
+                            console.log(data);
+                            self.eKYC_check();
+                        })
+                        .catch((error) => {
+                            self.eKYC_check();
+                            console.log(error, response);
+                        });
+                },
 
-        function makeCode () {
-            var eligibility = elevate.lsData.eligibility;
-            if(eligibility && eligibility.eligibility){
-                var url_verification = 'https://ekyc-dev-ui.azurewebsites.net/?mykad='+eligibility.mykad+'&fname='+eligibility.name;
-                qrcode.makeCode(url_verification);
-            }else{
-                elevate.redirectToPage('eligibilitycheck');
+                makeCode: function (uid) {
+                    var self = this;
+                    var url_verification = self.ekyc_url + '?uid=' + uid + '&mykad=' + self.eligibility.mykad + '&fname=' + self.eligibility.name;
+                    self.qrcode.makeCode(url_verification);
+                },
+                generateUUID: function () {
+                    var d = new Date().getTime();//Timestamp
+                    var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
+                    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                        var r = Math.random() * 16;//random number between 0 and 16
+                        if (d > 0) {//Use timestamp until depleted
+                            r = (d + r) % 16 | 0;
+                            d = Math.floor(d / 16);
+                        } else {//Use microseconds since page-load if supported
+                            r = (d2 + r) % 16 | 0;
+                            d2 = Math.floor(d2 / 16);
+                        }
+                        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+                    });
+                }
+
             }
-        }
-
-        function checkVerifyStatus(){
-            axios.post(apiEndpointURL_elevate + '/', params)
-                .then((response) => {
-
-                })
-                .catch((error) => {
-                    var response = error.response;
-
-                    console.log(error, response);
-                });
-        }
-
-        $(document).ready(function() {
-            makeCode();
         });
-    </script>
+    });
+</script>
