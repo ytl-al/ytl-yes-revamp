@@ -492,7 +492,7 @@
                 this.input.focus();
             },
             focusAndHide: function() {
-                this.focus();
+                //this.focus();
                 this.hide();
             }
         });
