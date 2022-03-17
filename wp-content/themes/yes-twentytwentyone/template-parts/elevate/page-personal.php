@@ -100,7 +100,7 @@
                                     <div class="align-items-center">
                                         <input type="text" class="form-control" id="email" name="email"
                                                v-model="deliveryInfo.email" @input="watchAllowNext"
-                                               placeholder="jane.doe@gmail.com" required>
+                                               placeholder="" required>
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-email"></div>
                                 </div>

@@ -88,9 +88,23 @@ main.site-main {
     color: #2B2B2B;
     margin-bottom: 10px;
 }
+.pink-btn-disable {
+    background-color: #D0D5DD;
+    border-radius: 20px;
+    padding: 9px 30px;
+    display: inline-block;
+    font-weight: 800;
+    font-size: 16px;
+    text-transform: inherit;
+    color: #64748B;
+    border: none;
+    text-align: center;
+    margin: 12px 0px;
+    text-decoration: none;
 
+}
 .pink-btn {
-    background-color: #FF0084;
+    background-color: #FF0084!important;
     border-radius: 20px;
     padding: 9px 30px;
     display: inline-block;
@@ -101,21 +115,11 @@ main.site-main {
     border: none;
     text-align: center;
     margin: 12px 0px;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.pink-btn-disable {
-    background-color: #D0D5DD;
-    border-radius: 20px;
-    padding: 9px 30px;
-    display: inline-block;
-    font-weight: 800;
-    font-size: 16px;
-    text-transform: inherit;
-    color: #64748B !important;
-    border: none;
-    text-align: center;
-    margin: 12px 0px;
-}
+
 
 .input_error {
     border: 1px solid #ff0000 !important;
@@ -227,6 +231,7 @@ main.site-main {
     color: #C4C4C4;
     border-bottom: 3px solid #C4C4C4;
     border-radius: 0;
+    cursor: pointer;
 }
 
 .plan_tabs .active {

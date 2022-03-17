@@ -89,6 +89,8 @@
             el: '#main-vue',
             data: {
                 ekyc_url: 'https://ekyc-dev-ui.azurewebsites.net/',
+                totalAttempt:0,
+                maxAttempts:10,
                 qrcode: null,
                 eligibility: {
                     uid: '',
@@ -96,7 +98,13 @@
                     name: '',
                     phone: '',
                     email: ''
-                }
+                },
+                customer:{
+                    id:'',
+                    securityNumber: '',
+                    fullName: '',
+                    productSelected:''
+                },
             },
 
             created: function () {
@@ -117,72 +125,75 @@
                         if (elevate.lsData.eligibility) {
                             self.eligibility = elevate.lsData.eligibility;
                         }
-                        self.eKYC_init();
+                        if (elevate.lsData.customer) {
+                            self.customer = elevate.lsData.customer;
+                        }
+                        if(!self.customer.id){
+                            elevate.redirectToPage('eligibilitycheck');
+                        }else{
+                            self.eKYC_init();
+                        }
                     } else {
                         elevate.redirectToPage('cart');
                     }
                 },
                 eKYC_init: function () {
                     var self = this;
-                    self.eligibility.uid = self.generateUUID();
                     var params = {
-                        uid: self.eligibility.uid,
+                        uid: self.customer.id,
                         mykad: self.eligibility.mykad,
                         fname: self.eligibility.name
                     };
-                    self.makeCode(self.eligibility.uid);
+                    self.makeCode(self.customer.id);
                     toggleOverlay();
-                    axios.post(apiEndpointURL_elevate + 'ekyc-init', params)
+                    axios.post(apiEndpointURL_elevate + '/ekyc-init', params)
                         .then((response) => {
                             var data = response.data;
-                            console.log(data);
-                            toggleOverlay(false);
-                            self.eKYC_check();
+
+                            if(data.status == 1){
+                                toggleOverlay(false);
+                                self.eKYC_check();
+                                setInterval(function (){
+                                    self.eKYC_check();
+                                },10000);
+
+                            }else{
+                                self.eKYC_init();
+                            }
+
                         })
                         .catch((error) => {
                             toggleOverlay(false);
-                            console.log(error, response);
                         });
 
                 },
                 eKYC_check: function () {
                     var self = this;
-                    var params = {
-                        uid: self.eligibility.uid,
-                        mykad: self.eligibility.mykad,
-                        fname: self.eligibility.name
-                    };
-                    axios.post(apiEndpointURL_elevate + 'ekyc-check', params)
-                        .then((response) => {
-                            var data = response.data;
-                            console.log(data);
-                            self.eKYC_check();
-                        })
-                        .catch((error) => {
-                            self.eKYC_check();
-                            console.log(error, response);
-                        });
+
+                    self.totalAttempt++;
+                    if( self.totalAttempt <= self.maxAttempts){
+                        var params = {
+                            uid: self.customer.id,
+                            mykad: self.eligibility.mykad,
+                            fname: self.eligibility.name
+                        };
+                        axios.post(apiEndpointURL_elevate + '/ekyc-check', params)
+                            .then((response) => {
+                                var data = response.data;
+                            })
+                            .catch((error) => {
+                                console.log(error, response);
+                            });
+
+                    }else{
+                        elevate.redirectToPage('/eligibility-failure/');
+                    }
                 },
 
                 makeCode: function (uid) {
                     var self = this;
                     var url_verification = self.ekyc_url + '?uid=' + uid + '&mykad=' + self.eligibility.mykad + '&fname=' + self.eligibility.name;
                     self.qrcode.makeCode(url_verification);
-                },
-                generateUUID: function () {
-                    var d = new Date().getTime();//Timestamp
-                    var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
-                    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-                        var r = Math.random() * 16;//random number between 0 and 16
-                        if (d > 0) {//Use timestamp until depleted
-                            r = (d + r) % 16 | 0;
-                            d = Math.floor(d / 16);
-                        } else {//Use microseconds since page-load if supported
-                            r = (d2 + r) % 16 | 0;
-                            d2 = Math.floor(d2 / 16);
-                        }
-                        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-                    });
                 }
 
             }

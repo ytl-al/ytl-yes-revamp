@@ -23,22 +23,6 @@ class Model extends BaseController
      */
     public static function plugin_install()
     {
-        $table = self::$wpdb->prefix . "elevate_eligibility";
-        $sql_create = "
-		CREATE TABLE `$table` (
-          `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-          `mykad` varchar(150) NOT NULL,
-          `name` varchar(150) NOT NULL,
-          `email` varchar(150) NOT NULL,
-          `phone` varchar(150) NOT NULL, 
-          `hash` varchar(200) NOT NULL,   
-          `status` int(1) DEFAULT 0,   
-          `created_at` timestamp NOT NULL,
-          `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
-          PRIMARY KEY (`id`)
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8;		 
-		";
-        self::$wpdb->query($sql_create);
 
     }
 

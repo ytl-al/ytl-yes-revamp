@@ -22,7 +22,7 @@
 <main>
     <section id="cart-body">
         <div class="container" style="border: 0">
-
+            <div id="main-vue">
             <div class="border-box">
                 <div class="row">
                     <div class="col-md-5 p-5 flex-column bg-checkout2">
@@ -34,43 +34,151 @@
                         <div class="flex-container mt-5">
                             <div>
                                 <div class="subtitle2">
-                                    Normal Contract 24 months
+                                    {{plan.displayName}}
                                 </div>
-                                <p>You can with our Normal 24 months contract option. </p>
-                                <ul class="mt-3 mb-3 list-1">
-                                    <li>250GB 4G Data</li>
-                                    <li>FREE Unlimited 5G Data* until 31st March 2022</li>
-                                    <li>Unlimited calls to ALL networks</li>
-                                    <li>Unlimited SMS to YES networks</li>
-                                    <li>Pay-as-you-use SMS to other networks</li>
-                                    <li>24 months contract</li>
-                                    <li>Upfront payment</li>
+                                <p></p>
+                                <ul class="mt-3 mb-3 list-1" v-for="(item, index) in plan.features">
+                                    <li>{{item}}</li>
                                 </ul>
-                                <p>
-                                    You will be redirected to another check out page for payment.
-                                </p>
-                                <p>Would you like to proceed?</p>
-                                <div class="p-3">
-                                    <a class="pink-btn text-uppercase  mr-2">choose plan</a> <a href="/5gplans/"
-                                                                                                class="btn-cancel text-uppercase">Cancel</a>
+                                <div v-for="(item, index) in plan.notes">
+                                <p>{{item}}</p>
                                 </div>
+                                <p class="mt-3">Would you like to proceed?</p>
+                                <div class="p-3">
+                                    <a class="pink-btn-disable text-uppercase mr-2" :class="(allowSubmit)?'pink-btn':'pink-btn-disable'" @click="goNext">choose plan</a>
+                                    <a href="/5gplans/" class="btn-cancel text-uppercase">Cancel</a>
+                                </div>
+                                <div id="error" class="mt-3"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
+            </div>
         </div>
 
-
-        </div>
     </section>
 
 </main>
 <?php require_once('includes/footer.php'); ?>
 <script type="text/javascript">
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll("[data-bs-toggle=\"tooltip\"]"))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
+    $(document).ready(function () {
+        var pageCart = new Vue({
+            el: '#main-vue',
+            data: {
+                productId: null,
+                isCartEmpty: false,
+                isCAEligibilityCheck: false,
+                selectedPlan:0,
+                taxRate: {
+                    sst: 0.06
+                },
+                plan:{
+                    displayName:'',
+                    features:[],
+                    notes:[],
+                },
+                eligibility: {
+                    mykad: '',
+                    name: '',
+                    phone: '',
+                    email: ''
+                },
+                customer:{
+                    id:'',
+                    securityNumber: '',
+                    fullName: '',
+                    productSelected:''
+                },
+                allowSubmit: false
+            },
+
+            created: function () {
+                var self = this;
+                self.pageInit();
+            },
+            methods: {
+                pageInit: function () {
+                    var self = this;
+                    if (elevate.validateSession(self.currentStep)) {
+                        if (elevate.lsData.eligibility) {
+                            self.eligibility = elevate.lsData.eligibility;
+                        }
+                        self.productId = elevate.lsData.product.productID;
+                        self.selectedPlan = elevate.lsData.selectedPlan;
+                        self.customer = elevate.lsData.customer;
+
+                        if(self.selectedPlan){
+                            self.pullPlan();
+                        }else{
+                            elevate.redirectToPage('eligibility-failure');
+                        }
+                    } else {
+                        elevate.redirectToPage('cart');
+                    }
+                },
+                pullPlan: function () {
+                    var self = this;
+                    var params = {};
+                    toggleOverlay();
+                    axios.get(apiEndpointURL + '/get-plan-by-id/'+ self.selectedPlan, params)
+                        .then((response) => {
+                            var data = response.data;
+                            self.plan.displayName = data.displayName;
+                            self.plan.features = data.internetSms.split('|');
+                            self.plan.notes = data.notes.split('|');
+                            self.allowSubmit = true;
+                            toggleOverlay(false);
+                        })
+                        .catch((error) => {
+                            toggleOverlay(false);
+                            console.log(error, response);
+                        });
+
+
+                },
+                CAEligibility: function () {
+                    var self = this;
+                    var params = {
+                        mykad: self.eligibility.mykad,
+                        name:self.eligibility.name,
+                    };
+                    toggleOverlay();
+                    axios.post(apiEndpointURL_elevate + '/verify-caeligibility', params)
+                        .then((response) => {
+
+                            var data = response.data;
+                            if (data.status == 1) {
+                                self.isCAEligibilityCheck = true;
+                                self.redirectYWOS();
+                            } else {
+                                toggleOverlay(false);
+                                $('#error').html("System error, please try again.");
+                                console.log(data);
+                            }
+                        })
+                        .catch((error) => {
+                            toggleOverlay(false);
+                            $('#error').html("System error, please try again.");
+                            console.log(error, response);
+                        });
+                },
+                redirectYWOS:function (){
+                    var self = this;
+                    toggleOverlay();
+                    ywos.buyPlan(self.selectedPlan);
+                },
+                goNext: function(){
+                    $('#error').html('');
+                    var self = this;
+                    if(self.isCAEligibilityCheck){
+                        self.redirectYWOS();
+                    }else{
+                        self.CAEligibility();
+                    }
+
+                }
+            }
+        });
+    });
 </script>

@@ -22,78 +22,208 @@
 <main>
     <section id="cart-body">
         <div class="container" style="border: 0">
-
-            <div class="border-box p-lg-5">
-                <div class="text-center">
-                    <h2 class="subtitle">You’re not eligible, but here’s what we can offer you!</h2>
-                    <p style="max-width: 750px; margin: auto">
-                        You are currently not elligible for our current plan with Elevate, however we’ve picked out some
-                        amanzing plans more suited to your needs!
-                    </p>
-                </div>
-                <div class="tabs_content mt-5">
-                    <div class="plan_tabs">
-                        <ul class="nav nav-pills nav-fill">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Postpaid</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Prepaid</a>
-                            </li>
-                        </ul>
+            <div id="main-vue">
+                <div class="border-box p-lg-5">
+                    <div class="text-center">
+                        <h2 class="subtitle">You’re not eligible, but here’s what we can offer you!</h2>
+                        <p style="max-width: 750px; margin: auto">
+                            You are currently not elligible for our current plan with Elevate, however we’ve picked out
+                            some
+                            amanzing plans more suited to your needs!
+                        </p>
                     </div>
-                    <div class="mt-4">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="plan-item p-3">
-                                    <div class="subtitle">Kasi Up<br>Postpaid 30</div>
-                                    <ul class="plan-list mt-3 mb-3">
-                                        <li>20GB for RM30</li>
-                                        <li>Unlimited refferals and earnings</li>
-                                        <li>Free YES Altitude phone</li>
-                                    </ul>
-                                    <div class="plan_price">RM30.00 /month</div>
+                    <div class="tabs_content mt-5">
+                        <div class="plan_tabs">
+                            <ul class="nav nav-pills nav-fill">
+                                <li class="nav-item">
+                                    <a class="nav-link active" onclick="changeTab(this,'postpaid')">Postpaid</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onclick="changeTab(this,'prepaid')">Prepaid</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="tab-postpaid" class="mt-5 tabcontent">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="plan-item p-3" data-planid="707">
+                                        <div class="subtitle">Kasi Up<br>Postpaid 49<br>(Contract)</div>
+                                        <ul class="plan-list mt-3 mb-3">
+                                            <li>100GB</li>
+                                            <li>24 months Contract</li>
+                                            <li>Kasi Up rewards</li>
+                                            <li>6 months free</li>
+                                            <li>4G paling power</li>
+                                            <li>Unlimited borak</li>
+                                        </ul>
+                                        <br/>
+                                        <div class="plan_price">RM49 <br/>for 100GB</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="plan-item p-3">
-                                    <div class="subtitle">Merdeka Device<br> Bundle</div>
-                                    <ul class="plan-list mt-3 mb-3">
-                                        <li>Free YES Altitude phone</li>
-                                        <li>Unlimited refferals and earnings</li>
-                                        <li>Unlimited Borak</li>
-                                    </ul>
-                                    <div class="plan_price">RM49.00 /month</div>
+                                <div class="col-md-4">
+                                    <div class="plan-item p-3" data-planid="706">
+                                        <div class="subtitle">Kasi Up <br>Postpaid 49 <br>(No Contract)</div>
+                                        <ul class="plan-list mt-3 mb-3">
+                                            <li>100GB</li>
+                                            <li>Kasi Up rewards</li>
+                                            <li>4G paling power</li>
+                                            <li>Unlimited borak</li>
+                                        </ul>
+                                        <br/><br/><br/>
+                                        <div class="plan_price">RM49 <br/>for 100GB</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="plan-item p-3">
-                                    <div class="subtitle">Kasi Up<br> Postpaid 49</div>
-                                    <ul class="plan-list mt-3 mb-3">
-                                        <li>Unlimited data for RM30</li>
-                                        <li>Unlimited refferals and earnings</li>
-                                        <li>Unlimited Borak</li>
-                                    </ul>
-                                    <div class="plan_price">RM49.00 /month</div>
+                                <div class="col-md-4">
+                                    <div class="plan-item p-3" data-planid="759">
+                                        <div class="subtitle">Pakej YES <br>Peranti Keluarga<br> Malaysia</div>
+                                        <ul class="plan-list mt-3 mb-3">
+                                            <li>100GB</li>
+                                            <li>12 Months Contract</li>
+                                            <li>Kasi Up rewards</li>
+                                            <li>Free YES phone</li>
+                                            <li>4G paling power</li>
+                                            <li>On-Net: Unlimited<br>
+                                                Off-Net: RM 0.09</li>
+                                        </ul>
+                                        <div class="plan_price">RM49 <br/>for 100GB</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="p-3 text-end">
-                        <a href="/5gplans/" class="btn-cancel text-uppercase mr-2">Cancel</a> <a
-                                class="pink-btn text-uppercase">choose plan</a>
+                        <div id="tab-prepaid" class="mt-5 tabcontent" style="display: none">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="plan-item p-3" data-planid="710">
+                                        <div class="subtitle">Kasi Up Prepaid 15
+                                            (Add-On)</div>
+                                        <ul class="plan-list mt-3 mb-3">
+                                            <li>10GB</li>
+                                            <li>Kasi Up rewards</li>
+                                            <li>30 day validity</li>
+                                            <li>Lowest RM per GB</li>
+                                            <li>4G paling power</li>
+                                            <li>No hidden fees</li>
+                                        </ul><br/>
+                                        <div class="plan_price">RM15 <br/>for 10GB</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="plan-item p-3" data-planid="758">
+                                        <div class="subtitle">Pakej YES Remaja
+                                            Keluarga Malaysia</div>
+                                        <ul class="plan-list mt-3 mb-3">
+                                            <li>20GB</li>
+                                            <li>Kasi Up rewards</li>
+                                            <li>30 day validity</li>
+                                            <li>Lowest RM per GB</li>
+                                            <li>4G paling power</li>
+                                            <li>No hidden fees</li>
+                                        </ul><br/>
+                                        <div class="plan_price">RM30 <br/>for 20GB</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="plan-item p-3" data-planid="767">
+                                        <div class="subtitle">Kasi Up Prepaid Unlimited</div>
+                                        <ul class="plan-list mt-3 mb-3">
+                                            <li>Unlimited GB
+                                                (7Mbps & 9GB Hotspot Data)</li>
+                                            <li>Kasi Up rewards</li>
+                                            <li>30 day validity</li>
+                                            <li>Lowest RM per GB</li>
+                                            <li>4G paling power</li>
+                                            <li>No hidden fees</li>
+                                        </ul>
+                                        <div class="plan_price">RM30 <br/>for Unlimited</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 text-end">
+                            <a href="/5gplans/" id class="btn-cancel text-uppercase mr-2">Cancel</a>
+                            <a id="btnChoosePlan" @click="goNext" class="pink-btn-disable text-uppercase">choose plan</a>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
 </main>
 <?php require_once('includes/footer.php'); ?>
+
 <script type="text/javascript">
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll("[data-bs-toggle=\"tooltip\"]"))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
+    $(document).ready(function () {
+        var pageCart = new Vue({
+            el: '#main-vue',
+            data: {
+                productId: null,
+                isCartEmpty: false,
+                selectedPlan:0,
+                taxRate: {
+                    sst: 0.06
+                },
+                eligibility: {
+                    mykad: '',
+                    name: '',
+                    phone: '',
+                    email: ''
+                },
+                customer:{
+                    id:'',
+                    securityNumber: '',
+                    fullName: '',
+                    productSelected:''
+                },
+                allowSubmit: false
+            },
+
+            created: function () {
+                var self = this;
+                setTimeout(function () {
+                    self.pageInit();
+                }, 500);
+            },
+            methods: {
+                pageInit: function () {
+                    var self = this;
+                    if (elevate.validateSession(self.currentStep)) {
+
+                    } else {
+                        elevate.redirectToPage('cart');
+                    }
+                },
+                goNext: function(){
+                    var self = this;
+                    self.selectedPlan = selectedPlan;
+                    if(self.selectedPlan){
+                        elevate.lsData.selectedPlan = self.selectedPlan;
+                        elevate.updateElevateLSData();
+                        elevate.redirectToPage('eligibility-plan');
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    var selectedPlan = 0;
+    $(document).ready(function () {
+        $(document).on('click', '.plan-item', function () {
+            selectedPlan = $(this).data('planid');
+            $('#btnChoosePlan').removeClass('pink-btn-disable');
+            $('#btnChoosePlan').addClass('pink-btn');
+            $('.plan-item-selected').removeClass('plan-item-selected');
+            $(this).addClass('plan-item-selected');
+        });
+
+    });
+
+    function changeTab(obj, tab) {
+        $('.plan_tabs .active').removeClass('active');
+        $(obj).addClass('active');
+        $('.tabs_content .tabcontent').hide();
+        $('#tab-' + tab).show();
+    }
 </script>

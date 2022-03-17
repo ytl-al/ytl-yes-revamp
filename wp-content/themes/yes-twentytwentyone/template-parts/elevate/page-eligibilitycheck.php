@@ -94,7 +94,7 @@
                                         <div class="align-items-center">
                                             <input type="text" class="form-control" id="email" name="email"
                                                    v-model="eligibility.email" @input="watchAllowNext"
-                                                   placeholder="jane.doe@gmail.com" required>
+                                                   placeholder="" required>
                                         </div>
                                         <div class="invalid-feedback mt-1" id="em-email"></div>
                                     </div>
@@ -115,8 +115,8 @@
                                                 :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">Check
                                             Eligibility
                                         </button>
-                                        <div id="error" class="mt-3"></div>
                                     </div>
+                                    <div id="error" class="mt-3"></div>
                                 </div>
 
                             </div>
@@ -138,6 +138,8 @@
             data: {
                 productId: null,
                 isCartEmpty: false,
+                isEligibilityCheck: false,
+                isCAEligibilityCheck: false,
                 taxRate: {
                     sst: 0.06
                 },
@@ -146,6 +148,12 @@
                     name: '',
                     phone: '',
                     email: ''
+                },
+                customer:{
+                    id:'',
+                    securityNumber: '',
+                    fullName: '',
+                    productSelected:''
                 },
                 input: {
                     mykad: {field: '#mykad_number', errorMessage: '#em-mykad'},
@@ -171,6 +179,8 @@
                             self.eligibility = elevate.lsData.eligibility;
                         }
 
+                        self.productId = elevate.lsData.product.productID;
+
                         self.updateFields();
                     } else {
                         elevate.redirectToPage('cart');
@@ -194,11 +204,16 @@
 
                             var data = response.data;
 
-
                             if (data.data && data.data.eligibilityStatus == 'ALLOWED') {
+                                self.isEligibilityCheck = true;
                                 self.CAEligibility();
                             } else {
                                 toggleOverlay(false);
+                                if(data.status == 0){
+                                    $('#error').html(data.error);
+                                }else{
+                                    $('#error').html(data.data.displayResponseMessage);
+                                }
                                 $('#error').html(data.data.displayResponseMessage);
                                 console.log(data);
 
@@ -213,22 +228,27 @@
 
                 CAEligibility: function () {
                     var self = this;
-                    var params = {};
+                    var params = {
+                        mykad: self.eligibility.mykad,
+                        name:self.eligibility.name,
+                    };
                     toggleOverlay();
                     axios.post(apiEndpointURL_elevate + '/verify-caeligibility', params)
                         .then((response) => {
 
                             var data = response.data;
                             if (data.status == 1) {
+                                self.isCAEligibilityCheck = true;
                                 self.elevateCustomer();
                             } else {
                                 toggleOverlay(false);
-                                $('#error').html(data.data.displayResponseMessage);
+                                $('#error').html("System error, please try again.");
                                 console.log(data);
                             }
                         })
                         .catch((error) => {
                             toggleOverlay(false);
+                            $('#error').html("System error, please try again.");
                             console.log(error, response);
                         });
                 },
@@ -236,17 +256,19 @@
                 elevateCustomer: function () {
                     var self = this;
                     var params = self.eligibility;
+                    params.productId = self.productId;
                     toggleOverlay();
                     axios.post(apiEndpointURL_elevate + '/customer', params)
                         .then((response) => {
 
                             var data = response.data;
                             if (data.status == 1) {
+                                elevate.lsData.customer = data.data;
+                                elevate.updateElevateLSData();
                                 elevate.redirectToPage('verification');
                             } else {
                                 toggleOverlay(false);
-                                $('#error').html(data.data.displayResponseMessage);
-                                console.log(data);
+                                $('#error').html(data.error);
                             }
                         })
                         .catch((error) => {
@@ -258,8 +280,11 @@
                 watchAllowNext: function () {
                     $('.input_error').removeClass('input_error');
                     var self = this;
+
+                    self.isEligibilityCheck = false;
+                    self.isCAEligibilityCheck = false;
+
                     var isFilled = true;
-                    console.log('self.eligibility', self.eligibility);
                     if (
                         self.eligibility.mykad.trim() == '' ||
                         self.eligibility.name.trim() == '' ||
@@ -300,7 +325,14 @@
                         //update store
                         elevate.lsData.eligibility = self.eligibility;
                         elevate.updateElevateLSData();
-                        self.eligibilityCheck();
+                        if(!self.isEligibilityCheck){
+                            self.eligibilityCheck();
+                        }else if(!self.isCAEligibilityCheck){
+                            self.CAEligibility();
+                        }else{
+                            self.elevateCustomer();
+                        }
+
                     }
                 }
 
