@@ -107,7 +107,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-6">
-                                    <button class="text-uppercase" @click="goNext"
+                                    <button class="pink-btn-disable text-uppercase" @click="goNext"
                                             :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">check
                                         eligibility
                                     </button>
@@ -307,15 +307,21 @@
                     ],
                     cities: []
                 },
-                customerDetails: {},
                 eligibility: {
                     mykad: '',
                     name: '',
                     phone: '',
                     email: ''
                 },
+                customer:{
+                    id:'',
+                    securityNumber: '',
+                    fullName: '',
+                    productSelected:''
+                },
                 deliveryInfo: {
                     uid: '',
+                    productId: '',
                     mykad: '',
                     name: '',
                     phone: '',
@@ -378,15 +384,19 @@
                 pageInit: function () {
                     var self = this;
 
-                    console.log("self.eligibility", self.eligibility);
                     if (elevate.validateSession(self.currentStep)) {
                         self.pageValid = true;
                         if (elevate.lsData.eligibility) {
                             self.eligibility = elevate.lsData.eligibility;
                         }
+                        if (elevate.lsData.customer) {
+                            self.customer = elevate.lsData.customer;
+                        }
                         if (elevate.lsData.deliveryInfo) {
                             self.deliveryInfo = elevate.lsData.deliveryInfo;
                         }
+                        self.productId =  elevate.lsData.product.productID;
+
                         self.updateFields();
                         toggleOverlay(false);
 
@@ -452,8 +462,7 @@
                             masterlist.map((value, index) => {
                                 options.push({
                                     value: value.masterCode,
-                                    name: value.masterValue,
-
+                                    name: value.masterValue
                                 });
                             })
                             self.selectOptions.cities = options;
@@ -541,14 +550,18 @@
                     var self = this;
 
                     toggleOverlay();
-                    axios.post(apiEndpointURL_elevate + '/customer/update', self.deliveryInfo)
+                    var param = self.deliveryInfo;
+                    param.uid = self.customer.id;
+                    param.productId = self.productId;
+
+                    axios.post(apiEndpointURL_elevate + '/customer/update', param)
                         .then((response) => {
                             var data = response.data;
                             if(data.status == 1){
-                                elevate.redirectToPage('contract');
+                                elevate.redirectToPage('review');
                             }else{
                                 toggleOverlay(false);
-                                $('#error').html(data.data.displayResponseMessage);
+                                $('#error').html("Systm error, please try again.");
                                 console.log(data);
                             }
                         })

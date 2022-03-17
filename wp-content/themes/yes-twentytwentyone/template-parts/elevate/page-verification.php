@@ -88,7 +88,7 @@
         var pageCart = new Vue({
             el: '#main-vue',
             data: {
-                ekyc_url: 'https://ekyc-dev-ui.azurewebsites.net/',
+                ekyc_url: 'https://ekyc-dev-web.azurewebsites.net/',
                 totalAttempt:0,
                 maxAttempts:10,
                 qrcode: null,

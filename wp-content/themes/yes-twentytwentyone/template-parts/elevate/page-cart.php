@@ -198,7 +198,7 @@
                             <div class="hr_line"></div>
                         </div>
 
-                        <a href="javascript:void(0)" @click="goNext" class="d-block" :class="isValidCart()?'pink-btn':'pink-btn-disable'">Continue</a>
+                        <a href="javascript:void(0)" @click="goNext" class="pink-btn-disable d-block" :class="isValidCart()?'pink-btn':'pink-btn-disable'">Continue</a>
                     </div>
                 </div>
             </div>

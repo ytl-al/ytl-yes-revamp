@@ -39,7 +39,7 @@ class ElevateApi
 
     const mobile_api_verify_eligbility = 'mobileyos/mobile/ws/v1/json/verifyEligibility';
 
-    const  ekyc_api_url = 'https://ekyc-dev-ui.azurewebsites.net/';
+    const  ekyc_api_url = 'https://ekyc-dev-web.azurewebsites.net/';
     const  ekyc_api_check = 'TBC';
 
     public function __construct()
@@ -324,7 +324,49 @@ class ElevateApi
     public static function elevate_customer_update(WP_REST_Request $request)
     {
 
-        $params = array();
+        $id = $request['uid'];
+        $params = array(
+            'securityNumber'=>$request['mykad'],
+            'fullName'=>$request['name'],
+            'addressLine1'=>$request['address'],
+            'addressLine2'=>$request['addressMore'],
+            'postCode'=>$request['postcode'],
+            'mobileNumber'=>$request['phone'],
+            'email'=>$request['email'],
+            'state'=>$request['state'],
+            'city'=>$request['city']
+        );
+        $params = array(
+            "customerID" => "",
+            "securityType" => 0,
+            "securityNumber" => $request['mykad'],
+            "fullName" => $request['name'],
+            "gender" => self::getGender($request['mykad']),
+            "dob" => self::getDOB($request['mykad']),
+            "addressLine1" => $request['address'],
+            "addressLine2" => $request['addressMore'],
+            "state" => $request['state'],
+            "city" => $request['city'],
+            "postCode" => $request['postcode'],
+            "country" => "Malaysia",
+            "mobileNumber" => $request['phone'],
+            "email" => $request['email'],
+            "msisdn" => "",
+            "agreedTerms" => true,
+            "agreedDataCollection" => true,
+            "referralCode" => "",
+            "dealerUID" => "",
+            "dealerCode" => "",
+            "registrationChannel" => "WEB",
+            "registrationDate" => date("c"),
+            "productSelected" => $request['productId'],
+            "orderNumber" => "",
+            "verificationStatus" => true,
+            "verificationCode" => "",
+            "verificationDate" =>  date("c"),
+            "emailSent" => true,
+            "lastModificationTime" => date("c")
+        );
         $token = self::get_token();
 
         $args = [
@@ -333,16 +375,14 @@ class ElevateApi
                 'Authorization' => 'Bearer ' . $token,
                 'Content-Type' => 'application/json'
             ),
-            'body' => $params,
+            'body' => json_encode($params),
             'method' => 'PUT'
         ];
 
-        $api_url = self::api_url . self::api_customer;
-        $return['status'] = 1;
-        $return['api_url'] = $api_url;
-        $return['request'] = $request;
-        /*
-         $request = wp_remote_post($api_url, $args);
+        $api_url = self::api_url . self::api_customer.'?id='.$id;
+
+        $request = wp_remote_request($api_url, $args);
+
         if (is_wp_error($request)) {
             $return['status'] = 0;
             $return['error'] = "Cannot connect to API server";
@@ -355,7 +395,7 @@ class ElevateApi
             $data = json_decode($request['body'], true);
             $return['status'] = 1;
             $return['data'] = $data;
-        }*/
+        }
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
