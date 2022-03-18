@@ -193,7 +193,7 @@ function toggleOverlay(toggleShow = true) {
 function initBetterDocsCustomize() {
     initBetterDocsSearchForm();
     // initBetterDocsSearchPlaceholder();
-    initBetterDocsSearch5G();
+    // initBetterDocsSearch5G();
 }
 
 
@@ -244,23 +244,17 @@ function initBetterDocsSearchPlaceholder() {
 function initBetterDocsSearch5G() {
     var bdSearchField = $('.betterdocs-search-field');
     if ($(bdSearchField).length) {
-        $(bdSearchField).on('keypress input propertychange paste', function(event) {
-            var bdSearchFieldVal = $(this).val();
-            event = (event) ? event : window.event;
-            var charCode = (event.which) ? event.which : event.keyCode;
-            if (
-                (charCode > 31 && (charCode < 48 || charCode > 57)) && // numeric (0-9)
-                charCode !== 46 &&
-                !(charCode > 64 && charCode < 91) && // uppercase alpha
-                !(charCode > 96 && charCode < 123) && // lowercase alpha
-                charCode !== 32
-            ) {
-                event.preventDefault();
-            } else {
-                if (bdSearchFieldVal == '5g' || bdSearchFieldVal == '4g' || bdSearchFieldVal == '5G' || bdSearchFieldVal == '4G') {
-                    $(bdSearchField).val(bdSearchFieldVal + ' ');
-                    $(bdSearchField).trigger('input').trigger('propertychange').trigger('paste').trigger('keyup').trigger('keypress');
-                }
+        $(bdSearchField).attr('pattern', '/^[a-zA-Z0-9 ]+$/');
+        $(bdSearchField).on('input', function() {
+            var v = this.value.replace(/[^a-zA-Z0-9 ]+$/g, '');
+            if (v != this.value) {
+                this.value = v;
+                $(bdSearchField).trigger('input').trigger('propertychange').trigger('paste').trigger('keyup').trigger('keypress');
+            }
+
+            if (this.value == '5g' || this.value == '4g' || this.value == '5G' || this.value == '4G') {
+                $(bdSearchField).val(this.value + ' ');
+                $(bdSearchField).trigger('input').trigger('propertychange').trigger('paste').trigger('keyup').trigger('keypress');
             }
         });
     }
