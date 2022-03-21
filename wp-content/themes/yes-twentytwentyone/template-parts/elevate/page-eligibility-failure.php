@@ -193,13 +193,16 @@
                         elevate.redirectToPage('cart');
                     }
                 },
+                redirectYWOS:function (){
+                    var self = this;
+                    toggleOverlay();
+                    ywos.buyPlan(self.selectedPlan);
+                },
                 goNext: function(){
                     var self = this;
                     self.selectedPlan = selectedPlan;
                     if(self.selectedPlan){
-                        elevate.lsData.selectedPlan = self.selectedPlan;
-                        elevate.updateElevateLSData();
-                        elevate.redirectToPage('eligibility-plan');
+                        self.redirectYWOS()
                     }
                 }
             }

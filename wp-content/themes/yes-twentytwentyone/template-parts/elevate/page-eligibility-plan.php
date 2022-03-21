@@ -95,7 +95,11 @@
 
             created: function () {
                 var self = this;
-                self.pageInit();
+
+                setTimeout(function () {
+                    self.pageInit();
+                }, 500);
+
             },
             methods: {
                 pageInit: function () {
@@ -144,7 +148,7 @@
                         name:self.eligibility.name,
                     };
                     toggleOverlay();
-                    axios.post(apiEndpointURL_elevate + '/verify-caeligibility', params)
+                    axios.post(apiEndpointURL_elevate + '/ca-verification', params)
                         .then((response) => {
 
                             var data = response.data;

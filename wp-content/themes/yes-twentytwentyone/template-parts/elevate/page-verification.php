@@ -25,10 +25,10 @@
         <div class="container">
             <ul class="wizard">
                 <li ui-sref="firstStep" class="completed">
-                    <span>1. Personal Details</span>
+                    <span>1. Eligibility Check</span>
                 </li>
                 <li ui-sref="secondStep" class="completed">
-                    <span>2. Yes Face ID</span>
+                    <span>2. ID Verification</span>
                 </li>
                 <li ui-sref="thirdStep">
                     <span>3. Review & Order</span>
@@ -51,6 +51,9 @@
                 <h3 class="subtitle2">Scan the QR code to begin verification</h3>
                 <div class="mt-5 mb-5">
                     <div id="qrcode"></div>
+                    <div class="text-center">
+                        <a id="cmdVerify" href="#" target="_blank" class="btn btn-danger mt-3 hide-de">Verify Now</a>
+                    </div>
                 </div>
                 <h3 class="subtitle2">Complete the verification in 2 simple steps!</h3>
 
@@ -90,7 +93,7 @@
             data: {
                 ekyc_url: 'https://ekyc-dev-web.azurewebsites.net/',
                 totalAttempt:0,
-                maxAttempts:10,
+                maxAttempts:60,
                 qrcode: null,
                 eligibility: {
                     uid: '',
@@ -145,26 +148,9 @@
                         fname: self.eligibility.name
                     };
                     self.makeCode(self.customer.id);
-                    toggleOverlay();
-                    axios.post(apiEndpointURL_elevate + '/ekyc-init', params)
-                        .then((response) => {
-                            var data = response.data;
-
-                            if(data.status == 1){
-                                toggleOverlay(false);
-                                self.eKYC_check();
-                                setInterval(function (){
-                                    self.eKYC_check();
-                                },10000);
-
-                            }else{
-                                self.eKYC_init();
-                            }
-
-                        })
-                        .catch((error) => {
-                            toggleOverlay(false);
-                        });
+                    setInterval(function (){
+                        self.eKYC_check();
+                    },15000);
 
                 },
                 eKYC_check: function () {
@@ -180,6 +166,16 @@
                         axios.post(apiEndpointURL_elevate + '/ekyc-check', params)
                             .then((response) => {
                                 var data = response.data;
+                                if(data.status == 1){
+                                    if(data.data.processStatus == "OCRImageCompleted"){
+                                        //success
+                                        self.CAEligibility();
+                                    }else{
+                                        //failure
+                                        elevate.redirectToPage('/error/');
+
+                                    }
+                                }
                             })
                             .catch((error) => {
                                 console.log(error, response);
@@ -190,9 +186,43 @@
                     }
                 },
 
+                CAEligibility: function () {
+                    var self = this;
+                    var params = {
+                        mykad: self.eligibility.mykad,
+                        name:self.eligibility.name,
+                    };
+                    toggleOverlay();
+                    axios.post(apiEndpointURL_elevate + '/ca-verification', params)
+                        .then((response) => {
+
+                            var data = response.data;
+                            if (data.status == 1) {
+
+                                self.isCAEligibilityCheck = true;
+                                self.redirectYWOS();
+                            } else {
+                                toggleOverlay(false);
+                                $('#error').html("System error, please try again.");
+                                console.log(data);
+                            }
+                        })
+                        .catch((error) => {
+                            toggleOverlay(false);
+                            $('#error').html("System error, please try again.");
+                            console.log(error, response);
+                        });
+                },
+                redirectYWOS:function (){
+                    var self = this;
+                    toggleOverlay();
+                    ywos.buyPlan(self.selectedPlan);
+                },
+
                 makeCode: function (uid) {
                     var self = this;
                     var url_verification = self.ekyc_url + '?uid=' + uid + '&mykad=' + self.eligibility.mykad + '&fname=' + self.eligibility.name;
+                    $('#cmdVerify').attr('href', url_verification);
                     self.qrcode.makeCode(url_verification);
                 }
 

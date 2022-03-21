@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="col-lg-4 col-6 text-lg-center text-end">
-                <h1 class="title_checkout p-3">Check Out</h1>
+                <h1 class="title_checkout p-3"></h1>
             </div>
             <div class="col-lg-4">
 
@@ -57,9 +57,9 @@
                                 <div class="col-lg-12 col-12">
                                     <label class="form-label">* MyKad number</label>
                                     <div class="input-group align-items-center">
-                                        <input type="text" maxlength="11" class="form-control" id="mykad_number"
+                                        <input type="text" maxlength="12" class="form-control" id="mykad_number"
                                                name="mykad" v-model="deliveryInfo.mykad" @input="watchAllowNext"
-                                               @keypress="checkInputCharacters(event, 'numeric', false)" placeholder=""
+                                               @keypress="checkInputCharacters(event, 'numeric', false)" placeholder="" readonly
                                                required>
 
                                     </div>
@@ -71,7 +71,7 @@
                                     <label class="form-label">* Full Name (as per MyKad)</label>
                                     <div class="input-group align-items-center">
                                         <input type="text" class="form-control" id="full_name" name="name"
-                                               v-model="deliveryInfo.name" @input="watchAllowNext" placeholder=""
+                                               v-model="deliveryInfo.name" @input="watchAllowNext" placeholder="" readonly
                                                required>
 
                                     </div>
@@ -90,7 +90,7 @@
                                     <input type="text" class="form-control" maxlength="11" id="ic_phone_number"
                                            name="phone" v-model="deliveryInfo.phone" @input="watchAllowNext"
                                            @keypress="checkInputCharacters(event, 'numeric', false)"
-                                           placeholder="Phone number">
+                                           placeholder="Phone number" readonly>
                                 </div>
                                 <div class="invalid-feedback mt-1" id="em-phone"></div>
                             </div>
@@ -100,7 +100,7 @@
                                     <div class="align-items-center">
                                         <input type="text" class="form-control" id="email" name="email"
                                                v-model="deliveryInfo.email" @input="watchAllowNext"
-                                               placeholder="" required>
+                                               placeholder="" readonly required>
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-email"></div>
                                 </div>
@@ -395,7 +395,7 @@
                         if (elevate.lsData.deliveryInfo) {
                             self.deliveryInfo = elevate.lsData.deliveryInfo;
                         }
-                        self.productId =  elevate.lsData.product.productID;
+                        self.productId =  elevate.lsData.orderDetail.productCode;
 
                         self.updateFields();
                         toggleOverlay(false);
@@ -516,7 +516,7 @@
                     ) {
                         isFilled = false;
                     }
-                    var mykad = /[0-9]{11}$/g;
+                    var mykad = /[0-9]{12}$/g;
                     if (self.deliveryInfo.mykad.trim() && !mykad.test(self.deliveryInfo.mykad.trim())) {
                         isFilled = false;
                         $('#mykad_number').addClass('input_error');
@@ -574,7 +574,7 @@
                 goNext: function () {
                     var self = this;
                     self.getStateCode(self.deliveryInfo.state);
-
+                    $('#error').html("");
                     if (self.allowSubmit) {
                         //update store
                         elevate.lsData.deliveryInfo = self.deliveryInfo;

@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="col-lg-4 col-6 text-lg-center text-end">
-                <h1 class="title_checkout p-3">Check Out</h1>
+                <h1 class="title_checkout p-3">Contract</h1>
             </div>
             <div class="col-lg-4">
 
@@ -65,21 +65,24 @@
                             <div class="col-md-6">
                                 <div>Customer Signature</div>
                                 <div style="height: 50px;"></div>
-                                <div class="hr_line" style="max-width: 300px"></div>
+                                <div><input type="text" @keypress="check_sign()"  v-model="contract_signed"  class="form-control user_sign" placeholder="Type your full name" id="fname"/></div>
+                                <div></div>
                                 <div class="mt-4">
                                     <a class="btn-signup" @click="sign_contract"><i class="icon icon-signup2"></i> Fill and Sign</a>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div>Date & Time</div>
-                                <div><?php echo date("d/m/Y")?></div>
+                                <div><?php echo date("d/m/Y H:i:s")?></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="mb-5">
-                    <button class="mt-3 w300" :class="allowSubmit?'pink-btn':'pink-btn-disable'" @click="goNext" type="button">Submit Contract</button>
+                    <button class="mt-3 pink-btn-disable w300" :class="allowSubmit?'pink-btn':'pink-btn-disable'" @click="goNext" type="button">Submit Contract</button>
+                    <div id="error" class="mt-3"></div>
                 </div>
+
             </div>
             </div>
         </div>
@@ -94,6 +97,8 @@
             data: {
                 ekyc_url: 'https://ekyc-dev-ui.azurewebsites.net/',
                 qrcode: null,
+                contract:{},
+                contract_signed:"",
                 eligibility: {
                     uid: '',
                     mykad: '',
@@ -165,18 +170,38 @@
                 },
                 sign_contract: function () {
                     var self = this;
-                    self.allowSubmit = true;
+                    $('#fname').focus();
+                },
+                check_sign: function (){
+                    var self = this;
+                    if(self.contract_signed && self.contract_signed == self.eligibility.name){
+                        self.allowSubmit = true;
+                    }else{
+                        self.allowSubmit = false;
+                    }
+
                 },
                 submit_contract: function () {
                     var self = this;
-                    var params = {}
+                    var params = self.eligibility;
                     toggleOverlay();
                     axios.post(apiEndpointURL_elevate + '/contract', params)
                         .then((response) => {
                             var data = response.data;
-                            console.log(data);
+                            if(data.status == 1){
+                                //save contract info
+
+                                elevate.lsData.contract = data.data;
+                                elevate.updateElevateLSData();
+                                elevate.redirectToPage('review');
+
+                            }else{
+                                toggleOverlay(false);
+                                $('#error').html("System error, please try again.");
+                                console.log(data);
+                            }
                             toggleOverlay(false);
-                            elevate.redirectToPage('thanks');
+
                         })
                         .catch((error) => {
                             toggleOverlay(false);
@@ -186,6 +211,7 @@
                 },
                 goNext: function (){
                     var self = this;
+                    $('#error').html("");
                     self.submit_contract();
                 }
             }

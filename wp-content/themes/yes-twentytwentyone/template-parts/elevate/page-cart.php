@@ -69,7 +69,7 @@
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
-            <h1 class="title">{{ orderSummary.product.nameEN }}</h1>
+            <h1 class="title">{{ orderSummary.product.selected.nameEN }}</h1>
         </div>
     </section>
     <!-- Banner End -->
@@ -84,8 +84,8 @@
                                 <div id="productSlide" class="carousel slide" data-bs-interval="false"
                                      data-ride="carousel" data-pause="hover">
                                     <div class="carousel-inner">
-                                        <div v-for="(image, index) in orderSummary.product.imageURL" class="carousel-item" :class="(index==0)?'active':''">
-                                            <img :src="'/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/' + image"
+                                        <div v-for="(image, index) in orderSummary.product.images" class="carousel-item" :class="(index==0)?'active':''">
+                                            <img :src="image.img"
                                                  class="d-block w-100" alt="">
                                         </div>
 
@@ -102,9 +102,9 @@
                                     </button>
 
                                     <div class="carousel-indicators">
-                                        <button v-for="(image, index) in orderSummary.product.imageURL" type="button" data-bs-target="#productSlide" :data-bs-slide-to="index"
+                                        <button v-for="(image, index) in orderSummary.product.images" type="button" data-bs-target="#productSlide" :data-bs-slide-to="index"
                                                 :class="(index==0)?'active':''" aria-current="true" aria-label="Slide 1">
-                                            <img :src="'/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/' + image"
+                                            <img :src="image.img"
                                                  width="60" height="70" class="d-block w-100"
                                                  alt="">
                                         </button>
@@ -113,51 +113,48 @@
                                 </div>
                             </div>
                             <div class="col-md-7">
-                                <h2 class="subtitle">{{ orderSummary.product.nameEN }}</h2>
+                                <h2 class="subtitle">{{ orderSummary.product.selected.nameEN }}</h2>
                                 <div class="mt-3">
                                     <div class="text-bold">Capacity</div>
                                     <div class="hlv_3">
-                                        {{ orderSummary.product.capacity }}
+                                        {{ orderSummary.product.selected.capacity }}
                                     </div>
                                 </div>
                                 <div class="mt-3">
                                     <div class="text-bold">Plan</div>
                                     <div class="accordion-wrap hlv_3">
-                                        <div class="accordion-header" @click="showPlanDetail()"> {{ orderSummary.product.planName}} <i
+                                        <div class="accordion-header" @click="showPlanDetail()"> {{orderSummary.product.selected.plan.nameEN}} <i
                                                     class="icon icon_arrow_down"></i></div>
                                         <ul class="accordion-body list-1 mt-3" style="display: none">
-                                            <li>250GB 4G Data</li>
-                                            <li>FREE Unlimited 5G Data* until 31st March 2022</li>
-                                            <li>Unlimited calls to ALL networks</li>
-                                            <li>Unlimited SMS to YES networks</li>
-                                            <li>Pay-as-you-use SMS to other networks</li>
-                                            <li>24 months contract</li>
+                                            <li>{{orderSummary.product.selected.plan.shortDescriptionEN}}</li>
                                         </ul>
                                     </div>
                                     <div class="text-description mt-3">
-                                        Enjoy 100GB 4G data and Unlimited 5G data in Kuala Lumpur, Cyberjaya &
-                                        Putrajaya
+
                                     </div>
                                 </div>
                                 <div class="hr_line"></div>
                                 <div class="text-bold mt-3">Select color</div>
                                 <div class="selectColorWrap mt-3">
                                     <ul>
-                                        <li v-for="(color, index) in orderSummary.product.color" @click="changeColor(color)"
-                                            data-bs-target="#productSlide" :data-bs-slide-to="index" class="color_select" :class="'color-'+color" :class="orderSummary.orderDetail.color.toString() == color.toString()?'selected':''"><a></a></li>
+                                        <li v-for="(image, index) in orderSummary.product.images" @click="changeColor(image.color)"
+                                            data-bs-target="#productSlide" :data-bs-slide-to="index" class="color_select" :class="'color-'+image.color +((string_to_slug(orderSummary.product.selected.color.toLowerCase()) == image.color.toLowerCase())?' selected':'')"><a></a></li>
                                     </ul>
                                 </div>
                                 <div class="text-bold mt-3">Select contract type</div>
                                 <div class="selectContractWrap mt-3">
                                     <ul>
-                                        <li v-for="(contract, index) in orderSummary.product.contract" @click="changeContract(contract.id)" :data-contract-id="contract.id" :class="'contract_' + contract.id" :class="parseFloat(orderSummary.orderDetail.contract_id) == parseFloat(contract.id)?'selected':''"><a>{{contract.name}}</a></li>
+                                        <li v-for="(contract, index) in orderSummary.product.colors[orderSummary.orderDetail.color]" @click="changeContract(contract.productCode)" :data-contract-id="contract.productCode" :class="'contract_' + contract.productCode + ((parseFloat(orderSummary.orderDetail.productCode) == parseFloat(contract.productCode))?' selected':'')"><a>
+                                                <span v-if="contract.contractName">{{contract.contractName}}</span>
+                                                <span v-else >Elevate {{contract.contract}} Months</span>
+                                            </a></li>
                                     </ul>
                                 </div>
                                 <div class="hr_line"></div>
                                 <div class="text-note">
-                                    Enjoy 24 month installment on your new smart phone.</br>
-                                    *RM0 upfront payment and 0% interest.</br>
-                                    *Subject to eligibility and only for MyKad holders
+                                    Enjoy 24-month instalment on your new 5G smart phone.
+                                    <br>*RM0 upfront payment, 0% interest & no credit card required.
+                                    <br>*For myKad holders only. Subject to eligibility.
                                 </div>
                             </div>
                         </div>
@@ -173,7 +170,7 @@
                                 <h3>TOTAL</h3>
                             </div>
                             <div class="col-6 pt-2 pb-2 text-end">
-                                <h3>RM{{ formatPrice(parseFloat(orderSummary.orderDetail.total).toFixed(2)) }}/mth</h3>
+                                <h3>RM{{ formatPrice(orderSummary.orderDetail.total) }}/mth</h3>
                             </div>
                         </div>
                         <div class="monthly mb-4">
@@ -182,7 +179,7 @@
                                     <p>{{item.name}}</p>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <p>RM{{item.price}}/ mth</p>
+                                    <p>RM{{formatPrice(item.price)}}/ mth</p>
                                 </div>
                             </div>
 
@@ -192,13 +189,13 @@
                                     <p>Upfront Payment</p>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.orderDetail.upfront).toFixed(2)) }}</p>
+                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.product.selected.upFrontPayment).toFixed(2)) }}</p>
                                 </div>
                             </div>
                             <div class="hr_line"></div>
                         </div>
 
-                        <a href="javascript:void(0)" @click="goNext" class="pink-btn-disable d-block" :class="isValidCart()?'pink-btn':'pink-btn-disable'">Continue</a>
+                        <a href="javascript:void(0)" @click="goNext" class="pink-btn-disable d-block" :class="allowSubmit?'pink-btn':'pink-btn-disable'">Continue</a>
                     </div>
                 </div>
             </div>
@@ -223,7 +220,7 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        toggleOverlay();
+
         var pageCart = new Vue({
             el: '#main-vue',
             data: {
@@ -236,17 +233,40 @@
                     sst: 0.06
                 },
                 orderSummary: {
-                    product: {},
+                    product: {
+                        selected:{
+                            productCode:'',
+                            code:'',
+                            nameEN:'',
+                            shortDescriptionEN:'',
+                            productBundleId:'',
+                            extraProperties:'',
+                            contractName:'',
+                            capacity:'',
+                            color:'',
+                            contract:'',
+                            devicePriceMonth:'',
+                            planPerMonth:'',
+                            upFrontPayment:0.0,
+                            plan:{
+                                planId:'',
+                                nameEN:'',
+                                shortDescriptionEN:'',
+                            }
+                        },
+                        colors:[]
+                    },
                     orderDetail: {
                         total: 0.00,
                         color: null,
-                        contract_id: null,
+                        productCode: null,
                         orderItems:[]
                     },
                 },
                 packageInfos: [],
                 currentStep: 0,
                 elevate: null,
+                allowSubmit: false,
             },
             created: function() {
                 var self = this;
@@ -261,7 +281,19 @@
                     if (elevate.validateSession(self.currentStep)) {
 
                         self.productId = elevate.lsData.meta.productId;
-                        self.ajaxGetPlanData()
+                        if(elevate.lsData.product){
+                            self.orderSummary.product = elevate.lsData.product;
+                        }
+                        if(elevate.lsData.orderDetail){
+                            self.orderSummary.orderDetail = elevate.lsData.orderDetail;
+                        }
+
+                       if(!elevate.lsData.product){
+                            self.ajaxGetPlanData();
+                        }else{
+                            self.isValidCart();
+                        }
+
                     } else {
                         self.isCartEmpty = true;
                         setTimeout(function() {
@@ -271,6 +303,7 @@
                 },
                 ajaxGetPlanData: function() {
                     var self = this;
+                    toggleOverlay();
                     axios.get(apiEndpointURL_elevate + '/getProduct/?code=' + self.productId)
                         .then((response) => {
                             var data = response.data;
@@ -279,12 +312,7 @@
                             }
 
                             self.orderSummary.product = data;
-                            /*if(elevate.lsData.orderDetail){
-                                self.orderSummary.orderDetail = elevate.lsData.orderDetail;
-                            }else{
-                                self.orderSummary.orderDetail.color = null;
-                                self.orderSummary.orderDetail.contract_id = data.contract[0].id;
-                            }*/
+
                             self.updatePlan();
 
 
@@ -302,26 +330,29 @@
                     self.hasFetchPlan = true;
 
                     self.updateSummary();
-
+                    self.orderSummary.orderDetail.productCode = self.orderSummary.product.selected.productCode;
 
                 },
                 updateSummary: function() {
                     var self = this;
                     var total = 0;
 
-                    self.orderSummary.orderDetail.total = 150;
                     self.orderSummary.orderDetail.orderItems = [
-                        {name:'Xiaomi 11T 5G NE with Elevate 24 months',price:100},
-                        {name:'Yes Postpaid FT5G',price:50},
+                        {name: self.orderSummary.product.selected.nameEN + ' - ' + self.orderSummary.product.selected.color,price:parseFloat(self.orderSummary.product.selected.devicePriceMonth).toFixed(2)},
+                        {name: self.orderSummary.product.selected.plan.nameEN,price:parseFloat(self.orderSummary.product.selected.planPerMonth).toFixed(2)},
                     ];
-                    self.orderSummary.orderDetail.upfront = 10;
+
+                    total = parseFloat(self.orderSummary.product.selected.devicePriceMonth) + parseFloat(self.orderSummary.product.selected.planPerMonth);
+
+                    self.orderSummary.orderDetail.total = total.toFixed(2);
+
                     //update store
-                    elevate.lsData.product = self.orderSummary.product;
-                    elevate.updateElevateLSData();
+                    self.isValidCart();
+
                 },
                 isUpfront: function (){
                     var self = this;
-                    return (self.orderSummary.orderDetail.upfront > 0);
+                    return (parseFloat(self.orderSummary.product.selected.upFrontPayment) > 0);
                 },
                 showPlanDetail: function(){
                     $('.accordion-wrap').toggleClass("active");
@@ -333,8 +364,10 @@
                     $('.selectColorWrap .selected').removeClass('selected');
                     $('.selectColorWrap .color-'+color).addClass('selected');
                     self.orderSummary.orderDetail.color = color;
-                    elevate.lsData.orderDetail =  self.orderSummary.orderDetail;
-                    elevate.updateElevateLSData();
+                    self.orderSummary.product.selected = self.orderSummary.product.colors[color][0];
+
+                    self.updateSummary();
+
                 },
                 changeContract: function (contract){
                     var self = this;
@@ -342,9 +375,9 @@
                     $('.selectContractWrap .selected').removeClass('selected');
                     $('.selectContractWrap .contract_' + contract).addClass('selected');
 
-                    self.orderSummary.orderDetail.contract_id = contract;
-                    elevate.lsData.orderDetail =  self.orderSummary.orderDetail;
-                    elevate.updateElevateLSData();
+                    self.orderSummary.orderDetail.productCode = contract;
+
+                    self.updateSummary();
                 },
 
                 isValidCart: function (){
@@ -353,27 +386,27 @@
                     var valid = true;
 
 
-                    if(!self.orderSummary.orderDetail.contract_id || !self.orderSummary.orderDetail.color){
+                    if(!self.orderSummary.orderDetail.productCode){
                         valid = false;
                     }
 
-                    if(self.orderSummary.orderDetail.contract_id == self.ywos_contract){
-                        valid = true;
-                    }
-
-                    return valid;
+                    self.allowSubmit = valid;
 
                 },
 
                 goNext: function(){
                     var self = this;
                     //check normal contract
-                    if(self.orderSummary.orderDetail.contract_id == self.ywos_contract){
-                        ywos.buyPlan(self.orderSummary.orderDetail.contract_id);
+                    if(self.orderSummary.orderDetail.productCode == self.ywos_contract){
+                        ywos.buyPlan(self.orderSummary.orderDetail.productCode);
                     }else{
-                        if(!self.orderSummary.orderDetail.contract_id || !self.orderSummary.orderDetail.color){
+                        if(!self.orderSummary.orderDetail.productCode){
                             return false;
                         }
+                        elevate.lsData.product =  self.orderSummary.product;
+                        elevate.lsData.orderDetail =  self.orderSummary.orderDetail;
+                        elevate.updateElevateLSData();
+
                         elevate.redirectToPage('eligibilitycheck');
                     }
                 }
@@ -381,4 +414,25 @@
             }
         });
     });
+
+    function string_to_slug(str, separator) {
+        str = str.trim();
+        str = str.toLowerCase();
+
+        // remove accents, swap ñ for n, etc
+        const from = "åàáãäâèéëêìíïîòóöôùúüûñç·/_,:;";
+        const to = "aaaaaaeeeeiiiioooouuuunc------";
+
+        for (let i = 0, l = from.length; i < l; i++) {
+            str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i));
+        }
+
+        return str
+            .replace(/[^a-z0-9 -]/g, "") // remove invalid chars
+            .replace(/\s+/g, "-") // collapse whitespace and replace by -
+            .replace(/-+/g, "-") // collapse dashes
+            .replace(/^-+/, "") // trim - from start of text
+            .replace(/-+$/, "") // trim - from end of text
+            .replace(/-/g, separator);
+    }
 </script>

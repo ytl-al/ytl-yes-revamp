@@ -60,57 +60,262 @@ class Model extends BaseController
         update_option('elevate_products_data', serialize($products));
     }
 
-    public function getProductByCode($code='')
+    public function getProductByCode($code = '')
     {
 
 
-        $product = array(
-            'productID' => "p01",
-            'code' => "c01",
-            'nameEN' => "XIAOMI 11T 5G NE",
-            'nameBM' => "XIAOMI 11T 5G NE",
-            'shortDescriptionEN' => " ",
-            'longDescriptionEN' => array(
-                'PlanDetails'=> array(
-                    ''
-                )
-            ),
-            'planType' => "postpaid",
-            'planID' => "695",
-            'productBundleId' => "string",
-            'planName' => "Yes Postpaid FT5G",
-            'sku' => "sku01",
-            'threshold' => "0",
-            'balance' => "0",
-            'status' => "1",
-            'program' => "string",
-            'capacity' => "8 RAM and 256 ROM",
-            'color' => array("black","silver","white"),
-            'contract' => array(
-                array('id'=>848, 'name'=>'Elevate 24 months'),
-                array('id'=>698, 'name'=>'Elevate 36 months'),
-                array('id'=>695, 'name'=>'Normal contract'),
-            ),
-            'tnC' => "",
-            'imageURL' => array(
-                "p1.png",
-                "p2.png",
-                "p3.png",
-            ),
-            'devicePrice' => "100",
-            'devicePriceMonth' => "50",
-            'planPerMonth' => "50",
-            'upFrontPayment' => "70",
-            'isDeleted' => "",
-            'deleterId' => "",
-            'deletionTime' => "",
-            'lastModificationTime' => "2022-03-09T11:14:41.627592",
-            'lastModifierId' => "a278e69c-919b-3c62-b479-3a02485d1fa5",
-            'creationTime' => "2022-03-02T08:01:13.301808",
-            'creatorId' => "",
-            'id' => "2ed171cf-a55b-86c0-fed4-3a025bd293d3",
-        );
-        return self::refinde($product);
+        $product = '[
+    {
+        "product": {
+            "code": "768",
+            "nameEN": "Xiaomi 11T 5G NE",
+            "nameBM": "Xiaomi 11T 5G NE",
+            "shortDescriptionEN": "Xiaomi 11T 5G NE",
+            "longDescriptionEN": "Xiaomi 11T 5G NE",
+            "shortDescriptionBM": "Xiaomi 11T 5G NE",
+            "longDescriptionBM": "Xiaomi 11T 5G NE",
+            "threshold": 0,
+            "balance": 10,
+            "status": 1,
+            "productBundleId": 100,
+            "planId": "eb7bf095-fff6-d799-fd6a-3a02ad58eb13",
+            "deviceId": "6e15d821-40fb-dc73-c66c-3a02ad5c6c3f",
+            "isDeleted": false,
+            "deleterId": null,
+            "deletionTime": null,
+            "lastModificationTime": null,
+            "lastModifierId": null,
+            "creationTime": "2022-03-18T04:42:43.9332194",
+            "creatorId": "a278e69c-919b-3c62-b479-3a02485d1fa5",
+            "extraProperties": {},
+            "concurrencyStamp": "ca2426f4460342988e2eb5a3ad724304",
+            "id": "3b26ed35-d931-b521-45fb-3a02ad829a1e"
+        },
+        "plan": {
+            "planId": "POST99",
+            "planName": "FT5G Postpaid 99",
+            "code": "POST99",
+            "nameEN": "YES Postpaid FT5G 99",
+            "nameBM": "YES Postpaid FT5G 99",
+            "shortDescriptionEN": "YES Postpaid FT5G 99",
+            "longDescriptionEN": "YES Postpaid FT5G 99",
+            "shortDescriptionBM": "YES Postpaid FT5G 99",
+            "longDescriptionBM": "YES Postpaid FT5G 99",
+            "planType": "POSTPAID",
+            "productBundleId": "P99",
+            "isDeleted": false,
+            "deleterId": null,
+            "deletionTime": null,
+            "lastModificationTime": null,
+            "lastModifierId": null,
+            "creationTime": "2022-03-18T03:57:11.4331778",
+            "creatorId": "a278e69c-919b-3c62-b479-3a02485d1fa5",
+            "extraProperties": {},
+            "concurrencyStamp": "037f3db181a449c48236d83624d7950b",
+            "id": "eb7bf095-fff6-d799-fd6a-3a02ad58eb13"
+        },
+        "device": {
+            "code": "XIAOMI_11T_5G_NE",
+            "nameEN": "Xiaomi 11T 5G NE",
+            "nameBM": "Xiaomi 11T 5G NE",
+            "shortDescriptionEN": "Xiaomi 11T 5G NE",
+            "longDescriptionEN": "Xiaomi 11T 5G NE",
+            "shortDescriptionBM": "Xiaomi 11T 5G NE",
+            "longDescriptionBM": "Xiaomi 11T 5G NE",
+            "sku": "string",
+            "threshold": 0,
+            "balance": 10,
+            "status": true,
+            "capacity": "8GB RAM and 256 ROM",
+            "color": "Black",
+            "contract": "24",
+            "contractName": null,
+            "tnC": "None",
+            "imageURL": "https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11t.png?x41595",
+            "devicePriceMonth": "10",
+            "planPerMonth": "10",
+            "upFrontPayment": "0",
+            "isDeleted": false,
+            "deleterId": null,
+            "deletionTime": null,
+            "lastModificationTime": null,
+            "lastModifierId": null,
+            "creationTime": "2022-03-18T04:01:01.2225504",
+            "creatorId": "a278e69c-919b-3c62-b479-3a02485d1fa5",
+            "extraProperties": {},
+            "concurrencyStamp": "618c7febdc9d4cef8be568e32ca110f2",
+            "id": "6e15d821-40fb-dc73-c66c-3a02ad5c6c3f"
+        }
+    },
+    {
+        "product": {
+            "code": "769",
+            "nameEN": "Xiaomi 11T 5G NE Black",
+            "nameBM": "Xiaomi 11T 5G NE Black",
+            "shortDescriptionEN": "Xiaomi 11T 5G NE Black",
+            "longDescriptionEN": "Xiaomi 11T 5G NE Black",
+            "shortDescriptionBM": "Xiaomi 11T 5G NE Black",
+            "longDescriptionBM": "Xiaomi 11T 5G NE Black",
+            "threshold": 0,
+            "balance": 10,
+            "status": 1,
+            "productBundleId": 100,
+            "planId": "eb7bf095-fff6-d799-fd6a-3a02ad58eb13",
+            "deviceId": "c3fd673a-7c88-21e2-76cb-3a02ae984f7c",
+            "isDeleted": false,
+            "deleterId": null,
+            "deletionTime": null,
+            "lastModificationTime": null,
+            "lastModifierId": null,
+            "creationTime": "2022-03-18T09:47:22.9779124",
+            "creatorId": "a278e69c-919b-3c62-b479-3a02485d1fa5",
+            "extraProperties": {},
+            "concurrencyStamp": "7db8710d522f473d928ffa7550870199",
+            "id": "1574736d-b249-d6a7-943f-3a02ae9987d7"
+        },
+        "plan": {
+            "planId": "POST99",
+            "planName": "FT5G Postpaid 99",
+            "code": "POST99",
+            "nameEN": "YES Postpaid FT5G 99",
+            "nameBM": "YES Postpaid FT5G 99",
+            "shortDescriptionEN": "YES Postpaid FT5G 99",
+            "longDescriptionEN": "YES Postpaid FT5G 99",
+            "shortDescriptionBM": "YES Postpaid FT5G 99",
+            "longDescriptionBM": "YES Postpaid FT5G 99",
+            "planType": "POSTPAID",
+            "productBundleId": "P99",
+            "isDeleted": false,
+            "deleterId": null,
+            "deletionTime": null,
+            "lastModificationTime": null,
+            "lastModifierId": null,
+            "creationTime": "2022-03-18T03:57:11.4331778",
+            "creatorId": "a278e69c-919b-3c62-b479-3a02485d1fa5",
+            "extraProperties": {},
+            "concurrencyStamp": "037f3db181a449c48236d83624d7950b",
+            "id": "eb7bf095-fff6-d799-fd6a-3a02ad58eb13"
+        },
+        "device": {
+            "code": "XIAOMI_11T_5G_NE",
+            "nameEN": "Xiaomi 11T 5G NE",
+            "nameBM": "Xiaomi 11T 5G NE",
+            "shortDescriptionEN": "Xiaomi 11T 5G NE",
+            "longDescriptionEN": "Xiaomi 11T 5G NE",
+            "shortDescriptionBM": "Xiaomi 11T 5G NE",
+            "longDescriptionBM": "Xiaomi 11T 5G NE",
+            "sku": "string",
+            "threshold": 0,
+            "balance": 10,
+            "status": true,
+            "capacity": "8GB RAM and 256 ROM",
+            "color": "Blue",
+            "contract": "24",
+            "contractName": null,
+            "tnC": "None",
+            "imageURL": "https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11t.png?x41595",
+            "devicePriceMonth": "10",
+            "planPerMonth": "10",
+            "upFrontPayment": "0",
+            "isDeleted": false,
+            "deleterId": null,
+            "deletionTime": null,
+            "lastModificationTime": null,
+            "lastModifierId": null,
+            "creationTime": "2022-03-18T09:46:03.1445417",
+            "creatorId": "a278e69c-919b-3c62-b479-3a02485d1fa5",
+            "extraProperties": {},
+            "concurrencyStamp": "60e1ff1d738242089d56ecfcf735f668",
+            "id": "c3fd673a-7c88-21e2-76cb-3a02ae984f7c"
+        }
+    },
+    {
+        "product": {
+            "code": "770",
+            "nameEN": "Xiaomi 11T 5G NE",
+            "nameBM": "Xiaomi 11T 5G NE",
+            "shortDescriptionEN": "Xiaomi 11T 5G NE 36 Months",
+            "longDescriptionEN": "Xiaomi 11T 5G NE 36 Months",
+            "shortDescriptionBM": "Xiaomi 11T 5G NE 36 Months",
+            "longDescriptionBM": "Xiaomi 11T 5G NE 36 Months",
+            "threshold": 0,
+            "balance": 5,
+            "status": 1,
+            "productBundleId": 100,
+            "planId": "eb7bf095-fff6-d799-fd6a-3a02ad58eb13",
+            "deviceId": "e2dc5629-8d69-f7fa-2744-3a02aebc610b",
+            "isDeleted": false,
+            "deleterId": null,
+            "deletionTime": null,
+            "lastModificationTime": null,
+            "lastModifierId": null,
+            "creationTime": "2022-03-18T10:27:23.7585152",
+            "creatorId": "a278e69c-919b-3c62-b479-3a02485d1fa5",
+            "extraProperties": {},
+            "concurrencyStamp": "c47597b32bc241e290988f84a21c80db",
+            "id": "c3d0a192-7bcb-5e25-b10c-3a02aebe29e5"
+        },
+        "plan": {
+            "planId": "POST99",
+            "planName": "FT5G Postpaid 99",
+            "code": "POST99",
+            "nameEN": "YES Postpaid FT5G 99",
+            "nameBM": "YES Postpaid FT5G 99",
+            "shortDescriptionEN": "YES Postpaid FT5G 99",
+            "longDescriptionEN": "YES Postpaid FT5G 99",
+            "shortDescriptionBM": "YES Postpaid FT5G 99",
+            "longDescriptionBM": "YES Postpaid FT5G 99",
+            "planType": "POSTPAID",
+            "productBundleId": "P99",
+            "isDeleted": false,
+            "deleterId": null,
+            "deletionTime": null,
+            "lastModificationTime": null,
+            "lastModifierId": null,
+            "creationTime": "2022-03-18T03:57:11.4331778",
+            "creatorId": "a278e69c-919b-3c62-b479-3a02485d1fa5",
+            "extraProperties": {},
+            "concurrencyStamp": "037f3db181a449c48236d83624d7950b",
+            "id": "eb7bf095-fff6-d799-fd6a-3a02ad58eb13"
+        },
+        "device": {
+            "code": "XIAOMI_11T_5G_NE_36",
+            "nameEN": "Xiaomi 11T 5G NE",
+            "nameBM": "Xiaomi 11T 5G NE",
+            "shortDescriptionEN": "Xiaomi 11T 5G NE",
+            "longDescriptionEN": "Xiaomi 11T 5G NE",
+            "shortDescriptionBM": "Xiaomi 11T 5G NE",
+            "longDescriptionBM": "Xiaomi 11T 5G NE",
+            "sku": "string",
+            "threshold": 0,
+            "balance": 10,
+            "status": true,
+            "capacity": "8GB RAM and 256 ROM",
+            "color": "Black",
+            "contract": "36",
+            "contractName": null,
+            "tnC": "None",
+            "imageURL": "https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11t.png?x41595",
+            "devicePriceMonth": "10",
+            "planPerMonth": "10",
+            "upFrontPayment": "0",
+            "isDeleted": false,
+            "deleterId": null,
+            "deletionTime": null,
+            "lastModificationTime": null,
+            "lastModifierId": null,
+            "creationTime": "2022-03-18T10:25:26.8275158",
+            "creatorId": "a278e69c-919b-3c62-b479-3a02485d1fa5",
+            "extraProperties": {},
+            "concurrencyStamp": "1d507fcd10084b7389d33bfb941a96ec",
+            "id": "e2dc5629-8d69-f7fa-2744-3a02aebc610b"
+        }
+    }
+]';
+        $product = self::refinde($product);
+//        print_r($product);die();
+
+        return $product;
 
         $products = self::getProductsData();
         foreach ($products['items'] as $k => $v) {
@@ -121,11 +326,43 @@ class Model extends BaseController
         return false;
     }
 
-    public static function refinde($product){
-        return $product;
+    public static function refinde($product)
+    {
+
+        $products = json_decode($product, true);
+        $first = $products[0]['device'];
+        $first ['productCode'] = $products[0]['product']['code'];
+        $first ['plan'] = $products[0]['plan'];
+
+        $processed = array();
+        $processed['selected'] = $first;
+
+        $colors = array();
+        $images = array();
+        foreach ($products as $k => $v) {
+            $c = self::createSlug($v['device']['color']);
+            $tmp = $v['device'];
+            $tmp['productCode'] = $v['product']['code'];
+            $tmp['plan'] = $v['plan'];
+            $colors[$c][] = $tmp;
+
+        }
+        $processed['colors'] = $colors;
+
+        foreach ($processed['colors'] as $k=>$c){
+            $img = $tmp['imageURL'];
+            if(!in_array($img,$images)){
+                $images[] = array('color'=>$k,'img'=>$img);
+            }
+        }
+
+        $processed['images'] = $images;
+
+        return $processed;
     }
 
-    public static function getEligibility($hash){
+    public static function getEligibility($hash)
+    {
         $table = self::$wpdb->prefix . "elevate_eligibility";
         $sql = "SELECT * FROM `$table` WHERE hash='$hash'";
 
@@ -133,26 +370,37 @@ class Model extends BaseController
         $item = $rows[0];
         return $item;
     }
-    public static function addEligibility($data){
+
+    public static function addEligibility($data)
+    {
         $table = self::$wpdb->prefix . "elevate_eligibility";
 
-        $sql = "INSERT INTO `".$table."` 
+        $sql = "INSERT INTO `" . $table . "` 
 		(`mykad`,`name`,`email`,`phone`,`hash`,`status`,`created_at`)
 		VALUES 
-		('".$data['mykad']."','".$data['name']."','".$data['email']."','".$data['phone']."','".$data['hash']."',0,'".date("Y-m-d H:i:s")."')";
+		('" . $data['mykad'] . "','" . $data['name'] . "','" . $data['email'] . "','" . $data['phone'] . "','" . $data['hash'] . "',0,'" . date("Y-m-d H:i:s") . "')";
 
         self::$wpdb->query($sql);
-        $lastid =  self::$wpdb->insert_id;
+        $lastid = self::$wpdb->insert_id;
         return $lastid;
     }
 
-    public static function updateEligibility($hash,$status) {
+    public static function updateEligibility($hash, $status)
+    {
         $table = self::$wpdb->prefix . "elevate_eligibility";
 
-        $sql = "UPDATE ".$table." 
-		SET status='".intval($status)."' WHERE hash='".$hash."'";
+        $sql = "UPDATE " . $table . " 
+		SET status='" . intval($status) . "' WHERE hash='" . $hash . "'";
 
         self::$wpdb->query($sql);
+    }
+
+    public static function createSlug($str, $delimiter = '-')
+    {
+
+        $slug = strtolower(trim(preg_replace('/[\s-]+/', $delimiter, preg_replace('/[^A-Za-z0-9-]+/', $delimiter, preg_replace('/[&]/', 'and', preg_replace('/[\']/', '', iconv('UTF-8', 'ASCII//TRANSLIT', $str))))), $delimiter));
+        return strtolower($slug);
+
     }
 
 

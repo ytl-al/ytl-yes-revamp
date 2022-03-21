@@ -88,6 +88,14 @@ main.site-main {
     color: #2B2B2B;
     margin-bottom: 10px;
 }
+
+.user_sign{
+    max-width: 300px;
+    border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+}
+
 .pink-btn-disable {
     background-color: #D0D5DD;
     border-radius: 20px;
@@ -96,11 +104,11 @@ main.site-main {
     font-weight: 800;
     font-size: 16px;
     text-transform: inherit;
-    color: #64748B;
+    color: #64748B!important;
     border: none;
     text-align: center;
     margin: 12px 0px;
-    text-decoration: none;
+    text-decoration: none!important;
 
 }
 .pink-btn {
@@ -115,7 +123,7 @@ main.site-main {
     border: none;
     text-align: center;
     margin: 12px 0px;
-    text-decoration: none;
+    text-decoration: none!important;
     cursor: pointer;
 }
 
@@ -422,7 +430,7 @@ main.site-main {
     background: #282524;
 }
 
-.color-silver a {
+.color-blue a {
     background: #ADBBDE;
 }
 
@@ -459,6 +467,10 @@ main.site-main {
     color: #fff;
     background: #555;
     opacity: 1;
+}
+
+#productSlide .carousel-item{
+    padding:50px;
 }
 
 #productSlide .carousel-indicators {
@@ -529,6 +541,9 @@ main.site-main {
     border-radius: 20px;
     color: #1A1E47;
     text-decoration: none;
+}
+.btn-link:hover {
+    border: 1px solid #555;
 }
 
 .icon {
@@ -714,10 +729,25 @@ ul.wizard {
     font-size: 19px;
     text-align: center;
 }
+.btn-pink-border-disable {
+    background: #FFFFFF;
+    border: 2px solid #999;
+    color: #777;
+    box-sizing: border-box;
+    border-radius: 30px;
+    display: inline-block;
+    padding: 5px 25px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+.btn-pink-border-disable:hover {
+    border: 2px solid #FF0084!important;
+}
 
 .btn-pink-border {
     background: #FFFFFF;
-    border: 2px solid #FF0084;
+    border: 2px solid #FF0084!important;
     color: #FF0084;
     box-sizing: border-box;
     border-radius: 30px;

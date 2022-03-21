@@ -42,7 +42,7 @@
                                     <div class="col-lg-8 col-12">
                                         <label class="form-label">* MyKad number</label>
                                         <div class="input-group align-items-center">
-                                            <input type="text" minlength="11" maxlength="11" class="form-control"
+                                            <input type="text" minlength="12" maxlength="12" class="form-control"
                                                    id="mykad_number"
                                                    name="mykad" v-model="eligibility.mykad" @input="watchAllowNext"
                                                    @keypress="checkInputCharacters(event, 'numeric', false)"
@@ -179,7 +179,7 @@
                             self.eligibility = elevate.lsData.eligibility;
                         }
 
-                        self.productId = elevate.lsData.product.productID;
+                        self.productId = elevate.lsData.orderDetail.productCode;
 
                         self.updateFields();
                     } else {
@@ -196,8 +196,9 @@
                     var self = this;
                     var params = {
                         "mykad": self.eligibility.mykad.trim(),
-                        "plan_type": "PREPAID"
+                        "plan_type": elevate.lsData.product.selected.plan.planType
                     };
+
                     toggleOverlay();
                     axios.post(apiEndpointURL_elevate + '/verify-eligibility', params)
                         .then((response) => {
@@ -242,8 +243,7 @@
                                 self.elevateCustomer();
                             } else {
                                 toggleOverlay(false);
-                                $('#error').html("System error, please try again.");
-                                console.log(data);
+                                elevate.redirectToPage('eligibility-failure');
                             }
                         })
                         .catch((error) => {
@@ -294,7 +294,7 @@
                         isFilled = false;
                     }
 
-                    var mykad = /[0-9]{11}$/g;
+                    var mykad = /[0-9]{12}$/g;
                     if (self.eligibility.mykad.trim() && !mykad.test(self.eligibility.mykad.trim())) {
                         isFilled = false;
                         $('#mykad_number').addClass('input_error');

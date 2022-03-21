@@ -42,6 +42,7 @@
 
     <section id="cart-body">
         <div class="container p-lg-5 p-3" style="border: 0">
+            <div id="main-vue">
             <div class="row gx-5">
                 <div class="col-lg-8 col-12">
                     <div class="border-box p-4">
@@ -52,25 +53,25 @@
                                     Your device plan -
                                 </div>
                                 <div class="text-bold text-23">
-                                    Xiaomi 11T 5G NE 99 Yes Postpaid FT5G
+                                    {{orderSummary.product.selected.nameEN}}
                                 </div>
                                 <div class="text-20 mt-3">
                                     Your contract -
                                 </div>
                                 <div class="text-bold text-23">
-                                    Normal 24 months
+                                    {{contractTitle}}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div>
                                     <div class="subtitle text-end">
-                                        RMxx.00/ mth
+                                        RM{{formatPrice(parseFloat(orderSummary.product.selected.devicePriceMonth).toFixed(2))}}/ mth
                                     </div>
                                 </div>
                                 <div class="mt-5 text-end">
-                                    <a class="btn-pink-border">
+                                    <!--a href="/elevate/contract" class="btn-pink-border-disable" :class="(contractSigned)?'btn-pink-border':'btn-pink-border-disable'">
                                         <i class="icon icon-signup"></i> Sign Contract
-                                    </a>
+                                    </a-->
                                 </div>
                             </div>
                         </div>
@@ -81,7 +82,7 @@
                                 <h2 class="subtitle">Customer Details</h2>
                             </div>
                             <div class="col-4 text-end">
-                                <a href="#" class="btn-link"><i class="icon icon_edit"></i> Edit Detail</a>
+                                <a href="/elevate/personal" class="btn-link"><i class="icon icon_edit"></i> Edit Detail</a>
                             </div>
                         </div>
 
@@ -89,33 +90,27 @@
                             <div class="col-md-6">
                                 <div class="row mt-3 item_info">
                                     <div class="label">Name</div>
-                                    <div class="content">JANE DOE</div>
+                                    <div class="content text-uppercase">{{deliveryInfo.name}}</div>
                                 </div>
                                 <div class="row mt-3 item_info">
                                     <div class="label">Email</div>
-                                    <div class="content">jan@gmail.com</div>
+                                    <div class="content">{{deliveryInfo.email}}</div>
                                 </div>
                                 <div class="row mt-3 item_info">
                                     <div class="label">Delivery Address</div>
-                                    <div class="content">205, Menara YTL, Jalan Bukit
-                                        Bintang, Kuala Lumpur, 58000, Malaysia
+                                    <div class="content"><span v-if="deliveryInfo.addressMore">{{deliveryInfo.addressMore}},</span> {{deliveryInfo.address}}, {{deliveryInfo.city}}, {{deliveryInfo.state}}, {{deliveryInfo.postcode}}, {{deliveryInfo.country}}
                                     </div>
                                 </div>
-                                <div class="row mt-3 item_info">
-                                    <div class="label">Billing Preferences</div>
-                                    <div class="content">111, Menara YTL, Jalan Bukit
-                                        Bintang, Kuala Lumpur, 58000, Malaysia
-                                    </div>
-                                </div>
+
                             </div>
                             <div class="col-md-6">
                                 <div class="row mt-3 item_info">
                                     <div class="label">ID Number</div>
-                                    <div class="content">9605674356</div>
+                                    <div class="content">{{deliveryInfo.mykad}}</div>
                                 </div>
                                 <div class="row mt-3 item_info">
                                     <div class="label">Contact Number</div>
-                                    <div class="content">0186664356</div>
+                                    <div class="content">{{deliveryInfo.phone}}</div>
                                 </div>
                             </div>
                         </div>
@@ -131,24 +126,16 @@
                                 <h3>TOTAL</h3>
                             </div>
                             <div class="col-6 pt-2 pb-2 text-end">
-                                <h3>RMxx.00/mth</h3>
+                                <h3>RM{{ formatPrice(parseFloat(orderSummary.orderDetail.total).toFixed(2)) }}/mth</h3>
                             </div>
                         </div>
                         <div class="monthly mb-4">
-                            <div class="row mt-2">
+                            <div v-for="(item, index) in orderSummary.orderDetail.orderItems" class="row mt-2">
                                 <div class="col-6">
-                                    <p>Xiaomi 11T 5G NE with Elevate 24 months</p>
+                                    <p>{{item.name}}</p>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <p>RMxx.00/ mth</p>
-                                </div>
-                            </div>
-                            <div class="row mt-2">
-                                <div class="col-6">
-                                    <p>Yes Postpaid FT5G</p>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <p>RMxx.00/ mth</p>
+                                    <p>RM{{item.price}}/ mth</p>
                                 </div>
                             </div>
                             <div class="hr_line"></div>
@@ -157,13 +144,13 @@
                                     <p>Upfront Payment</p>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <p>*RMxx.00</p>
+                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.orderDetail.upfront).toFixed(2)) }}</p>
                                 </div>
                             </div>
                             <div class="hr_line"></div>
                             <div class="row mt-2 ">
                                 <div class="col-1">
-                                    <input type="checkbox" id="subscribe" name="subscribe" value="1">
+                                    <input type="checkbox" id="subscribe" @click="watchAllowNext" name="subscribe" value="1">
                                 </div>
                                 <div class="col-11 text-12">
                                     <p>I here by agree to subscribe to the plan selected in the online form
@@ -175,7 +162,7 @@
                             </div>
                             <div class="row mt-2 ">
                                 <div class="col-1">
-                                    <input type="checkbox" id="consent" name="consent" value="1">
+                                    <input type="checkbox" id="consent" @click="watchAllowNext" name="consent" value="1">
                                 </div>
                                 <div class="col-11 text-12">
                                     <p>I further give consent to YTLC to process my personal data in accordance with
@@ -188,12 +175,14 @@
 
                             <div class="row mt-3 ">
                                 <div class="col-12">
-                                    <button class="btn-round-dark w-100" type="button">Order</button>
+                                    <button class="pink-btn-disable d-block w-100" :class=" allowSubmit?'pink-btn':'pink-btn-disable'"  @click="goNext" type="button">Order</button>
+                                    <div id="error" class="mt-3"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </section>
@@ -201,8 +190,178 @@
 </main>
 <?php require_once('includes/footer.php'); ?>
 <script type="text/javascript">
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll("[data-bs-toggle=\"tooltip\"]"))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
+    $(document).ready(function () {
+        var pageCart = new Vue({
+            el: '#main-vue',
+            data: {
+                productId: null,
+                isCartEmpty: false,
+                contractSigned: false,
+                interval: null,
+                contractTitle: '',
+                taxRate: {
+                    sst: 0.06
+                },
+                contract:{},
+                orderSummary: {
+                    product: {},
+                    orderDetail: {
+                        total: 0.00,
+                        color: null,
+                        contract_id: null,
+                        orderItems: []
+                    },
+                },
+                currentStep: 0,
+                elevate: null,
+                eligibility: {
+                    mykad: '',
+                    name: '',
+                    phone: '',
+                    email: ''
+                },
+                customer: {
+                    id: '',
+                    securityNumber: '',
+                    fullName: '',
+                    productSelected: ''
+                },
+                deliveryInfo: {
+                    uid: '',
+                    productId: '',
+                    mykad: '',
+                    name: '',
+                    phone: '',
+                    email: '',
+                    address: '',
+                    addressMore: '',
+                    addressLine: '',
+                    postcode: '',
+                    state: '',
+                    stateCode: '',
+                    city: '',
+                    cityCode: '',
+                    country: '',
+                    deliveryNotes: '',
+                    sanitize: {
+                        address: '',
+                        addressMore: '',
+                        addressLine: '',
+                        city: '',
+                        country: '',
+                        state: ''
+                    }
+                },
+                allowSelectCity: false,
+                allowSubmit: false
+            },
+
+            created: function () {
+                var self = this;
+                setTimeout(function () {
+                    self.pageInit();
+                }, 500);
+
+                /*self.interval = setInterval(function (){
+                        var self = this;
+                        if (elevate.validateSession(self.currentStep)) {
+                            if (elevate.lsData.contract) {
+                                self.contract = elevate.lsData.contract;
+                                clearInterval(self.interval);
+                            }
+                            console.log("contract",self.contract);
+                        }
+                },5000)*/
+            },
+            methods: {
+                pageInit: function () {
+                    var self = this;
+
+                    if (elevate.validateSession(self.currentStep)) {
+                        self.pageValid = true;
+                        if (elevate.lsData.eligibility) {
+                            self.eligibility = elevate.lsData.eligibility;
+                        }
+                        if (elevate.lsData.customer) {
+                            self.customer = elevate.lsData.customer;
+                        }
+                        if (elevate.lsData.deliveryInfo) {
+                            self.deliveryInfo = elevate.lsData.deliveryInfo;
+                        }
+
+                        if (elevate.lsData.orderDetail) {
+                            self.orderSummary.orderDetail = elevate.lsData.orderDetail;
+                        }
+                        if (elevate.lsData.product) {
+                            self.orderSummary.product = elevate.lsData.product;
+                        }
+
+                        if (elevate.lsData.contract) {
+                            self.contract = elevate.lsData.contract;
+                            self.contractSigned = true;
+                        }
+
+                        self.productId = elevate.lsData.product.productID;
+
+                        if(self.orderSummary.product.selected.contractName){
+                            self.contractTitle = self.orderSummary.product.selected.contractName;
+                        }else{
+                            self.contractTitle = 'Elevate ' + self.orderSummary.product.selected.contract +' months';
+                        }
+
+
+                        self.watchAllowNext();
+                        toggleOverlay(false);
+
+                    } else {
+                        elevate.redirectToPage('cart');
+                    }
+                },
+
+                makeOrder: function (){
+                    var self = this;
+                    var params = self.customer;
+                    toggleOverlay();
+                    axios.post(apiEndpointURL_elevate + '/order/create', params)
+                        .then((response) => {
+                            var data = response.data;
+                            if(data.status == 1){
+                                //save contract info
+                                elevate.lsData.newOrder = data.data;
+                                elevate.updateElevateLSData();
+                                elevate.redirectToPage('thanks');
+
+                            }else{
+                                toggleOverlay(false);
+                                $('#error').html("System error, please try again.");
+                                console.log(data);
+                            }
+                            toggleOverlay(false);
+
+                        })
+                        .catch((error) => {
+                            toggleOverlay(false);
+                            console.log(error, response);
+                        });
+                },
+
+                watchAllowNext:function (){
+                    var self = this;
+                    if(self.contract.id && $('#subscribe').is(':checked')&& $('#consent').is(':checked')){
+                        self.allowSubmit = true
+                    }else{
+                        self.allowSubmit = false
+                    }
+                },
+
+                goNext: function () {
+                    var self = this;
+                    if(self.allowSubmit){
+                        self.makeOrder();
+                    }
+                }
+
+            }
+        });
+    });
 </script>

@@ -19,6 +19,7 @@ class ElevateApi
     const  api_customer_get_by_guid = 'api/Elevate/customer/Id';
     const  api_customer_get_by_nric = 'api/Elevate/customer/securityNumber';
     const  api_customer = 'api/Elevate/customer';
+    const  api_ca_verification = 'api/Elevate/customer/CAVerification';
 
     const  api_order_create = 'api/Elevate/order';
     const  api_order_get_by_id = 'api/Elevate/order/Id';
@@ -40,7 +41,7 @@ class ElevateApi
     const mobile_api_verify_eligbility = 'mobileyos/mobile/ws/v1/json/verifyEligibility';
 
     const  ekyc_api_url = 'https://ekyc-dev-web.azurewebsites.net/';
-    const  ekyc_api_check = 'TBC';
+    const  ekyc_api_check = 'https://ydbp-api-dev.azurewebsites.net/api/EKYCProcessStatus/';
 
     public function __construct()
     {
@@ -78,6 +79,11 @@ class ElevateApi
                 'callback' => array('\Inc\Api\ElevateApi', 'verify_eligibility'),
             ));
 
+            register_rest_route('/elevate/v1', '/ca-verification', array(
+                'methods' => 'POST',
+                'callback' => array('\Inc\Api\ElevateApi', 'ca_verification'),
+            ));
+
             register_rest_route('/elevate/v1', '/verify-caeligibility', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'verify_caeligibility'),
@@ -96,6 +102,11 @@ class ElevateApi
             register_rest_route('/elevate/v1', 'contract', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'elevate_contract'),
+            ));
+
+            register_rest_route('/elevate/v1', 'order/create', array(
+                'methods' => 'POST',
+                'callback' => array('\Inc\Api\ElevateApi', 'elevate_order_create'),
             ));
 
 
@@ -170,6 +181,48 @@ class ElevateApi
         return $response;
     }
 
+    public static function ca_verification(WP_REST_Request $request)
+    {
+
+        $mykad = $request['mykad'];
+        $name = $request['name'];
+
+        $token = self::get_token();
+
+        $args = [
+            'headers' => array(
+                'Accept' => 'text/plain',
+                'Authorization' => 'Bearer ' . $token,
+                'Content-Type' => 'application/json'
+            )
+        ];
+
+        $api_url = self::api_url . self::api_ca_verification . '?MyKadNumber=' . $mykad . '&FullName=' . $name;
+
+        $request = wp_remote_get($api_url, $args);
+
+        if (is_wp_error($request)) {
+            $return['status'] = 0;
+            $return['error'] = "Cannot connect to API server";
+        } else if ($request['response']['code'] != 200) {
+            $return['status'] = 0;
+            $return['error'] = @$request['response'];
+        } else {
+            $data = json_decode($request['body'], true);
+
+            if ($data['response']) {
+                $return['status'] = 1;
+            } else {
+                $return['status'] = 0;
+            }
+            $return['data'] = $data;
+        }
+
+        $response = new WP_REST_Response($return);
+        $response->set_status(200);
+        return $response;
+    }
+
     public static function verify_caeligibility(WP_REST_Request $request)
     {
 
@@ -184,7 +237,7 @@ class ElevateApi
             )
         ];
 
-        $api_url = self::api_url . self::api_caeligibility.'?MyKadNumber='.$request['mykad'].'FullName='.$request['name'];
+        $api_url = self::api_url . self::api_caeligibility . '?MyKadNumber=' . $request['mykad'] . 'FullName=' . $request['name'];
 
         $request = wp_remote_get($api_url, $args);
 
@@ -197,9 +250,9 @@ class ElevateApi
         } else {
             $data = json_decode($request['body'], true);
 
-            if($data['response']){
+            if ($data['response']) {
                 $return['status'] = 1;
-            }else{
+            } else {
                 $return['status'] = 0;
             }
             $return['data'] = $data;
@@ -210,9 +263,10 @@ class ElevateApi
         return $response;
     }
 
-    public static function  elevate_customer_get($mykad){
+    public static function elevate_customer_get($mykad)
+    {
         $params = array(
-             'securityNumber'=>$mykad
+            'securityNumber' => $mykad
         );
         $token = self::get_token();
 
@@ -280,9 +334,10 @@ class ElevateApi
             "orderNumber" => "",
             "verificationStatus" => true,
             "verificationCode" => "",
-            "verificationDate" =>  date("c"),
+            "verificationDate" => date("c"),
             "emailSent" => true
         );
+
         $token = self::get_token();
 
         $args = [
@@ -298,7 +353,7 @@ class ElevateApi
 
         $api_url = self::api_url . self::api_customer;
 
-         $request = wp_remote_post($api_url, $args);
+        $request = wp_remote_post($api_url, $args);
 
         if (is_wp_error($request)) {
             $return['status'] = 0;
@@ -307,7 +362,7 @@ class ElevateApi
             $code = $request['response']['code'];
             $return['status'] = 0;
 
-            $return['error'] = "Sorry, ".$request['response']['message'];
+            $return['error'] = "Sorry, " . $request['response']['message'];
             $return['args'] = $args;
         } else {
             $code = $request['response']['code'];
@@ -326,15 +381,15 @@ class ElevateApi
 
         $id = $request['uid'];
         $params = array(
-            'securityNumber'=>$request['mykad'],
-            'fullName'=>$request['name'],
-            'addressLine1'=>$request['address'],
-            'addressLine2'=>$request['addressMore'],
-            'postCode'=>$request['postcode'],
-            'mobileNumber'=>$request['phone'],
-            'email'=>$request['email'],
-            'state'=>$request['state'],
-            'city'=>$request['city']
+            'securityNumber' => $request['mykad'],
+            'fullName' => $request['name'],
+            'addressLine1' => $request['address'],
+            'addressLine2' => $request['addressMore'],
+            'postCode' => $request['postcode'],
+            'mobileNumber' => $request['phone'],
+            'email' => $request['email'],
+            'state' => $request['state'],
+            'city' => $request['city']
         );
         $params = array(
             "customerID" => "",
@@ -363,7 +418,7 @@ class ElevateApi
             "orderNumber" => "",
             "verificationStatus" => true,
             "verificationCode" => "",
-            "verificationDate" =>  date("c"),
+            "verificationDate" => date("c"),
             "emailSent" => true,
             "lastModificationTime" => date("c")
         );
@@ -379,7 +434,7 @@ class ElevateApi
             'method' => 'PUT'
         ];
 
-        $api_url = self::api_url . self::api_customer.'?id='.$id;
+        $api_url = self::api_url . self::api_customer . '?id=' . $id;
 
         $request = wp_remote_request($api_url, $args);
 
@@ -404,9 +459,34 @@ class ElevateApi
 
     public static function elevate_contract(WP_REST_Request $request)
     {
-        $return['status'] = 1;
-        $params = array();
-        $token = '';//self::get_token();
+        $params = array(
+            "customerName" => $request['name'],
+            "customerNRIC" => $request['mykad'],
+            "orderID" => "",
+            "orderDate" => date("c"),
+            "tenure" => 0,
+            "contractStartDate" => date("c"),
+            "contractEndDate" => date("c", strtotime("+1 months")),
+            "contractStatus" => 0,
+            "contractValue" => 0,
+            "contractSignedDate" => date("c"),
+            "phoneSKU" => "",
+            "phoneColourName" => "",
+            "phoneColourHexCode" => "",
+            "phoneIMEI" => "",
+            "phonePrice" => 0,
+            "phoneCapacity" => "",
+            "deviceName" => "",
+            "drvFees" => 0,
+            "upFrontFees" => 0,
+            "orixDeviceCost" => 0,
+            "programFees" => 0,
+            "contractPDFLocation" => "",
+            "programName" => "",
+            "campaignID" => ""
+        );
+
+        $token = self::get_token();
 
         $args = [
             'headers' => array(
@@ -414,16 +494,14 @@ class ElevateApi
                 'Authorization' => 'Bearer ' . $token,
                 'Content-Type' => 'application/json'
             ),
-            'body' => $params,
-            'method' => 'PUT'
+            'body' => json_encode($params),
+            'method' => 'POST',
+            'data_format' => 'body'
         ];
 
         $api_url = self::api_url . self::api_contract;
 
-        $return['api_url'] = $api_url;
-        $return['request'] = $request;
-        /*
-         $request = wp_remote_post($api_url, $args);
+        $request = wp_remote_post($api_url, $args);
         if (is_wp_error($request)) {
             $return['status'] = 0;
             $return['error'] = "Cannot connect to API server";
@@ -436,7 +514,55 @@ class ElevateApi
             $data = json_decode($request['body'], true);
             $return['status'] = 1;
             $return['data'] = $data;
-        }*/
+        }
+
+        $response = new WP_REST_Response($return);
+        $response->set_status(200);
+        return $response;
+    }
+
+    public static function elevate_order_create(WP_REST_Request $request)
+    {
+        $params = array(
+            "orderNumber"=> "",
+            "customerGUID"=> $request['id'],
+            "orderStatus"=> "New",
+            "error"=> "",
+            "deliveryStatus"=> "Processing Order",
+            "deliveryDate"=> date("c"),
+            "podurl"=> "",
+            "comments"=> ""
+        );
+
+        $token = self::get_token();
+
+        $args = [
+            'headers' => array(
+                'Accept' => 'text/plain',
+                'Authorization' => 'Bearer ' . $token,
+                'Content-Type' => 'application/json'
+            ),
+            'body' => json_encode($params),
+            'method' => 'POST',
+            'data_format' => 'body'
+        ];
+
+        $api_url = self::api_url . self::api_order_create;
+
+        $request = wp_remote_post($api_url, $args);
+        if (is_wp_error($request)) {
+            $return['status'] = 0;
+            $return['error'] = "Cannot connect to API server";
+        } else if ($request['response']['code'] != 200) {
+            $code = $request['response']['code'];
+            $return['status'] = 0;
+            $return['error'] = @$request['response'];
+        } else {
+            $code = $request['response']['code'];
+            $data = json_decode($request['body'], true);
+            $return['status'] = 1;
+            $return['data'] = $data;
+        }
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
@@ -485,19 +611,20 @@ class ElevateApi
     public static function ekyc_check(WP_REST_Request $request)
     {
         $uid = $request['uid'];
-        $mykad = $request['mykad'];
-        $api_url = self::ekyc_api_url . self::ekyc_api_check . '?uid=' . $uid . '&mykad=' . $mykad;
+        $api_url =  self::ekyc_api_check . $uid;
         $params = array();
+
+        $token = self::get_token();
 
         $args = [
             'headers' => array(
+                'Accept' => 'text/plain',
+                'Authorization' => 'Bearer ' . $token,
                 'Content-Type' => 'application/json'
             ),
-            'body' => json_encode($params),
-            'method' => 'POST',
-            'data_format' => 'body'
+            'body' => $params
         ];
-        $request = wp_remote_post($api_url, $args);
+        $request = wp_remote_get($api_url, $args);
 
         if (is_wp_error($request)) {
             $return['status'] = 0;
@@ -693,20 +820,20 @@ class ElevateApi
         }
 
         //$dob = $date . "/" . $month . "/" . $year;
-        $dob = $year.'-'.$month.'-'.$date;
+        $dob = $year . '-' . $month . '-' . $date;
         return $dob;
     }
 
     public static function getGender($nric)
     {
-        $genderDigit = substr($nric, 10,1);
+        $genderDigit = substr($nric, 11, 1);
 
         if ($genderDigit % 2 == 0) //even
         {
-            $gender = 'FEMALE';
+            $gender = 0;// male
         } else //odd
         {
-            $gender = 'MALE';
+            $gender = 1;//female
         }
         return $gender;
     }
