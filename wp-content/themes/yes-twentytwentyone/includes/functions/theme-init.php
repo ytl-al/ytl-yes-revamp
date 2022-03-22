@@ -67,6 +67,22 @@ if (!function_exists('yes_twentytwentyone_setup')) {
         remove_theme_support('widgets-block-editor');
     }
     add_action('after_setup_theme', 'yes_twentytwentyone_setup');
+
+    function yes_twentytwentyone_customizer_setting($wp_customize)
+    {
+        // add a setting 
+        $new_setting_id = 'custom_top_logo';
+        $wp_customize->add_setting($new_setting_id);
+        // Add a control to upload the hover logo
+        $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, $new_setting_id, array(
+            'label' => esc_html__('Top Logo', 'yes.my'),
+            'section' => 'title_tagline', //this is the section where the custom-logo from WordPress is
+            'settings' => $new_setting_id,
+            'priority' => 8 // show it just below the custom-logo
+        )));
+    }
+
+    add_action('customize_register', 'yes_twentytwentyone_customizer_setting');
 }
 
 
@@ -166,7 +182,7 @@ if (!function_exists('yes_register_menus')) {
                     'shop-broadband'    => esc_html__('Broadband', 'yes.my'),
                     'shop-existing-customers' => esc_html__('Existing Customers', 'yes.my'),
                     'shop-device-plans' => esc_html__('Device Plans', 'yes.my'),
-                    
+
                     'support-help-support' => esc_html__('Support - Help & Support', 'yes.my'),
                     'support-tools-services' => esc_html__('Support - Tools & Services', 'yes.my'),
                     'support-contact-us' => esc_html__('Support - Contact Us', 'yes.my'),
@@ -234,9 +250,26 @@ if (!function_exists('display_yes_logo')) {
         $site_url   = get_home_url();
 
         if (has_custom_logo()) {
-            echo '<a href="' . $site_url . '" class="navbar-brand"><img src="' . esc_url($logo[0]) . '" alt="' . get_bloginfo('name') . '" title="' . get_bloginfo('name') . '" class="logo-top" /></a>';
+            echo '<a href="' . $site_url . '" class="navbar-brand d-block d-sm-none"><img src="' . esc_url($logo[0]) . '" alt="' . get_bloginfo('name') . '" title="' . get_bloginfo('name') . '" class="logo-top" /></a>';
         } else {
             echo '<h1><a href="' . $site_url . '">' . get_bloginfo('name') . '</a></h1>';
+        }
+    }
+}
+
+if (!function_exists('display_yes_toplogo')) {
+    /**
+     * Function display_yes_toplogo()
+     * Function to display custom logo in custom markup
+     * 
+     * @since    1.0.0
+     */
+    function display_yes_toplogo()
+    {
+        $custom_top_logo_url = get_theme_mod('custom_top_logo');
+        if (!empty($custom_top_logo_url)) {
+            $site_url   = get_home_url();
+            echo '<li class="text-center d-none d-lg-block"><a href="' . $site_url . '" class="navbar-brand" style="padding:8px"><img src="' . esc_url($custom_top_logo_url) . '" alt="' . get_bloginfo('name') . '" title="' . get_bloginfo('name') . '" class="logo-top" /></a></li>';
         }
     }
 }
