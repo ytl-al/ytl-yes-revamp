@@ -12,6 +12,8 @@ use WP_REST_Response;
 class ElevateApi
 {
 
+    const  API_TIMEOUT = 120;
+
     const  api_url = 'https://ydbp-api-dev.azurewebsites.net/';
     const  auth_path_auth = 'connect/token';
 
@@ -155,6 +157,7 @@ class ElevateApi
             ),
             'body' => json_encode($params),
             'method' => 'POST',
+            'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
 
@@ -348,6 +351,7 @@ class ElevateApi
             ),
             'body' => json_encode($params),
             'method' => 'POST',
+            'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
 
@@ -431,7 +435,8 @@ class ElevateApi
                 'Content-Type' => 'application/json'
             ),
             'body' => json_encode($params),
-            'method' => 'PUT'
+            'method' => 'PUT',
+            'timeout' => self::API_TIMEOUT
         ];
 
         $api_url = self::api_url . self::api_customer . '?id=' . $id;
@@ -496,6 +501,7 @@ class ElevateApi
             ),
             'body' => json_encode($params),
             'method' => 'POST',
+            'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
 
@@ -544,6 +550,7 @@ class ElevateApi
             ),
             'body' => json_encode($params),
             'method' => 'POST',
+            'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
 
@@ -583,6 +590,7 @@ class ElevateApi
             ),
             'body' => json_encode($params),
             'method' => 'POST',
+            'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
         $request = wp_remote_post($api_url, $args);
@@ -689,7 +697,8 @@ class ElevateApi
                 'Content-Type' => 'application/x-www-form-urlencoded'
             ),
             'body' => $params,
-            'method' => 'POST'
+            'method' => 'POST',
+            'timeout' => self::API_TIMEOUT
         ];
 
 
@@ -744,6 +753,7 @@ class ElevateApi
             'headers' => array('Content-Type' => 'application/json; charset=utf-8', 'Authorization' => 'BASIC ' . $authorization_key),
             'body' => json_encode($params),
             'method' => 'POST',
+            'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
         $api_url = self::mobile_api_url . self::mobile_auth_path_auth;

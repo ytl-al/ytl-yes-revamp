@@ -155,6 +155,37 @@
                     fullName: '',
                     productSelected:''
                 },
+                orderSummary: {
+                    product: {
+                        selected:{
+                            productCode:'',
+                            code:'',
+                            nameEN:'',
+                            shortDescriptionEN:'',
+                            productBundleId:'',
+                            extraProperties:'',
+                            contractName:'',
+                            capacity:'',
+                            color:'',
+                            contract:'',
+                            devicePriceMonth:'',
+                            planPerMonth:'',
+                            upFrontPayment:0.0,
+                            plan:{
+                                planId:'',
+                                nameEN:'',
+                                shortDescriptionEN:'',
+                            }
+                        },
+                        colors:[]
+                    },
+                    orderDetail: {
+                        total: 0.00,
+                        color: null,
+                        productCode: null,
+                        orderItems:[]
+                    },
+                },
                 input: {
                     mykad: {field: '#mykad_number', errorMessage: '#em-mykad'},
                     name: {field: '#full_name', errorMessage: '#em-name'},

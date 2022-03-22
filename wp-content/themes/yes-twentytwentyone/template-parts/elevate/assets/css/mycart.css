@@ -149,6 +149,15 @@ main.site-main {
     border-radius: 10px 0 0 10px;
 }
 
+.bg-checkout3{
+    background-image: url("../images/checkout_bg3.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 10px 0 0 10px;
+}
+
+
 .checkout-left {
     margin-top: 250px;
 }
@@ -157,6 +166,11 @@ main.site-main {
     margin-top: 190px;
     min-height: 420px;
 }
+.checkout-left3{
+    margin-top: 110px;
+    min-height: 420px;
+}
+
 
 .flex-container {
     height: 100%;

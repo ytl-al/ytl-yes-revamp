@@ -262,16 +262,6 @@
                     self.pageInit();
                 }, 500);
 
-                /*self.interval = setInterval(function (){
-                        var self = this;
-                        if (elevate.validateSession(self.currentStep)) {
-                            if (elevate.lsData.contract) {
-                                self.contract = elevate.lsData.contract;
-                                clearInterval(self.interval);
-                            }
-                            console.log("contract",self.contract);
-                        }
-                },5000)*/
             },
             methods: {
                 pageInit: function () {
@@ -318,36 +308,9 @@
                     }
                 },
 
-                makeOrder: function (){
-                    var self = this;
-                    var params = self.customer;
-                    toggleOverlay();
-                    axios.post(apiEndpointURL_elevate + '/order/create', params)
-                        .then((response) => {
-                            var data = response.data;
-                            if(data.status == 1){
-                                //save contract info
-                                elevate.lsData.newOrder = data.data;
-                                elevate.updateElevateLSData();
-                                elevate.redirectToPage('thanks');
-
-                            }else{
-                                toggleOverlay(false);
-                                $('#error').html("System error, please try again.");
-                                console.log(data);
-                            }
-                            toggleOverlay(false);
-
-                        })
-                        .catch((error) => {
-                            toggleOverlay(false);
-                            console.log(error, response);
-                        });
-                },
-
                 watchAllowNext:function (){
                     var self = this;
-                    if(self.contract.id && $('#subscribe').is(':checked')&& $('#consent').is(':checked')){
+                    if($('#subscribe').is(':checked')&& $('#consent').is(':checked')){
                         self.allowSubmit = true
                     }else{
                         self.allowSubmit = false
@@ -357,7 +320,7 @@
                 goNext: function () {
                     var self = this;
                     if(self.allowSubmit){
-                        self.makeOrder();
+                        elevate.redirectToPage('contract');
                     }
                 }
 

@@ -94,6 +94,7 @@
                 ekyc_url: 'https://ekyc-dev-web.azurewebsites.net/',
                 totalAttempt:0,
                 maxAttempts:60,
+                interval: null,
                 qrcode: null,
                 eligibility: {
                     uid: '',
@@ -107,6 +108,37 @@
                     securityNumber: '',
                     fullName: '',
                     productSelected:''
+                },
+                orderSummary: {
+                    product: {
+                        selected:{
+                            productCode:'',
+                            code:'',
+                            nameEN:'',
+                            shortDescriptionEN:'',
+                            productBundleId:'',
+                            extraProperties:'',
+                            contractName:'',
+                            capacity:'',
+                            color:'',
+                            contract:'',
+                            devicePriceMonth:'',
+                            planPerMonth:'',
+                            upFrontPayment:0.0,
+                            plan:{
+                                planId:'',
+                                nameEN:'',
+                                shortDescriptionEN:'',
+                            }
+                        },
+                        colors:[]
+                    },
+                    orderDetail: {
+                        total: 0.00,
+                        color: null,
+                        productCode: null,
+                        orderItems:[]
+                    },
                 },
             },
 
@@ -131,6 +163,7 @@
                         if (elevate.lsData.customer) {
                             self.customer = elevate.lsData.customer;
                         }
+
                         if(!self.customer.id){
                             elevate.redirectToPage('eligibilitycheck');
                         }else{
@@ -148,7 +181,7 @@
                         fname: self.eligibility.name
                     };
                     self.makeCode(self.customer.id);
-                    setInterval(function (){
+                    self.interval = setInterval(function (){
                         self.eKYC_check();
                     },15000);
 
@@ -169,6 +202,7 @@
                                 if(data.status == 1){
                                     if(data.data.processStatus == "OCRImageCompleted"){
                                         //success
+                                        clearInterval(self.interval);
                                         self.CAEligibility();
                                     }else{
                                         //failure
@@ -198,13 +232,12 @@
 
                             var data = response.data;
                             if (data.status == 1) {
-
-                                self.isCAEligibilityCheck = true;
-                                self.redirectYWOS();
+                                elevate.redirectToPage('personal');
                             } else {
                                 toggleOverlay(false);
                                 $('#error').html("System error, please try again.");
                                 console.log(data);
+                                elevate.redirectToPage('/compasia-fail');
                             }
                         })
                         .catch((error) => {

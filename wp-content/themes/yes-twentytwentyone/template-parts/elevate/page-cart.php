@@ -145,7 +145,7 @@
                                 <div class="selectContractWrap mt-3">
                                     <ul>
                                         <li v-for="(contract, index) in orderSummary.product.colors[orderSummary.orderDetail.color]" @click="changeContract(contract.productCode)" :data-contract-id="contract.productCode" :class="'contract_' + contract.productCode + ((parseFloat(orderSummary.orderDetail.productCode) == parseFloat(contract.productCode))?' selected':'')"><a>
-                                                <span v-if="contract.contractName">{{contract.contractName}}</span>
+                                                <span v-if="contract.contractName == 'Normal'">Normal {{contract.contract}} Months</span>
                                                 <span v-else >Elevate {{contract.contract}} Months</span>
                                             </a></li>
                                     </ul>
@@ -228,7 +228,7 @@
                 productId: null,
                 isCartEmpty: false,
                 hasFetchPlan: false,
-                ywos_contract:695,
+                ywos_contract:"Normal",
                 taxRate: {
                     sst: 0.06
                 },
@@ -291,6 +291,7 @@
                        if(!elevate.lsData.product){
                             self.ajaxGetPlanData();
                         }else{
+                            self.orderSummary.product.selected = self.selectedProduct(self.orderSummary.orderDetail.color, self.orderSummary.orderDetail.productCode);
                             self.isValidCart();
                         }
 
@@ -364,7 +365,6 @@
                     $('.selectColorWrap .selected').removeClass('selected');
                     $('.selectColorWrap .color-'+color).addClass('selected');
                     self.orderSummary.orderDetail.color = color;
-                    self.orderSummary.product.selected = self.orderSummary.product.colors[color][0];
 
                     self.updateSummary();
 
@@ -376,8 +376,22 @@
                     $('.selectContractWrap .contract_' + contract).addClass('selected');
 
                     self.orderSummary.orderDetail.productCode = contract;
+                    self.orderSummary.product.selected = self.selectedProduct(self.orderSummary.orderDetail.color,contract);
 
                     self.updateSummary();
+                },
+
+                selectedProduct: function (color,contract){
+                    var self = this;
+
+                    for(var i=0; i< self.orderSummary.product.colors[color].length; i++){
+
+                        if(self.orderSummary.product.colors[color][i].productCode == contract){
+                            return self.orderSummary.product.colors[color][i];
+                        }
+                    }
+
+                    return self.orderSummary.product.colors[color][0];
                 },
 
                 isValidCart: function (){
@@ -397,7 +411,9 @@
                 goNext: function(){
                     var self = this;
                     //check normal contract
-                    if(self.orderSummary.orderDetail.productCode == self.ywos_contract){
+                    //console.log(self.orderSummary.orderDetail.productCode,self.orderSummary.product.selected.contractName);
+                    //return ;
+                    if(self.orderSummary.product.selected.contractName == self.ywos_contract){
                         ywos.buyPlan(self.orderSummary.orderDetail.productCode);
                     }else{
                         if(!self.orderSummary.orderDetail.productCode){

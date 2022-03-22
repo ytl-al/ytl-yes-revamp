@@ -181,6 +181,34 @@
                     }
 
                 },
+
+                makeOrder: function (){
+                    var self = this;
+                    var params = self.customer;
+                    toggleOverlay();
+                    axios.post(apiEndpointURL_elevate + '/order/create', params)
+                        .then((response) => {
+                            var data = response.data;
+                            if(data.status == 1){
+                                //save contract info
+                                elevate.lsData.newOrder = data.data;
+                                elevate.updateElevateLSData();
+                                elevate.redirectToPage('thanks');
+
+                            }else{
+                                toggleOverlay(false);
+                                $('#error').html("System error, please try again.");
+                                console.log(data);
+                            }
+                            toggleOverlay(false);
+
+                        })
+                        .catch((error) => {
+                            toggleOverlay(false);
+                            console.log(error, response);
+                        });
+                },
+
                 submit_contract: function () {
                     var self = this;
                     var params = self.eligibility;
@@ -190,11 +218,11 @@
                             var data = response.data;
                             if(data.status == 1){
                                 //save contract info
+                                self.contract = data.data;
 
-                                elevate.lsData.contract = data.data;
                                 elevate.updateElevateLSData();
-                                elevate.redirectToPage('review');
-
+                                elevate.lsData.contract = data.data;
+                                self.makeOrder();
                             }else{
                                 toggleOverlay(false);
                                 $('#error').html("System error, please try again.");
