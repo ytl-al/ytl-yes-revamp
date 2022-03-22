@@ -7,7 +7,7 @@
                 <nav class="navbar navbar-expand-lg">
                     <div class="container">
                         <a class="navbar-brand d-flex justify-content-start" href="/"><img
-                                    src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/logo.svg"
+                                    src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/logomark.svg"
                                     class="logo-top"/></a>
                         <div class="justify-content-end" id="navbarSupportedContent">
                             <div class="d-flex align-items-center justify-content-end">
@@ -413,6 +413,8 @@
                     //check normal contract
                     //console.log(self.orderSummary.orderDetail.productCode,self.orderSummary.product.selected.contractName);
                     //return ;
+                    toggleOverlay();
+
                     if(self.orderSummary.product.selected.contractName == self.ywos_contract){
                         ywos.buyPlan(self.orderSummary.orderDetail.productCode);
                     }else{

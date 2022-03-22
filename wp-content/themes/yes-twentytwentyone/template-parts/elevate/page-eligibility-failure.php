@@ -20,19 +20,35 @@
     </div>
 </header>
 <main>
+    <section id="grey-innerbanner">
+        <div class="container">
+            <ul class="wizard">
+                <li ui-sref="firstStep" class="completed">
+                    <span>1. Eligibility check</span>
+                </li>
+                <li ui-sref="secondStep" class="completed">
+                    <span>2. ID verification</span>
+                </li>
+                <li ui-sref="thirdStep">
+                    <span>3. Delivery details</span>
+                </li>
+                <li ui-sref="fourthStep">
+                    <span>4. Review and order</span>
+                </li>
+            </ul>
+        </div>
+    </section>
     <section id="cart-body">
         <div class="container" style="border: 0">
             <div id="main-vue">
-                <div class="border-box p-lg-5">
-                    <div class="text-center">
-                        <h2 class="subtitle">You’re not eligible, but here’s what we can offer you!</h2>
+                <div class="border-box">
+                    <div class="text-center p-lg-5">
+                        <h2 class="subtitle">Sorry! We ran a check and you did not pass our ID verification</h2>
                         <p style="max-width: 750px; margin: auto">
-                            You are currently not elligible for our current plan with Elevate, however we’ve picked out
-                            some
-                            amanzing plans more suited to your needs!
+                            It seems like you did not qualify, however we’ve picked out some other<br> plans that you might be interested in.
                         </p>
                     </div>
-                    <div class="tabs_content mt-5">
+                    <div class="tabs_content">
                         <div class="plan_tabs">
                             <ul class="nav nav-pills nav-fill">
                                 <li class="nav-item">
@@ -43,11 +59,11 @@
                                 </li>
                             </ul>
                         </div>
-                        <div id="tab-postpaid" class="mt-5 tabcontent">
+                        <div id="tab-postpaid" class="mt-3 p-lg-5 tabcontent">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="plan-item p-3" data-planid="707">
-                                        <div class="subtitle">Kasi Up<br>Postpaid 49<br>(Contract)</div>
+                                        <div class="subtitle">Kasi Up<br>Postpaid 49<br>(Contract)<span class="circle"><i class="fa fa-check"></i></span></div>
                                         <ul class="plan-list mt-3 mb-3">
                                             <li>100GB</li>
                                             <li>24 months Contract</li>
@@ -57,12 +73,12 @@
                                             <li>Unlimited borak</li>
                                         </ul>
                                         <br/>
-                                        <div class="plan_price">RM49 <br/>for 100GB</div>
+                                        <div class="plan_price">RM49 for 100GB</div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="plan-item p-3" data-planid="706">
-                                        <div class="subtitle">Kasi Up <br>Postpaid 49 <br>(No Contract)</div>
+                                        <div class="subtitle">Kasi Up <br>Postpaid 49 <br>(No Contract)<span class="circle"><i class="fa fa-check"></i></span></div>
                                         <ul class="plan-list mt-3 mb-3">
                                             <li>100GB</li>
                                             <li>Kasi Up rewards</li>
@@ -70,12 +86,12 @@
                                             <li>Unlimited borak</li>
                                         </ul>
                                         <br/><br/><br/>
-                                        <div class="plan_price">RM49 <br/>for 100GB</div>
+                                        <div class="plan_price">RM49 for 100GB</div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="plan-item p-3" data-planid="759">
-                                        <div class="subtitle">Pakej YES <br>Peranti Keluarga<br> Malaysia</div>
+                                        <div class="subtitle">Pakej YES <br>Peranti Keluarga<br> Malaysia<span class="circle"><i class="fa fa-check"></i></span></div>
                                         <ul class="plan-list mt-3 mb-3">
                                             <li>100GB</li>
                                             <li>12 Months Contract</li>
@@ -85,17 +101,17 @@
                                             <li>On-Net: Unlimited<br>
                                                 Off-Net: RM 0.09</li>
                                         </ul>
-                                        <div class="plan_price">RM49 <br/>for 100GB</div>
+                                        <div class="plan_price">RM49 for 100GB</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="tab-prepaid" class="mt-5 tabcontent" style="display: none">
+                        <div id="tab-prepaid" class="mt-3 p-lg-5 tabcontent" style="display: none">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="plan-item p-3" data-planid="710">
-                                        <div class="subtitle">Kasi Up Prepaid 15
-                                            (Add-On)</div>
+                                        <div class="subtitle">Kasi Up Prepaid 15</br>
+                                            (Add-On)<span class="circle"><i class="fa fa-check"></i></span></div>
                                         <ul class="plan-list mt-3 mb-3">
                                             <li>10GB</li>
                                             <li>Kasi Up rewards</li>
@@ -104,13 +120,13 @@
                                             <li>4G paling power</li>
                                             <li>No hidden fees</li>
                                         </ul><br/>
-                                        <div class="plan_price">RM15 <br/>for 10GB</div>
+                                        <div class="plan_price">RM15 for 10GB</div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="plan-item p-3" data-planid="758">
-                                        <div class="subtitle">Pakej YES Remaja
-                                            Keluarga Malaysia</div>
+                                        <div class="subtitle">Pakej YES Remaja</br>
+                                            Keluarga Malaysia<span class="circle"><i class="fa fa-check"></i></span></div>
                                         <ul class="plan-list mt-3 mb-3">
                                             <li>20GB</li>
                                             <li>Kasi Up rewards</li>
@@ -119,12 +135,12 @@
                                             <li>4G paling power</li>
                                             <li>No hidden fees</li>
                                         </ul><br/>
-                                        <div class="plan_price">RM30 <br/>for 20GB</div>
+                                        <div class="plan_price">RM30 for 20GB</div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="plan-item p-3" data-planid="767">
-                                        <div class="subtitle">Kasi Up Prepaid Unlimited</div>
+                                        <div class="subtitle">Kasi Up</br> Prepaid Unlimited <span class="circle"><i class="fa fa-check"></i></span></div>
                                         <ul class="plan-list mt-3 mb-3">
                                             <li>Unlimited GB
                                                 (7Mbps & 9GB Hotspot Data)</li>
@@ -134,14 +150,15 @@
                                             <li>4G paling power</li>
                                             <li>No hidden fees</li>
                                         </ul>
-                                        <div class="plan_price">RM30 <br/>for Unlimited</div>
+                                        <div class="plan_price">RM30 for Unlimited</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="p-3 text-end">
-                            <a href="/5gplans/" id class="btn-cancel text-uppercase mr-2">Cancel</a>
-                            <a id="btnChoosePlan" @click="goNext" class="pink-btn-disable text-uppercase">choose plan</a>
+                        <div class="p-lg-5 text-end">
+                            <a id="btnChoosePlan" @click="goNext" class="pink-btn-disable mr-2 text-uppercase">choose plan</a>
+                            <a href="/5gplans/" id class="btn-cancel text-uppercase ">Cancel</a>
+
                         </div>
                     </div>
                 </div>

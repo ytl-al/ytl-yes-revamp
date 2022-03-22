@@ -220,16 +220,17 @@ main.site-main {
     color: #C4C4C4;
     cursor: pointer;
 }
-
+.plan_tabs{
+    border-bottom: 2px solid #F5F5F5;
+}
 .plan-item {
-    border: 0.5px solid #C5C5C5;
+    border:3px solid transparent;
     box-sizing: border-box;
     border-radius: 8px;
     background: #FFFFFF;
-    border: 1px solid #F4F4F3;
     box-shadow: 0px 3.63441px 10.9032px rgb(0 0 0 / 10%);
-    border: 3px solid transparent;
     cursor: pointer;
+    position: relative;
 }
 
 .plan-item:hover {
@@ -249,11 +250,11 @@ main.site-main {
 }
 
 .plan-item .plan_price {
-    color: #2F3BF5;
+    color: #2B2B2B;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 800;
-    font-size: 32px;
+    font-size: 18px;
     line-height: 40px;
 }
 
@@ -265,17 +266,22 @@ main.site-main {
 
 .plan_tabs .nav-link {
     background-color: transparent !important;
-    font-weight: 600;
-    font-size: 20px;
+    font-weight: bold;
+    font-size: 16px;
     color: #C4C4C4;
-    border-bottom: 3px solid #C4C4C4;
+    border-bottom: 8px solid #C4C4C4;
     border-radius: 0;
     cursor: pointer;
 }
 
 .plan_tabs .active {
     color: #FF0084 !important;
-    border-bottom: 3px solid #FF0084 !important;
+    border-bottom: 8px solid #FF0084 !important;
+}
+
+.plan_tabs .nav-fill .nav-item .nav-link,.plan_tabs .nav-justified .nav-item .nav-link {
+    width: 120px;
+    margin: auto;
 }
 
 .payment .nav-pills .nav-link {
@@ -619,6 +625,7 @@ main.site-main {
     font-weight: 800;
     font-size: 33px;
     line-height: 40px;
+    height: 72px;
 }
 
 .back-btn {
@@ -1040,6 +1047,30 @@ ul.wizard {
 .border-box {
     border: 0.5px solid #ebebeb;
     border-radius: 10px;
+}
+
+.circle{
+    background: #2F3BF5;
+    display: inline-block;
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.circle i{
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAXCAYAAAD6FjQuAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACbSURBVHgB1dRLDYAwEEXRJwEJSEAKEpCAA5CAg9YREpCAhKGEsqAp6W+mgZtM2L2zosDfI6LO3GquhWQW2ulqEwMdiMTAc9AO++IDA9Bdj9IioQGlfQ0aQyOTOcUAzYiA7lQtyAtKQg/QfBu6nqB8yA7pwIhigRJAHqgQnJFbIrigtEhQg6sAqMHdC6ghlQOukM6C53/WoEYc0AHpQzv4UgvEGwAAAABJRU5ErkJggg==');
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    height: 28px;
+    width: 28px;
+    margin: auto;
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {

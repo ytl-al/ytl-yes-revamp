@@ -20,6 +20,14 @@ html, body {
     color: red;
 }
 
+.nav-container {
+    background-color: #1A1E47!important;
+}
+
+.footer {
+    background-color: #1A1E47!important;
+}
+
 main.site-main {
     flex: auto;
 }
@@ -91,9 +99,13 @@ main.site-main {
 
 .user_sign{
     max-width: 300px;
-    border-radius: 0;
-    border: 0;
-    border-bottom: 1px solid #ccc;
+    border-radius: 0!important;
+    border: 0!important;
+    border-bottom: 1px solid #ccc!important;
+}
+
+.summary-box .monthly{
+    font-size: 14px;
 }
 
 .pink-btn-disable {
@@ -101,7 +113,7 @@ main.site-main {
     border-radius: 20px;
     padding: 9px 30px;
     display: inline-block;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 16px;
     text-transform: inherit;
     color: #64748B!important;
@@ -116,7 +128,7 @@ main.site-main {
     border-radius: 20px;
     padding: 9px 30px;
     display: inline-block;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 16px;
     text-transform: inherit;
     color: #FFF !important;
@@ -131,6 +143,13 @@ main.site-main {
 
 .input_error {
     border: 1px solid #ff0000 !important;
+}
+.bg-checkout {
+    background-image: url("../images/checkout.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 10px 0 0 10px;
 }
 
 .bg-checkout1 {
@@ -157,11 +176,9 @@ main.site-main {
     border-radius: 10px 0 0 10px;
 }
 
-
 .checkout-left {
     margin-top: 250px;
 }
-
 .checkout-left2 {
     margin-top: 190px;
     min-height: 420px;
@@ -203,16 +220,17 @@ main.site-main {
     color: #C4C4C4;
     cursor: pointer;
 }
-
+.plan_tabs{
+    border-bottom: 2px solid #F5F5F5;
+}
 .plan-item {
-    border: 0.5px solid #C5C5C5;
+    border:3px solid transparent;
     box-sizing: border-box;
     border-radius: 8px;
     background: #FFFFFF;
-    border: 1px solid #F4F4F3;
     box-shadow: 0px 3.63441px 10.9032px rgb(0 0 0 / 10%);
-    border: 3px solid transparent;
     cursor: pointer;
+    position: relative;
 }
 
 .plan-item:hover {
@@ -232,11 +250,11 @@ main.site-main {
 }
 
 .plan-item .plan_price {
-    color: #2F3BF5;
+    color: #2B2B2B;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 800;
-    font-size: 32px;
+    font-size: 18px;
     line-height: 40px;
 }
 
@@ -248,17 +266,22 @@ main.site-main {
 
 .plan_tabs .nav-link {
     background-color: transparent !important;
-    font-weight: 600;
-    font-size: 20px;
+    font-weight: bold;
+    font-size: 16px;
     color: #C4C4C4;
-    border-bottom: 3px solid #C4C4C4;
+    border-bottom: 8px solid #C4C4C4;
     border-radius: 0;
     cursor: pointer;
 }
 
 .plan_tabs .active {
     color: #FF0084 !important;
-    border-bottom: 3px solid #FF0084 !important;
+    border-bottom: 8px solid #FF0084 !important;
+}
+
+.plan_tabs .nav-fill .nav-item .nav-link,.plan_tabs .nav-justified .nav-item .nav-link {
+    width: 95px;
+    margin: auto;
 }
 
 .payment .nav-pills .nav-link {
@@ -267,6 +290,11 @@ main.site-main {
     background: #F9F7F4;
     box-shadow: 2px 2px 12px rgb(112 144 176 / 25%);
     border-radius: 8px;
+}
+
+.leftColor{
+    background: linear-gradient(80.9deg, #FF0084 16.48%, #6F29D2 85.6%, #2F3BF5 96.9%);
+    border-radius: 5px 0px 0px 5px;
 }
 
 #grey-innerbanner {
@@ -309,7 +337,7 @@ main.site-main {
     font-weight: bold;
     font-size: 23px;
     line-height: 28px;
-    color: #FF0084;
+    color: #000;
     letter-spacing: -0.02em;
 }
 
@@ -332,7 +360,7 @@ main.site-main {
 .item_info .label {
     font-family: Open Sans;
     font-style: normal;
-    font-weight: normal;
+    font-weight: bold;
     font-size: 20px;
     line-height: 24px;
 }
@@ -340,8 +368,8 @@ main.site-main {
 .item_info .content {
     font-family: Open Sans;
     font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
+    font-weight: normal;
+    font-size: 16px;
     line-height: 22px;
 }
 
@@ -367,6 +395,14 @@ main.site-main {
     font-size: 12px;
     line-height: 16px;
 
+}
+
+.btn-edit{
+    color:#000;
+    text-decoration: none;
+}
+.btn-edit:hover{
+    text-decoration:underline;
 }
 
 .content p {
@@ -460,19 +496,18 @@ main.site-main {
 }
 
 .selectContractWrap li {
-    opacity: 0.6;
-    border: 1px solid #FF0084;
+    border: 2px solid #1A1E47;
     box-sizing: border-box;
     border-radius: 20px;
     display: inline-block;
     margin: 0 12px 12px 0;
-    padding: 8px 20px;
+    padding: 5px 20px;
     cursor: pointer;
 }
 
 .selectContractWrap li.selected {
     color: #fff;
-    background: #FF0084;
+    background: #1A1E47;
     opacity: 1;
 }
 
@@ -595,6 +630,7 @@ main.site-main {
     font-weight: 800;
     font-size: 33px;
     line-height: 40px;
+    height: 72px;
 }
 
 .back-btn {
@@ -627,7 +663,7 @@ ul.wizard li::before {
     line-height: 1.2em;
     border-radius: 50%;
     background-color: #F9F7F4;
-    border: solid 1px #FF0084;
+    border: solid 1px #1A1E47;
     cursor: pointer;
     z-index: 1;
 }
@@ -638,7 +674,7 @@ ul.wizard li ~ li::after {
     width: 100%;
     right: 50%;
     height: 1px;
-    background-color: #FF0084;
+    background-color: #1A1E47;
     top: calc(0.75em - 3px);
     z-index: 0;
 }
@@ -649,53 +685,55 @@ ul.wizard li.completed ~ li::after {
     width: 100%;
     right: 50%;
     height: 1px;
-    background-color: #FF0084;
+    background-color: #1A1E47;
     top: calc(0.75em - 3px);
     z-index: 0;
 }
 
 ul.wizard li.active::before {
-    background: #FF0084;
+    background: #1A1E47;
     color: white;
 }
 
 ul.wizard li.active::after {
-    background: #FF0084;
+    background: #1A1E47;
     color: white;
 }
 
 ul.wizard span {
     color: #333;
-    font-size: 16px;
+    font-size: 12px;
     word-break: break-all;
     margin-top: 7px;
+    text-transform: uppercase;
 }
 
 ul.wizard li.completed::before {
-    background: #FF0084;
+    background: #1A1E47;
     color: #333;
 }
 
 ul.wizard li.completed span {
     color: #2B2B2B;
-    font-size: 16px;
+    font-size: 12px;
     margin-top: 7px;
     font-weight: bold;
+    text-transform: uppercase;
 }
 
 ul.wizard li.completed + li::after {
     /*  line after circle  */
-    background: #FF0084;
+    background: #1A1E47;
 }
 
 ul.wizard li.completed::after {
     /*  line before circle  */
-    background: #FF0084;
+    background: #1A1E47;
 
 }
 
 ul.wizard {
-    max-width: 600px;
+    max-width: 1000px;
     margin: auto;
 }
 
@@ -713,7 +751,7 @@ ul.wizard {
 #cart-body label {
     font-family: Open Sans;
     font-style: normal;
-    font-weight: normal;
+    font-weight: 600;
     font-size: 16px;
 }
 
@@ -900,7 +938,8 @@ ul.wizard {
 }
 
 .footer-white {
-    background-color: #FFF;
+    margin-top: 50px;
+    background: #F7F8F9;
     padding-top: 0px;
 }
 
@@ -911,7 +950,7 @@ ul.wizard {
 
 .footer-white .copyright p {
     color: #525252;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
 }
 
@@ -953,7 +992,7 @@ ul.wizard {
     height: 250px;
     margin: auto;
     padding: 20px;
-    background: #fff;
+    background: #F4F4F3;
 }
 
 #qrcode img {
@@ -982,7 +1021,6 @@ ul.wizard {
 }
 
 .verify-body {
-    background: #F4F4F3;
     border-radius: 10px;
     text-align: center;
     padding: 50px 0;
@@ -992,7 +1030,7 @@ ul.wizard {
     padding: 0;
     margin: auto;
     list-style: none;
-    max-width: 400px;
+    max-width: 450px;
     text-align: left;
 }
 
@@ -1014,6 +1052,30 @@ ul.wizard {
 .border-box {
     border: 0.5px solid #ebebeb;
     border-radius: 10px;
+}
+
+.plan-item-selected .circle{
+    background: #2F3BF5;
+    display: inline-block;
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+.plan-item-selected .circle i{
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAXCAYAAAD6FjQuAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACbSURBVHgB1dRLDYAwEEXRJwEJSEAKEpCAA5CAg9YREpCAhKGEsqAp6W+mgZtM2L2zosDfI6LO3GquhWQW2ulqEwMdiMTAc9AO++IDA9Bdj9IioQGlfQ0aQyOTOcUAzYiA7lQtyAtKQg/QfBu6nqB8yA7pwIhigRJAHqgQnJFbIrigtEhQg6sAqMHdC6ghlQOukM6C53/WoEYc0AHpQzv4UgvEGwAAAABJRU5ErkJggg==');
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    height: 28px;
+    width: 28px;
+    margin: auto;
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {

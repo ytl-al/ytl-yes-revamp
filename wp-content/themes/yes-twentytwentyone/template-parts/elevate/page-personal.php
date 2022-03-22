@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="col-lg-4 col-6 text-lg-center text-end">
-                <h1 class="title_checkout p-3"></h1>
+                <h1 class="title_checkout p-3">Check Out</h1>
             </div>
             <div class="col-lg-4">
 
@@ -27,15 +27,17 @@
             <div class="container">
                 <ul class="wizard">
                     <li ui-sref="firstStep" class="completed">
-                        <span>1. Personal Details</span>
+                        <span>1. Eligibility check</span>
                     </li>
-                    <li ui-sref="secondStep">
-                        <span>2. Yes Face ID</span>
+                    <li ui-sref="secondStep" class="completed">
+                        <span>2. ID verification</span>
                     </li>
-                    <li ui-sref="thirdStep">
-                        <span>3. Review & Order</span>
+                    <li ui-sref="thirdStep" class="completed">
+                        <span>3. Delivery details</span>
                     </li>
-
+                    <li ui-sref="fourthStep">
+                        <span>4. Review and order</span>
+                    </li>
                 </ul>
             </div>
         </section>
@@ -51,7 +53,7 @@
                                 Ensure all information is correct before proceeding.</p>
                             <div class="text-bold mb-3">ID Verification</div>
                         </div>
-                        <div class="col-lg-6 col-12">
+                        <div class="col-lg-5 col-12">
 
                             <div class="row mb-4">
                                 <div class="col-lg-12 col-12">
@@ -108,14 +110,13 @@
                             <div class="row">
                                 <div class="col-6">
                                     <button class="pink-btn-disable text-uppercase" @click="goNext"
-                                            :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">check
-                                        eligibility
+                                            :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">Continue
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-lg-6 col-12">
+                        <div class="col-lg-5 col-12">
                             <div class="row mb-4">
                                 <div class="col-lg-12">
                                     <label class="form-label">* Address</label>
@@ -129,7 +130,7 @@
                             </div>
                             <div class="row mb-4">
                                 <div class="col-md-12 col-12">
-                                    <label class="form-label">Apartment, Office, House, Floor number (optional)</label>
+                                    <label class="form-label">Unit number (optional)</label>
                                     <div class="input-group align-items-center">
                                         <input type="text" class="form-control" id="address-more" name="addressMore"
                                                v-model="deliveryInfo.addressMore" @input="watchAllowNext"
@@ -138,18 +139,20 @@
                                 </div>
                             </div>
                             <div class="row mb-4">
-                                <div class="col-md-4 col-12">
-                                    <label class="form-label">* Postcode</label>
-                                    <div class="input-group align-items-center">
-                                        <input type="text" maxlength="5" class="form-control" id="postcode"
-                                               name="postcode" v-model="deliveryInfo.postcode" @input="watchAllowNext"
-                                               @keypress="checkInputCharacters(event, 'numeric', false)" placeholder=""
-                                               required/>
-                                    </div>
-                                    <div class="invalid-feedback mt-1" id="em-postcode"></div>
+                            <div class="col-md-12 col-12">
+                                <label class="form-label">* Postcode</label>
+                                <div class="input-group mt-2 align-items-center">
+                                    <input type="text" maxlength="5" class="form-control" id="postcode"
+                                           name="postcode" v-model="deliveryInfo.postcode" @input="watchAllowNext"
+                                           @keypress="checkInputCharacters(event, 'numeric', false)" placeholder=""
+                                           required/>
                                 </div>
-                                <div class="col-md-4 col-12">
-                                    <label class="form-label">* State</label>
+                                <div class="invalid-feedback mt-1" id="em-postcode"></div>
+                            </div>
+                            </div>
+                            <div class="row mb-4">
+
+                                <div class="col-md-6 col-12">
                                     <label class="form-label" for="select-state">* State</label>
                                     <div class="input-group align-items-center">
                                         <select class="form-select" id="state" name="state" data-live-search="true"
@@ -163,7 +166,7 @@
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-state"></div>
                                 </div>
-                                <div class="col-md-4 col-12">
+                                <div class="col-md-6 col-12">
                                     <label class="form-label">* City</label>
                                     <div class="input-group align-items-center">
                                         <select class="form-select" id="city" name="city" data-live-search="true"
@@ -177,18 +180,7 @@
                                 </div>
 
                             </div>
-                            <div class="row mb-4">
-                                <div class="col-md-12 col-12">
-                                    <label class="form-label">Delivery Notes (optional)</label>
-                                    <div class="align-items-center">
-                                        <input type="text" class="form-control" id="delivery-notes" name="deliveryNotes"
-                                               v-model="deliveryInfo.deliveryNotes" @input="watchAllowNext"
-                                               placeholder="">
-                                        <p class="note mt-2">Nearby landmarks or more detailed directions</p>
-                                    </div>
-                                    <div class="invalid-feedback mt-1" id="em-note"></div>
-                                </div>
-                            </div>
+
                         </div>
                         <div class="col-md-12">
                             <div id="error"></div>

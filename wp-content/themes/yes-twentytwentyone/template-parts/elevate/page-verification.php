@@ -25,62 +25,67 @@
         <div class="container">
             <ul class="wizard">
                 <li ui-sref="firstStep" class="completed">
-                    <span>1. Eligibility Check</span>
+                    <span>1. Eligibility check</span>
                 </li>
                 <li ui-sref="secondStep" class="completed">
-                    <span>2. ID Verification</span>
+                    <span>2. ID verification</span>
                 </li>
                 <li ui-sref="thirdStep">
-                    <span>3. Review & Order</span>
+                    <span>3. Delivery details</span>
                 </li>
-
+                <li ui-sref="fourthStep">
+                    <span>4. Review and order</span>
+                </li>
             </ul>
         </div>
     </section>
     <!-- Banner End -->
-
     <section id="cart-body">
-        <div class="container  p-lg-5 p-3" style="border: 0">
-            <div class="row gx-5">
-                <h2 class="subtitle">ID Verification</h2>
-                <p>
-                    A few steps to verify your identity before we continue.
-                </p>
-            </div>
-            <div class="verify-body mt-3">
-                <h3 class="subtitle2">Scan the QR code to begin verification</h3>
-                <div class="mt-5 mb-5">
-                    <div id="qrcode"></div>
-                    <div class="text-center">
-                        <a id="cmdVerify" href="#" target="_blank" class="btn btn-danger mt-3 hide-de">Verify Now</a>
+        <div class="container" style="border: 0">
+
+            <div class="border-box">
+                <div class="row">
+                    <div class="col-md-5 p-5 flex-column bg-checkout">
+                        <div class="title text-white checkout-left">
+                            ID Verification
+                            <div class="mt-3" style="font-size: 14px;line-height: 20px;">
+                                A few steps to verify your identity before we continue.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 p-5">
+                        <div class="verify-body mt-3">
+                            <h3 class="subtitle2">Scan the QR code to begin verification</h3>
+                            <div class="mt-5 mb-5">
+                                <div id="qrcode"></div>
+                                <div class="text-center">
+                                    <a id="cmdVerify" href="#" target="_blank" class="btn btn-danger mt-3 hide-de">Verify Now</a>
+                                </div>
+                            </div>
+                            <h3 class="subtitle2">Complete the verification in 2 simple steps!</h3>
+
+                            <ul class="list-2 mt-5">
+                                <li><div><span class="number">1</span></div>
+                                    <div>
+                                        <div class="subtitle2">ID Validateion</div>
+                                        <p>Scan your ID with the object in a well lit room facing on a flat surface with minimum reflection</p>
+                                    </div></li>
+                                <li class="mt-3"><div><span class="number">2</span></div>
+                                    <div>
+                                        <div class="subtitle2">Face Verification</div>
+                                        <p>Ensure your face is within the frame for an accurate detection</p>
+                                    </div></li>
+                            </ul>
+                            <a href="/elevate/personal/" class="btn btn-defalt mr-2">Passed</a>
+                            <a href="/elevate/eligibility-failure/" class="btn btn-defalt">Failure</a>
+                        </div>
                     </div>
                 </div>
-                <h3 class="subtitle2">Complete the verification in 2 simple steps!</h3>
-
-                <ul class="list-2 mt-5">
-                    <li>
-                        <div><span class="number">1</span></div>
-                        <div>
-                            <div class="subtitle2">ID Validateion</div>
-                            <p>Scan your ID with the object in a well lit room facing on a flat surface with minimum
-                                reflection</p>
-                        </div>
-                    </li>
-                    <li>
-                        <div><span class="number">2</span></div>
-                        <div>
-                            <div class="subtitle2">Face Verification</div>
-                            <p>Ensure your face is within the frame for an accurate detection</p>
-                        </div>
-                    </li>
-                </ul>
-
-                <a href="/elevate/personal/" class="btn btn-defalt mr-2">Passed</a>
-                <a href="/elevate/eligibility-failure/" class="btn btn-defalt">Failure</a>
             </div>
 
         </div>
     </section>
+
     <div id="main-vue"></div>
 </main>
 <?php require_once('includes/footer.php'); ?>

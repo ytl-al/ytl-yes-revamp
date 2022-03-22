@@ -76,12 +76,17 @@
                                 <div><?php echo date("d/m/Y H:i:s")?></div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                                <button class="mt-3 pink-btn-disable text-uppercase w300" :class="allowSubmit?'pink-btn':'pink-btn-disable'" @click="goNext" type="button">Submit Contract</button>
+                                <div id="error" class="mt-3"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="mb-5">
-                    <button class="mt-3 pink-btn-disable w300" :class="allowSubmit?'pink-btn':'pink-btn-disable'" @click="goNext" type="button">Submit Contract</button>
-                    <div id="error" class="mt-3"></div>
-                </div>
+
 
             </div>
             </div>
@@ -240,7 +245,10 @@
                 goNext: function (){
                     var self = this;
                     $('#error').html("");
-                    self.submit_contract();
+                    if(self.allowSubmit){
+                        self.submit_contract();
+                    }
+
                 }
             }
         });

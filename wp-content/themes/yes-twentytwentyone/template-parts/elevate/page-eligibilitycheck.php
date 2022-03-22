@@ -20,6 +20,24 @@
     </div>
 </header>
 <main class="clearfix site-main">
+    <section id="grey-innerbanner">
+        <div class="container">
+            <ul class="wizard">
+                <li ui-sref="firstStep" class="completed">
+                    <span>1. Eligibility check</span>
+                </li>
+                <li ui-sref="secondStep">
+                    <span>2. ID verification</span>
+                </li>
+                <li ui-sref="thirdStep">
+                    <span>3. Delivery details</span>
+                </li>
+                <li ui-sref="fourthStep">
+                    <span>4. Review and order</span>
+                </li>
+            </ul>
+        </div>
+    </section>
     <section id="cart-body">
         <div class="container" style="border: 0">
 

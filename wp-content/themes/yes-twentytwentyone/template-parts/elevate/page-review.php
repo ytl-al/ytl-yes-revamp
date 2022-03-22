@@ -26,15 +26,17 @@
         <div class="container">
             <ul class="wizard">
                 <li ui-sref="firstStep" class="completed">
-                    <span>1. Personal Details</span>
+                    <span>1. Eligibility check</span>
                 </li>
                 <li ui-sref="secondStep" class="completed">
-                    <span>2. Yes Face ID</span>
+                    <span>2. ID verification</span>
                 </li>
                 <li ui-sref="thirdStep" class="completed">
-                    <span>3. Review & Order</span>
+                    <span>3. Delivery details</span>
                 </li>
-
+                <li ui-sref="fourthStep" class="completed">
+                    <span>4. Review and order</span>
+                </li>
             </ul>
         </div>
     </section>
@@ -45,57 +47,49 @@
             <div id="main-vue">
             <div class="row gx-5">
                 <div class="col-lg-8 col-12">
-                    <div class="border-box p-4">
-                        <h2 class="subtitle">Order Details</h2>
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-                                <div class="text-20">
-                                    Your device plan -
-                                </div>
-                                <div class="text-bold text-23">
-                                    {{orderSummary.product.selected.nameEN}}
-                                </div>
-                                <div class="text-20 mt-3">
-                                    Your contract -
-                                </div>
-                                <div class="text-bold text-23">
-                                    {{contractTitle}}
+                    <div class="subtitle">Review & Pay</div>
+                    <div class="border-box">
+                        <div class="row">
+                            <div class="col-md-3 leftColor">
+                                <div class="p-3">
+                                <img src="https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11t.png?x41595" width="150"/>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div>
-                                    <div class="subtitle text-end">
-                                        RM{{formatPrice(parseFloat(orderSummary.product.selected.devicePriceMonth).toFixed(2))}}/ mth
+                            <div class="col-md-9 p-4">
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="text-20">
+                                        <div class="subtitle2">{{orderSummary.product.selected.nameEN}}</div>
+                                        <div class="subtitle2">{{orderSummary.product.selected.nameEN}}</div>
+                                        </div>
+                                        <div class="hr_line"></div>
+                                        <div class="text-bold">
+                                            {{contractTitle}}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div>
+                                            <div class="subtitle text-end">
+                                                RM{{formatPrice(parseFloat(orderSummary.product.selected.devicePriceMonth).toFixed(2))}}/ mth
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="mt-5 text-end">
-                                    <!--a href="/elevate/contract" class="btn-pink-border-disable" :class="(contractSigned)?'btn-pink-border':'btn-pink-border-disable'">
-                                        <i class="icon icon-signup"></i> Sign Contract
-                                    </a-->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="border-box mt-3 mb-5 p-4">
-                        <div class="row">
-                            <div class="col-8">
-                                <h2 class="subtitle">Customer Details</h2>
-                            </div>
-                            <div class="col-4 text-end">
-                                <a href="/elevate/personal" class="btn-link"><i class="icon icon_edit"></i> Edit Detail</a>
                             </div>
                         </div>
 
-                        <div class="row mt-3">
+                    </div>
+                    <div class=" mt-3 mb-5">
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="row mt-3 item_info">
-                                    <div class="label">Name</div>
-                                    <div class="content text-uppercase">{{deliveryInfo.name}}</div>
+                                    <div class="label text-bold">To: {{deliveryInfo.name}}</div>
+                                    <div class="content">
+                                        <div>{{deliveryInfo.email}}</div>
+                                        <div>+60 {{deliveryInfo.phone}}</div>
+                                    </div>
                                 </div>
-                                <div class="row mt-3 item_info">
-                                    <div class="label">Email</div>
-                                    <div class="content">{{deliveryInfo.email}}</div>
-                                </div>
+
                                 <div class="row mt-3 item_info">
                                     <div class="label">Delivery Address</div>
                                     <div class="content"><span v-if="deliveryInfo.addressMore">{{deliveryInfo.addressMore}},</span> {{deliveryInfo.address}}, {{deliveryInfo.city}}, {{deliveryInfo.state}}, {{deliveryInfo.postcode}}, {{deliveryInfo.country}}
@@ -104,16 +98,13 @@
 
                             </div>
                             <div class="col-md-6">
-                                <div class="row mt-3 item_info">
-                                    <div class="label">ID Number</div>
-                                    <div class="content">{{deliveryInfo.mykad}}</div>
+                                <div style="float: right">
+                                    <a href="#" class="btn-edit">(Edit)</a>
                                 </div>
-                                <div class="row mt-3 item_info">
-                                    <div class="label">Contact Number</div>
-                                    <div class="content">{{deliveryInfo.phone}}</div>
-                                </div>
+
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <div class="col-lg-4 col-12">
@@ -175,7 +166,7 @@
 
                             <div class="row mt-3 ">
                                 <div class="col-12">
-                                    <button class="pink-btn-disable d-block w-100" :class=" allowSubmit?'pink-btn':'pink-btn-disable'"  @click="goNext" type="button">Order</button>
+                                    <button class="pink-btn-disable d-block text-uppercase w-100" :class=" allowSubmit?'pink-btn':'pink-btn-disable'"  @click="goNext" type="button">Order</button>
                                     <div id="error" class="mt-3"></div>
                                 </div>
                             </div>

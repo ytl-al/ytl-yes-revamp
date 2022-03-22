@@ -16,7 +16,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-2 d-flex align-items-center justify-content-md-start justify-content-sm-center">
-                    <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/logo-blue.png" />
+                    <img src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/union.png" />
                 </div>
                 <div class="col-12 col-md-5 d-flex align-items-center justify-content-md-start justify-content-sm-center">
                     <p>Need help? See <a href="/faq">Help Pages</a> or <a href="mailto:yescare@yes.my">Contact Us</a></p>
