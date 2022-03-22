@@ -50,15 +50,17 @@
             <div class="container">
                 <ul class="wizard">
                     <li ui-sref="firstStep" class="completed">
-                        <span>1. Personal Details</span>
+                        <span>1. Eligibility check</span>
                     </li>
                     <li ui-sref="secondStep" class="completed">
-                        <span>2. Yes Face ID</span>
+                        <span>2. ID verification</span>
                     </li>
                     <li ui-sref="thirdStep" class="completed">
-                        <span>3. Review & Order</span>
+                        <span>3. Delivery details</span>
                     </li>
-
+                    <li ui-sref="fourthStep" class="completed">
+                        <span>4. Review and order</span>
+                    </li>
                 </ul>
             </div>
         </section>
@@ -104,43 +106,32 @@
                                 <div class="col-8">
                                     <h2 class="subtitle">Customer Details</h2>
                                 </div>
-                                <div class="col-4 text-end">
-                                    <a href="#" class="btn-link"><i class="icon icon_edit"></i> Edit Detail</a>
-                                </div>
+
                             </div>
 
                             <div class="row mt-3">
                                 <div class="col-md-6">
                                     <div class="row mt-3 item_info">
-                                        <div class="label">Name</div>
-                                        <div class="content">JANE DOE</div>
+                                        <div class="label text-bold">To: Jane Doe</div>
+                                        <div class="content">
+                                            <div>jan@gmail.com</div>
+                                            <div>+60 0186664356</div>
+                                        </div>
                                     </div>
-                                    <div class="row mt-3 item_info">
-                                        <div class="label">Email</div>
-                                        <div class="content">jan@gmail.com</div>
-                                    </div>
+
                                     <div class="row mt-3 item_info">
                                         <div class="label">Delivery Address</div>
                                         <div class="content">205, Menara YTL, Jalan Bukit
                                             Bintang, Kuala Lumpur, 58000, Malaysia
                                         </div>
                                     </div>
-                                    <div class="row mt-3 item_info">
-                                        <div class="label">Billing Preferences</div>
-                                        <div class="content">111, Menara YTL, Jalan Bukit
-                                            Bintang, Kuala Lumpur, 58000, Malaysia
-                                        </div>
-                                    </div>
+
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="row mt-3 item_info">
-                                        <div class="label">ID Number</div>
-                                        <div class="content">9605674356</div>
+                                    <div style="float: right">
+                                        <a href="#" class="btn-edit">(Edit)</a>
                                     </div>
-                                    <div class="row mt-3 item_info">
-                                        <div class="label">Contact Number</div>
-                                        <div class="content">0186664356</div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -212,7 +203,7 @@
 
                                 <div class="row mt-3 ">
                                     <div class="col-12">
-                                        <button class="btn-round-dark w-100" type="button">Order</button>
+                                        <button class="pink-btn-disable w-100" type="button">Order</button>
                                     </div>
                                 </div>
                             </div>
@@ -223,12 +214,12 @@
         </section>
 
     </main>
-    <footer class="page-footer footer">
+    <footer class="page-footer footer-white">
         <div class="copyright">
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-2 d-flex align-items-center justify-content-md-start justify-content-sm-center">
-                        <img src="../images/Logo-blue.png" alt="">
+                        <img src="../images/union.png" alt="">
                     </div>
                     <div class="col-12 col-md-5 d-flex align-items-center justify-content-md-start justify-content-sm-center">
                         <p>Need help? See <a href="#">Help Pages</a> or <a href="#">Contact Us</a></p>
