@@ -1,0 +1,17 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+        var $opportunities_list = $('#opportunities-list');
+        var $opportunities_img = $('#opportunities-img');
+
+        $opportunities_list.on('click', '.tab-link', function (e) {
+            e.preventDefault();
+            var $me = $(this);
+            $opportunities_list.find('.tab-link').removeClass('active');
+            $me.addClass('active');
+            var apply_img = $me.data('img');
+            if (apply_img && apply_img.length > 0) {
+                $opportunities_img.attr('src', $me.data('img'))
+            }
+        });
+    });
+</script>
