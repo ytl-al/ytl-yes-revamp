@@ -42,6 +42,9 @@
 
     .panel-weaccept { margin: 15px 0 10px; }
     .panel-weaccept img { margin: 0 8px; }
+
+    .layer-selectedCard {}
+    .layer-selectedCard img { display: none; }
 </style>
 
 <!-- Vue Wrapper STARTS -->
@@ -144,10 +147,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mb-3 align-items-center g-2">
-                                        <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-12">
                                             <label class="form-label" for="input-chNumber1">* Card Number</label>
+                                            <div class="float-end layer-selectedCard">
+                                                <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/visa.png" height="15" v-bind:class="{ 'd-block': (paymentInfo.cardType == 'VISA') }" />
+                                                <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" height="25" v-bind:class="{ 'd-block': (paymentInfo.cardType == 'AMEX') }" />
+                                                <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/mastercard.png" height="30" v-bind:class="{ 'd-block': (paymentInfo.cardType == 'MASTERCARD') }" />
+                                            </div>
                                         </div>
+                                    </div>
+                                    <div class="row mb-3 align-items-center g-2">
                                         <div class="col-lg-6 col-12 mb-1">
                                             <div class="input-group align-items-center">
                                                 <input type="text" class="form-control text-center" id="input-cardInput1" v-model="cardholder.number1" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(1, event)" @keypress="checkInputCharacters(event, 'numeric', false)" /><span class="mx-1">-</span>
@@ -813,7 +823,7 @@
                         if (inputVal.length > 3) {
                             $('#input-cardInput' + nextStep).focus();
                         }
-                        if (inputVal.length == 4 && inputStep == 4 && self.cardholder.number1.length == 4 && self.cardholder.number2.length == 4 && self.cardholder.number3.length == 4 && self.cardholder.number4.length == 4) {
+                        if (inputVal.length == 4 && inputStep == 4 && self.cardholder.number1.length == 4 && self.cardholder.number2.length == 4 && self.cardholder.number3.length == 4 && self.cardholder.number4.length >= 2) {
                             self.paymentInfo.cardNumber = self.cardholder.number1 + self.cardholder.number2 + self.cardholder.number3 + self.cardholder.number4;
                             self.paymentInfo.cardType = getCreditCardType(self.paymentInfo.cardNumber);
                         } else {
