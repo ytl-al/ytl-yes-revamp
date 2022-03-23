@@ -365,18 +365,11 @@ section {
     bottom: 0;
 }
 
-.carousel-indicators [data-bs-target] {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    opacity: 1;
-}
-
 
 /* Home Slider styling */
 
-.carousel-indicators .active {
-    background-color: #1B26BC;
+.carousel-indicators [data-bs-target] {
+    height: 6px;
 }
 
 .slider-btn-container {
