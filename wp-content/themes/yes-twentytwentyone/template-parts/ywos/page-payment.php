@@ -709,6 +709,7 @@
                         
                         'phone_number'  : self.deliveryInfo.msisdn, 
                         'customer_name' : self.deliveryInfo.name, 
+                        'dob'           : self.deliveryInfo.dob, 
                         'email'         : self.deliveryInfo.email,
                         'login_yes_id'  : '', 
                         'security_type' : self.deliveryInfo.securityType, 

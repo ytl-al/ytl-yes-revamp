@@ -1064,6 +1064,7 @@ class Ytl_Pull_Data_Public
 		
 		$phone_number 	= $this->get_request_input($order_info, 'phone_number');
 		$customer_name	= $this->get_request_input($order_info, 'customer_name');
+		$dob			= $this->get_request_input($order_info, 'dob');
 		$email 			= $this->get_request_input($order_info, 'email');
 		$login_yes_id 	= $this->get_request_input($order_info, 'login_yes_id');
 		$security_type	= $this->get_request_input($order_info, 'security_type');
@@ -1106,7 +1107,7 @@ class Ytl_Pull_Data_Public
 		$session_id 	= $this->ca_generate_auth_token(true);
 
 		if (
-			$phone_number != null && $customer_name != null && $email != null && $security_type != null && $security_id != null && 
+			$phone_number != null && $customer_name != null && $dob != null && $email != null && $security_type != null && $security_id != null &&
 			$plan_name != null && $plan_type != null && $product_bundle_id != null && 
 			$address_line != null && $city != null && $city_code != null && $postal_code != null && $state != null && $state_code != null && $country != null &&
 			$payment_method != null && $process_name != null && $amount != null && $amount_sst != null && $total_amount != null && 
@@ -1121,6 +1122,7 @@ class Ytl_Pull_Data_Public
 				'eKYCCustomerDetail' 	=> [
 					'alternatePhoneNumber' 	=> $phone_number, 
 					'customerFullName' 		=> $customer_name, 
+					'dob' 					=> $dob, 
 					'email' 				=> $email, 
 					'loginYesId' 			=> $login_yes_id, 
 					'planName' 				=> $plan_name, 
