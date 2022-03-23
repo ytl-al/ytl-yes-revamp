@@ -394,9 +394,10 @@ if (!function_exists('yes_custom_breadcrumbs')) {
         $home_title = esc_html__('Home', 'yes.my');
 
         if (!is_front_page()) {
-            $html   .= '<div class="container breadcrumb-section">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">';
+            $html   .= '<div class="layer-breadcrumb">
+                            <div class="container breadcrumb-section">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">';
 
             if ($show_home) {
                 $html   .= '<li class="breadcrumb-item page-home"><a href="' . get_home_url() . '" title="' . $home_title . '">' . $home_title . '</a></li>';
@@ -415,8 +416,9 @@ if (!function_exists('yes_custom_breadcrumbs')) {
                 $html   .= '        <li class="breadcrumb-item active page-current page-' . get_the_ID() . '" aria-current="page">' . get_the_title() . '</li>';
             }
 
-            $html   .= '        </ol>
-                            </nav>
+            $html   .= '            </ol>
+                                </nav>
+                            </div>
                         </div>';
         }
 
