@@ -67,13 +67,29 @@
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-name"></div>
                                 </div>
-                                <div class="form-group mb-4">
-                                    <label class="form-label" for="input-dob">* Date of Birth</label>
-                                    <div class="input-group date align-items-center">
-                                        <input type="text" class="form-control input-datepicker" id="input-dob" name="dob" v-model="deliveryInfo.dob" @input="watchAllowNext" placeholder="" :disabled="!allowDOB" required />
-                                        <!-- <span class="input-group-text" id="addon-wrapping">@</span> -->
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group mb-4">
+                                            <label class="form-label" for="input-dob">* Date of Birth</label>
+                                            <div class="input-group date align-items-center">
+                                                <input type="text" class="form-control input-datepicker" id="input-dob" name="dob" v-model="deliveryInfo.dob" @input="watchAllowNext" placeholder="" :disabled="!allowDOB" required />
+                                                <!-- <span class="input-group-text" id="addon-wrapping">@</span> -->
+                                            </div>
+                                            <div class="invalid-feedback mt-1" id="em-dob"></div>
+                                        </div>
                                     </div>
-                                    <div class="invalid-feedback mt-1" id="em-name"></div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group mb-4">
+                                            <label class="form-label" for="select-gender">* Gender</label>
+                                            <div class="input-group align-items-center">
+                                                <select class="form-select" id="select-gender" name="gender" data-live-search="true" v-model="deliveryInfo.gender" @change="watchAllowNext" :disabled="!allowGender" required>
+                                                    <option value="" selected="selected" disabled="disabled">Select Gender</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group mb-4">
                                     <label class="form-label" for="input-email">* Email address</label>
@@ -407,6 +423,7 @@
                 deliveryInfo: {
                     name: '',
                     dob: '',
+                    gender: '', 
                     email: '',
                     emailConfirm: '',
                     address: '',
@@ -490,7 +507,8 @@
                 },
                 allowSelectCity: false,
                 allowSubmit: false,
-                allowDOB: false 
+                allowDOB: false, 
+                allowGender: false 
             },
             mounted: function() {},
             created: function() {
@@ -549,6 +567,7 @@
                     self.deliveryInfo.country = 'MALAYSIA';
 
                     self.checkNRICDOB();
+                    self.checkNRICGender();
 
                     self.referralCode.applicable = (self.orderSummary.plan.referralApplicable) ? true : false;
 
@@ -580,6 +599,17 @@
                         self.allowDOB = true;
                     }
                 },
+                checkNRICGender: function () {
+                    var self = this;
+                    if (self.deliveryInfo.securityType == 'NRIC') {
+                        var nricNo = self.deliveryInfo.securityId;
+                        var lastFour = nricNo.slice(-4);
+                        self.deliveryInfo.gender = (lastFour % 2 == 0) ? 'Female' : 'Male';
+                        self.allowGender = false;
+                    } else {
+                        self.allowGender = true;
+                    }
+                }, 
                 getStateCode: function(stateVal) {
                     var self = this;
                     var objState = self.selectOptions.states.filter(state => state.value == stateVal);
@@ -839,6 +869,7 @@
                     if (
                         self.deliveryInfo.name.trim() == '' ||
                         self.deliveryInfo.dob.trim() == '' ||
+                        self.deliveryInfo.gender.trim() == '' ||
                         self.deliveryInfo.email.trim() == '' ||
                         self.deliveryInfo.emailConfirm.trim() == '' ||
                         self.deliveryInfo.address.trim() == '' ||

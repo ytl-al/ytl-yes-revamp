@@ -720,6 +720,7 @@
                         'phone_number'  : self.deliveryInfo.msisdn, 
                         'customer_name' : self.deliveryInfo.name, 
                         'dob'           : self.deliveryInfo.dob, 
+                        'gender'        : self.deliveryInfo.gender, 
                         'email'         : self.deliveryInfo.email,
                         'login_yes_id'  : '', 
                         'security_type' : self.deliveryInfo.securityType, 
