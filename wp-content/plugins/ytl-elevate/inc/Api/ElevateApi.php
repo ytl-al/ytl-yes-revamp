@@ -26,6 +26,7 @@ class ElevateApi
     const  api_order_create = 'api/Elevate/order';
     const  api_order_get_by_id = 'api/Elevate/order/Id';
     const  api_order_get_by_number = 'api/Elevate/order/orderNumber';
+    const  api_order_yos_order = 'api/Elevate/createYOSOrder';
 
     const  api_contract = 'api/Elevate/contract';
     const  api_contract_get_by_id = 'api/Elevate/contract/Id';
@@ -467,11 +468,11 @@ class ElevateApi
         $params = array(
             "customerName" => $request['name'],
             "customerNRIC" => $request['mykad'],
-            "orderID" => "",
+            "orderID" => $request['orderId'],
             "orderDate" => date("c"),
             "tenure" => 0,
             "contractStartDate" => date("c"),
-            "contractEndDate" => date("c", strtotime("+1 months")),
+            "contractEndDate" => date("c", strtotime("+".$request['contract']." months")),
             "contractStatus" => 0,
             "contractValue" => 0,
             "contractSignedDate" => date("c"),
@@ -505,6 +506,8 @@ class ElevateApi
             'data_format' => 'body'
         ];
 
+        //echo '<pre>'; print_r($params);die('xxx');
+
         $api_url = self::api_url . self::api_contract;
 
         $request = wp_remote_post($api_url, $args);
@@ -529,6 +532,7 @@ class ElevateApi
 
     public static function elevate_order_create(WP_REST_Request $request)
     {
+
         $params = array(
             "orderNumber"=> "",
             "customerGUID"=> $request['id'],
@@ -555,6 +559,56 @@ class ElevateApi
         ];
 
         $api_url = self::api_url . self::api_order_create;
+
+        $request = wp_remote_post($api_url, $args);
+        if (is_wp_error($request)) {
+            $return['status'] = 0;
+            $return['error'] = "Cannot connect to API server";
+        } else if ($request['response']['code'] != 200) {
+            $code = $request['response']['code'];
+            $return['status'] = 0;
+            $return['error'] = @$request['response'];
+        } else {
+            $code = $request['response']['code'];
+            $data = json_decode($request['body'], true);
+            $return['status'] = 1;
+            $return['data'] = $data;
+        }
+
+        $response = new WP_REST_Response($return);
+        $response->set_status(200);
+        return $response;
+    }
+
+    public static function elevate_yos_order_create(WP_REST_Request $request)
+    {
+
+        $params = array(
+            "orderNumber"=> "",
+            "customerGUID"=> $request['id'],
+            "orderStatus"=> "New",
+            "error"=> "",
+            "deliveryStatus"=> "Processing Order",
+            "deliveryDate"=> date("c"),
+            "podurl"=> "",
+            "comments"=> ""
+        );
+
+        $token = self::get_token();
+
+        $args = [
+            'headers' => array(
+                'Accept' => 'text/plain',
+                'Authorization' => 'Bearer ' . $token,
+                'Content-Type' => 'application/json'
+            ),
+            'body' => json_encode($params),
+            'method' => 'POST',
+            'timeout' => self::API_TIMEOUT,
+            'data_format' => 'body'
+        ];
+
+        $api_url = self::api_url . self::api_order_yos_order;
 
         $request = wp_remote_post($api_url, $args);
         if (is_wp_error($request)) {

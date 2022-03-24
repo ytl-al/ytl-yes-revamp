@@ -46,8 +46,82 @@
 </main>
 <?php require_once('includes/footer.php'); ?>
 <script type="text/javascript">
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll("[data-bs-toggle=\"tooltip\"]"))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
+    $(document).ready(function () {
+        var pageCart = new Vue({
+            el: '#main-vue',
+            data: {
+                qrcode: null,
+                contract:{},
+                contract_signed:"",
+                eligibility: {
+                    uid: '',
+                    mykad: '',
+                    name: '',
+                    phone: '',
+                    email: ''
+                },
+                deliveryInfo: {
+                    uid: '',
+                    mykad: '',
+                    name: '',
+                    phone: '',
+                    email: '',
+                    address: '',
+                    addressMore: '',
+                    addressLine: '',
+                    postcode: '',
+                    state: '',
+                    stateCode: '',
+                    city: '',
+                    cityCode: '',
+                    country: '',
+                    deliveryNotes: '',
+                    sanitize: {
+                        address: '',
+                        addressMore: '',
+                        addressLine: '',
+                        city: '',
+                        country: '',
+                        state: ''
+                    }
+                },
+                orderSummary: {
+                    product: {},
+                    orderDetail: {
+                        total: 0.00,
+                        color: null,
+                        contract_id: null,
+                        orderItems: []
+                    },
+                    orderInfo:{}
+                },
+                currentStep: 0,
+                allowSubmit: false
+            },
+
+            created: function () {
+                var self = this;
+                setTimeout(function () {
+                    self.pageInit();
+                }, 500);
+            },
+            methods: {
+                pageInit: function () {
+                    var self = this;
+                    if (elevate.validateSession(self.currentStep)) {
+
+                        if (elevate.lsData.orderInfo) {
+                            self.orderSummary.orderInfo = elevate.lsData.orderInfo;
+                        }
+
+                        console.log(self.orderSummary.orderInfo);
+                        elevate.removeElevateLSData();
+
+                    } else {
+                        elevate.redirectToPage('cart');
+                    }
+                }
+            }
+        });
+    });
 </script>

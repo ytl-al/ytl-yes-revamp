@@ -24,18 +24,24 @@
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
-            <ul class="wizard">
-                <li ui-sref="firstStep" class="completed">
-                    <span>1. Personal Details</span>
-                </li>
-                <li ui-sref="secondStep" class="completed">
-                    <span>2. Yes Face ID</span>
-                </li>
-                <li ui-sref="thirdStep" class="completed">
-                    <span>3. Review & Order</span>
-                </li>
-
-            </ul>
+            <section id="grey-innerbanner">
+                <div class="container">
+                    <ul class="wizard">
+                        <li ui-sref="firstStep" class="completed">
+                            <span>1. Eligibility check</span>
+                        </li>
+                        <li ui-sref="secondStep">
+                            <span>2. ID verification</span>
+                        </li>
+                        <li ui-sref="thirdStep">
+                            <span>3. Delivery details</span>
+                        </li>
+                        <li ui-sref="fourthStep">
+                            <span>4. Review and order</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
         </div>
     </section>
     <!-- Banner End -->
@@ -47,7 +53,7 @@
                 <div class="mt-5 mb-5">
                     <h1 class="title mt-3 mb-3">Identity Not Eligible</h1>
                     <p>Unfortunately you are currently not eligible for the Yes Elevate contract option</p>
-                    <p>owever proceed with our Normal 24 months contract option.</p>
+                    <p>however proceed with our Normal 24 months contract option.</p>
                     <p>Would you like to proceed? </p>
                 </div>
                 <div class="mt-5 mb-5 text-center">

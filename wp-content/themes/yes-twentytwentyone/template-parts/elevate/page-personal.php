@@ -143,7 +143,7 @@
                                 <label class="form-label">* Postcode</label>
                                 <div class="input-group mt-2 align-items-center">
                                     <input type="text" maxlength="5" class="form-control" id="postcode"
-                                           name="postcode" v-model="deliveryInfo.postcode" @input="watchAllowNext"
+                                           name="postcode" v-model="deliveryInfo.postcode" @input="watchChangePostcode"
                                            @keypress="checkInputCharacters(event, 'numeric', false)" placeholder=""
                                            required/>
                                 </div>
@@ -159,8 +159,7 @@
                                                 v-model="deliveryInfo.state" @change="watchChangeState" required>
                                             <option value="" selected="selected" disabled="disabled">Select State
                                             </option>
-                                            <option v-for="state in selectOptions.states" :value="state.value">{{
-                                                state.name }}
+                                            <option v-for="state in postCode.state" :value="state">{{state}}
                                             </option>
                                         </select>
                                     </div>
@@ -171,8 +170,7 @@
                                     <div class="input-group align-items-center">
                                         <select class="form-select" id="city" name="city" data-live-search="true"
                                                 v-model="deliveryInfo.city" @change="watchChangeCity" required>
-                                            <option v-for="city in selectOptions.cities" :value="city.value">{{
-                                                city.name }}
+                                            <option v-for="city in postCode.city" :value="city">{{city}}
                                             </option>
                                         </select>
                                     </div>
@@ -194,7 +192,32 @@
 </div>
 <?php require_once('includes/footer.php'); ?>
 
+<?php
+    $file = dirname(__FILE__).'/'.'postcodes.json';
+    $postcode = json_decode(file_get_contents($file));
+
+    $code = [];
+    $state = [];
+    $city = [];
+    $stateCity = [];
+    foreach ($postcode as $item){
+        $code[$item->code] = $item;
+        if(!@in_array($item->state,$state)){
+            $state[] = $item->state;
+        }
+        if(!@in_array($item->city,$city)){
+            $city[] = $item->city;
+        }
+        if(!@in_array($item->city,$stateCity[$item->state])){
+            $stateCity[$item->state][] = $item->city;
+        }
+    }
+
+?>
+
 <script type="text/javascript">
+
+
     $(document).ready(function () {
         var pageCart = new Vue({
             el: '#main-vue',
@@ -215,12 +238,13 @@
                 },
                 currentStep: 0,
                 elevate: null,
+                postCode : <?php echo json_encode(array('data'=>$code,'state'=>$state,'stateCity'=>$stateCity,'city'=>$city))?>,
                 selectOptions: {
                     states: [{
                         'stateCode': 'KUL',
                         'value': 'WILAYAH PERSEKUTUAN-KUALA LUMPUR',
                         'name': 'Wilayah Persekutuan Kuala Lumpur'
-                    },
+                        },
                         {
                             'stateCode': 'PJY',
                             'value': 'PUTRAJAYA',
@@ -406,6 +430,7 @@
             methods: {
                 pageInit: function () {
                     var self = this;
+                    console.log("postCode",self.postCode);
 
                     if (elevate.validateSession(self.currentStep)) {
                         self.pageValid = true;
@@ -453,12 +478,44 @@
                         self.deliveryInfo.state = event.target.value;
                     }
                     if (typeof self.deliveryInfo.state !== 'undefined' && self.deliveryInfo.state.length) {
-                        self.ajaxGetCitiesByState(self.deliveryInfo.state);
+                        self.postCode.city = self.postCode.stateCity[self.deliveryInfo.state];
+                        console.log(self.postCode.city);
+                        setTimeout(function () {
+                            $('.form-select').selectpicker('refresh');
+                            if (self.deliveryInfo.city) {
+                                $('#city').val(self.deliveryInfo.city)
+                            }
+                            toggleOverlay(false);
+                        }, 500);
                     }
                 },
                 watchChangeCity: function (event) {
                     var self = this;
                     self.deliveryInfo.city = event.target.value;
+                    self.watchAllowNext();
+                },
+                watchChangePostcode: function(event){
+                    var self = this;
+                    var postcode = event.target.value;
+                    if(self.postCode.data[postcode]){
+                        self.postCode.city = self.postCode.stateCity[self.postCode.data[postcode].state];
+                        self.deliveryInfo.state = self.postCode.data[postcode].state;
+                        self.deliveryInfo.city = self.postCode.data[postcode].city;
+                        setTimeout(function () {
+                            $('#state').val(self.postCode.data[postcode].state);
+                            $('#city').val(self.postCode.data[postcode].city);
+                            $('.form-select').selectpicker('refresh');
+                        }, 500);
+                    }else{
+                        self.deliveryInfo.state = '';
+                        self.deliveryInfo.city = '';
+                        setTimeout(function () {
+                            $('#state').val('');
+                            $('#city').val('');
+                            $('.form-select').selectpicker('refresh');
+                        }, 500);
+                    }
+
                     self.watchAllowNext();
                 },
                 getStateCode: function (stateVal) {
@@ -558,7 +615,10 @@
                     }
 
                     var postcode = /^[0-9]{5}$/g;
-                    if (self.deliveryInfo.postcode.trim() && !postcode.test(self.deliveryInfo.postcode.trim())) {
+                    if (self.deliveryInfo.postcode && !postcode.test(self.deliveryInfo.postcode.trim())) {
+                        isFilled = false;
+                        $('#postcode').addClass('input_error');
+                    }else if(!self.postCode.data[self.deliveryInfo.postcode]){
                         isFilled = false;
                         $('#postcode').addClass('input_error');
                     }

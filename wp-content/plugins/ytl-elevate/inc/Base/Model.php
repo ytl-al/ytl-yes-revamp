@@ -481,9 +481,9 @@ class Model extends BaseController
             "nameEN": "Xiaomi 11T 5G NE",
             "nameBM": "Xiaomi 11T 5G NE",
             "shortDescriptionEN": "Xiaomi 11T 5G NE",
-            "longDescriptionEN": "Enjoy 24 month installment on your new smart phone.; *RM0 upfront payment and 0% interest.;*Subject to eligibility and only for MyKad holders",
+            "longDescriptionEN": "Enjoy 24 month installment on your new smart phone.;*RM0 upfront payment and 0% interest.;*Subject to eligibility and only for MyKad holders",
             "shortDescriptionBM": "Xiaomi 11T 5G NE",
-            "longDescriptionBM": "Enjoy 24 month installment on your new smart phone.; *RM0 upfront payment and 0% interest.;*Subject to eligibility and only for MyKad holders",
+            "longDescriptionBM": "Enjoy 24 month installment on your new smart phone.;*RM0 upfront payment and 0% interest.;*Subject to eligibility and only for MyKad holders",
             "threshold": 0,
             "balance": 10,
             "status": 1,
@@ -576,6 +576,21 @@ class Model extends BaseController
     {
 
         $products = json_decode($product, true);
+
+        foreach ($products as $k=>$v){
+            $products[$k]['product']['longDescriptionEN'] = explode(';',$products[$k]['product']['longDescriptionEN']);
+            $products[$k]['product']['longDescriptionBM'] = explode(';',$products[$k]['product']['longDescriptionBM']);
+
+            $products[$k]['plan']['longDescriptionEN'] = explode(';',$products[$k]['plan']['longDescriptionEN']);
+            $products[$k]['plan']['longDescriptionBM'] = explode(';',$products[$k]['plan']['longDescriptionBM']);
+
+            $products[$k]['device']['longDescriptionEN'] = explode(';',$products[$k]['device']['longDescriptionEN']);
+            $products[$k]['device']['longDescriptionBM'] = explode(';',$products[$k]['device']['longDescriptionBM']);
+
+            $products[$k]['device']['productNoteEN'] = $products[$k]['product']['longDescriptionEN'];
+            $products[$k]['device']['productNoteBM'] = $products[$k]['product']['longDescriptionBM'];
+        }
+
         $first = $products[0]['device'];
         $first ['productCode'] = $products[0]['product']['code'];
         $first ['plan'] = $products[0]['plan'];
@@ -589,7 +604,7 @@ class Model extends BaseController
             $c = self::createSlug($v['device']['color']);
             $tmp = $v['device'];
             $tmp['productCode'] = $v['product']['code'];
-            $tmp['plan'] = $v['plan'];
+            $tmp['plan'] =  $v['plan'];
             $colors[$c][] = $tmp;
 
         }

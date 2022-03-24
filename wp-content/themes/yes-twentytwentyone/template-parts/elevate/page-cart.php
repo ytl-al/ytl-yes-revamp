@@ -6,27 +6,12 @@
             <div class="row g-0">
                 <nav class="navbar navbar-expand-lg">
                     <div class="container">
-                        <a class="navbar-brand d-flex justify-content-start" href="/"><img
-                                    src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/logomark.svg"
-                                    class="logo-top"/></a>
+                        <?php if (function_exists('display_yes_logo')) display_yes_logo(); ?>
                         <div class="justify-content-end" id="navbarSupportedContent">
                             <div class="d-flex align-items-center justify-content-end">
-                                <a href="#">Help</a>
-                                <div class="dropdown language-drop float-end">
-                                    <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button"
-                                       id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <span class="iconify" data-icon="bi:globe"></span> English
-                                    </a>
-
-                                    <ul class="dropdown-menu dropdown-menu-start"
-                                        aria-labelledby="dropdownMenuLink">
-                                        <li><a class="dropdown-item" href="#">English</a></li>
-                                        <li><a class="dropdown-item" href="#">Bhasa Malay</a></li>
-                                        <li><a class="dropdown-item" href="#">中文</a></li>
-                                    </ul>
-                                </div>
-                                <a href="#" class="login-btn"><span class="iconify" data-icon="bx:bxs-cart"></span>
-                                    1 item</a>
+                                <a href="#" class="mx-3">Help</a>
+                                <!-- <?php if (function_exists('yes_language_switcher')) echo yes_language_switcher(); ?> -->
+                                <a href="#" class="login-btn"><span class="iconify" data-icon="bx:bxs-cart"></span> <span id="totalItemCart">1</span> item</a>
                             </div>
                         </div>
                     </div>
@@ -90,7 +75,7 @@
                                         </div>
 
                                     </div>
-                                    <button class="carousel-control-prev" type="button"
+                                    <!-- button class="carousel-control-prev" type="button"
                                             data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         <span class="visually-hidden">Previous</span>
@@ -99,7 +84,7 @@
                                             data-bs-target="#carouselExampleControls" data-bs-slide="next">
                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="visually-hidden">Next</span>
-                                    </button>
+                                    </button -->
 
                                     <div class="carousel-indicators">
                                         <button v-for="(image, index) in orderSummary.product.images" type="button" data-bs-target="#productSlide" :data-bs-slide-to="index"
@@ -125,8 +110,9 @@
                                     <div class="accordion-wrap hlv_3">
                                         <div class="accordion-header" @click="showPlanDetail()"> {{orderSummary.product.selected.plan.nameEN}} <i
                                                     class="icon icon_arrow_down"></i></div>
+                                        <div class="text-description mt-3">{{orderSummary.product.selected.plan.shortDescriptionEN}}</div>
                                         <ul class="accordion-body list-1 mt-3" style="display: none">
-                                            <li>{{orderSummary.product.selected.plan.shortDescriptionEN}}</li>
+                                            <li v-for="(list, index) in orderSummary.product.selected.plan.longDescriptionEN">{{list}}</li>
                                         </ul>
                                     </div>
                                     <div class="text-description mt-3">
@@ -138,11 +124,11 @@
                                 <div class="selectColorWrap mt-3">
                                     <ul>
                                         <li v-for="(image, index) in orderSummary.product.images" @click="changeColor(image.color)"
-                                            data-bs-target="#productSlide" :data-bs-slide-to="index" class="color_select" :class="'color-'+image.color +((string_to_slug(orderSummary.product.selected.color.toLowerCase()) == image.color.toLowerCase())?' selected':'')"><a></a></li>
+                                            data-bs-target="#productSlide" :data-bs-slide-to="index" class="color_select" :class="'color-'+image.color +((orderSummary.orderDetail.color == image.color.toLowerCase())?' selected':'')"><a></a></li>
                                     </ul>
                                 </div>
-                                <div class="text-bold mt-3">Select contract type</div>
-                                <div class="selectContractWrap mt-3">
+                                <div class="text-bold mt-3" v-if="orderSummary.orderDetail.color">Select contract type</div>
+                                <div class="selectContractWrap mt-3" v-if="orderSummary.orderDetail.color">
                                     <ul>
                                         <li v-for="(contract, index) in orderSummary.product.colors[orderSummary.orderDetail.color]" @click="changeContract(contract.productCode)" :data-contract-id="contract.productCode" :class="'contract_' + contract.productCode + ((parseFloat(orderSummary.orderDetail.productCode) == parseFloat(contract.productCode))?' selected':'')"><a>
                                                 <span v-if="contract.contractName == 'Normal'">Normal {{contract.contract}} Months</span>
@@ -151,10 +137,8 @@
                                     </ul>
                                 </div>
                                 <div class="hr_line"></div>
-                                <div class="text-note">
-                                    Enjoy 24-month instalment on your new 5G smart phone.
-                                    <br>*RM0 upfront payment, 0% interest & no credit card required.
-                                    <br>*For myKad holders only. Subject to eligibility.
+                                <div class="text-note" v-if="orderSummary.orderDetail.productCode">
+                                    <div v-for="(detail, index) in orderSummary.product.selected.productNoteEN">{{detail | trim}}</div>
                                 </div>
                             </div>
                         </div>
@@ -297,6 +281,7 @@
 
                     } else {
                         self.isCartEmpty = true;
+                        $('#totalItemCart').text("0");
                         setTimeout(function() {
                             toggleOverlay(false);
                         }, 1500);

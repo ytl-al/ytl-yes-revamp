@@ -65,15 +65,15 @@
                             <div class="col-md-6">
                                 <div>Customer Signature</div>
                                 <div style="height: 50px;"></div>
-                                <div><input type="text" @keypress="check_sign()"  v-model="contract_signed"  class="form-control user_sign" placeholder="Type your full name" id="fname"/></div>
+                                <div><input type="text" @keyup="check_sign()" autocomplete="off"  v-model="contract_signed"  class="form-control user_sign" placeholder="Type your full name" id="fname"/></div>
                                 <div></div>
                                 <div class="mt-4">
-                                    <a class="btn-signup" @click="sign_contract"><i class="icon icon-signup2"></i> Fill and Sign</a>
+                                    <a class="btn-signup" :class="allowSubmit?'btn-signed':'btn-signup'" @click="sign_contract"><i class="icon icon-signup2"></i> <span v-if="allowSubmit">Signed</span><span v-else>Fill and Sign</span></a>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div>Date & Time</div>
-                                <div><?php echo date("d/m/Y H:i:s")?></div>
+                                <div class="mt-3 text-bold"><?php echo date("d/m/Y")?></div>
                             </div>
                         </div>
                         <div class="row">
@@ -100,7 +100,6 @@
         var pageCart = new Vue({
             el: '#main-vue',
             data: {
-                ekyc_url: 'https://ekyc-dev-ui.azurewebsites.net/',
                 qrcode: null,
                 contract:{},
                 contract_signed:"",
@@ -144,6 +143,7 @@
                         contract_id: null,
                         orderItems: []
                     },
+                    orderInfo:{}
                 },
                 currentStep: 0,
                 allowSubmit: false
@@ -165,8 +165,20 @@
                         if (elevate.lsData.deliveryInfo) {
                             self.deliveryInfo = elevate.lsData.deliveryInfo;
                         }
+                        if (elevate.lsData.customer) {
+                            self.customer = elevate.lsData.customer;
+                        }
+
                         if (elevate.lsData.orderSummary) {
                             self.orderSummary = elevate.lsData.orderSummary;
+                        }
+
+                        if (elevate.lsData.product) {
+                            self.orderSummary.product = elevate.lsData.product;
+                        }
+
+                        if (elevate.lsData.orderInfo) {
+                            self.orderSummary.orderInfo = elevate.lsData.orderInfo;
                         }
 
                     } else {
@@ -179,6 +191,7 @@
                 },
                 check_sign: function (){
                     var self = this;
+
                     if(self.contract_signed && self.contract_signed == self.eligibility.name){
                         self.allowSubmit = true;
                     }else{
@@ -190,16 +203,17 @@
                 makeOrder: function (){
                     var self = this;
                     var params = self.customer;
+
                     toggleOverlay();
                     axios.post(apiEndpointURL_elevate + '/order/create', params)
                         .then((response) => {
                             var data = response.data;
                             if(data.status == 1){
                                 //save contract info
-                                elevate.lsData.newOrder = data.data;
+                                self.orderSummary.orderInfo = data.data;
+                                elevate.lsData.orderInfo = data.data;
                                 elevate.updateElevateLSData();
-                                elevate.redirectToPage('thanks');
-
+                                self.submit_contract();
                             }else{
                                 toggleOverlay(false);
                                 $('#error').html("System error, please try again.");
@@ -217,6 +231,8 @@
                 submit_contract: function () {
                     var self = this;
                     var params = self.eligibility;
+                    params.orderId = self.orderSummary.orderInfo.id;
+                    params.contract = self.orderSummary.product.selected.contract;
                     toggleOverlay();
                     axios.post(apiEndpointURL_elevate + '/contract', params)
                         .then((response) => {
@@ -225,9 +241,9 @@
                                 //save contract info
                                 self.contract = data.data;
 
-                                elevate.updateElevateLSData();
                                 elevate.lsData.contract = data.data;
-                                self.makeOrder();
+                                elevate.updateElevateLSData();
+                                elevate.redirectToPage('thanks');
                             }else{
                                 toggleOverlay(false);
                                 $('#error').html("System error, please try again.");
@@ -246,7 +262,12 @@
                     var self = this;
                     $('#error').html("");
                     if(self.allowSubmit){
-                        self.submit_contract();
+                        if(self.orderSummary.orderInfo){
+                            self.submit_contract();
+                        }else{
+                            self.makeOrder();
+                        }
+
                     }
 
                 }

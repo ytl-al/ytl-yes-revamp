@@ -76,7 +76,7 @@
                                         <label class="form-label">* Full Name (as per MyKad)</label>
                                         <div class="input-group align-items-center">
                                             <input type="text" class="form-control" id="full_name" name="name"
-                                                   v-model="eligibility.name" @input="watchAllowNext" placeholder=""
+                                                   v-model="eligibility.name" @keypress="checkInputCharacters(event, 'alpha', true)" @input="watchAllowNext" placeholder=""
                                                    required>
 
                                         </div>

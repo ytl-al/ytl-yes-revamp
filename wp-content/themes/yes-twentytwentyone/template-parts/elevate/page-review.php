@@ -45,9 +45,10 @@
     <section id="cart-body">
         <div class="container p-lg-5 p-3" style="border: 0">
             <div id="main-vue">
+                <div class="subtitle">Review & Pay</div>
             <div class="row gx-5">
                 <div class="col-lg-8 col-12">
-                    <div class="subtitle">Review & Pay</div>
+
                     <div class="border-box">
                         <div class="row">
                             <div class="col-md-3 leftColor">
@@ -59,8 +60,8 @@
                                 <div class="row mt-3">
                                     <div class="col-md-6">
                                         <div class="text-20">
-                                        <div class="subtitle2">{{orderSummary.product.selected.nameEN}}</div>
-                                        <div class="subtitle2">{{orderSummary.product.selected.nameEN}}</div>
+                                        <div class="subtitle2" style="margin-bottom: 0">{{orderSummary.product.selected.nameEN}}</div>
+                                        <div class="subtitle2">{{orderSummary.product.selected.plan.nameEN}}</div>
                                         </div>
                                         <div class="hr_line"></div>
                                         <div class="text-bold">
@@ -99,7 +100,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div style="float: right">
-                                    <a href="#" class="btn-edit">(Edit)</a>
+                                    <a href="/elevate/personal" class="btn-edit">(Edit)</a>
                                 </div>
 
                             </div>
@@ -135,7 +136,7 @@
                                     <p>Upfront Payment</p>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.orderDetail.upfront).toFixed(2)) }}</p>
+                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.product.selected.upFrontPayment).toFixed(2)) }}</p>
                                 </div>
                             </div>
                             <div class="hr_line"></div>
@@ -311,6 +312,7 @@
                 goNext: function () {
                     var self = this;
                     if(self.allowSubmit){
+                        toggleOverlay();
                         elevate.redirectToPage('contract');
                     }
                 }

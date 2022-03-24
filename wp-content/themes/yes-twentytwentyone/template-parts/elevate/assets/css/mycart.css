@@ -37,7 +37,7 @@ main.site-main {
 }
 
 .nav-container .language-drop .dropdown-toggle {
-    background-color: #00B4F0;
+    background-color: #1A1E47;
     border: none;
     font-size: 15px;
     font-weight: 600;
@@ -437,6 +437,26 @@ main.site-main {
     padding: 5px 25px;
     color: #0c0c0c;
     cursor: pointer;
+    min-width: 200px;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-signed {
+    background: #FFFFFF;
+    border: 1px solid #FF0084!important;
+    box-sizing: border-box;
+    border-radius: 30px;
+    padding: 5px 25px;
+    color: #FF0084!important;
+    cursor: pointer;
+    min-width: 200px;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-signed .icon-signup2{
+    background-image: url(../images/icon_signup.svg)!important;
 }
 
 .body_container {
