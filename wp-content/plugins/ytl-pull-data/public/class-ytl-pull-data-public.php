@@ -1134,7 +1134,7 @@ class Ytl_Pull_Data_Public
 					'universityName' 		=> $university_name, 
 					'dealerCode' 			=> $dealer_code, 
 					'dealerLoginId' 		=> $dealer_login_id, 
-					'supportingDocUniqueId'	=> 1
+					'supportingDocUniqueId'	=> null
 				], 
 
 				'orderDetail' 			=> [
