@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="col-lg-4 col-6 text-lg-center text-end">
-
+                <h1 class="title_checkout p-3"></h1>
             </div>
             <div class="col-lg-4">
 
@@ -23,7 +23,7 @@
 
     <section id="cart-body">
         <div class="container" style="border: 0">
-
+            <div id="main-vue">
             <div class="border-box thanks_bg p-lg-5">
                 <div class="row">
                     <div class="col-md-3 col-sm-3 col-6 offset-6">
@@ -39,7 +39,7 @@
                 <div style="height: 300px"></div>
 
             </div>
-
+            </div>
         </div>
     </section>
 

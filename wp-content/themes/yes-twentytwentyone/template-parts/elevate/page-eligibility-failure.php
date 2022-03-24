@@ -41,9 +41,9 @@
     <section id="cart-body">
         <div class="container" style="border: 0">
             <div id="main-vue">
-                <div class="border-box">
+                <div class="border-box pad-mobile">
                     <div class="text-center p-lg-5">
-                        <h2 class="subtitle">Sorry! We ran a check and you did not pass our ID verification</h2>
+                        <h2 class="subtitle mt-3">Sorry! We ran a check and you did not pass our ID verification</h2>
                         <p style="max-width: 750px; margin: auto">
                             It seems like you did not qualify, however we’ve picked out some other<br> plans that you might be interested in.
                         </p>

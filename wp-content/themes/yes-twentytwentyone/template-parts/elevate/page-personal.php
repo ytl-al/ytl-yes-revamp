@@ -107,7 +107,7 @@
                                     <div class="invalid-feedback mt-1" id="em-email"></div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row d-none d-md-block">
                                 <div class="col-6">
                                     <button class="pink-btn-disable text-uppercase" @click="goNext"
                                             :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">Continue
@@ -175,6 +175,14 @@
                                         </select>
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-city"></div>
+                                </div>
+
+                                <div class="row d-block d-md-none">
+                                    <div class="col-6">
+                                        <button class="pink-btn-disable text-uppercase" @click="goNext"
+                                                :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">Continue
+                                        </button>
+                                    </div>
                                 </div>
 
                             </div>

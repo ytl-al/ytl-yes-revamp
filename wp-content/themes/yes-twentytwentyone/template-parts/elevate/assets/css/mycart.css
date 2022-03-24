@@ -33,7 +33,7 @@ main.site-main {
 }
 
 #main-vue {
-    height: 100%;
+    height: calc(100% - 60px);
 }
 
 .nav-container .language-drop .dropdown-toggle {
@@ -537,7 +537,9 @@ main.site-main {
     background: #555;
     opacity: 1;
 }
-
+#productSlide{
+    margin-bottom: 100px;
+}
 #productSlide .carousel-item{
     padding:50px;
 }
@@ -1099,11 +1101,87 @@ ul.wizard {
 }
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    body{
+        overflow-x: hidden;
+    }
+    #main-vue {
+        height: auto;
+    }
     ul.wizard span {
-        font-size: 11px;
+        font-size: 8px;
     }
 
     ul.wizard li.completed span {
-        font-size: 11px;
+        font-size: 8px;
+    }
+
+    .pad-mobile{
+        padding:15px;
+    }
+    #cart-body {
+        padding: 0;
+    }
+    .body_container {
+        padding: 0;
+    }
+
+    #cart-body .container {
+        border:0;
+        border-radius: 0px;
+    }
+
+    .title_checkout {
+        font-size: 20px;
+    }
+
+    .bg-checkout,
+    .bg-checkout1,
+    .bg-checkout2{
+        border-radius: 0;
+    }
+
+    .checkout-left {
+        margin-top: 60px;
+        margin-bottom: 70px;
+    }
+
+    .verify-body {
+        padding: 0;
+    }
+
+    .text-end {
+        text-align: left!important;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
+    .subtitle {
+        font-size: 20px;
+    }
+
+    .summary-box {
+        box-shadow:none;
+        border-radius: 0;
+    }
+
+    .border-box {
+        border: 0;
+    }
+
+    .plan-item {
+        border: 3px solid #f1f1f1;
+        box-sizing: border-box;
+        border-radius: 8px;
+        background: #FFFFFF;
+        box-shadow: none;
+        cursor: pointer;
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .plan_tabs {
+        margin-top: 40px;
     }
 }

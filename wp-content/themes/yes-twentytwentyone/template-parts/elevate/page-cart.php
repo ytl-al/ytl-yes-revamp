@@ -30,7 +30,7 @@
         </section>
         <section id="cart-body">
             <div class="container no-border">
-        <div class="row mb-5">
+        <div class="row mt-5 mb-5">
             <div class="col-lg-8 col-12">
                 <div class="accordion">
                     <div class="packagebox mb-3">
@@ -75,16 +75,6 @@
                                         </div>
 
                                     </div>
-                                    <!-- button class="carousel-control-prev" type="button"
-                                            data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button"
-                                            data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button -->
 
                                     <div class="carousel-indicators">
                                         <button v-for="(image, index) in orderSummary.product.images" type="button" data-bs-target="#productSlide" :data-bs-slide-to="index"
@@ -98,47 +88,49 @@
                                 </div>
                             </div>
                             <div class="col-md-7">
-                                <h2 class="subtitle">{{ orderSummary.product.selected.nameEN }}</h2>
-                                <div class="mt-3">
-                                    <div class="text-bold">Capacity</div>
-                                    <div class="hlv_3">
-                                        {{ orderSummary.product.selected.capacity }}
+                                <div class="pad-mobile">
+                                    <h2 class="subtitle">{{ orderSummary.product.selected.nameEN }}</h2>
+                                    <div class="mt-3">
+                                        <div class="text-bold">Capacity</div>
+                                        <div class="hlv_3">
+                                            {{ orderSummary.product.selected.capacity }}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="mt-3">
-                                    <div class="text-bold">Plan</div>
-                                    <div class="accordion-wrap hlv_3">
-                                        <div class="accordion-header" @click="showPlanDetail()"> {{orderSummary.product.selected.plan.nameEN}} <i
-                                                    class="icon icon_arrow_down"></i></div>
-                                        <div class="text-description mt-3">{{orderSummary.product.selected.plan.shortDescriptionEN}}</div>
-                                        <ul class="accordion-body list-1 mt-3" style="display: none">
-                                            <li v-for="(list, index) in orderSummary.product.selected.plan.longDescriptionEN">{{list}}</li>
+                                    <div class="mt-3">
+                                        <div class="text-bold">Plan</div>
+                                        <div class="accordion-wrap hlv_3">
+                                            <div class="accordion-header" @click="showPlanDetail()"> {{orderSummary.product.selected.plan.nameEN}} <i
+                                                        class="icon icon_arrow_down"></i></div>
+                                            <div class="text-description mt-3">{{orderSummary.product.selected.plan.shortDescriptionEN}}</div>
+                                            <ul class="accordion-body list-1 mt-3" style="display: none">
+                                                <li v-for="(list, index) in orderSummary.product.selected.plan.longDescriptionEN">{{list}}</li>
+                                            </ul>
+                                        </div>
+                                        <div class="text-description mt-3">
+
+                                        </div>
+                                    </div>
+                                    <div class="hr_line"></div>
+                                    <div class="text-bold mt-3">Select color</div>
+                                    <div class="selectColorWrap mt-3">
+                                        <ul>
+                                            <li v-for="(image, index) in orderSummary.product.images" @click="changeColor(image.color)"
+                                                data-bs-target="#productSlide" :data-bs-slide-to="index" class="color_select" :class="'color-'+image.color +((orderSummary.orderDetail.color == image.color.toLowerCase())?' selected':'')"><a></a></li>
                                         </ul>
                                     </div>
-                                    <div class="text-description mt-3">
-
+                                    <div class="text-bold mt-3" v-if="orderSummary.orderDetail.color">Select contract type</div>
+                                    <div class="selectContractWrap mt-3" v-if="orderSummary.orderDetail.color">
+                                        <ul>
+                                            <li v-for="(contract, index) in orderSummary.product.colors[orderSummary.orderDetail.color]" @click="changeContract(contract.productCode)" :data-contract-id="contract.productCode" :class="'contract_' + contract.productCode + ((parseFloat(orderSummary.orderDetail.productCode) == parseFloat(contract.productCode))?' selected':'')"><a>
+                                                    <span v-if="contract.contractName == 'Normal'">Normal {{contract.contract}} Months</span>
+                                                    <span v-else >Elevate {{contract.contract}} Months</span>
+                                                </a></li>
+                                        </ul>
                                     </div>
-                                </div>
-                                <div class="hr_line"></div>
-                                <div class="text-bold mt-3">Select color</div>
-                                <div class="selectColorWrap mt-3">
-                                    <ul>
-                                        <li v-for="(image, index) in orderSummary.product.images" @click="changeColor(image.color)"
-                                            data-bs-target="#productSlide" :data-bs-slide-to="index" class="color_select" :class="'color-'+image.color +((orderSummary.orderDetail.color == image.color.toLowerCase())?' selected':'')"><a></a></li>
-                                    </ul>
-                                </div>
-                                <div class="text-bold mt-3" v-if="orderSummary.orderDetail.color">Select contract type</div>
-                                <div class="selectContractWrap mt-3" v-if="orderSummary.orderDetail.color">
-                                    <ul>
-                                        <li v-for="(contract, index) in orderSummary.product.colors[orderSummary.orderDetail.color]" @click="changeContract(contract.productCode)" :data-contract-id="contract.productCode" :class="'contract_' + contract.productCode + ((parseFloat(orderSummary.orderDetail.productCode) == parseFloat(contract.productCode))?' selected':'')"><a>
-                                                <span v-if="contract.contractName == 'Normal'">Normal {{contract.contract}} Months</span>
-                                                <span v-else >Elevate {{contract.contract}} Months</span>
-                                            </a></li>
-                                    </ul>
-                                </div>
-                                <div class="hr_line"></div>
-                                <div class="text-note" v-if="orderSummary.orderDetail.productCode">
-                                    <div v-for="(detail, index) in orderSummary.product.selected.productNoteEN">{{detail | trim}}</div>
+                                    <div class="hr_line"></div>
+                                    <div class="text-note" v-if="orderSummary.orderDetail.productCode">
+                                        <div v-for="(detail, index) in orderSummary.product.selected.productNoteEN">{{detail | trim}}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

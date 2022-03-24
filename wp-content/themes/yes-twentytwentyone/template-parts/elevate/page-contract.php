@@ -24,7 +24,7 @@
         <div class="container" style="border: 0">
             <div id="main-vue">
             <div class="border-box p-lg-5">
-                <div class="mb-5">
+                <div class="mb-5 pad-mobile">
                     <h2 class="subtitle mt-3 mb-3">Yes Elevate Contract Permissions</h2>
                     <p>Read our contract conditions before proceeding.</p>
                     <div class="mt-3 content">
