@@ -42,7 +42,7 @@
     <!-- Banner End -->
     <section id="cart-body">
         <div class="container" style="border: 0">
-
+            <div id="main-vue">
             <div class="border-box">
                 <div class="row">
                     <div class="col-md-5 p-5 flex-column bg-checkout">
@@ -58,8 +58,8 @@
                             <h3 class="subtitle2">Scan the QR code to begin verification</h3>
                             <div class="mt-5 mb-5">
                                 <div id="qrcode"></div>
-                                <div class="text-center">
-                                    <a id="cmdVerify" href="#" target="_blank" class="btn btn-danger mt-3 hide-de">Verify Now</a>
+                                <div class="text-center d-block d-md-none">
+                                    <a id="cmdVerify" href="#" target="_blank" class="btn btn-danger mt-3">Verify Now</a>
                                 </div>
                             </div>
                             <h3 class="subtitle2">Complete the verification in 2 simple steps!</h3>
@@ -82,11 +82,10 @@
                     </div>
                 </div>
             </div>
-
+            </div>
         </div>
     </section>
 
-    <div id="main-vue"></div>
 </main>
 <?php require_once('includes/footer.php'); ?>
 <script type="text/javascript"
@@ -205,7 +204,7 @@
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
-                                    if(data.data.processStatus == "OCRImageCompleted"){
+                                    if(data.data.processStatus == "EKYC_Done"){
                                         //success
                                         clearInterval(self.interval);
                                         self.CAEligibility();
