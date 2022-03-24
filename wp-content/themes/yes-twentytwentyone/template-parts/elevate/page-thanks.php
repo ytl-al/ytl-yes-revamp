@@ -26,7 +26,7 @@
             <div id="main-vue">
             <div class="border-box thanks_bg p-lg-5">
                 <div class="row">
-                    <div class="col-md-3 col-sm-3 col-6 offset-6">
+                    <div class="col-md-3 col-sm-3 col-12 offset-md-6 thank-mb">
                         <h1 class="title">Thank you!</h1>
                         <div class="mt-5">Tracking Number / Order Number</div>
                         <div class="subtitle">MYOS2107302000010601</div>
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="height: 300px"></div>
+                <div style="height: 300px" class="d-none d-md-block"></div>
 
             </div>
             </div>
@@ -115,10 +115,10 @@
                         }
 
                         console.log(self.orderSummary.orderInfo);
-                        elevate.removeElevateLSData();
+                        //elevate.removeElevateLSData();
 
                     } else {
-                        elevate.redirectToPage('cart');
+                        //elevate.redirectToPage('cart');
                     }
                 }
             }
