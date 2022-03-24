@@ -326,6 +326,23 @@
                         });
                 },
 
+                validateMobile: function (mob) {
+                    if (mob.length < 10 && mob.length > 11) {
+                        return false;
+                    }
+                    if (mob.slice(0, 2) != '01') {
+                        return false;
+                    }
+
+                    if (mob.slice(0, 3) == '011') {
+                        if (mob.length < 11) {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                },
+
                 watchAllowNext: function () {
                     $('.input_error').removeClass('input_error');
                     var self = this;
@@ -349,8 +366,12 @@
                         $('#mykad_number').addClass('input_error');
                     }
 
-                    var phone = /^[0-46-9]*[0-9]{9,10}$/g;
+                    /*var phone = /^[0-46-9]*[0-9]{9,10}$/g;
                     if (self.eligibility.phone.trim() && !phone.test(self.eligibility.phone.trim())) {
+                        isFilled = false;
+                        $('#ic_phone_number').addClass('input_error');
+                    }*/
+                    if(!self.validateMobile(self.eligibility.phone)){
                         isFilled = false;
                         $('#ic_phone_number').addClass('input_error');
                     }
