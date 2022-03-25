@@ -84,8 +84,8 @@
                                             <div class="input-group align-items-center">
                                                 <select class="form-select" id="select-gender" name="gender" data-live-search="true" v-model="deliveryInfo.gender" @change="watchAllowNext" :disabled="!allowGender" required>
                                                     <option value="" selected="selected" disabled="disabled">Select Gender</option>
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
+                                                    <option value="MALE">Male</option>
+                                                    <option value="FEMALE">Female</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -604,7 +604,7 @@
                     if (self.deliveryInfo.securityType == 'NRIC') {
                         var nricNo = self.deliveryInfo.securityId;
                         var lastFour = nricNo.slice(-4);
-                        self.deliveryInfo.gender = (lastFour % 2 == 0) ? 'Female' : 'Male';
+                        self.deliveryInfo.gender = (lastFour % 2 == 0) ? 'FEMALE' : 'MALE';
                         self.allowGender = false;
                     } else {
                         self.allowGender = true;
