@@ -1100,6 +1100,13 @@ ul.wizard {
     top: 10px;
 }
 
+.contract-disabled {
+    border: 2px solid #C4C4C4!important;
+    background: #C4C4C4!important;
+    color: #999;
+    cursor: default!important;
+}
+
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
     html, body {
         width: 100%;

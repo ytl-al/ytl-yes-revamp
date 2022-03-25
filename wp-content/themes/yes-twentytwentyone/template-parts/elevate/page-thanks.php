@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-4 col-6">
                 <div class="mt-4">
-                    <a href="/elevate/cart/" class="back-btn "><img
+                    <a href="/" class="back-btn "><img
                                 src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
                                 alt=""> Back to Homepage</a>
                 </div>
@@ -115,7 +115,7 @@
                         }
 
                         console.log(self.orderSummary.orderInfo);
-                        //elevate.removeElevateLSData();
+                        elevate.removeElevateLSData();
 
                     } else {
                         //elevate.redirectToPage('cart');

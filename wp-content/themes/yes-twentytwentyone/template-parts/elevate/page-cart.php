@@ -121,9 +121,9 @@
                                     <div class="text-bold mt-3" v-if="orderSummary.orderDetail.color">Select contract type</div>
                                     <div class="selectContractWrap mt-3" v-if="orderSummary.orderDetail.color">
                                         <ul>
-                                            <li v-for="(contract, index) in orderSummary.product.colors[orderSummary.orderDetail.color]" @click="changeContract(contract.productCode)" :data-contract-id="contract.productCode" :class="'contract_' + contract.productCode + ((parseFloat(orderSummary.orderDetail.productCode) == parseFloat(contract.productCode))?' selected':'')"><a>
+                                            <li v-for="(contract, index) in orderSummary.product.colors[orderSummary.orderDetail.color]" @click="changeContract(contract.productCode)" :data-contract-id="contract.productCode" class="text-uppercase" :class="'contract_' + contract.productCode + ((parseFloat(orderSummary.orderDetail.productCode) == parseFloat(contract.productCode))?' selected':'')"><a>
                                                     <span v-if="contract.contractName == 'Normal'">Normal {{contract.contract}} Months</span>
-                                                    <span v-else >Elevate {{contract.contract}} Months</span>
+                                                    <span v-else >Infinite {{contract.contract}} Months</span>
                                                 </a></li>
                                         </ul>
                                     </div>
