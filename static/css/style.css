@@ -1010,10 +1010,6 @@ section {
     box-shadow: none;
 }
 
-.breadcrumb-section {
-    background-color: #DEE5EF;
-}
-
 .breadcrumb-section .breadcrumb {
     margin-bottom: 0;
     padding: 10px 0px;
