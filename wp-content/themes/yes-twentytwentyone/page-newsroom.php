@@ -1,8 +1,8 @@
-<?php get_header(); ?>
-
 <?php
-$lang       = get_bloginfo('language');
-$abs_path           = 'templates/supported-devices';
+get_header();
+
+$lang = get_bloginfo('language');
+$abs_path = 'templates/news-room';
 $page_template_path = "$abs_path/content-en";
 
 if ($lang == 'ms-MY') {
@@ -12,6 +12,5 @@ if ($lang == 'ms-MY') {
 }
 
 get_template_part($page_template_path);
-?>
 
-<?php get_footer(); ?>
+get_footer();
