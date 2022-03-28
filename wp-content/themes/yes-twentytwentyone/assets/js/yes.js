@@ -1,11 +1,7 @@
 /* 
     JavaScript Name : Yes TwentyTwentyOne 
     Created on      : September 09, 2021, 03:04:23 PM
-<<<<<<< HEAD
     Last edited on  : March     15, 2022, 03:52:31 PM
-=======
-    Last edited on  : December  05, 2021, 03:52:31 PM
->>>>>>> custom-posts
     Author          : [YTL Digital Design] - AL
 */
 const yesLocalStorageName = 'yesSession';
@@ -24,11 +20,8 @@ $(document).ready(function() {
 
     initBootstrapTooltip();
 
-<<<<<<< HEAD
     initBetterDocsCustomize();
 
-=======
->>>>>>> custom-posts
     $('.link-jumpSection').on('click', function() {
         jumpSection(this);
     });
