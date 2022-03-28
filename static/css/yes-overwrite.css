@@ -1,0 +1,51 @@
+/* 
+    Stylesheet Name : Yes TwentyTwentyOne - New Branding Overwrite
+    Created on      : March     09, 2022, 11:14:12 AM
+    Last edited on  : March     09, 2022, 08:24:23 PM
+    Author          : [YTL Digital Design] - Zeeshan, AL
+*/
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    background-color: #FFF;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.navbar-brand {
+    display: inline-block;
+    padding-top: 10px;
+}
+
+.logo-top {
+    width: 35px;
+}
+
+.top-tabs-container {
+    background-color: #1A1E47;
+}
+
+.top-tabs-container .tabnav li {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.top-tabs-container .tabnav li a {
+    color: #FFF;
+    background-color: transparent;
+}
+
+.top-tabs-container .tabnav li a.active {
+    background-color: transparent;
+    font-weight: 700;
+}
