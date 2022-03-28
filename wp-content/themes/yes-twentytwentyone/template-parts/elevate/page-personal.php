@@ -155,24 +155,32 @@
                                 <div class="col-md-6 col-12">
                                     <label class="form-label" for="select-state">* State</label>
                                     <div class="input-group align-items-center">
-                                        <select class="form-select" id="state" name="state" data-live-search="true"
-                                                v-model="deliveryInfo.state" @change="watchChangeState" required>
+                                        <!--select class="form-select" id="state" name="state" data-live-search="true"
+                                                v-model="deliveryInfo.state" @change="watchChangeState" required readonly="">
                                             <option value="" selected="selected" disabled="disabled">Select State
                                             </option>
                                             <option v-for="state in postCode.state" :value="state">{{state}}
                                             </option>
-                                        </select>
+                                        </select-->
+                                        <input type="text"  class="form-control"  id="state" name="state"
+                                               v-model="deliveryInfo.state"  @input="watchAllowNext"
+                                               placeholder=""
+                                               required readonly/>
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-state"></div>
                                 </div>
                                 <div class="col-md-6 col-12">
                                     <label class="form-label">* City</label>
                                     <div class="input-group align-items-center">
-                                        <select class="form-select" id="city" name="city" data-live-search="true"
-                                                v-model="deliveryInfo.city" @change="watchChangeCity" required>
+                                        <!--select class="form-select" id="city" name="city" data-live-search="true"
+                                                v-model="deliveryInfo.city" @change="watchChangeCity" required readonly>
                                             <option v-for="city in postCode.city" :value="city">{{city}}
                                             </option>
-                                        </select>
+                                        </select-->
+                                        <input type="text" class="form-control"  id="city" name="city"
+                                               v-model="deliveryInfo.city"  @input="watchAllowNext"
+                                               placeholder=""
+                                               required readonly/>
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-city"></div>
                                 </div>
