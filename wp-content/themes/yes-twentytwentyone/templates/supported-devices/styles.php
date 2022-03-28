@@ -155,6 +155,7 @@
 
     #supported-device .phone-box .phone-img {
         max-width: 100%;
+        max-height: 212px;
         margin: 0 auto;
         margin-bottom: 20px;
     }
