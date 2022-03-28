@@ -35,6 +35,7 @@ class ElevateApi
     const  api_product = 'api/Elevate/product';
     const  api_product_get_by_id = 'api/Elevate/product/Id';
     const  api_product_get_by_nric = 'api/Elevate/product/productId';
+    const  api_product_bundle = 'api/Elevate/product/GetAllProducts';
 
     const api_caeligibility = 'api/Elevate/customer/CAEligibility';
 
@@ -128,10 +129,47 @@ class ElevateApi
     public static function getProduct(WP_REST_Request $request)
     {
         $code = $request['code'];
-        $product = \Inc\Base\Model::getProductByCode($code);
+//        $product = \Inc\Base\Model::getProductByCode($code);
+        $product = \Inc\Base\Model::refinde(self::pullBundleProduct($code));
+
         $response = new WP_REST_Response($product);
         $response->set_status(200);
         return $response;
+    }
+
+    private static function pullBundleProduct($code){
+        $params = array(
+            'productBundleId'=>$code
+        );
+        $token = self::get_token();
+
+        $args = [
+            'headers' => array(
+                'Accept' => 'text/plain',
+                'Authorization' => 'Bearer ' . $token,
+                'Content-Type' => 'application/json'
+            ),
+            'body' => $params,
+            'method' => 'GET'
+        ];
+
+
+        $api_url = self::api_url . self::api_product_bundle;
+
+        $request = wp_remote_get($api_url, $args);
+
+        $response = $request['response'];
+        $res_code = $response['code'];
+
+        if (is_wp_error($request)) {
+           return false;
+        } else if ($res_code != 200) {
+            return false;
+        } else {
+            $data = json_decode($request['body'], true);
+            $return = $data;
+        }
+        return $return;
     }
 
     public static function verify_eligibility(WP_REST_Request $request)

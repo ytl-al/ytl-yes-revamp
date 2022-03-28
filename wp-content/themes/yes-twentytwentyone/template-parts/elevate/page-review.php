@@ -145,11 +145,11 @@
                                     <input type="checkbox" id="subscribe" @click="watchAllowNext" name="subscribe" value="1">
                                 </div>
                                 <div class="col-11 text-12">
-                                    <p>I here by agree to subscribe to the plan selected in the online form
+                                    <label for="subscribe">I here by agree to subscribe to the plan selected in the online form
                                         submitted by me, and to be bound by the First to 5G Campaign Terms and
                                         Conditions available at <a target="_blank"
                                                                    href="https://www.yes.my/tnc/ongoing-campaigns-tnc">www.yes.my/tnc/ongoing-campaigns-tnc</a>.
-                                    </p>
+                                    </label>
                                 </div>
                             </div>
                             <div class="row mt-2 ">
@@ -157,10 +157,10 @@
                                     <input type="checkbox" id="consent" @click="watchAllowNext" name="consent" value="1">
                                 </div>
                                 <div class="col-11 text-12">
-                                    <p>I further give consent to YTLC to process my personal data in accordance with
+                                    <label for="consent">I further give consent to YTLC to process my personal data in accordance with
                                         the YTL Group Privacy Policy available at <a target="_blank"
                                                                                      href="https://www.ytl.com/privacypolicy.asp">www.ytl.com/privacypolicy.asp</a>.
-                                    </p>
+                                    </label>
                                 </div>
                             </div>
 

@@ -50,7 +50,7 @@
             </div>
         </section>
     </div>
-    <div id="container-hasItem" v-if="!isCartEmpty">
+    <div id="container-hasItem" v-if="hasFetchPlan">
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
@@ -267,6 +267,7 @@
                        if(!elevate.lsData.product){
                             self.ajaxGetPlanData();
                         }else{
+                            self.hasFetchPlan = true;
                             self.orderSummary.product.selected = self.selectedProduct(self.orderSummary.orderDetail.color, self.orderSummary.orderDetail.productCode);
                             self.isValidCart();
                         }
@@ -292,7 +293,7 @@
                             self.orderSummary.product = data;
 
                             self.updatePlan();
-
+                            self.hasFetchPlan = true;
 
                             toggleOverlay(false);
 
