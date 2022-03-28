@@ -35,7 +35,7 @@ class ElevateApi
     const  api_product = 'api/Elevate/product';
     const  api_product_get_by_id = 'api/Elevate/product/Id';
     const  api_product_get_by_nric = 'api/Elevate/product/productId';
-    const  api_product_bundle = 'api/Elevate/product/GetAllProducts';
+    const  api_product_bundle = 'api/Elevate/product/GetProductsByProductBundleId';
 
     const api_caeligibility = 'api/Elevate/customer/CAEligibility';
 
@@ -129,6 +129,7 @@ class ElevateApi
     public static function getProduct(WP_REST_Request $request)
     {
         $code = $request['code'];
+
 //        $product = \Inc\Base\Model::getProductByCode($code);
         $product = \Inc\Base\Model::refinde(self::pullBundleProduct($code));
 
