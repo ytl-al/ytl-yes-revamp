@@ -5,7 +5,6 @@
     ?>
             <option value="<?= $data_idd['country_name'] ?>"><?= $data_idd['country_name']; ?></option>
     <?php
-            break;
         endforeach;
     endif;
     ?>
