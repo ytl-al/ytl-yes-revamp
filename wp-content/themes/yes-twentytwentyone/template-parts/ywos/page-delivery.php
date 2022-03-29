@@ -800,6 +800,7 @@
                     var params = {
                         'phone_number': self.deliveryInfo.msisdn,
                         'customer_name': self.deliveryInfo.name,
+                        'dob': self.deliveryInfo.dob, 
                         'email': self.deliveryInfo.email,
                         'security_type': self.deliveryInfo.securityType,
                         'security_id': self.deliveryInfo.securityId,

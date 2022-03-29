@@ -798,6 +798,7 @@ class Ytl_Pull_Data_Public
 	{
 		$phone_number 	= (isset($order_info['phone_number']) && !empty(trim($order_info['phone_number']))) 	? $order_info['phone_number'] 	: null;
 		$customer_name 	= (isset($order_info['customer_name']) && !empty(trim($order_info['customer_name']))) 	? $order_info['customer_name'] 	: null;
+		$dob 			= (isset($order_info['dob']) && !empty(trim($order_info['dob']))) 						? $order_info['dob'] 			: null;
 		$email 			= (isset($order_info['email']) && !empty(trim($order_info['email']))) 					? $order_info['email'] 			: null;
 		$security_type 	= (isset($order_info['security_type']) && !empty(trim($order_info['security_type']))) 	? $order_info['security_type'] 	: null;
 		$security_id 	= (isset($order_info['security_id']) && !empty(trim($order_info['security_id']))) 		? $order_info['security_id'] 	: null;
@@ -814,10 +815,11 @@ class Ytl_Pull_Data_Public
 
 		$session_id 	= $this->ca_generate_auth_token(true);
 
-		if ($phone_number != null && $customer_name != null && $email != null && $security_type != null && $security_id != null && $address_line != null && $city != null && $city_code != null && $state != null && $state_code != null && $postal_code != null && $country != null && $plan_bundle_id != 0 && $plan_type != null && $plan_name != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
+		if ($phone_number != null && $customer_name != null && $dob != null && $email != null && $security_type != null && $security_id != null && $address_line != null && $city != null && $city_code != null && $state != null && $state_code != null && $postal_code != null && $country != null && $plan_bundle_id != 0 && $plan_type != null && $plan_name != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params 	= [
 				'alternatePhoneNumber' 	=> $phone_number,
 				'customerFullName' 		=> $customer_name,
+				'dob' 					=> $dob,
 				'email' 				=> $email,
 				'securityType' 			=> $security_type,
 				'securityId' 			=> $security_id,
