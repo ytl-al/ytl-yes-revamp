@@ -5,6 +5,9 @@
     Author          : [YTL Digital Design] - Zeeshan, AL
 */
 
+
+/* Styling by Zeeshan Start */
+
 body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
@@ -20,11 +23,13 @@ h5 {
     margin: 0;
     padding: 0;
     font-family: 'Montserrat', sans-serif;
+    letter-spacing: -0.02em;
 }
 
 .navbar-brand {
     display: inline-block;
     padding-top: 10px;
+    margin: 0;
 }
 
 .logo-top {
@@ -42,10 +47,582 @@ h5 {
 
 .top-tabs-container .tabnav li a {
     color: #FFF;
+    padding: 17px 13px;
     background-color: transparent;
 }
 
 .top-tabs-container .tabnav li a.active {
     background-color: transparent;
     font-weight: 700;
+}
+
+.top-tabs-container .language-drop .dropdown-toggle {
+    background-color: transparent;
+    color: #FFF;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.top-tabs-container .language-drop svg {
+    margin-right: 5px;
+}
+
+.top-tabs-container .language-drop .dropdown-item {
+    font-size: 12px;
+}
+
+.nav-container {
+    background-color: #FFF;
+}
+
+.nav-container .nav-link {
+    color: #1A1E47;
+}
+
+.navbar-toggler-icon {
+    background-image: url(../images/menu-line.svg);
+}
+
+.mega-dropdown-menu>li>ul>li.dropdown-header {
+    color: #1A1E47;
+    font-size: 14px;
+}
+
+.mega-dropdown-menu>li>ul>li>a {
+    color: #2B2B2B;
+    font-size: 14px;
+}
+
+.mega-dropdown-menu {
+    box-shadow: 0px 3px 4px rgb(0 0 0 / 25%);
+}
+
+.navbar-toggler-icon {
+    background-image: url(../images/menu-line-new.svg);
+}
+
+#slider-yes-home .slider-content h1 {
+    font-size: 48px;
+    line-height: 56px;
+    font-weight: 700;
+    color: #000;
+}
+
+#slider-yes-home .slider-content h1 span {
+    font-weight: 800;
+}
+
+#slider-yes-home .slider-content h1.white {
+    color: #FFF;
+}
+
+#slider-yes-home .slider-content p {
+    color: #000;
+    font-size: 24px;
+    line-height: 34px;
+}
+
+#slider-yes-home .slider-content p span {
+    font-weight: 700;
+}
+
+#slider-yes-home .slider-content p.small {
+    font-size: 16px;
+}
+
+#slider-yes-home .slider-content p.white {
+    color: #FFF;
+}
+
+#slider-yes-home .slider-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    left: 0;
+    top: 0;
+}
+
+#popular-deals h1 {
+    font-size: 39px;
+    line-height: 47px;
+}
+
+#popular-deals .deal-box {
+    background-color: #FFF;
+    box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    border: none;
+}
+
+#popular-deals .deal-box h2 {
+    background-color: #F7F8F9;
+    color: #1A1E47;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 23px;
+}
+
+.pink-btn {
+    background-color: #FF0084;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0.7rem 2.3rem;
+}
+
+#popular-deals .deal-box .content p.pricing {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 23px;
+    letter-spacing: -0.02em;
+    color: #000;
+    margin: 28px 0px;
+}
+
+#popular-deals .deal-box .content p {
+    line-height: 24px;
+    color: #2B2B2B;
+}
+
+#popular-deals p.small {
+    font-size: 12px !important;
+    color: #525252 !important;
+}
+
+#popular-deals .deal-box .content h3 {
+    font-weight: 800;
+    font-size: 23px;
+    color: #000;
+}
+
+.blue-arrow-link {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #2F3BF5;
+    text-align: center;
+}
+
+.blue-arrow-link svg {
+    margin-left: 5px;
+    font-size: 20px;
+}
+
+.blue-arrow-link:hover {
+    text-decoration: underline;
+    color: #2F3BF5;
+}
+
+#quick-action .whitebox {
+    background-color: #FFF;
+    filter: drop-shadow(0px 2px 12px 3px rgba(0, 0, 0, 0.1));
+    border-radius: 10px;
+}
+
+#quick-action .action-links {
+    background-color: #FFF;
+    border-radius: 10px;
+}
+
+#quick-action .whitebox h1 {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 56px;
+}
+
+#amazing-things {
+    background-image: none;
+}
+
+#faq-section .accordion-button {
+    background-color: #FFF;
+    border: none;
+    box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    color: #2B2B2B;
+    font-weight: 700;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#faq-section .accordion-button:focus {
+    box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
+}
+
+#faq-section .accordion-body {
+    font-size: 15px;
+    background-color: #FFF;
+}
+
+#faq-section .viewall-btn {
+    color: #2F3BF5;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#faq-section .accordion-item {
+    margin-bottom: 25px;
+}
+
+#faq-section .accordion-button::after {
+    opacity: 0.5;
+}
+
+#wpcf7-f630-o1,
+#wpcf7-f816-o1,
+#wpcf7-f820-o1 {
+    background: none;
+    background-color: #F7F8F9;
+}
+
+#newsletter h1 {
+    font-size: 23px;
+    line-height: 28px;
+    color: #000;
+}
+
+#newsletter p {
+    color: #2B2B2B;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+#newsletter input[type=email] {
+    font-size: 16px;
+    color: #2B2B2B;
+}
+
+#newsletter label {
+    font-size: 10px;
+    color: #2B2B2B;
+}
+
+#newsletter .white-btn {
+    background-color: #2F3BF5;
+    color: #FFF;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#newsletter .white-btn:hover {
+    background-color: #434EF5;
+}
+
+#newsletter .wpcf7-list-item input {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.layer-breadcrumb {
+    background-color: #F7F8F9;
+}
+
+.breadcrumb-section .breadcrumb .breadcrumb-item a {
+    color: #2B2B2B;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.breadcrumb-section .breadcrumb .breadcrumb-item {
+    color: #2B2B2B;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.breadcrumb-section .breadcrumb-item+.breadcrumb-item::before {
+    color: #2B2B2B;
+}
+
+#easy-steps .viewall-btn {
+    margin-bottom: 0px;
+}
+
+#easy-steps h1 {
+    font-size: 39px;
+    line-height: 47px;
+    color: #000;
+}
+
+#easy-steps h2 {
+    font-size: 24px;
+    line-height: 27px;
+    font-weight: 600;
+    color: #2B2B2B;
+}
+
+#easy-steps h2 span {
+    font-weight: 800;
+}
+
+#easy-steps .viewall-btn {
+    font-family: 'Montserrat', sans-serif;
+    color: #2F3BF5;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+#easy-steps h3 {
+    color: #1A1E47;
+}
+
+#easy-steps p {
+    color: #525252;
+    font-size: 16px;
+}
+
+#easy-steps .step-mob-visual {
+    padding: 0px 30px;
+}
+
+#databck-rewards {
+    background-image: none;
+    background-color: #FFF;
+}
+
+#databck-rewards h1 {
+    color: #000;
+    font-size: 39px;
+    line-height: 47px;
+    font-weight: 800;
+}
+
+#databck-rewards .viewall-btn {
+    font-family: 'Montserrat', sans-serif;
+    color: #2F3BF5;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 18px;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#databck-rewards .viewall-btn svg {
+    margin-left: 5px;
+    font-size: 20px;
+}
+
+#databck-rewards .viewall-btn:hover {
+    text-decoration: underline;
+}
+
+#databck-rewards p.small {
+    font-size: 12px;
+}
+
+#databck-rewards h2 {
+    color: #293854;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 23px;
+}
+
+#databck-rewards p {
+    color: #525252;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+#databck-rewards p span {
+    font-weight: 700;
+}
+
+#switch-yes {
+    background: linear-gradient(275.75deg, #2F3BF5 -0.54%, #FF0084 104.67%);
+}
+
+#switch-yes h1 {
+    color: #F9F7F4;
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 56px;
+}
+
+#switch-yes p.subtitle {
+    font-size: 20px;
+    font-weight: 400;
+    color: #FFF;
+    text-align: center;
+}
+
+#switch-yes .viewall-btn {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.plan-table .rounded-top {
+    border-top-left-radius: 10px!important;
+    border-top-right-radius: 10px!important;
+}
+
+.plan-table .rounded-bottom {
+    border-bottom-left-radius: 10px!important;
+    border-bottom-right-radius: 10px!important;
+}
+
+#switch-yes h3 {
+    font-size: 18px;
+    line-height: 23px;
+    font-weight: 800;
+}
+
+#switch-yes p {
+    font-size: 12px;
+    line-height: 21px;
+    font-weight: 400;
+}
+
+
+/* Styling by Zeeshan End */
+
+
+/* Footer styling Start */
+
+.footer {
+    width: 100%;
+    display: block;
+    background-color: #1A1E47;
+    padding-top: 30px;
+}
+
+.footer .footer-logo {
+    width: 65px;
+}
+
+.footer .icon-list {
+    width: 100%;
+    display: block;
+}
+
+.footer .icon-list .store-icon {
+    width: 75px;
+    height: 31px;
+}
+
+.footer .icon-list li {
+    list-style: none;
+    float: left;
+    margin-right: 10px;
+}
+
+.footer .icon-list li a svg {
+    width: 20px;
+}
+
+.footer .icon-list.icon-appdownload {
+    max-width: 130px;
+}
+
+.footer .icon-list.icon-appdownload li {
+    margin: 0;
+}
+
+.footer .menulist {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.footer .menulist li {
+    list-style: none;
+    float: none;
+    font-size: 12px;
+    color: #FFF;
+}
+
+.footer .menulist li a {
+    color: #FFF;
+    line-height: 35px;
+}
+
+footer.footer .wp-block-columns .widget.widget_nav_menu ul.menu li a {
+    line-height: 35px;
+}
+
+.footer .icon-list.icon-appdownload li a svg {
+    color: #FFF !important;
+}
+
+.footer .menulist li a:hover {
+    text-decoration: underline;
+}
+
+.footer .menulist li.heading {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.footer p {
+    font-size: 12px;
+    font-weight: 700;
+    color: #FFF;
+}
+
+.footer .copyright {
+    width: 100%;
+    display: block;
+    margin-top: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: linear-gradient(80.9deg, #FF0084 16.48%, #6F29D2 85.6%, #2F3BF5 96.9%);
+    border-top: none !important;
+}
+
+.footer .copyright p {
+    font-size: 12px;
+    color: #FFF;
+    font-weight: 400;
+}
+
+.footer .ctm-logo {
+    position: absolute;
+    right: 10px;
+    bottom: 0;
+}
+
+
+/* Footer styling End */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+    .top-tabs-container {
+        padding: 0px 10px;
+    }
+    #slider-yes-home .slider-content p {
+        font-size: 19px;
+        line-height: 23px;
+    }
+    #slider-yes-home .slider-content h1 {
+        font-size: 27px;
+        line-height: 36px;
+    }
+    .carousel-indicators [data-bs-target] {
+        width: 30px !important;
+        height: 6px !important;
+    }
+    .carousel-indicators {
+        margin-bottom: 0.8rem !important;
+    }
+    #popular-deals .deal-box {
+        margin-bottom: 0px;
+        height: 100% !important;
+    }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+    #popular-deals .deal-box {
+        margin-bottom: 0px;
+        height: 100% !important;
+    }
 }
