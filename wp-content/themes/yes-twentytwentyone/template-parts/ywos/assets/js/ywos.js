@@ -269,8 +269,7 @@ function checkInputCharacters(event, type = 'alphanumeric', withSpace = true) {
     var charNonAlpha = false;
     var charNonSpace = (withSpace && charCode == 32) ? false : true;
     if (
-        (charCode > 31 && (charCode < 48 || charCode > 57)) && // numeric (0-9)
-        charCode !== 46
+        (charCode > 31 && (charCode < 48 || charCode > 57)) // numeric (0-9)
     ) {
         charNonNumeric = true;
     }
@@ -281,7 +280,9 @@ function checkInputCharacters(event, type = 'alphanumeric', withSpace = true) {
         charNonAlpha = true;
     }
 
-    if (type == 'alphanumeric' && charNonNumeric && charNonAlpha && charNonSpace) {
+    if (charCode == 46) {
+        event.preventDefault();
+    } else if (type == 'alphanumeric' && charNonNumeric && charNonAlpha && charNonSpace) {
         event.preventDefault();
     } else if (type == 'numeric' && charNonNumeric && charNonSpace) {
         event.preventDefault();
