@@ -395,6 +395,10 @@
             margin-bottom: 10px;
         }
     }
+
+    .nav-container { background-color: #1A1E47; }
+    .nav-container a, .nav-container .login-btn {}
+    .logo-top { width: 48px; }
 </style>
 
 

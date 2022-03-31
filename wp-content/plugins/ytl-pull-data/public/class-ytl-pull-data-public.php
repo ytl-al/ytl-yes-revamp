@@ -333,6 +333,7 @@ class Ytl_Pull_Data_Public
 		$this->ra_reg_get_ipp_monthly_installments();
 		$this->ra_reg_create_yos_order();
 		$this->ra_reg_check_order_payment_status();
+		$this->ra_reg_get_order_by_order_display_id();
 	}
 
 	public function ra_reg_add_to_cart()
@@ -1200,8 +1201,9 @@ class Ytl_Pull_Data_Public
 			$yos_order_id 			= $data->orderNumber;
 			$yos_order_display_id	= $data->displayOrderNumber;
 			$xpay_order_id 			= $data->xpayOrderId;
-			$yos_order_response 	= $data->displayResponseMessage;
-			$this->record_new_order($session_key, $phone_number, $product_bundle_id, $yos_order_meta, $yos_order_id, $yos_order_display_id, $xpay_order_id, $yos_order_response);
+			$yos_order_response 	= $data;
+			$yos_order_response_display = $data->displayResponseMessage;
+			$this->record_new_order($session_key, $phone_number, $product_bundle_id, $yos_order_meta, $yos_order_id, $yos_order_display_id, $xpay_order_id, $yos_order_response, $yos_order_response_display);
 			
 			if ($data->responseCode > -1) {
 				$data->sessionId = $session_id;
@@ -1268,6 +1270,25 @@ class Ytl_Pull_Data_Public
 		return new WP_Error('error_checking_order_payment_status', "There's an error in checking order payment status.", array('status' => 400));
 	}
 
+	public function ra_reg_get_order_by_order_display_id() 
+	{
+		register_rest_route('ywos/v1', 'get-order-by-display-id/(?P<order_display_id>[a-zA-Z0-9-]+)', array(
+			'methods' 	=> 'GET', 
+			'callback' 	=> array($this, 'get_order_by_display_id')
+		));
+	}
+
+	public function get_order_by_display_id($data) 
+	{
+		$order_display_id = $data['order_display_id'];
+		global $wpdb;
+		$table_name = $wpdb->prefix.'ywos_orders';
+		$row = $wpdb->get_row($wpdb->prepare("SELECT ID, msisdn, plan_id, yos_order_response, yos_order_response_display, xpay_order_id, xpay_order_meta, xpay_order_response, is_xpay_success, order_created_at FROM $table_name WHERE yos_order_display_id = %s AND deleted_at IS NULL", $order_display_id));
+		$row->yos_order_response = unserialize($row->yos_order_response);
+		$row->xpay_order_meta = unserialize($row->xpay_order_meta);
+		return $row;
+	}
+
 	public function get_request_input($order_info = [], $input_name = '') 
 	{
 		return (isset($order_info[$input_name]) && !empty(trim($order_info[$input_name]))) ? $order_info[$input_name] : null;
@@ -1278,7 +1299,7 @@ class Ytl_Pull_Data_Public
 		return number_format((float) $amount, $decimal_plance, '.', '');
 	}
 
-	public function record_new_order($session_key = '', $msisdn = '', $plan_id = 0, $yos_order_meta = [], $yos_order_id = '', $yos_order_display_id = '', $xpay_order_id = '', $yos_order_response = '') 
+	public function record_new_order($session_key = '', $msisdn = '', $plan_id = 0, $yos_order_meta = [], $yos_order_id = '', $yos_order_display_id = '', $xpay_order_id = '', $yos_order_response = '', $yos_order_response_display = '') 
 	{
 		global $wpdb;
 		$table_name = $wpdb->prefix.'ywos_orders';
@@ -1290,11 +1311,12 @@ class Ytl_Pull_Data_Public
 			'msisdn' 		=> $msisdn, 
 			'plan_id' 		=> $plan_id, 
 			'yos_order_id' 	=> $yos_order_id, 
-			'yos_order_display_id' 	=> $yos_order_display_id, 
-			'yos_order_meta'=> serialize($yos_order_meta), 
-			'yos_order_response' 	=> $yos_order_response, 
+			'yos_order_display_id' 			=> $yos_order_display_id, 
+			'yos_order_meta'				=> serialize($yos_order_meta), 
+			'yos_order_response' 			=> serialize($yos_order_response), 
+			'yos_order_response_display' 	=> $yos_order_response_display, 
 			'xpay_order_id'	=> $xpay_order_id, 
-			'order_created_at'		=> $curTimestamp, 
+			'order_created_at'				=> $curTimestamp, 
 			'created_at' 	=> $curTimestamp, 
 			'updated_at' 	=> $curTimestamp 
 		);
