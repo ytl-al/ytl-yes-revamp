@@ -145,6 +145,7 @@
         color: #525252;
         text-transform: uppercase;
         text-align: left;
+		margin-top:20px;
     }
 
     #supported-device .phone-box h2 {
@@ -158,7 +159,7 @@
         max-width: 100%;
         max-height: 212px;
         margin: 0 auto;
-        margin-bottom: 20px;
+		margin-bottom:auto;
     }
 
     #supported-device .filter-drop .btn:focus,
