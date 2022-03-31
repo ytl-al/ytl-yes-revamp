@@ -4,9 +4,9 @@
     <div class="container">
         <div class="row justify-content-lg-center">
             <div class="col-lg-12 aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                <div>
-                    <h1>4G LTE Supported Devices</h1>
-                    <p>Is your device 4G LTE compatible?</p>
+            <div>
+                    <h1>4G LTE & 5G Supported Devices</h1>
+                    <p>Is your device 4G LTE or 5G compatible?</p>
                 </div>
             </div>
             <div class="col-lg-6 aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">

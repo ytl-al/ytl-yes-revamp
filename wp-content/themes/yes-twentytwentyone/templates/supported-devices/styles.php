@@ -29,22 +29,23 @@
     }
 
     #supported-top-banner {
-        background: linear-gradient(253.22deg, #ED028C -28.49%, #00B4F0 84.7%);
-        padding: 50px 0px;
+        background: linear-gradient(83.88deg, #FF0084 9.34%, #2F3BF5 89.66%);
+        padding: 90px 0px;
         text-align: center;
     }
 
     #supported-top-banner h1 {
-        font-size: 60px;
+        font-size: 48px;
         font-weight: 800;
-        color: #F9F7F4;
+        color: #FFF;
     }
 
     #supported-top-banner p {
-        font-size: 28px;
-        font-weight: 600;
+        font-size: 20px;
+		margin: 20px 0px;
+        font-weight: 400;
         line-height: normal;
-        color: #F9F7F4;
+        color: #FFF;
     }
 
     #supported-top-banner .search-box {
@@ -85,7 +86,7 @@
 
     #filter-panel h1 {
         color: #2B2B2B;
-        font-size: 24px;
+        font-size: 18px;
         font-weight: 600;
         margin-bottom: 15px;
     }
@@ -97,7 +98,7 @@
     }
 
     #filter-panel label {
-        font-size: 17px;
+        font-size: 16px;
         color: #2B2B2B;
     }
 
@@ -116,7 +117,7 @@
 
     #supported-device .nav-pills .nav-link {
         color: #525252;
-        font-size: 24px;
+        font-size: 16px;
         font-weight: 600;
         border-radius: 0;
     }
