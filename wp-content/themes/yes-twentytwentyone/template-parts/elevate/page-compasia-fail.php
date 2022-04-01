@@ -218,7 +218,7 @@
                             self.orderSummary.orderDetail = elevate.lsData.orderDetail;
                         }
 
-                        self.productId = elevate.lsData.orderDetail.productCode;
+                        self.productId = elevate.lsData.product.selected.productCode;
                         self.getNormalContract();
 
                         // console.log("selectedPlan", self.selectedPlan);

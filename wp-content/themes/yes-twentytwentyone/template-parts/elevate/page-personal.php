@@ -263,12 +263,12 @@
                         },
                         {
                             'stateCode': 'PJY',
-                            'value': 'PUTRAJAYA',
+                            'value': 'WILAYAH PERSEKUTUAN-PUTRAJAYA',
                             'name': 'Wilayah Persekutuan Putrajaya'
                         },
                         {
                             'stateCode': 'LBN',
-                            'value': 'LABUAN',
+                            'value': 'WILAYAH PERSEKUTUAN-LABUAN',
                             'name': 'Wilayah Persekutuan Labuan'
                         },
                         {
@@ -459,13 +459,14 @@
                         if (elevate.lsData.deliveryInfo) {
                             self.deliveryInfo = elevate.lsData.deliveryInfo;
                         }
-                        self.productId =  elevate.lsData.orderDetail.productCode;
+                        self.productId = elevate.lsData.product.selected.productCode;
 
                         self.updateFields();
                         toggleOverlay(false);
 
                         setTimeout(function () {
                             $('.form-select').selectpicker('refresh');
+                            self.watchAllowNext();
                         }, 100);
                     } else {
                         elevate.redirectToPage('cart');
@@ -517,10 +518,12 @@
                         self.postCode.city = self.postCode.stateCity[self.postCode.data[postcode].state];
                         self.deliveryInfo.state = self.postCode.data[postcode].state;
                         self.deliveryInfo.city = self.postCode.data[postcode].city;
+                        self.deliveryInfo.stateCode = self.getStateCode(self.deliveryInfo.state);
                         setTimeout(function () {
                             $('#state').val(self.postCode.data[postcode].state);
                             $('#city').val(self.postCode.data[postcode].city);
                             $('.form-select').selectpicker('refresh');
+                            self.updateCityCode();
                         }, 500);
                     }else{
                         self.deliveryInfo.state = '';
@@ -529,6 +532,8 @@
                             $('#state').val('');
                             $('#city').val('');
                             $('.form-select').selectpicker('refresh');
+
+
                         }, 500);
                     }
 
@@ -577,6 +582,49 @@
                                 }
                                 toggleOverlay(false);
                             }, 500);
+                        })
+                        .catch((error) => {
+                            // console.log(error);
+                        })
+                        .finally(() => {
+                            self.watchAllowNext();
+                            toggleOverlay(false);
+                        });
+                },
+
+                updateCityCode: function () {
+                    var self = this;
+                    var stateCode = self.deliveryInfo.stateCode;
+
+                    toggleOverlay();
+
+                    self.allowSelectCity = false;
+
+                    axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode)
+                        .then((response) => {
+                            var options = [];
+                            var data = response.data;
+                            var masterlist = data.masterDataList[0].masterList;
+                            masterlist.map((value, index) => {
+                                options.push({
+                                    value: value.masterCode,
+                                    name: value.masterValue
+                                });
+                                if(value.masterValue == self.deliveryInfo.city){
+                                    self.deliveryInfo.cityCode = value.masterCode;
+                                }
+                            })
+                            self.selectOptions.cities = options;
+                            self.allowSelectCity = true;
+
+                            var objCity = self.selectOptions.cities.filter(city => city.value == self.deliveryInfo.city);
+                            if (objCity.length == 0) {
+                                self.deliveryInfo.city = '';
+                                self.deliveryInfo.cityCode = '';
+                            }
+                            elevate.lsData.deliveryInfo = self.deliveryInfo;
+                            elevate.updateElevateLSData();
+                            console.log("self.deliveryInfo",self.deliveryInfo);
                         })
                         .catch((error) => {
                             // console.log(error);
@@ -655,7 +703,7 @@
                     if (self.deliveryInfo.postcode && !postcode.test(self.deliveryInfo.postcode.trim())) {
                         isFilled = false;
                         $('#postcode').addClass('input_error');
-                    }else if(!self.postCode.data[self.deliveryInfo.postcode]){
+                    }else if(self.deliveryInfo.postcode && !self.postCode.data[self.deliveryInfo.postcode]){
                         isFilled = false;
                         $('#postcode').addClass('input_error');
                     }

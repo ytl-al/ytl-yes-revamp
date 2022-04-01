@@ -108,7 +108,7 @@
                         if (elevate.lsData.eligibility) {
                             self.eligibility = elevate.lsData.eligibility;
                         }
-                        self.productId = elevate.lsData.product.productID;
+                        self.productId = elevate.lsData.product.selected.productCode;
                         self.selectedPlan = elevate.lsData.selectedPlan;
                         self.customer = elevate.lsData.customer;
 

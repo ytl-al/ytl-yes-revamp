@@ -139,6 +139,14 @@
                                     <p>*RM{{ formatPrice(parseFloat(orderSummary.product.selected.upFrontPayment).toFixed(2)) }}</p>
                                 </div>
                             </div>
+                            <div class="row mt-2 cart_bold">
+                                <div class="col-6">
+                                    <p>Taxes (SST)</p>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.orderDetail.sstAmount).toFixed(2)) }}</p>
+                                </div>
+                            </div>
                             <div class="hr_line"></div>
                             <div class="row mt-2 ">
                                 <div class="col-1">

@@ -168,6 +168,14 @@
                                     <p>*RM{{ formatPrice(parseFloat(orderSummary.product.selected.upFrontPayment).toFixed(2)) }}</p>
                                 </div>
                             </div>
+                            <div class="row mt-2 cart_bold">
+                                <div class="col-6">
+                                    <p>Taxes (SST)</p>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.orderDetail.sstAmount).toFixed(2)) }}</p>
+                                </div>
+                            </div>
                             <div class="hr_line"></div>
                         </div>
 
@@ -234,6 +242,7 @@
                     },
                     orderDetail: {
                         total: 0.00,
+                        sstAmount: 0.00,
                         color: null,
                         productCode: null,
                         orderItems:[]
@@ -257,6 +266,7 @@
                     if (elevate.validateSession(self.currentStep)) {
 
                         self.productId = elevate.lsData.meta.productId;
+
                         if(elevate.lsData.product){
                             self.orderSummary.product = elevate.lsData.product;
                         }
@@ -264,21 +274,17 @@
                             self.orderSummary.orderDetail = elevate.lsData.orderDetail;
                         }
 
-                       if(!elevate.lsData.product){
-                            self.ajaxGetPlanData();
-                        }else{
-                            self.hasFetchPlan = true;
-                            self.orderSummary.product.selected = self.selectedProduct(self.orderSummary.orderDetail.color, self.orderSummary.orderDetail.productCode);
-                            self.isValidCart();
-                        }
+                        self.ajaxGetPlanData();
 
                     } else {
                         self.isCartEmpty = true;
+                        self.hasFetchPlan = false;
                         $('#totalItemCart').text("0");
                         setTimeout(function() {
                             toggleOverlay(false);
                         }, 1500);
                     }
+
                 },
                 ajaxGetPlanData: function() {
                     var self = this;
@@ -321,10 +327,12 @@
                         {name: self.orderSummary.product.selected.plan.nameEN,price:parseFloat(self.orderSummary.product.selected.planPerMonth).toFixed(2)},
                     ];
 
-                    total = parseFloat(self.orderSummary.product.selected.devicePriceMonth) + parseFloat(self.orderSummary.product.selected.planPerMonth);
-
+                    // total = parseFloat(self.orderSummary.product.selected.devicePriceMonth) + parseFloat(self.orderSummary.product.selected.planPerMonth);
+                    total = parseFloat(self.orderSummary.product.selected.plan.monthlyAmount);
+                    var sstAmount = parseFloat(self.orderSummary.product.selected.plan.sstAmount);
                     self.orderSummary.orderDetail.total = total.toFixed(2);
-
+                    self.orderSummary.orderDetail.sstAmount = sstAmount.toFixed(2);
+                    //console.log("selected product",self.orderSummary.product.selected);
                     //update store
                     self.isValidCart();
 

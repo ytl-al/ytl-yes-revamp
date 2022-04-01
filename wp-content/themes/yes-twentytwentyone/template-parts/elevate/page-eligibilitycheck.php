@@ -228,7 +228,7 @@
                             self.eligibility = elevate.lsData.eligibility;
                         }
 
-                        self.productId = elevate.lsData.orderDetail.productCode;
+                        self.productId = elevate.lsData.product.selected.productCode;
 
                         self.updateFields();
                     } else {

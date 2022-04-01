@@ -113,6 +113,11 @@ class ElevateApi
                 'callback' => array('\Inc\Api\ElevateApi', 'elevate_order_create'),
             ));
 
+            register_rest_route('/elevate/v1', 'order/update', array(
+                'methods' => 'POST',
+                'callback' => array('\Inc\Api\ElevateApi', 'elevate_order_update'),
+            ));
+
 
         });
     }
@@ -170,6 +175,7 @@ class ElevateApi
             $data = json_decode($request['body'], true);
             $return = $data;
         }
+//        print_r($data);die();
         return $return;
     }
 
@@ -619,16 +625,16 @@ class ElevateApi
         return $response;
     }
 
-    public static function elevate_yos_order_create(WP_REST_Request $request)
+    public static function elevate_order_update(WP_REST_Request $request)
     {
 
         $params = array(
-            "orderNumber"=> "",
+            "orderNumber"=> $request['orderNumber'],
             "customerGUID"=> $request['id'],
             "orderStatus"=> "New",
             "error"=> "",
             "deliveryStatus"=> "Processing Order",
-            "deliveryDate"=> date("c"),
+            "deliveryDate"=> $request['deliveryDate'],
             "podurl"=> "",
             "comments"=> ""
         );
@@ -642,14 +648,14 @@ class ElevateApi
                 'Content-Type' => 'application/json'
             ),
             'body' => json_encode($params),
-            'method' => 'POST',
+            'method' => 'PUT',
             'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
 
-        $api_url = self::api_url . self::api_order_yos_order;
+        $api_url = self::api_url . self::api_order_create.'?id='.$request['id'];
 
-        $request = wp_remote_post($api_url, $args);
+        $request = wp_remote_request($api_url, $args);
         if (is_wp_error($request)) {
             $return['status'] = 0;
             $return['error'] = "Cannot connect to API server";

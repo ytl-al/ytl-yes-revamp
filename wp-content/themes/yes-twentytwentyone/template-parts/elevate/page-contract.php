@@ -177,9 +177,6 @@
                             self.orderSummary.product = elevate.lsData.product;
                         }
 
-                        if (elevate.lsData.orderInfo) {
-                            self.orderSummary.orderInfo = elevate.lsData.orderInfo;
-                        }
 
                     } else {
                         elevate.redirectToPage('cart');
@@ -213,6 +210,8 @@
                                 self.orderSummary.orderInfo = data.data;
                                 elevate.lsData.orderInfo = data.data;
                                 elevate.updateElevateLSData();
+                                self.updateElevateOrder();
+
                                 self.submit_contract();
                             }else{
                                 toggleOverlay(false);
@@ -226,6 +225,32 @@
                             toggleOverlay(false);
                             console.log(error, response);
                         });
+                },
+
+                updateElevateOrder: function (){
+                    var self = this;
+
+                    toggleOverlay();
+                    var param = elevate.lsData.orderInfo;
+
+                    console.log('updateElevateOrder',param); return false;
+
+                    axios.post(apiEndpointURL_elevate + '/order/update', param)
+                        .then((response) => {
+                            var data = response.data;
+                            if(data.status == 1){
+                                elevate.redirectToPage('thanks');
+                            }else{
+                                toggleOverlay(false);
+                                $('#error').html("Systm error, please try again.");
+                                console.log(data);
+                            }
+                        })
+                        .catch((error) => {
+                            toggleOverlay(false);
+                            console.log(error, response);
+                        });
+
                 },
 
                 submit_contract: function () {
@@ -243,7 +268,8 @@
 
                                 elevate.lsData.contract = data.data;
                                 elevate.updateElevateLSData();
-                                elevate.redirectToPage('thanks');
+                                toggleOverlay();
+                                elevate.redirectToPage('paynow');
                             }else{
                                 toggleOverlay(false);
                                 $('#error').html("System error, please try again.");
@@ -262,7 +288,8 @@
                     var self = this;
                     $('#error').html("");
                     if(self.allowSubmit){
-                        if(self.orderSummary.orderInfo){
+
+                        if(self.orderSummary.orderInfo.id){
                             self.submit_contract();
                         }else{
                             self.makeOrder();
