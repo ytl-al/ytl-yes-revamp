@@ -187,10 +187,10 @@
                         <div class="col-lg-5 col-12 offset-lg-6 col-orderResponse">
                             <h1>Thank you!</h1>
                             <p class="mb-3">
-                                Tracking Number / Order Number <br />
+                                Order Number <br />
                                 <a v-bind:href="'/ywos/thank-you/?order_display_id=' + purchaseInfo.displayOrderNumber" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br />
                                 Placed on {{ purchaseInfo.orderCreationDate }} <br />
-                                Estimated Delivery: {{ purchaseInfo.deliveryFromDate }} - {{ purchaseInfo.deliveryToDate }} <br /><br />
+                                <!-- Estimated Delivery: {{ purchaseInfo.deliveryFromDate }} - {{ purchaseInfo.deliveryToDate }} <br /><br /> -->
                                 A summary of your order has been sent to your email
                             </p>
                             <div class="offer-box d-none">

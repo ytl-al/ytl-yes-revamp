@@ -104,8 +104,8 @@
             <div class="col-4 text-end"><p class="large"><strong>RM{{ maybankIPP.ippInstallmentSelected.administrationPayment.toFixed(2) }}</strong></p></div>
         </div>
         <div class="row">
-            <div class="col-6"><p class="large">Payment Duration</p></div>
-            <div class="col-6 text-end"><p class="large"><strong>{{ maybankIPP.ippInstallmentSelected.monthlyInstallment.replace(' ', '') }} <sup>**</sup></strong></p></div>
+            <div class="col-8 pe-0"><p class="large">Estimated Monthly Instalment</p></div>
+            <div class="col-4 text-end"><p class="large"><strong>{{ maybankIPP.ippInstallmentSelected.monthlyInstallment.replace(' ', '') }} <sup>**</sup></strong></p></div>
         </div>
         <div class="row">
             <div class="col-12 mt-3"><p class="text-danger"><sup>**</sup> The Monthly instalment payment amount generated is just an estimate. To confirm the exact amount, kindly get in touch with Maybank.</p></div>

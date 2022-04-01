@@ -94,7 +94,7 @@
                                 <div class="form-group mb-4">
                                     <label class="form-label" for="input-email">* Email address</label>
                                     <div class="input-group align-items-center">
-                                        <input type="email" class="form-control" id="input-email" name="email" v-model="deliveryInfo.email" @input="watchAllowNext" placeholder="jane.doe@gmail.com" required />
+                                        <input type="email" class="form-control" id="input-email" name="email" v-model="deliveryInfo.email" @input="watchAllowNext" placeholder="" required />
                                         <!-- <a href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="right" class="ms-2" title="Tooltip text here"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/info-icon.png" /></a> -->
                                         <p class="info">Email is required for receipt and order confirmation</p>
                                     </div>
