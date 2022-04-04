@@ -33,10 +33,10 @@
                 </div>
             </div>
             <div class="row gx-5" v-if="pageValid">
-                <div class="col-lg-4 col-12 order-lg-2">
+                <div class="col-lg-5 col-12 order-lg-2">
                     <?php include('section-order-summary.php'); ?>
                 </div>
-                <form class="col-lg-8 col-12 order-lg-1 mt-4 mt-lg-0 needs-validation" @submit="verificationSubmit">
+                <form class="col-lg-7 col-12 order-lg-1 mt-4 mt-lg-0 needs-validation" @submit="verificationSubmit">
                     <div>
                         <h1 class="d-none d-lg-block">Verification</h1>
                         <p class="sub mb-4">Please fill in your ID information and mobile number to proceed</p>

@@ -1198,6 +1198,14 @@ class Ytl_Pull_Data_Public
 
 			$yos_order_meta 		= $params;
 			unset($yos_order_meta['sessionId']);
+			unset($yos_order_meta['paymentInfo']['bankCode']);
+			unset($yos_order_meta['paymentInfo']['bankName']);
+			unset($yos_order_meta['paymentInfo']['cardNumber']);
+			unset($yos_order_meta['paymentInfo']['cardType']);
+			unset($yos_order_meta['paymentInfo']['nameOnCard']);
+			unset($yos_order_meta['paymentInfo']['cardCVV']);
+			unset($yos_order_meta['paymentInfo']['cardExpiryMonth']);
+			unset($yos_order_meta['paymentInfo']['cardExpiryYear']);
 			$yos_order_id 			= $data->orderNumber;
 			$yos_order_display_id	= $data->displayOrderNumber;
 			$xpay_order_id 			= $data->xpayOrderId;
