@@ -860,7 +860,7 @@
                                 plan: planPriceBreakdown,
                                 device: planDevicePriceBreakdown,
                             };
-                            console.log(self.orderSummary.due);
+                            // console.log(self.orderSummary.due);
 
                             var hasDevice = false;
                             for (var i = 0; i < planDevicePriceBreakdown.length; i++) {
@@ -875,7 +875,7 @@
                             self.updatePlan();
                         })
                         .catch((error) => {
-                            console.log('error', error);
+                            // console.log('error', error);
                         })
                 },
                 updateAddOns: function(dataAddOns = {}) {

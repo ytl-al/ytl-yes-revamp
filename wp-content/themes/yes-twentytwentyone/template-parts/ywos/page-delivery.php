@@ -528,9 +528,9 @@
 
                         setTimeout(function() {
                             $('.form-select').selectpicker('refresh');
-                            $('button.dropdown-toggle').on('focus', function() {
-                                $(this).click();
-                            });
+                            // $('button.dropdown-toggle').on('focus', function() {
+                            //     $(this).click();
+                            // });
                             $('.input-datepicker').datepicker({
                                 format: 'dd/mm/yyyy',
                                 autoclose: true,
