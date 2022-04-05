@@ -12,10 +12,10 @@
     <div v-if="orderSummary.plan.planType != 'prepaid'">
         <div class="monthly mb-4">
             <div class="row">
-                <div class="col-6">
+                <div class="col-8 pe-0">
                     <p>Due Monthly</p>
                 </div>
-                <div class="col-6 text-end">
+                <div class="col-4 text-end">
                     <p>RM{{ parseFloat(orderSummary.plan.monthlyCommitment).toFixed(2) }}</p>
                 </div>
             </div>
@@ -51,42 +51,42 @@
     </div>
 
     <div class="row mt-2">
-        <div class="col-6">
+        <div class="col-8 pe-0">
             <p class="large">Add-Ons</p>
         </div>
-        <div class="col-6 text-end">
+        <div class="col-4 text-end">
             <p class="large"><strong>RM{{ parseFloat(orderSummary.due.addOns).toFixed(2) }}</strong></p>
         </div>
     </div>
     <div class="row">
-        <div class="col-6">
+        <div class="col-8 pe-0">
             <p class="large">Taxes (SST)</p>
         </div>
-        <div class="col-6 text-end">
+        <div class="col-4 text-end">
             <p class="large"><strong>RM{{ parseFloat(orderSummary.due.taxesSST).toFixed(2) }}</strong></p>
         </div>
     </div>
     <div class="row" v-if="deliveryInfo.securityType == 'PASSPORT' && orderSummary.due.foreignerDeposit > 0">
-        <div class="col-6">
+        <div class="col-8 pe-0">
             <p class="large">Deposit for Foreigner</p>
         </div>
-        <div class="col-6 text-end">
+        <div class="col-4 text-end">
             <p class="large"><strong>RM{{ parseFloat(orderSummary.due.foreignerDeposit).toFixed(2) }}</strong></p>
         </div>
     </div>
     <div class="row">
-        <div class="col-6">
+        <div class="col-8 pe-0">
             <p class="large">Shipping</p>
         </div>
-        <div class="col-6 text-end">
+        <div class="col-4 text-end">
             <p class="large"><strong>RM{{ parseFloat(orderSummary.due.shippingFees).toFixed(2) }}</strong></p>
         </div>
     </div>
     <div class="row">
-        <div class="col-6">
+        <div class="col-8 pe-0">
             <p class="large">Rounding Adjustment</p>
         </div>
-        <div class="col-6 text-end">
+        <div class="col-4 text-end">
             <p class="large"><strong>RM{{ parseFloat(orderSummary.due.rounding).toFixed(2) }}</strong></p>
         </div>
     </div>
@@ -96,8 +96,8 @@
             <div class="col-12">&nbsp;</div>
         </div>
         <div class="row">
-            <div class="col-6"><p class="large">Payment Duration</p></div>
-            <div class="col-6 text-end"><p class="large"><strong>{{ maybankIPP.ippInstallmentSelected.duration }} months</strong></p></div>
+            <div class="col-8 pe-0"><p class="large">Payment Duration</p></div>
+            <div class="col-4 text-end"><p class="large"><strong>{{ maybankIPP.ippInstallmentSelected.duration }} months</strong></p></div>
         </div>
         <div class="row">
             <div class="col-8 pe-0"><p class="large">Administration Payment</p></div>
