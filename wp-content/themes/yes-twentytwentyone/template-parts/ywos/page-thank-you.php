@@ -182,13 +182,14 @@
     <section id="cart-body" v-if="pageValid">
         <div class="container p-lg-5 p-3">
             <div class="row gx-5">
-                <div class="col-12 pb-4 border-bottom">
+                <div class="col-12 pb-4">
                     <div class="row">
                         <div class="col-lg-5 col-12 offset-lg-6 col-orderResponse">
                             <h1>Thank you!</h1>
                             <p class="mb-3">
                                 Order Number <br />
-                                <a v-bind:href="'/ywos/thank-you/?order_display_id=' + purchaseInfo.displayOrderNumber" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br />
+                                <!-- <a v-bind:href="'/ywos/thank-you/?order_display_id=' + purchaseInfo.displayOrderNumber" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br /> -->
+                                <a href="javascript:void(0)" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br />
                                 Placed on {{ purchaseInfo.orderCreationDate }} <br />
                                 <!-- Estimated Delivery: {{ purchaseInfo.deliveryFromDate }} - {{ purchaseInfo.deliveryToDate }} <br /><br /> -->
                                 A summary of your order has been sent to your email
@@ -200,10 +201,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6 mt-4">
+                <div class="col-6 mt-4 d-none">
                     <h2>You may also like</h2>
                 </div>
-                <div class="col-6 mt-4 text-end">
+                <div class="col-6 mt-4 text-end d-none">
                     <a href="/#popular-deals" class="shopping-link">Continue shopping <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/right-arrow.png" class="ms-2" alt=""></a>
                 </div>
             </div>
@@ -268,11 +269,13 @@
                     if (self.orderDisplayID) {
                         self.pageValid = true;
                         self.ajaxGetOrderByDisplayID();
-                        self.getHighlightPlans();
+                        // self.getHighlightPlans();
+                        toggleOverlay(false);
                     } else if (ywos.validateSession(self.currentStep)) {
                         self.pageValid = true;
                         self.updateData();
-                        self.getHighlightPlans();
+                        // self.getHighlightPlans();
+                        toggleOverlay(false);
                     } else {
                         ywos.redirectToPage('cart');
                     }

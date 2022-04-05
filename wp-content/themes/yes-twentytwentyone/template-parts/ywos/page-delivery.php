@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="row gx-5" v-if="pageValid">
-                <div class="col-lg-5 col-12 order-lg-2">
+                <div class="col-lg-4 col-12 order-lg-2">
                     <?php include('section-order-summary.php'); ?>
                     <div class="summary-box mt-3" v-if="referralCode.applicable">
                         <div class="row">
@@ -50,9 +50,9 @@
                         </div>
                     </div>
                 </div>
-                <form class="col-lg-7 col-12 order-lg-1 mt-4 mt-lg-0" @submit="deliveryDetailsSubmit">
+                <form class="col-lg-8 col-12 order-lg-1 mt-4 mt-lg-0" @submit="deliveryDetailsSubmit">
                     <div class="row gx-5">
-                        <div class="col-lg-7">
+                        <div class="col-lg-6">
                             <div class="layer-delivery">
                                 <div class="d-none d-lg-block">
                                     <h1>Delivery Details</h1>
@@ -171,7 +171,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-lg-6">
                             <div class="layer-billing d-none">
                                 <h2 style="color: #282828; font-size: 29px; font-weight: 800; margin-bottom: 0;">Billing</h2>
                                 <div class="form-group mb-4" style="color: 525252; font-size: 17px;">

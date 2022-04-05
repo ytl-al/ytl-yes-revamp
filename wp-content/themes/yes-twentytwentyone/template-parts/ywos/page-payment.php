@@ -80,10 +80,10 @@
                 </div>
             </div>
             <div class="row gx-5" v-if="pageValid">
-                <div class="col-lg-5 col-12 order-lg-2">
+                <div class="col-lg-4 col-12 order-lg-2">
                     <?php include('section-order-summary.php'); ?>
                 </div>
-                <form class="col-lg-7 col-12 order-lg-1 mt-3 mt-lg-0" autocomplete="off" @submit="paymentSubmit">
+                <form class="col-lg-8 col-12 order-lg-1 mt-3 mt-lg-0" autocomplete="off" @submit="paymentSubmit">
                     <div>
                         <h1 class="mb-4 d-none d-lg-block">Payment Info</h1>
                         <p class="sub mb-4 pe-5 d-none d-lg-block">This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.</p>
@@ -643,12 +643,12 @@
                         'session_key': ywos.lsData.sessionKey, 
                         'yos_order_id': self.orderResponse.orderNumber
                     };
-                    console.log(self.orderResponse);
+                    // console.log(self.orderResponse);
                     axios.post(apiEndpointURL + '/check-order-payment-status', params)
                         .then((response) => {
                             var data = response.data;
                             if (data != null && data.responseCode != null) {
-                                console.log('payment through');
+                                // console.log('payment through');
                                 self.paymentResponse = data;
                                 clearTimeout(timeoutObj);
 
@@ -689,7 +689,7 @@
                                     self.ajaxCheckOrderPaymentStatus(timeoutObj);
                                 }, 10000);
                             }
-                            console.log(error, response);
+                            // console.log(error, response);
                         });
                 }, 
                 initXpay: function() {
@@ -779,7 +779,7 @@
                                 toggleOverlay(false);
                                 self.toggleModalAlert('Error', errorMsg);
                             }
-                            console.log(error, response);
+                            // console.log(error, response);
                         })
                         .finally(() => {
                             // console.log('finally');
