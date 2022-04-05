@@ -63,7 +63,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="plan-item p-3" data-planid="707">
-                                        <div class="subtitle">Kasi Up<br>Postpaid 49<br>(Contract)<span class="circle"><i class="fa fa-check"></i></span></div>
+                                        <div class="subtitle">Kasi Up<br>Postpaid 49<br>(Contract)<span class="circle"><i class=""></i></span></div>
                                         <ul class="plan-list mt-3 mb-3">
                                             <li>100GB</li>
                                             <li>24 months Contract</li>
@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="plan-item p-3" data-planid="706">
-                                        <div class="subtitle">Kasi Up <br>Postpaid 49 <br>(No Contract)<span class="circle"><i class="fa fa-check"></i></span></div>
+                                        <div class="subtitle">Kasi Up <br>Postpaid 49 <br>(No Contract)<span class="circle"><i class=" "></i></span></div>
                                         <ul class="plan-list mt-3 mb-3">
                                             <li>100GB</li>
                                             <li>Kasi Up rewards</li>
@@ -91,7 +91,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="plan-item p-3" data-planid="759">
-                                        <div class="subtitle">Pakej YES <br>Peranti Keluarga<br> Malaysia<span class="circle"><i class="fa fa-check"></i></span></div>
+                                        <div class="subtitle">Pakej YES <br>Peranti Keluarga<br> Malaysia<span class="circle"><i class=" "></i></span></div>
                                         <ul class="plan-list mt-3 mb-3">
                                             <li>100GB</li>
                                             <li>12 Months Contract</li>
@@ -111,7 +111,7 @@
                                 <div class="col-md-4">
                                     <div class="plan-item p-3" data-planid="710">
                                         <div class="subtitle">Kasi Up Prepaid 15</br>
-                                            (Add-On)<span class="circle"><i class="fa fa-check"></i></span></div>
+                                            (Add-On)<span class="circle"><i class=""></i></span></div>
                                         <ul class="plan-list mt-3 mb-3">
                                             <li>10GB</li>
                                             <li>Kasi Up rewards</li>
@@ -126,7 +126,7 @@
                                 <div class="col-md-4">
                                     <div class="plan-item p-3" data-planid="758">
                                         <div class="subtitle">Pakej YES Remaja</br>
-                                            Keluarga Malaysia<span class="circle"><i class="fa fa-check"></i></span></div>
+                                            Keluarga Malaysia<span class="circle"><i class=""></i></span></div>
                                         <ul class="plan-list mt-3 mb-3">
                                             <li>20GB</li>
                                             <li>Kasi Up rewards</li>
@@ -140,7 +140,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="plan-item p-3" data-planid="767">
-                                        <div class="subtitle">Kasi Up</br> Prepaid Unlimited <span class="circle"><i class="fa fa-check"></i></span></div>
+                                        <div class="subtitle">Kasi Up</br> Prepaid Unlimited <span class="circle"><i class=""></i></span></div>
                                         <ul class="plan-list mt-3 mb-3">
                                             <li>Unlimited GB
                                                 (7Mbps & 9GB Hotspot Data)</li>

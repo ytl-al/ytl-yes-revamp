@@ -274,3 +274,28 @@ function toggleOverlay(toggleShow = true) {
         }, 500)
     }
 }
+
+function checkInputFullName(event){
+    event = (event) ? event : window.event;
+    var charCode = (event.which) ? event.which : event.keyCode;
+
+    var charNonAlpha = false;
+    if (
+        !(charCode > 64 && charCode < 91) && // uppercase alpha
+        !(charCode > 96 && charCode < 123)   // lowercase alpha
+    ) {
+        charNonAlpha = true;
+    }
+
+    var specialchar = false;
+    if(charCode == 47 || charCode == 64 || charCode == 32){
+        specialchar = true;
+    }
+
+    if(charNonAlpha && !specialchar){
+        event.preventDefault();
+    }else{
+        return true;
+    }
+
+}

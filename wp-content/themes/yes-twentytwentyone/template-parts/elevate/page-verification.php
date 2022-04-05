@@ -95,7 +95,7 @@
         var pageCart = new Vue({
             el: '#main-vue',
             data: {
-                ekyc_url: 'https://ekyc-dev-web.azurewebsites.net/',
+                ekyc_url: 'https://ekyc-web-dev.azurewebsites.net/',
                 totalAttempt:0,
                 maxAttempts:60,
                 interval: null,
@@ -258,7 +258,7 @@
 
                 makeCode: function (uid) {
                     var self = this;
-                    var url_verification = self.ekyc_url + '?uid=' + uid + '&mykad=' + self.eligibility.mykad + '&fname=' + self.eligibility.name;
+                    var url_verification = self.ekyc_url + 'EKYC/?fullName=' + self.eligibility.name + '&nric=' + self.eligibility.mykad + '&guid=' + uid ;
                     $('#cmdVerify').attr('href', url_verification);
                     self.qrcode.makeCode(url_verification);
                 }

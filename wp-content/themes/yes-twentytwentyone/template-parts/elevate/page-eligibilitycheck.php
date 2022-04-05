@@ -76,7 +76,7 @@
                                         <label class="form-label">* Full Name (as per MyKad)</label>
                                         <div class="input-group align-items-center">
                                             <input type="text" class="form-control" id="full_name" name="name"
-                                                   v-model="eligibility.name" @keypress="checkInputCharacters(event, 'alpha', true)" @input="watchAllowNext" placeholder=""
+                                                   v-model="eligibility.name" @keypress="checkInputFullName(event)" @input="watchAllowNext" placeholder=""
                                                    required>
 
                                         </div>
@@ -328,15 +328,15 @@
 
                 validateMobile: function (mob) {
 
-                    if (mob.length < 10 && mob.length > 11) {
+                    if (mob.length < 9 && mob.length > 10) {
                         return false;
                     }
-                    if (mob.slice(0, 2) != '01') {
+                    if (mob.slice(0, 1) != '1') {
                         return false;
                     }
 
-                    if (mob.slice(0, 3) == '011') {
-                        if (mob.length < 11) {
+                    if (mob.slice(0, 2) == '11') {
+                        if (mob.length < 10) {
                             return false;
                         }
                     }
@@ -395,6 +395,7 @@
                     $('#error').html('');
                     if (self.allowSubmit) {
                         //update store
+                        self.eligibility.phone = '0'+self.eligibility.phone;
                         elevate.lsData.eligibility = self.eligibility;
                         elevate.updateElevateLSData();
                         if(!self.isEligibilityCheck){
