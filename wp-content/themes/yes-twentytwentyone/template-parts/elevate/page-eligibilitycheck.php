@@ -226,6 +226,11 @@
                         self.pageValid = true;
                         if (elevate.lsData.eligibility) {
                             self.eligibility = elevate.lsData.eligibility;
+                            var zero = self.eligibility.phone.substring(0,1);
+
+                            if(zero =="0"){
+                                self.eligibility.phone = self.eligibility.phone.substring(1,11);
+                            }
                         }
 
                         self.productId = elevate.lsData.product.selected.productCode;
@@ -351,6 +356,11 @@
                     self.isEligibilityCheck = false;
                     self.isCAEligibilityCheck = false;
 
+                    var zero = self.eligibility.phone.substring(0,1);
+                    if(zero && zero =='0'){
+                        self.eligibility.phone = self.eligibility.phone.substring(1,11);
+                    }
+
                     var isFilled = true;
                     if (
                         self.eligibility.mykad.trim() == '' ||
@@ -395,7 +405,11 @@
                     $('#error').html('');
                     if (self.allowSubmit) {
                         //update store
-                        self.eligibility.phone = '0'+self.eligibility.phone;
+                        var zero = self.eligibility.phone.substring(0,1);
+                        if(zero !='0'){
+                            self.eligibility.phone = '0'+self.eligibility.phone;
+                        }
+
                         elevate.lsData.eligibility = self.eligibility;
                         elevate.updateElevateLSData();
                         if(!self.isEligibilityCheck){

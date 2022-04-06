@@ -458,6 +458,10 @@
                         }
                         if (elevate.lsData.deliveryInfo) {
                             self.deliveryInfo = elevate.lsData.deliveryInfo;
+                            self.deliveryInfo.mykad = self.eligibility.mykad;
+                            self.deliveryInfo.name = self.eligibility.name;
+                            self.deliveryInfo.phone = self.eligibility.phone;
+                            self.deliveryInfo.email = self.eligibility.email;
                         }
                         self.productId = elevate.lsData.product.selected.productCode;
 

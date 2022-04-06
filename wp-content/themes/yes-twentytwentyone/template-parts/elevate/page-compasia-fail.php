@@ -208,9 +208,7 @@
                         if (elevate.lsData.product) {
                             self.orderSummary.product  = elevate.lsData.product;
                         }
-                        if (elevate.lsData.deliveryInfo) {
-                            self.deliveryInfo = elevate.lsData.deliveryInfo;
-                        }
+
                         if (elevate.lsData.orderSummary) {
                             self.orderSummary = elevate.lsData.orderSummary;
                         }

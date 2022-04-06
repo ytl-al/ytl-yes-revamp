@@ -29,7 +29,7 @@
                     <div class="col-md-3 col-sm-3 col-12 offset-md-6 thank-mb">
                         <h1 class="title">Thank you!</h1>
                         <div class="mt-5">Tracking Number / Order Number</div>
-                        <div class="subtitle">MYOS2107302000010601</div>
+                        <div class="subtitle"><?php echo $_GET['orderNumber']?></div>
                         <div class="text-12 mt-2">Placed on <?php echo date("l, jS F Y")?></div>
                         <div class="mt-5">A summary of your order and a copy of your Elevate contract has been sent to
                             your email
@@ -114,7 +114,7 @@
                             self.orderSummary.orderInfo = elevate.lsData.orderInfo;
                         }
 
-                        console.log(self.orderSummary.orderInfo);
+                        //console.log(self.orderSummary.orderInfo);
                         elevate.removeElevateLSData();
 
                     } else {

@@ -44,6 +44,7 @@
 
         <!-- Body STARTS -->
         <section id="cart-body">
+            <input type="hidden" id="displayOrderNumber" value=""/>
             <div class="container p-lg-5 p-3">
                 <div class="row d-lg-none mb-3">
                     <div class="col">
@@ -703,6 +704,7 @@
                             });
                     },
                     initXpay: function() {
+                        alert('x');
                         var self = this;
                         var xpayOrderId = self.orderResponse.xpayOrderId;
                         var encryptedValue = self.orderResponse.encryptedValue;
@@ -809,6 +811,8 @@
                                 var data = response.data;
                                 self.orderResponse = data;
 
+                                $('#displayOrderNumber').val(data.displayOrderNumber);
+
                                 elevate.lsData.YOSOrder = data;
                                 elevate.updateElevateLSData();
 
@@ -856,7 +860,7 @@
                         elevate.lsData.meta.paymentResponse = self.paymentResponse;
                         elevate.updateElevateLSData();
 
-                        elevate.redirectToPage('thanks?orderNumber='+self.YOSOrder.displayOrderNumber);
+                        elevate.redirectToPage('thanks?orderNumber='+$('#displayOrderNumber').val());
                     },
                     updateElevateOrder: function (){
                         var self = this;

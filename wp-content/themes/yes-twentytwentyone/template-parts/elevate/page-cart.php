@@ -324,13 +324,15 @@
 
                     self.orderSummary.orderDetail.orderItems = [
                         {name: self.orderSummary.product.selected.nameEN + ' - ' + self.orderSummary.product.selected.color,price:parseFloat(self.orderSummary.product.selected.devicePriceMonth).toFixed(2)},
-                        {name: self.orderSummary.product.selected.plan.nameEN,price:parseFloat(self.orderSummary.product.selected.planPerMonth).toFixed(2)},
+                        {name: self.orderSummary.product.selected.plan.nameEN,price:parseFloat(self.orderSummary.product.selected.plan.monthlyAmount).toFixed(2)},
                     ];
 
                     // total = parseFloat(self.orderSummary.product.selected.devicePriceMonth) + parseFloat(self.orderSummary.product.selected.planPerMonth);
-                    total = parseFloat(self.orderSummary.product.selected.plan.monthlyAmount);
+                    var amount = parseFloat(self.orderSummary.product.selected.plan.monthlyAmount);
                     var sstAmount = parseFloat(self.orderSummary.product.selected.plan.sstAmount);
-                    self.orderSummary.orderDetail.total = total.toFixed(2);
+                    var rounding = parseFloat(self.orderSummary.product.selected.plan.roundingAdjustment);
+                    self.orderSummary.orderDetail.amount = amount.toFixed(2);
+                    self.orderSummary.orderDetail.total = amount +  sstAmount + rounding;
                     self.orderSummary.orderDetail.sstAmount = sstAmount.toFixed(2);
                     //console.log("selected product",self.orderSummary.product.selected);
                     //update store

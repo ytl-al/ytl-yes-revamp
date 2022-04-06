@@ -42,11 +42,11 @@
     </section>
     <!-- Banner End -->
 
-    <section id="cart-body">
+    <section id="cart-body"  style="display: none;">
         <div class="container p-lg-5 p-3" style="border: 0">
-            <div id="main-vue">
+            <div id="main-vue" >
                 <div class="subtitle">Review & Pay</div>
-            <div class="row gx-5">
+            <div class="row gx-5" >
                 <div class="col-lg-8 col-12">
 
                     <div class="border-box">
@@ -196,6 +196,7 @@
             data: {
                 productId: null,
                 isCartEmpty: false,
+                hasPlan: false,
                 contractSigned: false,
                 interval: null,
                 contractTitle: '',
@@ -299,10 +300,15 @@
                             self.contractTitle = 'Elevate ' + self.orderSummary.product.selected.contract +' months';
                         }
 
+                        self.hasPlan = true;
 
                         self.watchAllowNext();
                         toggleOverlay(false);
 
+
+                        setTimeout(function () {
+                                $('#cart-body').show();
+                        }, 500);
                     } else {
                         elevate.redirectToPage('cart');
                     }
