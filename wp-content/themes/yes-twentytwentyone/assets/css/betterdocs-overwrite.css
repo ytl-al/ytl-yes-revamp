@@ -1,25 +1,39 @@
 /* 
     Stylesheet Name : Yes.my BetterDocs Overwrite
     Created on      : March     08, 2022, 11:08:23 AM
-    Last edited on  : March     18, 2022, 11:42:26 PM
+    Last edited on  : April     07, 2022, 11:42:26 PM
     Author          : [YTL Digital Design] - AL
 */
 
 .betterdocs-single-wraper {}
 .betterdocs-single-wraper p { margin-bottom: 15px; }
 .betterdocs-single-wraper .docs-single-title .betterdocs-entry-title { margin: 0 0 20px; padding: 0; text-transform: none; }
-.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content { text-align: justify; }
-.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content-heading { font-size: 35px; margin-bottom: 12px; text-align: initial; }
-.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ol, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ul { margin: 0 0 20px; padding: 0; }
-.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ol li, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ul li { margin: 0 0 15px; padding: 0; }
-.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content > ol > li::marker, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content > ul > li::marker { font-weight: bold; }
-.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content > ol, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content > ul { padding-left: 20px; }
-.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content img { display: block; margin: 20px auto; }
+.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content, 
+#accordion-faqShortcode .accordion-body { text-align: justify; }
+#accordion-faqShortcode .accordion-body { color: #4d4d4d; }
+.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content-heading, 
+#accordion-faqShortcode .accordion-body h1 { font-size: 35px; margin-bottom: 12px; text-align: initial; }
+#accordion-faqShortcode .accordion-body h1 { color: inherit; font-size: 28px; margin: 12px 0 8px; }
+#accordion-faqShortcode .accordion-body h1:first-of-type { margin-top: 0; }
+.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ol, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ul,
+#accordion-faqShortcode .accordion-body ol, #accordion-faqShortcode .accordion-body ul { margin: 0 0 20px; padding: 0; }
+.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ol li, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ul li,
+#accordion-faqShortcode .accordion-body ol li, #accordion-faqShortcode .accordion-body ul li { margin: 0 0 15px; padding: 0; }
+.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content > ol > li::marker, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content > ul > li::marker,
+#accordion-faqShortcode .accordion-body > ol > li::marker, #accordion-faqShortcode .accordion-body > ul > li::marker { font-weight: bold; }
+.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content > ol, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content > ul, 
+#accordion-faqShortcode .accordion-body > ol, #accordion-faqShortcode .accordion-body > ul { padding-left: 20px; }
+.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content img, 
+#accordion-faqShortcode .accordion-body img { display: block; margin: 20px auto; }
 
-.betterdocs-single-wraper .doc-single-content-wrapper table { border-collapse: collapse; border-color: #333; border-style: solid; border-width: 1px 0 0 1px; margin: 20px 0; text-align: center; width: 100%; }
-.betterdocs-single-wraper .doc-single-content-wrapper table th, .betterdocs-single-wraper .doc-single-content-wrapper table td { border-color: #333; border-style: solid; border-width: 0 1px 1px 0; padding: 5px; }
-.betterdocs-single-wraper .doc-single-content-wrapper table th { background-color: #0EADF1; color: #FFF; }
-.betterdocs-single-wraper .doc-single-content-wrapper table td {}
+.betterdocs-single-wraper .doc-single-content-wrapper table, 
+#accordion-faqShortcode .accordion-body table { border-collapse: collapse; border-color: #333; border-style: solid; border-width: 1px 0 0 1px; margin: 20px 0; text-align: center; width: 100%; }
+.betterdocs-single-wraper .doc-single-content-wrapper table th, .betterdocs-single-wraper .doc-single-content-wrapper table td, 
+#accordion-faqShortcode .accordion-body table th, #accordion-faqShortcode .accordion-body table td { border-color: #333; border-style: solid; border-width: 0 1px 1px 0; padding: 5px; }
+.betterdocs-single-wraper .doc-single-content-wrapper table th,
+#accordion-faqShortcode .accordion-body table th { background-color: #0EADF1; color: #FFF; }
+.betterdocs-single-wraper .doc-single-content-wrapper table td,
+#accordion-faqShortcode .accordion-body table td {}
 
 .betterdocs-search-form-wrap .betterdocs-live-search { display: none; }
 .betterdocs-searchform .search-submit { border: 0; transition: all 0.3s ease-in-out; }

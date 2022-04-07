@@ -15,6 +15,8 @@ if (!function_exists('yes_enqueue_scripts')) {
         wp_enqueue_style('slick-theme', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.0/slick-theme.min.css', array(), '1.8.0');
         wp_enqueue_style('yes-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.0.0');
         wp_enqueue_style('yes-styles-responsive', get_template_directory_uri() . '/assets/css/responsive.css', array(), '1.0.0');
+        wp_enqueue_style('betterdocs-overwrite', get_template_directory_uri() . '/assets/css/betterdocs-overwrite.css', array(), '1.0.0');
+        wp_enqueue_style('yes-styles-reskin', get_template_directory_uri() . '/assets/css/yes-overwrite.css', array(), '1.0.0');
 
         wp_enqueue_script('jquery', get_template_directory_uri() . '/assets/js/jquery.min.js', array(), '3.5.1', true);
         wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.bundle.js', array(), '5.1.0', true);
@@ -514,4 +516,85 @@ if (!function_exists('update_direction_list_domain')) {
         }
     }
     // update_direction_list_domain('https://my.yes.my/', 'https://site.yes.my/', 3);
+}
+
+
+if (!function_exists('show_most_faq_viewed')) {
+    /**
+     * Function show_most_faq_viewed()
+     * Function to register shortcode for the FAQ in pages
+     * 
+     * @since    1.0.2
+     */
+    function show_most_faq_viewed()
+    {
+        global $post;
+        $docsArgs = [
+            'post_type' => 'docs',
+            'posts_per_page' => 3,
+            'orderby' => 'meta_value_num',
+            'order' => 'DESC',
+            'meta_key' => '_betterdocs_meta_views',
+            'tax_query' => [
+                'relation' => 'AND',
+                [
+                    'taxonomy' => 'knowledge_base',
+                    'field' => 'slug',
+                    'terms' => ['faq'],
+                    'operator' => 'IN',
+                    'include_children' => true
+                ]
+            ]
+        ];
+        $html_faq   = '';
+        $post_count = 1;
+        $posts = get_posts($docsArgs);
+        foreach ($posts as $post) {
+            setup_postdata($post);
+            $html_faq   .= '            <div class="accordion-item">
+                                            <h2 class="accordion-header" id="accordion-header-' . $post_count . '">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-content-' . $post_count . '" aria-expanded="true" aria-controls="accordion-content-' . $post_count . '">' . get_the_title() . '</button>
+                                            </h2>
+                                            <div id="accordion-content-' . $post_count . '" class="accordion-collapse collapse" aria-labelledby="accordion-header-' . $post_count . '" data-bs-parent="#accordion-faqShortcode">
+                                                <div class="accordion-body">' . get_the_content() . '</div>
+                                            </div>
+                                        </div>';
+            $post_count++;
+        }
+        wp_reset_postdata();
+
+        $lang           = get_bloginfo('language');
+        $faq_main_text  = 'Most Searched Topics';
+        $faq_link_text  = 'View All FAQ';
+        $faq_link       = '/faq';
+        if ($lang == 'ms-MY') {
+            $faq_main_text  = 'Topik Paling Dicari';
+            $faq_link_text  = 'Lihat Semua Soalan Lazim';
+            $faq_link       = '/ms' . $faq_link;
+        } else if ($lang == 'zh-CN') {
+            $faq_link       = '/zh-hans' . $faq_link;
+        }
+
+        $html   = ' <!-- FAQs Start -->
+                    <section id="faq-section" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                        <div class="container">
+                            <div class="row">
+                                <h1 class="mb-4">' . $faq_main_text . '</h1>
+                            </div>
+                            <div class="row justify-content-lg-center">
+                                <div class="col-12 col-lg-9">
+                                    <div class="accordion accordion-flush mb-3" id="accordion-faqShortcode">
+                                        ' . $html_faq . '
+                                    </div>
+                                    <p class="text-center"><a href="' . $faq_link . '" class="viewall-btn">' . $faq_link_text . ' <span class="iconify" data-icon="akar-icons:arrow-right"></span></a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- FAQs End -->';
+
+        return $html;
+    }
+
+    add_shortcode('bd_most_viewed_faq', 'show_most_faq_viewed');
 }
