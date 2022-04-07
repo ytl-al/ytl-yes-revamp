@@ -166,7 +166,7 @@
                                     <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/info-red-icon.png" alt="" class="float-start me-3">
                                     <div class="ps-5">
                                         <h1>Address Accuracy</h1>
-                                        <p>Addresses that are entered incorrectly may delay your oder, so please double-check for errors. If you wish to enter specific dispatch instructions, please do so under Delivery Notes.</p>
+                                        <p>Address that are entered incorrectly may delay your order, so please double-check for errors.</p>
                                     </div>
                                 </div>
                             </div>
