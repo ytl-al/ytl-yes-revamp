@@ -171,6 +171,30 @@ h5 {
     padding: 0.7rem 2.3rem;
 }
 
+.blue-btn {
+    background-color: #2F3BF5;
+    font-family: 'Montserrat', sans-serif;
+    display: inline-block;
+    border-radius: 90px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0.7rem 2.3rem;
+    font-size: 16px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFF;
+    border: none;
+}
+
+.blue-btn:hover {
+    color: #FFF;
+    background-color: #515BFF;
+}
+
+.btn-small {
+    font-size: 12px;
+}
+
 #popular-deals .deal-box .content p.pricing {
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
