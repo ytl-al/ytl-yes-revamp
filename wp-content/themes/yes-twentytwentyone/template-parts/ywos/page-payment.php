@@ -80,10 +80,10 @@
                 </div>
             </div>
             <div class="row gx-5" v-if="pageValid">
-                <div class="col-lg-4 col-12 order-lg-2">
+                <div class="col-lg-5 col-12 order-lg-2">
                     <?php include('section-order-summary.php'); ?>
                 </div>
-                <form class="col-lg-8 col-12 order-lg-1 mt-3 mt-lg-0" autocomplete="off" @submit="paymentSubmit">
+                <form class="col-lg-7 col-12 order-lg-1 mt-3 mt-lg-0" autocomplete="off" @submit="paymentSubmit">
                     <div>
                         <h1 class="mb-4 d-none d-lg-block">Payment Info</h1>
                         <p class="sub mb-4 pe-5 d-none d-lg-block">This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.</p>

@@ -835,6 +835,7 @@
 
                             var planPriceBreakdown = [];
                             var planDevicePriceBreakdown = [];
+                            var planSimplifiedBreakdown = [];
                             for (var key in data) {
                                 var keyPricingComponentList = 'pricingComponentList';
                                 if (key == keyPricingComponentList) {
@@ -855,10 +856,15 @@
                                         }
                                     });
                                 }
+                                var keySimplifiedItemPricingList = 'simplifiedItemPricingList';
+                                if (key == keySimplifiedItemPricingList) {
+                                    planSimplifiedBreakdown = data[keySimplifiedItemPricingList];
+                                }
                             };
                             self.orderSummary.due.priceBreakdown = {
                                 plan: planPriceBreakdown,
                                 device: planDevicePriceBreakdown,
+                                simplified: planSimplifiedBreakdown
                             };
                             // console.log(self.orderSummary.due);
 
