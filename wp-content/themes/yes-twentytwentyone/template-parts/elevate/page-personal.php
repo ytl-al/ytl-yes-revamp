@@ -90,7 +90,7 @@
                                 </div>
                                 <div class="col-lg-8 col-7">
                                     <input type="text" class="form-control text-upper" maxlength="11" id="ic_phone_number"
-                                           name="phone" v-model="deliveryInfo.inphone" @input="watchAllowNext"
+                                           name="phone" v-model="eligibility.inphone" @input="watchAllowNext"
                                            @keypress="checkInputCharacters(event, 'numeric', false)"
                                            placeholder="Phone number" readonly>
                                 </div>
