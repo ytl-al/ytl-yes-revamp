@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-4 col-6">
                 <div class="mt-4">
-                    <a href="/elevate/cart/" class="back-btn "><img
+                    <a href="/elevate/personal/" class="back-btn "><img
                                 src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
                                 alt=""> Back</a>
                 </div>
@@ -71,7 +71,7 @@
                                     <div class="col-md-6">
                                         <div>
                                             <div class="subtitle text-end">
-                                                RM{{formatPrice(parseFloat(orderSummary.product.selected.devicePriceMonth).toFixed(2))}}/ mth
+                                                RM{{ formatPrice(parseFloat(orderSummary.orderDetail.total).toFixed(2)) }}/ mth
                                             </div>
                                         </div>
                                     </div>

@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-4 col-6">
                 <div class="mt-4">
-                    <a href="/elevate/cart/" class="back-btn "><img
+                    <a href="/elevate/verification/" class="back-btn "><img
                                 src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
                                 alt=""> Back</a>
                 </div>
@@ -59,7 +59,7 @@
                                 <div class="col-lg-12 col-12">
                                     <label class="form-label">* MyKad number</label>
                                     <div class="input-group align-items-center">
-                                        <input type="text" maxlength="12" class="form-control" id="mykad_number"
+                                        <input type="text" maxlength="12" class="form-control text-upper" id="mykad_number"
                                                name="mykad" v-model="deliveryInfo.mykad" @input="watchAllowNext"
                                                @keypress="checkInputCharacters(event, 'numeric', false)" placeholder="" readonly
                                                required>
@@ -72,7 +72,7 @@
                                 <div class="col-lg-12 col-12">
                                     <label class="form-label">* Full Name (as per MyKad)</label>
                                     <div class="input-group align-items-center">
-                                        <input type="text" class="form-control" id="full_name" name="name"
+                                        <input type="text" class="form-control text-upper" id="full_name" name="name"
                                                v-model="deliveryInfo.name" @input="watchAllowNext" placeholder="" readonly
                                                required>
 
@@ -89,8 +89,8 @@
                                            placeholder="MY +60" readonly>
                                 </div>
                                 <div class="col-lg-8 col-7">
-                                    <input type="text" class="form-control" maxlength="11" id="ic_phone_number"
-                                           name="phone" v-model="deliveryInfo.phone" @input="watchAllowNext"
+                                    <input type="text" class="form-control text-upper" maxlength="11" id="ic_phone_number"
+                                           name="phone" v-model="deliveryInfo.inphone" @input="watchAllowNext"
                                            @keypress="checkInputCharacters(event, 'numeric', false)"
                                            placeholder="Phone number" readonly>
                                 </div>
@@ -100,7 +100,7 @@
                                 <div class="col-md-12">
                                     <label class="form-label">* Email address</label>
                                     <div class="align-items-center">
-                                        <input type="text" class="form-control" id="email" name="email"
+                                        <input type="text" class="form-control text-upper" id="email" name="email"
                                                v-model="deliveryInfo.email" @input="watchAllowNext"
                                                placeholder="" readonly required>
                                     </div>
@@ -121,7 +121,7 @@
                                 <div class="col-lg-12">
                                     <label class="form-label">* Address</label>
                                     <div class="input-group align-items-center">
-                                        <input type="text" class="form-control" id="address" name="address"
+                                        <input type="text" class="form-control text-uppercase" id="address" name="address"
                                                v-model="deliveryInfo.address" @input="watchAllowNext" placeholder=""
                                                required>
                                     </div>
@@ -132,7 +132,7 @@
                                 <div class="col-md-12 col-12">
                                     <label class="form-label">Unit number (optional)</label>
                                     <div class="input-group align-items-center">
-                                        <input type="text" class="form-control" id="address-more" name="addressMore"
+                                        <input type="text" class="form-control text-uppercase" id="address-more" name="addressMore"
                                                v-model="deliveryInfo.addressMore" @input="watchAllowNext"
                                                placeholder="">
                                     </div>
@@ -142,7 +142,7 @@
                             <div class="col-md-12 col-12">
                                 <label class="form-label">* Postcode</label>
                                 <div class="input-group mt-2 align-items-center">
-                                    <input type="text" maxlength="5" class="form-control" id="postcode"
+                                    <input type="text" maxlength="5" class="form-control text-upper" id="postcode"
                                            name="postcode" v-model="deliveryInfo.postcode" @input="watchChangePostcode"
                                            @keypress="checkInputCharacters(event, 'numeric', false)" placeholder=""
                                            required/>
@@ -162,7 +162,7 @@
                                             <option v-for="state in postCode.state" :value="state">{{state}}
                                             </option>
                                         </select-->
-                                        <input type="text"  class="form-control"  id="state" name="state"
+                                        <input type="text"  class="form-control text-upper"  id="state" name="state"
                                                v-model="deliveryInfo.state"  @input="watchAllowNext"
                                                placeholder=""
                                                required readonly/>
@@ -177,7 +177,7 @@
                                             <option v-for="city in postCode.city" :value="city">{{city}}
                                             </option>
                                         </select-->
-                                        <input type="text" class="form-control"  id="city" name="city"
+                                        <input type="text" class="form-control text-uppercase"  id="city" name="city"
                                                v-model="deliveryInfo.city"  @input="watchAllowNext"
                                                placeholder=""
                                                required readonly/>
@@ -388,6 +388,7 @@
                     mykad: '',
                     name: '',
                     phone: '',
+                    inphone: '',
                     email: '',
                     address: '',
                     addressMore: '',
@@ -446,7 +447,6 @@
             methods: {
                 pageInit: function () {
                     var self = this;
-                    console.log("postCode",self.postCode);
 
                     if (elevate.validateSession(self.currentStep)) {
                         self.pageValid = true;
@@ -748,7 +748,12 @@
                     self.getStateCode(self.deliveryInfo.state);
                     $('#error').html("");
                     if (self.allowSubmit) {
+                        $('input[type=text]').val (function () {
+                            return this.value.toUpperCase();
+                        })
+
                         //update store
+                        self.deliveryInfo.address = self.deliveryInfo.address.toUpperCase();
                         elevate.lsData.deliveryInfo = self.deliveryInfo;
                         elevate.updateElevateLSData();
                         self.updateCustomer();

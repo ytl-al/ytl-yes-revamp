@@ -5,6 +5,7 @@
 
 namespace Inc\Api;
 
+use GuzzleHttp\Psr7\Request;
 use \Inc\Base\Model;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -47,6 +48,14 @@ class ElevateApi
     const  ekyc_api_url = 'https://ekyc-dev-web.azurewebsites.net/';
     const  ekyc_api_check = 'https://ydbp-api-dev.azurewebsites.net/api/EKYCProcessStatus/';
 
+    const yos_order_token = '/wp-json/ywos/v1/get-auth-token';
+    const yos_order_username = 'ytldd';
+    const yos_order_password = 'ytldd123$';
+
+    const yos_order_without_payment = 'https://mobile.yes.my/mobileyos/mobile/ws/v1/json/createeKYCOrder';
+    const yos_order_request_id = '88888888';
+
+
     public function __construct()
     {
         $apiSetting = \Inc\Base\Model::getAPISettings();
@@ -60,7 +69,7 @@ class ElevateApi
         add_action('rest_api_init', function () {
             register_rest_route('/elevate/v1', '/test', array(
                 'methods' => 'GET',
-                'callback' => array('\Inc\Api\ElevateApi', 'verify_caeligibility'),
+                'callback' => array('\Inc\Api\ElevateApi', 'ydbp_identity_auth_token'),
             ));
 
             register_rest_route('/elevate/v1', '/getProduct', array(
@@ -753,6 +762,73 @@ class ElevateApi
 
     }
 
+    public function make_yos_order_without_payment(WP_REST_Request $request){
+        $token = ydbp_identity_auth_token();
+
+        $api_url =  self::yos_order_without_payment;
+        $params = array(
+            'eKYCCustomerDetail'=>array(
+                "alternatePhoneNumber" =>"0181234567",
+                "customerFullName" => "FIRSTNAME LASTNAME",
+                "email" => "email@domain.com",
+                "loginYesId" => "",
+                "planName" => "YES Postpaid FT5G RM99",
+                "planType" => "POSTPAID",
+                "securityId" => "123456001234",
+                "securityType" => "NRIC",
+                "dealerCode" => "",
+                "dealerLoginId" => ""
+            ),
+            'deliveryAddress'=>array(
+                "addressLine" => "Address Line 1",
+                "city" => "KUALA LUMPUR",
+                "cityCode" => "KUALA LUMPUR",
+                "country" => "Malaysia",
+                "postalCode" => "50000",
+                "state" => "WILAYAH PERSEKUTUAN-KUALA LUMPUR",
+                "stateCode" => "KUL"
+            ),
+            'orderDetail'=>array(
+                "planName"=> "YES Postpaid FT5G RM99",
+                "planType"=> "POSTPAID",
+                "productBundleId"=> "770",
+                "referralCode"=> ""
+            ),
+            "locale"=> "en",
+            "source"=> "Elevate",
+            "requestId"=> self::yos_order_request_id,
+            "sessionId"=> $token
+        );
+
+        $args = [
+            'headers' => array(
+                'Accept' => 'text/plain',
+                'Authorization' => 'Bearer ' . $token,
+                'Content-Type' => 'application/json'
+            ),
+            'body' => $params
+        ];
+        $request = wp_remote_get($api_url, $args);
+
+        if (is_wp_error($request)) {
+            $return['status'] = 0;
+            $return['error'] = "Cannot connect to API server";
+        } else if ($request['response']['code'] != 200) {
+            $code = $request['response']['code'];
+            $return['status'] = 0;
+            $return['error'] = 'Sorry, '.@$request['response'];
+        } else {
+            $code = $request['response']['code'];
+            $data = json_decode($request['body'], true);
+            $return['status'] = 1;
+            $return['data'] = $data;
+        }
+
+        $response = new WP_REST_Response($return);
+        $response->set_status(200);
+        return $response;
+    }
+
     public function get_token()
     {
         $token = self::generate_auth_token();
@@ -871,6 +947,33 @@ class ElevateApi
                 update_option('mobileservice_auth_token', serialize(['basicAuthToken' => $data, 'requestDate' => date("Y-m-d H:i:s")]), false);
             }
             $return = $data->basicAuthToken;
+        }
+        return $return;
+    }
+
+    public function ydbp_identity_auth_token()
+    {
+        $return = false;
+
+        $args = [
+            'headers' => array('Content-Type' => 'application/json; charset=utf-8',
+                'Authorization' => 'Basic ' . base64_encode( self::yos_order_username.':'.self::yos_order_password )),
+            'timeout' => self::API_TIMEOUT
+        ];
+        $api_url = site_url().self::yos_order_token;;
+
+        $request = wp_remote_get($api_url, $args);
+
+
+        $response = $request['response'];
+        $res_code = $response['code'];
+        if (is_wp_error($request)) {
+            $return = false;
+        } else if ($res_code != 200) {
+            $return = false;
+        } else {
+            $data = json_decode($request['body']);
+            $return = $data->token;
         }
         return $return;
     }

@@ -60,7 +60,7 @@
                                     <div class="col-lg-8 col-12">
                                         <label class="form-label">* MyKad number</label>
                                         <div class="input-group align-items-center">
-                                            <input type="text" minlength="12" maxlength="12" class="form-control"
+                                            <input type="text" minlength="12" maxlength="12" class="form-control text-uppercase"
                                                    id="mykad_number"
                                                    name="mykad" v-model="eligibility.mykad" @input="watchAllowNext"
                                                    @keypress="checkInputCharacters(event, 'numeric', false)"
@@ -75,7 +75,7 @@
                                     <div class="col-lg-8 col-12">
                                         <label class="form-label">* Full Name (as per MyKad)</label>
                                         <div class="input-group align-items-center">
-                                            <input type="text" class="form-control" id="full_name" name="name"
+                                            <input type="text" class="form-control text-uppercase" id="full_name" name="name"
                                                    v-model="eligibility.name" @keypress="checkInputFullName(event)" @input="watchAllowNext" placeholder=""
                                                    required>
 
@@ -95,9 +95,9 @@
                                                        placeholder="MY +60" readonly>
                                             </div>
                                             <div class="col-lg-8 col-7">
-                                                <input type="text" class="form-control" maxlength="11"
+                                                <input type="text" class="form-control text-uppercase" maxlength="11"
                                                        id="ic_phone_number"
-                                                       name="phone" v-model="eligibility.phone" @input="watchAllowNext"
+                                                       name="phone" v-model="eligibility.inphone" @input="watchAllowNext"
                                                        @keypress="checkInputCharacters(event, 'numeric', false)"
                                                        placeholder="Phone number">
                                             </div>
@@ -110,7 +110,7 @@
                                     <div class="col-lg-8 col-12">
                                         <label class="form-label">* Email address</label>
                                         <div class="align-items-center">
-                                            <input type="text" class="form-control" id="email" name="email"
+                                            <input type="text" class="form-control text-uppercase" id="email" name="email"
                                                    v-model="eligibility.email" @input="watchAllowNext"
                                                    placeholder="" required>
                                         </div>
@@ -165,6 +165,7 @@
                     mykad: '',
                     name: '',
                     phone: '',
+                    inphone: '',
                     email: ''
                 },
                 customer:{
@@ -353,20 +354,18 @@
                     $('.input_error').removeClass('input_error');
                     var self = this;
 
+
                     self.isEligibilityCheck = false;
                     self.isCAEligibilityCheck = false;
 
-                    var zero = self.eligibility.phone.substring(0,1);
-                    if(zero && zero =='0'){
-                        self.eligibility.phone = self.eligibility.phone.substring(1,11);
-                    }
+                    self.eligibility.phone = '0'+self.eligibility.inphone;
 
                     var isFilled = true;
                     if (
                         self.eligibility.mykad.trim() == '' ||
                         self.eligibility.name.trim() == '' ||
                         self.eligibility.email.trim() == '' ||
-                        self.eligibility.phone.trim() == ''
+                        self.eligibility.inphone.trim() == ''
                     ) {
                         isFilled = false;
                     }
@@ -378,12 +377,12 @@
                     }
 
                     var phone = /^[0-46-9]*[0-9]{9,10}$/g;
-                    if (self.eligibility.phone.trim() && !phone.test(self.eligibility.phone.trim())) {
+                    if (self.eligibility.inphone.trim() && !phone.test(self.eligibility.inphone.trim())) {
                         isFilled = false;
                         $('#ic_phone_number').addClass('input_error');
                     }
 
-                    if(self.eligibility.phone && !self.validateMobile(self.eligibility.phone)){
+                    if(self.eligibility.inphone && !self.validateMobile(self.eligibility.inphone)){
                         isFilled = false;
                         $('#ic_phone_number').addClass('input_error');
                     }
@@ -404,11 +403,12 @@
                     var self = this;
                     $('#error').html('');
                     if (self.allowSubmit) {
+
                         //update store
-                        var zero = self.eligibility.phone.substring(0,1);
-                        if(zero !='0'){
-                            self.eligibility.phone = '0'+self.eligibility.phone;
-                        }
+                        self.eligibility.phone = '0'+self.eligibility.inphone;
+
+                        self.eligibility.name = self.eligibility.name.toUpperCase();
+                        self.eligibility.email = self.eligibility.email.toUpperCase();
 
                         elevate.lsData.eligibility = self.eligibility;
                         elevate.updateElevateLSData();

@@ -50,7 +50,7 @@
             </div>
         </section>
     </div>
-    <div id="container-hasItem" v-if="hasFetchPlan">
+    <div id="container-hasItem" v-if="!isCartEmpty" style="display: none">
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
@@ -278,9 +278,11 @@
 
                     } else {
                         self.isCartEmpty = true;
-                        self.hasFetchPlan = false;
+
                         $('#totalItemCart').text("0");
                         setTimeout(function() {
+                            $('#container-hasItem').show();
+                            $('#main-vue').css({'height':'auto'});h
                             toggleOverlay(false);
                         }, 1500);
                     }
@@ -299,7 +301,8 @@
                             self.orderSummary.product = data;
 
                             self.updatePlan();
-                            self.hasFetchPlan = true;
+                            $('#container-hasItem').show();
+                            $('#main-vue').css({'height':'auto'});
 
                             toggleOverlay(false);
 
@@ -311,8 +314,6 @@
                 },
                 updatePlan: function() {
                     var self = this;
-
-                    self.hasFetchPlan = true;
 
                     self.updateSummary();
                     self.orderSummary.orderDetail.productCode = self.orderSummary.product.selected.productCode;
@@ -401,6 +402,9 @@
                     //check normal contract
                     //console.log(self.orderSummary.orderDetail.productCode,self.orderSummary.product.selected.contractName);
                     //return ;
+
+                    if(!self.allowSubmit) return ;
+
                     toggleOverlay();
 
                     if(self.orderSummary.product.selected.contractName == self.ywos_contract){

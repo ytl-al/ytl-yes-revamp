@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-4 col-6">
                 <div class="mt-4">
-                    <a href="/elevate/cart/" class="back-btn "><img
+                    <a href="/elevate/eligibilitycheck/" class="back-btn "><img
                                 src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
                                 alt=""> Back</a>
                 </div>
@@ -55,9 +55,9 @@
                     </div>
                     <div class="col-md-7 p-5">
                         <div class="verify-body mt-3">
-                            <h3 class="subtitle2">Scan the QR code to begin verification</h3>
+                            <h3 class="subtitle2 d-none d-md-block">Scan the QR code to begin verification</h3>
                             <div class="mt-5 mb-5">
-                                <div id="qrcode"></div>
+                                <div class="d-none d-md-block" id="qrcode"></div>
                                 <div class="text-center d-block d-md-none">
                                     <a id="cmdVerify" href="#" target="_blank" class="btn btn-danger mt-3">Verify Now</a>
                                 </div>
@@ -67,7 +67,7 @@
                             <ul class="list-2 mt-5">
                                 <li><div><span class="number">1</span></div>
                                     <div>
-                                        <div class="subtitle2">ID Validateion</div>
+                                        <div class="subtitle2">ID Validation</div>
                                         <p>Scan your ID with the object in a well lit room facing on a flat surface with minimum reflection</p>
                                     </div></li>
                                 <li class="mt-3"><div><span class="number">2</span></div>

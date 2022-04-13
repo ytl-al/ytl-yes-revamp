@@ -1107,6 +1107,25 @@ ul.wizard {
     cursor: default!important;
 }
 
+#cmdVerify{
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    margin: auto;
+    font-size: 19px;
+    padding-top: 18px;
+    border: 5px solid #cccc;
+}
+
+.listing-quickSelectBanks li{
+    margin-right: 10px;
+    cursor: pointer;
+}
+.listing-quickSelectBanks img{
+    height: 50px;
+}
+
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
     html, body {
         width: 100%;
@@ -1201,5 +1220,15 @@ ul.wizard {
     .thank-mb{
         padding-top: 150px;
         border-radius: 10px;
+    }
+
+    .checkout-left {
+        margin-top: 50px;
+    }
+
+    .verify-body {
+        border-radius: 10px;
+        text-align: center;
+        padding: 0;
     }
 }

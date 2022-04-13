@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-4 col-6">
                 <div class="mt-4">
-                    <a href="/elevate/cart/" class="back-btn "><img
+                    <a href="/elevate/review/" class="back-btn "><img
                                 src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
                                 alt=""> Back</a>
                 </div>
@@ -65,7 +65,7 @@
                             <div class="col-md-6">
                                 <div>Customer Signature</div>
                                 <div style="height: 50px;"></div>
-                                <div><input type="text" @keyup="check_sign()" autocomplete="off"  v-model="contract_signed"  class="form-control user_sign" placeholder="Type your full name" id="fname"/></div>
+                                <div><input type="text" @keyup="check_sign()" autocomplete="off"  v-model="contract_signed"  class="form-control user_sign text-uppercase" placeholder="Type your full name" id="fname"/></div>
                                 <div></div>
                                 <div class="mt-4">
                                     <a class="btn-signup" :class="allowSubmit?'btn-signed':'btn-signup'" @click="sign_contract"><i class="icon icon-signup2"></i> <span v-if="allowSubmit">Signed</span><span v-else>Fill and Sign</span></a>
@@ -189,7 +189,7 @@
                 check_sign: function (){
                     var self = this;
 
-                    if(self.contract_signed && self.contract_signed == self.eligibility.name){
+                    if(self.contract_signed && self.contract_signed.toUpperCase() == self.eligibility.name.toUpperCase()){
                         self.allowSubmit = true;
                     }else{
                         self.allowSubmit = false;

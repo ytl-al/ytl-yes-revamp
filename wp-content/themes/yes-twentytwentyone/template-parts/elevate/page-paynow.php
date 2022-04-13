@@ -116,7 +116,7 @@
                                             <div class="col-lg-6 col-12">
                                                 <label class="form-label" for="input-chName">* Cardholder Name</label>
                                                 <div class="input-group align-items-center">
-                                                    <input type="text" class="form-control" id="input-chName" v-model="paymentInfo.nameOnCard" @input="watchAllowSubmit" placeholder="John Doe" @keypress="checkInputCharacters(event, 'alpha')" />
+                                                    <input type="text" class="form-control" id="input-chName" v-model="paymentInfo.nameOnCard" @input="watchAllowSubmit" placeholder="John Doe"  @keypress="checkInputFullName(event)" />
                                                 </div>
                                             </div>
                                         </div>
@@ -160,9 +160,9 @@
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-12">
                                                 <ul class="nav nav-pills listing-quickSelectBanks">
-                                                    <li class="nav-item" v-for="quickSelectBank in quickSelectBanks" v-on:click="selectBank(quickSelectBank.value, event)"><div class="img-quickSelectBank"><img :src="quickSelectBank.imgSrc" alt="{{ quickSelectBank.name }}" title="{{ quickSelectBank.name }}" /></div><span>{{ quickSelectBank.name }}</span></li>
+                                                    <li class="nav-item text-center" v-for="quickSelectBank in quickSelectBanks" v-on:click="selectBank(quickSelectBank.value, event)"><div class="img-quickSelectBank"><img :src="quickSelectBank.imgSrc" :alt="quickSelectBank.name" :title="quickSelectBank.name" /></div><span>{{ quickSelectBank.name }}</span></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -704,7 +704,6 @@
                             });
                     },
                     initXpay: function() {
-                        alert('x');
                         var self = this;
                         var xpayOrderId = self.orderResponse.xpayOrderId;
                         var encryptedValue = self.orderResponse.encryptedValue;
