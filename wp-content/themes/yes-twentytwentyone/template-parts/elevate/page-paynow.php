@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-4 col-6">
                     <div class="mt-4">
-                        <a href="/elevate/cart/" class="back-btn "><img
+                        <a href="/elevate/contract/" class="back-btn "><img
                                     src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
                                     alt=""> Back</a>
                     </div>
@@ -688,6 +688,9 @@
                                     }
                                     toggleOverlay(false);
                                     self.toggleModalAlert('Error Payment', errorMsg);
+                                    self.cancelElevateOrder(errorMsg);
+
+                                    //cancel Elevate order
 
                                     clearTimeout(timeoutObj);
 
@@ -829,6 +832,8 @@
                                     }
                                     toggleOverlay(false);
                                     self.toggleModalAlert('Error', errorMsg);
+
+                                    self.cancelElevateOrder(errorMsg);
                                 }
                                 console.log(error, response);
                             })
@@ -869,6 +874,32 @@
                         param.orderNumber = self.orderResponse.orderNumber;
 
                         axios.post(apiEndpointURL_elevate + '/order/update', param)
+                            .then((response) => {
+                                var data = response.data;
+                                if(data.status == 1){
+
+                                }else{
+                                    toggleOverlay(false);
+                                    $('#error').html("Systm error, please try again.");
+                                    console.log(data);
+                                }
+                            })
+                            .catch((error) => {
+                                toggleOverlay(false);
+                                console.log(error, response);
+                            });
+
+                    },
+
+                    cancelElevateOrder: function (error){
+                        var self = this;
+
+                        toggleOverlay();
+                        var param = elevate.lsData.orderInfo;
+                        param.orderNumber = self.orderResponse.orderNumber;
+                        param.error = error;
+
+                        axios.post(apiEndpointURL_elevate + '/order/cancel', param)
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){

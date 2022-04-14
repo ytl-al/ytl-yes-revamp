@@ -127,6 +127,11 @@ class ElevateApi
                 'callback' => array('\Inc\Api\ElevateApi', 'elevate_order_update'),
             ));
 
+            register_rest_route('/elevate/v1', 'order/cancel', array(
+                'methods' => 'POST',
+                'callback' => array('\Inc\Api\ElevateApi', 'elevate_order_cancel'),
+            ));
+
 
         });
     }
@@ -643,6 +648,56 @@ class ElevateApi
             "orderStatus"=> "New",
             "error"=> "",
             "deliveryStatus"=> "Processing Order",
+            "deliveryDate"=> $request['deliveryDate'],
+            "podurl"=> "",
+            "comments"=> ""
+        );
+
+        $token = self::get_token();
+
+        $args = [
+            'headers' => array(
+                'Accept' => 'text/plain',
+                'Authorization' => 'Bearer ' . $token,
+                'Content-Type' => 'application/json'
+            ),
+            'body' => json_encode($params),
+            'method' => 'PUT',
+            'timeout' => self::API_TIMEOUT,
+            'data_format' => 'body'
+        ];
+
+        $api_url = self::api_url . self::api_order_create.'?id='.$request['id'];
+
+        $request = wp_remote_request($api_url, $args);
+        if (is_wp_error($request)) {
+            $return['status'] = 0;
+            $return['error'] = "Cannot connect to API server";
+        } else if ($request['response']['code'] != 200) {
+            $code = $request['response']['code'];
+            $return['status'] = 0;
+            $return['error'] = @$request['response'];
+        } else {
+            $code = $request['response']['code'];
+            $data = json_decode($request['body'], true);
+            $return['status'] = 1;
+            $return['data'] = $data;
+        }
+
+        $response = new WP_REST_Response($return);
+        $response->set_status(200);
+        return $response;
+    }
+
+    public static function elevate_order_cancel(WP_REST_Request $request)
+    {
+
+        $params = array(
+            "orderNumber"=> $request['orderNumber'],
+            "customerGUID"=> $request['id'],
+            "orderStatus"=> "Failed",
+            "error"=> $request['error'],
+            "deliveryStatus"=> "Cancelled",
             "deliveryDate"=> $request['deliveryDate'],
             "podurl"=> "",
             "comments"=> ""
