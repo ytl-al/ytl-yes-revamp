@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Form Maker
+ * Plugin Name: Form Maker Pro
  * Plugin URI: https://10web.io/plugins/wordpress-form-maker/?utm_source=form_maker&utm_medium=free_plugin
  * Description: This plugin is a modern and advanced tool for easy and fast creating of a WordPress Form. The backend interface is intuitive and user friendly which allows users far from scripting and programming to create WordPress Forms.
- * Version: 1.14.10
+ * Version: 2.14.10
  * Author: 10Web Form Builder Team
  * Author URI: https://10web.io/plugins/?utm_source=form_maker&utm_medium=free_plugin
  * License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
@@ -61,7 +61,7 @@ final class WDFM {
   public $nicename = '';
   public $nonce = 'nonce_fm';
   public $fm_form_nonce = 'fm_form_nonce';
-  public $is_free = 1;
+  public $is_free = 0;
   public $is_demo = false;
   public $fm_settings = array();
 
@@ -103,7 +103,7 @@ final class WDFM {
     $this->plugin_url = plugins_url(plugin_basename(dirname(__FILE__)));
     $this->front_urls = $this->get_front_urls();
     $this->main_file = plugin_basename(__FILE__);
-    $this->plugin_version = '1.14.10';
+    $this->plugin_version = '2.14.10';
     $this->db_version = '2.14.10';
     $this->menu_postfix = ($this->is_free == 2 ? '_fmc' : '_fm');
     $this->plugin_postfix = ($this->is_free == 2 ? '_fmc' : '');

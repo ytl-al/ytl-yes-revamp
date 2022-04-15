@@ -1772,7 +1772,6 @@ function add(key, after_edit, wdid) {
     alert("The pages are closed");
     return;
   }
-  if (!document.getElementById('editing_id').value) if (key == 0) if (fm_check_something_really_important(key)) { return };
   if (document.getElementById('main_editor').style.display == "block") {
     if (document.getElementById('editing_id').value) {
       i = document.getElementById('editing_id').value;

@@ -78,7 +78,6 @@ function sortable_columns() {
 		    return false;
       }
       if (ui.item.attr("id") == "add_field" && ui.item.parent().attr("id") != "add_field_cont") {
-        if (fm_check_something_really_important()) return false;
         nextID = jQuery("#add_field").next(".wdform_row").attr("wdid"); //find next row id for position
 				jQuery("#add_field").parent().attr("id", "cur_column");  // add id cur_column to this column
         popup_ready();

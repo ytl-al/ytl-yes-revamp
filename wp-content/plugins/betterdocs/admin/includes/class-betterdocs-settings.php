@@ -161,6 +161,49 @@ class BetterDocs_Settings {
         }
         return false;
     }
+
+    public static function get_selected_roles( $settings = array() ) {
+        $article_roles   =  isset( $settings['article_roles'] ) ? $settings['article_roles'] : Betterdocs_DB::get_settings('article_roles') ;
+        $settings_roles  =  isset( $settings['settings_roles'] ) ? $settings['settings_roles'] : Betterdocs_DB::get_settings('settings_roles');
+        $analytics_roles =  isset( $settings['analytics_roles'] ) ? $settings['analytics_roles'] : BetterDocs_DB::get_settings('analytics_roles');
+
+        if( $analytics_roles == 'off' || empty( $analytics_roles ) ) {
+            $analytics_roles = array( 'administrator' );
+        }
+
+        if( $settings_roles == 'off' || empty( $settings_roles ) ) {
+            $settings_roles = array( 'administrator' );
+        }
+
+        if( $article_roles == 'off' || empty( $article_roles ) ) {
+            $article_roles = array( 'administrator' ); 
+        }
+
+        return array(
+            'article_roles'   => array_unique( array_merge( array( 'administrator' ), $article_roles ) ),
+            'settings_roles'  => array_unique( array_merge( array( 'administrator' ), $settings_roles ) ),
+            'analytics_roles' => array_unique( array_merge( array( 'administrator' ), $analytics_roles ) )
+        );
+    }
+
+    public static function get_role_cap_mapper( $settings = array() ) {
+        if( empty( $settings ) ) {
+            $settings = self::get_selected_roles();
+        }
+     
+        return array(
+            'write_docs' =>  array( 
+                'roles' => $settings['article_roles']
+            ),
+            'edit_docs_settings' => array(
+                'roles' => $settings['settings_roles']
+            ),
+            'read_docs_analytics' => array(
+                'roles' => $settings['analytics_roles']
+            )
+        );
+    }
+
     /**
      * This function is responsible for 
      * save all settings data, including checking the disable field to prevent
@@ -173,8 +216,8 @@ class BetterDocs_Settings {
 		$settings_args = self::settings_args();
         $fields = self::get_settings_fields( $settings_args );
         $data = [];
+        $new_posted_fields = [];
         if( ! empty( $posted_fields ) ) {
-            $new_posted_fields = [];
             foreach( $posted_fields as $posted_field ) {
                 preg_match("/(.*)\[(.*)\]/", $posted_field['name'], $matches);
                 if( ! empty( $matches ) ) {
@@ -192,8 +235,22 @@ class BetterDocs_Settings {
         }
         $fields_keys = array_fill_keys( array_keys( $fields ), 'off' );
 
-		foreach( $new_posted_fields as $key => $new_posted_field ) {
-			if( array_key_exists( $key, $fields ) ) {
+        $builtin_doc_page = $new_posted_fields['builtin_doc_page'] ? $fields_keys['builtin_doc_page'] : '';
+        $docs_slug = $new_posted_fields['docs_slug'];
+        $docs_page = $new_posted_fields['docs_page'];
+        if ($builtin_doc_page == 1 && $docs_slug) {
+            $docs_slug = $docs_slug;
+        } elseif ($builtin_doc_page != 1 && $docs_page) {
+            $post_info = get_post($docs_page);
+            $docs_slug = $post_info->post_name;
+        } else {
+            $docs_slug = 'docs';
+        }
+
+        do_action( 'betterdocs_settings_before_save', $new_posted_fields );
+
+		foreach ( $new_posted_fields as $key => $new_posted_field ) {
+			if ( array_key_exists( $key, $fields ) ) {
                 unset( $fields_keys[ $key ] );
                 if( empty( $new_posted_field ) ) {
 					$posted_value = isset( $fields[ $key ]['default'] ) ? $fields[ $key ]['default'] : '';
@@ -201,7 +258,18 @@ class BetterDocs_Settings {
                 if( isset( $fields[ $key ]['disable'] ) && $fields[ $key ]['disable'] === true ) {
                     $posted_value = isset( $fields[ $key ]['default'] ) ? $fields[ $key ]['default'] : '';
                 }
+
                 $posted_value = BetterDocs_Helper::sanitize_field( $fields[ $key ], $new_posted_field );
+
+                if( $key == 'permalink_structure' ) {
+                    $permalink_stracture = explode('%', $posted_value);
+                    if ($permalink_stracture[0] == '/') {
+                        $posted_value = $docs_slug . $posted_value;
+                    } else if ($permalink_stracture[0] == '') {
+                        $posted_value = $docs_slug . '/' . $posted_value;
+                    }
+                }
+
                 if( isset( $data[ $key ] ) ) {
                     if( is_array( $data[ $key ] ) ) {
                         $data[ $key ][] = $posted_value;
@@ -213,9 +281,12 @@ class BetterDocs_Settings {
                 }
             }
         }
-
-        $data = array_merge( $fields_keys, $data );
+        
+        $data            = array_merge( $fields_keys, $data );
+        $roles_rechecked = self::get_selected_roles($data);
+        $data            = array_merge( $data, $roles_rechecked );
 		BetterDocs_DB::update_settings( $data );
+        do_action( 'bdocs_settings_saved', $data );
     }
     
     public static function general_settings_ac(){
