@@ -123,7 +123,7 @@
                                         <ul>
                                             <li v-for="(contract, index) in orderSummary.product.colors[orderSummary.orderDetail.color]" @click="changeContract(contract.productCode)" :data-contract-id="contract.productCode" class="text-uppercase" :class="'contract_' + contract.productCode + ((parseFloat(orderSummary.orderDetail.productCode) == parseFloat(contract.productCode))?' selected':'')"><a>
                                                     <span v-if="contract.contractName == 'Normal'">Normal {{contract.contract}} Months</span>
-                                                    <span v-else >Infinite {{contract.contract}} Months</span>
+                                                    <span v-else >Elevate {{contract.contract}} Months</span>
                                                 </a></li>
                                         </ul>
                                     </div>

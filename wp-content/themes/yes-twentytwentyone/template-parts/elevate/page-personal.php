@@ -162,10 +162,11 @@
                                             <option v-for="state in postCode.state" :value="state">{{state}}
                                             </option>
                                         </select-->
-                                        <input type="text"  class="form-control text-upper"  id="state" name="state"
+                                        <input type="hidden"  class="form-control text-upper"  id="state" name="state"
                                                v-model="deliveryInfo.state"  @input="watchAllowNext"
                                                placeholder=""
                                                required readonly/>
+                                        <div id="state_display"></div>
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-state"></div>
                                 </div>
@@ -177,10 +178,11 @@
                                             <option v-for="city in postCode.city" :value="city">{{city}}
                                             </option>
                                         </select-->
-                                        <input type="text" class="form-control text-uppercase"  id="city" name="city"
+                                        <input type="hidden" class="form-control text-uppercase"  id="city" name="city"
                                                v-model="deliveryInfo.city"  @input="watchAllowNext"
                                                placeholder=""
                                                required readonly/>
+                                        <div id="city_display"></div>
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-city"></div>
                                 </div>
@@ -462,6 +464,9 @@
                             self.deliveryInfo.name = self.eligibility.name;
                             self.deliveryInfo.phone = self.eligibility.phone;
                             self.deliveryInfo.email = self.eligibility.email;
+
+                            $('#state_display').text(self.deliveryInfo.state)
+                            $('#city_display').text(self.deliveryInfo.city)
                         }
                         self.productId = elevate.lsData.product.selected.productCode;
 
@@ -526,6 +531,10 @@
                         setTimeout(function () {
                             $('#state').val(self.postCode.data[postcode].state);
                             $('#city').val(self.postCode.data[postcode].city);
+
+                            $('#state_display').text(self.deliveryInfo.state)
+                            $('#city_display').text(self.deliveryInfo.city)
+
                             $('.form-select').selectpicker('refresh');
                             self.updateCityCode();
                         }, 500);

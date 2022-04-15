@@ -1118,6 +1118,15 @@ ul.wizard {
     border: 5px solid #cccc;
 }
 
+
+#state_display, #city_display{
+    border: 1px solid #E7EAEE;
+    border-radius: 8px;
+    padding: 2px 10px;
+    min-height: 40px;
+    width: 100%;
+}
+
 .listing-quickSelectBanks li{
     margin-right: 10px;
     cursor: pointer;
