@@ -22,7 +22,7 @@ class ElevateApi
     const  api_customer_get_by_guid = 'api/Elevate/customer/Id';
     const  api_customer_get_by_nric = 'api/Elevate/customer/securityNumber';
     const  api_customer = 'api/Elevate/customer';
-    const  api_ca_verification = 'api/Elevate/customer/CAVerification';
+    const  api_ca_verification = 'api/Elevate/compAsia/Verification';
 
     const  api_order_create = 'api/Elevate/order';
     const  api_order_get_by_id = 'api/Elevate/order/Id';
@@ -38,7 +38,8 @@ class ElevateApi
     const  api_product_get_by_nric = 'api/Elevate/product/productId';
     const  api_product_bundle = 'api/Elevate/product/GetProductsByProductBundleId';
 
-    const api_caeligibility = 'api/Elevate/customer/CAEligibility';
+    const api_caeligibility = 'api/Elevate/compAsia/Eligibility';
+    //const api_caeligibility = 'api/Elevate/compAsia/Eligibility';
 
     const  mobile_api_url = 'https://mobileservicesiot.ytlcomms.my/';
     const  mobile_auth_path_auth = 'mobileyos/mobile/ws/v1/json/auth/getBasicAuth';
@@ -224,6 +225,8 @@ class ElevateApi
         $api_url = self::mobile_api_url . self::mobile_api_verify_eligbility;
         $return['url'] = $api_url;
         $request = wp_remote_post($api_url, $args);
+		
+		//print_r($request);die($api_url);
 
         if (is_wp_error($request)) {
             $return['status'] = 0;
@@ -238,6 +241,8 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
+		
+		//print_r($return);die($api_url);
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
@@ -249,6 +254,10 @@ class ElevateApi
 
         $mykad = $request['mykad'];
         $name = $request['name'];
+        $email = $request['email'];
+        $phone = $request['phone'];
+        $front_url = $request['front_url'];
+        $back_url = $request['back_url'];
 
         $token = self::get_token();
 
@@ -260,8 +269,8 @@ class ElevateApi
             )
         ];
 
-        $api_url = self::api_url . self::api_ca_verification . '?MyKadNumber=' . $mykad . '&FullName=' . $name;
-
+        $api_url = self::api_url . self::api_ca_verification . '?MyKadNumber=' . $mykad . '&FullName=' . $name. '&email=' . $email. '&phone=' . $phone. '&front_url=' . $front_url. '&back_url=' . $back_url;
+		 
         $request = wp_remote_get($api_url, $args);
 
         if (is_wp_error($request)) {
@@ -418,6 +427,7 @@ class ElevateApi
         $api_url = self::api_url . self::api_customer;
 
         $request = wp_remote_post($api_url, $args);
+		//echo '<pre>'; print_r(json_encode($params));die();
 
         if (is_wp_error($request)) {
             $return['status'] = 0;
@@ -796,6 +806,8 @@ class ElevateApi
             'body' => $params
         ];
         $request = wp_remote_get($api_url, $args);
+		
+		//echo '<pre>';print_r($request);die();
 
         if (is_wp_error($request)) {
             $return['status'] = 0;

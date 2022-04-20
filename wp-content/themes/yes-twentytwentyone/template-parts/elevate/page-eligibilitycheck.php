@@ -95,7 +95,7 @@
                                                        placeholder="MY +60" readonly>
                                             </div>
                                             <div class="col-lg-8 col-7">
-                                                <input type="text" class="form-control text-uppercase" maxlength="11"
+                                                <input type="text" class="form-control text-uppercase" maxlength="10"
                                                        id="ic_phone_number"
                                                        name="phone" v-model="eligibility.inphone" @input="watchAllowNext"
                                                        @keypress="checkInputCharacters(event, 'numeric', false)"
@@ -260,6 +260,8 @@
 
                             var data = response.data;
 
+
+
                             if (data.data && data.data.eligibilityStatus == 'ALLOWED') {
                                 self.isEligibilityCheck = true;
                                 self.CAEligibility();
@@ -293,6 +295,7 @@
                         .then((response) => {
 
                             var data = response.data;
+
                             if (data.status == 1) {
                                 self.isCAEligibilityCheck = true;
                                 self.elevateCustomer();
@@ -350,7 +353,49 @@
                     return true;
                 },
 
+                getDOB: function (){
+                    var self = this;
+                    var dateString = self.eligibility.mykad.substring(0, 6);
+
+                    var year = dateString.substring(0, 2); //year
+                    var month = dateString.substring(2, 4); //month
+                    var date = dateString.substring(4, 6); //date
+
+                    if (year > 20) {
+                        year = "19" + year;
+                    }
+                    else {
+                        year = "20" + year;
+                    }
+
+                    var dob = date + "/" + month + "/" + year;
+                    return dob;
+                },
+
+                validateAge: function(){
+                    var self = this;
+                    var dateString = self.eligibility.mykad.substring(0, 6);
+
+                    var year = dateString.substring(0, 2); //year
+                    var month = dateString.substring(2, 4); //month
+                    var date = dateString.substring(4, 6); //date
+
+                    if (year > 20) {
+                        year = "19" + year;
+                    }
+                    else {
+                        year = "20" + year;
+                    }
+
+                    var dob = new Date(year+'-'+month+'-'+date);
+                    var today = new Date();
+                    var age = Math.floor((today-dob) / (365.25 * 24 * 60 * 60 * 1000));
+
+                    return (age>=18 && age <=65);
+                },
+
                 watchAllowNext: function () {
+                    $('#error').html("");
                     $('.input_error').removeClass('input_error');
                     var self = this;
 
@@ -391,6 +436,11 @@
                     if (self.eligibility.email.trim() && !email.test(self.eligibility.email.trim())) {
                         isFilled = false;
                         $('#email').addClass('input_error');
+                    }
+
+                    if(!self.validateAge()){
+                        isFilled = false;
+                        $('#error').html("Sorry, Only age between 18 to 65 years can register.");
                     }
 
                     if (isFilled) {

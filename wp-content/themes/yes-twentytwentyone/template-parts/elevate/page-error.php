@@ -57,8 +57,8 @@
                     <p>Would you like to proceed? </p>
                 </div>
                 <div class="mt-5 mb-5 text-center">
-                    <a href="#" class="btn-primary w130 mr-2">Yes</a>
-                    <a href="#" class="btn-black w130">Cancel</a>
+                    <a href="/5gplans" class="btn-primary w130 mr-2">Yes</a>
+                    <a href="/elevate/eligibilitycheck" class="btn-black w130">Retry</a>
                 </div>
             </div>
 

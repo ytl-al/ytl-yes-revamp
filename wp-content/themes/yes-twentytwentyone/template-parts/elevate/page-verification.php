@@ -207,7 +207,10 @@
                                     if(data.data.processStatus == "EKYC_Done"){
                                         //success
                                         clearInterval(self.interval);
-                                        self.CAEligibility();
+										var front_url = data.data.fronImageFilePath; 
+										var back_url = data.data.backImageFilePath;
+										
+                                        self.CAVerification(front_url, back_url);
                                     }else{
                                         //failure
                                         elevate.redirectToPage('/error/');
@@ -224,16 +227,20 @@
                     }
                 },
 
-                CAEligibility: function () {
+                CAVerification: function (front_url, back_url) {
                     var self = this;
                     var params = {
                         mykad: self.eligibility.mykad,
                         name:self.eligibility.name,
+                        email:self.eligibility.email,
+                        phone:self.eligibility.phone,
+                        front_url:back_url,
+                        back_url:back_url,
                     };
                     toggleOverlay();
                     axios.post(apiEndpointURL_elevate + '/ca-verification', params)
                         .then((response) => {
-
+							 
                             var data = response.data;
                             if (data.status == 1) {
                                 elevate.redirectToPage('personal');
