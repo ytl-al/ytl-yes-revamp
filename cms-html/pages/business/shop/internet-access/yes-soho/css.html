@@ -1,0 +1,291 @@
+<style type="text/css">
+    #soho-banner {
+        align-items: center;
+        justify-content: center;
+        padding: 50px 0px;
+        padding-top: 0px;
+    }
+    
+    #soho-banner .visual {
+        background-image: url("/wp-content/uploads/2022/03/soho-banner-visual-bg.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    
+    #soho-banner h1 {
+        font-size: 60px;
+        font-weight: 800;
+        line-height: 72px;
+        color: #000;
+        margin-bottom: 10px;
+    }
+    
+    #soho-banner p {
+        font-size: 20px;
+        font-weight: 400;
+        color: #2B2B2B;
+        line-height: 24px;
+    }
+    /* Soho Banner End */
+    
+    #benefits-tabs .nav-pills .nav-link {
+        background-color: #F7F8F9;
+        border-radius: 20px;
+        text-align: left;
+        padding: 20px;
+        padding-left: 30px;
+        margin-bottom: 20px;
+    }
+    
+    #benefits-tabs .nav-pills .nav-link h1 {
+        color: #2B2B2B;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+        margin-bottom: 10px;
+    }
+    
+    #benefits-tabs .nav-pills .nav-link p {
+        color: #2B2B2B;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        display: none;
+    }
+    
+    #benefits-tabs .nav-pills .nav-link.active {
+        border-left: 15px solid;
+        border-width: 10px;
+        border-color: #2F3BF5;
+    }
+    
+    #benefits-tabs .nav-pills .nav-link.active p {
+        display: block;
+    }
+    
+    #benefits-tabs .tab-content h2 {
+        color: #000000;
+        font-size: 39px;
+        line-height: 47px;
+        font-weight: 800;
+    }
+    
+    #benefits-tabs .tab-content {
+        padding-left: 60px;
+    }
+    
+    #benefits-tabs .tab-content img {
+        width: 70%;
+    }
+    
+    #right-plan {
+        margin: 100px 0px;
+    }
+    
+    #right-plan h1 {
+        color: #000000;
+        font-size: 39px;
+        line-height: 47px;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 65px;
+    }
+    
+    #right-plan p {
+        color: #525252;
+        font-size: 20px;
+        line-height: 24px;
+        text-align: center;
+        padding: 0px 15%;
+    }
+    
+    #soho-plans {
+        margin-bottom: 100px;
+    }
+    
+    #soho-plans .plan-box {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: #FFF;
+        box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+        padding: 30px;
+        height: 100%;
+    }
+    
+    #soho-plans .plan-box h1 {
+        color: #1A1E47;
+        font-size: 23px;
+        line-height: 28px;
+        text-align: center;
+        font-weight: 800;
+        margin-bottom: 30px;
+    }
+    
+    #soho-plans .plan-box h2 {
+        color: #2F3BF5;
+        font-weight: 800;
+        font-size: 72px;
+        text-align: center;
+    }
+    
+    #soho-plans .plan-box h2.small {
+        font-size: 42px;
+    }
+    
+    #soho-plans .plan-box h2 sup {
+        font-size: 29px;
+        top: -30px;
+    }
+    
+    #soho-plans .plan-box p.grey {
+        color: #2B2B2B;
+        font-size: 18px;
+        text-align: center;
+    }
+    
+    #soho-plans .plan-box hr {
+        width: 100%;
+        margin: 15px 0px;
+        border-top: 1px solid #C4C4C4;
+    }
+    
+    #soho-plans .plan-box p.blue {
+        color: #2B2B2B;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 700;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    
+    #talk-sales {
+        margin-bottom: 100px;
+    }
+    
+    #talk-sales h1 {
+        color: #000000;
+        font-size: 39px;
+        line-height: 47px;
+        font-weight: 800;
+        margin-bottom: 20px;
+    }
+    
+    #talk-sales p {
+        color: #2B2B2B;
+        font-size: 20px;
+        line-height: 24px;
+        margin-bottom: 20px;
+    }
+    
+    #talk-sales .knowmore-btn {
+        font-family: 'Montserrat', sans-serif;
+        color: #2F3BF5;
+        letter-spacing: 0.1em;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 18px;
+        display: inline-block;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    
+    #talk-sales .knowmore-btn svg {
+        margin-left: 5px;
+        font-size: 20px;
+    }
+    
+    #talk-sales .knowmore-btn:hover {
+        text-decoration: underline;
+    }
+    
+    #talk-sales .sales-form-box {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        background: #F7F8F9;
+        box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+        height: 100%;
+        padding: 30px;
+    }
+    
+    #talk-sales .sales-form-box h1 {
+        text-align: center;
+        color: #000000;
+        font-size: 23px;
+        margin-bottom: 15px;
+    }
+    
+    #talk-sales .sales-form-box p {
+        color: #2B2B2B;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: center;
+    }
+    
+    #talk-sales .sales-form-box p span {
+        font-weight: 700;
+    }
+    
+    #talk-sales .sales-form-box .attach-link {
+        color: #525252;
+        font-size: 16px;
+        text-decoration: underline;
+        display: inline-block;
+    }
+    
+    #talk-sales .sales-form-box .form-control {
+        border: none;
+        padding: 15px;
+        border-radius: 5px;
+    }
+    
+    #talk-sales .sales-form-box .attach-link svg {
+        display: inline;
+        margin-right: 5px;
+    }
+    /* IPAD Portrait */
+    
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {}
+    
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+        #soho-banner {
+            padding-bottom: 20px;
+        }
+        #soho-banner h1 {
+            font-size: 30px;
+            line-height: 35px;
+        }
+        #soho-banner p {
+            padding: 0 10%;
+            font-size: 18px;
+        }
+        #soho-banner .visual img {
+            width: 70%;
+            margin-bottom: 20px;
+        }
+        #benefits-tabs .tab-content {
+            padding-left: 0px;
+        }
+        #benefits-tabs .tab-content img {
+            width: 60%;
+            margin: 0 auto;
+        }
+        #benefits-tabs .tab-content {
+            text-align: center;
+        }
+        #benefits-tabs .tab-content h2 {
+            font-size: 27px;
+            line-height: 33px;
+        }
+        #talk-sales {
+            margin-bottom: 40px;
+        }
+        #talk-sales .sales-form-box {
+            margin-top: 30px;
+        }
+    }
+</style>
