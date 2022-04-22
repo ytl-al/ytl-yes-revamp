@@ -51,7 +51,7 @@
                         <?php if (function_exists('display_yes_toplogo')) display_yes_toplogo(); ?>
                         <li class="" role="presentation"><a href="javascript:void(0)" class="nav-link<?php echo (!$is_business_child) ? ' active' : ''; ?>" id="tabNav-personal" data-bs-toggle="tab" data-bs-target="#tabNavContent-personal" role="tab" aria-controls="tabNavContent-personal" aria-selected="true">Personal</a></li>
                         <li class="" role="presentation"><a href="javascript:void(0)" class="nav-link<?php echo ($is_business_child) ? ' active' : ''; ?>" id="tabNav-business" data-bs-toggle="tab" data-bs-target="#tabNavContent-business" role="tab" aria-controls="tabNavContent-business" aria-selected="false">Business</a></li>
-                        <li class="" role="presentation"><a href="https://www.ytlfoundation.org/learnfromhome/">Learning</a></li>
+                        <li class="" role="presentation"><a href="https://www.ytlfoundation.org/learnfromhome/" target="_blank">Learning</a></li>
                     </ul>
                 </div>
                 <div class="col-2">
