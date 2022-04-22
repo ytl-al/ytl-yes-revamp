@@ -223,7 +223,7 @@
 
 <style type="text/css">
     @media (min-width: 992px) {
-        .tab-content>.active {
+        .nav-container .tab-content>.active {
             display: flex !important;
             flex-basis: auto;
         }
