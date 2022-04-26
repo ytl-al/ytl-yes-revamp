@@ -250,7 +250,7 @@ if (!function_exists('display_yes_logo')) {
         $site_url   = get_home_url();
 
         if (has_custom_logo()) {
-            echo '<a href="' . $site_url . '" class="navbar-brand d-block d-sm-none"><img src="' . esc_url($logo[0]) . '" alt="' . get_bloginfo('name') . '" title="' . get_bloginfo('name') . '" class="logo-top" /></a>';
+            echo '<a href="' . $site_url . '" class="navbar-brand d-block d-lg-none"><img src="' . esc_url($logo[0]) . '" alt="' . get_bloginfo('name') . '" title="' . get_bloginfo('name') . '" class="logo-top" /></a>';
         } else {
             echo '<h1><a href="' . $site_url . '">' . get_bloginfo('name') . '</a></h1>';
         }

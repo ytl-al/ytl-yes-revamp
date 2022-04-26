@@ -17,7 +17,8 @@
 
     .layer-accordionPlanDetails .img-infinite { margin-bottom: 12px; max-width: 230px; }
     .layer-accordionPlanDetails p {}
-    .layer-accordionPlanDetails p.panel-textGradient { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin: 0; background: linear-gradient(80.9deg, #FF0084 16.48%, #6F29D2 85.6%, #2F3BF5 96.9%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; }
+    .layer-accordionPlanDetails p.panel-textGradient { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin: 0; }
+    p.panel-textGradient span { background: linear-gradient(80.9deg, #FF0084 16.48%, #6F29D2 85.6%, #2F3BF5 96.9%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; }
     .layer-accordionPlanDetails p.panel-hotspot { font-size: 33px; font-weight: 800; line-height: 33px; vertical-align: sub; }
     .layer-accordionPlanDetails p.panel-hotspot sup { font-size: 18px; line-height: 23px; margin: 0 0 0 5px; }
     .layer-accordionPlanDetails p.panel-permonth { font-size: 23px; line-height: 28px; }
@@ -180,7 +181,7 @@
                                         <div class="row gx-5">
                                             <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
                                                 <img src="https://cdn.yes.my/site/wp-content/uploads/2022/04/icon-elevate-infinite.png" class="img-fluid img-infinite" alt="INFINITE+" title="INFINITE+" />
-                                                <p class="panel-textGradient">Basic 99</p>
+                                                <p class="panel-textGradient"><span>Basic 99</span></p>
                                                 <p class="panel-hotspot">200<sup>GB Hotspot</sup></p>
                                                 <p class="panel-permonth"><strong>99</strong>/mth</p>
                                             </div>
@@ -293,7 +294,7 @@
                                         <div class="row gx-5">
                                             <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
                                                 <img src="https://cdn.yes.my/site/wp-content/uploads/2022/04/icon-elevate-infinite.png" class="img-fluid img-infinite" alt="INFINITE+" title="INFINITE+" />
-                                                <p class="panel-textGradient">Standard 128</p>
+                                                <p class="panel-textGradient"><span>Standard 128</span></p>
                                                 <p class="panel-hotspot">200<sup>GB Hotspot</sup></p>
                                                 <p class="panel-permonth"><strong>128</strong>/mth</p>
                                             </div>
@@ -406,7 +407,7 @@
                                         <div class="row gx-5">
                                             <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
                                                 <img src="https://cdn.yes.my/site/wp-content/uploads/2022/04/icon-elevate-infinite.png" class="img-fluid img-infinite" alt="INFINITE+" title="INFINITE+" />
-                                                <p class="panel-textGradient">Premium 188</p>
+                                                <p class="panel-textGradient"><span>Premium 188</span></p>
                                                 <p class="panel-hotspot">200<sup>GB Hotspot</sup></p>
                                                 <p class="panel-permonth"><strong>188</strong>/mth</p>
                                             </div>
