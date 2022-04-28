@@ -1,7 +1,47 @@
 <?php require_once('includes/header.php') ?>
+<style>
+	body{ 
+		background: url(/wp-content/uploads/2021/09/amazing-things-bg.png);
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+	.contract_section{
+		margin-top:30px;
+	}
+	.contract_term{max-height:350px; overflow-y:auto;border:1px solid #ccc; padding:15px; border-radius:3px; margin-bottom:10px;}
+	.contract_term{ margin-top:20px;}
+	
+	:root {
+        --code-color: darkred;
+        --code-bg-color: #aaaaaa;
+        --code-font-size: 14px;
+        --code-line-height: 1.4;
+        --scroll-bar-color: #c5c5c5;
+        --scroll-bar-bg-color: #fff;
+    }
+	
+	*{
+        scrollbar-width: thin;
+        scrollbar-color: var(--scroll-bar-color) var(--scroll-bar-bg-color);
+    }
 
+     
+    *::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    *::-webkit-scrollbar-track {
+        background: var(--scroll-bar-bg-color);
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background-color: var(--scroll-bar-color);
+        border-radius: 20px;
+        border: 3px solid var(--scroll-bar-bg-color);
+    }
+</style>
 <header class="white-top">
-    <div class="container">
+    <div class="container"">
         <div class="row">
             <div class="col-lg-4 col-6">
                 <div class="mt-4">
@@ -23,42 +63,74 @@
     <section id="cart-body">
         <div class="container" style="border: 0">
             <div id="main-vue">
-            <div class="border-box p-lg-5">
+            <div class="p-lg-5">
                 <div class="mb-5 pad-mobile">
                     <h2 class="subtitle mt-3 mb-3">Yes Elevate Contract Permissions</h2>
                     <p>Read our contract conditions before proceeding.</p>
                     <div class="mt-3 content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis in neque non rhoncus.
-                            Sed efficitur, enim eu ultricies blandit, erat eros dapibus orci, eu finibus libero nisi et
-                            turpis. Phasellus eu orci felis. Suspendisse potenti. Duis sagittis ipsum sit amet risus
-                            pharetra vestibulum nec id diam. Vivamus felis augue, euismod vel tempus eu, varius sit amet
-                            arcu. Aenean ultrices neque quis nulla aliquam volutpat id at quam. Integer aliquet turpis
-                            venenatis commodo posuere.</p>
-
-                        <p>Ut erat eros, hendrerit in diam nec, semper elementum leo. Aliquam condimentum elit vitae
-                            pellentesque blandit. Vivamus malesuada nulla ut nulla cursus porttitor. Nulla finibus velit
-                            a erat bibendum placerat. Phasellus nec laoreet massa, nec tempor dui. Nam ultrices elit a
-                            dui vestibulum, sed porta ante vestibulum. Pellentesque a mauris sit amet urna consequat
-                            pulvinar. Donec ullamcorper eget ante ultrices ullamcorper. Sed a pulvinar magna. Morbi
-                            aliquet iaculis urna, at suscipit neque porta sit amet. Pellentesque a massa ante. Nullam
-                            malesuada consequat aliquam. Nullam porta nisi id nisl tincidunt suscipit. Quisque sed
-                            gravida eros. Nam venenatis ligula ex. Maecenas enim lorem, dictum at sodales rutrum,
-                            malesuada quis dui.</p>
-
-                        <p>Maecenas pellentesque at lorem quis eleifend. Phasellus nisi sapien, aliquam sed porttitor
-                            nec, hendrerit quis diam. Curabitur malesuada felis mattis, elementum dolor vel, tristique
-                            dui. Morbi ultricies dolor id vestibulum fringilla. Cras ac nunc eu augue venenatis
-                            fermentum et vitae sapien. Nulla porttitor pharetra nulla, eu accumsan mauris. Duis nec
-                            mauris diam. Nullam blandit, mauris in venenatis lacinia, dolor nisl congue ante, eget
-                            iaculis lorem orci sit amet orci. Integer in vestibulum neque, sit amet consequat velit.
-                            Integer et consectetur ligula. Quisque mollis venenatis nunc, sagittis pellentesque quam
-                            vulputate non. Etiam felis metus, tristique non ex a, suscipit faucibus augue.</p>
-
-                        <p>Nulla malesuada augue et arcu lobortis fermentum. Donec ac dui mi. Nulla facilisi.
-                            Suspendisse sagittis, libero eget malesuada porttitor, magna leo sagittis odio, vel rutrum
-                            augue elit in nunc. Phasellus pulvinar venenatis diam ac dignissim. Vestibulum porttitor
-                            tincidunt massa, iaculis porttitor tortor pharetra a. Duis nec sem malesuada, bibendum velit
-                            eget, rhoncus arcu.</p>
+						<div class="contract_section">
+							<h3>YES Terms and Condition</h3>
+							<div class="contract_term">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis in neque non rhoncus.
+								Sed efficitur, enim eu ultricies blandit, erat eros dapibus orci, eu finibus libero nisi et
+								turpis. Phasellus eu orci felis. Suspendisse potenti. Duis sagittis ipsum sit amet risus
+								pharetra vestibulum nec id diam. Vivamus felis augue, euismod vel tempus eu, varius sit amet
+								arcu. Aenean ultrices neque quis nulla aliquam volutpat id at quam. Integer aliquet turpis
+								venenatis commodo posuere.</p>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis in neque non rhoncus.
+								Sed efficitur, enim eu ultricies blandit, erat eros dapibus orci, eu finibus libero nisi et
+								turpis. Phasellus eu orci felis. Suspendisse potenti. Duis sagittis ipsum sit amet risus
+								pharetra vestibulum nec id diam. Vivamus felis augue, euismod vel tempus eu, varius sit amet
+								arcu. Aenean ultrices neque quis nulla aliquam volutpat id at quam. Integer aliquet turpis
+								venenatis commodo posuere.</p>
+								
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis in neque non rhoncus.
+								Sed efficitur, enim eu ultricies blandit, erat eros dapibus orci, eu finibus libero nisi et
+								turpis. Phasellus eu orci felis. Suspendisse potenti. Duis sagittis ipsum sit amet risus
+								pharetra vestibulum nec id diam. Vivamus felis augue, euismod vel tempus eu, varius sit amet
+								arcu. Aenean ultrices neque quis nulla aliquam volutpat id at quam. Integer aliquet turpis
+								venenatis commodo posuere.</p>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis in neque non rhoncus.
+								Sed efficitur, enim eu ultricies blandit, erat eros dapibus orci, eu finibus libero nisi et
+								turpis. Phasellus eu orci felis. Suspendisse potenti. Duis sagittis ipsum sit amet risus
+								pharetra vestibulum nec id diam. Vivamus felis augue, euismod vel tempus eu, varius sit amet
+								arcu. Aenean ultrices neque quis nulla aliquam volutpat id at quam. Integer aliquet turpis
+								venenatis commodo posuere.</p>
+							</div>
+							<div><label><input type="checkbox" id="term1" name="term1" @click="check_sign" value="agree"/> I Agree</label></div>	
+						</div>		
+						<div class="contract_section">
+							<h3>Tera Optimus Pearl Terms and Condition</h3>
+							<div class="contract_term">
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis in neque non rhoncus.
+								Sed efficitur, enim eu ultricies blandit, erat eros dapibus orci, eu finibus libero nisi et
+								turpis. Phasellus eu orci felis. Suspendisse potenti. Duis sagittis ipsum sit amet risus
+								pharetra vestibulum nec id diam. Vivamus felis augue, euismod vel tempus eu, varius sit amet
+								arcu. Aenean ultrices neque quis nulla aliquam volutpat id at quam. Integer aliquet turpis
+								venenatis commodo posuere.</p>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis in neque non rhoncus.
+								Sed efficitur, enim eu ultricies blandit, erat eros dapibus orci, eu finibus libero nisi et
+								turpis. Phasellus eu orci felis. Suspendisse potenti. Duis sagittis ipsum sit amet risus
+								pharetra vestibulum nec id diam. Vivamus felis augue, euismod vel tempus eu, varius sit amet
+								arcu. Aenean ultrices neque quis nulla aliquam volutpat id at quam. Integer aliquet turpis
+								venenatis commodo posuere.</p>
+								
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis in neque non rhoncus.
+								Sed efficitur, enim eu ultricies blandit, erat eros dapibus orci, eu finibus libero nisi et
+								turpis. Phasellus eu orci felis. Suspendisse potenti. Duis sagittis ipsum sit amet risus
+								pharetra vestibulum nec id diam. Vivamus felis augue, euismod vel tempus eu, varius sit amet
+								arcu. Aenean ultrices neque quis nulla aliquam volutpat id at quam. Integer aliquet turpis
+								venenatis commodo posuere.</p>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis in neque non rhoncus.
+								Sed efficitur, enim eu ultricies blandit, erat eros dapibus orci, eu finibus libero nisi et
+								turpis. Phasellus eu orci felis. Suspendisse potenti. Duis sagittis ipsum sit amet risus
+								pharetra vestibulum nec id diam. Vivamus felis augue, euismod vel tempus eu, varius sit amet
+								arcu. Aenean ultrices neque quis nulla aliquam volutpat id at quam. Integer aliquet turpis
+								venenatis commodo posuere.</p>
+							</div>
+							<div><label><input type="checkbox" id="term2" name="term2" @click="check_sign" value="agree"/> I Agree</label></div>	
+						</div>
+                         
                     </div>
                     <div class="mt-3">
                         <div class="row">
@@ -188,19 +260,23 @@
                 },
                 check_sign: function (){
                     var self = this;
-
-                    if(self.contract_signed && self.contract_signed.toUpperCase() == self.eligibility.name.toUpperCase()){
-                        self.allowSubmit = true;
-                    }else{
-                        self.allowSubmit = false;
-                    }
+					self.allowSubmit = true;
+					
+					if(!$('#term1').is(':checked') || !$('#term2').is(':checked')){
+                        self.allowSubmit = false
+                    } 
+					 
+                    if(self.contract_signed && self.contract_signed.toUpperCase() != self.eligibility.name.toUpperCase()){
+                         self.allowSubmit = false;
+                    }  
+					 
 
                 },
 
                 makeOrder: function (){
                     var self = this;
                     var params = self.customer;
-
+					params.productSelected = self.orderSummary.product.selected.plan.planId;
                     toggleOverlay();
                     axios.post(apiEndpointURL_elevate + '/order/create', params)
                         .then((response) => {

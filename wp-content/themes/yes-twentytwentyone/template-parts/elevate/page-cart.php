@@ -333,7 +333,8 @@
                     var sstAmount = parseFloat(self.orderSummary.product.selected.plan.sstAmount);
                     var rounding = parseFloat(self.orderSummary.product.selected.plan.roundingAdjustment);
                     self.orderSummary.orderDetail.amount = amount.toFixed(2);
-                    self.orderSummary.orderDetail.total = amount +  sstAmount + rounding;
+					var total =  amount +  sstAmount + rounding;
+                    self.orderSummary.orderDetail.total = total.toFixed(2);
                     self.orderSummary.orderDetail.sstAmount = sstAmount.toFixed(2);
                     //console.log("selected product",self.orderSummary.product.selected);
                     //update store
@@ -356,6 +357,9 @@
                     self.orderSummary.orderDetail.color = color;
 
                     self.updateSummary();
+					setTimeout(function(){
+						$('.selectContractWrap li:first-child').trigger("click");
+					},100);
 
                 },
                 changeContract: function (contract){

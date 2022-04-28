@@ -258,7 +258,7 @@ class Model extends BaseController
 
     public static function refinde($products)
     {
-
+		
         foreach ($products as $k=>$v){
             $products[$k]['product']['longDescriptionEN'] = explode(';',$products[$k]['product']['longDescriptionEN']);
             $products[$k]['product']['longDescriptionBM'] = explode(';',$products[$k]['product']['longDescriptionBM']);
@@ -293,14 +293,16 @@ class Model extends BaseController
         $processed['colors'] = $colors;
 
         foreach ($processed['colors'] as $k=>$c){
-            $img = $tmp['imageURL'];
-            if(!in_array($img,$images)){
+			 
+			$colorImg = explode(';',$c[0]['imageURL']); 
+            $img = $colorImg[0];
+            if(!in_array($img,$images)){ 
                 $images[] = array('color'=>$k,'img'=>$img);
             }
         }
 
         $processed['images'] = $images;
-
+		
         return $processed;
     }
 

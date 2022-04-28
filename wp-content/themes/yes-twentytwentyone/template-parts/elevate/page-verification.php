@@ -75,9 +75,7 @@
                                         <div class="subtitle2">Face Verification</div>
                                         <p>Ensure your face is within the frame for an accurate detection</p>
                                     </div></li>
-                            </ul>
-                            <a href="/elevate/personal/" class="btn btn-defalt mr-2">Passed</a>
-                            <a href="/elevate/eligibility-failure/" class="btn btn-defalt">Failure</a>
+                            </ul> 
                         </div>
                     </div>
                 </div>
@@ -207,9 +205,9 @@
                                     if(data.data.processStatus == "EKYC_Done"){
                                         //success
                                         clearInterval(self.interval);
-										var front_url = data.data.fronImageFilePath; 
+										var front_url = data.data.fronImageFilePath;
 										var back_url = data.data.backImageFilePath;
-										
+
                                         self.CAVerification(front_url, back_url);
                                     }else{
                                         //failure
@@ -240,7 +238,7 @@
                     toggleOverlay();
                     axios.post(apiEndpointURL_elevate + '/ca-verification', params)
                         .then((response) => {
-							 
+
                             var data = response.data;
                             if (data.status == 1) {
                                 elevate.redirectToPage('personal');

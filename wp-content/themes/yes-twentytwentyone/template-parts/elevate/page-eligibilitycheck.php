@@ -83,6 +83,17 @@
                                         <div class="invalid-feedback mt-1" id="em-name"></div>
                                     </div>
                                 </div>
+                                <div class="row mb-4">
+                                    <div class="col-lg-8 col-12">
+                                        <label class="form-label">* Date Of Birth</label>
+                                        <div class="align-items-center">
+                                            <input type="text" class="form-control text-uppercase" id="dob" name="dob"
+                                                   v-model="eligibility.dob"
+                                                   placeholder="" readonly>
+                                        </div>
+                                        <div class="invalid-feedback mt-1" id="em-email"></div>
+                                    </div>
+                                </div>
                                 <div class="row mb-4 align-items-center g-2">
                                     <div class="col-12">
                                         <label class="form-label">*Key in your mobile number</label>
@@ -164,6 +175,7 @@
                 eligibility: {
                     mykad: '',
                     name: '',
+                    dob: '',
                     phone: '',
                     inphone: '',
                     email: ''
@@ -274,6 +286,11 @@
                                 }
                                 $('#error').html(data.data.displayResponseMessage);
                                 console.log(data);
+
+                                setTimeout(function(){
+                                    elevate.redirectToPage('compasia-fail');
+                                },1000);
+
 
                             }
                         })
@@ -421,6 +438,12 @@
                         $('#mykad_number').addClass('input_error');
                     }
 
+                    if(self.eligibility.mykad.trim().length == 12){
+                        self.eligibility.dob = self.getDOB();
+                    }else{
+                        self.eligibility.dob = '';
+                    }
+
                     var phone = /^[0-46-9]*[0-9]{9,10}$/g;
                     if (self.eligibility.inphone.trim() && !phone.test(self.eligibility.inphone.trim())) {
                         isFilled = false;
@@ -438,7 +461,7 @@
                         $('#email').addClass('input_error');
                     }
 
-                    if(!self.validateAge()){
+                    if(self.eligibility.mykad.trim() && !self.validateAge()){
                         isFilled = false;
                         $('#error').html("Sorry, Only age between 18 to 65 years can register.");
                     }
