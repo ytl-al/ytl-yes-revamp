@@ -544,22 +544,25 @@ if (!function_exists('show_most_faq_viewed')) {
                     'operator' => 'IN',
                     'include_children' => true
                 ]
-            ]
+            ],
+            'suppress_filters' => false
         ];
         $html_faq   = '';
         $post_count = 1;
-        $posts = get_posts($docsArgs);
-        foreach ($posts as $post) {
-            setup_postdata($post);
-            $html_faq   .= '            <div class="accordion-item">
-                                            <h2 class="accordion-header" id="accordion-header-' . $post_count . '">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-content-' . $post_count . '" aria-expanded="true" aria-controls="accordion-content-' . $post_count . '">' . get_the_title() . '</button>
-                                            </h2>
-                                            <div id="accordion-content-' . $post_count . '" class="accordion-collapse collapse" aria-labelledby="accordion-header-' . $post_count . '" data-bs-parent="#accordion-faqShortcode">
-                                                <div class="accordion-body">' . get_the_content() . '</div>
-                                            </div>
-                                        </div>';
-            $post_count++;
+        $faqs = new WP_Query($docsArgs);
+        if ($faqs->have_posts()) {
+            while($faqs->have_posts()) {
+                $faqs->the_post();
+                $html_faq   .= '            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="accordion-header-' . $post_count . '">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-content-' . $post_count . '" aria-expanded="true" aria-controls="accordion-content-' . $post_count . '">' . get_the_title() . '</button>
+                                                </h2>
+                                                <div id="accordion-content-' . $post_count . '" class="accordion-collapse collapse" aria-labelledby="accordion-header-' . $post_count . '" data-bs-parent="#accordion-faqShortcode">
+                                                    <div class="accordion-body">' . get_the_content() . '</div>
+                                                </div>
+                                            </div>';
+                $post_count++;
+            }
         }
         wp_reset_postdata();
 
