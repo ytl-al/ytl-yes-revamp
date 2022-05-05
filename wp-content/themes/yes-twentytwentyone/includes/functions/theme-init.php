@@ -601,3 +601,24 @@ if (!function_exists('show_most_faq_viewed')) {
 
     add_shortcode('bd_most_viewed_faq', 'show_most_faq_viewed');
 }
+
+
+if (!function_exists('yes_remove_powered_headers')) {
+    /**
+     * Function yes_remove_powered_headers()
+     * Function to remove the 'X-powered-by' in headers
+     * 
+     * @since    1.0.2
+     */
+    function yes_remove_powered_headers($headers)
+    {
+        if (function_exists('header_remove')) {
+            header_remove('x-powered-by');
+            header_remove('X-Powered-By');
+        }
+        unset($headers['x-powered-by']);
+        unset($headers['X-Powered-By']);
+        return $headers;
+    }
+    add_action('wp_headers', 'yes_remove_powered_headers');
+}
