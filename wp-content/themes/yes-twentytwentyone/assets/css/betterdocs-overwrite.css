@@ -15,6 +15,7 @@
 #accordion-faqShortcode .accordion-body h1 { font-size: 35px; margin-bottom: 12px; text-align: initial; }
 #accordion-faqShortcode .accordion-body h1 { color: inherit; font-size: 28px; margin: 12px 0 8px; }
 #accordion-faqShortcode .accordion-body h1:first-of-type { margin-top: 0; }
+.betterdocs-content { overflow-y: auto; }
 .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ol, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ul,
 #accordion-faqShortcode .accordion-body ol, #accordion-faqShortcode .accordion-body ul { margin: 0 0 20px; padding: 0; }
 .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ol li, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content ul li,
