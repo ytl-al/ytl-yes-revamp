@@ -31,7 +31,7 @@
                         <div class="mt-5">Order Number</div>
                         <div class="subtitle"><?php echo $_GET['orderNumber']?></div>
                         <div class="text-12 mt-2">Placed on <?php echo date("l, jS F Y")?></div>
-                        <div class="mt-5">A summary of your order and a copy of your Elevate contract has been sent to
+                        <div class="mt-5">A summary of your order has been sent to
                             your email
                         </div>
                     </div>

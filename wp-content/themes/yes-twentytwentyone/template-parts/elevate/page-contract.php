@@ -97,7 +97,7 @@
 								arcu. Aenean ultrices neque quis nulla aliquam volutpat id at quam. Integer aliquet turpis
 								venenatis commodo posuere.</p>
 							</div>
-							<div><label><input type="checkbox" id="term1" name="term1" @click="check_sign" value="agree"/> I Agree</label></div>	
+							<div><label><input type="checkbox" id="term1" name="term1" @click="check_sign" value="agree" checked/> I Agree</label></div>	
 						</div>		
 						<div class="contract_section">
 							<h3>Tera Optimus Pearl Terms and Condition</h3>
@@ -128,7 +128,7 @@
 								arcu. Aenean ultrices neque quis nulla aliquam volutpat id at quam. Integer aliquet turpis
 								venenatis commodo posuere.</p>
 							</div>
-							<div><label><input type="checkbox" id="term2" name="term2" @click="check_sign" value="agree"/> I Agree</label></div>	
+							<div><label><input type="checkbox" id="term2" name="term2" @click="check_sign" value="agree" checked/> I Agree</label></div>	
 						</div>
                          
                     </div>
@@ -144,8 +144,8 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div>Date & Time</div>
-                                <div class="mt-3 text-bold"><?php echo date("d/m/Y")?></div>
+                                <div>Date & Time</div> 
+                                <div class="mt-3 text-bold text-uppercase" id="contract_time" style="display:none"><span>{{ time }}</span></div>
                             </div>
                         </div>
                         <div class="row">
@@ -173,6 +173,8 @@
             el: '#main-vue',
             data: {
                 qrcode: null,
+				interval: null,
+				time: null,
                 contract:{},
                 contract_signed:"",
                 eligibility: {
@@ -220,12 +222,29 @@
                 currentStep: 0,
                 allowSubmit: false
             },
+			
+			beforeDestroy() {
+				// prevent memory leak
+				clearInterval(this.interval)
+			},
 
             created: function () {
                 var self = this;
                 setTimeout(function () {
                     self.pageInit();
                 }, 500);
+				$('#contract_time').show();
+				this.interval = setInterval(() => {
+				  // Concise way to format time according to system locale.
+				  this.time = Intl.DateTimeFormat('en-GB', {
+					day: '2-digit',
+					month: '2-digit',
+					year: 'numeric',
+					hour: 'numeric',
+					minute: 'numeric',
+					hourCycle: 'h11',
+				  }).format()
+				}, 1000);
             },
             methods: {
                 pageInit: function () {
@@ -233,10 +252,14 @@
                     if (elevate.validateSession(self.currentStep)) {
                         if (elevate.lsData.eligibility) {
                             self.eligibility = elevate.lsData.eligibility;
-                        }
+                        }else{
+							 elevate.redirectToPage('eligibilitycheck');
+						}
                         if (elevate.lsData.deliveryInfo) {
                             self.deliveryInfo = elevate.lsData.deliveryInfo;
-                        }
+                        }else{
+							 elevate.redirectToPage('personal');
+						}
                         if (elevate.lsData.customer) {
                             self.customer = elevate.lsData.customer;
                         }
@@ -253,6 +276,8 @@
                     } else {
                         elevate.redirectToPage('cart');
                     }
+					
+					
                 },
                 sign_contract: function () {
                     var self = this;
@@ -262,13 +287,19 @@
                     var self = this;
 					self.allowSubmit = true;
 					
+					if(!self.contract_signed){
+						self.allowSubmit = false;
+					}
+					
 					if(!$('#term1').is(':checked') || !$('#term2').is(':checked')){
                         self.allowSubmit = false
                     } 
 					 
                     if(self.contract_signed && self.contract_signed.toUpperCase() != self.eligibility.name.toUpperCase()){
                          self.allowSubmit = false;
-                    }  
+                    } 
+					
+					
 					 
 
                 },

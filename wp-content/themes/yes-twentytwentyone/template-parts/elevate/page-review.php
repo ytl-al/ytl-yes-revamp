@@ -84,10 +84,10 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row mt-3 item_info">
-                                    <div class="label text-bold">To: {{deliveryInfo.name}}</div>
+                                    <div class="label text-bold">To: {{eligibility.name}}</div>
                                     <div class="content">
-                                        <div>{{deliveryInfo.email}}</div>
-                                        <div>+60 {{deliveryInfo.phone}}</div>
+                                        <div>{{eligibility.email}}</div>
+                                        <div>+60 {{eligibility.inphone}}</div>
                                     </div>
                                 </div>
 
@@ -136,15 +136,23 @@
                                     <p>Upfront Payment</p>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.product.selected.upFrontPayment).toFixed(2)) }}</p>
+                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.product.selected.plan.upFrontPayment).toFixed(2)) }}</p>
                                 </div>
                             </div>
                             <div class="row mt-2 cart_bold">
                                 <div class="col-6">
-                                    <p>Taxes (SST)</p>
+                                    <p>Tax (SST)</p>
                                 </div>
                                 <div class="col-6 text-end">
                                     <p>*RM{{ formatPrice(parseFloat(orderSummary.orderDetail.sstAmount).toFixed(2)) }}</p>
+                                </div>
+                            </div>
+							<div class="row mt-2 cart_bold">
+                                <div class="col-6">
+                                    <p>Rounding Adjustment</p>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.orderDetail.roundingAdjustment).toFixed(2)) }}</p>
                                 </div>
                             </div>
                             <div class="hr_line"></div>
@@ -255,13 +263,13 @@
                 },
                 allowSelectCity: false,
                 allowSubmit: false
-            },
-
+            }, 
+			
             created: function () {
                 var self = this;
                 setTimeout(function () {
                     self.pageInit();
-                }, 500);
+                }, 500); 
 
             },
             methods: {
@@ -272,13 +280,17 @@
                         self.pageValid = true;
                         if (elevate.lsData.eligibility) {
                             self.eligibility = elevate.lsData.eligibility;
-                        }
+                        }else{
+								 elevate.redirectToPage('eligibilitycheck');
+						}
                         if (elevate.lsData.customer) {
                             self.customer = elevate.lsData.customer;
                         }
                         if (elevate.lsData.deliveryInfo) {
                             self.deliveryInfo = elevate.lsData.deliveryInfo;
-                        }
+                        }else{
+							elevate.redirectToPage('personal');
+						}
 
                         if (elevate.lsData.orderDetail) {
                             self.orderSummary.orderDetail = elevate.lsData.orderDetail;

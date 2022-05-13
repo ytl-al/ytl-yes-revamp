@@ -62,44 +62,11 @@
                                      <div class="col-11 text-bold">
                                          Sorry, you do not qualify for the Yes Elevate contract option, please select another contract option:
                                      </div>
-                                     <div class="col-md-12 mt-3">
-                                         <div>Select a new contract option:</div>
-                                         <div class="selectContractWrap contractNormal mt-2">
-                                             <ul>
-                                                 <li v-for="(contract, index) in orderSummary.product.colors[orderSummary.orderDetail.color]" @click="changeContract(contract.productCode)" :data-contract-id="contract.productCode" class="text-uppercase" :class="(contract.contractName == 'Normal'?'contract_'+ contract.productCode :'contract_'+ contract.productCode +' contract-disabled')"><a>
-                                                         <span v-if="contract.contractName == 'Normal'">Normal {{contract.contract}} Months</span>
-                                                         <span v-else >Infinite {{contract.contract}} Months</span>
-                                                     </a></li>
-                                             </ul>
-                                         </div>
-                                     </div>
+                                      
                                  </div>
-                                <div class="row" style="min-height: 450px;">
-                                    <div class="col-md-12" v-if="allowSubmit">
-                                        <div class="hr_line"></div>
-                                        <div class="text-note" v-if="orderSummary.orderDetail.productCode">
-                                            <div v-for="(detail, index) in orderSummary.product.selected.productNoteEN">{{detail | trim}}</div>
-                                        </div>
-                                        <div class="row mt-5">
-                                            <div class="col-md-3">
-                                                <img :src="orderSummary.product.selected.imageURL" width="100"/>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <h2 class="subtitle" style="margin-bottom: 0">{{ orderSummary.product.selected.nameEN }}</h2>
-                                                <h2 class="subtitle">{{orderSummary.product.selected.plan.nameEN }}</h2>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-5">
-                                            <div class="text-description mt-3">{{orderSummary.product.selected.plan.shortDescriptionEN}}</div>
-                                            <ul class="accordion-body list-1 mt-3">
-                                                <li v-for="(list, index) in orderSummary.product.selected.plan.longDescriptionEN">{{list}}</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                                 
                                 <div class="p-3">
-                                    <a class="pink-btn-disable text-uppercase mr-2" :class="(allowSubmit)?'pink-btn':'pink-btn-disable'" @click="goNext">choose plan</a>
-                                    <a href="/5gplans/" class="btn-cancel text-uppercase">Cancel</a>
+                                    <a href="/infinite-phone-bundles/" class="pink-btn text-uppercase">Back to Infinite+</a>
                                 </div>
                                 <div id="error" class="mt-3"></div>
                             </div>
@@ -279,7 +246,9 @@
                 goNext: function(){
                     $('#error').html('');
                     var self = this;
-                    self.redirectYWOS();
+					if(self.allowSubmit){
+						self.redirectYWOS();
+					}
                 }
             }
         });

@@ -516,18 +516,24 @@
                         if (elevate.validateSession(self.currentStep)) {
                             self.pageValid = true;
                             if (elevate.lsData.eligibility) {
-                                self.eligibility = elevate.lsData.eligibility;
-                            }
+                            self.eligibility = elevate.lsData.eligibility;
+							}else{
+								 elevate.redirectToPage('eligibilitycheck');
+							}
+							if (elevate.lsData.deliveryInfo) {
+								self.deliveryInfo = elevate.lsData.deliveryInfo;
+							}else{
+								 elevate.redirectToPage('personal');
+							}
                             if (elevate.lsData.customer) {
                                 self.customer = elevate.lsData.customer;
-                            }
-                            if (elevate.lsData.deliveryInfo) {
-                                self.deliveryInfo = elevate.lsData.deliveryInfo;
-                            }
+                            } 
 
                             if (elevate.lsData.orderDetail) {
                                 self.orderSummary.orderDetail = elevate.lsData.orderDetail;
-                            }
+                            }else{
+								 elevate.redirectToPage('contract');
+							}
                             if (elevate.lsData.product) {
                                 self.orderSummary.product = elevate.lsData.product;
                             }

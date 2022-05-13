@@ -118,6 +118,7 @@
                                                 data-bs-target="#productSlide" :data-bs-slide-to="index" class="color_select" :class="'color-'+image.color +((orderSummary.orderDetail.color == image.color.toLowerCase())?' selected':'')"><a></a></li>
                                         </ul>
                                     </div>
+									<div style="display:none;">
                                     <div class="text-bold mt-3" v-if="orderSummary.orderDetail.color">Select contract type</div>
                                     <div class="selectContractWrap mt-3" v-if="orderSummary.orderDetail.color">
                                         <ul>
@@ -127,6 +128,7 @@
                                                 </a></li>
                                         </ul>
                                     </div>
+									</div>
                                     <div class="hr_line"></div>
                                     <div class="text-note" v-if="orderSummary.orderDetail.productCode">
                                         <div v-for="(detail, index) in orderSummary.product.selected.productNoteEN">{{detail | trim}}</div>
@@ -165,15 +167,23 @@
                                     <p>Upfront Payment</p>
                                 </div>
                                 <div class="col-6 text-end">
-                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.product.selected.upFrontPayment).toFixed(2)) }}</p>
+                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.product.selected.plan.upFrontPayment).toFixed(2)) }}</p>
                                 </div>
                             </div>
                             <div class="row mt-2 cart_bold">
                                 <div class="col-6">
-                                    <p>Taxes (SST)</p>
+                                    <p>Tax (SST)</p>
                                 </div>
                                 <div class="col-6 text-end">
                                     <p>*RM{{ formatPrice(parseFloat(orderSummary.orderDetail.sstAmount).toFixed(2)) }}</p>
+                                </div>
+                            </div>
+							<div class="row mt-2 cart_bold">
+                                <div class="col-6">
+                                    <p>Rounding Adjustment</p>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.orderDetail.roundingAdjustment).toFixed(2)) }}</p>
                                 </div>
                             </div>
                             <div class="hr_line"></div>
@@ -336,6 +346,7 @@
 					var total =  amount +  sstAmount + rounding;
                     self.orderSummary.orderDetail.total = total.toFixed(2);
                     self.orderSummary.orderDetail.sstAmount = sstAmount.toFixed(2);
+                    self.orderSummary.orderDetail.roundingAdjustment = rounding.toFixed(2);
                     //console.log("selected product",self.orderSummary.product.selected);
                     //update store
                     self.isValidCart();

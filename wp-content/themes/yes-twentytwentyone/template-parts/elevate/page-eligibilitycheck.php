@@ -1,5 +1,14 @@
 <?php require_once('includes/header.php') ?>
-
+<style>
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+	input[type="number"] {
+		-moz-appearance: textfield;
+	}
+</style>
 <header class="white-top">
     <div class="container">
         <div class="row">
@@ -60,10 +69,10 @@
                                     <div class="col-lg-8 col-12">
                                         <label class="form-label">* MyKad number</label>
                                         <div class="input-group align-items-center">
-                                            <input type="text" minlength="12" maxlength="12" class="form-control text-uppercase"
+                                            <input type="number" pattern="\d*" minlength="12" maxlength="12" class="form-control text-uppercase"
                                                    id="mykad_number"
                                                    name="mykad" v-model="eligibility.mykad" @input="watchAllowNext"
-                                                   @keypress="checkInputCharacters(event, 'numeric', false)"
+                                                   @keypress="isNumber($event)" min="0"
                                                    placeholder=""
                                                    required>
 
@@ -106,10 +115,10 @@
                                                        placeholder="MY +60" readonly>
                                             </div>
                                             <div class="col-lg-8 col-7">
-                                                <input type="text" class="form-control text-uppercase" maxlength="10"
+                                                <input type="number" pattern="\d*" min="0" class="form-control text-uppercase" maxlength="10"
                                                        id="ic_phone_number"
                                                        name="phone" v-model="eligibility.inphone" @input="watchAllowNext"
-                                                       @keypress="checkInputCharacters(event, 'numeric', false)"
+                                                       @keypress="isNumber($event)"
                                                        placeholder="Phone number">
                                             </div>
                                         </div>
@@ -388,6 +397,29 @@
                     var dob = date + "/" + month + "/" + year;
                     return dob;
                 },
+				
+				getDOBIso: function (){
+                    var self = this;
+                    var dateString = self.eligibility.mykad.substring(0, 6);
+
+                    var year = dateString.substring(0, 2); //year
+                    var month = dateString.substring(2, 4); //month
+                    var date = dateString.substring(4, 6); //date
+
+                    if (year > 20) {
+                        year = "19" + year;
+                    }
+                    else {
+                        year = "20" + year;
+                    }
+
+                    var dob = year + "-" + month + "-" + date;
+                    return dob;
+                },
+				
+				isValidDate: function(d) {
+				  return (new Date(d) !== "Invalid Date") && !isNaN(new Date(d));
+				},
 
                 validateAge: function(){
                     var self = this;
@@ -410,11 +442,23 @@
 
                     return (age>=18 && age <=65);
                 },
+				
+				isNumber: function(evt) {
+				  evt = (evt) ? evt : window.event;
+				  var charCode = (evt.which) ? evt.which : evt.keyCode;
+				  if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+					evt.preventDefault();;
+				  } else {
+					return true;
+				  }
+				},
 
                 watchAllowNext: function () {
                     $('#error').html("");
                     $('.input_error').removeClass('input_error');
                     var self = this;
+					
+					var error = new Array();
 
 
                     self.isEligibilityCheck = false;
@@ -438,45 +482,59 @@
                         $('#mykad_number').addClass('input_error');
                     }
 
-                    if(self.eligibility.mykad.trim().length == 12){
-                        self.eligibility.dob = self.getDOB();
+                    if(self.eligibility.mykad.trim().length >= 12){
+						
+						var bod = self.getDOBIso(); 
+						
+						if(self.isValidDate(bod)){
+							self.eligibility.dob = self.getDOB();
+							if(!self.validateAge()){						 
+								isFilled = false;
+								$('#mykad_number').addClass('input_error');
+								error.push('Only age between 18 to 65 years can register');								 
+							}
+						}else{
+							isFilled = false;
+							$('#mykad_number').addClass('input_error');
+							self.eligibility.dob = '';
+							error.push('Invalid MyKad number');
+						}
                     }else{
+						if(self.eligibility.mykad.trim().length > 0 && self.eligibility.mykad.trim().length < 12){
+							error.push('Invalid MyKad number');
+							$('#mykad_number').addClass('input_error');
+						}
                         self.eligibility.dob = '';
                     }
 
                     var phone = /^[0-46-9]*[0-9]{9,10}$/g;
-                    if (self.eligibility.inphone.trim() && !phone.test(self.eligibility.inphone.trim())) {
+                    if (self.eligibility.inphone.trim() && (!phone.test(self.eligibility.inphone.trim()) || !self.validateMobile(self.eligibility.inphone))) {
                         isFilled = false;
                         $('#ic_phone_number').addClass('input_error');
-                    }
-
-                    if(self.eligibility.inphone && !self.validateMobile(self.eligibility.inphone)){
-                        isFilled = false;
-                        $('#ic_phone_number').addClass('input_error');
-                    }
+						error.push('Invalid mobile number');
+                    } 
 
                     var email = /\S+@\S+\.\S+/;
                     if (self.eligibility.email.trim() && !email.test(self.eligibility.email.trim())) {
                         isFilled = false;
                         $('#email').addClass('input_error');
-                    }
-
-                    if(self.eligibility.mykad.trim() && !self.validateAge()){
-                        isFilled = false;
-                        $('#error').html("Sorry, Only age between 18 to 65 years can register.");
-                    }
+						error.push('Invalid email');
+                    } 
 
                     if (isFilled) {
                         self.allowSubmit = true;
                     } else {
                         self.allowSubmit = false;
+						if(error.length){
+							$('#error').html("Sorry: " + error.join(', ')+'.');
+						}
                     }
                 },
                 goNext: function () {
                     var self = this;
-                    $('#error').html('');
+                    
                     if (self.allowSubmit) {
-
+						$('#error').html('');
                         //update store
                         self.eligibility.phone = '0'+self.eligibility.inphone;
 

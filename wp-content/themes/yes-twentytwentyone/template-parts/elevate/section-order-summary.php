@@ -1,7 +1,7 @@
 <div class="summary-box">
     <h1 class="subtitle">Order summary</h1>
     <h3 class="plan_price">Monthly Payment</h3>
-    <div class="row">
+    <div class="">
         <div class="hr_line"></div>
         <div class="row cart_total">
             <div class="col-6 pt-2 pb-2">
@@ -11,7 +11,7 @@
                 <h3>RM{{ formatPrice(parseFloat(orderSummary.orderDetail.total).toFixed(2)) }}/mth</h3>
             </div>
         </div>
-        <div class="row monthly mb-4">
+        <div class="monthly mb-4">
             <div v-for="(item, index) in orderSummary.orderDetail.orderItems" class="row mt-2">
                 <div class="col-6">
                     <p>{{item.name}}</p>
@@ -26,17 +26,25 @@
                     <p>Upfront Payment</p>
                 </div>
                 <div class="col-6 text-end">
-                    <p>*RM{{ formatPrice(parseFloat(orderSummary.product.selected.upFrontPayment).toFixed(2)) }}</p>
+                    <p>*RM{{ formatPrice(parseFloat(orderSummary.product.selected.plan.upFrontPayment).toFixed(2)) }}</p>
                 </div>
             </div>
             <div class="row mt-2 cart_bold">
                 <div class="col-6">
-                    <p>Taxes (SST)</p>
+                    <p>Tax (SST)</p>
                 </div>
                 <div class="col-6 text-end">
                     <p>*RM{{ formatPrice(parseFloat(orderSummary.orderDetail.sstAmount).toFixed(2)) }}</p>
                 </div>
             </div>
+			<div class="row mt-2 cart_bold">
+				<div class="col-6">
+					<p>Rounding Adjustment</p>
+				</div>
+				<div class="col-6 text-end">
+					<p>*RM{{ formatPrice(parseFloat(orderSummary.orderDetail.roundingAdjustment).toFixed(2)) }}</p>
+				</div>
+			</div>
             <div class="hr_line"></div>
     </div>
     </div>

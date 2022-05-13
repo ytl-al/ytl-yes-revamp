@@ -454,7 +454,9 @@
                         self.pageValid = true;
                         if (elevate.lsData.eligibility) {
                             self.eligibility = elevate.lsData.eligibility;
-                        }
+                        }else{
+							 elevate.redirectToPage('eligibilitycheck');
+						}
                         if (elevate.lsData.customer) {
                             self.customer = elevate.lsData.customer;
                         }

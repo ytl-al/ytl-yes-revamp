@@ -235,7 +235,7 @@ class ElevateApi
         $return['url'] = $api_url;
         $request = wp_remote_post($api_url, $args);
 		
-		//print_r($request);die($api_url);
+		 //print_r($params);print_r($request);die($api_url);
 
         if (is_wp_error($request)) {
             $return['status'] = 0;
@@ -267,6 +267,9 @@ class ElevateApi
         $phone = $request['phone'];
         $front_url = $request['front_url'];
         $back_url = $request['back_url'];
+        $selfievideo = $request['selfievideo'];
+        $PartneReferenceID = $request['PartneReferenceID'];
+        $OCRConfidenceScore = $request['OCRConfidenceScore'];
 
         $token = self::get_token();
 
@@ -278,7 +281,7 @@ class ElevateApi
             )
         ];
 
-        $api_url = self::api_url . self::api_ca_verification . '?MyKadNumber=' . $mykad . '&FullName=' . $name. '&email=' . $email. '&phone=' . $phone. '&front_url=' . $front_url. '&back_url=' . $back_url;
+        $api_url = self::api_url . self::api_ca_verification . '?MyKadNumber=' . $mykad . '&FullName=' . $name. '&email=' . $email. '&phone=' . $phone. '&front_url=' . $front_url. '&back_url=' . $back_url. '&selfievideo=' . $selfievideo. '&PartneReferenceID=' . $PartneReferenceID. '&OCRConfidenceScore=' . $OCRConfidenceScore;
 		 
         $request = wp_remote_get($api_url, $args);
 
@@ -290,9 +293,16 @@ class ElevateApi
             $return['error'] = @$request['response'];
         } else {
             $data = json_decode($request['body'], true);
-
+			
             if ($data['response']) {
-                $return['status'] = 1;
+				$res = json_decode($data['response']);
+				 
+				if($res->result !== 'Fail'){
+					$return['status'] = 1;
+				}else{
+					$return['status'] = 0;
+					$return['error'] = $res->reason;
+				}
             } else {
                 $return['status'] = 0;
             }

@@ -489,6 +489,18 @@
                     var self = this;
 
                     if (elevate.validateSession(self.currentStep)) {
+						
+						if (elevate.lsData.eligibility) {
+                            self.eligibility = elevate.lsData.eligibility;
+                        }else{
+							 elevate.redirectToPage('eligibilitycheck');
+						}
+                        if (elevate.lsData.deliveryInfo) {
+                            self.deliveryInfo = elevate.lsData.deliveryInfo;
+                        }else{
+							 elevate.redirectToPage('personal');
+						}
+						
                         self.pageValid = true;
                         self.ajaxGetFPXBankList();
                         self.updateData();
