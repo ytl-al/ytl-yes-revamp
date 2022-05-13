@@ -30,7 +30,16 @@
     .layer-planDevice p.panel-deviceImg img { max-height: 148px; }
     .layer-planDevice p.panel-btn { margin: 0 0 20px; text-align: center; }
     .layer-planDevice p.panel-btn a { background-color: #2F3BF5; border-radius: 50px; color: #FFF; font-weight: 800; letter-spacing: 0.1em; padding: 8px 40px; text-transform: uppercase; }
-    .layer-planDevice ul.listing-deviceDesc { margin-bottom: 0; padding-left: 20px; }
+    .layer-planDevice ul.listing-deviceDesc { margin-bottom: 20px; padding-left: 20px; }
+
+    .panel-colors { display: flex; align-items: center; }
+    .panel-colors .span-color { background-color: transparent; border: 2px solid #999; border-radius: 100%; box-sizing: border-box; display: inline-block; height: 40px; margin: 0 0 0 8px; padding: 2px; width: 40px; }
+    .span-color:after { background-color: #D9D9D9; border-radius: 100%; content: ''; display: inline-block; height: 32px; width: 32px; }
+    .span-color.blue:after { background-color: #ADBBDE; }
+    .span-color.black:after { background-color: #282524; }
+    .span-color.white:after { background-color: #FFF; }
+    .span-color.red:after { background-color: #FE0003; }
+    .span-color.grey:after { background-color: #D9D9D9; }
 
     
     @media (min-width: 768px) {

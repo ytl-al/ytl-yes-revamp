@@ -2,61 +2,250 @@
 
 <style type="text/css">
     .layer-steps {}
-    .layer-steps .layer-step, .layer-step {}
-    .layer-step h2 { font-size: 23px; margin: 0 0 8px; }
-    .layer-step p {}
-    .layer-step .panel-stepHeading { color: #1A1E47; font-size: 18px; font-weight: 800; margin: 0 0 15px; text-transform: uppercase; }
-    .panel-stepHeading .icon-stepHeading { background-color: #1A1E47; border-radius: 100%; display: inline-block; margin: 0 12px 0 0; height: 53px; padding: 10px 0 0; text-align: center; vertical-align: middle; width: 53px; }
-    .icon-stepHeading img { max-height: 32px; max-width: 32px; }
 
-    .section-bg-grey { background-color: #F7F8F9; }
+    .layer-steps .layer-step,
+    .layer-step {}
+
+    .layer-step h2 {
+        font-size: 23px;
+        margin: 0 0 8px;
+    }
+
+    .layer-step p {}
+
+    .layer-step .panel-stepHeading {
+        color: #1A1E47;
+        font-size: 18px;
+        font-weight: 800;
+        margin: 0 0 15px;
+        text-transform: uppercase;
+    }
+
+    .panel-stepHeading .icon-stepHeading {
+        background-color: #1A1E47;
+        border-radius: 100%;
+        display: inline-block;
+        margin: 0 12px 0 0;
+        height: 53px;
+        padding: 10px 0 0;
+        text-align: center;
+        vertical-align: middle;
+        width: 53px;
+    }
+
+    .icon-stepHeading img {
+        max-height: 32px;
+        max-width: 32px;
+    }
+
+    .section-bg-grey {
+        background-color: #F7F8F9;
+    }
 
     .layer-accordionPlans {}
-    .layer-accordionPlans .layer-accordionPlan {}
-    .layer-accordionPlan .layer-accordionPlanDetails { background-color: #FFF; border-radius: 10px; box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1); margin: 45px 0 0; padding: 30px; }
 
-    .layer-accordionPlanDetails .img-infinite { margin-bottom: 12px; max-width: 230px; }
+    .layer-accordionPlans .layer-accordionPlan {}
+
+    .layer-accordionPlan .layer-accordionPlanDetails {
+        background-color: #FFF;
+        border-radius: 10px;
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+        margin: 45px 0 0;
+        padding: 30px;
+    }
+
+    .layer-accordionPlanDetails .img-infinite {
+        margin-bottom: 12px;
+        max-width: 230px;
+    }
+
     .layer-accordionPlanDetails p {}
-    .layer-accordionPlanDetails p.panel-textGradient { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin: 0; }
-    p.panel-textGradient span { background: linear-gradient(80.9deg, #FF0084 16.48%, #6F29D2 85.6%, #2F3BF5 96.9%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; }
-    .layer-accordionPlanDetails p.panel-hotspot { font-size: 33px; font-weight: 800; line-height: 33px; vertical-align: sub; }
-    .layer-accordionPlanDetails p.panel-hotspot sup { font-size: 18px; line-height: 23px; margin: 0 0 0 5px; }
-    .layer-accordionPlanDetails p.panel-permonth { font-size: 23px; line-height: 28px; }
-    .layer-accordionPlanDetails ul.listing-planCheck, ul.listing-planCheck { margin: 0; padding: 0; }
-    .layer-accordionPlanDetails ul.listing-planCheck li, ul.listing-planCheck li { list-style-type: none; margin: 0 0 12px; padding: 0 0 0 25px; position: relative; }
-    .layer-accordionPlanDetails ul.listing-planCheck li:before, .ul.listing-planCheck li:before { background-image: url('https://cdn.yes.my/site/wp-content/uploads/2022/04/icon-elevate-check.png'); background-size: contain; content: ''; display: inline-block; height: 20px; width: 20px; position: absolute; top: 2px; left: 0px; }
-    .layer-accordionPlanDetails .accordion-button, .layer-accordionPlanDetails .btn-viewMore { background-color: #FF0084; border-radius: 50px; color: #FFF; font-weight: 800; justify-content: center; padding: 10px 40px; text-transform: uppercase; }
-    .layer-accordionPlanDetails .accordion-button::after, .layer-accordionPlanDetails .btn-viewMore::after { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e"); margin-left: 15px; }
-    .layer-accordionPlanDetails .accordion-button:not(.collapsed)::after, .layer-accordionPlanDetails .btn-viewMore:not(.collapsed)::after { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important; }
-    
-    .layer-accordionPlan .layer-accordionPlanDevices { border-bottom: 1px solid #C5C5C5; margin: 18px 0 48px; padding: 0 0 33px; }
+
+    .layer-accordionPlanDetails p.panel-textGradient {
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin: 0;
+    }
+
+    p.panel-textGradient span {
+        background: linear-gradient(80.9deg, #FF0084 16.48%, #6F29D2 85.6%, #2F3BF5 96.9%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+    }
+
+    .layer-accordionPlanDetails p.panel-hotspot {
+        font-size: 33px;
+        font-weight: 800;
+        line-height: 33px;
+        vertical-align: sub;
+    }
+
+    .layer-accordionPlanDetails p.panel-hotspot sup {
+        font-size: 18px;
+        line-height: 23px;
+        margin: 0 0 0 5px;
+    }
+
+    .layer-accordionPlanDetails p.panel-permonth {
+        font-size: 23px;
+        line-height: 28px;
+    }
+
+    .layer-accordionPlanDetails ul.listing-planCheck,
+    ul.listing-planCheck {
+        margin: 0;
+        padding: 0;
+    }
+
+    .layer-accordionPlanDetails ul.listing-planCheck li,
+    ul.listing-planCheck li {
+        list-style-type: none;
+        margin: 0 0 12px;
+        padding: 0 0 0 25px;
+        position: relative;
+    }
+
+    .layer-accordionPlanDetails ul.listing-planCheck li:before,
+    .ul.listing-planCheck li:before {
+        background-image: url('https://cdn.yes.my/site/wp-content/uploads/2022/04/icon-elevate-check.png');
+        background-size: contain;
+        content: '';
+        display: inline-block;
+        height: 20px;
+        width: 20px;
+        position: absolute;
+        top: 2px;
+        left: 0px;
+    }
+
+    .layer-accordionPlanDetails .accordion-button,
+    .layer-accordionPlanDetails .btn-viewMore {
+        background-color: #FF0084;
+        border-radius: 50px;
+        color: #FFF;
+        font-weight: 800;
+        justify-content: center;
+        padding: 10px 40px;
+        text-transform: uppercase;
+    }
+
+    .layer-accordionPlanDetails .accordion-button::after,
+    .layer-accordionPlanDetails .btn-viewMore::after {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        margin-left: 15px;
+    }
+
+    .layer-accordionPlanDetails .accordion-button:not(.collapsed)::after,
+    .layer-accordionPlanDetails .btn-viewMore:not(.collapsed)::after {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
+    }
+
+    .layer-accordionPlan .layer-accordionPlanDevices {
+        border-bottom: 1px solid #C5C5C5;
+        margin: 18px 0 48px;
+        padding: 0 0 33px;
+    }
+
     .layer-accordionPlanDevices .layer-accordionPlanDevicesBody {}
-    .layer-accordionPlanDevices .layer-accordionPlanDevicesBody .flex-nowrap { overflow-y: auto; padding: 0 0 15px; }
-    .layer-accordionPlanDevices .layer-planDevice { background-color: #FFF; border-radius: 10px; box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15); height: 100%; padding: 40px 30px; }
-    .layer-planDevice h2, .layer-planDevice h3 { font-size: 18px; line-height: 23px; letter-spacing: -0.02em; margin: 0 0 20px; text-align: center; }
+
+    .layer-accordionPlanDevices .layer-accordionPlanDevicesBody .flex-nowrap {
+        overflow-y: auto;
+        padding: 0 0 15px;
+    }
+
+    .layer-accordionPlanDevices .layer-planDevice {
+        background-color: #FFF;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
+        height: 100%;
+        padding: 40px 30px;
+    }
+
+    .layer-planDevice h2,
+    .layer-planDevice h3 {
+        font-size: 18px;
+        line-height: 23px;
+        letter-spacing: -0.02em;
+        margin: 0 0 20px;
+        text-align: center;
+    }
+
     .layer-planDevice h2 {}
-    .layer-planDevice h3 { font-size: 23px; line-height: 28px; }
+
+    .layer-planDevice h3 {
+        font-size: 23px;
+        line-height: 28px;
+    }
+
     .layer-planDevice p {}
-    .layer-planDevice p.panel-deviceImg { margin: 0 0 20px; text-align: center; }
-    .layer-planDevice p.panel-deviceImg img { max-height: 148px; }
-    .layer-planDevice p.panel-btn { margin: 0 0 20px; text-align: center; }
-    .layer-planDevice p.panel-btn a { background-color: #2F3BF5; border-radius: 50px; color: #FFF; font-weight: 800; letter-spacing: 0.1em; padding: 8px 40px; text-transform: uppercase; }
-    .layer-planDevice ul.listing-deviceDesc { margin-bottom: 0; padding-left: 20px; }
+
+    .layer-planDevice p.panel-deviceImg {
+        margin: 0 0 20px;
+        text-align: center;
+    }
+
+    .layer-planDevice p.panel-deviceImg img {
+        max-height: 148px;
+    }
+
+    .layer-planDevice p.panel-btn {
+        margin: 0 0 20px;
+        text-align: center;
+    }
+
+    .layer-planDevice p.panel-btn a {
+        background-color: #2F3BF5;
+        border-radius: 50px;
+        color: #FFF;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+        padding: 8px 40px;
+        text-transform: uppercase;
+    }
+
+    .layer-planDevice ul.listing-deviceDesc { margin-bottom: 20px; padding-left: 20px; }
+
     .layer-planDevice ul.listing-deviceDesc li {}
 
-    
+    .panel-colors { display: flex; align-items: center; }
+    .panel-colors .span-color { background-color: transparent; border: 2px solid #999; border-radius: 100%; box-sizing: border-box; display: inline-block; height: 40px; margin: 0 0 0 8px; padding: 2px; width: 40px; }
+    .span-color:after { background-color: #D9D9D9; border-radius: 100%; content: ''; display: inline-block; height: 32px; width: 32px; }
+    .span-color.blue:after { background-color: #ADBBDE; }
+    .span-color.black:after { background-color: #282524; }
+    .span-color.white:after { background-color: #FFF; }
+    .span-color.red:after { background-color: #FE0003; }
+    .span-color.grey:after { background-color: #D9D9D9; }
+
+
     @media (min-width: 768px) {
-        .layer-step h2 { margin-bottom: 16px; }
-        .layer-step .panel-stepHeading { margin-bottom: 24px; }
+        .layer-step h2 {
+            margin-bottom: 16px;
+        }
+
+        .layer-step .panel-stepHeading {
+            margin-bottom: 24px;
+        }
     }
 
     @media (min-width: 1024px) {
-        .layer-accordionPlanDetails .img-infinite { max-width: 256px; }
-        .layer-accordionPlanDetails .accordion-button, .layer-accordionPlanDetails .btn-viewMore { width: 80%; }
+        .layer-accordionPlanDetails .img-infinite {
+            max-width: 256px;
+        }
+
+        .layer-accordionPlanDetails .accordion-button,
+        .layer-accordionPlanDetails .btn-viewMore {
+            width: 80%;
+        }
     }
 
     @media (min-width: 1200px) {
-        .layer-accordionPlanDevices .layer-accordionPlanDevicesBody .flex-nowrap { overflow-y: visible; padding-bottom: 0; }
+        .layer-accordionPlanDevices .layer-accordionPlanDevicesBody .flex-nowrap {
+            overflow-y: visible;
+            padding-bottom: 0;
+        }
     }
 </style>
 
@@ -429,24 +618,25 @@
                                             <div class="row flex-nowrap flex-xl-wrap">
                                                 <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
                                                     <div class="layer-planDevice">
-                                                        <h2>YES Postpaid FT5G RM99</h2>
-                                                        <h3>XIAOMI 11 LITE 5G NE 8 RAM and 128 RAM</h3>
-                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11lite.png" /></p>
-                                                        <p class="panel-btn"><a href="" class="btn btn-getplan" title="">Get Plan</a></p>
+                                                        <h2>Infinite+ Premium 188</h2>
+                                                        <h3>SAMSUNG S22 Ultra (Black)</h3>
+                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/04/samsung-s22-ultra-black.png"></p>
+                                                        <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan" data-productid="9000">Get Plan</a></p>
                                                         <ul class="listing-deviceDesc">
                                                             <li>250GB 4G Data</li>
                                                             <li>30 Megapixels front camera</li>
                                                             <li>Dual SIM</li>
                                                             <li>5G Enabled</li>
                                                         </ul>
+                                                        <p class="panel-colors">Available in: <span class="span-color black" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Black"></span><span class="span-color blue" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Blue"></span></p>
                                                     </div>
                                                 </div>
-                                                <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
+                                                <!-- <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
                                                     <div class="layer-planDevice">
-                                                        <h2>YES Postpaid FT5G RM99</h2>
-                                                        <h3>XIAOMI 11T 5G NE 8 RAM and 128 ROM</h3>
-                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11t.png" /></p>
-                                                        <p class="panel-btn"><a href="" class="btn btn-getplan" title="">Get Plan</a></p>
+                                                        <h2>Infinite+ Premium 188</h2>
+                                                        <h3>SAMSUNG S22 Ultra (Blue)</h3>
+                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/04/samsung-s22-ultra-blue.png"></p>
+                                                        <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan" data-productid="9000">Get Plan</a></p>
                                                         <ul class="listing-deviceDesc">
                                                             <li>250GB 4G Data</li>
                                                             <li>30 Megapixels front camera</li>
@@ -454,63 +644,7 @@
                                                             <li>5G Enabled</li>
                                                         </ul>
                                                     </div>
-                                                </div>
-                                                <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
-                                                    <div class="layer-planDevice">
-                                                        <h2>YES Postpaid FT5G RM99</h2>
-                                                        <h3>XIAOMI 11T PRO 8 RAM and 256 ROM</h3>
-                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11tpro.png" /></p>
-                                                        <p class="panel-btn"><a href="" class="btn btn-getplan" title="">Get Plan</a></p>
-                                                        <ul class="listing-deviceDesc">
-                                                            <li>250GB 4G Data</li>
-                                                            <li>30 Megapixels front camera</li>
-                                                            <li>Dual SIM</li>
-                                                            <li>5G Enabled</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
-                                                    <div class="layer-planDevice">
-                                                        <h2>YES Postpaid FT5G RM99</h2>
-                                                        <h3>XIAOMI 11T 5G NE 8 RAM and 128 ROM</h3>
-                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11t.png" /></p>
-                                                        <p class="panel-btn"><a href="" class="btn btn-getplan" title="">Get Plan</a></p>
-                                                        <ul class="listing-deviceDesc">
-                                                            <li>250GB 4G Data</li>
-                                                            <li>30 Megapixels front camera</li>
-                                                            <li>Dual SIM</li>
-                                                            <li>5G Enabled</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
-                                                    <div class="layer-planDevice">
-                                                        <h2>YES Postpaid FT5G RM99</h2>
-                                                        <h3>XIAOMI 11T PRO 8 RAM and 256 ROM</h3>
-                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11tpro.png" /></p>
-                                                        <p class="panel-btn"><a href="" class="btn btn-getplan" title="">Get Plan</a></p>
-                                                        <ul class="listing-deviceDesc">
-                                                            <li>250GB 4G Data</li>
-                                                            <li>30 Megapixels front camera</li>
-                                                            <li>Dual SIM</li>
-                                                            <li>5G Enabled</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
-                                                    <div class="layer-planDevice">
-                                                        <h2>YES Postpaid FT5G RM99</h2>
-                                                        <h3>XIAOMI 11 LITE 5G NE 8 RAM and 128 RAM</h3>
-                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11lite.png" /></p>
-                                                        <p class="panel-btn"><a href="" class="btn btn-getplan" title="">Get Plan</a></p>
-                                                        <ul class="listing-deviceDesc">
-                                                            <li>250GB 4G Data</li>
-                                                            <li>30 Megapixels front camera</li>
-                                                            <li>Dual SIM</li>
-                                                            <li>5G Enabled</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
