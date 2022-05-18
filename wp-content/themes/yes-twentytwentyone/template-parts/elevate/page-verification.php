@@ -75,7 +75,7 @@
                                         <div class="subtitle2">Face Verification</div>
                                         <p>Ensure your face is within the frame for an accurate detection</p>
                                     </div></li>
-                            </ul> 
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -168,6 +168,8 @@
                             self.customer = elevate.lsData.customer;
                         }
 
+                        self.dealer = elevate.lsData.meta.dealer;
+
                         if(!self.customer.id){
                             elevate.redirectToPage('eligibilitycheck');
                         }else{
@@ -207,7 +209,7 @@
                                     if(data.data.processStatus == "EKYC_Done"){
                                         //success
                                         clearInterval(self.interval);
-										 
+
                                         self.CAVerification(data.data);
 										//elevate.redirectToPage('personal');
                                     }else{
@@ -227,16 +229,16 @@
                 },
 
                 CAVerification: function (response) {
-					 
+
                     var self = this;
                     var params = {
                         mykad: self.eligibility.mykad,
                         name:self.eligibility.name,
                         email:self.eligibility.email,
                         phone:self.eligibility.phone,
-                        front_url:response.fronImageFilePath,
-                        back_url:response.backImageFilePath,
-                        selfievideo:response.videoFilePath,
+                        //front_url:response.fronImageFilePath,
+                        //back_url:response.backImageFilePath,
+                        //selfievideo:response.videoFilePath,
                         PartneReferenceID:response.uid,
                         OCRConfidenceScore:response.sim,
                     };
@@ -245,7 +247,7 @@
                         .then((response) => {
 
                             var data = response.data;
-							
+
                             if (data.status == 1) {
                                 elevate.redirectToPage('personal');
                             } else {

@@ -1,5 +1,11 @@
 <?php require_once('includes/header.php') ?>
-
+<style>
+#cart-body .nav-pills .nav-link.active {
+    color: #FF0084 !important;
+    border: 0 !important;
+    border-bottom: 8px solid #FF0084 !important;
+}
+</style>
 <header class="white-top">
     <div class="container">
         <div class="row">
@@ -157,7 +163,7 @@
                         </div>
                         <div class="p-lg-5 text-end">
                             <a id="btnChoosePlan" @click="goNext" class="pink-btn-disable mr-2 text-uppercase">choose plan</a>
-                            <a href="/5gplans/" id class="btn-cancel text-uppercase ">Cancel</a>
+                            <a href="/infinite-phone-bundles/" id class="btn-cancel text-uppercase ">Cancel</a>
 
                         </div>
                     </div>

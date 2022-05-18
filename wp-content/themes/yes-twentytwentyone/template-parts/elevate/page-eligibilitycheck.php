@@ -155,6 +155,7 @@
                                         </button>
                                     </div>
                                     <div id="error" class="mt-3"></div>
+                                    <div id="status_mesage"></div>
                                 </div>
 
                             </div>
@@ -178,6 +179,7 @@
                 isCartEmpty: false,
                 isEligibilityCheck: false,
                 isCAEligibilityCheck: false,
+                notActiveContract: false,
                 taxRate: {
                     sst: 0.06
                 },
@@ -256,6 +258,7 @@
                         }
 
                         self.productId = elevate.lsData.product.selected.productCode;
+                        self.dealer = elevate.lsData.meta.dealer;
 
                         self.updateFields();
                     } else {
@@ -275,6 +278,8 @@
                         "plan_type": elevate.lsData.product.selected.plan.planType
                     };
 
+					$('#status_mesage').html('Checking eligibility...');
+
                     toggleOverlay();
                     axios.post(apiEndpointURL_elevate + '/verify-eligibility', params)
                         .then((response) => {
@@ -285,7 +290,7 @@
 
                             if (data.data && data.data.eligibilityStatus == 'ALLOWED') {
                                 self.isEligibilityCheck = true;
-                                self.CAEligibility();
+                                self.elevateCustomer();
                             } else {
                                 toggleOverlay(false);
                                 if(data.status == 0){
@@ -315,16 +320,45 @@
                     var params = {
                         mykad: self.eligibility.mykad,
                         name:self.eligibility.name,
+                        phone:self.eligibility.phone,
+                        email:self.eligibility.email,
                     };
                     toggleOverlay();
+					$('#status_mesage').html('Checking compAsia...');
                     axios.post(apiEndpointURL_elevate + '/verify-caeligibility', params)
                         .then((response) => {
 
                             var data = response.data;
-
                             if (data.status == 1) {
                                 self.isCAEligibilityCheck = true;
-                                self.elevateCustomer();
+                                self.checkActiveContract();
+                            } else {
+                                toggleOverlay(false);
+                                elevate.redirectToPage('eligibility-failure');
+                            }
+                        })
+                        .catch((error) => {
+                            toggleOverlay(false);
+                            $('#error').html("System error, please try again.");
+                            console.log(error, response);
+                        });
+                },
+
+				checkActiveContract: function () {
+                    var self = this;
+                    var params = {
+					 mykad: self.eligibility.mykad
+					};
+                    toggleOverlay();
+					$('#status_mesage').html('Checking contract...');
+					var t = new Date().getTime();
+                    axios.post(apiEndpointURL_elevate + '/check-active-contract?t='+t, params)
+                        .then((response) => {
+
+                            var data = response.data;
+                            if (data.status == 1) {
+                                self.notActiveContract = true;
+								elevate.redirectToPage('verification');
                             } else {
                                 toggleOverlay(false);
                                 elevate.redirectToPage('eligibility-failure');
@@ -341,7 +375,14 @@
                     var self = this;
                     var params = self.eligibility;
                     params.productId = self.productId;
+
+                    params.referralCode = self.dealer.referral_code;
+                    params.dealerUID = self.dealer.dealer_id;
+                    params.dealerCode = self.dealer.dealer_code;
+
                     toggleOverlay();
+					$('#status_mesage').html('Checking customer...');
+
                     axios.post(apiEndpointURL_elevate + '/customer', params)
                         .then((response) => {
 
@@ -349,7 +390,11 @@
                             if (data.status == 1) {
                                 elevate.lsData.customer = data.data;
                                 elevate.updateElevateLSData();
-                                elevate.redirectToPage('verification');
+
+								//check compAsia Eligibility
+								self.CAEligibility();
+
+                                //elevate.redirectToPage('verification');
                             } else {
                                 toggleOverlay(false);
                                 $('#error').html(data.error);
@@ -397,7 +442,7 @@
                     var dob = date + "/" + month + "/" + year;
                     return dob;
                 },
-				
+
 				getDOBIso: function (){
                     var self = this;
                     var dateString = self.eligibility.mykad.substring(0, 6);
@@ -416,7 +461,7 @@
                     var dob = year + "-" + month + "-" + date;
                     return dob;
                 },
-				
+
 				isValidDate: function(d) {
 				  return (new Date(d) !== "Invalid Date") && !isNaN(new Date(d));
 				},
@@ -442,7 +487,7 @@
 
                     return (age>=18 && age <=65);
                 },
-				
+
 				isNumber: function(evt) {
 				  evt = (evt) ? evt : window.event;
 				  var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -457,7 +502,7 @@
                     $('#error').html("");
                     $('.input_error').removeClass('input_error');
                     var self = this;
-					
+
 					var error = new Array();
 
 
@@ -483,15 +528,15 @@
                     }
 
                     if(self.eligibility.mykad.trim().length >= 12){
-						
-						var bod = self.getDOBIso(); 
-						
+
+						var bod = self.getDOBIso();
+
 						if(self.isValidDate(bod)){
 							self.eligibility.dob = self.getDOB();
-							if(!self.validateAge()){						 
+							if(!self.validateAge()){
 								isFilled = false;
 								$('#mykad_number').addClass('input_error');
-								error.push('Only age between 18 to 65 years can register');								 
+								error.push('Only age between 18 to 65 years can register');
 							}
 						}else{
 							isFilled = false;
@@ -512,14 +557,14 @@
                         isFilled = false;
                         $('#ic_phone_number').addClass('input_error');
 						error.push('Invalid mobile number');
-                    } 
+                    }
 
                     var email = /\S+@\S+\.\S+/;
                     if (self.eligibility.email.trim() && !email.test(self.eligibility.email.trim())) {
                         isFilled = false;
                         $('#email').addClass('input_error');
 						error.push('Invalid email');
-                    } 
+                    }
 
                     if (isFilled) {
                         self.allowSubmit = true;
@@ -532,7 +577,7 @@
                 },
                 goNext: function () {
                     var self = this;
-                    
+                    $('#status_mesage').html('');
                     if (self.allowSubmit) {
 						$('#error').html('');
                         //update store

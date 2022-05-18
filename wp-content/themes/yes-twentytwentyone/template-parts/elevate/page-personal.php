@@ -471,6 +471,7 @@
                             $('#city_display').text(self.deliveryInfo.city)
                         }
                         self.productId = elevate.lsData.product.selected.productCode;
+                        self.dealer = elevate.lsData.meta.dealer;
 
                         self.updateFields();
                         toggleOverlay(false);
@@ -736,6 +737,10 @@
                     var param = self.deliveryInfo;
                     param.uid = self.customer.id;
                     param.productId = self.productId;
+
+                    params.referralCode = self.dealer.referral_code;
+                    params.dealerUID = self.dealer.dealer_id;
+                    params.dealerCode = self.dealer.dealer_code;
 
                     axios.post(apiEndpointURL_elevate + '/customer/update', param)
                         .then((response) => {

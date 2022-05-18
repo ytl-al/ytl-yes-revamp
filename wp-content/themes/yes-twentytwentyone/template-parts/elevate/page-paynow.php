@@ -527,7 +527,7 @@
 							}
                             if (elevate.lsData.customer) {
                                 self.customer = elevate.lsData.customer;
-                            } 
+                            }
 
                             if (elevate.lsData.orderDetail) {
                                 self.orderSummary.orderDetail = elevate.lsData.orderDetail;
@@ -544,6 +544,7 @@
                             }
 
                             self.productId = elevate.lsData.product.selected.productCode;
+                            self.dealer = elevate.lsData.meta.dealer;
 
                             self.ajaxGetFPXBankList();
                             self.updateData();
@@ -738,7 +739,7 @@
                     getGender: function (){
                         var self = this;
                         var genderDigit = self.eligibility.mykad.substring(11);
-                        console.log(self.eligibility.mykad, genderDigit);
+                        //console.log(self.eligibility.mykad, genderDigit);
                         if (genderDigit % 2 == 0) //even
                         {
                             return "FEMALE"; //female

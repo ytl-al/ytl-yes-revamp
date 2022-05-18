@@ -22,6 +22,7 @@ class ElevateApi
     const  api_customer_get_by_guid = 'api/Elevate/customer';
     const  api_customer_get_by_nric = 'api/Elevate/customer/securityNumber';
     const  api_customer = 'api/Elevate/customer';
+    const  api_customer_check_contract = 'api/Elevate/customer/CheckActiveContract';
     const  api_ca_verification = 'api/Elevate/compAsia/Verification';
 
     const  api_order_create = 'api/Elevate/order';
@@ -103,6 +104,11 @@ class ElevateApi
                 'callback' => array('\Inc\Api\ElevateApi', 'verify_caeligibility'),
             ));
 
+			register_rest_route('/elevate/v1', '/check-active-contract', array(
+                'methods' => 'POST',
+                'callback' => array('\Inc\Api\ElevateApi', 'check_active_contract'),
+            ));
+
             register_rest_route('/elevate/v1', '/ekyc-init', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'ekyc_init'),
@@ -132,12 +138,12 @@ class ElevateApi
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'elevate_order_cancel'),
             ));
-			
+
 			register_rest_route('/elevate/v1', 'qrcode/check', array(
                 'methods' => 'GET',
                 'callback' => array('\Inc\Api\ElevateApi', 'elevate_delivery_qrcode_check'),
             ));
-			
+
 			register_rest_route('/elevate/v1', 'qrcode/confirm', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'elevate_delivery_qrcode_confirm'),
@@ -150,7 +156,7 @@ class ElevateApi
 
     public static function do_test(WP_REST_Request $request)
     {
-      
+
         return self::elevate_customer_get_by_uid($request['uid']);
 
     }
@@ -234,8 +240,8 @@ class ElevateApi
         $api_url = self::mobile_api_url . self::mobile_api_verify_eligbility;
         $return['url'] = $api_url;
         $request = wp_remote_post($api_url, $args);
-		
-		 //print_r($params);print_r($request);die($api_url);
+
+		// print_r($params);print_r($request);die($api_url);
 
         if (is_wp_error($request)) {
             $return['status'] = 0;
@@ -250,7 +256,7 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
-		
+
 		//print_r($return);die($api_url);
 
         $response = new WP_REST_Response($return);
@@ -265,25 +271,42 @@ class ElevateApi
         $name = $request['name'];
         $email = $request['email'];
         $phone = $request['phone'];
-        $front_url = $request['front_url'];
+        $guid = $request['guid'];
+        /*$front_url = $request['front_url'];
         $back_url = $request['back_url'];
-        $selfievideo = $request['selfievideo'];
+        $selfievideo = $request['selfievideo'];*/
         $PartneReferenceID = $request['PartneReferenceID'];
-        $OCRConfidenceScore = $request['OCRConfidenceScore'];
+        $OCRConfidenceScore = round($request['OCRConfidenceScore']/100,2);
 
         $token = self::get_token();
+
+		$params = array(
+            'myKadNumber' => $mykad,
+            'fullName' => $name,
+            'mobileNumber' => $phone,
+            'email' => $email,
+            'ocrConfidenceScore' => $OCRConfidenceScore."",
+            'partnerReferenceID' => $PartneReferenceID,
+        );
 
         $args = [
             'headers' => array(
                 'Accept' => 'text/plain',
                 'Authorization' => 'Bearer ' . $token,
                 'Content-Type' => 'application/json'
-            )
+            ),
+			'body' => json_encode($params),
+            'method' => 'POST',
+            'timeout' => self::API_TIMEOUT,
+            'data_format' => 'body'
         ];
 
-        $api_url = self::api_url . self::api_ca_verification . '?MyKadNumber=' . $mykad . '&FullName=' . $name. '&email=' . $email. '&phone=' . $phone. '&front_url=' . $front_url. '&back_url=' . $back_url. '&selfievideo=' . $selfievideo. '&PartneReferenceID=' . $PartneReferenceID. '&OCRConfidenceScore=' . $OCRConfidenceScore;
-		 
-        $request = wp_remote_get($api_url, $args);
+        //$api_url = self::api_url . self::api_ca_verification . '?MyKadNumber=' . $mykad . '&FullName=' . $name. '&email=' . $email. '&phone=' . $phone. '&front_url=' . $front_url. '&back_url=' . $back_url. '&selfievideo=' . $selfievideo. '&PartneReferenceID=' . $PartneReferenceID. '&OCRConfidenceScore=' . $OCRConfidenceScore;
+        $api_url = self::api_url . self::api_ca_verification;
+
+        $request = wp_remote_post($api_url, $args);
+
+		 //print_r($args);print_r($request);die($api_url);
 
         if (is_wp_error($request)) {
             $return['status'] = 0;
@@ -293,11 +316,11 @@ class ElevateApi
             $return['error'] = @$request['response'];
         } else {
             $data = json_decode($request['body'], true);
-			
+
             if ($data['response']) {
 				$res = json_decode($data['response']);
-				 
-				if($res->result !== 'Fail'){
+
+				if($res->result == 'Success'){
 					$return['status'] = 1;
 				}else{
 					$return['status'] = 0;
@@ -320,17 +343,28 @@ class ElevateApi
 
         $token = self::get_token();
 
+		$params = array(
+            'myKadNumber' =>$request['mykad'],
+            'fullName' => $request['name'],
+            'mobileNumber' => $request['phone'],
+            'email' => $request['email'],
+        );
+
         $args = [
             'headers' => array(
                 'Accept' => 'text/plain',
                 'Authorization' => 'Bearer ' . $token,
                 'Content-Type' => 'application/json'
-            )
+            ),
+            'body' => json_encode($params),
+            'method' => 'POST',
+            'timeout' => self::API_TIMEOUT,
+            'data_format' => 'body'
         ];
 
-        $api_url = self::api_url . self::api_caeligibility . '?MyKadNumber=' . $request['mykad'] . 'FullName=' . $request['name'];
+        $api_url = self::api_url . self::api_caeligibility;
 
-        $request = wp_remote_get($api_url, $args);
+        $request = wp_remote_post($api_url, $args);
 
         if (is_wp_error($request)) {
             $return['status'] = 0;
@@ -345,6 +379,53 @@ class ElevateApi
                 $return['status'] = 1;
             } else {
                 $return['status'] = 0;
+            }
+            $return['data'] = $data;
+        }
+
+        $response = new WP_REST_Response($return);
+        $response->set_status(200);
+        return $response;
+    }
+
+	public static function check_active_contract(WP_REST_Request $request)
+    {
+		$mykad = $request['mykad'];
+
+        $token = self::get_token();
+
+		$params = array(
+        );
+
+        $args = [
+            'headers' => array(
+                'Accept' => 'text/plain',
+                'Authorization' => 'Bearer ' . $token,
+                'Content-Type' => 'application/json'
+            ),
+            'body' => json_encode($params),
+            'method' => 'GET',
+            'timeout' => self::API_TIMEOUT
+        ];
+
+        $api_url = self::api_url . self::api_customer_check_contract.'?customerNRIC='.$mykad;
+
+        $request = wp_remote_get($api_url, $args);
+
+        if (is_wp_error($request)) {
+            $return['status'] = 0;
+            $return['error'] = "Cannot connect to API server";
+        } else if ($request['response']['code'] != 200) {
+            $return['status'] = 0;
+            $return['error'] = @$request['response'];
+        } else {
+            $data = json_decode($request['body'], true);
+			//print_r($request);die( $api_url);
+            if (!$data) {
+                $return['status'] = 1;
+            } else {
+                $return['status'] = 0;
+				$return['error'] = 'User cannot buy more contract.';
             }
             $return['data'] = $data;
         }
@@ -392,6 +473,10 @@ class ElevateApi
 
     public static function elevate_customer_insert(WP_REST_Request $request)
     {
+		if(!isset($request['referralCode'])) $request['referralCode'] = '';
+		if(!isset($request['dealerUID'])) $request['dealerUID'] = '';
+		if(!isset($request['dealerCode'])) $request['dealerCode'] = '';
+
         $mykad = $request['mykad'];
         $name = $request['name'];
         $email = $request['email'];
@@ -415,10 +500,9 @@ class ElevateApi
             "email" => $email,
             "msisdn" => "",
             "agreedTerms" => true,
-            "agreedDataCollection" => true,
-            "referralCode" => "",
-            "dealerUID" => "",
-            "dealerCode" => "",
+            "referralCode"=> $request['referralCode'],
+            "dealerUID"=> $request['dealerUID'],
+            "dealerCode"=> $request['dealerCode'],
             "registrationChannel" => "WEB",
             "registrationDate" => date("c"),
             "productSelected" => $productId,
@@ -472,18 +556,12 @@ class ElevateApi
     public static function elevate_customer_update(WP_REST_Request $request)
     {
 
+		if(!isset($request['referralCode'])) $request['referralCode'] = '';
+		if(!isset($request['dealerUID'])) $request['dealerUID'] = '';
+		if(!isset($request['dealerCode'])) $request['dealerCode'] = '';
+
         $id = $request['uid'];
-        $params = array(
-            'securityNumber' => $request['mykad'],
-            'fullName' => $request['name'],
-            'addressLine1' => $request['address'],
-            'addressLine2' => $request['addressMore'],
-            'postCode' => $request['postcode'],
-            'mobileNumber' => $request['phone'],
-            'email' => $request['email'],
-            'state' => $request['state'],
-            'city' => $request['city']
-        );
+         
         $params = array(
             "customerID" => "",
             "securityType" => 0,
@@ -502,9 +580,9 @@ class ElevateApi
             "msisdn" => "",
             "agreedTerms" => true,
             "agreedDataCollection" => true,
-            "referralCode" => "",
-            "dealerUID" => "",
-            "dealerCode" => "",
+            "referralCode"=> $request['referralCode'],
+            "dealerUID"=> $request['dealerUID'],
+            "dealerCode"=> $request['dealerCode'],
             "registrationChannel" => "WEB",
             "registrationDate" => date("c"),
             "productSelected" => $request['productId'],
@@ -532,6 +610,9 @@ class ElevateApi
 
         $request = wp_remote_request($api_url, $args);
 
+		//echo '<pre>';print_r($args); print_r($request);die();
+
+
         if (is_wp_error($request)) {
             $return['status'] = 0;
             $return['error'] = "Cannot connect to API server";
@@ -550,12 +631,12 @@ class ElevateApi
         $response->set_status(200);
         return $response;
     }
-	
+
 	public static function elevate_customer_get_by_uid($uid)
     {
 
-         
-        $params = array( 
+
+        $params = array(
         );
         $token = self::get_token();
 
@@ -565,13 +646,13 @@ class ElevateApi
                 'Authorization' => 'Bearer ' . $token,
                 'Content-Type' => 'application/json'
             ),
-            'body' => json_encode($params), 
+            'body' => json_encode($params),
         ];
 
         $api_url = self::api_url . self::api_customer_get_by_guid . '/' . $uid;
 
         $request = wp_remote_get($api_url, $args);
-		 
+
         if (is_wp_error($request)) {
             $return['status'] = 0;
             $return['error'] = "Cannot connect to API server";
@@ -591,7 +672,7 @@ class ElevateApi
 
     public static function elevate_contract(WP_REST_Request $request)
     {
-		 
+
         $params = array(
             "customerName" => $request['name'],
             "customerNRIC" => $request['mykad'],
@@ -633,10 +714,10 @@ class ElevateApi
             'data_format' => 'body'
         ];
 
-        
+
 
         $api_url = self::api_url . self::api_contract;
-	 
+
         $request = wp_remote_post($api_url, $args);
         if (is_wp_error($request)) {
             $return['status'] = 0;
@@ -660,6 +741,10 @@ class ElevateApi
     public static function elevate_order_create(WP_REST_Request $request)
     {
 
+		if(!isset($request['referralCode'])) $request['referralCode'] = '';
+		if(!isset($request['dealerUID'])) $request['dealerUID'] = '';
+		if(!isset($request['dealerCode'])) $request['dealerCode'] = '';
+
         $params = array(
             "orderNumber"=> "",
             "customerGUID"=> $request['id'],
@@ -669,9 +754,9 @@ class ElevateApi
             "deliveryDate"=> date("c"),
             "podurl"=> "",
             "comments"=> "",
-            "referralCode"=> "",
-            "dealerUID"=> "",
-            "dealerCode"=> "",
+            "referralCode"=> $request['referralCode'],
+            "dealerUID"=> $request['dealerUID'],
+            "dealerCode"=> $request['dealerCode'],
             "productSelected"=> $request['productSelected']
         );
 
@@ -692,9 +777,9 @@ class ElevateApi
         $api_url = self::api_url . self::api_order_create;
 
         $request = wp_remote_post($api_url, $args);
-		
+
 		//print_r($request); print_r($args); die($api_url);
-		
+
         if (is_wp_error($request)) {
             $return['status'] = 0;
             $return['error'] = "Cannot connect to API server";
@@ -713,11 +798,11 @@ class ElevateApi
         $response->set_status(200);
         return $response;
     }
-	
+
 	public static function elevate_order_get_by_number($orderNumber)
     {
 
-        $params = array( 
+        $params = array(
         );
 
         $token = self::get_token();
@@ -729,15 +814,15 @@ class ElevateApi
                 'Content-Type' => 'application/json'
             ),
             'body' => json_encode($params),
-            'timeout' => self::API_TIMEOUT 
+            'timeout' => self::API_TIMEOUT
         ];
 
         $api_url = self::api_url . self::api_order_get_by_number.'?orderNumber='.$orderNumber ;
 
         $request = wp_remote_get($api_url, $args);
-		
+
 		//print_r($request); print_r($args); die($api_url);
-		
+
         if (is_wp_error($request)) {
             $return['status'] = 0;
             $return['error'] = "Cannot connect to API server";
@@ -757,7 +842,9 @@ class ElevateApi
 
     public static function elevate_order_update(WP_REST_Request $request)
     {
-
+		if(!isset($request['referralCode'])) $request['referralCode'] = '';
+		if(!isset($request['dealerUID'])) $request['dealerUID'] = '';
+		if(!isset($request['dealerCode'])) $request['dealerCode'] = '';
         $params = array(
             "orderNumber"=> $request['orderNumber'],
             "customerGUID"=> $request['customerGUID'],
@@ -813,6 +900,10 @@ class ElevateApi
     public static function elevate_order_cancel(WP_REST_Request $request)
     {
 
+		if(!isset($request['referralCode'])) $request['referralCode'] = '';
+		if(!isset($request['dealerUID'])) $request['dealerUID'] = '';
+		if(!isset($request['dealerCode'])) $request['dealerCode'] = '';
+
         $params = array(
             "orderNumber"=> $request['orderNumber'],
             "customerGUID"=> $request['customerGUID'],
@@ -822,9 +913,9 @@ class ElevateApi
             "deliveryDate"=> $request['deliveryDate'],
             "podurl"=> "",
             "comments"=> "",
-			"referralCode"=> "",
-            "dealerUID"=> "",
-            "dealerCode"=> "",
+			"referralCode"=> $request['referralCode'],
+            "dealerUID"=> $request['dealerUID'],
+            "dealerCode"=> $request['dealerCode'],
 			"productSelected"=> $request['productSelected'],
             "customerQRCodeScanned"=> false
         );
@@ -864,7 +955,7 @@ class ElevateApi
         $response->set_status(200);
         return $response;
     }
-	
+
 	public function elevate_delivery_qrcode_check(WP_REST_Request $request){
 		$qrcode = $request['qrcode'];
 		$return= array();
@@ -874,17 +965,17 @@ class ElevateApi
 			$AESEncryption_iv = "C1620E617EE4FE95";
 			$AESEncryption_blockSize = 256;
 
-			$aes = new \Inc\Base\AESEncryption(base64_decode($qrcode), $AESEncryption_inputKey, $AESEncryption_iv, $AESEncryption_blockSize); 
+			$aes = new \Inc\Base\AESEncryption(base64_decode($qrcode), $AESEncryption_inputKey, $AESEncryption_iv, $AESEncryption_blockSize);
 			$dec = $aes->decrypt();
 			$tmp = explode(':',$dec);
-			
+
 			$payload = array(
 				'nric'=>$tmp[0],
 				'name'=>$tmp[1],
 				'uuid'=>$tmp[2],
 				'order_no'=>$tmp[3]
 			);
-			 
+
 			if($payload['order_no'] ){
 				$return['status'] = 1;
 				$return['data'] = $payload;
@@ -892,7 +983,7 @@ class ElevateApi
 				$return['status'] = 0;
 				$return['error'] = 'Invalid QRCode';
 			}
-			
+
 		}else{
 			$return['status'] = 0;
 			$return['error'] = 'Invalid QRCode';
@@ -901,12 +992,12 @@ class ElevateApi
         $response->set_status(200);
         return $response;
 	}
-	
+
 	public function elevate_delivery_qrcode_confirm(WP_REST_Request $request){
 		$orderNumber = $request['SONO'];
-		
+
 		$order = ElevateApi::elevate_order_get_by_number($orderNumber);
-		
+
 		if($order['status']){
 			if( $order['data']['orderStatus']== "New" && $order['data']['customerQRCodeScanned']== false){
 				//update scan
@@ -960,7 +1051,7 @@ class ElevateApi
 		}else{
 			$return = $order;
 		}
-		 
+
 		$response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
@@ -1023,7 +1114,7 @@ class ElevateApi
             'body' => $params
         ];
         $request = wp_remote_get($api_url, $args);
-		
+
 		//echo '<pre>';print_r($request);die();
 
         if (is_wp_error($request)) {
@@ -1112,7 +1203,7 @@ class ElevateApi
         $response->set_status(200);
         return $response;
     }
-	 
+
 
     public function get_token()
     {

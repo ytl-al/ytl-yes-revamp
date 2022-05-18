@@ -1,6 +1,6 @@
 <?php require_once('includes/header.php') ?>
 <style>
-	body{ 
+	body{
 		background: url(/wp-content/uploads/2021/09/amazing-things-bg.png);
 		background-size: cover;
 		background-repeat: no-repeat;
@@ -10,7 +10,7 @@
 	}
 	.contract_term{max-height:350px; overflow-y:auto;border:1px solid #ccc; padding:15px; border-radius:3px; margin-bottom:10px;}
 	.contract_term{ margin-top:20px;}
-	
+
 	:root {
         --code-color: darkred;
         --code-bg-color: #aaaaaa;
@@ -19,13 +19,13 @@
         --scroll-bar-color: #c5c5c5;
         --scroll-bar-bg-color: #fff;
     }
-	
+
 	*{
         scrollbar-width: thin;
         scrollbar-color: var(--scroll-bar-color) var(--scroll-bar-bg-color);
     }
 
-     
+
     *::-webkit-scrollbar {
         width: 12px;
     }
@@ -83,7 +83,7 @@
 								pharetra vestibulum nec id diam. Vivamus felis augue, euismod vel tempus eu, varius sit amet
 								arcu. Aenean ultrices neque quis nulla aliquam volutpat id at quam. Integer aliquet turpis
 								venenatis commodo posuere.</p>
-								
+
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis in neque non rhoncus.
 								Sed efficitur, enim eu ultricies blandit, erat eros dapibus orci, eu finibus libero nisi et
 								turpis. Phasellus eu orci felis. Suspendisse potenti. Duis sagittis ipsum sit amet risus
@@ -97,8 +97,8 @@
 								arcu. Aenean ultrices neque quis nulla aliquam volutpat id at quam. Integer aliquet turpis
 								venenatis commodo posuere.</p>
 							</div>
-							<div><label><input type="checkbox" id="term1" name="term1" @click="check_sign" value="agree" checked/> I Agree</label></div>	
-						</div>		
+							<div><label><input type="checkbox" id="term1" name="term1" @click="check_sign" value="agree" checked/> I Agree</label></div>
+						</div>
 						<div class="contract_section">
 							<h3>Tera Optimus Pearl Terms and Condition</h3>
 							<div class="contract_term">
@@ -114,7 +114,7 @@
 								pharetra vestibulum nec id diam. Vivamus felis augue, euismod vel tempus eu, varius sit amet
 								arcu. Aenean ultrices neque quis nulla aliquam volutpat id at quam. Integer aliquet turpis
 								venenatis commodo posuere.</p>
-								
+
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis in neque non rhoncus.
 								Sed efficitur, enim eu ultricies blandit, erat eros dapibus orci, eu finibus libero nisi et
 								turpis. Phasellus eu orci felis. Suspendisse potenti. Duis sagittis ipsum sit amet risus
@@ -128,9 +128,9 @@
 								arcu. Aenean ultrices neque quis nulla aliquam volutpat id at quam. Integer aliquet turpis
 								venenatis commodo posuere.</p>
 							</div>
-							<div><label><input type="checkbox" id="term2" name="term2" @click="check_sign" value="agree" checked/> I Agree</label></div>	
+							<div><label><input type="checkbox" id="term2" name="term2" @click="check_sign" value="agree" checked/> I Agree</label></div>
 						</div>
-                         
+
                     </div>
                     <div class="mt-3">
                         <div class="row">
@@ -144,7 +144,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div>Date & Time</div> 
+                                <div>Date & Time</div>
                                 <div class="mt-3 text-bold text-uppercase" id="contract_time" style="display:none"><span>{{ time }}</span></div>
                             </div>
                         </div>
@@ -175,6 +175,11 @@
                 qrcode: null,
 				interval: null,
 				time: null,
+				dealer:{
+					dealer_code: '',
+					dealer_id: '',
+					referral_code: ''
+				},
                 contract:{},
                 contract_signed:"",
                 eligibility: {
@@ -222,7 +227,7 @@
                 currentStep: 0,
                 allowSubmit: false
             },
-			
+
 			beforeDestroy() {
 				// prevent memory leak
 				clearInterval(this.interval)
@@ -272,12 +277,13 @@
                             self.orderSummary.product = elevate.lsData.product;
                         }
 
+                        self.dealer = elevate.lsData.meta.dealer;
 
                     } else {
                         elevate.redirectToPage('cart');
                     }
-					
-					
+
+
                 },
                 sign_contract: function () {
                     var self = this;
@@ -286,21 +292,18 @@
                 check_sign: function (){
                     var self = this;
 					self.allowSubmit = true;
-					
+
 					if(!self.contract_signed){
 						self.allowSubmit = false;
 					}
-					
+
 					if(!$('#term1').is(':checked') || !$('#term2').is(':checked')){
                         self.allowSubmit = false
-                    } 
-					 
+                    }
+
                     if(self.contract_signed && self.contract_signed.toUpperCase() != self.eligibility.name.toUpperCase()){
                          self.allowSubmit = false;
-                    } 
-					
-					
-					 
+                    }
 
                 },
 
@@ -308,6 +311,10 @@
                     var self = this;
                     var params = self.customer;
 					params.productSelected = self.orderSummary.product.selected.plan.planId;
+                    params.referralCode = self.dealer.referral_code;
+                    params.dealerUID = self.dealer.dealer_id;
+                    params.dealerCode = self.dealer.dealer_code;
+
                     toggleOverlay();
                     axios.post(apiEndpointURL_elevate + '/order/create', params)
                         .then((response) => {

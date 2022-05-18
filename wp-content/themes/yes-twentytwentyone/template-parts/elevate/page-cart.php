@@ -40,7 +40,7 @@
                             </div>
                             <div class="col-12 p-3 px-5">
                                 <h3 class="mt-5 mt-lg-0">No item in the cart</h3>
-                                <p class="mb-3">You may browse the plans available <a href="/5gplans/">here</a>.</p>
+                                <p class="mb-3">You may browse the plans available <a href="/infinite-phone-bundles/">here</a>.</p>
                             </div>
                         </div>
                     </div>
@@ -276,6 +276,7 @@
                     if (elevate.validateSession(self.currentStep)) {
 
                         self.productId = elevate.lsData.meta.productId;
+                        self.dealer = elevate.lsData.meta.dealer;
 
                         if(elevate.lsData.product){
                             self.orderSummary.product = elevate.lsData.product;

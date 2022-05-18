@@ -46,7 +46,7 @@
                                 <p class="mt-3">Would you like to proceed?</p>
                                 <div class="p-3">
                                     <a class="pink-btn-disable text-uppercase mr-2" :class="(allowSubmit)?'pink-btn':'pink-btn-disable'" @click="goNext">choose plan</a>
-                                    <a href="/5gplans/" class="btn-cancel text-uppercase">Cancel</a>
+                                    <a href="/infinite-phone-bundles/" class="btn-cancel text-uppercase">Cancel</a>
                                 </div>
                                 <div id="error" class="mt-3"></div>
                             </div>
