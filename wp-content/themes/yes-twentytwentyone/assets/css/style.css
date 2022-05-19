@@ -531,10 +531,6 @@ section {
     align-items: center;
     justify-content: center;
     padding: 50px 0px;
-    background-image: url("/site/wp-content/uploads/2021/09/amazing-things-bg-1.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top;
 }
 
 #amazing-things h1 {

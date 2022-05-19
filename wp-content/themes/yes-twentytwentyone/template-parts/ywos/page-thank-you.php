@@ -180,7 +180,7 @@
 <div id="main-vue" style="display: none;">
     <!-- Cart Body STARTS -->
     <section id="cart-body" v-if="pageValid">
-        <div class="container p-lg-5 p-3">
+        <div class="container p-lg-5 p-3 thankyou-box">
             <div class="row gx-5">
                 <div class="col-12 pb-4">
                     <div class="row">

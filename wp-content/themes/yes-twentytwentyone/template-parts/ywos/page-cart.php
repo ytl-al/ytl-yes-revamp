@@ -422,7 +422,7 @@
                         <div class="packagebox mb-3">
                             <div class="row align-items-center">
                                 <div class="col-lg-3 col-12 visualbg d-none">
-                                    <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/kasiup-postpaid-visual.png" class="img-fluid" alt="" />
+                                    <img src="/wp-content/uploads/2022/05/ft5g-cart-visual.jpg" class="img-fluid" alt="" />
                                 </div>
                                 <div class="col-12 p-3 px-5">
                                     <h3 class="mt-3 mt-lg-0">No item in the cart</h3>
@@ -442,10 +442,10 @@
                         <div class="packagebox mb-3">
                             <div class="row">
                                 <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="orderSummary.plan.planType == 'postpaid'">
-                                    <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/kasiup-postpaid-visual.png" class="img-fluid" alt="" />
+                                    <img src="/wp-content/uploads/2022/05/ft5g-cart-visual.jpg" class="img-fluid" alt="" />
                                 </div>
                                 <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center" v-if="orderSummary.plan.planType == 'prepaid'">
-                                    <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/kasiup-prepaid-visual.png" class="img-fluid" alt="" />
+                                    <img src="/wp-content/uploads/2022/05/ft5g-cart-visual.jpg" class="img-fluid" alt="" />
                                 </div>
                                 <div class="col-lg-6 col-12 pt-lg-4 pb-1 px-4 px-lg-5 ps-lg-4">
                                     <h3 class="mt-3 mt-lg-0">{{ orderSummary.plan.displayName }}</h3>
