@@ -145,7 +145,7 @@ main.site-main {
     border: 1px solid #ff0000 !important;
 }
 .bg-checkout {
-    background-image: url("../images/checkout.jpg");
+    background-image: url("../images/idverification-visualbg.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -153,7 +153,7 @@ main.site-main {
 }
 
 .bg-checkout1 {
-    background-image: url("../images/checkout_bg.png");
+    background-image: url("../images/eligbility-visualbg.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -177,7 +177,7 @@ main.site-main {
 }
 
 .checkout-left {
-    margin-top: 250px;
+    margin-top: 300px;
 }
 .checkout-left2 {
     margin-top: 190px;

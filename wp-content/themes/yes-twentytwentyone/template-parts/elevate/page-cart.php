@@ -102,7 +102,7 @@
                                             <div class="accordion-header" @click="showPlanDetail()"> {{orderSummary.product.selected.plan.nameEN}} <i
                                                         class="icon icon_arrow_down"></i></div>
                                             <div class="text-description mt-3">{{orderSummary.product.selected.plan.shortDescriptionEN}}</div>
-                                            <ul class="accordion-body list-1 mt-3" style="display: none">
+                                            <ul class="accordion-body list-1 mt-3">
                                                 <li v-for="(list, index) in orderSummary.product.selected.plan.longDescriptionEN">{{list}}</li>
                                             </ul>
                                         </div>
@@ -148,7 +148,7 @@
                                 <h3>TOTAL</h3>
                             </div>
                             <div class="col-6 pt-2 pb-2 text-end">
-                                <h3>RM{{ formatPrice(orderSummary.orderDetail.total) }}/mth</h3>
+                                <h3>RM{{ formatPrice(orderSummary.orderDetail.subtotal) }}/mth</h3>
                             </div>
                         </div>
                         <div class="monthly mb-4">
@@ -159,33 +159,7 @@
                                 <div class="col-6 text-end">
                                     <p>RM{{formatPrice(item.price)}}/ mth</p>
                                 </div>
-                            </div>
-
-                            <div class="hr_line"></div>
-                            <div class="row mt-2 cart_bold" v-if="isUpfront">
-                                <div class="col-6">
-                                    <p>Upfront Payment</p>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.product.selected.plan.upFrontPayment).toFixed(2)) }}</p>
-                                </div>
-                            </div>
-                            <div class="row mt-2 cart_bold">
-                                <div class="col-6">
-                                    <p>Tax (SST)</p>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.orderDetail.sstAmount).toFixed(2)) }}</p>
-                                </div>
-                            </div>
-							<div class="row mt-2 cart_bold">
-                                <div class="col-6">
-                                    <p>Rounding Adjustment</p>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.orderDetail.roundingAdjustment).toFixed(2)) }}</p>
-                                </div>
-                            </div>
+                            </div> 
                             <div class="hr_line"></div>
                         </div>
 
@@ -251,6 +225,7 @@
                         colors:[]
                     },
                     orderDetail: {
+                        subtotal: 0.00,
                         total: 0.00,
                         sstAmount: 0.00,
                         color: null,
@@ -314,6 +289,10 @@
                             self.updatePlan();
                             $('#container-hasItem').show();
                             $('#main-vue').css({'height':'auto'});
+							
+							setTimeout(function(){
+								$('.selectColorWrap li:first-child').trigger("click");
+							},100);
 
                             toggleOverlay(false);
 
@@ -339,8 +318,9 @@
                         {name: self.orderSummary.product.selected.plan.nameEN,price:parseFloat(self.orderSummary.product.selected.plan.monthlyAmount).toFixed(2)},
                     ];
 
-                    // total = parseFloat(self.orderSummary.product.selected.devicePriceMonth) + parseFloat(self.orderSummary.product.selected.planPerMonth);
-                    var amount = parseFloat(self.orderSummary.product.selected.plan.monthlyAmount);
+                    var subtotal = parseFloat(self.orderSummary.product.selected.devicePriceMonth) + parseFloat(self.orderSummary.product.selected.planPerMonth);
+                    
+					var amount = parseFloat(self.orderSummary.product.selected.plan.monthlyAmount);
                     var sstAmount = parseFloat(self.orderSummary.product.selected.plan.sstAmount);
                     var rounding = parseFloat(self.orderSummary.product.selected.plan.roundingAdjustment);
                     self.orderSummary.orderDetail.amount = amount.toFixed(2);
@@ -348,6 +328,7 @@
                     self.orderSummary.orderDetail.total = total.toFixed(2);
                     self.orderSummary.orderDetail.sstAmount = sstAmount.toFixed(2);
                     self.orderSummary.orderDetail.roundingAdjustment = rounding.toFixed(2);
+					self.orderSummary.orderDetail.subtotal = subtotal.toFixed(2);
                     //console.log("selected product",self.orderSummary.product.selected);
                     //update store
                     self.isValidCart();

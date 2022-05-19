@@ -301,7 +301,7 @@
                         self.allowSubmit = false
                     }
 
-                    if(self.contract_signed && self.contract_signed.toUpperCase() != self.eligibility.name.toUpperCase()){
+                    if(!self.contract_signed.toUpperCase()){
                          self.allowSubmit = false;
                     }
 

@@ -117,8 +117,29 @@
                         </div>
 
                         <div class="col-lg-5 col-12">
+						<div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label class="form-label">* Alternative Name</label>
+                                    <div class="input-group align-items-center">
+                                        <input type="text" class="form-control text-uppercase" id="alternative_name" name="alternative_name"
+                                               v-model="eligibility.alternative_name" @keypress="checkInputFullName(event)" @input="watchAllowNext" placeholder=""
+                                               required>
+                                    </div> 
+                                </div>
+								 <div class="col-md-6">
+                                    <label class="form-label">* Alternative Phone</label>
+                                    <div class="input-group align-items-center">                                        
+										<input type="text" pattern="[0-9]+" min="0" class="form-control text-uppercase" maxlength="10"
+                                                       id="alternative_phone"
+                                                       name="alternative_phone" v-model="eligibility.alternative_phone" @input="watchAllowNext"
+                                                       @keypress="isNumber($event)"
+                                                       placeholder="Phone number">	   
+                                    </div> 
+                                </div>
+                            </div>
+							 
                             <div class="row mb-4">
-                                <div class="col-lg-12">
+                                <div class="col-md-8">
                                     <label class="form-label">* Address</label>
                                     <div class="input-group align-items-center">
                                         <input type="text" class="form-control text-uppercase" id="address" name="address"
@@ -127,10 +148,8 @@
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-address"></div>
                                 </div>
-                            </div>
-                            <div class="row mb-4">
-                                <div class="col-md-12 col-12">
-                                    <label class="form-label">Unit number (optional)</label>
+								<div class="col-md-4">
+                                    <label class="form-label">Unit number</label>
                                     <div class="input-group align-items-center">
                                         <input type="text" class="form-control text-uppercase" id="address-more" name="addressMore"
                                                v-model="deliveryInfo.addressMore" @input="watchAllowNext"
@@ -138,6 +157,7 @@
                                     </div>
                                 </div>
                             </div>
+                             
                             <div class="row mb-4">
                             <div class="col-md-12 col-12">
                                 <label class="form-label">* Postcode</label>
@@ -342,10 +362,15 @@
                     cities: []
                 },
                 eligibility: {
+                    cardtype: 1,
                     mykad: '',
                     name: '',
+                    dob: '',
                     phone: '',
-                    email: ''
+                    inphone: '',
+                    email: '',
+                    alternative_name: '',
+                    alternative_phone: ''
                 },
                 customer:{
                     id:'',
@@ -402,6 +427,8 @@
                     cityCode: '',
                     country: '',
                     deliveryNotes: '',
+					alternative_name: '',
+                    alternative_phone: '',
                     sanitize: {
                         address: '',
                         addressMore: '',
@@ -466,6 +493,9 @@
                             self.deliveryInfo.name = self.eligibility.name;
                             self.deliveryInfo.phone = self.eligibility.phone;
                             self.deliveryInfo.email = self.eligibility.email;
+							
+                            self.deliveryInfo.alternative_name = self.eligibility.alternative_name;
+                            self.deliveryInfo.alternative_phone = self.eligibility.alternative_phone;
 
                             $('#state_display').text(self.deliveryInfo.state)
                             $('#city_display').text(self.deliveryInfo.city)
@@ -493,6 +523,9 @@
                         self.deliveryInfo.name = eligibility.name;
                         self.deliveryInfo.phone = eligibility.phone;
                         self.deliveryInfo.email = eligibility.email;
+						
+						self.deliveryInfo.alternative_name = self.eligibility.alternative_name;
+                        self.deliveryInfo.alternative_phone = self.eligibility.alternative_phone;
                     }
 
                     self.watchChangeState();
@@ -676,6 +709,15 @@
 
                     return true;
                 },
+				isNumber: function(evt) {
+				  evt = (evt) ? evt : window.event;
+				  var charCode = (evt.which) ? evt.which : evt.keyCode;
+				  if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+					evt.preventDefault();;
+				  } else {
+					return true;
+				  }
+				},
                 watchAllowNext: function () {
                     $('.input_error').removeClass('input_error');
                     var self = this;
@@ -688,6 +730,8 @@
                         self.deliveryInfo.address.trim() == '' ||
                         self.deliveryInfo.postcode.trim() == '' ||
                         self.deliveryInfo.state.trim() == '' ||
+                        self.eligibility.alternative_name.trim() == '' ||
+                        self.eligibility.alternative_phone.trim() == '' ||
                         (typeof self.deliveryInfo.city == 'undefined' || self.deliveryInfo.city.trim() == '')
                     ) {
                         isFilled = false;
@@ -707,6 +751,11 @@
                     if(!self.validateMobile(self.deliveryInfo.phone)){
                         isFilled = false;
                         $('#ic_phone_number').addClass('input_error');
+                    }
+					
+					if(self.eligibility.alternative_phone & !self.validateMobile('0'+self.eligibility.alternative_phone)){
+                        isFilled = false;
+                        $('#alternative_phone').addClass('input_error');
                     }
 
                     var email = /\S+@\S+\.\S+/;
@@ -738,9 +787,9 @@
                     param.uid = self.customer.id;
                     param.productId = self.productId;
 
-                    params.referralCode = self.dealer.referral_code;
-                    params.dealerUID = self.dealer.dealer_id;
-                    params.dealerCode = self.dealer.dealer_code;
+                    param.referralCode = self.dealer.referral_code;
+                    param.dealerUID = self.dealer.dealer_id;
+                    param.dealerCode = self.dealer.dealer_code;
 
                     axios.post(apiEndpointURL_elevate + '/customer/update', param)
                         .then((response) => {
@@ -771,6 +820,7 @@
                         //update store
                         self.deliveryInfo.address = self.deliveryInfo.address.toUpperCase();
                         elevate.lsData.deliveryInfo = self.deliveryInfo;
+                        elevate.lsData.eligibility = self.eligibility;
                         elevate.updateElevateLSData();
                         self.updateCustomer();
                     }

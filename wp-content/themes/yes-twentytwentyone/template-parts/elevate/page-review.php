@@ -58,7 +58,7 @@
                             </div>
                             <div class="col-md-9 p-4">
                                 <div class="row mt-3">
-                                    <div class="col-md-6">
+                                    <div class="col-md-9">
                                         <div class="text-20">
                                         <div class="subtitle2" style="margin-bottom: 0">{{orderSummary.product.selected.nameEN}}</div>
                                         <div class="subtitle2">{{orderSummary.product.selected.plan.nameEN}}</div>
@@ -66,20 +66,32 @@
                                         <div class="hr_line"></div>
                                         <div class="text-bold">
                                             {{contractTitle}}
-                                        </div>
+                                        </div> 
                                     </div>
-                                    <div class="col-md-6">
-                                        <div>
-                                            <div class="subtitle text-end">
-                                                RM{{ formatPrice(parseFloat(orderSummary.orderDetail.total).toFixed(2)) }}/ mth
-                                            </div>
-                                        </div>
-                                    </div>
+                                     
                                 </div>
                             </div>
                         </div>
 
                     </div>
+					<div class="row mt-3">
+					<div class="col-md-12 col-12">
+					 <div class="border-box" style="width:100%; padding:20px;">
+					<div class="subtitle2">Plan</div>
+					<div class="accordion-wrap hlv_3">
+						<div class="accordion-header" @click="showPlanDetail()"> {{orderSummary.product.selected.plan.nameEN}} <i
+									class="icon icon_arrow_down"></i></div>
+						<div class="text-description mt-3">{{orderSummary.product.selected.plan.shortDescriptionEN}}</div>
+						<ul class="accordion-body list-1 mt-3">
+							<li v-for="(list, index) in orderSummary.product.selected.plan.longDescriptionEN">{{list}}</li>
+						</ul>
+					</div>
+					<div class="text-description mt-3">
+
+					</div>
+				</div>
+				</div>
+				</div>
                     <div class=" mt-3 mb-5">
                         <div class="row">
                             <div class="col-md-6">
@@ -118,7 +130,7 @@
                                 <h3>TOTAL</h3>
                             </div>
                             <div class="col-6 pt-2 pb-2 text-end">
-                                <h3>RM{{ formatPrice(parseFloat(orderSummary.orderDetail.total).toFixed(2)) }}/mth</h3>
+                                <h3>RM{{ formatPrice(parseFloat(orderSummary.orderDetail.subtotal).toFixed(2)) }}/mth</h3>
                             </div>
                         </div>
                         <div class="monthly mb-4">
@@ -130,38 +142,13 @@
                                     <p>RM{{item.price}}/ mth</p>
                                 </div>
                             </div>
-                            <div class="hr_line"></div>
-                            <div class="row mt-2 cart_bold">
-                                <div class="col-6">
-                                    <p>Upfront Payment</p>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.product.selected.plan.upFrontPayment).toFixed(2)) }}</p>
-                                </div>
-                            </div>
-                            <div class="row mt-2 cart_bold">
-                                <div class="col-6">
-                                    <p>Tax (SST)</p>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.orderDetail.sstAmount).toFixed(2)) }}</p>
-                                </div>
-                            </div>
-							<div class="row mt-2 cart_bold">
-                                <div class="col-6">
-                                    <p>Rounding Adjustment</p>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <p>*RM{{ formatPrice(parseFloat(orderSummary.orderDetail.roundingAdjustment).toFixed(2)) }}</p>
-                                </div>
-                            </div>
-                            <div class="hr_line"></div>
+							<div class="hr_line"></div>
                             <div class="row mt-2 ">
                                 <div class="col-1">
                                     <input type="checkbox" id="subscribe" @click="watchAllowNext" name="subscribe" value="1">
                                 </div>
-                                <div class="col-11 text-12">
-                                    <label for="subscribe">I here by agree to subscribe to the plan selected in the online form
+                                <div class="col-11 text-12" >
+                                    <label for="subscribe" style="line-height:20px;">I here by agree to subscribe to the plan selected in the online form
                                         submitted by me, and to be bound by the First to 5G Campaign Terms and
                                         Conditions available at <a target="_blank"
                                                                    href="https://www.yes.my/tnc/ongoing-campaigns-tnc">www.yes.my/tnc/ongoing-campaigns-tnc</a>.
@@ -173,7 +160,7 @@
                                     <input type="checkbox" id="consent" @click="watchAllowNext" name="consent" value="1">
                                 </div>
                                 <div class="col-11 text-12">
-                                    <label for="consent">I further give consent to YTLC to process my personal data in accordance with
+                                    <label for="consent" style="line-height:20px;">I further give consent to YTLC to process my personal data in accordance with
                                         the YTL Group Privacy Policy available at <a target="_blank"
                                                                                      href="https://www.ytl.com/privacypolicy.asp">www.ytl.com/privacypolicy.asp</a>.
                                     </label>
@@ -325,7 +312,10 @@
                         elevate.redirectToPage('cart');
                     }
                 },
-
+				showPlanDetail: function(){
+                    $('.accordion-wrap').toggleClass("active");
+                    $(".accordion-body").slideToggle();
+                },
                 watchAllowNext:function (){
                     var self = this;
                     if($('#subscribe').is(':checked')&& $('#consent').is(':checked')){

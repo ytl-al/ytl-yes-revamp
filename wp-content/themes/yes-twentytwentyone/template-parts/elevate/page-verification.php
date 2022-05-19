@@ -49,7 +49,7 @@
                         <div class="title text-white checkout-left">
                             ID Verification
                             <div class="mt-3" style="font-size: 14px;line-height: 20px;">
-                                A few steps to verify your identity before we continue.
+                                A few steps to verify your identity<br> before we continue.
                             </div>
                         </div>
                     </div>

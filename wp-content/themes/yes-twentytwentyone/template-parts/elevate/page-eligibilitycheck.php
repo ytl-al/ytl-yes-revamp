@@ -54,27 +54,39 @@
                 <div class="row">
                     <div class="col-md-5 p-5 flex-column bg-checkout1">
                         <div class="title text-white checkout-left">
-                            Amazing things happen when you say yes.
+                            Check if you are eligible for the Yes Elevate contract option
                         </div>
                     </div>
                     <div class="col-md-7 p-5">
                         <form class="needs-validation" novalidate>
                             <div class="mt-2 mb-2">
                                 <h2 class="subtitle">Eligibility Check</h2>
-                                <p class="sub mb-4">Please fill in your MyKad information, mobile<br> number and email
+                                <p class="sub mb-4">Please fill in your MyKad/MyTentera information, mobile<br> number and email
                                     to proceed</p>
 
                                 <div class="text-bold">ID Verification</div>
-                                <div class="row mb-4 mt-3">
+                                <div class="row mb-4 align-items-center g-2">
                                     <div class="col-lg-8 col-12">
-                                        <label class="form-label">* MyKad number</label>
-                                        <div class="input-group align-items-center">
-                                            <input type="number" pattern="\d*" minlength="12" maxlength="12" class="form-control text-uppercase"
+                                        <label class="form-label">* MyKad/MyTentera number</label>
+                                        <div class="">
+											<div class="row">
+                                            <div class="col-lg-4 col-5">
+                                                <select v-model="eligibility.cardtype" class="" style="width:100%"
+                                                       id="cardtype" name="cardtype">
+													<option value="1">MyKad</option>
+													<option value="2" >MyTentera</option>
+												</select>	   
+                                            </div>
+                                            <div class="col-lg-8 col-7">
+                                                <input type="text" pattern="[0-9]+" minlength="12" maxlength="12" class="form-control text-uppercase"
                                                    id="mykad_number"
                                                    name="mykad" v-model="eligibility.mykad" @input="watchAllowNext"
                                                    @keypress="isNumber($event)" min="0"
                                                    placeholder=""
                                                    required>
+                                            </div>
+                                        </div>
+                                            
 
                                         </div>
                                         <div class="invalid-feedback mt-1" id="em-mykad"></div>
@@ -115,7 +127,7 @@
                                                        placeholder="MY +60" readonly>
                                             </div>
                                             <div class="col-lg-8 col-7">
-                                                <input type="number" pattern="\d*" min="0" class="form-control text-uppercase" maxlength="10"
+                                                <input type="text" pattern="[0-9]+" min="0" class="form-control text-uppercase" maxlength="10"
                                                        id="ic_phone_number"
                                                        name="phone" v-model="eligibility.inphone" @input="watchAllowNext"
                                                        @keypress="isNumber($event)"
@@ -184,12 +196,15 @@
                     sst: 0.06
                 },
                 eligibility: {
+                    cardtype: 1,
                     mykad: '',
                     name: '',
                     dob: '',
                     phone: '',
                     inphone: '',
-                    email: ''
+                    email: '',
+                    alternative_name: '',
+                    alternative_phone: ''
                 },
                 customer:{
                     id:'',
