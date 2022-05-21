@@ -1,11 +1,11 @@
 <?php
 
     /*
-     * Functions to manage the admin page for custom post type "IDD Rates"
+     * Functions to manage the admin page for custom post type "Supported Device"
      */
     
     /**
-     * Customizing admin page for custom post type "IDD Rates".
+     * Customizing admin page for custom post type "Supported Device".
      * 
      * @link https://developer.wordpress.org/reference/hooks/manage_posts_columns/
      * @link https://developer.wordpress.org/reference/hooks/manage_posts_custom_column/
@@ -13,9 +13,9 @@
      * @link https://developer.wordpress.org/reference/hooks/pre_get_posts/
      */
      
-    if (!class_exists('Yesmy_custom_admin_post_type_supported_device')) {
+    if (!class_exists('Yes_custom_admin_post_type_supported_device')) {
 
-        class Yesmy_custom_admin_post_type_supported_device {
+        class Yes_custom_admin_post_type_supported_device {
 
             protected $post_type    = 'supported-device';
 
@@ -28,11 +28,18 @@
         
             public function manage_admin_columns($columns) 
             {
-                $new_columns    = [
+                $new_columns    = [];
+                $first_part_columns = [
                     'cb'            => $columns['cb'], 
-                    'device_image'  => __('Device Image')  
+                    'device_image'  => __('Device Image', 'yes.my'),
                 ];
-                return array_merge($new_columns, $columns);
+                $second_part_columns    = [
+                    'title'         => __('Model', 'yes.my'), 
+                    'release_date'  => __('Release Date', 'yes.my')
+                ];
+                $new_columns    = array_merge($first_part_columns, $columns);
+                $new_columns    = array_merge($new_columns, $second_part_columns);
+                return $new_columns;
             }
         
             public function manage_admin_column($column_key, $post_id) 
@@ -43,6 +50,9 @@
                         if ($thumbnail_url) {
                             echo "<img src='$thumbnail_url' />";
                         }
+                        break;
+                    case 'release_date' : 
+                        echo get_post_meta($post_id, 'yes_release_date', true);
                         break;
                     default: 
                 }
@@ -63,5 +73,3 @@
         }
 
     }
-    
-?>

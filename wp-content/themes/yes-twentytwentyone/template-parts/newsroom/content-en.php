@@ -1,4 +1,4 @@
-<?php get_template_part('templates/news-room/styles'); ?>
+<?php get_template_part('template-parts/newsroom/styles'); ?>
 
 <section id="newsroom-top-banner">
     <div class="container">
@@ -136,7 +136,7 @@ $arr_months = array(
     'November',
     'December'
 );
-get_template_part('templates/news-room/filter', '', ['arr_years' => $arr_years, 'arr_months' => $arr_months]);
+get_template_part('template-parts/newsroom/filter', '', ['arr_years' => $arr_years, 'arr_months' => $arr_months]);
 ?>
 
 <section id="news-section" class="mb-5">
@@ -144,9 +144,9 @@ get_template_part('templates/news-room/filter', '', ['arr_years' => $arr_years, 
         <h1>Latest News</h1>
 
         <div class="row gy-3">
-            <?php get_template_part('templates/news-room/no-results', '', ['arr_posts' => $arr_featured_posts]); ?>
+            <?php get_template_part('template-parts/newsroom/no-results', '', ['arr_posts' => $arr_featured_posts]); ?>
 
-            <?php get_template_part('templates/news-room/has-results', '', ['arr_posts' => $arr_posts]); ?>
+            <?php get_template_part('template-parts/newsroom/has-results', '', ['arr_posts' => $arr_posts]); ?>
         </div>
 
         <div class="pagination mt-5">
@@ -171,4 +171,4 @@ get_template_part('templates/news-room/filter', '', ['arr_years' => $arr_years, 
     </div>
 </section>
 
-<?php get_template_part('templates/news-room/scripts'); ?>
+<?php get_template_part('template-parts/newsroom/scripts'); ?>

@@ -12,7 +12,7 @@
                             <div class="form-group">
                                 <div class="dropdown">
                                     <button class="btn dropdown-toggle" data-toggle="dropdown" type="button">Cuba “Australia“</button>
-                                    <?php get_template_part('templates/roaming-idd/dropdown-roaming', '', ['data_roaming' => $args['data_roaming']]); ?>
+                                    <?php get_template_part('template-parts/roaming-idd/dropdown-roaming', '', ['data_roaming' => $args['data_roaming']]); ?>
                                     <input name="roamingSelect" type="hidden" />
                                 </div>
 
@@ -522,7 +522,7 @@
                             <div class="form-group">
                                 <div class="dropdown">
                                     <button class="btn dropdown-toggle" data-toggle="dropdown" type="button">Cuba “Cambodia”</button>
-                                    <?php get_template_part('templates/roaming-idd/dropdown-idd', '', ['data_idd' => $args['data_idd']]); ?>
+                                    <?php get_template_part('template-parts/roaming-idd/dropdown-idd', '', ['data_idd' => $args['data_idd']]); ?>
                                     <input name="iddSelect" type="hidden" />
                                 </div>
 

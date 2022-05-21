@@ -1,11 +1,11 @@
 <?php
 
     /*
-     * Functions to manage the admin page for custom post type "IDD Rates"
+     * Functions to manage the admin page for custom post type "Supported Device"
      */
     
     /**
-     * Customizing admin page for custom post type "IDD Rates".
+     * Customizing admin page for custom post type "Supported Device".
      * 
      * @link https://developer.wordpress.org/reference/hooks/manage_posts_columns/
      * @link https://developer.wordpress.org/reference/hooks/manage_posts_custom_column/
@@ -13,9 +13,9 @@
      * @link https://developer.wordpress.org/reference/hooks/pre_get_posts/
      */
      
-    if (!class_exists('Yesmy_custom_admin_post_type_roaming_rates')) {
+    if (!class_exists('Yes_custom_admin_post_type_roaming_rates')) {
 
-        class Yesmy_custom_admin_post_type_roaming_rates {
+        class Yes_custom_admin_post_type_roaming_rates {
 
             protected $post_type    = 'roaming-rates';
 
@@ -31,7 +31,7 @@
             {
                 $new_columns    = [
                     'cb'            => $columns['cb'], 
-                    'title'         => __('Title'), 
+                    'title'         => __('Country'), 
         
                     'telco_count'   => __('Number of Telcos', 'yes.my'), 
                     'telco_names'   => __('Telco Names', 'yes.my') 

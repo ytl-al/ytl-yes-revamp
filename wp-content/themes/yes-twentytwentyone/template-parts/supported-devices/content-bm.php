@@ -1,4 +1,4 @@
-<?php get_template_part('templates/supported-devices/styles'); ?>
+<?php get_template_part('template-parts/supported-devices/styles'); ?>
 
 <section id="supported-top-banner">
     <div class="container">
@@ -23,11 +23,11 @@
     <div class="flexible">
         <div class="container container-filter oversized-1440">
             <div class="row">
-                <?php get_template_part('templates/supported-devices/filter'); ?>
+                <?php get_template_part('template-parts/supported-devices/filter'); ?>
 
                 <div class="col">
                     <div class="row filter-storeitem storeitem-supported-devices">
-                        <?php get_template_part('templates/supported-devices/devices'); ?>
+                        <?php get_template_part('template-parts/supported-devices/devices'); ?>
                     </div>
                 </div>
             </div>
@@ -80,4 +80,4 @@
     </div>
 </section>
 
-<?php get_template_part('templates/supported-devices/scripts'); ?>
+<?php get_template_part('template-parts/supported-devices/scripts'); ?>

@@ -10,9 +10,9 @@
      * @link https://developer.wordpress.org/reference/functions/register_post_type/
      */
      
-    if (!class_exists('Yesmy_custom_post_types_config')) {
+    if (!class_exists('Yes_custom_post_types_config')) {
 
-        class Yesmy_custom_post_types_config {
+        class Yes_custom_post_types_config {
 
             public function __construct() 
             {

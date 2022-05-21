@@ -1,14 +1,15 @@
 <?php
+
 require_once(THEME_FUNCTIONS_PATH . '/meta-box/meta-box.php');
 require_once(THEME_FUNCTIONS_PATH . '/meta-box-class/my-meta-box-class.php');
 
 if (is_admin()) {
-    /**
-     * Function to add custom meta boxes to page and post post types
-     * 
-     * @since    1.0.0
-     */
     if (!function_exists('add_meta_page_post')) {
+        /**
+         * Function to add custom meta boxes to page and post post types
+         * 
+         * @since    1.0.0
+         */
         function add_meta_page_post()
         {
             $prefix = 'yes_';
@@ -37,8 +38,21 @@ if (is_admin()) {
                     ]
                 ]
             ];
+            return $meta_boxes;
+        }
 
-            //for supported-devices
+        add_filter('rwmb_meta_boxes', 'add_meta_page_post');
+    }
+
+    if (!function_exists('add_meta_supported_device')) {
+        /**
+         * Function to add custom meta boxes to supported device post types
+         * 
+         * @since    1.2.0
+         */
+        function add_meta_supported_device()
+        {
+            $prefix     = 'yes_';
             $meta_boxes[] = [
                 'title'         => esc_html__('Additional Info', 'yes.my'),
                 'id'            => 'yes_release_date_meta',
@@ -65,8 +79,21 @@ if (is_admin()) {
                     ]
                 ]
             ];
+            return $meta_boxes;
+        }
 
-            //for news room
+        add_filter('rwmb_meta_boxes', 'add_meta_supported_device');
+    }
+
+    if (!function_exists('add_meta_newsroom')) {
+        /**
+         * Function to add custom meta boxes to newsroom post types
+         * 
+         * @since    1.2.0
+         */
+        function add_meta_newsroom()
+        {
+            $prefix     = 'yes_';
             $meta_boxes[] = [
                 'title'         => esc_html__('Additional Info', 'yes.my'),
                 'id'            => 'yes_release_date_meta',
@@ -96,14 +123,18 @@ if (is_admin()) {
                     ]
                 ]
             ];
-
             return $meta_boxes;
         }
 
-        add_filter('rwmb_meta_boxes', 'add_meta_page_post');
+        // add_filter('rwmb_meta_boxes', 'add_meta_newsroom');
     }
 
     if (!function_exists('add_meta_roaming_rates')) {
+        /**
+         * Function to add custom meta boxes to roaming post types
+         * 
+         * @since    1.2.0
+         */
         function add_meta_roaming_rates()
         {
             $prefix     = 'yesmy_roaming_';
@@ -163,6 +194,11 @@ if (is_admin()) {
     }
 
     if (!function_exists('add_meta_idd_postpaid_rates')) {
+        /**
+         * Function to add custom meta boxes to idd postpaid rates post types
+         * 
+         * @since    1.2.0
+         */
         function add_meta_idd_postpaid_rates()
         {
             $prefix     = 'yesmy_idd_postpaid_';
@@ -188,6 +224,11 @@ if (is_admin()) {
     }
 
     if (!function_exists('add_meta_idd_prepaid_rates')) {
+        /**
+         * Function to add custom meta boxes to idd prepaid rates post types
+         * 
+         * @since    1.2.0
+         */
         function add_meta_idd_prepaid_rates()
         {
             $prefix     = 'yesmy_idd_prepaid_';

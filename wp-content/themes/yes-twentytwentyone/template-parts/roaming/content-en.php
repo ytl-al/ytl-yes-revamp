@@ -1,6 +1,6 @@
 <!-- Styles -->
 
-<?php get_template_part('templates/roaming/styles'); ?>
+<?php get_template_part('template-parts/roaming/styles'); ?>
 
 <!-- Breadcrumb Start -->
 <section class="breadcrumb-section">
@@ -24,7 +24,7 @@
                     <h1>Travelling? Stay close to home with <span>YesRoam</span></h1>
                     <p>Roam freely anywhere with out Partnering Operators.</p>
                     <div class="search-box dropdown">
-                        <?php get_template_part('templates/roaming/dropdown-roaming', '', ['data_roaming' => $args['data_roaming']]); ?>
+                        <?php get_template_part('template-parts/roaming/dropdown-roaming', '', ['data_roaming' => $args['data_roaming']]); ?>
                         <input id="roamingSelect" name="roamingSelect" type="hidden" />
                         <button data-button="openRoaming" class="btn">Check roaming rates</button>
                     </div>
@@ -350,7 +350,7 @@
                     <h1>From Malaysia to <span>anywhere in the world.</span></h1>
                     <p>Here are affordable IDD rates you'll like.</p>
                     <div class="search-box dropdown">
-                        <?php get_template_part('templates/roaming/dropdown-idd', '', ['data_idd' => $args['data_idd']]); ?>
+                        <?php get_template_part('template-parts/roaming/dropdown-idd', '', ['data_idd' => $args['data_idd']]); ?>
                         <input id="iddSelect" name="iddSelect" type="hidden" />
                         <button class="btn" data-button="openIdd">Check IDD rates</button>
                     </div>
@@ -480,4 +480,4 @@
     </div>
 </section>
 <!--Roaming Rates Section End-->
-<?php get_template_part('templates/roaming/scripts'); ?>
+<?php get_template_part('template-parts/roaming/scripts'); ?>

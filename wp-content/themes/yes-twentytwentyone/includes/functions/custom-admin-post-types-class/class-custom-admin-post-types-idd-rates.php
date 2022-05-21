@@ -13,9 +13,9 @@
      * @link https://developer.wordpress.org/reference/hooks/pre_get_posts/
      */
      
-    if (!class_exists('Yesmy_custom_admin_post_type_idd_rates')) {
+    if (!class_exists('Yes_custom_admin_post_type_idd_rates')) {
 
-        class Yesmy_custom_admin_post_type_idd_rates {
+        class Yes_custom_admin_post_type_idd_rates {
 
             protected $post_type    = 'idd-rates';
 
@@ -45,7 +45,7 @@
             {
                 $new_columns    = [
                     'cb'                    => $columns['cb'], 
-                    'title'                 => __('Title'), 
+                    'title'                 => __('Country'), 
         
                     'country_code'          => __('Country Code', 'yes.my'), 
         
