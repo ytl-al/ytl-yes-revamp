@@ -6,13 +6,14 @@ require_once(THEME_FUNCTIONS_PATH . '/meta-box-class/my-meta-box-class.php');
 if (is_admin()) {
     if (!function_exists('add_meta_page_post')) {
         /**
-         * Function to add custom meta boxes to page and post post types
+         * Function to add custom meta boxes to page, post, supported-device, newsroom post types
          * 
          * @since    1.0.0
          */
         function add_meta_page_post()
         {
             $prefix = 'yes_';
+            // Custom Meta Boxes for Page and Post
             $meta_boxes[]   = [
                 'title'         => esc_html__('Additional Content Code', 'yes.my'),
                 'id'            => 'yes_code_meta',
@@ -38,21 +39,8 @@ if (is_admin()) {
                     ]
                 ]
             ];
-            return $meta_boxes;
-        }
 
-        add_filter('rwmb_meta_boxes', 'add_meta_page_post');
-    }
-
-    if (!function_exists('add_meta_supported_device')) {
-        /**
-         * Function to add custom meta boxes to supported device post types
-         * 
-         * @since    1.2.0
-         */
-        function add_meta_supported_device()
-        {
-            $prefix     = 'yes_';
+            // Custom Meta Boxes for Supported Device
             $meta_boxes[] = [
                 'title'         => esc_html__('Additional Info', 'yes.my'),
                 'id'            => 'yes_release_date_meta',
@@ -79,54 +67,42 @@ if (is_admin()) {
                     ]
                 ]
             ];
+
+            // Custom Meta Boxes for Newsroom
+            // $meta_boxes[] = [
+            //     'title'         => esc_html__('Additional Info', 'yes.my'),
+            //     'id'            => 'yes_release_date_meta',
+            //     'post_types'    => ['newsroom'],
+            //     'context'       => 'normal',
+            //     'revision'      => true,
+            //     'fields'        => [
+            //         [
+            //             'type'       => 'date',
+            //             'id'         =>  $prefix . 'release_date',
+            //             'name'  => esc_html__('Release date', 'yes.my'),
+            //             'attributes' => [
+            //                 //'required'  => true,
+            //             ],
+
+            //             // Date picker options. See here http://api.jqueryui.com/datepicker
+            //             'js_options' => array(
+            //                 'dateFormat'      => 'yy-mm-dd',
+            //                 'showButtonPanel' => false,
+            //             ),
+
+            //             // Display inline?
+            //             'inline' => false,
+
+            //             // Save value as timestamp?
+            //             'timestamp' => false,
+            //         ]
+            //     ]
+            // ];
+
             return $meta_boxes;
         }
 
-        add_filter('rwmb_meta_boxes', 'add_meta_supported_device');
-    }
-
-    if (!function_exists('add_meta_newsroom')) {
-        /**
-         * Function to add custom meta boxes to newsroom post types
-         * 
-         * @since    1.2.0
-         */
-        function add_meta_newsroom()
-        {
-            $prefix     = 'yes_';
-            $meta_boxes[] = [
-                'title'         => esc_html__('Additional Info', 'yes.my'),
-                'id'            => 'yes_release_date_meta',
-                'post_types'    => ['news-room'],
-                'context'       => 'normal',
-                'revision'      => true,
-                'fields'        => [
-                    [
-                        'type'       => 'date',
-                        'id'         =>  $prefix . 'release_date',
-                        'name'  => esc_html__('Release date', 'yes.my'),
-                        'attributes' => [
-                            //'required'  => true,
-                        ],
-
-                        // Date picker options. See here http://api.jqueryui.com/datepicker
-                        'js_options' => array(
-                            'dateFormat'      => 'yy-mm-dd',
-                            'showButtonPanel' => false,
-                        ),
-
-                        // Display inline?
-                        'inline' => false,
-
-                        // Save value as timestamp?
-                        'timestamp' => false,
-                    ]
-                ]
-            ];
-            return $meta_boxes;
-        }
-
-        // add_filter('rwmb_meta_boxes', 'add_meta_newsroom');
+        add_filter('rwmb_meta_boxes', 'add_meta_page_post');
     }
 
     if (!function_exists('add_meta_roaming_rates')) {
