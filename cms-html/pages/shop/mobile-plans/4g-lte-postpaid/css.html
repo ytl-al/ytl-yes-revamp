@@ -1,4 +1,32 @@
 <style type="text/css">
+    #postpaid-top-banner {
+        background-image: url('/wp-content/uploads/2022/05/postpaid-banner-bg-new-scaled.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        overflow: hidden;
+    }
+    
+    #postpaid-top-banner h1 {
+        font-size: 50px;
+        font-family: 'Montserrat', sans-serif;
+        line-height: 50px;
+        font-weight: 700;
+        color: #FFF;
+        margin-bottom: 20px;
+    }
+    
+    #postpaid-top-banner p {
+        font-size: 20px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+        line-height: 24px;
+        color: #FFF;
+        padding-right: 16%;
+    }
+    
+    #postpaid-top-banner p span {
+        font-weight: 800;
+    }
     /* Postpaid Plans styling */
     
     #postpaid-plans {
@@ -6,22 +34,15 @@
         justify-content: center;
         padding: 70px 0px;
         padding-top: 0px;
-        background-image: url("/wp-content/uploads/2021/10/postpaid-plan-bg.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: top;
+        background-color: #F7F8F9;
     }
     
     #postpaid-plans h1 {
-        font-size: 56px;
-        font-weight: 600;
-        line-height: 59px;
-        color: #FFF;
-        padding-top: 60px;
-    }
-    
-    #postpaid-plans h1 span {
+        font-size: 39px;
         font-weight: 800;
+        line-height: 47px;
+        color: #000;
+        padding-top: 60px;
     }
     
     #postpaid-plans .plan-table {
@@ -32,14 +53,16 @@
     #postpaid-plans .plan-table th {
         padding: 9px 30px;
         vertical-align: middle;
-        background-color: #F9F7F4;
-        border: solid 4px #00B4F0;
-        border-radius: 7px;
+        background-color: #FFF;
+        border: none;
+        border-radius: 10px;
+        width: 20%;
+        text-align: center;
     }
     
     #postpaid-plans .plan-table th .pink-btn {
-        padding: 14px 60px;
-        display: block;
+        padding: .375rem .75rem;
+        display: inline-block;
     }
     
     #postpaid-plans .plan-table th.visual {
@@ -49,18 +72,19 @@
     
     #postpaid-plans .plan-table th h1 {
         color: #2B2B2B;
-        font-size: 20px;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 16px;
         line-height: 24px;
-        font-weight: 600;
+        font-weight: 400;
         text-align: center;
         margin-bottom: 15px;
         padding-top: 0px;
     }
     
     #postpaid-plans .plan-table th h2 {
-        color: #00B4F0;
-        font-size: 24px;
-        line-height: 28px;
+        color: #000;
+        font-size: 18px;
+        line-height: 23px;
         font-weight: 800;
         text-align: center;
         margin-bottom: 15px;
@@ -70,9 +94,9 @@
         padding: 20px;
         text-align: center;
         background-color: #FFF;
-        border-bottom: solid 1.5px #00B4F0;
-        color: #525252;
-        font-size: 20px;
+        border-bottom: solid 1.5px #d5d5d5;
+        color: #2B2B2B;
+        font-size: 15px;
         font-weight: 600;
         vertical-align: middle;
     }
@@ -82,7 +106,7 @@
     }
     
     #postpaid-plans .plan-table tr td.blue-col {
-        background-color: #00B4F0;
+        background-color: #1A1E47;
         border-bottom: none;
         position: relative;
         color: #F9F7F4;
@@ -95,7 +119,7 @@
         top: 22px; */
         float: right;
     }
-
+    
     #postpaid-plans .plan-table tr td.blue-col:after {
         clear: both;
         content: '';
@@ -110,10 +134,80 @@
     }
     /* Switch Yes styling */
     
-    @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    #wfh {
+        background-color: #FFF;
+        background-image: url('/wp-content/uploads/2022/04/roaming-banner-bg-scaled.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 96px 0px;
+    }
+    
+    #wfh h1 {
+        font-size: 60px;
+        font-weight: 800;
+        line-height: 72px;
+        color: #000;
+        text-align: left;
+    }
+    
+    #wfh p {
+        font-size: 16px;
+        line-height: 24px;
+        color: #525252;
+        text-align: left;
+    }
+    
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+        #postpaid-top-banner {
+            background-position: top right;
+        }
+        #postpaid-top-banner h1 {
+            font-size: 30px;
+            line-height: 30px;
+            text-align: left;
+        }
+        #postpaid-top-banner p {
+            line-height: 25px;
+            font-size: 17px;
+            text-align: left;
+            margin-bottom: 20px;
+            padding: 0;
+        }
+        #postpaid-top-banner {
+            padding-top: 20px;
+        }
+        #postpaid-top-banner .banner-visual {
+            text-align: center;
+        }
+        #postpaid-top-banner .banner-visual img {
+            margin: 0 auto;
+            margin-top: 20px;
+            width: 70% !important;
+            display: inline-block !important;
+        }
+        #easy-steps .content {
+            padding: 0px 13px !important;
+        }
+        #wfh {
+            padding: 56px 0px;
+        }
+        #wfh h1 {
+            font-size: 42px;
+            line-height: 38px;
+        }
+    }
+    /* Portrait */
+    
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
+        #wfh {
+            padding: 16px 0px;
+        }
+    }
+    
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
         #postpaid-plans h1 {
-            font-size: 40px;
-            line-height: 50px;
+            font-size: 30px;
+            line-height: 39px;
             padding-top: 28px;
         }
         #postpaid-plans .plan-table tr td {
@@ -121,18 +215,22 @@
         }
         #postpaid-plans .plan-table th {
             padding: 9px 13px;
+            min-width: 125px;
+        }
+        #postpaid-plans .plan-table th .pink-btn {
+            font-size: 12px;
         }
         #postpaid-plans .plan-table th h1 {
-            font-size: 16px;
+            font-size: 12px;
         }
         #postpaid-plans .plan-table tr td.blue-col {
-            min-width: 187px;
-            font-size: 16px;
+            min-width: 127px;
+            font-size: 12px;
             position: sticky;
             left: 0;
         }
         #postpaid-plans .plan-table th.visual {
-            background-color: #ad4a84;
+            background-color: #F7F8F9;
             position: sticky;
             left: 0;
         }
@@ -140,10 +238,52 @@
             display: none;
         }
         #postpaid-plans .plan-table tr td {
-            font-size: 16px;
+            font-size: 12px;
         }
         #postpaid-plans .plan-table th h2 {
+            font-size: 14px;
+        }
+        #postpaid-top-banner {
+            background-position: top right;
+        }
+        #postpaid-top-banner h1 {
+            font-size: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+        #postpaid-top-banner p {
+            line-height: 25px;
+            padding: 0px 5%;
             font-size: 17px;
+            text-align: center;
+        }
+        #postpaid-top-banner {
+            padding-top: 20px;
+        }
+        #postpaid-top-banner .banner-visual {
+            text-align: center;
+        }
+        #postpaid-top-banner .banner-visual img {
+            margin: 0 auto;
+            margin-top: 20px;
+            width: 70% !important;
+            display: inline-block !important;
+        }
+        #easy-steps h1,
+        #databck-rewards h1,
+        #switch-yes h1,
+        #wfh h1,
+        #faq-section h1 {
+            font-size: 30px;
+            line-height: 39px;
+        }
+        #wfh {
+            background-image: url('/wp-content/uploads/2022/04/roaming-banner-bg-mobile.jpg');
+            padding: 54px 0px;
+        }
+        #wfh h1 {
+            font-size: 32px;
+            line-height: 38px;
         }
     }
 </style>
