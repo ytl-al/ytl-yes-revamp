@@ -18,11 +18,11 @@
 <!-- Banner1 Start -->
 <section id="roaming-banner">
     <div class="container">
-        <div class="row justify-content-center justify-content-lg-start">
-            <div class="col-11 col-lg-6 d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+        <div class="row justify-content-center">
+            <div class="col-11 col-lg-8 d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                 <div>
-                    <h1>Travelling? Stay close to home with <span>YesRoam</span></h1>
-                    <p>Roam freely anywhere with out Partnering Operators.</p>
+                    <h1>Stay connected anytime, anywhere with YesRoam</h1>
+                    <p>Roam freely without part--nering operators when you’re travelling.</p>
                     <div class="search-box dropdown">
                         <?php get_template_part('template-parts/roaming/dropdown-roaming', '', ['data_roaming' => $args['data_roaming']]); ?>
                         <input id="roamingSelect" name="roamingSelect" type="hidden" />
@@ -344,11 +344,11 @@
 <!-- Banner2 Start -->
 <section id="roaming-banner" class="roaming-bg2">
     <div class="container">
-        <div class="row justify-content-center justify-content-lg-start">
-            <div class="col-11 col-lg-6 d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+        <div class="row justify-content-center">
+            <div class="col-11 col-lg-8 d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                 <div>
-                    <h1>From Malaysia to <span>anywhere in the world.</span></h1>
-                    <p>Here are affordable IDD rates you'll like.</p>
+                    <h1>Making an overseas call?</span></h1>
+                    <p>Here are the affordable International Direct Dailing (IDD) rates you’ll like.</p>
                     <div class="search-box dropdown">
                         <?php get_template_part('template-parts/roaming/dropdown-idd', '', ['data_idd' => $args['data_idd']]); ?>
                         <input id="iddSelect" name="iddSelect" type="hidden" />
