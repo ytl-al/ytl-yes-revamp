@@ -30,7 +30,7 @@
                         <span>1. Eligibility check</span>
                     </li>
                     <li ui-sref="secondStep" class="completed">
-                        <span>2. ID verification</span>
+                        <span>2. MyKAD verification</span>
                     </li>
                     <li ui-sref="thirdStep" class="completed">
                         <span>3. Delivery details</span>
@@ -51,13 +51,13 @@
                             <h2 class="subtitle">Personal Details</h2>
                             <p class="sub mb-4">Delivery only available in Malaysia.<br>
                                 Ensure all information is correct before proceeding.</p>
-                            <div class="text-bold mb-3">ID Verification</div>
+                            <div class="text-bold mb-3">MyKAD Verification</div>
                         </div>
                         <div class="col-lg-5 col-12">
 
                             <div class="row mb-4">
                                 <div class="col-lg-12 col-12">
-                                    <label class="form-label">* MyKad number</label>
+                                    <label class="form-label"><br/>* MyKad number</label>
                                     <div class="input-group align-items-center">
                                         <input type="text" maxlength="12" class="form-control text-upper" id="mykad_number"
                                                name="mykad" v-model="deliveryInfo.mykad" @input="watchAllowNext"
@@ -116,24 +116,27 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-5 col-12">
+                        <div class="col-lg-7 col-12">
 						<div class="row mb-4">
-                                <div class="col-md-6">
-                                    <label class="form-label">* Alternative Name</label>
+                                <div class="col-md-5">
+                                    <label class="form-label">* Name of <br>Alternate Contact Person</label>
                                     <div class="input-group align-items-center">
                                         <input type="text" class="form-control text-uppercase" id="alternative_name" name="alternative_name"
                                                v-model="eligibility.alternative_name" @keypress="checkInputFullName(event)" @input="watchAllowNext" placeholder=""
                                                required>
                                     </div> 
                                 </div>
-								 <div class="col-md-6">
-                                    <label class="form-label">* Alternative Phone</label>
+								 <div class="col-md-7">
+                                    <label class="form-label">* Phone Number of<br> Alternate Contact Person</label>
                                     <div class="input-group align-items-center">                                        
-										<input type="text" pattern="[0-9]+" min="0" class="form-control text-uppercase" maxlength="10"
-                                                       id="alternative_phone"
-                                                       name="alternative_phone" v-model="eligibility.alternative_phone" @input="watchAllowNext"
-                                                       @keypress="isNumber($event)"
-                                                       placeholder="Phone number">	   
+										<div class="input-group-prepend" style="margin-right:10px;">
+                                                <span class="input-group-text" id="basic-addon1">MY +60</span>
+                                            </div>
+                                            <input type="text" pattern="[0-9]+" min="0" class="form-control text-uppercase" maxlength="10"
+                                                   id="alternative_phone"
+                                                   name="alternative_phone" v-model="eligibility.alternative_phone" @input="watchAllowNext"
+                                                   @keypress="isNumber($event)"
+                                                   placeholder="Phone number">	   
                                     </div> 
                                 </div>
                             </div>

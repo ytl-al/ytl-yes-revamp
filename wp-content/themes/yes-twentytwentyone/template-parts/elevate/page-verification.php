@@ -28,7 +28,7 @@
                     <span>1. Eligibility check</span>
                 </li>
                 <li ui-sref="secondStep" class="completed">
-                    <span>2. ID verification</span>
+                    <span>2. MyKAD verification</span>
                 </li>
                 <li ui-sref="thirdStep">
                     <span>3. Delivery details</span>
@@ -47,7 +47,7 @@
                 <div class="row">
                     <div class="col-md-5 p-5 flex-column bg-checkout">
                         <div class="title text-white checkout-left">
-                            ID Verification
+                            MyKAD Verification
                             <div class="mt-3" style="font-size: 14px;line-height: 20px;">
                                 A few steps to verify your identity<br> before we continue.
                             </div>
@@ -67,8 +67,8 @@
                             <ul class="list-2 mt-5">
                                 <li><div><span class="number">1</span></div>
                                     <div>
-                                        <div class="subtitle2">ID Validation</div>
-                                        <p>Scan your ID with the object in a well lit room facing on a flat surface with minimum reflection</p>
+                                        <div class="subtitle2">MyKAD Validation</div>
+                                        <p>Scan your MyKAD with the object in a well lit room facing on a flat surface with minimum reflection</p>
                                     </div></li>
                                 <li class="mt-3"><div><span class="number">2</span></div>
                                     <div>
@@ -147,10 +147,10 @@
             created: function () {
                 var self = this;
                 setTimeout(function () {
-                    self.qrcode = new QRCode(document.getElementById("qrcode"), {
+                    /*self.qrcode = new QRCode(document.getElementById("qrcode"), {
                         width: 100,
                         height: 100
-                    });
+                    });*/
                     self.pageInit();
 
                 }, 500);
@@ -271,9 +271,17 @@
 
                 makeCode: function (uid) {
                     var self = this;
-                    var url_verification = self.ekyc_url + 'EKYC/?fullName=' + self.eligibility.name + '&nric=' + self.eligibility.mykad + '&guid=' + uid ;
+                    var url_verification = self.ekyc_url + 'EKYC/?fullName=' + encodeURIComponent (self.eligibility.name) + '&nric=' + self.eligibility.mykad + '&guid=' + encodeURIComponent(uid);
                     $('#cmdVerify').attr('href', url_verification);
-                    self.qrcode.makeCode(url_verification);
+                    //self.qrcode.makeCode(url_verification);
+					const qrcode = new QRCode(document.getElementById('qrcode'), {
+					  text: url_verification,
+					  width: 128,
+					  height: 128,
+					  colorDark : '#000',
+					  colorLight : '#fff',
+					  correctLevel : QRCode.CorrectLevel.H
+					});
                 }
 
             }

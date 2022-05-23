@@ -36,7 +36,7 @@
                     <span>1. Eligibility check</span>
                 </li>
                 <li ui-sref="secondStep">
-                    <span>2. ID verification</span>
+                    <span>2. MyKAD verification</span>
                 </li>
                 <li ui-sref="thirdStep">
                     <span>3. Delivery details</span>
@@ -64,7 +64,7 @@
                                 <p class="sub mb-4">Please fill in your MyKad/MyTentera information, mobile<br> number and email
                                     to proceed</p>
 
-                                <div class="text-bold">ID Verification</div>
+                                <div class="text-bold">MyKAD Verification</div>
                                 <div class="row mb-4 align-items-center g-2">
                                     <div class="col-lg-8 col-12">
                                         <label class="form-label">* MyKad/MyTentera number</label>
@@ -153,8 +153,7 @@
                                 <div class="row mb-4">
                                     <div class="col-lg-8 col-12">
                                         <div class="sub">
-                                            <p>By submitting this information you are agreeing to recieve exclusive Yes
-                                                offers and promotions</p>
+                                            <p>By submitting this information you are agreeing to receive exclusive Yes offers and promotions</p>
                                         </div>
                                     </div>
                                 </div>
@@ -314,11 +313,12 @@
                                     $('#error').html(data.data.displayResponseMessage);
                                 }
                                 $('#error').html(data.data.displayResponseMessage);
+								$('#status_mesage').html('');
                                 console.log(data);
 
                                 setTimeout(function(){
                                     elevate.redirectToPage('compasia-fail');
-                                },1000);
+                                },5000);
 
 
                             }
@@ -349,11 +349,17 @@
                                 self.checkActiveContract();
                             } else {
                                 toggleOverlay(false);
-                                elevate.redirectToPage('eligibility-failure');
+								console.log(data);
+								$('#status_mesage').html('');
+								//$('#error').html("Sorry,"+ data.error);
+								$('#status_mesage').html('');
+                                 elevate.redirectToPage('eligibility-failure');
+								
                             }
                         })
                         .catch((error) => {
                             toggleOverlay(false);
+							$('#status_mesage').html('');
                             $('#error').html("System error, please try again.");
                             console.log(error, response);
                         });
@@ -376,7 +382,10 @@
 								elevate.redirectToPage('verification');
                             } else {
                                 toggleOverlay(false);
-                                elevate.redirectToPage('eligibility-failure');
+								console.log(data);
+								$('#status_mesage').html('');
+								//$('#error').html("Sorry,"+ data.error);
+                                 elevate.redirectToPage('eligibility-failure');
                             }
                         })
                         .catch((error) => {

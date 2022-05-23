@@ -1,16 +1,21 @@
 <?php require_once 'includes/header.php'; ?>
+<style>
+	body{
+		background: url(/wp-content/uploads/2021/09/amazing-things-bg.png);
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+</style>	
     <header class="white-top">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-6">
                     <div class="mt-4">
-                        <a href="/elevate/contract/" class="back-btn "><img
-                                    src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
-                                    alt=""> Back</a>
+                         
                     </div>
                 </div>
                 <div class="col-lg-4 col-6 text-lg-center text-end">
-                    <h1 class="title_checkout p-3">Check Out</h1>
+                    <h1 class="title_checkout p-3">Pre-Register Checkout</h1>
                 </div>
                 <div class="col-lg-4">
 
@@ -26,17 +31,11 @@
             <div class="container">
                 <ul class="wizard">
                     <li ui-sref="firstStep" class="completed">
-                        <span>1. Eligibility check</span>
+                        <span>1. Slect Plan</span>
                     </li>
                     <li ui-sref="secondStep" class="completed">
-                        <span>2. MyKAD verification</span>
-                    </li>
-                    <li ui-sref="thirdStep" class="completed">
-                        <span>3. Delivery details</span>
-                    </li>
-                    <li ui-sref="fourthStep" class="completed">
-                        <span>4. Review and order</span>
-                    </li>
+                        <span>2. Payment</span>
+                    </li> 
                 </ul>
             </div>
         </section>
@@ -497,9 +496,8 @@
                 mounted: function() {},
                 created: function() {
                     var self = this;
-                    setTimeout(function() {
-                        self.pageInit();
-                    }, 500);
+					 
+                    self.pageInit();
                     self.initTabs();
                 },
                 computed: {
@@ -512,45 +510,45 @@
                 methods: {
                     pageInit: function() {
                         var self = this;
+						
+                        elevate.checkExists();
+						
+						self.pageValid = true;
+                             
+						if (elevate.lsData.deliveryInfo) {
+							self.deliveryInfo = elevate.lsData.deliveryInfo;
+						}else{
+							 elevate.redirectToPage('pre-register/?id=error');
+						}
+						if (elevate.lsData.customer) {
+							self.customer = elevate.lsData.customer;
+						}else{
+							 elevate.redirectToPage('pre-register/?id='+self.deliveryInfo.id);
+						}
 
-                        if (elevate.validateSession(self.currentStep)) {
-                            self.pageValid = true;
-                            if (elevate.lsData.eligibility) {
-                            self.eligibility = elevate.lsData.eligibility;
-							}else{
-								 elevate.redirectToPage('eligibilitycheck');
-							}
-							if (elevate.lsData.deliveryInfo) {
-								self.deliveryInfo = elevate.lsData.deliveryInfo;
-							}else{
-								 elevate.redirectToPage('personal');
-							}
-                            if (elevate.lsData.customer) {
-                                self.customer = elevate.lsData.customer;
-                            }
+						if (elevate.lsData.orderDetail) {
+							self.orderSummary.orderDetail = elevate.lsData.orderDetail;
+						}else{
+							elevate.redirectToPage('pre-register/?id='+self.deliveryInfo.id);
+						}
+						if (elevate.lsData.product) {
+							self.orderSummary.product = elevate.lsData.product;
+						}
 
-                            if (elevate.lsData.orderDetail) {
-                                self.orderSummary.orderDetail = elevate.lsData.orderDetail;
-                            }else{
-								 elevate.redirectToPage('contract');
-							}
-                            if (elevate.lsData.product) {
-                                self.orderSummary.product = elevate.lsData.product;
-                            }
+						if (elevate.lsData.contract) {
+							self.contract = elevate.lsData.contract;
+							self.contractSigned = true;
+						}
 
-                            if (elevate.lsData.contract) {
-                                self.contract = elevate.lsData.contract;
-                                self.contractSigned = true;
-                            }
-
-                            self.productId = elevate.lsData.product.selected.productCode;
-                            self.dealer = elevate.lsData.meta.dealer;
-
-                            self.ajaxGetFPXBankList();
-                            self.updateData();
-                        } else {
-                            elevate.redirectToPage('cart');
-                        }
+						self.productId = elevate.lsData.product.selected.productCode;
+						 
+						self.ajaxGetFPXBankList();
+						self.updateData();
+						
+						setTimeout(function(){
+							$('#main-vue').show();
+							toggleOverlay(false);
+						},500);
                     },
                     ajaxGetFPXBankList: function() {
                         var self = this;
@@ -738,8 +736,7 @@
                     },
                     getGender: function (){
                         var self = this;
-                        var genderDigit = self.eligibility.mykad.substring(11);
-                        //console.log(self.eligibility.mykad, genderDigit);
+                        var genderDigit = self.deliveryInfo.mykad.substring(11); 
                         if (genderDigit % 2 == 0) //even
                         {
                             return "FEMALE"; //female
@@ -751,8 +748,8 @@
                     },
                     getDOB: function (){
                         var self = this;
-                        var dateString = self.eligibility.mykad.substring(0, 6);
-                        console.log(self.eligibility.mykad, dateString);
+                        var dateString = self.deliveryInfo.mykad.substring(0, 6);
+                        console.log(self.deliveryInfo.mykad, dateString);
 
                         var year = dateString.substring(0, 2); //year
                         var month = dateString.substring(2, 4); //month
@@ -791,7 +788,7 @@
                             "product_bundle_id": self.productId,
                             "referral_code": self.deliveryInfo.referralCode,
                             "addon_name": "",
-                            "address_line": (self.deliveryInfo.addressMore)?self.deliveryInfo.addressMore+', '+self.deliveryInfo.address:self.deliveryInfo.address,
+                            "address_line": self.deliveryInfo.address,
                             "city": self.deliveryInfo.city,
                             "city_code": self.deliveryInfo.cityCode,
                             "postal_code": self.deliveryInfo.postcode,
@@ -884,7 +881,7 @@
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
-
+									//self.removePrequalifiedCustomer();
                                 }else{
                                     toggleOverlay(false);
                                     $('#error').html("Systm error, please try again.");
@@ -923,6 +920,36 @@
                             });
 
                     },
+					
+					removePrequalifiedCustomer: function () {
+						var self = this;
+						var params = {
+							id: self.deliveryInfo.id			
+						};
+						 
+						toggleOverlay();
+						$('#status_mesage').html('Remove data...');
+						
+						axios.post(apiEndpointURL_elevate + '/del-prequalified-customer', params)
+							.then((response) => {
+								var data = response.data;
+								if(data.status == 1){
+									 
+								}else{
+									toggleOverlay(false);
+									$('#error').html("System error, please try again.");
+									$('#status_mesage').html('');
+									console.log(data);
+								} 
+
+							})
+							.catch((error) => {
+								toggleOverlay(false);
+								console.log(error, response);
+							});
+
+					},
+					
                     selectBank: function(bank, event) {
                         var self = this;
                         $('.listing-quickSelectBanks .nav-item').removeClass('selected');

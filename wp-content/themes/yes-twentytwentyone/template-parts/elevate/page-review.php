@@ -29,7 +29,7 @@
                     <span>1. Eligibility check</span>
                 </li>
                 <li ui-sref="secondStep" class="completed">
-                    <span>2. ID verification</span>
+                    <span>2. MyKAD verification</span>
                 </li>
                 <li ui-sref="thirdStep" class="completed">
                     <span>3. Delivery details</span>
@@ -52,9 +52,7 @@
                     <div class="border-box">
                         <div class="row">
                             <div class="col-md-3 leftColor">
-                                <div class="p-3">
-                                <img src="https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11t.png?x41595" width="150"/>
-                                </div>
+                                <div class="p-3" v-if="orderSummary.product.selected"><img :src="getProductImage()" width="150"></div>
                             </div>
                             <div class="col-md-9 p-4">
                                 <div class="row mt-3">
@@ -160,9 +158,7 @@
                                     <input type="checkbox" id="consent" @click="watchAllowNext" name="consent" value="1">
                                 </div>
                                 <div class="col-11 text-12">
-                                    <label for="consent" style="line-height:20px;">I further give consent to YTLC to process my personal data in accordance with
-                                        the YTL Group Privacy Policy available at <a target="_blank"
-                                                                                     href="https://www.ytl.com/privacypolicy.asp">www.ytl.com/privacypolicy.asp</a>.
+                                    <label for="consent" style="line-height:20px;">I further give consent to YTLC to process my personal data in accordance with YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a> and also give consent to ORIX to process my personal data in accordance with ORIX Privacy Policy available at (<a href="https://www.orix.com.my/privacy-policy" target="_blank">https://www.orix.com.my/privacy-policy</a>) for the purposes of my agreement with ORIX.
                                     </label>
                                 </div>
                             </div>
@@ -316,6 +312,13 @@
                     $('.accordion-wrap').toggleClass("active");
                     $(".accordion-body").slideToggle();
                 },
+				getProductImage: function(){
+					var self = this;
+					var url = self.orderSummary.product.selected.imageURL.split(';');
+					console.log(url);
+					return url[0];
+					
+				},
                 watchAllowNext:function (){
                     var self = this;
                     if($('#subscribe').is(':checked')&& $('#consent').is(':checked')){

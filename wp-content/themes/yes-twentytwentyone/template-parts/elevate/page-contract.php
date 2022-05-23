@@ -137,7 +137,7 @@
                             <div class="col-md-6">
                                 <div>Customer Signature</div>
                                 <div style="height: 50px;"></div>
-                                <div><input type="text" @keyup="check_sign()" autocomplete="off"  v-model="contract_signed"  class="form-control user_sign text-uppercase" placeholder="Type your full name" id="fname"/></div>
+                                <div><input type="text" @keyup="check_sign()" autocomplete="off"  v-model="contract_signed"  class="form-control user_sign text-uppercase" placeholder="Type your full name as per NRIC" id="fname"/></div>
                                 <div></div>
                                 <div class="mt-4">
                                     <a class="btn-signup" :class="allowSubmit?'btn-signed':'btn-signup'" @click="sign_contract"><i class="icon icon-signup2"></i> <span v-if="allowSubmit">Signed</span><span v-else>Fill and Sign</span></a>
@@ -301,7 +301,7 @@
                         self.allowSubmit = false
                     }
 
-                    if(!self.contract_signed.toUpperCase()){
+                    if(!self.contract_signed.toUpperCase() || (self.contract_signed && self.contract_signed.toUpperCase()!= self.eligibility.name.toUpperCase())){
                          self.allowSubmit = false;
                     }
 

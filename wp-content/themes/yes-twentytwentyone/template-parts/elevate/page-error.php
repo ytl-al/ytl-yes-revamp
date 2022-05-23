@@ -31,7 +31,7 @@
                             <span>1. Eligibility check</span>
                         </li>
                         <li ui-sref="secondStep">
-                            <span>2. ID verification</span>
+                            <span>2. MyKAD verification</span>
                         </li>
                         <li ui-sref="thirdStep">
                             <span>3. Delivery details</span>
