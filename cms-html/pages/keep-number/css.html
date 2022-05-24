@@ -1,32 +1,28 @@
 <style type="text/css">
     #numbers-top-banner {
-        background-image: url('/wp-content/uploads/2021/12/numbers-banner-bg.jpg');
+        background-image: url('/wp-content/uploads/2022/04/numbers-top-banner-bg-scaled.jpg');
         background-size: cover;
         background-repeat: no-repeat;
-        padding-top: 50px;
+        background-color: #FF0084;
         overflow: hidden;
+        padding: 80px 0px;
     }
     
     #numbers-top-banner h1 {
-        font-size: 60px;
+        font-size: 48px;
+        line-height: 56px;
         font-weight: 800;
-        color: #F9F7F4;
+        color: #FFF;
+        text-align: center;
         margin-bottom: 20px;
-        margin-top: 20px;
     }
     
     #numbers-top-banner p {
-        font-size: 28px;
-        font-weight: 600;
-        line-height: 40px;
-        color: #F9F7F4;
-    }
-    
-    #number-section, #section-number {
-        background-image: url('/wp-content/uploads/2021/12/keepnumbers-bodybg-large.png');
-        background-size: cover;
-        background-position: top center;
-        background-repeat: no-repeat;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 24px;
+        color: #FFF;
+        text-align: center;
     }
     
     .switch-activation {
@@ -40,10 +36,10 @@
     }
     
     .switch-activation h1 {
-        font-size: 40px;
+        font-size: 33px;
         font-weight: 800;
         line-height: 40px;
-        color: #2B2B2B;
+        color: ##000000;
         text-align: center;
     }
     
@@ -61,10 +57,10 @@
     }
     
     .switch-activation h3 {
-        font-size: 24px;
+        font-size: 18px;
         font-weight: 800;
-        line-height: 30px;
-        color: #00B4F0;
+        line-height: 23px;
+        color: #1A1E47;
         margin-bottom: 12px;
         text-transform: uppercase;
         display: flex;
@@ -77,9 +73,9 @@
     }
     
     .switch-activation p {
-        font-size: 21px;
-        color: #2B2B2B;
-        line-height: 28px;
+        font-size: 16px;
+        color: #525252;
+        line-height: 24px;
         padding-bottom: 20px;
     }
     
@@ -88,11 +84,23 @@
         display: inline-block;
     }
     
+    .switch-activation .step-mob-visual {
+        padding: 0px 30px;
+    }
+    
+    .switch-activation .content {
+        padding: 0px 60px;
+    }
+    
+    .switch-activation-grey {
+        background-color: #F7F8F9;
+    }
+    
     #number-steps h1 {
-        font-size: 24px;
+        font-size: 18px;
         font-weight: 800;
-        line-height: 30px;
-        color: #00B4F0;
+        line-height: 23px;
+        color: #1A1E47;
         margin-bottom: 12px;
         text-transform: uppercase;
         display: flex;
@@ -105,29 +113,28 @@
     }
     
     #number-steps h2 {
-        color: #525252;
+        color: #000000;
         font-weight: 800;
-        font-size: 29px;
+        font-size: 23px;
         margin-bottom: 20px;
     }
     
     #number-steps p {
-        font-size: 21px;
-        color: #2B2B2B;
-        line-height: 28px;
+        font-size: 16px;
+        color: #525252;
+        line-height: 24px;
         padding-bottom: 20px;
     }
     
     #number-steps p a {
-        color: #ED028C;
-        text-decoration: underline;
-        font-weight: 700;
+        color: #2F3BF5;
+        text-decoration: none;
     }
     
     #number-steps .scroll-link {
         color: #525252;
-        font-size: 20px;
-        font-weight: 700;
+        font-size: 16px;
+        font-weight: 400;
         display: block;
     }
     
@@ -140,6 +147,7 @@
     @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
         #numbers-top-banner h1 {
             font-size: 44px;
+            line-height: 44px;
         }
         #numbers-top-banner p {
             font-size: 24px;
@@ -148,28 +156,19 @@
     }
     
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+        #numbers-top-banner {
+            background-position: top;
+            padding: 40px 0px;
+        }
         #numbers-top-banner h1 {
-            font-size: 23px;
+            font-size: 35px;
+            line-height: 35px;
             text-align: center;
-            margin-bottom: 5px;
         }
         #numbers-top-banner p {
-            font-size: 15px;
-            line-height: 20px;
             margin-bottom: 15px;
             text-align: center;
-            padding: 0px 14px;
-        }
-        #numbers-top-banner {
-            padding-top: 5px;
-        }
-        #numbers-top-banner .banner-visual {
-            text-align: center;
-        }
-        #numbers-top-banner .banner-visual img {
-            margin: 0 auto;
-            width: 60% !important;
-            display: inline-block !important;
+            font-size: 22px;
         }
     }
 </style>
