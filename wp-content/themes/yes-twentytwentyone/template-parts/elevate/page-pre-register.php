@@ -133,54 +133,54 @@
 
                 <div class="layer-selectPlan">
                     <div class="row flex-nowrap flex-xl-wrap gx-5">
-                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column bundle896" style="display:none">
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle896" >
                             <div class="layer-planDevice">
                                 <h2>Infinite+ Basic 99</h2>
                                 <h3>XIAOMI Redmi 10</h3>
-                                <p class="panel-deviceImg"><img src="https://site.yes.my/wp-content/uploads/2021/09/Xiaomi-Redmi-10.jpg" /></p>
-                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(8960)" data-productid="8960">Select</a></p>
+                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2021/09/Xiaomi-Redmi-10.jpg" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(896)" data-productid="896">Select</a></p>
                             </div>
                         </div>
-                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column bundle898" style="display:none">
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle898" >
                             <div class="layer-planDevice">
                                 <h2>Infinite+ Standard 128</h2>
                                 <h3>SAMSUNG A33</h3>
                                 <p class="panel-deviceImg"><img src="/wp-content/uploads/2022/04/samsung-a33.jpg" /></p>
-                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(8980)" data-productid="8980">Select</a></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(898)" data-productid="898">Select</a></p>
                             </div>
                         </div>
-                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column bundle900" style="display:none">
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle900" >
                             <div class="layer-planDevice">
                                 <h2>Infinite+ Premium 188</h2>
                                 <h3>SAMSUNG S22 Ultra</h3>
                                 <p class="panel-deviceImg"><img src="/wp-content/uploads/2022/04/samsung-s22-ultra-black.png" /></p>
-                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(9000)" data-productid="9000">Select</a></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(900)" data-productid="900">Select</a></p>
                             </div>
                         </div>
 
 
-                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column bundle892" style="display:none">
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle892" >
                             <div class="layer-planDevice">
                                 <h2>Infinite+ Standard 128</h2>
-                                <h3>SAMSUNG A33</h3>
-                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2022/04/samsung-a33.jpg" /></p>
-                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(8920)" data-productid="8920">Select</a></p>
+                                <h3>Xiaomi 11T</h3>
+                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2021/12/xiaomi_11t.png?x41595" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(892)" data-productid="892">Select</a></p>
                             </div>
                         </div>
-                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column bundle904" style="display:none">
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle904" >
                             <div class="layer-planDevice">
                                 <h2>Infinite+ Premium 188</h2>
-                                <h3>SAMSUNG S22 Ultra</h3>
-                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2022/04/samsung-s22-ultra-black.png" /></p>
-                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(9040)" data-productid="9040">Select</a></p>
+                                <h3>Xiaomi Redmi 10</h3>
+                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2021/09/Xiaomi-Redmi-10.jpg" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(904)" data-productid="904">Select</a></p>
                             </div>
                         </div>
-                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column bundle894" style="display:none">
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle894">
                             <div class="layer-planDevice">
                                 <h2>Infinite+ Basic 99</h2>
-                                <h3>XIAOMI Redmi 10</h3>
-                                <p class="panel-deviceImg"><img src="https://site.yes.my/wp-content/uploads/2021/09/Xiaomi-Redmi-10.jpg" /></p>
-                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(8940)" data-productid="8940">Select</a></p>
+                                <h3>Xiaomi 11T </h3>
+                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2021/12/xiaomi_11t.png?x41595" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(894)" data-productid="894">Select</a></p>
                             </div>
                         </div>
                     </div>
@@ -468,7 +468,7 @@
             methods: {
                 pageInit: function() {
 					var self = this;
-					
+					$('.productItem').hide();
 					setTimeout(function() {
 						self.getUserInfor();
 					}, 500);
@@ -492,7 +492,7 @@
 				ajaxGetPlanData: function() {
                     var self = this;
                     toggleOverlay(); 
-                    axios.get(apiEndpointURL_elevate + '/getProduct/?code=' + self.productId)
+                    axios.get(apiEndpointURL_elevate + '/getProductByCode/?code=' + self.productId)
                         .then((response) => {
                             var data = response.data;
                             if (data.internetData == '∞') {
