@@ -69,7 +69,8 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="plan-item p-3" data-planid="707">
-                                        <div class="subtitle">Kasi Up<br>Postpaid 49<br>(Contract)<span class="circle"><i class=""></i></span></div>
+										<div>Postpaid 49</div>
+                                        <div class="subtitle">RM49 for 100GB<span class="circle"><i class=""></i></span></div>
                                         <ul class="plan-list mt-3 mb-3">
                                             <li>100GB</li>
                                             <li>24 months Contract</li>
@@ -84,7 +85,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="plan-item p-3" data-planid="706">
-                                        <div class="subtitle">Kasi Up <br>Postpaid 49 <br>(No Contract)<span class="circle"><i class=" "></i></span></div>
+										<div>Postpaid 49(No Contract)</div>
+                                        <div class="subtitle">RM49 for 100GB<span class="circle"><i class=" "></i></span></div>
                                         <ul class="plan-list mt-3 mb-3">
                                             <li>100GB</li>
                                             <li>Kasi Up rewards</li>
@@ -96,28 +98,29 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="plan-item p-3" data-planid="759">
-                                        <div class="subtitle">Pakej YES <br>Peranti Keluarga<br> Malaysia<span class="circle"><i class=" "></i></span></div>
+                                    <div class="plan-item p-3" data-planid="708">
+									<div>Postpaid 15 Phone Bundle 12m</div>
+                                        <div class="subtitle">RM15 for 10GB<span class="circle"><i class=" "></i></span></div>
                                         <ul class="plan-list mt-3 mb-3">
-                                            <li>100GB</li>
-                                            <li>12 Months Contract</li>
+                                            <li>20GB</li>
+                                            <li>24 Months</li>
                                             <li>Kasi Up rewards</li>
                                             <li>Free YES phone</li>
                                             <li>4G paling power</li>
                                             <li>On-Net: Unlimited<br>
                                                 Off-Net: RM 0.09</li>
                                         </ul>
-                                        <div class="plan_price">RM49 for 100GB</div>
+                                        <div class="plan_price">RM15 for 10GB</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div id="tab-prepaid" class="mt-3 p-lg-5 tabcontent" style="display: none">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="plan-item p-3" data-planid="710">
-                                        <div class="subtitle">Kasi Up Prepaid 15</br>
-                                            (Add-On)<span class="circle"><i class=""></i></span></div>
+										<div>Prepaid 15</div>
+                                        <div class="subtitle">RM15 for 10GB<span class="circle"><i class=""></i></span></div>
                                         <ul class="plan-list mt-3 mb-3">
                                             <li>10GB</li>
                                             <li>Kasi Up rewards</li>
@@ -129,10 +132,11 @@
                                         <div class="plan_price">RM15 for 10GB</div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="plan-item p-3" data-planid="758">
-                                        <div class="subtitle">Pakej YES Remaja</br>
-                                            Keluarga Malaysia<span class="circle"><i class=""></i></span></div>
+                                <div class="col-md-6">
+                                    <div class="plan-item p-3" data-planid="767">
+									<div>Prepaid Unlimited</div>
+                                        <div class="subtitle">RM30 for Unlimited</br>
+                                            <span class="circle"><i class=""></i></span></div>
                                         <ul class="plan-list mt-3 mb-3">
                                             <li>20GB</li>
                                             <li>Kasi Up rewards</li>
@@ -141,24 +145,9 @@
                                             <li>4G paling power</li>
                                             <li>No hidden fees</li>
                                         </ul><br/>
-                                        <div class="plan_price">RM30 for 20GB</div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="plan-item p-3" data-planid="767">
-                                        <div class="subtitle">Kasi Up</br> Prepaid Unlimited <span class="circle"><i class=""></i></span></div>
-                                        <ul class="plan-list mt-3 mb-3">
-                                            <li>Unlimited GB
-                                                (7Mbps & 9GB Hotspot Data)</li>
-                                            <li>Kasi Up rewards</li>
-                                            <li>30 day validity</li>
-                                            <li>Lowest RM per GB</li>
-                                            <li>4G paling power</li>
-                                            <li>No hidden fees</li>
-                                        </ul>
                                         <div class="plan_price">RM30 for Unlimited</div>
                                     </div>
-                                </div>
+                                </div> 
                             </div>
                         </div>
                         <div class="p-lg-5 text-end">

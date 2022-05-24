@@ -1296,7 +1296,7 @@ class ElevateApi
         return $response;
     }
 	
-	public function delete_prequalified_customer(WP_REST_Request $request){
+	public static function delete_prequalified_customer(WP_REST_Request $request){
 				$id = $request['id'];
 				if($id){
 					$params = array(
