@@ -11,7 +11,7 @@ $apiSetting =  \Inc\Base\Model::getAPISettings();
     </div>
     <div class="nav-tab-wrapper">
         <a href="javascript:void(0)" class="nav-tab nav-tab-active">API Settings</a>
-        <a href="?page=elevate-pull" class="nav-tab">Pull Products</a>
+        <!--a href="?page=elevate-pull" class="nav-tab">Pull Products</a-->
     </div>
 
     <div class="wrapper-ytlpdAdmin">
@@ -23,8 +23,20 @@ $apiSetting =  \Inc\Base\Model::getAPISettings();
             <form action="" method="post">
                 <table>
                     <tr>
-                        <td><label>API URL</label></td>
+                        <td><label>Identity API URL</label></td>
+                        <td><input type="text" name="identity_url" class="form-control" value="<?= @$apiSetting['identity_url']; ?>" size="50"></td>
+                    </tr>
+					<tr>
+                        <td><label>WEB API URL</label></td>
                         <td><input type="text" name="url" class="form-control" value="<?= @$apiSetting['url']; ?>" size="50"></td>
+                    </tr>
+					<tr>
+                        <td><label>Mobile API URL</label></td>
+                        <td><input type="text" name="mobile_url" class="form-control" value="<?= @$apiSetting['mobile_url']; ?>" size="50"></td>
+                    </tr>
+					<tr>
+                        <td><label>eKYC URL</label></td>
+                        <td><input type="text" name="ekyc_url" class="form-control" value="<?= @$apiSetting['ekyc_url']; ?>" size="50"></td>
                     </tr>
                     <tr>
                         <td><label>Client Id</label></td>

@@ -15,8 +15,9 @@ class ElevateApi
 
     const  API_TIMEOUT = 120;
 
-    const  api_url = 'https://ydbp-api-dev.azurewebsites.net/';
-    const  auth_path_auth = 'connect/token';
+   // const  api_url = 'https://ydbp-api-dev.azurewebsites.net/';
+    
+	const  auth_path_auth = 'connect/token';
 
     const  api_customer_create = 'api/Elevate/customer';
     const  api_customer_get_by_guid = 'api/Elevate/customer';
@@ -39,16 +40,13 @@ class ElevateApi
     const  api_product_get_by_nric = 'api/Elevate/product/productId';
     const  api_product_bundle = 'api/Elevate/product/GetProductsByProductBundleId';
 
-    const api_caeligibility = 'api/Elevate/compAsia/Eligibility';
-    //const api_caeligibility = 'api/Elevate/compAsia/Eligibility';
-
-    const  mobile_api_url = 'https://mobileservicesiot.ytlcomms.my/';
+    const api_caeligibility = 'api/Elevate/compAsia/Eligibility'; 
+ 
     const  mobile_auth_path_auth = 'mobileyos/mobile/ws/v1/json/auth/getBasicAuth';
 
     const mobile_api_verify_eligbility = 'mobileyos/mobile/ws/v1/json/verifyEligibility';
 
-    const  ekyc_api_url = 'https://ekyc-dev-web.azurewebsites.net/';
-    const  ekyc_api_check = 'https://ydbp-api-dev.azurewebsites.net/api/EKYCProcessStatus/';
+    const  ekyc_api_check = 'api/EKYCProcessStatus/';
 
     const yos_order_token = '/wp-json/ywos/v1/get-auth-token';
     const yos_order_username = 'ytldd';
@@ -60,10 +58,9 @@ class ElevateApi
     public function __construct()
     {
         $apiSetting = \Inc\Base\Model::getAPISettings();
-        $this->api_url = $apiSetting['url'];
-        $this->apiSetting = $apiSetting;
+         
     }
-
+	 
 
     public static function register()
     {
@@ -170,10 +167,12 @@ class ElevateApi
 
     public static function do_test(WP_REST_Request $request)
     {
-      
+		 
         return self::elevate_customer_get_by_uid($request['uid']);
 
     }
+	
+	
 
     public static function getProduct(WP_REST_Request $request)
     {
@@ -192,7 +191,7 @@ class ElevateApi
             'productBundleId'=>$code
         );
         $token = self::get_token();
-
+		 
         $args = [
             'headers' => array(
                 'Accept' => 'text/plain',
@@ -202,11 +201,13 @@ class ElevateApi
             'body' => $params,
             'method' => 'GET'
         ];
-
-
-        $api_url = self::api_url . self::api_product_bundle;
-
+		$apiSetting = \Inc\Base\Model::getAPISettings();
+		
+        $api_url = $apiSetting['url'] . self::api_product_bundle;
+		 
         $request = wp_remote_get($api_url, $args);
+		
+		//print_r($request);die($api_url);
 
         $response = $request['response'];
         $res_code = $response['code'];
@@ -250,8 +251,9 @@ class ElevateApi
             'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
-
-        $api_url = self::mobile_api_url . self::mobile_api_verify_eligbility;
+		
+		$serverSetting = \Inc\Base\Model::getAPISettings();
+        $api_url = $serverSetting['mobile_url'] . self::mobile_api_verify_eligbility;
         $return['url'] = $api_url;
         $request = wp_remote_post($api_url, $args);
 		
@@ -314,9 +316,8 @@ class ElevateApi
             'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
-
-        //$api_url = self::api_url . self::api_ca_verification . '?MyKadNumber=' . $mykad . '&FullName=' . $name. '&email=' . $email. '&phone=' . $phone. '&front_url=' . $front_url. '&back_url=' . $back_url. '&selfievideo=' . $selfievideo. '&PartneReferenceID=' . $PartneReferenceID. '&OCRConfidenceScore=' . $OCRConfidenceScore;
-        $api_url = self::api_url . self::api_ca_verification;
+		$apiSetting = \Inc\Base\Model::getAPISettings();
+        $api_url = $apiSetting['url'] . self::api_ca_verification;
 		 
         $request = wp_remote_post($api_url, $args);
 		
@@ -375,8 +376,8 @@ class ElevateApi
             'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
-
-        $api_url = self::api_url . self::api_caeligibility;
+		$apiSetting = \Inc\Base\Model::getAPISettings();
+        $api_url = $apiSetting['url'] . self::api_caeligibility;
 
         $request = wp_remote_post($api_url, $args);
 
@@ -421,8 +422,8 @@ class ElevateApi
             'method' => 'GET',
             'timeout' => self::API_TIMEOUT
         ];
-
-        $api_url = self::api_url . self::api_customer_check_contract.'?customerNRIC='.$mykad;
+		$apiSetting = \Inc\Base\Model::getAPISettings();
+        $api_url = $apiSetting['url'] . self::api_customer_check_contract.'?customerNRIC='.$mykad;
 
         $request = wp_remote_get($api_url, $args);
 
@@ -464,8 +465,8 @@ class ElevateApi
             ),
             'body' => $params
         ];
-
-        $api_url = self::api_url . self::api_customer;
+		$apiSetting = \Inc\Base\Model::getAPISettings();
+        $api_url = $apiSetting['url'] . self::api_customer;
         $return['status'] = 1;
         $return['api_url'] = $api_url;
         $request = wp_remote_get($api_url, $args);
@@ -542,7 +543,8 @@ class ElevateApi
             'data_format' => 'body'
         ];
 		//echo json_encode($params);die();
-        $api_url = self::api_url . self::api_customer;
+		$apiSetting = \Inc\Base\Model::getAPISettings();
+        $api_url = $apiSetting['url'] . self::api_customer;
 
         $request = wp_remote_post($api_url, $args);
 		//echo '<pre>'; print_r(json_encode($params));die();
@@ -620,8 +622,8 @@ class ElevateApi
             'method' => 'PUT',
             'timeout' => self::API_TIMEOUT
         ];
-
-        $api_url = self::api_url . self::api_customer . '?id=' . $id;
+		$apiSetting = \Inc\Base\Model::getAPISettings();
+        $api_url = $apiSetting['url'] . self::api_customer . '?id=' . $id;
 
         $request = wp_remote_request($api_url, $args);
 		
@@ -663,8 +665,8 @@ class ElevateApi
             ),
             'body' => json_encode($params), 
         ];
-
-        $api_url = self::api_url . self::api_customer_get_by_guid . '/' . $uid;
+		$apiSetting = \Inc\Base\Model::getAPISettings();
+        $api_url = $apiSetting['url'] . self::api_customer_get_by_guid . '/' . $uid;
 
         $request = wp_remote_get($api_url, $args);
 		 
@@ -732,8 +734,8 @@ class ElevateApi
         ];
 
         
-
-        $api_url = self::api_url . self::api_contract;
+		$apiSetting = \Inc\Base\Model::getAPISettings();
+        $api_url = $apiSetting['url'] . self::api_contract;
 	 
         $request = wp_remote_post($api_url, $args);
         if (is_wp_error($request)) {
@@ -790,8 +792,8 @@ class ElevateApi
             'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
-
-        $api_url = self::api_url . self::api_order_create;
+		$apiSetting = \Inc\Base\Model::getAPISettings();
+        $api_url = $apiSetting['url'] . self::api_order_create;
 
         $request = wp_remote_post($api_url, $args);
 		
@@ -833,8 +835,8 @@ class ElevateApi
             'body' => json_encode($params),
             'timeout' => self::API_TIMEOUT 
         ];
-
-        $api_url = self::api_url . self::api_order_get_by_number.'?orderNumber='.$orderNumber ;
+		$apiSetting = \Inc\Base\Model::getAPISettings();
+        $api_url = $apiSetting['url'] . self::api_order_get_by_number.'?orderNumber='.$orderNumber ;
 
         $request = wp_remote_get($api_url, $args);
 		
@@ -891,8 +893,8 @@ class ElevateApi
             'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
-
-        $api_url = self::api_url . self::api_order_create.'?id='.$request['id'];
+		$apiSetting = \Inc\Base\Model::getAPISettings();
+        $api_url = $apiSetting['url'] . self::api_order_create.'?id='.$request['id'];
 
         $request = wp_remote_request($api_url, $args);
         if (is_wp_error($request)) {
@@ -950,8 +952,8 @@ class ElevateApi
             'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
-
-        $api_url = self::api_url . self::api_order_create.'?id='.$request['id'];
+		$apiSetting = \Inc\Base\Model::getAPISettings();
+        $api_url = $apiSetting['url'] . self::api_order_create.'?id='.$request['id'];
 
         $request = wp_remote_request($api_url, $args);
         if (is_wp_error($request)) {
@@ -1047,8 +1049,8 @@ class ElevateApi
 					'timeout' => self::API_TIMEOUT,
 					'data_format' => 'body'
 				];
-
-				$api_url = self::api_url . self::api_order_create.'?id='.$order['data']['id'];
+				$apiSetting = \Inc\Base\Model::getAPISettings();
+				$api_url = $apiSetting['url'] . self::api_order_create.'?id='.$order['data']['id'];
 
 				$request = wp_remote_request($api_url, $args);
 				if (is_wp_error($request)) {
@@ -1074,50 +1076,11 @@ class ElevateApi
         return $response;
 	}
 
-    public static function ekyc_init(WP_REST_Request $request)
-    {
-        $uid = $request['uid'];
-        $mykad = $request['mykad'];
-        $fname = $request['fname'];
-        $api_url = self::ekyc_api_url . '?uid=' . $uid . '&mykad=' . $mykad . '&fname=' . $fname;
-        $params = array();
-
-        $args = [
-            'headers' => array(
-                'Content-Type' => 'application/json'
-            ),
-            'body' => json_encode($params),
-            'method' => 'POST',
-            'timeout' => self::API_TIMEOUT,
-            'data_format' => 'body'
-        ];
-        $request = wp_remote_post($api_url, $args);
-
-
-        if (is_wp_error($request)) {
-            $return['status'] = 0;
-            $return['error'] = "Cannot connect to API server";
-        } else if ($request['response']['code'] != 200) {
-            $return['status'] = 0;
-            $return['error'] = @$request['response'];
-        } else {
-            $data = json_decode($request['body'], true);
-            $return['status'] = 1;
-            $return['data'] = $data;
-        }
-        //overwrite for test
-        $return['status'] = 1;
-
-        $response = new WP_REST_Response($return);
-        $response->set_status(200);
-        return $response;
-
-    }
-
     public static function ekyc_check(WP_REST_Request $request)
     {
         $uid = $request['uid'];
-        $api_url =  self::ekyc_api_check . $uid;
+		$apiSetting = \Inc\Base\Model::getAPISettings();
+        $api_url =  $apiSetting['url'].self::ekyc_api_check . $uid;
         $params = array();
 
         $token = self::get_token();
@@ -1168,8 +1131,8 @@ class ElevateApi
             'method' => 'GET'
         ];
 
-
-        $api_url = self::api_url . '/api/Elevate/Prequalifiedcustomer/'.$uid;
+		$apiSetting = \Inc\Base\Model::getAPISettings();
+        $api_url = $apiSetting['url'] . '/api/Elevate/Prequalifiedcustomer/'.$uid;
 
         $request = wp_remote_get($api_url, $args);
 
@@ -1316,8 +1279,8 @@ class ElevateApi
 						'timeout' => self::API_TIMEOUT,
 						'data_format' => 'body'
 					];
-
-					$api_url = self::api_url . self::api_prequalifiedcustomer;
+					$apiSetting = \Inc\Base\Model::getAPISettings();
+					$api_url = $apiSetting['url'] . self::api_prequalifiedcustomer;
 
 					$request = wp_remote_request($api_url, $args);
 					if (is_wp_error($request)) {
@@ -1390,12 +1353,11 @@ class ElevateApi
             'method' => 'POST',
             'timeout' => self::API_TIMEOUT
         ];
-
-
-        $api_url = $apiSetting['url'] . self::auth_path_auth;
+ 
+        $api_url = $apiSetting['identity_url'] . self::auth_path_auth;
 
         $request = wp_remote_post($api_url, $args);
-
+		 
         if (is_wp_error($request)) {
             $return = false;
         } else if ($request['response']['code'] != 200) {
@@ -1446,7 +1408,9 @@ class ElevateApi
             'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
-        $api_url = self::mobile_api_url . self::mobile_auth_path_auth;
+		
+		$serverSetting = \Inc\Base\Model::getAPISettings(); 
+        $api_url = $serverSetting['mobile_url'] . self::mobile_auth_path_auth;
 
         $request = wp_remote_post($api_url, $args);
 
@@ -1509,8 +1473,8 @@ class ElevateApi
             'method' => 'GET'
         ];
 
-
-        $api_url = self::api_url . self::api_product;
+		$apiSetting = \Inc\Base\Model::getAPISettings();
+        $api_url = $apiSetting['url'] . self::api_product;
 
         $request = wp_remote_get($api_url, $args);
 

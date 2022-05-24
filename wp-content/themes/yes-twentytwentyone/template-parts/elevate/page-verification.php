@@ -59,7 +59,7 @@
                             <div class="mt-5 mb-5">
                                 <div class="d-none d-md-block" id="qrcode"></div>
                                 <div class="text-center d-block d-md-none">
-                                    <a id="cmdVerify" href="#" target="_blank" class="btn btn-danger mt-3">Verify Now</a>
+                                    <a id="cmdVerify" target="_blank" class="btn btn-danger mt-3">Verify Now</a> 
                                 </div>
                             </div>
                             <h3 class="subtitle2">Complete the verification in 2 simple steps!</h3>
@@ -86,18 +86,21 @@
 
 </main>
 <?php require_once('includes/footer.php'); ?>
+<?php $apiSetting = \Inc\Base\Model::getAPISettings();?>
 <script type="text/javascript"
         src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/qrcodejs/qrcode.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
+ var windows = [];
+ $(document).ready(function () {
         var pageCart = new Vue({
             el: '#main-vue',
             data: {
-                ekyc_url: 'https://ekyc-web-dev.azurewebsites.net/',
+                ekyc_url: '<?php echo $apiSetting["ekyc_url"]?>',
                 totalAttempt:0,
-                maxAttempts:60,
+                maxAttempts:20,
                 interval: null,
                 qrcode: null,
+                verifyWindow: null,
                 eligibility: {
                     uid: '',
                     mykad: '',
@@ -190,6 +193,17 @@
                     self.interval = setInterval(function (){
                         self.eKYC_check();
                     },15000);
+					
+					$('#cmdVerify').click(function(){
+						var url = $('#cmdVerify').data('url');
+						windows.push(window.open(url, '_blank')); 
+					})
+					
+					$('#cmdVerifyClose').click(function(){ 
+						for(var i = 0; i < windows.length; i++){
+							windows[i].close()
+						}
+					})
 
                 },
                 eKYC_check: function () {
@@ -209,11 +223,18 @@
                                     if(data.data.processStatus == "EKYC_Done"){
                                         //success
                                         clearInterval(self.interval);
-
+										for(var i = 0; i < windows.length; i++){
+											windows[i].close()
+										}
                                         self.CAVerification(data.data);
 										//elevate.redirectToPage('personal');
-                                    }else{
+                                    }
+									
+									if(data.data.processStatus == "EKYC_Fail"){
                                         //failure
+										for(var i = 0; i < windows.length; i++){
+											windows[i].close()
+										}
                                         elevate.redirectToPage('/error/');
 
                                     }
@@ -272,7 +293,7 @@
                 makeCode: function (uid) {
                     var self = this;
                     var url_verification = self.ekyc_url + 'EKYC/?fullName=' + encodeURIComponent (self.eligibility.name) + '&nric=' + self.eligibility.mykad + '&guid=' + encodeURIComponent(uid);
-                    $('#cmdVerify').attr('href', url_verification);
+                    $('#cmdVerify').data('url', url_verification);
                     //self.qrcode.makeCode(url_verification);
 					const qrcode = new QRCode(document.getElementById('qrcode'), {
 					  text: url_verification,
@@ -283,8 +304,7 @@
 					  correctLevel : QRCode.CorrectLevel.H
 					});
                 }
-
             }
         });
-    });
+    }); 
 </script>

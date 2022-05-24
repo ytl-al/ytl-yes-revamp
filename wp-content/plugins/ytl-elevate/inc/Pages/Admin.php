@@ -47,7 +47,8 @@ class Admin extends BaseController
                 'capability' => 'manage_options',
                 'menu_slug' => 'elevate-setting',
                 'callback' =>  array($this, 'elevate_setting'),
-            ),
+            )
+			/*,
             array(
                 'parent_slug' => 'elevate-setting',
                 'page_title' => __('Products Pull', 'elevate'),
@@ -55,7 +56,7 @@ class Admin extends BaseController
                 'capability' => 'manage_options',
                 'menu_slug' =>  'elevate-pull',
                 'function' =>  array($this, 'elevate_pull')
-            )
+            )*/
         );
 		$this->settings->AddSubPage($this->subpages)->register();
 

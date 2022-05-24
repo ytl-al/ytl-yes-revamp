@@ -133,7 +133,7 @@
 
                 <div class="layer-selectPlan">
                     <div class="row flex-nowrap flex-xl-wrap gx-5">
-                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column bundle896" style="display:none">
                             <div class="layer-planDevice">
                                 <h2>Infinite+ Basic 99</h2>
                                 <h3>XIAOMI Redmi 10</h3>
@@ -141,7 +141,7 @@
                                 <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(8960)" data-productid="8960">Select</a></p>
                             </div>
                         </div>
-                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column bundle898" style="display:none">
                             <div class="layer-planDevice">
                                 <h2>Infinite+ Standard 128</h2>
                                 <h3>SAMSUNG A33</h3>
@@ -149,7 +149,7 @@
                                 <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(8980)" data-productid="8980">Select</a></p>
                             </div>
                         </div>
-                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column bundle900" style="display:none">
                             <div class="layer-planDevice">
                                 <h2>Infinite+ Premium 188</h2>
                                 <h3>SAMSUNG S22 Ultra</h3>
@@ -159,28 +159,28 @@
                         </div>
 
 
-                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column bundle892" style="display:none">
                             <div class="layer-planDevice">
                                 <h2>Infinite+ Standard 128</h2>
                                 <h3>SAMSUNG A33</h3>
                                 <p class="panel-deviceImg"><img src="/wp-content/uploads/2022/04/samsung-a33.jpg" /></p>
-                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(8980)" data-productid="8980">Select</a></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(8920)" data-productid="8920">Select</a></p>
                             </div>
                         </div>
-                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column bundle904" style="display:none">
                             <div class="layer-planDevice">
                                 <h2>Infinite+ Premium 188</h2>
                                 <h3>SAMSUNG S22 Ultra</h3>
                                 <p class="panel-deviceImg"><img src="/wp-content/uploads/2022/04/samsung-s22-ultra-black.png" /></p>
-                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(9000)" data-productid="9000">Select</a></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(9040)" data-productid="9040">Select</a></p>
                             </div>
                         </div>
-                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column bundle894" style="display:none">
                             <div class="layer-planDevice">
                                 <h2>Infinite+ Basic 99</h2>
                                 <h3>XIAOMI Redmi 10</h3>
                                 <p class="panel-deviceImg"><img src="https://site.yes.my/wp-content/uploads/2021/09/Xiaomi-Redmi-10.jpg" /></p>
-                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(8960)" data-productid="8960">Select</a></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(8940)" data-productid="8940">Select</a></p>
                             </div>
                         </div>
                     </div>
@@ -498,23 +498,29 @@
                             if (data.internetData == '∞') {
                                 data.internetData = 'Unlimited';
                             }
-
-                            self.orderSummary.product = data;
-
-
-                            self.updatePlan(); 
 							
-							if(self.orderSummary.product.selected.contractName){
-								self.contractTitle = self.orderSummary.product.selected.contractName;
+							if(data.selected.plan){
+
+								self.orderSummary.product = data;
+								
+
+								self.updatePlan(); 
+								
+								if(self.orderSummary.product.selected.contractName){
+									self.contractTitle = self.orderSummary.product.selected.contractName;
+								}else{
+									self.contractTitle = 'Elevate ' + self.orderSummary.product.selected.contract +' months';
+								}
+								
+								$('#main-vue').css({'height':'auto'});
+								$('#section-planDetails').show();
+
+								toggleOverlay(false);
+								self.jumpToSection('section-planDetails');
 							}else{
-								self.contractTitle = 'Elevate ' + self.orderSummary.product.selected.contract +' months';
+								toggleOverlay(false);
+								self.toggleModalAlert('Error', "Sorry, Your product does not existed.");
 							}
-							
-                            $('#main-vue').css({'height':'auto'});
-							$('#section-planDetails').show();
-
-                            toggleOverlay(false);
-							self.jumpToSection('section-planDetails');
 
                         })
                         .catch((error) => {
@@ -558,6 +564,7 @@
 				
 				getProductImage: function(){
 					var self = this;
+					if(!self.orderSummary.product.selected.imageURL) return;
 					var url = self.orderSummary.product.selected.imageURL.split(';');
 					console.log(url);
 					return url[0];
@@ -639,7 +646,7 @@
 									self.deliveryInfo.cityCode = self.deliveryInfo.city;
 									
 									self.deliveryInfo.phone = self.getPhone(self.deliveryInfo.mobile);
-									 
+									self.productOffered(); 
 									self.updateCityCode();
 								}else{
 									$('#cart-body').hide(); 
@@ -660,6 +667,29 @@
 					 }
 					  
 					 
+				},
+				
+				productOffered: function(){
+					var self = this;
+					if(self.deliveryInfo.productOffered){
+						var aryBundle = self.deliveryInfo.productOffered.split(',');
+						var found = false;
+						for(var i = 0; i< aryBundle.length; i++){
+							var tmp = '.bundle'+aryBundle[i].trim();							 
+							$(tmp).show();
+							if($(tmp)){
+								found = true;
+							}
+						}
+						
+						if(!found){
+							$('#cart-body').hide(); 
+							$('#page_error').show();
+						}
+					}else{
+						$('#cart-body').hide(); 
+						$('#page_error').show();
+					}
 				},
 				
 				getPhone: function(phone){
