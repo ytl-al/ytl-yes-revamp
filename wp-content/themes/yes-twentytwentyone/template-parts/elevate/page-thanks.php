@@ -31,9 +31,7 @@
                         <!--div class="mt-5">Order Number</div>
                         <div class="subtitle"><?php //echo $_GET['orderNumber']?></div>
                         <div class="text-12 mt-2">Placed on <?php echo date("l, jS F Y")?></div-->
-                        <div class="mt-5">A summary of your order has been sent to
-                            your email
-                        </div>
+                        <div class="mt-5">Thank you for your interest. We will get in touch with you by 6th June on your application.</div>
                     </div>
                 </div>
                 <div style="height: 300px" class="d-none d-md-block"></div>
