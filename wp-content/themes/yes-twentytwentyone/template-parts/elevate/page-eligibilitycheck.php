@@ -60,7 +60,7 @@
                     <div class="col-md-7 p-5">
                         <form class="needs-validation" novalidate>
                             <div class="mt-2 mb-2">
-                                <h2 class="subtitle">Eligibility Check</h2>
+                                <h2 class="subtitle">Preregistration Details</h2>
                                 <p class="sub mb-4">Please fill in your MyKad/MyTentera information, mobile<br> number and email
                                     to proceed</p>
 
@@ -75,7 +75,7 @@
                                                        id="cardtype" name="cardtype">
 													<option value="1">MyKad</option>
 													<option value="2" >MyTentera</option>
-												</select>	   
+												</select>
                                             </div>
                                             <div class="col-lg-8 col-7">
                                                 <input type="text" pattern="[0-9]+" minlength="12" maxlength="12" class="form-control text-uppercase"
@@ -86,7 +86,7 @@
                                                    required>
                                             </div>
                                         </div>
-                                            
+
 
                                         </div>
                                         <div class="invalid-feedback mt-1" id="em-mykad"></div>
@@ -150,7 +150,7 @@
                                     </div>
                                 </div>
 
-                                 
+
 								<div class="row mt-2 ">
 									<div class="col-1">
 										<input type="checkbox" id="subscribe" @click="watchAllowNext" name="subscribe" value="1">
@@ -171,7 +171,7 @@
 										<label for="consent" style="line-height:20px;">I further give consent to YTLC to process my personal data in accordance with YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a> and also give consent to ORIX to process my personal data in accordance with ORIX Privacy Policy available at (<a href="https://www.orix.com.my/privacy-policy" target="_blank">https://www.orix.com.my/privacy-policy</a>) for the purposes of my agreement with ORIX.
 										</label>
 									</div>
-								</div> 
+								</div>
 
                                 <div class="row mt-2 mb-5">
                                     <div class="col-md-6">
@@ -369,7 +369,7 @@
 								//$('#error').html("Sorry,"+ data.error);
 								$('#status_mesage').html('');
                                  elevate.redirectToPage('eligibility-failure');
-								
+
                             }
                         })
                         .catch((error) => {
@@ -604,8 +604,8 @@
                         $('#email').addClass('input_error');
 						error.push('Invalid email');
                     }
-					
-					if(!$('#subscribe').is(':checked') ||  !$('#consent').is(':checked')){ 
+
+					if(!$('#subscribe').is(':checked') ||  !$('#consent').is(':checked')){
                         isFilled = false
                     }
 
