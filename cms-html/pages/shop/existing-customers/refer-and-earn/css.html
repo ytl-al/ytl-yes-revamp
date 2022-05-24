@@ -1,25 +1,26 @@
 <style type="text/css">
     #refer-top-banner {
-        background-image: url("https://cdn.yes.my/site/wp-content/uploads/2022/02/refer-banner.jpg");
+        background-image: url("/wp-content/uploads/2022/03/referearn-banner-bg-new-scaled.jpg");
         background-size: cover;
         background-repeat: no-repeat;
-        padding-top: 50px;
+        padding: 90px 0px;
         overflow: hidden;
     }
     
     #refer-top-banner h1 {
         font-size: 60px;
-        line-height: 60px;
+        line-height: 65px;
         font-weight: 800;
-        color: #FFF;
+        color: #000;
         text-align: left;
+        margin-bottom: 20px;
     }
     
     #refer-top-banner p {
-        font-size: 24px;
+        font-size: 20px;
         font-weight: 600;
-        line-height: 28px;
-        color: #FFF;
+        line-height: 24px;
+        color: #000;
         margin-bottom: 20px;
     }
     /* How it Works Start */
@@ -32,10 +33,10 @@
     }
     
     #how-works h1 {
-        font-size: 40px;
+        font-size: 39px;
         font-weight: 800;
-        line-height: 40px;
-        color: #2B2B2B;
+        line-height: 47px;
+        color: #000;
         text-align: center;
     }
     
@@ -53,10 +54,10 @@
     }
     
     #how-works h3 {
-        font-size: 24px;
+        font-size: 23px;
         font-weight: 800;
-        line-height: 30px;
-        color: #00B4F0;
+        line-height: 28px;
+        color: #1A1E47;
         margin-bottom: 12px;
         text-transform: uppercase;
         display: flex;
@@ -69,14 +70,10 @@
     }
     
     #how-works p {
-        font-size: 21px;
+        font-size: 16px;
         color: #2B2B2B;
-        line-height: 28px;
+        line-height: 24px;
         padding-bottom: 20px;
-    }
-    
-    #how-works p span {
-        font-weight: 700;
     }
     
     #how-works .step-box {
@@ -98,16 +95,16 @@
     }
     
     #how-claim h1 {
-        font-size: 40px;
+        font-size: 33px;
         font-weight: 800;
         line-height: 40px;
-        color: #2B2B2B;
+        color: #000;
     }
     
     #how-claim p {
-        font-size: 21px;
-        color: #525252;
-        line-height: 28px;
+        font-size: 16px;
+        color: #2B2B2B;
+        line-height: 24px;
         padding-bottom: 20px;
     }
     
@@ -121,15 +118,14 @@
         align-items: center;
         justify-content: center;
         padding: 70px 0px;
-        padding-top: 0px;
-        background: linear-gradient(180deg, rgba(223, 244, 254, 0) 16.56%, #DFF4FE 167.9%);
+        background-color: #F7F8F9;
     }
     
     #get-rewarded h1 {
-        font-size: 40px;
+        font-size: 39px;
         font-weight: 800;
-        line-height: 40px;
-        color: #2B2B2B;
+        line-height: 47px;
+        color: #000;
         text-align: center
     }
     
@@ -141,40 +137,42 @@
     #get-rewarded .plan-table th {
         padding: 9px 30px;
         vertical-align: middle;
-        background-color: #F9F7F4;
-        border: 3px solid #00B4F0;
+        background-color: #FFF;
         border-radius: 8px;
+        border: none;
     }
     
     #get-rewarded .plan-table th.visual {
         border: none;
+        background-color: #F7F8F9;
     }
     
     #get-rewarded .plan-table th h1 {
-        color: #525252;
-        font-size: 20px;
-        line-height: 24px;
+        color: #000;
+        font-size: 18px;
+        line-height: 23px;
         font-weight: 800;
         text-align: center;
     }
     
     #get-rewarded .plan-table tr td {
-        padding: 20px;
+        padding: 30px 20px;
+        font-family: 'Montserrat', sans-serif;
         text-align: center;
-        background-color: #F9F7F4;
-        border: solid 1.2px #DEE5EF;
+        background-color: #FFF;
         border-radius: 8px;
-        color: #525252;
-        font-size: 29px;
+        color: #1A1E47;
+        font-size: 23px;
         font-weight: 800;
         vertical-align: middle;
     }
     
     #get-rewarded .plan-table tr td.blue-col {
-        background: linear-gradient(238.42deg, #00B4F0 0.12%, #ED028C 174.16%);
+        background-color: #1A1E47;
+        font-family: 'Montserrat', sans-serif;
         border-bottom: none;
         position: relative;
-        color: #F9F7F4;
+        color: #FFF;
         text-align: left;
         width: 25%;
     }
@@ -183,34 +181,46 @@
         position: absolute;
         right: 22px;
         top: 22px;
+        display: none;
     }
     /* IPAD Portrait */
     
-    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
+        #refer-top-banner {
+            background-position: -382px top;
+            padding: 31px 0px;
+        }
         #refer-top-banner h1 {
-            font-size: 44px;
+            font-size: 33px;
             line-height: 44px;
         }
         #refer-top-banner p {
-            font-size: 24px;
+            font-size: 21px;
             line-height: 35px;
+            margin-bottom: 0;
+        }
+    }
+    
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+        #refer-top-banner {
+            background-position: -171px top;
+            padding: 31px 0px;
         }
     }
     
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
         #refer-top-banner {
+            background-image: url("/wp-content/uploads/2022/03/referearn-banner-bg-mobile.jpg");
             background-position: top;
-            padding-top: 20px;
+            padding: 49px 0px;
         }
         #refer-top-banner h1 {
-            font-size: 35px;
-            line-height: 35px;
-            text-align: center;
+            font-size: 32px;
+            line-height: 38px;
         }
         #refer-top-banner p {
-            margin-bottom: 15px;
-            text-align: center;
-            font-size: 22px;
+            font-size: 17px;
+            margin-bottom: 0;
         }
         #get-rewarded .plan-table tr td {
             padding: 10px;
