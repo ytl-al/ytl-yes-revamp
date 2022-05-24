@@ -324,7 +324,7 @@
                                 self.orderSummary.orderInfo = data.data;
                                 elevate.lsData.orderInfo = data.data;
                                 elevate.updateElevateLSData();
-                                self.updateElevateOrder();
+                                //self.updateElevateOrder();
 
                                 self.submit_contract();
                             }else{
@@ -346,9 +346,7 @@
 
                     toggleOverlay();
                     var param = elevate.lsData.orderInfo;
-
-                    console.log('updateElevateOrder',param); return false;
-
+ 
                     axios.post(apiEndpointURL_elevate + '/order/update', param)
                         .then((response) => {
                             var data = response.data;
@@ -383,7 +381,8 @@
                                 elevate.lsData.contract = data.data;
                                 elevate.updateElevateLSData();
                                 toggleOverlay();
-                                elevate.redirectToPage('paynow');
+                                 elevate.redirectToPage('thanks');
+								//elevate.redirectToPage('paynow');
                             }else{
                                 toggleOverlay(false);
                                 $('#error').html("System error, please try again.");

@@ -230,8 +230,8 @@ class ElevateApi
     public static function getProductByCode(WP_REST_Request $request)
     {
         $code = $request['code'];
-
-        $product = \Inc\Base\Model::refinde(self::pullBundleProductByCode($code));
+		$product = self::pullBundleProductByCode($code);
+        $product = \Inc\Base\Model::refinde(array($product));
 
         $response = new WP_REST_Response($product);
         $response->set_status(200);
@@ -335,14 +335,12 @@ class ElevateApi
     public static function ca_verification(WP_REST_Request $request)
     {
 
-        $mykad = $request['mykad'];
+        /*$mykad = $request['mykad'];
         $name = $request['name'];
         $email = $request['email'];
         $phone = $request['phone'];
         $guid = $request['guid'];
-        /*$front_url = $request['front_url'];
-        $back_url = $request['back_url'];
-        $selfievideo = $request['selfievideo'];*/
+         
         $PartneReferenceID = $request['PartneReferenceID'];
         $OCRConfidenceScore = round($request['OCRConfidenceScore']/100,2);
 
@@ -397,8 +395,8 @@ class ElevateApi
                 $return['status'] = 0;
             }
             $return['data'] = $data;
-        }
-
+        }*/
+		$return['status'] = 1;
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
@@ -408,7 +406,7 @@ class ElevateApi
     {
 
 
-        $token = self::get_token();
+        /*$token = self::get_token();
 
 		$params = array(
             'myKadNumber' =>$request['mykad'],
@@ -448,8 +446,8 @@ class ElevateApi
                 $return['status'] = 0;
             }
             $return['data'] = $data;
-        }
-
+        }*/
+		$return['status'] = 1;
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
