@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="row gx-5" v-if="pageValid">
-                <div class="col-lg-4 col-12 order-lg-2">
+                <div class="col-lg-5 col-12 order-lg-2">
                     <?php include('section-order-summary.php'); ?>
                     <div class="summary-box mt-3" v-if="referralCode.applicable">
                         <div class="row">
@@ -50,9 +50,9 @@
                         </div>
                     </div>
                 </div>
-                <form class="col-lg-8 col-12 order-lg-1 mt-4 mt-lg-0" @submit="deliveryDetailsSubmit">
+                <form class="col-lg-7 col-12 order-lg-1 mt-4 mt-lg-0" @submit="deliveryDetailsSubmit">
                     <div class="row gx-5">
-                        <div class="col-lg-6">
+                        <div class="col-lg-7">
                             <div class="layer-delivery">
                                 <div class="d-none d-lg-block">
                                     <h1>Delivery Details</h1>
@@ -67,10 +67,34 @@
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-name"></div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group mb-4">
+                                            <label class="form-label" for="input-dob">* Date of Birth</label>
+                                            <div class="input-group date align-items-center">
+                                                <input type="text" class="form-control input-datepicker" id="input-dob" name="dob" v-model="deliveryInfo.dob" @input="watchAllowNext" placeholder="" :disabled="!allowDOB" required />
+                                                <!-- <span class="input-group-text" id="addon-wrapping">@</span> -->
+                                            </div>
+                                            <div class="invalid-feedback mt-1" id="em-dob"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group mb-4">
+                                            <label class="form-label" for="select-gender">* Gender</label>
+                                            <div class="input-group align-items-center">
+                                                <select class="form-select" id="select-gender" name="gender" data-live-search="true" v-model="deliveryInfo.gender" @change="watchAllowNext" :disabled="!allowGender" required>
+                                                    <option value="" selected="selected" disabled="disabled">Select Gender</option>
+                                                    <option value="MALE">Male</option>
+                                                    <option value="FEMALE">Female</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group mb-4">
                                     <label class="form-label" for="input-email">* Email address</label>
                                     <div class="input-group align-items-center">
-                                        <input type="email" class="form-control" id="input-email" name="email" v-model="deliveryInfo.email" @input="watchAllowNext" placeholder="jane.doe@gmail.com" required />
+                                        <input type="email" class="form-control" id="input-email" name="email" v-model="deliveryInfo.email" @input="watchAllowNext" placeholder="" required />
                                         <!-- <a href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="right" class="ms-2" title="Tooltip text here"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/info-icon.png" /></a> -->
                                         <p class="info">Email is required for receipt and order confirmation</p>
                                     </div>
@@ -142,7 +166,7 @@
                                     <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/info-red-icon.png" alt="" class="float-start me-3">
                                     <div class="ps-5">
                                         <h1>Address Accuracy</h1>
-                                        <p>Addresses that are entered incorrectly may delay your oder, so please double-check for errors. If you wish to enter specific dispatch instructions, please do so under Delivery Notes.</p>
+                                        <p>Address that are entered incorrectly may delay your order, so please double-check for errors.</p>
                                     </div>
                                 </div>
                             </div>
@@ -297,7 +321,7 @@
             el: '#main-vue',
             data: {
                 currentStep: 2,
-                pageValid: false, 
+                pageValid: false,
                 isBillingDifferent: false,
                 orderSummary: {
                     plan: {},
@@ -313,21 +337,6 @@
                 },
                 selectOptions: {
                     states: [{
-                            'stateCode': 'KUL',
-                            'value': 'WILAYAH PERSEKUTUAN-KUALA LUMPUR',
-                            'name': 'Wilayah Persekutuan Kuala Lumpur'
-                        },
-                        {
-                            'stateCode': 'PJY',
-                            'value': 'PUTRAJAYA',
-                            'name': 'Wilayah Persekutuan Putrajaya'
-                        },
-                        {
-                            'stateCode': 'LBN',
-                            'value': 'LABUAN',
-                            'name': 'Wilayah Persekutuan Labuan'
-                        },
-                        {
                             'stateCode': 'JHR',
                             'value': 'JOHOR',
                             'name': 'Johor'
@@ -391,52 +400,100 @@
                             'stateCode': 'TRG',
                             'value': 'TERENGGANU',
                             'name': 'Terengganu'
+                        },
+                        {
+                            'stateCode': 'KUL',
+                            'value': 'WILAYAH PERSEKUTUAN-KUALA LUMPUR',
+                            'name': 'Wilayah Persekutuan Kuala Lumpur'
+                        },
+                        {
+                            'stateCode': 'PJY',
+                            'value': 'PUTRAJAYA',
+                            'name': 'Wilayah Persekutuan Putrajaya'
+                        },
+                        {
+                            'stateCode': 'LBN',
+                            'value': 'LABUAN',
+                            'name': 'Wilayah Persekutuan Labuan'
                         }
                     ],
-                    cities: [] 
+                    cities: []
                 },
-                customerDetails: {}, 
+                customerDetails: {},
                 deliveryInfo: {
                     name: '',
+                    dob: '',
+                    gender: '', 
                     email: '',
                     emailConfirm: '',
                     address: '',
                     addressMore: '',
-                    addressLine: '', 
+                    addressLine: '',
                     postcode: '',
                     state: '',
-                    stateCode: '', 
+                    stateCode: '',
                     city: '',
                     cityCode: '',
                     country: '',
-                    deliveryNotes: '', 
+                    deliveryNotes: '',
                     sanitize: {
-                        address: '', 
+                        address: '',
                         addressMore: '',
                         addressLine: '',
-                        city: '', 
-                        country: '', 
+                        city: '',
+                        country: '',
                         state: ''
                     }
                 },
                 referralCode: {
-                    applicable: false, 
-                    code: '', 
-                    alert: false, 
+                    applicable: false,
+                    code: '',
+                    alert: false,
                     toUse: false,
-                    verified: false 
-                }, 
+                    verified: false
+                },
                 input: {
-                    name: { field: '#input-name', errorMessage: '#em-name' }, 
-                    email: { field: '#input-email', errorMessage: '#em-email' }, 
-                    emailConfirm: { field: '#input-emailConfirm', errorMessage: '#em-emailConfirm' }, 
-                    address: { field: '#input-address', errorMessage: '#em-address' }, 
-                    addressMore: { field: '#input-addressMore', errorMessage: '#em-addressMore' }, 
-                    postcode: { field: '#input-postcode', errorMessage: '#em-postcode' }, 
-                    state: { field: '#select-state', errorMessage: '#em-state' }, 
-                    city: { field: '#select-city', errorMessage: '#em-city' }, 
-                    deliveryNotes: { field: '#textarea-deliveryNotes', errorMessage: '#em-deliveryNotes' }, 
-                    referralCode: { field: '#input-referralCode', errorMessage: '#em-referralCode', successMessage: '#sm-referralCode' }
+                    name: {
+                        field: '#input-name',
+                        errorMessage: '#em-name'
+                    },
+                    email: {
+                        field: '#input-email',
+                        errorMessage: '#em-email'
+                    },
+                    emailConfirm: {
+                        field: '#input-emailConfirm',
+                        errorMessage: '#em-emailConfirm'
+                    },
+                    address: {
+                        field: '#input-address',
+                        errorMessage: '#em-address'
+                    },
+                    addressMore: {
+                        field: '#input-addressMore',
+                        errorMessage: '#em-addressMore'
+                    },
+                    postcode: {
+                        field: '#input-postcode',
+                        errorMessage: '#em-postcode'
+                    },
+                    state: {
+                        field: '#select-state',
+                        errorMessage: '#em-state'
+                    },
+                    city: {
+                        field: '#select-city',
+                        errorMessage: '#em-city'
+                    },
+                    deliveryNotes: {
+                        field: '#textarea-deliveryNotes',
+                        errorMessage: '#em-deliveryNotes'
+                    },
+                    referralCode: {
+                        field: '#input-referralCode',
+                        errorMessage: '#em-referralCode',
+                        successMessage: '#sm-referralCode'
+                    }
                 },
                 billingInfo: {
                     name: '',
@@ -449,7 +506,9 @@
                     city: '',
                 },
                 allowSelectCity: false,
-                allowSubmit: false
+                allowSubmit: false,
+                allowDOB: false, 
+                allowGender: false 
             },
             mounted: function() {},
             created: function() {
@@ -469,6 +528,21 @@
 
                         setTimeout(function() {
                             $('.form-select').selectpicker('refresh');
+                            // $('button.dropdown-toggle').on('focus', function() {
+                            //     $(this).click();
+                            // });
+                            $('.input-datepicker').datepicker({
+                                format: 'dd/mm/yyyy',
+                                autoclose: true,
+                                startDate: '01/01/1910',
+                                endDate: '0'
+                            }).on(
+                                "changeDate",
+                                function() {
+                                    self.deliveryInfo.dob = $('#input-dob').val();
+                                    self.watchAllowNext();
+                                }
+                            );
                         }, 100);
                     } else {
                         ywos.redirectToPage('cart');
@@ -485,7 +559,8 @@
                         self.watchChangeState();
                     } else if (customerDetails) {
                         Object.keys(customerDetails).map(function(key) {
-                            self.deliveryInfo[key] = customerDetails[key];
+                            deliveyInfoKey = (key == 'dateOfBirth') ? 'dob' : key;
+                            self.deliveryInfo[deliveyInfoKey] = customerDetails[key];
                         });
                         self.deliveryInfo.emailConfirm = '';
                         self.watchChangeState();
@@ -493,7 +568,10 @@
                     self.deliveryInfo.stateCode = (self.deliveryInfo.state) ? self.getStateCode(self.deliveryInfo.state) : '';
                     self.deliveryInfo.cityCode = self.deliveryInfo.city;
                     self.deliveryInfo.country = 'MALAYSIA';
-                    
+
+                    self.checkNRICDOB();
+                    self.checkNRICGender();
+
                     self.referralCode.applicable = (self.orderSummary.plan.referralApplicable) ? true : false;
 
                     if (ywos.lsData.meta.referralCode) {
@@ -508,6 +586,33 @@
                         }, 300);
                     }
                 },
+                checkNRICDOB: function() {
+                    var self = this;
+                    if (self.deliveryInfo.securityType == 'NRIC') {
+                        var nricNo = self.deliveryInfo.securityId;
+                        var nricYear = nricNo.substring(0, 2);
+                        var nricMonth = nricNo.substring(2, 4);
+                        var nricDay = nricNo.substring(4, 6);
+
+                        var dateYear = (nricYear > 20) ? '19' + nricYear : '20' + nricYear;
+                        var dob = nricDay + '/' + nricMonth + '/' + dateYear;
+                        self.deliveryInfo.dob = dob;
+                        self.allowDOB = false;
+                    } else {
+                        self.allowDOB = true;
+                    }
+                },
+                checkNRICGender: function () {
+                    var self = this;
+                    if (self.deliveryInfo.securityType == 'NRIC') {
+                        var nricNo = self.deliveryInfo.securityId;
+                        var lastFour = nricNo.slice(-4);
+                        self.deliveryInfo.gender = (lastFour % 2 == 0) ? 'FEMALE' : 'MALE';
+                        self.allowGender = false;
+                    } else {
+                        self.allowGender = true;
+                    }
+                }, 
                 getStateCode: function(stateVal) {
                     var self = this;
                     var objState = self.selectOptions.states.filter(state => state.value == stateVal);
@@ -516,7 +621,7 @@
                 ajaxGetCitiesByState: function(state = null) {
                     var self = this;
                     var stateCode = self.getStateCode(state);
-                    
+
                     toggleOverlay();
 
                     self.allowSelectCity = false;
@@ -538,7 +643,7 @@
                             })
                             self.selectOptions.cities = options;
                             self.allowSelectCity = true;
-                            
+
                             var objCity = self.selectOptions.cities.filter(city => city.value == self.deliveryInfo.city);
                             if (objCity.length == 0) {
                                 self.deliveryInfo.city = '';
@@ -567,7 +672,9 @@
                         var emEmailConfirm = self.input.emailConfirm.errorMessage;
                         $(emEmailConfirm).html('Confirm email address must be same as Email address.').show();
                         $(inputEmailConfirm).focus();
-                        $(inputEmailConfirm).on('keydown', function() { $(emEmailConfirm).hide().html(''); });
+                        $(inputEmailConfirm).on('keydown', function() {
+                            $(emEmailConfirm).hide().html('');
+                        });
 
                         return false;
                     }
@@ -586,7 +693,7 @@
                         return false;
                     }
                     return true;
-                }, 
+                },
                 validateReferralCodeField: function(errorMsg = '') {
                     var self = this;
                     var inputReferralCode = self.input.referralCode.field;
@@ -595,14 +702,16 @@
                     $(smReferralCode).html('').hide();
                     $(emReferralCode).html(errorMsg).show();
                     $(inputReferralCode).focus();
-                    $(inputReferralCode).on('keydown', function() { $(emReferralCode).hide().html(''); });
-                }, 
+                    $(inputReferralCode).on('keydown', function() {
+                        $(emReferralCode).hide().html('');
+                    });
+                },
                 ajaxVerifyReferralCode: function() {
                     var self = this;
                     $(self.input.referralCode.errorMessage).hide().html('');
 
                     var params = {
-                        'referral_code': self.referralCode.code, 
+                        'referral_code': self.referralCode.code,
                         'security_type': self.deliveryInfo.securityType,
                         'security_id': self.deliveryInfo.securityId
                     };
@@ -621,7 +730,7 @@
                             var data = response.data;
                             var errorMsg = '';
                             if (error.response.status == 500 || error.response.status == 503) {
-                                errorMsg = "<p>There's an error in verifying the referral code.</p>";
+                                errorMsg = "<p>Eligibility Check. There's an error in validating customer eligibilities.</p>";
                             } else {
                                 errorMsg = data.message
                             }
@@ -647,7 +756,7 @@
                     } else {
                         self.ajaxVerifyReferralCode();
                     }
-                }, 
+                },
                 alertReferral: function(useReferral = true) {
                     var self = this;
                     $('#modal-referralAlert, #modal-referralEmptyAlert').modal('hide');
@@ -665,13 +774,13 @@
                     var self = this;
                     self.deliveryInfo.sanitize = {
                         address: self.deliveryInfo.address.toCamelCase(),
-                        addressMore: self.deliveryInfo.addressMore.toCamelCase(), 
+                        addressMore: self.deliveryInfo.addressMore.toCamelCase(),
                         addressLine: (self.deliveryInfo.addressMore) ? self.deliveryInfo.address + '<br />' + self.deliveryInfo.addressMore : self.deliveryInfo.address,
-                        state: self.deliveryInfo.state.replace('-', ' ').toCamelCase(), 
-                        city: self.deliveryInfo.city.toCamelCase(), 
+                        state: self.deliveryInfo.state.replace('-', ' ').toCamelCase(),
+                        city: self.deliveryInfo.city.toCamelCase(),
                         country: self.deliveryInfo.country.toCamelCase()
                     };
-                }, 
+                },
                 redirectVerified: function() {
                     var self = this;
 
@@ -692,21 +801,22 @@
 
                     var self = this;
                     var params = {
-                        'phone_number': self.deliveryInfo.msisdn, 
+                        'phone_number': self.deliveryInfo.msisdn,
                         'customer_name': self.deliveryInfo.name,
-                        'email': self.deliveryInfo.email, 
-                        'security_type': self.deliveryInfo.securityType, 
-                        'security_id': self.deliveryInfo.securityId, 
-                        'address_line': self.deliveryInfo.address + ' ' + self.deliveryInfo.addressMore, 
-                        'state': self.deliveryInfo.state, 
+                        'dob': self.deliveryInfo.dob, 
+                        'email': self.deliveryInfo.email,
+                        'security_type': self.deliveryInfo.securityType,
+                        'security_id': self.deliveryInfo.securityId,
+                        'address_line': self.deliveryInfo.address + ' ' + self.deliveryInfo.addressMore,
+                        'state': self.deliveryInfo.state,
                         'state_code': self.getStateCode(self.deliveryInfo.state),
-                        'city': self.deliveryInfo.city, 
-                        'city_code': self.deliveryInfo.city, 
-                        'postal_code': self.deliveryInfo.postcode, 
-                        'country': self.deliveryInfo.country, 
-                        'plan_bundle_id': self.orderSummary.plan.mobilePlanId, 
-                        'plan_type': self.orderSummary.plan.planType, 
-                        'plan_name': self.orderSummary.plan.planName 
+                        'city': self.deliveryInfo.city,
+                        'city_code': self.deliveryInfo.city,
+                        'postal_code': self.deliveryInfo.postcode,
+                        'country': self.deliveryInfo.country,
+                        'plan_bundle_id': self.orderSummary.plan.mobilePlanId,
+                        'plan_type': self.orderSummary.plan.planType,
+                        'plan_name': self.orderSummary.plan.planName
                     };
                     axios.post(apiEndpointURL + '/validate-customer-eligibilities', params)
                         .then((response) => {
@@ -726,13 +836,12 @@
                             $('#modal-errorEligibilityCheck .panel-errMsg').html(errorMsg);
                             $('#modal-errorEligibilityCheck').modal('show');
                         })
-                        .finally(() => {
-                        });
-                }, 
+                        .finally(() => {});
+                },
                 checkCustomerEligibility: function() {
                     var self = this;
                     self.ajaxValidateCustomerEligibility();
-                }, 
+                },
                 deliveryDetailsSubmit: function(e) {
                     var self = this;
                     var validSubmit = true;
@@ -763,6 +872,8 @@
                     
                     if (
                         self.deliveryInfo.name.trim() == '' ||
+                        self.deliveryInfo.dob.trim() == '' ||
+                        self.deliveryInfo.gender.trim() == '' ||
                         self.deliveryInfo.email.trim() == '' ||
                         self.deliveryInfo.emailConfirm.trim() == '' ||
                         self.deliveryInfo.address.trim() == '' ||

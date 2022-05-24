@@ -752,6 +752,8 @@ ul.wizard li.completed::after {
     text-decoration: underline;
 }
 
+.footer.footer-noMenu .copyright p, .footer.footer-noMenu .copyright p a { color: #FFF; }
+
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
     ul.wizard span {
         font-size: 11px;
@@ -796,6 +798,8 @@ ul.wizard li.completed::after {
 .form-select.bootstrap-select .bs-searchbox .form-control {
     padding: 4px 8px !important;
 }
+
+.form-control::placeholder { color: #AAA; }
 
 label.form-label, label.form-check-label { cursor: pointer; }
 

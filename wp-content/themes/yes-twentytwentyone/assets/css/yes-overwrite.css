@@ -1,0 +1,927 @@
+/* 
+    Stylesheet Name : Yes TwentyTwentyOne - New Branding Overwrite
+    Created on      : March     09, 2022, 11:14:12 AM
+    Last edited on  : March     09, 2022, 08:24:23 PM
+    Author          : [YTL Digital Design] - Zeeshan, AL
+*/
+
+
+/* Styling by Zeeshan Start */
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    background-color: #FFF;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: -0.02em;
+}
+
+.navbar-brand {
+    display: inline-block;
+    padding-top: 10px;
+    margin: 0;
+}
+
+.logo-top {
+    width: 35px;
+}
+
+.top-tabs-container {
+    background-color: #1A1E47;
+}
+
+.top-tabs-container .tabnav li {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.top-tabs-container .tabnav li a {
+    color: #FFF;
+    padding: 17px 13px;
+    background-color: transparent;
+}
+
+.top-tabs-container .tabnav li a.active {
+    background-color: transparent;
+    font-weight: 700;
+}
+
+.top-tabs-container .language-drop .dropdown-toggle {
+    background-color: transparent;
+    color: #FFF;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.top-tabs-container .language-drop svg {
+    margin-right: 5px;
+}
+
+.top-tabs-container .language-drop .dropdown-item {
+    font-size: 12px;
+}
+
+.nav-container {
+    background-color: #FFF;
+}
+
+.nav-container .nav-link {
+    color: #1A1E47;
+}
+
+.navbar-toggler-icon {
+    background-image: url(../images/menu-line.svg);
+}
+
+.nav-container .pink-btn {
+    background-color: #FF0084 !important;
+}
+
+.mega-dropdown-menu>li>ul>li.dropdown-header {
+    color: #1A1E47;
+    font-size: 14px;
+}
+
+.mega-dropdown-menu>li>ul>li>a {
+    color: #2B2B2B;
+    font-size: 14px;
+}
+
+.mega-dropdown-menu {
+    box-shadow: 0px 3px 4px rgb(0 0 0 / 25%);
+}
+
+.navbar-toggler-icon {
+    background-image: url(../images/menu-line-new.svg);
+}
+
+#slider-yes-home .slider-content h1 {
+    font-size: 48px;
+    line-height: 56px;
+    font-weight: 800;
+    color: #000;
+}
+
+#slider-yes-home .slider-content h1 span {
+    font-weight: 800;
+}
+
+#slider-yes-home .slider-content h1.white {
+    color: #FFF;
+}
+
+#slider-yes-home .slider-content p {
+    color: #000;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+#slider-yes-home .slider-content p span {
+    font-weight: 700;
+}
+
+#slider-yes-home .slider-content p.small {
+    font-size: 16px;
+}
+
+#slider-yes-home .slider-content p.white {
+    color: #FFF;
+}
+
+#slider-yes-home .slider-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    left: 0;
+    top: 0;
+}
+
+#popular-deals h1 {
+    font-size: 39px;
+    line-height: 47px;
+}
+
+#popular-deals .deal-box {
+    background-color: #FFF;
+    box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    border: none;
+}
+
+#popular-deals .deal-box h2 {
+    background-color: #F7F8F9;
+    color: #000;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 23px;
+}
+
+.pink-btn {
+    background-color: #FF0084;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0.7rem 2.3rem;
+}
+
+.blue-btn {
+    background-color: #2F3BF5;
+    font-family: 'Montserrat', sans-serif;
+    display: inline-block;
+    border-radius: 90px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0.7rem 2.3rem;
+    font-size: 16px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFF;
+    border: none;
+}
+
+.blue-btn:hover {
+    color: #FFF;
+    background-color: #515BFF;
+}
+
+.btn-small {
+    font-size: 12px;
+}
+
+#popular-deals .deal-box .content p.pricing {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 23px;
+    letter-spacing: -0.02em;
+    color: #000;
+    margin: 28px 0px;
+}
+
+#popular-deals .deal-box .content p {
+    line-height: 24px;
+    color: #2B2B2B;
+}
+
+#popular-deals p.small {
+    font-size: 12px !important;
+    color: #525252 !important;
+}
+
+#popular-deals .deal-box .content h3 {
+    font-weight: 800;
+    font-size: 23px;
+    color: #000;
+}
+
+.blue-arrow-link {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #2F3BF5;
+    text-align: center;
+}
+
+.blue-arrow-link svg {
+    margin-left: 5px;
+    font-size: 20px;
+}
+
+.blue-arrow-link:hover {
+    text-decoration: underline;
+    color: #2F3BF5;
+}
+
+#quick-action .whitebox {
+    background-color: #FFF;
+    filter: drop-shadow(0px 2px 12px 3px rgba(0, 0, 0, 0.1));
+    border-radius: 10px;
+}
+
+#quick-action .action-links {
+    background-color: #FFF;
+    border-radius: 10px;
+}
+
+#quick-action .whitebox h1 {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 56px;
+}
+
+#amazing-things {
+    background-image: none;
+}
+
+#faq-section .accordion-button {
+    background-color: #FFF;
+    border: none;
+    box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    color: #2B2B2B;
+    font-weight: 700;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#faq-section .accordion-button:focus {
+    box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
+}
+
+#faq-section .accordion-body {
+    font-size: 15px;
+    background-color: #FFF;
+}
+
+#faq-section .viewall-btn {
+    color: #2F3BF5;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#faq-section .accordion-item {
+    margin-bottom: 25px;
+}
+
+#faq-section .accordion-button::after {
+    opacity: 0.5;
+}
+
+#wpcf7-f630-o1,
+#wpcf7-f816-o1,
+#wpcf7-f820-o1 {
+    background: none;
+    background-color: #F7F8F9;
+}
+
+#newsletter h1 {
+    font-size: 23px;
+    line-height: 28px;
+    color: #000;
+}
+
+#newsletter p {
+    color: #2B2B2B;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+#newsletter input[type=email] {
+    font-size: 16px;
+    color: #2B2B2B;
+}
+
+#newsletter label {
+    font-size: 10px;
+    color: #2B2B2B;
+}
+
+#newsletter .white-btn {
+    background-color: #2F3BF5;
+    color: #FFF;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#newsletter .white-btn:hover {
+    background-color: #434EF5;
+}
+
+#newsletter .wpcf7-list-item input {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.layer-breadcrumb {
+    background-color: #F7F8F9;
+}
+
+.breadcrumb-section .breadcrumb .breadcrumb-item a {
+    color: #2B2B2B;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.breadcrumb-section .breadcrumb .breadcrumb-item {
+    color: #2B2B2B;
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.breadcrumb-section .breadcrumb-item+.breadcrumb-item::before {
+    color: #2B2B2B;
+}
+
+#easy-steps .viewall-btn {
+    margin-bottom: 0px;
+}
+
+#easy-steps h1 {
+    font-size: 39px;
+    line-height: 47px;
+    color: #000;
+}
+
+#easy-steps h2 {
+    font-size: 24px;
+    line-height: 27px;
+    font-weight: 600;
+    color: #2B2B2B;
+}
+
+#easy-steps h2 span {
+    font-weight: 800;
+}
+
+#easy-steps .viewall-btn {
+    font-family: 'Montserrat', sans-serif;
+    color: #2F3BF5;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+#easy-steps h3 {
+    color: #1A1E47;
+}
+
+#easy-steps p {
+    color: #525252;
+    font-size: 16px;
+}
+
+#easy-steps .step-mob-visual {
+    padding: 0px 30px;
+}
+
+#databck-rewards {
+    background-image: none;
+    background-color: #FFF;
+}
+
+#databck-rewards h1 {
+    color: #000;
+    font-size: 39px;
+    line-height: 47px;
+    font-weight: 800;
+}
+
+#databck-rewards .viewall-btn {
+    font-family: 'Montserrat', sans-serif;
+    color: #2F3BF5;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 18px;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#databck-rewards .viewall-btn svg {
+    margin-left: 5px;
+    font-size: 20px;
+}
+
+#databck-rewards .viewall-btn:hover {
+    text-decoration: underline;
+}
+
+#databck-rewards p.small {
+    font-size: 12px;
+}
+
+#databck-rewards h2 {
+    color: #000;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 23px;
+}
+
+#databck-rewards p {
+    color: #525252;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+#databck-rewards p span {
+    font-weight: 700;
+}
+
+#switch-yes {
+    background: linear-gradient(275.75deg, #2F3BF5 -0.54%, #FF0084 104.67%);
+}
+
+#switch-yes h1 {
+    color: #F9F7F4;
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 56px;
+}
+
+#switch-yes p.subtitle {
+    font-size: 20px;
+    font-weight: 400;
+    color: #FFF;
+    text-align: center;
+}
+
+#switch-yes .viewall-btn {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.plan-table .rounded-top {
+    border-top-left-radius: 10px!important;
+    border-top-right-radius: 10px!important;
+}
+
+.plan-table .rounded-bottom {
+    border-bottom-left-radius: 10px!important;
+    border-bottom-right-radius: 10px!important;
+}
+
+#switch-yes h3 {
+    font-size: 18px;
+    line-height: 23px;
+    font-weight: 800;
+}
+
+#switch-yes p {
+    font-size: 12px;
+    line-height: 21px;
+    font-weight: 400;
+}
+
+
+/* Styling by Zeeshan End */
+
+
+/* Footer styling Start */
+
+.footer {
+    width: 100%;
+    display: block;
+    background-color: #1A1E47;
+    padding-top: 30px;
+}
+
+.footer .footer-logo {
+    width: 65px;
+}
+
+.footer .icon-list {
+    width: 100%;
+    display: block;
+}
+
+.footer .icon-list .store-icon {
+    width: 75px;
+    height: 31px;
+}
+
+.footer .icon-list li {
+    list-style: none;
+    float: left;
+    margin-right: 10px;
+}
+
+.footer .icon-list li a svg {
+    width: 20px;
+}
+
+.footer .icon-list.icon-appdownload {
+    max-width: 130px;
+}
+
+.footer .icon-list.icon-appdownload li {
+    margin: 0;
+}
+
+.footer .menulist {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.footer .menulist li {
+    list-style: none;
+    float: none;
+    font-size: 12px;
+    color: #FFF;
+}
+
+.footer .menulist li a {
+    color: #FFF;
+    line-height: 35px;
+}
+
+footer.footer .wp-block-columns .widget.widget_nav_menu ul.menu li a {
+    line-height: 35px;
+}
+
+.footer .icon-list.icon-appdownload li a svg {
+    color: #FFF !important;
+}
+
+.footer .menulist li a:hover {
+    text-decoration: underline;
+}
+
+.footer .menulist li.heading {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.footer p {
+    font-size: 12px;
+    font-weight: 700;
+    color: #FFF;
+}
+
+.footer .copyright {
+    width: 100%;
+    display: block;
+    margin-top: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: linear-gradient(80.9deg, #FF0084 16.48%, #6F29D2 85.6%, #2F3BF5 96.9%);
+    border-top: none !important;
+}
+
+.footer .copyright p {
+    font-size: 12px;
+    color: #FFF;
+    font-weight: 400;
+}
+
+.footer .ctm-logo {
+    position: absolute;
+    right: 10px;
+    bottom: 0;
+}
+
+
+/* Footer styling End */
+
+
+/* FAQ Start */
+
+.betterdocs-searchform .search-submit {
+    background-color: #FF0084 !important;
+    border-radius: 90px !important;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+}
+
+.betterdocs-sidebar-content.betterdocs-category-sidebar .docs-single-cat-wrap .docs-cat-title-wrap.active-title {
+    border-color: #191e47 !important;
+}
+
+.betterdocs-sidebar-content .betterdocs-categories-wrap li a.active {
+    color: #ff0084 !important;
+}
+
+.betterdocs-sidebar-content.betterdocs-category-sidebar .docs-cat-title-inner .docs-cat-heading {
+    color: #000000 !important;
+}
+
+.betterdocs-sidebar-content.betterdocs-category-sidebar .betterdocs-categories-wrap li a {
+    color: #000000 !important;
+}
+
+.betterdocs-breadcrumb-item.current span {
+    font-size: 14px !important;
+    color: #ff0084 !important;
+}
+
+.betterdocs-breadcrumb .betterdocs-breadcrumb-item a {
+    font-size: 14px !important;
+    color: #000000 !important;
+}
+
+.docs-single-title .betterdocs-entry-title {
+    font-size: 25px !important;
+    color: #000000 !important;
+}
+
+.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content-heading,
+#accordion-faqShortcode .accordion-body h1 {
+    font-size: 19px !important;
+}
+
+.betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content-heading {
+    margin-top: 38px;
+}
+
+.betterdocs-content {
+    font-size: 14px !important;
+}
+
+.betterdocs-content a {
+    color: #1A1E47 !important;
+}
+
+.betterdocs-toc>.toc-title {
+    color: #000000 !important;
+    font-size: 16px !important;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 15px;
+}
+
+.betterdocs-toc>.toc-list a {
+    color: #000000 !important;
+    font-size: 14px !important;
+}
+
+h1.betterdocs-entry-title {
+    font-size: 19px !important;
+    margin-bottom: 20px;
+}
+
+
+/* FAQ End */
+
+
+/* YWOS Start */
+
+#cart-body .container {
+    border: none !important;
+}
+
+#cart-body .packagebox {
+    border: 1px solid #C4C4C4 !important;
+}
+
+#cart-body .packagebox h3 {
+    color: #FF0084 !important;
+}
+
+#cart-body .packagebox p {
+    font-size: 16px !important;
+    color: #2B2B2B !important;
+    font-weight: 400 !important;
+}
+
+#cart-body .packagebox .package-info {
+    border-top: solid 1px #C4C4C4 !important;
+}
+
+.span-checkList:before {
+    background-image: url(/site/wp-content/uploads/2022/05/tickoutline-new.png) !important;
+}
+
+#cart-body .packagebox h3.price {
+    font-size: 33px !important;
+    color: #000 !important;
+}
+
+#grey-innerbanner {
+    background-color: #F7F8F9 !important;
+}
+
+#grey-innerbanner h1 {
+    font-size: 39px !important;
+}
+
+#cart-body p {
+    font-size: 16px !important;
+    color: #000000;
+    font-weight: 400 !important;
+}
+
+#cart-body p a {
+    color: #2F3BF5 !important;
+    text-decoration: none !important;
+}
+
+#cart-body .addons-container h1 {
+    font-size: 23px !important;
+    color: #000 !important;
+}
+
+#cart-body .addons-container .addon-box h1 {
+    color: #000 !important;
+    font-size: 18px !important;
+}
+
+#cart-body h1 {
+    font-size: 18px !important;
+}
+
+.summary-box h2,
+#cart-body .summary-box h2 {
+    margin: 0 !important;
+    border-bottom: none !important;
+}
+
+.summary-box h3 {
+    font-size: 23px !important;
+    color: #000 !important;
+}
+
+.summary-box .monthly {
+    border-bottom: solid 1px #F5F5F5 !important;
+    border-top: solid 1px #F5F5F5 !important;
+    padding: 5px 0px;
+}
+
+#cart-body .packagebox .visualbg {
+    background: #191e47 !important;
+    padding: 15px 0px !important;
+}
+
+.white-btn2 {
+    border-color: #FF0084 !important;
+    color: #FF0084 !important;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+}
+
+.white-btn2:hover {
+    color: #FFF !important;
+}
+
+#login-modal .nav-pills .nav-link.active {
+    background-color: #1A1E47 !important;
+}
+
+#login-modal h1 {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+#login-modal p.bold {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+}
+
+.white-top h1 {
+    font-size: 23px !important;
+    color: #000 !important;
+    font-weight: 900 !important;
+}
+
+ul.wizard li.completed+li::after {
+    background: #1A1E47 !important;
+}
+
+ul.wizard li.completed span {
+    color: #000 !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+}
+
+ul.wizard li::before {
+    border: solid 1px #1A1E47 !important;
+}
+
+ul.wizard li.completed~li::after {
+    background-color: #1A1E47 !important;
+}
+
+ul.wizard span {
+    color: #000 !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+}
+
+ul.wizard li.completed::before {
+    background: #1A1E47 !important;
+}
+
+#cart-body form h1 {
+    font-size: 28px !important;
+}
+
+#cart-body h2 {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+}
+
+#cart-body .address-accuracy h1 {
+    font-size: 16px !important;
+}
+
+#cart-body .summary-box .summary-totalpayment,
+#cart-body .summary-box .summary-totalamount {
+    font-size: 23px !important;
+    font-weight: 800 !important;
+    color: #000 !important;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.summary-box p.large strong {
+    font-weight: 700 !important;
+}
+
+#cart-body .nav-pills .nav-link.active {
+    background: #FFF !important;
+    border: solid 3px #1A1E47 !important;
+}
+
+#cart-body .thankyou-box {
+    border: 0.5px solid #ebebeb !important;
+}
+
+#cart-body .thankyou-box h1 {
+    font-size: 33px !important;
+}
+
+
+/* YWOS End */
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+    .top-tabs-container {
+        padding: 0px 10px;
+    }
+    #slider-yes-home .slider-content p {
+        font-size: 19px;
+        line-height: 23px;
+    }
+    #slider-yes-home .slider-content h1 {
+        font-size: 27px;
+        line-height: 36px;
+    }
+    .carousel-indicators [data-bs-target] {
+        width: 30px !important;
+        height: 6px !important;
+    }
+    .carousel-indicators {
+        margin-bottom: 0.8rem !important;
+    }
+    #popular-deals .deal-box {
+        margin-bottom: 0px;
+        height: 100% !important;
+    }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+    #popular-deals .deal-box {
+        margin-bottom: 0px;
+        height: 100% !important;
+    }
+}

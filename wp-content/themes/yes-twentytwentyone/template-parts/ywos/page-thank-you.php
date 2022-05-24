@@ -160,12 +160,18 @@
         text-decoration: underline;
     }
 
-    .col-orderResponse { padding-bottom: 100px; }
+    .col-orderResponse {
+        padding-bottom: 100px;
+    }
+
     @media only screen and (min-device-width: 375px) and (max-device-width: 992px) {
         #cart-body .container {
             background-image: none;
         }
-        .col-orderResponse { padding-bottom: 1.5rem !important; }
+
+        .col-orderResponse {
+            padding-bottom: 1.5rem !important;
+        }
     }
 </style>
 
@@ -174,17 +180,18 @@
 <div id="main-vue" style="display: none;">
     <!-- Cart Body STARTS -->
     <section id="cart-body" v-if="pageValid">
-        <div class="container p-lg-5 p-3">
+        <div class="container p-lg-5 p-3 thankyou-box">
             <div class="row gx-5">
-                <div class="col-12 pb-4 border-bottom">
+                <div class="col-12 pb-4">
                     <div class="row">
                         <div class="col-lg-5 col-12 offset-lg-6 col-orderResponse">
                             <h1>Thank you!</h1>
                             <p class="mb-3">
-                                Tracking Number / Order Number <br />
+                                Order Number <br />
+                                <!-- <a v-bind:href="'/ywos/thank-you/?order_display_id=' + purchaseInfo.displayOrderNumber" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br /> -->
                                 <a href="javascript:void(0)" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br />
                                 Placed on {{ purchaseInfo.orderCreationDate }} <br />
-                                Estimated Delivery: {{ purchaseInfo.deliveryFromDate }} - {{ purchaseInfo.deliveryToDate }} <br /><br />
+                                <!-- Estimated Delivery: {{ purchaseInfo.deliveryFromDate }} - {{ purchaseInfo.deliveryToDate }} <br /><br /> -->
                                 A summary of your order has been sent to your email
                             </p>
                             <div class="offer-box d-none">
@@ -194,62 +201,31 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6 mt-4">
+                <div class="col-6 mt-4 d-none">
                     <h2>You may also like</h2>
                 </div>
-                <div class="col-6 mt-4 text-end">
+                <div class="col-6 mt-4 text-end d-none">
                     <a href="/#popular-deals" class="shopping-link">Continue shopping <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/right-arrow.png" class="ms-2" alt=""></a>
                 </div>
             </div>
-            <div class="row gx-5">
-                <div class="col-lg-4 col-12 mt-4">
-                    <div class="package-box">
-                        <h1>Kasi Up Prepaid 15 <br />(Add-On)</h1>
-                        <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">20GB for RM30</p>
-                        <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">Unlimited refferals and earnings</p>
-                        <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">Free YES Altitude phone</p>
-                        <div class="row mt-4">
-                            <div class="col-10">
-                                <h2>RM30.00</h2>
-                            </div>
-                            <div class="col-2">
-                                <a href="javascript:void(0)" onClick="buyPlan('710');"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cart-pink-icon.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-12 mt-4">
-                    <div class="package-box">
-                        <h1>Pakej YES Peranti Keluarga Malaysia</h1>
-                        <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">Free YES Altitude phone</p>
-                        <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">Unlimited refferals and earnings</p>
-                        <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">Unlimited Borak</p>
-                        <div class="row mt-4">
-                            <div class="col-10">
-                                <h2>RM49.00<span>/month</span></h2>
-                            </div>
-                            <div class="col-2">
-                                <a href="javascript:void(0)" onClick="buyPlan('759');"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cart-pink-icon.png" alt=""></a>
+            <div class="row gx-5 row-highlightPlans" style="display: none;">
+                <template v-for="plan in highlightPlans">
+                    <div class="col-lg-4 col-12 mt-4">
+                        <div class="package-box">
+                            <h1>{{ plan.displayName }}</h1>
+                            <p class="mb-2" v-for="planInfo in plan.planInfos.slice(0, 3)"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">{{ planInfo }}</p>
+                            <div class="row mt-4">
+                                <div class="col-10">
+                                    <h2 v-if="plan.planType == 'prepaid'">RM{{ plan.totalAmount }}</h2>
+                                    <h2 v-if="plan.planType == 'postpaid'">RM{{ plan.totalAmount }}<span>/month</span></h2>
+                                </div>
+                                <div class="col-2">
+                                    <a href="javascript:void(0)" v-on:click="buyPlan(plan.mobilePlanId)"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cart-pink-icon.png" alt=""></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-12 mt-4">
-                    <div class="package-box">
-                        <h1>Pakej YES Remaja <br />Keluarga Malaysia</h1>
-                        <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">Unlimited data for RM30</p>
-                        <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">Unlimited refferals and earnings</p>
-                        <p class="mb-2"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">Unlimited Borak</p>
-                        <div class="row mt-4">
-                            <div class="col-10">
-                                <h2>RM30.00</h2>
-                            </div>
-                            <div class="col-2">
-                                <a href="javascript:void(0)" onClick="buyPlan('758');"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cart-pink-icon.png" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </template>
             </div>
         </div>
     </section>
@@ -264,8 +240,11 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
+                highlightPlanIDs: [710, 759, 758],
+                highlightPlans: [],
+                orderDisplayID: '',
                 currentStep: 5,
-                pageValid: false, 
+                pageValid: false,
                 purchaseInfo: {
                     displayOrderNumber: '',
                     deliveryFromDate: '',
@@ -276,6 +255,10 @@
             mounted: function() {},
             created: function() {
                 var self = this;
+                var url_string = window.location.href;
+                var url = new URL(url_string);
+                self.orderDisplayID = url.searchParams.get('order_display_id');
+
                 setTimeout(function() {
                     self.pageInit();
                 }, 500);
@@ -283,14 +266,70 @@
             methods: {
                 pageInit: function() {
                     var self = this;
-                    if (ywos.validateSession(self.currentStep)) {
+                    if (self.orderDisplayID) {
+                        self.pageValid = true;
+                        self.ajaxGetOrderByDisplayID();
+                        // self.getHighlightPlans();
+                        toggleOverlay(false);
+                    } else if (ywos.validateSession(self.currentStep)) {
                         self.pageValid = true;
                         self.updateData();
+                        // self.getHighlightPlans();
                         toggleOverlay(false);
                     } else {
                         ywos.redirectToPage('cart');
                     }
-                }, 
+                },
+                ajaxGetOrderByDisplayID: function() {
+                    var self = this;
+                    axios.get(apiEndpointURL + '/get-order-by-display-id/' + self.orderDisplayID)
+                        .then((response) => {
+                            var data = response.data;
+                            var yosOrderResponse = data.yos_order_response;
+                            self.purchaseInfo = {
+                                displayOrderNumber: self.orderDisplayID,
+                                deliveryFromDate: yosOrderResponse.deliveryFromDate,
+                                deliveryToDate: yosOrderResponse.deliveryToDate,
+                                orderCreationDate: yosOrderResponse.orderCreationDate
+                            }
+                            $('#main-vue').show();
+                        })
+                        .catch((error) => {
+                            // console.log(error);
+                        })
+                        .finally(() => {
+                            // console.log('finally');
+                        });
+                },
+                ajaxGetHighlightPlan: function(planID) {
+                    var self = this;
+                    axios.get(apiEndpointURL + '/get-plan-by-id/' + planID)
+                        .then((response) => {
+                            var planData = response.data;
+                            if (planData.notes) {
+                                var arrNotes = planData.notes.split(',');
+                                planData.planInfos = arrNotes.sort(function(a, b) {
+                                    return a.length - b.length;
+                                });
+                            }
+                            self.highlightPlans.push(planData);
+                            if (self.highlightPlanIDs.length >= self.highlightPlans.length) {
+                                setTimeout(function() {
+                                    $('.row-highlightPlans').show();
+                                    toggleOverlay(false);
+                                }, 1000);
+                            }
+                        })
+                        .catch((error) => {
+                            console.log('error', error);
+                        })
+                },
+                getHighlightPlans: function() {
+                    var self = this;
+                    self.highlightPlanIDs.map(function(planID) {
+                        self.ajaxGetHighlightPlan(planID);
+                    });
+                },
                 updateData: function() {
                     var self = this;
                     if (typeof ywos.lsData.meta.orderResponse != 'undefined') {
@@ -302,7 +341,7 @@
                         self.purchaseInfo = ywos.lsData.meta.purchaseInfo;
                     }
                     self.clearLocalData(ywos.lsData.meta.planID, ywos.lsData.meta.completedStep);
-                }, 
+                },
                 clearLocalData: function(planID = 0, completedStep = 0) {
                     ywos.lsData.meta = {};
                     ywos.lsData.meta.planID = planID;

@@ -92,7 +92,7 @@ function betterdocs_category_grid($atts, $content = null)
 	$nested_subcategory_check = ( $get_args['nested_subcategory'] == 'true' || $get_args['nested_subcategory'] == '' ) ? true : false;
     $nested_subcategory       = ( $nested_subcategory == 1 && $nested_subcategory_check  != false ) || ($nested_subcategory_check  == true && $nested_subcategory  == 1);
     $masonry = ($masonry_layout == 1 && $masonry_check   == '') || ($masonry_check == true && $masonry_check != "false");
-	$taxonomy_objects = BetterDocs_Helper::taxonomy_object($get_args['multiple_knowledge_base'], $get_args['terms'], $get_args['terms_orderby'], $get_args['kb_slug'], $nested_subcategory);
+	$taxonomy_objects = BetterDocs_Helper::taxonomy_object($get_args['multiple_knowledge_base'], $get_args['terms'], $get_args['terms_order'], $get_args['terms_orderby'], $get_args['kb_slug'], $nested_subcategory);
     if ($taxonomy_objects && !is_wp_error($taxonomy_objects)) {
 		$class = ['betterdocs-categories-wrap category-grid white-bg'];
 		if (!is_singular('docs') && !is_tax('doc_category') && !is_tax('doc_tag')) {
@@ -224,8 +224,10 @@ function betterdocs_category_grid($atts, $content = null)
 									$get_args['multiple_knowledge_base'], 
 									$category_id, 
 									'docs',
+                                    $get_args['orderby'],
+                                    $get_args['order'],
                                     $get_args['terms_orderby'],
-                                    '',
+                                    $get_args['terms_order'],
 									$page_cat,
                                     $get_args['kb_slug']
 								);
@@ -269,7 +271,7 @@ function betterdocs_category_grid($atts, $content = null)
 
 					$uncategorised_tax_query = '';
 					$args['tax_query'] = apply_filters('betterdocs_kb_uncategorised_tax_query', $uncategorised_tax_query, $wp_query);
-
+                    $args = apply_filters('betterdocs_articles_args', $args);
 					$post_query = new WP_Query($args);
 					if ($post_query->have_posts()) :
 						echo '<ul>';
@@ -307,8 +309,8 @@ function betterdocs_category_grid($atts, $content = null)
 		return ob_get_clean();
 	}
 	
-	function nested_category_list($term_id, $multiple_kb, $category_id, $post_type, $orderby, $order, $page_cat, $kb_slug='', $nested_posts_num = -1) {
-		$sub_categories = BetterDocs_Helper::child_taxonomy_terms($term_id, $multiple_kb, $orderby, $order, $kb_slug);
+	function nested_category_list($term_id, $multiple_kb, $category_id, $post_type, $docs_orderby, $docs_order, $terms_orderby, $terms_order, $page_cat, $kb_slug='', $nested_posts_num = -1) {
+		$sub_categories = BetterDocs_Helper::child_taxonomy_terms($term_id, $multiple_kb, $terms_orderby, $terms_order, $kb_slug);
 		if ($sub_categories) {
 			foreach ($sub_categories as $sub_category) {
 				if (is_single() && in_array($sub_category->term_id, $category_id)) {
@@ -323,8 +325,8 @@ function betterdocs_category_grid($atts, $content = null)
 					<a href="#">' . $sub_category->name . '</a></span>';
 
 				echo '<ul class="' . esc_attr($subcat_class) . '">';
-				$sub_args = BetterDocs_Helper::list_query_arg($post_type, $multiple_kb, $sub_category->slug,  $nested_posts_num, $orderby, $order, $kb_slug);
-				$sub_args = apply_filters('betterdocs_sub_cat_articles_args', $sub_args, $sub_category->term_id);
+				$sub_args = BetterDocs_Helper::list_query_arg($post_type, $multiple_kb, $sub_category->slug,  $nested_posts_num, $docs_orderby, $docs_order, $kb_slug);
+				$sub_args = apply_filters('betterdocs_articles_args', $sub_args, $sub_category->term_id);
 				$sub_post_query = new WP_Query($sub_args);
 
 				if ($sub_post_query->have_posts()) :
@@ -337,7 +339,7 @@ function betterdocs_category_grid($atts, $content = null)
 					endwhile;
 				endif;
 				wp_reset_query();
-				nested_category_list($sub_category->term_id, $multiple_kb, $category_id, $post_type, $orderby, $order, $page_cat, $kb_slug);
+				nested_category_list($sub_category->term_id, $multiple_kb, $category_id, $post_type, $docs_orderby, $docs_order, $terms_orderby, $terms_order, $page_cat, $kb_slug);
 				echo '</ul>';
 			}
 		}
@@ -380,7 +382,7 @@ function betterdocs_category_grid($atts, $content = null)
 		);
 
         $nested_subcategory = ($nested_subcategory == 1 && $get_args['nested_subcategory'] == '') || ($get_args['nested_subcategory'] == true && $get_args['nested_subcategory'] != "false");
-		$taxonomy_objects = BetterDocs_Helper::taxonomy_object($get_args['multiple_knowledge_base'], $get_args['terms'], $get_args['terms_orderby'], $get_args['kb_slug'], $nested_subcategory);
+		$taxonomy_objects = BetterDocs_Helper::taxonomy_object($get_args['multiple_knowledge_base'], $get_args['terms'], $get_args['terms_order'], $get_args['terms_orderby'], $get_args['kb_slug'], $nested_subcategory);
 
 		if ($taxonomy_objects && !is_wp_error($taxonomy_objects)) : ?>
 		<div class="betterdocs-categories-wrap category-list">
@@ -461,9 +463,12 @@ function betterdocs_category_grid($atts, $content = null)
                                     $get_args['multiple_knowledge_base'],
                                     $category_id,
                                     'docs',
+                                    $get_args['orderby'],
+                                    $get_args['order'],
                                     $get_args['terms_orderby'],
                                     $get_args['terms_order'],
-                                    $page_cat
+                                    $page_cat,
+                                    ''
                                 );
                             }
                             ?>
@@ -504,6 +509,7 @@ function betterdocs_category_grid($atts, $content = null)
 				'nested_subcategory' => '',
 				'terms' => '',
                 'terms_orderby' => BetterDocs_DB::get_settings('alphabetically_order_term'),
+				'terms_order' => '',
 				'icon' => true,
                 'kb_slug' => '',
                 'title_tag' => 'h2',
@@ -515,7 +521,7 @@ function betterdocs_category_grid($atts, $content = null)
 		);
 		$post_icon_check    = ( $get_args['icon'] == 'true' ) ? true : false;
         $nested_subcategory = ($nested_subcategory == 1 && $get_args['nested_subcategory'] == '') || ($get_args['nested_subcategory'] == true && $get_args['nested_subcategory'] != "false");
-        $taxonomy_objects = BetterDocs_Helper::taxonomy_object($get_args['multiple_knowledge_base'], $get_args['terms'], $get_args['terms_orderby'], $get_args['kb_slug'], $nested_subcategory);
+        $taxonomy_objects = BetterDocs_Helper::taxonomy_object($get_args['multiple_knowledge_base'], $get_args['terms'], $get_args['terms_order'], $get_args['terms_orderby'], $get_args['kb_slug'], $nested_subcategory);
 
 		if ($taxonomy_objects && !is_wp_error($taxonomy_objects)) :
 			$class = ['betterdocs-categories-wrap betterdocs-category-box layout-2 ash-bg'];
@@ -683,8 +689,11 @@ function betterdocs_get_search_result() {
         );
     }
 
-	$args['tax_query'] = apply_filters('betterdocs_live_search_tax_query', $tax_query, $_POST);
+	$args['tax_query'] = array(
+        apply_filters('betterdocs_live_search_tax_query', $tax_query, $_POST)
+    );
 
+    $args = apply_filters('betterdocs_articles_args', $args);
 	$loop = new WP_Query($args);
 	$output = '<div class="betterdocs-search-result-wrap"><ul class="docs-search-result">';
 	if ($loop->have_posts()) :

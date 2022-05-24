@@ -13,22 +13,22 @@
 <!-- Header STARTS -->
 <header class="page-header">
     <?php get_template_part('template-parts/header/top-page-banner'); ?>
-    
+
     <div class="top-tabs-container">
         <div class="container g-0">
             <div class="row g-0">
                 <div class="col-10">
-                    <?php 
-                        $lang           = get_bloginfo('language');
-                        $personalLink   = '/';
-                        $bizLink        = '/biz/plans';
-                        if ($lang == 'ms-MY') {
-                            $personalLink   = '/ms'.$personalLink;
-                            $bizLink        = '/ms'.$bizLink;
-                        } else if ($lang == 'zh-CN') {
-                            $personalLink   = '/zh-hans'.$personalLink;
-                            $bizLink        = '/zh-hans'.$bizLink;
-                        }
+                    <?php
+                    $lang           = get_bloginfo('language');
+                    $personalLink   = '/';
+                    $bizLink        = '/biz/plans';
+                    if ($lang == 'ms-MY') {
+                        $personalLink   = '/ms' . $personalLink;
+                        $bizLink        = '/ms' . $bizLink;
+                    } else if ($lang == 'zh-CN') {
+                        $personalLink   = '/zh-hans' . $personalLink;
+                        $bizLink        = '/zh-hans' . $bizLink;
+                    }
                     ?>
                     <ul class="tabnav">
                         <?php /*
@@ -36,6 +36,7 @@
                         <li><a href="<?php echo $bizLink; ?>"><?php echo esc_html__('Business', 'yes.my'); ?></a></li>
                         <li><a href="https://www.ytlfoundation.org/learnfromhome/" target="_blank"><?php echo esc_html__('Education', 'yes.my'); ?></a></li>
                         */ ?>
+                        <?php if (function_exists('display_yes_toplogo')) display_yes_toplogo(); ?>
                         <li><a href="<?php echo $personalLink; ?>" class="active">Personal</a></li>
                         <li><a href="<?php echo $bizLink; ?>">Business</a></li>
                         <li><a href="https://www.ytlfoundation.org/learnfromhome/" target="_blank">Education</a></li>
@@ -95,17 +96,17 @@
                                 </li>
                             </ul>
                             <?php
-                                if (has_nav_menu('primary')) :
-                                    wp_nav_menu(
-                                        array(
-                                            'theme_location'    => 'primary',
-                                            'container'         => false,
-                                            'li_class'          => 'nav-item',
-                                            'link_class'        => 'nav-link',
-                                            'items_wrap'        => '<ul class="navbar-nav">%3$s</ul>',
-                                        )
-                                    );
-                                endif;
+                            if (has_nav_menu('primary')) :
+                                wp_nav_menu(
+                                    array(
+                                        'theme_location'    => 'primary',
+                                        'container'         => false,
+                                        'li_class'          => 'nav-item',
+                                        'link_class'        => 'nav-link',
+                                        'items_wrap'        => '<ul class="navbar-nav">%3$s</ul>',
+                                    )
+                                );
+                            endif;
                             ?>
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item dropdown mega-dropdown">

@@ -15,6 +15,8 @@ if (!function_exists('yes_enqueue_scripts')) {
         wp_enqueue_style('slick-theme', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.0/slick-theme.min.css', array(), '1.8.0');
         wp_enqueue_style('yes-styles', get_template_directory_uri() . '/assets/css/style.css', array(), '1.0.0');
         wp_enqueue_style('yes-styles-responsive', get_template_directory_uri() . '/assets/css/responsive.css', array(), '1.0.0');
+        wp_enqueue_style('betterdocs-overwrite', get_template_directory_uri() . '/assets/css/betterdocs-overwrite.css', array(), '1.0.0');
+        wp_enqueue_style('yes-styles-reskin', get_template_directory_uri() . '/assets/css/yes-overwrite.css', array(), '1.0.0');
 
         wp_enqueue_script('jquery', get_template_directory_uri() . '/assets/js/jquery.min.js', array(), '3.5.1', true);
         wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.bundle.js', array(), '5.1.0', true);
@@ -65,6 +67,22 @@ if (!function_exists('yes_twentytwentyone_setup')) {
         remove_theme_support('widgets-block-editor');
     }
     add_action('after_setup_theme', 'yes_twentytwentyone_setup');
+
+    function yes_twentytwentyone_customizer_setting($wp_customize)
+    {
+        // add a setting 
+        $new_setting_id = 'custom_top_logo';
+        $wp_customize->add_setting($new_setting_id);
+        // Add a control to upload the hover logo
+        $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, $new_setting_id, array(
+            'label' => esc_html__('Top Logo', 'yes.my'),
+            'section' => 'title_tagline', //this is the section where the custom-logo from WordPress is
+            'settings' => $new_setting_id,
+            'priority' => 8 // show it just below the custom-logo
+        )));
+    }
+
+    add_action('customize_register', 'yes_twentytwentyone_customizer_setting');
 }
 
 
@@ -164,7 +182,7 @@ if (!function_exists('yes_register_menus')) {
                     'shop-broadband'    => esc_html__('Broadband', 'yes.my'),
                     'shop-existing-customers' => esc_html__('Existing Customers', 'yes.my'),
                     'shop-device-plans' => esc_html__('Device Plans', 'yes.my'),
-                    
+
                     'support-help-support' => esc_html__('Support - Help & Support', 'yes.my'),
                     'support-tools-services' => esc_html__('Support - Tools & Services', 'yes.my'),
                     'support-contact-us' => esc_html__('Support - Contact Us', 'yes.my'),
@@ -232,9 +250,26 @@ if (!function_exists('display_yes_logo')) {
         $site_url   = get_home_url();
 
         if (has_custom_logo()) {
-            echo '<a href="' . $site_url . '" class="navbar-brand"><img src="' . esc_url($logo[0]) . '" alt="' . get_bloginfo('name') . '" title="' . get_bloginfo('name') . '" class="logo-top" /></a>';
+            echo '<a href="' . $site_url . '" class="navbar-brand d-block d-lg-none"><img src="' . esc_url($logo[0]) . '" alt="' . get_bloginfo('name') . '" title="' . get_bloginfo('name') . '" class="logo-top" /></a>';
         } else {
             echo '<h1><a href="' . $site_url . '">' . get_bloginfo('name') . '</a></h1>';
+        }
+    }
+}
+
+if (!function_exists('display_yes_toplogo')) {
+    /**
+     * Function display_yes_toplogo()
+     * Function to display custom logo in custom markup
+     * 
+     * @since    1.0.0
+     */
+    function display_yes_toplogo()
+    {
+        $custom_top_logo_url = get_theme_mod('custom_top_logo');
+        if (!empty($custom_top_logo_url)) {
+            $site_url   = get_home_url();
+            echo '<li class="text-center d-none d-lg-block"><a href="' . $site_url . '" class="navbar-brand" style="padding:8px"><img src="' . esc_url($custom_top_logo_url) . '" alt="' . get_bloginfo('name') . '" title="' . get_bloginfo('name') . '" class="logo-top" /></a></li>';
         }
     }
 }
@@ -357,9 +392,10 @@ if (!function_exists('yes_custom_breadcrumbs')) {
         $home_title = esc_html__('Home', 'yes.my');
 
         if (!is_front_page()) {
-            $html   .= '<div class="container breadcrumb-section">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">';
+            $html   .= '<div class="layer-breadcrumb">
+                            <div class="container breadcrumb-section">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">';
 
             if ($show_home) {
                 $html   .= '<li class="breadcrumb-item page-home"><a href="' . get_home_url() . '" title="' . $home_title . '">' . $home_title . '</a></li>';
@@ -378,8 +414,9 @@ if (!function_exists('yes_custom_breadcrumbs')) {
                 $html   .= '        <li class="breadcrumb-item active page-current page-' . get_the_ID() . '" aria-current="page">' . get_the_title() . '</li>';
             }
 
-            $html   .= '        </ol>
-                            </nav>
+            $html   .= '            </ol>
+                                </nav>
+                            </div>
                         </div>';
         }
 
@@ -479,4 +516,109 @@ if (!function_exists('update_direction_list_domain')) {
         }
     }
     // update_direction_list_domain('https://my.yes.my/', 'https://site.yes.my/', 3);
+}
+
+
+if (!function_exists('show_most_faq_viewed')) {
+    /**
+     * Function show_most_faq_viewed()
+     * Function to register shortcode for the FAQ in pages
+     * 
+     * @since    1.0.2
+     */
+    function show_most_faq_viewed()
+    {
+        global $post;
+        $docsArgs = [
+            'post_type' => 'docs',
+            'posts_per_page' => 3,
+            'orderby' => 'meta_value_num',
+            'order' => 'DESC',
+            'meta_key' => '_betterdocs_meta_views',
+            'tax_query' => [
+                'relation' => 'AND',
+                [
+                    'taxonomy' => 'knowledge_base',
+                    'field' => 'slug',
+                    'terms' => ['faq'],
+                    'operator' => 'IN',
+                    'include_children' => true
+                ]
+            ],
+            'suppress_filters' => false
+        ];
+        $html_faq   = '';
+        $post_count = 1;
+        $faqs = new WP_Query($docsArgs);
+        if ($faqs->have_posts()) {
+            while($faqs->have_posts()) {
+                $faqs->the_post();
+                $html_faq   .= '            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="accordion-header-' . $post_count . '">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-content-' . $post_count . '" aria-expanded="true" aria-controls="accordion-content-' . $post_count . '">' . get_the_title() . '</button>
+                                                </h2>
+                                                <div id="accordion-content-' . $post_count . '" class="accordion-collapse collapse" aria-labelledby="accordion-header-' . $post_count . '" data-bs-parent="#accordion-faqShortcode">
+                                                    <div class="accordion-body">' . get_the_content() . '</div>
+                                                </div>
+                                            </div>';
+                $post_count++;
+            }
+        }
+        wp_reset_postdata();
+
+        $lang           = get_bloginfo('language');
+        $faq_main_text  = 'Most Searched Topics';
+        $faq_link_text  = 'View All FAQ';
+        $faq_link       = '/faq';
+        if ($lang == 'ms-MY') {
+            $faq_main_text  = 'Topik Paling Dicari';
+            $faq_link_text  = 'Lihat Semua Soalan Lazim';
+            $faq_link       = '/ms' . $faq_link;
+        } else if ($lang == 'zh-CN') {
+            $faq_link       = '/zh-hans' . $faq_link;
+        }
+
+        $html   = ' <!-- FAQs Start -->
+                    <section id="faq-section" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                        <div class="container">
+                            <div class="row">
+                                <h1 class="mb-4">' . $faq_main_text . '</h1>
+                            </div>
+                            <div class="row justify-content-lg-center">
+                                <div class="col-12 col-lg-9">
+                                    <div class="accordion accordion-flush mb-3" id="accordion-faqShortcode">
+                                        ' . $html_faq . '
+                                    </div>
+                                    <p class="text-center"><a href="' . $faq_link . '" class="viewall-btn">' . $faq_link_text . ' <span class="iconify" data-icon="akar-icons:arrow-right"></span></a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- FAQs End -->';
+
+        return $html;
+    }
+
+    add_shortcode('bd_most_viewed_faq', 'show_most_faq_viewed');
+}
+
+
+if (!function_exists('yes_remove_powered_headers')) {
+    /**
+     * Function yes_remove_powered_headers()
+     * Function to remove the 'X-powered-by' in headers
+     * 
+     * @since    1.0.2
+     */
+    function yes_remove_powered_headers($headers)
+    {
+        if (function_exists('header_remove')) {
+            header_remove('x-powered-by');
+            header_remove('X-Powered-By');
+        }
+        unset($headers['x-powered-by']);
+        unset($headers['X-Powered-By']);
+        return $headers;
+    }
+    add_action('wp_headers', 'yes_remove_powered_headers');
 }

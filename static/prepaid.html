@@ -8,6 +8,8 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
@@ -16,6 +18,34 @@
     <link rel="stylesheet" type="text/css" href="css/aos.css" />
     <link rel="stylesheet" type="text/css" href="css/responsive.css" />
     <style>
+        #prepaid-top-banner {
+            background-image: url('images/prepaid-banner-bg.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            overflow: hidden;
+        }
+        
+        #prepaid-top-banner h1 {
+            font-size: 50px;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 50px;
+            font-weight: 700;
+            color: #FFF;
+            margin-bottom: 20px;
+        }
+        
+        #prepaid-top-banner p {
+            font-size: 25px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 500;
+            line-height: 28px;
+            color: #FFF;
+        }
+        
+        #prepaid-top-banner p span {
+            font-weight: 800;
+        }
+        
         #easy-steps {
             align-items: center;
             justify-content: center;
@@ -318,7 +348,36 @@
             overflow: hidden;
         }
         
-        @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+            #prepaid-top-banner {
+                background-position: top right;
+            }
+            #prepaid-top-banner h1 {
+                font-size: 30px;
+                line-height: 30px;
+                text-align: left;
+            }
+            #prepaid-top-banner p {
+                line-height: 25px;
+                font-size: 17px;
+                text-align: left;
+                margin-bottom: 20px;
+            }
+            #prepaid-top-banner {
+                padding-top: 20px;
+            }
+            #prepaid-top-banner .banner-visual {
+                text-align: center;
+            }
+            #prepaid-top-banner .banner-visual img {
+                margin: 0 auto;
+                margin-top: 20px;
+                width: 70% !important;
+                display: inline-block !important;
+            }
+        }
+        
+        @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
             #databck-rewards h1 {
                 font-size: 32px;
                 line-height: 46px;
@@ -387,6 +446,32 @@
             }
             #switch-yes {
                 margin-bottom: 50px;
+            }
+            #prepaid-top-banner {
+                background-position: top right;
+            }
+            #prepaid-top-banner h1 {
+                font-size: 30px;
+                line-height: 30px;
+                text-align: center;
+            }
+            #prepaid-top-banner p {
+                line-height: 25px;
+                padding: 0px 5%;
+                font-size: 17px;
+                text-align: center;
+            }
+            #prepaid-top-banner {
+                padding-top: 20px;
+            }
+            #prepaid-top-banner .banner-visual {
+                text-align: center;
+            }
+            #prepaid-top-banner .banner-visual img {
+                margin: 0 auto;
+                margin-top: 20px;
+                width: 70% !important;
+                display: inline-block !important;
             }
         }
     </style>
@@ -505,8 +590,20 @@
             <!-- Breadcrumb End -->
 
             <!-- Banner Start -->
-            <section id="inner-banner">
-                <img src="images/prepaid-banner.png" class="img-fluid" />
+            <section id="prepaid-top-banner">
+                <div class="container">
+                    <div class="row justify-content-lg-center">
+                        <div class="col-12 col-md-6 col-lg-6 ps-lg-5 d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                            <div>
+                                <h1>Kasi Up Data Add-Ons</h1>
+                                <p>Get <span>1GB</span> for only <span>RM1</span> with the Kasi Up prepaid add-on!</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-6 banner-visual justify-content-end" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                            <img src="images/prepaid-banner-visual.png" class="d-block w-100" alt="">
+                        </div>
+                    </div>
+                </div>
             </section>
             <!-- Banner End -->
 

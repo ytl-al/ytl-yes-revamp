@@ -1,0 +1,1008 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>YES</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/aos.css" />
+    <link rel="stylesheet" type="text/css" href="css/slick.css" />
+    <link rel="stylesheet" type="text/css" href="css/slick-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" />
+
+    <style>
+        #roaming-banner {
+            overflow: hidden;
+            background-image: url('images/roaming-banner1-bg.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 150px 0px;
+        }
+        
+        .roaming-bg2 {
+            background-image: url('images/roaming-banner2-bg.jpg') !important;
+        }
+        
+        #roaming-banner h1 {
+            font-size: 49px;
+            line-height: 67px;
+            font-weight: 600;
+            color: #2B2B2B;
+            text-align: left;
+            margin-bottom: 15px;
+        }
+        
+        #roaming-banner h1 span {
+            font-weight: 800;
+        }
+        
+        #roaming-banner p {
+            font-size: 29px;
+            font-weight: 400;
+            line-height: 40px;
+            color: #525252;
+            margin-bottom: 20px;
+        }
+        
+        #roaming-banner .search-box {
+            width: 100%;
+            position: relative;
+            border-radius: 90px;
+            background-color: #FFF;
+            border: solid 1px #00B4F0;
+            display: inline-block;
+            padding: 2px;
+        }
+        
+        #roaming-banner .search-box input {
+            border: none;
+            background-color: #FFF;
+            border-radius: 90px;
+            padding: 12px;
+            padding-left: 18px;
+            font-size: 19px;
+            float: left;
+        }
+        
+        #roaming-banner .search-box input ::placeholder {
+            color: #525252;
+        }
+        
+        #roaming-banner .search-box .btn {
+            float: right;
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 90px;
+            background-color: #ED028C;
+            color: #FFF;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+        
+        #countries-section {
+            padding: 60px 0px;
+        }
+        
+        #countries-section h1 {
+            text-align: center;
+            color: #00B4F0;
+            font-weight: 600;
+            font-size: 49px;
+            line-height: 67px;
+            margin-bottom: 50px;
+        }
+        
+        #countries-section h1 span {
+            font-weight: 800;
+        }
+        
+        #countries-section .carousel-roaming h2 {
+            text-align: center;
+            color: #2B2B2B;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        #countries-section .carousel-roaming p {
+            color: #7A7A7A;
+            text-align: center;
+            font-size: 15px;
+        }
+        
+        #countries-section .carousel-roaming .row-roaming-country img {
+            margin: 0 auto;
+        }
+        
+        #countries-section .carousel-roaming .slick-dots {
+            bottom: -57px;
+        }
+        
+        #countries-section .carousel-roaming .slick-dots li button::before {
+            font-size: 20px;
+            color: #525252;
+        }
+        
+        #roaming-rates-section {
+            padding: 60px 0px;
+        }
+        
+        #roaming-rates-section h1 {
+            text-align: center;
+            color: #00B4F0;
+            font-weight: 600;
+            font-size: 49px;
+            line-height: 67px;
+            margin-bottom: 50px;
+        }
+        
+        #roaming-rates-section h1 span {
+            font-weight: 800;
+            color: #ec008c;
+        }
+        
+        #roaming-rates-section .row-roaming h3 {
+            border-bottom: 4px solid #666;
+            padding-bottom: 1em;
+            margin-bottom: 1em;
+            font-size: 18px;
+        }
+        
+        #roaming-rates-section .row-roaming h4 {
+            font-size: 18px;
+            font-weight: 800;
+        }
+        
+        #roaming-rates-section .row-roaming h4.blue {
+            color: #00B4F0;
+        }
+        
+        #roaming-rates-section .row-roaming h4.internet-rates {
+            font-size: 81px;
+            font-weight: 800;
+            color: #00B4F0;
+        }
+        
+        #roaming-rates-section .row-roaming h4.internet-rates sub {
+            font-size: 20px;
+        }
+        
+        #roaming-rates-section .row-roaming p.small {
+            font-size: 12px;
+        }
+        
+        #roaming-rates-section .row-roaming p.blue {
+            color: #00B4F0;
+        }
+        
+        #roaming-rates-section .viewall-btn {
+            display: inline-block;
+            font-size: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #ED028C;
+            text-align: center;
+        }
+        
+        #roaming-rates-section .viewall-btn svg {
+            margin-left: 5px;
+            font-size: 20px;
+        }
+        
+        #roaming-rates-section .viewall-btn:hover {
+            text-decoration: underline;
+        }
+        
+        #roaming-tips {
+            padding: 60px 0px;
+        }
+        
+        #roaming-tips h1 {
+            text-align: center;
+            color: #00B4F0;
+            font-weight: 600;
+            font-size: 49px;
+            line-height: 67px;
+            margin-bottom: 50px;
+        }
+        
+        #start-roaming {
+            padding: 60px 0px;
+        }
+        
+        #start-roaming h1 {
+            text-align: center;
+            color: #00B4F0;
+            font-weight: 600;
+            font-size: 49px;
+            line-height: 67px;
+            margin-bottom: 50px;
+        }
+        
+        #start-roaming p.small {
+            font-size: 11px;
+        }
+        
+        #start-roaming .viewall-btn {
+            display: inline-block;
+            font-size: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #ED028C;
+            text-align: center;
+        }
+        
+        #start-roaming .viewall-btn svg {
+            margin-left: 5px;
+            font-size: 20px;
+        }
+        
+        #start-roaming .viewall-btn:hover {
+            text-decoration: underline;
+        }
+        /* IPAD Portrait */
+        
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+            #roaming-banner h1 {
+                font-size: 44px;
+                line-height: 44px;
+            }
+            #roaming-banner p {
+                font-size: 24px;
+                line-height: 35px;
+            }
+        }
+        
+        @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+            #roaming-banner {
+                background-position: top;
+                padding: 50px 0px;
+            }
+            #roaming-banner h1 {
+                font-size: 35px;
+                line-height: 35px;
+                text-align: center;
+            }
+            #roaming-banner p {
+                margin-bottom: 15px;
+                text-align: center;
+                font-size: 22px;
+                line-height: normal;
+            }
+            #roaming-banner .search-box input {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            #roaming-banner .search-box .btn {
+                font-size: 11px;
+            }
+        }
+        
+        @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+            #roaming-banner .search-box input {
+                padding: 7px 12px;
+                font-size: 11px;
+            }
+            #roaming-banner .search-box .btn {
+                font-size: 10px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="layer-page">
+        <header class="page-header">
+            <div class="top-tabs-container">
+                <div class="container g-0">
+                    <div class="row g-0">
+                        <div class="col-10">
+                            <ul class="tabnav">
+                                <li><a href="#" class="active">Personal</a></li>
+                                <li><a href="#">Business</a></li>
+                                <li><a href="#">Education</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-2">
+                            <div class="dropdown language-drop float-end">
+                                <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="iconify" data-icon="bi:globe"></span> English
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">English</a></li>
+                                    <li><a class="dropdown-item" href="#">Bhasa Malay</a></li>
+                                    <li><a class="dropdown-item" href="#">中文</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-container">
+                <div class="container g-lg-0">
+                    <div class="row g-0">
+                        <nav class="navbar navbar-expand-lg">
+                            <div class="container">
+                                <a class="navbar-brand" href="#"><img src="images/logo.svg" class="logo-top" /></a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <li class="nav-item dropdown mega-dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                                            <ul class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Mobile Plans</li>
+                                                        <li><a href="#">Prepaid Plans</a></li>
+                                                        <li><a href="#">Postpaid Plans</a></li>
+                                                        <li><a href="#">YES Prihatin</a></li>
+                                                        <li><a href="#">Merdeka RM1 Package</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Broadband</li>
+                                                        <li><a href="#">Home broadband</a></li>
+                                                        <li><a href="#">On-the-go broadband</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Existing Customers</li>
+                                                        <li><a href="#">How-To: Refer & Earn</a></li>
+                                                        <li><a href="#">How-To: Get Databack</a></li>
+                                                        <li><a href="#">Data & Hotspot Add-Ons</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="#">Keep Number</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Partners</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Help</a>
+                                        </li>
+                                    </ul>
+                                    <div class="d-flex align-items-center">
+                                        <a href="#" class="pink-btn me-3">Get Started</a>
+                                        <a href="#" class="login-btn"><span class="iconify" data-icon="carbon:user-avatar-filled-alt"></span> Log In</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <!-- Breadcrumb Start -->
+            <section class="breadcrumb-section">
+                <div class="container">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active"><a href="#">Roaming</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </section>
+            <!-- Breadcrumb End -->
+
+            <!-- Banner1 Start -->
+            <section id="roaming-banner">
+                <div class="container">
+                    <div class="row justify-content-center justify-content-lg-start">
+                        <div class="col-11 col-lg-6 d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                            <div>
+                                <h1>Travelling? Stay close to home with <span>YesRoam</span></h1>
+                                <p>Roam freely anywhere with out Partnering Operators.</p>
+                                <div class="search-box">
+                                    <input type="text" placeholder="Search a Country">
+                                    <button class="btn">Check roaming rates</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Banner1 End -->
+
+            <!--Roaming Rates Section Start-->
+            <section id="roaming-rates-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1>Enjoy roaming in <span>Argentina</span> with our Partnering Operators.</h1>
+                            <div class="row row-roaming">
+                                <div class="col-12 col-lg-2">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h3>Plans</h3>
+
+                                            <h4>4G LTE Postpaid</h4>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-lg-10">
+                                    <fieldset id="roaming-table">
+                                        <div class="row" data-template="roamingTemplate" style="">
+                                            <div class="col-12 col-lg-3">
+                                                <h3>Roaming Operator</h3>
+
+                                                <p class="brand">
+                                                    <h4 class="blue">Personal</h4>
+                                                </p>
+                                            </div>
+
+                                            <div class="col-12 col-lg-3">
+                                                <h3>Internet Rates</h3>
+
+                                                <h4 class="blue">RM</h4>
+
+                                                <h4 class="internet-rates">
+                                                    38<sub>/Day</sub>
+                                                </h4>
+
+                                                <p class="blue" data-name="planDayRateQuota">Up to 100MB Data</p>
+
+                                                <p class="small" data-name="planDayRateTnc">Once the quota is finished, the data speed will be reduced until your day pass expires without additional cost.</p>
+                                            </div>
+
+                                            <div class="col-12 col-lg-6">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <h3>Call &amp; SMS Rates</h3>
+                                                    </div>
+
+                                                    <div class="col-6 col-lg-6">
+                                                        <p class="ctitle" data-name="planCallWithinCountryTxt">Call Within Argentina</p>
+                                                        <h4 class="blue" data-name="planCallWithinCountryRate">RM6.00 /Min</h4>
+                                                    </div>
+
+                                                    <div class="col-6 col-lg-6">
+                                                        <p class="ctitle">Call To Other Countries</p>
+                                                        <h4 class="blue" data-name="planCallToOtherCountriesRate">RM9.00 /Min</h4>
+                                                    </div>
+
+                                                    <div class="col-6 col-lg-6">
+                                                        <p class="ctitle">Call To Malaysia</p>
+                                                        <h4 class="blue" data-name="planCallToMalaysiRate">RM6.00 /Min</h4>
+                                                    </div>
+
+                                                    <div class="col-6 col-lg-6">
+                                                        <p class="ctitle">Receiving Calls</p>
+                                                        <h4 class="blue" data-name="planReceivingCallRate">RM5.00 /Min</h4>
+                                                    </div>
+
+                                                    <div class="col-6 col-lg-6">
+                                                        <p class="ctitle">SMS</p>
+                                                        <h4 class="blue" data-name="planSmsRate">RM1.00 /SMS</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 text-center" style="font-size:12px;">&nbsp;
+                            <p>• Prices shown above are subject to 6% service tax.</p>
+
+                            <p>• The call rates shown above are not applicable for calls to Premium Numbers, Satellites and special services.</p>
+
+                            <p>• For more info, please contact Yes Customer Careline.</p>
+                            <a href="/faq/roaming" class="viewall-btn mt-5">Got questions? Click here for FAQ<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--Roaming Rates Section End-->
+
+            <!--Roaming Tips Start-->
+            <section id="roaming-tips">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">&nbsp;
+                            <h1>Roaming Tips</h1>
+                            <div class="row gx-5 row-roaming-step">
+                                <div class="col-12 col-md-6 col-xl-3 text-center">
+                                    <img alt="selfcare" class="mb-4" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/yes-selfcare.png">
+                                    <p>Activate International Roaming service via Selfcare</p>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-3 text-center">
+                                    <img alt="credit-limit" class="mb-4" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/credit-limit.png">
+                                    <p>Increase your credit limit via Selfcare to avoid any service distruption.</p>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-xl-3 text-center">
+                                    <img alt="deactivate" class="mb-4" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/deactivate.png">
+                                    <p>Turn off your Data Roaming &amp; Mobile Data in your phone setting if you don't wish to use data service while abroad
+                                    </p>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-3 text-center">
+                                    <img alt="bills" class="mb-4" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/bills.png">
+                                    <p>Settle all outstanding bills.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--Roaming Tips End-->
+
+            <!--Start Roaming Start-->
+            <section id="start-roaming">
+                <div class="container">
+                    <h1>How to start roaming</h1>
+                    <div class="row justify-content-center">
+                        <div class="col-10 gx-5">
+                            <div class="row">
+                                <div class="col-12 col-lg-4 text-center">
+                                    <img src="images/roaming-setting-icon.jpg" class="mb-4" alt="">
+                                    <p class="small">Step 1:</p>
+                                    <p><strong>Go to Settings.</strong></p>
+                                    <p class="mt-3">Select “Mobile Network”.</p>
+                                </div>
+                                <div class="col-12 col-lg-4 text-center">
+                                    <img src="images/roaming-network-icon.jpg" class="mb-4" alt="">
+                                    <p class="small">Step 2:</p>
+                                    <p><strong>Click Network Operators.</strong></p>
+                                    <p class="mt-3">Wait for 1 to 2 minutes for the list of networks to show up.</p>
+                                    <p class="mt-3">Select our preferred roaming operator to connect.</p>
+                                </div>
+                                <div class="col-12 col-lg-4 text-center">
+                                    <img src="images/roaming-mobile-icon.jpg" class="mb-4" alt="">
+                                    <p class="small">Step 3:</p>
+                                    <p><strong>Go to Mobile Network.</strong></p>
+                                    <p class="mt-3">Turn on your Data Roaming & Mobile Data in your phone setting if you wish to use data service while abroad.</p>
+                                    <p class="mt-3">On some Android phones, you may need to select your SIM to turn on Data Roaming.</p>
+                                </div>
+                                <div class="col-12 mt-5 text-center">
+                                    <p class="small"><strong>Tip:</strong> For Partnering Operators who do not have 4G LTE roaming service, kindly select the mobile network mode to 2G/3G in your phone setting to avoid any connection or compatibility issue.</p>
+                                    <a href="/faq/roaming" class="viewall-btn mt-5">Have problems connecting? Click here<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                                </div>
+                                <div class="col-12 mt-5 text-center">
+                                    <a href="#" class="pink-btn">Close <span class="iconify" data-icon="carbon:close-filled"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--Start Roaming End-->
+
+            <!--Countries Section Start-->
+            <section id="countries-section">
+                <h1><span>RM38/day</span>, up to <span>500MB</span> at these <span>24 countries</span>.</h1>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="carousel-roaming">
+                                <div>
+                                    <div class="row gy-5 row-roaming-country">
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/australia.png">
+                                            <h2>Australia</h2>
+                                            <p>Telstra</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/austria.png">
+                                            <h2>Austria</h2>
+                                            <p>Hutchison - 3 (Drei)</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/bangladesh.png">
+                                            <h2>Bangladesh</h2>
+                                            <p>GrameenPhone</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/brunei.png">
+                                            <h2>Brunei Darussalam</h2>
+                                            <p>DSTCom</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/cambodia.png">
+                                            <h2>Cambodia</h2>
+                                            <p>Viettel - Metfone</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/canada.png">
+                                            <h2>Canada</h2>
+                                            <p>Rogers Communications</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/china.png">
+                                            <h2>China</h2>
+                                            <p>China Mobile</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/denmark.png">
+                                            <h2>Denmark</h2>
+                                            <p>H3G (3)</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/hong-kong.png">
+                                            <h2>Hong Kong</h2>
+                                            <p>Hutchison (3)</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/india.png">
+                                            <h2>India</h2>
+                                            <p>Vodafone</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/indonesia.png">
+                                            <h2>Indonesia</h2>
+                                            <p>PT Indosat Tbk</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/south-korea.png">
+                                            <h2>Republic of Korea</h2>
+                                            <p>SK Telecom (SKT)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="row gy-5 row-roaming-country">
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/macau.png">
+                                            <h2>Macau</h2>
+                                            <p>Hutchison (3)</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/maynmar.png">
+                                            <h2>Myanmar</h2>
+                                            <p>Telenor</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/philippines.png">
+                                            <h2>Philippines</h2>
+                                            <p>Smart</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/qatar.png">
+                                            <h2>Qatar</h2>
+                                            <p>Ooredoo / Qtel</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/saudi.png">
+                                            <h2>Saudi Arabia</h2>
+                                            <p>Zain SA</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/singapore.png">
+                                            <h2>Singapore</h2>
+                                            <p>StarHub</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/sweden.png">
+                                            <h2>Sweden</h2>
+                                            <p>H3G Access AB (3)</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/taiwan.png">
+                                            <h2>Taiwan</h2>
+                                            <p>APTG</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/thailand.png">
+                                            <h2>Thailand</h2>
+                                            <p>True Move</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/uk.png">
+                                            <h2>United Kingdom</h2>
+                                            <p>Hutchison (3)</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/us.png">
+                                            <h2>United States</h2>
+                                            <p>T-Mobile</p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/vietnam.png">
+                                            <h2>Vietnam</h2>
+                                            <p>Vietnamobile</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--Countries Section End-->
+
+            <!-- Banner2 Start -->
+            <section id="roaming-banner" class="roaming-bg2">
+                <div class="container">
+                    <div class="row justify-content-center justify-content-lg-start">
+                        <div class="col-11 col-lg-6 d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                            <div>
+                                <h1>From Malaysia to <span>anywhere in the world.</span></h1>
+                                <p>Here are affordable IDD rates you'll like.</p>
+                                <div class="search-box">
+                                    <input type="text" placeholder="Search a Country">
+                                    <button class="btn">Check IDD rates</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Banner2 End -->
+
+            <!--Roaming Rates Section Start-->
+            <section id="roaming-rates-section">
+                <div class="container">
+                    <div class="row row-roaming">
+                        <h1><span>Affordable</span> IDD rates just the way you like it.</h1>
+                        <div class="col-12 col-lg-3">
+                            <div class="row header">
+                                <div class="col-12">
+                                    <p class="sub">&nbsp;</p>
+                                </div>
+
+                                <div class="col-12">
+                                    <h3>Country (Code)</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4>Afghanistan (93)</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-7">
+                            <div class="row header">
+                                <div class="col-5"></div>
+
+                                <div class="col-6" style="text-align:center">
+                                    <p class="sub">Call Rate (RM/Min)</p>
+                                </div>
+
+                                <div class="col-5">
+                                    <h3>Plan</h3>
+                                </div>
+
+                                <div class="col-3" style="text-align:center">
+                                    <h3>Fixed</h3>
+                                </div>
+
+                                <div class="col-3" style="text-align:center">
+                                    <h3>Mobile</h3>
+                                </div>
+                            </div>
+                            <div class="row" data-filter="postpaid">
+                                <div class="col-5">
+                                    <p>4G LTE Postpaid</p>
+                                </div>
+
+                                <div class="col-3" style="text-align:center">
+                                    <h4>1.80</h4>
+                                </div>
+
+                                <div class="col-3" style="text-align:center">
+                                    <h4>1.80</h4>
+                                </div>
+                            </div>
+
+                            <div class="row" data-filter="prepaid">
+                                <div class="col-5">
+                                    <p>4G LTE Prepaid</p>
+                                </div>
+
+                                <div class="col-3" style="text-align:center">
+                                    <h4>1.80</h4>
+                                </div>
+
+                                <div class="col-3" style="text-align:center">
+                                    <h4>1.80</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-2">
+                            <div class="row header">
+                                <div class="col-12">
+                                    <p class="sub">&nbsp;</p>
+                                </div>
+
+                                <div class="col-5 d-lg-none">
+                                    <h3>Plan</h3>
+                                </div>
+
+                                <div class="col-6 col-lg-12">
+                                    <h3>SMS Rate (RM)</h3>
+                                </div>
+                            </div>
+                            <div class="row" data-filter="postpaid">
+                                <div class="col-5 d-lg-none">
+                                    <h3>4G LTE Postpaid</h3>
+                                </div>
+
+                                <div class="col-6">
+                                    <h4>0.28</h4>
+                                </div>
+                            </div>
+
+                            <div class="row" data-filter="prepaid">
+                                <div class="col-5 d-lg-none">
+                                    <h3>4G LTE Prepaid</h3>
+                                </div>
+
+                                <div class="col-6 col-lg-12">
+                                    <h4>0.28</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center" style="font-size:12px;">&nbsp;
+                            <p>• Prices shown above are subject to 6% service tax.</p>
+
+                            <p>• IDD calls are charged at 30 seconds block.</p>
+
+                            <p>• Rates are subject to change without prior notice.</p>
+                            <a href="#" class="pink-btn mt-5">Close <span class="iconify" data-icon="carbon:close-filled"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--Roaming Rates Section End-->
+
+        </main>
+        <footer class="page-footer footer">
+            <div class="container g-lg-0">
+                <div class="row position-relative">
+                    <div class="col-12 col-md-3">
+                        <img src="images/logo.svg" class="footer-logo mb-4" />
+                        <div class="row mb-2">
+                            <ul class="icon-list">
+                                <li>
+                                    <a href="#"><img src="images/facebook.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/instagram.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/youtube.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/twitter.svg" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <p class="mb-2">Get The MyYes App</p>
+                            <ul class="icon-list">
+                                <li>
+                                    <a href="#"><img src="images/logos_google-play-icon.svg" class="store-icon" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/logos_apple-app-store.svg" class="store-icon" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="row g-0 row-cols-2 row-cols-sm-1 row-cols-md-5">
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Plans & Pricing</li>
+                                    <li><a href="#">Prepaid plans</a></li>
+                                    <li><a href="#">Postpaid plans</a></li>
+                                    <li><a href="#">YES Prihatin plans</a></li>
+                                    <li><a href="#">Data Add-Ons</a></li>
+                                    <li><a href="#">Merdeka RM1 Package</a></li>
+                                    <li><a href="#">On-the-go broadband</a></li>
+                                    <li><a href="#">Home broadband</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Explore</li>
+                                    <li><a href="#">Keep number</a></li>
+                                    <li><a href="#">Refer & earn</a></li>
+                                    <li><a href="#">Databack</a></li>
+                                    <li><a href="#">Partnerships</a></li>
+                                    <li><a href="#">Roaming</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Tools</li>
+                                    <li><a href="#">Device manuals</a></li>
+                                    <li><a href="#">Coverage</a></li>
+                                    <li><a href="#">Speed test</a></li>
+                                    <li><a href="#">Kiosk locations</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Company</li>
+                                    <li><a href="#">About us</a></li>
+                                    <li><a href="#">Sustainability reports</a></li>
+                                    <li><a href="#">Newsroom</a></li>
+                                    <li><a href="#">Terms & conditions</a></li>
+                                    <li><a href="#">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Help</li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Chatbot</a></li>
+                                    <li><a href="#">Email us</a></li>
+                                    <li><a href="#">Facebook messenger</a></li>
+                                    <li><a href="#">Visit our store</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-1">
+                        <img src="images/ctm.png" class="img-fluid ctm-logo" />
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-md-start justify-content-sm-center">
+                            <p>POWERED BY YTL, YTL Communications Sdn. Bhd. (793634-V)</p>
+                        </div>
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-md-end justify-content-sm-center">
+                            <img src="images/footer-icons.png" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="js/iconify.min.js"></script>
+    <script type="text/javascript" src="js/aos.js"></script>
+    <script type="text/javascript" src="js/slick.js"></script>
+
+    <script type="text/javascript">
+        AOS.init();
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.carousel-roaming').slick({
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                dots: true,
+                arrows: false,
+            });
+        });
+    </script>
+
+
+
+</body>
+
+</html>

@@ -47,6 +47,11 @@ class BetterDocs_Template_Source extends Elementor\TemplateLibrary\Source_Base {
                 $templates[] = $this->prepare_template( $template_data );
             }
         }
+
+	    if ( ! empty( $args ) ) {
+		    $templates = wp_list_filter( $templates, $args );
+	    }
+
         return $templates;
     }
 

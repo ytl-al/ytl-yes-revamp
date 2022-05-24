@@ -84,6 +84,7 @@ class Ytl_Pull_Data_Activator
 					yos_order_display_id VARCHAR(255) NULL DEFAULT '', 
 					yos_order_meta TEXT NULL DEFAULT '', 
 					yos_order_response TEXT NULL DEFAULT '', 
+					yos_order_response_display TEXT NULL DEFAULT '', 
 					xpay_order_id VARCHAR(255) NULL DEFAULT '', 
 					xpay_order_meta TEXT NULL DEFAULT '', 
 					xpay_order_response TEXT NULL DEFAULT '', 

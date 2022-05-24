@@ -1,10 +1,92 @@
 <style type="text/css">
-    iframe {
-        width: 100%;
-        height: 900px;
+    #location-top-banner {
+        background: linear-gradient(83.24deg, #FF0084 10.6%, #2F3BF5 89.86%);
+        padding: 90px 0px;
+        text-align: center;
     }
     
-    .flexbox .centerize {
-        padding: 0;
+    #location-top-banner h1 {
+        font-size: 48px;
+        font-weight: 800;
+        color: #FFF;
+    }
+    
+    #coverage-area {
+        padding: 50px 0px;
+    }
+    
+    #coverage-area p {
+        color: #000000;
+        font-size: 17px;
+        line-height: 21px;
+    }
+    
+    #coverage-area iframe {
+        width: 100%;
+        height: 788px;
+    }
+    /* Home Broadband Start */
+    
+    #wfh {
+        background-color: #FFF;
+        background-image: url('/wp-content/uploads/2022/04/homebroadband-banner-bg-scaled.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 96px 0px;
+    }
+    
+    #wfh h1 {
+        font-size: 60px;
+        font-weight: 800;
+        line-height: 72px;
+        color: #000;
+        text-align: left;
+    }
+    
+    #wfh p {
+        font-size: 16px;
+        line-height: 24px;
+        color: #525252;
+        text-align: left;
+    }
+    /* Home Broadband End */
+    /* IPAD Portrait */
+    
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+        #wfh {
+            padding: 56px 0px;
+        }
+        #wfh h1 {
+            font-size: 42px;
+            line-height: 38px;
+        }
+    }
+    /* Portrait */
+    
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
+        #wfh {
+            padding: 16px 0px;
+        }
+    }
+    
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+        #location-top-banner h1 {
+            font-size: 40px;
+        }
+        #home-broadband h1 {
+            font-size: 43px;
+            line-height: 43px;
+        }
+        #home-broadband {
+            padding: 0px;
+        }
+        #wfh {
+            background-image: url('/wp-content/uploads/2022/04/roaming-banner-bg-mobile.jpg');
+            padding: 54px 0px;
+        }
+        #wfh h1 {
+            font-size: 32px;
+            line-height: 38px;
+        }
     }
 </style>

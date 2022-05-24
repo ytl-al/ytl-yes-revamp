@@ -20,6 +20,27 @@
 
 	<?php wp_footer(); ?>
 
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var bdSearchField = $('.betterdocs-search-field');
+			if ($(bdSearchField).length) {
+				$(bdSearchField).attr('pattern', '/^[a-zA-Z0-9 ]+$/');
+				$(bdSearchField).on('input', function() {
+					var v = this.value.replace(/[^a-zA-Z0-9 ]+$/g, '');
+					if (v != this.value) {
+						this.value = v;
+						$(bdSearchField).trigger('input').trigger('propertychange').trigger('paste').trigger('keyup').trigger('keypress');
+					}
+
+					if (this.value == '5g' || this.value == '4g' || this.value == '5G' || this.value == '4G') {
+						$(bdSearchField).val(this.value + ' ');
+						$(bdSearchField).trigger('input').trigger('propertychange').trigger('paste').trigger('keyup').trigger('keypress');
+					}
+				});
+			}
+		});
+	</script>
+
 </body>
 
 </html>

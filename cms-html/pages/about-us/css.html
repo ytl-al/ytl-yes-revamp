@@ -1,0 +1,264 @@
+<style type="text/css">
+    #aboutus-banner {
+        background-image: url("/wp-content/uploads/2022/04/about-banner-bg-new-scaled.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 208px 0px;
+        overflow: hidden;
+    }
+    
+    #aboutus-banner h1 {
+        font-size: 60px;
+        line-height: 65px;
+        font-weight: 800;
+        color: #000;
+        text-align: left;
+        margin-bottom: 20px;
+    }
+    
+    #aboutus-banner p {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 24px;
+        color: #000;
+        margin-bottom: 20px;
+    }
+    
+    #aboutus-banner p span {
+        font-weight: 600;
+    }
+    /* Learn Banner End */
+    
+    #yes-leaders-section {
+        padding: 60px 0px;
+    }
+    
+    #yes-leaders-section h1 {
+        text-align: center;
+        color: #000000;
+        font-size: 39px;
+        line-height: 47px;
+        font-weight: 800;
+    }
+    
+    #yes-leaders-section p {
+        text-align: center;
+        color: #2B2B2B;
+        font-size: 20px;
+        line-height: 24px;
+        margin-top: 15px;
+    }
+    
+    #yes-leaders-section .leader-box {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: #FFF;
+        box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+        padding: 30px;
+        height: 100%;
+        text-align: center;
+    }
+    
+    #yes-leaders-section .leader-box h2 {
+        color: #000000;
+        font-size: 23px;
+        font-weight: 800;
+        margin-bottom: 10px;
+    }
+    
+    #yes-leaders-section .leader-box h3 {
+        color: #000000;
+        font-size: 12px;
+        line-height: 17px;
+        font-weight: 700;
+    }
+    
+    #yes-leaders-section .leader-box .social-box {
+        text-align: center;
+        padding: 20px 0px;
+    }
+    
+    #yes-leaders-section .leader-box p {
+        color: #525252;
+        font-size: 16px;
+        line-height: 24px;
+        padding: 0;
+    }
+    
+    #about-slider-section {
+        align-items: center;
+        justify-content: center;
+        background-color: #FFF;
+        position: relative;
+        min-height: 782px;
+    }
+    
+    #about-slider-section .year-box {
+        display: flex;
+        flex-direction: column;
+        background-color: #1A1E47;
+        padding: 50px 10%;
+        padding-left: 5%;
+        border-radius: 0px 25px 25px 0px;
+        position: absolute;
+        left: 0;
+        z-index: 0;
+        align-items: center;
+    }
+    
+    #about-slider-section .year-box .nav-link {
+        background-color: transparent;
+        background: none;
+        color: #FFFFFF;
+        font-size: 24px;
+        font-weight: 600;
+        border-left: solid 10px #F9F7F4CC;
+        padding-left: 10px;
+        margin-bottom: 25px;
+        border-radius: 0;
+        padding: 0px 1rem;
+    }
+    
+    #about-slider-section .year-box .nav-link.active {
+        font-weight: 900;
+        border-color: #2F3BF5;
+    }
+    
+    #about-slider-section h1 {
+        color: #000000;
+        font-size: 39px;
+        line-height: 47px;
+        font-weight: 800;
+        margin-bottom: 20px;
+    }
+    
+    #about-slider-section h2 {
+        font-size: 17px;
+        font-weight: 700;
+        color: #2B2B2B;
+        margin-bottom: 20px;
+    }
+    
+    #about-slider-section p {
+        color: #2B2B2B;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        margin-bottom: 30px;
+    }
+    
+    #about-slider-section p.small {
+        color: #7A7A7A;
+        font-size: 20px;
+        margin-bottom: 40px;
+    }
+    
+    #about-slider-section .about-carousel {
+        position: absolute;
+        left: 15%;
+        z-index: 200;
+        top: 20%;
+    }
+    
+    #about-slider-section .carousel-box {
+        width: 100%;
+    }
+    
+    #about-slider-section .carousel-box .slider-visual {
+        float: left;
+        width: 460px;
+    }
+    
+    #about-slider-section .carousel-box .slider-content {
+        display: inline-block;
+        padding-left: 13%;
+        width: 50%;
+        padding-top: 102px;
+    }
+    /* IPAD Portrait */
+    
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
+        #aboutus-banner {
+            background-position: -227px top;
+            padding: 31px 0px;
+        }
+        #aboutus-banner h1 {
+            font-size: 33px;
+            line-height: 44px;
+        }
+        #aboutus-banner p {
+            font-size: 21px;
+            line-height: 35px;
+            margin-bottom: 0;
+        }
+        #about-slider-section .carousel-box .slider-visual {
+            display: none;
+        }
+        #about-slider-section .year-box {
+            display: none;
+        }
+        #about-slider-section .carousel-box .slider-content {
+            padding: 0;
+            width: 100%;
+        }
+        #about-slider-section .about-carousel {
+            position: static !important;
+        }
+        #about-slider-section {
+            padding: 40px 0px;
+            min-height: auto;
+        }
+    }
+    
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+        #aboutus-banner {
+            background-position: -171px top;
+            padding: 31px 0px;
+        }
+    }
+    
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+        #aboutus-banner {
+            background-image: url("/wp-content/uploads/2022/04/about-banner-bg-mobile.jpg");
+            background-position: top;
+            padding: 49px 0px;
+        }
+        #aboutus-banner h1 {
+            font-size: 32px;
+            line-height: 38px;
+        }
+        #aboutus-banner p {
+            font-size: 17px;
+            margin-bottom: 0;
+        }
+        #yes-leaders-section h1 {
+            font-size: 29px;
+        }
+        #yes-leaders-section p {
+            padding: 0px 4%;
+        }
+        #about-slider-section .year-box {
+            display: none;
+        }
+        #about-slider-section .slider-visual {
+            display: none;
+        }
+        #about-slider-section {
+            padding: 40px 0px;
+            min-height: auto;
+        }
+        #about-slider-section .carousel-box .slider-content {
+            padding: 0;
+            width: 100%;
+        }
+        #about-slider-section .about-carousel {
+            position: static !important;
+        }
+    }
+    
+    .fm-form-container.fm-theme16 {
+        display: none !important;
+    }
+</style>

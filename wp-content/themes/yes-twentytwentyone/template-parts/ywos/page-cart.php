@@ -370,7 +370,9 @@
         opacity: 0.6;
     }
 
-    .addon-content { padding-right: 38px; }
+    .addon-content {
+        padding-right: 38px;
+    }
 
     @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
         #cart-body .packagebox .visualbg {
@@ -393,6 +395,10 @@
             margin-bottom: 10px;
         }
     }
+
+    .nav-container { background-color: #1A1E47; }
+    .nav-container a, .nav-container .login-btn {}
+    .logo-top { width: 48px; }
 </style>
 
 
@@ -416,7 +422,7 @@
                         <div class="packagebox mb-3">
                             <div class="row align-items-center">
                                 <div class="col-lg-3 col-12 visualbg d-none">
-                                    <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/kasiup-postpaid-visual.png" class="img-fluid" alt="" />
+                                    <img src="/wp-content/uploads/2022/05/ft5g-cart-visual.jpg" class="img-fluid" alt="" />
                                 </div>
                                 <div class="col-12 p-3 px-5">
                                     <h3 class="mt-3 mt-lg-0">No item in the cart</h3>
@@ -436,12 +442,12 @@
                         <div class="packagebox mb-3">
                             <div class="row">
                                 <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="orderSummary.plan.planType == 'postpaid'">
-                                    <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/kasiup-postpaid-visual.png" class="img-fluid" alt="" />
+                                    <img src="/wp-content/uploads/2022/05/ft5g-cart-visual.jpg" class="img-fluid" alt="" />
                                 </div>
                                 <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center" v-if="orderSummary.plan.planType == 'prepaid'">
-                                    <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/kasiup-prepaid-visual.png" class="img-fluid" alt="" />
+                                    <img src="/wp-content/uploads/2022/05/ft5g-cart-visual.jpg" class="img-fluid" alt="" />
                                 </div>
-                                <div class="col-lg-6 col-12 pt-lg-4 pb-1 px-4 px-lg-4">
+                                <div class="col-lg-6 col-12 pt-lg-4 pb-1 px-4 px-lg-5 ps-lg-4">
                                     <h3 class="mt-3 mt-lg-0">{{ orderSummary.plan.displayName }}</h3>
                                     <p class="mb-3" v-if="orderSummary.plan.internetData">RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(0) }} for {{ orderSummary.plan.internetData }}</p>
                                     <div class="package-info" v-if="packageInfos.length">
@@ -461,10 +467,10 @@
                         </div>
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#cart-accordion">
                             <div class="accordion-body">
-                                <div v-if="packageInfos.slice(3).length">
+                                <div v-if="packageInfos.slice(4).length">
                                     <h1>More Benefits</h1>
                                     <div class="row mb-4">
-                                        <div class="col-lg-6 mb-3" v-for="(packageInfo, index) in packageInfos.slice(3)"><span class="span-itemList">{{ packageInfo }}</span></div>
+                                        <div class="col-lg-6 mb-3" v-for="(packageInfo, index) in packageInfos.slice(4)"><span class="span-itemList">{{ packageInfo }}</span></div>
                                     </div>
                                 </div>
 
@@ -495,11 +501,11 @@
                                     </template>
                                 </div>
                                 <div class="row mb-3 mt-5">
-                                    <div class="col-10 pb-1 border-bottom">
+                                    <div class="col-8 pb-1 border-bottom">
                                         <p>Add-Ons</p>
                                         <p v-if="orderSummary.addOn != null">{{ orderSummary.addOn.displayAddonName }} <a href="javascript:void(0)" class="btn-sm pink-btn text-white mx-lg-3" v-on:click="removeAddOn()">Remove</a></p>
                                     </div>
-                                    <div class="col-2 pb-1 border-bottom text-end">
+                                    <div class="col-4 pb-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.addOns).toFixed(2) }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom">
@@ -804,8 +810,8 @@
 
                         if (ywos.lsData.meta.isLoggedIn) {
                             self.orderSummary = ywos.lsData.meta.orderSummary;
-                            self.ajaxGetPlanAddOns();
-                            self.updatePlan(false);
+                            self.updateAddOns(self.orderSummary.plan.addonListServiceTypes);
+                            self.updatePlan();
                         } else {
                             self.ajaxGetPlanData();
                         }
@@ -829,6 +835,7 @@
 
                             var planPriceBreakdown = [];
                             var planDevicePriceBreakdown = [];
+                            var planSimplifiedBreakdown = [];
                             for (var key in data) {
                                 var keyPricingComponentList = 'pricingComponentList';
                                 if (key == keyPricingComponentList) {
@@ -836,7 +843,10 @@
                                     pricingComponentList.map(function(pricingComponent) {
                                         var componentName = pricingComponent.pricingComponentName;
                                         var componentValue = formatPrice(pricingComponent.pricingComponentValue);
-                                        var objArr = { name: componentName, value: componentValue };
+                                        var objArr = {
+                                            name: componentName,
+                                            value: componentValue
+                                        };
                                         if (['Postpaid Device Price', 'Postpaid Device Upfront Payment'].includes(componentName)) {
                                             planDevicePriceBreakdown.push(objArr);
                                         } else if (['Postpaid Foreigner Deposit'].includes(componentName)) {
@@ -846,8 +856,17 @@
                                         }
                                     });
                                 }
+                                var keySimplifiedItemPricingList = 'simplifiedItemPricingList';
+                                if (key == keySimplifiedItemPricingList) {
+                                    planSimplifiedBreakdown = data[keySimplifiedItemPricingList];
+                                }
                             };
-                            self.orderSummary.due.priceBreakdown = { plan: planPriceBreakdown, device: planDevicePriceBreakdown };
+                            self.orderSummary.due.priceBreakdown = {
+                                plan: planPriceBreakdown,
+                                device: planDevicePriceBreakdown,
+                                simplified: planSimplifiedBreakdown
+                            };
+                            // console.log(self.orderSummary.due);
 
                             var hasDevice = false;
                             for (var i = 0; i < planDevicePriceBreakdown.length; i++) {
@@ -858,59 +877,46 @@
                             }
                             self.orderSummary.plan.hasDevice = hasDevice;
 
-                            self.updateAddOns(data.addOns);
+                            self.updateAddOns(data.addonListServiceTypes);
                             self.updatePlan();
                         })
                         .catch((error) => {
-                            console.log('error', error);
+                            // console.log('error', error);
                         })
-                },
-                ajaxGetPlanAddOns: function() {
-                    var self = this;
-                    axios.post(apiEndpointURL + '/get-add-ons-by-plan', {
-                            'plan_name': self.orderSummary.plan.planName,
-                            'plan_type': self.orderSummary.plan.planType
-                        })
-                        .then((response) => {
-                            var data = response.data;
-                            self.updateAddOns(data);
-
-                            setTimeout(function() {
-                                toggleOverlay(false);
-                            }, 500);
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                        });
                 },
                 updateAddOns: function(dataAddOns = {}) {
                     var self = this;
-                    dataAddOns.map(function(data) {
-                        data.addonPackageInfoList.map(function(addOn) {
-                            // addOn.taxSST = addOn.totalAmount * self.taxRate.sst;
-                            var indPaymentDeduction = addOn.paymentDeductionInfoList.filter(paymentDeduction => { return paymentDeduction.type == 'SST'; });
-                            if (indPaymentDeduction) {
-                                indPaymentDeduction = indPaymentDeduction[0];
-                                addOn.taxSST = parseFloat(indPaymentDeduction.value).toFixed(2);
-                            }
-                            self.planAddOns.push(addOn);
+                    if (dataAddOns) {
+                        dataAddOns.map(function(data) {
+                            data.addonPackageInfoList.map(function(addOn) {
+                                // addOn.taxSST = addOn.totalAmount * self.taxRate.sst;
+                                var indPaymentDeduction = addOn.paymentDeductionInfoList.filter(paymentDeduction => {
+                                    return paymentDeduction.type == 'SST';
+                                });
+                                if (indPaymentDeduction) {
+                                    indPaymentDeduction = indPaymentDeduction[0];
+                                    addOn.taxSST = parseFloat(indPaymentDeduction.value).toFixed(2);
+                                }
+                                self.planAddOns.push(addOn);
+                            });
                         });
-                    });
-                    
-                    var planAddOn = self.orderSummary.addOn;
-                    if (planAddOn) {
-                        self.orderSummary.due.taxesSST += planAddOn.taxSST;
-                        self.orderSummary.due.total += planAddOn.taxSST;
 
-                        setTimeout(function() {
-                            self.addOn.allowAddOn = (self.orderSummary.addOn == null) ? true : false;
-                            if (self.addOn.allowAddOn) {
-                                $('.addon-box').removeClass('addon-box-disabled');
-                            } else {
-                                $('.addon-box').addClass('addon-box-disabled');
-                            }
-                        }, 500);
+                        var planAddOn = self.orderSummary.addOn;
+                        if (planAddOn) {
+                            self.orderSummary.due.taxesSST += planAddOn.taxSST;
+                            self.orderSummary.due.total += planAddOn.taxSST;
+
+                            setTimeout(function() {
+                                self.addOn.allowAddOn = (self.orderSummary.addOn == null) ? true : false;
+                                if (self.addOn.allowAddOn) {
+                                    $('.addon-box').removeClass('addon-box-disabled');
+                                } else {
+                                    $('.addon-box').addClass('addon-box-disabled');
+                                }
+                            }, 500);
+                        }
                     }
+
                 },
                 updatePlan: function(closeOverlay = true) {
                     var self = this;
@@ -941,7 +947,7 @@
                     // self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.plan.totalAmount) + parseFloat(self.orderSummary.due.addOns) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees));
                     // self.orderSummary.due.rounding = getRoundingAdjustmentAmount(self.orderSummary.due.total.toFixed(2));
                     // self.orderSummary.due.total += parseFloat(self.orderSummary.due.rounding);
-                    
+
                     // self.orderSummary.due.taxesSST = parseFloat(self.orderSummary.plan.totalSST);
                     // self.orderSummary.due.rounding = parseFloat(self.orderSummary.plan.roundingAdjustment);
                     // self.orderSummary.due.totalWithoutSST = parseFloat(self.orderSummary.plan.totalAmountWithoutSST);

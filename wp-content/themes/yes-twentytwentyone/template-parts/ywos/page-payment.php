@@ -42,6 +42,9 @@
 
     .panel-weaccept { margin: 15px 0 10px; }
     .panel-weaccept img { margin: 0 8px; }
+
+    .layer-selectedCard {}
+    .layer-selectedCard img { display: none; }
 </style>
 
 <!-- Vue Wrapper STARTS -->
@@ -77,10 +80,10 @@
                 </div>
             </div>
             <div class="row gx-5" v-if="pageValid">
-                <div class="col-lg-4 col-12 order-lg-2">
+                <div class="col-lg-5 col-12 order-lg-2">
                     <?php include('section-order-summary.php'); ?>
                 </div>
-                <form class="col-lg-8 col-12 order-lg-1 mt-3 mt-lg-0" autocomplete="off" @submit="paymentSubmit">
+                <form class="col-lg-7 col-12 order-lg-1 mt-3 mt-lg-0" autocomplete="off" @submit="paymentSubmit">
                     <div>
                         <h1 class="mb-4 d-none d-lg-block">Payment Info</h1>
                         <p class="sub mb-4 pe-5 d-none d-lg-block">This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.</p>
@@ -112,7 +115,7 @@
                                                 <p class="panel-weaccept">
                                                     We accept
                                                     <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/visa.png" />
-                                                    <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" />
+                                                    <!-- <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" /> -->
                                                     <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/mastercard.png" />
                                                 </p>
                                             </div>
@@ -144,10 +147,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mb-3 align-items-center g-2">
-                                        <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-12">
                                             <label class="form-label" for="input-chNumber1">* Card Number</label>
+                                            <div class="float-end layer-selectedCard">
+                                                <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/visa.png" height="15" v-bind:class="{ 'd-block': (paymentInfo.cardType == 'VISA') }" />
+                                                <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" height="25" v-bind:class="{ 'd-block': (paymentInfo.cardType == 'AMEX') }" />
+                                                <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/mastercard.png" height="30" v-bind:class="{ 'd-block': (paymentInfo.cardType == 'MASTERCARD') }" />
+                                            </div>
                                         </div>
+                                    </div>
+                                    <div class="row mb-3 align-items-center g-2">
                                         <div class="col-lg-6 col-12 mb-1">
                                             <div class="input-group align-items-center">
                                                 <input type="text" class="form-control text-center" id="input-cardInput1" v-model="cardholder.number1" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(1, event)" @keypress="checkInputCharacters(event, 'numeric', false)" /><span class="mx-1">-</span>
@@ -633,12 +643,12 @@
                         'session_key': ywos.lsData.sessionKey, 
                         'yos_order_id': self.orderResponse.orderNumber
                     };
-                    console.log(self.orderResponse);
+                    // console.log(self.orderResponse);
                     axios.post(apiEndpointURL + '/check-order-payment-status', params)
                         .then((response) => {
                             var data = response.data;
                             if (data != null && data.responseCode != null) {
-                                console.log('payment through');
+                                // console.log('payment through');
                                 self.paymentResponse = data;
                                 clearTimeout(timeoutObj);
 
@@ -657,7 +667,7 @@
                         .catch((error) => {
                             var response = error.response;
                             self.checkPaymentStatusCount++;
-                            if (typeof response != 'undefined' && self.checkPaymentStatusCount > 4) {
+                            if (typeof response != 'undefined' && self.checkPaymentStatusCount > 29) {
                                 var data = response.data;
                                 var errorMsg = '';
                                 if (error.response.status == 500 || error.response.status == 503) {
@@ -679,7 +689,7 @@
                                     self.ajaxCheckOrderPaymentStatus(timeoutObj);
                                 }, 10000);
                             }
-                            console.log(error, response);
+                            // console.log(error, response);
                         });
                 }, 
                 initXpay: function() {
@@ -709,6 +719,8 @@
                         
                         'phone_number'  : self.deliveryInfo.msisdn, 
                         'customer_name' : self.deliveryInfo.name, 
+                        'dob'           : self.deliveryInfo.dob, 
+                        'gender'        : self.deliveryInfo.gender, 
                         'email'         : self.deliveryInfo.email,
                         'login_yes_id'  : '', 
                         'security_type' : self.deliveryInfo.securityType, 
@@ -767,7 +779,7 @@
                                 toggleOverlay(false);
                                 self.toggleModalAlert('Error', errorMsg);
                             }
-                            console.log(error, response);
+                            // console.log(error, response);
                         })
                         .finally(() => {
                             // console.log('finally');
@@ -812,7 +824,7 @@
                         if (inputVal.length > 3) {
                             $('#input-cardInput' + nextStep).focus();
                         }
-                        if (inputVal.length == 4 && inputStep == 4 && self.cardholder.number1.length == 4 && self.cardholder.number2.length == 4 && self.cardholder.number3.length == 4 && self.cardholder.number4.length == 4) {
+                        if (inputVal.length == 4 && inputStep == 4 && self.cardholder.number1.length == 4 && self.cardholder.number2.length == 4 && self.cardholder.number3.length == 4 && self.cardholder.number4.length >= 2) {
                             self.paymentInfo.cardNumber = self.cardholder.number1 + self.cardholder.number2 + self.cardholder.number3 + self.cardholder.number4;
                             self.paymentInfo.cardType = getCreditCardType(self.paymentInfo.cardNumber);
                         } else {
