@@ -11,7 +11,7 @@
         margin: 0 0 8px;
     }
 
-    .layer-step p {}
+    .layer-step p { color: #525252; }
 
     .layer-step .panel-stepHeading {
         color: #1A1E47;
@@ -90,8 +90,13 @@
     }
 
     .layer-accordionPlanDetails p.panel-permonth {
-        font-size: 23px;
-        line-height: 28px;
+        font-size: 20px;
+        line-height: 24px;
+    }
+    
+    .layer-accordionPlanDetails p.panel-permonth strong {
+        font-size: 33px;
+        line-height: 40px;
     }
 
     .layer-accordionPlanDetails ul.listing-planCheck,
@@ -214,10 +219,15 @@
     .panel-colors .span-color { background-color: transparent; border: 2px solid #999; border-radius: 100%; box-sizing: border-box; display: inline-block; height: 40px; margin: 0 0 0 8px; padding: 2px; width: 40px; }
     .span-color:after { background-color: #D9D9D9; border-radius: 100%; content: ''; display: inline-block; height: 32px; width: 32px; }
     .span-color.blue:after { background-color: #ADBBDE; }
-    .span-color.black:after { background-color: #282524; }
-    .span-color.white:after { background-color: #FFF; }
+    .span-color.black:after { background-color: #1B1F22; }
+    .span-color.white:after { background-color: #EFEFEF; }
     .span-color.red:after { background-color: #FE0003; }
     .span-color.grey:after { background-color: #D9D9D9; }
+    .span-color.light-blue:after { background-color: #84C8EC; }
+    .span-color.pearl-white:after { background-color: #D7E8F7; }
+    .span-color.light-dark-blue:after { background-color: #8ECDED; }
+    .span-color.midnight-green:after { background-color: #405855; }
+    .span-color.orange:after { background-color: #F06329; }
 
 
     @media (min-width: 768px) {
@@ -341,18 +351,18 @@
                     <div class="row gx-5 text-md-start text-center">
                         <div class="col-12 col-md-4 mb-5 mb-md-0 layer-step flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
                             <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/04/icon-elevate-step-1.png" /></span> Step 1</p>
-                            <h2>Select Plan</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br />asdfasdf as</p>
+                            <h2>Pick a Yes Infinite Plan.</h2>
+                            <p>Our Yes Infinite Plans consist of 4 tiers: Basic, Standard, Premium and Ultra. Pick a plan that suits your needs.</p>
                         </div>
                         <div class="col-12 col-md-4 mb-5 mb-md-0 layer-step flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
                             <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/04/icon-elevate-step-2.png" /></span> Step 2</p>
-                            <h2>Select Free Phone</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <h2>Choose a FREE* 5G Phone.</h2>
+                            <p>Choose a FREE* 5G smartphon from the list of phone models available based on the plan you have selected. <br /><br />*Terms and conditions apply.</p>
                         </div>
                         <div class="col-12 col-md-4 layer-step flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="500">
                             <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/04/icon-elevate-step-3.png" /></span> Step 3</p>
-                            <h2>Checkout</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            <h2>Checkout & Enjoy!</h2>
+                            <p>Confirm your purchase and you're all set to unlock infinite possibilities.</p>
                         </div>
                     </div>
                 </div>
@@ -370,20 +380,20 @@
                                         <div class="row gx-5">
                                             <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
                                                 <img src="https://cdn.yes.my/site/wp-content/uploads/2022/04/icon-elevate-infinite.png" class="img-fluid img-infinite" alt="INFINITE+" title="INFINITE+" />
-                                                <p class="panel-textGradient"><span>Basic 99</span></p>
-                                                <p class="panel-hotspot">200<sup>GB Hotspot</sup></p>
-                                                <p class="panel-permonth"><strong>99</strong>/mth</p>
+                                                <p class="panel-textGradient"><span>Basic</span></p>
+                                                <!-- <p class="panel-hotspot">200<sup>GB Hotspot</sup></p> -->
+                                                <p class="panel-permonth"><strong>58</strong>/mth</p>
                                             </div>
                                             <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
                                                 <ul class="listing-planCheck">
-                                                    <li>Unlimited 5G data until further notice</li>
-                                                    <li>99GB 4G data</li>
-                                                    <li>RM99 per month for 36 months</li>
-                                                    <li>Free device. Select from below</li>
+                                                    <li>Unlimited full speed 5G + 4G data</li>
+                                                    <li>Unlimited calls</li>
+                                                    <li>10GB hotspot data</li>
+                                                    <li>FREE* 5G smartphone<br />*Terms and conditions apply.</li>
                                                 </ul>
                                             </div>
                                             <div class="col-lg-4 mt-md-4 mt-lg-0 d-flex align-items-lg-end justify-content-lg-end">
-                                                <button class="accordion-button btn-viewMore collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePlan-1" aria-expanded="true" aria-controls="collapsePlan-1">View More</button>
+                                                <button class="accordion-button btn-viewMore collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePlan-1" aria-expanded="true" aria-controls="collapsePlan-1">Show Free Phones</button>
                                             </div>
                                         </div>
                                     </div>
@@ -392,19 +402,20 @@
                                             <div class="row flex-nowrap flex-xl-wrap">
                                                 <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
                                                     <div class="layer-planDevice">
-                                                        <h2>YES Postpaid FT5G RM99</h2>
-                                                        <h3>XIAOMI 11 LITE 5G NE 8 RAM and 128 RAM</h3>
-                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11lite.png" /></p>
+                                                        <h2>Yes Infinite+ Basic</h2>
+                                                        <h3>VIVO Y55+ 5G</h3>
+                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/05/vivo-y55.png" /></p>
                                                         <p class="panel-btn"><a href="" class="btn btn-getplan" title="">Get Plan</a></p>
                                                         <ul class="listing-deviceDesc">
-                                                            <li>250GB 4G Data</li>
-                                                            <li>30 Megapixels front camera</li>
-                                                            <li>Dual SIM</li>
-                                                            <li>5G Enabled</li>
+                                                            <li>FREE 5G smartphone (RRP RM1,099)</li>
+                                                            <li>6GB RAM</li>
+                                                            <li>128GB Storage</li>
+                                                            <li>36-month contract</li>
                                                         </ul>
+                                                        <p class="panel-colors">Available in: <span class="span-color light-blue" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Light Blue"></span></p>
                                                     </div>
                                                 </div>
-                                                <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
+                                                <!-- <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
                                                     <div class="layer-planDevice">
                                                         <h2>YES Postpaid FT5G RM99</h2>
                                                         <h3>XIAOMI 11T 5G NE 8 RAM and 128 ROM</h3>
@@ -473,7 +484,7 @@
                                                             <li>5G Enabled</li>
                                                         </ul>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -483,20 +494,20 @@
                                         <div class="row gx-5">
                                             <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
                                                 <img src="https://cdn.yes.my/site/wp-content/uploads/2022/04/icon-elevate-infinite.png" class="img-fluid img-infinite" alt="INFINITE+" title="INFINITE+" />
-                                                <p class="panel-textGradient"><span>Standard 128</span></p>
-                                                <p class="panel-hotspot">200<sup>GB Hotspot</sup></p>
-                                                <p class="panel-permonth"><strong>128</strong>/mth</p>
+                                                <p class="panel-textGradient"><span>Standard</span></p>
+                                                <!-- <p class="panel-hotspot">200<sup>GB Hotspot</sup></p> -->
+                                                <p class="panel-permonth"><strong>88</strong>/mth</p>
                                             </div>
                                             <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
                                                 <ul class="listing-planCheck">
-                                                    <li>Unlimited 5G data until further notice</li>
-                                                    <li>99GB 4G data</li>
-                                                    <li>RM99 per month for 36 months</li>
-                                                    <li>Free device. Select from below</li>
+                                                    <li>Unlimited full speed 5G + 4G data</li>
+                                                    <li>Unlimited calls</li>
+                                                    <li>40GB hotspot data</li>
+                                                    <li>FREE* 5G smartphone<br />*Terms and conditions apply.</li>
                                                 </ul>
                                             </div>
                                             <div class="col-lg-4 mt-md-4 mt-lg-0 d-flex align-items-lg-end justify-content-lg-end">
-                                                <button class="accordion-button btn-viewMore collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePlan-2" aria-expanded="true" aria-controls="collapsePlan-2">View More</button>
+                                                <button class="accordion-button btn-viewMore collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePlan-2" aria-expanded="true" aria-controls="collapsePlan-2">Show Free Phones</button>
                                             </div>
                                         </div>
                                     </div>
@@ -505,86 +516,32 @@
                                             <div class="row flex-nowrap flex-xl-wrap">
                                                 <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
                                                     <div class="layer-planDevice">
-                                                        <h2>YES Postpaid FT5G RM99</h2>
-                                                        <h3>XIAOMI 11 LITE 5G NE 8 RAM and 128 RAM</h3>
-                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11lite.png" /></p>
+                                                        <h2>Yes Infinite+ Standard</h2>
+                                                        <h3>Samsung Galaxy A33 5G</h3>
+                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/05/samsung-galaxy-a33.png" /></p>
                                                         <p class="panel-btn"><a href="" class="btn btn-getplan" title="">Get Plan</a></p>
                                                         <ul class="listing-deviceDesc">
-                                                            <li>250GB 4G Data</li>
-                                                            <li>30 Megapixels front camera</li>
-                                                            <li>Dual SIM</li>
-                                                            <li>5G Enabled</li>
+                                                            <li>FREE 5G smartphone (RRP RM1,499)</li>
+                                                            <li>8GB RAM</li>
+                                                            <li>128GB Storage</li>
+                                                            <li>36-month contract</li>
                                                         </ul>
+                                                        <p class="panel-colors">Available in: <span class="span-color pearl-white" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Pearl White"></span></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
                                                     <div class="layer-planDevice">
-                                                        <h2>YES Postpaid FT5G RM99</h2>
-                                                        <h3>XIAOMI 11T 5G NE 8 RAM and 128 ROM</h3>
-                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11t.png" /></p>
+                                                        <h2>Yes Infinite+ Standard</h2>
+                                                        <h3>Xiaomi RedMi Note II Pro 5G</h3>
+                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/05/xiaomi-redmi-note2-pro.png" /></p>
                                                         <p class="panel-btn"><a href="" class="btn btn-getplan" title="">Get Plan</a></p>
                                                         <ul class="listing-deviceDesc">
-                                                            <li>250GB 4G Data</li>
-                                                            <li>30 Megapixels front camera</li>
-                                                            <li>Dual SIM</li>
-                                                            <li>5G Enabled</li>
+                                                            <li>FREE 5G smartphone (RRP RM1,299)</li>
+                                                            <li>8GB RAM</li>
+                                                            <li>128GB Storage</li>
+                                                            <li>36-month contract</li>
                                                         </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
-                                                    <div class="layer-planDevice">
-                                                        <h2>YES Postpaid FT5G RM99</h2>
-                                                        <h3>XIAOMI 11T PRO 8 RAM and 256 ROM</h3>
-                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11tpro.png" /></p>
-                                                        <p class="panel-btn"><a href="" class="btn btn-getplan" title="">Get Plan</a></p>
-                                                        <ul class="listing-deviceDesc">
-                                                            <li>250GB 4G Data</li>
-                                                            <li>30 Megapixels front camera</li>
-                                                            <li>Dual SIM</li>
-                                                            <li>5G Enabled</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
-                                                    <div class="layer-planDevice">
-                                                        <h2>YES Postpaid FT5G RM99</h2>
-                                                        <h3>XIAOMI 11T 5G NE 8 RAM and 128 ROM</h3>
-                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11t.png" /></p>
-                                                        <p class="panel-btn"><a href="" class="btn btn-getplan" title="">Get Plan</a></p>
-                                                        <ul class="listing-deviceDesc">
-                                                            <li>250GB 4G Data</li>
-                                                            <li>30 Megapixels front camera</li>
-                                                            <li>Dual SIM</li>
-                                                            <li>5G Enabled</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
-                                                    <div class="layer-planDevice">
-                                                        <h2>YES Postpaid FT5G RM99</h2>
-                                                        <h3>XIAOMI 11T PRO 8 RAM and 256 ROM</h3>
-                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11tpro.png" /></p>
-                                                        <p class="panel-btn"><a href="" class="btn btn-getplan" title="">Get Plan</a></p>
-                                                        <ul class="listing-deviceDesc">
-                                                            <li>250GB 4G Data</li>
-                                                            <li>30 Megapixels front camera</li>
-                                                            <li>Dual SIM</li>
-                                                            <li>5G Enabled</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
-                                                    <div class="layer-planDevice">
-                                                        <h2>YES Postpaid FT5G RM99</h2>
-                                                        <h3>XIAOMI 11 LITE 5G NE 8 RAM and 128 RAM</h3>
-                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11lite.png" /></p>
-                                                        <p class="panel-btn"><a href="" class="btn btn-getplan" title="">Get Plan</a></p>
-                                                        <ul class="listing-deviceDesc">
-                                                            <li>250GB 4G Data</li>
-                                                            <li>30 Megapixels front camera</li>
-                                                            <li>Dual SIM</li>
-                                                            <li>5G Enabled</li>
-                                                        </ul>
+                                                        <p class="panel-colors">Available in: <span class="span-color black" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Black"></span></p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -596,20 +553,20 @@
                                         <div class="row gx-5">
                                             <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
                                                 <img src="https://cdn.yes.my/site/wp-content/uploads/2022/04/icon-elevate-infinite.png" class="img-fluid img-infinite" alt="INFINITE+" title="INFINITE+" />
-                                                <p class="panel-textGradient"><span>Premium 188</span></p>
-                                                <p class="panel-hotspot">200<sup>GB Hotspot</sup></p>
+                                                <p class="panel-textGradient"><span>Premium</span></p>
+                                                <!-- <p class="panel-hotspot">200<sup>GB Hotspot</sup></p> -->
                                                 <p class="panel-permonth"><strong>188</strong>/mth</p>
                                             </div>
                                             <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
                                                 <ul class="listing-planCheck">
-                                                    <li>Unlimited 5G data until further notice</li>
-                                                    <li>99GB 4G data</li>
-                                                    <li>RM99 per month for 36 months</li>
-                                                    <li>Free device. Select from below</li>
+                                                    <li>Unlimited full speed 5G + 4G data</li>
+                                                    <li>Unlimited calls</li>
+                                                    <li>70GB hotspot data</li>
+                                                    <li>FREE* 5G smartphone<br />*Terms and conditions apply.</li>
                                                 </ul>
                                             </div>
                                             <div class="col-lg-4 mt-md-4 mt-lg-0 d-flex align-items-lg-end justify-content-lg-end">
-                                                <button class="accordion-button btn-viewMore collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePlan-3" aria-expanded="true" aria-controls="collapsePlan-3">View More</button>
+                                                <button class="accordion-button btn-viewMore collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePlan-3" aria-expanded="true" aria-controls="collapsePlan-3">Show Free Phones</button>
                                             </div>
                                         </div>
                                     </div>
@@ -618,33 +575,93 @@
                                             <div class="row flex-nowrap flex-xl-wrap">
                                                 <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
                                                     <div class="layer-planDevice">
-                                                        <h2>Infinite+ Premium 188</h2>
-                                                        <h3>SAMSUNG S22 Ultra (Black)</h3>
-                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/04/samsung-s22-ultra-black.png"></p>
-                                                        <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan" data-productid="9000">Get Plan</a></p>
+                                                        <h2>Yes Infinite+ Premium</h2>
+                                                        <h3>Samsung Galaxy A53 5G</h3>
+                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/05/samsung-galaxy-a53.png" /></p>
+                                                        <p class="panel-btn"><a href="" class="btn btn-getplan" title="">Get Plan</a></p>
                                                         <ul class="listing-deviceDesc">
-                                                            <li>250GB 4G Data</li>
-                                                            <li>30 Megapixels front camera</li>
-                                                            <li>Dual SIM</li>
-                                                            <li>5G Enabled</li>
+                                                            <li>FREE 5G smartphone (RRP RM1,849)</li>
+                                                            <li>8GB RAM</li>
+                                                            <li>256GB Storage</li>
+                                                            <li>36-month contract</li>
                                                         </ul>
-                                                        <p class="panel-colors">Available in: <span class="span-color black" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Black"></span><span class="span-color blue" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Blue"></span></p>
+                                                        <p class="panel-colors">Available in: <span class="span-color white" data-bs-toggle="tooltip" data-bs-placement="bottom" title="White"></span></p>
                                                     </div>
                                                 </div>
-                                                <!-- <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
+                                                <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
                                                     <div class="layer-planDevice">
-                                                        <h2>Infinite+ Premium 188</h2>
-                                                        <h3>SAMSUNG S22 Ultra (Blue)</h3>
-                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/04/samsung-s22-ultra-blue.png"></p>
-                                                        <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan" data-productid="9000">Get Plan</a></p>
+                                                        <h2>Yes Infinite+ Premium</h2>
+                                                        <h3>OPPO Reno7 5G</h3>
+                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/05/oppo-reno7.png" /></p>
+                                                        <p class="panel-btn"><a href="" class="btn btn-getplan" title="">Get Plan</a></p>
                                                         <ul class="listing-deviceDesc">
-                                                            <li>250GB 4G Data</li>
-                                                            <li>30 Megapixels front camera</li>
-                                                            <li>Dual SIM</li>
-                                                            <li>5G Enabled</li>
+                                                            <li>FREE 5G smartphone (RRP RM1,999)</li>
+                                                            <li>8GB RAM</li>
+                                                            <li>256GB Storage</li>
+                                                            <li>36-month contract</li>
                                                         </ul>
+                                                        <p class="panel-colors">Available in: <span class="span-color light-dark-blue" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Light Dark Blue"></span></p>
                                                     </div>
-                                                </div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layer-accordionPlan" id="accordionPlan-4" data-aos="fade-up" data-aos-duration="500" data-aos-delay="700">
+                                    <div class="layer-accordionPlanDetails accordion-header" id="accordionPlanHeading-4">
+                                        <div class="row gx-5">
+                                            <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+                                                <img src="https://cdn.yes.my/site/wp-content/uploads/2022/04/icon-elevate-infinite.png" class="img-fluid img-infinite" alt="INFINITE+" title="INFINITE+" />
+                                                <p class="panel-textGradient"><span>Ultra</span></p>
+                                                <!-- <p class="panel-hotspot">200<sup>GB Hotspot</sup></p> -->
+                                                <p class="panel-permonth"><strong>178</strong>/mth</p>
+                                            </div>
+                                            <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+                                                <ul class="listing-planCheck">
+                                                    <li>Unlimited full speed 5G + 4G data</li>
+                                                    <li>Unlimited calls</li>
+                                                    <li>100GB hotspot data</li>
+                                                    <li>FREE* 5G smartphone<br />*Terms and conditions apply.</li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-lg-4 mt-md-4 mt-lg-0 d-flex align-items-lg-end justify-content-lg-end">
+                                                <button class="accordion-button btn-viewMore collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePlan-4" aria-expanded="true" aria-controls="collapsePlan-3">Show Free Phones</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layer-accordionPlanDevices accordion-collapse collapse" id="collapsePlan-4" aria-labelledby="accordionPlanHeading-4" data-bs-parent="accordion-plans">
+                                        <div class="layer-accordionPlanDevicesBody">
+                                            <div class="row flex-nowrap flex-xl-wrap">
+                                                <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
+                                                    <div class="layer-planDevice">
+                                                        <h2>Yes Infinite+ Ultra</h2>
+                                                        <h3>Samsung Galaxy S22 5G</h3>
+                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/05/samsung-galaxy-s22.png" /></p>
+                                                        <p class="panel-btn"><a href="" class="btn btn-getplan" title="">Get Plan</a></p>
+                                                        <ul class="listing-deviceDesc">
+                                                            <li>FREE 5G smartphone (RRP RM3,699)</li>
+                                                            <li>8GB RAM</li>
+                                                            <li>256GB Storage</li>
+                                                            <li>36-month contract</li>
+                                                        </ul>
+                                                        <p class="panel-colors">Available in: <span class="span-color midnight-green" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Midnight Green"></span></p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
+                                                    <div class="layer-planDevice">
+                                                        <h2>Yes Infinite+ Ultra</h2>
+                                                        <h3>VIVO X80 5G</h3>
+                                                        <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/05/vivo-x80.png" /></p>
+                                                        <p class="panel-btn"><a href="" class="btn btn-getplan" title="">Get Plan</a></p>
+                                                        <ul class="listing-deviceDesc">
+                                                            <li>FREE 5G smartphone (RRP RM3,499)</li>
+                                                            <li>12GB RAM</li>
+                                                            <li>256GB Storage</li>
+                                                            <li>36-month contract</li>
+                                                        </ul>
+                                                        <p class="panel-colors">Available in: <span class="span-color orange" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Orange"></span></p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
