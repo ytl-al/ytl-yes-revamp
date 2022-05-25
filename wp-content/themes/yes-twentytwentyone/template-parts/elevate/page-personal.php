@@ -124,11 +124,11 @@
                                         <input type="text" class="form-control text-uppercase" id="alternative_name" name="alternative_name"
                                                v-model="eligibility.alternative_name" @keypress="checkInputFullName(event)" @input="watchAllowNext" placeholder=""
                                                required>
-                                    </div> 
+                                    </div>
                                 </div>
 								 <div class="col-md-7">
                                     <label class="form-label">* Phone Number of<br> Alternate Contact Person</label>
-                                    <div class="input-group align-items-center">                                        
+                                    <div class="input-group align-items-center">
 										<div class="input-group-prepend" style="margin-right:10px;">
                                                 <span class="input-group-text" id="basic-addon1">MY +60</span>
                                             </div>
@@ -136,11 +136,11 @@
                                                    id="alternative_phone"
                                                    name="alternative_phone" v-model="eligibility.alternative_phone" @input="watchAllowNext"
                                                    @keypress="isNumber($event)"
-                                                   placeholder="Phone number">	   
-                                    </div> 
+                                                   placeholder="Phone number">
+                                    </div>
                                 </div>
                             </div>
-							 
+
                             <div class="row mb-4">
                                 <div class="col-md-8">
                                     <label class="form-label">* Address</label>
@@ -160,7 +160,7 @@
                                     </div>
                                 </div>
                             </div>
-                             
+
                             <div class="row mb-4">
                             <div class="col-md-12 col-12">
                                 <label class="form-label">* Postcode</label>
@@ -496,7 +496,7 @@
                             self.deliveryInfo.name = self.eligibility.name;
                             self.deliveryInfo.phone = self.eligibility.phone;
                             self.deliveryInfo.email = self.eligibility.email;
-							
+
                             self.deliveryInfo.alternative_name = self.eligibility.alternative_name;
                             self.deliveryInfo.alternative_phone = self.eligibility.alternative_phone;
 
@@ -526,7 +526,7 @@
                         self.deliveryInfo.name = eligibility.name;
                         self.deliveryInfo.phone = eligibility.phone;
                         self.deliveryInfo.email = eligibility.email;
-						
+
 						self.deliveryInfo.alternative_name = self.eligibility.alternative_name;
                         self.deliveryInfo.alternative_phone = self.eligibility.alternative_phone;
                     }
@@ -755,7 +755,7 @@
                         isFilled = false;
                         $('#ic_phone_number').addClass('input_error');
                     }
-					
+
 					if(self.eligibility.alternative_phone & !self.validateMobile('0'+self.eligibility.alternative_phone)){
                         isFilled = false;
                         $('#alternative_phone').addClass('input_error');
@@ -789,10 +789,16 @@
                     var param = self.deliveryInfo;
                     param.uid = self.customer.id;
                     param.productId = self.productId;
+                    if(self.dealer){
+                        param.referralCode = self.dealer.referral_code;
+                        param.dealerUID = self.dealer.dealer_id;
+                        param.dealerCode = self.dealer.dealer_code;
+                    }else{
+                        param.referralCode = "";
+                        param.dealerUID = "";
+                        param.dealerCode = "";
+                    }
 
-                    param.referralCode = self.dealer.referral_code;
-                    param.dealerUID = self.dealer.dealer_id;
-                    param.dealerCode = self.dealer.dealer_code;
 
                     axios.post(apiEndpointURL_elevate + '/customer/update', param)
                         .then((response) => {
@@ -801,13 +807,12 @@
                                 elevate.redirectToPage('review');
                             }else{
                                 toggleOverlay(false);
-                                $('#error').html("Systm error, please try again.");
-                                console.log(data);
+                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                             }
                         })
                         .catch((error) => {
                             toggleOverlay(false);
-                            console.log(error, response);
+                            toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                         });
 
                 },
