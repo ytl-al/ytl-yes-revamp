@@ -159,7 +159,7 @@
                                 <div class="col-6 text-end">
                                     <p>RM{{formatPrice(item.price)}}/ mth</p>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="hr_line"></div>
                         </div>
 
@@ -289,7 +289,7 @@
                             self.updatePlan();
                             $('#container-hasItem').show();
                             $('#main-vue').css({'height':'auto'});
-							
+
 							setTimeout(function(){
 								$('.selectColorWrap li:first-child').trigger("click");
 							},100);
@@ -299,7 +299,7 @@
                         })
                         .catch((error) => {
                             toggleOverlay(false);
-                            console.log('error', error);
+                            toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                         })
                 },
                 updatePlan: function() {
@@ -319,7 +319,7 @@
                     ];
 
                     var subtotal = parseFloat(self.orderSummary.product.selected.devicePriceMonth) + parseFloat(self.orderSummary.product.selected.planPerMonth);
-                    
+
 					var amount = parseFloat(self.orderSummary.product.selected.plan.monthlyAmount);
                     var sstAmount = parseFloat(self.orderSummary.product.selected.plan.sstAmount);
                     var rounding = parseFloat(self.orderSummary.product.selected.plan.roundingAdjustment);

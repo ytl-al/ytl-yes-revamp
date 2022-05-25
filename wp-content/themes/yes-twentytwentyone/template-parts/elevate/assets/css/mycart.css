@@ -508,6 +508,22 @@ main.site-main {
     background: #fff;
 }
 
+.color-peach a {
+    background: #D8A89D;
+}
+
+.color-gray a {
+    background: #ACACAC;
+}
+
+.color-pink a {
+    background: #BC9792;
+}
+
+.color-green a {
+    background: #465D5B;
+}
+
 .selectContractWrap ul {
     list-style: none;
     padding: 0;

@@ -329,15 +329,14 @@
                                 self.submit_contract();
                             }else{
                                 toggleOverlay(false);
-                                $('#error').html("System error, please try again.");
-                                console.log(data);
+                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                             }
                             toggleOverlay(false);
 
                         })
                         .catch((error) => {
                             toggleOverlay(false);
-                            console.log(error, response);
+                            toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                         });
                 },
 
@@ -346,7 +345,7 @@
 
                     toggleOverlay();
                     var param = elevate.lsData.orderInfo;
- 
+
                     axios.post(apiEndpointURL_elevate + '/order/update', param)
                         .then((response) => {
                             var data = response.data;
@@ -354,13 +353,12 @@
                                 elevate.redirectToPage('thanks');
                             }else{
                                 toggleOverlay(false);
-                                $('#error').html("Systm error, please try again.");
-                                console.log(data);
+                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                             }
                         })
                         .catch((error) => {
                             toggleOverlay(false);
-                            console.log(error, response);
+                            toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                         });
 
                 },
@@ -385,15 +383,14 @@
 								//elevate.redirectToPage('paynow');
                             }else{
                                 toggleOverlay(false);
-                                $('#error').html("System error, please try again.");
-                                console.log(data);
+                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                             }
                             toggleOverlay(false);
 
                         })
                         .catch((error) => {
                             toggleOverlay(false);
-                            console.log(error, response);
+                            toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                         });
 
                 },

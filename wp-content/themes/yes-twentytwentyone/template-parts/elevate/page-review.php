@@ -64,9 +64,9 @@
                                         <div class="hr_line"></div>
                                         <div class="text-bold">
                                             {{contractTitle}}
-                                        </div> 
+                                        </div>
                                     </div>
-                                     
+
                                 </div>
                             </div>
                         </div>
@@ -140,29 +140,6 @@
                                     <p>RM{{item.price}}/ mth</p>
                                 </div>
                             </div>
-							<div class="hr_line"></div>
-                            <div class="row mt-2 ">
-                                <div class="col-1">
-                                    <input type="checkbox" id="subscribe" @click="watchAllowNext" name="subscribe" value="1">
-                                </div>
-                                <div class="col-11 text-12" >
-                                    <label for="subscribe" style="line-height:20px;">I here by agree to subscribe to the plan selected in the online form
-                                        submitted by me, and to be bound by the First to 5G Campaign Terms and
-                                        Conditions available at <a target="_blank"
-                                                                   href="https://www.yes.my/tnc/ongoing-campaigns-tnc">www.yes.my/tnc/ongoing-campaigns-tnc</a>.
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="row mt-2 ">
-                                <div class="col-1">
-                                    <input type="checkbox" id="consent" @click="watchAllowNext" name="consent" value="1">
-                                </div>
-                                <div class="col-11 text-12">
-                                    <label for="consent" style="line-height:20px;">I further give consent to YTLC to process my personal data in accordance with YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a> and also give consent to ORIX to process my personal data in accordance with ORIX Privacy Policy available at (<a href="https://www.orix.com.my/privacy-policy" target="_blank">https://www.orix.com.my/privacy-policy</a>) for the purposes of my agreement with ORIX.
-                                    </label>
-                                </div>
-                            </div>
-
 
                             <div class="row mt-3 ">
                                 <div class="col-12">
@@ -203,6 +180,7 @@
                         contract_id: null,
                         orderItems: []
                     },
+                    orderInfo:{}
                 },
                 currentStep: 0,
                 elevate: null,
@@ -246,13 +224,13 @@
                 },
                 allowSelectCity: false,
                 allowSubmit: false
-            }, 
-			
+            },
+
             created: function () {
                 var self = this;
                 setTimeout(function () {
                     self.pageInit();
-                }, 500); 
+                }, 500);
 
             },
             methods: {
@@ -317,22 +295,87 @@
 					var url = self.orderSummary.product.selected.imageURL.split(';');
 					console.log(url);
 					return url[0];
-					
+
 				},
+
+                makeOrder: function (){
+                    var self = this;
+                    var params = self.customer;
+                    params.productSelected = self.orderSummary.product.selected.plan.planId;
+                    params.referralCode = self.dealer.referral_code;
+                    params.dealerUID = self.dealer.dealer_id;
+                    params.dealerCode = self.dealer.dealer_code;
+
+                    toggleOverlay();
+                    axios.post(apiEndpointURL_elevate + '/order/create', params)
+                        .then((response) => {
+                            var data = response.data;
+                            if(data.status == 1){
+                                //save contract info
+                                self.orderSummary.orderInfo = data.data;
+                                elevate.lsData.orderInfo = data.data;
+                                elevate.updateElevateLSData();
+                                //self.updateElevateOrder();
+                                self.submit_contract();
+                            }else{
+                                toggleOverlay(false);
+                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                            }
+                            toggleOverlay(false);
+
+                        })
+                        .catch((error) => {
+                            toggleOverlay(false);
+                            toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                        });
+                },
+
+                submit_contract: function () {
+                    var self = this;
+                    var params = self.eligibility;
+                    params.orderId = self.orderSummary.orderInfo.id;
+                    params.contract = self.orderSummary.product.selected.contract;
+                    toggleOverlay();
+                    axios.post(apiEndpointURL_elevate + '/contract', params)
+                        .then((response) => {
+                            var data = response.data;
+                            if(data.status == 1){
+                                //save contract info
+                                self.contract = data.data;
+
+                                elevate.lsData.contract = data.data;
+                                elevate.updateElevateLSData();
+                                toggleOverlay();
+                                elevate.redirectToPage('thanks');
+                                //elevate.redirectToPage('paynow');
+                            }else{
+                                toggleOverlay(false);
+                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                            }
+                            toggleOverlay(false);
+
+                        })
+                        .catch((error) => {
+                            toggleOverlay(false);
+                            toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                        });
+
+                },
+
                 watchAllowNext:function (){
                     var self = this;
-                    if($('#subscribe').is(':checked')&& $('#consent').is(':checked')){
-                        self.allowSubmit = true
-                    }else{
-                        self.allowSubmit = false
-                    }
+                    self.allowSubmit = true
                 },
 
                 goNext: function () {
                     var self = this;
                     if(self.allowSubmit){
                         toggleOverlay();
-                        elevate.redirectToPage('contract');
+                        if(self.orderSummary.orderInfo.id){
+                            self.submit_contract();
+                        }else{
+                            self.makeOrder();
+                        }
                     }
                 }
 

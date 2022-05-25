@@ -372,7 +372,7 @@ $customerQRCodeScanned = false;
 
                     },
                     error: function (e) {
-                        console.log(e.message);
+                        toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                     }
                 });
 	}

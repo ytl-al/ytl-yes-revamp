@@ -59,7 +59,7 @@
                             <div class="mt-5 mb-5">
                                 <div class="d-none d-md-block" id="qrcode"></div>
                                 <div class="text-center d-block d-md-none">
-                                    <a id="cmdVerify" target="_blank" class="btn btn-danger mt-3">Verify Now</a> 
+                                    <a id="cmdVerify" target="_blank" class="btn btn-danger mt-3">Verify Now</a>
                                 </div>
                             </div>
                             <h3 class="subtitle2">Complete the verification in 2 simple steps!</h3>
@@ -193,13 +193,13 @@
                     self.interval = setInterval(function (){
                         self.eKYC_check();
                     },15000);
-					
+
 					$('#cmdVerify').click(function(){
 						var url = $('#cmdVerify').data('url');
-						windows.push(window.open(url, '_blank')); 
+						windows.push(window.open(url, '_blank'));
 					})
-					
-					$('#cmdVerifyClose').click(function(){ 
+
+					$('#cmdVerifyClose').click(function(){
 						for(var i = 0; i < windows.length; i++){
 							windows[i].close()
 						}
@@ -229,13 +229,14 @@
                                         self.CAVerification(data.data);
 										//elevate.redirectToPage('personal');
                                     }
-									
+
 									if(data.data.processStatus == "EKYC_Fail"){
                                         //failure
 										for(var i = 0; i < windows.length; i++){
 											windows[i].close()
 										}
-                                        elevate.redirectToPage('/error/');
+                                        toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, Your verification was rejected by eKYC system.',"elevate.redirectToPage('/error')")
+                                        //elevate.redirectToPage('/error/');
 
                                     }
                                 }
@@ -245,7 +246,8 @@
                             });
 
                     }else{
-                        elevate.redirectToPage('/eligibility-failure/');
+                        toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, We can\'t verify your eKYC because of time limit.',"elevate.redirectToPage('/eligibility-failure')")
+                        //elevate.redirectToPage('/eligibility-failure/');
                     }
                 },
 
@@ -273,15 +275,12 @@
                                 elevate.redirectToPage('personal');
                             } else {
                                 toggleOverlay(false);
-                                $('#error').html("System error, please try again.");
-                                console.log(data);
-                                elevate.redirectToPage('/compasia-fail');
+                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due tobe cause your NRIC is not eligible (blacklisted).',"elevate.redirectToPage('/compasia-fail')")
                             }
                         })
                         .catch((error) => {
                             toggleOverlay(false);
-                            $('#error').html("System error, please try again.");
-                            console.log(error, response);
+                            toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                         });
                 },
                 redirectYWOS:function (){
@@ -306,5 +305,5 @@
                 }
             }
         });
-    }); 
+    });
 </script>
