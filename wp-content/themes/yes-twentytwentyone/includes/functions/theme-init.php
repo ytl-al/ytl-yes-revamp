@@ -106,7 +106,8 @@ if (!function_exists('yes_register_widgets')) {
                 ['name' => 'Footer FAQ',        'id' => 'yes_widget_footer_faq'],
                 ['name' => 'Footer Newsletter', 'id' => 'yes_widget_footer_newsletter'],
                 ['name' => 'Footer Top',        'id' => 'yes_widget_footer_top'],
-                ['name' => 'Footer Bottom',     'id' => 'yes_widget_footer_bottom']
+                ['name' => 'Footer Bottom',     'id' => 'yes_widget_footer_bottom'], 
+                ['name' => 'Popular Deals',     'id' => 'yes_widget_popular_deals']
             ];
             foreach ($arr_widgets as $arr_widget) {
                 /** Register widget for all */
