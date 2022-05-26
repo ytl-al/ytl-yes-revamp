@@ -209,7 +209,7 @@
                             </div>
                             <div class="d-flex align-items-center">
                                 <!-- <a href="https://appstore.yes.my/ywos" class="pink-btn" target="_blank"><?php echo esc_html__('Get Started', 'yes.my'); ?></a> -->
-                                <a href="https://appstore.yes.my/ywos" class="pink-btn" target="_blank">Get Started</a>
+                                <a href="/selfcare" class="pink-btn" target="_blank">Get Started</a>
                                 <!-- <a href="#" class="login-btn"><span class="iconify" data-icon="carbon:user-avatar-filled-alt"></span> <?php echo esc_html__('Log In', 'yes.my'); ?></a> -->
                             </div>
                         </div>
