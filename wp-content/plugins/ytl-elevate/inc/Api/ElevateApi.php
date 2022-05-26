@@ -182,7 +182,17 @@ class ElevateApi
     public static function getProduct(WP_REST_Request $request)
     {
         $code = $request['code'];
-        $product = \Inc\Base\Model::refinde(self::pullBundleProduct($code));
+        $products = self::pullBundleProduct($code);
+        foreach ($products as $k=>$v){
+
+            if(!$products[$k]['device']['imageURL'] || strtolower($products[$k]['device']['imageURL'])=='null'){
+                $products[$k]['device']['imageURL'] = 'https://cdn.yes.my/site/wp-content/uploads/2022/05/elevate-phone-outline.jpeg';
+            }
+
+        }
+        $product = \Inc\Base\Model::refinde($products);
+
+
 
         $response = new WP_REST_Response($product);
         $response->set_status(200);
@@ -340,7 +350,7 @@ class ElevateApi
         $email = $request['email'];
         $phone = $request['phone'];
         $guid = $request['guid'];
-         
+
         $PartneReferenceID = $request['PartneReferenceID'];
         $OCRConfidenceScore = round($request['OCRConfidenceScore']/100,2);
 

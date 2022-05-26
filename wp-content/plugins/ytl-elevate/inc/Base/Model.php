@@ -293,7 +293,7 @@ class Model extends BaseController
         $processed['colors'] = $colors;
 
         foreach ($processed['colors'] as $k=>$c){
-            if($c[0]['imageURL']){
+            if($c[0]['imageURL'] && strtolower($c[0]['imageURL'])!='null'){
                 $colorImg = explode(';',$c[0]['imageURL']);
                 $img = $colorImg[0];
             }else{
