@@ -230,8 +230,8 @@ class ElevateApi
     public static function getProductByCode(WP_REST_Request $request)
     {
         $code = $request['code'];
-
-        $product = \Inc\Base\Model::refinde(self::pullBundleProductByCode($code));
+		$product = self::pullBundleProductByCode($code);
+        $product = \Inc\Base\Model::refinde(array($product));
 
         $response = new WP_REST_Response($product);
         $response->set_status(200);

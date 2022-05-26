@@ -315,32 +315,28 @@
 
                             var data = response.data;
 
-
-
-                            if (data.data && data.data.eligibilityStatus == 'ALLOWED') {
+                            if (data.data.eligibilityStatus == 'ALLOWED') {
                                 self.isEligibilityCheck = true;
                                 self.elevateCustomer();
                             } else {
+
                                 toggleOverlay(false);
                                 if(data.status == 0){
-                                    $('#error').html(data.error);
+                                    toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                                 }else{
-                                    $('#error').html(data.data.displayResponseMessage);
+                                    toggleModalAlert('Error','Dear valued customer,<br>Your submission was not successful as you already have an existing installment plan that is currently active.',"elevate.redirectToPage('compasia-fail')")
                                 }
-                                $('#error').html(data.data.displayResponseMessage);
-								$('#status_mesage').html('');
-                                console.log(data);
+                                // $('#error').html(data.data.displayResponseMessage);
+								// $('#status_mesage').html('');
+                                // console.log(data);
 
-                                setTimeout(function(){
-                                    elevate.redirectToPage('compasia-fail');
-                                },5000);
 
 
                             }
                         })
                         .catch((error) => {
                             toggleOverlay(false);
-                            console.log(error, response);
+                            console.log(error);
                         });
 
                 },
@@ -364,19 +360,15 @@
                                 self.checkActiveContract();
                             } else {
                                 toggleOverlay(false);
-								console.log(data);
 								$('#status_mesage').html('');
-								//$('#error').html("Sorry,"+ data.error);
-								$('#status_mesage').html('');
-                                 elevate.redirectToPage('eligibility-failure');
+                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due tobe cause your NRIC is not eligible (blacklisted).',"elevate.redirectToPage('eligibility-failure')");
 								
                             }
                         })
                         .catch((error) => {
                             toggleOverlay(false);
 							$('#status_mesage').html('');
-                            $('#error').html("System error, please try again.");
-                            console.log(error, response);
+                            console.log(error);
                         });
                 },
 
@@ -397,16 +389,13 @@
 								elevate.redirectToPage('verification');
                             } else {
                                 toggleOverlay(false);
-								console.log(data);
 								$('#status_mesage').html('');
-								//$('#error').html("Sorry,"+ data.error);
-                                 elevate.redirectToPage('eligibility-failure');
+                                toggleModalAlert('Error','Dear valued customer,<br>Your submission was not successful as you already have an existing installment plan that is currently active.',"elevate.redirectToPage('eligibility-failure')")
                             }
                         })
                         .catch((error) => {
                             toggleOverlay(false);
-                            $('#error').html("System error, please try again.");
-                            console.log(error, response);
+                            toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.');
                         });
                 },
 
@@ -415,9 +404,15 @@
                     var params = self.eligibility;
                     params.productId = self.productId;
 
+                    if(self.dealer){
                     params.referralCode = self.dealer.referral_code;
                     params.dealerUID = self.dealer.dealer_id;
                     params.dealerCode = self.dealer.dealer_code;
+                    }else{
+                        params.referralCode ="";
+                        params.dealerUID = "";
+                        params.dealerCode = "";
+                    }
 
                     toggleOverlay();
 					$('#status_mesage').html('Checking customer...');
@@ -436,12 +431,12 @@
                                 //elevate.redirectToPage('verification');
                             } else {
                                 toggleOverlay(false);
-                                $('#error').html(data.error);
+                                toggleModalAlert('Error','Dear valued customer,<br>'+data.error)
+
                             }
                         })
                         .catch((error) => {
-                            toggleOverlay(false);
-                            console.log(error, response);
+                            console.log(error);
                         });
                 },
 
@@ -575,7 +570,7 @@
 							if(!self.validateAge()){
 								isFilled = false;
 								$('#mykad_number').addClass('input_error');
-								error.push('Only age between 18 to 65 years can register');
+                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to your age not meeting the requirement.');
 							}
 						}else{
 							isFilled = false;

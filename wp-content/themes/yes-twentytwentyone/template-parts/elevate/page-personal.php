@@ -789,10 +789,16 @@
                     var param = self.deliveryInfo;
                     param.uid = self.customer.id;
                     param.productId = self.productId;
-
+                    if(self.dealer){
                     param.referralCode = self.dealer.referral_code;
                     param.dealerUID = self.dealer.dealer_id;
                     param.dealerCode = self.dealer.dealer_code;
+                    }else{
+                        param.referralCode = "";
+                        param.dealerUID = "";
+                        param.dealerCode = "";
+                    }
+
 
                     axios.post(apiEndpointURL_elevate + '/customer/update', param)
                         .then((response) => {
@@ -801,8 +807,7 @@
                                 elevate.redirectToPage('review');
                             }else{
                                 toggleOverlay(false);
-                                $('#error').html("Systm error, please try again.");
-                                console.log(data);
+                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                             }
                         })
                         .catch((error) => {

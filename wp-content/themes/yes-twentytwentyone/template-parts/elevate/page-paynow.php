@@ -194,23 +194,7 @@
     </div>
     </main>
     <!-- Vue Wrapper ENDS -->
-
-    <div class="modal fade" id="modal-alert" tabindex="-1" aria-labelledby="modal-alert" aria-hidden="true" data-bs-backdrop="static">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h5 class="modal-title" id="modal-titleLabel"></h5>
-                </div>
-                <div class="modal-body text-center">
-                    <p id="modal-bodyText"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+<?php require_once('includes/footer.php'); ?>
 
     <script type="text/javascript">
         var mainwin;
@@ -838,7 +822,8 @@
                                         errorMsg = data.message
                                     }
                                     toggleOverlay(false);
-                                    self.toggleModalAlert('Error', errorMsg);
+                                    toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                                    //self.toggleModalAlert('Error', errorMsg);
 
                                     self.cancelElevateOrder(errorMsg);
                                 }
@@ -887,8 +872,7 @@
 
                                 }else{
                                     toggleOverlay(false);
-                                    $('#error').html("Systm error, please try again.");
-                                    console.log(data);
+                                    toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                                 }
                             })
                             .catch((error) => {
@@ -913,8 +897,7 @@
 
                                 }else{
                                     toggleOverlay(false);
-                                    $('#error').html("Systm error, please try again.");
-                                    console.log(data);
+                                    toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                                 }
                             })
                             .catch((error) => {
@@ -1038,4 +1021,3 @@
     </script>
 
 
-<?php require_once('includes/footer.php'); ?>
