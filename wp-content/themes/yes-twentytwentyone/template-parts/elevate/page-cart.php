@@ -25,7 +25,7 @@
     <div id="container-empty" v-if="isCartEmpty">
         <section id="grey-innerbanner">
             <div class="container">
-                <h1 class="title">Elevate cart</h1>
+                <h1 class="title">Yes Infinite+ Cart</h1>
             </div>
         </section>
         <section id="cart-body">

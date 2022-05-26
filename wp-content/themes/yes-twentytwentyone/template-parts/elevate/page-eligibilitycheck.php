@@ -54,7 +54,7 @@
                 <div class="row">
                     <div class="col-md-5 p-5 flex-column bg-checkout1">
                         <div class="title text-white checkout-left">
-                            Check if you are eligible for the Yes Elevate contract option
+                            Check if you are eligible for the Yes Infinite+ contract option
                         </div>
                     </div>
                     <div class="col-md-7 p-5">

@@ -270,7 +270,7 @@
                         if(self.orderSummary.product.selected.contractName){
                             self.contractTitle = self.orderSummary.product.selected.contractName;
                         }else{
-                            self.contractTitle = 'Elevate ' + self.orderSummary.product.selected.contract +' months';
+                            self.contractTitle = 'Yes Infinite+';
                         }
 
                         self.hasPlan = true;
