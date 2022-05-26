@@ -297,7 +297,7 @@ class Model extends BaseController
                 $colorImg = explode(';',$c[0]['imageURL']);
                 $img = $colorImg[0];
             }else{
-                $img = '/wp-content/uploads/2022/05/elevate-phone-outline.jpeg';
+                $img = 'https://cdn.yes.my/site/wp-content/uploads/2022/05/elevate-phone-outline.jpeg';
             }
 
 
