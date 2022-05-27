@@ -188,21 +188,21 @@ font-family: 'Open Sans', sans-serif;
                         <thead>
                             <tr>
                                 <th class="text-center visual"><img src="https://cdn.yes.my/site/wp-content/uploads/2021/09/kasiup-postpaid-visual.png" class="img-fluid d-none"></th>
-                                <th class="plan-item p-3" data-planid="915">
+                                <th class="plan-item p-3" data-planid="792">
 									<div >
                                     <h1>Yes Infinite Basic</h1>
                                     <h2>RM58/mth <span class="circle"><i class=""></i></span></h2>
                                     <a href="javascript:void(0)" class="btn pink-btn">Select<span class="d-none d-lg-inline-block">&nbsp;Plan</span></a>
 									</div>
                                 </th>
-                                <th class="plan-item p-3" data-planid="916">
+                                <th class="plan-item p-3" data-planid="793">
 									<div >
                                     <h1>Yes Infinite Standard</h1>
                                     <h2>RM88/mth<span class="circle"><i class=""></i></span></h2>
                                     <a href="javascript:void(0)" class="btn pink-btn">Select<span class="d-none d-lg-inline-block">&nbsp;Plan</span></a>
 									</div>
                                 </th>
-                                <th class="plan-item p-3" data-planid="917">
+                                <th class="plan-item p-3" data-planid="794">
 									<div >
                                     <h1>Yes Infinite Premium</h1>
                                     <h2>RM118/mth<span class="circle"><i class=""></i></span></h2>
@@ -210,7 +210,7 @@ font-family: 'Open Sans', sans-serif;
 									</div>
                                 </th>
 
-                                <th class="plan-item p-3" data-planid="918">
+                                <th class="plan-item p-3" data-planid="795">
 									<div >
                                     <h1>Yes Infinite Ultra</h1>
                                     <h2>RM178/mth<span class="circle"><i class=""></i></span></h2>
@@ -279,7 +279,7 @@ font-family: 'Open Sans', sans-serif;
                             <thead>
                                 <tr>
                                     <th class="text-center visual"><img src="https://cdn.yes.my/site/wp-content/uploads/2021/10/kasiup-prepaid-visual.png" class="img-fluid d-none"></th>
-                                    <th class="plan-item p-3" data-planid="710">
+                                    <th class="plan-item p-3" data-planid="689">
 										<div >
                                         <h1>Yes Prepaid FT5G Unlimited <span class="circle"><i class=""></i></span></h1>
                                         <h2>RM30</h2>
