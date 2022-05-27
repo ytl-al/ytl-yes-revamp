@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="row mb-4 align-items-center g-2">
                                     <div class="col-12">
-                                        <label class="form-label">*Key in your mobile number</label>
+                                        <label class="form-label">* Key in your mobile number</label>
                                     </div>
                                     <div class="col-lg-8 col-12">
                                         <div class="row">
