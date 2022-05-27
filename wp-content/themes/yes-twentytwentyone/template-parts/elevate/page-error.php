@@ -52,7 +52,7 @@
             <div class="verify-body p-lg-5">
                 <div class="mt-5 mb-5">
                     <h1 class="title mt-3 mb-3">Identity Not Eligible</h1>
-                    <p>Unfortunately you are currently not eligible for the Yes Elevate contract option</p>
+                    <p>Unfortunately you are currently not eligible for the Yes Infinite+ contract option</p>
                     <p>however proceed with our Normal 24 months contract option.</p>
                     <p>Would you like to proceed? </p>
                 </div>
