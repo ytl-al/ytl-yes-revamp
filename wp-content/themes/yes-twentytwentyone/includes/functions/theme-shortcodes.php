@@ -5,7 +5,7 @@ if (!function_exists('generate_scheduled_network_maintenance')) {
      * Function generate_scheduled_network_maintenance()
      * Function to register shortcode for the Scheduled Network Maintenance page
      * 
-     * @since    1.0.2
+     * @since    1.2.0
      */
     function generate_scheduled_network_maintenance()
     {
@@ -186,4 +186,27 @@ if (!function_exists('generate_scheduled_network_maintenance')) {
     }
 
     add_shortcode('yessc_scheduled_network_maintenance', 'generate_scheduled_network_maintenance');
+}
+
+
+if (!function_exists('display_widget_content')) {
+    /**
+     * Function display_widget_content()
+     * Function to register shortcode to display the widget by ID
+     * 
+     * @since    1.2.0
+     */
+    function display_widget_content($atts)
+    {
+        extract(shortcode_atts(array(
+            'widget_id' => FALSE
+        ), $atts));
+
+        ob_start(); 
+        dynamic_sidebar($widget_id); 
+        $widget_content = ob_get_clean(); 
+        $html = $widget_content; 
+        return $html;
+    }
+    add_shortcode('yes_display_widget', 'display_widget_content');
 }

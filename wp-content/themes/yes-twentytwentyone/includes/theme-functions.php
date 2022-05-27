@@ -10,6 +10,7 @@
 
 define('THEME_FUNCTIONS_PATH', TEMPLATEPATH . '/includes/functions');
 
+// require_once(THEME_FUNCTIONS_PATH . '/theme-maintenance.php');
 require_once(THEME_FUNCTIONS_PATH . '/theme-init.php');
 require_once(THEME_FUNCTIONS_PATH . '/theme-shortcodes.php');
 require_once(THEME_FUNCTIONS_PATH . '/theme-wpcf7-validation.php');

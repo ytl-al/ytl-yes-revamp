@@ -397,8 +397,10 @@
     }
 
     .nav-container { background-color: #1A1E47; }
+    .nav-container .navbar { padding-top: 8px; padding-bottom: 8px; }
+    .nav-container .navbar-brand { padding-top: 0; padding-bottom: 0; }
     .nav-container a, .nav-container .login-btn {}
-    .logo-top { width: 48px; }
+    .logo-top { width: 35px; }
 </style>
 
 
@@ -632,7 +634,7 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-12 mb-lg-0 mb-2 align-self-center">
-                            <h1 class="mb-4">or sign in with your YES ID</h1>
+                            <h1 class="mb-4">or sign in with your Yes ID / Number</h1>
                         </div>
                     </div>
                     <div class="row justify-content-center">
@@ -651,7 +653,7 @@
                                     <form class="form-loginTac" @submit="otpLoginSubmit">
                                         <div class="input-box">
                                             <div class="w-100">
-                                                <input type="text" class="form-control userid" id="input-otpYesNumber" maxlength="11" v-model="login.input.otp.yesNumber" @input="watchOTPLoginFields" placeholder="YES ID" />
+                                                <input type="text" class="form-control userid" id="input-otpYesNumber" maxlength="11" v-model="login.input.otp.yesNumber" @input="watchOTPLoginFields" placeholder="Yes ID / Number" />
                                             </div>
                                             <div class=" w-100 border-top item-otpPassword" id="box-otpPassword" style="display: none;">
                                                 <input type="password" class="form-control password" id="input-otpPassword" v-model="login.input.otp.password" @input="watchOTPLoginFields" placeholder="******" maxlength="6" />
@@ -678,7 +680,7 @@
                                     <form class="form-loginPassword" @submit="basicLoginSubmit">
                                         <div class="input-box">
                                             <div class="w-100 border-bottom">
-                                                <input type="text" class="form-control userid" id="input-basicYesNumber" maxlength="11" v-model="login.input.basic.yesNumber" @input="watchBasicLoginFields" placeholder="YES ID" />
+                                                <input type="text" class="form-control userid" id="input-basicYesNumber" maxlength="11" v-model="login.input.basic.yesNumber" @input="watchBasicLoginFields" placeholder="Yes ID / Number" />
                                             </div>
                                             <div class="w-100">
                                                 <input type="password" class="form-control password" id="input-basicPassword" v-model="login.input.basic.password" @input="watchBasicLoginFields" placeholder="********" />

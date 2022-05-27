@@ -420,7 +420,7 @@
 
 .white-btn2:disabled {
     background-color: #ED028C;
-    color: #FFF;
+    color: #FFF !important;
     opacity: 0.6;
 }
 
