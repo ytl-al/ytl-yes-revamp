@@ -106,7 +106,8 @@ if (!function_exists('yes_register_widgets')) {
                 ['name' => 'Footer FAQ',        'id' => 'yes_widget_footer_faq'],
                 ['name' => 'Footer Newsletter', 'id' => 'yes_widget_footer_newsletter'],
                 ['name' => 'Footer Top',        'id' => 'yes_widget_footer_top'],
-                ['name' => 'Footer Bottom',     'id' => 'yes_widget_footer_bottom']
+                ['name' => 'Footer Bottom',     'id' => 'yes_widget_footer_bottom'], 
+                ['name' => 'Popular Deals',     'id' => 'yes_widget_popular_deals']
             ];
             foreach ($arr_widgets as $arr_widget) {
                 /** Register widget for all */
@@ -187,6 +188,10 @@ if (!function_exists('yes_register_menus')) {
                     'support-tools-services' => esc_html__('Support - Tools & Services', 'yes.my'),
                     'support-contact-us' => esc_html__('Support - Contact Us', 'yes.my'),
 
+                    'bs-internet-access'    => esc_html__('Business - Internet Access', 'yes.my'), 
+                    'bs-private-network'    => esc_html__('Business - Private Network', 'yes.my'), 
+                    'bs-voice-communication'=> esc_html__('Business - Voice Communication', 'yes.my') 
+
                     // 'footer-column-1'   => esc_html__('Footer - Column 1', 'yes.my'),
                     // 'footer-column-2'   => esc_html__('Footer - Column 2', 'yes.my'),
                     // 'footer-column-3'   => esc_html__('Footer - Column 3', 'yes.my'),
@@ -250,7 +255,7 @@ if (!function_exists('display_yes_logo')) {
         $site_url   = get_home_url();
 
         if (has_custom_logo()) {
-            echo '<a href="' . $site_url . '" class="navbar-brand d-block d-lg-none"><img src="' . esc_url($logo[0]) . '" alt="' . get_bloginfo('name') . '" title="' . get_bloginfo('name') . '" class="logo-top" /></a>';
+            echo '<a href="' . $site_url . '" class="navbar-brand d-block d-sm-none"><img src="' . esc_url($logo[0]) . '" alt="' . get_bloginfo('name') . '" title="' . get_bloginfo('name') . '" class="logo-top" /></a>';
         } else {
             echo '<h1><a href="' . $site_url . '">' . get_bloginfo('name') . '</a></h1>';
         }
@@ -601,6 +606,24 @@ if (!function_exists('show_most_faq_viewed')) {
 
     add_shortcode('bd_most_viewed_faq', 'show_most_faq_viewed');
 }
+
+
+
+if (!function_exists('is_child_of_business')) {
+    function is_child_of_business() 
+    {
+        if (is_page()) {
+            global $post;
+            $parents = get_post_ancestors($post->ID);
+            $top_post_id = ($parents) ? end($parents) : $post->ID;
+            $post_slug = get_post_field('post_name', $top_post_id);
+            if ($post_slug == 'business') {
+                return true;
+            }
+        }
+        return false;
+    }
+} 
 
 
 if (!function_exists('yes_remove_powered_headers')) {

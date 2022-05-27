@@ -112,11 +112,19 @@ h5 {
     color: #000;
 }
 
+#slider-yes-home .slider-content h2 {
+    font-size: 21px;
+    line-height: 28px;
+    font-weight: 700;
+    color: #000;
+}
+
 #slider-yes-home .slider-content h1 span {
     font-weight: 800;
 }
 
-#slider-yes-home .slider-content h1.white {
+#slider-yes-home .slider-content h1.white,
+#slider-yes-home .slider-content h2.white {
     color: #FFF;
 }
 
@@ -150,6 +158,10 @@ h5 {
 #popular-deals h1 {
     font-size: 39px;
     line-height: 47px;
+}
+
+#popular-deals .deal-box .deal-img {
+    max-width: 300px;
 }
 
 #popular-deals .deal-box {
