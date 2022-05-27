@@ -54,7 +54,7 @@
                 <div class="row">
                     <div class="col-md-5 p-5 flex-column bg-checkout1">
                         <div class="title text-white checkout-left">
-                            Check if you are eligible for the Yes Elevate contract option
+                            Check if you are eligible for the Yes Infinite+ contract option
                         </div>
                     </div>
                     <div class="col-md-7 p-5">
@@ -168,7 +168,8 @@
 										<input type="checkbox" id="consent" @click="watchAllowNext" name="consent" value="1">
 									</div>
 									<div class="col-11 text-12">
-										<label for="consent" style="line-height:20px;">I further give consent to YTLC to process my personal data in accordance with YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a> and also give consent to ORIX to process my personal data in accordance with ORIX Privacy Policy available at (<a href="https://www.orix.com.my/privacy-policy" target="_blank">https://www.orix.com.my/privacy-policy</a>) for the purposes of my agreement with ORIX.
+										<label for="consent" style="line-height:20px;">
+                                            I further give consent to YTLC to process my personal data in accordance with YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a> and also give consent to TOP to process my personal data in accordance with TOP Privacy Policy available at (<a href="http://yes.compasia.com/TOP_PRIVACY_POLICY.PDF" target="_blank">http://yes.compasia.com/TOP_PRIVACY_POLICY.PDF</a>) for the purposes of my agreement with TOP.
 										</label>
 									</div>
 								</div>
@@ -315,32 +316,28 @@
 
                             var data = response.data;
 
-
-
-                            if (data.data && data.data.eligibilityStatus == 'ALLOWED') {
+                            if (data.data.eligibilityStatus == 'ALLOWED') {
                                 self.isEligibilityCheck = true;
                                 self.elevateCustomer();
                             } else {
+
                                 toggleOverlay(false);
                                 if(data.status == 0){
-                                    $('#error').html(data.error);
+                                    toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                                 }else{
-                                    $('#error').html(data.data.displayResponseMessage);
+                                    toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due tobe cause your NRIC is not eligible (blacklisted).',"elevate.redirectToPage('compasia-fail')")
                                 }
-                                $('#error').html(data.data.displayResponseMessage);
-								$('#status_mesage').html('');
-                                console.log(data);
+                                // $('#error').html(data.data.displayResponseMessage);
+								// $('#status_mesage').html('');
+                                // console.log(data);
 
-                                setTimeout(function(){
-                                    elevate.redirectToPage('compasia-fail');
-                                },5000);
 
 
                             }
                         })
                         .catch((error) => {
                             toggleOverlay(false);
-                            console.log(error, response);
+                            console.log(error);
                         });
 
                 },
@@ -364,19 +361,15 @@
                                 self.checkActiveContract();
                             } else {
                                 toggleOverlay(false);
-								console.log(data);
 								$('#status_mesage').html('');
-								//$('#error').html("Sorry,"+ data.error);
-								$('#status_mesage').html('');
-                                 elevate.redirectToPage('eligibility-failure');
+                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due tobe cause your NRIC is not eligible (blacklisted).',"elevate.redirectToPage('eligibility-failure')");
 
                             }
                         })
                         .catch((error) => {
                             toggleOverlay(false);
 							$('#status_mesage').html('');
-                            $('#error').html("System error, please try again.");
-                            console.log(error, response);
+                            console.log(error);
                         });
                 },
 
@@ -397,16 +390,13 @@
 								elevate.redirectToPage('verification');
                             } else {
                                 toggleOverlay(false);
-								console.log(data);
 								$('#status_mesage').html('');
-								//$('#error').html("Sorry,"+ data.error);
-                                 elevate.redirectToPage('eligibility-failure');
+                                toggleModalAlert('Error','Dear valued customer,<br>Your submission was not successful as you already have an existing installment plan that is currently active.',"elevate.redirectToPage('eligibility-failure')")
                             }
                         })
                         .catch((error) => {
                             toggleOverlay(false);
-                            $('#error').html("System error, please try again.");
-                            console.log(error, response);
+                            toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.');
                         });
                 },
 
@@ -415,9 +405,15 @@
                     var params = self.eligibility;
                     params.productId = self.productId;
 
-                    params.referralCode = self.dealer.referral_code;
-                    params.dealerUID = self.dealer.dealer_id;
-                    params.dealerCode = self.dealer.dealer_code;
+                    if(self.dealer){
+                        params.referralCode = self.dealer.referral_code;
+                        params.dealerUID = self.dealer.dealer_id;
+                        params.dealerCode = self.dealer.dealer_code;
+                    }else{
+                        params.referralCode ="";
+                        params.dealerUID = "";
+                        params.dealerCode = "";
+                    }
 
                     toggleOverlay();
 					$('#status_mesage').html('Checking customer...');
@@ -436,12 +432,12 @@
                                 //elevate.redirectToPage('verification');
                             } else {
                                 toggleOverlay(false);
-                                $('#error').html(data.error);
+                                toggleModalAlert('Error','Dear valued customer,<br>'+data.error)
+
                             }
                         })
                         .catch((error) => {
-                            toggleOverlay(false);
-                            console.log(error, response);
+                            console.log(error);
                         });
                 },
 
@@ -575,7 +571,7 @@
 							if(!self.validateAge()){
 								isFilled = false;
 								$('#mykad_number').addClass('input_error');
-								error.push('Only age between 18 to 65 years can register');
+                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to your age not meeting the requirement.');
 							}
 						}else{
 							isFilled = false;

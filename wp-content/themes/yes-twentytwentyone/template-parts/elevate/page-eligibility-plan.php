@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="col-md-5 p-5 flex-column bg-checkout2">
                         <div class="title text-white checkout-left2">
-                            You’re not elligible for Yes Elevate, but here’s the next best thing!
+                            You’re not elligible for Yes Infinite+, but here’s the next best thing!
                         </div>
                     </div>
                     <div class="col-md-7  p-5">

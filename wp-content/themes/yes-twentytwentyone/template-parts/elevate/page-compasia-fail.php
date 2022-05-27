@@ -45,7 +45,7 @@
                 <div class="row">
                     <div class="col-md-5 p-5 flex-column bg-checkout3">
                         <div class="title text-white checkout-left3">
-                            Sorry! We’ve checked and you currently do not qualify for the Yes Elevate contract option
+                            Sorry! We’ve checked and you currently do not qualify for the Yes Infinite+ contract option
                         </div>
                     </div>
                     <div class="col-md-7  p-5">
@@ -60,11 +60,11 @@
                                          </svg>
                                      </div>
                                      <div class="col-11 text-bold">
-                                         Sorry, you do not qualify for the Yes Elevate contract option, please select another contract option:
+                                         Sorry, you do not qualify for the Yes Infinite+ contract option, please select another contract option:
                                      </div>
-                                      
+
                                  </div>
-                                 
+
                                 <div class="p-3">
                                     <a href="/infinite-phone-bundles/" class="pink-btn text-uppercase">Back to Infinite+</a>
                                 </div>
