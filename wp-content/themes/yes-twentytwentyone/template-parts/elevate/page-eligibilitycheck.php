@@ -324,7 +324,7 @@
                                 if(data.status == 0){
                                     toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                                 }else{
-                                    toggleModalAlert('Error','Dear valued customer,<br>Your submission was not successful as you already have an existing installment plan that is currently active.',"elevate.redirectToPage('compasia-fail')")
+                                    toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due tobe cause your NRIC is not eligible (blacklisted).',"elevate.redirectToPage('compasia-fail')")
                                 }
                                 // $('#error').html(data.data.displayResponseMessage);
 								// $('#status_mesage').html('');
