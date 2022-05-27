@@ -1,12 +1,16 @@
 <?php require_once 'includes/header.php' ?>
 
+<style type="text/css">
+    .nav-container .navbar { padding-top: 8px; padding-bottom: 8px; }
+</style>
+
 <header class="page-header">
     <div class="nav-container">
         <div class="container g-lg-0">
             <div class="row g-0">
                 <nav class="navbar navbar-expand-lg">
                     <div class="container">
-                        <?php if (function_exists('display_yes_logo')) display_yes_logo(); ?>
+                        <a class="navbar-brand d-flex justify-content-start py-0" href="/"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/03/yes-logo-new-white.png" class="logo-top"></a>
                         <div class="justify-content-end" id="navbarSupportedContent">
                             <div class="d-flex align-items-center justify-content-end">
                                 <a href="#" class="mx-3">Help</a>

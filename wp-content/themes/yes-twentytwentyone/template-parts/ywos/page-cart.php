@@ -397,8 +397,10 @@
     }
 
     .nav-container { background-color: #1A1E47; }
+    .nav-container .navbar { padding-top: 8px; padding-bottom: 8px; }
+    .nav-container .navbar-brand { padding-top: 0; padding-bottom: 0; }
     .nav-container a, .nav-container .login-btn {}
-    .logo-top { width: 48px; }
+    .logo-top { width: 35px; }
 </style>
 
 

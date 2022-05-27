@@ -17,7 +17,7 @@
             <div class="row g-0">
                 <nav class="navbar navbar-expand-lg">
                     <div class="container">
-                        <a class="navbar-brand d-flex justify-content-start" href="/"><img src="https://cdn.yes.my/site/wp-content/uploads/2021/09/logo-2.png" class="logo-top"></a>
+                        <a class="navbar-brand d-flex justify-content-start" href="/"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/03/yes-logo-new-white.png" class="logo-top"></a>
                         <div class="justify-content-end" id="navbarSupportedContent">
                             <div class="d-flex align-items-center justify-content-end">
                                 <a href="#" class="mx-3">Help</a>
