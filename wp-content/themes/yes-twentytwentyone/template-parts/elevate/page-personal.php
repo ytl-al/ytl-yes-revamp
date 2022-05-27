@@ -124,11 +124,11 @@
                                         <input type="text" class="form-control text-uppercase" id="alternative_name" name="alternative_name"
                                                v-model="eligibility.alternative_name" @keypress="checkInputFullName(event)" @input="watchAllowNext" placeholder=""
                                                required>
-                                    </div> 
+                                    </div>
                                 </div>
 								 <div class="col-md-7">
                                     <label class="form-label">* Phone Number of<br> Alternate Contact Person</label>
-                                    <div class="input-group align-items-center">                                        
+                                    <div class="input-group align-items-center">
 										<div class="input-group-prepend" style="margin-right:10px;">
                                                 <span class="input-group-text" id="basic-addon1">MY +60</span>
                                             </div>
@@ -136,11 +136,11 @@
                                                    id="alternative_phone"
                                                    name="alternative_phone" v-model="eligibility.alternative_phone" @input="watchAllowNext"
                                                    @keypress="isNumber($event)"
-                                                   placeholder="Phone number">	   
-                                    </div> 
+                                                   placeholder="Phone number">
+                                    </div>
                                 </div>
                             </div>
-							 
+
                             <div class="row mb-4">
                                 <div class="col-md-8">
                                     <label class="form-label">* Address</label>
@@ -160,7 +160,7 @@
                                     </div>
                                 </div>
                             </div>
-                             
+
                             <div class="row mb-4">
                             <div class="col-md-12 col-12">
                                 <label class="form-label">* Postcode</label>
@@ -496,7 +496,7 @@
                             self.deliveryInfo.name = self.eligibility.name;
                             self.deliveryInfo.phone = self.eligibility.phone;
                             self.deliveryInfo.email = self.eligibility.email;
-							
+
                             self.deliveryInfo.alternative_name = self.eligibility.alternative_name;
                             self.deliveryInfo.alternative_phone = self.eligibility.alternative_phone;
 
@@ -526,7 +526,7 @@
                         self.deliveryInfo.name = eligibility.name;
                         self.deliveryInfo.phone = eligibility.phone;
                         self.deliveryInfo.email = eligibility.email;
-						
+
 						self.deliveryInfo.alternative_name = self.eligibility.alternative_name;
                         self.deliveryInfo.alternative_phone = self.eligibility.alternative_phone;
                     }
@@ -745,20 +745,26 @@
                         $('#mykad_number').addClass('input_error');
                     }
 
-                    /*var phone = /^[0-46-9]*[0-9]{7,11}$/g;
-                    if (self.deliveryInfo.phone.trim() && !phone.test(self.deliveryInfo.phone.trim())) {
-                        isFilled = false;
-                        $('#ic_phone_number').addClass('input_error');
-                    }*/
-
                     if(!self.validateMobile(self.deliveryInfo.phone)){
                         isFilled = false;
                         $('#ic_phone_number').addClass('input_error');
                     }
-					
+
+                    var phone = /^[1]*[0-9]{9,11}$/g;
+                    if (self.eligibility.alternative_phone.trim() && !phone.test(self.eligibility.alternative_phone.trim())) {
+                        isFilled = false;
+                        $('#alternative_phone').addClass('input_error');
+                    }
+
 					if(self.eligibility.alternative_phone & !self.validateMobile('0'+self.eligibility.alternative_phone)){
                         isFilled = false;
                         $('#alternative_phone').addClass('input_error');
+                    }
+
+                    if(self.eligibility.alternative_phone && self.eligibility.alternative_phone == self.eligibility.inphone){
+                        isFilled = false;
+                        $('#alternative_phone').addClass('input_error');
+                        toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, You cannot using same phone number.')
                     }
 
                     var email = /\S+@\S+\.\S+/;

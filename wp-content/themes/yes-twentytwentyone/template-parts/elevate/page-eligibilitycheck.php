@@ -54,7 +54,7 @@
                 <div class="row">
                     <div class="col-md-5 p-5 flex-column bg-checkout1">
                         <div class="title text-white checkout-left">
-                            Check if you are eligible for the Yes Elevate contract option
+                            Check if you are eligible for the Yes Infinite+ contract option
                         </div>
                     </div>
                     <div class="col-md-7 p-5">
@@ -75,7 +75,7 @@
                                                        id="cardtype" name="cardtype">
 													<option value="1">MyKad</option>
 													<option value="2" >MyTentera</option>
-												</select>	   
+												</select>
                                             </div>
                                             <div class="col-lg-8 col-7">
                                                 <input type="text" pattern="[0-9]+" minlength="12" maxlength="12" class="form-control text-uppercase"
@@ -86,7 +86,7 @@
                                                    required>
                                             </div>
                                         </div>
-                                            
+
 
                                         </div>
                                         <div class="invalid-feedback mt-1" id="em-mykad"></div>
@@ -150,7 +150,7 @@
                                     </div>
                                 </div>
 
-                                 
+
 								<div class="row mt-2 ">
 									<div class="col-1">
 										<input type="checkbox" id="subscribe" @click="watchAllowNext" name="subscribe" value="1">
@@ -168,10 +168,11 @@
 										<input type="checkbox" id="consent" @click="watchAllowNext" name="consent" value="1">
 									</div>
 									<div class="col-11 text-12">
-										<label for="consent" style="line-height:20px;">I further give consent to YTLC to process my personal data in accordance with YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a> and also give consent to ORIX to process my personal data in accordance with ORIX Privacy Policy available at (<a href="https://www.orix.com.my/privacy-policy" target="_blank">https://www.orix.com.my/privacy-policy</a>) for the purposes of my agreement with ORIX.
+										<label for="consent" style="line-height:20px;">
+                                            I further give consent to YTLC to process my personal data in accordance with YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a> and also give consent to TOP to process my personal data in accordance with TOP Privacy Policy available at (<a href="http://yes.compasia.com/TOP_PRIVACY_POLICY.PDF" target="_blank">http://yes.compasia.com/TOP_PRIVACY_POLICY.PDF</a>) for the purposes of my agreement with TOP.
 										</label>
 									</div>
-								</div> 
+								</div>
 
                                 <div class="row mt-2 mb-5">
                                     <div class="col-md-6">
@@ -324,7 +325,7 @@
                                 if(data.status == 0){
                                     toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                                 }else{
-                                    toggleModalAlert('Error','Dear valued customer,<br>Your submission was not successful as you already have an existing installment plan that is currently active.',"elevate.redirectToPage('compasia-fail')")
+                                    toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to because your NRIC is not eligible (blacklisted).',"elevate.redirectToPage('compasia-fail')")
                                 }
                                 // $('#error').html(data.data.displayResponseMessage);
 								// $('#status_mesage').html('');
@@ -362,7 +363,7 @@
                                 toggleOverlay(false);
 								$('#status_mesage').html('');
                                 toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due tobe cause your NRIC is not eligible (blacklisted).',"elevate.redirectToPage('eligibility-failure')");
-								
+
                             }
                         })
                         .catch((error) => {
@@ -599,8 +600,8 @@
                         $('#email').addClass('input_error');
 						error.push('Invalid email');
                     }
-					
-					if(!$('#subscribe').is(':checked') ||  !$('#consent').is(':checked')){ 
+
+					if(!$('#subscribe').is(':checked') ||  !$('#consent').is(':checked')){
                         isFilled = false
                     }
 

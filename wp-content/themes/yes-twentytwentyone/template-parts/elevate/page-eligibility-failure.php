@@ -147,7 +147,7 @@
                                         </ul><br/>
                                         <div class="plan_price">RM30 for Unlimited</div>
                                     </div>
-                                </div> 
+                                </div>
                             </div>
                         </div>
                         <div class="p-lg-5 text-end">
@@ -200,7 +200,8 @@
                 pageInit: function () {
                     var self = this;
                     if (elevate.validateSession(self.currentStep)) {
-
+                        elevate.lsData.eligibility = "";
+                        elevate.updateElevateLSData();
                     } else {
                         elevate.redirectToPage('cart');
                     }

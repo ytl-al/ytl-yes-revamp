@@ -64,9 +64,9 @@
                                         <div class="hr_line"></div>
                                         <div class="text-bold">
                                             {{contractTitle}}
-                                        </div> 
+                                        </div>
                                     </div>
-                                     
+
                                 </div>
                             </div>
                         </div>
@@ -246,13 +246,13 @@
                 },
                 allowSelectCity: false,
                 allowSubmit: false
-            }, 
-			
+            },
+
             created: function () {
                 var self = this;
                 setTimeout(function () {
                     self.pageInit();
-                }, 500); 
+                }, 500);
 
             },
             methods: {
@@ -292,7 +292,7 @@
                         if(self.orderSummary.product.selected.contractName){
                             self.contractTitle = self.orderSummary.product.selected.contractName;
                         }else{
-                            self.contractTitle = 'Elevate ' + self.orderSummary.product.selected.contract +' months';
+                            self.contractTitle = 'Yes Infinite+';
                         }
 
                         self.hasPlan = true;
@@ -317,7 +317,7 @@
 					var url = self.orderSummary.product.selected.imageURL.split(';');
 					console.log(url);
 					return url[0];
-					
+
 				},
                 watchAllowNext:function (){
                     var self = this;

@@ -65,7 +65,7 @@
             <div id="main-vue">
             <div class="p-lg-5">
                 <div class="mb-5 pad-mobile">
-                    <h2 class="subtitle mt-3 mb-3">Yes Elevate Contract Permissions</h2>
+                    <h2 class="subtitle mt-3 mb-3">Yes Infinite+ Contract Permissions</h2>
                     <p>Read our contract conditions before proceeding.</p>
                     <div class="mt-3 content">
 						<div class="contract_section">
@@ -137,7 +137,7 @@
                             <div class="col-md-6">
                                 <div>Customer Signature</div>
                                 <div style="height: 50px;"></div>
-                                <div><input type="text" @keyup="check_sign()" autocomplete="off"  v-model="contract_signed"  class="form-control user_sign text-uppercase" placeholder="Type your full name as per NRIC" id="fname"/></div>
+                                <div><input type="text" @keyup="check_sign()" autocomplete="off"  v-model="contract_signed"  class="form-control user_sign text-uppercase" placeholder="Type your full name as per MyKAD" id="fname"/></div>
                                 <div></div>
                                 <div class="mt-4">
                                     <a class="btn-signup" :class="allowSubmit?'btn-signed':'btn-signup'" @click="sign_contract"><i class="icon icon-signup2"></i> <span v-if="allowSubmit">Signed</span><span v-else>Fill and Sign</span></a>

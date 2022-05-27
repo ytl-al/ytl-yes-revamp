@@ -1,12 +1,12 @@
 <?php require_once 'includes/header.php' ?>
- 	
+
 <style type="text/css">
 	body{
 		background: url(/wp-content/uploads/2021/09/amazing-things-bg.png);
 		background-size: cover;
 		background-repeat: no-repeat;
 	}
-	
+
     .layer-invitationText {
         margin: 0 0 30px;
     }
@@ -116,7 +116,7 @@
                     </li>
                     <li ui-sref="secondStep">
                         <span>2. Payment</span>
-                    </li> 
+                    </li>
                 </ul>
             </div>
         </section>
@@ -275,7 +275,7 @@
 										<div class="col-6 text-end">
 											<p>RM{{item.price}}/ mth</p>
 										</div>
-									</div>                                     
+									</div>
                                     <div class="hr_line"></div>
                                     <div class="row mt-2 ">
                                         <div class="col-1"><input type="checkbox" id="subscribe" name="subscribe" value="1" v-on:change="watchAllowNext" /></div>
@@ -308,8 +308,8 @@
 		<div class="flex-container mt-3">
 		<div><div class="row">
 		<div class="col-1"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.721 5.14645L2.42767 23.9998C2.19483 24.403 2.07163 24.8602 2.07032 25.3258C2.06902 25.7914 2.18966 26.2493 2.42024 26.6538C2.65082 27.0583 2.98331 27.3954 3.38461 27.6316C3.78592 27.8677 4.24207 27.9947 4.70767 27.9998H27.2943C27.7599 27.9947 28.2161 27.8677 28.6174 27.6316C29.0187 27.3954 29.3512 27.0583 29.5818 26.6538C29.8124 26.2493 29.933 25.7914 29.9317 25.3258C29.9304 24.8602 29.8072 24.403 29.5743 23.9998L18.281 5.14645C18.0433 4.75459 17.7086 4.43061 17.3093 4.20576C16.9099 3.98092 16.4593 3.86279 16.001 3.86279C15.5427 3.86279 15.0921 3.98092 14.6927 4.20576C14.2934 4.43061 13.9587 4.75459 13.721 5.14645V5.14645Z" stroke="#EF4444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 12V17.3333" stroke="#EF4444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 22.6665H16.0133" stroke="#EF4444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg></div> <div class="col-11 text-bold">
-                                         Sorry, your request does not qualify for the Yes Elevate contract option, please select another contract option:
-                                     </div></div> 
+                                         Sorry, your request does not qualify for the Yes Infinite+ contract option, please select another contract option:
+                                     </div></div>
 									 <div class="p-3 text-center"><a href="/infinite-phone-bundles/" class="pink-btn text-uppercase">Back to Infinite+</a></div> <div id="error" class="mt-3"></div></div></div>
 	</div>
 
@@ -332,7 +332,7 @@
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function() {         
+    $(document).ready(function() {
         var pageCart = new Vue({
             el: '#main-vue',
             data: {
@@ -475,7 +475,7 @@
                 },
                 selectPlan: function(productId = 0) {
                     var self = this;
-					
+
                     self.productId = productId;
                     var dc = elevate.getCookie('paramDC');
 					var duid = elevate.getCookie('paramDUID');
@@ -483,35 +483,35 @@
 
 					if(!dc) dc = '';
 					if(!duid) duid = '';
-					if(!rc) rc = ''; 
+					if(!rc) rc = '';
 					elevate.initLocalStorage(self.productId, dc, duid, rc);
-					
+
 					self.ajaxGetPlanData();
                 },
-				
+
 				ajaxGetPlanData: function() {
                     var self = this;
-                    toggleOverlay(); 
+                    toggleOverlay();
                     axios.get(apiEndpointURL_elevate + '/getProductByCode/?code=' + self.productId)
                         .then((response) => {
                             var data = response.data;
                             if (data.internetData == '∞') {
                                 data.internetData = 'Unlimited';
                             }
-							
+
 							if(data.selected.plan){
 
 								self.orderSummary.product = data;
-								
 
-								self.updatePlan(); 
-								
+
+								self.updatePlan();
+
 								if(self.orderSummary.product.selected.contractName){
 									self.contractTitle = self.orderSummary.product.selected.contractName;
 								}else{
 									self.contractTitle = 'Elevate ' + self.orderSummary.product.selected.contract +' months';
 								}
-								
+
 								$('#main-vue').css({'height':'auto'});
 								$('#section-planDetails').show();
 
@@ -532,7 +532,7 @@
                     var self = this;
 
                     self.updateSummary();
-                    self.orderSummary.orderDetail.productCode = self.orderSummary.product.selected.productCode; 
+                    self.orderSummary.orderDetail.productCode = self.orderSummary.product.selected.productCode;
 
                 },
                 updateSummary: function() {
@@ -543,11 +543,11 @@
                         {name: self.orderSummary.product.selected.nameEN + ' - ' + self.orderSummary.product.selected.color,price:parseFloat(self.orderSummary.product.selected.devicePriceMonth).toFixed(2)},
                         {name: self.orderSummary.product.selected.plan.nameEN,price:parseFloat(self.orderSummary.product.selected.plan.monthlyAmount).toFixed(2)},
                     ];
-					
-					
+
+
 
                     var subtotal = parseFloat(self.orderSummary.product.selected.devicePriceMonth) + parseFloat(self.orderSummary.product.selected.planPerMonth);
-                    
+
 					var amount = parseFloat(self.orderSummary.product.selected.plan.monthlyAmount);
                     var sstAmount = parseFloat(self.orderSummary.product.selected.plan.sstAmount);
                     var rounding = parseFloat(self.orderSummary.product.selected.plan.roundingAdjustment);
@@ -557,26 +557,26 @@
                     self.orderSummary.orderDetail.sstAmount = sstAmount.toFixed(2);
                     self.orderSummary.orderDetail.roundingAdjustment = rounding.toFixed(2);
 					self.orderSummary.orderDetail.subtotal = subtotal.toFixed(2);
-					
-					self.orderSummary.orderDetail.color = self.orderSummary.product.selected.color; 
-                     
-                }, 
-				
+
+					self.orderSummary.orderDetail.color = self.orderSummary.product.selected.color;
+
+                },
+
 				getProductImage: function(){
 					var self = this;
 					if(!self.orderSummary.product.selected.imageURL) return;
 					var url = self.orderSummary.product.selected.imageURL.split(';');
 					console.log(url);
 					return url[0];
-					
+
 				},
-				
+
 				getStateCode: function (stateVal) {
                     var self = this;
                     var objState = self.selectOptions.states.filter(state => state.value == stateVal);
                     return objState[0].stateCode;
                 },
-				
+
 				updateCityCode: function () {
                     var self = this;
                     var stateCode = self.deliveryInfo.stateCode;
@@ -607,7 +607,7 @@
                                 self.deliveryInfo.city = '';
                                 self.deliveryInfo.cityCode = '';
                             }
-                            
+
                         })
                         .catch((error) => {
                             // console.log(error);
@@ -617,18 +617,18 @@
                             toggleOverlay(false);
                         });
                 },
-				
+
 				getUserInfor: function(){
 					 var self = this;
-					 
+
 					 var url_string = window.location.href;
 					 var url = new URL(url_string);
 					 var guid = url.searchParams.get('id');
 					 if(guid){
 						 $('#page_error').hide();
-						 $('#cart-body').show();  
-						 self.guid = guid; 
-						 
+						 $('#cart-body').show();
+						 self.guid = guid;
+
 						 toggleOverlay();
 						 axios.get(apiEndpointURL_elevate + '/getPreRegisterUser/?id=' + self.guid)
 							.then((response) => {
@@ -636,62 +636,62 @@
 								var data = response.data;
 								console.log(data);
 								if(data){
-									self.deliveryInfo = data; 
-									
+									self.deliveryInfo = data;
+
 									self.deliveryInfo.mykad = self.deliveryInfo.nric;
 									self.deliveryInfo.address = self.deliveryInfo.addressLine1;
 									self.deliveryInfo.postcode = self.deliveryInfo.postCode;
-									
+
 									self.deliveryInfo.stateCode = (self.deliveryInfo.state) ? self.getStateCode(self.deliveryInfo.state) : '';
 									self.deliveryInfo.cityCode = self.deliveryInfo.city;
-									
+
 									self.deliveryInfo.phone = self.getPhone(self.deliveryInfo.mobile);
-									self.productOffered(); 
+									self.productOffered();
 									self.updateCityCode();
 								}else{
-									$('#cart-body').hide(); 
+									$('#cart-body').hide();
 									$('#page_error').show();
 								}
 
 							})
 							.catch((error) => {
 								toggleOverlay(false);
-								 $('#cart-body').hide(); 
+								 $('#cart-body').hide();
 								 $('#page_error').show()
 								console.log('error', error);
 							})
-						
+
 					 }else{
-						 $('#cart-body').hide(); 
+						 $('#cart-body').hide();
 						 $('#page_error').show();
 					 }
-					  
-					 
+
+
 				},
-				
+
 				productOffered: function(){
 					var self = this;
 					if(self.deliveryInfo.productOffered){
 						var aryBundle = self.deliveryInfo.productOffered.split(',');
 						var found = false;
 						for(var i = 0; i< aryBundle.length; i++){
-							var tmp = '.bundle'+aryBundle[i].trim();							 
+							var tmp = '.bundle'+aryBundle[i].trim();
 							$(tmp).show();
 							if($(tmp)){
 								found = true;
 							}
 						}
-						
+
 						if(!found){
-							$('#cart-body').hide(); 
+							$('#cart-body').hide();
 							$('#page_error').show();
 						}
 					}else{
-						$('#cart-body').hide(); 
+						$('#cart-body').hide();
 						$('#page_error').show();
 					}
 				},
-				
+
 				getPhone: function(phone){
 					if(phone.substring(0,1) == "6"){
 						return phone.substring(1,11);
@@ -703,23 +703,23 @@
                     var self = this;
                     var params = self.deliveryInfo;
                     params.productId = self.orderSummary.product.selected.productCode;
- 
+
                     toggleOverlay();
 					$('#status_mesage').html('Process customer...');
-					
+
 					//console.log(params);return;
 
                     axios.post(apiEndpointURL_elevate + '/customer', params)
-                        .then((response) => { 
+                        .then((response) => {
                             var data = response.data;
                             if (data.status == 1) {
                                 elevate.lsData.customer = data.data;
                                 elevate.updateElevateLSData();
 								self.customer =  data.data;
-								
+
 								//create order
 								self.makeOrder();
-								
+
                             } else {
                                 toggleOverlay(false);
                                 $('#error').html(data.error);
@@ -731,7 +731,7 @@
                             console.log(error, response);
                         });
                 },
-				
+
 				makeOrder: function (){
                     var self = this;
                     var params = self.customer;
@@ -755,7 +755,7 @@
                                 $('#error').html("System error, please try again.");
 								$('#status_mesage').html('');
                                 console.log(data);
-                            } 
+                            }
 
                         })
                         .catch((error) => {
@@ -769,13 +769,13 @@
 
                         toggleOverlay();
                         var param = elevate.lsData.orderInfo;
-						 
+
                         param.orderNumber = self.orderResponse.orderNumber;
 
                         axios.post(apiEndpointURL_elevate + '/order/update', param)
                             .then((response) => {
                                 var data = response.data;
-								
+
                                 if(data.status == 1){
 									//self.removePrequalifiedCustomer();
 									elevate.redirectToPage('thanks?orderNumber='+$('#displayOrderNumber').val());
@@ -819,7 +819,7 @@
 						});
 
 				},
-				
+
 				elevateContract: function () {
                     var self = this;
                     var params = {
@@ -827,14 +827,14 @@
 						mykad: self.deliveryInfo.nric,
 						phone: self.deliveryInfo.phone,
 						alternative_name: self.deliveryInfo.name,
-						alternative_phone:	self.deliveryInfo.phone					
+						alternative_phone:	self.deliveryInfo.phone
 					};
-					
+
                     params.orderId = self.orderSummary.orderInfo.id;
                     params.contract = self.orderSummary.product.selected.contract;
                     toggleOverlay();
 					$('#status_mesage').html('Process contract...');
-					
+
                     axios.post(apiEndpointURL_elevate + '/contract', params)
                         .then((response) => {
                             var data = response.data;
@@ -844,9 +844,9 @@
 
                                 elevate.lsData.contract = data.data;
                                 elevate.updateElevateLSData();
-								
-								
-                                if(self.deliveryInfo.isFree){ 
+
+
+                                if(self.deliveryInfo.isFree){
 									self.ajaxCreateYOSOrderFree();
 								}else{
 									$('#status_mesage').html('Please make payment...');
@@ -857,7 +857,7 @@
                                 $('#error').html("System error, please try again.");
 								$('#status_mesage').html('');
                                 console.log(data);
-                            } 
+                            }
 
                         })
                         .catch((error) => {
@@ -866,27 +866,27 @@
                         });
 
                 },
-				
+
 				removePrequalifiedCustomer: function () {
                     var self = this;
                     var params = {
-						id: self.deliveryInfo.id			
+						id: self.deliveryInfo.id
 					};
-					 
+
                     toggleOverlay();
 					$('#status_mesage').html('Remove data...');
-					
+
                     axios.post(apiEndpointURL_elevate + '/del-prequalified-customer', params)
                         .then((response) => {
                             var data = response.data;
                             if(data.status == 1){
-                                 
+
                             }else{
                                 toggleOverlay(false);
                                 $('#error').html("System error, please try again.");
 								$('#status_mesage').html('');
                                 console.log(data);
-                            } 
+                            }
 
                         })
                         .catch((error) => {
@@ -895,10 +895,10 @@
                         });
 
                 },
-				
+
 				getDOB: function (mykad){
                         var self = this;
-                        var dateString =  mykad.substring(0, 6); 
+                        var dateString =  mykad.substring(0, 6);
 
                         var year = dateString.substring(0, 2); //year
                         var month = dateString.substring(2, 4); //month
@@ -914,7 +914,7 @@
                         var dob = date + "/" + month + "/" + year;
                         return dob;
                     },
-					
+
 				ajaxCreateYOSOrderFree: function() {
                         var self = this;
                         var params = {
@@ -950,25 +950,25 @@
                         axios.post(apiEndpointURL_elevate + '/create-yos-free-order', params)
                             .then((response) => {
                                 var data = response.data;
-								 
+
 								if(parseInt(data.status) == 1){
-									 
+
 								    console.log(data.data);
 									self.orderResponse = data.data;
 
-									elevate.lsData.YOSOrder = data.data;								
-									elevate.updateElevateLSData(); 
-									
+									elevate.lsData.YOSOrder = data.data;
+									elevate.updateElevateLSData();
+
 									//update elevate Order
-									
+
 									$('#displayOrderNumber').val(data.data.displayOrderNumber);
-									self.updateElevateOrder(); 
+									self.updateElevateOrder();
 								 }else{
 									 $('#status_mesage').html('');
 									 $('#error').html('Sorry, you cannot make order. '+data.error);
 								 }
-								  
-								
+
+
                             })
                             .catch((error) => {
                                 var response = error.response;
@@ -993,7 +993,7 @@
 
                         // console.log(JSON.stringify(params));
                     },
-				
+
                 jumpToSection: function(sectionID) {
                     var targetSection = $('#' + sectionID);
                     if (targetSection.length > 0) {
@@ -1004,7 +1004,7 @@
                     }
                     return false;
                 },
-				
+
 				toggleModalAlert: function(modalHeader = '', modalText = '') {
 					$('#modal-titleLabel').html(modalHeader);
 					$('#modal-bodyText').html(modalText);
@@ -1014,7 +1014,7 @@
 						$('#modal-bodyText').html('');
 					});
 				},
-				
+
                 showPlanDetail: function() {
                     $('.accordion-wrap').toggleClass("active");
                     $(".accordion-body").slideToggle();
@@ -1026,26 +1026,26 @@
                     } else {
                         self.allowSubmit = false
                     }
-					
+
 					if(!self.deliveryInfo.id){
 						self.allowSubmit = false
 					}
-					
+
                 },
                 goNext: function() {
-					
+
                     var self = this;
                     if (self.allowSubmit) {
 						$('#status_mesage').html('');
 						$('#error').html('');
-					
+
 						var LSData = JSON.parse(localStorage.getItem(elevateLSName));
 						elevate.lsData = LSData;
 						elevate.lsData.deliveryInfo =  self.deliveryInfo;
 						elevate.lsData.product =  self.orderSummary.product;
 						elevate.lsData.orderDetail =  self.orderSummary.orderDetail;
 						elevate.updateElevateLSData();
-						  		
+
 						if(self.customer){
 							if(self.orderSummary.orderInfo){
 								if(self.contract){
