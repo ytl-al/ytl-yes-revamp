@@ -1168,6 +1168,12 @@ ul.wizard {
         font-size: 8px;
     }
 
+    ul.wizard span, ul.wizard li.completed span {
+        font-size: 12px !important;
+        text-align: center;
+        word-break: normal;
+    }
+
     .pad-mobile{
         padding:15px;
     }
