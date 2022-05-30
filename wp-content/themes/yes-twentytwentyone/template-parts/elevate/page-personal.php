@@ -122,7 +122,7 @@
                                     <label class="form-label">* Name of <br>Alternate Contact Person</label>
                                     <div class="input-group align-items-center">
                                         <input type="text" class="form-control text-uppercase" id="alternative_name" name="alternative_name"
-                                               v-model="eligibility.alternative_name" @keypress="checkInputFullName(event)" @input="watchAllowNext" placeholder=""
+                                               v-model="eligibility.alternative_name" @keypress="checkInputFullName(event)" @input="watchAllowNext" @change="watchAllowNext" placeholder=""
                                                required>
                                     </div>
                                 </div>
@@ -134,7 +134,7 @@
                                             </div>
                                             <input type="text" pattern="[0-9]+" min="0" class="form-control text-uppercase" maxlength="10"
                                                    id="alternative_phone"
-                                                   name="alternative_phone" v-model="eligibility.alternative_phone" @input="watchAllowNext"
+                                                   name="alternative_phone" v-model="eligibility.alternative_phone" @input="watchAllowNext"  @change="watchAllowNext"
                                                    @keypress="isNumber($event)"
                                                    placeholder="Phone number">
                                     </div>
@@ -697,15 +697,16 @@
                     }
                 },
                 validateMobile: function (mob) {
-                    if (mob.length < 10 && mob.length > 11) {
+
+                    if (mob.length < 9 && mob.length > 10) {
                         return false;
                     }
-                    if (mob.slice(0, 2) != '01') {
+                    if (mob.slice(0, 1) != '1') {
                         return false;
                     }
 
-                    if (mob.slice(0, 3) == '011') {
-                        if (mob.length < 11) {
+                    if (mob.slice(0, 2) == '11') {
+                        if (mob.length < 10) {
                             return false;
                         }
                     }
@@ -745,7 +746,7 @@
                         $('#mykad_number').addClass('input_error');
                     }
 
-                    if(!self.validateMobile(self.deliveryInfo.phone)){
+                    if(!self.validateMobile(self.eligibility.inphone)){
                         isFilled = false;
                         $('#ic_phone_number').addClass('input_error');
                     }
@@ -756,7 +757,7 @@
                         $('#alternative_phone').addClass('input_error');
                     }
 
-					if(self.eligibility.alternative_phone & !self.validateMobile('0'+self.eligibility.alternative_phone)){
+					if(self.eligibility.alternative_phone && !self.validateMobile(self.eligibility.alternative_phone)){
                         isFilled = false;
                         $('#alternative_phone').addClass('input_error');
                     }
@@ -765,6 +766,12 @@
                         isFilled = false;
                         $('#alternative_phone').addClass('input_error');
                         toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, You cannot using same phone number.')
+                    }
+
+                    var pattern =  /^[a-zA-Z,\,/@,\s]+$/;
+                    if(self.eligibility.alternative_name && !pattern.test(self.eligibility.alternative_name)){
+                        $('#alternative_name').addClass('input_error');
+                        isFilled = false
                     }
 
                     var email = /\S+@\S+\.\S+/;

@@ -297,11 +297,7 @@
 				},
                 watchAllowNext:function (){
                     var self = this;
-                    if($('#subscribe').is(':checked')&& $('#consent').is(':checked')){
-                        self.allowSubmit = true
-                    }else{
-                        self.allowSubmit = false
-                    }
+                    self.allowSubmit = true
                 },
 
                 goNext: function () {

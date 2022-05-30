@@ -60,7 +60,7 @@
                     <div class="col-md-7 p-5">
                         <form class="needs-validation" novalidate>
                             <div class="mt-2 mb-2">
-                                <h2 class="subtitle">Eligibility Check</h2>
+                                <h2 class="subtitle">Pre-registration Details</h2>
                                 <p class="sub mb-4">Please fill in your MyKad/MyTentera information, mobile<br> number and email
                                     to proceed</p>
 
@@ -80,7 +80,7 @@
                                             <div class="col-lg-8 col-7">
                                                 <input type="text" pattern="[0-9]+" minlength="12" maxlength="12" class="form-control text-uppercase"
                                                    id="mykad_number"
-                                                   name="mykad" v-model="eligibility.mykad" @input="watchAllowNext"
+                                                   name="mykad" v-model="eligibility.mykad" @input="watchAllowNext" @change="watchAllowNext"
                                                    @keypress="isNumber($event)" min="0"
                                                    placeholder=""
                                                    required>
@@ -97,7 +97,7 @@
                                         <label class="form-label">* Full Name (as per MyKad)</label>
                                         <div class="input-group align-items-center">
                                             <input type="text" class="form-control text-uppercase" id="full_name" name="name"
-                                                   v-model="eligibility.name" @keypress="checkInputFullName(event)" @input="watchAllowNext" placeholder=""
+                                                   v-model="eligibility.name" @keypress="checkInputFullName(event)" @input="watchAllowNext" @change="watchAllowNext" placeholder=""
                                                    required>
 
                                         </div>
@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="row mb-4 align-items-center g-2">
                                     <div class="col-12">
-                                        <label class="form-label">*Key in your mobile number</label>
+                                        <label class="form-label">* Key in your mobile number</label>
                                     </div>
                                     <div class="col-lg-8 col-12">
                                         <div class="row">
@@ -325,7 +325,7 @@
                                 if(data.status == 0){
                                     toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                                 }else{
-                                    toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to because your NRIC is not eligible (blacklisted).',"elevate.redirectToPage('compasia-fail')")
+                                    toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due tobe cause your NRIC is not eligible (blacklisted).',"elevate.redirectToPage('compasia-fail')")
                                 }
                                 // $('#error').html(data.data.displayResponseMessage);
 								// $('#status_mesage').html('');
@@ -406,9 +406,9 @@
                     params.productId = self.productId;
 
                     if(self.dealer){
-                    params.referralCode = self.dealer.referral_code;
-                    params.dealerUID = self.dealer.dealer_id;
-                    params.dealerCode = self.dealer.dealer_code;
+                        params.referralCode = self.dealer.referral_code;
+                        params.dealerUID = self.dealer.dealer_id;
+                        params.dealerCode = self.dealer.dealer_code;
                     }else{
                         params.referralCode ="";
                         params.dealerUID = "";
@@ -540,7 +540,6 @@
 
 					var error = new Array();
 
-
                     self.isEligibilityCheck = false;
                     self.isCAEligibilityCheck = false;
 
@@ -561,6 +560,8 @@
                         isFilled = false;
                         $('#mykad_number').addClass('input_error');
                     }
+
+
 
                     if(self.eligibility.mykad.trim().length >= 12){
 
@@ -586,6 +587,21 @@
 						}
                         self.eligibility.dob = '';
                     }
+
+                   var pattern = /^\d+\.?\d*$/;
+                   if(self.eligibility.mykad && !pattern.test(self.eligibility.mykad)){
+                       error.push('Invalid MyKad number');
+                       $('#mykad_number').addClass('input_error');
+                       self.eligibility.dob = '';
+                       isFilled = false
+                   }
+
+                   var pattern =  /^[a-zA-Z,\,/@,\s]+$/;
+                   if(self.eligibility.name && !pattern.test(self.eligibility.name)){
+                       error.push('Invalid Full Name');
+                       $('#full_name').addClass('input_error');
+                       isFilled = false
+                   }
 
                     var phone = /^[0-46-9]*[0-9]{9,10}$/g;
                     if (self.eligibility.inphone.trim() && (!phone.test(self.eligibility.inphone.trim()) || !self.validateMobile(self.eligibility.inphone))) {

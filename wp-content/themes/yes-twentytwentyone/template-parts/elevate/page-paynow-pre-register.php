@@ -5,13 +5,13 @@
 		background-size: cover;
 		background-repeat: no-repeat;
 	}
-</style>	
+</style>
     <header class="white-top">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-6">
                     <div class="mt-4">
-                         
+
                     </div>
                 </div>
                 <div class="col-lg-4 col-6 text-lg-center text-end">
@@ -35,7 +35,7 @@
                     </li>
                     <li ui-sref="secondStep" class="completed">
                         <span>2. Payment</span>
-                    </li> 
+                    </li>
                 </ul>
             </div>
         </section>
@@ -480,7 +480,7 @@
                 mounted: function() {},
                 created: function() {
                     var self = this;
-					 
+
                     self.pageInit();
                     self.initTabs();
                 },
@@ -494,11 +494,11 @@
                 methods: {
                     pageInit: function() {
                         var self = this;
-						
+
                         elevate.checkExists();
-						
+
 						self.pageValid = true;
-                             
+
 						if (elevate.lsData.deliveryInfo) {
 							self.deliveryInfo = elevate.lsData.deliveryInfo;
 						}else{
@@ -525,10 +525,10 @@
 						}
 
 						self.productId = elevate.lsData.product.selected.productCode;
-						 
+
 						self.ajaxGetFPXBankList();
 						self.updateData();
-						
+
 						setTimeout(function(){
 							$('#main-vue').show();
 							toggleOverlay(false);
@@ -720,7 +720,7 @@
                     },
                     getGender: function (){
                         var self = this;
-                        var genderDigit = self.deliveryInfo.mykad.substring(11); 
+                        var genderDigit = self.deliveryInfo.mykad.substring(11);
                         if (genderDigit % 2 == 0) //even
                         {
                             return "FEMALE"; //female
@@ -904,27 +904,27 @@
                             });
 
                     },
-					
+
 					removePrequalifiedCustomer: function () {
 						var self = this;
 						var params = {
-							id: self.deliveryInfo.id			
+							id: self.deliveryInfo.id
 						};
-						 
+
 						toggleOverlay();
 						$('#status_mesage').html('Remove data...');
-						
+
 						axios.post(apiEndpointURL_elevate + '/del-prequalified-customer', params)
 							.then((response) => {
 								var data = response.data;
 								if(data.status == 1){
-									 
+
 								}else{
 									toggleOverlay(false);
 									$('#error').html("System error, please try again.");
 									$('#status_mesage').html('');
 									console.log(data);
-								} 
+								}
 
 							})
 							.catch((error) => {
@@ -933,7 +933,7 @@
 							});
 
 					},
-					
+
                     selectBank: function(bank, event) {
                         var self = this;
                         $('.listing-quickSelectBanks .nav-item').removeClass('selected');

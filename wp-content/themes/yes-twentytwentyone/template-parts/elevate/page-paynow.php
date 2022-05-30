@@ -877,7 +877,7 @@
                             })
                             .catch((error) => {
                                 toggleOverlay(false);
-                                console.log(error, response);
+                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                             });
 
                     },
@@ -901,8 +901,7 @@
                                 }
                             })
                             .catch((error) => {
-                                toggleOverlay(false);
-                                console.log(error, response);
+                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                             });
 
                     },
@@ -998,6 +997,12 @@
 
                         if (paymentMethod == 'CREDIT_CARD_IPP' && self.paymentInfo.ippType == '') {
                             isFilled = false;
+                        }
+
+                        var pattern =  /^[a-zA-Z,\,/@,\s]+$/;
+                        if(self.paymentInfo.nameOnCard && !pattern.test(self.paymentInfo.nameOnCard)){
+                            $('#input-chName').addClass('input_error');
+                            isFilled = false
                         }
 
                         if (isFilled) {

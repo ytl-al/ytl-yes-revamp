@@ -1,12 +1,16 @@
 <?php require_once 'includes/header.php' ?>
 
+<style type="text/css">
+    .nav-container .navbar { padding-top: 8px; padding-bottom: 8px; }
+</style>
+
 <header class="page-header">
     <div class="nav-container">
         <div class="container g-lg-0">
             <div class="row g-0">
                 <nav class="navbar navbar-expand-lg">
                     <div class="container">
-                        <?php if (function_exists('display_yes_logo')) display_yes_logo(); ?>
+                        <a class="navbar-brand d-flex justify-content-start py-0" href="/"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/03/yes-logo-new-white.png" class="logo-top"></a>
                         <div class="justify-content-end" id="navbarSupportedContent">
                             <div class="d-flex align-items-center justify-content-end">
                                 <a href="#" class="mx-3">Help</a>
@@ -25,7 +29,7 @@
     <div id="container-empty" v-if="isCartEmpty">
         <section id="grey-innerbanner">
             <div class="container">
-                <h1 class="title">Elevate cart</h1>
+                <h1 class="title">Yes Infinite+ Cart</h1>
             </div>
         </section>
         <section id="cart-body">
@@ -159,7 +163,7 @@
                                 <div class="col-6 text-end">
                                     <p>RM{{formatPrice(item.price)}}/ mth</p>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="hr_line"></div>
                         </div>
 
@@ -289,7 +293,7 @@
                             self.updatePlan();
                             $('#container-hasItem').show();
                             $('#main-vue').css({'height':'auto'});
-							
+
 							setTimeout(function(){
 								$('.selectColorWrap li:first-child').trigger("click");
 							},100);
@@ -319,7 +323,7 @@
                     ];
 
                     var subtotal = parseFloat(self.orderSummary.product.selected.devicePriceMonth) + parseFloat(self.orderSummary.product.selected.planPerMonth);
-                    
+
 					var amount = parseFloat(self.orderSummary.product.selected.plan.monthlyAmount);
                     var sstAmount = parseFloat(self.orderSummary.product.selected.plan.sstAmount);
                     var rounding = parseFloat(self.orderSummary.product.selected.plan.roundingAdjustment);

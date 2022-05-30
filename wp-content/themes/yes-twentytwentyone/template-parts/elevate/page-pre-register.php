@@ -276,19 +276,7 @@
 											<p>RM{{item.price}}/ mth</p>
 										</div>
 									</div>
-                                    <div class="hr_line"></div>
-                                    <div class="row mt-2 ">
-                                        <div class="col-1"><input type="checkbox" id="subscribe" name="subscribe" value="1" v-on:change="watchAllowNext" /></div>
-                                        <div class="col-11 text-12">
-                                            <label for="subscribe" style="cursor: pointer; font-size: 12px; line-height: 14px;">I here by agree to subscribe to the plan selected in the online form submitted by me, and to be bound by the First to 5G Campaign Terms and Conditions available at <a target="_blank" href="https://www.yes.my/tnc/ongoing-campaigns-tnc">www.yes.my/tnc/ongoing-campaigns-tnc</a>.</label>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-2 ">
-                                        <div class="col-1"><input type="checkbox" id="consent" name="consent" value="1" v-on:change="watchAllowNext" /></div>
-                                        <div class="col-11 text-12">
-                                            <label for="consent" style="cursor: pointer; font-size: 12px; line-height: 14px;">I further give consent to YTLC to process my personal data in accordance with YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a> and also give consent to ORIX to process my personal data in accordance with ORIX Privacy Policy available at (<a href="https://www.orix.com.my/privacy-policy" target="_blank">https://www.orix.com.my/privacy-policy</a>) for the purposes of my agreement with ORIX.</label>
-                                        </div>
-                                    </div>
+                                     
                                     <div class="row mt-3 ">
                                         <div class="col-12">
                                             <button class="pink-btn-disable d-block text-uppercase w-100" :class=" allowSubmit?'pink-btn':'pink-btn-disable'" v-on:click="goNext" type="button">Order</button>
@@ -637,7 +625,7 @@
 								console.log(data);
 								if(data){
 									self.deliveryInfo = data;
-
+									self.allowSubmit = true;
 									self.deliveryInfo.mykad = self.deliveryInfo.nric;
 									self.deliveryInfo.address = self.deliveryInfo.addressLine1;
 									self.deliveryInfo.postcode = self.deliveryInfo.postCode;
@@ -1020,13 +1008,7 @@
                     $(".accordion-body").slideToggle();
                 },
                 watchAllowNext: function() {
-                    var self = this;
-                    if ($('#subscribe').is(':checked') && $('#consent').is(':checked')) {
-                        self.allowSubmit = true
-                    } else {
-                        self.allowSubmit = false
-                    }
-
+                    var self = this; 
 					if(!self.deliveryInfo.id){
 						self.allowSubmit = false
 					}

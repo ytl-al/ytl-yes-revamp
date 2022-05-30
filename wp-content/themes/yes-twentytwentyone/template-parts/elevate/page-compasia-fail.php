@@ -169,8 +169,19 @@
                 pageInit: function () {
                     var self = this;
                     if (elevate.validateSession(self.currentStep)) {
-                        elevate.lsData.eligibility = "";
-                        elevate.updateElevateLSData();
+                        if (elevate.lsData.eligibility) {
+                            self.eligibility = elevate.lsData.eligibility;
+                        }
+                        if (elevate.lsData.product) {
+                            self.orderSummary.product  = elevate.lsData.product;
+                        }
+
+                        if (elevate.lsData.orderSummary) {
+                            self.orderSummary = elevate.lsData.orderSummary;
+                        }
+                        if(elevate.lsData.orderDetail){
+                            self.orderSummary.orderDetail = elevate.lsData.orderDetail;
+                        }
 
                         self.productId = elevate.lsData.product.selected.productCode;
                         self.getNormalContract();
