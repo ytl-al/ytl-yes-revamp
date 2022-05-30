@@ -33,72 +33,10 @@
                 </div>
             </div>
             <div class="row gx-5" v-if="pageValid">
-                <div class="col-lg-4 col-12 order-lg-2">
-                    <div class="summary-box">
-                        <h1>Order summary</h1>
-                        <h2>Due today after taxes and shipping</h2>
-                        <div class="row">
-                            <div class="col-6 pt-2 pb-2">
-                                <h3>TOTAL</h3>
-                            </div>
-                            <div class="col-6 pt-2 pb-2 text-end">
-                                <h3>RM{{ parseFloat(orderSummary.due.total).toFixed(2) }}</h3>
-                            </div>
-                        </div>
-                        <div v-if="orderSummary.plan.planType != 'prepaid'">
-                            <div class="monthly mb-4">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <p>Due Monthly</p>
-                                    </div>
-                                    <div class="col-6 text-end">
-                                        <p>RM{{ parseFloat(orderSummary.plan.monthlyCommitment).toFixed(2) }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-8">
-                                <p class="large">{{ orderSummary.plan.displayName }}</p>
-                            </div>
-                            <div class="col-4 text-end d-flex align-items-center justify-content-end">
-                                <p class="large"><strong>RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(2) }}</strong></p>
-                            </div>
-                            <div class="col-6">
-                                <p class="large">Add-Ons</p>
-                            </div>
-                            <div class="col-6 text-end">
-                                <p class="large"><strong>RM{{ parseFloat(orderSummary.due.addOns).toFixed(2) }}</strong></p>
-                            </div>
-                            <div class="col-6">
-                                <p class="large">Taxes (SST)</p>
-                            </div>
-                            <div class="col-6 text-end">
-                                <p class="large"><strong>RM{{ parseFloat(orderSummary.due.taxesSST).toFixed(2) }}</strong></p>
-                            </div>
-                            <div class="col-6">
-                                <p class="large">Shipping</p>
-                            </div>
-                            <div class="col-6 text-end">
-                                <p class="large"><strong>RM{{ parseFloat(orderSummary.due.shippingFees).toFixed(2) }}</strong></p>
-                            </div>
-                            <div class="col-6" v-if="customerDetails.securityType == 'PASSPORT' && orderSummary.due.foreignerDeposit > 0">
-                                <p class="large">Deposit for Foreigner</p>
-                            </div>
-                            <div class="col-6 text-end" v-if="customerDetails.securityType == 'PASSPORT' && orderSummary.due.foreignerDeposit > 0">
-                                <p class="large"><strong>RM{{ parseFloat(orderSummary.due.foreignerDeposit).toFixed(2) }}</strong></p>
-                            </div>
-                            <div class="col-6">
-                                <p class="large">Rounding Adjustment</p>
-                            </div>
-                            <div class="col-6 text-end">
-                                <p class="large"><strong>RM{{ parseFloat(orderSummary.due.rounding).toFixed(2) }}</strong></p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-lg-5 col-12 order-lg-2">
+                    <?php include('section-order-summary.php'); ?>
                 </div>
-                <form class="col-lg-8 col-12 order-lg-1 mt-4 mt-lg-0 needs-validation" @submit="verificationSubmit">
+                <form class="col-lg-7 col-12 order-lg-1 mt-4 mt-lg-0 needs-validation" @submit="verificationSubmit">
                     <div>
                         <h1 class="d-none d-lg-block">Verification</h1>
                         <p class="sub mb-4">Please fill in your ID information and mobile number to proceed</p>
@@ -119,7 +57,7 @@
                                     <div class="form-group">
                                         <label class="form-label" for="input-securityId">* IC/Passport Number</label>
                                         <div class="input-group align-items-center">
-                                            <input type="text" class="form-control" id="input-securityId" v-model="customerDetails.securityId" @input="watchAllowNext" maxlength="14" placeholder="" :disabled="!allowSecurityId" />
+                                            <input type="text" class="form-control" id="input-securityId" v-model="customerDetails.securityId" @input="watchAllowNext" @keypress="checkInput(event)" maxlength="14" placeholder="" :disabled="!allowSecurityId" />
                                             <!-- <a href="#" data-bs-toggle="tooltip" data-bs-placement="right" class="ms-2" title="Tooltip text here"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/info-icon.png" /></a> -->
                                             <div class="invalid-feedback mt-1" id="em-securityID"></div>
                                         </div>
@@ -144,7 +82,7 @@
                                 </div>
                                 <div class="col-lg-4 col-7">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="input-otpPhoneNumber" maxlength="10" v-model="verify.input.phoneNumber" @input="watchAllowNext" placeholder="181234567" :disabled="!allowPhoneNumber" />
+                                        <input type="text" class="form-control" id="input-otpPhoneNumber" maxlength="10" v-model="verify.input.phoneNumber" @input="watchAllowNext" @keypress="checkInputCharacters(event, 'numeric', false)" placeholder="181234567" :disabled="!allowPhoneNumber" />
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-12" v-if="!isLoggedIn">
@@ -206,6 +144,9 @@
                     securityId: '',
                     msisdn: ''
                 },
+                deliveryInfo: {
+                    securityType: ''
+                },
                 allowSecurityType: true,
                 allowSecurityId: true,
                 allowPhoneNumber: true,
@@ -265,9 +206,7 @@
                         self.customerDetails = (ywos.lsData.meta.customerDetails) ? ywos.lsData.meta.customerDetails : self.customerDetails;
 
                         if (self.isLoggedIn) {
-                            // self.allowSecurityType = (self.customerDetails.securityType && self.loginInfo.type != 'guest') ? false : true;
-                            // self.allowSecurityId = (self.customerDetails.securityId && self.loginInfo.type != 'guest') ? false : true;
-                            // self.allowPhoneNumber = (self.customerDetails.mobileNumber) ? false : true;
+                            self.deliveryInfo.securityType = self.customerDetails.securityType;
                             self.verify.input.phoneNumber = self.customerDetails.msisdn.slice(1);
                             self.isAgree = true;
 
@@ -460,17 +399,37 @@
                         var foreignerDeposit = parseFloat(self.orderSummary.plan.foreignerDeposit);
                         if (self.customerDetails.securityType == 'PASSPORT' && ywos.lsData.meta.orderSummary.due.foreignerDeposit == 0.00) {
                             self.orderSummary.due.foreignerDeposit = foreignerDeposit;
-                            self.orderSummary.due.total += foreignerDeposit;
+                            self.orderSummary.due.total = parseFloat(self.orderSummary.due.total) + parseFloat(foreignerDeposit);
                         } else if (self.customerDetails.securityType == 'NRIC' && ywos.lsData.meta.orderSummary.due.foreignerDeposit != 0.00) {
                             self.orderSummary.due.foreignerDeposit = 0.00;
-                            self.orderSummary.due.total -= foreignerDeposit;
+                            self.orderSummary.due.total = parseFloat(self.orderSummary.due.total) - parseFloat(foreignerDeposit);
                         }
                     }
                 },
+                checkInput: function (event) {
+                    var self = this;
+                    var type = 'alphanumeric';
+                    if (self.customerDetails.securityType == 'NRIC') {
+                        type = 'numeric';
+                        if (self.customerDetails.securityId.length > 11) {
+                            event.preventDefault();
+                        } else {
+                            checkInputCharacters(event, type, false);
+                        }
+                    } else if (self.customerDetails.securityType == 'PASSPORT') {
+                        checkInputCharacters(event, type, false);
+                    } else {
+                        return true;
+                    }
+                }, 
                 watchSecurityType: function() {
                     var self = this;
+                    self.deliveryInfo.securityType = self.customerDetails.securityType;
                     self.checkForeignerDeposit();
                     self.watchAllowNext();
+
+                    self.customerDetails.securityId = '';
+                    $('#input-securityId').focus();
                 },
                 watchAgree: function() {
                     var self = this;

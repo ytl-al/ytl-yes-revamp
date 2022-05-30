@@ -1,4 +1,4 @@
-/* 
+/*
     Stylesheet Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
     Last edited on  : February  04, 2022, 03:52:31 PM
@@ -275,7 +275,7 @@ section {
 .footer {
     width: 100%;
     display: block;
-    background-color: #00B4F0;
+    background-color: #1A1E47;
     padding-top: 30px;
 }
 
@@ -289,7 +289,7 @@ section {
 }
 
 .footer .icon-list .store-icon {
-    width: 95px;
+    width: 75px;
     height: 31px;
 }
 
@@ -348,10 +348,10 @@ section {
 .footer .copyright {
     width: 100%;
     display: block;
-    border-top: solid 1px #FFF;
     margin-top: 30px;
     padding-top: 10px;
     padding-bottom: 10px;
+    background: linear-gradient(80.9deg, #FF0084 16.48%, #6F29D2 85.6%, #2F3BF5 96.9%);
 }
 
 .footer .copyright p {
@@ -365,18 +365,11 @@ section {
     bottom: 0;
 }
 
-.carousel-indicators [data-bs-target] {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    opacity: 1;
-}
-
 
 /* Home Slider styling */
 
-.carousel-indicators .active {
-    background-color: #1B26BC;
+.carousel-indicators [data-bs-target] {
+    height: 6px;
 }
 
 .slider-btn-container {
@@ -538,10 +531,6 @@ section {
     align-items: center;
     justify-content: center;
     padding: 50px 0px;
-    background-image: url("/site/wp-content/uploads/2021/09/amazing-things-bg-1.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top;
 }
 
 #amazing-things h1 {

@@ -96,6 +96,8 @@ define('WPCF7_FOOTER_NEWSLETTER_FORM_ID_BM', 0);
 define('WPCF7_FOOTER_NEWSLETTER_FORM_ID_CH', 0);
 define('YWOS_PAGE_ID', 0);
 
+define('XPAY_LIB_PATH', '');
+
 define('STEP_CLIENT_KEY', '');
 define('STEP_URL', '');
 define('STEP_USERNAME', '');

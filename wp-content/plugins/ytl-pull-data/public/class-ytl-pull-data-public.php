@@ -204,6 +204,33 @@ class Ytl_Pull_Data_Public
 	private $path_create_yos_order_and_payment;
 
 	/**
+	 * The api path to check payment status.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $path_check_order_payment_status		The api path to check payment status.
+	 */
+	private $path_check_order_payment_status;
+
+	/**
+	 * The api path to get Maybank IPP tenure details.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $path_get_ipp_tenure_details		The api path to get Maybank IPP tenure details.
+	 */
+	private $path_get_ipp_tenure_details;
+
+	/**
+	 * The api path to get Maybank IPP monthly installment details.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $path_get_ipp_monthly_installment		The api path to get Maybank IPP monthly installment details.
+	 */
+	private $path_get_ipp_monthly_installment;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -219,17 +246,20 @@ class Ytl_Pull_Data_Public
 		$this->api_timeout 	= 60;
 		$this->api_app_version      = '1.1';
 		$this->api_locale           = 'EN';
-		$this->path_generate_auth_token 	= '/mobileyos-dev/mobile/ws/v1/json/auth/getBasicAuth';
-		$this->path_get_add_ons_by_plan 	= '/mobileyos-dev/mobile/ws/v1/json/getEligibleAddonList';
-		$this->path_generate_otp_for_login	= '/mobileyos-dev/mobile/ws/v1/json/generateOTPForLogin';
-		$this->path_validate_login			= '/mobileyos-dev/mobile/ws/v1/json/validateLoginAndGetCustomerDetails';
-		$this->path_get_cities_by_state_code = '/mobileyos-dev/mobile/ws/v1/json/getAllCitiesByStateCode';
-		$this->path_generate_otp_for_guest_login = '/mobileyos-dev/mobile/ws/v1/json/generateOTPForGuestLogin';
-		$this->path_validate_guest_login 	= '/mobileyos-dev/mobile/ws/v1/json/validateGuestLogin';
-		$this->path_validate_customer_eligibilities	= '/mobileyos-dev/mobile/ws/v1/json/validateCustomerEligibilities';
-		$this->path_verify_referral_code 	= '/mobileyos-dev/mobile/ws/v1/json/verifyReferralCode';
-		$this->path_get_fpx_bank_list 		= '/mobileyos-dev/mobile/ws/v1/json/getFpxBankList';
-		$this->path_create_yos_order_and_payment = '/mobileyos-dev/mobile/ws/v1/json/createYOSOrderAndPaymentWithAddonAndReloads';
+		$this->path_generate_auth_token 	= '/mobileyos/mobile/ws/v1/json/auth/getBasicAuth';
+		$this->path_get_add_ons_by_plan 	= '/mobileyos/mobile/ws/v1/json/getEligibleAddonList';
+		$this->path_generate_otp_for_login	= '/mobileyos/mobile/ws/v1/json/generateOTPForLogin';
+		$this->path_validate_login			= '/mobileyos/mobile/ws/v1/json/validateLoginAndGetCustomerDetails';
+		$this->path_get_cities_by_state_code = '/mobileyos/mobile/ws/v1/json/getAllCitiesByStateCode';
+		$this->path_generate_otp_for_guest_login = '/mobileyos/mobile/ws/v1/json/generateOTPForGuestLogin';
+		$this->path_validate_guest_login 	= '/mobileyos/mobile/ws/v1/json/validateGuestLogin';
+		$this->path_validate_customer_eligibilities	= '/mobileyos/mobile/ws/v1/json/validateCustomerEligibilities';
+		$this->path_verify_referral_code 	= '/mobileyos/mobile/ws/v1/json/verifyReferralCode';
+		$this->path_get_fpx_bank_list 		= '/mobileyos/mobile/ws/v1/json/getFpxBankList';
+		$this->path_create_yos_order_and_payment = '/mobileyos/mobile/ws/v1/json/createYOSOrderAndPaymentWithAddonAndReloads';
+		$this->path_check_order_payment_status 	 = '/mobileyos/mobile/ws/v1/json/orderPaymentStatus';
+		$this->path_get_ipp_tenure_details		 = '/mobileyos/mobile/ws/v1/json/getIPPTenureDetails';
+		$this->path_get_ipp_monthly_installment  = '/mobileyos/mobile/ws/v1/json/getIPPMonthlyInstalment';
 
 		$ytlpd_options				= get_option($this->prefix . "settings");
 		$this->api_domain 			= (!empty($ytlpd_options['ytlpd_api_domain_url'])) ? $ytlpd_options['ytlpd_api_domain_url'] : '';
@@ -299,7 +329,11 @@ class Ytl_Pull_Data_Public
 		$this->ra_reg_validate_customer_eligibilities();
 		$this->ra_reg_verify_referral_code();
 		$this->ra_reg_get_fpx_bank_list();
+		$this->ra_reg_get_ipp_tenures();
+		$this->ra_reg_get_ipp_monthly_installments();
 		$this->ra_reg_create_yos_order();
+		$this->ra_reg_check_order_payment_status();
+		$this->ra_reg_get_order_by_order_display_id();
 	}
 
 	public function ra_reg_add_to_cart()
@@ -356,7 +390,6 @@ class Ytl_Pull_Data_Public
 		foreach ($plans_obj as $plans) {
 			foreach ($plans as $plan_id => $plan) {
 				if ($plan_id == $data['plan_id']) {
-					$plan->addOns = $this->ca_get_add_ons_by_plan($plan->planName, $plan->planType);
 					$return	= $plan;
 					break;
 				}
@@ -766,6 +799,7 @@ class Ytl_Pull_Data_Public
 	{
 		$phone_number 	= (isset($order_info['phone_number']) && !empty(trim($order_info['phone_number']))) 	? $order_info['phone_number'] 	: null;
 		$customer_name 	= (isset($order_info['customer_name']) && !empty(trim($order_info['customer_name']))) 	? $order_info['customer_name'] 	: null;
+		$dob 			= (isset($order_info['dob']) && !empty(trim($order_info['dob']))) 						? $order_info['dob'] 			: null;
 		$email 			= (isset($order_info['email']) && !empty(trim($order_info['email']))) 					? $order_info['email'] 			: null;
 		$security_type 	= (isset($order_info['security_type']) && !empty(trim($order_info['security_type']))) 	? $order_info['security_type'] 	: null;
 		$security_id 	= (isset($order_info['security_id']) && !empty(trim($order_info['security_id']))) 		? $order_info['security_id'] 	: null;
@@ -782,10 +816,11 @@ class Ytl_Pull_Data_Public
 
 		$session_id 	= $this->ca_generate_auth_token(true);
 
-		if ($phone_number != null && $customer_name != null && $email != null && $security_type != null && $security_id != null && $address_line != null && $city != null && $city_code != null && $state != null && $state_code != null && $postal_code != null && $country != null && $plan_bundle_id != 0 && $plan_type != null && $plan_name != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
+		if ($phone_number != null && $customer_name != null && $dob != null && $email != null && $security_type != null && $security_id != null && $address_line != null && $city != null && $city_code != null && $state != null && $state_code != null && $postal_code != null && $country != null && $plan_bundle_id != 0 && $plan_type != null && $plan_name != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params 	= [
 				'alternatePhoneNumber' 	=> $phone_number,
 				'customerFullName' 		=> $customer_name,
+				'dob' 					=> $dob,
 				'email' 				=> $email,
 				'securityType' 			=> $security_type,
 				'securityId' 			=> $security_id,
@@ -815,7 +850,7 @@ class Ytl_Pull_Data_Public
 			$api_url 	= $this->api_domain . $this->path_validate_customer_eligibilities;
 			$request 	= wp_remote_post($api_url, $args);
 			$data 		= json_decode($request['body']);
-
+			
 			if ($data->responseCode > -1) {
 				$data->sessionId = $session_id;
 
@@ -824,6 +859,10 @@ class Ytl_Pull_Data_Public
 				return $response;
 			} else if ($data->displayResponseMessage) {
 				return new WP_Error('error_validating_customer_eligibilities', $data->displayResponseMessage, array('status' => 400));
+			} else if ($data->responseMessage) {
+				return new WP_Error('error_validating_customer_eligibilities', $data->responseMessage, array('status' => 400));
+			} else if ($data->displayErrorMessage) {
+				return new WP_Error('error_validating_customer_eligibilities', $data->displayErrorMessage, array('status' => 400));
 			}
 		} else {
 			return new WP_Error('error_validating_customer_eligibilities', "Parameters not complete to validate customer eligibilities.", array('status' => 400));
@@ -851,7 +890,7 @@ class Ytl_Pull_Data_Public
 	{
 		$session_id = $this->ca_generate_auth_token(true);
 		if ($referral_code != null && $security_type != null && $security_id != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
-			$params		= ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'referralCode' => $referral_code, 'refereeSeucityType' => $security_type, 'refereeSecurityID' => $security_id, 'sessionId' => $session_id];
+			$params		= ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'referralCode' => $referral_code, 'refereeSecurityType' => $security_type, 'refereeSecurityID' => $security_id, 'sessionId' => $session_id];
 			$args 		= [
 				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
 				'body'          => json_encode($params),
@@ -869,6 +908,8 @@ class Ytl_Pull_Data_Public
 				$response 	= new WP_REST_Response($data);
 				$response->set_status(200);
 				return $response;
+			} else if ($data->displayResponseMessage) {
+				return new WP_Error('error_verify_referral_code', $data->displayResponseMessage, array('status' => 400));
 			} else if ($data->displayErrorMessage) {
 				return new WP_Error('error_verify_referral_code', $data->displayErrorMessage, array('status' => 400));
 			}
@@ -920,6 +961,93 @@ class Ytl_Pull_Data_Public
 		return new WP_Error('error_getting_fpx_bank_list', "There's an error in retrieving the bank list.", array('status' => 400));
 	}
 
+	public function ra_reg_get_ipp_tenures() 
+	{
+		register_rest_route('ywos/v1', 'get-ipp-tenures', array(
+			'methods'	=> 'POST', 
+			'callback' 	=> array($this, 'get_ipp_tenures')
+		));
+	}
+
+	public function get_ipp_tenures(WP_REST_Request $request) 
+	{
+		$plan_name	= $request['plan_name'];
+		return $this->ca_get_ipp_tenures($plan_name);
+	}
+
+	public function ca_get_ipp_tenures($plan_name = '') 
+	{
+		$session_id 	= $this->ca_generate_auth_token(true);
+		if ($plan_name && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
+			$params = ['planName' => $plan_name, 'requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'sessionId' => $session_id];
+			$args 	= [
+				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
+				'body'          => json_encode($params),
+				'method'        => 'POST',
+				'data_format'   => 'body',
+				'timeout'     	=> $this->api_timeout
+			];
+			$api_url	= $this->api_domain . $this->path_get_ipp_tenure_details;
+			$request 	= wp_remote_post($api_url, $args);
+			$data 		= json_decode($request['body']);
+
+			if ($data->responseCode > -1) {
+				$response = new WP_REST_Response($data);
+				$response->set_status(200);
+				return $response;
+			} else {
+				return new WP_Error('error_getting_ipp_tenure', "There's an error in retrieving the Maybank IPP tenure details.", array('status' => 400));
+			}
+		} else {
+			return new WP_Error('error_getting_ipp_tenure', "Parameters not complete to retrieve Maybank IPP tenure details.", array('status' => 400));
+		}
+		return new WP_Error('error_getting_ipp_tenure', "There's an error in retrieving the Maybank IPP tenure details.", array('status' => 400));
+	}
+
+	public function ra_reg_get_ipp_monthly_installments() 
+	{
+		register_rest_route('ywos/v1', 'get-ipp-monthly-installments', array(
+			'methods'	=> 'POST', 
+			'callback' 	=> array($this, 'get_ipp_monthly_installments')
+		));
+	}
+
+	public function get_ipp_monthly_installments(WP_REST_Request $request) 
+	{
+		$total_amount 	= $request['total_amount'];
+		$tenure_type 	= $request['tenure_type'];
+		return $this->ca_get_ipp_monthly_installments($total_amount, $tenure_type);
+	}
+
+	public function ca_get_ipp_monthly_installments($total_amount = 0, $tenure_type = 0) 
+	{
+		$session_id 	= $this->ca_generate_auth_token(true);
+		if ($total_amount && $tenure_type && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
+			$params = ['planAmount' => $total_amount, 'ippTenureType' => $tenure_type, 'requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'sessionId' => $session_id];
+			$args 	= [
+				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
+				'body'          => json_encode($params),
+				'method'        => 'POST',
+				'data_format'   => 'body',
+				'timeout'     	=> $this->api_timeout
+			];
+			$api_url	= $this->api_domain . $this->path_get_ipp_monthly_installment;
+			$request 	= wp_remote_post($api_url, $args);
+			$data 		= json_decode($request['body']);
+			
+			if ($data->responseCode > -1) {
+				$response = new WP_REST_Response($data);
+				$response->set_status(200);
+				return $response;
+			} else {
+				return new WP_Error('error_getting_ipp_installment', "There's an error in retrieving the Maybank IPP installment details.", array('status' => 400));
+			}
+		} else {
+			return new WP_Error('error_getting_ipp_installment', "Parameters not complete to retrieve Maybank IPP installment details.", array('status' => 400));
+		}
+		return new WP_Error('error_getting_ipp_installment', "There's an error in retrieving the Maybank IPP installment details.", array('status' => 400));
+	}
+
 	public function ra_reg_create_yos_order()
 	{
 		register_rest_route('ywos/v1', 'create-yos-order', array(
@@ -939,6 +1067,8 @@ class Ytl_Pull_Data_Public
 		
 		$phone_number 	= $this->get_request_input($order_info, 'phone_number');
 		$customer_name	= $this->get_request_input($order_info, 'customer_name');
+		$dob			= $this->get_request_input($order_info, 'dob');
+		$gender			= $this->get_request_input($order_info, 'gender');
 		$email 			= $this->get_request_input($order_info, 'email');
 		$login_yes_id 	= $this->get_request_input($order_info, 'login_yes_id');
 		$security_type	= $this->get_request_input($order_info, 'security_type');
@@ -976,22 +1106,28 @@ class Ytl_Pull_Data_Public
 		$card_cvv 		= $this->get_request_input($order_info, 'card_cvv');
 		$card_expiry_month 	= $this->get_request_input($order_info, 'card_expiry_month');
 		$card_expiry_year 	= $this->get_request_input($order_info, 'card_expiry_year');
+		$ippType 		= $this->get_request_input($order_info, 'ippType');
 
 		$session_id 	= $this->ca_generate_auth_token(true);
 
 		if (
-			$phone_number != null && $customer_name != null && $email != null && $security_type != null && $security_id != null && 
+			$phone_number != null && $customer_name != null && $dob != null && $gender != null && $email != null && $security_type != null && $security_id != null &&
 			$plan_name != null && $plan_type != null && $product_bundle_id != null && 
 			$address_line != null && $city != null && $city_code != null && $postal_code != null && $state != null && $state_code != null && $country != null &&
 			$payment_method != null && $process_name != null && $amount != null && $amount_sst != null && $total_amount != null && 
-			($payment_method == 'FPX' && ($bank_code != null && $bank_name != null)) || 
-			($payment_method == 'CREDIT_CARD' && ($card_number != null && $card_type != null && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null)) && 
+			(
+				($payment_method == 'FPX' && ($bank_code != null && $bank_name != null)) || 
+				($payment_method == 'CREDIT_CARD' && ($card_number != null && $card_type != null && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null)) || 
+				($payment_method == 'CREDIT_CARD_IPP' && ($card_number != null && $card_type != null && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null && $ippType != null))
+			) &&
 			isset($this->api_domain) && isset($this->api_request_id) && $session_id
 		) {
 			$params 	= [
 				'eKYCCustomerDetail' 	=> [
 					'alternatePhoneNumber' 	=> $phone_number, 
 					'customerFullName' 		=> $customer_name, 
+					'dob' 					=> $dob, 
+					'gender' 				=> $gender, 
 					'email' 				=> $email, 
 					'loginYesId' 			=> $login_yes_id, 
 					'planName' 				=> $plan_name, 
@@ -1003,7 +1139,7 @@ class Ytl_Pull_Data_Public
 					'universityName' 		=> $university_name, 
 					'dealerCode' 			=> $dealer_code, 
 					'dealerLoginId' 		=> $dealer_login_id, 
-					'supportingDocUniqueId'	=> 1
+					'supportingDocUniqueId'	=> null
 				], 
 
 				'orderDetail' 			=> [
@@ -1038,6 +1174,7 @@ class Ytl_Pull_Data_Public
 					'cardCVV' 			=> $card_cvv, 
 					'cardExpiryMonth' 	=> $card_expiry_month, 
 					'cardExpiryYear' 	=> $card_expiry_year, 
+					'ippType' 			=> $ippType, 
 					'isAutoSubscribe' 	=> false, 
 					'isSavedCard' 		=> false 
 				], 
@@ -1048,7 +1185,6 @@ class Ytl_Pull_Data_Public
 				'requestId' 			=> $this->api_request_id,
 				'sessionId' 			=> $session_id
 			];
-			
 			$args 		= [
 				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
 				'body'          => json_encode($params),
@@ -1062,11 +1198,20 @@ class Ytl_Pull_Data_Public
 
 			$yos_order_meta 		= $params;
 			unset($yos_order_meta['sessionId']);
+			unset($yos_order_meta['paymentInfo']['bankCode']);
+			unset($yos_order_meta['paymentInfo']['bankName']);
+			unset($yos_order_meta['paymentInfo']['cardNumber']);
+			unset($yos_order_meta['paymentInfo']['cardType']);
+			unset($yos_order_meta['paymentInfo']['nameOnCard']);
+			unset($yos_order_meta['paymentInfo']['cardCVV']);
+			unset($yos_order_meta['paymentInfo']['cardExpiryMonth']);
+			unset($yos_order_meta['paymentInfo']['cardExpiryYear']);
 			$yos_order_id 			= $data->orderNumber;
 			$yos_order_display_id	= $data->displayOrderNumber;
 			$xpay_order_id 			= $data->xpayOrderId;
-			$yos_order_response 	= $data->displayResponseMessage;
-			$this->record_new_order($session_key, $phone_number, $product_bundle_id, $yos_order_meta, $yos_order_id, $yos_order_display_id, $xpay_order_id, $yos_order_response);
+			$yos_order_response 	= $data;
+			$yos_order_response_display = $data->displayResponseMessage;
+			$this->record_new_order($session_key, $phone_number, $product_bundle_id, $yos_order_meta, $yos_order_id, $yos_order_display_id, $xpay_order_id, $yos_order_response, $yos_order_response_display);
 			
 			if ($data->responseCode > -1) {
 				$data->sessionId = $session_id;
@@ -1083,6 +1228,75 @@ class Ytl_Pull_Data_Public
 		return new WP_Error('error_creating_yos_order', "There's an error in creating YOS order.", array('status' => 400));
 	}
 
+	public function ra_reg_check_order_payment_status() 
+	{
+		register_rest_route('ywos/v1', 'check-order-payment-status', array(
+			'methods'	=> 'POST', 
+			'callback' 	=> array($this, 'check_order_payment_status')
+		));
+	}
+
+	public function check_order_payment_status(WP_REST_Request $request) 
+	{
+		$session_key	= $request['session_key'];
+		$yos_order_id 	= $request['yos_order_id'];
+		return $this->ca_check_order_payment_status($session_key, $yos_order_id);
+	}
+
+	public function ca_check_order_payment_status($session_key = null, $yos_order_id = 0) 
+	{
+		$session_id 	= $this->ca_generate_auth_token(true);
+		if ($session_key != null && $yos_order_id && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
+			$params = ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'orderNumber' => $yos_order_id, 'sessionId' => $session_id];
+			$args 	= [
+				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
+				'body'          => json_encode($params),
+				'method'        => 'POST',
+				'data_format'   => 'body',
+				'timeout'     	=> $this->api_timeout
+			];
+			$api_url	= $this->api_domain . $this->path_check_order_payment_status;
+			$request 	= wp_remote_post($api_url, $args);
+			$data 		= json_decode($request['body']);
+
+			$xpay_order_response 	= $data->displayResponseMessage;
+			$xpay_order_meta 		= $data;
+			$is_xpay_success 		= ($data->responseCode == 0) ? 1 : 0;
+			$this->update_order_record($session_key, $xpay_order_response, $is_xpay_success, $xpay_order_meta);
+			
+			if ($data->responseCode == 0) {
+				$data->sessionId = $session_id;
+				$response 	= new WP_REST_Response($data);
+				$response->set_status(200);
+				return $response;
+			} else {
+				return new WP_Error('error_checking_order_payment_status', $data->displayResponseMessage, array('status' => 400));
+			}
+		} else {
+			return new WP_Error('error_checking_order_payment_status', "Parameters not complete to check order payment status.", array('status' => 400));
+		}
+		return new WP_Error('error_checking_order_payment_status', "There's an error in checking order payment status.", array('status' => 400));
+	}
+
+	public function ra_reg_get_order_by_order_display_id() 
+	{
+		register_rest_route('ywos/v1', 'get-order-by-display-id/(?P<order_display_id>[a-zA-Z0-9-]+)', array(
+			'methods' 	=> 'GET', 
+			'callback' 	=> array($this, 'get_order_by_display_id')
+		));
+	}
+
+	public function get_order_by_display_id($data) 
+	{
+		$order_display_id = $data['order_display_id'];
+		global $wpdb;
+		$table_name = $wpdb->prefix.'ywos_orders';
+		$row = $wpdb->get_row($wpdb->prepare("SELECT ID, msisdn, plan_id, yos_order_response, yos_order_response_display, xpay_order_id, xpay_order_meta, xpay_order_response, is_xpay_success, order_created_at FROM $table_name WHERE yos_order_display_id = %s AND deleted_at IS NULL", $order_display_id));
+		$row->yos_order_response = unserialize($row->yos_order_response);
+		$row->xpay_order_meta = unserialize($row->xpay_order_meta);
+		return $row;
+	}
+
 	public function get_request_input($order_info = [], $input_name = '') 
 	{
 		return (isset($order_info[$input_name]) && !empty(trim($order_info[$input_name]))) ? $order_info[$input_name] : null;
@@ -1093,23 +1307,24 @@ class Ytl_Pull_Data_Public
 		return number_format((float) $amount, $decimal_plance, '.', '');
 	}
 
-	public function record_new_order($session_key = '', $msisdn = '', $plan_id = 0, $yos_order_meta = [], $yos_order_id = '', $yos_order_display_id = '', $xpay_order_id = '', $yos_order_response = '') 
+	public function record_new_order($session_key = '', $msisdn = '', $plan_id = 0, $yos_order_meta = [], $yos_order_id = '', $yos_order_display_id = '', $xpay_order_id = '', $yos_order_response = '', $yos_order_response_display = '') 
 	{
 		global $wpdb;
 		$table_name = $wpdb->prefix.'ywos_orders';
 
 		$checkIfExists 	= $wpdb->get_var("SELECT ID FROM $table_name WHERE session_key = '$session_key'");
-		$curTimestamp 	= current_time('mysql', 1);
+		$curTimestamp 	= current_time('mysql');
 		$params 		= array(
 			'session_key'	=> $session_key, 
 			'msisdn' 		=> $msisdn, 
 			'plan_id' 		=> $plan_id, 
 			'yos_order_id' 	=> $yos_order_id, 
-			'yos_order_display_id' 	=> $yos_order_display_id, 
-			'yos_order_meta'=> serialize($yos_order_meta), 
-			'yos_order_response' 	=> $yos_order_response, 
+			'yos_order_display_id' 			=> $yos_order_display_id, 
+			'yos_order_meta'				=> serialize($yos_order_meta), 
+			'yos_order_response' 			=> serialize($yos_order_response), 
+			'yos_order_response_display' 	=> $yos_order_response_display, 
 			'xpay_order_id'	=> $xpay_order_id, 
-			'order_created_at'		=> $curTimestamp, 
+			'order_created_at'				=> $curTimestamp, 
 			'created_at' 	=> $curTimestamp, 
 			'updated_at' 	=> $curTimestamp 
 		);
@@ -1126,6 +1341,31 @@ class Ytl_Pull_Data_Public
 				$params, 
 				array(
 					'ID' => $checkIfExists
+				)
+			);
+		}
+	}
+
+	public function update_order_record($session_key = '', $xpay_order_response = '', $is_xpay_success = 0, $xpay_order_meta) 
+	{
+		global $wpdb;
+		$table_name = $wpdb->prefix.'ywos_orders';
+
+		$getRecordID 	= $wpdb->get_var("SELECT ID FROM $table_name WHERE session_key = '$session_key'");
+		$curTimestamp 	= current_time('mysql');
+		
+		if ($getRecordID) {
+			$params = [
+				'xpay_order_response' 	=> $xpay_order_response, 
+				'xpay_order_meta' 		=> serialize($xpay_order_meta),
+				'is_xpay_success' 		=> $is_xpay_success, 
+				'updated_at' 			=> $curTimestamp 
+			];
+			$wpdb->update(
+				$table_name,
+				$params, 
+				array(
+					'ID' => $getRecordID
 				)
 			);
 		}

@@ -27,7 +27,7 @@ if ($sub_categories) {
         $sub_args['posts_per_page'] = $postPerSubcategory;
 
         $sub_args['tax_query'] = apply_filters('betterdocs_list_tax_query_arg', $tax_query, $multiple_kb, $sub_category->slug, '');
-
+        $sub_args = apply_filters('betterdocs_articles_args', $sub_args);
         $sub_post_query = new \WP_Query($sub_args);
         if ($sub_post_query->have_posts()) :
             while ($sub_post_query->have_posts()) : $sub_post_query->the_post();

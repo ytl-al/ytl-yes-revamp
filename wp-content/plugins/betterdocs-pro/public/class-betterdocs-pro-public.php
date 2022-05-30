@@ -22,6 +22,7 @@
  */
 class Betterdocs_Pro_Public
 {
+    use BetterDocs_Content_Restrictions;
 	/**
 	 * The ID of this plugin.
 	 *
@@ -40,6 +41,8 @@ class Betterdocs_Pro_Public
 	 */
 	private $version;
 
+    public $internal_kb;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -51,6 +54,7 @@ class Betterdocs_Pro_Public
 	{
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+        $this->internal_kb = $this->content_restriction();
 		add_filter('betterdocs_docs_layout_select_choices', array($this, 'customizer_docs_page_layout_choices'));
 		add_filter('betterdocs_archive_template', array($this, 'get_docs_archive_template'));
 		add_filter('betterdocs_single_layout_select_choices', array($this, 'customizer_single_layout_choices'));
@@ -65,7 +69,13 @@ class Betterdocs_Pro_Public
         add_action('betterdocs_after_live_search_form', array($this, 'popular_srarch'), 10, 1);
         add_action('betterdocs_advance_search_settings', array($this, 'advance_search_settings'));
         add_action('betterdocs_popular_keyword_limit_settings', array($this, 'popular_keyword_limit'));
-        add_filter('betterdocs_search_button_text', array($this, 'search_button_text'), 10, 1 );
+        add_filter('betterdocs_search_button_text', array($this, 'search_button_text'), 10, 1);
+        if ($this->internal_kb == 1) {
+            add_filter('betterdocs_category_terms_object', array($this, 'restrict_doc_category'), 10, 1);
+            add_filter('betterdocs_kb_terms_object', array($this, 'restrict_kb'), 10, 1);
+            add_filter('betterdocs_tag_tax_query', array($this, 'restrict_tax_query'), 10, 2);
+            add_filter('betterdocs_live_search_tax_query', array($this, 'search_articles_args'), 10, 1);
+        }
         $live_search = BetterDocs_DB::get_settings('advance_search');
         if ($live_search == 1) {
             add_action('betterdocs_search_section', array($this, 'advance_search'), 10, 1);
@@ -171,77 +181,6 @@ class Betterdocs_Pro_Public
         }
         return false;
     }
-
-    public function get_404_template()
-    {
-        global $wp_query;
-        $wp_query->set_404();
-        status_header( 404 );
-        get_template_part( 404 );
-        exit();
-    }
-
-    public function restricted_redirect_url()
-    {
-        $restricted_redirect_url = BetterDocs_DB::get_settings('restricted_redirect_url');
-        if ($restricted_redirect_url) {
-            wp_redirect($restricted_redirect_url);
-        } else {
-            $this->get_404_template();
-        }
-    }
-
-    public function content_visibility_by_role()
-    {
-        global $current_user;
-        $roles = $current_user->roles;
-        $content_visibility = BetterDocs_DB::get_settings('content_visibility');
-        $content_visibility = ($content_visibility !== 'off') ? $content_visibility : array('all');
-        //If The User Has Multiple Roles Assigned
-        $role_exists = is_array($content_visibility) ? ( array_intersect( $roles, $content_visibility ) ) : 'all';
-        if (is_user_logged_in() && (($role_exists == true) || in_array('all', $content_visibility))) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function internal_kb_restriction()
-    {
-        global $wp_query;
-        $content_restriction = BetterDocs_DB::get_settings('enable_content_restriction');
-        $restrict_template = BetterDocs_DB::get_settings('restrict_template');
-        $restrict_template = !empty($restrict_template) ? $restrict_template : array();
-        $restrict_category = BetterDocs_DB::get_settings('restrict_category');
-        $restrict_category = !empty($restrict_category) ? $restrict_category : array();
-        $restrict_kb = BetterDocs_DB::get_settings('restrict_kb');
-        $restrict_kb = !empty($restrict_kb) ? $restrict_kb : array();
-        $tax = BetterDocs_Helper::get_tax();
-
-        $cat_terms = get_the_terms(get_the_ID(), 'doc_category');
-        $kb_terms = get_the_terms(get_the_ID(), 'knowledge_base');
-
-        if ($this->is_betterdocs() && $content_restriction == 1 && $this->content_visibility_by_role() == false
-            && (is_array($restrict_template) && in_array('all', $restrict_template)
-                || (is_array($restrict_template) && in_array('docs', $restrict_template))
-                || ($tax === 'knowledge_base'
-                    && (is_array($restrict_template) && in_array('knowledge_base', $restrict_template)
-                        && (is_array($restrict_kb) && (in_array('all', $restrict_kb) || in_array($wp_query->query['knowledge_base'], $restrict_kb)))))
-                || ($tax === 'doc_category'
-                    && (is_array($restrict_template) && in_array('doc_category', $restrict_template)
-                        && (is_array($restrict_category) && (in_array('all', $restrict_category) || in_array($wp_query->query['doc_category'], $restrict_category)))))
-                || (is_singular('docs')
-                    && ((is_array($restrict_template) && in_array('doc_category', $restrict_template))
-                        && (is_array($restrict_category) && (in_array('all', $restrict_category) || in_array($cat_terms[0]->slug, $restrict_category)))
-                        || ((is_array($restrict_template) && in_array('knowledge_base', $restrict_template))
-                            && (is_array($restrict_kb) && (in_array('all', $restrict_kb) || in_array($kb_terms[0]->slug, $restrict_kb)))))
-                )
-            )
-        ) {
-            $this->restricted_redirect_url();
-        }
-    }
-
 
     /**
      * Get Docs Page Template for docs base directory.

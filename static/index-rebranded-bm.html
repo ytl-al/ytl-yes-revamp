@@ -1,0 +1,1005 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>YES</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/slick.css" />
+    <link rel="stylesheet" type="text/css" href="css/aos.css" />
+    <link rel="stylesheet" type="text/css" href="css/slick-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="../wp-content/themes/yes-twentytwentyone/assets/css/yes-overwrite.css" />
+
+    <style>
+        .slider-btn-container .lightpink-btn {
+            background-color: #FDDBFB;
+            color: #096FD4;
+        }
+        
+        .slider-btn-left {
+            left: 0;
+            right: auto;
+            bottom: 10%;
+        }
+        
+        .slider-btn-freefire {
+            left: 111px;
+            right: auto;
+            bottom: 19%;
+        }
+        
+        #slider-yes-home .slider-content h1 {
+            font-size: 48px;
+            line-height: 56px;
+            font-weight: 700;
+            color: #000;
+        }
+        
+        #slider-yes-home .slider-content h1 span {
+            font-weight: 800;
+        }
+        
+        #slider-yes-home .slider-content h1.white {
+            color: #FFF;
+        }
+        
+        #slider-yes-home .slider-content p {
+            color: #000;
+            font-size: 24px;
+            line-height: 34px;
+        }
+        
+        #slider-yes-home .slider-content p span {
+            font-weight: 700;
+        }
+        
+        #slider-yes-home .slider-content p.small {
+            font-size: 16px;
+        }
+        
+        #slider-yes-home .slider-content p.white {
+            color: #FFF;
+        }
+        
+        #slider-yes-home .slider-content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            left: 0;
+            top: 0;
+        }
+        
+        @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+            .slider-btn-container {
+                margin-bottom: 0.9rem;
+            }
+            .carousel-indicators {
+                margin-bottom: 0.5rem;
+            }
+            .slider-btn {
+                padding: 3px 25px;
+                font-size: 11px;
+            }
+            .carousel-indicators {
+                margin-bottom: -0.2rem;
+            }
+            .carousel-indicators [data-bs-target] {
+                width: 5px;
+                height: 5px;
+            }
+            .slider-btn-container .white-btn {
+                padding: 3px 25px;
+                font-size: 11px;
+            }
+            .slider-btn-left {
+                bottom: 5%;
+            }
+            .slider-btn-left img {
+                width: 50%;
+            }
+            .slider-btn-freefire img {
+                width: 50%;
+                max-width: inherit;
+            }
+        }
+        /* IPAD Portrait */
+        
+        @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+            .slider-btn-container {
+                margin-bottom: 0.9rem;
+            }
+            .carousel-indicators {
+                margin-bottom: 0rem;
+            }
+            .slider-btn {
+                padding: 5px 25px;
+                font-size: 13px;
+            }
+            .slider-btn-container .lightpink-btn {
+                font-size: 13px;
+                padding: 5px 25px;
+            }
+            .slider-btn-left img {
+                width: 50%;
+            }
+            .slider-btn-freefire img {
+                width: 50%;
+                max-width: inherit;
+            }
+            .slider-btn-freefire {
+                left: 35px;
+            }
+        }
+        
+        @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+            #quick-action .whitebox {
+                padding: 35px 20px;
+            }
+            #quick-action .whitebox h1 {
+                font-size: 35px;
+            }
+            .slider-btn-container {
+                margin-bottom: 0.5rem;
+            }
+            .slider-btn {
+                padding: 3px 25px;
+                font-size: 11px;
+            }
+            .slider-btn-container .lightpink-btn {
+                padding: 3px 25px;
+                font-size: 11px;
+            }
+            .carousel-indicators {
+                margin-bottom: -0.2rem;
+            }
+            .carousel-indicators [data-bs-target] {
+                width: 5px;
+                height: 5px;
+            }
+            .slider-btn-left img {
+                width: 50%;
+            }
+            .slider-btn-left {
+                bottom: 5%;
+            }
+            .slider-btn-freefire img {
+                width: 40%;
+                max-width: inherit;
+            }
+            .slider-btn-freefire {
+                left: 16px;
+            }
+            #slider-yes-home .slider-content p {
+                font-size: 19px;
+                line-height: 23px;
+            }
+            #slider-yes-home .slider-content h1 {
+                font-size: 27px;
+                line-height: 36px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="layer-page">
+        <header class="page-header">
+            <div class="top-pink-bar d-none">
+                <div class="row g-0 text-center">
+                    <p>Are you an Exisiting YES user? Earn up to RM50/referral through our Refer & Earn program!</p>
+                </div>
+                <a href="#" class="close-btn"><span class="iconify" data-icon="eva:close-fill"></span></a>
+            </div>
+            <div class="top-tabs-container">
+                <div class="container g-0">
+                    <div class="row g-0">
+                        <div class="col-10">
+                            <ul class="tabnav">
+                                <li><a href="#" class="active">Personal</a></li>
+                                <li><a href="#">Business</a></li>
+                                <li><a href="#">Education</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-2">
+                            <div class="dropdown language-drop float-end">
+                                <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="iconify" data-icon="bi:globe"></span> English
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">English</a></li>
+                                    <li><a class="dropdown-item" href="#">Bhasa Malay</a></li>
+                                    <li><a class="dropdown-item" href="#">中文</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-container">
+                <div class="container g-lg-0">
+                    <div class="row g-0">
+                        <nav class="navbar navbar-expand-lg">
+                            <div class="container">
+                                <a class="navbar-brand" href="#"><img src="images/logo.svg" class="logo-top" /></a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <li class="nav-item dropdown mega-dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                                            <ul class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Mobile Plans</li>
+                                                        <li><a href="#">Prepaid Plans</a></li>
+                                                        <li><a href="#">Postpaid Plans</a></li>
+                                                        <li><a href="#">YES Prihatin</a></li>
+                                                        <li><a href="#">Merdeka RM1 Package</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Broadband</li>
+                                                        <li><a href="#">Home broadband</a></li>
+                                                        <li><a href="#">On-the-go broadband</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Existing Customers</li>
+                                                        <li><a href="#">How-To: Refer & Earn</a></li>
+                                                        <li><a href="#">How-To: Get Databack</a></li>
+                                                        <li><a href="#">Data & Hotspot Add-Ons</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="#">Keep Number</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Partners</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Help</a>
+                                        </li>
+                                    </ul>
+                                    <div class="d-flex align-items-center">
+                                        <a href="#" class="pink-btn me-3">Get Started</a>
+                                        <a href="#" class="login-btn"><span class="iconify" data-icon="carbon:user-avatar-filled-alt"></span> Log In</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <!-- Slider Start -->
+            <section>
+                <div id="slider-yes-home" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true" data-bs-interval="false">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#slider-yes-home" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#slider-yes-home" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#slider-yes-home" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#slider-yes-home" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" data-bs-interval="5000">
+                            <a href="https://firstto5g.yes.my/FreeFire">
+                                <img src="images/freefire-banner-bg-new-bm.jpg" class="w-100 d-none d-lg-block" alt="...">
+                                <img src="images/freefire-banner-bg-new-mobile-bm.jpg" class="w-100 d-block d-md-block d-lg-none" alt="...">
+                                <div class="slider-content">
+                                    <div class="container h-100">
+                                        <div class="row h-100">
+                                            <div class="col-9 col-lg-4 d-flex align-items-center" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
+                                                <div>
+                                                    <img src="images/freefire-banner-visual1.png" class="img-fluid mb-3" alt="">
+                                                    <p class="white mb-3">Bersama Pelan YES FT5G Free Fire</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="5000">
+                            <a href="https://firstto5g.yes.my/Register/DiscoverFT5G">
+                                <img src="images/unlimited-5gbanner-bg.jpg" class="w-100 d-none d-lg-block" alt="...">
+                                <img src="images/unlimited-5gbanner-bg-mobile.jpg" class="w-100 d-block d-md-block d-lg-none" alt="...">
+                                <div class="slider-content">
+                                    <div class="container h-100">
+                                        <div class="row h-100 mt-4 mb-4 mt-lg-0 mb-lg-0 justify-content-center">
+                                            <div class="col-12 col-xl-7 col-lg-8 d-flex align-items-center justify-content-center justify-content-lg-start">
+                                                <div>
+                                                    <h1 class="mb-3 white text-center text-lg-start">Miliki Masa Depan Anda!</h1>
+                                                    <p class="white mb-3 text-center text-lg-start">Jadi yang pertama untuk mengalami data<br><span>5G tanpa had</span></p>
+                                                    <p class="white small text-center text-lg-start">*T&Cs apply.</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-9 col-xl-5 col-lg-4 d-flex align-items-center">
+                                                <div>
+                                                    <img src="images/unlimited-5gbanner-visual.png" class="img-fluid mb-3" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="5000">
+                            <a href="https://www.yes.my/ms/5gplans">
+                                <img src="images/ft5g-bg-bm.jpg" class="w-100 d-none d-lg-block" alt="...">
+                                <img src="images/ft5g-bg-mobile-bm.jpg" class="w-100 d-block d-md-block d-lg-none" alt="...">
+                                <div class="slider-content">
+                                    <div class="container h-100">
+                                        <div class="row h-100">
+                                            <div class="col-12 col-lg-4 d-flex justify-content-center justify-content-lg-start align-items-start align-items-lg-center pt-5 pt-lg-0">
+                                                <div>
+                                                    <h1 class="white mb-3 text-center text-lg-start">kini <span>percuma</span>*</h1>
+                                                    <p class="white small text-center text-lg-start">*Tertakluk kepada terma dan syarat.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="5000">
+                            <a href="https://appstore.yes.my/ywos">
+                                <img src="images/kasiup-banner-bg.jpg" class="w-100 d-none d-lg-block" alt="...">
+                                <img src="images/kasiup-banner-bg-mobile.jpg" class="w-100 d-block d-md-block d-lg-none" alt="...">
+                                <div class="slider-content">
+                                    <div class="container h-100">
+                                        <div class="row h-100 mt-4 mb-4 mt-lg-0 mb-lg-0 justify-content-center">
+                                            <div class="col-12 col-xl-5 col-lg-6 d-flex align-items-center justify-content-center justify-content-lg-start">
+                                                <div>
+                                                    <h1 class="mb-3 text-center text-lg-start">Kasi Up</h1>
+                                                    <p class="mb-3 text-center text-lg-start">The New Affordable for the New Normal</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="5000">
+                            <a href="/keluargamalaysia">
+                                <img src="images/keluarga-banner-bg.jpg" class="w-100 d-none d-lg-block" alt="...">
+                                <img src="images/keluarga-banner-bg-mobile.jpg" class="w-100 d-block d-md-block d-lg-none" alt="...">
+                                <div class="slider-content">
+                                    <div class="container h-100">
+                                        <div class="row h-100 mt-4 mb-4 mt-lg-0 mb-lg-0 justify-content-center">
+                                            <div class="col-12 col-xl-5 col-lg-6 d-flex align-items-center justify-content-center justify-content-lg-start">
+                                                <div>
+                                                    <h1 class="mb-3 text-center text-lg-start">Pakej Keluarga<br>Malaysia</h1>
+                                                    <p class="mb-3 text-center text-lg-start">Free 4G Smartphone.<br>Free 1GB data daily.</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-xl-7 col-lg-6 d-flex align-items-center">
+                                                <div class="pb-5 pb-lg-0">
+                                                    <img src="images/keluarga-banner-visual.png" class="img-fluid mb-3" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <button class="carousel-control-prev d-none" type="button" data-bs-target="#slider-yes-home" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                          </button>
+                        <button class="carousel-control-next d-none" type="button" data-bs-target="#slider-yes-home" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <!-- Slider End -->
+
+            <!-- Quick Action Start -->
+            <section id="quick-action">
+                <div class="container">
+                    <div class="whitebox">
+                        <div class="row d-flex align-items-center justify-content-center">
+                            <div class="col-12 col-md-4 justify-content-center">
+                                <h1>Quick Actions</h1>
+                                <p>Just purchased a plan from us?<br>We’ve got you covered!</p>
+                            </div>
+                            <div class="col-12 col-md-8">
+                                <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-3">
+                                    <div class="col">
+                                        <a href="#" class="action-links">
+                                            <img src="images/trackorder-icon.svg" />
+                                            <p>Track Order</p>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#" class="action-links">
+                                            <img src="images/download-yes-icon.svg" />
+                                            <p>Download MyYes app</p>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#" class="action-links">
+                                            <img src="images/activate-sim-icon.svg" />
+                                            <p>Activate SIM card</p>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#" class="action-links">
+                                            <img src="images/refer-icon.svg" />
+                                            <p>Refer & Earn</p>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#" class="action-links">
+                                            <img src="images/reload-icon.svg" />
+                                            <p>Reload Data</p>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#" class="action-links">
+                                            <img src="images/upgrade-plan-icon.svg" />
+                                            <p>Upgrade Plan</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Quick Action End -->
+
+            <!-- Popular Deals Start -->
+            <section id="popular-deals">
+                <div class="container">
+                    <div class="row mb-5">
+                        <div class="col-12">
+                            <h1>Catch our popular deals</h1>
+                        </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-xl-3 row-cols-lg-2 row-cols-md-2">
+                        <div class="col">
+                            <div class="deal-box card h-100">
+                                <h2>YES FT5G<br>Prepaid Unlimited</h2>
+                                <div class="content d-flex flex-column">
+                                    <div class="mb-auto">
+                                        <img src="images/ft5g-simpack.jpg" class="mb-5 mt-5" />
+                                        <div class="row mb-4">
+                                            <div class="col-12 text-center">
+                                                <p class="pricing">RM30</p>
+                                                <p>Unlimited 5G*/4G**<br>Unlimited Calls to All Networks</p>
+                                            </div>
+                                        </div>
+                                        <div class="pink-btn-box"><a href="https://firstto5g.yes.my/?pl=689" class="pink-btn">Buy Now</a></div>
+                                    </div>
+                                    <p class="small mt-3 mb-3">*subject to availability until 31st March 2022<br>** 7Mbps, 9GB Hotspot</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="deal-box card h-100">
+                                <h2>YES FT5G<br>Postpaid 49</h2>
+                                <div class="content d-flex flex-column">
+                                    <div class="mb-auto">
+                                        <img src="images/ft5g-simpack.jpg" class="mb-5 mt-5" />
+                                        <div class="row mb-4">
+                                            <div class="col-12 text-center">
+                                                <p class="pricing">RM49</p>
+                                                <p>Unlimited 5G*<br>100GB Full Speed 4G<br>Unlimited Calls to All Networks </p>
+                                            </div>
+                                        </div>
+                                        <div class="pink-btn-box"><a href="https://firstto5g.yes.my/?pl=690" class="pink-btn">Buy Now</a></div>
+                                    </div>
+                                    <p class="small mt-3 mb-3">*subject to availability until 31st March 2022</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-md-12 col-lg-12">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-6 col-md-6">
+                                    <div class="deal-box card mb-3">
+                                        <img src="images/payas-visual.jpg" class="img-fluid mb-1" />
+                                        <div class="content">
+                                            <h3 class="mb-3">Kasi Up <span>Prepaid</span></h3>
+                                            <div class="pink-btn-box"><a href="#" class="pink-btn">View All</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 col-lg-6 col-md-6">
+                                    <div class="deal-box card">
+                                        <img src="images/paymonthly-visual.jpg" class="img-fluid mb-1" />
+                                        <div class="content">
+                                            <h3 class="mb-3">Kasi Up <span>Prepaid</span></h3>
+                                            <div class="pink-btn-box"><a href="#" class="pink-btn">View All</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <!-- Popular Deals End -->
+
+            <!-- WFH Start -->
+            <section id="wfh">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-6 d-flex align-content-center justify-content-md-start justify-content-center flex-wrap">
+                            <h1 class="mb-3 w-100">#WFH?</h1>
+                            <p class="mb-4 w-100">Upgrade your internet with our<br>home broadband</p>
+                            <a href="#" class="pink-btn">Upgrade Now</a>
+                        </div>
+                        <div class="col-12 col-md-6 d-flex align-items-center">
+                            <img src="images/wfh-visual.png" class="img-fluid wfh-visual" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- WFH End -->
+
+            <!-- Amazing Things Start -->
+            <section id="amazing-things">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1 class="mb-5">
+                                These <span>amazing</span> things happen<br>when you say <span>YES</span>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="row row-cols-2 row-cols-lg-4 mb-4">
+                        <div class="col mb-4">
+                            <img src="images/crisp-call-pic.jpg" class="w-100 mb-2" />
+                            <h2 class="mb-2">Crisp and<br>Clear Calls</h2>
+                            <p>No latency. No jitters.<br>No static. All the way.</p>
+                        </div>
+                        <div class="col mb-4">
+                            <img src="images/4glte-pic.jpg" class="w-100 mb-2" />
+                            <h2 class="mb-2">4G LTE means<br>4G LTE</h2>
+                            <p>No matter where,<br>no matter what.</p>
+                        </div>
+                        <div class="col mb-4">
+                            <img src="images/cutprices-pic.jpg" class="w-100 mb-2" />
+                            <h2 class="mb-2">We Cut Prices,<br>Not Service</h2>
+                            <p>Because you deserve<br>the best!</p>
+                        </div>
+                        <div class="col mb-4">
+                            <img src="images/affordable-pic.jpg" class="w-100 mb-2" />
+                            <h2 class="mb-2">Affordable and<br>Amazing Deals</h2>
+                            <p>Because connectivity is a right,<br>not a privilege.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-lg-6 text-lg-start text-center">
+                            <a href="#" class="pink-btn mb-4">Get Started</a>
+                            <div class="d-flex align-items-center justify-content-lg-start justify-content-center">
+                                <p class="small me-2">In partnership with</p>
+                                <img src="images/partnership-logos.png" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 d-flex align-items-center justify-content-lg-end justify-content-center">
+                            <img src="images/hunt-yes-logo.png" class="hunt-yes-logo" />
+                        </div>
+                    </div>
+                </div>
+                <!-- Customer Reviews Start -->
+                <div id="customer-review-new">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 mb-4">
+                                <h1>Read what our customers have to say!</h1>
+                            </div>
+                            <div class="col-12">
+                                <div class="reviews-carousel">
+                                    <div class="reviewbox">
+                                        <h1>David Bay</h1>
+                                        <div class="rating-box">
+                                            <img src="images/5star.png" />
+                                            <div class="date">28 Jan 2022</div>
+                                        </div>
+                                        <div class="content mb-auto">
+                                            <p>
+                                                <span>The internet has improved since early 2022 so I leave a new review.</span> The price is affordable, offers in many variations of deal. Most importantly, the app is very simple, minimal and easy to
+                                                use and I hope it keeps on that way.
+                                            </p>
+                                        </div>
+                                        <div class="source-div">Sourced from Google Playstore</div>
+                                    </div>
+                                    <div class="reviewbox">
+                                        <h1>Su Chy</h1>
+                                        <div class="rating-box">
+                                            <img src="images/5star.png" />
+                                            <div class="date">6 Jan 2022</div>
+                                        </div>
+                                        <div class="content mb-auto">
+                                            <p>
+                                                <span>Best user experience so far.</span> And bang for bucks. With the same amount for one line I paid for other operators now is able to pay for 4 lines with Yes... Its a people caring network. The speed
+                                                is fast and stable as well.
+                                            </p>
+                                        </div>
+                                        <div class="source-div">Sourced from Google Playstore</div>
+                                    </div>
+                                    <div class="reviewbox">
+                                        <h1>Anuar Ali</h1>
+                                        <div class="rating-box">
+                                            <img src="images/5star.png" />
+                                            <div class="date">5 Jan 2022</div>
+                                        </div>
+                                        <div class="content mb-auto">
+                                            <p>
+                                                <span>Hope Yes will continue this generous data plan. Thanks.</span> Since I am living and working in the city centre, and I am using the unlimited data plan, the network speed is considerably OK. And when
+                                                I buy the RM 15, plus The Prihatin plan, I received a free 9 GB hotspot data. All is valid for 30 days.
+                                            </p>
+                                        </div>
+                                        <div class="source-div">Sourced from Google Playstore</div>
+                                    </div>
+                                    <div class="reviewbox">
+                                        <h1>Yanie Lee</h1>
+                                        <div class="rating-box">
+                                            <img src="images/5star.png" />
+                                            <div class="date">20 Nov 2021</div>
+                                        </div>
+                                        <div class="content mb-auto">
+                                            <p>
+                                                <span>Been using about 5 months already...Very good coverage of internet data!</span>Friendly use. Fast networking. Worth it price & save data cost. Recommended! 👍👍👍
+                                            </p>
+                                        </div>
+                                        <div class="source-div">Sourced from Google Playstore</div>
+                                    </div>
+                                    <div class="reviewbox">
+                                        <h1>Nur Nusrah</h1>
+                                        <div class="rating-box">
+                                            <img src="images/5star.png" />
+                                            <div class="date">13 May 2019</div>
+                                        </div>
+                                        <div class="content mb-auto">
+                                            <p>
+                                                <span>I'm as a Yes user simcard is very satisfied with the service.</span>My internet is very fast and I can open everything without any problems.
+                                            </p>
+                                        </div>
+                                        <div class="source-div">Sourced from Google Playstore</div>
+                                    </div>
+                                    <div class="reviewbox">
+                                        <h1>ASP</h1>
+                                        <div class="rating-box">
+                                            <img src="images/5star.png" />
+                                            <div class="date">13 May 2019</div>
+                                        </div>
+                                        <div class="content mb-auto">
+                                            <p>
+                                                <span>GOOD JOB YES</span>Best apps, best telecom in Malaysia..in my village also got 4g besides other telecom get teribble connection..
+                                            </p>
+                                        </div>
+                                        <div class="source-div">Sourced from Google Playstore</div>
+                                    </div>
+                                    <div class="reviewbox">
+                                        <h1>Sardar Anand</h1>
+                                        <div class="rating-box">
+                                            <img src="images/5star.png" />
+                                            <div class="date">19 Nov 2019</div>
+                                        </div>
+                                        <div class="content mb-auto">
+                                            <p>
+                                                <span>The speed of internet is soo.. fast.</span>YES 4G network catch at anywhere. So i recommend to user try Yes4G.
+                                            </p>
+                                        </div>
+                                        <div class="source-div">Sourced from Google Playstore</div>
+                                    </div>
+                                    <div class="reviewbox">
+                                        <h1>Sulaiman Abu Bakar</h1>
+                                        <div class="rating-box">
+                                            <img src="images/5star.png" />
+                                            <div class="date">20 Aug 2017</div>
+                                        </div>
+                                        <div class="content mb-auto">
+                                            <p>
+                                                <span>Been using Unifi 50mbps, Webe, Digi and now YES.</span>Who would have know that the infamous ISP Yes is actually the best compared to the rest! Oh yes I used Umobile and checked with Maxis and Celcom
+                                                before. Fastest internet speed with over 30mbps at my home area and best of all that no other ISP can beat...
+                                            </p>
+                                        </div>
+                                        <div class="source-div">Sourced from Google Playstore</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Customer Reviews End -->
+            </section>
+            <!-- Amazing Things End -->
+
+            <!-- FAQs Start -->
+            <section id="faq-section">
+                <div class="container">
+                    <div class="row">
+                        <h1 class="mb-5">Frequently Asked Questions about YES</h1>
+                    </div>
+                    <div class="row">
+                        <div class="accordion accordion-flush mb-3" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">How to activate my SIM card?</button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">How do i keep my number</button>
+                                </h2>
+                                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">How do i pay for my bills?</button>
+                                </h2>
+                                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but
+                                        just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="viewall-btn">View All FAQs <span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                    </div>
+                </div>
+            </section>
+            <!-- FAQs End -->
+
+            <!-- Newsletter Start -->
+            <section id="newsletter">
+                <div class="container">
+                    <form>
+                        <div class="row">
+                            <div class="col-12 col-lg-12 col-xl-5 d-flex flex-wrap align-items-center pe-md-5">
+                                <h1 class="mb-3">Just say YES!</h1>
+                                <p>Join our mailing list to get our best & latest deals directly to your email inbox. You’ll never miss out again</p>
+                            </div>
+                            <div class="col-12 col-lg-12 col-xl-5 d-flex flex-wrap align-items-center mt-md-0 mb-md-0 mt-3 mb-5">
+                                <input type="email" class="form-control mb-md-0 mb-3" id="newsletter-input" placeholder="Email Address">
+                                <div class="form-check newsletter-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        I’ve read and accept the Terms & Conditions
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-12 col-xl-2 d-flex align-items-center ps-xl-5">
+                                <button class="white-btn" type="submit">Subscribe</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            <!-- Newsletter End -->
+        </main>
+        <footer class="page-footer footer">
+            <div class="container g-lg-0">
+                <div class="row position-relative">
+                    <div class="col-12 col-md-3">
+                        <img src="images/logo.svg" class="footer-logo mb-4" />
+                        <div class="row mb-2">
+                            <ul class="icon-list">
+                                <li>
+                                    <a href="#"><img src="images/facebook.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/instagram.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/youtube.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/twitter.svg" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <p class="mb-2">Get The MyYes App</p>
+                            <ul class="icon-list">
+                                <li>
+                                    <a href="#"><img src="images/logos_google-play-icon.svg" class="store-icon" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/logos_apple-app-store.svg" class="store-icon" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="row g-0 row-cols-2 row-cols-sm-1 row-cols-md-5">
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Plans & Pricing</li>
+                                    <li><a href="#">Prepaid plans</a></li>
+                                    <li><a href="#">Postpaid plans</a></li>
+                                    <li><a href="#">YES Prihatin plans</a></li>
+                                    <li><a href="#">Data Add-Ons</a></li>
+                                    <li><a href="#">Merdeka RM1 Package</a></li>
+                                    <li><a href="#">On-the-go broadband</a></li>
+                                    <li><a href="#">Home broadband</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Explore</li>
+                                    <li><a href="#">Keep number</a></li>
+                                    <li><a href="#">Refer & earn</a></li>
+                                    <li><a href="#">Databack</a></li>
+                                    <li><a href="#">Partnerships</a></li>
+                                    <li><a href="#">Roaming</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Tools</li>
+                                    <li><a href="#">Device manuals</a></li>
+                                    <li><a href="#">Coverage</a></li>
+                                    <li><a href="#">Speed test</a></li>
+                                    <li><a href="#">Kiosk locations</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Company</li>
+                                    <li><a href="#">About us</a></li>
+                                    <li><a href="#">Sustainability reports</a></li>
+                                    <li><a href="#">Newsroom</a></li>
+                                    <li><a href="#">Terms & conditions</a></li>
+                                    <li><a href="#">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Help</li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Chatbot</a></li>
+                                    <li><a href="#">Email us</a></li>
+                                    <li><a href="#">Facebook messenger</a></li>
+                                    <li><a href="#">Visit our store</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-1">
+                        <img src="images/ctm.png" class="img-fluid ctm-logo" />
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-md-start justify-content-sm-center">
+                            <p>POWERED BY YTL, YTL Communications Sdn. Bhd. (793634-V)</p>
+                        </div>
+                        <div class="col-12 col-md-6 d-flex align-items-center justify-content-md-end justify-content-sm-center">
+                            <img src="images/footer-icons.png" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <div class="modal signup-modal fade" id="signup-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="row g-0">
+                            <div class="col-12 col-lg-6">
+                                <img src="images/popup-visual.jpg" class="img-fluid" />
+                            </div>
+                            <div class="col-12 col-lg-6 d-flex flex-wrap align-items-center justify-content-center">
+                                <div class="signup-content">
+                                    <h1 class="mb-3">Don’t miss out!</h1>
+                                    <p class="mb-3">Get our latest deals sent straight to your inbox so you never miss out on our amazing offers.</p>
+                                    <input type="email" class="form-control mb-3" id="signup-input" placeholder="Email">
+                                    <button class="pink-btn d-block w-100" type="submit">Yes, Sign me up!</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="js/iconify.min.js"></script>
+    <script type="text/javascript" src="js/slick.js"></script>
+    <script type="text/javascript" src="js/aos.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.reviews-carousel').slick({
+                prevArrow: '<a href="#" class="slide-arrow prev-arrow slick-arrow"><span class="iconify slick-prev" data-icon="eva:arrow-ios-back-fill"></span></a>',
+                nextArrow: '<a href="#" class="slide-arrow next-arrow slick-arrow"><span class="iconify slick-next" data-icon="eva:arrow-ios-forward-fill"></span></a>',
+                infinite: false,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                dots: false,
+                responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: true,
+                        arrows: false
+                    }
+                }, {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                        arrows: false,
+                        infinite: true,
+                        dots: true,
+                        slidesToScroll: 1,
+                    }
+                }, {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1,
+                        arrows: false,
+                        infinite: true,
+                        dots: true,
+                        slidesToScroll: 1
+                    }
+                }, {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        dots: true,
+                        infinite: true,
+                        dots: true,
+                        arrows: false
+                    }
+                }]
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        // $(window).on('load', function() {
+        //     $('#signup-modal').modal('show');
+        // });
+    </script>
+
+    <script type="text/javascript">
+        AOS.init();
+    </script>
+
+</body>
+
+</html>

@@ -370,7 +370,9 @@
         opacity: 0.6;
     }
 
-    .addon-content { padding-right: 38px; }
+    .addon-content {
+        padding-right: 38px;
+    }
 
     @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
         #cart-body .packagebox .visualbg {
@@ -393,6 +395,12 @@
             margin-bottom: 10px;
         }
     }
+
+    .nav-container { background-color: #1A1E47; }
+    .nav-container .navbar { padding-top: 8px; padding-bottom: 8px; }
+    .nav-container .navbar-brand { padding-top: 0; padding-bottom: 0; }
+    .nav-container a, .nav-container .login-btn {}
+    .logo-top { width: 35px; }
 </style>
 
 
@@ -416,7 +424,7 @@
                         <div class="packagebox mb-3">
                             <div class="row align-items-center">
                                 <div class="col-lg-3 col-12 visualbg d-none">
-                                    <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/kasiup-postpaid-visual.png" class="img-fluid" alt="" />
+                                    <img src="/wp-content/uploads/2022/05/ft5g-cart-visual.jpg" class="img-fluid" alt="" />
                                 </div>
                                 <div class="col-12 p-3 px-5">
                                     <h3 class="mt-3 mt-lg-0">No item in the cart</h3>
@@ -436,14 +444,14 @@
                         <div class="packagebox mb-3">
                             <div class="row">
                                 <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="orderSummary.plan.planType == 'postpaid'">
-                                    <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/kasiup-postpaid-visual.png" class="img-fluid" alt="" />
+                                    <img src="/wp-content/uploads/2022/05/ft5g-cart-visual.jpg" class="img-fluid" alt="" />
                                 </div>
                                 <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center" v-if="orderSummary.plan.planType == 'prepaid'">
-                                    <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/kasiup-prepaid-visual.png" class="img-fluid" alt="" />
+                                    <img src="/wp-content/uploads/2022/05/ft5g-cart-visual.jpg" class="img-fluid" alt="" />
                                 </div>
-                                <div class="col-lg-6 col-12 pt-lg-4 pb-1 px-4 px-lg-4">
+                                <div class="col-lg-6 col-12 pt-lg-4 pb-1 px-4 px-lg-5 ps-lg-4">
                                     <h3 class="mt-3 mt-lg-0">{{ orderSummary.plan.displayName }}</h3>
-                                    <p class="mb-3">RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(0) }} for {{ orderSummary.plan.internetData }}</p>
+                                    <p class="mb-3" v-if="orderSummary.plan.internetData">RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(0) }} for {{ orderSummary.plan.internetData }}</p>
                                     <div class="package-info" v-if="packageInfos.length">
                                         <div class="row">
                                             <div class="col-6 mb-3" v-for="(packageInfo, index) in packageInfos.slice(0, 4)">
@@ -453,37 +461,53 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-12 mt-3 mb-3 mt-lg-0 mb-lg-0 d-flex align-items-center justify-content-lg-end justify-content-center">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        <h3 class="price">RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(0) }}</h3>
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <h3 class="price">RM{{ formatPrice(parseFloat(orderSummary.plan.totalAmount)) }}</h3>
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#cart-accordion">
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#cart-accordion">
                             <div class="accordion-body">
-                                <div v-if="packageInfos.slice(3).length">
+                                <div v-if="packageInfos.slice(4).length">
                                     <h1>More Benefits</h1>
                                     <div class="row mb-4">
-                                        <div class="col-lg-6 mb-3" v-for="(packageInfo, index) in packageInfos.slice(3)"><span class="span-itemList">{{ packageInfo }}</span></div>
+                                        <div class="col-lg-6 mb-3" v-for="(packageInfo, index) in packageInfos.slice(4)"><span class="span-itemList">{{ packageInfo }}</span></div>
                                     </div>
                                 </div>
 
                                 <h1>One-time Charges (due now)</h1>
                                 <h2>Rate plan</h2>
-                                <div class="row mb-4">
-                                    <div class="col-6">
-                                        <p>{{ orderSummary.plan.displayName }}</p>
+
+                                <template v-for="(price) in orderSummary.due.priceBreakdown.plan">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p>{{ price.name }}</p>
+                                        </div>
+                                        <div class="col-6 text-end">
+                                            <p>RM{{ price.value }}</p>
+                                        </div>
                                     </div>
-                                    <div class="col-6 text-end">
-                                        <p>RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(2) }}</p>
-                                    </div>
+                                </template>
+                                <div class="mt-2 pt-2 border-top pb-2 border-bottom" v-if="orderSummary.plan.bundleName || orderSummary.plan.hasDevice">
+                                    <p class="bold mb-0" v-if="orderSummary.plan.bundleName">Device Bundle: <span class="fw-bold">{{ orderSummary.plan.bundleName }}</span></p>
+                                    <template v-for="(price, index) in orderSummary.due.priceBreakdown.device">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <p>{{ price.name }}</p>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <p>RM{{ price.value }}</p>
+                                            </div>
+                                        </div>
+                                    </template>
                                 </div>
-                                <div class="row mb-3">
-                                    <div class="col-10 pb-1 border-bottom">
+                                <div class="row mb-3 mt-5">
+                                    <div class="col-8 pb-1 border-bottom">
                                         <p>Add-Ons</p>
                                         <p v-if="orderSummary.addOn != null">{{ orderSummary.addOn.displayAddonName }} <a href="javascript:void(0)" class="btn-sm pink-btn text-white mx-lg-3" v-on:click="removeAddOn()">Remove</a></p>
                                     </div>
-                                    <div class="col-2 pb-1 border-bottom text-end">
+                                    <div class="col-4 pb-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.addOns).toFixed(2) }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom">
@@ -491,6 +515,12 @@
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.taxesSST).toFixed(2) }}</p>
+                                    </div>
+                                    <div class="col-6 pb-1 pt-1 border-bottom" v-if="orderSummary.due.foreignerDeposit > 0">
+                                        <p>Deposit for Foreigner</p>
+                                    </div>
+                                    <div class="col-6 pb-1 pt-1 border-bottom text-end" v-if="orderSummary.due.foreignerDeposit > 0">
+                                        <p>RM{{ parseFloat(orderSummary.due.foreignerDeposit).toFixed(2) }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom">
                                         <p>Shipping Fee</p>
@@ -505,32 +535,13 @@
                                         <p>RM{{ parseFloat(orderSummary.due.rounding).toFixed(2) }}</p>
                                     </div>
                                 </div>
-                                <div v-if="orderSummary.plan.bundlePlan">
-                                    <p class="bold mb-2">Device Bundle: <span class="fw-bold">{{ orderSummary.plan.bundleName }}</span></p>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <p>Device payment</p>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <p>RM{{ parseFloat(orderSummary.plan.totalPostpaidDevice).toFixed(2) }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-6">
-                                            <p>Device Upfront Payment</p>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <p>RM{{ parseFloat(orderSummary.plan.totalPostpaidDeviceUpfont).toFixed(2) }}</p>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="row mb-3">
                                     <div class="col-6">
                                         <p class="fw-bold">Total charges due now</p>
                                         <p class="small">This summary is not an invoice</p>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <p class="large">RM{{ parseFloat(orderSummary.due.total).toFixed(2) }}</p>
+                                        <p class="large">RM{{ formatPrice(parseFloat(orderSummary.due.total).toFixed(2)) }}</p>
                                     </div>
                                 </div>
                                 <div v-if="orderSummary.plan.planType != 'prepaid'">
@@ -567,7 +578,7 @@
                                 <h3>TOTAL</h3>
                             </div>
                             <div class="col-6 pt-2 pb-2 text-end">
-                                <h3>RM{{ parseFloat(orderSummary.due.total).toFixed(2) }}</h3>
+                                <h3>RM{{ formatPrice(parseFloat(orderSummary.due.total).toFixed(2)) }}</h3>
                             </div>
                         </div>
                         <div class="monthly mb-4" v-if="orderSummary.plan.monthlyCommitment > 0">
@@ -623,7 +634,7 @@
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-12 mb-lg-0 mb-2 align-self-center">
-                            <h1 class="mb-4">or sign in with your YES ID</h1>
+                            <h1 class="mb-4">or sign in with your Yes ID / Number</h1>
                         </div>
                     </div>
                     <div class="row justify-content-center">
@@ -642,7 +653,7 @@
                                     <form class="form-loginTac" @submit="otpLoginSubmit">
                                         <div class="input-box">
                                             <div class="w-100">
-                                                <input type="text" class="form-control userid" id="input-otpYesNumber" maxlength="11" v-model="login.input.otp.yesNumber" @input="watchOTPLoginFields" placeholder="YES ID" />
+                                                <input type="text" class="form-control userid" id="input-otpYesNumber" maxlength="11" v-model="login.input.otp.yesNumber" @input="watchOTPLoginFields" placeholder="Yes ID / Number" />
                                             </div>
                                             <div class=" w-100 border-top item-otpPassword" id="box-otpPassword" style="display: none;">
                                                 <input type="password" class="form-control password" id="input-otpPassword" v-model="login.input.otp.password" @input="watchOTPLoginFields" placeholder="******" maxlength="6" />
@@ -669,7 +680,7 @@
                                     <form class="form-loginPassword" @submit="basicLoginSubmit">
                                         <div class="input-box">
                                             <div class="w-100 border-bottom">
-                                                <input type="text" class="form-control userid" id="input-basicYesNumber" maxlength="11" v-model="login.input.basic.yesNumber" @input="watchBasicLoginFields" placeholder="YES ID" />
+                                                <input type="text" class="form-control userid" id="input-basicYesNumber" maxlength="11" v-model="login.input.basic.yesNumber" @input="watchBasicLoginFields" placeholder="Yes ID / Number" />
                                             </div>
                                             <div class="w-100">
                                                 <input type="password" class="form-control password" id="input-basicPassword" v-model="login.input.basic.password" @input="watchBasicLoginFields" placeholder="********" />
@@ -801,8 +812,8 @@
 
                         if (ywos.lsData.meta.isLoggedIn) {
                             self.orderSummary = ywos.lsData.meta.orderSummary;
-                            self.ajaxGetPlanAddOns();
-                            self.updatePlan(false);
+                            self.updateAddOns(self.orderSummary.plan.addonListServiceTypes);
+                            self.updatePlan();
                         } else {
                             self.ajaxGetPlanData();
                         }
@@ -824,80 +835,90 @@
 
                             self.orderSummary.plan = data;
 
+                            var planPriceBreakdown = [];
+                            var planDevicePriceBreakdown = [];
+                            var planSimplifiedBreakdown = [];
                             for (var key in data) {
                                 var keyPricingComponentList = 'pricingComponentList';
                                 if (key == keyPricingComponentList) {
                                     var pricingComponentList = data[keyPricingComponentList];
                                     pricingComponentList.map(function(pricingComponent) {
-                                        var pricingComponentName = pricingComponent.pricingComponentName;
-                                        switch (pricingComponentName) {
-                                            case 'Postpaid Device Price':
-                                                self.orderSummary.plan.totalPostpaidDevice = pricingComponent.pricingComponentValue;
-                                                break;
-                                            case 'Plan Advanced Payment':
-                                                self.orderSummary.plan.totalAdvancedPayment = pricingComponent.pricingComponentValue;
-                                                break;
-                                            case 'Postpaid Device Upfront Payment':
-                                                self.orderSummary.plan.totalPostpaidDeviceUpfont = pricingComponent.pricingComponentValue;
-                                                break;
+                                        var componentName = pricingComponent.pricingComponentName;
+                                        var componentValue = formatPrice(pricingComponent.pricingComponentValue);
+                                        var objArr = {
+                                            name: componentName,
+                                            value: componentValue
+                                        };
+                                        if (['Postpaid Device Price', 'Postpaid Device Upfront Payment'].includes(componentName)) {
+                                            planDevicePriceBreakdown.push(objArr);
+                                        } else if (['Postpaid Foreigner Deposit'].includes(componentName)) {
+                                            self.orderSummary.plan.foreignerDeposit = componentValue;
+                                        } else {
+                                            planPriceBreakdown.push(objArr);
                                         }
                                     });
                                 }
+                                var keySimplifiedItemPricingList = 'simplifiedItemPricingList';
+                                if (key == keySimplifiedItemPricingList) {
+                                    planSimplifiedBreakdown = data[keySimplifiedItemPricingList];
+                                }
                             };
+                            self.orderSummary.due.priceBreakdown = {
+                                plan: planPriceBreakdown,
+                                device: planDevicePriceBreakdown,
+                                simplified: planSimplifiedBreakdown
+                            };
+                            // console.log(self.orderSummary.due);
 
-                            self.updateAddOns(data.addOns);
+                            var hasDevice = false;
+                            for (var i = 0; i < planDevicePriceBreakdown.length; i++) {
+                                if (parseFloat(planDevicePriceBreakdown[i].value) > 0) {
+                                    hasDevice = true;
+                                    break;
+                                }
+                            }
+                            self.orderSummary.plan.hasDevice = hasDevice;
+
+                            self.updateAddOns(data.addonListServiceTypes);
                             self.updatePlan();
                         })
                         .catch((error) => {
-                            console.log('error', error);
+                            // console.log('error', error);
                         })
-                },
-                ajaxGetPlanAddOns: function() {
-                    var self = this;
-                    axios.post(apiEndpointURL + '/get-add-ons-by-plan', {
-                            'plan_name': self.orderSummary.plan.planName,
-                            'plan_type': self.orderSummary.plan.planType
-                        })
-                        .then((response) => {
-                            var data = response.data;
-                            self.updateAddOns(data);
-
-                            setTimeout(function() {
-                                toggleOverlay(false);
-                            }, 500);
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                        });
                 },
                 updateAddOns: function(dataAddOns = {}) {
                     var self = this;
-                    dataAddOns.map(function(data) {
-                        data.addonPackageInfoList.map(function(addOn) {
-                            // addOn.taxSST = addOn.totalAmount * self.taxRate.sst;
-                            var indPaymentDeduction = addOn.paymentDeductionInfoList.filter(paymentDeduction => { return paymentDeduction.type == 'SST'; });
-                            if (indPaymentDeduction) {
-                                indPaymentDeduction = indPaymentDeduction[0];
-                                addOn.taxSST = parseFloat(indPaymentDeduction.value).toFixed(2);
-                            }
-                            self.planAddOns.push(addOn);
+                    if (dataAddOns) {
+                        dataAddOns.map(function(data) {
+                            data.addonPackageInfoList.map(function(addOn) {
+                                // addOn.taxSST = addOn.totalAmount * self.taxRate.sst;
+                                var indPaymentDeduction = addOn.paymentDeductionInfoList.filter(paymentDeduction => {
+                                    return paymentDeduction.type == 'SST';
+                                });
+                                if (indPaymentDeduction) {
+                                    indPaymentDeduction = indPaymentDeduction[0];
+                                    addOn.taxSST = parseFloat(indPaymentDeduction.value).toFixed(2);
+                                }
+                                self.planAddOns.push(addOn);
+                            });
                         });
-                    });
-                    
-                    var planAddOn = self.orderSummary.addOn;
-                    if (planAddOn) {
-                        self.orderSummary.due.taxesSST += planAddOn.taxSST;
-                        self.orderSummary.due.total += planAddOn.taxSST;
 
-                        setTimeout(function() {
-                            self.addOn.allowAddOn = (self.orderSummary.addOn == null) ? true : false;
-                            if (self.addOn.allowAddOn) {
-                                $('.addon-box').removeClass('addon-box-disabled');
-                            } else {
-                                $('.addon-box').addClass('addon-box-disabled');
-                            }
-                        }, 500);
+                        var planAddOn = self.orderSummary.addOn;
+                        if (planAddOn) {
+                            self.orderSummary.due.taxesSST += planAddOn.taxSST;
+                            self.orderSummary.due.total += planAddOn.taxSST;
+
+                            setTimeout(function() {
+                                self.addOn.allowAddOn = (self.orderSummary.addOn == null) ? true : false;
+                                if (self.addOn.allowAddOn) {
+                                    $('.addon-box').removeClass('addon-box-disabled');
+                                } else {
+                                    $('.addon-box').addClass('addon-box-disabled');
+                                }
+                            }, 500);
+                        }
                     }
+
                 },
                 updatePlan: function(closeOverlay = true) {
                     var self = this;
@@ -928,7 +949,7 @@
                     // self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.plan.totalAmount) + parseFloat(self.orderSummary.due.addOns) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees));
                     // self.orderSummary.due.rounding = getRoundingAdjustmentAmount(self.orderSummary.due.total.toFixed(2));
                     // self.orderSummary.due.total += parseFloat(self.orderSummary.due.rounding);
-                    
+
                     // self.orderSummary.due.taxesSST = parseFloat(self.orderSummary.plan.totalSST);
                     // self.orderSummary.due.rounding = parseFloat(self.orderSummary.plan.roundingAdjustment);
                     // self.orderSummary.due.totalWithoutSST = parseFloat(self.orderSummary.plan.totalAmountWithoutSST);
@@ -947,7 +968,7 @@
                     self.orderSummary.due.planAmount = parseFloat(self.orderSummary.plan.totalAmount).toFixed(2);
                     self.orderSummary.due.amount = (parseFloat(self.orderSummary.plan.totalAmountWithoutSST.replace(/,/g, '')) + ((self.orderSummary.addOn != null) ? parseFloat(self.orderSummary.addOn.amount) : 0)).toFixed(2);
                     self.orderSummary.due.taxesSST = (parseFloat(self.orderSummary.plan.totalSST) + ((self.orderSummary.addOn != null) ? parseFloat(self.orderSummary.addOn.taxSST) : 0)).toFixed(2);
-                    self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.due.amount) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees));
+                    self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.due.amount) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees)) + parseFloat(self.orderSummary.due.foreignerDeposit);
                     self.orderSummary.due.rounding = parseFloat(getRoundingAdjustmentAmount(self.orderSummary.due.total.toFixed(2))).toFixed(2);
                     self.orderSummary.due.total = (parseFloat(self.orderSummary.due.total) + parseFloat(self.orderSummary.due.rounding)).toFixed(2);
                 },
@@ -1088,7 +1109,7 @@
                     var self = this;
                     self.allowRequestOTP = false;
 
-                    var timer = 1 * 30,
+                    var timer = timerMinute * 60,
                         minutes, seconds;
                     var interval = setInterval(function() {
                         timer -= 1;
@@ -1148,7 +1169,7 @@
 
                         if (!ywos.lsData.meta.isLoggedIn && ywos.lsData.meta.customerDetails.securityType == 'PASSPORT' && self.orderSummary.plan.planType == 'postpaid' && self.orderSummary.due.foreignerDeposit == 0.00) {
                             self.orderSummary.due.foreignerDeposit = 200.00;
-                            self.orderSummary.due.total += self.orderSummary.due.foreignerDeposit;
+                            self.updateSummary();
                         }
                     } else if (loginType == 'guest') {
                         if (!ywos.lsData.meta.isLoggedIn) {

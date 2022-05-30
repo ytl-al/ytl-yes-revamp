@@ -46,6 +46,7 @@ class BetterDocs_Docs_Post_Type
         self::$docs_archive = self::get_docs_archive();
         self::$docs_slug = self::get_docs_slug();
         self::$cat_slug = self::docs_category_slug();
+        // assign default admin capabilities for docs, doc terms, doc tags, knowledge base
         add_action('init', array(__CLASS__, 'register_post'));
         add_action('parse_request', array(__CLASS__, 'docs_rewrite_parse_request'));
         add_action('generate_rewrite_rules', array(__CLASS__, 'generate_rewrite_rules'));
@@ -76,7 +77,8 @@ class BetterDocs_Docs_Post_Type
             empty( $term_query->query_vars['taxonomy'] )
             || ! in_array( 'doc_category', $term_query->query_vars['taxonomy'], true )
             || empty( $screen )
-            || ( empty( $screen ) && $screen->taxonomy !== 'doc_category' )
+            || ( ! empty( $screen ) && $screen->taxonomy !== 'doc_category' )
+            || ( ! empty( $screen ) && $screen->id != 'edit-doc_category' )
         ) {
             return;
         }
@@ -172,6 +174,12 @@ class BetterDocs_Docs_Post_Type
             'query_var'         => true,
             'show_in_rest'      => true,
             'has_archive'       => true,
+            'capabilities' => [
+                'manage_terms' => 'manage_doc_terms',
+                'edit_terms'   => 'edit_doc_terms',
+                'delete_terms' => 'delete_doc_terms',
+                'assign_terms' => 'edit_docs'
+            ]
         );
 
         $category_args['rewrite'] = apply_filters('betterdocs_category_rewrite', array('slug' => self::$cat_slug, 'with_front' => false));
@@ -201,21 +209,22 @@ class BetterDocs_Docs_Post_Type
         $betterdocs_articles_caps = apply_filters('betterdocs_articles_caps', 'edit_posts', 'article_roles');
 
         $args = array(
-            'labels'               => $labels,
-            'description'          => esc_html__('Add new doc from here', 'betterdocs'),
-            'public'               => true,
-            'public_queryable'     => true,
-            'exclude_from_search'  => false,
-            'show_ui'              => true,
-            'show_in_menu'         => false,
-            'show_in_admin_bar'    => $betterdocs_articles_caps,
-            'query_var'            => true,
-            'capability_type'      => 'post',
-            'hierarchical'         => true,
-            'menu_position'        => self::$menu_position,
-            'show_in_rest'         => true,
-            'menu_icon'            => BETTERDOCS_ADMIN_URL . '/assets/img/betterdocs-icon-white.svg', 100,
-            'supports'             => array('title', 'editor', 'thumbnail', 'excerpt', 'author', 'revisions', 'custom-fields', 'comments')
+            'labels'              => $labels,
+            'description'         => esc_html__('Add new doc from here', 'betterdocs'),
+            'public'              => true,
+            'public_queryable'    => true,
+            'exclude_from_search' => false,
+            'show_ui'             => true,
+            'show_in_menu'        => false,
+            'show_in_admin_bar'   => $betterdocs_articles_caps,
+            'query_var'           => true,
+            'capability_type'     => ['doc', 'docs'],
+            'hierarchical'        => true,
+            'map_meta_cap'        => true,
+            'menu_position'       => self::$menu_position,
+            'show_in_rest'        => true,
+            'menu_icon'           => BETTERDOCS_ADMIN_URL . '/assets/img/betterdocs-icon-white.svg', 100,
+            'supports'            => array('title', 'editor', 'thumbnail', 'excerpt', 'author', 'revisions', 'custom-fields', 'comments')
         );
 
         $builtin_doc_page = BetterDocs_DB::get_settings('builtin_doc_page');
@@ -258,7 +267,13 @@ class BetterDocs_Docs_Post_Type
             'update_count_callback' => '_update_post_term_count',
             'show_admin_column'     => true,
             'query_var'             => true,
-            'show_in_rest'          => true
+            'show_in_rest'          => true,
+            'capabilities' => [
+                'manage_terms' => 'manage_doc_terms',
+                'edit_terms'   => 'edit_doc_terms',
+                'delete_terms' => 'delete_doc_terms',
+                'assign_terms' => 'edit_docs'
+            ]
         );
 
         $tag_slug = BetterDocs_DB::get_settings('tag_slug');
@@ -650,7 +665,7 @@ class BetterDocs_Docs_Post_Type
     public static function generate_rewrite_rules($wp_rewrite)
     {
         if (!empty($wp_rewrite->rules['([^/]+)/?$']) && $wp_rewrite->rules['([^/]+)/?$'] == 'index.php?doc_category=$matches[1]') {
-            //unset($wp_rewrite->rules['([^/]+)/?$']);
+            unset($wp_rewrite->rules['([^/]+)/?$']);
         }
     }
 
@@ -689,12 +704,13 @@ class BetterDocs_Docs_Post_Type
      */
     public static function docs_rewrite($rewrite)
     {
-        $permalink =  BetterDocs_DB::get_settings('permalink_structure');
+        $permalink_structure =  BetterDocs_DB::get_settings('permalink_structure');
+        $permalink = BetterDocs_Helper::permalink_stracture(self::$docs_slug, $permalink_structure);
         if (!empty($permalink)) {
             if (class_exists('BetterDocs_Multiple_Kb') && BetterDocs_Multiple_Kb::get_multiple_kb() != 1) {
                 $permalink = preg_replace('/%knowledge_base%\/?/', '', $permalink);
             }
-            //$rewrite = array('slug' => trim($permalink, '/'), 'with_front' => false);
+            $rewrite = array('slug' => trim($permalink, '/'), 'with_front' => false);
         }
         return $rewrite;
     }
@@ -772,6 +788,7 @@ class BetterDocs_Docs_Post_Type
         $url = wp_get_attachment_url($attachment_id);
         return $url;
     }
+
 }
 
 BetterDocs_Docs_Post_Type::init();

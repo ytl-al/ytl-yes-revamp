@@ -86,6 +86,15 @@ class Ytl_Pull_Data_Admin
      */
     private $get_all_plans_path;
 
+    /**
+     * The api path to auth.
+     *
+     * @since    1.0.0
+     * @access   private
+     * @var      string    $get_all_plans_with_addons_path  The all plans with addons path for API url to be used.
+     */
+    private $get_all_plans_with_addons_path;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -100,8 +109,9 @@ class Ytl_Pull_Data_Admin
         $this->prefix		= $prefix;
         $this->api_app_version      = '1.1';
         $this->api_locale           = 'EN';
-        $this->auth_path_auth       = '/mobileyos-dev/mobile/ws/v1/json/auth/getBasicAuth';
-        $this->get_all_plans_path   = '/mobileyos-dev/mobile/ws/v1/json/getAllPlans';
+        $this->auth_path_auth       = '/mobileyos/mobile/ws/v1/json/auth/getBasicAuth';
+        $this->get_all_plans_path   = '/mobileyos/mobile/ws/v1/json/getAllPlans';
+        $this->get_all_plans_with_addons_path = '/mobileyos/mobile/ws/v1/json/getAllPlansWithAddons';
 	}
 
 	/**
@@ -400,12 +410,13 @@ class Ytl_Pull_Data_Admin
                 'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
                 'body'          => json_encode($params),
                 'method'        => 'POST', 
-                'data_format'   => 'body' 
+                'data_format'   => 'body',
+                'timeout'       => 180 
             ];
-            $api_url    = $domain_url.$this->get_all_plans_path;
+            $api_url    = $domain_url.$this->get_all_plans_with_addons_path;
             $request    = wp_remote_post($api_url, $args);
-            $response   = $request['response'];
-            $res_code   = $response['code'];
+            $response   = (!is_wp_error($request)) ? $request['response'] : [];
+            $res_code   = (!is_wp_error($request)) ? $response['code'] : 0;
 
             if (is_wp_error($request)) {
                 $error_message  = $response->get_error_message();
@@ -424,7 +435,7 @@ class Ytl_Pull_Data_Admin
                 update_option('ytlpd_plans_data', serialize($plan_data), false);
                 update_option('ytlpd_updated_at', strtotime(current_time('mysql')), false);
 
-                add_settings_error('ytlpd_messages', 'ytlpd_message', __('Yes plans have been successfully pulled and saved!', 'ytl-pull-data'), 'updated');
+                add_settings_error('ytlpd_messages', 'ytlpd_message', __('YES plans have been successfully pulled and saved!', 'ytl-pull-data'), 'updated');
         
                 if (function_exists('w3tc_flush_all')) {
                     w3tc_flush_all();

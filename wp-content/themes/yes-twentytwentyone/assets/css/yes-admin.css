@@ -1,0 +1,59 @@
+/* Styles for Post Type Roaming Rates */
+
+.wp-admin.post-type-roaming-rates .wp-list-table th.column-telco_count,
+.wp-admin.post-type-roaming-rates .wp-list-table td.column-telco_count {
+    text-align: center;
+}
+
+
+/* END Styles for Post Type Roaming Rates */
+
+
+/* Styles for Post Type IDD Rates */
+
+.wp-admin.post-type-idd-rates .wp-list-table th {
+    font-size: 98%;
+}
+
+.wp-admin.post-type-idd-rates .wp-list-table th:not(.column-title),
+.wp-admin.post-type-idd-rates .wp-list-table td:not(.column-title) {
+    text-align: center;
+}
+
+.wp-admin.post-type-idd-rates .wp-list-table td:not(.column-title) {
+    padding-right: 27px;
+}
+
+.wp-admin.post-type-idd-rates .wp-list-table th.column-country_code {
+    width: 120px;
+}
+
+.wp-admin.post-type-idd-rates .wp-list-table th.column-postpaid_rate_fixed,
+.wp-admin.post-type-idd-rates .wp-list-table td.column-postpaid_rate_fixed,
+.wp-admin.post-type-idd-rates .wp-list-table th.column-prepaid_rate_fixed,
+.wp-admin.post-type-idd-rates .wp-list-table td.column-prepaid_rate_fixed {
+    border-left: 2px solid #DDD;
+}
+
+
+/* END Styles for Post Type IDD Rates */
+
+
+/* Styles for Post Type Supported Device */
+
+.wp-admin.post-type-supported-device .wp-list-table th.column-device_image,
+.wp-admin.post-type-supported-device .wp-list-table td.column-device_image {
+    text-align: center;
+}
+
+.wp-admin.post-type-supported-device .wp-list-table th.column-device_image {
+    width: 150px;
+}
+
+.wp-admin.post-type-supported-device .wp-list-table .column-device_image img {
+    max-height: 100px;
+    max-width: 190px;
+}
+
+
+/* END Styles for Post Type Supported Device */

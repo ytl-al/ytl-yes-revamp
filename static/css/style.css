@@ -16,7 +16,7 @@ body {
 /* Addedby AL */
 
 body {
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     overflow-x: hidden;
     background-color: #f9f7f4;
@@ -39,7 +39,7 @@ h4,
 h5 {
     margin: 0;
     padding: 0;
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 a {
@@ -385,18 +385,11 @@ section {
     bottom: 0;
 }
 
-.carousel-indicators [data-bs-target] {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    opacity: 1;
-}
-
 
 /* Home Slider styling */
 
-.carousel-indicators .active {
-    background-color: #1B26BC;
+.carousel-indicators [data-bs-target] {
+    height: 6px;
 }
 
 .slider-btn-container {
@@ -521,10 +514,9 @@ section {
 .pink-btn {
     background-color: #ED028C;
     border-radius: 90px;
-    padding: 14px 74px;
-    display: inline-block;
     font-weight: 800;
     font-size: 16px;
+    padding: 0.7rem 2.3rem;
     text-transform: uppercase;
     color: #FFF;
     border: none;

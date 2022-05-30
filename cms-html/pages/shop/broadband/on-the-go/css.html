@@ -1,27 +1,27 @@
 <style type="text/css">
     #broadband-top-banner {
-        background: linear-gradient(68.74deg, #00B4F0 6.36%, #04A4E0 37.06%, #003AB0 78.32%);
+        background-image: url('/wp-content/uploads/2022/03/broadband-top-banner-bg-scaled.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: #2F3BF5;
         overflow: hidden;
+        padding: 80px 0px;
     }
     
     #broadband-top-banner h1 {
-        font-size: 50px;
-        line-height: 50px;
+        font-size: 60px;
+        line-height: 72px;
         font-weight: 800;
-        color: #F9F7F4;
-        text-align: left;
+        color: #FFF;
+        text-align: center;
     }
     
     #broadband-top-banner p {
-        font-size: 29px;
-        font-weight: 800;
-        line-height: 28px;
-        color: #F9F7F4;
-        margin-bottom: 20px;
-    }
-    
-    #broadband-top-banner .banner-visual {
-        padding-top: 20px;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 24px;
+        color: #FFF;
+        text-align: center;
     }
     /* Pay Less Start */
     
@@ -32,31 +32,25 @@
         padding-bottom: 0px;
     }
     
-    #payless .visual {
-        background-image: url("/wp-content/uploads/2022/02/payless-visual-bg.png");
-        background-size: cover;
-        background-repeat: no-repeat;
-    }
-    
     #payless h1 {
-        font-size: 50px;
+        font-size: 39px;
         font-weight: 800;
-        line-height: 50px;
-        color: #2B2B2B;
+        line-height: 47px;
+        color: #000;
     }
     
     #payless h2 {
-        font-size: 42px;
+        font-size: 23px;
         font-weight: 800;
-        line-height: 42px;
+        line-height: 28px;
         color: #2B2B2B;
     }
     
     #payless p {
-        font-size: 28px;
-        font-weight: 600;
+        font-size: 20px;
+        font-weight: 400;
         color: #2B2B2B;
-        line-height: 28px;
+        line-height: 24px;
     }
     
     #payless .pink-link {
@@ -75,9 +69,9 @@
     }
     
     #payless .benefits-section h1 {
-        color: #293854;
-        font-size: 24px;
-        line-height: 26px;
+        color: #000;
+        font-size: 23px;
+        line-height: 28px;
         font-weight: 800;
         text-align: center;
         margin-bottom: 15px;
@@ -97,57 +91,54 @@
         align-items: center;
         justify-content: center;
         padding: 70px 0px;
-        padding-top: 0px;
-        background-image: url("/wp-content/uploads/2022/02/broadband-plan-bg.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: 0px 68%;
+        background-color: #F7F8F9;
     }
     
     #broadband-plans h1 {
-        font-size: 40px;
+        font-size: 39px;
         font-weight: 800;
-        line-height: 40px;
-        color: #2B2B2B;
+        line-height: 47px;
+        color: #000;
         text-align: center
     }
     
     #broadband-plans .plan-table {
-        border-spacing: 20px;
+        border-spacing: 8px 0px;
         border-collapse: initial;
     }
     
     #broadband-plans .plan-table th {
         padding: 0px 17px;
         vertical-align: middle;
-        background-color: #F9F7F4;
-        border: 3px solid #00B4F0;
-        border-radius: 8px;
+        background-color: #FFF;
+        border: none;
+        border-radius: 10px;
     }
     
     #broadband-plans .plan-table th.visual {
         border: none;
+        background-color: transparent;
     }
     
     #broadband-plans .plan-table th h1 {
-        color: #00B4F0;
-        font-size: 24px;
-        line-height: 24px;
+        color: #000;
+        font-size: 23px;
+        line-height: 28px;
         font-weight: 800;
         text-align: center;
     }
     
     #broadband-plans .plan-table th h2 {
-        color: #525252;
-        font-size: 20px;
-        line-height: 20px;
-        font-weight: 800;
+        color: #2B2B2B;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 700;
         text-align: center;
     }
     
     #broadband-plans .plan-table th p {
-        color: #525252;
-        font-size: 11px;
+        color: #2B2B2B;
+        font-size: 12px;
     }
     
     #broadband-plans .plan-table th p.blue {
@@ -157,7 +148,7 @@
     
     #broadband-plans .plan-table th .pink-btn {
         font-size: 13px;
-        padding: 5px 20px;
+        padding: 0.375rem 0.75rem;
         margin-top: 5px;
     }
     
@@ -165,20 +156,30 @@
         padding: 20px;
         text-align: center;
         background-color: #FFF;
-        border-radius: 10px;
-        border-bottom: solid 2px #00B4F0;
+        border-bottom: solid 1.5px #d5d5d5;
         color: #525252;
-        font-size: 17px;
+        font-size: 16px;
         font-weight: 700;
         vertical-align: middle;
     }
     
+    #broadband-plans .plan-table tr:last-child td {
+        border-bottom: none;
+    }
+    
+    #broadband-plans .plan-table tr td.empty-row {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        height: 10px;
+    }
+    
     #broadband-plans .plan-table tr td.blue-col {
-        background: #003AB0;
+        background: #1A1E47;
         border-bottom: none;
         position: relative;
-        color: #F9F7F4;
-        font-size: 17px;
+        color: #FFF;
+        font-size: 16px;
         font-weight: 700;
         text-align: left;
         width: 25%;
@@ -193,21 +194,24 @@
         position: absolute;
         right: 22px;
         top: 32%;
+        display: none;
     }
     
     #broadband-plans .grey-text {
         font-size: 17px;
         color: #7A7A7A;
-        font-weight: 700;
+        font-weight: 400;
     }
     
     #broadband-plans .viewall-btn {
         display: inline-block;
-        font-size: 20px;
-        font-weight: 800;
         text-transform: uppercase;
-        color: #ED028C;
         text-align: center;
+        color: #2F3BF5;
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        font-family: 'Montserrat', sans-serif;
     }
     
     #broadband-plans .viewall-btn svg {
@@ -223,26 +227,26 @@
     
     #topup-banner {
         text-align: center;
-        padding: 100px 0px;
-        background-image: url("/wp-content/uploads/2022/02/topup-banner.jpg");
+        padding: 50px 0px;
+        background-image: url("/wp-content/uploads/2022/04/topup-banner-bg-new-scaled.jpg");
         background-size: cover;
         background-repeat: no-repeat;
     }
     
     #topup-banner h1 {
-        color: #2B2B2B;
-        font-size: 49px;
+        color: #FFF;
+        font-size: 60px;
         font-weight: 800;
         text-align: center;
-        line-height: 49px;
+        line-height: 72px;
         margin-bottom: 15px;
     }
     
-    #topup-banner h2 {
-        font-size: 31px;
-        font-weight: 700;
-        line-height: 35px;
-        color: #525252;
+    #topup-banner p {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 24px;
+        color: #FFF;
         text-align: center;
         margin-bottom: 30px;
     }
@@ -269,7 +273,7 @@
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
         #broadband-top-banner {
             background-position: top;
-            padding-top: 20px;
+            padding: 40px 0px;
         }
         #broadband-top-banner h1 {
             font-size: 35px;
@@ -323,5 +327,9 @@
             background-position: top;
             margin-bottom: 30px;
         }
+    }
+    
+    .fm-form-container.fm-theme16 {
+        display: none !important;
     }
 </style>

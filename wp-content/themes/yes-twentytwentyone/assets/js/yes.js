@@ -1,7 +1,7 @@
-/* 
-    JavaScript Name : Yes TwentyTwentyOne 
+/*
+    JavaScript Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : December  05, 2021, 03:52:31 PM
+    Last edited on  : March     15, 2022, 03:52:31 PM
     Author          : [YTL Digital Design] - AL
 */
 const yesLocalStorageName = 'yesSession';
@@ -20,6 +20,8 @@ $(document).ready(function() {
 
     initBootstrapTooltip();
 
+    initBetterDocsCustomize();
+
     $('.link-jumpSection').on('click', function() {
         jumpSection(this);
     });
@@ -33,7 +35,7 @@ $(document).ready(function() {
 /**
  * Function closeTopPageBanner()
  * Function to close the top page banner
- * 
+ *
  * @since    1.0.0
  */
 function closeTopPageBanner() {
@@ -55,7 +57,7 @@ function closeTopPageBanner() {
 /**
  * Function checkTopPageBannerExpiry()
  * Function to check the expiry of closed top page banner and show if expired
- * 
+ *
  * @since    1.0.0
  */
 function checkTopPageBannerExpiry() {
@@ -75,7 +77,7 @@ function checkTopPageBannerExpiry() {
 /**
  * Function eventListenPageModalClose()
  * Function add event listener to page modal on close
- * 
+ *
  * @since    1.0.0
  */
 function eventListenPageModalClose() {
@@ -100,7 +102,7 @@ function eventListenPageModalClose() {
 /**
  * Function checkPageModalExpiry()
  * Function to check the expiry of closed page modal and show if expired
- * 
+ *
  * @since    1.0.0
  */
 function checkPageModalExpiry() {
@@ -121,7 +123,7 @@ function checkPageModalExpiry() {
 /**
  * Function initBootstrapTooltip()
  * Function to initialize Bootstrap tooltip everywhere
- * 
+ *
  * @since    1.0.0
  */
 function initBootstrapTooltip() {
@@ -134,8 +136,8 @@ function initBootstrapTooltip() {
 
 /**
  * Function jumpSection()
- * Function to trigger the jumpToSection by passing sectionID
- * 
+ * Function to scroll page to section
+ *
  * @since    1.0.1
  */
 function jumpSection(el) {
@@ -147,7 +149,7 @@ function jumpSection(el) {
 /**
  * Function jumpToSection()
  * Function to scroll page to section
- * 
+ *
  * @since    1.0.2
  */
 function jumpToSection(sectionID) {
@@ -163,9 +165,28 @@ function jumpToSection(sectionID) {
 
 
 /**
+ * Function initBetterDocsSearch5G()
+ * Function to init the 5g string search in BetterDocs Advanced Search
+ *
+ * @since    1.0.2
+ */
+function initBetterDocsSearch5G() {
+    var bdSearchField = $('.betterdocs-search-field');
+    if ($(bdSearchField).length) {
+        $(bdSearchField).on('input propertychange paste', function() {
+            var bdSearchFieldVal = $(bdSearchField).val();
+            if (bdSearchFieldVal == '5g') {
+                $(bdSearchField).val('5g ');
+                $(bdSearchField).trigger('input').trigger('propertychange').trigger('paste').trigger('keyup').trigger('keypress');
+            }
+        });
+    }
+}
+
+/**
  * Function toggleOverlay()
  * Function to toggle the overlay
- * 
+ *
  * @since    1.0.2
  */
 function toggleOverlay(toggleShow = true) {
@@ -178,5 +199,82 @@ function toggleOverlay(toggleShow = true) {
             $('body').removeClass('show-overlay');
             $('.layer-overlay').removeAttr('style');
         }, 500)
+    }
+}
+
+
+/**
+ * Function initBetterDocsCustomize()
+ * Function to init the BetterDocs customization functions
+ * 
+ * @since    1.0.2
+ */
+function initBetterDocsCustomize() {
+    initBetterDocsSearchForm();
+    // initBetterDocsSearchPlaceholder();
+    // initBetterDocsSearch5G();
+}
+
+
+/**
+ * Function initBetterDocsSearchForm()
+ * Function to check the page and show the default hidden BetterDocs Live Search form
+ * 
+ * @since    1.0.2
+ */
+function initBetterDocsSearchForm() {
+    if ($('.betterdocs-live-search')) {
+        var urlPath = window.location.pathname;
+        var regex = /docs\/$/;
+        var matches = regex.test(urlPath);
+        if (!matches) {
+            $('.betterdocs-live-search').show();
+        }
+    }
+}
+
+
+/**
+ * Function initBetterDocsSearchPlaceholder()
+ * Function to change the BetterDocs search field
+ * 
+ * @since    1.0.2
+ */
+function initBetterDocsSearchPlaceholder() {
+    if ($('.betterdocs-search-field')) {
+        var placeholderText = 'Please enter more than 2 characters';
+        var docLang = document.documentElement.lang;
+        if (docLang == 'ms-MY') {
+            placeholderText = 'Sila masukkan lebih daripada 2 aksara ';
+        } else if (docLang == 'zh-hans') {
+            placeholderText = '请输入超过 2 个字符';
+        }
+        $('.betterdocs-search-field').attr('placeholder', placeholderText);
+    }
+}
+
+
+/**
+ * Function initBetterDocsSearch5G()
+ * Function to init the 5g string search in BetterDocs Advanced Search
+ * 
+ * @since    1.0.2
+ */
+function initBetterDocsSearch5G() {
+    var bdSearchField = $('.betterdocs-search-field');
+    if ($(bdSearchField).length) {
+        $(bdSearchField).attr('pattern', '/^[a-zA-Z0-9 ]+$/');
+        $(bdSearchField).on('input', function() {
+            var v = this.value.replace(/[^a-zA-Z0-9 ]+$/g, '');
+            if (v != this.value) {
+                this.value = v;
+                $(bdSearchField).trigger('input').trigger('propertychange').trigger('paste').trigger('keyup').trigger('keypress');
+            }
+
+            if (this.value == '5g' || this.value == '4g' || this.value == '5G' || this.value == '4G') {
+                $(bdSearchField).val(this.value + ' ');
+                $(bdSearchField).trigger('input').trigger('propertychange').trigger('paste').trigger('keyup').trigger('keypress');
+            }
+        });
     }
 }

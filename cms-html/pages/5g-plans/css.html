@@ -1,76 +1,52 @@
 <style type="text/css">
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-    body {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-    }
-    
-    h1,
-    h2,
-    h3,
-    h4,
-    p {
-        font-family: 'Montserrat', sans-serif;
-    }
-    
     .layer-5g-bodybg {
-        background-color: #0070D2;
-        background-image: url('/wp-content/uploads/2021/12/5g-bodybg.png');
-        background-size: 100%;
-        background-repeat: no-repeat;
-        background-position: 0px -69px;
+        background-color: #FFF;
         width: 100%;
         display: flex;
         flex-direction: column;
     }
+    
+    .layer-5g-bodybg .viewall-btn {
+        display: inline-block;
+        text-transform: uppercase;
+        text-align: center;
+        color: #2F3BF5;
+        font-size: 17px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        font-family: 'Montserrat', sans-serif;
+    }
+    
+    .layer-5g-bodybg .viewall-btn svg {
+        margin-left: 5px;
+        font-size: 20px;
+    }
+    
+    .layer-5g-bodybg .viewall-btn:hover {
+        text-decoration: underline;
+    }
     /* Top Banner Start */
     
     #section-5g-topbanner {
-        padding: 100px 0px;
-        background-image: url('/wp-content/uploads/2021/12/5g-banner-bg.jpg');
+        padding: 174px 0px;
+        background-image: url('/wp-content/uploads/2022/05/5g-banner-bg-new2-scaled.jpg');
         background-size: cover;
         background-repeat: no-repeat;
     }
     
     #section-5g-topbanner h1 {
-        font-size: 72px;
+        font-size: 60px;
         line-height: 72px;
-        font-weight: 700;
+        font-weight: 800;
         color: #FFF;
-        margin-bottom: 30px;
-        text-align: left;
-    }
-    
-    #section-5g-topbanner h1 span {
-        background: linear-gradient(170.38deg, #EBCCF9 17.73%, #7771E2 157.34%, rgba(255, 255, 255, 0) 161.84%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        margin-bottom: 20px;
     }
     
     #section-5g-topbanner p {
-        font-size: 21px;
-        font-weight: 500;
-        line-height: 25px;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 24px;
         color: #F9F7F4;
-        margin-bottom: 30px;
-        padding-right: 50%;
-    }
-    
-    #section-5g-topbanner .btn {
-        background-color: #FDDBFB;
-        border-radius: 90px;
-        padding: 14px 30px;
-        display: inline-block;
-        font-weight: 700;
-        font-size: 24px;
-        color: #096FD4;
-        border: none;
-        text-align: center;
-    }
-    
-    #section-5g-topbanner .btn:hover {
-        background-color: #EC7AF6;
-        color: #FFF;
     }
     /* Top Banner End */
     /* 5g Internet Start */
@@ -80,17 +56,13 @@
     }
     
     #section-5g-internet h1 {
-        font-size: 48px;
-        line-height: 48px;
-        font-weight: 700;
-        color: #FFF;
+        font-size: 39px;
+        line-height: 47px;
+        font-weight: 800;
+        color: #000000;
         text-align: center;
         margin-bottom: 60px;
         margin-top: 60px;
-    }
-    
-    #section-5g-internet h1 span {
-        color: #FFD9FF;
     }
     
     #section-5g-internet .section-box {
@@ -104,7 +76,6 @@
         width: 100%;
         display: inline-block;
         position: relative;
-        cursor: pointer;
         padding: 20px;
         -webkit-transition: all 200ms ease-in;
         -ms-transition: all 200ms ease-in;
@@ -127,34 +98,19 @@
         backdrop-filter: blur(27.2034px);
         /* Note: backdrop-filter has minimal browser support */
         border-radius: 40px;
-    }
-    
-    #section-5g-internet .section-box .layer-box:hover .hoverbox {
-        opacity: 1;
-    }
-    
-    #section-5g-internet .section-box .layer-box:hover h1 {
-        color: rgba(255, 255, 255, 1);
-    }
-    
-    #section-5g-internet .section-box .layer-box:hover h2 {
-        color: rgba(255, 217, 255, 1);
-    }
-    
-    #section-5g-internet .section-box .layer-box:hover p {
-        color: rgba(249, 247, 244, 1);
+        display: none;
     }
     
     #section-5g-internet .section-box .layer-box h1 {
-        font-size: 24px;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.8);
+        font-size: 23px;
+        font-weight: 800;
+        color: #2B2B2B;
         text-transform: uppercase;
         margin-bottom: 10px;
         text-align: left;
         transition: all 200ms ease-in;
         margin-top: 0;
-        line-height: 24px;
+        line-height: 28px;
     }
     
     #section-5g-internet .section-box .layer-box img.icon {
@@ -164,8 +120,9 @@
     
     #section-5g-internet .section-box .time-box h2 {
         font-size: 16px;
-        font-weight: 400;
-        color: rgba(255, 217, 255, 0.8);
+        font-weight: 700;
+        line-height: 24px;
+        color: #2B2B2B;
         text-transform: uppercase;
         position: relative;
         width: 100%;
@@ -174,8 +131,8 @@
     
     #section-5g-internet .section-box p {
         font-size: 16px;
-        color: rgba(249, 247, 244, 0.8);
-        line-height: 21px;
+        color: #2B2B2B;
+        line-height: 24px;
         font-weight: 400;
         transition: all 200ms ease-in;
     }
@@ -187,69 +144,49 @@
     }
     
     #section-living-better h1 {
-        font-size: 50px;
-        line-height: 50px;
-        color: #FFF;
-        font-weight: 700;
+        font-size: 39px;
+        line-height: 47px;
+        color: #000000;
+        font-weight: 800;
         margin-bottom: 40px;
-    }
-    
-    #section-living-better h1 span {
-        color: #C2FBFE;
     }
     
     #section-living-better .nav-link {
         font-size: 24px;
-        line-height: 27px;
+        line-height: 28px;
         width: 100%;
         padding: 30px;
         border-radius: 20px;
         display: block;
         margin-bottom: 20px;
         cursor: pointer;
-        color: #F9F7F4;
+        color: #2B2B2B;
         text-align: left;
-        font-weight: 400;
+        font-weight: 500;
+        font-family: 'Montserrat', sans-serif;
     }
     
     #section-living-better .nav-pills .nav-link.active {
-        font-weight: 700;
-        color: #FFF;
-        background: rgba(255, 255, 255, 0.01);
-        box-shadow: inset 0px 0.272034px 10.8814px rgba(107, 242, 230, 0.5), inset 0px 1.08814px 4.89661px rgba(149, 235, 255, 0.4), inset 0px 26.6593px 27.2034px rgba(255, 255, 255, 0.3);
+        font-weight: 800;
+        color: #2B2B2B;
+        background: rgba(47, 59, 245, 0.1);
     }
     /* Living Better End */
     /* 5g Map Start */
     
     #section-5g-map {
         margin-top: 0px;
+        padding: 50px 0px;
+        background-color: #F7F8F9;
         margin-bottom: 60px;
     }
     
     #section-5g-map h1 {
-        font-size: 52px;
-        font-weight: 700;
-        line-height: 63px;
-        color: #F9F7F4;
-    }
-    
-    #section-5g-map h1 span {
-        color: #FFD9FF;
-    }
-    
-    #section-5g-map .link-pink, #section-offering .link-pink {
-        font-size: 28px;
-        font-weight: 600;
-        color: #FFD9FF;
-        text-decoration: underline;
-        margin-top: 30px;
-        margin-bottom: 10px;
-        transition: all 0.2s ease;
-    }
-    
-    #section-5g-map .link-pink:hover, #section-offering .link-pink:hover {
-        text-decoration: underline;
-        color: #FFF;
+        font-size: 39px;
+        font-weight: 800;
+        line-height: 47px;
+        color: #000000;
+        text-align: center;
     }
     /* 5g Map End */
     /* Offering Start */
@@ -260,21 +197,21 @@
     }
     
     #section-offering h1 {
-        font-size: 40px;
-        color: #F9F7F4;
-        line-height: 42px;
+        font-size: 39px;
+        color: #000000;
+        line-height: 47px;
         text-align: center;
-        font-weight: 700;
+        font-weight: 800;
         margin-bottom: 30px;
         padding: 0px 20%;
     }
     
-    #section-offering h2 {
-        color: #F9F7F4;
-        font-size: 21px;
-        line-height: 26px;
+    #section-offering p {
+        color: #2B2B2B;
+        font-size: 20px;
+        line-height: 24px;
         text-align: center;
-        font-weight: 500;
+        font-weight: 400;
         margin-bottom: 40px;
         padding: 0px 10%;
     }
@@ -283,22 +220,28 @@
         width: 100%;
         display: block;
         border-radius: 10px;
-        background-color: #FFD9FF;
-        padding: 30px;
+        background-color: #F7F8F9;
+        padding: 40px;
     }
     
     #section-offering .msg-box h3 {
-        color: #0070D2;
-        font-weight: 700;
-        font-size: 30px;
-        line-height: 36px;
+        color: #000000;
+        font-weight: 800;
+        font-size: 23px;
+        line-height: 28px;
     }
     
     #section-offering .msg-box p {
-        color: #0070D2;
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 29px;
+        color: #2B2B2B;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        margin-bottom: 0;
+        padding: 0;
+    }
+    
+    #section-offering .pink-btn {
+        padding: 0.7rem 2rem;
     }
     
     #section-offering .msg-box p a {
@@ -322,26 +265,25 @@
     }
     
     #section-plan .nav-wrapper {
-        border-bottom: solid 2px #FFD9FF;
+        border-bottom: solid 2px #F5F5F5;
     }
     
     #section-plan .nav-pills .nav-link {
-        color: rgba(255, 255, 255, 0.2);
-        font-size: 21px;
-        font-weight: 600;
+        color: #000000;
+        font-size: 16px;
+        font-weight: 700;
         border-radius: 0;
     }
     
     #section-plan .nav-pills .nav-link.active {
-        color: rgba(255, 217, 255, 1);
-        border-bottom: solid 4px #E779F4;
+        border-bottom: solid 4px #FF0084;
         background-color: transparent;
     }
     
     #section-plan .sim-box {
-        border-radius: 40px;
-        background: rgba(255, 255, 255, 0.1);
-        box-shadow: inset 0px 0.272034px 10.8814px #FFD9FF, inset 0px 1.08814px 4.89661px #626FE8, inset 0px 26.6593px 27.2034px rgba(255, 255, 255, 0.3);
+        border-radius: 10px;
+        background: #FFF;
+        box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -352,54 +294,32 @@
     #section-plan .sim-box h1 {
         width: 100%;
         position: relative;
-        font-size: 28px;
-        line-height: 33px;
-        font-weight: 600;
-        color: #FFF;
-    }
-    
-    #section-plan .sim-box h1 img {
-        position: absolute;
-        right: 0;
-        top: 10px;
+        font-size: 18px;
+        line-height: 23px;
+        font-weight: 800;
+        color: #000000;
     }
     
     #section-plan .sim-box .price-box {
         text-align: center;
-        color: #FFD9FF;
-        font-size: 48px;
-        font-weight: 700;
-        padding: 40px 0px
+        font-family: 'Montserrat', sans-serif;
+        color: #000000;
+        font-size: 43px;
+        font-weight: 800;
+        padding: 19px 0px
     }
     
     #section-plan .sim-box .plan-points li {
-        font-size: 14px;
-        color: #FFF;
-        line-height: 23px;
+        font-size: 16px;
+        color: #2B2B2B;
+        line-height: 24px;
         font-weight: 400;
+        text-align: left;
     }
     
     #section-plan .sim-box .btn-box {
         text-align: center;
-        margin-top: 30px;
-    }
-    
-    #section-plan .sim-box .btn-box .btn {
-        background-color: #FDDBFB;
-        border-radius: 90px;
-        padding: 8px 30px;
-        display: inline-block;
-        font-weight: 700;
-        font-size: 16px;
-        color: #096FD4;
-        border: none;
-        text-align: center;
-        text-transform: uppercase;
-    }
-    
-    #section-plan .sim-box .btn-box .btn:hover {
-        background-color: #EC7AF6;
-        color: #FFF;
+        margin-bottom: 30px;
     }
     
     #section-plan .phone-box h1 {
@@ -422,9 +342,9 @@
     }
     
     #section-plan .phone-box .price-box p {
-        font-size: 32px;
-        font-weight: 700;
-        color: #EBCCF9;
+        font-size: 33px;
+        font-weight: 800;
+        color: #000;
         margin-top: 20px;
     }
     
@@ -433,16 +353,15 @@
     }
     
     #section-plan .note-text {
-        font-size: 14px;
-        font-style: italic;
-        color: #FFF;
-        line-height: 17px;
+        font-size: 12px;
+        color: #2B2B2B;
+        line-height: 21px;
     }
     
     #section-plan .pink-heading {
-        font-size: 28px;
+        font-size: 20px;
         font-weight: 600;
-        color: #FFD9FF;
+        color: #000;
         justify-content: center;
     }
     
@@ -474,7 +393,7 @@
     }
     
     #section-plan .link-white {
-        color: #FFF;
+        color: #2B2B2B;
         text-decoration: none;
     }
     
@@ -483,6 +402,10 @@
     }
     /* Section Plan End */
     /* Phone Specs Start */
+    
+    #phone-specs {
+        margin-top: 60px;
+    }
     
     #phone-specs h1 {
         font-size: 36px;
@@ -497,6 +420,14 @@
         border-collapse: initial;
     }
     
+    #phone-specs .phone-table th h2 {
+        font-size: 39px;
+        line-height: 47px;
+        color: #000000;
+        font-weight: 800;
+        text-align: left;
+    }
+    
     #phone-specs .phone-table th {
         padding: 9px 0px;
         vertical-align: middle;
@@ -504,13 +435,13 @@
     }
     
     #phone-specs .phone-table tr td {
-        padding: 5px;
+        padding: 15px 5px;
         text-align: center;
-        background-color: #338DDB;
-        border-bottom: solid 1.5px #99C6ED;
-        color: #FFF;
-        font-size: 13px;
-        font-weight: 500;
+        background-color: #F7F8F9;
+        border-bottom: solid 1.5px #EBEBEB;
+        color: #2B2B2B;
+        font-size: 16px;
+        font-weight: 400;
         vertical-align: middle;
     }
     
@@ -532,9 +463,7 @@
     }
     
     #phone-specs .phone-table tr td.pink-bottom {
-        background-color: #FFD9FF;
-        color: #0070D2;
-        font-weight: 600;
+        font-weight: 700;
     }
     
     #phone-specs .phone-table tr:last-child td {
@@ -542,17 +471,22 @@
     }
     
     #phone-specs .phone-table tr td.blue-col {
-        background-color: #BD78EF;
+        background-color: #1A1E47;
         border-bottom: none;
-        color: #F9F7F4;
+        color: #FFF;
         text-align: left;
-        font-size: 15px;
-        font-weight: 500;
+        font-size: 16px;
+        font-weight: 700;
         padding-left: 20px;
     }
     
     #phone-specs .res-container {
         overflow: hidden;
+    }
+    
+    #section-5g-map iframe {
+        width: 100%;
+        height: 400px;
     }
     /* Phone Specs End */
     /* IPAD Portrait */
@@ -567,11 +501,7 @@
             font-size: 14px;
         }
         #section-5g-topbanner {
-            padding: 30px 0px;
-            background-image: url('/wp-content/uploads/2021/12/5g-banner-mobile-bg.jpg');
-        }
-        #section-5g-topbanner .btn {
-            font-size: 15px;
+            padding: 90px 0px;
         }
         #section-living-better .accordion-item {
             background: none;
@@ -602,12 +532,6 @@
     }
     
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
-        .layer-5g-bodybg {
-            background-image: url('/wp-content/uploads/2021/12/5g-bodybg-mobile.png');
-            background-size: 100%;
-            background-repeat: no-repeat;
-            background-position: 0px 0px;
-        }
         #section-5g-topbanner h1 {
             font-size: 40px;
             line-height: 40px;
@@ -615,15 +539,10 @@
         #section-5g-topbanner p {
             line-height: 20px;
             font-size: 14px;
-            margin-bottom: 15px;
-            padding-right: 0px;
         }
         #section-5g-topbanner {
-            padding: 30px 0px;
-            background-image: url('/wp-content/uploads/2021/12/5g-banner-mobile-bg.jpg');
-        }
-        #section-5g-topbanner .btn {
-            font-size: 15px;
+            padding: 90px 0px;
+            background-image: url('/wp-content/uploads/2022/04/5g-banner-bg-mobile-new.jpg');
         }
         #section-5g-internet h1 {
             font-size: 40px;
@@ -635,9 +554,6 @@
             padding: 30px 22px;
         }
         #section-5g-internet .section-box .layer-box {
-            background: rgba(255, 255, 255, 0.01);
-            box-shadow: inset 0px 0.272034px 10.8814px #FFD9FF, inset 0px 1.08814px 4.89661px #626FE8, inset 0px 26.6593px 27.2034px rgba(255, 255, 255, 0.3);
-            /* Note: backdrop-filter has minimal browser support */
             border-radius: 40px;
             padding: 20px 48px;
         }
@@ -661,11 +577,9 @@
             font-size: 16px;
             line-height: 22px;
             border-radius: 20px;
-            color: #F9F7F4;
-            font-weight: 400;
-            background: rgba(255, 255, 255, 0.01);
-            box-shadow: inset 0px 0.272034px 10.8814px rgba(107, 242, 230, 0.5), inset 0px 1.08814px 4.89661px rgba(149, 235, 255, 0.4), inset 0px 26.6593px 27.2034px rgba(255, 255, 255, 0.3);
-            border: none;
+            font-weight: 800;
+            color: #2B2B2B;
+            background: rgba(47, 59, 245, 0.1);
         }
         #section-living-better .accordion-body {
             text-align: center;
@@ -703,7 +617,6 @@
         }
         #section-plan .nav-pills .nav-link {
             padding: 1rem 0rem;
-            border-bottom: solid 4px #0070D2;
         }
         #phone-specs .phone-table tr td {
             padding: 10px;
@@ -717,15 +630,25 @@
             left: 0;
         }
         #phone-specs .phone-table th.visual {
-            background-color: #0070D2;
+            background-color: #FFF;
             position: sticky;
             left: 0px;
+        }
+        #section-5g-topbanner .btn-arrow {
+            font-size: 15px;
+        }
+        #section-plan .nav-wrapper .nav {
+            justify-content: center;
+        }
+        #phone-specs .phone-table th h2 {
+            font-size: 24px;
+            line-height: 31px;
         }
     }
     
     #section-plan .sim-box .btn-box .btn.btn-oos {
         background-color: transparent;
-        color: #FDDBFB;
+        color: #000;
         cursor: default;
         font-style: italic;
         font-weight: 600;
@@ -737,5 +660,117 @@
     
     .layer-page .wpcf7 {
         display: none !important;
+    }
+    
+    .layer-phoneModel {
+        display: none;
+    }
+    
+    .layer-phoneModel.active {
+        display: block;
+    }
+    
+    .layer-phoneColors {
+        margin: 0;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+    }
+    
+    .layer-phoneColors a.item-phoneColor {
+        border: 2px solid #BBB;
+        border-radius: 100%;
+        display: inline-block;
+        height: 34px;
+        margin: 0 6px 0 0;
+        padding: 2px;
+        width: 34px;
+    }
+    
+    .layer-phoneColors a.item-phoneColor:before {
+        background-color: #333;
+        border-radius: 100%;
+        content: '';
+        display: block;
+        height: 26px;
+        width: 26px;
+    }
+    
+    .layer-phoneColors a.item-phoneColor:last-of-type {
+        margin-right: 0;
+    }
+    
+    .layer-phoneColors a.item-phoneColor:hover {
+        border-color: #DDD;
+    }
+    
+    .layer-phoneColors a.item-phoneColor.active {
+        border-color: #FFF;
+    }
+    
+    .layer-phoneColors a.item-phoneColor.phone-black {}
+    
+    .layer-phoneColors a.item-phoneColor.phone-bubble-blue:before {
+        background-color: #ADBBDE;
+    }
+    
+    .layer-phoneColors a.item-phoneColor.phone-truffle-black:before {
+        background-color: #282524;
+    }
+    
+    .layer-phoneColors a.item-phoneColor.phone-snow-white:before {
+        background-color: #FFF;
+    }
+    
+    .layer-phoneColors a.item-phoneColor.phone-mint-green:before {
+        background-color: #A9D7CB;
+    }
+    
+    .layer-phoneColors a.item-phoneColor.phone-peach-pink:before {
+        background-color: #EEC5B8;
+    }
+    
+    .layer-phoneColors a.item-phoneColor.phone-space:before {
+        background-color: #646C72;
+    }
+    
+    .layer-phoneColors a.item-phoneColor.phone-grey:before {
+        background-color: #A1B0D7;
+    }
+    
+    .layer-phoneColors a.item-phoneColor.phone-aurora:before {
+        background-color: #BFDCF3;
+    }
+    
+    .layer-phoneColors a.item-phoneColor.phone-celestial-blue:before {
+        background-color: #B4D8FD;
+    }
+    
+    .layer-phoneColors a.item-phoneColor.phone-meteorite-grey:before {
+        background-color: #282524;
+    }
+    
+    .layer-phoneColors a.item-phoneColor.phone-realme-blue:before {
+        background-color: #D1D1EA;
+    }
+    
+    .layer-phoneColors a.item-phoneColor.phone-realme-grey:before {
+        background-color: #686C76;
+    }
+    
+    .layer-phoneColors a.item-phoneColor.phone-vivoy76-blue:before {
+        background-color: #A7E7FC;
+    }
+    
+    .layer-phoneColors a.item-phoneColor.phone-vivo76-black:before {
+        background-color: #434A50;
+    }
+    
+    .layer-phoneColors a.item-phoneColor.phone-vivo23e-black:before {
+        background-color: #23343E;
+    }
+    
+    .layer-phoneColors a.item-phoneColor.phone-vivo23e-blue:before {
+        background-color: #6BEAF3;
     }
 </style>

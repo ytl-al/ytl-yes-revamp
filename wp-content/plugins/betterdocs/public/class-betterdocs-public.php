@@ -148,7 +148,6 @@ class BetterDocs_Public {
 	public function public_hooks()
 	{
 		add_filter( 'archive_template', array( $this, 'get_docs_archive_template' ) );
-		add_filter( 'template_include', array( $this, 'get_docs_archive_template' ) );
 		add_filter( 'single_template', array( $this, 'get_docs_single_template' ), 99);
 		$defaults = betterdocs_generate_defaults();
 		if( is_array( $defaults ) && $defaults['betterdocs_docs_layout_select'] === 'layout-2' ) {

@@ -1,22 +1,21 @@
 <style type="text/css">
-    body {background: #F9F7F4; }
     #location-top-banner {
-        background: linear-gradient(253.22deg, #ED028C -28.49%, #00B4F0 84.7%);
-        padding: 50px 0px;
+        background: linear-gradient(83.24deg, #FF0084 10.6%, #2F3BF5 89.86%);
+        padding: 90px 0px;
         text-align: center;
     }
     
     #location-top-banner h1 {
-        font-size: 60px;
+        font-size: 48px;
         font-weight: 800;
-        color: #F9F7F4;
+        color: #FFF;
     }
     
     #location-top-banner p {
-        font-size: 28px;
-        font-weight: 600;
+        font-size: 20px;
+        font-weight: 400;
         line-height: normal;
-        color: #F9F7F4;
+        color: #FFF;
     }
     
     #location-top-banner p.small {
@@ -24,14 +23,21 @@
     }
     
     #store-locations .filter-drop {
-        border-radius: 0;
-        border: 1px solid #C5C5C5;
-        background-color: #F9F7F4;
+        border: 1px solid #C4C4C4;
+        background-color: #FFF;
+        border-radius: 10px;
         font-size: 17px;
         color: #000;
         font-weight: 400;
-        padding: 15px 30px;
+        padding: 15px 16px;
+        text-align: left;
         width: 100%;
+    }
+    
+    #store-locations .dropdown-toggle::after {
+        position: absolute;
+        right: 20px;
+        top: 26px;
     }
     
     #store-locations .filter-drop:focus {
@@ -40,9 +46,9 @@
     }
     
     #store-locations .dropdown-menu {
-        border-radius: 0;
-        border: 1px solid #C5C5C5;
-        background-color: #F9F7F4;
+        border-radius: 10px;
+        border: 1px solid #C4C4C4;
+        background-color: #FFF;
         width: 100%;
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
     }
@@ -63,10 +69,11 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        border-radius: 27px;
+        border-radius: 10px;
         background-color: #FFF;
         padding: 30px;
         padding-bottom: 15px;
+        box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
         transition: all 0.3s ease;
     }
     
@@ -76,27 +83,28 @@
     
     #store-locations .store-box h2 {
         padding: 10px;
-        border-radius: 10px;
+        border-radius: 0px;
         display: inline-block;
-        background-color: #00B4F0;
-        color: #FFF;
-        font-size: 15px;
-        font-weight: 800;
+        background-color: #F5F5F5;
+        color: #2B2B2B;
+        font-size: 12px;
+        font-weight: 700;
         /* text-transform: uppercase; */
     }
     
     #store-locations .store-box h3 {
-        color: #2B2B2B;
-        font-weight: 700;
-        font-size: 24px;
+        color: #000000;
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 23px;
         text-transform: uppercase;
     }
     
     #store-locations .store-box p {
-        color: #7A7A7A;
-        font-size: 19px;
+        color: #2B2B2B;
+        font-size: 16px;
         font-weight: 400;
-        line-height: 22px;
+        line-height: 24px;
         padding-right: 20%;
     }
     
@@ -113,7 +121,7 @@
     
     #store-locations .store-box .map-btn {
         display: block;
-        color: #ED028C;
+        color: #2F3BF5;
         text-decoration: none;
         font-size: 18px;
         font-weight: 600;
@@ -122,7 +130,7 @@
     
     #store-locations .filter-container {
         width: 100%;
-        background-color: #f9f7f4;
+        background-color: #FFF;
         padding: 15px 0px;
         display: flex;
         flex-direction: column;
@@ -145,6 +153,10 @@
     #store-locations .is-hidden {
         display: none;
     }
+    
+    #store-locations .store-box h2.red {
+        background-color: #D93832;
+    }
     /* IPAD Portrait */
     
     @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {}
@@ -160,8 +172,26 @@
             font-size: 13px;
         }
     }
-
-    .sticky-top { z-index: 3; }
-    #store-locations .filter-shadow { z-index: 1020; }
-    .layer-page { overflow: unset; }
+    
+    .sticky-top {
+        z-index: 3;
+    }
+    
+    #store-locations .filter-shadow {
+        z-index: 1020;
+    }
+    
+    .layer-page {
+        overflow: unset;
+    }
+    
+    #store-locations .store-box h2.red {
+        background-color: #D93832;
+        color: #FFF;
+    }
+    
+    #store-locations .store-box h2.oem-color {
+        background-color: #2F3BF5;
+        color: #FFF;
+    }
 </style>

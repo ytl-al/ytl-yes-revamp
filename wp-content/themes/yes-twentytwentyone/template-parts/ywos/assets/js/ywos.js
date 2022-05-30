@@ -141,6 +141,16 @@ const ywos = {
         }
         this.redirectToPage('cart');
     },
+    checkPurchaseCompleted: function(currentStep = 0) {
+        if (
+            typeof this.lsData.meta.purchaseCompleted != 'undefined' &&
+            this.lsData.meta.purchaseCompleted &&
+            typeof this.lsData.meta.purchaseInfo != 'undefined'
+        ) {
+            return true;
+        }
+        return false;
+    },
     redirectToPage: function(pageSlug) {
         window.location.href = window.location.origin + '/ywos/' + pageSlug;
     },
@@ -154,6 +164,9 @@ const ywos = {
             isValid = false;
         } else if (!this.checkItems()) {
             console.log('Plan ID is not found!');
+            isValid = false;
+        } else if (this.checkPurchaseCompleted(curStep)) {
+            console.log('Purchase has been completed!');
             isValid = false;
         } else if (!this.checkStep(curStep)) {
             console.log('Previous step not yet completed!');
@@ -243,4 +256,39 @@ function getCreditCardType(ccNumber) {
         return 'CHINA_UNION_PAY';
     }
     return undefined;
+}
+
+function formatPrice(amount) {
+    return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function checkInputCharacters(event, type = 'alphanumeric', withSpace = true) {
+    event = (event) ? event : window.event;
+    var charCode = (event.which) ? event.which : event.keyCode;
+    var charNonNumeric = false;
+    var charNonAlpha = false;
+    var charNonSpace = (withSpace && charCode == 32) ? false : true;
+    if (
+        (charCode > 31 && (charCode < 48 || charCode > 57)) // numeric (0-9)
+    ) {
+        charNonNumeric = true;
+    }
+    if (
+        !(charCode > 64 && charCode < 91) && // uppercase alpha
+        !(charCode > 96 && charCode < 123)   // lowercase alpha
+    ) {
+        charNonAlpha = true;
+    }
+
+    if (charCode == 46) {
+        event.preventDefault();
+    } else if (type == 'alphanumeric' && charNonNumeric && charNonAlpha && charNonSpace) {
+        event.preventDefault();
+    } else if (type == 'numeric' && charNonNumeric && charNonSpace) {
+        event.preventDefault();
+    } else if (type == 'alpha' && charNonAlpha && charNonSpace) {
+        event.preventDefault();
+    } else {
+        return true;
+    }
 }
