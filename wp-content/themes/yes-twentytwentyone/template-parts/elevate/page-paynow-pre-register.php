@@ -772,10 +772,10 @@
                             "product_bundle_id": self.productId,
                             "referral_code": self.deliveryInfo.referralCode,
                             "addon_name": "",
-                            "conversion": self.deliveryInfo.isConversion,
+                            "conversion": true,
                             "existingMsisdn": self.deliveryInfo.msisdnToUpgrade,
                             "existingPlanName": self.deliveryInfo.currentPlan,
-                            "existingPlanType": self.deliveryInfo.currentPlanType,
+                            "existingPlanType": "POSTPAID",
                             "address_line": self.deliveryInfo.address,
                             "city": self.deliveryInfo.city,
                             "city_code": self.deliveryInfo.cityCode,
@@ -813,6 +813,7 @@
                                 self.initXpay();
                             })
                             .catch((error) => {
+								toggleOverlay(false);
                                 var response = error.response;
                                 if (typeof response != 'undefined') {
                                     var data = response.data;
@@ -869,7 +870,7 @@
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
-									//self.removePrequalifiedCustomer();
+									self.removePrequalifiedCustomer();
                                 }else{
                                     toggleOverlay(false);
                                     $('#error').html("Systm error, please try again.");

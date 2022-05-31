@@ -1496,34 +1496,40 @@ class ElevateApi
 	public static function delete_prequalified_customer(WP_REST_Request $request){
 				$id = $request['id'];
 				if($id){
-					$params = array(
-						"Id"=> $id
+					$params = array( 
 					);
 
 					$token = self::get_token();
 
 					$args = [
 						'headers' => array(
-							'Accept' => 'text/plain',
+							//'Accept' => 'text/plain',
 							'Authorization' => 'Bearer ' . $token,
 							'Content-Type' => 'application/json'
 						),
-						'body' => json_encode($params),
+						'body' => $params,
 						'method' => 'DELETE',
-						'timeout' => self::API_TIMEOUT,
-						'data_format' => 'body'
+						'timeout' => self::API_TIMEOUT
 					];
 					$apiSetting = \Inc\Base\Model::getAPISettings();
-					$api_url = $apiSetting['url'] . self::api_prequalifiedcustomer;
+					$api_url = $apiSetting['url'] . self::api_prequalifiedcustomer.'?id='.$id;
 
 					$request = wp_remote_request($api_url, $args);
+					//print_r($args);print_r($request);die($api_url);
 					if (is_wp_error($request)) {
 						$return['status'] = 0;
 						$return['error'] = "Cannot connect to API server";
 					} else if ($request['response']['code'] != 200) {
-						$code = $request['response']['code'];
-						$return['status'] = 0;
-						$return['error'] = @$request['response'];
+						if($request['response']['code'] == 204){ 
+							$data = json_decode($request['body'], true);
+							$return['status'] = 1;
+							$return['data'] = $data;
+						}else{
+							$code = $request['response']['code'];
+							$return['status'] = 0;
+							$return['error'] = @$request['response'];	
+						}
+						
 					} else {
 						$code = $request['response']['code'];
 						$data = json_decode($request['body'], true);

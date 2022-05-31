@@ -163,7 +163,7 @@
                                 <div class="col-6 text-end">
                                     <p>RM{{formatPrice(item.price)}}/ mth</p>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
 
                         <a href="javascript:void(0)" @click="goNext" class="pink-btn-disable d-block" :class="allowSubmit?'pink-btn':'pink-btn-disable'">Continue</a>

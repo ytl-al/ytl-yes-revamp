@@ -122,9 +122,11 @@
         </section>
     <!-- Banner End -->
 	<input type="hidden" value="" id="displayOrderNumber"/>
+	
     <section id="cart-body" style="display: none;">
         <div class="container " style="border: 0">
             <div id="main-vue">
+				<button style="display:none;" type="button" @click="removePrequalifiedCustomer">Remove</button>
                 <div class="layer-invitationText">
                     <h3>Dear {{ deliveryInfo.name }},</h3>
                     <p>We are pleased to invite you to our special promotion, just for you. Please select a plan, and proceed.</p>
@@ -784,8 +786,8 @@
                                 var data = response.data;
 
                                 if(data.status == 1){
-									//self.removePrequalifiedCustomer();
-									elevate.redirectToPage('thanks?orderNumber='+$('#displayOrderNumber').val());
+									self.removePrequalifiedCustomer();
+									//elevate.redirectToPage('thanks?orderNumber='+$('#displayOrderNumber').val());
                                 }else{
                                     toggleOverlay(false);
 									$('#status_mesage').html('');
@@ -887,7 +889,7 @@
                         .then((response) => {
                             var data = response.data;
                             if(data.status == 1){
-
+								elevate.redirectToPage('thanks?orderNumber='+$('#displayOrderNumber').val());
                             }else{
                                 toggleOverlay(false);
                                 $('#error').html("System error, please try again.");
