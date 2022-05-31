@@ -112,7 +112,7 @@
             <div class="container">
                 <ul class="wizard">
                     <li ui-sref="firstStep" class="completed">
-                        <span>1. Slect Plan</span>
+                        <span>1. Select Plan</span>
                     </li>
                     <li ui-sref="secondStep">
                         <span>2. Payment</span>
@@ -181,6 +181,14 @@
                                 <h3>Xiaomi 11T </h3>
                                 <p class="panel-deviceImg"><img src="/wp-content/uploads/2021/12/xiaomi_11t.png?x41595" /></p>
                                 <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(894)" data-productid="894">Select</a></p>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle920">
+                            <div class="layer-planDevice">
+                                <h2>Infinite+ Basic 99</h2>
+                                <h3>Xiaomi 11T </h3>
+                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2021/12/xiaomi_11t.png?x41595" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(920)" data-productid="920">Select</a></p>
                             </div>
                         </div>
                     </div>
@@ -562,6 +570,9 @@
 				getStateCode: function (stateVal) {
                     var self = this;
                     var objState = self.selectOptions.states.filter(state => state.value == stateVal);
+                    if (!objState.length) {
+                        objState = self.selectOptions.states.filter(state => state.value == stateVal.toUpperCase());
+                    }
                     return objState[0].stateCode;
                 },
 
