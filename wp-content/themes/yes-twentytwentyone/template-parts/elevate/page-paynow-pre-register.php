@@ -577,7 +577,7 @@
                                 self.getMaybankIPPInstallments();
                             })
                             .catch((error) => {
-                                // console.log(error.response.data);
+                                console.log(error);
                             })
                             .finally(() => {
                                 setTimeout(function() {
@@ -604,7 +604,7 @@
                                 self.maybankIPP.ippInstallments.push(ippInstallment);
                             })
                             .catch((error) => {
-                                // console.log(error.response.data);
+                                console.log(error.response.data);
                             });
                     },
                     getMaybankIPPInstallments: function() {

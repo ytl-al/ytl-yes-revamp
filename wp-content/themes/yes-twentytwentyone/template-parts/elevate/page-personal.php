@@ -146,7 +146,7 @@
                                     <label class="form-label">* Address</label>
                                     <div class="input-group align-items-center">
                                         <input type="text" class="form-control text-uppercase" id="address" name="address"
-                                               v-model="deliveryInfo.address" @input="watchAllowNext" placeholder=""
+                                               v-model="deliveryInfo.address" @input="watchAllowNext" placeholder="" maxlength="80"
                                                required>
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-address"></div>
@@ -155,7 +155,7 @@
                                     <label class="form-label">Unit number</label>
                                     <div class="input-group align-items-center">
                                         <input type="text" class="form-control text-uppercase" id="address-more" name="addressMore"
-                                               v-model="deliveryInfo.addressMore" @input="watchAllowNext"
+                                               v-model="deliveryInfo.addressMore" @input="watchAllowNext" maxlength="30"
                                                placeholder="">
                                     </div>
                                 </div>
@@ -636,7 +636,7 @@
                             }, 500);
                         })
                         .catch((error) => {
-                            // console.log(error);
+                            console.log(error);
                         })
                         .finally(() => {
                             self.watchAllowNext();
@@ -679,7 +679,7 @@
                             console.log("self.deliveryInfo",self.deliveryInfo);
                         })
                         .catch((error) => {
-                            // console.log(error);
+                            console.log(error);
                         })
                         .finally(() => {
                             self.watchAllowNext();

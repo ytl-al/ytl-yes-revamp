@@ -324,7 +324,6 @@
                                 self.orderSummary.orderInfo = data.data;
                                 elevate.lsData.orderInfo = data.data;
                                 elevate.updateElevateLSData();
-                                self.updateElevateOrder();
 
                                 self.submit_contract();
                             }else{
@@ -336,7 +335,7 @@
                         })
                         .catch((error) => {
                             toggleOverlay(false);
-                            toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                            console.log(error);
                         });
                 },
 
@@ -358,7 +357,7 @@
                         })
                         .catch((error) => {
                             toggleOverlay(false);
-                            toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                            console.log(error);
                         });
 
                 },
@@ -389,7 +388,7 @@
                         })
                         .catch((error) => {
                             toggleOverlay(false);
-                            toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                            console.log(error);
                         });
 
                 },

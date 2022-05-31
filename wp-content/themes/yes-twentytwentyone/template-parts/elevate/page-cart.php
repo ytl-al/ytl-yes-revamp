@@ -303,7 +303,7 @@
                         })
                         .catch((error) => {
                             toggleOverlay(false);
-                            toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                            console.log(error);
                         })
                 },
                 updatePlan: function() {

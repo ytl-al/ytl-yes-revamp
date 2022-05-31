@@ -232,6 +232,7 @@
 
 									if(data.data.processStatus == "EKYC_Fail"){
                                         //failure
+                                        clearInterval(self.interval);
 										for(var i = 0; i < windows.length; i++){
 											windows[i].close()
 										}
@@ -246,6 +247,7 @@
                             });
 
                     }else{
+                        clearInterval(self.interval);
                         toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, We can\'t verify your eKYC because of time limit.',"elevate.redirectToPage('/eligibility-failure')")
                         //elevate.redirectToPage('/eligibility-failure/');
                     }
@@ -275,12 +277,12 @@
                                 elevate.redirectToPage('personal');
                             } else {
                                 toggleOverlay(false);
-                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due tobe cause your NRIC is not eligible (blacklisted).',"elevate.redirectToPage('/compasia-fail')")
+                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful because your NRIC is not eligible (blacklisted).',"elevate.redirectToPage('/compasia-fail')")
                             }
                         })
                         .catch((error) => {
                             toggleOverlay(false);
-                            toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                            console.log(error);
                         });
                 },
                 redirectYWOS:function (){

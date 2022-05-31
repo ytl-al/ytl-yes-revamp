@@ -276,7 +276,7 @@
 											<p>RM{{item.price}}/ mth</p>
 										</div>
 									</div>
-                                     
+
                                     <div class="row mt-3 ">
                                         <div class="col-12">
                                             <button class="pink-btn-disable d-block text-uppercase w-100" :class=" allowSubmit?'pink-btn':'pink-btn-disable'" v-on:click="goNext" type="button">Order</button>
@@ -598,7 +598,7 @@
 
                         })
                         .catch((error) => {
-                            // console.log(error);
+                            console.log(error);
                         })
                         .finally(() => {
                             self.watchAllowNext();
@@ -1008,7 +1008,7 @@
                     $(".accordion-body").slideToggle();
                 },
                 watchAllowNext: function() {
-                    var self = this; 
+                    var self = this;
 					if(!self.deliveryInfo.id){
 						self.allowSubmit = false
 					}
