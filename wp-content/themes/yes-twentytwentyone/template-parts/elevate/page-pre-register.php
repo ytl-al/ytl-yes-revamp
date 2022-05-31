@@ -186,9 +186,17 @@
                         <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle920">
                             <div class="layer-planDevice">
                                 <h2>Infinite+ Basic 99</h2>
-                                <h3>Xiaomi 11T </h3>
+                                <h3>Xiaomi 11T (Celestial Blue)</h3>
                                 <p class="panel-deviceImg"><img src="/wp-content/uploads/2021/12/xiaomi_11t.png?x41595" /></p>
                                 <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(920)" data-productid="920">Select</a></p>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle923">
+                            <div class="layer-planDevice">
+                                <h2>Infinite+ Basic 99</h2>
+                                <h3>Xiaomi 11T (Meteorite Gray)</h3>
+                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2021/12/xiaomi_11t.png?x41595" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(923)" data-productid="923">Select</a></p>
                             </div>
                         </div>
                     </div>
