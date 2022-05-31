@@ -164,7 +164,6 @@
                                     <p>RM{{formatPrice(item.price)}}/ mth</p>
                                 </div>
                             </div>
-                            <div class="hr_line"></div>
                         </div>
 
                         <a href="javascript:void(0)" @click="goNext" class="pink-btn-disable d-block" :class="allowSubmit?'pink-btn':'pink-btn-disable'">Continue</a>

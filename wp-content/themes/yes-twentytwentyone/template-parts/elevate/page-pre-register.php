@@ -610,10 +610,10 @@
                             self.allowSelectCity = true;
 
                             var objCity = self.selectOptions.cities.filter(city => city.value == self.deliveryInfo.city);
-                            if (objCity.length == 0) {
+                            /*if (objCity.length == 0) {
                                 self.deliveryInfo.city = '';
                                 self.deliveryInfo.cityCode = '';
-                            }
+                            }*/
 
                         })
                         .catch((error) => {
@@ -975,6 +975,7 @@
 									$('#displayOrderNumber').val(data.data.displayOrderNumber);
 									self.updateElevateOrder();
 								 }else{
+									 toggleOverlay(false);
 									 $('#status_mesage').html('');
 									 $('#error').html('Sorry, you cannot make order. '+data.error);
 								 }

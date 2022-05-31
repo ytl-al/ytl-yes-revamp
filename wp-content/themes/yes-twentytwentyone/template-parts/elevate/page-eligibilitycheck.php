@@ -305,7 +305,8 @@
                     var self = this;
                     var params = {
                         "mykad": self.eligibility.mykad.trim(),
-                        "plan_type": elevate.lsData.product.selected.plan.planType
+                        "plan_type": elevate.lsData.product.selected.plan.planType,
+                        "bundleId": self.productId,
                     };
 
 					$('#status_mesage').html('Checking eligibility...');

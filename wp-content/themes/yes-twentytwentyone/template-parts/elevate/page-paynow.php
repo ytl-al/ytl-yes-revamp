@@ -801,8 +801,9 @@
                         //console.log("params",params); return;
                         axios.post(apiEndpointURL_elevate + '/create-yos-order', params)
                             .then((response) => {
-                                var data = response.data;
+                                var data = response.data.data;
                                 self.orderResponse = data;
+								console.log("self.orderResponse",self.orderResponse);
 
                                 $('#displayOrderNumber').val(data.displayOrderNumber);
 

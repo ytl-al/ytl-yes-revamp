@@ -287,11 +287,13 @@ class ElevateApi
         $token = self::mobileservice_generate_auth_token();
         $mykad = $request['mykad'];
         $planType = $request['plan_type'];
+        $bundleId = $request['bundleId'];
 
         $apiSetting = get_option("ytlpd_settings");
         $request_id = $apiSetting['ytlpd_api_request_id'];
         $params = array(
             'planType' => $planType,
+            'bundleId' => $bundleId,
             'locale' => "en",
             'requestId' => $request_id,
             'securityId' => $mykad,
@@ -918,9 +920,9 @@ class ElevateApi
 
     public static function elevate_order_update(WP_REST_Request $request)
     {
-		if(!isset($request['referralCode'])) $request['referralCode'] = '';
-		if(!isset($request['dealerUID'])) $request['dealerUID'] = '';
-		if(!isset($request['dealerCode'])) $request['dealerCode'] = '';
+		if(!($request['referralCode'])) $request['referralCode'] = '';
+		if(!($request['dealerUID'])) $request['dealerUID'] = '';
+		if(!($request['dealerCode'])) $request['dealerCode'] = '';
         $params = array(
             "orderNumber"=> $request['orderNumber'],
             "customerGUID"=> $request['customerGUID'],
@@ -950,6 +952,7 @@ class ElevateApi
             'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
+		 
 		$apiSetting = \Inc\Base\Model::getAPISettings();
         $api_url = $apiSetting['url'] . self::api_order_create.'?id='.$request['id'];
 
@@ -1306,9 +1309,9 @@ class ElevateApi
             'paymentInfo' 			=> [
                 'paymentMethod' 	=> $payment_method,
                 'processName' 		=> $process_name,
-                'amount' 			=> $amount,
-                'sst' 				=> $amount_sst,
-                'totalAmount' 		=> $total_amount,
+                'amount' 			=> number_format($amount, 2, '.', ''),
+                'sst' 				=> number_format($amount_sst, 2, '.', ''),
+                'totalAmount' 		=> number_format($total_amount, 2, '.', ''),
                 'bankCode' 			=> $bank_code,
                 'bankName' 			=> $bank_name,
                 'cardNumber' 		=> $card_number,
@@ -1343,7 +1346,7 @@ class ElevateApi
         $request = wp_remote_post($api_url, $args);
         //echo '<pre>';
         //echo json_encode($params);
-        //print_r($request); die($api_url);
+        //print_r($args); die($api_url);
 
         if (is_wp_error($request)) {
             $return['status'] = 0;
@@ -1461,7 +1464,7 @@ class ElevateApi
         $request = wp_remote_post($api_url, $args);
 		//echo '<pre>';
 		//echo json_encode($params);
-		//print_r($request); die($api_url);
+		//print_r($args);print_r($request); die($api_url);
 
         if (is_wp_error($request)) {
             $return['status'] = 0;
