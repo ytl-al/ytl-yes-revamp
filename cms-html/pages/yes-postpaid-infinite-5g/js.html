@@ -1,1 +1,26 @@
 <script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/js/elevate.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var paramDevice = url.searchParams.get('device');
+        var targetDevice = $('#device-' + paramDevice);
+        if ($(targetDevice)) {
+            var parentAccordionContent = $(targetDevice).closest('.accordion-collapse').siblings('.layer-accordionPlanDetails');
+            var btnAccordion = $(parentAccordionContent).find('.accordion-button');
+
+            $(btnAccordion).trigger('click');
+
+            setTimeout(function() {
+                var parentAccordionContentID = $(parentAccordionContent).closest('.layer-accordionPlan').attr('id');
+                var targetSection = $('#' + parentAccordionContentID);
+                if (targetSection.length > 0) {
+                    var targetOffset = $(targetSection).offset().top - 140;
+                    $('html, body').animate({
+                        scrollTop: targetOffset
+                    }, 100);
+                }
+            }, 1000);
+        }
+    });
+</script>

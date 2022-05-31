@@ -163,26 +163,6 @@ function jumpToSection(sectionID) {
     return false;
 }
 
-
-/**
- * Function initBetterDocsSearch5G()
- * Function to init the 5g string search in BetterDocs Advanced Search
- *
- * @since    1.0.2
- */
-function initBetterDocsSearch5G() {
-    var bdSearchField = $('.betterdocs-search-field');
-    if ($(bdSearchField).length) {
-        $(bdSearchField).on('input propertychange paste', function() {
-            var bdSearchFieldVal = $(bdSearchField).val();
-            if (bdSearchFieldVal == '5g') {
-                $(bdSearchField).val('5g ');
-                $(bdSearchField).trigger('input').trigger('propertychange').trigger('paste').trigger('keyup').trigger('keypress');
-            }
-        });
-    }
-}
-
 /**
  * Function toggleOverlay()
  * Function to toggle the overlay
