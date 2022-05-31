@@ -799,7 +799,7 @@
                         }
 
                         //console.log("params",params); return;
-                        axios.post(apiEndpointURL + '/create-yos-order', params)
+                        axios.post(apiEndpointURL_elevate + '/create-yos-order', params)
                             .then((response) => {
                                 var data = response.data;
                                 self.orderResponse = data;

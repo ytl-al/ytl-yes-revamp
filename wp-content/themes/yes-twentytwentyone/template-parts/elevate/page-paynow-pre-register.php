@@ -772,6 +772,10 @@
                             "product_bundle_id": self.productId,
                             "referral_code": self.deliveryInfo.referralCode,
                             "addon_name": "",
+                            "conversion": true,
+                            "existingMsisdn": self.deliveryInfo.msisdnToUpgrade,
+                            "existingPlanName": self.deliveryInfo.currentPlan,
+                            "existingPlanType": "POSTPAID",
                             "address_line": self.deliveryInfo.address,
                             "city": self.deliveryInfo.city,
                             "city_code": self.deliveryInfo.cityCode,
@@ -796,7 +800,7 @@
                         }
 
                         //console.log("params",params); return;
-                        axios.post(apiEndpointURL + '/create-yos-order', params)
+                        axios.post(apiEndpointURL_elevate + '/create-yos-order', params)
                             .then((response) => {
                                 var data = response.data;
                                 self.orderResponse = data;
