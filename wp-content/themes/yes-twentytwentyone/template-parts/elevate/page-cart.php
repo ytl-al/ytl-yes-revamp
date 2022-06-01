@@ -175,7 +175,7 @@
     </div>
 </main>
 </div>
-<?php get_footer('no-newsletter'); ?>
+<?php require_once('includes/footer.php'); ?>
 </div>
 <script type="text/javascript">
 
