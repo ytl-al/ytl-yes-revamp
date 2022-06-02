@@ -196,5 +196,11 @@
         #supported-top-banner p {
             font-size: 20px;
         }
+        #supported-top-banner .search-box input {
+        font-size: 15px;
+    }
+    #supported-top-banner .search-box .search-btn{
+        top:12px;
+    }
     }
 </style>
