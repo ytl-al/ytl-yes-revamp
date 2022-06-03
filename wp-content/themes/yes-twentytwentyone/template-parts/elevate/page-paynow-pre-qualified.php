@@ -129,7 +129,7 @@
 													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" height="25" v-if="paymentInfo.cardType == 'AMEX'" />
 													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/mastercard.png" height="30" v-if="paymentInfo.cardType == 'MASTERCARD'" />
 												</div>
-												</div>												
+												</div>
 												</div>
                                             </div>
                                             <div class="col-lg-6 col-12 mb-1">
@@ -866,7 +866,7 @@
                         elevate.lsData.meta.paymentResponse = self.paymentResponse;
                         elevate.updateElevateLSData();
 
-                        elevate.redirectToPage('thanks?orderNumber='+$('#displayOrderNumber').val());
+                        elevate.redirectToPage('thanks-pre-quanlified?orderNumber='+$('#displayOrderNumber').val());
                     },
                     updateElevateOrder: function (){
                         var self = this;

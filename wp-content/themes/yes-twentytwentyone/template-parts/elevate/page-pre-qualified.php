@@ -906,7 +906,7 @@
 
                                 if(data.status == 1){
 									self.removePrequalifiedCustomer();
-									//elevate.redirectToPage('thanks?orderNumber='+$('#displayOrderNumber').val());
+									//elevate.redirectToPage('thanks-pre-quanlified?orderNumber='+$('#displayOrderNumber').val());
                                 }else{
                                     toggleOverlay(false);
 									$('#status_mesage').html('');
@@ -1008,7 +1008,7 @@
                         .then((response) => {
                             var data = response.data;
                             if(data.status == 1){
-								elevate.redirectToPage('thanks?orderNumber='+$('#displayOrderNumber').val());
+								elevate.redirectToPage('thanks-pre-quanlified?orderNumber='+$('#displayOrderNumber').val());
                             }else{
                                 toggleOverlay(false);
                                 $('#error').html("System error, please try again.");
