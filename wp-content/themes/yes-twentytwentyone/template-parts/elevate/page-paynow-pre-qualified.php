@@ -866,7 +866,7 @@
                         elevate.lsData.meta.paymentResponse = self.paymentResponse;
                         elevate.updateElevateLSData();
 
-                        elevate.redirectToPage('thanks-pre-quanlified?orderNumber='+$('#displayOrderNumber').val());
+                        elevate.redirectToPage('thanks-pre-qualified?orderNumber='+$('#displayOrderNumber').val());
                     },
                     updateElevateOrder: function (){
                         var self = this;
