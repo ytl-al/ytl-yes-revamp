@@ -665,7 +665,7 @@
                                                    value="agree" checked/> I Agree</label></div>
                             </div>
                             <div class="contract_section">
-                                <h3>Tera Optimus Pearl Terms and Condition</h3>
+                                <h3>Terra Optimus Pearl Device Rental Agreement</h3>
                                 <div class="contract_term">
                                     <ol>
                                         <li>

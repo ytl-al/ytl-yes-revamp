@@ -139,7 +139,7 @@
                             <div class="layer-planDevice">
                                 <h2>Infinite+ Basic 99</h2>
                                 <h3>XIAOMI Redmi 10</h3>
-                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2021/09/Xiaomi-Redmi-10.jpg" /></p>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/devices/redmi10front.png"/></p>
                                 <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(896)" data-productid="896">Select</a></p>
                             </div>
                         </div>
@@ -147,7 +147,7 @@
                             <div class="layer-planDevice">
                                 <h2>Infinite+ Standard 128</h2>
                                 <h3>SAMSUNG A33</h3>
-                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2022/04/samsung-a33.jpg" /></p>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/devices/SamsungA33Black.jpg" /></p>
                                 <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(898)" data-productid="898">Select</a></p>
                             </div>
                         </div>
@@ -155,7 +155,7 @@
                             <div class="layer-planDevice">
                                 <h2>Infinite+ Premium 188</h2>
                                 <h3>SAMSUNG S22 Ultra</h3>
-                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2022/04/samsung-s22-ultra-black.png" /></p>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/devices/SamsungUltraBlack.png" /></p>
                                 <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(900)" data-productid="900">Select</a></p>
                             </div>
                         </div>
@@ -163,41 +163,41 @@
 
                         <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle892" >
                             <div class="layer-planDevice">
-                                <h2>Infinite+ Standard 128</h2>
+                                <h2>Elevate 5G Postpaid 118 Device Bundle</h2>
                                 <h3>Xiaomi 11T</h3>
-                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2021/12/xiaomi_11t.png?x41595" /></p>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11t.png?x41595" /></p>
                                 <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(892)" data-productid="892">Select</a></p>
                             </div>
                         </div>
                         <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle904" >
                             <div class="layer-planDevice">
-                                <h2>Infinite+ Premium 188</h2>
+                                <h2>Infinite+ Plus Basic 99</h2>
                                 <h3>Xiaomi Redmi 10</h3>
-                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2021/09/Xiaomi-Redmi-10.jpg" /></p>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/devices/redmi10front.png" /></p>
                                 <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(904)" data-productid="904">Select</a></p>
                             </div>
                         </div>
                         <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle894">
                             <div class="layer-planDevice">
-                                <h2>Infinite+ Basic 99</h2>
+                                <h2>Elevate 5G Postpaid 118 Device Bundle</h2>
                                 <h3>Xiaomi 11T </h3>
-                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2021/12/xiaomi_11t.png?x41595" /></p>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11t.png?x41595" /></p>
                                 <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(894)" data-productid="894">Select</a></p>
                             </div>
                         </div>
                         <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle920">
                             <div class="layer-planDevice">
-                                <h2>Infinite+ Basic 99</h2>
+                                <h2>Elevate 5G Postpaid 118 Device Bundle</h2>
                                 <h3>Xiaomi 11T (Celestial Blue)</h3>
-                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2021/12/xiaomi_11t.png?x41595" /></p>
+                                <p class="panel-deviceImg"><img height="200" src="/wp-content/uploads/2021/12/xiaomi_11t.png?x41595" /></p>
                                 <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(920)" data-productid="920">Select</a></p>
                             </div>
                         </div>
                         <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle923">
                             <div class="layer-planDevice">
-                                <h2>Infinite+ Basic 99</h2>
+                                <h2>Elevate 5G Postpaid 118 Device Bundle</h2>
                                 <h3>Xiaomi 11T (Meteorite Gray)</h3>
-                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2021/12/xiaomi_11t.png?x41595" /></p>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/site/wp-content/uploads/2021/12/xiaomi_11t.png?x41595" /></p>
                                 <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(923)" data-productid="923">Select</a></p>
                             </div>
                         </div>
@@ -515,7 +515,7 @@
 								if(self.orderSummary.product.selected.contractName){
 									self.contractTitle = self.orderSummary.product.selected.contractName;
 								}else{
-									self.contractTitle = 'Elevate ' + self.orderSummary.product.selected.contract +' months';
+									self.contractTitle = '';
 								}
 
 								$('#main-vue').css({'height':'auto'});
@@ -650,6 +650,8 @@
 									self.deliveryInfo.mykad = self.deliveryInfo.nric;
 									self.deliveryInfo.address = self.deliveryInfo.addressLine1;
 									self.deliveryInfo.postcode = self.deliveryInfo.postCode;
+									
+									self.deliveryInfo.msisdnToUpgrade = self.getMsisdn(self.deliveryInfo.msisdnToUpgrade);
 
 									self.deliveryInfo.stateCode = (self.deliveryInfo.state) ? self.getStateCode(self.deliveryInfo.state) : '';
 									self.deliveryInfo.cityCode = self.deliveryInfo.city;
@@ -702,12 +704,33 @@
 				},
 
 				getPhone: function(phone){
-					if(phone.substring(0,1) == "6"){
-						return phone.substring(1,11);
-					}else{
-						return phone;
+					var phone = phone.replaceAll(' ', '')
+					var c = phone.substring(0,1);
+					var tel = '';
+					switch(c){
+						case '+':
+							tel = phone.substring(2,11);
+							break;
+						case '6':
+							tel = phone.substring(1,11);
+							break;
+						case '1':
+							tel = '0'+phone;
+							break;
+						default:
+							tel = phone;
+							break;						
 					}
+					return tel;
+					
 				},
+				
+				getMsisdn: function(msisdn){
+					 
+					 var tmp = msisdn.split('@');
+					 return tmp[0];
+				},
+				
 				elevateCustomer: function () {
                     var self = this;
                     var params = self.deliveryInfo;
@@ -979,7 +1002,11 @@
 								 }else{
 									 toggleOverlay(false);
 									 $('#status_mesage').html('');
-									 $('#error').html('Sorry, you cannot make order. '+data.error);
+									 var errorMsg = 'Sorry, you cannot make order. '
+									 if(data.error){
+										 errorMsg = errorMsg + data.error;
+									 }
+									 $('#error').html(errorMsg);
 								 }
 
 

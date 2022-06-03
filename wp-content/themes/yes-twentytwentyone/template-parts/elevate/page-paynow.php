@@ -122,7 +122,16 @@
                                         </div>
                                         <div class="row mb-3 align-items-center g-2">
                                             <div class="col-12">
-                                                <label class="form-label" for="input-chNumber1">* Card Number</label>
+												<div class="row">
+                                                <div class="col-lg-6 col-12">
+												<label class="form-label" for="input-chNumber1">* Card Number</label>
+												<div class="float-end layer-selectedCard">
+													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/visa.png" height="15" v-if="paymentInfo.cardType == 'VISA'" />
+													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" height="25" v-if="paymentInfo.cardType == 'AMEX'" />
+													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/mastercard.png" height="30" v-if="paymentInfo.cardType == 'MASTERCARD'" />
+												</div>
+												</div>												
+												</div>
                                             </div>
                                             <div class="col-lg-6 col-12 mb-1">
                                                 <div class="input-group align-items-center">
