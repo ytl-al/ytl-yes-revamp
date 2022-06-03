@@ -121,7 +121,16 @@
                                         </div>
                                         <div class="row mb-3 align-items-center g-2">
                                             <div class="col-12">
-                                                <label class="form-label" for="input-chNumber1">* Card Number</label>
+												<div class="row">
+                                                <div class="col-lg-6 col-12">
+												<label class="form-label" for="input-chNumber1">* Card Number</label>
+												<div class="float-end layer-selectedCard">
+													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/visa.png" height="15" v-if="paymentInfo.cardType == 'VISA'" />
+													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" height="25" v-if="paymentInfo.cardType == 'AMEX'" />
+													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/mastercard.png" height="30" v-if="paymentInfo.cardType == 'MASTERCARD'" />
+												</div>
+												</div>												
+												</div>
                                             </div>
                                             <div class="col-lg-6 col-12 mb-1">
                                                 <div class="input-group align-items-center">
@@ -577,7 +586,7 @@
                                 self.getMaybankIPPInstallments();
                             })
                             .catch((error) => {
-                                // console.log(error.response.data);
+                                console.log(error);
                             })
                             .finally(() => {
                                 setTimeout(function() {
@@ -604,7 +613,7 @@
                                 self.maybankIPP.ippInstallments.push(ippInstallment);
                             })
                             .catch((error) => {
-                                // console.log(error.response.data);
+                                console.log(error.response.data);
                             });
                     },
                     getMaybankIPPInstallments: function() {
@@ -772,6 +781,10 @@
                             "product_bundle_id": self.productId,
                             "referral_code": self.deliveryInfo.referralCode,
                             "addon_name": "",
+                            "conversion": self.deliveryInfo.isConversion,
+                            "existingMsisdn": self.deliveryInfo.msisdnToUpgrade,
+                            "existingPlanName": self.deliveryInfo.currentPlan,
+                            "existingPlanType": self.deliveryInfo.currentPlanType,
                             "address_line": self.deliveryInfo.address,
                             "city": self.deliveryInfo.city,
                             "city_code": self.deliveryInfo.cityCode,
@@ -796,9 +809,9 @@
                         }
 
                         //console.log("params",params); return;
-                        axios.post(apiEndpointURL + '/create-yos-order', params)
+                        axios.post(apiEndpointURL_elevate + '/create-yos-order', params)
                             .then((response) => {
-                                var data = response.data;
+                                var data = response.data.data;
                                 self.orderResponse = data;
 
                                 $('#displayOrderNumber').val(data.displayOrderNumber);
@@ -809,6 +822,7 @@
                                 self.initXpay();
                             })
                             .catch((error) => {
+								toggleOverlay(false);
                                 var response = error.response;
                                 if (typeof response != 'undefined') {
                                     var data = response.data;
@@ -865,7 +879,7 @@
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
-									//self.removePrequalifiedCustomer();
+									self.removePrequalifiedCustomer();
                                 }else{
                                     toggleOverlay(false);
                                     $('#error').html("Systm error, please try again.");

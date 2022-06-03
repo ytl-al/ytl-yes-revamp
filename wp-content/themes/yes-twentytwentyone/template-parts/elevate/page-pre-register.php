@@ -112,7 +112,7 @@
             <div class="container">
                 <ul class="wizard">
                     <li ui-sref="firstStep" class="completed">
-                        <span>1. Slect Plan</span>
+                        <span>1. Select Plan</span>
                     </li>
                     <li ui-sref="secondStep">
                         <span>2. Payment</span>
@@ -122,9 +122,11 @@
         </section>
     <!-- Banner End -->
 	<input type="hidden" value="" id="displayOrderNumber"/>
+
     <section id="cart-body" style="display: none;">
         <div class="container " style="border: 0">
             <div id="main-vue">
+				<button style="display:none;" type="button" @click="removePrequalifiedCustomer">Remove</button>
                 <div class="layer-invitationText">
                     <h3>Dear {{ deliveryInfo.name }},</h3>
                     <p>We are pleased to invite you to our special promotion, just for you. Please select a plan, and proceed.</p>
@@ -133,54 +135,166 @@
 
                 <div class="layer-selectPlan">
                     <div class="row flex-nowrap flex-xl-wrap gx-5">
-                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle896" >
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle836" >
                             <div class="layer-planDevice">
-                                <h2>Infinite+ Basic 99</h2>
-                                <h3>XIAOMI Redmi 10</h3>
-                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2021/09/Xiaomi-Redmi-10.jpg" /></p>
-                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(896)" data-productid="896">Select</a></p>
+                                <h2>Infinite+ Basic</h2>
+                                <h3>VIVO Y55+ Blue</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/site/wp-content/uploads/2022/05/vivo-y55.png"/></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(836)" data-productid="836">Select</a></p>
                             </div>
                         </div>
-                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle898" >
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle837" >
                             <div class="layer-planDevice">
-                                <h2>Infinite+ Standard 128</h2>
-                                <h3>SAMSUNG A33</h3>
-                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2022/04/samsung-a33.jpg" /></p>
-                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(898)" data-productid="898">Select</a></p>
+                                <h2>Infinite+ Basic</h2>
+                                <h3>VIVO Y55+ Black</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/site/wp-content/uploads/2022/05/vivo-y55.png" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(837)" data-productid="837">Select</a></p>
                             </div>
                         </div>
-                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle900" >
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle838" >
                             <div class="layer-planDevice">
-                                <h2>Infinite+ Premium 188</h2>
-                                <h3>SAMSUNG S22 Ultra</h3>
-                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2022/04/samsung-s22-ultra-black.png" /></p>
-                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(900)" data-productid="900">Select</a></p>
+                                <h2>Infinite+ Standard</h2>
+                                <h3>XIAOMI REDMI NOTE 11 PRO</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/XIAOMIREDMINOTE11PROGray.png" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(838)" data-productid="838">Select</a></p>
                             </div>
                         </div>
 
 
-                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle892" >
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle839" >
                             <div class="layer-planDevice">
-                                <h2>Infinite+ Standard 128</h2>
-                                <h3>Xiaomi 11T</h3>
-                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2021/12/xiaomi_11t.png?x41595" /></p>
-                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(892)" data-productid="892">Select</a></p>
+                                <h2>Infinite+ Standard</h2>
+                                <h3>XIAOMI REDMI NOTE 11 PRO</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/XIAOMIREDMINOTE11PROBlue.png" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(839)" data-productid="839">Select</a></p>
                             </div>
                         </div>
-                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle904" >
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle840" >
                             <div class="layer-planDevice">
-                                <h2>Infinite+ Premium 188</h2>
-                                <h3>Xiaomi Redmi 10</h3>
-                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2021/09/Xiaomi-Redmi-10.jpg" /></p>
-                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(904)" data-productid="904">Select</a></p>
+                                <h2>Infinite+ Standard</h2>
+                                <h3>SAMSUNG A33 Blue</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA33Blue.jpg" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(840)" data-productid="840">Select</a></p>
                             </div>
                         </div>
-                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle894">
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle841">
                             <div class="layer-planDevice">
-                                <h2>Infinite+ Basic 99</h2>
-                                <h3>Xiaomi 11T </h3>
-                                <p class="panel-deviceImg"><img src="/wp-content/uploads/2021/12/xiaomi_11t.png?x41595" /></p>
-                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(894)" data-productid="894">Select</a></p>
+                                <h2>Infinite+ Standard</h2>
+                                <h3>SAMSUNG A33 Black</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA33Black.jpg" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(841)" data-productid="841">Select</a></p>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle842">
+                            <div class="layer-planDevice">
+                                <h2>Infinite+ Standard</h2>
+                                <h3>SAMSUNG A33 Peach</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA33Peach.jpg" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(842)" data-productid="842">Select</a></p>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle843">
+                            <div class="layer-planDevice">
+                                <h2>Infinite+ Standard</h2>
+                                <h3>SAMSUNG A33 White</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA33White.jpg" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(843)" data-productid="842">Select</a></p>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle844">
+                            <div class="layer-planDevice">
+                                <h2>Infinite+ Premium</h2>
+                                <h3>OPPO RENO 7 Black</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/OPPORENO7Black.jpg" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(844)" data-productid="844">Select</a></p>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle845">
+                            <div class="layer-planDevice">
+                                <h2>Infinite+ Premium</h2>
+                                <h3>OPPO RENO 7 Blue</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/OPPORENO7Blue.jpg" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(845)" data-productid="845">Select</a></p>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle846">
+                            <div class="layer-planDevice">
+                                <h2>Infinite+ Premium</h2>
+                                <h3>SAMSUNG A53 Blue</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA53Blue.jpg" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(846)" data-productid="846">Select</a></p>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle847">
+                            <div class="layer-planDevice">
+                                <h2>Infinite+ Premium</h2>
+                                <h3>SAMSUNG A53 Black</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA53Black.jpg" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(847)" data-productid="847">Select</a></p>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle848">
+                            <div class="layer-planDevice">
+                                <h2>Infinite+ Premium</h2>
+                                <h3>SAMSUNG A53 Peach</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA53Peach.jpg" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(848)" data-productid="848">Select</a></p>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle849">
+                            <div class="layer-planDevice">
+                                <h2>Infinite+ Premium</h2>
+                                <h3>SAMSUNG A53 White</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA53White.jpg" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(849)" data-productid="849">Select</a></p>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle850">
+                            <div class="layer-planDevice">
+                                <h2>Infinite+ Ultra</h2>
+                                <h3>VIVO X80 Blue</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/VIVOX80Blue.jpg" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(850)" data-productid="850">Select</a></p>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle851">
+                            <div class="layer-planDevice">
+                                <h2>Infinite+ Ultra</h2>
+                                <h3>VIVO X80 Black</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/VIVOX80Black.jpg" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(851)" data-productid="851">Select</a></p>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle852">
+                            <div class="layer-planDevice">
+                                <h2>Infinite+ Ultra</h2>
+                                <h3>SAMSUNG S22 Black</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGS22Black.jpg" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(852)" data-productid="852">Select</a></p>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle853">
+                            <div class="layer-planDevice">
+                                <h2>Infinite+ Ultra</h2>
+                                <h3>SAMSUNG S22 White</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGS22White.jpg" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(853)" data-productid="853">Select</a></p>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle854">
+                            <div class="layer-planDevice">
+                                <h2>Infinite+ Ultra</h2>
+                                <h3>SAMSUNG S22 Green</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGS22Green.jpg" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(854)" data-productid="854">Select</a></p>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle855">
+                            <div class="layer-planDevice">
+                                <h2>Infinite+ Ultra</h2>
+                                <h3>SAMSUNG S22 Pink</h3>
+                                <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGS22Pink.jpg" /></p>
+                                <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(855)" data-productid="855">Select</a></p>
                             </div>
                         </div>
                     </div>
@@ -276,19 +390,7 @@
 											<p>RM{{item.price}}/ mth</p>
 										</div>
 									</div>
-                                    <div class="hr_line"></div>
-                                    <div class="row mt-2 ">
-                                        <div class="col-1"><input type="checkbox" id="subscribe" name="subscribe" value="1" v-on:change="watchAllowNext" /></div>
-                                        <div class="col-11 text-12">
-                                            <label for="subscribe" style="cursor: pointer; font-size: 12px; line-height: 14px;">I here by agree to subscribe to the plan selected in the online form submitted by me, and to be bound by the First to 5G Campaign Terms and Conditions available at <a target="_blank" href="https://www.yes.my/tnc/ongoing-campaigns-tnc">www.yes.my/tnc/ongoing-campaigns-tnc</a>.</label>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-2 ">
-                                        <div class="col-1"><input type="checkbox" id="consent" name="consent" value="1" v-on:change="watchAllowNext" /></div>
-                                        <div class="col-11 text-12">
-                                            <label for="consent" style="cursor: pointer; font-size: 12px; line-height: 14px;">I further give consent to YTLC to process my personal data in accordance with YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a> and also give consent to ORIX to process my personal data in accordance with ORIX Privacy Policy available at (<a href="https://www.orix.com.my/privacy-policy" target="_blank">https://www.orix.com.my/privacy-policy</a>) for the purposes of my agreement with ORIX.</label>
-                                        </div>
-                                    </div>
+
                                     <div class="row mt-3 ">
                                         <div class="col-12">
                                             <button class="pink-btn-disable d-block text-uppercase w-100" :class=" allowSubmit?'pink-btn':'pink-btn-disable'" v-on:click="goNext" type="button">Order</button>
@@ -315,7 +417,22 @@
 
 </main>
 
-<?php require_once('includes/footer.php'); ?>
+ <div class="modal fade" id="modal-alert" tabindex="-1" aria-labelledby="modal-alert" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title" id="modal-titleLabel"></h5>
+                </div>
+                <div class="modal-body text-center">
+                    <p id="modal-bodyText"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+</div>
+
 <script type="text/javascript">
     $(document).ready(function() {
         var pageCart = new Vue({
@@ -494,7 +611,7 @@
 								if(self.orderSummary.product.selected.contractName){
 									self.contractTitle = self.orderSummary.product.selected.contractName;
 								}else{
-									self.contractTitle = 'Elevate ' + self.orderSummary.product.selected.contract +' months';
+									self.contractTitle = '';
 								}
 
 								$('#main-vue').css({'height':'auto'});
@@ -559,6 +676,9 @@
 				getStateCode: function (stateVal) {
                     var self = this;
                     var objState = self.selectOptions.states.filter(state => state.value == stateVal);
+                    if (!objState.length) {
+                        objState = self.selectOptions.states.filter(state => state.value == stateVal.toUpperCase());
+                    }
                     return objState[0].stateCode;
                 },
 
@@ -588,14 +708,14 @@
                             self.allowSelectCity = true;
 
                             var objCity = self.selectOptions.cities.filter(city => city.value == self.deliveryInfo.city);
-                            if (objCity.length == 0) {
+                            /*if (objCity.length == 0) {
                                 self.deliveryInfo.city = '';
                                 self.deliveryInfo.cityCode = '';
-                            }
+                            }*/
 
                         })
                         .catch((error) => {
-                            // console.log(error);
+                            console.log(error);
                         })
                         .finally(() => {
                             self.watchAllowNext();
@@ -622,10 +742,12 @@
 								console.log(data);
 								if(data){
 									self.deliveryInfo = data;
-
+									self.allowSubmit = true;
 									self.deliveryInfo.mykad = self.deliveryInfo.nric;
 									self.deliveryInfo.address = self.deliveryInfo.addressLine1;
 									self.deliveryInfo.postcode = self.deliveryInfo.postCode;
+
+									self.deliveryInfo.msisdnToUpgrade = self.getMsisdn(self.deliveryInfo.msisdnToUpgrade);
 
 									self.deliveryInfo.stateCode = (self.deliveryInfo.state) ? self.getStateCode(self.deliveryInfo.state) : '';
 									self.deliveryInfo.cityCode = self.deliveryInfo.city;
@@ -678,12 +800,33 @@
 				},
 
 				getPhone: function(phone){
-					if(phone.substring(0,1) == "6"){
-						return phone.substring(1,11);
-					}else{
-						return phone;
+					var phone = phone.replaceAll(' ', '')
+					var c = phone.substring(0,1);
+					var tel = '';
+					switch(c){
+						case '+':
+							tel = phone.substring(2,11);
+							break;
+						case '6':
+							tel = phone.substring(1,11);
+							break;
+						case '1':
+							tel = '0'+phone;
+							break;
+						default:
+							tel = phone;
+							break;
 					}
+					return tel;
+
 				},
+
+				getMsisdn: function(msisdn){
+
+					 var tmp = msisdn.split('@');
+					 return tmp[0];
+				},
+
 				elevateCustomer: function () {
                     var self = this;
                     var params = self.deliveryInfo;
@@ -762,8 +905,8 @@
                                 var data = response.data;
 
                                 if(data.status == 1){
-									//self.removePrequalifiedCustomer();
-									elevate.redirectToPage('thanks?orderNumber='+$('#displayOrderNumber').val());
+									self.removePrequalifiedCustomer();
+									//elevate.redirectToPage('thanks?orderNumber='+$('#displayOrderNumber').val());
                                 }else{
                                     toggleOverlay(false);
 									$('#status_mesage').html('');
@@ -865,7 +1008,7 @@
                         .then((response) => {
                             var data = response.data;
                             if(data.status == 1){
-
+								elevate.redirectToPage('thanks?orderNumber='+$('#displayOrderNumber').val());
                             }else{
                                 toggleOverlay(false);
                                 $('#error').html("System error, please try again.");
@@ -922,6 +1065,10 @@
                             "product_bundle_id": self.orderSummary.product.selected.productCode,
                             "referral_code": "",
                             "addon_name": "",
+                            "conversion": self.deliveryInfo.isConversion,
+                            "existingMsisdn": self.deliveryInfo.msisdnToUpgrade,
+                            "existingPlanName": self.deliveryInfo.currentPlan,
+                            "existingPlanType": self.deliveryInfo.currentPlanType,
                             "address_line":  self.deliveryInfo.addressLine1,
                             "city": self.deliveryInfo.city,
                             "city_code": self.deliveryInfo.cityCode,
@@ -949,8 +1096,13 @@
 									$('#displayOrderNumber').val(data.data.displayOrderNumber);
 									self.updateElevateOrder();
 								 }else{
+									 toggleOverlay(false);
 									 $('#status_mesage').html('');
-									 $('#error').html('Sorry, you cannot make order. '+data.error);
+									 var errorMsg = 'Sorry, you cannot make order. '
+									 if(data.error){
+										 errorMsg = errorMsg + data.error;
+									 }
+									 $('#error').html(errorMsg);
 								 }
 
 
@@ -1006,12 +1158,6 @@
                 },
                 watchAllowNext: function() {
                     var self = this;
-                    if ($('#subscribe').is(':checked') && $('#consent').is(':checked')) {
-                        self.allowSubmit = true
-                    } else {
-                        self.allowSubmit = false
-                    }
-
 					if(!self.deliveryInfo.id){
 						self.allowSubmit = false
 					}
@@ -1055,3 +1201,4 @@
     });
 </script>
 
+<?php require_once('includes/footer.php'); ?>

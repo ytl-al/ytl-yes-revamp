@@ -140,7 +140,6 @@
                                     <p>RM{{item.price}}/ mth</p>
                                 </div>
                             </div>
-
                             <div class="row mt-3 ">
                                 <div class="col-12">
                                     <button class="pink-btn-disable d-block text-uppercase w-100" :class=" allowSubmit?'pink-btn':'pink-btn-disable'"  @click="goNext" type="button">Order</button>
@@ -180,7 +179,6 @@
                         contract_id: null,
                         orderItems: []
                     },
-                    orderInfo:{}
                 },
                 currentStep: 0,
                 elevate: null,
@@ -297,74 +295,6 @@
 					return url[0];
 
 				},
-
-                makeOrder: function (){
-                    var self = this;
-                    var params = self.customer;
-                    params.productSelected = self.orderSummary.product.selected.plan.planId;
-
-                    if(self.dealer){
-                        params.referralCode = self.dealer.referral_code;
-                        params.dealerUID = self.dealer.dealer_id;
-                        params.dealerCode = self.dealer.dealer_code;
-                    }else{
-                        params.referralCode = "";
-                        params.dealerUID = "";
-                        params.dealerCode = "";
-                    }
-
-                    axios.post(apiEndpointURL_elevate + '/order/create', params)
-                        .then((response) => {
-                            var data = response.data;
-                            if(data.status == 1){
-                                //save contract info
-                                self.orderSummary.orderInfo = data.data;
-                                elevate.lsData.orderInfo = data.data;
-                                elevate.updateElevateLSData();
-                                //self.updateElevateOrder();
-                                self.submit_contract();
-                            }else{
-                                toggleOverlay(false);
-                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
-                            }
-                        })
-                        .catch((error) => {
-                            toggleOverlay(false);
-                            toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
-                        });
-                },
-
-                submit_contract: function () {
-                    var self = this;
-                    var params = self.eligibility;
-                    params.orderId = self.orderSummary.orderInfo.id;
-                    params.contract = self.orderSummary.product.selected.contract;
-
-                    axios.post(apiEndpointURL_elevate + '/contract', params)
-                        .then((response) => {
-                            var data = response.data;
-                            if(data.status == 1){
-                                //save contract info
-                                self.contract = data.data;
-
-                                elevate.lsData.contract = data.data;
-                                elevate.updateElevateLSData();
-                                toggleOverlay();
-                                elevate.redirectToPage('thanks');
-                                //elevate.redirectToPage('paynow');
-                            }else{
-                                toggleOverlay(false);
-                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
-                            }
-
-                        })
-                        .catch((error) => {
-                            toggleOverlay(false);
-                            toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
-                        });
-
-                },
-
                 watchAllowNext:function (){
                     var self = this;
                     self.allowSubmit = true
@@ -374,11 +304,7 @@
                     var self = this;
                     if(self.allowSubmit){
                         toggleOverlay();
-                        if(self.orderSummary.orderInfo.id){
-                            self.submit_contract();
-                        }else{
-                            self.makeOrder();
-                        }
+                        elevate.redirectToPage('contract');
                     }
                 }
 
