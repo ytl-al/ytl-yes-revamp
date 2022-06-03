@@ -28,7 +28,12 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-3 col-12 offset-md-6 thank-mb">
                         <h1 class="title">Thank you!</h1>
-                        <div class="mt-5">Thank you for your interest. We will get in touch with you by 9th June 2022 on your application.</div>
+                        <div class="mt-5">Order Number</div>
+                        <div class="subtitle"><?php echo $_GET['orderNumber']?></div>
+                        <div class="text-12 mt-2">Placed on <?php echo date("l, jS F Y")?></div>
+                        <div class="mt-5">A summary of your order has been sent to
+                            your email
+                        </div>
                     </div>
                 </div>
                 <div style="height: 300px" class="d-none d-md-block"></div>

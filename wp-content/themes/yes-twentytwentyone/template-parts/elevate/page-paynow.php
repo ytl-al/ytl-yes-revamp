@@ -130,7 +130,7 @@
 													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" height="25" v-if="paymentInfo.cardType == 'AMEX'" />
 													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/mastercard.png" height="30" v-if="paymentInfo.cardType == 'MASTERCARD'" />
 												</div>
-												</div>												
+												</div>
 												</div>
                                             </div>
                                             <div class="col-lg-6 col-12 mb-1">
@@ -812,7 +812,6 @@
                             .then((response) => {
                                 var data = response.data.data;
                                 self.orderResponse = data;
-								console.log("self.orderResponse",self.orderResponse);
 
                                 $('#displayOrderNumber').val(data.displayOrderNumber);
 

@@ -906,7 +906,7 @@
 
                                 if(data.status == 1){
 									self.removePrequalifiedCustomer();
-									//elevate.redirectToPage('thanks?orderNumber='+$('#displayOrderNumber').val());
+									//elevate.redirectToPage('thanks-pre-qualified?orderNumber='+$('#displayOrderNumber').val());
                                 }else{
                                     toggleOverlay(false);
 									$('#status_mesage').html('');
@@ -978,7 +978,7 @@
 									self.ajaxCreateYOSOrderFree();
 								}else{
 									$('#status_mesage').html('Please make payment...');
-									elevate.redirectToPage('paynow-pre-register');
+									elevate.redirectToPage('paynow-pre-qualified');
 								}
                             }else{
                                 toggleOverlay(false);
@@ -1008,7 +1008,7 @@
                         .then((response) => {
                             var data = response.data;
                             if(data.status == 1){
-								elevate.redirectToPage('thanks?orderNumber='+$('#displayOrderNumber').val());
+								elevate.redirectToPage('thanks-pre-qualified?orderNumber='+$('#displayOrderNumber').val());
                             }else{
                                 toggleOverlay(false);
                                 $('#error').html("System error, please try again.");
@@ -1183,7 +1183,7 @@
 									if(self.deliveryInfo.isFree){
 										self.ajaxCreateYOSOrderFree();
 									}else{
-										elevate.redirectToPage('paynow-pre-register');
+										elevate.redirectToPage('paynow-pre-qualified');
 									}
 								}else{
 									self.elevateContract();
