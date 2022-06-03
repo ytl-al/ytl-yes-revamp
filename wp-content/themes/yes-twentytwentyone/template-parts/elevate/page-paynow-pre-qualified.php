@@ -511,18 +511,18 @@
 						if (elevate.lsData.deliveryInfo) {
 							self.deliveryInfo = elevate.lsData.deliveryInfo;
 						}else{
-							 elevate.redirectToPage('pre-register/?id=error');
+							 elevate.redirectToPage('pre-qualified/?id=error');
 						}
 						if (elevate.lsData.customer) {
 							self.customer = elevate.lsData.customer;
 						}else{
-							 elevate.redirectToPage('pre-register/?id='+self.deliveryInfo.id);
+							 elevate.redirectToPage('pre-qualified/?id='+self.deliveryInfo.id);
 						}
 
 						if (elevate.lsData.orderDetail) {
 							self.orderSummary.orderDetail = elevate.lsData.orderDetail;
 						}else{
-							elevate.redirectToPage('pre-register/?id='+self.deliveryInfo.id);
+							elevate.redirectToPage('pre-qualified/?id='+self.deliveryInfo.id);
 						}
 						if (elevate.lsData.product) {
 							self.orderSummary.product = elevate.lsData.product;

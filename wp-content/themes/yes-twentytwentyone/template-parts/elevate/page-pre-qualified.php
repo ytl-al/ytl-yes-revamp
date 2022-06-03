@@ -978,7 +978,7 @@
 									self.ajaxCreateYOSOrderFree();
 								}else{
 									$('#status_mesage').html('Please make payment...');
-									elevate.redirectToPage('paynow-pre-register');
+									elevate.redirectToPage('paynow-pre-qualified');
 								}
                             }else{
                                 toggleOverlay(false);
@@ -1183,7 +1183,7 @@
 									if(self.deliveryInfo.isFree){
 										self.ajaxCreateYOSOrderFree();
 									}else{
-										elevate.redirectToPage('paynow-pre-register');
+										elevate.redirectToPage('paynow-pre-qualified');
 									}
 								}else{
 									self.elevateContract();
