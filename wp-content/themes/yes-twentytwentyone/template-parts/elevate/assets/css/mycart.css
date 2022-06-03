@@ -1157,6 +1157,11 @@ ul.wizard {
         height: 100%;
         overflow-x: hidden;
     }
+	.thanks_bg{
+		background:none;
+	}
+	
+	
     #main-vue {
         height: auto;
     }
@@ -1249,10 +1254,20 @@ ul.wizard {
     }
 
     .thank-mb{
-        padding-top: 150px;
-        border-radius: 10px;
+        padding-top: 0px;
+        border-radius: 0px;
     }
-
+	
+	.thank-mb .mt-5{
+		margin-top:10px!important
+	}
+	.thank-mb .subtitle{
+	    color: #2F3BF5 !important;
+	}
+	.thank-mb .text-12 {
+		 
+		font-size: 14px; 
+	}
     .checkout-left {
         margin-top: 50px;
     }

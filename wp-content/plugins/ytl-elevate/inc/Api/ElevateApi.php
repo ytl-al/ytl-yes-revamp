@@ -44,7 +44,6 @@ class ElevateApi
     const api_caeligibility = 'api/Elevate/compAsia/Eligibility';
 
     const  mobile_auth_path_auth = 'mobileyos/mobile/ws/v1/json/auth/getBasicAuth';
-
     const mobile_api_verify_eligbility = 'mobileyos/mobile/ws/v1/json/verifyEligibility';
 
     const  ekyc_api_check = 'api/EKYCProcessStatus/';
@@ -52,6 +51,7 @@ class ElevateApi
     const yos_order_token = '/wp-json/ywos/v1/get-auth-token';
     const yos_order_username = 'ytldd';
     const yos_order_password = 'ytldd123$';
+    const yos_order = '/mobileyos/mobile/ws/v1/json/createYOSOrderAndPaymentWithAddonAndReloads';
     const yos_order_without_payment = '/mobileyos/mobile/ws/v1/json/createeKYCOrder';
 
 	const api_prequalifiedcustomer='api/Elevate/Prequalifiedcustomer';
@@ -156,6 +156,11 @@ class ElevateApi
                 'callback' => array('\Inc\Api\ElevateApi', 'get_pre_register_user'),
             ));
 
+            register_rest_route('/elevate/v1', 'create-yos-order', array(
+                'methods' => 'POST',
+                'callback' => array('\Inc\Api\ElevateApi', 'make_yos_order'),
+            ));
+
 			register_rest_route('/elevate/v1', 'create-yos-free-order', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'make_yos_order_without_payment'),
@@ -182,17 +187,7 @@ class ElevateApi
     public static function getProduct(WP_REST_Request $request)
     {
         $code = $request['code'];
-        $products = self::pullBundleProduct($code);
-        foreach ($products as $k=>$v){
-
-            if(!$products[$k]['device']['imageURL'] || strtolower($products[$k]['device']['imageURL'])=='null'){
-                $products[$k]['device']['imageURL'] = 'https://cdn.yes.my/site/wp-content/uploads/2022/05/elevate-phone-outline.jpeg';
-            }
-
-        }
-        $product = \Inc\Base\Model::refinde($products);
-
-
+        $product = \Inc\Base\Model::refinde(self::pullBundleProduct($code));
 
         $response = new WP_REST_Response($product);
         $response->set_status(200);
@@ -292,11 +287,13 @@ class ElevateApi
         $token = self::mobileservice_generate_auth_token();
         $mykad = $request['mykad'];
         $planType = $request['plan_type'];
+        $bundleId = $request['bundleId'];
 
         $apiSetting = get_option("ytlpd_settings");
         $request_id = $apiSetting['ytlpd_api_request_id'];
         $params = array(
             'planType' => $planType,
+            'bundleId' => $bundleId,
             'locale' => "en",
             'requestId' => $request_id,
             'securityId' => $mykad,
@@ -345,12 +342,14 @@ class ElevateApi
     public static function ca_verification(WP_REST_Request $request)
     {
 
-        /*$mykad = $request['mykad'];
+        $mykad = $request['mykad'];
         $name = $request['name'];
         $email = $request['email'];
         $phone = $request['phone'];
         $guid = $request['guid'];
-
+        /*$front_url = $request['front_url'];
+        $back_url = $request['back_url'];
+        $selfievideo = $request['selfievideo'];*/
         $PartneReferenceID = $request['PartneReferenceID'];
         $OCRConfidenceScore = round($request['OCRConfidenceScore']/100,2);
 
@@ -405,8 +404,8 @@ class ElevateApi
                 $return['status'] = 0;
             }
             $return['data'] = $data;
-        }*/
-		$return['status'] = 1;
+        }
+
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
@@ -416,7 +415,7 @@ class ElevateApi
     {
 
 
-        /*$token = self::get_token();
+        $token = self::get_token();
 
 		$params = array(
             'myKadNumber' =>$request['mykad'],
@@ -456,8 +455,8 @@ class ElevateApi
                 $return['status'] = 0;
             }
             $return['data'] = $data;
-        }*/
-		$return['status'] = 1;
+        }
+
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
@@ -646,8 +645,8 @@ class ElevateApi
             "fullName" => $request['name'],
             "gender" => self::getGender($request['mykad']),
             "dob" => self::getDOB($request['mykad']),
-            "addressLine1" => $request['address'],
-            "addressLine2" => $request['addressMore'],
+            "addressLine1" => $request['addressMore'],
+            "addressLine2" => $request['address'],
             "state" => $request['state'],
             "city" => $request['city'],
             "postCode" => $request['postcode'],
@@ -921,9 +920,9 @@ class ElevateApi
 
     public static function elevate_order_update(WP_REST_Request $request)
     {
-		if(!isset($request['referralCode'])) $request['referralCode'] = '';
-		if(!isset($request['dealerUID'])) $request['dealerUID'] = '';
-		if(!isset($request['dealerCode'])) $request['dealerCode'] = '';
+		if(!($request['referralCode'])) $request['referralCode'] = '';
+		if(!($request['dealerUID'])) $request['dealerUID'] = '';
+		if(!($request['dealerCode'])) $request['dealerCode'] = '';
         $params = array(
             "orderNumber"=> $request['orderNumber'],
             "customerGUID"=> $request['customerGUID'],
@@ -953,6 +952,7 @@ class ElevateApi
             'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
+		 
 		$apiSetting = \Inc\Base\Model::getAPISettings();
         $api_url = $apiSetting['url'] . self::api_order_create.'?id='.$request['id'];
 
@@ -1211,8 +1211,173 @@ class ElevateApi
         return $return;
     }
 
+    public static function make_yos_order(WP_REST_Request $request){
+        //$token = self::ydbp_identity_auth_token();
+        $token = self::mobileservice_get_token();
+
+        $phone_number 	= $request['phone_number'];
+        $customer_name	= $request['customer_name'];
+        $email 			= $request['email'];
+        $login_yes_id 	= $request['login_yes_id'];
+        $security_type	= $request['security_type'];
+        $security_id 	= $request['security_id'];
+        $school_name 	= $request['school_name'];
+        $school_code 	= $request['school_code'];
+        $university_name= $request['university_name'];
+        $dealer_code 	= $request['dealer_code'];
+        $dealer_login_id= $request['dealer_login_id'];
+
+        $plan_name 		= $request['plan_name'];
+        $plan_type 		= $request['plan_type'];
+        $product_bundle_id = $request['product_bundle_id'];
+        $referral_code 	= $request['referral_code'];
+        $addon_name 	= $request['addon_name'];
+
+        $address_line 	= $request['address_line'];
+        $city			= $request['city'];
+        $city_code 		= $request['city_code'];
+        $postal_code 	= $request['postal_code'];
+        $state 			= $request['state'];
+        $state_code 	= $request['state_code'];
+        $country 		= $request['country'];
+
+        $payment_method	= $request['payment_method'];
+        $process_name 	= $request['process_name'];
+        $amount 		= $request['amount'];
+        $amount_sst 	= $request['amount_sst'];
+        $total_amount 	= $request['total_amount'];
+        $bank_code 		= $request['bank_code'];
+        $bank_name 		= $request['bank_name'];
+        $card_number 	= $request['card_number'];
+        $card_type 		= $request['card_type'];
+        $name_on_card 	= $request['name_on_card'];
+        $card_cvv 		= $request['card_cvv'];
+        $card_expiry_month 	= $request['card_expiry_month'];
+        $card_expiry_year 	= $request['card_expiry_year'];
+        $ippType 		= $request['ippType'];
+
+        $conversion = ($request['conversion'])?$request['conversion']:"";
+        $existingMsisdn= ($request['existingMsisdn'])?$request['existingMsisdn']:"";
+        $existingPlanName= ($request['existingPlanName'])?$request['existingPlanName']:"";
+        $existingPlanType= ($request['existingPlanType'])?$request['existingPlanType']:"";
+
+        $ytlpd_options = get_option("ytlpd_settings");
+        $ytlpd_api_domain_url =  $ytlpd_options['ytlpd_api_domain_url'];
+        $ytlpd_api_request_id =  $ytlpd_options['ytlpd_api_request_id'];
+
+        $api_url =  $ytlpd_api_domain_url.self::yos_order;
+        $params 	= [
+            'eKYCCustomerDetail' 	=> [
+                'alternatePhoneNumber' 	=> $phone_number,
+                'customerFullName' 		=> $customer_name,
+                'email' 				=> $email,
+                'loginYesId' 			=> $login_yes_id,
+                'planName' 				=> $plan_name,
+                'planType' 				=> $plan_type,
+                'securityType' 			=> $security_type,
+                'securityId' 			=> $security_id,
+                'schoolName' 			=> $school_name,
+                'schoolCode' 			=> $school_code,
+                'universityName' 		=> $university_name,
+                'dealerCode' 			=> $dealer_code,
+                'dealerLoginId' 		=> $dealer_login_id,
+                'supportingDocUniqueId'	=> 1
+            ],
+
+            'orderDetail' 			=> [
+                'planName' 			=> $plan_name,
+                'planType' 			=> $plan_type,
+                'productBundleId' 	=> $product_bundle_id,
+                'referralCode' 		=> $referral_code,
+                'addonName' 		=> $addon_name,
+                "conversion"=> $conversion,
+                "existingMsisdn"=> $existingMsisdn,
+                "existingPlanName"=> $existingPlanName,
+                "existingPlanType"=> $existingPlanType,
+            ],
+
+            'deliveryAddress' 		=> [
+                'addressLine' 		=> $address_line,
+                'city' 				=> $city,
+                'cityCode' 			=> $city_code,
+                'postalCode' 		=> $postal_code,
+                'state' 			=> $state,
+                'stateCode' 		=> $state_code,
+                'country' 			=> $country
+            ],
+
+            'paymentInfo' 			=> [
+                'paymentMethod' 	=> $payment_method,
+                'processName' 		=> $process_name,
+                'amount' 			=> number_format($amount, 2, '.', ''),
+                'sst' 				=> number_format($amount_sst, 2, '.', ''),
+                'totalAmount' 		=> number_format($total_amount, 2, '.', ''),
+                'bankCode' 			=> $bank_code,
+                'bankName' 			=> $bank_name,
+                'cardNumber' 		=> $card_number,
+                'cardType' 			=> $card_type,
+                'nameOnCard' 		=> $name_on_card,
+                'cardCVV' 			=> $card_cvv,
+                'cardExpiryMonth' 	=> $card_expiry_month,
+                'cardExpiryYear' 	=> $card_expiry_year,
+                'ippType' 			=> $ippType,
+                'isAutoSubscribe' 	=> false,
+                'isSavedCard' 		=> false
+            ],
+
+            'appVersion' 			=> '1.0',
+            'locale' 				=> 'en',
+            'source' 				=> 'Elevate',
+            'requestId' 			=> $ytlpd_api_request_id,
+            'sessionId' 			=> $token
+        ];
+
+        $args = [
+            'headers' => array(
+                //'Accept' => 'text/plain',
+                'Content-Type' => 'application/json'
+            ),
+            'body' => json_encode($params),
+            'method' => 'POST',
+            'timeout' => self::API_TIMEOUT,
+            'data_format' => 'body'
+        ];
+        //print_r($args); die($api_url);
+        $request = wp_remote_post($api_url, $args);
+        //echo '<pre>';
+        //echo json_encode($params);
+        //print_r($args); die($api_url);
+
+        if (is_wp_error($request)) {
+            $return['status'] = 0;
+            $return['error'] = "Cannot connect to API server";
+        } else if ($request['response']['code'] != 200) {
+            $code = $request['response']['code'];
+            $return['status'] = 0;
+            $error = json_decode($request['body'],true);
+            $return['error'] = $error['errorDescription'];
+        } else {
+            $code = $request['response']['code'];
+            $data = json_decode($request['body'], true);
+
+            if($data['responseCode'] == -1){
+                $return['status'] = 0;
+                $return['error'] = $data['responseMessage'];
+            }else{
+                $return['status'] = 1;
+                $return['data'] = $data;
+            }
+
+        }
+
+        $response = new WP_REST_Response($return);
+        $response->set_status(200);
+        return $response;
+    }
+
     public static function make_yos_order_without_payment(WP_REST_Request $request){
-        $token = self::ydbp_identity_auth_token();
+//        $token = self::ydbp_identity_auth_token();
+        $token = self::mobileservice_get_token();
 
 		$phone_number = $request['phone_number'];
 		$customer_name = $request['customer_name'];
@@ -1236,7 +1401,12 @@ class ElevateApi
 		$state_code = $request['state_code'];
 		$country = $request['country'];
 
-		$ytlpd_options = get_option("ytlpd_settings");
+        $conversion = ($request['conversion'])?$request['conversion']:"";
+        $existingMsisdn= ($request['existingMsisdn'])?$request['existingMsisdn']:"";
+        $existingPlanName= ($request['existingPlanName'])?$request['existingPlanName']:"";
+        $existingPlanType= ($request['existingPlanType'])?$request['existingPlanType']:"";
+
+        $ytlpd_options = get_option("ytlpd_settings");
 		$ytlpd_api_domain_url =  $ytlpd_options['ytlpd_api_domain_url'];
 		$ytlpd_api_request_id =  $ytlpd_options['ytlpd_api_request_id'];
 
@@ -1267,7 +1437,11 @@ class ElevateApi
                 "planName"=> $plan_name,
                 "planType"=> $plan_type,
                 "productBundleId"=> $product_bundle_id,
-                "referralCode"=> $referral_code
+                "referralCode"=> $referral_code,
+                "conversion"=> $conversion,
+                "existingMsisdn"=> $existingMsisdn,
+                "existingPlanName"=> $existingPlanName,
+                "existingPlanType"=> $existingPlanType,
             ),
             "appVersion"=> "1.0",
             "locale"=> "en",
@@ -1290,7 +1464,7 @@ class ElevateApi
         $request = wp_remote_post($api_url, $args);
 		//echo '<pre>';
 		//echo json_encode($params);
-		//print_r($request); die($api_url);
+		//print_r($args);print_r($request); die($api_url);
 
         if (is_wp_error($request)) {
             $return['status'] = 0;
@@ -1322,34 +1496,40 @@ class ElevateApi
 	public static function delete_prequalified_customer(WP_REST_Request $request){
 				$id = $request['id'];
 				if($id){
-					$params = array(
-						"Id"=> $id
+					$params = array( 
 					);
 
 					$token = self::get_token();
 
 					$args = [
 						'headers' => array(
-							'Accept' => 'text/plain',
+							//'Accept' => 'text/plain',
 							'Authorization' => 'Bearer ' . $token,
 							'Content-Type' => 'application/json'
 						),
-						'body' => json_encode($params),
+						'body' => $params,
 						'method' => 'DELETE',
-						'timeout' => self::API_TIMEOUT,
-						'data_format' => 'body'
+						'timeout' => self::API_TIMEOUT
 					];
 					$apiSetting = \Inc\Base\Model::getAPISettings();
-					$api_url = $apiSetting['url'] . self::api_prequalifiedcustomer;
+					$api_url = $apiSetting['url'] . self::api_prequalifiedcustomer.'?id='.$id;
 
 					$request = wp_remote_request($api_url, $args);
+					//print_r($args);print_r($request);die($api_url);
 					if (is_wp_error($request)) {
 						$return['status'] = 0;
 						$return['error'] = "Cannot connect to API server";
 					} else if ($request['response']['code'] != 200) {
-						$code = $request['response']['code'];
-						$return['status'] = 0;
-						$return['error'] = @$request['response'];
+						if($request['response']['code'] == 204){ 
+							$data = json_decode($request['body'], true);
+							$return['status'] = 1;
+							$return['data'] = $data;
+						}else{
+							$code = $request['response']['code'];
+							$return['status'] = 0;
+							$return['error'] = @$request['response'];	
+						}
+						
 					} else {
 						$code = $request['response']['code'];
 						$data = json_decode($request['body'], true);
@@ -1432,7 +1612,9 @@ class ElevateApi
 
     public function mobileservice_get_token()
     {
-        $tokenOption = get_option('mobileservice_auth_token');
+        $token = self::mobileservice_generate_auth_token();
+        return $token;
+        /*$tokenOption = get_option('mobileservice_auth_token');
 
         if (!$tokenOption) {
             $token = self::mobileservice_generate_auth_token();
@@ -1448,7 +1630,7 @@ class ElevateApi
             }
 
         }
-        return $token;
+        return $token;*/
     }
 
     private function mobileservice_generate_auth_token()

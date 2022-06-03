@@ -122,7 +122,16 @@
                                         </div>
                                         <div class="row mb-3 align-items-center g-2">
                                             <div class="col-12">
-                                                <label class="form-label" for="input-chNumber1">* Card Number</label>
+												<div class="row">
+                                                <div class="col-lg-6 col-12">
+												<label class="form-label" for="input-chNumber1">* Card Number</label>
+												<div class="float-end layer-selectedCard">
+													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/visa.png" height="15" v-if="paymentInfo.cardType == 'VISA'" />
+													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" height="25" v-if="paymentInfo.cardType == 'AMEX'" />
+													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/mastercard.png" height="30" v-if="paymentInfo.cardType == 'MASTERCARD'" />
+												</div>
+												</div>												
+												</div>
                                             </div>
                                             <div class="col-lg-6 col-12 mb-1">
                                                 <div class="input-group align-items-center">
@@ -182,7 +191,7 @@
 
                             <div class="row">
                                 <div class="col-12 col-lg-6">
-                                    <button type="submit" class="pink-btn w-100" :disabled="!allowSubmit">Pay</button>
+                                    <button type="submit" class="w-100" :class="allowSubmit?'pink-btn':'pink-btn-disable'" :disabled="!allowSubmit">Pay</button>
                                 </div>
                             </div>
                         </div>
@@ -558,7 +567,7 @@
                                 }
                             })
                             .catch((error) => {
-                                // console.log(error);
+                                console.log(error);
                             })
                             .finally(() => {
                                 setTimeout(function() {
@@ -579,7 +588,7 @@
                                 self.getMaybankIPPInstallments();
                             })
                             .catch((error) => {
-                                // console.log(error.response.data);
+                                console.log(error);
                             })
                             .finally(() => {
                                 setTimeout(function() {
@@ -606,7 +615,7 @@
                                 self.maybankIPP.ippInstallments.push(ippInstallment);
                             })
                             .catch((error) => {
-                                // console.log(error.response.data);
+                                console.log(error);
                             });
                     },
                     getMaybankIPPInstallments: function() {
@@ -799,10 +808,11 @@
                         }
 
                         //console.log("params",params); return;
-                        axios.post(apiEndpointURL + '/create-yos-order', params)
+                        axios.post(apiEndpointURL_elevate + '/create-yos-order', params)
                             .then((response) => {
-                                var data = response.data;
+                                var data = response.data.data;
                                 self.orderResponse = data;
+								console.log("self.orderResponse",self.orderResponse);
 
                                 $('#displayOrderNumber').val(data.displayOrderNumber);
 
@@ -877,7 +887,7 @@
                             })
                             .catch((error) => {
                                 toggleOverlay(false);
-                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                                console.log(error);
                             });
 
                     },
@@ -901,7 +911,7 @@
                                 }
                             })
                             .catch((error) => {
-                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                                console.log(error);
                             });
 
                     },
@@ -979,6 +989,8 @@
                         var paymentInfo = self.paymentInfo;
                         var paymentMethod = self.paymentInfo.paymentMethod;
 
+                        $('.input_error').removeClass('input_error');
+
                         if (paymentMethod == 'CREDIT_CARD' || paymentMethod == 'CREDIT_CARD_IPP') {
                             if (
                                 self.paymentInfo.nameOnCard.trim() == '' ||
@@ -988,6 +1000,45 @@
                                 self.paymentInfo.cardCVV.trim() == ''
                             ) {
                                 isFilled = false;
+                            }else{
+                                var pattern =  /^[a-zA-Z,\,/@,\s]+$/;
+                                if(self.paymentInfo.nameOnCard && !pattern.test(self.paymentInfo.nameOnCard)){
+                                    $('#input-chName').addClass('input_error');
+                                    isFilled = false
+                                }
+                                /*var pattern = /[0-9]{4}$/g;
+                                if (self.cardholder.number1 && !pattern.test(self.cardholder.number1)) {
+                                    isFilled = false;
+                                    $('#input-cardInput1').addClass('input_error');
+                                }
+                                // if (self.cardholder.number2 && !pattern.test(self.cardholder.number2)) {
+                                //     isFilled = false;
+                                //     $('#input-cardInput2').addClass('input_error');
+                                // }
+                                if (self.cardholder.number3 && !pattern.test(self.cardholder.number3)) {
+                                    isFilled = false;
+                                    $('#input-cardInput3').addClass('input_error');
+                                }
+                                // if (self.cardholder.number4 && !pattern.test(self.cardholder.number4)) {
+                                //     isFilled = false;
+                                //     $('#input-cardInput4').addClass('input_error');
+                                // }
+                                if (self.cardholder.number6 && !pattern.test(self.cardholder.number6)) {
+                                    isFilled = false;
+                                    $('#input-cardInput6').addClass('input_error');
+                                }
+
+                                var pattern = /[0-9]{2}$/g;
+                                if (self.cardholder.number5 && !pattern.test(self.cardholder.number5)) {
+                                    isFilled = false;
+                                    $('#input-cardInput5').addClass('input_error');
+                                }
+
+                                var pattern = /[0-9]{3}$/g;
+                                if (self.cardholder.number7 && !pattern.test(self.cardholder.number7)) {
+                                    isFilled = false;
+                                    $('#input-cardInput7').addClass('input_error');
+                                }*/
                             }
                         } else if (paymentMethod == 'FPX') {
                             if (self.paymentInfo.bankCode.trim() == '' || self.paymentInfo.bankName.trim() == '') {
@@ -998,6 +1049,8 @@
                         if (paymentMethod == 'CREDIT_CARD_IPP' && self.paymentInfo.ippType == '') {
                             isFilled = false;
                         }
+
+
 
                         if (isFilled) {
                             self.allowSubmit = true;

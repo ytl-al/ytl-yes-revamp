@@ -163,8 +163,7 @@
                                 <div class="col-6 text-end">
                                     <p>RM{{formatPrice(item.price)}}/ mth</p>
                                 </div>
-                            </div>
-                            <div class="hr_line"></div>
+                            </div> 
                         </div>
 
                         <a href="javascript:void(0)" @click="goNext" class="pink-btn-disable d-block" :class="allowSubmit?'pink-btn':'pink-btn-disable'">Continue</a>
@@ -176,7 +175,7 @@
     </div>
 </main>
 </div>
-<?php get_footer('no-newsletter'); ?>
+<?php require_once('includes/footer.php'); ?>
 </div>
 <script type="text/javascript">
 
@@ -303,7 +302,7 @@
                         })
                         .catch((error) => {
                             toggleOverlay(false);
-                            toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                            console.log(error);
                         })
                 },
                 updatePlan: function() {
