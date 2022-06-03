@@ -31,7 +31,7 @@
             <div class="container">
                 <ul class="wizard">
                     <li ui-sref="firstStep" class="completed">
-                        <span>1. Slect Plan</span>
+                        <span>1. Select Plan</span>
                     </li>
                     <li ui-sref="secondStep" class="completed">
                         <span>2. Payment</span>
