@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>YES Top Referrers Leaderboard</title>
+
+        <meta name="MobileOptimized" content="width" />
+        <meta name="HandheldFriendly" content="true" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,600,700" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+        <link rel="stylesheet" type="text/css" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.3/r-2.2.9/datatables.min.css"/>
+        
+        <style type="text/css">
+            /* @font-face {
+                font-family: "VAG Rounded Std";
+                src: url("/fonts/VAGRoundedStd-Black.eot?#iefix") format("embedded-opentype"), url("/fonts/VAGRoundedStd-Black.woff2") format("woff2"), url("/fonts/VAGRoundedStd-Black.woff") format("woff"), url("/fonts/VAGRoundedStd-Black.ttf") format("truetype"), url("/fonts/VAGRoundedStd-Black.svg#VAGRoundedStd-Black") format("svg");
+                font-weight: 900;
+                font-style: normal
+            }
+
+            @font-face {
+                font-family: "VAG Rounded Std";
+                src: url("/fonts/VAGRoundedStd-Light.eot?#iefix") format("embedded-opentype"), url("/fonts/VAGRoundedStd-Light.woff2") format("woff2"), url("/fonts/VAGRoundedStd-Light.woff") format("woff"), url("/fonts/VAGRoundedStd-Light.ttf") format("truetype"), url("/fonts/VAGRoundedStd-Light.svg#VAGRoundedStd-Light") format("svg");
+                font-weight: 300;
+                font-style: normal
+            }
+
+            @font-face {
+                font-family: "VAG Rounded Std";
+                src: url("/fonts/VAGRoundedStd-Thin.eot?#iefix") format("embedded-opentype"), url("/fonts/VAGRoundedStd-Thin.woff2") format("woff2"), url("/fonts/VAGRoundedStd-Thin.woff") format("woff"), url("/fonts/VAGRoundedStd-Thin.ttf") format("truetype"), url("/fonts/VAGRoundedStd-Thin.svg#VAGRoundedStd-Thin") format("svg");
+                font-weight: 100;
+                font-style: normal
+            }
+
+            @font-face {
+                font-family: "VAG Rounded Std";
+                src: url("/fonts/VAGRoundedStd-Bold.eot?#iefix") format("embedded-opentype"), url("/fonts/VAGRoundedStd-Bold.woff2") format("woff2"), url("/fonts/VAGRoundedStd-Bold.woff") format("woff"), url("/fonts/VAGRoundedStd-Bold.ttf") format("truetype"), url("/fonts/VAGRoundedStd-Bold.svg#VAGRoundedStd-Bold") format("svg");
+                font-weight: bold;
+                font-style: normal
+            } */
+            
+            html, body { height: 100vh; }
+            body { background-color: #FFF; font-family: "Quicksand", "VAG Rounded Std";  }
+            .layer-body { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; padding: 30px 0; min-height: 100vh; }
+            .layer-content { background-color: #14A5DE; border-radius: 20px; color: #FFF; max-width: 592px; padding: 30px 10px; width: 90%; }
+            .layer-content .layer-header { margin: 0 0 20px; text-align: center; }
+            .layer-content h1 { font-size: 20px; margin: 0; }
+            .font-yes { background: url('https://prihatin.yes.my/assets/media/logos/yes_reverse.png') no-repeat; background-size: contain; display: inline-block; font-size: 115%; font-weight: bold; }
+            .layer-header .font-yes { height: 46px; margin-bottom: -28px; width: 58px; }
+            .color-yes { color: #00A4E3; }
+
+            .listing-tabs { border: 0; margin: 0 0 15px; }
+            .listing-tabs .nav-link { border: 2px solid #FFF; border-radius: 20px; color: #FFF; margin: 0 5px; padding: 5px 12px; }
+            .listing-tabs .nav-item:first-of-type .nav-link { margin-left: 0; }
+            .listing-tabs .nav-item:last-of-type .nav-link { margin-right: 0; }
+            .listing-tabs .nav-link:focus, .listing-tabs .nav-link:hover { background-color: #FFF; border-color: #FFF; color: #00A4E3; }
+            .listing-tabs .nav-item.show .nav-link, .listing-tabs .nav-link.active { background-color: #FFF; border-color: #FFF; color: #00A4E3; font-weight: bold; }
+
+            .layer-topThree { display: flex; align-items: center; justify-content: center; margin: 45px 0 25px; }
+            .layer-topThree .layer-profile { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+            .layer-profile .profile-num { display: none; }
+            .layer-profile .profile-img { background-color: #FFF; border: 5px solid cyan; border-radius: 100%; box-shadow: 0 0 20px cyan; display: flex; color: #212529; font-size: 90%; font-style: italic; font-weight: bold; align-items: center; justify-content: center; height: 100px; margin: 1rem 0 0.5rem; padding: 5px; text-align: center; width: 100px; word-wrap: break-word; }
+            .layer-profile .profile-points { color: #FFF; font-size: 120%; font-style: italic; font-weight: bold; }
+            .layer-profile.first { transform: translateY(-10%); }
+            .layer-profile.second { margin-right: -0.8rem; }
+            .layer-profile.third { margin-left: -0.8rem; }
+            .layer-profile .fa-crown { color: gold; filter: drop-shadow(0px 0px 5px gold); }
+            .layer-profile.second .fa-crown { color: silver; filter: drop-shadow(0px 0px 5px silver); }
+            .layer-profile.third .fa-crown { color: brown; filter: drop-shadow(0px 0px 5px brown); }
+
+            .page-link, .page-link:hover { color: #00A4E3; }
+            .page-link:focus { box-shadow: 0 0 0 transparent; }
+            .page-item.active .page-link { background-color: #00A4E3; border-color: #00A4E3; }
+
+            .table { border: 0; font-size: 15px; margin: 0; table-layout: fixed; }
+            .table thead { display: none; }
+            .table tbody, .table>:not(:first-child) { border: 0; }
+            .table tr td { padding: 5px 0; }
+            .table td.cell-rank { width: 40px; }
+            .table td.cell-name { padding-left: 15px; }
+            .table td.cell-points { width: 60px; }
+            .table span.span-rank, .table span.span-name, .table span.span-points { display: block; }
+            .table span.span-rank { background-color: #FFF; border-radius: 100%; padding: 8px; text-align: center; }
+            .table span.span-name { background-color: #FFF; border-radius: 25px 0 0 25px; padding: 8px 0 8px 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            .table span.span-points { background-color: #FFF; border-radius: 0 25px 25px 0; color: #14A5DE; font-style: italic; font-weight: bold; padding: 8px 15px 8px 0; text-align: right; }
+
+            /* .tab-content { min-height: 670px; } */
+            
+            @media (min-width: 768px) {
+                /* .layer-body { padding: 0; } */
+                .layer-content { padding: 30px; width: 100%; }
+                .layer-content h1 { font-size: 2.5rem; }
+                .layer-header .font-yes { height: 58px; margin-bottom: -25px; width: 82px; }
+                .table-responsive { min-height: 505px; }
+                .listing-tabs .nav-link { margin: 0 10px; padding: 5px 20px; }
+
+                .table { font-size: 20px; }
+                .table td.cell-rank { width: 50px; }
+            }
+
+
+            /* Loader */
+            .floatingCirclesG{
+                position:relative;
+                width:125px;
+                height:125px;
+                margin:auto;
+                transform:scale(0.6);
+                    -o-transform:scale(0.6);
+                    -ms-transform:scale(0.6);
+                    -webkit-transform:scale(0.6);
+                    -moz-transform:scale(0.6);
+            }
+
+            .f_circleG{
+                position:absolute;
+                background-color:rgb(20,165,222);
+                height:22px;
+                width:22px;
+                border-radius:12px;
+                    -o-border-radius:12px;
+                    -ms-border-radius:12px;
+                    -webkit-border-radius:12px;
+                    -moz-border-radius:12px;
+                animation-name:f_fadeG;
+                    -o-animation-name:f_fadeG;
+                    -ms-animation-name:f_fadeG;
+                    -webkit-animation-name:f_fadeG;
+                    -moz-animation-name:f_fadeG;
+                animation-duration:1.2s;
+                    -o-animation-duration:1.2s;
+                    -ms-animation-duration:1.2s;
+                    -webkit-animation-duration:1.2s;
+                    -moz-animation-duration:1.2s;
+                animation-iteration-count:infinite;
+                    -o-animation-iteration-count:infinite;
+                    -ms-animation-iteration-count:infinite;
+                    -webkit-animation-iteration-count:infinite;
+                    -moz-animation-iteration-count:infinite;
+                animation-direction:normal;
+                    -o-animation-direction:normal;
+                    -ms-animation-direction:normal;
+                    -webkit-animation-direction:normal;
+                    -moz-animation-direction:normal;
+            }
+
+            #frotateG_01{
+                left:0;
+                top:51px;
+                animation-delay:0.45s;
+                    -o-animation-delay:0.45s;
+                    -ms-animation-delay:0.45s;
+                    -webkit-animation-delay:0.45s;
+                    -moz-animation-delay:0.45s;
+            }
+
+            #frotateG_02{
+                left:15px;
+                top:15px;
+                animation-delay:0.6s;
+                    -o-animation-delay:0.6s;
+                    -ms-animation-delay:0.6s;
+                    -webkit-animation-delay:0.6s;
+                    -moz-animation-delay:0.6s;
+            }
+
+            #frotateG_03{
+                left:51px;
+                top:0;
+                animation-delay:0.75s;
+                    -o-animation-delay:0.75s;
+                    -ms-animation-delay:0.75s;
+                    -webkit-animation-delay:0.75s;
+                    -moz-animation-delay:0.75s;
+            }
+
+            #frotateG_04{
+                right:15px;
+                top:15px;
+                animation-delay:0.9s;
+                    -o-animation-delay:0.9s;
+                    -ms-animation-delay:0.9s;
+                    -webkit-animation-delay:0.9s;
+                    -moz-animation-delay:0.9s;
+            }
+
+            #frotateG_05{
+                right:0;
+                top:51px;
+                animation-delay:1.05s;
+                    -o-animation-delay:1.05s;
+                    -ms-animation-delay:1.05s;
+                    -webkit-animation-delay:1.05s;
+                    -moz-animation-delay:1.05s;
+            }
+
+            #frotateG_06{
+                right:15px;
+                bottom:15px;
+                animation-delay:1.2s;
+                    -o-animation-delay:1.2s;
+                    -ms-animation-delay:1.2s;
+                    -webkit-animation-delay:1.2s;
+                    -moz-animation-delay:1.2s;
+            }
+
+            #frotateG_07{
+                left:51px;
+                bottom:0;
+                animation-delay:1.35s;
+                    -o-animation-delay:1.35s;
+                    -ms-animation-delay:1.35s;
+                    -webkit-animation-delay:1.35s;
+                    -moz-animation-delay:1.35s;
+            }
+
+            #frotateG_08{
+                left:15px;
+                bottom:15px;
+                animation-delay:1.5s;
+                    -o-animation-delay:1.5s;
+                    -ms-animation-delay:1.5s;
+                    -webkit-animation-delay:1.5s;
+                    -moz-animation-delay:1.5s;
+            }
+
+
+
+            @keyframes f_fadeG{
+                0%{
+                    background-color:rgb(255,255,255);
+                }
+
+                100%{
+                    background-color:rgb(20,165,222);
+                }
+            }
+
+            @-o-keyframes f_fadeG{
+                0%{
+                    background-color:rgb(255,255,255);
+                }
+
+                100%{
+                    background-color:rgb(20,165,222);
+                }
+            }
+
+            @-ms-keyframes f_fadeG{
+                0%{
+                    background-color:rgb(255,255,255);
+                }
+
+                100%{
+                    background-color:rgb(20,165,222);
+                }
+            }
+
+            @-webkit-keyframes f_fadeG{
+                0%{
+                    background-color:rgb(255,255,255);
+                }
+
+                100%{
+                    background-color:rgb(20,165,222);
+                }
+            }
+
+            @-moz-keyframes f_fadeG{
+                0%{
+                    background-color:rgb(255,255,255);
+                }
+
+                100%{
+                    background-color:rgb(20,165,222);
+                }
+            }
+            /* END Loader */
+        </style>
+    </head>
+    <body>
+        <div class="layer-body">
+            <div class="layer-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="layer-header">
+                                <h1><span class="font-yes"></span> Top Referrers Leaderboard</h1>
+                            </div>
+                            <ul class="listing-tabs nav nav-tabs justify-content-center" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="tab-today" data-bs-toggle="tab" data-bs-target="#tabContent-today" type="button" role="tab" aria-controls="tabContent-today" aria-selected="false">Today</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link " i="tab-week" data-bs-toggle="tab" data-bs-target="#tabContent-week" type="button" role="tab" aria-controls="tabContent-week" aria-selected="true">Week</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="tab-month" data-bs-toggle="tab" data-bs-target="#tabContent-month" type="button" role="tab" aria-controls="tabContent-month" aria-selected="false">Month</button>
+                                </li>
+                            </ul>
+                            <div class="layer-tabContents tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="tabContent-today" role="tabpanel" aria-labelledby="tab-today">
+                                    <div class="layer-topThree">
+                                        <div class="layer-profile second">
+                                            <div class="profile-num">2</div>
+                                            <i class="fas fa-crown"></i>
+                                            <div class="profile-img">Angie Woo</div>
+                                            <div class="profile-points">398</div>
+                                        </div>
+                                        <div class="layer-profile first">
+                                            <div class="profile-num">1</div>
+                                            <i class="fas fa-crown"></i>
+                                            <div class="profile-img">Ahmad Dhani</div>
+                                            <div class="profile-points">412</div>
+                                        </div>
+                                        <div class="layer-profile third">
+                                            <div class="profile-num">3</div>
+                                            <i class="fas fa-crown"></i>
+                                            <div class="profile-img">Muthusamy Muniandi</div>
+                                            <div class="profile-points">384</div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <div class="loader floatingCirclesG">
+                                            <div class="f_circleG" id="frotateG_01"></div>
+                                            <div class="f_circleG" id="frotateG_02"></div>
+                                            <div class="f_circleG" id="frotateG_03"></div>
+                                            <div class="f_circleG" id="frotateG_04"></div>
+                                            <div class="f_circleG" id="frotateG_05"></div>
+                                            <div class="f_circleG" id="frotateG_06"></div>
+                                            <div class="f_circleG" id="frotateG_07"></div>
+                                            <div class="f_circleG" id="frotateG_08"></div>
+                                        </div>
+                                        <table class="table table-borderless" id="table-rankToday" width="100%" style="display: none;">
+                                            <thead>
+                                                <tr>
+                                                    <th width="50">Rank</th>
+                                                    <th>Name</th>
+                                                    <th>Points</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tabContent-week" role="tabpanel" aria-labelledby="tab-week">
+                                    <div class="layer-topThree">
+                                        <div class="layer-profile second">
+                                            <div class="profile-num">2</div>
+                                            <i class="fas fa-crown"></i>
+                                            <div class="profile-img">Angie Woo</div>
+                                            <div class="profile-points">398</div>
+                                        </div>
+                                        <div class="layer-profile first">
+                                            <div class="profile-num">1</div>
+                                            <i class="fas fa-crown"></i>
+                                            <div class="profile-img">Ahmad Dhani</div>
+                                            <div class="profile-points">412</div>
+                                        </div>
+                                        <div class="layer-profile third">
+                                            <div class="profile-num">3</div>
+                                            <i class="fas fa-crown"></i>
+                                            <div class="profile-img">Muthusamy Muniandi</div>
+                                            <div class="profile-points">384</div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-borderless" id="table-rankWeek" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th width="50">Rank</th>
+                                                    <th>Name</th>
+                                                    <th>Points</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tabContent-month" role="tabpanel" aria-labelledby="tab-month">
+                                    <div class="layer-topThree">
+                                        <div class="layer-profile second">
+                                            <div class="profile-num">2</div>
+                                            <i class="fas fa-crown"></i>
+                                            <div class="profile-img">Angie Woo</div>
+                                            <div class="profile-points">398</div>
+                                        </div>
+                                        <div class="layer-profile first">
+                                            <div class="profile-num">1</div>
+                                            <i class="fas fa-crown"></i>
+                                            <div class="profile-img">Ahmad Dhani</div>
+                                            <div class="profile-points">412</div>
+                                        </div>
+                                        <div class="layer-profile third">
+                                            <div class="profile-num">3</div>
+                                            <i class="fas fa-crown"></i>
+                                            <div class="profile-img">Muthusamy Muniandi</div>
+                                            <div class="profile-points">384</div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-borderless" id="table-rankMonth" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th width="50">Rank</th>
+                                                    <th>Name</th>
+                                                    <th>Points</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/r-2.2.9/datatables.min.js"></script>
+        <script type="text/javascript">
+            var data = [
+                // { 'rank': 1, 'name': 'Ahmad Dhani', 'points': 412 },
+                // { 'rank': 2, 'name': 'Angie Woo', 'points': 398 },
+                // { 'rank': 3, 'name': 'Muthusamy Muniandi', 'points': 384 },
+                { 'rank': 4, 'name': 'Irwan Shah', 'points': 366 },
+                { 'rank': 5, 'name': 'Siti Nur Bayah', 'points': 361 },
+                { 'rank': 6, 'name': 'Fish Lam', 'points': 359 },
+                { 'rank': 7, 'name': 'Alex Chan', 'points': 354 },
+                { 'rank': 8, 'name': 'Rajini Kandarsami', 'points': 352 },
+                { 'rank': 9, 'name': 'Vijay Sundramaniam', 'points': 337 },
+                { 'rank': 10, 'name': 'Lucy Chen', 'points': 326 },
+                { 'rank': 11, 'name': 'Mariah Abu Semat', 'points': 318 },
+                { 'rank': 12, 'name': 'Jackson Lee', 'points': 310 },
+                { 'rank': 13, 'name': 'Chan Ho Nam', 'points': 305 },
+                { 'rank': 14, 'name': 'Jared Liu', 'points': 294 },
+                { 'rank': 15, 'name': 'Mohd Hisham', 'points': 293 },
+                { 'rank': 16, 'name': 'Rajamoorthy Singham', 'points': 290 },
+                { 'rank': 17, 'name': 'Shantini Arumugam', 'points': 283 },
+                { 'rank': 18, 'name': 'Nik Nasir', 'points': 275 },
+                { 'rank': 19, 'name': 'Jackie Chiu', 'points': 272 },
+                { 'rank': 20, 'name': 'Michelle Yang', 'points': 265 },
+                // { 'rank': 21, 'name': 'Simran Rai', 'points': 262 },
+            ];
+            var dataTableConfig = {
+                columns     : [
+                    { data: 'rank' }, 
+                    { data: 'name' }, 
+                    { data: 'points' } 
+                ], 
+                data        : data, 
+                info        : false, 
+                lengthChange: false, 
+                ordering    : false, 
+                responsive  : true, 
+                searching   : false 
+            };
+            
+            // var tableRankToday  = $('#table-rankToday').DataTable(dataTableConfig);
+            // var tableRankWeek   = $('#table-rankWeek').DataTable(dataTableConfig);
+            // var tableRankMonth  = $('#table-rankMonth').DataTable(dataTableConfig);
+            
+            // var redrawToday     = false;
+            // var redrawWeek      = false;
+            // var redrawMonth     = false;
+
+            // var tabElToday   = document.querySelector('button[data-bs-target="#tabContent-today"]')
+            // tabElToday.addEventListener('shown.bs.tab', function (event) {
+            //     if (!redrawToday) {
+            //         tableRankToday.columns.adjust().draw();
+            //         redrawToday = true;
+            //     }
+            // });
+
+            // var tabElWeek   = document.querySelector('button[data-bs-target="#tabContent-week"]')
+            // tabElWeek.addEventListener('shown.bs.tab', function (event) {
+            //     if (!redrawWeek) {
+            //         tableRankWeek.columns.adjust().draw();
+            //         redrawWeek = true;
+            //     }
+            // });
+
+            // var tabElMonth  = document.querySelector('button[data-bs-target="#tabContent-month"]')
+            // tabElMonth.addEventListener('shown.bs.tab', function (event) {
+            //     if (!redrawMonth) {
+            //         tableRankMonth.columns.adjust().draw();
+            //         redrawMonth = true;
+            //     }
+            // });
+
+            buildTable('table-rankToday', data);
+            buildTable('table-rankWeek', data);
+            buildTable('table-rankMonth', data);
+
+            function buildTable(tableID, tableData) {
+                var table   = $('#' + tableID);
+                var loader  = $(table).siblings('.loader');
+                var html    = '';
+                tableData.map(function (data, index) {
+                    html    += `<tr>
+                                    <td class="cell-rank"><span class="span-rank">${data.rank}</span></td>
+                                    <td class="cell-name"><span class="span-name">${data.name}</span></td>
+                                    <td class="cell-points"><span class="span-points">${data.points}</span></td>
+                                </tr>`;
+                });
+                $(table).find('tbody').append(html);
+                setTimeout(function () {
+                    $(loader).fadeOut('fast', function() {
+                        $(table).fadeIn('fast');
+                    });
+                }, 1500);
+            }
+        </script>
+    </body>
+</html>

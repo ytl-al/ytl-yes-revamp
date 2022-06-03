@@ -1,0 +1,476 @@
+<script type="text/javascript">
+    var ajax = new XMLHttpRequest();
+    ajax.open("GET", "https://site.yes.my/ia-defs.svg", true);
+    ajax.send();
+    ajax.onload = function(e) {
+        var div = document.createElement("div");
+        div.innerHTML = ajax.responseText;
+        document.body.insertBefore(div, document.body.childNodes[0]);
+    };
+
+    var $overlay;
+
+    $(document).ready(function() {
+        JUI.select("nav span.select", null);
+        JUI.dropmenu("nav .dropmenu");
+
+        $("nav .dropdown-item").click(function() {
+            var $parent = $(this).parents(".dropdown");
+            var $input = $("input[type=hidden]", $parent);
+            var $toggle = $(".dropdown-toggle", $parent);
+
+            if ($input.length) {
+                $input.val($(this).attr("data-value"));
+                $toggle.html($(this).html());
+            }
+
+            $parent.trigger("OnChanged");
+        });
+
+        $("#toggleSearch").off("click");
+        $("#toggleSearch").click(function() {
+            $("body").toggleClass("searching");
+        });
+
+        $(".btn-scroll-top").prop("href", "#main-body");
+    });
+</script>
+<!-- <link
+        href="https://www.yes.my/themes/yestheme2018/css/remote.css"
+        rel="stylesheet"
+        type="text/css"
+      /> -->
+<link href="https://site.yes.my/wp-content/themes/yes.my/css/remote.css" rel="stylesheet" type="text/css" />
+<link href="https://site.yes.my/wp-content/themes/yes.my/css/std.css" rel="stylesheet" type="text/css" />
+<link href="https://site.yes.my/wp-content/themes/yes.my/css/yes.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("body").prepend(
+            "<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':\r\nnew Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],\r\nj=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=\r\n'https:\/\/www.googletagmanager.com\/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);\r\n})(window,document,'script','dataLayer','GTM-T8K5HSR');<\/script>\r\n<noscript><iframe src=\"https:\/\/www.googletagmanager.com\/ns.html?id=GTM-T8K5HSR\"\r\nheight=\"0\" width=\"0\" style=\"display:none;visibility:hidden\"><\/iframe><\/noscript>"
+        );
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $(".plans_content").hide();
+        $(".plans_").click(function() {
+            $(".plans_content").toggle();
+        });
+    });
+</script>
+<style type="text/css">
+    .dropdown1 {
+        position: relative;
+        display: inline-block;
+        font-weight: 900;
+        color: white;
+    }
+    
+    .dropdown-content {
+        position: absolute;
+        background-color: #fff;
+        min-width: 240px;
+        border-radius: 20px;
+        padding: 16px 16px;
+        z-index: 1;
+        color: 000;
+        text-align: left;
+        flex-direction: column;
+        align-items: flex-start;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s, opacity 0.6s linear;
+        top: 22px;
+        color: #000;
+    }
+    
+    .dropdown-content .linkt,
+    .dropdown-content .linkt:hover {
+        color: #000 !important;
+    }
+    
+    .dropdown1>.menus.menu-site {
+        color: white;
+        font-weight: 600;
+        padding: 0;
+        margin: 0 !important;
+    }
+    
+    .dropdown1>.dropdown-content>.menus.menu-site>a {
+        color: #000 !important;
+        padding: 0;
+        margin: 0 !important;
+    }
+    
+    .kasicolor {
+        color: #00a4e3 !important;
+    }
+    
+    .dropdown1:hover .dropdown-content {
+        display: flex;
+        visibility: visible;
+        opacity: 1;
+    }
+</style>
+<style type="text/css">
+    /* @media (max-width: 1200px){
+          .nav-main .menu-user{
+              display: none;
+          }
+        } */
+    
+    @media (min-width: 1025px) {
+        /* .nav-site .menus{
+              padding: 0 10px !important;
+          } */
+        .menus>span:not(:first-child),
+        .menus>a:not(:first-child) {
+            margin-left: 0.5em !important;
+        }
+        .menus>span:not(:last-child),
+        .menus>a:not(:last-child) {
+            margin-right: 0.5em !important;
+        }
+    }
+    
+    @media (min-width: 1440px) {
+        .menus>span:not(:first-child),
+        .menus>a:not(:first-child) {
+            margin-left: 0.5em !important;
+        }
+        .menus>span:not(:last-child),
+        .menus>a:not(:last-child) {
+            margin-right: 0.5em !important;
+        }
+    }
+    
+    .i-cart {
+        display: none;
+    }
+    
+    body .nav-corporate .menus>span,
+    body .nav-corporate .menus>a,
+    body.transparent-nav.scrolling .nav-corporate .menus>span,
+    body.transparent-nav.scrolling .nav-corporate .menus>a,
+    body.transparent-nav.searching .nav-corporate .menus>span,
+    body.transparent-nav.searching .nav-corporate .menus>a {
+        font-size: 16px !important;
+        font-weight: bold !important;
+    }
+    
+    .nav-mobile .links a:hover {
+        color: #333 !important;
+    }
+    
+    .mobile-menu-pills .nav-pills .nav-link.active {
+        color: #00a4e3 !important;
+        font-weight: bold;
+    }
+</style>
+<nav class="nav-mobile">
+    <div class="mobile-shop">
+        <a aria-label="Site Logo" class="site-logo" href="https://www.yes.my/" style="margin-right: 10px" tabindex="-1"><svg class="ia ia-yes"><use xlink:href="#ia-yes"></use></svg></a>
+        <a class="btn-locator" href="https://www.yes.my/support/store-locator" tabindex="-1" title="Store Locator"> <svg class="ia ia-pin"><use xlink:href="#ia-pin"></use></svg> <span>Store Locator</span></a>
+        <a class="btn-cart" href="https://shop.yes.my/shop/viewCart.do" tabindex="-1" title="Shopping Cart"> <svg class="ia ia-cart"><use xlink:href="#ia-cart"></use></svg></a>
+        <a class="btn-close" role="button" tabindex="-1" title="Close Menu"> <svg class="ia ia-close"><use xlink:href="#ia-close"></use></svg></a>
+    </div>
+    <form action="https://www.yes.my/search" id="mysearch2" method="get">
+        <input id="sToken2" name="sToken" type="hidden" value="nyUkgDUBlM+cq0WYJTSuTlkx7AEJ5Yoz" />
+        <button class="but-trigger-search" style="background: none; border: none" title="Search" type="submit"><svg class="ia ia-search"><use xlink:href="#ia-search"></use></svg></button>
+        <input class="search-field" id="queryStr" name="q" placeholder="Search yes.my" title="Search" type="text" />
+    </form>
+    <div class="mobile-menu-pills">
+        <div aria-orientation="horizontal" class="nav nav-pills" id="menu-pills-tab" role="tablist">
+            <a aria-controls="menu-pills-home" aria-selected="true" class="nav-link active" data-toggle="pill" href="#menu-pills-home" id="menu-pills-home-tab" role="tab" tabindex="-1">4G LTE</a>
+            <a aria-controls="menu-pills-support" aria-selected="false" class="nav-link" data-toggle="pill" href="#menu-pills-support" id="menu-pills-support-tab" role="tab" tabindex="-1">Support</a>
+            <a aria-controls="menu-pills-selfcare" aria-selected="false" class="nav-link" data-toggle="pill" href="#menu-pills-selfcare" id="menu-pills-selfcare-tab" role="tab" tabindex="-1">Selfcare</a>
+        </div>
+
+        <div class="tab-content" id="menu-pills-tabContent">
+            <div aria-labelledby="menu-pills-home-tab" class="tab-pane fade links show active" id="menu-pills-home" role="tabpanel">
+                <a href="https://www.yes.my/whyyes/" tabindex="-1">WHY YES</a>
+                <a class="plans_" href="#" tabindex="-1">PLANS</a>
+                <div class="ml-4 plans_content">
+                    <a href="https://www.yes.my/4g-lte-prepaid/" tabindex="-1"><span class="kasicolor">Kasi Up</span> Prepaid</a>
+                    <a href="https://www.yes.my/4g-lte-postpaid/" tabindex="-1"><span class="kasicolor">Kasi Up</span> Postpaid</a>
+                    <a href="https://www.yes.my/4g-broadband/" tabindex="-1"><span class="kasicolor">Kasi Up</span> Broadband</a>
+                    <a href="https://www.yes.my/kasiup/" tabindex="-1"><span class="kasicolor">Kasi Up</span> Refer &amp; Earn</a>
+                    <a href="https://www.yes.my/kasiupB40/" tabindex="-1"><span class="kasicolor">Kasi Up</span>B40</a>
+                </div>
+                <a href="https://www.yes.my/kasiup/" tabindex="-1">REFER &amp; EARN</a>
+                <a href="https://www.yes.my/kasiupB40/" tabindex="-1">YES PRIHATIN</a>
+                <a href="https://www.yes.my/faq/about-yes-4g/" tabindex="-1">FAQ</a>
+                <hr />
+                <a href="https://www.yes.my/biz/plans/internet-access/" tabindex="-1">BUSINESS</a>
+                <a href="https://ytlfoundation.org/learn" tabindex="-1" target="_blank">EDUCATION</a>
+                <a href="https://www.yes.my/who-we-are/" tabindex="-1">ABOUT US</a>
+            </div>
+            <div aria-labelledby="menu-pills-support-tab" class="tab-pane fade links" id="menu-pills-support" role="tabpanel">
+                <a href="https://www.yes.my/roaming/" tabindex="-1">ROAMING &amp; IDD</a>
+                <a href="https://www.yes.my/rewards/deals/" tabindex="-1">REWARDS</a>
+                <a href="https://www.yes.my/supported-devices/" tabindex="-1">SUPPORTED DEVICES</a>
+                <a href="https://www.yes.my/support/coverage/" tabindex="-1">COVERAGE</a>
+                <a href="https://www.yes.my/support/speed-test/" tabindex="-1">SPEED TEST</a>
+                <a href="https://www.yes.my/download-services/" tabindex="-1">DOWNLOAD &amp; SERVICES</a>
+                <a href="https://www.yes.my/faq/about-yes-4g/" tabindex="-1">FAQ</a>
+                <a href="https://www.yes.my/support/payment/" tabindex="-1">PAYMENT CHANNELS</a>
+                <a href="https://www.yes.my/tnc/general-tnc/" tabindex="-1">TERMS &amp; CONDITIONS</a>
+                <a href="http://www.ytl.com/privacypolicy.asp" tabindex="-1">PRIVACY POLICY</a>
+            </div>
+            <div aria-labelledby="menu-pills-selfcare-tab" class="tab-pane fade links" id="menu-pills-selfcare" role="tabpanel">
+                <a href="https://shop.yes.my/shop/activate.do" tabindex="-1">ACTIVATE SIM</a>
+                <a href="https://shop.yes.my/shop/trackOrder.do" tabindex="-1">TRACK MY ORDER</a>
+                <a href="https://selfcare.yes.my/myselfcare/doExpressPay.do" tabindex="-1">RELOAD &amp; PAY</a>
+                <a href="https://www.yes.my/support/checkprihatinstatus/">Check Prihatin Status</a>
+                <a href="https://selfcare.yes.my/myselfcare/doLogin.do" tabindex="-1"><b class="brand">LOGIN NOW!</b></a>
+            </div>
+        </div>
+    </div>
+    <div class="mobile-get-apps">
+        <span>GET THE APP</span>
+        <span class="menus menu-getapps">
+            <a aria-label="AppStore Download" href="https://itunes.apple.com/us/app/myyes4g/id1321262375?mt=8" rel="noopener" tabindex="-1" target="_blank"><svg class="ia ia-apple"><use xlink:href="#ia-apple"></use></svg></a>
+            <a aria-label="PlayStore Download" href="https://play.google.com/store/apps/details?id=my.yes.yes4g" rel="noopener" tabindex="-1" target="_blank"><svg class="ia ia-playstore"><use xlink:href="#ia-playstore"></use></svg></a>
+        </span>
+    </div>
+</nav>
+
+<nav class="nav-main">
+    <div class="nav-corporate">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section">
+                        <span class="menus menu-business"><a href="https://www.yes.my/biz/plans/internet-access/">Business</a>
+                            <a href="https://ytlfoundation.org/learn" target="_blank">Education</a>
+                            <a href="https://www.yes.my/who-we-are/">About Us</a>
+                        </span>
+                        <span aria-label="Menu" class="dropmenu btn-language">
+                            <a aria-label="Menu" data-original-title="" role="button" tabindex="0" title="">EN</a>
+                            <span class="selection selection-menu">
+                                <a href="https://www.yes.my/" language="">EN</a>
+                                <a href="https://www.yes.my/ms/" language="ms">BM</a>
+                                <a href="https://www.yes.my/zh-hans/" language="zh-hans">中文</a>
+                            </span>
+                        </span>
+                        <span class="menus menu-shop">
+                            <a class="i-locator" href="https://www.yes.my/support/store-locator/"><svg class="ia ia-pin"><use xlink:href="#ia-pin"></use></svg>
+                                <span>Store Locator</span>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-site">
+        <div class="container">
+            <div class="row">
+                <div class="col-2 col-lg-1 align-items-center d-flex">
+                    <a aria-label="Site Logo" class="site-logo" href="https://www.yes.my/" style="line-height: 34px; padding-top: 6px"><svg class="ia ia-yes"><use xlink:href="#ia-yes"></use></svg></a>
+                </div>
+
+                <div class="col-10 col-lg-11">
+                    <div class="section">
+                        <ul class="menus menu-site">
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-296"><a href="https://www.yes.my/whyyes/">WHY YES</a></li>
+                            <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-297"><a href="#">PLANS</a>
+                                <ul class="sub-menu">
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-298"><a href="https://www.yes.my/4g-lte-prepaid/"><span class="kasicolor">Kasi Up</span> Prepaid</a></li>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-299"><a href="https://www.yes.my/4g-lte-postpaid/"><span class="kasicolor">Kasi Up</span> Postpaid</a></li>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-300"><a href="https://www.yes.my/4g-broadband/"><span class="kasicolor">Kasi Up</span> Broadband</a></li>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-301"><a href="https://www.yes.my/kasiup/"><span class="kasicolor">Kasi Up</span> Refer &amp; Earn</a></li>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-302"><a href="https://www.yes.my/kasiupb40/"><span class="kasicolor">YES</span> PRIHATIN</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-303"><a href="https://www.yes.my/kasiup/">REFER &amp; EARN</a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-304"><a href="https://www.yes.my/kasiupb40/">YES PRIHATIN</a></li>
+                            <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-100 current_page_item menu-item-305"><a href="https://www.yes.my/faq/about-yes-4g/" aria-current="page">FAQ</a></li>
+                        </ul>
+                        <span class="menus menu-user">
+                            <a class="hidemobile" tabindex="0" role="button" id="toggleSearch"><svg class="ia ia-search"><use xlink:href="#ia-search"></use></svg></a>
+                            <span class="dropmenu hidemobile">
+                                <a role="button" tabindex="0" data-original-title="" title=""><svg class="ia ia-contact"><use xlink:href="#ia-contact"></use></svg></a>
+                                <span class="selection selection-menu text-uppercase">
+                                    <a id="menu-item-69" class="menu-item menu-item-type-custom menu-item-object-custom" href="https://shop.yes.my/shop/activate.do">Activate SIM</a> 
+                                    <a id="menu-item-70" class="menu-item menu-item-type-custom menu-item-object-custom" href="https://shop.yes.my/shop/trackOrder.do">Track My Order</a> 
+                                    <a id="menu-item-71" class="menu-item menu-item-type-custom menu-item-object-custom" href="https://selfcare.yes.my/myselfcare/doExpressPay.do">Reload &amp; Pay</a> 
+                                    <a id="menu-item-3011" class="menu-item menu-item-type-post_type menu-item-object-page" href="https://www.yes.my/support/checkprihatinstatus/">Check Prihatin Status</a> 
+                                    <a id="menu-item-72" class="highlight menu-item menu-item-type-custom menu-item-object-custom" href="https://selfcare.yes.my/myselfcare/doLogin.do">Login Now!</a> 
+                                </span>
+                            </span>
+                            <span class="dropmenu btn-language d-lg-none" aria-lable="Language Switcher">
+                                <a role="button" tabindex="0" aria-label="Language Switcher" data-original-title="" title="">EN</a>
+                                <span class="selection selection-menu">
+                                    <a href="https://www.yes.my/" language="en">EN</a>
+                                    <a href="https://www.yes.my/ms/" language="ms">BM</a>
+                                    <a href="https://www.yes.my/zh-hans/" language="zh-hans">中文</a>
+                                </span>
+                            </span>
+                            <span class="dropmenu btn-sidemenu" aria-label="Menu" data-original-title="" title="">
+                                <a role="button" tabindex="0" aria-label="Menu" data-original-title="" title=""><svg class="ia ia-burger"><use xlink:href="#ia-burger"></use></svg></a>
+                                <span class="selection selection-menu text-uppercase">
+                                    <a id="menu-item-124" class="menu-item menu-item-type-post_type menu-item-object-page" href="https://www.yes.my/roaming/">Roaming &amp; IDD</a> 
+                                    <a id="menu-item-123" class="menu-item menu-item-type-post_type menu-item-object-page" href="https://www.yes.my/rewards/deals/">Rewards</a> 
+                                    <a id="menu-item-122" class="menu-item menu-item-type-post_type menu-item-object-page" href="https://www.yes.my/supported-devices/">Supported Devices</a> 
+                                    <a id="menu-item-121" class="menu-item menu-item-type-post_type menu-item-object-page" href="https://www.yes.my/support/coverage/">Coverage</a> 
+                                    <a id="menu-item-120" class="menu-item menu-item-type-post_type menu-item-object-page" href="https://www.yes.my/support/speed-test/">Speed Test</a> 
+                                    <a id="menu-item-119" class="menu-item menu-item-type-post_type menu-item-object-page" href="https://www.yes.my/support/payment/">Payment Channels</a> 
+                                    <a id="menu-item-118" class="menu-item menu-item-type-post_type menu-item-object-page" href="https://www.yes.my/download-services/">Download &amp; Services</a> 
+                                    <a id="menu-item-117" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-100 current_page_item" href="https://www.yes.my/faq/about-yes-4g/">FAQ</a> 
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+
+
+                    
+                    <!-- <div class="section">
+                        <span class="menus menu-site">
+                            <a href="https://www.yes.my/whyyes/">WHY YES</a>
+                        </span>
+                        <div class="dropdown1 text-white font-weight-bold" href="https://www.yes.my/kasiup/" style="width: auto; font-weight: 600; color: white">
+                            <span class="menus menu-site">PLANS</span>
+                            <div class="dropdown-content">
+                                <span class="menus menu-site"><a href="https://www.yes.my/4g-lte-prepaid/">
+                                    <span class="kasicolor">Kasi Up</span>
+                                    <span class="linkt"> Prepaid</span></a>
+                                    <a href="https://www.yes.my/4g-lte-postpaid/">
+                                        <span class="kasicolor">Kasi Up</span>
+                                        <span class="linkt"> Postpaid</span>
+                                    </a>
+                                    <a href="https://www.yes.my/4g-broadband/">
+                                        <span class="kasicolor">Kasi Up</span>
+                                        <span class="linkt"> Broadband</span>
+                                    </a>
+                                    <a href="https://www.yes.my/kasiup/">
+                                        <span class="kasicolor">Kasi Up</span>
+                                        <span class="linkt"> Refer &amp; Earn</span>
+                                    </a>
+                                    <a href="https://www.yes.my/kasiupB40/">
+                                        <span class="kasicolor">Kasi Up</span>
+                                        <span class="linkt"> PRIHATIN</span>
+                                    </a>
+                                </span>
+                            </div>
+                            <span class="menus menu-site"> </span>
+                        </div>
+                        <span class="menus menu-site">
+                            <a href="https://www.yes.my/kasiup/">REFER &amp; EARN</a>
+                            <a href="https://www.yes.my/kasiupB40/">YES PRIHATIN</a>
+                            <a href="https://www.yes.my/faq/about-yes-4g/">FAQ</a>
+                        </span>
+                        <span class="menus menu-user">
+                            <a class="hidemobile" id="toggleSearch" role="button" tabindex="0"><svg class="ia ia-search"><use xlink:href="#ia-search"></use></svg></a>
+                            <span class="dropmenu hidemobile">
+                                <a role="button" tabindex="0"><svg class="ia ia-contact"><use xlink:href="#ia-contact"></use></svg></a>
+                                <span class="selection selection-menu">
+                                    <a href="https://shop.yes.my/shop/activate.do">ACTIVATE SIM</a>
+                                    <a href="https://shop.yes.my/shop/trackOrder.do">TRACK MY ORDER</a>
+                                    <a href="https://selfcare.yes.my/myselfcare/doExpressPay.do">RELOAD &amp; PAY</a>
+                                    <a class="highlight" href="https://selfcare.yes.my/myselfcare/doLogin.do" style="color: #fff">LOGIN NOW!</a>
+                                </span>
+                            </span>
+                            <span aria-label="Menu" class="dropmenu btn-language d-lg-none">
+                                <a aria-label="Menu" data-original-title="" role="button" tabindex="0" title="">EN</a>
+                                <span class="selection selection-menu">
+                                    <a href="https://www.yes.my/" language="">EN</a>
+                                    <a href="https://www.yes.my/ms/" language="ms">BM</a>
+                                    <a href="https://www.yes.my/zh-hans/" language="zh-hans">中文</a>
+                                </span>
+                            </span>
+                            <span aria-label="Menu" class="dropmenu btn-sidemenu">
+                                <a aria-label="Menu" role="button" tabindex="0"><svg class="ia ia-burger"><use xlink:href="#ia-burger"></use></svg></a>
+                                <span class="selection selection-menu">
+                                    <a href="https://www.yes.my/roaming/">ROAMING &amp; IDD</a>
+                                    <a href="https://www.yes.my/rewards/deals/">REWARDS</a>
+                                    <a href="https://www.yes.my/supported-devices/">SUPPORTED DEVICES</a>
+                                    <a href="https://www.yes.my/support/coverage/">COVERAGE</a>
+                                    <a href="https://www.yes.my/support/speed-test/">SPEED TEST</a>
+                                    <a href="https://www.yes.my/support/payment/">PAYMENT CHANNELS</a>
+                                    <a href="https://www.yes.my/download-services/">DOWNLOAD &amp; SERVICES</a>
+                                    <a href="https://www.yes.my/faq/about-yes-4g/">FAQ</a>
+                                </span>
+                            </span>
+                        </span>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="hover-search">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form action="https://www.yes.my/search" id="mysearch" method="get">
+                    <input id="sToken" name="sToken" type="hidden" value="nyUkgDUBlM+cq0WYJTSuTlkx7AEJ5Yoz" />
+                    <button class="but-trigger-search" title="Search" type="submit"><svg class="ia ia-search"><use xlink:href="#ia-search"></use></svg></button>
+                    <input class="search-field" id="queryStr" name="q" placeholder="Search" title="Search" type="text" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var $body = $("body");
+        var $scroller = $(document);
+
+        var SCROLLING_OFFSET_TOP = 10;
+        var scrolling = false;
+
+        $scroller
+            .scroll(function() {
+                if (scrolling && $(this).scrollTop() < SCROLLING_OFFSET_TOP) {
+                    $body.removeClass("scrolling");
+                    scrolling = false;
+                } else if (!scrolling && $(this).scrollTop() >= SCROLLING_OFFSET_TOP) {
+                    $body.addClass("scrolling");
+                    scrolling = true;
+                }
+            })
+            .scroll();
+
+        var $btn_sidemenu = $(".btn-sidemenu");
+
+        function toggleSideMenuPull(e) {
+            $("body").toggleClass("show-nav");
+
+            e.preventDefault();
+            return false;
+        }
+
+        function activate_sidemenu_dropdown() {
+            $btn_sidemenu.popover("enable");
+            $btn_sidemenu.off("click");
+        }
+
+        function activate_sidemenu_pull() {
+            $btn_sidemenu.popover("disable");
+            $btn_sidemenu.off("click");
+            $btn_sidemenu.on("click", toggleSideMenuPull);
+        }
+
+        $(window)
+            .resize(function() {
+                if ($(this).width() > 1024) {
+                    activate_sidemenu_dropdown();
+                } else {
+                    activate_sidemenu_pull();
+                }
+            })
+            .resize();
+
+        $(".nav-mobile .btn-close").click(function() {
+            $("body").removeClass("show-nav");
+        });
+    });
+</script>
+<!-- <script type="text/javascript">
+          $(".selection-menu a").click(function () {
+            window.location = "https://www.yes.my/zh-hans/whyyes";
+          });
+        </script> -->
