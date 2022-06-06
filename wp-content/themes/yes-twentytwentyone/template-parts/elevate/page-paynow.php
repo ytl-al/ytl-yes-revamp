@@ -812,13 +812,18 @@
                             .then((response) => {
                                 var data = response.data.data;
                                 self.orderResponse = data;
+                                if(response.data.status){
+                                    $('#displayOrderNumber').val(data.displayOrderNumber);
 
-                                $('#displayOrderNumber').val(data.displayOrderNumber);
+                                    elevate.lsData.YOSOrder = data;
+                                    elevate.updateElevateLSData();
 
-                                elevate.lsData.YOSOrder = data;
-                                elevate.updateElevateLSData();
+                                    self.initXpay();
+                                }else{
+                                    toggleOverlay(false);
+                                    toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, '+response.data.error)
+                                }
 
-                                self.initXpay();
                             })
                             .catch((error) => {
                                 var response = error.response;
