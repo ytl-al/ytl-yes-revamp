@@ -342,14 +342,12 @@ class ElevateApi
     public static function ca_verification(WP_REST_Request $request)
     {
 
-        $mykad = $request['mykad'];
+        /*$mykad = $request['mykad'];
         $name = $request['name'];
         $email = $request['email'];
         $phone = $request['phone'];
         $guid = $request['guid'];
-        /*$front_url = $request['front_url'];
-        $back_url = $request['back_url'];
-        $selfievideo = $request['selfievideo'];*/
+
         $PartneReferenceID = $request['PartneReferenceID'];
         $OCRConfidenceScore = round($request['OCRConfidenceScore']/100,2);
 
@@ -404,8 +402,8 @@ class ElevateApi
                 $return['status'] = 0;
             }
             $return['data'] = $data;
-        }
-
+        }*/
+        $return['status'] = 1;
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
@@ -415,7 +413,7 @@ class ElevateApi
     {
 
 
-        $token = self::get_token();
+        /*$token = self::get_token();
 
 		$params = array(
             'myKadNumber' =>$request['mykad'],
@@ -455,8 +453,8 @@ class ElevateApi
                 $return['status'] = 0;
             }
             $return['data'] = $data;
-        }
-
+        }*/
+        $return['status'] = 1;
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
@@ -952,7 +950,7 @@ class ElevateApi
             'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
-		 
+
 		$apiSetting = \Inc\Base\Model::getAPISettings();
         $api_url = $apiSetting['url'] . self::api_order_create.'?id='.$request['id'];
 
@@ -1496,7 +1494,7 @@ class ElevateApi
 	public static function delete_prequalified_customer(WP_REST_Request $request){
 				$id = $request['id'];
 				if($id){
-					$params = array( 
+					$params = array(
 					);
 
 					$token = self::get_token();
@@ -1520,16 +1518,16 @@ class ElevateApi
 						$return['status'] = 0;
 						$return['error'] = "Cannot connect to API server";
 					} else if ($request['response']['code'] != 200) {
-						if($request['response']['code'] == 204){ 
+						if($request['response']['code'] == 204){
 							$data = json_decode($request['body'], true);
 							$return['status'] = 1;
 							$return['data'] = $data;
 						}else{
 							$code = $request['response']['code'];
 							$return['status'] = 0;
-							$return['error'] = @$request['response'];	
+							$return['error'] = @$request['response'];
 						}
-						
+
 					} else {
 						$code = $request['response']['code'];
 						$data = json_decode($request['body'], true);
