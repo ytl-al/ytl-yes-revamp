@@ -373,7 +373,8 @@
                     inphone: '',
                     email: '',
                     alternative_name: '',
-                    alternative_phone: ''
+                    alternative_phone: '',
+                    registrationChannel: 'WEB'
                 },
                 customer:{
                     id:'',
@@ -802,6 +803,7 @@
                     var param = self.deliveryInfo;
                     param.uid = self.customer.id;
                     param.productId = self.productId;
+                    param.registrationChannel = self.eligibility.registrationChannel;
                     if(self.dealer){
                     param.referralCode = self.dealer.referral_code;
                     param.dealerUID = self.dealer.dealer_id;

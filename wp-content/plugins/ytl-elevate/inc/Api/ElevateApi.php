@@ -550,6 +550,7 @@ class ElevateApi
 		if(!isset($request['referralCode'])) $request['referralCode'] = '';
 		if(!isset($request['dealerUID'])) $request['dealerUID'] = '';
 		if(!isset($request['dealerCode'])) $request['dealerCode'] = '';
+		if(!isset($request['registrationChannel'])) $request['registrationChannel'] = 'WEB';
 
         $cardtype = ($request['cardtype'])?$request['cardtype']:1;
         $mykad = $request['mykad'];
@@ -578,7 +579,7 @@ class ElevateApi
             "referralCode"=> $request['referralCode'],
             "dealerUID"=> $request['dealerUID'],
             "dealerCode"=> $request['dealerCode'],
-            "registrationChannel" => "WEB",
+            "registrationChannel" => $request['registrationChannel'],
             "registrationDate" => date("c"),
             "productSelected" => $productId,
             "orderNumber" => "",
@@ -635,6 +636,7 @@ class ElevateApi
 		if(!isset($request['referralCode'])) $request['referralCode'] = '';
 		if(!isset($request['dealerUID'])) $request['dealerUID'] = '';
 		if(!isset($request['dealerCode'])) $request['dealerCode'] = '';
+		if(!isset($request['registrationChannel'])) $request['registrationChannel'] = 'WEB';
 
         $id = $request['uid'];
 
@@ -659,7 +661,7 @@ class ElevateApi
             "referralCode"=> $request['referralCode'],
             "dealerUID"=> $request['dealerUID'],
             "dealerCode"=> $request['dealerCode'],
-            "registrationChannel" => "WEB",
+            "registrationChannel" => $request['registrationChannel'],
             "registrationDate" => date("c"),
             "productSelected" => $request['productId'],
             "orderNumber" => "",
@@ -1460,7 +1462,7 @@ class ElevateApi
             'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
-
+		//print_r($args);print_r($request); die($api_url);
         $request = wp_remote_post($api_url, $args);
 		//echo '<pre>';
 		//echo json_encode($params);

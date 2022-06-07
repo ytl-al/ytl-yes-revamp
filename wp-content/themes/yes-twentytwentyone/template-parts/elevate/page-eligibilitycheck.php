@@ -219,7 +219,8 @@
                     inphone: '',
                     email: '',
                     alternative_name: '',
-                    alternative_phone: ''
+                    alternative_phone: '',
+                    registrationChannel: 'WEB',
                 },
                 customer:{
                     id:'',
@@ -306,7 +307,7 @@
                     var params = {
                         "mykad": self.eligibility.mykad.trim(),
                         "plan_type": elevate.lsData.product.selected.plan.planType,
-                        "bundleId": self.productId,
+                        "bundleId": elevate.lsData.product.selected.productCode,
                     };
 
 					$('#status_mesage').html('Checking eligibility...');
