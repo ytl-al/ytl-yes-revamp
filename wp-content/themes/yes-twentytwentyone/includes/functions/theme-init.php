@@ -292,6 +292,7 @@ if (!function_exists('yes_language_switcher') && function_exists('icl_get_langua
         $languages      = icl_get_languages('skip_missing=0&orderby=custom&order=asc');
         $langs          = '';
         $active_lang    = '';
+        $active_lang_mobile = '';
         if (1 < count($languages)) {
             foreach ($languages as $language) {
                 switch ($language['code']) {
