@@ -1178,7 +1178,7 @@ class ElevateApi
 	public static function get_pre_register_user(WP_REST_Request $request){
         $uid = $request['id'];
         $token = self::get_token();
-
+        $params = array();
         $args = [
             'headers' => array(
                 'Accept' => 'text/plain',
