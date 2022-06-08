@@ -678,7 +678,7 @@
                             .catch((error) => {
                                 var response = error.response;
                                 self.checkPaymentStatusCount++;
-                                if (typeof response != 'undefined' && self.checkPaymentStatusCount > 4) {
+                                if (typeof response != 'undefined' && self.checkPaymentStatusCount > 24) {
                                     var data = response.data;
                                     var errorMsg = '';
                                     if (error.response.status == 500 || error.response.status == 503) {
@@ -719,7 +719,7 @@
                                 mainwin.focus();
                                 mainwin.close();
                             }
-                             self.redirectThankYou();
+                             // self.redirectThankYou();
                         }, 300000);
 
                         mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
