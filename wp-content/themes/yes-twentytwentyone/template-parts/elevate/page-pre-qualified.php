@@ -122,7 +122,7 @@
         </section>
     <!-- Banner End -->
 	<input type="hidden" value="" id="displayOrderNumber"/>
-	
+
     <section id="cart-body" style="display: none;">
         <div class="container " style="border: 0">
             <div id="main-vue">
@@ -649,8 +649,8 @@
 									self.allowSubmit = true;
 									self.deliveryInfo.mykad = self.deliveryInfo.nric;
 									self.deliveryInfo.address = self.deliveryInfo.addressLine1;
-									self.deliveryInfo.postcode = self.deliveryInfo.postCode; 
-									
+									self.deliveryInfo.postcode = self.deliveryInfo.postCode;
+
 									self.deliveryInfo.msisdnToUpgrade = self.getMsisdn(self.deliveryInfo.msisdnToUpgrade);
 
 									self.deliveryInfo.stateCode = (self.deliveryInfo.state) ? self.getStateCode(self.deliveryInfo.state) : '';
@@ -719,18 +719,18 @@
 							break;
 						default:
 							tel = phone;
-							break;						
+							break;
 					}
 					return tel;
-					
+
 				},
-				
+
 				getMsisdn: function(msisdn){
-					 
+
 					 var tmp = msisdn.split('@');
 					 return tmp[0];
 				},
-				
+
 				elevateCustomer: function () {
                     var self = this;
                     var params = self.deliveryInfo;
@@ -883,7 +883,7 @@
 									self.ajaxCreateYOSOrderFree();
 								}else{
 									$('#status_mesage').html('Please make payment...');
-									elevate.redirectToPage('paynow-pre-register');
+									elevate.redirectToPage('paynow-pre-qualified');
 								}
                             }else{
                                 toggleOverlay(false);
@@ -1088,7 +1088,7 @@
 									if(self.deliveryInfo.isFree){
 										self.ajaxCreateYOSOrderFree();
 									}else{
-										elevate.redirectToPage('paynow-pre-register');
+										elevate.redirectToPage('paynow-pre-qualified');
 									}
 								}else{
 									self.elevateContract();
