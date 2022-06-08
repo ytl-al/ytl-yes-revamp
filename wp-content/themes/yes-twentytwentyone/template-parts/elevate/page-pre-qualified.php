@@ -831,6 +831,7 @@
                         var self = this;
                         var params = self.deliveryInfo;
                         params.productId = self.orderSummary.product.selected.productCode;
+			params.registrationChannel = "WEB-PREQUALIFIED";
 
                         toggleOverlay();
                         $('#status_mesage').html('Process customer...');
