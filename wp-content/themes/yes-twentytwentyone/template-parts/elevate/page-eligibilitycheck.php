@@ -60,7 +60,7 @@
                     <div class="col-md-7 p-5">
                         <form class="needs-validation" novalidate>
                             <div class="mt-2 mb-2">
-                                <h2 class="subtitle">Pre-registration Details</h2>
+                                <h2 class="subtitle">Eligibility Check</h2>
                                 <p class="sub mb-4">Please fill in your MyKad/MyTentera information, mobile<br> number and email
                                     to proceed</p>
 
