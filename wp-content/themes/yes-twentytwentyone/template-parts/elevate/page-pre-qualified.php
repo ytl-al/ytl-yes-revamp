@@ -135,166 +135,166 @@
 
                     <div class="layer-selectPlan">
                         <div class="row flex-nowrap flex-xl-wrap gx-5">
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle836" >
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle876" >
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Basic</h2>
                                     <h3>VIVO Y55+ (6+128GB)</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/site/wp-content/uploads/2022/05/vivo-y55.png"/></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(836)" data-productid="836">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(876)" data-productid="876">Select</a></p>
                                 </div>
                             </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle837" >
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle877" >
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Basic</h2>
                                     <h3>VIVO Y55+ (6+128GB)</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/site/wp-content/uploads/2022/05/vivo-y55.png" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(837)" data-productid="837">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(877)" data-productid="877">Select</a></p>
                                 </div>
                             </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle838" >
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle878" >
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Standard</h2>
                                     <h3>Xiaomi Redmi Note 11 Pro 5G</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/XIAOMIREDMINOTE11PROGray.png" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(838)" data-productid="838">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(878)" data-productid="878">Select</a></p>
                                 </div>
                             </div>
 
 
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle839" >
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle879" >
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Standard</h2>
                                     <h3>Xiaomi Redmi Note 11 Pro 5G</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/XIAOMIREDMINOTE11PROBlue.png" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(839)" data-productid="839">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(879)" data-productid="879">Select</a></p>
                                 </div>
                             </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle840" >
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle880" >
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Standard</h2>
                                     <h3>Samsung Galaxy A33 5G 8+128GB</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA33Blue.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(840)" data-productid="840">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(880)" data-productid="880">Select</a></p>
                                 </div>
                             </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle841">
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle881">
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Standard</h2>
                                     <h3>Samsung Galaxy A33 5G 8+128GB</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA33Black.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(841)" data-productid="841">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(881)" data-productid="881">Select</a></p>
                                 </div>
                             </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle842">
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle882">
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Standard</h2>
                                     <h3>Samsung Galaxy A33 5G 8+128GB</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA33Peach.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(842)" data-productid="842">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(882)" data-productid="882">Select</a></p>
                                 </div>
                             </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle843">
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle883">
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Standard</h2>
                                     <h3>Samsung Galaxy A33 5G 8+128GB</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA33White.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(843)" data-productid="842">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(883)" data-productid="883">Select</a></p>
                                 </div>
                             </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle844">
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle884">
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Premium</h2>
                                     <h3>Oppo Reno 7 5G</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/OPPORENO7Black.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(844)" data-productid="844">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(884)" data-productid="884">Select</a></p>
                                 </div>
                             </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle845">
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle885">
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Premium</h2>
                                     <h3>Oppo Reno 7 5G</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/OPPORENO7Blue.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(845)" data-productid="845">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(885)" data-productid="885">Select</a></p>
                                 </div>
                             </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle846">
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle886">
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Premium</h2>
                                     <h3>Samsung Galaxy A53 5G 8+256GB</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA53Blue.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(846)" data-productid="846">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(886)" data-productid="886">Select</a></p>
                                 </div>
                             </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle847">
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle887">
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Premium</h2>
                                     <h3>Samsung Galaxy A53 5G 8+256GB</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA53Black.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(847)" data-productid="847">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(887)" data-productid="887">Select</a></p>
                                 </div>
                             </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle848">
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle888">
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Premium</h2>
                                     <h3>Samsung Galaxy A53 5G 8+256GB</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA53Peach.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(848)" data-productid="848">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(888)" data-productid="888">Select</a></p>
                                 </div>
                             </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle849">
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle889">
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Premium</h2>
                                     <h3>Samsung Galaxy A53 5G 8+256GB</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA53White.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(849)" data-productid="849">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(889)" data-productid="889">Select</a></p>
                                 </div>
                             </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle850">
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle890">
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Ultra</h2>
                                     <h3>Vivo X80 (12+256GB)</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/VIVOX80Blue.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(850)" data-productid="850">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(890)" data-productid="890">Select</a></p>
                                 </div>
                             </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle851">
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle891">
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Ultra</h2>
                                     <h3>Vivo X80 (12+256GB)</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/VIVOX80Black.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(851)" data-productid="851">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(891)" data-productid="891">Select</a></p>
                                 </div>
                             </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle852">
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle892">
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Ultra</h2>
                                     <h3>Samsung Galaxy S22 5G 8+256GB</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGS22Black.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(852)" data-productid="852">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(892)" data-productid="892">Select</a></p>
                                 </div>
                             </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle853">
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle893">
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Ultra</h2>
                                     <h3>Samsung Galaxy S22 5G 8+256GB</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGS22White.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(853)" data-productid="853">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(893)" data-productid="893">Select</a></p>
                                 </div>
                             </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle854">
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle894">
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Ultra</h2>
                                     <h3>Samsung Galaxy S22 5G 8+256GB</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGS22Green.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(854)" data-productid="854">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(894)" data-productid="894">Select</a></p>
                                 </div>
                             </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle855">
+                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle895">
                                 <div class="layer-planDevice">
                                     <h2>Yes Infinite+ Ultra</h2>
                                     <h3>Samsung Galaxy S22 5G 8+256GB</h3>
                                     <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGS22Pink.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(855)" data-productid="855">Select</a></p>
+                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(895)" data-productid="895">Select</a></p>
                                 </div>
                             </div>
                         </div>
