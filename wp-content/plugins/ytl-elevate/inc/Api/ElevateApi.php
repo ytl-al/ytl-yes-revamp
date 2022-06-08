@@ -342,7 +342,7 @@ class ElevateApi
     public static function ca_verification(WP_REST_Request $request)
     {
 
-        /*$mykad = $request['mykad'];
+        $mykad = $request['mykad'];
         $name = $request['name'];
         $email = $request['email'];
         $phone = $request['phone'];
@@ -402,8 +402,7 @@ class ElevateApi
                 $return['status'] = 0;
             }
             $return['data'] = $data;
-        }*/
-        $return['status'] = 1;
+        }
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
@@ -413,7 +412,7 @@ class ElevateApi
     {
 
 
-        /*$token = self::get_token();
+        $token = self::get_token();
 
 		$params = array(
             'myKadNumber' =>$request['mykad'],
@@ -453,8 +452,7 @@ class ElevateApi
                 $return['status'] = 0;
             }
             $return['data'] = $data;
-        }*/
-        $return['status'] = 1;
+        }
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;

@@ -306,80 +306,11 @@
                     self.allowSubmit = true
                 },
 
-                submit_contract: function () {
-                    var self = this;
-                    var params = self.eligibility;
-                    params.orderId = self.orderSummary.orderInfo.id;
-                    params.contract = self.orderSummary.product.selected.contract;
-                    toggleOverlay();
-                    axios.post(apiEndpointURL_elevate + '/contract', params)
-                        .then((response) => {
-                            var data = response.data;
-                            if (data.status == 1) {
-                                //save contract info
-                                self.contract = data.data;
-
-                                elevate.lsData.contract = data.data;
-                                elevate.updateElevateLSData();
-                                toggleOverlay();
-                                //elevate.redirectToPage('paynow');
-                                elevate.redirectToPage('thanks');
-                            } else {
-                                toggleOverlay(false);
-                                toggleModalAlert('Error', 'Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
-                            }
-                            toggleOverlay(false);
-
-                        })
-                        .catch((error) => {
-                            toggleOverlay(false);
-                            console.log(error);
-                        });
-
-                },
-
-                makeOrder: function () {
-                    var self = this;
-                    var params = self.customer;
-                    params.productSelected = self.orderSummary.product.selected.plan.planId;
-                    params.referralCode = self.dealer.referral_code;
-                    params.dealerUID = self.dealer.dealer_id;
-                    params.dealerCode = self.dealer.dealer_code;
-
-                    toggleOverlay();
-                    axios.post(apiEndpointURL_elevate + '/order/create', params)
-                        .then((response) => {
-                            var data = response.data;
-                            if (data.status == 1) {
-                                //save contract info
-                                self.orderSummary.orderInfo = data.data;
-                                elevate.lsData.orderInfo = data.data;
-                                elevate.updateElevateLSData();
-
-                                self.submit_contract();
-                            } else {
-                                toggleOverlay(false);
-                                toggleModalAlert('Error', 'Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
-                            }
-                            toggleOverlay(false);
-
-                        })
-                        .catch((error) => {
-                            toggleOverlay(false);
-                            console.log(error);
-                        });
-                },
-
                 goNext: function () {
                     var self = this;
                     if(self.allowSubmit){
                         toggleOverlay();
-                        //elevate.redirectToPage('contract');
-                        if (self.orderSummary.orderInfo.id) {
-                            self.submit_contract();
-                        } else {
-                            self.makeOrder();
-                        }
+                        elevate.redirectToPage('contract');
                     }
                 }
 

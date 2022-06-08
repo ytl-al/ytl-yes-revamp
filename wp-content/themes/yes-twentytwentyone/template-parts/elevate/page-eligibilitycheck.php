@@ -400,7 +400,7 @@
                             } else {
                                 toggleOverlay(false);
                                 $('#status_mesage').html('');
-                                toggleModalAlert('Error','Dear valued customer,<br>Thank you for your interest. Our records show you have already registered. We will get in touch with you after the 9th of June.',"elevate.redirectToPage('eligibility-failure')")
+                                toggleModalAlert('Error','Dear valued customer,<br>Your submission was not successful as you already have an existing installment plan that is currently active.',"elevate.redirectToPage('eligibility-failure')")
                             }
                         })
                         .catch((error) => {
