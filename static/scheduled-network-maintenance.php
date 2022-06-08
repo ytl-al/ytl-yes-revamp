@@ -3,7 +3,7 @@
 <?php 
     $array = $arr_keys = array();
     $i = 0;
-    $file_to_read = fopen('https://www.yes.my/shared/maintenance-network-list.csv', 'r');
+    $file_to_read = fopen('https://docs.google.com/spreadsheets/d/e/2PACX-1vSNCFsI3DH0j8XYetf8PsuZvFv2SRdOu-gPL_lp8Y11H8vdK0kfzJX8oxVnQIbBlg/pub?gid=1667049903&single=true&output=csv', 'r');
     if ($file_to_read !== FALSE) {
         while (($data = fgetcsv($file_to_read, 1000, ',')) !== FALSE) {
             if (empty($arr_keys)) {

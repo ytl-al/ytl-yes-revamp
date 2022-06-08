@@ -103,6 +103,9 @@ define('STEP_URL', '');
 define('STEP_USERNAME', '');
 define('STEP_PASSWORD', '');
 
+define('FP_SCHEDULED_NETWORK_MAINTENANCE', 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSNCFsI3DH0j8XYetf8PsuZvFv2SRdOu-gPL_lp8Y11H8vdK0kfzJX8oxVnQIbBlg/pub?gid=1667049903&single=true&output=csv');
+define('FP_STORE_LOCATIONS', 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQI-x7j9XeZ0lmQx4tFI0nnup0du20jq9YQXtnUPdzsOWAAGA9dm0OEyAskIB6BuQ/pub?gid=349852332&single=true&output=csv');
+
 
 /* That's all, stop editing! Happy publishing. */
 

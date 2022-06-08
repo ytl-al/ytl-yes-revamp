@@ -202,11 +202,358 @@ if (!function_exists('display_widget_content')) {
             'widget_id' => FALSE
         ), $atts));
 
-        ob_start(); 
-        dynamic_sidebar($widget_id); 
-        $widget_content = ob_get_clean(); 
-        $html = $widget_content; 
+        ob_start();
+        dynamic_sidebar($widget_id);
+        $widget_content = ob_get_clean();
+        $html = $widget_content;
         return $html;
     }
     add_shortcode('yes_display_widget', 'display_widget_content');
+}
+
+
+if (!function_exists('generate_store_locations')) {
+    /**
+     * Function generate_store_locations()
+     * Function to register shortcode to generate the store location list
+     * 
+     * @since    1.2.1
+     */
+    function generate_store_locations()
+    {
+        $array = $arr_keys = array();
+        $i = 0;
+        $file_to_read = fopen(FP_STORE_LOCATIONS, 'r');
+        if ($file_to_read !== FALSE) {
+            while (($data = fgetcsv($file_to_read, 0, ',')) !== FALSE) {
+                if (empty($arr_keys)) {
+                    $arr_keys = $data;
+                    continue;
+                }
+                $service_string = '';
+                foreach ($data as $key => $value) {
+                    $service_string = build_service_string($service_string, $arr_keys[$key], $value);
+
+                    if ($key != '0') $array[$i][$arr_keys[$key]] = $value;
+                }
+                $array[$i]['Services'] = $service_string;
+                $i++;
+            }
+            if (!feof($file_to_read)) {
+                // echo 'Error: unexpected fgets() fail\n';
+            }
+            fclose($file_to_read);
+        }
+
+        $arr_list = [];
+        if ($array) {
+            foreach ($array as $list) {
+                if ($list['State'] && $list['Address'] && $list['Is Active'] == 'Yes' && $list['Latitude'] && $list['Longitude']) {
+                    $arr_list[$list['State']][] = $list;
+                }
+            }
+        }
+
+        $html_list  = '';
+
+        foreach ($arr_list as $state => $stores) {
+            $state_name     = ucwords(strtolower($state));
+            $html_list      .= '            <div class="col-12 mb-4 layer-state" data-state="' . strtolower($state) . '" data-aos="fade-up" data-aos-duration="500">
+                                                <h1 class="mb-4">' . $state_name . '</h1>';
+            foreach ($stores as $data) {
+                $services       = $data['Services'];
+                $store_type     = $data['Store Type'];
+                $store_brand    = ($data['Brand']) ? $data['Brand'] : '';
+                $store_name     = ($store_brand) ? $data['Store Name'] . " [" . $store_brand . "]" : $data['Store Name'];
+                $store_address  = $data['Address'];
+                $operating_hour = $data['Operation Hour'];
+                $explode_hours  = explode(';', $operating_hour);
+                $link_waze      = "https://www.waze.com/ul?ll=" . $data['Latitude'] . "%2C" . $data['Longitude'] . "&amp;navigate=yes";
+                $link_gmap      = "https://www.google.com/maps/search/?api=1&amp;query=" . $data['Latitude'] . "%2C" . $data['Longitude'];
+
+                $class_store_type = '';
+                switch ($store_type) {
+                    case 'OEM Store':
+                        $class_store_type = 'oem-color';
+                        break;
+                    case 'MyNews':
+                        $class_store_type = 'red';
+                        break;
+                    default;
+                }
+
+                $html_hours = '';
+                if ($operating_hour != '') {
+                    $html_hours .= '                        <p class="mb-0 time">';
+                    $i = 0;
+                    foreach ($explode_hours as $hours) {
+                        $html_hours     .= '                    <span class="iconify align-middle" data-icon="akar-icons:clock"></span> ' . $hours;
+                        if ($i != count($explode_hours)) $html_hours .= '<br />';
+                        $i++;
+                    }
+                    $html_hours .= '                        </p>';
+                }
+
+                $html_list  .= '                <div class="store-box mb-3" data-services="' . $services . '">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <h2 class="mb-3 ' . $class_store_type . '">' . $store_type . '</h2>
+                                                            <h3 class="mb-3">' . $store_name . '</h3>
+                                                        </div>
+                                                        <div class="col-12 col-lg-8 col-xxl-9 mb-5 mb-lg-0">
+                                                            <p class="mb-3">' . $store_address . '</p>
+                                                            ' . $html_hours . '
+                                                            <!-- <p class="phone d-none"><a href="tel:+6018-3330000">+60 18-333 0000</a></p> -->
+                                                        </div>
+                                                        <div class="col-12 col-lg-4 col-xxl-3 mt-auto">
+                                                            <a href="' . $link_waze . '" class="map-btn mb-3" target="_blank" rel="noopener"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/01/icon-waze.png"> Waze</a>
+                                                            <a href="' . $link_gmap . '" class="map-btn" target="_blank" rel="noopener"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/01/icon-gmap.png?"> Google Maps</a>
+                                                        </div>
+                                                    </div>
+                                                </div>';
+            }
+
+            $html_list      .= '                <div class="layer-listBoxNoResults is-hidden">
+                                                    <h3>No results</h3>
+                                                </div>
+                                            </div>';
+        }
+
+        $html       = ' <!-- Store Locations Start -->
+                        <section id="store-locations">
+                            <div class="filter-container sticky-top">
+                                <div class="container">
+                                    <div class="row justify-content-lg-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                                        <div class="col-12 col-lg-8">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-4 mb-2 mb-lg-0">
+                                                    <div class="dropdown">
+                                                        <button class="btn filter-drop dropdown-toggle" type="button" id="dropdownStates" data-bs-toggle="dropdown" aria-expanded="false">All States</button>
+                                                        <ul class="dropdown-menu states" aria-labelledby="dropdownStates" data-filter-type="state">
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBoxAll" data-filter-type="state" id="checkall" type="checkbox" value="All" checked /> <span>All</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox state" type="checkbox" value="perlis" data-state-name="Perlis" checked /> <span>Perlis</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox state" type="checkbox" value="terrengganu" data-state-name="Terengganu" checked /> <span>Terrengganu</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox state" type="checkbox" value="kedah" data-state-name="Kedah" checked /> <span>Kedah</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox state" type="checkbox" value="pulau pinang" data-state-name="Pulau Pinang" checked /> <span>Pulau Pinang</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox state" type="checkbox" value="perak" data-state-name="Perak" checked /> <span>Perak</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox state" type="checkbox" value="kuala lumpur" data-state-name="Kuala Lumpur" checked /> <span>Kuala Lumpur</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox state" type="checkbox" value="negeri sembilan" data-state-name="Negeri Sembilan" checked /> <span>Negeri Sembilan</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox state" type="checkbox" value="melaka" data-state-name="Melaka" checked /> <span>Melaka</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox state" type="checkbox" value="johor" data-state-name="Johor" checked /> <span>Johor</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox state" type="checkbox" value="pahang" data-state-name="Pahang" checked /> <span>Pahang</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox state" type="checkbox" value="kelantan" data-state-name="Kelantan" checked /> <span>Kelantan</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox state" type="checkbox" value="sabah" data-state-name="Sabah" checked /> <span>Sabah</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox state" type="checkbox" value="selangor" data-state-name="Selangor" checked /> <span>Selangor</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox state" type="checkbox" value="sarawak" data-state-name="Sarawak" checked /> <span>Sarawak</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox state" type="checkbox" value="labuan" data-state-name="Labuan" checked /> <span>Labuan</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check mb-0"><label><input class="cardCheckBox state" type="checkbox" value="putrajaya" data-state-name="Putrajaya" checked /> <span>Putrajaya</span></label></div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-lg-6">
+                                                    <div class="dropdown">
+                                                        <button class="btn filter-drop dropdown-toggle" type="button" id="dropdownProducts" data-bs-toggle="dropdown" aria-expanded="false">All Products &amp; Services</button>
+                                                        <ul class="dropdown-menu" aria-labelledby="dropdownProducts" data-filter-type="service">
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBoxAll" type="checkbox" value="All" data-filter-type="service" checked /> All</label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox service" type="checkbox" value="postpaid-activations" data-service-name="Postpaid Activations" checked /> <span>Postpaid Activations</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox service" type="checkbox" value="prepaid-activations" data-service-name="Prepaid Activations" checked /> <span>Prepaid Activations</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox service" type="checkbox" value="postpaid-bill-payment" data-service-name="Postpaid Bill Payment" checked /> <span>Postpaid Bill Payment</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox service" type="checkbox" value="prepaid-topup" data-service-name="Prepaid Top Up" checked /> <span>Prepaid Top Up</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox service" type="checkbox" value="prepaid-reload-card" data-service-name="Prepaid Reload Card" checked /> <span>Prepaid Reload Card</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox service" type="checkbox" value="device-sales" data-service-name="Yes Device Sales Only" checked /> <span>Yes Device Sales Only</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox service" type="checkbox" value="debit-online" data-service-name="Auto Debit Application (Online)" checked /> <span>Auto Debit Application (Online)</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox service" type="checkbox" value="change-details" data-service-name="Change of Customer Details" checked /> <span>Change of Customer Details</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox service" type="checkbox" value="trouble-shooting" data-service-name="Yes Device Troubleshooting" checked /> <span>Yes Device Troubleshooting</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox service" type="checkbox" value="device-configuration" data-service-name="Yes Device Configuration" checked /> <span>Yes Device Configuration</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox service" type="checkbox" value="faulty-device" data-service-name="Faulty Device Replacement (Yes Device Only)" checked /> <span>Faulty Device Replacement (Yes Device Only)</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox service" type="checkbox" value="service-query" data-service-name="Service Query" checked /> <span>Service Query</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox service" type="checkbox" value="termination" data-service-name="Termination" checked /> <span>Termination</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox service" type="checkbox" value="dealer-mynews" data-service-name="Dealer MyNews" checked /> <span>Dealer MyNews</span></label></div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="form-check"><label><input class="cardCheckBox service" type="checkbox" value="oem-stores" data-service-name="OEM Stores" checked /> <span>OEM Stores</span></label></div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container mb-5">
+                                <div class="row justify-content-lg-center">
+                                    <div class="col-12 col-lg-8">
+                                        <div class="row mt-5">' . $html_list . '</div>
+                                        <div class="row mb-4 mt-5 is-hidden" id="row-noResultsAll">
+                                            <div class="col-12">
+                                                <div class="layer-listBoxNoResults mb-0">
+                                                    <h3>No results</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Store Locations End -->';
+
+        return $html;
+    }
+
+
+    /**
+     * Function build_service_string()
+     * Function to build the service strings from the excel list
+     * 
+     * @since    1.2.1
+     */
+    function build_service_string($service_string = '', $key = '', $value = '')
+    {
+        if (strpos($key, 'Service - ') !== false && $value == 'Yes') {
+            switch ($key) {
+                case 'Service - Postpaid Activation':
+                    if ($service_string != '') $service_string .= ',';
+                    $service_string .= 'postpaid-activation';
+                    break;
+                case 'Service - Prepaid Activation':
+                    if ($service_string != '') $service_string .= ',';
+                    $service_string .= 'prepaid-activation';
+                    break;
+                case 'Service - Postpaid Bill Payment':
+                    if ($service_string != '') $service_string .= ',';
+                    $service_string .= 'postpaid-bill-payment';
+                    break;
+                case 'Service - Prepaid Top Up':
+                    if ($service_string != '') $service_string .= ',';
+                    $service_string .= 'prepaid-topup';
+                    break;
+                case 'Service - Prepaid Reload Card':
+                    if ($service_string != '') $service_string .= ',';
+                    $service_string .= 'prepaid-reload-card';
+                    break;
+                case 'Service - Yes Device Sales Only':
+                    if ($service_string != '') $service_string .= ',';
+                    $service_string .= 'device-sales';
+                    break;
+                case 'Service - Auto Debit Application (Online)':
+                    if ($service_string != '') $service_string .= ',';
+                    $service_string .= 'debit-online';
+                    break;
+                case 'Service - Change of Customer Details':
+                    if ($service_string != '') $service_string .= ',';
+                    $service_string .= 'change-details';
+                    break;
+                case 'Service - Yes Device Troubleshooting':
+                    if ($service_string != '') $service_string .= ',';
+                    $service_string .= 'trouble-shooting';
+                    break;
+                case 'Service - Yes Device Configuration':
+                    if ($service_string != '') $service_string .= ',';
+                    $service_string .= 'device-configuration';
+                    break;
+                case 'Service - Faulty Device Replacement (Yes Device Only)':
+                    if ($service_string != '') $service_string .= ',';
+                    $service_string .= 'faulty-device';
+                    break;
+                case 'Service - Service Query':
+                    if ($service_string != '') $service_string .= ',';
+                    $service_string .= 'service-query';
+                    break;
+                case 'Service - Termination':
+                    if ($service_string != '') $service_string .= ',';
+                    $service_string .= 'termination';
+                    break;
+                default;
+            }
+        }
+
+        if ($key == 'Store Type') {
+            switch ($value) {
+                case 'Yes Store': 
+                    if ($service_string != '') $service_string .= ',';
+                    $service_string .= 'yes-stores';
+                    break;
+                case 'Yes Store & Service Centre': 
+                    if ($service_string != '') $service_string .= ',';
+                    $service_string .= 'yes-stores-service-centre';
+                    break;
+                case 'MyNews':
+                    if ($service_string != '') $service_string .= ',';
+                    $service_string .= 'dealer-mynews';
+                    break;
+                case 'OEM Store':
+                    if ($service_string != '') $service_string .= ',';
+                    $service_string .= 'oem-stores';
+                    break;
+                default;
+            }
+        }
+        return $service_string;
+    }
+
+    add_shortcode('yessc_store_locations_list', 'generate_store_locations');
 }
