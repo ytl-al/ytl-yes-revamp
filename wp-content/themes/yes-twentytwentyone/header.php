@@ -37,11 +37,11 @@
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-71589028-2"></script>
 	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
 
-	gtag('config', 'UA-71589028-2');
+		gtag('config', 'UA-71589028-2');
 	</script> -->
 	<!-- END Global site tag (gtag.js) - Google Analytics -->
 
@@ -53,39 +53,29 @@
 	})(window,document,'script','dataLayer','GTM-T8K5HSR');</script> -->
 	<!-- END Google Tag Manager -->
 
-	<!-- Resulticks -->
-	<!-- <script resulconfig="/resulticks/resulconfig.json" src="https://sdk.rsut.io/handlers/6bed952814264982be0edbc93fde1501.sdk" defer="defer"></script>
-	<script type="text/javascript">
-		window.addEventListener('load', (event) => {
-			window.ReWebSDK.conversionTracking();
-		});
-	</script> -->
-	<!-- END Resulticks -->
-
 	<!-- Facebook Pixel Code -->
 	<!-- <script>
-	!function(f,b,e,v,n,t,s)
-	{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-	n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-	if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-	n.queue=[];t=b.createElement(e);t.async=!0;
-	t.src=v;s=b.getElementsByTagName(e)[0];
-	s.parentNode.insertBefore(t,s)}(window,document,'script',
-	'https://connect.facebook.net/en_US/fbevents.js');
-	fbq('init', '255543333392474');
-	fbq('track', 'PageView');
+		!function(f,b,e,v,n,t,s)
+		{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		n.queue=[];t=b.createElement(e);t.async=!0;
+		t.src=v;s=b.getElementsByTagName(e)[0];
+		s.parentNode.insertBefore(t,s)}(window, document,'script',
+		'https://connect.facebook.net/en_US/fbevents.js');
+		fbq('init', '255543333392474');
+		fbq('track', 'PageView');
 	</script>
 	<noscript>
-	<img height="1" width="1"
-	src="https://www.facebook.com/tr?id=255543333392474&ev=PageView
-	&noscript=1"/>
+	<img height="1" width="1" style="display:none" 
+		src="https://www.facebook.com/tr?id=255543333392474&ev=PageView&noscript=1"/>
 	</noscript> -->
 	<!-- End Facebook Pixel Code -->
 </head>
 
 <body <?php body_class(); ?>>
 	<!-- Google Tag Manager (noscript) -->
-	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T8K5HSR" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T8K5HSR" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
 	<!-- End Google Tag Manager (noscript) -->
 
 	<?php wp_body_open(); ?>
