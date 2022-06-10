@@ -264,7 +264,6 @@ if (!function_exists('generate_store_locations')) {
                 $services       = $data['Services'];
                 $store_type     = $data['Store Type'];
                 $store_brand    = ($data['Brand']) ? $data['Brand'] : '';
-                $store_name     = ($store_brand) ? $data['Store Name'] . " [" . $store_brand . "]" : $data['Store Name'];
                 $store_address  = $data['Address'];
                 $operating_hour = $data['Operation Hour'];
                 $explode_hours  = explode(';', $operating_hour);
@@ -280,6 +279,23 @@ if (!function_exists('generate_store_locations')) {
                         $class_store_type = 'red';
                         break;
                     default;
+                }
+
+                switch ($store_brand) {
+                    case 'VIVO':
+                        $store_name = "<span class='font-normal'>vivo</span> Concept Store";
+                        break;
+                    case 'OPPO':
+                        $store_name = "$store_brand Brand Store";
+                        break;
+                    case 'SAMSUNG':
+                        $store_name = "$store_brand Experience Store";
+                        break;
+                    case 'Xiaomi': 
+                        $store_name = "<span class='font-normal'>Mi</span> Store";
+                        break;
+                    default: 
+                        $store_name = $data['Store Name'];
                 }
 
                 $html_hours = '';
