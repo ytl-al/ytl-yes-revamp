@@ -133,7 +133,7 @@
 													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" height="25" v-if="paymentInfo.cardType == 'AMEX'" />
 													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/mastercard.png" height="30" v-if="paymentInfo.cardType == 'MASTERCARD'" />
 												</div>
-												</div>												
+												</div>
 												</div>
                                             </div>
                                             <div class="col-lg-6 col-12 mb-1">
@@ -512,35 +512,35 @@
                         if (elevate.validateSession(self.currentStep)) {
 							self.pageValid = true;
 							self.guid = elevate.lsData.guid;
-							
+
 							if (elevate.lsData.deliveryInfo) {
 								self.deliveryInfo = elevate.lsData.deliveryInfo;
 							}else{
 								 elevate.redirectToPage('pre-register-complete/?id='+self.guid);
 							}
-							
+
 							if (elevate.lsData.orderSummary) {
 								self.orderSummary = elevate.lsData.orderSummary;
 							}else{
 								 elevate.redirectToPage('pre-register-complete/?id='+self.guid);
 							}
-							
+
 							if (elevate.lsData.contract) {
 								self.contract = elevate.lsData.contract;
 								self.contractSigned = true;
-							} 
-							 
+							}
+
 							$('#guid').val(self.guid);
-							 
-							self.productId = self.orderSummary.orderDetail.productCode;  
-							
+
+							self.productId = self.orderSummary.orderDetail.productCode;
+
 							self.ajaxGetFPXBankList();
 							self.updateData();
-						
+
 						}else{
 							elevate.redirectToPage('pre-register-complete/?id=error');
 						}
-						
+
 						setTimeout(function(){
 							$('#main-vue').show();
 							toggleOverlay(false);
@@ -578,8 +578,8 @@
                             });
                     },
                     ajaxGetMaybankIPPTenures: function() {
-						
-                        var self = this; 
+
+                        var self = this;
                         axios.post(apiEndpointURL + '/get-ipp-tenures', {
                             'plan_name': self.orderSummary.plan.planName
                         })
@@ -660,7 +660,7 @@
                         axios.post(apiEndpointURL + '/check-order-payment-status', params)
                             .then((response) => {
                                 var data = response.data;
-                                if (data != null && data.responseCode != null) { 
+                                if (data != null && data.responseCode != null) {
                                     self.paymentResponse = data;
                                     clearTimeout(timeoutObj);
 
@@ -668,13 +668,13 @@
                                         mainwin.focus();
                                         mainwin.close();
                                     }
-									
+
 									if(data.reasonCodeDesc == "APPROVED OR COMPLETED"){
 										self.updatePaymentStatus(2);
 									}else{
 										self.updatePaymentStatus(-1);
 									}
-                                    
+
                                 } else {
                                     setTimeout(function() {
                                         self.ajaxCheckOrderPaymentStatus(timeoutObj);
@@ -684,7 +684,7 @@
                             .catch((error) => {
                                 var response = error.response;
                                 self.checkPaymentStatusCount++;
-                                if (typeof response != 'undefined' && self.checkPaymentStatusCount > 24) {
+                                if (typeof response != 'undefined' && self.checkPaymentStatusCount > 29) {
                                     var data = response.data;
                                     var errorMsg = '';
                                     if (error.response.status == 500 || error.response.status == 503) {
@@ -880,7 +880,7 @@
 
                         elevate.redirectToPage('pre-register-thanks?status='+status+'&orderNumber='+$('#displayOrderNumber').val());
                     },
-					
+
                     updateElevateOrder: function (){
                         var self = this;
 
@@ -892,7 +892,7 @@
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
-									 
+
                                 }else{
                                     toggleOverlay(false);
                                     $('#error').html("Systm error, please try again.");
@@ -931,24 +931,24 @@
                             });
 
                     },
-					
+
 					updatePaymentStatus: function (status){
                         var self = this;
 
                         toggleOverlay();
                         var param = {};
-						
-						if(self.orderResponse){						
+
+						if(self.orderResponse){
 							param.orderNumber = self.orderResponse.orderNumber;
 						}else{
 							return;
 						}
-						if(self.orderResponse){			
+						if(self.orderResponse){
 							param.paymentRef = self.paymentResponse.referenceNo;
 						}else{
 							param.paymentRef = "";
 						}
-                        param.status = status.toString(); 
+                        param.status = status.toString();
 
                         axios.post(apiEndpointURL_elevate + '/order/updatePayment', param)
                             .then((response) => {

@@ -671,7 +671,7 @@
 									}else{
 										self.updatePaymentStatus(-1);
 									}
-                                    
+
                                 } else {
                                     setTimeout(function() {
                                         self.ajaxCheckOrderPaymentStatus(timeoutObj);
@@ -681,7 +681,7 @@
                             .catch((error) => {
                                 var response = error.response;
                                 self.checkPaymentStatusCount++;
-                                if (typeof response != 'undefined' && self.checkPaymentStatusCount > 24) {
+                                if (typeof response != 'undefined' && self.checkPaymentStatusCount > 29) {
                                     var data = response.data;
                                     var errorMsg = '';
                                     if (error.response.status == 500 || error.response.status == 503) {
@@ -933,18 +933,18 @@
 
                         toggleOverlay();
                         var param = {};
-						
-						if(self.orderResponse){						
+
+						if(self.orderResponse){
 							param.orderNumber = self.orderResponse.orderNumber;
 						}else{
 							return;
 						}
-						if(self.orderResponse){			
+						if(self.orderResponse){
 							param.paymentRef = self.paymentResponse.referenceNo;
 						}else{
 							param.paymentRef = "";
 						}
-                        param.status = status.toString(); 
+                        param.status = status.toString();
 
                         axios.post(apiEndpointURL_elevate + '/order/updatePayment', param)
                             .then((response) => {
