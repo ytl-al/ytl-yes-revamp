@@ -659,7 +659,6 @@
                             .then((response) => {
                                 var data = response.data;
                                 if (data != null && data.responseCode != null) {
-                                    console.log('payment through');
                                     self.paymentResponse = data;
                                     clearTimeout(timeoutObj);
 
@@ -668,7 +667,12 @@
                                         mainwin.close();
                                     }
 
-                                    self.redirectThankYou();
+									if(data.reasonCodeDesc == "APPROVED OR COMPLETED"){
+										self.updatePaymentStatus(2);
+									}else{
+										self.updatePaymentStatus(-1);
+									}
+                                    
                                 } else {
                                     setTimeout(function() {
                                         self.ajaxCheckOrderPaymentStatus(timeoutObj);
@@ -720,6 +724,9 @@
                                 mainwin.close();
                             }
                              // self.redirectThankYou();
+							 errorMsg = "Payment Timeout.";
+							 self.cancelElevateOrder(errorMsg);
+							 self.updatePaymentStatus(-1);
                         }, 300000);
 
                         mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
@@ -836,10 +843,10 @@
                                         errorMsg = data.message
                                     }
                                     toggleOverlay(false);
-                                    toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
-                                    //self.toggleModalAlert('Error', errorMsg);
+                                    self.toggleModalAlert('Error', errorMsg);
 
                                     self.cancelElevateOrder(errorMsg);
+									self.updatePaymentStatus(-1);
                                 }
                                 console.log(error, response);
                             })
@@ -860,7 +867,7 @@
 
                         e.preventDefault();
                     },
-                    redirectThankYou: function() {
+                    redirectThankYou: function(status) {
 
                         var self = this;
 
@@ -870,7 +877,7 @@
                         elevate.lsData.meta.paymentResponse = self.paymentResponse;
                         elevate.updateElevateLSData();
 
-                        elevate.redirectToPage('thanks?orderNumber='+$('#displayOrderNumber').val());
+                        elevate.redirectToPage('thanks?status='+status+'&orderNumber='+$('#displayOrderNumber').val());
                     },
                     updateElevateOrder: function (){
                         var self = this;
@@ -915,10 +922,51 @@
                                 }
                             })
                             .catch((error) => {
-                                console.log(error);
+                                toggleOverlay(false);
+                                console.log(error, response);
                             });
 
                     },
+					
+					updatePaymentStatus: function (status){
+                        var self = this;
+
+                        toggleOverlay();
+                        var param = {};
+						
+						if(self.orderResponse){						
+							param.orderNumber = self.orderResponse.orderNumber;
+						}else{
+							return;
+						}
+						if(self.orderResponse){			
+							param.paymentRef = self.paymentResponse.referenceNo;
+						}else{
+							param.paymentRef = "";
+						}
+                        param.status = status.toString(); 
+
+                        axios.post(apiEndpointURL_elevate + '/order/updatePayment', param)
+                            .then((response) => {
+                                var data = response.data;
+                                if(data.status == 1){
+									console.log(data);
+									self.redirectThankYou(status);
+                                }else{
+                                    toggleOverlay(false);
+                                    $('#error').html("Systm error, please try again.");
+                                    console.log(data);
+                                }
+                            })
+                            .catch((error) => {
+                                toggleOverlay(false);
+								$('#error').html(error);
+                                console.log(error, response);
+                            });
+
+                    },
+
+					
                     selectBank: function(bank, event) {
                         var self = this;
                         $('.listing-quickSelectBanks .nav-item').removeClass('selected');
@@ -1010,39 +1058,7 @@
                                     $('#input-chName').addClass('input_error');
                                     isFilled = false
                                 }
-                                /*var pattern = /[0-9]{4}$/g;
-                                if (self.cardholder.number1 && !pattern.test(self.cardholder.number1)) {
-                                    isFilled = false;
-                                    $('#input-cardInput1').addClass('input_error');
-                                }
-                                // if (self.cardholder.number2 && !pattern.test(self.cardholder.number2)) {
-                                //     isFilled = false;
-                                //     $('#input-cardInput2').addClass('input_error');
-                                // }
-                                if (self.cardholder.number3 && !pattern.test(self.cardholder.number3)) {
-                                    isFilled = false;
-                                    $('#input-cardInput3').addClass('input_error');
-                                }
-                                // if (self.cardholder.number4 && !pattern.test(self.cardholder.number4)) {
-                                //     isFilled = false;
-                                //     $('#input-cardInput4').addClass('input_error');
-                                // }
-                                if (self.cardholder.number6 && !pattern.test(self.cardholder.number6)) {
-                                    isFilled = false;
-                                    $('#input-cardInput6').addClass('input_error');
-                                }
 
-                                var pattern = /[0-9]{2}$/g;
-                                if (self.cardholder.number5 && !pattern.test(self.cardholder.number5)) {
-                                    isFilled = false;
-                                    $('#input-cardInput5').addClass('input_error');
-                                }
-
-                                var pattern = /[0-9]{3}$/g;
-                                if (self.cardholder.number7 && !pattern.test(self.cardholder.number7)) {
-                                    isFilled = false;
-                                    $('#input-cardInput7').addClass('input_error');
-                                }*/
                             }
                         } else if (paymentMethod == 'FPX') {
                             if (self.paymentInfo.bankCode.trim() == '' || self.paymentInfo.bankName.trim() == '') {
@@ -1053,8 +1069,6 @@
                         if (paymentMethod == 'CREDIT_CARD_IPP' && self.paymentInfo.ippType == '') {
                             isFilled = false;
                         }
-
-
 
                         if (isFilled) {
                             self.allowSubmit = true;

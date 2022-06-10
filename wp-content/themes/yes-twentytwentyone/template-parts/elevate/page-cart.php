@@ -271,7 +271,7 @@
                         $('#totalItemCart').text("0");
                         setTimeout(function() {
                             $('#container-hasItem').show();
-                            $('#main-vue').css({'height':'auto'});h
+                            $('#main-vue').css({'height':'auto'});
                             toggleOverlay(false);
                         }, 1500);
                     }

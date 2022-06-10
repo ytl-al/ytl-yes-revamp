@@ -64,6 +64,11 @@
             text-align: center;
         }
 
+	#page_error{
+		min-height:400px;
+		padding-top: 50px;
+	}
+
         .layer-planDevice p.panel-btn a,
         #cart-body .layer-planDevice p.panel-btn a {
             background-color: #2F3BF5;
