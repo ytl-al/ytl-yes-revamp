@@ -160,11 +160,11 @@
                                                 <li>Subject to Clause 7.4 herein, on or from the Commencement Date, an Eligible Subscriber may subscribe to Yes Infinite+ Postpaid Service Plan by selecting one (1) Yes Infinite+ Postpaid Service Plan, from the list of Yes Infinite+ Postpaid Service Plans made available by YTLC @ yes.my, for subscription</li>
                                                 <li>All Eligible Subscribers are bound by the following terms and conditions:-
                                                     <ol>
-                                                        <li>Yes Infinite+ T&Cs available @ [https://www.yes.my/docs/tnc/]    on the subscription of any of the Yes Infinite+ Postpaid Service Plan;</li>
+                                                        <li>Yes Infinite+ T&Cs available @ [<a href="https://www.yes.my/docs/tnc/" target="_blank">https://www.yes.my/docs/tnc/</a>]    on the subscription of any of the Yes Infinite+ Postpaid Service Plan;</li>
                                                         <li>TOPS’ Device Rental Agreement Terms and Conditions;</li>
-                                                        <li>YTL’s Group Privacy Police available @ https://www.ytl.com/privacypolicy.asp</li>
-                                                        <li>TOPS’ Privacy Notice available @ https://www.orix.com.my/privacy-policy; and</li>
-                                                        <li>CompAsia’s Privacy Policy available @ https://shop.compasia.com/pages/privacy-policy</li>
+                                                        <li>YTL’s Group Privacy Police available @ <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a></li>
+                                                        <li>TOPS’ Privacy Notice available @ <a href="https://www.orix.com.my/privacy-policy" target="_blank">https://www.orix.com.my/privacy-policy</a>; and</li>
+                                                        <li>CompAsia’s Privacy Policy available @ <a href="https://shop.compasia.com/pages/privacy-policy" target="_blank">https://shop.compasia.com/pages/privacy-policy</a></li>
                                                     </ol>
                                                 </li>
 
@@ -475,7 +475,7 @@
                                                     </table>
 
                                                 </li>
-                                                <li>Charges will be imposed for all International Roaming Service and IDD Service in accordance with the voice calls and SMS rates published @ https://www.yes.my/roaming</li>
+                                                <li>Charges will be imposed for all International Roaming Service and IDD Service in accordance with the voice calls and SMS rates published @ <a href="https://www.yes.my/roaming" target="_blank">https://www.yes.my/roaming</a></li>
                                                 <li>For clarity, charges will apply for voice calls to special and toll free numbers, including but not limited to those numbers listed below
                                                     <table cellspacing="0" class="Table" style="border-collapse:collapse; border:none; width:80.0%">
                                                         <tbody>

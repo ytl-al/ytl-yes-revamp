@@ -196,6 +196,7 @@
                                 <div class="col-12 col-lg-6">
                                     <button type="submit" class="pink-btn w-100" :disabled="!allowSubmit">Pay</button>
                                 </div>
+								<div id="error" style="color:red"></div>
                             </div>
                         </div>
                     </form>
@@ -518,8 +519,8 @@
 								 elevate.redirectToPage('pre-register-complete/?id='+self.guid);
 							}
 							
-							if (elevate.lsData.orderDetail) {
-								self.orderSummary.orderDetail = elevate.lsData.orderDetail;
+							if (elevate.lsData.orderSummary) {
+								self.orderSummary = elevate.lsData.orderSummary;
 							}else{
 								 elevate.redirectToPage('pre-register-complete/?id='+self.guid);
 							}
@@ -527,10 +528,7 @@
 							if (elevate.lsData.contract) {
 								self.contract = elevate.lsData.contract;
 								self.contractSigned = true;
-							}
-							
-							self.deliveryInfo = elevate.lsData.deliveryInfo;
-							self.orderSummary = elevate.lsData.orderSummary; 
+							} 
 							 
 							$('#guid').val(self.guid);
 							 
@@ -539,6 +537,8 @@
 							self.ajaxGetFPXBankList();
 							self.updateData();
 						
+						}else{
+							elevate.redirectToPage('pre-register-complete/?id=error');
 						}
 						
 						setTimeout(function(){
@@ -660,8 +660,7 @@
                         axios.post(apiEndpointURL + '/check-order-payment-status', params)
                             .then((response) => {
                                 var data = response.data;
-                                if (data != null && data.responseCode != null) {
-                                    console.log('payment through');
+                                if (data != null && data.responseCode != null) { 
                                     self.paymentResponse = data;
                                     clearTimeout(timeoutObj);
 
@@ -669,8 +668,13 @@
                                         mainwin.focus();
                                         mainwin.close();
                                     }
-
-                                    self.redirectThankYou();
+									
+									if(data.reasonCodeDesc == "APPROVED OR COMPLETED"){
+										self.updatePaymentStatus(2);
+									}else{
+										self.updatePaymentStatus(-1);
+									}
+                                    
                                 } else {
                                     setTimeout(function() {
                                         self.ajaxCheckOrderPaymentStatus(timeoutObj);
@@ -721,7 +725,10 @@
                                 mainwin.focus();
                                 mainwin.close();
                             }
-                             self.redirectThankYou();
+                             //self.redirectThankYou();
+							 errorMsg = "Payment Timeout.";
+							 self.cancelElevateOrder(errorMsg);
+							 self.updatePaymentStatus(-1);
                         }, 300000);
 
                         mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
@@ -840,6 +847,7 @@
                                     self.toggleModalAlert('Error', errorMsg);
 
                                     self.cancelElevateOrder(errorMsg);
+									self.updatePaymentStatus(-1);
                                 }
                                 console.log(error, response);
                             })
@@ -860,7 +868,7 @@
 
                         e.preventDefault();
                     },
-                    redirectThankYou: function() {
+                    redirectThankYou: function(status) {
 
                         var self = this;
 
@@ -870,8 +878,9 @@
                         elevate.lsData.meta.paymentResponse = self.paymentResponse;
                         elevate.updateElevateLSData();
 
-                        elevate.redirectToPage('pre-register-thanks?orderNumber='+$('#displayOrderNumber').val());
+                        elevate.redirectToPage('pre-register-thanks?status='+status+'&orderNumber='+$('#displayOrderNumber').val());
                     },
+					
                     updateElevateOrder: function (){
                         var self = this;
 
@@ -918,6 +927,44 @@
                             })
                             .catch((error) => {
                                 toggleOverlay(false);
+                                console.log(error, response);
+                            });
+
+                    },
+					
+					updatePaymentStatus: function (status){
+                        var self = this;
+
+                        toggleOverlay();
+                        var param = {};
+						
+						if(self.orderResponse){						
+							param.orderNumber = self.orderResponse.orderNumber;
+						}else{
+							return;
+						}
+						if(self.orderResponse){			
+							param.paymentRef = self.paymentResponse.referenceNo;
+						}else{
+							param.paymentRef = "";
+						}
+                        param.status = status.toString(); 
+
+                        axios.post(apiEndpointURL_elevate + '/order/updatePayment', param)
+                            .then((response) => {
+                                var data = response.data;
+                                if(data.status == 1){
+									console.log(data);
+									self.redirectThankYou(status);
+                                }else{
+                                    toggleOverlay(false);
+                                    $('#error').html("Systm error, please try again.");
+                                    console.log(data);
+                                }
+                            })
+                            .catch((error) => {
+                                toggleOverlay(false);
+								$('#error').html(error);
                                 console.log(error, response);
                             });
 

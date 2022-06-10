@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-6 text-lg-center text-end">
-                    <h1 class="title_checkout p-3">pre-qualified Checkout</h1>
+                    <h1 class="title_checkout p-3">Pre Qualified Checkout</h1>
                 </div>
                 <div class="col-lg-4">
 
@@ -192,6 +192,7 @@
                                 <div class="col-12 col-lg-6">
                                     <button type="submit" class="pink-btn w-100" :disabled="!allowSubmit">Pay</button>
                                 </div>
+				<div id="error" style="color:red"></div>
                             </div>
                         </div>
                     </form>
@@ -657,7 +658,6 @@
                             .then((response) => {
                                 var data = response.data;
                                 if (data != null && data.responseCode != null) {
-                                    console.log('payment through');
                                     self.paymentResponse = data;
                                     clearTimeout(timeoutObj);
 
@@ -666,7 +666,12 @@
                                         mainwin.close();
                                     }
 
-                                    self.redirectThankYou();
+									if(data.reasonCodeDesc == "APPROVED OR COMPLETED"){
+										self.updatePaymentStatus(2);
+									}else{
+										self.updatePaymentStatus(-1);
+									}
+                                    
                                 } else {
                                     setTimeout(function() {
                                         self.ajaxCheckOrderPaymentStatus(timeoutObj);
@@ -676,7 +681,7 @@
                             .catch((error) => {
                                 var response = error.response;
                                 self.checkPaymentStatusCount++;
-                                if (typeof response != 'undefined' && self.checkPaymentStatusCount > 4) {
+                                if (typeof response != 'undefined' && self.checkPaymentStatusCount > 24) {
                                     var data = response.data;
                                     var errorMsg = '';
                                     if (error.response.status == 500 || error.response.status == 503) {
@@ -717,7 +722,10 @@
                                 mainwin.focus();
                                 mainwin.close();
                             }
-                             self.redirectThankYou();
+                             //self.redirectThankYou();
+							 errorMsg = "Payment Timeout.";
+							 self.cancelElevateOrder(errorMsg);
+							 self.updatePaymentStatus(-1);
                         }, 300000);
 
                         mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
@@ -836,6 +844,7 @@
                                     self.toggleModalAlert('Error', errorMsg);
 
                                     self.cancelElevateOrder(errorMsg);
+									self.updatePaymentStatus(-1);
                                 }
                                 console.log(error, response);
                             })
@@ -856,7 +865,7 @@
 
                         e.preventDefault();
                     },
-                    redirectThankYou: function() {
+                    redirectThankYou: function(status) {
 
                         var self = this;
 
@@ -866,7 +875,7 @@
                         elevate.lsData.meta.paymentResponse = self.paymentResponse;
                         elevate.updateElevateLSData();
 
-                        elevate.redirectToPage('thanks-pre-qualified?orderNumber='+$('#displayOrderNumber').val());
+                        elevate.redirectToPage('thanks-pre-qualified?status='+status+'&orderNumber='+$('#displayOrderNumber').val());
                     },
                     updateElevateOrder: function (){
                         var self = this;
@@ -914,6 +923,44 @@
                             })
                             .catch((error) => {
                                 toggleOverlay(false);
+                                console.log(error, response);
+                            });
+
+                    },
+
+					updatePaymentStatus: function (status){
+                        var self = this;
+
+                        toggleOverlay();
+                        var param = {};
+						
+						if(self.orderResponse){						
+							param.orderNumber = self.orderResponse.orderNumber;
+						}else{
+							return;
+						}
+						if(self.orderResponse){			
+							param.paymentRef = self.paymentResponse.referenceNo;
+						}else{
+							param.paymentRef = "";
+						}
+                        param.status = status.toString(); 
+
+                        axios.post(apiEndpointURL_elevate + '/order/updatePayment', param)
+                            .then((response) => {
+                                var data = response.data;
+                                if(data.status == 1){
+									console.log(data);
+									self.redirectThankYou(status);
+                                }else{
+                                    toggleOverlay(false);
+                                    $('#error').html("Systm error, please try again.");
+                                    console.log(data);
+                                }
+                            })
+                            .catch((error) => {
+                                toggleOverlay(false);
+								$('#error').html(error);
                                 console.log(error, response);
                             });
 

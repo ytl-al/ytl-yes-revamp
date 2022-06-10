@@ -59,7 +59,7 @@
                                         <input type="text" maxlength="12" class="form-control text-upper" id="mykad_number"
                                                name="mykad" v-model="deliveryInfo.mykad" @input="watchAllowNext"
                                                @keypress="checkInputCharacters(event, 'numeric', false)" placeholder=""
-                                               required>
+                                               readonly required>
 
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-mykad"></div>
@@ -70,7 +70,7 @@
                                     <label class="form-label">* Full Name (as per MyKad)</label>
                                     <div class="input-group align-items-center">
                                         <input type="text" class="form-control text-uppercase" id="full_name" name="name"
-                                               v-model="deliveryInfo.name" @input="watchAllowNext" placeholder=""
+                                               v-model="deliveryInfo.name" @input="watchAllowNext" placeholder="" readonly
                                                required>
 
                                     </div>
@@ -99,7 +99,7 @@
                                     <div class="align-items-center">
                                         <input type="text" class="form-control text-upper" id="email" name="email"
                                                v-model="deliveryInfo.email" @input="watchAllowNext"
-                                               placeholder="" readonly required>
+                                               placeholder=""  required>
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-email"></div>
                                 </div>
@@ -155,7 +155,7 @@
                                     <label class="form-label">Unit number</label>
                                     <div class="input-group align-items-center">
                                         <input type="text" class="form-control text-uppercase" id="address-more" name="addressMore"
-                                               v-model="deliveryInfo.addressLine2" @input="watchAllowNext" maxlength="30"
+                                               v-model="deliveryInfo.addressMore" @input="watchAllowNext" maxlength="30"
                                                placeholder="">
                                     </div>
                                 </div>

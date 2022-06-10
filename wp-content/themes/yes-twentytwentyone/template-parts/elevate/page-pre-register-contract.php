@@ -1178,6 +1178,7 @@
                 },
                 contract: {},
                 contract_signed: "",
+                contractSigned: false,
                 eligibility: {
                     uid: '',
                     mykad: '',
@@ -1254,19 +1255,35 @@
 
                     if (elevate.validateSession(self.currentStep)) {
                         self.pageValid = true;
-                        
-						self.deliveryInfo = elevate.lsData.deliveryInfo;
-						self.orderSummary = elevate.lsData.orderSummary; 
+                       
+						if (elevate.lsData.deliveryInfo) {
+								self.deliveryInfo = elevate.lsData.deliveryInfo;
+						}else{
+							 elevate.redirectToPage('pre-register-complete/?id='+self.guid);
+						}
+						
+						if(elevate.lsData.orderSummary){
+							self.orderSummary = elevate.lsData.orderSummary; 
+							self.dealer.dealer_code = self.orderSummary.order.dealerCode;
+							self.dealer.dealer_id = self.orderSummary.order.dealerUID;
+							self.dealer.referral_code = self.orderSummary.order.referralCode;
+						}else{
+							 elevate.redirectToPage('pre-register-complete/?id='+self.guid);
+						}
                         self.guid = elevate.lsData.guid;
 						 
 						$('#guid').val(self.guid);
-						self.dealer.dealer_code = self.orderSummary.order.dealerCode;
-						self.dealer.dealer_id = self.orderSummary.order.dealerUID;
-						self.dealer.referral_code = self.orderSummary.order.referralCode;
+						 
+						if (elevate.lsData.contract) {
+							self.contract = elevate.lsData.contract;
+							self.contractSigned = true;
+						}
 						
 						self.productId = self.orderSummary.orderDetail.productCode; 
                         self.check_sign();
-                    } 
+                    }else{
+						elevate.redirectToPage('pre-register-complete/?id=error');
+					}
                 },
                 sign_contract: function () {
                     var self = this;

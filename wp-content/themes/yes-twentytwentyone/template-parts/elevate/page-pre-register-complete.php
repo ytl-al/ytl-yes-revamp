@@ -67,6 +67,12 @@
 	.text-12{
 		font-size:12px!important;
 	}
+	
+	#page_done,
+	#page_error{
+		min-height:400px;
+		padding-top: 50px;
+	}
 
     .layer-planDevice p.panel-btn a,
     #cart-body .layer-planDevice p.panel-btn a {
@@ -247,7 +253,7 @@
 									</div>
 									<div class="col-11 text-12">
 										<label for="consent" class="text-12" style="line-height:20px;">
-                                            I further give consent to YTLC to process my personal data in accordance with YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a> and also give consent to TOP to process my personal data in accordance with TOP Privacy Policy available at (<a href="http://yes.compasia.com/TOP_PRIVACY_POLICY.PDF" target="_blank">http://yes.compasia.com/TOP_PRIVACY_POLICY.PDF</a>) for the purposes of my agreement with TOP.
+                                            I further give consent to YTLC to process my personal data in accordance with YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a> and also give consent to TOP to process my personal data in accordance with TOP Privacy Policy available at (<a style="word-break: break-all;" href="http://yes.compasia.com/TOP_PRIVACY_POLICY.PDF" target="_blank">http://yes.compasia.com/TOP_PRIVACY_POLICY.PDF</a>) for the purposes of my agreement with TOP.
 										</label>
 									</div>
 								</div>
@@ -264,12 +270,22 @@
             </div>
             </div>
         </div>
+        </div>
     </section>
 	<div id="page_error" style="display:none;">
 		<div class="flex-container mt-3">
 		<div><div class="row">
 		<div class="col-1"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.721 5.14645L2.42767 23.9998C2.19483 24.403 2.07163 24.8602 2.07032 25.3258C2.06902 25.7914 2.18966 26.2493 2.42024 26.6538C2.65082 27.0583 2.98331 27.3954 3.38461 27.6316C3.78592 27.8677 4.24207 27.9947 4.70767 27.9998H27.2943C27.7599 27.9947 28.2161 27.8677 28.6174 27.6316C29.0187 27.3954 29.3512 27.0583 29.5818 26.6538C29.8124 26.2493 29.933 25.7914 29.9317 25.3258C29.9304 24.8602 29.8072 24.403 29.5743 23.9998L18.281 5.14645C18.0433 4.75459 17.7086 4.43061 17.3093 4.20576C16.9099 3.98092 16.4593 3.86279 16.001 3.86279C15.5427 3.86279 15.0921 3.98092 14.6927 4.20576C14.2934 4.43061 13.9587 4.75459 13.721 5.14645V5.14645Z" stroke="#EF4444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 12V17.3333" stroke="#EF4444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 22.6665H16.0133" stroke="#EF4444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg></div> <div class="col-11 text-bold">
                                          Sorry, your request does not qualify for the Yes Infinite+ contract option, please select another contract option:
+                                     </div></div>
+									 <div class="p-3 text-center"><a href="/infinite-phone-bundles/" class="pink-btn text-uppercase">Back to Infinite+</a></div> <div id="error" class="mt-3"></div></div></div>
+	</div>
+	
+	<div id="page_done" style="display:none;">
+		<div class="flex-container mt-3">
+		<div><div class="row">
+		<div class="col-1"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.721 5.14645L2.42767 23.9998C2.19483 24.403 2.07163 24.8602 2.07032 25.3258C2.06902 25.7914 2.18966 26.2493 2.42024 26.6538C2.65082 27.0583 2.98331 27.3954 3.38461 27.6316C3.78592 27.8677 4.24207 27.9947 4.70767 27.9998H27.2943C27.7599 27.9947 28.2161 27.8677 28.6174 27.6316C29.0187 27.3954 29.3512 27.0583 29.5818 26.6538C29.8124 26.2493 29.933 25.7914 29.9317 25.3258C29.9304 24.8602 29.8072 24.403 29.5743 23.9998L18.281 5.14645C18.0433 4.75459 17.7086 4.43061 17.3093 4.20576C16.9099 3.98092 16.4593 3.86279 16.001 3.86279C15.5427 3.86279 15.0921 3.98092 14.6927 4.20576C14.2934 4.43061 13.9587 4.75459 13.721 5.14645V5.14645Z" stroke="#EF4444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 12V17.3333" stroke="#EF4444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 22.6665H16.0133" stroke="#EF4444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg></div> <div class="col-11 text-bold">
+                                         Sorry, your order already approved or completed.
                                      </div></div>
 									 <div class="p-3 text-center"><a href="/infinite-phone-bundles/" class="pink-btn text-uppercase">Back to Infinite+</a></div> <div id="error" class="mt-3"></div></div></div>
 	</div>
@@ -448,7 +464,8 @@
 									
 							$('#cart-body').show();
 							$('#page_error').hide();
-							 
+							$('.layer-page').css({'height':'auto'});
+
 						}
 						
 					}else{
@@ -574,7 +591,8 @@
 									self.deliveryInfo = data.customer; 
 									self.deliveryInfo.name= self.deliveryInfo.fullName;
 									self.deliveryInfo.mykad = self.deliveryInfo.securityNumber;
-									self.deliveryInfo.address = self.deliveryInfo.addressLine1;
+									self.deliveryInfo.address = self.deliveryInfo.addressLine2;
+									self.deliveryInfo.addressMore = self.deliveryInfo.addressLine1;
 									self.deliveryInfo.postcode = self.deliveryInfo.postCode;
  
 									self.deliveryInfo.stateCode = (self.deliveryInfo.state) ? self.getStateCode(self.deliveryInfo.state) : '';
@@ -607,13 +625,20 @@
 									
 									self.updatePlan();
 									
-									$('#cart-body').show();
-									$('#page_error').hide();
+									if(parseInt(data.order.orderStatus) == 2 || parseInt(data.order.orderStatus) == 3){
+										$('#cart-body').hide();
+										$('#page_done').show();
+									}else{
+										$('#cart-body').show();
+										$('#page_error').hide();
+									} 
+									
 									
 								}else{
 									$('#cart-body').hide();
 									$('#page_error').show();
 								}
+								$('.layer-page').css({'height':'auto'});
 
 							})
 							.catch((error) => {
@@ -895,9 +920,8 @@
 
 						var LSData = JSON.parse(localStorage.getItem(elevateLSName));
 						elevate.lsData = LSData;
-						elevate.lsData.deliveryInfo =  self.deliveryInfo;
-						elevate.lsData.product =  self.orderSummary.product; 
-						elevate.lsData.orderDetail =  self.orderSummary.orderDetail;
+						elevate.lsData.deliveryInfo = self.deliveryInfo;
+						elevate.lsData.orderSummary =  self.orderSummary;
 						elevate.lsData.guid =  self.guid; 
 						elevate.updateElevateLSData();
 						toggleOverlay();
