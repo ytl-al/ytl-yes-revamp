@@ -38,6 +38,28 @@
 					}
 				});
 			}
+
+			$('.btn-buyplan').on('click', function() {
+				dataLayer.push({ ecommerce: null });
+				dataLayer.push({
+					'event': 'addToCart',
+					'ecommerce': {
+						'currencyCode': 'MYR',
+						'add': {                                // 'add' actionFieldObject measures.
+						'products': [{                        //  adding a product to a shopping cart.
+							'name': 'Triblend Android T-Shirt 2',
+							'id': '12345',
+							'price': '15.25',
+							'brand': 'Google',
+							'category': 'Apparel',
+							'variant': 'Gray',
+							'quantity': 1
+						}]
+						}
+					}
+				});
+				alert('asd');
+			});
 		});
 	</script>
 
