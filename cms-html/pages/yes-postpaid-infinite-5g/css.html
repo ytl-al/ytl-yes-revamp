@@ -30,6 +30,7 @@
     .layer-planDevice p.panel-deviceImg img { max-height: 148px; }
     .layer-planDevice p.panel-btn { margin: 0 0 20px; text-align: center; }
     .layer-planDevice p.panel-btn a { background-color: #2F3BF5; border-radius: 50px; color: #FFF; font-weight: 800; letter-spacing: 0.1em; padding: 8px 40px; text-transform: uppercase; }
+    .layer-planDevice p.panel-btn a.btn-oos { background-color: transparent; color: #333; cursor: not-allowed; font-style: italic;}
     .layer-planDevice ul.listing-deviceDesc { margin-bottom: 20px; padding-left: 20px; }
 
     .panel-colors { display: flex; align-items: center; }
@@ -47,6 +48,17 @@
     .span-color.orange:after { background-color: #F06329; }
     .span-color.peach:after { background-color: #D8A89D; }
     .span-color.pink:after { background-color: #BC9792; }
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+    .infinity-banner h1 {
+                font-size: 23px !important;
+                line-height: 36px !important;
+            }
+            .infinity-banner h2 {
+                font-size: 13px !important;
+                line-height: 20px !important;
+            }
+    }
 
     
     @media (min-width: 768px) {
