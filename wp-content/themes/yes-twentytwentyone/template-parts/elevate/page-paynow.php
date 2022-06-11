@@ -637,7 +637,7 @@
                         self.paymentInfo.sst = self.orderSummary.orderDetail.sstAmount;
                         self.paymentInfo.totalAmount = self.orderSummary.orderDetail.total;
 
-                        self.ajaxGetMaybankIPPTenures();
+                        // self.ajaxGetMaybankIPPTenures();
                     },
                     toggleModalAlert: function(modalHeader = '', modalText = '') {
                         $('#modal-titleLabel').html(modalHeader);
