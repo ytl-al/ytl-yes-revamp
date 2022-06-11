@@ -329,7 +329,7 @@
                                 if(data.status == 0){
                                     toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
                                 }else{
-                                    toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful because your NRIC is not eligible (blacklisted).',"elevate.redirectToPage('compasia-fail')")
+                                    toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful because your NRIC is not eligible.',"elevate.redirectToPage('compasia-fail')")
                                 }
                                 // $('#error').html(data.data.displayResponseMessage);
                                 // $('#status_mesage').html('');
@@ -368,7 +368,7 @@
                             } else {
                                 toggleOverlay(false);
                                 $('#status_mesage').html('');
-                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful because your NRIC is not eligible (blacklisted).',"elevate.redirectToPage('eligibility-failure')");
+                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful because your NRIC is not eligible.',"elevate.redirectToPage('eligibility-failure')");
 
                             }
                         })
