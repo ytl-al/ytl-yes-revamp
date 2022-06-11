@@ -62,8 +62,25 @@ const ywos = {
     },
     buyPlan: function(planID) {
         toggleOverlay();
+        var self = this;
         this.initLocalStorage(planID);
-        this.redirectToCart();
+        $.ajax({
+            url: apiEndpointURL + '/get-plan-by-id/' + planID,
+            method: 'GET',
+            success: function(data) {
+                var pushData = [{
+                    'name': data.planName,
+                    'id': planID,
+                    'category': data.planType,
+                    'price': data.totalAmountWithoutSST,
+                    'list_name': 'Product Page'
+                }];
+                gaEEcommercePush('impressions', pushData);
+            },
+            complete: function() {
+                self.redirectToCart();
+            }
+        });
     },
     checkExists: function() {
         if (ywosLSData === null) {
@@ -273,9 +290,8 @@ function checkInputCharacters(event, type = 'alphanumeric', withSpace = true) {
     ) {
         charNonNumeric = true;
     }
-    if (
-        !(charCode > 64 && charCode < 91) && // uppercase alpha
-        !(charCode > 96 && charCode < 123)   // lowercase alpha
+    if (!(charCode > 64 && charCode < 91) && // uppercase alpha
+        !(charCode > 96 && charCode < 123) // lowercase alpha
     ) {
         charNonAlpha = true;
     }

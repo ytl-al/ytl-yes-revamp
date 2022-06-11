@@ -1,7 +1,7 @@
 /*
     JavaScript Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : March     15, 2022, 03:52:31 PM
+    Last edited on  : June      10, 2022, 03:52:31 PM
     Author          : [YTL Digital Design] - AL
 */
 const yesLocalStorageName = 'yesSession';
@@ -256,5 +256,50 @@ function initBetterDocsSearch5G() {
                 $(bdSearchField).trigger('input').trigger('propertychange').trigger('paste').trigger('keyup').trigger('keypress');
             }
         });
+    }
+}
+
+
+/**
+ * Function pushAnalytics()
+ * Function to measure shopping journey to analytics
+ * 
+ * @since    1.2.1
+ */
+function pushAnalytics(eventType = '', data = {}) {
+    gaEEcommercePush(eventType, data);
+}
+
+
+/**
+ * Function gaEEcommercePush()
+ * Function to measure shopping journey to Google Analytics Enhanced Ecommerce
+ * 
+ * @since    1.2.1
+ */
+function gaEEcommercePush(eventType = '', data = {}) {
+    if (eventType && data) {
+        switch (eventType) {
+            case 'impressions':                         // dataLayer push for 'Product Impressions' - product page on "Buy Now" btn clicked
+                gtag('event', 'view_item', {
+                    'items': data
+                });
+                break;
+            case 'addToCart':                           // dataLayer push for 'Add to Cart' - page-cart.php on load
+                gtag('event', 'add_to_cart', {
+                    'items': data
+                });
+                break;
+            case 'checkout':                            // dataLayer push for 'Initiate Checkout' - page-cart.php on redirect after login/proceed as guest
+                gtag('event', 'begin_checkout', {
+                    'items': data
+                });
+                break;
+            case 'purchase':                            // dataLayer push for 'Pay & Thank you' - page-PaymentMethodChangeEvent.php on complete transaction payment
+                gtag('event', 'purchase', data);
+                break;
+            default:
+                return;
+        }
     }
 }

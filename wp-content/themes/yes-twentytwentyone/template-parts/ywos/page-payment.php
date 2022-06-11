@@ -801,6 +801,8 @@
                     ywos.lsData.meta.paymentResponse = self.paymentResponse;
                     ywos.updateYWOSLSData();
 
+                    self.sendAnalytics();
+
                     ywos.redirectToPage('thank-you');
                 },
                 selectBank: function(bank, event) {
@@ -911,6 +913,34 @@
                 selectPaymentMethod: function(paymentMethod) {
                     this.paymentInfo.paymentMethod = paymentMethod;
                     this.watchAllowSubmit();
+                },
+                sendAnalytics: function() {
+                    var self = this;
+                    var eventType = 'purchase';
+                    var pushData = {
+                        'transaction_id': self.orderResponse.displayOrderNumber, 
+                        'currency': 'MYR',
+                        'value': self.orderSummary.due.total,
+                        'tax': self.orderSummary.due.taxesSST,
+                        'shipping': self.orderSummary.due.shippingFees, 
+                        'foreigner_deposit': self.orderSummary.due.foreignerDeposit,
+                        'items': [{
+                            'name': self.orderSummary.plan.planName, 
+                            'id': self.orderSummary.plan.mobilePlanId, 
+                            'category': self.orderSummary.plan.planType, 
+                            'price': self.orderSummary.plan.totalAmountWithoutSST
+                        }]
+                    };
+                    if (self.orderSummary.addOn) {
+                        pushData.items.push({
+                            'name': self.orderSummary.addOn.addonName, 
+                            'id': 0, 
+                            'category': 'addOn', 
+                            'price': self.orderSummary.addOn.amount
+                        });
+                    }
+                    console.log(eventType, pushData);
+                    pushAnalytics(eventType, pushData);
                 }
             }
         });

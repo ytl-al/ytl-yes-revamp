@@ -927,6 +927,8 @@
 
                     self.updateSummary();
 
+                    self.sendAnalytics('addToCart');
+
                     if (closeOverlay) {
                         setTimeout(function() {
                             toggleOverlay(false);
@@ -1204,6 +1206,8 @@
                         ywos.lsData.meta.orderSummary.addOn = self.orderSummary.addOn;
                         self.orderSummary = ywos.lsData.meta.orderSummary;
                         currentStep = ywos.lsData.meta.completedStep;
+                    } else {
+                        self.sendAnalytics('checkout');
                     }
 
                     ywos.lsData.meta.loginType = loginType;
@@ -1259,6 +1263,40 @@
                     } else {
                         self.login.submitButton.allowBasic = false;
                     }
+                },
+                sendAnalytics: function(eventType) {
+                    var self = this;
+                    var pushData = [];
+                    switch (eventType) {
+                        case 'addToCart': 
+                            pushData = [{
+                                'name': self.orderSummary.plan.planName, 
+                                'id': self.orderSummary.plan.mobilePlanId, 
+                                'category': self.orderSummary.plan.planType, 
+                                'price': self.orderSummary.plan.totalAmountWithoutSST
+                            }];
+                            break;
+                        case 'checkout':
+                            pushData = [{
+                                'name': self.orderSummary.plan.planName, 
+                                'id': self.orderSummary.plan.mobilePlanId, 
+                                'category': self.orderSummary.plan.planType, 
+                                'price': self.orderSummary.plan.totalAmountWithoutSST
+                            }];
+
+                            if (self.orderSummary.addOn) {
+                                pushData.push({
+                                    'name': self.orderSummary.addOn.addonName, 
+                                    'id': 0, 
+                                    'category': 'addOn', 
+                                    'price': self.orderSummary.addOn.amount
+                                });
+                            }
+                            break;
+                        default: 
+                            return;
+                    }
+                    pushAnalytics(eventType, pushData);
                 }
             }
         });
