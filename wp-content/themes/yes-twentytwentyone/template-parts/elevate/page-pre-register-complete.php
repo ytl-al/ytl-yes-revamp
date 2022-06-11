@@ -591,8 +591,8 @@
 									self.deliveryInfo = data.customer; 
 									self.deliveryInfo.name= self.deliveryInfo.fullName;
 									self.deliveryInfo.mykad = self.deliveryInfo.securityNumber;
-									self.deliveryInfo.address = self.deliveryInfo.addressLine2;
-									self.deliveryInfo.addressMore = self.deliveryInfo.addressLine1;
+									self.deliveryInfo.address = self.deliveryInfo.addressLine1;
+									self.deliveryInfo.addressMore = self.deliveryInfo.addressLine2;
 									self.deliveryInfo.postcode = self.deliveryInfo.postCode;
  
 									self.deliveryInfo.stateCode = (self.deliveryInfo.state) ? self.getStateCode(self.deliveryInfo.state) : '';

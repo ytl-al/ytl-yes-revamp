@@ -649,6 +649,8 @@
                                 self.deliveryInfo.city = '';
                                 self.deliveryInfo.cityCode = '';
                             }
+                            self.deliveryInfo.address = self.deliveryInfo.addressLine1 + ' ' + self.deliveryInfo.addressLine2;
+                            self.deliveryInfo.addressMore = self.deliveryInfo.address2;
                             elevate.lsData.deliveryInfo = self.deliveryInfo;
                             elevate.updateElevateLSData();
                             console.log("self.deliveryInfo",self.deliveryInfo);
@@ -743,7 +745,7 @@
                     if(self.deliveryInfo.alternative_phone && self.deliveryInfo.alternative_phone == self.deliveryInfo.inphone){
                         isFilled = false;
                         $('#alternative_phone').addClass('input_error');
-                        toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, You cannot using same phone number.')
+                        toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, You cannot use the same number as alternate phone number.')
                     }
 
                     var pattern =  /^[a-zA-Z,\,/@,\s]+$/;
