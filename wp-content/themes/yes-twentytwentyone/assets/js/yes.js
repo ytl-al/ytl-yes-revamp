@@ -313,8 +313,7 @@ function gaEEcommercePush(eventType = '', data = {}) {
  * @since    1.2.1
  */
 function fbPixelPush(eventType = '', data = {}) {
-    // if (typeof fbq === 'function' && eventType && data) {
-    if (eventType && data) {
+    if (typeof fbq === 'function' && eventType && data) {
         switch (eventType) {
             case 'impressions': 
                 var objItems = [];
