@@ -802,8 +802,9 @@
                     ywos.updateYWOSLSData();
 
                     self.sendAnalytics();
-
-                    ywos.redirectToPage('thank-you');
+                    setTimeout(function() {
+                        ywos.redirectToPage('thank-you');
+                    }, 2000);
                 },
                 selectBank: function(bank, event) {
                     var self = this;
@@ -924,6 +925,7 @@
                         'tax': self.orderSummary.due.taxesSST,
                         'shipping': self.orderSummary.due.shippingFees, 
                         'foreigner_deposit': self.orderSummary.due.foreignerDeposit,
+                        'payment_method': self.paymentInfo.paymentMethod,
                         'items': [{
                             'name': self.orderSummary.plan.planName, 
                             'id': self.orderSummary.plan.mobilePlanId, 
@@ -939,7 +941,6 @@
                             'price': self.orderSummary.addOn.amount
                         });
                     }
-                    console.log(eventType, pushData);
                     pushAnalytics(eventType, pushData);
                 }
             }
