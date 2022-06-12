@@ -926,6 +926,7 @@
                         'shipping': self.orderSummary.due.shippingFees, 
                         'foreigner_deposit': self.orderSummary.due.foreignerDeposit,
                         'payment_method': self.paymentInfo.paymentMethod,
+                        'rounding_adjustment': self.orderSummary.rounding,
                         'items': [{
                             'name': self.orderSummary.plan.planName, 
                             'id': self.orderSummary.plan.mobilePlanId, 
