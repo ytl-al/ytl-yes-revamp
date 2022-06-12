@@ -884,10 +884,10 @@
                         elevate.lsData.meta.paymentResponse = self.paymentResponse;
                         elevate.updateElevateLSData();
 
-                        self.sendAnalytics();
                         setTimeout(function() {
                             elevate.redirectToPage('pre-register-thanks?status='+status+'&orderNumber='+$('#displayOrderNumber').val());
                         }, 2000);
+                        self.sendAnalytics();
                     },
 
                     updateElevateOrder: function (){
