@@ -925,8 +925,33 @@
 						elevate.lsData.guid =  self.guid; 
 						elevate.updateElevateLSData();
 						toggleOverlay();
-						elevate.redirectToPage('pre-register-contract');								
+                        self.sendAnalytics();
+						setTimeout(function() {
+                            elevate.redirectToPage('pre-register-contract');
+                        }, 2000);							
                     }
+                },
+                sendAnalytics: function() {
+                    var self = this;
+                    var pushData = [];
+                    pushData.push({
+                        'name': self.orderSummary.device.nameEN + ' - ' + self.orderSummary.device.color,
+                        'id': self.orderSummary.device.code, 
+                        'category': 'DEVICE',
+                        'price': parseFloat(self.orderSummary.device.devicePriceMonth).toFixed(2)
+                    });
+                    pushData.push({
+                        'name': self.orderSummary.plan.nameEN,
+                        'id': self.orderSummary.plan.planId, 
+                        'category': self.orderSummary.plan.planType,
+                        'price': parseFloat(self.orderSummary.plan.monthlyAmount).toFixed(2)
+                    });
+
+                    pushAnalytics('addToCart', pushData);
+                    pushAnalytics('checkout', pushData);
+                    
+                    elevate.lsData.analyticItems =  pushData;
+                    elevate.updateElevateLSData();
                 }
             }
         });

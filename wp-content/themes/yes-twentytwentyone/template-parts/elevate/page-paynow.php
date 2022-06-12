@@ -485,7 +485,8 @@
                         deliveryType: ''
                     },
                     checkPaymentStatusCount: 0,
-                    paymentResponse: null
+                    paymentResponse: null,
+                    analyticItems: []
                 },
                 mounted: function() {},
                 created: function() {
@@ -536,6 +537,10 @@
                                 self.contractSigned = true;
                             }
 
+                            if (elevate.lsData.analyticItems) {
+                                self.analyticItems = elevate.lsData.analyticItems;
+                            }
+
                             self.productId = elevate.lsData.product.selected.productCode;
                             self.dealer = elevate.lsData.meta.dealer;
 
@@ -572,7 +577,7 @@
                             .finally(() => {
                                 setTimeout(function() {
                                     $('.form-select#select-bank').selectpicker('refresh');
-                                    // toggleOverlay(false);
+                                    toggleOverlay(false);
                                 }, 500);
                             });
                     },
@@ -877,7 +882,10 @@
                         elevate.lsData.meta.paymentResponse = self.paymentResponse;
                         elevate.updateElevateLSData();
 
-                        elevate.redirectToPage('thanks?status='+status+'&orderNumber='+$('#displayOrderNumber').val());
+                        self.sendAnalytics();
+                        setTimeout(function() {
+                            elevate.redirectToPage('thanks?status='+status+'&orderNumber='+$('#displayOrderNumber').val());
+                        }, 2000);
                     },
                     updateElevateOrder: function (){
                         var self = this;
@@ -961,7 +969,7 @@
                             .catch((error) => {
                                 toggleOverlay(false);
 								$('#error').html(error);
-                                console.log(error, response);
+                                console.log(error);
                             });
 
                     },
@@ -1084,6 +1092,22 @@
                     selectPaymentMethod: function(paymentMethod) {
                         this.paymentInfo.paymentMethod = paymentMethod;
                         this.watchAllowSubmit();
+                    },
+                    sendAnalytics: function() {
+                        var self = this;
+                        var eventType = 'purchase';
+                        var pushData = {
+                            'transaction_id': $('#displayOrderNumber').val(), 
+                            'currency': 'MYR',
+                            'value': self.orderSummary.orderDetail.total,
+                            'tax': self.orderSummary.orderDetail.sstAmount,
+                            'shipping': 0, 
+                            'foreigner_deposit': 0,
+                            'rounding_adjustment': self.orderSummary.orderDetail.roundingAdjustment,
+                            'payment_method': self.paymentInfo.paymentMethod,
+                            'items': self.analyticItems
+                        };
+                        pushAnalytics(eventType, pushData);
                     }
                 }
             });

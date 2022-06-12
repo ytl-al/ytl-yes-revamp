@@ -10,12 +10,12 @@
     <header class="white-top">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-6">
+                <div class="col-lg-4 col-6 d-none">
                     <div class="mt-4">
 
                     </div>
                 </div>
-                <div class="col-lg-4 col-6 text-lg-center text-end">
+                <div class="col-lg-12 text-lg-center text-end">
                     <h1 class="title_checkout p-3">Pre-Register Checkout</h1>
                 </div>
                 <div class="col-lg-4">
@@ -489,7 +489,8 @@
                         deliveryType: ''
                     },
                     checkPaymentStatusCount: 0,
-                    paymentResponse: null
+                    paymentResponse: null,
+                    analyticItems: []
                 },
                 mounted: function() {},
                 created: function() {
@@ -515,6 +516,7 @@
 
 							if (elevate.lsData.deliveryInfo) {
 								self.deliveryInfo = elevate.lsData.deliveryInfo;
+                                self.deliveryInfo.address = self.deliveryInfo.addressLine1 + ' ' + self.deliveryInfo.addressLine2;
 							}else{
 								 elevate.redirectToPage('pre-register-complete/?id='+self.guid);
 							}
@@ -529,6 +531,10 @@
 								self.contract = elevate.lsData.contract;
 								self.contractSigned = true;
 							}
+
+                            if (elevate.lsData.analyticItems) {
+                                self.analyticItems = elevate.lsData.analyticItems;
+                            }
 
 							$('#guid').val(self.guid);
 
@@ -573,7 +579,7 @@
                             .finally(() => {
                                 setTimeout(function() {
                                     $('.form-select#select-bank').selectpicker('refresh');
-                                    // toggleOverlay(false);
+                                    toggleOverlay(false);
                                 }, 500);
                             });
                     },
@@ -878,7 +884,10 @@
                         elevate.lsData.meta.paymentResponse = self.paymentResponse;
                         elevate.updateElevateLSData();
 
-                        elevate.redirectToPage('pre-register-thanks?status='+status+'&orderNumber='+$('#displayOrderNumber').val());
+                        self.sendAnalytics();
+                        setTimeout(function() {
+                            elevate.redirectToPage('pre-register-thanks?status='+status+'&orderNumber='+$('#displayOrderNumber').val());
+                        }, 2000);
                     },
 
                     updateElevateOrder: function (){
@@ -1107,6 +1116,22 @@
                     selectPaymentMethod: function(paymentMethod) {
                         this.paymentInfo.paymentMethod = paymentMethod;
                         this.watchAllowSubmit();
+                    },
+                    sendAnalytics: function() {
+                        var self = this;
+                        var eventType = 'purchase';
+                        var pushData = {
+                            'transaction_id': $('#displayOrderNumber').val(), 
+                            'currency': 'MYR',
+                            'value': self.orderSummary.orderDetail.total,
+                            'tax': self.orderSummary.orderDetail.sstAmount,
+                            'shipping': 0, 
+                            'foreigner_deposit': 0,
+                            'rounding_adjustment': self.orderSummary.orderDetail.roundingAdjustment,
+                            'payment_method': self.paymentInfo.paymentMethod,
+                            'items': self.analyticItems
+                        };
+                        pushAnalytics(eventType, pushData);
                     }
                 }
             });

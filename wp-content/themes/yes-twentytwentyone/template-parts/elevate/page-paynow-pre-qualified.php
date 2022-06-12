@@ -571,7 +571,7 @@
                             .finally(() => {
                                 setTimeout(function() {
                                     $('.form-select#select-bank').selectpicker('refresh');
-                                    // toggleOverlay(false);
+                                    toggleOverlay(false);
                                 }, 500);
                             });
                     },

@@ -416,9 +416,33 @@
                         elevate.lsData.product =  self.orderSummary.product;
                         elevate.lsData.orderDetail =  self.orderSummary.orderDetail;
                         elevate.updateElevateLSData();
-
-                        elevate.redirectToPage('eligibilitycheck');
+                        self.sendAnalytics();
+                        setTimeout(function() {
+                            elevate.redirectToPage('eligibilitycheck');
+                        }, 2000);
                     }
+                },
+                sendAnalytics: function() {
+                    var self = this;
+                    var pushData = [];
+                    pushData.push({
+                        'name': self.orderSummary.product.selected.nameEN + ' - ' + self.orderSummary.product.selected.color,
+                        'id': self.orderSummary.product.selected.code, 
+                        'category': 'DEVICE',
+                        'price': parseFloat(self.orderSummary.product.selected.devicePriceMonth).toFixed(2)
+                    });
+                    pushData.push({
+                        'name': self.orderSummary.product.selected.plan.nameEN,
+                        'id': self.orderSummary.product.selected.plan.planId, 
+                        'category': self.orderSummary.product.selected.plan.planType,
+                        'price': parseFloat(self.orderSummary.product.selected.plan.monthlyAmount).toFixed(2)
+                    });
+
+                    pushAnalytics('addToCart', pushData);
+                    pushAnalytics('checkout', pushData);
+                    
+                    elevate.lsData.analyticItems =  pushData;
+                    elevate.updateElevateLSData();
                 }
 
             }
