@@ -887,7 +887,9 @@
                         setTimeout(function() {
                             elevate.redirectToPage('pre-register-thanks?status='+status+'&orderNumber='+$('#displayOrderNumber').val());
                         }, 2000);
-                        self.sendAnalytics();
+                        if (status == 2) {
+                            self.sendAnalytics();
+                        }
                     },
 
                     updateElevateOrder: function (){
