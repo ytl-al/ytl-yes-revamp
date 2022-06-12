@@ -79,6 +79,10 @@
             padding: 8px 40px;
             text-transform: uppercase;
         }
+	
+        .text-12{
+            font-size:12px!important;
+        }
 
         @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
             #cart-body {
@@ -556,6 +560,28 @@
                                             </div>
                                             <div class="col-6 text-end">
                                                 <p>RM{{item.price}}/ mth</p>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-1">
+                                                <input type="checkbox" id="subscribe" @click="watchAllowNext" name="subscribe" value="1">
+                                            </div>
+                                            <div class="col-11" >
+                                                <label for="subscribe" class="text-12" style="line-height:20px;">I here by agree to subscribe to the plan selected in the online form
+                                                    submitted by me, and to be bound by the First to 5G Campaign Terms and
+                                                    Conditions available at <a target="_blank"
+                                                                            href="https://www.yes.my/tnc/ongoing-campaigns-tnc">www.yes.my/tnc/ongoing-campaigns-tnc</a>.
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2 ">
+                                            <div class="col-1">
+                                                <input type="checkbox" id="consent" @click="watchAllowNext" name="consent" value="1">
+                                            </div>
+                                            <div class="col-11 text-12">
+                                                <label for="consent" class="text-12" style="line-height:20px;">
+                                                    I further give consent to YTLC to process my personal data in accordance with YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a>.
+                                                </label>
                                             </div>
                                         </div>
 
@@ -1325,12 +1351,36 @@
                         $('.accordion-wrap').toggleClass("active");
                         $(".accordion-body").slideToggle();
                     },
-                    watchAllowNext: function() {
+                    // watchAllowNext: function() {
+                    //     var self = this;
+                    //     if(!self.deliveryInfo.id){
+                    //         self.allowSubmit = false
+                    //     }
+
+                    // },
+                    
+                    watchAllowNext: function () {
+                        $('#error').html("");
+                        $('.input_error').removeClass('input_error');
                         var self = this;
-                        if(!self.deliveryInfo.id){
-                            self.allowSubmit = false
+                        var isFilled = true;
+                        var error = new Array();
+                        
+                        if(!$('#subscribe').is(':checked') ||  !$('#consent').is(':checked')){
+                            isFilled = false
                         }
 
+                        if (isFilled) {
+                            self.allowSubmit = true;
+                        } else {
+                            self.allowSubmit = false;
+                            if(error.length){
+                                var uniqueArray = error.filter(function(item, pos, self) {
+                                    return self.indexOf(item) == pos;
+                                })
+                                $('#error').html("Sorry: " + uniqueArray.join(', ')+'.');
+                            }
+                        }
                     },
                     goNext: function() {
 
