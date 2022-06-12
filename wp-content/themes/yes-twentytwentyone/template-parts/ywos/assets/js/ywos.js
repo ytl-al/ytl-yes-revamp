@@ -75,7 +75,7 @@ const ywos = {
                     'price': data.totalAmountWithoutSST,
                     'list_name': 'Product Page'
                 }];
-                gaEEcommercePush('impressions', pushData);
+                pushAnalytics('impressions', pushData);
             },
             complete: function() {
                 self.redirectToCart();
