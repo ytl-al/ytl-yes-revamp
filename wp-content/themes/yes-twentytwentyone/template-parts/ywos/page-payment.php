@@ -801,10 +801,10 @@
                     ywos.lsData.meta.paymentResponse = self.paymentResponse;
                     ywos.updateYWOSLSData();
 
-                    self.sendAnalytics();
                     setTimeout(function() {
                         ywos.redirectToPage('thank-you');
                     }, 2000);
+                    self.sendAnalytics();
                 },
                 selectBank: function(bank, event) {
                     var self = this;

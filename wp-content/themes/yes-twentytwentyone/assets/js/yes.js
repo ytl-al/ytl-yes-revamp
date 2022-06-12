@@ -262,12 +262,13 @@ function initBetterDocsSearch5G() {
 
 /**
  * Function pushAnalytics()
- * Function to measure shopping journey to analytics
+ * Function to measure shopping journey to analytics - Google Analytics, Facebook Pixel
  * 
  * @since    1.2.1
  */
 function pushAnalytics(eventType = '', data = {}) {
     gaEEcommercePush(eventType, data);
+    fbPixelPush(eventType, data);
 }
 
 
@@ -297,6 +298,80 @@ function gaEEcommercePush(eventType = '', data = {}) {
                 break;
             case 'purchase':                            // dataLayer push for 'Pay & Thank you' - page-PaymentMethodChangeEvent.php on complete transaction payment
                 gtag('event', 'purchase', data);
+                break;
+            default:
+                return;
+        }
+    }
+}
+
+
+/**
+ * Function fbPixelPush()
+ * Function to measure shopping journey to Facebook Pixel
+ * 
+ * @since    1.2.1
+ */
+function fbPixelPush(eventType = '', data = {}) {
+    // if (typeof fbq === 'function' && eventType && data) {
+    if (eventType && data) {
+        switch (eventType) {
+            case 'impressions': 
+                var objItems = [];
+                data.map(function(item) {
+                    item.quantity = 1;
+                    objItems.push(item);
+                });
+                var objTrack = {
+                    'content_type': 'product', 
+                    'contents': objItems
+                };
+                fbq('track', 'ViewContent', objTrack);
+                break;
+            case 'addToCart': 
+                var objItems = [];
+                var total = 0;
+                data.map(function(item) {
+                    objItems.push(item);
+                    total = parseFloat(total) + parseFloat(item.price);
+                });
+                var objTrack = {
+                    'content_type': 'product', 
+                    'currency': 'MYR', 
+                    'value': total.toFixed(2),
+                    'contents': objItems
+                };
+                fbq('track', 'AddToCart', objTrack);
+                break;
+            case 'checkout':
+                var objItems = [];
+                var total = 0;
+                data.map(function(item) {
+                    objItems.push(item);
+                    total = parseFloat(total) + parseFloat(item.price);
+                });
+                var objTrack = {
+                    'currency': 'MYR', 
+                    'value': total.toFixed(2),
+                    'contents': objItems, 
+                    'num_items': objItems.length
+                };
+                fbq('track', 'InitiateCheckout', objTrack);
+                break;
+            case 'purchase':
+                var objItems = [];
+                var total = 0;
+                data.map(function(item) {
+                    objItems.push(item);
+                    total = total + item.price;
+                });
+                var objTrack = {
+                    'content_type': 'product', 
+                    'currency': data.currency, 
+                    'value': data.value,
+                    'contents': objItems
+                };
+                fbq('track', 'Purchase', objTrack);
                 break;
             default:
                 return;
