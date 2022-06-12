@@ -690,7 +690,7 @@
                             .catch((error) => {
                                 var response = error.response;
                                 self.checkPaymentStatusCount++;
-                                if (typeof response != 'undefined' && self.checkPaymentStatusCount > 29) {
+                                if (typeof response != 'undefined' && self.checkPaymentStatusCount > 59) {
                                     var data = response.data;
                                     var errorMsg = '';
                                     if (error.response.status == 500 || error.response.status == 503) {
