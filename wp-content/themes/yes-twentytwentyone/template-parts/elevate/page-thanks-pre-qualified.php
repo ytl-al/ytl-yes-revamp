@@ -39,7 +39,7 @@
 						?>
 						<h1 class="title"></h1> 
                         <div class="subtitle" style="color:red">Payment Failure.</div> 
-                        <div class="mt-5">Sorry, your order was cancelled.</div>
+                        <div class="mt-5">Sorry, payment failed. Please retry.</div>
 						<?php	
 						}?>
                     </div>
