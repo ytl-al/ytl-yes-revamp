@@ -1,134 +1,210 @@
 <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places,visualization&v=weekly&client=gme-ytlcommunications3&channel=publicyes"></script>
-
 <script type="text/javascript">
+    const cardsState = $('[data-state]');
+    const cardListBox = $('.layer-listBox');
+    const cardsCkbState = $('.cardCheckBox.state');
+    const cardsCkbService = $('.cardCheckBox.service');
+    const cardsCkbStoreType = $('.cardCheckBox.store-type');
+    var arrCheckedStates = cardsCkbState.filter(':checked').get().map(el => el.value);
+    var arrCheckedServices = cardsCkbService.filter(':checked').get().map(el => el.value);
+    var arrCheckedStoreTypes = cardsCkbStoreType.filter(':checked').get().map(el => el.value);
+
     $(document).ready(function() {
-        $('.cardCheckBoxAll[data-filter-type="state"]').prop('checked', true).trigger('change');
-        $('.cardCheckBoxAll[data-filter-type="service"]').prop('checked', true).trigger('change');
+        $(window).scroll(function() {
+            var scroll = $(window).scrollTop();
+            var targetFilter = $('.sticky-top').offset().top;
+            if (scroll >= targetFilter) {
+                $('.sticky-top').addClass('filter-shadow');
+            } else {
+                $('.sticky-top').removeClass('filter-shadow');
+            }
+        });
+
+        initFilterCheckbox();
+
+        toggleOverlay();
+
+        getLocation();
     });
-    function handleSelectAll($dropDown, $calledFromFilter) {
-        $filterType = $dropDown.data("filter-type") || $dropDown.closest("[data-filter-type]").data("filter-type");
 
-        if ($calledFromFilter) {
-            var $cardsCkb = $("[data-filter-type='" + $filterType + "'] .cardCheckBox");
-            var $selectAll = $cardsCkb.length === $cardsCkb.filter(":checked").length;
-
-            $("[data-filter-type='" + $filterType + "'] input.cardCheckBoxAll").prop("checked", $selectAll);
+    function handleSelectAll(dropdown, calledFromFilter = false) {
+        var filterType = $(dropdown).data('filter-type') || $(dropdown).closest('[data-filter-type]').data('filter-type');
+        if (calledFromFilter) {
+            var cardsCkb = $('[data-filter-type="' + filterType + '"] .cardCheckBox');
+            var selectAll = cardsCkb.length === cardsCkb.filter(':checked').length;
+            $('[data-filter-type="' + filterType + '"] input.cardCheckBoxAll').prop('checked', selectAll);
         } else {
-            $("[data-filter-type='" + $filterType + "'] .cardCheckBox").prop("checked", $dropDown.is(":checked")).change();
+            $('[data-filter-type="' + filterType + '"] .cardCheckBox').prop('checked', $(dropdown).is(':checked')).change();
         }
     }
 
-    // Cache your elements
-    const $stateCards = $("[data-state]");
-    const $serviceCards = $('[data-services]');
-    const $stateCardsCkb = $(".cardCheckBox.state");
-    const $serviceCardsCkb = $('.cardCheckBox.service');
+    function checkIfNoResults() {
+        setTimeout(function() {
+            AOS.refresh();
+        }, 500);
 
-    $("input.cardCheckBoxAll").each(function($index, $dropDown) {
-        $dropDown = $($dropDown);
+        var activeBoxStates = $('.layer-state').not('.is-hidden');
+        var boxNoResultsAll = $('#row-noResultsAll');
+        if (!$(activeBoxStates).length) {
+            $(boxNoResultsAll).removeClass('is-hidden');
+        } else {
+            var activeBoxServices = $('.store-box').not('.is-hidden');
+            $(activeBoxStates).each(function(idx, stateBox) {
+                var activeBoxServices = $(stateBox).find('.store-box').not('.is-hidden');
+                var noResultBoxServices = $(stateBox).find('.layer-listBoxNoResults');
+                if (!$(activeBoxServices).length) {
+                    $(noResultBoxServices).removeClass('is-hidden');
+                } else {
+                    $(noResultBoxServices).addClass('is-hidden');
+                }
+            });
+            $(boxNoResultsAll).addClass('is-hidden');
+        }
+    }
 
-        $dropDown.on("change", function() {
-            handleSelectAll($dropDown);
-        });
-    });
+    function changeState(e) {
+        var checkbox = $(e.target);
+        handleSelectAll(checkbox, true);
 
-    $stateCardsCkb.on("change", function($e) {
-        $checkBox = $($e.target);
-        handleSelectAll($checkBox, true);
-
-        // Create an Array of checked values
-        const checkedStatesArr = $stateCardsCkb.filter(":checked").get().map(el => el.value);
-
+        arrCheckedStates = cardsCkbState.filter(':checked').get().map(el => el.value);
         var selectedText = 'No State Selected';
-        if (checkedStatesArr.length == $stateCardsCkb.length) {
+        if (arrCheckedStates.length == cardsCkbState.length) {
             selectedText = 'All States';
-        } else if (checkedStatesArr.length > 1) {
+        } else if (arrCheckedStates.length > 1) {
             selectedText = 'Multiple States';
-        } else if (checkedStatesArr.length == 1) {
-            // selectedText = $checkBox.closest('.form-check').find('span').html();
-            selectedText = $('.cardCheckBox.state[value="' + checkedStatesArr[0] + '"]').closest('.form-check').find('span').html();
+        } else if (arrCheckedStates.length == 1) {
+            selectedText = $('.cardCheckBox.state[value="' + arrCheckedStates[0] + '"]').closest('.form-check').find('span').html();
         }
         $('#dropdownStates').text(selectedText);
 
-        // Show all and exit if no filter is active
-        if (!checkedStatesArr.length) return $stateCards.addClass("is-hidden");
+        if (!arrCheckedStates.length) {
+            cardsState.addClass('is-hidden');
+            checkIfNoResults();
+            return;
+        }
 
-        // Finally, use jQuery's .toggleClass() and JS's Array.prototype.includes()
-        $stateCards.each(function() {
-            const state = $(this).data("state");
-            $(this).toggleClass("is-hidden", !checkedStatesArr.includes(state));
+        cardsState.each(function() {
+            const state = $(this).data('state');
+            $(this).toggleClass('is-hidden', !arrCheckedStates.includes(state));
         });
-    });
 
-    $serviceCardsCkb.on("change", function($e) {
-        $checkBox = $($e.target);
-        handleSelectAll($checkBox, true);
+        checkIfNoResults();
+    }
 
-        // Create an Array of checked values
-        const checkedServicesArr = $serviceCardsCkb.filter(":checked").get().map(el => el.value);
-        
-        var selectedText = 'No Products & Services Selected';
-        if (checkedServicesArr.length == $serviceCardsCkb.length) {
-            selectedText = 'All Products & Services';
-        } else if (checkedServicesArr.length > 1) {
-            selectedText = 'Multiple Products & Services';
-        } else if (checkedServicesArr.length == 1) {
-            // selectedText = $checkBox.closest('.form-check').find('span').html();
-            selectedText = $('.cardCheckBox.service[value="' + checkedServicesArr[0] + '"]').closest('.form-check').find('span').html();
+    function toggleListBox() {
+        cardListBox.addClass('is-hidden');
+
+        arrCheckedStoreTypes = cardsCkbStoreType.filter(':checked').get().map(el => el.value);
+        arrCheckedServices = cardsCkbService.filter(':checked').get().map(el => el.value);
+        arrCheckedListBox = arrCheckedStoreTypes.concat(arrCheckedServices);
+
+        cardListBox.each(function(idx, listBox) {
+            var listBox = $(this);
+            var service = $(this).data('services');
+            for (var i = 0; i < arrCheckedStoreTypes.length; i++) {
+                if (service.indexOf(arrCheckedStoreTypes[i]) > -1) {
+                    var target = $(listBox);
+                    var targetServices = $(target).data('services');
+                    for (var j = 0; j < arrCheckedServices.length; j++) {
+                        if (targetServices.indexOf(arrCheckedServices[j]) > -1) {
+                            $(target).removeClass('is-hidden');
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+
+        checkIfNoResults();
+    }
+
+    function changeService(e) {
+        var checkbox = $(e.target);
+        handleSelectAll(checkbox, true);
+
+        const arrCheckedServices = cardsCkbService.filter(':checked').get().map(el => el.value);
+        switch (true) {
+            case arrCheckedServices.length == cardsCkbService.length:
+                selectedText = 'All Products & Services';
+                break;
+            case (arrCheckedServices.length > 1):
+                selectedText = 'Multiple Products & Services';
+                break;
+            case (arrCheckedServices.length == 1):
+                selectedText = $('.cardCheckBox.service[value="' + arrCheckedServices[0] + '"]').closest('.form-check').find('span').html();
+                break;
+            default:
+                selectedText = 'No Products & Services Selected';
         }
         $('#dropdownProducts').text(selectedText);
 
-        // Show all and exit if no filter is active
-        if (!checkedServicesArr.length) return $serviceCards.addClass("is-hidden");
+        toggleListBox();
+    }
 
-        // Finally, use jQuery's .toggleClass() and JS's Array.prototype.includes()
-        $serviceCards.each(function(idx, target) {
-            var services = $(this).data("services");
-            $(target).addClass('is-hidden');
-            for (var i = 0; i < checkedServicesArr.length; i++) {
-                if (services.indexOf(checkedServicesArr[i]) > -1) {
-                    $(target).removeClass('is-hidden');
-                    break;
+    function changeStoreType(e) {
+        var checkbox = $(e.target);
+        handleSelectAll(checkbox, true);
+
+        arrCheckedStoreTypes = cardsCkbStoreType.filter(':checked').get().map(el => el.value);
+        switch (true) {
+            case arrCheckedStoreTypes.length == cardsCkbStoreType.length:
+                selectedText = 'All Store Types';
+                break;
+            case (arrCheckedStoreTypes.length > 1):
+                selectedText = 'Multiple Store Types';
+                break;
+            case (arrCheckedStoreTypes.length == 1):
+                selectedText = $('.cardCheckBox.store-type[value="' + arrCheckedStoreTypes[0] + '"]').closest('.form-check').find('span').text();
+                break;
+            default:
+                selectedText = 'No Store Type Selected';
+        }
+        $('#dropdownStoreTypes').text(selectedText);
+
+        toggleListBox();
+    }
+
+    function initFilterCheckbox() {
+        $('.cardCheckBoxAll[data-filter-type="state"]').prop('checked', true).trigger('change');
+        $('.cardCheckBoxAll[data-filter-type="service"]').prop('checked', true).trigger('change');
+        $('.cardCheckBoxAll[data-filter-type="store-type"]').prop('checked', true).trigger('change');
+
+        $('ul.dropdown-menu').on('click', function(e) {
+            var events = $._data(document, 'events') || {};
+            events = events.click || [];
+            for (var i = 0; i < events.length; i++) {
+                if (events[i].selector) {
+                    if ($(e.target).is(events[i].selector)) {
+                        events[i].handler.call(event.target, event);
+                    }
+                    $(e.target).parents(events[i].selector).each(function() {
+                        events[i].handler.call(this, e);
+                    });
                 }
             }
+            e.stopPropagation();
         });
-    });
 
-    $('ul.dropdown-menu').on('click', function(event) {
-        var events = $._data(document, 'events') || {};
-        events = events.click || [];
-        for (var i = 0; i < events.length; i++) {
-            if (events[i].selector) {
+        $('input.cardCheckBoxAll').each(function(index, dropdown) {
+            $(dropdown).on('change', function() {
+                handleSelectAll(dropdown);
+            });
+        });
 
-                //Check if the clicked element matches the event selector
-                if ($(event.target).is(events[i].selector)) {
-                    events[i].handler.call(event.target, event);
-                }
+        $(cardsCkbState).on('change', function(event) {
+            changeState(event);
+        });
 
-                // Check if any of the clicked element parents matches the 
-                // delegated event selector (Emulating propagation)
-                $(event.target).parents(events[i].selector).each(function() {
-                    events[i].handler.call(this, event);
-                });
-            }
-        }
-        event.stopPropagation(); //Always stop propagation
-    });
-    $(window).scroll(function() {
-        var scroll = $(window).scrollTop();
-        if (scroll > 450) {
-            $(".filter-container").addClass("filter-shadow");
-        } else {
-            $(".filter-container").removeClass("filter-shadow");
-        }
-    });
+        $(cardsCkbService).on('change', function(event) {
+            changeService(event);
+        });
 
-    $(document).ready(function() {
-        toggleOverlay();
-        getLocation();
-    })
+        $(cardsCkbStoreType).on('change', function(event) {
+            changeStoreType(event);
+        });
+    }
 
-    var x = document.getElementById("location-area");
+    var x = document.getElementById("store-locations");
 
     function getLocation() {
         if (navigator.geolocation) {
