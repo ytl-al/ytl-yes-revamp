@@ -724,9 +724,9 @@
                             }
                              //self.redirectThankYou();
 							 errorMsg = "Payment Timeout.";
-							 self.cancelElevateOrder(errorMsg);
-							 self.updatePaymentStatus(-1);
-                        }, 300000);
+							//  self.cancelElevateOrder(errorMsg);
+							 self.updatePaymentStatus(3);
+                        }, 600000);
 
                         mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
 

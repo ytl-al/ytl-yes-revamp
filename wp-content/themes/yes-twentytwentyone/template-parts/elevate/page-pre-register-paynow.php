@@ -733,9 +733,9 @@
                             }
                              //self.redirectThankYou();
 							 errorMsg = "Payment Timeout.";
-							 self.cancelElevateOrder(errorMsg);
-							 self.updatePaymentStatus(-1);
-                        }, 300000);
+							//  self.cancelElevateOrder(errorMsg);
+							 self.updatePaymentStatus(3);
+                        }, 600000);
 
                         mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
 
@@ -887,7 +887,7 @@
                         setTimeout(function() {
                             elevate.redirectToPage('pre-register-thanks?status='+status+'&orderNumber='+$('#displayOrderNumber').val());
                         }, 2000);
-                        if (status == 2) {
+                        if (status == 2 || status == 3) {
                             self.sendAnalytics();
                         }
                     },

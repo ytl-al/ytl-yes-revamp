@@ -35,6 +35,9 @@
                         <div class="mt-5">A summary of your order has been sent to
                             your email
                         </div>
+                        <?php } else if ($_GET['status'] == 3) { ?>
+                            <h1 class="title">Thank you!</h1>
+                            <div class="mt-5">We have received your order and are waiting for payment clearance. <br />You will receive confirmation email once payment is cleared.</div>
 						<?php }else{
 						?>
 						<h1 class="title"></h1> 
