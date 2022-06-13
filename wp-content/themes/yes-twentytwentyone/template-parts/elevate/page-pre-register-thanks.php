@@ -119,18 +119,7 @@
             methods: {
                 pageInit: function () {
                     var self = this;
-                    if (elevate.validateSession(self.currentStep)) {
-
-                        if (elevate.lsData.orderInfo) {
-                            self.orderSummary.orderInfo = elevate.lsData.orderInfo;
-                        }
-
-                        //console.log(self.orderSummary.orderInfo);
-                        elevate.removeElevateLSData();
-
-                    } else {
-                        //elevate.redirectToPage('cart');
-                    }
+                    elevate.removeElevateLSData(); 
                 }
             }
         });

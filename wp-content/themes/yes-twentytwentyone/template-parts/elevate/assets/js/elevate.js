@@ -92,6 +92,7 @@ const elevate = {
     buyPlan: function (productId) {
         toggleOverlay();
 
+        var self = this;
         var dc = elevate.getCookie('paramDC');
         var duid = elevate.getCookie('paramDUID');
         var rc = elevate.getCookie('paramRC');
@@ -101,7 +102,23 @@ const elevate = {
         if(!rc) rc = '';
 
         this.initLocalStorage(productId, dc, duid, rc);
-        this.redirectToCart();
+        $.ajax({
+            url: apiEndpointURL_elevate + '/getProduct/?code=' + productId, 
+            method: 'GET',
+            success: function(data) {
+                var pushData = [{
+                    'name': data.selected.plan.planName,
+                    'id': productId,
+                    'category': data.selected.plan.planType,
+                    'price': data.selected.plan.upFrontPayment,
+                    'list_name': 'Product Page'
+                }];
+                pushAnalytics('impressions', pushData);
+            },
+            complete: function() {
+                self.redirectToCart();
+            }
+        });
     },
     checkExists: function () {
         if (elevateLSData === null) {

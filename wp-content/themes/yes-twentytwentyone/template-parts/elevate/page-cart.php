@@ -163,7 +163,7 @@
                                 <div class="col-6 text-end">
                                     <p>RM{{formatPrice(item.price)}}/ mth</p>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
 
                         <a href="javascript:void(0)" @click="goNext" class="pink-btn-disable d-block" :class="allowSubmit?'pink-btn':'pink-btn-disable'">Continue</a>
@@ -271,7 +271,7 @@
                         $('#totalItemCart').text("0");
                         setTimeout(function() {
                             $('#container-hasItem').show();
-                            $('#main-vue').css({'height':'auto'});h
+                            $('#main-vue').css({'height':'auto'});
                             toggleOverlay(false);
                         }, 1500);
                     }
@@ -321,7 +321,7 @@
                         {name: self.orderSummary.product.selected.plan.nameEN,price:parseFloat(self.orderSummary.product.selected.plan.monthlyAmount).toFixed(2)},
                     ];
 
-                    var subtotal = parseFloat(self.orderSummary.product.selected.devicePriceMonth) + parseFloat(self.orderSummary.product.selected.planPerMonth);
+                    var subtotal = parseFloat(self.orderSummary.product.selected.devicePriceMonth) + parseFloat(self.orderSummary.product.selected.plan.monthlyAmount);
 
 					var amount = parseFloat(self.orderSummary.product.selected.plan.monthlyAmount);
                     var sstAmount = parseFloat(self.orderSummary.product.selected.plan.sstAmount);
@@ -416,9 +416,33 @@
                         elevate.lsData.product =  self.orderSummary.product;
                         elevate.lsData.orderDetail =  self.orderSummary.orderDetail;
                         elevate.updateElevateLSData();
-
-                        elevate.redirectToPage('eligibilitycheck');
+                        self.sendAnalytics();
+                        setTimeout(function() {
+                            elevate.redirectToPage('eligibilitycheck');
+                        }, 2000);
                     }
+                },
+                sendAnalytics: function() {
+                    var self = this;
+                    var pushData = [];
+                    pushData.push({
+                        'name': self.orderSummary.product.selected.nameEN + ' - ' + self.orderSummary.product.selected.color,
+                        'id': self.orderSummary.product.selected.code, 
+                        'category': 'DEVICE',
+                        'price': parseFloat(self.orderSummary.product.selected.devicePriceMonth).toFixed(2)
+                    });
+                    pushData.push({
+                        'name': self.orderSummary.product.selected.plan.nameEN,
+                        'id': self.orderSummary.product.selected.plan.planId, 
+                        'category': self.orderSummary.product.selected.plan.planType,
+                        'price': parseFloat(self.orderSummary.product.selected.plan.monthlyAmount).toFixed(2)
+                    });
+
+                    pushAnalytics('addToCart', pushData);
+                    pushAnalytics('checkout', pushData);
+                    
+                    elevate.lsData.analyticItems =  pushData;
+                    elevate.updateElevateLSData();
                 }
 
             }

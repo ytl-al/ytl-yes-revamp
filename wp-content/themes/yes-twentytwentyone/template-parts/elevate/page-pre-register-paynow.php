@@ -6,16 +6,17 @@
 		background-repeat: no-repeat;
 	}
 </style>
+<input type="hidden" value="" id="guid"/>
     <header class="white-top">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-6">
+                <div class="col-lg-4 col-6 d-none">
                     <div class="mt-4">
 
                     </div>
                 </div>
-                <div class="col-lg-4 col-6 text-lg-center text-end">
-                    <h1 class="title_checkout p-3">Pre Qualified Checkout</h1>
+                <div class="col-lg-12 text-lg-center text-end">
+                    <h1 class="title_checkout p-3">Pre-Register Checkout</h1>
                 </div>
                 <div class="col-lg-4">
 
@@ -31,10 +32,13 @@
             <div class="container">
                 <ul class="wizard">
                     <li ui-sref="firstStep" class="completed">
-                        <span>1. Select Plan</span>
+                        <span>1. REVIEW AND ORDER</span>
                     </li>
                     <li ui-sref="secondStep" class="completed">
-                        <span>2. Payment</span>
+                        <span>2. SIGN CONTRACT </span>
+                    </li>
+					 <li ui-sref="secondStep" class="completed">
+                        <span>3. PAYMENT</span>
                     </li>
                 </ul>
             </div>
@@ -53,7 +57,7 @@
                 </div>
                 <div class="row gx-5" v-if="pageValid">
                     <div class="col-lg-4 col-12 order-lg-2">
-                        <?php include('section-order-summary.php'); ?>
+                        <?php include('pre-order-summary.php'); ?>
                     </div>
                     <form class="col-lg-8 col-12 order-lg-1 mt-3 mt-lg-0" autocomplete="off" @submit="paymentSubmit">
                         <div>
@@ -192,7 +196,7 @@
                                 <div class="col-12 col-lg-6">
                                     <button type="submit" class="pink-btn w-100" :disabled="!allowSubmit">Pay</button>
                                 </div>
-				<div id="error" style="color:red"></div>
+								<div id="error" style="color:red"></div>
                             </div>
                         </div>
                     </form>
@@ -485,7 +489,8 @@
                         deliveryType: ''
                     },
                     checkPaymentStatusCount: 0,
-                    paymentResponse: null
+                    paymentResponse: null,
+                    analyticItems: []
                 },
                 mounted: function() {},
                 created: function() {
@@ -505,39 +510,42 @@
                     pageInit: function() {
                         var self = this;
 
-                        elevate.checkExists();
+                        if (elevate.validateSession(self.currentStep)) {
+							self.pageValid = true;
+							self.guid = elevate.lsData.guid;
 
-						self.pageValid = true;
+							if (elevate.lsData.deliveryInfo) {
+								self.deliveryInfo = elevate.lsData.deliveryInfo;
+                                self.deliveryInfo.address = self.deliveryInfo.addressLine1 + ' ' + self.deliveryInfo.addressLine2;
+							}else{
+								 elevate.redirectToPage('pre-register-complete/?id='+self.guid);
+							}
 
-						if (elevate.lsData.deliveryInfo) {
-							self.deliveryInfo = elevate.lsData.deliveryInfo;
+							if (elevate.lsData.orderSummary) {
+								self.orderSummary = elevate.lsData.orderSummary;
+							}else{
+								 elevate.redirectToPage('pre-register-complete/?id='+self.guid);
+							}
+
+							if (elevate.lsData.contract) {
+								self.contract = elevate.lsData.contract;
+								self.contractSigned = true;
+							}
+
+                            if (elevate.lsData.analyticItems) {
+                                self.analyticItems = elevate.lsData.analyticItems;
+                            }
+
+							$('#guid').val(self.guid);
+
+							self.productId = self.orderSummary.orderDetail.productCode;
+
+							self.ajaxGetFPXBankList();
+							self.updateData();
+
 						}else{
-							 elevate.redirectToPage('pre-qualified/?id=error');
+							elevate.redirectToPage('pre-register-complete/?id=error');
 						}
-						if (elevate.lsData.customer) {
-							self.customer = elevate.lsData.customer;
-						}else{
-							 elevate.redirectToPage('pre-qualified/?id='+self.deliveryInfo.id);
-						}
-
-						if (elevate.lsData.orderDetail) {
-							self.orderSummary.orderDetail = elevate.lsData.orderDetail;
-						}else{
-							elevate.redirectToPage('pre-qualified/?id='+self.deliveryInfo.id);
-						}
-						if (elevate.lsData.product) {
-							self.orderSummary.product = elevate.lsData.product;
-						}
-
-						if (elevate.lsData.contract) {
-							self.contract = elevate.lsData.contract;
-							self.contractSigned = true;
-						}
-
-						self.productId = elevate.lsData.product.selected.productCode;
-
-						self.ajaxGetFPXBankList();
-						self.updateData();
 
 						setTimeout(function(){
 							$('#main-vue').show();
@@ -576,9 +584,10 @@
                             });
                     },
                     ajaxGetMaybankIPPTenures: function() {
+
                         var self = this;
                         axios.post(apiEndpointURL + '/get-ipp-tenures', {
-                            'plan_name': self.orderSummary.product.selected.plan.planName
+                            'plan_name': self.orderSummary.plan.planName
                         })
                             .then((response) => {
                                 var data = response.data;
@@ -784,8 +793,8 @@
                             "university_name": "",
                             "dealer_code": "",
                             "dealer_login_id": "",
-                            "plan_name": self.orderSummary.product.selected.plan.planName,
-                            "plan_type": self.orderSummary.product.selected.plan.planType,
+                            "plan_name": self.orderSummary.plan.planName,
+                            "plan_type": self.orderSummary.plan.planType,
                             "product_bundle_id": self.productId,
                             "referral_code": self.deliveryInfo.referralCode,
                             "addon_name": "",
@@ -875,8 +884,14 @@
                         elevate.lsData.meta.paymentResponse = self.paymentResponse;
                         elevate.updateElevateLSData();
 
-                        elevate.redirectToPage('thanks-pre-qualified?status='+status+'&orderNumber='+$('#displayOrderNumber').val());
+                        setTimeout(function() {
+                            elevate.redirectToPage('pre-register-thanks?status='+status+'&orderNumber='+$('#displayOrderNumber').val());
+                        }, 2000);
+                        if (status == 2 || status == 3) {
+                            self.sendAnalytics();
+                        }
                     },
+
                     updateElevateOrder: function (){
                         var self = this;
 
@@ -888,7 +903,7 @@
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
-									self.removePrequalifiedCustomer();
+
                                 }else{
                                     toggleOverlay(false);
                                     $('#error').html("Systm error, please try again.");
@@ -1103,6 +1118,22 @@
                     selectPaymentMethod: function(paymentMethod) {
                         this.paymentInfo.paymentMethod = paymentMethod;
                         this.watchAllowSubmit();
+                    },
+                    sendAnalytics: function() {
+                        var self = this;
+                        var eventType = 'purchase';
+                        var pushData = {
+                            'transaction_id': $('#displayOrderNumber').val(), 
+                            'currency': 'MYR',
+                            'value': self.orderSummary.orderDetail.total,
+                            'tax': self.orderSummary.orderDetail.sstAmount,
+                            'shipping': 0, 
+                            'foreigner_deposit': 0,
+                            'rounding_adjustment': self.orderSummary.orderDetail.roundingAdjustment,
+                            'payment_method': self.paymentInfo.paymentMethod,
+                            'items': self.analyticItems
+                        };
+                        pushAnalytics(eventType, pushData);
                     }
                 }
             });

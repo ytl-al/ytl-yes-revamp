@@ -277,7 +277,7 @@
                                 elevate.redirectToPage('personal');
                             } else {
                                 toggleOverlay(false);
-                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful because your NRIC is not eligible (blacklisted).',"elevate.redirectToPage('/compasia-fail')")
+                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful because your NRIC is not eligible.',"elevate.redirectToPage('/compasia-fail')")
                             }
                         })
                         .catch((error) => {

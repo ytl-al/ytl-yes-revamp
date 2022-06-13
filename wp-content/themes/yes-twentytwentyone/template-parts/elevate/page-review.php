@@ -46,110 +46,110 @@
         <div class="container p-lg-5 p-3" style="border: 0">
             <div id="main-vue" >
                 <div class="subtitle">Review & Pay</div>
-            <div class="row gx-5" >
-                <div class="col-lg-8 col-12">
+                <div class="row gx-5" >
+                    <div class="col-lg-8 col-12">
 
-                    <div class="border-box">
-                        <div class="row">
-                            <div class="col-md-3 leftColor">
-                                <div class="p-3" v-if="orderSummary.product.selected"><img :src="getProductImage()" width="150"></div>
-                            </div>
-                            <div class="col-md-9 p-4">
-                                <div class="row mt-3">
-                                    <div class="col-md-9">
-                                        <div class="text-20">
-                                        <div class="subtitle2" style="margin-bottom: 0">{{orderSummary.product.selected.nameEN}}</div>
-                                        <div class="subtitle2">{{orderSummary.product.selected.plan.nameEN}}</div>
+                        <div class="border-box">
+                            <div class="row">
+                                <div class="col-md-3 leftColor">
+                                    <div class="p-3" v-if="orderSummary.product.selected"><img :src="getProductImage()" width="150"></div>
+                                </div>
+                                <div class="col-md-9 p-4">
+                                    <div class="row mt-3">
+                                        <div class="col-md-9">
+                                            <div class="text-20">
+                                                <div class="subtitle2" style="margin-bottom: 0">{{orderSummary.product.selected.nameEN}}</div>
+                                                <div class="subtitle2">{{orderSummary.product.selected.plan.nameEN}}</div>
+                                            </div>
+                                            <div class="hr_line"></div>
+                                            <div class="text-bold">
+                                                {{contractTitle}}
+                                            </div>
                                         </div>
-                                        <div class="hr_line"></div>
-                                        <div class="text-bold">
-                                            {{contractTitle}}
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12 col-12">
+                                <div class="border-box" style="width:100%; padding:20px;">
+                                    <div class="subtitle2">Plan</div>
+                                    <div class="accordion-wrap hlv_3">
+                                        <div class="accordion-header" @click="showPlanDetail()"> {{orderSummary.product.selected.plan.nameEN}} <i
+                                                    class="icon icon_arrow_down"></i></div>
+                                        <div class="text-description mt-3">{{orderSummary.product.selected.plan.shortDescriptionEN}}</div>
+                                        <ul class="accordion-body list-1 mt-3">
+                                            <li v-for="(list, index) in orderSummary.product.selected.plan.longDescriptionEN">{{list}}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="text-description mt-3">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" mt-3 mb-5">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row mt-3 item_info">
+                                        <div class="label text-bold">To: {{eligibility.name}}</div>
+                                        <div class="content">
+                                            <div>{{eligibility.email}}</div>
+                                            <div>+60 {{eligibility.inphone}}</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-3 item_info">
+                                        <div class="label">Delivery Address</div>
+                                        <div class="content"><span v-if="deliveryInfo.addressMore">{{deliveryInfo.addressMore}},</span> {{deliveryInfo.address}}, {{deliveryInfo.city}}, {{deliveryInfo.state}}, {{deliveryInfo.postcode}}, {{deliveryInfo.country}}
                                         </div>
                                     </div>
 
                                 </div>
-                            </div>
-                        </div>
+                                <div class="col-md-6">
+                                    <div style="float: right">
+                                        <a href="/elevate/personal" class="btn-edit">(Edit)</a>
+                                    </div>
 
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-					<div class="row mt-3">
-					<div class="col-md-12 col-12">
-					 <div class="border-box" style="width:100%; padding:20px;">
-					<div class="subtitle2">Plan</div>
-					<div class="accordion-wrap hlv_3">
-						<div class="accordion-header" @click="showPlanDetail()"> {{orderSummary.product.selected.plan.nameEN}} <i
-									class="icon icon_arrow_down"></i></div>
-						<div class="text-description mt-3">{{orderSummary.product.selected.plan.shortDescriptionEN}}</div>
-						<ul class="accordion-body list-1 mt-3">
-							<li v-for="(list, index) in orderSummary.product.selected.plan.longDescriptionEN">{{list}}</li>
-						</ul>
-					</div>
-					<div class="text-description mt-3">
-
-					</div>
-				</div>
-				</div>
-				</div>
-                    <div class=" mt-3 mb-5">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row mt-3 item_info">
-                                    <div class="label text-bold">To: {{eligibility.name}}</div>
-                                    <div class="content">
-                                        <div>{{eligibility.email}}</div>
-                                        <div>+60 {{eligibility.inphone}}</div>
-                                    </div>
+                    <div class="col-lg-4 col-12">
+                        <div class="summary-box">
+                            <h1 class="subtitle">Order summary</h1>
+                            <h3 class="plan_price">Monthly Payment</h3>
+                            <div class="hr_line"></div>
+                            <div class="row cart_total">
+                                <div class="col-6 pt-2 pb-2">
+                                    <h3>TOTAL</h3>
                                 </div>
-
-                                <div class="row mt-3 item_info">
-                                    <div class="label">Delivery Address</div>
-                                    <div class="content"><span v-if="deliveryInfo.addressMore">{{deliveryInfo.addressMore}},</span> {{deliveryInfo.address}}, {{deliveryInfo.city}}, {{deliveryInfo.state}}, {{deliveryInfo.postcode}}, {{deliveryInfo.country}}
-                                    </div>
+                                <div class="col-6 pt-2 pb-2 text-end">
+                                    <h3>RM{{ formatPrice(parseFloat(orderSummary.orderDetail.subtotal).toFixed(2)) }}/mth</h3>
                                 </div>
-
                             </div>
-                            <div class="col-md-6">
-                                <div style="float: right">
-                                    <a href="/elevate/personal" class="btn-edit">(Edit)</a>
+                            <div class="monthly mb-4">
+                                <div v-for="(item, index) in orderSummary.orderDetail.orderItems" class="row mt-2">
+                                    <div class="col-6">
+                                        <p>{{item.name}}</p>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <p>RM{{item.price}}/ mth</p>
+                                    </div>
                                 </div>
-
+                                <div class="row mt-3 ">
+                                    <div class="col-12">
+                                        <button class="pink-btn-disable d-block text-uppercase w-100" :class=" allowSubmit?'pink-btn':'pink-btn-disable'"  @click="goNext" type="button">Order</button>
+                                        <div id="error" class="mt-3"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
-                <div class="col-lg-4 col-12">
-                    <div class="summary-box">
-                        <h1 class="subtitle">Order summary</h1>
-                        <h3 class="plan_price">Monthly Payment</h3>
-                        <div class="hr_line"></div>
-                        <div class="row cart_total">
-                            <div class="col-6 pt-2 pb-2">
-                                <h3>TOTAL</h3>
-                            </div>
-                            <div class="col-6 pt-2 pb-2 text-end">
-                                <h3>RM{{ formatPrice(parseFloat(orderSummary.orderDetail.subtotal).toFixed(2)) }}/mth</h3>
-                            </div>
-                        </div>
-                        <div class="monthly mb-4">
-                            <div v-for="(item, index) in orderSummary.orderDetail.orderItems" class="row mt-2">
-                                <div class="col-6">
-                                    <p>{{item.name}}</p>
-                                </div>
-                                <div class="col-6 text-end">
-                                    <p>RM{{item.price}}/ mth</p>
-                                </div>
-                            </div>
-                            <div class="row mt-3 ">
-                                <div class="col-12">
-                                    <button class="pink-btn-disable d-block text-uppercase w-100" :class=" allowSubmit?'pink-btn':'pink-btn-disable'"  @click="goNext" type="button">Order</button>
-                                    <div id="error" class="mt-3"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             </div>
         </div>
     </section>
@@ -170,6 +170,11 @@
                 taxRate: {
                     sst: 0.06
                 },
+                dealer: {
+                    dealer_code: '',
+                    dealer_id: '',
+                    referral_code: ''
+                },
                 contract:{},
                 orderSummary: {
                     product: {},
@@ -179,6 +184,7 @@
                         contract_id: null,
                         orderItems: []
                     },
+                    orderInfo: {}
                 },
                 currentStep: 0,
                 elevate: null,
@@ -240,16 +246,16 @@
                         if (elevate.lsData.eligibility) {
                             self.eligibility = elevate.lsData.eligibility;
                         }else{
-								 elevate.redirectToPage('eligibilitycheck');
-						}
+                            elevate.redirectToPage('eligibilitycheck');
+                        }
                         if (elevate.lsData.customer) {
                             self.customer = elevate.lsData.customer;
                         }
                         if (elevate.lsData.deliveryInfo) {
                             self.deliveryInfo = elevate.lsData.deliveryInfo;
                         }else{
-							elevate.redirectToPage('personal');
-						}
+                            elevate.redirectToPage('personal');
+                        }
 
                         if (elevate.lsData.orderDetail) {
                             self.orderSummary.orderDetail = elevate.lsData.orderDetail;
@@ -278,23 +284,23 @@
 
 
                         setTimeout(function () {
-                                $('#cart-body').show();
+                            $('#cart-body').show();
                         }, 500);
                     } else {
                         elevate.redirectToPage('cart');
                     }
                 },
-				showPlanDetail: function(){
+                showPlanDetail: function(){
                     $('.accordion-wrap').toggleClass("active");
                     $(".accordion-body").slideToggle();
                 },
-				getProductImage: function(){
-					var self = this;
-					var url = self.orderSummary.product.selected.imageURL.split(';');
-					console.log(url);
-					return url[0];
+                getProductImage: function(){
+                    var self = this;
+                    var url = self.orderSummary.product.selected.imageURL.split(';');
+                    console.log(url);
+                    return url[0];
 
-				},
+                },
                 watchAllowNext:function (){
                     var self = this;
                     self.allowSubmit = true

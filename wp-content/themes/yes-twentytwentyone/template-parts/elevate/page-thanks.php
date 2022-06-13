@@ -27,8 +27,24 @@
             <div class="border-box thanks_bg p-lg-5">
                 <div class="row">
                     <div class="col-md-3 col-sm-3 col-12 offset-md-6 thank-mb">
+						<?php if($_GET['status'] == 2){?>
                         <h1 class="title">Thank you!</h1>
-                        <div class="mt-5">Thank you for your interest. We will get in touch with you by 9th June 2022 on your application.</div>
+                        <div class="mt-5">Order Number</div>
+                        <div class="subtitle"><?php echo $_GET['orderNumber']?></div>
+                        <div class="text-12 mt-2">Placed on <?php echo date("l, jS F Y")?></div>
+                        <div class="mt-5">A summary of your order has been sent to
+                            your email
+                        </div>
+                        <?php } else if ($_GET['status'] == 3) { ?>
+                            <h1 class="title">Thank you!</h1>
+                            <div class="mt-5">We have received your order and are waiting for payment clearance. <br />You will receive confirmation email once payment is cleared.</div>
+						<?php }else{
+						?>
+						<h1 class="title"></h1> 
+                        <div class="subtitle" style="color:red">Payment Failure.</div> 
+                        <div class="mt-5">Sorry, payment failed. Please retry.</div>
+						<?php	
+						}?>
                     </div>
                 </div>
                 <div style="height: 300px" class="d-none d-md-block"></div>

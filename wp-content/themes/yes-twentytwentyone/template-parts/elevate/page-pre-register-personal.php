@@ -1,17 +1,17 @@
 <?php require_once('includes/header.php') ?>
-
+<input type="hidden" value="" id="guid"/>
 <header class="white-top">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-6">
                 <div class="mt-4">
-                    <a href="/elevate/verification/" class="back-btn "><img
+                    <a onclick="goBack()" style="cursor:pointer" class="back-btn "><img
                                 src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
                                 alt=""> Back</a>
                 </div>
             </div>
             <div class="col-lg-4 col-6 text-lg-center text-end">
-                <h1 class="title_checkout p-3">Check Out</h1>
+                <h1 class="title_checkout p-3">PRE-REGISTER - Delivery</h1>
             </div>
             <div class="col-lg-4">
 
@@ -27,16 +27,13 @@
             <div class="container">
                 <ul class="wizard">
                     <li ui-sref="firstStep" class="completed">
-                        <span>1. Eligibility check</span>
+                        <span>1. REVIEW AND ORDER</span>
                     </li>
-                    <li ui-sref="secondStep" class="completed">
-                        <span>2. MyKAD verification</span>
+                    <li ui-sref="secondStep">
+                        <span>2. SIGN CONTRACT </span>
                     </li>
-                    <li ui-sref="thirdStep" class="completed">
-                        <span>3. Delivery details</span>
-                    </li>
-                    <li ui-sref="fourthStep">
-                        <span>4. Review and order</span>
+					 <li ui-sref="secondStep">
+                        <span>3. PAYMENT</span>
                     </li>
                 </ul>
             </div>
@@ -61,8 +58,8 @@
                                     <div class="input-group align-items-center">
                                         <input type="text" maxlength="12" class="form-control text-upper" id="mykad_number"
                                                name="mykad" v-model="deliveryInfo.mykad" @input="watchAllowNext"
-                                               @keypress="checkInputCharacters(event, 'numeric', false)" placeholder="" readonly
-                                               required>
+                                               @keypress="checkInputCharacters(event, 'numeric', false)" placeholder=""
+                                               readonly required>
 
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-mykad"></div>
@@ -72,7 +69,7 @@
                                 <div class="col-lg-12 col-12">
                                     <label class="form-label">* Full Name (as per MyKad)</label>
                                     <div class="input-group align-items-center">
-                                        <input type="text" class="form-control text-upper" id="full_name" name="name"
+                                        <input type="text" class="form-control text-uppercase" id="full_name" name="name"
                                                v-model="deliveryInfo.name" @input="watchAllowNext" placeholder="" readonly
                                                required>
 
@@ -90,9 +87,9 @@
                                 </div>
                                 <div class="col-lg-8 col-7">
                                     <input type="text" class="form-control text-upper" maxlength="11" id="ic_phone_number"
-                                           name="phone" v-model="eligibility.inphone" @input="watchAllowNext"
+                                           name="phone" v-model="deliveryInfo.inphone" @input="watchAllowNext"
                                            @keypress="checkInputCharacters(event, 'numeric', false)"
-                                           placeholder="Phone number" readonly>
+                                           placeholder="Phone number" >
                                 </div>
                                 <div class="invalid-feedback mt-1" id="em-phone"></div>
                             </div>
@@ -102,15 +99,18 @@
                                     <div class="align-items-center">
                                         <input type="text" class="form-control text-upper" id="email" name="email"
                                                v-model="deliveryInfo.email" @input="watchAllowNext"
-                                               placeholder="" readonly required>
+                                               placeholder=""  required>
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-email"></div>
                                 </div>
                             </div>
                             <div class="row d-none d-md-block">
-                                <div class="col-6">
-                                    <button class="pink-btn-disable text-uppercase" @click="goNext"
+                                <div class="col-12">
+                                    <button class="pink-btn-disable text-uppercase" @click="goNext" style="margin-right:10px;"
                                             :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">Continue
+                                    </button>
+									
+									<button class="pink-btn-disable text-uppercase" onclick="goBack()" type="button">Cancel
                                     </button>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                                     <label class="form-label">* Name of <br>Alternate Contact Person</label>
                                     <div class="input-group align-items-center">
                                         <input type="text" class="form-control text-uppercase" id="alternative_name" name="alternative_name"
-                                               v-model="eligibility.alternative_name" @keypress="checkInputFullName(event)" @input="watchAllowNext" @change="watchAllowNext" placeholder=""
+                                               v-model="deliveryInfo.alternative_name" @keypress="checkInputFullName(event)" @input="watchAllowNext" @change="watchAllowNext" placeholder=""
                                                required>
                                     </div>
                                 </div>
@@ -134,7 +134,7 @@
                                             </div>
                                             <input type="text" pattern="[0-9]+" min="0" class="form-control text-uppercase" maxlength="10"
                                                    id="alternative_phone"
-                                                   name="alternative_phone" v-model="eligibility.alternative_phone" @input="watchAllowNext"  @change="watchAllowNext"
+                                                   name="alternative_phone" v-model="deliveryInfo.alternative_phone" @input="watchAllowNext"  @change="watchAllowNext"
                                                    @keypress="isNumber($event)"
                                                    placeholder="Phone number">
                                     </div>
@@ -211,10 +211,13 @@
                                 </div>
 
                                 <div class="row d-block d-md-none">
-                                    <div class="col-6">
-                                        <button class="pink-btn-disable text-uppercase" @click="goNext"
+                                    <div class="col-12">
+                                        <button class="pink-btn-disable text-uppercase" @click="goNext" style="margin-right:10px;"
                                                 :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">Continue
                                         </button>
+										
+										<button class="pink-btn-disable text-uppercase" onclick="goBack()" type="button">Cancel
+                                    </button>
                                     </div>
                                 </div>
 
@@ -257,12 +260,11 @@
 ?>
 
 <script type="text/javascript">
-
-
+	toggleOverlay();
     $(document).ready(function () {
         var pageCart = new Vue({
             el: '#main-vue',
-            data: {
+            data: {				
                 productId: null,
                 isCartEmpty: false,
                 taxRate: {
@@ -364,7 +366,7 @@
                     ],
                     cities: []
                 },
-                eligibility: {
+                deliveryInfo: {
                     cardtype: 1,
                     mykad: '',
                     name: '',
@@ -472,7 +474,7 @@
             },
 
             created: function () {
-                var self = this;
+                var self = this; 
                 setTimeout(function () {
                     self.pageInit();
                 }, 500);
@@ -483,59 +485,31 @@
 
                     if (elevate.validateSession(self.currentStep)) {
                         self.pageValid = true;
-                        if (elevate.lsData.eligibility) {
-                            self.eligibility = elevate.lsData.eligibility;
-                        }else{
-							 elevate.redirectToPage('eligibilitycheck');
-						}
-                        if (elevate.lsData.customer) {
-                            self.customer = elevate.lsData.customer;
-                        }
-                        if (elevate.lsData.deliveryInfo) {
-                            self.deliveryInfo = elevate.lsData.deliveryInfo;
-                            self.deliveryInfo.mykad = self.eligibility.mykad;
-                            self.deliveryInfo.name = self.eligibility.name;
-                            self.deliveryInfo.phone = self.eligibility.phone;
-                            self.deliveryInfo.email = self.eligibility.email;
-
-                            self.deliveryInfo.alternative_name = self.eligibility.alternative_name;
-                            self.deliveryInfo.alternative_phone = self.eligibility.alternative_phone;
-
-                            $('#state_display').text(self.deliveryInfo.state)
-                            $('#city_display').text(self.deliveryInfo.city)
-                        }
-                        self.productId = elevate.lsData.product.selected.productCode;
-                        self.dealer = elevate.lsData.meta.dealer;
+                         
+                        
+						self.deliveryInfo = elevate.lsData.deliveryInfo;
+						self.orderSummary = elevate.lsData.orderSummary; 
+                        self.guid = elevate.lsData.guid;
+						
+						$('#guid').val(self.guid);
+						
+						self.productId = self.orderSummary.orderDetail.productCode
 
                         self.updateFields();
-                        toggleOverlay(false);
+                       
 
                         setTimeout(function () {
                             $('.form-select').selectpicker('refresh');
                             self.watchAllowNext();
                         }, 100);
-                    } else {
-                        elevate.redirectToPage('cart');
                     }
                 },
                 updateFields: function () {
-                    var self = this;
-                    var eligibility = self.eligibility;
-                    if (eligibility && !self.deliveryInfo.mykad) {
-                        // self.deliveryInfo.uid = eligibility.uid;
-                        self.deliveryInfo.mykad = eligibility.mykad;
-                        self.deliveryInfo.name = eligibility.name;
-                        self.deliveryInfo.phone = eligibility.phone;
-                        self.deliveryInfo.email = eligibility.email;
+                    var self = this; 
 
-						self.deliveryInfo.alternative_name = self.eligibility.alternative_name;
-                        self.deliveryInfo.alternative_phone = self.eligibility.alternative_phone;
-                    }
-
-                    self.watchChangeState();
+                    self.watchChangePostcode();
                     self.deliveryInfo.stateCode = (self.deliveryInfo.state) ? self.getStateCode(self.deliveryInfo.state) : '';
-                    self.deliveryInfo.cityCode = self.deliveryInfo.city;
-                    self.deliveryInfo.country = 'MALAYSIA';
+                    
 
                 },
                 watchChangeState: function (event) {
@@ -562,7 +536,7 @@
                 },
                 watchChangePostcode: function(event){
                     var self = this;
-                    var postcode = event.target.value;
+                    var postcode = self.deliveryInfo.postcode;
                     if(self.postCode.data[postcode]){
                         self.postCode.city = self.postCode.stateCity[self.postCode.data[postcode].state];
                         self.deliveryInfo.state = self.postCode.data[postcode].state;
@@ -675,6 +649,8 @@
                                 self.deliveryInfo.city = '';
                                 self.deliveryInfo.cityCode = '';
                             }
+                            self.deliveryInfo.address = self.deliveryInfo.addressLine1 + ' ' + self.deliveryInfo.addressLine2;
+                            self.deliveryInfo.addressMore = self.deliveryInfo.address2;
                             elevate.lsData.deliveryInfo = self.deliveryInfo;
                             elevate.updateElevateLSData();
                             console.log("self.deliveryInfo",self.deliveryInfo);
@@ -727,6 +703,9 @@
                     $('.input_error').removeClass('input_error');
                     var self = this;
                     var isFilled = true;
+					
+					self.deliveryInfo.name = self.deliveryInfo.name.toUpperCase();
+					
                     if (
                         self.deliveryInfo.mykad.trim() == '' ||
                         self.deliveryInfo.name.trim() == '' ||
@@ -735,8 +714,8 @@
                         self.deliveryInfo.address.trim() == '' ||
                         self.deliveryInfo.postcode.trim() == '' ||
                         self.deliveryInfo.state.trim() == '' ||
-                        self.eligibility.alternative_name.trim() == '' ||
-                        self.eligibility.alternative_phone.trim() == '' ||
+                        self.deliveryInfo.alternative_name.trim() == '' ||
+                        self.deliveryInfo.alternative_phone.trim() == '' ||
                         (typeof self.deliveryInfo.city == 'undefined' || self.deliveryInfo.city.trim() == '')
                     ) {
                         isFilled = false;
@@ -747,30 +726,30 @@
                         $('#mykad_number').addClass('input_error');
                     }
 
-                    if(!self.validateMobile(self.eligibility.inphone)){
+                    if(!self.validateMobile(self.deliveryInfo.inphone)){
                         isFilled = false;
                         $('#ic_phone_number').addClass('input_error');
                     }
 
                     var phone = /^[1]*[0-9]{9,11}$/g;
-                    if (self.eligibility.alternative_phone.trim() && !phone.test(self.eligibility.alternative_phone.trim())) {
+                    if (self.deliveryInfo.alternative_phone.trim() && !phone.test(self.deliveryInfo.alternative_phone.trim())) {
                         isFilled = false;
                         $('#alternative_phone').addClass('input_error');
                     }
 
-					if(self.eligibility.alternative_phone && !self.validateMobile(self.eligibility.alternative_phone)){
+					if(self.deliveryInfo.alternative_phone && !self.validateMobile(self.deliveryInfo.alternative_phone)){
                         isFilled = false;
                         $('#alternative_phone').addClass('input_error');
                     }
 
-                    if(self.eligibility.alternative_phone && self.eligibility.alternative_phone == self.eligibility.inphone){
+                    if(self.deliveryInfo.alternative_phone && self.deliveryInfo.alternative_phone == self.deliveryInfo.inphone){
                         isFilled = false;
                         $('#alternative_phone').addClass('input_error');
-                        toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, You cannot using same phone number.')
+                        toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, You cannot use the same number as alternate phone number.')
                     }
 
                     var pattern =  /^[a-zA-Z,\,/@,\s]+$/;
-                    if(self.eligibility.alternative_name && !pattern.test(self.eligibility.alternative_name)){
+                    if(self.deliveryInfo.alternative_name && !pattern.test(self.deliveryInfo.alternative_name)){
                         $('#alternative_name').addClass('input_error');
                         isFilled = false
                     }
@@ -801,25 +780,23 @@
 
                     toggleOverlay();
                     var param = self.deliveryInfo;
-                    param.uid = self.customer.id;
-                    param.productId = self.productId;
-                    param.registrationChannel = self.eligibility.registrationChannel;
+                    param.uid = self.deliveryInfo.id;
+                    param.productId = self.productId; 
                     if(self.dealer){
-                    param.referralCode = self.dealer.referral_code;
-                    param.dealerUID = self.dealer.dealer_id;
-                    param.dealerCode = self.dealer.dealer_code;
+						param.referralCode = self.orderSummary.order.referralCode;
+						param.dealerUID = self.orderSummary.order.dealerUID;
+						param.dealerCode = self.orderSummary.order.dealerCode;
                     }else{
                         param.referralCode = "";
                         param.dealerUID = "";
                         param.dealerCode = "";
                     }
 
-
                     axios.post(apiEndpointURL_elevate + '/customer/update', param)
                         .then((response) => {
                             var data = response.data;
                             if(data.status == 1){
-                                elevate.redirectToPage('review');
+                                elevate.redirectToPage('pre-register-complete/?id='+ self.guid);
                             }else{
                                 toggleOverlay(false);
                                 toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
@@ -843,13 +820,16 @@
                         //update store
                         self.deliveryInfo.address = self.deliveryInfo.address.toUpperCase();
                         elevate.lsData.deliveryInfo = self.deliveryInfo;
-                        elevate.lsData.eligibility = self.eligibility;
+                        elevate.lsData.deliveryInfo = self.deliveryInfo;
                         elevate.updateElevateLSData();
                         self.updateCustomer();
                     }
-                }
-
+                }, 
             }
         });
     });
+	
+	function goBack(){ 
+		elevate.redirectToPage('pre-register-complete/?id='+ $('#guid').val());
+	}
 </script>
