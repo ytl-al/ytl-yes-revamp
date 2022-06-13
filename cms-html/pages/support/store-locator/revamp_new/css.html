@@ -77,8 +77,10 @@
         box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
         transition: all 0.3s ease;
     }
-
-    #store-locations .layer-listBoxNoResults { padding-bottom: 30px; }
+    
+    #store-locations .layer-listBoxNoResults {
+        padding-bottom: 30px;
+    }
     
     #store-locations .store-box:hover {
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
@@ -102,7 +104,7 @@
         line-height: 23px;
         text-transform: uppercase;
     }
-
+    
     #store-locations .store-box h3 .font-normal {
         text-transform: none;
     }
@@ -200,5 +202,23 @@
     #store-locations .store-box h2.oem-color {
         background-color: #2F3BF5;
         color: #FFF;
+    }
+    
+    .layer-storeLocatorFilter .navbar-toggler {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    @media (min-width: 992px) {
+        .layer-storeLocatorFilter .navbar-toggler {
+            display: none;
+        }
+        .layer-storeLocatorFilter .navbar-collapse {
+            display: flex !important;
+            flex-basis: auto;
+        }
     }
 </style>
