@@ -485,6 +485,7 @@
                         deliveryType: ''
                     },
                     checkPaymentStatusCount: 0,
+                    checkPaymentStatusCountLimit: 59,
                     paymentResponse: null
                 },
                 mounted: function() {},
@@ -653,60 +654,76 @@
                             'session_key': elevate.lsData.sessionKey,
                             'yos_order_id': self.orderResponse.orderNumber
                         };
-                        console.log(self.orderResponse);
+                        // console.log(self.orderResponse);
                         axios.post(apiEndpointURL + '/check-order-payment-status', params)
-                            .then((response) => {
+                        .then((response) => {
                                 var data = response.data;
-                                if (data != null && data.responseCode != null) {
+                                var responseCode = data.responseCode;
+                                var paymentId = data.paymentId;
+                                var recheck = false;
+                                var closePaymentWindow = false;
+                                
+                                if (responseCode == 0) {                        // Payment success
                                     self.paymentResponse = data;
-                                    clearTimeout(timeoutObj);
+                                    closePaymentWindow = true;
+                                    self.updatePaymentStatus(2);
+                                } else if (responseCode == -1) {   
+                                    if (paymentId == 'Not Available') {         // Payment in progress
+                                        recheck = true;
+                                    } else if (paymentId != 'Not Available') {  // Payment failed
+                                        closePaymentWindow = true;
+                                        toggleOverlay(false);
+                                        self.toggleModalAlert('Error Payment', 'Your payment is not successful.<br />Please try again.');
+                                        setTimeout(function() {
+                                            self.updatePaymentStatus(-1, false);
+                                        }, 500);
+                                    }
+                                } else if (responseCode == -2 && paymentId != 'Not Available') {   // No response from bank
+                                    self.paymentResponse = data;
+                                    closePaymentWindow = true;
+                                    self.updatePaymentStatus(3);
+                                }
 
+                                if (recheck) {
+                                    if (self.checkPaymentStatusCount <= self.checkPaymentStatusCountLimit) {
+                                        self.checkPaymentStatusCount++;
+                                        setTimeout(function() {
+                                            self.ajaxCheckOrderPaymentStatus(timeoutObj);
+                                        }, 10000);
+                                    } else {
+                                        toggleOverlay(false);
+                                        self.toggleModalAlert('Error Payment', 'Your payment is not successful.<br />Please try again.');
+                                        closePaymentWindow = true;
+                                        setTimeout(function() {
+                                            self.updatePaymentStatus(-1, false);
+                                        }, 500);
+                                    }
+                                }
+
+                                if (closePaymentWindow) {
+                                    clearTimeout(timeoutObj);
                                     if (mainwin && !mainwin.closed) {
                                         mainwin.focus();
                                         mainwin.close();
                                     }
-
-									if(data.reasonCodeDesc == "APPROVED OR COMPLETED"){
-										self.updatePaymentStatus(2);
-									}else{
-										self.updatePaymentStatus(-1);
-									}
-
-                                } else {
-                                    setTimeout(function() {
-                                        self.ajaxCheckOrderPaymentStatus(timeoutObj);
-                                    }, 10000);
                                 }
                             })
                             .catch((error) => {
-                                var response = error.response;
-                                self.checkPaymentStatusCount++;
-                                if (typeof response != 'undefined' && self.checkPaymentStatusCount > 59) {
-                                    var data = response.data;
-                                    var errorMsg = '';
-                                    if (error.response.status == 500 || error.response.status == 503) {
-                                        errorMsg = "There's an error in processing your payment.<br />Please try again later.";
-                                    } else {
-                                        errorMsg = data.message
-                                    }
+                                if (self.checkPaymentStatusCount <= self.checkPaymentStatusCountLimit) {
+                                    self.checkPaymentStatusCount++;
+                                    setTimeout(function() {
+                                        self.ajaxCheckOrderPaymentStatus(timeoutObj);
+                                    }, 10000);
+                                } else {
                                     toggleOverlay(false);
-                                    self.toggleModalAlert('Error Payment', errorMsg);
-                                    self.cancelElevateOrder(errorMsg);
-
-                                    //cancel Elevate order
+                                    self.toggleModalAlert('Error Payment', "There's an error in processing your payment.<br />Please try again later.");
 
                                     clearTimeout(timeoutObj);
-
                                     if (mainwin && !mainwin.closed) {
                                         mainwin.focus();
                                         mainwin.close();
                                     }
-                                } else {
-                                    setTimeout(function() {
-                                        self.ajaxCheckOrderPaymentStatus(timeoutObj);
-                                    }, 10000);
                                 }
-                                console.log(error, response);
                             });
                     },
                     initXpay: function() {
@@ -721,6 +738,7 @@
                             if (mainwin != null && !mainwin.closed) {
                                 mainwin.focus();
                                 mainwin.close();
+                                self.updatePaymentStatus(3);
                             }
                              //self.redirectThankYou();
 							 errorMsg = "Payment Timeout.";
@@ -855,14 +873,8 @@
                         // console.log(JSON.stringify(params));
                     },
                     paymentSubmit: function(e) {
-                        var self = this;
                         toggleOverlay();
-                        if(self.orderResponse.orderNumber){
-                            this.initXpay();
-                        }else{
-                            this.ajaxCreateYOSOrder();
-                        }
-
+                        this.ajaxCreateYOSOrder();
                         e.preventDefault();
                     },
                     redirectThankYou: function(status) {
@@ -928,10 +940,12 @@
 
                     },
 
-					updatePaymentStatus: function (status){
+					updatePaymentStatus: function (status, redirect = true){
                         var self = this;
 
-                        toggleOverlay();
+                        if (redirect) {
+                            toggleOverlay();
+                        }
                         var param = {};
 
 						if(self.orderResponse){
@@ -939,7 +953,7 @@
 						}else{
 							return;
 						}
-						if(self.orderResponse){
+						if(self.orderResponse && self.paymentResponse){
 							param.paymentRef = self.paymentResponse.referenceNo;
 						}else{
 							param.paymentRef = "";
@@ -951,7 +965,9 @@
                                 var data = response.data;
                                 if(data.status == 1){
 									console.log(data);
-									self.redirectThankYou(status);
+									if (redirect) {
+                                        self.redirectThankYou(status);
+                                    }
                                 }else{
                                     toggleOverlay(false);
                                     $('#error').html("Systm error, please try again.");

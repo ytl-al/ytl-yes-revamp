@@ -186,6 +186,15 @@
                     <div class="row">
                         <div class="col-lg-5 col-12 offset-lg-6 col-orderResponse">
                             <h1>Thank you!</h1>
+                            <template v-if="paymentStatus == 2">
+                            <p class="mb-3">
+                                Order Number <br />
+                                <a href="javascript:void(0)" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br />
+                                Placed on {{ purchaseInfo.orderCreationDate }} <br /> <br />
+                                We have received your order and are waiting for payment clearance. You will receive confirmation email once payment is cleared.
+                            </p>
+                            </template>
+                            <template v-else>
                             <p class="mb-3">
                                 Order Number <br />
                                 <!-- <a v-bind:href="'/ywos/thank-you/?order_display_id=' + purchaseInfo.displayOrderNumber" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br /> -->
@@ -194,6 +203,8 @@
                                 <!-- Estimated Delivery: {{ purchaseInfo.deliveryFromDate }} - {{ purchaseInfo.deliveryToDate }} <br /><br /> -->
                                 A summary of your order has been sent to your email
                             </p>
+                            </template>
+                            
                             <div class="offer-box d-none">
                                 <p>Send me amazing Offers and Promotions</p>
                                 <a href="#" class="pink-btn d-block">Subscribe</a>
@@ -243,6 +254,7 @@
                 highlightPlanIDs: [710, 759, 758],
                 highlightPlans: [],
                 orderDisplayID: '',
+                paymentStatus: '',
                 currentStep: 5,
                 pageValid: false,
                 purchaseInfo: {
@@ -258,6 +270,7 @@
                 var url_string = window.location.href;
                 var url = new URL(url_string);
                 self.orderDisplayID = url.searchParams.get('order_display_id');
+                self.paymentStatus = url.searchParams.get('status');
 
                 setTimeout(function() {
                     self.pageInit();
@@ -286,6 +299,7 @@
                         .then((response) => {
                             var data = response.data;
                             var yosOrderResponse = data.yos_order_response;
+                            self.paymentStatus = data.is_xpay_success;
                             self.purchaseInfo = {
                                 displayOrderNumber: self.orderDisplayID,
                                 deliveryFromDate: yosOrderResponse.deliveryFromDate,

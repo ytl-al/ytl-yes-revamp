@@ -502,6 +502,7 @@
                     deliveryType: ''
                 },
                 checkPaymentStatusCount: 0,
+                checkPaymentStatusCountLimit: 59,
                 paymentResponse: null
             },
             mounted: function() {},
@@ -647,49 +648,66 @@
                     axios.post(apiEndpointURL + '/check-order-payment-status', params)
                         .then((response) => {
                             var data = response.data;
-                            if (data != null && data.responseCode != null) {
-                                // console.log('payment through');
+                            var responseCode = data.responseCode;
+                            var paymentId = data.paymentId;
+                            var recheck = false;
+                            var closePaymentWindow = false;
+                            
+                            if (responseCode == 0) {                        // Payment success
                                 self.paymentResponse = data;
-                                clearTimeout(timeoutObj);
+                                closePaymentWindow = true;
+                                self.redirectThankYou(1);
+                            } else if (responseCode == -1) {   
+                                if (paymentId == 'Not Available') {         // Payment in progress
+                                    recheck = true;
+                                } else if (paymentId != 'Not Available') {  // Payment failed
+                                    closePaymentWindow = true;
+                                    toggleOverlay(false);
+                                    self.toggleModalAlert('Error Payment', 'Your payment is not successful.<br />Please try again.');
+                                }
+                            } else if (responseCode == -2 && paymentId != 'Not Available') {   // No response from bank
+                                self.paymentResponse = data;
+                                closePaymentWindow = true;
+                                self.redirectThankYou(2);
+                            }
 
+                            if (recheck) {
+                                if (self.checkPaymentStatusCount <= self.checkPaymentStatusCountLimit) {
+                                    self.checkPaymentStatusCount++;
+                                    setTimeout(function() {
+                                        self.ajaxCheckOrderPaymentStatus(timeoutObj);
+                                    }, 10000);
+                                } else {
+                                    toggleOverlay(false);
+                                    self.toggleModalAlert('Error Payment', 'Your payment is not successful.<br />Please try again.');
+                                    closePaymentWindow = true;
+                                }
+                            }
+
+                            if (closePaymentWindow) {
+                                clearTimeout(timeoutObj);
                                 if (mainwin && !mainwin.closed) {
                                     mainwin.focus();
                                     mainwin.close();
                                 }
-
-                                self.redirectThankYou();
-                            } else {
-                                setTimeout(function() {
-                                    self.ajaxCheckOrderPaymentStatus(timeoutObj);
-                                }, 10000);
                             }
                         })
                         .catch((error) => {
-                            var response = error.response;
-                            self.checkPaymentStatusCount++;
-                            if (typeof response != 'undefined' && self.checkPaymentStatusCount > 59) {
-                                var data = response.data;
-                                var errorMsg = '';
-                                if (error.response.status == 500 || error.response.status == 503) {
-                                    errorMsg = "There's an error in processing your payment.<br />Please try again later.";
-                                } else {
-                                    errorMsg = data.message
-                                }
+                            if (self.checkPaymentStatusCount <= self.checkPaymentStatusCountLimit) {
+                                self.checkPaymentStatusCount++;
+                                setTimeout(function() {
+                                    self.ajaxCheckOrderPaymentStatus(timeoutObj);
+                                }, 10000);
+                            } else {
                                 toggleOverlay(false);
-                                self.toggleModalAlert('Error Payment', errorMsg);
+                                self.toggleModalAlert('Error Payment', "There's an error in processing your payment.<br />Please try again later.");
 
                                 clearTimeout(timeoutObj);
-
                                 if (mainwin && !mainwin.closed) {
                                     mainwin.focus();
                                     mainwin.close();
                                 }
-                            } else {
-                                setTimeout(function() {
-                                    self.ajaxCheckOrderPaymentStatus(timeoutObj);
-                                }, 10000);
                             }
-                            // console.log(error, response);
                         });
                 }, 
                 initXpay: function() {
@@ -792,7 +810,7 @@
                     this.ajaxCreateYOSOrder();
                     e.preventDefault();
                 },
-                redirectThankYou: function() {
+                redirectThankYou: function(paymentStatus) {
                     var self = this;
 
                     ywos.lsData.meta.completedStep = self.currentStep;
@@ -802,7 +820,7 @@
                     ywos.updateYWOSLSData();
 
                     setTimeout(function() {
-                        ywos.redirectToPage('thank-you');
+                        ywos.redirectToPage('thank-you?status=' + paymentStatus);
                     }, 2000);
                     self.sendAnalytics();
                 },
