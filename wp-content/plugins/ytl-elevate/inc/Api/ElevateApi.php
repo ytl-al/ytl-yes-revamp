@@ -189,6 +189,11 @@ class ElevateApi
                 'callback' => array('\Inc\Api\ElevateApi', 'delete_prequalified_customer'),
             ));
 
+            register_rest_route('/elevate/v1', '/check-stock', array(
+                'methods' => 'GET',
+                'callback' => array('\Inc\Api\ElevateApi', 'check_stock'),
+            ));
+
 
         });
     }
@@ -1931,6 +1936,44 @@ class ElevateApi
             $gender = 1;//female
         }
         return $gender;
+    }
+
+    public function check_stock() 
+    {
+        $token  = self::get_token();
+        $args   = [
+            'headers'   => [
+                'Accept' => 'text/plan',
+                'Authorization' => 'Bearer ' . $token,
+                'Content-Type'  => 'application/json'
+            ],
+            'body'      => [],
+            'method'    => 'GET'
+        ];
+        $apiSetting = \Inc\Base\Model::getAPISettings();
+        $api_url    = $apiSetting['url'] . self::api_product . '?MaxResultCount=100';
+
+        $request    = wp_remote_get($api_url, $args);
+        $response   = $request['response'];
+        $res_code   = $response['code'];
+
+        $data 		= json_decode($request['body']);
+
+        if ($res_code == 200) {
+            $items      = $data->items;
+            $arr_return = [];
+            foreach ($items as $item) {
+                $existing_balance   = (isset($arr_return[$item->productBundleId]['balance'])) ? $arr_return[$item->productBundleId]['balance'] : 0;
+                $arr_return[$item->productBundleId] = [
+                    'productBundleId'   => $item->productBundleId,
+                    'balance'           => $item->balance + $existing_balance
+                ];
+            }
+            $response 	= new WP_REST_Response($arr_return);
+            $response->set_status(200);
+            return $response;
+        }
+        return false;
     }
 
 }
