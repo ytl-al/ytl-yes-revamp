@@ -677,6 +677,7 @@
                                     self.paymentResponse = data;
                                     closePaymentWindow = true;
                                     self.updatePaymentStatus(2);
+                                    window.focus();
                                 } else if (responseCode == -1) {   
                                     if (paymentId == 'Not Available') {         // Payment in progress
                                         recheck = true;
@@ -711,6 +712,7 @@
                                 }
 
                                 if (closePaymentWindow) {
+                                    window.focus();
                                     clearTimeout(timeoutObj);
                                     if (mainwin && !mainwin.closed) {
                                         mainwin.focus();
@@ -728,6 +730,7 @@
                                     toggleOverlay(false);
                                     self.toggleModalAlert('Error Payment', "There's an error in processing your payment.<br />Please try again later.");
 
+                                    window.focus();
                                     clearTimeout(timeoutObj);
                                     if (mainwin && !mainwin.closed) {
                                         mainwin.focus();
