@@ -133,7 +133,7 @@
                             <div class="contract_section">
                                 <h3>YES Terms and Condition</h3>
                                 <div class="contract_term">
-                                    
+
                                     <ol>
                                         <li><strong>The Service Plan.<br>
                                         </strong>The Yes Infinite+ Postpaid Service Plans Programme is a time limited programme (“<strong>Programme</strong>”) launched by YTL Communications Sdn Bhd (Company No. 200701035605(793634-V)) (“<strong>YTLC</strong>”) in collaboration with CompAsia
@@ -1028,14 +1028,22 @@
                 $('#contract_time').show();
                 this.interval = setInterval(() => {
                     // Concise way to format time according to system locale.
-                    this.time = Intl.DateTimeFormat('en-GB', {
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: 'numeric',
-                        hour: 'numeric',
-                        minute: 'numeric',
-                        hourCycle: 'h11',
-                    }).format()
+                    var today = new Date();
+                    var d = today.getDate();
+                    if(d<10) d = '0' + d;
+                    var m = (today.getMonth()+1);
+                    if(m<10) m = '0' + m;
+                    var date = d+'/'+ m +'/'+today.getFullYear();
+
+                    var hours = today.getHours();
+                    var minutes = today.getMinutes();
+                    var ampm = hours >= 12 ? 'pm' : 'am';
+                    hours = hours % 12;
+                    hours = hours ? hours : 12; // the hour '0' should be '12'
+                    minutes = minutes < 10 ? '0'+minutes : minutes;
+                    var strTime = hours + ':' + minutes + ' ' + ampm;
+
+                    this.time = dateTime = date+' '+strTime;
                 }, 1000);
             },
             methods: {
@@ -1045,15 +1053,15 @@
 
                     if (elevate.validateSession(self.currentStep)) {
                         self.pageValid = true;
-                       
+
 						if (elevate.lsData.deliveryInfo) {
 								self.deliveryInfo = elevate.lsData.deliveryInfo;
 						}else{
 							 elevate.redirectToPage('pre-register-complete/?id='+self.guid);
 						}
-						
+
 						if(elevate.lsData.orderSummary){
-							self.orderSummary = elevate.lsData.orderSummary; 
+							self.orderSummary = elevate.lsData.orderSummary;
 							self.dealer.dealer_code = self.orderSummary.order.dealerCode;
 							self.dealer.dealer_id = self.orderSummary.order.dealerUID;
 							self.dealer.referral_code = self.orderSummary.order.referralCode;
@@ -1061,15 +1069,15 @@
 							 elevate.redirectToPage('pre-register-complete/?id='+self.guid);
 						}
                         self.guid = elevate.lsData.guid;
-						 
+
 						$('#guid').val(self.guid);
-						 
+
 						if (elevate.lsData.contract) {
 							self.contract = elevate.lsData.contract;
 							self.contractSigned = true;
 						}
-						
-						self.productId = self.orderSummary.orderDetail.productCode; 
+
+						self.productId = self.orderSummary.orderDetail.productCode;
                         self.check_sign();
                     }else{
 						elevate.redirectToPage('pre-register-complete/?id=error');
@@ -1101,7 +1109,7 @@
                     var self = this;
                     var params = self.deliveryInfo;
                     params.productSelected = self.orderSummary.plan.planId;
-					
+
                     params.referralCode = self.dealer.referral_code;
                     params.dealerUID = self.dealer.dealer_id;
                     params.dealerCode = self.dealer.dealer_code;
@@ -1200,8 +1208,8 @@
             }
         });
     });
-	
-	function goBack(){ 
+
+	function goBack(){
 		elevate.redirectToPage('pre-register-complete/?id='+ $('#guid').val());
 	}
 </script>

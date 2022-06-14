@@ -115,7 +115,7 @@
                             <div class="contract_section">
                                 <h3>YES Terms and Condition</h3>
                                 <div class="contract_term">
-                                    
+
                                     <ol>
                                         <li><strong>The Service Plan.<br>
                                         </strong>The Yes Infinite+ Postpaid Service Plans Programme is a time limited programme (“<strong>Programme</strong>”) launched by YTL Communications Sdn Bhd (Company No. 200701035605(793634-V)) (“<strong>YTLC</strong>”) in collaboration with CompAsia
@@ -1009,14 +1009,22 @@
                 $('#contract_time').show();
                 this.interval = setInterval(() => {
                     // Concise way to format time according to system locale.
-                    this.time = Intl.DateTimeFormat('en-GB', {
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: 'numeric',
-                        hour: 'numeric',
-                        minute: 'numeric',
-                        hourCycle: 'h11',
-                    }).format()
+                    var today = new Date();
+                    var d = today.getDate();
+                    if(d<10) d = '0' + d;
+                    var m = (today.getMonth()+1);
+                    if(m<10) m = '0' + m;
+                    var date = d+'/'+ m +'/'+today.getFullYear();
+
+                    var hours = today.getHours();
+                    var minutes = today.getMinutes();
+                    var ampm = hours >= 12 ? 'pm' : 'am';
+                    hours = hours % 12;
+                    hours = hours ? hours : 12; // the hour '0' should be '12'
+                    minutes = minutes < 10 ? '0'+minutes : minutes;
+                    var strTime = hours + ':' + minutes + ' ' + ampm;
+
+                    this.time = dateTime = date+' '+strTime;
                 }, 1000);
             },
             methods: {
