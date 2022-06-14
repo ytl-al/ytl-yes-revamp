@@ -88,6 +88,7 @@
                         <h1 class="mb-4 d-none d-lg-block">Payment Info</h1>
                         <p class="sub mb-4 pe-5 d-none d-lg-block">This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.</p>
                         <h2>Select payment</h2>
+                        <div class="alert alert-warning mb-4" role="alert">Please ensure your web browser and/or 3rd party software pop-up blocker is disabled before you proceed with your transactions.</div>
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button type="button" class="nav-link" id="nav-creditcard" role="tab" data-paymentnav="CREDIT_CARD" data-bs-toggle="pill" data-bs-target="#tab-creditcard" aria-controls="tab-creditcard" aria-selected="false" v-on:click="selectPaymentMethod('CREDIT_CARD')">
