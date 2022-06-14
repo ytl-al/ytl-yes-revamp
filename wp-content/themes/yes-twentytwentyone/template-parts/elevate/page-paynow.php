@@ -668,12 +668,12 @@
                                 var paymentId = data.paymentId;
                                 var recheck = false;
                                 var closePaymentWindow = false;
-                                
+
                                 if (responseCode == 0) {                        // Payment success
                                     self.paymentResponse = data;
                                     closePaymentWindow = true;
                                     self.updatePaymentStatus(2);
-                                } else if (responseCode == -1) {   
+                                } else if (responseCode == -1) {
                                     if (paymentId == 'Not Available') {         // Payment in progress
                                         recheck = true;
                                     } else if (paymentId != 'Not Available') {  // Payment failed
@@ -806,8 +806,8 @@
                             "school_name": "",
                             "school_code": "",
                             "university_name": "",
-                            "dealer_code": "",
-                            "dealer_login_id": "",
+                            "dealer_code": self.dealer.dealer_code,
+                            "dealer_login_id": self.dealer.dealer_id,
                             "plan_name": self.orderSummary.product.selected.plan.planName,
                             "plan_type": self.orderSummary.product.selected.plan.planType,
                             "product_bundle_id": self.productId,
@@ -948,7 +948,7 @@
                             });
 
                     },
-					
+
 					updatePaymentStatus: function (status, redirect = true){
                         var self = this;
 
@@ -956,18 +956,18 @@
                             toggleOverlay();
                         }
                         var param = {};
-						
-						if(self.orderResponse){						
+
+						if(self.orderResponse){
 							param.orderNumber = self.orderResponse.orderNumber;
 						}else{
 							return;
 						}
-						if(self.orderResponse && self.paymentResponse){			
+						if(self.orderResponse && self.paymentResponse){
 							param.paymentRef = self.paymentResponse.referenceNo;
 						}else{
 							param.paymentRef = "";
 						}
-                        param.status = status.toString(); 
+                        param.status = status.toString();
 
                         axios.post(apiEndpointURL_elevate + '/order/updatePayment', param)
                             .then((response) => {
@@ -991,7 +991,7 @@
 
                     },
 
-					
+
                     selectBank: function(bank, event) {
                         var self = this;
                         $('.listing-quickSelectBanks .nav-item').removeClass('selected');
@@ -1114,11 +1114,11 @@
                         var self = this;
                         var eventType = 'purchase';
                         var pushData = {
-                            'transaction_id': $('#displayOrderNumber').val(), 
+                            'transaction_id': $('#displayOrderNumber').val(),
                             'currency': 'MYR',
                             'value': self.orderSummary.orderDetail.total,
                             'tax': self.orderSummary.orderDetail.sstAmount,
-                            'shipping': 0, 
+                            'shipping': 0,
                             'foreigner_deposit': 0,
                             'rounding_adjustment': self.orderSummary.orderDetail.roundingAdjustment,
                             'payment_method': self.paymentInfo.paymentMethod,
