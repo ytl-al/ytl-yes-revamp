@@ -744,7 +744,6 @@
                             if (mainwin != null && !mainwin.closed) {
                                 mainwin.focus();
                                 mainwin.close();
-                                self.updatePaymentStatus(3);
                             }
                              // self.redirectThankYou();
 							 errorMsg = "Payment Timeout.";
