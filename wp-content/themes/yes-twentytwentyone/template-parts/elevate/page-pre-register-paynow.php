@@ -665,7 +665,7 @@
                         };
                         // console.log(self.orderResponse);
                         axios.post(apiEndpointURL + '/check-order-payment-status', params)
-                        .then((response) => {
+                            .then((response) => {
                                 var data = response.data;
                                 var responseCode = data.responseCode;
                                 var paymentId = data.paymentId;
