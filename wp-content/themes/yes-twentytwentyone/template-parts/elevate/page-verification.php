@@ -97,7 +97,7 @@
             data: {
                 ekyc_url: '<?php echo $apiSetting["ekyc_url"]?>',
                 totalAttempt:0,
-                maxAttempts:20,
+                maxAttempts:60,
                 interval: null,
                 qrcode: null,
                 verifyWindow: null,
@@ -192,7 +192,7 @@
                     self.makeCode(self.customer.id);
                     self.interval = setInterval(function (){
                         self.eKYC_check();
-                    },15000);
+                    },5000);
 
 					$('#cmdVerify').click(function(){
 						var url = $('#cmdVerify').data('url');
