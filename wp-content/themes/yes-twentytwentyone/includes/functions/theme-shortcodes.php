@@ -281,15 +281,18 @@ if (!function_exists('generate_store_locations')) {
                     default;
                 }
 
+                $$coming_soon = '';
                 switch ($store_brand) {
                     case 'VIVO':
                         $store_name = "<span class='font-normal'>vivo</span> Concept Store";
                         break;
                     case 'OPPO':
-                        $store_name = "$store_brand Brand Store";
+                        $coming_soon= ($data['Ready to Sell'] == 'No') ? ' (Available Soon)' : '';
+                        $store_name = "$store_brand Brand Store" . $coming_soon;
                         break;
                     case 'SAMSUNG':
-                        $store_name = "$store_brand Experience Store";
+                        $coming_soon= ($data['Ready to Sell'] == 'No') ? ' (Available Soon)' : '';
+                        $store_name = "$store_brand Experience Store" . $coming_soon;
                         break;
                     case 'Xiaomi': 
                         $store_name = "<span class='font-normal'>Mi</span> Store";
