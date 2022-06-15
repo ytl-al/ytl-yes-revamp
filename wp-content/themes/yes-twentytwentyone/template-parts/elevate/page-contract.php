@@ -1077,6 +1077,7 @@
                         self.allowSubmit = false
                     }
 
+                    self.contract_signed = self.contract_signed.trim();
                     if (!self.contract_signed.toUpperCase() || (self.contract_signed && self.contract_signed.toUpperCase() != self.eligibility.name.toUpperCase())) {
                         self.allowSubmit = false;
                     }
