@@ -79,7 +79,7 @@
             padding: 8px 40px;
             text-transform: uppercase;
         }
-	
+
         .text-12{
             font-size:12px!important;
         }
@@ -127,7 +127,7 @@
                         <span>2. Select Plan</span>
                     </li>
                     <li ui-sref="secondStep">
-                        <span>3. Payment</span>
+                        <span>3. Complete Order</span>
                     </li>
                 </ul>
             </div>
@@ -137,7 +137,7 @@
 
         <section id="cart-body" style="display: none;">
             <div class="container " style="border: 0">
-                <div id="main-vue">                   
+                <div id="main-vue">
                     <div class="layer-invitationText text-center">
                         <h3>Dear {{ deliveryInfo.name }},</h3>
                         <p>We are pleased to invite you to our special promotion, just for you. Please verify your personal information and proceed.</p>
@@ -162,7 +162,7 @@
                                 </div>
                             </div>
                             <h3 class="subtitle2">Complete the verification in 2 simple steps!</h3>
-							
+
 							<!-- button type="button" @click="doPass">Go</button -->
 
                             <ul class="list-2 mt-5">
@@ -180,7 +180,7 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
             </div>
         </section>
         <div id="page_error" style="display:none;">
@@ -192,7 +192,7 @@
                     <div class="p-3 text-center"><a href="/infinite-phone-bundles/" class="pink-btn text-uppercase">Back to Infinite+</a></div> <div id="error" class="mt-3"></div></div></div>
         </div>
 
-    </main> 
+    </main>
 <?php require_once('includes/footer.php'); ?>
 <?php $apiSetting = \Inc\Base\Model::getAPISettings();?>
 <script type="text/javascript"
@@ -321,7 +321,7 @@
                             }
                         ],
                         cities: []
-                    }, 
+                    },
                 orderSummary: {
                     product: {
                         selected:{
@@ -357,7 +357,7 @@
 
             created: function () {
                 var self = this;
-                setTimeout(function () { 
+                setTimeout(function () {
                     self.pageInit();
 
                 }, 500);
@@ -365,13 +365,13 @@
             methods: {
                 pageInit: function () {
                     var self = this;
-                    if (elevate.validateSession(self.currentStep)) {                        
+                    if (elevate.validateSession(self.currentStep)) {
                         self.dealer = elevate.lsData.meta.dealer;
-						self.getUserInfor(); 
+						self.getUserInfor();
                     }else{
 						elevate.initLocalStorage(-1, '', '', '');
 						self.getUserInfor();
-					}  
+					}
                 },
                 eKYC_init: function () {
                     var self = this;
@@ -428,7 +428,7 @@
 											windows[i].close()
 										}
                                         toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, Your verification was rejected by eKYC system.')
-                                        
+
                                     }
                                 }
                             })
@@ -439,19 +439,19 @@
                     }else{
                         clearInterval(self.interval);
                         toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, We can\'t verify your eKYC because of time limit.')
-                        
+
                     }
                 },
-				
+
 				doPass: function(){
 					var self = this;
-					 
+
 					elevate.lsData.ekycPassed = true;
 					elevate.lsData.meta.guid = self.guid;
 					elevate.lsData.deliveryInfo = self.deliveryInfo;
 					elevate.updateElevateLSData();
-					toggleOverlay();								
-					elevate.redirectToPage('pre-plan');					
+					toggleOverlay();
+					elevate.redirectToPage('pre-plan');
 				},
 
                 CAVerification: function (response) {
@@ -477,7 +477,7 @@
 								elevate.lsData.meta.guid = self.guid;
 								elevate.lsData.deliveryInfo = self.deliveryInfo;
 								elevate.updateElevateLSData();
-								toggleOverlay();								
+								toggleOverlay();
                                 elevate.redirectToPage('pre-plan');
                             } else {
                                 toggleOverlay(false);
@@ -511,7 +511,7 @@
 						$('#page_error').show();
 					}
 				},
-				
+
 				getStateCode: function (stateVal) {
 					var self = this;
 					var objState = self.selectOptions.states.filter(state => state.value == stateVal);
@@ -546,17 +546,17 @@
 							self.selectOptions.cities = options;
 							self.allowSelectCity = true;
 
-							var objCity = self.selectOptions.cities.filter(city => city.value == self.deliveryInfo.city);                                
+							var objCity = self.selectOptions.cities.filter(city => city.value == self.deliveryInfo.city);
 
 						})
 						.catch((error) => {
 							console.log(error);
 						})
-						.finally(() => { 
+						.finally(() => {
 							toggleOverlay(false);
 						});
 				},
-					
+
 				getPhone: function(phone){
 					var phone = phone.replaceAll(' ', '')
 					var c = phone.substring(0,1);
@@ -584,7 +584,7 @@
 					var tmp = msisdn.split('@');
 					return tmp[0];
 				},
-				
+
 				getUserInfor: function(){
 					var self = this;
 
@@ -617,7 +617,7 @@
 									self.deliveryInfo.phone = self.getPhone(self.deliveryInfo.mobile);
 									self.productOffered();
 									self.updateCityCode();
-									
+
 									self.eKYC_init();
 								}else{
 									$('#cart-body').hide();
@@ -639,7 +639,7 @@
 
 
 				},
-					
+
                 redirectYWOS:function (){
                     var self = this;
                     toggleOverlay();
@@ -650,7 +650,7 @@
                     var self = this;
                     var url_verification = self.ekyc_url + 'EKYC/?fullName=' + encodeURIComponent (self.deliveryInfo.name) + '&nric=' + self.deliveryInfo.mykad + '&guid=' + encodeURIComponent(self.guid);
                     $('#cmdVerify').data('url', url_verification);
-                    
+
 					const qrcode = new QRCode(document.getElementById('qrcode'), {
 					  text: url_verification,
 					  width: 128,

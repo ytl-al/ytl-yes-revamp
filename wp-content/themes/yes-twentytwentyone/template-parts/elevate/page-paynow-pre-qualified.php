@@ -37,7 +37,7 @@
                         <span>2. Select Plan</span>
                     </li>
                     <li ui-sref="secondStep" class="completed">
-                        <span>3. Payment</span>
+                        <span>3. Complete Order</span>
                     </li>
                 </ul>
             </div>
