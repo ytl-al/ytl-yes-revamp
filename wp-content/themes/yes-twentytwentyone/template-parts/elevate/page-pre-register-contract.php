@@ -1099,8 +1099,7 @@
                         self.allowSubmit = false
                     }
 
-                    self.contract_signed = self.contract_signed.trim();
-                    if (!self.contract_signed.toUpperCase() || (self.contract_signed && self.contract_signed.toUpperCase() != self.deliveryInfo.name.toUpperCase())) {
+                    if (!self.contract_signed.toUpperCase() || (self.contract_signed && self.contract_signed.trim().toUpperCase() != self.deliveryInfo.name.toUpperCase())) {
                         self.allowSubmit = false;
                     }
 
