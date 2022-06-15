@@ -31,10 +31,13 @@
             <div class="container">
                 <ul class="wizard">
                     <li ui-sref="firstStep" class="completed">
-                        <span>1. Select Plan</span>
+                        <span>1. Verify</span>
+                    </li>
+                    <li ui-sref="firstStep" class="completed">
+                        <span>2. Select Plan</span>
                     </li>
                     <li ui-sref="secondStep" class="completed">
-                        <span>2. Payment</span>
+                        <span>3. Payment</span>
                     </li>
                 </ul>
             </div>
@@ -663,13 +666,13 @@
                                 var paymentId = data.paymentId;
                                 var recheck = false;
                                 var closePaymentWindow = false;
-                                
+
                                 if (responseCode == 0) {                        // Payment success
                                     self.paymentResponse = data;
                                     closePaymentWindow = true;
                                     self.updatePaymentStatus(2);
                                     window.focus();
-                                } else if (responseCode == -1) {   
+                                } else if (responseCode == -1) {
                                     if (paymentId == 'Not Available') {         // Payment in progress
                                         recheck = true;
                                     } else if (paymentId != 'Not Available') {  // Payment failed

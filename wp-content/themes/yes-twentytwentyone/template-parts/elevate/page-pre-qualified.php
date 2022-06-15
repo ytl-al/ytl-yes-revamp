@@ -108,7 +108,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h1 class="title_checkout p-3">Pre-Register</h1>
+                    <h1 class="title_checkout p-3">Pre-Qualified</h1>
                 </div>
             </div>
         </div>
@@ -121,10 +121,13 @@
             <div class="container">
                 <ul class="wizard">
                     <li ui-sref="firstStep" class="completed">
-                        <span>1. Select Plan</span>
+                        <span>1. Verify</span>
+                    </li>
+					  <li ui-sref="firstStep">
+                        <span>2. Select Plan</span>
                     </li>
                     <li ui-sref="secondStep">
-                        <span>2. Payment</span>
+                        <span>3. Payment</span>
                     </li>
                 </ul>
             </div>
@@ -134,470 +137,50 @@
 
         <section id="cart-body" style="display: none;">
             <div class="container " style="border: 0">
-                <div id="main-vue">
-                    <button style="display:none;" type="button" @click="removePrequalifiedCustomer">Remove</button>
-                    <div class="layer-invitationText">
+                <div id="main-vue">                   
+                    <div class="layer-invitationText text-center">
                         <h3>Dear {{ deliveryInfo.name }},</h3>
-                        <p>We are pleased to invite you to our special promotion, just for you. Please select a plan, and proceed.</p>
+                        <p>We are pleased to invite you to our special promotion, just for you. Please verify your personal information and proceed.</p>
                     </div>
-                    <div class="subtitle mb-4">Select Plan</div>
-
-                    <div class="layer-selectPlan">
-                        <div class="row flex-nowrap flex-xl-wrap gx-5">
-                            <!-- Retention Products START -->
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle836" >
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Basic</h2>
-                                    <h3>VIVO Y55+ (6+128GB)</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/site/wp-content/uploads/2022/05/vivo-y55.png"/></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(836)" data-productid="836">Select</a></p>
-                                </div>
+                    <div class="border-box">
+                <div class="row">
+                    <div class="col-md-5 p-5 flex-column bg-checkout">
+                        <div class="title text-white checkout-left">
+                            MyKAD Verification
+                            <div class="mt-3" style="font-size: 14px;line-height: 20px;">
+                                A few steps to verify your identity<br> before we continue.
                             </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle837" >
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Basic</h2>
-                                    <h3>VIVO Y55+ (6+128GB)</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/site/wp-content/uploads/2022/05/vivo-y55.png" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(837)" data-productid="837">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle838" >
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Standard</h2>
-                                    <h3>Xiaomi Redmi Note 11 Pro 5G</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/XIAOMIREDMINOTE11PROGray.png" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(838)" data-productid="838">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle839" >
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Standard</h2>
-                                    <h3>Xiaomi Redmi Note 11 Pro 5G</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/XIAOMIREDMINOTE11PROBlue.png" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(839)" data-productid="839">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle840" >
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Standard</h2>
-                                    <h3>Samsung Galaxy A33 5G 8+128GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA33Blue.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(840)" data-productid="840">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle841">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Standard</h2>
-                                    <h3>Samsung Galaxy A33 5G 8+128GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA33Black.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(841)" data-productid="841">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle842">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Standard</h2>
-                                    <h3>Samsung Galaxy A33 5G 8+128GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA33Peach.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(842)" data-productid="842">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle843">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Standard</h2>
-                                    <h3>Samsung Galaxy A33 5G 8+128GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA33White.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(843)" data-productid="842">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle844">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Premium</h2>
-                                    <h3>Oppo Reno 7 5G</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/OPPORENO7Black.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(844)" data-productid="844">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle845">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Premium</h2>
-                                    <h3>Oppo Reno 7 5G</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/OPPORENO7Blue.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(845)" data-productid="845">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle846">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Premium</h2>
-                                    <h3>Samsung Galaxy A53 5G 8+256GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA53Blue.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(846)" data-productid="846">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle847">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Premium</h2>
-                                    <h3>Samsung Galaxy A53 5G 8+256GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA53Black.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(847)" data-productid="847">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle848">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Premium</h2>
-                                    <h3>Samsung Galaxy A53 5G 8+256GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA53Peach.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(848)" data-productid="848">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle849">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Premium</h2>
-                                    <h3>Samsung Galaxy A53 5G 8+256GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA53White.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(849)" data-productid="849">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle850">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Ultra</h2>
-                                    <h3>Vivo X80 (12+256GB)</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/VIVOX80Blue.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(850)" data-productid="850">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle851">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Ultra</h2>
-                                    <h3>Vivo X80 (12+256GB)</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/VIVOX80Black.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(851)" data-productid="851">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle852">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Ultra</h2>
-                                    <h3>Samsung Galaxy S22 5G 8+256GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGS22Black.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(852)" data-productid="852">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle853">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Ultra</h2>
-                                    <h3>Samsung Galaxy S22 5G 8+256GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGS22White.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(853)" data-productid="853">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle854">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Ultra</h2>
-                                    <h3>Samsung Galaxy S22 5G 8+256GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGS22Green.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(854)" data-productid="854">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle855">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Ultra</h2>
-                                    <h3>Samsung Galaxy S22 5G 8+256GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGS22Pink.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(855)" data-productid="855">Select</a></p>
-                                </div>
-                            </div>
-                            <!-- Retention Products END -->
-
-                            <!-- Upsell Products START -->
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle876" >
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Basic</h2>
-                                    <h3>VIVO Y55+ (6+128GB)</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/site/wp-content/uploads/2022/05/vivo-y55.png"/></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(876)" data-productid="876">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle877" >
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Basic</h2>
-                                    <h3>VIVO Y55+ (6+128GB)</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/site/wp-content/uploads/2022/05/vivo-y55.png" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(877)" data-productid="877">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle878" >
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Standard</h2>
-                                    <h3>Xiaomi Redmi Note 11 Pro 5G</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/XIAOMIREDMINOTE11PROGray.png" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(878)" data-productid="878">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle879" >
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Standard</h2>
-                                    <h3>Xiaomi Redmi Note 11 Pro 5G</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/XIAOMIREDMINOTE11PROBlue.png" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(879)" data-productid="879">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle880" >
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Standard</h2>
-                                    <h3>Samsung Galaxy A33 5G 8+128GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA33Blue.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(880)" data-productid="880">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle881">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Standard</h2>
-                                    <h3>Samsung Galaxy A33 5G 8+128GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA33Black.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(881)" data-productid="881">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle882">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Standard</h2>
-                                    <h3>Samsung Galaxy A33 5G 8+128GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA33Peach.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(882)" data-productid="882">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle883">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Standard</h2>
-                                    <h3>Samsung Galaxy A33 5G 8+128GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA33White.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(883)" data-productid="883">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle884">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Premium</h2>
-                                    <h3>Oppo Reno 7 5G</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/OPPORENO7Black.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(884)" data-productid="884">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle885">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Premium</h2>
-                                    <h3>Oppo Reno 7 5G</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/OPPORENO7Blue.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(885)" data-productid="885">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle886">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Premium</h2>
-                                    <h3>Samsung Galaxy A53 5G 8+256GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA53Blue.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(886)" data-productid="886">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle887">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Premium</h2>
-                                    <h3>Samsung Galaxy A53 5G 8+256GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA53Black.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(887)" data-productid="887">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle888">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Premium</h2>
-                                    <h3>Samsung Galaxy A53 5G 8+256GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA53Peach.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(888)" data-productid="888">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle889">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Premium</h2>
-                                    <h3>Samsung Galaxy A53 5G 8+256GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGA53White.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(889)" data-productid="889">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle890">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Ultra</h2>
-                                    <h3>Vivo X80 (12+256GB)</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/VIVOX80Blue.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(890)" data-productid="890">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle891">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Ultra</h2>
-                                    <h3>Vivo X80 (12+256GB)</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/VIVOX80Black.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(891)" data-productid="891">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle892">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Ultra</h2>
-                                    <h3>Samsung Galaxy S22 5G 8+256GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGS22Black.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(892)" data-productid="892">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle893">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Ultra</h2>
-                                    <h3>Samsung Galaxy S22 5G 8+256GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGS22White.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(893)" data-productid="893">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle894">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Ultra</h2>
-                                    <h3>Samsung Galaxy S22 5G 8+256GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGS22Green.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(894)" data-productid="894">Select</a></p>
-                                </div>
-                            </div>
-                            <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column productItem bundle895">
-                                <div class="layer-planDevice">
-                                    <h2>Yes Infinite+ Ultra</h2>
-                                    <h3>Samsung Galaxy S22 5G 8+256GB</h3>
-                                    <p class="panel-deviceImg"><img height="200" src="https://cdn.yes.my/elevate/SAMSUNGS22Pink.jpg" /></p>
-                                    <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(895)" data-productid="895">Select</a></p>
-                                </div>
-                            </div>
-                            <!-- Upsell Products END -->
                         </div>
                     </div>
-
-                    <div class="layer-planDetails" id="section-planDetails" style="display: none;">
-                        <div class="subtitle mb-4">Plan Details</div>
-                        <div class="row gx-5">
-                            <div class="col-lg-8 col-12">
-                                <div class="border-box">
-                                    <div class="row">
-                                        <div class="col-md-3 leftColor">
-                                            <div class="p-3" v-if="orderSummary.product.selected"><img :src="getProductImage()" width="150"></div>
-                                        </div>
-                                        <div class="col-md-9 p-4">
-                                            <div class="row mt-3" v-if="orderSummary.product.selected">
-                                                <div class="col-md-9">
-                                                    <div class="text-20">
-                                                        <div class="subtitle2" style="margin-bottom: 0">{{orderSummary.product.selected.nameEN}}</div>
-                                                        <div class="subtitle2">{{orderSummary.product.selected.plan.nameEN}}</div>
-                                                    </div>
-                                                    <div class="hr_line"></div>
-                                                    <div class="text-bold">
-                                                        {{contractTitle}}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col-md-12 col-12">
-                                        <div class="border-box" style="width: 100%; padding: 20px;" v-if="orderSummary.product.selected">
-                                            <div class="accordion-wrap hlv_3">
-                                                <div class="accordion-header" @click="showPlanDetail()"> {{orderSummary.product.selected.plan.nameEN}} <i
-                                                            class="icon icon_arrow_down"></i></div>
-                                                <div class="text-description mt-3">{{orderSummary.product.selected.plan.shortDescriptionEN}}</div>
-                                                <ul class="accordion-body list-1 mt-3">
-                                                    <li v-for="(list, index) in orderSummary.product.selected.plan.longDescriptionEN">{{list}}</li>
-                                                </ul>
-                                            </div>
-                                            <div class="text-description mt-3">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class=" mt-3 mb-5">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="row mt-3 item_info">
-                                                <div class="label text-bold">To: {{ deliveryInfo.name }}</div>
-                                                <div class="content">
-                                                    <div>{{ deliveryInfo.email }}</div>
-                                                    <div>+60 {{ deliveryInfo.phone }}</div>
-                                                </div>
-                                            </div>
-                                            <div class="row mt-3 item_info">
-                                                <div class="label">Delivery Address</div>
-                                                <div class="content">
-                                                    {{deliveryInfo.addressLine1}}, <br />
-                                                    {{deliveryInfo.city}}, <br />
-                                                    {{deliveryInfo.state}}, <br />
-                                                    {{deliveryInfo.postCode}}, {{deliveryInfo.country}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <!-- <div style="float: right;"><a href="/elevate/personal" class="btn-edit">(Edit)</a></div> -->
-                                        </div>
-                                    </div>
+                    <div class="col-md-7 p-5">
+                        <div class="verify-body mt-3">
+                            <h3 class="subtitle2 d-none d-md-block">Scan the QR code to begin verification</h3>
+                            <div class="mt-5 mb-5">
+                                <div class="d-none d-md-block" id="qrcode"></div>
+                                <div class="text-center d-block d-md-none">
+                                    <a id="cmdVerify" target="_blank" class="btn btn-danger mt-3">Verify Now</a>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-12">
-                                <div class="summary-box">
-                                    <h1 class="subtitle">Order summary</h1>
-                                    <h3 class="plan_price">Monthly Payment</h3>
-                                    <div class="hr_line"></div>
-                                    <div class="row cart_total">
-                                        <div class="col-6 pt-2 pb-2">
-                                            <h3>TOTAL</h3>
-                                        </div>
-                                        <div class="col-6 pt-2 pb-2 text-end">
-                                            <h3>RM{{ formatPrice(parseFloat(orderSummary.orderDetail.subtotal).toFixed(2)) }}/mth</h3>
-                                        </div>
-                                    </div>
-                                    <div class="monthly mb-4">
-                                        <div v-for="(item, index) in orderSummary.orderDetail.orderItems" class="row mt-2">
-                                            <div class="col-6">
-                                                <p>{{item.name}}</p>
-                                            </div>
-                                            <div class="col-6 text-end">
-                                                <p>RM{{item.price}}/ mth</p>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-1">
-                                                <input type="checkbox" id="subscribe" @click="watchAllowNext" name="subscribe" value="1">
-                                            </div>
-                                            <div class="col-11" >
-                                                <label for="subscribe" class="text-12" style="line-height:20px;">I here by agree to subscribe to the plan selected in the online form
-                                                    submitted by me, and to be bound by the First to 5G Campaign Terms and
-                                                    Conditions available at <a target="_blank"
-                                                                            href="https://www.yes.my/tnc/ongoing-campaigns-tnc">www.yes.my/tnc/ongoing-campaigns-tnc</a>.
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-2 ">
-                                            <div class="col-1">
-                                                <input type="checkbox" id="consent" @click="watchAllowNext" name="consent" value="1">
-                                            </div>
-                                            <div class="col-11 text-12">
-                                                <label for="consent" class="text-12" style="line-height:20px;">
-                                                    I further give consent to YTLC to process my personal data in accordance with YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a>.
-                                                </label>
-                                            </div>
-                                        </div>
+                            <h3 class="subtitle2">Complete the verification in 2 simple steps!</h3>
+							
+							<!-- button type="button" @click="doPass">Go</button -->
 
-                                        <div class="row mt-3 ">
-                                            <div class="col-12">
-                                                <button class="pink-btn-disable d-block text-uppercase w-100" :class=" allowSubmit?'pink-btn':'pink-btn-disable'" v-on:click="goNext" type="button">Order</button>
-                                                <div id="error" class="mt-3"></div>
-                                                <div id="status_mesage"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <ul class="list-2 mt-5">
+                                <li><div><span class="number">1</span></div>
+                                    <div>
+                                        <div class="subtitle2">MyKAD Validation</div>
+                                        <p>Scan your MyKAD with the object in a well lit room facing on a flat surface with minimum reflection</p>
+                                    </div></li>
+                                <li class="mt-3"><div><span class="number">2</span></div>
+                                    <div>
+                                        <div class="subtitle2">Face Verification</div>
+                                        <p>Ensure your face is within the frame for an accurate detection</p>
+                                    </div></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+            </div> 
             </div>
         </section>
         <div id="page_error" style="display:none;">
@@ -609,58 +192,53 @@
                     <div class="p-3 text-center"><a href="/infinite-phone-bundles/" class="pink-btn text-uppercase">Back to Infinite+</a></div> <div id="error" class="mt-3"></div></div></div>
         </div>
 
-    </main>
-
-    <div class="modal fade" id="modal-alert" tabindex="-1" aria-labelledby="modal-alert" aria-hidden="true" data-bs-backdrop="static">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h5 class="modal-title" id="modal-titleLabel"></h5>
-                </div>
-                <div class="modal-body text-center">
-                    <p id="modal-bodyText"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            var pageCart = new Vue({
-                el: '#main-vue',
-                data: {
-                    productId: '',
-                    contractTitle: '',
-                    guid: '',
-                    deliveryInfo: {
-                        "name": "",
-                        "nric": "",
-                        "age": "",
-                        "gender": "",
-                        "email": "",
-                        "mobile": "",
-                        "addressLine1": "",
-                        "postCode": "",
-                        "city": "",
-                        "state": "",
-                        "country": "",
-                        "productOffered": "",
-                        "currentPlan": "",
-                        "isFree": false,
-                        "msisdnToUpgrade": "",
-                        "isDeleted": false,
-                        "deleterId": null,
-                        "deletionTime": null,
-                        "lastModificationTime": null,
-                        "lastModifierId": null,
-                        "creationTime": "",
-                        "creatorId": null,
-                        "id": ""
-                    },
-                    selectOptions: {
+    </main> 
+<?php require_once('includes/footer.php'); ?>
+<?php $apiSetting = \Inc\Base\Model::getAPISettings();?>
+<script type="text/javascript"
+        src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/qrcodejs/qrcode.min.js"></script>
+<script type="text/javascript">
+ var windows = [];
+ $(document).ready(function () {
+        var pageCart = new Vue({
+            el: '#main-vue',
+            data: {
+                ekyc_url: '<?php echo $apiSetting["ekyc_url"]?>',
+                ekycPassed:false,
+                totalAttempt:0,
+                maxAttempts:60,
+                interval: null,
+                qrcode: null,
+                verifyWindow: null,
+                productId: '',
+				contractTitle: '',
+				guid: '',
+				deliveryInfo: {
+					"name": "",
+					"nric": "",
+					"age": "",
+					"gender": "",
+					"email": "",
+					"mobile": "",
+					"addressLine1": "",
+					"postCode": "",
+					"city": "",
+					"state": "",
+					"country": "",
+					"productOffered": "",
+					"currentPlan": "",
+					"isFree": false,
+					"msisdnToUpgrade": "",
+					"isDeleted": false,
+					"deleterId": null,
+					"deletionTime": null,
+					"lastModificationTime": null,
+					"lastModifierId": null,
+					"creationTime": "",
+					"creatorId": null,
+					"id": ""
+				},
+				selectOptions: {
                         states: [{
                             'stateCode': 'KUL',
                             'value': 'WILAYAH PERSEKUTUAN-KUALA LUMPUR',
@@ -743,681 +321,346 @@
                             }
                         ],
                         cities: []
-                    },
-                    orderSummary: {
-                        product: {},
-                        orderDetail: {
-                            total: 0.00,
-                            color: null,
-                            contract_id: null,
-                            orderItems: []
+                    }, 
+                orderSummary: {
+                    product: {
+                        selected:{
+                            productCode:'',
+                            code:'',
+                            nameEN:'',
+                            shortDescriptionEN:'',
+                            productBundleId:'',
+                            extraProperties:'',
+                            contractName:'',
+                            capacity:'',
+                            color:'',
+                            contract:'',
+                            devicePriceMonth:'',
+                            planPerMonth:'',
+                            upFrontPayment:0.0,
+                            plan:{
+                                planId:'',
+                                nameEN:'',
+                                shortDescriptionEN:'',
+                            }
                         },
+                        colors:[]
                     },
-                    allowSubmit: false
+                    orderDetail: {
+                        total: 0.00,
+                        color: null,
+                        productCode: null,
+                        orderItems:[]
+                    },
                 },
-                created: function() {
+            },
+
+            created: function () {
+                var self = this;
+                setTimeout(function () { 
+                    self.pageInit();
+
+                }, 500);
+            },
+            methods: {
+                pageInit: function () {
                     var self = this;
-                    setTimeout(function() {
-                        self.pageInit();
-                    }, 500);
+                    if (elevate.validateSession(self.currentStep)) {                        
+                        self.dealer = elevate.lsData.meta.dealer;
+						self.getUserInfor(); 
+                    }else{
+						elevate.initLocalStorage(-1, '', '', '');
+						self.getUserInfor();
+					}  
                 },
-                methods: {
-                    pageInit: function() {
-                        var self = this;
-                        $('.productItem').hide();
-                        setTimeout(function() {
-                            self.getUserInfor();
-                        }, 500);
-                    },
-                    selectPlan: function(productId = 0) {
-                        var self = this;
-
-                        self.productId = productId;
-                        var dc = elevate.getCookie('paramDC');
-                        var duid = elevate.getCookie('paramDUID');
-                        var rc = elevate.getCookie('paramRC');
-
-                        if(!dc) dc = '';
-                        if(!duid) duid = '';
-                        if(!rc) rc = '';
-                        elevate.initLocalStorage(self.productId, dc, duid, rc);
-
-                        self.ajaxGetPlanData();
-                    },
-
-                    ajaxGetPlanData: function() {
-                        var self = this;
-                        toggleOverlay();
-                        axios.get(apiEndpointURL_elevate + '/getProductByCode/?code=' + self.productId)
-                            .then((response) => {
-                                var data = response.data;
-                                if (data.internetData == '∞') {
-                                    data.internetData = 'Unlimited';
-                                }
-
-                                if(data.selected.plan){
-
-                                    self.orderSummary.product = data;
-
-
-                                    self.updatePlan();
-
-                                    if(self.orderSummary.product.selected.contractName){
-                                        self.contractTitle = self.orderSummary.product.selected.contractName;
-                                    }else{
-                                        self.contractTitle = '';
-                                    }
-
-                                    $('#main-vue').css({'height':'auto'});
-                                    $('#section-planDetails').show();
-
-                                    toggleOverlay(false);
-                                    self.jumpToSection('section-planDetails');
-                                }else{
-                                    toggleOverlay(false);
-                                    self.toggleModalAlert('Error', "Sorry, Your product does not existed.");
-                                }
-
-                            })
-                            .catch((error) => {
-                                toggleOverlay(false);
-                                console.log('error', error);
-                            })
-                    },
-                    updatePlan: function() {
-                        var self = this;
-
-                        self.updateSummary();
-                        self.orderSummary.orderDetail.productCode = self.orderSummary.product.selected.productCode;
-
-                    },
-                    updateSummary: function() {
-                        var self = this;
-                        var total = 0;
-
-                        self.orderSummary.orderDetail.orderItems = [
-                            {name: self.orderSummary.product.selected.nameEN + ' - ' + self.orderSummary.product.selected.color,price:parseFloat(self.orderSummary.product.selected.devicePriceMonth).toFixed(2)},
-                            {name: self.orderSummary.product.selected.plan.nameEN,price:parseFloat(self.orderSummary.product.selected.plan.monthlyAmount).toFixed(2)},
-                        ];
-
-
-
-                        var subtotal = parseFloat(self.orderSummary.product.selected.devicePriceMonth) + parseFloat(self.orderSummary.product.selected.planPerMonth);
-
-                        var amount = parseFloat(self.orderSummary.product.selected.plan.monthlyAmount);
-                        var sstAmount = parseFloat(self.orderSummary.product.selected.plan.sstAmount);
-                        var rounding = parseFloat(self.orderSummary.product.selected.plan.roundingAdjustment);
-                        self.orderSummary.orderDetail.amount = amount.toFixed(2);
-                        var total =  amount +  sstAmount + rounding;
-                        self.orderSummary.orderDetail.total = total.toFixed(2);
-                        self.orderSummary.orderDetail.sstAmount = sstAmount.toFixed(2);
-                        self.orderSummary.orderDetail.roundingAdjustment = rounding.toFixed(2);
-                        self.orderSummary.orderDetail.subtotal = subtotal.toFixed(2);
-
-                        self.orderSummary.orderDetail.color = self.orderSummary.product.selected.color;
-
-                    },
-
-                    getProductImage: function(){
-                        var self = this;
-                        if(!self.orderSummary.product.selected.imageURL) return;
-                        var url = self.orderSummary.product.selected.imageURL.split(';');
-                        console.log(url);
-                        return url[0];
-
-                    },
-
-                    getStateCode: function (stateVal) {
-                        var self = this;
-                        var objState = self.selectOptions.states.filter(state => state.value == stateVal);
-                        if (!objState.length) {
-                            objState = self.selectOptions.states.filter(state => state.value == stateVal.toUpperCase());
-                        }
-                        return objState[0].stateCode;
-                    },
-
-                    updateCityCode: function () {
-                        var self = this;
-                        var stateCode = self.deliveryInfo.stateCode;
-
-                        toggleOverlay();
-
-                        self.allowSelectCity = false;
-
-                        axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode)
-                            .then((response) => {
-                                var options = [];
-                                var data = response.data;
-                                var masterlist = data.masterDataList[0].masterList;
-                                masterlist.map((value, index) => {
-                                    options.push({
-                                        value: value.masterCode,
-                                        name: value.masterValue
-                                    });
-                                    if(value.masterValue == self.deliveryInfo.city){
-                                        self.deliveryInfo.cityCode = value.masterCode;
-                                    }
-                                })
-                                self.selectOptions.cities = options;
-                                self.allowSelectCity = true;
-
-                                var objCity = self.selectOptions.cities.filter(city => city.value == self.deliveryInfo.city);
-                                /*if (objCity.length == 0) {
-                                    self.deliveryInfo.city = '';
-                                    self.deliveryInfo.cityCode = '';
-                                }*/
-
-                            })
-                            .catch((error) => {
-                                console.log(error);
-                            })
-                            .finally(() => {
-                                self.watchAllowNext();
-                                toggleOverlay(false);
-                            });
-                    },
-
-                    getUserInfor: function(){
-                        var self = this;
-
-                        var url_string = window.location.href;
-                        var url = new URL(url_string);
-                        var guid = url.searchParams.get('id');
-                        if(guid){
-                            $('#page_error').hide();
-                            $('#cart-body').show();
-                            self.guid = guid;
-
-                            toggleOverlay();
-                            axios.get(apiEndpointURL_elevate + '/getPreRegisterUser/?id=' + self.guid)
-                                .then((response) => {
-                                    toggleOverlay(false);
-                                    var data = response.data;
-                                    console.log(data);
-                                    if(data){
-                                        self.deliveryInfo = data;
-                                        self.allowSubmit = true;
-                                        self.deliveryInfo.mykad = self.deliveryInfo.nric;
-                                        self.deliveryInfo.address = self.deliveryInfo.addressLine1;
-                                        self.deliveryInfo.postcode = self.deliveryInfo.postCode;
-
-                                        self.deliveryInfo.msisdnToUpgrade = self.getMsisdn(self.deliveryInfo.msisdnToUpgrade);
-
-                                        self.deliveryInfo.stateCode = (self.deliveryInfo.state) ? self.getStateCode(self.deliveryInfo.state) : '';
-                                        self.deliveryInfo.cityCode = self.deliveryInfo.city;
-
-                                        self.deliveryInfo.phone = self.getPhone(self.deliveryInfo.mobile);
-                                        self.productOffered();
-                                        self.updateCityCode();
-                                    }else{
-                                        $('#cart-body').hide();
-                                        $('#page_error').show();
-                                    }
-
-                                })
-                                .catch((error) => {
-                                    toggleOverlay(false);
-                                    $('#cart-body').hide();
-                                    $('#page_error').show()
-                                    console.log('error', error);
-                                })
-
-                        }else{
-                            $('#cart-body').hide();
-                            $('#page_error').show();
-                        }
-
-
-                    },
-
-                    productOffered: function(){
-                        var self = this;
-                        if(self.deliveryInfo.productOffered){
-                            var aryBundle = self.deliveryInfo.productOffered.split(',');
-                            var found = false;
-                            for(var i = 0; i< aryBundle.length; i++){
-                                var tmp = '.bundle'+aryBundle[i].trim();
-                                $(tmp).show();
-                                if($(tmp)){
-                                    found = true;
-                                }
-                            }
-
-                            if(!found){
-                                $('#cart-body').hide();
-                                $('#page_error').show();
-                            }
-                        }else{
-                            $('#cart-body').hide();
-                            $('#page_error').show();
-                        }
-                    },
-
-                    getPhone: function(phone){
-                        var phone = phone.replaceAll(' ', '')
-                        var c = phone.substring(0,1);
-                        var tel = '';
-                        switch(c){
-                            case '+':
-                                tel = phone.substring(2,11);
-                                break;
-                            case '6':
-                                tel = phone.substring(1,11);
-                                break;
-                            case '1':
-                                tel = '0'+phone;
-                                break;
-                            default:
-                                tel = phone;
-                                break;
-                        }
-                        return tel;
-
-                    },
-
-                    getMsisdn: function(msisdn){
-
-                        var tmp = msisdn.split('@');
-                        return tmp[0];
-                    },
-
-                    elevateCustomer: function () {
-                        var self = this;
-                        var params = self.deliveryInfo;
-                        params.productId = self.orderSummary.product.selected.productCode;
-			            params.registrationChannel = "WEB-PREQUALIFIED";
-
-                        toggleOverlay();
-                        $('#status_mesage').html('Process customer...');
-
-                        //console.log(params);return;
-
-                        axios.post(apiEndpointURL_elevate + '/customer', params)
-                            .then((response) => {
-                                var data = response.data;
-                                if (data.status == 1) {
-                                    elevate.lsData.customer = data.data;
-                                    elevate.updateElevateLSData();
-                                    self.customer =  data.data;
-
-                                    //create order
-                                    self.makeOrder();
-
-                                } else {
-                                    toggleOverlay(false);
-                                    $('#error').html(data.error);
-                                    $('#status_mesage').html('');
-                                }
-                            })
-                            .catch((error) => {
-                                toggleOverlay(false);
-                                console.log(error, response);
-                            });
-                    },
-
-                    makeOrder: function (){
-                        var self = this;
-                        var params = self.customer;
-                        params.productSelected = self.orderSummary.product.selected.plan.planId;
-                        params.referralCode = "";
-                        params.dealerUID = "";
-                        params.dealerCode = "";
-                        $('#status_mesage').html('Process order...');
-                        toggleOverlay();
-                        axios.post(apiEndpointURL_elevate + '/order/create', params)
-                            .then((response) => {
-                                var data = response.data;
-                                if(data.status == 1){
-                                    //save contract info
-                                    self.orderSummary.orderInfo = data.data;
-                                    elevate.lsData.orderInfo = data.data;
-                                    elevate.updateElevateLSData();
-                                    self.elevateContract();
-                                }else{
-                                    toggleOverlay(false);
-                                    $('#error').html("System error, please try again.");
-                                    $('#status_mesage').html('');
-                                    console.log(data);
-                                }
-
-                            })
-                            .catch((error) => {
-                                toggleOverlay(false);
-                                console.log(error, response);
-                            });
-                    },
-
-                    updateElevateOrder: function (){
-                        var self = this;
-
-                        toggleOverlay();
-                        var param = elevate.lsData.orderInfo;
-
-                        param.orderNumber = self.orderResponse.orderNumber;
-
-                        axios.post(apiEndpointURL_elevate + '/order/update', param)
-                            .then((response) => {
-                                var data = response.data;
-
-                                if(data.status == 1){
-                                    self.removePrequalifiedCustomer();
-                                    //elevate.redirectToPage('thanks-pre-qualified?orderNumber='+$('#displayOrderNumber').val());
-                                }else{
-                                    toggleOverlay(false);
-                                    $('#status_mesage').html('');
-                                    $('#error').html("Systm error, please try again.");
-                                    console.log(data);
-                                }
-                            })
-                            .catch((error) => {
-                                toggleOverlay(false);
-                                console.log(error, response);
-                            });
-
-                    },
-
-                    cancelElevateOrder: function (error){
-                        var self = this;
-
-                        toggleOverlay();
-                        var param = elevate.lsData.orderInfo;
-                        param.orderNumber = self.orderResponse.orderNumber;
-                        param.error = error;
-
-                        axios.post(apiEndpointURL_elevate + '/order/cancel', param)
-                            .then((response) => {
-                                var data = response.data;
-                                if(data.status == 1){
-
-                                }else{
-                                    toggleOverlay(false);
-                                    $('#status_mesage').html('');
-                                    $('#error').html("Systm error, please try again.");
-                                    console.log(data);
-                                }
-                            })
-                            .catch((error) => {
-                                toggleOverlay(false);
-                                console.log(error, response);
-                            });
-
-                    },
-
-                    elevateContract: function () {
-                        var self = this;
+                eKYC_init: function () {
+                    var self = this;
+                    var params = {
+                        uid: self.deliveryInfo.id,
+                        mykad: self.deliveryInfo.mykad,
+                        fname: self.deliveryInfo.name
+                    };
+                    self.makeCode();
+                    self.interval = setInterval(function (){
+                        self.eKYC_check();
+                    },5000);
+
+					$('#cmdVerify').click(function(){
+						var url = $('#cmdVerify').data('url');
+						windows.push(window.open(url, '_blank'));
+					})
+
+					$('#cmdVerifyClose').click(function(){
+						for(var i = 0; i < windows.length; i++){
+							windows[i].close()
+						}
+					})
+
+                },
+                eKYC_check: function () {
+                    var self = this;
+
+                    self.totalAttempt++;
+                    if( self.totalAttempt <= self.maxAttempts){
                         var params = {
-                            name: self.deliveryInfo.name,
-                            mykad: self.deliveryInfo.nric,
-                            phone: self.deliveryInfo.phone,
-                            alternative_name: self.deliveryInfo.name,
-                            alternative_phone:	self.deliveryInfo.phone
+                            uid: self.guid,
+                            mykad: self.deliveryInfo.mykad,
+                            fname: self.deliveryInfo.name
                         };
-
-                        params.orderId = self.orderSummary.orderInfo.id;
-                        params.contract = self.orderSummary.product.selected.contract;
-                        toggleOverlay();
-                        $('#status_mesage').html('Process contract...');
-
-                        axios.post(apiEndpointURL_elevate + '/contract', params)
+                        axios.post(apiEndpointURL_elevate + '/ekyc-check', params)
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
-                                    //save contract info
-                                    self.contract = data.data;
-
-                                    elevate.lsData.contract = data.data;
-                                    elevate.updateElevateLSData();
-
-
-                                    if(self.deliveryInfo.isFree){
-                                        self.ajaxCreateYOSOrderFree();
-                                    }else{
-                                        $('#status_mesage').html('Please make payment...');
-                                        elevate.redirectToPage('paynow-pre-qualified');
+                                    if(data.data.processStatus == "EKYC_Done"){
+                                        //success
+                                        clearInterval(self.interval);
+										for(var i = 0; i < windows.length; i++){
+											windows[i].close()
+										}
+                                        self.CAVerification(data.data);
+										//elevate.redirectToPage('personal');
                                     }
-                                }else{
-                                    toggleOverlay(false);
-                                    $('#error').html("System error, please try again.");
-                                    $('#status_mesage').html('');
-                                    console.log(data);
-                                }
 
+									if(data.data.processStatus == "EKYC_Fail"){
+                                        //failure
+                                        clearInterval(self.interval);
+										for(var i = 0; i < windows.length; i++){
+											windows[i].close()
+										}
+                                        toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, Your verification was rejected by eKYC system.')
+                                        
+                                    }
+                                }
                             })
                             .catch((error) => {
-                                toggleOverlay(false);
                                 console.log(error, response);
                             });
 
-                    },
-
-                    removePrequalifiedCustomer: function () {
-                        var self = this;
-                        var params = {
-                            id: self.deliveryInfo.id
-                        };
-
-                        toggleOverlay();
-                        $('#status_mesage').html('Remove data...');
-
-                        axios.post(apiEndpointURL_elevate + '/del-prequalified-customer', params)
-                            .then((response) => {
-                                var data = response.data;
-                                if(data.status == 1){
-                                    elevate.redirectToPage('thanks-pre-qualified?orderNumber='+$('#displayOrderNumber').val());
-                                }else{
-                                    toggleOverlay(false);
-                                    $('#error').html("System error, please try again.");
-                                    $('#status_mesage').html('');
-                                    console.log(data);
-                                }
-
-                            })
-                            .catch((error) => {
-                                toggleOverlay(false);
-                                console.log(error, response);
-                            });
-
-                    },
-
-                    getDOB: function (mykad){
-                        var self = this;
-                        var dateString =  mykad.substring(0, 6);
-
-                        var year = dateString.substring(0, 2); //year
-                        var month = dateString.substring(2, 4); //month
-                        var date = dateString.substring(4, 6); //date
-
-                        if (year > 20) {
-                            year = "19" + year;
-                        }
-                        else {
-                            year = "20" + year;
-                        }
-
-                        var dob = date + "/" + month + "/" + year;
-                        return dob;
-                    },
-
-                    ajaxCreateYOSOrderFree: function() {
-                        var self = this;
-                        var params = {
-                            "session_key": elevate.lsData.sessionKey,
-                            "phone_number": self.deliveryInfo.phone,
-                            "customer_name": self.deliveryInfo.name,
-                            "dob": self.getDOB(self.deliveryInfo.nric),
-                            "gender": self.deliveryInfo.gender,
-                            "email": self.deliveryInfo.email,
-                            "login_yes_id": "",
-                            "security_type": "NRIC",
-                            "security_id": self.deliveryInfo.nric,
-                            "school_name": "",
-                            "school_code": "",
-                            "university_name": "",
-                            "dealer_code": "",
-                            "dealer_login_id": "",
-                            "plan_name": self.orderSummary.product.selected.plan.planName,
-                            "plan_type": self.orderSummary.product.selected.plan.planType,
-                            "product_bundle_id": self.orderSummary.product.selected.productCode,
-                            "referral_code": "",
-                            "addon_name": "",
-                            "conversion": self.deliveryInfo.isConversion,
-                            "existingMsisdn": self.deliveryInfo.msisdnToUpgrade,
-                            "existingPlanName": self.deliveryInfo.currentPlan,
-                            "existingPlanType": self.deliveryInfo.currentPlanType,
-                            "address_line":  self.deliveryInfo.addressLine1,
-                            "city": self.deliveryInfo.city,
-                            "city_code": self.deliveryInfo.cityCode,
-                            "postal_code": self.deliveryInfo.postCode,
-                            "state": self.deliveryInfo.state,
-                            "state_code": self.deliveryInfo.stateCode,
-                            "country": self.deliveryInfo.country
-                        }
-                        $('#status_mesage').html('Process payment...');
-                        //console.log("params",params); return;
-                        axios.post(apiEndpointURL_elevate + '/create-yos-free-order', params)
-                            .then((response) => {
-                                var data = response.data;
-
-                                if(parseInt(data.status) == 1){
-
-                                    console.log(data.data);
-                                    self.orderResponse = data.data;
-
-                                    elevate.lsData.YOSOrder = data.data;
-                                    elevate.updateElevateLSData();
-
-                                    //update elevate Order
-
-                                    $('#displayOrderNumber').val(data.data.displayOrderNumber);
-                                    self.updateElevateOrder();
-                                }else{
-                                    toggleOverlay(false);
-                                    $('#status_mesage').html('');
-                                    var errorMsg = 'Sorry, you cannot make order. '
-                                    if(data.error){
-                                        errorMsg = errorMsg + data.error;
-                                    }
-                                    $('#error').html(errorMsg);
-                                }
-
-
-                            })
-                            .catch((error) => {
-                                var response = error.response;
-                                if (typeof response != 'undefined') {
-                                    var data = response.data;
-                                    var errorMsg = '';
-                                    if (error.response.status == 500 || error.response.status == 503) {
-                                        errorMsg = "There's an error in creating your order.<br />Please try again later.";
-                                    } else {
-                                        errorMsg = data.message
-                                    }
-                                    toggleOverlay(false);
-                                    self.toggleModalAlert('Error', errorMsg);
-
-                                    self.cancelElevateOrder(errorMsg);
-                                }
-                                console.log(error, response);
-                            })
-                            .finally(() => {
-                                // console.log('finally');
-                            });
-
-                        // console.log(JSON.stringify(params));
-                    },
-
-                    jumpToSection: function(sectionID) {
-                        var targetSection = $('#' + sectionID);
-                        if (targetSection.length > 0) {
-                            var targetOffset = $(targetSection).offset().top;
-                            $('html, body').animate({
-                                scrollTop: targetOffset
-                            }, 100);
-                        }
-                        return false;
-                    },
-
-                    toggleModalAlert: function(modalHeader = '', modalText = '') {
-                        $('#modal-titleLabel').html(modalHeader);
-                        $('#modal-bodyText').html(modalText);
-                        $('#modal-alert').modal('show');
-                        $('#modal-alert').on('hidden.bs.modal', function() {
-                            $('#modal-titleLabel').html('');
-                            $('#modal-bodyText').html('');
-                        });
-                    },
-
-                    showPlanDetail: function() {
-                        $('.accordion-wrap').toggleClass("active");
-                        $(".accordion-body").slideToggle();
-                    },
-                    // watchAllowNext: function() {
-                    //     var self = this;
-                    //     if(!self.deliveryInfo.id){
-                    //         self.allowSubmit = false
-                    //     }
-
-                    // },
-                    
-                    watchAllowNext: function () {
-                        $('#error').html("");
-                        $('.input_error').removeClass('input_error');
-                        var self = this;
-                        var isFilled = true;
-                        var error = new Array();
+                    }else{
+                        clearInterval(self.interval);
+                        toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, We can\'t verify your eKYC because of time limit.')
                         
-                        if(!$('#subscribe').is(':checked') ||  !$('#consent').is(':checked')){
-                            isFilled = false
-                        }
-
-                        if (isFilled) {
-                            self.allowSubmit = true;
-                        } else {
-                            self.allowSubmit = false;
-                            if(error.length){
-                                var uniqueArray = error.filter(function(item, pos, self) {
-                                    return self.indexOf(item) == pos;
-                                })
-                                $('#error').html("Sorry: " + uniqueArray.join(', ')+'.');
-                            }
-                        }
-                    },
-                    goNext: function() {
-
-                        var self = this;
-                        if (self.allowSubmit) {
-                            $('#status_mesage').html('');
-                            $('#error').html('');
-
-                            var LSData = JSON.parse(localStorage.getItem(elevateLSName));
-                            elevate.lsData = LSData;
-                            elevate.lsData.deliveryInfo =  self.deliveryInfo;
-                            elevate.lsData.product =  self.orderSummary.product;
-                            elevate.lsData.orderDetail =  self.orderSummary.orderDetail;
-                            elevate.updateElevateLSData();
-
-                            if(self.customer){
-                                if(self.orderSummary.orderInfo){
-                                    if(self.contract){
-                                        if(self.deliveryInfo.isFree){
-                                            self.ajaxCreateYOSOrderFree();
-                                        }else{
-                                            elevate.redirectToPage('paynow-pre-qualified');
-                                        }
-                                    }else{
-                                        self.elevateContract();
-                                    }
-                                }else{
-                                    self.makeOrder();
-                                }
-                            }else{
-                                self.elevateCustomer();
-                            }
-                        }
                     }
-                }
-            });
-        });
-    </script>
+                },
+				
+				doPass: function(){
+					var self = this;
+					 
+					elevate.lsData.ekycPassed = true;
+					elevate.lsData.meta.guid = self.guid;
+					elevate.lsData.deliveryInfo = self.deliveryInfo;
+					elevate.updateElevateLSData();
+					toggleOverlay();								
+					elevate.redirectToPage('pre-plan');					
+				},
 
-<?php require_once('includes/footer.php'); ?>
+                CAVerification: function (response) {
+
+                    var self = this;
+                    var params = {
+                        mykad: self.deliveryInfo.mykad,
+                        name:self.deliveryInfo.name,
+                        email:self.deliveryInfo.email,
+                        phone:self.deliveryInfo.phone,
+                        PartneReferenceID:response.uid,
+                        OCRConfidenceScore:response.sim,
+                    };
+                    toggleOverlay();
+                    axios.post(apiEndpointURL_elevate + '/ca-verification', params)
+                        .then((response) => {
+
+                            var data = response.data;
+
+                            if (data.status == 1) {
+								//todo
+								elevate.lsData.ekycPassed = true;
+								elevate.lsData.meta.guid = self.guid;
+								elevate.lsData.deliveryInfo = self.deliveryInfo;
+								elevate.updateElevateLSData();
+								toggleOverlay();								
+                                elevate.redirectToPage('pre-plan');
+                            } else {
+                                toggleOverlay(false);
+                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful because your NRIC is not eligible.');
+                            }
+                        })
+                        .catch((error) => {
+                            toggleOverlay(false);
+                            console.log(error);
+                        });
+                },
+				productOffered: function(){
+					var self = this;
+					if(self.deliveryInfo.productOffered){
+						var aryBundle = self.deliveryInfo.productOffered.split(',');
+						var found = false;
+						for(var i = 0; i< aryBundle.length; i++){
+							var tmp = '.bundle'+aryBundle[i].trim();
+							$(tmp).show();
+							if($(tmp)){
+								found = true;
+							}
+						}
+
+						if(!found){
+							$('#cart-body').hide();
+							$('#page_error').show();
+						}
+					}else{
+						$('#cart-body').hide();
+						$('#page_error').show();
+					}
+				},
+				
+				getStateCode: function (stateVal) {
+					var self = this;
+					var objState = self.selectOptions.states.filter(state => state.value == stateVal);
+					if (!objState.length) {
+						objState = self.selectOptions.states.filter(state => state.value == stateVal.toUpperCase());
+					}
+					return objState[0].stateCode;
+				},
+
+				updateCityCode: function () {
+					var self = this;
+					var stateCode = self.deliveryInfo.stateCode;
+
+					toggleOverlay();
+
+					self.allowSelectCity = false;
+
+					axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode)
+						.then((response) => {
+							var options = [];
+							var data = response.data;
+							var masterlist = data.masterDataList[0].masterList;
+							masterlist.map((value, index) => {
+								options.push({
+									value: value.masterCode,
+									name: value.masterValue
+								});
+								if(value.masterValue == self.deliveryInfo.city){
+									self.deliveryInfo.cityCode = value.masterCode;
+								}
+							})
+							self.selectOptions.cities = options;
+							self.allowSelectCity = true;
+
+							var objCity = self.selectOptions.cities.filter(city => city.value == self.deliveryInfo.city);                                
+
+						})
+						.catch((error) => {
+							console.log(error);
+						})
+						.finally(() => { 
+							toggleOverlay(false);
+						});
+				},
+					
+				getPhone: function(phone){
+					var phone = phone.replaceAll(' ', '')
+					var c = phone.substring(0,1);
+					var tel = '';
+					switch(c){
+						case '+':
+							tel = phone.substring(2,11);
+							break;
+						case '6':
+							tel = phone.substring(1,11);
+							break;
+						case '1':
+							tel = '0'+phone;
+							break;
+						default:
+							tel = phone;
+							break;
+					}
+					return tel;
+
+				},
+
+				getMsisdn: function(msisdn){
+
+					var tmp = msisdn.split('@');
+					return tmp[0];
+				},
+				
+				getUserInfor: function(){
+					var self = this;
+
+					var url_string = window.location.href;
+					var url = new URL(url_string);
+					var guid = url.searchParams.get('id');
+					if(guid){
+						$('#page_error').hide();
+						$('#cart-body').show();
+						self.guid = guid;
+
+						toggleOverlay();
+						axios.get(apiEndpointURL_elevate + '/getPreRegisterUser/?id=' + self.guid)
+							.then((response) => {
+								toggleOverlay(false);
+								var data = response.data;
+								console.log(data);
+								if(data){
+									self.deliveryInfo = data;
+									self.allowSubmit = true;
+									self.deliveryInfo.mykad = self.deliveryInfo.nric;
+									self.deliveryInfo.address = self.deliveryInfo.addressLine1;
+									self.deliveryInfo.postcode = self.deliveryInfo.postCode;
+
+									self.deliveryInfo.msisdnToUpgrade = self.getMsisdn(self.deliveryInfo.msisdnToUpgrade);
+
+									self.deliveryInfo.stateCode = (self.deliveryInfo.state) ? self.getStateCode(self.deliveryInfo.state) : '';
+									self.deliveryInfo.cityCode = self.deliveryInfo.city;
+
+									self.deliveryInfo.phone = self.getPhone(self.deliveryInfo.mobile);
+									self.productOffered();
+									self.updateCityCode();
+									
+									self.eKYC_init();
+								}else{
+									$('#cart-body').hide();
+									$('#page_error').show();
+								}
+
+							})
+							.catch((error) => {
+								toggleOverlay(false);
+								$('#cart-body').hide();
+								$('#page_error').show()
+								console.log('error', error);
+							})
+
+					}else{
+						$('#cart-body').hide();
+						$('#page_error').show();
+					}
+
+
+				},
+					
+                redirectYWOS:function (){
+                    var self = this;
+                    toggleOverlay();
+                    ywos.buyPlan(self.selectedPlan);
+                },
+
+                makeCode: function () {
+                    var self = this;
+                    var url_verification = self.ekyc_url + 'EKYC/?fullName=' + encodeURIComponent (self.deliveryInfo.name) + '&nric=' + self.deliveryInfo.mykad + '&guid=' + encodeURIComponent(self.guid);
+                    $('#cmdVerify').data('url', url_verification);
+                    
+					const qrcode = new QRCode(document.getElementById('qrcode'), {
+					  text: url_verification,
+					  width: 128,
+					  height: 128,
+					  colorDark : '#000',
+					  colorLight : '#fff',
+					  correctLevel : QRCode.CorrectLevel.H
+					});
+                }
+            }
+        });
+    });
+</script>
