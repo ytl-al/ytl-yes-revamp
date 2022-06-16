@@ -411,7 +411,7 @@
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
-                                    if(data.data.processStatus == "EKYC_Done"){
+                                    if(data.data.processStatus.toUpperCase() == "EKYC_DONE"){
                                         //success
                                         clearInterval(self.interval);
 										for(var i = 0; i < windows.length; i++){
@@ -421,7 +421,7 @@
 										//elevate.redirectToPage('personal');
                                     }
 
-									if(data.data.processStatus == "EKYC_Fail"){
+                                    if(data.data.processStatus.toUpperCase() == "EKYC_FAILED"){
                                         //failure
                                         clearInterval(self.interval);
 										for(var i = 0; i < windows.length; i++){
