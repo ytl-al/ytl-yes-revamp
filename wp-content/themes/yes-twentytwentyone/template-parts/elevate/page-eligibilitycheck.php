@@ -544,6 +544,12 @@
                     }
                 },
 
+                validateEmail: function(emailAddress) {
+                    emailAddress = emailAddress.toLowerCase();;
+                    var re = /^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)+(com|asia|au|biz|cn|co|de|edu|giv|hk|id|in|jp|my|net|nz|org|sg|tw|uk)$/;
+                    return re.test(emailAddress);
+                },
+
                 watchAllowNext: function () {
                     $('#error').html("");
                     $('.input_error').removeClass('input_error');
@@ -614,15 +620,14 @@
                         isFilled = false
                     }
 
-                    var phone = /^[0-46-9]*[0-9]{9,10}$/g;
+                    var phone = /^[1][0-9].{7,}$/g;
                     if (self.eligibility.inphone.trim() && (!phone.test(self.eligibility.inphone.trim()) || !self.validateMobile(self.eligibility.inphone))) {
                         isFilled = false;
                         $('#ic_phone_number').addClass('input_error');
                         error.push('Invalid mobile number');
                     }
 
-                    var email = /\S+@\S+\.\S+/;
-                    if (self.eligibility.email.trim() && !email.test(self.eligibility.email.trim())) {
+                    if (self.eligibility.email.trim() && !self.validateEmail(self.eligibility.email.trim())) {
                         isFilled = false;
                         $('#email').addClass('input_error');
                         error.push('Invalid email');

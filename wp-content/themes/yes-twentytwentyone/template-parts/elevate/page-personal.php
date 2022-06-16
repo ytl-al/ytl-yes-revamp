@@ -723,6 +723,13 @@
 					return true;
 				  }
 				},
+
+                validateEmail: function(emailAddress) {
+                    emailAddress = emailAddress.toLowerCase();;
+                    var re = /^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)+(com|asia|au|biz|cn|co|de|edu|giv|hk|id|in|jp|my|net|nz|org|sg|tw|uk)$/;
+                    return re.test(emailAddress);
+                },
+
                 watchAllowNext: function () {
                     $('.input_error').removeClass('input_error');
                     var self = this;
@@ -775,8 +782,7 @@
                         isFilled = false
                     }
 
-                    var email = /\S+@\S+\.\S+/;
-                    if (self.deliveryInfo.email.trim() && !email.test(self.deliveryInfo.email.trim())) {
+                    if (self.eligibility.email.trim() && !self.validateEmail(self.eligibility.email.trim())) {
                         isFilled = false;
                         $('#email').addClass('input_error');
                     }

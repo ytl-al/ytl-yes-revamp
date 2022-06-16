@@ -109,7 +109,7 @@
                                     <button class="pink-btn-disable text-uppercase" @click="goNext" style="margin-right:10px;"
                                             :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">Continue
                                     </button>
-									
+
 									<button class="pink-btn-disable text-uppercase" onclick="goBack()" type="button">Cancel
                                     </button>
                                 </div>
@@ -215,7 +215,7 @@
                                         <button class="pink-btn-disable text-uppercase" @click="goNext" style="margin-right:10px;"
                                                 :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">Continue
                                         </button>
-										
+
 										<button class="pink-btn-disable text-uppercase" onclick="goBack()" type="button">Cancel
                                     </button>
                                     </div>
@@ -264,7 +264,7 @@
     $(document).ready(function () {
         var pageCart = new Vue({
             el: '#main-vue',
-            data: {				
+            data: {
                 productId: null,
                 isCartEmpty: false,
                 taxRate: {
@@ -474,7 +474,7 @@
             },
 
             created: function () {
-                var self = this; 
+                var self = this;
                 setTimeout(function () {
                     self.pageInit();
                 }, 500);
@@ -485,18 +485,18 @@
 
                     if (elevate.validateSession(self.currentStep)) {
                         self.pageValid = true;
-                         
-                        
+
+
 						self.deliveryInfo = elevate.lsData.deliveryInfo;
-						self.orderSummary = elevate.lsData.orderSummary; 
+						self.orderSummary = elevate.lsData.orderSummary;
                         self.guid = elevate.lsData.guid;
-						
+
 						$('#guid').val(self.guid);
-						
+
 						self.productId = self.orderSummary.orderDetail.productCode
 
                         self.updateFields();
-                       
+
 
                         setTimeout(function () {
                             $('.form-select').selectpicker('refresh');
@@ -505,11 +505,11 @@
                     }
                 },
                 updateFields: function () {
-                    var self = this; 
+                    var self = this;
 
                     self.watchChangePostcode();
                     self.deliveryInfo.stateCode = (self.deliveryInfo.state) ? self.getStateCode(self.deliveryInfo.state) : '';
-                    
+
 
                 },
                 watchChangeState: function (event) {
@@ -673,23 +673,15 @@
                         return true;
                     }
                 },
-                validateMobile: function (mob) {
+                validateMobile: function (phone_number) {
 
                     if (mob.length < 9 && mob.length > 10) {
                         return false;
                     }
-                    if (mob.slice(0, 1) != '1') {
-                        return false;
-                    }
-
-                    if (mob.slice(0, 2) == '11') {
-                        if (mob.length < 10) {
-                            return false;
-                        }
-                    }
-
-                    return true;
+                    var phone = /^[1][0-9].{7,}$/g;
+                    return phone.test(phone_number)
                 },
+
 				isNumber: function(evt) {
 				  evt = (evt) ? evt : window.event;
 				  var charCode = (evt.which) ? evt.which : evt.keyCode;
@@ -699,13 +691,20 @@
 					return true;
 				  }
 				},
+
+                validateEmail: function(emailAddress) {
+                    emailAddress = emailAddress.toLowerCase();;
+                    var re = /^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)+(com|asia|au|biz|cn|co|de|edu|giv|hk|id|in|jp|my|net|nz|org|sg|tw|uk)$/;
+                    return re.test(emailAddress);
+                },
+
                 watchAllowNext: function () {
                     $('.input_error').removeClass('input_error');
                     var self = this;
                     var isFilled = true;
-					
+
 					self.deliveryInfo.name = self.deliveryInfo.name.toUpperCase();
-					
+
                     if (
                         self.deliveryInfo.mykad.trim() == '' ||
                         self.deliveryInfo.name.trim() == '' ||
@@ -731,12 +730,6 @@
                         $('#ic_phone_number').addClass('input_error');
                     }
 
-                    var phone = /^[1]*[0-9]{9,11}$/g;
-                    if (self.deliveryInfo.alternative_phone.trim() && !phone.test(self.deliveryInfo.alternative_phone.trim())) {
-                        isFilled = false;
-                        $('#alternative_phone').addClass('input_error');
-                    }
-
 					if(self.deliveryInfo.alternative_phone && !self.validateMobile(self.deliveryInfo.alternative_phone)){
                         isFilled = false;
                         $('#alternative_phone').addClass('input_error');
@@ -754,8 +747,8 @@
                         isFilled = false
                     }
 
-                    var email = /\S+@\S+\.\S+/;
-                    if (self.deliveryInfo.email.trim() && !email.test(self.deliveryInfo.email.trim())) {
+
+                    if (self.eligibility.email.trim() && !self.validateEmail(self.eligibility.email.trim())) {
                         isFilled = false;
                         $('#email').addClass('input_error');
                     }
@@ -781,7 +774,7 @@
                     toggleOverlay();
                     var param = self.deliveryInfo;
                     param.uid = self.deliveryInfo.id;
-                    param.productId = self.productId; 
+                    param.productId = self.productId;
                     if(self.dealer){
 						param.referralCode = self.orderSummary.order.referralCode;
 						param.dealerUID = self.orderSummary.order.dealerUID;
@@ -824,12 +817,12 @@
                         elevate.updateElevateLSData();
                         self.updateCustomer();
                     }
-                }, 
+                },
             }
         });
     });
-	
-	function goBack(){ 
+
+	function goBack(){
 		elevate.redirectToPage('pre-register-complete/?id='+ $('#guid').val());
 	}
 </script>
