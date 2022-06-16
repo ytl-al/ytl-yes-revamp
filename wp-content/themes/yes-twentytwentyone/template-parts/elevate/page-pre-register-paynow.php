@@ -490,7 +490,8 @@
                         deliveryType: ''
                     },
                     checkPaymentStatusCount: 0,
-                    checkPaymentStatusCountLimit: 59,
+                    checkPaymentStatusCountLimit: 78, // times every 5 seconds (5000), total = 6.5 minutes, excluding 10 seconds before first check
+                    paymentTimeout: false,
                     paymentResponse: null,
                     analyticItems: []
                 },
@@ -676,8 +677,9 @@
                                 if (responseCode == 0) {                        // Payment success
                                     self.paymentResponse = data;
                                     closePaymentWindow = true;
-                                    self.updatePaymentStatus(2);
-                                    window.focus();
+                                    setTimeout(function() {
+                                        self.updatePaymentStatus(2);
+                                    }, 2000);
                                 } else if (responseCode == -1) {   
                                     if (paymentId == 'Not Available') {         // Payment in progress
                                         recheck = true;
@@ -699,8 +701,8 @@
                                     if (self.checkPaymentStatusCount <= self.checkPaymentStatusCountLimit) {
                                         self.checkPaymentStatusCount++;
                                         setTimeout(function() {
-                                            self.ajaxCheckOrderPaymentStatus(timeoutObj);
-                                        }, 10000);
+                                            if (!self.paymentTimeout) self.ajaxCheckOrderPaymentStatus(timeoutObj);
+                                        }, 5000);
                                     } else {
                                         toggleOverlay(false);
                                         self.toggleModalAlert('Error Payment', 'Your payment is not successful.<br />Please try again.');
@@ -712,9 +714,10 @@
                                 }
 
                                 if (closePaymentWindow) {
-                                    window.focus();
                                     clearTimeout(timeoutObj);
-                                    if (mainwin && !mainwin.closed) {
+                                    self.paymentTimeout = true;
+                                    self.checkPaymentStatusCount = 0;
+                                    if (mainwin != null && !mainwin.closed) {
                                         mainwin.focus();
                                         mainwin.close();
                                     }
@@ -725,14 +728,15 @@
                                     self.checkPaymentStatusCount++;
                                     setTimeout(function() {
                                         self.ajaxCheckOrderPaymentStatus(timeoutObj);
-                                    }, 10000);
+                                    }, 5000);
                                 } else {
                                     toggleOverlay(false);
                                     self.toggleModalAlert('Error Payment', "There's an error in processing your payment.<br />Please try again later.");
 
-                                    window.focus();
                                     clearTimeout(timeoutObj);
-                                    if (mainwin && !mainwin.closed) {
+                                    self.paymentTimeout = true;
+                                    self.checkPaymentStatusCount = 0;
+                                    if (mainwin != null && !mainwin.closed) {
                                         mainwin.focus();
                                         mainwin.close();
                                     }
@@ -756,11 +760,18 @@
 							 errorMsg = "Payment Timeout.";
 							//  self.cancelElevateOrder(errorMsg);
 							 self.updatePaymentStatus(3);
-                        }, 600000);
+                            
+                            clearTimeout(timeoutObj);
+                            self.paymentTimeout = true;
+                            self.checkPaymentStatusCount = 0;
+                            toggleOverlay(false);
+                            self.toggleModalAlert('Error Payment', "You have exceeds the time for payment window. Please try again.");
+                        }, 360000);
 
                         mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
 
                         setTimeout(function() {
+                            self.paymentTimeout = false;
                             self.checkPaymentStatusCount = 0;
                             self.ajaxCheckOrderPaymentStatus(timeoutObject);
                         }, 10000);
