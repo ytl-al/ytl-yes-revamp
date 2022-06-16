@@ -96,6 +96,7 @@
             el: '#main-vue',
             data: {
                 ekyc_url: '<?php echo $apiSetting["ekyc_url"]?>',
+                ekyc_uid: '',
                 totalAttempt:0,
                 maxAttempts:60,
                 interval: null,
@@ -149,11 +150,10 @@
 
             created: function () {
                 var self = this;
+                self.ekyc_uid = self.generateUUID();
+
                 setTimeout(function () {
-                    /*self.qrcode = new QRCode(document.getElementById("qrcode"), {
-                        width: 100,
-                        height: 100
-                    });*/
+
                     self.pageInit();
 
                 }, 500);
@@ -184,12 +184,8 @@
                 },
                 eKYC_init: function () {
                     var self = this;
-                    var params = {
-                        uid: self.customer.id,
-                        mykad: self.eligibility.mykad,
-                        fname: self.eligibility.name
-                    };
-                    self.makeCode(self.customer.id);
+
+                    self.makeCode(self.ekyc_uid);
                     self.interval = setInterval(function (){
                         self.eKYC_check();
                     },5000);
@@ -212,7 +208,7 @@
                     self.totalAttempt++;
                     if( self.totalAttempt <= self.maxAttempts){
                         var params = {
-                            uid: self.customer.id,
+                            uid: self.ekyc_uid,
                             mykad: self.eligibility.mykad,
                             fname: self.eligibility.name
                         };
@@ -220,7 +216,7 @@
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
-                                    if(data.data.processStatus.toUpperCase() == "EKYC_DONE"){
+                                    if(data.data.processStatus && data.data.processStatus.toUpperCase() == "EKYC_DONE"){
                                         //success
                                         clearInterval(self.interval);
 										for(var i = 0; i < windows.length; i++){
@@ -228,9 +224,7 @@
 										}
                                         self.CAVerification(data.data);
 										//elevate.redirectToPage('personal');
-                                    }
-
-                                    if(data.data.processStatus.toUpperCase() == "EKYC_FAILED"){
+                                    }else{
                                         //failure
                                         clearInterval(self.interval);
 										for(var i = 0; i < windows.length; i++){
@@ -289,6 +283,22 @@
                     var self = this;
                     toggleOverlay();
                     ywos.buyPlan(self.selectedPlan);
+                },
+
+                generateUUID: function() {
+                    var d = new Date().getTime();//Timestamp
+                    var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now()*1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
+                    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                        var r = Math.random() * 16;
+                        if(d > 0){
+                            r = (d + r)%16 | 0;
+                            d = Math.floor(d/16);
+                        } else {
+                            r = (d2 + r)%16 | 0;
+                            d2 = Math.floor(d2/16);
+                        }
+                        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+                    });
                 },
 
                 makeCode: function (uid) {

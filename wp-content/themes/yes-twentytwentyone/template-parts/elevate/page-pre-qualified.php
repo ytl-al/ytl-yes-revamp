@@ -204,6 +204,7 @@
             el: '#main-vue',
             data: {
                 ekyc_url: '<?php echo $apiSetting["ekyc_url"]?>',
+                ekyc_uid: '',
                 ekycPassed:false,
                 totalAttempt:0,
                 maxAttempts:60,
@@ -357,6 +358,7 @@
 
             created: function () {
                 var self = this;
+				self.ekyc_uid = self.generateUUID();
                 setTimeout(function () {
                     self.pageInit();
 
@@ -375,11 +377,7 @@
                 },
                 eKYC_init: function () {
                     var self = this;
-                    var params = {
-                        uid: self.deliveryInfo.id,
-                        mykad: self.deliveryInfo.mykad,
-                        fname: self.deliveryInfo.name
-                    };
+                     
                     self.makeCode();
                     self.interval = setInterval(function (){
                         self.eKYC_check();
@@ -403,25 +401,24 @@
                     self.totalAttempt++;
                     if( self.totalAttempt <= self.maxAttempts){
                         var params = {
-                            uid: self.guid,
+                            uid: self.ekyc_uid,
                             mykad: self.deliveryInfo.mykad,
                             fname: self.deliveryInfo.name
                         };
                         axios.post(apiEndpointURL_elevate + '/ekyc-check', params)
                             .then((response) => {
                                 var data = response.data;
+								 
                                 if(data.status == 1){
-                                    if(data.data.processStatus.toUpperCase() == "EKYC_DONE"){
+									 
+                                    if(data.data.processStatus && data.data.processStatus.toUpperCase() == "EKYC_DONE"){
                                         //success
                                         clearInterval(self.interval);
 										for(var i = 0; i < windows.length; i++){
 											windows[i].close()
 										}
                                         self.CAVerification(data.data);
-										//elevate.redirectToPage('personal');
-                                    }
-
-                                    if(data.data.processStatus.toUpperCase() == "EKYC_FAILED"){
+                                    }else{
                                         //failure
                                         clearInterval(self.interval);
 										for(var i = 0; i < windows.length; i++){
@@ -433,7 +430,7 @@
                                 }
                             })
                             .catch((error) => {
-                                console.log(error, response);
+                                console.log(error);
                             });
 
                     }else{
@@ -451,7 +448,7 @@
 					elevate.lsData.deliveryInfo = self.deliveryInfo;
 					elevate.updateElevateLSData();
 					toggleOverlay();
-					elevate.redirectToPage('pre-plan');
+					elevate.redirectToPage('pre-qualified-plan');					
 				},
 
                 CAVerification: function (response) {
@@ -478,7 +475,7 @@
 								elevate.lsData.deliveryInfo = self.deliveryInfo;
 								elevate.updateElevateLSData();
 								toggleOverlay();
-                                elevate.redirectToPage('pre-plan');
+                                elevate.redirectToPage('pre-qualified-plan');
                             } else {
                                 toggleOverlay(false);
                                 toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful because your NRIC is not eligible.');
@@ -646,9 +643,25 @@
                     ywos.buyPlan(self.selectedPlan);
                 },
 
+				generateUUID: function() {  
+					var d = new Date().getTime();//Timestamp
+					var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now()*1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
+					return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+						var r = Math.random() * 16; 
+						if(d > 0){ 
+							r = (d + r)%16 | 0;
+							d = Math.floor(d/16);
+						} else { 
+							r = (d2 + r)%16 | 0;
+							d2 = Math.floor(d2/16);
+						}
+						return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+					});
+				},
+
                 makeCode: function () {
                     var self = this;
-                    var url_verification = self.ekyc_url + 'EKYC/?fullName=' + encodeURIComponent (self.deliveryInfo.name) + '&nric=' + self.deliveryInfo.mykad + '&guid=' + encodeURIComponent(self.guid);
+                    var url_verification = self.ekyc_url + 'EKYC/?fullName=' + encodeURIComponent (self.deliveryInfo.name) + '&nric=' + self.deliveryInfo.mykad + '&guid=' + encodeURIComponent(self.ekyc_uid);
                     $('#cmdVerify').data('url', url_verification);
 
 					const qrcode = new QRCode(document.getElementById('qrcode'), {
