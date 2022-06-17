@@ -91,7 +91,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group mb-4">
+                                <div class="form-group mb-4" id="field-email">
                                     <label class="form-label" for="input-email">* Email address</label>
                                     <div class="input-group align-items-center">
                                         <input type="email" class="form-control" id="input-email" name="email" v-model="deliveryInfo.email" @input="watchAllowNext" placeholder="" required />
@@ -100,7 +100,7 @@
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-email"></div>
                                 </div>
-                                <div class="form-group mb-4">
+                                <div class="form-group mb-4" id="field-emailConfirm">
                                     <label class="form-label" for="input-emailConfirm">* Confirm email address</label>
                                     <div class="input-group align-items-center">
                                         <input type="email" class="form-control" id="input-emailConfirm" name="emailConfirm" v-model="deliveryInfo.emailConfirm" @input="watchAllowNext" placeholder="" required />
@@ -663,6 +663,22 @@
                             toggleOverlay(false);
                         });
                 },
+                validateEmail: function() {
+                    var self = this;
+                    var email = self.deliveryInfo.email.toLowerCase();
+                    var regexp = /^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)+(com|asia|au|biz|cn|co|de|edu|giv|hk|id|in|jp|my|net|nz|org|sg|tw|uk)$/;
+                    if (!regexp.test(email)) {
+                        var inputEmail = self.input.email.field;
+                        var emEmail = self.input.email.errorMessage;
+                        $(emEmail).html('Please fill up valid email address').show();
+                        $(inputEmail).focus();
+                        $(inputEmail).on('keydown', function() {
+                            $(emEmail).hide().html('');
+                        });
+                        return false;
+                    }
+                    return true;
+                },
                 validateConfirmEmail: function() {
                     var self = this;
                     var email = self.deliveryInfo.email.toLowerCase();
@@ -846,7 +862,11 @@
                     var self = this;
                     var validSubmit = true;
 
-                    if (!self.validateConfirmEmail()) {
+                    if (!self.validateEmail()) {
+                        jumpToSection('field-email');
+                        validSubmit = false;
+                    } else if (!self.validateConfirmEmail()) {
+                        jumpToSection('field-emailConfirm');
                         validSubmit = false;
                     }
                     if (validSubmit) {
