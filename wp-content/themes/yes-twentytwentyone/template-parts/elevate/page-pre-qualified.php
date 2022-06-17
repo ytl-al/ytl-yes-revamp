@@ -411,7 +411,7 @@
 
                                 if(data.status == 1){
 
-                                    if(data.data.processStatus && data.data.processStatus.toUpperCase() == "EKYC_DONE"){
+                                    if(data.data.processStatus && data.data.processStatus && data.data.processStatus.toUpperCase() == "EKYC_DONE"){
                                         //success
                                         clearInterval(self.interval);
 										for(var i = 0; i < windows.length; i++){
@@ -419,7 +419,7 @@
 										}
                                         self.CAVerification(data.data);
                                     }
-                                    
+
                                     if(data.data.processStatus && data.data.processStatus.toUpperCase() == "EKYC_FAILED"){
                                         //failure
                                         clearInterval(self.interval);
