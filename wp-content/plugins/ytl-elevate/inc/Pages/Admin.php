@@ -48,15 +48,15 @@ class Admin extends BaseController
                 'menu_slug' => 'elevate-setting',
                 'callback' =>  array($this, 'elevate_setting'),
             )
-			/*,
+			,
             array(
                 'parent_slug' => 'elevate-setting',
-                'page_title' => __('Products Pull', 'elevate'),
-                'menu_title' => __('Products Pull', 'elevate'),
+                'page_title' => __('Api Logs', 'elevate'),
+                'menu_title' => __('Api Logs', 'elevate'),
                 'capability' => 'manage_options',
-                'menu_slug' =>  'elevate-pull',
-                'function' =>  array($this, 'elevate_pull')
-            )*/
+                'menu_slug' =>  'elevate-log',
+                'function' =>  array($this, 'elevate_logs')
+            )
         );
 		$this->settings->AddSubPage($this->subpages)->register();
 
@@ -77,6 +77,26 @@ class Admin extends BaseController
         }
 
         require_once WP_PLUGIN_DIR .'/ytl-elevate/templates/settings_pull.php';
+	}
+	
+	public function elevate_logs()
+	{
+		$act = strtolower($_GET['act']);
+		switch($act){
+			case 'detail':
+				$id = intval($_GET['id']);
+				$logItem = \Inc\Base\Model::gegtLogs($id); 
+				require_once WP_PLUGIN_DIR .'/ytl-elevate/templates/logs_detail.php';
+				break;
+			case 'clear':
+				\Inc\Base\Model::clearLogs(); 
+				wp_redirect('admin.php?page=elevate-log');
+				break;
+			default:
+				$api_logs = \Inc\Base\Model::gegtAPILogs(); 
+				$total_log = \Inc\Base\Model::getLogTotal(); 
+				require_once WP_PLUGIN_DIR .'/ytl-elevate/templates/logs.php';
+		}
 	}
 
 	public static function get_role()

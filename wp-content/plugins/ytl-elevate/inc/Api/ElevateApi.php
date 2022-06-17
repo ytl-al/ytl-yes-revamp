@@ -301,6 +301,8 @@ class ElevateApi
             $return = $data;
         }
 //        print_r($data);die();
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
         return $return;
     }
 
@@ -356,6 +358,8 @@ class ElevateApi
         }
 
 		//print_r($return);die($api_url);
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
@@ -426,6 +430,10 @@ class ElevateApi
             }
             $return['data'] = $data;
         }
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
@@ -476,6 +484,10 @@ class ElevateApi
             }
             $return['data'] = $data;
         }
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
@@ -522,6 +534,9 @@ class ElevateApi
             }
             $return['data'] = $data;
         }
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
@@ -561,6 +576,10 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		
         return $return;
     }
 
@@ -643,6 +662,9 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
@@ -724,6 +746,9 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
@@ -764,6 +789,9 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         return $return;
     }
@@ -832,6 +860,9 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
@@ -893,6 +924,9 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
@@ -936,6 +970,9 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
        return $return;
     }
@@ -992,6 +1029,9 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
@@ -1051,6 +1091,9 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
@@ -1101,6 +1144,9 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $request['body'];
         }
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
@@ -1139,6 +1185,10 @@ class ElevateApi
 			$return['status'] = 0;
 			$return['error'] = 'Invalid QRCode';
 		}
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		
 		$response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
@@ -1202,6 +1252,9 @@ class ElevateApi
 		}else{
 			$return = $order;
 		}
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
 		$response = new WP_REST_Response($return);
         $response->set_status(200);
@@ -1242,7 +1295,11 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
-
+		
+		if($request['response']['code'] != 204){
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		}
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
@@ -1279,6 +1336,10 @@ class ElevateApi
             $data = json_decode($request['body'], true);
             $return = $data;
         }
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		
 //        print_r($data);die();
         return $return;
     }
@@ -1315,6 +1376,10 @@ class ElevateApi
             $return = $data;
         }
         //print_r($data);die();
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		
         $response = new WP_REST_Response($return[0]);
         $response->set_status(200);
         return $response;
@@ -1478,6 +1543,9 @@ class ElevateApi
             }
 
         }
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
@@ -1595,6 +1663,9 @@ class ElevateApi
 			}
 
         }
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
@@ -1653,6 +1724,9 @@ class ElevateApi
 			}
 
         }
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
@@ -1706,7 +1780,10 @@ class ElevateApi
 					$return['status'] = 0;
 					$return['error'] = "Invalid request";
 				}
-
+				
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		
 		$response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
@@ -1901,6 +1978,9 @@ class ElevateApi
             $data = json_decode($request['body'], true);
             $return = $data;
         }
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		
         return $return;
     }
 
@@ -1958,6 +2038,9 @@ class ElevateApi
         $res_code   = $response['code'];
 
         $data 		= json_decode($request['body']);
+		
+		//Write api log
+		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         if ($res_code == 200) {
             $items      = $data->items;

@@ -23,7 +23,19 @@ class Model extends BaseController
      */
     public static function plugin_install()
     {
-
+		$table = self::$wpdb->prefix . "api_log";
+		$sql = 'CREATE TABLE `'.$table.'` (
+		  `id` int(11) NOT NULL AUTO_INCREMENT,
+		  `api` varchar(200) DEFAULT NULL,
+		  `payload` text,
+		  `body` text,
+		  `response` text,
+		  `status` int(11) DEFAULT NULL,
+		  `created` datetime DEFAULT NULL,
+		  PRIMARY KEY (`id`)
+		) ENGINE=MyISAM DEFAULT CHARSET=utf8;';
+		  ending all this to mysql queries
+		self::$wpdb->query($sql);
     }
 
     public function updateAPISettings($data)
@@ -347,6 +359,97 @@ class Model extends BaseController
         return strtolower($slug);
 
     }
+	
+	public static function apiLog($data)
+    {
+		$apiSetting = self::getAPISettings();
+		
+		
+		$type = $apiSetting['api_log'];
+		if(!$type){
+			return;
+		}else if($type == 'error' && intval($data['status']) == 200){
+			return;
+		}
+		 
+		
+        $table = self::$wpdb->prefix . "api_log";
+		
+		if(is_array( $data['response']) || is_object($data['response'])) 
+			{ $data['response'] = json_encode($data['response']); }
+		
+		if(is_array( $data['body']) || is_object($data['body'])) 
+			{ $data['body'] = json_encode($data['body']); }
+
+        $sql = "INSERT INTO `" . $table . "` 
+		(`api`,`payload`,`response`,`body`,`status`,`created`)
+		VALUES 
+		('" . $data['api'] . "','" . $data['payload'] . "','" . $data['response']. "','" . $data['body'] . "','" . $data['status'] . "','". date("Y-m-d H:i:s") . "')";
+
+        self::$wpdb->query($sql);
+
+    }
+	
+	public static function gegtAPILogs(){
+		$table = self::$wpdb->prefix . "api_log"; 
+        $sql = "SELECT * FROM `$table`";
+		$max = 50;
+		
+		$page = intval($_GET['pagenum']);
+		if(!$page) $page = 1;
+		
+		$where = [];
+		$keyword = trim($_GET['keyword']);
+		if($keyword){
+			$where[] = "(api LIKE '%$keyword%' OR payload LIKE '%$keyword%' OR body LIKE '%$keyword%')";
+		}
+		
+		$status = trim($_GET['status']);
+		if($status){
+			$where[] = "(status = '$status')";
+		}
+		
+		if(!empty($where)){
+			$sql.= " WHERE (". implode('and', $where).")";
+		}
+		$sql .= " ORDER BY created DESC";
+		$sql.= " LIMIT ".(($page-1) * $max).",".$max; 
+		 
+        $rows = self::$wpdb->get_results($sql);  
+		
+        return $rows;
+	}
+	
+	 public static function getLogTotal()
+    {
+        $table = self::$wpdb->prefix . "api_log"; 
+        $sql = "SELECT count(*) as total FROM `$table`";
+
+        $rows = self::$wpdb->get_results($sql);
+        $item = $rows[0]->total;
+        return $item;
+    }
+	
+	public static function gegtLogs($id)
+    {
+        $table = self::$wpdb->prefix . "api_log"; 
+        $sql = "SELECT * FROM `$table` WHERE id='$id'";
+
+        $rows = self::$wpdb->get_results($sql);
+        $item = $rows[0];
+        return $item;
+    }
+	
+	 public static function clearLogs()
+    {
+        $table = self::$wpdb->prefix . "api_log";
+
+        $sql = "TRUNCATE TABLE " . $table ;
+
+        self::$wpdb->query($sql);
+		
+    }
+
 
 
 }
