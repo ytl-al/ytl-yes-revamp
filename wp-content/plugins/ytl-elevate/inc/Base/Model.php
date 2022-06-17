@@ -34,7 +34,7 @@ class Model extends BaseController
 		  `created` datetime DEFAULT NULL,
 		  PRIMARY KEY (`id`)
 		) ENGINE=MyISAM DEFAULT CHARSET=utf8;';
-		  ending all this to mysql queries
+		  
 		self::$wpdb->query($sql);
     }
 
