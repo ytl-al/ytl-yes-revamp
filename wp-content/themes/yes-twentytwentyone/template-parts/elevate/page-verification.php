@@ -224,7 +224,9 @@
 										}
                                         self.CAVerification(data.data);
 										//elevate.redirectToPage('personal');
-                                    }else{
+                                    }
+
+                                    if(data.data.processStatus && data.data.processStatus.toUpperCase() == "EKYC_FAILED"){
                                         //failure
                                         clearInterval(self.interval);
 										for(var i = 0; i < windows.length; i++){
@@ -255,9 +257,6 @@
                         name:self.eligibility.name,
                         email:self.eligibility.email,
                         phone:self.eligibility.phone,
-                        //front_url:response.fronImageFilePath,
-                        //back_url:response.backImageFilePath,
-                        //selfievideo:response.videoFilePath,
                         PartneReferenceID:response.uid,
                         OCRConfidenceScore:response.sim,
                     };

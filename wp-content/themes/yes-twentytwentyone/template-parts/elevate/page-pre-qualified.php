@@ -377,7 +377,7 @@
                 },
                 eKYC_init: function () {
                     var self = this;
-                     
+
                     self.makeCode();
                     self.interval = setInterval(function (){
                         self.eKYC_check();
@@ -408,9 +408,9 @@
                         axios.post(apiEndpointURL_elevate + '/ekyc-check', params)
                             .then((response) => {
                                 var data = response.data;
-								 
+
                                 if(data.status == 1){
-									 
+
                                     if(data.data.processStatus && data.data.processStatus.toUpperCase() == "EKYC_DONE"){
                                         //success
                                         clearInterval(self.interval);
@@ -418,7 +418,9 @@
 											windows[i].close()
 										}
                                         self.CAVerification(data.data);
-                                    }else{
+                                    }
+                                    
+                                    if(data.data.processStatus && data.data.processStatus.toUpperCase() == "EKYC_FAILED"){
                                         //failure
                                         clearInterval(self.interval);
 										for(var i = 0; i < windows.length; i++){
@@ -448,7 +450,7 @@
 					elevate.lsData.deliveryInfo = self.deliveryInfo;
 					elevate.updateElevateLSData();
 					toggleOverlay();
-					elevate.redirectToPage('pre-qualified-plan');					
+					elevate.redirectToPage('pre-qualified-plan');
 				},
 
                 CAVerification: function (response) {
@@ -643,15 +645,15 @@
                     ywos.buyPlan(self.selectedPlan);
                 },
 
-				generateUUID: function() {  
+				generateUUID: function() {
 					var d = new Date().getTime();//Timestamp
 					var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now()*1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
 					return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-						var r = Math.random() * 16; 
-						if(d > 0){ 
+						var r = Math.random() * 16;
+						if(d > 0){
 							r = (d + r)%16 | 0;
 							d = Math.floor(d/16);
-						} else { 
+						} else {
 							r = (d2 + r)%16 | 0;
 							d2 = Math.floor(d2/16);
 						}
