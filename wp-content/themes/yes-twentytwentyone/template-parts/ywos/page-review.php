@@ -101,11 +101,11 @@
                                     </template>
                                 </div>
                                 <div class="row mb-3 mt-5">
-                                    <div class="col-10 pb-1 border-bottom">
+                                    <div class="col-6 pb-1 border-bottom">
                                         <p>Add-Ons</p>
                                         <p v-if="orderSummary.addOn != null">{{ orderSummary.addOn.displayAddonName }} <a href="javascript:void(0)" class="btn-sm pink-btn text-white mx-lg-3" v-on:click="removeAddOn()">Remove</a></p>
                                     </div>
-                                    <div class="col-2 pb-1 border-bottom text-end">
+                                    <div class="col-6 pb-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.addOns).toFixed(2) }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom">
