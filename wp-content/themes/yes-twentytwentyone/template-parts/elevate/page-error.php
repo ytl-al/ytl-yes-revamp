@@ -52,9 +52,7 @@
             <div class="verify-body p-lg-5">
                 <div class="mt-5 mb-5">
                     <h1 class="title mt-3 mb-3">Identity Not Eligible</h1>
-                    <p>Unfortunately you are currently not eligible for the Yes Infinite+ contract option</p>
-                    <p>however proceed with our Normal 24 months contract option.</p>
-                    <p>Would you like to proceed? </p>
+                    <p>Unfortunately you are currently not eligible for the Yes Infinite+ Programme, however you can still get the cheapest and fastest plan in Malaysia by clicking YES.</p>
                 </div>
                 <div class="mt-5 mb-5 text-center">
                     <a href="/5gplans" class="btn-primary w130 mr-2">Yes</a>
