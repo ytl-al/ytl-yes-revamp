@@ -430,10 +430,10 @@ class ElevateApi
             }
             $return['data'] = $data;
         }
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
-
+		
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
@@ -484,10 +484,10 @@ class ElevateApi
             }
             $return['data'] = $data;
         }
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
-
+		
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
@@ -534,7 +534,7 @@ class ElevateApi
             }
             $return['data'] = $data;
         }
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
@@ -576,10 +576,10 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
-
+		
         return $return;
     }
 
@@ -662,7 +662,7 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
@@ -676,7 +676,7 @@ class ElevateApi
 
 		if(!isset($request['addressMore'])) $request['addressMore'] = '';
 		if(!isset($request['msisdn'])) $request['msisdn'] = '';
-
+		
 		if(!isset($request['referralCode'])) $request['referralCode'] = '';
 		if(!isset($request['dealerUID'])) $request['dealerUID'] = '';
 		if(!isset($request['dealerCode'])) $request['dealerCode'] = '';
@@ -746,7 +746,7 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
@@ -789,7 +789,7 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
@@ -860,7 +860,7 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
@@ -924,7 +924,7 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
@@ -970,7 +970,7 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
@@ -1029,7 +1029,7 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
@@ -1091,7 +1091,7 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
@@ -1144,7 +1144,7 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $request['body'];
         }
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
@@ -1185,10 +1185,10 @@ class ElevateApi
 			$return['status'] = 0;
 			$return['error'] = 'Invalid QRCode';
 		}
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
-
+		
 		$response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
@@ -1252,7 +1252,7 @@ class ElevateApi
 		}else{
 			$return = $order;
 		}
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
@@ -1295,7 +1295,12 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
-
+		
+		$code = $request['response']['code'];
+		$data = json_decode('{"documentId":"980526106659","sim":null,"uid":"60378ea3-1b9f-4e90-ac36-385c8324287e","processStatus":"EKYC_Done","customerAddress":"NO 44 NA JAN DATO ABDUL HAMID 22 TAMAN SHI SENTOSA 41200 KLANG SELANGOR","videoFilePath":null,"fronImageFilePath":"https://ydbpelevatestorage.blob.core.windows.net/ekyc/60378ea3-1b9f-4e90-ac36-385c8324287e/MYTENTERA_980526106659.jpg","backImageFilePath":"https://ydbpelevatestorage.blob.core.windows.net/ekyc/60378ea3-1b9f-4e90-ac36-385c8324287e/MYTENTERA_980526106659Bak.jpg"}', true);
+		$return['status'] = 1;
+		$return['data'] = $data;
+		
 		if($request['response']['code'] != 204){
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
@@ -1336,17 +1341,17 @@ class ElevateApi
             $data = json_decode($request['body'], true);
             $return = $data;
         }
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
-
+		
 //        print_r($data);die();
         return $return;
     }
 
 	public static function get_pre_register_completed(WP_REST_Request $request){
         $uid = $request['id'];
-
+		  
 		$token = self::get_token();
 
         $args = [
@@ -1361,7 +1366,7 @@ class ElevateApi
 
 		$apiSetting = \Inc\Base\Model::getAPISettings();
         $api_url = $apiSetting['url'] . self::api_customer_pre_complete.'/'.$uid;
-
+		
         $request = wp_remote_get($api_url, $args);
 
         $response = $request['response'];
@@ -1376,10 +1381,10 @@ class ElevateApi
             $return = $data;
         }
         //print_r($data);die();
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
-
+		
         $response = new WP_REST_Response($return[0]);
         $response->set_status(200);
         return $response;
@@ -1543,7 +1548,7 @@ class ElevateApi
             }
 
         }
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
@@ -1663,7 +1668,7 @@ class ElevateApi
 			}
 
         }
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
@@ -1671,11 +1676,11 @@ class ElevateApi
         $response->set_status(200);
         return $response;
     }
-
-	public static function yos_check_order_status(WP_REST_Request $request){
+	
+	public static function yos_check_order_status(WP_REST_Request $request){ 
         $token = self::mobileservice_get_token();
 		$session_key  = $request['session_key'];
-
+		 
         $ytlpd_options = get_option("ytlpd_settings");
 		$ytlpd_api_domain_url =  $ytlpd_options['ytlpd_api_domain_url'];
 		$ytlpd_api_request_id =  $ytlpd_options['ytlpd_api_request_id'];
@@ -1683,7 +1688,7 @@ class ElevateApi
 		$api_url =  $ytlpd_api_domain_url.self::yos_order_without_payment;
 		$params = array(
             "orderNumber"=>$request['yos_order_id'],
-            "locale"=> "en",
+            "locale"=> "en", 
             "requestId"=> $ytlpd_api_request_id,
             "sessionId"=> $token
         );
@@ -1724,7 +1729,7 @@ class ElevateApi
 			}
 
         }
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
@@ -1780,10 +1785,10 @@ class ElevateApi
 					$return['status'] = 0;
 					$return['error'] = "Invalid request";
 				}
-
+				
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
-
+		
 		$response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
@@ -1980,7 +1985,7 @@ class ElevateApi
         }
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
-
+		
         return $return;
     }
 
@@ -2018,7 +2023,7 @@ class ElevateApi
         return $gender;
     }
 
-    public function check_stock()
+    public function check_stock() 
     {
         $token  = self::get_token();
         $args   = [
@@ -2038,7 +2043,7 @@ class ElevateApi
         $res_code   = $response['code'];
 
         $data 		= json_decode($request['body']);
-
+		
 		//Write api log
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 

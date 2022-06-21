@@ -212,11 +212,12 @@
                             mykad: self.eligibility.mykad,
                             fname: self.eligibility.name
                         };
-                        axios.post(apiEndpointURL_elevate + '/ekyc-check', params)
+						var d = new Date();
+                        axios.post(apiEndpointURL_elevate + '/ekyc-check?t='+d.getTime(), params)
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
-                                    if(data.data.processStatus && data.data.processStatus && data.data.processStatus.toUpperCase() == "EKYC_DONE"){
+                                    if(data.data.processStatus && data.data.processStatus.toUpperCase() == "EKYC_DONE"){
                                         //success
                                         clearInterval(self.interval);
 										for(var i = 0; i < windows.length; i++){
@@ -225,8 +226,8 @@
                                         self.CAVerification(data.data);
 										//elevate.redirectToPage('personal');
                                     }
-
-                                    if(data.data.processStatus && data.data.processStatus.toUpperCase() == "EKYC_FAILED"){
+									
+									if(data.data.processStatus && data.data.processStatus.toUpperCase() == "EKYC_FAILED"){
                                         //failure
                                         clearInterval(self.interval);
 										for(var i = 0; i < windows.length; i++){
@@ -256,8 +257,8 @@
                         mykad: self.eligibility.mykad,
                         name:self.eligibility.name,
                         email:self.eligibility.email,
-                        phone:self.eligibility.phone,
-                        PartneReferenceID:response.uid,
+                        phone:self.eligibility.phone, 
+                        PartneReferenceID:self.customer.id,
                         OCRConfidenceScore:response.sim,
                     };
                     toggleOverlay();
@@ -266,7 +267,7 @@
 
                             var data = response.data;
 
-                            if (data.status == 1) {
+                            if (parseInt(data.status) == 1) {
                                 elevate.redirectToPage('personal');
                             } else {
                                 toggleOverlay(false);

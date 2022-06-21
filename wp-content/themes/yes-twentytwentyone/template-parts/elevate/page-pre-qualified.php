@@ -412,7 +412,7 @@
                                 if(data.status == 1){
 
                                     if(data.data.processStatus && data.data.processStatus && data.data.processStatus.toUpperCase() == "EKYC_DONE"){
-                                        //success
+                                        //success 
                                         clearInterval(self.interval);
 										for(var i = 0; i < windows.length; i++){
 											windows[i].close()
@@ -443,13 +443,10 @@
                 },
 
 				doPass: function(){
-					var self = this;
-
-					elevate.lsData.ekycPassed = true;
-					elevate.lsData.meta.guid = self.guid;
-					elevate.lsData.deliveryInfo = self.deliveryInfo;
+					var self = this; 
+					elevate.lsData.ekycPassed = true; 
 					elevate.updateElevateLSData();
-					toggleOverlay();
+					 
 					elevate.redirectToPage('pre-qualified-plan');
 				},
 
@@ -464,7 +461,7 @@
                         PartneReferenceID:response.uid,
                         OCRConfidenceScore:response.sim,
                     };
-                    toggleOverlay();
+                    
                     axios.post(apiEndpointURL_elevate + '/ca-verification', params)
                         .then((response) => {
 
@@ -472,12 +469,7 @@
 
                             if (data.status == 1) {
 								//todo
-								elevate.lsData.ekycPassed = true;
-								elevate.lsData.meta.guid = self.guid;
-								elevate.lsData.deliveryInfo = self.deliveryInfo;
-								elevate.updateElevateLSData();
-								toggleOverlay();
-                                elevate.redirectToPage('pre-qualified-plan');
+								self.doPass();
                             } else {
                                 toggleOverlay(false);
                                 toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful because your NRIC is not eligible.');
@@ -485,7 +477,7 @@
                         })
                         .catch((error) => {
                             toggleOverlay(false);
-                            console.log(error);
+                            //alert(error.message);
                         });
                 },
 				productOffered: function(){
@@ -616,6 +608,11 @@
 									self.deliveryInfo.phone = self.getPhone(self.deliveryInfo.mobile);
 									self.productOffered();
 									self.updateCityCode();
+									
+									elevate.lsData.meta.guid = self.guid;
+									elevate.lsData.deliveryInfo = self.deliveryInfo;
+									elevate.updateElevateLSData();
+					 
 
 									self.eKYC_init();
 								}else{
