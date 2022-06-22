@@ -286,6 +286,9 @@
                             if (data.internetData == '∞') {
                                 data.internetData = 'Unlimited';
                             }
+                            
+                            var filteredBalance = data.images.filter((image) => { return data.colors[image.color][0].balance > 0; })
+                            data.images = filteredBalance;
 
                             self.orderSummary.product = data;
 
