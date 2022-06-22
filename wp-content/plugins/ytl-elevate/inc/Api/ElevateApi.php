@@ -1295,11 +1295,7 @@ class ElevateApi
             $return['status'] = 1;
             $return['data'] = $data;
         }
-		
-		$code = $request['response']['code'];
-		$data = json_decode('{"documentId":"980526106659","sim":null,"uid":"60378ea3-1b9f-4e90-ac36-385c8324287e","processStatus":"EKYC_Done","customerAddress":"NO 44 NA JAN DATO ABDUL HAMID 22 TAMAN SHI SENTOSA 41200 KLANG SELANGOR","videoFilePath":null,"fronImageFilePath":"https://ydbpelevatestorage.blob.core.windows.net/ekyc/60378ea3-1b9f-4e90-ac36-385c8324287e/MYTENTERA_980526106659.jpg","backImageFilePath":"https://ydbpelevatestorage.blob.core.windows.net/ekyc/60378ea3-1b9f-4e90-ac36-385c8324287e/MYTENTERA_980526106659Bak.jpg"}', true);
-		$return['status'] = 1;
-		$return['data'] = $data;
+		 
 		
 		if($request['response']['code'] != 204){
 		//Write api log
