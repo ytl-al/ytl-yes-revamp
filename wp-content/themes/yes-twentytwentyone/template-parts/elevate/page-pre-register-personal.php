@@ -741,7 +741,7 @@
                         toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, You cannot use the same number as alternate phone number.')
                     }
 
-                    var pattern =  /^[a-zA-Z,\,/@,\s]+$/;
+                    var pattern =  /^[a-zA-Z,\,\@,\.,\s]+$/;
                     if(self.deliveryInfo.alternative_name && !pattern.test(self.deliveryInfo.alternative_name)){
                         $('#alternative_name').addClass('input_error');
                         isFilled = false

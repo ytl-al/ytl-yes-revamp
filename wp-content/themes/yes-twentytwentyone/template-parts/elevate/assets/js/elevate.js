@@ -103,7 +103,7 @@ const elevate = {
 
         this.initLocalStorage(productId, dc, duid, rc);
         $.ajax({
-            url: apiEndpointURL_elevate + '/getProduct/?code=' + productId, 
+            url: apiEndpointURL_elevate + '/getProduct/?code=' + productId,
             method: 'GET',
             success: function(data) {
                 var pushData = [{
@@ -366,7 +366,7 @@ function checkInputFullName(event) {
     }
 
     var specialchar = false;
-    if (charCode == 47 || charCode == 64 || charCode == 32) {
+    if (charCode == 46 || charCode == 47 || charCode == 64 || charCode == 32) {
         specialchar = true;
     }
 

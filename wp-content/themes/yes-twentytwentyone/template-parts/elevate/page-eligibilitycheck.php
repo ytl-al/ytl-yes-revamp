@@ -613,7 +613,7 @@
                         isFilled = false
                     }
 
-                    var pattern =  /^[a-zA-Z,\,/@,\s]+$/;
+                    var pattern =  /^[a-zA-Z,\,\@,\.,\s]+$/;
                     if(self.eligibility.name && !pattern.test(self.eligibility.name)){
                         error.push('Invalid Full Name');
                         $('#full_name').addClass('input_error');
