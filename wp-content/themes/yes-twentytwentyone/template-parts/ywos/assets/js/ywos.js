@@ -34,6 +34,7 @@ const ywos = {
         var expiryLength = expiryYWOSCart * 60000;
         var ywosCartExpiry = Date.now() + expiryLength;
         var sessionKey = this.generateSessionKey();
+        var siteLang = document.getElementsByTagName('html')[0].getAttribute('lang');
         if (ywosLocalStorageData === null) {
             storageData = {
                 'expiry': ywosCartExpiry,
@@ -41,7 +42,8 @@ const ywos = {
                 'meta': {
                     'planID': planID,
                     'sessionId': ''
-                }
+                },
+                'siteLang': siteLang
             };
             ywosLocalStorageData = storageData;
         } else {
@@ -51,7 +53,8 @@ const ywos = {
                 'meta': {
                     'planID': planID,
                     'sessionId': ''
-                }
+                },
+                'siteLang': siteLang
             };
             ywosLocalStorageData = storageData;
         }
