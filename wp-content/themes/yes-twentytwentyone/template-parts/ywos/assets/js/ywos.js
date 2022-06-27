@@ -204,6 +204,15 @@ const ywos = {
             // }, 500);
             return true;
         }
+    },
+    renderText: function(strID, objText) {
+        var siteLang = this.lsData.siteLang;
+        if (siteLang && objText) {
+            if (objText[strID] && objText[strID][siteLang]) {
+                return objText[strID][siteLang];
+            } 
+        }
+        return;
     }
 };
 
