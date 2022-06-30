@@ -203,69 +203,69 @@
 
 <!--Countries Section Start-->
 <section id="countries-section">
-    <h1><span>RM38/day</span>, up to <span>500MB</span> at these <span>24 countries</span>.</h1>
+    <h1><span>RM38/day</span>, up to <span>500MB</span> at these <span>22 countries</span>.</h1>
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="carousel-roaming">
                     <div>
                         <div class="row gy-5 row-roaming-country">
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/australia.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/australia.png">
                                 <h2>Australia</h2>
                                 <p>Telstra</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src=https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/austria.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/austria.png">
                                 <h2>Austria</h2>
                                 <p>Hutchison - 3 (Drei)</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/bangladesh.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/bangladesh.png">
                                 <h2>Bangladesh</h2>
                                 <p>GrameenPhone</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/brunei.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/brunei.png">
                                 <h2>Brunei Darussalam</h2>
                                 <p>DSTCom</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/cambodia.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/cambodia.png">
                                 <h2>Cambodia</h2>
                                 <p>Viettel - Metfone</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/canada.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/canada.png">
                                 <h2>Canada</h2>
                                 <p>Rogers Communications</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/china.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/china.png">
                                 <h2>China</h2>
                                 <p>China Mobile</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/denmark.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/denmark.png">
                                 <h2>Denmark</h2>
-                                <p>H3G (3)</p>
+                                <p>TDC</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/hong-kong.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/hong-kong.png">
                                 <h2>Hong Kong</h2>
-                                <p>Hutchison (3)</p>
+                                <p>China Mobile HK</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/india.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/india.png">
                                 <h2>India</h2>
                                 <p>Vodafone</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/indonesia.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/indonesia.png">
                                 <h2>Indonesia</h2>
                                 <p>PT Indosat Tbk</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/south-korea.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/south-korea.png">
                                 <h2>Republic of Korea</h2>
                                 <p>SK Telecom (SKT)</p>
                             </div>
@@ -273,62 +273,52 @@
                     </div>
                     <div>
                         <div class="row gy-5 row-roaming-country">
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/macau.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/macau.png">
                                 <h2>Macau</h2>
                                 <p>Hutchison (3)</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/maynmar.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/maynmar.png">
                                 <h2>Myanmar</h2>
                                 <p>Telenor</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/philippines.png">
-                                <h2>Philippines</h2>
-                                <p>Smart</p>
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/qatar.png">
-                                <h2>Qatar</h2>
-                                <p>Ooredoo / Qtel</p>
-                            </div>
-
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/saudi.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/saudi.png">
                                 <h2>Saudi Arabia</h2>
                                 <p>Zain SA</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/singapore.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/singapore.png">
                                 <h2>Singapore</h2>
                                 <p>StarHub</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/sweden.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/sweden.png">
                                 <h2>Sweden</h2>
                                 <p>H3G Access AB (3)</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/taiwan.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/taiwan.png">
                                 <h2>Taiwan</h2>
                                 <p>APTG</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/thailand.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/thailand.png">
                                 <h2>Thailand</h2>
                                 <p>True Move</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/uk.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/uk.png">
                                 <h2>United Kingdom</h2>
                                 <p>Hutchison (3)</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/us.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/us.png">
                                 <h2>United States</h2>
                                 <p>T-Mobile</p>
                             </div>
 
-                            <div class="col-6 col-md-4 col-lg-2"><img alt="" data-entity-type="" data-entity-uuid="" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/country/vietnam.png">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/vietnam.png">
                                 <h2>Vietnam</h2>
                                 <p>Vietnamobile</p>
                             </div>
