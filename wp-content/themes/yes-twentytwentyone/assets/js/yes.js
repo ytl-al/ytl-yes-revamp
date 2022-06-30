@@ -361,8 +361,8 @@ function fbPixelPush(eventType = '', data = {}) {
                 var objItems = [];
                 var total = 0;
                 data.map(function(item) {
-                    objItems.push(item);
-                    total = total + item.price;
+                    var objItem = { 'id': item.id, 'quantity': 1 };
+                    objItems.push(objItem);
                 });
                 var objTrack = {
                     'content_type': 'product', 
