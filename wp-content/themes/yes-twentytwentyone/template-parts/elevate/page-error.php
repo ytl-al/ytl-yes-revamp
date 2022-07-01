@@ -51,8 +51,8 @@
 
             <div class="verify-body p-lg-5">
                 <div class="mt-5 mb-5">
-                    <h1 class="title mt-3 mb-3">Identity Not Eligible</h1>
-                    <p>Unfortunately you are currently not eligible for the Yes Infinite+ Programme, however you can still get the cheapest and fastest plan in Malaysia by clicking YES.</p>
+                    <h1 class="title mt-3 mb-3">Eligibility check unsuccessful</h1>
+                    <p>Unfortunately, your eligibility check is unsuccessful at the moment. However, if you still wish to connect to Yes 5G, you may visit our <a href="https://www.yes.my/support/store-locator/">Yes Stores</a> for assistance or you can sign up online for just the Yes Infinite postpaid plan by itself.</p>
                 </div>
                 <div class="mt-5 mb-5 text-center">
                     <a href="/5gplans" class="btn-primary w130 mr-2">Yes</a>
