@@ -38,6 +38,7 @@ class ElevateApi
     const  api_contract_get_by_nric = 'api/Elevate/contract/customerNRIC';
 
     const  api_product = 'api/Elevate/product';
+    const  api_product_all = 'api/Elevate/product/GetAllProducts';
     const  api_product_get_by_id = 'api/Elevate/product/Id';
     const  api_product_get_by_nric = 'api/Elevate/product/productId';
     const  api_product_bundle = 'api/Elevate/product/GetProductsByProductBundleId';
@@ -2032,7 +2033,7 @@ class ElevateApi
             'method'    => 'GET'
         ];
         $apiSetting = \Inc\Base\Model::getAPISettings();
-        $api_url    = $apiSetting['url'] . self::api_product . '?MaxResultCount=100';
+        $api_url    = $apiSetting['url'] . self::api_product_all . '?MaxResultCount=100';
 
         $request    = wp_remote_get($api_url, $args);
         $response   = $request['response'];
@@ -2044,13 +2045,12 @@ class ElevateApi
 		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         if ($res_code == 200) {
-            $items      = $data->items;
             $arr_return = [];
-            foreach ($items as $item) {
-                $existing_balance   = (isset($arr_return[$item->productBundleId]['balance'])) ? $arr_return[$item->productBundleId]['balance'] : 0;
-                $arr_return[$item->productBundleId] = [
-                    'productBundleId'   => $item->productBundleId,
-                    'balance'           => $item->balance + $existing_balance
+            foreach ($data as $item) {
+                $existing_balance   = (isset($arr_return[$item->product->productBundleId]['balance'])) ? $arr_return[$item->product->productBundleId]['balance'] : 0;
+                $arr_return[$item->product->productBundleId] = [
+                    'productBundleId'   => $item->product->productBundleId,
+                    'balance'           => $item->device->balance + $existing_balance
                 ];
             }
             $response 	= new WP_REST_Response($arr_return);

@@ -1,7 +1,7 @@
 /*
     JavaScript Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : June      10, 2022, 03:52:31 PM
+    Last edited on  : June      30, 2022, 03:52:31 PM
     Author          : [YTL Digital Design] - AL
 */
 const yesLocalStorageName = 'yesSession';
@@ -318,8 +318,8 @@ function fbPixelPush(eventType = '', data = {}) {
             case 'impressions': 
                 var objItems = [];
                 data.map(function(item) {
-                    item.quantity = 1;
-                    objItems.push(item);
+                    var objItem = { 'id': item.id, 'quantity': 1 };
+                    objItems.push(objItem);
                 });
                 var objTrack = {
                     'content_type': 'product', 
@@ -331,7 +331,8 @@ function fbPixelPush(eventType = '', data = {}) {
                 var objItems = [];
                 var total = 0;
                 data.map(function(item) {
-                    objItems.push(item);
+                    var objItem = { 'id': item.id, 'quantity': 1 };
+                    objItems.push(objItem);
                     total = parseFloat(total) + parseFloat(item.price);
                 });
                 var objTrack = {
@@ -346,7 +347,8 @@ function fbPixelPush(eventType = '', data = {}) {
                 var objItems = [];
                 var total = 0;
                 data.map(function(item) {
-                    objItems.push(item);
+                    var objItem = { 'id': item.id, 'quantity': 1 };
+                    objItems.push(objItem);
                     total = parseFloat(total) + parseFloat(item.price);
                 });
                 var objTrack = {
@@ -359,10 +361,10 @@ function fbPixelPush(eventType = '', data = {}) {
                 break;
             case 'purchase':
                 var objItems = [];
-                var total = 0;
-                data.map(function(item) {
-                    objItems.push(item);
-                    total = total + item.price;
+                var items = data.items;
+                items.map(function(item) {
+                    var objItem = { 'id': item.id, 'quantity': 1 };
+                    objItems.push(objItem);
                 });
                 var objTrack = {
                     'content_type': 'product', 
