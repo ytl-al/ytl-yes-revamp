@@ -52,7 +52,7 @@
             <div class="verify-body p-lg-5">
                 <div class="mt-5 mb-5">
                     <h1 class="title mt-3 mb-3">Eligibility check unsuccessful</h1>
-                    <p>Unfortunately, we could not confirm your eligibility for the infinite + plan online. <br>Please proceed to our  <a target="_blank" href="https://www.yes.my/support/store-locator/">Yes Stores</a> for further assistance or continue browsing our <a target="_blank" href="https://www.yes.my/yes-postpaid-plans/">other Yes Infinite+ plan</a>.</p>
+                    <p>Unfortunately, we could not confirm your eligibility for the YES Infinite+ plan online. <br>Please proceed to our  <a target="_blank" href="https://www.yes.my/support/store-locator/">Yes Stores</a> for further assistance or continue browsing our <a target="_blank" href="https://www.yes.my/yes-postpaid-plans/">other plan</a>.</p>
                 </div>
                 <div class="mt-5 mb-5 text-center">
                     <a href="/elevate/eligibilitycheck" class="btn-black w130">Retry</a>
