@@ -52,7 +52,7 @@
             <div class="verify-body p-lg-5">
                 <div class="mt-5 mb-5">
                     <h1 class="title mt-3 mb-3">Eligibility check unsuccessful</h1>
-                    <p>Unfortunately, your eligibility check is unsuccessful at the moment. However, if you still wish to connect to Yes 5G, you may visit our <a href="https://www.yes.my/support/store-locator/">Yes Stores</a> for assistance or you can sign up online for just the Yes Infinite postpaid plan by itself.</p>
+                    <p>Unfortunately, we could not confirm your eligibility for the infinite + plan online. Please proceed to our  <a target="_blank" href="https://www.yes.my/support/store-locator/">Yes Stores</a> for further assistance or continue browsing our <a target="_blank" href="https://www.yes.my/yes-postpaid-plans/">other plans</a>.</p>
                 </div>
                 <div class="mt-5 mb-5 text-center">
                     <a href="/5gplans" class="btn-primary w130 mr-2">Yes</a>
