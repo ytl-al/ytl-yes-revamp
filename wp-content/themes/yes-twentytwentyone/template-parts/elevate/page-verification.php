@@ -226,14 +226,14 @@
                                         self.CAVerification(data.data);
 										//elevate.redirectToPage('personal');
                                     }
-									
+
 									if(data.data.processStatus && data.data.processStatus.toUpperCase() == "EKYC_FAILED"){
                                         //failure
                                         clearInterval(self.interval);
 										for(var i = 0; i < windows.length; i++){
 											windows[i].close()
 										}
-                                        toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, Your verification was rejected by eKYC system.',"elevate.redirectToPage('/error')")
+                                        toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, Your verification was rejected by eKYC system.',"elevate.redirectToPage('/error?ca=failure')")
                                         //elevate.redirectToPage('/error/');
 
                                     }
@@ -257,7 +257,7 @@
                         mykad: self.eligibility.mykad,
                         name:self.eligibility.name,
                         email:self.eligibility.email,
-                        phone:self.eligibility.phone, 
+                        phone:self.eligibility.phone,
                         PartneReferenceID:self.customer.id,
                         OCRConfidenceScore:response.sim,
                     };

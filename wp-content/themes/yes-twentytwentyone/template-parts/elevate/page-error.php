@@ -52,10 +52,15 @@
             <div class="verify-body p-lg-5">
                 <div class="mt-5 mb-5">
                     <h1 class="title mt-3 mb-3">Eligibility check unsuccessful</h1>
-                    <p>Unfortunately, we could not confirm your eligibility for the YES Infinite+ plan online. <br>Please proceed to our  <a target="_blank" href="https://www.yes.my/support/store-locator/">Yes Stores</a> for further assistance or continue browsing our <a target="_blank" href="https://www.yes.my/yes-postpaid-plans/">other plan</a>.</p>
+                    <?php if($_GET['ca']=='failure'):?>
+                        <p>Unfortunately, we could not confirm your eligibility for the Yes Infinite+ plan online. Please either retry in an hour or proceed to our <a target="_blank" href="https://www.yes.my/support/store-locator/">Yes Stores</a> for further assistance.</p>
+                    <?php else:?>
+                        <p>Unfortunately, we could not verify your identity online.<br> Please either retry and ensure that you are following the ekyc steps or proceed to our <a target="_blank" href="https://www.yes.my/support/store-locator/">Yes Stores</a> for further assistance.</p>
+                    <?php endif;?>
                 </div>
                 <div class="mt-5 mb-5 text-center">
-                    <a href="/elevate/eligibilitycheck" class="btn-black w130">Retry</a>
+                    <a href="/elevate/eligibilitycheck" class="btn-black w130" style="margin-right:10px;">Retry</a>
+                    <a href="https://www.yes.my/support/store-locator/" target="_blank" class="btn-black w180">Yes Store Locations</a>
                 </div>
             </div>
 
