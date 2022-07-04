@@ -206,6 +206,17 @@ const ywos = {
         }
     },
     renderText: function(strID, objText) {
+        // if (objText) {
+        //     var siteLang = this.lsData.siteLang;
+        //     if (siteLang) {
+        //         if (objText[strID] && objText[strID][siteLang]) {
+        //             return objText[strID][siteLang];
+        //         } 
+        //     } else if (strID) {
+        //         return objText[strID]['en-US'];
+        //     }
+        // }
+
         var siteLang = this.lsData.siteLang;
         if (siteLang && objText) {
             if (objText[strID] && objText[strID][siteLang]) {
