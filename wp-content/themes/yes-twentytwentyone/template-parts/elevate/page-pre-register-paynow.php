@@ -1119,7 +1119,7 @@
                                 self.paymentInfo.nameOnCard.trim() == '' ||
                                 self.paymentInfo.cardNumber.trim() == '' ||
                                 self.paymentInfo.cardExpiryMonth.trim() == '' ||
-                                self.paymentInfo.cardExpiryYear.trim() == '' ||
+                                self.paymentInfo.cardExpiryYear.trim().length < 4 ||
                                 self.paymentInfo.cardCVV.trim() == ''
                             ) {
                                 isFilled = false;
