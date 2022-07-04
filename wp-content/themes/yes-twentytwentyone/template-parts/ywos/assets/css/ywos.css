@@ -737,6 +737,7 @@ ul.wizard li.completed::after {
 }
 
 .footer.footer-noMenu .copyright {
+    background: #F7F8FA;
     margin-top: 0px;
     padding: 20px 0px;
 }
@@ -752,7 +753,7 @@ ul.wizard li.completed::after {
     text-decoration: underline;
 }
 
-.footer.footer-noMenu .copyright p, .footer.footer-noMenu .copyright p a { color: #FFF; }
+.footer.footer-noMenu .copyright p, .footer.footer-noMenu .copyright p a { font-size: 16px; font-weight: 600; }
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
     ul.wizard span {

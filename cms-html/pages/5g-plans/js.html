@@ -1,3 +1,5 @@
+<script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/js/ywos.js "></script>
+<script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/js/elevate.js "></script>
 <script type="text/javascript">
     $(document).ready(function () {
         var url_string  = window.location.href;
@@ -5,7 +7,7 @@
         var paramDC     = url.searchParams.get('dc');
         var paramDUID   = url.searchParams.get('duid');
         if (paramDC !== null && paramDUID !== null) {
-            $('.btn-ypa').each(function() {
+            $('.sim-box .btn.pink-btn').each(function() {
                 var href    = $(this).attr('href');
                 var newHREF = href + '&dc=' + paramDC + '&duid=' + paramDUID;
                 $(this).attr('href', newHREF);
@@ -13,11 +15,54 @@
         }
         var paramRC     = url.searchParams.get('rc');
         if (paramRC !== null) {
-            $('.btn-ypa').each(function() {
+            $('.sim-box .btn.pink-btn').each(function() {
                 var href    = $(this).attr('href');
-                var newHREF = href + '&rc=' + paramRC;
+                var newHREF = (href.indexOf('&') > -1) ? href + '&rc=' + paramRC : href + '/?rc=' + paramRC;
                 $(this).attr('href', newHREF);
             });
         }
     });
 </script>
+
+<script type="text/javascript">
+        $(document).ready(function() {
+            initPhoneModelsHeight();
+            $(window).on('resize', function() {
+                initPhoneModelsHeight();
+            });
+            $('.item-phoneColor').on('click', function() {
+                updatePhoneColorSelection(this);
+            });
+
+            $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function(event) {
+                setTimeout(function() {
+                    initPhoneModelsHeight();
+                }, 1000);
+            });
+        });
+
+        function initPhoneModelsHeight() {
+            $('.layer-phoneModels').css('min-height', '');
+            setTimeout(function() {
+                $('.layer-phoneModels').each(function() {
+                    $(this).css('min-height', $(this).height());
+                });
+            }, 100);
+        }
+
+        function updatePhoneColorSelection(el) {
+            var itemPhoneColor = $('.item-phoneColor');
+            var itemID = $(el).attr('data-target');
+
+            if ($('#' + itemID).length) {
+                var parentLayer = $(el).closest('.layer-phoneModels');
+                var activeModel = $('.layer-phoneModel.active', parentLayer);
+                $(activeModel).fadeOut(100, function() {
+                    $(activeModel).removeClass('active');
+                    setTimeout(function() {
+                        $('#' + itemID).fadeIn().addClass('active');
+                    }, 100);
+                });
+            }
+        }
+    </script>

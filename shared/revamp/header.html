@@ -1,0 +1,497 @@
+<script type="text/javascript">
+    var ajax = new XMLHttpRequest();
+    ajax.open("GET", "https://site.yes.my/ia-defs.svg", true);
+    ajax.send();
+    ajax.onload = function(e) {
+        var div = document.createElement("div");
+        div.innerHTML = ajax.responseText;
+        document.body.insertBefore(div, document.body.childNodes[0]);
+    };
+
+    var $overlay;
+
+    $(document).ready(function() {
+        JUI.select("nav span.select", null);
+        JUI.dropmenu("nav .dropmenu");
+
+        $("nav .dropdown-item").click(function() {
+            var $parent = $(this).parents(".dropdown");
+            var $input = $("input[type=hidden]", $parent);
+            var $toggle = $(".dropdown-toggle", $parent);
+
+            if ($input.length) {
+                $input.val($(this).attr("data-value"));
+                $toggle.html($(this).html());
+            }
+
+            $parent.trigger("OnChanged");
+        });
+
+        $("#toggleSearch").off("click");
+        $("#toggleSearch").click(function() {
+            $("body").toggleClass("searching");
+        });
+
+        $(".btn-scroll-top").prop("href", "#main-body");
+    });
+</script>
+
+<link href="https://site.yes.my/wp-content/themes/yes.my/css/remote.css" rel="stylesheet" type="text/css" />
+<link href="https://site.yes.my/wp-content/themes/yes.my/css/std.css" rel="stylesheet" type="text/css" />
+<link href="https://site.yes.my/wp-content/themes/yes.my/css/yes.css" rel="stylesheet" type="text/css" />
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel='stylesheet' id='bootstrap-css' href='https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/assets/css/bootstrap.min.css' type='text/css' media='all' />
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("body").prepend(
+            "<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':\r\nnew Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],\r\nj=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=\r\n'https:\/\/www.googletagmanager.com\/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);\r\n})(window,document,'script','dataLayer','GTM-T8K5HSR');<\/script>\r\n<noscript><iframe src=\"https:\/\/www.googletagmanager.com\/ns.html?id=GTM-T8K5HSR\"\r\nheight=\"0\" width=\"0\" style=\"display:none;visibility:hidden\"><\/iframe><\/noscript>"
+        );
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $(".plans_content").hide();
+        $(".plans_").click(function() {
+            $(".plans_content").toggle();
+        });
+    });
+</script>
+
+<style type="text/css">
+    .dropdown1 { position: relative; display: inline-block; font-weight: 900; color: white; }
+    .dropdown-content { position: absolute; background-color: #fff; min-width: 240px; border-radius: 20px; padding: 16px 16px; z-index: 1; color: 000; text-align: left; flex-direction: column; align-items: flex-start; visibility: hidden; opacity: 0; transition: visibility 0s, opacity 0.6s linear; top: 22px; color: #000; }
+    .dropdown-content .linkt,
+    .dropdown-content .linkt:hover { color: #000 !important; }
+    .dropdown1>.menus.menu-site { color: white; font-weight: 600; padding: 0; margin: 0 !important; }
+    .dropdown1>.dropdown-content>.menus.menu-site>a { color: #000 !important; padding: 0; margin: 0 !important; }
+    .kasicolor { color: #00a4e3 !important; }
+    .dropdown1:hover .dropdown-content { display: flex; visibility: visible; opacity: 1; }
+</style>
+<style type="text/css">
+   @media (min-width: 1025px) { 
+        /* .nav-site .menus { padding: 0 10px !important; } */
+        .menus>span:not(:first-child),
+        .menus>a:not(:first-child) { margin-left: 0.5em !important; }
+        .menus>span:not(:last-child),
+        .menus>a:not(:last-child) { margin-right: 0.5em !important; }
+    }
+    @media (min-width: 1440px) { 
+        .menus>span:not(:first-child),
+        .menus>a:not(:first-child) { margin-left: 0.5em !important; }
+        .menus>span:not(:last-child),
+        .menus>a:not(:last-child) { margin-right: 0.5em !important; }
+    }
+
+    .i-cart { display: none; }
+    body .nav-corporate .menus>span,
+    body .nav-corporate .menus>a,
+    body.transparent-nav.scrolling .nav-corporate .menus>span,
+    body.transparent-nav.scrolling .nav-corporate .menus>a,
+    body.transparent-nav.searching .nav-corporate .menus>span,
+    body.transparent-nav.searching .nav-corporate .menus>a { font-size: 16px !important; font-weight: bold !important; }
+    .nav-mobile .links a:hover { color: #333 !important; }
+    .mobile-menu-pills .nav-pills .nav-link.active { color: #00a4e3 !important; font-weight: bold; }
+</style>
+<style>
+    /* Top Secondary Bar styling */
+    body { padding-top: 0px; }* { font-family: 'Open Sans', sans-serif !important; letter-spacing: 0px; ; }
+    .revamp-header .top-tabs-container .language-drop .btn { line-height: 1.5; width: auto; padding: 0.25rem 0.5rem; height: auto; }
+    .revamp-header .top-tabs-container .language-drop { margin-top: 13px; width: auto; }
+    a:focus:after { position: static !important; box-shadow: none; width: auto; height: auto; }
+    .revamp-header .top-tabs-container .language-drop .btn:after { position: static; }
+    .revamp-header,
+    .revamp-footer { font-family: 'Open Sans', sans-serif !important; font-weight: 400 !important; }
+    .revamp-header a:focus,
+    .revamp-footer a:focus { outline: none; box-shadow: none; }
+    .revamp-header .top-tabs-container { width: 100%; display: block; background-color: #F9F7F4; }
+    .revamp-header .top-tabs-container .tabnav { margin: 0; padding: 0; }
+    .revamp-header .top-tabs-container .tabnav li { list-style: none; float: left; font-size: 16px; font-weight: 600; }
+    .revamp-header .top-tabs-container .tabnav li a { padding: 17px 22px; display: inline-block; text-align: center; background-color: #F9F7F4; color: #00B4F0; text-decoration: none; }
+    .revamp-header .top-tabs-container .tabnav li a.active { background-color: #00B4F0; color: #FFF; font-weight: 800; }
+    .revamp-header .top-tabs-container .language-drop svg { font-size: 15px; }
+    .revamp-header .top-tabs-container .language-drop .dropdown-toggle { background-color: #F9F7F4; border: none; font-size: 14px; font-weight: 600; color: #00B4F0; }
+    .revamp-header .top-tabs-container .language-drop .dropdown-toggle::after { vertical-align: 0.1em; }
+    .revamp-header .top-tabs-container .language-drop .dropdown-toggle:active,
+    .revamp-header .top-tabs-container .language-drop .dropdown-toggle:focus { border: none; outline: none; box-shadow: none; }
+    .revamp-header .top-tabs-container .language-drop .dropdown-item { font-size: 14px; }
+    .revamp-header .top-tabs-container .language-drop .dropdown-item:active { background-color: #00B4F0; }
+    @media (max-width: 768px) { 
+        .revamp-header .top-tabs-container .tabnav li a { font-size: 90%; padding-left: 15px; padding-right: 15px; }
+    }
+
+    /* Nav Bar styling */
+    .revamp-header .logo-top { width: 48px; }
+    .revamp-header .nav-container { width: 100%; display: block; background-color: #00B4F0; }
+    .revamp-header .nav-container .navbar { padding-top: .7rem; padding-bottom: .7rem; }
+    .revamp-header .nav-container .navbar-brand { margin-right: 2.8rem; margin-left: 8px; }
+    .revamp-header .nav-container .nav-link { color: #FFF; font-size: 16px; font-weight: 700; padding-right: 1rem !important; padding-left: 1rem !important; }
+    .revamp-header .nav-container .nav-link::after { vertical-align: 2px !important; }
+    .revamp-header .navbar-toggler-icon { background-image: url(../images/menu-line.svg); }
+    .revamp-header .navbar-toggler:active,
+    .revamp-header .navbar-toggler:focus { box-shadow: none; border: none; }
+    .revamp-header .nav-container .pink-btn { display: inline-block; background-color: #ED028C; text-decoration: none; border-radius: 90px; font-size: 14px; color: #FFF; font-weight: 700; text-transform: uppercase; padding: 6px 38px; text-align: center; }
+    .revamp-header .nav-container .pink-btn:hover { /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */  background-color: #D00072; }
+    .revamp-header .nav-container .login-btn { font-size: 16px; color: #FFF; font-weight: 700; display: inline-block; }
+    .revamp-header .nav-container .login-btn svg { font-size: 19px; }
+    .revamp-header .mega-dropdown { position: static !important; width: auto; }
+    .revamp-header .mega-dropdown-menu { padding: 20px 14px; width: 100%; box-shadow: none; -webkit-box-shadow: none; border: none; border-radius: 0px 0px 9px 9px; box-shadow: 0px 1px 4px rgb(0 0 0 / 25%); margin-top: 0px !important; }
+    .revamp-header .mega-dropdown-menu>li { float: left; }
+    .revamp-header .mega-dropdown-menu>li>ul { padding: 0; margin: 0; }
+    .revamp-header .mega-dropdown-menu>li>ul>li { list-style: none; margin-right: 30px; }
+    .revamp-header .mega-dropdown-menu>li>ul>li.dropdown-header { font-size: 16px; font-weight: 700; color: #00B4F0; padding: 0px; padding-bottom: 10px; }
+    .revamp-header .mega-dropdown-menu>li>ul>li>a { display: block; clear: both; font-weight: normal; line-height: 35px; color: #00B4F0; font-size: 16px; white-space: normal; }
+    .revamp-header .mega-dropdown-menu>li>ul>li>a:hover { text-decoration: underline; }
+
+    /* Footer styling */
+    .revamp-footer .footer { width: 100%; display: block; background-color: #1A1E47; padding-top: 30px; }
+    .revamp-footer .footer .footer-logo { width: 65px; }
+    .revamp-footer .footer .icon-list { width: 100%; display: block; }
+    .revamp-footer .footer .icon-list .store-icon { width: 75px; height: 31px; }
+    .revamp-footer .footer .icon-list li { list-style: none; float: left; margin-right: 10px; }
+    .revamp-footer .footer .icon-list li a svg { width: 20px; }
+    .revamp-footer .footer .icon-list.icon-appdownload { max-width: 130px; }
+    .revamp-footer .footer .icon-list.icon-appdownload li { margin: 0; }
+    .revamp-footer .footer .menulist { width: 100%; margin: 0; padding: 0; }
+    .revamp-footer .footer .menulist li { list-style: none; float: none; font-size: 12px; color: #FFF; }
+    .revamp-footer .footer .menulist li a { color: #FFF; line-height: 20px; text-decoration: none; }
+    .revamp-footer .footer .menulist li a:hover { text-decoration: none; }
+    .revamp-footer .footer .menulist li.heading { font-weight: 700; font-family: 'Montserrat', sans-serif; font-size: 14px; margin-bottom: 10px; }
+    .revamp-footer .footer p { font-size: 12px; font-weight: 700; color: #FFF; }
+    .revamp-footer .footer .copyright { width: 100%; display: block; margin-top: 30px; padding-top: 10px; padding-bottom: 10px; background: linear-gradient(80.9deg, #FF0084 16.48%, #6F29D2 85.6%, #2F3BF5 96.9%); }
+    .revamp-footer .footer .copyright p { font-size: 12px; color: #FFF; }
+    .revamp-footer .footer .ctm-logo { position: absolute; right: 10px; bottom: 0; }
+    .revamp-header .navbar-brand { display: inline-block; padding-top: 10px; margin: 0; }
+    .revamp-header .logo-top { width: 35px; }
+    .revamp-header .top-tabs-container { background-color: #1A1E47; }
+    .revamp-header .top-tabs-container .tabnav li { font-size: 12px; font-weight: 400; }
+    .revamp-header .top-tabs-container .tabnav li a { color: #FFF; padding: 17px 13px; background-color: transparent; }
+    .revamp-header .top-tabs-container .tabnav li a.active { background-color: transparent; font-weight: 700; }
+    .revamp-header .top-tabs-container .language-drop .dropdown-toggle { background-color: transparent; color: #FFF; font-size: 12px; font-weight: 700; }
+    .revamp-header .top-tabs-container .language-drop svg { margin-right: 5px; }
+    .revamp-header .top-tabs-container .language-drop .dropdown-item { font-size: 12px; }
+    .revamp-header .nav-container { background-color: #FFF; }
+    .revamp-header .nav-container .nav-link { color: #1A1E47; }
+    .revamp-header .nav-container .pink-btn { background-color: #FF0084 !important; }
+    .revamp-header .mega-dropdown-menu>li>ul>li.dropdown-header { color: #1A1E47; font-size: 14px; }
+    .revamp-header .mega-dropdown-menu>li>ul>li>a { color: #2B2B2B; font-size: 14px; text-decoration: none; }
+    .revamp-header .mega-dropdown-menu { box-shadow: 0px 3px 4px rgb(0 0 0 / 25%); }
+    .revamp-header .navbar-toggler-icon { background-image: url('https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/assets/images/menu-line-new.svg'); }
+    .revamp-header .mega-dropdown-menu { border-radius: 0px 0px 9px 9px; }
+    
+    /* Footer styling Start */
+    .revamp-footer .footer { width: 100%; display: block; background-color: #1A1E47; padding-top: 30px; }
+    .revamp-footer .footer .footer-logo { width: 65px; }
+    .revamp-footer .footer .icon-list { width: 100%; display: block; }
+    .revamp-footer .footer .icon-list .store-icon { width: 75px; height: 31px; }
+    .revamp-footer .footer .icon-list li { list-style: none; float: left; margin-right: 10px; }
+    .revamp-footer .footer .icon-list li a svg { width: 20px; }
+    .revamp-footer .footer .icon-list.icon-appdownload { max-width: 130px; }
+    .revamp-footer .footer .icon-list.icon-appdownload li { margin: 0; }
+    .revamp-footer .footer .menulist { width: 100%; margin: 0; padding: 0; }
+    .revamp-footer .footer .menulist li { list-style: none; float: none; font-size: 12px; color: #FFF; }
+    .revamp-footer .footer .menulist li a { color: #FFF; line-height: 35px; }
+    .revamp-footer footer.footer .wp-block-columns .widget.widget_nav_menu ul.menu li a { line-height: 35px; }
+    .revamp-footer .footer .icon-list.icon-appdownload li a svg { color: #FFF !important; }
+    .revamp-footer .footer .menulist li a:hover { text-decoration: none; }
+    .revamp-footer .footer .menulist li.heading { font-weight: 700; font-size: 14px; margin-bottom: 10px; }
+    .revamp-footer .footer p { font-size: 12px; font-weight: 700; color: #FFF; }
+    .revamp-footer .footer .copyright { width: 100%; display: block; margin-top: 30px; padding-top: 10px; padding-bottom: 10px; background: linear-gradient(80.9deg, #FF0084 16.48%, #6F29D2 85.6%, #2F3BF5 96.9%); border-top: none !important; }
+    .revamp-footer .footer .copyright p { font-size: 12px; color: #FFF; font-weight: 400; margin: 0; }
+    .revamp-footer .footer .ctm-logo { position: absolute; right: 10px; bottom: 0; }
+    
+    /* Footer styling End */
+    .revamp-header .pink-btn { background-color: #FF0084; font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 0.1em; padding: 0.7rem 2.3rem; }
+    @media (min-width: 992px) { 
+        .revamp-header .nav-container .tab-content>.active { display: flex !important; flex-basis: auto; }
+    }
+    @media only screen and (min-device-width: 375px) and (max-device-width: 667px) { 
+        .revamp-header .mega-dropdown-menu>li { float: none; margin-bottom: 20px; }
+    }
+    
+    /* IPAD Portrait */
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {}
+    
+    /* Portrait */
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {}
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) { 
+        .revamp-header .mega-dropdown-menu>li { float: none; margin-bottom: 20px; }
+    }
+
+    html, body { height: 100%; }
+    body { background-color: #F6F6F6; display: flex; flex-direction: column; }
+    #site-content { flex: auto; }
+</style>
+
+<div class="revamp-header">
+    <header class="page-header">
+        <div class="top-pink-bar d-none">
+            <div class="row g-0 text-center">
+                <p>Are you an Exisiting YES user? Earn up to RM50/referral through our Refer & Earn program!</p>
+            </div>
+            <a href="#" class="close-btn"><span class="iconify" data-icon="eva:close-fill"></span></a>
+        </div>
+        <div class="top-tabs-container">
+            <div class="container g-0">
+                <div class="row g-0">
+                    <div class="col-10">
+                        <ul class="nav tabnav" id="tabNav" role="tablist">
+                            <li class="text-center d-none d-lg-block">
+                                <a href="https://www.yes.my" class="navbar-brand" style="padding:8px"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/05/yes-logo-new-white.png?x93376" alt="Yes | First to 5G" title="Yes | First to 5G" class="logo-top"></a>
+                            </li>
+                            <li><a href="javascript:void(0)" class="nav-link active" id="personal-tab" data-bs-toggle="tab" data-bs-target="#tabNavContent-personal" type="button" role="tab" aria-controls="home" aria-selected="true">Personal</a></li>
+                            <li><a href="javascript:void(0)" class="nav-link" id="business-tab" data-bs-toggle="tab" data-bs-target="#tabNavContent-business" type="button" role="tab" aria-controls="profile" aria-selected="false">Business</a></li>
+                            <li><a href="https://www.ytlfoundation.org/learnfromhome/" target="_blank">Learning</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-2">
+                        <div class="dropdown language-drop float-end">
+                            <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="iconify" data-icon="bi:globe"></span> English
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="https://www.yes.my/">English</a></li>
+                                <li><a class="dropdown-item" href="https://www.yes.my/ms/">Bhasa Malay</a></li>
+                                <li><a class="dropdown-item" href="https://www.yes.my/zh-hans/">中文</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="nav-container">
+            <div class="container g-lg-0">
+                <div class="row g-0">
+                    <nav class="navbar navbar-expand-lg">
+                        <div class="container-fluid">
+                            <a href="https://www.yes.my" class="navbar-brand d-block d-sm-none"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/05/yes-logo-new-grad2.png?x93376" alt="Yes | First to 5G" title="Yes | First to 5G" class="logo-top"></a>
+                            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tabNavContent" aria-controls="tabNavContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse tab-content" id="tabNavContent">
+                                <div class="tab-pane me-auto mb-2 mb-lg-0 show active" id="tabNavContent-personal" role="tabpanel" aria-labelledby="tabNav-personal">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item dropdown mega-dropdown">
+                                            <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a> -->
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                                            <ul class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li>
+                                                    <ul>
+                                                        <!-- <li class="dropdown-header">Mobile Plans</li> -->
+                                                        <li class="dropdown-header">Mobile Plans</li>
+                                                        <li id="menu-item-20032" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20032"><a href="https://www.yes.my/yes-prepaid-plans/">Prepaid Plans</a></li>
+                                                        <li id="menu-item-20031" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20031"><a href="https://www.yes.my/yes-postpaid-plans/">Postpaid Plans</a></li>
+                                                        <li id="menu-item-6597" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6597"><a href="https://www.yes.my/shop/plans/data-add-ons/">Data &amp; Hotspot Add-Ons</a></li>
+                                                        <li id="menu-item-6920" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6920"><a href="https://www.yes.my/5gplans/">First to 5G</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <!-- <li class="dropdown-header">Device Plans</li> -->
+                                                        <li class="dropdown-header">Device Plans</li>
+                                                        <li id="menu-item-20026" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20026"><a href="https://www.yes.my/yes-postpaid-infinite-5g/">Infinite+</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <!-- <li class="dropdown-header">Broadband</li> -->
+                                                        <li class="dropdown-header">Broadband</li>
+                                                        <li id="menu-item-551" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-551"><a href="https://www.yes.my/shop/broadband/home-broadband/">Home Broadband</a></li>
+                                                        <li id="menu-item-552" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-552"><a href="https://www.yes.my/shop/broadband/on-the-go-broadband/">On-the-go Broadband</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <!-- <li class="dropdown-header">Existing Customers</li> -->
+                                                        <li class="dropdown-header">Existing Customers</li>
+                                                        <li id="menu-item-558" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-558"><a href="https://www.yes.my/shop/existing-customers/how-to-get-databack/">How-To: Get Databack</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="navbar-nav">
+                                        <li id="menu-item-20033" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20033 nav-item"><a href="https://www.yes.my/yes-postpaid-infinite-5g/" class="nav-link">Infinite+</a></li>
+                                        <li id="menu-item-549" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-549 nav-item"><a href="https://www.yes.my/keep-your-number/" class="nav-link">Keep Your Number</a></li>
+                                        <li id="menu-item-1243" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1243 nav-item"><a href="https://www.yes.my/partners/" class="nav-link">Partners</a></li>
+                                    </ul>
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item dropdown mega-dropdown">
+                                            <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Support</a> -->
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Support</a>
+                                            <ul class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li>
+                                                    <ul>
+                                                        <!-- <li class="dropdown-header">Help &amp; Support</li> -->
+                                                        <li class="dropdown-header">Help &amp; Support</li>
+                                                        <li id="menu-item-6564" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6564"><a href="https://www.yes.my/faq/">FAQ</a></li>
+                                                        <li id="menu-item-7118" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7118"><a href="/support/offlinechat">Ask Sofia</a></li>
+                                                        <li id="menu-item-20064" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20064"><a href="https://www.yes.my/support/payment-methods/">Payment Methods</a></li>
+                                                        <li id="menu-item-6570" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6570"><a href="/faq/howtoactivatesim">Activate SIM</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <!-- <li class="dropdown-header">Tools &amp; Services</li> -->
+                                                        <li class="dropdown-header">Tools &amp; Services</li>
+                                                        <li id="menu-item-7117" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7117"><a href="https://www.yes.my/coverage/">Coverage</a></li>
+                                                        <li id="menu-item-6572" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6572"><a href="https://www.yes.my/speed-test/">Speed Test</a></li>
+                                                        <li id="menu-item-6573" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6573"><a href="https://www.yes.my/supported-devices/">Supported Devices</a></li>
+                                                        <li id="menu-item-9668" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9668"><a href="https://www.yes.my/trackorder/">Track Order</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <!-- <li class="dropdown-header">Contact Us</li> -->
+                                                        <li class="dropdown-header">Contact Us</li>
+                                                        <li id="menu-item-6574" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6574"><a target="_blank" rel="noopener" href="mailto:yescare@yes.my">Email Us</a></li>
+                                                        <li id="menu-item-6575" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6575"><a target="_blank" rel="noopener" href="https://www.facebook.com/messages/t/242365937676/">Facebook Messenger</a></li>
+                                                        <li id="menu-item-6576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6576"><a href="https://www.yes.my/support/store-locator/">Store Locations</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane me-auto mb-2 mb-lg-0" id="tabNavContent-business" role="tabpanel" aria-labelledby="tabNav-business">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item dropdown mega-dropdown">
+                                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown-businessSolution" role="button" data-bs-toggle="dropdown" aria-expanded="false">Business Solutions</a>
+                                            <ul class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Internet Access</li>
+                                                        <li id="menu-item-20003" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20003"><a href="https://www.yes.my/business/internet-access/yes-soho/">Yes Soho</a></li>
+                                                        <li id="menu-item-20004" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20004"><a href="https://www.yes.my/business/internet-access/yes-dia/">Yes DIA</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="nav-item dropdown mega-dropdown">
+                                                    <ul>
+                                                        <li class="dropdown-header">Private Network</li>
+                                                        <li id="menu-item-20012" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20012"><a href="https://www.yes.my/business/private-network/yes-dedicated-leased-line/">Yes Dedicated Leased Line</a></li>
+                                                        <li id="menu-item-20013" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20013"><a href="https://www.yes.my/business/private-network/yes-4g-vpn/">Yes 4G VPN</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="nav-item dropdown mega-dropdown">
+                                                    <ul>
+                                                        <li class="dropdown-header">Voice Communication</li>
+                                                        <li id="menu-item-20014" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20014"><a href="https://www.yes.my/business/voice-communication/yes-sipconnect/">Yes SIPconnect</a></li>
+                                                        <li id="menu-item-20015" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20015"><a href="https://www.yes.my/business/voice-communication/business-telephony-system/">Business Telephony System</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item dropdown mega-dropdown">
+                                            <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Support</a> -->
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Support</a>
+                                            <ul class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li>
+                                                    <ul>
+                                                        <!-- <li class="dropdown-header">Help &amp; Support</li> -->
+                                                        <li class="dropdown-header">Help &amp; Support</li>
+                                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6564"><a href="https://www.yes.my/faq/">FAQ</a></li>
+                                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7118"><a href="/support/offlinechat">Ask Sofia</a></li>
+                                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20064"><a href="https://www.yes.my/support/payment-methods/">Payment Methods</a></li>
+                                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6570"><a href="/faq/howtoactivatesim">Activate SIM</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <!-- <li class="dropdown-header">Tools &amp; Services</li> -->
+                                                        <li class="dropdown-header">Tools &amp; Services</li>
+                                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7117"><a href="https://www.yes.my/coverage/">Coverage</a></li>
+                                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6572"><a href="https://www.yes.my/speed-test/">Speed Test</a></li>
+                                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6573"><a href="https://www.yes.my/supported-devices/">Supported Devices</a></li>
+                                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9668"><a href="https://www.yes.my/trackorder/">Track Order</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <!-- <li class="dropdown-header">Contact Us</li> -->
+                                                        <li class="dropdown-header">Contact Us</li>
+                                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6574"><a target="_blank" rel="noopener" href="mailto:yescare@yes.my">Email Us</a></li>
+                                                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-6575"><a target="_blank" rel="noopener" href="https://www.facebook.com/messages/t/242365937676/">Facebook Messenger</a></li>
+                                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6576"><a href="https://www.yes.my/support/store-locator/">Store Locations</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <!-- <a href="https://appstore.yes.my/ywos" class="pink-btn" target="_blank">Get Started</a> -->
+                                    <a href="https://www.yes.my/selfcare" class="pink-btn" target="_blank">Get Started</a>
+                                    <!-- <a href="#" class="login-btn"><span class="iconify" data-icon="carbon:user-avatar-filled-alt"></span> Log In</a> -->
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var $body = $("body");
+        var $scroller = $(document);
+
+        var SCROLLING_OFFSET_TOP = 10;
+        var scrolling = false;
+
+        $scroller
+            .scroll(function() {
+                if (scrolling && $(this).scrollTop() < SCROLLING_OFFSET_TOP) {
+                    $body.removeClass("scrolling");
+                    scrolling = false;
+                } else if (!scrolling && $(this).scrollTop() >= SCROLLING_OFFSET_TOP) {
+                    $body.addClass("scrolling");
+                    scrolling = true;
+                }
+            })
+            .scroll();
+
+        var $btn_sidemenu = $(".btn-sidemenu");
+
+        function toggleSideMenuPull(e) {
+            $("body").toggleClass("show-nav");
+
+            e.preventDefault();
+            return false;
+        }
+
+        function activate_sidemenu_dropdown() {
+            $btn_sidemenu.popover("enable");
+            $btn_sidemenu.off("click");
+        }
+
+        function activate_sidemenu_pull() {
+            $btn_sidemenu.popover("disable");
+            $btn_sidemenu.off("click");
+            $btn_sidemenu.on("click", toggleSideMenuPull);
+        }
+
+        $(window)
+            .resize(function() {
+                if ($(this).width() > 1024) {
+                    activate_sidemenu_dropdown();
+                } else {
+                    activate_sidemenu_pull();
+                }
+            })
+            .resize();
+
+        $(".nav-mobile .btn-close").click(function() {
+            $("body").removeClass("show-nav");
+        });
+    });
+</script>
+
+<script type='text/javascript' src="https://cdn.yes.my/site/wp-includes/js/jquery/jquery.min.js"></script>
+<script type='text/javascript' src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/assets/js/bootstrap.bundle.js"></script>
+<script type='text/javascript' src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/assets/js/iconify.min.js"></script>
