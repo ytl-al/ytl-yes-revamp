@@ -290,7 +290,7 @@
 
                             <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/singapore.png">
                                 <h2>Singapore</h2>
-                                <p>StarHub</p>
+                                <p>StarHub/M1</p>
                             </div>
 
                             <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/sweden.png">
