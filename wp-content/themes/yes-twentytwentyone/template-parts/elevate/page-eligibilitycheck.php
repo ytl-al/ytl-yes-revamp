@@ -131,7 +131,7 @@
                                                        id="ic_phone_number"
                                                        name="phone" v-model="eligibility.inphone" @input="watchAllowNext"
                                                        @keypress="isNumber($event)"
-                                                       @placeholder="renderText('phone_number')">
+                                                       :placeholder="renderText('phone_number')">
                                             </div>
                                         </div>
                                     </div>

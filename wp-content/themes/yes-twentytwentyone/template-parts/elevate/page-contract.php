@@ -898,7 +898,7 @@
                                     <div style="height: 50px;"></div>
                                     <div><input type="text" @keyup="check_sign()" autocomplete="off"
                                                 v-model="contract_signed" class="form-control user_sign text-uppercase"
-                                                @placeholder="renderText('type_your_fullname')" id="fname"/></div>
+                                                :placeholder="renderText('type_your_fullname')" id="fname"/></div>
                                     <div></div>
                                     <div class="mt-4">
                                         <a class="btn-signup" :class="allowSubmit?'btn-signed':'btn-signup'"
@@ -1088,6 +1088,11 @@
                     var self = this;
                     var params = self.customer;
                     params.productSelected = self.orderSummary.product.selected.plan.planId;
+                    if(!self.dealer){
+                        self.dealer.referral_code = '';
+                        self.dealer.dealer_id = '';
+                        self.dealer.dealer_code = '';
+                    }
                     params.referralCode = self.dealer.referral_code;
                     params.dealerUID = self.dealer.dealer_id;
                     params.dealerCode = self.dealer.dealer_code;
@@ -1174,6 +1179,7 @@
                 },
                 goNext: function () {
                     var self = this;
+                    alert(self.allowSubmit);
                     $('#error').html("");
                     if (self.allowSubmit) {
 
