@@ -271,6 +271,7 @@
                     axios.post(apiEndpointURL + '/validate-guest-login', {
                             'phone_number': '0' + self.verify.input.phoneNumber.trim(),
                             'otp_password': self.verify.input.otpPassword.trim(),
+                            'locale': self.apiLocale
                         })
                         .then((response) => {
                             self.redirectVerified();

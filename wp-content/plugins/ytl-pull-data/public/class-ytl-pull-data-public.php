@@ -524,14 +524,15 @@ class Ytl_Pull_Data_Public
 	public function generate_otp_for_login(WP_REST_Request $request)
 	{
 		$yes_id	= (trim($request['yes_number'])) ? $request['yes_number'] . '@YES.MY' : null;
+		$locale	= (trim($request['locale'])) ? $request['locale'] . '@YES.MY' : null;
 		return $this->ca_generate_otp_for_login($yes_id);
 	}
 
-	public function ca_generate_otp_for_login($yes_id = null)
+	public function ca_generate_otp_for_login($yes_id = null, $locale = 'EN')
 	{
 		$session_id 	= $this->ca_generate_auth_token(true);
 		if ($yes_id != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
-			$params 	= ['requestId' => $this->api_request_id, 'yesId' => $yes_id, 'locale' => $this->api_locale, 'sessionId' => $session_id];
+			$params 	= ['requestId' => $this->api_request_id, 'yesId' => $yes_id, 'locale' => $locale, 'sessionId' => $session_id];
 			$args 		= [
 				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
 				'body'          => json_encode($params),
@@ -745,6 +746,11 @@ class Ytl_Pull_Data_Public
 					}
 				],
 				'otp_password' => [
+					'validate_callback' => function ($param, $request, $key) {
+						return true;
+					}
+				],
+				'locale' => [
 					'validate_callback' => function ($param, $request, $key) {
 						return true;
 					}

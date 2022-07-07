@@ -1108,7 +1108,8 @@
                 ajaxGenerateOTPForLogin: function() {
                     var self = this;
                     axios.post(apiEndpointURL + '/generate-otp-for-login', {
-                            'yes_number': self.login.input.otp.yesNumber
+                            'yes_number': self.login.input.otp.yesNumber, 
+                            'locale': self.apiLocale
                         })
                         .then((response) => {
                             $('.item-otpPassword').show();
