@@ -1089,6 +1089,7 @@
                     var params = self.customer;
                     params.productSelected = self.orderSummary.product.selected.plan.planId;
                     if(!self.dealer){
+                        self.dealer = [];
                         self.dealer.referral_code = '';
                         self.dealer.dealer_id = '';
                         self.dealer.dealer_code = '';
@@ -1179,7 +1180,7 @@
                 },
                 goNext: function () {
                     var self = this;
-                    alert(self.allowSubmit);
+
                     $('#error').html("");
                     if (self.allowSubmit) {
 
