@@ -2,30 +2,30 @@
     .layer-page {
         overflow: unset;
     }
-    
+
     .page-banner {
         background: linear-gradient(83.24deg, #FF0084 10.6%, #2F3BF5 89.86%);
         color: #FFF;
         padding: 45px 0px;
         text-align: center;
     }
-    
+
     .page-banner h1 {
         font-size: 48px;
         font-weight: 800;
         margin: 0 0 10px;
     }
-    
+
     .page-banner p {
         font-size: 16px;
         font-weight: 400;
     }
-    
+
     .page-banner p span {
         display: block;
         font-size: 22px;
     }
-    
+
     .layer-filter.filter-container {
         width: 100%;
         background-color: #FFF;
@@ -43,13 +43,13 @@
         justify-content: space-between;
         width: 100%;
     }
-    
+
     .layer-filter.filter-container.filter-shadow {
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
         padding: 15px 0;
         z-index: 1020;
     }
-    
+
     .layer-filter .filter-drop {
         border: 1px solid #C4C4C4;
         background-color: #FFF;
@@ -61,18 +61,18 @@
         text-align: left;
         width: 100%;
     }
-    
+
     .layer-filter .dropdown-toggle::after {
         position: absolute;
         right: 20px;
         top: 26px;
     }
-    
+
     .layer-filter .filter-drop:focus {
         outline: none;
         box-shadow: none;
     }
-    
+
     .layer-filter .dropdown-menu {
         border-radius: 10px;
         border: 1px solid #C4C4C4;
@@ -80,29 +80,29 @@
         width: 100%;
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
     }
-    
+
     .layer-filter .dropdown-menu .form-check {
         padding-left: 20px;
         margin-bottom: 5px;
     }
-    
+
     .layer-filter .dropdown-menu .form-check label {
         cursor: pointer;
         display: block;
     }
-    
+
     .layer-list {}
-    
+
     .layer-list .is-hidden {
         display: none;
     }
-    
+
     .layer-list .heading-state {
         font-size: 24px;
         line-height: 28px;
         margin: 0 0 20px;
     }
-    
+
     .layer-list .layer-listBox,
     .layer-list .layer-listBoxNoResults {
         background-color: #FFF;
@@ -112,15 +112,15 @@
         padding: 30px;
         transition: all 0.3s ease-in-out;
     }
-    
+
     .layer-list .layer-state:last-child .layer-listBox:last-child {
         margin-bottom: 0;
     }
-    
+
     .layer-list .layer-listBox:hover {
         filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
     }
-    
+
     .layer-listBox .panel-date {
         background-color: #F5F5F5;
         display: inline-block;
@@ -128,30 +128,42 @@
         margin: 0 0 15px;
         padding: 10px 20px;
     }
-    
+
     .layer-listBox .layer-listInfo {}
-    
+
     .layer-listInfo .table-listInfo {
         margin: 0;
     }
-    
+
     .table-listInfo th,
     .table-listInfo td {
         border: 0;
-        padding: 0 20px 15px 0;
+        display: block;
+        padding: 0 0 10px;
     }
-    
-    .table-listInfo th {}
-    
+
+    .table-listInfo th {
+        padding-bottom: 0;
+    }
+
     .table-listInfo td {
         padding-right: 0;
     }
-    
+
     .table-listInfo tr:last-child th,
     .table-listInfo tr:last-child td {
         padding-bottom: 0;
     }
-    
+
+    .layer-listBox .map-btn {
+        color: #2F3BF5;
+        display: block; 
+        font-size: 18px;
+        font-weight: 600;
+        opacity: 60%;
+        text-decoration: none;
+    }
+
     @media (min-width: 768px) {
         .table-listInfo th {
             width: 30%;
@@ -168,9 +180,14 @@
             flex-basis: auto;
         }
     }
-    
+
     @media (min-width: 1200px) {
+        .table-listInfo th, .table-listInfo td {
+            display: table-cell;
+            padding: 0 20px 15px 0;
+        }
         .table-listInfo th {
+            padding-bottom: 15px;
             width: 20%;
         }
     }

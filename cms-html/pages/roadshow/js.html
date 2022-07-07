@@ -23,27 +23,6 @@
     const cardsCkbState = $('.cardCheckBox.state');
     const cardsCkbMonth = $('.cardCheckBox.month');
 
-    const websiteLang = document.getElementsByTagName('html')[0].getAttribute('lang');
-    const objTranslate = {
-        'strNoState': { 'en-US': 'No State Selected', 'ms-MY': 'Tiada Negeri Dipilih', 'zh-hans': 'No State Selected' },
-        'strAllStates': { 'en-US': 'All States', 'ms-MY': 'Semua Negeri', 'zh-hans': 'All States' },
-        'strMultipleStates': { 'en-US': 'Multiple States', 'ms-MY': 'Beberapa Negeri', 'zh-hans': 'Multiple States' },
-
-        'strNoMonth': { 'en-US': 'No Month Selected', 'ms-MY': 'Tiada Bulan Dipilih', 'zh-hans': 'No Month Selected' },
-        'strAllMonths': { 'en-US': 'All Months', 'ms-MY': 'Semua Bulan', 'zh-hans': 'All Months' },
-        'strMultipleMonths': { 'en-US': 'Multiple Months', 'ms-MY': 'Beberapa Bulan', 'zh-hans': 'Multiple Months' }
-    };
-
-    function renderText(strID) {
-        var siteLang = (websiteLang) ? websiteLang : 'en-US';
-        if (siteLang && objTranslate) {
-            if (objTranslate[strID] && objTranslate[strID][siteLang]) {
-                return objTranslate[strID][siteLang];
-            } 
-        }
-        return;
-    }
-
     function handleSelectAll(dropdown, calledFromFilter = false) {
         var filterType = $(dropdown).data('filter-type') || $(dropdown).closest('[data-filter-type]').data('filter-type');
         if (calledFromFilter) {
@@ -81,11 +60,11 @@
         handleSelectAll(checkbox, true);
 
         const arrCheckedStates = cardsCkbState.filter(':checked').get().map(el => el.value);
-        var selectedText = renderText('strNoState');
+        var selectedText = 'No State Selected';
         if (arrCheckedStates.length == cardsCkbState.length) {
-            selectedText = renderText('strAllStates');
+            selectedText = 'All States';
         } else if (arrCheckedStates.length > 1) {
-            selectedText = renderText('strMultipleStates');
+            selectedText = 'Multiple States';
         } else if (arrCheckedStates.length == 1) {
             selectedText = $('.cardCheckBox.state[value="' + arrCheckedStates[0] + '"]').closest('.form-check').find('span').html();
         }
@@ -112,16 +91,16 @@
         const arrCheckedMonths = cardsCkbMonth.filter(':checked').get().map(el => el.value);
         switch (true) {
             case arrCheckedMonths.length == cardsCkbMonth.length:
-                selectedText = renderText('strAllMonths');
+                selectedText = 'All Months';
                 break;
             case (arrCheckedMonths.length > 1):
-                selectedText = renderText('strMultipleMonths');
+                selectedText = 'Multiple Months';
                 break;
             case (arrCheckedMonths.length == 1):
                 selectedText = $('.cardCheckBox.month[value="' + arrCheckedMonths[0] + '"]').closest('.form-check').find('span').html();
                 break;
             default:
-                selectedText = renderText('strNoMonth');
+                selectedText = 'No Month Selected';
         }
         $('#dropdown-months').text(selectedText);
 
