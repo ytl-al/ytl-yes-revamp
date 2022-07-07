@@ -33,6 +33,7 @@ function elevate_enqueue_scripts()
     wp_enqueue_script('axios', 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js', array(), '0.24.0', true);
     wp_enqueue_script('ywos-js', get_template_directory_uri() . '/template-parts/ywos/assets/js/ywos.js', array(), '1.0.0', true);
     wp_enqueue_script('elevatelib-js', get_template_directory_uri() . '/template-parts/elevate/assets/js/elevate.js', array(), '1.0.0', true);
+    wp_enqueue_script('elevatelang-js', get_template_directory_uri() . '/template-parts/elevate/assets/js/elevate_lang.js', array(), '1.0.0', true);
 //wp_enqueue_script('elevatelib-js', 'http://localhost/elevate.js', array(), '1.0.0', true);
     wp_enqueue_script('xpaylib', XPAY_LIB_PATH, array(), '1.0.0', true);
     wp_enqueue_script('select-picker', 'https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js', array(), '1.14.0', true);

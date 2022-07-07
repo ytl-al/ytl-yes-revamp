@@ -757,7 +757,7 @@
 							 errorMsg = "Payment Timeout.";
 							//  self.cancelElevateOrder(errorMsg);
 							 self.updatePaymentStatus(3);
-                            
+
                             clearTimeout(timeoutObj);
                             self.paymentTimeout = true;
                             self.checkPaymentStatusCount = 0;
@@ -1074,6 +1074,9 @@
                             self.paymentInfo.bankName = bankListSelected[0].bankName;
                         }
                         self.watchAllowSubmit();
+                    },
+                    renderText: function(strID) {
+                        return elevate.renderText(strID, Elevate_lang);
                     },
                     watchAllowSubmit: function() {
                         var self = this;

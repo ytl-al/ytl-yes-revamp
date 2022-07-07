@@ -40,10 +40,10 @@
                             <div class="mt-5">We have received your order and are waiting for payment clearance. <br />You will receive confirmation email once payment is cleared.</div>
 						<?php }else{
 						?>
-						<h1 class="title"></h1> 
-                        <div class="subtitle" style="color:red">Payment Failure.</div> 
+						<h1 class="title"></h1>
+                        <div class="subtitle" style="color:red">Payment Failure.</div>
                         <div class="mt-5">Sorry, payment failed. Please retry.</div>
-						<?php	
+						<?php
 						}?>
                     </div>
                 </div>
@@ -131,6 +131,9 @@
                     } else {
                         //elevate.redirectToPage('cart');
                     }
+                },
+                renderText: function(strID) {
+                    return elevate.renderText(strID, Elevate_lang);
                 }
             }
         });

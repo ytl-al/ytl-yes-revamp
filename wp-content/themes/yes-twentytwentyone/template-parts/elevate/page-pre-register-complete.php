@@ -63,11 +63,11 @@
         margin: 0 0 20px;
         text-align: center;
     }
-	
+
 	.text-12{
 		font-size:12px!important;
 	}
-	
+
 	#page_done,
 	#page_error{
 		min-height:400px;
@@ -139,7 +139,7 @@
     <section id="cart-body" style="display: none;">
         <div class="container " style="border: 0">
             <div id="main-vue">
-				           
+
                  <div class="subtitle">Review & Pay</div>
                 <div class="row gx-5" >
                 <div class="col-lg-8 col-12">
@@ -280,7 +280,7 @@
                                      </div></div>
 									 <div class="p-3 text-center"><a href="/infinite-phone-bundles/" class="pink-btn text-uppercase">Back to Infinite+</a></div> <div id="error" class="mt-3"></div></div></div>
 	</div>
-	
+
 	<div id="page_done" style="display:none;">
 		<div class="flex-container mt-3">
 		<div><div class="row">
@@ -451,29 +451,29 @@
 					var url = new URL(url_string);
 					var guid = url.searchParams.get('id');
 					var force = url.searchParams.get('force');
-					 
+
 					if (elevate.validateSession(self.currentStep)) {
 						if(guid != elevate.lsData.guid || force == 1){
 							self.getUserInfor();
 						}else{
 							self.deliveryInfo = elevate.lsData.deliveryInfo;
 							self.orderSummary = elevate.lsData.orderSummary;
-							self.guid = elevate.lsData.guid; 
-							
+							self.guid = elevate.lsData.guid;
+
 							self.updatePlan();
-									
+
 							$('#cart-body').show();
 							$('#page_error').hide();
 							$('.layer-page').css({'height':'auto'});
 
 						}
-						
+
 					}else{
 						self.getUserInfor();
-					}					
+					}
                 },
-                 
- 
+
+
                 updatePlan: function() {
                     var self = this;
 
@@ -511,7 +511,7 @@
 				getProductImage: function(){
 					var self = this;
 					if(!self.orderSummary.device.imageURL) return;
-					var url = self.orderSummary.device.imageURL.split(';'); 
+					var url = self.orderSummary.device.imageURL.split(';');
 					return url[0];
 
 				},
@@ -583,57 +583,57 @@
 								toggleOverlay(false);
 								var data = response.data;
 								console.log(data);
-								if(data){ 
-									//init 
+								if(data){
+									//init
 									elevate.initLocalStorage(data.product.code, data.order.dealerCode, data.order.dealerUID, data.order.referralCode);
-								
+
 									//customer
-									self.deliveryInfo = data.customer; 
+									self.deliveryInfo = data.customer;
 									self.deliveryInfo.name= self.deliveryInfo.fullName;
 									self.deliveryInfo.mykad = self.deliveryInfo.securityNumber;
 									self.deliveryInfo.address = self.deliveryInfo.addressLine1;
 									self.deliveryInfo.addressMore = self.deliveryInfo.addressLine2;
 									self.deliveryInfo.postcode = self.deliveryInfo.postCode;
- 
+
 									self.deliveryInfo.stateCode = (self.deliveryInfo.state) ? self.getStateCode(self.deliveryInfo.state) : '';
 									self.deliveryInfo.cityCode = self.deliveryInfo.city;
-									
+
 									if(data.contract.alternateContactName){
 										self.deliveryInfo.alternative_name = data.contract.alternateContactName;
 									}else{
 										self.deliveryInfo.alternative_name = "";
 									}
-									
+
 									if(data.contract.alternateContactNumber){
 										self.deliveryInfo.alternative_phone = data.contract.alternateContactNumber;
 									}else{
 										self.deliveryInfo.alternative_phone = "";
 									}
-									 
-	
 
-									self.deliveryInfo.phone = self.getPhone(self.deliveryInfo.mobileNumber);									 
-									self.deliveryInfo.inphone = self.getInPhone(self.deliveryInfo.mobileNumber);									 
+
+
+									self.deliveryInfo.phone = self.getPhone(self.deliveryInfo.mobileNumber);
+									self.deliveryInfo.inphone = self.getInPhone(self.deliveryInfo.mobileNumber);
 									self.updateCityCode();
-									
+
 									//product
 									self.orderSummary.product = data.product;
 									self.orderSummary.plan = data.plan;
 									self.orderSummary.plan.longDescriptionEN = data.plan.longDescriptionEN.split(';');
 									self.orderSummary.device = data.device;
-									self.orderSummary.order = data.order; 
-									
+									self.orderSummary.order = data.order;
+
 									self.updatePlan();
-									
+
 									if(parseInt(data.order.orderStatus) == 2 || parseInt(data.order.orderStatus) == 3){
 										$('#cart-body').hide();
 										$('#page_done').show();
 									}else{
 										$('#cart-body').show();
 										$('#page_error').hide();
-									} 
-									
-									
+									}
+
+
 								}else{
 									$('#cart-body').hide();
 									$('#page_error').show();
@@ -656,7 +656,7 @@
 
 				},
 
-				 
+
 				getPhone: function(phone){
 					var phone = phone.replaceAll(' ', '')
 					var c = phone.substring(0,1);
@@ -678,7 +678,7 @@
 					return tel;
 
 				},
-				
+
 				getInPhone: function(phone){
 					var phone = phone.replaceAll(' ', '')
 					var c = phone.substring(0,1);
@@ -786,7 +786,7 @@
                                 var data = response.data;
 
                                 if(data.status == 1){
-									 
+
                                 }else{
                                     toggleOverlay(false);
 									$('#status_mesage').html('');
@@ -827,7 +827,7 @@
 						});
 
 				},
- 
+
 
 				getDOB: function (mykad){
                         var self = this;
@@ -861,7 +861,7 @@
 						$('#modal-bodyText').html('');
 					});
 				},
- 
+
                 watchAllowNext: function() {
                     var self = this;
 					if(!self.deliveryInfo.id){
@@ -869,31 +869,31 @@
 					}
 
                 },
-				
+
 				editCustomer:function(){
 					var self = this;
-					
+
 					var LSData = JSON.parse(localStorage.getItem(elevateLSName));
 					elevate.lsData = LSData;
-						
+
 					console.log(LSData);
-					
+
 					elevate.lsData.deliveryInfo = self.deliveryInfo;
 					elevate.lsData.orderSummary =  self.orderSummary;
-					elevate.lsData.guid =  self.guid; 
+					elevate.lsData.guid =  self.guid;
 					elevate.updateElevateLSData();
-					
+
 					toggleOverlay();
 					elevate.redirectToPage('pre-register-personal');
 				},
-				
+
 				watchAllowNext: function () {
                     $('#error').html("");
                     $('.input_error').removeClass('input_error');
                     var self = this;
 					var isFilled = true;
 					var error = new Array();
-					
+
 					if(!$('#subscribe').is(':checked') ||  !$('#consent').is(':checked')){
                         isFilled = false
                     }
@@ -910,7 +910,11 @@
 						}
                     }
                 },
-				
+
+                renderText: function(strID) {
+                    return elevate.renderText(strID, Elevate_lang);
+                },
+
                 goNext: function() {
 
                     var self = this;
@@ -922,13 +926,13 @@
 						elevate.lsData = LSData;
 						elevate.lsData.deliveryInfo = self.deliveryInfo;
 						elevate.lsData.orderSummary =  self.orderSummary;
-						elevate.lsData.guid =  self.guid; 
+						elevate.lsData.guid =  self.guid;
 						elevate.updateElevateLSData();
 						toggleOverlay();
                         self.sendAnalytics();
 						setTimeout(function() {
                             elevate.redirectToPage('pre-register-contract');
-                        }, 2000);							
+                        }, 2000);
                     }
                 },
                 sendAnalytics: function() {
@@ -936,20 +940,20 @@
                     var pushData = [];
                     pushData.push({
                         'name': self.orderSummary.device.nameEN + ' - ' + self.orderSummary.device.color,
-                        'id': self.orderSummary.device.code, 
+                        'id': self.orderSummary.device.code,
                         'category': 'DEVICE',
                         'price': parseFloat(self.orderSummary.device.devicePriceMonth).toFixed(2)
                     });
                     pushData.push({
                         'name': self.orderSummary.plan.nameEN,
-                        'id': self.orderSummary.plan.planId, 
+                        'id': self.orderSummary.plan.planId,
                         'category': self.orderSummary.plan.planType,
                         'price': parseFloat(self.orderSummary.plan.monthlyAmount).toFixed(2)
                     });
 
                     pushAnalytics('addToCart', pushData);
                     pushAnalytics('checkout', pushData);
-                    
+
                     elevate.lsData.analyticItems =  pushData;
                     elevate.updateElevateLSData();
                 }

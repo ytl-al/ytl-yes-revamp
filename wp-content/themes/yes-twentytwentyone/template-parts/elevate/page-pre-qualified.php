@@ -412,7 +412,7 @@
                                 if(data.status == 1){
 
                                     if(data.data.processStatus && data.data.processStatus && data.data.processStatus.toUpperCase() == "EKYC_DONE"){
-                                        //success 
+                                        //success
                                         clearInterval(self.interval);
 										for(var i = 0; i < windows.length; i++){
 											windows[i].close()
@@ -443,10 +443,10 @@
                 },
 
 				doPass: function(){
-					var self = this; 
-					elevate.lsData.ekycPassed = true; 
+					var self = this;
+					elevate.lsData.ekycPassed = true;
 					elevate.updateElevateLSData();
-					 
+
 					elevate.redirectToPage('pre-qualified-plan');
 				},
 
@@ -461,7 +461,7 @@
                         PartneReferenceID:response.uid,
                         OCRConfidenceScore:response.sim,
                     };
-                    
+
                     axios.post(apiEndpointURL_elevate + '/ca-verification', params)
                         .then((response) => {
 
@@ -608,11 +608,11 @@
 									self.deliveryInfo.phone = self.getPhone(self.deliveryInfo.mobile);
 									self.productOffered();
 									self.updateCityCode();
-									
+
 									elevate.lsData.meta.guid = self.guid;
 									elevate.lsData.deliveryInfo = self.deliveryInfo;
 									elevate.updateElevateLSData();
-					 
+
 
 									self.eKYC_init();
 								}else{
@@ -671,6 +671,10 @@
 					  colorLight : '#fff',
 					  correctLevel : QRCode.CorrectLevel.H
 					});
+                },
+
+                renderText: function(strID) {
+                    return elevate.renderText(strID, Elevate_lang);
                 }
             }
         });

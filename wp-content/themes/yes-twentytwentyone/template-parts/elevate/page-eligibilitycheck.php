@@ -9,6 +9,7 @@
         -moz-appearance: textfield;
     }
 </style>
+<div id="main-vue">
 <header class="white-top">
     <div class="container">
         <div class="row">
@@ -33,16 +34,16 @@
         <div class="container">
             <ul class="wizard">
                 <li ui-sref="firstStep" class="completed">
-                    <span>1. Eligibility check</span>
+                    <span>{{ renderText('elevate_step_1') }}</span>
                 </li>
                 <li ui-sref="secondStep">
-                    <span>2. MyKAD verification</span>
+                    <span>{{ renderText('elevate_step_2') }}</span>
                 </li>
                 <li ui-sref="thirdStep">
-                    <span>3. Delivery details</span>
+                    <span>{{ renderText('elevate_step_3') }}</span>
                 </li>
                 <li ui-sref="fourthStep">
-                    <span>4. Review and order</span>
+                    <span>{{ renderText('elevate_step_4') }}</span>
                 </li>
             </ul>
         </div>
@@ -50,31 +51,30 @@
     <section id="cart-body">
         <div class="container" style="border: 0">
 
-            <div class="border-box" id="main-vue">
+            <div class="border-box" >
                 <div class="row">
                     <div class="col-md-5 p-5 flex-column bg-checkout1">
                         <div class="title text-white checkout-left">
-                            Check if you are eligible for the Yes Infinite+ contract option
+                            {{ renderText('if_you_are_eligible') }}
                         </div>
                     </div>
                     <div class="col-md-7 p-5">
                         <form class="needs-validation" novalidate>
                             <div class="mt-2 mb-2">
-                                <h2 class="subtitle">Eligibility Check</h2>
-                                <p class="sub mb-4">Please fill in your MyKad/MyTentera information, mobile<br> number and email
-                                    to proceed</p>
+                                <h2 class="subtitle">{{ renderText('eligibility_check') }}</h2>
+                                <p class="sub mb-4" v-html="renderText('fill_in_mykad')"></p>
 
-                                <div class="text-bold">MyKAD Verification</div>
+                                <div class="text-bold">{{ renderText('MyKAD_verification') }}</div>
                                 <div class="row mb-4 align-items-center g-2">
                                     <div class="col-lg-8 col-12">
-                                        <label class="form-label">* MyKad/MyTentera number</label>
+                                        <label class="form-label">{{ renderText('MyKAD_number') }}</label>
                                         <div class="">
                                             <div class="row">
                                                 <div class="col-lg-4 col-5">
                                                     <select v-model="eligibility.cardtype" class="" style="width:100%"
                                                             id="cardtype" name="cardtype">
-                                                        <option value="1">MyKad</option>
-                                                        <option value="2" >MyTentera</option>
+                                                        <option value="1">{{ renderText('MyKad') }}</option>
+                                                        <option value="2" >{{ renderText('MyTentera') }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-lg-8 col-7">
@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-lg-8 col-12">
-                                        <label class="form-label">* Full Name (as per MyKad)</label>
+                                        <label class="form-label">{{ renderText('full_name') }}</label>
                                         <div class="input-group align-items-center">
                                             <input type="text" class="form-control text-uppercase" id="full_name" name="name"
                                                    v-model="eligibility.name" @keypress="checkInputFullName(event)" @input="watchAllowNext" @change="watchAllowNext" placeholder=""
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-lg-8 col-12">
-                                        <label class="form-label">* Date Of Birth</label>
+                                        <label class="form-label">{{ renderText('date_of_birth') }}</label>
                                         <div class="align-items-center">
                                             <input type="text" class="form-control text-uppercase" id="dob" name="dob"
                                                    v-model="eligibility.dob"
@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="row mb-4 align-items-center g-2">
                                     <div class="col-12">
-                                        <label class="form-label">* Key in your mobile number</label>
+                                        <label class="form-label">{{ renderText('mobile_number') }}</label>
                                     </div>
                                     <div class="col-lg-8 col-12">
                                         <div class="row">
@@ -131,7 +131,7 @@
                                                        id="ic_phone_number"
                                                        name="phone" v-model="eligibility.inphone" @input="watchAllowNext"
                                                        @keypress="isNumber($event)"
-                                                       placeholder="Phone number">
+                                                       @placeholder="renderText('phone_number')">
                                             </div>
                                         </div>
                                     </div>
@@ -140,7 +140,7 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-lg-8 col-12">
-                                        <label class="form-label">* Email address</label>
+                                        <label class="form-label">{{ renderText('email_address') }}</label>
                                         <div class="align-items-center">
                                             <input type="text" class="form-control text-uppercase" id="email" name="email"
                                                    v-model="eligibility.email" @input="watchAllowNext"
@@ -156,11 +156,7 @@
                                         <input type="checkbox" id="subscribe" @click="watchAllowNext" name="subscribe" value="1">
                                     </div>
                                     <div class="col-11 text-12" >
-                                        <label for="subscribe" style="line-height:20px;">I here by agree to subscribe to the plan selected in the online form
-                                            submitted by me, and to be bound by the First to 5G Campaign Terms and
-                                            Conditions available at <a target="_blank"
-                                                                       href="https://www.yes.my/tnc/ongoing-campaigns-tnc">www.yes.my/tnc/ongoing-campaigns-tnc</a>.
-                                        </label>
+                                        <label for="subscribe" style="line-height:20px;" v-html="renderText('term_and_condition1')"></label>
                                     </div>
                                 </div>
                                 <div class="row mt-2 ">
@@ -168,8 +164,7 @@
                                         <input type="checkbox" id="consent" @click="watchAllowNext" name="consent" value="1">
                                     </div>
                                     <div class="col-11 text-12">
-                                        <label for="consent" style="line-height:20px;">
-                                            I further give consent to YTLC to process my personal data in accordance with YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a> and also give consent to TOP to process my personal data in accordance with TOP Privacy Policy available at (<a href="http://yes.compasia.com/TOP_PRIVACY_POLICY.PDF" target="_blank">http://yes.compasia.com/TOP_PRIVACY_POLICY.PDF</a>) for the purposes of my agreement with TOP.
+                                        <label for="consent" style="line-height:20px;" v-html="renderText('term_and_condition1')">
                                         </label>
                                     </div>
                                 </div>
@@ -177,8 +172,7 @@
                                 <div class="row mt-2 mb-5">
                                     <div class="col-md-6">
                                         <button class="text-uppercase" @click="goNext"
-                                                :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">Check
-                                            Eligibility
+                                                :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">{{ renderText('check_eligibility') }}
                                         </button>
                                     </div>
                                     <div id="error" class="mt-3"></div>
@@ -195,6 +189,7 @@
     </section>
 
 </main>
+</div>
 <?php require_once('includes/footer.php'); ?>
 
 <script type="text/javascript">
@@ -648,6 +643,9 @@
                             $('#error').html("Sorry: " + uniqueArray.join(', ')+'.');
                         }
                     }
+                },
+                renderText: function(strID) {
+                    return elevate.renderText(strID, Elevate_lang);
                 },
                 goNext: function () {
                     var self = this;

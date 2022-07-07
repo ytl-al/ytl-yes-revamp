@@ -753,7 +753,7 @@
                              //self.redirectThankYou();
 							 errorMsg = "Payment Timeout.";
 							//  self.cancelElevateOrder(errorMsg);
-                            
+
                             clearTimeout(timeoutObj);
                             self.paymentTimeout = true;
                             self.checkPaymentStatusCount = 0;
@@ -1135,6 +1135,9 @@
                     selectPaymentMethod: function(paymentMethod) {
                         this.paymentInfo.paymentMethod = paymentMethod;
                         this.watchAllowSubmit();
+                    },
+                    renderText: function(strID) {
+                        return elevate.renderText(strID, Elevate_lang);
                     }
                 }
             });

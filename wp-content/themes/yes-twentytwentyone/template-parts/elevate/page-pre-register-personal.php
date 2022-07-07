@@ -801,6 +801,9 @@
                         });
 
                 },
+                renderText: function(strID) {
+                    return elevate.renderText(strID, Elevate_lang);
+                },
                 goNext: function () {
                     var self = this;
                     self.getStateCode(self.deliveryInfo.state);

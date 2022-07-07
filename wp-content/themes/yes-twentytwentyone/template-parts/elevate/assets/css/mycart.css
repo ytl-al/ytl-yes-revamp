@@ -33,7 +33,7 @@ main.site-main {
 }
 
 #main-vue {
-    height: calc(100% - 60px);
+    /*height: calc(100% - 60px);*/
 }
 
 .nav-container .language-drop .dropdown-toggle {
@@ -1160,8 +1160,8 @@ ul.wizard {
 	.thanks_bg{
 		background:none;
 	}
-	
-	
+
+
     #main-vue {
         height: auto;
     }
@@ -1257,7 +1257,7 @@ ul.wizard {
         padding-top: 0px;
         border-radius: 0px;
     }
-	
+
 	.thank-mb .mt-5{
 		margin-top:10px!important
 	}
@@ -1265,8 +1265,8 @@ ul.wizard {
 	    color: #2F3BF5 !important;
 	}
 	.thank-mb .text-12 {
-		 
-		font-size: 14px; 
+
+		font-size: 14px;
 	}
     .checkout-left {
         margin-top: 50px;

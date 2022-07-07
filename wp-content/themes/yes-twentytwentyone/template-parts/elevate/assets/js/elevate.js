@@ -47,6 +47,8 @@ const elevate = {
         return '_' + Math.random().toString(36).substr(2, 9);
     },
     initLocalStorage: function (productId, dc, duid, rc) {
+        var siteLang = document.getElementsByTagName('html')[0].getAttribute('lang');
+        if(!siteLang) siteLang = 'en-US';
         var elevateLocalStorageData = elevateLSData;
         var storageData = {};
         var expiryLength = expiryelevateCart * 60000;
@@ -64,7 +66,8 @@ const elevate = {
                         'dealer_id': duid,
                         'referral_code': rc
                     }
-                }
+                },
+                'siteLang': siteLang
             };
             elevateLocalStorageData = storageData;
         } else {
@@ -80,7 +83,8 @@ const elevate = {
                         'referral_code': rc
                     }
 
-                }
+                },
+                'siteLang': siteLang
             };
             elevateLocalStorageData = storageData;
         }
@@ -262,7 +266,23 @@ const elevate = {
     },
     eraseCookie: function (name) {
         document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    },
+    renderText: function(strID, objText) {
+        var siteLang = this.lsData.siteLang;
+        if(!siteLang) siteLang = 'en-US';
+        if (siteLang && objText) {
+            if (objText[siteLang][strID]) {
+                return objText[siteLang][strID];
+            }
+        }
+        return strID;
+    },
+    getCurrentLang: function (){
+        var siteLang = this.lsData.siteLang;
+        if(!siteLang) siteLang = 'en-US';
+        return siteLang;
     }
+
 };
 
 function buyElevatePlan(productId) {

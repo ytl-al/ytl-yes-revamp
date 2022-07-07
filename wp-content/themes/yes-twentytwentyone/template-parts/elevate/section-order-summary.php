@@ -1,10 +1,10 @@
 <div class="summary-box">
-    <h1 class="subtitle">Order summary</h1>
+    <h1 class="subtitle">{{ renderText('order_summary') }}</h1>
     <div class="">
         <div class="hr_line"></div>
         <div class="row cart_total">
             <div class="col-6 pt-2 pb-2">
-                <h3>DUE TODAY</h3>
+                <h3>{{ renderText('due_today') }}</h3>
             </div>
             <div class="col-6 pt-2 pb-2 text-end">
                 <h3>RM{{ formatPrice(parseFloat(orderSummary.orderDetail.total).toFixed(2)) }}</h3>
@@ -21,7 +21,7 @@
             </div>
 			 <div class="row mt-2 cart_bold">
                 <div class="col-6">
-                    <p>Tax(SST) + Rounding Adjustment</p>
+                    <p>{{ renderText('tax_rounding') }}</p>
                 </div>
                 <div class="col-6 text-end">
                     <p>RM{{ formatPrice((parseFloat(orderSummary.orderDetail.sstAmount) + parseFloat(orderSummary.orderDetail.roundingAdjustment)).toFixed(2)) }}</p>
@@ -30,16 +30,16 @@
             <div class="hr_line"></div>
             <div class="row mt-2 cart_bold">
                 <div class="col-6">
-                    <p>Monthly Charges</p>
+                    <p>{{ renderText('monthly_charges') }}</p>
                 </div>
                 <div class="col-6 text-end">
                     <p>RM{{ formatPrice(parseFloat(orderSummary.product.selected.plan.upFrontPayment).toFixed(2)) }}*</p>
                 </div>
-            </div> 
+            </div>
 			 <div class="hr_line"></div>
-			<div class="mt-2 note" style="font-size:12px; color:#999;"> 
-				*Price is not uncludsive of Sales & Service Tax(SST)
-			</div>  
+			<div class="mt-2 note" style="font-size:12px; color:#999;">
+                {{ renderText('price_uncludsive_of_sales') }}
+			</div>
     </div>
     </div>
 
@@ -49,19 +49,19 @@
             <div class="col-12">&nbsp;</div>
         </div>
         <div class="row">
-            <div class="col-6"><p class="large">Payment Duration</p></div>
+            <div class="col-6"><p class="large">{{ renderText('payment_duration') }}</p></div>
             <div class="col-6 text-end"><p class="large"><strong>{{ maybankIPP.ippInstallmentSelected.duration }} months</strong></p></div>
         </div>
         <div class="row">
-            <div class="col-6"><p class="large">Administration Payment</p></div>
+            <div class="col-6"><p class="large">{{ renderText('administration_payment') }}</p></div>
             <div class="col-6 text-end"><p class="large"><strong>RM{{ maybankIPP.ippInstallmentSelected.administrationPayment.toFixed(2) }}</strong></p></div>
         </div>
         <div class="row">
-            <div class="col-6"><p class="large">Payment Duration</p></div>
+            <div class="col-6"><p class="large">{{ renderText('payment_duration') }}</p></div>
             <div class="col-6 text-end"><p class="large"><strong>{{ maybankIPP.ippInstallmentSelected.monthlyInstallment.replace(' ', '') }} <sup>**</sup></strong></p></div>
         </div>
         <div class="row">
-            <div class="col-12 mt-3"><p class="text-danger"><sup>**</sup> The Monthly Instalment payment amount generated is just an estimate. To confirm the exact amount. Kindly get in touch with Maybank.</p></div>
+            <div class="col-12 mt-3"><p class="text-danger"><sup>**</sup> {{ renderText('payment_note') }}</p></div>
         </div>
     </template>
 </div>

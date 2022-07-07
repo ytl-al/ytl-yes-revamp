@@ -1,5 +1,5 @@
 <?php require_once 'includes/header.php' ?>
-
+<div id="main-vue">
 <header class="white-top">
     <div class="container">
         <div class="row">
@@ -7,11 +7,11 @@
                 <div class="mt-4">
                     <a href="/elevate/personal/" class="back-btn "><img
                                 src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
-                                alt=""> Back</a>
+                                alt=""> {{ renderText('back') }}</a>
                 </div>
             </div>
             <div class="col-lg-4 col-6 text-lg-center text-end">
-                <h1 class="title_checkout p-3">Check Out</h1>
+                <h1 class="title_checkout p-3">{{ renderText('check_out') }}</h1>
             </div>
             <div class="col-lg-4">
 
@@ -26,16 +26,16 @@
         <div class="container">
             <ul class="wizard">
                 <li ui-sref="firstStep" class="completed">
-                    <span>1. Eligibility check</span>
+                    <span>{{ renderText('elevate_step_1') }}</span>
                 </li>
                 <li ui-sref="secondStep" class="completed">
-                    <span>2. MyKAD verification</span>
+                    <span>{{ renderText('elevate_step_2') }}</span>
                 </li>
                 <li ui-sref="thirdStep" class="completed">
-                    <span>3. Delivery details</span>
+                    <span>{{ renderText('elevate_step_3') }}</span>
                 </li>
                 <li ui-sref="fourthStep" class="completed">
-                    <span>4. Review and order</span>
+                    <span>{{ renderText('elevate_step_4') }}</span>
                 </li>
             </ul>
         </div>
@@ -44,8 +44,8 @@
 
     <section id="cart-body"  style="display: none;">
         <div class="container p-lg-5 p-3" style="border: 0">
-            <div id="main-vue" >
-                <div class="subtitle">Review & Pay</div>
+            <div >
+                <div class="subtitle">{{ renderText('review_and_pay') }}</div>
                 <div class="row gx-5" >
                     <div class="col-lg-8 col-12">
 
@@ -58,8 +58,8 @@
                                     <div class="row mt-3">
                                         <div class="col-md-9">
                                             <div class="text-20">
-                                                <div class="subtitle2" style="margin-bottom: 0">{{orderSummary.product.selected.nameEN}}</div>
-                                                <div class="subtitle2">{{orderSummary.product.selected.plan.nameEN}}</div>
+                                                <div class="subtitle2" style="margin-bottom: 0">{{orderSummary.product.selected.name}}</div>
+                                                <div class="subtitle2">{{orderSummary.product.selected.plan.name}}</div>
                                             </div>
                                             <div class="hr_line"></div>
                                             <div class="text-bold">
@@ -155,6 +155,7 @@
     </section>
 
 </main>
+</div>
 <?php require_once('includes/footer.php'); ?>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -305,7 +306,9 @@
                     var self = this;
                     self.allowSubmit = true
                 },
-
+                renderText: function(strID) {
+                    return elevate.renderText(strID, Elevate_lang);
+                },
                 goNext: function () {
                     var self = this;
                     if(self.allowSubmit){

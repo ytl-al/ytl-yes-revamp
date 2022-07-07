@@ -673,14 +673,14 @@
                                 var paymentId = data.paymentId;
                                 var recheck = false;
                                 var closePaymentWindow = false;
-                                
+
                                 if (responseCode == 0) {                        // Payment success
                                     self.paymentResponse = data;
                                     closePaymentWindow = true;
                                     setTimeout(function() {
                                         self.updatePaymentStatus(2);
                                     }, 2000);
-                                } else if (responseCode == -1) {   
+                                } else if (responseCode == -1) {
                                     if (paymentId == 'Not Available') {         // Payment in progress
                                         recheck = true;
                                     } else if (paymentId != 'Not Available') {  // Payment failed
@@ -760,7 +760,7 @@
 							 errorMsg = "Payment Timeout.";
 							//  self.cancelElevateOrder(errorMsg);
 							 self.updatePaymentStatus(3);
-                            
+
                             clearTimeout(timeoutObj);
                             self.paymentTimeout = true;
                             self.checkPaymentStatusCount = 0;
@@ -1108,6 +1108,9 @@
                         }
                         self.watchAllowSubmit();
                     },
+                    renderText: function(strID) {
+                        return elevate.renderText(strID, Elevate_lang);
+                    },
                     watchAllowSubmit: function() {
                         var self = this;
                         var isFilled = true;
@@ -1153,11 +1156,11 @@
                         var self = this;
                         var eventType = 'purchase';
                         var pushData = {
-                            'transaction_id': $('#displayOrderNumber').val(), 
+                            'transaction_id': $('#displayOrderNumber').val(),
                             'currency': 'MYR',
                             'value': self.orderSummary.orderDetail.total,
                             'tax': self.orderSummary.orderDetail.sstAmount,
-                            'shipping': 0, 
+                            'shipping': 0,
                             'foreigner_deposit': 0,
                             'rounding_adjustment': self.orderSummary.orderDetail.roundingAdjustment,
                             'payment_method': self.paymentInfo.paymentMethod,
