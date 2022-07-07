@@ -83,19 +83,19 @@
     ol table th { background-color: #0EADF1; color: #FFF; }
     ol table td {}
 </style>
+<div id="main-vue">
 <header class="white-top">
-    <div class="container"
-    ">
+    <div class="container" >
     <div class="row">
         <div class="col-lg-4 col-6">
             <div class="mt-4">
                 <a href="/elevate/review/" class="back-btn "><img
                             src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
-                            alt=""> Back</a>
+                            alt=""> {{ renderText('back') }}</a>
             </div>
         </div>
         <div class="col-lg-4 col-6 text-lg-center text-end">
-            <h1 class="title_checkout p-3">Contract</h1>
+            <h1 class="title_checkout p-3">{{ renderText('contract') }}</h1>
         </div>
         <div class="col-lg-4">
 
@@ -106,14 +106,14 @@
 <main class="clearfix site-main">
     <section id="cart-body">
         <div class="container" style="border: 0">
-            <div id="main-vue">
+            <div >
                 <div class="p-lg-5">
                     <div class="mb-5 pad-mobile">
-                        <h2 class="subtitle mt-3 mb-3">Yes Infinite+ Contract Permissions</h2>
-                        <p>Read our contract conditions before proceeding.</p>
+                        <h2 class="subtitle mt-3 mb-3">{{ renderText('contract_permission') }}</h2>
+                        <p>{{ renderText('contract_label_1') }}</p>
                         <div class="mt-3 content">
                             <div class="contract_section">
-                                <h3>YES Terms and Condition</h3>
+                                <h3>{{ renderText('yes_terms') }}</h3>
                                 <div class="contract_term">
 
                                     <ol>
@@ -452,10 +452,10 @@
                                     </ol>
                                 </div>
                                 <div><label><input type="checkbox" id="term1" name="term1" @click="check_sign"
-                                                   value="agree" checked/> I Agree</label></div>
+                                                   value="agree" checked/> {{ renderText('customer_signature') }}</label></div>
                             </div>
                             <div class="contract_section">
-                                <h3>Terra Optimus Pearl Device Rental Agreement</h3>
+                                <h3>{{ renderText('terra_terms') }}</h3>
                                 <div class="contract_term">
                                     <ol>
                                         <li>
@@ -894,21 +894,21 @@
                         <div class="mt-3">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div>Customer Signature</div>
+                                    <div>{{ renderText('customer_signature') }}</div>
                                     <div style="height: 50px;"></div>
                                     <div><input type="text" @keyup="check_sign()" autocomplete="off"
                                                 v-model="contract_signed" class="form-control user_sign text-uppercase"
-                                                placeholder="Type your full name as per MyKAD" id="fname"/></div>
+                                                @placeholder="renderText('type_your_fullname')" id="fname"/></div>
                                     <div></div>
                                     <div class="mt-4">
                                         <a class="btn-signup" :class="allowSubmit?'btn-signed':'btn-signup'"
                                            @click="sign_contract"><i class="icon icon-signup2"></i> <span
-                                                    v-if="allowSubmit">Signed</span><span
-                                                    v-else>Fill and Sign</span></a>
+                                                    v-if="allowSubmit">{{ renderText('signed') }}</span><span
+                                                    v-else>{{ renderText('fill_and_signed') }}</span></a>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div>Date & Time</div>
+                                    <div>{{ renderText('date_time') }}</div>
                                     <div class="mt-3 text-bold text-uppercase" id="contract_time" style="display:none">
                                         <span>{{ time }}</span></div>
                                 </div>
@@ -919,7 +919,7 @@
                                 <div class="col-md-6">
                                     <button class="mt-3 pink-btn-disable text-uppercase w300"
                                             :class="allowSubmit?'pink-btn':'pink-btn-disable'" @click="goNext"
-                                            type="button">Submit Contract
+                                            type="button">{{ renderText('submit_contract') }}
                                     </button>
                                     <div id="error" class="mt-3"></div>
                                 </div>
@@ -934,6 +934,7 @@
     </section>
 
 </main>
+</div>
 <?php require_once('includes/footer.php'); ?>
 <script type="text/javascript">
     $(document).ready(function () {

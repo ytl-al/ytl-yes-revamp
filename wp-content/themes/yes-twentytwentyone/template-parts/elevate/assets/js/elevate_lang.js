@@ -8,6 +8,7 @@ Elevate_lang['en-US']['back_to_cart'] = 'Back to Cart';
 Elevate_lang['en-US']['back_to_infinite'] = 'Back to Infinite+';
 Elevate_lang['en-US']['continue'] = 'Continue';
 Elevate_lang['en-US']['help'] = 'Help';
+Elevate_lang['en-US']['to'] = 'To';
 Elevate_lang['en-US']['items'] = 'Items';
 Elevate_lang['en-US']['error'] = 'Error';
 Elevate_lang['en-US']['capacity'] = 'Capacity';
@@ -79,6 +80,21 @@ Elevate_lang['en-US']['state'] = '* State';
 Elevate_lang['en-US']['city'] = '* City';
 
 Elevate_lang['en-US']['review_and_pay'] = 'Review & Pay';
+Elevate_lang['en-US']['delivery_address'] = 'Delivery Address';
+Elevate_lang['en-US']['edit'] = 'Edit';
+
+Elevate_lang['en-US']['contract'] = 'Contract';
+Elevate_lang['en-US']['contract_permission'] = 'Yes Infinite+ Contract Permissions';
+Elevate_lang['en-US']['contract_label_1'] = 'Read our contract conditions before proceeding.';
+Elevate_lang['en-US']['yes_terms'] = 'YES Terms and Condition';
+Elevate_lang['en-US']['terra_terms'] = 'Terra Optimus Pearl Device Rental Agreement';
+Elevate_lang['en-US']['customer_signature'] = 'Customer Signature';
+Elevate_lang['en-US']['signed'] = 'Signed';
+Elevate_lang['en-US']['fill_and_signed'] = 'Fill and Sign';
+Elevate_lang['en-US']['date_time'] = 'Date & Time';
+Elevate_lang['en-US']['submit_contract'] = 'Submit Contract';
+Elevate_lang['en-US']['i_agree'] = 'I Agree';
+Elevate_lang['en-US']['type_your_fullname'] = 'Type your full name as per MyKAD';
 
 
 Elevate_lang['ms-MY']['capacity'] = 'Capacity';

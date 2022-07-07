@@ -1,4 +1,5 @@
 <?php require_once 'includes/header.php'; ?>
+    <div id="main-vue" style="display: none;">
     <header class="white-top">
         <div class="container">
             <div class="row">
@@ -20,7 +21,7 @@
     </header>
     <!-- Vue Wrapper STARTS -->
     <main class="clearfix site-main">
-    <div id="main-vue" style="display: none;">
+    <div >
         <!-- Banner Start -->
         <section id="grey-innerbanner">
             <div class="container">
@@ -203,6 +204,7 @@
         <!-- Body ENDS -->
     </div>
     </main>
+    </div>
     <!-- Vue Wrapper ENDS -->
 <?php require_once('includes/footer.php'); ?>
 

@@ -75,7 +75,7 @@
                         <div class="row mt-3">
                             <div class="col-md-12 col-12">
                                 <div class="border-box" style="width:100%; padding:20px;">
-                                    <div class="subtitle2">Plan</div>
+                                    <div class="subtitle2">{{ renderText('plan') }}</div>
                                     <div class="accordion-wrap hlv_3">
                                         <div class="accordion-header" @click="showPlanDetail()"> {{orderSummary.product.selected.plan.nameEN}} <i
                                                     class="icon icon_arrow_down"></i></div>
@@ -94,7 +94,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="row mt-3 item_info">
-                                        <div class="label text-bold">To: {{eligibility.name}}</div>
+                                        <div class="label text-bold">{{ renderText('to') }}: {{eligibility.name}}</div>
                                         <div class="content">
                                             <div>{{eligibility.email}}</div>
                                             <div>+60 {{eligibility.inphone}}</div>
@@ -102,7 +102,7 @@
                                     </div>
 
                                     <div class="row mt-3 item_info">
-                                        <div class="label">Delivery Address</div>
+                                        <div class="label">{{ renderText('delivery_address') }}</div>
                                         <div class="content"><span v-if="deliveryInfo.addressMore">{{deliveryInfo.addressMore}},</span> {{deliveryInfo.address}}, {{deliveryInfo.city}}, {{deliveryInfo.state}}, {{deliveryInfo.postcode}}, {{deliveryInfo.country}}
                                         </div>
                                     </div>
@@ -110,7 +110,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div style="float: right">
-                                        <a href="/elevate/personal" class="btn-edit">(Edit)</a>
+                                        <a href="/elevate/personal" class="btn-edit">({{ renderText('edit') }})</a>
                                     </div>
 
                                 </div>
