@@ -217,7 +217,7 @@ const ywos = {
         //     }
         // }
 
-        var siteLang = this.lsData.siteLang;
+        var siteLang = (this.lsData.siteLang) ? this.lsData.siteLang : 'en-US';
         if (siteLang && objText) {
             if (objText[strID] && objText[strID][siteLang]) {
                 return objText[strID][siteLang];

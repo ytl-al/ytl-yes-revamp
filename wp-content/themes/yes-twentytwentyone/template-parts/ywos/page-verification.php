@@ -8,16 +8,16 @@
         <div class="container">
             <ul class="wizard">
                 <li ui-sref="firstStep" class="completed">
-                    <span>1. Verification</span>
+                    <span>1. {{ renderText('strVerification') }}</span>
                 </li>
                 <li ui-sref="secondStep">
-                    <span>2. Delivery Details</span>
+                    <span>2. {{ renderText('strDelivery') }}</span>
                 </li>
                 <li ui-sref="thirdStep">
-                    <span>3. Review</span>
+                    <span>3. {{ renderText('strReview') }}</span>
                 </li>
                 <li ui-sref="fourthStep">
-                    <span>4. Payment Info</span>
+                    <span>4. {{ renderText('strPayment') }}</span>
                 </li>
             </ul>
         </div>
@@ -38,24 +38,24 @@
                 </div>
                 <form class="col-lg-7 col-12 order-lg-1 mt-4 mt-lg-0 needs-validation" @submit="verificationSubmit">
                     <div>
-                        <h1 class="d-none d-lg-block">Verification</h1>
-                        <p class="sub mb-4">Please fill in your ID information and mobile number to proceed</p>
+                        <h1 class="d-none d-lg-block">{{ renderText('strVerification') }}</h1>
+                        <p class="sub mb-4">{{ renderText('strFillIn') }}</p>
                         <div>
-                            <h2>ID Verification</h2>
+                            <h2>{{ renderText('strIDVerification') }}</h2>
                             <div class="row mb-4">
                                 <div class="col-lg-4 col-12 mb-3 mb-lg-0">
                                     <div class="form-group">
-                                        <label class="form-label" for="select-securityType">* ID Type</label>
+                                        <label class="form-label" for="select-securityType">* {{ renderText('strIDType') }}</label>
                                         <select class="form-select" id="select-securityType" v-model="customerDetails.securityType" @change="watchSecurityType" :disabled="!allowSecurityType">
-                                            <option value="" disabled="disabled" selected="selected">Select ID Type</option>
-                                            <option value="NRIC">NRIC</option>
-                                            <option value="PASSPORT">Passport</option>
+                                            <option value="" disabled="disabled" selected="selected">{{ renderText('strIDTypeSelect') }}</option>
+                                            <option value="NRIC">{{ renderText('strIDNRIC') }}</option>
+                                            <option value="PASSPORT">{{ renderText('strIDPassport') }}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-12">
                                     <div class="form-group">
-                                        <label class="form-label" for="input-securityId">* IC/Passport Number</label>
+                                        <label class="form-label" for="input-securityId">* {{ renderText('strIDNumber') }}</label>
                                         <div class="input-group align-items-center">
                                             <input type="text" class="form-control" id="input-securityId" v-model="customerDetails.securityId" @input="watchAllowNext" @keypress="checkInput(event)" maxlength="14" placeholder="" :disabled="!allowSecurityId" />
                                             <!-- <a href="#" data-bs-toggle="tooltip" data-bs-placement="right" class="ms-2" title="Tooltip text here"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/info-icon.png" /></a> -->
@@ -67,11 +67,11 @@
                         </div>
 
                         <div class="my-5">
-                            <h2>Mobile Verification</h2>
+                            <h2>{{ renderText('strMobileVerification') }}</h2>
                             <div class="row mb-4 align-items-center g-2">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label class="form-label" for="input-otpPhoneNumber"><strong>Step 1:</strong> Key in your mobile number</label>
+                                        <label class="form-label" for="input-otpPhoneNumber" v-html="renderText('strMobileStep1')"></label>
                                         <!-- <a href="#" data-bs-toggle="tooltip" data-bs-placement="right" class="ms-2" title="Tooltip text here"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/question-icon.png" /></a> -->
                                     </div>
                                 </div>
@@ -93,7 +93,7 @@
                             <div class="row mb-3 align-items-center g-2" v-if="!isLoggedIn">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label class="form-label" for="input-otpPassword"><strong>Step 2:</strong> Insert your TAC code and verify</label>
+                                        <label class="form-label" for="input-otpPassword" v-html="renderText('strMobileStep2')"></label>
                                         <!-- <a href="#" data-bs-toggle="tooltip" data-bs-placement="right" class="ms-2" title="Tooltip text here"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/question-icon.png" /></a> -->
                                     </div>
                                 </div>
@@ -102,7 +102,7 @@
                                         <input type="password" class="form-control" id="input-otpPassword" v-model="verify.input.otpPassword" @input="watchAllowNext" maxlength="6" placeholder="******" />
                                     </div>
                                 </div>
-                                <p class="mb-3 panel-otpMessage" style="display: none;"><span class="span-message">Your TAC code has been sent.</span> TAC code is valid for <span class="span-timer">5:00</span>.</p>
+                                <p class="mb-3 panel-otpMessage" style="display: none;"><span class="span-message">Your TAC code has been sent.</span> {{ renderText('strTacCodeValid')}} <span class="span-timer">5:00</span>.</p>
                                 <div class="invalid-feedback mt-1" id="em-otpPassword"></div>
                             </div>
                         </div>
@@ -111,13 +111,13 @@
                             <div class="col-lg-6 col-12">
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" value="" id="input-agree" v-model="isAgree" @change="watchAgree" />
-                                    <label class="form-check-label label-small" for="input-agree">I hereby agree to subscribe to the YES postpaid/prepaid service as indicated in the online form submitted by me. I further give consent to YTLC to process my personal data in accordance with the YTL Group Privacy Policy available at <a href="http://www.ytl.com/privacypolicy.asp" target="_blank">http://www.ytl.com/privacypolicy.asp</a>.</label>
+                                    <label class="form-check-label label-small" for="input-agree" v-html="renderText('strAgree')"></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-5 col-12">
-                                <button class="pink-btn" type="submit" :disabled="!allowNext">Next: Insert delivery details</button>
+                                <button class="pink-btn" type="submit" :disabled="!allowNext">{{ renderText('strBtnSubmit') }}</button>
                                 <div class="invalid-feedback mt-2" id="em-verification"></div>
                             </div>
                         </div>
@@ -162,7 +162,7 @@
                     },
                     addOn: null
                 },
-                requestOTPText: 'Request TAC',
+                requestOTPText: '',
                 verify: {
                     input: {
                         inputSecurityID: '#input-securityId',
@@ -186,7 +186,41 @@
                 isLoggedIn: false,
                 allowNext: false,
                 isAgree: false,
-                allowRequestOTP: true
+                allowRequestOTP: true,
+
+                apiLocale: 'EN', 
+                pageText: {
+                    strVerification: { 'en-US': 'Verification', 'ms-MY': 'Pengesahan', 'zh-hans': 'Verification' },
+                    strDelivery: { 'en-US': 'Delivery Details', 'ms-MY': 'Butiran Penghantaran', 'zh-hans': 'Delivery Details' },
+                    strReview: { 'en-US': 'Review', 'ms-MY': 'Semak', 'zh-hans': 'Review' },
+                    strPayment: { 'en-US': 'Payment Info', 'ms-MY': 'Maklumat Pembayaran', 'zh-hans': 'Payment Info' },
+                    
+                    strFillIn: { 'en-US': 'Please fill in your ID information and mobile number to proceed', 'ms-MY': 'Sila isikan maklumat ID dan nombor mudah alih untuk teruskan', 'zh-hans': 'Please fill in your ID information and mobile number to proceed' },
+                    
+                    strIDVerification: { 'en-US': 'ID Verification', 'ms-MY': 'Pengesahan ID', 'zh-hans': 'ID Verification' },
+                    strIDType: { 'en-US': 'ID Type', 'ms-MY': 'Jenis ID', 'zh-hans': 'ID Type' },
+                    strIDTypeSelect: { 'en-US': 'Select ID Type', 'ms-MY': 'Pilih jenis ID', 'zh-hans': 'Select ID Type' },
+                    strIDNRIC: { 'en-US': 'NRIC', 'ms-MY': 'Kad Pengenalan', 'zh-hans': 'NRIC' },
+                    strIDPassport: { 'en-US': 'Passport', 'ms-MY': 'Pasport', 'zh-hans': 'Passport' },
+                    strIDNumber: { 'en-US': 'IC/Passport Number', 'ms-MY': 'Nombor KP/Pasport', 'zh-hans': 'IC/Passport Number' },
+                    
+                    strMobileVerification: { 'en-US': 'Mobile Verification', 'ms-MY': 'Pengesahan Nombor Mudah Alih', 'zh-hans': 'Mobile Verification' },
+                    strMobileStep1: { 'en-US': '<strong>Step 1:</strong>: Key in your mobile number', 'ms-MY': '<strong>Langkah 1: Masukkan nombor telefon mudah alih anda', 'zh-hans': '<strong>Step 1:</strong>: Key in your mobile number' },
+                    strMobileStep2: { 'en-US': '<strong>Step 2</strong>: Insert your TAC code and verify', 'ms-MY': '<strong>Langkah 2</strong>: Masukkan TAC dan sahkan', 'zh-hans': '<strong>Step 2</strong>: Insert your TAC code and verify' },
+                    strRequestTAC: { 'en-US': 'Request TAC', 'ms-MY': 'Minta TAC', 'zh-hans': 'Request TAC' },
+                    strResendTAC: { 'en-US': 'Resend TAC', 'ms-MY': 'Minta Semula TAC', 'zh-hans': 'Resend TAC' },
+                    strTacCodeValid: { 'en-US': 'TAC code is valid for', 'ms-MY': 'Kod TAC sah untuk', 'zh-hans': 'TAC code is valid for' },
+
+                    strAgree: { 'en-US': 'I hereby agree to subscribe to the YES postpaid/prepaid service as indicated in the online form submitted by me. I further give consent to YTLC to process my personal data in accordance with the YTL Group Privacy Policy available at <a href="http://www.ytl.com/privacypolicy.asp" target="_blank">http://www.ytl.com/privacypolicy.asp</a>.', 'ms-MY': 'Saya dengan ini bersetuju untuk melanggan pilihan Pelan Perkhidmatan Pascabayar/Prabayar dalam borang dalam talian yang saya hantar. <br />Saya selanjutnya memberi kebenaran kepada YTLC untuk memproses data peribadi saya mengikut Polisi Privasi Kumpulan YTL yang terkandung di <a href="http://www.ytl.com/privacypolicy.asp" target="_blank">http://www.ytl.com/privacypolicy.asp</a>.', 'zh-hans': 'I hereby agree to subscribe to the YES postpaid/prepaid service as indicated in the online form submitted by me. I further give consent to YTLC to process my personal data in accordance with the YTL Group Privacy Policy available at <a href="http://www.ytl.com/privacypolicy.asp" target="_blank">http://www.ytl.com/privacypolicy.asp</a>.' },
+
+                    strBtnSubmit: { 'en-US': 'Next: Insert delivery details', 'ms-MY': 'Seterusnya: Masukkan Butiran Penghantaran', 'zh-hans': 'Next: Insert delivery details' }, 
+                    
+                    strErrorNRIC: { 'en-US': 'Please insert valid NRIC number', 'ms-MY': 'Sila masukkan nombor kad pengenalan yang sah', 'zh-hans': 'Please insert valid NRIC number' },
+                    strErrorPhoneNumber: { 'en-US': 'Please insert valid phone number', 'ms-MY': 'Sila masukkan nombor telefon bimbit yang sah', 'zh-hans': 'Please insert valid phone number' }, 
+
+                    errorValidating: { 'en-US': "There's an error in validating your eligibility. Please try again later.", 'ms-MY': 'Ralat ketika mengesahkan kelayakan anda. Sila cuba lagi kemudian.', 'zh-hans': "There's an error in validating your eligibility. Please try again later." }, 
+                    errorEligibilityCheck: { 'en-US': 'Customer eligibility check failed: ', 'ms-MY': 'Pengesahan kelayakan pelanggan gagal: ', 'zh-hans': 'Customer eligibility check failed: ' }
+                }
             },
             mounted: function() {},
             created: function() {
@@ -221,6 +255,11 @@
                             self.isAgree = true;
                             self.watchAllowNext();
                         }
+
+                        self.requestOTPText = self.renderText('strRequestTAC');
+
+                        self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
+
                         toggleOverlay(false);
                     } else {
                         ywos.redirectToPage('cart');
@@ -242,9 +281,9 @@
                             var data = response.data;
                             var errorMsg = '';
                             if (error.response.status == 500 || error.response.status == 503) {
-                                errorMsg = "There's an error in validating your eligibility. Please try again later.";
+                                errorMsg = self.renderText('errorValidating');
                             } else {
-                                errorMsg = 'Customer eligibility check failed: ' + data.message;
+                                errorMsg = self.renderText('errorEligibilityCheck') + data.message;
                             }
                             
                             $('.panel-otpMessage').hide();
@@ -259,7 +298,7 @@
                         var pregTest = self.customerDetails.securityId.match(/^(\d{12})+$/);
                         if (pregTest == null) {
                             toggleOverlay(false);
-                            $(self.verify.errorMessage.securityID).html('Please insert valid NRIC number').show();
+                            $(self.verify.errorMessage.securityID).html(self.renderText('strErrorNRIC')).show();
                             $(self.verify.input.inputSecurityID).focus();
                             $(self.verify.input.inputSecurityID).on('keydown', function() {
                                 $(self.verify.errorMessage.securityID).hide().html('');
@@ -316,7 +355,7 @@
                         var inputPhoneNumber = self.verify.input.inputPhoneNumber;
                         var emVerifyPhoneNumber = self.verify.errorMessage.phoneNumber;
 
-                        $(emVerifyPhoneNumber).html('Please insert valid phone number').show();
+                        $(emVerifyPhoneNumber).html(self.renderText('strErrorPhoneNumber')).show();
                         $(inputPhoneNumber).focus();
                         $(inputPhoneNumber).on('keydown', function() {
                             $(emVerifyPhoneNumber).hide().html('');
@@ -344,14 +383,15 @@
                         if (timer == 0) {
                             clearInterval(interval);
                             self.allowRequestOTP = true;
-                            self.requestOTPText = 'Resend TAC'
+                            self.requestOTPText = self.renderText('strResendTAC')
                         }
                     }, 1000);
                 },
                 ajaxGenerateOTPForGuestLogin: function() {
                     var self = this;
                     axios.post(apiEndpointURL + '/generate-otp-for-guest-login', {
-                            'phone_number': '0' + self.verify.input.phoneNumber
+                            'phone_number': '0' + self.verify.input.phoneNumber,
+                            'locale': self.apiLocale
                         })
                         .then((response) => {
                             $('.panel-otpMessage').show();
@@ -364,11 +404,10 @@
                             var data = response.data;
                             var errorMsg = '';
                             if (error.response.status == 500 || error.response.status == 503) {
-                                errorMsg = "<p>There's an error in generating your TAC code.</p>";
+                                errorMsg = "<p>There's an error in generating your TAC code.<br /> Please try again later.</p>";
                             } else {
                                 errorMsg = data.message
                             }
-                            errorMsg += '<br /> Please try again later.';
                             
                             $(self.verify.errorMessage.phoneNumber).html(errorMsg).show();
 
@@ -458,6 +497,9 @@
                     } else {
                         self.allowNext = false;
                     }
+                },
+                renderText: function(strID) {
+                    return ywos.renderText(strID, this.pageText);
                 }
             }
         });

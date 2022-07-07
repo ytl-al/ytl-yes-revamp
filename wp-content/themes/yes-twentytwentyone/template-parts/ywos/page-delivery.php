@@ -8,16 +8,16 @@
         <div class="container">
             <ul class="wizard">
                 <li ui-sref="firstStep" class="completed">
-                    <span>1. Verification</span>
+                    <span>1. {{ renderText('strVerification') }}</span>
                 </li>
                 <li ui-sref="secondStep" class="completed">
-                    <span>2. Delivery Details</span>
+                    <span>2. {{ renderText('strDelivery') }}</span>
                 </li>
                 <li ui-sref="thirdStep">
-                    <span>3. Review</span>
+                    <span>3. {{ renderText('strReview') }}</span>
                 </li>
                 <li ui-sref="fourthStep">
-                    <span>4. Payment Info</span>
+                    <span>4. {{ renderText('strPayment') }}</span>
                 </li>
             </ul>
         </div>
@@ -29,8 +29,8 @@
         <div class="container p-lg-5 p-3">
             <div class="row d-lg-none mb-3">
                 <div class="col">
-                    <h1>Delivery Details</h1>
-                    <p class="sub mb-0">Delivery only available in Malaysia</p>
+                    <h1>{{ renderText('strDelivery') }}</h1>
+                    <p class="sub mb-0">{{ renderText('strDeliverySub') }}</p>
                 </div>
             </div>
             <div class="row gx-5" v-if="pageValid">
@@ -40,12 +40,12 @@
                         <div class="row">
                             <div class="col">
                                 <div class="referral-box">
-                                    <input type="text" class="form-control referral" id="input-referralCode" maxlength="11" v-model="referralCode.code" placeholder="Enter referral code (if any)" @keypress="checkIsNumber(event)" />
+                                    <input type="text" class="form-control referral" id="input-referralCode" maxlength="11" v-model="referralCode.code" :placeholder="renderText('placeholderReferral')" @keypress="checkIsNumber(event)" />
                                     <img src="/wp-content/uploads/2022/02/referral-tick.png" class="referral-check" v-if="referralCode.verified" />
                                 </div>
                                 <div class="invalid-feedback mt-1" id="em-referralCode"></div>
                                 <div class="valid-feedback mt-1" id="sm-referralCode"></div>
-                                <button type="button" class="btn-sm pink-btn mt-2 w-100" v-on:click="verifyReferralCode">Verify Referral Code</button>
+                                <button type="button" class="btn-sm pink-btn mt-2 w-100" v-on:click="verifyReferralCode">{{ renderText('strBtnReferral') }}</button>
                             </div>
                         </div>
                     </div>
@@ -55,12 +55,12 @@
                         <div class="col-lg-7">
                             <div class="layer-delivery">
                                 <div class="d-none d-lg-block">
-                                    <h1>Delivery Details</h1>
-                                    <p class="sub mb-4">Delivery only available in Malaysia</p>
+                                    <h1>{{ renderText('strDelivery') }}</h1>
+                                    <p class="sub mb-4">{{ renderText('strDeliverySub') }}</p>
                                 </div>
 
                                 <div class="form-group mb-4">
-                                    <label class="form-label" for="input-name">* Full Name (as per IC/ Passport)</label>
+                                    <label class="form-label" for="input-name">* {{ renderText('labelFullName') }}</label>
                                     <div class="input-group align-items-center">
                                         <input type="text" class="form-control" id="input-name" name="name" v-model="deliveryInfo.name" @input="watchAllowNext" placeholder="" required />
                                         <!-- <a href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="right" class="ms-2" title="Tooltip text here"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/info-icon.png" /></a> -->
@@ -70,7 +70,7 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="form-group mb-4">
-                                            <label class="form-label" for="input-dob">* Date of Birth</label>
+                                            <label class="form-label" for="input-dob">* {{ renderText('labelDOB') }}</label>
                                             <div class="input-group date align-items-center">
                                                 <input type="text" class="form-control input-datepicker" id="input-dob" name="dob" v-model="deliveryInfo.dob" @input="watchAllowNext" placeholder="" :disabled="!allowDOB" required />
                                                 <!-- <span class="input-group-text" id="addon-wrapping">@</span> -->
@@ -80,35 +80,35 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group mb-4">
-                                            <label class="form-label" for="select-gender">* Gender</label>
+                                            <label class="form-label" for="select-gender">* {{ renderText('labelGender') }}</label>
                                             <div class="input-group align-items-center">
                                                 <select class="form-select" id="select-gender" name="gender" data-live-search="true" v-model="deliveryInfo.gender" @change="watchAllowNext" :disabled="!allowGender" required>
-                                                    <option value="" selected="selected" disabled="disabled">Select Gender</option>
-                                                    <option value="MALE">Male</option>
-                                                    <option value="FEMALE">Female</option>
+                                                    <option value="" selected="selected" disabled="disabled">{{ renderText('selectGender') }}</option>
+                                                    <option value="MALE">{{ renderText('selectGenderMale') }}</option>
+                                                    <option value="FEMALE">{{ renderText('selectGenderFemale') }}</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group mb-4" id="field-email">
-                                    <label class="form-label" for="input-email">* Email address</label>
+                                    <label class="form-label" for="input-email">* {{ renderText('labelEmail') }}</label>
                                     <div class="input-group align-items-center">
                                         <input type="email" class="form-control" id="input-email" name="email" v-model="deliveryInfo.email" @input="watchAllowNext" placeholder="" required />
                                         <!-- <a href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="right" class="ms-2" title="Tooltip text here"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/info-icon.png" /></a> -->
-                                        <p class="info">Email is required for receipt and order confirmation</p>
+                                        <p class="info">{{ renderText('infoEmail') }}</p>
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-email"></div>
                                 </div>
                                 <div class="form-group mb-4" id="field-emailConfirm">
-                                    <label class="form-label" for="input-emailConfirm">* Confirm email address</label>
+                                    <label class="form-label" for="input-emailConfirm">* {{ renderText('labelEmailConfirm') }}</label>
                                     <div class="input-group align-items-center">
                                         <input type="email" class="form-control" id="input-emailConfirm" name="emailConfirm" v-model="deliveryInfo.emailConfirm" @input="watchAllowNext" placeholder="" required />
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-emailConfirm"></div>
                                 </div>
                                 <div class="form-group mb-4">
-                                    <label class="form-label" for="input-address">* Address</label>
+                                    <label class="form-label" for="input-address">* {{ renderText('labelAddress') }}</label>
                                     <!-- <a href="#" class="grey-link float-end">Can't find your address?</a> -->
                                     <div class="input-group align-items-center">
                                         <input type="text" class="form-control" id="input-address" name="address" v-model="deliveryInfo.address" @input="watchAllowNext" placeholder="" required />
@@ -116,7 +116,7 @@
                                     <div class="invalid-feedback mt-1" id="em-address"></div>
                                 </div>
                                 <div class="form-group mb-4">
-                                    <label class="form-label" for="input-addressMore">Apartment, Office, House, Floor number (optional)</label>
+                                    <label class="form-label" for="input-addressMore">{{ renderText('labelAddressOptional') }}</label>
                                     <div class="input-group align-items-center">
                                         <input type="text" class="form-control" id="input-addressMore" name="addressMore" v-model="deliveryInfo.addressMore" placeholder="" />
                                     </div>
@@ -125,7 +125,7 @@
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <div class="form-group mb-4">
-                                            <label class="form-label" for="input-postcode">* Postcode</label>
+                                            <label class="form-label" for="input-postcode">* {{ renderText('labelPostcode') }}</label>
                                             <div class="input-group align-items-center">
                                                 <input type="text" class="form-control" id="input-postcode" name="postcode" maxlength="5" v-model="deliveryInfo.postcode" @input="watchAllowNext" @keypress="checkIsNumber(event)" placeholder="" required />
                                             </div>
@@ -134,10 +134,10 @@
                                     </div>
                                     <div class="col-lg-8">
                                         <div class="form-group mb-4">
-                                            <label class="form-label" for="select-state">* State</label>
+                                            <label class="form-label" for="select-state">* {{ renderText('labelState') }}</label>
                                             <div class="input-group align-items-center">
                                                 <select class="form-select" id="select-state" name="state" data-live-search="true" v-model="deliveryInfo.state" @change="watchChangeState" required>
-                                                    <option value="" selected="selected" disabled="disabled">Select State</option>
+                                                    <option value="" selected="selected" disabled="disabled">{{ renderText('selectState') }}</option>
                                                     <option v-for="state in selectOptions.states" :value="state.value">{{ state.name }}</option>
                                                 </select>
                                             </div>
@@ -146,7 +146,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group mb-4">
-                                    <label class="form-label">* City</label>
+                                    <label class="form-label">* {{ renderText('labelCity') }}</label>
                                     <div class="input-group align-items-center">
                                         <select class="form-select" id="select-city" name="city" data-live-search="true" v-model="deliveryInfo.city" @change="watchAllowNext" :disabled="!allowSelectCity" required>
                                             <option v-for="city in selectOptions.cities" :value="city.value">{{ city.name }}</option>
@@ -165,8 +165,8 @@
                                 <div class="address-accuracy mb-4">
                                     <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/info-red-icon.png" alt="" class="float-start me-3">
                                     <div class="ps-5">
-                                        <h1>Address Accuracy</h1>
-                                        <p>Address that are entered incorrectly may delay your order, so please double-check for errors.</p>
+                                        <h1>{{ renderText('strAddressNoteTitle') }}</h1>
+                                        <p>{{ renderText('strAddressNote') }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -252,7 +252,7 @@
 
                     <div class="row">
                         <div class="col-12">
-                            <input type="submit" class="pink-btn" value="Next: Review & Pay" :disabled="!allowSubmit" />
+                            <input type="submit" class="pink-btn" :value="renderText('strBtnSubmit')" :disabled="!allowSubmit" />
                         </div>
                     </div>
                 </form>
@@ -265,14 +265,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h5 class="modal-title" id="exampleModalLabel">Referral Code</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ renderText('modalRCTitle') }}</h5>
                 </div>
                 <div class="modal-body text-center">
-                    <p>Would you like to continue without a referral code?</p>
+                    <p>{{ renderText('modalRCEmpty') }}</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" v-on:click="alertReferral">No</button>
-                    <button type="button" class="btn btn-primary" v-on:click="alertReferral(false)">Proceed without referral code</button>
+                    <button type="button" class="btn btn-secondary" v-on:click="alertReferral">{{ renderText('modalRCNo') }}</button>
+                    <button type="button" class="btn btn-primary" v-on:click="alertReferral(false)">{{ renderText('modalRCContinue') }}</button>
                 </div>
             </div>
         </div>
@@ -282,14 +282,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h5 class="modal-title" id="exampleModalLabel">Referral Code</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ renderText('modalRCTitle') }}</h5>
                 </div>
                 <div class="modal-body text-center">
-                    <p>Please verify the referral code</p>
+                    <p>{{ renderText('modalRCVerify') }}</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" v-on:click="alertReferral">Ok</button>
-                    <button type="button" class="btn btn-primary" v-on:click="alertReferral(false)">Proceed without referral code</button>
+                    <button type="button" class="btn btn-secondary" v-on:click="alertReferral">OK</button>
+                    <button type="button" class="btn btn-primary" v-on:click="alertReferral(false)">{{ renderText('modalRCContinue') }}</button>
                 </div>
             </div>
         </div>
@@ -299,7 +299,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Eligibility Check</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ renderText('modalEligibilityTitle') }}</h5>
                 </div>
                 <div class="modal-body text-center">
                     <p class="panel-errMsg"></p>
@@ -508,7 +508,49 @@
                 allowSelectCity: false,
                 allowSubmit: false,
                 allowDOB: false, 
-                allowGender: false 
+                allowGender: false, 
+
+                apiLocale: 'EN', 
+                pageText: {
+                    strVerification: { 'en-US': 'Verification', 'ms-MY': 'Pengesahan', 'zh-hans': 'Verification' },
+                    strDelivery: { 'en-US': 'Delivery Details', 'ms-MY': 'Butiran Penghantaran', 'zh-hans': 'Delivery Details' },
+                    strReview: { 'en-US': 'Review', 'ms-MY': 'Semak', 'zh-hans': 'Review' },
+                    strPayment: { 'en-US': 'Payment Info', 'ms-MY': 'Maklumat Pembayaran', 'zh-hans': 'Payment Info' },
+
+                    strDeliverySub: { 'en-US': 'Delivery only available in Malaysia', 'ms-MY': 'Penghantaran hanya untuk di Malaysia', 'zh-hans': 'Delivery only available in Malaysia' },
+
+                    labelFullName: { 'en-US': 'Full Name (as per IC/Passport)', 'ms-MY': 'Nama Penuh (seperti di KP/Pasport)', 'zh-hans': 'Full Name (as per IC/Passport)' },
+                    labelDOB: { 'en-US': 'Date of Birth', 'ms-MY': 'Tarikh Lahir', 'zh-hans': 'Date of Birth' },
+                    labelGender: { 'en-US': 'Gender', 'ms-MY': 'Jantina', 'zh-hans': 'Gender' },
+                    selectGender: { 'en-US': 'Select Gender', 'ms-MY': 'Pilih Jantina', 'zh-hans': 'Select Gender' },
+                    selectGenderMale: { 'en-US': 'Male', 'ms-MY': 'Lelaki', 'zh-hans': 'Male' },
+                    selectGenderFemale: { 'en-US': 'Female', 'ms-MY': 'Perempuan', 'zh-hans': 'Female' },
+                    labelEmail: { 'en-US': 'Email address', 'ms-MY': 'Alamat emel', 'zh-hans': 'Email address' },
+                    infoEmail: { 'en-US': 'Email is required for receipt and order confirmation', 'ms-MY': 'Emel diperlukan untuk resit dan pengesahan pesanan', 'zh-hans': 'Email is required for receipt and order confirmation' },
+                    labelEmailConfirm: { 'en-US': 'Confirm email address', 'ms-MY': 'Sahkan alamat emel', 'zh-hans': 'Confirm email address' },
+                    errorEmailConfirm: { 'en-US': 'Confirm email address must be same as Email address.', 'ms-MY': 'Pengesahan alamat emel harus sama dengan alamat emel.', 'zh-hans': 'Confirm email address must be same as Email address.' }, 
+                    labelAddress: { 'en-US': 'Address', 'ms-MY': 'Alamat', 'zh-hans': 'Address' },
+                    labelAddressOptional: { 'en-US': 'Apartment, Office, House, Floor number (optional)', 'ms-MY': 'Pangsapuri, Pejabat, Rumah, Nombor tingkat (tidak wajib)', 'zh-hans': 'Apartment, Office, House, Floor number (optional)' },
+                    labelPostcode: { 'en-US': 'Postcode', 'ms-MY': 'Poskod', 'zh-hans': 'Postcode' },
+                    labelState: { 'en-US': 'State', 'ms-MY': 'Negeri', 'zh-hans': 'State' },
+                    selectState: { 'en-US': 'Select State', 'ms-MY': 'Pilih Negeri', 'zh-hans': 'Select State' },
+                    labelCity: { 'en-US': 'City', 'ms-MY': 'Bandar', 'zh-hans': 'City' },
+                    strAddressNoteTitle: { 'en-US': 'Address Accuracy', 'ms-MY': 'Ketepatan Alamat', 'zh-hans': 'Address Accuracy' },
+                    strAddressNote: { 'en-US': 'Address that are entered incorrectly may delay your order, so please double-check for errors.', 'ms-MY': 'Alamat yang dimasukkan dengan tidak tepat mungkin melengahkan penghantaran anda, jadi sila semak untuk mengelakkan kesilapan.', 'zh-hans': 'Address that are entered incorrectly may delay your order, so please double-check for errors.' },
+
+                    strBtnSubmit: { 'en-US': 'Next: Review & Pay', 'ms-MY': 'Seterusnya: Semak & Bayar', 'zh-hans': 'Next: Review & Pay' },
+
+                    placeholderReferral: { 'en-US': 'Enter referral code (if any)', 'ms-MY': 'Masukkan kod rujukan (jika ada)', 'zh-hans': 'Enter referral code (if any)' },
+                    errorReferralCode: { 'en-US': 'Please fill in the referral code.', 'ms-MY': 'Sila masukkan kod rujukan.', 'zh-hans': 'Please fill in the referral code.' }, 
+                    strBtnReferral: { 'en-US': 'Verify Referral Code', 'ms-MY': 'Sahkan Kod Rujukan', 'zh-hans': 'Verify Referral Code' },
+
+                    modalRCTitle: { 'en-US': 'Referral Code', 'ms-MY': 'Kod Rujukan', 'zh-hans': 'Referral Code' },
+                    modalRCEmpty: { 'en-US': 'Would you like to continue without a referral code?', 'ms-MY': 'Teruskan tanpa kod rujukan?', 'zh-hans': 'Would you like to continue without a referral code?' },
+                    modalRCNo: { 'en-US': 'No', 'ms-MY': 'Tidak', 'zh-hans': 'No' },
+                    modalRCContinue: { 'en-US': 'Proceed without referral code', 'ms-MY': 'Teruskan tanpa kod rujukan', 'zh-hans': 'Proceed without referral code' },
+                    modalRCVerify: { 'en-US': 'Please verify the referral code', 'ms-MY': 'Sila sahkan kod rujukan', 'zh-hans': 'Please verify the referral code' },
+                    modalEligibilityTitle: { 'en-US': 'Eligibility Check', 'ms-MY': 'Pengesahan Kelayakan', 'zh-hans': 'Eligibility Check' },
+                }
             },
             mounted: function() {},
             created: function() {
@@ -524,6 +566,7 @@
                         self.pageValid = true;
                         self.orderSummary = ywos.lsData.meta.orderSummary;
                         self.updateFields();
+                        self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
                         toggleOverlay(false);
 
                         setTimeout(function() {
@@ -686,7 +729,7 @@
                     if (email != emailConfirm) {
                         var inputEmailConfirm = self.input.emailConfirm.field;
                         var emEmailConfirm = self.input.emailConfirm.errorMessage;
-                        $(emEmailConfirm).html('Confirm email address must be same as Email address.').show();
+                        $(emEmailConfirm).html(self.renderText('errorEmailConfirm')).show();
                         $(inputEmailConfirm).focus();
                         $(inputEmailConfirm).on('keydown', function() {
                             $(emEmailConfirm).hide().html('');
@@ -729,7 +772,8 @@
                     var params = {
                         'referral_code': self.referralCode.code,
                         'security_type': self.deliveryInfo.securityType,
-                        'security_id': self.deliveryInfo.securityId
+                        'security_id': self.deliveryInfo.securityId,
+                        'locale': self.apiLocale
                     };
                     axios.post(apiEndpointURL + '/verify-referral-code', params)
                         .then((response) => {
@@ -767,7 +811,7 @@
                         self.validateReferralCodeField('Please verify your identity in verification page.');
                         toggleOverlay(false);
                     } else if (self.referralCode.code.trim() == '') {
-                        self.validateReferralCodeField('Please fill in the referral code.');
+                        self.validateReferralCodeField(self.renderText('errorReferralCode'));
                         toggleOverlay(false);
                     } else {
                         self.ajaxVerifyReferralCode();
@@ -832,7 +876,8 @@
                         'country': self.deliveryInfo.country,
                         'plan_bundle_id': self.orderSummary.plan.mobilePlanId,
                         'plan_type': self.orderSummary.plan.planType,
-                        'plan_name': self.orderSummary.plan.planName
+                        'plan_name': self.orderSummary.plan.planName,
+                        'locale': self.apiLocale
                     };
                     axios.post(apiEndpointURL + '/validate-customer-eligibilities', params)
                         .then((response) => {
@@ -920,6 +965,9 @@
                     }
                 },
                 watchBillingDifferent: function() {},
+                renderText: function(strID) {
+                    return ywos.renderText(strID, this.pageText);
+                }
             }
         });
     });

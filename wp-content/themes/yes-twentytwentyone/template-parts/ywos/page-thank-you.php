@@ -185,23 +185,23 @@
                 <div class="col-12 pb-4">
                     <div class="row">
                         <div class="col-lg-5 col-12 offset-lg-6 col-orderResponse">
-                            <h1>Thank you!</h1>
+                            <h1>{{ renderText('strThankYou') }}</h1>
                             <template v-if="paymentStatus == 2">
                             <p class="mb-3">
-                                Order Number <br />
+                                {{ renderText('strOrderNumber') }} <br />
                                 <a href="javascript:void(0)" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br />
-                                Placed on {{ purchaseInfo.orderCreationDate }} <br /> <br />
-                                We have received your order and are waiting for payment clearance. You will receive confirmation email once payment is cleared.
+                                {{ renderText('strPlacedOn') }} {{ purchaseInfo.orderCreationDate }} <br /> <br />
+                                {{ renderText('strOrderPaymentPending') }}
                             </p>
                             </template>
                             <template v-else>
                             <p class="mb-3">
-                                Order Number <br />
+                                {{ renderText('strOrderNumber') }} <br />
                                 <!-- <a v-bind:href="'/ywos/thank-you/?order_display_id=' + purchaseInfo.displayOrderNumber" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br /> -->
                                 <a href="javascript:void(0)" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br />
-                                Placed on {{ purchaseInfo.orderCreationDate }} <br />
+                                {{ renderText('strPlacedOn') }} {{ purchaseInfo.orderCreationDate }} <br />
                                 <!-- Estimated Delivery: {{ purchaseInfo.deliveryFromDate }} - {{ purchaseInfo.deliveryToDate }} <br /><br /> -->
-                                A summary of your order has been sent to your email
+                                {{ renderText('strOrderSummary') }}
                             </p>
                             </template>
                             
@@ -262,6 +262,14 @@
                     deliveryFromDate: '',
                     deliveryToDate: '',
                     orderCreationDate: ''
+                },
+
+                pageText: {
+                    strThankYou: { 'en-US': 'Thank you!', 'ms-MY': 'Terima kasih!', 'zh-hans': 'Thank you!' },
+                    strOrderNumber: { 'en-US': 'Order Number', 'ms-MY': 'Nombor Pesanan', 'zh-hans': 'Order Number' },
+                    strPlacedOn: { 'en-US': 'Placed on', 'ms-MY': 'Dipesan pada', 'zh-hans': 'Placed on' },
+                    strOrderSummary: { 'en-US': 'A summary of your order has been sent to your email', 'ms-MY': 'Ringkasan pesanan telah dihantar ke emel anda', 'zh-hans': 'A summary of your order has been sent to your email' },
+                    strOrderPaymentPending: { 'en-US': 'We have received your order and are waiting for payment clearance. You will receive confirmation email once payment is cleared.', 'ms-MY': 'Kami telah menerima pesanan anda dan menunggu pelepasan bayaran yang telah dibuat. Anda akan memerima emel pengesahan setelah pembayaran teleh diterima.', 'zh-hans': 'We have received your order and are waiting for payment clearance. You will receive confirmation email once payment is cleared.' },
                 }
             },
             mounted: function() {},
@@ -363,6 +371,9 @@
                     ywos.lsData.meta.purchaseInfo = this.purchaseInfo;
                     ywos.lsData.meta.purchaseCompleted = true;
                     ywos.updateYWOSLSData();
+                },
+                renderText: function(strID) {
+                    return ywos.renderText(strID, this.pageText);
                 }
             }
         });

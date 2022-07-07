@@ -472,7 +472,7 @@
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#cart-accordion">
                             <div class="accordion-body">
                                 <div v-if="packageInfos.slice(4).length">
-                                    <h1>More Benefits</h1>
+                                    <h1>{{ renderText('summaryMoreBenefits') }}</h1>
                                     <div class="row mb-4">
                                         <div class="col-lg-6 mb-3" v-for="(packageInfo, index) in packageInfos.slice(4)"><span class="span-itemList">{{ packageInfo }}</span></div>
                                     </div>
@@ -671,7 +671,7 @@
                                             <label class="form-check-label" for="flexCheckDefault">Keep me logged in</label>
                                         </div> -->
                                         <div class="row">
-                                            <div class="col-lg-8 offset-lg-2 mb-lg-0 mb-2 text-center">
+                                            <div class="col-lg-10 offset-lg-1 mb-lg-0 mb-2 text-center">
                                                 <input type="submit" :value="renderText('checkoutLogin')" class="pink-btn d-block mb-3 w-100" :disabled="!login.submitButton.allowOtp" />
                                                 <!-- <a href="https://selfcare.yes.my/myselfcare/doForgotPasswordLink.do" class="forgotpassword">FORGOT PASSWORD?</a> -->
                                             </div>
@@ -696,7 +696,7 @@
                                             <label class="form-check-label" for="flexCheckDefault">Keep me logged in</label>
                                         </div> -->
                                         <div class="row">
-                                            <div class="col-lg-8 offset-lg-2 mb-lg-0 mb-2 text-center">
+                                            <div class="col-lg-10 offset-lg-1 mb-lg-0 mb-2 text-center">
                                                 <input type="submit" :value="renderText('checkoutLogin')" class="pink-btn d-block mb-3 w-100" :disabled="!login.submitButton.allowBasic" />
                                                 <!-- <a href="https://selfcare.yes.my/myselfcare/doForgotPasswordLink.do" class="forgotpassword">FORGOT PASSWORD?</a> -->
                                             </div>
@@ -798,8 +798,11 @@
                     allowAddOn: true,
                     modalRemove: '#modal-addOnRemove'
                 },
+
+                apiLocale: 'EN', 
                 pageText: {
                     pageTitle: { 'en-US': 'Your Cart', 'ms-MY': 'Kart Anda', 'zh-hans': 'Your Cart' },
+                    summaryMoreBenefits: { 'en-US': 'More Benefits', 'ms-MY': 'Lebih Manfaat', 'zh-hans': 'More Benefits' },
                     summaryOneTimeCharges: { 'en-US': 'One-time Charges (due now)', 'ms-MY': 'Caj Sekali (perlu dibayar sekarang)', 'zh-hans': 'One-time Charges (due now)' },
                     summaryRatePlan: { 'en-US': 'Rate plan', 'ms-MY': 'Kadar pelan', 'zh-hans': 'Rate plan' },
                     summaryAddOns: { 'en-US': 'Add-Ons', 'ms-MY': 'Tambahan', 'zh-hans': 'Add-Ons' }, 
@@ -824,6 +827,8 @@
                     checkoutLogin: { 'en-US': 'Login', 'ms-MY': 'Daftar masuk', 'zh-hans': 'Login' },
                     checkoutTACRequest: { 'en-US': 'Request TAC', 'ms-MY': 'Minta TAC', 'zh-hans': 'Request TAC' },
                     checkoutTACResend: { 'en-US': 'Resend TAC', 'ms-MY': 'Minta Semula TAC', 'zh-hans': 'Resend TAC' },
+
+                    errorValidNumber: { 'en-US': 'Please insert valid Yes Number', 'ms-MY': 'Sila masukkan Nombor Yes yang sah', 'zh-hans': 'Please insert valid Yes Number' }
                 }
             },
             created: function() {
@@ -847,6 +852,8 @@
                         } else {
                             self.ajaxGetPlanData();
                         }
+
+                        self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
                     } else {
                         self.isCartEmpty = true;
                         setTimeout(function() {
@@ -1045,7 +1052,8 @@
                     axios.post(apiEndpointURL + '/validate-login', {
                             'yes_number': self.loginInfo.yes_number,
                             'password': self.loginInfo.password,
-                            'auth_type': self.loginInfo.type
+                            'auth_type': self.loginInfo.type, 
+                            'locale': self.apiLocale
                         })
                         .then((response) => {
                             var data = response.data;
@@ -1088,7 +1096,7 @@
                         var inputOTPYesNumber = self.login.input.otp.inputYesNumber;
                         var emOTPForLogin = self.login.errorMessage.otp;
 
-                        $(emOTPForLogin).html('Please insert valid YES Number').show();
+                        $(emOTPForLogin).html(self.renderText('errorValidNumber')).show();
                         $(inputOTPYesNumber).focus();
                         $(inputOTPYesNumber).on('keydown', function() {
                             $(emOTPForLogin).hide().html('');
@@ -1114,11 +1122,10 @@
                             var data = response.data;
                             var errorMsg = '';
                             if (error.response.status == 500 || error.response.status == 503) {
-                                errorMsg = "<p>There's an error in generating your TAC code.</p>";
+                                errorMsg = "<p>There's an error in generating your TAC code.<br /> Please try again later.</p>";
                             } else {
                                 errorMsg = data.message
                             }
-                            errorMsg += '<br /> Please try again later.';
                             $(self.login.errorMessage.otp).html(errorMsg).show();
 
                             $(self.login.input.otp.inputPassword).focus();

@@ -546,6 +546,8 @@ class Ytl_Pull_Data_Public
 				$response 	= new WP_REST_Response($data);
 				$response->set_status(200);
 				return $response;
+			} else if ($data->displayResponseMessage) {
+				return new WP_Error('error_generating_otp_for_login', $data->displayResponseMessage, array('status' => 400));
 			}
 		} else {
 			return new WP_Error('error_generating_otp_for_login', "Parameters not complete to generate OTP for login.", array('status' => 400));
@@ -583,16 +585,17 @@ class Ytl_Pull_Data_Public
 		$yes_id 	= $request['yes_number'] . '@YES.MY';
 		$password	= $request['password'];
 		$auth_type 	= $request['auth_type'];
-		return $this->ca_validate_login($yes_id, $password, $auth_type);
+		$locale 	= $request['locale'];
+		return $this->ca_validate_login($yes_id, $password, $auth_type, $locale);
 	}
 
-	public function ca_validate_login($yes_id = null, $password = null, $auth_type = 'password')
+	public function ca_validate_login($yes_id = null, $password = null, $auth_type = 'password', $locale = 'EN')
 	{
 		$session_id 	= $this->ca_generate_auth_token(true);
 		if ($yes_id && $password && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params 	= [
 				'requestId'	=> $this->api_request_id,
-				'locale' 	=> $this->api_locale,
+				'locale' 	=> $locale,
 				'sessionId' => $session_id,
 				'yesId' 	=> $yes_id,
 				'password' 	=> $password,
@@ -685,6 +688,11 @@ class Ytl_Pull_Data_Public
 					'validate_callback'	=> function ($param, $request, $key) {
 						return true;
 					}
+				],
+				'locale' 	=> [
+					'validate_callback'	=> function ($param, $request, $key) {
+						return true;
+					}
 				]
 			]
 		));
@@ -693,14 +701,15 @@ class Ytl_Pull_Data_Public
 	public function generate_otp_for_guest_login(WP_REST_Request $request)
 	{
 		$msisdn = (trim($request['phone_number'])) ? $request['phone_number'] : null;
-		return $this->ca_generate_otp_for_guest_login($msisdn);
+		$locale = (trim($request['locale'])) ? $request['locale'] : 'EN';
+		return $this->ca_generate_otp_for_guest_login($msisdn, $locale);
 	}
 
-	public function ca_generate_otp_for_guest_login($msisdn = null)
+	public function ca_generate_otp_for_guest_login($msisdn = null, $locale = 'EN')
 	{
 		$session_id = $this->ca_generate_auth_token(true);
 		if ($msisdn != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
-			$params 	= ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'msisdn' => $msisdn, 'sessionId' => $session_id];
+			$params 	= ['requestId' => $this->api_request_id, 'locale' => $locale, 'msisdn' => $msisdn, 'sessionId' => $session_id];
 			$args 		= [
 				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
 				'body'          => json_encode($params),
@@ -715,8 +724,8 @@ class Ytl_Pull_Data_Public
 				$response 	= new WP_REST_Response($data);
 				$response->set_status(200);
 				return $response;
-			} else if ($data->displayErrorMessage) {
-				return new WP_Error('error_generating_otp_for_guest_login_with_message', $data->displayErrorMessage, array('status' => 400));
+			} else if ($data->displayResponseMessage) {
+				return new WP_Error('error_generating_otp_for_guest_login_with_message', $data->displayResponseMessage, array('status' => 400));
 			}
 		} else {
 			return new WP_Error('error_generating_otp_for_guest_login', "Parameters not complete to generate OTP for guest login.", array('status' => 400));
@@ -748,14 +757,15 @@ class Ytl_Pull_Data_Public
 	{
 		$msisdn = (trim($request['phone_number'])) ? $request['phone_number'] : null;
 		$otp_password = (trim($request['otp_password'])) ? $request['otp_password'] : null;
-		return $this->ca_validate_guest_login($msisdn, $otp_password);
+		$locale = (trim($request['locale'])) ? $request['locale'] : null;
+		return $this->ca_validate_guest_login($msisdn, $otp_password, $locale);
 	}
 
-	public function ca_validate_guest_login($msisdn = null, $otp_password = null)
+	public function ca_validate_guest_login($msisdn = null, $otp_password = null, $locale = 'EN')
 	{
 		$session_id = $this->ca_generate_auth_token(true);
 		if ($msisdn != null && $otp_password != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
-			$params 	= ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'msisdn' => $msisdn, 'password' => $otp_password, 'sessionId' => $session_id];
+			$params 	= ['requestId' => $this->api_request_id, 'locale' => $locale, 'msisdn' => $msisdn, 'password' => $otp_password, 'sessionId' => $session_id];
 			$args 		= [
 				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
 				'body'          => json_encode($params),
@@ -813,7 +823,8 @@ class Ytl_Pull_Data_Public
 		$plan_bundle_id = (isset($order_info['plan_bundle_id']) && !empty(trim($order_info['plan_bundle_id']))) ? $order_info['plan_bundle_id'] : null;
 		$plan_type 		= (isset($order_info['plan_type']) && !empty(trim($order_info['plan_type']))) 			? $order_info['plan_type'] 		: null;
 		$plan_name 		= (isset($order_info['plan_name']) && !empty(trim($order_info['plan_name']))) 			? $order_info['plan_name'] 		: null;
-
+		$locale 		= (isset($order_info['locale']) && !empty(trim($order_info['locale']))) 				? $order_info['locale'] 		: 'EN';
+		
 		$session_id 	= $this->ca_generate_auth_token(true);
 
 		if ($phone_number != null && $customer_name != null && $dob != null && $email != null && $security_type != null && $security_id != null && $address_line != null && $city != null && $city_code != null && $state != null && $state_code != null && $postal_code != null && $country != null && $plan_bundle_id != 0 && $plan_type != null && $plan_name != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
@@ -835,7 +846,7 @@ class Ytl_Pull_Data_Public
 				'planType' 				=> $plan_type,
 				'planName' 				=> $plan_name,
 				'appVersion' 			=> $this->api_app_version,
-				'locale' 				=> $this->api_locale,
+				'locale' 				=> $locale,
 				'source' 				=> 'MYOS',
 				'requestId' 			=> $this->api_request_id,
 				'sessionId' 			=> $session_id
@@ -883,14 +894,15 @@ class Ytl_Pull_Data_Public
 		$referral_code = (trim($request['referral_code'])) ? $request['referral_code'] : null;
 		$security_type = (trim($request['security_type'])) ? $request['security_type'] : null;
 		$security_id = (trim($request['security_id'])) ? $request['security_id'] : null;
-		return $this->ca_verify_referral_code($referral_code, $security_type, $security_id);
+		$locale = (trim($request['locale'])) ? $request['locale'] : null;
+		return $this->ca_verify_referral_code($referral_code, $security_type, $security_id, $locale);
 	}
 
-	public function ca_verify_referral_code($referral_code = null, $security_type = null, $security_id = null)
+	public function ca_verify_referral_code($referral_code = null, $security_type = null, $security_id = null, $locale = 'EN')
 	{
 		$session_id = $this->ca_generate_auth_token(true);
 		if ($referral_code != null && $security_type != null && $security_id != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
-			$params		= ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'referralCode' => $referral_code, 'refereeSecurityType' => $security_type, 'refereeSecurityID' => $security_id, 'sessionId' => $session_id];
+			$params		= ['requestId' => $this->api_request_id, 'locale' => $locale, 'referralCode' => $referral_code, 'refereeSecurityType' => $security_type, 'refereeSecurityID' => $security_id, 'sessionId' => $session_id];
 			$args 		= [
 				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
 				'body'          => json_encode($params),
@@ -1107,6 +1119,7 @@ class Ytl_Pull_Data_Public
 		$card_expiry_month 	= $this->get_request_input($order_info, 'card_expiry_month');
 		$card_expiry_year 	= $this->get_request_input($order_info, 'card_expiry_year');
 		$ippType 		= $this->get_request_input($order_info, 'ippType');
+		$locale 		= $this->get_request_input($order_info, 'locale');
 
 		$session_id 	= $this->ca_generate_auth_token(true);
 
@@ -1180,7 +1193,7 @@ class Ytl_Pull_Data_Public
 				], 
 
 				'appVersion' 			=> $this->api_app_version,
-				'locale' 				=> $this->api_locale,
+				'locale' 				=> $locale,
 				'source' 				=> 'MYOS',
 				'requestId' 			=> $this->api_request_id,
 				'sessionId' 			=> $session_id
