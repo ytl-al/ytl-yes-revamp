@@ -114,7 +114,7 @@ if (!function_exists('generate_scheduled_network_maintenance')) {
                         <section class="layer-section" id="section-list">
                             <div class="layer-filter filter-container sticky-top" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                                 <div class="layer-filterToggle">
-                                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>Filter</span> <span class="navbar-toggler-icon"></span></button>
+                                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>'. esc_html__('Filter', 'yes.my') .'</span> <span class="navbar-toggler-icon"></span></button>
                                     <div class="navbar-collapse tab-content collapse justify-content-center" id="tab-storeLocatorFilter">
                                         <div class="container">
                                             <div class="row justify-content-lg-center">
@@ -347,7 +347,7 @@ if (!function_exists('generate_store_locations')) {
                         <section id="store-locations">
                             <div class="filter-container sticky-top" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                                 <div class="layer-storeLocatorFilter">
-                                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>Filter</span> <span class="navbar-toggler-icon"></span></button>
+                                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>'. esc_html__('Filter', 'yes.my') .'</span> <span class="navbar-toggler-icon"></span></button>
                                     <div class="navbar-collapse tab-content collapse justify-content-center" id="tab-storeLocatorFilter">
                                         <div class="container">
                                             <div class="row justify-content-lg-center">
@@ -646,7 +646,7 @@ if (!function_exists('generate_roadshow')) {
                         <section class="layer-section" id="section-list">
                             <div class="layer-filter filter-container sticky-top" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                                 <div class="layer-filterToggle">
-                                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>Filter</span> <span class="navbar-toggler-icon"></span></button>
+                                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>'. esc_html__('Filter', 'yes.my') .'</span> <span class="navbar-toggler-icon"></span></button>
                                     <div class="navbar-collapse tab-content collapse justify-content-center" id="tab-storeLocatorFilter">
                                         <div class="container">
                                             <div class="row justify-content-lg-center">
