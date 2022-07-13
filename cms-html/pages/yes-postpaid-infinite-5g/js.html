@@ -34,12 +34,13 @@
                 Object.values(data).map(function(item) {
                     var bundleID    = item.productBundleId;
                     var balance     = item.balance;
-                    var btnBuyNow   = $('.layer-planDevice .panel-btn .btn[data-productid="' + bundleID + '"]');
-                    if (balance <= 0 && $(btnBuyNow)) {
-                        var parentBtnBuyNow = $(btnBuyNow).closest('.panel-btn');
-                        var btnOOSHTML  = '<span class="span-oos">Out of Stock</span>';
-                        $(btnBuyNow).remove();
-                        $(parentBtnBuyNow).append(btnOOSHTML);
+                    var layerPlanDevice = $('[data-planDevice="' + bundleID + '"]');
+                    if (balance <= 0 && $(layerPlanDevice)) {
+                        var phoneName   = $('h3', layerPlanDevice).text();
+                        var panelBtn    = $('.panel-btn', layerPlanDevice);
+                        var btnNotify   = '<a href="javascript:void(0)" onClick="triggerModalNotify(\'' + phoneName + '\')">Notify Me</a>';
+                        $(panelBtn).html(btnNotify);
+                        $('.span-oosDeviceText', layerPlanDevice).show();
                     }
                 });
             },
@@ -50,5 +51,12 @@
                 toggleOverlay(false);
             }
         });
+    }
+    function triggerModalNotify(phoneModel = '') {
+        var modalNotify = new bootstrap.Modal(document.getElementById('modal-notify'), {});
+
+        $('#span-phoneModel').html(phoneModel);
+        $('#wdform_3_element10').val(phoneModel);
+        modalNotify.show();
     }
 </script>

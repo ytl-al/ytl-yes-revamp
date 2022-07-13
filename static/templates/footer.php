@@ -157,12 +157,6 @@
     <!-- Layer Page ENDS -->
 
     <div class="layer-overlay"></div>
-
-    <script type='text/javascript' src='https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/assets/js/bootstrap.bundle.js' id='bootstrap-js'></script>
-    <script type='text/javascript' src='https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/assets/js/iconify.min.js' id='iconify-js'></script>
-    <script type='text/javascript' src='https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/assets/js/aos.js' id='aos-js'></script>
-    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.0/slick.min.js' id='slick-js'></script>
-    <script type='text/javascript' src='https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/assets/js/yes.js' id='yes-js-js'></script>
 </body>
 
 </html>
