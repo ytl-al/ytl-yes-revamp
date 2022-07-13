@@ -59,7 +59,7 @@ if (!function_exists('generate_scheduled_network_maintenance')) {
         $arr_list = [];
         if ($array) {
             foreach ($array as $list) {
-                if ($list['State'] && $list['Area'] && $list['Service Type'] && $list['Start Date'] && $list['End Date'] && $list['Time']) {
+                if ($list['State'] && $list['Area'] && $list['Service Type'] && $list['Start Date'] && $list['End Date'] && $list['Time'] && $list['Show on Web'] == 'Yes') {
                     $arr_list[$list['State']][] = $list;
                 }
             }
