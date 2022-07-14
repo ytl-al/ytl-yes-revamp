@@ -1,5 +1,9 @@
 <?php include('header-ywos.php'); ?>
 
+<style type="text/css">
+    #cart-body .packagebox .visualbg .img-fluid { padding-left: 12px; }
+</style>
+
 
 <!-- Vue Wrapper STARTS -->
 <div id="main-vue" style="display: none;">
@@ -8,16 +12,16 @@
         <div class="container">
             <ul class="wizard">
                 <li ui-sref="firstStep" class="completed">
-                    <span>1. Verification</span>
+                    <span>1. {{ renderText('strVerification') }}</span>
                 </li>
                 <li ui-sref="secondStep" class="completed">
-                    <span>2. Delivery Details</span>
+                    <span>2. {{ renderText('strDelivery') }}</span>
                 </li>
                 <li ui-sref="thirdStep" class="completed">
-                    <span>3. Review</span>
+                    <span>3. {{ renderText('strReview') }}</span>
                 </li>
                 <li ui-sref="fourthStep">
-                    <span>4. Payment Info</span>
+                    <span>4. {{ renderText('strPayment') }}</span>
                 </li>
             </ul>
         </div>
@@ -29,7 +33,7 @@
         <div class="container p-lg-5 p-3">
             <div class="row d-lg-none mb-3">
                 <div class="col">
-                    <h1>Review & Pay</h1>
+                    <h1>{{ renderText('strReviewPay') }}</h1>
                 </div>
             </div>
             <div class="row gx-5" v-if="pageValid">
@@ -37,15 +41,15 @@
                     <?php include('section-order-summary.php'); ?>
                 </div>
                 <div class="col-lg-8 col-12 order-lg-1 mt-3 mt-lg-0">
-                    <h1 class="mb-4 d-none d-lg-block">Review & Pay</h1>
+                    <h1 class="mb-4 d-none d-lg-block">{{ renderText('strReviewPay') }}</h1>
                     <div class="accordion" id="cart-accordion">
                         <div class="packagebox mb-3">
                             <div class="row">
                                 <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="orderSummary.plan.planType == 'postpaid'">
-                                    <img src="/wp-content/uploads/2022/05/ft5g-cart-visual.jpg" class="img-fluid" alt="" />
+                                    <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid" alt="" />
                                 </div>
                                 <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center" v-if="orderSummary.plan.planType == 'prepaid'">
-                                    <img src="/wp-content/uploads/2022/05/ft5g-cart-visual.jpg" class="img-fluid" alt="" />
+                                    <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid" alt="" />
                                 </div>
                                 <div class="col-lg-6 col-12 pt-lg-4 pb-1 px-4 px-lg-5 ps-lg-4">
                                     <h3 class="mt-3 mt-lg-0">{{ orderSummary.plan.displayName }}</h3>
@@ -68,14 +72,14 @@
                         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#cart-accordion">
                             <div class="accordion-body">
                                 <div v-if="packageInfos.slice(4).length">
-                                    <h1>More Benefits</h1>
+                                    <h1>{{ renderText('summaryMoreBenefits') }}</h1>
                                     <div class="row mb-4">
                                         <div class="col-lg-6 mb-3" v-for="(packageInfo, index) in packageInfos.slice(4)"><span class="span-itemList">{{ packageInfo }}</span></div>
                                     </div>
                                 </div>
 
-                                <h1>One-time Charges (due now)</h1>
-                                <h2>Rate plan</h2>
+                                <h1>{{ renderText('summaryOneTimeCharges') }}</h1>
+                                <h2>{{ renderText('summaryRatePlan') }}</h2>
 
                                 <template v-for="(price) in orderSummary.due.priceBreakdown.plan">
                                     <div class="row">
@@ -101,33 +105,33 @@
                                     </template>
                                 </div>
                                 <div class="row mb-3 mt-5">
-                                    <div class="col-10 pb-1 border-bottom">
-                                        <p>Add-Ons</p>
+                                    <div class="col-6 pb-1 border-bottom">
+                                        <p>{{ renderText('summaryAddOns') }}</p>
                                         <p v-if="orderSummary.addOn != null">{{ orderSummary.addOn.displayAddonName }} <a href="javascript:void(0)" class="btn-sm pink-btn text-white mx-lg-3" v-on:click="removeAddOn()">Remove</a></p>
                                     </div>
-                                    <div class="col-2 pb-1 border-bottom text-end">
+                                    <div class="col-6 pb-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.addOns).toFixed(2) }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom">
-                                        <p>Taxes</p>
+                                        <p>{{ renderText('summaryTaxes') }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.taxesSST).toFixed(2) }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom" v-if="orderSummary.due.foreignerDeposit > 0">
-                                        <p>Deposit for Foreigner</p>
+                                        <p>{{ renderText('summaryForeignerDeposit') }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom text-end" v-if="orderSummary.due.foreignerDeposit > 0">
                                         <p>RM{{ parseFloat(orderSummary.due.foreignerDeposit).toFixed(2) }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom">
-                                        <p>Shipping Fee</p>
+                                        <p>{{ renderText('summaryShipping') }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.shippingFees).toFixed(2) }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom">
-                                        <p>Rounding Adjustment</p>
+                                        <p>{{ renderText('summaryRounding') }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.rounding).toFixed(2) }}</p>
@@ -135,16 +139,16 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-6">
-                                        <p class="fw-bold">Total charges due now</p>
-                                        <p class="small">This summary is not an invoice</p>
+                                        <p class="fw-bold">{{ renderText('summaryTotalDue') }}</p>
+                                        <p class="small">{{ renderText('summaryNotInvoice') }}</p>
                                     </div>
                                     <div class="col-6 text-end">
                                         <p class="large">RM{{ formatPrice(parseFloat(orderSummary.due.total).toFixed(2)) }}</p>
                                     </div>
                                 </div>
                                 <div v-if="orderSummary.plan.planType != 'prepaid'">
-                                    <h1>Monthly Charges</h1>
-                                    <h2>Rate plan</h2>
+                                    <h1>{{ renderText('summaryMonthlyCharges') }}</h1>
+                                    <h2>{{ renderText('summaryRatePlan') }}</h2>
                                     <div class="row mb-3">
                                         <div class="col-6">
                                             <p>{{ orderSummary.plan.displayName }}</p>
@@ -155,7 +159,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
-                                            <p class="bold">Total monthly charges</p>
+                                            <p class="bold">{{ renderText('summaryTotalMonthly') }}</p>
                                         </div>
                                         <div class="col-6 text-end">
                                             <p class="bold">RM{{ parseFloat(orderSummary.plan.monthlyCommitment).toFixed(2) }}</p>
@@ -170,8 +174,8 @@
                             <a href="javascript:void(0)" class="grey-link" style="text-decoration: none;" v-on:click="ywos.redirectToPage('delivery')">(<u>Edit</u>)</a>
                         </div>
                         <div class="col-9 order-1">
-                            <p class="mb-3"><strong>To: {{ deliveryInfo.name }}</strong><br> {{ deliveryInfo.email }}<br> +60 {{ slicedMobileNumber }}</p>
-                            <p><strong>Shipping Address</strong><br> {{ deliveryInfo.sanitize.address }} <br /><template v-if="deliveryInfo.sanitize.addressMore">{{ deliveryInfo.sanitize.addressMore }} <br /></template>{{ deliveryInfo.postcode }}, {{ deliveryInfo.sanitize.city }} <br />{{ deliveryInfo.sanitize.state }} <br /> {{ deliveryInfo.sanitize.country }}</p>
+                            <p class="mb-3"><strong>{{ renderText('strTo') }}: {{ deliveryInfo.name }}</strong><br> {{ deliveryInfo.email }}<br> +60 {{ slicedMobileNumber }}</p>
+                            <p><strong>{{ renderText('strShippingAddress') }}</strong><br> {{ deliveryInfo.sanitize.address }} <br /><template v-if="deliveryInfo.sanitize.addressMore">{{ deliveryInfo.sanitize.addressMore }} <br /></template>{{ deliveryInfo.postcode }}, {{ deliveryInfo.sanitize.city }} <br />{{ deliveryInfo.sanitize.state }} <br /> {{ deliveryInfo.sanitize.country }}</p>
                         </div>
                     </div>
                     <div class="row mb-3 d-none">
@@ -194,17 +198,17 @@
                         <div class="col">
                             <div class="form-check mb-3">
                                 <input type="checkbox" class="form-check-input" v-model="agree.terms" id="checkbox-terms" @change="watchSubmit" />
-                                <label class="form-check-label" for="checkbox-terms">I hereby agree to subscribe to the Postpaid/Prepaid Service Plan selected in the online form submitted by me, and to be bound by the terms and conditions available at <a href="/tnc/general-tnc" target="_blank">www.yes.my/tnc/general-tnc</a>.</label>
+                                <label class="form-check-label" for="checkbox-terms" v-html="renderText('strAgreeTerms')"></label>
                             </div>
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" v-model="agree.privacy" id="checkbox-privacy" @change="watchSubmit" />
-                                <label class="form-check-label" for="checkbox-privacy">I further give consent to YTLC to process my personal data in accordance with the YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a>.</label>
+                                <label class="form-check-label" for="checkbox-privacy" v-html="renderText('strAgreePrivacy')"></label>
                             </div>
                         </div>
                     </div>
                     <div class="row mt-5">
                         <div class="col-lg-5 col-12">
-                            <button class="pink-btn d-block w-100" type="submit" v-on:click="validateReview" :disabled="!allowSubmit">Pay Now</button>
+                            <button class="pink-btn d-block w-100" type="submit" v-on:click="validateReview" :disabled="!allowSubmit">{{ renderText('strBtnPayNow') }}</button>
                             <!-- <a href="checkout-payment.html" class="pink-btn d-block w-100">Pay Now</a> -->
                         </div>
                     </div>
@@ -263,7 +267,37 @@
                     terms: false, 
                     privacy: false 
                 },
-                allowSubmit: false
+                allowSubmit: false,
+
+                apiLocale: 'EN', 
+                pageText: {
+                    strVerification: { 'en-US': 'Verification', 'ms-MY': 'Pengesahan', 'zh-hans': 'Verification' },
+                    strDelivery: { 'en-US': 'Delivery Details', 'ms-MY': 'Butiran Penghantaran', 'zh-hans': 'Delivery Details' },
+                    strReview: { 'en-US': 'Review', 'ms-MY': 'Semak', 'zh-hans': 'Review' },
+                    strPayment: { 'en-US': 'Payment Info', 'ms-MY': 'Maklumat Pembayaran', 'zh-hans': 'Payment Info' },
+
+                    strReviewPay: { 'en-US': 'Review & Pay', 'ms-MY': 'Semak & Bayar', 'zh-hans': 'Review & Pay' },
+
+                    summaryMoreBenefits: { 'en-US': 'More Benefits', 'ms-MY': 'Lebih Manfaat', 'zh-hans': 'More Benefits' },
+                    summaryOneTimeCharges: { 'en-US': 'One-time Charges (due now)', 'ms-MY': 'Caj Sekali (perlu dibayar sekarang)', 'zh-hans': 'One-time Charges (due now)' },
+                    summaryRatePlan: { 'en-US': 'Rate plan', 'ms-MY': 'Kadar pelan', 'zh-hans': 'Rate plan' },
+                    summaryAddOns: { 'en-US': 'Add-Ons', 'ms-MY': 'Tambahan', 'zh-hans': 'Add-Ons' }, 
+                    summaryTaxes: { 'en-US': 'Taxes', 'ms-MY': 'Cukai', 'zh-hans': 'Taxes' }, 
+                    summaryForeignerDeposit: { 'en-US': 'Deposit for Foreigner', 'ms-MY': 'Deposit Warga Asing', 'zh-hans': 'Deposit for Foreigner' }, 
+                    summaryShipping: { 'en-US': 'Shipping Fee', 'ms-MY': 'Caj Penghantaran', 'zh-hans': 'Shipping Fee' }, 
+                    summaryRounding: { 'en-US': 'Rounding Adjustment', 'ms-MY': 'Penyelarasan Pembundaran', 'zh-hans': 'Rounding Adjustment' }, 
+                    summaryTotalDue: { 'en-US': 'Total charges due now', 'ms-MY': 'Jumlah perlu dibayar sekarang', 'zh-hans': 'Total charges due now' }, 
+                    summaryNotInvoice: { 'en-US': 'This summary is not an invoice', 'ms-MY': 'Ringkasan ini bukanlah invois', 'zh-hans': 'This summary is not an invoice' }, 
+                    summaryMonthlyCharges: { 'en-US': 'Monthly Charges', 'ms-MY': 'Caj Bulanan', 'zh-hans': 'Monthly Charges' }, 
+                    summaryTotalMonthly: { 'en-US': 'Total monthly charges', 'ms-MY': 'Jumlah caj bulanan', 'zh-hans': 'Total monthly charges' }, 
+
+                    strTo: { 'en-US': 'To', 'ms-MY': 'Ke', 'zh-hans': 'To' },
+                    strShippingAddress: { 'en-US': 'Shipping Address', 'ms-MY': 'Alamat Penghantaran', 'zh-hans': 'Shipping Address' },
+                    strAgreeTerms: { 'en-US': 'I hereby agree to subscribe to the Postpaid/Prepaid Service Plan selected in the online form submitted by me, and to be bound by the terms and conditions available at <a href="/tnc/general-tnc" target="_blank">www.yes.my/tnc/general-tnc</a>.', 'ms-MY': 'Saya dengan ini bersetuju untuk melanggan pilihan Pelan Perkhidmatan Pascabayar/Prabayar dalam borang dalam talian yang saya hantar, dan akan terikat dengan terma dan syarat terkandung di <a href="/ms/tnc/general-tnc" target="_blank">www.yes.my/tnc/general-tnc</a>.', 'zh-hans': 'I hereby agree to subscribe to the Postpaid/Prepaid Service Plan selected in the online form submitted by me, and to be bound by the terms and conditions available at <a href="/zh-hans/tnc/general-tnc" target="_blank">www.yes.my/tnc/general-tnc</a>.' },
+                    strAgreePrivacy: { 'en-US': 'I further give consent to YTLC to process my personal data in accordance with the YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a>.', 'ms-MY': 'Saya selanjutnya memberi kebenaran kepada YTLC untuk memproses data peribadi saya mengikut Polisi Privasi Kumpulan YTL yang terkandung di <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a>.', 'zh-hans': 'I further give consent to YTLC to process my personal data in accordance with the YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a>.' },
+
+                    strBtnPayNow: { 'en-US': 'Pay Now', 'ms-MY': 'Bayar Sekarang', 'zh-hans': 'Pay Now' } 
+                }
             },
             mounted: function() {},
             created: function() {
@@ -278,6 +312,7 @@
                     if (ywos.validateSession(self.currentStep)) {
                         self.pageValid = true;
                         self.updateData();
+                        self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
                         toggleOverlay(false);
                     } else {
                         ywos.redirectToPage('cart');
@@ -319,6 +354,9 @@
                     } else {
                         self.allowSubmit = false;
                     }
+                },
+                renderText: function(strID) {
+                    return ywos.renderText(strID, this.pageText);
                 }
             }
         });

@@ -33,7 +33,7 @@
                     <p>{{ renderText('monthly_charges') }}</p>
                 </div>
                 <div class="col-6 text-end">
-                    <p>RM{{ formatPrice(parseFloat(orderSummary.product.selected.plan.upFrontPayment).toFixed(2)) }}*</p>
+                    <p>RM{{ formatPrice(parseFloat(orderSummary.plan.upFrontPayment).toFixed(2)) }}*</p>
                 </div>
             </div>
 			 <div class="hr_line"></div>
@@ -53,7 +53,7 @@
             <div class="col-6 text-end"><p class="large"><strong>{{ maybankIPP.ippInstallmentSelected.duration }} months</strong></p></div>
         </div>
         <div class="row">
-            <div class="col-6"><p class="large">{{ renderText('administration_payment') }}</p></div>
+            <div class="col-6"><p class="large">{{ renderText('payment_duration') }}</p></div>
             <div class="col-6 text-end"><p class="large"><strong>RM{{ maybankIPP.ippInstallmentSelected.administrationPayment.toFixed(2) }}</strong></p></div>
         </div>
         <div class="row">

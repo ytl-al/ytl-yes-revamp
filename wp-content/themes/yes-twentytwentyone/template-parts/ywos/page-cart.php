@@ -34,6 +34,8 @@
         text-align: center;
         padding: 15px 12px;
     }
+    
+    #cart-body .packagebox .visualbg .img-fluid { padding-left: 12px; }
 
     #cart-body .packagebox h3 {
         font-weight: 800;
@@ -409,7 +411,7 @@
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
-            <h1>Your Cart</h1>
+            <h1>{{ renderText('pageTitle') }}</h1>
         </div>
     </section>
     <!-- Banner End -->
@@ -444,10 +446,10 @@
                         <div class="packagebox mb-3">
                             <div class="row">
                                 <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="orderSummary.plan.planType == 'postpaid'">
-                                    <img src="/wp-content/uploads/2022/05/ft5g-cart-visual.jpg" class="img-fluid" alt="" />
+                                    <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid" alt="" />
                                 </div>
                                 <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center" v-if="orderSummary.plan.planType == 'prepaid'">
-                                    <img src="/wp-content/uploads/2022/05/ft5g-cart-visual.jpg" class="img-fluid" alt="" />
+                                    <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid" alt="" />
                                 </div>
                                 <div class="col-lg-6 col-12 pt-lg-4 pb-1 px-4 px-lg-5 ps-lg-4">
                                     <h3 class="mt-3 mt-lg-0">{{ orderSummary.plan.displayName }}</h3>
@@ -470,14 +472,14 @@
                         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#cart-accordion">
                             <div class="accordion-body">
                                 <div v-if="packageInfos.slice(4).length">
-                                    <h1>More Benefits</h1>
+                                    <h1>{{ renderText('summaryMoreBenefits') }}</h1>
                                     <div class="row mb-4">
                                         <div class="col-lg-6 mb-3" v-for="(packageInfo, index) in packageInfos.slice(4)"><span class="span-itemList">{{ packageInfo }}</span></div>
                                     </div>
                                 </div>
 
-                                <h1>One-time Charges (due now)</h1>
-                                <h2>Rate plan</h2>
+                                <h1>{{ renderText('summaryOneTimeCharges') }}</h1>
+                                <h2>{{ renderText('summaryRatePlan') }}</h2>
 
                                 <template v-for="(price) in orderSummary.due.priceBreakdown.plan">
                                     <div class="row">
@@ -504,32 +506,32 @@
                                 </div>
                                 <div class="row mb-3 mt-5">
                                     <div class="col-8 pb-1 border-bottom">
-                                        <p>Add-Ons</p>
+                                        <p>{{ renderText('summaryAddOns') }}</p>
                                         <p v-if="orderSummary.addOn != null">{{ orderSummary.addOn.displayAddonName }} <a href="javascript:void(0)" class="btn-sm pink-btn text-white mx-lg-3" v-on:click="removeAddOn()">Remove</a></p>
                                     </div>
                                     <div class="col-4 pb-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.addOns).toFixed(2) }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom">
-                                        <p>Taxes</p>
+                                        <p>{{ renderText('summaryTaxes') }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.taxesSST).toFixed(2) }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom" v-if="orderSummary.due.foreignerDeposit > 0">
-                                        <p>Deposit for Foreigner</p>
+                                        <p>{{ renderText('summaryForeignerDeposit') }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom text-end" v-if="orderSummary.due.foreignerDeposit > 0">
                                         <p>RM{{ parseFloat(orderSummary.due.foreignerDeposit).toFixed(2) }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom">
-                                        <p>Shipping Fee</p>
+                                        <p>{{ renderText('summaryShipping') }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.shippingFees).toFixed(2) }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom">
-                                        <p>Rounding Adjustment</p>
+                                        <p>{{ renderText('summaryRounding') }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.rounding).toFixed(2) }}</p>
@@ -537,16 +539,16 @@
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-6">
-                                        <p class="fw-bold">Total charges due now</p>
-                                        <p class="small">This summary is not an invoice</p>
+                                        <p class="fw-bold">{{ renderText('summaryTotalDue') }}</p>
+                                        <p class="small">{{ renderText('summaryNotInvoice') }}</p>
                                     </div>
                                     <div class="col-6 text-end">
                                         <p class="large">RM{{ formatPrice(parseFloat(orderSummary.due.total).toFixed(2)) }}</p>
                                     </div>
                                 </div>
                                 <div v-if="orderSummary.plan.planType != 'prepaid'">
-                                    <h1>Monthly Charges</h1>
-                                    <h2>Rate plan</h2>
+                                    <h1>{{ renderText('summaryMonthlyCharges') }}</h1>
+                                    <h2>{{ renderText('summaryRatePlan') }}</h2>
                                     <div class="row mb-3">
                                         <div class="col-6">
                                             <p>{{ orderSummary.plan.displayName }}</p>
@@ -557,7 +559,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
-                                            <p class="bold">Total monthly charges</p>
+                                            <p class="bold">{{ renderText('summaryTotalMonthly') }}</p>
                                         </div>
                                         <div class="col-6 text-end">
                                             <p class="bold">RM{{ parseFloat(orderSummary.plan.monthlyCommitment).toFixed(2) }}</p>
@@ -567,15 +569,15 @@
                             </div>
                         </div>
                     </div>
-                    <p>You have the option to <a href="/keep-your-number" target="_blank">Keep Your Number</a> during or after SIM activation.</p>
+                    <p v-html="renderText('keepNumberOption')"></p>
                 </div>
                 <div class="col-lg-4 col-12">
                     <div class="summary-box">
-                        <h1>Order summary</h1>
-                        <h2>Due today after taxes and shipping</h2>
+                        <h1>{{ renderText('osTitle') }}</h1>
+                        <h2>{{ renderText('osDueToday') }}</h2>
                         <div class="row">
                             <div class="col-6 pt-2 pb-2">
-                                <h3>TOTAL</h3>
+                                <h3>{{ renderText('osTotal') }}</h3>
                             </div>
                             <div class="col-6 pt-2 pb-2 text-end">
                                 <h3>RM{{ formatPrice(parseFloat(orderSummary.due.total).toFixed(2)) }}</h3>
@@ -584,7 +586,7 @@
                         <div class="monthly mb-4" v-if="orderSummary.plan.monthlyCommitment > 0">
                             <div class="row">
                                 <div class="col-6">
-                                    <p>Due Monthly</p>
+                                    <p>{{ renderText('osMonthlyDue') }}</p>
                                 </div>
                                 <div class="col-6 text-end">
                                     <p>RM{{ parseFloat(orderSummary.plan.monthlyCommitment).toFixed(2) }}</p>
@@ -592,7 +594,7 @@
                             </div>
                         </div>
                         <div class="referral-box mb-3 d-none"><input class="form-control referral" type="text" placeholder="Enter referral code (if any)"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/referral-tick.png" class="referral-check" alt=""></div>
-                        <a href="javascript:void(0)" class="pink-btn d-block" v-on:click="checkLoggedIn">Proceed to checkout</a>
+                        <a href="javascript:void(0)" class="pink-btn d-block" v-on:click="checkLoggedIn">{{ renderText('osCheckout') }}</a>
                     </div>
                 </div>
             </div>
@@ -629,23 +631,23 @@
                 <div class="modal-body pt-5 pb-5">
                     <div class="row justify-content-center mb-4">
                         <div class="col-lg-9 col-12 mb-lg-0 mb-2 align-self-center">
-                            <a href="javascript:void(0)" class="white-btn2 d-block" v-on:click="redirectLoggedIn('guest')">Continue checkout as Guest</a>
+                            <a href="javascript:void(0)" class="white-btn2 d-block" v-on:click="redirectLoggedIn('guest')">{{ renderText('checkoutGuest') }}</a>
                         </div>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-12 mb-lg-0 mb-2 align-self-center">
-                            <h1 class="mb-4">or sign in with your Yes ID / Number</h1>
+                            <h1 class="mb-4">{{ renderText('checkoutSignIn') }}</h1>
                         </div>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-lg-8 col-12 mb-lg-0 mb-2 align-self-center">
-                            <p class="bold text-center mb-3">Select your preference</p>
+                            <p class="bold text-center mb-3">{{ renderText('checkoutPreference') }}</p>
                             <ul class="nav justify-content-center nav-pills mb-3" id="pills-tab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link active" id="pills-loginTac-tab" data-bs-toggle="pill" data-bs-target="#pills-loginTac" type="button" role="tab" aria-controls="pills-loginTac" aria-selected="true">TAC</button>
                                 </li>
                                 <li class="nav-item" role="presentation" style="margin-left: -20px;">
-                                    <button class="nav-link" id="pills-loginPassword-tab" data-bs-toggle="pill" data-bs-target="#pills-loginPassword" type="button" role="tab" aria-controls="pills-loginPassword" aria-selected="false">Password</button>
+                                    <button class="nav-link" id="pills-loginPassword-tab" data-bs-toggle="pill" data-bs-target="#pills-loginPassword" type="button" role="tab" aria-controls="pills-loginPassword" aria-selected="false">{{ renderText('checkoutPassword') }}</button>
                                 </li>
                             </ul>
                             <div class="tab-content" id="pills-tabContent">
@@ -653,7 +655,7 @@
                                     <form class="form-loginTac" @submit="otpLoginSubmit">
                                         <div class="input-box">
                                             <div class="w-100">
-                                                <input type="text" class="form-control userid" id="input-otpYesNumber" maxlength="11" v-model="login.input.otp.yesNumber" @input="watchOTPLoginFields" placeholder="Yes ID / Number" />
+                                                <input type="text" class="form-control userid" id="input-otpYesNumber" maxlength="11" v-model="login.input.otp.yesNumber" @input="watchOTPLoginFields" :placeholder="renderText('checkoutYesID')" />
                                             </div>
                                             <div class=" w-100 border-top item-otpPassword" id="box-otpPassword" style="display: none;">
                                                 <input type="password" class="form-control password" id="input-otpPassword" v-model="login.input.otp.password" @input="watchOTPLoginFields" placeholder="******" maxlength="6" />
@@ -669,8 +671,8 @@
                                             <label class="form-check-label" for="flexCheckDefault">Keep me logged in</label>
                                         </div> -->
                                         <div class="row">
-                                            <div class="col-lg-8 offset-lg-2 mb-lg-0 mb-2 text-center">
-                                                <input type="submit" value="LOGIN" class="pink-btn d-block mb-3 w-100" :disabled="!login.submitButton.allowOtp" />
+                                            <div class="col-lg-10 offset-lg-1 mb-lg-0 mb-2 text-center">
+                                                <input type="submit" :value="renderText('checkoutLogin')" class="pink-btn d-block mb-3 w-100" :disabled="!login.submitButton.allowOtp" />
                                                 <!-- <a href="https://selfcare.yes.my/myselfcare/doForgotPasswordLink.do" class="forgotpassword">FORGOT PASSWORD?</a> -->
                                             </div>
                                         </div>
@@ -680,7 +682,7 @@
                                     <form class="form-loginPassword" @submit="basicLoginSubmit">
                                         <div class="input-box">
                                             <div class="w-100 border-bottom">
-                                                <input type="text" class="form-control userid" id="input-basicYesNumber" maxlength="11" v-model="login.input.basic.yesNumber" @input="watchBasicLoginFields" placeholder="Yes ID / Number" />
+                                                <input type="text" class="form-control userid" id="input-basicYesNumber" maxlength="11" v-model="login.input.basic.yesNumber" @input="watchBasicLoginFields" :placeholder="renderText('checkoutYesID')" />
                                             </div>
                                             <div class="w-100">
                                                 <input type="password" class="form-control password" id="input-basicPassword" v-model="login.input.basic.password" @input="watchBasicLoginFields" placeholder="********" />
@@ -694,8 +696,8 @@
                                             <label class="form-check-label" for="flexCheckDefault">Keep me logged in</label>
                                         </div> -->
                                         <div class="row">
-                                            <div class="col-lg-8 offset-lg-2 mb-lg-0 mb-2 text-center">
-                                                <input type="submit" value="LOGIN" class="pink-btn d-block mb-3 w-100" :disabled="!login.submitButton.allowBasic" />
+                                            <div class="col-lg-10 offset-lg-1 mb-lg-0 mb-2 text-center">
+                                                <input type="submit" :value="renderText('checkoutLogin')" class="pink-btn d-block mb-3 w-100" :disabled="!login.submitButton.allowBasic" />
                                                 <!-- <a href="https://selfcare.yes.my/myselfcare/doForgotPasswordLink.do" class="forgotpassword">FORGOT PASSWORD?</a> -->
                                             </div>
                                         </div>
@@ -740,7 +742,7 @@
                 planID: null,
                 isCartEmpty: false,
                 hasFetchPlan: false,
-                requestOTPText: 'Request TAC',
+                requestOTPText: '',
                 loginInfo: {
                     type: 'guest',
                     yes_number: '',
@@ -795,6 +797,38 @@
                 addOn: {
                     allowAddOn: true,
                     modalRemove: '#modal-addOnRemove'
+                },
+
+                apiLocale: 'EN', 
+                pageText: {
+                    pageTitle: { 'en-US': 'Your Cart', 'ms-MY': 'Kart Anda', 'zh-hans': 'Your Cart' },
+                    summaryMoreBenefits: { 'en-US': 'More Benefits', 'ms-MY': 'Lebih Manfaat', 'zh-hans': 'More Benefits' },
+                    summaryOneTimeCharges: { 'en-US': 'One-time Charges (due now)', 'ms-MY': 'Caj Sekali (perlu dibayar sekarang)', 'zh-hans': 'One-time Charges (due now)' },
+                    summaryRatePlan: { 'en-US': 'Rate plan', 'ms-MY': 'Kadar pelan', 'zh-hans': 'Rate plan' },
+                    summaryAddOns: { 'en-US': 'Add-Ons', 'ms-MY': 'Tambahan', 'zh-hans': 'Add-Ons' }, 
+                    summaryTaxes: { 'en-US': 'Taxes', 'ms-MY': 'Cukai', 'zh-hans': 'Taxes' }, 
+                    summaryForeignerDeposit: { 'en-US': 'Deposit for Foreigner', 'ms-MY': 'Deposit Warga Asing', 'zh-hans': 'Deposit for Foreigner' }, 
+                    summaryShipping: { 'en-US': 'Shipping Fee', 'ms-MY': 'Caj Penghantaran', 'zh-hans': 'Shipping Fee' }, 
+                    summaryRounding: { 'en-US': 'Rounding Adjustment', 'ms-MY': 'Penyelarasan Pembundaran', 'zh-hans': 'Rounding Adjustment' }, 
+                    summaryTotalDue: { 'en-US': 'Total charges due now', 'ms-MY': 'Jumlah perlu dibayar sekarang', 'zh-hans': 'Total charges due now' }, 
+                    summaryNotInvoice: { 'en-US': 'This summary is not an invoice', 'ms-MY': 'Ringkasan ini bukanlah invois', 'zh-hans': 'This summary is not an invoice' }, 
+                    summaryMonthlyCharges: { 'en-US': 'Monthly Charges', 'ms-MY': 'Caj Bulanan', 'zh-hans': 'Monthly Charges' }, 
+                    summaryTotalMonthly: { 'en-US': 'Total monthly charges', 'ms-MY': 'Jumlah caj bulanan', 'zh-hans': 'Total monthly charges' }, 
+                    keepNumberOption: { 'en-US': 'You have the option to <a href="/keep-your-number" target="_blank">Keep Your Number</a> during or after SIM activation.', 'ms-MY': 'Anda mempunyai pilihan untuk <a href="/ms/keep-your-number" target="_blank">Kekalkan Nombor Anda</a> semasa atau selepas pengaktifan SIM.', 'zh-hans': 'You have the option to <a href="/zh-hans/keep-your-number" target="_blank">Keep Your Number</a> during or after SIM activation.' },
+                    osTitle: { 'en-US': 'Order summary', 'ms-MY': 'Ringkasan pesanan', 'zh-hans': 'Order summary' },
+                    osDueToday: { 'en-US': 'Due today after taxes and shipping', 'ms-MY': 'Perlu dibayar hari ini selepas cukai dan penghantaran', 'zh-hans': 'Due today after taxes and shipping' },
+                    osMonthlyDue: { 'en-US': 'Due Monthly', 'ms-MY': 'Perlu dibayar bulanan', 'zh-hans': 'Due Monthly' },
+                    osCheckout: { 'en-US': 'Checkout', 'ms-MY': 'Terus ke Pembayaran', 'zh-hans': 'Checkout' },
+                    checkoutGuest: { 'en-US': 'Continue checkout as Guest', 'ms-MY': 'Sambung ke Pembayaran Sebagai Tetamu', 'zh-hans': 'Continue checkout as Guest' },
+                    checkoutSignIn: { 'en-US': 'or sign in with your Yes ID / Number', 'ms-MY': 'atau daftar masuk dengan ID Yes / Nombor', 'zh-hans': 'or sign in with your Yes ID / Number' },
+                    checkoutPreference: { 'en-US': 'Select your preference', 'ms-MY': 'Buat pilihan', 'zh-hans': 'Select your preference' },
+                    checkoutPassword: { 'en-US': 'Password', 'ms-MY': 'Kata Laluan', 'zh-hans': 'Password' },
+                    checkoutYesID: { 'en-US': 'Yes ID / Number', 'ms-MY': 'ID Yes / Nombor', 'zh-hans': 'Yes ID / Number' },
+                    checkoutLogin: { 'en-US': 'Login', 'ms-MY': 'Daftar masuk', 'zh-hans': 'Login' },
+                    checkoutTACRequest: { 'en-US': 'Request TAC', 'ms-MY': 'Minta TAC', 'zh-hans': 'Request TAC' },
+                    checkoutTACResend: { 'en-US': 'Resend TAC', 'ms-MY': 'Minta Semula TAC', 'zh-hans': 'Resend TAC' },
+
+                    errorValidNumber: { 'en-US': 'Please insert valid Yes Number', 'ms-MY': 'Sila masukkan Nombor Yes yang sah', 'zh-hans': 'Please insert valid Yes Number' }
                 }
             },
             created: function() {
@@ -807,6 +841,7 @@
             methods: {
                 getPlanData: function() {
                     var self = this;
+
                     if (ywos.validateSession(self.currentStep)) {
                         self.planID = ywos.lsData.meta.planID;
 
@@ -817,12 +852,16 @@
                         } else {
                             self.ajaxGetPlanData();
                         }
+
+                        self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
                     } else {
                         self.isCartEmpty = true;
                         setTimeout(function() {
                             toggleOverlay(false);
                         }, 1500);
                     }
+
+                    self.requestOTPText = self.renderText('checkoutTACRequest');
                 },
                 ajaxGetPlanData: function() {
                     var self = this;
@@ -986,7 +1025,7 @@
                             $('#pills-loginTac-tab').trigger('click');
                             if (self.allowRequestOTP) {
                                 $('.item-otpPassword').hide();
-                                self.requestOTPText = 'Request TAC';
+                                self.requestOTPText = self.renderText('checkoutTACRequest');
                             } else {
                                 self.login.input.otp.yesNumber = '';
                             }
@@ -1013,7 +1052,8 @@
                     axios.post(apiEndpointURL + '/validate-login', {
                             'yes_number': self.loginInfo.yes_number,
                             'password': self.loginInfo.password,
-                            'auth_type': self.loginInfo.type
+                            'auth_type': self.loginInfo.type, 
+                            'locale': self.apiLocale
                         })
                         .then((response) => {
                             var data = response.data;
@@ -1056,7 +1096,7 @@
                         var inputOTPYesNumber = self.login.input.otp.inputYesNumber;
                         var emOTPForLogin = self.login.errorMessage.otp;
 
-                        $(emOTPForLogin).html('Please insert valid YES Number').show();
+                        $(emOTPForLogin).html(self.renderText('errorValidNumber')).show();
                         $(inputOTPYesNumber).focus();
                         $(inputOTPYesNumber).on('keydown', function() {
                             $(emOTPForLogin).hide().html('');
@@ -1068,7 +1108,8 @@
                 ajaxGenerateOTPForLogin: function() {
                     var self = this;
                     axios.post(apiEndpointURL + '/generate-otp-for-login', {
-                            'yes_number': self.login.input.otp.yesNumber
+                            'yes_number': self.login.input.otp.yesNumber, 
+                            'locale': self.apiLocale
                         })
                         .then((response) => {
                             $('.item-otpPassword').show();
@@ -1082,11 +1123,10 @@
                             var data = response.data;
                             var errorMsg = '';
                             if (error.response.status == 500 || error.response.status == 503) {
-                                errorMsg = "<p>There's an error in generating your TAC code.</p>";
+                                errorMsg = "<p>There's an error in generating your TAC code.<br /> Please try again later.</p>";
                             } else {
                                 errorMsg = data.message
                             }
-                            errorMsg += '<br /> Please try again later.';
                             $(self.login.errorMessage.otp).html(errorMsg).show();
 
                             $(self.login.input.otp.inputPassword).focus();
@@ -1127,7 +1167,7 @@
                             $('#input-otpPassword').hide();
                             clearInterval(interval);
                             self.allowRequestOTP = true;
-                            self.requestOTPText = 'Resend TAC';
+                            self.requestOTPText = self.renderText('checkoutTACResend');
                         }
                     }, 1000);
                 },
@@ -1297,6 +1337,9 @@
                             return;
                     }
                     pushAnalytics(eventType, pushData);
+                },
+                renderText: function(strID) {
+                    return ywos.renderText(strID, this.pageText);
                 }
             }
         });

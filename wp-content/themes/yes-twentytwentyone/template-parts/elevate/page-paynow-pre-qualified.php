@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-6 text-lg-center text-end">
-                    <h1 class="title_checkout p-3">Pre-Register Checkout</h1>
+                    <h1 class="title_checkout p-3">Pre Qualified Checkout</h1>
                 </div>
                 <div class="col-lg-4">
 
@@ -31,10 +31,13 @@
             <div class="container">
                 <ul class="wizard">
                     <li ui-sref="firstStep" class="completed">
-                        <span>1. Select Plan</span>
+                        <span>1. Verify</span>
+                    </li>
+                    <li ui-sref="firstStep" class="completed">
+                        <span>2. Select Plan</span>
                     </li>
                     <li ui-sref="secondStep" class="completed">
-                        <span>2. Payment</span>
+                        <span>3. Complete Order</span>
                     </li>
                 </ul>
             </div>
@@ -60,6 +63,7 @@
                             <h1 class="mb-4 d-none d-lg-block">Payment Info</h1>
                             <p class="sub mb-4 pe-5 d-none d-lg-block">This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.</p>
                             <h2>Select payment</h2>
+                            <div class="alert alert-warning mb-4" role="alert">Please ensure your web browser and/or 3rd party software pop-up blocker is disabled before you proceed with your transactions.</div>
                             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <button type="button" class="nav-link" id="nav-creditcard" role="tab" data-paymentnav="CREDIT_CARD" data-bs-toggle="pill" data-bs-target="#tab-creditcard" aria-controls="tab-creditcard" aria-selected="false" v-on:click="selectPaymentMethod('CREDIT_CARD')">
@@ -192,6 +196,7 @@
                                 <div class="col-12 col-lg-6">
                                     <button type="submit" class="pink-btn w-100" :disabled="!allowSubmit">Pay</button>
                                 </div>
+				<div id="error" style="color:red"></div>
                             </div>
                         </div>
                     </form>
@@ -484,6 +489,8 @@
                         deliveryType: ''
                     },
                     checkPaymentStatusCount: 0,
+                    checkPaymentStatusCountLimit: 78, // times every 5 seconds (5000), total = 6.5 minutes, excluding 10 seconds before first check
+                    paymentTimeout: false,
                     paymentResponse: null
                 },
                 mounted: function() {},
@@ -570,7 +577,7 @@
                             .finally(() => {
                                 setTimeout(function() {
                                     $('.form-select#select-bank').selectpicker('refresh');
-                                    // toggleOverlay(false);
+                                    toggleOverlay(false);
                                 }, 500);
                             });
                     },
@@ -635,7 +642,7 @@
                         self.paymentInfo.sst = self.orderSummary.orderDetail.sstAmount;
                         self.paymentInfo.totalAmount = self.orderSummary.orderDetail.total;
 
-                        self.ajaxGetMaybankIPPTenures();
+                        // self.ajaxGetMaybankIPPTenures();
                     },
                     toggleModalAlert: function(modalHeader = '', modalText = '') {
                         $('#modal-titleLabel').html(modalHeader);
@@ -652,56 +659,82 @@
                             'session_key': elevate.lsData.sessionKey,
                             'yos_order_id': self.orderResponse.orderNumber
                         };
-                        console.log(self.orderResponse);
+                        // console.log(self.orderResponse);
                         axios.post(apiEndpointURL + '/check-order-payment-status', params)
                             .then((response) => {
                                 var data = response.data;
-                                if (data != null && data.responseCode != null) {
-                                    console.log('payment through');
-                                    self.paymentResponse = data;
-                                    clearTimeout(timeoutObj);
+                                var responseCode = data.responseCode;
+                                var paymentId = data.paymentId;
+                                var recheck = false;
+                                var closePaymentWindow = false;
 
-                                    if (mainwin && !mainwin.closed) {
+                                if (responseCode == 0) {                        // Payment success
+                                    self.paymentResponse = data;
+                                    closePaymentWindow = true;
+                                    setTimeout(function() {
+                                        self.updatePaymentStatus(2);
+                                    }, 2000);
+                                } else if (responseCode == -1) {
+                                    if (paymentId == 'Not Available') {         // Payment in progress
+                                        recheck = true;
+                                    } else if (paymentId != 'Not Available') {  // Payment failed
+                                        closePaymentWindow = true;
+                                        toggleOverlay(false);
+                                        self.toggleModalAlert(this.renderText('error_payment'), this.renderText('your_payment_is_not_successful'));
+                                        setTimeout(function() {
+                                            self.updatePaymentStatus(-1, false);
+                                        }, 500);
+                                    }
+                                } else if (responseCode == -2 && paymentId != 'Not Available') {   // No response from bank
+                                    self.paymentResponse = data;
+                                    closePaymentWindow = true;
+                                    self.updatePaymentStatus(3);
+                                }
+
+                                if (recheck) {
+                                    if (self.checkPaymentStatusCount <= self.checkPaymentStatusCountLimit) {
+                                        self.checkPaymentStatusCount++;
+                                        setTimeout(function() {
+                                            if (!self.paymentTimeout) self.ajaxCheckOrderPaymentStatus(timeoutObj);
+                                        }, 5000);
+                                    } else {
+                                        toggleOverlay(false);
+                                        self.toggleModalAlert(this.renderText('error_payment'), this.renderText('your_payment_is_not_successful'));
+                                        closePaymentWindow = true;
+                                        setTimeout(function() {
+                                            self.updatePaymentStatus(-1, false);
+                                        }, 500);
+                                    }
+                                }
+
+                                if (closePaymentWindow) {
+                                    clearTimeout(timeoutObj);
+                                    self.paymentTimeout = true;
+                                    self.checkPaymentStatusCount = 0;
+                                    if (mainwin != null && !mainwin.closed) {
                                         mainwin.focus();
                                         mainwin.close();
                                     }
-
-                                    self.redirectThankYou();
-                                } else {
-                                    setTimeout(function() {
-                                        self.ajaxCheckOrderPaymentStatus(timeoutObj);
-                                    }, 10000);
                                 }
                             })
                             .catch((error) => {
-                                var response = error.response;
-                                self.checkPaymentStatusCount++;
-                                if (typeof response != 'undefined' && self.checkPaymentStatusCount > 4) {
-                                    var data = response.data;
-                                    var errorMsg = '';
-                                    if (error.response.status == 500 || error.response.status == 503) {
-                                        errorMsg = "There's an error in processing your payment.<br />Please try again later.";
-                                    } else {
-                                        errorMsg = data.message
-                                    }
+                                if (self.checkPaymentStatusCount <= self.checkPaymentStatusCountLimit) {
+                                    self.checkPaymentStatusCount++;
+                                    setTimeout(function() {
+                                        self.ajaxCheckOrderPaymentStatus(timeoutObj);
+                                    }, 5000);
+                                } else {
                                     toggleOverlay(false);
-                                    self.toggleModalAlert('Error Payment', errorMsg);
-                                    self.cancelElevateOrder(errorMsg);
-
-                                    //cancel Elevate order
+                                    self.toggleModalAlert(this.renderText('error_payment'), this.renderText('error_processing_payment') );
 
                                     clearTimeout(timeoutObj);
-
-                                    if (mainwin && !mainwin.closed) {
+                                    self.paymentTimeout = true;
+                                    self.checkPaymentStatusCount = 0;
+                                    if (mainwin != null && !mainwin.closed) {
                                         mainwin.focus();
                                         mainwin.close();
                                     }
-                                } else {
-                                    setTimeout(function() {
-                                        self.ajaxCheckOrderPaymentStatus(timeoutObj);
-                                    }, 10000);
                                 }
-                                console.log(error, response);
                             });
                     },
                     initXpay: function() {
@@ -717,12 +750,21 @@
                                 mainwin.focus();
                                 mainwin.close();
                             }
-                             self.redirectThankYou();
-                        }, 300000);
+                             //self.redirectThankYou();
+							 errorMsg = "Payment Timeout.";
+							//  self.cancelElevateOrder(errorMsg);
+
+                            clearTimeout(timeoutObj);
+                            self.paymentTimeout = true;
+                            self.checkPaymentStatusCount = 0;
+                            toggleOverlay(false);
+                            self.toggleModalAlert(this.renderText('error_payment'), this.renderText('payment_exceeds_time'));
+                        }, 360000);
 
                         mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
 
                         setTimeout(function() {
+                            self.paymentTimeout = false;
                             self.checkPaymentStatusCount = 0;
                             self.ajaxCheckOrderPaymentStatus(timeoutObject);
                         }, 10000);
@@ -828,7 +870,7 @@
                                     var data = response.data;
                                     var errorMsg = '';
                                     if (error.response.status == 500 || error.response.status == 503) {
-                                        errorMsg = "There's an error in creating your order.<br />Please try again later.";
+                                        errorMsg = this.renderText('error_create_order');
                                     } else {
                                         errorMsg = data.message
                                     }
@@ -836,6 +878,7 @@
                                     self.toggleModalAlert('Error', errorMsg);
 
                                     self.cancelElevateOrder(errorMsg);
+									self.updatePaymentStatus(-1);
                                 }
                                 console.log(error, response);
                             })
@@ -846,17 +889,11 @@
                         // console.log(JSON.stringify(params));
                     },
                     paymentSubmit: function(e) {
-                        var self = this;
                         toggleOverlay();
-                        if(self.orderResponse.orderNumber){
-                            this.initXpay();
-                        }else{
-                            this.ajaxCreateYOSOrder();
-                        }
-
+                        this.ajaxCreateYOSOrder();
                         e.preventDefault();
                     },
-                    redirectThankYou: function() {
+                    redirectThankYou: function(status) {
 
                         var self = this;
 
@@ -866,7 +903,7 @@
                         elevate.lsData.meta.paymentResponse = self.paymentResponse;
                         elevate.updateElevateLSData();
 
-                        elevate.redirectToPage('thanks-pre-qualified?orderNumber='+$('#displayOrderNumber').val());
+                        elevate.redirectToPage('thanks-pre-qualified?status='+status+'&orderNumber='+$('#displayOrderNumber').val());
                     },
                     updateElevateOrder: function (){
                         var self = this;
@@ -882,7 +919,7 @@
 									self.removePrequalifiedCustomer();
                                 }else{
                                     toggleOverlay(false);
-                                    $('#error').html("Systm error, please try again.");
+                                    $('#error').html(this.renderText('system_error'));
                                     console.log(data);
                                 }
                             })
@@ -908,12 +945,54 @@
 
                                 }else{
                                     toggleOverlay(false);
-                                    $('#error').html("Systm error, please try again.");
+                                    $('#error').html(this.renderText('system_error'));
                                     console.log(data);
                                 }
                             })
                             .catch((error) => {
                                 toggleOverlay(false);
+                                console.log(error, response);
+                            });
+
+                    },
+
+					updatePaymentStatus: function (status, redirect = true){
+                        var self = this;
+
+                        if (redirect) {
+                            toggleOverlay();
+                        }
+                        var param = {};
+
+						if(self.orderResponse){
+							param.orderNumber = self.orderResponse.orderNumber;
+						}else{
+							return;
+						}
+						if(self.orderResponse && self.paymentResponse){
+							param.paymentRef = self.paymentResponse.referenceNo;
+						}else{
+							param.paymentRef = "";
+						}
+                        param.status = status.toString();
+
+                        axios.post(apiEndpointURL_elevate + '/order/updatePayment', param)
+                            .then((response) => {
+                                var data = response.data;
+                                if(data.status == 1){
+									console.log(data);
+									if (redirect) {
+                                        self.redirectThankYou(status);
+                                    }
+                                }else{
+                                    toggleOverlay(false);
+                                    $('#error').html(this.renderText('system_error'));
+                                    console.log(data);
+                                }
+                            })
+                            .catch((error) => {
+                                toggleOverlay(false);
+								$('#error').html(error);
                                 console.log(error, response);
                             });
 
@@ -1056,6 +1135,9 @@
                     selectPaymentMethod: function(paymentMethod) {
                         this.paymentInfo.paymentMethod = paymentMethod;
                         this.watchAllowSubmit();
+                    },
+                    renderText: function(strID) {
+                        return elevate.renderText(strID, Elevate_lang);
                     }
                 }
             });

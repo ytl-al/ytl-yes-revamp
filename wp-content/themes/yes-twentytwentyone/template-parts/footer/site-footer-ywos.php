@@ -19,7 +19,7 @@
                     <img src="https://cdn.yes.my/site/wp-content/uploads/2022/03/yes-logo-new-grad2.png" height="40" />
                 </div>
                 <div class="col-12 col-md-5 d-flex align-items-center justify-content-md-start justify-content-sm-center">
-                    <p>Need help? See <a href="/faq">Help Pages</a> or <a href="mailto:yescare@yes.my">Contact Us</a></p>
+                    <p id="panel-footerNeedHelp"></p>
                 </div>
                 <div class="col-12 col-md-5 d-flex align-items-center justify-content-md-end justify-content-sm-center">
                     <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/footer-icons2.png" class="img-fluid" />

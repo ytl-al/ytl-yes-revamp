@@ -54,16 +54,16 @@
         <div class="container">
             <ul class="wizard">
                 <li ui-sref="firstStep" class="completed">
-                    <span>1. Verification</span>
+                    <span>1. {{ renderText('strVerification') }}</span>
                 </li>
                 <li ui-sref="secondStep" class="completed">
-                    <span>2. Delivery Details</span>
+                    <span>2. {{ renderText('strDelivery') }}</span>
                 </li>
                 <li ui-sref="thirdStep" class="completed">
-                    <span>3. Review</span>
+                    <span>3. {{ renderText('strReview') }}</span>
                 </li>
                 <li ui-sref="fourthStep" class="completed">
-                    <span>4. Payment Info</span>
+                    <span>4. {{ renderText('strPayment') }}</span>
                 </li>
             </ul>
         </div>
@@ -75,8 +75,8 @@
         <div class="container p-lg-5 p-3">
             <div class="row d-lg-none mb-3">
                 <div class="col">
-                    <h1>Payment Info</h1>
-                    <p class="sub mb-4 pe-5">This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.</p>
+                    <h1>{{ renderText('strPayment') }}</h1>
+                    <p class="sub mb-4 pe-5">{{ renderText('strPaymentSub') }}</p>
                 </div>
             </div>
             <div class="row gx-5" v-if="pageValid">
@@ -85,9 +85,10 @@
                 </div>
                 <form class="col-lg-7 col-12 order-lg-1 mt-3 mt-lg-0" autocomplete="off" @submit="paymentSubmit">
                     <div>
-                        <h1 class="mb-4 d-none d-lg-block">Payment Info</h1>
-                        <p class="sub mb-4 pe-5 d-none d-lg-block">This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.</p>
-                        <h2>Select payment</h2>
+                        <h1 class="mb-4 d-none d-lg-block">{{ renderText('strPayment') }}</h1>
+                        <p class="sub mb-4 pe-5 d-none d-lg-block">{{ renderText('strPaymentSub') }}</p>
+                        <h2>{{ renderText('strPaymentSelect') }}</h2>
+                        <div class="alert alert-warning mb-4" role="alert">{{ renderText('strPaymentInfo') }}</div>
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button type="button" class="nav-link" id="nav-creditcard" role="tab" data-paymentnav="CREDIT_CARD" data-bs-toggle="pill" data-bs-target="#tab-creditcard" aria-controls="tab-creditcard" aria-selected="false" v-on:click="selectPaymentMethod('CREDIT_CARD')">
@@ -111,9 +112,9 @@
                                     <template v-if="paymentInfo.paymentMethod == 'CREDIT_CARD'">
                                         <div class="row mb-4">
                                             <div class="col-lg-6">
-                                                <h4 class="my-3">Credit/Debit Card</h4>
+                                                <h4 class="my-3">{{ renderText('strPaymentTypeCard') }}</h4>
                                                 <p class="panel-weaccept">
-                                                    We accept
+                                                    {{ renderText('strWeAccept') }}
                                                     <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/visa.png" />
                                                     <!-- <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" /> -->
                                                     <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/mastercard.png" />
@@ -124,15 +125,15 @@
                                     <div v-bind:class="{ 'd-none': (maybankIPP.disabled || paymentInfo.paymentMethod != 'CREDIT_CARD_IPP') }">
                                         <div class="row mb-4">
                                             <div class="col-lg-6">
-                                                <h4 class="my-3">Maybank 0% EzyPay (Instalment Payment)</h4>
+                                                <h4 class="my-3">Maybank 0% EzyPay ({{ renderText('strInstalmentPayment') }})</h4>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
                                             <div class="col-lg-6">
-                                                <label class="form-label" for="select-tenure">Installment Type</label>
+                                                <label class="form-label" for="select-tenure">{{ renderText('strInstalmentType') }}</label>
                                                 <div class="form-group">
                                                     <select class="form-control form-select" id="select-tenure" data-live-search="false" name="ipp-tenure" v-model="paymentInfo.ippType" @change="watchTenureChange">
-                                                        <option value="" disabled="disabled" selected="selected">Select Installment Type</option>
+                                                        <option value="" disabled="disabled" selected="selected">{{ renderText('selectInstallmentType') }}</option>
                                                         <option v-for="ippType in maybankIPP.ippTypeList" :value="ippType.ippTenureType">{{ ippType.ippTenureTypeDisplay }}</option>
                                                     </select>
                                                 </div>
@@ -141,7 +142,7 @@
                                     </div>
                                     <div class="row mb-4">
                                         <div class="col-lg-6 col-12">
-                                            <label class="form-label" for="input-chName">* Cardholder Name</label>
+                                            <label class="form-label" for="input-chName">* {{ renderText('labelCardName') }}</label>
                                             <div class="input-group align-items-center">
                                                 <input type="text" class="form-control" id="input-chName" v-model="paymentInfo.nameOnCard" @input="watchAllowSubmit" placeholder="John Doe" @keypress="checkInputCharacters(event, 'alpha')" />
                                             </div>
@@ -149,7 +150,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6 col-12">
-                                            <label class="form-label" for="input-chNumber1">* Card Number</label>
+                                            <label class="form-label" for="input-chNumber1">* {{ renderText('labelCardNumber') }}</label>
                                             <div class="float-end layer-selectedCard">
                                                 <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/visa.png" height="15" v-bind:class="{ 'd-block': (paymentInfo.cardType == 'VISA') }" />
                                                 <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" height="25" v-bind:class="{ 'd-block': (paymentInfo.cardType == 'AMEX') }" />
@@ -166,11 +167,11 @@
                                                 <input type="text" class="form-control text-center" id="input-cardInput4" v-model="cardholder.number4" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(4, event)" @keypress="checkInputCharacters(event, 'numeric', false)" />
                                             </div>
                                         </div>
-                                        <p class="info mb-3">Numbers must contain 16 digits</p>
+                                        <p class="info mb-3">{{ renderText('infoCardNumber') }}</p>
                                     </div>
                                     <div class="row mb-4">
                                         <div class="col-lg-3 col-12">
-                                            <label class="form-label" for="input-cardInput5">* Exp Date</label>
+                                            <label class="form-label" for="input-cardInput5">* {{ renderText('labelCardExpiry') }}</label>
                                             <div class="input-group align-items-center">
                                                 <input type="text" class="form-control text-center" id="input-cardInput5" autocomplete="off" v-model="paymentInfo.cardExpiryMonth" placeholder="00" maxlength="2" @input="checkCardInputJump(5, event)" @keypress="checkInputCharacters(event, 'numeric', false)" /> <span class="mx-2">/</span>
                                                 <input type="text" class="form-control text-center" id="input-cardInput6" autocomplete="off" v-model="paymentInfo.cardExpiryYear" placeholder="0000" maxlength="4" @input="checkCardInputJump(6, event)" @keypress="checkInputCharacters(event, 'numeric', false)" />
@@ -200,7 +201,7 @@
                                 <div class="tab-paneContent">
                                     <div class="row mb-4">
                                         <div class="col-lg-6">
-                                            <h4 class="my-3">Online Banking (FPX)</h4>
+                                            <h4 class="my-3">{{ renderText('strPaymentTypeFPX') }}</h4>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -214,7 +215,7 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <select class="form-control form-select" id="select-bank" data-live-search="true" name="fpx-bank" v-model="paymentInfo.bankCode" @change="watchBankSelect">
-                                                    <option value="" disabled="disabled" selected="selected">Select a Bank</option>
+                                                    <option value="" disabled="disabled" selected="selected">{{ renderText('selectSelectBank') }}</option>
                                                     <option v-for="fpxBank in fpxBankList" :value="fpxBank.bankCode" :disabled="!fpxBank.available" :data-bankname="fpxBank.bankName">{{ fpxBank.bankName }}</option>
                                                 </select>
                                             </div>
@@ -226,7 +227,7 @@
 
                         <div class="row">
                             <div class="col-12 col-lg-6">
-                                <button type="submit" class="pink-btn w-100" :disabled="!allowSubmit">Pay</button>
+                                <button type="submit" class="pink-btn w-100" :disabled="!allowSubmit">{{ renderText('strBtnPay') }}</button>
                             </div>
                         </div>
                     </div>
@@ -502,7 +503,46 @@
                     deliveryType: ''
                 },
                 checkPaymentStatusCount: 0,
-                paymentResponse: null
+                checkPaymentStatusCountLimit: 78, // times every 5 seconds (5000), total = 6.5 minutes, excluding 10 seconds before first check
+                paymentTimeout: false,
+                paymentResponse: null,
+
+                apiLocale: 'EN', 
+                pageText: {
+                    strVerification: { 'en-US': 'Verification', 'ms-MY': 'Pengesahan', 'zh-hans': 'Verification' },
+                    strDelivery: { 'en-US': 'Delivery Details', 'ms-MY': 'Butiran Penghantaran', 'zh-hans': 'Delivery Details' },
+                    strReview: { 'en-US': 'Review', 'ms-MY': 'Semak', 'zh-hans': 'Review' },
+                    strPayment: { 'en-US': 'Payment Info', 'ms-MY': 'Maklumat Pembayaran', 'zh-hans': 'Payment Info' },
+                    
+                    strFillIn: { 'en-US': 'Please fill in your ID information and mobile number to proceed', 'ms-MY': 'Sila isikan maklumat ID dan nombor mudah alih untuk teruskan', 'zh-hans': 'Please fill in your ID information and mobile number to proceed' },
+                    strPaymentSub: { 'en-US': 'This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.', 'ms-MY': 'Maklumat ini diperlukan untuk pembelian dalam talian dan digunakan untuk mengesahkan dan melindungi identiti anda. Kami menyimpan maklumat ini dengan selamat dan tidak akan menggunakannya untuk tujuan lain.', 'zh-hans': 'This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.' },
+                    strPaymentSelect: { 'en-US': 'Select payment', 'ms-MY': 'Pilih bayaran', 'zh-hans': 'Select payment' },
+                    strPaymentInfo: { 'en-US': 'Please ensure your web browser and/or 3rd party software pop-up blocker is disabled before you proceed with your transactions.', 'ms-MY': 'Sila pastikan pelayar web dan/atau perisian penyekat jendela timbul pihak ketiga telah dilumpuhkan sebelum anda meneruskan transaksi.', 'zh-hans': 'Please ensure your web browser and/or 3rd party software pop-up blocker is disabled before you proceed with your transactions.' },
+
+                    strPaymentTypeCard: { 'en-US': 'Credit/Debit Card', 'ms-MY': 'Kad Kredit/Debit', 'zh-hans': 'Credit/Debit Card' },
+                    strWeAccept: { 'en-US': 'We accept', 'ms-MY': 'Kami terima', 'zh-hans': 'We accept' },
+
+                    strInstalmentPayment: { 'en-US': 'Instalment Payment', 'ms-MY': 'Bayaran Ansuran', 'zh-hans': 'Instalment Payment' },
+                    strInstalmentType: { 'en-US': 'Instalment Type', 'ms-MY': 'Jenis Ansuran', 'zh-hans': 'Instalment Type' },
+                    selectInstallmentType: { 'en-US': 'Select Installment Type', 'ms-MY': 'Pilih Jenis Ansuran', 'zh-hans': 'Select Installment Type' },
+
+                    labelCardName: { 'en-US': 'Cardholder Name', 'ms-MY': 'Nama Pemegang Kad', 'zh-hans': 'Cardholder Name' },
+                    labelCardNumber: { 'en-US': 'Card Number', 'ms-MY': 'Nombor Kad', 'zh-hans': 'Card Number' },
+                    infoCardNumber: { 'en-US': 'Numbers must contain 16 digits', 'ms-MY': 'Nombor mesti mempunyai 16 digit', 'zh-hans': 'Numbers must contain 16 digits' },
+                    labelCardExpiry: { 'en-US': 'Exp Date', 'ms-MY': 'Tarikh Luput', 'zh-hans': 'Exp Date' },
+
+                    strPaymentTypeFPX: { 'en-US': 'Online Banking (FPX)', 'ms-MY': 'Perbankan Dalam Talian (FPX)', 'zh-hans': 'Online Banking (FPX)' },
+                    selectSelectBank: { 'en-US': 'Select a Bank', 'ms-MY': 'Pilih Bank', 'zh-hans': 'Select a Bank' },
+
+                    strBtnPay: { 'en-US': 'Pay', 'ms-MY': 'Bayar', 'zh-hans': 'Pay' },
+
+                    errorCreateOrder: { 'en-US': "There's an error in creating your order.<br />Please try again later.", 'ms-MY': 'Terdapat ralat dalam membuat pesanan.<br />Sila cuba lagi kemudian.', 'zh-hans': "There's an error in creating your order.<br />Please try again later." },
+                    errorProcessingPayment: { 'en-US': "There's an error in processing your payment.<br />Please try again later.", 'ms-MY': 'Terdapat ralat dalam pemprosesan bayaran.<br />Sila cuba lagi kemudian.', 'zh-hans': "There's an error in processing your payment.<br />Please try again later." },
+                    errorPaymentNotSuccessful: { 'en-US': 'Your payment is not successful.<br />Please try again.', 'ms-MY': 'Pembayaran anda tidak berjaya.<br />Sila cuba lagi kemudian.', 'zh-hans': 'Your payment is not successful.<br />Please try again.' },
+                    errorPaymentExceed: { 'en-US': 'You have exceeds the time for payment window. Please try again.', 'ms-MY': 'Anda telah melebihi waktu pembayaran. Sila cuba lagi.', 'zh-hans': 'You have exceeds the time for payment window. Please try again.' },
+                    modalErrorPaymentTitle: { 'en-US': 'Payment Error', 'ms-MY': 'Ralat Pembayaran', 'zh-hans': 'Payment Error' },
+                    modalErrorTitle: { 'en-US': 'Error', 'ms-MY': 'Ralat', 'zh-hans': 'Error' },
+                }
             },
             mounted: function() {},
             created: function() {
@@ -525,6 +565,7 @@
                     
                     if (ywos.validateSession(self.currentStep)) {
                         self.pageValid = true;
+                        self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
                         self.ajaxGetFPXBankList();
                         self.updateData();
                     } else {
@@ -647,49 +688,72 @@
                     axios.post(apiEndpointURL + '/check-order-payment-status', params)
                         .then((response) => {
                             var data = response.data;
-                            if (data != null && data.responseCode != null) {
-                                // console.log('payment through');
+                            var responseCode = data.responseCode;
+                            var paymentId = data.paymentId;
+                            var recheck = false;
+                            var closePaymentWindow = false;
+                            
+                            if (responseCode == 0) {                        // Payment success
                                 self.paymentResponse = data;
-                                clearTimeout(timeoutObj);
+                                closePaymentWindow = true;
+                                setTimeout(function() {
+                                    self.redirectThankYou(1);
+                                }, 2000);
+                            } else if (responseCode == -1) {   
+                                if (paymentId == 'Not Available') {         // Payment in progress
+                                    recheck = true;
+                                } else if (paymentId != 'Not Available') {  // Payment failed
+                                    closePaymentWindow = true;
+                                    toggleOverlay(false);
+                                    self.toggleModalAlert(self.renderText('modalErrorPaymentTitle'), self.renderText('errorPaymentNotSuccessful'));
+                                }
+                            } else if (responseCode == -2 && paymentId != 'Not Available') {   // No response from bank
+                                self.paymentResponse = data;
+                                closePaymentWindow = true;
+                                self.redirectThankYou(2);
+                            }
 
-                                if (mainwin && !mainwin.closed) {
+                            if (recheck) {
+                                if (self.checkPaymentStatusCount <= self.checkPaymentStatusCountLimit) {
+                                    self.checkPaymentStatusCount++;
+                                    setTimeout(function() {
+                                        if (!self.paymentTimeout) self.ajaxCheckOrderPaymentStatus(timeoutObj);
+                                    }, 5000);
+                                } else {
+                                    toggleOverlay(false);
+                                    self.toggleModalAlert(self.renderText('modalErrorPaymentTitle'), self.renderText('errorPaymentNotSuccessful'));
+                                    closePaymentWindow = true;
+                                }
+                            }
+
+                            if (closePaymentWindow) {
+                                clearTimeout(timeoutObj);
+                                self.paymentTimeout = true;
+                                self.checkPaymentStatusCount = 0;
+                                if (mainwin != null && !mainwin.closed) {
                                     mainwin.focus();
                                     mainwin.close();
                                 }
-
-                                self.redirectThankYou();
-                            } else {
-                                setTimeout(function() {
-                                    self.ajaxCheckOrderPaymentStatus(timeoutObj);
-                                }, 10000);
                             }
                         })
                         .catch((error) => {
-                            var response = error.response;
-                            self.checkPaymentStatusCount++;
-                            if (typeof response != 'undefined' && self.checkPaymentStatusCount > 59) {
-                                var data = response.data;
-                                var errorMsg = '';
-                                if (error.response.status == 500 || error.response.status == 503) {
-                                    errorMsg = "There's an error in processing your payment.<br />Please try again later.";
-                                } else {
-                                    errorMsg = data.message
-                                }
+                            if (self.checkPaymentStatusCount <= self.checkPaymentStatusCountLimit) {
+                                self.checkPaymentStatusCount++;
+                                setTimeout(function() {
+                                    self.ajaxCheckOrderPaymentStatus(timeoutObj);
+                                }, 5000);
+                            } else {
                                 toggleOverlay(false);
-                                self.toggleModalAlert('Error Payment', errorMsg);
+                                self.toggleModalAlert(self.renderText('modalErrorPaymentTitle'), self.renderText('errorProcessingPayment'));
 
                                 clearTimeout(timeoutObj);
-
-                                if (mainwin && !mainwin.closed) {
+                                self.paymentTimeout = true;
+                                self.checkPaymentStatusCount = 0;
+                                if (mainwin != null && !mainwin.closed) {
                                     mainwin.focus();
                                     mainwin.close();
                                 }
-                            } else {
-                                setTimeout(function() {
-                                    self.ajaxCheckOrderPaymentStatus(timeoutObj);
-                                }, 10000);
                             }
-                            // console.log(error, response);
                         });
                 }, 
                 initXpay: function() {
@@ -703,11 +767,18 @@
                             mainwin.close();
                         }
                         // self.redirectThankYou();
-                    }, 300000);
+
+                        clearTimeout(timeoutObj);
+                        self.paymentTimeout = true;
+                        self.checkPaymentStatusCount = 0;
+                        toggleOverlay(false);
+                        self.toggleModalAlert(self.renderText('modalErrorPaymentTitle'), self.renderText('errorPaymentExceed'));
+                    }, 360000);
 
                     mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
                     
                     setTimeout(function() {
+                        self.paymentTimeout = false;
                         self.checkPaymentStatusCount = 0;
                         self.ajaxCheckOrderPaymentStatus(timeoutObject);
                     }, 10000);
@@ -758,7 +829,8 @@
                         'card_cvv'      : self.paymentInfo.cardCVV, 
                         'card_expiry_month' : self.paymentInfo.cardExpiryMonth, 
                         'card_expiry_year'  : self.paymentInfo.cardExpiryYear, 
-                        'ippType'       : self.paymentInfo.ippType
+                        'ippType'       : self.paymentInfo.ippType, 
+                        'locale'        : self.apiLocale
                     };
                     axios.post(apiEndpointURL + '/create-yos-order', params)
                         .then((response) => {
@@ -772,12 +844,12 @@
                                 var data = response.data;
                                 var errorMsg = '';
                                 if (error.response.status == 500 || error.response.status == 503) {
-                                    errorMsg = "There's an error in creating your order.<br />Please try again later.";
+                                    errorMsg = self.renderText('errorCreateOrder');
                                 } else {
                                     errorMsg = data.message
                                 }
                                 toggleOverlay(false);
-                                self.toggleModalAlert('Error', errorMsg);
+                                self.toggleModalAlert(self.renderText('modalErrorTitle'), errorMsg);
                             }
                             // console.log(error, response);
                         })
@@ -792,7 +864,7 @@
                     this.ajaxCreateYOSOrder();
                     e.preventDefault();
                 },
-                redirectThankYou: function() {
+                redirectThankYou: function(paymentStatus) {
                     var self = this;
 
                     ywos.lsData.meta.completedStep = self.currentStep;
@@ -802,7 +874,7 @@
                     ywos.updateYWOSLSData();
 
                     setTimeout(function() {
-                        ywos.redirectToPage('thank-you');
+                        ywos.redirectToPage('thank-you?status=' + paymentStatus);
                     }, 2000);
                     self.sendAnalytics();
                 },
@@ -943,6 +1015,9 @@
                         });
                     }
                     pushAnalytics(eventType, pushData);
+                },
+                renderText: function(strID) {
+                    return ywos.renderText(strID, this.pageText);
                 }
             }
         });

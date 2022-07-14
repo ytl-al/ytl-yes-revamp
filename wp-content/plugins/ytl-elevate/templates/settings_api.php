@@ -58,6 +58,17 @@ $apiSetting =  \Inc\Base\Model::getAPISettings();
                         <td><label>Client_Secret</label></td>
                         <td><input type="text" name="client_secret" class="form-control" value="<?= @$apiSetting['client_secret']; ?>" size="50"></td>
                     </tr>
+					
+					<tr>
+                        <td><label>API Log</label></td>
+                        <td>
+							<select type="text" name="api_log" class="form-control" >
+								<option value="">No Log</option>
+								<option value="error" <?= (@$apiSetting['api_log'] == 'error')?'selected':'' ?>>Log Error Only</option>
+								<option value="all" <?= (@$apiSetting['api_log'] == 'all')?'selected':'' ?>>Log All</option>
+							</select>
+						</td>
+                    </tr>
 
                 </table>
                 <input type="submit" name="submit" value="Update">

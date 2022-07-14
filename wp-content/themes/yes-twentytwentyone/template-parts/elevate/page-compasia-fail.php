@@ -1,5 +1,5 @@
 <?php require_once('includes/header.php') ?>
-
+<div id="main-vue">
 <header class="white-top">
     <div class="container">
         <div class="row">
@@ -7,7 +7,7 @@
                 <div class="mt-4">
                     <a href="/elevate/cart/" class="back-btn "><img
                                 src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
-                                alt=""> Back to Cart</a>
+                                alt=""> {{ renderText('back_to_cart') }}</a>
                 </div>
             </div>
             <div class="col-lg-4 col-6 text-lg-center text-end">
@@ -24,28 +24,28 @@
         <div class="container">
             <ul class="wizard">
                 <li ui-sref="firstStep" class="completed">
-                    <span>1. Eligibility check</span>
+                    <span>{{ renderText('elevate_step_1') }}</span>
                 </li>
                 <li ui-sref="secondStep" class="completed">
-                    <span>2. MyKAD verification</span>
+                    <span>{{ renderText('elevate_step_2') }}</span>
                 </li>
                 <li ui-sref="thirdStep">
-                    <span>3. Delivery details</span>
+                    <span>{{ renderText('elevate_step_3') }}</span>
                 </li>
                 <li ui-sref="fourthStep">
-                    <span>4. Review and order</span>
+                    <span>{{ renderText('elevate_step_4') }}</span>
                 </li>
             </ul>
         </div>
     </section>
     <section id="cart-body">
         <div class="container" style="border: 0">
-            <div id="main-vue">
+            <div >
             <div class="border-box">
                 <div class="row">
                     <div class="col-md-5 p-5 flex-column bg-checkout3">
                         <div class="title text-white checkout-left3">
-                            Sorry! We’ve checked and you currently do not qualify for the Yes Infinite+ contract option
+                            {{ renderText('compasia_fail_error1') }}
                         </div>
                     </div>
                     <div class="col-md-7  p-5">
@@ -60,13 +60,13 @@
                                          </svg>
                                      </div>
                                      <div class="col-11 text-bold">
-                                         Sorry, you do not qualify for the Yes Infinite+ contract option, please select another contract option:
+                                         {{ renderText('compasia_fail_error2') }}
                                      </div>
 
                                  </div>
 
                                 <div class="p-3">
-                                    <a href="/infinite-phone-bundles/" class="pink-btn text-uppercase">Back to Infinite+</a>
+                                    <a href="/infinite-phone-bundles/" class="pink-btn text-uppercase">{{ renderText('back_to_infinite') }}</a>
                                 </div>
                                 <div id="error" class="mt-3"></div>
                             </div>
@@ -80,6 +80,7 @@
     </section>
 
 </main>
+</div>
 <?php require_once('includes/footer.php'); ?>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -242,6 +243,9 @@
                     if(self.selectedPlan.productCode) {
                         ywos.buyPlan(self.selectedPlan.productCode);
                     }
+                },
+                renderText: function(strID) {
+                    return elevate.renderText(strID, Elevate_lang);
                 },
                 goNext: function(){
                     $('#error').html('');

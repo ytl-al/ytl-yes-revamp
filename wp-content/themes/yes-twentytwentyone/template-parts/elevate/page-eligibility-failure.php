@@ -12,7 +12,7 @@
         padding-top: 0px;
         background-color:#F7F8F9;
     }
-    
+
     .item-plans h1 {
         font-size: 39px;
         font-weight: 800;
@@ -20,12 +20,12 @@
         color: #000;
         padding-top: 60px;
     }
-    
+
     .item-plans .plan-table {
         border-spacing: 8px 0px;
         border-collapse: initial;
     }
-    
+
     .item-plans .plan-table th {
         padding: 9px 30px;
         vertical-align: middle;
@@ -35,17 +35,17 @@ border:none;
 width:20%;
 text-align:center;
     }
-    
+
     .item-plans .plan-table th .pink-btn {
         padding:.375rem .75rem;
     display: inline-block;
     }
-    
+
     .item-plans .plan-table th.visual {
         background-color: transparent;
         border: none;
     }
-    
+
     .item-plans .plan-table th h1 {
          color: #2B2B2B;
 font-family: 'Open Sans', sans-serif;
@@ -56,7 +56,7 @@ font-family: 'Open Sans', sans-serif;
         margin-bottom: 15px;
         padding-top: 0px;
     }
-    
+
     .item-plans .plan-table th h2 {
         color: #000;
         font-size: 18px;
@@ -65,7 +65,7 @@ font-family: 'Open Sans', sans-serif;
         text-align: center;
         margin-bottom: 15px;
     }
-    
+
     .item-plans .plan-table tr td {
         padding: 20px;
         text-align: center;
@@ -76,11 +76,11 @@ font-family: 'Open Sans', sans-serif;
         font-weight: 600;
         vertical-align: middle;
     }
-    
+
     .item-plans .plan-table tr:last-child td {
         border-bottom: none;
     }
-    
+
     .item-plans .plan-table tr td.blue-col {
         background-color:#1A1E47;
         border-bottom: none;
@@ -88,7 +88,7 @@ font-family: 'Open Sans', sans-serif;
         color: #F9F7F4;
         text-align: left;
     }
-    
+
     .item-plans .plan-table tr td.blue-col .info-icon {
         /* position: absolute;
         right: 22px;
@@ -101,14 +101,14 @@ font-family: 'Open Sans', sans-serif;
         content: '';
         display: block;
     }
-    
+
     .item-plans .plan-table tr td.empty-row {
         background-color: transparent;
         border: none;
         padding: 0;
         height: 10px;
     }
-	
+
 	.plan-item {
 		border: 3px solid transparent !important;
 		box-sizing: border-box;
@@ -147,16 +147,16 @@ font-family: 'Open Sans', sans-serif;
         <div class="container">
             <ul class="wizard">
                 <li ui-sref="firstStep" class="completed">
-                    <span>1. Eligibility check</span>
+                    <span>{{ renderText('elevate_step_1') }}</span>
                 </li>
                 <li ui-sref="secondStep" class="completed">
-                    <span>2. MyKAD verification</span>
+                    <span>{{ renderText('elevate_step_2') }}</span>
                 </li>
                 <li ui-sref="thirdStep">
-                    <span>3. Delivery details</span>
+                    <span>{{ renderText('elevate_step_3') }}</span>
                 </li>
                 <li ui-sref="fourthStep">
-                    <span>4. Review and order</span>
+                    <span>{{ renderText('elevate_step_4') }}</span>
                 </li>
             </ul>
         </div>
@@ -275,7 +275,7 @@ font-family: 'Open Sans', sans-serif;
                         <div id="tab-prepaid" class="item-plans mt-3 p-lg-5 tabcontent" style="display: none">
 							  <div  class="table-responsive">
                             <table class="table plan-table">
-							
+
                             <thead>
                                 <tr>
                                     <th class="text-center visual"><img src="https://cdn.yes.my/site/wp-content/uploads/2021/10/kasiup-prepaid-visual.png" class="img-fluid d-none"></th>
@@ -323,8 +323,8 @@ font-family: 'Open Sans', sans-serif;
                                     <td>9GB</td>
                                 </tr>
                             </tbody>
-                        </table> 
-							 
+                        </table>
+
 							</div>
                         </div>
                         <div class="p-lg-5 text-end">
@@ -386,6 +386,9 @@ font-family: 'Open Sans', sans-serif;
                     var self = this;
                     toggleOverlay();
                     ywos.buyPlan(self.selectedPlan);
+                },
+                renderText: function(strID) {
+                    return elevate.renderText(strID, Elevate_lang);
                 },
                 goNext: function(){
                     var self = this;

@@ -3,7 +3,7 @@
 <style type="text/css">
     .nav-container .navbar { padding-top: 8px; padding-bottom: 8px; }
 </style>
-
+<div id="main-vue" style="display: none">
 <header class="page-header">
     <div class="nav-container">
         <div class="container g-lg-0">
@@ -13,9 +13,9 @@
                         <a class="navbar-brand d-flex justify-content-start py-0" href="/"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/03/yes-logo-new-white.png" class="logo-top"></a>
                         <div class="justify-content-end" id="navbarSupportedContent">
                             <div class="d-flex align-items-center justify-content-end">
-                                <a href="#" class="mx-3">Help</a>
+                                <a href="#" class="mx-3">{{ renderText('help') }}</a>
                                 <!-- <?php if (function_exists('yes_language_switcher')) echo yes_language_switcher(); ?> -->
-                                <a href="#" class="login-btn"><span class="iconify" data-icon="bx:bxs-cart"></span> <span id="totalItemCart">1</span> item</a>
+                                <a href="#" class="login-btn"><span class="iconify" data-icon="bx:bxs-cart"></span> <span id="totalItemCart">1</span> {{ renderText('items') }}</a>
                             </div>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
         </div>
     </div>
 </header>
-<div id="main-vue" style="display: none">
+<div>
 <main class="clearfix site-main" id="primary" >
     <div id="container-empty" v-if="isCartEmpty">
         <section id="grey-innerbanner">
@@ -43,8 +43,8 @@
                                 <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/kasiup-postpaid-visual.png" class="img-fluid" alt="" />
                             </div>
                             <div class="col-12 p-3 px-5">
-                                <h3 class="mt-5 mt-lg-0">No item in the cart</h3>
-                                <p class="mb-3">You may browse the plans available <a href="/infinite-phone-bundles/">here</a>.</p>
+                                <h3 class="mt-5 mt-lg-0">{{ renderText('no_item_in_cart') }}</h3>
+                                <p class="mb-3" v-html="renderText('browse_plan_here')"></p>
                             </div>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
-            <h1 class="title">{{ orderSummary.product.selected.nameEN }}</h1>
+            <h1 class="title">{{ orderSummary.product.selected.name }}</h1>
         </div>
     </section>
     <!-- Banner End -->
@@ -93,19 +93,19 @@
                             </div>
                             <div class="col-md-7">
                                 <div class="pad-mobile">
-                                    <h2 class="subtitle">{{ orderSummary.product.selected.nameEN }}</h2>
+                                    <h2 class="subtitle">{{ orderSummary.product.selected.name }}</h2>
                                     <div class="mt-3">
-                                        <div class="text-bold">Capacity</div>
+                                        <div class="text-bold">{{ renderText('capacity') }}</div>
                                         <div class="hlv_3">
                                             {{ orderSummary.product.selected.capacity }}
                                         </div>
                                     </div>
                                     <div class="mt-3">
-                                        <div class="text-bold">Plan</div>
+                                        <div class="text-bold">{{ renderText('plan') }}</div>
                                         <div class="accordion-wrap hlv_3">
-                                            <div class="accordion-header" @click="showPlanDetail()"> {{orderSummary.product.selected.plan.nameEN}} <i
+                                            <div class="accordion-header" @click="showPlanDetail()"> {{orderSummary.product.selected.plan.name}} <i
                                                         class="icon icon_arrow_down"></i></div>
-                                            <div class="text-description mt-3">{{orderSummary.product.selected.plan.shortDescriptionEN}}</div>
+                                            <div class="text-description mt-3">{{orderSummary.product.selected.plan.shortDescription}}</div>
                                             <ul class="accordion-body list-1 mt-3">
                                                 <li v-for="(list, index) in orderSummary.product.selected.plan.longDescriptionEN">{{list}}</li>
                                             </ul>
@@ -115,7 +115,7 @@
                                         </div>
                                     </div>
                                     <div class="hr_line"></div>
-                                    <div class="text-bold mt-3">Select color</div>
+                                    <div class="text-bold mt-3">{{ renderText('select_color') }}</div>
                                     <div class="selectColorWrap mt-3">
                                         <ul>
                                             <li v-for="(image, index) in orderSummary.product.images" @click="changeColor(image.color)"
@@ -123,7 +123,7 @@
                                         </ul>
                                     </div>
 									<div style="display:none;">
-                                    <div class="text-bold mt-3" v-if="orderSummary.orderDetail.color">Select contract type</div>
+                                    <div class="text-bold mt-3" v-if="orderSummary.orderDetail.color">{{ renderText('select_contract_type') }}</div>
                                     <div class="selectContractWrap mt-3" v-if="orderSummary.orderDetail.color">
                                         <ul>
                                             <li v-for="(contract, index) in orderSummary.product.colors[orderSummary.orderDetail.color]" @click="changeContract(contract.productCode)" :data-contract-id="contract.productCode" class="text-uppercase" :class="'contract_' + contract.productCode + ((parseFloat(orderSummary.orderDetail.productCode) == parseFloat(contract.productCode))?' selected':'')"><a>
@@ -135,7 +135,7 @@
 									</div>
                                     <div class="hr_line"></div>
                                     <div class="text-note" v-if="orderSummary.orderDetail.productCode">
-                                        <div v-for="(detail, index) in orderSummary.product.selected.productNoteEN">{{detail | trim}}</div>
+                                        <div v-for="(detail, index) in orderSummary.product.selected.productNote">{{detail | trim}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -144,12 +144,12 @@
                 </div>
                 <div class="col-lg-4 col-12">
                     <div class="summary-box">
-                        <h1 class="subtitle">Order summary</h1>
-                        <h3 class="plan_price">Monthly Payment</h3>
+                        <h1 class="subtitle">{{ renderText('order_summary') }}</h1>
+                        <h3 class="plan_price">{{ renderText('monthly_payment') }}</h3>
                         <div class="hr_line"></div>
                         <div class="row cart_total">
                             <div class="col-6 pt-2 pb-2">
-                                <h3>TOTAL</h3>
+                                <h3>{{ renderText('total') }}</h3>
                             </div>
                             <div class="col-6 pt-2 pb-2 text-end">
                                 <h3>RM{{ formatPrice(orderSummary.orderDetail.subtotal) }}/mth</h3>
@@ -163,10 +163,10 @@
                                 <div class="col-6 text-end">
                                     <p>RM{{formatPrice(item.price)}}/ mth</p>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
 
-                        <a href="javascript:void(0)" @click="goNext" class="pink-btn-disable d-block" :class="allowSubmit?'pink-btn':'pink-btn-disable'">Continue</a>
+                        <a href="javascript:void(0)" @click="goNext" class="pink-btn-disable text-uppercase d-block" :class="allowSubmit?'pink-btn':'pink-btn-disable'">{{ renderText('checkout') }}</a>
                     </div>
                 </div>
             </div>
@@ -174,6 +174,7 @@
     </section>
     </div>
 </main>
+</div>
 </div>
 <?php require_once('includes/footer.php'); ?>
 </div>
@@ -208,7 +209,9 @@
                         selected:{
                             productCode:'',
                             code:'',
+                            name:'',
                             nameEN:'',
+                            shortDescription:'',
                             shortDescriptionEN:'',
                             productBundleId:'',
                             extraProperties:'',
@@ -222,7 +225,8 @@
                             plan:{
                                 planId:'',
                                 nameEN:'',
-                                shortDescriptionEN:'',
+                                name:'',
+                                shortDescription:'',
                             }
                         },
                         colors:[]
@@ -271,7 +275,7 @@
                         $('#totalItemCart').text("0");
                         setTimeout(function() {
                             $('#container-hasItem').show();
-                            $('#main-vue').css({'height':'auto'});h
+                            $('#main-vue').css({'height':'auto'});
                             toggleOverlay(false);
                         }, 1500);
                     }
@@ -286,6 +290,11 @@
                             if (data.internetData == '∞') {
                                 data.internetData = 'Unlimited';
                             }
+
+                            var filteredBalance = data.images.filter((image) => { return data.colors[image.color][0].balance > 0; })
+                            data.images = filteredBalance;
+
+                            data = self.updateLang(data);
 
                             self.orderSummary.product = data;
 
@@ -305,6 +314,32 @@
                             console.log(error);
                         })
                 },
+                updateLang: function (data){
+                    switch (elevate.getCurrentLang()){
+                        case 'ms-MY':
+                            data.selected.name = data.selected.nameBM;
+                            data.selected.shortDescription = data.selected.shortDescriptionBM;
+                            data.selected.longDescription = data.selected.longDescriptionBM;
+                            data.selected.productNote = data.selected.productNoteBM;
+
+                            data.selected.plan.name = data.selected.plan.nameBM;
+                            data.selected.plan.shortDescription = data.selected.plan.shortDescriptionBM;
+                            data.selected.plan.longDescription = data.selected.plan.longDescriptionBM;
+                            break;
+                        default:
+                            data.selected.name = data.selected.nameEN;
+                            data.selected.shortDescription = data.selected.shortDescriptionEN;
+                            data.selected.longDescription = data.selected.longDescriptionEN;
+                            data.selected.productNote = data.selected.productNoteEN;
+
+                            data.selected.plan.name = data.selected.plan.nameEN;
+                            data.selected.plan.shortDescription = data.selected.plan.shortDescriptionEN;
+                            data.selected.plan.longDescription = data.selected.plan.longDescriptionEN;
+                            break;
+                    }
+                    return data;
+                },
+
                 updatePlan: function() {
                     var self = this;
 
@@ -317,11 +352,11 @@
                     var total = 0;
 
                     self.orderSummary.orderDetail.orderItems = [
-                        {name: self.orderSummary.product.selected.nameEN + ' - ' + self.orderSummary.product.selected.color,price:parseFloat(self.orderSummary.product.selected.devicePriceMonth).toFixed(2)},
-                        {name: self.orderSummary.product.selected.plan.nameEN,price:parseFloat(self.orderSummary.product.selected.plan.monthlyAmount).toFixed(2)},
+                        {name: self.orderSummary.product.selected.name + ' - ' + self.orderSummary.product.selected.color,price:parseFloat(self.orderSummary.product.selected.devicePriceMonth).toFixed(2)},
+                        {name: self.orderSummary.product.selected.plan.name,price:parseFloat(self.orderSummary.product.selected.plan.monthlyAmount).toFixed(2)},
                     ];
 
-                    var subtotal = parseFloat(self.orderSummary.product.selected.devicePriceMonth) + parseFloat(self.orderSummary.product.selected.planPerMonth);
+                    var subtotal = parseFloat(self.orderSummary.product.selected.devicePriceMonth) + parseFloat(self.orderSummary.product.selected.plan.monthlyAmount);
 
 					var amount = parseFloat(self.orderSummary.product.selected.plan.monthlyAmount);
                     var sstAmount = parseFloat(self.orderSummary.product.selected.plan.sstAmount);
@@ -367,6 +402,8 @@
                     self.orderSummary.orderDetail.productCode = contract;
                     self.orderSummary.product.selected = self.selectedProduct(self.orderSummary.orderDetail.color,contract);
 
+                    self.orderSummary.product = self.updateLang(self.orderSummary.product);
+
                     self.updateSummary();
                 },
 
@@ -397,6 +434,9 @@
 
                 },
 
+                renderText: function(strID) {
+                    return elevate.renderText(strID, Elevate_lang);
+                },
                 goNext: function(){
                     var self = this;
                     //check normal contract
@@ -416,9 +456,33 @@
                         elevate.lsData.product =  self.orderSummary.product;
                         elevate.lsData.orderDetail =  self.orderSummary.orderDetail;
                         elevate.updateElevateLSData();
-
-                        elevate.redirectToPage('eligibilitycheck');
+                        self.sendAnalytics();
+                        setTimeout(function() {
+                            elevate.redirectToPage('eligibilitycheck');
+                        }, 2000);
                     }
+                },
+                sendAnalytics: function() {
+                    var self = this;
+                    var pushData = [];
+                    pushData.push({
+                        'name': self.orderSummary.product.selected.nameEN + ' - ' + self.orderSummary.product.selected.color,
+                        'id': self.orderSummary.product.selected.code,
+                        'category': 'DEVICE',
+                        'price': parseFloat(self.orderSummary.product.selected.devicePriceMonth).toFixed(2)
+                    });
+                    pushData.push({
+                        'name': self.orderSummary.product.selected.plan.nameEN,
+                        'id': self.orderSummary.product.selected.plan.planId,
+                        'category': self.orderSummary.product.selected.plan.planType,
+                        'price': parseFloat(self.orderSummary.product.selected.plan.monthlyAmount).toFixed(2)
+                    });
+
+                    pushAnalytics('addToCart', pushData);
+                    pushAnalytics('checkout', pushData);
+
+                    elevate.lsData.analyticItems =  pushData;
+                    elevate.updateElevateLSData();
                 }
 
             }

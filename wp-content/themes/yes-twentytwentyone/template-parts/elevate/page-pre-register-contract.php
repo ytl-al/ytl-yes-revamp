@@ -83,19 +83,21 @@
     ol table th { background-color: #0EADF1; color: #FFF; }
     ol table td {}
 </style>
+<input type="hidden" value="" id="guid"/>
 <div id="main-vue">
 <header class="white-top">
-    <div class="container" >
+    <div class="container"
+    ">
     <div class="row">
         <div class="col-lg-4 col-6">
             <div class="mt-4">
-                <a href="/elevate/review/" class="back-btn "><img
-                            src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
-                            alt=""> {{ renderText('back') }}</a>
+                <a onclick="goBack()" style="cursor:pointer" class="back-btn "><img
+                                src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
+                                alt=""> {{ renderText('back') }}</a>
             </div>
         </div>
         <div class="col-lg-4 col-6 text-lg-center text-end">
-            <h1 class="title_checkout p-3">{{ renderText('contract') }}</h1>
+            <h1 class="title_checkout p-3">{{ renderText('pre_register_contract') }}</h1>
         </div>
         <div class="col-lg-4">
 
@@ -104,6 +106,23 @@
     </div>
 </header>
 <main class="clearfix site-main">
+<!-- Banner Start -->
+    <section id="grey-innerbanner">
+            <div class="container">
+                <ul class="wizard">
+                    <li ui-sref="firstStep" class="completed">
+                        <span>{{ renderText('pre-qualified_step1') }}</span>
+                    </li>
+                    <li ui-sref="firstStep" class="completed">
+                        <span>{{ renderText('pre-qualified_step2') }}</span>
+                    </li>
+                    <li ui-sref="secondStep">
+                        <span>{{ renderText('pre-qualified_step3') }}</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    <!-- Banner End -->
     <section id="cart-body">
         <div class="container" style="border: 0">
             <div >
@@ -452,7 +471,7 @@
                                     </ol>
                                 </div>
                                 <div><label><input type="checkbox" id="term1" name="term1" @click="check_sign"
-                                                   value="agree" checked/> {{ renderText('customer_signature') }}</label></div>
+                                                   value="agree" checked/> {{ renderText('i_agree') }}</label></div>
                             </div>
                             <div class="contract_section">
                                 <h3>{{ renderText('terra_terms') }}</h3>
@@ -887,7 +906,7 @@
                                     </ol>
                                 </div>
                                 <div><label><input type="checkbox" id="term2" name="term2" @click="check_sign"
-                                                   value="agree" checked/> I Agree</label></div>
+                                                   value="agree" checked/> {{ renderText('i_agree') }}</label></div>
                             </div>
 
                         </div>
@@ -898,7 +917,7 @@
                                     <div style="height: 50px;"></div>
                                     <div><input type="text" @keyup="check_sign()" autocomplete="off"
                                                 v-model="contract_signed" class="form-control user_sign text-uppercase"
-                                                :placeholder="renderText('type_your_fullname')" id="fname"/></div>
+                                                placeholder="Type your full name as per MyKAD" id="fname"/></div>
                                     <div></div>
                                     <div class="mt-4">
                                         <a class="btn-signup" :class="allowSubmit?'btn-signed':'btn-signup'"
@@ -951,6 +970,7 @@
                 },
                 contract: {},
                 contract_signed: "",
+                contractSigned: false,
                 eligibility: {
                     uid: '',
                     mykad: '',
@@ -1031,36 +1051,39 @@
             methods: {
                 pageInit: function () {
                     var self = this;
+                    var self = this;
+
                     if (elevate.validateSession(self.currentStep)) {
-                        if (elevate.lsData.eligibility) {
-                            self.eligibility = elevate.lsData.eligibility;
-                        } else {
-                            elevate.redirectToPage('eligibilitycheck');
-                        }
-                        if (elevate.lsData.deliveryInfo) {
-                            self.deliveryInfo = elevate.lsData.deliveryInfo;
-                        } else {
-                            elevate.redirectToPage('personal');
-                        }
-                        if (elevate.lsData.customer) {
-                            self.customer = elevate.lsData.customer;
-                        }
+                        self.pageValid = true;
 
-                        if (elevate.lsData.orderSummary) {
-                            self.orderSummary = elevate.lsData.orderSummary;
-                        }
+						if (elevate.lsData.deliveryInfo) {
+								self.deliveryInfo = elevate.lsData.deliveryInfo;
+						}else{
+							 elevate.redirectToPage('pre-register-complete/?id='+self.guid);
+						}
 
-                        if (elevate.lsData.product) {
-                            self.orderSummary.product = elevate.lsData.product;
-                        }
+						if(elevate.lsData.orderSummary){
+							self.orderSummary = elevate.lsData.orderSummary;
+							self.dealer.dealer_code = self.orderSummary.order.dealerCode;
+							self.dealer.dealer_id = self.orderSummary.order.dealerUID;
+							self.dealer.referral_code = self.orderSummary.order.referralCode;
+						}else{
+							 elevate.redirectToPage('pre-register-complete/?id='+self.guid);
+						}
+                        self.guid = elevate.lsData.guid;
 
-                        self.dealer = elevate.lsData.meta.dealer;
+						$('#guid').val(self.guid);
 
-                    } else {
-                        elevate.redirectToPage('cart');
-                    }
+						if (elevate.lsData.contract) {
+							self.contract = elevate.lsData.contract;
+							self.contractSigned = true;
+						}
 
-
+						self.productId = self.orderSummary.orderDetail.productCode;
+                        self.check_sign();
+                    }else{
+						elevate.redirectToPage('pre-register-complete/?id=error');
+					}
                 },
                 sign_contract: function () {
                     var self = this;
@@ -1078,7 +1101,7 @@
                         self.allowSubmit = false
                     }
 
-                    if (!self.contract_signed.toUpperCase() || (self.contract_signed && self.contract_signed.trim().toUpperCase() != self.eligibility.name.toUpperCase())) {
+                    if (!self.contract_signed.toUpperCase() || (self.contract_signed && self.contract_signed.trim().toUpperCase() != self.deliveryInfo.name.toUpperCase())) {
                         self.allowSubmit = false;
                     }
 
@@ -1086,14 +1109,9 @@
 
                 makeOrder: function () {
                     var self = this;
-                    var params = self.customer;
-                    params.productSelected = self.orderSummary.product.selected.plan.planId;
-                    if(!self.dealer){
-                        self.dealer = [];
-                        self.dealer.referral_code = '';
-                        self.dealer.dealer_id = '';
-                        self.dealer.dealer_code = '';
-                    }
+                    var params = self.deliveryInfo;
+                    params.productSelected = self.orderSummary.plan.planId;
+
                     params.referralCode = self.dealer.referral_code;
                     params.dealerUID = self.dealer.dealer_id;
                     params.dealerCode = self.dealer.dealer_code;
@@ -1135,7 +1153,7 @@
                                 elevate.redirectToPage('thanks');
                             } else {
                                 toggleOverlay(false);
-                                toggleModalAlert('Error',this.renderText('system_currently_unavailable'))
+                                toggleModalAlert('Error', this.renderText('system_currently_unavailable'))
                             }
                         })
                         .catch((error) => {
@@ -1147,9 +1165,9 @@
 
                 submit_contract: function () {
                     var self = this;
-                    var params = self.eligibility;
+                    var params = self.deliveryInfo;
                     params.orderId = self.orderSummary.orderInfo.id;
-                    params.contract = self.orderSummary.product.selected.contract;
+                    params.contract = self.orderSummary.device.contract;
                     toggleOverlay();
                     axios.post(apiEndpointURL_elevate + '/contract', params)
                         .then((response) => {
@@ -1161,7 +1179,7 @@
                                 elevate.lsData.contract = data.data;
                                 elevate.updateElevateLSData();
                                 toggleOverlay();
-                                elevate.redirectToPage('paynow');
+                                elevate.redirectToPage('pre-register-paynow');
                             } else {
                                 toggleOverlay(false);
                                 toggleModalAlert('Error', this.renderText('system_currently_unavailable'))
@@ -1178,13 +1196,13 @@
                 renderText: function(strID) {
                     return elevate.renderText(strID, Elevate_lang);
                 },
+
                 goNext: function () {
                     var self = this;
-
                     $('#error').html("");
                     if (self.allowSubmit) {
 
-                        if (self.orderSummary.orderInfo.id) {
+                        if (self.orderSummary.orderInfo && self.orderSummary.orderInfo.id) {
                             self.submit_contract();
                         } else {
                             self.makeOrder();
@@ -1196,4 +1214,8 @@
             }
         });
     });
+
+	function goBack(){
+		elevate.redirectToPage('pre-register-complete/?id='+ $('#guid').val());
+	}
 </script>

@@ -1,14 +1,15 @@
 <?php require_once('includes/header.php') ?>
 <style>
-	input[type="number"]::-webkit-outer-spin-button,
-	input[type="number"]::-webkit-inner-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
-	}
-	input[type="number"] {
-		-moz-appearance: textfield;
-	}
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
 </style>
+<div id="main-vue">
 <header class="white-top">
     <div class="container">
         <div class="row">
@@ -33,16 +34,16 @@
         <div class="container">
             <ul class="wizard">
                 <li ui-sref="firstStep" class="completed">
-                    <span>1. Eligibility check</span>
+                    <span>{{ renderText('elevate_step_1') }}</span>
                 </li>
                 <li ui-sref="secondStep">
-                    <span>2. MyKAD verification</span>
+                    <span>{{ renderText('elevate_step_2') }}</span>
                 </li>
                 <li ui-sref="thirdStep">
-                    <span>3. Delivery details</span>
+                    <span>{{ renderText('elevate_step_3') }}</span>
                 </li>
                 <li ui-sref="fourthStep">
-                    <span>4. Review and order</span>
+                    <span>{{ renderText('elevate_step_4') }}</span>
                 </li>
             </ul>
         </div>
@@ -50,42 +51,41 @@
     <section id="cart-body">
         <div class="container" style="border: 0">
 
-            <div class="border-box" id="main-vue">
+            <div class="border-box" >
                 <div class="row">
                     <div class="col-md-5 p-5 flex-column bg-checkout1">
                         <div class="title text-white checkout-left">
-                            Check if you are eligible for the Yes Infinite+ contract option
+                            {{ renderText('if_you_are_eligible') }}
                         </div>
                     </div>
                     <div class="col-md-7 p-5">
                         <form class="needs-validation" novalidate>
                             <div class="mt-2 mb-2">
-                                <h2 class="subtitle">Pre-registration Details</h2>
-                                <p class="sub mb-4">Please fill in your MyKad/MyTentera information, mobile<br> number and email
-                                    to proceed</p>
+                                <h2 class="subtitle">{{ renderText('eligibility_check') }}</h2>
+                                <p class="sub mb-4" v-html="renderText('fill_in_mykad')"></p>
 
-                                <div class="text-bold">MyKAD Verification</div>
+                                <div class="text-bold">{{ renderText('MyKAD_verification') }}</div>
                                 <div class="row mb-4 align-items-center g-2">
                                     <div class="col-lg-8 col-12">
-                                        <label class="form-label">* MyKad/MyTentera number</label>
+                                        <label class="form-label">{{ renderText('MyKAD_number') }}</label>
                                         <div class="">
-											<div class="row">
-                                            <div class="col-lg-4 col-5">
-                                                <select v-model="eligibility.cardtype" class="" style="width:100%"
-                                                       id="cardtype" name="cardtype">
-													<option value="1">MyKad</option>
-													<option value="2" >MyTentera</option>
-												</select>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-5">
+                                                    <select v-model="eligibility.cardtype" class="" style="width:100%"
+                                                            id="cardtype" name="cardtype">
+                                                        <option value="1">{{ renderText('MyKad') }}</option>
+                                                        <option value="2" >{{ renderText('MyTentera') }}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-8 col-7">
+                                                    <input type="text" pattern="[0-9]+" minlength="12" maxlength="12" class="form-control text-uppercase"
+                                                           id="mykad_number"
+                                                           name="mykad" v-model="eligibility.mykad" @input="watchAllowNext" @change="watchAllowNext"
+                                                           @keypress="isNumber($event)" min="0"
+                                                           placeholder=""
+                                                           required>
+                                                </div>
                                             </div>
-                                            <div class="col-lg-8 col-7">
-                                                <input type="text" pattern="[0-9]+" minlength="12" maxlength="12" class="form-control text-uppercase"
-                                                   id="mykad_number"
-                                                   name="mykad" v-model="eligibility.mykad" @input="watchAllowNext" @change="watchAllowNext"
-                                                   @keypress="isNumber($event)" min="0"
-                                                   placeholder=""
-                                                   required>
-                                            </div>
-                                        </div>
 
 
                                         </div>
@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-lg-8 col-12">
-                                        <label class="form-label">* Full Name (as per MyKad)</label>
+                                        <label class="form-label">{{ renderText('full_name') }}</label>
                                         <div class="input-group align-items-center">
                                             <input type="text" class="form-control text-uppercase" id="full_name" name="name"
                                                    v-model="eligibility.name" @keypress="checkInputFullName(event)" @input="watchAllowNext" @change="watchAllowNext" placeholder=""
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-lg-8 col-12">
-                                        <label class="form-label">* Date Of Birth</label>
+                                        <label class="form-label">{{ renderText('date_of_birth') }}</label>
                                         <div class="align-items-center">
                                             <input type="text" class="form-control text-uppercase" id="dob" name="dob"
                                                    v-model="eligibility.dob"
@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="row mb-4 align-items-center g-2">
                                     <div class="col-12">
-                                        <label class="form-label">* Key in your mobile number</label>
+                                        <label class="form-label">{{ renderText('mobile_number') }}</label>
                                     </div>
                                     <div class="col-lg-8 col-12">
                                         <div class="row">
@@ -131,7 +131,7 @@
                                                        id="ic_phone_number"
                                                        name="phone" v-model="eligibility.inphone" @input="watchAllowNext"
                                                        @keypress="isNumber($event)"
-                                                       placeholder="Phone number">
+                                                       :placeholder="renderText('phone_number')">
                                             </div>
                                         </div>
                                     </div>
@@ -140,7 +140,7 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-lg-8 col-12">
-                                        <label class="form-label">* Email address</label>
+                                        <label class="form-label">{{ renderText('email_address') }}</label>
                                         <div class="align-items-center">
                                             <input type="text" class="form-control text-uppercase" id="email" name="email"
                                                    v-model="eligibility.email" @input="watchAllowNext"
@@ -151,34 +151,28 @@
                                 </div>
 
 
-								<div class="row mt-2 ">
-									<div class="col-1">
-										<input type="checkbox" id="subscribe" @click="watchAllowNext" name="subscribe" value="1">
-									</div>
-									<div class="col-11 text-12" >
-										<label for="subscribe" style="line-height:20px;">I here by agree to subscribe to the plan selected in the online form
-											submitted by me, and to be bound by the First to 5G Campaign Terms and
-											Conditions available at <a target="_blank"
-																	   href="https://www.yes.my/tnc/ongoing-campaigns-tnc">www.yes.my/tnc/ongoing-campaigns-tnc</a>.
-										</label>
-									</div>
-								</div>
-								<div class="row mt-2 ">
-									<div class="col-1">
-										<input type="checkbox" id="consent" @click="watchAllowNext" name="consent" value="1">
-									</div>
-									<div class="col-11 text-12">
-										<label for="consent" style="line-height:20px;">
-                                            I further give consent to YTLC to process my personal data in accordance with YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a> and also give consent to TOP to process my personal data in accordance with TOP Privacy Policy available at (<a href="http://yes.compasia.com/TOP_PRIVACY_POLICY.PDF" target="_blank">http://yes.compasia.com/TOP_PRIVACY_POLICY.PDF</a>) for the purposes of my agreement with TOP.
-										</label>
-									</div>
-								</div>
+                                <div class="row mt-2 ">
+                                    <div class="col-1">
+                                        <input type="checkbox" id="subscribe" @click="watchAllowNext" name="subscribe" value="1">
+                                    </div>
+                                    <div class="col-11 text-12" >
+                                        <label for="subscribe" style="line-height:20px;" v-html="renderText('term_and_condition1')"></label>
+                                    </div>
+                                </div>
+                                <div class="row mt-2 ">
+                                    <div class="col-1">
+                                        <input type="checkbox" id="consent" @click="watchAllowNext" name="consent" value="1">
+                                    </div>
+                                    <div class="col-11 text-12">
+                                        <label for="consent" style="line-height:20px;" v-html="renderText('term_and_condition1')">
+                                        </label>
+                                    </div>
+                                </div>
 
                                 <div class="row mt-2 mb-5">
                                     <div class="col-md-6">
                                         <button class="text-uppercase" @click="goNext"
-                                                :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">Check
-                                            Eligibility
+                                                :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">{{ renderText('check_eligibility') }}
                                         </button>
                                     </div>
                                     <div id="error" class="mt-3"></div>
@@ -195,6 +189,7 @@
     </section>
 
 </main>
+</div>
 <?php require_once('includes/footer.php'); ?>
 
 <script type="text/javascript">
@@ -219,7 +214,8 @@
                     inphone: '',
                     email: '',
                     alternative_name: '',
-                    alternative_phone: ''
+                    alternative_phone: '',
+                    registrationChannel: 'WEB',
                 },
                 customer:{
                     id:'',
@@ -306,10 +302,10 @@
                     var params = {
                         "mykad": self.eligibility.mykad.trim(),
                         "plan_type": elevate.lsData.product.selected.plan.planType,
-                        "bundleId": self.productId,
+                        "bundleId": elevate.lsData.product.selected.productCode,
                     };
 
-					$('#status_mesage').html('Checking eligibility...');
+                    $('#status_mesage').html('Checking eligibility...');
 
                     toggleOverlay();
                     axios.post(apiEndpointURL_elevate + '/verify-eligibility', params)
@@ -319,17 +315,19 @@
 
                             if (data.data.eligibilityStatus == 'ALLOWED') {
                                 self.isEligibilityCheck = true;
-                                self.elevateCustomer();
+                                // self.elevateCustomer();      // Commented by AL
+
+                                self.checkActiveContract();     // Moved by AL
                             } else {
 
                                 toggleOverlay(false);
                                 if(data.status == 0){
-                                    toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                                    toggleModalAlert('Error',this.renderText('your_submission_was_not_successful'))
                                 }else{
-                                    toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful because your NRIC is not eligible (blacklisted).',"elevate.redirectToPage('compasia-fail')")
+                                    toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('compasia-fail')")
                                 }
                                 // $('#error').html(data.data.displayResponseMessage);
-								// $('#status_mesage').html('');
+                                // $('#status_mesage').html('');
                                 // console.log(data);
 
 
@@ -352,47 +350,52 @@
                         email:self.eligibility.email,
                     };
                     toggleOverlay();
-					$('#status_mesage').html('Checking compAsia...');
+                    $('#status_mesage').html('Checking compAsia...');
                     axios.post(apiEndpointURL_elevate + '/verify-caeligibility', params)
                         .then((response) => {
 
                             var data = response.data;
                             if (data.status == 1) {
                                 self.isCAEligibilityCheck = true;
-                                self.checkActiveContract();
+                                // self.checkActiveContract();      // Commented by AL
+
+                                self.elevateCustomer();             // Moved by AL
                             } else {
                                 toggleOverlay(false);
-								$('#status_mesage').html('');
-                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful because your NRIC is not eligible (blacklisted).',"elevate.redirectToPage('eligibility-failure')");
+                                $('#status_mesage').html('');
+                                toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('eligibility-failure')");
 
                             }
                         })
                         .catch((error) => {
                             toggleOverlay(false);
-							$('#status_mesage').html('');
+                            $('#status_mesage').html('');
                             console.log(error);
                         });
                 },
 
-				checkActiveContract: function () {
+                checkActiveContract: function () {
                     var self = this;
                     var params = {
-					 mykad: self.eligibility.mykad
-					};
+                        mykad: self.eligibility.mykad
+                    };
                     toggleOverlay();
-					$('#status_mesage').html('Checking contract...');
-					var t = new Date().getTime();
+                    $('#status_mesage').html('Checking contract...');
+                    var t = new Date().getTime();
                     axios.post(apiEndpointURL_elevate + '/check-active-contract?t='+t, params)
                         .then((response) => {
 
                             var data = response.data;
                             if (data.status == 1) {
                                 self.notActiveContract = true;
-								elevate.redirectToPage('verification');
+                                // elevate.redirectToPage('verification');      // Commented by AL
+
+                                //check compAsia Eligibility
+                                self.CAEligibility();                           // Moved by AL
                             } else {
                                 toggleOverlay(false);
-								$('#status_mesage').html('');
-                                toggleModalAlert('Error','Dear valued customer,<br>Your submission was not successful as you already have an existing installment plan that is currently active.',"elevate.redirectToPage('eligibility-failure')")
+                                $('#status_mesage').html('');
+                                toggleModalAlert('Error',this.renderText('fail_existing_installment_plan'),"elevate.redirectToPage('eligibility-failure')")
                             }
                         })
                         .catch((error) => {
@@ -417,7 +420,7 @@
                     }
 
                     toggleOverlay();
-					$('#status_mesage').html('Checking customer...');
+                    $('#status_mesage').html('Checking customer...');
 
                     axios.post(apiEndpointURL_elevate + '/customer', params)
                         .then((response) => {
@@ -427,13 +430,15 @@
                                 elevate.lsData.customer = data.data;
                                 elevate.updateElevateLSData();
 
-								//check compAsia Eligibility
-								self.CAEligibility();
+                                // //check compAsia Eligibility                 // Commented by AL
+                                // self.CAEligibility();                        // Commented by AL
+
+                                elevate.redirectToPage('verification');         // Moved by AL
 
                                 //elevate.redirectToPage('verification');
                             } else {
                                 toggleOverlay(false);
-                                toggleModalAlert('Error','Dear valued customer,<br>'+data.error)
+                                toggleModalAlert('Error',this.renderText('dear_valued_customer')+',<br>'+data.error)
 
                             }
                         })
@@ -479,7 +484,7 @@
                     return dob;
                 },
 
-				getDOBIso: function (){
+                getDOBIso: function (){
                     var self = this;
                     var dateString = self.eligibility.mykad.substring(0, 6);
 
@@ -498,9 +503,9 @@
                     return dob;
                 },
 
-				isValidDate: function(d) {
-				  return (new Date(d) !== "Invalid Date") && !isNaN(new Date(d));
-				},
+                isValidDate: function(d) {
+                    return (new Date(d) !== "Invalid Date") && !isNaN(new Date(d));
+                },
 
                 validateAge: function(){
                     var self = this;
@@ -524,22 +529,28 @@
                     return (age>=18 && age <=65);
                 },
 
-				isNumber: function(evt) {
-				  evt = (evt) ? evt : window.event;
-				  var charCode = (evt.which) ? evt.which : evt.keyCode;
-				  if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
-					evt.preventDefault();;
-				  } else {
-					return true;
-				  }
-				},
+                isNumber: function(evt) {
+                    evt = (evt) ? evt : window.event;
+                    var charCode = (evt.which) ? evt.which : evt.keyCode;
+                    if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                        evt.preventDefault();;
+                    } else {
+                        return true;
+                    }
+                },
+
+                validateEmail: function(emailAddress) {
+                    emailAddress = emailAddress.toLowerCase();;
+                    var re = /^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)+(com|asia|au|biz|cn|co|de|edu|giv|hk|id|in|jp|my|net|nz|org|sg|tw|uk)$/;
+                    return re.test(emailAddress);
+                },
 
                 watchAllowNext: function () {
                     $('#error').html("");
                     $('.input_error').removeClass('input_error');
                     var self = this;
 
-					var error = new Array();
+                    var error = new Array();
 
                     self.isEligibilityCheck = false;
                     self.isCAEligibilityCheck = false;
@@ -566,59 +577,58 @@
 
                     if(self.eligibility.mykad.trim().length >= 12){
 
-						var bod = self.getDOBIso();
+                        var bod = self.getDOBIso();
 
-						if(self.isValidDate(bod)){
-							self.eligibility.dob = self.getDOB();
-							if(!self.validateAge()){
-								isFilled = false;
-								$('#mykad_number').addClass('input_error');
-                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to your age not meeting the requirement.');
-							}
-						}else{
-							isFilled = false;
-							$('#mykad_number').addClass('input_error');
-							self.eligibility.dob = '';
-							error.push('Invalid MyKad number');
-						}
+                        if(self.isValidDate(bod)){
+                            self.eligibility.dob = self.getDOB();
+                            if(!self.validateAge()){
+                                isFilled = false;
+                                $('#mykad_number').addClass('input_error');
+                                toggleModalAlert('Error',this.renderText('fail_age_not_matched'));
+                            }
+                        }else{
+                            isFilled = false;
+                            $('#mykad_number').addClass('input_error');
+                            self.eligibility.dob = '';
+                            error.push('Invalid MyKad number');
+                        }
                     }else{
-						if(self.eligibility.mykad.trim().length > 0 && self.eligibility.mykad.trim().length < 12){
-							error.push('Invalid MyKad number');
-							$('#mykad_number').addClass('input_error');
-						}
+                        if(self.eligibility.mykad.trim().length > 0 && self.eligibility.mykad.trim().length < 12){
+                            error.push('Invalid MyKad number');
+                            $('#mykad_number').addClass('input_error');
+                        }
                         self.eligibility.dob = '';
                     }
 
-                   var pattern = /^\d+\.?\d*$/;
-                   if(self.eligibility.mykad && !pattern.test(self.eligibility.mykad)){
-                       error.push('Invalid MyKad number');
-                       $('#mykad_number').addClass('input_error');
-                       self.eligibility.dob = '';
-                       isFilled = false
-                   }
+                    var pattern = /^\d+\.?\d*$/;
+                    if(self.eligibility.mykad && !pattern.test(self.eligibility.mykad)){
+                        error.push('Invalid MyKad number');
+                        $('#mykad_number').addClass('input_error');
+                        self.eligibility.dob = '';
+                        isFilled = false
+                    }
 
-                   var pattern =  /^[a-zA-Z,\,/@,\s]+$/;
-                   if(self.eligibility.name && !pattern.test(self.eligibility.name)){
-                       error.push('Invalid Full Name');
-                       $('#full_name').addClass('input_error');
-                       isFilled = false
-                   }
+                    var pattern =  /^[a-zA-Z,\.,\/,@,\s]+$/;
+                    if(self.eligibility.name && !pattern.test(self.eligibility.name)){
+                        error.push('Invalid Full Name');
+                        $('#full_name').addClass('input_error');
+                        isFilled = false
+                    }
 
-                    var phone = /^[0-46-9]*[0-9]{9,10}$/g;
+                    var phone = /^[1][0-9].{7,}$/g;
                     if (self.eligibility.inphone.trim() && (!phone.test(self.eligibility.inphone.trim()) || !self.validateMobile(self.eligibility.inphone))) {
                         isFilled = false;
                         $('#ic_phone_number').addClass('input_error');
-						error.push('Invalid mobile number');
+                        error.push('Invalid mobile number');
                     }
 
-                    var email = /\S+@\S+\.\S+/;
-                    if (self.eligibility.email.trim() && !email.test(self.eligibility.email.trim())) {
+                    if (self.eligibility.email.trim() && !self.validateEmail(self.eligibility.email.trim())) {
                         isFilled = false;
                         $('#email').addClass('input_error');
-						error.push('Invalid email');
+                        error.push('Invalid email');
                     }
 
-					if(!$('#subscribe').is(':checked') ||  !$('#consent').is(':checked')){
+                    if(!$('#subscribe').is(':checked') ||  !$('#consent').is(':checked')){
                         isFilled = false
                     }
 
@@ -626,19 +636,22 @@
                         self.allowSubmit = true;
                     } else {
                         self.allowSubmit = false;
-						if(error.length){
-							var uniqueArray = error.filter(function(item, pos, self) {
-								return self.indexOf(item) == pos;
-							})
-							$('#error').html("Sorry: " + uniqueArray.join(', ')+'.');
-						}
+                        if(error.length){
+                            var uniqueArray = error.filter(function(item, pos, self) {
+                                return self.indexOf(item) == pos;
+                            })
+                            $('#error').html("Sorry: " + uniqueArray.join(', ')+'.');
+                        }
                     }
+                },
+                renderText: function(strID) {
+                    return elevate.renderText(strID, Elevate_lang);
                 },
                 goNext: function () {
                     var self = this;
                     $('#status_mesage').html('');
                     if (self.allowSubmit) {
-						$('#error').html('');
+                        $('#error').html('');
                         //update store
                         self.eligibility.phone = '0'+self.eligibility.inphone;
 

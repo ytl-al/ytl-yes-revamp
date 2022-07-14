@@ -34,6 +34,7 @@ const ywos = {
         var expiryLength = expiryYWOSCart * 60000;
         var ywosCartExpiry = Date.now() + expiryLength;
         var sessionKey = this.generateSessionKey();
+        var siteLang = document.getElementsByTagName('html')[0].getAttribute('lang');
         if (ywosLocalStorageData === null) {
             storageData = {
                 'expiry': ywosCartExpiry,
@@ -41,7 +42,8 @@ const ywos = {
                 'meta': {
                     'planID': planID,
                     'sessionId': ''
-                }
+                },
+                'siteLang': siteLang
             };
             ywosLocalStorageData = storageData;
         } else {
@@ -51,7 +53,8 @@ const ywos = {
                 'meta': {
                     'planID': planID,
                     'sessionId': ''
-                }
+                },
+                'siteLang': siteLang
             };
             ywosLocalStorageData = storageData;
         }
@@ -201,6 +204,26 @@ const ywos = {
             // }, 500);
             return true;
         }
+    },
+    renderText: function(strID, objText) {
+        // if (objText) {
+        //     var siteLang = this.lsData.siteLang;
+        //     if (siteLang) {
+        //         if (objText[strID] && objText[strID][siteLang]) {
+        //             return objText[strID][siteLang];
+        //         } 
+        //     } else if (strID) {
+        //         return objText[strID]['en-US'];
+        //     }
+        // }
+
+        var siteLang = (this.lsData.siteLang) ? this.lsData.siteLang : 'en-US';
+        if (siteLang && objText) {
+            if (objText[strID] && objText[strID][siteLang]) {
+                return objText[strID][siteLang];
+            } 
+        }
+        return;
     }
 };
 

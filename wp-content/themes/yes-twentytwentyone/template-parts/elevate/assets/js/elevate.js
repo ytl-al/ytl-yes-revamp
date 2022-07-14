@@ -47,6 +47,8 @@ const elevate = {
         return '_' + Math.random().toString(36).substr(2, 9);
     },
     initLocalStorage: function (productId, dc, duid, rc) {
+        var siteLang = document.getElementsByTagName('html')[0].getAttribute('lang');
+        if(!siteLang) siteLang = 'en-US';
         var elevateLocalStorageData = elevateLSData;
         var storageData = {};
         var expiryLength = expiryelevateCart * 60000;
@@ -64,7 +66,8 @@ const elevate = {
                         'dealer_id': duid,
                         'referral_code': rc
                     }
-                }
+                },
+                'siteLang': siteLang
             };
             elevateLocalStorageData = storageData;
         } else {
@@ -80,7 +83,8 @@ const elevate = {
                         'referral_code': rc
                     }
 
-                }
+                },
+                'siteLang': siteLang
             };
             elevateLocalStorageData = storageData;
         }
@@ -92,6 +96,7 @@ const elevate = {
     buyPlan: function (productId) {
         toggleOverlay();
 
+        var self = this;
         var dc = elevate.getCookie('paramDC');
         var duid = elevate.getCookie('paramDUID');
         var rc = elevate.getCookie('paramRC');
@@ -101,7 +106,23 @@ const elevate = {
         if(!rc) rc = '';
 
         this.initLocalStorage(productId, dc, duid, rc);
-        this.redirectToCart();
+        $.ajax({
+            url: apiEndpointURL_elevate + '/getProduct/?code=' + productId,
+            method: 'GET',
+            success: function(data) {
+                var pushData = [{
+                    'name': data.selected.plan.planName,
+                    'id': productId,
+                    'category': data.selected.plan.planType,
+                    'price': data.selected.plan.upFrontPayment,
+                    'list_name': 'Product Page'
+                }];
+                pushAnalytics('impressions', pushData);
+            },
+            complete: function() {
+                self.redirectToCart();
+            }
+        });
     },
     checkExists: function () {
         if (elevateLSData === null) {
@@ -245,7 +266,23 @@ const elevate = {
     },
     eraseCookie: function (name) {
         document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    },
+    renderText: function(strID, objText) {
+        var siteLang = this.lsData.siteLang;
+        if(!siteLang) siteLang = 'en-US';
+        if (siteLang && objText) {
+            if (objText[siteLang][strID]) {
+                return objText[siteLang][strID];
+            }
+        }
+        return strID;
+    },
+    getCurrentLang: function (){
+        var siteLang = this.lsData.siteLang;
+        if(!siteLang) siteLang = 'en-US';
+        return siteLang;
     }
+
 };
 
 function buyElevatePlan(productId) {
@@ -349,7 +386,7 @@ function checkInputFullName(event) {
     }
 
     var specialchar = false;
-    if (charCode == 47 || charCode == 64 || charCode == 32) {
+    if (charCode == 46 || charCode == 47 || charCode == 64 || charCode == 32 || charCode == 110) {
         specialchar = true;
     }
 

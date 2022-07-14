@@ -172,6 +172,9 @@
                     toggleOverlay();
                     ywos.buyPlan(self.selectedPlan);
                 },
+                renderText: function(strID) {
+                    return elevate.renderText(strID, Elevate_lang);
+                },
                 goNext: function(){
                     $('#error').html('');
                     var self = this;
