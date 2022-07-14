@@ -7,8 +7,8 @@
     <div class="container">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active"><a href="#">Roaming</a></li>
+                <li class="breadcrumb-item"><a href="/ms">Laman Utama</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Perayauan</a></li>
             </ol>
         </nav>
     </div>
@@ -26,7 +26,7 @@
                     <div class="search-box dropdown">
                         <?php get_template_part('template-parts/roaming/dropdown-roaming', '', ['data_roaming' => $args['data_roaming']]); ?>
                         <input id="roamingSelect" name="roamingSelect" type="hidden" />
-                        <button data-button="openRoaming" class="btn">Periksa kadar rayauan</button>
+                        <button data-button="openRoaming" class="btn">Semak kadar rayauan</button>
                     </div>
                 </div>
             </div>
@@ -342,7 +342,7 @@
                     <div class="search-box dropdown">
                         <?php get_template_part('template-parts/roaming/dropdown-idd', '', ['data_idd' => $args['data_idd']]); ?>
                         <input id="iddSelect" name="iddSelect" type="hidden" />
-                        <button class="btn" data-button="openIdd">Periksa kadar IDD</button>
+                        <button class="btn" data-button="openIdd">Semak kadar IDD</button>
                     </div>
                 </div>
             </div>
