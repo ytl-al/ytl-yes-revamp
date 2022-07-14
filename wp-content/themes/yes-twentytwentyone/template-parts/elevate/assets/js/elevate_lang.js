@@ -142,7 +142,7 @@ Elevate_lang['en-US']['unfortunately'] = 'Unfortunately';
 Elevate_lang['en-US']['error_payment'] = 'Error Payment';
 
 
-Elevate_lang['en-US']['system_error'] = 'Systm error, please try again.';
+Elevate_lang['en-US']['system_error'] = 'System error, please try again.';
 Elevate_lang['en-US']['your_submission_was_not_successful'] = 'Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.';
 Elevate_lang['en-US']['NRIC_is_not_eligible'] = 'Dear valued customer,<br>Unfortunately, your submission was not successful because your NRIC is not eligible.';
 Elevate_lang['en-US']['fail_existing_installment_plan'] = 'Dear valued customer,<br>Your submission was not successful as you already have an existing installment plan that is currently active.';

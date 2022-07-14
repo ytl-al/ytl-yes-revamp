@@ -166,7 +166,7 @@
                             </div>
                         </div>
 
-                        <a href="javascript:void(0)" @click="goNext" class="pink-btn-disable d-block" :class="allowSubmit?'pink-btn':'pink-btn-disable'">{{ renderText('checkout') }}</a>
+                        <a href="javascript:void(0)" @click="goNext" class="pink-btn-disable text-uppercase d-block" :class="allowSubmit?'pink-btn':'pink-btn-disable'">{{ renderText('checkout') }}</a>
                     </div>
                 </div>
             </div>
