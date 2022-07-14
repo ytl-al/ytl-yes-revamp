@@ -103,12 +103,12 @@
         }
     </style>
 
-
+<div id="main-vue">
     <header class="white-top">
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h1 class="title_checkout p-3">Pre-Qualified</h1>
+                    <h1 class="title_checkout p-3">{{ renderText('pre-qualified') }}</h1>
                 </div>
             </div>
         </div>
@@ -121,13 +121,13 @@
             <div class="container">
                 <ul class="wizard">
                     <li ui-sref="firstStep" class="completed">
-                        <span>1. Verify</span>
+                        <span>{{ renderText('pre-qualified_step1') }}</span>
                     </li>
 					  <li ui-sref="firstStep">
-                        <span>2. Select Plan</span>
+                        <span>{{ renderText('pre-qualified_step2') }}</span>
                     </li>
                     <li ui-sref="secondStep">
-                        <span>3. Complete Order</span>
+                        <span>{{ renderText('pre-qualified_step3') }}</span>
                     </li>
                 </ul>
             </div>
@@ -137,44 +137,43 @@
 
         <section id="cart-body" style="display: none;">
             <div class="container " style="border: 0">
-                <div id="main-vue">
+                <div >
                     <div class="layer-invitationText text-center">
-                        <h3>Dear {{ deliveryInfo.name }},</h3>
-                        <p>We are pleased to invite you to our special promotion, just for you. Please verify your personal information and proceed.</p>
+                        <h3>{{ renderText('dear') }} {{ deliveryInfo.name }},</h3>
+                        <p>{{ renderText('invite_promotion_msg') }}</p>
                     </div>
                     <div class="border-box">
                 <div class="row">
                     <div class="col-md-5 p-5 flex-column bg-checkout">
                         <div class="title text-white checkout-left">
-                            MyKAD Verification
-                            <div class="mt-3" style="font-size: 14px;line-height: 20px;">
-                                A few steps to verify your identity<br> before we continue.
+                            {{ renderText('MyKAD_verification') }}
+                            <div class="mt-3" style="font-size: 14px;line-height: 20px;" v-html="renderText('verify_label_1')">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-7 p-5">
                         <div class="verify-body mt-3">
-                            <h3 class="subtitle2 d-none d-md-block">Scan the QR code to begin verification</h3>
+                            <h3 class="subtitle2 d-none d-md-block">{{ renderText('verify_label_2') }}</h3>
                             <div class="mt-5 mb-5">
                                 <div class="d-none d-md-block" id="qrcode"></div>
                                 <div class="text-center d-block d-md-none">
-                                    <a id="cmdVerify" target="_blank" class="btn btn-danger mt-3">Verify Now</a>
+                                    <a id="cmdVerify" target="_blank" class="btn btn-danger mt-3">{{ renderText('verify_now') }}</a>
                                 </div>
                             </div>
-                            <h3 class="subtitle2">Complete the verification in 2 simple steps!</h3>
+                            <h3 class="subtitle2">{{ renderText('verify_label_3') }}</h3>
 
 							<!-- button type="button" @click="doPass">Go</button -->
 
                             <ul class="list-2 mt-5">
                                 <li><div><span class="number">1</span></div>
                                     <div>
-                                        <div class="subtitle2">MyKAD Validation</div>
-                                        <p>Scan your MyKAD with the object in a well lit room facing on a flat surface with minimum reflection</p>
+                                        <div class="subtitle2">{{ renderText('verify_label_4') }}</div>
+                                        <p>{{ renderText('verify_label_5') }}</p>
                                     </div></li>
                                 <li class="mt-3"><div><span class="number">2</span></div>
                                     <div>
-                                        <div class="subtitle2">Face Verification</div>
-                                        <p>Ensure your face is within the frame for an accurate detection</p>
+                                        <div class="subtitle2">{{ renderText('verify_label_6') }}</div>
+                                        <p>{{ renderText('verify_label_7') }}</p>
                                     </div></li>
                             </ul>
                         </div>
@@ -187,12 +186,13 @@
             <div class="flex-container mt-3">
                 <div><div class="row">
                         <div class="col-1"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.721 5.14645L2.42767 23.9998C2.19483 24.403 2.07163 24.8602 2.07032 25.3258C2.06902 25.7914 2.18966 26.2493 2.42024 26.6538C2.65082 27.0583 2.98331 27.3954 3.38461 27.6316C3.78592 27.8677 4.24207 27.9947 4.70767 27.9998H27.2943C27.7599 27.9947 28.2161 27.8677 28.6174 27.6316C29.0187 27.3954 29.3512 27.0583 29.5818 26.6538C29.8124 26.2493 29.933 25.7914 29.9317 25.3258C29.9304 24.8602 29.8072 24.403 29.5743 23.9998L18.281 5.14645C18.0433 4.75459 17.7086 4.43061 17.3093 4.20576C16.9099 3.98092 16.4593 3.86279 16.001 3.86279C15.5427 3.86279 15.0921 3.98092 14.6927 4.20576C14.2934 4.43061 13.9587 4.75459 13.721 5.14645V5.14645Z" stroke="#EF4444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 12V17.3333" stroke="#EF4444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 22.6665H16.0133" stroke="#EF4444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg></div> <div class="col-11 text-bold">
-                            Sorry, your request does not qualify for the Yes Infinite+ contract option, please select another contract option:
+                            {{ renderText('request_does_not_qualify') }}
                         </div></div>
-                    <div class="p-3 text-center"><a href="/infinite-phone-bundles/" class="pink-btn text-uppercase">Back to Infinite+</a></div> <div id="error" class="mt-3"></div></div></div>
+                    <div class="p-3 text-center"><a href="/infinite-phone-bundles/" class="pink-btn text-uppercase"> {{ renderText('back_to_infinite') }}</a></div> <div id="error" class="mt-3"></div></div></div>
         </div>
 
     </main>
+</div>
 <?php require_once('includes/footer.php'); ?>
 <?php $apiSetting = \Inc\Base\Model::getAPISettings();?>
 <script type="text/javascript"
@@ -426,7 +426,7 @@
 										for(var i = 0; i < windows.length; i++){
 											windows[i].close()
 										}
-                                        toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, Your verification was rejected by eKYC system.')
+                                        toggleModalAlert('Error',this.renderText('eKYC_rejected'))
 
                                     }
                                 }
@@ -437,7 +437,7 @@
 
                     }else{
                         clearInterval(self.interval);
-                        toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, We can\'t verify your eKYC because of time limit.')
+                        toggleModalAlert('Error',this.renderText('eKYC_time_limit'))
 
                     }
                 },
@@ -472,7 +472,7 @@
 								self.doPass();
                             } else {
                                 toggleOverlay(false);
-                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful because your NRIC is not eligible.');
+                                toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'));
                             }
                         })
                         .catch((error) => {

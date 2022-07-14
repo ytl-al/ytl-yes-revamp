@@ -1,5 +1,5 @@
 <?php require_once('includes/header.php') ?>
-
+<div id="main-vue">
 <header class="white-top">
     <div class="container">
         <div class="row">
@@ -7,7 +7,7 @@
                 <div class="mt-4">
                     <a href="/" class="back-btn "><img
                                 src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
-                                alt=""> Back to Homepage</a>
+                                alt="">{{ renderText('back_to_homepage') }}</a>
                 </div>
             </div>
             <div class="col-lg-4 col-6 text-lg-center text-end">
@@ -23,26 +23,25 @@
 
     <section id="cart-body">
         <div class="container" style="border: 0">
-            <div id="main-vue">
+            <div >
             <div class="border-box thanks_bg p-lg-5">
                 <div class="row">
                     <div class="col-md-3 col-sm-3 col-12 offset-md-6 thank-mb">
 						<?php if($_GET['status'] == 2){?>
-                        <h1 class="title">Thank you!</h1>
-                        <div class="mt-5">Order Number</div>
+                        <h1 class="title">{{ renderText('thank_you') }}</h1>
+                        <div class="mt-5">{{ renderText('order_number') }}</div>
                         <div class="subtitle"><?php echo $_GET['orderNumber']?></div>
                         <div class="text-12 mt-2">Placed on <?php echo date("l, jS F Y")?></div>
-                        <div class="mt-5">A summary of your order has been sent to
-                            your email
+                        <div class="mt-5">{{ renderText('summary_sent') }}
                         </div>
                         <?php } else if ($_GET['status'] == 3) { ?>
-                            <h1 class="title">Thank you!</h1>
-                            <div class="mt-5">We have received your order and are waiting for payment clearance. <br />You will receive confirmation email once payment is cleared.</div>
+                            <h1 class="title">{{ renderText('thank_you') }}</h1>
+                            <div class="mt-5" v-html="renderText('received_your_order_msg')"></div>
 						<?php }else{
 						?>
 						<h1 class="title"></h1>
-                        <div class="subtitle" style="color:red">Payment Failure.</div>
-                        <div class="mt-5">Sorry, payment failed. Please retry.</div>
+                            <div class="subtitle" style="color:red">{{ renderText('payment_failure') }}</div>
+                            <div class="mt-5">{{ renderText('sorry_payment_failure') }}</div>
 						<?php
 						}?>
                     </div>
@@ -55,6 +54,7 @@
     </section>
 
 </main>
+</div>
 <?php require_once('includes/footer.php'); ?>
 <script type="text/javascript">
     $(document).ready(function () {

@@ -680,7 +680,7 @@
                                     } else if (paymentId != 'Not Available') {  // Payment failed
                                         closePaymentWindow = true;
                                         toggleOverlay(false);
-                                        self.toggleModalAlert('Error Payment', 'Your payment is not successful.<br />Please try again.');
+                                        self.toggleModalAlert(this.renderText('error_payment'), this.renderText('your_payment_is_not_successful'));
                                         setTimeout(function() {
                                             self.updatePaymentStatus(-1, false);
                                         }, 500);
@@ -699,7 +699,7 @@
                                         }, 5000);
                                     } else {
                                         toggleOverlay(false);
-                                        self.toggleModalAlert('Error Payment', 'Your payment is not successful.<br />Please try again.');
+                                        self.toggleModalAlert(this.renderText('error_payment'), this.renderText('your_payment_is_not_successful'));
                                         closePaymentWindow = true;
                                         setTimeout(function() {
                                             self.updatePaymentStatus(-1, false);
@@ -725,7 +725,7 @@
                                     }, 5000);
                                 } else {
                                     toggleOverlay(false);
-                                    self.toggleModalAlert('Error Payment', "There's an error in processing your payment.<br />Please try again later.");
+                                    self.toggleModalAlert(this.renderText('error_payment'), this.renderText('error_processing_payment') );
 
                                     clearTimeout(timeoutObj);
                                     self.paymentTimeout = true;
@@ -758,7 +758,7 @@
                             self.paymentTimeout = true;
                             self.checkPaymentStatusCount = 0;
                             toggleOverlay(false);
-                            self.toggleModalAlert('Error Payment', "You have exceeds the time for payment window. Please try again.");
+                            self.toggleModalAlert(this.renderText('error_payment'), this.renderText('payment_exceeds_time'));
                         }, 360000);
 
                         mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
@@ -870,7 +870,7 @@
                                     var data = response.data;
                                     var errorMsg = '';
                                     if (error.response.status == 500 || error.response.status == 503) {
-                                        errorMsg = "There's an error in creating your order.<br />Please try again later.";
+                                        errorMsg = this.renderText('error_create_order');
                                     } else {
                                         errorMsg = data.message
                                     }
@@ -919,7 +919,7 @@
 									self.removePrequalifiedCustomer();
                                 }else{
                                     toggleOverlay(false);
-                                    $('#error').html("Systm error, please try again.");
+                                    $('#error').html(this.renderText('system_error'));
                                     console.log(data);
                                 }
                             })
@@ -945,7 +945,7 @@
 
                                 }else{
                                     toggleOverlay(false);
-                                    $('#error').html("Systm error, please try again.");
+                                    $('#error').html(this.renderText('system_error'));
                                     console.log(data);
                                 }
                             })
@@ -986,7 +986,7 @@
                                     }
                                 }else{
                                     toggleOverlay(false);
-                                    $('#error').html("Systm error, please try again.");
+                                    $('#error').html(this.renderText('system_error'));
                                     console.log(data);
                                 }
                             })

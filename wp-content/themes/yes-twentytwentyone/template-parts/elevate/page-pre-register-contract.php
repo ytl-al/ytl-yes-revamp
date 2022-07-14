@@ -84,6 +84,7 @@
     ol table td {}
 </style>
 <input type="hidden" value="" id="guid"/>
+<div id="main-vue">
 <header class="white-top">
     <div class="container"
     ">
@@ -92,11 +93,11 @@
             <div class="mt-4">
                 <a onclick="goBack()" style="cursor:pointer" class="back-btn "><img
                                 src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
-                                alt=""> Back</a>
+                                alt=""> {{ renderText('back') }}</a>
             </div>
         </div>
         <div class="col-lg-4 col-6 text-lg-center text-end">
-            <h1 class="title_checkout p-3">Pre-Register Contract</h1>
+            <h1 class="title_checkout p-3">{{ renderText('pre_register_contract') }}</h1>
         </div>
         <div class="col-lg-4">
 
@@ -110,13 +111,13 @@
             <div class="container">
                 <ul class="wizard">
                     <li ui-sref="firstStep" class="completed">
-                        <span>1. REVIEW AND ORDER</span>
+                        <span>{{ renderText('pre-qualified_step1') }}</span>
                     </li>
-                    <li ui-sref="secondStep" class="completed">
-                        <span>2. SIGN CONTRACT </span>
+                    <li ui-sref="firstStep" class="completed">
+                        <span>{{ renderText('pre-qualified_step2') }}</span>
                     </li>
-					 <li ui-sref="secondStep">
-                        <span>3. PAYMENT</span>
+                    <li ui-sref="secondStep">
+                        <span>{{ renderText('pre-qualified_step3') }}</span>
                     </li>
                 </ul>
             </div>
@@ -124,14 +125,14 @@
     <!-- Banner End -->
     <section id="cart-body">
         <div class="container" style="border: 0">
-            <div id="main-vue">
+            <div >
                 <div class="p-lg-5">
                     <div class="mb-5 pad-mobile">
-                        <h2 class="subtitle mt-3 mb-3">Yes Infinite+ Contract Permissions</h2>
-                        <p>Read our contract conditions before proceeding.</p>
+                        <h2 class="subtitle mt-3 mb-3">{{ renderText('contract_permission') }}</h2>
+                        <p>{{ renderText('contract_label_1') }}</p>
                         <div class="mt-3 content">
                             <div class="contract_section">
-                                <h3>YES Terms and Condition</h3>
+                                <h3>{{ renderText('yes_terms') }}</h3>
                                 <div class="contract_term">
 
                                     <ol>
@@ -470,10 +471,10 @@
                                     </ol>
                                 </div>
                                 <div><label><input type="checkbox" id="term1" name="term1" @click="check_sign"
-                                                   value="agree" checked/> I Agree</label></div>
+                                                   value="agree" checked/> {{ renderText('i_agree') }}</label></div>
                             </div>
                             <div class="contract_section">
-                                <h3>Terra Optimus Pearl Device Rental Agreement</h3>
+                                <h3>{{ renderText('terra_terms') }}</h3>
                                 <div class="contract_term">
                                     <ol>
                                         <li>
@@ -905,14 +906,14 @@
                                     </ol>
                                 </div>
                                 <div><label><input type="checkbox" id="term2" name="term2" @click="check_sign"
-                                                   value="agree" checked/> I Agree</label></div>
+                                                   value="agree" checked/> {{ renderText('i_agree') }}</label></div>
                             </div>
 
                         </div>
                         <div class="mt-3">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div>Customer Signature</div>
+                                    <div>{{ renderText('customer_signature') }}</div>
                                     <div style="height: 50px;"></div>
                                     <div><input type="text" @keyup="check_sign()" autocomplete="off"
                                                 v-model="contract_signed" class="form-control user_sign text-uppercase"
@@ -921,12 +922,12 @@
                                     <div class="mt-4">
                                         <a class="btn-signup" :class="allowSubmit?'btn-signed':'btn-signup'"
                                            @click="sign_contract"><i class="icon icon-signup2"></i> <span
-                                                    v-if="allowSubmit">Signed</span><span
-                                                    v-else>Fill and Sign</span></a>
+                                                    v-if="allowSubmit">{{ renderText('signed') }}</span><span
+                                                    v-else>{{ renderText('fill_and_signed') }}</span></a>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div>Date & Time</div>
+                                    <div>{{ renderText('date_time') }}</div>
                                     <div class="mt-3 text-bold text-uppercase" id="contract_time" style="display:none">
                                         <span>{{ time }}</span></div>
                                 </div>
@@ -937,7 +938,7 @@
                                 <div class="col-md-6">
                                     <button class="mt-3 pink-btn-disable text-uppercase w300"
                                             :class="allowSubmit?'pink-btn':'pink-btn-disable'" @click="goNext"
-                                            type="button">Submit Contract
+                                            type="button">{{ renderText('submit_contract') }}
                                     </button>
                                     <div id="error" class="mt-3"></div>
                                 </div>
@@ -952,6 +953,7 @@
     </section>
 
 </main>
+</div>
 <?php require_once('includes/footer.php'); ?>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -1127,7 +1129,7 @@
                                 self.submit_contract();
                             } else {
                                 toggleOverlay(false);
-                                toggleModalAlert('Error', 'Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                                toggleModalAlert('Error', this.renderText('system_currently_unavailable'))
                             }
                             toggleOverlay(false);
 
@@ -1151,7 +1153,7 @@
                                 elevate.redirectToPage('thanks');
                             } else {
                                 toggleOverlay(false);
-                                toggleModalAlert('Error', 'Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                                toggleModalAlert('Error', this.renderText('system_currently_unavailable'))
                             }
                         })
                         .catch((error) => {
@@ -1180,7 +1182,7 @@
                                 elevate.redirectToPage('pre-register-paynow');
                             } else {
                                 toggleOverlay(false);
-                                toggleModalAlert('Error', 'Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                                toggleModalAlert('Error', this.renderText('system_currently_unavailable'))
                             }
                             toggleOverlay(false);
 

@@ -1111,7 +1111,7 @@
                                 self.submit_contract();
                             } else {
                                 toggleOverlay(false);
-                                toggleModalAlert('Error', 'Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                                toggleModalAlert('Error', this.renderText('system_currently_unavailable'))
                             }
                             toggleOverlay(false);
 
@@ -1135,7 +1135,7 @@
                                 elevate.redirectToPage('thanks');
                             } else {
                                 toggleOverlay(false);
-                                toggleModalAlert('Error', 'Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                                toggleModalAlert('Error',this.renderText('system_currently_unavailable'))
                             }
                         })
                         .catch((error) => {
@@ -1164,7 +1164,7 @@
                                 elevate.redirectToPage('paynow');
                             } else {
                                 toggleOverlay(false);
-                                toggleModalAlert('Error', 'Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                                toggleModalAlert('Error', this.renderText('system_currently_unavailable'))
                             }
                             toggleOverlay(false);
 

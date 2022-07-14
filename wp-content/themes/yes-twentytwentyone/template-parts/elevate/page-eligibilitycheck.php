@@ -322,9 +322,9 @@
 
                                 toggleOverlay(false);
                                 if(data.status == 0){
-                                    toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                                    toggleModalAlert('Error',this.renderText('your_submission_was_not_successful'))
                                 }else{
-                                    toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful because your NRIC is not eligible.',"elevate.redirectToPage('compasia-fail')")
+                                    toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('compasia-fail')")
                                 }
                                 // $('#error').html(data.data.displayResponseMessage);
                                 // $('#status_mesage').html('');
@@ -363,7 +363,7 @@
                             } else {
                                 toggleOverlay(false);
                                 $('#status_mesage').html('');
-                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful because your NRIC is not eligible.',"elevate.redirectToPage('eligibility-failure')");
+                                toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('eligibility-failure')");
 
                             }
                         })
@@ -395,7 +395,7 @@
                             } else {
                                 toggleOverlay(false);
                                 $('#status_mesage').html('');
-                                toggleModalAlert('Error','Dear valued customer,<br>Your submission was not successful as you already have an existing installment plan that is currently active.',"elevate.redirectToPage('eligibility-failure')")
+                                toggleModalAlert('Error',this.renderText('fail_existing_installment_plan'),"elevate.redirectToPage('eligibility-failure')")
                             }
                         })
                         .catch((error) => {
@@ -438,7 +438,7 @@
                                 //elevate.redirectToPage('verification');
                             } else {
                                 toggleOverlay(false);
-                                toggleModalAlert('Error','Dear valued customer,<br>'+data.error)
+                                toggleModalAlert('Error',this.renderText('dear_valued_customer')+',<br>'+data.error)
 
                             }
                         })
@@ -584,7 +584,7 @@
                             if(!self.validateAge()){
                                 isFilled = false;
                                 $('#mykad_number').addClass('input_error');
-                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to your age not meeting the requirement.');
+                                toggleModalAlert('Error',this.renderText('fail_age_not_matched'));
                             }
                         }else{
                             isFilled = false;

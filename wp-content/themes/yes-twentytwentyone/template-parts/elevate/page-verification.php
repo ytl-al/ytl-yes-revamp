@@ -49,8 +49,8 @@
                     <div class="col-md-5 p-5 flex-column bg-checkout">
                         <div class="title text-white checkout-left">
                             {{ renderText('MyKAD_verification') }}
-                            <div class="mt-3" style="font-size: 14px;line-height: 20px;">
-                                {{ renderText('verify_label_1') }}
+                            <div class="mt-3" style="font-size: 14px;line-height: 20px;" v-html="renderText('verify_label_1')">
+
                             </div>
                         </div>
                     </div>
@@ -235,7 +235,7 @@
 										for(var i = 0; i < windows.length; i++){
 											windows[i].close()
 										}
-                                        toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, Your verification was rejected by eKYC system.',"elevate.redirectToPage('/error?ca=failure')")
+                                        toggleModalAlert('Error',this.renderText('eKYC_rejected'),"elevate.redirectToPage('/error?ca=failure')")
                                         //elevate.redirectToPage('/error/');
 
                                     }
@@ -247,7 +247,7 @@
 
                     }else{
                         clearInterval(self.interval);
-                        toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, We can\'t verify your eKYC because of time limit.',"elevate.redirectToPage('/eligibility-failure')")
+                        toggleModalAlert('Error',this.renderText('eKYC_time_limit'),"elevate.redirectToPage('/eligibility-failure')")
                         //elevate.redirectToPage('/eligibility-failure/');
                     }
                 },
@@ -273,7 +273,7 @@
                                 elevate.redirectToPage('personal');
                             } else {
                                 toggleOverlay(false);
-                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful because your NRIC is not eligible.',"elevate.redirectToPage('/compasia-fail')")
+                                toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('/compasia-fail')")
                             }
                         })
                         .catch((error) => {

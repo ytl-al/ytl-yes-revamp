@@ -44,7 +44,7 @@
                             </div>
                             <div class="col-12 p-3 px-5">
                                 <h3 class="mt-5 mt-lg-0">{{ renderText('no_item_in_cart') }}</h3>
-                                <p class="mb-3">{{ renderText('browse_plan_here') }}</p>
+                                <p class="mb-3" v-html="renderText('browse_plan_here')"></p>
                             </div>
                         </div>
                     </div>

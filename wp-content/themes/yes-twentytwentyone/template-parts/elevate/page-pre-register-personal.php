@@ -1,5 +1,6 @@
 <?php require_once('includes/header.php') ?>
 <input type="hidden" value="" id="guid"/>
+<div id="main-vue">
 <header class="white-top">
     <div class="container">
         <div class="row">
@@ -7,11 +8,11 @@
                 <div class="mt-4">
                     <a onclick="goBack()" style="cursor:pointer" class="back-btn "><img
                                 src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
-                                alt=""> Back</a>
+                                alt="">{{renderText('back')}}</a>
                 </div>
             </div>
             <div class="col-lg-4 col-6 text-lg-center text-end">
-                <h1 class="title_checkout p-3">PRE-REGISTER - Delivery</h1>
+                <h1 class="title_checkout p-3">{{renderText('pre_register_delivery')}}</h1>
             </div>
             <div class="col-lg-4">
 
@@ -27,13 +28,13 @@
             <div class="container">
                 <ul class="wizard">
                     <li ui-sref="firstStep" class="completed">
-                        <span>1. REVIEW AND ORDER</span>
+                        <span>{{ renderText('pre-qualified_step1') }}</span>
+                    </li>
+                    <li ui-sref="firstStep">
+                        <span>{{ renderText('pre-qualified_step2') }}</span>
                     </li>
                     <li ui-sref="secondStep">
-                        <span>2. SIGN CONTRACT </span>
-                    </li>
-					 <li ui-sref="secondStep">
-                        <span>3. PAYMENT</span>
+                        <span>{{ renderText('pre-qualified_step3') }}</span>
                     </li>
                 </ul>
             </div>
@@ -42,19 +43,18 @@
 
         <section id="cart-body">
             <div class="container p-lg-5 p-3">
-                <div class=" gx-5" id="main-vue">
+                <div class=" gx-5" >
                     <form class="row needs-validation" novalidate>
                         <div class="col-md-12">
-                            <h2 class="subtitle">Personal Details</h2>
-                            <p class="sub mb-4">Delivery only available in Malaysia.<br>
-                                Ensure all information is correct before proceeding.</p>
-                            <div class="text-bold mb-3">MyKAD Verification</div>
+                            <h2 class="subtitle">{{ renderText('personal_details') }}</h2>
+                            <p class="sub mb-4" v-html="renderText('delivery_only_available_in_malaysia')"> </p>
+                            <div class="text-bold mb-3">{{ renderText('MyKAD_verification') }}</div>
                         </div>
                         <div class="col-lg-5 col-12">
 
                             <div class="row mb-4">
                                 <div class="col-lg-12 col-12">
-                                    <label class="form-label"><br/>* MyKad number</label>
+                                    <label class="form-label"><br/>{{ renderText('MyKAD_number') }}</label>
                                     <div class="input-group align-items-center">
                                         <input type="text" maxlength="12" class="form-control text-upper" id="mykad_number"
                                                name="mykad" v-model="deliveryInfo.mykad" @input="watchAllowNext"
@@ -67,7 +67,7 @@
                             </div>
                             <div class="row mb-4">
                                 <div class="col-lg-12 col-12">
-                                    <label class="form-label">* Full Name (as per MyKad)</label>
+                                    <label class="form-label">{{ renderText('full_name') }}</label>
                                     <div class="input-group align-items-center">
                                         <input type="text" class="form-control text-uppercase" id="full_name" name="name"
                                                v-model="deliveryInfo.name" @input="watchAllowNext" placeholder="" readonly
@@ -79,7 +79,7 @@
                             </div>
                             <div class="row mb-4 align-items-center g-2">
                                 <div class="col-12">
-                                    <label class="form-label">*Phone number</label>
+                                    <label class="form-label">{{ renderText('phone_number') }}</label>
                                 </div>
                                 <div class="col-lg-4 col-5">
                                     <input type="text" class="form-control text-center" id="ic_passport_number"
@@ -95,7 +95,7 @@
                             </div>
                             <div class="row mb-4">
                                 <div class="col-md-12">
-                                    <label class="form-label">* Email address</label>
+                                    <label class="form-label">{{ renderText('email_address') }}</label>
                                     <div class="align-items-center">
                                         <input type="text" class="form-control text-upper" id="email" name="email"
                                                v-model="deliveryInfo.email" @input="watchAllowNext"
@@ -107,10 +107,10 @@
                             <div class="row d-none d-md-block">
                                 <div class="col-12">
                                     <button class="pink-btn-disable text-uppercase" @click="goNext" style="margin-right:10px;"
-                                            :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">Continue
+                                            :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">{{ renderText('continue') }}
                                     </button>
 
-									<button class="pink-btn-disable text-uppercase" onclick="goBack()" type="button">Cancel
+									<button class="pink-btn-disable text-uppercase" onclick="goBack()" type="button">{{ renderText('cancel') }}
                                     </button>
                                 </div>
                             </div>
@@ -119,7 +119,7 @@
                         <div class="col-lg-7 col-12">
 						<div class="row mb-4">
                                 <div class="col-md-5">
-                                    <label class="form-label">* Name of <br>Alternate Contact Person</label>
+                                    <label class="form-label" v-html="renderText('alternate_name_person')"></label>
                                     <div class="input-group align-items-center">
                                         <input type="text" class="form-control text-uppercase" id="alternative_name" name="alternative_name"
                                                v-model="deliveryInfo.alternative_name" @keypress="checkInputFullName(event)" @input="watchAllowNext" @change="watchAllowNext" placeholder=""
@@ -127,7 +127,7 @@
                                     </div>
                                 </div>
 								 <div class="col-md-7">
-                                    <label class="form-label">* Phone Number of<br> Alternate Contact Person</label>
+                                    <label class="form-label" v-html="renderText('alternate_contact_person')"></label>
                                     <div class="input-group align-items-center">
 										<div class="input-group-prepend" style="margin-right:10px;">
                                                 <span class="input-group-text" id="basic-addon1">MY +60</span>
@@ -143,7 +143,7 @@
 
                             <div class="row mb-4">
                                 <div class="col-md-8">
-                                    <label class="form-label">* Address</label>
+                                    <label class="form-label">{{ renderText('address') }}</label>
                                     <div class="input-group align-items-center">
                                         <input type="text" class="form-control text-uppercase" id="address" name="address"
                                                v-model="deliveryInfo.address" @input="watchAllowNext" placeholder="" maxlength="80"
@@ -152,7 +152,7 @@
                                     <div class="invalid-feedback mt-1" id="em-address"></div>
                                 </div>
 								<div class="col-md-4">
-                                    <label class="form-label">Unit number</label>
+                                    <label class="form-label">{{ renderText('unit_number') }}</label>
                                     <div class="input-group align-items-center">
                                         <input type="text" class="form-control text-uppercase" id="address-more" name="addressMore"
                                                v-model="deliveryInfo.addressMore" @input="watchAllowNext" maxlength="30"
@@ -163,7 +163,7 @@
 
                             <div class="row mb-4">
                             <div class="col-md-12 col-12">
-                                <label class="form-label">* Postcode</label>
+                                <label class="form-label">{{ renderText('postcode') }}</label>
                                 <div class="input-group mt-2 align-items-center">
                                     <input type="text" maxlength="5" class="form-control text-upper" id="postcode"
                                            name="postcode" v-model="deliveryInfo.postcode" @input="watchChangePostcode"
@@ -176,7 +176,7 @@
                             <div class="row mb-4">
 
                                 <div class="col-md-6 col-12">
-                                    <label class="form-label" for="select-state">* State</label>
+                                    <label class="form-label" for="select-state">{{ renderText('state') }}</label>
                                     <div class="input-group align-items-center">
                                         <!--select class="form-select" id="state" name="state" data-live-search="true"
                                                 v-model="deliveryInfo.state" @change="watchChangeState" required readonly="">
@@ -194,7 +194,7 @@
                                     <div class="invalid-feedback mt-1" id="em-state"></div>
                                 </div>
                                 <div class="col-md-6 col-12">
-                                    <label class="form-label">* City</label>
+                                    <label class="form-label">{{ renderText('city') }}</label>
                                     <div class="input-group align-items-center">
                                         <!--select class="form-select" id="city" name="city" data-live-search="true"
                                                 v-model="deliveryInfo.city" @change="watchChangeCity" required readonly>
@@ -213,10 +213,10 @@
                                 <div class="row d-block d-md-none">
                                     <div class="col-12">
                                         <button class="pink-btn-disable text-uppercase" @click="goNext" style="margin-right:10px;"
-                                                :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">Continue
+                                                :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">{{ renderText('continue') }}
                                         </button>
 
-										<button class="pink-btn-disable text-uppercase" onclick="goBack()" type="button">Cancel
+										<button class="pink-btn-disable text-uppercase" onclick="goBack()" type="button">{{ renderText('cancel') }}
                                     </button>
                                     </div>
                                 </div>
@@ -233,6 +233,7 @@
         </section>
 
     </main>
+</div>
 </div>
 <?php require_once('includes/footer.php'); ?>
 
@@ -738,7 +739,7 @@
                     if(self.deliveryInfo.alternative_phone && self.deliveryInfo.alternative_phone == self.deliveryInfo.inphone){
                         isFilled = false;
                         $('#alternative_phone').addClass('input_error');
-                        toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, You cannot use the same number as alternate phone number.')
+                        toggleModalAlert('Error',this.renderText('alternate_phone_number_must_be_same'))
                     }
 
                     var pattern =  /^[a-zA-Z,\.,\/,@,\s]+$/;
@@ -792,7 +793,7 @@
                                 elevate.redirectToPage('pre-register-complete/?id='+ self.guid);
                             }else{
                                 toggleOverlay(false);
-                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                                toggleModalAlert('Error',this.renderText('system_currently_unavailable'))
                             }
                         })
                         .catch((error) => {

@@ -7,6 +7,7 @@
 	}
 </style>
 <input type="hidden" value="" id="guid"/>
+<div id="main-vue" style="display: none;">
     <header class="white-top">
         <div class="container">
             <div class="row">
@@ -16,7 +17,7 @@
                     </div>
                 </div>
                 <div class="col-lg-12 text-lg-center text-end">
-                    <h1 class="title_checkout p-3">Pre-Register Checkout</h1>
+                    <h1 class="title_checkout p-3">{{ renderText('pre_register_checkout') }}</h1>
                 </div>
                 <div class="col-lg-4">
 
@@ -26,19 +27,19 @@
     </header>
     <!-- Vue Wrapper STARTS -->
     <main class="clearfix site-main">
-    <div id="main-vue" style="display: none;">
+    <div >
         <!-- Banner Start -->
         <section id="grey-innerbanner">
             <div class="container">
                 <ul class="wizard">
                     <li ui-sref="firstStep" class="completed">
-                        <span>1. REVIEW AND ORDER</span>
+                        <span>{{ renderText('pre-qualified_step1') }}</span>
+                    </li>
+                    <li ui-sref="firstStep" class="completed">
+                        <span>{{ renderText('pre-qualified_step2') }}</span>
                     </li>
                     <li ui-sref="secondStep" class="completed">
-                        <span>2. SIGN CONTRACT </span>
-                    </li>
-					 <li ui-sref="secondStep" class="completed">
-                        <span>3. PAYMENT</span>
+                        <span>{{ renderText('pre-qualified_step3') }}</span>
                     </li>
                 </ul>
             </div>
@@ -51,8 +52,8 @@
             <div class="container p-lg-5 p-3">
                 <div class="row d-lg-none mb-3">
                     <div class="col">
-                        <h1>Payment Info</h1>
-                        <p class="sub mb-4 pe-5">This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.</p>
+                        <h1>{{ renderText('payment_info') }}</h1>
+                        <p class="sub mb-4 pe-5">{{ renderText('payment_info_label_1') }}</p>
                     </div>
                 </div>
                 <div class="row gx-5" v-if="pageValid">
@@ -61,10 +62,10 @@
                     </div>
                     <form class="col-lg-8 col-12 order-lg-1 mt-3 mt-lg-0" autocomplete="off" @submit="paymentSubmit">
                         <div>
-                            <h1 class="mb-4 d-none d-lg-block">Payment Info</h1>
-                            <p class="sub mb-4 pe-5 d-none d-lg-block">This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.</p>
-                            <h2>Select payment</h2>
-                            <div class="alert alert-warning mb-4" role="alert">Please ensure your web browser and/or 3rd party software pop-up blocker is disabled before you proceed with your transactions.</div>
+                            <h1 class="mb-4 d-none d-lg-block">{{ renderText('payment_info') }}</h1>
+                            <p class="sub mb-4 pe-5 d-none d-lg-block">{{ renderText('payment_info_label_1') }}</p>
+                            <h2>{{ renderText('select_payment') }}</h2>
+                            <div class="alert alert-warning mb-4" role="alert">{{ renderText('payment_info_label_2') }}</div>
                             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <button type="button" class="nav-link" id="nav-creditcard" role="tab" data-paymentnav="CREDIT_CARD" data-bs-toggle="pill" data-bs-target="#tab-creditcard" aria-controls="tab-creditcard" aria-selected="false" v-on:click="selectPaymentMethod('CREDIT_CARD')">
@@ -88,9 +89,9 @@
                                         <template v-if="paymentInfo.paymentMethod == 'CREDIT_CARD'">
                                             <div class="row mb-4">
                                                 <div class="col-lg-6">
-                                                    <h4 class="my-3">Credit/Debit Card</h4>
+                                                    <h4 class="my-3">{{ renderText('card_payment') }}</h4>
                                                     <p class="panel-weaccept">
-                                                        We accept
+                                                        {{ renderText('we_accept') }}
                                                         <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/visa.png" />
                                                         <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" />
                                                         <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/mastercard.png" />
@@ -101,12 +102,12 @@
                                         <div v-bind:class="{ 'd-none': (maybankIPP.disabled || paymentInfo.paymentMethod != 'CREDIT_CARD_IPP') }">
                                             <div class="row mb-4">
                                                 <div class="col-lg-6">
-                                                    <h4 class="my-3">Maybank 0% EzyPay (Instalment Payment)</h4>
+                                                    <h4 class="my-3">{{ renderText('instalment_payment') }}</h4>
                                                 </div>
                                             </div>
                                             <div class="row mb-4">
                                                 <div class="col-lg-6">
-                                                    <label class="form-label" for="select-tenure">Installment Type</label>
+                                                    <label class="form-label" for="select-tenure">{{ renderText('instalment_type') }}</label>
                                                     <div class="form-group">
                                                         <select class="form-control form-select" id="select-tenure" data-live-search="false" name="ipp-tenure" v-model="paymentInfo.ippType" @change="watchTenureChange">
                                                             <option value="" disabled="disabled" selected="selected">Select Installment Type</option>
@@ -118,7 +119,7 @@
                                         </div>
                                         <div class="row mb-4">
                                             <div class="col-lg-6 col-12">
-                                                <label class="form-label" for="input-chName">* Cardholder Name</label>
+                                                <label class="form-label" for="input-chName">{{ renderText('cardholder_name') }}</label>
                                                 <div class="input-group align-items-center">
                                                     <input type="text" class="form-control" id="input-chName" v-model="paymentInfo.nameOnCard" @input="watchAllowSubmit" placeholder="John Doe"  @keypress="checkInputFullName(event)" />
                                                 </div>
@@ -128,7 +129,7 @@
                                             <div class="col-12">
 												<div class="row">
                                                 <div class="col-lg-6 col-12">
-												<label class="form-label" for="input-chNumber1">* Card Number</label>
+												<label class="form-label" for="input-chNumber1">{{ renderText('card_number') }}</label>
 												<div class="float-end layer-selectedCard">
 													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/visa.png" height="15" v-if="paymentInfo.cardType == 'VISA'" />
 													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" height="25" v-if="paymentInfo.cardType == 'AMEX'" />
@@ -145,18 +146,18 @@
                                                     <input type="text" pattern="[0-9]+" class="form-control text-center" id="input-cardInput4" v-model="cardholder.number4" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(4, event)" @keypress="checkInputCharacters(event, 'numeric', false)" />
                                                 </div>
                                             </div>
-                                            <p class="info mb-3">Numbers must contain 16 digits</p>
+                                            <p class="info mb-3">{{ renderText('card_number_hint') }}</p>
                                         </div>
                                         <div class="row mb-4">
                                             <div class="col-lg-3 col-12">
-                                                <label class="form-label" for="input-cardInput5">* Exp Date</label>
+                                                <label class="form-label" for="input-cardInput5">{{ renderText('exp_date') }}</label>
                                                 <div class="input-group align-items-center">
 													<input type="text" pattern="[0-9]+" class="form-control text-center" id="input-cardInput5" autocomplete="off" v-model="paymentInfo.cardExpiryMonth" placeholder="MM" maxlength="2" @input="checkCardInputJump(5, event)" @keypress="checkInputCharacters(event, 'numeric', false)" /> <span class="mx-2">/</span>
                                                     <input type="text" pattern="[0-9]+" class="form-control text-center" id="input-cardInput6" autocomplete="off" v-model="paymentInfo.cardExpiryYear" placeholder="YYYY" maxlength="4" @input="checkCardInputJump(6, event)" @keypress="checkInputCharacters(event, 'numeric', false)" />
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-12">
-                                                <label class="form-label" for="input-cardInput7">* CVV</label>
+                                                <label class="form-label" for="input-cardInput7">{{ renderText('cvv') }}</label>
                                                 <div class="input-group align-items-center">
                                                     <input type="password" class="form-control text-center" id="input-cardInput7" autocomplete="off" v-model="paymentInfo.cardCVV" @input="watchAllowSubmit" placeholder="***" maxlength="3" @keypress="checkInputCharacters(event, 'numeric', false)" />
                                                 </div>
@@ -169,7 +170,7 @@
                                     <div class="tab-paneContent">
                                         <div class="row mb-4">
                                             <div class="col-lg-6">
-                                                <h4 class="my-3">Online Banking (FPX)</h4>
+                                                <h4 class="my-3">{{ renderText('online_bank') }})</h4>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -183,7 +184,7 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <select class="form-control form-select" id="select-bank" data-live-search="true" name="fpx-bank" v-model="paymentInfo.bankCode" @change="watchBankSelect">
-                                                        <option value="" disabled="disabled" selected="selected">Select a Bank</option>
+                                                        <option value="" disabled="disabled" selected="selected">{{ renderText('select_bank') }}</option>
                                                         <option v-for="fpxBank in fpxBankList" :value="fpxBank.bankCode" :disabled="!fpxBank.available" :data-bankname="fpxBank.bankName">{{ fpxBank.bankName }}</option>
                                                     </select>
                                                 </div>
@@ -195,7 +196,7 @@
 
                             <div class="row">
                                 <div class="col-12 col-lg-6">
-                                    <button type="submit" class="pink-btn w-100" :disabled="!allowSubmit">Pay</button>
+                                    <button type="submit" class="pink-btn w-100" :disabled="!allowSubmit">{{ renderText('pay') }}</button>
                                 </div>
 								<div id="error" style="color:red"></div>
                             </div>
@@ -207,6 +208,7 @@
         <!-- Body ENDS -->
     </div>
     </main>
+</div>
     <!-- Vue Wrapper ENDS -->
 
 
@@ -686,7 +688,7 @@
                                     } else if (paymentId != 'Not Available') {  // Payment failed
                                         closePaymentWindow = true;
                                         toggleOverlay(false);
-                                        self.toggleModalAlert('Error Payment', 'Your payment is not successful.<br />Please try again.');
+                                        self.toggleModalAlert(this.renderText('error_payment'),this.renderText('your_payment_is_not_successful'));
                                         setTimeout(function() {
                                             self.updatePaymentStatus(-1, false);
                                         }, 500);
@@ -705,7 +707,7 @@
                                         }, 5000);
                                     } else {
                                         toggleOverlay(false);
-                                        self.toggleModalAlert('Error Payment', 'Your payment is not successful.<br />Please try again.');
+                                        self.toggleModalAlert(this.renderText('error_payment'), this.renderText('your_payment_is_not_successful'));
                                         closePaymentWindow = true;
                                         setTimeout(function() {
                                             self.updatePaymentStatus(-1, false);
@@ -731,7 +733,7 @@
                                     }, 5000);
                                 } else {
                                     toggleOverlay(false);
-                                    self.toggleModalAlert('Error Payment', "There's an error in processing your payment.<br />Please try again later.");
+                                    self.toggleModalAlert(this.renderText('error_payment'), this.renderText('error_processing_payment'));
 
                                     clearTimeout(timeoutObj);
                                     self.paymentTimeout = true;
@@ -765,7 +767,7 @@
                             self.paymentTimeout = true;
                             self.checkPaymentStatusCount = 0;
                             toggleOverlay(false);
-                            self.toggleModalAlert('Error Payment', "You have exceeds the time for payment window. Please try again.");
+                            self.toggleModalAlert(this.renderText('error_payment'), this.renderText('payment_exceeds_time'));
                         }, 360000);
 
                         mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
@@ -877,7 +879,7 @@
                                     var data = response.data;
                                     var errorMsg = '';
                                     if (error.response.status == 500 || error.response.status == 503) {
-                                        errorMsg = "There's an error in creating your order.<br />Please try again later.";
+                                        errorMsg = this.renderText('error_create_order');
                                     } else {
                                         errorMsg = data.message
                                     }
@@ -932,7 +934,7 @@
 
                                 }else{
                                     toggleOverlay(false);
-                                    $('#error').html("Systm error, please try again.");
+                                    $('#error').html(this.renderText('system_error'));
                                     console.log(data);
                                 }
                             })
@@ -958,7 +960,7 @@
 
                                 }else{
                                     toggleOverlay(false);
-                                    $('#error').html("Systm error, please try again.");
+                                    $('#error').html(this.renderText('system_error'));
                                     console.log(data);
                                 }
                             })
@@ -999,7 +1001,7 @@
                                     }
                                 }else{
                                     toggleOverlay(false);
-                                    $('#error').html("Systm error, please try again.");
+                                    $('#error').html(this.renderText('system_error'));
                                     console.log(data);
                                 }
                             })

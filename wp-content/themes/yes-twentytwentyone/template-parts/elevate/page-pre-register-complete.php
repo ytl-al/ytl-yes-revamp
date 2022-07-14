@@ -104,12 +104,12 @@
     }
 </style>
 
-
+<div id="main-vue">
 <header class="white-top">
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">
-                <h1 class="title_checkout p-3">Pre-Register Complete Order</h1>
+                <h1 class="title_checkout p-3">{{ renderText('pre_register_complete_order') }}</h1>
             </div>
         </div>
     </div>
@@ -122,13 +122,13 @@
             <div class="container">
                 <ul class="wizard">
                     <li ui-sref="firstStep" class="completed">
-                        <span>1. REVIEW AND ORDER</span>
+                        <span>{{ renderText('pre-qualified_step1') }}</span>
+                    </li>
+                    <li ui-sref="firstStep" class="completed">
+                        <span>{{ renderText('pre-qualified_step2') }}</span>
                     </li>
                     <li ui-sref="secondStep">
-                        <span>2. SIGN CONTRACT </span>
-                    </li>
-					 <li ui-sref="secondStep">
-                        <span>3. PAYMENT</span>
+                        <span>{{ renderText('pre-qualified_step3') }}</span>
                     </li>
                 </ul>
             </div>
@@ -138,9 +138,9 @@
 
     <section id="cart-body" style="display: none;">
         <div class="container " style="border: 0">
-            <div id="main-vue">
+            <div >
 
-                 <div class="subtitle">Review & Pay</div>
+                 <div class="subtitle">{{ renderText('review_and_pay') }}</div>
                 <div class="row gx-5" >
                 <div class="col-lg-8 col-12">
 
@@ -170,7 +170,7 @@
 					<div class="row mt-3">
 					<div class="col-md-12 col-12">
 					 <div class="border-box" style="width:100%; padding:20px;">
-					<div class="subtitle2">Plan</div>
+					<div class="subtitle2">{{ renderText('plan') }}</div>
 					<div class="accordion-wrap hlv_3">
 						<div class="accordion-header" @click="showPlanDetail()"> {{orderSummary.plan.nameEN}} <i
 									class="icon icon_arrow_down"></i></div>
@@ -189,7 +189,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row mt-3 item_info">
-                                    <div class="label text-bold">To: {{deliveryInfo.name}}</div>
+                                    <div class="label text-bold">{{ renderText('to') }}: {{deliveryInfo.name}}</div>
                                     <div class="content">
                                         <div>{{deliveryInfo.email}}</div>
                                         <div>+60 {{deliveryInfo.inphone}}</div>
@@ -197,7 +197,7 @@
                                 </div>
 
                                 <div class="row mt-3 item_info">
-                                    <div class="label">Delivery Address</div>
+                                    <div class="label">{{ renderText('delivery_address') }}</div>
                                     <div class="content"><span v-if="deliveryInfo.addressMore">{{deliveryInfo.addressMore}},</span> {{deliveryInfo.address}}, {{deliveryInfo.city}}, {{deliveryInfo.state}}, {{deliveryInfo.postcode}}, {{deliveryInfo.country}}
                                     </div>
                                 </div>
@@ -205,7 +205,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div style="float: right">
-                                    <a @click="editCustomer" style="cursor:pointer" class="btn-edit">(Edit)</a>
+                                    <a @click="editCustomer" style="cursor:pointer" class="btn-edit">({{ renderText('edit') }})</a>
                                 </div>
 
                             </div>
@@ -215,12 +215,12 @@
                 </div>
                 <div class="col-lg-4 col-12">
                     <div class="summary-box">
-                        <h1 class="subtitle">Order summary</h1>
-                        <h3 class="plan_price">Monthly Payment</h3>
+                        <h1 class="subtitle">{{ renderText('order_summary') }}</h1>
+                        <h3 class="plan_price">{{ renderText('monthly_payment') }}</h3>
                         <div class="hr_line"></div>
                         <div class="row cart_total">
                             <div class="col-6 pt-2 pb-2">
-                                <h3>TOTAL</h3>
+                                <h3>{{ renderText('total') }}</h3>
                             </div>
                             <div class="col-6 pt-2 pb-2 text-end">
                                 <h3>RM{{ formatPrice(parseFloat(orderSummary.orderDetail.subtotal).toFixed(2)) }}/mth</h3>
@@ -240,10 +240,8 @@
 										<input type="checkbox" id="subscribe" @click="watchAllowNext" name="subscribe" value="1">
 									</div>
 									<div class="col-11" >
-										<label for="subscribe" class="text-12" style="line-height:20px;">I here by agree to subscribe to the plan selected in the online form
-											submitted by me, and to be bound by the First to 5G Campaign Terms and
-											Conditions available at <a target="_blank"
-																	   href="https://www.yes.my/tnc/ongoing-campaigns-tnc">www.yes.my/tnc/ongoing-campaigns-tnc</a>.
+										<label for="subscribe" class="text-12" style="line-height:20px;" v-html="renderText('term_and_condition1')">
+
 										</label>
 									</div>
 								</div>
@@ -252,8 +250,8 @@
 										<input type="checkbox" id="consent" @click="watchAllowNext" name="consent" value="1">
 									</div>
 									<div class="col-11 text-12">
-										<label for="consent" class="text-12" style="line-height:20px;">
-                                            I further give consent to YTLC to process my personal data in accordance with YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a> and also give consent to TOP to process my personal data in accordance with TOP Privacy Policy available at (<a style="word-break: break-all;" href="http://yes.compasia.com/TOP_PRIVACY_POLICY.PDF" target="_blank">http://yes.compasia.com/TOP_PRIVACY_POLICY.PDF</a>) for the purposes of my agreement with TOP.
+										<label for="consent" class="text-12" style="line-height:20px;"  v-html="renderText('term_and_condition2')">
+
 										</label>
 									</div>
 								</div>
@@ -276,21 +274,22 @@
 		<div class="flex-container mt-3">
 		<div><div class="row">
 		<div class="col-1"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.721 5.14645L2.42767 23.9998C2.19483 24.403 2.07163 24.8602 2.07032 25.3258C2.06902 25.7914 2.18966 26.2493 2.42024 26.6538C2.65082 27.0583 2.98331 27.3954 3.38461 27.6316C3.78592 27.8677 4.24207 27.9947 4.70767 27.9998H27.2943C27.7599 27.9947 28.2161 27.8677 28.6174 27.6316C29.0187 27.3954 29.3512 27.0583 29.5818 26.6538C29.8124 26.2493 29.933 25.7914 29.9317 25.3258C29.9304 24.8602 29.8072 24.403 29.5743 23.9998L18.281 5.14645C18.0433 4.75459 17.7086 4.43061 17.3093 4.20576C16.9099 3.98092 16.4593 3.86279 16.001 3.86279C15.5427 3.86279 15.0921 3.98092 14.6927 4.20576C14.2934 4.43061 13.9587 4.75459 13.721 5.14645V5.14645Z" stroke="#EF4444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 12V17.3333" stroke="#EF4444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 22.6665H16.0133" stroke="#EF4444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg></div> <div class="col-11 text-bold">
-                                         Sorry, your request does not qualify for the Yes Infinite+ contract option, please select another contract option:
+                    {{ renderText('request_does_not_qualify') }}
                                      </div></div>
-									 <div class="p-3 text-center"><a href="/infinite-phone-bundles/" class="pink-btn text-uppercase">Back to Infinite+</a></div> <div id="error" class="mt-3"></div></div></div>
+									 <div class="p-3 text-center"><a href="/infinite-phone-bundles/" class="pink-btn text-uppercase">{{ renderText('back_to_infinite') }}</a></div> <div id="error" class="mt-3"></div></div></div>
 	</div>
 
 	<div id="page_done" style="display:none;">
 		<div class="flex-container mt-3">
 		<div><div class="row">
 		<div class="col-1"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.721 5.14645L2.42767 23.9998C2.19483 24.403 2.07163 24.8602 2.07032 25.3258C2.06902 25.7914 2.18966 26.2493 2.42024 26.6538C2.65082 27.0583 2.98331 27.3954 3.38461 27.6316C3.78592 27.8677 4.24207 27.9947 4.70767 27.9998H27.2943C27.7599 27.9947 28.2161 27.8677 28.6174 27.6316C29.0187 27.3954 29.3512 27.0583 29.5818 26.6538C29.8124 26.2493 29.933 25.7914 29.9317 25.3258C29.9304 24.8602 29.8072 24.403 29.5743 23.9998L18.281 5.14645C18.0433 4.75459 17.7086 4.43061 17.3093 4.20576C16.9099 3.98092 16.4593 3.86279 16.001 3.86279C15.5427 3.86279 15.0921 3.98092 14.6927 4.20576C14.2934 4.43061 13.9587 4.75459 13.721 5.14645V5.14645Z" stroke="#EF4444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 12V17.3333" stroke="#EF4444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M16 22.6665H16.0133" stroke="#EF4444" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg></div> <div class="col-11 text-bold">
-                                         Sorry, your order already approved or completed.
+                    {{ renderText('order_already_approved') }}
                                      </div></div>
-									 <div class="p-3 text-center"><a href="/infinite-phone-bundles/" class="pink-btn text-uppercase">Back to Infinite+</a></div> <div id="error" class="mt-3"></div></div></div>
+									 <div class="p-3 text-center"><a href="/infinite-phone-bundles/" class="pink-btn text-uppercase">{{ renderText('back_to_infinite') }}</a></div> <div id="error" class="mt-3"></div></div></div>
 	</div>
 
 </main>
+    </div>
 
  <div class="modal fade" id="modal-alert" tabindex="-1" aria-labelledby="modal-alert" aria-hidden="true" data-bs-backdrop="static">
         <div class="modal-dialog">
@@ -790,7 +789,7 @@
                                 }else{
                                     toggleOverlay(false);
 									$('#status_mesage').html('');
-                                    $('#error').html("Systm error, please try again.");
+                                    $('#error').html(this.renderText('system_error'));
                                     console.log(data);
                                 }
                             })
@@ -817,7 +816,7 @@
 							}else{
 								toggleOverlay(false);
 								$('#status_mesage').html('');
-								$('#error').html("Systm error, please try again.");
+								$('#error').html(this.renderText('system_error'));
 								console.log(data);
 							}
 						})

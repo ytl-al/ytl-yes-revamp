@@ -773,7 +773,7 @@
                     if(self.eligibility.alternative_phone && self.eligibility.alternative_phone == self.eligibility.inphone){
                         isFilled = false;
                         $('#alternative_phone').addClass('input_error');
-                        toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, You cannot using same phone number.')
+                        toggleModalAlert('Error',this.renderText('cannot_use_same_phone_number'))
                     }
 
                     var pattern =  /^[a-zA-Z,\.,\/,@,\s]+$/;
@@ -828,7 +828,7 @@
                                 elevate.redirectToPage('review');
                             }else{
                                 toggleOverlay(false);
-                                toggleModalAlert('Error','Dear valued customer,<br>Unfortunately, your submission was not successful due to the system that is currently unavailable.')
+                                toggleModalAlert('Error',this.renderText('system_currently_unavailable'))
                             }
                         })
                         .catch((error) => {

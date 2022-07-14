@@ -28,21 +28,20 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-3 col-12 offset-md-6 thank-mb">
 						<?php if($_GET['status'] == 2){?>
-                        <h1 class="title">Thank you!</h1>
-                        <div class="mt-5">Order Number</div>
-                        <div class="subtitle"><?php echo $_GET['orderNumber']?></div>
-                        <div class="text-12 mt-2">Placed on <?php echo date("l, jS F Y")?></div>
-                        <div class="mt-5">A summary of your order has been sent to
-                            your email
-                        </div>
+                            <h1 class="title">{{ renderText('thank_you') }}</h1>
+                            <div class="mt-5">{{ renderText('order_number') }}</div>
+                            <div class="subtitle"><?php echo $_GET['orderNumber']?></div>
+                            <div class="text-12 mt-2">Placed on <?php echo date("l, jS F Y")?></div>
+                            <div class="mt-5">{{ renderText('summary_sent') }}
+                            </div>
                         <?php } else if ($_GET['status'] == 3) { ?>
-                            <h1 class="title">Thank you!</h1>
-                            <div class="mt-5">We have received your order and are waiting for payment clearance. <br />You will receive confirmation email once payment is cleared.</div>
+                            <h1 class="title">{{ renderText('thank_you') }}</h1>
+                            <div class="mt-5" v-html="renderText('received_your_order_msg')"></div>
 						<?php }else{
 						?>
 						<h1 class="title"></h1>
-                        <div class="subtitle" style="color:red">Payment Failure.</div>
-                        <div class="mt-5">Sorry, payment failed. Please retry.</div>
+                            <div class="subtitle" style="color:red">{{ renderText('payment_failure') }}</div>
+                            <div class="mt-5">{{ renderText('sorry_payment_failure') }}</div>
 						<?php
 						}?>
                     </div>
