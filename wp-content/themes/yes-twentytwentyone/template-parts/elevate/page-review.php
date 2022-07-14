@@ -120,12 +120,12 @@
                     </div>
                     <div class="col-lg-4 col-12">
                         <div class="summary-box">
-                            <h1 class="subtitle">Order summary</h1>
-                            <h3 class="plan_price">Monthly Payment</h3>
+                            <h1 class="subtitle">{{ renderText('order_summary') }}</h1>
+                            <h3 class="plan_price">{{ renderText('monthly_payment') }}</h3>
                             <div class="hr_line"></div>
                             <div class="row cart_total">
                                 <div class="col-6 pt-2 pb-2">
-                                    <h3>TOTAL</h3>
+                                    <h3>{{ renderText('total') }}</h3>
                                 </div>
                                 <div class="col-6 pt-2 pb-2 text-end">
                                     <h3>RM{{ formatPrice(parseFloat(orderSummary.orderDetail.subtotal).toFixed(2)) }}/mth</h3>
@@ -142,7 +142,7 @@
                                 </div>
                                 <div class="row mt-3 ">
                                     <div class="col-12">
-                                        <button class="pink-btn-disable d-block text-uppercase w-100" :class=" allowSubmit?'pink-btn':'pink-btn-disable'"  @click="goNext" type="button">Order</button>
+                                        <button class="pink-btn-disable d-block text-uppercase w-100" :class=" allowSubmit?'pink-btn':'pink-btn-disable'"  @click="goNext" type="button">{{ renderText('order') }}</button>
                                         <div id="error" class="mt-3"></div>
                                     </div>
                                 </div>
