@@ -23,11 +23,11 @@
     <div class="flexible">
         <div class="container container-filter oversized-1440">
             <div class="row">
-                <?php get_template_part('template-parts/supported-devices/filter'); ?>
+                <?php get_template_part('template-parts/supported-devices/filter-bm'); ?>
 
                 <div class="col">
                     <div class="row filter-storeitem storeitem-supported-devices">
-                        <?php get_template_part('template-parts/supported-devices/devices'); ?>
+                        <?php get_template_part('template-parts/supported-devices/devices-bm'); ?>
                     </div>
                 </div>
             </div>
