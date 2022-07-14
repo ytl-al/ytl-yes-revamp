@@ -21,12 +21,12 @@
         <div class="row justify-content-center">
             <div class="col-11 col-lg-8 d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                 <div>
-                    <h1>Stay connected anytime, anywhere with YesRoam</h1>
-                    <p>Roam freely without part--nering operators when you’re travelling.</p>
+                    <h1>Kekal terhubung bila-bila masa, di mana jua dengan YesRoam</h1>
+                    <p>Rayau dengan bebas tanpa operator rakan kongsi apabila anda di luar negara.</p>
                     <div class="search-box dropdown">
                         <?php get_template_part('template-parts/roaming/dropdown-roaming', '', ['data_roaming' => $args['data_roaming']]); ?>
                         <input id="roamingSelect" name="roamingSelect" type="hidden" />
-                        <button data-button="openRoaming" class="btn">Check roaming rates</button>
+                        <button data-button="openRoaming" class="btn">Periksa kadar rayauan</button>
                     </div>
                 </div>
             </div>
@@ -203,7 +203,7 @@
 
 <!--Countries Section Start-->
 <section id="countries-section">
-    <h1><span>RM38/day</span>, up to <span>500MB</span> at these <span>22 countries</span>.</h1>
+    <h1>RM38/hari, sehingga 500MB di 22 negara.</h1>
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -337,12 +337,12 @@
         <div class="row justify-content-center">
             <div class="col-11 col-lg-8 d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                 <div>
-                    <h1>Making an overseas call?</span></h1>
-                    <p>Here are the affordable International Direct Dailing (IDD) rates you’ll like.</p>
+                    <h1>Ingin buat panggilan luar negara?</span></h1>
+                    <p>Berikut adalah kadar berpatutan panggilan Dial Terus Antarabangsa (IDD) yang pasti anda sukai.</p>
                     <div class="search-box dropdown">
                         <?php get_template_part('template-parts/roaming/dropdown-idd', '', ['data_idd' => $args['data_idd']]); ?>
                         <input id="iddSelect" name="iddSelect" type="hidden" />
-                        <button class="btn" data-button="openIdd">Check IDD rates</button>
+                        <button class="btn" data-button="openIdd">Periksa kadar IDD</button>
                     </div>
                 </div>
             </div>
