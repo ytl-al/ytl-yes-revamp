@@ -49,6 +49,9 @@ const elevate = {
     initLocalStorage: function (productId, dc, duid, rc) {
         var siteLang = document.getElementsByTagName('html')[0].getAttribute('lang');
         if(!siteLang) siteLang = 'en-US';
+		
+		elevate.setCookie('siteLang',siteLang,1);
+		
         var elevateLocalStorageData = elevateLSData;
         var storageData = {};
         var expiryLength = expiryelevateCart * 60000;
@@ -268,7 +271,8 @@ const elevate = {
         document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     },
     renderText: function(strID, objText) {
-        var siteLang = this.lsData.siteLang;
+       // var siteLang = this.lsData.siteLang;
+	    var siteLang = elevate.getCookie('siteLang');
         if(!siteLang) siteLang = 'en-US';
         if (siteLang && objText) {
             if (objText[siteLang][strID]) {
@@ -278,7 +282,8 @@ const elevate = {
         return strID;
     },
     getCurrentLang: function (){
-        var siteLang = this.lsData.siteLang;
+        //var siteLang = this.lsData.siteLang;
+		var siteLang = elevate.getCookie('siteLang');
         if(!siteLang) siteLang = 'en-US';
         return siteLang;
     }

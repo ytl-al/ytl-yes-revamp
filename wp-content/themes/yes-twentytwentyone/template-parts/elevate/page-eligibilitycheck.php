@@ -17,7 +17,7 @@
                 <div class="mt-4">
                     <a href="/elevate/cart/" class="back-btn "><img
                                 src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
-                                alt=""> Back</a>
+                                alt=""> {{ renderText('back') }}</a>
                 </div>
             </div>
             <div class="col-lg-4 col-6 text-lg-center text-end">
