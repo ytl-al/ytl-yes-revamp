@@ -1,7 +1,7 @@
 /*
     Stylesheet Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : February  04, 2022, 03:52:31 PM
+    Last edited on  : July      15, 2022, 03:52:31 PM
     Author          : [YTL Digital Design] - Zeeshan, AL
 */
 
@@ -275,7 +275,7 @@ section {
 .footer {
     width: 100%;
     display: block;
-    background-color: #1A1E47;
+    background-color: #00B4F0;
     padding-top: 30px;
 }
 
@@ -289,7 +289,7 @@ section {
 }
 
 .footer .icon-list .store-icon {
-    width: 75px;
+    width: 95px;
     height: 31px;
 }
 
@@ -348,10 +348,10 @@ section {
 .footer .copyright {
     width: 100%;
     display: block;
+    border-top: solid 1px #FFF;
     margin-top: 30px;
     padding-top: 10px;
     padding-bottom: 10px;
-    background: linear-gradient(80.9deg, #FF0084 16.48%, #6F29D2 85.6%, #2F3BF5 96.9%);
 }
 
 .footer .copyright p {
@@ -1409,7 +1409,7 @@ footer.footer .wp-block-image {
     position: fixed;
     top: 0px;
     width: 100%;
-    z-index: 4;
+    z-index: 1040;
     transition: all 230ms ease-in-out;
     -moz-transition: all 230ms ease-in-out;
     -o-transition: all 230ms ease-in-out;
@@ -1566,3 +1566,5 @@ body.show-overlay .layer-overlay {
     width: 40px;
     height: 40px;
 }
+
+.page-header .navbar .dropdown-menu { z-index: 1030; }
