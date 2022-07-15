@@ -277,7 +277,11 @@ const elevate = {
         if (siteLang && objText) {
             if (objText[siteLang][strID]) {
                 return objText[siteLang][strID];
-            }
+            }else{
+				if(objText['en-US'][strID]){
+					return objText['en-US'][strID];
+				}
+			}
         }
         return strID;
     },
