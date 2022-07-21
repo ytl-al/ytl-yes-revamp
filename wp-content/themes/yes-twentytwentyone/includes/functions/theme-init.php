@@ -295,23 +295,25 @@ if (!function_exists('yes_language_switcher') && function_exists('icl_get_langua
         $active_lang_mobile = '';
         if (1 < count($languages)) {
             foreach ($languages as $language) {
-                switch ($language['code']) {
-                    case 'ms':
-                        $language_name      = 'Bahasa Malaysia';
-                        $lang_name_mobile   = 'BM';
-                        break;
-                    case 'zh-hans':
-                        $language_name      = '中文';
-                        $lang_name_mobile   = '中文';
-                        break;
-                    default:
-                        $language_name      = 'English';
-                        $lang_name_mobile   = 'EN';
+                if ($language['code'] != 'zh-hans') {
+                    switch ($language['code']) {
+                        case 'ms':
+                            $language_name      = 'Bahasa Malaysia';
+                            $lang_name_mobile   = 'BM';
+                            break;
+                        case 'zh-hans':
+                            $language_name      = '中文';
+                            $lang_name_mobile   = '中文';
+                            break;
+                        default:
+                            $language_name      = 'English';
+                            $lang_name_mobile   = 'EN';
+                    }
+                    $langs  .= '<li><a href="' . $language['url'] . '" language="' . $language['code'] . '" class="dropdown-item" >' . $language_name . '</a></li>';
+    
+                    ($language['active']) ? $active_lang = $language_name : '';
+                    ($language['active']) ? $active_lang_mobile = $lang_name_mobile : '';
                 }
-                $langs  .= '<li><a href="' . $language['url'] . '" language="' . $language['code'] . '" class="dropdown-item" >' . $language_name . '</a></li>';
-
-                ($language['active']) ? $active_lang = $language_name : '';
-                ($language['active']) ? $active_lang_mobile = $lang_name_mobile : '';
             }
         }
         $exp_class  = join(' ', $classes);
