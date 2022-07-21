@@ -887,7 +887,7 @@
                                     </ol>
                                 </div>
                                 <div><label><input type="checkbox" id="term2" name="term2" @click="check_sign"
-                                                   value="agree" checked/> I Agree</label></div>
+                                                   value="agree" checked/> {{ renderText('i_agree') }}</label></div>
                             </div>
 
                         </div>

@@ -54,10 +54,10 @@
                     </div>
                 </div>
                 <div class="row gx-5" v-if="pageValid">
-                    <div class="col-lg-4 col-12 order-lg-2">
+                    <div class="col-lg-5 col-12 order-lg-2">
                         <?php include('section-order-summary.php'); ?>
                     </div>
-                    <form class="col-lg-8 col-12 order-lg-1 mt-3 mt-lg-0" autocomplete="off" @submit="paymentSubmit">
+                    <form class="col-lg-7 col-12 order-lg-1 mt-3 mt-lg-0" autocomplete="off" @submit="paymentSubmit">
                         <div>
                             <h1 class="mb-4 d-none d-lg-block">{{ renderText('payment_info') }}</h1>
                             <p class="sub mb-4 pe-5 d-none d-lg-block">{{ renderText('payment_info_label_1') }}</p>

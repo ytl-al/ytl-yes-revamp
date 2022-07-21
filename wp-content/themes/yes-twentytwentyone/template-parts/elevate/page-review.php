@@ -47,14 +47,14 @@
             <div >
                 <div class="subtitle">{{ renderText('review_and_pay') }}</div>
                 <div class="row gx-5" >
-                    <div class="col-lg-8 col-12">
+                    <div class="col-lg-7 col-12">
 
                         <div class="border-box">
                             <div class="row">
-                                <div class="col-md-3 leftColor">
+                                <div class="col-md-4 leftColor">
                                     <div class="p-3" v-if="orderSummary.product.selected"><img :src="getProductImage()" width="150"></div>
                                 </div>
-                                <div class="col-md-9 p-4">
+                                <div class="col-md-8 p-4">
                                     <div class="row mt-3">
                                         <div class="col-md-9">
                                             <div class="text-20">
@@ -118,16 +118,16 @@
 
                         </div>
                     </div>
-                    <div class="col-lg-4 col-12">
+                    <div class="col-lg-5 col-12">
                         <div class="summary-box">
                             <h1 class="subtitle">{{ renderText('order_summary') }}</h1>
                             <h3 class="plan_price">{{ renderText('monthly_payment') }}</h3>
                             <div class="hr_line"></div>
                             <div class="row cart_total">
-                                <div class="col-6 pt-2 pb-2">
+                                <div class="col-4 pt-2 pb-2">
                                     <h3>{{ renderText('total') }}</h3>
                                 </div>
-                                <div class="col-6 pt-2 pb-2 text-end">
+                                <div class="col-8 pt-2 pb-2 text-end">
                                     <h3>RM{{ formatPrice(parseFloat(orderSummary.orderDetail.subtotal).toFixed(2)) }}/mth</h3>
                                 </div>
                             </div>

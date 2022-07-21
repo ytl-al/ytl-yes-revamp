@@ -471,6 +471,7 @@
                                     <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(895)" data-productid="895">{{ renderText('select') }}</a></p>
                                 </div>
                             </div>
+
                             <!-- Upsell Products END -->
                         </div>
                     </div>

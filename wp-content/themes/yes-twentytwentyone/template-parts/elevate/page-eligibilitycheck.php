@@ -164,7 +164,7 @@
                                         <input type="checkbox" id="consent" @click="watchAllowNext" name="consent" value="1">
                                     </div>
                                     <div class="col-11 text-12">
-                                        <label for="consent" style="line-height:20px;" v-html="renderText('term_and_condition1')">
+                                        <label for="consent" style="line-height:20px;" v-html="renderText('term_and_condition2')">
                                         </label>
                                     </div>
                                 </div>

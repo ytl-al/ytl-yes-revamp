@@ -143,15 +143,15 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-12">
-                    <div class="summary-box">
+                    <div class="summary-box" style="margin-top: 20px;">
                         <h1 class="subtitle">{{ renderText('order_summary') }}</h1>
                         <h3 class="plan_price">{{ renderText('monthly_payment') }}</h3>
                         <div class="hr_line"></div>
                         <div class="row cart_total">
-                            <div class="col-6 pt-2 pb-2">
+                            <div class="col-5 pt-2 pb-2">
                                 <h3>{{ renderText('total') }}</h3>
                             </div>
-                            <div class="col-6 pt-2 pb-2 text-end">
+                            <div class="col-7 pt-2 pb-2 text-end">
                                 <h3>RM{{ formatPrice(orderSummary.orderDetail.subtotal) }}/mth</h3>
                             </div>
                         </div>
