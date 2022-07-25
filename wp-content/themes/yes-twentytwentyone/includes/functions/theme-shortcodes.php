@@ -589,7 +589,7 @@ if (!function_exists('generate_roadshow')) {
         $arr_list = [];
         if ($array) {
             foreach ($array as $list) {
-                if ($list['State'] && $list['Address'] && $list['Time'] && $list['Start Date'] && $list['End Date'] && $list['Date String'] && $list['Latitude'] && $list['Longitude']) {
+                if ($list['State'] && $list['Address'] && $list['Time'] && $list['Start Date'] && $list['End Date'] && $list['Date String'] && $list['Latitude'] && $list['Longitude'] && $list['Show on Web'] == 'Yes') {
                     $arr_list[$list['State']][] = $list;
                 }
             }
