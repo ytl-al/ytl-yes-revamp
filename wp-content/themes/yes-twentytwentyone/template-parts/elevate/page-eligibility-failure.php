@@ -142,7 +142,7 @@ font-family: 'Open Sans', sans-serif;
         </div>
     </div>
 </header>
-<main>
+<main id="main-vue">
     <section id="grey-innerbanner">
         <div class="container">
             <ul class="wizard">
@@ -163,7 +163,7 @@ font-family: 'Open Sans', sans-serif;
     </section>
     <section id="cart-body">
         <div class="container" style="border: 0">
-            <div id="main-vue">
+            <div>
                 <div class="border-box pad-mobile">
                     <div class="text-center p-lg-5">
                         <h2 class="subtitle mt-3">Sorry! We ran a check and you did not pass our ID verification</h2>
