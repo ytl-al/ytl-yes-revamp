@@ -1,4 +1,257 @@
-<!-- Slider Start -->
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>YES</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../wp-content/themes/yes-twentytwentyone/assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/slick.css" />
+    <link rel="stylesheet" type="text/css" href="css/aos.css" />
+    <link rel="stylesheet" type="text/css" href="css/slick-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" />
+    <link rel="stylesheet" type="text/css"
+        href="../wp-content/themes/yes-twentytwentyone/assets/css/yes-overwrite.css" />
+        <style type="text/css">
+            #section-steps{background-image: url(https://cdn.yes.my/site/wp-content/uploads/2022/07/steps-infinite-bg.jpg); background-size:cover;}
+            .layer-step h2 { font-size: 23px; margin: 0 0 8px; font-weight:600; color:#FFF; }
+            .layer-step p{color:#FFF;}
+            .layer-step a{text-decoration:underline; color:#FFF;}
+            .layer-step .panel-stepHeading { color: #FFF; font-family: 'Montserrat', sans-serif; font-size: 25px; font-weight: 800; margin: 0 0 15px; text-transform: uppercase; }
+            .panel-stepHeading .icon-stepHeading { background-color: #FFF; border-radius: 100%; display: inline-block; margin: 0 12px 0 0; height: 53px; padding: 5px 0 0; text-align: center; vertical-align: middle; width: 53px; }
+            .icon-stepHeading img { max-height: 32px; max-width: 32px; }
+        
+            .section-bg-grey { background-color: #F7F8F9; }
+        
+            .layer-accordionPlan .layer-accordionPlanDetails { background-color: #FFF; border-radius: 10px; box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1); margin: 45px 0 0; padding: 30px; }
+        
+            .layer-accordionPlanDetails .img-infinite { margin-bottom: 12px; max-width: 230px; }
+            .layer-accordionPlanDetails p.panel-textGradient { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin: 0; }
+            p.panel-textGradient span { background: linear-gradient(80.9deg, #FF0084 16.48%, #6F29D2 85.6%, #2F3BF5 96.9%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; }
+            .layer-accordionPlanDetails p.panel-hotspot { font-size: 33px; font-weight: 800; line-height: 33px; vertical-align: sub; }
+            .layer-accordionPlanDetails p.panel-hotspot sup { font-size: 18px; line-height: 23px; margin: 0 0 0 5px; }
+            .layer-accordionPlanDetails p.panel-permonth { font-size: 23px; line-height: 28px; }
+            .layer-accordionPlanDetails ul.listing-planCheck, ul.listing-planCheck { margin: 0; padding: 0; }
+            .layer-accordionPlanDetails ul.listing-planCheck li, ul.listing-planCheck li { list-style-type: none; margin: 0 0 12px; padding: 0 0 0 25px; position: relative; }
+            .layer-accordionPlanDetails ul.listing-planCheck li:before, .ul.listing-planCheck li:before { background-image: url('https://cdn.yes.my/site/wp-content/uploads/2022/04/icon-elevate-check.png'); background-size: contain; content: ''; display: inline-block; height: 20px; width: 20px; position: absolute; top: 2px; left: 0px; }
+            .layer-accordionPlanDetails .accordion-button, .layer-accordionPlanDetails .btn-viewMore { background-color: #FF0084; border-radius: 50px; color: #FFF; font-weight: 800; justify-content: center; padding: 10px 40px; text-transform: uppercase; }
+            .layer-accordionPlanDetails .accordion-button::after, .layer-accordionPlanDetails .btn-viewMore::after { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e"); margin-left: 15px; }
+            .layer-accordionPlanDetails .accordion-button:not(.collapsed)::after, .layer-accordionPlanDetails .btn-viewMore:not(.collapsed)::after { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important; }
+            
+            .layer-accordionPlan .layer-accordionPlanDevices { border-bottom: 1px solid #C5C5C5; margin: 18px 0 48px; padding: 0 0 33px; }
+            .layer-accordionPlanDevices .layer-accordionPlanDevicesBody .flex-nowrap { overflow-y: auto; padding: 0 0 15px; }
+            .layer-accordionPlanDevices .layer-planDevice { background-color: #FFF; border-radius: 10px; box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15); height: 100%; margin-top: 4px; padding: 40px 30px; }
+            .layer-planDevice h2, .layer-planDevice h3 { font-size: 18px; line-height: 23px; letter-spacing: -0.02em; margin: 0 0 20px; text-align: center; }
+            .layer-planDevice h3 { font-size: 23px; line-height: 28px; }
+        
+            .layer-planDevice p.panel-deviceImg { margin: 0 0 20px; position: relative; text-align: center; }
+            .layer-planDevice p.panel-deviceImg img { max-height: 148px; }
+            .layer-planDevice p.panel-deviceImg .span-oosDeviceText { align-items: center; background-color: rgba(255, 255, 255, 0.8); border-radius: 100%; color: #000; display: flex; font-size: 12px; font-weight: 700; height: 100px; left: 50%; line-height: 16px; margin: -50px 0 0 -50px; position: absolute; text-align: center; text-transform: uppercase; top: 50%; width: 100px; }
+            .layer-planDevice p.panel-btn { margin: 0 0 20px; text-align: center; }
+            .layer-planDevice p.panel-btn a { background-color: #2F3BF5; border-radius: 50px; color: #FFF; display: inline-block; font-weight: 800; letter-spacing: 0.1em; padding: 8px 40px; text-transform: uppercase; }
+            .layer-planDevice p.panel-btn span.span-oos { background-color: transparent; color: #333; cursor: text; display: inline-block; font-style: italic; font-weight: 800; letter-spacing: 0.1em; line-height: 1.5; padding: 9px 40px; text-transform: uppercase; }
+            .layer-planDevice ul.listing-deviceDesc { margin-bottom: 20px; padding-left: 20px; }
+        
+            .panel-colors { align-items: center; }
+            .panel-colors .span-colorAvailableText { color: #000; display: block; font-weight: 700; margin: 0 0 8px; }
+            .panel-colors .span-color { background-color: transparent; border: 2px solid #333; border-radius: 100%; box-sizing: border-box; display: inline-block; height: 30px; margin: 0 4px 0 0; padding: 2px; width: 30px; }
+            .panel-colors .span-color:last-of-type { margin-right: 0; }
+            .span-color:after { background-color: #D9D9D9; border-radius: 100%; content: ''; display: inline-block; height: 22px; width: 22px; }
+            .span-color.blue:after { background-color: #ADBBDE; }
+            .span-color.black:after { background-color: #1B1F22; }
+            .span-color.white:after { background-color: #EFEFEF; }
+            .span-color.red:after { background-color: #FE0003; }
+            .span-color.grey:after { background-color: #D9D9D9; }
+            .span-color.light-blue:after { background-color: #84C8EC; }
+            .span-color.pearl-white:after { background-color: #D7E8F7; }
+            .span-color.light-dark-blue:after { background-color: #8ECDED; }
+            .span-color.midnight-green:after { background-color: #405855; }
+            .span-color.orange:after { background-color: #F06329; }
+            .span-color.peach:after { background-color: #D8A89D; }
+            .span-color.pink:after { background-color: #BC9792; }
+            
+            #infinity-banner { background-image: url(https://cdn.yes.my/site/wp-content/uploads/2022/07/infinite-banner-new-home-bg-scaled.jpg); background-size: cover; background-repeat: no-repeat; overflow: hidden; padding: 64px 0px; background-position:right; }
+            #infinity-banner h1 { font-size: 48px; font-weight: 800; color:#FFF; line-height: 56px; }
+            #infinity-banner h2 { font-size: 21px; font-weight: 700; color:#FFF; }
+            #infinity-banner p { font-size: 10px; color:#FFF; }
+        
+            @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+                #infinity-banner { background-image: url(https://cdn.yes.my/site/wp-content/uploads/2022/07/infinite-banner-new-home-bg-mobile-new.jpg); padding:0px; padding-top: 20px; }
+                #infinity-banner h1 { font-size: 35px !important; line-height: 36px !important; }
+                #infinity-banner h2 { font-size: 13px !important; line-height: 20px !important; padding-bottom: 123px; }
+                #infinity-banner .pink-btn { font-size: 10px; padding: 0.7rem 1.3rem; }
+            }
+            @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+                #infinity-banner h1{font-size: 68px;}
+                #infinity-banner h2{font-size: 33px;}
+                #infinity-banner{background-position: -250px 0px; padding: 46px 0px;}
+            }
+            @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
+                #infinity-banner{ background-position: -370px 0px; }
+            }
+        
+            @media (min-width: 768px) {
+                .layer-step h2 { margin-bottom: 16px; }
+                .layer-step .panel-stepHeading { margin-bottom: 24px; }
+            }
+        
+            @media (min-width: 1024px) {
+                .layer-accordionPlanDetails .img-infinite { max-width: 256px; }
+                .layer-accordionPlanDetails .accordion-button, .layer-accordionPlanDetails .btn-viewMore { width: 80%; }
+        
+                .panel-colors .span-color { height: 40px; margin-right: 8px; width: 40px; }
+                .span-color:after { height: 32px; width: 32px; }
+            }
+        
+            @media (min-width: 1200px) {
+                .layer-accordionPlanDevices .layer-accordionPlanDevicesBody .flex-nowrap { overflow-y: visible; padding-bottom: 0; }
+            }
+        
+            #slider-yes-home .slider-content h1 { font-size: 48px; line-height: 56px; font-weight: 800; color: #000; }
+            #slider-yes-home .slider-content h2 { font-size: 21px; line-height: 28px; font-weight: 700; color: #000; }
+            #slider-yes-home .slider-content h1 span { font-weight: 800; }
+            #slider-yes-home .slider-content h1.white, #slider-yes-home .slider-content h2.white { color: #FFF; }
+            #slider-yes-home .slider-content p { color: #000; font-size: 20px; line-height: 24px; }
+            #slider-yes-home .slider-content p span { font-weight: 700; }
+            #slider-yes-home .slider-content p.small { font-size: 16px; }
+            #slider-yes-home .slider-content p.white { color: #FFF; }
+            #slider-yes-home .slider-content { position: absolute; width: 100%; height: 100%; z-index: 1; left: 0; top: 0; }
+        
+            .fm-form-container.fm-theme1 { width: 100% !important; }
+            .fm-form input[type="text"] { background-color: #FFF; background-clip: padding-box; border: 1px solid #CED4DA; color: #212529; display: block; font-size: 1rem; font-weight: 400; padding: 0.375rem 0.75rem; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; }
+            .fm-form .button-submit { background-color: #FF0084; border-radius: 50px; border: 0; color: #FFF; float: right !important; font-weight: 800; justify-content: center; padding: 10px 40px; text-transform: uppercase; width: 100% !important; }
+            .fm-form .button-submit:hover { background-color: #D00072; }
+            #why-infinite h1 {font-size: 39px; font-weight: 800; line-height: 47px;color: #000; padding-top: 60px;}
+            #why-infinite .greybox {display: flex; width: 100%; height: 100%; background-color: #F5F5F5; box-shadow: 2px 2px 12px rgba(112, 144, 176, 0.25); border-radius: 10px; text-align: center; padding: 20px; flex-direction: column;}
+            #why-infinite .greybox h2 {color: #000; font-size: 28px; font-weight: 800; text-align:left;}
+            #why-infinite .greybox p {color: #000; font-size: 15px; line-height:20px; text-align:left;}
+        </style>
+</head>
+
+<body>
+
+    <div class="layer-page">
+        <header class="page-header">
+            <div class="top-pink-bar d-none">
+                <div class="row g-0 text-center">
+                    <p>Are you an Exisiting YES user? Earn up to RM50/referral through our Refer & Earn program!</p>
+                </div>
+                <a href="#" class="close-btn"><span class="iconify" data-icon="eva:close-fill"></span></a>
+            </div>
+            <div class="top-tabs-container">
+                <div class="container g-0">
+                    <div class="row g-0">
+                        <div class="col-10">
+                            <ul class="tabnav">
+                                <li><a href="#" class="active">Personal</a></li>
+                                <li><a href="#">Business</a></li>
+                                <li><a href="#">Education</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-2">
+                            <div class="dropdown language-drop float-end">
+                                <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button"
+                                    id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="iconify" data-icon="bi:globe"></span> English
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">English</a></li>
+                                    <li><a class="dropdown-item" href="#">Bhasa Malay</a></li>
+                                    <li><a class="dropdown-item" href="#">中文</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-container">
+                <div class="container g-lg-0">
+                    <div class="row g-0">
+                        <nav class="navbar navbar-expand-lg">
+                            <div class="container">
+                                <a class="navbar-brand" href="#"><img src="images/logo.svg" class="logo-top" /></a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <li class="nav-item dropdown mega-dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                                                role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                                            <ul class="dropdown-menu mega-dropdown-menu"
+                                                aria-labelledby="navbarDropdown">
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Mobile Plans</li>
+                                                        <li><a href="#">Prepaid Plans</a></li>
+                                                        <li><a href="#">Postpaid Plans</a></li>
+                                                        <li><a href="#">YES Prihatin</a></li>
+                                                        <li><a href="#">Merdeka RM1 Package</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Broadband</li>
+                                                        <li><a href="#">Home broadband</a></li>
+                                                        <li><a href="#">On-the-go broadband</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <ul>
+                                                        <li class="dropdown-header">Existing Customers</li>
+                                                        <li><a href="#">How-To: Refer & Earn</a></li>
+                                                        <li><a href="#">How-To: Get Databack</a></li>
+                                                        <li><a href="#">Data & Hotspot Add-Ons</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="#">Keep Number</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Partners</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#">Help</a>
+                                        </li>
+                                    </ul>
+                                    <div class="d-flex align-items-center">
+                                        <a href="#" class="pink-btn me-3">Get Started</a>
+                                        <a href="#" class="login-btn"><span class="iconify"
+                                                data-icon="carbon:user-avatar-filled-alt"></span> Log In</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+
+            <!-- Breadcrumb Start -->
+            <div class="container breadcrumb-section">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                        <li class="breadcrumb-item"><a href="#">Mobile Plans</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Postpaid Plans</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- Breadcrumb End -->
+
+            <!-- Slider Start -->
 <section id="infinity-banner">
     <div class="container">
         <div class="row">
@@ -21,82 +274,81 @@
 
 <!-- Why Infinite Start -->
 <section id="why-infinite" class="pb-5">
-    <div class="container">
-      <h1 class="mb-1 text-center" data-aos="fade-up" data-aos-duration="1000">Malaysia's cheapest & fastest<br>beyond unlimited 5G + 4G plan</h1>
-      <h2 class="mb-5 text-center" data-aos="fade-up" data-aos-duration="1000">Experience infinite full speed data & calls with a FREE 5G phone.​</h2>
-      <div class="row" data-aos="fade-up" data-aos-duration="1000">
-         <div class="col-12 col-xl-3 col-lg-6 col-md-6">
-             <div class="greybox">
-                 <div class="mb-auto">
-                     <img src="https://cdn.yes.my/site/wp-content/uploads/2022/07/free-infinite-5g.png" alt="">
-                 </div>
-                 <div>
-                     <h2>FREE 5G phone</h2>
-                 <p>FREE really means FREE. Just upgrade your Yes Infinite plan with '+' to get one with 0% upfront payment.​</p>
-                 </div>
-             </div>
-         </div>
-         <div class="col-12 col-xl-3 col-lg-6 col-md-6 mt-4 mt-lg-0">
-             <div class="greybox">
-                 <div class="mb-auto">
-                     <img src="https://cdn.yes.my/site/wp-content/uploads/2022/07/5g-already-infinite.png" alt="">
-                 </div>
-                 <div>
-                     <h2>5G already</h2>
-                 <p>You can now enjoy 20x faster speed with near-zero latency with Yes 5G connectivity.​</p>
-                 </div>
-             </div>
-         </div>
-         <div class="col-12 col-xl-3 col-lg-6 col-md-6 mt-4 mt-lg-0">
-             <div class="greybox">
-                 <div class="mb-auto">
-                     <img src="https://cdn.yes.my/site/wp-content/uploads/2022/07/best-plan-infinite.png" alt="">
-                 </div>
-                 <div>
-                     <h2>Best plan with the least spend</h2>
-                 <p>From as low as RM58/month, it is 300% cheaper than existing 4G plans.​</p>
-                 </div>
-             </div>
-         </div>
-         <div class="col-12 col-xl-3 col-lg-6 col-md-6 mt-4 mt-lg-0">
-             <div class="greybox">
-                 <div class="mb-auto">
-                     <img src="https://cdn.yes.my/site/wp-content/uploads/2022/07/nocap-infinite.png" alt="">
-                 </div>
-                 <div>
-                     <h2>No speed cap</h2>
-                 <p>With no Fair Usage Policy (FUP),  your data, speed and calls will be uncapped. Enjoy all this at a fixed monthly rate.​</p>
-                 </div>
-             </div>
-         </div>
-      </div>
-    </div>
- </section>
- <!-- Why Infinite End -->
- 
- <!-- Section Steps STARTS -->
- <section class="layer-steps" id="section-steps">
-     <div class="container my-5">
-         <div class="row gx-5 text-md-start text-center">
-             <div class="col-12 col-md-4 mb-5 mb-md-0 layer-step flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
-                 <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/07/icon-elevate-step-1-new.png"></span> Step 1</p>
-                 <h2>Pick a Yes Infinite Plan.</h2>
-                 <p>Our Yes Infinite Plans consist of 4 tiers: Basic, Standard, Premium and Ultra. Pick a plan that suits your needs.</p>
-             </div>
-             <div class="col-12 col-md-4 mb-5 mb-md-0 layer-step flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
-                 <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/07/icon-elevate-step-2-new.png"></span> Step 2</p>
-                 <h2>Choose a FREE 5G Phone by upgrading to '+'.</h2>
-                 <p>Choose a FREE* 5G smartphone from the list of phone models available based on the plan you have selected. <br><br>*Terms and conditions apply.</p>
-             </div>
-             <div class="col-12 col-md-4 layer-step flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="500">
-                 <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/07/icon-elevate-step-3-new.png"></span> Step 3</p>
-                 <h2>Confirm your Yes Infinite+ order & enjoy!</h2>
-                 <p>Confirm your purchase and you’re all set to unlock infinite possibilities. If you wish to keep your existing number, click <a href="/keep-your-number/">here</a> for a step-by-step guide.</p>
-             </div>
-         </div>
+   <div class="container">
+     <h1 class="mb-5 text-center" data-aos="fade-up" data-aos-duration="1000">Malaysia's cheapest & fastest<br>beyond unlimited 5G + 4G plan</h1>
+     <div class="row" data-aos="fade-up" data-aos-duration="1000">
+        <div class="col-12 col-xl-3 col-lg-6 col-md-6">
+            <div class="greybox">
+                <div class="mb-auto">
+                    <img src="https://cdn.yes.my/site/wp-content/uploads/2022/07/free-infinite-5g.png" alt="">
+                </div>
+                <div>
+                    <h2>FREE 5G phone</h2>
+                <p>FREE really means FREE. Just upgrade your Yes Infinite plan with '+' to get one with 0% upfront payment.​</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-xl-3 col-lg-6 col-md-6 mt-4 mt-lg-0">
+            <div class="greybox">
+                <div class="mb-auto">
+                    <img src="https://cdn.yes.my/site/wp-content/uploads/2022/07/5g-already-infinite.png" alt="">
+                </div>
+                <div>
+                    <h2>5G already</h2>
+                <p>You can now enjoy 20x faster speed with near-zero latency with Yes 5G connectivity.​</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-xl-3 col-lg-6 col-md-6 mt-4 mt-lg-0">
+            <div class="greybox">
+                <div class="mb-auto">
+                    <img src="https://cdn.yes.my/site/wp-content/uploads/2022/07/best-plan-infinite.png" alt="">
+                </div>
+                <div>
+                    <h2>Best plan with the least spend</h2>
+                <p>From as low as RM58/month, it is 300% cheaper than existing 4G plans.​</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-xl-3 col-lg-6 col-md-6 mt-4 mt-lg-0">
+            <div class="greybox">
+                <div class="mb-auto">
+                    <img src="https://cdn.yes.my/site/wp-content/uploads/2022/07/nocap-infinite.png" alt="">
+                </div>
+                <div>
+                    <h2>No speed cap</h2>
+                <p>With no Fair Usage Policy (FUP),  your data, speed and calls will be uncapped. Enjoy all this at a fixed monthly rate.​</p>
+                </div>
+            </div>
+        </div>
      </div>
- </section>
- <!-- Section Steps ENDS -->
+   </div>
+</section>
+<!-- Why Infinite End -->
+
+<!-- Section Steps STARTS -->
+<section class="layer-steps" id="section-steps">
+    <div class="container my-5">
+        <div class="row gx-5 text-md-start text-center">
+            <div class="col-12 col-md-4 mb-5 mb-md-0 layer-step flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
+                <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/07/icon-elevate-step-1-new.png"></span> Step 1</p>
+                <h2>Pick a Yes Infinite Plan.</h2>
+                <p>Our Yes Infinite Plans consist of 4 tiers: Basic, Standard, Premium and Ultra. Pick a plan that suits your needs.</p>
+            </div>
+            <div class="col-12 col-md-4 mb-5 mb-md-0 layer-step flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
+                <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/07/icon-elevate-step-2-new.png"></span> Step 2</p>
+                <h2>Choose a FREE 5G Phone by upgrading to '+'.</h2>
+                <p>Choose a FREE* 5G smartphone from the list of phone models available based on the plan you have selected. <br><br>*Terms and conditions apply.</p>
+            </div>
+            <div class="col-12 col-md-4 layer-step flex-column" data-aos="fade-up" data-aos-duration="500" data-aos-delay="500">
+                <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/07/icon-elevate-step-3-new.png"></span> Step 3</p>
+                <h2>Confirm your Yes Infinite+ order & enjoy!</h2>
+                <p>Confirm your purchase and you’re all set to unlock infinite possibilities. If you wish to keep your existing number, click <a href="/keep-your-number/">here</a> for a step-by-step guide.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Section Steps ENDS -->
 
 <!-- Section Plans STARTS -->
 <section class="section-bg-grey py-5" id="section-plans">
@@ -173,21 +425,6 @@
                         <div class="layer-accordionPlanDevices accordion-collapse collapse" id="collapsePlan-2" aria-labelledby="accordionPlanHeading-2" data-bs-parent="accordion-plans">
                             <div class="layer-accordionPlanDevicesBody">
                                 <div class="row flex-nowrap flex-xl-wrap">
-                                    <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
-                                        <div class="layer-planDevice" id="device-oppo-a77" data-planDevice="9160">
-                                            <h2>Yes Infinite+ Standard</h2>
-                                            <h3>OPPO A77 5G</h3>
-                                            <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/07/oppo-a77-5g-dev.jpeg" /><span class="span-oosDeviceText" style="display: none;">Temporarily Out of Stock</span></p>
-                                            <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan" data-productid="19160">Get Plan</a></p>
-                                            <ul class="listing-deviceDesc">
-                                                <li>FREE 5G smartphone (RRP <s> RM1,199 </s>)</li>
-                                                <li>6GB RAM</li>
-                                                <li>128GB Storage</li>
-                                                <li>36-month contract</li>
-                                            </ul>
-                                            <p class="panel-colors"><span class="span-colorAvailableText">Available in:</span> <span class="span-color light-blue" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Light Blue"></span><span class="span-color black" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Black"></span></p>
-                                        </div>
-                                    </div>
                                     <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
                                         <div class="layer-planDevice" id="device-samsung-a33" data-planDevice="18000">
                                             <h2>Yes Infinite+ Standard</h2>
@@ -307,21 +544,6 @@
                             <div class="layer-accordionPlanDevicesBody">
                                 <div class="row flex-nowrap flex-xl-wrap">
                                     <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
-                                        <div class="layer-planDevice" id="device-oppo-reno-8-pro" data-planDevice="9180">
-                                            <h2>Yes Infinite+ Ultra</h2>
-                                            <h3>OPPO Reno 8 Pro 5G</h3>
-                                            <p class="panel-deviceImg"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/07/reno-8-pro.jpg" /><span class="span-oosDeviceText" style="display: none;">Temporarily Out of Stock</span></p>
-                                            <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-getplan btn-elevate-buyplan" data-productid="9180">Get Plan</a></p>
-                                            <ul class="listing-deviceDesc">
-                                                <li>FREE 5G smartphone (RRP <s> RM3,499 </s>)</li>
-                                                <li>12GB RAM</li>
-                                                <li>256GB Storage</li>
-                                                <li>36-month contract</li>
-                                            </ul>
-                                            <p class="panel-colors"><span class="span-colorAvailableText">Available in:</span> <span class="span-color black" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Glazed Black"></span><span class="span-color midnight-green" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Glazed Green"></span></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
                                         <div class="layer-planDevice" id="device-samsung-s22" data-planDevice="1812">
                                             <h2>Yes Infinite+ Ultra</h2>
                                             <h3>Samsung Galaxy S22 5G</h3>
@@ -351,6 +573,21 @@
                                                 <li>36-month contract</li>
                                             </ul>
                                             <p class="panel-colors"><span class="span-colorAvailableText">Available in:</span> <span class="span-color light-blue" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Blue"></span><span class="span-color black" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Black"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-10 col-md-5 col-xl-4 mb-xl-4 flex-column">
+                                        <div class="layer-planDevice" id="device-oppo-reno-8-pro" data-planDevice="9180">
+                                            <h2>Yes Infinite+ Ultra</h2>
+                                            <h3>OPPO Reno 8 Pro 5G</h3>
+                                            <p class="panel-deviceImg"><img src="https://www.yes.my/wp-content/uploads/2022/07/reno-8-pro.jpg" /><span class="span-oosDeviceText" style="display: none;">Temporarily Out of Stock</span></p>
+                                            <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-getplan btn-elevate-buyplan" data-productid="9180">Get Plan</a></p>
+                                            <ul class="listing-deviceDesc">
+                                                <li>FREE 5G smartphone (RRP <s> RM3,499 </s>)</li>
+                                                <li>12GB RAM</li>
+                                                <li>256GB Storage</li>
+                                                <li>36-month contract</li>
+                                            </ul>
+                                            <p class="panel-colors"><span class="span-colorAvailableText">Available in:</span> <span class="span-color black" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Black"></span><span class="span-color midnight-green" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Midnight Green"></span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -483,20 +720,129 @@
     </div>
 </section>
 <!-- Footer FAQ ENDS -->
-
-<!-- Model Notify Me STARTS -->
-<div class="modal fade" tabindex="-1" id="modal-notify">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Notify Me!</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </main>
+        <footer class="page-footer footer">
+            <div class="container g-lg-0">
+                <div class="row position-relative">
+                    <div class="col-12 col-md-3">
+                        <img src="images/logo.svg" class="footer-logo mb-4" />
+                        <div class="row mb-2">
+                            <ul class="icon-list">
+                                <li>
+                                    <a href="#"><img src="images/facebook.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/instagram.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/youtube.svg" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/twitter.svg" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <p class="mb-2">Get The MyYes App</p>
+                            <ul class="icon-list">
+                                <li>
+                                    <a href="#"><img src="images/logos_google-play-icon.svg" class="store-icon" /></a>
+                                </li>
+                                <li>
+                                    <a href="#"><img src="images/logos_apple-app-store.svg" class="store-icon" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="row g-0 row-cols-2 row-cols-sm-1 row-cols-md-5">
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Plans & Pricing</li>
+                                    <li><a href="#">Prepaid plans</a></li>
+                                    <li><a href="#">Postpaid plans</a></li>
+                                    <li><a href="#">YES Prihatin plans</a></li>
+                                    <li><a href="#">Data Add-Ons</a></li>
+                                    <li><a href="#">Merdeka RM1 Package</a></li>
+                                    <li><a href="#">On-the-go broadband</a></li>
+                                    <li><a href="#">Home broadband</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Explore</li>
+                                    <li><a href="#">Keep number</a></li>
+                                    <li><a href="#">Refer & earn</a></li>
+                                    <li><a href="#">Databack</a></li>
+                                    <li><a href="#">Partnerships</a></li>
+                                    <li><a href="#">Roaming</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Tools</li>
+                                    <li><a href="#">Device manuals</a></li>
+                                    <li><a href="#">Coverage</a></li>
+                                    <li><a href="#">Speed test</a></li>
+                                    <li><a href="#">Kiosk locations</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Company</li>
+                                    <li><a href="#">About us</a></li>
+                                    <li><a href="#">Sustainability reports</a></li>
+                                    <li><a href="#">Newsroom</a></li>
+                                    <li><a href="#">Terms & conditions</a></li>
+                                    <li><a href="#">Privacy policy</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="menulist">
+                                    <li class="heading">Help</li>
+                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="#">Chatbot</a></li>
+                                    <li><a href="#">Email us</a></li>
+                                    <li><a href="#">Facebook messenger</a></li>
+                                    <li><a href="#">Visit our store</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-1">
+                        <img src="images/ctm.png" class="img-fluid ctm-logo" />
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <p class="mb-3">Enter your email address to get notified on the stock availability of this phone. (<span id="span-phoneModel"></span>)</p>
-                [Form id="10"]
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div
+                            class="col-12 col-md-6 d-flex align-items-center justify-content-md-start justify-content-sm-center">
+                            <p>POWERED BY YTL, YTL Communications Sdn. Bhd. (793634-V)</p>
+                        </div>
+                        <div
+                            class="col-12 col-md-6 d-flex align-items-center justify-content-md-end justify-content-sm-center">
+                            <img src="images/footer-icons.png" class="img-fluid" />
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </footer>
     </div>
-</div>
-<!-- Model Notify Me ENDS -->
+
+
+
+
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="js/iconify.min.js"></script>
+    <script type="text/javascript" src="js/slick.js"></script>
+    <script type="text/javascript" src="js/aos.js"></script>
+
+    <script type="text/javascript">
+        AOS.init();
+    </script>
+</body>
+
+</html>
