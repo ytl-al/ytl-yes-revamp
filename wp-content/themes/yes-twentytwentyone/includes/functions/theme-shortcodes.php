@@ -29,15 +29,16 @@ if (!function_exists('generate_scheduled_network_maintenance')) {
                     } else if ($arr_keys[$key] == 'End Date') {
                         $end_date       = strtotime(str_replace('/', '-', $value));
                         $month          = date('F', $end_date);
+                        $year           = date('Y', $end_date);
                         $end_date_string = date('jS', $end_date);
                         $array[$i]['End Date Unix'] = $end_date;
                         if ($months != $month) {
-                            $date_string    .= " $months - $end_date_string $month";
+                            $date_string    .= " $months - $end_date_string $month, $year";
                             $months         .= ", $month";
                         } else if ($date_string != $end_date_string) {
-                            $date_string    .= " - $end_date_string $month";
+                            $date_string    .= " - $end_date_string $month, $year";
                         } else {
-                            $date_string    .= " $month";
+                            $date_string    .= " $month, $year";
                         }
                     }
                     if ($key != '0') $array[$i][$arr_keys[$key]] = $value;                // Remove "No" from array
@@ -67,7 +68,7 @@ if (!function_exists('generate_scheduled_network_maintenance')) {
         ksort($arr_list);                                                               // Sort by states alphabetically
 
         $lang           = get_bloginfo('language');
-        $str_box_time   = 'Time';
+        $str_box_time   = 'Downtime Between';
         $str_box_area   = 'Affected Area';
         $str_box_type   = 'Service Type';
         if ($lang == 'ms-MY') {
