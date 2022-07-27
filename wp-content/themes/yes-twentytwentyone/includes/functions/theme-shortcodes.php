@@ -73,7 +73,7 @@ if (!function_exists('generate_scheduled_network_maintenance')) {
         $str_box_type   = 'Service Type';
         if ($lang == 'ms-MY') {
             $str_box_time   = 'Masa';
-            $str_box_area   = 'Kawasan';
+            $str_box_area   = 'Kawasan Terjejas';
             $str_box_type   = 'Jenis Servis';
         } else if ($lang == 'zh-CN') {
         }
