@@ -670,6 +670,7 @@ if (!function_exists('generate_roadshow')) {
                                                                     <li><div class="form-check"><label><input class="cardCheckBox state" type="checkbox" checked value="Pulau Pinang"       data-state-name="Pulau Pinang" />       <span>Pulau Pinang</span></label></div></li>
                                                                     <li><div class="form-check"><label><input class="cardCheckBox state" type="checkbox" checked value="Sabah"              data-state-name="Sabah" />              <span>Sabah</span></label></div></li>
                                                                     <li><div class="form-check"><label><input class="cardCheckBox state" type="checkbox" checked value="Sarawak"            data-state-name="Sarawak" />            <span>Sarawak</span></label></div></li>
+                                                                    <li><div class="form-check"><label><input class="cardCheckBox state" type="checkbox" checked value="Selangor"           data-state-name="Selangor" />           <span>Selangor</span></label></div></li>
                                                                     <li><div class="form-check"><label><input class="cardCheckBox state" type="checkbox" checked value="Terengganu"         data-state-name="Terengganu" />         <span>Terengganu</span></label></div></li>
                                                                 </ul>
                                                             </div>
