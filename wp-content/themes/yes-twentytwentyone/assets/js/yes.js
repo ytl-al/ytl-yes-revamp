@@ -1,7 +1,7 @@
 /*
     JavaScript Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : June      30, 2022, 03:52:31 PM
+    Last edited on  : August    03, 2022, 03:52:31 PM
     Author          : [YTL Digital Design] - AL
 */
 const yesLocalStorageName = 'yesSession';
@@ -298,6 +298,12 @@ function gaEEcommercePush(eventType = '', data = {}) {
                 break;
             case 'purchase':                            // dataLayer push for 'Pay & Thank you' - page-PaymentMethodChangeEvent.php on complete transaction payment
                 gtag('event', 'purchase', data);
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-10904758864/YQttCOib_9EDENDU5c8o',
+                    'value': data.value,
+                    'currency': data.currency,
+                    'transaction_id': data.transaction_id
+                });
                 break;
             default:
                 return;

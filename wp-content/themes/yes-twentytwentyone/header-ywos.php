@@ -44,6 +44,17 @@
 	</script> -->
 	<!-- END Global site tag (gtag.js) - Google Analytics -->
 
+	<!-- Global site tag (gtag.js) - Google Ads: 10904758864 -->
+	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10904758864"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'AW-10904758864');
+	</script> -->
+	<!-- END Global site tag (gtag.js) - Google Ads: 10904758864 -->
+
 	<!-- Facebook Pixel Code -->
 	<!-- <script>
 		!function(f,b,e,v,n,t,s)
