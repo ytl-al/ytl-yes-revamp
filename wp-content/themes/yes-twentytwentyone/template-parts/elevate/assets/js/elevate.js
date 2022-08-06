@@ -395,7 +395,7 @@ function checkInputFullName(event) {
     }
 
     var specialchar = false;
-    if (charCode == 46 || charCode == 47 || charCode == 64 || charCode == 32 || charCode == 110) {
+    if (charCode == 46 || charCode == 47 || charCode == 64 || charCode == 32 || charCode == 110 || charCode == 222 || charCode == 39 || charCode == 96) {
         specialchar = true;
     }
 
