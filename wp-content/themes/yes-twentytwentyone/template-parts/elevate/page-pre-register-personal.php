@@ -742,7 +742,7 @@
                         toggleModalAlert('Error',this.renderText('alternate_phone_number_must_be_same'))
                     }
 
-                    var pattern =  /^[a-zA-Z,\.,\/,\',@,\s]+$/;
+                    var pattern =  /^[a-zA-Z,\.,\/,\',\’,\‘,@,\s]+$/;
                     if(self.deliveryInfo.alternative_name && !pattern.test(self.deliveryInfo.alternative_name)){
                         $('#alternative_name').addClass('input_error');
                         isFilled = false

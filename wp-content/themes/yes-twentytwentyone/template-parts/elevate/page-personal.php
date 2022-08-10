@@ -776,7 +776,7 @@
                         toggleModalAlert('Error',this.renderText('cannot_use_same_phone_number'))
                     }
 
-                    var pattern =  /^[a-zA-Z,\.,\/,\',@,\s]+$/;
+                    var pattern =  /^[a-zA-Z,\.,\/,\',\’,\‘,@,\s]+$/;
                     if(self.eligibility.alternative_name && !pattern.test(self.eligibility.alternative_name)){
                         $('#alternative_name').addClass('input_error');
                         isFilled = false
