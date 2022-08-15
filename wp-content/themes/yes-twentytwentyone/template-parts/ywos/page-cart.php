@@ -464,7 +464,7 @@
                                 </div>
                                 <div class="col-lg-3 col-12 mt-3 mb-3 mt-lg-0 mb-lg-0 d-flex align-items-center justify-content-lg-end justify-content-center">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        <h3 class="price">RM{{ formatPrice(parseFloat(orderSummary.plan.totalAmount)) }}</h3>
+                                        <h3 class="price">RM{{ (orderSummary.plan.totalAmount % 1 != 0) ? parseFloat(orderSummary.plan.totalAmount).toFixed(2) : formatPrice(parseFloat(orderSummary.plan.totalAmount)) }}</h3>
                                     </button>
                                 </div>
                             </div>
