@@ -122,7 +122,7 @@
                 <p class="large">{{ renderSummaryText('strRounding') }}</p>
             </div>
             <div class="col-4 text-end">
-                <p class="large"><strong>RM{{ parseFloat(orderSummary.due.rounding).toFixed(2) }}</strong></p>
+                <p class="large"><strong>{{ (orderSummary.due.rounding < 0) ? '-' : '' }}RM{{ parseFloat(orderSummary.due.rounding.replace('-', '')).toFixed(2) }}</strong></p>
             </div>
         </div>
     </template>

@@ -534,7 +534,7 @@
                                         <p>{{ renderText('summaryRounding') }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom text-end">
-                                        <p>RM{{ parseFloat(orderSummary.due.rounding).toFixed(2) }}</p>
+                                        <p>{{ (orderSummary.due.rounding < 0) ? '-' : '' }}RM{{ parseFloat(orderSummary.due.rounding.replace('-', '')).toFixed(2) }}</p>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -1010,8 +1010,10 @@
                     self.orderSummary.due.amount = (parseFloat(self.orderSummary.plan.totalAmountWithoutSST.replace(/,/g, '')) + ((self.orderSummary.addOn != null) ? parseFloat(self.orderSummary.addOn.amount) : 0)).toFixed(2);
                     self.orderSummary.due.taxesSST = (parseFloat(self.orderSummary.plan.totalSST) + ((self.orderSummary.addOn != null) ? parseFloat(self.orderSummary.addOn.taxSST) : 0)).toFixed(2);
                     self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.due.amount) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees)) + parseFloat(self.orderSummary.due.foreignerDeposit);
-                    self.orderSummary.due.rounding = parseFloat(getRoundingAdjustmentAmount(self.orderSummary.due.total.toFixed(2))).toFixed(2);
+                    // self.orderSummary.due.rounding = parseFloat(getRoundingAdjustmentAmount(self.orderSummary.due.total.toFixed(2))).toFixed(2);
+                    self.orderSummary.due.rounding = parseFloat(self.orderSummary.plan.roundingAdjustment).toFixed(2);
                     self.orderSummary.due.total = (parseFloat(self.orderSummary.due.total) + parseFloat(self.orderSummary.due.rounding)).toFixed(2);
+                    // self.orderSummary.due.total = parseFloat(self.orderSummary.plan.totalAmountWithSST).toFixed(2);
                 },
                 checkLoggedIn: function() {
                     var self = this;
