@@ -41,7 +41,7 @@
                 <p style="color: #00B4F0;">{{ renderSummaryText('strTotal') }}</p>
             </div>
             <div class="col-5 py-2 text-end">
-                <p class="large" style="color: #00B4F0;">RM{{ formatPrice(parseFloat(orderSummary.due.total).toFixed(2)) }}</p>
+                <p class="large" style="color: #00B4F0;"><strong>RM{{ formatPrice(parseFloat(orderSummary.due.total).toFixed(2)) }}</strong></p>
             </div>
         </div>
         <div v-if="orderSummary.plan.planType != 'prepaid'">
@@ -51,8 +51,20 @@
                         <p>{{ renderSummaryText('strDueMonthly') }}</p>
                     </div>
                     <div class="col-4 text-end">
-                        <p>RM{{ parseFloat(orderSummary.plan.monthlyCommitment).toFixed(2) }}</p>
+                        <p><strong>RM{{ parseFloat(orderSummary.plan.monthlyCommitment).toFixed(2) }}</strong></p>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3" v-if="orderSummary.plan.supplementaryBundlePlans">
+            <p>{{ renderSummaryText('strSupplimentaryBundledLines') }}</p>
+            <div class="row mb-0" v-for="(subPlan) in orderSummary.plan.supplementaryBundlePlans">
+                <div class="col-8">
+                    <p class="mb-0 ps-2">{{ subPlan.planName }}</p>
+                </div>
+                <div class="col-4 text-end">
+                    <p class="large"><strong>RM{{ parseFloat(subPlan.planPrice).toFixed(2) }}</strong></p>
                 </div>
             </div>
         </div>
@@ -169,6 +181,7 @@
         strSummaryTitle: { 'en-US': 'Order summary', 'ms-MY': 'Ringkasan pesanan', 'zh-hans': 'Order summary' },
         strTotal: { 'en-US': 'Total Payment', 'ms-MY': 'Jumlah Bayaran', 'zh-hans': 'Total Payment' },
         strDueMonthly: { 'en-US': 'Due Monthly', 'ms-MY': 'Perlu Dibayar Setiap Bulan', 'zh-hans': 'Due Monthly' },
+        strSupplimentaryBundledLines: { 'en-US': 'Supplementary Bundled Lines', 'ms-MY': 'Talian Tambahan Bundle', 'zh-hans': 'Supplementary Bundled Lines' }, 
         strAddOns: { 'en-US': 'Add-Ons', 'ms-MY': 'Tambahan', 'zh-hans': 'Add-Ons' },
         strForeignerDeposit: { 'en-US': 'Deposit for Foreigner', 'ms-MY': 'Deposit Warga Asing', 'zh-hans': 'Deposit for Foreigner' },
         strShipping: { 'en-US': 'Shipping', 'ms-MY': 'Penghantaran', 'zh-hans': 'Shipping' },

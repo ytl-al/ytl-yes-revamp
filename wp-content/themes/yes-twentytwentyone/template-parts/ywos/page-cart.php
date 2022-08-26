@@ -557,6 +557,17 @@
                                             <p>RM{{ parseFloat(orderSummary.plan.monthlyCommitment).toFixed(2) }}</p>
                                         </div>
                                     </div>
+                                    <div class="mb-3" v-if="orderSummary.plan.supplementaryBundlePlans">
+                                        <h4 style="font-size: 16px; font-weight: 700;">{{ renderText('summarySupplimentaryBundleLines') }}</h4>
+                                        <div class="row mb-0" v-for="(subPlan) in orderSummary.plan.supplementaryBundlePlans">
+                                            <div class="col-6">
+                                                <p class="mb-0 ps-2">{{ subPlan.planName }}</p>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <p class="mb-0">RM{{ parseFloat(subPlan.planPrice).toFixed(2) }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-6">
                                             <p class="bold">{{ renderText('summaryTotalMonthly') }}</p>
@@ -813,6 +824,7 @@
                     summaryTotalDue: { 'en-US': 'Total charges due now', 'ms-MY': 'Jumlah perlu dibayar sekarang', 'zh-hans': 'Total charges due now' }, 
                     summaryNotInvoice: { 'en-US': 'This summary is not an invoice', 'ms-MY': 'Ringkasan ini bukanlah invois', 'zh-hans': 'This summary is not an invoice' }, 
                     summaryMonthlyCharges: { 'en-US': 'Monthly Charges', 'ms-MY': 'Caj Bulanan', 'zh-hans': 'Monthly Charges' }, 
+                    summarySupplimentaryBundleLines: { 'en-US': 'Supplementary Bundled Lines', 'ms-MY': 'Talian Tambahan Bundle', 'zh-hans': 'Supplementary Bundled Lines' }, 
                     summaryTotalMonthly: { 'en-US': 'Total monthly charges', 'ms-MY': 'Jumlah caj bulanan', 'zh-hans': 'Total monthly charges' }, 
                     keepNumberOption: { 'en-US': 'You have the option to <a href="/keep-your-number" target="_blank">Keep Your Number</a> during or after SIM activation.', 'ms-MY': 'Anda mempunyai pilihan untuk <a href="/ms/keep-your-number" target="_blank">Kekalkan Nombor Anda</a> semasa atau selepas pengaktifan SIM.', 'zh-hans': 'You have the option to <a href="/zh-hans/keep-your-number" target="_blank">Keep Your Number</a> during or after SIM activation.' },
                     osTitle: { 'en-US': 'Order summary', 'ms-MY': 'Ringkasan pesanan', 'zh-hans': 'Order summary' },
