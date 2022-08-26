@@ -47,7 +47,7 @@
                             <div class="col-12">
                                 <h3>Plans</h3>
 
-                                <h4 data-name="planName">4G LTE Postpaid</h4>
+                                <h4 data-name="planName">Mobile Postpaid Plan</h4>
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
 
                 <p>• The call rates shown above are not applicable for calls to Premium Numbers, Satellites and special services.</p>
 
-                <p>• For more info, please contact Yes Customer Careline.</p>
+                <p>• For more information, please contact YesCare via email <a href="mailto:yescare@yes.my">yescare@yes.my</a>.</p>
                 <a href="/faq/roaming" class="viewall-btn mt-5">Got questions? Click here for FAQ<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
             </div>
         </div>
@@ -136,21 +136,21 @@
                 <h1>Roaming Tips</h1>
                 <div class="row gx-5 row-roaming-step">
                     <div class="col-12 col-md-6 col-xl-3 text-center">
-                        <img alt="selfcare" class="mb-4" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/yes-selfcare.png">
+                        <img alt="selfcare" class="mb-4" src="/wp-content/uploads/2022/08/yes-selfcare.png">
                         <p>Activate International Roaming service via Selfcare</p>
                     </div>
                     <div class="col-12 col-md-6 col-xl-3 text-center">
-                        <img alt="credit-limit" class="mb-4" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/credit-limit.png">
+                        <img alt="credit-limit" class="mb-4" src="/wp-content/uploads/2022/08/credit-limit.png">
                         <p>Increase your credit limit via Selfcare to avoid any service distruption.</p>
                     </div>
 
                     <div class="col-12 col-md-6 col-xl-3 text-center">
-                        <img alt="deactivate" class="mb-4" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/deactivate.png">
+                        <img alt="deactivate" class="mb-4" src="/wp-content/uploads/2022/08/deactivate.png">
                         <p>Turn off your Data Roaming &amp; Mobile Data in your phone setting if you don't wish to use data service while abroad
                         </p>
                     </div>
                     <div class="col-12 col-md-6 col-xl-3 text-center">
-                        <img alt="bills" class="mb-4" src="https://site.yes.my/wp-content/themes/yes.my/images/yes2018/bills.png">
+                        <img alt="bills" class="mb-4" src="/wp-content/uploads/2022/08/bills.png">
                         <p>Settle all outstanding bills.</p>
                     </div>
                 </div>
@@ -377,46 +377,46 @@
                 <div class="row header">
                     <div class="col-5"></div>
 
-                    <div class="col-6" style="text-align:center">
-                        <p class="sub">Call Rate (RM/Min)</p>
+                    <div class="col-6 text-center">
+                        <p class="sub my-2 my-lg-0">Call Rate (RM/Min)</p>
                     </div>
 
                     <div class="col-5">
                         <h3>Plan</h3>
                     </div>
 
-                    <div class="col-3" style="text-align:center">
+                    <div class="col-3 text-center">
                         <h3>Fixed</h3>
                     </div>
 
-                    <div class="col-3" style="text-align:center">
+                    <div class="col-3 text-center">
                         <h3>Mobile</h3>
                     </div>
                 </div>
                 <div class="row" data-filter="postpaid">
                     <div class="col-5">
-                        <p>4G LTE Postpaid</p>
+                        <p>Mobile Postpaid Plan</p>
                     </div>
 
-                    <div class="col-3" style="text-align:center">
+                    <div class="col-3 text-center">
                         <h4 data-name="iddPostpaidFixed">1.80</h4>
                     </div>
 
-                    <div class="col-3" style="text-align:center">
+                    <div class="col-3 text-center">
                         <h4 data-name="iddPostpaidMobile">1.80</h4>
                     </div>
                 </div>
 
                 <div class="row" data-filter="prepaid">
                     <div class="col-5">
-                        <p>4G LTE Prepaid</p>
+                        <p>Mobile Prepaid Plan </p>
                     </div>
 
-                    <div class="col-3" style="text-align:center">
+                    <div class="col-3 text-center">
                         <h4 data-name="iddPrepaidFixed">1.80</h4>
                     </div>
 
-                    <div class="col-3" style="text-align:center">
+                    <div class="col-3 text-center">
                         <h4 data-name="iddPrepaidMobile">1.80</h4>
                     </div>
                 </div>
@@ -432,26 +432,26 @@
                         <h3>Plan</h3>
                     </div>
 
-                    <div class="col-6 col-lg-12">
+                    <div class="col-6 col-lg-12 text-center">
                         <h3>SMS Rate (RM)</h3>
                     </div>
                 </div>
                 <div class="row" data-filter="postpaid">
                     <div class="col-5 d-lg-none">
-                        <h3>4G LTE Postpaid</h3>
+                        <p>Mobile Postpaid Plan</p>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-6 col-lg-12 text-center">
                         <h4 data-name="iddPostpaidSms">0.28</h4>
                     </div>
                 </div>
 
                 <div class="row" data-filter="prepaid">
                     <div class="col-5 d-lg-none">
-                        <h3>4G LTE Prepaid</h3>
+                        <p>Mobile Prepaid Plan </p>
                     </div>
 
-                    <div class="col-6 col-lg-12">
+                    <div class="col-6 col-lg-12 text-center">
                         <h4 data-name="iddPrepaidSms">0.28</h4>
                     </div>
                 </div>
