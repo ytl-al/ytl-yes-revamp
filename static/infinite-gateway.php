@@ -8,7 +8,7 @@
     #best-solution h1{font-size:30px; color:#000; font-weight:800; text-align:center;}
     #best-solution h2{font-size:25px; color:#000; font-weight:400; text-align:center;}
     #best-solution .layer-solutionBox {text-align:center;}
-    #best-solution .layer-solutionBox img {margin-bottom:20px;}
+    #best-solution .layer-solutionBox img {margin-bottom:20px; width:64px;}
     #best-solution .layer-solutionBox h2 {font-size:26px; color:#000; font-weight:800;}
     #best-solution .layer-solutionBox h3 {font-size:16px; color:#000; font-weight:400;}
 
