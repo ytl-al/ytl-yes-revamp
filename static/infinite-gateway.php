@@ -1,7 +1,7 @@
 <?php include('templates/header.php'); ?>
 
 <style type="text/css">
-    #section-gateway-banner{background-image: url('https://www.yes.my/wp-content/uploads/2022/09/infinite-fibre-banner-bg.jpg'); background-size:cover; background-repeat:no-repeat; background-position:center bottom; padding:250px 0px;}
+    #section-gateway-banner{background-image: url('https://www.yes.my/wp-content/uploads/2022/09/infinite-fibre-banner-bg.jpg'); background-size:cover; background-repeat:no-repeat; background-position:center bottom; padding:200px 0px;}
     #section-gateway-banner h2{font-size:59px; color:#FFF; font-weight:800;}
     #section-gateway-banner h1{font-size:100px; color:#FFF; font-weight:800; line-height:100px;}
     .layer-solutions {}
