@@ -54,6 +54,7 @@
     .layer-planBox hr { background-color: #000; opacity: 1; }
     .layer-planBox ul { margin: 0; padding: 0 0 0 20px; }
     .layer-planBox ul li {}
+    .layer-planBox .span-slash { text-decoration: line-through; }
     .layer-planBox .card-footer { background-color: #F4F4F4; border-radius: 0 0 20px 20px; margin: 0 0 30px; text-align: center; }
     .layer-planBox .card-footer p { font-size: 20px; }
     .layer-planBox .panel-price { font-weight: 800; }
@@ -298,7 +299,7 @@
                                             <ul>
                                                 <li>Unlimited 5G data</li>
                                                 <li>150GB 4G data</li>
-                                                <li>FREE Router (RRP: <span class="span-slash">RM1,199</span></li>
+                                                <li>FREE Router (RRP: <span class="span-slash">RM1,199</span>)</li>
                                                 <li>7 days free trial</li>
                                                 <li>24-month contract</li>
                                             </ul>
@@ -320,7 +321,7 @@
                                             <ul>
                                                 <li>Unlimited 5G data</li>
                                                 <li>150GB 4G data</li>
-                                                <li>FREE Router (RRP: <span class="span-slash">RM1,199</span></li>
+                                                <li>FREE Router (RRP: <span class="span-slash">RM1,199</span>)</li>
                                                 <li>7 days free trial</li>
                                                 <li>2 mobile lines with Infinite full speed data & calls</li>
                                                 <li>24-month contract</li>
