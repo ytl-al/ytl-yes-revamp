@@ -4,7 +4,7 @@
     #section-gateway-banner{background-image: url('https://www.yes.my/wp-content/uploads/2022/09/infinite-fibre-banner-bg.jpg'); background-size:cover; background-repeat:no-repeat; background-position:center bottom; padding:200px 0px;}
     #section-gateway-banner h2{font-size:59px; color:#FFF; font-weight:800;}
     #section-gateway-banner h1{font-size:100px; color:#FFF; font-weight:800; line-height:100px;}
-    #section-gateway-banner .pricing{position:absolute; right:80px; bottom:0;}
+    #section-gateway-banner .pricing{}
     #section-gateway-banner .pricing h4{color:#FFF; font-weight:400; font-size:20px;}
     #section-gateway-banner .pricing h5{color:#FFF; font-weight:800; font-size:48px;}
     #section-gateway-banner .pricing h5 sub{font-size:18px;}
@@ -102,13 +102,15 @@
                                         <h1 class="mb-4 mt-4">Home Fibre is now Wireless.</h1>
                                         <p class="panel-btn"><a href="javascript:void(0)" class="btn link-jumpSection pink-btn mt-3" data-targetsection="infinite-wireless-fibre-plans">Get It Now</a></p>
                                     </div>
+                                    <div class="col-lg-4 d-flex align-items-end justify-content-end">
+                                        <div class="pricing">
+                                            <h4>120Mbps from only</h4>
+                                            <h5>RM119<sub>/mth</sub></h5>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="pricing">
-                        <h4>120Mbps from only</h4>
-                        <h5>RM119<sub>/mth</sub></h5>
                     </div>
                 </div>
             </section>
