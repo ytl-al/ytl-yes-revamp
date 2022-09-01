@@ -4,10 +4,13 @@
     #section-gateway-banner{background-image: url('https://www.yes.my/wp-content/uploads/2022/09/infinite-fibre-banner-bg.jpg'); background-size:cover; background-repeat:no-repeat; background-position:center bottom; padding:200px 0px;}
     #section-gateway-banner h2{font-size:59px; color:#FFF; font-weight:800;}
     #section-gateway-banner h1{font-size:100px; color:#FFF; font-weight:800; line-height:100px;}
-    .layer-solutions {}
-    .layer-solutions .layer-solutionBox {}
-    .layer-solutionBox img {}
-    .layer-solutionBox h2 {}
+    #best-solution{background-color:#E6E6E6; padding-bottom:0px !important; overflow: hidden;}
+    #best-solution h1{font-size:30px; color:#000; font-weight:800; text-align:center;}
+    #best-solution h2{font-size:25px; color:#000; font-weight:400; text-align:center;}
+    #best-solution .layer-solutionBox {text-align:center;}
+    #best-solution .layer-solutionBox img {margin-bottom:20px;}
+    #best-solution .layer-solutionBox h2 {font-size:26px; color:#000; font-weight:800;}
+    #best-solution .layer-solutionBox h3 {font-size:16px; color:#000; font-weight:400;}
 
     .layer-comparison {}
     .layer-comparison h3 {}
@@ -88,7 +91,7 @@
                         <div class="col-12 col-xl-3 col-lg-6 col-md-6">
                             <div class="layer-solutionBox">
                                 <div class="mb-auto">
-                                    <img src="/static/images/infinite-gateway/icon-solution-7-days.png" alt="">
+                                    <img src="https://cdn.yes.my/site/wp-content/uploads/2022/09/free-router-icon.png" alt="">
                                 </div>
                                 <div>
                                     <h2>FREE router with 7 days trial.</h2>
@@ -98,7 +101,7 @@
                         <div class="col-12 col-xl-3 col-lg-6 col-md-6 mt-4 mt-lg-0">
                             <div class="layer-solutionBox">
                                 <div class="mb-auto">
-                                    <img src="/static/images/infinite-gateway/icon-solution-fastest.png" alt="">
+                                    <img src="https://cdn.yes.my/site/wp-content/uploads/2022/09/fastes-broadband-icon.png" alt="">
                                 </div>
                                 <div>
                                     <h2>Fastest broadband in Malaysia.</h2>
@@ -108,24 +111,29 @@
                         <div class="col-12 col-xl-3 col-lg-6 col-md-6 mt-4 mt-lg-0">
                             <div class="layer-solutionBox">
                                 <div class="mb-auto">
-                                    <img src="/static/images/infinite-gateway/icon-solution-plug-play.png" alt="">
+                                    <img src="https://cdn.yes.my/site/wp-content/uploads/2022/09/wireless-portable-icon.png" alt="">
                                 </div>
                                 <div>
                                     <h2>Plug & Use.</h2>
-                                    <p>No installation required</p>
+                                    <h3>No installation required</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-xl-3 col-lg-6 col-md-6 mt-4 mt-lg-0">
                             <div class="layer-solutionBox">
                                 <div class="mb-auto">
-                                    <img src="/static/images/infinite-gateway/icon-solution-wireless.png" alt="">
+                                    <img src="https://cdn.yes.my/site/wp-content/uploads/2022/09/plug-use-icon.png" alt="">
                                 </div>
                                 <div>
                                     <h2>Wireless & Portable.</h2>
-                                    <p>Use it anywhere, anytime</p>
+                                    <h3>Use it anywhere, anytime</h3>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
+                        <div class="col-12 text-center">
+                            <img src="https://cdn.yes.my/site/wp-content/uploads/2022/09/best-solution-bg.jpg" alt="" class="img-fluid">
                         </div>
                     </div>
                 </div>
