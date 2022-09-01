@@ -68,6 +68,10 @@
         .layer-contentBox .panel-lineHeightDouble { line-height: 54px; }
         .span-hideLarge { display: none; }
     }
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+        #section-gateway-banner h2 {font-size: 25px;}
+        #section-gateway-banner h1{font-size: 53px; line-height: 50px;}
+    }
 </style>
 
 <main class="clearfix site-main" id="primary" role="main">
