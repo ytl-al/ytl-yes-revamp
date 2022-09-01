@@ -16,6 +16,10 @@
     #best-solution .layer-solutionBox h2 {font-size:26px; color:#000; font-weight:800;}
     #best-solution .layer-solutionBox h3 {font-size:16px; color:#000; font-weight:400;}
 
+    #section-infinite-gateway-banner{background-image: url('https://www.yes.my/wp-content/uploads/2022/09/first-ever-banner-bg.jpg'); background-size:cover; background-repeat:no-repeat; background-position:center bottom; padding:200px 0px;}
+    #section-infinite-gateway-banner h2{font-size:38px; color:#000; font-weight:800;}
+    #section-infinite-gateway-banner h1{font-size:70px; color:#000; font-weight:800; line-height:65px;}
+
     .layer-comparison { padding: 60px 0; text-align: center; }
     .layer-comparison h3 {}
     .layer-comparison .layer-gradientText p { font-size: 25px; }
@@ -92,8 +96,8 @@
                             <div>
                                 <div class="row">
                                     <div class="col-lg-8">
-                                        <img src="https://cdn.yes.my/site/wp-content/uploads/2022/09/infinite-fibre-banner-yes.png" alt="" class="mb-3 mb-lg-3 d-block">
-                                        <h2 class="d-inline align-middle">Infinite Gateway</h2> <img src="https://cdn.yes.my/site/wp-content/uploads/2022/09/infinite-fibre-banner-5g.png" alt="" class="d-inline align-middle ps-3">
+                                        <img src="https://www.yes.my/wp-content/uploads/2022/09/infinite-fibre-banner-yes.png" alt="" class="mb-3 mb-lg-3 d-block">
+                                        <h2 class="d-inline align-middle">Infinite Gateway</h2> <img src="https://www.yes.my/wp-content/uploads/2022/09/infinite-fibre-banner-5g.png" alt="" class="d-inline align-middle ps-3">
                                         <h1 class="mb-4 mt-4">Home Fibre is now Wireless.</h1>
                                         <p class="panel-btn"><a href="javascript:void(0)" class="btn link-jumpSection pink-btn mt-3" data-targetsection="infinite-wireless-fibre-plans">Get It Now</a></p>
                                     </div>
@@ -118,7 +122,7 @@
                         <div class="col-12 col-xl-3 col-lg-6 col-md-6">
                             <div class="layer-solutionBox">
                                 <div class="mb-auto">
-                                    <img src="https://cdn.yes.my/site/wp-content/uploads/2022/09/free-router-icon.png" alt="">
+                                    <img src="https://www.yes.my/wp-content/uploads/2022/09/free-router-icon.png" alt="">
                                 </div>
                                 <div>
                                     <h2>FREE router with 7 days trial.</h2>
@@ -128,7 +132,7 @@
                         <div class="col-12 col-xl-3 col-lg-6 col-md-6 mt-4 mt-lg-0">
                             <div class="layer-solutionBox">
                                 <div class="mb-auto">
-                                    <img src="https://cdn.yes.my/site/wp-content/uploads/2022/09/fastes-broadband-icon.png" alt="">
+                                    <img src="https://www.yes.my/wp-content/uploads/2022/09/fastes-broadband-icon.png" alt="">
                                 </div>
                                 <div>
                                     <h2>Fastest broadband in Malaysia.</h2>
@@ -138,7 +142,7 @@
                         <div class="col-12 col-xl-3 col-lg-6 col-md-6 mt-4 mt-lg-0">
                             <div class="layer-solutionBox">
                                 <div class="mb-auto">
-                                    <img src="https://cdn.yes.my/site/wp-content/uploads/2022/09/wireless-portable-icon.png" alt="">
+                                    <img src="https://www.yes.my/wp-content/uploads/2022/09/wireless-portable-icon.png" alt="">
                                 </div>
                                 <div>
                                     <h2>Plug & Use.</h2>
@@ -149,7 +153,7 @@
                         <div class="col-12 col-xl-3 col-lg-6 col-md-6 mt-4 mt-lg-0">
                             <div class="layer-solutionBox">
                                 <div class="mb-auto">
-                                    <img src="https://cdn.yes.my/site/wp-content/uploads/2022/09/plug-use-icon.png" alt="">
+                                    <img src="https://www.yes.my/wp-content/uploads/2022/09/plug-use-icon.png" alt="">
                                 </div>
                                 <div>
                                     <h2>Wireless & Portable.</h2>
@@ -160,7 +164,7 @@
                     </div>
                     <div class="row aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
                         <div class="col-12 text-center">
-                            <img src="https://cdn.yes.my/site/wp-content/uploads/2022/09/best-solution-bg.jpg" alt="" class="img-fluid">
+                            <img src="https://www.yes.my/wp-content/uploads/2022/09/best-solution-bg.jpg" alt="" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -223,16 +227,15 @@
             <!-- Layer Comparison ENDS -->
 
             <!-- Layer Infinite Gateway Banner STARTS -->
-            <section id="infinite-banner">
+            <section id="section-infinite-gateway-banner">
                 <div class="container">
                     <div class="row">
-                        <div class="col-12 col-lg-8 d-flex align-items-center aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                        <div class="col-12 d-flex align-items-start align-items-lg-center justify-content-start" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                             <div>
-                                <img src="/static/images/infinite-gateway/bg-infinite-banner.png" class="mb-3" alt="">
                                 <div class="row">
-                                    <div class="col-lg-4">
-                                        <p class="panel-sub">Infinite Gateway <img src="/static/images/infinite-gateway/icon-5g.png" /></p>
-                                        <h2>The first ever wireless 5G home fibre in Malaysia.</h2>
+                                    <div class="col-lg-5">
+                                        <h2 class="d-inline align-middle">Infinite Gateway</h2> <img src="https://www.yes.my/wp-content/uploads/2022/09/infinite-fibre-banner-5g.png" alt="" class="d-inline align-middle ps-3" />
+                                        <h1 class="mb-4 mt-4">The first ever wireless 5G home fibre in Malaysia.</h1>
                                     </div>
                                 </div>
                             </div>
