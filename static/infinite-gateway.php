@@ -123,10 +123,10 @@
             <!-- Solution STARTS -->
             <section id="best-solution" class="layer-solutions py-5">
                 <div class="container">
-                    <h1 class="mb-1 text-center aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">The best solution to all your home fibre issues.</h1>
-                    <p class="mb-5 text-center aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">Not in Fibre coverage? Fibre Port Full? <br />Home Fibre not fast enough? We've got just the wireless solution for you.​</p>
-                    <div class="row aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="col-12 col-xl-3 col-lg-6 col-md-6">
+                    <h1 class="mb-1 text-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">The best solution to all your home fibre issues.</h1>
+                    <p class="mb-5 text-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Not in Fibre coverage? Fibre Port Full? <br />Home Fibre not fast enough? We've got just the wireless solution for you.​</p>
+                    <div class="row">
+                        <div class="col-12 col-xl-3 col-lg-6 col-md-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
                             <div class="layer-solutionBox">
                                 <div class="mb-auto">
                                     <img src="https://www.yes.my/wp-content/uploads/2022/09/free-router-icon.png" alt="">
@@ -136,7 +136,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-xl-3 col-lg-6 col-md-6 mt-4 mt-lg-0">
+                        <div class="col-12 col-xl-3 col-lg-6 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                             <div class="layer-solutionBox">
                                 <div class="mb-auto">
                                     <img src="https://www.yes.my/wp-content/uploads/2022/09/fastes-broadband-icon.png" alt="">
@@ -146,7 +146,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-xl-3 col-lg-6 col-md-6 mt-4 mt-lg-0">
+                        <div class="col-12 col-xl-3 col-lg-6 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
                             <div class="layer-solutionBox">
                                 <div class="mb-auto">
                                     <img src="https://www.yes.my/wp-content/uploads/2022/09/wireless-portable-icon.png" alt="">
@@ -157,7 +157,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-xl-3 col-lg-6 col-md-6 mt-4 mt-lg-0">
+                        <div class="col-12 col-xl-3 col-lg-6 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                             <div class="layer-solutionBox">
                                 <div class="mb-auto">
                                     <img src="https://www.yes.my/wp-content/uploads/2022/09/plug-use-icon.png" alt="">
@@ -169,7 +169,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="row" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                         <div class="col-12 text-center">
                             <img src="https://www.yes.my/wp-content/uploads/2022/09/best-solution-bg.jpg" alt="" class="img-fluid">
                         </div>
@@ -179,7 +179,7 @@
             <!-- Solution ENDS -->
 
             <!-- Layer Comparison STARTS -->
-            <section id="section-comparison" data-aos="fade-up" data-aos-duration="1000" class="layer-comparison aos-init aos-animate">
+            <section id="section-comparison" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200" class="layer-comparison">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-10 offset-lg-1">
@@ -263,19 +263,19 @@
                 </div>
                 <div class="container">
                     <div class="row gx-5 text-md-start text-center">
-                        <div class="col-12 col-md-3 mb-4 mb-md-0 layer-step flex-column aos-init aos-animate" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
+                        <div class="col-12 col-md-3 mb-4 mb-md-0 layer-step flex-column" data-aos="fade-up" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
                             <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"></span> Step 1</p>
                             <p>Choose Infinite Gateway Plan.</p>
                         </div>
-                        <div class="col-12 col-md-3 mb-4 mb-md-0 layer-step flex-column aos-init aos-animate" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
+                        <div class="col-12 col-md-3 mb-4 mb-md-0 layer-step flex-column" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                             <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"></span> Step 2</p>
                             <p>Check 5G+4G LTE & broadband coverage.</p>
                         </div>
-                        <div class="col-12 col-md-3 mb-4 mb-md-0 layer-step flex-column aos-init aos-animate" data-aos="fade-up" data-aos-duration="500" data-aos-delay="500">
+                        <div class="col-12 col-md-3 mb-4 mb-md-0 layer-step flex-column" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
                             <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"></span> Step 3</p>
                             <p>Fill up delivery form and check out.</p>
                         </div>
-                        <div class="col-12 col-md-3 mb-4 mb-md-0 layer-step flex-column aos-init aos-animate" data-aos="fade-up" data-aos-duration="500" data-aos-delay="700">
+                        <div class="col-12 col-md-3 mb-4 mb-md-0 layer-step flex-column" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
                             <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"></span> Step 4</p>
                             <p>FREE router & SIM to be delivered to your address.</p>
                         </div>
@@ -285,7 +285,7 @@
             <!-- Layer Steps ENDS -->
 
             <!-- Layer Plans STARTS -->
-            <div class="layer-sectionGradient layer-plans aos-init aos-animate" id="infinite-wireless-fibre-plans" data-aos="fade-up" data-aos-duration="1000">
+            <div class="layer-sectionGradient layer-plans" id="infinite-wireless-fibre-plans" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                 <div class="container">
                     <div class="row mb-5 row-sectionHeader">
                         <div class="col-lg-12 text-center">
