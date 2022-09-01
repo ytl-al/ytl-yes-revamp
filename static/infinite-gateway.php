@@ -18,10 +18,10 @@
     .layer-gradientText {}
     .layer-gradientText h3, .layer-gradientText p { background: linear-gradient(80.9deg, #FF0084 16.48%, #6F29D2 85.6%, #2F3BF5 96.9%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; }
     .layer-comparison p {}
-    .layer-comparison .layer-contentBox { background-color: #F2F2F2; border-radius: 5px; padding: 25px; }
+    .layer-comparison .layer-contentBox { background-color: #F2F2F2; border-radius: 5px; padding: 25px; text-align: left; }
     .layer-contentBox.box-gradient { background: linear-gradient(45.9deg, #FF0084 16.48%, #6F29D2 55.6%, #2F3BF5 96.9%); }
     .layer-contentBox p { font-size: 18px; margin: 8px 0; }
-    .layer-contentBox .span-hideLarge { margin: 0 12px 0 0; }
+    .layer-contentBox .span-hideLarge { font-weight: 700; margin: 0 12px 0 0; }
     .layer-contentBox .panel-lineHeightDouble { line-height: normal; }
     .layer-contentBox.box-gradient p { color: #FFF; }
 
@@ -55,6 +55,7 @@
     .layer-plans p.panel-btnBuy a {}
 
     @media (min-width: 992px) {
+        .layer-comparison .layer-contentBox { text-align: center; }
         .layer-contentBox .panel-lineHeightDouble { line-height: 54px; }
         .span-hideLarge { display: none; }
     }
@@ -175,7 +176,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-4 text-center d-none d-lg-block">
+                                <div class="col-lg-4 d-none d-lg-block">
                                     <div class="layer-contentBox bg-white">
                                         <p>Speed</p>
                                         <p>Bands</p>
@@ -236,27 +237,27 @@
             <!-- Layer Steps STARTS -->
             <section class="layer-steps" id="section-steps">
                 <div class="container">
-                    <div class="row">
+                    <div class="row mb-5">
                         <div class="col-lg-12">
                             <h2 class="text-center">Here's how to get it.</h2>
                         </div>
                     </div>
                 </div>
-                <div class="container my-5">
+                <div class="container">
                     <div class="row gx-5 text-md-start text-center">
-                        <div class="col-12 col-md-3 layer-step flex-column aos-init aos-animate" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
+                        <div class="col-12 col-md-3 mb-4 mb-md-0 layer-step flex-column aos-init aos-animate" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
                             <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"></span> Step 1</p>
                             <p>Choose Infinite Gateway Plan.</p>
                         </div>
-                        <div class="col-12 col-md-3 layer-step flex-column aos-init aos-animate" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
+                        <div class="col-12 col-md-3 mb-4 mb-md-0 layer-step flex-column aos-init aos-animate" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
                             <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"></span> Step 2</p>
                             <p>Check 5G+4G LTE & broadband coverage.</p>
                         </div>
-                        <div class="col-12 col-md-3 layer-step flex-column aos-init aos-animate" data-aos="fade-up" data-aos-duration="500" data-aos-delay="500">
+                        <div class="col-12 col-md-3 mb-4 mb-md-0 layer-step flex-column aos-init aos-animate" data-aos="fade-up" data-aos-duration="500" data-aos-delay="500">
                             <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"></span> Step 3</p>
                             <p>Fill up delivery form and check out.</p>
                         </div>
-                        <div class="col-12 col-md-3 layer-step flex-column aos-init aos-animate" data-aos="fade-up" data-aos-duration="500" data-aos-delay="700">
+                        <div class="col-12 col-md-3 mb-4 mb-md-0 layer-step flex-column aos-init aos-animate" data-aos="fade-up" data-aos-duration="500" data-aos-delay="700">
                             <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"></span> Step 4</p>
                             <p>FREE router & SIM to be delivered to your address.</p>
                         </div>
