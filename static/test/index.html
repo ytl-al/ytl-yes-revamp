@@ -1,0 +1,19 @@
+asdfkasdf
+<iframe src="/static/test/iframe.html"></iframe>
+<div id="">
+    asdfasdf
+</div>
+
+<script type="text/javascript">
+    window.addEventListener('message', function(event) {
+        console.log(event.data)
+        if (event.data === 'subscribe') {
+            console.log('Set subscribe event');
+            triggerListen();
+        }
+    }, false);
+
+    function triggerListen() {
+        alert('asd');
+    }
+</script>
