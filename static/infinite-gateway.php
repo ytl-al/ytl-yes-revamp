@@ -26,7 +26,7 @@
     .layer-gradientText {}
     .layer-gradientText h3, .layer-gradientText p { background: linear-gradient(80.9deg, #FF0084 16.48%, #6F29D2 85.6%, #2F3BF5 96.9%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; }
     .layer-comparison p {}
-    .layer-comparison .layer-contentBox { background-color: #F2F2F2; border-radius: 5px; padding: 25px; text-align: left; }
+    .layer-comparison .layer-contentBox { background-color: #F2F2F2; border-radius: 10px; padding: 25px; text-align: left; }
     .layer-contentBox.box-gradient { background: linear-gradient(45.9deg, #FF0084 16.48%, #6F29D2 55.6%, #2F3BF5 96.9%); }
     .layer-contentBox p { font-size: 18px; margin: 8px 0; }
     .layer-contentBox .span-hideLarge { font-weight: 700; margin: 0 12px 0 0; }
