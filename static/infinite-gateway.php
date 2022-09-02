@@ -179,11 +179,11 @@
             <!-- Solution ENDS -->
 
             <!-- Layer Comparison STARTS -->
-            <section id="section-comparison" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200" class="layer-comparison">
+            <section id="section-comparison" data-aos="fade-up" class="layer-comparison">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-10 offset-lg-1">
-                            <div class="row align-items-center mb-3">
+                            <div class="row align-items-center mb-3" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
                                 <div class="col-lg-4 offset-lg-4 py-2">
                                     <div class="layer-gradientText">
                                         <h3>Infinite Gateway</h3>
@@ -195,7 +195,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-4 d-none d-lg-block">
+                                <div class="col-lg-4 d-none d-lg-block" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                                     <div class="layer-contentBox bg-white">
                                         <p>Speed</p>
                                         <p>Bands</p>
@@ -205,7 +205,7 @@
                                         <p>Moveable from <br />room-to-room</p>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 mb-4 mb-lg-0">
+                                <div class="col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
                                     <div class="layer-contentBox box-gradient">
                                         <p><span class="span-hideLarge">Speed:</span>5G (Up to xxMbpx)</p>
                                         <p><span class="span-hideLarge">Bands:</span>2.5GHz or 5GHz</p>
@@ -215,7 +215,7 @@
                                         <p class="panel-lineHeightDouble mb-0"><span class="span-hideLarge">Moveable from room-to-room:</span>Yes</p>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                                     <h3 class="mb-3 d-lg-none">Wired Fibre</h3>
                                     <div class="layer-contentBox">
                                         <p><span class="span-hideLarge">Speed:</span>4G (Up to xxMbpx)</p>
