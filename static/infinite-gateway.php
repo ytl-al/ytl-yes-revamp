@@ -71,6 +71,16 @@
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
         #section-gateway-banner h2 {font-size: 25px;}
         #section-gateway-banner h1{font-size: 53px; line-height: 50px;}
+        #section-gateway-banner {padding: 13px 0px;}
+        #section-gateway-banner .banner-5g {width:57px;}
+        #section-gateway-banner .yes-logo-banner{width:54px;}
+        #section-infinite-gateway-banner {background-position: left bottom; padding: 33px 0px;}
+        #section-infinite-gateway-banner h2{font-size: 25px;}
+        #section-infinite-gateway-banner .banner-5g{width:50px;}
+        #section-infinite-gateway-banner h1{font-size: 32px; line-height: 33px;}
+        .layer-steps h2{font-size: 34px;}
+        .layer-sectionGradient{margin-bottom:30px;}
+        
     }
 </style>
 
@@ -100,9 +110,9 @@
                         <div class="col-12 d-flex align-items-start align-items-lg-center justify-content-start" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                             <div>
                                 <div class="row">
-                                    <div class="col-12 col-lg-8">
-                                        <img src="https://www.yes.my/wp-content/uploads/2022/09/infinite-fibre-banner-yes.png" alt="" class="mb-3 mb-lg-3 d-block">
-                                        <h2 class="d-inline align-middle">Infinite Gateway</h2> <img src="https://www.yes.my/wp-content/uploads/2022/09/infinite-fibre-banner-5g.png" alt="" class="d-inline align-middle ps-3">
+                                    <div class="col-10 col-lg-8">
+                                        <img src="https://www.yes.my/wp-content/uploads/2022/09/infinite-fibre-banner-yes.png" alt="" class="yes-logo-banner mb-3 mb-lg-3 d-block">
+                                        <h2 class="d-inline align-middle">Infinite Gateway</h2> <img src="https://www.yes.my/wp-content/uploads/2022/09/infinite-fibre-banner-5g.png" alt="" class="banner-5g d-inline align-middle ps-1 ps-lg-3">
                                         <h1 class="mb-4 mt-4">Home Fibre is now Wireless.</h1>
                                         <p class="panel-btn"><a href="javascript:void(0)" class="btn link-jumpSection pink-btn mt-3" data-targetsection="infinite-wireless-fibre-plans">Get It Now</a></p>
                                     </div>
@@ -240,8 +250,8 @@
                         <div class="col-12 d-flex align-items-start align-items-lg-center justify-content-start" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                             <div>
                                 <div class="row">
-                                    <div class="col-lg-5">
-                                        <h2 class="d-inline align-middle">Infinite Gateway</h2> <img src="https://www.yes.my/wp-content/uploads/2022/09/infinite-fibre-banner-5g.png" alt="" class="d-inline align-middle ps-3" />
+                                    <div class="col-8 col-lg-5">
+                                        <h2 class="d-inline align-middle">Infinite Gateway</h2> <img src="https://www.yes.my/wp-content/uploads/2022/09/infinite-fibre-banner-5g.png" alt="" class="banner-5g d-inline align-middle ps-0 ps-lg-3" />
                                         <h1 class="mb-4 mt-4">The first ever wireless 5G home fibre in Malaysia.</h1>
                                     </div>
                                 </div>
