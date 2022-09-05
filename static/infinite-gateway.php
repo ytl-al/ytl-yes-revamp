@@ -32,6 +32,7 @@
     .layer-contentBox .span-hideLarge { font-weight: 700; margin: 0 12px 0 0; }
     .layer-contentBox .panel-lineHeightDouble { line-height: normal; }
     .layer-contentBox.box-gradient p { color: #FFF; }
+    .layer-comparison .layer-smallgrey{font-size:12px; color:#525252;}
 
     .layer-steps { padding: 60px 0; }
     .layer-steps h2 { color: #000; font-size: 39px; font-weight: 800; line-height: 47px; }
@@ -45,6 +46,7 @@
     .layer-plans p {}
     .layer-plans .row-sectionHeader h2, .layer-plans .row-sectionHeader p { color: #FFF; }
     .layer-plans .row-sectionHeader p { color: #FFF; font-size: 20px; }
+    .layer-plans .blue-arrow-link{color:#FFF !important;}
 
     .layer-planBox { background-color: transparent; border: 0; }
     .layer-planBox .card-body { background-color: #FFF; border-radius: 20px 20px 0 0; padding: 20px 30px; }
@@ -112,14 +114,15 @@
                                 <div class="row">
                                     <div class="col-10 col-lg-8">
                                         <img src="https://www.yes.my/wp-content/uploads/2022/09/infinite-fibre-banner-yes.png" alt="" class="yes-logo-banner mb-3 mb-lg-3 d-block">
-                                        <h2 class="d-inline align-middle">Infinite Gateway</h2> <img src="https://www.yes.my/wp-content/uploads/2022/09/infinite-fibre-banner-5g.png" alt="" class="banner-5g d-inline align-middle ps-1 ps-lg-3">
-                                        <h1 class="mb-4 mt-4">Home Fibre is now Wireless.</h1>
+                                        <h2 class="d-inline align-middle">Wireless Fibre</h2> <img src="https://www.yes.my/wp-content/uploads/2022/09/infinite-fibre-banner-5g.png" alt="" class="banner-5g d-inline align-middle ps-1 ps-lg-3">
+                                        <h1 class="mb-4 mt-4">Home fibre is now wireless.</h1>
                                         <p class="panel-btn"><a href="javascript:void(0)" class="btn link-jumpSection pink-btn mt-3" data-targetsection="infinite-wireless-fibre-plans">Get It Now</a></p>
                                     </div>
                                     <div class="col-12 col-lg-4 d-flex align-items-end justify-content-start justify-content-lg-end">
                                         <div class="pricing mt-4 mt-lg-0">
-                                            <h4>120Mbps from only</h4>
+                                            <h4>Launch offer</h4>
                                             <h5>RM119<sub>/mth</sub></h5>
+                                            <h4 class="text-decoration-line-through">RM148</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -134,7 +137,7 @@
             <section id="best-solution" class="layer-solutions py-5">
                 <div class="container">
                     <h1 class="mb-1 text-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">The best solution to all your home fibre issues.</h1>
-                    <p class="mb-5 text-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Not in Fibre coverage? Fibre Port Full? <br />Home Fibre not fast enough? We've got just the wireless solution for you.​</p>
+                    <p class="mb-5 text-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">Tired of always buffering? Can't get whole home coverage? Hate messy and dusty cables?<br>Too busy to schedule a date for installation? This is the Wi-Fi your home needs.</p>
                     <div class="row">
                         <div class="col-12 col-xl-3 col-lg-6 col-md-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
                             <div class="layer-solutionBox">
@@ -163,7 +166,7 @@
                                 </div>
                                 <div>
                                     <h2>Plug & Use.</h2>
-                                    <h3>No installation required</h3>
+                                    <h3>No installation required.</h3>
                                 </div>
                             </div>
                         </div>
@@ -174,7 +177,7 @@
                                 </div>
                                 <div>
                                     <h2>Wireless & Portable.</h2>
-                                    <h3>Use it anywhere, anytime</h3>
+                                    <h3>Use it anywhere, anytime.</h3>
                                 </div>
                             </div>
                         </div>
@@ -196,48 +199,48 @@
                             <div class="row align-items-center mb-3" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
                                 <div class="col-lg-4 offset-lg-4 py-2">
                                     <div class="layer-gradientText">
-                                        <h3>Infinite Gateway</h3>
-                                        <p>(Wireless Fibre)</p>
+                                        <h3>Wireless Fibre 5G</h3>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 py-2 d-none d-lg-block">
-                                    <h3>Wired Fibre</h3>
+                                    <h3>Other wired fibre plans</h3>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-4 d-none d-lg-block" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                                     <div class="layer-contentBox bg-white">
-                                        <p>Speed</p>
-                                        <p>Bands</p>
-                                        <p>Max number of <br />devices connectable</p>
-                                        <p>Coverage range</p>
-                                        <p>Installation</p>
-                                        <p>Moveable from <br />room-to-room</p>
+                                        <p class="mb-3">Unlimited 5G</p>
+                                        <p class="mb-3">Bands</p>
+                                        <p class="mb-3">Coverage range<br><br></p>
+                                        <p class="mb-3">Installation required</p>
+                                        <p>Portable</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 mb-4 mb-lg-0" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
                                     <div class="layer-contentBox box-gradient">
-                                        <p><span class="span-hideLarge">Speed:</span>5G (Up to xxMbpx)</p>
-                                        <p><span class="span-hideLarge">Bands:</span>2.5GHz or 5GHz</p>
-                                        <p class="panel-lineHeightDouble"><span class="span-hideLarge">Max number of devices connectable:</span>32</p>
-                                        <p><span class="span-hideLarge">Coverage range:</span>Up to XXXX sq. ft.</p>
-                                        <p><span class="span-hideLarge">Installation:</span>No</p>
-                                        <p class="panel-lineHeightDouble mb-0"><span class="span-hideLarge">Moveable from room-to-room:</span>Yes</p>
+                                        <p class="mb-3"><span class="span-hideLarge">Unlimited 5G:</span>Yes</p>
+                                        <p class="mb-3"><span class="span-hideLarge">Bands:</span>2.4GHz or 5GHz</p>
+                                        <p class="panel-lineHeightDouble mb-3"><span class="span-hideLarge">Coverage range:</span>2.4GHz - up to 100m<br>5GHz - up to 50m</p>
+                                        <p class="mb-3"><span class="span-hideLarge">Installation required:</span>No</p>
+                                        <p class="panel-lineHeightDouble mb-0"><span class="span-hideLarge">Portable:</span>Yes</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
-                                    <h3 class="mb-3 d-lg-none">Wired Fibre</h3>
+                                    <h3 class="mb-3 d-lg-none">Other wired fibre plans</h3>
                                     <div class="layer-contentBox">
-                                        <p><span class="span-hideLarge">Speed:</span>4G (Up to xxMbpx)</p>
-                                        <p><span class="span-hideLarge">Bands:</span>2.5GHz or 5GHz</p>
-                                        <p class="panel-lineHeightDouble"><span class="span-hideLarge">Max number of devices connectable:</span>xx</p>
-                                        <p><span class="span-hideLarge">Coverage range:</span>Up to XXXX sq. ft.</p>
-                                        <p><span class="span-hideLarge">Installation:</span>Yes</p>
-                                        <p class="panel-lineHeightDouble mb-0"><span class="span-hideLarge">Moveable from room-to-room:</span>No</p>
+                                        <p class="mb-3"><span class="span-hideLarge">Unlimited 5G:</span>No</p>
+                                        <p class="mb-3"><span class="span-hideLarge">Bands:</span>2.4GHz or 5GHz</p>
+                                        <p class="panel-lineHeightDouble mb-3"><span class="span-hideLarge">Coverage range:</span>2.4GHz - up to 30m<br>5GHz - up to 25m</p>
+                                        <p class="mb-3"><span class="span-hideLarge">Installation required:</span>Yes</p>
+                                        <p class="panel-lineHeightDouble mb-0"><span class="span-hideLarge">Portable:</span>No</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <p class="layer-smallgrey mt-3">*Yes Unlimited 5G is only available within selected coverage areas. Outside of the coverage area,<br>you will be running on your 4G data. Terms and conditions apply. For the latest updates on Yes 5G coverage map, visit yes.my/coverage.</p>
+                        <a href="/coverage/" class="blue-arrow-link mt-3">Check broadband coverage in your area<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
                     </div>
                 </div>
             </section>
@@ -251,8 +254,8 @@
                             <div>
                                 <div class="row">
                                     <div class="col-8 col-lg-5">
-                                        <h2 class="d-inline align-middle">Infinite Gateway</h2> <img src="https://www.yes.my/wp-content/uploads/2022/09/infinite-fibre-banner-5g.png" alt="" class="banner-5g d-inline align-middle ps-0 ps-lg-3" />
-                                        <h1 class="mb-4 mt-4">The first ever wireless 5G home fibre in Malaysia.</h1>
+                                        <h2 class="d-inline align-middle">Yes Wireless Fibre</h2> <img src="https://www.yes.my/wp-content/uploads/2022/09/infinite-fibre-banner-5g.png" alt="" class="banner-5g d-inline align-middle ps-0 ps-lg-3" />
+                                        <h1 class="mb-4 mt-4">The first-ever wireless 5G home fibre in Malaysia.</h1>
                                     </div>
                                 </div>
                             </div>
@@ -273,21 +276,17 @@
                 </div>
                 <div class="container">
                     <div class="row gx-5 text-md-start text-center">
-                        <div class="col-12 col-md-3 mb-4 mb-md-0 layer-step flex-column" data-aos="fade-up" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                        <div class="col-12 col-md-4 mb-4 mb-md-0 layer-step flex-column" data-aos="fade-up" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
                             <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"></span> Step 1</p>
-                            <p>Choose Infinite Gateway Plan.</p>
+                            <p>Choose Infinite Gateway Plan</p>
                         </div>
-                        <div class="col-12 col-md-3 mb-4 mb-md-0 layer-step flex-column" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                        <div class="col-12 col-md-4 mb-4 mb-md-0 layer-step flex-column" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                             <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"></span> Step 2</p>
-                            <p>Check 5G+4G LTE & broadband coverage.</p>
+                            <p>Fill up delivery form and check out</p>
                         </div>
-                        <div class="col-12 col-md-3 mb-4 mb-md-0 layer-step flex-column" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                        <div class="col-12 col-md-4 mb-4 mb-md-0 layer-step flex-column" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
                             <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"></span> Step 3</p>
-                            <p>Fill up delivery form and check out.</p>
-                        </div>
-                        <div class="col-12 col-md-3 mb-4 mb-md-0 layer-step flex-column" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
-                            <p class="panel-stepHeading justify-content-md-start justify-content-center"><span class="icon-stepHeading"></span> Step 4</p>
-                            <p>FREE router & SIM to be delivered to your address.</p>
+                            <p>FREE router & SIM to be delivered to your address</p>
                         </div>
                     </div>
                 </div>
@@ -299,8 +298,8 @@
                 <div class="container">
                     <div class="row mb-5 row-sectionHeader">
                         <div class="col-lg-12 text-center">
-                            <h2>Wireless Fibre Plans</h2>
-                            <p>Unlock infinite possibilities in the comfort of your home.</p>
+                            <h2>Wireless Fibre Plans​</h2>
+                            <p>Unlock the power of wireless fibre at home with ease.​</p>
                         </div>
                     </div>
                     <div class="row">
@@ -310,11 +309,11 @@
                                     <div class="layer-planBox card h-100">
                                         <div class="card-body">
                                             <h3>Wireless 5G+4G <br />Home Fibre</h3>
-                                            <p>Standalone plan</p>
+                                            <p>Device only plan</p>
                                             <hr />
                                             <ul>
                                                 <li>Unlimited 5G data</li>
-                                                <li>150GB 4G data</li>
+                                                <li>Uncapped 4G LTE data (150GB)​</li>
                                                 <li>FREE Router (RRP: <span class="span-slash">RM1,199</span>)</li>
                                                 <li>7 days free trial</li>
                                                 <li>24-month contract</li>
@@ -325,18 +324,18 @@
                                             <p class="panel-price"><span class="span-large">RM119</span> /mth</p>
                                             <p class="panel-tnc">*Terms and conditions apply</p>
                                         </div>
-                                    <p class="panel-btnBuy"><a href="javascript:void(0)" class="btn pink-btn btn-buyplan">Buy Now</a></p>
+                                    <p class="panel-btnBuy"><a href="javascript:void(0)" class="btn pink-btn btn-buyplan">Try it for Free</a></p>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="layer-planBox card h-100">
                                         <div class="card-body">
-                                            <h3>Wireless 5G <br />Home Fibre</h3>
+                                            <h3>Wireless 5G+4G <br />Home Fibre</h3>
                                             <p>Bundle plan</p>
                                             <hr />
                                             <ul>
                                                 <li>Unlimited 5G data</li>
-                                                <li>150GB 4G data</li>
+                                                <li>Uncapped 4G LTE data (150GB)</li>
                                                 <li>FREE Router (RRP: <span class="span-slash">RM1,199</span>)</li>
                                                 <li>7 days free trial</li>
                                                 <li>2 mobile lines with Infinite full speed data & calls</li>
@@ -348,15 +347,64 @@
                                             <p class="panel-price"><span class="span-large">RM148</span> /mth</p>
                                             <p class="panel-tnc">*Terms and conditions apply</p>
                                         </div>
-                                    <p class="panel-btnBuy"><a href="javascript:void(0)" class="btn pink-btn btn-buyplan">Buy Now</a></p>
+                                    <p class="panel-btnBuy"><a href="javascript:void(0)" class="btn pink-btn btn-buyplan">Try it for Free</a></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="row text-center">
+                    <a href="/coverage/" class="blue-arrow-link mt-5">Check broadband coverage in your area<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                    </div>
                 </div>
             </div>
             <!-- Layer Plans ENDS -->
+
+            <!-- Footer FAQs STARTS -->
+            <section class="layer-footerFAQ mt-4 mt-lg-0" id="faq-section" data-aos="fade-up">
+                <div class="container">
+                    <div class="row">
+                        <h1 class="mb-5">Frequently Asked Questions</h1>
+                    </div>
+                    <div class="row justify-content-lg-center">
+                        <div class="col-12 col-lg-9">
+                            <div class="accordion accordion-flush mb-3" id="accordionFlushExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="flush-headingOne"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">Where are the Yes 5G coverage areas in Malaysia?</button></h2>
+                                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <p>In terms of 5G coverage areas, you can already enjoy Yes 5G connectivity in selected areas of Selangor, KL, Cyberjaya, Putrajaya, Johor, Perak and Penang. Based on Digital Nasional Berhad's (DNB) plans, the 5G network is expanding fast and it is expected to reach 80% of Malaysia's population by 2024. To keep up with our Yes 5G coverage area updates, head over to yes.my/coverage.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="flush-headingTwo"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">I am an existing Yes customer. Can I keep my existing number and subscribed to Yes Wireless Fibre Service Plan?</button></h2>
+                                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <p>No, Yes Wireless Fibre Service Plan only applicable for new customer and customers who port in (MNP).</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="flush-headingThree"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">What happens if I terminate my 24-month contract?</button></h2>
+                                    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <p>If you terminates the Yes Wireless Fibre Service Plans during the contract period, you will be subject to Early Termination Charges (“ETC”).</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-center mb-0"><a href="/faq" class="viewall-btn">View All FAQs <span class="iconify" data-icon="akar-icons:arrow-right"></span></a></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Footer FAQs ENDS -->
+<style>
+    #easy-steps .content {
+        padding: 0px 60px;
+    }
+</style>
 
             <?php include('templates/footer-faq.php'); ?>
         </div>
