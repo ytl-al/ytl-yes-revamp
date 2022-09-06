@@ -202,7 +202,7 @@
                     strIDTypeSelect: { 'en-US': 'Select ID Type', 'ms-MY': 'Pilih jenis ID', 'zh-hans': 'Select ID Type' },
                     strIDNRIC: { 'en-US': 'NRIC', 'ms-MY': 'Kad Pengenalan', 'zh-hans': 'NRIC' },
                     strIDPassport: { 'en-US': 'Passport', 'ms-MY': 'Pasport', 'zh-hans': 'Passport' },
-                    strIDNumber: { 'en-US': 'IC/Passport Number', 'ms-MY': 'Nombor KP/Pasport', 'zh-hans': 'IC/Passport Number' },
+                    strIDNumber: { 'en-US': 'ID/Passport Number', 'ms-MY': 'Nombor KP/Pasport', 'zh-hans': 'ID/Passport Number' },
                     
                     strMobileVerification: { 'en-US': 'Mobile Verification', 'ms-MY': 'Pengesahan Nombor Mudah Alih', 'zh-hans': 'Mobile Verification' },
                     strMobileStep1: { 'en-US': '<strong>Step 1:</strong>: Key in your mobile number', 'ms-MY': '<strong>Langkah 1: Masukkan nombor telefon mudah alih anda', 'zh-hans': '<strong>Step 1:</strong>: Key in your mobile number' },

@@ -140,7 +140,7 @@
                                 <div class="row mb-3">
                                     <div class="col-6">
                                         <p class="fw-bold">{{ renderText('summaryTotalDue') }}</p>
-                                        <p class="small">{{ renderText('summaryNotInvoice') }}</p>
+                                        <p class="small d-none">{{ renderText('summaryNotInvoice') }}</p>
                                     </div>
                                     <div class="col-6 text-end">
                                         <p class="large">RM{{ formatPrice(parseFloat(orderSummary.due.total).toFixed(2)) }}</p>
@@ -157,7 +157,7 @@
                                             <p>RM{{ parseFloat(orderSummary.plan.monthlyCommitment).toFixed(2) }}</p>
                                         </div>
                                     </div>
-                                    <div class="mb-3" v-if="orderSummary.plan.supplementaryBundlePlans">
+                                    <div class="mb-3" v-if="orderSummary.plan.supplementaryBundlePlans && orderSummary.plan.supplementaryBundlePlans.length">
                                         <h4 style="font-size: 16px; font-weight: 700;">{{ renderText('summarySupplimentaryBundleLines') }}</h4>
                                         <div class="row mb-0" v-for="(subPlan) in orderSummary.plan.supplementaryBundlePlans">
                                             <div class="col-6">
@@ -290,12 +290,12 @@
                     strReviewPay: { 'en-US': 'Review & Pay', 'ms-MY': 'Semak & Bayar', 'zh-hans': 'Review & Pay' },
 
                     summaryMoreBenefits: { 'en-US': 'More Benefits', 'ms-MY': 'Lebih Manfaat', 'zh-hans': 'More Benefits' },
-                    summaryOneTimeCharges: { 'en-US': 'One-time Charges (due now)', 'ms-MY': 'Caj Sekali (perlu dibayar sekarang)', 'zh-hans': 'One-time Charges (due now)' },
+                    summaryOneTimeCharges: { 'en-US': 'Total Payable Now', 'ms-MY': 'Jumlah Perlu Dibayar Sekarang', 'zh-hans': 'Total Payable Now' },
                     summaryRatePlan: { 'en-US': 'Rate plan', 'ms-MY': 'Kadar pelan', 'zh-hans': 'Rate plan' },
                     summaryAddOns: { 'en-US': 'Add-Ons', 'ms-MY': 'Tambahan', 'zh-hans': 'Add-Ons' }, 
-                    summaryTaxes: { 'en-US': 'Taxes', 'ms-MY': 'Cukai', 'zh-hans': 'Taxes' }, 
+                    summaryTaxes: { 'en-US': 'SST @6%', 'ms-MY': 'SST @6%', 'zh-hans': 'SST @6%' }, 
                     summaryForeignerDeposit: { 'en-US': 'Deposit for Foreigner', 'ms-MY': 'Deposit Warga Asing', 'zh-hans': 'Deposit for Foreigner' }, 
-                    summaryShipping: { 'en-US': 'Shipping Fee', 'ms-MY': 'Caj Penghantaran', 'zh-hans': 'Shipping Fee' }, 
+                    summaryShipping: { 'en-US': 'Delivery Fee', 'ms-MY': 'Caj Penghantaran', 'zh-hans': 'Delivery Fee' }, 
                     summaryRounding: { 'en-US': 'Rounding Adjustment', 'ms-MY': 'Penyelarasan Pembundaran', 'zh-hans': 'Rounding Adjustment' }, 
                     summaryTotalDue: { 'en-US': 'Total charges due now', 'ms-MY': 'Jumlah perlu dibayar sekarang', 'zh-hans': 'Total charges due now' }, 
                     summaryNotInvoice: { 'en-US': 'This summary is not an invoice', 'ms-MY': 'Ringkasan ini bukanlah invois', 'zh-hans': 'This summary is not an invoice' }, 

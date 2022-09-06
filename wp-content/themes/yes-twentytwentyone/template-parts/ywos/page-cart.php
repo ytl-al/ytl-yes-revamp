@@ -35,7 +35,7 @@
         padding: 15px 12px;
     }
     
-    #cart-body .packagebox .visualbg .img-fluid { padding-left: 12px; }
+    #cart-body .packagebox .visualbg .img-fluid { max-width: 50%; padding-left: 12px; }
 
     #cart-body .packagebox h3 {
         font-weight: 800;
@@ -398,6 +398,10 @@
         }
     }
 
+    @media (min-width: 922px) {
+        #cart-body .packagebox .visualbg .img-fluid { max-width: 100%; }
+    }
+
     .nav-container { background-color: #1A1E47; }
     .nav-container .navbar { padding-top: 8px; padding-bottom: 8px; }
     .nav-container .navbar-brand { padding-top: 0; padding-bottom: 0; }
@@ -445,7 +449,7 @@
                     <div class="accordion" id="cart-accordion">
                         <div class="packagebox mb-3">
                             <div class="row">
-                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="orderSummary.plan.planType == 'postpaid'">
+                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center justify-content-center" v-if="orderSummary.plan.planType == 'postpaid'">
                                     <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid" alt="" />
                                 </div>
                                 <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center" v-if="orderSummary.plan.planType == 'prepaid'">
@@ -540,7 +544,7 @@
                                 <div class="row mb-3">
                                     <div class="col-6">
                                         <p class="fw-bold">{{ renderText('summaryTotalDue') }}</p>
-                                        <p class="small">{{ renderText('summaryNotInvoice') }}</p>
+                                        <p class="small d-none">{{ renderText('summaryNotInvoice') }}</p>
                                     </div>
                                     <div class="col-6 text-end">
                                         <p class="large">RM{{ formatPrice(parseFloat(orderSummary.due.total).toFixed(2)) }}</p>
@@ -557,7 +561,7 @@
                                             <p>RM{{ parseFloat(orderSummary.plan.monthlyCommitment).toFixed(2) }}</p>
                                         </div>
                                     </div>
-                                    <div class="mb-3" v-if="orderSummary.plan.supplementaryBundlePlans">
+                                    <div class="mb-3" v-if="orderSummary.plan.supplementaryBundlePlans && orderSummary.plan.supplementaryBundlePlans.length">
                                         <h4 style="font-size: 16px; font-weight: 700;">{{ renderText('summarySupplimentaryBundleLines') }}</h4>
                                         <div class="row mb-0" v-for="(subPlan) in orderSummary.plan.supplementaryBundlePlans">
                                             <div class="col-6">
@@ -814,21 +818,22 @@
                 pageText: {
                     pageTitle: { 'en-US': 'Your Cart', 'ms-MY': 'Kart Anda', 'zh-hans': 'Your Cart' },
                     summaryMoreBenefits: { 'en-US': 'More Benefits', 'ms-MY': 'Lebih Manfaat', 'zh-hans': 'More Benefits' },
-                    summaryOneTimeCharges: { 'en-US': 'One-time Charges (due now)', 'ms-MY': 'Caj Sekali (perlu dibayar sekarang)', 'zh-hans': 'One-time Charges (due now)' },
+                    summaryOneTimeCharges: { 'en-US': 'Total Payable Now', 'ms-MY': 'Jumlah Perlu Dibayar Sekarang', 'zh-hans': 'Total Payable Now' },
                     summaryRatePlan: { 'en-US': 'Rate plan', 'ms-MY': 'Kadar pelan', 'zh-hans': 'Rate plan' },
                     summaryAddOns: { 'en-US': 'Add-Ons', 'ms-MY': 'Tambahan', 'zh-hans': 'Add-Ons' }, 
-                    summaryTaxes: { 'en-US': 'Taxes', 'ms-MY': 'Cukai', 'zh-hans': 'Taxes' }, 
+                    summaryTaxes: { 'en-US': 'SST @6%', 'ms-MY': 'SST @6%', 'zh-hans': 'SST @6%' }, 
                     summaryForeignerDeposit: { 'en-US': 'Deposit for Foreigner', 'ms-MY': 'Deposit Warga Asing', 'zh-hans': 'Deposit for Foreigner' }, 
-                    summaryShipping: { 'en-US': 'Shipping Fee', 'ms-MY': 'Caj Penghantaran', 'zh-hans': 'Shipping Fee' }, 
+                    summaryShipping: { 'en-US': 'Delivery Fee', 'ms-MY': 'Caj Penghantaran', 'zh-hans': 'Delivery Fee' }, 
                     summaryRounding: { 'en-US': 'Rounding Adjustment', 'ms-MY': 'Penyelarasan Pembundaran', 'zh-hans': 'Rounding Adjustment' }, 
                     summaryTotalDue: { 'en-US': 'Total charges due now', 'ms-MY': 'Jumlah perlu dibayar sekarang', 'zh-hans': 'Total charges due now' }, 
                     summaryNotInvoice: { 'en-US': 'This summary is not an invoice', 'ms-MY': 'Ringkasan ini bukanlah invois', 'zh-hans': 'This summary is not an invoice' }, 
                     summaryMonthlyCharges: { 'en-US': 'Monthly Charges', 'ms-MY': 'Caj Bulanan', 'zh-hans': 'Monthly Charges' }, 
                     summarySupplimentaryBundleLines: { 'en-US': 'Supplementary Bundled Lines', 'ms-MY': 'Talian Tambahan Bundle', 'zh-hans': 'Supplementary Bundled Lines' }, 
                     summaryTotalMonthly: { 'en-US': 'Total monthly charges', 'ms-MY': 'Jumlah caj bulanan', 'zh-hans': 'Total monthly charges' }, 
-                    keepNumberOption: { 'en-US': 'You have the option to <a href="/keep-your-number" target="_blank">Keep Your Number</a> during or after SIM activation.', 'ms-MY': 'Anda mempunyai pilihan untuk <a href="/ms/keep-your-number" target="_blank">Kekalkan Nombor Anda</a> semasa atau selepas pengaktifan SIM.', 'zh-hans': 'You have the option to <a href="/zh-hans/keep-your-number" target="_blank">Keep Your Number</a> during or after SIM activation.' },
+                    keepNumberOption: { 'en-US': 'You have the option to <a href="/keep-your-number" target="_blank">Switch to Yes</a> during or after SIM activation.', 'ms-MY': 'Anda mempunyai pilihan untuk <a href="/ms/keep-your-number" target="_blank">Kekalkan Nombor Anda</a> semasa atau selepas pengaktifan SIM.', 'zh-hans': 'You have the option to <a href="/zh-hans/keep-your-number" target="_blank">Switch to Yes</a> during or after SIM activation.' },
                     osTitle: { 'en-US': 'Order summary', 'ms-MY': 'Ringkasan pesanan', 'zh-hans': 'Order summary' },
                     osDueToday: { 'en-US': 'Due today after taxes and shipping', 'ms-MY': 'Perlu dibayar hari ini selepas cukai dan penghantaran', 'zh-hans': 'Due today after taxes and shipping' },
+                    osTotal: { 'en-US': 'Total', 'ms-MY': 'Jumlah', 'zh-hans': 'Total' },
                     osMonthlyDue: { 'en-US': 'Due Monthly', 'ms-MY': 'Perlu dibayar bulanan', 'zh-hans': 'Due Monthly' },
                     osCheckout: { 'en-US': 'Checkout', 'ms-MY': 'Terus ke Pembayaran', 'zh-hans': 'Checkout' },
                     checkoutGuest: { 'en-US': 'Continue checkout as Guest', 'ms-MY': 'Sambung ke Pembayaran Sebagai Tetamu', 'zh-hans': 'Continue checkout as Guest' },

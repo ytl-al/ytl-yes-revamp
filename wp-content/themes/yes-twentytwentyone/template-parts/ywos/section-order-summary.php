@@ -57,7 +57,7 @@
             </div>
         </div>
 
-        <div class="mb-3" v-if="orderSummary.plan.supplementaryBundlePlans">
+        <div class="mb-3" v-if="orderSummary.plan.supplementaryBundlePlans && orderSummary.plan.supplementaryBundlePlans.length">
             <p>{{ renderSummaryText('strSupplimentaryBundledLines') }}</p>
             <div class="row mb-0" v-for="(subPlan) in orderSummary.plan.supplementaryBundlePlans">
                 <div class="col-8">
