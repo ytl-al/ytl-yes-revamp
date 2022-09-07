@@ -86,6 +86,13 @@
                                             </li>
                                             <li>
                                                 <ul>
+                                                    <li class="dropdown-header"><?php echo esc_html__('Wireless Fibre 5G', 'yes.my'); ?></li>
+                                                    <!-- <li class="dropdown-header">Device Plans</li> -->
+                                                    <?php if (has_nav_menu('shop-wireless-fibre')) wp_nav_menu(['theme_location' => 'shop-wireless-fibre', 'container' => false, 'items_wrap' => '%3$s']); ?>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <ul>
                                                     <li class="dropdown-header"><?php echo esc_html__('Device Plans', 'yes.my'); ?></li>
                                                     <!-- <li class="dropdown-header">Device Plans</li> -->
                                                     <?php if (has_nav_menu('shop-device-plans')) wp_nav_menu(['theme_location' => 'shop-device-plans', 'container' => false, 'items_wrap' => '%3$s']); ?>

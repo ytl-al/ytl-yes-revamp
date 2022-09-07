@@ -367,6 +367,18 @@ class Ytl_Pull_Data_Admin
      */
     public function display_action_page()
     {
+        /** Manual add additional plans STARTS */
+        // $plans = get_option('ytlpd_plans_data');
+        // $plans_obj = unserialize($plans);
+        // $new_plans_standalone = json_decode('{ "displayName": "Yes Wireless Fibre 120Mbps", "planType": "postpaid", "planName": "Yes Wireless Fibre 120Mbps", "mobilePlanId": "946", "contractPeriod": "24 months", "internetData": "", "internetVoice": null, "internetSms": null, "notes": "", "allowedCustomerType": null, "totalAmount": "148.00", "monthlyCommitment": "148.00", "totalAmountWithoutSST": "148.00", "totalAmountWithSST": "156.90", "totalSST": "8.88", "roundingAdjustment": "0.02", "foreignerDeposit": "200.00", "freePlan": false, "menuType": "5G", "supportingDocAgeLimit": null, "bundleName": null, "pricingComponentList": [ { "pricingComponentName": "Postpaid Foreigner Deposit", "pricingComponentValue": "200.00" }, { "pricingComponentName": "Postpaid Device Price", "pricingComponentValue": "0.00" }, { "pricingComponentName": "Plan Advanced Payment", "pricingComponentValue": "148.00" }, { "pricingComponentName": "Postpaid Device Upfront Payment", "pricingComponentValue": "0.00" } ], "simplifiedItemPricingList": [], "supplementaryBundlePlans": [], "addonListServiceTypes": null, "addonListByCategory": null, "zoomPlan": false, "codEligible": false, "referralApplicable": false, "bundlePlan": true, "mnpApplicable": true, "supportingDocRequired": false }');
+        // $new_plans_bundle = json_decode('{ "displayName": "Yes Wireless Fibre 120Mbps Bundle", "planType": "postpaid", "planName": "Yes Wireless Fibre 120Mbps Bundle", "mobilePlanId": "948", "contractPeriod": "24 months", "internetData": "", "internetVoice": null, "internetSms": null, "notes": "", "allowedCustomerType": null, "totalAmount": "229.00", "monthlyCommitment": "229.00", "totalAmountWithoutSST": "229.00", "totalAmountWithSST": "242.75", "totalSST": "13.74", "roundingAdjustment": "0.01", "foreignerDeposit": "200.00", "freePlan": false, "menuType": "5G", "supportingDocAgeLimit": null, "bundleName": null, "pricingComponentList": [ { "pricingComponentName": "Postpaid Foreigner Deposit", "pricingComponentValue": "200.00" }, { "pricingComponentName": "Postpaid Device Price", "pricingComponentValue": "0.00" }, { "pricingComponentName": "Plan Advanced Payment", "pricingComponentValue": "229.00" }, { "pricingComponentName": "Postpaid Device Upfront Payment", "pricingComponentValue": "0.00" } ], "simplifiedItemPricingList": [], "supplementaryBundlePlans": [ { "planName": "Infinite Basic_s", "planPrice": "0.00" }, { "planName": "Infinite Basic_s", "planPrice": "0.00" } ], "addonListServiceTypes": null, "addonListByCategory": null, "zoomPlan": false, "codEligible": false, "referralApplicable": false, "bundlePlan": true, "mnpApplicable": true, "supportingDocRequired": false }');
+        // $plans_obj['postpaid'][946] = $new_plans_standalone;
+        // $plans_obj['postpaid'][948] = $new_plans_bundle;
+        // print_r(serialize($plans_obj));
+        // update_option('ytlpd_plans_data', serialize($plans_obj), false);
+        // update_option('ytlpd_updated_at', strtotime(current_time('mysql')), false);
+        /** Manual add additional plans ENDS */
+
         if (isset($_POST['trigger_pull_data']) && check_admin_referer('pull_plans_btn_clicked')) {
             $ytlpd_options	= get_option($this->prefix."settings");
             if (!empty($ytlpd_options['ytlpd_api_domain_url'])) {

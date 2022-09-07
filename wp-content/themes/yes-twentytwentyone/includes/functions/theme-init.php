@@ -183,6 +183,7 @@ if (!function_exists('yes_register_menus')) {
                     'shop-broadband'    => esc_html__('Broadband', 'yes.my'),
                     'shop-existing-customers' => esc_html__('Existing Customers', 'yes.my'),
                     'shop-device-plans' => esc_html__('Device Plans', 'yes.my'),
+                    'shop-wireless-fibre' => esc_html__('Wireless Fibre 5G', 'yes.my'),
 
                     'support-help-support' => esc_html__('Support - Help & Support', 'yes.my'),
                     'support-tools-services' => esc_html__('Support - Tools & Services', 'yes.my'),
