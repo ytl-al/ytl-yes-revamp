@@ -55,22 +55,22 @@ if (isset($_POST['trigger-upload-data']) && check_admin_referer('upload_data_btn
             foreach ($records as $key => $data) {
                 $user_meta = [
                     'accountNumber' => (isset($data['AccountNumber']) && $data['AccountNumber']) ? $data['AccountNumber'] : '',
-                    'msisdn' => (isset($data['MSISDN']) && $data['MSISDN']) ? '0' . $data['MSISDN'] : '',
-                    'nric' => (isset($data['NRIC']) && $data['NRIC']) ? $data['NRIC'] : '',
+                    'msisdn' => (isset($data['MSISDN']) && $data['MSISDN']) ? '0' . strval($data['MSISDN']) : '',
+                    'nric' => (isset($data['NRIC']) && $data['NRIC']) ? strval($data['NRIC']) : '',
                     'name' => (isset($data['CustomerName']) && $data['CustomerName']) ? $data['CustomerName'] : '',
                     'gender' => (isset($data['Gender']) && $data['Gender']) ? $data['Gender'] : '',
                     'dateOfBirth' => (isset($data['DateOfBirth']) && $data['DateOfBirth']) ? date('d/m/Y', strtotime($data['DateOfBirth'])) : '',
-                    'mobileNumber' => (isset($data['MobileNumber']) && $data['MobileNumber']) ? $data['MobileNumber'] : '',
-                    'homeNumber' => (isset($data['HomeNumber']) && $data['HomeNumber']) ? $data['HomeNumber'] : '',
-                    'officeNumber' => (isset($data['OfficeNumber']) && $data['OfficeNumber']) ? $data['OfficeNumber'] : '',
+                    'mobileNumber' => (isset($data['MobileNumber']) && $data['MobileNumber']) ? strval($data['MobileNumber']) : '',
+                    'homeNumber' => (isset($data['HomeNumber']) && $data['HomeNumber']) ? strval($data['HomeNumber']) : '',
+                    'officeNumber' => (isset($data['OfficeNumber']) && $data['OfficeNumber']) ? strval($data['OfficeNumber']) : '',
                     'email' => (isset($data['Email']) && $data['Email']) ? $data['Email'] : '',
                     'address' => (isset($data['Address']) && $data['Address']) ? $data['Address'] : '',
                     'city' => (isset($data['City']) && $data['City']) ? $data['City'] : '',
                     'state' => (isset($data['State']) && $data['State']) ? $data['State'] : '',
-                    'postcode' => (isset($data['Postcode']) && $data['Postcode']) ? $data['Postcode'] : '',
+                    'postcode' => (isset($data['Postcode']) && $data['Postcode']) ? strval($data['Postcode']) : '',
                     'country' => (isset($data['Country']) && $data['Country']) ? $data['Country'] : '',
                     'securityType' => (isset($data['SecurityType']) && $data['SecurityType']) ? $data['SecurityType'] : '',
-                    'securityId' => (isset($data['SecurityId']) && $data['SecurityId']) ? $data['SecurityId'] : '',
+                    'securityId' => (isset($data['SecurityId']) && $data['SecurityId']) ? strval($data['SecurityId']) : '',
                     'citizenship' => (isset($data['Citizenship']) && $data['Citizenship']) ? $data['Citizenship'] : '',
                     'yesId' => (isset($data['YesID']) && $data['YesID']) ? $data['YesID'] : '',
                     'salutation' => (isset($data['Salutation']) && $data['Salutation']) ? $data['Salutation'] : '',
@@ -132,7 +132,7 @@ if (isset($_POST['trigger-select-promo-id']) && check_admin_referer('select_prom
     if ($promo_id) {
         $submitted_select_promo_id = TRUE;
 
-        $customer_list = $wpdb->get_results("SELECT * FROM $table_name WHERE promo_id = '$promo_id' ORDER BY ID ASC", ARRAY_A);
+        $customer_list = $wpdb->get_results("SELECT * FROM $table_name WHERE promo_id = '$promo_id' AND deleted_at IS NULL ORDER BY ID ASC", ARRAY_A);
     } else {
         add_settings_error('ytlpd_messages_2', 'ytlpd_messages', __('Please select a Promo ID!', 'ytl-pull-data'), 'error');
     }

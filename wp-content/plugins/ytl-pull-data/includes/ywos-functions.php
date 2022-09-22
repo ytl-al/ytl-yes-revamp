@@ -11,7 +11,7 @@
 	{
 		global $wpdb;
 		$table_name = $wpdb->prefix.'ywos_targeted_promo_customers';
-		$data = $wpdb->get_row($wpdb->prepare("SELECT ID, promo_id, unique_user_id, user_meta, meta, has_purchased, created_at FROM $table_name WHERE promo_id = %s AND unique_user_id = %s", $promo_id, $unique_id));
+		$data = $wpdb->get_row($wpdb->prepare("SELECT ID, promo_id, unique_user_id, user_meta, meta, has_purchased, created_at FROM $table_name WHERE promo_id = %s AND unique_user_id = %s AND deleted_at IS NULL", $promo_id, $unique_id));
 		if ($data->user_meta) $data->user_meta = unserialize($data->user_meta);
 		if ($data->meta) $data->meta = ($data->meta) ? unserialize($data->meta) : $data->meta;
 		if ($data) {
@@ -36,7 +36,7 @@
 		global $wpdb;
 		$table_name = $wpdb->prefix.'ywos_targeted_promo_customers';
 
-		$getRecordID 	= $wpdb->get_var("SELECT ID FROM $table_name WHERE promo_id = '$promo_id' AND unique_user_id = '$unique_id'");
+		$getRecordID 	= $wpdb->get_var("SELECT ID FROM $table_name WHERE promo_id = '$promo_id' AND unique_user_id = '$unique_id' AND deleted_at IS NULL");
 		$curTimestamp 	= current_time('mysql');
 		if ($getRecordID) {
 			$params = [

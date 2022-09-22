@@ -543,6 +543,8 @@
                     errorProcessingPayment: { 'en-US': "There's an error in processing your payment.<br />Please try again later.", 'ms-MY': 'Terdapat ralat dalam pemprosesan bayaran.<br />Sila cuba lagi kemudian.', 'zh-hans': "There's an error in processing your payment.<br />Please try again later." },
                     errorPaymentNotSuccessful: { 'en-US': 'Your payment is not successful.<br />Please try again.', 'ms-MY': 'Pembayaran anda tidak berjaya.<br />Sila cuba lagi kemudian.', 'zh-hans': 'Your payment is not successful.<br />Please try again.' },
                     errorPaymentExceed: { 'en-US': 'You have exceeds the time for payment window. Please try again.', 'ms-MY': 'Anda telah melebihi waktu pembayaran. Sila cuba lagi.', 'zh-hans': 'You have exceeds the time for payment window. Please try again.' },
+                    errorPromoLinkExpired: { 'en-US': 'Your unique link has been used for purchase.<br />Please reach out to us for more information.', 'ms-MY': 'Link unik anda telah digunakan untuk pembelian.<br />Sila hubungi kami untuk pengesahan.', 'zh-hans': 'Your unique link has been used for purchase.<br />Please reach out to us for more information.' },
+                    errorPromoLinkError: { 'en-US': 'Cannot verify your promo link. Please try again.', 'ms-MY': 'Promo link anda tidak dapat disahkan. Sila cuba lagi.', 'zh-hans': 'Cannot verify your promo link. Please try again.' },
                     modalErrorPaymentTitle: { 'en-US': 'Payment Error', 'ms-MY': 'Ralat Pembayaran', 'zh-hans': 'Payment Error' },
                     modalErrorTitle: { 'en-US': 'Error', 'ms-MY': 'Ralat', 'zh-hans': 'Error' },
                 }
@@ -870,7 +872,28 @@
                 }, 
                 paymentSubmit: function(e) {
                     toggleOverlay();
-                    this.ajaxCreateYOSOrder();
+                    var self = this;
+                    if (self.isTargetedPromo) {
+                        axios.post(apiEndpointURL + '/tp-url-check', {
+                                'promo_id': self.tpMeta.promoID, 
+                                'unique_id': self.tpMeta.userID 
+                            })
+                            .then((response) => {
+                                var data = response.data;
+                                if (data.has_purchased == '1') {
+                                    self.toggleModalAlert(self.renderText('modalErrorTitle'), self.renderText('errorPromoLinkExpired'));
+                                    toggleOverlay(false);
+                                } else {
+                                    self.ajaxCreateYOSOrder();
+                                }
+                            })
+                            .catch((error) => {
+                                self.toggleModalAlert(self.renderText('modalErrorTitle'), self.renderText('errorPromoLinkError'));
+                                toggleOverlay(false);
+                            });
+                    } else {
+                        self.ajaxCreateYOSOrder();
+                    }
                     e.preventDefault();
                 },
                 ajaxUpdateTPPurchasedFlag: function() {
