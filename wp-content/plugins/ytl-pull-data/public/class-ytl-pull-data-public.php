@@ -1391,8 +1391,10 @@ class Ytl_Pull_Data_Public
 	{
 		$promo_id = $params['promo_id'];
 		$unique_id = $params['unique_id'];
+		$yos_order_id = $params['yos_order_id'];
+		$yos_order_display_id = $params['yos_order_display_id'];
 
-		$data = ywos_tp_update_has_purchased_flag($promo_id, $unique_id);
+		$data = ywos_tp_update_has_purchased_flag($promo_id, $unique_id, $yos_order_id, $yos_order_display_id);
 
 		if ($data) {
 			$response = new WP_REST_Response($data);

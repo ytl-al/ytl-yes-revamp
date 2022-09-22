@@ -878,7 +878,9 @@
                     if (self.isTargetedPromo) {
                         axios.post(apiEndpointURL + '/tp-update-purchase', {
                                 'promo_id': self.tpMeta.promoID, 
-                                'unique_id': self.tpMeta.userID
+                                'unique_id': self.tpMeta.userID, 
+                                'yos_order_id': self.orderResponse.orderNumber, 
+                                'yos_order_display_id': self.orderResponse.displayOrderNumber
                             })
                             .then((response) => {
                                 // console.log(response);

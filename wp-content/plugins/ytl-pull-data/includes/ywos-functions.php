@@ -24,12 +24,14 @@
     /**
      * Function to update the has_purchased flag for a record
      * 
-     * @param    string     $promo_id 		The promo ID and unique ID pair
-     * @param    string     $unique_id 		The unique ID and promo ID pair 
+     * @param    string     $promo_id 				The promo ID and unique ID pair
+     * @param    string     $unique_id 				The unique ID and promo ID pair 
+     * @param    string     $yos_order_id  			The yos_order_id 
+     * @param    string     $yos_order_display_id	The yos_order_display_id 
      * 
      * @since    1.1.0
      */
-	function ywos_tp_update_has_purchased_flag($promo_id, $unique_id)
+	function ywos_tp_update_has_purchased_flag($promo_id, $unique_id, $yos_order_id, $yos_order_display_id)
 	{
 		global $wpdb;
 		$table_name = $wpdb->prefix.'ywos_targeted_promo_customers';
@@ -39,6 +41,8 @@
 		if ($getRecordID) {
 			$params = [
 				'has_purchased' => 1, 
+				'yos_order_id' 	=> $yos_order_id, 
+				'yos_order_display_id' => $yos_order_display_id, 
 				'updated_at' 	=> $curTimestamp 
 			];
 			return $wpdb->update(

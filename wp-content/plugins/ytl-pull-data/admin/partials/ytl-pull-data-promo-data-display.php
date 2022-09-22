@@ -51,7 +51,7 @@ if (isset($_POST['trigger-upload-data']) && check_admin_referer('upload_data_btn
             $records = build_data_array_from_file($xlsx->rows());
             $arr_insert = [];
             $insert_values = '';
-            $counter = 1;
+            $counter = 0;
             foreach ($records as $key => $data) {
                 $user_meta = [
                     'accountNumber' => (isset($data['AccountNumber']) && $data['AccountNumber']) ? $data['AccountNumber'] : '',
@@ -77,7 +77,7 @@ if (isset($_POST['trigger-upload-data']) && check_admin_referer('upload_data_btn
                     'preferredLanguage' => (isset($data['PreferredLanguage']) && $data['PreferredLanguage']) ? $data['PreferredLanguage'] : 0
                 ];
 
-                if (isset($data['UniqueID'])) {
+                if (isset($data['UniqueID']) && isset($data['MSISDN']) && isset($data['CustomerName']) && isset($data['SecurityType']) && isset($data['SecurityId'])) {
                     $unique_user_id = $data['UniqueID'];
                     $curTimestamp 	= current_time('mysql');
                     $row = [
@@ -232,7 +232,9 @@ if (isset($_POST['trigger-select-promo-id']) && check_admin_referer('select_prom
                             <th class="manage-column">Unique ID</th>
                             <th class="manage-column">Name</th>
                             <th class="manage-column">Yes ID</th>
-                            <th class="manage-column">Has Purchased</th>
+                            <th class="manage-column" style="text-align: center;">Has Purchased</th>
+                            <th class="manage-column" style="text-align: center;">YOS Order ID</th>
+                            <th class="manage-column" style="text-align: center;">YOS Order Display ID</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -245,13 +247,17 @@ if (isset($_POST['trigger-select-promo-id']) && check_admin_referer('select_prom
                             $customer_name = ($customer_meta['name']) ? $customer_meta['name'] : '';
                             $customer_yes_id = ($customer_meta['yesId']) ? $customer_meta['yesId'] : '';
                             $customer_has_purchased = ($customer['has_purchased']) ? 'Yes' : 'No';
+                            $yos_order_id = ($customer['yos_order_id']) ? $customer['yos_order_id'] : '-';
+                            $yos_order_display_id = ($customer['yos_order_display_id']) ? $customer['yos_order_display_id'] : '-';
                         ?>
                             <tr>
                                 <td width="40"><?php echo $index; ?></td>
                                 <td><a href="/<?php echo $promo_id; ?>/?id=<?php echo $customer_unique_id; ?>" target="_blank"><?php echo $customer_unique_id; ?></a></td>
                                 <td><?php echo $customer_name; ?></td>
                                 <td><?php echo $customer_yes_id; ?></td>
-                                <td><?php echo $customer_has_purchased; ?></td>
+                                <td style="text-align: center;"><?php echo $customer_has_purchased; ?></td>
+                                <td style="text-align: center;"><?php echo $yos_order_id; ?></td>
+                                <td style="text-align: center;"><?php echo $yos_order_display_id; ?></td>
                             </tr>
                         <?php $index++;
                         endforeach; ?>

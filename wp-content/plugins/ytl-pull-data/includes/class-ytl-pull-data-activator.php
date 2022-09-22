@@ -126,6 +126,8 @@ class Ytl_Pull_Data_Activator
 					user_meta TEXT NULL DEFAULT '', 
 					meta TEXT NULL DEFAULT '', 
 					has_purchased INT(1) NULL DEFAULT 0,
+					yos_order_id VARCHAR(255) NULL DEFAULT NULL, 
+					yos_order_display_id VARCHAR(255) NULL DEFAULT NULL, 
 					created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
 					updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
 					deleted_at TIMESTAMP NULL DEFAULT NULL, 
