@@ -22,6 +22,7 @@
     <div class="nav-tab-wrapper">
         <a href="?page=ytl-pull-data" class="nav-tab">API Information Settings</a>
         <a href="javascript:void(0)" class="nav-tab nav-tab-active">Pull Plans Action</a>
+        <a href="?page=ytl-pull-data-promo" class="nav-tab">Promo Data Upload</a>
     </div>
 
     <div class="wrapper-ytlpdAdmin">
@@ -53,7 +54,7 @@
                     </tbody>
                 </table>
                 <p class="submit">
-                    <input type="hidden" name="_wp_http_referer" value="/wp-admin/admin.php?page=geneco-plans" />
+                    <input type="hidden" name="_wp_http_referer" value="/wp-admin/admin.php?page=ytl-pull-data" />
                     <input type="hidden" name="trigger_pull_data" value="1" />
                     <input type="submit" name="btn-pull" id="btn-pullData" class="button button-primary" value="Pull Data" />
                 </p>

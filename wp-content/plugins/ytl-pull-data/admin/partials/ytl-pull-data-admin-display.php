@@ -22,6 +22,7 @@
     <div class="nav-tab-wrapper">
         <a href="javascript:void(0)" class="nav-tab nav-tab-active">API Information Settings</a>
         <a href="?page=ytl-pull-data-action" class="nav-tab">Pull Plans Action</a>
+        <a href="?page=ytl-pull-data-promo" class="nav-tab">Promo Data Upload</a>
     </div>
     
     <div class="wrapper-ytlpdAdmin">

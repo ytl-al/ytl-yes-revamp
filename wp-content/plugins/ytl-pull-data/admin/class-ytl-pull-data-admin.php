@@ -499,4 +499,21 @@ class Ytl_Pull_Data_Admin
         }
         return $return;
     }
+
+    public function register_promo_data_page() 
+    {
+        add_submenu_page(
+            'ytl-pull-data',                             			            // parent slug
+            __('YTL API Pull Data - Promo Customer Data', 'ytl-pull-data'),     // page title
+            __('Promo Customer Data', 'ytl-pull-data'),      				    // menu title
+            'manage_options',                        				            // capability
+            'ytl-pull-data-promo',                          		            // menu_slug
+            array( $this, 'display_promo_data_page' )  					        // callable function
+        );
+    }
+
+    public function display_promo_data_page() 
+    {
+        require_once plugin_dir_path(dirname(__FILE__)).'admin/partials/ytl-pull-data-promo-data-display.php';
+    }
 }

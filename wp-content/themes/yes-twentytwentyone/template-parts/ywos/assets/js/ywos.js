@@ -20,6 +20,11 @@ $(document).ready(function() {
         var planID = $(this).attr('data-planid');
         ywos.buyPlan(planID);
     });
+
+    $('.btn-buytpplan').on('click', function() {
+        var planID = $(this).attr('data-planid');
+        ywos.buyPlan(planID, true);
+    });
 });
 
 const ywos = {
@@ -28,45 +33,53 @@ const ywos = {
     generateSessionKey: function() {
         return '_' + Math.random().toString(36).substr(2, 9);
     },
-    initLocalStorage: function(planID) {
+    initLocalStorage: function(planID, isTargetedPromo = false) {
         var ywosLocalStorageData = ywosLSData;
         var storageData = {};
         var expiryLength = expiryYWOSCart * 60000;
         var ywosCartExpiry = Date.now() + expiryLength;
         var sessionKey = this.generateSessionKey();
         var siteLang = document.getElementsByTagName('html')[0].getAttribute('lang');
-        if (ywosLocalStorageData === null) {
-            storageData = {
-                'expiry': ywosCartExpiry,
-                'sessionKey': sessionKey,
-                'meta': {
-                    'planID': planID,
-                    'sessionId': ''
-                },
-                'siteLang': siteLang
-            };
-            ywosLocalStorageData = storageData;
-        } else {
-            storageData = {
-                'expiry': ywosCartExpiry,
-                'sessionKey': sessionKey,
-                'meta': {
-                    'planID': planID,
-                    'sessionId': ''
-                },
-                'siteLang': siteLang
-            };
-            ywosLocalStorageData = storageData;
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var refCode = url.searchParams.get('rc');
+
+        storageData = {
+            'expiry': ywosCartExpiry,
+            'sessionKey': sessionKey,
+            'meta': {
+                'planID': planID,
+                'sessionId': ''
+            },
+            'siteLang': siteLang,
+            'isTargetedPromo': false,
+            'tpMeta': {}
+        };
+
+        if (refCode) {
+            storageData.meta.refCode = refCode;
         }
+
+        if (isTargetedPromo) {
+            var segments = url.pathname.split('/');
+            var userID = url.searchParams.get('id');
+            var promoID = segments.pop() || segments.pop();
+            
+            var tpMeta = { 'userID': userID, 'promoID': promoID };
+            storageData.isTargetedPromo = true;
+            storageData.tpMeta = tpMeta;
+        }
+        ywosLocalStorageData = storageData;
+
         localStorage.setItem(ywosLSName, JSON.stringify(ywosLocalStorageData));
     },
     redirectToCart: function() {
         window.location.href = window.location.origin + "/ywos/cart";
     },
-    buyPlan: function(planID) {
+    buyPlan: function(planID, isTargetedPromo = false) {
         toggleOverlay();
         var self = this;
-        this.initLocalStorage(planID);
+        self.initLocalStorage(planID, isTargetedPromo);
         $.ajax({
             url: apiEndpointURL + '/get-plan-by-id/' + planID,
             method: 'GET',
@@ -229,6 +242,10 @@ const ywos = {
 
 function buyPlan(planID) {
     ywos.buyPlan(planID);
+}
+
+function buyTPPlan(planID) {
+    ywos.buyPlan(planID, true);
 }
 
 function roundAmount(amount, decimals = 2) {

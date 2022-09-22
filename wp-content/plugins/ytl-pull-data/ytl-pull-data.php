@@ -16,7 +16,7 @@
  * Plugin Name:       YTL API Pull Data
  * Plugin URI:        https://www.ytl.com/
  * Description:       Plugin to pull and save the plans data to be used in Yes.my website.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Author:            YTL Digital Design [AL Latif Mohamad]
  * Author URI:        https://www.ytl.com/technology.asp
  * License:           GPL-2.0+
@@ -35,7 +35,7 @@ if (!defined('WPINC')) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('YTL_PULL_DATA_VERSION', '1.0.0');
+define('YTL_PULL_DATA_VERSION', '1.1.0');
 
 /**
  * Prefix for all plugin's options.
@@ -64,6 +64,11 @@ function deactivate_ytl_pull_data()
 
 register_activation_hook(__FILE__, 'activate_ytl_pull_data');
 register_deactivation_hook(__FILE__, 'deactivate_ytl_pull_data');
+
+/**
+ * The external functions to be called within YWOS,
+ */
+require plugin_dir_path(__FILE__) . 'includes/ywos-functions.php';
 
 /**
  * The core plugin class that is used to define internationalization,

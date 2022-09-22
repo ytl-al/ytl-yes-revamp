@@ -50,6 +50,7 @@
                                             <option value="" disabled="disabled" selected="selected">{{ renderText('strIDTypeSelect') }}</option>
                                             <option value="NRIC">{{ renderText('strIDNRIC') }}</option>
                                             <option value="PASSPORT">{{ renderText('strIDPassport') }}</option>
+                                            <option v-if="isLoggedIn && customerDetails.securityType == 'BRN'" value="BRN">BRN</option>
                                         </select>
                                     </div>
                                 </div>
@@ -216,6 +217,7 @@
                     strBtnSubmit: { 'en-US': 'Next: Insert delivery details', 'ms-MY': 'Seterusnya: Masukkan Butiran Penghantaran', 'zh-hans': 'Next: Insert delivery details' }, 
                     
                     strErrorNRIC: { 'en-US': 'Please insert valid NRIC number', 'ms-MY': 'Sila masukkan nombor kad pengenalan yang sah', 'zh-hans': 'Please insert valid NRIC number' },
+                    strErrorPassport: { 'en-US': 'Please insert valid Passport number', 'ms-MY': 'Sila masukkan nombor passport yang sah', 'zh-hans': 'Please insert valid Passport number' },
                     strErrorPhoneNumber: { 'en-US': 'Please insert valid phone number', 'ms-MY': 'Sila masukkan nombor telefon bimbit yang sah', 'zh-hans': 'Please insert valid phone number' }, 
 
                     errorValidating: { 'en-US': "There's an error in validating your eligibility. Please try again later.", 'ms-MY': 'Ralat ketika mengesahkan kelayakan anda. Sila cuba lagi kemudian.', 'zh-hans': "There's an error in validating your eligibility. Please try again later." }, 
@@ -304,6 +306,12 @@
                             $(self.verify.input.inputSecurityID).on('keydown', function() {
                                 $(self.verify.errorMessage.securityID).hide().html('');
                             });
+                            return false;
+                        }
+                    } else if (self.customerDetails.securityType == 'PASSPORT') {
+                        toggleOverlay(false);
+                        if (!self.customerDetails.securityId.trim().length) {
+                            $(self.verify.errorMessage.securityID).html(self.renderText('strErrorPassport')).show();
                             return false;
                         }
                     }

@@ -70,6 +70,16 @@ class Ytl_Pull_Data_Activator
 	{
 		$prefix	= (defined(YTLPD_PREFIX)) ? YTLPD_PREFIX : 'ytlpd_';
 
+		self::create_table_ywos_order();
+		self::create_table_ywos_targeted_promo_customers();
+
+		add_option($prefix."db_version", '1.0');
+	}
+
+	public function create_table_ywos_order() 
+	{
+		$prefix	= (defined(YTLPD_PREFIX)) ? YTLPD_PREFIX : 'ytlpd_';
+
 		global $wpdb;
 
 		$table_name			= $wpdb->prefix.'ywos_orders';
@@ -98,7 +108,31 @@ class Ytl_Pull_Data_Activator
 		
 		require_once(ABSPATH.'wp-admin/includes/upgrade.php');
 		dbDelta($sql);
+	}
 
-		add_option($prefix."db_version", '1.0');
+	public function create_table_ywos_targeted_promo_customers()
+	{
+		$prefix	= (defined(YTLPD_PREFIX)) ? YTLPD_PREFIX : 'ytlpd_';
+
+		global $wpdb;
+	
+		$table_name			= $wpdb->prefix.'ywos_targeted_promo_customers';
+		$charset_collate 	= $wpdb->get_charset_collate();
+
+		$sql = "CREATE TABLE $table_name (
+					ID mediumint(9) NOT NULL AUTO_INCREMENT, 
+					promo_id VARCHAR(255) NULL DEFAULT '', 
+					unique_user_id VARCHAR(255) NULL DEFAULT '',
+					user_meta TEXT NULL DEFAULT '', 
+					meta TEXT NULL DEFAULT '', 
+					has_purchased INT(1) NULL DEFAULT 0,
+					created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+					updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+					deleted_at TIMESTAMP NULL DEFAULT NULL, 
+					PRIMARY KEY (id)
+				) $charset_collate;";
+		
+		require_once(ABSPATH.'wp-admin/includes/upgrade.php');
+		dbDelta($sql);
 	}
 }

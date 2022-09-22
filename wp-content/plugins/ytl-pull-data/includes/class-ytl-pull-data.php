@@ -165,6 +165,7 @@ class Ytl_Pull_Data
         $this->loader->add_action('admin_init', $plugin_admin, 'register_settings');
         $this->loader->add_action('admin_menu', $plugin_admin, 'register_settings_page');
         $this->loader->add_action('admin_menu', $plugin_admin, 'register_action_page');
+        $this->loader->add_action('admin_menu', $plugin_admin, 'register_promo_data_page');
 
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');

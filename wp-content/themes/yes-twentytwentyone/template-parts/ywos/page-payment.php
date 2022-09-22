@@ -507,6 +507,9 @@
                 paymentTimeout: false,
                 paymentResponse: null,
 
+                isTargetedPromo: false, 
+                tpMeta: {}, 
+
                 apiLocale: 'EN', 
                 pageText: {
                     strVerification: { 'en-US': 'Verification', 'ms-MY': 'Pengesahan', 'zh-hans': 'Verification' },
@@ -568,6 +571,9 @@
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
                         self.ajaxGetFPXBankList();
                         self.updateData();
+
+                        self.isTargetedPromo = ywos.lsData.isTargetedPromo;
+                        self.tpMeta = ywos.lsData.tpMeta;
                     } else {
                         ywos.redirectToPage('cart');
                     }
@@ -696,6 +702,9 @@
                             if (responseCode == 0) {                        // Payment success
                                 self.paymentResponse = data;
                                 closePaymentWindow = true;
+
+                                self.ajaxUpdateTPPurchasedFlag();
+                                
                                 setTimeout(function() {
                                     self.redirectThankYou(1);
                                 }, 2000);
@@ -863,6 +872,24 @@
                     toggleOverlay();
                     this.ajaxCreateYOSOrder();
                     e.preventDefault();
+                },
+                ajaxUpdateTPPurchasedFlag: function() {
+                    var self = this;
+                    if (self.isTargetedPromo) {
+                        axios.post(apiEndpointURL + '/tp-update-purchase', {
+                                'promo_id': self.tpMeta.promoID, 
+                                'unique_id': self.tpMeta.userID
+                            })
+                            .then((response) => {
+                                // console.log(response);
+                            })
+                            .catch((error) => {
+                                // console.log(error);
+                            })
+                            .finally(() => {
+                                // console.log('finally');
+                            });
+                    }
                 },
                 redirectThankYou: function(paymentStatus) {
                     var self = this;

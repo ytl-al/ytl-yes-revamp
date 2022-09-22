@@ -567,7 +567,9 @@
                         self.orderSummary = ywos.lsData.meta.orderSummary;
                         self.updateFields();
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
-                        toggleOverlay(false);
+                        // toggleOverlay(false);
+                        
+                        self.checkPreDefReferralCode();
 
                         setTimeout(function() {
                             $('.form-select').selectpicker('refresh');
@@ -800,6 +802,15 @@
                         .finally(() => {
                             toggleOverlay(false);
                         });
+                },
+                checkPreDefReferralCode: function() {
+                    var self = this;
+                    if (self.orderSummary.plan.referralApplicable && ywos.lsData.meta.refCode != null) {
+                        self.referralCode.code = ywos.lsData.meta.refCode;
+                        self.verifyReferralCode();
+                    } else {
+                        toggleOverlay(false);
+                    }
                 },
                 verifyReferralCode: function() {
                     var self = this;
