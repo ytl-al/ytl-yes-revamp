@@ -611,7 +611,7 @@
                             </div>
                         </div>
                     </div>
-                    <p v-html="renderText('keepNumberOption')"></p>
+                    <p v-if="orderSummary.plan.bundleName != 'Home Internet'" v-html="renderText('keepNumberOption')"></p>
                 </div>
                 <div class="col-lg-4 col-12">
                     <div class="summary-box">
