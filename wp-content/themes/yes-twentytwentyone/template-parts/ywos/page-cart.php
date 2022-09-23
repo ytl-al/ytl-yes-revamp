@@ -523,7 +523,7 @@
                                     </div>
                                 </template>
                                 <div class="mt-2 pt-2 border-top pb-2 border-bottom" v-if="orderSummary.plan.bundleName || orderSummary.plan.hasDevice">
-                                    <p class="bold mb-0" v-if="orderSummary.plan.bundleName">Device Bundle: <span class="fw-bold">{{ orderSummary.plan.bundleName }}</span></p>
+                                    <!-- <p class="bold mb-0" v-if="orderSummary.plan.bundleName">Device Bundle: <span class="fw-bold">{{ orderSummary.plan.bundleName }}</span></p> -->
                                     <template v-for="(price, index) in orderSummary.due.priceBreakdown.device">
                                         <div class="row">
                                             <div class="col-6">
