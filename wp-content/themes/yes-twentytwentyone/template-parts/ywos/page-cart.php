@@ -939,7 +939,7 @@
                                     self.ajaxGetPlanData();
 
                                     ywos.lsData.meta.loginType = 'targetedPromo';
-                                    ywos.lsData.meta.customerDetails = data.user_meta;
+                                    // ywos.lsData.meta.customerDetails = data.user_meta;
                                     ywos.updateYWOSLSData();
                                 }
                             }
@@ -1297,7 +1297,7 @@
                     var currentStep = self.currentStep;
                     var loginType = (ywos.lsData.meta.loginType) ? ywos.lsData.meta.loginType : self.loginInfo.type;
 
-                    if (loginType == 'otp' || loginType == 'password' || loginType == 'targetedPromo') {
+                    if (loginType == 'otp' || loginType == 'password') {
                         toPage = 'delivery';
                         currentStep += 1;
 
@@ -1305,7 +1305,7 @@
                             self.orderSummary.due.foreignerDeposit = 200.00;
                             self.updateSummary();
                         }
-                    } else if (loginType == 'guest') {
+                    } else if (loginType == 'guest' || loginType == 'targetedPromo') {
                         if (!ywos.lsData.meta.isLoggedIn) {
                             isLoggedIn = false;
                             ywos.lsData.meta.customerDetails = {
