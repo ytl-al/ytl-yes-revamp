@@ -118,7 +118,7 @@ function build_data_array_from_file($file_data)
             continue;
         }
         foreach ($data as $key => $value) {
-            $array[$i][$arr_keys[$key]] = $value;
+            $array[$i][$arr_keys[$key]] = trim($value);
         }
         $i++;
     }
