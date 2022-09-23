@@ -587,7 +587,7 @@ class Ytl_Pull_Data_Public
 	public function login_basic(WP_REST_Request $request)
 	{
 		$yes_id		= (trim($request['yes_number'])) ? $request['yes_number'] : null;
-		$yes_id 	= ($yes_id != null && strpos(strtolower($yes_id), '@yes.my') !== false) ? $yes_id : $yes_id. '@YES.MY';
+		$yes_id 	= ($yes_id != null && strpos(strtolower($yes_id), '@yes.my') !== false) ? $yes_id : $yes_id . '@YES.MY';
 		$password	= $request['password'];
 		$auth_type 	= $request['auth_type'];
 		$locale 	= $request['locale'];
