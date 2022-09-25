@@ -1,8 +1,7 @@
 <style type="text/css">
     .fm-form-container.fm-theme16 { display: none !important; }
-    #section-gateway-banner{background-image: url('https://yesmy-dev.azurewebsites.net/wp-content/uploads/2022/09/infinite-fibre-banner-bg.jpg'); background-size:cover; background-repeat:no-repeat; background-position:center bottom; padding:200px 0px;}
     #section-gateway-banner h2{font-size:25px; color:#FFF; font-weight:600;}
-            #section-gateway-banner h1{font-size:70px; color:#FFF; font-weight:800; line-height:70px;}
+            #section-gateway-banner h1{font-size:70px !important; color:#FFF; font-weight:800; line-height:70px !important;}
             #section-gateway-banner h3{font-size:30px; color:#FFF; font-weight:500; line-height:normal;}
             #section-gateway-banner .pricing{width:150px; height:150px; border-radius:50%; background-color:#FF0084; display:flex;}
             #section-gateway-banner .pricing h4{color:#FFF; font-weight:600; font-size:16px;}
@@ -81,14 +80,21 @@
         
         .span-hideLarge { display: none; }
     }
-    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
-        #section-gateway-banner h2 {font-size: 25px;}
-        #section-gateway-banner h1{font-size: 38px; line-height: 40px;}
-#section-gateway-banner h3{font-size:24px;}
-        #section-gateway-banner {padding: 13px 0px;}
-        #section-gateway-banner .banner-5g {width:57px;}
-        #section-gateway-banner .yes-logo-banner{width:54px;}
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
+        #section-gateway-banner h2 {font-size: 25px !important;}
+        #section-gateway-banner h1{font-size: 55px !important; line-height: 55px !important;}
+#section-gateway-banner h3{font-size:29px !important; padding-right: 90px;}
+        #section-gateway-banner .banner-5g {width:55px;}
+        #section-gateway-banner .yes-logo-banner{width:50px;}
+    }
+    @media only screen and (min-device-width: 320px) and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) {
+        #section-gateway-banner h2 {font-size: 19px !important;}
+        #section-gateway-banner h1{font-size: 33px !important; line-height: 33px !important;}
+#section-gateway-banner h3{font-size:17px !important; padding-right: 90px;}
+        #section-gateway-banner .banner-5g {width:47px;}
+        #section-gateway-banner .yes-logo-banner{width:38px;}
 #section-infinite-gateway-banner {background-position: -77px bottom; padding: 33px 0px;}
+#section-gateway-banner .pink-btn{padding: 0.3rem 2rem;}
         #section-infinite-gateway-banner h2{font-size: 25px;}
         #section-infinite-gateway-banner .banner-5g{width:50px;}
         #section-infinite-gateway-banner h1{font-size: 32px; line-height: 33px;}
