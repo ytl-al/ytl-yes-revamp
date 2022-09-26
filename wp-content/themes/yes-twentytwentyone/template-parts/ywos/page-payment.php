@@ -1008,9 +1008,9 @@
                         if (
                             self.paymentInfo.nameOnCard.trim() == '' || 
                             self.paymentInfo.cardNumber.trim() == '' || 
-                            self.paymentInfo.cardExpiryMonth.trim() == '' ||
+                            self.paymentInfo.cardExpiryMonth.trim().length < 2 ||
                             self.paymentInfo.cardExpiryYear.trim().length < 4 ||
-                            self.paymentInfo.cardCVV.trim() == ''
+                            self.paymentInfo.cardCVV.trim().length < 3
                         ) {
                             isFilled = false;
                         }
