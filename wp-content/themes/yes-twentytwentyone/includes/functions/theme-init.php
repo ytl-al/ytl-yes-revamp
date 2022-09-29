@@ -188,10 +188,11 @@ if (!function_exists('yes_register_menus')) {
                     'support-help-support' => esc_html__('Support - Help & Support', 'yes.my'),
                     'support-tools-services' => esc_html__('Support - Tools & Services', 'yes.my'),
                     'support-contact-us' => esc_html__('Support - Contact Us', 'yes.my'),
+                    'support-contact-us-business' => esc_html__('Support - Contact Us (Business)', 'yes.my'),
 
                     'bs-internet-access'    => esc_html__('Business - Internet Access', 'yes.my'), 
                     'bs-private-network'    => esc_html__('Business - Private Network', 'yes.my'), 
-                    'bs-voice-communication'=> esc_html__('Business - Voice Communication', 'yes.my') 
+                    'bs-voice-communication'=> esc_html__('Business - Voice Communication', 'yes.my'),
 
                     // 'footer-column-1'   => esc_html__('Footer - Column 1', 'yes.my'),
                     // 'footer-column-2'   => esc_html__('Footer - Column 2', 'yes.my'),
