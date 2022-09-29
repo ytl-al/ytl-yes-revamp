@@ -207,7 +207,7 @@
                                                 <ul>
                                                     <li class="dropdown-header"><?php echo esc_html__('Contact Us', 'yes.my'); ?></li>
                                                     <!-- <li class="dropdown-header">Contact Us</li> -->
-                                                    <?php if (has_nav_menu('support-contact-us')) wp_nav_menu(['theme_location' => 'support-contact-us-business', 'container' => false, 'items_wrap' => '%3$s']); ?>
+                                                    <?php if (has_nav_menu('bs-support-contact-us')) wp_nav_menu(['theme_location' => 'bs-support-contact-us', 'container' => false, 'items_wrap' => '%3$s']); ?>
                                                 </ul>
                                             </li>
                                         </ul>
