@@ -454,7 +454,7 @@
                                 <div><label><input type="checkbox" id="term1" name="term1" @click="check_sign"
                                                    value="agree" checked/> {{ renderText('customer_signature') }}</label></div>
                             </div>
-                            <div class="contract_section">
+                            <div class="contract_section d-none">
                                 <h3>{{ renderText('terra_terms') }}</h3>
                                 <div class="contract_term">
                                     <ol>
