@@ -230,6 +230,15 @@ class Ytl_Pull_Data_Public
 	 */
 	private $path_get_ipp_monthly_installment;
 
+    /**
+     * The api path to auth.
+     *
+     * @since    1.1.1
+     * @access   private
+     * @var      string    $get_all_plans_with_addons_path  The all plans with addons path for API url to be used.
+     */
+    private $get_all_plans_with_addons_path;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -260,6 +269,7 @@ class Ytl_Pull_Data_Public
 		$this->path_check_order_payment_status 	 = '/mobileyos/mobile/ws/v1/json/orderPaymentStatus';
 		$this->path_get_ipp_tenure_details		 = '/mobileyos/mobile/ws/v1/json/getIPPTenureDetails';
 		$this->path_get_ipp_monthly_installment  = '/mobileyos/mobile/ws/v1/json/getIPPMonthlyInstalment';
+        $this->get_all_plans_with_addons_path = '/mobileyos/mobile/ws/v1/json/getAllPlansWithAddons';
 
 		$ytlpd_options				= get_option($this->prefix . "settings");
 		$this->api_domain 			= (!empty($ytlpd_options['ytlpd_api_domain_url'])) ? $ytlpd_options['ytlpd_api_domain_url'] : '';
@@ -383,25 +393,69 @@ class Ytl_Pull_Data_Public
 
 	public function get_plan_by_id($data)
 	{
-		$return 	= [];
-		$get_plans 	= get_option($this->prefix . 'plans_data');
-		if (empty($get_plans)) {
-			return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
-		}
-		$plans_obj 	= unserialize($get_plans);
-		foreach ($plans_obj as $plans) {
-			foreach ($plans as $plan_id => $plan) {
-				if ($plan_id == $data['plan_id']) {
-					$return	= $plan;
-					break;
-				}
-			}
-		}
-		if (empty($return)) {
-			return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
-		}
+		return $this->ca_get_plan_by_id($data['plan_id'], true);
 
-		return $return;
+		// $return 	= [];
+		// $get_plans 	= get_option($this->prefix . 'plans_data');
+		// if (empty($get_plans)) {
+		// 	return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
+		// }
+		// $plans_obj 	= unserialize($get_plans);
+		// foreach ($plans_obj as $plans) {
+		// 	foreach ($plans as $plan_id => $plan) {
+		// 		if ($plan_id == $data['plan_id']) {
+		// 			$return	= $plan;
+		// 			break;
+		// 		}
+		// 	}
+		// }
+		// if (empty($return)) {
+		// 	return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
+		// }
+
+		// return $return;
+	}
+
+	public function ca_get_plan_by_id($plan_id, $returnPlanDetail = false) 
+	{
+		$session_id 	= $this->ca_generate_auth_token(true);
+		if ($plan_id && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
+			$params 	= [
+				'requestId'	=> $this->api_request_id,
+				'locale' 	=> "EN",
+				'sessionId' => $session_id,
+				// 'planName' 	=> "Yes Kasi Up B40 Prepaid Plan, Yes LTE 68_70GB_Zoom Promotion",
+				'bundleMapId' => $plan_id
+			];
+			$args 		= [
+				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
+				'body'          => json_encode($params),
+				'method'        => 'POST',
+				'data_format'   => 'body',
+				'timeout'     	=> $this->api_timeout
+			];
+			$api_url 	= $this->api_domain . $this->get_all_plans_with_addons_path;
+			$request 	= wp_remote_post($api_url, $args);
+			$data 		= json_decode($request['body']);
+			if ($data->responseCode > -1) {
+				if ($returnPlanDetail) {
+					return $data->planDetails[0];
+				} else {
+					$data->sessionId = $session_id;
+				}
+
+				$response 	= new WP_REST_Response($data);
+				$response->set_status(200);
+				return $response;
+			} else if ($data->displayResponseMessage) {
+				return new WP_Error('error_get_plan_by_id', $data->displayResponseMessage, array('status' => 400));
+			} else {
+				return new WP_Error('error_get_plan_by_id', "Invalid plan ID.", array('status' => 400));
+			}
+		} else {
+			return new WP_Error('error_get_plan_by_id', "Parameters not complete to retrieve the plan.", array('status' => 400));
+		}
+		return new WP_Error('error_get_plan_by_id', "There's an error in retrieving the plan.", array('status' => 400));
 	}
 
 	public function ra_reg_get_add_ons_by_plan()
