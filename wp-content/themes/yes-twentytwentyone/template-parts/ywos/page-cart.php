@@ -423,6 +423,33 @@
 
     <!-- Body STARTS -->
     <section id="cart-body">
+        <div class="container" id="container-empty" v-if="isTargetedPromo && tpValidation != ''">
+            <div class="row mb-5 gx-5">
+                <div class="col-lg-8 col-12">
+                    <div class="accordion">
+                        <div class="packagebox mb-3">
+                            <div class="row align-items-center">
+                                <div class="col-lg-3 col-12 visualbg d-none">
+                                    <img src="/wp-content/uploads/2022/05/ft5g-cart-visual.jpg" class="img-fluid" alt="" />
+                                </div>
+                                <div class="col-12 p-3 px-5">
+                                    <template v-if="tpValidation == 'has_purchased'">
+                                        <h3 class="mt-3 mt-lg-0">Link has expired!</h3>
+                                        <p class="mb-3">Your link has been redeemed. Only one purchase can be made per unique link.</p>
+                                    </template>
+
+                                    <template v-if="tpValidation == 'not_valid'">
+                                        <h3 class="mt-3 mt-lg-0">Failed to add to cart!</h3>
+                                        <p class="mb-3">Your request is not valid. The Unique ID and Promo ID provided cannot be validated. Please <a href="javascript:void(0)" onClick="history.back();">go back</a> and try again.</p>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="container" id="container-empty" v-if="isCartEmpty">
             <div class="row mb-5 gx-5">
                 <div class="col-lg-8 col-12">
@@ -496,7 +523,7 @@
                                     </div>
                                 </template>
                                 <div class="mt-2 pt-2 border-top pb-2 border-bottom" v-if="orderSummary.plan.bundleName || orderSummary.plan.hasDevice">
-                                    <p class="bold mb-0" v-if="orderSummary.plan.bundleName">Device Bundle: <span class="fw-bold">{{ orderSummary.plan.bundleName }}</span></p>
+                                    <!-- <p class="bold mb-0" v-if="orderSummary.plan.bundleName">Device Bundle: <span class="fw-bold">{{ orderSummary.plan.bundleName }}</span></p> -->
                                     <template v-for="(price, index) in orderSummary.due.priceBreakdown.device">
                                         <div class="row">
                                             <div class="col-6">
@@ -584,7 +611,7 @@
                             </div>
                         </div>
                     </div>
-                    <p v-html="renderText('keepNumberOption')"></p>
+                    <p v-if="orderSummary.plan.bundleName != 'Home Broadband'" v-html="renderText('keepNumberOption')"></p>
                 </div>
                 <div class="col-lg-4 col-12">
                     <div class="summary-box">
@@ -670,7 +697,7 @@
                                     <form class="form-loginTac" @submit="otpLoginSubmit">
                                         <div class="input-box">
                                             <div class="w-100">
-                                                <input type="text" class="form-control userid" id="input-otpYesNumber" maxlength="11" v-model="login.input.otp.yesNumber" @input="watchOTPLoginFields" :placeholder="renderText('checkoutYesID')" />
+                                                <input type="text" class="form-control userid" id="input-otpYesNumber" v-model="login.input.otp.yesNumber" @input="watchOTPLoginFields" :placeholder="renderText('checkoutYesID')" />
                                             </div>
                                             <div class=" w-100 border-top item-otpPassword" id="box-otpPassword" style="display: none;">
                                                 <input type="password" class="form-control password" id="input-otpPassword" v-model="login.input.otp.password" @input="watchOTPLoginFields" placeholder="******" maxlength="6" />
@@ -697,7 +724,7 @@
                                     <form class="form-loginPassword" @submit="basicLoginSubmit">
                                         <div class="input-box">
                                             <div class="w-100 border-bottom">
-                                                <input type="text" class="form-control userid" id="input-basicYesNumber" maxlength="11" v-model="login.input.basic.yesNumber" @input="watchBasicLoginFields" :placeholder="renderText('checkoutYesID')" />
+                                                <input type="text" class="form-control userid" id="input-basicYesNumber" v-model="login.input.basic.yesNumber" @input="watchBasicLoginFields" :placeholder="renderText('checkoutYesID')" />
                                             </div>
                                             <div class="w-100">
                                                 <input type="password" class="form-control password" id="input-basicPassword" v-model="login.input.basic.password" @input="watchBasicLoginFields" placeholder="********" />
@@ -813,6 +840,9 @@
                     allowAddOn: true,
                     modalRemove: '#modal-addOnRemove'
                 },
+                isTargetedPromo: false, 
+                tpValidation: '', 
+                tpMeta: {}, 
 
                 apiLocale: 'EN', 
                 pageText: {
@@ -862,12 +892,16 @@
                     if (ywos.validateSession(self.currentStep)) {
                         self.planID = ywos.lsData.meta.planID;
 
-                        if (ywos.lsData.meta.isLoggedIn) {
-                            self.orderSummary = ywos.lsData.meta.orderSummary;
-                            self.updateAddOns(self.orderSummary.plan.addonListServiceTypes);
-                            self.updatePlan();
+                        if (ywos.lsData.isTargetedPromo) {
+                            self.initTargetedPromo()
                         } else {
-                            self.ajaxGetPlanData();
+                            if (ywos.lsData.meta.isLoggedIn) {
+                                self.orderSummary = ywos.lsData.meta.orderSummary;
+                                self.updateAddOns(self.orderSummary.plan.addonListServiceTypes);
+                                self.updatePlan();
+                            } else {
+                                self.ajaxGetPlanData();
+                            }
                         }
 
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
@@ -880,6 +914,45 @@
 
                     self.requestOTPText = self.renderText('checkoutTACRequest');
                 },
+                initTargetedPromo: function() {
+                    var self = this;
+                    self.isTargetedPromo = (ywos.lsData.isTargetedPromo) ? ywos.lsData.isTargetedPromo : false;
+                    self.tpMeta = ywos.lsData.tpMeta;
+                    var userID = self.tpMeta.userID;
+                    var promoID = self.tpMeta.promoID;
+
+                    axios.post(apiEndpointURL + '/tp-url-check', {
+                            'unique_id': userID,
+                            'promo_id': promoID
+                        })
+                        .then((response) => {
+                            var data = response.data;
+                            if (data.has_purchased == '1') {
+                                self.tpValidation = 'has_purchased';
+                                toggleOverlay(false);
+                            } else {
+                                if (ywos.lsData.meta.isLoggedIn) {
+                                    self.orderSummary = ywos.lsData.meta.orderSummary;
+                                    self.updateAddOns(self.orderSummary.plan.addonListServiceTypes);
+                                    self.updatePlan();
+                                } else {
+                                    self.ajaxGetPlanData();
+
+                                    ywos.lsData.meta.loginType = 'targetedPromo';
+                                    // ywos.lsData.meta.customerDetails = data.user_meta;
+                                    ywos.updateYWOSLSData();
+                                }
+                            }
+                        })
+                        .catch((error) => {
+                            self.tpValidation = 'not_valid';
+                            toggleOverlay(false);
+                            console.log(error);
+                        })
+                        .finally(() => {
+                            // console.log('finally');
+                        });
+                }, 
                 ajaxGetPlanData: function() {
                     var self = this;
                     axios.get(apiEndpointURL + '/get-plan-by-id/' + self.planID)
@@ -1034,7 +1107,7 @@
                 },
                 checkLoggedIn: function() {
                     var self = this;
-                    if (typeof ywos.lsData.meta.isLoggedIn === 'undefined' || !ywos.lsData.meta.isLoggedIn) {
+                    if ((typeof ywos.lsData.meta.isLoggedIn === 'undefined' || !ywos.lsData.meta.isLoggedIn) && !ywos.lsData.isTargetedPromo) {
                         self.login.input.otp.password = '';
                         self.login.input.basic.yesNumber = '';
                         self.login.input.basic.password = '';
@@ -1060,7 +1133,7 @@
                     var self = this;
                     var yesNumber = self.login.input.basic.yesNumber.trim();
                     var password = self.login.input.basic.password;
-                    if (isNaN(yesNumber) || yesNumber.length == 0 || password.length == 0) {
+                    if (yesNumber.length == 0 || password.length == 0) {
                         self.toggleErrorMessageLoginBasic('Please insert valid login credentials.');
                         return false;
                     }
@@ -1111,7 +1184,7 @@
                 validateYesNumberOTP: function() {
                     var self = this;
                     var otpYesNumber = self.login.input.otp.yesNumber.trim();
-                    if (isNaN(otpYesNumber) || otpYesNumber.length == 0) {
+                    if (otpYesNumber.length == 0) {
                         var inputOTPYesNumber = self.login.input.otp.inputYesNumber;
                         var emOTPForLogin = self.login.errorMessage.otp;
 
@@ -1232,7 +1305,7 @@
                             self.orderSummary.due.foreignerDeposit = 200.00;
                             self.updateSummary();
                         }
-                    } else if (loginType == 'guest') {
+                    } else if (loginType == 'guest' || loginType == 'targetedPromo') {
                         if (!ywos.lsData.meta.isLoggedIn) {
                             isLoggedIn = false;
                             ywos.lsData.meta.customerDetails = {

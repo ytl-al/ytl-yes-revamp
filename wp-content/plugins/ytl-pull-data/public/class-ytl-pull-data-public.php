@@ -334,6 +334,8 @@ class Ytl_Pull_Data_Public
 		$this->ra_reg_create_yos_order();
 		$this->ra_reg_check_order_payment_status();
 		$this->ra_reg_get_order_by_order_display_id();
+		$this->ra_reg_tp_url_check();
+		$this->ra_reg_tp_update_has_purchased_flag();
 	}
 
 	public function ra_reg_add_to_cart()
@@ -523,9 +525,10 @@ class Ytl_Pull_Data_Public
 
 	public function generate_otp_for_login(WP_REST_Request $request)
 	{
-		$yes_id	= (trim($request['yes_number'])) ? $request['yes_number'] . '@YES.MY' : null;
-		$locale	= (trim($request['locale'])) ? $request['locale'] . '@YES.MY' : null;
-		return $this->ca_generate_otp_for_login($yes_id);
+		$yes_id	= (trim($request['yes_number'])) ? $request['yes_number'] : null;
+		$yes_id = ($yes_id != null && strpos(strtolower($yes_id), '@yes.my') !== false) ? $yes_id : $yes_id . '@YES.MY';
+		$locale	= (trim($request['locale'])) ? $request['locale'] : 'EN';
+		return $this->ca_generate_otp_for_login($yes_id, $locale);
 	}
 
 	public function ca_generate_otp_for_login($yes_id = null, $locale = 'EN')
@@ -564,7 +567,7 @@ class Ytl_Pull_Data_Public
 			'args' 		=> [
 				'yes_number'	=> [
 					'validate_callback'	=> function ($param, $request, $key) {
-						return is_numeric($param);
+						return is_string($param);
 					}
 				],
 				'password' 		=> [
@@ -583,7 +586,8 @@ class Ytl_Pull_Data_Public
 
 	public function login_basic(WP_REST_Request $request)
 	{
-		$yes_id 	= $request['yes_number'] . '@YES.MY';
+		$yes_id		= (trim($request['yes_number'])) ? $request['yes_number'] : null;
+		$yes_id 	= ($yes_id != null && strpos(strtolower($yes_id), '@yes.my') !== false) ? $yes_id : $yes_id . '@YES.MY';
 		$password	= $request['password'];
 		$auth_type 	= $request['auth_type'];
 		$locale 	= $request['locale'];
@@ -1319,6 +1323,85 @@ class Ytl_Pull_Data_Public
 		$row->yos_order_response = unserialize($row->yos_order_response);
 		$row->xpay_order_meta = unserialize($row->xpay_order_meta);
 		return $row;
+	}
+
+
+    /**
+     * Function to register the rest API for targeted promo url check
+     * 
+     * @since    1.1.0
+     */
+	public function ra_reg_tp_url_check() 
+	{
+		register_rest_route('ywos/v1', 'tp-url-check', array(
+			'methods'	=> 'POST',
+			'callback'	=> array($this, 'rest_tp_url_check')
+		));
+	}
+
+
+    /**
+     * Function to register callback for the rest API for targeted promo url check
+     * 
+	 * @param	 $promo_id		The Promo ID given from URL's last path
+	 * @param	 $unique_id 	The unique User ID given
+	 * 
+     * @since    1.1.0
+     */
+	public function rest_tp_url_check(WP_REST_Request $params) 
+	{
+		$promo_id = $params['promo_id'];
+		$unique_id = $params['unique_id'];
+		
+		$data = ywos_tp_url_check($promo_id, $unique_id);
+		if ($data) {
+			$response = new WP_REST_Response($data);
+			$response->set_status(200);
+			return $response;
+		} else {
+			return new WP_Error('error_tp_url_check', "Unique ID and Promo ID is not valid.", array('status' => 400));
+		}
+		return new WP_Error('error_tp_url_check', "There's an error validating the URL with the Unique ID and Promo ID provided.", array('status' => 400));
+	}
+
+
+    /**
+     * Function to register the rest API to update the has_purchased flag for targeted promo
+     * 
+     * @since    1.1.0
+     */
+	public function ra_reg_tp_update_has_purchased_flag() 
+	{
+		register_rest_route('ywos/v1', 'tp-update-purchase', array(
+			'methods' 	=> 'POST', 
+			'callback'	=> array($this, 'rest_tp_update_has_purchased_flag')
+		));
+	}
+
+
+    /**
+     * Function to register callback for the rest API to update the has_purchased flag for targeted promo
+     * 
+	 * @param	 $promo_id		The Promo ID given from URL's last path
+	 * @param	 $unique_id 	The unique User ID given
+	 * 
+     * @since    1.1.0
+     */
+	public function rest_tp_update_has_purchased_flag(WP_REST_Request $params) 
+	{
+		$promo_id = $params['promo_id'];
+		$unique_id = $params['unique_id'];
+		$yos_order_id = $params['yos_order_id'];
+		$yos_order_display_id = $params['yos_order_display_id'];
+
+		$data = ywos_tp_update_has_purchased_flag($promo_id, $unique_id, $yos_order_id, $yos_order_display_id);
+
+		if ($data) {
+			$response = new WP_REST_Response($data);
+			$response->set_status(200);
+			return $response;
+		}
+		return new WP_Error('error_tp_url_check', "Failed to update the has purchased flag by Unique ID and Promo ID provided.", array('status' => 400));
 	}
 
 	public function get_request_input($order_info = [], $input_name = '') 

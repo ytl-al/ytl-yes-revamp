@@ -507,6 +507,9 @@
                 paymentTimeout: false,
                 paymentResponse: null,
 
+                isTargetedPromo: false, 
+                tpMeta: {}, 
+
                 apiLocale: 'EN', 
                 pageText: {
                     strVerification: { 'en-US': 'Verification', 'ms-MY': 'Pengesahan', 'zh-hans': 'Verification' },
@@ -540,6 +543,8 @@
                     errorProcessingPayment: { 'en-US': "There's an error in processing your payment.<br />Please try again later.", 'ms-MY': 'Terdapat ralat dalam pemprosesan bayaran.<br />Sila cuba lagi kemudian.', 'zh-hans': "There's an error in processing your payment.<br />Please try again later." },
                     errorPaymentNotSuccessful: { 'en-US': 'Your payment is not successful.<br />Please try again.', 'ms-MY': 'Pembayaran anda tidak berjaya.<br />Sila cuba lagi kemudian.', 'zh-hans': 'Your payment is not successful.<br />Please try again.' },
                     errorPaymentExceed: { 'en-US': 'You have exceeds the time for payment window. Please try again.', 'ms-MY': 'Anda telah melebihi waktu pembayaran. Sila cuba lagi.', 'zh-hans': 'You have exceeds the time for payment window. Please try again.' },
+                    errorPromoLinkExpired: { 'en-US': 'Your unique link is expired as it is already been used for purchase.<br />You may reach out to Yes for more information.', 'ms-MY': 'Link unik anda telah tamat tempoh kerana ia telah digunakan untuk pembelian.<br />Sila hubungi Yes untuk tahu lebih lanjut.', 'zh-hans': 'Your unique link is expired as it is already been used for purchase.<br />You may reach out to Yes for more information.' },
+                    errorPromoLinkError: { 'en-US': 'Cannot verify your promo link. Please try again.', 'ms-MY': 'Promo link anda tidak dapat disahkan. Sila cuba lagi.', 'zh-hans': 'Cannot verify your promo link. Please try again.' },
                     modalErrorPaymentTitle: { 'en-US': 'Payment Error', 'ms-MY': 'Ralat Pembayaran', 'zh-hans': 'Payment Error' },
                     modalErrorTitle: { 'en-US': 'Error', 'ms-MY': 'Ralat', 'zh-hans': 'Error' },
                 }
@@ -568,6 +573,9 @@
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
                         self.ajaxGetFPXBankList();
                         self.updateData();
+
+                        self.isTargetedPromo = ywos.lsData.isTargetedPromo;
+                        self.tpMeta = ywos.lsData.tpMeta;
                     } else {
                         ywos.redirectToPage('cart');
                     }
@@ -696,6 +704,9 @@
                             if (responseCode == 0) {                        // Payment success
                                 self.paymentResponse = data;
                                 closePaymentWindow = true;
+
+                                self.ajaxUpdateTPPurchasedFlag();
+                                
                                 setTimeout(function() {
                                     self.redirectThankYou(1);
                                 }, 2000);
@@ -861,8 +872,49 @@
                 }, 
                 paymentSubmit: function(e) {
                     toggleOverlay();
-                    this.ajaxCreateYOSOrder();
+                    var self = this;
+                    if (self.isTargetedPromo) {
+                        axios.post(apiEndpointURL + '/tp-url-check', {
+                                'promo_id': self.tpMeta.promoID, 
+                                'unique_id': self.tpMeta.userID 
+                            })
+                            .then((response) => {
+                                var data = response.data;
+                                if (data.has_purchased == '1') {
+                                    self.toggleModalAlert(self.renderText('modalErrorTitle'), self.renderText('errorPromoLinkExpired'));
+                                    toggleOverlay(false);
+                                } else {
+                                    self.ajaxCreateYOSOrder();
+                                }
+                            })
+                            .catch((error) => {
+                                self.toggleModalAlert(self.renderText('modalErrorTitle'), self.renderText('errorPromoLinkError'));
+                                toggleOverlay(false);
+                            });
+                    } else {
+                        self.ajaxCreateYOSOrder();
+                    }
                     e.preventDefault();
+                },
+                ajaxUpdateTPPurchasedFlag: function() {
+                    var self = this;
+                    if (self.isTargetedPromo) {
+                        axios.post(apiEndpointURL + '/tp-update-purchase', {
+                                'promo_id': self.tpMeta.promoID, 
+                                'unique_id': self.tpMeta.userID, 
+                                'yos_order_id': self.orderResponse.orderNumber, 
+                                'yos_order_display_id': self.orderResponse.displayOrderNumber
+                            })
+                            .then((response) => {
+                                // console.log(response);
+                            })
+                            .catch((error) => {
+                                // console.log(error);
+                            })
+                            .finally(() => {
+                                // console.log('finally');
+                            });
+                    }
                 },
                 redirectThankYou: function(paymentStatus) {
                     var self = this;
@@ -956,9 +1008,9 @@
                         if (
                             self.paymentInfo.nameOnCard.trim() == '' || 
                             self.paymentInfo.cardNumber.trim() == '' || 
-                            self.paymentInfo.cardExpiryMonth.trim() == '' ||
+                            self.paymentInfo.cardExpiryMonth.trim().length < 2 ||
                             self.paymentInfo.cardExpiryYear.trim().length < 4 ||
-                            self.paymentInfo.cardCVV.trim() == ''
+                            self.paymentInfo.cardCVV.trim().length < 3
                         ) {
                             isFilled = false;
                         }
