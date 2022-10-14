@@ -261,7 +261,10 @@ if (!function_exists('generate_store_locations')) {
         }
 
         $html_list  = '';
-
+        if( isset($arr_list['KUALA LUMPUR']) ) {
+            $new_value = $arr_list['KUALA LUMPUR'];
+            $arr_list = array_merge(["KUALA LUMPUR"=>$new_value], $arr_list);
+        }
         foreach ($arr_list as $state => $stores) {
             $state_name     = ucwords(strtolower($state));
             $html_list      .= '            <div class="col-12 mb-4 layer-state" data-state="' . strtolower($state) . '">
@@ -408,6 +411,7 @@ if (!function_exists('generate_store_locations')) {
                                                                     <li><div class="form-check"><label><input class="cardCheckBox store-type" type="checkbox" value="yes-service-store" data-storetype="Yes Store & Service Centre" checked /> <span>Yes Stores & Service Centre</span></label></div></li>
                                                                     <li><div class="form-check"><label><input class="cardCheckBox store-type" type="checkbox" value="dealer-mynews" data-storetype="Dealer MyNews" checked /> <span>Dealer MyNews</span></label></div></li>
                                                                     <li><div class="form-check"><label><input class="cardCheckBox store-type" type="checkbox" value="oem-stores" data-storetype="OEM Stores" checked /> <span>OEM Stores</span></label></div></li>
+                                                                    <li><div class="form-check"><label><input class="cardCheckBox store-type" type="checkbox" value="yes-experience-stores" data-storetype="Yes Experience Stores" checked /> <span>Yes Experience Stores</span></label></div></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
