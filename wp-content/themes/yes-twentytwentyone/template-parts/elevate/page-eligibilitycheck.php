@@ -350,7 +350,7 @@
                         email:self.eligibility.email,
                     };
                     toggleOverlay();
-                    $('#status_mesage').html('Checking compAsia...');
+                    // $('#status_mesage').html('Checking compAsia...');
                     axios.post(apiEndpointURL_elevate + '/verify-caeligibility', params)
                         .then((response) => {
 

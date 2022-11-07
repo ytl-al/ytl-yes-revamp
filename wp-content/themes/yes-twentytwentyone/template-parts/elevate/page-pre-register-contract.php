@@ -137,8 +137,7 @@
 
                                     <ol>
                                         <li><strong>The Service Plan.<br>
-                                        </strong>The Yes Infinite+ Postpaid Service Plans Programme is a time limited programme (“<strong>Programme</strong>”) launched by YTL Communications Sdn Bhd (Company No. 200701035605(793634-V)) (“<strong>YTLC</strong>”) in collaboration with CompAsia
-                                            Sdn Bhd (Company No. 201201022161 (1006653-T)) (“<strong>CompAsia</strong>”) and Terra Optimus Pearl Sdn Bhd (Company No. 201401027003 (1103093-X)) (“<strong>TOP</strong>”).<br> YTLC, CompAsia and TOP may be referred to collectively as “<strong>Parties</strong>”.<br>        1.2&nbsp; By Your subscription or use of any of the Yes Infinite+ Postpaid Service Plans (as defined below) You acknowledge that You understand the terms and conditions contained herein (“<strong>Yes Infinite+ T&amp;Cs</strong>” and agree to abide
+                                        </strong>The Yes Infinite+ Postpaid Service Plans Programme is a time limited programme (“<strong>Programme</strong>”) launched by YTL Communications Sdn Bhd (Company No. 200701035605(793634-V)) (“<strong>YTLC</strong>”). YTLC may be referred to collectively as “<strong>Parties</strong>”.<br>        1.1&nbsp; By Your subscription or use of any of the Yes Infinite+ Postpaid Service Plans (as defined below) You acknowledge that You understand the terms and conditions contained herein (“<strong>Yes Infinite+ T&amp;Cs</strong>” and agree to abide
                                             by them.</li>
                                         <li>This Programme is open to all individuals who are Malaysian citizens and satisfies the following pre-conditions:<br> 2.1 individuals between the ages of 18 and 65 years at the time of subscription to the Yes Infinite+ Postpaid Service Plan;<br> 2.2
                                             in possession of a valid MyKad or MyTentera; and<br> 2.3 successfully pass the credit check process.
@@ -171,9 +170,7 @@
                                             Service Plans made available by YTLC @ <a href="https://www.yes.my/">yes.my</a>, for subscription.
                                             <p></p>
                                             <p>6.2 All Eligible Subscribers are bound by the following terms and conditions:-<br> (a) Yes Infinite+ T&amp;Cs available @ <a href="https://www.yes.my/docs/tnc/">https://www.yes.my/docs/tnc/</a> on the subscription of any of the Yes Infinite+ Postpaid
-                                                Service Plan;<br> (b) <span style="color: initial;">TOP’s Device Rental Agreement Terms and Conditions;</span></p>
-                                            <p>(c) YTL’s Group Privacy Privacy available @ <a href="https://www.ytl.com/privacypolicy.asp">https://www.ytl.com/privacypolicy.asp</a>;<br> (d) TOP’s Privacy Notice available @ <a href="_wp_link_placeholder" data-wplink-edit="true">http://yes.compasia.com/TOP_PRIVACY_POLICY.PDF</a>;
-                                                and<br> (e) CompAsia’s Privacy Policy available @ <a href="https://shop.compasia.com/pages/privacy-policy">https://shop.compasia.com/pages/privacy-policy</a></p>
+                                                Service Plan;<br> (b) YTL’s Group Privacy Privacy available @ <a href="https://www.ytl.com/privacypolicy.asp">https://www.ytl.com/privacypolicy.asp</a>;</p>
                                         </li>
                                         <li><strong>Yes Infinite+ Postpaid Service Plans &amp; Service Offerings<br>
                                         </strong><strong>Yes Infinite+ Postpaid Service Plans<br>
@@ -327,7 +324,7 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <p>*<span style="font-style: normal !msorm;"><em>Subject to TOP’s Device Rental Agreement and </em></span><span style="font-style: normal !msorm;"><em>successful completion of </em></span><span style="font-style: normal !msorm;"><em>the Contract Period</em></span>
+                                            <p>
                                                 <span
                                                     style="font-style: normal !msorm;"><em>. </em></span>.</p>
                                             <p>7.4 An Eligible Subscriber is entitled to register one (1) Yes Infinite+ Postpaid Service Plan only per valid MyKad or MyTentera, provided that he/she does not have, in aggregate, more than six (6) Postpaid Service accounts with YTLC.</p>
