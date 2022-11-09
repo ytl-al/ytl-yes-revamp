@@ -42,7 +42,12 @@ const ywos = {
         var siteLang = document.getElementsByTagName('html')[0].getAttribute('lang');
         var url_string = window.location.href;
         var url = new URL(url_string);
-        var refCode = url.searchParams.get('rc');
+        var refCode = '';
+        if (url.searchParams.get('rc') != null) {
+            refCode = url.searchParams.get('rc');
+        } else if (url.searchParams.get('referralCode') != null) {
+            refCode = url.searchParams.get('referralCode');
+        }
 
         storageData = {
             'expiry': ywosCartExpiry,
