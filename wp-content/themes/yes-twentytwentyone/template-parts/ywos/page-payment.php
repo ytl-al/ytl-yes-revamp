@@ -22,11 +22,11 @@
         margin-right: 30px;
     }
 
-    #cart-body .listing-quickSelectBanks li.nav-item { cursor: pointer; margin-right: 10px; max-width: 60px; text-align: center; }
-    .listing-quickSelectBanks li.nav-item .img-quickSelectBank { border: 1px solid #D9D9D9; border-radius: 4px; box-shadow: 2px 2px 12px rgb(112 144 176 / 25%); margin: 0 0 10px; padding: 3px; }
-    .listing-quickSelectBanks li.nav-item.selected .img-quickSelectBank { border-color: rgb(61, 140, 255); }
-    .listing-quickSelectBanks li.nav-item img { height: 44px; margin: 0 auto; width: 44px; }
-    .listing-quickSelectBanks li.nav-item span { display: inline-block; font-size: 11px; line-height: 12px; }
+    #cart-body .listing-quickSelectBanks li.nav-item,#cart-body .listing-quickSelectWallets li.nav-item { cursor: pointer; margin-right: 10px; max-width: 60px; text-align: center; }
+    .listing-quickSelectBanks li.nav-item .img-quickSelectBank, .listing-quickSelectWallets li.nav-item .img-quickSelectWallets { border: 1px solid #D9D9D9; border-radius: 4px; box-shadow: 2px 2px 12px rgb(112 144 176 / 25%); margin: 0 0 10px; padding: 3px; }
+    .listing-quickSelectBanks li.nav-item.selected .img-quickSelectBank, .listing-quickSelectWallets li.nav-item.selected .img-quickSelectWallets { border-color: rgb(61, 140, 255); }
+    .listing-quickSelectBanks li.nav-item img, .listing-quickSelectWallets li.nav-item img { height: 44px; margin: 0 auto; width: 44px; }
+    .listing-quickSelectBanks li.nav-item span, .listing-quickSelectWallets li.nav-item span { display: inline-block; font-size: 11px; line-height: 12px; }
 
     @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
         #cart-body .nav-pills .nav-item {
@@ -238,7 +238,7 @@
                                     <div class="row mb-4">
                                         <div class="col-lg-6">
                                             <ul class="nav nav-pills listing-quickSelectWallets">
-                                                <li class="nav-item" v-for="quickSelectWallet in rmWallets" v-on:click="selectWallet(quickSelectWallet.eWalletMethodCode, event)"><div class="img-quickSelectWallet"><img width="52" src="/wp-content/uploads/2022/11/TouchNGoLogo.png" :alt="quickSelectWallet.eWalletMethodName" :title="quickSelectWallet.eWalletMethodName" /></div><span>{{ quickSelectWallet.eWalletMethodName }}</span></li>
+                                                <li class="nav-item" v-for="quickSelectWallet in rmWallets" v-on:click="selectWallet(quickSelectWallet.eWalletMethodCode, event)"><div class="img-quickSelectWallet"><img width="52" :src="quickSelectWallet.eWalletLogoUrl" :alt="quickSelectWallet.eWalletMethodName" :title="quickSelectWallet.eWalletMethodName" /></div><span>{{ quickSelectWallet.eWalletMethodName }}</span></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -579,8 +579,16 @@
                     .then((response) => {
                         var data = response?.data?.rmEwalletList;
                         if(data) {
+                            data.forEach((list, index) => {
+                                if( list['eWalletMethodCode'] == 'GRABPAY_MY' ) {
+                                    data[index].eWalletLogoUrl = '/wp-content/uploads/2022/11/GrabPayLogo.png'
+                                }else if( list['eWalletMethodCode'] == 'SHOPEEPAY_MY' ) {
+                                    data[index].eWalletLogoUrl = '/wp-content/uploads/2022/11/shopeePayLogo.png';
+                                }else if( list['eWalletMethodCode'] == 'TNG_MY' ) {
+                                    data[index].eWalletLogoUrl = '/wp-content/uploads/2022/11/TouchNGoLogo.png';
+                                }
+                            });
                             self.rmWallets = data;
-                            console.log(self.rmWallets);
                         }
                     })
                     .catch((error) => {
