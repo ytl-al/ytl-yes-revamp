@@ -23,8 +23,8 @@
     }
 
     #cart-body .listing-quickSelectBanks li.nav-item,#cart-body .listing-quickSelectWallets li.nav-item { cursor: pointer; margin-right: 10px; max-width: 60px; text-align: center; }
-    .listing-quickSelectBanks li.nav-item .img-quickSelectBank, .listing-quickSelectWallets li.nav-item .img-quickSelectWallets { border: 1px solid #D9D9D9; border-radius: 4px; box-shadow: 2px 2px 12px rgb(112 144 176 / 25%); margin: 0 0 10px; padding: 3px; }
-    .listing-quickSelectBanks li.nav-item.selected .img-quickSelectBank, .listing-quickSelectWallets li.nav-item.selected .img-quickSelectWallets { border-color: rgb(61, 140, 255); }
+    .listing-quickSelectBanks li.nav-item .img-quickSelectBank, .listing-quickSelectWallets li.nav-item .img-quickSelectWallet { border: 1px solid #D9D9D9; border-radius: 4px; box-shadow: 2px 2px 12px rgb(112 144 176 / 25%); margin: 0 0 10px; padding: 3px; }
+    .listing-quickSelectBanks li.nav-item.selected .img-quickSelectBank, .listing-quickSelectWallets li.nav-item.selected .img-quickSelectWallet { border-color: rgb(61, 140, 255); }
     .listing-quickSelectBanks li.nav-item img, .listing-quickSelectWallets li.nav-item img { height: 44px; margin: 0 auto; width: 44px; }
     .listing-quickSelectBanks li.nav-item span, .listing-quickSelectWallets li.nav-item span { display: inline-block; font-size: 11px; line-height: 12px; }
 
@@ -840,11 +840,11 @@
                     
                     mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
                     
-                    // setTimeout(function() {
-                    //     self.paymentTimeout = false;
-                    //     self.checkPaymentStatusCount = 0;
-                    //     self.ajaxCheckOrderPaymentStatus(timeoutObject);
-                    // }, 10000);
+                    setTimeout(function() {
+                        self.paymentTimeout = false;
+                        self.checkPaymentStatusCount = 0;
+                        self.ajaxCheckOrderPaymentStatus(timeoutObject);
+                    }, 10000);
                 }, 
                 ajaxCreateYOSOrder: function() {
                     var self = this;
@@ -995,7 +995,7 @@
                 }, 
                 selectWallet: function(wallet, event) {
                     var self = this;
-                    $('.listing-quickSelectBanks .nav-item').removeClass('selected');
+                    $('.listing-quickSelectWallets .nav-item').removeClass('selected');
                     $(event.currentTarget).addClass('selected');
                     self.paymentInfo.walletType = wallet;
                     self.watchWalletSelect();
