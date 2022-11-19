@@ -267,6 +267,7 @@ class Ytl_Pull_Data_Public
 		$this->path_get_fpx_bank_list 		= '/mobileyos/mobile/ws/v1/json/getFpxBankList';
 		$this->path_create_yos_order_and_payment = '/mobileyos/mobile/ws/v1/json/createYOSOrderAndPaymentWithAddonAndReloads';
 		$this->path_check_order_payment_status 	 = '/mobileyos/mobile/ws/v1/json/orderPaymentStatus';
+		$this->path_get_rm_wallet_merchant 	 = '/mobileyos/mobile/ws/v1/json/getRMEwalletList';
 		$this->path_get_ipp_tenure_details		 = '/mobileyos/mobile/ws/v1/json/getIPPTenureDetails';
 		$this->path_get_ipp_monthly_installment  = '/mobileyos/mobile/ws/v1/json/getIPPMonthlyInstalment';
         $this->get_all_plans_with_addons_path = '/mobileyos/mobile/ws/v1/json/getAllPlansWithAddons';
@@ -342,6 +343,7 @@ class Ytl_Pull_Data_Public
 		$this->ra_reg_get_ipp_tenures();
 		$this->ra_reg_get_ipp_monthly_installments();
 		$this->ra_reg_create_yos_order();
+		$this->ra_reg_get_wallet_rm_merchant();
 		$this->ra_reg_check_order_payment_status();
 		$this->ra_reg_get_order_by_order_display_id();
 		$this->ra_reg_tp_url_check();
@@ -1186,7 +1188,8 @@ class Ytl_Pull_Data_Public
 		$locale 		= $this->get_request_input($order_info, 'locale');
 
 		$session_id 	= $this->ca_generate_auth_token(true);
-
+		$walletType		= $this->get_request_input($order_info, 'walletType');
+		
 		if (
 			$phone_number != null && $customer_name != null && $dob != null && $gender != null && $email != null && $security_type != null && $security_id != null &&
 			$plan_name != null && $plan_type != null && $product_bundle_id != null && 
@@ -1194,6 +1197,7 @@ class Ytl_Pull_Data_Public
 			$payment_method != null && $process_name != null && $amount != null && $amount_sst != null && $total_amount != null && 
 			(
 				($payment_method == 'FPX' && ($bank_code != null && $bank_name != null)) || 
+				($payment_method == 'REVENUE_M_WEB' && ($walletType != null )) || 
 				($payment_method == 'CREDIT_CARD' && ($card_number != null && $card_type != null && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null)) || 
 				($payment_method == 'CREDIT_CARD_IPP' && ($card_number != null && $card_type != null && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null && $ippType != null))
 			) &&
@@ -1238,22 +1242,23 @@ class Ytl_Pull_Data_Public
 				], 
 				
 				'paymentInfo' 			=> [
-					'paymentMethod' 	=> $payment_method, 
-					'processName' 		=> $process_name, 
-					'amount' 			=> $amount, 
-					'sst' 				=> $amount_sst, 
-					'totalAmount' 		=> $total_amount, 
-					'bankCode' 			=> $bank_code, 
-					'bankName' 			=> $bank_name, 
-					'cardNumber' 		=> $card_number, 
-					'cardType' 			=> $card_type, 
-					'nameOnCard' 		=> $name_on_card, 
-					'cardCVV' 			=> $card_cvv, 
-					'cardExpiryMonth' 	=> $card_expiry_month, 
-					'cardExpiryYear' 	=> $card_expiry_year, 
-					'ippType' 			=> $ippType, 
-					'isAutoSubscribe' 	=> false, 
-					'isSavedCard' 		=> false 
+					'paymentMethod' 	=> $payment_method,
+					'processName' 		=> $process_name,
+					'amount' 			=> $amount,
+					'sst' 				=> $amount_sst,
+					'totalAmount' 		=> $total_amount,
+					'bankCode' 			=> $bank_code,
+					'bankName' 			=> $bank_name,
+					'cardNumber' 		=> $card_number,
+					'cardType' 			=> $card_type,
+					'nameOnCard' 		=> $name_on_card,
+					'cardCVV' 			=> $card_cvv,
+					'cardExpiryMonth' 	=> $card_expiry_month,
+					'cardExpiryYear' 	=> $card_expiry_year,
+					'ippType' 			=> $ippType,
+					'isAutoSubscribe' 	=> false,
+					'isSavedCard' 		=> false,
+					'ewalletType'       => $walletType
 				], 
 
 				'appVersion' 			=> $this->api_app_version,
@@ -1269,11 +1274,12 @@ class Ytl_Pull_Data_Public
 				'data_format'   => 'body',
 				'timeout'     	=> $this->api_timeout
 			];
-			$api_url 	= $this->api_domain . $this->path_create_yos_order_and_payment;
-			$request 	= wp_remote_post($api_url, $args);
-			$data 		= json_decode($request['body']);
+			
+			$api_url 		= $this->api_domain . $this->path_create_yos_order_and_payment;
+			$request 		= wp_remote_post($api_url, $args);
+			$data 			= json_decode($request['body']);
+			$yos_order_meta = $params;
 
-			$yos_order_meta 		= $params;
 			unset($yos_order_meta['sessionId']);
 			unset($yos_order_meta['paymentInfo']['bankCode']);
 			unset($yos_order_meta['paymentInfo']['bankName']);
@@ -1283,11 +1289,13 @@ class Ytl_Pull_Data_Public
 			unset($yos_order_meta['paymentInfo']['cardCVV']);
 			unset($yos_order_meta['paymentInfo']['cardExpiryMonth']);
 			unset($yos_order_meta['paymentInfo']['cardExpiryYear']);
+
 			$yos_order_id 			= $data->orderNumber;
 			$yos_order_display_id	= $data->displayOrderNumber;
 			$xpay_order_id 			= $data->xpayOrderId;
 			$yos_order_response 	= $data;
 			$yos_order_response_display = $data->displayResponseMessage;
+			
 			$this->record_new_order($session_key, $phone_number, $product_bundle_id, $yos_order_meta, $yos_order_id, $yos_order_display_id, $xpay_order_id, $yos_order_response, $yos_order_response_display);
 			
 			if ($data->responseCode > -1) {
@@ -1303,6 +1311,45 @@ class Ytl_Pull_Data_Public
 			return new WP_Error('error_creating_yos_order', "Parameters not complete to create YOS order.", array('status' => 400));
 		}
 		return new WP_Error('error_creating_yos_order', "There's an error in creating YOS order.", array('status' => 400));
+	}
+
+	
+	public function ra_reg_get_wallet_rm_merchant()
+	{
+		register_rest_route('ywos/v1', 'get-rm-wallet-merchant', array(
+			'methods'	=> 'GET', 
+			'callback' 	=> array($this, 'get_wallet_rm_merchant')
+		));
+	}
+
+	public function get_wallet_rm_merchant(WP_REST_Request $order_info) 
+	{
+		return $this->ca_get_wallet_rm_merchant($order_info);
+	}
+
+	function ca_get_wallet_rm_merchant( $order_info ) {
+		$session_id 	= $this->ca_generate_auth_token(true);
+		$params = ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'sessionId' => $session_id];
+		$args 	= [
+			'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
+			'body'          => json_encode($params),
+			'method'        => 'POST',
+			'data_format'   => 'body',
+			'timeout'     	=> $this->api_timeout
+		];
+		$api_url	= $this->api_domain . $this->path_get_rm_wallet_merchant;
+		$request 	= wp_remote_post($api_url, $args);
+		$data 		= json_decode($request['body']);
+
+		if (is_wp_error($request)) {
+			return new WP_Error('error_getting_rm_wallet_list', $data, array('status' => 400));
+		} else {
+			$data->sessionId = $session_id;
+			$response	= new WP_REST_Response($data);
+			$response->set_status(200);
+			return $response;
+		}
+		return new WP_Error('error_getting_rm_wallet_list', "There's an error in Getting RM Wallet list.", array('status' => 400));
 	}
 
 	public function ra_reg_check_order_payment_status() 

@@ -22,11 +22,11 @@
         margin-right: 30px;
     }
 
-    #cart-body .listing-quickSelectBanks li.nav-item { cursor: pointer; margin-right: 10px; max-width: 60px; text-align: center; }
-    .listing-quickSelectBanks li.nav-item .img-quickSelectBank { border: 1px solid #D9D9D9; border-radius: 4px; box-shadow: 2px 2px 12px rgb(112 144 176 / 25%); margin: 0 0 10px; padding: 3px; }
-    .listing-quickSelectBanks li.nav-item.selected .img-quickSelectBank { border-color: rgb(61, 140, 255); }
-    .listing-quickSelectBanks li.nav-item img { height: 44px; margin: 0 auto; width: 44px; }
-    .listing-quickSelectBanks li.nav-item span { display: inline-block; font-size: 11px; line-height: 12px; }
+    #cart-body .listing-quickSelectBanks li.nav-item,#cart-body .listing-quickSelectWallets li.nav-item { cursor: pointer; margin-right: 10px; max-width: 60px; text-align: center; }
+    .listing-quickSelectBanks li.nav-item .img-quickSelectBank, .listing-quickSelectWallets li.nav-item .img-quickSelectWallet { border: 1px solid #D9D9D9; border-radius: 4px; box-shadow: 2px 2px 12px rgb(112 144 176 / 25%); margin: 0 0 10px; padding: 3px; }
+    .listing-quickSelectBanks li.nav-item.selected .img-quickSelectBank, .listing-quickSelectWallets li.nav-item.selected .img-quickSelectWallet { border-color: rgb(61, 140, 255); }
+    .listing-quickSelectBanks li.nav-item img, .listing-quickSelectWallets li.nav-item img { height: 44px; margin: 0 auto; width: 44px; }
+    .listing-quickSelectBanks li.nav-item span, .listing-quickSelectWallets li.nav-item span { display: inline-block; font-size: 11px; line-height: 12px; }
 
     @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
         #cart-body .nav-pills .nav-item {
@@ -98,6 +98,11 @@
                             <li class="nav-item" role="presentation">
                                 <button type="button" class="nav-link" id="nav-fpx" role="tab" data-paymentnav="FPX" data-bs-toggle="pill" data-bs-target="#tab-fpx" aria-controls="tab-fpx" aria-selected="false" v-on:click="selectPaymentMethod('FPX')">
                                     <img src="/wp-content/uploads/2022/02/fpx-logo.png" />
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button type="button" class="nav-link" id="nav-rm" role="tab" data-paymentnav="RM" data-bs-toggle="pill" data-bs-target="#tab-rm" aria-controls="tab-fpx" aria-selected="false" v-on:click="selectPaymentMethod('REVENUE_M_WEB')">
+                                    <img src="/wp-content/uploads/2022/11/rm-logo.png" />
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation" v-if="!maybankIPP.disabled">
@@ -207,7 +212,7 @@
                                     <div class="row mb-4">
                                         <div class="col-lg-6">
                                             <ul class="nav nav-pills listing-quickSelectBanks">
-                                                <li class="nav-item" v-for="quickSelectBank in quickSelectBanks" v-on:click="selectBank(quickSelectBank.value, event)"><div class="img-quickSelectBank"><img :src="quickSelectBank.imgSrc" alt="{{ quickSelectBank.name }}" title="{{ quickSelectBank.name }}" /></div><span>{{ quickSelectBank.name }}</span></li>
+                                                <li class="nav-item" v-for="quickSelectBank in quickSelectBanks" v-on:click="selectBank(quickSelectBank.value, event)"><div class="img-quickSelectBank"><img :src="quickSelectBank.imgSrc" :alt="quickSelectBank.name" :title="quickSelectBank.name" /></div><span>{{ quickSelectBank.name }}</span></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -219,6 +224,22 @@
                                                     <option v-for="fpxBank in fpxBankList" :value="fpxBank.bankCode" :disabled="!fpxBank.available" :data-bankname="fpxBank.bankName">{{ fpxBank.bankName }}</option>
                                                 </select>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab-rm" role="tabpanel" aria-labelledby="nav-rm">
+                                <div class="tab-paneContent">
+                                    <div class="row mb-4">
+                                        <div class="col-lg-6">
+                                            <h4 class="my-3">{{ renderText('strPaymentTypeRM') }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-lg-6">
+                                            <ul class="nav nav-pills listing-quickSelectWallets">
+                                                <li class="nav-item" v-for="quickSelectWallet in rmWallets" v-on:click="selectWallet(quickSelectWallet.eWalletMethodCode, event)"><div class="img-quickSelectWallet"><img width="52" :src="quickSelectWallet.eWalletLogoUrl" :alt="quickSelectWallet.eWalletMethodName" :title="quickSelectWallet.eWalletMethodName" /></div><span>{{ quickSelectWallet.eWalletMethodName }}</span></li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -343,6 +364,7 @@
                     { value: "standard-chartered", name: "Standard Chartered", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/standard-chartered.png", quickSelect: false }, 
                     { value: "uob-bank", name: "UOB Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/uob.png", quickSelect: false } 
                 ],
+                rmWallets: [],
                 fpxBankList: [],
                 cardholder: {
                     number1: '', 
@@ -535,6 +557,7 @@
                     labelCardExpiry: { 'en-US': 'Exp Date', 'ms-MY': 'Tarikh Luput', 'zh-hans': 'Exp Date' },
 
                     strPaymentTypeFPX: { 'en-US': 'Online Banking (FPX)', 'ms-MY': 'Perbankan Dalam Talian (FPX)', 'zh-hans': 'Online Banking (FPX)' },
+                    strPaymentTypeRM: { 'en-US': 'E-Wallet', 'ms-MY': 'E-Wallet', 'zh-hans': 'E-Wallet' },
                     selectSelectBank: { 'en-US': 'Select a Bank', 'ms-MY': 'Pilih Bank', 'zh-hans': 'Select a Bank' },
 
                     strBtnPay: { 'en-US': 'Pay', 'ms-MY': 'Bayar', 'zh-hans': 'Pay' },
@@ -552,12 +575,39 @@
             mounted: function() {},
             created: function() {
                 var self = this;
+                axios.get(apiEndpointURL + '/get-rm-wallet-merchant')
+                    .then((response) => {
+                        var data = response?.data?.rmEwalletList;
+                        if(data) {
+                            data.forEach((list, index) => {
+                                if( list['eWalletMethodCode'] == 'GRABPAY_MY' ) {
+                                    data[index].eWalletLogoUrl = '/wp-content/uploads/2022/11/GrabPayLogo.png'
+                                }else if( list['eWalletMethodCode'] == 'SHOPEEPAY_MY' ) {
+                                    data[index].eWalletLogoUrl = '/wp-content/uploads/2022/11/shopeePayLogo.png';
+                                }else if( list['eWalletMethodCode'] == 'TNG_MY' ) {
+                                    data[index].eWalletLogoUrl = '/wp-content/uploads/2022/11/TouchNGoLogo.png';
+                                }
+                            });
+                            self.rmWallets = data;
+                        }
+                    })
+                    .catch((error) => {
+                        console.log('error',error);
+                    });
                 setTimeout(function() {
                     self.pageInit();
                 }, 500);
                 self.initTabs();
             },
             computed: {
+
+                quickSelectWallets: function() {
+                   
+                    console.log('hello',this.rmWallets);
+                    return this.rmWallets.filter(function(wallet) {
+                        return wallet.quickSelect
+                    })
+                },
                 quickSelectBanks: function() {
                     return this.fpxBanks.filter(function(bank) {
                         return bank.quickSelect
@@ -579,6 +629,8 @@
                     } else {
                         ywos.redirectToPage('cart');
                     }
+
+                    
                 },
                 ajaxGetFPXBankList: function() {
                     var self = this;
@@ -771,7 +823,7 @@
                     var self = this;
                     var xpayOrderId = self.orderResponse.xpayOrderId;
                     var encryptedValue = self.orderResponse.encryptedValue;
-
+                    
                     var timeoutObject = setTimeout(function() {
                         if (mainwin != null && !mainwin.closed) {
                             mainwin.focus();
@@ -785,7 +837,7 @@
                         toggleOverlay(false);
                         self.toggleModalAlert(self.renderText('modalErrorPaymentTitle'), self.renderText('errorPaymentExceed'));
                     }, 360000);
-
+                    
                     mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
                     
                     setTimeout(function() {
@@ -797,51 +849,51 @@
                 ajaxCreateYOSOrder: function() {
                     var self = this;
                     var params = {
-                        'session_key'   : ywos.lsData.sessionKey, 
+                        'session_key'       : ywos.lsData.sessionKey, 
                         
-                        'phone_number'  : self.deliveryInfo.msisdn, 
-                        'customer_name' : self.deliveryInfo.name, 
-                        'dob'           : self.deliveryInfo.dob, 
-                        'gender'        : self.deliveryInfo.gender, 
-                        'email'         : self.deliveryInfo.email,
-                        'login_yes_id'  : '', 
-                        'security_type' : self.deliveryInfo.securityType, 
-                        'security_id'   : self.deliveryInfo.securityId,
-                        'school_name'   : '', 
-                        'school_code'   : '', 
+                        'phone_number'      : self.deliveryInfo.msisdn, 
+                        'customer_name'     : self.deliveryInfo.name, 
+                        'dob'               : self.deliveryInfo.dob, 
+                        'gender'            : self.deliveryInfo.gender, 
+                        'email'             : self.deliveryInfo.email,
+                        'login_yes_id'      : '', 
+                        'security_type'     : self.deliveryInfo.securityType, 
+                        'security_id'       : self.deliveryInfo.securityId,
+                        'school_name'       : '', 
+                        'school_code'       : '', 
                         'university_name'   : '', 
-                        'dealer_code'   : '', 
+                        'dealer_code'       : '', 
                         'dealer_login_id'   : '', 
 
-                        'plan_name'     : self.orderSummary.plan.planName, 
-                        'plan_type'     : self.orderSummary.plan.planType, 
+                        'plan_name'         : self.orderSummary.plan.planName, 
+                        'plan_type'         : self.orderSummary.plan.planType, 
                         'product_bundle_id' : self.orderSummary.plan.mobilePlanId, 
-                        'referral_code' : self.deliveryInfo.referralCode, 
-                        'addon_name'    : (self.orderSummary.addOn && self.orderSummary.addOn.addonName) ? self.orderSummary.addOn.addonName : '', 
+                        'referral_code'     : self.deliveryInfo.referralCode, 
+                        'addon_name'        : (self.orderSummary.addOn && self.orderSummary.addOn.addonName) ? self.orderSummary.addOn.addonName : '', 
 
-                        'address_line'  : self.deliveryInfo.sanitize.address + ' ' + self.deliveryInfo.sanitize.addressMore, 
-                        'city'          : self.deliveryInfo.city, 
-                        'city_code'     : self.deliveryInfo.cityCode, 
-                        'postal_code'   : self.deliveryInfo.postcode, 
-                        'state'         : self.deliveryInfo.state, 
-                        'state_code'    : self.deliveryInfo.stateCode, 
-                        'country'       : 'Malaysia', 
-
-                        'payment_method': self.paymentInfo.paymentMethod, 
-                        'process_name'  : self.paymentInfo.processName, 
-                        'amount'        : roundAmount(self.paymentInfo.amount, 2), 
-                        'amount_sst'    : roundAmount(self.paymentInfo.sst, 2), 
-                        'total_amount'  : roundAmount(self.paymentInfo.totalAmount, 2), 
-                        'bank_code'     : self.paymentInfo.bankCode, 
-                        'bank_name'     : self.paymentInfo.bankName, 
-                        'card_number'   : self.paymentInfo.cardNumber, 
-                        'card_type'     : self.paymentInfo.cardType, 
-                        'name_on_card'  : self.paymentInfo.nameOnCard, 
-                        'card_cvv'      : self.paymentInfo.cardCVV, 
+                        'address_line'      : self.deliveryInfo.sanitize.address + ' ' + self.deliveryInfo.sanitize.addressMore, 
+                        'city'              : self.deliveryInfo.city, 
+                        'city_code'         : self.deliveryInfo.cityCode, 
+                        'postal_code'       : self.deliveryInfo.postcode, 
+                        'state'             : self.deliveryInfo.state, 
+                        'state_code'        : self.deliveryInfo.stateCode, 
+                        'country'           : 'Malaysia', 
+                        'payment_method'    : self.paymentInfo.paymentMethod, 
+                        'process_name'      : self.paymentInfo.processName, 
+                        'amount'            : roundAmount(self.paymentInfo.amount, 2), 
+                        'amount_sst'        : roundAmount(self.paymentInfo.sst, 2), 
+                        'total_amount'      : roundAmount(self.paymentInfo.totalAmount, 2), 
+                        'bank_code'         : self.paymentInfo.bankCode, 
+                        'bank_name'         : self.paymentInfo.bankName, 
+                        'card_number'       : self.paymentInfo.cardNumber, 
+                        'card_type'         : self.paymentInfo.cardType, 
+                        'name_on_card'      : self.paymentInfo.nameOnCard, 
+                        'card_cvv'          : self.paymentInfo.cardCVV, 
                         'card_expiry_month' : self.paymentInfo.cardExpiryMonth, 
                         'card_expiry_year'  : self.paymentInfo.cardExpiryYear, 
-                        'ippType'       : self.paymentInfo.ippType, 
-                        'locale'        : self.apiLocale
+                        'ippType'           : self.paymentInfo.ippType, 
+                        'locale'            : self.apiLocale,
+                        'walletType'        : self.paymentInfo.walletType
                     };
                     axios.post(apiEndpointURL + '/create-yos-order', params)
                         .then((response) => {
@@ -941,6 +993,17 @@
                         $('#select-bank').selectpicker('refresh');
                     }, 100);
                 }, 
+                selectWallet: function(wallet, event) {
+                    var self = this;
+                    $('.listing-quickSelectWallets .nav-item').removeClass('selected');
+                    $(event.currentTarget).addClass('selected');
+                    self.paymentInfo.walletType = wallet;
+                    self.watchWalletSelect();
+                    setTimeout(function() {
+                        $('#select-bank').trigger('change');
+                        $('#select-bank').selectpicker('refresh');
+                    }, 100);
+                },
                 checkCardInputJump: function(inputStep, event) {
                     var self = this;
                     var objInd = 'number' + inputStep;
@@ -998,6 +1061,10 @@
                     }
                     self.watchAllowSubmit();
                 },
+                watchWalletSelect: function(e) {
+                    var self = this;
+                    self.watchAllowSubmit();
+                },
                 watchAllowSubmit: function() {
                     var self = this;
                     var isFilled = true;
@@ -1016,6 +1083,10 @@
                         }
                     } else if (paymentMethod == 'FPX') {
                         if (self.paymentInfo.bankCode.trim() == '' || self.paymentInfo.bankName.trim() == '') {
+                            isFilled = false;
+                        }
+                    }else if( paymentMethod == 'REVENUE_M_WEB' ) {
+                        if ( self.paymentInfo.walletType.trim() == '' ) {
                             isFilled = false;
                         }
                     }
