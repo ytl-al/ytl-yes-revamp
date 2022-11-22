@@ -101,7 +101,7 @@
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button type="button" class="nav-link" id="nav-rm" role="tab" data-paymentnav="RM" data-bs-toggle="pill" data-bs-target="#tab-rm" aria-controls="tab-fpx" aria-selected="false" v-on:click="selectPaymentMethod('REVENUE_M_WEB')">
+                                <button type="button" class="nav-link" id="nav-rm" role="tab" data-paymentnav="RM" data-bs-toggle="pill" data-bs-target="#tab-rm" aria-controls="tab-fpx" aria-selected="false" v-on:click="selectPaymentMethod('REVENUE_M_YOS')">
                                     <img src="/wp-content/uploads/2022/11/rm-logo.png" />
                                 </button>
                             </li>

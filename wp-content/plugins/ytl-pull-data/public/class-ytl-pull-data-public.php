@@ -1197,7 +1197,7 @@ class Ytl_Pull_Data_Public
 			$payment_method != null && $process_name != null && $amount != null && $amount_sst != null && $total_amount != null && 
 			(
 				($payment_method == 'FPX' && ($bank_code != null && $bank_name != null)) || 
-				($payment_method == 'REVENUE_M_WEB' && ($walletType != null )) || 
+				($payment_method == 'REVENUE_M_YOS' && ($walletType != null )) || 
 				($payment_method == 'CREDIT_CARD' && ($card_number != null && $card_type != null && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null)) || 
 				($payment_method == 'CREDIT_CARD_IPP' && ($card_number != null && $card_type != null && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null && $ippType != null))
 			) &&
