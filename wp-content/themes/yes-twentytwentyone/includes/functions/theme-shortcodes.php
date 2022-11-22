@@ -349,7 +349,7 @@ if (!function_exists('generate_store_locations')) {
 
         $html       = ' <!-- Store Locations Start -->
                         <section id="store-locations">
-                            <div class="filter-container sticky-top" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                            <div class="filter-container" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                                 <div class="layer-storeLocatorFilter">
                                     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>'. esc_html__('Filter', 'yes.my') .'</span> <span class="navbar-toggler-icon"></span></button>
                                     <div class="navbar-collapse tab-content collapse justify-content-center" id="tab-storeLocatorFilter">
@@ -649,7 +649,7 @@ if (!function_exists('generate_roadshow')) {
 
         $html       = ' <!-- Section List STARTS -->
                         <section class="layer-section" id="section-list">
-                            <div class="layer-filter filter-container sticky-top" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                            <div class="layer-filter filter-container" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                                 <div class="layer-filterToggle">
                                     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>'. esc_html__('Filter', 'yes.my') .'</span> <span class="navbar-toggler-icon"></span></button>
                                     <div class="navbar-collapse tab-content collapse justify-content-center" id="tab-storeLocatorFilter">

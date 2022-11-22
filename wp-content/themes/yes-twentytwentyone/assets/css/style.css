@@ -1,7 +1,7 @@
 /*
     Stylesheet Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : July      15, 2022, 03:52:31 PM
+    Last edited on  : November  22, 2022, 03:52:31 PM
     Author          : [YTL Digital Design] - Zeeshan, AL
 */
 
@@ -1253,7 +1253,7 @@ section {
 /* Added by AL - START */
 
 .layer-page {
-    overflow: hidden;
+    overflow: unset;
 }
 
 .bg-blueYes {
@@ -1568,3 +1568,12 @@ body.show-overlay .layer-overlay {
 }
 
 .page-header .navbar .dropdown-menu { z-index: 1030; }
+.page-header.sticky-top { z-index: 1030; }
+body.page-scrolled .page-header.sticky-top { filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)); }
+.page-header.sticky-top .nav-container .navbar { transition: all 230ms ease-in-out; }
+body.page-scrolled .page-header.sticky-top .nav-container .navbar { padding-top: 0.3rem; padding-bottom: 0.3rem; }
+@media (max-width: 991px) {
+    .page-header .nav-container .navbar .navbar-collapse .mega-dropdown-menu { box-shadow: 0 0 0 transparent; }
+    .page-header.sticky-top .nav-container .navbar .navbar-collapse { padding-top: .7rem; padding-bottom: .7rem; overflow-y: auto !important; max-height: 80vh !important; }
+    body.page-scrolled .page-header.sticky-top.filter-shadow .nav-container .navbar { padding-top: 0; padding-bottom: 0px; }
+}

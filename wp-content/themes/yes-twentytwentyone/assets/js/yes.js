@@ -1,7 +1,7 @@
 /*
     JavaScript Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : August    03, 2022, 03:52:31 PM
+    Last edited on  : November  22, 2022, 03:52:31 PM
     Author          : [YTL Digital Design] - AL
 */
 const yesLocalStorageName = 'yesSession';
@@ -17,6 +17,11 @@ $(document).ready(function() {
     checkPageModalExpiry();
 
     eventListenPageModalClose();
+
+    checkScrollHeaderSticky();
+    $(window).scroll(function() {
+        checkScrollHeaderSticky();
+    });
 
     initBootstrapTooltip();
 
@@ -383,5 +388,21 @@ function fbPixelPush(eventType = '', data = {}) {
             default:
                 return;
         }
+    }
+}
+
+
+/**
+ * Function checkScrollHeaderSticky()
+ * Function add check scroll for page-header
+ * 
+ * @since    1.2.1
+ */
+function checkScrollHeaderSticky() {
+    var scroll = $(window).scrollTop();
+    if (scroll >= 5) {
+        $('body').addClass('page-scrolled');
+    } else {
+        $('body').removeClass('page-scrolled');
     }
 }

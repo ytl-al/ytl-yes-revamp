@@ -11,7 +11,7 @@
 ?>
 
 <!-- Header STARTS -->
-<header class="page-header">
+<header class="page-header sticky-top">
     <?php get_template_part('template-parts/header/top-page-banner'); ?>
 
     <div class="top-tabs-container">
