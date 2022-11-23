@@ -1,7 +1,7 @@
 /*
     JavaScript Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : November  22, 2022, 03:52:31 PM
+    Last edited on  : November  23, 2022, 03:52:31 PM
     Author          : [YTL Digital Design] - AL
 */
 const yesLocalStorageName = 'yesSession';
@@ -11,6 +11,8 @@ const expiryTopPageBanner = 10; // in minute
 const expiryPageModal = 60; // in minute
 
 const pageLoadTimestamp = Date.now();
+
+const scolledAosRefresh = false;
 
 $(document).ready(function() {
     checkTopPageBannerExpiry();
@@ -402,6 +404,11 @@ function checkScrollHeaderSticky() {
     var scroll = $(window).scrollTop();
     if (scroll >= 5) {
         $('body').addClass('page-scrolled');
+    
+        if (!scolledAosRefresh) {
+            AOS.refresh();
+            scolledAosRefresh = true;
+        }
     } else {
         $('body').removeClass('page-scrolled');
     }
