@@ -206,7 +206,7 @@
                     strIDNumber: { 'en-US': 'ID/Passport Number', 'ms-MY': 'Nombor KP/Pasport', 'zh-hans': 'ID/Passport Number' },
                     
                     strMobileVerification: { 'en-US': 'Mobile Verification', 'ms-MY': 'Pengesahan Nombor Mudah Alih', 'zh-hans': 'Mobile Verification' },
-                    strMobileStep1: { 'en-US': '<strong>Step 1:</strong>: Key in your mobile number', 'ms-MY': '<strong>Langkah 1: Masukkan nombor telefon mudah alih anda', 'zh-hans': '<strong>Step 1:</strong>: Key in your mobile number' },
+                    strMobileStep1: { 'en-US': '<strong>Step 1</strong>: Key in your mobile number', 'ms-MY': '<strong>Langkah 1</strong>: Masukkan nombor telefon mudah alih anda', 'zh-hans': '<strong>Step 1</strong>: Key in your mobile number' },
                     strMobileStep2: { 'en-US': '<strong>Step 2</strong>: Insert your TAC code and verify', 'ms-MY': '<strong>Langkah 2</strong>: Masukkan TAC dan sahkan', 'zh-hans': '<strong>Step 2</strong>: Insert your TAC code and verify' },
                     strRequestTAC: { 'en-US': 'Request TAC', 'ms-MY': 'Minta TAC', 'zh-hans': 'Request TAC' },
                     strResendTAC: { 'en-US': 'Resend TAC', 'ms-MY': 'Minta Semula TAC', 'zh-hans': 'Resend TAC' },

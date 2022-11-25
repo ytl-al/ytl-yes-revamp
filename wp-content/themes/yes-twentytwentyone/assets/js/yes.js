@@ -405,7 +405,7 @@ function checkScrollHeaderSticky() {
     if (scroll >= 5) {
         $('body').addClass('page-scrolled');
     
-        if (!scolledAosRefresh) {
+        if (!scolledAosRefresh && $('.sticky-top').length) {
             AOS.refresh();
             scolledAosRefresh = true;
         }

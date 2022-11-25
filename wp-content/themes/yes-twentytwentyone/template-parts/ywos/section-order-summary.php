@@ -31,6 +31,14 @@
                         <p class="large" v-if="deliveryInfo.securityType != '' && deliveryInfo.securityType != 'NRIC'"><strong>{{ item.nonMalaysianPriceValue.replace('(-1)', '(-1) ') }}</strong></p>
                     </div>
                 </div>
+                <div class="row" v-if="item.priceDisplayName == 'Deposit for Foreigner' && deliveryInfo.securityType == 'PASSPORT' && orderSummary.due.foreignerDeposit > 0">
+                    <div class="col-8">
+                        <p class="large">{{ renderSummaryText('strForeignerDeposit') }}</p>
+                    </div>
+                    <div class="col-4 text-end">
+                        <p class="large"><strong>{{ item.nonMalaysianPriceValue }}</strong></p>
+                    </div>
+                </div>
             </template>
         </template>
     </template>

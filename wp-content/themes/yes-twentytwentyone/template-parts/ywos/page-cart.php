@@ -1302,7 +1302,7 @@
                         currentStep += 1;
 
                         if (!ywos.lsData.meta.isLoggedIn && ywos.lsData.meta.customerDetails.securityType == 'PASSPORT' && self.orderSummary.plan.planType == 'postpaid' && self.orderSummary.due.foreignerDeposit == 0.00) {
-                            self.orderSummary.due.foreignerDeposit = 200.00;
+                            self.orderSummary.due.foreignerDeposit = self.orderSummary.plan.foreignerDeposit;
                             self.updateSummary();
                         }
                     } else if (loginType == 'guest' || loginType == 'targetedPromo') {
