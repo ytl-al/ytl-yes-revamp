@@ -21,7 +21,9 @@
     #cart-body .nav-pills .nav-item {
         margin-right: 30px;
     }
-
+    #GRABPAY_MY {
+        display:none;
+    }
     #cart-body .listing-quickSelectBanks li.nav-item,#cart-body .listing-quickSelectWallets li.nav-item { cursor: pointer; margin-right: 10px; max-width: 60px; text-align: center; }
     .listing-quickSelectBanks li.nav-item .img-quickSelectBank, .listing-quickSelectWallets li.nav-item .img-quickSelectWallet { border: 1px solid #D9D9D9; border-radius: 4px; box-shadow: 2px 2px 12px rgb(112 144 176 / 25%); margin: 0 0 10px; padding: 3px; }
     .listing-quickSelectBanks li.nav-item.selected .img-quickSelectBank, .listing-quickSelectWallets li.nav-item.selected .img-quickSelectWallet { border-color: rgb(61, 140, 255); }
@@ -212,7 +214,7 @@
                                     <div class="row mb-4">
                                         <div class="col-lg-6">
                                             <ul class="nav nav-pills listing-quickSelectBanks">
-                                                <li class="nav-item" v-for="quickSelectBank in quickSelectBanks" v-on:click="selectBank(quickSelectBank.value, event)"><div class="img-quickSelectBank"><img :src="quickSelectBank.imgSrc" :alt="quickSelectBank.name" :title="quickSelectBank.name" /></div><span>{{ quickSelectBank.name }}</span></li>
+                                            <li class="nav-item" v-for="quickSelectBank in quickSelectBanks" v-on:click="selectBank(quickSelectBank.value, event)"><div class="img-quickSelectBank"><img :src="quickSelectBank.imgSrc" alt="{{ quickSelectBank.name }}" title="{{ quickSelectBank.name }}" /></div><span>{{ quickSelectBank.name }}</span></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -238,7 +240,7 @@
                                     <div class="row mb-4">
                                         <div class="col-lg-6">
                                             <ul class="nav nav-pills listing-quickSelectWallets">
-                                                <li class="nav-item" v-for="quickSelectWallet in rmWallets" v-on:click="selectWallet(quickSelectWallet.eWalletMethodCode, event)"><div class="img-quickSelectWallet"><img width="52" :src="quickSelectWallet.eWalletLogoUrl" :alt="quickSelectWallet.eWalletMethodName" :title="quickSelectWallet.eWalletMethodName" /></div><span>{{ quickSelectWallet.eWalletMethodName }}</span></li>
+                                                <li class="nav-item" v-for="quickSelectWallet in rmWallets" :id="quickSelectWallet.eWalletMethodCode" v-on:click="selectWallet(quickSelectWallet.eWalletMethodCode, event)"><div class="img-quickSelectWallet"><img width="52" :src="quickSelectWallet.eWalletLogoUrl" :alt="quickSelectWallet.eWalletMethodName" :title="quickSelectWallet.eWalletMethodName" /></div><span>{{ quickSelectWallet.eWalletMethodName }}</span></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -323,205 +325,205 @@
                     }
                 },
                 paymentInfo: {
-                    paymentMethod: 'CREDIT_CARD', 
-                    processName: 'NEW_YOS_ORDER', 
-                    amount: 0.00, 
-                    sst: 0.00, 
+                    paymentMethod: 'CREDIT_CARD',
+                    processName: 'NEW_YOS_ORDER',
+                    amount: 0.00,
+                    sst: 0.00,
                     totalAmount: 0.00,
-                    bankCode: '', 
-                    bankName: '', 
+                    bankCode: '',
+                    bankName: '',
                     cardNumber: '',
-                    cardType: '', 
+                    cardType: '',
                     nameOnCard: '',
                     cardCVV: '',
                     cardExpiryMonth: '',
-                    cardExpiryYear: '', 
-                    isAutoSubscribe: false, 
+                    cardExpiryYear: '',
+                    isAutoSubscribe: false,
                     isSaveMyCard: false,
                     ippType: ''
                 },
                 fpxBanks: [
-                    { value: "alliance-bank", name: "Alliance Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/alliance.png" }, 
-                    { value: "bank-islam", name: "Bank Islam", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/islam.png", quickSelect: false }, 
-                    { value: "bank-muamalat", name: "Muamalat Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/muamalat.png", quickSelect: false }, 
-                    { value: "bank-rakyat", name: "Bank Rakyat", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/rakyat.png", quickSelect: false }, 
-                    { value: "bsn", name: "BSN", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/bsn.png", quickSelect: false }, 
+                    { value: "alliance-bank", name: "Alliance Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/alliance.png" },
+                    { value: "bank-islam", name: "Bank Islam", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/islam.png", quickSelect: false },
+                    { value: "bank-muamalat", name: "Muamalat Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/muamalat.png", quickSelect: false },
+                    { value: "bank-rakyat", name: "Bank Rakyat", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/rakyat.png", quickSelect: false },
+                    { value: "bsn", name: "BSN", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/bsn.png", quickSelect: false },
 
-                    { value: "BCBB0235", name: "CIMB Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/cimb.png", quickSelect: true }, 
-                    { value: "HLB0224", name: "Hong Leong Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/hong-leong.png", quickSelect: true }, 
-                    { value: "hsbc-bank", name: "HSBC Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/hsbc.png", quickSelect: false }, 
-                    { value: "kfh", name: "KFH", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/kfh.png", quickSelect: false }, 
-                    { value: "maybank-2e", name: "Maybank2E", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/maybank.png", quickSelect: false }, 
+                    { value: "BCBB0235", name: "CIMB Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/cimb.png", quickSelect: true },
+                    { value: "HLB0224", name: "Hong Leong Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/hong-leong.png", quickSelect: true },
+                    { value: "hsbc-bank", name: "HSBC Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/hsbc.png", quickSelect: false },
+                    { value: "kfh", name: "KFH", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/kfh.png", quickSelect: false },
+                    { value: "maybank-2e", name: "Maybank2E", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/maybank.png", quickSelect: false },
 
-                    { value: "MB2U0227", name: "Maybank2U", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/maybank.png", quickSelect: true }, 
-                    { value: "ocbc-bank", name: "OCBC Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/ocbc.png", quickSelect: false }, 
-                    { value: "PBB0233", name: "Public Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/public.png", quickSelect: true }, 
-                    { value: "rhb-bank", name: "RHB Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/rhb.png", quickSelect: false }, 
-                    { value: "sbi-bank-a", name: "SBI Bank A", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/sbi.png", quickSelect: false }, 
+                    { value: "MB2U0227", name: "Maybank2U", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/maybank.png", quickSelect: true },
+                    { value: "ocbc-bank", name: "OCBC Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/ocbc.png", quickSelect: false },
+                    { value: "PBB0233", name: "Public Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/public.png", quickSelect: true },
+                    { value: "rhb-bank", name: "RHB Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/rhb.png", quickSelect: false },
+                    { value: "sbi-bank-a", name: "SBI Bank A", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/sbi.png", quickSelect: false },
 
-                    { value: "sbi-bank-b", name: "SBI Bank B", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/sbi.png", quickSelect: false }, 
-                    { value: "sbi-bank-c", name: "SBI Bank C", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/sbi.png", quickSelect: false }, 
-                    { value: "standard-chartered", name: "Standard Chartered", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/standard-chartered.png", quickSelect: false }, 
-                    { value: "uob-bank", name: "UOB Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/uob.png", quickSelect: false } 
+                    { value: "sbi-bank-b", name: "SBI Bank B", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/sbi.png", quickSelect: false },
+                    { value: "sbi-bank-c", name: "SBI Bank C", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/sbi.png", quickSelect: false },
+                    { value: "standard-chartered", name: "Standard Chartered", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/standard-chartered.png", quickSelect: false },
+                    { value: "uob-bank", name: "UOB Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/uob.png", quickSelect: false }
                 ],
                 rmWallets: [],
                 fpxBankList: [],
                 cardholder: {
-                    number1: '', 
-                    number2: '', 
+                    number1: '',
+                    number2: '',
                     number3: '',
-                    number4: '', 
+                    number4: '',
                     number5: '',
-                    number6: '', 
-                    number7: '' 
+                    number6: '',
+                    number7: ''
                 },
                 maybankIPP: {
-                    disabled: true, 
+                    disabled: true,
                     ippTypeList: [],
                     ippInstallments: [],
                     ippInstallmentSelected: {
-                        duration: 0, 
-                        administrationPayment: 0.00, 
+                        duration: 0,
+                        administrationPayment: 0.00,
                         monthlyInstallment: ''
                     }
-                }, 
+                },
                 countries: [
-                    { "value": "Malaysia", "name": "Malaysia" }, 
-                    { "value": "Argentina", "name": "Argentina" }, 
-                    { "value": "Australia", "name": "Australia" }, 
-                    { "value": "Austria", "name": "Austria" }, 
-                    { "value": "Azerbaijan", "name": "Azerbaijan" }, 
-                    { "value": "Bahamas", "name": "Bahamas" }, 
-                    { "value": "Bahrain", "name": "Bahrain" }, 
-                    { "value": "Bangladesh", "name": "Bangladesh" }, 
-                    { "value": "Belarus", "name": "Belarus" }, 
-                    { "value": "Belgium", "name": "Belgium" }, 
-                    { "value": "Benin", "name": "Benin" }, 
-                    { "value": "Brazil", "name": "Brazil" }, 
-                    { "value": "Brunei Darussalam", "name": "Brunei Darussalam" }, 
-                    { "value": "Bulgaria", "name": "Bulgaria" }, 
-                    { "value": "Cambodia", "name": "Cambodia" }, 
-                    { "value": "Canada", "name": "Canada" }, 
-                    { "value": "Cape Verde", "name": "Cape Verde" }, 
-                    { "value": "Chad", "name": "Chad" }, 
-                    { "value": "Chile", "name": "Chile" }, 
-                    { "value": "China", "name": "China" }, 
-                    { "value": "Colombia", "name": "Colombia" }, 
-                    { "value": "Congo", "name": "Congo" }, 
-                    { "value": "Congo, Democratic Republic of the", "name": "Congo, Democratic Republic of the" }, 
-                    { "value": "Costa Rica", "name": "Costa Rica" }, 
-                    { "value": "Cote d'Ivoire", "name": "Cote d'Ivoire" }, 
-                    { "value": "Croatia", "name": "Croatia" }, 
-                    { "value": "Cyprus", "name": "Cyprus" }, 
-                    { "value": "Czech Republic", "name": "Czech Republic" }, 
-                    { "value": "Denmark", "name": "Denmark" }, 
-                    { "value": "Ecuador", "name": "Ecuador" }, 
-                    { "value": "Egypt", "name": "Egypt" }, 
-                    { "value": "El Salvador", "name": "El Salvador" }, 
-                    { "value": "Estonia", "name": "Estonia" }, 
-                    { "value": "Fiji", "name": "Fiji" }, 
-                    { "value": "Finland", "name": "Finland" }, 
-                    { "value": "France", "name": "France" }, 
-                    { "value": "French Polynesia", "name": "French Polynesia" }, 
-                    { "value": "Gabon", "name": "Gabon" }, 
-                    { "value": "Gambia", "name": "Gambia" }, 
-                    { "value": "Germany", "name": "Germany" }, 
-                    { "value": "Ghana", "name": "Ghana" }, 
-                    { "value": "Gibraltar", "name": "Gibraltar" }, 
-                    { "value": "Greece", "name": "Greece" }, 
-                    { "value": "Guam", "name": "Guam" }, 
-                    { "value": "Guatemala", "name": "Guatemala" }, 
-                    { "value": "Guinea-Bissau", "name": "Guinea-Bissau" }, 
-                    { "value": "Guyana", "name": "Guyana" }, 
-                    { "value": "Hong Kong", "name": "Hong Kong" }, 
-                    { "value": "Hungary", "name": "Hungary" }, 
-                    { "value": "Iceland", "name": "Iceland" }, 
-                    { "value": "India", "name": "India" }, 
-                    { "value": "Indonesia", "name": "Indonesia" }, 
-                    { "value": "International Airspace", "name": "International Airspace" }, 
-                    { "value": "Iran", "name": "Iran" }, 
-                    { "value": "Ireland", "name": "Ireland" }, 
-                    { "value": "Italy", "name": "Italy" }, 
-                    { "value": "Japan", "name": "Japan" }, 
-                    { "value": "Jordan", "name": "Jordan" }, 
-                    { "value": "Kazakhstan", "name": "Kazakhstan" }, 
-                    { "value": "Kenya", "name": "Kenya" }, 
-                    { "value": "Korea, Republic of", "name": "Korea, Republic of" }, 
-                    { "value": "Latvia", "name": "Latvia" }, 
-                    { "value": "Liechtenstein", "name": "Liechtenstein" }, 
-                    { "value": "Lithuania", "name": "Lithuania" }, 
-                    { "value": "Luxembourg", "name": "Luxembourg" }, 
-                    { "value": "Macau", "name": "Macau" }, 
-                    { "value": "Madagascar", "name": "Madagascar" }, 
-                    { "value": "Malawi", "name": "Malawi" }, 
-                    { "value": "Mauritius", "name": "Mauritius" }, 
-                    { "value": "Mexico", "name": "Mexico" }, 
-                    { "value": "Montenegro, Republic of", "name": "Montenegro, Republic of" }, 
-                    { "value": "Morocco", "name": "Morocco" }, 
-                    { "value": "Myanmar", "name": "Myanmar" }, 
-                    { "value": "Netherlands", "name": "Netherlands" }, 
-                    { "value": "New Zealand", "name": "New Zealand" }, 
-                    { "value": "Nicaragua", "name": "Nicaragua" }, 
-                    { "value": "Niger", "name": "Niger" }, 
-                    { "value": "Nigeria", "name": "Nigeria" }, 
-                    { "value": "Norway", "name": "Norway" }, 
-                    { "value": "Oman", "name": "Oman" }, 
-                    { "value": "Pakistan", "name": "Pakistan" }, 
-                    { "value": "Panama", "name": "Panama" }, 
-                    { "value": "Papua New Guinea", "name": "Papua New Guinea" }, 
-                    { "value": "Paraguay", "name": "Paraguay" }, 
-                    { "value": "Peru", "name": "Peru" }, 
-                    { "value": "Philippines", "name": "Philippines" }, 
-                    { "value": "Poland", "name": "Poland" }, 
-                    { "value": "Puerto Rico", "name": "Puerto Rico" }, 
-                    { "value": "Qatar", "name": "Qatar" }, 
-                    { "value": "Romania", "name": "Romania" }, 
-                    { "value": "Russian Federation", "name": "Russian Federation" }, 
-                    { "value": "Rwanda", "name": "Rwanda" }, 
-                    { "value": "Samoa", "name": "Samoa" }, 
-                    { "value": "Saudi Arabia", "name": "Saudi Arabia" }, 
-                    { "value": "Seychelles", "name": "Seychelles" }, 
-                    { "value": "Singapore", "name": "Singapore" }, 
-                    { "value": "Slovakia (Slovak Republic)", "name": "Slovakia (Slovak Republic)" }, 
-                    { "value": "Slovenia", "name": "Slovenia" }, 
-                    { "value": "South Africa", "name": "South Africa" }, 
-                    { "value": "Spain", "name": "Spain" }, 
-                    { "value": "Sri Lanka", "name": "Sri Lanka" }, 
-                    { "value": "Suriname", "name": "Suriname" }, 
-                    { "value": "Swaziland", "name": "Swaziland" }, 
-                    { "value": "Sweden", "name": "Sweden" }, 
-                    { "value": "Switzerland", "name": "Switzerland" }, 
-                    { "value": "Taiwan", "name": "Taiwan" }, 
-                    { "value": "Tanzania, United Republic of", "name": "Tanzania, United Republic of" }, 
-                    { "value": "Thailand", "name": "Thailand" }, 
-                    { "value": "Tonga", "name": "Tonga" }, 
-                    { "value": "Trinidad and Tobago", "name": "Trinidad and Tobago" }, 
-                    { "value": "Turkey", "name": "Turkey" }, 
-                    { "value": "Uganda", "name": "Uganda" }, 
-                    { "value": "Ukraine", "name": "Ukraine" }, 
-                    { "value": "United Arab Emirates", "name": "United Arab Emirates" }, 
-                    { "value": "United Kingdom", "name": "United Kingdom" }, 
-                    { "value": "United States", "name": "United States" }, 
-                    { "value": "Uruguay", "name": "Uruguay" }, 
-                    { "value": "Vanuatu", "name": "Vanuatu" }, 
-                    { "value": "Venezuela", "name": "Venezuela" }, 
-                    { "value": "Vietnam", "name": "Vietnam" }, 
+                    { "value": "Malaysia", "name": "Malaysia" },
+                    { "value": "Argentina", "name": "Argentina" },
+                    { "value": "Australia", "name": "Australia" },
+                    { "value": "Austria", "name": "Austria" },
+                    { "value": "Azerbaijan", "name": "Azerbaijan" },
+                    { "value": "Bahamas", "name": "Bahamas" },
+                    { "value": "Bahrain", "name": "Bahrain" },
+                    { "value": "Bangladesh", "name": "Bangladesh" },
+                    { "value": "Belarus", "name": "Belarus" },
+                    { "value": "Belgium", "name": "Belgium" },
+                    { "value": "Benin", "name": "Benin" },
+                    { "value": "Brazil", "name": "Brazil" },
+                    { "value": "Brunei Darussalam", "name": "Brunei Darussalam" },
+                    { "value": "Bulgaria", "name": "Bulgaria" },
+                    { "value": "Cambodia", "name": "Cambodia" },
+                    { "value": "Canada", "name": "Canada" },
+                    { "value": "Cape Verde", "name": "Cape Verde" },
+                    { "value": "Chad", "name": "Chad" },
+                    { "value": "Chile", "name": "Chile" },
+                    { "value": "China", "name": "China" },
+                    { "value": "Colombia", "name": "Colombia" },
+                    { "value": "Congo", "name": "Congo" },
+                    { "value": "Congo, Democratic Republic of the", "name": "Congo, Democratic Republic of the" },
+                    { "value": "Costa Rica", "name": "Costa Rica" },
+                    { "value": "Cote d'Ivoire", "name": "Cote d'Ivoire" },
+                    { "value": "Croatia", "name": "Croatia" },
+                    { "value": "Cyprus", "name": "Cyprus" },
+                    { "value": "Czech Republic", "name": "Czech Republic" },
+                    { "value": "Denmark", "name": "Denmark" },
+                    { "value": "Ecuador", "name": "Ecuador" },
+                    { "value": "Egypt", "name": "Egypt" },
+                    { "value": "El Salvador", "name": "El Salvador" },
+                    { "value": "Estonia", "name": "Estonia" },
+                    { "value": "Fiji", "name": "Fiji" },
+                    { "value": "Finland", "name": "Finland" },
+                    { "value": "France", "name": "France" },
+                    { "value": "French Polynesia", "name": "French Polynesia" },
+                    { "value": "Gabon", "name": "Gabon" },
+                    { "value": "Gambia", "name": "Gambia" },
+                    { "value": "Germany", "name": "Germany" },
+                    { "value": "Ghana", "name": "Ghana" },
+                    { "value": "Gibraltar", "name": "Gibraltar" },
+                    { "value": "Greece", "name": "Greece" },
+                    { "value": "Guam", "name": "Guam" },
+                    { "value": "Guatemala", "name": "Guatemala" },
+                    { "value": "Guinea-Bissau", "name": "Guinea-Bissau" },
+                    { "value": "Guyana", "name": "Guyana" },
+                    { "value": "Hong Kong", "name": "Hong Kong" },
+                    { "value": "Hungary", "name": "Hungary" },
+                    { "value": "Iceland", "name": "Iceland" },
+                    { "value": "India", "name": "India" },
+                    { "value": "Indonesia", "name": "Indonesia" },
+                    { "value": "International Airspace", "name": "International Airspace" },
+                    { "value": "Iran", "name": "Iran" },
+                    { "value": "Ireland", "name": "Ireland" },
+                    { "value": "Italy", "name": "Italy" },
+                    { "value": "Japan", "name": "Japan" },
+                    { "value": "Jordan", "name": "Jordan" },
+                    { "value": "Kazakhstan", "name": "Kazakhstan" },
+                    { "value": "Kenya", "name": "Kenya" },
+                    { "value": "Korea, Republic of", "name": "Korea, Republic of" },
+                    { "value": "Latvia", "name": "Latvia" },
+                    { "value": "Liechtenstein", "name": "Liechtenstein" },
+                    { "value": "Lithuania", "name": "Lithuania" },
+                    { "value": "Luxembourg", "name": "Luxembourg" },
+                    { "value": "Macau", "name": "Macau" },
+                    { "value": "Madagascar", "name": "Madagascar" },
+                    { "value": "Malawi", "name": "Malawi" },
+                    { "value": "Mauritius", "name": "Mauritius" },
+                    { "value": "Mexico", "name": "Mexico" },
+                    { "value": "Montenegro, Republic of", "name": "Montenegro, Republic of" },
+                    { "value": "Morocco", "name": "Morocco" },
+                    { "value": "Myanmar", "name": "Myanmar" },
+                    { "value": "Netherlands", "name": "Netherlands" },
+                    { "value": "New Zealand", "name": "New Zealand" },
+                    { "value": "Nicaragua", "name": "Nicaragua" },
+                    { "value": "Niger", "name": "Niger" },
+                    { "value": "Nigeria", "name": "Nigeria" },
+                    { "value": "Norway", "name": "Norway" },
+                    { "value": "Oman", "name": "Oman" },
+                    { "value": "Pakistan", "name": "Pakistan" },
+                    { "value": "Panama", "name": "Panama" },
+                    { "value": "Papua New Guinea", "name": "Papua New Guinea" },
+                    { "value": "Paraguay", "name": "Paraguay" },
+                    { "value": "Peru", "name": "Peru" },
+                    { "value": "Philippines", "name": "Philippines" },
+                    { "value": "Poland", "name": "Poland" },
+                    { "value": "Puerto Rico", "name": "Puerto Rico" },
+                    { "value": "Qatar", "name": "Qatar" },
+                    { "value": "Romania", "name": "Romania" },
+                    { "value": "Russian Federation", "name": "Russian Federation" },
+                    { "value": "Rwanda", "name": "Rwanda" },
+                    { "value": "Samoa", "name": "Samoa" },
+                    { "value": "Saudi Arabia", "name": "Saudi Arabia" },
+                    { "value": "Seychelles", "name": "Seychelles" },
+                    { "value": "Singapore", "name": "Singapore" },
+                    { "value": "Slovakia (Slovak Republic)", "name": "Slovakia (Slovak Republic)" },
+                    { "value": "Slovenia", "name": "Slovenia" },
+                    { "value": "South Africa", "name": "South Africa" },
+                    { "value": "Spain", "name": "Spain" },
+                    { "value": "Sri Lanka", "name": "Sri Lanka" },
+                    { "value": "Suriname", "name": "Suriname" },
+                    { "value": "Swaziland", "name": "Swaziland" },
+                    { "value": "Sweden", "name": "Sweden" },
+                    { "value": "Switzerland", "name": "Switzerland" },
+                    { "value": "Taiwan", "name": "Taiwan" },
+                    { "value": "Tanzania, United Republic of", "name": "Tanzania, United Republic of" },
+                    { "value": "Thailand", "name": "Thailand" },
+                    { "value": "Tonga", "name": "Tonga" },
+                    { "value": "Trinidad and Tobago", "name": "Trinidad and Tobago" },
+                    { "value": "Turkey", "name": "Turkey" },
+                    { "value": "Uganda", "name": "Uganda" },
+                    { "value": "Ukraine", "name": "Ukraine" },
+                    { "value": "United Arab Emirates", "name": "United Arab Emirates" },
+                    { "value": "United Kingdom", "name": "United Kingdom" },
+                    { "value": "United States", "name": "United States" },
+                    { "value": "Uruguay", "name": "Uruguay" },
+                    { "value": "Vanuatu", "name": "Vanuatu" },
+                    { "value": "Venezuela", "name": "Venezuela" },
+                    { "value": "Vietnam", "name": "Vietnam" },
                     { "value": "Zambia", "name": "Zambia"}
                 ],
                 orderResponse: {
-                    orderNumber: '', 
-                    displayOrderNumber: '', 
-                    xpayOrderId: '', 
-                    encryptedValue: '', 
+                    orderNumber: '',
+                    displayOrderNumber: '',
+                    xpayOrderId: '',
+                    encryptedValue: '',
                     grandTotal: 0.00,
                     roundingAdjustment: 0.00,
-                    gstTotal: 0.00, 
-                    totalWithOutGST: 0.00, 
-                    shippingCharges: 0.00, 
-                    shippingChargesWithGST: 0.00, 
-                    foreignerDeposit: 0.00, 
-                    deliveryFromDate: '', 
-                    deliveryToData: '', 
+                    gstTotal: 0.00,
+                    totalWithOutGST: 0.00,
+                    shippingCharges: 0.00,
+                    shippingChargesWithGST: 0.00,
+                    foreignerDeposit: 0.00,
+                    deliveryFromDate: '',
+                    deliveryToData: '',
                     deliveryType: ''
                 },
                 checkPaymentStatusCount: 0,
@@ -529,16 +531,16 @@
                 paymentTimeout: false,
                 paymentResponse: null,
 
-                isTargetedPromo: false, 
-                tpMeta: {}, 
+                isTargetedPromo: false,
+                tpMeta: {},
 
-                apiLocale: 'EN', 
+                apiLocale: 'EN',
                 pageText: {
                     strVerification: { 'en-US': 'Verification', 'ms-MY': 'Pengesahan', 'zh-hans': 'Verification' },
                     strDelivery: { 'en-US': 'Delivery Details', 'ms-MY': 'Butiran Penghantaran', 'zh-hans': 'Delivery Details' },
                     strReview: { 'en-US': 'Review', 'ms-MY': 'Semak', 'zh-hans': 'Review' },
                     strPayment: { 'en-US': 'Payment Info', 'ms-MY': 'Maklumat Pembayaran', 'zh-hans': 'Payment Info' },
-                    
+
                     strFillIn: { 'en-US': 'Please fill in your ID information and mobile number to proceed', 'ms-MY': 'Sila isikan maklumat ID dan nombor mudah alih untuk teruskan', 'zh-hans': 'Please fill in your ID information and mobile number to proceed' },
                     strPaymentSub: { 'en-US': 'This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.', 'ms-MY': 'Maklumat ini diperlukan untuk pembelian dalam talian dan digunakan untuk mengesahkan dan melindungi identiti anda. Kami menyimpan maklumat ini dengan selamat dan tidak akan menggunakannya untuk tujuan lain.', 'zh-hans': 'This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.' },
                     strPaymentSelect: { 'en-US': 'Select payment', 'ms-MY': 'Pilih bayaran', 'zh-hans': 'Select payment' },
@@ -602,8 +604,6 @@
             computed: {
 
                 quickSelectWallets: function() {
-                   
-                    console.log('hello',this.rmWallets);
                     return this.rmWallets.filter(function(wallet) {
                         return wallet.quickSelect
                     })
@@ -612,12 +612,12 @@
                     return this.fpxBanks.filter(function(bank) {
                         return bank.quickSelect
                     })
-                } 
-            }, 
+                }
+            },
             methods: {
                 pageInit: function() {
                     var self = this;
-                    
+
                     if (ywos.validateSession(self.currentStep)) {
                         self.pageValid = true;
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
@@ -630,7 +630,7 @@
                         ywos.redirectToPage('cart');
                     }
 
-                    
+
                 },
                 ajaxGetFPXBankList: function() {
                     var self = this;
@@ -666,7 +666,7 @@
                 ajaxGetMaybankIPPTenures: function() {
                     var self = this;
                     axios.post(apiEndpointURL + '/get-ipp-tenures', {
-                            'plan_name': self.orderSummary.plan.planName 
+                            'plan_name': self.orderSummary.plan.planName
                         })
                         .then((response) => {
                             var data = response.data;
@@ -683,20 +683,20 @@
                                 toggleOverlay(false);
                             }, 500);
                         });
-                }, 
+                },
                 ajaxGetMaybankIPPInstallments: function(totalAmount, tenure) {
                     var self = this;
                     var ippInstallment = {};
                     axios.post(apiEndpointURL + '/get-ipp-monthly-installments', {
-                            'total_amount': totalAmount, 
+                            'total_amount': totalAmount,
                             'tenure_type': tenure
                         })
                         .then((response) => {
                             var data = response.data;
                             ippInstallment = {
                                 tenure,
-                                displayIPPMonthlyInstalment: data.displayIPPMonthlyInstalment, 
-                                displayResponseMessage: data.displayResponseMessage, 
+                                displayIPPMonthlyInstalment: data.displayIPPMonthlyInstalment,
+                                displayResponseMessage: data.displayResponseMessage,
                                 ippMonthlyInstalment: data.ippMonthlyInstalment
                             };
                             self.maybankIPP.ippInstallments.push(ippInstallment);
@@ -709,7 +709,7 @@
                     var self = this;
                     var totalAmount = self.orderSummary.due.total;
                     var tenure = '';
-                    
+
                     if (self.maybankIPP.ippTypeList.length) {
                         self.maybankIPP.disabled = false;
                         self.maybankIPP.ippTypeList.map(function(type) {
@@ -737,11 +737,11 @@
                         $('#modal-titleLabel').html('');
                         $('#modal-bodyText').html('');
                     });
-                }, 
+                },
                 ajaxCheckOrderPaymentStatus(timeoutObj) {
                     var self = this;
                     var params = {
-                        'session_key': ywos.lsData.sessionKey, 
+                        'session_key': ywos.lsData.sessionKey,
                         'yos_order_id': self.orderResponse.orderNumber
                     };
                     // console.log(self.orderResponse);
@@ -752,17 +752,17 @@
                             var paymentId = data.paymentId;
                             var recheck = false;
                             var closePaymentWindow = false;
-                            
+
                             if (responseCode == 0) {                        // Payment success
                                 self.paymentResponse = data;
                                 closePaymentWindow = true;
 
                                 self.ajaxUpdateTPPurchasedFlag();
-                                
+
                                 setTimeout(function() {
                                     self.redirectThankYou(1);
                                 }, 2000);
-                            } else if (responseCode == -1) {   
+                            } else if (responseCode == -1) {
                                 if (paymentId == 'Not Available') {         // Payment in progress
                                     recheck = true;
                                 } else if (paymentId != 'Not Available') {  // Payment failed
@@ -818,12 +818,12 @@
                                 }
                             }
                         });
-                }, 
+                },
                 initXpay: function() {
                     var self = this;
                     var xpayOrderId = self.orderResponse.xpayOrderId;
                     var encryptedValue = self.orderResponse.encryptedValue;
-                    
+
                     var timeoutObject = setTimeout(function() {
                         if (mainwin != null && !mainwin.closed) {
                             mainwin.focus();
@@ -837,61 +837,61 @@
                         toggleOverlay(false);
                         self.toggleModalAlert(self.renderText('modalErrorPaymentTitle'), self.renderText('errorPaymentExceed'));
                     }, 360000);
-                    
+
                     mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
-                    
+
                     setTimeout(function() {
                         self.paymentTimeout = false;
                         self.checkPaymentStatusCount = 0;
                         self.ajaxCheckOrderPaymentStatus(timeoutObject);
                     }, 10000);
-                }, 
+                },
                 ajaxCreateYOSOrder: function() {
                     var self = this;
                     var params = {
-                        'session_key'       : ywos.lsData.sessionKey, 
-                        
-                        'phone_number'      : self.deliveryInfo.msisdn, 
-                        'customer_name'     : self.deliveryInfo.name, 
-                        'dob'               : self.deliveryInfo.dob, 
-                        'gender'            : self.deliveryInfo.gender, 
+                        'session_key'       : ywos.lsData.sessionKey,
+
+                        'phone_number'      : self.deliveryInfo.msisdn,
+                        'customer_name'     : self.deliveryInfo.name,
+                        'dob'               : self.deliveryInfo.dob,
+                        'gender'            : self.deliveryInfo.gender,
                         'email'             : self.deliveryInfo.email,
-                        'login_yes_id'      : '', 
-                        'security_type'     : self.deliveryInfo.securityType, 
+                        'login_yes_id'      : '',
+                        'security_type'     : self.deliveryInfo.securityType,
                         'security_id'       : self.deliveryInfo.securityId,
-                        'school_name'       : '', 
-                        'school_code'       : '', 
-                        'university_name'   : '', 
-                        'dealer_code'       : '', 
-                        'dealer_login_id'   : '', 
+                        'school_name'       : '',
+                        'school_code'       : '',
+                        'university_name'   : '',
+                        'dealer_code'       : '',
+                        'dealer_login_id'   : '',
 
-                        'plan_name'         : self.orderSummary.plan.planName, 
-                        'plan_type'         : self.orderSummary.plan.planType, 
-                        'product_bundle_id' : self.orderSummary.plan.mobilePlanId, 
-                        'referral_code'     : self.deliveryInfo.referralCode, 
-                        'addon_name'        : (self.orderSummary.addOn && self.orderSummary.addOn.addonName) ? self.orderSummary.addOn.addonName : '', 
+                        'plan_name'         : self.orderSummary.plan.planName,
+                        'plan_type'         : self.orderSummary.plan.planType,
+                        'product_bundle_id' : self.orderSummary.plan.mobilePlanId,
+                        'referral_code'     : self.deliveryInfo.referralCode,
+                        'addon_name'        : (self.orderSummary.addOn && self.orderSummary.addOn.addonName) ? self.orderSummary.addOn.addonName : '',
 
-                        'address_line'      : self.deliveryInfo.sanitize.address + ' ' + self.deliveryInfo.sanitize.addressMore, 
-                        'city'              : self.deliveryInfo.city, 
-                        'city_code'         : self.deliveryInfo.cityCode, 
-                        'postal_code'       : self.deliveryInfo.postcode, 
-                        'state'             : self.deliveryInfo.state, 
-                        'state_code'        : self.deliveryInfo.stateCode, 
-                        'country'           : 'Malaysia', 
-                        'payment_method'    : self.paymentInfo.paymentMethod, 
-                        'process_name'      : self.paymentInfo.processName, 
-                        'amount'            : roundAmount(self.paymentInfo.amount, 2), 
-                        'amount_sst'        : roundAmount(self.paymentInfo.sst, 2), 
-                        'total_amount'      : roundAmount(self.paymentInfo.totalAmount, 2), 
-                        'bank_code'         : self.paymentInfo.bankCode, 
-                        'bank_name'         : self.paymentInfo.bankName, 
-                        'card_number'       : self.paymentInfo.cardNumber, 
-                        'card_type'         : self.paymentInfo.cardType, 
-                        'name_on_card'      : self.paymentInfo.nameOnCard, 
-                        'card_cvv'          : self.paymentInfo.cardCVV, 
-                        'card_expiry_month' : self.paymentInfo.cardExpiryMonth, 
-                        'card_expiry_year'  : self.paymentInfo.cardExpiryYear, 
-                        'ippType'           : self.paymentInfo.ippType, 
+                        'address_line'      : self.deliveryInfo.sanitize.address + ' ' + self.deliveryInfo.sanitize.addressMore,
+                        'city'              : self.deliveryInfo.city,
+                        'city_code'         : self.deliveryInfo.cityCode,
+                        'postal_code'       : self.deliveryInfo.postcode,
+                        'state'             : self.deliveryInfo.state,
+                        'state_code'        : self.deliveryInfo.stateCode,
+                        'country'           : 'Malaysia',
+                        'payment_method'    : self.paymentInfo.paymentMethod,
+                        'process_name'      : self.paymentInfo.processName,
+                        'amount'            : roundAmount(self.paymentInfo.amount, 2),
+                        'amount_sst'        : roundAmount(self.paymentInfo.sst, 2),
+                        'total_amount'      : roundAmount(self.paymentInfo.totalAmount, 2),
+                        'bank_code'         : self.paymentInfo.bankCode,
+                        'bank_name'         : self.paymentInfo.bankName,
+                        'card_number'       : self.paymentInfo.cardNumber,
+                        'card_type'         : self.paymentInfo.cardType,
+                        'name_on_card'      : self.paymentInfo.nameOnCard,
+                        'card_cvv'          : self.paymentInfo.cardCVV,
+                        'card_expiry_month' : self.paymentInfo.cardExpiryMonth,
+                        'card_expiry_year'  : self.paymentInfo.cardExpiryYear,
+                        'ippType'           : self.paymentInfo.ippType,
                         'locale'            : self.apiLocale,
                         'walletType'        : self.paymentInfo.walletType
                     };
@@ -921,14 +921,14 @@
                         });
 
                     // console.log(JSON.stringify(params));
-                }, 
+                },
                 paymentSubmit: function(e) {
                     toggleOverlay();
                     var self = this;
                     if (self.isTargetedPromo) {
                         axios.post(apiEndpointURL + '/tp-url-check', {
-                                'promo_id': self.tpMeta.promoID, 
-                                'unique_id': self.tpMeta.userID 
+                                'promo_id': self.tpMeta.promoID,
+                                'unique_id': self.tpMeta.userID
                             })
                             .then((response) => {
                                 var data = response.data;
@@ -952,9 +952,9 @@
                     var self = this;
                     if (self.isTargetedPromo) {
                         axios.post(apiEndpointURL + '/tp-update-purchase', {
-                                'promo_id': self.tpMeta.promoID, 
-                                'unique_id': self.tpMeta.userID, 
-                                'yos_order_id': self.orderResponse.orderNumber, 
+                                'promo_id': self.tpMeta.promoID,
+                                'unique_id': self.tpMeta.userID,
+                                'yos_order_id': self.orderResponse.orderNumber,
                                 'yos_order_display_id': self.orderResponse.displayOrderNumber
                             })
                             .then((response) => {
@@ -992,7 +992,7 @@
                         $('#select-bank').trigger('change');
                         $('#select-bank').selectpicker('refresh');
                     }, 100);
-                }, 
+                },
                 selectWallet: function(wallet, event) {
                     var self = this;
                     $('.listing-quickSelectWallets .nav-item').removeClass('selected');
@@ -1040,19 +1040,19 @@
                     if (selectedTenure) {
                         selectedTenure = selectedTenure[0];
                         self.maybankIPP.ippInstallmentSelected = {
-                            duration: selectedTenure.tenure, 
-                            administrationPayment: 0.00, 
+                            duration: selectedTenure.tenure,
+                            administrationPayment: 0.00,
                             monthlyInstallment: selectedTenure.displayIPPMonthlyInstalment
                         };
                         self.watchAllowSubmit();
                     } else {
                         self.maybankIPP.ippInstallmentSelected = {
-                            duration: 0, 
-                            administrationPayment: 0.00, 
+                            duration: 0,
+                            administrationPayment: 0.00,
                             monthlyInstallment: ''
                         };
                     }
-                }, 
+                },
                 watchBankSelect: function(e) {
                     var self = this;
                     var bankListSelected = self.fpxBankList.filter(bank => { return bank.bankCode == self.paymentInfo.bankCode; });
@@ -1073,8 +1073,8 @@
 
                     if (paymentMethod == 'CREDIT_CARD' || paymentMethod == 'CREDIT_CARD_IPP') {
                         if (
-                            self.paymentInfo.nameOnCard.trim() == '' || 
-                            self.paymentInfo.cardNumber.trim() == '' || 
+                            self.paymentInfo.nameOnCard.trim() == '' ||
+                            self.paymentInfo.cardNumber.trim() == '' ||
                             self.paymentInfo.cardExpiryMonth.trim().length < 2 ||
                             self.paymentInfo.cardExpiryYear.trim().length < 4 ||
                             self.paymentInfo.cardCVV.trim().length < 3
@@ -1085,7 +1085,7 @@
                         if (self.paymentInfo.bankCode.trim() == '' || self.paymentInfo.bankName.trim() == '') {
                             isFilled = false;
                         }
-                    }else if( paymentMethod == 'REVENUE_M_WEB' ) {
+                    }else if( paymentMethod == 'REVENUE_M_YOS' ) {
                         if ( self.paymentInfo.walletType.trim() == '' ) {
                             isFilled = false;
                         }
@@ -1114,26 +1114,26 @@
                     var self = this;
                     var eventType = 'purchase';
                     var pushData = {
-                        'transaction_id': self.orderResponse.displayOrderNumber, 
+                        'transaction_id': self.orderResponse.displayOrderNumber,
                         'currency': 'MYR',
                         'value': self.orderSummary.due.total,
                         'tax': self.orderSummary.due.taxesSST,
-                        'shipping': self.orderSummary.due.shippingFees, 
+                        'shipping': self.orderSummary.due.shippingFees,
                         'foreigner_deposit': self.orderSummary.due.foreignerDeposit,
                         'payment_method': self.paymentInfo.paymentMethod,
                         'rounding_adjustment': self.orderSummary.due.rounding,
                         'items': [{
-                            'name': self.orderSummary.plan.planName, 
-                            'id': self.orderSummary.plan.mobilePlanId, 
-                            'category': self.orderSummary.plan.planType, 
+                            'name': self.orderSummary.plan.planName,
+                            'id': self.orderSummary.plan.mobilePlanId,
+                            'category': self.orderSummary.plan.planType,
                             'price': self.orderSummary.plan.totalAmountWithoutSST
                         }]
                     };
                     if (self.orderSummary.addOn) {
                         pushData.items.push({
-                            'name': self.orderSummary.addOn.addonName, 
-                            'id': 0, 
-                            'category': 'addOn', 
+                            'name': self.orderSummary.addOn.addonName,
+                            'id': 0,
+                            'category': 'addOn',
                             'price': self.orderSummary.addOn.amount
                         });
                     }
