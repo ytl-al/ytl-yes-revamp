@@ -1,0 +1,102 @@
+<style type="text/css">
+    @font-face { font-family: 'Barlow'; font-weight: 400; src: url('/wp-content/themes/yes-twentytwentyone/assets/fonts/Barlow-Regular.ttf'); }
+    @font-face { font-family: 'Barlow'; font-weight: 500; src: url('/wp-content/themes/yes-twentytwentyone/assets/fonts/Barlow-SemiBold.ttf'); }
+    @font-face { font-family: 'Barlow'; font-weight: 600; src: url('/wp-content/themes/yes-twentytwentyone/assets/fonts/Barlow-Bold.ttf'); }
+    @font-face { font-family: 'Barlow'; font-weight: 700; src: url('/wp-content/themes/yes-twentytwentyone/assets/fonts/Barlow-ExtraBold.ttf'); }
+    @font-face { font-family: 'Barlow'; font-weight: 300; src: url('/wp-content/themes/yes-twentytwentyone/assets/fonts/Barlow-Medium.ttf'); }
+    @font-face { font-family: 'Barlow'; font-weight: 200; src: url('/wp-content/themes/yes-twentytwentyone/assets/fonts/Barlow-Light.ttf'); }
+
+    .page-header, #newsletter, footer.footer, .layer-breadcrumb, .fm-form-container.fm-theme16 { display: none !important; }
+
+    html, body {}
+    body { background-color: #000; color: #FFF; display: flex; }
+    .layer-page { display: flex; width: 100%; }
+    .site-main { width: 100%; }
+
+    .layer-cgMain { display: flex; flex-direction: column; font-family: 'Barlow'; overflow: visible; width: 100%; }
+    .layer-cgMain h1, .layer-cgMain h2, .layer-cgMain h3, .layer-cgMain h4, .layer-cgMain p { font-family: 'Barlow'; }
+
+    .layer-cgMain .layer-cgHeader { padding: 15px 0; }
+    .layer-cgMain .layer-cgBody { flex: auto; }
+    .layer-cgMain .layer-cgFooter { padding: 30px 0; }
+
+    .layer-cgHeader img { height: 40px; }
+
+    .layer-cgBody .section-banner { height: 70vh; position: relative; }
+    .section-banner .layer-bgBanner { background-size: cover; height: 100%; width: 100%; position: absolute; }
+    .section-banner #video-cgBanner { right: -1000px; height: auto; width: auto; max-height: 100%; min-height: 100%; min-width: 100%; }
+    .section-banner .layer-bgBanner.mobile {}
+    .section-banner .layer-contentBannerWrapper { height: 100%; left: 0; position: absolute; top: 0; width: 100%; }
+    .layer-contentBannerWrapper .layer-contentBanner { padding: 30px 0 0; }
+    .layer-contentBanner h3 { color: #76B900; font-size: 15px; font-weight: 200; letter-spacing: 15px; margin-bottom: 30px; }
+    .layer-contentBanner h2 { font-size: 30px; font-weight: 700; line-height: 35px; margin-bottom: 30px; }
+    .layer-contentBanner p { font-size: 16px; font-weight: 300; margin-bottom: 30px; }
+    .layer-contentBanner p.panel-btn { margin-bottom: 0; }
+    .layer-contentBanner p.panel-copyright { bottom: 10px; color: #666; font-size: 12px; margin-bottom: 0; max-width: 100%; position: absolute; }
+
+    .layer-cgMain .btn-cgCTA, .fm-form .standardForm .button-submit { background: linear-gradient(80.9deg, #FF0084 16.48%, #6F29D2 85.6%, #2F3BF5 96.9%); border: 0; border-radius: 6px; color: #FFF; display: inline-block; font-size: 18px; font-weight: 600; padding: 12px 35px; transition: all 230ms ease-in-out; }
+    .layer-cgMain .btn-cgCTA:hover {}
+
+    .layer-cgBody .section-form { padding: 80px 0; }
+    .section-form .layer-formRegister {}
+    .layer-formRegister h4 { color: #76B900; font-size: 48px; font-weight: 600; margin-bottom: 30px; text-align: center; }
+    .section-form .standardForm { background-color: #262626; border-radius: 15px; padding: 30px 15px; }
+    .standardForm .form-group, .fm-form .standardForm .form-group { font-size: 20px; margin: 0 0 20px; }
+    .standardForm label, .fm-form .standardForm label { cursor: pointer; display: block; font-weight: 300; margin-bottom: 5px; }
+    .standardForm label span, .fm-form .standardForm label span { color: #D01600; margin-left: 7px; }
+    .standardForm .form-control, .fm-form .standardForm .form-control {}
+    .standardForm .form-check-label, .fm-form .standardForm .form-check-label { font-size: 14px; font-weight: 400; text-align: justify; }
+    .standardForm .panel-small { font-size: 12px; font-weight: 300; margin: 5px 0 0; }
+
+    .layer-formRegister .fm-form-container.fm-theme1 { width: 100%; }
+    .layer-formRegister .fm-form-container.fm-theme1 .fm-form { padding: 0 !important; }
+    .layer-formRegister .fm-form-container .fm-form .standardForm input[type="text"]:not(.ui-spinner-input), .layer-formRegister .fm-form-container.fm-theme1 .fm-form select { border: 1px solid #CED4DA !important; border-radius: 4px !important; }
+    .layer-formRegister .fm-form .button-submit { margin: 24px 0 0; width: 100%; }
+    .layer-formRegister .fm-form-container .fm-not-filled { margin-bottom: 0; }
+    .layer-formRegister .form-check { padding-left: 0; }
+    .layer-formRegister .form-check .checkbox-div { display: block; margin: 0 0 0.125rem; padding: 0 0 0 1.5em; align-items: start; }
+    .layer-formRegister .fm-form-container.fm-theme1 .fm-form .form-check input[type="checkbox"] { border-radius: 0.25em; float: left; height: 20px; margin: .25em 0 0 -1.5em; width: 20px; }
+    .layer-formRegister .fm-form-container.fm-theme1 .fm-form .form-check label { font-size: 14px; font-weight: 400; line-height: 21px; margin: 0 0 0 10px; text-align: justify; }
+    .layer-formRegister .fm-form-container.fm-theme1 .fm-form .form-check label span { display: none; }
+
+    .layer-cgFooter p { color: #666; font-size: 12px; }
+
+    @media (min-width: 768px) {
+        .layer-contentBannerWrapper .layer-contentBanner { padding-top: 0; }
+        .layer-cgBody .section-banner { height: 60vh; }
+        .layer-contentBanner h3 { margin-bottom: 15px; }
+        .layer-contentBanner h2 { margin-bottom: 15px; }
+        .layer-contentBanner p { margin-bottom: 15px; max-width: 70%; }
+        .layer-contentBanner p.panel-btn { margin-bottom: 0; }
+
+        .section-form .standardForm { padding-left: 80px; padding-right: 80px; }
+    }
+
+    @media (min-width: 840px) {
+        .layer-cgBody .section-banner { height: 90vh; }
+        .layer-contentBanner p { max-width: 100%; }
+        .layer-contentBanner p.panel-copyright { bottom: 0; margin-top: 15px; position: relative; }
+    }
+
+    @media (min-width: 992px) {
+        .layer-cgHeader img { height: 55px; }
+
+        .layer-cgBody .section-banner { height: 80vh; }
+        .section-banner #video-cgBanner { right: -400px; }
+        .layer-contentBanner h3 { font-size: 34px; letter-spacing: 34px; margin-bottom: 30px; }
+        .layer-contentBanner h2 { font-size: 64px; line-height: 64px; margin-bottom: 30px; }
+        .layer-contentBanner p { font-size: 21px; margin-bottom: 30px; max-width: 80%; }
+        .layer-contentBanner p.panel-copyright { bottom: 10px; margin-top: 0; position: absolute; }
+
+        .section-form .standardForm { padding: 30px 100px; }
+    }
+
+    @media (min-width: 1180px) {
+        .layer-cgBody .section-banner { height: 70vh; }
+        .layer-contentBanner p { max-width: 70%; }
+    }
+
+    @media (min-width: 992px) and (max-height: 610px) {
+        .layer-contentBanner p.panel-copyright { bottom: auto; margin-top: 30px; position: relative; }
+    }
+</style>
