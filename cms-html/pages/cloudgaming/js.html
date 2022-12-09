@@ -6,7 +6,8 @@
         var charSpace = (charCode == 32) ? true : false;
         var valLength = $(this).val().length;
         if (
-            (charCode > 31 && (charCode < 48 || chadmin-arCode > 57)) // numeric (0-9)
+            (charCode > 31 && (charCode < 48 || charCode > 57)) // numeric (0-9)
+            || (valLength == 0 && charCode == 48)
         ) {
             charNonNumeric = true;
         }
