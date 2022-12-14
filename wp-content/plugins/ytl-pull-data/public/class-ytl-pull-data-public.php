@@ -395,27 +395,27 @@ class Ytl_Pull_Data_Public
 
 	public function get_plan_by_id($data)
 	{
-		return $this->ca_get_plan_by_id($data['plan_id'], true);
+		// return $this->ca_get_plan_by_id($data['plan_id'], true);
 
-		// $return 	= [];
-		// $get_plans 	= get_option($this->prefix . 'plans_data');
-		// if (empty($get_plans)) {
-		// 	return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
-		// }
-		// $plans_obj 	= unserialize($get_plans);
-		// foreach ($plans_obj as $plans) {
-		// 	foreach ($plans as $plan_id => $plan) {
-		// 		if ($plan_id == $data['plan_id']) {
-		// 			$return	= $plan;
-		// 			break;
-		// 		}
-		// 	}
-		// }
-		// if (empty($return)) {
-		// 	return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
-		// }
+		$return 	= [];
+		$get_plans 	= get_option($this->prefix . 'plans_data');
+		if (empty($get_plans)) {
+			return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
+		}
+		$plans_obj 	= unserialize($get_plans);
+		foreach ($plans_obj as $plans) {
+			foreach ($plans as $plan_id => $plan) {
+				if ($plan_id == $data['plan_id']) {
+					$return	= $plan;
+					break;
+				}
+			}
+		}
+		if (empty($return)) {
+			return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
+		}
 
-		// return $return;
+		return $return;
 	}
 
 	public function ca_get_plan_by_id($plan_id, $returnPlanDetail = false) 
