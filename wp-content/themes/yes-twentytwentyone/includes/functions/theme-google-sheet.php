@@ -417,9 +417,10 @@ function get_google_sheet_data($sheet_id, $key, $range)
 function get_product_stock_data()
 {
     $curl = curl_init();
-
+    $url = get_site_url(null, '/wp-json/elevate/v1/check-stock', 'https');
+    print_r($url);
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://www.yes.my/wp-json/elevate/v1/check-stock',
+        CURLOPT_URL => $url,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
