@@ -418,7 +418,7 @@ function get_product_stock_data()
 {
     $curl = curl_init();
     $url = get_site_url(null, '/wp-json/elevate/v1/check-stock', 'https');
-    print_r($url);
+    $url = 'https://yes.my/wp-json/elevate/v1/check-stock';
     curl_setopt_array($curl, array(
         CURLOPT_URL => $url,
         CURLOPT_RETURNTRANSFER => true,
