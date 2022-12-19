@@ -8,6 +8,7 @@
         var paramDevice = url.searchParams.get('device');
         var targetDevice = $('#device-' + paramDevice);
         if ($(targetDevice)) {
+            $('body').addClass('page-scrolled');
             var parentAccordionContent = $(targetDevice).closest('.accordion-collapse').siblings('.layer-accordionPlanDetails');
             var btnAccordion = $(parentAccordionContent).find('.accordion-button');
 
@@ -78,13 +79,4 @@
         $('#wdform_3_element10').val(phoneModel);
         modalNotify.show();
     }
-    /**
-     * Function to check if page is loaded from back button
-    */
-    function pageShown(evt) {
-        if (evt.persisted) {
-            toggleOverlay(false);
-        }
-    }
-    window.addEventListener("pageshow", pageShown, false);
 </script>
