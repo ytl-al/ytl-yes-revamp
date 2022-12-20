@@ -600,7 +600,7 @@ div .wd-button:first-child {
 
 .wd-label-radio {
   display: inline-block;
-  max-width: 450px;
+  max-width: 500px;
   margin: 0;
 }
 
@@ -5618,6 +5618,13 @@ a.fm_not-active {
   width: unset;
 }
 
+input.fm-mini-labe-input {
+  height: 16px;
+  min-height: 16px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 @media screen and (max-width: 782px) {
   .fm-option-wrapper1 {
     width: calc(30% + 0.25rem + 25px);
@@ -5632,4 +5639,8 @@ a.fm_not-active {
     text-align: start;
     width: 65%;
   }
+}
+
+#form_maker_editor {
+  width: 100%;
 }

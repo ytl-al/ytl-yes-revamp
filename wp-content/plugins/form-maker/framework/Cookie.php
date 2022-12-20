@@ -225,9 +225,12 @@ class Cookie_fm {
    */
   private static function getIPAddress() {
     // whether ip is from the remote address.
-    $ip = $_SERVER['REMOTE_ADDR'];
+    $ip = '';
+    if ( !empty($_SERVER['REMOTE_ADDR']) ) {
+      $ip = $_SERVER['REMOTE_ADDR'];
+    }
     // whether ip is from the share internet.
-    if ( !empty($_SERVER['HTTP_CLIENT_IP']) ) {
+    elseif ( !empty($_SERVER['HTTP_CLIENT_IP']) ) {
       $ip = $_SERVER['HTTP_CLIENT_IP'];
     }
     // whether ip is from the proxy.

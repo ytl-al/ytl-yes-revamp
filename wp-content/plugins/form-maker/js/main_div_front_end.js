@@ -17,7 +17,50 @@ jQuery(window).on("load", function () {
       }
     });
   }
+  fm_run_cookie_init();
 });
+
+jQuery(document).ready(function() {
+    /* Adding margin from top to fields if the field doesn't have label, to keep one line design */
+    jQuery(".wdform_column").each(function () {
+      if ((jQuery(this).find(".wdform-label-section.wd-hidden").length > 0 || jQuery(this).find(".wdform-label-section.wd-width-30").length > 0) && jQuery(this).find(".wdform-label-section.wd-flex-row").length > 0) {
+        jQuery(this).find(".wdform-label-section.wd-hidden, .wdform-label-section.wd-width-30").parent().addClass("fm_empty_margin");
+      }
+    });
+});
+
+/* This function need as when content is cached cookie doesn't work and show submit error */
+function fm_run_cookie_init() {
+  var form_ids = {};
+  var i =0;
+  jQuery(".fm-form").each(function( index ) {
+    var id = jQuery(this).attr("id");
+    id = id.replace('form','');
+    form_ids[i] = id;
+    i++;
+  });
+  jQuery.ajax( {
+    url: fm_objectL10n.fm_frontend_ajax_url,
+    data: {
+      action: "fm_init_cookies",
+      method: "POST",
+      dataType: "json",
+      form_ids: form_ids,
+    },
+    success: function ( result ) {
+      try {
+        var res = JSON.parse(result);
+        jQuery.each( res, function( index, value ) {
+          var form_id = value.form_id;
+          var field_validation_value = value.field_validation_value;
+          jQuery(document).find("#fm_empty_field_validation" + form_id).attr("value", field_validation_value);
+        });
+      } catch (e) {
+        return false;
+      }
+    }
+  });
+}
 
 /**
  * Function called from fm_script_ready(+form_id) function which run during form load
@@ -347,19 +390,54 @@ function wd_validate(that, ids) {
   var isValid;
   var reg_exp;
 
-  var value = jQuery(that).val();
-  var id = jQuery(that).attr("id");
-  var hidden_input = jQuery(that).parent().find(".hidden_date");
 
+  var id = jQuery(that).attr("id");
   var type = jQuery(that).data("valid-type");
+
   var form_id = jQuery(that).data("form-id");
   var wdid = jQuery(that).data("wdid");
-  var date_format = hidden_input.data("format");
-  var date_min = new Date(hidden_input.data("min"));
-  var date_max = new Date(hidden_input.data("max"));
-
-  var start_year = parseInt(jQuery(that).attr("from"));
-  var end_year = parseInt(jQuery(that).attr("to"));
+  var value = jQuery(that).val();
+  var hidden_input = jQuery(that).parent().find(".hidden_date");
+  var date_format = "MM/DD/YY";
+  if (hidden_input.length != 0) {
+    date_format = hidden_input.data("format").toUpperCase();
+    /* In moment js format YY equal to calendar format Y ... */
+    var Ycount = (date_format.match(/Y/g) || []).length;
+    if (Ycount === 2) {
+      date_format = date_format.replace("YY", "YYYY");
+    }
+    else if (Ycount === 1) {
+      date_format = date_format.replace("Y", "YY");
+    }
+    var momentjs_value = value;
+    if (typeof moment === "function") {
+      momentjs_value = moment(value, date_format)._i;
+    }
+    var date_min = hidden_input.data("min"); /* Min date */
+    var date_max = hidden_input.data("max"); /* Max date */
+    /* Case when min/max value mantioned in format +1d, -5w, +3m ....*/
+    date_min = min_max_date_with_operator(date_min, date_format);
+    date_max = min_max_date_with_operator(date_max, date_format);
+    var check_min_max = false;
+    if (date_format === 'OO') {
+      if (typeof moment !== "function") {
+        check_min_max = true;
+      }
+      else if (date_min <= momentjs_value && date_max >= momentjs_value) {
+        check_min_max = true;
+      }
+    }
+    else {
+      if (typeof moment !== "function") {
+        check_min_max = true;
+      }
+      else if ((moment(date_min, date_format).isSameOrBefore(moment(value, date_format)) || date_min == '') && (moment(value, date_format).isSameOrBefore(moment(date_max, date_format)) || date_max == '')) {
+        check_min_max = true;
+      }
+    }
+    var start_year = parseInt(jQuery(that).attr("from"));
+    var end_year = parseInt(jQuery(that).attr("to"));
+  }
 
   if ( typeof ids == "undefined" ) {
     var ids = jQuery(that).data("addiotional-fields");
@@ -370,17 +448,17 @@ function wd_validate(that, ids) {
   var section_cont = jQuery(cont_id + " .wdform-element-section");
 
   switch (type) {
-    case "hour24": {
+    case "hour24": {  /* time field */
       error_message = fm_objectL10n.time_validation;
       reg_exp = /^(0?[0-1]?[0-9]|2[0-3])?$/;
       break;
     }
-    case "hour12": {
+    case "hour12": { /* time field */
       error_message = fm_objectL10n.time_validation;
       reg_exp = /^(0?[0-9]|1[0-2])?$/;
       break;
     }
-    case "minute":
+    case "minute": /* time field */
     case "second": {
       error_message = fm_objectL10n.time_validation;
       reg_exp = /^([0-5]?[0-9])?$/;
@@ -396,22 +474,22 @@ function wd_validate(that, ids) {
       reg_exp = /^[+]?\d+([.]\d+)?$/;
       break;
     }
-    case "day": {
+    case "day": { /* Date of Birth field */
       error_message = fm_objectL10n.date_validation;
       reg_exp = /^(0?[0-2]?[0-9]|3[0-1])?$/;
       break;
     }
-    case "month": {
+    case "month": { /* Date of Birth field */
       error_message = fm_objectL10n.date_validation;
       reg_exp = /^(0?[0-9]|1[0-2])?$/;
       break;
     }
-    case "year": {
+    case "year": { /* Date of Birth field */
       error_message = fm_objectL10n.date_validation;
       reg_exp = /^([1-2]?[0-9]?[0-9]?[0-9])?$/;
       break;
     }
-    case "date": {
+    case "date": { /* Date field */
       if ( date_format == "mm/dd/yy" ) {
         error_message = fm_objectL10n.date_validation;
         reg_exp = /^(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[01])\/\d{4}$/;
@@ -422,33 +500,32 @@ function wd_validate(that, ids) {
       break;
     }
   }
-
   isValid = reg_exp.test(value);
-  if ( value == '' || date_format != "mm/dd/yy") {
+  if ( value == '' || date_format != "MM/DD/YY") {
     isValid = true;
   }
-	if ( isValid ) {
-		for ( var i in ids ) {
-			isValid = wd_validate("#" + ids[i], '');
-			if ( !isValid ) {
-				break;
-			}
-		}
-	}
+  if ( isValid ) {
+    for ( var i in ids ) {
+      isValid = wd_validate("#" + ids[i], '');
+      if ( !isValid ) {
+        break;
+      }
+    }
+  }
 
-  if ( type == "year" ) {
+  if ( type == "year" ) {  /* Date of Birth field */
     if ( ( parseInt(value) < start_year ) || ( parseInt(value) > end_year ) ) {
       isValid = false;
       error_message = fm_objectL10n.year_validation.replace('%%start%%', start_year).replace('%%end%%', end_year);
     }
   }
   if ( type == "date" ) {
-    if ( ( new Date(value) < date_min ) || ( new Date(value) > date_max ) ) {
+    if ( !check_min_max ) {
       isValid = false;
       error_message = fm_objectL10n.date_validation;
     }
   }
-  
+
   jQuery("#check_email_" + wdid + "_" + form_id).remove();
   if ( !isValid ) {
     // Add error message.
@@ -464,6 +541,86 @@ function wd_validate(that, ids) {
   }
 
   return isValid;
+}
+
+/*
+* Function count date according format when min/max is +d, -m, +w ...
+*
+* @param date_min_max is date format like +7d
+* @param date_format is date format
+*
+* @return date
+*
+* */
+function min_max_date_with_operator( date_min_max, date_format ) {
+  var count; /* used for cases min/max date for format +1d, -3m .... get value 1, 3 ....*/
+  var dateOper; /* used for cases min/max date for format +1d, -3m .... get value d, m ....*/
+
+  if ( typeof moment !== "function") {
+    return;
+  }
+
+  var chars = '';
+  /* Collect array like [0 => +1y, 1 => -3m, 2 => +5w] */
+  var myArray = [];
+
+  /* Case when there are + or - in min/max condition */
+  if ( date_min_max.indexOf('+') >= 0 || date_min_max.indexOf('-') >= 0 ) {
+      /* Checking every char and split to parts for y/m/w/d and add to array */
+      for (var i = 0; i < date_min_max.length; i++) {
+
+        if ( (date_min_max[i] === '+' || date_min_max[i] === '-') && i !== 0 ) {
+          myArray.push(chars);
+          chars = '';
+        }
+        chars += date_min_max[i];
+      }
+      myArray.push(chars);
+
+      /* Collect object with moment format ex. {days:7,months:1} */
+      var obj = {};
+      for (var i = 0; i < myArray.length; i++) {
+        count = parseInt(myArray[i].replace(/[^\d]/g, ''));
+        dateOper = myArray[i].replace('+'+count, '').replace('-'+count, '').toLowerCase();
+
+        switch( dateOper ) {
+          case 'y':
+            if( myArray[i].indexOf('+') === 0 ) {
+                obj['years'] = count;
+            } else if( myArray[i].indexOf('-') === 0) {
+                obj['years'] = -count;
+            }
+            break;
+          case 'm':
+            if( myArray[i].indexOf('+') === 0 ) {
+                obj['months'] = count;
+            } else if( myArray[i].indexOf('-') === 0) {
+                obj['months'] = -count;
+            }
+            break;
+          case 'w':
+            if( myArray[i].indexOf('+') === 0 ) {
+                obj['weeks'] = count;
+            } else if( myArray[i].indexOf('-') === 0) {
+                obj['weeks'] = -count;
+            }
+            break;
+          default:
+            if( myArray[i].indexOf('+') === 0 ) {
+                obj['days'] = -count;
+            } else if( myArray[i].indexOf('-') === 0) {
+                obj['days'] = -count;
+            }
+        }
+      }
+      date_min_max = moment().add(obj).format(date_format);
+  } else if ( date_min_max === 'today' ) {
+      date_min_max = moment().format(date_format);
+  } else {
+      date_min_max = moment(date_min_max, date_format)._i;
+  }
+
+  return date_min_max;
 }
 
 function check_isnum_interval(e, x, from, to) {
@@ -1031,7 +1188,57 @@ function remove_whitespace(node) {
   return;
 }
 
-function change_value_range(id, min_max, element_value, default_min_max, format) {
+function change_value_range(id, min_max, element_value, default_min_max, format, that) {
+  format = format.toUpperCase();
+  /* in moment js format YY equal to calendar format Y ... */
+  var count = (format.match(/Y/g) || []).length;
+  if( count === 2 ) {
+      format = format.replace("YY", "YYYY");
+  } else if( count === 1 ) {
+      format = format.replace("Y", "YY");
+  }
+
+  default_min_max = min_max_date_with_operator( default_min_max, format );
+
+  check_min_max = false;
+  if ( format === 'OO' ) {
+      if(min_max === 'minDate') {
+        check_min = (default_min_max <= element_value) ? true : false;
+      } else {
+        check_max = (default_min_max < element_value) ? false : true;
+      }
+  } else {
+      if( typeof moment !== "function") {
+          check_min_max = true;
+      } else {
+          if (moment(default_min_max, format).isSameOrBefore(moment(element_value, format)) && min_max === 'minDate') {
+            check_min_max = true;
+          }
+          if (moment(element_value, format).isSameOrBefore(moment(default_min_max, format)) && min_max === 'maxDate') {
+            check_min_max = true;
+          }
+      }
+  }
+
+  var form_id = jQuery(that).data("form-id");
+  var wdid = jQuery(that).data("wdid");
+  var cont_id = "#form" + form_id + " div[wdid='" + wdid + "']";
+  var label_cont = jQuery(cont_id + " .wdform-label-section:first .wdform-label");
+  if ( !check_min_max ) {
+    error_message = fm_objectL10n.date_validation;
+    var section_cont = jQuery(cont_id + " .wdform-element-section");
+    // Add error message.
+    jQuery("#check_email_" + wdid + "_" + form_id).remove();
+    section_cont.parent().parent().append("<div id='check_email_" + wdid + "_" + form_id + "' class='fm-not-filled'>" + error_message + "</div>");
+    // Add error class to label.
+    label_cont.addClass("wd-error-label");
+  }
+  else {
+    // Remove error class from label.
+    jQuery("#check_email_" + wdid + "_" + form_id).remove();
+    label_cont.removeClass("wd-error-label");
+  }
+
   if ( element_value ) {
     jQuery("#" + id).datepicker('option', min_max, element_value);
   }

@@ -947,6 +947,13 @@ input[type=number].wd-type-number {
 	.fm-form-container .fm-form .wdform-element-section {
 		width: 100%;
 	}
+	.fm-form .fm-form-builder .wdform_column {
+		flex-direction: column;
+	}
+}
+
+.wdform-matrix-table input {
+	width: 100% !important;
 }
 
 .fm-form .wd-flex {
@@ -1150,6 +1157,13 @@ div[type="type_slider"] .label {
 	max-width: 100%;
 	line-height: 1;
 }
+
+@media screen  and (min-width: 769px) {
+	.fm_empty_margin {
+		margin-top: 24px;
+	}
+}
+
 .wdform_column {
 	display: flex;
 	flex-direction: column;

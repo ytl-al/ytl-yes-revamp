@@ -215,6 +215,9 @@ class FMControllerCheckpaypal extends FMAdminController {
             WDW_FM_Library(self::PLUGIN)->mail($email_data['recipient'], $email_data['subject'], $email_data['body'], $email_data['header_arr'], $email_data['attachment'], $email_data['save_uploads']);
             delete_option( $email_data_key );
           }
+        }
+
+        if ( !empty($form->mail_send_payment_info) && $form->mail_send_payment_info == 1 ) {
           WDW_FM_Library(self::PLUGIN)->mail($recipient, $subject, $message, $header_arr);
         }
       }

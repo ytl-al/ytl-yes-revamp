@@ -8050,7 +8050,7 @@ function type_address(i, w_field_label, w_field_label_size, w_field_label_pos, w
   jQuery(function (jQuery) {
     jQuery("label#" + i + "_mini_label_street1").click(function () {
       if (jQuery(this).children('input').length == 0) {
-        var street1 = "<input type='text' class='street1' style='outline:none; border:none; background:none; width:130px;' value=\"" + jQuery(this).text() + "\">";
+        var street1 = "<input type='text' class='street1 fm-mini-labe-input' style='outline:none; border:none; background:none; width:130px;' value=\"" + jQuery(this).text() + "\">";
         jQuery(this).html(street1);
         jQuery("input.street1").focus();
         jQuery("input.street1").blur(function () {
@@ -8064,7 +8064,7 @@ function type_address(i, w_field_label, w_field_label_size, w_field_label_pos, w
 
     jQuery("label#" + i + "_mini_label_street2").click(function () {
       if (jQuery(this).children('input').length == 0) {
-        var street2 = "<input type='text' class='street2'  style='outline:none; border:none; background:none; width:130px;' value=\"" + jQuery(this).text() + "\">";
+        var street2 = "<input type='text' class='street2 fm-mini-labe-input'  style='outline:none; border:none; background:none; width:130px;' value=\"" + jQuery(this).text() + "\">";
         jQuery(this).html(street2);
         jQuery("input.street2").focus();
         jQuery("input.street2").blur(function () {
@@ -8078,7 +8078,7 @@ function type_address(i, w_field_label, w_field_label_size, w_field_label_pos, w
 
     jQuery("label#" + i + "_mini_label_city").click(function () {
       if (jQuery(this).children('input').length == 0) {
-        var city = "<input type='text' class='city'  style='outline:none; border:none; background:none; width:130px;' value=\"" + jQuery(this).text() + "\">";
+        var city = "<input type='text' class='city fm-mini-labe-input'  style='outline:none; border:none; background:none; width:130px;' value=\"" + jQuery(this).text() + "\">";
         jQuery(this).html(city);
         jQuery("input.city").focus();
         jQuery("input.city").blur(function () {
@@ -8092,7 +8092,7 @@ function type_address(i, w_field_label, w_field_label_size, w_field_label_pos, w
 
     jQuery("label#" + i + "_mini_label_state").click(function () {
       if (jQuery(this).children('input').length == 0) {
-        var state = "<input type='text' class='state'  style='outline:none; border:none; background:none; width:130px;' value=\"" + jQuery(this).text() + "\">";
+        var state = "<input type='text' class='state fm-mini-labe-input'  style='outline:none; border:none; background:none; width:130px;' value=\"" + jQuery(this).text() + "\">";
         jQuery(this).html(state);
         jQuery("input.state").focus();
         jQuery("input.state").blur(function () {
@@ -8106,7 +8106,7 @@ function type_address(i, w_field_label, w_field_label_size, w_field_label_pos, w
 
     jQuery("label#" + i + "_mini_label_postal").click(function () {
       if (jQuery(this).children('input').length == 0) {
-        var postal = "<input type='text' class='postal'  style='outline:none; border:none; background:none; width:130px;' value=\"" + jQuery(this).text() + "\">";
+        var postal = "<input type='text' class='postal fm-mini-labe-input'  style='outline:none; border:none; background:none; width:130px;' value=\"" + jQuery(this).text() + "\">";
         jQuery(this).html(postal);
         jQuery("input.postal").focus();
         jQuery("input.postal").blur(function () {
@@ -8120,7 +8120,7 @@ function type_address(i, w_field_label, w_field_label_size, w_field_label_pos, w
 
     jQuery("label#" + i + "_mini_label_country").click(function () {
       if (jQuery(this).children('input').length == 0) {
-        var country = "<input type='text' class='country'  style='outline:none; border:none; background:none; width:130px;' value=\"" + jQuery(this).text() + "\">";
+        var country = "<input type='text' class='country fm-mini-labe-input'  style='outline:none; border:none; background:none; width:130px;' value=\"" + jQuery(this).text() + "\">";
         jQuery(this).html(country);
         jQuery("input.country").focus();
         jQuery("input.country").blur(function () {
