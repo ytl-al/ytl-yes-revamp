@@ -107,7 +107,8 @@ if (!function_exists('yes_register_widgets')) {
                 ['name' => 'Footer Newsletter', 'id' => 'yes_widget_footer_newsletter'],
                 ['name' => 'Footer Top',        'id' => 'yes_widget_footer_top'],
                 ['name' => 'Footer Bottom',     'id' => 'yes_widget_footer_bottom'], 
-                ['name' => 'Popular Deals',     'id' => 'yes_widget_popular_deals']
+                ['name' => 'Popular Deals',     'id' => 'yes_widget_popular_deals'],
+                ['name' => 'FWM Social Media',      'id' => 'yes_fwm_widget_social_media'],
             ];
             foreach ($arr_widgets as $arr_widget) {
                 /** Register widget for all */
@@ -193,6 +194,8 @@ if (!function_exists('yes_register_menus')) {
                     'bs-internet-access'    => esc_html__('Business - Internet Access', 'yes.my'), 
                     'bs-private-network'    => esc_html__('Business - Private Network', 'yes.my'), 
                     'bs-voice-communication'=> esc_html__('Business - Voice Communication', 'yes.my'),
+
+                    'fwm-header'=> esc_html__('FWM Header Menu', 'yes.my'),
 
                     // 'footer-column-1'   => esc_html__('Footer - Column 1', 'yes.my'),
                     // 'footer-column-2'   => esc_html__('Footer - Column 2', 'yes.my'),
