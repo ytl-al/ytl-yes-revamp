@@ -46,4 +46,4 @@
 	<!-- Entry Content ENDS -->
 </article>
 <!-- #post-<?php the_ID(); ?> -->
-<!-- Article ENDS -->Î
+<!-- Article ENDS -->
