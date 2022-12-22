@@ -516,6 +516,8 @@ class FMControllerManage_fm extends FMAdminController {
   public function form_options( $id = 0 ) {
     // Set params for view.
     $params = array();
+    $fm_settings = WDFMInstance(self::PLUGIN)->fm_settings;
+    $params['fm_enable_wp_editor'] = !isset( $fm_settings['fm_enable_wp_editor'] ) ? 1 : $fm_settings['fm_enable_wp_editor'];
     $params['id'] = $id;
     $params['page'] = $this->page;
     $params['page_url'] = $this->page_url;
@@ -639,6 +641,8 @@ class FMControllerManage_fm extends FMAdminController {
   public function email_options( $id = 0 ) {
     // Set params for view.
     $params = array();
+    $fm_settings = WDFMInstance(self::PLUGIN)->fm_settings;
+    $params['fm_enable_wp_editor'] = !isset( $fm_settings['fm_enable_wp_editor'] ) ? 1 : $fm_settings['fm_enable_wp_editor'];
     $params['id'] = $id;
     $params['page'] = $this->page;
     $params['page_url'] = $this->page_url;
@@ -759,6 +763,7 @@ class FMControllerManage_fm extends FMAdminController {
     $mail_subject_user = WDW_FM_Library(self::PLUGIN)->get('mail_subject_user', '');
     $mail_mode = WDW_FM_Library(self::PLUGIN)->get('mail_mode', '');
     $mail_send_email_payment = WDW_FM_Library(self::PLUGIN)->get('mail_send_email_payment', '');
+    $mail_send_payment_info = WDW_FM_Library(self::PLUGIN)->get('mail_send_payment_info', 1);
     $mail_send_email_payment_user = WDW_FM_Library(self::PLUGIN)->get('mail_send_email_payment_user', '');
     $mail_mode_user = WDW_FM_Library(self::PLUGIN)->get('mail_mode_user', '');
     $mail_attachment = WDW_FM_Library(self::PLUGIN)->get('mail_attachment', '');
@@ -795,6 +800,7 @@ class FMControllerManage_fm extends FMAdminController {
       'mail_mode' => $mail_mode,
       'mail_mode_user' => $mail_mode_user,
       'mail_send_email_payment' => $mail_send_email_payment,
+      'mail_send_payment_info' => $mail_send_payment_info,
       'mail_send_email_payment_user' => $mail_send_email_payment_user,
       'mail_attachment' => $mail_attachment,
       'mail_attachment_user' => $mail_attachment_user,
@@ -838,7 +844,11 @@ class FMControllerManage_fm extends FMAdminController {
     $submissions_limit = stripslashes(WDW_FM_Library(self::PLUGIN)->get('submissions_limit', 0));
     $submissions_limit_text = stripslashes(WDW_FM_Library(self::PLUGIN)->get('submissions_limit_text', ''));
     $save_uploads = stripslashes(WDW_FM_Library(self::PLUGIN)->get('save_uploads', ''));
-    $submit_text = WDW_FM_Library(self::PLUGIN)->get('submit_text', '', FALSE);
+
+    $allowed_html_tags = WDW_FM_Library(self::PLUGIN)->allowed_html_tags();
+    $submit_text = html_entity_decode(WDW_FM_Library(self::PLUGIN)->get('submit_text', '', FALSE));
+    $submit_text = htmlentities(wp_kses($submit_text, $allowed_html_tags));
+
     $url = WDW_FM_Library(self::PLUGIN)->get('url', '');
     $tax = WDW_FM_Library(self::PLUGIN)->get('tax', 0);
     $paypal_email = WDW_FM_Library(self::PLUGIN)->get('paypal_email', '', 'esc_attr');
@@ -1073,11 +1083,11 @@ class FMControllerManage_fm extends FMAdminController {
 	*/
 	public function remove_query( $id = 0 ) {
 		$fieldset_id = WDW_FM_Library(self::PLUGIN)->get('fieldset_id', 'general');
-		$query_id 	 = WDW_FM_Library(self::PLUGIN)->get('query_id',0);
+    $query_id = WDW_FM_Library(self::PLUGIN)->get('query_id', 0, 'intval');
 		$message = 2;
-		if( $this->model->delete_formmaker_query( $query_id ) ) {
-			$message = 3;
-		}
+    if ( $this->model->delete_formmaker_query($query_id) ) {
+      $message = 3;
+    }
 
 		WDW_FM_Library(self::PLUGIN)->fm_redirect(add_query_arg(array(
 													'page' => $this->page,
@@ -1220,6 +1230,7 @@ class FMControllerManage_fm extends FMAdminController {
         'mail_mode' => $res['mail_mode'],
         'mail_mode_user' => $res['mail_mode_user'],
         'mail_send_email_payment' => $res['mail_send_email_payment'],
+        'mail_send_payment_info' => $res['mail_send_payment_info'],
         'mail_send_email_payment_user' => $res['mail_send_email_payment_user'],
         'mail_attachment' => $res['mail_attachment'],
         'mail_attachment_user' => $res['mail_attachment_user'],
@@ -1378,6 +1389,7 @@ class FMControllerManage_fm extends FMAdminController {
         'mail_mode' => 1,
         'mail_mode_user' => 1,
         'mail_send_email_payment' => 1,
+        'mail_send_payment_info' => 1,
         'mail_send_email_payment_user' => 1,
         'mail_attachment' => 1,
         'mail_attachment_user' => 1,
@@ -1545,6 +1557,7 @@ class FMControllerManage_fm extends FMAdminController {
       'mail_mode' => 1,
       'mail_mode_user' => 1,
       'mail_send_email_payment' => 1,
+      'mail_send_payment_info' => 1,
       'mail_send_email_payment_user' => 1,
       'mail_attachment' => 1,
       'mail_attachment_user' => 1,

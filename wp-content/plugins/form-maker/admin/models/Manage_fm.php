@@ -31,11 +31,20 @@ class FMModelManage_fm extends FMAdminModel {
     $rows = $wpdb->get_results($query);
     if ( !empty($rows) ) {
       foreach ( $rows as $key => $row ) {
+        $form_options = json_decode( $row->form_options, 1 );
+        $save_db = isset($form_options['savedb']) ? $form_options['savedb'] : 1;
         if ( !isset($row->header_hide) ) {
           $row->header_hide = 1;
         }
-        $query = "SELECT count(DISTINCT group_id) FROM " . $wpdb->prefix . "formmaker_submits WHERE form_id=" . (int) $row->id;
-        $row->submission_count = $wpdb->get_var($query);
+        $submission_count_query = "SELECT count(DISTINCT group_id) FROM " . $wpdb->prefix . "formmaker_submits WHERE form_id=" . (int) $row->id;
+        $submission_count = $wpdb->get_var($submission_count_query);
+        if ( $save_db == 2 ) {
+          $in_progress_count_query = $submission_count_query . " AND (element_value = 'In progress' or element_value = 'Pending')";
+          $in_progress_count = $wpdb->get_var($in_progress_count_query);
+          $submission_count = intval($submission_count) - intval($in_progress_count);
+        }
+        $row->submission_count = $submission_count;
+
         $rows[$key] = WDW_FM_Library::convert_json_options_to_old( $row, 'form_options');
       }
     }
@@ -232,6 +241,7 @@ class FMModelManage_fm extends FMAdminModel {
       $row->mail_mode = 1;
       $row->mail_mode_user = 1;
       $row->mail_send_email_payment = 1;
+      $row->mail_send_payment_info = 1;
       $row->mail_send_email_payment_user = 1;
       $row->mail_attachment = 1;
       $row->mail_attachment_user = 1;
@@ -3868,8 +3878,8 @@ class FMModelManage_fm extends FMAdminModel {
    */
   public function delete_formmaker_query( $id = 0 ) {
     global $wpdb;
-    $query = 'DELETE FROM ' . $wpdb->prefix . 'formmaker_query WHERE id =' . $id;
-    return $wpdb->query($query);
+
+    return $wpdb->query($wpdb->prepare('DELETE FROM `' . $wpdb->prefix . 'formmaker_query` WHERE id =%d', $id));
   }
 
   /**

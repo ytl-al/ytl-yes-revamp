@@ -3,7 +3,7 @@
  * Plugin Name: Form Maker Pro
  * Plugin URI: https://10web.io/plugins/wordpress-form-maker/?utm_source=form_maker&utm_medium=free_plugin
  * Description: This plugin is a modern and advanced tool for easy and fast creating of a WordPress Form. The backend interface is intuitive and user friendly which allows users far from scripting and programming to create WordPress Forms.
- * Version: 2.14.10
+ * Version: 2.15.7
  * Author: 10Web Form Builder Team
  * Author URI: https://10web.io/plugins/?utm_source=form_maker&utm_medium=free_plugin
  * License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
@@ -103,8 +103,8 @@ final class WDFM {
     $this->plugin_url = plugins_url(plugin_basename(dirname(__FILE__)));
     $this->front_urls = $this->get_front_urls();
     $this->main_file = plugin_basename(__FILE__);
-    $this->plugin_version = '2.14.10';
-    $this->db_version = '2.14.10';
+    $this->plugin_version = '2.15.7';
+    $this->db_version = '2.15.7';
     $this->menu_postfix = ($this->is_free == 2 ? '_fmc' : '_fm');
     $this->plugin_postfix = ($this->is_free == 2 ? '_fmc' : '');
     $this->menu_slug = 'manage' . $this->menu_postfix;
@@ -212,6 +212,9 @@ final class WDFM {
     add_action('wp_ajax_FMShortocde' . $this->plugin_postfix, array($this, 'form_maker_ajax'));
     add_action('media_buttons', array($this, 'media_button'));
 
+    add_action('wp_ajax_fm_init_cookies', array($this, 'FM_front_end_init_cookies'));
+    add_action( 'wp_ajax_nopriv_fm_init_cookies', array($this, 'FM_front_end_init_cookies') );
+
     add_action('admin_head', array($this, 'form_maker_admin_ajax'));//js variables for admin.
 
     // Form maker shortcodes.
@@ -296,6 +299,28 @@ final class WDFM {
     }
     if (!$this->is_free) {
       add_action('rest_api_init', array($this,'register_endpoint_for_stripe_events'));
+    }
+  }
+
+  /* Init cookies and get response new key for fm_empty_field_validation which js added to form */
+  public function FM_front_end_init_cookies() {
+    if ( get_option('wd_form_maker_version', FALSE) ) {
+      if ( !class_exists('Cookie_fm') ) {
+        require_once(WDFMInstance(self::PLUGIN)->plugin_dir . '/framework/Cookie.php');
+      }
+      $form_ids = WDW_FM_Library::get('form_ids', '');
+      if( empty($form_ids) || gettype($form_ids) != 'array' ) {
+        die();
+      }
+      new Cookie_fm();
+      $new_values = array();
+      foreach ( $form_ids as $id ) {
+        $value = md5('uniqid(rand(), TRUE)');
+        $new_values[] = array( 'form_id' => $id, 'field_validation_value' => $value );
+        Cookie_fm::saveCookieValueByKey( $id, 'fm_empty_field_validation', $value );
+      }
+      echo json_encode($new_values);
+      die();
     }
   }
 
@@ -1206,6 +1231,8 @@ final class WDFM {
     wp_register_style($this->handle_prefix . '-frontend', $front_plugin_url . $style_file, $required_styles, $this->plugin_version);
     wp_register_script($this->handle_prefix . '-frontend', $front_plugin_url . $script_file, $required_scripts, $this->plugin_version);
 
+    wp_register_script($this->handle_prefix . '-frontend-momentjs', $front_plugin_url . '/js/moment.min.js', array(), '2.29.2');
+
     if (WDW_FM_Library(self::PLUGIN)->elementor_is_active()) {
       wp_enqueue_style($this->handle_prefix . '-frontend');
       wp_enqueue_script($this->handle_prefix . '-frontend');
@@ -1228,6 +1255,7 @@ final class WDFM {
       'number_validation' => addslashes(__('This is not a valid number value.', $this->prefix)),
       'date_validation' => addslashes(__('This is not a valid date value.', $this->prefix)),
       'year_validation' => addslashes(sprintf(__('The year must be between %s and %s', $this->prefix), '%%start%%', '%%end%%')),
+      'fm_frontend_ajax_url' => admin_url( 'admin-ajax.php' ),
     ));
 
     wp_localize_script($this->handle_prefix . '-frontend', 'fm_ajax', array(
@@ -1632,8 +1660,8 @@ final class WDFM {
         'file' => 'fm_save.php',
       ),
       'form-maker-stripe' => array(
-        'version' => '1.2.9',
-        'fm_version' => '2.14.10',
+        'version' => '1.2.11',
+        'fm_version' => '2.15.5',
         'file' => 'fm_stripe.php',
       ),
       'form-maker-webhooks' => array(
@@ -1848,3 +1876,22 @@ function fm_add_plugin_meta_links( $meta_fields, $file ) {
 if ( WDFMInstance(1)->is_free ) {
   add_filter("plugin_row_meta", 'fm_add_plugin_meta_links', 10, 2);
 }
+
+require_once(WP_PLUGIN_DIR . "/" . plugin_basename(dirname(__FILE__)) . '/booster/init.php');
+add_action('init', function() {
+  TWB(array(
+        'submenu' => array(
+          'parent_slug' => 'manage_fm',
+          'title' => 'Speed Optimization',
+        ),
+        'page' => array(
+          'slug' => 'form-maker',
+          'section_booster_title' => 'Optimize forms and increase your conversions',
+          'section_booster_desc' => 'Use the free 10Web Booster plugin to automatically optimize pages with forms and boost performance.',
+          'section_booster_success_title' => 'Optimize pages with forms',
+          'section_booster_success_desc' => 'Improve website performance',
+          'section_optimize_images' => FALSE,
+          'section_analyze_desc' => 'Speed up your website and increase conversions by optimizing all pages that include forms.',
+        ),
+      ));
+}, 11);

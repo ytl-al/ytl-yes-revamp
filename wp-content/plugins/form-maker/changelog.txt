@@ -1,3 +1,49 @@
+2.15.7
+* Added: 10Web Booster integration.
+* Fixed: Special chars in exported submission.
+* Fixed: PDF link in submission.
+
+2.15.6
+* Fixed: Security vulnerability.
+* Fixed: Compatibility with Elementor latest version.
+
+2.15.5
+* Improved: Show customer info in Stripe payments.
+* Fixed: Number field validation.
+* Fixed: Alignment of Field with mini labels.
+* Fixed: Conditional fields with options from DB.
+
+2.15.4
+* Improved: Fields alignment in different cases.
+* Fixed: Page url placeholder with ajax submit.
+* Fixed: Pure textarea for Email body with disabled HTML editor.
+* Fixed: Allow TABLE tag in custom text after submit.
+
+2.15.3
+* Improved: Allow HTML in choices fields labels.
+* Fixed: Responsiveness issue with 2 columns.
+* Fixed: Form submit on cached pages.
+
+2.15.2
+* Improved: Allow HTML tags in Paragraph text field.
+* Fixed: Date field validation with y+m format.
+
+2.15.1
+* Fixed: Date field validation.
+
+2.15.0
+* Improved: Date field with all date formats.
+* Fixed: Action after submission with custom text for popup forms.
+* Fixed: Show form on button click for the second time.
+
+2.14.12
+* Fixed: XSS vulnerability.
+
+2.14.11
+* Added: Option to not send Email with payment information.
+* Improved: Cancel Stripe transaction if an error occurs while submitting a form.
+* Fixed: Submissions count in list.
+
 2.14.10
 * Improved: FM Cookie init process.
 * Fixed: Stripe transaction worked in case of form not submitted.

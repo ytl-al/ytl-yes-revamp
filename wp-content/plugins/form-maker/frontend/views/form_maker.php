@@ -1160,6 +1160,7 @@ class FMViewForm_maker {
           }
           case 'type_date': { //Todo: Depricated.
             wp_enqueue_script('jquery-ui-datepicker');
+            wp_enqueue_script(WDFMInstance(self::PLUGIN)->handle_prefix . '-frontend-momentjs');
             if ( function_exists('wp_add_inline_script') ) { // Since Wordpress 4.5.0
               wp_add_inline_script('jquery-ui-datepicker', WDW_FM_Library(self::PLUGIN)->localize_ui_datepicker());
             }
@@ -1816,6 +1817,7 @@ class FMViewForm_maker {
       }
     }
     $form_maker_front_end .= '<div class="wdform_preload"></div>';
+    $form_maker_front_end .= '<input type="hidden" name="fm-current-page" value="' . esc_url(WDW_FM_Library(self::PLUGIN)->get_current_page_url()) . '" />';
     $form_maker_front_end .= '</form>';
     $jsversion = $row->jsversion ? $row->jsversion : 1;
     $front_urls = WDFMInstance(self::PLUGIN)->front_urls;
@@ -1894,6 +1896,7 @@ class FMViewForm_maker {
     $message = $params['message'];
     $onload_js = '';
     $fm_form = '';
+    $submit_text_type = ($form->submit_text_type == 1 || $form->submit_text_type == 3) ? TRUE : FALSE;
     switch ($type) {
       case 'topbar': {
         $top_bottom = $form->topbar_position ? 'top' : 'bottom';
@@ -2045,12 +2048,12 @@ class FMViewForm_maker {
         if ($display_on_this && $hide_mobile || ($fm_settings['fm_ajax_submit'] && Cookie_fm::getCookieByKey($id, 'fm_hide_form_after_submit') == 1)) {
           if ( Cookie_fm::getCookieByKey($id, 'fm_hide_form_after_submit') == 1) {
             if ( $error == 'success' ) {
-              if ($message) {
+              if ( $message || $submit_text_type ) {
                 $onload_js .= '
 									jQuery("#fm-form' . $id . '").addClass("fm-hide");
 									jQuery("#fm-pages' . $id . '").addClass("fm-hide");
 									jQuery("#fm-popover-background' . $id . '").css("display", "block");
-									jQuery("#fm-popover' . $id . '").css("visibility", "");
+									jQuery("#fm-popover' . $id . '").css("display", "block");
 
 									fm_hide_form(' . $id . ', ' . $frequency . ');
 								';
@@ -2078,30 +2081,29 @@ class FMViewForm_maker {
               if ( $message ) {
                 $onload_js .= '
 									jQuery("#fm-popover-background' . $id . '").css("display", "block");
-									jQuery("#fm-popover' . $id . '").css("visibility", "");
+									jQuery("#fm-popover' . $id . '").css("display", "block");
 								';
               }
             }
             else {
-              $onload_js .= '
-								function show_popup_form_'. $id . '() {
-								  jQuery("#fm-popover-background' . $id . '").css("display", "block");
-								  jQuery("#fm-popover' . $id . '").css("visibility", "");
-								  jQuery(".fm-popover-content").addClass("fm-animated ' . ($animate_effect) . '");
-								  jQuery("#fm-popover' . $id . ' .fm-header-img").addClass("fm-animated ' . ($form->header_image_animation) . '");
-								}
-								if(' . $frequency . ' == 0){
-									localStorage.removeItem("hide-"+' . $id . ');
-								}
+              $onload_js .= 'if (' . $frequency . ' == 0) {
+                  localStorage.removeItem("hide-"+' . $id . ');
+                }
 								var hide_popover = localStorage.getItem("hide-"+' . $id . ');
 								if((hide_popover == null || fm_currentDate.getTime() >= hide_popover || ' . $show_for_admin . ') && ' . ((int)$form->popover_loading_delay >= 0 ? 'true' : 'false') . '){
-									setTimeout(function(){
-										show_popup_form_'. $id . '()
+                setTimeout(function(){
+                  show_popup_form_'. $id . '()
 									}, ' . ($loading_delay * 1000) . ');
-								}';
+              }';
             }
           }
           $onload_js .= '
+              function show_popup_form_'. $id . '() {
+                jQuery("#fm-popover-background' . $id . '").css("display", "block");
+                jQuery("#fm-popover' . $id . '").css("display", "block");
+                jQuery(".fm-popover-content").addClass("fm-animated ' . ($animate_effect) . '");
+                jQuery("#fm-popover' . $id . ' .fm-header-img").addClass("fm-animated ' . ($form->header_image_animation) . '");
+							}
 							jQuery("#fm-popover-inner-background' . $id . '").on("click", function(){
 								fm_hide_form(' . $id . ', ' . $frequency . ', function(){
 								  jQuery("#fm-popover-background' . $id . '").css("display", "none");
@@ -2111,7 +2113,7 @@ class FMViewForm_maker {
 						';
 
           $fm_form .= '<div class="fm-popover-background" id="fm-popover-background' . $id . '" style="display:none;"></div>
-						<div id="fm-popover' . $id . '" class="fm-popover ' . $hide_mobile_class . '" style="visibility:hidden;">
+						<div id="fm-popover' . $id . '" class="fm-popover ' . $hide_mobile_class . '" style="display:none;">
 							<div class="fm-popover-container" id="fm-popover-container' . $id . '">
 								<div class="fm-popover-inner-background" id="fm-popover-inner-background' . $id . '"></div>
 								<div class="fm-popover-content">';
@@ -2414,12 +2416,12 @@ class FMViewForm_maker {
         $table = $label_table_and_column[0];
         $label_column = $label_table_and_column[1];
         if ( $label_column ) {
-          $choices_labels = $this->model->select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
+          $choices_labels = WDW_FM_Library::select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
         }
         $value_table_and_column = explode(':', str_replace(array('[', ']'), '', $param['w_choices_price'][$key]));
         $value_column = $param['w_choices_disabled'][$key] == "true" ? '' : $value_table_and_column[1];
         if ( $value_column ) {
-          $choices_values = $this->model->select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
+          $choices_values = WDW_FM_Library::select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
         }
         $columns_count = count($choices_labels) > 0 ? count($choices_labels) : count($choices_values);
         for ( $k = 0; $k < $columns_count; $k++ ) {
@@ -2620,7 +2622,7 @@ class FMViewForm_maker {
         $table = $label_table_and_column[0];
         $label_column = $label_table_and_column[1];
         if ( $label_column ) {
-          $choices_labels = $this->model->select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
+          $choices_labels = WDW_FM_Library::select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
         }
         $value_table_and_column = explode(':', str_replace(array(
                                                              '[',
@@ -2628,7 +2630,7 @@ class FMViewForm_maker {
                                                            ), '', $param['w_choices_price'][$key]));
         $value_column = $value_table_and_column[1];
         if ( $value_column ) {
-          $choices_values = $this->model->select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
+          $choices_values = WDW_FM_Library::select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
         }
         $columns_count_radio = count($choices_labels) > 0 ? count($choices_labels) : count($choices_values);
         if ( array_filter($choices_labels) || array_filter($choices_values) ) {
@@ -2818,7 +2820,7 @@ class FMViewForm_maker {
         $table = $label_table_and_column[0];
         $label_column = $label_table_and_column[1];
         if ( $label_column ) {
-          $choices_labels = $this->model->select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
+          $choices_labels = WDW_FM_Library::select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
         }
         $value_table_and_column = explode(':', str_replace(array(
                                                              '[',
@@ -2826,7 +2828,7 @@ class FMViewForm_maker {
                                                            ), '', $param['w_choices_price'][$key]));
         $value_column = $value_table_and_column[1];
         if ( $value_column ) {
-          $choices_values = $this->model->select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
+          $choices_values = WDW_FM_Library::select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
         }
         $columns_count = count($choices_labels) > 0 ? count($choices_labels) : count($choices_values);
         if ( array_filter($choices_labels) || array_filter($choices_values) ) {
@@ -3008,12 +3010,12 @@ class FMViewForm_maker {
         $table = $label_table_and_column[0];
         $label_column = $label_table_and_column[1];
         if ( $label_column ) {
-          $choices_labels = $this->model->select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
+          $choices_labels = WDW_FM_Library::select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
         }
         $value_table_and_column = explode(':', str_replace(array('[', ']'), '', $param['w_choices_price'][$key]));
         $value_column = $value_table_and_column[1];
         if ( $value_column ) {
-          $choices_values = $this->model->select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
+          $choices_values = WDW_FM_Library::select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
         }
         $columns_count_shipping = count($choices_labels) > 0 ? count($choices_labels) : count($choices_values);
         if ( array_filter($choices_labels) || array_filter($choices_values) ) {
@@ -3028,7 +3030,7 @@ class FMViewForm_maker {
               $param['w_choices_checked'][$key] = ($param['w_choices_checked'][$key] == 'true' ? 'checked="checked"' : '');
             }
             $html .= '<div class="radio-div wd-choice wd-flex ' . ($param['w_field_option_pos'] == "right" ? "wd-flex-row" : "wd-flex-row-reverse") . '">';
-            $html .= '<input type="radio" id="wdform_' . $id1 . '_element' . $form_id . '' . ($key1 + $k) . '" name="wdform_' . $id1 . '_element' . $form_id . '" value="' . $choice_value . '" title="' . htmlspecialchars($choice_label[0]) . '" ' . $param['w_choices_checked'][$key] . ' ' . $param['attributes'] . ' />';
+            $html .= '<input type="radio" id="wdform_' . $id1 . '_element' . $form_id . '' . ($key1 + $k) . '" name="wdform_' . $id1 . '_element' . $form_id . '" value="' . $choice_value . '" title="' . htmlspecialchars($choice_label) . '" ' . $param['w_choices_checked'][$key] . ' ' . $param['attributes'] . ' />';
             $html .= '<label class="wd-align-items-center wd-flex ' . ($param['w_field_option_pos'] == "right" ? "wd-flex-row" : "wd-flex-row-reverse") . '" for="wdform_' . $id1 . '_element' . $form_id . '' . ($key1 + $k) . '"><span></span>' . $choice_label . '</label>';
             $html .= '</div>';
           }
@@ -3291,7 +3293,11 @@ class FMViewForm_maker {
     }
     foreach ( $params_names as $params_name ) {
       $temp = explode('*:*' . $params_name . '*:*', $temp);
-      $param[$params_name] = esc_html($temp[0]);
+      if ( $params_name == 'w_choices' ) {
+        $param[$params_name] = strip_tags($temp[0], "<b><strong><span><a>");
+      } else {
+         $param[$params_name] = esc_html($temp[0]);
+      }
       $temp = $temp[1];
     }
     if ( $temp ) {
@@ -3339,12 +3345,12 @@ class FMViewForm_maker {
         $table = $label_table_and_column[0];
         $label_column = $label_table_and_column[1];
         if ( $select_data_from_db && $label_column ) {
-          $choices_labels = $this->model->select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
+          $choices_labels = WDW_FM_Library::select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
         }
         $value_table_and_column = explode(':', str_replace(array( '[', ']' ), '', $param['w_choices_value'][$key]));
         $value_column = $value_table_and_column[1];
         if ( $select_data_from_db && $value_column ) {
-          $choices_values = $this->model->select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
+          $choices_values = WDW_FM_Library::select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
         }
         $columns_count_checkbox = count($choices_labels) > 0 ? count($choices_labels) : count($choices_values);
         if ( array_filter($choices_labels) || array_filter($choices_values) ) {
@@ -3493,7 +3499,12 @@ class FMViewForm_maker {
     }
     foreach ( $params_names as $params_name ) {
       $temp = explode('*:*' . $params_name . '*:*', $temp);
-      $param[$params_name] = esc_html($temp[0]);
+      if ( $params_name == 'w_choices' ) {
+        $param[$params_name] = strip_tags($temp[0], "<b><strong><span><a>");
+      } else {
+        $param[$params_name] = esc_html($temp[0]);
+      }
+
       $temp = $temp[1];
     }
     if ( $temp ) {
@@ -3541,12 +3552,12 @@ class FMViewForm_maker {
         $table = $label_table_and_column[0];
         $label_column = $label_table_and_column[1];
         if ( $select_data_from_db && $label_column ) {
-          $choices_labels = $this->model->select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
+          $choices_labels = WDW_FM_Library::select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
         }
         $value_table_and_column = explode(':', str_replace(array( '[', ']' ), '', $param['w_choices_value'][$key]));
         $value_column = $value_table_and_column[1];
         if ( $select_data_from_db && $value_column ) {
-          $choices_values = $this->model->select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
+          $choices_values = WDW_FM_Library::select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
         }
         $columns_count_radio = count($choices_labels) > 0 ? count($choices_labels) : count($choices_values);
         if ( array_filter($choices_labels) || array_filter($choices_values) ) {
@@ -3726,12 +3737,12 @@ class FMViewForm_maker {
         $table = $label_table_and_column[0];
         $label_column = $label_table_and_column[1];
         if ( $select_data_from_db && $label_column ) {
-          $choices_labels = $this->model->select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
+          $choices_labels = WDW_FM_Library::select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
         }
         $value_table_and_column = explode(':', str_replace(array('[', ']'), '', $param['w_choices_value'][$key]));
         $value_column = $param['w_choices_disabled'][$key] == "true" ? '' : $value_table_and_column[1];
         if ( $select_data_from_db && $value_column ) {
-          $choices_values = $this->model->select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
+          $choices_values = WDW_FM_Library::select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
         }
         $columns_count = count($choices_labels) > 0 ? count($choices_labels) : count($choices_values);
         if ( array_filter($choices_labels) || array_filter($choices_values) ) {
@@ -3779,6 +3790,7 @@ class FMViewForm_maker {
    */
   private function type_date_new( $params = array(), $row = array(), $form_id = 0, $id1 = 0, $type = '', $param = array() ) {
     wp_enqueue_script('jquery-ui-datepicker');
+    wp_enqueue_script(WDFMInstance(self::PLUGIN)->handle_prefix . '-frontend-momentjs');
     if ( function_exists('wp_add_inline_script') ) { // Since Wordpress 4.5.0
       wp_add_inline_script('jquery-ui-datepicker', WDW_FM_Library(self::PLUGIN)->localize_ui_datepicker());
     }
@@ -3865,6 +3877,7 @@ class FMViewForm_maker {
    * @return string
    */
   private function type_date_fields( $params = array(), $row = array(), $form_id = 0, $id1 = 0, $type = '', $param = array() ) {
+    wp_enqueue_script(WDFMInstance(self::PLUGIN)->handle_prefix . '-frontend-momentjs');
     $params_names = array(
       'w_field_label_size',
       'w_field_label_pos',
@@ -4082,6 +4095,7 @@ class FMViewForm_maker {
    */
   private function type_date_range( $params = array(), $row = array(), $form_id = 0, $id1 = 0, $type = '', $param = array() ) {
     wp_enqueue_script('jquery-ui-datepicker');
+    wp_enqueue_script(WDFMInstance(self::PLUGIN)->handle_prefix . '-frontend-momentjs');
     if ( function_exists('wp_add_inline_script') ) { // Since Wordpress 4.5.0
       wp_add_inline_script('jquery-ui-datepicker', WDW_FM_Library(self::PLUGIN)->localize_ui_datepicker());
     }
@@ -4150,12 +4164,12 @@ class FMViewForm_maker {
     $param['w_class'] .= ' wd-flex-row';
 
     $html = '<div class="wd-flex wd-flex-row wd-align-items-center wd-width-50">';
-    $html .= '<input class="wd-width-100" autocomplete="off" type="text" id="wdform_' . $id1 . '_element' . $form_id . '0" name="wdform_' . $id1 . '_element' . $form_id . '0" ' . $param['attributes'] . ' onchange="change_value_range(\'wdform_' . $id1 . '_element' . $form_id . '1\', \'minDate\', this.value, \'' . $param['w_min_date'] . '\', \'' . $param['w_format'] . '\')" />';
+    $html .= '<input class="wd-width-100" autocomplete="off" type="text" id="wdform_' . $id1 . '_element' . $form_id . '0" name="wdform_' . $id1 . '_element' . $form_id . '0" ' . $param['attributes'] . ' onchange="change_value_range(\'wdform_' . $id1 . '_element' . $form_id . '1\', \'minDate\', this.value, \'' . $param['w_min_date'] . '\', \'' . $param['w_format'] . '\', this)" data-form-id="' . $form_id . '" data-wdid="' . $id1 . '" />';
     $html .= '<span id="button_calendar_' . $id1 . '0" class="dashicons dashicons-calendar-alt wd-calendar-button ' . ($param['w_show_image'] == "yes" ? "wd-inline-block" : "wd-hidden") . '"></span>';
     $html .= '</div>';
     $html .= '<div class="wd-flex wd-flex-row wd-align-items-center wd-name-separator"></div>';
     $html .= '<div class="wd-flex wd-flex-row wd-align-items-center wd-width-50">';
-    $html .= '<input class="wd-width-100" autocomplete="off" type="text" id="wdform_' . $id1 . '_element' . $form_id . '1" name="wdform_' . $id1 . '_element' . $form_id . '1" ' . $param['attributes'] . ' onchange="change_value_range(\'wdform_' . $id1 . '_element' . $form_id . '0\', \'maxDate\', this.value, \'' . $param['w_max_date'] . '\', \'' . $param['w_format'] . '\')" />';
+    $html .= '<input class="wd-width-100" autocomplete="off" type="text" id="wdform_' . $id1 . '_element' . $form_id . '1" name="wdform_' . $id1 . '_element' . $form_id . '1" ' . $param['attributes'] . ' onchange="change_value_range(\'wdform_' . $id1 . '_element' . $form_id . '0\', \'maxDate\', this.value, \'' . $param['w_max_date'] . '\', \'' . $param['w_format'] . '\', this)"  data-form-id="' . $form_id . '" data-wdid="' . $id1 . '" />';
     $html .= '<span id="button_calendar_' . $id1 . '1" class="dashicons dashicons-calendar-alt wd-calendar-button ' . ($param['w_show_image'] == "yes" ? "wd-inline-block" : "wd-hidden") . '"></span>';
     $html .= '</div>';
 

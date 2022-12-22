@@ -67,11 +67,20 @@ class FMModelSubmissions_fm extends FMAdminModel {
 	* @param int $id
 	* @return object $statistics
 	*/
-	public function get_statistics( $id = 0 ) {
+	public function get_statistics( $id = 0, $save_db = 1 ) {
 		global $wpdb;
 		$statistics = array();
-		$query = $wpdb->prepare('SELECT count(distinct group_id) FROM ' . $wpdb->prefix . 'formmaker_submits WHERE form_id ="%d"', $id);
-		$statistics["total_entries"] = $wpdb->get_var($query);
+
+    $submission_count_query = "SELECT count(DISTINCT group_id) FROM " . $wpdb->prefix . "formmaker_submits WHERE form_id=%d";
+    $submission_count = $wpdb->get_var( $wpdb->prepare( $submission_count_query, $id ) );
+    if ( $save_db == 2 ) {
+      $in_progress_count_query = $submission_count_query . " AND (element_value = 'In progress' or element_value = 'Pending')";
+
+      $in_progress_count = $wpdb->get_var( $wpdb->prepare( $in_progress_count_query, $id ) );
+      $submission_count = intval($submission_count) - intval($in_progress_count);
+    }
+
+		$statistics["total_entries"] = $submission_count;
 
 		$query = $wpdb->prepare('SELECT `views` FROM ' . $wpdb->prefix . 'formmaker_views WHERE form_id="%d"', $id);
 		$statistics["total_views"] = $wpdb->get_var($query);

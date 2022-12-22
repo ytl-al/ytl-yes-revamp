@@ -175,7 +175,12 @@ class FMControllerSubmissions_fm extends FMAdminController {
 		$page_num = $paged ? ($paged - 1) * $params['page_per_num'] : 0;
 		
 		$params['forms'] = $this->model->get_forms();
-		$params['statistics']  = $this->model->get_statistics( $id );
+
+    $form_options = isset($params['forms'][$id]->form_options) ? $params['forms'][$id]->form_options : '';
+    $form_options = json_decode( $form_options, 1 );
+
+    $save_db = isset($form_options['savedb']) ? $form_options['savedb'] : 1;
+		$params['statistics']  = $this->model->get_statistics( $id, $save_db );
 		$params['blocked_ips'] = $this->model->blocked_ips();
 		
 		$labels_parameters = $this->model->get_labels_parameters( $id , $page_num, $params['page_per_num'] );
@@ -261,7 +266,7 @@ class FMControllerSubmissions_fm extends FMAdminController {
 		
 		$params['rows_data']    = $lists;
 		$params['rows'] 		= $labels_parameters[5];
-		$params['subs_count'] 	= $labels_parameters[2]['total'];
+		$params['subs_count'] 	= isset($params['statistics']["total_entries"]) ? $params['statistics']["total_entries"] : $labels_parameters[2]['total'];
 		/* If not result redirect to first page */
 		if ( empty($params['group_id_s']) && $paged > 1 ) {
 			$redirect = add_query_arg( array_merge( $pagination_url, array('paged' => 1) ), admin_url('admin.php') );

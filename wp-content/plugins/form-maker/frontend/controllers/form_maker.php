@@ -195,7 +195,7 @@ class FMControllerForm_maker {
                   }
                 break;
                 default:
-                  if (in_array($current_post_type, $display_on)) {
+                  if (in_array($current_post_type, $display_on) || $current_post_type == 'form-maker') {
                     $display_on_this = TRUE;
                   }
 				        break;

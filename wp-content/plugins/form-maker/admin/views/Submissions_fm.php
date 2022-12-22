@@ -742,6 +742,9 @@ class  FMViewSubmissions_fm extends FMAdminView {
 										}
 										else {
 											$element_value = str_replace("***br***", '<br>', $temp[$g]->element_value );
+                      if ( $sorted_label_types[$h] == "type_textarea" ) {
+                        $element_value = esc_html( strip_tags( html_entity_decode($element_value) ) );
+                      }
 											$textdata = $this->gen_shorter_text($element_value, 100);
 											$status_column_width = ( $sorted_label_types[$h] == 'type_paypal_payment_status' ) ? '300px' : '';
 
@@ -757,6 +760,9 @@ class  FMViewSubmissions_fm extends FMAdminView {
 												<?php if ( $sorted_label_types[$h] == 'type_signature' ) { ?>
 													<img src="<?php echo $textdata['text']; ?>" style="width:50px; border: 1px solid #ddd;"/>
 												<?php
+												}
+												elseif ( $sorted_label_types[$h] == 'type_hidden' ) {
+												  echo html_entity_decode($element_value);
 												}
 												else {
 												  /* Check for Stripe case */

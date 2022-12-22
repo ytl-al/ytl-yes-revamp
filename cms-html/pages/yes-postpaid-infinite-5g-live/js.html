@@ -17,11 +17,30 @@
                 var parentAccordionContentID = $(parentAccordionContent).closest('.layer-accordionPlan').attr('id');
                 var targetSection = $('#' + parentAccordionContentID);
                 if (targetSection.length > 0) {
-                    var targetOffset = $(targetSection).offset().top - 140;
+                    var headerHeight = $('.page-header').outerHeight();
+                        headerHeight = ($('body').hasClass('page-scrolled')) ? headerHeight + 45 : (headerHeight * 2) + 35;
+                    var targetOffset = $(targetSection).offset().top - headerHeight;
                     $('html, body').animate({
                         scrollTop: targetOffset
                     }, 100);
                 }
+            }, 1000);
+        }
+
+        var paramPlan = url.searchParams.get('plan');
+        var targetPlan = $('#plan-' + paramPlan);
+        if ($(targetPlan)) {
+            var btnPlanAccordion = $(targetPlan).find('.accordion-button');
+            
+            $(btnPlanAccordion).trigger('click');
+
+            setTimeout(function() {
+                var headerHeight = $('.page-header').outerHeight();
+                    headerHeight = ($('body').hasClass('page-scrolled')) ? headerHeight + 45 : (headerHeight * 2) + 35;
+                var targetOffset = $(targetPlan).offset().top - headerHeight;
+                    $('html, body').animate({
+                        scrollTop: targetOffset
+                    }, 100);
             }, 1000);
         }
     });
@@ -34,7 +53,7 @@
                 Object.values(data).map(function(item) {
                     var bundleID    = item.productBundleId;
                     var balance     = item.balance;
-                    var layerPlanDevice = $('[data-planDevice="' + bundleID + '"]');
+                    var layerPlanDevice = $('[data-plandevice="' + bundleID + '"]');
                     if (balance <= 0 && $(layerPlanDevice)) {
                         var phoneName   = $('h3', layerPlanDevice).text();
                         var panelBtn    = $('.panel-btn', layerPlanDevice);

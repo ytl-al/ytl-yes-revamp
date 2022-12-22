@@ -711,7 +711,11 @@ class FMViewForm_submissions {
 																else {
 																	$check_payment_status = 'data-status = "1"';
 																} ?>
-																<td align="center" class="<?php echo $labels_id[$h]; ?>_fc" <?php echo $styleStr; ?> <?php echo ($savedb == 2 && $labels_id[$h] == "0") ? $check_payment_status : ""; ?>><p><?php echo str_replace("***br***", '<br>', $t->element_value); ?></p></td>
+																<td align="center" class="<?php echo $labels_id[$h]; ?>_fc" <?php echo $styleStr; ?> <?php echo ($savedb == 2 && $labels_id[$h] == "0") ? $check_payment_status : ""; ?>>
+                                  <div>
+                                    <?php echo html_entity_decode( str_replace("***br***", '<br>', $t->element_value) ); ?>
+                                  </div>
+                                </td>
 																<?php
 															}
 														}

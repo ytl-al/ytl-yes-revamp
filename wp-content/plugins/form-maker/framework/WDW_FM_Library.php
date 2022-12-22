@@ -4596,7 +4596,8 @@ class WDW_FM_Library {
     $fm_script_dir = $wp_upload_dir['basedir'] . $frontend_dir . 'js/fm-script-' . $form_id . '.js';
     $fm_script_url = $front_urls['upload_url'] . $frontend_dir . 'js/fm-script-' . $form_id . '.js';
 
-    if ( !$force_rewrite && @file_get_contents($fm_script_url) ) {
+    $file_is_readable = file_get_contents($fm_script_dir);
+    if ( !$force_rewrite && $file_is_readable ) {
       WDW_FM_Library(self::PLUGIN)->update_file_read_option(0);
       return;
     }
@@ -4605,13 +4606,11 @@ class WDW_FM_Library {
     file_put_contents( $fm_script_dir, self::get_fm_js_content($form_id) );
 
     if ( WDFMInstance(self::PLUGIN)->fm_settings['fm_file_read'] == '0' ) {
-      $file_is_readable = @file_get_contents($fm_script_url);
       if ( !$file_is_readable ) {
         WDW_FM_Library(self::PLUGIN)->update_file_read_option(1);
       }
     }
     else if ( WDFMInstance(self::PLUGIN)->fm_settings['fm_file_read'] == '1' ) {
-      $file_is_readable = @file_get_contents($fm_script_url);
       if ( $file_is_readable ) {
         WDW_FM_Library(self::PLUGIN)->update_file_read_option(0);
       }
@@ -4858,7 +4857,7 @@ class WDW_FM_Library {
                 $data_temp[stripslashes($label_titles[$h])] = $matrix;
               }
               else {
-                $val = strip_tags(htmlspecialchars_decode($element_value));
+                $val = strip_tags(html_entity_decode($element_value));
                 $val = stripslashes(str_replace('&#039;', "'", $val));
                 $data_temp[stripslashes($label_titles[$h])] = $val;
               }
@@ -4941,11 +4940,17 @@ class WDW_FM_Library {
   /**
    * Get current page url.
    *
+   * @param $ajax_submit bool
+   *
    * @return string
-   */
-  public static function get_current_page_url() {
-    global $wp;
-    return add_query_arg( $_SERVER['QUERY_STRING'], '', home_url( $wp->request ) );
+  */
+  public static function get_current_page_url( $ajax_submit = 0 ) {
+    $referer = wp_get_referer();
+    if( $ajax_submit && $referer != false ) {
+      return sanitize_url(wp_get_referer());
+    } else {
+      return sanitize_url(trim((is_ssl() ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']));
+    }
   }
 
   /**
@@ -6426,4 +6431,136 @@ class WDW_FM_Library {
     }
     return $user_email;
   }
+
+  /**
+   * Array of allowed html tags
+   *
+   */
+  public static function allowed_html_tags() {
+    $allowed_attr = array(
+      "class" => TRUE,
+      "style" => TRUE,
+      "width" => TRUE,
+      "height" => TRUE,
+      "cellspacing" => TRUE,
+      "cellpadding" => TRUE,
+    );
+    $allowed_html = array(
+      "a" => array(
+        "href" => TRUE,
+        "title" => TRUE,
+      ),
+      "h1" => array(),
+      "h2" => array(),
+      "h3" => array(),
+      "h4" => array(),
+      "h5" => array(),
+      "h6" => array(),
+      "i" => array(),
+      "em" => array(),
+      "strong" => array(),
+      "br" => array(),
+      "hr" => array(),
+      "del" => array(
+        "datetime" => TRUE,
+      ),
+      "ins" => array(
+        "datetime" => TRUE,
+      ),
+      "ul" => array(),
+      "ol" => array(),
+      "li" => array(),
+      "table" => $allowed_attr,
+      "tbody" => $allowed_attr,
+      "th" => $allowed_attr,
+      "tr" => $allowed_attr,
+      "td" => $allowed_attr,
+      "p" => array(),
+      "code" => array(),
+      "div" => $allowed_attr,
+      "img" => array( "class" => TRUE, "src" => TRUE, "alt" => TRUE),
+      "video" => array( "class" => TRUE, "src" => TRUE, "controls" => TRUE),
+      "source" => array( "src" => TRUE, "type" => TRUE ),
+    );
+
+    return $allowed_html;
+  }
+
+  /**
+   * Select data from db for labels.
+   *
+   * @param string $db_info
+   * @param string $label_column
+   * @param string $table
+   * @param string $where
+   * @param string $order_by
+   * @return mixed
+   */
+  public static function select_data_from_db_for_labels( $db_info = '', $label_column = '', $table = '', $where = '', $order_by = '' ) {
+    global $wpdb;
+    $where = html_entity_decode($where, ENT_QUOTES);
+    $query = "SELECT `" . $label_column . "` FROM " . $table . $where . " ORDER BY " . $order_by;
+    $db_info = trim($db_info, '[]');
+    if ( $db_info ) {
+      $temp = explode( '@@@wdfhostwdf@@@', $db_info );
+      $host = $temp[ 0 ];
+      $temp = explode( '@@@wdfportwdf@@@', $temp[1] );
+      $port = $temp[ 0 ];
+      if ($port) {
+        $host .= ':' . $port;
+      }
+      $temp = explode( '@@@wdfusernamewdf@@@', $temp[ 1 ] );
+      $username = $temp[ 0 ];
+      $temp = explode( '@@@wdfpasswordwdf@@@', $temp[ 1 ] );
+      $password = $temp[ 0 ];
+      $temp = explode( '@@@wdfdatabasewdf@@@', $temp[ 1 ] );
+      $database = $temp[ 0 ];
+      $wpdb_temp = new wpdb( $username, $password, $database, $host );
+      $choices_labels = $wpdb_temp->get_results( $query, ARRAY_N );
+    } else {
+      $choices_labels = $wpdb->get_results( $query, ARRAY_N );
+    }
+
+    return $choices_labels;
+  }
+
+  /**
+   * Select data from db for values.
+   *
+   * @param string $db_info
+   * @param string $value_column
+   * @param string $table
+   * @param string $where
+   * @param string $order_by
+   *
+   * @return array|null|object
+   */
+  public static function select_data_from_db_for_values( $db_info = '', $value_column = '', $table = '', $where = '', $order_by = '' ) {
+    global $wpdb;
+    $where = html_entity_decode($where, ENT_QUOTES);
+    $query = "SELECT `" . $value_column . "` FROM " . $table . $where . " ORDER BY " . $order_by;
+    $db_info = trim($db_info, '[]');
+    if ( $db_info ) {
+      $temp = explode( '@@@wdfhostwdf@@@', $db_info );
+      $host = $temp[ 0 ];
+      $temp = explode( '@@@wdfportwdf@@@', $temp[ 1 ] );
+      $port = $temp[0];
+      if ($port) {
+        $host .= ':' . $port;
+      }
+      $temp = explode( '@@@wdfusernamewdf@@@', $temp[ 1 ] );
+      $username = $temp[ 0 ];
+      $temp = explode( '@@@wdfpasswordwdf@@@', $temp[ 1 ] );
+      $password = $temp[ 0 ];
+      $temp = explode( '@@@wdfdatabasewdf@@@', $temp[ 1 ] );
+      $database = $temp[ 0 ];
+      $wpdb_temp = new wpdb( $username, $password, $database, $host );
+      $choices_values = $wpdb_temp->get_results( $query, ARRAY_N );
+    } else {
+      $choices_values = $wpdb->get_results( $query, ARRAY_N );
+    }
+
+    return $choices_values;
+  }
+
 }

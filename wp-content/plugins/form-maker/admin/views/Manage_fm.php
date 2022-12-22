@@ -695,11 +695,13 @@ class FMViewManage_fm extends FMAdminView {
               if (ui.tab[0].id === 'form_email_options_tab') {
                 jQuery(document).trigger('fm_tab_email_loaded');
               }
-              ui.panel.find('.wp-editor-area').each(function () {
-                var cur_id = jQuery(this).attr('id');
-                tinymce.execCommand( 'mceAddEditor', true, cur_id );
-                quicktags({id : cur_id});
-              });
+              if ( typeof tinymce != "undefined" ) {
+                ui.panel.find('.wp-editor-area').each(function () {
+                  var cur_id = jQuery(this).attr('id');
+                  tinymce.execCommand('mceAddEditor', true, cur_id);
+                  quicktags({id: cur_id});
+                });
+              }
             },
             create: function( event, ui ) {
               jQuery( '.fm-topbar_user_guid' ).attr( 'href','https://help.10web.io/hc/en-us/articles/'+ ui.tab.data( 'help-url' ) + '?utm_source=form_maker&utm_medium=free_plugin' );
@@ -749,6 +751,8 @@ class FMViewManage_fm extends FMAdminView {
   public function body_email_options( $params = array() ) {
     $row = $params['row'];
     $payment_method = isset($row->paypal_mode) ? intval($row->paypal_mode) : 0;
+    $mail_send_payment_info = !empty($row->mail_send_payment_info) ? $row->mail_send_payment_info : 1;
+    $mail_send_email_payment = !empty($row->mail_send_email_payment) ? $row->mail_send_email_payment : 1;
     $fields = $params['fields'];
     $fields_count = $params['fields_count'];
     ?>
@@ -783,17 +787,24 @@ class FMViewManage_fm extends FMAdminView {
                 <span class="dashicons dashicons-list-view" data-id="mail"></span>
                 <p class="description"><?php _e('Specify the email address(es), to which submitted form information will be sent. For multiple email addresses separate with commas.', WDFMInstance(self::PLUGIN)->prefix); ?></p>
               </div>
-              <?php if ( !empty($payment_method) ) { ?>
+              <?php if ( !empty($payment_method) ) {
+                ?>
                 <div class="wd-group">
                   <label class="wd-label"><?php _e('Send Email', WDFMInstance(self::PLUGIN)->prefix); ?></label>
                   <div class="fm-row">
-                    <input type="radio" name="mail_send_email_payment" <?php echo $row->mail_send_email_payment == 1 ? 'checked="checked"' : '' ?> id="fm_send_email_payment-1" class="wd-radio" value="1">
+                    <input type="radio" name="mail_send_email_payment" <?php echo $mail_send_email_payment == 1 ? 'checked="checked"' : '' ?> id="fm_send_email_payment-1" class="wd-radio" value="1">
                     <label class="wd-label-radio" for="fm_send_email_payment-1"><?php _e('Before completion of payment', WDFMInstance(self::PLUGIN)->prefix); ?></label>
                   </div>
                   <div class="fm-row">
-                    <input type="radio" name="mail_send_email_payment" <?php echo $row->mail_send_email_payment == 2 ? 'checked="checked"' : '' ?> id="fm_send_email_payment-2" class="wd-radio" value="2">
+                    <input type="radio" name="mail_send_email_payment" <?php echo $mail_send_email_payment == 2 ? 'checked="checked"' : '' ?> id="fm_send_email_payment-2" class="wd-radio" value="2">
                     <label class="wd-label-radio" for="fm_send_email_payment-2"><?php _e('After payment has been successfully completed', WDFMInstance(self::PLUGIN)->prefix); ?></label>
                   </div>
+                  <?php if ( $payment_method === 1 ) { ?>
+                    <div class="fm-row">
+                      <input type="checkbox" name="mail_send_payment_info" <?php echo $mail_send_payment_info == 1 ? 'checked="checked"' : '' ?> id="fm_mail_send_payment_info" class="wd-checkbox" value="1">
+                      <label class="wd-label-radio" for="fm_mail_send_payment_info"><?php _e('Send payment information after payment has been successfully completed', WDFMInstance(self::PLUGIN)->prefix); ?></label>
+                    </div>
+                  <?php } ?>
                 </div>
               <?php } ?>
               <div class="wd-group">
@@ -847,7 +858,7 @@ class FMViewManage_fm extends FMAdminView {
                   <span class="dashicons dashicons-list-view" data-id="script_mail"></span>
                 </div>
                 <?php
-                if ( user_can_richedit() ) {
+                if ( user_can_richedit() && $params['fm_enable_wp_editor'] ) {
                   wp_editor($row->script_mail, 'script_mail', array(
                     'teeny' => TRUE,
                     'textarea_name' => 'script_mail',
@@ -857,7 +868,7 @@ class FMViewManage_fm extends FMAdminView {
                 }
                 else {
                   ?>
-                  <textarea name="script_mail" id="script_mail" cols="20" rows="10" style="width:300px; height:450px;"><?php echo $row->script_mail; ?></textarea>
+                  <textarea name="script_mail" id="script_mail" cols="20" rows="10" style="width:100%; height:200px;"><?php echo $row->script_mail; ?></textarea>
                   <?php
                 }
                 ?>
@@ -1006,7 +1017,7 @@ class FMViewManage_fm extends FMAdminView {
                   <span class="dashicons dashicons-list-view" data-id="script_mail_user"></span>
                 </div>
                 <?php
-                if ( user_can_richedit() ) {
+                if ( user_can_richedit() && $params['fm_enable_wp_editor'] ) {
                   wp_editor($row->script_mail_user, 'script_mail_user', array(
                     'teeny' => TRUE,
                     'textarea_name' => 'script_mail_user',
@@ -1016,7 +1027,7 @@ class FMViewManage_fm extends FMAdminView {
                 }
                 else {
                   ?>
-                  <textarea autocomplete="off" name="script_mail_user" id="script_mail_user" cols="20" rows="10" style="width:300px; height:450px;"><?php echo $row->script_mail_user; ?></textarea>
+                  <textarea autocomplete="off" name="script_mail_user" id="script_mail_user" cols="20" rows="10" style="width:100%; height:200px;"><?php echo $row->script_mail_user; ?></textarea>
                   <?php
                 }
                 ?>
@@ -1248,7 +1259,7 @@ class FMViewManage_fm extends FMAdminView {
       <input type="hidden" id="editing_id" />
       <input type="hidden" value="<?php echo WDFMInstance(self::PLUGIN)->plugin_url; ?>" id="form_plugins_url" />
       <div id="main_editor" style="position: fixed; display: none; z-index: 140;">
-        <?php if ( user_can_richedit() && $params['fm_enable_wp_editor']) {
+        <?php if ( user_can_richedit() && $params['fm_enable_wp_editor'] ) {
           wp_editor('', 'form_maker_editor', array(
             'teeny' => TRUE,
             'textarea_name' => 'form_maker_editor',
@@ -1525,7 +1536,7 @@ class FMViewManage_fm extends FMAdminView {
                       <span class="dashicons dashicons-list-view" data-id="submit_text"></span>
                     </div>
                     <?php
-                    if ( user_can_richedit() ) {
+                    if ( user_can_richedit() && $params['fm_enable_wp_editor'] ) {
                       wp_editor($row->submit_text, 'submit_text', array(
                       'teeny' => TRUE,
                       'textarea_name' => 'submit_text',
@@ -1536,8 +1547,8 @@ class FMViewManage_fm extends FMAdminView {
                     else {
                       ?>
                       <textarea autocomplete="off" cols="36" rows="5" id="submit_text" name="submit_text" style="resize: vertical; width:100%">
-                                <?php echo $row->submit_text; ?>
-                              </textarea>
+                        <?php echo $row->submit_text; ?>
+                      </textarea>
                       <?php
                     }
                     ?>
@@ -1735,6 +1746,10 @@ class FMViewManage_fm extends FMAdminView {
             $temp = explode('*:*w_field_label*:*', $temp[1]);
             $temp = explode('*:*w_submit_title*:*', $temp[1]);
             $label_name = $temp[0];
+          }
+          /* Check if data string has db_info data to run converter which is using in conditional fields */
+          if ( strpos($temp[1], '[db_info]') !== false ) {
+            $temp[1] = $this->get_label_values_from_db( $temp[1], $type );
           }
           array_push($labels, str_replace(array("'",'"'),array('%quot%','%dquot%'), $label_name));
           array_push($all_labels, str_replace(array("'",'"'),array('%quot%','%dquot%'), $label_name));
@@ -1957,6 +1972,7 @@ class FMViewManage_fm extends FMAdminView {
                                       $w_size = explode('*:*w_flow*:*', $paramss[$key_select_or_input]);
                                       break;
                                   }
+                                  $w_choices_array = array();
                                   if ( !empty($w_size) ) {
                                     $w_choices = explode('*:*w_choices*:*', $w_size[1]);
                                     $w_choices_array = explode('***', $w_choices[0]);
@@ -2195,6 +2211,965 @@ class FMViewManage_fm extends FMAdminView {
   </div>
 		<?php		
 	}
+
+  /**
+   * Convert Select field DB placeholder to normal label/value
+   * The main target of converting to make it usable in conditional fields
+   *
+   * @param string $field
+   *
+   * @return string
+  */
+  public function get_label_values_from_db_own_select( $field = '' ) {
+    $params_names = array(
+      'w_field_label_size',
+      'w_field_label_pos',
+      'w_size',
+      'w_choices',
+      'w_choices_checked',
+      'w_choices_disabled',
+      'w_required',
+      'w_class',
+    );
+    $temp = $field;
+    if ( strpos($temp, 'w_choices_value') > -1 ) {
+      $params_names = array(
+        'w_field_label_size',
+        'w_field_label_pos',
+        'w_size',
+        'w_choices',
+        'w_choices_checked',
+        'w_choices_disabled',
+        'w_required',
+        'w_value_disabled',
+        'w_choices_value',
+        'w_choices_params',
+        'w_class',
+      );
+    }
+    if ( strpos($temp, 'w_hide_label') > -1 ) {
+      $params_names = array(
+        'w_field_label_size',
+        'w_field_label_pos',
+        'w_hide_label',
+        'w_size',
+        'w_choices',
+        'w_choices_checked',
+        'w_choices_disabled',
+        'w_required',
+        'w_value_disabled',
+        'w_choices_value',
+        'w_choices_params',
+        'w_class',
+      );
+    }
+    if ( strpos($temp, 'w_use_for_submission') > -1 ) {
+      $params_names = array(
+        'w_field_label_size',
+        'w_field_label_pos',
+        'w_hide_label',
+        'w_size',
+        'w_choices',
+        'w_choices_checked',
+        'w_choices_disabled',
+        'w_required',
+        'w_value_disabled',
+        'w_use_for_submission',
+        'w_choices_value',
+        'w_choices_params',
+        'w_class',
+      );
+    }
+
+    foreach ( $params_names as $params_name ) {
+      $temp = explode('*:*' . $params_name . '*:*', $temp);
+      $param[$params_name] = esc_html($temp[0]);
+      $temp = $temp[1];
+    }
+
+    $param['w_choices'] = explode('***', $param['w_choices']);
+    $param['w_choices_value'] = explode('***', $param['w_choices_value']);
+    $param['w_choices_params'] = explode('***', $param['w_choices_params']);
+
+    $return_data = $field;
+    foreach ( $param['w_choices'] as $key => $choice ) {
+      if ( isset($param['w_choices_params']) && $param['w_choices_params'][$key] ) {
+        $w_choices_params = explode('[where_order_by]', $param['w_choices_params'][$key]);
+        $where_str = $w_choices_params[0];
+        $where = (str_replace(array( '[', ']' ), '', $w_choices_params[0]) ? ' WHERE ' . str_replace(array(
+                                                                                                       '[',
+                                                                                                       ']'
+                                                                                                     ), '', $where_str) : '');
+        $w_choices_params = explode('[db_info]', $w_choices_params[1]);
+        $order_by = str_replace(array( '[', ']' ), '', $w_choices_params[0]);
+        $db_info = $w_choices_params[1];
+        $label_table_and_column = explode(':', str_replace(array( '[', ']' ), '', $choice));
+        $table = $label_table_and_column[0];
+        $label_column = $label_table_and_column[1];
+        if ( $label_column ) {
+          $choices_labels = WDW_FM_Library::select_data_from_db_for_labels( $db_info, $label_column, $table, $where, $order_by );
+          $temp_choices_labels = array();
+          foreach ( $choices_labels as $choices_label ) {
+            $temp_choices_labels[] = $choices_label[0];
+          }
+          $choices_labels = $temp_choices_labels;
+        }
+        $value_table_and_column = explode(':', str_replace(array(
+                                                             '[',
+                                                             ']'
+                                                           ), '', $param['w_choices_value'][$key]));
+        $value_column = $param['w_choices_disabled'][$key] == "true" ? '' : $value_table_and_column[1];
+        if ( $value_column ) {
+          $choices_values = WDW_FM_Library::select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
+          $temp_choices_values = array();
+          foreach ( $choices_values as $choices_value ) {
+            $temp_choices_values[] = $choices_value[0];
+          }
+          $choices_values = $temp_choices_values;
+        }
+
+        $choices_labels = implode('***', $choices_labels);
+        $choices_values = implode('***', $choices_values);
+
+        $return_data = str_replace(array($param['w_choices'][$key], $param['w_choices_value'][$key]), array($choices_labels, $choices_values), $return_data);
+
+      }
+    }
+    return $return_data;
+  }
+
+
+  /**
+   * Convert Radio field DB placeholder to normal label/value
+   * The main target of converting to make it usable in conditional fields
+   *
+   * @param string $field
+   *
+   * @return string
+  */
+  public function get_label_values_from_db_radio( $field = '' ) {
+    $params_names = array(
+      'w_field_label_size',
+      'w_field_label_pos',
+      'w_flow',
+      'w_choices',
+      'w_choices_checked',
+      'w_rowcol',
+      'w_required',
+      'w_randomize',
+      'w_allow_other',
+      'w_allow_other_num',
+      'w_class',
+    );
+    $temp = $field;
+    if ( strpos($temp, 'w_field_option_pos') > -1 ) {
+      $params_names = array(
+        'w_field_label_size',
+        'w_field_label_pos',
+        'w_field_option_pos',
+        'w_flow',
+        'w_choices',
+        'w_choices_checked',
+        'w_rowcol',
+        'w_required',
+        'w_randomize',
+        'w_allow_other',
+        'w_allow_other_num',
+        'w_value_disabled',
+        'w_choices_value',
+        'w_choices_params',
+        'w_class',
+      );
+    }
+    if ( strpos($temp, 'w_hide_label') > -1 ) {
+      $params_names = array(
+        'w_field_label_size',
+        'w_field_label_pos',
+        'w_field_option_pos',
+        'w_hide_label',
+        'w_flow',
+        'w_choices',
+        'w_choices_checked',
+        'w_rowcol',
+        'w_required',
+        'w_randomize',
+        'w_allow_other',
+        'w_allow_other_num',
+        'w_value_disabled',
+        'w_choices_value',
+        'w_choices_params',
+        'w_class',
+      );
+    }
+    if ( strpos($temp, 'w_use_for_submission') > -1 ) {
+      $params_names = array(
+        'w_field_label_size',
+        'w_field_label_pos',
+        'w_field_option_pos',
+        'w_hide_label',
+        'w_flow',
+        'w_choices',
+        'w_choices_checked',
+        'w_rowcol',
+        'w_required',
+        'w_randomize',
+        'w_allow_other',
+        'w_allow_other_num',
+        'w_value_disabled',
+        'w_use_for_submission',
+        'w_choices_value',
+        'w_choices_params',
+        'w_class',
+      );
+    }
+
+    foreach ( $params_names as $params_name ) {
+      $temp = explode('*:*' . $params_name . '*:*', $temp);
+      if ( $params_name == 'w_choices' ) {
+        $param[$params_name] = strip_tags($temp[0], "<b><strong><span><a>");
+      } else {
+        $param[$params_name] = esc_html($temp[0]);
+      }
+
+      $temp = $temp[1];
+    }
+
+    $param['w_choices'] = explode('***', $param['w_choices']);
+    $param['w_choices_checked'] = explode('***', $param['w_choices_checked']);
+    if ( isset($param['w_choices_value']) ) {
+      $param['w_choices_value'] = explode('***', $param['w_choices_value']);
+      $param['w_choices_params'] = explode('***', $param['w_choices_params']);
+    }
+
+    $return_data = $field;
+    foreach ( $param['w_choices'] as $key => $choice ) {
+      if ( isset($param['w_choices_params']) && $param['w_choices_params'][$key] ) {
+        $w_choices_params = explode('[where_order_by]', $param['w_choices_params'][$key]);
+        $where_str = $w_choices_params[0];
+        $where = (str_replace(array( '[', ']' ), '', $w_choices_params[0]) ? ' WHERE ' . str_replace(array(
+                                                                                                       '[',
+                                                                                                       ']',
+                                                                                                     ), '', $where_str) : '');
+        $w_choices_params = explode('[db_info]', $w_choices_params[1]);
+        $order_by = str_replace(array( '[', ']' ), '', $w_choices_params[0]);
+        $db_info = $w_choices_params[1];
+        $label_table_and_column = explode(':', str_replace(array( '[', ']' ), '', $choice));
+        $table = $label_table_and_column[0];
+        $label_column = $label_table_and_column[1];
+        if ( $label_column ) {
+          $choices_labels = WDW_FM_Library::select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
+          $temp_choices_labels = array();
+          foreach ( $choices_labels as $choices_label ) {
+            $temp_choices_labels[] = $choices_label[0];
+          }
+          $choices_labels = $temp_choices_labels;
+        }
+        $value_table_and_column = explode(':', str_replace(array( '[', ']' ), '', $param['w_choices_value'][$key]));
+        $value_column = $value_table_and_column[1];
+        if ( $value_column ) {
+          $choices_values = WDW_FM_Library::select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
+          $temp_choices_values = array();
+          foreach ( $choices_values as $choices_value ) {
+            $temp_choices_values[] = $choices_value[0];
+          }
+          $choices_values = $temp_choices_values;
+        }
+        $choices_labels = implode('***', $choices_labels);
+        $choices_values = implode('***', $choices_values);
+        $return_data = str_replace(array(
+                                     $param['w_choices'][$key],
+                                     $param['w_choices_value'][$key]
+                                   ), array( $choices_labels, $choices_values ), $return_data);
+      }
+    }
+    return $return_data;
+  }
+
+
+  /**
+   * Convert Checkbox field DB placeholder to normal label/value
+   * The main target of converting to make it usable in conditional fields
+   *
+   * @param string $field
+   *
+   * @return string
+  */
+  public function get_label_values_from_db_checkbox( $field = '' ) {
+    $params_names = array(
+      'w_field_label_size',
+      'w_field_label_pos',
+      'w_flow',
+      'w_choices',
+      'w_choices_checked',
+      'w_rowcol',
+      'w_required',
+      'w_randomize',
+      'w_allow_other',
+      'w_allow_other_num',
+      'w_class',
+    );
+    $temp = $field;
+    if ( strpos($temp, 'w_field_option_pos') > -1 ) {
+      $params_names = array(
+        'w_field_label_size',
+        'w_field_label_pos',
+        'w_field_option_pos',
+        'w_flow',
+        'w_choices',
+        'w_choices_checked',
+        'w_rowcol',
+        'w_required',
+        'w_randomize',
+        'w_allow_other',
+        'w_allow_other_num',
+        'w_value_disabled',
+        'w_choices_value',
+        'w_choices_params',
+        'w_class',
+      );
+    }
+    if ( strpos($temp, 'w_hide_label') > -1 ) {
+      $params_names = array(
+        'w_field_label_size',
+        'w_field_label_pos',
+        'w_field_option_pos',
+        'w_hide_label',
+        'w_flow',
+        'w_choices',
+        'w_choices_checked',
+        'w_rowcol',
+        'w_required',
+        'w_randomize',
+        'w_allow_other',
+        'w_allow_other_num',
+        'w_value_disabled',
+        'w_choices_value',
+        'w_choices_params',
+        'w_class',
+      );
+    }
+    if ( strpos($temp, 'w_limit_choice') > -1 ) {
+      $params_names = array(
+        'w_field_label_size',
+        'w_field_label_pos',
+        'w_field_option_pos',
+        'w_hide_label',
+        'w_flow',
+        'w_choices',
+        'w_choices_checked',
+        'w_rowcol',
+        'w_limit_choice',
+        'w_limit_choice_alert',
+        'w_required',
+        'w_randomize',
+        'w_allow_other',
+        'w_allow_other_num',
+        'w_value_disabled',
+        'w_choices_value',
+        'w_choices_params',
+        'w_class',
+      );
+    }
+    if ( strpos($temp, 'w_use_for_submission') > -1 ) {
+      $params_names = array(
+        'w_field_label_size',
+        'w_field_label_pos',
+        'w_field_option_pos',
+        'w_hide_label',
+        'w_flow',
+        'w_choices',
+        'w_choices_checked',
+        'w_rowcol',
+        'w_limit_choice',
+        'w_limit_choice_alert',
+        'w_required',
+        'w_randomize',
+        'w_allow_other',
+        'w_allow_other_num',
+        'w_value_disabled',
+        'w_use_for_submission',
+        'w_choices_value',
+        'w_choices_params',
+        'w_class',
+      );
+    }
+
+    foreach ( $params_names as $params_name ) {
+      $temp = explode('*:*' . $params_name . '*:*', $temp);
+      if ( $params_name == 'w_choices' ) {
+        $param[$params_name] = strip_tags($temp[0], "<b><strong><span><a>");
+      } else {
+        $param[$params_name] = esc_html($temp[0]);
+      }
+      $temp = $temp[1];
+    }
+
+    $param['w_choices'] = explode('***', $param['w_choices']);
+    if ( isset($param['w_choices_value']) ) {
+      $param['w_choices_value'] = explode('***', $param['w_choices_value']);
+      $param['w_choices_params'] = explode('***', $param['w_choices_params']);
+    }
+
+    $return_data = $field;
+    foreach ( $param['w_choices'] as $key => $choice ) {
+      if ( isset($param['w_choices_params']) && $param['w_choices_params'][$key] ) {
+        $w_choices_params = explode('[where_order_by]', $param['w_choices_params'][$key]);
+        $where_str = $w_choices_params[0];
+        $where = (str_replace(array( '[', ']' ), '', $w_choices_params[0]) ? ' WHERE ' . str_replace(array(
+                                                                                                       '[',
+                                                                                                       ']',
+                                                                                                     ), '', $where_str) : '');
+        $w_choices_params = explode('[db_info]', $w_choices_params[1]);
+        $order_by = str_replace(array( '[', ']' ), '', $w_choices_params[0]);
+        $db_info = $w_choices_params[1];
+        $label_table_and_column = explode(':', str_replace(array( '[', ']' ), '', $choice));
+        $table = $label_table_and_column[0];
+        $label_column = $label_table_and_column[1];
+        if ( $label_column ) {
+          $choices_labels = WDW_FM_Library::select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
+          $temp_choices_labels = array();
+          foreach ( $choices_labels as $choices_label ) {
+            $temp_choices_labels[] = $choices_label[0];
+          }
+          $choices_labels = $temp_choices_labels;
+
+        }
+        $value_table_and_column = explode(':', str_replace(array( '[', ']' ), '', $param['w_choices_value'][$key]));
+        $value_column = $value_table_and_column[1];
+        if ( $value_column ) {
+          $choices_values = WDW_FM_Library::select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
+          $temp_choices_values = array();
+          foreach ( $choices_values as $choices_value ) {
+            $temp_choices_values[] = $choices_value[0];
+          }
+          $choices_values = $temp_choices_values;
+        }
+        $choices_labels = implode('***', $choices_labels);
+        $choices_values = implode('***', $choices_values);
+
+        $return_data = str_replace(array($param['w_choices'][$key], $param['w_choices_value'][$key]), array($choices_labels, $choices_values), $return_data);
+      }
+    }
+    return $return_data;
+  }
+
+  /**
+   * Convert Payment Select field DB placeholder to normal label/value
+   * The main target of converting to make it usable in conditional fields
+   *
+   * @param string $field
+   *
+   * @return string
+   */
+  public function get_label_values_from_db_paypal_select( $field = '' ) {
+    $params_names = array(
+      'w_field_label_size',
+      'w_field_label_pos',
+      'w_size',
+      'w_choices',
+      'w_choices_price',
+      'w_choices_checked',
+      'w_choices_disabled',
+      'w_required',
+      'w_quantity',
+      'w_quantity_value',
+      'w_class',
+      'w_property',
+      'w_property_values',
+    );
+    $temp = $field;
+    if ( strpos($temp, 'w_choices_params') > -1 ) {
+      $params_names = array(
+        'w_field_label_size',
+        'w_field_label_pos',
+        'w_size',
+        'w_choices',
+        'w_choices_price',
+        'w_choices_checked',
+        'w_choices_disabled',
+        'w_required',
+        'w_quantity',
+        'w_quantity_value',
+        'w_choices_params',
+        'w_class',
+        'w_property',
+        'w_property_values',
+      );
+    }
+    if ( strpos($temp, 'w_hide_label') > -1 ) {
+      $params_names = array(
+        'w_field_label_size',
+        'w_field_label_pos',
+        'w_hide_label',
+        'w_size',
+        'w_choices',
+        'w_choices_price',
+        'w_choices_checked',
+        'w_choices_disabled',
+        'w_required',
+        'w_quantity',
+        'w_quantity_value',
+        'w_choices_params',
+        'w_class',
+        'w_property',
+        'w_property_values',
+      );
+    }
+
+    foreach ( $params_names as $params_name ) {
+      $temp = explode('*:*' . $params_name . '*:*', $temp);
+      $param[$params_name] = esc_html($temp[0]);
+      $temp = $temp[1];
+    }
+    $param['w_choices'] = explode('***', $param['w_choices']);
+    $param['w_choices_price'] = explode('***', $param['w_choices_price']);
+    $param['w_choices_disabled'] = explode('***', $param['w_choices_disabled']);
+    if ( isset($param['w_choices_params']) ) {
+      $param['w_choices_params'] = explode('***', $param['w_choices_params']);
+    }
+
+    $return_data = $field;
+    foreach ( $param['w_choices'] as $key => $choice ) {
+      if ( isset($param['w_choices_params']) && $param['w_choices_params'][$key] ) {
+        $w_choices_params = explode('[where_order_by]', $param['w_choices_params'][$key]);
+        $where_str = $w_choices_params[0];
+        $where = (str_replace(array( '[', ']' ), '', $w_choices_params[0]) ? ' WHERE ' . str_replace(array(
+                                                                                                       '[',
+                                                                                                       ']'
+                                                                                                     ), '', $where_str) : '');
+        $w_choices_params = explode('[db_info]', $w_choices_params[1]);
+        $order_by = str_replace(array( '[', ']' ), '', $w_choices_params[0]);
+        $db_info = $w_choices_params[1];
+        $label_table_and_column = explode(':', str_replace(array( '[', ']' ), '', $choice));
+        $table = $label_table_and_column[0];
+        $label_column = $label_table_and_column[1];
+        if ( $label_column ) {
+          $choices_labels = WDW_FM_Library::select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
+          $temp_choices_labels = array();
+          foreach ( $choices_labels as $choices_label ) {
+            $temp_choices_labels[] = $choices_label[0];
+          }
+          $choices_labels = $temp_choices_labels;
+        }
+        $value_table_and_column = explode(':', str_replace(array( '[', ']' ), '', $param['w_choices_price'][$key]));
+        $value_column = $param['w_choices_disabled'][$key] == "true" ? '' : $value_table_and_column[1];
+        if ( $value_column ) {
+          $choices_values = WDW_FM_Library::select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
+          $temp_choices_values = array();
+          foreach ( $choices_values as $choices_value ) {
+            $temp_choices_values[] = $choices_value[0];
+          }
+          $choices_values = $temp_choices_values;
+        }
+        $choices_labels = implode('***', $choices_labels);
+        $choices_values = implode('***', $choices_values);
+
+        $return_data = str_replace(array($param['w_choices'][$key], $param['w_choices_price'][$key]), array($choices_labels, $choices_values), $return_data);
+      }
+    }
+
+    return $return_data;
+  }
+
+  /**
+   * Convert Payment Checkbox field DB placeholder to normal label/value
+   * The main target of converting to make it usable in conditional fields
+   *
+   * @param string $field
+   *
+   * @return string
+   */
+  public function get_label_values_from_db_paypal_checkbox( $field = '' ) {
+    $params_names = array(
+      'w_field_label_size',
+      'w_field_label_pos',
+      'w_flow',
+      'w_choices',
+      'w_choices_price',
+      'w_choices_checked',
+      'w_required',
+      'w_randomize',
+      'w_allow_other',
+      'w_allow_other_num',
+      'w_class',
+      'w_property',
+      'w_property_values',
+      'w_quantity',
+      'w_quantity_value',
+    );
+    $temp = $field;
+    if ( strpos($temp, 'w_field_option_pos') > -1 ) {
+      $params_names = array(
+        'w_field_label_size',
+        'w_field_label_pos',
+        'w_field_option_pos',
+        'w_flow',
+        'w_choices',
+        'w_choices_price',
+        'w_choices_checked',
+        'w_required',
+        'w_randomize',
+        'w_allow_other',
+        'w_allow_other_num',
+        'w_choices_params',
+        'w_class',
+        'w_property',
+        'w_property_values',
+        'w_quantity',
+        'w_quantity_value',
+      );
+    }
+    if ( strpos($temp, 'w_hide_label') > -1 ) {
+      $params_names = array(
+        'w_field_label_size',
+        'w_field_label_pos',
+        'w_field_option_pos',
+        'w_hide_label',
+        'w_flow',
+        'w_choices',
+        'w_choices_price',
+        'w_choices_checked',
+        'w_required',
+        'w_randomize',
+        'w_allow_other',
+        'w_allow_other_num',
+        'w_choices_params',
+        'w_class',
+        'w_property',
+        'w_property_values',
+        'w_quantity',
+        'w_quantity_value',
+      );
+    }
+
+    foreach ( $params_names as $params_name ) {
+      $temp = explode('*:*' . $params_name . '*:*', $temp);
+      $param[$params_name] = esc_html($temp[0]);
+      $temp = $temp[1];
+    }
+
+    $param['w_choices'] = explode('***', $param['w_choices']);
+    $param['w_choices_price'] = explode('***', $param['w_choices_price']);
+    if ( isset($param['w_choices_params']) ) {
+      $param['w_choices_params'] = explode('***', $param['w_choices_params']);
+    }
+
+    $return_data = $field;
+    foreach ( $param['w_choices'] as $key => $choice ) {
+      if ( isset($param['w_choices_params']) && $param['w_choices_params'][$key] ) {
+        $w_choices_params = explode('[where_order_by]', $param['w_choices_params'][$key]);
+        $where_str = $w_choices_params[0];
+        $where = (str_replace(array('[',']'), '', $w_choices_params[0]) ? ' WHERE ' . str_replace(array('[',']'), '', $where_str) : '');
+        $w_choices_params = explode('[db_info]', $w_choices_params[1]);
+        $order_by = str_replace(array( '[', ']' ), '', $w_choices_params[0]);
+        $db_info = $w_choices_params[1];
+        $label_table_and_column = explode(':', str_replace(array( '[', ']' ), '', $choice));
+        $table = $label_table_and_column[0];
+        $label_column = $label_table_and_column[1];
+        if ( $label_column ) {
+          $choices_labels = WDW_FM_Library::select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
+          $temp_choices_labels = array();
+          foreach ( $choices_labels as $choices_label ) {
+            $temp_choices_labels[] = $choices_label[0];
+          }
+          $choices_labels = $temp_choices_labels;
+        }
+        $value_table_and_column = explode(':', str_replace(array(
+                                                             '[',
+                                                             ']',
+                                                           ), '', $param['w_choices_price'][$key]));
+        $value_column = $value_table_and_column[1];
+        if ( $value_column ) {
+          $choices_values = WDW_FM_Library::select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
+          $temp_choices_values = array();
+          foreach ( $choices_values as $choices_value ) {
+            $temp_choices_values[] = $choices_value[0];
+          }
+          $choices_values = $temp_choices_values;
+        }
+        $choices_labels = implode('***', $choices_labels);
+        $choices_values = implode('***', $choices_values);
+
+        $return_data = str_replace(array($param['w_choices'][$key], $param['w_choices_price'][$key]), array($choices_labels, $choices_values), $return_data);
+      }
+    }
+    return $return_data;
+  }
+
+  /**
+   * Convert Payment Radio field DB placeholder to normal label/value
+   * The main target of converting to make it usable in conditional fields
+   *
+   * @param string $field
+   *
+   * @return string
+   */
+  public function get_label_values_from_db_paypal_radio( $field = '' ) {
+    $params_names = array(
+      'w_field_label_size',
+      'w_field_label_pos',
+      'w_flow',
+      'w_choices',
+      'w_choices_price',
+      'w_choices_checked',
+      'w_required',
+      'w_randomize',
+      'w_allow_other',
+      'w_allow_other_num',
+      'w_class',
+      'w_property',
+      'w_property_values',
+      'w_quantity',
+      'w_quantity_value',
+    );
+    $temp = $field;
+    if ( strpos($temp, 'w_field_option_pos') > -1 ) {
+      $params_names = array(
+        'w_field_label_size',
+        'w_field_label_pos',
+        'w_field_option_pos',
+        'w_flow',
+        'w_choices',
+        'w_choices_price',
+        'w_choices_checked',
+        'w_required',
+        'w_randomize',
+        'w_allow_other',
+        'w_allow_other_num',
+        'w_choices_params',
+        'w_class',
+        'w_property',
+        'w_property_values',
+        'w_quantity',
+        'w_quantity_value',
+      );
+    }
+    if ( strpos($temp, 'w_hide_label') > -1 ) {
+      $params_names = array(
+        'w_field_label_size',
+        'w_field_label_pos',
+        'w_field_option_pos',
+        'w_hide_label',
+        'w_flow',
+        'w_choices',
+        'w_choices_price',
+        'w_choices_checked',
+        'w_required',
+        'w_randomize',
+        'w_allow_other',
+        'w_allow_other_num',
+        'w_choices_params',
+        'w_class',
+        'w_property',
+        'w_property_values',
+        'w_quantity',
+        'w_quantity_value',
+      );
+    }
+
+    foreach ( $params_names as $params_name ) {
+      $temp = explode('*:*' . $params_name . '*:*', $temp);
+      $param[$params_name] = esc_html($temp[0]);
+      $temp = $temp[1];
+    }
+
+    $param['w_choices'] = explode('***', $param['w_choices']);
+    $param['w_choices_price'] = explode('***', $param['w_choices_price']);
+    if ( isset($param['w_choices_params']) ) {
+      $param['w_choices_params'] = explode('***', $param['w_choices_params']);
+    }
+
+    $return_data = $field;
+    foreach ( $param['w_choices'] as $key => $choice ) {
+      if ( isset($param['w_choices_params']) && $param['w_choices_params'][$key] ) {
+        $w_choices_params = explode('[where_order_by]', $param['w_choices_params'][$key]);
+        $where_str = $w_choices_params[0];
+        $where = (str_replace(array( '[', ']' ), '', $w_choices_params[0]) ? ' WHERE ' . str_replace(array('[',']'), '', $where_str) : '');
+        $w_choices_params = explode('[db_info]', $w_choices_params[1]);
+        $order_by = str_replace(array( '[', ']' ), '', $w_choices_params[0]);
+        $db_info = $w_choices_params[1];
+        $label_table_and_column = explode(':', str_replace(array( '[', ']' ), '', $choice));
+        $table = $label_table_and_column[0];
+        $label_column = $label_table_and_column[1];
+        if ( $label_column ) {
+          $choices_labels = WDW_FM_Library::select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
+          $temp_choices_labels = array();
+          foreach ( $choices_labels as $choices_label ) {
+            $temp_choices_labels[] = $choices_label[0];
+          }
+          $choices_labels = $temp_choices_labels;
+        }
+        $value_table_and_column = explode(':', str_replace(array(
+                                                             '[',
+                                                             ']',
+                                                           ), '', $param['w_choices_price'][$key]));
+        $value_column = $value_table_and_column[1];
+        if ( $value_column ) {
+          $choices_values = WDW_FM_Library::select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
+          $temp_choices_values = array();
+          foreach ( $choices_values as $choices_value ) {
+            $temp_choices_values[] = $choices_value[0];
+          }
+          $choices_values = $temp_choices_values;
+        }
+        $choices_labels = implode('***', $choices_labels);
+        $choices_values = implode('***', $choices_values);
+        $return_data = str_replace(array(
+                                     $param['w_choices'][$key],
+                                     $param['w_choices_price'][$key]
+                                   ), array( $choices_labels, $choices_values ), $return_data);      }
+    }
+    return $return_data;
+  }
+
+  /**
+   * Convert Payment Shipping Radio field DB placeholder to normal label/value
+   * The main target of converting to make it usable in conditional fields
+   *
+   * @param string $field
+   *
+   * @return string
+   */
+  public function get_label_values_from_db_paypal_shipping( $field = '' ) {
+    $params_names = array(
+      'w_field_label_size',
+      'w_field_label_pos',
+      'w_flow',
+      'w_choices',
+      'w_choices_price',
+      'w_choices_checked',
+      'w_required',
+      'w_randomize',
+      'w_allow_other',
+      'w_allow_other_num',
+      'w_class',
+    );
+    $temp = $field;
+    if ( strpos($temp, 'w_field_option_pos') > -1 ) {
+      $params_names = array(
+        'w_field_label_size',
+        'w_field_label_pos',
+        'w_field_option_pos',
+        'w_flow',
+        'w_choices',
+        'w_choices_price',
+        'w_choices_checked',
+        'w_required',
+        'w_randomize',
+        'w_allow_other',
+        'w_allow_other_num',
+        'w_choices_params',
+        'w_class',
+      );
+    }
+    if ( strpos($temp, 'w_hide_label') > -1 ) {
+      $params_names = array(
+        'w_field_label_size',
+        'w_field_label_pos',
+        'w_field_option_pos',
+        'w_hide_label',
+        'w_flow',
+        'w_choices',
+        'w_choices_price',
+        'w_choices_checked',
+        'w_required',
+        'w_randomize',
+        'w_allow_other',
+        'w_allow_other_num',
+        'w_choices_params',
+        'w_class',
+      );
+    }
+
+    foreach ( $params_names as $params_name ) {
+      $temp = explode('*:*' . $params_name . '*:*', $temp);
+      $param[$params_name] = esc_html($temp[0]);
+      $temp = $temp[1];
+    }
+
+    $param['w_choices'] = explode('***', $param['w_choices']);
+    $param['w_choices_price'] = explode('***', $param['w_choices_price']);
+    if ( isset($param['w_choices_params']) ) {
+      $param['w_choices_params'] = explode('***', $param['w_choices_params']);
+    }
+
+    $return_data = $field;
+    foreach ( $param['w_choices'] as $key => $choice ) {
+      if ( isset($param['w_choices_params']) && $param['w_choices_params'][$key] ) {
+        $w_choices_params = explode('[where_order_by]', $param['w_choices_params'][$key]);
+        $where_str = $w_choices_params[0];
+        $where = (str_replace(array('[',']'), '', $w_choices_params[0]) ? ' WHERE ' . str_replace(array('[',']'), '', $where_str) : '');
+        $w_choices_params = explode('[db_info]', $w_choices_params[1]);
+        $order_by = str_replace(array( '[', ']' ), '', $w_choices_params[0]);
+        $db_info = $w_choices_params[1];
+        $label_table_and_column = explode(':', str_replace(array( '[', ']' ), '', $choice));
+        $table = $label_table_and_column[0];
+        $label_column = $label_table_and_column[1];
+        if ( $label_column ) {
+          $choices_labels = WDW_FM_Library::select_data_from_db_for_labels($db_info, $label_column, $table, $where, $order_by);
+          $temp_choices_labels = array();
+          foreach ( $choices_labels as $choices_label ) {
+            $temp_choices_labels[] = $choices_label[0];
+          }
+          $choices_labels = $temp_choices_labels;
+        }
+        $value_table_and_column = explode(':', str_replace(array('[', ']'), '', $param['w_choices_price'][$key]));
+        $value_column = $value_table_and_column[1];
+        if ( $value_column ) {
+          $choices_values = WDW_FM_Library::select_data_from_db_for_values($db_info, $value_column, $table, $where, $order_by);
+          $temp_choices_values = array();
+          foreach ( $choices_values as $choices_value ) {
+            $temp_choices_values[] = $choices_value[0];
+          }
+          $choices_values = $temp_choices_values;
+        }
+        $choices_labels = implode('***', $choices_labels);
+        $choices_values = implode('***', $choices_values);
+        $return_data = str_replace(array(
+                                     $param['w_choices'][$key],
+                                     $param['w_choices_price'][$key]
+                                   ), array( $choices_labels, $choices_values ), $return_data);
+      }
+    }
+    return $return_data;
+  }
+
+
+  /**
+   * Get from DB and convert to label/value if used option "From Database" for select, radio, checkbox
+   * The main target of converting to make it usable in conditional fields
+   *
+   * @param string $field
+   * @param string $type
+   *
+   * @return string
+  */
+  public function get_label_values_from_db( $field = '', $type = '' ) {
+    switch ( $type ) {
+      case 'type_own_select':
+        return $this->get_label_values_from_db_own_select( $field );
+        break;
+      case 'type_radio':
+        return $this->get_label_values_from_db_radio( $field );
+        break;
+      case 'type_checkbox':
+        return $this->get_label_values_from_db_checkbox( $field );
+        break;
+      case 'type_paypal_select':
+        return $this->get_label_values_from_db_paypal_select( $field );
+        break;
+      case 'type_paypal_checkbox':
+        return $this->get_label_values_from_db_paypal_checkbox( $field );
+        break;
+      case 'type_paypal_radio':
+        return $this->get_label_values_from_db_paypal_radio( $field );
+        break;
+      case 'type_paypal_shipping':
+        return $this->get_label_values_from_db_paypal_shipping( $field );
+        break;
+    }
+    return $field;
+  }
 
   /**
    * Placeholders popup.
