@@ -22,8 +22,8 @@
                 <div class="navbar-nav">
                     <ul class="d-flex list-unstyled flex-lg-row flex-column mb-0">
                         <?php if (has_nav_menu('primary')) wp_nav_menu(['theme_location' => 'fwm-header', 'container' => false, 'items_wrap' => '%3$s']); ?>
-                        
-                        <div class="dropdown pb-md-0 pb-3">
+                        <?php echo yes_language_switcher(['language_main_btn_header_ytl'], 'fwm'); ?>
+                        <div class="dropdown pb-md-0 pb-3 d-none">
                             <button class="btn btn-secondary dropdown-toggle p-0 mx-4 language_main_btn_header_ytl" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="/wp-content/uploads/2022/12/language.png"> En
                             </button>

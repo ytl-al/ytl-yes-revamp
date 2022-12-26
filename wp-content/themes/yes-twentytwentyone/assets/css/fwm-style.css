@@ -21,6 +21,23 @@
 
 
 /* header css start */
+.language_main_btn_header_ytl ul li a {
+    margin: 0px 0px !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+color: #ed0888 !important;
+}
+
+.language_main_btn_header_ytl > a {
+    color: #ff0084 !important;
+    background: transparent !important;
+    border: 0 !important;
+    font-weight: 600 !important;
+    margin: 0px 20px;
+    font-size: 15px;
+}
+
 .main_header_ytl_dev .navbar-nav .current_page_item a {
     font-size: 18px !important;
     color: #ed0888 !important;
@@ -182,7 +199,7 @@ body .home_banner_btn_rounded .active {
 
 /* iframe css start */
 .yes_iframe_main {
-    height: 750px;
+    height: 850px;
     background: #272a47;;
 }
 
@@ -442,7 +459,12 @@ footer:before {
 .yes_main_accoring_heading:after {
     background: url(https://yes.my/wp-content/uploads/2022/12/up-btn.png) !important;
     width: 17px;
-    height: 10px;
+    height: 11px;
+    right: 15px;
+    position: absolute;
+    top: 26px;
+    bottom: 0;
+    border: 0 !important;
 }
 
 .yes_main_heading_main {
@@ -1012,6 +1034,7 @@ footer:before {
         margin-top: 130px;
         position: relative;
         width: 100%;
+        z-index: 1;
     }
 
     .mobile_screen_margin_ytl_rem .yes_mobile_img_bottom {
@@ -1132,10 +1155,7 @@ footer:before {
         font-size: 14px;
     }
 
-    .main_header_ytl_dev li {
-        margin-bottom: 15px;
-    }
-
+   
     .yes_home_banner_main .carousel-item > img{
         margin-top: 0px;
     }
@@ -1170,6 +1190,9 @@ footer:before {
     .yes_location_main_text_content button a {
         color: #1A1E47 !important;
     }
+    .main_header_ytl_dev .navbar-nav ul {
+        margin-top: 20px;
+    }
     
 }
 
@@ -1188,6 +1211,24 @@ footer:before {
     .phone_list_join_main_banner_ytl .yes_spots_main_banner .yes_mobile_img_bottom {
         width: 100%;
     }
+}
+
+@media(min-width:992px) and (max-width:1183px){
+    .main_header_ytl_dev .navbar-nav ul li a{
+        font-size: 13px;
+        margin: 0px 10px;
+    }
+}
+
+@media(max-width:1182px){
+    .main_header_ytl_dev .navbar-nav ul {
+        margin-top: 20px;
+    }
+
+    .main_header_ytl_dev li {
+        margin-bottom: 20px;
+    }
+
 }
 
 /* responsive design end */
