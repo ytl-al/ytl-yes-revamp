@@ -297,6 +297,7 @@ if (!function_exists('yes_language_switcher') && function_exists('icl_get_langua
         $languages      = icl_get_languages('skip_missing=0&orderby=custom&order=asc');
         $langs          = '';
         $active_lang    = '';
+        $flag_img_url   = '';
         $active_lang_mobile = '';
         if (1 < count($languages)) {
             foreach ($languages as $language) {
@@ -305,23 +306,23 @@ if (!function_exists('yes_language_switcher') && function_exists('icl_get_langua
                         case 'ms':
                             $language_name      = 'Bahasa Malaysia';
                             $lang_name_mobile   = 'BM';
-                            $flag_img_url = '/wp-content/uploads/2022/12/united-kingdom-1.png';
+                            // $flag_img_url = '/wp-content/uploads/2022/12/united-kingdom-1.png';
                             break;
                         case 'zh-hans':
                             $language_name      = '中文';
                             $lang_name_mobile   = '中文';
-                            $flag_img_url = '';
+                            // $flag_img_url = '';
                             break;
                         default:
                             $language_name      = 'English';
                             $lang_name_mobile   = 'EN';
-                            $flag_img_url = '/wp-content/uploads/2022/12/malaysia-flage.png';
+                            // $flag_img_url = '/wp-content/uploads/2022/12/malaysia-flage.png';
                     }
 
                     $flag_image = '';
                     if( $type == 'fwm' ) {
                         $language_name = $lang_name_mobile;
-                        $flag_image = '<img src="'.$flag_img_url.'" alt="'.$lang_name_mobile.'_flag_image" />';
+                        // $flag_image = '<img src="'.$flag_img_url.'" alt="'.$lang_name_mobile.'_flag_image" />';
                     }
                     $langs  .= '<li><a href="' . $language['url'] . '" language="' . $language['code'] . '" class="dropdown-item" >' .$flag_image.''. $language_name . '</a></li>';
     

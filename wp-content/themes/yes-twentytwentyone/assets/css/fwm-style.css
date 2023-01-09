@@ -10,7 +10,7 @@
 }
 
 :root {
-    --bg-maincolor: #ed028c;
+    --bg-maincolor: #FF0084;
     --bg-grey: #f7f8f9;
     --bg-normal-grey: #F5F5F5;
 }
@@ -21,12 +21,19 @@
 
 
 /* header css start */
+
+
+
 .language_main_btn_header_ytl ul li a {
     margin: 0px 0px !important;
     display: flex;
     align-items: center;
     gap: 10px;
 color: #ed0888 !important;
+}
+
+.language_main_btn_header_ytl > a:focus{
+    box-shadow: 0px 0px 4px 3px transparent !important;
 }
 
 .language_main_btn_header_ytl > a {
@@ -36,10 +43,12 @@ color: #ed0888 !important;
     font-weight: 600 !important;
     margin: 0px 20px;
     font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .main_header_ytl_dev .navbar-nav .current_page_item a {
-    font-size: 18px !important;
     color: #ed0888 !important;
 }
 
@@ -102,6 +111,15 @@ color: #ed0888 !important;
     font-weight: 600;
 }
 
+.language_main_btn_header_ytl .dropdown-menu {
+    left: -30px !important;
+    border: 0;
+    margin-top: 0px !important;
+}
+.language_main_btn_header_ytl .dropdown-menu li {
+    margin: 0px !important;
+}
+
 .language_main_btn_header_ytl:focus:not(:focus-visible) {
     outline: 0;
     background-color: transparent;
@@ -125,10 +143,11 @@ color: #ed0888 !important;
 
 
 .yes_home_banner_main .carousel-item > img {
-    height: 700px;
+    height: 92vh;
     object-fit: cover;
 }
-.yes_home_banner_main {
+
+.yes_home_banner_main{
     margin-top: 42px;
 }
 
@@ -158,16 +177,16 @@ body .home_banner_btn_rounded .active {
 
 .yes_home_banner_main_content_ytl h1 {
     font-weight: 700;
-    text-transform: uppercase;
 }
 
-.yes_home_banner_main_content_ytl button {
+.yes_home_banner_main_content_ytl a {
     background-color: transparent;
-    border-radius: 30px;
+    border-radius: 50px;
     padding: 10px 20px;
-    font-size: 14px;
-    font-weight: 600;
-    border: 1px solid #fff;
+    font-size: 12px;
+    font-weight: 700;
+    border: 2px solid #fff;
+    width: fit-content;
 }
 
 .yes_home_banner_main_content_ytl-2 {
@@ -199,7 +218,6 @@ body .home_banner_btn_rounded .active {
 
 /* iframe css start */
 .yes_iframe_main {
-    height: 850px;
     background: #272a47;;
 }
 
@@ -209,7 +227,7 @@ body .home_banner_btn_rounded {
 
 
 .yes_iframe_main iframe{
-    height:80%;
+    height:630px;
 }
 
 .yes_iframe_main h1 {
@@ -274,9 +292,9 @@ body .home_banner_btn_rounded {
 }
 
 .yes_our_plans_main_boxes h4 {
-    font-size: 17px;
+    font-size: 15px;
     /* color: var(--bg-maincolor); */
-    font-weight: 700;
+    font-weight: 800;
 }
 
 .yes_our_plans_main_boxes h5 {
@@ -289,14 +307,13 @@ body .home_banner_btn_rounded {
     padding: 9px 20px;
     font-size: 12px;
     background: var(--bg-maincolor);
-    font-weight: 600;
+    font-weight: 800;
 }
 
 /* our plans css end */
 
 /* post win section css start  */
 .yes_post_win_boxes_main {
-    background-image: url(https://yes.my//wp-content/uploads/2022/12/brands-img-1.png);
     width: 100%;
     height: 100%;
     border-radius: 15px;
@@ -333,13 +350,15 @@ body .home_banner_btn_rounded {
     font-weight: 600;
 }
 
+
 .yes_post_win_boxes_main button {
-    border-radius: 20px;
-    padding: 9px 20px;
+    border-radius: 50px;
+    padding: 10px 20px;
     font-size: 12px;
     background: var(--bg-maincolor);
     font-weight: 600;
     border: 1px solid #fff;
+    align-items: center;
 }
 
 .yes_your_business_boxes {
@@ -420,6 +439,10 @@ footer:before {
     border-radius: 7px !important;
 }
 
+.yes_how_to_join_mainlist li div:last-child {
+    padding: 5px 0 0;
+}
+
 .yes_main_accoring_heading p {
     font-size: 14px;
     font-weight: 200;
@@ -448,12 +471,18 @@ footer:before {
     color: #000;
 }
 
-.yes_finder_spot_main_accroding button {
+.yes_finder_spot_main_accroding button{
+background: transparent;
+
+}
+
+.yes_finder_spot_main_accroding button a {
     background: var(--bg-maincolor);
     font-weight: 700;
     font-size: 13px;
-    padding: 8px 20px;
-    border-radius: 30px;
+    padding: 10px 20px;
+    border-radius: 50px;
+	display: block;
 }
 
 .yes_main_accoring_heading:after {
@@ -499,7 +528,7 @@ footer:before {
 .yes_how_to_join_mainlist li {
     font-size: 14px;
     font-weight: 500;
-    margin-top: 20px;
+    margin: 25px 0 0;
 }
 
 .yes_how_to_join_mainlist li .yes_how_to_join_number {
@@ -538,16 +567,33 @@ footer:before {
 }
 
 .yes_infinite_main_boxes_ytl_rem h6 {
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 15px;
     color: var(--bg-maincolor);
 }
 
 .yes_infinite_main_boxes_ytl_rem button {
+    background: transparent;
+    margin-top: 7px;
+}
+
+.yes_infinite_main_boxes_ytl_rem p {
+    color: #fff;
+    font-size: 11px;
+    margin-top: 10px;
+}
+
+.yes_infinite_main_boxes_ytl_rem button a{
     padding: 10px 20px;
     border-radius: 20px;
     background: var(--bg-maincolor);
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
+    display: block;
+}
+
+.yes_infinite_main_boxes_ytl_rem button a:hover {
+    background: #c9066b;
 }
 
 .our_plans_main_heading_prepaid>h4 {
@@ -564,14 +610,25 @@ footer:before {
     height: 200px;
 }
 
+.yes_contact_main_banner_form button:hover {
+    background: #bb0764 !important;
+    border-color: #ff0084 !important;
+}
 /* our plans page css end */
 
 
 /* contact page css start */
+
+.yes_contact_main_banner_rem .fm-not-filled, .fm-not-valid-date, .fm-error {
+    color: #fff !important;
+    font-weight: 600;
+    font-size: 11px;
+}
+
 .yes_contact_main_banner_rem {
-    background-image: url(https://yes.my/wp-content/uploads/2022/12/our-plans_img.png);
+    background-image: url(https://www.yes.my/wp-content/uploads/2023/01/business-visual-a-banner.jpg);
+    background-size: cover;
     width: 100%;
-    height: 700px;
     margin-top: 80px;
 }
 
@@ -621,6 +678,17 @@ footer:before {
     width: 10%;
 }
 
+.wdform_page .wdform_column input::placeholder, .wdform_page .wdform_column select::placeholder{
+    opacity:0.5
+}
+
+body .fm-form-container .fm-form div[type="type_phone_new"] input[type="text"] {
+    padding-left: 12px !important;
+    position: relative;
+    z-index: 10000;
+}
+
+
 .yes_contact_main_banner_rem .fm_empty_margin{
     margin-top: 0px !important;
 }
@@ -644,9 +712,24 @@ footer:before {
     width: 100%;
 }
 
+.fm-not-filled {
+    color: #fff;
+}
+
+.post_win_voucher_boxes_yes button a{
+	display: block !important;
+}
+
+
+.post_win_voucher_boxes_yes button a:hover {
+    color: #ffffff !important;
+    border: 2px solid #ff0084;
+    background: #ff0084 !important;
+}
+
 .yes_contact_main_banner_form button {
-    background-color: transparent;
-    border: 1px solid #fff;
+    background-color: #ff0084 !important;
+    border: 1px solid transparent;
     padding: 10px 10px;
     font-size: 14px;
     font-weight: 600;
@@ -666,37 +749,12 @@ footer:before {
     left: 0;
     padding: 13px 0;
     font-size: 13px;
+    display: none;
 }
 
 .yes_wifi_conected p {
     z-index: 100;
     position: relative;
-}
-
-.yes_contact_main_banner_form:before {
-    content: '';
-    position: absolute;
-    right: -10%;
-    top: -8%;
-    background: url(https://yes.my/wp-content/uploads/2022/12/diamond-img.png);
-    width: 23%;
-    height: 26%;
-    background-size: contain;
-    background-repeat: no-repeat;
-    bottom: 0;
-    margin: auto;
-}
-
-.yes_contact_main_banner_content:before{
-    content: '';
-    position: absolute;
-    left: -6%;
-    top: -50%;
-    background: url(https://yes.my/wp-content/uploads/2022/12/clone-diamond.png);
-    width: 49%;
-    height: 80%;
-    background-size: contain;
-    background-repeat: no-repeat;
 }
 
 .yes_contact_main_banner_content{
@@ -705,18 +763,6 @@ footer:before {
 
 .yes_contact_main_banner_form{
     position: relative;
-}
-
-.yes_contact_main_banner_form:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -23%;
-    background: url(https://yes.my/wp-content/uploads/2022/12/fdgdg.png);
-    width: 25%;
-    height: 20%;
-    background-size: contain;
-    background-repeat: no-repeat;
 }
 
 footer:before {
@@ -837,19 +883,43 @@ footer:before {
     position: relative;
 }
 
+.join_contest_btn_rem_yes {
+    font-size: 14px;
+    border: 2px solid #fff;
+    border-radius: 50px;
+    padding: 10px 20px;
+    color: #fff;
+    font-weight: 600;
+    margin: auto;
+    display: block;
+    width: fit-content;
+}
+
+.join_contest_btn_rem_yes:hover{
+    color: #fff;
+}
+
+.main_btn_rem_yes {
+    border: 2px solid #1a1e47 !important;
+    color: #1a1e47 !important;
+}
+
+.yes_home_banner_main_content_ytl a img {
+    width: 20px !important;
+    padding-left: 5px;
+}
+
 /* login page css end */
 
 
 /* responsive design start */
 
 @media(max-width:767px) {
+    .language_main_btn_header_ytl > a{
+        margin: 0px 10px;
+    }
     .yes_post_win_boxes_main-2 {
         height: 520px;
-        background: url(https://yes.my/wp-content/uploads/2022/12/mobile-screen-map.png);
-        justify-content: center;
-        align-items: center;
-        display: flex;
-        flex-flow: column;
         margin-top: 20px;
     }
 
@@ -883,6 +953,12 @@ footer:before {
         top: 20px;
     }
 
+.yes_contact_main_banner_rem .fm-not-filled, .fm-not-valid-date, .fm-error {
+    color: #fff !important;
+    font-weight: 600;
+    font-size: 11px;
+}
+
     .yes_about_boxes_main_img {
         height: 300px !important;
     }
@@ -892,7 +968,7 @@ footer:before {
         padding: 0px;
     }
 
-    .yes_home_banner_main_content_ytl-2:before {
+    /* .yes_home_banner_main_content_ytl-2:before {
         position: absolute;
         right: 0;
         top: 0;
@@ -916,7 +992,7 @@ footer:before {
         background-repeat: no-repeat;
         background-position: left;
         background-size: contain;
-    }
+    } */
 
     .yes_home_banner_main_content_ytl-2 h6 {
         position: relative;
@@ -974,7 +1050,7 @@ footer:before {
     }
 
 
-    .mobile_screen_margin_ytl_rem:before {
+    /* .mobile_screen_margin_ytl_rem:before {
         position: absolute;
         right: 0;
         bottom: 0;
@@ -985,13 +1061,13 @@ footer:before {
         background-repeat: no-repeat;
         background-position: right;
         background-size: contain;
-    }
+    } */
 
     .yes_our_plans_main_banner .yes_spots_main_banner {
         position: relative;
     }
 
-    .yes_our_plans_main_banner .yes_spots_main_banner:after {
+    /* .yes_our_plans_main_banner .yes_spots_main_banner:after {
         position: absolute;
         left: 0;
         top: 0;
@@ -1004,9 +1080,9 @@ footer:before {
         background-size: contain;
         bottom: 0;
         margin: auto;
-    }
+    } */
 
-    .yes_our_plans_main_banner .yes_spots_main_banner:before {
+    /* .yes_our_plans_main_banner .yes_spots_main_banner:before {
         position: absolute;
         right: 0;
         top: 0;
@@ -1017,7 +1093,7 @@ footer:before {
         background-repeat: no-repeat;
         background-position: right;
         background-size: contain;
-    }
+    } */
 
     .login_main_section_ytl_dev h1 {
         z-index: 100;
@@ -1160,23 +1236,6 @@ footer:before {
         margin-top: 0px;
     }
 
-    .yes_contact_main_banner_form:before{
-        content: none;
-    }
-
-    .yes_contact_main_banner_form:after{
-        left: 15%;
-        bottom: -20%;
-    }
-
-    .yes_contact_main_banner_content:before {
-        left: -6%;
-        top: -40%;
-        width: 62%;
-        height: 71%;
-        transform: rotate(330deg);
-    }
-
     .yes_contact_main_banner_content h1{
         z-index:10;
         position: relative;
@@ -1213,11 +1272,11 @@ footer:before {
     }
 }
 
-@media(min-width:992px) and (max-width:1183px){
-    .main_header_ytl_dev .navbar-nav ul li a{
-        font-size: 13px;
-        margin: 0px 10px;
-    }
+@media (min-width: 992px) and (max-width: 1200px){
+.main_header_ytl_dev .navbar-nav ul li a {
+    font-size: 13px;
+    margin: 0px 10px;
+}
 }
 
 @media(max-width:1182px){
@@ -1230,5 +1289,12 @@ footer:before {
     }
 
 }
+
+@media(min-width:1240px) and (max-width:1200px){
+    .main_header_ytl_dev .navbar-nav ul li a{
+        font-size: 13px;
+        margin: 0px 7px;
+    }
+} 
 
 /* responsive design end */
