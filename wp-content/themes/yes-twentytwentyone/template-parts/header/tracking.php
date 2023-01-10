@@ -99,6 +99,6 @@ a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,
 twq('config','o5rd5');
 
 </script>
-<!-- End Twitter conversion tracking base and event code →
+<!-- End Twitter conversion tracking base and event code -->
         
     <?php endif; ?>
