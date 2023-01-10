@@ -7,7 +7,7 @@
  *
  * @package yes-twentytwentyone
  */
-
+$parent_post_id = wp_get_post_parent_id();
 ?>
 
 <header class="yes_main_header">
@@ -21,19 +21,15 @@
             <div class="collapse navbar-collapse justify-content-end main_header_ytl_dev" id="navbarNavAltMarkups">
                 <div class="navbar-nav">
                     <ul class="d-flex list-unstyled flex-lg-row flex-column mb-0">
-                        <?php if (has_nav_menu('fwm-header')) wp_nav_menu(['theme_location' => 'fwm-header', 'container' => false, 'items_wrap' => '%3$s']); ?>
+                        <?php 
+                            if( has_nav_menu('fwm-ms2-header') && ( $parent_post_id == 32050 || get_the_ID() == 32050  || $parent_post_id == 32051 || get_the_ID() == 32051 ) ) {
+                                wp_nav_menu(['theme_location' => 'fwm-ms2-header', 'container' => false, 'items_wrap' => '%3$s']); 
+                            }else if ( has_nav_menu('fwm-header') ) {
+                                wp_nav_menu(['theme_location' => 'fwm-header', 'container' => false, 'items_wrap' => '%3$s']); 
+                            }
+                        ?>
                         <?php echo yes_language_switcher(['language_main_btn_header_ytl'], 'fwm'); ?>
-                        <div class="dropdown pb-md-0 pb-3 d-none">
-                            <button class="btn btn-secondary dropdown-toggle p-0 mx-4 language_main_btn_header_ytl" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="/wp-content/uploads/2022/12/language.png"> En
-                            </button>
-                            <ul class="dropdown-menu language_main_btn_header_ytl_list dropdown-menu-end border-0" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#"><img src="/wp-content/uploads/2022/12/malaysia-flage.png" alt="">MS</a></li>
-                                <li><a class="dropdown-item" href="#"><img src="/wp-content/uploads/2022/12/united-kingdom-1.png">BM</a></li>
-                            </ul>
-                        </div>
                     </ul>
-
                 </div>
             </div>
         </div>

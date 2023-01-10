@@ -196,6 +196,7 @@ if (!function_exists('yes_register_menus')) {
                     'bs-voice-communication'=> esc_html__('Business - Voice Communication', 'yes.my'),
 
                     'fwm-header'=> esc_html__('FWM Header Menu', 'yes.my'),
+                    'fwm-ms2-header'=> esc_html__('FWM Header Menu 2', 'yes.my'),
 
                     // 'footer-column-1'   => esc_html__('Footer - Column 1', 'yes.my'),
                     // 'footer-column-2'   => esc_html__('Footer - Column 2', 'yes.my'),
