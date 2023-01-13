@@ -1,17 +1,17 @@
 <style type="text/css">
     .fm-form-container.fm-theme16 { display: none !important; }
     #section-gateway-banner h2{font-size:25px; color:#FFF; font-weight:600;}
-            #section-gateway-banner h1{font-size:70px !important; color:#FFF; font-weight:800; line-height:70px !important;}
-            #section-gateway-banner h3{font-size:30px; color:#FFF; font-weight:500; line-height:normal;}
-            #section-gateway-banner .pricing{width:150px; height:150px; border-radius:50%; background-color:#FF0084; display:flex;}
-            #section-gateway-banner .pricing h4{color:#FFF; font-weight:600; font-size:16px;}
-#section-gateway-banner .pricing h4 span{font-weight:400;}
-            #section-gateway-banner .pricing h5{color:#FFF; font-weight:700; font-size:30px; line-height:17px; padding-top:10px;}
-            #section-gateway-banner .pricing sub{color:#FFF; font-weight:600; font-size: 14px;
-    font-family: 'Montserrat', sans-serif;}
-            #section-gateway-banner .pricing h5 sub{font-size:18px;}
-            #section-gateway-banner .banner-5g {width:57px;}
-            #section-gateway-banner .yes-logo-banner{width:67px;}
+                    #section-gateway-banner h1{font-size:70px !important; color:#FFF; font-weight:800; line-height:70px !important;}
+                    #section-gateway-banner h3{font-size:30px; color:#FFF; font-weight:500; line-height:normal;}
+                    #section-gateway-banner .pricing{width:150px; height:150px; border-radius:50%; background-color:#FF0084; display:flex;}
+                    #section-gateway-banner .pricing h4{color:#FFF; font-weight:600; font-size:16px;}
+        #section-gateway-banner .pricing h4 span{font-weight:400;}
+                    #section-gateway-banner .pricing h5{color:#FFF; font-weight:700; font-size:30px; line-height:17px; padding-top:10px;}
+                    #section-gateway-banner .pricing sub{color:#FFF; font-weight:600; font-size: 14px;
+            font-family: 'Montserrat', sans-serif;}
+                    #section-gateway-banner .pricing h5 sub{font-size:18px;}
+                    #section-gateway-banner .banner-5g {width:57px;}
+                    #section-gateway-banner .yes-logo-banner{width:67px;}
     #best-solution{background-color:#F2F2F2; padding-bottom:0px !important; overflow: hidden;}
     #best-solution h1{font-size:30px; color:#000; font-weight:800; text-align:center;}
     #best-solution h2{font-size:25px; color:#000; font-weight:400; text-align:center;}
@@ -56,12 +56,58 @@
     .layer-plans .row-sectionHeader h2, .layer-plans .row-sectionHeader p { color: #000; }
     .layer-plans .row-sectionHeader p { color: #000; font-size: 20px; }
 
+   .card_body_yes{
+    background: linear-gradient(90deg, #c91fc7 6.67%, #b21ab1 27.76%, #a619a7 66.79%, #8a21a3 119.46%, #432fc3 183.12%, #2d369d 206.87%) !important;
+position:relative;
+}
+
+.layer-planBox ul li {
+    font-size: 14px;
+    line-height: 1.7;
+    font-weight: 500;
+}
+
+.list_data_yes_my {
+    list-style-type: upper-roman;
+}
+
+.card_body_yes:before {
+    position: absolute;
+    right: -22px;
+    top: -65px;
+    content: 'Diskaun 50% untuk Yes Wireless Fibre';
+    background: #ff0084;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 10px;
+    z-index: 1;
+    line-height: 1.2;
+    box-shadow: 0px 0px 19px 4px #80808040;
+    text-align: center;
+}
+
+.card_footer_yes{
+background: #9d1498 !important;
+}
+
+.list_data_yes_my{
+padding-left: 37px !important;
+}
+
+
+
     .layer-planBox { background: transparent; border: 0; color:#FFF; }
-    .layer-planBox .card-body { background: linear-gradient(90deg, #FF0580 6.67%, #F20987 27.76%, #D01298 66.79%, #9821B4 119.46%, #4C36DA 183.12%, #2E3EE9 206.87%); padding: 20px 30px; border-radius: 20px 20px 0 0; }
+    .layer-planBox .card-body { background: linear-gradient(90deg, #FF0580 6.67%, #F20987 27.76%, #d8129e 66.79%, #bf28e3 119.46%, #6049f5 183.12%, #3d4dff 206.87%); padding: 20px 30px; border-radius: 20px 20px 0 0; }
 .layer-planBox .grad2{background: linear-gradient(90deg, #FF0580 -103.02%, #F20987 -81.94%, #D01298 -42.91%, #9821B4 9.76%, #4C36DA 73.42%, #2E3EE9 97.17%);}
 .layer-planBox .grad-footer{ background:#522DA1 !important; }
     .layer-planBox .card-body p { font-size: 22px; }
-    .layer-planBox h3 {font-weight:800;}
+    .layer-planBox h3 {font-weight:800; width: 99%;}
     .layer-planBox p {font-family: 'Montserrat', sans-serif;}
     .layer-planBox hr { background-color: #FFF; opacity: 0.7; }
     .layer-planBox ul { margin: 0; padding: 0 0 0 20px; }
@@ -81,27 +127,41 @@
         .span-hideLarge { display: none; }
     }
     @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
-        #section-gateway-banner h2 {font-size: 25px !important;}
-        #section-gateway-banner h1{font-size: 55px !important; line-height: 55px !important;}
-#section-gateway-banner h3{font-size:29px !important; padding-right: 90px;}
-        #section-gateway-banner .banner-5g {width:55px;}
-        #section-gateway-banner .yes-logo-banner{width:50px;}
-    }
-    @media only screen and (min-device-width: 320px) and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) {
-        #section-gateway-banner h2 {font-size: 19px !important;}
-        #section-gateway-banner h1{font-size: 33px !important; line-height: 33px !important;}
-#section-gateway-banner h3{font-size:17px !important; padding-right: 90px;}
-        #section-gateway-banner .banner-5g {width:47px;}
-        #section-gateway-banner .yes-logo-banner{width:38px;}
-#section-infinite-gateway-banner {background-position: -77px bottom; padding: 33px 0px;}
-#section-gateway-banner .pink-btn{padding: 0.3rem 2rem;}
-        #section-infinite-gateway-banner h2{font-size: 25px;}
-        #section-infinite-gateway-banner .banner-5g{width:50px;}
-        #section-infinite-gateway-banner h1{font-size: 32px; line-height: 33px;}
-.layer-steps h2{font-size: 34px;}
-.layer-sectionGradient{margin-bottom:30px;}
-#section-gateway-banner .pricing{width: 120px; height: 120px;}
-#section-gateway-banner .pricing h5{font-size: 24px; line-height: 11px;}
+                #section-gateway-banner h2 {font-size: 25px !important;}
+                #section-gateway-banner h1{font-size: 55px !important; line-height: 55px !important;}
+        #section-gateway-banner h3{font-size:29px !important; padding-right: 90px;}
+                #section-gateway-banner .banner-5g {width:55px;}
+                #section-gateway-banner .yes-logo-banner{width:50px;}
+            }
+            @media only screen and (min-device-width: 320px) and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) {
+                #section-gateway-banner h2 {font-size: 19px !important;}
+                #section-gateway-banner h1{font-size: 33px !important; line-height: 33px !important;}
+        #section-gateway-banner h3{font-size:17px !important; padding-right: 90px;}
+                #section-gateway-banner .banner-5g {width:47px;}
+                #section-gateway-banner .yes-logo-banner{width:38px;}
+        #section-infinite-gateway-banner {background-position: -77px bottom; padding: 33px 0px;}
+        #section-gateway-banner .pink-btn{padding: 0.3rem 2rem;}
+                #section-infinite-gateway-banner h2{font-size: 25px;}
+                #section-infinite-gateway-banner .banner-5g{width:50px;}
+                #section-infinite-gateway-banner h1{font-size: 32px; line-height: 33px;}
+        .layer-steps h2{font-size: 34px;}
+        .layer-sectionGradient{margin-bottom:30px;}
+        #section-gateway-banner .pricing{width: 120px; height: 120px;}
+        #section-gateway-banner .pricing h5{font-size: 24px; line-height: 11px;}
+.layer-planBox h3 {
+    width: 81%;
+}
         
     }
+
+@media(max-width:375px){
+.card_body_yes:before{
+height: 80px;
+    width: 80px;
+    font-size: 11px;
+    padding: 6px;
+    right: -11px;
+    top: -15px;
+}
+}
 </style>
