@@ -519,6 +519,10 @@ if (!function_exists('generate_store_locations')) {
                     if ($service_string != '') $service_string .= ',';
                     $service_string .= 'yes-service-stores';
                     break;
+                case 'Yes Experience Store': 
+                    if ($service_string != '') $service_string .= ',';
+                    $service_string .= 'yes-experience-stores';
+                    break;
                 case 'MyNews':
                     if ($service_string != '') $service_string .= ',';
                     $service_string .= 'dealer-mynews';
