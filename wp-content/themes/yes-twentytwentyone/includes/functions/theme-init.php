@@ -196,6 +196,7 @@ if (!function_exists('yes_register_menus')) {
                     'bs-voice-communication'=> esc_html__('Business - Voice Communication', 'yes.my'),
 
                     'fwm-header'=> esc_html__('FWM Header Menu', 'yes.my'),
+                    'fwm-ms2-header'=> esc_html__('FWM Header Menu 2', 'yes.my'),
 
                     // 'footer-column-1'   => esc_html__('Footer - Column 1', 'yes.my'),
                     // 'footer-column-2'   => esc_html__('Footer - Column 2', 'yes.my'),
@@ -292,11 +293,12 @@ if (!function_exists('yes_language_switcher') && function_exists('icl_get_langua
      * 
      * @since    1.0.0
      */
-    function yes_language_switcher($classes = [])
+    function yes_language_switcher($classes = [], $type = '')
     {
         $languages      = icl_get_languages('skip_missing=0&orderby=custom&order=asc');
         $langs          = '';
         $active_lang    = '';
+        $flag_img_url   = '';
         $active_lang_mobile = '';
         if (1 < count($languages)) {
             foreach ($languages as $language) {
@@ -305,16 +307,25 @@ if (!function_exists('yes_language_switcher') && function_exists('icl_get_langua
                         case 'ms':
                             $language_name      = 'Bahasa Malaysia';
                             $lang_name_mobile   = 'BM';
+                            // $flag_img_url = '/wp-content/uploads/2022/12/united-kingdom-1.png';
                             break;
                         case 'zh-hans':
                             $language_name      = '中文';
                             $lang_name_mobile   = '中文';
+                            // $flag_img_url = '';
                             break;
                         default:
                             $language_name      = 'English';
                             $lang_name_mobile   = 'EN';
+                            // $flag_img_url = '/wp-content/uploads/2022/12/malaysia-flage.png';
                     }
-                    $langs  .= '<li><a href="' . $language['url'] . '" language="' . $language['code'] . '" class="dropdown-item" >' . $language_name . '</a></li>';
+
+                    $flag_image = '';
+                    if( $type == 'fwm' ) {
+                        $language_name = $lang_name_mobile;
+                        // $flag_image = '<img src="'.$flag_img_url.'" alt="'.$lang_name_mobile.'_flag_image" />';
+                    }
+                    $langs  .= '<li><a href="' . $language['url'] . '" language="' . $language['code'] . '" class="dropdown-item" >' .$flag_image.''. $language_name . '</a></li>';
     
                     ($language['active']) ? $active_lang = $language_name : '';
                     ($language['active']) ? $active_lang_mobile = $lang_name_mobile : '';
@@ -654,4 +665,141 @@ if (!function_exists('yes_remove_powered_headers')) {
         return $headers;
     }
     add_action('wp_headers', 'yes_remove_powered_headers');
+}
+
+if (!function_exists('form_maker_form_data_generate_csv_callback')) {
+    // http://yes.my.localhost/wp-admin/admin-ajax.php?action=form_maker_form_data_generate_csv&form_id=6&send_header=1
+    add_action( 'wp_ajax_form_maker_form_data_generate_csv', 'form_maker_form_data_generate_csv_callback' );
+    add_action( 'wp_ajax_nopriv_form_maker_form_data_generate_csv', 'form_maker_form_data_generate_csv_callback' );
+    /**
+     * This function is use for generate the the csv data
+     * 
+     * @since    1.0.2
+     */
+    function form_maker_form_data_generate_csv_callback() {
+        try {
+            generate_form_data_csv();
+        }catch(Exception $e) {
+        }
+        wp_die();
+    }
+
+}
+if (!function_exists('generate_form_data_csv')) {
+    /**
+     * This function is use for generate the the csv data
+     * 
+     * @since    1.0.2
+     */
+    function generate_form_data_csv() {
+        require_once WP_CONTENT_DIR.'/plugins/form-maker/admin/models/model.php';
+        require_once WP_CONTENT_DIR.'/plugins/form-maker/admin/models/Submissions_fm.php';
+        $model_class = 'FMModelSubmissions_fm';
+        $model = new $model_class();
+        $form_id = WDW_FM_Library(1)->get( 'form_id', 0, 'intval' );
+        $label_parameters = $model->get_labels_parameters($form_id);
+        if( isset($label_parameters[8]) && !empty($label_parameters[8]) && is_array($label_parameters[8]) ) {
+            if( $_GET['send_header'] == 1 ) {
+                $_GET['groupids'] = implode(",",$label_parameters[8]);
+                $_GET['limitstart'] = 1000;
+                $_GET['page_num'] = -1;
+            }
+        }
+        $fm_settings = WDFMInstance(1)->fm_settings;
+        // Update export per_page.
+        $page_num_update = WDW_FM_Library(1)->get('page_num_update');
+        $option_key = (WDFMInstance(1)->is_free == 2 ? 'fmc_settings' : 'fm_settings');
+        if ( $page_num_update ) {
+        $fm_settings['ajax_export_per_page'] = WDW_FM_Library(1)->get('page_num');
+        update_option( $option_key, $fm_settings );
+        }
+        $csv_delimiter = isset($fm_settings['csv_delimiter']) ? $fm_settings['csv_delimiter'] : ',';
+        
+        $limitstart = WDW_FM_Library(1)->get( 'limitstart', 0, 'intval' );
+        $send_header = WDW_FM_Library(1)->get( 'send_header', 0, 'intval' );
+        $params = WDW_FM_Library(1)->get_submissions_to_export();
+        $upload_dir = wp_upload_dir();
+        $file_path = $upload_dir['basedir'] . '/form-maker';
+        $tempfile = $file_path . '/export' . $form_id . '.txt';
+        if ( !empty($params) ) {
+        $data = $params[0];
+        $title = $params[1];
+        if ( !empty( $data ) ) {
+            $sorted_label_names_original = $label_parameters[4];
+            $sorted_label_names_original = array_merge(array(
+                                    'ID',
+                                    "Submit date",
+                                    "Submitter's IP",
+                                    "Submitter's Username",
+                                    "Submitter's Email Address",
+                                ), $sorted_label_names_original);
+
+            if (($key = array_search('stripe', $sorted_label_names_original)) !== false) {
+            unset($sorted_label_names_original[$key]);
+            }
+
+            $sorted_label_names = array();
+            function unique_label($sorted_label_names, $label) {
+            if ( in_array($label, $sorted_label_names) ) {
+            return unique_label($sorted_label_names, $label . '(1)');
+            }
+            else {
+                return $label;
+            }
+            }
+            foreach ( $sorted_label_names_original as $key => $label ) {
+            $sorted_label_names[] = unique_label($sorted_label_names, $label);
+            }
+
+            foreach ( $data as $key => $row ) {
+            $sorted_data = array();
+            foreach ( $sorted_label_names as $label ) {
+                if ( !array_key_exists($label, $row) ) {
+                $sorted_data[$label] = '';
+                }
+                else {
+                $sorted_data[$label] = $row[$label];
+                }
+            }
+            $data[$key] = $sorted_data;
+            }
+            if ( !is_dir($file_path) ) {
+            mkdir($file_path, 0777);
+            }
+            if ( $limitstart == 0 && file_exists($tempfile) ) {
+            unlink($tempfile);
+            }
+            $output = fopen($tempfile, "a");
+            if ( $limitstart == 0 ) {
+            foreach ($sorted_label_names_original as $i => $rec) {
+                $sorted_label_names_original[$i] = ltrim($rec, '=+-@');
+            }
+            fputcsv($output, $sorted_label_names_original, $csv_delimiter);
+            }
+            foreach ( $data as $index => $record ) {
+            foreach ( $record as $i => $rec ) {
+                $record[$i] = ltrim($rec, '=+-@');
+            }
+            if ( !empty($index) ) {
+                fputcsv($output, $record, $csv_delimiter);
+            }
+            }
+            fclose($output);
+        }
+        }
+
+        if ( $send_header == 1 ) {
+        $txtfile = fopen($tempfile, "r");
+        $txtfilecontent = fread($txtfile, filesize($tempfile));
+        fclose($txtfile);
+        $filename = $title . "_" . date('Ymd') . ".csv";
+        header('Content-Encoding: UTF-8');
+        header('content-type: application/csv; charset=UTF-8');
+        header("Content-Disposition: attachment; filename=\"$filename\"");
+        // Set UTF-8 BOM
+        echo "\xEF\xBB\xBF";
+        echo $txtfilecontent;
+        unlink($tempfile);
+        }
+    }
 }
