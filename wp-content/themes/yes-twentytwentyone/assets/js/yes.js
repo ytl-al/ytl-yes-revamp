@@ -402,10 +402,14 @@ function fbPixelPush(eventType = '', data = {}) {
  */
  function twPixelPush(eventType = '', data = {}) {
     if (typeof twq === 'function' && eventType && data) {
-        const custom_email = JSON.parse(localStorage.getItem(ywosLSName))?.meta.customerDetails?.email;
-        const conversion_id = JSON.parse(localStorage.getItem(ywosLSName)).sessionKey;
+        let conversion_id;
+        if (localStorage.getItem('ywosLSName') !== null) {
+            conversion_id = JSON.parse(localStorage.getItem('ywosLSName')).sessionKey;
+        }else if (localStorage.getItem('yesElevate') !== null) {
+            conversion_id = JSON.parse(localStorage.getItem('yesElevate')).sessionKey;
+        }
         switch (eventType) {
-            // case 'impressions': 
+            // case 'impressions':
             //     var objItems = [];
             //     data.map(function(item) {
             //         var objItem = { 'id': item.id, 'quantity': 1 };
@@ -466,6 +470,7 @@ function fbPixelPush(eventType = '', data = {}) {
                 twq('event', 'tw-o5rd5-od4eb', objTrack);
                 break;
             case 'purchase':
+                const custom_email = JSON.parse(localStorage.getItem(ywosLSName))?.meta.customerDetails?.email;
                 var objItems = [];
                 var total = 0;
                 var items = data.items;
