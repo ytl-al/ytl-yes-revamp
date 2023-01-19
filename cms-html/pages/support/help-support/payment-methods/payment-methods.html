@@ -13,166 +13,921 @@
 </section>
 <!-- Banner End -->
 
-
 <!--Payment Method Start-->
-<section id="payment-method">
-    <div class="nav-wrapper d-flex align-items-center justify-content-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-        <ul class="nav nav-pills d-md-flex align-items-center justify-content-center" id="pills-tab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="yes-altitude-tab" data-bs-toggle="tab" data-bs-target="#yes-altitude" type="button" role="tab" aria-controls="yes-altitude" aria-selected="true">
-                    Pay bills
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="yes-huddle-tab" data-bs-toggle="tab" data-bs-target="#yes-huddle" type="button" role="tab" aria-controls="yes-huddle" aria-selected="false">
-                    Reload data/ Purchase add-ons
-                </button>
-            </li>
-        </ul>
-    </div>
-    <div class="container">
-        <div class="row justify-content-lg-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
-            <div class="col-12 col-lg-10">
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="yes-altitude" role="tabpanel" aria-labelledby="yes-altitude-tab">
-                        <div class="row mb-4">
-                            <div class="col-12 text-center text-lg-start mb-4">
-                                <h1>Online</h1>
-                            </div>
-                        </div>
-                        <div class="row mb-4 method-box-border pb-4">
-                            <div class="col-12 col-lg-1 text-center">
-                                <img src="/wp-content/uploads/2022/10/Yeslogo_gradient_revsersed.png" alt="">
-                            </div>
-                            <div class="col-12 col-lg-11 text-center text-lg-start ps-0 ps-lg-5">
-                                <h2 class="mb-2">MyYes App / Self Care</h2>
-                                <p class="mb-2">Check in Self Care or through our MyYes app and pay your bills conveniently with MasterCard,Visa card or Maybank2U.</p>
-                                <a href="https://selfcare.yes.my/" class="viewall-btn mt-3">Login to self-care<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
-                            </div>
-                        </div>
-                        <div class="row mb-4 method-box-border pb-4">
-                            <div class="col-12 col-lg-1 text-center">
-                                <img src="/wp-content/uploads/2022/04/payment-ebanking.png" alt="">
-                            </div>
-                            <div class="col-12 col-lg-11 text-center text-lg-start ps-0 ps-lg-5">
-                                <h2 class="mb-2">e-Banking</h2>
-                                <p class="mb-2">Pay with any of these portals, payable to 'Yes-'<br>(Average processing time: 1 to 2 business days)</p>
-                                <div class="bank-box">
-                                    <ul>
-                                        <li>
-                                            <a href="https://www.agronet.com.my/" target="_blank" rel="noopener">
-                                                <img src="/wp-content/uploads/2022/04/agrobank.png" alt="">
-                                                <p>AgroNet</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="http://www.cimbclicks.com.my/" target="_blank" rel="noopener">
-                                                <img src="/wp-content/uploads/2022/04/cimb.png" alt="">
-                                                <p>CIMB Clicks</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="https://www.citibank.com.my/MYGCB/JSO/signon/DisplayUsernameSignon.do?JFP_TOKEN=HI5SQSC4" target="_blank" rel="noopener">
-                                                <img src="/wp-content/uploads/2022/04/citibank.png" alt="">
-                                                <p>Citibank Online</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="https://www.hsbc.com.my/1/2/!ut/p/c5/04_SB8K8xLLM9MSSzPy8xBz9CP0os3gDCxNvAz9vzyAXA2cPRxMPywBDAwjQD07Niw8N1i_IdlQEAOXcX54!/?__EntryPage=hubpib.services.updatePersonalInfo&amp;__EntryPageParams=piblite:NO" target="_blank" rel="noopener">
-                                                <img src="/wp-content/uploads/2022/04/hsbc.png" alt="">
-                                                <p>HSBC</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="https://www.kfhonline.com.my/kfh_consumer/common/Login.do" target="_blank" rel="noopener">
-                                                <img src="/wp-content/uploads/2022/04/kfh.png" alt="">
-                                                <p>KFH Online</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="https://www.maybank2u.com.my/mbb/m2u/common/M2ULogin.do?action=Login" target="_blank" rel="noopener">
-                                                <img src="/wp-content/uploads/2022/04/maybank.png" alt="">
-                                                <p>Maybank2u</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="https://www2.pbebank.com/myIBK/apppbb/servlet/BxxxServlet?RDOName=BxxxAuth&amp;MethodName=login" target="_blank" rel="noopener">
-                                                <img src="/wp-content/uploads/2022/04/publicbank.png" alt="">
-                                                <p>Public Bank (PBe)</p>
-                                            </a>
-                                        </li>
-                                    </ul>
+<div>
+    <section id="payment-method">
+        <div class="nav-wrapper d-flex align-items-center justify-content-center" data-aos="fade-up"
+            data-aos-duration="1000" data-aos-delay="200">
+            <ul class="nav nav-pills d-md-flex align-items-center justify-content-center" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="yes-altitude-tab" data-bs-toggle="tab"
+                        data-bs-target="#yes-altitude" type="button" role="tab" aria-controls="yes-altitude"
+                        aria-selected="true">
+                        Bill payment
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="yes-huddle-tab" data-bs-toggle="tab" data-bs-target="#yes-huddle"
+                        type="button" role="tab" aria-controls="yes-huddle" aria-selected="false">
+                        Reload/Data add-on
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div class="container_main">
+            <div class="row justify-content-lg-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                <div class="col-12 col-lg-12">
+                    <div class="tab-content" id="nav-tabContent">
+                        <!----------------------- Pay bills section start --------------------------->
+                        <div class="tab-pane fade show active" id="yes-altitude" role="tabpanel"
+                            aria-labelledby="yes-altitude-tab">
+                            <!-- MyYes App section start -->
+                            <section class="payment_section_rem_ytl bg-white py-5">
+                                <div class="container col-xl-8 col-lg-9 col-md-10">
+                                    <div class="row">
+                                        <div class="col-12 text-center main_heading_payment_method_rem">
+                                            <h3>MyYes App</h3>
+                                            <p>
+                                                Manage your all your account needs with ease through our self-care
+                                                MyYes app.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row align-items-center">
+                                        <div class="col-xl-6 col-lg-6 col-md-6">
+                                            <div class="payment_method_rem_ytl">
+                                                <ul class="list-unstyled">
+                                                    <li>
+                                                        <h6 class="mb-1">
+                                                            <img
+                                                                src="/wp-content/uploads/2023/01/forward-media-step.png">
+                                                            Step
+                                                            1
+                                                        </h6>
+                                                        <p>Download the MyYes app</p>
+                                                    </li>
+                                                    <li>
+                                                        <h6 class="mb-1">
+                                                            <img
+                                                                src="/wp-content/uploads/2023/01/forward-media-step.png">
+                                                            Step
+                                                            2
+                                                        </h6>
+                                                        <p>Login to your account</p>
+                                                    </li>
+                                                    <li>
+                                                        <h6 class="mb-1">
+                                                            <img
+                                                                src="/wp-content/uploads/2023/01/forward-media-step.png">
+                                                            Step
+                                                            3
+                                                        </h6>
+                                                        <p>Select the 'Account' tab</p>
+                                                    </li>
+                                                    <li>
+                                                        <h6 class="mb-1">
+                                                            <img
+                                                                src="/wp-content/uploads/2023/01/forward-media-step.png">
+                                                            Step
+                                                            4
+                                                        </h6>
+                                                        <p>Tap on 'Pay' to make bill&nbsp;payment</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-6 col-lg-6 col-md-6">
+                                            <div class="payment_method_scanner_rem">
+                                                <h6 class="text-center">Scan the QR code to begin</h6>
+                                                <div
+                                                    class="scanner_all_btn_rem_ytl d-flex align-items-center justify-content-center">
+                                                    <div class="btn_app_rem_ytl">
+                                                        <a href="https://apps.apple.com/us/app/myyes/id1321262375">
+                                                            <img src="/wp-content/uploads/2023/01/appstore-btn.png"
+                                                                alt="">
+                                                        </a>
+                                                        <a
+                                                            href="https://play.google.com/store/apps/details?id=my.yes.yes4g">
+                                                            <img src="/wp-content/uploads/2023/01/googleplay-btn.png"
+                                                                alt="">
+                                                        </a>
+                                                        <a href="https://appgallery.huawei.com/#/app/C105172881">
+                                                            <img src="/wp-content/uploads/2023/01/appgallery-btn.png"
+                                                                alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="scanner_img_rem_ytl">
+                                                        <img src="/wp-content/uploads/2023/01/Picture1.png" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </section>
+                            <!-- MyYes App section start -->
+
+                            <!-- JomPAY/Online Banking section start -->
+                            <section class="payment_section_rem_ytl payment_section_rem_ytl-2 mt-5 py-5">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 text-center main_heading_payment_method_rem">
+                                            <h3>JomPAY/Online Banking</h3>
+                                            <p class="text-white">
+                                                Pay your bills anytime, anywhere at your convenience.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-xl-6 col-lg-6 col-md-6">
+                                            <div class="payment_method_rem_ytl">
+                                                <ul class="list-unstyled">
+                                                    <li>
+                                                        <h6 class="mb-1 text-white">
+                                                            <img
+                                                                src="/wp-content/uploads/2023/01/forward-media-step.png">
+                                                            Step
+                                                            1
+                                                        </h6>
+                                                        <p class="text-white">
+                                                            Log in to your preferred bank or select JomPAY.
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <h6 class="mb-1 text-white">
+                                                            <img
+                                                                src="/wp-content/uploads/2023/01/forward-media-step.png">
+                                                            Step
+                                                            2
+                                                        </h6>
+                                                        <p class="text-white">
+                                                            Enter Yes JomPAY Biller Code: 22376 &amp; Ref-1 (Billing
+                                                            Account) to confirm payment.
+                                                        </p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-6 col-lg-6 col-md-6">
+                                            <div class="payment_method_scanner_rem">
+                                                <div
+                                                    class="scanner_all_btn_rem_ytl d-flex align-items-center justify-content-center">
+                                                    <img src="/wp-content/uploads/2023/01/JomPAYDetail.png" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- JomPAY/Online Banking section end -->
+
+                            <!-- Yes Express Payment Channel seciton start -->
+                            <section class="payment_section_rem_ytl pt-5 pb-5">
+                                <div class="container">
+                                    <div class="row pt-5">
+                                        <div class="col-12 text-center main_heading_payment_method_rem">
+                                            <h3>Yes Express Payment Channel</h3>
+                                            <p>
+                                                Enjoy quick, easy and secure online bill payment through our
+                                                designated portal.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col-xl-3 col-lg-4 col-md-6 mt-3 mt-xl-0">
+                                            <div class="payment_slider_boxes">
+                                                <img src="/wp-content/uploads/2023/01/slider-1.png" alt=""
+                                                    class="w-100">
+                                                <h5>Step 1</h5>
+                                                <a href="https://selfcare.yes.my/myselfcare/doExpressPay.do"><span>Visit</span>
+                                                    https://selfcare.yes.my /myselfcare/doExpressPay.do</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-4 col-md-6 mt-3 mt-xl-0">
+                                            <div class="payment_slider_boxes">
+                                                <img src="/wp-content/uploads/2023/01/slider-2.png" alt=""
+                                                    class="w-100">
+                                                <h5>Step 2</h5>
+                                                <p class="mb-0">Verify your phone number&nbsp;&nbsp;</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-4 col-md-6 mt-3 mt-xl-0">
+                                            <div class="payment_slider_boxes">
+                                                <img src="/wp-content/uploads/2023/01/slider-3.png" alt=""
+                                                    class="w-100">
+                                                <h5>Step 3</h5>
+                                                <p class="mb-0">Choose 'Pay bills'.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-4 col-md-6 mt-3 mt-xl-0">
+                                            <div class="payment_slider_boxes">
+                                                <img src="/wp-content/uploads/2023/01/slider-4.png" alt=""
+                                                    class="w-100">
+                                                <h5>Step 4</h5>
+                                                <p class="mb-0">Make payment.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- Yes Express Payment Channel seciton start -->
+
+                            <!-- Auto Billing/Direct Debit section start -->
+                            <section class=" mt-5 pb-5 auto_billing_main_section">
+                                <div class="container">
+                                    <div class="row pt-5">
+                                        <div class="col-12 text-center main_heading_payment_method_rem">
+                                            <h3>Auto Billing/Direct Debit</h3>
+                                            <p>Enjoy 2% rebate or up to RM5 on your monthly bill when you enable
+                                                automatic payment. </p>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="auto_bill_main_boxn mt-3 mt-xl-0">
+                                            <div class="payment_slider_boxes auto_billing_debit_img">
+                                                <img src="/wp-content/uploads/2023/01/AutoBillingStep1.png" alt=""
+                                                    class="w-100">
+                                                <h5>Step 1</h5>
+                                                <p class="mb-0 mt-1">Download MyYes app.</p>
+                                            </div>
+                                        </div>
+                                        <div class="auto_bill_main_boxn mt-3 mt-xl-0">
+                                            <div class="payment_slider_boxes auto_billing_debit_img">
+                                                <img src="/wp-content/uploads/2023/01/AutoBillingStep2-1-2.png" alt=""
+                                                    class="w-100">
+                                                <h5>Step 2</h5>
+                                                <p class="mb-0 mt-1">Tap 'Auto Bill'&nbsp;on homepage.</p>
+                                            </div>
+                                        </div>
+                                        <div class="auto_bill_main_boxn mt-xl-0">
+                                            <div class="payment_slider_boxes auto_billing_debit_img">
+                                                <img src="/wp-content/uploads/2023/01/AutoBillingStep4-1-2.png" alt=""
+                                                    class="w-100">
+                                                <h5>Step 3</h5>
+                                                <p class="mb-0 mt-1">Switch on 'Enable Auto Billing'</p>
+                                            </div>
+                                        </div>
+                                        <div class="auto_bill_main_boxn mt-xl-0">
+                                            <div class="payment_slider_boxes auto_billing_debit_img">
+                                                <img src="/wp-content/uploads/2023/01/AutoBillingStep3-1-2.png" alt=""
+                                                    class="w-100">
+                                                <h5>Step 4</h5>
+                                                <p class="mb-0 mt-1">Press 'Add Card'</p>
+                                            </div>
+                                        </div>
+                                        <div class="auto_bill_main_boxn mt-3 mt-xl-0">
+                                            <div class="payment_slider_boxes auto_billing_debit_img">
+                                                <img src="/wp-content/uploads/2023/01/AutoBillingStep5.png" alt=""
+                                                    class="w-100">
+                                                <h5>Step 5</h5>
+                                                <p class="mb-0 mt-1">Fill in the credit/debit card details and proceed
+                                                    with payment.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- Auto Billing/Direct Debit section start -->
+
+                            <!-- Internet Banking section start -->
+                            <section class="internet_banking_section_rem mt-5 py-5">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 text-center main_heading_payment_method_rem">
+                                            <h3>Internet Banking</h3>
+                                            <p class="text-dark">Pay your bills through online transaction from your
+                                                preferred bank.</p>
+                                        </div>
+                                    </div>
+                                    <div class="row internet_baking_logo mt-4">
+                                        <div class="pay_internet_banking_slider">
+                                            <div class="row">
+                                                <div class="large-12 columns">
+                                                    <div class="pay_internet_banking">
+                                                        <div class="internet_banking_logo">
+                                                            <img src="/wp-content/uploads/2023/01/Maybank_Logo-1.png"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="internet_banking_logo">
+                                                            <img src="/wp-content/uploads/2023/01/pb_logo.png" alt="">
+                                                        </div>
+                                                        <div class="internet_banking_logo">
+                                                            <img src="/wp-content/uploads/2023/01/rhb-logo.png" alt="">
+                                                        </div>
+                                                        <div class="internet_banking_logo">
+                                                            <img src="/wp-content/uploads/2023/01/hong-leong.png"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="internet_banking_logo">
+                                                            <img src="/wp-content/uploads/2023/01/bankrakyat.png"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="internet_banking_logo ambank-logo">
+                                                            <img src="/wp-content/uploads/2023/01/ambank-logo.png"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="internet_banking_logo">
+                                                            <img src="/wp-content/uploads/2023/01/UOB_Logo.png" alt="">
+                                                        </div>
+                                                        <div class="internet_banking_logo">
+                                                            <img src="/wp-content/uploads/2023/01/CIMB-Logo.png" alt="">
+                                                        </div>
+                                                        <div class="internet_banking_logo">
+                                                            <img src="/wp-content/uploads/2023/01/HSBC.png" alt="">
+                                                        </div>
+                                                        <div class="internet_banking_logo">
+                                                            <img src="/wp-content/uploads/2023/01/logo_ocbc.png" alt="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- Internet Banking section end -->
+
+                            <!-- eWallets section start -->
+                            <section class="mt-5">
+                                <div class="container">
+                                    <div class="row mb-4">
+                                        <div class="col-12 text-center main_heading_payment_method_rem">
+                                            <h3>eWallets</h3>
+                                            <p class="text-dark">Pay your bills through your preferred&nbsp;eWallet.</p>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <div class="col-xl-7 col-lg-8 col-md-10">
+                                            <div class="wallet_logos">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 mt-lg-0 mt-3">
+                                                        <div class="wallet_logo_img">
+                                                            <img src="/wp-content/uploads/2023/01/Shopee-logo.png"
+                                                                alt="" class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 mt-lg-0 mt-3">
+                                                        <div class="wallet_logo_img">
+                                                            <img src="/wp-content/uploads/2023/01/unnamed.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 mt-lg-0 mt-3">
+                                                        <div class="wallet_logo_img">
+                                                            <img src="/wp-content/uploads/2023/01/Lazada-Logo.png"
+                                                                alt="" class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 mt-lg-0 mt-3">
+                                                        <div class="wallet_logo_img">
+                                                            <img src="/wp-content/uploads/2023/01/boost-logo.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- eWallets section start -->
+
+                            <!-- Other Payment Options secion start -->
+                            <section class="mt-5 payment_other_option_section_main_rem">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 text-center main_heading_payment_method_rem mb-3">
+                                            <h3>Other Payment Options</h3>
+                                            <p class="text-dark">Pay your bill conveniently at your nearest
+                                                Yes&nbsp;Koisk&nbsp;or preferred
+                                                retail store.</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-2 col-lg-3 yes_kiosk-map">
+                                            <div class="other_payment_option_box">
+                                                <a href="https://www.payquik.my/kiosk-map"><img
+                                                        src="/wp-content/uploads/2023/01/store.png" alt=""
+                                                        class="w-100"></a>
+                                                <h6 class="mb-0 text-white mt-3 text-center">Self Service Kiosk (SSK)
+                                                    View location</h6>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-10 col-lg-9">
+                                            <div class="other_payment_option_boxs">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                                <div class="payment_option_img">
+                                                                    <img src="/wp-content/uploads/2023/01/petronas-logo-2.png"
+                                                                        alt="" class="w-100">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                                <div class="payment_option_img">
+                                                                    <img src="/wp-content/uploads/2023/01/shell-logo.png"
+                                                                        alt="" class="w-100">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                                <div class="payment_option_img">
+                                                                    <img src="/wp-content/uploads/2023/01/petron-logo.png"
+                                                                        alt="" class="w-100">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                                <div class="payment_option_img">
+                                                                    <img src="/wp-content/uploads/2023/01/caltex_logo.png"
+                                                                        alt="" class="w-100">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                                <div class="payment_option_img">
+                                                                    <img src="/wp-content/uploads/2023/01/bhp.png"
+                                                                        alt="" class="w-100">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                                <div class="payment_option_img">
+                                                                    <img src="/wp-content/uploads/2023/01/kk.png" alt=""
+                                                                        class="w-100">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                                <div class="payment_option_img">
+                                                                    <img src="/wp-content/uploads/2023/01/CARiNG-Logo.jpg"
+                                                                        alt="" class="w-100">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                                <div class="payment_option_img">
+                                                                    <img src="/wp-content/uploads/2023/01/Logo_of_Giant_Hypermarket.png"
+                                                                        alt="" class="w-100">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                                <div class="payment_option_img">
+                                                                    <img src="/wp-content/uploads/2023/01/billion.png"
+                                                                        alt="" class="w-100">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                                <div class="payment_option_img">
+                                                                    <img src="/wp-content/uploads/2023/01/senheng.png"
+                                                                        alt="" class="w-100">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                                <div class="payment_option_img">
+                                                                    <img src="/wp-content/uploads/2023/01/Mydin.png"
+                                                                        alt="" class="w-100">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                                <div class="payment_option_img">
+                                                                    <img src="/wp-content/uploads/2023/01/mynews-logo.png"
+                                                                        alt="" class="w-100">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- Other Payment Options secion start -->
+
                         </div>
-                        <div class="row mb-4 method-box-border pb-4">
-                            <div class="col-12 col-lg-1 text-center">
-                                <img src="/wp-content/uploads/2022/04/payment-autodebit.png" alt="">
-                            </div>
-                            <div class="col-12 col-lg-11 text-center text-lg-start ps-0 ps-lg-5">
-                                <h2 class="mb-2">Auto debit</h2>
-                                <p class="mb-2">Register to enjoy 2% rebate from your monthly commitment plan.<br><br>Payments can be made by inputing standing instructions from your MasterCard or VisaCard.</p>
-                                <a href="/selfcare" target="_blank" class="viewall-btn mt-3" rel="noopener">Activate auto debit here<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
-                            </div>
+                        <!----------------------- Pay bills section start --------------------------->
+
+                        <!---------------------------- Reload data/ Purchase add-ons section start --------------------------->
+                        <div class="tab-pane fade" id="yes-huddle" role="tabpanel" aria-labelledby="yes-huddle-tab">
+                            <!-- MyYes App section start -->
+                            <section class="payment_section_rem_ytl bg-white py-5">
+                                <div class="container col-xl-8 col-lg-9 col-md-10">
+                                    <div class="row">
+                                        <div class="col-12 text-center main_heading_payment_method_rem">
+                                            <h3>MyYes App</h3>
+                                            <p>Reload or purchase data add-ons with ease through our self-care MyYes
+                                                app.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row align-items-center">
+                                        <div class="col-xl-6 col-lg-6 col-md-6">
+                                            <div class="payment_method_rem_ytl">
+                                                <ul class="list-unstyled">
+                                                    <li>
+                                                        <h6 class="mb-1">
+                                                            <img
+                                                                src="/wp-content/uploads/2023/01/forward-media-step.png">
+                                                            Step
+                                                            1
+                                                        </h6>
+                                                        <p>Download the MyYes app.</p>
+                                                    </li>
+                                                    <li>
+                                                        <h6 class="mb-1">
+                                                            <img
+                                                                src="/wp-content/uploads/2023/01/forward-media-step.png">
+                                                            Step
+                                                            2
+                                                        </h6>
+                                                        <p>Login to your account.</p>
+                                                    </li>
+                                                    <li>
+                                                        <h6 class="mb-1">
+                                                            <img
+                                                                src="/wp-content/uploads/2023/01/forward-media-step.png">
+                                                            Step
+                                                            3
+                                                        </h6>
+                                                        <p>Select the 'Account' tab.</p>
+                                                    </li>
+                                                    <li>
+                                                        <h6 class="mb-1">
+                                                            <img
+                                                                src="/wp-content/uploads/2023/01/forward-media-step.png">
+                                                            Step
+                                                            4
+                                                        </h6>
+                                                        <p>Tap on 'Add-ons' to purchase reload or data.</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-6 col-lg-6 col-md-6">
+                                            <div class="payment_method_scanner_rem">
+                                                <h6 class="text-center">Scan the QR code to begin</h6>
+                                                <div
+                                                    class="scanner_all_btn_rem_ytl d-flex align-items-center justify-content-center">
+                                                    <div class="btn_app_rem_ytl">
+                                                        <a href="https://apps.apple.com/us/app/myyes/id1321262375">
+                                                            <img src="/wp-content/uploads/2023/01/appstore-btn.png"
+                                                                alt="">
+                                                        </a>
+                                                        <a
+                                                            href="https://play.google.com/store/apps/details?id=my.yes.yes4g">
+                                                            <img src="/wp-content/uploads/2023/01/googleplay-btn.png"
+                                                                alt="">
+                                                        </a>
+                                                        <a href="https://appgallery.huawei.com/#/app/C105172881">
+                                                            <img src="/wp-content/uploads/2023/01/appgallery-btn.png"
+                                                                alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="scanner_img_rem_ytl">
+                                                        <img src="/wp-content/uploads/2023/01/Picture1.png" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- MyYes App section start -->
+
+                            <!-- Yes Express Payment Channel seciton start -->
+                            <section class="payment_section_rem_ytl mt-5 pb-5">
+                                <div class="container">
+                                    <div class="row pt-5">
+                                        <div class="col-12 text-center main_heading_payment_method_rem">
+                                            <h3>Yes Express Payment Channel</h3>
+                                            <p>Enjoy quick and hassle-free reload through our designated portal.</p>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-4">
+                                        <div class="col-xl-3 col-lg-4 col-md-6 mt-3 mt-xl-0">
+                                            <div class="payment_slider_boxes">
+                                                <img src="/wp-content/uploads/2023/01/slider-1.png" alt=""
+                                                    class="w-100">
+                                                <h5>Step 1</h5>
+                                                <a href="https://selfcare.yes.my/myselfcare/doExpressPay.do"><span>Visit</span>
+                                                    https://selfcare.yes.my /myselfcare/doExpressPay.do</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-4 col-md-6 mt-3 mt-xl-0">
+                                            <div class="payment_slider_boxes">
+                                                <img src="/wp-content/uploads/2023/01/slider-2.png" alt=""
+                                                    class="w-100">
+                                                <h5>Step 2</h5>
+                                                <p class="mb-0">Verify your phone number&nbsp;&nbsp;</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-4 col-md-6 mt-3 mt-xl-0">
+                                            <div class="payment_slider_boxes">
+                                                <img src="/wp-content/uploads/2023/01/slider-3.png" alt=""
+                                                    class="w-100">
+                                                <h5>Step 3</h5>
+                                                <p class="mb-0">Choose 'Add-ons'.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-4 col-md-6 mt-3 mt-xl-0">
+                                            <div class="payment_slider_boxes">
+                                                <img src="/wp-content/uploads/2023/01/slider-4.png" alt=""
+                                                    class="w-100">
+                                                <h5>Step 4</h5>
+                                                <p class="mb-0">Make payment.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- Yes Express Payment Channel seciton start -->
+
+                            <!-- Internet Banking section start -->
+                            <section class="bg-white mt-5 py-5">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 text-center main_heading_payment_method_rem">
+                                            <h3>Internet Banking</h3>
+                                            <p class="text-dark">Reload instantly through online transaction from your
+                                                preferred bank.</p>
+                                        </div>
+                                    </div>
+                                    <div class="row internet_baking_logo mt-4">
+                                        <div class="pay_internet_banking_slider">
+                                            <div class="row">
+                                                <div class="large-12 columns">
+                                                    <div class="pay_internet_banking">
+                                                        <div class="internet_banking_logo">
+                                                            <img src="/wp-content/uploads/2023/01/Maybank_Logo-1.png"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="internet_banking_logo">
+                                                            <img src="/wp-content/uploads/2023/01/pb_logo.png" alt="">
+                                                        </div>
+                                                        <div class="internet_banking_logo">
+                                                            <img src="/wp-content/uploads/2023/01/rhb-logo.png" alt="">
+                                                        </div>
+                                                        <div class="internet_banking_logo">
+                                                            <img src="/wp-content/uploads/2023/01/hong-leong.png"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="internet_banking_logo">
+                                                            <img src="/wp-content/uploads/2023/01/bankrakyat.png"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="internet_banking_logo ambank-logo">
+                                                            <img src="/wp-content/uploads/2023/01/ambank-logo.png"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="internet_banking_logo">
+                                                            <img src="/wp-content/uploads/2023/01/UOB_Logo.png" alt="">
+                                                        </div>
+                                                        <div class="internet_banking_logo">
+                                                            <img src="/wp-content/uploads/2023/01/CIMB-Logo.png" alt="">
+                                                        </div>
+                                                        <div class="internet_banking_logo">
+                                                            <img src="/wp-content/uploads/2023/01/HSBC.png" alt="">
+                                                        </div>
+                                                        <div class="internet_banking_logo">
+                                                            <img src="/wp-content/uploads/2023/01/logo_ocbc.png" alt="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- Internet Banking section end -->
+
+                            <!-- eWallets section start -->
+                            <section class="mt-5 internet_banking_section_rem py-5">
+                                <div class="container">
+                                    <div class="row mb-4">
+                                        <div class="col-12 text-center main_heading_payment_method_rem">
+                                            <h3>eWallets</h3>
+                                            <p class="text-dark">Reload directly through your preferred eWallet.</p>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <div class="col-xl-7 col-lg-8 col-md-10">
+                                            <div class="wallet_logos">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 mt-lg-0 mt-3">
+                                                        <div class="wallet_logo_img">
+                                                            <img src="/wp-content/uploads/2023/01/Shopee-logo.png"
+                                                                alt="" class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 mt-lg-0 mt-3">
+                                                        <div class="wallet_logo_img">
+                                                            <img src="/wp-content/uploads/2023/01/unnamed.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 mt-lg-0 mt-3">
+                                                        <div class="wallet_logo_img">
+                                                            <img src="/wp-content/uploads/2023/01/Lazada-Logo.png"
+                                                                alt="" class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 mt-lg-0 mt-3">
+                                                        <div class="wallet_logo_img">
+                                                            <img src="/wp-content/uploads/2023/01/boost-logo.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- eWallets section start -->
+
+                            <!-- Other Payment Options secion start -->
+                            <section class="mt-5 payment_other_option_section_main_rem">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 text-center main_heading_payment_method_rem mb-3">
+                                            <h3>Other Payment Options</h3>
+                                            <p class="text-dark">Reload conveniently at your nearest Yes&nbsp;Koisk or
+                                                preferred retail store.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-2 col-lg-3 yes_kiosk-map">
+                                            <div class="other_payment_option_box">
+                                                <a href="https://www.payquik.my/kiosk-map"><img
+                                                        src="/wp-content/uploads/2023/01/store.png" alt=""
+                                                        class="w-100"></a>
+                                                <h6 class="mb-0 text-white mt-3 text-center">Self Service Kiosk (SSK)
+                                                    View location</h6>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-10 col-lg-9">
+                                            <div class="other_payment_option_boxs">
+                                                <div class="row">
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/petronas-logo-2.png"
+                                                                alt="" class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/shell-logo.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/petron-logo.png"
+                                                                alt="" class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/caltex_logo.png"
+                                                                alt="" class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/bhp.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/kk.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/CARiNG-Logo.jpg"
+                                                                alt="" class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/Logo_of_Giant_Hypermarket.png"
+                                                                alt="" class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/billion.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/senheng.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/Mydin.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/mynews-logo.png"
+                                                                alt="" class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/watsons.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/tmg.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/pos.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/mph.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/family-mart.png"
+                                                                alt="" class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/econsave.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/cu.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/cosway.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/big-pharmacy.png"
+                                                                alt="" class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/aeon.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/lotus.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mt-3">
+                                                        <div class="payment_option_img">
+                                                            <img src="/wp-content/uploads/2023/01/99.png" alt=""
+                                                                class="w-100">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- Other Payment Options secion start -->
                         </div>
-                        <div class="row mb-4">
-                            <div class="col-12 text-center text-lg-start mb-4 mt-5">
-                                <h1>Other payment methods</h1>
-                            </div>
-                        </div>
-                        <div class="row mb-4 method-box-border pb-4">
-                            <div class="col-12 col-lg-1 text-center">
-                                <img src="/wp-content/uploads/2022/04/atm-icon.png" alt="">
-                            </div>
-                            <div class="col-12 col-lg-11 text-center text-lg-start ps-0 ps-lg-5">
-                                <h2 class="mb-2">ATM &amp; CDM</h2>
-                                <p class="mb-2">Payment can be made at any Maybank ATM (automated teller machine) or CDM (cash deposit machine) or Public Bank CDT (cash deposit terminal).<br><br>Payable to 'Yes ---'</p>
-                                <a href="http://www.maybank2u.com.my/mbb_info/m2u/public/customerService.do?programId=CS-CustService&amp;chCatId=/mbb/Personal" target="_blank" class="viewall-btn mt-3" rel="noopener">Locate a Maybank ATM/CDM<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
-                                <br><a href="https://www.pbebank.com/Personal-Banking/Branch-Locators.aspx" target="_blank" class="viewall-btn mt-3" rel="noopener">Locate a Public Bank CDT<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
-                            </div>
-                        </div>
-                        <div class="row mb-4 method-box-border pb-4">
-                            <div class="col-12 col-lg-1 text-center">
-                                <img src="/wp-content/uploads/2022/04/yes-store-icon.png" alt="">
-                            </div>
-                            <div class="col-12 col-lg-11 text-center text-lg-start ps-0 ps-lg-5">
-                                <h2 class="mb-2">Yes Stores / Kiosks</h2>
-                                <p class="mb-2">Visit any of our stores today and make payment via cash or credit/debit card.</p>
-                                <a href="/support/store-locator" target="_blank" class="viewall-btn mt-3" rel="noopener">visit our stores here<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
-                            </div>
-                        </div>
-                        <div class="row mb-4 method-box-border pb-4">
-                            <div class="col-12 col-lg-1 text-center">
-                                <img src="/wp-content/uploads/2022/04/overcounter-icon.png" alt="">
-                            </div>
-                            <div class="col-12 col-lg-11 text-center text-lg-start ps-0 ps-lg-5">
-                                <h2 class="mb-2">Over-the-counter</h2>
-                                <p class="mb-2">Pay by cash over the counter at any of the following areas:<br>(Average processing time: Next business day)</p>
-                                <a href="https://www.e-pay.com.my/" target="_blank" class="viewall-btn mt-3" rel="noopener">e-Pay Locations<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
-                                <br><a href="https://www.agrobank.com.my/product/banking-agents/" target="_blank" class="viewall-btn mt-3" rel="noopener">AgroAgent Locations<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="yes-huddle" role="tabpanel" aria-labelledby="yes-huddle-tab">
-                        <div class="row justify-content-lg-center gx-5 gy-5">
-                            <div class="col-12 mb-4">
-                                <h1>How to purchase data add-ons</h1>
-                            </div>
-                        </div>
-                        <div class="row pb-4">
-                            <div class="col-12 mb-4">
-                                <h2 class="mb-2">Step 1</h2>
-                                <p class="mb-2">For both prepaid and postpaid plans, you can top up your data within your MyYes app account or on our Data Add-Ons page. Proceed to pay once you have selected how much you want to top up.</p>
-                            </div>
-                            <div class="col-12 mb-4">
-                                <h2 class="mb-2">Step 2</h2>
-                                <p class="mb-2">Top up your Yes 4G LTE Prepaid via cash, credit card or bank transfer.</p>
-                            </div>
-                        </div>
+                        <!---------------------------- Reload data/ Purchase add-ons section end --------------------------->
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 <!--Payment Method End-->

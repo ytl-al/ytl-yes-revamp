@@ -1,17 +1,85 @@
-<style type="text/css">
+<style>
+    .yes_kiosk-map {
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+    }
+
     #payment-top-banner {
         background: linear-gradient(83.82deg, #FF0084 9.28%, #2F3BF5 90.23%);
         padding: 80px 0px;
         text-align: center;
     }
-    
+
+    .auto_billing_main_section .auto_bill_main_boxn {
+        width: 20%;
+    }
+
+    @media (max-width: 1200px) {
+        .auto_billing_main_section .auto_bill_main_boxn {
+            width: 33.33333333%;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .auto_billing_main_section .auto_bill_main_boxn {
+            width: 50%;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .auto_billing_main_section .auto_bill_main_boxn {
+            width: 100%;
+        }
+    }
+
+    .ambank-logo img {
+        height: 60px;
+        object-position: bottom;
+    }
+
+    .internet_baking_logo .slick-next:before,
+    .slick-prev:before {
+        color: #ff0084;
+    }
+
+    .internet_baking_logo .slick-dots li.slick-active button:before {
+        color: #ff0084;
+    }
+
+    .payment_section_rem_ytl .payment_method_rem_ytl ul li h6 img {
+        width: 20px;
+        padding-right: 5px;
+    }
+
+
+    .internet_banking_logo {
+        background: #fff;
+        border-radius: 15px;
+        height: 100px;
+        align-items: center;
+        box-shadow: rgb(50 50 105 / 15%) 0px 2px 5px 0px, rgb(0 0 0 / 5%) 0px 1px 1px 0px;
+        display: flex !important;
+        margin: 0px 10px;
+    }
+
+    .internet_banking_logo img {
+        width: 100%;
+        max-width: 160px;
+        object-fit: cover;
+        margin: auto;
+    }
+
     #payment-top-banner h1 {
         font-size: 48px;
         line-height: 56px;
         font-weight: 800;
         color: #F9F7F4;
     }
-    
+
     #payment-top-banner p {
         font-size: 20px;
         font-weight: 400;
@@ -19,27 +87,27 @@
         color: #F9F7F4;
         margin-bottom: 20px;
     }
-    
+
     #payment-method {
         margin-top: 60px;
     }
-    
+
     #payment-method .tab-content {
         padding: 50px 0px;
     }
-    
+
     #payment-method .tab-content>.active {
         flex-direction: column !important;
     }
-    
+
     #payment-method .nav-item {
         margin: 0px 20px
     }
-    
+
     #payment-method .nav-wrapper {
         border-bottom: solid 1px #C5C5C5;
     }
-    
+
     #payment-method .nav-pills .nav-link {
         color: #000;
         font-size: 18px;
@@ -48,34 +116,28 @@
         border-radius: 0;
         border-bottom: solid 4px #FFF;
     }
-    
+
     #payment-method .nav-pills .nav-link.active {
         color: #ED028C;
         border-bottom: solid 4px #ED028C;
         background-color: transparent;
         font-weight: 800;
     }
-    
+
     #payment-method h1 {
         font-size: 33px;
         line-height: 43px;
         color: #000;
         font-weight: 800;
     }
-    
+
     #payment-method h2 {
         font-size: 23px;
         line-height: 28px;
         color: #000;
         font-weight: 800;
     }
-    
-    #payment-method p {
-        font-size: 16px;
-        line-height: 24px;
-        color: #2B2B2B;
-    }
-    
+
     #payment-method .viewall-btn {
         display: inline-block;
         text-transform: uppercase;
@@ -86,20 +148,20 @@
         letter-spacing: 0.1em;
         font-family: 'Montserrat', sans-serif;
     }
-    
+
     #payment-method .viewall-btn svg {
         margin-left: 5px;
         font-size: 20px;
     }
-    
+
     #payment-method .viewall-btn:hover {
         text-decoration: underline;
     }
-    
+
     #payment-method .method-box-border {
         border-bottom: solid 1px #C5C5C5;
     }
-    
+
     #payment-method .bank-box {
         background-color: #F7F8F9;
         border-radius: 10px;
@@ -108,52 +170,271 @@
         display: flex;
         flex-direction: column;
     }
-    
+
     #payment-method .bank-box ul {
         width: 100%;
         margin: 0;
         padding: 0;
     }
-    
+
     #payment-method .bank-box ul li {
         list-style: none;
         float: left;
         margin: 22px;
         text-align: center;
     }
-    
+
     #payment-method .bank-box ul li p {
         color: #525252;
         font-size: 16px;
         font-weight: 400;
     }
-    
+
     #payment-method .bank-box ul li img {
         display: block;
         margin-bottom: 10px;
     }
-    
+
     #payment-method .bank-box ul li a {
         display: inline-block;
     }
+
     /* IPAD Portrait */
-    
+
     @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {}
-    
+
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
         #payment-top-banner h1 {
             font-size: 40px;
         }
+
         #payment-top-banner p {
             font-size: 20px;
         }
+
         #payment-method .tab-content {
-            padding: 30px 10%;
+            padding: 30px 0%;
         }
+
         #payment-method .bank-box ul li {
             width: 100%;
             margin-left: 0;
             margin-right: 0;
         }
+    }
+
+
+
+
+
+
+
+
+
+    :root {
+        --bg-maincolor: #ed028c;
+        --bg-grey: #f7f8f9;
+    }
+
+    .main_heading_payment_method_rem h3 {
+        font-weight: 700;
+        font-size: 40px;
+        color: var(--bg-maincolor);
+    }
+
+    .main_heading_payment_method_rem p {
+        font-size: 14px !important;
+        font-weight: 600;
+        margin-top: 5px;
+    }
+
+    .payment_section_rem_ytl {
+        background-color: var(--bg-grey)
+    }
+
+    .payment_section_rem_ytl .payment_method_rem_ytl ul li {
+        margin-top: 30px;
+    }
+
+    .payment_section_rem_ytl .payment_method_rem_ytl ul li h6 {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 0 !important;
+    }
+
+    .payment_section_rem_ytl .payment_method_rem_ytl ul li h6 i {
+        color: var(--bg-maincolor);
+        padding-right: 5px;
+        font-size: 16px;
+    }
+
+    .payment_section_rem_ytl .payment_method_rem_ytl ul li p {
+        font-size: 14px !important;
+        font-weight: 500;
+        margin-bottom: 0;
+        color: #505050 !important;
+        padding-left: 25px;
+    }
+
+    .payment_method_scanner_rem .scanner_all_btn_rem_ytl .btn_app_rem_ytl a img {
+        width: 150px;
+        margin: 11px auto 0 auto;
+        display: block;
+    }
+
+    .scanner_img_rem_ytl img {
+        width: 160px;
+        margin-left: 20px;
+    }
+
+    .payment_method_scanner_rem h6 {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .payment_slider_boxes {
+        position: relative;
+        border-radius: 1rem;
+        background-color: #fff;
+        overflow: visible;
+        -webkit-box-shadow: 0 5px 20px 5px rgb(0 0 0 / 10%);
+        box-shadow: 0 5px 20px 5px rgb(0 0 0 / 10%);
+        padding-bottom: 20px;
+    }
+
+    .payment_slider_boxes img {
+        border-radius: 1rem 1rem 0rem 0;
+    }
+
+    .payment_slider_boxes h5 {
+        font-weight: 700;
+        font-size: 16px;
+        padding: 20px 20px 0px 20px;
+        margin-bottom: 0;
+    }
+
+    .payment_slider_boxes p {
+        font-size: 14px;
+        font-weight: 500;
+        padding: 0px 20px 0px 20px;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .payment_slider_boxes a {
+        font-size: 14px;
+        font-weight: 500;
+        padding: 0px 20px 0px 20px;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .payment_section_rem_ytl-2 {
+        background-color: #1a1e47;
+    }
+
+    .payment_section_rem_ytl-2 .payment_method_rem_ytl ul li p {
+        color: #bfbfbf !important;
+    }
+
+    .internet_baking_logo .item {
+        background: #fff;
+        border-radius: 15px;
+        height: 100px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        box-shadow: rgb(50 50 105 / 15%) 0px 2px 5px 0px, rgb(0 0 0 / 5%) 0px 1px 1px 0px;
+    }
+
+    .internet_baking_logo .item img {
+        max-width: 200px;
+        object-fit: cover;
+    }
+
+
+
+    .wallet_logo_img {
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: rgb(0 0 0 / 15%) 0px 2px 8px;
+    }
+
+    .wallet_logo_img img {
+        height: 80px;
+        object-fit: contain;
+    }
+
+    .internet_banking_section_rem {
+        background: #f7f8f9;
+    }
+
+    .payment_option_img {
+        border-radius: 10px;
+        padding: 10px 15px;
+        box-shadow: rgb(60 64 67 / 30%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 1px 3px 1px;
+        background-color: #fff;
+    }
+
+    .payment_option_img img {
+        height: 50px;
+        object-fit: contain;
+    }
+
+    .other_payment_option_box {
+        box-shadow: rgb(0 0 0 / 15%) 0px 2px 8px;
+        padding: 20px 20px;
+        border-radius: 10px;
+        background: #1a1e47;
+    }
+
+    .other_payment_option_box img {
+        object-fit: contain;
+        height: 145px;
+    }
+
+    .payment_other_option_section_main_rem {
+        background: #fff;
+        padding: 40px 0px;
+    }
+
+    .other_payment_option_boxs h5 {
+        font-size: 25px;
+        font-weight: 700;
+    }
+
+    .auto_billing_debit_img img {
+        height: 460px;
+        object-fit: cover;
+        object-position: top;
+        padding: 2px;
+    }
+
+    .payment_slider_boxes a span {
+        color: #000;
+        font-weight: 600;
+    }
+
+
+    @media(max-width:640px) {
+        .main_heading_payment_method_rem h3 {
+            font-size: 30px;
+        }
+
+        .payment_method_scanner_rem .scanner_all_btn_rem_ytl .btn_app_rem_ytl a img {
+            width: 120px;
+        }
+
+        .payment_section_rem_ytl-2 .scanner_all_btn_rem_ytl img {
+            width: 100%;
+        }
+    }
+
+    .payment_slider_boxes.auto_billing_debit_img {
+        border: 2px solid #c9c9c9;
     }
 </style>
