@@ -25,6 +25,12 @@ $(document).ready(function() {
         var planID = $(this).attr('data-planid');
         ywos.buyPlan(planID, true);
     });
+
+    $('.btn-buyInfinityPlan').on('click', function() {
+        var planID = $(this).attr('data-planid');
+        ywos.buyBundlePlan(planID);
+        console.log('planSelected');
+    });
 });
 
 const ywos = {
@@ -33,7 +39,7 @@ const ywos = {
     generateSessionKey: function() {
         return '_' + Math.random().toString(36).substr(2, 9);
     },
-    initLocalStorage: function(planID, isTargetedPromo = false) {
+    initLocalStorage: function(planID, isTargetedPromo = false, type = '') {
         var ywosLocalStorageData = ywosLSData;
         var storageData = {};
         var expiryLength = expiryYWOSCart * 60000;
@@ -48,18 +54,34 @@ const ywos = {
         } else if (url.searchParams.get('referralCode') != null) {
             refCode = url.searchParams.get('referralCode');
         }
-
+        
+        let deviceID = '';
+        if( type == 'bundle_plan' ) {
+            if (localStorage.getItem(ywosLSName) !== null) {
+                deviceID = JSON.parse(localStorage.getItem(ywosLSName)).meta.deviceID;
+            }else{
+                deviceID = planID;
+                planID = '';
+            }
+        }
+        if( type == 'new_bundle_plan' ) {
+            deviceID = planID;
+            planID = '';
+        }
         storageData = {
             'expiry': ywosCartExpiry,
             'sessionKey': sessionKey,
             'meta': {
                 'planID': planID,
-                'sessionId': ''
+                'sessionId': '',
+                'deviceID': deviceID,
             },
             'siteLang': siteLang,
             'isTargetedPromo': false,
-            'tpMeta': {}
+            'tpMeta': {},
+            'type' : type
         };
+        
 
         if (refCode) {
             storageData.meta.refCode = refCode;
@@ -81,10 +103,10 @@ const ywos = {
     redirectToCart: function() {
         window.location.href = window.location.origin + "/ywos/cart";
     },
-    buyPlan: function(planID, isTargetedPromo = false) {
+    buyPlan: function(planID, isTargetedPromo = false, type = false) {
         toggleOverlay();
         var self = this;
-        self.initLocalStorage(planID, isTargetedPromo);
+        self.initLocalStorage(planID, isTargetedPromo, type);
         $.ajax({
             url: apiEndpointURL + '/get-plan-by-id/' + planID,
             method: 'GET',
@@ -100,6 +122,32 @@ const ywos = {
             },
             complete: function() {
                 self.redirectToCart();
+            }
+        });
+    },
+    redirectToPlanSelection: function() {
+        window.location.href = window.location.origin + "/ywos/planselection";
+    },
+    buyBundlePlan: function( deviceID, isTargetedPromo = false ) {
+        toggleOverlay();
+        var self = this;
+        self.initLocalStorage(deviceID, isTargetedPromo, 'new_bundle_plan');
+        $.ajax({
+            url: apiEndpointURL + '/get-bundlePlan-by-id/' + deviceID,
+            method: 'GET',
+            success: function(data) {
+                console.log(data);
+                var pushData = [{
+                    'name': data.device_name,
+                    'id': deviceID,
+                    'category': '',
+                    'price': data.price,
+                    'list_name': 'Product Page'
+                }];
+                pushAnalytics('impressions', pushData);
+            },
+            complete: function() {
+                self.redirectToPlanSelection();
             }
         });
     },
