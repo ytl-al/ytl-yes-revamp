@@ -23,6 +23,7 @@
         <a href="javascript:void(0)" class="nav-tab nav-tab-active">API Information Settings</a>
         <a href="?page=ytl-pull-data-action" class="nav-tab">Pull Plans Action</a>
         <a href="?page=ytl-pull-data-promo" class="nav-tab">Promo Data Upload</a>
+        <a href="?page=ytl-pull-device-bundle-plan-data" class="nav-tab">Device Bundle Plan</a>
     </div>
     
     <div class="wrapper-ytlpdAdmin">

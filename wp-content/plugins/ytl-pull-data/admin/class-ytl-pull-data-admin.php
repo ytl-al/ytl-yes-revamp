@@ -23,23 +23,23 @@
 class Ytl_Pull_Data_Admin
 {
 
-	/**
-	 * The ID of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
-	 */
-	private $plugin_name;
+    /**
+     * The ID of this plugin.
+     *
+     * @since    1.0.0
+     * @access   private
+     * @var      string    $plugin_name    The ID of this plugin.
+     */
+    private $plugin_name;
 
-	/**
-	 * The version of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-	private $version;
+    /**
+     * The version of this plugin.
+     *
+     * @since    1.0.0
+     * @access   private
+     * @var      string    $version    The current version of this plugin.
+     */
+    private $version;
 
     /**
      * The prefix for variables.
@@ -95,70 +95,70 @@ class Ytl_Pull_Data_Admin
      */
     private $get_all_plans_with_addons_path;
 
-	/**
-	 * Initialize the class and set its properties.
-	 *
-	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
-	 */
-	public function __construct($plugin_name, $version, $prefix)
-	{
-        $this->plugin_name 	= $plugin_name;
-        $this->version 		= $version;
-        $this->prefix		= $prefix;
+    /**
+     * Initialize the class and set its properties.
+     *
+     * @since    1.0.0
+     * @param      string    $plugin_name       The name of this plugin.
+     * @param      string    $version    The version of this plugin.
+     */
+    public function __construct($plugin_name, $version, $prefix)
+    {
+        $this->plugin_name     = $plugin_name;
+        $this->version         = $version;
+        $this->prefix        = $prefix;
         $this->api_app_version      = '1.1';
         $this->api_locale           = 'EN';
         $this->auth_path_auth       = '/mobileyos/mobile/ws/v1/json/auth/getBasicAuth';
         $this->get_all_plans_path   = '/mobileyos/mobile/ws/v1/json/getAllPlans';
         $this->get_all_plans_with_addons_path = '/mobileyos/mobile/ws/v1/json/getAllPlansWithAddons';
-	}
+    }
 
-	/**
-	 * Register the stylesheets for the admin area.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_styles()
-	{
+    /**
+     * Register the stylesheets for the admin area.
+     *
+     * @since    1.0.0
+     */
+    public function enqueue_styles()
+    {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Ytl_Pull_Data_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Ytl_Pull_Data_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+        /**
+         * This function is provided for demonstration purposes only.
+         *
+         * An instance of this class should be passed to the run() function
+         * defined in Ytl_Pull_Data_Loader as all of the hooks are defined
+         * in that particular class.
+         *
+         * The Ytl_Pull_Data_Loader will then create the relationship
+         * between the defined hooks and the functions defined in this
+         * class.
+         */
 
-		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/ytl-pull-data-admin.css', array(), $this->version, 'all');
-	}
+        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/ytl-pull-data-admin.css', array(), $this->version, 'all');
+    }
 
-	/**
-	 * Register the JavaScript for the admin area.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_scripts()
-	{
+    /**
+     * Register the JavaScript for the admin area.
+     *
+     * @since    1.0.0
+     */
+    public function enqueue_scripts()
+    {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Ytl_Pull_Data_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Ytl_Pull_Data_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+        /**
+         * This function is provided for demonstration purposes only.
+         *
+         * An instance of this class should be passed to the run() function
+         * defined in Ytl_Pull_Data_Loader as all of the hooks are defined
+         * in that particular class.
+         *
+         * The Ytl_Pull_Data_Loader will then create the relationship
+         * between the defined hooks and the functions defined in this
+         * class.
+         */
 
-		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/ytl-pull-data-admin.js', array('jquery'), $this->version, false);
-	}
+        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/ytl-pull-data-admin.js', array('jquery'), $this->version, false);
+    }
 
     /**
      * Register the settings page for the admin area.
@@ -168,13 +168,13 @@ class Ytl_Pull_Data_Admin
     public function register_settings_page()
     {
         add_menu_page(
-            __('YTL API Pull Data', 'ytl-pull-data'),  		// page title
-            __('YTL API Pull Data', 'ytl-pull-data'),  		// menu title
-            'manage_options', 								// capability
-            'ytl-pull-data', 								// menu slug
-            array($this, 'display_settings_page'), 			// callable function
-            'dashicons-open-folder', 						// icon url - https://developer.wordpress.org/resource/dashicons
-            65												// menu position
+            __('YTL API Pull Data', 'ytl-pull-data'),          // page title
+            __('YTL API Pull Data', 'ytl-pull-data'),          // menu title
+            'manage_options',                                 // capability
+            'ytl-pull-data',                                 // menu slug
+            array($this, 'display_settings_page'),             // callable function
+            'dashicons-open-folder',                         // icon url - https://developer.wordpress.org/resource/dashicons
+            65                                                // menu position
         );
     }
 
@@ -185,18 +185,18 @@ class Ytl_Pull_Data_Admin
      */
     public function display_settings_page()
     {
-        require_once plugin_dir_path(dirname(__FILE__)).'admin/partials/ytl-pull-data-admin-display.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/ytl-pull-data-admin-display.php';
     }
 
-	/**
-	 * Register the settings for our settings page.
-	 * 
-	 * @since 	 1.0.0
-	 */
+    /**
+     * Register the settings for our settings page.
+     * 
+     * @since 	 1.0.0
+     */
     public function register_settings()
     {
-        $settings_id 		= $this->prefix."settings";
-        $settngs_section_id	= $this->prefix."settings_section";
+        $settings_id         = $this->prefix . "settings";
+        $settngs_section_id    = $this->prefix . "settings_section";
 
         register_setting(
             $settings_id,
@@ -212,41 +212,41 @@ class Ytl_Pull_Data_Admin
         );
 
         add_settings_field(
-            $this->prefix."api_url_domain",
+            $this->prefix . "api_url_domain",
             __('YTL Pull Data API URL Domain', 'ytl-pull-data'),
             array($this, 'sandbox_add_settings_field_input_url'),
             $settings_id,
             $settngs_section_id,
             array(
-                'label_for'		=> $this->prefix."api_domain_url",
-                'default' 		=> '',                      // https://jsonplaceholder.typicode.com/posts
-                'description'	=> __('The URL domain for the YTL Pull Data API from CRM', 'ytl-pull-data')
+                'label_for'        => $this->prefix . "api_domain_url",
+                'default'         => '',                      // https://jsonplaceholder.typicode.com/posts
+                'description'    => __('The URL domain for the YTL Pull Data API from CRM', 'ytl-pull-data')
             )
         );
 
         add_settings_field(
-            $this->prefix."api_request_id",
+            $this->prefix . "api_request_id",
             __('YTL Pull Data API Request ID', 'ytl-pull-data'),
             array($this, 'sandbox_add_settings_field_input_text'),
             $settings_id,
             $settngs_section_id,
             array(
-                'label_for'		=> $this->prefix."api_request_id",
-                'default' 		=> '',
-                'description'	=> __('The request ID for YTL Pull Data API to retrieve the plans', 'ytl-pull-data')
+                'label_for'        => $this->prefix . "api_request_id",
+                'default'         => '',
+                'description'    => __('The request ID for YTL Pull Data API to retrieve the plans', 'ytl-pull-data')
             )
         );
 
         add_settings_field(
-            $this->prefix."api_authorization_key",
+            $this->prefix . "api_authorization_key",
             __('YTL Pull Data API Authorization Key', 'ytl-pull-data'),
             array($this, 'sandbox_add_settings_field_input_text'),
             $settings_id,
             $settngs_section_id,
             array(
-                'label_for'		=> $this->prefix."api_authorization_key",
-                'default' 		=> '',
-                'description'	=> __('The authorization key used for YTL Pull Data API to retrieve the session id', 'ytl-pull-data')
+                'label_for'        => $this->prefix . "api_authorization_key",
+                'default'         => '',
+                'description'    => __('The authorization key used for YTL Pull Data API to retrieve the session id', 'ytl-pull-data')
             )
         );
     }
@@ -258,7 +258,7 @@ class Ytl_Pull_Data_Admin
      */
     public function sandbox_register_setting($input)
     {
-        $new_input 	    = array();
+        $new_input         = array();
         $valid_submit   = true;
 
         if (isset($input)) {
@@ -271,7 +271,7 @@ class Ytl_Pull_Data_Admin
         }
 
         if ($valid_submit) {
-		    add_settings_error('ytlpd_messages', 'ytlpd_message', __('API Information has been saved! Please go to <a href="?page=ytl-pull-data-action">Pull Plans</a> page to pull the latest plans.', 'ytl-pull-data'), 'updated');
+            add_settings_error('ytlpd_messages', 'ytlpd_message', __('API Information has been saved! Please go to <a href="?page=ytl-pull-data-action">Pull Plans</a> page to pull the latest plans.', 'ytl-pull-data'), 'updated');
         } else {
             add_settings_error('ytlpd_messages', 'ytlpd_message', __('Please fill up the API URL & API Key fields!', 'ytl-pull-data'), 'error');
         }
@@ -296,20 +296,20 @@ class Ytl_Pull_Data_Admin
      */
     public function sandbox_add_settings_field_input_url($args)
     {
-        $field_id 		= $args['label_for'];
-        $field_default	= $args['default'];
-        $field_desc		= esc_html($args['description']);
+        $field_id         = $args['label_for'];
+        $field_default    = $args['default'];
+        $field_desc        = esc_html($args['description']);
 
-        $options 	= get_option($this->prefix."settings");
-        $option 	= $field_default;
+        $options     = get_option($this->prefix . "settings");
+        $option     = $field_default;
 
         if (!empty($options[$field_id])) {
             $option = $options[$field_id];
         }
 
-        $input_id 	= $this->prefix."settings[$field_id]";
-        $input_name	= $this->prefix."settings[$field_id]";
-        $input_value= esc_attr($option);
+        $input_id     = $this->prefix . "settings[$field_id]";
+        $input_name    = $this->prefix . "settings[$field_id]";
+        $input_value = esc_attr($option);
         $html_input = "	<input type='url' class='regular-text' id='$input_id' name='$input_name' value='$input_value' />
 						<p class='description'><em>$field_desc</em></p>";
 
@@ -323,20 +323,20 @@ class Ytl_Pull_Data_Admin
      */
     public function sandbox_add_settings_field_input_text($args)
     {
-        $field_id 		= $args['label_for'];
-        $field_default	= $args['default'];
-        $field_desc		= esc_html($args['description']);
+        $field_id         = $args['label_for'];
+        $field_default    = $args['default'];
+        $field_desc        = esc_html($args['description']);
 
-        $options 	= get_option($this->prefix."settings");
-        $option 	= $field_default;
+        $options     = get_option($this->prefix . "settings");
+        $option     = $field_default;
 
         if (!empty($options[$field_id])) {
             $option = $options[$field_id];
         }
 
-        $input_id 	= $this->prefix."settings[$field_id]";
-        $input_name	= $this->prefix."settings[$field_id]";
-        $input_value= esc_attr($option);
+        $input_id     = $this->prefix . "settings[$field_id]";
+        $input_name    = $this->prefix . "settings[$field_id]";
+        $input_value = esc_attr($option);
         $html_input = "	<input type='text' class='regular-text' id='$input_id' name='$input_name' value='$input_value' />
 						<p class='description'><em>$field_desc</em></p>";
 
@@ -351,12 +351,12 @@ class Ytl_Pull_Data_Admin
     public function register_action_page()
     {
         add_submenu_page(
-            'ytl-pull-data',                             			// parent slug
-            __('YTL API Pull Data - Pull Plans', 'ytl-pull-data'), 	// page title
-            __('Pull Plans', 'ytl-pull-data'),      				// menu title
-            'manage_options',                        				// capability
-            'ytl-pull-data-action',                          		// menu_slug
-            array( $this, 'display_action_page' )  					// callable function
+            'ytl-pull-data',                                         // parent slug
+            __('YTL API Pull Data - Pull Plans', 'ytl-pull-data'),     // page title
+            __('Pull Plans', 'ytl-pull-data'),                      // menu title
+            'manage_options',                                        // capability
+            'ytl-pull-data-action',                                  // menu_slug
+            array($this, 'display_action_page')                      // callable function
         );
     }
 
@@ -393,9 +393,9 @@ class Ytl_Pull_Data_Admin
         /** Manual add additional plans ENDS */
 
         if (isset($_POST['trigger_pull_data']) && check_admin_referer('pull_plans_btn_clicked')) {
-            $ytlpd_options	= get_option($this->prefix."settings");
+            $ytlpd_options    = get_option($this->prefix . "settings");
             if (!empty($ytlpd_options['ytlpd_api_domain_url'])) {
-                $domain_url	        = $ytlpd_options['ytlpd_api_domain_url'];
+                $domain_url            = $ytlpd_options['ytlpd_api_domain_url'];
             }
             if (!empty($ytlpd_options['ytlpd_api_request_id'])) {
                 $request_id         = $ytlpd_options['ytlpd_api_request_id'];
@@ -405,12 +405,12 @@ class Ytl_Pull_Data_Admin
             }
 
             if (isset($domain_url) && isset($request_id) && isset($authorization_key)) {
-				$this->ytlpd_pull_plans_api($domain_url, $request_id, $authorization_key);
+                $this->ytlpd_pull_plans_api($domain_url, $request_id, $authorization_key);
             } else {
                 add_settings_error('ytlpd_messages', 'ytlpd_message', __('Could not pull plans. Please check the API information in <a href="?page=ytl-pull-data">API Information Settings</a> page.', 'ytl-pull-data'), 'error');
             }
         }
-        require_once plugin_dir_path(dirname(__FILE__)).'admin/partials/ytl-pull-data-admin-action-display.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/ytl-pull-data-admin-action-display.php';
     }
 
     /**
@@ -426,7 +426,7 @@ class Ytl_Pull_Data_Admin
     {
         $generate_auth_token    = $this->generate_auth_token($domain_url, $request_id, $authorization_key);
         if ($generate_auth_token) {
-            $get_session_data   = get_option($this->prefix."basic_auth_token");
+            $get_session_data   = get_option($this->prefix . "basic_auth_token");
             $session_data       = unserialize($get_session_data);
             $session_id         = $session_data['basicAuthToken'];
 
@@ -434,22 +434,22 @@ class Ytl_Pull_Data_Admin
             $args       = [
                 'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
                 'body'          => json_encode($params),
-                'method'        => 'POST', 
+                'method'        => 'POST',
                 'data_format'   => 'body',
-                'timeout'       => 180 
+                'timeout'       => 180
             ];
-            $api_url    = $domain_url.$this->get_all_plans_with_addons_path;
+            $api_url    = $domain_url . $this->get_all_plans_with_addons_path;
             $request    = wp_remote_post($api_url, $args);
             $response   = (!is_wp_error($request)) ? $request['response'] : [];
             $res_code   = (!is_wp_error($request)) ? $response['code'] : 0;
 
             if (is_wp_error($request)) {
                 $error_message  = $response->get_error_message();
-                add_settings_error('ytlpd_messages', 'ytlpd_message', __('Something went wrong on getting all plans: ', 'ytl-pull-data').$error_message, 'error');
+                add_settings_error('ytlpd_messages', 'ytlpd_message', __('Something went wrong on getting all plans: ', 'ytl-pull-data') . $error_message, 'error');
             } else if ($res_code != 200) {
                 if (isset($response['message'])) {
                     $error_message  = $response['message'];
-                    add_settings_error('ytlpd_messages', 'ytlpd_message', __('Something went wrong on getting all plans: ', 'ytl-pull-data')."<strong><em>$error_message</em></strong>", 'error');
+                    add_settings_error('ytlpd_messages', 'ytlpd_message', __('Something went wrong on getting all plans: ', 'ytl-pull-data') . "<strong><em>$error_message</em></strong>", 'error');
                 }
             } else {
                 $data       = json_decode($request['body']);
@@ -461,7 +461,7 @@ class Ytl_Pull_Data_Admin
                 update_option('ytlpd_updated_at', strtotime(current_time('mysql')), false);
 
                 add_settings_error('ytlpd_messages', 'ytlpd_message', __('YES plans have been successfully pulled and saved!', 'ytl-pull-data'), 'updated');
-        
+
                 if (function_exists('w3tc_flush_all')) {
                     w3tc_flush_all();
                 }
@@ -478,28 +478,28 @@ class Ytl_Pull_Data_Admin
      * @param    string     $request_id         The request id to be used to call the API.
      * @param    string     $authorization_key  The authorization key to be used to call the API.
      */
-    private function generate_auth_token($domain_url = null, $request_id = null, $authorization_key = null) 
+    private function generate_auth_token($domain_url = null, $request_id = null, $authorization_key = null)
     {
         $return     = false;
         $params     = ['requestId' => $request_id, 'locale' => $this->api_locale];
         $args       = [
-            'headers'       => array('Content-Type' => 'application/json; charset=utf-8', 'Authorization' => 'BASIC '.$authorization_key),
+            'headers'       => array('Content-Type' => 'application/json; charset=utf-8', 'Authorization' => 'BASIC ' . $authorization_key),
             'body'          => json_encode($params),
-            'method'        => 'POST', 
-            'data_format'   => 'body' 
+            'method'        => 'POST',
+            'data_format'   => 'body'
         ];
-        $api_url    = $domain_url.$this->auth_path_auth;
+        $api_url    = $domain_url . $this->auth_path_auth;
         $request    = wp_remote_post($api_url, $args);
         $response   = $request['response'];
         $res_code   = $response['code'];
 
         if (is_wp_error($request)) {
             $error_message  = $response->get_error_message();
-            add_settings_error('ytlpd_messages', 'ytlpd_message', __('Something went wrong on generating auth token: ', 'ytl-pull-data').$error_message, 'error');
+            add_settings_error('ytlpd_messages', 'ytlpd_message', __('Something went wrong on generating auth token: ', 'ytl-pull-data') . $error_message, 'error');
         } else if ($res_code != 200) {
             if (isset($response['message'])) {
                 $error_message  = $response['message'];
-                add_settings_error('ytlpd_messages', 'ytlpd_message', __('Something went wrong on generating auth token: ', 'ytl-pull-data')."<strong><em>$error_message</em></strong>", 'error');
+                add_settings_error('ytlpd_messages', 'ytlpd_message', __('Something went wrong on generating auth token: ', 'ytl-pull-data') . "<strong><em>$error_message</em></strong>", 'error');
             }
         } else {
             $data   = json_decode($request['body']);
@@ -509,20 +509,230 @@ class Ytl_Pull_Data_Admin
         return $return;
     }
 
-    public function register_promo_data_page() 
+    public function register_promo_data_page()
     {
         add_submenu_page(
-            'ytl-pull-data',                             			            // parent slug
+            'ytl-pull-data',                                                     // parent slug
             __('YTL API Pull Data - Promo Customer Data', 'ytl-pull-data'),     // page title
-            __('Promo Customer Data', 'ytl-pull-data'),      				    // menu title
-            'manage_options',                        				            // capability
-            'ytl-pull-data-promo',                          		            // menu_slug
-            array( $this, 'display_promo_data_page' )  					        // callable function
+            __('Promo Customer Data', 'ytl-pull-data'),                          // menu title
+            'manage_options',                                                    // capability
+            'ytl-pull-data-promo',                                              // menu_slug
+            array($this, 'display_promo_data_page')                              // callable function
         );
     }
 
-    public function display_promo_data_page() 
+    public function display_promo_data_page()
     {
-        require_once plugin_dir_path(dirname(__FILE__)).'admin/partials/ytl-pull-data-promo-data-display.php';
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/ytl-pull-data-promo-data-display.php';
+    }
+
+    /**
+     * This function is use for register submenu for mapping infinity data
+     *
+     * @return void
+     */
+    public function register_device_bundle_plan_page(): void
+    {
+        add_submenu_page(
+            'ytl-pull-data',                                                     // parent slug
+            __('Map infinity data', 'ytl-pull-data'),                           // page title
+            __('Map Infinity Data', 'ytl-pull-data'),                              // menu title
+            'manage_options',                                                    // capability
+            'ytl-pull-device-bundle-plan-data',                                  // menu_slug
+            array($this, 'display_map_infinity_data')                          // callable function
+        );
+    }
+
+    /**
+     * This function is use for show the mapped infinity data
+     *
+     * @return void
+     */
+    public function display_map_infinity_data(): Void
+    {
+        $this->save_bundle_device_plan_data();
+        $device_bundle_plans = unserialize(get_option('ywos_device_bundle_plans', array()));
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/ytl-pull-device-bundle-plan-data.php';
+    }
+
+    /**
+     * This function is use for save custom setting form data
+     *
+     * @return void
+     */
+    protected function save_bundle_device_plan_data(): Void
+    {
+        if (isset($_POST['action']) && !empty($_POST['action']) && !is_array($_POST['action']) && $_POST['action'] === 'ytl-create_new_device') {
+            $res = $this->save_bundle_devices($_POST);
+        }
+        if (isset($_POST['action']) && !empty($_POST['action']) && !is_array($_POST['action']) && $_POST['action'] === 'ytl-DeleteDeviceBundle') {
+            if( isset($_POST['deviceBundleId']) ) {
+                $res = $this->delete_mapped_infinity_devices($_POST['deviceBundleId']);
+            }
+        }
+    }
+
+    /**
+     * This function is use for save the device with mapped plan data
+     *
+     * @param Array $device_data
+     * @return Array
+     */
+    protected function save_bundle_devices(array $device_data = array()): array
+    {
+        $response               = array();
+        $device_capacity        = array();
+        $device_plan_details    = array();
+        $device_remark          = array();
+        $image_upload_path      = 'YWOS-device-images';
+        $plans                  = array();
+        $get_plans              = get_option($this->prefix . 'plans_data', array()); // get all ywos plans data
+        if (!isset($_POST['action']) || empty($_POST['action']) || is_array($_POST['action']) || $_POST['action'] !== 'ytl-create_new_device') {
+            $response['error'] = true;
+            $response['message'] = 'Action is not valid';
+            return $response;
+        }
+        $device_bundle_plans = get_option('ywos_device_bundle_plans', array());
+        if (!isset($device_bundle_plans) || !is_array($device_bundle_plans)) {
+            $device_bundle_plans = unserialize($device_bundle_plans);
+        }
+
+
+        // prepare all the mapped plan data
+        if (isset($device_data['planData']['plan_id']) && !empty($device_data['planData']['plan_id']) && is_array($device_data['planData']['plan_id'])) {
+            foreach ($device_data['planData']['plan_id'] as $key => $plan_id) {
+
+                //upload device image
+                $image_arg = array();
+                if (isset($_FILES['planData']['name']['device_image'][$key]) && !empty($_FILES['planData']['name']['device_image'][$key])) {
+                    $image_arg['name'] = $_FILES['planData']['name']['device_image'][$key];
+                }
+                if (isset($_FILES['planData']['tmp_name']['device_image'][$key]) && !empty($_FILES['planData']['tmp_name']['device_image'][$key])) {
+                    $image_arg['tmp_name'] = $_FILES['planData']['tmp_name']['device_image'][$key];
+                }
+                $device_image_url = $this->upload_images_in_specificPath((array) $image_arg, (string) $image_upload_path);
+
+                //get the specific plan data
+                $planData     = [];
+                if (isset($get_plans) && !empty($get_plans) && !is_array($get_plans)) {
+                    $plans_obj     = unserialize((string) $get_plans);
+                }
+                foreach ($plans_obj as $plans_data) {
+                    foreach ($plans_data as $planid => $plan) {
+                        if ($planid == $plan_id) {
+                            $planData    = $plan;
+                            break;
+                        }
+                    }
+                }
+
+                // create array with all the plan and device details
+                $plans[] = array(
+                    'plan_id'       => (int) $plan_id,
+                    'color_name'    => (string) $device_data['planData']['color_name'][$key],
+                    'color_code'    => (string) $device_data['planData']['color_code'][$key],
+                    'data'          => (array) $planData,
+                    'device_image'  => (string) $device_image_url
+                );
+            }
+        }
+
+        if (isset($device_data['capacity']) && !empty($device_data['capacity']) && !is_array($device_data['capacity'])) {
+            $device_capacity = (array) explode(",", $device_data['capacity']);
+        }
+        if (isset($device_data['plan_details']) && !empty($device_data['plan_details']) && !is_array($device_data['plan_details'])) {
+            $device_plan_details = (array) explode(",", $device_data['plan_details']);
+        }
+        if (isset($device_data['remark']) && !empty($device_data['remark']) && !is_array($device_data['remark'])) {
+            $device_remark = (array) explode(",", $device_data['remark']);
+        }
+
+        // Created array to store Device full data with mapped plan IDs
+        $map_data = array(
+            'device_name'   => (string) $device_data['device_name'] ? $device_data['device_name'] : '',
+            'plan_name'     => (string) isset($device_data['plan_name']) ? $device_data['plan_name'] : '',
+            'planData'      => (array) $plans,
+            'details'       => (array) $device_plan_details,
+            'capacity'      => (array) $device_capacity,
+            'remark'        => (array) $device_remark
+        );
+        $device_bundle_plans[] = $map_data;
+        // Add device bundle plan in option table
+        $bool = update_option('ywos_device_bundle_plans', serialize($device_bundle_plans));
+        if ($bool) {
+            $response['error'] = false;
+            $response['message'] = 'Device bundle added successfully';
+            return $response;
+        }
+        $response['error'] = true;
+        $response['message'] = 'Device bundle add failed';
+        return $response;
+    }
+
+    /**
+     * This function is use for upload image in specific path
+     *
+     * @param array $file
+     * @param string $path
+     * @return string
+     */
+    function upload_images_in_specificPath(array $file, string $path = 'ytl-images'): string
+    {
+        $uploaded_path = '';
+        if (isset($file) && !empty($file) && is_array($file)) {
+            $upload_dir = wp_upload_dir();
+
+            if (!empty($upload_dir['basedir'])) {
+                $user_dirname = $upload_dir['basedir'] . '/' . $path;
+                if (!file_exists($user_dirname)) {
+                    wp_mkdir_p($user_dirname);
+                }
+
+                $filename = wp_unique_filename($user_dirname, $file['name']);
+                move_uploaded_file($file['tmp_name'], $user_dirname . '/' . $filename);
+                $uploaded_path = $upload_dir['baseurl'] . '/' . $path . '/' . $filename;
+            }
+        }
+        return $uploaded_path;
+    }
+
+    /**
+     * This function is use for delete the mapped device using device id
+     *
+     * @param integer $device_id
+     * @return array
+     */
+    protected function delete_mapped_infinity_devices(int $device_id): array
+    {
+        $response = [];
+        $device_bundle_plans = get_option('ywos_device_bundle_plans', array()); // in this line we get all the devices
+        if( isset($device_bundle_plans) && !empty($device_bundle_plans) && !is_array($device_bundle_plans) ) {
+            $device_bundle_plans = unserialize($device_bundle_plans);
+        }
+        $response['error'] = true;
+        $response['message'] = 'Device Not Found';
+        if( isset($device_bundle_plans[$device_id]) && !empty($device_bundle_plans[$device_id]) ) { 
+            unset($device_bundle_plans[$device_id]); // remove the device data using device id/key
+            $bool = update_option('ywos_device_bundle_plans', serialize($device_bundle_plans)); // 
+            $response['error'] = false;
+            $response['message'] = 'Device delete failed';
+            if( $bool ) {
+                $response['error'] = false;
+                $response['message'] = 'Device Deleted Successfully!';
+            }
+        }
+        return $response;
+    }
+
+    /**
+     * This function is use for update the infinity devices using device id
+     *
+     * @param integer $device_id
+     * @param array $device_updated_data
+     * @return void
+     */
+    protected function update_mapped_infinity_devices(int $device_id, array $device_updated_data): void
+    {
+        
     }
 }
