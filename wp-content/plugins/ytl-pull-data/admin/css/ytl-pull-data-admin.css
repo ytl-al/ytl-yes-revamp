@@ -126,3 +126,49 @@
         margin-right: 0;
     }
 }
+
+
+
+/* ==== Bundle Device CSS ==== */
+.device__data__table tr.fold {
+    display: none;
+}
+
+.device__data__table tr.open {
+    display: table-row;
+}
+
+.device__data__table tr td table thead tr td {
+    background: #ddd;
+    font-weight: 700;
+}
+
+.device_image {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+}
+
+.device__data__table thead tr td {
+    font-weight: 700;
+    background: #ddd;
+    padding: 10px;
+}
+
+.device__data__table {
+    border-collapse: collapse;
+}
+
+.device__data__table tr td {
+    border-bottom: 1px solid #ddd;
+    padding: 5px;
+}
+
+.device__data__table tr td table {
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+}
+
+.device__data__table tr td table tbody tr:last-child td {
+    border: none !important;
+}
