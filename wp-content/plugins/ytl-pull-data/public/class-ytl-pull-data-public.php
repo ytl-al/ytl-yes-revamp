@@ -330,6 +330,7 @@ class Ytl_Pull_Data_Public
 	{
 		$this->ra_reg_add_to_cart();
 		$this->ra_reg_get_plan_by_id();
+		$this->ra_reg_get_bundlePlan_by_id();
 		$this->ra_reg_get_add_ons_by_plan();
 		$this->ra_reg_get_auth_token();
 		$this->ra_reg_generate_otp_for_login();
@@ -393,6 +394,7 @@ class Ytl_Pull_Data_Public
 		));
 	}
 
+
 	public function get_plan_by_id($data)
 	{
 		// return $this->ca_get_plan_by_id($data['plan_id'], true);
@@ -409,6 +411,54 @@ class Ytl_Pull_Data_Public
 					$return	= $plan;
 					break;
 				}
+			}
+		}
+		if (empty($return)) {
+			return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
+		}
+
+		return $return;
+	}
+
+	/**
+	 * This function is use for create the API route for the bundle Plan
+	 *
+	 * @return void
+	 */
+	public function ra_reg_get_bundlePlan_by_id() :void
+	{
+		register_rest_route('ywos/v1', '/get-bundlePlan-by-id/(?P<device_id>\d+)', array(
+			'methods'	=> 'GET',
+			'callback' 	=> array($this, 'get_bundlePlan_by_id'),
+			'args' 		=> array(
+				'plan_id' 	=> array(
+					'validate_callback'	=> function ($param, $request, $key) {
+						return is_numeric($param);
+					}
+				)
+			)
+		));
+	}
+
+	/**
+	 * This function is use for the get the bundle plan data using plan id
+	 *
+	 * @param array $data
+	 * @return array
+	 */
+	public function get_bundlePlan_by_id(WP_REST_Request $request)
+	{
+		$devicePlan_id = $request->get_param( 'device_id' );
+		$return 	= [];
+		$get_plans 	= get_option('ywos_device_bundle_plans');
+		if (empty($get_plans)) {
+			return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
+		}
+		$plans_obj 	= unserialize($get_plans);
+		foreach ($plans_obj as $device_id => $device) {
+			if ($device_id == $devicePlan_id) {
+				$return	= $device;
+				break;
 			}
 		}
 		if (empty($return)) {
