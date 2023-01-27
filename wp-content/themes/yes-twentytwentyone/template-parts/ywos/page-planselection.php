@@ -88,7 +88,7 @@
                                             <div class="text-bold mt-3">{{renderText('select_color')}}</div>
                                             <div class="selectColorWrap mt-3">
                                                 <ul>
-                                                    <li v-for="(plan, index) in deviceData.planData" v-on:click="changePlan(index)" data-bs-target="#productSlide" :data-bs-slide-to="index" :class="'color_select color-'+plan.color_name +((selectedPlanData.color_name == plan.color_name.toLowerCase())?' selected':'')">
+                                                    <li v-for="(plan, index) in deviceData.planData" v-on:click="changePlan(index)" data-bs-target="#productSlide" :data-bs-slide-to="index" :class="'color_select color-'+plan.color_name.toLowerCase() +((selectedPlanData.color_name.toLowerCase() == plan.color_name.toLowerCase())?' selected':'')">
                                                         <a></a>
                                                     </li>
                                                 </ul>

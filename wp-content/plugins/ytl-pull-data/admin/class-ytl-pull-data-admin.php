@@ -535,8 +535,8 @@ class Ytl_Pull_Data_Admin
     {
         add_submenu_page(
             'ytl-pull-data',                                                     // parent slug
-            __('Map infinity data', 'ytl-pull-data'),                           // page title
-            __('Map Infinity Data', 'ytl-pull-data'),                              // menu title
+            __('Device Bundle plan', 'ytl-pull-data'),                           // page title
+            __('Device Bundle plan', 'ytl-pull-data'),                              // menu title
             'manage_options',                                                    // capability
             'ytl-pull-device-bundle-plan-data',                                  // menu_slug
             array($this, 'display_map_infinity_data')                          // callable function
@@ -550,26 +550,40 @@ class Ytl_Pull_Data_Admin
      */
     public function display_map_infinity_data(): Void
     {
-        $this->save_bundle_device_plan_data();
+        $deviceData = $this->bundle_device_plan_data();
         $device_bundle_plans = unserialize(get_option('ywos_device_bundle_plans', array()));
         require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/ytl-pull-device-bundle-plan-data.php';
     }
 
     /**
-     * This function is use for save custom setting form data
+     * This function is use for save, update and delete bundle data
      *
      * @return void
      */
-    protected function save_bundle_device_plan_data(): Void
+    protected function bundle_device_plan_data(): array
     {
+        $res = [];
         if (isset($_POST['action']) && !empty($_POST['action']) && !is_array($_POST['action']) && $_POST['action'] === 'ytl-create_new_device') {
             $res = $this->save_bundle_devices($_POST);
         }
         if (isset($_POST['action']) && !empty($_POST['action']) && !is_array($_POST['action']) && $_POST['action'] === 'ytl-DeleteDeviceBundle') {
-            if( isset($_POST['deviceBundleId']) ) {
+            if (isset($_POST['deviceBundleId'])) {
                 $res = $this->delete_mapped_infinity_devices($_POST['deviceBundleId']);
             }
         }
+        if (isset($_POST['action']) && !empty($_POST['action']) && !is_array($_POST['action']) && $_POST['action'] === 'ytl-EditDeviceBundle') {
+            if (isset($_POST['deviceBundleId'])) {
+                $res['type'] = 'edit-data';
+                $res['data'] = $this->get_bundle_devices($_POST['deviceBundleId']);
+            }
+        }
+
+        if (isset($_POST['action']) && !empty($_POST['action']) && !is_array($_POST['action']) && $_POST['action'] === 'ytl-update_device') {
+            if (isset($_POST['deviceBundleId'])) {
+                $this->update_mapped_infinity_devices($_POST, $_POST['deviceBundleId']);
+            }
+        }
+        return $res;
     }
 
     /**
@@ -578,7 +592,7 @@ class Ytl_Pull_Data_Admin
      * @param Array $device_data
      * @return Array
      */
-    protected function save_bundle_devices(array $device_data = array()): array
+    protected function save_bundle_devices(array $device_data = array(), int $deviceID = -1): array
     {
         $response               = array();
         $device_capacity        = array();
@@ -587,15 +601,7 @@ class Ytl_Pull_Data_Admin
         $image_upload_path      = 'YWOS-device-images';
         $plans                  = array();
         $get_plans              = get_option($this->prefix . 'plans_data', array()); // get all ywos plans data
-        if (!isset($_POST['action']) || empty($_POST['action']) || is_array($_POST['action']) || $_POST['action'] !== 'ytl-create_new_device') {
-            $response['error'] = true;
-            $response['message'] = 'Action is not valid';
-            return $response;
-        }
-        $device_bundle_plans = get_option('ywos_device_bundle_plans', array());
-        if (!isset($device_bundle_plans) || !is_array($device_bundle_plans)) {
-            $device_bundle_plans = unserialize($device_bundle_plans);
-        }
+        $device_bundle_plans = $this->get_bundle_devices();
 
 
         // prepare all the mapped plan data
@@ -624,8 +630,10 @@ class Ytl_Pull_Data_Admin
                             break;
                         }
                     }
+                }                
+                if (!$device_image_url) {
+                    $device_image_url = $device_data['planData']['device_image_url'][$key];
                 }
-
                 // create array with all the plan and device details
                 $plans[] = array(
                     'plan_id'       => (int) $plan_id,
@@ -656,7 +664,11 @@ class Ytl_Pull_Data_Admin
             'capacity'      => (array) $device_capacity,
             'remark'        => (array) $device_remark
         );
-        $device_bundle_plans[] = $map_data;
+        if ($deviceID == -1) { //Check we have a device id or not. If we have a deviceID then it will got to else part
+            $device_bundle_plans[] = $map_data;
+        } else {
+            $device_bundle_plans[$deviceID] = $map_data;
+        }
         // Add device bundle plan in option table
         $bool = update_option('ywos_device_bundle_plans', serialize($device_bundle_plans));
         if ($bool) {
@@ -676,7 +688,7 @@ class Ytl_Pull_Data_Admin
      * @param string $path
      * @return string
      */
-    function upload_images_in_specificPath(array $file, string $path = 'ytl-images'): string
+    function upload_images_in_specificPath(array $file, string $path = 'ytl-images') :string
     {
         $uploaded_path = '';
         if (isset($file) && !empty($file) && is_array($file)) {
@@ -705,18 +717,15 @@ class Ytl_Pull_Data_Admin
     protected function delete_mapped_infinity_devices(int $device_id): array
     {
         $response = [];
-        $device_bundle_plans = get_option('ywos_device_bundle_plans', array()); // in this line we get all the devices
-        if( isset($device_bundle_plans) && !empty($device_bundle_plans) && !is_array($device_bundle_plans) ) {
-            $device_bundle_plans = unserialize($device_bundle_plans);
-        }
+        $device_bundle_plans = $this->get_bundle_devices();
         $response['error'] = true;
         $response['message'] = 'Device Not Found';
-        if( isset($device_bundle_plans[$device_id]) && !empty($device_bundle_plans[$device_id]) ) { 
+        if (isset($device_bundle_plans[$device_id]) && !empty($device_bundle_plans[$device_id])) {
             unset($device_bundle_plans[$device_id]); // remove the device data using device id/key
             $bool = update_option('ywos_device_bundle_plans', serialize($device_bundle_plans)); // 
             $response['error'] = false;
             $response['message'] = 'Device delete failed';
-            if( $bool ) {
+            if ($bool) {
                 $response['error'] = false;
                 $response['message'] = 'Device Deleted Successfully!';
             }
@@ -731,8 +740,29 @@ class Ytl_Pull_Data_Admin
      * @param array $device_updated_data
      * @return void
      */
-    protected function update_mapped_infinity_devices(int $device_id, array $device_updated_data): void
+    protected function update_mapped_infinity_devices(array $device_updated_data, int $device_id): void
     {
-        
+        $this->save_bundle_devices($device_updated_data, $device_id);
+    }
+
+    /**
+     * This function is use for get the specific data using id and get all the data if id will not pass
+     *
+     * @param integer $deviceID
+     * @return array
+     */
+    protected function get_bundle_devices(int $deviceID = -1): array
+    {
+        $device_bundle_plans = get_option('ywos_device_bundle_plans', array()); // in this line we get all the devices
+        if (isset($device_bundle_plans) && !empty($device_bundle_plans) && !is_array($device_bundle_plans)) {
+            $device_bundle_plans = unserialize($device_bundle_plans);
+        }
+        if ($deviceID == -1) {
+            return $device_bundle_plans;
+        }
+        if (isset($device_bundle_plans[$deviceID]) && !empty($device_bundle_plans[$deviceID])) {
+            return $device_bundle_plans[$deviceID];
+        }
+        return array();
     }
 }
