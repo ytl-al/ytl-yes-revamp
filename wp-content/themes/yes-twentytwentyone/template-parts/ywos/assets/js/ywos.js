@@ -29,7 +29,6 @@ $(document).ready(function() {
     $('.btn-buyInfinityPlan').on('click', function() {
         var planID = $(this).attr('data-planid');
         ywos.buyBundlePlan(planID);
-        console.log('planSelected');
     });
 });
 
@@ -126,7 +125,7 @@ const ywos = {
         });
     },
     redirectToPlanSelection: function() {
-        window.location.href = window.location.origin + "/ywos/planselection";
+        window.location.href = window.location.origin + "/ywos/device-type";
     },
     buyBundlePlan: function( deviceID, isTargetedPromo = false ) {
         toggleOverlay();
@@ -136,7 +135,6 @@ const ywos = {
             url: apiEndpointURL + '/get-bundlePlan-by-id/' + deviceID,
             method: 'GET',
             success: function(data) {
-                console.log(data);
                 var pushData = [{
                     'name': data.device_name,
                     'id': deviceID,

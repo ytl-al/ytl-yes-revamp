@@ -13,6 +13,47 @@
     .ytl_vue-content-load {
         display: none;
     }
+
+    .cart_total h3{
+        font-weight: 900 !important;
+    }
+
+    #cart-body h2 {
+        font-weight: 900 !important;
+        margin-bottom: 10px !important;
+    }
+
+    .accordion-header {
+        cursor: pointer !important;
+        font-weight: 600 !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 5px !important;
+    }
+
+    .accordion-body {
+        margin: 10px 0 !important;
+    }
+
+    #cart-body p{
+        font-weight: 600 !important;
+    }
+
+    .main-content.page-main-content-loaded{
+        height: auto !important;
+    }
+
+     @media(max-width:768px){
+        .page-footer .row {
+            gap: 15px;
+        }
+        
+        .page-footer .row > div {
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 15px;
+        }
+     }
 </style>
 <main class="main-content">
     <header class="page-header">
@@ -25,7 +66,7 @@
                             <div class="justify-content-end" id="navbarSupportedContent">
                                 <div class="d-flex align-items-center justify-content-end">
                                     <a href="#" class="mx-3" data-render-text="help">Help</a>
-                                    <a href="#" class="login-btn" ><span class="iconify" data-icon="bx:bxs-cart"></span> <span id="totalItemCart">1 </span> <span data-render-text="items"> Items </span></a>
+                                    <a href="#" class="login-btn"><span class="iconify" data-icon="bx:bxs-cart"></span> <span id="totalItemCart">1 </span> <span data-render-text="items"> Items </span></a>
                                 </div>
                             </div>
                         </div>
@@ -42,8 +83,8 @@
                 </div>
             </section>
             <section id="cart-body">
-                <div class="container body_container no-border">
-                    <div class="row mb-5 gx-5">
+                <div class="container body_container no-border p-0">
+                    <div class="row">
                         <div class="col-lg-8 col-12">
                             <div class="product-box">
                                 <div class="row">
@@ -79,7 +120,7 @@
                                                     Infinite Plus Basic
                                                 </div> -->
                                                     <ul class="accordion-body list-1 mt-3">
-                                                        <li v-for="detail in deviceData.details">{{detail}}</li>
+                                                        <li v-for="detail in selectedPlanData.planDetails">{{detail}}</li>
                                                     </ul>
                                                 </div>
                                                 <div class="text-description mt-3"></div>
@@ -89,7 +130,7 @@
                                             <div class="selectColorWrap mt-3">
                                                 <ul>
                                                     <li v-for="(plan, index) in deviceData.planData" v-on:click="changePlan(index)" data-bs-target="#productSlide" :data-bs-slide-to="index" :class="'color_select color-'+plan.color_name.toLowerCase() +((selectedPlanData.color_name.toLowerCase() == plan.color_name.toLowerCase())?' selected':'')">
-                                                        <a></a>
+                                                        <a :style="'background:'+plan.color_code+';'"></a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -107,14 +148,14 @@
                         <div class="col-lg-4 col-12">
                             <div class="summary-box">
                                 <h1 class="subtitle">{{renderText('order_summary')}}</h1>
-                                <h3 class="plan_price">{{renderText('monthly_payment')}}</h3>
+                                <h6>{{renderText('order_summary_subtext')}}</h6>
                                 <div class="hr_line"></div>
                                 <div class="row cart_total">
                                     <div class="col-4 pt-2 pb-2">
                                         <h3>{{renderText('total')}}</h3>
                                     </div>
                                     <div class="col-8 pt-2 pb-2 text-end">
-                                        <h3>RM{{selectedPlanData.totalAmount}}/mth</h3>
+                                        <h3>RM{{ selectedPlanData.totalAmount }}</h3>
                                     </div>
                                 </div>
                                 <div class="monthly mb-4">
@@ -123,19 +164,19 @@
                                             <p>{{deviceData.device_name}} - {{selectedPlanData.color_name}}</p>
                                         </div>
                                         <div class="col-6 text-end">
-                                            <p>RM0.00/ mth</p>
+                                            <p>RM0.00</p>
                                         </div>
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-6">
-                                            <p>{{deviceData.plan_name}}</p>
+                                            <p>{{renderText('due_monthly')}}</p>
                                         </div>
                                         <div class="col-6 text-end">
-                                            <p>RM{{selectedPlanData.totalAmount}}/ mth</p>
+                                            <p>RM{{ parseFloat(selectedPlanData.monthlyCommitment).toFixed(2)}}</p>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="javascript:void(0)" @click="goToCartPage" class="pink-btn-disable text-uppercase d-block pink-btn">{{renderText('go_to_cart')}}</a>
+                                <a href="javascript:void(0)" @click="goToCartPage" class="pink-btn-disable text-uppercase d-block pink-btn">{{renderText('add_to_cart')}}</a>
                             </div>
                         </div>
                     </div>
@@ -162,7 +203,6 @@
                 },
             }
             const renderText = ywos.renderText(jQuery(this).data('render-text'), pageText);
-            console.log(renderText);
             $(this).html(renderText);
         });
         setTimeout(function() {
@@ -192,7 +232,8 @@
                     color_code: '',
                     monthlyCommitment: '',
                     totalAmount: '',
-                    plan_id: ''
+                    plan_id: '',
+                    planDetails: []
                 },
                 ywos: null,
                 ywosLSName: 'yesYWOS',
@@ -217,15 +258,25 @@
                         'ms-MY': 'Ringkasan pesanan',
                         'zh-hans': 'Order summary'
                     },
+                    order_summary_subtext: {
+                        'en-US': 'Due today after taxes and shipping',
+                        'ms-MY': 'Perlu dibayar hari ini selepas cukai dan penghantaran',
+                        'zh-hans': 'Due today after taxes and shipping'
+                    },
                     total: {
                         'en-US': 'TOTAL',
                         'ms-MY': 'JUMLAH',
                         'zh-hans': 'TOTAL'
                     },
-                    go_to_cart: {
-                        'en-US': 'Go to Cart',
-                        'ms-MY': 'Go to Cart',
-                        'zh-hans': 'Go to Cart'
+                    due_monthly: {
+                        'en-US': 'Due Monthly',
+                        'ms-MY': 'Perlu dibayar bulanan',
+                        'zh-hans': 'Due Monthly'
+                    },
+                    add_to_cart: {
+                        'en-US': 'Add to Cart',
+                        'ms-MY': 'Tambah ke Troli',
+                        'zh-hans': 'Add to Cart'
                     },
                     monthly_payment: {
                         'en-US': 'Monthly Payment',
@@ -272,6 +323,7 @@
                             $('#main-vue').css({
                                 'height': 'auto'
                             });
+                            $('.main-content').addClass('page-main-content-loaded');
                             $('.ytl_vue-content-load').css({
                                 'display': 'block'
                             });
@@ -287,13 +339,16 @@
                 changePlan: function(index) {
                     var self = this;
                     const selectedData = self.deviceData.planData[index];
+                    const planDetails = self.deviceData.planData[index]?.data?.notes?.split(',');
                     self.selectedPlanData = {
                         color_name: selectedData.color_name,
                         color_code: selectedData.color_code,
                         monthlyCommitment: selectedData.data.monthlyCommitment,
-                        totalAmount: selectedData.data.totalAmount,
-                        plan_id: selectedData.plan_id
+                        totalAmount: selectedData.data.totalAmountWithoutSST,
+                        plan_id: selectedData.plan_id,
+                        planDetails: planDetails
                     };
+
                 },
                 showPlanDetail: function() {
                     $('.accordion-wrap').toggleClass("active");
