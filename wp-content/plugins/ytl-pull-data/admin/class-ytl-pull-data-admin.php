@@ -618,19 +618,10 @@ class Ytl_Pull_Data_Admin
                 }
                 $device_image_url = $this->upload_images_in_specificPath((array) $image_arg, (string) $image_upload_path);
 
-                //get the specific plan data
-                $planData     = [];
-                if (isset($get_plans) && !empty($get_plans) && !is_array($get_plans)) {
-                    $plans_obj     = unserialize((string) $get_plans);
-                }
-                foreach ($plans_obj as $plans_data) {
-                    foreach ($plans_data as $planid => $plan) {
-                        if ($planid == $plan_id) {
-                            $planData    = $plan;
-                            break;
-                        }
-                    }
-                }                
+                //get the specific plan data using the plan ID
+                $planData = new Ytl_Pull_Data_Public($this->plugin_name, $this->version, $this->prefix);
+                $planData = $planData->get_plan_by_id(['plan_id' => $plan_id]);
+
                 if (!$device_image_url) {
                     $device_image_url = $device_data['planData']['device_image_url'][$key];
                 }
