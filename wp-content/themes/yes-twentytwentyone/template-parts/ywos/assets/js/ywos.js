@@ -28,6 +28,18 @@ $(document).ready(function() {
 
     $('.btn-buyInfinityPlan').on('click', function() {
         var planID = $(this).attr('data-planid');
+        const planType = $(this).attr('data-planType');
+        if( planType == "mixed" ) {
+            const deviceType = $(this).parents('.layer-planDevice').find('.deviceType:radio:checked').val();
+            planID = $(this).parents('.layer-planDevice').find('.deviceType:radio:checked').attr('data-planid');
+            console.log(deviceType);
+            console.log(planID);
+            if( deviceType == 'instalment' ) {
+                return elevate.buyPlan(planID);
+            }else if( deviceType == 'upfront' ) {
+                return ywos.buyBundlePlan(planID);
+            }
+        }
         ywos.buyBundlePlan(planID);
     });
 });
