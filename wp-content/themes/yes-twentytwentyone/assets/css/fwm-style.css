@@ -845,7 +845,7 @@ footer:before {
 }
 
 .home_banner_slide_3_yes {
-    background: url(https://yes.my/wp-content/uploads/2023/01/shopee-visual-3.png);
+    background: url(https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/01/MicrosoftTeams-image-31-01.png);
     background-size: cover;
     height: 92vh;
     margin-top: 60px !important;
@@ -1707,7 +1707,7 @@ body .fm-form-container.fm-theme1 .fm-form input[type="text"],
     }
 
     body .home_banner_slide_3_yes {
-        background: url(https://yes.my/wp-content/uploads/2023/01/shopee-visual-3-mobile-screen-.png) !important;
+        background: url(https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/01/MicrosoftTeams-image-mobile-31-01.png) !important;
         border-radius: 0px 0px 20px 20px;
         background-size: cover !important;
         background-repeat: no-repeat;
@@ -1747,10 +1747,17 @@ body .fm-form-container.fm-theme1 .fm-form input[type="text"],
 
 @media(max-width:820px) {
     .home_banner_slide_3_yes {
-        background: url(https://yes.my/wp-content/uploads/2023/01/BANNER-SHOPEE-1-1.png) !important;
+        background: url(https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/01/MicrosoftTeams-image-mobile-31-01.png) !important;
         background-position: center !important;
         background-size: cover !important;
         height: 600px !important;
+    }
+}
+
+@media(max-width:820px) and (min-width:561px){
+    body .home_banner_slide_3_yes{
+        align-items: end !important;
+        padding-bottom: 50px !important;
     }
 }
 
