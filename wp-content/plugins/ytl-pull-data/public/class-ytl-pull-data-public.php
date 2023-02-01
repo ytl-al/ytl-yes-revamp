@@ -397,8 +397,6 @@ class Ytl_Pull_Data_Public
 
 	public function get_plan_by_id($data)
 	{
-		// return $this->ca_get_plan_by_id($data['plan_id'], true);
-
 		$return 	= [];
 		$get_plans 	= get_option($this->prefix . 'plans_data');
 		if (empty($get_plans)) {
@@ -412,6 +410,9 @@ class Ytl_Pull_Data_Public
 					break;
 				}
 			}
+		}
+		if( empty($return) || !is_array($return) ) {
+			$return = $this->ca_get_plan_by_id($data['plan_id'], true);
 		}
 		if (empty($return)) {
 			return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
@@ -491,7 +492,10 @@ class Ytl_Pull_Data_Public
 			$data 		= json_decode($request['body']);
 			if ($data->responseCode > -1) {
 				if ($returnPlanDetail) {
-					return $data->planDetails[0];
+					if( isset($data->planDetails[0]) ) {
+						return $data->planDetails[0];
+					}
+					return [];
 				} else {
 					$data->sessionId = $session_id;
 				}
