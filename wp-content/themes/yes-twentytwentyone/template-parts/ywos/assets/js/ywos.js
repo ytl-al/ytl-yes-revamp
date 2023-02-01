@@ -34,7 +34,7 @@ $(document).ready(function() {
             planID = $(this).parents('.layer-planDevice').find('.deviceType:radio:checked').attr('data-planid');
             console.log(deviceType);
             console.log(planID);
-            if( deviceType == 'instalment' ) {
+            if( deviceType == 'installment' ) {
                 return elevate.buyPlan(planID);
             }else if( deviceType == 'upfront' ) {
                 return ywos.buyBundlePlan(planID);

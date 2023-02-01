@@ -119,7 +119,7 @@
                                                     <!-- <div class="text-description mt-3">
                                                     Infinite Plus Basic
                                                 </div> -->
-                                                    <ul class="accordion-body list-1 mt-3">
+                                                    <ul class="accordion-body list-1 mt-3" v-if="selectedPlanData.planDetails.length > 0">
                                                         <li v-for="detail in selectedPlanData.planDetails">{{detail}}</li>
                                                     </ul>
                                                 </div>
@@ -310,6 +310,7 @@
                             self.deviceData = data;
                             if (localStorage.getItem(ywosLSName) !== null && JSON.parse(localStorage.getItem(ywosLSName)).meta.planID != '') {
                                 self.deviceData?.planData.map((data, index) => {
+                                    console.log(JSON.parse(localStorage.getItem(ywosLSName)).meta.planID);
                                     if (JSON.parse(localStorage.getItem(ywosLSName)).meta.planID == data?.plan_id) {
                                         self.changePlan(index);
                                     } else {
@@ -339,12 +340,12 @@
                 changePlan: function(index) {
                     var self = this;
                     const selectedData = self.deviceData.planData[index];
-                    const planDetails = self.deviceData.planData[index]?.data?.notes?.split(',');
+                    const planDetails = self.deviceData.planData[index]?.data?.notes?.split(',').filter(elm => elm);
                     self.selectedPlanData = {
                         color_name: selectedData.color_name,
                         color_code: selectedData.color_code,
                         monthlyCommitment: selectedData.data.monthlyCommitment,
-                        totalAmount: selectedData.data.totalAmountWithoutSST,
+                        totalAmount: selectedData.data.totalAmountWithSST,
                         plan_id: selectedData.plan_id,
                         planDetails: planDetails
                     };
