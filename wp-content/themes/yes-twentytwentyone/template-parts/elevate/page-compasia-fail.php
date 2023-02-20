@@ -69,6 +69,7 @@
                                     <a href="/infinite-phone-bundles/" class="pink-btn text-uppercase">{{ renderText('back_to_infinite') }}</a>
                                 </div>
                                 <div id="error" class="mt-3"></div>
+                                <div v-if="isUpFrontPlanAvailable" @click="buyPlan">Buy using upfron payment</div>
                             </div>
                         </div>
                     </div>
@@ -155,7 +156,9 @@
                         orderItems:[]
                     },
                 },
-                allowSubmit: false
+                allowSubmit: false,
+                isUpFrontPlanAvailable : false,
+                upFrontPlanID : null
             },
 
             created: function () {
@@ -168,6 +171,7 @@
             },
             methods: {
                 pageInit: function () {
+
                     var self = this;
                     if (elevate.validateSession(self.currentStep)) {
                         if (elevate.lsData.eligibility) {
@@ -175,6 +179,36 @@
                         }
                         if (elevate.lsData.product) {
                             self.orderSummary.product  = elevate.lsData.product;
+                        }
+
+                        if(self.orderSummary.product.selected.productCode) {
+                            const mapPlanId = {
+                                1097 : {
+                                    planID : 1127,
+                                    deviceID : 2,
+                                },
+                                1096 : {
+                                    planID : 1126,
+                                    deviceID : 2,
+                                },
+                                1095 : {
+                                    planID : 1125,
+                                    deviceID : 2,
+                                },
+                                1101 : {
+                                    planID : 1123,
+                                    deviceID : 3,
+                                },
+                                1093 : {
+                                    planID : 1131,
+                                    deviceID : 4,
+                                }
+                            };
+                            if( mapPlanId[self.orderSummary.product.selected.productCode] ) {
+                                self.isUpFrontPlanAvailable = true;
+                                self.upFrontPlanID = mapPlanId[self.orderSummary.product.selected.productCode].planID;
+                            }
+                            // ywos.creditCheckFailedPlan(planID);
                         }
 
                         if (elevate.lsData.orderSummary) {
@@ -193,7 +227,39 @@
                         elevate.redirectToPage('cart');
                     }
                 },
-
+                buyPlan: function() {
+                    var self = this;
+                    // console.log(apiEndpointURL);
+                    if(self.isUpFrontPlanAvailable) {
+                        // const mapPlanId = {
+                        //     1097 : {
+                        //         planID : 1127,
+                        //         deviceID : 2,
+                        //     },
+                        //     1096 : {
+                        //         planID : 1126,
+                        //         deviceID : 2,
+                        //     },
+                        //     1095 : {
+                        //         planID : 1125,
+                        //         deviceID : 2,
+                        //     },
+                        //     1101 : {
+                        //         planID : 1123,
+                        //         deviceID : 3,
+                        //     },
+                        //     1093 : {
+                        //         planID : 1131,
+                        //         deviceID : 4,
+                        //     }
+                        // };
+                        // if( mapPlanId[self.orderSummary.product.selected.productCode] ) {
+                        //     planID = mapPlanId[self.orderSummary.product.selected.productCode].planID;
+                        // }
+                        ywos.creditCheckFailedPlan(self.upFrontPlanID);
+                    }
+                    // axios.get('http://yes.my.localhost/wp-json/ywos/v1' + '/get_bundle_plan/' + self.planID);
+                },
                 getNormalContract: function(){
                     var self = this;
                     var color = self.orderSummary.orderDetail.color;

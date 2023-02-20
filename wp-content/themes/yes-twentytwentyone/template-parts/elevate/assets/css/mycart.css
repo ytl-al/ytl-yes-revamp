@@ -520,6 +520,14 @@ main.site-main {
     background: #ACACAC;
 }
 
+.color-graphite a{
+    background: #4B4E53;
+}
+
+.color-silver a {
+    background: #878a8f;
+}
+
 .color-pink a {
     background: #BC9792;
 }
