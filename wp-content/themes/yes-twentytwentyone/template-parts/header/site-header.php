@@ -50,7 +50,7 @@
                     <ul class="nav tabnav" id="tabNav" role="tablist">
                         <?php if (function_exists('display_yes_toplogo')) display_yes_toplogo(); ?>
                         <li class="" role="presentation"><a href="javascript:void(0)" class="nav-link<?php echo (!$is_business_child) ? ' active' : ''; ?>" id="tabNav-personal" data-bs-toggle="tab" data-bs-target="#tabNavContent-personal" role="tab" aria-controls="tabNavContent-personal" aria-selected="true"><?php echo esc_html__('Personal', 'yes.my'); ?></a></li>
-                        <li class="" role="presentation"><a href="javascript:void(0)" class="nav-link<?php echo ($is_business_child) ? ' active' : ''; ?>" id="tabNav-business" data-bs-toggle="tab" data-bs-target="#tabNavContent-business" role="tab" aria-controls="tabNavContent-business" aria-selected="false"><?php echo esc_html__('Business', 'yes.my'); ?></a></li>
+                        <li class="" role="presentation"><a href="/business" class="nav-link<?php echo ($is_business_child) ? ' active' : ''; ?>" id="tabNav-business" data-bs-target="#tabNavContent-business" role="tab" aria-controls="tabNavContent-business" aria-selected="false"><?php echo esc_html__('Business', 'yes.my'); ?></a></li>
                         <li class="" role="presentation"><a href="https://www.ytlfoundation.org/learnfromhome/" target="_blank"><?php echo esc_html__('Learning', 'yes.my'); ?></a></li>
                     </ul>
                 </div>
@@ -207,7 +207,7 @@
                                                 <ul>
                                                     <li class="dropdown-header"><?php echo esc_html__('Contact Us', 'yes.my'); ?></li>
                                                     <!-- <li class="dropdown-header">Contact Us</li> -->
-                                                    <?php if (has_nav_menu('bs-support-contact-us')) wp_nav_menu(['theme_location' => 'bs-support-contact-us', 'container' => false, 'items_wrap' => '%3$s']); ?>
+                                                     <?php if (has_nav_menu('bs-support-contact-us')) wp_nav_menu(['theme_location' => 'bs-support-contact-us', 'container' => false, 'items_wrap' => '%3$s']); ?>
                                                 </ul>
                                             </li>
                                         </ul>
