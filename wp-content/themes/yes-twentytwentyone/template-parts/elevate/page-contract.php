@@ -201,10 +201,10 @@
                                                     </tr>
                                                     <tr>
                                                         <th width="134">Hotspot</th>
-                                                        <td width="134">10GB</td>
-                                                        <td width="134">40GB</td>
-                                                        <td width="134">70GB</td>
-                                                        <td width="134">100GB</td>
+                                                        <td width="134">20GB</td>
+                                                        <td width="134">50GB</td>
+                                                        <td width="134">80GB</td>
+                                                        <td width="134">110GB</td>
                                                     </tr>
                                                     <tr>
                                                         <th width="134">*Device Type</th>
