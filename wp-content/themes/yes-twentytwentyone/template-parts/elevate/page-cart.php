@@ -2,6 +2,7 @@
 
 <style type="text/css">
     .nav-container .navbar { padding-top: 8px; padding-bottom: 8px; }
+    .deviceContract-text{font-size: 14.5px !important;}
 </style>
 <div id="main-vue" style="display: none">
 <header class="page-header">
@@ -143,15 +144,15 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-12">
-                    <div class="summary-box" style="margin-top: 20px;">
+                    <div class="summary-box">
                         <h1 class="subtitle">{{ renderText('order_summary') }}</h1>
                         <h3 class="plan_price">{{ renderText('monthly_payment') }}</h3>
                         <div class="hr_line"></div>
                         <div class="row cart_total">
-                            <div class="col-5 pt-2 pb-2">
+                            <div class="col-4 pt-2 pb-2">
                                 <h3>{{ renderText('total') }}</h3>
                             </div>
-                            <div class="col-7 pt-2 pb-2 text-end">
+                            <div class="col-8 pt-2 pb-2 text-end">
                                 <h3>RM{{ formatPrice(orderSummary.orderDetail.subtotal) }}/mth</h3>
                             </div>
                         </div>
@@ -159,6 +160,7 @@
                             <div v-for="(item, index) in orderSummary.orderDetail.orderItems" class="row mt-2">
                                 <div class="col-6">
                                     <p>{{item.name}}</p>
+                                    <small class="deviceContract-text" v-if="index == 0 && parseFloat(item.price) > 0.00">{{renderText('deviceContract')}}</small>
                                 </div>
                                 <div class="col-6 text-end">
                                     <p>RM{{formatPrice(item.price)}}/ mth</p>
