@@ -364,7 +364,7 @@
                     var sstAmount = parseFloat(self.orderSummary.product.selected.plan.sstAmount);
                     var rounding = parseFloat(self.orderSummary.product.selected.plan.roundingAdjustment);
                     self.orderSummary.orderDetail.amount = amount.toFixed(2);
-					var total =  amount +  sstAmount + rounding;
+					var total =  subtotal +  sstAmount + rounding;
                     self.orderSummary.orderDetail.total = total.toFixed(2);
                     self.orderSummary.orderDetail.sstAmount = sstAmount.toFixed(2);
                     self.orderSummary.orderDetail.roundingAdjustment = rounding.toFixed(2);
