@@ -1901,18 +1901,21 @@ class ElevateApi
 
         $request = wp_remote_post($api_url, $args);
 
-        $response = $request['response'];
-        $res_code = $response['code'];
         if (is_wp_error($request)) {
             $return = false;
-        } else if ($res_code != 200) {
-            $return = false;
         } else {
-            $data = json_decode($request['body']);
-            if (!empty($data->basicAuthToken)) {
-                update_option('mobileservice_auth_token', serialize(['basicAuthToken' => $data, 'requestDate' => date("Y-m-d H:i:s")]), false);
+            $response = $request['response'];
+            $res_code = $response['code'];
+            
+            if ($res_code != 200) {
+                $return = false;
+            } else {
+                $data = json_decode($request['body']);
+                if (!empty($data->basicAuthToken)) {
+                    update_option('mobileservice_auth_token', serialize(['basicAuthToken' => $data, 'requestDate' => date("Y-m-d H:i:s")]), false);
+                }
+                $return = $data->basicAuthToken;
             }
-            $return = $data->basicAuthToken;
         }
         return $return;
     }
