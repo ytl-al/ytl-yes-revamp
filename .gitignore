@@ -3,6 +3,7 @@
 .vscode
 .well-known
 pdf
+.wp-configs_
 wp-config.php
 
 # ignore everything in the root except the following files.
