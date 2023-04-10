@@ -20,25 +20,12 @@ if (!class_exists('BetterDocsGutenberg')) {
 
         private function __construct()
         {
-            // enqueue style
-            add_action('wp_enqueue_scripts', [$this, 'enqueue_style']);
             // Load Admin Files
             $this->load_admin_dependencies();
             // Load All Block Files
             $this->load_block_dependencies();
             // load Admin Class
             new BetterDocsGutenbergAdmin();
-        }
-
-        public function enqueue_style()
-        {
-            wp_enqueue_style(
-                'betterdocs-fontawesome-frontend',
-                BETTERDOCS_URL . 'admin/assets/css/font-awesome5.css',
-                array(),
-                BETTERDOCS_VERSION,
-                'all'
-            );
         }
 
         private function load_admin_dependencies()

@@ -22,7 +22,7 @@ $parent_post_id = wp_get_post_parent_id();
                 <div class="navbar-nav">
                     <ul class="d-flex list-unstyled flex-lg-row flex-column mb-0">
                         <?php 
-                            if( has_nav_menu('fwm-ms2-header') && ( $parent_post_id == 32050 || get_the_ID() == 32050  || $parent_post_id == 32051 || get_the_ID() == 32051 ) ) {
+                            if( has_nav_menu('fwm-ms2-header') && ( $parent_post_id == 38593 || get_the_ID() == 38593  || $parent_post_id == 38594 || get_the_ID() == 38594 ) ) {
                                 wp_nav_menu(['theme_location' => 'fwm-ms2-header', 'container' => false, 'items_wrap' => '%3$s']); 
                             }else if ( has_nav_menu('fwm-header') ) {
                                 wp_nav_menu(['theme_location' => 'fwm-header', 'container' => false, 'items_wrap' => '%3$s']); 

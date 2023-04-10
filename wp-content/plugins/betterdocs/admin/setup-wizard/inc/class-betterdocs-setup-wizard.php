@@ -207,12 +207,14 @@ if( ! class_exists( 'BetterDocsSetupWizard' ) ){
             // duplicate existing plugin data and deactivate
             if(isset($_POST['activate_plugin'])) {
                 $existing_plugins_data = self::existing_plugins_data($_POST['activate_plugin']);
-                if ( $existing_plugins_data['name'] === 'echo-knowledge-base' ) {
-                    self::eco_knowledgerbase_migration();
-                } elseif ( $existing_plugins_data['name'] === 'pressapps-knowledge-base' ) {
-                    self::pressapps_migration();
+                if (isset($existing_plugins_data['name']) && isset($existing_plugins_data['url'])) {
+                    if ( $existing_plugins_data['name'] === 'echo-knowledge-base' ) {
+                        self::eco_knowledgerbase_migration();
+                    } elseif ( $existing_plugins_data['name'] === 'pressapps-knowledge-base' ) {
+                        self::pressapps_migration();
+                    }
+                    deactivate_plugins( $existing_plugins_data['url'] );
                 }
-                deactivate_plugins( $existing_plugins_data['url'] );
             }
             $newValue['builtin_doc_page'] = (isset($_POST['builtin_doc_page']) ? $_POST['builtin_doc_page'] : 'off');
             $newValue['docs_slug'] = (isset($_POST['docs_slug']) ? $_POST['docs_slug'] : 'docs');

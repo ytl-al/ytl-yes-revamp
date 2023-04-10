@@ -218,7 +218,7 @@
 
     wp.customize( 'betterdocs_doc_page_cat_title_color2', function( value ) {
         value.bind( function( to ) {
-            $( '.betterdocs-category-box.single-kb .docs-single-cat-wrap .docs-cat-title, .single-kb .docs-cat-list-2 .docs-cat-title' ).css( 'color', to );
+            $( '.betterdocs-category-box.single-kb .docs-single-cat-wrap .docs-cat-title, .single-kb .docs-cat-list-2 .docs-cat-title, .betterdocs-category-grid-layout-6 .betterdocs-term-info .betterdocs-term-title' ).css( 'color', to );
         } );
     });
     
@@ -440,6 +440,37 @@
     wp.customize( 'betterdocs_doc_single_content_area_bg_color', function( value ) {
         value.bind( function( to ) {
             $( '.betterdocs-single-bg .betterdocs-content-area,.betterdocs-single-layout4 .betterdocs-content-full,.betterdocs-single-layout5 .betterdocs-content-full' ).css( 'background-color', to );
+        } );
+    });
+
+    // Single Doc Background Image & Background Image Properties
+    wp.customize( 'betterdocs_doc_single_content_area_bg_image', function( value ) {
+        value.bind( function( to ) {
+            $( '.betterdocs-single-bg .betterdocs-content-area,.betterdocs-single-layout4 .betterdocs-content-full,.betterdocs-single-layout5 .betterdocs-content-full' ).css( 'background-image', 'url('+to+')' );
+        } );
+    });
+
+    wp.customize( 'betterdocs_doc_single_content_bg_property_size', function( value ) {
+        value.bind( function( to ) {
+            $( '.betterdocs-single-bg .betterdocs-content-area,.betterdocs-single-layout4 .betterdocs-content-full,.betterdocs-single-layout5 .betterdocs-content-full' ).css( 'background-size', to );
+        } );
+    });
+
+    wp.customize( 'betterdocs_doc_single_content_bg_property_repeat', function( value ) {
+        value.bind( function( to ) {
+            $( '.betterdocs-single-bg .betterdocs-content-area,.betterdocs-single-layout4 .betterdocs-content-full,.betterdocs-single-layout5 .betterdocs-content-full' ).css( 'background-repeat', to );
+        } );
+    });
+
+    wp.customize( 'betterdocs_doc_single_content_bg_property_attachment', function( value ) {
+        value.bind( function( to ) {
+            $( '.betterdocs-single-bg .betterdocs-content-area,.betterdocs-single-layout4 .betterdocs-content-full,.betterdocs-single-layout5 .betterdocs-content-full' ).css( 'background-attachment', to );
+        } );
+    });
+
+    wp.customize( 'betterdocs_doc_single_content_bg_property_position', function( value ) {
+        value.bind( function( to ) {
+            $( '.betterdocs-single-bg .betterdocs-content-area,.betterdocs-single-layout4 .betterdocs-content-full,.betterdocs-single-layout5 .betterdocs-content-full' ).css( 'background-position', to );
         } );
     });
 
@@ -1069,6 +1100,18 @@
             $( '.betterdocs-category-wraper.betterdocs-single-wraper' ).css( 'background-position', to);
         } );
     });
+
+    wp.customize( 'betterdocs_archive_content_area_max_width', function( value ) {
+        value.bind( function( to ) {
+            $( '.betterdocs-single-wraper .betterdocs-content-area, .betterdocs-content-area.doc-category-layout-2' ).css( 'max-width', to + 'px' );
+        } );
+    });
+
+    wp.customize( 'betterdocs_archive_content_area_width', function( value ) {
+        value.bind( function( to ) {
+            $( '.betterdocs-single-wraper .betterdocs-content-area, .betterdocs-content-area.doc-category-layout-2' ).css( 'width', to + '%' );
+        } );
+    });
     
     wp.customize( 'betterdocs_archive_content_background_color', function( value ) {
         value.bind( function( to ) {
@@ -1290,73 +1333,73 @@
 
     wp.customize( 'betterdocs_live_search_heading_font_size', function( value ) {
         value.bind( function( to ) {
-            $( '.betterdocs-search-heading h2' ).css( 'font-size', to + 'px');
+            $( '.betterdocs-search-heading h2.heading, .betterdocs-search-heading h1.heading, .betterdocs-search-heading h3.heading, .betterdocs-search-heading h4.heading, .betterdocs-search-heading h5.heading, .betterdocs-search-heading h6.heading' ).css( 'font-size', to + 'px');
         } );
     });
 
     wp.customize( 'betterdocs_live_search_heading_font_color', function( value ) {
         value.bind( function( to ) {
-            $( '.betterdocs-search-heading h2' ).css( 'color', to );
+            $( '.betterdocs-search-heading h2.heading, .betterdocs-search-heading h1.heading, .betterdocs-search-heading h3.heading, .betterdocs-search-heading h4.heading, .betterdocs-search-heading h5.heading, .betterdocs-search-heading h6.heading' ).css( 'color', to );
         } );
     });
 
     wp.customize( 'betterdocs_live_search_subheading_font_size', function( value ) {
         value.bind( function( to ) {
-            $( '.betterdocs-search-heading h3' ).css( 'font-size', to + 'px');
+            $( '.betterdocs-search-heading h3.subheading, .betterdocs-search-heading h2.subheading, .betterdocs-search-heading h1.subheading, .betterdocs-search-heading h4.subheading, .betterdocs-search-heading h5.subheading, betterdocs-search-heading h6.subheading' ).css( 'font-size', to + 'px');
         } );
     });
     
     wp.customize( 'betterdocs_live_search_subheading_font_color', function( value ) {
         value.bind( function( to ) {
-            $( '.betterdocs-search-heading h3' ).css( 'color', to );
+            $( '.betterdocs-search-heading h3.subheading, .betterdocs-search-heading h2.subheading, .betterdocs-search-heading h1.subheading, .betterdocs-search-heading h4.subheading, .betterdocs-search-heading h5.subheading, .betterdocs-search-heading h6.subheading' ).css( 'color', to );
         } );
     });
 
     wp.customize( 'betterdocs_search_heading_margin_top', function( value ) {
         value.bind( function( to ) {
-            $( '.betterdocs-search-heading h2' ).css( 'margin-top', to + 'px' );
+            $( '.betterdocs-search-heading h2.heading, .betterdocs-search-heading h1.heading, .betterdocs-search-heading h3.heading, .betterdocs-search-heading h4.heading, .betterdocs-search-heading h5.heading, .betterdocs-search-heading h6.heading' ).css( 'margin-top', to + 'px' );
         } );
     });
 
     wp.customize( 'betterdocs_search_heading_margin_right', function( value ) {
         value.bind( function( to ) {
-            $( '.betterdocs-search-heading h2' ).css( 'margin-right', to + 'px' );
+            $( '.betterdocs-search-heading h2.heading, .betterdocs-search-heading h1.heading, .betterdocs-search-heading h3.heading, .betterdocs-search-heading h4.heading, .betterdocs-search-heading h5.heading, .betterdocs-search-heading h6.heading' ).css( 'margin-right', to + 'px' );
         } );
     });
 
     wp.customize( 'betterdocs_search_heading_margin_bottom', function( value ) {
         value.bind( function( to ) {
-            $( '.betterdocs-search-heading h2' ).css( 'margin-bottom', to + 'px' );
+            $( '.betterdocs-search-heading h2.heading, .betterdocs-search-heading h1.heading, .betterdocs-search-heading h3.heading, .betterdocs-search-heading h4.heading, .betterdocs-search-heading h5.heading, .betterdocs-search-heading h6.heading' ).css( 'margin-bottom', to + 'px' );
         } );
     });
 
     wp.customize( 'betterdocs_search_heading_margin_left', function( value ) {
         value.bind( function( to ) {
-            $( '.betterdocs-search-heading h2' ).css( 'margin-left', to + 'px' );
+            $( '.betterdocs-search-heading h2.heading, .betterdocs-search-heading h1.heading, .betterdocs-search-heading h3.heading, .betterdocs-search-heading h4.heading, .betterdocs-search-heading h5.heading, .betterdocs-search-heading h6.heading' ).css( 'margin-left', to + 'px' );
         } );
     });
 
     wp.customize( 'betterdocs_search_subheading_margin_top', function( value ) {
         value.bind( function( to ) {
-            $( '.betterdocs-search-heading h3' ).css( 'margin-top', to + 'px' );
+            $( '.betterdocs-search-heading h3.subheading, .betterdocs-search-heading h2.subheading, .betterdocs-search-heading h1.subheading, .betterdocs-search-heading h4.subheading, .betterdocs-search-heading h5.subheading, .betterdocs-search-heading h6.subheading' ).css( 'margin-top', to + 'px' );
         } );
     });
 
     wp.customize( 'betterdocs_search_subheading_margin_right', function( value ) {
         value.bind( function( to ) {
-            $( '.betterdocs-search-heading h3' ).css( 'margin-right', to + 'px' );
+            $( '.betterdocs-search-heading h3.subheading, .betterdocs-search-heading h2.subheading, .betterdocs-search-heading h1.subheading, .betterdocs-search-heading h4.subheading, .betterdocs-search-heading h5.subheading, .betterdocs-search-heading h6.subheading' ).css( 'margin-right', to + 'px' );
         } );
     });
 
     wp.customize( 'betterdocs_search_subheading_margin_bottom', function( value ) {
         value.bind( function( to ) {
-            $( '.betterdocs-search-heading h3' ).css( 'margin-bottom', to + 'px' );
+            $( '.betterdocs-search-heading h3.subheading, .betterdocs-search-heading h2.subheading, .betterdocs-search-heading h1.subheading, .betterdocs-search-heading h4.subheading, .betterdocs-search-heading h5.subheading, .betterdocs-search-heading h6.subheading' ).css( 'margin-bottom', to + 'px' );
         } );
     });
 
     wp.customize( 'betterdocs_search_subheading_margin_left', function( value ) {
         value.bind( function( to ) {
-            $( '.betterdocs-search-heading h3' ).css( 'margin-left', to + 'px' );
+            $( '.betterdocs-search-heading h3.subheading, .betterdocs-search-heading h2.subheading, .betterdocs-search-heading h1.subheading, .betterdocs-search-heading h4.subheading, .betterdocs-search-heading h5.subheading, .betterdocs-search-heading h6.subheading' ).css( 'margin-left', to + 'px' );
         } );
     });
 
@@ -1795,6 +1838,214 @@
         } );
     }); 
 
+    wp.customize( 'betterdocs_post_reactions_text_color', function( value ) {
+        value.bind( function( to ) {
+            $( '.betterdocs-article-reactions .betterdocs-article-reactions-heading h5' ).css( 'color', to );
+        } );
+    });
+    
+    wp.customize( 'betterdocs_post_reactions_icon_color', function( value ) {
+        value.bind( function( to ) {
+            $( '.betterdocs-article-reaction-links li a' ).css( 'background-color', to );
+        } );
+    });
+    wp.customize( 'betterdocs_post_reactions_icon_hover_bg_color', function( value ) {
+        value.bind( function( to ) {
+            $( '.betterdocs-article-reaction-links li a:hover' ).css( 'background-color', to );
+        } );
+    });
+
+    wp.customize( 'betterdocs_post_reactions_icon_svg_color', function( value ) {
+        value.bind( function( to ) {
+            $( '.betterdocs-article-reaction-links li a svg path' ).css( 'fill', to );
+        } );
+    });
+
+    //FAQ Section Title Margin FAQ Layout 1
+
+    wp.customize('betterdocs_faq_title_margin', function( value ) {
+        value.bind( function( to ) {
+            $( '.betterdocs-faq-section-title.faq-doc' ).css( 'margin', formatData( JSON.parse(to) ) );
+        } );
+    });
+
+    // FAQ Title Color FAQ Layout 1
+
+    wp.customize('betterdocs_faq_title_color', function(value){
+        value.bind( function( to ){
+            $('.betterdocs-faq-section-title.faq-doc').css('color', to);
+        });
+    });
+
+    // Entry Content Font Size FAQ Layout 1
+
+    wp.customize('betterdocs_faq_title_font_size', function(value){
+        value.bind( function( to ){
+            $('.betterdocs-faq-section-title.faq-doc').css('font-size', to + 'px');
+        });
+    });
+
+    // FAQ Category Title Color FAQ Layout 1
+
+    wp.customize('betterdocs_faq_category_title_color', function(value){
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-1.faq-doc .betterdocs-faq-title h2').css( 'color', to );
+        });
+    });
+
+    // FAQ Category Font Size FAQ Layout 1
+    
+    wp.customize('betterdocs_faq_category_name_font_size', function(value){
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-1.faq-doc .betterdocs-faq-title h2').css( 'font-size', to + 'px' );
+        });
+    });
+
+    // FAQ Category Name Padding FAQ Layout 1
+    wp.customize('betterdocs_faq_category_name_padding', function(value){
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-1.faq-doc .betterdocs-faq-title h2').css( 'padding', formatData( JSON.parse(to) ) );
+        });
+    });
+
+    // FAQ List Color FAQ Layout 1
+    wp.customize('betterdocs_faq_list_color', function(value){
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-1.faq-doc .betterdocs-faq-list > li .betterdocs-faq-group .betterdocs-faq-post .betterdocs-faq-post-name').css( 'color', to );
+        });
+    });
+
+    // FAQ List Background Color FAQ Layout 1
+    wp.customize('betterdocs_faq_list_background_color', function(value){
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-1.faq-doc .betterdocs-faq-list > li .betterdocs-faq-group .betterdocs-faq-post').css( 'background-color', to );
+        });
+    });
+
+    // FAQ List Content Background Color Layout 1
+    wp.customize('betterdocs_faq_list_content_background_color', function(value){
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-1.faq-doc .betterdocs-faq-group .betterdocs-faq-main-content').css( 'background-color', to );
+        });
+    });
+
+    // FAQ List Content Color Layout 1
+    
+    wp.customize('betterdocs_faq_list_content_color', function(value){
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-1.faq-doc .betterdocs-faq-group .betterdocs-faq-main-content').css( 'color', to );
+        });
+    });
+
+    // FAQ List Content Background Font Size Layout 1
+    wp.customize('betterdocs_faq_list_content_font_size', function(value){
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-1.faq-doc .betterdocs-faq-group .betterdocs-faq-main-content').css( 'font-size', to + 'px' );
+        });
+    });
+
+    // FAQ List Font Size FAQ Layout 1
+    wp.customize('betterdocs_faq_list_font_size', function(value){
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-1.faq-doc .betterdocs-faq-list > li .betterdocs-faq-group .betterdocs-faq-post .betterdocs-faq-post-name').css( 'font-size', to + 'px' );
+        });
+    });
+
+    // FAQ List Padding FAQ Layout 1
+    wp.customize('betterdocs_faq_list_padding', function(value) {
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-1.faq-doc .betterdocs-faq-list > li .betterdocs-faq-group .betterdocs-faq-post').css( 'padding', formatData( JSON.parse(to) ) );
+        });
+    });
+
+    /** FAQ LAYOUT 2 CONTROLLERS **/
+
+    // FAQ Category Title Color
+    wp.customize('betterdocs_faq_category_title_color_layout_2', function(value) {
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-2.faq-doc .betterdocs-faq-title h2').css('color', to);
+        });
+    });
+
+    // FAQ Category Name Font Size
+    wp.customize('betterdocs_faq_category_name_font_size_layout_2', function(value) {
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-2.faq-doc .betterdocs-faq-title h2').css('font-size', to + 'px');
+        });
+    });
+
+    // FAQ Category List Box Padding 
+    wp.customize('betterdocs_faq_category_name_padding_layout_2', function(value) {
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-2.faq-doc .betterdocs-faq-title h2').css('padding', formatData( JSON.parse(to) ) );
+        });
+    });
+
+    // FAQ List Color
+    wp.customize('betterdocs_faq_list_color_layout_2', function(value) {
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-2.faq-doc .betterdocs-faq-list > li .betterdocs-faq-group .betterdocs-faq-post-layout-2 .betterdocs-faq-post-name').css( 'color', to );
+        });
+    });
+
+    // FAQ List Background Color
+    wp.customize('betterdocs_faq_list_background_color_layout_2', function(value) {
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-2.faq-doc .betterdocs-faq-list-layout-2 > li .betterdocs-faq-group-layout-2').css( 'background-color', to );
+        });
+    });
+
+    // FAQ List Content Background Color
+    wp.customize('betterdocs_faq_list_content_background_color_layout_2', function(value) {
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-2.faq-doc .betterdocs-faq-list-layout-2 > li .betterdocs-faq-group-layout-2 .betterdocs-faq-main-content-layout-2').css( 'background-color', to );
+        });
+    });
+
+    // FAQ List Content Color
+    
+    wp.customize('betterdocs_faq_list_content_color_layout_2', function(value){
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-2.faq-doc .betterdocs-faq-list-layout-2 > li .betterdocs-faq-group-layout-2 .betterdocs-faq-main-content-layout-2').css( 'color', to );
+        });
+    });
+
+    // FAQ List Content Font Size
+    wp.customize('betterdocs_faq_list_content_font_size_layout_2', function(value){
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-2.faq-doc .betterdocs-faq-list-layout-2 > li .betterdocs-faq-group-layout-2 .betterdocs-faq-main-content-layout-2').css( 'font-size', to + 'px' );
+        });
+    });
+
+    //FAQ List Font Size
+    wp.customize('betterdocs_faq_list_font_size_layout_2', function(value) {
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-2.faq-doc .betterdocs-faq-list > li .betterdocs-faq-group .betterdocs-faq-post-layout-2 .betterdocs-faq-post-name').css( 'font-size', to + 'px' );
+        });
+    });
+
+    //FAQ List Padding
+    wp.customize('betterdocs_faq_list_padding_layout_2', function(value) {
+        value.bind( function( to ){
+            $('.betterdocs-faq-main-wrapper-layout-2.faq-doc .betterdocs-faq-list-layout-2 > li .betterdocs-faq-group-layout-2 .betterdocs-faq-post-layout-2').css( 'padding', formatData( JSON.parse(to) ) );
+        });
+    });
 
 
 } )( jQuery );
+
+
+function formatData( data ) {
+
+    var dimensions = '';
+
+    for( let key in data ) {
+        if( data[key] != '' ) {
+            dimensions += data[key] + 'px ';
+        } else {
+            dimensions += 0 + 'px ';
+        }
+    }
+
+    return dimensions;
+}

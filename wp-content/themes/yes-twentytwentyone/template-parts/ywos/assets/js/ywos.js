@@ -74,7 +74,8 @@ const ywos = {
                 deviceID = planID;
                 planID = '';
             }
-        }else if( type == 'new_bundle_plan' ) {
+        }
+        if( type == 'new_bundle_plan' ) {
             deviceID = planID;
             planID = '';
         }
@@ -135,128 +136,8 @@ const ywos = {
             }
         });
     },
-    mapSessionData: function(planData = '') {
-
-        var planPriceBreakdown = [];
-        var planDevicePriceBreakdown = [];
-        var planSimplifiedBreakdown = [];
-        for (var key in planData) {
-            var keyPricingComponentList = 'pricingComponentList';
-            if (key == keyPricingComponentList) {
-                var pricingComponentList = planData[keyPricingComponentList];
-                pricingComponentList.map(function(pricingComponent) {
-                    var componentName = pricingComponent.pricingComponentName;
-                    var componentValue = formatPrice(pricingComponent.pricingComponentValue);
-                    var objArr = {
-                        name: componentName,
-                        value: componentValue
-                    };
-                    if (['Postpaid Device Price', 'Postpaid Device Upfront Payment'].includes(componentName)) {
-                        planDevicePriceBreakdown.push(objArr);
-                    } else if (['Postpaid Foreigner Deposit'].includes(componentName)) {
-                        // self.orderSummary.plan.foreignerDeposit = componentValue;
-                    } else {
-                        planPriceBreakdown.push(objArr);
-                    }
-                });
-            }
-            var keySimplifiedItemPricingList = 'simplifiedItemPricingList';
-            if (key == keySimplifiedItemPricingList) {
-                planSimplifiedBreakdown = planData[keySimplifiedItemPricingList];
-            }
-        };
-        var priceBreakdown = {
-            plan: planPriceBreakdown,
-            device: planDevicePriceBreakdown,
-            simplified: planSimplifiedBreakdown
-        };
-
-        var storageData = JSON.parse(localStorage.getItem(ywosLSName));
-        var yesElevate = JSON.parse(localStorage.getItem('yesElevate'));
-
-        storageData.meta.loginType = 'guest';
-        const ElevateDate = new Date(yesElevate.customer.dob);
-        var day = ElevateDate.getDate();
-        day = day < 10 ? "0" + day : day;
-        var month = ElevateDate.getMonth() + 1;
-        month = month < 10 ? "0" + month : month;
-        var year = ElevateDate.getFullYear();
-        const newDateFormate = day + "/" + month + "/" + year;
-        console.log(newDateFormate);
-
-
-        storageData.meta.customerDetails = {
-            'securityType' : 'nric',
-            'securityId' : yesElevate.customer.securityNumber,
-            'msisdn' : yesElevate.customer.mobileNumber,
-            'nric': yesElevate.customer.securityType,
-            'gender' : yesElevate.customer.gender,
-            'mobileNumber': yesElevate.customer.mobileNumber,
-            'homeNumber': yesElevate.customer.mobileNumber,
-            'officeNumber' : yesElevate.customer.mobileNumber,
-            'name' : yesElevate.customer.fullName,
-            'email': yesElevate.customer.email,
-            'address': yesElevate.customer.addressLine1,
-            'state' : yesElevate.customer.state,
-            'city' : yesElevate.customer.city,
-            'postcode' : yesElevate.customer.postCode,
-            'country': yesElevate.customer.country,
-            'citizenship': '',
-            'yesId': '',
-            'accountNumber': '',
-            'dateOfBirth': newDateFormate,
-            'salutation' : '',
-            'preferredLanguage' : ''
-        },
-        storageData.meta.orderSummary = {
-            'plan' : planData,
-            'due' : {
-                'amount'            : (parseFloat(planData.totalAmountWithoutSST.replace(/,/g, ''))).toFixed(2),
-                'addOns'            : 0,
-                'planAmount'        : (parseFloat(planData.totalAmount)).toFixed(2),
-                'taxesSST'          : (parseFloat(planData.totalSST)).toFixed(2),
-                'shippingFees'      : 0.00,
-                'rounding'          : (parseFloat(planData.roundingAdjustment)).toFixed(2),
-                'foreignerDeposit'  : (parseFloat(planData.foreignerDeposit)).toFixed(2),
-                'total'             : roundAmount(parseFloat(planData.totalAmountWithoutSST.replace(/,/g, '')) + parseFloat(planData.totalSST) + 0.00 + parseFloat(planData.foreignerDeposit) + parseFloat(planData.roundingAdjustment)).toFixed(2),
-                'priceBreakdown'    : priceBreakdown,
-                'addOn'             : null                
-            }
-        };
-        // storageData.meta.orderSummary.plan = planData;
-        storageData.meta.isLoggedIn = false;
-        storageData.meta.completedStep = 1;
-        localStorage.setItem(ywosLSName, JSON.stringify(storageData));
-        console.log(storageData);
-    },
-    creditCheckFailedPlan: function(planID, isTargetedPromo = false, type = false) {
-        toggleOverlay();
-        var self = this;
-        self.initLocalStorage(planID, isTargetedPromo, type);
-        $.ajax({
-            url: apiEndpointURL + '/get-plan-by-id/' + planID,
-            method: 'GET',
-            success: function(data) {
-                var pushData = [{
-                    'name': data.planName,
-                    'id': planID,
-                    'category': data.planType,
-                    'price': data.totalAmountWithoutSST,
-                    'list_name': 'Product Page'
-                }];
-                self.mapSessionData(data);
-                // pushAnalytics('impressions', pushData);
-            },
-            complete: function() {
-                self.redirectToYwosPage('delivery');
-            }
-        });
-    },
     redirectToPlanSelection: function() {
         window.location.href = window.location.origin + "/ywos/device-type";
-    },
-    redirectToYwosPage: function(pageSlug) {
-        window.location.href = window.location.origin + "/ywos/"+pageSlug+"/";
     },
     buyBundlePlan: function( deviceID, isTargetedPromo = false ) {
         toggleOverlay();

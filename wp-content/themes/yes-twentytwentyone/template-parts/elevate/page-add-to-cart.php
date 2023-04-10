@@ -6,7 +6,10 @@
 		var url = new URL(url_string);
 		var planId = url.searchParams.get('planId');
 		if(planId){
-			buyElevatePlan(planId);
+			console.log(planId,'Worong ID');
+            buyElevatePlan(planId);
+		}else{
+			console.log(planId,'Not working ID');
 		}
 	});
 </script>

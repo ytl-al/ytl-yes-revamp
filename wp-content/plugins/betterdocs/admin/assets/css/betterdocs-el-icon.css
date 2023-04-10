@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('../fonts/betterdocs-el.eot?psw3l1');
-  src:  url('../fonts/betterdocs-el.eot?psw3l1#iefix') format('embedded-opentype'),
-    url('../fonts/betterdocs-el.ttf?psw3l1') format('truetype'),
-    url('../fonts/betterdocs-el.woff?psw3l1') format('woff'),
-    url('../fonts/betterdocs-el.svg?psw3l1#icomoon') format('svg');
+  src:  url('../fonts/betterdocs-el.eot?r0zfgt');
+  src:  url('../fonts/betterdocs-el.eot?r0zfgt#iefix') format('embedded-opentype'),
+    url('../fonts/betterdocs-el.ttf?r0zfgt') format('truetype'),
+    url('../fonts/betterdocs-el.woff?r0zfgt') format('woff'),
+    url('../fonts/betterdocs-el.svg?r0zfgt#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -44,7 +44,7 @@
   color: #cdcfd2;
 }
 
-#elementor-panel__editor__help__link[href^="https://betterdocs.co/docs"]:before {
+#elementor-panel__editor__help__link[href^="https://betterdocs.co/docs"]:before, #elementor-panel__editor__help__link[href^="http://betterdocs.co/docs/betterdocs-faq-builder-in-elementor"]:before {
   content: "\e90b";
   font-family: "icomoon" !important;
   font-size: 190%;
@@ -98,6 +98,9 @@
 }
 .betterdocs-icon-category-box:before {
   content: "\e90d";
+}
+.betterdocs-icon-faq::before{
+  content: "\e96c";
 }
 
 .betterdocs-dialog-buttons-action {

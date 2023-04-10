@@ -7,6 +7,7 @@
 
     if( ! empty( $field['options'] ) ) :
         foreach( $field['options'] as $opt_id => $option ) {
+            $selected = '';
             if( is_array( $value ) ) {
                 $selected = in_array( $opt_id, $value ) ? 'checked="checked"' : '';
             }

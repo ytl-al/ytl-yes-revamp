@@ -69,19 +69,22 @@ class BetterDocs
 	 */
 	public function __construct()
 	{
-		if (defined('BETTER_DOCUMENTATION_VERSION')) {
-			$this->version = BETTER_DOCUMENTATION_VERSION;
+		if (defined('BETTERDOCS_VERSION')) {
+			$this->version = BETTERDOCS_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
 		$this->plugin_name = 'betterdocs';
-
+        $this->db();
+        add_action('init', array($this, 'search_migration'));
 		$this->load_dependencies();
 		$this->set_locale();
-		$this->start_plugin_tracking();
+		// $this->start_plugin_tracking();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-		new Betterdocs_Role_Management_Lite();
+        if (is_admin()) {
+            new Betterdocs_Role_Management_Lite();
+        }
 		add_action('admin_init', array($this, 'redirect'));
 		add_action('wp_ajax_optin_wizard_action_betterdocs', array($this, 'wizard_action'));
 	}
@@ -124,17 +127,15 @@ class BetterDocs
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once BETTERDOCS_ADMIN_DIR_PATH . 'class-betterdocs-admin.php';
+		require_once BETTERDOCS_ADMIN_DIR_PATH . 'class-betterdocs-admin-notice.php';
 		require_once BETTERDOCS_ADMIN_DIR_PATH . 'class-betterdocs-admin-screen.php';
 		require_once BETTERDOCS_ADMIN_DIR_PATH . 'partials/class-betterdocs-list-table.php';
 		require_once BETTERDOCS_ADMIN_DIR_PATH . 'includes/class-betterdocs-db.php';
 		require_once BETTERDOCS_ADMIN_DIR_PATH . 'includes/class-betterdocs-metabox.php';
 		require_once BETTERDOCS_ADMIN_DIR_PATH . 'includes/class-betterdocs-settings.php';
 		require_once BETTERDOCS_ADMIN_DIR_PATH . 'includes/class-betterdocs-role-management-lite.php';
-
-		/**
-		 * Notice Messages
-		 */
-		require_once BETTERDOCS_ADMIN_DIR_PATH . 'includes/class-betterdocs-notice.php';
+		require_once BETTERDOCS_ADMIN_DIR_PATH . 'reports/class-betterdocs-email-template.php';
+		require_once BETTERDOCS_ADMIN_DIR_PATH . 'reports/class-betterdocs-report-email.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -151,11 +152,18 @@ class BetterDocs
 		 * The class responsible for registering docs post type and it's category and tags taxonomy
 		 */
 		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-betterdocs-docs-post-type.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-betterdocs-faq.php';
 
 		/**
 		 * The functions responsible for betterdocs shortcodes
 		 */
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/betterdocs-shortcodes.php';
+
+		/**
+		 * The Class Is Responsible For Loading TOC Class
+		 */
+
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-betterdocs-toc.php';
 
 		/**
 		 * The functions responsible for betterdocs breadcrumbs
@@ -181,6 +189,105 @@ class BetterDocs
 
 		$this->loader = new BetterDocs_Loader();
 	}
+
+    public static function db() {
+        global $wpdb;
+        $installed_ver = get_site_option( "betterdocs_db_version" );
+        if ( $installed_ver != BETTERDOCS_DB_VERSION ) {
+            $search_keyword_table = $wpdb->prefix . 'betterdocs_search_keyword';
+            $search_keyword = "CREATE TABLE $search_keyword_table (
+                id bigint NOT NULL AUTO_INCREMENT,
+                keyword text NOT NULL,
+                PRIMARY KEY (id)
+            )";
+
+            $search_log_table = $wpdb->prefix . 'betterdocs_search_log';
+            $search_log = "CREATE TABLE $search_log_table (
+                id bigint NOT NULL AUTO_INCREMENT,
+                keyword_id bigint NOT NULL,
+                count mediumint(9) NULL,
+                not_found_count mediumint(9) NULL,
+                created_at date DEFAULT '0000-00-00' NOT NULL,
+                PRIMARY KEY (id),
+                KEY keyword_id (keyword_id),
+                KEY created_at (created_at)
+            )";
+
+            require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+
+            dbDelta( $search_keyword );
+            dbDelta( $search_log );
+
+            update_option( "betterdocs_db_version", BETTERDOCS_DB_VERSION );
+        }
+    }
+
+    public static function search_migration() {
+        global $wpdb;
+        if (get_site_option( "betterdocs_search_data_migration" ) == false) {
+            $search_data = get_site_option( 'betterdocs_search_data' );
+            if (!empty($search_data)) {
+                $search_data_arr = unserialize($search_data);
+                foreach ($search_data_arr as $key=>$value) {
+                    $args = array(
+                        'post_type'      => 'docs',
+                        'post_status'      => 'publish',
+                        'posts_per_page'      => -1,
+                        'suppress_filters' => true,
+                        's' => $key
+                    );
+
+                    $loop = new WP_Query($args);
+                    if ($loop->have_posts()) {
+                        $count = $value;
+                        $not_found_count = 0;
+                    } else {
+                        $count = 0;
+                        $not_found_count = $value;
+                    }
+
+                    $keyword = $wpdb->get_var(
+                        $wpdb->prepare( "
+                            SELECT keyword
+                            FROM {$wpdb->prefix}betterdocs_search_keyword
+                            WHERE keyword = %s",
+                            $key
+                        )
+                    );
+
+                    if ( $keyword == NUll ) {
+                        $insert = $wpdb->query(
+                            $wpdb->prepare(
+                                "INSERT INTO {$wpdb->prefix}betterdocs_search_keyword 
+                                ( keyword )
+                                VALUES ( %s )",
+                                array(
+                                    $key
+                                )
+                            )
+                        );
+
+                        if ($insert) {
+                            $wpdb->query(
+                                $wpdb->prepare(
+                                    "INSERT INTO {$wpdb->prefix}betterdocs_search_log
+                                    (keyword_id, count, not_found_count, created_at)
+                                    VALUES (%d, %d, %d, %s)",
+                                    array(
+                                        $wpdb->insert_id,
+                                        $count,
+                                        $not_found_count,
+                                        date('Y-m-d')
+                                    )
+                                )
+                            );
+                        }
+                    }
+                }
+                update_option( "betterdocs_search_data_migration", '1.0' );
+            }
+        }
+    }
 
 	/**
 	 * Optional usage tracker
@@ -285,6 +392,7 @@ class BetterDocs
 	{
 		$plugin_public = new BetterDocs_Public($this->get_plugin_name(), $this->get_version());
 		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'load_assets');
+//		$this->loader->add_action('enqueue_block_assets', $plugin_public, 'load_assets');
 	}
 
 	/**

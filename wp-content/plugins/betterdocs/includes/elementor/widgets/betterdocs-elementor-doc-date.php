@@ -103,10 +103,7 @@ class BetterDocs_Elementor_Doc_Date extends Widget_Base {
             ?>
             <div class="update-date">
                 <?php
-                printf(
-                    esc_html__('Updated on %s', 'betterdocs'),
-                    get_the_modified_date()
-                );
+                wp_sprintf( '%s %s', __( 'Updated on', 'betterdocs' ), get_the_modified_date() );
                 ?>
             </div>
             <?php

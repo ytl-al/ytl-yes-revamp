@@ -3,10 +3,10 @@
     <div class="">
         <div class="hr_line"></div>
         <div class="row cart_total">
-            <div class="col-6 pt-2 pb-2">
+            <div class="col-5 pt-2 pb-2">
                 <h3>{{ renderText('due_today') }}</h3>
             </div>
-            <div class="col-6 pt-2 pb-2 text-end">
+            <div class="col-7 pt-2 pb-2 text-end">
                 <h3>RM{{ formatPrice(parseFloat(orderSummary.orderDetail.total).toFixed(2)) }}</h3>
             </div>
         </div>

@@ -98,6 +98,7 @@
 			"checked",
 			betterdocs_admin.dark_mode
 		);
+		
 		$("#betterdocs-mode-toggle").on("click", function (e) {
 			$("body").toggleClass("betterdocs-dark-mode");
 			$.ajax({
@@ -116,7 +117,7 @@
 		});
 
 		// Go To Sorting UI
-		$("body.post-type-docs .wp-heading-inline").after(
+		$("body.post-type-docs.edit-php .wp-heading-inline").after(
 			'<a href="admin.php?page=betterdocs-admin" class="page-title-action">' +
 			betterdocs_admin.menu_title +
 			"</a>"
@@ -134,12 +135,14 @@
 				}
 			}
 		);
+
 		$(".betterdocs-group-field .betterdocs-group-clone").on(
 			"click",
 			function () {
 				$.betterdocsAdmin.cloneGroup(this);
 			}
 		);
+
 		$("body").on(
 			"click",
 			".betterdocs-group-field .betterdocs-group-remove",
@@ -158,6 +161,7 @@
 				$.betterdocsAdmin.initMediaField(this);
 			}
 		);
+
 		$(".betterdocs-media-field-wrapper .betterdocs-media-remove-button").on(
 			"click",
 			function (e) {
@@ -172,10 +176,16 @@
 		$(".betterdocs-settings-menu li").on("click", function (e) {
 			$.betterdocsAdmin.settingsTab(this);
 		});
+		
 		$(".betterdocs-settings-button").on("click", function (e) {
 			e.preventDefault();
 			var form = $(this).parents("#betterdocs-settings-form");
 			$.betterdocsAdmin.submitSettings(this, form);
+		});
+
+		$("#test_report").on("click", function (e) {
+			e.preventDefault();
+			$.betterdocsAdmin.sendEmail(this);
 		});
 
 		$(".betterdocs-opt-alert").on("click", function (e) {
@@ -241,14 +251,13 @@
 
 		$(".betterdocs-settings-field.betterdocs-select").on("select2:select", function (evt) {
 			let $values = $(this).val();
-			const isNotEqual = (a, b) => JSON.stringify(a) !== JSON.stringify(b);
-			if (isNotEqual($values, ["all"])) {
-				let $filtered = $values.filter(function($value, index, arr) {
-					return $value != 'all';
+			if ( Array.isArray( $values ) && $values.includes('all') && $values.length > 1 ) {
+				let mod_values = $values.filter((value) => {
+					return value != 'all'
 				});
-				$(this).val($filtered);
+				$(this).val(mod_values);
 				$(this).trigger('change');
-			}
+			} 
 		});
 
 		$(".betterdocs-metabox-wrapper .betterdocs-meta-field, .betterdocs-settings-field").trigger("change");
@@ -834,6 +843,49 @@
 		});
 	};
 
+	$.betterdocsAdmin.sendEmail = function (button) {
+		var button = $(button),
+			submitKey = button.data("key"),
+			nonce = button.data("nonce");
+		
+		$.ajax({
+			type: "POST",
+			url: ajaxurl,
+			data: {
+				action: "test_email_report",
+				key: submitKey,
+				nonce: nonce
+			},
+			beforeSend: function () {
+				button.val(betterdocs_admin.sending);
+			},
+			success: function (res) {
+				button.val(betterdocs_admin.test_report);
+				if (res.success === true) {
+					swal({
+						title: "Email Report Sent!",
+						text: "Click OK to continue",
+						icon: "success",
+						buttons: [false, "Ok"],
+						timer: 2000,
+					}).then(function () {
+						$(".betterdocs-save-now").removeClass(
+							"betterdocs-save-now"
+						);
+					});
+				} else {
+					swal({
+						title: "Email sending failed!",
+						text: "Click OK to continue",
+						icon: "error",
+						buttons: [false, "Ok"],
+						timer: 1000,
+					});
+				}
+			},
+		});
+	};
+
 	$.betterdocsAdmin.get_query_vars = function (name) {
 		var vars = {};
 		window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (
@@ -859,5 +911,180 @@
 		this.firstChild.textContent = betterdocs_admin.text;
 		previousValue.setSelectionRange(0, 99999);
 	}); 
+
+	/**
+	 * admin tabs to display All Docs list and grid view 
+	 */
+
+	let active_tab = localStorage.getItem("betterdocs_admin_tab");
+	if (active_tab === 'tab-content-1') {
+		$('.icon-wrap-1').addClass('active');
+		$('.tab-content-1').addClass('active');
+		$('.select-kb-top').hide();
+	} else {
+		$('.icon-wrap-2').addClass('active');
+		$('.tab-content-2').addClass('active');
+		$('.select-kb-top').show();
+	}
+
+	$('.tabs-nav a').click(function(e) {
+		e.preventDefault();
+		$(this).siblings('a').removeClass('active').end().addClass('active');
+		let sel = this.getAttribute('data-toggle-target');
+		if (sel === '.tab-content-2') {
+			$('.select-kb-top').show();
+		} else {
+			$('.select-kb-top').hide();
+		}
+		let val = $(this).hasClass('active') ? sel : '';
+		localStorage.setItem('betterdocs_admin_tab', val.replace('.',''));
+		$('.betterdocs-tab-content').removeClass('active').filter(sel).addClass('active');
+	});
+
+	/**
+	 * drag and drop sortalbe doc post
+	 */
+	const docs_post_list = $(".betterdocs-single-listing ul");
+	docs_post_list.each(function (i, single_doc_list) {
+		var single_doc_list = $(single_doc_list),
+			list_term_id = single_doc_list.data("category_id"),
+			droppable = false;
+
+		if (single_doc_list.hasClass("docs-droppable")) {
+			droppable = true;
+		}
+
+		single_doc_list.sortable({
+			connectWith: "ul.docs-droppable",
+			placeholder: "betterdocs-post-list-placeholder",
+			// axis: droppable ? "y" : true,
+			// On start, set a height for the placeholder to prevent table jumps.
+			start: function (event, ui) {
+				const item = $(ui.item[0]);
+				$(".betterdocs-post-list-placeholder").css(
+					"height",
+					item.css("height")
+				);
+			},
+			receive: function (event, ui) {
+				const item = ui.item;
+				item.siblings(".betterdocs-no-docs").remove();
+				if (list_term_id != undefined) {
+					// AJAX Data.
+					const data = {
+						action: "update_docs_term",
+						object_id: item.data("id"),
+						prev_term_id: ui.sender.data("category_id"),
+						list_term_id: list_term_id,
+						doc_cat_order_nonce:
+							betterdocs_admin.doc_cat_order_nonce,
+					};
+					// Run the ajax request.
+					$.ajax({
+						type: "POST",
+						url: betterdocs_admin.ajaxurl,
+						data: data,
+						dataType: "JSON",
+						success: function (response) {
+							// console.log( response );
+						},
+					});
+				}
+			},
+			update: function (event, ui) {
+				const docs_ordering_data = [];
+				single_doc_list
+					.find("li.ui-sortable-handle")
+					.each(function () {
+						const ele = $(this);
+						docs_ordering_data.push(ele.data("id"));
+					});
+				if (list_term_id != undefined) {
+					// AJAX Data.
+					const data = {
+						action: "update_doc_order_by_category",
+						docs_ordering_data: docs_ordering_data,
+						list_term_id: list_term_id,
+						doc_cat_order_nonce:
+							betterdocs_admin.doc_cat_order_nonce,
+					};
+					// console.log( docs_ordering_data );
+					// Run the ajax request.
+					$.ajax({
+						type: "POST",
+						url: betterdocs_admin.ajaxurl,
+						data: data,
+						dataType: "JSON",
+						success: function (response) {
+							// console.log( response );
+						},
+					});
+				}
+			},
+		});
+	});
+
+	// drag and drop sortalbe doc category
+	const base_index =
+	parseInt(betterdocs_admin.paged) > 0
+		? (parseInt(betterdocs_admin.paged) - 1) *
+		  parseInt($("#" + betterdocs_admin.per_page_id).val())
+		: 0;
+	const tax_table = $(".taxonomy-doc_category #the-list");
+
+	if (tax_table.length > 0) {
+		// If the tax table contains items.
+		if (!tax_table.find("tr:first-child").hasClass("no-items")) {
+			tax_table.sortable({
+				placeholder: "betterdocs-drag-drop-cat-tax-placeholder",
+				axis: "y",
+
+				// On start, set a height for the placeholder to prevent table jumps.
+				start: function (event, ui) {
+					const item = $(ui.item[0]);
+					const index = item.index();
+					$(".betterdocs-drag-drop-cat-tax-placeholder").css(
+						"height",
+						item.css("height")
+					);
+				},
+				// Update callback.
+				update: function (event, ui) {
+					const item = $(ui.item[0]);
+
+					const taxonomy_ordering_data = [];
+
+					tax_table
+						.find("tr.ui-sortable-handle")
+						.each(function () {
+							const ele = $(this);
+							const term_data = {
+								term_id: ele.attr("id").replace("tag-", ""),
+								order: parseInt(ele.index()) + 1,
+							};
+							taxonomy_ordering_data.push(term_data);
+						});
+
+					// AJAX Data.
+					const data = {
+						action: "update_doc_cat_order",
+						taxonomy_ordering_data: taxonomy_ordering_data,
+						base_index: base_index,
+						doc_cat_order_nonce:
+							betterdocs_admin.doc_cat_order_nonce,
+					};
+
+					// Run the ajax request.
+					$.ajax({
+						type: "POST",
+						url: betterdocs_admin.ajaxurl,
+						data: data,
+						dataType: "JSON",
+						success: function (response) {},
+					});
+				},
+			});
+		}
+	}
 
 })(jQuery);

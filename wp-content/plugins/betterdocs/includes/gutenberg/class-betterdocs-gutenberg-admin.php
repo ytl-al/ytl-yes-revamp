@@ -27,14 +27,6 @@ class BetterDocsGutenbergAdmin
             );
 
             wp_enqueue_style(
-                'eb-fontawesome-admin',
-                BETTERDOCS_URL . 'admin/assets/css/font-awesome5.css',
-                array(),
-                BETTERDOCS_VERSION,
-                'all'
-            );
-
-            wp_enqueue_style(
                 'fontpicker-material-theme',
                 BETTERDOCS_URL . 'admin/assets/css/fonticonpicker.material-theme.react.css',
                 array(),

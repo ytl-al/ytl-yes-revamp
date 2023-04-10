@@ -23,7 +23,7 @@ if ($showIcon) {
 }
 
 if ($showTitle) {
-    $html .= '<' . $titleTag . ' class="el-betterdocs-cb-cat-title__layout-2"><span>' . $term->name . '</span></' . $titleTag . '>';
+    $html .= '<' . BetterDocs_Helper::validate_html_tag($titleTag) . ' class="el-betterdocs-cb-cat-title__layout-2"><span>' . $term->name . '</span></' . BetterDocs_Helper::validate_html_tag($titleTag) . '>';
 }
 
 if ($showCount) {

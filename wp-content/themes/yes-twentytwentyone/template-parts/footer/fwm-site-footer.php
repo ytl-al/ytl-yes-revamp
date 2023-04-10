@@ -1,4 +1,16 @@
 <!-- Footer start -->
+<script>
+    // fetch('https://ip-api.io/json/')
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //         if(data.organisation.indexOf('YTL COMMUNICATIONS') != -1 || data.organisation.indexOf('Bharti') != -1 || data.organisation.indexOf('BHO') != -1 ){
+    //             jQuery('.yes_wifi_conected').show();
+    //             console.log('WiFi connected');
+    //         }
+    //         console.log('------->',data);
+    //         console.log('------->',data.organisation);
+    //     });
+</script>
 <footer class="">
     <div class="container-fluid bg-white px-4 py-3">
         <div class="d-flex align-items-center justify-content-md-between justify-content-center">

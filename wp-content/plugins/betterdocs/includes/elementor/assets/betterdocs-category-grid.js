@@ -3,7 +3,7 @@ var BetterDocs = function ($scope, $) {
     let columnPerGrid = $(".betterdocs-category-grid.masonry",$scope).attr('data-column');
     let masonryItem = $(".betterdocs-category-grid.masonry .el-betterdocs-category-grid-post",$scope);
     let column_space = $(".betterdocs-category-grid.masonry",$scope).attr('data-column-space');
-    let total_margin = columnPerGrid * column_space;
+    let total_margin = (columnPerGrid - 1) * column_space;
     if (masonryGrid.length) {
         masonryItem.css("width", "calc((100% - "+total_margin+"px) / "+parseInt(columnPerGrid)+")");
         masonryGrid.masonry({

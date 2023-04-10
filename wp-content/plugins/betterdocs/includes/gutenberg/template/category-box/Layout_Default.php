@@ -29,9 +29,9 @@ if ($showTitle) {
 
 if ($showCount) {
     if ($term_count == 1) {
-        $html .= '<div class="el-betterdocs-cb-cat-count"><span class="count-prefix">'.$prefix.'</span>'.$term_count.'<span class="count-suffix">'.$suffixSingular.'</span></div>';
+        $html .= '<div class="el-betterdocs-cb-cat-count"><span class="count-prefix">'.esc_html($prefix).'</span>'.$term_count.'<span class="count-suffix">'.esc_html($suffixSingular).'</span></div>';
     } else {
-        $html .= '<div class="el-betterdocs-cb-cat-count"><span class="count-prefix">'.$prefix.'</span>'.$term_count.'<span class="count-suffix">'.$suffix.'</span></div>';
+        $html .= '<div class="el-betterdocs-cb-cat-count"><span class="count-prefix">'.esc_html($prefix).'</span>'.$term_count.'<span class="count-suffix">'.esc_html($suffix).'</span></div>';
     }
 }
 

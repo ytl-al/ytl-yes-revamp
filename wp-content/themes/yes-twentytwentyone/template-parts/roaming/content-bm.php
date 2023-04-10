@@ -264,8 +264,8 @@
                                 <h2>Republic of Korea</h2>
                                 <p>SK Telecom (SKT)</p>
                             </div>
-
-                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/macau.png">
+							
+							<div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/macau.png">
                                 <h2>Macau</h2>
                                 <p>Hutchison (3)</p>
                             </div>

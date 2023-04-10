@@ -1,7 +1,7 @@
 <?php
   if ( ! defined( 'ABSPATH' ) ) {
      exit;
- } // var_dump($fields); // die();
+ }  //var_dump($fields,$detail); // die();
 ?><style type="text/css">
   label span.howto { cursor: default; }
   
@@ -426,6 +426,12 @@ color: #666;
 <?php 
   $emails=array(); $date_field=''; 
   if(is_array($detail) && is_array($fields)){
+     
+      foreach($detail as $k=>$v){
+       if(!isset($fields[$k])){
+        $fields[$k]=array('name'=>$k,'label'=>str_replace(array('_','-'),' ',$k),'type'=>'text');   
+       }   
+      }
   foreach($fields as $field){ //var_dump($field['basetype']); 
   
   if(!isset($field['name']) || !empty($field['vx_skip_edit'])){  continue; }

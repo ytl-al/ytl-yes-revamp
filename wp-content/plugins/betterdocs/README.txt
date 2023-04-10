@@ -1,11 +1,11 @@
 === BetterDocs - Best Documentation & Knowledge Base Plugin ===
 Contributors: wpdevteam, re_enter_rupok, asif2bd, emsohel, priyomukul, manzurahammed, cu121, fencermonir
 Donate link: https://wpdeveloper.com
-Tags:  knowledge base, docs, documentation, documents, wiki, faq page, doc, knowledge, table of content, TOC, knowledgebase, faqs, doc page, best documentation plugin, support ticket, customer support, instant answer bot, bot, help articles, better docs
+Tags:  knowledge base, docs, documentation, documents, wiki, faq page, doc, knowledge, knowledgebase, doc page, best documentation plugin, support ticket, customer support, instant answer bot, bot, help articles, better docs, document, faq, instant answers, elementor, chat, live search, external knowledgebase, multiple knowledge bases, faqs, help, chatbot, TOC, table of content, elementor doc, template, doc theme
 Requires at least: 4.0
-Tested up to: 5.9
+Tested up to: 6.2
 Requires PHP: 5.6
-Stable tag: 2.0.12
+Stable tag: 2.3.6
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,7 +15,7 @@ A better Documentation and Knowledgebase plugin for WordPress. Create better Doc
 
 Do you want to reduce your support pressure immediately? How about you creating a stunning and resourceful knowledge base for your customers? 🤔
 
-👨‍💻 82% of customers prefer to support through an online knowledge base and actually get annoyed to create support tickets as it’sits a lengthy process. So creating an informative Documentation page can help to enhance your customer experience.
+👨‍💻 82% of customers prefer to support through an online knowledge base and actually get annoyed to create support tickets as it’s a lengthy process. So creating an informative Documentation page can help to enhance your customer experience.
 
 But how do you create a stunning **docs** page easily on WordPress site without any coding? Well, we’ve got you covered. 😎
 
@@ -54,6 +54,10 @@ BetterDocs offer multiple ready templates to design your WordPress documentation
 Translate your BetterDocs Single Docs by using WPML quite easily.
 
 https://www.youtube.com/watch?v=db4FB2NUD-g
+
+## 💬 CREATE FAQ INSTANTLY ##
+
+Design FAQ sections for your Knowledge base easily with the help of BetterDocs FAQ Builder.
 
 ## 📋 INTERACTIVE TABLE OF CONTENTS (TOC) ##
 
@@ -175,37 +179,126 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 2.0.12 - 07/04/2022 = 
+= 2.3.6 - 08/02/2023 =
+- Fixed: Category Grid Elementor widget showing underlines
+- Fixed: Sub category Orders not working on Archive page
+- Fixed: Email Feedback Form Submissions not Including User's Email Address in the Email body
+- Few minor bug fixes & improvements
+
+= 2.3.5 - 25/01/2023 =
+- Added: FAQ Schema Option
+- Fixed: Premade docs templates not showing inside Elementor Theme Builder
+- Few minor bug fixes & improvements
+
+= 2.3.4 - 15/01/2023 =
+- Fixed: Fatal error on PHP 7.1
+
+= 2.3.3 - 11/01/2023 =
+- Fixed: Single Doc Last update date not showing
+- Fixed: Class name getting removed from the single doc page heading
+- Fixed: Newly created doc count not showing properly in email reporting
+- Few minor bug fixes & improvements
+
+= 2.3.2 - 24/12/2022 =
+- Fixed: PHP error on email reporting template
+- Fixed: Clicking on any link in TOC produce JS error
+- Few minor bug fixes & improvements
+
+= 2.3.1 - 22/12/2022 =
+- Revamped: Email Reporting template
+- Few minor bug fixes & improvements
+
+= 2.3.0 - 21/12/2022 =
+- Added: FAQ Builder
+- Fixed: Table of Contents hierarchy showing wrong outcome based on certain settings
+- Few minor bug fixes & improvements
+
+= 2.2.2 - 22/11/2022 =
+- Fixed: Undefined Index error in Quick Setup wizard
+- Fixed: Live Search showing content even after clearing the search field
+- Fixed: Docs navigation not following the BetterDocs ordering
+- Few minor bug fixes & improvements
+
+= 2.2.1 - 07/11/2022 =
+- Fixed: heredoc throwing parse error
+- Few minor bug fixes & improvements
+
+= 2.2.0 - 06/11/2022 =
+- Added: Email Reporting feature
+- Fixed: Single Doc TOC z-index issue with media files
+- Few minor bug fixes & improvements
+
+= 2.1.6 - 25/09/2022 =
+- Added: Option to change sidebar layouts for Category Archive pages
+- Fixed: Nested Sub Category List isn't open by default when visiting Single docs
+- Fixed: PHP error on archive pages when Sidebar is disabled from settings
+- Few minor bug fixes & improvements
+
+= 2.1.5 - 22/08/2022 =
+- Fixed: HTML not rendering inside Category Description
+- Few minor bug fixes & improvements
+
+= 2.1.4 - 11/08/2022 =
+- Fixed: Elementor Deprecated functions error
+- Fixed: Category Box Masonry width not being equal in right side
+- Few minor bug fixes & improvements
+
+
+= 2.1.3 - 08/08/2022 =
+- Fixed: Sanitized some missing strings
+
+= 2.1.2 - 26/07/2022 =
+- Fixed: Triggering fatal error during activation
+
+= 2.1.1 - 21/07/2022 =
+- Fixed: Font Awesome icons loading globally
+- Improved: Added option to show TOC Title in the anchor link
+- Fixed: Throwing PHP Errors in PHP 7.4.8 version
+- Few minor bug fixes & improvements
+
+= 2.1.0 - 03/07/2022 =
+- Few minor bug fixes & improvements
+
+= 2.0.14 - 25/05/2022 =
+- Added: WordPress 6.0 Compatibility
+- Added: Background Image set option for Single Docs
+- Few minor bug fixes & improvements
+
+= 2.0.13 - 19/04/2022 =
+- Added: BetterDocs default order option for the Gutenberg blocks
+- Few minor bug fixes & improvements
+
+= 2.0.12 - 07/04/2022 =
 - Fixed: Fatal error if a default WordPress user role doesn't exist
 
-= 2.0.11 - 07/04/2022 = 
+= 2.0.11 - 07/04/2022 =
 - Fixed: Default WordPress Role Management capabilities not working
 - Fixed: Fatal Error while processing Role Management migration
 - Few minor bug fixes & improvements
 
-= 2.0.10 - 29/03/2022 = 
+= 2.0.10 - 29/03/2022 =
 - Fixed: Role management not migrating properly
 - Few minor bug fixes & improvements
 
-= 2.0.9 - 27/03/2022 = 
+= 2.0.9 - 27/03/2022 =
 - Fixed: Ordering not working properly for Sub-categories
 - Fixed: Adding %knowledge_base% in the category page URL when WPML Language Switcher option is hit
 - Fixed: Docs tags disappearing in the List View
 - Fixed: Deprecated errors related to Elementor 3.6
 - Few minor bug fixes & improvements
 
-= 2.0.8 - 06/03/2022 = 
+= 2.0.8 - 06/03/2022 =
 - Fixed: Custom Post Type throwing 404 Page while Multiple KB is activated
 - Fixed: Fatal error related to Elementor Template Loader
 - Few minor bug fixes & improvements
 
-= 2.0.7 - 15/02/2022 = 
+= 2.0.7 - 15/02/2022 =
 - Fixed: Category Creation not working from Gutenberg editor in WordPress 5.9
 - Fixed: Ready-made templates not loading inside Elementor Theme Builder
 - Fixed: Conflict with Phlox PRO theme
 - Few minor bug fixes & improvements
 
-= 2.0.6 - 02/02/2022 = 
+= 2.0.6 - 02/02/2022 =
 - Fixed: Category Order not working for docs page
 - Fixed: Undefined index orderby on betterdocs_category_box shortcode
 - Fixed: Docs not updating in WordPress 5.9 when reusable blocks are used
@@ -213,12 +306,12 @@ Yes, it will work with any standard WordPress theme.
 - Fixed: Customizer not loading in Twenty Twenty & Twenty Seventeen Theme
 - Few minor bug fixes & improvements
 
-= 2.0.5 - 25/01/2022 = 
+= 2.0.5 - 25/01/2022 =
 - Fixed: Child pages throwing 404 error when BetterDocs is enabled
 - Fixed: "Share this Article" text not being translatable in different layouts
 - Few minor bug fixes & improvements
 
-= 2.0.4 - 12/01/2022 = 
+= 2.0.4 - 12/01/2022 =
 - Fixed: Built-in Docs order not working
 - Fixed: Option to change "Search" button placeholder
 - Fixed: Docs order not working properly inside Elementor widgets
@@ -229,7 +322,7 @@ Yes, it will work with any standard WordPress theme.
 - Few minor bug fixes & improvements
 
 
-= 2.0.3 - 23/12/2021 = 
+= 2.0.3 - 23/12/2021 =
 - Fixed: Few minor bug fix & improvements
 
 = 2.0.2 - 22/12/2021 =

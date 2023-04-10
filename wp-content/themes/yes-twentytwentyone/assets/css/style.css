@@ -1253,7 +1253,7 @@ section {
 /* Added by AL - START */
 
 .layer-page {
-    overflow: unset;
+    /* overflow: hidden; */
 }
 
 .bg-blueYes {
@@ -1567,6 +1567,10 @@ body.show-overlay .layer-overlay {
     height: 40px;
 }
 
+/*Remove Extra Spaces from footer  */
+#qm-icon-container {
+	 display: none !important;
+}
 .page-header .navbar .dropdown-menu { z-index: 1030; }
 .page-header.sticky-top { z-index: 1030; }
 body.page-scrolled .page-header.sticky-top { filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)); }

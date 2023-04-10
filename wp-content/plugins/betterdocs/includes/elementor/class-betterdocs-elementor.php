@@ -38,7 +38,7 @@ class BetterDocs_Elementor
             add_action('wp_enqueue_scripts', [__CLASS__, 'editor_load_asset']);
             add_action('elementor/init', [__CLASS__, 'load_basic_widgets']);
             if (is_plugin_active('elementor-pro/elementor-pro.php')) {
-                add_action('elementor/widgets/widgets_registered', [__CLASS__, 'register_theme_builder_widgets']);
+	            add_action('elementor/widgets/register', [__CLASS__, 'register_theme_builder_widgets']);
                 add_action('elementor/init', [__CLASS__, 'load_theme_builder_widgets']);
                 add_action('elementor/theme/register_conditions', [__CLASS__, 'register_conditions']);
             }
@@ -57,9 +57,10 @@ class BetterDocs_Elementor
     public static function get_basic_widget_list()
     {
         $widget_arr = [
-            'betterdocs-elementor-search-form' => 'BetterDocs_Elementor_Search_Form',
+            'betterdocs-elementor-search-form'   => 'BetterDocs_Elementor_Search_Form',
             'betterdocs-elementor-category-grid' => 'BetterDocs_Elementor_Category_Grid',
-            'betterdocs-elementor-category-box' => 'BetterDocs_Elementor_Category_Box'
+            'betterdocs-elementor-category-box'  => 'BetterDocs_Elementor_Category_Box',
+            'betterdocs-faq-widget'              => 'Betterdocs_FAQ_Widget'
         ];
 
         return $widget_arr;
@@ -84,7 +85,8 @@ class BetterDocs_Elementor
             'betterdocs-elementor-feedback'    => 'BetterDocs_Elementor_Feedback',
             'betterdocs-elementor-doc-date'    => 'BetterDocs_Elementor_Doc_Date',
             'betterdocs-elementor-toc'         => 'BetterDocs_Elementor_Toc',
-            'betterdocs-elementor-category-archive-list' => 'BetterDocs_Category_Archive_List'
+            'betterdocs-elementor-category-archive-list' => 'BetterDocs_Category_Archive_List',
+            'betterdocs-elementor-reactions' => 'BetterDocs_Elementor_Reactions',
         ];
 
         return $widget_arr;
@@ -145,7 +147,7 @@ class BetterDocs_Elementor
         require_once BETTERDOCS_DIR_PATH . 'includes/elementor/betterdocs-doc-archive.php';
         require_once BETTERDOCS_DIR_PATH . 'includes/elementor/betterdocs-archive-condition.php';
         require_once BETTERDOCS_DIR_PATH . 'includes/elementor/docs-page.php';
-        self::_register_tag();
+	    add_action( 'elementor/dynamic_tags/register', [ __CLASS__, '_register_tag' ] );
 
         //load widget file
         foreach (self::get_theme_builder_widget_list() as $key => $value) {
@@ -190,8 +192,7 @@ class BetterDocs_Elementor
     {
         foreach (self::get_basic_widget_list() as $value) {
             if (class_exists($value)) {
-                //error_log( print_r(self::get_basic_widget_list(), TRUE) );
-                $widgets_manager->register_widget_type(new $value);
+                $widgets_manager->register(new $value);
             }
         }
     }
@@ -210,17 +211,16 @@ class BetterDocs_Elementor
     {
         foreach (self::get_theme_builder_widget_list() as $value) {
             if (class_exists($value)) {
-                $widgets_manager->register_widget_type(new $value);
+                $widgets_manager->register(new $value);
             }
         }
     }
 
-    public static function _register_tag()
+	public static function _register_tag( $module )
     {
         require_once BETTERDOCS_DIR_PATH . 'includes/elementor/widgets/betterdocs-elementor-title-tag.php';
 
-        $module = Plugin::elementor()->dynamic_tags;
-        $module->register_tag(new BetterDocs_Elementor_Title_Tag());
+        $module->register(new BetterDocs_Elementor_Title_Tag());
     }
 
     public static function promote_pro_elements($config)
@@ -236,12 +236,6 @@ class BetterDocs_Elementor
         }
 
         $combine_array = array_merge($promotion_widgets, [
-            [
-                'name'       => 'betterdocs-elementor-reactions',
-                'title'      => __('Doc Reactions', 'betterdocs'),
-                'icon'       => 'betterdocs-icon-Reactions',
-                'categories' => '["betterdocs-elements"]',
-            ],
             [
                 'name'       => 'betterdocs-multiple-kb',
                 'title'      => __('BetterDocs Multiple KB', 'betterdocs'),
@@ -263,7 +257,9 @@ class BetterDocs_Elementor
         }
         add_action('elementor/ajax/register_actions', array(__CLASS__, 'modified_ajax_action'), 20);
 
-	    if ( defined( 'ELEMENTOR_VERSION' ) && version_compare( ELEMENTOR_VERSION, '3.5.0', '>=' ) ) {
+	    if ( defined( 'ELEMENTOR_VERSION' ) && version_compare( ELEMENTOR_VERSION, '3.10.0', '>=' ) ) {
+		    add_filter( 'http_response', array( __CLASS__, 'http_response_modify_for_bd_template' ), 10, 3 );
+	    } else if ( defined( 'ELEMENTOR_VERSION' ) && version_compare( ELEMENTOR_VERSION, '3.5.0', '>=' ) ) {
 		    add_filter( 'option_' . Elementor\Api::LIBRARY_OPTION_KEY, array( __CLASS__, 'added_bd_template' ) );
 	    }
     }
@@ -354,6 +350,27 @@ class BetterDocs_Elementor
 		}
 
 		return $templates_list;
+	}
+
+	/**
+	 * Added BetterDocs template with Elementor core templates list
+	 *
+	 * @param $response
+	 * @param $parsed_args
+	 * @param $url
+	 *
+	 * @return mixed
+	 * @since  2.3.5
+	 */
+	public static function http_response_modify_for_bd_template( $response, $parsed_args, $url ) {
+		if ( $url === Elementor\TemplateLibrary\Source_Remote::API_TEMPLATES_URL ) {
+			$templates_list   = json_decode( wp_remote_retrieve_body( $response ), true );
+			$bd_templates     = self::get_bd_templates();
+			$templates_list   = array_merge( (array) $templates_list, (array) $bd_templates );
+			$response['body'] = json_encode( $templates_list );
+		}
+
+		return $response;
 	}
 
 	/**
@@ -772,7 +789,7 @@ class BetterDocs_Elementor
                         'DESC' => 'Descending',
                     ],
                     'default' => 'ASC',
-    
+
                 ]
             );
 
@@ -898,7 +915,7 @@ class BetterDocs_Elementor
                         } else {
                             $html .= '<i class="' . $settings['list_icon']['value'] . ' el-betterdocs-cg-post-list-icon"></i>';
                         }
-                        $html .= '<a ' . implode(' ', $sub_attr) . '>' . get_the_title() . '</a></li>';
+                        $html .= '<a ' . implode(' ', $sub_attr) . '>' . wp_kses(get_the_title(), BETTERDOCS_KSES_ALLOWED_HTML) . '</a></li>';
                     endwhile;
                 endif;
                 wp_reset_query();

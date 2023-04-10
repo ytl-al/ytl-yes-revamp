@@ -10,8 +10,6 @@
  * @subpackage BetterDocs/includes
  */
 
-use function YoastSEO_Vendor\GuzzleHttp\json_decode;
-
 /**
  * Register docs post type and taxonomies class.
  *
@@ -161,7 +159,7 @@ class BetterDocs_Docs_Post_Type
             'edit_item'        => esc_html__('Edit Category', 'betterdocs'),
             'update_item'      => esc_html__('Update Category', 'betterdocs'),
             'add_new_item'     => esc_html__('Add New Docs Category', 'betterdocs'),
-            'new_item_name'    => esc_html__('New Docs Name', 'betterdocs'),
+            'new_item_name'    => esc_html__('New Docs Category Name', 'betterdocs'),
             'menu_name'        => esc_html__('Categories', 'betterdocs')
         );
 
@@ -481,20 +479,24 @@ class BetterDocs_Docs_Post_Type
         </div>
 
         <div class="form-field term-group">
-            <label for="doc-category-image-id">' . esc_html__('Category Icon', 'betterdocs') . '</label>
-            <input type="hidden" id="doc-category-image-id" name="term_meta[image-id]" class="custom_media_url" value="">
-            <div id="doc-category-image-wrapper">
+            <label>' . esc_html__('Category Icon', 'betterdocs') . '</label>
+            <input type="hidden" name="term_meta[image-id]" class="doc-category-image-id" value="">
+            <div class="doc-category-image-wrapper">
                 <img src="' . BETTERDOCS_ADMIN_URL . 'assets/img/betterdocs-cat-icon.svg" alt="">
             </div>
             <p>
-                <input type="button" class="button button-secondary betterdocs_tax_media_button"
-                    id="betterdocs_tax_media_button" name="betterdocs_tax_media_button"
+                <input type="button" id="betterdocs_tax_media_button" 
+                    class="button button-secondary betterdocs_tax_media_button" 
+                    name="betterdocs_tax_media_button"
                     value="' . esc_html__('Add Image', 'betterdocs') . '" />
-                <input type="button" class="button button-secondary doc_tax_media_remove" id="doc_tax_media_remove"
+                <input type="button" 
+                    id="doc_tax_media_remove"
+                    class="button button-secondary doc_tax_media_remove"
                     name="doc_tax_media_remove"
                     value="' . esc_html__('Remove Image', 'betterdocs') . '" />
             </p>
         </div>';
+        do_action('betterdocs_doc_category_add_form_after');
     }
 
     /**
@@ -533,9 +535,7 @@ class BetterDocs_Docs_Post_Type
         $cat_icon_id = get_term_meta($term->term_id, 'doc_category_image-id', true);
 
         do_action('betterdocs_doc_category_update_form_before', $term);
-
         ?>
-
         <tr class="form-field term-group-wrap">
             <th scope="row">
                 <label for="doc-category-id"><?php esc_html_e('Category Id', 'betterdocs'); ?></label>
@@ -554,11 +554,11 @@ class BetterDocs_Docs_Post_Type
         </tr>
         <tr class="form-field term-group-wrap batterdocs-cat-media-upload">
             <th scope="row">
-                <label for="doc-category-image-id"><?php esc_html_e('Image', 'betterdocs'); ?></label>
+                <label><?php esc_html_e('Category Icon', 'betterdocs'); ?></label>
             </th>
             <td>
-                <input type="hidden" id="doc-category-image-id" name="term_meta[image-id]" value="<?php echo esc_attr($cat_icon_id); ?>">
-                <div id="doc-category-image-wrapper">
+                <input type="hidden" class="doc-category-image-id" name="term_meta[image-id]" value="<?php echo esc_attr($cat_icon_id); ?>">
+                <div class="doc-category-image-wrapper" id="doc-category-image-wrapper">
                     <?php
                     if ($cat_icon_id) {
                         echo wp_get_attachment_image($cat_icon_id, 'thumbnail');
@@ -574,6 +574,7 @@ class BetterDocs_Docs_Post_Type
             </td>
         </tr>
         <?php
+        do_action('betterdocs_doc_category_update_form_after', $term);
     }
 
     /*
@@ -604,61 +605,64 @@ class BetterDocs_Docs_Post_Type
     */
     public static function add_script()
     {
-
         global $current_screen;
         if ($current_screen->id == 'edit-doc_category') {
-
         ?>
-            <script>
-                jQuery(document).ready(function($) {
+        <script>
+            jQuery(document).ready(function($) {
+                function betterdocs_media_upload(button_class) {
+                    var _custom_media = true,
+                        _betterdocs_send_attachment = wp.media.editor.send.attachment;
+                    $('body').on('click', button_class, function(e) {
+                        let button_id = '#' + $(this).attr('id');
+                        let send_attachment_bkp = wp.media.editor.send.attachment;
+                        let button = $(button_id);
+                        let imageId = $(this).parent().parent().find('.doc-category-image-id');
+                        let imageWrapper = $(this).parent().parent().find('.doc-category-image-wrapper');
 
-                    function betterdocs_media_upload(button_class) {
-                        var _custom_media = true,
-                            _betterdocs_send_attachment = wp.media.editor.send.attachment;
-                        $('body').on('click', button_class, function(e) {
-                            var button_id = '#' + $(this).attr('id');
-                            var send_attachment_bkp = wp.media.editor.send.attachment;
-                            var button = $(button_id);
-                            _custom_media = true;
-                            wp.media.editor.send.attachment = function(props, attachment) {
-                                if (_custom_media) {
-                                    $('#doc-category-image-id').val(attachment.id);
-                                    $('#doc-category-image-wrapper').html(
-                                        '<img class="custom_media_image" src="" style="margin:0;padding:0;max-height:100px;float:none;" />'
-                                    );
-                                    $('#doc-category-image-wrapper .custom_media_image').attr('src', attachment
-                                        .url).css('display', 'block');
-                                } else {
-                                    return _betterdocs_send_attachment.apply(button_id, [props, attachment]);
-                                }
-                            }
-                            wp.media.editor.open(button);
-                            return false;
-                        });
-                    }
-
-                    betterdocs_media_upload('.betterdocs_tax_media_button.button');
-
-                    $('body').on('click', '.doc_tax_media_remove', function() {
-                        $('#doc-category-image-id').val('');
-                        $('#doc-category-image-wrapper').html(
-                            '<img class="custom_media_image" src="" style="margin:0;padding:0;max-height:100px;float:none;" />'
-                        );
-                    });
-
-                    $(document).ajaxComplete(function(event, xhr, settings) {
-                        var queryStringArr = settings.data.split('&');
-                        if ($.inArray('action=add-tag', queryStringArr) !== -1) {
-                            var xml = xhr.responseXML;
-                            $response = $(xml).find('term_id').text();
-                            if ($response != "") {
-                                // Clear the thumb image
-                                $('#doc-category-image-wrapper').html('');
+                        _custom_media = true;
+                        wp.media.editor.send.attachment = function(props, attachment) {
+                            if (_custom_media) {
+                                imageId.val(attachment.id);
+                                imageWrapper.html(
+                                    '<img class="custom_media_image" src="" style="margin:0;padding:0;max-height:100px;float:none;" />'
+                                );
+                                let custom_media_image = imageWrapper.find('.custom_media_image');
+                                custom_media_image.attr('src', attachment
+                                    .url).css('display', 'block');
+                            } else {
+                                return _betterdocs_send_attachment.apply(button_id, [props, attachment]);
                             }
                         }
+                        wp.media.editor.open(button);
+                        return false;
                     });
+                }
+
+                betterdocs_media_upload('.betterdocs_tax_media_button.button');
+
+                $('body').on('click', '.doc_tax_media_remove', function() {
+                    let imageId = $(this).parent().parent().find('.doc-category-image-id');
+                    let imageWrapper = $(this).parent().parent().find('.doc-category-image-wrapper');
+                    imageId.val('');
+                    imageWrapper.html(
+                        '<img class="custom_media_image" src="" style="margin:0;padding:0;max-height:100px;float:none;" />'
+                    );
                 });
-            </script>
+
+                $(document).ajaxComplete(function(event, xhr, settings) {
+                    var queryStringArr = settings.data.split('&');
+                    if ($.inArray('action=add-tag', queryStringArr) !== -1) {
+                        var xml = xhr.responseXML;
+                        $response = $(xml).find('term_id').text();
+                        if ($response != "") {
+                            // Clear the thumb image
+                            $('.doc-category-image-wrapper').html('');
+                        }
+                    }
+                });
+            });
+        </script>
 <?php }
     }
 
@@ -751,6 +755,13 @@ class BetterDocs_Docs_Post_Type
         if (is_array($rules)) {
             $rules = implode('', $rules);
         }
+
+        if( ! is_plugin_active( 'betterdocs-pro/betterdocs-pro.php' ) ) {
+            if (strpos($rules, 'knowledge_base') !== false) {
+                flush_rewrite_rules();
+            }
+        }
+
         if (!strpos($rules, 'docs')) {
             flush_rewrite_rules();
         }
@@ -770,6 +781,74 @@ class BetterDocs_Docs_Post_Type
                 'format' => 'url',
             ]
         ]);
+        // endpoint for single doc reactions, this code will be refactored in the future
+        register_rest_route( 'betterdocs', '/feedback/(?P<id>\d+)', array(
+            'methods'   => [ 'PUT', 'POST' ],
+            'callback'  => array( __CLASS__, 'save_response' ),
+            'permission_callback' => '__return_true',
+            'args'      => array(
+                'id' => array(
+                    'validate_callback' => function($param, $request, $key) {
+                        return is_numeric( $param );
+                    }
+                ),
+            ),
+        ));
+    }
+
+
+    /**
+     * Save Feedback for individual Docs(Migrated From Pro To Free Version)
+     * @param WP_REST_Request $request
+     * @return void
+     */
+    public static function save_response( WP_REST_Request $request ){
+        global $wpdb;
+        $docs_id = isset( $request['id'] ) ? intval( $request['id'] ) : null;
+        $feelings = isset( $request['feelings'] ) ? $request['feelings'] : 'happy';
+        if( $docs_id !== null && get_option('betterdocs_pro_db_version') == true ) {
+            $post_id = $wpdb->get_results(
+                $wpdb->prepare(
+                    "SELECT *
+                    FROM {$wpdb->prefix}betterdocs_analytics
+                    WHERE created_at = %s AND post_id = %d",
+                    date('Y-m-d'),
+                    $docs_id
+                )
+            );
+
+            if (!empty($post_id)) {
+                $feelings_increment = $post_id[0]->{$feelings} + 1;
+                $insert = $wpdb->query(
+                    $wpdb->prepare(
+                        "UPDATE {$wpdb->prefix}betterdocs_analytics 
+                    SET ".$feelings." = ". $feelings_increment ."
+                    WHERE created_at = %s AND post_id = %d",
+                        array(
+                            date('Y-m-d'),
+                            $docs_id
+                        )
+                    )
+                );
+            } else {
+                $insert = $wpdb->query(
+                    $wpdb->prepare(
+                        "INSERT INTO {$wpdb->prefix}betterdocs_analytics 
+                        ( post_id, ".$request['feelings'].", created_at )
+                        VALUES ( %d, %d, %s )",
+                        array(
+                            $docs_id,
+                            1,
+                            date('Y-m-d')
+                        )
+                    )
+                );
+            }
+
+            if( $insert == true ) return true;
+
+        }
+        return false;
     }
 
     /**

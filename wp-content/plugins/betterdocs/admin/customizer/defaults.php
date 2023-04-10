@@ -245,6 +245,7 @@ function betterdocs_get_option_defaults() {
 		'betterdocs_sidebar_list_item_margin_left' => '10',
 		'betterdocs_sidebar_list_icon_color' => '#566e8b',
 		'betterdocs_sidebar_list_icon_font_size' => '14',
+		'betterdocs_archive_layout_select' => 'layout-1',
 		'betterdocs_archive_page_background_color' => '',
 		'betterdocs_archive_page_background_image' => '',
 		'betterdocs_archive_page_background_property' => '',
@@ -252,6 +253,8 @@ function betterdocs_get_option_defaults() {
 		'betterdocs_archive_page_background_repeat' => '',
 		'betterdocs_archive_page_background_attachment' => '',
 		'betterdocs_archive_page_background_position' => '',
+		'betterdocs_archive_content_area_max_width' => '1400',
+		'betterdocs_archive_content_area_width' => '100',
 		'betterdocs_archive_content_area_settings' => '',
 		'betterdocs_archive_content_background_color' => '#ffffff',
 		'betterdocs_archive_content_margin' => '',
@@ -304,6 +307,8 @@ function betterdocs_get_option_defaults() {
 		'betterdocs_live_search_subheading' => '',
 		'betterdocs_live_search_subheading_font_size' => 16,
 		'betterdocs_live_search_heading_font_color' => '#566e8b',
+		'betterdocs_live_search_heading_tag' => 'h2',
+		'betterdocs_live_search_subheading_tag' => 'h3',
 		'betterdocs_search_heading_margin' => '',
 		'betterdocs_search_heading_margin_top' => '0',
 		'betterdocs_search_heading_margin_right' => '0',
@@ -398,7 +403,75 @@ function betterdocs_get_option_defaults() {
 		'betterdocs_doc_single_toc_margin_top' => '0',
 		'betterdocs_doc_single_toc_margin_right' => '0',
 		'betterdocs_doc_single_toc_margin_bottom' => '0',
-		'betterdocs_doc_single_toc_margin_left' => '0'
+		'betterdocs_doc_single_toc_margin_left' => '0',
+		'betterdocs_doc_single_content_area_bg_image' => '',
+		'betterdocs_doc_single_content_bg_property' => '',
+		'betterdocs_doc_single_content_bg_property_size' => '',
+		'betterdocs_doc_single_content_bg_property_repeat' => '',
+		'betterdocs_doc_single_content_bg_property_attachment' => '',
+		'betterdocs_doc_single_content_bg_property_position' => '',
+		'betterdocs_reactions_title' => '',
+		'betterdocs_post_reactions' => true,
+		'betterdocs_post_reactions_text' => esc_html__('What are your feelings', 'betterdocs'),
+		'betterdocs_post_reactions_text_color' => '#566e8b',
+		'betterdocs_post_reactions_icon_color' => '#00b88a',
+		'betterdocs_post_reactions_icon_hover_bg_color' => '#fff',
+		'betterdocs_post_reactions_icon_svg_color' => '#fff',
+		'betterdocs_post_reactions_icon_hover_svg_color' => '#00b88a',
+		'betterdocs_faq_switch' => true,
+		'betterdocs_select_specific_faq' => 'all',
+		'betterdocs_select_faq_template' => 'layout-1',
+		'betterdocs_faq_title_text' => esc_html__('Frequently Asked Questions', 'betterdocs'),
+		'betterdocs_faq_title_margin' => array(
+			'input1'  	=> 0,
+			'input2'  	=> 0,
+			'input3'  	=> 0,
+			'input4'  	=> 0,
+		),
+		'betterdocs_faq_title_color' => '#15063F',
+		'betterdocs_faq_title_font_size' => '30',
+		'betterdocs_faq_category_title_color' => '#15063F',
+		'betterdocs_faq_category_name_font_size' => '25',
+		'betterdocs_faq_category_name_font_color' => '#15063F',
+		'betterdocs_faq_category_name_padding' => array(
+			'input1'  	=> 20,
+			'input2'  	=> 20,
+			'input3'  	=> 20,
+			'input4'  	=> 20,
+		),
+		'betterdocs_faq_list_color' => '#2f3b48',
+		'betterdocs_faq_list_background_color' => '#f0f1f5',
+		'betterdocs_faq_list_font_size' => '17',
+		'betterdocs_faq_list_padding' => array(
+			'input1'  	=> 20,
+			'input2'  	=> 20,
+			'input3'  	=> 20,
+			'input4'  	=> 20,
+		),
+		'betterdocs_faq_list_content_background_color' => '#fbfcff',
+		'betterdocs_faq_category_title_color_layout_2' => '#15063F',
+		'betterdocs_faq_category_name_font_size_layout_2' => '25',
+		'betterdocs_faq_category_name_padding_layout_2' => array(
+			'input1'  	=> 20,
+			'input2'  	=> 20,
+			'input3'  	=> 20,
+			'input4'  	=> 20,
+		),
+		'betterdocs_faq_list_color_layout_2' => '#2f3b48',
+		'betterdocs_faq_list_background_color_layout_2' => '#fff',
+		'betterdocs_faq_list_content_background_color_layout_2' => '#fff',
+		'betterdocs_faq_list_font_size_layout_2' => '17',
+		'betterdocs_faq_list_padding_layout_2' => array(
+			'input1'  	=> 20,
+			'input2'  	=> 20,
+			'input3'  	=> 20,
+			'input4'  	=> 20,
+		),
+		'betterdocs_faq_list_content_font_size' => '15',
+		'betterdocs_faq_list_content_font_size_layout_2' => '15',
+		'betterdocs_faq_list_content_color' => '#7B7B7B',
+		'betterdocs_faq_list_content_color_layout_2' => '#7B7B7B',
+		'betterdocs_faq_section_seperator' => ''
 	);
 	
 	return apply_filters( 'betterdocs_option_defaults', $betterdocs_defaults );
@@ -465,4 +538,68 @@ if( ! function_exists( 'betterdocs_generate_output' ) ) :
 		}
 		return $returned;
 	}
+endif;
+
+if( ! function_exists( 'betterdocs_dimension_generator' ) ) :
+    function betterdocs_dimension_generator($key, $style_attr, $measure = 'px', $important = false) {
+        
+        $important = $important ? ' !important' : '';
+        $saved_options = get_theme_mods();
+        if( is_array($saved_options) && array_key_exists( $key, $saved_options ) ) {
+            $valueArr = (array) json_decode(betterdocs_get_option($key));
+        } else {
+            $default = betterdocs_get_option_defaults();
+            $valueArr = isset( $default[$key] ) ? $default[$key] : '';
+        }
+
+        $dimensionArr = [];
+        $dimensionAttr = '';
+        $input1 = '';
+        $input2 = '';
+        $input3 = '';
+        $input4 = '';
+        $measure = isset($valueArr['data_unit']) ? $valueArr['data_unit'] : $measure;
+
+        if ( $valueArr['input1'] !== '' ) {
+            $input1 = $valueArr['input1'] . $measure;
+        } else {
+            $input1 = '0' . $measure;
+        }
+        if ( $input1 !== '' ) {
+            $dimensionArr[] = $input1;
+        }
+        
+        if ( $valueArr['input2'] !== '' ) {
+            $input2 = $valueArr['input2'] . $measure;
+        } else {
+            $input2 = '0' . $measure;
+        }
+        if ( $input2 !== '' ) {
+            $dimensionArr[] = $input2;
+        }
+        
+        if ( $valueArr['input3'] !== '' ) {
+            $input3 = $valueArr['input3'] . $measure;
+        } else {
+            $input3 = '0' . $measure;
+        }
+        if ( $input3 !== '' ) {
+            $dimensionArr[] = $input3;
+        }
+        
+        if ( $valueArr['input4'] !== '' ) {
+            $input4 = $valueArr['input4'] . $measure;
+        } else {
+            $input4 = '0' . $measure;
+        }
+        if ( $input4 !== '' ) {
+            $dimensionArr[] = $input4;
+        }
+
+        if ( count($dimensionArr) > 0 ) {
+            $dimensionAttr = "{$style_attr}: " . implode(' ', $dimensionArr) . $important . ";";
+        }
+        
+        return $dimensionAttr;
+    }
 endif;

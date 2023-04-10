@@ -1573,6 +1573,7 @@ class BetterDocs_Elementor_Category_Grid extends Widget_Base
         );
 
         $terms_object = array(
+            'hide_empty' => true,
             'taxonomy' => 'doc_category',
             'order' => $settings['order'],
             'offset'    => $settings['offset'],
@@ -1614,14 +1615,12 @@ class BetterDocs_Elementor_Category_Grid extends Widget_Base
             }
 
             $terms_object['meta_query'] =  array(
+                'relation' => 'OR',
                 array(
-                    'relation' => 'OR',
-                    array(
-                        'key'       => 'doc_category_knowledge_base',
-                        'value'     => $meta_value,
-                        'compare'   => 'LIKE'
-                    )
-                ),
+                    'key'       => 'doc_category_knowledge_base',
+                    'value'     => $meta_value,
+                    'compare'   => 'LIKE'
+                )
             );
 
             $taxonomy_objects = get_terms( apply_filters( 'betterdocs_category_terms_object', $terms_object ) );
@@ -1635,7 +1634,7 @@ class BetterDocs_Elementor_Category_Grid extends Widget_Base
                         $term_slug = $term->slug;
                         $count = $term->count;
                         $get_term_count = betterdocs_get_postcount($count, $term_id, $settings['nested_subcategory']);
-                        $term_count = apply_filters('betterdocs_postcount', $get_term_count, $default_multiple_kb, $term_id, $term_slug, $count, $settings['nested_subcategory']);
+                        $term_count = apply_filters('betterdocs_postcount', $get_term_count, $default_multiple_kb, $term_id, $term_slug, $count, $settings['nested_subcategory'], $settings['selected_knowledge_base']);
                         if ($term_count > 0) {
                             $html .= BetterDocs_Elementor::include_with_variable($this->get_template($settings['layout_template']), ['term' => $term, 'term_count' => $term_count, 'settings' => $settings, 'default_multiple_kb' => $default_multiple_kb]);
                         }
@@ -1706,7 +1705,7 @@ class BetterDocs_Elementor_Category_Grid extends Widget_Base
                             $column_space = $grid.data('column-space');
                         if ($layout_mode === 'masonry') {
                             let masonryItem = $(".el-betterdocs-category-grid-post", $grid);
-                            let total_margin = $column * $column_space;
+                            let total_margin = ($column - 1) * $column_space;
                             masonryItem.css("width", "calc((100% - " + total_margin + "px) / " + parseInt($column) + ")");
                             $grid.masonry({
                                 itemSelector: ".el-betterdocs-category-grid-post",

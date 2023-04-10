@@ -1,5 +1,4 @@
 <!-- Styles -->
-
 <?php get_template_part('template-parts/roaming/styles'); ?>
 
 <!-- Breadcrumb Start -->
@@ -203,7 +202,7 @@
 
 <!--Countries Section Start-->
 <section id="countries-section">
-    <h1><span>RM38/day</span>, up to <span>500MB</span> at these <span>20 countries</span>.</h1>
+    <h1>Roam internationally at these 20 of countries</h1>
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -264,8 +263,8 @@
                                 <h2>Republic of Korea</h2>
                                 <p>SK Telecom (SKT)</p>
                             </div>
-                            
-                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/macau.png">
+
+							<div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/macau.png">
                                 <h2>Macau</h2>
                                 <p>Hutchison (3)</p>
                             </div>

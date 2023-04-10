@@ -12,7 +12,7 @@
 
 ?>
 
-	<?php get_template_part('template-parts/footer/site-footer-no-newsletter'); ?>
+		<?php get_template_part('template-parts/footer/site-footer-no-newsletter'); ?>
 	</div>
 	<!-- Layer Page ENDS -->
 	
@@ -22,14 +22,12 @@
 	
 	<script src="https://ipmeta.io/plugin.js"></script>
 	<script>
-		if( typeof provideGtagPlugin === 'function' ) {
-			provideGtagPlugin({
-				apiKey: '<?php echo IPMETA_API_KEY ?>',
-				serviceProvider: 'dimension1',
-				networkDomain: 'dimension2',
-				networkType: 'dimension3',
-			});
-		}
+		provideGtagPlugin({
+			apiKey: '<?php echo IPMETA_API_KEY ?>',
+			serviceProvider: 'dimension1',
+			networkDomain: 'dimension2',
+			networkType: 'dimension3',
+		});
 	</script>
 
 </body>

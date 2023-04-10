@@ -45,10 +45,7 @@
     ?>
     <div class="update-date">
         <?php
-            printf(
-                esc_html__( 'Updated on %s', 'betterdocs' ),
-                get_the_modified_date()
-            );
+            echo wp_sprintf( '%s %s', __( 'Updated on', 'betterdocs' ), get_the_modified_date() );
         ?>
     </div>
     <?php } ?>

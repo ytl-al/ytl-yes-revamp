@@ -44,8 +44,9 @@ if (!class_exists('BetterdocsStyleHandler')) {
          */
         public function betterdocs_blocks_edit_post($hook)
         {
+            global $current_screen;
             $dir = dirname(__FILE__);
-            if ($hook == 'post-new.php' || $hook == 'post.php') {
+            if ( $hook == 'post-new.php' && $current_screen->is_block_editor || $hook == 'post.php' && $current_screen->is_block_editor ) {
                 wp_enqueue_script(
                     'betterdocs-blocks-edit-post',
                     BETTERDOCS_URL . 'public/js/style-handler.js',

@@ -110,6 +110,54 @@
 	width: 80px;
 }
 
+.wpdeveloper-notice-message.bdocs-black-friday-notice {
+	padding: 0;
+	margin-top: 8px;
+}
+.bddocs-black-friday-notice .wpdeveloper-notice-thumbnail {
+	width: 30px;
+	height: 30px;
+}
+.bddocs-black-friday-notice .party-icon .emoji {
+	width: 18px !important;
+	height: 18px !important;
+}
+.bddocs-black-friday-notice .wpdeveloper-notice-thumbnail img {
+	width: 100%;
+}
+.bddocs-black-friday-notice .notice-dismiss {
+	bottom: 0;
+}
+.betterdocs-e-button {
+	display: inline-block;
+	font-weight: var(--e-button-font-weight);
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	color: #fff;
+	border: 0;
+	text-decoration: none;
+	background: var(--e-button-context-color);
+	padding: var(--e-button-padding-y) var(--e-button-padding-x);
+	font-size: var(--e-button-font-size);
+	line-height: var(--e-button-line-height);
+	border-radius: var(--e-button-border-radius);
+	-webkit-transition: background-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+	transition: background-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+	-o-transition: background-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	transition: background-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	transition: background-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+}
+.betterdocs-e-button:hover {
+	color: #fff;
+	text-decoration: none;
+	background: var(--e-button-context-color-dark);
+}
+
 .wp-core-ui .doc-category-kb[multiple] {
 	padding: 10px 0;
 	min-width: 300px; 

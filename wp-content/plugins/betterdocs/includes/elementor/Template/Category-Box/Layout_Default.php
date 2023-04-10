@@ -28,9 +28,9 @@ echo '<a href="' . $term_permalink . '" class="el-betterdocs-category-box-post">
 
     if ($settings['show_count']) {
         if($term_count == 1) {
-            printf('<div class="el-betterdocs-cb-cat-count"><span class="count-prefix">%s</span>%s<span class="count-suffix">%s</span></div>', $settings['count_prefix'], $term_count, $settings['count_suffix_singular']);
+            printf('<div class="el-betterdocs-cb-cat-count"><span class="count-prefix">%s</span>%s<span class="count-suffix">%s</span></div>', esc_html($settings['count_prefix']), $term_count, esc_html($settings['count_suffix_singular']));
         } else {
-            printf('<div class="el-betterdocs-cb-cat-count"><span class="count-prefix">%s</span>%s<span class="count-suffix">%s</span></div>', $settings['count_prefix'], $term_count, $settings['count_suffix']);
+            printf('<div class="el-betterdocs-cb-cat-count"><span class="count-prefix">%s</span>%s<span class="count-suffix">%s</span></div>', esc_html($settings['count_prefix']), $term_count, esc_html($settings['count_suffix']));
         }
         
     }

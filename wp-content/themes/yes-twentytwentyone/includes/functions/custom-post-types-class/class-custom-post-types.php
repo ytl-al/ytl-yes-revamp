@@ -31,6 +31,7 @@
                         $reg_taxonomy   = (isset($arr_post_type_args['reg_taxonomy']) && !empty($arr_post_type_args['reg_taxonomy'])) ? $arr_post_type_args['reg_taxonomy'] : false;
                         $reg_tags       = (isset($arr_post_type_args['reg_tags']) && !empty($arr_post_type_args['reg_tags'])) ? $arr_post_type_args['reg_tags'] : false;
                         $rewrite        = (isset($arr_post_type_args['rewrite']) && !empty($arr_post_type_args['rewrite'])) ? $arr_post_type_args['rewrite'] : false;
+                        $capabilities   = (isset($arr_post_type_args['capabilities']) && !empty($arr_post_type_args['capabilities']) && is_array($arr_post_type_args['capabilities']))? $arr_post_type_args['capabilities']: array();
 
                         $labels         = [
                             'name'              => _x($name, 'post type general name'), 
@@ -59,6 +60,7 @@
                             'query_var'             => true, 
                             'rewrite'               => ['slug', $slug], 
                             'capability_type'       => 'post', 
+                            'capabilities'          => $capabilities,
                             'has_archive'           => true, 
                             'hierarchical'          => false, 
                             'menu_position'         => 25, 
@@ -109,7 +111,13 @@
                     'show_ui'           => true, 
                     'show_admin_column' => true, 
                     'query_var'         => true, 
-                    'rewrite'           => array('slug' => "$rewrite", 'hierarchical' => true) 
+                    'rewrite'           => array('slug' => "$rewrite", 'hierarchical' => true),
+                    'capabilities'      => array(
+                        'manage_terms' => "manage_$slug-$category_name_plural",
+                        'edit_terms'   => "edit_$slug-$category_name_plural",
+                        'delete_terms' => "delete_$slug-$category_name_plural",
+                        'assign_terms' => "assign_$slug-$category_name_plural",
+                    )
                 ];
 
                 register_taxonomy("$slug-category", array($slug), $args);
@@ -162,7 +170,13 @@
                     'show_ui'           => true, 
                     'show_admin_column' => true, 
                     'query_var'         => true, 
-                    'rewrite'           => array('slug' => "$rewrite") 
+                    'rewrite'           => array('slug' => "$rewrite"),
+                    'capabilities'      => array(
+                        'manage_terms' => "manage_$slug-$tag_name_plural",
+                        'edit_terms'   => "edit_$slug-$tag_name_plural",
+                        'delete_terms' => "delete_$slug-$tag_name_plural",
+                        'assign_terms' => "assign_$slug-$tag_name_plural",
+                    )
                 ];
 
                 register_taxonomy("$slug-tag", array($slug), $args);

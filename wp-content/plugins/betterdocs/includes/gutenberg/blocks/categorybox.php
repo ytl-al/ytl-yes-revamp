@@ -36,11 +36,19 @@ function betterdocs_categorybox_block_init()
         filemtime("$dir/$index_js")
     );
 
+    wp_register_style(
+        'betterdocs-fontawesome-frontend',
+        BETTERDOCS_URL . 'admin/assets/css/font-awesome5.css',
+        array(),
+        BETTERDOCS_VERSION,
+        'all'
+    );
+
     $editor_style = 'categorybox/style.css';
     wp_register_style(
         'betterdocs-categorybox-block-editor',
         plugins_url($editor_style, __FILE__),
-        array(),
+        array('betterdocs-fontawesome-frontend'),
         filemtime("$dir/$editor_style"),
         'all'
     );

@@ -350,8 +350,10 @@ $sql.=" order by $order_by $order ";
  }
 // $sql='SELECT l.* from wp_vxcf_leads l left join wp_vxcf_leads_detail d on (l.id = d.lead_id) left join tickets t on(l.id=t.entry_id) where l.form_id ="cf_6" and l.status ="0" and d.value like "%bioinfo35@gmail.com%" and d.name = "your-email" and t.status ="open" and t.priority="normal" group by d.lead_id order by l.id DESC LIMIT 0,20';
 //echo $sql.'<hr>';            
-$results=$wpdb->get_results($sql, ARRAY_A);  
-//echo json_encode($results); die();   
+$results=$wpdb->get_results($sql, ARRAY_A); 
+//if(isset($_GET['form_id'])){ 
+//echo json_encode($results); var_dump(vxcf_form::$form_fields); // die($sql); 
+//}   
  // $re = $wpdb->get_results('SELECT FOUND_ROWS();', ARRAY_A);     
 
              $leads=array();
@@ -361,16 +363,21 @@ $ids[]=$v['id'];
    $leads[$v['id']]=$v;    
 }
        
-if(!empty(vxcf_form::$form_fields)){
+if(!empty(vxcf_form::$form_fields)){ //var_dump(vxcf_form::$form_fields,$req);
  $sql_d="SELECT id,lead_id";   
  foreach(vxcf_form::$form_fields as $k=>$v){
      if(!empty($v['is_main'])){ continue; }
      $k=$v['name'];
  $sql_d.=", MAX(if(`name`='$k', `value`, null )) AS '".$k."_field'";   
  }
- $sql_d.=' FROM '.$detail.' where lead_id in('.implode(',',$ids).')  GROUP BY `lead_id` ';   
+ $sql_d.=' FROM '.$detail.' where lead_id in('.implode(',',$ids).')  GROUP BY `lead_id` ';   //mysql does not support too much Ids in IN() , gravity uses only 10 ids with pagination GF_Query::get_entries
 
 $res= $wpdb->get_results($sql_d, ARRAY_A);
+if(isset($_GET['form_id'])){ 
+  //  global $wpdb;
+    
+   // echo $wpdb->last_error.'------------'.$sql_d; echo json_encode($res); $wpdb->print_error(); die();
+}
 //var_dump($res,vxcf_form::$form_fields);  
 //echo $sql_d.'-----<hr>'.json_encode($res).'<-------'.$wpdb->last_error.'----<hr>'; //die();
 if(!empty($res)){

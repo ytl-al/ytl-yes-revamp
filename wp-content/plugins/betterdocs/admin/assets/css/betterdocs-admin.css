@@ -578,6 +578,7 @@ label.betterdocs-adv-checkbox-label:hover {
 /* BetterDocs Settings Page CSS */
 .betterdocs-settings-wrap {
     padding: 15px;
+    padding-left: 0px;
 }
 
 .betterdocs-settings-header {
@@ -668,6 +669,141 @@ label.betterdocs-adv-checkbox-label:hover {
     border-top: none;
     position: relative;
     display: none;
+}
+
+.betterdocs-tab-content {
+    display: none;
+}
+.betterdocs-tab-content.active {
+    display: block;
+}
+.betterdocs-list-grid-icon {
+    display: flex;
+    margin-left: auto;
+}
+
+.betterdocs-analytics-teaser .betterdocs-settings-tab {
+    position: relative;
+}
+.betterdocs-analytics-teaser .betterdocs-settings-tab img {
+    width: 100%;
+    max-width: 100%;
+}
+.betterdocs-analytics-teaser .betterdocs-settings-tab .overlay {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, .7);
+}
+.betterdocs-analytics-teaser .betterdocs-settings-tab .overlay-content {
+    width: 45%;
+    margin: 0 auto;
+    background-color: rgba(255,255,255, .7);
+    color: #fff;
+    box-shadow: 0px 30px 60px rgba(0, 1, 35, 0.18);
+    border-radius: 15px;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-right: 20px;
+}
+
+.betterdocs-analytics-teaser .overlay-content h3 {
+    font-style:normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000000;
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: .5em;
+}
+@media only screen and (max-width: 1024px){
+    .betterdocs-analytics-teaser .betterdocs-settings-tab .overlay-content {
+        width: 85%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .betterdocs-analytics-teaser .overlay-content h3{
+        font-size: 18px;
+        line-height: 21px;
+        margin: .8em 0;
+    }
+    .betterdocs-analytics-teaser .analytics-list {
+        width: 85%;
+    }
+}
+
+.betterdocs-analytics-teaser .analytics-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.betterdocs-analytics-teaser .teaser-text{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 29px;
+    text-align: center;
+    color: #666B78;
+    margin: 0;
+    overflow: hidden;
+}
+.betterdocs-analytics-teaser .teaser-desc {
+    margin-bottom: 20px;
+}
+.betterdocs-analytics-teaser .analytics-list{
+    width: 85%;
+    margin: auto;
+}
+
+.overlay .overlay-content .analytics-upgrade-btn{
+    display: flex;
+    position: relative;
+    background-color: #36D692;
+    box-shadow: 0px 10px 60px rgba(0, 1, 35, 0.3);
+    border-radius: 15px;
+    width: 300px;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    transform: translate(4px, 43px);
+}
+
+.overlay .overlay-content .analytics-upgrade-btn a{
+    color: #FFFFFF;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 40px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 320px;
+    height: 72px;
+    text-decoration: none;
+}
+
+#img-teaser{
+    width: 13px;
+    /* height: 15px; */
+    padding-left: 10px;
+
+}
+
+#img-teaser-1, #img-teaser-2, #img-teaser-3, #img-teaser-4{
+    width: 15px;
+    padding-right: 15px;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
 }
 
 .betterdocs-settings-tab.active {
@@ -1292,6 +1428,24 @@ body.wp-admin.rtl .ui-datepicker {
     margin: 30px 0px;
     transition: all 0.3s ease 0s;
 }
+#test_report {
+    background-image: -webkit-linear-gradient(-169deg, #15c7a4 0%, #37de89 100%);
+    color: rgb(255, 255, 255);
+    letter-spacing: 1px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+    padding: 8px 10px;
+    border-radius: 3px;
+    transition: all 0.3s ease 0s;
+}
+.select2-container--open .select2-dropdown--below {
+    z-index: 9999;
+}
 .betterdocs-meta-next:hover, .betterdocs-settings-button:hover {
     background-color: #73d16f;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px;
@@ -1841,7 +1995,7 @@ body.toplevel_page_betterdocs-admin {
     border-radius: 90px;
     height: 34px;
     padding: 0 5px;
-    margin-left: auto;
+    margin-left: 10px;
 }
 .betterdocs-switch-mode label {
     display: flex;
@@ -2295,4 +2449,18 @@ body.betterdocs-dark-mode .betterdocs-listing-table-content .tablenav-pages .pag
 .betterdocs-control-wrapper #copy-clipboard:hover span {
     opacity: 1;
     visibility: visible;
+}
+.taxonomy-doc_category #the-list tr:hover {
+    cursor: -webkit-grab; 
+    cursor: -moz-grab;
+}
+
+.taxonomy-doc_category #the-list tr.ui-sortable-helper:hover {
+    display: table;
+    cursor: -webkit-grabbing; 
+    cursor: -moz-grabbing;
+}
+
+.taxonomy-doc_category #the-list tr.no-items:hover {
+    cursor: default;
 }

@@ -2,9 +2,9 @@
 Contributors: crmperks, sbazzi
 Tags: contact form 7, contact form 7 database, contact form db, save contact form, wpforms database
 Requires at least: 3.8
-Tested up to: 5.8
-Stable tag: 1.2.8
-Version: 1.2.8
+Tested up to: 6.2
+Stable tag: 1.3.0
+Version: 1.3.0
 Requires PHP: 5.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -74,6 +74,7 @@ You can add notes to any contact form entry and you can edit old notes. Also you
 <li>Don't miss out on any potential leads. Collect data in real time as it is entered on your forms.</li>
 <li>Save Elementor Forms submissions in database.</li>
 <li>Search field and Download CSV button for front end entries table.</li>
+<li>Complete clickable links for file fields in front end entries table.</li>
 <li>Google Analytics Parameters and Geolocation of a visitor who submitted the form.</li>
 <li>Lookup lead's email and phone using email and phone lookup apis.</li>
 <li>20+ premium add-ons</li>
@@ -165,6 +166,12 @@ Contact form 7 entries plugin allows you to save contact form 7 entries to local
 
 
 == Changelog ==
+
+= 1.3.0 =
+* fixed "csv file escaping" issue.
+
+= 1.2.9 =
+* added "convert file urls to clickable links" feature.
 
 = 1.2.8 =
 * fixed "start" parameter issue in shortcode.

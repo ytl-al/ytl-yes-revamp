@@ -14,7 +14,7 @@ function betterdocs_get_pages() {
     if( ! empty( $_pages ) ) {
         $pages[0] = 'Select a Page';
         foreach( $_pages as $page ) {
-            $pages[ $page->ID ] = $page->post_title;
+            $pages[ $page->ID ] = esc_html($page->post_title);
         }
     }
 
@@ -72,19 +72,20 @@ function betterdocs_settings_args(){
                 ),
             )
         ),
-        'internal_kb_section' => array(
+        'internal_kb_section' =>  array(
             'title' => __('Internal Knowledge Base', 'betterdocs'),
-            'priority'    => 0,
-            'fields' => array(
+            'priority'    => 1,
+            'fields' => apply_filters( 'betterdocs_internal_kb_fields', array(
                 'content_restriction_title' => array(
                     'type'        => 'title',
                     'label'       => __('Internal Knowledge Base', 'betterdocs'),
+                    'disable'     => true,
                     'priority'    => 0,
                 ),
-                'enable_content_restriction_free' => array(
+                'enable_content_restriction' => array(
                     'type'      => 'checkbox',
+                    'disable'    => true,
                     'priority'  => 1,
-                    'disable' => true,
                     'label'     => __( 'Enable/Disable', 'betterdocs' ),
                     'default'   => '',
                     'dependency' => array(
@@ -93,10 +94,49 @@ function betterdocs_settings_args(){
                         )
                     )
                 ),
-            )
+                'content_visibility' => array(
+                    'type'        => 'select',
+                    'label'       => __('Restrict Access to', 'betterdocs'),
+                    'help'        => __('<strong>Note:</strong> Only selected User Roles will be able to view your Knowledge Base' , 'betterdocs'),
+                    'disable'     => true,
+                    'priority'    => 2,
+                    'multiple'    => true,
+                    'default'     => 'all',
+                    'options'     => BetterDocs_Settings::get_all_user_roles()
+                ),
+                'restrict_template' => array(
+                    'type'        => 'select',
+                    'label'       => __('Restriction on Docs', 'betterdocs'),
+                    'help'        => __('<strong>Note:</strong> Selected Docs pages will be restricted' , 'betterdocs'),
+                    'disable'     => true,
+                    'priority'    => 3,
+                    'multiple'    => true,
+                    'default'     => 'all',
+                    'options'     => BetterDocs_Settings::get_texanomy()
+                ),
+                'restrict_category' => array(
+                    'type'        => 'select',
+                    'label'       => __('Restriction on Docs Categories', 'betterdocs'),
+                    'help'        => __('<strong>Note:</strong> Selected Docs categories will be restricted ' , 'betterdocs'),
+                    'disable'     => true,
+                    'priority'    => 5,
+                    'multiple'    => true,
+                    'default'     => 'all',
+                    'options'     => BetterDocs_Settings::get_terms_list('doc_category')
+                ),
+                'restricted_redirect_url' => array(
+                    'type'        => 'text',
+                    'label'       => __('Redirect URL' , 'betterdocs'),
+                    'help'        => __('<strong>Note:</strong> Set a custom URL to redirect users without permissions when they try to access internal knowledge base. By default, restricted content will redirect to the "404 not found" page' , 'betterdocs'),
+                    'default'     => '',
+                    'placeholder' => 'https://',
+                    'disable'     => true,
+                    'priority'	  => 6,
+                ),
+            ))
         )
     ));
-    if( ! current_user_can('delete_users') ) {
+    if( ! current_user_can('activate_plugins') ) {
         unset($advanced_settings['role_management_section']);
     }
     return apply_filters('betterdocs_settings_tab', array(
@@ -177,6 +217,12 @@ function betterdocs_settings_args(){
                             'priority' => 10,
                             'help'     => betterdocs_permalink_structure_tags(),
                         ),
+                        'enable_faq_schema' => array(
+                            'type'        => 'checkbox',
+                            'label'       => __('Enable FAQ Schema' , 'betterdocs'),
+                            'default'     => '',
+                            'priority'    => 10
+                        ),
                     ),
                 )),
 
@@ -213,6 +259,13 @@ function betterdocs_settings_args(){
                                     'priority'    => 10,
                                     'disable' => true,
                                 )),
+                                'child_category_exclude' => apply_filters( 'child_category_exclude' ,array(
+                                    'type'        => 'checkbox',
+                                    'label'       => __('Exclude Child Terms In Category Search' , 'betterdocs'),
+                                    'default'     => '',
+                                    'priority'    => 10,
+                                    'disable'     => true,
+                                )),
                                 'popular_keyword_limit' => apply_filters( 'betterdocs_popular_keyword_limit_settings', array(
                                     'type'        => 'number',
                                     'label'       => __('Minimum amount of Keywords Search' , 'betterdocs'),
@@ -220,6 +273,12 @@ function betterdocs_settings_args(){
                                     'priority'    => 10,
                                     'disable' => true,
                                 )),
+                                'search_letter_limit' =>  array(
+                                    'type'        => 'number',
+                                    'label'       => __('Minimum Character Limit For Search Result' , 'betterdocs'),
+                                    'default'     => 3,
+                                    'priority'    => 10,
+                                ),
                                 'search_placeholder' => array(
                                     'type'        => 'text',
                                     'label'       => __('Search Placeholder' , 'betterdocs'),
@@ -228,9 +287,9 @@ function betterdocs_settings_args(){
                                 ),
                                 'search_button_text' => apply_filters('betterdocs_search_button_text',array(
                                     'type'     => 'text',
-                                    'label'    => __('Search Button Text', 'betterdocs-pro'),
+                                    'label'    => __('Search Button Text', 'betterdocs'),
                                     'priority' => 10,
-                                    'default'  => esc_html__('Search','betterdocs-pro'),
+                                    'default'  => esc_html__('Search','betterdocs'),
                                     'disable'  => true
                                 )),
                                 'search_not_found_text' => array(
@@ -294,8 +353,8 @@ function betterdocs_settings_args(){
                                 'alphabetically_order_post' => array(
                                     'type'        => 'select',
                                     'label'       => __('Docs Order By' , 'betterdocs'),
-                                    'default'     =>  apply_filters('betterdocs_post_order_default', 'none'),
-                                    'options'     =>  apply_filters('betterdocs_post_order_options', array(
+                                    'default'     => 'betterdocs_order',
+                                    'options'     => array(
                                         'none'      => __('No order', 'betterdocs'),
                                         'ID'        => __('Post ID', 'betterdocs'),
                                         'author'    => __('Post Author', 'betterdocs'),
@@ -305,8 +364,9 @@ function betterdocs_settings_args(){
                                         'parent'    => __('Parent Id', 'betterdocs'),
                                         'rand'      => __('Random', 'betterdocs'),
                                         'comment_count' => __('Comment Count', 'betterdocs'),
-                                        'menu_order'    => __('Menu Order', 'betterdocs')
-                                    )),
+                                        'menu_order' => __('Menu Order', 'betterdocs'),
+                                        'betterdocs_order' => __('BetterDocs Order', 'betterdocs')
+                                    ),
                                     'priority'    => 10,
                                 ),
                                 'docs_order' => array(
@@ -331,15 +391,15 @@ function betterdocs_settings_args(){
                                     'default'   => 3,
                                     'priority'	=> 10
                                 ),
-                                'posts_number' => array(
+                                'posts_number' => apply_filters('betterdocs_posts_number',array(
                                     'type'      => 'number',
-                                    'label'     => __('Number of Posts' , 'betterdocs'),
+                                    'label'     => __('Number of Docs' , 'betterdocs'),
                                     'default'   => 10,
                                     'priority'	=> 10
-                                ),
+                                )),
                                 'post_count' => array(
                                     'type'        => 'checkbox',
-                                    'label'       => __('Enable Post Count' , 'betterdocs'),
+                                    'label'       => __('Enable Doc Count' , 'betterdocs'),
                                     'default'     => 1,
                                     'priority'    => 10,
                                 ),
@@ -395,7 +455,7 @@ function betterdocs_settings_args(){
                                     'priority'	=> 10,
                                     'dependency'  => array(
                                         1 => array(
-                                            'fields' => array( 'toc_title', 'enable_sticky_toc', 'toc_hierarchy', 'supported_heading_tag', 'toc_list_number' )
+                                            'fields' => array( 'toc_title', 'enable_sticky_toc', 'toc_hierarchy', 'supported_heading_tag', 'toc_list_number', 'title_link_ctc', 'toc_dynamic_title', 'collapsible_toc_mobile' )
                                         )
                                     ),
                                     'hide'  => array(
@@ -421,6 +481,12 @@ function betterdocs_settings_args(){
                                     'type'      => 'checkbox',
                                     'label'     => __('TOC List Number' , 'betterdocs'),
                                     'default'   => 1,
+                                    'priority'	=> 10
+                                ),
+                                'toc_dynamic_title' => array(
+                                    'type'      => 'checkbox',
+                                    'label'     => __('Show TOC Title in Anchor Links' , 'betterdocs'),
+                                    'default'   => 0,
                                     'priority'	=> 10
                                 ),
                                 'enable_sticky_toc' => array(
@@ -458,7 +524,7 @@ function betterdocs_settings_args(){
                                 ),
                                 'enable_post_title' => array(
                                     'type'      => 'checkbox',
-                                    'label'     => __('Enable Post Title' , 'betterdocs'),
+                                    'label'     => __('Enable Doc Title' , 'betterdocs'),
                                     'default'   => 1,
                                     'priority'	=> 10
                                 ),
@@ -693,6 +759,24 @@ function betterdocs_settings_args(){
                             'priority'	=> 10,
                             'help'      => __('<strong>You can use:</strong> [betterdocs_category_list post_type="docs" category="doc_category" orderby="" order="" masonry="" column="" posts_per_page="" nested_subcategory="" terms="" terms_orderby="" terms_order="" kb_slug="" multiple_knowledge_base="false" title_tag="h2"]' , 'betterdocs'),
                         ),
+                        'faq_modern_layout' => array(
+                            'type'      => 'text',
+                            'label'     => __('FAQ Layout - 1' , 'betterdocs'),
+                            'default'   => '[betterdocs_faq_list_modern]',
+                            'readonly'	=> true,
+                            'clipboard' => true,
+                            'priority'	=> 30,
+                            'help'      => __('<strong>You can use:</strong> [betterdocs_faq_list_modern groups="group_id" class="" group_exclude="group_id" faq_heading="Frequently Asked Questions" faq_schema="true"]' , 'betterdocs'),
+                        ),
+                        'faq_classic_layout' => array(
+                            'type'      => 'text',
+                            'label'     => __('FAQ Layout - 2' , 'betterdocs'),
+                            'default'   => '[betterdocs_faq_list_classic]',
+                            'readonly'	=> true,
+                            'clipboard' => true,
+                            'priority'	=> 30,
+                            'help'      => __('<strong>You can use:</strong> [betterdocs_faq_list_classic groups="group_id" class="" group_exclude="group_id" faq_heading="Frequently Asked Questions" faq_schema="true"]' , 'betterdocs'),
+                        )
                     )),
                 )),
             )),
@@ -702,6 +786,97 @@ function betterdocs_settings_args(){
             'priority'    => 20,
             'button_text' => __( 'Save Settings' ),
             'sections' => $advanced_settings
+        ),
+        'reporting' => array(
+            'title' => __( 'Email Reporting', 'betterdocs' ),
+            'priority' => 10,
+            'button_text' => __( 'Save Settings' ),
+            'sections' => apply_filters('betterdocs_reporting_settings_sections', array(
+                'reporting_settings' => apply_filters('betterdocs_reporting_settings', array(
+                    'title' => __( 'Reporting Settings', 'betterdocs' ),
+                    'priority' => 10,
+                    'fields'   => array(
+                        'enable_reporting'   => array(
+                            'name'     => 'enable_reporting',
+                            'label'    => __( 'Enable Reporting', 'betterdocs' ),
+                            'type'     => 'checkbox',
+                            'priority' => 0,
+                            'default'  => 0,
+                            'dependency'  => array(
+                                1 => array(
+                                    'fields' => array( 'reporting_frequency', 'reporting_day', 'reporting_email', 'reporting_subject', 'select_reporting_data', 'test_report' )
+                                )
+                            ),
+                        ),
+                        'reporting_frequency' => apply_filters( 'betterdocs_reporting_frequency_settings', array(
+                            'name'     => 'reporting_frequency',
+                            'type'     => 'select',
+                            'label'    => __( 'Reporting Frequency', 'betterdocs' ),
+                            'default'  => 'betterdocs_weekly',
+                            'priority' => 1,
+                            'disable'  => true,
+                            'options'  => array(
+                                'betterdocs_daily'   => __( 'Once Daily', 'betterdocs' ),
+                                'betterdocs_weekly'  => __( 'Once Weekly', 'betterdocs' ),
+                                'betterdocs_monthly' => __( 'Once Monthly', 'betterdocs' )
+                            ),
+                        )),
+                        'reporting_day'       => array(
+                            'name'        => 'reporting_day',
+                            'type'        => 'select',
+                            'label'       => __( 'Select Reporting Day', 'betterdocs' ),
+                            'default'     => 'monday',
+                            'priority'    => 2,
+                            'options'     => array(
+                                'sunday'    => __( 'Sunday', 'betterdocs' ),
+                                'monday'    => __( 'Monday', 'betterdocs' ),
+                                'tuesday'   => __( 'Tuesday', 'betterdocs' ),
+                                'wednesday' => __( 'Wednesday', 'betterdocs' ),
+                                'thursday'  => __( 'Thursday', 'betterdocs' ),
+                                'friday'    => __( 'Friday', 'betterdocs' ),
+                                'saturday'    => __( 'Saturday', 'betterdocs' ),
+                            ),
+                            'help'        => __('<strong>Note:</strong> This is only applicable for the <strong>“Weekly”</strong> report' , 'betterdocs'),
+                        ),
+                        'reporting_email'     => array(
+                            'name'     => 'reporting_email',
+                            'type'     => 'text',
+                            'label'    => __( 'Reporting Email', 'betterdocs' ),
+                            'default'  => get_option( 'admin_email' ),
+                            'priority' => 3
+                        ),
+                        'reporting_subject_updated'   => apply_filters( 'betterdocs_reporting_subject_settings', array(
+                            'name'     => 'reporting_subject',
+                            'type'     => 'text',
+                            'label'    => __( 'Reporting Email Subject', 'betterdocs' ),
+                            'default'  => wp_sprintf( '%s %s %s', __( 'Your Documentation Performance of', 'betterdocs' ),  get_bloginfo( 'name' ), __( 'Website', 'betterdocs' ) ),
+                            'priority' => 4,
+                            'disable'  => true
+                        )),
+                        'select_reporting_data'   => apply_filters( 'betterdocs_select_reporting_data_settings', array(
+                            'name'        => 'select_reporting_data',
+                            'type'        => 'select',
+                            'label'       => __('Select Reporting Data', 'betterdocs'),
+                            'priority'    => 1,
+                            'multiple' => true,
+                            'options' => array(
+                                'overview' => 'Overview',
+                                'top-docs' => 'Top Docs',
+                                'most-search' => 'Most Searched Keywords'
+                            ),
+                            'default' => array('overview', 'top-docs', 'most-search'),
+                            'disable'  => true
+                        )),
+                        'test_report'         => array(
+                            'name'     => 'test_report',
+                            'label'    => __( 'Reporting Test', 'betterdocs' ),
+                            'value'     => __( 'Test Report', 'betterdocs' ),
+                            'type'     => 'button',
+                            'priority' => 5,
+                        ),
+                    ),
+                )),
+            ))
         ),
         'betterdocs_instant_answer' => array(
             'title'       => __( 'Instant Answer', 'betterdocs' ),
@@ -720,7 +895,7 @@ function betterdocs_settings_args(){
                         'ia_description' => array(
                             'type' => 'html',
                             'priority' => 1,
-                            'html' => __( 'Display a list of articles or categories in a chat-like widget to give your visitors a chance of self-learning about your website.', 'betterdocs' )
+                            'html' => __( 'Display a list of docs or categories in a chat-like widget to give your visitors a chance of self-learning about your website.', 'betterdocs' )
                         ),
                         'enable_disable_free' => array(
                             'type' => 'checkbox',

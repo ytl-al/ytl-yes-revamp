@@ -238,6 +238,7 @@ color: #727f30; font-size: 18px; vertical-align: middle;
 <h2>Premium Version</h2>
 <p><i class="fa fa-check"></i> Don't miss out on any potential leads. Collect data in real time as it is entered on your forms.</p>
 <p><i class="fa fa-check"></i> Search field and Download CSV button for front end entries table.</p>
+<p><i class="fa fa-check"></i> Complete clickable links for file fields in front end entries table.</p>
 <p><i class="fa fa-check"></i> Compare daily entries, visitors and partial entries in graphical forms.</p>
 <p><i class="fa fa-check"></i> Google Analytics Parameters and Geolocation of a visitor who submitted the form.</p>
 <p><i class="fa fa-check"></i> Lead Scoring.</p>

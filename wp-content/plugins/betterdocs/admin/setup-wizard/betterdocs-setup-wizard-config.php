@@ -84,13 +84,13 @@ BetterDocsSetupWizard::setSection(array(
 					'title' => esc_html__('Create Categories', 'betterdocs'),
 					'url'	=> admin_url('edit-tags.php?taxonomy=doc_category&post_type=docs'),
 					'feature_title' => esc_html__('Create Categories', 'betterdocs'),
-					'feature_content' => sprintf( '%1$s %2$s', __( 'You can create Categories from ', 'betterdocs' ), '<strong>BetterDocs &gt; Categories</strong>' )
+					'feature_content' => sprintf( '%s %s &gt; <strong>%s</strong>', __( 'You can create Categories from', 'betterdocs' ), '<strong>BetterDocs</strong>', __( 'Categories', 'betterdocs' ) )
 				),
 				array(
 					'title' => esc_html__('Create Docs', 'betterdocs'),
 					'url'	=> admin_url('post-new.php?post_type=docs'),
 					'feature_title' => esc_html__('Create Docs', 'betterdocs'),
-					'feature_content' => sprintf( '%1$s %2$s', __( 'You can create Docs from ', 'betterdocs' ), '<strong>BetterDocs &gt; Add New</strong>' )
+					'feature_content' => sprintf( '%1$s %2$s %3$s', __( 'You can create Docs from ', 'betterdocs' ), '<strong>BetterDocs &gt;</strong>', __('Add New', 'betterdocs') )
 				)
 			]
 		),

@@ -496,6 +496,10 @@ main.site-main {
     border-radius: 100%;
 }
 
+.color-purple a {
+  background: #e8bcf0 !important;
+}
+
 .color-black a {
     background: #282524;
 }

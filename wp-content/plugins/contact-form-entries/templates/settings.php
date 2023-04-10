@@ -228,6 +228,7 @@ foreach($forms_arr as $k=>$v){
   <li><code>user-id</code> - <?php _e('show entries from specific user id , leave empty for logged in user (e.g., user-id="2" , user-id="")', 'contact-form-entries'); ?></li>
   <li><code>search</code> - <?php _e('Add search table field - premium feature (e.g., search="1")', 'contact-form-entries'); ?></li>
   <li><code>export</code> - <?php _e('Add search table field - premium feature (e.g., export="1")', 'contact-form-entries'); ?></li>
+  <li><code>thumb-cols</code> - <?php _e('comma separated column labels for showing images (e.g., thumb-cols="File 300") , you can set image width with "thumb-width" - premium feature ', 'contact-form-entries'); ?></li>
 
    <li> <p><strong><?php _e('Get ShortCode', 'contact-form-entries'); ?></strong></p>
  <p> 

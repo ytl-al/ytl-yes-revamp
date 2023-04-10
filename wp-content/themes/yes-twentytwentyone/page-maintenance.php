@@ -141,8 +141,9 @@
                     <div class="row justify-content-center align-content-center d-flex h-100">
                         <div class="col-12 col-lg-8 d-flex align-content-center justify-content-center flex-wrap ps-4 ps-lg-0 h-100">
                             <h1 class="mb-3 w-100" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">Stay tuned to unlock<br>infinite possibilities.</h1>
-                            <h2 class="mb-3 w-100" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">We are still available on our MyYes app in the mean time. Download MyYes app now on:</h2>
-                            <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
+							<h2 class="mb-3 w-100" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200" style="font-weight:700;">A new standard for unlimited will be introduced at 6pm so don’t miss out.</h2>
+                            <h2 class="mb-3 w-100" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">We are still available on our MyYes app in the mean time. Download MyYes app now on:</h2>
+                            <div data-aos="fade-up" data-aos-duration="500" data-aos-delay="400">
                                 <div class="row g-0">
                                     <div class="col-4">
                                         <a href="https://onelink.to/6e8tqc" target="_blank"><img src="https://cdn.yes.my/site/wp-content/uploads/2022/05/maintenance-googleplay-btn.png" alt="Google Play" class="me-3 img-fluid"></a>

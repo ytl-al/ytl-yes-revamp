@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         window.ymConfig = {
             bot: 'x1622800346254'
         };
@@ -54,7 +54,7 @@
                     w.attachEvent ? w.attachEvent("onload", l) : w.addEventListener("load", l, !1)
             }
         })();
-    </script>
+    </script> -->
 </footer>
 <!-- Footer ENDS -->
 

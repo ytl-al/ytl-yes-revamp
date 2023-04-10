@@ -10,7 +10,8 @@
     /**
      * Store search data to sessionStorage
      */
-    sessionStorage.setItem("betterdocs_search_data", betterdocspublic.search_keyword);
+    /*sessionStorage.setItem("betterdocs_search_data", betterdocspublic.search_keyword);
+    sessionStorage.setItem("search_not_found", betterdocspublic.search_not_found);*/
 
     // disable from submit on enter
     popularSearch.on("click", function(e) {
@@ -37,6 +38,17 @@
         let inputCat = thisEvent.parent('.betterdocs-searchform-input-wrap').siblings('.betterdocs-search-category').find(':selected').val();
         let resultWrapper = thisEvent.parent().parent(".betterdocs-searchform");
         let kbSlug = thisEvent.parent().parent('.betterdocs-searchform').find('.betterdocs-search-kbslug').val();
+
+        //Before the result is fetched, we have to remove the search result wrapper based on letter limit characters
+        if ( ! inputVal.length ) {
+          var nodeResults = thisEvent.parents(".betterdocs-live-search").find(".betterdocs-search-result-wrap");
+          if (nodeResults.length > 0) {
+            nodeResults.each(function (item) {
+              $(nodeResults[item]).remove();
+            });
+          }
+        }
+
         liveSearchAction(e, thisEvent, inputVal, inputCat, resultWrapper, kbSlug);
       });
     });
@@ -54,12 +66,12 @@
       let resultList = thisEvent.parent(".betterdocs-searchform").find(".betterdocs-search-result-wrap");
       let searchLoader = thisEvent.parent().find(".docs-search-loader");
       let searchClose = thisEvent.parent().find(".docs-search-close");
-      let search_keyword = sessionStorage.betterdocs_search_data;
+      let search_letter_limit = betterdocspublic.search_letter_limit;
       if (
           e.key != "a" &&
           e.keyCode != 17 &&
           e.keyCode != 91 &&
-          inputVal.length >= 3
+          inputVal.length >= search_letter_limit
       ) {
         delay(function() {
           ajaxLoad(
@@ -70,7 +82,7 @@
               resultList,
               searchLoader,
               searchClose,
-              search_keyword
+              thisEvent
           );
         }, 400);
       } else if (!inputVal.length) {
@@ -106,7 +118,7 @@
       resultList,
       searchLoader,
       searchClose,
-      search_keyword
+      inputEvent
     ) {
       if (request) {
         request.abort();
@@ -118,8 +130,7 @@
           action: "betterdocs_get_search_result",
           search_input: inputVal,
           search_cat: inputCat,
-          kb_slug: kbSlug,
-          search_data: search_keyword,
+          kb_slug: kbSlug
         },
         beforeSend: function() {
           searchLoader.show();
@@ -131,8 +142,23 @@
           resultList.remove();
           searchLoader.hide();
           searchClose.show();
+
+          let search_letter_limit = betterdocspublic.search_letter_limit;
+          var inputVal2 = inputEvent.val();
+
+          //After the result is fetched, we have to remove the search result wrapper
+          if( inputVal2.length < search_letter_limit ) {
+            var nodeResults = $(".betterdocs-live-search").find(".betterdocs-search-result-wrap");
+            if (nodeResults.length > 0) {
+              nodeResults.each(function (item) {
+                $(nodeResults[item]).slideUp(400);
+              });
+            }
+            searchClose.hide();
+            return;
+          }
+
           resultWrapper.append(response.data.post_lists);
-          sessionStorage.setItem("betterdocs_search_data", response.data.search_data);
         }
       });
     }
@@ -261,23 +287,25 @@
     var catHeading = $(
       ".betterdocs-sidebar-content .docs-single-cat-wrap .docs-cat-title-wrap"
     );
+
+    var active_subcategory = $('.docs-sub-cat.current-sub-cat');
+
     catList.hide();
 
     if (currentCatList.length) {
       currentCatList.show().addClass("show");
-      for(let child of currentCatList[0].children) {
-        //Arrow down only if selected post is from a nested sub category. This is for single post along with sidebar, and for single selected category
-        if( $(child).hasClass('docs-sub-cat') && $(child).hasClass('current-sub-cat') ) {
-          let right = child.previousElementSibling.children[0];
-          let down = child.previousElementSibling.children[1];
-          $(right).css('display', 'none');
-          $(down).css('display', 'inline');
-        }
-      }
     }
 
-    if (currentCatList.length) {
-      currentCatList.show().addClass("show");
+    /**
+     * This code toggles the nested subcat arrow to down direction if it is activated, this approach is from bottom to top
+     */
+    if( active_subcategory.length ) {
+      var subcat = $(active_subcategory);
+      while( subcat.attr('class') === 'docs-sub-cat' || subcat.attr('class') === 'docs-sub-cat current-sub-cat') {
+        subcat.prev().children('.toggle-arrow').toggle();
+        subcat.parent().css('display','block');
+        subcat = subcat.parent();
+      }
     }
 
     catHeading.click(function(e) {
@@ -567,5 +595,65 @@
         });
       })();
     }
+
+    //FAQ LOGIC
+    $('.betterdocs-faq-post').on('click', function(e) {
+      var current_node = $(this);
+      var active_list  = $('.betterdocs-faq-group.active');
+      
+      if( ! current_node.parent().hasClass('active') ) {
+        current_node.parent().addClass('active');
+        current_node.children('svg').toggle();
+        current_node.next().slideDown();
+      }
+
+      for( let node of active_list ) {
+          if( $(node).hasClass('active') ) {
+            $(node).removeClass('active');
+            $(node).children('.betterdocs-faq-post').children('svg').toggle();
+            $(node).children('.betterdocs-faq-main-content').slideUp();
+          }
+      }
+    });
+
+    //FAQ LOGIC 2 
+
+    $('.betterdocs-faq-post-layout-2').on('click', function(e) {
+      var current_node = $(this);
+
+      if( ! current_node.parent().hasClass('active') ) {
+        current_node.parent().addClass('active');
+        current_node.children('.betterdocs-faq-post-layout-2-icon-group').children('svg').toggle();
+        current_node.next().slideDown();
+      } else {
+        current_node.parent().removeClass('active');
+        current_node.children('.betterdocs-faq-post-layout-2-icon-group').children('svg').toggle();
+        current_node.next().slideUp();
+      }
+
+    });
+
+    $('.betterdocs-feelings').on( 'click', function( e ) {
+			e.preventDefault();
+			
+			var feelings = e.currentTarget.dataset.feelings;
+			if( betterdocspublic != undefined &&
+				betterdocspublic.FEEDBACK != undefined &&
+				betterdocspublic.FEEDBACK.DISPLAY != undefined &&
+				betterdocspublic.FEEDBACK.DISPLAY == true ) {
+				var URL = betterdocspublic.FEEDBACK.URL + '/' + betterdocspublic.post_id + '&feelings=' + feelings;
+				jQuery.ajax({
+					url : URL,
+					method : 'POST',
+					success : function( res ){
+						if(res === true) {
+							$('.betterdocs-article-reactions-heading,.betterdocs-article-reaction-links').fadeOut(1000);
+							$('.betterdocs-article-reactions').html('<p>'+betterdocspublic.FEEDBACK.SUCCESS+'</p>').fadeIn(1000);
+						}
+					}
+				});
+			}
+		});
+
   });
 })(jQuery);

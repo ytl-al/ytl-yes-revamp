@@ -7,9 +7,9 @@
             <div class="betterdocs-admin-sidebar-cta">
                 <?php     
                     if(class_exists('Betterdocs_Pro')) {
-                        printf( __( '<a rel="nofollow" href="%s" target="_blank">Manage License</a>', 'betterdocs' ), 'https://wpdeveloper.com/account' ); 
-                    }else{
-                        printf( __( '<a rel="nofollow" href="%s" target="_blank">Upgrade to Pro</a>', 'betterdocs' ), 'https://betterdocs.co/upgrade' );
+                        wp_sprintf( '<a rel="nofollow" href="%s" target="_blank">%s</a>', 'https://wpdeveloper.com/account', __( 'Manage License', 'betterdocs' ) );
+                    } else {
+                        wp_sprintf( '<a rel="nofollow" href="%s" target="_blank">%s</a>', 'https://betterdocs.co/upgrade', __( 'Upgrade to Pro', 'betterdocs' ) );
                     }
                 ?>
             </div>

@@ -273,7 +273,7 @@ class BetterDocs_Elementor_Title extends Widget_Base {
 
         $this->add_inline_editing_attributes('title');
 
-        $title = $settings['title'];
+        $title = esc_html($settings['title']);
 
         if (!empty($settings['link']['url'])) {
             $this->add_link_attributes('url', $settings['link']);

@@ -1063,18 +1063,27 @@ a.close-toc {
   align-items: center;
   cursor: pointer;
 }
+.betterdocs-article-reactions p {
+  margin: 0;
+  text-align: center;
+  width: 100%;
+}
+
 .betterdocs-article-reactions h5 {
   display: inline-block;
 }
+
 .betterdocs-article-reaction-links {
   margin: 0;
   padding: 0;
 }
+
 .betterdocs-article-reaction-links li {
   list-style: none;
   display: inline-table;
   margin: 0;
 }
+
 .betterdocs-article-reaction-links li a {
   display: inline-block;
   width: 29px;
@@ -1094,39 +1103,48 @@ a.close-toc {
   transition: all 0.2s ease-in-out;
   box-shadow: 0px 3px 10px 0px rgba(3, 29, 60, 0.15);
 }
+
 .betterdocs-article-reaction-links li a:hover {
   background-color: #fff;
 }
+
 .betterdocs-article-reaction-links li a svg {
   width: 15px;
   height: 15px;
 }
+
 .betterdocs-article-reaction-links li a svg path {
   fill: #fff;
 }
+
 .betterdocs-article-reaction-links li a:hover svg path {
   fill: #19ca9e;
 }
+
 .betterdocs-article-reactions,
 .betterdocs-social-share {
   display: flex;
   flex-flow: row wrap;
 }
+
 .betterdocs-article-reactions {
   padding: 2em;
   background-color: #fff;
   border-radius: 5px;
   justify-content: space-between;
 }
+
 .betterdocs-social-share .betterdocs-social-share-heading,
 .betterdocs-article-reactions .betterdocs-article-reactions-heading {
   flex: 0 0 auto;
 }
+
 .betterdocs-article-reactions .betterdocs-article-reactions-heading h5,
 .betterdocs-social-share .betterdocs-social-share-heading h5 {
   font-size: 1em;
   margin: 0;
 }
+
 .betterdocs-social-share {
   margin-top: 44px;
 }
@@ -1209,6 +1227,66 @@ a.close-toc {
   border-right: 1px solid #eff2f7;
   padding-right: 1px;
 }
+
+/*** Category Sidebar Layout 4 Css ***/
+.betterdocs-content-area .betterdocs-full-sidebar-left.sidebar-layout-4{
+  max-width: 400px;
+  width: 30%;
+  padding: 0;
+}
+
+.betterdocs-content-area .betterdocs-full-sidebar-left.sidebar-layout-4 .betterdocs-sidebar-content.betterdocs-category-sidebar .docs-single-cat-wrap .docs-cat-title-wrap.active-title{
+  background-color: transparent !important;
+	border: none !important;
+}
+
+.betterdocs-content-area .betterdocs-full-sidebar-left.sidebar-layout-4 .betterdocs-sidebar-content.betterdocs-category-sidebar .betterdocs-categories-wrap.category-grid .docs-single-cat-wrap .docs-cat-title-wrap .docs-cat-title-inner .cat-list-arrow-down{
+  display: block;
+  height: 15px;
+  width: 15px;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.betterdocs-content-area .betterdocs-full-sidebar-left.sidebar-layout-4 .betterdocs-sidebar-content.betterdocs-category-sidebar.betterdocs-height{
+  height: auto;
+}
+
+.betterdocs-content-area .betterdocs-full-sidebar-left.sidebar-layout-4.betterdocs-background{
+  height: fit-content;
+}
+/*** Category Sidebar Layout 4 Css ***/
+
+/*** Category Sidebar Layout 5 Css ***/
+.betterdocs-content-area .betterdocs-full-sidebar-left.sidebar-layout-5{
+  max-width: 400px;
+  width: 30%;
+  padding: 0;
+}
+
+.betterdocs-content-area .betterdocs-full-sidebar-left.sidebar-layout-5 .betterdocs-sidebar-content.betterdocs-category-sidebar .docs-single-cat-wrap .docs-cat-title-wrap.active-title{
+  background-color: transparent !important;
+	border: none !important;
+}
+
+.betterdocs-content-area .betterdocs-full-sidebar-left.sidebar-layout-5 .betterdocs-sidebar-content.betterdocs-category-sidebar .betterdocs-categories-wrap.category-grid .docs-single-cat-wrap .docs-cat-title-wrap .docs-cat-title-inner .cat-list-arrow-down{
+  display: block;
+  height: 15px;
+  width: 15px;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.betterdocs-content-area .betterdocs-full-sidebar-left.sidebar-layout-5 .betterdocs-sidebar-content.betterdocs-category-sidebar.betterdocs-height{
+  height: auto;
+}
+
+.betterdocs-content-area .betterdocs-full-sidebar-left.sidebar-layout-5.betterdocs-background{
+  height: fit-content;
+}
+
+.betterdocs-content-area .sidebar-layout-5{
+  box-shadow: 0px 8px 20px rgb(0 1 35 / 10%);
+}
+/*** Category Sidebar Layout 5 Css ***/
 
 .betterdocs-full-sidebar-right {
   grid-column: 11 / span 2;
@@ -1384,6 +1462,7 @@ betterdocs-single-layout5 .betterdocs-full-sidebar-left {
 }
 
 .grid-col-3 .docs-content-full-main {
+  width: inherit;
   grid-column: 4 / span 7;
 }
 
@@ -1467,6 +1546,8 @@ betterdocs-single-layout5 .betterdocs-full-sidebar-left {
 
 .betterdocs-single-layout4.betterdocs-single-wraper .docs-single-main {
   padding: 35px;
+  width: inherit;
+  width: -moz-available;
 }
 
 .betterdocs-single-layout4.betterdocs-single-wraper .betterdocs-full-sidebar-left {
@@ -1783,4 +1864,187 @@ body.single-docs .site-content > .ast-container,
     padding-bottom: 0 !important;
     padding-left: 0 !important;
   }
+}
+
+
+/** FAQ LAYOUT 1 CSS **/
+
+.betterdocs-faq-section-title {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #15063F;
+}
+
+.betterdocs-faq-main-wrapper-layout-1{
+  margin: 0px auto;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.betterdocs-faq-main-wrapper-layout-1 .betterdocs-faq-title h2 {
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 1.2;
+  color: #15063F;
+  padding: 20px 20px;
+  margin: 0;
+}
+
+.betterdocs-faq-main-wrapper-layout-1  .betterdocs-faq-list {
+  list-style: none;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 2em;
+  padding: 0px;
+  text-indent: 0;
+}
+
+.betterdocs-faq-main-wrapper-layout-1 .betterdocs-faq-list > li {
+  margin: 0px;
+  padding: 0px;
+  text-indent: 0;
+  list-style: none;
+  background: none;
+}
+
+.betterdocs-faq-main-wrapper-layout-1 .betterdocs-faq-list > li .betterdocs-faq-group.active .betterdocs-faq-post .betterdocs-faq-post-name {
+  color: #528ffe;
+}
+
+.betterdocs-faq-main-wrapper-layout-1 .betterdocs-faq-list > li .betterdocs-faq-group .betterdocs-faq-post {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 20px;
+  margin-bottom: 5px;
+  background-color: #f0f1f5;
+}
+
+.betterdocs-faq-main-wrapper-layout-1 .betterdocs-faq-list .betterdocs-faq-group {
+  margin-bottom: 5px;
+}
+
+.betterdocs-faq-main-wrapper-layout-1 .betterdocs-faq-list > li .betterdocs-faq-group .betterdocs-faq-post .betterdocs-faq-post-name{
+  font-size: 17px;
+  line-height: 1.2;
+  color: #2f3b48;
+  font-weight: 500;
+}
+
+.betterdocs-faq-main-wrapper-layout-1 .betterdocs-faq-group .betterdocs-faq-main-content {
+  display: none;
+  padding: 20px;
+  overflow: auto;
+  color: #7B7B7B;
+}
+
+.betterdocs-faq-main-wrapper-layout-1 .betterdocs-faq-group .betterdocs-faq-main-content {
+  background-color: #fbfcff;
+}
+
+.betterdocs-faq-main-wrapper-layout-1 .betterdocs-faq-list > li .betterdocs-faq-group .betterdocs-faq-post .betterdocs-faq-iconplus {
+  margin-left: 16px;
+  max-width: 30px;
+  max-height: 20px;
+  flex-shrink: 0;
+}
+
+.betterdocs-faq-main-wrapper-layout-1 .betterdocs-faq-list > li .betterdocs-faq-group .betterdocs-faq-post .betterdocs-faq-iconminus {
+  margin-left: 16px;
+  max-width: 30px;
+  max-height: 20px;
+  flex-shrink: 0;
+  display: none;
+}
+
+/** FAQ LAYOUT 2 CSS **/
+
+.betterdocs-faq-main-wrapper-layout-2 {
+  margin: 0px auto;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.betterdocs-faq-main-wrapper-layout-2 .betterdocs-faq-list-layout-2 {
+  padding: 0px;
+  margin: 0px;
+}
+
+.betterdocs-faq-main-wrapper-layout-2 .betterdocs-faq-list-layout-2 > li {
+  margin: 0px;
+  padding: 0px;
+  text-indent: 0;
+  list-style: none;
+  background: none;
+}
+
+.betterdocs-faq-main-wrapper-layout-2 .betterdocs-faq-title h2 {
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 1.2;
+  color: #15063F;
+  padding: 20px 20px;
+  margin: 0;
+}
+
+.betterdocs-faq-main-wrapper-layout-2 .betterdocs-faq-list > li .betterdocs-faq-group .betterdocs-faq-post-layout-2 .betterdocs-faq-post-name {
+  font-size: 17px;
+  line-height: 1.2;
+  color: #2f3b48;
+  font-weight: 500;
+}
+
+.betterdocs-faq-main-wrapper-layout-2 .betterdocs-faq-list-layout-2 > li .betterdocs-faq-group-layout-2 {
+  background: #fff;
+  box-shadow: 0px 3px 15px rgb(0 0 0 / 15%), 0 0 2px rgb(0 0 0 / 5%);
+  margin: 0 0 20px;
+  border-radius: 1px;
+}
+
+.betterdocs-faq-main-wrapper-layout-2 .betterdocs-faq-list-layout-2 > li .betterdocs-faq-group-layout-2 .betterdocs-faq-post-layout-2 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px 20px 20px 20px;
+  margin: 0px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.betterdocs-faq-main-wrapper-layout-2 .betterdocs-faq-list-layout-2 > li .betterdocs-faq-group-layout-2 .betterdocs-faq-post-layout-2 .betterdocs-faq-post-layout-2-icon-group {
+  padding: 5px 10px 0px 0px;
+  flex-shrink: 0;
+}
+
+.betterdocs-faq-main-wrapper-layout-2 .betterdocs-faq-list-layout-2 > li .betterdocs-faq-group-layout-2 .betterdocs-faq-post-layout-2 .betterdocs-faq-post-layout-2-icon-group .betterdocs-faq-iconplus-layout-2 {
+  height: 18px;
+  width: 18px;
+}
+
+.betterdocs-faq-main-wrapper-layout-2 .betterdocs-faq-list-layout-2 > li .betterdocs-faq-group-layout-2 .betterdocs-faq-post-layout-2 .betterdocs-faq-post-layout-2-icon-group .betterdocs-faq-iconminus-layout-2 {
+  height: 18px;
+  width: 18px;
+  display: none;
+}
+
+.betterdocs-faq-main-wrapper-layout-2 .betterdocs-faq-list-layout-2 > li .betterdocs-faq-group-layout-2 .betterdocs-faq-main-content-layout-2 {
+  display: none;
+  overflow: auto;
+  padding: 20px;
+}
+
+.betterdocs-faq-main-wrapper-layout-2 .betterdocs-faq-group-layout-2 .betterdocs-faq-post-layout-2 {
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.betterdocs-faq-main-wrapper-layout-2 .betterdocs-faq-group-layout-2.active .betterdocs-faq-post-layout-2 {
+  background-color: #f0f1f5;
 }

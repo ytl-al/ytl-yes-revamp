@@ -10,7 +10,13 @@ if(!empty($search)){
 if(!empty($export)){ ?><a class="vx_export_btn" href="?vx_crm_form_action=download_csv&vx_crm_key=<?php echo esc_html($export) ?>"><?php _e('Download CSV', 'contact-form-entries'); ?></a> <?php } ?>
  </p>
 <?php
-}
+} 
+$upload=vxcf_form::get_upload_dir();
+   $thumb_fields=array();   
+     if(!empty($atts['thumb-cols'])){
+     $thumb_fields=array_map('trim',array_map('strtolower',explode(',',$atts['thumb-cols'])));  
+     } 
+  $thumb_width='70';  if(!empty($atts['thumb-width'])){ $thumb_width=$atts['thumb-width']; } 
 ?>
  <table <?php echo $class.' '.$css ?> cellspacing="0" <?php echo esc_html($table_id) ?>>
   <thead>
@@ -70,17 +76,40 @@ $field_name=$field['name'].'_field';
 if($field['name'] == 'time'){
   $field['name']='created';  
 }
-
+if(isset($field['label'] ) && in_array( strtolower($field['label']),$thumb_fields)){
+$field['type']='thumb';          
+}
 $field_label='';
 if(isset($lead['detail'][$field_name])){
  $field_label=maybe_unserialize($lead['detail'][$field_name]);   
 
-if(is_array($field_label)){
-  $field_label=implode(', ',$field_label);  
-} }
+ }
 if($field['name'] == 'created' && !empty($lead['created'])){
    $field_label=strtotime($lead['created']); //+$offset
 $field_label= date('M-d-Y H:i:s',$field_label);   
+}
+if(isset($field['type']) && in_array($field['type'],array('file','thumb')) && !empty($field_label) && self::$is_pr){ 
+    if(!is_array($field_label)){
+        $field_label=array($field_label);
+    }
+ $file_urls=array();   
+foreach($field_label as $file_url){
+    $file_arr=explode('/',$file_url);
+$file_name=$file_arr[count($file_arr)-1];
+
+    if(filter_var($file_url,FILTER_VALIDATE_URL) === false){  
+  $field_label=$upload['url'].$file_url;     
+    } 
+   // echo $field_label;
+ if($field['type'] == 'thumb'){   
+$file_urls[]='<div class="vxcf_front_thumb" style="max-width:'.esc_attr($thumb_width).'px "> <img src="'.$field_label.'"></div>';    
+ }else{ 
+$file_urls[]='<a href="'.esc_url($field_label).'" target="_blank" class="vxcf_front_file_url">'.esc_attr($file_name)."</a>";     
+} }
+$field_label=implode("<br/>",$file_urls);
+}
+if(is_array($field_label)){
+  $field_label=implode(', ',$field_label);  
 }
 ?>
 <td><?php echo wp_kses_post($field_label); ?></td>
@@ -194,6 +223,10 @@ $field_label= date('M-d-Y H:i:s',$field_label);
         }
      ?>  
   <style type="text/css">
+  .vxcf_front_thumb img{
+      width:100%;
+      display: block;
+  }
   .vx_export_btn{
       float: right;
   }

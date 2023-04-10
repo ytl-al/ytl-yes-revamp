@@ -2,9 +2,9 @@
 /**
 * Plugin Name: Contact Form Entries
 * Description: Save form submissions to the database from <a href="https://wordpress.org/plugins/contact-form-7/">Contact Form 7</a>, <a href="https://wordpress.org/plugins/ninja-forms/">Ninja Forms</a>, <a href="https://elementor.com/widgets/form-widget/">Elementor Forms</a> and <a href="https://wordpress.org/plugins/wpforms-lite/">WP Forms</a>.
-* Version: 1.2.8
+* Version: 1.3.0
 * Requires at least: 3.8
-* Tested up to: 5.8
+* Tested up to: 6.2
 * Author URI: https://www.crmperks.com
 * Plugin URI: https://www.crmperks.com/plugins/contact-form-plugins/crm-perks-forms/
 * Author: CRM Perks
@@ -26,7 +26,7 @@ class vxcf_form {
   public static $type = "vxcf_form";
   public static $path = ''; 
 
-  public static  $version = '1.2.8';
+  public static  $version = '1.3.0';
   public static $upload_folder = 'crm_perks_uploads';
   public static $db_version='';  
   public static $base_url='';  
@@ -123,6 +123,9 @@ public  function setup_main(){
 //$this->create_entry();
 add_shortcode('vx-entries', array($this, 'entries_shortcode'));  
 
+$pro_file=self::$path . 'pro/pro.php';
+if(file_exists($pro_file)){ include_once($pro_file); self::$is_pr='1'; }
+
   if(is_admin()){
 load_plugin_textdomain('contact-form-entries', FALSE,  self::plugin_dir_name(). '/languages/' );     
   self::$db_version=get_option(vxcf_form::$type."_version");
@@ -155,8 +158,7 @@ $this->plugin_api(true);
 require_once(self::$path . "includes/crmperks-cf.php");
 require_once(self::$path . "includes/plugin-pages.php");   
 self::$pages=new vxcf_form_pages(); 
-$pro_file=self::$path . 'pro/pro.php';
-if(file_exists($pro_file)){ include_once($pro_file); self::$is_pr='1'; }
+
 $pro_file=self::$path . 'pro/add-ons.php';
 if(file_exists($pro_file)){ include_once($pro_file); }
 $pro_file=self::$path . 'wp/crmperks-notices.php';
@@ -228,9 +230,11 @@ $fields['created']=array('name'=>'created','_id'=>'created', 'label'=> __('Creat
   }
   
     if(!empty($atts['col-labels'])){
-     $col_labels=array_map('trim',array_map('strtolower',explode(',',$atts['col-labels'])));   
+     $col_labels=array_map('trim',array_map('strtolower',explode(',',$atts['col-labels'])));
+  
    if(is_array($fields) && count($fields)>0){
     foreach($fields as $k=>$v){ 
+
       if(isset($v['label'] ) && !in_array( strtolower($v['label']),$col_labels)){
       unset($fields[$k]);    
       }  
@@ -682,17 +686,21 @@ $uploaded_files=$this->copy_files($uploaded_files);
 }
 $form_title=$form->title();
 $tags=vxcf_form::get_form_fields('cf_'.$form_id); 
-
+$post_data=$submission->get_posted_data();
 
  $lead=array();
-if(is_array($tags)){
-  foreach($tags as $k=>$v){
-      $name=$v['name'];
-     
-$val=$submission->get_posted_data($name);
+if(is_array($post_data)){
+  foreach($post_data as $k=>$val){
+    if(in_array($k,array('vx_width','vx_height','vx_url'))){ continue; } 
+       if(isset($tags[$k])){
+          $v=$tags[$k];  //$v is empty for non form fields 
+      }
+     $name=$k;  //$v['name'] //if empty then $v is old
+
  if(isset($uploaded_files[$name])){
   $val=$uploaded_files[$name];
    }
+
    if( !empty($val) && isset($v['basetype']) && $v['basetype'] == 'mfile' && function_exists('dnd_get_upload_dir') ){
       $dir=dnd_get_upload_dir(); 
      $f_arr=array();
@@ -711,6 +719,7 @@ $val=$submission->get_posted_data($name);
   $lead[$k]=$val;          
   }  
 }
+
 
 $form_arr=array('id'=>$form_id,'name'=>$form_title,'fields'=>$tags);
 $this->create_entry($lead,$form_arr,'cf','',$track);
@@ -1417,7 +1426,10 @@ public function get_ip(){
 } else {
     $ip = $_SERVER['REMOTE_ADDR'];
 }
-//$ip='103.255.6.72';
+if(strpos($ip,',')!== false){
+    $a=explode(',',$ip);
+    if(isset($a[1])){ $ip=trim($a[1]);}
+}
 return $ip;
 }
 /**
@@ -2817,7 +2829,7 @@ $extra_keys=array('vxbrowser'=>'browser','vxurl'=>'url','vxscreen'=>'screen','vx
      /*  if(function_exists('mb_convert_encoding')){
        $val=mb_convert_encoding($val, 'UTF-8');
        } */
-      $_row[]=$val; 
+      $_row[]=self::esc_data($val); 
     
   }
 
@@ -2843,6 +2855,15 @@ if(is_array($var) && isset($var[0]) ){
     
 } 
 }
+public static function esc_data( $data ) {
+        $xls_chars = array( '=', '+', '-', '@' );
+
+        if (function_exists('mb_substr') && in_array( mb_substr( $data, 0, 1 ), $xls_chars, true ) ) {
+            $data = "'" . $data;
+        }
+
+        return $data;
+    }
 public function vx_id(){
       $vx_id='';
  if(!empty($_COOKIE['vx_user'])){

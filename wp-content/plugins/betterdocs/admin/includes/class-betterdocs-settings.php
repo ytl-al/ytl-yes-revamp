@@ -1,7 +1,7 @@
-<?php 
+<?php
 /**
  * This class is responsible for all settings things happening in Betterdocs Plugin
- * 
+ *
  * @link       https://wpdeveloper.com
  * @since      1.0.0
  *
@@ -13,7 +13,7 @@ class BetterDocs_Settings {
         add_action( 'betterdocs_settings_header', array( __CLASS__, 'header_template' ), 10 );
         add_action( 'wp_ajax_betterdocs_general_settings', array( __CLASS__, 'general_settings_ac' ), 10 );
     }
-    
+
     /**
      * This function is responsible for settings page header
      *
@@ -40,11 +40,6 @@ class BetterDocs_Settings {
         $new_fields = [];
 
         foreach( $settings as $setting ) {
-
-            // if( isset( $setting['fields'] ) ) {
-
-            // }
-
             $sections = isset( $setting['sections'] ) ? $setting['sections'] : [];
             if( ! empty( $sections ) ) {
                 foreach( $sections as $section ) {
@@ -101,6 +96,111 @@ class BetterDocs_Settings {
 
 		include_once BETTERDOCS_ADMIN_DIR_PATH . 'partials/betterdocs-settings-display.php';
 	}
+
+    /**
+     * Render the analytics page
+	 *
+     * @return void
+	 */
+    public static function analytics_page(){
+        /*$settings_args = self::settings_args();
+        $value = BetterDocs_DB::get_settings();
+
+		include_once BETTERDOCS_ADMIN_DIR_PATH . 'partials/betterdocs-settings-display.php';*/
+        ?>
+        <div class="betterdocs-settings-wrap">
+            <?php do_action( 'betterdocs_settings_header' ); ?>
+            <div class="betterdocs-left-right-settings">
+                <?php do_action( 'betterdocs_before_settings_left' ); ?>
+                <div class="betterdocs-settings">
+                    <div class="betterdocs-settings-menu">
+                        <ul>
+                            <li class="active" data-tab="overview"><a href="#overview"><?php esc_html_e('Overview', 'betterdocs'); ?></a></li>
+                            <li class="" data-tab="reactions"><a href="#reactions"><?php esc_html_e('Reactions', 'betterdocs'); ?></a></li>
+                            <li class="" data-tab="keyword_search"><a href="#keyword_search"><?php esc_html_e('Keyword Search', 'betterdocs'); ?></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="betterdocs-settings-content betterdocs-analytics-teaser">
+                        <div class="betterdocs-settings-content">
+                            <div class="betterdocs-settings-form-wrapper">
+                                <form method="post" id="betterdocs-settings-form" action="#">
+                                    <div id="betterdocs-overview" class="betterdocs-settings-tab active">
+                                        <img src="<?php echo plugins_url( '/', __FILE__ ).'../assets/img/analytics-overview.png'; ?>" alt="">
+                                        <div class="overlay">
+                                            <?php self::overlay_content() ?>
+                                        </div>
+                                    </div>
+                                    <div id="betterdocs-reactions" class="betterdocs-settings-tab">
+                                        <img src="<?php echo plugins_url( '/', __FILE__ ).'../assets/img/analytics-reactions.png'; ?>" alt="">
+                                        <div class="overlay">
+                                            <?php self::overlay_content() ?>
+                                        </div>
+                                    </div>
+                                    <div id="betterdocs-keyword_search" class="betterdocs-settings-tab">
+                                        <img src="<?php echo plugins_url( '/', __FILE__ ).'../assets/img/analytics-search.png'; ?>" alt="">
+                                        <div class="overlay">
+                                            <?php self::overlay_content() ?>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <?php //include BETTERDOCS_ADMIN_DIR_PATH . 'partials/betterdocs-settings-blocks.php'; ?>
+                </div>
+                <?php
+                do_action( 'betterdocs_after_settings_left' );
+                ?>
+            </div>
+        </div>
+<?php
+	}
+
+    /**
+     * Render the faq builder page
+	 *
+     * @return void
+	 */
+    public static function faq_page() {
+        ?>
+        <div class="betterdocs-settings-wrap">
+            <div id="betterdocsFaqBuilder"></div>
+        </div>
+<?php
+	}
+
+    public static function overlay_content() {
+        ?>
+        <div class="overlay-content">
+            <h3><?php esc_html_e('Unlock Analytics With BetterDocs PRO', 'betterdocs'); ?><img src="<?php echo plugins_url( '/', __FILE__ ).'../assets/img/analytics-lock.png'; ?>" id="img-teaser" alt=""></h3>
+            <p class="teaser-text teaser-desc"><?php esc_html_e('Scale your support tickets tracking the performance of your knowledge base BetterDocs Analytics.', 'betterdocs'); ?></p>
+            <ul class="analytics-list">
+                <li>
+                    <div class="analytics-item">
+                        <img src="<?php echo plugins_url( '/', __FILE__ ).'../assets/img/group-icon-1.png'; ?>" id="img-teaser-1" alt="">
+                        <p class="teaser-text"><?php esc_html_e('Measure performance of your knowledge base', 'betterdocs'); ?></p>
+                    </div>
+                </li>
+                <li>
+                    <div class="analytics-item">
+                        <img src="<?php echo plugins_url( '/', __FILE__ ).'../assets/img/analytics-magifier.png'; ?>" id="img-teaser-2" alt="">
+                        <p class="teaser-text"><?php esc_html_e('Identify most viewed docs and doc categories', 'betterdocs'); ?></p>
+                    </div>
+                </li>
+                <li>
+                    <div class="analytics-item">
+                        <img src="<?php echo plugins_url( '/', __FILE__ ).'../assets/img/analytics-globe.png'; ?>" id="img-teaser-4" alt="">
+                        <p class="teaser-text"><?php esc_html_e('Identify most used keywords searched by site visitors', 'betterdocs'); ?> </p>
+                    </div>
+                </li>
+            </ul>
+            <div class="analytics-upgrade-btn">
+                <a href="https://betterdocs.co/upgrade"><?php esc_html_e('Upgrade To BetterDocs PRO','betterdocs') ?></a>
+            </div>
+        </div>
+        <?php
+    }
     /**
      * This function is responsible for render settings field
      *
@@ -113,7 +213,7 @@ class BetterDocs_Settings {
         $name      = $key;
         $id        = BetterDocs_Metabox::get_row_id( $key );
         $file_name = isset( $field['type'] ) ? $field['type'] : 'text';
-        
+
         if( 'template' === $file_name ) {
             $default = isset( $field['defaults'] ) ? $field['defaults'] : [];
         } else {
@@ -127,7 +227,7 @@ class BetterDocs_Settings {
         } else {
             $value = $default;
         }
-        
+
         $class  = 'betterdocs-settings-field';
         $row_class = BetterDocs_Metabox::get_row_class( $file_name );
 
@@ -162,27 +262,35 @@ class BetterDocs_Settings {
         return false;
     }
 
+    public static function has_administrator( &$roles ){
+        if( $roles === 'off' || empty( $roles ) ) {
+            $roles = [ 'administrator' ];
+        }
+
+        if( ! is_array( $roles ) ) {
+            $roles = [ $roles ];
+        }
+
+        if( ! in_array( 'administrator', $roles, true ) ) {
+            $roles[] = 'administrator';
+        }
+
+        return array_unique( $roles );
+    }
+
     public static function get_selected_roles( $settings = array() ) {
         $article_roles   =  isset( $settings['article_roles'] ) ? $settings['article_roles'] : Betterdocs_DB::get_settings('article_roles') ;
         $settings_roles  =  isset( $settings['settings_roles'] ) ? $settings['settings_roles'] : Betterdocs_DB::get_settings('settings_roles');
         $analytics_roles =  isset( $settings['analytics_roles'] ) ? $settings['analytics_roles'] : BetterDocs_DB::get_settings('analytics_roles');
 
-        if( $analytics_roles == 'off' || empty( $analytics_roles ) ) {
-            $analytics_roles = array( 'administrator' );
-        }
-
-        if( $settings_roles == 'off' || empty( $settings_roles ) ) {
-            $settings_roles = array( 'administrator' );
-        }
-
-        if( $article_roles == 'off' || empty( $article_roles ) ) {
-            $article_roles = array( 'administrator' ); 
-        }
+        $article_roles   = self::has_administrator( $article_roles );
+        $settings_roles  = self::has_administrator( $settings_roles );
+        $analytics_roles = self::has_administrator( $analytics_roles );
 
         return array(
-            'article_roles'   => array_unique( array_merge( array( 'administrator' ), $article_roles ) ),
-            'settings_roles'  => array_unique( array_merge( array( 'administrator' ), $settings_roles ) ),
-            'analytics_roles' => array_unique( array_merge( array( 'administrator' ), $analytics_roles ) )
+            'article_roles'   => $article_roles,
+            'settings_roles'  => $settings_roles,
+            'analytics_roles' => $analytics_roles
         );
     }
 
@@ -190,9 +298,9 @@ class BetterDocs_Settings {
         if( empty( $settings ) ) {
             $settings = self::get_selected_roles();
         }
-     
+
         return array(
-            'write_docs' =>  array( 
+            'write_docs' =>  array(
                 'roles' => $settings['article_roles']
             ),
             'edit_docs_settings' => array(
@@ -205,7 +313,7 @@ class BetterDocs_Settings {
     }
 
     /**
-     * This function is responsible for 
+     * This function is responsible for
      * save all settings data, including checking the disable field to prevent
      * users manipulation.
      *
@@ -235,7 +343,7 @@ class BetterDocs_Settings {
         }
         $fields_keys = array_fill_keys( array_keys( $fields ), 'off' );
 
-        $builtin_doc_page = $new_posted_fields['builtin_doc_page'] ? $fields_keys['builtin_doc_page'] : '';
+        $builtin_doc_page = isset($new_posted_fields['builtin_doc_page']) ? $fields_keys['builtin_doc_page'] : '';
         $docs_slug = $new_posted_fields['docs_slug'];
         $docs_page = $new_posted_fields['docs_page'];
         if ($builtin_doc_page == 1 && $docs_slug) {
@@ -281,19 +389,19 @@ class BetterDocs_Settings {
                 }
             }
         }
-        
+
         $data            = array_merge( $fields_keys, $data );
         $roles_rechecked = self::get_selected_roles($data);
         $data            = array_merge( $data, $roles_rechecked );
 		BetterDocs_DB::update_settings( $data );
         do_action( 'bdocs_settings_saved', $data );
     }
-    
+
     public static function general_settings_ac(){
         /**
          * Verify the Nonce
          */
-        if ( ( ! isset( $_POST['nonce'] ) && ! isset( $_POST['key'] ) ) || ! 
+        if ( ( ! isset( $_POST['nonce'] ) && ! isset( $_POST['key'] ) ) || !
         wp_verify_nonce( $_POST['nonce'], 'betterdocs_'. $_POST['key'] .'_nonce' ) ) {
             return;
         }
@@ -367,8 +475,12 @@ class BetterDocs_Settings {
         $terms = array(
             'all' => 'All'
         );
-        foreach($get_terms as $key=>$value) {
-            $terms[$value->slug] = $value->name;
+        if (!empty($get_terms) && !is_wp_error($get_terms)) {
+            foreach($get_terms as $value) {
+                if (isset($value->slug) && isset($value->name)) {
+                    $terms[$value->slug] = $value->name;
+                }
+            }
         }
         return $terms;
     }

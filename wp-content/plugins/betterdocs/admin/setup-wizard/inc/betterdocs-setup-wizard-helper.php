@@ -15,10 +15,7 @@ if(!function_exists('betterdocs_setup_get_customizer_setting_url')){
 
 if(!function_exists('betterdocs_get_admin_settings_url')){
     function betterdocs_get_admin_settings_url(){
-        $settingUrl = 'edit.php?post_type=docs&page=betterdocs-settings';
-        if(class_exists('Betterdocs_Pro')){
-            $settingUrl = 'admin.php?page=betterdocs-settings';
-        }
+        $settingUrl = 'admin.php?page=betterdocs-settings';
         return esc_url( admin_url($settingUrl) );     
     }
 }

@@ -34,4 +34,56 @@ class BetterDocs_Activator {
 		BetterDocs_Settings::save_default_settings();
 	}
 
+    public static function search_migration() {
+        global $wpdb;
+        $search_data = get_option( 'betterdocs_search_data' );
+        if (!empty($search_data)) {
+            $search_data_arr = unserialize($search_data);
+            foreach ($search_data_arr as $key=>$value) {
+                $args = array(
+                    'post_type'      => 'docs',
+                    'post_status'      => 'publish',
+                    'posts_per_page'      => -1,
+                    'suppress_filters' => true,
+                    's' => $key
+                );
+
+                $loop = new WP_Query($args);
+                if ($loop->have_posts()) {
+                    $count = $value;
+                    $not_found_count = 0;
+                } else {
+                    $count = 0;
+                    $not_found_count = $value;
+                }
+                $insert = $wpdb->query(
+                    $wpdb->prepare(
+                        "INSERT INTO {$wpdb->prefix}betterdocs_search_keyword 
+                        ( keyword )
+                        VALUES ( %s )",
+                        array(
+                            $key
+                        )
+                    )
+                );
+
+                if ($insert) {
+                    $wpdb->query(
+                        $wpdb->prepare(
+                            "INSERT INTO {$wpdb->prefix}betterdocs_search_log
+                            (keyword_id, count, not_found_count, created_at)
+                            VALUES (%d, %d, %d, %s)",
+                            array(
+                                $wpdb->insert_id,
+                                $count,
+                                $not_found_count,
+                                date('Y-m-d')
+                            )
+                        )
+                    );
+                }
+            }
+            update_option( "betterdocs_search_data_migration", '1.0' );
+        }
+    }
 }

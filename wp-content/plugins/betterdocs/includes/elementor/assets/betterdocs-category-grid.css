@@ -43,6 +43,7 @@
   .el-betterdocs-cg-body ul li a {
     color: #566E8B;
     line-height: 1.8;
+	text-decoration: none !important;
   }
   .el-betterdocs-cg-body ul li .el-betterdocs-cg-post-list-icon {
     line-height: 1.8;
@@ -216,6 +217,7 @@
     -webkit-transition: 300ms;
     -o-transition: 300ms;
     transition: 300ms;
+	text-decoration: none !important;
   }
   .el-betterdocs-category-grid-post.layout-2 .el-betterdocs-cg-button:hover {
     color: #fc8c91;
@@ -227,93 +229,93 @@
     .elementor-element.elementor-grid-1 {
       position: relative;
     }
-  
+
     .elementor-element.elementor-grid-1 .el-betterdocs-category-grid-post {
       width: 100%;
       float: left;
     }
-  
+
     .elementor-element.elementor-grid-2 {
       position: relative;
     }
-  
+
     .elementor-element.elementor-grid-2 .el-betterdocs-category-grid-post {
       width: 50%;
       float: left;
     }
-  
+
     .elementor-element.elementor-grid-2 .el-betterdocs-category-grid-post:nth-of-type(2n) {
       margin-right: 0 !important;
     }
-  
+
     .elementor-element.elementor-grid-2 .el-betterdocs-category-grid-post:nth-of-type(2n + 1) {
       clear: left;
     }
-  
+
     .elementor-element.elementor-grid-3 {
       position: relative;
     }
-  
+
     .elementor-element.elementor-grid-3 .el-betterdocs-category-grid-post {
       width: 33.3333%;
       float: left;
     }
-  
+
     .elementor-element.elementor-grid-3 .el-betterdocs-category-grid-post:nth-of-type(3n) {
       margin-right: 0 !important;
     }
-  
+
     .elementor-element.elementor-grid-3 .el-betterdocs-category-grid-post:nth-of-type(3n + 1) {
       clear: left;
     }
-  
+
     .elementor-element.elementor-grid-4 {
       position: relative;
     }
-  
+
     .elementor-element.elementor-grid-4 .el-betterdocs-category-grid-post {
       width: 25%;
       float: left;
     }
-  
+
     .elementor-element.elementor-grid-4 .el-betterdocs-category-grid-post:nth-of-type(4n) {
       margin-right: 0 !important;
     }
-  
+
     .elementor-element.elementor-grid-4 .el-betterdocs-category-grid-post:nth-of-type(4n + 1) {
       clear: left;
     }
-  
+
     .elementor-element.elementor-grid-5 {
       position: relative;
     }
-  
+
     .elementor-element.elementor-grid-5 .el-betterdocs-category-grid-post {
       width: 20%;
       float: left;
     }
-  
+
     .elementor-element.elementor-grid-5 .el-betterdocs-category-grid-post:nth-of-type(5n) {
       margin-right: 0 !important;
     }
-  
+
     .elementor-element.elementor-grid-5 .el-betterdocs-category-grid-post:nth-of-type(5n + 1) {
       clear: left;
     }
-  
+
     .elementor-element.elementor-grid-6 {
       position: relative;
     }
-  
+
     .elementor-element.elementor-grid-6 .el-betterdocs-category-grid-post {
       width: 16%;
       float: left;
     }
-  
+
     .elementor-element.elementor-grid-6 .el-betterdocs-category-grid-post:nth-of-type(6n) {
       margin-right: 0 !important;
     }
-  
+
     .elementor-element.elementor-grid-6 .el-betterdocs-category-grid-post:nth-of-type(6n + 1) {
       clear: left;
     }
@@ -322,93 +324,93 @@
     .elementor-element.elementor-grid-tablet-1 {
       position: relative;
     }
-  
+
     .elementor-element.elementor-grid-tablet-1 .el-betterdocs-category-grid-post {
       width: 100%;
       float: left;
     }
-  
+
     .elementor-element.elementor-grid-tablet-2 {
       position: relative;
     }
-  
+
     .elementor-element.elementor-grid-tablet-2 .el-betterdocs-category-grid-post {
       width: 50%;
       float: left;
     }
-  
+
     .elementor-element.elementor-grid-tablet-2 .el-betterdocs-category-grid-post:nth-of-type(2n) {
       margin-right: 0 !important;
     }
-  
+
     .elementor-element.elementor-grid-tablet-2 .el-betterdocs-category-grid-post:nth-of-type(2n + 1) {
       clear: left;
     }
-  
+
     .elementor-element.elementor-grid-tablet-3 {
       position: relative;
     }
-  
+
     .elementor-element.elementor-grid-tablet-3 .el-betterdocs-category-grid-post {
       width: 33.3333%;
       float: left;
     }
-  
+
     .elementor-element.elementor-grid-tablet-3 .el-betterdocs-category-grid-post:nth-of-type(3n) {
       margin-right: 0 !important;
     }
-  
+
     .elementor-element.elementor-grid-tablet-3 .el-betterdocs-category-grid-post:nth-of-type(3n + 1) {
       clear: left;
     }
-  
+
     .elementor-element.elementor-grid-tablet-4 {
       position: relative;
     }
-  
+
     .elementor-element.elementor-grid-tablet-4 .el-betterdocs-category-grid-post {
       width: 25%;
       float: left;
     }
-  
+
     .elementor-element.elementor-grid-tablet-4 .el-betterdocs-category-grid-post:nth-of-type(4n) {
       margin-right: 0 !important;
     }
-  
+
     .elementor-element.elementor-grid-tablet-4 .el-betterdocs-category-grid-post:nth-of-type(4n + 1) {
       clear: left;
     }
-  
+
     .elementor-element.elementor-grid-tablet-5 {
       position: relative;
     }
-  
+
     .elementor-element.elementor-grid-tablet-5 .el-betterdocs-category-grid-post {
       width: 20%;
       float: left;
     }
-  
+
     .elementor-element.elementor-grid-tablet-5 .el-betterdocs-category-grid-post:nth-of-type(5n) {
       margin-right: 0 !important;
     }
-  
+
     .elementor-element.elementor-grid-tablet-5 .el-betterdocs-category-grid-post:nth-of-type(5n + 1) {
       clear: left;
     }
-  
+
     .elementor-element.elementor-grid-tablet-6 {
       position: relative;
     }
-  
+
     .elementor-element.elementor-grid-tablet-6 .el-betterdocs-category-grid-post {
       width: 16%;
       float: left;
     }
-  
+
     .elementor-element.elementor-grid-tablet-6 .el-betterdocs-category-grid-post:nth-of-type(6n) {
       margin-right: 0 !important;
     }
-  
+
     .elementor-element.elementor-grid-tablet-6 .el-betterdocs-category-grid-post:nth-of-type(6n + 1) {
       clear: left;
     }
@@ -417,93 +419,93 @@
     .elementor-element.elementor-grid-mobile-1 {
       position: relative;
     }
-  
+
     .elementor-element.elementor-grid-mobile-1 .el-betterdocs-category-grid-post {
-      width: 100%;
+      width: 100% !important;
       float: left;
     }
-  
+
     .elementor-element.elementor-grid-mobile-2 {
       position: relative;
     }
-  
+
     .elementor-element.elementor-grid-mobile-2 .el-betterdocs-category-grid-post {
       width: 50%;
       float: left;
     }
-  
+
     .elementor-element.elementor-grid-mobile-2 .el-betterdocs-category-grid-post:nth-of-type(2n) {
       margin-right: 0 !important;
     }
-  
+
     .elementor-element.elementor-grid-mobile-2 .el-betterdocs-category-grid-post:nth-of-type(2n + 1) {
       clear: left;
     }
-  
+
     .elementor-element.elementor-grid-mobile-3 {
       position: relative;
     }
-  
+
     .elementor-element.elementor-grid-mobile-3 .el-betterdocs-category-grid-post {
       width: 33.3333%;
       float: left;
     }
-  
+
     .elementor-element.elementor-grid-mobile-3 .el-betterdocs-category-grid-post:nth-of-type(3n) {
       margin-right: 0 !important;
     }
-  
+
     .elementor-element.elementor-grid-mobile-3 .el-betterdocs-category-grid-post:nth-of-type(3n + 1) {
       clear: left;
     }
-  
+
     .elementor-element.elementor-grid-mobile-4 {
       position: relative;
     }
-  
+
     .elementor-element.elementor-grid-mobile-4 .el-betterdocs-category-grid-post {
       width: 25%;
       float: left;
     }
-  
+
     .elementor-element.elementor-grid-mobile-4 .el-betterdocs-category-grid-post:nth-of-type(4n) {
       margin-right: 0 !important;
     }
-  
+
     .elementor-element.elementor-grid-mobile-4 .el-betterdocs-category-grid-post:nth-of-type(4n + 1) {
       clear: left;
     }
-  
+
     .elementor-element.elementor-grid-mobile-5 {
       position: relative;
     }
-  
+
     .elementor-element.elementor-grid-mobile-5 .el-betterdocs-category-grid-post {
       width: 20%;
       float: left;
     }
-  
+
     .elementor-element.elementor-grid-mobile-5 .el-betterdocs-category-grid-post:nth-of-type(5n) {
       margin-right: 0 !important;
     }
-  
+
     .elementor-element.elementor-grid-mobile-5 .el-betterdocs-category-grid-post:nth-of-type(5n + 1) {
       clear: left;
     }
-  
+
     .elementor-element.elementor-grid-mobile-6 {
       position: relative;
     }
-  
+
     .elementor-element.elementor-grid-mobile-6 .el-betterdocs-category-grid-post {
       width: 16%;
       float: left;
     }
-  
+
     .elementor-element.elementor-grid-mobile-6 .el-betterdocs-category-grid-post:nth-of-type(6n) {
       margin-right: 0 !important;
     }
-  
+
     .elementor-element.elementor-grid-mobile-6 .el-betterdocs-category-grid-post:nth-of-type(6n + 1) {
       clear: left;
     }
@@ -534,4 +536,3 @@
   margin-left: auto;
   margin-right: auto;
 }
-  

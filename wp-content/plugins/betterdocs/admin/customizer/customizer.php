@@ -25,6 +25,9 @@ function betterdocs_customize_register( $wp_customize ) {
 
 	// Get default customizer values
 	$defaults = betterdocs_get_option_defaults();
+	
+	// Nested Sucategory
+	$nested_subcategory = intval( BetterDocs_DB::get_settings('nested_subcategory') );
 
 	// Load custom controls
 	require_once( BETTERDOCS_ADMIN_DIR_PATH . 'customizer/controls.php' );
@@ -55,26 +58,37 @@ function betterdocs_customize_register( $wp_customize ) {
 			'priority' => 2,
 			'choices'		=> apply_filters('betterdocs_docs_layout_select_choices', array(
 				'layout-1' 	=> array(
+					'label' => esc_html__('Grid Layout', 'betterdocs'),
 					'image' => BETTERDOCS_ADMIN_URL . 'assets/img/docs-layout-1.png',
 				),
 				'layout-2' 	=> array(
+					'label' => esc_html__('Box Layout', 'betterdocs'),
 					'image' => BETTERDOCS_ADMIN_URL . 'assets/img/docs-layout-2.png',
 				),
 				'layout-3' 	=> array(
+					'label' => esc_html__('Card Layout', 'betterdocs'),
 					'image' => BETTERDOCS_ADMIN_URL . 'assets/img/docs-layout-3.png',
 					'pro' => true,
 					'url' => 'https://betterdocs.co/upgrade',
 				),
 				'layout-4' 	=> array(
+					'label' => esc_html__('Modern Layout', 'betterdocs'),
 					'image' => BETTERDOCS_ADMIN_URL . 'assets/img/docs-layout-4.png',
 					'pro' => true,
 					'url' => 'https://betterdocs.co/upgrade',
 				),
                 'layout-5' 	=> array(
+					'label' => esc_html__('Classic Layout', 'betterdocs'),
 					'image' => BETTERDOCS_ADMIN_URL . 'assets/img/docs-layout-5.png',
 					'pro' => true,
 					'url' => 'https://betterdocs.co/upgrade',
 				),
+				'layout-6' => array(
+					'label' => esc_html__('Handbook Layout', 'betterdocs'),
+					'image' => BETTERDOCS_ADMIN_URL . 'assets/img/docs-layout-6.png',
+					'pro' => true,
+					'url' => 'https://betterdocs.co/upgrade',
+				)
 			))
 		) )
 	);
@@ -1900,177 +1914,182 @@ function betterdocs_customize_register( $wp_customize ) {
 		),
 	) ) );
 
-	// Docs Subcategory Color
 
-	$wp_customize->add_setting( 'betterdocs_doc_page_article_subcategory_color' , array(
-		'default'     => $defaults['betterdocs_doc_page_article_subcategory_color'],
-		'capability'    => 'edit_theme_options',
-	    'transport'   => 'postMessage',
-	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
-	) );
+	/**** When Nested Category Is Enabled These Controllers Will Run ****/
+	if( $nested_subcategory ) {
 
-	$wp_customize->add_control(
-		new BetterDocs_Customizer_Alpha_Color_Control(
-		$wp_customize,
-		'betterdocs_doc_page_article_subcategory_color',
-		array(
-			'label'      => esc_html__('Docs Subcategory Color', 'betterdocs'),
-			'section'    => 'betterdocs_doc_page_settings',
-			'settings'   => 'betterdocs_doc_page_article_subcategory_color',
-			'priority' 	 => 44
-		) )
-	);
+		// Docs Subcategory Color
+		
+		$wp_customize->add_setting( 'betterdocs_doc_page_article_subcategory_color' , array(
+			'default'     => $defaults['betterdocs_doc_page_article_subcategory_color'],
+			'capability'    => 'edit_theme_options',
+			'transport'   => 'postMessage',
+			'sanitize_callback' => 'betterdocs_sanitize_rgba',
+		) );
 
-	// Docs Subcategory Hover Color
+		$wp_customize->add_control(
+			new BetterDocs_Customizer_Alpha_Color_Control(
+			$wp_customize,
+			'betterdocs_doc_page_article_subcategory_color',
+			array(
+				'label'      => esc_html__('Docs Subcategory Color', 'betterdocs'),
+				'section'    => 'betterdocs_doc_page_settings',
+				'settings'   => 'betterdocs_doc_page_article_subcategory_color',
+				'priority' 	 => 44
+			) )
+		);
 
-	$wp_customize->add_setting( 'betterdocs_doc_page_article_subcategory_hover_color' , array(
-		'default'     => $defaults['betterdocs_doc_page_article_subcategory_hover_color'],
-		'capability'    => 'edit_theme_options',
-	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
-	) );
+		// Docs Subcategory Hover Color
 
-	$wp_customize->add_control(
-		new BetterDocs_Customizer_Alpha_Color_Control(
-		$wp_customize,
-		'betterdocs_doc_page_article_subcategory_hover_color',
-		array(
-			'label'      => esc_html__('Docs Subcategory Hover Color', 'betterdocs'),
-			'section'    => 'betterdocs_doc_page_settings',
-			'settings'   => 'betterdocs_doc_page_article_subcategory_hover_color',
-			'priority' => 44
-		) )
-	);
+		$wp_customize->add_setting( 'betterdocs_doc_page_article_subcategory_hover_color' , array(
+			'default'     => $defaults['betterdocs_doc_page_article_subcategory_hover_color'],
+			'capability'    => 'edit_theme_options',
+			'sanitize_callback' => 'betterdocs_sanitize_rgba',
+		) );
 
-	// Docs Subcategory Font Size
+		$wp_customize->add_control(
+			new BetterDocs_Customizer_Alpha_Color_Control(
+			$wp_customize,
+			'betterdocs_doc_page_article_subcategory_hover_color',
+			array(
+				'label'      => esc_html__('Docs Subcategory Hover Color', 'betterdocs'),
+				'section'    => 'betterdocs_doc_page_settings',
+				'settings'   => 'betterdocs_doc_page_article_subcategory_hover_color',
+				'priority' => 44
+			) )
+		);
 
-	$wp_customize->add_setting( 'betterdocs_doc_page_article_subcategory_font_size', array(
-		'default'       => $defaults['betterdocs_doc_page_article_subcategory_font_size'],
-		'capability'    => 'edit_theme_options',
-		'transport' => 'postMessage',
-		'sanitize_callback' => 'betterdocs_sanitize_integer'
+		// Docs Subcategory Font Size
 
-	) );
+		$wp_customize->add_setting( 'betterdocs_doc_page_article_subcategory_font_size', array(
+			'default'       => $defaults['betterdocs_doc_page_article_subcategory_font_size'],
+			'capability'    => 'edit_theme_options',
+			'transport' => 'postMessage',
+			'sanitize_callback' => 'betterdocs_sanitize_integer'
 
-	$wp_customize->add_control( new BetterDocs_Customizer_Range_Value_Control(
-		$wp_customize, 'betterdocs_doc_page_article_subcategory_font_size', array(
-		'type'     => 'betterdocs-range-value',
-		'section'  => 'betterdocs_doc_page_settings',
-		'settings' => 'betterdocs_doc_page_article_subcategory_font_size',
-		'label'    => esc_html__('Docs Subcategory Font Size', 'betterdocs'),
-		'priority' => 44,
-		'input_attrs' => array(
-			'class'  => '',
-			'min'    => 0,
-			'max'    => 50,
-			'step'   => 1,
-			'suffix'  => 'px', //optional suffix
-		),
-	) ) );
+		) );
 
-	// Subcategory Icon Color
+		$wp_customize->add_control( new BetterDocs_Customizer_Range_Value_Control(
+			$wp_customize, 'betterdocs_doc_page_article_subcategory_font_size', array(
+			'type'     => 'betterdocs-range-value',
+			'section'  => 'betterdocs_doc_page_settings',
+			'settings' => 'betterdocs_doc_page_article_subcategory_font_size',
+			'label'    => esc_html__('Docs Subcategory Font Size', 'betterdocs'),
+			'priority' => 44,
+			'input_attrs' => array(
+				'class'  => '',
+				'min'    => 0,
+				'max'    => 50,
+				'step'   => 1,
+				'suffix'  => 'px', //optional suffix
+			),
+		) ) );
 
-	$wp_customize->add_setting( 'betterdocs_doc_page_subcategory_icon_color' , array(
-		'default'     => $defaults['betterdocs_doc_page_subcategory_icon_color'],
-		'capability'    => 'edit_theme_options',
-	    'transport'   => 'postMessage',
-	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
-	) );
+		// Subcategory Icon Color
 
-	$wp_customize->add_control(
-		new BetterDocs_Customizer_Alpha_Color_Control(
-		$wp_customize,
-		'betterdocs_doc_page_subcategory_icon_color',
-		array(
-			'label'      => esc_html__('Subcategory Icon Color', 'betterdocs'),
-			'section'    => 'betterdocs_doc_page_settings',
-			'settings'   => 'betterdocs_doc_page_subcategory_icon_color',
-			'priority' => 44
-		) )
-	);
+		$wp_customize->add_setting( 'betterdocs_doc_page_subcategory_icon_color' , array(
+			'default'     => $defaults['betterdocs_doc_page_subcategory_icon_color'],
+			'capability'    => 'edit_theme_options',
+			'transport'   => 'postMessage',
+			'sanitize_callback' => 'betterdocs_sanitize_rgba',
+		) );
 
-	// Subcategory Icon Font Size
+		$wp_customize->add_control(
+			new BetterDocs_Customizer_Alpha_Color_Control(
+			$wp_customize,
+			'betterdocs_doc_page_subcategory_icon_color',
+			array(
+				'label'      => esc_html__('Subcategory Icon Color', 'betterdocs'),
+				'section'    => 'betterdocs_doc_page_settings',
+				'settings'   => 'betterdocs_doc_page_subcategory_icon_color',
+				'priority' => 44
+			) )
+		);
 
-	$wp_customize->add_setting( 'betterdocs_doc_page_subcategory_icon_font_size', array(
-		'default'       => $defaults['betterdocs_doc_page_subcategory_icon_font_size'],
-		'capability'    => 'edit_theme_options',
-		'transport' => 'postMessage',
-		'sanitize_callback' => 'betterdocs_sanitize_integer'
+		// Subcategory Icon Font Size
 
-	) );
+		$wp_customize->add_setting( 'betterdocs_doc_page_subcategory_icon_font_size', array(
+			'default'       => $defaults['betterdocs_doc_page_subcategory_icon_font_size'],
+			'capability'    => 'edit_theme_options',
+			'transport' => 'postMessage',
+			'sanitize_callback' => 'betterdocs_sanitize_integer'
 
-	$wp_customize->add_control( new BetterDocs_Customizer_Range_Value_Control(
-		$wp_customize, 'betterdocs_doc_page_subcategory_icon_font_size', array(
-		'type'     => 'betterdocs-range-value',
-		'section'  => 'betterdocs_doc_page_settings',
-		'settings' => 'betterdocs_doc_page_subcategory_icon_font_size',
-		'label'    => esc_html__('Subcategory Icon Font Size', 'betterdocs'),
-		'priority' => 44,
-		'input_attrs' => array(
-			'class'  => '',
-			'min'    => 0,
-			'max'    => 50,
-			'step'   => 1,
-			'suffix' => 'px', //optional suffix
-		),
-	) ) );
+		) );
 
-	// Docs List Color
+		$wp_customize->add_control( new BetterDocs_Customizer_Range_Value_Control(
+			$wp_customize, 'betterdocs_doc_page_subcategory_icon_font_size', array(
+			'type'     => 'betterdocs-range-value',
+			'section'  => 'betterdocs_doc_page_settings',
+			'settings' => 'betterdocs_doc_page_subcategory_icon_font_size',
+			'label'    => esc_html__('Subcategory Icon Font Size', 'betterdocs'),
+			'priority' => 44,
+			'input_attrs' => array(
+				'class'  => '',
+				'min'    => 0,
+				'max'    => 50,
+				'step'   => 1,
+				'suffix' => 'px', //optional suffix
+			),
+		) ) );
 
-	$wp_customize->add_setting( 'betterdocs_doc_page_subcategory_article_list_color' , array(
-		'default'     => $defaults['betterdocs_doc_page_subcategory_article_list_color'],
-		'capability'    => 'edit_theme_options',
-	    'transport'   => 'postMessage',
-	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
-	) );
+		// Docs List Color
 
-	$wp_customize->add_control(
-		new BetterDocs_Customizer_Alpha_Color_Control(
-		$wp_customize,
-		'betterdocs_doc_page_subcategory_article_list_color',
-		array(
-			'label'      => esc_html__('Subcategory Docs List Color', 'betterdocs'),
-			'section'    => 'betterdocs_doc_page_settings',
-			'settings'   => 'betterdocs_doc_page_subcategory_article_list_color',
-			'priority' 	 => 44,
-		) )
-	);
+		$wp_customize->add_setting( 'betterdocs_doc_page_subcategory_article_list_color' , array(
+			'default'     => $defaults['betterdocs_doc_page_subcategory_article_list_color'],
+			'capability'    => 'edit_theme_options',
+			'transport'   => 'postMessage',
+			'sanitize_callback' => 'betterdocs_sanitize_rgba',
+		) );
 
-	$wp_customize->add_setting( 'betterdocs_doc_page_subcategory_article_list_hover_color' , array(
-		'default'     => $defaults['betterdocs_doc_page_subcategory_article_list_hover_color'],
-		'capability'    => 'edit_theme_options',
-	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
-	) );
+		$wp_customize->add_control(
+			new BetterDocs_Customizer_Alpha_Color_Control(
+			$wp_customize,
+			'betterdocs_doc_page_subcategory_article_list_color',
+			array(
+				'label'      => esc_html__('Subcategory Docs List Color', 'betterdocs'),
+				'section'    => 'betterdocs_doc_page_settings',
+				'settings'   => 'betterdocs_doc_page_subcategory_article_list_color',
+				'priority' 	 => 44,
+			) )
+		);
 
-	$wp_customize->add_control(
-		new BetterDocs_Customizer_Alpha_Color_Control(
-		$wp_customize,
-		'betterdocs_doc_page_subcategory_article_list_hover_color',
-		array(
-			'label'      => esc_html__('Subcategory List Hover Color', 'betterdocs'),
-			'section'    => 'betterdocs_doc_page_settings',
-			'settings'   => 'betterdocs_doc_page_subcategory_article_list_hover_color',
-			'priority' 	 => 44
-		) )
-	);
-	
-	$wp_customize->add_setting( 'betterdocs_doc_page_subcategory_article_list_icon_color' , array(
-		'default'     => $defaults['betterdocs_doc_page_subcategory_article_list_icon_color'],
-		'capability'    => 'edit_theme_options',
-	    'transport'   => 'postMessage',
-	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
-	) );
+		$wp_customize->add_setting( 'betterdocs_doc_page_subcategory_article_list_hover_color' , array(
+			'default'     => $defaults['betterdocs_doc_page_subcategory_article_list_hover_color'],
+			'capability'    => 'edit_theme_options',
+			'sanitize_callback' => 'betterdocs_sanitize_rgba',
+		) );
 
-	$wp_customize->add_control(
-		new BetterDocs_Customizer_Alpha_Color_Control(
-		$wp_customize,
-		'betterdocs_doc_page_subcategory_article_list_icon_color',
-		array(
-			'label'      => esc_html__('Subcategory List Icon Color', 'betterdocs'),
-			'section'    => 'betterdocs_doc_page_settings',
-			'settings'   => 'betterdocs_doc_page_subcategory_article_list_icon_color',
-			'priority' 	 => 44
-		) )
-	);
+		$wp_customize->add_control(
+			new BetterDocs_Customizer_Alpha_Color_Control(
+			$wp_customize,
+			'betterdocs_doc_page_subcategory_article_list_hover_color',
+			array(
+				'label'      => esc_html__('Subcategory List Hover Color', 'betterdocs'),
+				'section'    => 'betterdocs_doc_page_settings',
+				'settings'   => 'betterdocs_doc_page_subcategory_article_list_hover_color',
+				'priority' 	 => 44
+			) )
+		);
+		
+		$wp_customize->add_setting( 'betterdocs_doc_page_subcategory_article_list_icon_color' , array(
+			'default'     => $defaults['betterdocs_doc_page_subcategory_article_list_icon_color'],
+			'capability'    => 'edit_theme_options',
+			'transport'   => 'postMessage',
+			'sanitize_callback' => 'betterdocs_sanitize_rgba',
+		) );
+
+		$wp_customize->add_control(
+			new BetterDocs_Customizer_Alpha_Color_Control(
+			$wp_customize,
+			'betterdocs_doc_page_subcategory_article_list_icon_color',
+			array(
+				'label'      => esc_html__('Subcategory List Icon Color', 'betterdocs'),
+				'section'    => 'betterdocs_doc_page_settings',
+				'settings'   => 'betterdocs_doc_page_subcategory_article_list_icon_color',
+				'priority' 	 => 44
+			) )
+		);
+	}
 
 	// Explore More Button
 
@@ -2592,23 +2611,34 @@ function betterdocs_customize_register( $wp_customize ) {
 			'priority'   => 102,
 			'choices'		=> apply_filters('betterdocs_single_layout_select_choices', array(
 				'layout-1' 	=> array(
+					'label' => esc_html__('Classic Layout', 'betterdocs'),
 					'image' => BETTERDOCS_ADMIN_URL . 'assets/img/single-layout-1.png',
 				),
                 'layout-4' 	=> array(
+					'label' => esc_html__('Abstract Layout', 'betterdocs'),
                     'image' => BETTERDOCS_ADMIN_URL . 'assets/img/single-layout-4.png',
-                    'pro' => false
+                    'pro' 	=> false
                 ),
                 'layout-5' 	=> array(
+					'label' => esc_html__('Modern Layout', 'betterdocs'),
                     'image' => BETTERDOCS_ADMIN_URL . 'assets/img/single-layout-5.png',
-                    'pro' => false
+                    'pro' 	=> false
                 ),
 				'layout-2' 	=> array(
+					'label' => esc_html__('Minimalist Layout', 'betterdocs'),
 					'image' => BETTERDOCS_ADMIN_URL . 'assets/img/single-layout-2.png',
 					'pro' => true,
 					'url' => 'https://betterdocs.co/upgrade',
 				),
 				'layout-3' 	=> array(
+					'label' => esc_html__('Artisan Layout', 'betterdocs'),
 					'image' => BETTERDOCS_ADMIN_URL . 'assets/img/single-layout-3.png',
+					'pro' => true,
+					'url' => 'https://betterdocs.co/upgrade',
+				),
+				'layout-6' 	=> array(
+					'label' => esc_html__('Bohemian Layout', 'betterdocs'),
+					'image' => BETTERDOCS_ADMIN_URL . 'assets/img/single-layout-6.png',
 					'pro' => true,
 					'url' => 'https://betterdocs.co/upgrade',
 				),
@@ -2636,6 +2666,163 @@ function betterdocs_customize_register( $wp_customize ) {
 			'priority'   => 103
 		) )
 	);
+
+	// Column Background Image(Single Docs)
+
+	$wp_customize->add_setting( 'betterdocs_doc_single_content_area_bg_image' , array(
+		'default'    => $defaults['betterdocs_doc_single_content_area_bg_image'],
+		'capability' => 'edit_theme_options',
+		'transport'  => 'postMessage'
+	) );
+
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+		$wp_customize,
+		'betterdocs_doc_single_content_area_bg_image',
+		array(
+			'label'    => esc_html__('Background Image', 'betterdocs'),
+			'section'  => 'betterdocs_single_docs_settings',
+			'settings' => 'betterdocs_doc_single_content_area_bg_image',
+			'priority' => 103
+		) )
+	);
+
+	// Background property(Single Docs)
+
+	$wp_customize->add_setting( 'betterdocs_doc_single_content_bg_property', array(
+		'default'       	=> $defaults['betterdocs_doc_single_content_bg_property'],
+		'capability'    	=> 'edit_theme_options',
+		'transport' 		=> 'postMessage',
+		'sanitize_callback' => 'betterdocs_sanitize_select'
+
+	) );
+
+	$wp_customize->add_control( new BetterDocs_Title_Custom_Control(
+		$wp_customize, 'betterdocs_doc_single_content_bg_property', array(
+		'type'     => 'betterdocs-title',
+		'section'  => 'betterdocs_single_docs_settings',
+		'settings' => 'betterdocs_doc_single_content_bg_property',
+		'priority' => 103,
+		'label'    => esc_html__('Background Property', 'betterdocs'),
+		'input_attrs' => array(
+			'id' => 'betterdocs_doc_single_content_bg_property',
+			'class' => 'betterdocs-select',
+		),
+	) ) );
+
+	$wp_customize->add_setting( 'betterdocs_doc_single_content_bg_property_size', array(
+		'default'       	=> $defaults['betterdocs_doc_single_content_bg_property_size'],
+		'capability'    	=> 'edit_theme_options',
+		'transport' 		=> 'postMessage',
+		'sanitize_callback' => 'betterdocs_sanitize_select'
+
+	) );
+
+	$wp_customize->add_control( new BetterDocs_Select_Control(
+		$wp_customize, 'betterdocs_doc_single_content_bg_property_size', array(
+		'type'     => 'betterdocs-select',
+		'section'  => 'betterdocs_single_docs_settings',
+		'settings' => 'betterdocs_doc_single_content_bg_property_size',
+		'priority' => 103,
+		'label'    => esc_html__('Size', 'betterdocs'),
+		'input_attrs' => array(
+			'class' => 'betterdocs_doc_single_content_bg_property betterdocs-select',
+		),
+		'choices'  => array(
+			'auto'   	=> esc_html__('auto', 'betterdocs'),
+			'length'   	=> esc_html__('length', 'betterdocs'),
+			'cover'   	=> esc_html__('cover', 'betterdocs'),
+			'contain'   => esc_html__('contain', 'betterdocs'),
+			'initial'   => esc_html__('initial', 'betterdocs'),
+			'inherit'   => esc_html__('inherit', 'betterdocs')
+		)
+	) ) );
+	
+	$wp_customize->add_setting( 'betterdocs_doc_single_content_bg_property_repeat', array(
+		'default'       	=> $defaults['betterdocs_doc_single_content_bg_property_repeat'],
+		'capability'    	=> 'edit_theme_options',
+		'transport' 		=> 'postMessage',
+		'sanitize_callback' => 'betterdocs_sanitize_select'
+
+	) );
+
+	$wp_customize->add_control( new BetterDocs_Select_Control(
+		$wp_customize, 'betterdocs_doc_single_content_bg_property_repeat', array(
+		'type'     => 'betterdocs-select',
+		'section'  => 'betterdocs_single_docs_settings',
+		'settings' => 'betterdocs_doc_single_content_bg_property_repeat',
+		'priority' => 103,
+		'label'    => esc_html__('Repeat', 'betterdocs'),
+		'input_attrs' => array(
+			'class' => 'betterdocs_doc_single_content_bg_property betterdocs-select',
+		),
+		'choices'  => array(
+			'no-repeat' => esc_html__('no-repeat', 'betterdocs'),
+			'initial'   => esc_html__('initial', 'betterdocs'),
+			'inherit'   => esc_html__('inherit', 'betterdocs'),
+			'repeat'   	=> esc_html__('repeat', 'betterdocs'),
+			'repeat-x'  => esc_html__('repeat-x', 'betterdocs'),
+			'repeat-y'  => esc_html__('repeat-y', 'betterdocs')
+		)
+	) ) );
+
+	$wp_customize->add_setting( 'betterdocs_doc_single_content_bg_property_attachment', array(
+		'default'       => $defaults['betterdocs_doc_single_content_bg_property_attachment'],
+		'capability'    => 'edit_theme_options',
+		'transport' => 'postMessage',
+		'sanitize_callback' => 'betterdocs_sanitize_select'
+
+	) );
+
+	$wp_customize->add_control( new BetterDocs_Select_Control(
+		$wp_customize, 'betterdocs_doc_single_content_bg_property_attachment', array(
+		'type'     => 'betterdocs-select',
+		'section'  => 'betterdocs_single_docs_settings',
+		'settings' => 'betterdocs_doc_single_content_bg_property_attachment',
+		'priority' => 103,
+		'label'    => esc_html__('Attachment', 'betterdocs'),
+		'input_attrs' => array(
+			'class' => 'betterdocs_doc_single_content_bg_property betterdocs-select',
+		),
+		'choices'  => array(
+			'initial' 	=> esc_html__('initial', 'betterdocs'),
+			'inherit'   => esc_html__('inherit', 'betterdocs'),
+			'scroll'   	=> esc_html__('scroll', 'betterdocs'),
+			'fixed'  	=> esc_html__('fixed', 'betterdocs'),
+			'local'  	=> esc_html__('local', 'betterdocs'),
+		)
+	) ) );
+
+	$wp_customize->add_setting( 'betterdocs_doc_single_content_bg_property_position', array(
+		'default'       => $defaults['betterdocs_doc_single_content_bg_property_position'],
+		'capability'    => 'edit_theme_options',
+		'transport' => 'postMessage',
+		'sanitize_callback' => 'esc_html'
+
+	) );
+
+	$wp_customize->add_control( new BetterDocs_Select_Control(
+		$wp_customize, 'betterdocs_doc_single_content_bg_property_position', array(
+		'type'     => 'betterdocs-select',
+		'section'  => 'betterdocs_single_docs_settings',
+		'settings' => 'betterdocs_doc_single_content_bg_property_position',
+		'priority' => 103,
+		'label'    => esc_html__('Position', 'betterdocs'),
+		'input_attrs' => array(
+			'class' => 'betterdocs_doc_single_content_bg_property betterdocs-select',
+		),
+		'choices'  => array(
+			'left top'   	  => esc_html__('left top', 'betterdocs'),
+			'left center'     => esc_html__('left center', 'betterdocs'),
+			'left bottom'     => esc_html__('left bottom', 'betterdocs'),
+			'right top' 	  => esc_html__('right top', 'betterdocs'),
+			'right center'    => esc_html__('right center', 'betterdocs'),
+			'right bottom'    => esc_html__('right bottom', 'betterdocs'),
+			'center top'      => esc_html__('center top', 'betterdocs'),
+			'center center'   => esc_html__('center center', 'betterdocs'),
+			'center bottom'   => esc_html__('center bottom', 'betterdocs')
+		)
+	) ) );
 
 	$wp_customize->add_setting( 'betterdocs_doc_single_content_area_padding', array(
 		'default'       => $defaults['betterdocs_doc_single_content_area_padding'],
@@ -5484,11 +5671,67 @@ function betterdocs_customize_register( $wp_customize ) {
     );
 
 	// Archive Page
-
 	$wp_customize->add_section( 'betterdocs_archive_page_settings' , array(
-		'title'      => esc_html__('Archive Page','betterdocs'),
+		'title'      => esc_html__('Category Archive','betterdocs'),
 		'priority'   => 400
 	) );
+
+	/**
+	 * 
+	 * Archive Layout Select & This Controller Is Used To Change The Only Sidebar Layouts(1, 2, 3, 4, 5) Of Category Template Layout 1 
+	 * & This Controller Is Applied To Category Archive Layout 6 available in doc-category-templates/category-template-2.php(File)
+	 * 
+	 **/  
+	$wp_customize->add_setting( 'betterdocs_archive_layout_select' , array(
+		'default'     		=> $defaults['betterdocs_archive_layout_select'],
+		'capability'    	=> 'edit_theme_options',
+	    'sanitize_callback' => 'betterdocs_sanitize_select',
+	) );
+
+	$wp_customize->add_control(
+		new BetterDocs_Radio_Image_Control(
+			$wp_customize,
+			'betterdocs_archive_layout_select',
+			array(
+				'type'     		=> 'betterdocs-radio-image',
+				'settings'		=> 'betterdocs_archive_layout_select',
+				'section'		=> 'betterdocs_archive_page_settings',
+				'label'			=> esc_html__('Select Category Archive Layout', 'betterdocs'),
+				'choices'		=> apply_filters('betterdocs_archive_layout_choices', array(
+					'layout-1' 	=> array(
+						'label' => esc_html__('Classic Layout', 'betterdocs'),
+						'image' => BETTERDOCS_ADMIN_URL . 'assets/img/sidebar-layout-1.png',
+					),
+					'layout-4' 	=> array(
+						'label' => esc_html__('Abstract Layout', 'betterdocs'),
+						'image' => BETTERDOCS_ADMIN_URL . 'assets/img/sidebar-layout-4.png',
+					),
+					'layout-5' 	=> array(
+						'label' => esc_html__('Modern Layout', 'betterdocs'),
+						'image' => BETTERDOCS_ADMIN_URL . 'assets/img/sidebar-layout-5.png',
+					),
+					'layout-2' 	=> array(
+						'label' => esc_html__('Memphis Layout', 'betterdocs'),
+						'image' => BETTERDOCS_ADMIN_URL . 'assets/img/sidebar-layout-2.png',
+						'pro' => true,
+						'url' => 'https://betterdocs.co/upgrade',
+					),
+					'layout-3' 	=> array(
+						'label' => esc_html__('Neoclassic Layout', 'betterdocs'),
+						'image' => BETTERDOCS_ADMIN_URL . 'assets/img/sidebar-layout-3.png',
+						'pro' => true,
+						'url' => 'https://betterdocs.co/upgrade',
+					),
+					'layout-6' 	=> array(
+						'label' => esc_html__('Handbook Layout', 'betterdocs'),
+						'image' => BETTERDOCS_ADMIN_URL . 'assets/img/docs-cat-layout-6.png',
+						'pro' 	=> true,
+						'url' 	=> 'https://betterdocs.co/upgrade'
+					)
+				))
+			)
+		)
+	);
 
 	// Archive Background Color
 
@@ -5656,6 +5899,50 @@ function betterdocs_customize_register( $wp_customize ) {
 			'center center'   => esc_html__('center center', 'betterdocs'),
 			'center bottom'   => esc_html__('center bottom', 'betterdocs')
 		)
+	) ) );
+
+	// Content Area Width
+	$wp_customize->add_setting( 'betterdocs_archive_content_area_width', array(
+		'default'       	=> $defaults['betterdocs_archive_content_area_width'],
+		'capability'    	=> 'edit_theme_options',
+		'transport' 		=> 'postMessage',
+		'sanitize_callback' => 'betterdocs_sanitize_integer'
+	) );
+
+	$wp_customize->add_control( new BetterDocs_Customizer_Range_Value_Control(
+		$wp_customize, 'betterdocs_archive_content_area_width', array(
+		'type'     => 'betterdocs-range-value',
+		'section'  => 'betterdocs_archive_page_settings',
+		'settings' => 'betterdocs_archive_content_area_width',
+		'label'    => esc_html__('Content Area Width', 'betterdocs'),
+		'input_attrs' => array(
+			'min'    => 0,
+			'max'    => 100,
+			'step'   => 1,
+			'suffix' => '%', //optional suffix
+		),
+	) ) );
+
+	// Content Area Max Width
+	$wp_customize->add_setting( 'betterdocs_archive_content_area_max_width', array(
+		'default'       	=> $defaults['betterdocs_archive_content_area_max_width'],
+		'capability'    	=> 'edit_theme_options',
+		'transport' 		=> 'postMessage',
+		'sanitize_callback' => 'betterdocs_sanitize_integer'
+	) );
+
+	$wp_customize->add_control( new BetterDocs_Customizer_Range_Value_Control(
+		$wp_customize, 'betterdocs_archive_content_area_max_width', array(
+		'type'     => 'betterdocs-range-value',
+		'section'  => 'betterdocs_archive_page_settings',
+		'settings' => 'betterdocs_archive_content_area_max_width',
+		'label'    => esc_html__('Content Area Maximum Width', 'betterdocs'),
+		'input_attrs' => array(
+			'min'    => 0,
+			'max'    => 3000,
+			'step'   => 1,
+			'suffix' => 'px', //optional suffix
+		),
 	) ) );
 
 	// Archive Content Area
@@ -6640,6 +6927,36 @@ function betterdocs_customize_register( $wp_customize ) {
         )
 	);
 
+	// Live Search Heading Tag 
+
+	$wp_customize->add_setting( 'betterdocs_live_search_heading_tag', array(
+		'default'       	=> $defaults['betterdocs_live_search_heading_tag'],
+		'capability'    	=> 'edit_theme_options',
+		'sanitize_callback' => 'betterdocs_sanitize_select'
+	) );
+
+	$wp_customize->add_control(
+        new WP_Customize_Control(
+            $wp_customize,
+            'betterdocs_live_search_heading_tag',
+            array(
+                'label'      => esc_html__('Heading Tags', 'betterdocs'),
+                'section'    => 'betterdocs_live_search_settings',
+                'settings'   => 'betterdocs_live_search_heading_tag',
+                'type'    	 => 'select',
+                'choices' => array(
+                    'h1'  => 'h1',
+                    'h2'  => 'h2',
+                    'h3'  => 'h3',
+                    'h4'  => 'h4',
+                    'h5'  => 'h5',
+                    'h6'  => 'h6'
+                ),
+                'priority' 	 => 502
+            ) 
+		)
+    );
+
 	// Search Field Font Size
 
 	$wp_customize->add_setting( 'betterdocs_live_search_heading_font_size', array(
@@ -6804,6 +7121,36 @@ function betterdocs_customize_register( $wp_customize ) {
             )
         )
 	);
+
+		// Live Search Sub-Heading Tag 
+
+		$wp_customize->add_setting( 'betterdocs_live_search_subheading_tag', array(
+			'default'       	=> $defaults['betterdocs_live_search_subheading_tag'],
+			'capability'    	=> 'edit_theme_options',
+			'sanitize_callback' => 'betterdocs_sanitize_select'
+		) );
+	
+		$wp_customize->add_control(
+			new WP_Customize_Control(
+				$wp_customize,
+				'betterdocs_live_search_subheading_tag',
+				array(
+					'label'      => esc_html__('Sub Heading Tags', 'betterdocs'),
+					'section'    => 'betterdocs_live_search_settings',
+					'settings'   => 'betterdocs_live_search_subheading_tag',
+					'type'    	 => 'select',
+					'choices' => array(
+						'h1'  => 'h1',
+						'h2'  => 'h2',
+						'h3'  => 'h3',
+						'h4'  => 'h4',
+						'h5'  => 'h5',
+						'h6'  => 'h6'
+					),
+					'priority' 	 => 507
+				) 
+			)
+		);
 
 	$wp_customize->add_setting( 'betterdocs_live_search_subheading_font_size', array(
 		'default'       	=> $defaults['betterdocs_live_search_subheading_font_size'],
@@ -8060,8 +8407,827 @@ function betterdocs_customize_register( $wp_customize ) {
 		) )
 	);
 
-	
+	// Reactions Separator
 
+    $wp_customize->add_setting('betterdocs_reactions_title', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_html',
+    ));
+
+    $wp_customize->add_control(new BetterDocs_Separator_Custom_Control(
+		$wp_customize, 'betterdocs_reactions_title', array(
+		'label' => __('Reactions', 'betterdocs'),
+		'priority'   => 159,
+        'settings' => 'betterdocs_reactions_title',
+        'section' => 'betterdocs_single_docs_settings',
+	)));
+
+	// Post Reactions
+
+	$wp_customize->add_setting('betterdocs_post_reactions', array(
+        'default' => $defaults['betterdocs_post_reactions'],
+        'capability' => 'edit_theme_options',
+        'sanitize_callback' => 'betterdocs_sanitize_checkbox',
+    ));
+
+    $wp_customize->add_control(new BetterDocs_Customizer_Toggle_Control(
+		$wp_customize, 'betterdocs_post_reactions', array(
+		'label' => esc_html__('Enable Reactions?', 'betterdocs'),
+		'priority'   => 160,
+        'section' => 'betterdocs_single_docs_settings',
+        'settings' => 'betterdocs_post_reactions',
+        'type' => 'light', // light, ios, flat
+    )));
+
+    $wp_customize->add_setting('betterdocs_post_reactions_text', array(
+		'default' => $defaults['betterdocs_post_reactions_text'],
+		'capability'    => 'edit_theme_options',
+        'sanitize_callback' => 'esc_html',
+    ));
+
+    $wp_customize->add_control(
+        new WP_Customize_Control(
+            $wp_customize,
+            'betterdocs_post_reactions_text',
+            array(
+				'label' => __('Reactions Title', 'betterdocs'),
+				'priority'   => 161,
+                'section' => 'betterdocs_single_docs_settings',
+                'settings' => 'betterdocs_post_reactions_text',
+                'type' => 'text',
+            )
+        )
+	);
+	
+	// Reactions Text Color
+
+	$wp_customize->add_setting( 'betterdocs_post_reactions_text_color' , array(
+		'default'     => $defaults['betterdocs_post_reactions_text_color'],
+		'capability'    => 'edit_theme_options',
+	    'transport'   => 'postMessage',
+	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
+	) );
+
+	$wp_customize->add_control(
+		new BetterDocs_Customizer_Alpha_Color_Control(
+		$wp_customize,
+		'betterdocs_post_reactions_text_color',
+		array(
+			'label'      => __( 'Reactions Text Color', 'betterdocs' ),
+			'priority'   => 162,
+			'section'    => 'betterdocs_single_docs_settings',
+			'settings'   => 'betterdocs_post_reactions_text_color',
+		) )
+	);
+
+	// Reactions Icon Color
+
+	$wp_customize->add_setting( 'betterdocs_post_reactions_icon_color' , array(
+		'default'     => $defaults['betterdocs_post_reactions_icon_color'],
+		'capability'    => 'edit_theme_options',
+	    'transport'   => 'postMessage',
+	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
+	) );
+
+	$wp_customize->add_control(
+		new BetterDocs_Customizer_Alpha_Color_Control(
+		$wp_customize,
+		'betterdocs_post_reactions_icon_color',
+		array(
+			'label'      => __( 'Reactions Icon Background Color', 'betterdocs' ),
+			'priority'   => 163,
+			'section'    => 'betterdocs_single_docs_settings',
+			'settings'   => 'betterdocs_post_reactions_icon_color',
+		) )
+	);
+	
+	$wp_customize->add_setting( 'betterdocs_post_reactions_icon_svg_color' , array(
+		'default'     => $defaults['betterdocs_post_reactions_icon_svg_color'],
+		'capability'    => 'edit_theme_options',
+	    'transport'   => 'postMessage',
+	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
+	) );
+
+	$wp_customize->add_control(
+		new BetterDocs_Customizer_Alpha_Color_Control(
+		$wp_customize,
+		'betterdocs_post_reactions_icon_svg_color',
+		array(
+			'label'      => __( 'Reactions Icon Color', 'betterdocs' ),
+			'priority'   => 163,
+			'section'    => 'betterdocs_single_docs_settings',
+			'settings'   => 'betterdocs_post_reactions_icon_svg_color',
+		) )
+	);
+	
+	$wp_customize->add_setting( 'betterdocs_post_reactions_icon_hover_bg_color' , array(
+		'default'     => $defaults['betterdocs_post_reactions_icon_hover_bg_color'],
+		'capability'    => 'edit_theme_options',
+	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
+	) );
+
+	$wp_customize->add_control(
+		new BetterDocs_Customizer_Alpha_Color_Control(
+		$wp_customize,
+		'betterdocs_post_reactions_icon_hover_bg_color',
+		array(
+			'label'      => __( 'Reactions Icon Hover Background Color', 'betterdocs' ),
+			'priority'   => 163,
+			'section'    => 'betterdocs_single_docs_settings',
+			'settings'   => 'betterdocs_post_reactions_icon_hover_bg_color',
+		) )
+	);
+	
+	$wp_customize->add_setting( 'betterdocs_post_reactions_icon_hover_svg_color' , array(
+		'default'     => $defaults['betterdocs_post_reactions_icon_hover_svg_color'],
+		'capability'    => 'edit_theme_options',
+	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
+	) );
+
+	$wp_customize->add_control(
+		new BetterDocs_Customizer_Alpha_Color_Control(
+		$wp_customize,
+		'betterdocs_post_reactions_icon_hover_svg_color',
+		array(
+			'label'      => __( 'Reactions Icon Hover Color', 'betterdocs' ),
+			'priority'   => 163,
+			'section'    => 'betterdocs_single_docs_settings',
+			'settings'   => 'betterdocs_post_reactions_icon_hover_svg_color',
+		) )
+	);
+
+	// FAQ Section
+
+	$wp_customize->add_section( 'betterdocs_faq_section' , array(
+		'title'      => esc_html__('FAQ','betterdocs'),
+		'priority'   => 600
+	) );
+
+	$wp_customize->add_setting('betterdocs_faq_section_seperator', array(
+		'default'           => $defaults['betterdocs_faq_section_seperator'],
+		'sanitize_callback' => 'esc_html',
+	));
+
+	$wp_customize->add_control(new BetterDocs_Separator_Custom_Control(
+		$wp_customize, 'betterdocs_faq_section_seperator', array(
+		'label'	    => esc_html__('Docs Page FAQ', 'betterdocs'),
+		'settings'	=> 'betterdocs_faq_section_seperator',
+		'section'  	=> 'betterdocs_faq_section',
+		'priority'  => 624
+	)));
+
+	// FAQ Controls
+	$wp_customize->add_setting( 'betterdocs_faq_switch', array(
+		'default'    => $defaults['betterdocs_faq_switch'],
+		'capability' => 'edit_theme_options',
+	) );
+
+	$wp_customize->add_control( new BetterDocs_Customizer_Toggle_Control( 
+		$wp_customize, 
+		'betterdocs_faq_switch', array(
+		'label' 	 => esc_html__('Enable FAQ', 'betterdocs'),
+        'section' 	 => 'betterdocs_faq_section',
+        'settings'   => 'betterdocs_faq_switch',
+        'type' 		 => 'light', // light, ios, flat
+        'priority' 	 => 625
+	)));
+
+	// Select Specific FAQ
+	$wp_customize->add_setting( 'betterdocs_select_specific_faq' , array(
+		'default'           => $defaults['betterdocs_select_specific_faq'],
+		'capability'        => 'edit_theme_options',
+	) );
+	
+	$wp_customize->add_control(
+        new WP_Customize_Control(
+            $wp_customize,
+            'betterdocs_select_specific_faq',
+            array(
+                'label'      => esc_html__('Select FAQ Groups', 'betterdocs'),
+                'section'    => 'betterdocs_faq_section',
+                'settings'   => 'betterdocs_select_specific_faq',
+                'type'       => 'select',
+                'choices'    => BetterDocs_Helper::faq_term_list(),
+                'priority' 	 => 626
+            ) )
+    );
+
+	$wp_customize->add_setting( 'betterdocs_select_faq_template' , array(
+		'default'     		=> $defaults['betterdocs_select_faq_template'],
+		'capability'   	 	=> 'edit_theme_options',
+	    'sanitize_callback' => 'betterdocs_sanitize_select',
+	) );
+
+	$wp_customize->add_control(
+		new BetterDocs_Radio_Image_Control(
+		$wp_customize,
+		'betterdocs_select_faq_template',
+		array(
+			'type'     		=> 'betterdocs-radio-image',
+			'settings'		=> 'betterdocs_select_faq_template',
+			'section'		=> 'betterdocs_faq_section',
+			'label'			=> esc_html__('Select FAQ Layout', 'betterdocs'),
+			'priority' 		=> 627,
+			'choices'		=> array(
+				'layout-1' 	=> array(
+					'label' => esc_html__('Modern Layout', 'betterdocs'),
+					'image' => BETTERDOCS_ADMIN_URL . 'assets/img/faq-layout-1.png',
+				),
+				'layout-2' 	=> array(
+					'label' => esc_html__('Classic Layout', 'betterdocs'),
+					'image' => BETTERDOCS_ADMIN_URL . 'assets/img/faq-layout-2.png',
+				)
+			)
+		) )
+	);
+
+	$wp_customize->add_setting('betterdocs_faq_title_text', array(
+		'default' => $defaults['betterdocs_faq_title_text'],
+		'capability'    => 'edit_theme_options',
+        'sanitize_callback' => 'esc_html',
+    ));
+
+    $wp_customize->add_control(
+        new WP_Customize_Control(
+            $wp_customize,
+            'betterdocs_faq_title_text',
+            array(
+				'label' => __('Section Title Text', 'betterdocs'),
+                'section' => 'betterdocs_faq_section',
+				'priority' 	 => 628,
+                'settings' => 'betterdocs_faq_title_text',
+                'type' => 'text',
+            )
+        )
+	);
+
+	// FAQ Title Color
+
+	$wp_customize->add_setting('betterdocs_faq_title_margin', array(
+        'default' 			=> $defaults['betterdocs_faq_title_margin'],
+        'transport' 		=> 'postMessage',
+		'capability'    	=> 'edit_theme_options',
+    ));
+
+    $wp_customize->add_control(
+        new BetterDocs_Multi_Dimension_Control(
+            $wp_customize,
+            'betterdocs_faq_title_margin',
+            array(
+                'label' => __('FAQ Section Title Margin (PX)', 'betterdocs'),
+                'section' => 'betterdocs_faq_section',
+                'settings' => 'betterdocs_faq_title_margin',
+                'priority' => 629,
+                'input_fields' => array(
+                    'input1'   	=> __( 'top', 'betterdocs' ),
+                    'input2'   	=> __( 'right', 'betterdocs' ),
+                    'input3'   	=> __( 'bottom', 'betterdocs' ),
+                    'input4'   	=> __( 'left', 'betterdocs' ),
+				),
+				'defaults' => array(
+                    'input1'  	=> 0,
+                    'input2'  	=> 0,
+                    'input3'  	=> 0,
+                    'input4'  	=> 0,
+                )
+            ))
+    );
+	
+	// FAQ Title Color
+
+	$wp_customize->add_setting( 'betterdocs_faq_title_color' , array(
+		'default'       	=> $defaults['betterdocs_faq_title_color'],
+		'capability'    	=> 'edit_theme_options',
+	    'transport'   		=> 'postMessage',
+	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
+	) );
+
+	$wp_customize->add_control(
+		new BetterDocs_Customizer_Alpha_Color_Control(
+		$wp_customize,
+		'betterdocs_faq_title_color',
+		array(
+			'label'      => __( 'Section Title Color', 'betterdocs' ),
+			'section'    => 'betterdocs_faq_section',
+			'settings'   => 'betterdocs_faq_title_color',
+			'priority' 	 => 630,
+		) )
+	);
+
+	// Entry Content Font Size
+
+	$wp_customize->add_setting( 'betterdocs_faq_title_font_size', array(
+		'default'       	=> $defaults['betterdocs_faq_title_font_size'],
+		'capability'    	=> 'edit_theme_options',
+		'transport' 		=> 'postMessage',
+		'sanitize_callback' => 'betterdocs_sanitize_integer'
+	) );
+
+	$wp_customize->add_control( new BetterDocs_Customizer_Range_Value_Control(
+		$wp_customize, 'betterdocs_faq_title_font_size', array(
+		'type'     => 'betterdocs-range-value',
+		'section'  => 'betterdocs_faq_section',
+		'settings' => 'betterdocs_faq_title_font_size',
+		'label'    => esc_html__('Section Title Font Size', 'betterdocs'),
+		'priority' 	 => 631,
+		'input_attrs' => array(
+			'class'  => '',
+			'min'    => 0,
+			'max'    => 50,
+			'step'   => 1,
+			'suffix' => 'px', // optional suffix
+		),
+	) ) );
+
+	
+	// FAQ Title Color
+	$wp_customize->add_setting( 'betterdocs_faq_category_title_color' , array(
+		'default'     		=> $defaults['betterdocs_faq_category_title_color'],
+		'capability'    	=> 'edit_theme_options',
+	    'transport'   		=> 'postMessage',
+	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
+	) );
+
+	$wp_customize->add_control(
+		new BetterDocs_Customizer_Alpha_Color_Control(
+		$wp_customize,
+		'betterdocs_faq_category_title_color',
+		array(
+			'label'      => __( 'Group Title Color', 'betterdocs' ),
+			'section'    => 'betterdocs_faq_section',
+			'priority' 	 => 632,
+			'settings'   => 'betterdocs_faq_category_title_color',
+		) )
+	);
+
+	// Entry Content Font Size
+
+	$wp_customize->add_setting( 'betterdocs_faq_category_name_font_size', array(
+		'default'       	=> $defaults['betterdocs_faq_category_name_font_size'],
+		'capability'    	=> 'edit_theme_options',
+		'transport' 		=> 'postMessage',
+		'sanitize_callback' => 'betterdocs_sanitize_integer'
+
+	) );
+
+	$wp_customize->add_control( new BetterDocs_Customizer_Range_Value_Control(
+		$wp_customize, 'betterdocs_faq_category_name_font_size', array(
+		'type'     => 'betterdocs-range-value',
+		'section'  => 'betterdocs_faq_section',
+		'settings' => 'betterdocs_faq_category_name_font_size',
+		'label'    => esc_html__('Group Title Font Size', 'betterdocs'),
+		'priority' 	 => 633,
+		'input_attrs' => array(
+			'class'  => '',
+			'min'    => 0,
+			'max'    => 50,
+			'step'   => 1,
+			'suffix' => 'px', // optional suffix
+		),
+	) ) );
+
+	$wp_customize->add_setting('betterdocs_faq_category_name_padding', array(
+        'default' 			=> $defaults['betterdocs_faq_category_name_padding'],
+        'transport' 		=> 'postMessage',
+		'capability'    	=> 'edit_theme_options',
+    ));
+
+    $wp_customize->add_control(
+        new BetterDocs_Multi_Dimension_Control(
+            $wp_customize,
+            'betterdocs_faq_category_name_padding',
+            array(
+                'label' => __('Group Title Padding (PX)', 'betterdocs'),
+                'section' => 'betterdocs_faq_section',
+                'settings' => 'betterdocs_faq_category_name_padding',
+                'priority' => 634,
+                'input_fields' => array(
+                    'input1'   	=> __( 'top', 'betterdocs' ),
+                    'input2'   	=> __( 'right', 'betterdocs' ),
+                    'input3'   	=> __( 'bottom', 'betterdocs' ),
+                    'input4'   	=> __( 'left', 'betterdocs' ),
+				),
+				'defaults' => array(
+                    'input1'  	=> 20,
+                    'input2'  	=> 20,
+                    'input3'  	=> 20,
+                    'input4'  	=> 20,
+                )
+            ))
+    );
+
+
+	// FAQ List Color
+	$wp_customize->add_setting( 'betterdocs_faq_list_color' , array(
+		'default'     		=> $defaults['betterdocs_faq_list_color'],
+		'capability'    	=> 'edit_theme_options',
+	    'transport'   		=> 'postMessage',
+	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
+	) );
+
+	$wp_customize->add_control(
+		new BetterDocs_Customizer_Alpha_Color_Control(
+		$wp_customize,
+		'betterdocs_faq_list_color',
+		array(
+			'label'      => __( 'FAQ List Color', 'betterdocs' ),
+			'section'    => 'betterdocs_faq_section',
+			'settings'   => 'betterdocs_faq_list_color',
+			'priority' 	 => 635,
+		) )
+	);
+
+
+	// FAQ List Background Color
+	$wp_customize->add_setting( 'betterdocs_faq_list_background_color' , array(
+		'default'     		=> $defaults['betterdocs_faq_list_background_color'],
+		'capability'    	=> 'edit_theme_options',
+	    'transport'   		=> 'postMessage',
+	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
+	) );
+
+	$wp_customize->add_control(
+		new BetterDocs_Customizer_Alpha_Color_Control(
+		$wp_customize,
+		'betterdocs_faq_list_background_color',
+		array(
+			'label'      => __( 'FAQ List Background Color', 'betterdocs' ),
+			'section'    => 'betterdocs_faq_section',
+			'settings'   => 'betterdocs_faq_list_background_color',
+			'priority' 	 => 636,
+		) )
+	);
+
+	// FAQ List Content Background Color
+	$wp_customize->add_setting( 'betterdocs_faq_list_content_background_color' , array(
+		'default'     		=> $defaults['betterdocs_faq_list_content_background_color'],
+		'capability'    	=> 'edit_theme_options',
+	    'transport'   		=> 'postMessage',
+	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
+	) );
+
+	$wp_customize->add_control(
+		new BetterDocs_Customizer_Alpha_Color_Control(
+		$wp_customize,
+		'betterdocs_faq_list_content_background_color',
+		array(
+			'label'      => __( 'FAQ List Content Background Color', 'betterdocs' ),
+			'section'    => 'betterdocs_faq_section',
+			'settings'   => 'betterdocs_faq_list_content_background_color',
+			'priority' 	 => 637,
+		) )
+	);
+
+	// FAQ List Content Color
+
+	$wp_customize->add_setting( 'betterdocs_faq_list_content_color' , array(
+		'default'     		=> $defaults['betterdocs_faq_list_content_color'],
+		'capability'    	=> 'edit_theme_options',
+	    'transport'   		=> 'postMessage',
+	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
+	) );
+
+	$wp_customize->add_control(
+		new BetterDocs_Customizer_Alpha_Color_Control(
+		$wp_customize,
+		'betterdocs_faq_list_content_color',
+		array(
+			'label'      => __( 'FAQ List Content Color', 'betterdocs' ),
+			'section'    => 'betterdocs_faq_section',
+			'settings'   => 'betterdocs_faq_list_content_color',
+			'priority' 	 => 638,
+		) )
+	);
+
+	//FAQ Content Font Size
+
+	$wp_customize->add_setting( 'betterdocs_faq_list_content_font_size', array(
+		'default'       	=> $defaults['betterdocs_faq_list_content_font_size'],
+		'capability'    	=> 'edit_theme_options',
+		'transport' 		=> 'postMessage',
+		'sanitize_callback' => 'betterdocs_sanitize_integer'
+
+	) );
+
+	$wp_customize->add_control( new BetterDocs_Customizer_Range_Value_Control(
+		$wp_customize, 'betterdocs_faq_list_content_font_size', array(
+		'type'     => 'betterdocs-range-value',
+		'section'  => 'betterdocs_faq_section',
+		'settings' => 'betterdocs_faq_list_content_font_size',
+		'label'    => esc_html__('FAQ Content Font Size', 'betterdocs'),
+		'priority'   => 639,
+		'input_attrs' => array(
+			'class'  => '',
+			'min'    => 0,
+			'max'    => 50,
+			'step'   => 1,
+			'suffix' => 'px', //optional suffix
+		),
+	) ) );
+
+	// Entry Content Font Size
+
+	$wp_customize->add_setting( 'betterdocs_faq_list_font_size', array(
+		'default'       	=> $defaults['betterdocs_faq_list_font_size'],
+		'capability'    	=> 'edit_theme_options',
+		'transport' 		=> 'postMessage',
+		'sanitize_callback' => 'betterdocs_sanitize_integer'
+
+	) );
+
+	$wp_customize->add_control( new BetterDocs_Customizer_Range_Value_Control(
+		$wp_customize, 'betterdocs_faq_list_font_size', array(
+		'type'     => 'betterdocs-range-value',
+		'section'  => 'betterdocs_faq_section',
+		'settings' => 'betterdocs_faq_list_font_size',
+		'label'    => esc_html__('FAQ List Font Size', 'betterdocs'),
+		'priority' 	 => 640,
+		'input_attrs' => array(
+			'class'  => '',
+			'min'    => 0,
+			'max'    => 50,
+			'step'   => 1,
+			'suffix' => 'px', // optional suffix
+		),
+	) ) );
+
+	$wp_customize->add_setting('betterdocs_faq_list_padding', array(
+        'default' 			=> $defaults['betterdocs_faq_list_padding'],
+        'transport' 		=> 'postMessage',
+		'capability'    	=> 'edit_theme_options',
+    ));
+
+    $wp_customize->add_control(
+        new BetterDocs_Multi_Dimension_Control(
+            $wp_customize,
+            'betterdocs_faq_list_padding',
+            array(
+                'label' => __('FAQ List Padding (PX)', 'betterdocs'),
+                'section' => 'betterdocs_faq_section',
+                'settings' => 'betterdocs_faq_list_padding',
+                'priority' => 641,
+                'input_fields' => array(
+                    'input1'   	=> __( 'top', 'betterdocs' ),
+                    'input2'   	=> __( 'right', 'betterdocs' ),
+                    'input3'   	=> __( 'bottom', 'betterdocs' ),
+                    'input4'   	=> __( 'left', 'betterdocs' ),
+				),
+				'defaults' => array(
+					'input1'  	=> 20,
+					'input2'  	=> 20,
+					'input3'  	=> 20,
+					'input4'  	=> 20,
+				)
+            ))
+    );
+
+	/*** FAQ LAYOUT 2 CONTROLLERS ***/
+
+	// FAQ Title Color
+	$wp_customize->add_setting( 'betterdocs_faq_category_title_color_layout_2' , array(
+		'default'     		=> $defaults['betterdocs_faq_category_title_color_layout_2'],
+		'capability'    	=> 'edit_theme_options',
+	    'transport'   		=> 'postMessage',
+	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
+	) );
+
+	$wp_customize->add_control(
+		new BetterDocs_Customizer_Alpha_Color_Control(
+		$wp_customize,
+		'betterdocs_faq_category_title_color_layout_2',
+		array(
+			'label'      => __( 'Group Title Color', 'betterdocs' ),
+			'section'    => 'betterdocs_faq_section',
+			'priority' 	 => 642,
+			'settings'   => 'betterdocs_faq_category_title_color_layout_2',
+		) )
+	);
+
+	// Entry Content Font Size
+
+	$wp_customize->add_setting( 'betterdocs_faq_category_name_font_size_layout_2', array(
+		'default'       	=> $defaults['betterdocs_faq_category_name_font_size_layout_2'],
+		'capability'    	=> 'edit_theme_options',
+		'transport' 		=> 'postMessage',
+		'sanitize_callback' => 'betterdocs_sanitize_integer'
+
+	) );
+
+	$wp_customize->add_control( new BetterDocs_Customizer_Range_Value_Control(
+		$wp_customize, 'betterdocs_faq_category_name_font_size_layout_2', array(
+		'type'     => 'betterdocs-range-value',
+		'section'  => 'betterdocs_faq_section',
+		'settings' => 'betterdocs_faq_category_name_font_size_layout_2',
+		'label'    => esc_html__('Group Title Font Size', 'betterdocs'),
+		'priority' 	 => 643,
+		'input_attrs' => array(
+			'class'  => '',
+			'min'    => 0,
+			'max'    => 50,
+			'step'   => 1,
+			'suffix' => 'px', // optional suffix
+		),
+	) ) );
+	
+	// Category Name Padding
+
+	$wp_customize->add_setting('betterdocs_faq_category_name_padding_layout_2', array(
+        'default' 			=> $defaults['betterdocs_faq_category_name_padding_layout_2'],
+        'transport' 		=> 'postMessage',
+		'capability'    	=> 'edit_theme_options',
+    ));
+
+    $wp_customize->add_control(
+        new BetterDocs_Multi_Dimension_Control(
+            $wp_customize,
+            'betterdocs_faq_category_name_padding_layout_2',
+            array(
+                'label' => __('Group Title Padding (PX)', 'betterdocs'),
+                'section' => 'betterdocs_faq_section',
+                'settings' => 'betterdocs_faq_category_name_padding_layout_2',
+                'priority' => 644,
+                'input_fields' => array(
+                    'input1'   	=> __( 'top', 'betterdocs' ),
+                    'input2'   	=> __( 'right', 'betterdocs' ),
+                    'input3'   	=> __( 'bottom', 'betterdocs' ),
+                    'input4'   	=> __( 'left', 'betterdocs' ),
+				),
+				'defaults' => array(
+                    'input1'  	=> 20,
+                    'input2'  	=> 20,
+                    'input3'  	=> 20,
+                    'input4'  	=> 20,
+                )
+            ))
+    );
+
+
+	// FAQ List Color
+	$wp_customize->add_setting( 'betterdocs_faq_list_color_layout_2' , array(
+		'default'     		=> $defaults['betterdocs_faq_list_color_layout_2'],
+		'capability'    	=> 'edit_theme_options',
+	    'transport'   		=> 'postMessage',
+	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
+	) );
+
+	$wp_customize->add_control(
+		new BetterDocs_Customizer_Alpha_Color_Control(
+		$wp_customize,
+		'betterdocs_faq_list_color_layout_2',
+		array(
+			'label'      => __( 'FAQ List Color', 'betterdocs' ),
+			'section'    => 'betterdocs_faq_section',
+			'settings'   => 'betterdocs_faq_list_color_layout_2',
+			'priority' 	 => 645,
+		) )
+	);
+
+
+	// FAQ List Background Color
+	$wp_customize->add_setting( 'betterdocs_faq_list_background_color_layout_2' , array(
+		'default'     		=> $defaults['betterdocs_faq_list_background_color_layout_2'],
+		'capability'    	=> 'edit_theme_options',
+	    'transport'   		=> 'postMessage',
+	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
+	) );
+
+	$wp_customize->add_control(
+		new BetterDocs_Customizer_Alpha_Color_Control(
+		$wp_customize,
+		'betterdocs_faq_list_background_color_layout_2',
+		array(
+			'label'      => __( 'FAQ List Background Color', 'betterdocs' ),
+			'section'    => 'betterdocs_faq_section',
+			'settings'   => 'betterdocs_faq_list_background_color_layout_2',
+			'priority' 	 => 646,
+		) )
+	);
+
+	// FAQ List Content Background Color
+	$wp_customize->add_setting( 'betterdocs_faq_list_content_background_color_layout_2' , array(
+		'default'     		=> $defaults['betterdocs_faq_list_content_background_color_layout_2'],
+		'capability'    	=> 'edit_theme_options',
+	    'transport'   		=> 'postMessage',
+	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
+	) );
+
+	$wp_customize->add_control(
+		new BetterDocs_Customizer_Alpha_Color_Control(
+		$wp_customize,
+		'betterdocs_faq_list_content_background_color_layout_2',
+		array(
+			'label'      => __( 'FAQ List Content Background Color', 'betterdocs' ),
+			'section'    => 'betterdocs_faq_section',
+			'settings'   => 'betterdocs_faq_list_content_background_color_layout_2',
+			'priority' 	 => 647,
+		) )
+	);
+
+
+	$wp_customize->add_setting( 'betterdocs_faq_list_content_color_layout_2' , array(
+		'default'     		=> $defaults['betterdocs_faq_list_content_color_layout_2'],
+		'capability'    	=> 'edit_theme_options',
+	    'transport'   		=> 'postMessage',
+	    'sanitize_callback' => 'betterdocs_sanitize_rgba',
+	) );
+
+	$wp_customize->add_control(
+		new BetterDocs_Customizer_Alpha_Color_Control(
+		$wp_customize,
+		'betterdocs_faq_list_content_color_layout_2',
+		array(
+			'label'      => __( 'FAQ List Content Color', 'betterdocs' ),
+			'section'    => 'betterdocs_faq_section',
+			'settings'   => 'betterdocs_faq_list_content_color_layout_2',
+			'priority' 	 => 648,
+		) )
+	);
+
+	//FAQ Content Font Size
+
+	$wp_customize->add_setting( 'betterdocs_faq_list_content_font_size_layout_2', array(
+		'default'       	=> $defaults['betterdocs_faq_list_content_font_size_layout_2'],
+		'capability'    	=> 'edit_theme_options',
+		'transport' 		=> 'postMessage',
+		'sanitize_callback' => 'betterdocs_sanitize_integer'
+
+	) );
+
+	$wp_customize->add_control( new BetterDocs_Customizer_Range_Value_Control(
+		$wp_customize, 'betterdocs_faq_list_content_font_size_layout_2', array(
+		'type'     => 'betterdocs-range-value',
+		'section'  => 'betterdocs_faq_section',
+		'settings' => 'betterdocs_faq_list_content_font_size_layout_2',
+		'label'    => esc_html__('FAQ Content Font Size', 'betterdocs'),
+		'priority'   => 649,
+		'input_attrs' => array(
+			'class'  => '',
+			'min'    => 0,
+			'max'    => 50,
+			'step'   => 1,
+			'suffix' => 'px', //optional suffix
+		),
+	) ) );
+
+	// Entry Content Font Size
+
+	$wp_customize->add_setting( 'betterdocs_faq_list_font_size_layout_2', array(
+		'default'       	=> $defaults['betterdocs_faq_list_font_size_layout_2'],
+		'capability'    	=> 'edit_theme_options',
+		'transport' 		=> 'postMessage',
+		'sanitize_callback' => 'betterdocs_sanitize_integer'
+
+	) );
+
+	$wp_customize->add_control( new BetterDocs_Customizer_Range_Value_Control(
+		$wp_customize, 'betterdocs_faq_list_font_size_layout_2', array(
+		'type'     => 'betterdocs-range-value',
+		'section'  => 'betterdocs_faq_section',
+		'settings' => 'betterdocs_faq_list_font_size_layout_2',
+		'label'    => esc_html__('FAQ List Font Size', 'betterdocs'),
+		'priority' 	 => 650,
+		'input_attrs' => array(
+			'class'  => '',
+			'min'    => 0,
+			'max'    => 50,
+			'step'   => 1,
+			'suffix' => 'px', // optional suffix
+		),
+	) ) );
+
+	// FAQ List Padding
+	
+	$wp_customize->add_setting('betterdocs_faq_list_padding_layout_2', array(
+        'default' 			=> $defaults['betterdocs_faq_list_padding_layout_2'],
+        'transport' 		=> 'postMessage',
+		'capability'    	=> 'edit_theme_options',
+    ));
+
+    $wp_customize->add_control(
+        new BetterDocs_Multi_Dimension_Control(
+            $wp_customize,
+            'betterdocs_faq_list_padding_layout_2',
+            array(
+                'label' => __('FAQ List Padding (PX)', 'betterdocs'),
+                'section' => 'betterdocs_faq_section',
+                'settings' => 'betterdocs_faq_list_padding_layout_2',
+                'priority' => 651,
+                'input_fields' => array(
+                    'input1'   	=> __( 'top', 'betterdocs' ),
+                    'input2'   	=> __( 'right', 'betterdocs' ),
+                    'input3'   	=> __( 'bottom', 'betterdocs' ),
+                    'input4'   	=> __( 'left', 'betterdocs' ),
+				),
+				'defaults' => array(
+					'input1'  	=> 20,
+					'input2'  	=> 20,
+					'input3'  	=> 20,
+					'input4'  	=> 20,
+				)
+            ))
+    );
+
+	
 	// Create custom panels
 
 	$wp_customize->add_panel( 'betterdocs_customize_options', array(
@@ -8077,7 +9243,7 @@ function betterdocs_customize_register( $wp_customize ) {
 	$wp_customize->get_section('betterdocs_sidebar_settings')->panel = 'betterdocs_customize_options';
 	$wp_customize->get_section('betterdocs_archive_page_settings')->panel = 'betterdocs_customize_options';
 	$wp_customize->get_section('betterdocs_live_search_settings')->panel = 'betterdocs_customize_options';
-
+	$wp_customize->get_section('betterdocs_faq_section')->panel = 'betterdocs_customize_options';
 
 }
 add_action( 'customize_register', 'betterdocs_customize_register' );

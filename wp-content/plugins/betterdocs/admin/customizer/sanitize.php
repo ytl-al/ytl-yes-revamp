@@ -11,7 +11,7 @@ if ( ! function_exists( 'betterdocs_sanitize_integer' ) ) :
  * @since 1.0.0
  */
 function betterdocs_sanitize_integer( $input ) {
-	return absint( $input );
+	return filter_var( $input, FILTER_SANITIZE_NUMBER_INT );
 }
 
 endif;

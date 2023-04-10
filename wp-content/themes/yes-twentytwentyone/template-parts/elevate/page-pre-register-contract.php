@@ -86,8 +86,7 @@
 <input type="hidden" value="" id="guid"/>
 <div id="main-vue">
 <header class="white-top">
-    <div class="container"
-    ">
+    <div class="container">
     <div class="row">
         <div class="col-lg-4 col-6">
             <div class="mt-4">

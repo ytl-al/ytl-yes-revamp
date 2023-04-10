@@ -228,9 +228,10 @@ class BetterDocs_Customizer_Alpha_Color_Control extends WP_Customize_Control {
 class BetterDocs_Separator_Custom_Control extends WP_Customize_Control{
 	public $type = 'separator';
 	public function render_content(){
+		$custom_class = isset( $this->input_attrs['class'] ) ? ' '.$this->input_attrs['class'] : '';
 		?>
 		<label>
-			<h4 class="betterdocs-customize-control-separator"><?php echo esc_html( $this->label ); ?></h4>
+			<h4 class="betterdocs-customize-control-separator<?php echo $custom_class; ?>"><?php echo esc_html( $this->label ); ?></h4>
 			<?php if ( ! empty( $this->description ) ) : ?>
 			<span class="description customize-control-description"><?php echo $this->description; ?></span>
 			<?php endif; ?>
@@ -321,7 +322,7 @@ class BetterDocs_Dimension_Control extends WP_Customize_Control {
 /**
  * Number Customizer Control
  * 
- * Class BetterDocs_Dimension_Control
+ * Class BetterDocs_Padding_Control
  *
  * @since 1.0.0
  */
@@ -364,7 +365,7 @@ class BetterDocs_Padding_Control extends WP_Customize_Control {
 /**
  * Number Customizer Control
  * 
- * Class BetterDocs_Dimension_Control
+ * Class BetterDocs_Number_Control
  *
  * @since 1.0.0
  */
@@ -445,12 +446,85 @@ class BetterDocs_Radio_Image_Control extends WP_Customize_Control {
 				<?php } else { ?>
 				<input class="image-select" type="radio" value="<?php echo esc_attr( $value ) ?>" id="<?php echo $this->id . $value; ?>" name="<?php echo esc_attr( $name ) ?>" <?php $this->link(); checked( $this->value(), $value ); ?>>
 					<label for="<?php echo $this->id . $value; ?>">
-						<img src="<?php echo esc_url( $label['image'] ) ?>" alt="<?php echo esc_attr( $value ) ?>" title="<?php echo esc_attr( $value ) ?>">
+						<img src="<?php echo esc_url( $label['image'] ) ?>" alt="<?php echo esc_attr( $value ) ?>" title="<?php echo isset( $label['label'] ) ? esc_attr( $label['label'] ) : '' ; ?>">
 					</label>
 				</input>
 			<?php } endforeach; ?>
 		</div>
 		<script>jQuery(document).ready(function($) { $( '[id="input_<?php echo $this->id; ?>"]' ).buttonset(); });</script>
+		<?php
+	}
+}
+
+/**
+ * Spacing Customizer Control
+ * 
+ * Class BetterDocs_Dimension_Control
+ */
+
+class BetterDocs_Multi_Dimension_Control extends WP_Customize_Control {
+
+	public $type = 'betterdocs-multi-dimension';
+
+	public $defaults;
+	public $input_fields;
+
+	public function enqueue() {
+		wp_enqueue_script(
+            'betterdocs-customizer-dimension-control',
+            BETTERDOCS_ADMIN_URL . 'assets/js/customizer-dimension-control.js',
+            array( 'jquery' ),
+            rand(),
+            true
+        );
+	}
+
+	/**
+	 * Render the control's content.
+	 */
+	public function render_content() {
+
+		if( $this->value() ) {
+			if ( is_array ($this->value())) {
+				$dimension_val = $this->value();
+			} else {
+				$dimension_val = (array) json_decode($this->value());
+			}
+		} else {
+			$dimension_val = $this->defaults;
+		}
+
+		// Output the label and description if they were passed in.
+		if ( isset( $this->label ) && '' !== $this->label ) {
+			echo '<span class="customize-control-title">' . sanitize_text_field( $this->label ) . '<a href="#" title="'.esc_html__('Reset', 'betterdocs').'" class="betterdocs-customizer-reset '.esc_html( $this->type ).'"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="20px"><path d="M 25 2 C 12.321124 2 2 12.321124 2 25 C 2 37.678876 12.321124 48 25 48 C 37.678876 48 48 37.678876 48 25 A 2.0002 2.0002 0 1 0 44 25 C 44 35.517124 35.517124 44 25 44 C 14.482876 44 6 35.517124 6 25 C 6 14.482876 14.482876 6 25 6 C 30.475799 6 35.391893 8.3080175 38.855469 12 L 35 12 A 2.0002 2.0002 0 1 0 35 16 L 46 16 L 46 5 A 2.0002 2.0002 0 0 0 43.970703 2.9726562 A 2.0002 2.0002 0 0 0 42 5 L 42 9.5253906 C 37.79052 4.9067015 31.727675 2 25 2 z"></path></svg></a></span>';
+		}
+		if ( isset( $this->description ) && '' !== $this->description ) {
+			echo '<span class="description customize-control-description">' . sanitize_text_field( $this->description ) . '</span>';
+		}
+		?>
+		<input type="hidden" value="" class="betterdocs-dimension-control <?php echo esc_attr($this->id) ?>" data-customize-setting-link="<?php echo esc_attr($this->id); ?>">
+		<ul class="betterdocs-dimension-fields">
+			<li class="betterdocs-dimension-link">
+				<span class="dashicons dashicons-admin-links betterdocs-dimension-connected" data-element-connect="<?php echo esc_attr($this->id) ?>" title="Link Values Together"></span>
+				<span class="dashicons dashicons-editor-unlink betterdocs-dimension-disconnected" data-element-connect="<?php echo esc_attr($this->id) ?>" title="Link Values Together"></span>
+			</li>
+			<li class="dimension-field">
+				<input type="number" class="betterdocs-dimension-input betterdocs-dimension-input-1 disconnected" value="<?php echo esc_attr($dimension_val['input1'] ); ?>" data-element-connect="<?php echo esc_attr($this->id) ?>" data-input="input1">
+				<span class="dimension-title"><?php echo $this->input_fields['input1'] ?></span>
+			</li>
+			<li class="dimension-field">
+				<input type="number" class="betterdocs-dimension-input betterdocs-dimension-input-2 disconnected" value="<?php echo esc_attr($dimension_val['input2'] ); ?>" data-element-connect="<?php echo esc_attr($this->id) ?>" data-input="input2">
+				<span class="dimension-title"><?php echo $this->input_fields['input2'] ?></span>
+			</li>
+			<li class="dimension-field">
+				<input type="number" class="betterdocs-dimension-input betterdocs-dimension-input-3 disconnected" value="<?php echo esc_attr($dimension_val['input3'] ); ?>" data-element-connect="<?php echo esc_attr($this->id) ?>" data-input="input3">
+				<span class="dimension-title"><?php echo $this->input_fields['input3'] ?></span>
+			</li>
+			<li class="dimension-field">
+				<input type="number" class="betterdocs-dimension-input betterdocs-dimension-input-4 disconnected" value="<?php echo esc_attr($dimension_val['input4'] ); ?>" data-element-connect="<?php echo esc_attr($this->id) ?>" data-input="input4">
+				<span class="dimension-title"><?php echo $this->input_fields['input4'] ?></span>
+			</li>
+		</ul>
 		<?php
 	}
 }

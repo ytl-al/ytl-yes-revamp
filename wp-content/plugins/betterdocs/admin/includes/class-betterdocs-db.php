@@ -19,9 +19,11 @@ class BetterDocs_DB {
             'category_slug' => 'docs-category',
             'tag_slug' => 'docs-tag',
             'disable_root_slug_mkb' => '',
+            'enable_faq_schema' => '',
             'live_search' => 1,
             'advance_search' => '',
             'popular_keyword_limit' => 5,
+            'search_letter_limit' => 3,
             'search_placeholder' => esc_html__('Search..', 'betterdocs'),
             'search_not_found_text' => esc_html__('Sorry, no docs were found.', 'betterdocs'),
             'search_result_image' => 1,
@@ -42,6 +44,7 @@ class BetterDocs_DB {
             'toc_title' => esc_html__('Table of Contents', 'betterdocs'),
             'toc_hierarchy' => 1,
             'toc_list_number' => 1,
+            'toc_dynamic_title' => 0,
             'enable_sticky_toc' => 1,
             'sticky_toc_offset' => 100,
             'collapsible_toc_mobile' => '',
@@ -77,10 +80,16 @@ class BetterDocs_DB {
             'display_ia_archives' => array('all'),
             'display_ia_texonomy' => array('all'),
             'display_ia_single' => array('all'),
+            'article_roles' => array('administrator'),
+            'settings_roles' => array('administrator'),
+            'analytics_roles' => array('administrator'),
             'enable_content_restriction' => '',
             'restrict_template' => array('all'),
             'restrict_category' => array('all'),
-            'restrict_kb' => array('all')
+            'restrict_kb' => array('all'),
+            'reporting_day' => 'monday',
+            'reporting_subject_updated' => wp_sprintf( '%s %s %s', __( 'Your Documentation Performance of', 'betterdocs' ),  get_bloginfo( 'name' ), __( 'Website', 'betterdocs' ) ),
+            'reporting_email' => get_option( 'admin_email' )
         ));
     }
     /**

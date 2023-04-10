@@ -42,7 +42,7 @@ function betterdocs_get_term_parents_list($term_id, $taxonomy, $separator, $args
         $name   = ('slug' === $args['format']) ? $parent->slug : $parent->name;
         $term_permalink = get_term_link($parent->term_id, $taxonomy);
         $term_permalink = apply_filters('betterdocs_breadcrumb_term_permalink', $term_permalink);
-        $list .= '<li class="betterdocs-breadcrumb-item"><a href="' . $term_permalink . '">' . $name . '</a></li>';
+        $list .= '<li class="betterdocs-breadcrumb-item"><a href="' . $term_permalink . '">' . esc_html($name) . '</a></li>';
         if (next($parents) == true) {
             $list .= '<li class="betterdocs-breadcrumb-item breadcrumb-delimiter">' . $separator . '</li>';
         }
@@ -69,11 +69,11 @@ function betterdocs_breadcrumbs()
     if ($post_type != 'post' && $builtin_doc_page == 1) {
         $post_type_object = get_post_type_object($post_type);
         $post_type_archive = get_post_type_archive_link($post_type);
-        $docs_page = '<li class="betterdocs-breadcrumb-item item-cat item-custom-post-type-' . $post_type . '"><a class="bread-cat bread-custom-post-type-' . $post_type . '" href="' . $post_type_archive . '" title="' . $post_type_object->labels->name . '">' . stripslashes($post_type_object->labels->name) . '</a></li>';
+        $docs_page = '<li class="betterdocs-breadcrumb-item item-cat item-custom-post-type-' . esc_attr($post_type) . '"><a class="bread-cat bread-custom-post-type-' . esc_attr($post_type) . '" href="' . esc_url($post_type_archive) . '" title="' . esc_attr($post_type_object->labels->name) . '">' . stripslashes($post_type_object->labels->name) . '</a></li>';
     } elseif ($docs_page) {
         $docs_page_url = get_page_link($docs_page);
         $docs_page_title = get_the_title($docs_page);
-        $docs_page = '<li class="betterdocs-breadcrumb-item item-cat item-custom-docs-page"><a class="bread-cat bread-custom-docs-page" href="' . $docs_page_url . '" title="' . $docs_page_title . '">' . $docs_page_title . '</a></li>';
+        $docs_page = '<li class="betterdocs-breadcrumb-item item-cat item-custom-docs-page"><a class="bread-cat bread-custom-docs-page" href="' . esc_url($docs_page_url) . '" title="' . esc_attr($docs_page_title) . '">' . wp_kses($docs_page_title, BETTERDOCS_KSES_ALLOWED_HTML) . '</a></li>';
     }
 
     // Get the query & post information
@@ -137,7 +137,7 @@ function betterdocs_breadcrumbs()
             // Check if the post is in a category
             if ($enable_breadcrumb_title == 1) {
                 echo '<li class="betterdocs-breadcrumb-item breadcrumb-delimiter"> ' . $delimiter . ' </li>';
-                echo '<li class="betterdocs-breadcrumb-item item-current item-' . $post->ID . ' current"><span>' . get_the_title() . '</span></li>';
+                echo '<li class="betterdocs-breadcrumb-item item-current item-' . $post->ID . ' current"><span>' . wp_kses(get_the_title(), BETTERDOCS_KSES_ALLOWED_HTML) . '</span></li>';
             }
         }
         echo '</ul>';

@@ -36,7 +36,7 @@ echo '<article class="el-betterdocs-category-grid-post" data-id="' . get_the_ID(
             $multiple_kb = BetterDocs_Elementor::get_betterdocs_multiple_kb_status();
             if ($multiple_kb == true) {
                 $taxes = array('knowledge_base', 'doc_category');
-
+                $tax_map = [];
                 foreach ($taxes as $tax) {
                     $kterms = get_terms($tax);
 
@@ -70,7 +70,7 @@ echo '<article class="el-betterdocs-category-grid-post" data-id="' . get_the_ID(
                     $kb_term = $settings['selected_knowledge_base'];
                 }
 
-                if($kb_term){
+                if($kb_term && isset($tax_map['knowledge_base'])){
                     $args['tax_query'][] = array(
                         'taxonomy' => 'knowledge_base',
                         'field' => 'term_taxonomy_id',
@@ -114,11 +114,11 @@ echo '<article class="el-betterdocs-category-grid-post" data-id="' . get_the_ID(
 
                     echo '<li>';
                     if (isset($settings['list_icon']['value']['url']) && !empty($settings['list_icon']['value']['url'])) {
-                        echo '<img class="el-betterdocs-cg-post-list-icon" src="' . $settings['list_icon']['value']['url'] . '" />';
+                        echo '<img class="el-betterdocs-cg-post-list-icon" src="' . esc_url($settings['list_icon']['value']['url']) . '" />';
                     } else {
-                        echo '<i class="' . $settings['list_icon']['value'] . ' el-betterdocs-cg-post-list-icon"></i>';
+                        echo '<i class="' . esc_attr($settings['list_icon']['value']) . ' el-betterdocs-cg-post-list-icon"></i>';
                     }
-                    echo '<a ' . implode(' ', $attr) . '>' . get_the_title() . '</a>
+                    echo '<a ' . implode(' ', $attr) . '>' . wp_kses(get_the_title(), BETTERDOCS_KSES_ALLOWED_HTML) . '</a>
                     </li>';
                 }
                 echo '</ul>';
@@ -137,23 +137,23 @@ echo '<article class="el-betterdocs-category-grid-post" data-id="' . get_the_ID(
             if ($settings['show_button']) {
                 $term_permalink = BetterDocs_Helper::term_permalink('doc_category', $term->slug);
 
-                echo '<a class="el-betterdocs-cg-button" href="' . $term_permalink . '">';
+                echo '<a class="el-betterdocs-cg-button" href="' . esc_url($term_permalink) . '">';
 
                 if ($settings['icon_position'] === 'before') {
                     if (isset($settings['button_icon']['value']['url']) && !empty($settings['button_icon']['value']['url'])) {
-                        echo '<img class="el-betterdocs-cg-button-icon el-betterdocs-cg-button-icon-left" src="' . $settings['button_icon']['value']['url'] . '" />';
+                        echo '<img class="el-betterdocs-cg-button-icon el-betterdocs-cg-button-icon-left" src="' . esc_url($settings['button_icon']['value']['url']) . '" />';
                     } else {
-                        echo '<i class="' . $settings['button_icon']['value'] . ' el-betterdocs-cg-button-icon el-betterdocs-cg-button-icon-left"></i>';
+                        echo '<i class="' . esc_attr($settings['button_icon']['value']) . ' el-betterdocs-cg-button-icon el-betterdocs-cg-button-icon-left"></i>';
                     }
                 }
 
-                echo $settings['button_text'];
+                echo esc_html($settings['button_text']);
 
                 if ($settings['icon_position'] === 'after') {
                     if (isset($settings['button_icon']['value']['url']) && !empty($settings['button_icon']['value']['url'])) {
                         echo '<img class="el-betterdocs-cg-button-icon el-betterdocs-cg-button-icon-right" src="' . $settings['button_icon']['value']['url'] . '" />';
                     } else {
-                        echo '<i class="' . $settings['button_icon']['value'] . ' el-betterdocs-cg-button-icon el-betterdocs-cg-button-icon-right"></i>';
+                        echo '<i class="' . esc_attr($settings['button_icon']['value']) . ' el-betterdocs-cg-button-icon el-betterdocs-cg-button-icon-right"></i>';
                     }
                 }
 

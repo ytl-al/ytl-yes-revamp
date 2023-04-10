@@ -201,12 +201,12 @@
                     strIDVerification: { 'en-US': 'ID Verification', 'ms-MY': 'Pengesahan ID', 'zh-hans': 'ID Verification' },
                     strIDType: { 'en-US': 'ID Type', 'ms-MY': 'Jenis ID', 'zh-hans': 'ID Type' },
                     strIDTypeSelect: { 'en-US': 'Select ID Type', 'ms-MY': 'Pilih jenis ID', 'zh-hans': 'Select ID Type' },
-                    strIDNRIC: { 'en-US': 'MyKad ', 'ms-MY': 'Kad Pengenalan', 'zh-hans': 'MyKad ' },
+                    strIDNRIC: { 'en-US': 'NRIC', 'ms-MY': 'Kad Pengenalan', 'zh-hans': 'NRIC' },
                     strIDPassport: { 'en-US': 'Passport', 'ms-MY': 'Pasport', 'zh-hans': 'Passport' },
                     strIDNumber: { 'en-US': 'ID/Passport Number', 'ms-MY': 'Nombor KP/Pasport', 'zh-hans': 'ID/Passport Number' },
                     
                     strMobileVerification: { 'en-US': 'Mobile Verification', 'ms-MY': 'Pengesahan Nombor Mudah Alih', 'zh-hans': 'Mobile Verification' },
-                    strMobileStep1: { 'en-US': '<strong>Step 1</strong>: Key in your mobile number', 'ms-MY': '<strong>Langkah 1</strong>: Masukkan nombor telefon mudah alih anda', 'zh-hans': '<strong>Step 1</strong>: Key in your mobile number' },
+                    strMobileStep1: { 'en-US': '<strong>Step 1</strong>: Key in your mobile number', 'ms-MY': '<strong>Langkah</strong> 1: Masukkan nombor telefon mudah alih anda', 'zh-hans': '<strong>Step 1:</strong>: Key in your mobile number' },
                     strMobileStep2: { 'en-US': '<strong>Step 2</strong>: Insert your TAC code and verify', 'ms-MY': '<strong>Langkah 2</strong>: Masukkan TAC dan sahkan', 'zh-hans': '<strong>Step 2</strong>: Insert your TAC code and verify' },
                     strRequestTAC: { 'en-US': 'Request TAC', 'ms-MY': 'Minta TAC', 'zh-hans': 'Request TAC' },
                     strResendTAC: { 'en-US': 'Resend TAC', 'ms-MY': 'Minta Semula TAC', 'zh-hans': 'Resend TAC' },
@@ -216,7 +216,7 @@
 
                     strBtnSubmit: { 'en-US': 'Next: Insert delivery details', 'ms-MY': 'Seterusnya: Masukkan Butiran Penghantaran', 'zh-hans': 'Next: Insert delivery details' }, 
                     
-                    strErrorNRIC: { 'en-US': 'Please insert valid MyKad  number', 'ms-MY': 'Sila masukkan nombor kad pengenalan yang sah', 'zh-hans': 'Please insert valid MyKad  number' },
+                    strErrorNRIC: { 'en-US': 'Please insert valid NRIC number', 'ms-MY': 'Sila masukkan nombor kad pengenalan yang sah', 'zh-hans': 'Please insert valid NRIC number' },
                     strErrorPassport: { 'en-US': 'Please insert valid Passport number', 'ms-MY': 'Sila masukkan nombor passport yang sah', 'zh-hans': 'Please insert valid Passport number' },
                     strErrorPhoneNumber: { 'en-US': 'Please insert valid phone number', 'ms-MY': 'Sila masukkan nombor telefon bimbit yang sah', 'zh-hans': 'Please insert valid phone number' }, 
 
