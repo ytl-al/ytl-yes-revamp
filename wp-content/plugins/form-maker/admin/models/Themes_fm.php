@@ -17,7 +17,7 @@ class FMModelThemes_fm extends FMAdminModel {
     $search = $params['search'];
     $query = 'SELECT * FROM `' . $wpdb->prefix . 'formmaker_themes` AS `t`';
     if ( $search ) {
-      $query .= $wpdb->prepare('WHERE `t`.`title` LIKE "%s"', '%' . $search . '%');
+      $query .= $wpdb->prepare('WHERE `t`.`title` LIKE %s', '%' . $search . '%');
     }
     $query .= ' ORDER BY `t`.`' . $orderby . '` ' . $order;
     $query .= ' LIMIT ' . $page_num . ',' . $page_per;
@@ -36,12 +36,12 @@ class FMModelThemes_fm extends FMAdminModel {
   public function get_row_data( $id = 0 , $reset = false ) {
     global $wpdb;
     if ( $id != 0 ) {
-      $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker_themes WHERE id="%d"', $id));
+      $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker_themes WHERE id=%d', $id));
       if ( $reset ) {
         if ( !$row->default ) {
           $row_id = $row->id;
           $row_title = $row->title;
-          $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker_themes WHERE default="%d"', 1));
+          $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker_themes WHERE default=%d', 1));
           $row->id = $row_id;
           $row->title = $row_title;
           $row->default = FALSE;
@@ -83,7 +83,7 @@ class FMModelThemes_fm extends FMAdminModel {
     global $wpdb;
     $query = 'SELECT COUNT(*) FROM `' . $wpdb->prefix . 'formmaker_themes`';
     if ( $search ) {
-      $query .= $wpdb->prepare('WHERE `title` LIKE "%s"', '%' . $search . '%');
+      $query .= $wpdb->prepare('WHERE `title` LIKE %s', '%' . $search . '%');
     }
     $total = $wpdb->get_var($query);
 
@@ -209,6 +209,6 @@ class FMModelThemes_fm extends FMAdminModel {
    */
   public function get_default( $id = 0 ) {
     global $wpdb;
-    return $wpdb->get_var($wpdb->prepare('SELECT `default` FROM ' . $wpdb->prefix . 'formmaker_themes WHERE id="%d"', $id));
+    return $wpdb->get_var($wpdb->prepare('SELECT `default` FROM ' . $wpdb->prefix . 'formmaker_themes WHERE id=%d', $id));
   }
 }

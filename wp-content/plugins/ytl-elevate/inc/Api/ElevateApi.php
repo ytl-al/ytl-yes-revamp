@@ -73,126 +73,151 @@ class ElevateApi
             register_rest_route('/elevate/v1', '/test', array(
                 'methods' => 'GET',
                 'callback' => array('\Inc\Api\ElevateApi', 'do_test'),
+                'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', '/getProduct', array(
                 'methods' => 'GET',
                 'callback' => array('\Inc\Api\ElevateApi', 'getProduct'),
+                'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', '/getProductByCode', array(
                 'methods' => 'GET',
                 'callback' => array('\Inc\Api\ElevateApi', 'getProductByCode'),
+                'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', '/customer', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'elevate_customer_insert'),
+                'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', 'customer/update', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'elevate_customer_update'),
+                'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', '/verify-eligibility', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'verify_eligibility'),
+                'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', '/ca-verification', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'ca_verification'),
+                'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', '/verify-caeligibility', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'verify_caeligibility'),
+                'permission_callback' => '__return_true'
             ));
 
 			register_rest_route('/elevate/v1', '/check-active-contract', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'check_active_contract'),
+                'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', '/ekyc-init', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'ekyc_init'),
+                'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', '/ekyc-check', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'ekyc_check'),
+                'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', 'contract', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'elevate_contract'),
+                'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', 'order/create', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'elevate_order_create'),
+                'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', 'order/update', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'elevate_order_update'),
+                'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', 'order/cancel', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'elevate_order_cancel'),
+                'permission_callback' => '__return_true'
             ));
 
 			register_rest_route('/elevate/v1', 'order/updatePayment', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'elevate_order_update_payment'),
+                'permission_callback' => '__return_true'
             ));
 
 			register_rest_route('/elevate/v1', 'qrcode/check', array(
                 'methods' => 'GET',
                 'callback' => array('\Inc\Api\ElevateApi', 'elevate_delivery_qrcode_check'),
+                'permission_callback' => '__return_true'
             ));
 
 			register_rest_route('/elevate/v1', 'qrcode/confirm', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'elevate_delivery_qrcode_confirm'),
+                'permission_callback' => '__return_true'
             ));
 
 			register_rest_route('/elevate/v1', 'getPreRegisterUser', array(
                 'methods' => 'GET',
                 'callback' => array('\Inc\Api\ElevateApi', 'get_pre_register_user'),
+                'permission_callback' => '__return_true'
             ));
 
 			register_rest_route('/elevate/v1', 'getPreRegisterCompleted', array(
                 'methods' => 'GET',
                 'callback' => array('\Inc\Api\ElevateApi', 'get_pre_register_completed'),
+                'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', 'create-yos-order', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'make_yos_order'),
+                'permission_callback' => '__return_true'
             ));
 
 			register_rest_route('/elevate/v1', 'create-yos-free-order', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'make_yos_order_without_payment'),
+                'permission_callback' => '__return_true'
             ));
 
 			register_rest_route('/elevate/v1', 'check-yos-order-status', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'yos_check_order_status'),
+                'permission_callback' => '__return_true'
             ));
 
 			register_rest_route('/elevate/v1', 'del-prequalified-customer', array(
                 'methods' => 'POST',
                 'callback' => array('\Inc\Api\ElevateApi', 'delete_prequalified_customer'),
+                'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', '/check-stock', array(
                 'methods' => 'GET',
                 'callback' => array('\Inc\Api\ElevateApi', 'check_stock'),
+                'permission_callback' => '__return_true'
             ));
 
 

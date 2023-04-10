@@ -92,4 +92,4 @@ class FMElementor extends \Elementor\Widget_Base {
   }
 }
 
-\Elementor\Plugin::instance()->widgets_manager->register_widget_type(new FMElementor());
+\Elementor\Plugin::instance()->widgets_manager->register(new FMElementor());

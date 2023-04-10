@@ -9,7 +9,7 @@
  * @subpackage BetterDocs/public
  */
 
-get_header(); 
+get_header();
 
 echo '<div class="betterdocs-wraper betterdocs-main-wraper">';
 	$live_search = BetterDocs_DB::get_settings('live_search');
@@ -40,7 +40,8 @@ echo '<div class="betterdocs-wraper betterdocs-main-wraper">';
                 echo '</div>';
             }
     echo '</div>
-    </div>
-</div>';
+    </div>';
+    include( BETTERDOCS_PUBLIC_PATH . 'partials/faq.php' );
+'</div>';
 
 get_footer();

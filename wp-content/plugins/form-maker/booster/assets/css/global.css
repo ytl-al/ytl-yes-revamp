@@ -286,6 +286,9 @@ a.twb-custom-button:hover,
 }
 
 #twb-speed-galleries_bwg,
+#twb-speed-wdi_feeds,
+#twb-speed-info_ffwd,
+#twb-speed-sliders_wds,
 #twb-speed-manage_fm {
   position: relative;
   padding-left: 30px;
@@ -293,6 +296,9 @@ a.twb-custom-button:hover,
   width: 180px;
 }
 #twb-speed-galleries_bwg:before,
+#twb-speed-wdi_feeds:before,
+#twb-speed-info_ffwd:before,
+#twb-speed-sliders_wds:before,
 #twb-speed-manage_fm:before {
   content: '';
   position: absolute;
@@ -301,6 +307,15 @@ a.twb-custom-button:hover,
   transform: translateY(-50%);
   width: 15px;
   height: 15px;
+}
+#twb-speed-sliders_wds:before {
+  background: transparent url(../images/slider.svg) 0% 0% no-repeat padding-box;
+}
+#twb-speed-info_ffwd:before {
+  background: transparent url(../images/ff.svg) 0% 0% no-repeat padding-box;
+}
+#twb-speed-wdi_feeds:before {
+  background: transparent url(../images/if.svg) 0% 0% no-repeat padding-box;
 }
 #twb-speed-galleries_bwg:before {
   background: transparent url(../images/pg.svg) 0% 0% no-repeat padding-box;

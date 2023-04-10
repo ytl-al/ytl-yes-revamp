@@ -856,15 +856,15 @@ class FMViewForm_maker {
             $param['w_name_fields'] = isset($param['w_name_fields']) ? $param['w_name_fields'] : ($param['w_name_format'] == 'normal' ? 'no***no' : 'yes***yes');
             $w_name_fields = explode('***', $param['w_name_fields']);
             $param['w_autofill'] = isset($param['w_autofill']) ? $param['w_autofill'] : 'no';
-            $element_title = stripslashes( WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . '_element_title' . $form_id, NULL, 'esc_html' ) );
-            $element_middle = stripslashes( WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . '_element_middle' . $form_id, NULL, 'esc_html' ) );
-            $element_first = stripslashes( WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . '_element_first' . $form_id, NULL, 'esc_html' ) );
+            $element_title = WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . '_element_title' . $form_id, NULL, 'esc_html' );
+            $element_middle = WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . '_element_middle' . $form_id, NULL, 'esc_html' );
+            $element_first = WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . '_element_first' . $form_id, NULL, 'esc_html' );
             if ( isset($element_title) || isset($element_middle) ) {
-              $param['w_first_val'] = stripslashes( WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . '_element_first' . $form_id, $w_first_val[0], 'esc_html' ) ) . '***' . stripslashes( WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . '_element_last' . $form_id, $w_first_val[1], 'esc_html' ) ) . '***' . stripslashes( WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . '_element_title' . $form_id, $w_first_val[2], 'esc_html' ) ) . '***' . stripslashes( WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . '_element_middle' . $form_id, $w_first_val[3], 'esc_html' ) );
+              $param['w_first_val'] = WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . '_element_first' . $form_id, $w_first_val[0], 'esc_html' ) . '***' . WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . '_element_last' . $form_id, $w_first_val[1], 'esc_html' ) . '***' . WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . '_element_title' . $form_id, $w_first_val[2], 'esc_html' ) . '***' . WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . '_element_middle' . $form_id, $w_first_val[3], 'esc_html' );
             }
             else {
               if ( isset($element_first) ) {
-                $param['w_first_val'] = stripslashes( WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . '_element_first' . $form_id, $w_first_val[0], 'esc_html' ) ) . '***' . stripslashes( WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . '_element_last' . $form_id, $w_first_val[1], 'esc_html' ) );
+                $param['w_first_val'] = WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . '_element_first' . $form_id, $w_first_val[0], 'esc_html' ) . '***' . WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . '_element_last' . $form_id, $w_first_val[1], 'esc_html' );
               }
             }
             $w_first_val = explode('***', $param['w_first_val']);
@@ -1828,7 +1828,7 @@ class FMViewForm_maker {
     if ( WDFMInstance(self::PLUGIN)->fm_settings['fm_file_read'] == '1' || !file_exists($fm_script_dir) ) {
       $fm_js_content = WDW_FM_Library(self::PLUGIN)->get_fm_js_content($form_id);
       if (function_exists('wp_add_inline_script') ) {
-        wp_add_inline_script(WDFMInstance(self::PLUGIN)->handle_prefix . '-frontend', $fm_js_content);
+        wp_add_inline_script('jquery', $fm_js_content);
       }
       else {
         echo '<script id="'. WDFMInstance(self::PLUGIN)->handle_prefix . '-frontend-inline-js">' . $fm_js_content . '</script>';
@@ -2136,14 +2136,8 @@ class FMViewForm_maker {
     $wp_upload_dir = wp_upload_dir();
     $fm_script_dir = $wp_upload_dir['basedir'] . $frontend_dir . 'js/fm-script-' . $id . '.js';
 
-    if ( WDFMInstance(self::PLUGIN)->fm_settings['fm_file_read'] == '1' || !file_exists($fm_script_dir) ) {
-      $handle = WDFMInstance(self::PLUGIN)->handle_prefix . '-frontend';
-    } else {
-      $handle = WDFMInstance(self::PLUGIN)->handle_prefix . '-script-' . $id;
-    }
-
-    if ( function_exists('wp_add_inline_script') ) { // Since Wordpress 4.5.0
-      wp_add_inline_script($handle, $onload_js);
+    if ( function_exists('wp_add_inline_script') ) { // Since WordPress 4.5.0
+      wp_add_inline_script('jquery', $onload_js);
     }
     else {
       echo '<script>' . $onload_js . '</script>';

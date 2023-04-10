@@ -13,12 +13,12 @@ class BoosterController {
   const PLUGIN_ZIP = 'https://downloads.wordpress.org/plugin/tenweb-speed-optimizer.latest-stable.zip';
 
   private $google_api_keys = array(
-      'AIzaSyCQmF4ZSbZB8prjxci3GWVK4UWc-Yv7vbw',
-      'AIzaSyAgXPc9Yp0auiap8L6BsHWoSVzkSYgHdrs',
-      'AIzaSyCftPiteYkBsC2hamGbGax5D9JQ4CzexPU',
-      'AIzaSyC-6oKLqdvufJnysAxd0O56VgZrCgyNMHg',
-      'AIzaSyB1QHYGZZ6JIuUUce4VyBt5gF_-LwI5Xsk'
-    );
+    'AIzaSyCQmF4ZSbZB8prjxci3GWVK4UWc-Yv7vbw',
+    'AIzaSyAgXPc9Yp0auiap8L6BsHWoSVzkSYgHdrs',
+    'AIzaSyCftPiteYkBsC2hamGbGax5D9JQ4CzexPU',
+    'AIzaSyC-6oKLqdvufJnysAxd0O56VgZrCgyNMHg',
+    'AIzaSyB1QHYGZZ6JIuUUce4VyBt5gF_-LwI5Xsk'
+  );
 
   public function __construct($booster) {
     $this->booster = $booster;
@@ -45,7 +45,7 @@ class BoosterController {
 
   /**
    * Display.
-  */
+   */
   public function display() {
     $params = array();
     $params['twb_dismiss'] = isset($_GET['twb_dismiss']) ? intval($_GET['twb_dismiss']) : 0;
@@ -115,12 +115,12 @@ class BoosterController {
   /**
    * Run function as ajax action and keep optimized images data in DB option
    * Endpoint work once a day to prevent page loading time
-  */
+   */
   public function set_compressed_pages() {
     $twb_optimized_pages = get_transient("twb_optimized_pages");
 
     if ( !empty($twb_optimized_pages) || !defined('TENWEBIO_MANAGER_PREFIX') ) {
-     die;
+      die;
     }
 
     $workspace_id = (int) get_site_option(TENWEBIO_MANAGER_PREFIX . '_workspace_id', 0);
@@ -178,10 +178,10 @@ class BoosterController {
           }));
 
           if( !empty($found) ) {
-              $pages_compressed[$i]['images_count'] = $found['images_count'];
-              $total_compressed_images += $found['images_count'];
+            $pages_compressed[$i]['images_count'] = $found['images_count'];
+            $total_compressed_images += $found['images_count'];
           } else {
-              $pages_compressed[$i]['images_count'] = 0;
+            $pages_compressed[$i]['images_count'] = 0;
           }
           $i++;
         }
@@ -191,10 +191,9 @@ class BoosterController {
         $data['total_compressed_images'] = (int) $total_compressed_images;
         $data['total_not_compressed_images_size'] = $total_not_compressed_images_size;
         $data['total_not_compressed_images_count'] = $total_not_compressed_images_count;
-      }
-
-      if ( $total_compressed_images != 0 || $total_not_compressed_images_size != 0 ) {
-        set_transient( 'twb_optimized_pages', $data, DAY_IN_SECONDS );
+        if ( $total_compressed_images != 0 || $total_not_compressed_images_size != 0 ) {
+          set_transient( 'twb_optimized_pages', $data, DAY_IN_SECONDS );
+        }
       }
     }
     die;
@@ -217,7 +216,7 @@ class BoosterController {
    * @param $params array
    *
    * @return array
-  */
+   */
   public function get_pages_compressed( $params ) {
     $return_data = array(
       'pages' => array(),
@@ -229,14 +228,14 @@ class BoosterController {
 
     $twb_optimized_pages = get_transient("twb_optimized_pages");
     if ( !empty($twb_optimized_pages) ) {
-        return $twb_optimized_pages;
+      return $twb_optimized_pages;
     } else {
-        /* in case of returned data is 0 just get from db last data or run PG functionality to get count/size */
-        $images_total_size = get_option('twb_images_total_size');
-        if ( !empty($images_total_size) ) {
-          $return_data['total_not_compressed_images_size'] = $images_total_size;
-          $return_data['total_not_compressed_images_count'] = $params['images_count'];
-        }
+      /* in case of returned data is 0 just get from db last data or run PG functionality to get count/size */
+      $images_total_size = get_option('twb_images_total_size');
+      if ( !empty($images_total_size) ) {
+        $return_data['total_not_compressed_images_size'] = $images_total_size;
+        $return_data['total_not_compressed_images_count'] = $params['images_count'];
+      }
     }
 
     return $return_data;
@@ -402,7 +401,7 @@ class BoosterController {
    * Get optimized media count.
    *
    * @return int
-  */
+   */
   public function get_images_count() {
     $allowed_types = array('image/jpeg','image/jpg','image/png','image/gif','image/webp','image/svg');
     // Get all wp-media attachments.
@@ -416,11 +415,14 @@ class BoosterController {
       }
     }
 
-    // Get all Photo gallery media.
-    global $wpdb;
-    $row = $wpdb->get_row( 'SELECT count(id) AS qty FROM `' . $wpdb->prefix . 'bwg_file_paths` WHERE is_dir = 0' );
-    if (!empty($row) && !empty($row->qty)) {
-      $total += intval($row->qty);
+    include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+    if ( is_plugin_active('photo-gallery/photo-gallery.php') ) {
+      // Get all Photo gallery media.
+      global $wpdb;
+      $row = $wpdb->get_row('SELECT count(id) AS qty FROM `' . $wpdb->prefix . 'bwg_file_paths` WHERE is_dir = 0');
+      if ( !empty($row) && !empty($row->qty) ) {
+        $total += intval($row->qty);
+      }
     }
 
     return intval($total);
@@ -430,7 +432,7 @@ class BoosterController {
    * Sign up to the Dashboard.
    *
    * @return bool
-  */
+   */
   public function sign_up_dashboard() {
     $email = isset($_POST['twb_email']) ? sanitize_email($_POST['twb_email']) : '';
     $parent_slug = isset($_POST['parent_slug']) ? sanitize_text_field($_POST['parent_slug']) : '';
@@ -446,18 +448,27 @@ class BoosterController {
     );
 
     if ( $is_plugin ) {
-        switch ( $parent_slug ) {
-          case "manage_fm":
-            $body_data['product_id'] = '95';
-            break;
-          case "galleries_bwg":
-            $body_data['product_id'] = '101';
-            break;
-          default:
-            $body_data['product_slug'] = "plugin_" . $slug;
-        }
+      switch ( $parent_slug ) {
+        case "manage_fm":
+          $body_data['product_id'] = '95';
+          break;
+        case "wdi_feeds":
+          $body_data['product_id'] = '43';
+          break;
+        case "info_ffwd":
+          $body_data['product_id'] = '93';
+          break;
+        case "sliders_wds":
+          $body_data['product_id'] = '97';
+          break;
+        case "galleries_bwg":
+          $body_data['product_id'] = '101';
+          break;
+        default:
+          $body_data['product_slug'] = "plugin_" . $slug;
+      }
     } else {
-        $body_data['product_slug'] = "theme_" . $slug;
+      $body_data['product_slug'] = "theme_" . $slug;
     }
 
     $args = array(
@@ -472,10 +483,10 @@ class BoosterController {
     $result = wp_remote_post( $url, $args );
     ob_clean();
     if ( !empty($result) && isset( $result['body']) ) {
-        $result = $result['body'];
+      $result = $result['body'];
     } else {
-        echo json_encode( array('status' => 'error' ) );
-        die;
+      echo json_encode( array('status' => 'error' ) );
+      die;
     }
 
     $result = json_decode($result, 1);
@@ -501,7 +512,7 @@ class BoosterController {
    * Connect to dashboard.
    *
    * @return void
-  */
+   */
   public function connect_to_dashboard() {
     if ( class_exists('\TenWebOptimizer\OptimizerUtils') ) {
       $twb_connect_link = \TenWebOptimizer\OptimizerUtils::get_tenweb_connection_link('login');
@@ -524,9 +535,9 @@ class BoosterController {
     /* Check if url hasn't http or https add */
     if ( strpos($url, 'http') !== 0 ){
       if ( isset($_SERVER['HTTPS']) ) {
-          $url = 'https://'.$url;
+        $url = 'https://'.$url;
       } else {
-          $url = 'http://'.$url;
+        $url = 'http://'.$url;
       }
     }
 

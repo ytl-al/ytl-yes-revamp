@@ -1,22 +1,21 @@
 <?php
+
 /**
  * interface for specific hostings class
  *
  * Standard: PSR-2
  *
  * @package SC\DUPX\DB
- * @link http://www.php-fig.org/psr/psr-2/
- *
+ * @link    http://www.php-fig.org/psr/psr-2/
  */
+
 defined('ABSPATH') || defined('DUPXABSPATH') || exit;
 
 /**
  * instaler custom host interface for cusotm hosting classes
- * 
  */
 interface DUPX_Host_interface
 {
-
     /**
      * return the current host itentifier
      *
@@ -39,8 +38,13 @@ interface DUPX_Host_interface
 
     /**
      * return the label of current hosting
-     * 
+     *
      * @return string
      */
     public function getLabel();
+
+    /**
+     * this function is called if current hosting is this
+     */
+    public function setCustomParams();
 }

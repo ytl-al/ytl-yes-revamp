@@ -455,7 +455,7 @@ class  FMViewSubmissions_fm extends FMAdminView {
 								<?php
 							  break;
                 case 'type_submitter_mail':
-                  $query = $wpdb->prepare('SELECT id FROM ' . $wpdb->prefix . 'formmaker_submits WHERE form_id ="%d" AND element_label="verifyInfo" AND element_value="verified**%d"', $form_id, $sorted_labels_id[$i]);
+                  $query = $wpdb->prepare('SELECT id FROM ' . $wpdb->prefix . 'formmaker_submits WHERE form_id =%d AND element_label="verifyInfo" AND element_value="verified**%d"', $form_id, $sorted_labels_id[$i]);
                   $is_verified_exist = $wpdb->get_var($query);
                   ?>
                   <th class="<?php echo $sorted_labels_id[$i]; ?>_fc" <?php echo $styleStr; ?>>
@@ -710,7 +710,7 @@ class  FMViewSubmissions_fm extends FMAdminView {
 											$temp[$g]->element_value = str_replace("***property***", " ", $temp[$g]->element_value);
 										}
 										if ( $sorted_label_types[$h] == "type_submitter_mail" ) {
-                      $query = $wpdb->prepare('SELECT id FROM ' . $wpdb->prefix . 'formmaker_submits WHERE form_id ="%d" AND group_id="%d" AND element_value="verified**%d"', $form_id, $data->group_id, $sorted_labels_id[$h]);
+                      $query = $wpdb->prepare('SELECT id FROM ' . $wpdb->prefix . 'formmaker_submits WHERE form_id =%d AND group_id=%d AND element_value="verified**%d"', $form_id, $data->group_id, $sorted_labels_id[$h]);
 											$isverified = $wpdb->get_var($query);
 											if ( $isverified ) {
 												if ( !isset($verified_emails[$sorted_labels_id[$h]]) ) {

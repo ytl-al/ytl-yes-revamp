@@ -261,6 +261,11 @@ class TWBLibrary {
 
     $post_id = $post->ID;
     $page_score = get_post_meta( $post_id, 'two_page_speed' );
+
+    if ( !is_array($page_score) ) {
+      return 'notstarted';
+    }
+
     $page_score = end($page_score);
 
     if ( isset($page_score['previous_score']) ) {

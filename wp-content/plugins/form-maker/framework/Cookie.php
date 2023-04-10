@@ -118,7 +118,7 @@ class Cookie_fm {
   public static function getCookie() {
     if ( empty(self::$cookie_data) ) {
       global $wpdb;
-      $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM `' . $wpdb->prefix . 'formmaker_cookies` WHERE `cookie_id` = "%s"', self::getCookieId()));
+      $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM `' . $wpdb->prefix . 'formmaker_cookies` WHERE `cookie_id` = %s', self::getCookieId()));
       if ( !empty($row) ) {
         if ( !empty($row->value) ) {
           $row->value = json_decode($row->value, TRUE);

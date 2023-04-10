@@ -12,7 +12,7 @@ class FMModelCheckpaypal extends FMAdminModel {
    */
   public function get_form_by_id( $id = 0 ) {
     global $wpdb;
-    $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker WHERE id="%d"', $id));
+    $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker WHERE id=%d', $id));
     $row = WDW_FM_Library::convert_json_options_to_old( $row, 'form_options' );
 
     return $row;
@@ -26,7 +26,7 @@ class FMModelCheckpaypal extends FMAdminModel {
    */
   public function get_form_session_by_group_id( $id = 0 ) {
     global $wpdb;
-    $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker_sessions WHERE group_id="%d"', $id));
+    $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker_sessions WHERE group_id=%d', $id));
 
     return $row;
   }

@@ -1,20 +1,20 @@
 <?php
+
 defined('ABSPATH') || defined('DUPXABSPATH') || exit;
 /**
  * Utility class working with strings
  *
  * Standard: PSR-2
+ *
  * @link http://www.php-fig.org/psr/psr-2
  *
- * @package DUP
+ * @package    DUP
  * @subpackage classes/utilities
- * @copyright (c) 2017, Snapcreek LLC
- * @license	https://opensource.org/licenses/GPL-3.0 GNU Public License
- *
+ * @copyright  (c) 2017, Snapcreek LLC
+ * @license    https://opensource.org/licenses/GPL-3.0 GNU Public License
  */
 class DUP_STR
 {
-
     /**
      * Append the value to the string if it doesn't already exist
      *
@@ -25,11 +25,12 @@ class DUP_STR
      */
     public static function appendOnce($string, $value)
     {
-        return $string.(substr($string, -1) == $value ? '' : $value);
+        return $string . (substr($string, -1) == $value ? '' : $value);
     }
 
     /**
      * Returns true if the string contains UTF8 characters
+     *
      * @see http://php.net/manual/en/function.mb-detect-encoding.php
      *
      * @param string  $string     The class name where the $destArray exists
@@ -93,7 +94,4 @@ class DUP_STR
         }
         return (substr($haystack, -$length) === $needle);
     }
-
-
 }
-

@@ -21,7 +21,7 @@ class FMModelForm_maker {
    */
   public function showform( $id = 0, $type = 'embedded' ) {
     global $wpdb;
-    $row = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM ' . $wpdb->prefix . 'formmaker WHERE id="%d"' . (!WDFMInstance(self::PLUGIN)->is_free ? '' : ' AND id' . (WDFMInstance(self::PLUGIN)->is_free == 1 ? ' NOT ' : ' ') . 'IN (' . (get_option( 'contact_form_forms', '' ) != '' ? get_option( 'contact_form_forms' ) : 0) . ')'), $id ) );
+    $row = $wpdb->get_row( $wpdb->prepare( 'SELECT * FROM ' . $wpdb->prefix . 'formmaker WHERE id=%d' . (!WDFMInstance(self::PLUGIN)->is_free ? '' : ' AND id' . (WDFMInstance(self::PLUGIN)->is_free == 1 ? ' NOT ' : ' ') . 'IN (' . (get_option( 'contact_form_forms', '' ) != '' ? get_option( 'contact_form_forms' ) : 0) . ')'), $id ) );
     if ( !$row ) {
       echo WDW_FM_Library(self::PLUGIN)->message( __( 'There is no form selected or the form was deleted.', WDFMInstance(self::PLUGIN)->prefix ), 'fm-notice-error' );
       return FALSE;
@@ -1189,12 +1189,12 @@ class FMModelForm_maker {
     // If IP is blacklisted.
     $this->check_ip($id);
     $error = false;
-    if ( !$this->fm_empty_field_validation($id) ) {
+    $fm_settings = WDFMInstance(self::PLUGIN)->fm_settings;
+    if ( $fm_settings['fm_antispam_bot_validation'] && !$this->fm_empty_field_validation($id) ) {
       $error = true;
       Cookie_fm::setCookieValueByKey($id, 'error_or_no', 1);
       Cookie_fm::setCookieValueByKey($id, 'massage_after_submit', addslashes(addslashes(__('Error: Something went wrong, please try again.', WDFMInstance(self::PLUGIN)->prefix))));
     }
-    $fm_settings = WDFMInstance(self::PLUGIN)->fm_settings;
     if ( $fm_settings['fm_antispam_referer'] && !$this->check_http_referer() ) {
       // If failed empty field and referer verification with enabled antispam protection.
       $error = true;
@@ -1392,7 +1392,7 @@ class FMModelForm_maker {
 
   public function check_ip($id) {
     global $wpdb;
-    $blocked_ip = $wpdb->get_var( $wpdb->prepare( 'SELECT * FROM ' . $wpdb->prefix . 'formmaker_blocked WHERE ip="%s"', $_SERVER['REMOTE_ADDR'] ) );
+    $blocked_ip = $wpdb->get_var( $wpdb->prepare( 'SELECT * FROM ' . $wpdb->prefix . 'formmaker_blocked WHERE ip=%s', $_SERVER['REMOTE_ADDR'] ) );
     if ( $blocked_ip ) {
       Cookie_fm::setCookieValueByKey($id, 'error_or_no', 1);
       Cookie_fm::setCookieValueByKey($id, 'massage_after_submit', addslashes(__('Your ip is blacklisted. Please contact the website administrator.', WDFMInstance(self::PLUGIN)->prefix)));
@@ -5149,9 +5149,9 @@ class FMModelForm_maker {
 	private function ip_exceeded_limit( $id, $ip ) {
 		global $wpdb;
 		$max_second = 20;
-		$row = $wpdb->get_var($wpdb->prepare('SELECT count(DISTINCT(group_id)) FROM `' . $wpdb->prefix . 'formmaker_submits` WHERE form_id=%d AND ip="%s" AND date>=("' . date('Y-m-d H:i:s', time() - $max_second) . '")', $id, $ip));
+		$row = $wpdb->get_var($wpdb->prepare('SELECT count(DISTINCT(group_id)) FROM `' . $wpdb->prefix . 'formmaker_submits` WHERE form_id=%d AND ip=%s AND date>=("' . date('Y-m-d H:i:s', time() - $max_second) . '")', $id, $ip));
 		if ( $row >= 4) {
-			if ( ! $wpdb->get_var($wpdb->prepare( 'SELECT * FROM ' . $wpdb->prefix . 'formmaker_blocked WHERE ip="%s"', $ip )) ) {
+			if ( ! $wpdb->get_var($wpdb->prepare( 'SELECT * FROM ' . $wpdb->prefix . 'formmaker_blocked WHERE ip=%s', $ip )) ) {
 				$wpdb->insert($wpdb->prefix . 'formmaker_blocked', array('ip' => $ip), array('%s') );
 			}
 		}

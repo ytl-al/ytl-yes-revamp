@@ -3,8 +3,8 @@ Contributors: wpdevteam, re_enter_rupok
 Donate link: https://wpdeveloper.com
 Tags: knowledge base, docs, documentation, documents, faq page, doc, knowledge, table of content, TOC, knowledgebase, faqs, doc page, best documentation plugin, support, customer support
 Requires at least: 4.0
-Tested up to: 5.9
-Stable tag: 2.0.9
+Tested up to: 6.1
+Stable tag: 2.2.7
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -90,6 +90,83 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 2.2.7 - 08/02/2023 = 
+
+- Fixed: Analytics graph throwing PHP error
+- Fixed: Weekly Email Report is sent twice at the same time
+- Improved: Added option to show docs lists, search keywords and reactions based on custom date range selector in Analytics
+- Improved: Added option to make Instant Answers doc title clickable
+- Few minor bug fixes & improvements
+
+= 2.2.6 - 15/01/2023 = 
+
+- Fixed: Parse error for older PHP Versions
+
+= 2.2.5 - 11/01/2023 = 
+
+- Few minor bug fixes & improvements
+
+= 2.2.4 - 22/12/2022 = 
+
+- Few minor bug fixes & improvements
+
+= 2.2.3 - 21/12/2022 = 
+
+- Few minor bug fixes & improvements
+
+= 2.2.2 - 22/11/2022 = 
+
+- Improved: Added option to exclude subcategories from Advanced Search Category List
+- Fixed: Newly created Categories showing docs assigned to them despite no docs being assigned when you filter a category based on a Knowledge base 
+- Few minor bug fixes & improvements
+
+= 2.2.1 - 06/11/2022 = 
+
+- Improved: Added Category Ordering option inside Instant Answers
+- Added: Shortcodes for Multiple Knowledge base
+- Fixed: Analytics not working when switching to a different language on dashboard
+- Fixed: Reaction count for draft docs are being counted for Analytics
+- Few minor bug fixes & improvements
+
+= 2.2.0 - 25/09/2022 = 
+
+- Added: New Handbook Layout for Docs, Archive & Single Docs page
+- Few minor bug fixes & improvements
+
+= 2.1.4 - 22/08/2022 = 
+
+- Improved: Added Individual docs Analytics
+- Improved: Added "Views" tab for Analytics
+- Few minor bug fixes & improvements
+
+= 2.1.3 - 11/08/2022 = 
+
+- Fixed: Elementor Deprecated functions error
+- Few minor bug fixes & improvements
+
+= 2.1.2 - 08/08/2022 = 
+- Fixed: Sanitized some missing strings
+
+= 2.1.1 - 21/07/2022 = 
+- Fixed: Analytics Reaction graph not working properly for all time data
+- Improved: Added option to change the Heading tags for Knowledge base titles
+- Few minor bug fixes & improvements
+
+= 2.1.0 - 03/07/2022 = 
+- Revamped: BetterDocs Analytics with more key metrics and graphs
+- Few minor bug fixes & improvements
+
+= 2.0.11 - 25/05/2022 = 
+- Added WordPress 6.0 Compatibility
+- Few minor bug fixes & improvements
+
+= 2.0.10 - 19/04/2022 = 
+- Improved: Query optimization for role management
+- Improved: Added border radius option for Advanced Search Popular keywords
+- Fixed: Restricted Docs List still being visible to users from tags Archive page
+- Fixed: BetterDocs not working for multi-sites
+- Few minor bug fixes & improvements
 
 = 2.0.9 - 07/04/2022 = 
 - Fixed: Fatal error if a default WordPress user role doesn't exist

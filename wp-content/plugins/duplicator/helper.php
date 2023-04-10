@@ -1,4 +1,5 @@
 <?php
+
 defined('ABSPATH') || exit;
 
 if (!function_exists('duplicator_cloned_get_home_path')) {
@@ -16,7 +17,7 @@ if (!function_exists('duplicator_cloned_get_home_path')) {
         // below two lines
         // extra added by snapcreek
         // when home is www. path and siteurl is non-www , the duplicator_get_home_psth() was  returning empty value
-        $home = str_ireplace('://www.', '://', $home);
+        $home    = str_ireplace('://www.', '://', $home);
         $siteurl = str_ireplace('://www.', '://', $siteurl);
 
         if (!empty($home) && 0 !== strcasecmp($home, $siteurl)  && $home !== $siteurl) {
@@ -32,11 +33,17 @@ if (!function_exists('duplicator_cloned_get_home_path')) {
 }
 
 if (!function_exists('duplicator_get_home_path')) {
-    function duplicator_get_home_path() {
+    /**
+     * Get home path
+     *
+     * @return string
+     */
+    function duplicator_get_home_path()
+    {
         static $homePath = null;
         if (is_null($homePath)) {
             if (!function_exists('get_home_path')) {
-                require_once(ABSPATH.'wp-admin/includes/file.php');
+                require_once(ABSPATH . 'wp-admin/includes/file.php');
             }
             $homePath = wp_normalize_path(duplicator_cloned_get_home_path());
             if ($homePath == '//' || $homePath == '') {
@@ -50,7 +57,14 @@ if (!function_exists('duplicator_get_home_path')) {
 }
 
 if (!function_exists('duplicator_get_abs_path')) {
-    function duplicator_get_abs_path() {
+
+    /**
+     * Get abspath
+     *
+     * @return string
+     */
+    function duplicator_get_abs_path()
+    {
         static $absPath = null;
         if (is_null($absPath)) {
             $absPath = wp_normalize_path(ABSPATH);
@@ -77,6 +91,7 @@ if (!function_exists('sanitize_textarea_field')) {
      * @since 4.7.0
      *
      * @param string $str String to sanitize.
+     *
      * @return string Sanitized string.
      */
     function sanitize_textarea_field($str)
@@ -99,11 +114,12 @@ if (!function_exists('_sanitize_text_fields')) {
     /**
      * Internal helper function to sanitize a string from user input or from the db
      *
-     * @since 4.7.0
+     * @since  4.7.0
      * @access private
      *
-     * @param string $str String to sanitize.
-     * @param bool $keep_newlines optional Whether to keep newlines. Default: false.
+     * @param string $str           String to sanitize.
+     * @param bool   $keep_newlines optional Whether to keep newlines. Default: false.
+     *
      * @return string Sanitized string.
      */
     function _sanitize_text_fields($str, $keep_newlines = false)
@@ -128,7 +144,7 @@ if (!function_exists('_sanitize_text_fields')) {
         $found = false;
         while (preg_match('/%[a-f0-9]{2}/i', $filtered, $match)) {
             $filtered = str_replace($match[0], '', $filtered);
-            $found = true;
+            $found    = true;
         }
 
         if ($found) {
@@ -149,30 +165,27 @@ if (!function_exists('wp_normalize_path')) {
      * Allows for two leading slashes for Windows network shares, but
      * ensures that all other duplicate slashes are reduced to a single.
      *
-     * @since 3.9.0
-     * @since 4.4.0 Ensures upper-case drive letters on Windows systems.
-     * @since 4.5.0 Allows for Windows network shares.
-     * @since 4.9.7 Allows for PHP file wrappers.
-     *
      * @param string $path Path to normalize.
+     *
      * @return string Normalized path.
      */
-    function wp_normalize_path( $path ) {
+    function wp_normalize_path($path)
+    {
         $wrapper = '';
-        if ( wp_is_stream( $path ) ) {
-            list( $wrapper, $path ) = explode( '://', $path, 2 );
-            $wrapper .= '://';
+        if (wp_is_stream($path)) {
+            list( $wrapper, $path ) = explode('://', $path, 2);
+            $wrapper               .= '://';
         }
 
         // Standardise all paths to use /
-        $path = str_replace( '\\', '/', $path );
+        $path = str_replace('\\', '/', $path);
 
         // Replace multiple slashes down to a singular, allowing for network shares having two slashes.
-        $path = preg_replace( '|(?<=.)/+|', '/', $path );
+        $path = preg_replace('|(?<=.)/+|', '/', $path);
 
         // Windows paths should uppercase the drive letter
-        if ( ':' === substr( $path, 1, 1 ) ) {
-            $path = ucfirst( $path );
+        if (':' === substr($path, 1, 1)) {
+            $path = ucfirst($path);
         }
 
         return $wrapper . $path;

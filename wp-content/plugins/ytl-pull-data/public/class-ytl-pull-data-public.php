@@ -354,7 +354,8 @@ class Ytl_Pull_Data_Public
 	{
 		register_rest_route('ywos/v1', 'add-to-cart', array(
 			'methods'	=> 'POST',
-			'callback'	=> array($this, 'ra_add_to_cart')
+			'callback'	=> array($this, 'ra_add_to_cart'),
+			'permission_callback' => '__return_true'
 		));
 	}
 
@@ -389,7 +390,8 @@ class Ytl_Pull_Data_Public
 						return is_numeric($param);
 					}
 				)
-			)
+			),
+			'permission_callback' => '__return_true'
 		));
 	}
 
@@ -464,7 +466,8 @@ class Ytl_Pull_Data_Public
 	{
 		register_rest_route('ywos/v1', '/get-add-ons-by-plan', array(
 			'methods'	=> 'POST',
-			'callback' 	=> array($this, 'get_add_ons_by_plan')
+			'callback' 	=> array($this, 'get_add_ons_by_plan'),
+			'permission_callback' => '__return_true'
 		));
 	}
 
@@ -527,7 +530,8 @@ class Ytl_Pull_Data_Public
 	{
 		register_rest_route('ywos/v1', 'get-auth-token', array(
 			'methods'	=> 'GET',
-			'callback'	=> array($this, 'get_auth_token')
+			'callback'	=> array($this, 'get_auth_token'),
+			'permission_callback' => '__return_true'
 		));
 	}
 
@@ -575,7 +579,8 @@ class Ytl_Pull_Data_Public
 						return true;
 					}
 				]
-			]
+			],
+			'permission_callback' => '__return_true'
 		));
 	}
 
@@ -636,7 +641,8 @@ class Ytl_Pull_Data_Public
 						return is_string($param);
 					}
 				]
-			]
+			],
+			'permission_callback' => '__return_true'
 		]);
 	}
 
@@ -700,7 +706,8 @@ class Ytl_Pull_Data_Public
 						return is_string($param);
 					}
 				)
-			)
+			),
+			'permission_callback' => '__return_true'
 		]);
 	}
 
@@ -755,7 +762,8 @@ class Ytl_Pull_Data_Public
 						return true;
 					}
 				]
-			]
+			],
+			'permission_callback' => '__return_true'
 		));
 	}
 
@@ -815,7 +823,8 @@ class Ytl_Pull_Data_Public
 						return true;
 					}
 				]
-			]
+			],
+			'permission_callback' => '__return_true'
 		));
 	}
 
@@ -862,7 +871,8 @@ class Ytl_Pull_Data_Public
 	{
 		register_rest_route('ywos/v1', 'validate-customer-eligibilities', array(
 			'methods'	=> 'POST',
-			'callback'	=> array($this, 'validate_customer_eligibilities')
+			'callback'	=> array($this, 'validate_customer_eligibilities'),
+			'permission_callback' => '__return_true'
 		));
 	}
 
@@ -951,7 +961,8 @@ class Ytl_Pull_Data_Public
 	{
 		register_rest_route('ywos/v1', 'verify-referral-code', array(
 			'methods'	=> 'POST',
-			'callback' 	=> array($this, 'verify_referral_code')
+			'callback' 	=> array($this, 'verify_referral_code'),
+			'permission_callback' => '__return_true'
 		));
 	}
 
@@ -1001,7 +1012,8 @@ class Ytl_Pull_Data_Public
 	{
 		register_rest_route('ywos/v1', 'get-fpx-bank-list', array(
 			'methods'	=> 'GET',
-			'callback' 	=> array($this, 'get_fpx_bank_list')
+			'callback' 	=> array($this, 'get_fpx_bank_list'),
+			'permission_callback' => '__return_true'
 		));
 	}
 
@@ -1043,7 +1055,8 @@ class Ytl_Pull_Data_Public
 	{
 		register_rest_route('ywos/v1', 'get-ipp-tenures', array(
 			'methods'	=> 'POST',
-			'callback' 	=> array($this, 'get_ipp_tenures')
+			'callback' 	=> array($this, 'get_ipp_tenures'),
+			'permission_callback' => '__return_true'
 		));
 	}
 
@@ -1086,7 +1099,8 @@ class Ytl_Pull_Data_Public
 	{
 		register_rest_route('ywos/v1', 'get-ipp-monthly-installments', array(
 			'methods'	=> 'POST',
-			'callback' 	=> array($this, 'get_ipp_monthly_installments')
+			'callback' 	=> array($this, 'get_ipp_monthly_installments'),
+			'permission_callback' => '__return_true'
 		));
 	}
 
@@ -1130,7 +1144,8 @@ class Ytl_Pull_Data_Public
 	{
 		register_rest_route('ywos/v1', 'create-yos-order', array(
 			'methods'	=> 'POST',
-			'callback' 	=> array($this, 'create_yos_order')
+			'callback' 	=> array($this, 'create_yos_order'),
+			'permission_callback' => '__return_true'
 		));
 	}
 
@@ -1318,7 +1333,8 @@ class Ytl_Pull_Data_Public
 	{
 		register_rest_route('ywos/v1', 'get-rm-wallet-merchant', array(
 			'methods'	=> 'GET',
-			'callback' 	=> array($this, 'get_wallet_rm_merchant')
+			'callback' 	=> array($this, 'get_wallet_rm_merchant'),
+			'permission_callback' => '__return_true'
 		));
 	}
 
@@ -1356,7 +1372,8 @@ class Ytl_Pull_Data_Public
 	{
 		register_rest_route('ywos/v1', 'check-order-payment-status', array(
 			'methods'	=> 'POST',
-			'callback' 	=> array($this, 'check_order_payment_status')
+			'callback' 	=> array($this, 'check_order_payment_status'),
+			'permission_callback' => '__return_true'
 		));
 	}
 
@@ -1411,7 +1428,8 @@ class Ytl_Pull_Data_Public
 	{
 		register_rest_route('ywos/v1', 'get-order-by-display-id/(?P<order_display_id>[a-zA-Z0-9-]+)', array(
 			'methods' 	=> 'GET',
-			'callback' 	=> array($this, 'get_order_by_display_id')
+			'callback' 	=> array($this, 'get_order_by_display_id'),
+			'permission_callback' => '__return_true'
 		));
 	}
 
@@ -1436,7 +1454,8 @@ class Ytl_Pull_Data_Public
 	{
 		register_rest_route('ywos/v1', 'tp-url-check', array(
 			'methods'	=> 'POST',
-			'callback'	=> array($this, 'rest_tp_url_check')
+			'callback'	=> array($this, 'rest_tp_url_check'),
+			'permission_callback' => '__return_true'
 		));
 	}
 
@@ -1475,7 +1494,8 @@ class Ytl_Pull_Data_Public
 	{
 		register_rest_route('ywos/v1', 'tp-update-purchase', array(
 			'methods' 	=> 'POST',
-			'callback'	=> array($this, 'rest_tp_update_has_purchased_flag')
+			'callback'	=> array($this, 'rest_tp_update_has_purchased_flag'),
+			'permission_callback' => '__return_true'
 		));
 	}
 
@@ -1554,7 +1574,7 @@ class Ytl_Pull_Data_Public
 		}
 	}
 
-	public function update_order_record($session_key = '', $xpay_order_response = '', $is_xpay_success = 0, $xpay_order_meta)
+	public function update_order_record($session_key = '', $xpay_order_response = '', $is_xpay_success = 0, $xpay_order_meta = '')
 	{
 		global $wpdb;
 		$table_name = $wpdb->prefix.'ywos_orders';

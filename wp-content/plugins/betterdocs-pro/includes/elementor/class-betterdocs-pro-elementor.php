@@ -4,6 +4,7 @@ use ElementorPro\Modules\GlobalWidget\Documents\Widget;
 use ElementorPro\Plugin;
 use ElementorPro\Modules\ThemeBuilder as ThemeBuilder;
 use \Elementor\Group_Control_Typography as Group_Control_Typography;
+use \Elementor\Group_Control_Border as Group_Control_Border;
 
 /**
  * Working with elementor plugin
@@ -27,7 +28,7 @@ class BetterDocs_Pro_Elementor
      */
     public static function init()
     {
-        add_action('elementor/widgets/widgets_registered', [__CLASS__, 'register_widgets']);
+        add_action('elementor/widgets/register', [__CLASS__, 'register_widgets']);
         add_action('betterdocs/elementor/widgets/advanced-search/switcher', [__CLASS__,'betterdocs_advance_search'], 10, 1);
         add_action('betterdocs/elementor/widgets/advanced-search/controllers', [__CLASS__,'betterdocs_advance_search_controls'], 10, 1);
         if (is_plugin_active('elementor-pro/elementor-pro.php')) {
@@ -44,7 +45,6 @@ class BetterDocs_Pro_Elementor
      */
     public static function get_widget_list()
     {
-        $widget_arr['betterdocs-elementor-reactions']     = 'BetterDocs_Elementor_Reactions';
         $widget_arr['betterdocs-elementor-multiple-kb']   = 'BetterDocs_Elementor_Multiple_Kb';
         $widget_arr['betterdocs-elementor-popular-view']  = 'Betterdocs_Elementor_Popular_View';
         $widget_arr['betterdocs-elementor-tab-view-list'] = 'BetterDocs_Elementor_Tab_View';
@@ -64,7 +64,7 @@ class BetterDocs_Pro_Elementor
     {
         foreach (self::get_widget_list() as $value) {
             if (class_exists($value)) {
-                $widgets_manager->register_widget_type(new $value);
+                $widgets_manager->register(new $value);
             }
         }
     }
@@ -306,6 +306,44 @@ class BetterDocs_Pro_Elementor
                     'size_units' => ['px', 'em', '%'],
                     'selectors'  => [
                         '{{WRAPPER}} .betterdocs-popular-search-keyword' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                    ],
+                ]
+            );
+
+            $wp->add_group_control(
+                Group_Control_Border::get_type(),
+                [
+                    'name'       => 'advance_search_popular_search_keyword_border_type',
+                    'label'      => esc_html__('Border', 'betterdocs-pro'),
+                    'fields_options' => [
+                        'border' => [
+                            'default' => 'solid',
+                        ],
+                        'width'  => [
+                            'default' => [
+                                'top'      => '1',
+                                'right'    => '1',
+                                'bottom'   => '1',
+                                'left'     => '1',
+                                'isLinked' => false,
+                            ],
+                        ],
+                        'color'  => [
+                            'default' => '#DDDEFF',
+                        ],
+                    ],
+                    'selector'  => '{{WRAPPER}} .betterdocs-popular-search-keyword .popular-keyword'
+                ]
+            );
+
+            $wp->add_responsive_control(
+                'advance_search_popular_search_keyword_border_radius',
+                [
+                    'label'      => esc_html__('Keyword Border Radius', 'betterdocs-pro'),
+                    'type'       => Controls_Manager::DIMENSIONS,
+                    'size_units' => ['px', 'em', '%'],
+                    'selectors'  => [
+                        '{{WRAPPER}} .betterdocs-popular-search-keyword .popular-keyword' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                     ],
                 ]
             );

@@ -1,15 +1,16 @@
 <?php
+
 defined('ABSPATH') || defined('DUPXABSPATH') || exit;
 /**
  * Validate variables
  *
  * Standard: PSR-2
+ *
  * @link http://www.php-fig.org/psr/psr-2
  *
- * @package Duplicator
+ * @package    Duplicator
  * @subpackage classes/utilities
- * @copyright (c) 2017, Snapcreek LLC
- *
+ * @copyright  (c) 2017, Snapcreek LLC
  */
 // Exit if accessed directly
 if (!defined('DUPLICATOR_VERSION')) {
@@ -21,7 +22,7 @@ class DUP_Validator
     /**
      * @var array $patterns
      */
-    private static $patterns = array(
+    private static $patterns        = array(
         'fdir' => '/^([a-zA-Z]:[\\\\\/]|\/|\\\\\\\\|\/\/)[^<>\0]+$/',
         'ffile' => '/^([a-zA-Z]:[\\\\\/]|\/|\\\\\\\\|\/\/)[^<>\0]+$/',
         'fext' => '/^\.?[^\\\\\/*:<>\0?"|\s\.]+$/',
@@ -29,14 +30,12 @@ class DUP_Validator
         'empty' => '/^$/',
         'nempty' => '/^.+$/',
     );
-
     const FILTER_VALIDATE_IS_EMPTY  = 'empty';
     const FILTER_VALIDATE_NOT_EMPTY = 'nempty';
     const FILTER_VALIDATE_FILE      = 'ffile';
     const FILTER_VALIDATE_FOLDER    = 'fdir';
     const FILTER_VALIDATE_FILE_EXT  = 'fext';
     const FILTER_VALIDATE_EMAIL     = 'email';
-
     /**
      * @var array $errors [ ['key' => string field key,
      *                      'msg' => error message ] , [] ]
@@ -44,7 +43,7 @@ class DUP_Validator
     private $errors = array();
 
     /**
-     *
+     * Class constructor
      */
     public function __construct()
     {
@@ -52,7 +51,9 @@ class DUP_Validator
     }
 
     /**
+     * Reset
      *
+     * @return void
      */
     public function reset()
     {
@@ -94,12 +95,12 @@ class DUP_Validator
      *
      * @param string $format printf format message where %s is the variable content default "%s\n"
      * @param bool $echo if false return string
-     * @return void|string
+     *
+     * @return string
      */
     public function getErrorsFormat($format = "%s\n", $echo = true)
     {
         $msgs = $this->getErrorsMsg();
-
         ob_start();
         foreach ($msgs as $msg) {
             printf($format, $msg);
@@ -107,6 +108,7 @@ class DUP_Validator
 
         if ($echo) {
             ob_end_flush();
+            return '';
         } else {
             return ob_get_clean();
         }
@@ -136,28 +138,25 @@ class DUP_Validator
      * @param mixed $variable
      * @param int $filter
      * @param array $options
+     *
      * @return mixed
      */
     public function filter_var($variable, $filter = FILTER_DEFAULT, $options = array())
     {
         $success = true;
         $result  = null;
-
         if (isset($options['acc_vals']) && in_array($variable, $options['acc_vals'])) {
             return $variable;
         }
 
         if ($filter === FILTER_VALIDATE_BOOLEAN) {
             $options['flags'] = FILTER_NULL_ON_FAILURE;
-
-            $result = filter_var($variable, $filter, $options);
-
+            $result           = filter_var($variable, $filter, $options);
             if (is_null($result)) {
                 $success = false;
             }
         } else {
             $result = filter_var($variable, $filter, $options);
-
             if ($result === false) {
                 $success = false;
             }
@@ -165,7 +164,6 @@ class DUP_Validator
 
         if (!$success) {
             $key = isset($options['valkey']) ? $options['valkey'] : '';
-
             if (isset($options['errmsg'])) {
                 $msg = sprintf($options['errmsg'], $variable);
             } else {
@@ -184,8 +182,8 @@ class DUP_Validator
      * @param mixed $variable
      * @param string $filter
      * @param array $options
-     * @return type
-     * @throws Exception
+     *
+     * @return string
      */
     public function filter_custom($variable, $filter, $options = array())
     {
@@ -197,10 +195,8 @@ class DUP_Validator
         $options = array_merge($options, array(
             'options' => array(
                 'regexp' => self::$patterns[$filter])
-            )
-        );
-
-        //$options['regexp'] = self::$patterns[$filter];
+            ));
+//$options['regexp'] = self::$patterns[$filter];
 
         return $this->filter_var($variable, FILTER_VALIDATE_REGEXP, $options);
     }
@@ -221,7 +217,6 @@ class DUP_Validator
 
         $vals = explode($delimiter, trim($variable, $delimiter));
         $res  = array();
-
         foreach ($vals as $val) {
             $res[] = $this->filter_custom($val, $filter, $options);
         }

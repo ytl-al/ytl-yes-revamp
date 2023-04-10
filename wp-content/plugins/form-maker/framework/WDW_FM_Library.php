@@ -1049,7 +1049,7 @@ class WDW_FM_Library {
    */
   public static function get_fm_js_content( $form_id = 0 ) {
     global $wpdb;
-    $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker WHERE id="%d"', $form_id));
+    $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker WHERE id=%d', $form_id));
     if ( !$row ) {
       return;
     }
@@ -4385,9 +4385,15 @@ class WDW_FM_Library {
     var inputIds<?php echo $form_id; ?> = '<?php echo json_encode($inputIds); ?>';
     <?php
     reset($inputIds);
-    $first_field_id = explode('|',  key($inputIds) );
+    $first_field_id = 0;
+    if ( !empty($inputIds) ) {
+      $first_field_id_arr = explode('|',  key($inputIds));
+      if ( !empty($first_field_id_arr[0]) ) {
+        $first_field_id = (int) $first_field_id_arr[0];
+      }
+    }
     ?>
-    var update_first_field_id<?php echo $form_id; ?> = <?php echo !empty($first_field_id[0]) ? $first_field_id[0] : 0; ?>;
+    var update_first_field_id<?php echo $form_id; ?> = <?php echo $first_field_id; ?>;
     var form_view_count<?php echo $form_id ?> = 0;
     <?php echo preg_replace($pattern, ' ', $row->javascript); ?>
 
@@ -6190,7 +6196,7 @@ class WDW_FM_Library {
   public static function get_form_options_json( $table, $form_id ) {
     global $wpdb;
     $table_full_name = $wpdb->prefix . $table;
-    $prepared = $wpdb->prepare("SELECT form_options FROM " . $table_full_name . ' WHERE id="%d"' ,$form_id);
+    $prepared = $wpdb->prepare("SELECT form_options FROM " . $table_full_name . ' WHERE id=%d' ,$form_id);
     $row = $wpdb->get_var($prepared);
     if( $row && !empty($row) && self::fm_isJSON($row) ) {
 
@@ -6478,6 +6484,7 @@ class WDW_FM_Library {
       "p" => array(),
       "code" => array(),
       "div" => $allowed_attr,
+      "span" => $allowed_attr,
       "img" => array( "class" => TRUE, "src" => TRUE, "alt" => TRUE),
       "video" => array( "class" => TRUE, "src" => TRUE, "controls" => TRUE),
       "source" => array( "src" => TRUE, "type" => TRUE ),

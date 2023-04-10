@@ -79,7 +79,7 @@ class TenWebBooster {
         new TWBGutenberg($this);
       }
 
-      if ( $this->list ) {
+      if ( $this->list && !class_exists('TWBBWGList') ) {
         require_once('List.php');
         $this->list = TWBList($this);
       }

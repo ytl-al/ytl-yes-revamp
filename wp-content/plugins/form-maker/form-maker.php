@@ -3,7 +3,7 @@
  * Plugin Name: Form Maker Pro
  * Plugin URI: https://10web.io/plugins/wordpress-form-maker/?utm_source=form_maker&utm_medium=free_plugin
  * Description: This plugin is a modern and advanced tool for easy and fast creating of a WordPress Form. The backend interface is intuitive and user friendly which allows users far from scripting and programming to create WordPress Forms.
- * Version: 2.15.7
+ * Version: 2.15.11
  * Author: 10Web Form Builder Team
  * Author URI: https://10web.io/plugins/?utm_source=form_maker&utm_medium=free_plugin
  * License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
@@ -103,8 +103,8 @@ final class WDFM {
     $this->plugin_url = plugins_url(plugin_basename(dirname(__FILE__)));
     $this->front_urls = $this->get_front_urls();
     $this->main_file = plugin_basename(__FILE__);
-    $this->plugin_version = '2.15.7';
-    $this->db_version = '2.15.7';
+    $this->plugin_version = '2.15.11';
+    $this->db_version = '2.15.11';
     $this->menu_postfix = ($this->is_free == 2 ? '_fmc' : '_fm');
     $this->plugin_postfix = ($this->is_free == 2 ? '_fmc' : '');
     $this->menu_slug = 'manage' . $this->menu_postfix;
@@ -1391,7 +1391,7 @@ final class WDFM {
     elseif (version_compare($version, $new_version, '<')) {
       $version = substr_replace($version, '1.', 0, 2);
       require_once $this->plugin_dir . "/form_maker_update.php";
-      $mail_verification_post_ids = $wpdb->get_results($wpdb->prepare('SELECT mail_verification_post_id FROM ' . $wpdb->prefix . 'formmaker WHERE mail_verification_post_id != "%d"', 0));
+      $mail_verification_post_ids = $wpdb->get_results($wpdb->prepare('SELECT mail_verification_post_id FROM ' . $wpdb->prefix . 'formmaker WHERE mail_verification_post_id != %d', 0));
       if ( !empty($mail_verification_post_ids) ) {
         foreach ($mail_verification_post_ids as $mail_verification_post_id) {
           $update_email_ver_post_type = array(

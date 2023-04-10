@@ -626,6 +626,7 @@ function add_condition_fields( num ) {
 		case "type_paypal_price_new":
 		case "type_spinner":
 		case "type_date_new":
+		case "type_date_fields":
 		case "type_phone_new":
 		case "type_time":
 		case "type_editor":
@@ -803,10 +804,9 @@ function change_choices(value) {
 		case "type_spinner":
 		case "type_range":
 		case "type_date_new":
+		case "type_date_fields":
 		case "type_phone_new":
 		case "type_time":
-		case "type_range":
-		case "type_slider":
 		case "type_editor":
 		case "type_hidden":
 			if(types_array[id]=="type_number" || types_array[id]=="type_phone")

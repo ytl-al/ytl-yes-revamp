@@ -40,6 +40,7 @@ class BetterDocs_Pro_IA {
         add_action('wp_enqueue_scripts', array($this, 'scripts'));
         add_action('admin_enqueue_scripts', array($this, 'scripts'));
         add_filter('betterdocs_settings_tab', array($this, 'settings'));
+        add_filter('rest_doc_category_query', array( $this, 'order_ia_doc_taxonomies' ), 10, 2 );
         $ia = BetterDocs_DB::get_settings('enable_disable');
         $ia_preview = BetterDocs_DB::get_settings('ia_enable_preview');
         if($ia == 1) {
@@ -48,6 +49,18 @@ class BetterDocs_Pro_IA {
         if($ia_preview == 1) {
             add_action('admin_footer', array($this, 'add_admin_ia_icon'));
         }
+    }
+
+    public function order_ia_doc_taxonomies( $args, $request ) {
+        if( empty( $args['include'] ) && empty( $_GET ) && $args['taxonomy'] == 'doc_category' ) {
+            $tax_limit          = empty( BetterDocs_DB::get_settings('doc_category_limit') ) ? 10 : BetterDocs_DB::get_settings('doc_category_limit');
+            $args['number']     = $tax_limit;
+            $args['hide_empty'] = 1;
+            $args['meta_key']   = 'doc_category_order';
+            $args['orderby']    = 'meta_value_num';
+            $args['order']      = 'ASC';
+        }
+        return $args;
     }
 
     public function scripts( $hook ) {
@@ -74,7 +87,7 @@ class BetterDocs_Pro_IA {
                 }
             }
             if( ! self::DEV_MODE ) {
-                wp_enqueue_style( 
+                wp_enqueue_style(
                     'betterdocs-instant-answer', 
                     BETTERDOCS_PRO_PUBLIC_URL . 'modules/instant-answer.css', 
                     array(),  BETTERDOCS_PRO_VERSION, 'all'
@@ -83,13 +96,13 @@ class BetterDocs_Pro_IA {
 
             wp_add_inline_style( 'betterdocs-instant-answer', $this->inline_style() );
 
-            wp_enqueue_script( 
+            wp_enqueue_script(
                 'betterdocs-instant-answer', 
                 self::DEV_MODE ? BETTERDOCS_PRO_PUBLIC_URL . 'instant-answer/lib/bundle.js' : BETTERDOCS_PRO_PUBLIC_URL . 'modules/instant-answer.js',
                 array('wp-i18n', 'wp-element', 'wp-hooks', 'wp-util', 'wp-components'), BETTERDOCS_PRO_VERSION, true 
             );
             $enable_instant_answer = BetterDocs_DB::get_settings('enable_disable');
-            if($enable_instant_answer == 1) {
+            if ( $enable_instant_answer == 1 ) {
                 wp_localize_script('betterdocs-instant-answer', 'betterdocs', $this->jsObject( $this->bdocs_settings ));
             }
         }
@@ -317,7 +330,7 @@ class BetterDocs_Pro_IA {
         $search_settings['SEARCH_PLACEHOLDER'] = $search_placeholder;
 
         $search_settings['OOPS'] = $this->setNempty( 'search_not_found_1', $settings ) ? $settings['search_not_found_1'] : __( 'Oops...', 'betterdocs-pro' );
-        $search_settings['NOT_FOUND'] = $this->setNempty( 'search_not_found_2', $settings ) ? $settings['search_not_found_2'] : __( 'We couldn’t find any articles that match your search. Try searching for a new term.', 'betterdocs-pro' );
+        $search_settings['NOT_FOUND'] = $this->setNempty( 'search_not_found_2', $settings ) ? $settings['search_not_found_2'] : __( 'We couldn’t find any docs that match your search. Try searching for a new term.', 'betterdocs-pro' );
 
         $answer_tab_switch = $this->setNempty( 'answer_tab_visibility_switch', $settings ) ? $settings['answer_tab_visibility_switch'] : [];
         if( ! empty( $answer_tab_switch ) && $answer_tab_switch === '1' ) {
@@ -553,7 +566,7 @@ class BetterDocs_Pro_IA {
                         'ia_description' => array(
                             'type' => 'html',
                             'priority' => 1,
-                            'html' => __( 'Display a list of articles or categories in a chat-like widget to give your visitors a chance of self-learning about your website.', 'betterdocs-pro' )
+                            'html' => __( 'Display a list of docs or categories in a chat-like widget to give your visitors a chance of self-learning about your website.', 'betterdocs-pro' )
                         ),
                         'enable_disable' => array(
                             'type' => 'checkbox',
@@ -626,6 +639,17 @@ class BetterDocs_Pro_IA {
                                     'priority' => 3,
                                     'multiple' => true,
                                     'options'  => $this->docs_categories(),
+                                    'dependency' => array(
+                                        '' => array(
+                                            'fields' => array( 'doc_category_limit' ),
+                                        )
+                                    ),
+                                ),
+                                'doc_category_limit' => array(
+                                    'type'        => 'number',
+                                    'label'       => __('Number Of Categories' , 'betterdocs-pro'),
+                                    'default'     => 10,
+                                    'priority'    => 4
                                 ),
                                 'display_ia_pages' => array(
                                     'type'        => 'select',
@@ -943,7 +967,7 @@ class BetterDocs_Pro_IA {
                                     'type'     => 'text',
                                     'label'    => __('Docs not Found' , 'betterdocs-pro'),
                                     'priority' => 11,
-                                    'default'  => __( 'We couldn’t find any articles that match your search. Try searching for a new term.', 'betterdocs-pro' )
+                                    'default'  => __( 'We couldn’t find any docs that match your search. Try searching for a new term.', 'betterdocs-pro' )
                                 ),
                             )
                         ),
@@ -1200,7 +1224,7 @@ class BetterDocs_Pro_IA {
 
         if( ! empty( $_docs ) ) {
             foreach( $_docs as $doc ) {
-                $docs[ $doc->ID ] = $doc->post_title;
+                $docs[ $doc->ID ] = wp_kses($doc->post_title, BETTERDOCS_PRO_KSES_ALLOWED_HTML);
             }
         }
 
@@ -1232,7 +1256,7 @@ class BetterDocs_Pro_IA {
         if($allpages ) {
             $page_list[ 'all' ] = 'All';
             foreach( $allpages as $page ) {
-                $page_list[ $page->ID ] = $page->post_title;
+                $page_list[ $page->ID ] = wp_kses($page->post_title, BETTERDOCS_PRO_KSES_ALLOWED_HTML);
             }
         }
         return $page_list;
@@ -1408,54 +1432,8 @@ class BetterDocs_Pro_IA {
             'callback'  => array( $this, 'save_global_response' ),
             'permission_callback' => '__return_true'
         ));
-        register_rest_route( $this->namespace, '/feedback/(?P<id>\d+)', array(
-            'methods'   => [ 'PUT', 'POST' ],
-            'callback'  => array( $this, 'save_response' ),
-            'permission_callback' => '__return_true',
-            'args'      => array(
-                'id' => array(
-                    'validate_callback' => function($param, $request, $key) {
-                        return is_numeric( $param );
-                    }
-                ),
-            ),
-        ));
     }
-    /**
-     * Save Feedback for individual Docs
-     * @param WP_REST_Request $request
-     * @return void
-     */
-    public function save_response( WP_REST_Request $request ){
-        $docs_id = isset( $request['id'] ) ? intval( $request['id'] ) : null;
-        if( $docs_id !== null ) {
-            $feelings = isset( $request['feelings'] ) ? $request['feelings'] : 'happy';
-            $feedback = get_post_meta( $docs_id, '_betterdocs_feelings', true );
-            $feedback_per_day = get_post_meta( $docs_id, '_betterdocs_meta_impression_per_day', true );
-            $todays_date = date( 'd-m-Y', time() );
 
-            if( empty( $feedback_per_day )  ) {
-                $feedback_per_day = [];
-                $feedback_per_day[ $todays_date ][ $feelings ] = 1;
-                add_post_meta( $docs_id, '_betterdocs_meta_impression_per_day', $feedback_per_day );
-            } else {
-                if( isset( $feedback_per_day[ $todays_date ] ) ) {
-                    $impressions_data = isset( $impressions[ $todays_date ][ $feelings ] ) ? ++$impressions[ $todays_date ][ $feelings ] : 1;
-                    $feedback_per_day[ $todays_date ][ $feelings ] = $impressions_data;
-                } else {
-                    $feedback_per_day[ $todays_date ][ $feelings ] = 1;
-                }
-                update_post_meta( $docs_id, '_betterdocs_meta_impression_per_day', $feedback_per_day );
-            }
-
-            $feedback = empty( $feedback ) ? array() : $feedback;
-            $feedback[ $feelings ] = ( isset( $feedback[ $feelings ] ) ? intval( $feedback[ $feelings ] ) : 0 ) + 1;
-            if( update_post_meta( $docs_id, '_betterdocs_feelings', $feedback ) ) {
-                return true;
-            }
-        }
-        return false;
-    }
     /**
      * Save Global Feedback
      * @param WP_REST_Request $request
@@ -1471,6 +1449,8 @@ class BetterDocs_Pro_IA {
         return false;
     }
 
+
+
     public function send_asked_mail( WP_REST_Request $request ){
         $sanitized_data = $this->sanitize( $_POST );
         if( empty( $sanitized_data ) || ! isset( $sanitized_data['email'] ) ) {
@@ -1484,10 +1464,11 @@ class BetterDocs_Pro_IA {
         $ask_subject = $this->setNempty( 'ask_subject', $this->bdocs_settings ) ? $this->bdocs_settings['ask_subject'] : '[ia_subject]';
         $to = $this->setNempty( 'ask_email', $this->bdocs_settings ) ? $this->bdocs_settings['ask_email'] : get_bloginfo('admin_email');
 
-        $subject = $this->ready_subject( $sanitized_data, $ask_subject );
+        $subject = html_entity_decode( $this->ready_subject( $sanitized_data, $ask_subject ), ENT_QUOTES, 'UTF-8' );
         if( isset( $sanitized_data['subject'] ) ) {
-            $sanitized_data['subject'] = $subject;
+            $sanitized_data['subject'] = html_entity_decode( $subject, ENT_QUOTES, 'UTF-8' );
         }
+
         $files = $request->get_file_params();
         if( ! empty( $files ) ) {
 			if ( ! function_exists( 'wp_handle_upload' ) ) {
@@ -1517,7 +1498,7 @@ class BetterDocs_Pro_IA {
             }
         }
         $body = $this->simple_mail_template( $sanitized_data );
-        $name = $sanitized_data['name'];
+        $name = html_entity_decode( $sanitized_data['name'], ENT_QUOTES, 'UTF-8' );
         $from = $sanitized_data['email'];
         $headers = array( 'Content-Type: text/html; charset=UTF-8', "From: $name <$from>", 'Reply-To: ' . $from );
         if( wp_mail( $to, $subject, $body, $headers ) ) {
@@ -1558,7 +1539,7 @@ class BetterDocs_Pro_IA {
                 if( $key === 'email' ) {
                     $sanitized_data[ $key ] = sanitize_email( $data );
                 } else {
-                    $sanitized_data[ $key ] = sanitize_text_field( stripslashes($data) );
+                    $sanitized_data[ $key ] = esc_html( stripslashes($data) );
                 }
             }
             

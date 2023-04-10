@@ -10,7 +10,7 @@
  * Plugin Name:       BetterDocs Pro
  * Plugin URI:        https:/betterdocs.co
  * Description:       Help your customers browse the docs and find instant answers through BetterDocs Instant Answers. Get access to Multiple KB, Insightful Analytics & many more!
- * Version:           2.0.9
+ * Version:           2.2.7
  * Author:            WPDeveloper
  * Author URI:        https://wpdeveloper.com
  * License:           GPL-3.0+
@@ -27,8 +27,8 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'BETTERDOCS_PRO_VERSION', '2.0.9' );
-//define( 'BETTERDOCS_PRO_PUBLIC_URL', plugins_url( '/', __FILE__ ) );
+define( 'BETTERDOCS_PRO_VERSION', '2.2.7' );
+define('BETTERDOCS_PRO_DB_VERSION', '1.0');
 define( 'BETTERDOCS_PRO_URL', plugin_dir_url( __FILE__ ) );
 define( 'BETTERDOCS_PRO_PUBLIC_URL', BETTERDOCS_PRO_URL . 'public/' );
 define( 'BETTERDOCS_PRO_ADMIN_URL', BETTERDOCS_PRO_URL . 'admin/' );
@@ -38,6 +38,35 @@ define( 'BETTERDOCS_PRO_ROOT_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'BETTERDOCS_PRO_ADMIN_DIR_PATH', BETTERDOCS_PRO_ROOT_DIR_PATH . 'admin/' );
 define( 'BETTERDOCS_PRO_PUBLIC_PATH', BETTERDOCS_PRO_ROOT_DIR_PATH . 'public/' );
 
+define(
+	'BETTERDOCS_PRO_KSES_ALLOWED_HTML',
+	array(
+		'span' => array(
+			'class' => array(),
+			'style' => array()
+		),
+		'p' => array(
+			'class' => array(),
+			'style' => array()
+		),
+		'strong' => array(),
+		'a' => array(
+			'href' => array(),
+			'title' => array()
+		),
+		'h1' => array(),
+		'h2' => array(),
+		'h3' => array(),
+		'h4' => array(),
+		'h5' => array(),
+		'h6' => array(),
+		'div' => array(
+			'class' => array(),
+			'style' => array()
+		)
+	)
+);
+
 // Licensing
 define( 'BETTERDOCS_PRO_STORE_URL', 'https://api.wpdeveloper.com/' );
 define( 'BETTERDOCS_PRO_SL_ITEM_ID', 342422 );
@@ -45,14 +74,20 @@ define( 'BETTERDOCS_PRO_SL_ITEM_SLUG', 'betterdocs-pro' );
 define( 'BETTERDOCS_PRO_SL_ITEM_NAME', 'BetterDocs Pro' );
 define( 'BETTERDOCS_FREE_PLUGIN', BETTERDOCS_PRO_ADMIN_DIR_PATH . 'library/betterdocs.zip' );
 
+add_image_size( 'betterdocs-category-thumb', 360, 512 );
+
+global $migration_Process;
+
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-betterdocs-pro-activator.php';
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-betterdocs-pro-activator.php
  */
 function activate_betterdocs_pro() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-betterdocs-pro-activator.php';
 	Betterdocs_Pro_Activator::activate();
 }
+register_activation_hook( __FILE__, 'activate_betterdocs_pro' );
+
 
 /**
  * The code that runs during plugin deactivation.
@@ -62,9 +97,17 @@ function deactivate_betterdocs_pro() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-betterdocs-pro-deactivator.php';
 	Betterdocs_Pro_Deactivator::deactivate();
 }
-
-register_activation_hook( __FILE__, 'activate_betterdocs_pro' );
 register_deactivation_hook( __FILE__, 'deactivate_betterdocs_pro' );
+
+/**
+ * WP-Background Processing
+ *
+ * @package WP-Background-Processing
+ */
+
+if ( ! class_exists( 'BetterDocs_Migration_Process' ) ) {
+    require_once BETTERDOCS_PRO_ROOT_DIR_PATH . 'includes/wp-background-processing/wp-background-processing.php';
+}
 
 /**
  * The core plugin class that is used to define internationalization,
@@ -109,6 +152,17 @@ function betterdocs_install_core_notice() {
 		</div>
 	<?php
 	endif;
+
+    if( get_current_screen()->base == 'betterdocs_page_betterdocs-analytics'
+        && get_site_option( 'betterdocs_analytics_migration_queue_set' ) == true
+        && get_site_option( 'betterdocs_analytics_migration' ) == false) :
+    ?>
+        <div class="notice-warning notice is-dismissible betterdocs-analytics-notice">
+            <strong><?php echo sprintf( '%s', __( 'BetterDocs Analytics Migration', 'betterdocs-pro' )) ?></strong>
+            <p><?php echo sprintf( '%s', __( 'BetterDocs is migrating the analytics data in the background. The migration process may take a little while, so please be patient.', 'betterdocs-pro' )) ?></p>
+        </div>
+    <?php
+    endif;
 }
 add_action( 'admin_notices', 'betterdocs_install_core_notice' );
 

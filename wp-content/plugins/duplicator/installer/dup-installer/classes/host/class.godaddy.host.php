@@ -1,24 +1,25 @@
 <?php
+
 /**
  * godaddy custom hosting class
  *
  * Standard: PSR-2
  *
  * @package SC\DUPX\DB
- * @link http://www.php-fig.org/psr/psr-2/
- *
+ * @link    http://www.php-fig.org/psr/psr-2/
  */
+
 defined('ABSPATH') || defined('DUPXABSPATH') || exit;
+
+use Duplicator\Installer\Core\Params\PrmMng;
 
 /**
  * class for GoDaddy managed hosting
- * 
+ *
  * @todo not yet implemneted
- * 
  */
 class DUPX_GoDaddy_Host implements DUPX_Host_interface
 {
-
     /**
      * return the current host itentifier
      *
@@ -35,8 +36,8 @@ class DUPX_GoDaddy_Host implements DUPX_Host_interface
     public function isHosting()
     {
         // check only mu plugin file exists
-        
-        $file = $GLOBALS['DUPX_ROOT'].'/wp-content/mu-plugins/gd-system-plugin.php';
+
+        $file = PrmMng::getInstance()->getValue(PrmMng::PARAM_PATH_MUPLUGINS_NEW) . '/gd-system-plugin.php';
         return file_exists($file);
     }
 
@@ -48,15 +49,25 @@ class DUPX_GoDaddy_Host implements DUPX_Host_interface
      */
     public function init()
     {
-        
     }
 
     /**
-     * 
+     *
      * @return string
      */
     public function getLabel()
     {
         return 'GoDaddy';
+    }
+
+    /**
+     * this function is called if current hosting is this
+     */
+    public function setCustomParams()
+    {
+        PrmMng::getInstance()->setValue(PrmMng::PARAM_IGNORE_PLUGINS, array(
+            'gd-system-plugin.php',
+            'object-cache.php'
+        ));
     }
 }

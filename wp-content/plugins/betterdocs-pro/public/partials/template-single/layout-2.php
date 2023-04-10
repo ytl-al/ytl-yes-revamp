@@ -36,21 +36,7 @@ echo '<div class="betterdocs-single-wraper betterdocs-single-bg full-wrapper bet
 
 	echo '<div class="'.implode(' ', $wraper_class).'">';
 		if ($enable_sidebar_cat_list == 1) {
-		echo '<aside id="betterdocs-sidebar-left" class="betterdocs-full-sidebar-left">
-            <div data-simplebar class="betterdocs-sidebar-content betterdocs-category-sidebar">';
-                $output = betterdocs_generate_output();
-                $terms_orderby = BetterDocs_DB::get_settings('terms_orderby');
-                $terms_order   = BetterDocs_DB::get_settings('terms_order');
-                if (BetterDocs_DB::get_settings('alphabetically_order_term') == 1) {
-                    $terms_orderby = 'name';
-                }
-                if ( BetterDocs_Multiple_Kb::$enable == 1 ) {
-                    echo do_shortcode( '[betterdocs_category_list terms_order="'.$terms_order.'" terms_orderby="'.esc_html($terms_orderby).'" title_tag="'.BetterDocs_Helper::html_tag($output['betterdocs_sidebar_title_tag']).'" multiple_knowledge_base=true]' );
-                } else {
-                    echo do_shortcode( '[betterdocs_category_list terms_order="'.$terms_order.'" terms_orderby="'.esc_html($terms_orderby).'" title_tag="'.BetterDocs_Helper::html_tag($output['betterdocs_sidebar_title_tag']).'"]' );
-                }
-			echo '</div>
-		</aside>';
+            include BETTERDOCS_PRO_PUBLIC_PATH . 'partials/sidebars/sidebar-2.php';
 		}
 
 		echo '<div id="betterdocs-single-main" class="docs-single-main docs-content-full-main">
@@ -66,7 +52,9 @@ echo '<div class="betterdocs-single-wraper betterdocs-single-bg full-wrapper bet
                 <div class="docs-single-title">';
                     if ( is_single() ) {
                         $output = betterdocs_generate_output();
-                        the_title( '<'.BetterDocs_Helper::html_tag($output['betterdocs_post_title_tag']).' id="betterdocs-entry-title" class="betterdocs-entry-title">', '</'.BetterDocs_Helper::html_tag($output['betterdocs_post_title_tag']).'>' );
+                        echo '<'.BetterDocs_Helper::html_tag($output['betterdocs_post_title_tag']).' id="betterdocs-entry-title" class="betterdocs-entry-title">';
+                        echo wp_kses(get_the_title(), BETTERDOCS_PRO_KSES_ALLOWED_HTML);
+                        echo '</'.BetterDocs_Helper::html_tag($output['betterdocs_post_title_tag']).'>';
                     }
                 echo '</div>
             </header>';
@@ -152,16 +140,22 @@ echo '<div class="betterdocs-single-wraper betterdocs-single-bg full-wrapper bet
             if ($enable_credit == 1) {
                 echo '<div class="betterdocs-credit">
                     <p>';
-                    printf(__('Powered by ', 'betterdocs-pro').'<a href="%s" target="_blank">' . __('BetterDocs', 'betterdocs-pro') . '</a>', 'https://betteredocs.co');
+                    printf(__('Powered by ', 'betterdocs-pro').'<a href="%s" target="_blank">' . __('BetterDocs', 'betterdocs-pro') . '</a>', 'https://betterdocs.co');
                     echo '</p>
                 </div>';
             }
 
             $enable_comment = BetterDocs_DB::get_settings('enable_comment');
             if ( $enable_comment == 1 ) {
-                if ( comments_open() || get_comments_number() ) :
-                    comments_template();
-                endif;
+                if (function_exists('wp_is_block_theme') && wp_is_block_theme()) { 
+					if( comments_open() || get_comments_number() ) {
+						echo do_blocks('<!-- wp:post-comments /-->');
+					}
+				} else {
+					if ( comments_open() || get_comments_number() ){
+						comments_template();
+					}
+				}
             }
         echo '</div>
     </div>';
@@ -181,4 +175,4 @@ echo '<div class="betterdocs-single-wraper betterdocs-single-bg full-wrapper bet
 	echo '</div>
 </div>';
 
-get_footer();
+get_footer(); 

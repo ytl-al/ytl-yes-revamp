@@ -1,32 +1,31 @@
 <?php
-defined('ABSPATH') || defined('DUPXABSPATH') || exit;
-// Exit if accessed directly
-if (!defined('DUPLICATOR_VERSION'))
-    exit;
+
+use Duplicator\Libs\Snap\SnapIO;
 
 abstract class DUP_Archive_Build_Mode
 {
-
     const Unconfigured = -1;
-    const Auto         = 0; // should no longer be used
+    const Auto         = 0;
+    // should no longer be used
     //  const Shell_Exec   = 1;
-    const ZipArchive   = 2;
-    const DupArchive   = 3;
-
+    const ZipArchive = 2;
+    const DupArchive = 3;
 }
 
 class DUP_Settings
 {
+    const UNINSTALL_PACKAGE_OPTION_KEY  = 'duplicator_uninstall_package';
+    const UNINSTALL_SETTINGS_OPTION_KEY = 'duplicator_uninstall_settings';
 
     const OPT_SETTINGS                  = 'duplicator_settings';
     const INSTALLER_NAME_MODE_WITH_HASH = 'withhash';
     const INSTALLER_NAME_MODE_SIMPLE    = 'simple';
-    const STORAGE_POSITION_LECAGY       = 'legacy';
+    const STORAGE_POSITION_LEGACY       = 'legacy';
     const STORAGE_POSITION_WP_CONTENT   = 'wpcont';
     const SSDIR_NAME_LEGACY             = 'wp-snapshots';
     const SSDIR_NAME_NEW                = 'backups-dup-lite';
 
-    protected static $Data;
+    protected static $Data      = array();
     protected static $ssDirPath = null;
     protected static $ssDirUrl  = null;
 
@@ -35,20 +34,29 @@ class DUP_Settings
      */
     public static function init()
     {
-        self::$Data = get_option(self::OPT_SETTINGS);
-        //when the plugin updated, this will be true
-        if (empty(self::$Data) || empty(self::$Data['version']) || version_compare(DUPLICATOR_VERSION, self::$Data['version'], '>')) {
-            self::SetDefaults();
+        static $initialized = null;
+        if ($initialized == null) {
+            $initialized = true; // Must be at the top of the function to prvent infinite loop
+            $defaults    = (array) self::GetAllDefaults();
+            $data        = (array) get_option(self::OPT_SETTINGS);
+            self::$Data  = array_merge($defaults, $data);
+            // when the plugin updated, this will be true
+            if (empty(self::$Data) || empty(self::$Data['version']) || version_compare(DUPLICATOR_VERSION, self::$Data['version'], '>')) {
+                self::SetDefaults();
+            }
         }
     }
 
     /**
      *  Find the setting value
-     *  @param string $key	The name of the key to find
-     *  @return The value stored in the key returns null if key does not exist
+     *
+     *  @param string $key  The name of the key to find
+     *
+     *  @return string The value stored in the key returns null if key does not exist
      */
     public static function Get($key = '')
     {
+        self::init();
         $result = null;
         if (isset(self::$Data[$key])) {
             $result = self::$Data[$key];
@@ -63,12 +71,14 @@ class DUP_Settings
 
     /**
      *  Set the settings value in memory only
-     *  @param string $key		The name of the key to find
-     *  @param string $value		The value to set
-     *  remarks:	 The Save() method must be called to write the Settings object to the DB
+     *
+     *  @param string $key      The name of the key to find
+     *  @param string $value        The value to set
+     *  remarks:     The Save() method must be called to write the Settings object to the DB
      */
     public static function Set($key, $value)
     {
+        self::init();
         if (isset(self::$Data[$key])) {
             self::$Data[$key] = ($value == null) ? '' : $value;
         } elseif (!empty($key)) {
@@ -78,24 +88,23 @@ class DUP_Settings
 
     public static function setStoragePosition($newPosition)
     {
-        $legacyPath = self::getSsdirPathLegacy();
-        $wpContPath = self::getSsdirPathWpCont();
+        self::init();
 
+        $legacyPath     = self::getSsdirPathLegacy();
+        $wpContPath     = self::getSsdirPathWpCont();
         $oldStoragePost = self::Get('storage_position');
-
         self::resetPositionVars();
-
         switch ($newPosition) {
-            case self::STORAGE_POSITION_LECAGY:
-                self::$Data['storage_position'] = self::STORAGE_POSITION_LECAGY;
+            case self::STORAGE_POSITION_LEGACY:
+                self::$Data['storage_position'] = self::STORAGE_POSITION_LEGACY;
                 if (!DUP_Util::initSnapshotDirectory()) {
                     self::resetPositionVars();
                     self::$Data['storage_position'] = $oldStoragePost;
                     return false;
                 }
                 if (is_dir($wpContPath)) {
-                    if (DupLiteSnapLibIOU::moveContentDirToTarget($wpContPath, $legacyPath, true)) {
-                        DupLiteSnapLibIOU::rrmdir($wpContPath);
+                    if (SnapIO::rcopy($wpContPath, $legacyPath)) {
+                        SnapIO::rrmdir($wpContPath);
                     }
                 }
                 break;
@@ -107,8 +116,8 @@ class DUP_Settings
                     return false;
                 }
                 if (is_dir($legacyPath)) {
-                    if (DupLiteSnapLibIOU::moveContentDirToTarget($legacyPath, $wpContPath, true)) {
-                        DupLiteSnapLibIOU::rrmdir($legacyPath);
+                    if (SnapIO::rcopy($legacyPath, $wpContPath)) {
+                        SnapIO::rrmdir($legacyPath);
                     }
                 }
                 break;
@@ -127,25 +136,34 @@ class DUP_Settings
 
     /**
      *  Saves all the setting values to the database
-     *  @return True if option value has changed, false if not or if update failed.
+     *
+     *  @return bool True if option value has changed, false if not or if update failed.
      */
     public static function Save()
     {
+        self::init();
+
+        update_option(self::UNINSTALL_PACKAGE_OPTION_KEY, self::$Data['uninstall_files']);
+        update_option(self::UNINSTALL_SETTINGS_OPTION_KEY, self::$Data['uninstall_settings']);
         return update_option(self::OPT_SETTINGS, self::$Data);
     }
 
     /**
      *  Deletes all the setting values to the database
-     *  @return True if option value has changed, false if not or if update failed.
+     *
+     *  @return bool true if option value has changed, false if not or if update failed.
      */
     public static function Delete()
     {
+        $defaults   = self::GetAllDefaults();
+        self::$Data = apply_filters('duplicator_defaults_settings', $defaults);
         return delete_option(self::OPT_SETTINGS);
     }
 
     /**
      *  Sets the defaults if they have not been set
-     *  @return True if option value has changed, false if not or if update failed.
+     *
+     *  @return bool True if option value has changed, false if not or if update failed.
      */
     public static function SetDefaults()
     {
@@ -169,29 +187,24 @@ class DUP_Settings
     {
         $default            = array();
         $default['version'] = DUPLICATOR_VERSION;
-
         //Flag used to remove the wp_options value duplicator_settings which are all the settings in this class
         $default['uninstall_settings'] = isset(self::$Data['uninstall_settings']) ? self::$Data['uninstall_settings'] : true;
         //Flag used to remove entire wp-snapshot directory
-        $default['uninstall_files']    = isset(self::$Data['uninstall_files']) ? self::$Data['uninstall_files'] : true;
-        //Flag used to remove all tables
-        $default['uninstall_tables']   = isset(self::$Data['uninstall_tables']) ? self::$Data['uninstall_tables'] : true;
-
+        $default['uninstall_files'] = isset(self::$Data['uninstall_files']) ? self::$Data['uninstall_files'] : true;
         //Flag used to show debug info
-        $default['package_debug']            = isset(self::$Data['package_debug']) ? self::$Data['package_debug'] : false;
+        $default['package_debug'] = isset(self::$Data['package_debug']) ? self::$Data['package_debug'] : false;
         //Flag used to enable mysqldump
-        $default['package_mysqldump']        = isset(self::$Data['package_mysqldump']) ? self::$Data['package_mysqldump'] : true;
+        $default['package_mysqldump'] = isset(self::$Data['package_mysqldump']) ? self::$Data['package_mysqldump'] : true;
         //Optional mysqldump search path
-        $default['package_mysqldump_path']   = isset(self::$Data['package_mysqldump_path']) ? self::$Data['package_mysqldump_path'] : '';
+        $default['package_mysqldump_path'] = isset(self::$Data['package_mysqldump_path']) ? self::$Data['package_mysqldump_path'] : '';
         //Optional mysql limit size
         $default['package_phpdump_qrylimit'] = isset(self::$Data['package_phpdump_qrylimit']) ? self::$Data['package_phpdump_qrylimit'] : "100";
         //Optional mysqldump search path
-        $default['package_zip_flush']        = isset(self::$Data['package_zip_flush']) ? self::$Data['package_zip_flush'] : false;
+        $default['package_zip_flush'] = isset(self::$Data['package_zip_flush']) ? self::$Data['package_zip_flush'] : false;
         //Optional mysqldump search path
-        $default['installer_name_mode']      = isset(self::$Data['installer_name_mode']) ? self::$Data['installer_name_mode'] : self::INSTALLER_NAME_MODE_SIMPLE;
+        $default['installer_name_mode'] = isset(self::$Data['installer_name_mode']) ? self::$Data['installer_name_mode'] : self::INSTALLER_NAME_MODE_SIMPLE;
         // storage position
-        $default['storage_position']         = isset(self::$Data['storage_position']) ? self::$Data['storage_position'] : self::STORAGE_POSITION_WP_CONTENT;
-
+        $default['storage_position'] = isset(self::$Data['storage_position']) ? self::$Data['storage_position'] : self::STORAGE_POSITION_WP_CONTENT;
         //Flag for .htaccess file
         $default['storage_htaccess_off'] = isset(self::$Data['storage_htaccess_off']) ? self::$Data['storage_htaccess_off'] : false;
         // Initial archive build mode
@@ -207,9 +220,7 @@ class DUP_Settings
         $default['skip_archive_scan']      = isset(self::$Data['skip_archive_scan']) ? self::$Data['skip_archive_scan'] : false;
         $default['unhook_third_party_js']  = isset(self::$Data['unhook_third_party_js']) ? self::$Data['unhook_third_party_js'] : false;
         $default['unhook_third_party_css'] = isset(self::$Data['unhook_third_party_css']) ? self::$Data['unhook_third_party_css'] : false;
-
-        $default['active_package_id'] = -1;
-
+        $default['active_package_id']      = -1;
         return $default;
     }
 
@@ -224,18 +235,18 @@ class DUP_Settings
 
     public static function getSsdirPathLegacy()
     {
-        return DupLiteSnapLibIOU::safePathTrailingslashit(duplicator_get_abs_path()).self::SSDIR_NAME_LEGACY;
+        return SnapIO::safePathTrailingslashit(duplicator_get_abs_path()) . self::SSDIR_NAME_LEGACY;
     }
 
     public static function getSsdirPathWpCont()
     {
-        return DupLiteSnapLibIOU::safePathTrailingslashit(WP_CONTENT_DIR).self::SSDIR_NAME_NEW;
+        return SnapIO::safePathTrailingslashit(WP_CONTENT_DIR) . self::SSDIR_NAME_NEW;
     }
 
     public static function getSsdirPath()
     {
         if (is_null(self::$ssDirPath)) {
-            if (self::Get('storage_position') === self::STORAGE_POSITION_LECAGY) {
+            if (self::Get('storage_position') === self::STORAGE_POSITION_LEGACY) {
                 self::$ssDirPath = self::getSsdirPathLegacy();
             } else {
                 self::$ssDirPath = self::getSsdirPathWpCont();
@@ -247,10 +258,10 @@ class DUP_Settings
     public static function getSsdirUrl()
     {
         if (is_null(self::$ssDirUrl)) {
-            if (self::Get('storage_position') === self::STORAGE_POSITION_LECAGY) {
-                self::$ssDirUrl = DupLiteSnapLibIOU::trailingslashit(DUPLICATOR_SITE_URL).self::SSDIR_NAME_LEGACY;
+            if (self::Get('storage_position') === self::STORAGE_POSITION_LEGACY) {
+                self::$ssDirUrl = SnapIO::trailingslashit(DUPLICATOR_SITE_URL) . self::SSDIR_NAME_LEGACY;
             } else {
-                self::$ssDirUrl = DupLiteSnapLibIOU::trailingslashit(content_url()).self::SSDIR_NAME_NEW;
+                self::$ssDirUrl = SnapIO::trailingslashit(content_url()) . self::SSDIR_NAME_NEW;
             }
         }
         return self::$ssDirUrl;
@@ -258,11 +269,11 @@ class DUP_Settings
 
     public static function getSsdirTmpPath()
     {
-        return self::getSsdirPath().'/tmp';
+        return self::getSsdirPath() . '/tmp';
     }
 
     public static function getSsdirInstallerPath()
     {
-        return self::getSsdirPath().'/installer';
+        return self::getSsdirPath() . '/installer';
     }
 }

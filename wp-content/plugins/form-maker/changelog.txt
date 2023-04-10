@@ -1,3 +1,17 @@
+2.15.11
+* Fixed: Form loading in some cases.
+
+2.15.10
+* Fixed: Widget deprecation.
+* Fixed: Deprecation errors.
+
+2.15.9
+* Fixed: Minor bug.
+
+2.15.8
+* Fixed: Date range field with empty min/max dates.
+* Fixed: Conditional fields issue for Date of Birth field, if the field is the first field.
+
 2.15.7
 * Added: 10Web Booster integration.
 * Fixed: Special chars in exported submission.

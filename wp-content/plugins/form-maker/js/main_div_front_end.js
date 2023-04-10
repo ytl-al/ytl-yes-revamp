@@ -1211,10 +1211,10 @@ function change_value_range(id, min_max, element_value, default_min_max, format,
       if( typeof moment !== "function") {
           check_min_max = true;
       } else {
-          if (moment(default_min_max, format).isSameOrBefore(moment(element_value, format)) && min_max === 'minDate') {
+          if ( default_min_max === "" || (moment(default_min_max, format).isSameOrBefore(moment(element_value, format)) && min_max === 'minDate') ) {
             check_min_max = true;
           }
-          if (moment(element_value, format).isSameOrBefore(moment(default_min_max, format)) && min_max === 'maxDate') {
+          if ( default_min_max === "" || (moment(element_value, format).isSameOrBefore(moment(default_min_max, format)) && min_max === 'maxDate') ) {
             check_min_max = true;
           }
       }

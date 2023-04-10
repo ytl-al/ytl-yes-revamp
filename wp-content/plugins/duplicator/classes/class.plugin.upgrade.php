@@ -1,55 +1,111 @@
 <?php
+
+/**
+ *
+ * @package   Duplicator
+ * @copyright (c) 2023, Snap Creek LLC
+ */
+
+use Duplicator\Controllers\WelcomeController;
+
 defined('ABSPATH') || defined('DUPXABSPATH') || exit;
 
 /**
-
- * Upgrade logic of plugin resides here
-
+ * Upgrade/Install logic of plugin resides here
  */
 class DUP_LITE_Plugin_Upgrade
 {
-
     const DUP_VERSION_OPT_KEY = 'duplicator_version_plugin';
 
+    /**
+     * version starting from which the welcome page is shown
+     */
+    const DUP_WELCOME_PAGE_VERSION = '1.5.3';
+
+    /**
+     * wp_options key containing info about when the plugin was activated
+     */
+    const DUP_ACTIVATED_OPT_KEY = 'duplicator_activated';
+
+    /**
+     * Called as part of WordPress register_activation_hook
+     *
+     * @return void
+     */
     public static function onActivationAction()
     {
+        //NEW VS UPDATE
         if (($oldDupVersion = get_option(self::DUP_VERSION_OPT_KEY, false)) === false) {
             self::newInstallation();
         } else {
             self::updateInstallation($oldDupVersion);
         }
+        DUP_Settings::Save();
 
-        //Setup All Directories
+        if ($oldDupVersion === false || version_compare($oldDupVersion, self::DUP_WELCOME_PAGE_VERSION, '<=')) {
+            update_option(WelcomeController::REDIRECT_OPT_KEY, true);
+        }
+
+        self::setActivatedTime();
+
+        //Init Database & Backup Directories
+        self::updateDatabase();
         DUP_Util::initSnapshotDirectory();
     }
 
-    protected static function newInstallation()
+    /**
+     * Set time of plugin activation in wp-options
+     *
+     * @return void
+     */
+    public static function setActivatedTime()
     {
-        self::updateDatabase();
-
-        //WordPress Options Hooks
-        update_option(self::DUP_VERSION_OPT_KEY, DUPLICATOR_VERSION);
-    }
-
-    protected static function updateInstallation($oldVersion)
-    {
-        self::updateDatabase();
-
-        //Do not update to new wp-content storage till after 1.3.35
-        if (version_compare($oldVersion, '1.3.35', '<')) {
-            DUP_Settings::Set('storage_position', DUP_Settings::STORAGE_POSITION_LECAGY);
-            DUP_Settings::Save();
+        if (get_option(self::DUP_ACTIVATED_OPT_KEY, false) !== false) {
+            return;
         }
 
+        update_option(self::DUP_ACTIVATED_OPT_KEY, array('lite' => time()));
+    }
+
+     /**
+     * Runs only on new installs
+     *
+     * @return void
+     */
+    protected static function newInstallation()
+    {
         //WordPress Options Hooks
         update_option(self::DUP_VERSION_OPT_KEY, DUPLICATOR_VERSION);
     }
 
+    /**
+     * Run only on update installs
+     *
+     * @param string $oldVersion  The last/previous installed version
+     *
+     * @return void
+     */
+    protected static function updateInstallation($oldVersion)
+    {
+        //PRE 1.3.35
+        //Do not update to new wp-content storage till after
+        if (version_compare($oldVersion, '1.3.35', '<')) {
+            DUP_Settings::Set('storage_position', DUP_Settings::STORAGE_POSITION_LEGACY);
+        }
+        //WordPress Options Hooks
+        update_option(self::DUP_VERSION_OPT_KEY, DUPLICATOR_VERSION);
+    }
+
+     /**
+     * Runs for both new and update installs and creates the database tables
+     *
+     * @return void
+     */
     protected static function updateDatabase()
     {
         global $wpdb;
 
-        $table_name = $wpdb->prefix."duplicator_packages";
+        $table_name = $wpdb->prefix . "duplicator_packages";
 
         //PRIMARY KEY must have 2 spaces before for dbDelta to work
         //see: https://codex.wordpress.org/Creating_Tables_with_Plugins
@@ -65,7 +121,7 @@ class DUP_LITE_Plugin_Upgrade
 			   KEY hash (hash))";
 
         $abs_path = duplicator_get_abs_path();
-        require_once($abs_path.'/wp-admin/includes/upgrade.php');
+        require_once($abs_path . '/wp-admin/includes/upgrade.php');
         @dbDelta($sql);
     }
 }

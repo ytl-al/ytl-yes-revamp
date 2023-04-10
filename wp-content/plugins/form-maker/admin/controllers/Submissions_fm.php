@@ -569,7 +569,7 @@ class FMControllerSubmissions_fm extends FMAdminController {
 		
 		$paged = WDW_FM_Library(self::PLUGIN)->get('paged', 1, 'intval');
 		$form_id = WDW_FM_Library(self::PLUGIN)->get('form_id', 0, 'intval');
-		$q 	 = $wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker_submits WHERE group_id ="%d"', $id);
+		$q 	 = $wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker_submits WHERE group_id=%d', $id);
 		$row = $wpdb->get_row($q);		
 		$message = 2;	
 		
@@ -612,7 +612,7 @@ class FMControllerSubmissions_fm extends FMAdminController {
 		
 		$paged = WDW_FM_Library(self::PLUGIN)->get('paged', 1, 'intval');
 		$form_id = WDW_FM_Library(self::PLUGIN)->get('form_id', 0, 'intval');
-		$q 	 = $wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker_submits WHERE group_id ="%d"', $id);
+		$q 	 = $wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker_submits WHERE group_id=%d', $id);
 		$row = $wpdb->get_row($q);		
 		$message = 2;
 		

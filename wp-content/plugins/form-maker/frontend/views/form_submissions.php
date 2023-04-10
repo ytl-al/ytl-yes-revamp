@@ -25,7 +25,7 @@ class FMViewForm_submissions {
     wp_enqueue_style(WDFMInstance(self::PLUGIN)->handle_prefix . '-jquery-ui');
     wp_enqueue_style(WDFMInstance(self::PLUGIN)->handle_prefix . '-submissions_css');
     wp_enqueue_script('jquery-ui-datepicker');
-    if ( function_exists('wp_add_inline_script') ) { // Since Wordpress 4.5.0
+    if ( function_exists('wp_add_inline_script') ) { // Since WordPress 4.5.0
       wp_add_inline_script('jquery-ui-datepicker', WDW_FM_Library(self::PLUGIN)->localize_ui_datepicker());
     }
     else {

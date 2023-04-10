@@ -21,7 +21,7 @@ class FMModelBlocked_ips_fm extends FMAdminModel {
     global $wpdb;
     $query = "SELECT * FROM `" . $wpdb->prefix . "formmaker_blocked` ";
     if ( $search ) {
-      $query .= $wpdb->prepare('WHERE `ip` LIKE "%s"', '%' . $search . '%');
+      $query .= $wpdb->prepare('WHERE `ip` LIKE %s', '%' . $search . '%');
     }
     $query .= ' ORDER BY `' . $orderby . '` ' . $order;
     $query .= " LIMIT " . $limit . "," . $items_per_page;
@@ -39,7 +39,7 @@ class FMModelBlocked_ips_fm extends FMAdminModel {
   public function get_row_data( $id = 0 ) {
     global $wpdb;
     if ( $id != 0 ) {
-      $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker_blocked WHERE id="%d"', $id));
+      $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker_blocked WHERE id=%d', $id));
     }
     else {
       $row = new stdClass();
@@ -61,7 +61,7 @@ class FMModelBlocked_ips_fm extends FMAdminModel {
 
     $search = WDW_FM_Library(self::PLUGIN)->get('s', '');
     if ( $search ) {
-      $query .= $wpdb->prepare('WHERE `ip` LIKE "%s"', '%' . $search . '%');
+      $query .= $wpdb->prepare('WHERE `ip` LIKE %s', '%' . $search . '%');
     }
 
     $total = $wpdb->get_var($query);
@@ -110,6 +110,6 @@ class FMModelBlocked_ips_fm extends FMAdminModel {
    */
   public function delete_data( $id = 0 ) {
     global $wpdb;
-    return $wpdb->query($wpdb->prepare('DELETE FROM `' . $wpdb->prefix . 'formmaker_blocked` WHERE id="%d"', $id));
+    return $wpdb->query($wpdb->prepare('DELETE FROM `' . $wpdb->prefix . 'formmaker_blocked` WHERE id=%d', $id));
   }
 }

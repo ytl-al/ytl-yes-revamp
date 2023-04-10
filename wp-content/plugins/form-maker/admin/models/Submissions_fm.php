@@ -82,7 +82,7 @@ class FMModelSubmissions_fm extends FMAdminModel {
 
 		$statistics["total_entries"] = $submission_count;
 
-		$query = $wpdb->prepare('SELECT `views` FROM ' . $wpdb->prefix . 'formmaker_views WHERE form_id="%d"', $id);
+		$query = $wpdb->prepare('SELECT `views` FROM ' . $wpdb->prefix . 'formmaker_views WHERE form_id=%d', $id);
 		$statistics["total_views"] = $wpdb->get_var($query);
 		if ( $statistics["total_views"] ) {
 		  $statistics["conversion_rate"] = round((($statistics["total_entries"] / $statistics["total_views"]) * 100), 2) . '%';
@@ -990,7 +990,7 @@ class FMModelSubmissions_fm extends FMAdminModel {
    */
   public function delete_row( $id = 0 ) {
     global $wpdb;
-    $query = $wpdb->prepare('DELETE FROM ' . $wpdb->prefix . 'formmaker_submits WHERE group_id="%d"', $id);
+    $query = $wpdb->prepare('DELETE FROM ' . $wpdb->prefix . 'formmaker_submits WHERE group_id=%d', $id);
 
     return $wpdb->query($query);
   }
@@ -1004,7 +1004,7 @@ class FMModelSubmissions_fm extends FMAdminModel {
    */
   public function delete_from_session( $form_id = 0, $id = 0 ) {
     global $wpdb;
-    $query = $wpdb->prepare('DELETE FROM ' . $wpdb->prefix . 'formmaker_sessions WHERE form_id="%d" AND group_id="%d"', $form_id, $id);
+    $query = $wpdb->prepare('DELETE FROM ' . $wpdb->prefix . 'formmaker_sessions WHERE form_id=%d AND group_id=%d', $form_id, $id);
 
     return $wpdb->query($query);
   }
@@ -1030,7 +1030,7 @@ class FMModelSubmissions_fm extends FMAdminModel {
    */
   public function delete_rows_from_session( $form_id = 0, $cids = '' ) {
     global $wpdb;
-    $query = $wpdb->prepare('DELETE FROM ' . $wpdb->prefix . 'formmaker_sessions WHERE form_id="%d" AND group_id IN ( "%s" )', $form_id, $cids);
+    $query = $wpdb->prepare('DELETE FROM ' . $wpdb->prefix . 'formmaker_sessions WHERE form_id=%d AND group_id IN ( %s )', $form_id, $cids);
 
     return $wpdb->query($query);
   }
@@ -1058,7 +1058,7 @@ class FMModelSubmissions_fm extends FMAdminModel {
    */
   public function get_ips( $ip = '' ) {
     global $wpdb;
-	$q = $wpdb->prepare('SELECT ip FROM ' . $wpdb->prefix . 'formmaker_blocked WHERE ip="%s"', $ip);
+	$q = $wpdb->prepare('SELECT ip FROM ' . $wpdb->prefix . 'formmaker_blocked WHERE ip=%s', $ip);
     return $wpdb->get_var($q);
   }
 
@@ -1082,7 +1082,7 @@ class FMModelSubmissions_fm extends FMAdminModel {
    */
   public function delete_by_ip( $ip = '' ) {
     global $wpdb;
-    return $wpdb->query( $wpdb->prepare('DELETE FROM ' . $wpdb->prefix . 'formmaker_blocked WHERE ip="%s"', $ip) );
+    return $wpdb->query( $wpdb->prepare('DELETE FROM ' . $wpdb->prefix . 'formmaker_blocked WHERE ip=%s', $ip) );
   }
 
   /**

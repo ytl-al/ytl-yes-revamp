@@ -24,7 +24,7 @@ class FMModelManage_fm extends FMAdminModel {
     $query = "SELECT t1.* FROM " . $wpdb->prefix . "formmaker as t1 ";
     $query .= (!WDFMInstance(self::PLUGIN)->is_free ? '' : 'WHERE t1.id' . (WDFMInstance(self::PLUGIN)->is_free == 1 ? ' NOT ' : ' ') . 'IN (' . (get_option('contact_form_forms', '') != '' ? get_option('contact_form_forms') : 0) . ')');
     if ( $search ) {
-      $query .= $wpdb->prepare((!WDFMInstance(self::PLUGIN)->is_free ? 'WHERE' : ' AND') . ' `t1`.`title` LIKE "%s"', '%' . $search . '%');
+      $query .= $wpdb->prepare((!WDFMInstance(self::PLUGIN)->is_free ? 'WHERE' : ' AND') . ' `t1`.`title` LIKE %s', '%' . $search . '%');
     }
     $query .= ' ORDER BY t1.`' . $orderby . '` ' . $order;
     $query .= " LIMIT " . $limit . "," . $items_per_page;
@@ -61,7 +61,7 @@ class FMModelManage_fm extends FMAdminModel {
   public function get_row_data( $id = 0 ) {
     global $wpdb;
     if ( $id != 0 ) {
-      $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker WHERE id="%d"', $id));
+      $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker WHERE id=%d', $id));
       if ( $row ) {
         $row = WDW_FM_Library::convert_json_options_to_old( $row, 'form_options' );
         $row->gdpr_checkbox = 0;
@@ -155,7 +155,7 @@ class FMModelManage_fm extends FMAdminModel {
     $fm_nonce = wp_create_nonce('fm_ajax_nonce');
     global $wpdb;
     if ( $id != 0 ) {
-      $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker_backup WHERE backup_id="%d"', $id));
+      $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker_backup WHERE backup_id=%d', $id));
       if ( $row ) {
         $row = WDW_FM_Library::convert_json_options_to_old( $row, 'form_options' );
         $row->gdpr_checkbox = 0;
@@ -3716,7 +3716,7 @@ class FMModelManage_fm extends FMAdminModel {
 
     $query .= (!WDFMInstance(self::PLUGIN)->is_free ? '' : 'WHERE id' . (WDFMInstance(self::PLUGIN)->is_free == 1 ? ' NOT ' : ' ') . 'IN (' . (get_option('contact_form_forms', '') != '' ? get_option('contact_form_forms') : 0) . ')');
     if ( $search ) {
-      $query .= $wpdb->prepare((!WDFMInstance(self::PLUGIN)->is_free ? 'WHERE' : ' AND') . ' `title` LIKE "%s"', '%' . $search . '%');
+      $query .= $wpdb->prepare((!WDFMInstance(self::PLUGIN)->is_free ? 'WHERE' : ' AND') . ' `title` LIKE %s', '%' . $search . '%');
     }
 
     $total = $wpdb->get_var($query);
@@ -3733,7 +3733,7 @@ class FMModelManage_fm extends FMAdminModel {
    */
   public function get_display_options( $id = 0 ) {
     global $wpdb;
-    $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker_display_options WHERE form_id="%d"', $id));
+    $row = $wpdb->get_row($wpdb->prepare('SELECT * FROM ' . $wpdb->prefix . 'formmaker_display_options WHERE form_id=%d', $id));
     if ( !$row ) {
       $row = new stdClass();
       $row->form_id = $id;
