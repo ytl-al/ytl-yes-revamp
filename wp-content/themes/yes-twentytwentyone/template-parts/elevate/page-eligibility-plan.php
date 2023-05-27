@@ -125,7 +125,7 @@
                     var self = this;
                     var params = {};
                     toggleOverlay();
-                    axios.get(apiEndpointURL + '/get-plan-by-id/'+ self.selectedPlan, params)
+                    axios.get(apiEndpointURL + '/get-plan-by-id/'+ self.selectedPlan + '?nonce='+yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
                             self.plan.displayName = data.displayName;
@@ -148,7 +148,7 @@
                         name:self.eligibility.name,
                     };
                     toggleOverlay();
-                    axios.post(apiEndpointURL_elevate + '/ca-verification', params)
+                    axios.post(apiEndpointURL_elevate + '/ca-verification'+ '?nonce='+yesObj.nonce  ,params)
                         .then((response) => {
 
                             var data = response.data;

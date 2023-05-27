@@ -1,7 +1,7 @@
 /*
     JavaScript Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : November  23, 2022, 03:52:31 PM
+    Last edited on  : November  30, 2022, 03:52:31 PM
     Author          : [YTL Digital Design] - AL
 */
 const yesLocalStorageName = 'yesSession';
@@ -269,13 +269,14 @@ function initBetterDocsSearch5G() {
 
 /**
  * Function pushAnalytics()
- * Function to measure shopping journey to analytics - Google Analytics, Facebook Pixel
+ * Function to measure shopping journey to analytics - Google Analytics, Facebook Pixel, Twitter Pixel
  * 
  * @since    1.2.1
  */
 function pushAnalytics(eventType = '', data = {}) {
     gaEEcommercePush(eventType, data);
     fbPixelPush(eventType, data);
+    twPixelPush(eventType, data);
 }
 
 
@@ -349,8 +350,8 @@ function fbPixelPush(eventType = '', data = {}) {
                     total = parseFloat(total) + parseFloat(item.price);
                 });
                 var objTrack = {
-                    'content_type': 'product', 
-                    'currency': 'MYR', 
+                    'content_type': 'product',
+                    'currency': 'MYR',
                     'value': total.toFixed(2),
                     'contents': objItems
                 };
@@ -393,6 +394,114 @@ function fbPixelPush(eventType = '', data = {}) {
     }
 }
 
+/**
+ * Function twPixelPush()
+ * Function to measure shopping journey to Twitter Pixel
+ * 
+ * @since    1.2.1
+ */
+ function twPixelPush(eventType = '', data = {}) {
+    if (typeof twq === 'function' && eventType && data) {
+        let conversion_id;
+        if (localStorage.getItem('ywosLSName') !== null) {
+            conversion_id = JSON.parse(localStorage.getItem('ywosLSName')).sessionKey;
+        }else if (localStorage.getItem('yesElevate') !== null) {
+            conversion_id = JSON.parse(localStorage.getItem('yesElevate')).sessionKey;
+        }
+        switch (eventType) {
+            // case 'impressions':
+            //     var objItems = [];
+            //     data.map(function(item) {
+            //         var objItem = { 'id': item.id, 'quantity': 1 };
+            //         objItems.push(objItem);
+            //     });
+            //     var objTrack = {
+            //         'content_type': 'product', 
+            //         'contents': objItems
+            //     };
+            //     twq('track', 'ViewContent', objTrack);
+            //     break;
+            case 'addToCart': 
+                var objItems = [];
+                var total = 0;
+                data.map(function(item) {
+                    var objItem = { 
+                        'content_type'      : 'product',
+                        'content_id'        : item.id, 
+                        'content_name'      : item.name,
+                        'content_price'     : item.price,
+                        'num_items'         : 1,
+                        'content_group_id'  : null
+                    };
+                    objItems.push(objItem);
+                    total = parseFloat(total) + parseFloat(item.price);
+                });
+                var objTrack = {
+                    'currency': 'MYR',
+                    'value': total.toFixed(2),
+                    'contents': objItems,
+                    'conversion_id' : conversion_id,
+                    'email_address' : null
+                };
+                twq('event', 'tw-o5rd5-od4e9', objTrack);
+                break;
+            case 'checkout':
+                var objItems = [];
+                var total = 0;
+                data.map(function(item) {
+                    var objItem = { 
+                        'content_type'      : 'product',
+                        'content_id'        : item.id, 
+                        'content_name'      : item.name,
+                        'content_price'     : item.price,
+                        'num_items'         : 1,
+                        'content_group_id'  : null
+                    };
+                    objItems.push(objItem);
+                    total = parseFloat(total) + parseFloat(item.price);
+                });
+                var objTrack = {
+                    'currency': 'MYR',
+                    'value': total.toFixed(2),
+                    'contents': objItems,
+                    'conversion_id' : conversion_id,
+                    'email_address' : null
+                };
+                twq('event', 'tw-o5rd5-od4eb', objTrack);
+                break;
+            case 'purchase':
+                const custom_email = JSON.parse(localStorage.getItem(ywosLSName))?.meta.customerDetails?.email;
+                var objItems = [];
+                var total = 0;
+                var items = data.items;
+                items.map(function(item) {
+                    var objItem = { 
+                        'content_type'      : 'product',
+                        'content_id'        : item.id, 
+                        'content_name'      : item.name,
+                        'content_price'     : item.price,
+                        'num_items'         : 1,
+                        'content_group_id'  : null
+                    };
+                    objItems.push(objItem);
+                    total = parseFloat(total) + parseFloat(item.price);
+                });
+                
+                var objTrack = {
+                    'currency': 'MYR',
+                    'value': total.toFixed(2),
+                    'contents': objItems,
+                    'conversion_id' : conversion_id,
+                    'email_address' : custom_email
+                };
+                twq('event', 'tw-o5rd5-od4ed', objTrack);
+                break;
+            default:
+                return;
+        }
+    }
+}
+
 
 /**
  * Function checkScrollHeaderSticky()
@@ -413,3 +522,62 @@ function checkScrollHeaderSticky() {
         $('body').removeClass('page-scrolled');
     }
 }
+
+
+const acc_btns = document.querySelectorAll(".widgettitle");
+const acc_contents = document.querySelectorAll(".widget.widget_nav_menu div");
+
+acc_btns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const panel = btn.nextElementSibling;
+    panel.classList.toggle("active");
+    btn.classList.toggle("active");
+  });
+});
+jQuery(document).on('click', '.custom_menu_nuv', function (e) {
+    var obj = jQuery(this);
+    jQuery(".navbar").hide();
+   
+     })
+
+     
+
+//slider on e-sim page
+
+
+jQuery('.responsive').slick({
+    dots: true,
+    infinite: false,
+    speed: 300,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+      // You can unslick at a given breakpoint now by adding:
+      // settings: "unslick"
+      // instead of a settings object
+    ]
+  });
+  

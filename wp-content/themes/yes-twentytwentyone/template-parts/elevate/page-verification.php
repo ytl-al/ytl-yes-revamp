@@ -215,7 +215,7 @@
                             fname: self.eligibility.name
                         };
 						var d = new Date();
-                        axios.post(apiEndpointURL_elevate + '/ekyc-check?t='+d.getTime(), params)
+                        axios.post(apiEndpointURL_elevate + '/ekyc-check?t='+d.getTime() + '&nonce='+yesObj.nonce, params)
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
@@ -264,7 +264,7 @@
                         OCRConfidenceScore:response.sim,
                     };
                     toggleOverlay();
-                    axios.post(apiEndpointURL_elevate + '/ca-verification', params)
+                    axios.post(apiEndpointURL_elevate + '/ca-verification' + '?nonce='+yesObj.nonce, params)
                         .then((response) => {
 
                             var data = response.data;

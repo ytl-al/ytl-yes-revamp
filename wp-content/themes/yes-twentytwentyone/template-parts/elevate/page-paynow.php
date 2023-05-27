@@ -557,7 +557,7 @@
                     },
                     ajaxGetFPXBankList: function() {
                         var self = this;
-                        axios.get(apiEndpointURL + '/get-fpx-bank-list')
+                        axios.get(apiEndpointURL + '/get-fpx-bank-list' + '?nonce='+yesObj.nonce)
                             .then((response) => {
                                 var data = response.data;
                                 if (!data.fpxServiceDown) {
@@ -588,7 +588,7 @@
                     },
                     ajaxGetMaybankIPPTenures: function() {
                         var self = this;
-                        axios.post(apiEndpointURL + '/get-ipp-tenures', {
+                        axios.post(apiEndpointURL + '/get-ipp-tenures' + '?nonce='+yesObj.nonce, {
                             'plan_name': self.orderSummary.product.selected.plan.planName
                         })
                             .then((response) => {
@@ -610,7 +610,7 @@
                     ajaxGetMaybankIPPInstallments: function(totalAmount, tenure) {
                         var self = this;
                         var ippInstallment = {};
-                        axios.post(apiEndpointURL + '/get-ipp-monthly-installments', {
+                        axios.post(apiEndpointURL + '/get-ipp-monthly-installments' + '?nonce='+yesObj.nonce, {
                             'total_amount': totalAmount,
                             'tenure_type': tenure
                         })
@@ -665,7 +665,7 @@
                             'yos_order_id': self.orderResponse.orderNumber
                         };
                         // console.log(self.orderResponse);
-                        axios.post(apiEndpointURL + '/check-order-payment-status', params)
+                        axios.post(apiEndpointURL + '/check-order-payment-status' +'?nonce='+yesObj.nonce, params)
                             .then((response) => {
                                 var data = response.data;
                                 var responseCode = data.responseCode;
@@ -854,7 +854,7 @@
                         }
 
                         //console.log("params",params); return;
-                        axios.post(apiEndpointURL_elevate + '/create-yos-order', params)
+                        axios.post(apiEndpointURL_elevate + '/create-yos-order' + '?nonce='+yesObj.nonce, params)
                             .then((response) => {
                                 var data = response.data.data;
                                 self.orderResponse = data;
@@ -924,7 +924,7 @@
                         var param = elevate.lsData.orderInfo;
                         param.orderNumber = self.orderResponse.orderNumber;
 
-                        axios.post(apiEndpointURL_elevate + '/order/update', param)
+                        axios.post(apiEndpointURL_elevate + '/order/update' + '?nonce='+yesObj.nonce, param)
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
@@ -949,7 +949,7 @@
                         param.orderNumber = self.orderResponse.orderNumber;
                         param.error = error;
 
-                        axios.post(apiEndpointURL_elevate + '/order/cancel', param)
+                        axios.post(apiEndpointURL_elevate + '/order/cancel'+ '?nonce='+yesObj.nonce, param)
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
@@ -986,7 +986,7 @@
 						}
                         param.status = status.toString();
 
-                        axios.post(apiEndpointURL_elevate + '/order/updatePayment', param)
+                        axios.post(apiEndpointURL_elevate + '/order/updatePayment' + '?nonce='+yesObj.nonce, param)
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){

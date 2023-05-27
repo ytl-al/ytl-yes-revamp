@@ -21,7 +21,6 @@
     #cart-body .nav-pills .nav-item {
         margin-right: 30px;
     }
-    
     #cart-body .listing-quickSelectBanks li.nav-item,#cart-body .listing-quickSelectWallets li.nav-item { cursor: pointer; margin-right: 10px; max-width: 60px; text-align: center; }
     .listing-quickSelectBanks li.nav-item .img-quickSelectBank, .listing-quickSelectWallets li.nav-item .img-quickSelectWallet { border: 1px solid #D9D9D9; border-radius: 4px; box-shadow: 2px 2px 12px rgb(112 144 176 / 25%); margin: 0 0 10px; padding: 3px; }
     .listing-quickSelectBanks li.nav-item.selected .img-quickSelectBank, .listing-quickSelectWallets li.nav-item.selected .img-quickSelectWallet { border-color: rgb(61, 140, 255); }
@@ -575,7 +574,7 @@
             mounted: function() {},
             created: function() {
                 var self = this;
-                axios.get(apiEndpointURL + '/get-rm-wallet-merchant')
+                axios.get(apiEndpointURL + '/get-rm-wallet-merchant' + '?nonce='+yesObj.nonce)
                     .then((response) => {
                         var data = response?.data?.rmEwalletList;
                         if(data) {
@@ -632,7 +631,7 @@
                 },
                 ajaxGetFPXBankList: function() {
                     var self = this;
-                    axios.get(apiEndpointURL + '/get-fpx-bank-list')
+                    axios.get(apiEndpointURL + '/get-fpx-bank-list' + '?nonce='+yesObj.nonce)
                         .then((response) => {
                             var data = response.data;
                             if (!data.fpxServiceDown) {
@@ -663,7 +662,7 @@
                 },
                 ajaxGetMaybankIPPTenures: function() {
                     var self = this;
-                    axios.post(apiEndpointURL + '/get-ipp-tenures', {
+                    axios.post(apiEndpointURL + '/get-ipp-tenures' + '?nonce='+yesObj.nonce, {
                             'plan_name': self.orderSummary.plan.planName
                         })
                         .then((response) => {
@@ -685,7 +684,7 @@
                 ajaxGetMaybankIPPInstallments: function(totalAmount, tenure) {
                     var self = this;
                     var ippInstallment = {};
-                    axios.post(apiEndpointURL + '/get-ipp-monthly-installments', {
+                    axios.post(apiEndpointURL + '/get-ipp-monthly-installments' + '?nonce='+yesObj.nonce, {
                             'total_amount': totalAmount,
                             'tenure_type': tenure
                         })
@@ -743,7 +742,7 @@
                         'yos_order_id': self.orderResponse.orderNumber
                     };
                     // console.log(self.orderResponse);
-                    axios.post(apiEndpointURL + '/check-order-payment-status', params)
+                    axios.post(apiEndpointURL + '/check-order-payment-status'+ '?nonce='+yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
                             var responseCode = data.responseCode;
@@ -893,7 +892,7 @@
                         'locale'            : self.apiLocale,
                         'walletType'        : self.paymentInfo.walletType
                     };
-                    axios.post(apiEndpointURL + '/create-yos-order', params)
+                    axios.post(apiEndpointURL + '/create-yos-order'+ '?nonce='+yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
                             self.orderResponse = data;
@@ -924,7 +923,7 @@
                     toggleOverlay();
                     var self = this;
                     if (self.isTargetedPromo) {
-                        axios.post(apiEndpointURL + '/tp-url-check', {
+                        axios.post(apiEndpointURL + '/tp-url-check' + '?nonce='+yesObj.nonce, {
                                 'promo_id': self.tpMeta.promoID,
                                 'unique_id': self.tpMeta.userID
                             })
@@ -949,7 +948,7 @@
                 ajaxUpdateTPPurchasedFlag: function() {
                     var self = this;
                     if (self.isTargetedPromo) {
-                        axios.post(apiEndpointURL + '/tp-update-purchase', {
+                        axios.post(apiEndpointURL + '/tp-update-purchase' + '?nonce='+yesObj.nonce, {
                                 'promo_id': self.tpMeta.promoID,
                                 'unique_id': self.tpMeta.userID,
                                 'yos_order_id': self.orderResponse.orderNumber,

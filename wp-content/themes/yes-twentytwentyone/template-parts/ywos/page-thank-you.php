@@ -325,7 +325,7 @@
                 },
                 ajaxGetHighlightPlan: function(planID) {
                     var self = this;
-                    axios.get(apiEndpointURL + '/get-plan-by-id/' + planID)
+                    axios.get(apiEndpointURL + '/get-plan-by-id/' + planID + '/?nonce='+yesObj.nonce)
                         .then((response) => {
                             var planData = response.data;
                             if (planData.notes) {

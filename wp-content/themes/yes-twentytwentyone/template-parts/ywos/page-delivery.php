@@ -674,7 +674,7 @@
                         $('.form-select').selectpicker('refresh');
                     }, 100);
 
-                    axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode)
+                    axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode + '?nonce='+yesObj.nonce)
                         .then((response) => {
                             var options = [];
                             var data = response.data;
@@ -777,7 +777,7 @@
                         'security_id': self.deliveryInfo.securityId,
                         'locale': self.apiLocale
                     };
-                    axios.post(apiEndpointURL + '/verify-referral-code', params)
+                    axios.post(apiEndpointURL + '/verify-referral-code'+ '?nonce='+yesObj.nonce, params)
                         .then((response) => {
                             self.referralCode.verified = true;
                             ywos.lsData.meta.referralCode = params;
@@ -890,7 +890,7 @@
                         'plan_name': self.orderSummary.plan.planName,
                         'locale': self.apiLocale
                     };
-                    axios.post(apiEndpointURL + '/validate-customer-eligibilities', params)
+                    axios.post(apiEndpointURL + '/validate-customer-eligibilities'+ '?nonce='+yesObj.nonce, params)
                         .then((response) => {
                             self.redirectVerified()
                         })

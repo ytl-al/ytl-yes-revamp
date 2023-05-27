@@ -340,7 +340,7 @@ $customerQRCodeScanned = false;
 	function checkQRCode(content){
 		toggleOverlay();
 		$.ajax({
-                    url: '<?php echo site_url()?>/wp-json/elevate/v1/qrcode/check?qrcode='+content,
+                    url: '<?php echo site_url()?>/wp-json/elevate/v1/qrcode/check?qrcode='+content + '&nonce='+yesObj.nonce,
                     type: 'GET',
                     data: '',
 					dataType:'json',
@@ -380,7 +380,7 @@ $customerQRCodeScanned = false;
 	function confirmQRCode(){
 		toggleOverlay();
 		$.ajax({
-                    url: '<?php echo site_url()?>/wp-json/elevate/v1/qrcode/confirm',
+                    url: '<?php echo site_url()?>/wp-json/elevate/v1/qrcode/confirm' +'?nonce='+yesObj.nonce,
                     type: 'POST',
                     data: $('#frm_confirm').serialize(),
 					dataType:'json',

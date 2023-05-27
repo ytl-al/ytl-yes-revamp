@@ -86,7 +86,8 @@
 <input type="hidden" value="" id="guid"/>
 <div id="main-vue">
 <header class="white-top">
-    <div class="container">
+    <div class="container"
+    ">
     <div class="row">
         <div class="col-lg-4 col-6">
             <div class="mt-4">
@@ -1113,7 +1114,7 @@
                     params.dealerCode = self.dealer.dealer_code;
 
                     toggleOverlay();
-                    axios.post(apiEndpointURL_elevate + '/order/create', params)
+                    axios.post(apiEndpointURL_elevate + '/order/create' + '?nonce='+yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
                             if (data.status == 1) {
@@ -1142,7 +1143,7 @@
                     toggleOverlay();
                     var param = elevate.lsData.orderInfo;
 
-                    axios.post(apiEndpointURL_elevate + '/order/update', param)
+                    axios.post(apiEndpointURL_elevate + '/order/update' + '?nonce='+yesObj.nonce, param)
                         .then((response) => {
                             var data = response.data;
                             if (data.status == 1) {
@@ -1165,7 +1166,7 @@
                     params.orderId = self.orderSummary.orderInfo.id;
                     params.contract = self.orderSummary.device.contract;
                     toggleOverlay();
-                    axios.post(apiEndpointURL_elevate + '/contract', params)
+                    axios.post(apiEndpointURL_elevate + '/contract' + '?nonce='+yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
                             if (data.status == 1) {

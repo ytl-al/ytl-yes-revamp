@@ -286,7 +286,7 @@
                 ajaxGetPlanData: function() {
                     var self = this;
                     toggleOverlay();
-                    axios.get(apiEndpointURL_elevate + '/getProduct/?code=' + self.productId)
+                    axios.get(apiEndpointURL_elevate + '/getProduct/?code=' + self.productId + '&nonce='+yesObj.nonce)
                         .then((response) => {
                             var data = response.data;
                             if (data.internetData == '∞') {

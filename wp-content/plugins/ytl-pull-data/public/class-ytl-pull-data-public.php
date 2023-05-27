@@ -113,6 +113,15 @@ class Ytl_Pull_Data_Public
 	 */
 	private $path_generate_auth_token;
 
+		/**
+	 * The api path to generate auth token.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $path_generate_auth_token_new      		The path to generate authentication token for service.
+	 */
+	private $path_generate_auth_token_new;
+
 	/**
 	 * The api path to get the add ons by plan.
 	 *
@@ -131,6 +140,16 @@ class Ytl_Pull_Data_Public
 	 */
 	private $path_generate_otp_for_login;
 
+
+		/**
+	 * The api path to generate otp for login.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $path_generate_otp_for_login  	_new	The path to generate New otp for login service.
+	 */
+	private $path_generate_otp_for_login_new;
+
 	/**
 	 * The api path to validate the login credentials.
 	 *
@@ -139,6 +158,15 @@ class Ytl_Pull_Data_Public
 	 * @var      string    $path_validate_login  				The path to validate the login service.
 	 */
 	private $path_validate_login;
+
+		/**
+	 * The api path to validate the login credentials.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $path_validate_login_new 				The path to validate the login service.
+	 */
+	private $path_validate_login_new;
 
 	/**
 	 * The api path to get all cities by state code.
@@ -237,6 +265,19 @@ class Ytl_Pull_Data_Public
      * @access   private
      * @var      string    $get_all_plans_with_addons_path  The all plans with addons path for API url to be used.
      */
+
+
+	 private $path_get_rm_wallet_merchant;
+
+    /**
+     * The api path to auth.
+     *
+     * @since    1.1.1
+     * @access   private
+     * @var      string   
+     */
+
+
     private $get_all_plans_with_addons_path;
 
 	/**
@@ -256,9 +297,12 @@ class Ytl_Pull_Data_Public
 		$this->api_app_version      = '1.1';
 		$this->api_locale           = 'EN';
 		$this->path_generate_auth_token 	= '/mobileyos/mobile/ws/v1/json/auth/getBasicAuth';
+		$this->path_generate_auth_token_new 	= '/connect/token';
 		$this->path_get_add_ons_by_plan 	= '/mobileyos/mobile/ws/v1/json/getEligibleAddonList';
 		$this->path_generate_otp_for_login	= '/mobileyos/mobile/ws/v1/json/generateOTPForLogin';
+		$this->path_generate_otp_for_login_new	= '/api/app/sms-notification/generate-oTP';
 		$this->path_validate_login			= '/mobileyos/mobile/ws/v1/json/validateLoginAndGetCustomerDetails';
+		$this->path_validate_login_new      = '/api/app/SMS-notification/verify-oTP';
 		$this->path_get_cities_by_state_code = '/mobileyos/mobile/ws/v1/json/getAllCitiesByStateCode';
 		$this->path_generate_otp_for_guest_login = '/mobileyos/mobile/ws/v1/json/generateOTPForGuestLogin';
 		$this->path_validate_guest_login 	= '/mobileyos/mobile/ws/v1/json/validateGuestLogin';
@@ -330,6 +374,7 @@ class Ytl_Pull_Data_Public
 	{
 		$this->ra_reg_add_to_cart();
 		$this->ra_reg_get_plan_by_id();
+		$this->ra_reg_get_bundlePlan_by_id();
 		$this->ra_reg_get_add_ons_by_plan();
 		$this->ra_reg_get_auth_token();
 		$this->ra_reg_generate_otp_for_login();
@@ -348,10 +393,14 @@ class Ytl_Pull_Data_Public
 		$this->ra_reg_get_order_by_order_display_id();
 		$this->ra_reg_tp_url_check();
 		$this->ra_reg_tp_update_has_purchased_flag();
+		$this-> ra_reg_get_auth_token_new();
+		$this->ra_reg_generate_otp_for_guest_login_new();
+		$this-> ra_new_reg_guest_otp();
 	}
 
 	public function ra_reg_add_to_cart()
 	{
+		
 		register_rest_route('ywos/v1', 'add-to-cart', array(
 			'methods'	=> 'POST',
 			'callback'	=> array($this, 'ra_add_to_cart'),
@@ -361,6 +410,9 @@ class Ytl_Pull_Data_Public
 
 	public function ra_add_to_cart(WP_REST_Request $request)
 	{
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 } 
 		global $wpdb;
 
 		$table_name			= $wpdb->prefix . 'ywos_cart';
@@ -381,6 +433,7 @@ class Ytl_Pull_Data_Public
 
 	public function ra_reg_get_plan_by_id()
 	{
+		
 		register_rest_route('ywos/v1', '/get-plan-by-id/(?P<plan_id>\d+)', array(
 			'methods'	=> 'GET',
 			'callback' 	=> array($this, 'get_plan_by_id'),
@@ -395,10 +448,13 @@ class Ytl_Pull_Data_Public
 		));
 	}
 
+
 	public function get_plan_by_id($data)
 	{
-		//return $this->ca_get_plan_by_id($data['plan_id'], true);
-
+	
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }   
 		$return 	= [];
 		$get_plans 	= get_option($this->prefix . 'plans_data');
 		if (empty($get_plans)) {
@@ -413,6 +469,66 @@ class Ytl_Pull_Data_Public
 				}
 			}
 		}
+
+		if( empty($return) || !is_array($return) ) {
+			// $return= $this->ca_get_plan_by_id($data['plan_id'], true);
+			// print_r($return);
+			// die();
+			
+		}
+		if (empty($return)) {
+			return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
+		}
+		
+		return $return;
+	}
+
+	/**
+	 * This function is use for create the API route for the bundle Plan
+	 *
+	 * @return void
+	 */
+	public function ra_reg_get_bundlePlan_by_id() :void
+	{
+		register_rest_route('ywos/v1', '/get-bundlePlan-by-id/(?P<device_id>\d+)', array(
+			'methods'	=> 'GET',
+			'callback' 	=> array($this, 'get_bundlePlan_by_id'),
+			'args' 		=> array(
+				'plan_id' 	=> array(
+					'validate_callback'	=> function ($param, $request, $key) {
+						return is_numeric($param);
+					}
+				)
+
+				),
+				'permission_callback' => '__return_true'
+		));
+	}
+
+	/**
+	 * This function is use for the get the bundle plan data using plan id
+	 *
+	 * @param array $data
+	 * @return array
+	 */
+	public function get_bundlePlan_by_id(WP_REST_Request $request)
+	{
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 } 
+		$devicePlan_id = $request->get_param( 'device_id' );
+		$return 	= [];
+		$get_plans 	= get_option('ywos_device_bundle_plans');
+		if (empty($get_plans)) {
+			return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
+		}
+		$plans_obj 	= unserialize($get_plans);
+		foreach ($plans_obj as $device_id => $device) {
+			if ($device_id == $devicePlan_id) {
+				$return	= $device;
+				break;
+			}
+		}
 		if (empty($return)) {
 			return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
 		}
@@ -420,8 +536,11 @@ class Ytl_Pull_Data_Public
 		return $return;
 	}
 
-	public function ca_get_plan_by_id($plan_id, $returnPlanDetail = false)
+	public function ca_get_plan_by_id($plan_id, $returnPlanDetail = false) 
 	{
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 } 
 		$session_id 	= $this->ca_generate_auth_token(true);
 		if ($plan_id && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params 	= [
@@ -443,7 +562,10 @@ class Ytl_Pull_Data_Public
 			$data 		= json_decode($request['body']);
 			if ($data->responseCode > -1) {
 				if ($returnPlanDetail) {
-					return $data->planDetails[0];
+					if( isset($data->planDetails[0]) ) {
+						return $data->planDetails[0];
+					}
+					return [];
 				} else {
 					$data->sessionId = $session_id;
 				}
@@ -473,6 +595,9 @@ class Ytl_Pull_Data_Public
 
 	public function get_add_ons_by_plan(WP_REST_Request $request)
 	{
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 } 
 		$plan_name 	= (isset($request['plan_name']) && $request['plan_name'] != null) ? $request['plan_name'] : null;
 		$plan_type 	= (isset($request['plan_type']) && $request['plan_type'] != null) ? $request['plan_type'] : null;
 
@@ -489,6 +614,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_get_add_ons_by_plan($plan_name = null, $plan_type = null)
 	{
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 } 
 		$session_id 	= $this->ca_generate_auth_token(true);
 		if ($plan_name && $plan_type && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params 	= [
@@ -526,6 +654,73 @@ class Ytl_Pull_Data_Public
 		return [];
 	}
 
+
+			/*new token Genration Code  start here */
+			
+			
+			public function ra_reg_get_auth_token_new(){
+				register_rest_route('ywos/v1', 'connect/token', array(
+					'methods'	=> 'POST',
+					'callback'	=> array($this, 'get_auth_token_new')
+				));
+			}
+			public function get_auth_token_new($get_token_only = false)
+			{
+				return $this->ca_generate_auth_token_new();
+			}
+		
+			public function ca_generate_auth_token_new($get_token_only = false)
+			{
+				// $api_domain="https://ydbp-identity-dev.azurewebsites.net";
+				$guestLoginData=get_option('yes_gauest_login_token_data',true);
+				if(isset($guestLoginData)){
+					$api_domain=$guestLoginData['set_token_data_guest_login']['token_url'];
+					$client_id=$guestLoginData['set_token_data_guest_login']['client_id'];
+					$client_secret=$guestLoginData['set_token_data_guest_login']['client_secret'];
+					$grant_type=$guestLoginData['set_token_data_guest_login']['grant_type'];
+					$username=$guestLoginData['set_token_data_guest_login']['username'];
+					$password=$guestLoginData['set_token_data_guest_login']['password'];
+
+
+
+				}
+				// print_r($guestLoginData);
+				// die();
+				if (isset($api_domain) && isset($this->api_request_id) && isset($this->api_authorization_key)) {
+					// $params     = ['requestId' => $this->api_request_id, 'locale' => $this->api_locale];
+					$params     = ['Client_Id' => $client_id, 'Client_Secret' => $client_secret, 'grant_type'=> $grant_type, 'UserName'=> $username, 'Password'=>$password];
+					// $params = [];
+					$args       = [
+						'headers'       => array('Content-Type' => 'application/x-www-form-urlencoded'),
+						'body'          => $params,
+						'method'        => 'POST',
+						'data_format'   => 'body',
+						'timeout'     	=> $this->api_timeout
+					];
+					$api_url    = $api_domain . $this->path_generate_auth_token_new;
+					$request    = wp_remote_post($api_url, $args);
+					$data   	= json_decode($request['body']);
+					if (!empty($data->access_token)) {
+						if ($get_token_only) {
+							return $data->access_token;
+						}
+						$response 	= new WP_REST_Response(['token' => $data->access_token]);
+						$response->set_status(200);
+						return $response;
+					}
+				} else {
+					return new WP_Error('error_generating_auth_token', "Parameters not complete to generate auth token.", array('status' => 400));
+				}
+				return new WP_Error('error_generating_auth_token', "There's an error in generating the auth token.", array('status' => 400));
+			}
+
+
+
+
+
+
+
+
 	public function ra_reg_get_auth_token()
 	{
 		register_rest_route('ywos/v1', 'get-auth-token', array(
@@ -542,6 +737,7 @@ class Ytl_Pull_Data_Public
 
 	public function ca_generate_auth_token($get_token_only = false)
 	{
+		
 		if (isset($this->api_domain) && isset($this->api_request_id) && isset($this->api_authorization_key)) {
 			$params     = ['requestId' => $this->api_request_id, 'locale' => $this->api_locale];
 			$args       = [
@@ -568,6 +764,85 @@ class Ytl_Pull_Data_Public
 		return new WP_Error('error_generating_auth_token', "There's an error in generating the auth token.", array('status' => 400));
 	}
 
+
+
+
+	public function ra_reg_generate_otp_for_guest_login_new()
+	{
+		register_rest_route('ywos/v1', '/api/app/sms-notification/generate-oTP', array(
+			'methods'	=> 'POST',
+			'callback'	=> array($this, 'generate_otp_for_guest_login_new'),
+			'args' 		=> [
+				'MobileNumber' 	=> [
+					'validate_callback'	=> function ($param, $request, $key) {
+						return true;
+					}
+				],
+				'locale' 	=> [
+					'validate_callback'	=> function ($param, $request, $key) {
+						return true;
+					}
+				]
+			]
+		));
+	}
+
+	public function generate_otp_for_guest_login_new(WP_REST_Request $request)
+	{
+		
+		$MobileNumber = (trim($request['MobileNumber'])) ? $request['MobileNumber'] : null;
+		$locale = (trim($request['locale'])) ? $request['locale'] : 'EN';
+		return $this->ca_generate_otp_for_guest_login_new($MobileNumber, $locale);
+	}
+
+
+	public function ca_generate_otp_for_guest_login_new($MobileNumber = null, $locale = 'EN')
+	{
+
+		 
+		// $api_domain ="https://ydbp-shoutout-kraken-dev.azurewebsites.net";
+		$guestLoginData=get_option('yes_gauest_login_token_data');
+		if(isset($guestLoginData) && !empty($guestLoginData)){
+			$api_domain=$guestLoginData['set_token_data_guest_login']['otp_url'];
+
+		}
+		$session_id = $this->ca_generate_auth_token_new(true);
+		if ($MobileNumber != null  && isset($api_domain) && $session_id) {
+			// $params 	= ['requestId' => $this->api_request_id, 'locale' => $locale, 'msisdn' => $MobileNumber, 'sessionId' => $session_id];
+			$params 	= ['MobileNumber' => $MobileNumber];
+			$args 		= [
+				'headers'       => "Authorization: Bearer {$session_id}",
+				'body'          => json_encode($params),
+				'method'        => 'POST',
+				'data_format'   => 'body',
+				'timeout'     	=> $this->api_timeout
+			];
+			$api_url 	=  $api_domain.$this->path_generate_otp_for_login_new.'?MobileNumber='.$MobileNumber;
+			$request 	= wp_remote_post($api_url, $args);	
+			$data = $request['body'];
+			if($data == 'ERR1'){
+				$data=FALSE;
+			}else{
+				$data;
+			}
+			if (!empty($data)) {
+				$response 	= new WP_REST_Response($data);
+				$response->set_status(200);
+				return $response;
+			} else if($data==FALSE)  {
+				return new WP_Error('error_generating_otp_for_guest_login', "There's an error in generating OTP for guest login.", array('status' => 400));
+			}
+		} else {
+			return new WP_Error('error_generating_otp_for_guest_login', "Parameters not complete to generate OTP for guest login.", array('status' => 400));
+		}
+		return new WP_Error('error_generating_otp_for_guest_login', "There's an error in generating OTP for guest login.", array('status' => 400));
+	}
+
+
+
+
+
+
 	public function ra_reg_generate_otp_for_login()
 	{
 		register_rest_route('ywos/v1', 'generate-otp-for-login', array(
@@ -579,8 +854,8 @@ class Ytl_Pull_Data_Public
 						return true;
 					}
 				]
-			],
-			'permission_callback' => '__return_true'
+				],
+				'permission_callback' => '__return_true'
 		));
 	}
 
@@ -594,6 +869,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_generate_otp_for_login($yes_id = null, $locale = 'EN')
 	{
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 } 
 		$session_id 	= $this->ca_generate_auth_token(true);
 		if ($yes_id != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params 	= ['requestId' => $this->api_request_id, 'yesId' => $yes_id, 'locale' => $locale, 'sessionId' => $session_id];
@@ -641,8 +919,8 @@ class Ytl_Pull_Data_Public
 						return is_string($param);
 					}
 				]
-			],
-			'permission_callback' => '__return_true'
+				],
+				'permission_callback' => '__return_true'
 		]);
 	}
 
@@ -658,6 +936,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_validate_login($yes_id = null, $password = null, $auth_type = 'password', $locale = 'EN')
 	{
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 } 
 		$session_id 	= $this->ca_generate_auth_token(true);
 		if ($yes_id && $password && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params 	= [
@@ -706,8 +987,8 @@ class Ytl_Pull_Data_Public
 						return is_string($param);
 					}
 				)
-			),
-			'permission_callback' => '__return_true'
+				),
+				'permission_callback' => '__return_true'
 		]);
 	}
 
@@ -719,6 +1000,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_get_cities_by_state($state_code = null)
 	{
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 } 
 		$session_id 	= $this->ca_generate_auth_token(true);
 		if ($state_code && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params = ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'sessionId' => $session_id, 'stateCode' => $state_code];
@@ -762,8 +1046,8 @@ class Ytl_Pull_Data_Public
 						return true;
 					}
 				]
-			],
-			'permission_callback' => '__return_true'
+				],
+				'permission_callback' => '__return_true'
 		));
 	}
 
@@ -776,6 +1060,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_generate_otp_for_guest_login($msisdn = null, $locale = 'EN')
 	{
+		// if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+		// 	exit("Request not valid");
+		//  } 
 		$session_id = $this->ca_generate_auth_token(true);
 		if ($msisdn != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params 	= ['requestId' => $this->api_request_id, 'locale' => $locale, 'msisdn' => $msisdn, 'sessionId' => $session_id];
@@ -823,8 +1110,8 @@ class Ytl_Pull_Data_Public
 						return true;
 					}
 				]
-			],
-			'permission_callback' => '__return_true'
+				],
+				'permission_callback' => '__return_true'
 		));
 	}
 
@@ -838,6 +1125,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_validate_guest_login($msisdn = null, $otp_password = null, $locale = 'EN')
 	{
+		// if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+		// 	exit("Request not valid");
+		//  } 
 		$session_id = $this->ca_generate_auth_token(true);
 		if ($msisdn != null && $otp_password != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params 	= ['requestId' => $this->api_request_id, 'locale' => $locale, 'msisdn' => $msisdn, 'password' => $otp_password, 'sessionId' => $session_id];
@@ -883,6 +1173,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_validate_customer_eligibilities($order_info = [])
 	{
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 } 
 		$phone_number 	= (isset($order_info['phone_number']) && !empty(trim($order_info['phone_number']))) 	? $order_info['phone_number'] 	: null;
 		$customer_name 	= (isset($order_info['customer_name']) && !empty(trim($order_info['customer_name']))) 	? $order_info['customer_name'] 	: null;
 		$dob 			= (isset($order_info['dob']) && !empty(trim($order_info['dob']))) 						? $order_info['dob'] 			: null;
@@ -900,7 +1193,7 @@ class Ytl_Pull_Data_Public
 		$plan_type 		= (isset($order_info['plan_type']) && !empty(trim($order_info['plan_type']))) 			? $order_info['plan_type'] 		: null;
 		$plan_name 		= (isset($order_info['plan_name']) && !empty(trim($order_info['plan_name']))) 			? $order_info['plan_name'] 		: null;
 		$locale 		= (isset($order_info['locale']) && !empty(trim($order_info['locale']))) 				? $order_info['locale'] 		: 'EN';
-
+		
 		$session_id 	= $this->ca_generate_auth_token(true);
 
 		if ($phone_number != null && $customer_name != null && $dob != null && $email != null && $security_type != null && $security_id != null && $address_line != null && $city != null && $city_code != null && $state != null && $state_code != null && $postal_code != null && $country != null && $plan_bundle_id != 0 && $plan_type != null && $plan_name != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
@@ -937,7 +1230,7 @@ class Ytl_Pull_Data_Public
 			$api_url 	= $this->api_domain . $this->path_validate_customer_eligibilities;
 			$request 	= wp_remote_post($api_url, $args);
 			$data 		= json_decode($request['body']);
-
+			
 			if ($data->responseCode > -1) {
 				$data->sessionId = $session_id;
 
@@ -977,6 +1270,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_verify_referral_code($referral_code = null, $security_type = null, $security_id = null, $locale = 'EN')
 	{
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 } 
 		$session_id = $this->ca_generate_auth_token(true);
 		if ($referral_code != null && $security_type != null && $security_id != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params		= ['requestId' => $this->api_request_id, 'locale' => $locale, 'referralCode' => $referral_code, 'refereeSecurityType' => $security_type, 'refereeSecurityID' => $security_id, 'sessionId' => $session_id];
@@ -1011,19 +1307,22 @@ class Ytl_Pull_Data_Public
 	public function ra_reg_get_fpx_bank_list()
 	{
 		register_rest_route('ywos/v1', 'get-fpx-bank-list', array(
-			'methods'	=> 'GET',
+			'methods'	=> 'GET', 
 			'callback' 	=> array($this, 'get_fpx_bank_list'),
 			'permission_callback' => '__return_true'
 		));
 	}
 
-	public function get_fpx_bank_list()
+	public function get_fpx_bank_list() 
 	{
 		return $this->ca_get_fpx_bank_list();
 	}
 
-	public function ca_get_fpx_bank_list()
+	public function ca_get_fpx_bank_list() 
 	{
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 } 
 		$session_id 	= $this->ca_generate_auth_token(true);
 		if (isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params = ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'sessionId' => $session_id];
@@ -1051,23 +1350,26 @@ class Ytl_Pull_Data_Public
 		return new WP_Error('error_getting_fpx_bank_list', "There's an error in retrieving the bank list.", array('status' => 400));
 	}
 
-	public function ra_reg_get_ipp_tenures()
+	public function ra_reg_get_ipp_tenures() 
 	{
 		register_rest_route('ywos/v1', 'get-ipp-tenures', array(
-			'methods'	=> 'POST',
+			'methods'	=> 'POST', 
 			'callback' 	=> array($this, 'get_ipp_tenures'),
 			'permission_callback' => '__return_true'
 		));
 	}
 
-	public function get_ipp_tenures(WP_REST_Request $request)
+	public function get_ipp_tenures(WP_REST_Request $request) 
 	{
 		$plan_name	= $request['plan_name'];
 		return $this->ca_get_ipp_tenures($plan_name);
 	}
 
-	public function ca_get_ipp_tenures($plan_name = '')
+	public function ca_get_ipp_tenures($plan_name = '') 
 	{
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 } 
 		$session_id 	= $this->ca_generate_auth_token(true);
 		if ($plan_name && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params = ['planName' => $plan_name, 'requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'sessionId' => $session_id];
@@ -1095,24 +1397,27 @@ class Ytl_Pull_Data_Public
 		return new WP_Error('error_getting_ipp_tenure', "There's an error in retrieving the Maybank IPP tenure details.", array('status' => 400));
 	}
 
-	public function ra_reg_get_ipp_monthly_installments()
+	public function ra_reg_get_ipp_monthly_installments() 
 	{
 		register_rest_route('ywos/v1', 'get-ipp-monthly-installments', array(
-			'methods'	=> 'POST',
+			'methods'	=> 'POST', 
 			'callback' 	=> array($this, 'get_ipp_monthly_installments'),
 			'permission_callback' => '__return_true'
 		));
 	}
 
-	public function get_ipp_monthly_installments(WP_REST_Request $request)
+	public function get_ipp_monthly_installments(WP_REST_Request $request) 
 	{
 		$total_amount 	= $request['total_amount'];
 		$tenure_type 	= $request['tenure_type'];
 		return $this->ca_get_ipp_monthly_installments($total_amount, $tenure_type);
 	}
 
-	public function ca_get_ipp_monthly_installments($total_amount = 0, $tenure_type = 0)
+	public function ca_get_ipp_monthly_installments($total_amount = 0, $tenure_type = 0) 
 	{
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 } 
 		$session_id 	= $this->ca_generate_auth_token(true);
 		if ($total_amount && $tenure_type && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params = ['planAmount' => $total_amount, 'ippTenureType' => $tenure_type, 'requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'sessionId' => $session_id];
@@ -1126,7 +1431,7 @@ class Ytl_Pull_Data_Public
 			$api_url	= $this->api_domain . $this->path_get_ipp_monthly_installment;
 			$request 	= wp_remote_post($api_url, $args);
 			$data 		= json_decode($request['body']);
-
+			
 			if ($data->responseCode > -1) {
 				$response = new WP_REST_Response($data);
 				$response->set_status(200);
@@ -1143,21 +1448,24 @@ class Ytl_Pull_Data_Public
 	public function ra_reg_create_yos_order()
 	{
 		register_rest_route('ywos/v1', 'create-yos-order', array(
-			'methods'	=> 'POST',
+			'methods'	=> 'POST', 
 			'callback' 	=> array($this, 'create_yos_order'),
 			'permission_callback' => '__return_true'
 		));
 	}
 
-	public function create_yos_order(WP_REST_Request $order_info)
+	public function create_yos_order(WP_REST_Request $order_info) 
 	{
 		return $this->ca_create_yos_order($order_info);
 	}
 
-	public function ca_create_yos_order($order_info = [])
+	public function ca_create_yos_order($order_info = []) 
 	{
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 } 
 		$session_key 	= $this->get_request_input($order_info, 'session_key');
-
+		
 		$phone_number 	= $this->get_request_input($order_info, 'phone_number');
 		$customer_name	= $this->get_request_input($order_info, 'customer_name');
 		$dob			= $this->get_request_input($order_info, 'dob');
@@ -1185,7 +1493,7 @@ class Ytl_Pull_Data_Public
 		$state 			= $this->get_request_input($order_info, 'state');
 		$state_code 	= $this->get_request_input($order_info, 'state_code');
 		$country 		= $this->get_request_input($order_info, 'country');
-
+		
 		$payment_method	= $this->get_request_input($order_info, 'payment_method');
 		$process_name 	= $this->get_request_input($order_info, 'process_name');
 		$amount 		= $this->get_float_number($order_info['amount']);
@@ -1204,58 +1512,58 @@ class Ytl_Pull_Data_Public
 
 		$session_id 	= $this->ca_generate_auth_token(true);
 		$walletType		= $this->get_request_input($order_info, 'walletType');
-
+		
 		if (
 			$phone_number != null && $customer_name != null && $dob != null && $gender != null && $email != null && $security_type != null && $security_id != null &&
-			$plan_name != null && $plan_type != null && $product_bundle_id != null &&
+			$plan_name != null && $plan_type != null && $product_bundle_id != null && 
 			$address_line != null && $city != null && $city_code != null && $postal_code != null && $state != null && $state_code != null && $country != null &&
-			$payment_method != null && $process_name != null && $amount != null && $amount_sst != null && $total_amount != null &&
+			$payment_method != null && $process_name != null && $amount != null && $amount_sst != null && $total_amount != null && 
 			(
-				($payment_method == 'FPX' && ($bank_code != null && $bank_name != null)) ||
-				($payment_method == 'REVENUE_M_YOS' && ($walletType != null )) ||
-				($payment_method == 'CREDIT_CARD' && ($card_number != null && $card_type != null && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null)) ||
+				($payment_method == 'FPX' && ($bank_code != null && $bank_name != null)) || 
+				($payment_method == 'REVENUE_M_YOS' && ($walletType != null )) || 
+				($payment_method == 'CREDIT_CARD' && ($card_number != null && $card_type != null && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null)) || 
 				($payment_method == 'CREDIT_CARD_IPP' && ($card_number != null && $card_type != null && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null && $ippType != null))
 			) &&
 			isset($this->api_domain) && isset($this->api_request_id) && $session_id
 		) {
 			$params 	= [
 				'eKYCCustomerDetail' 	=> [
-					'alternatePhoneNumber' 	=> $phone_number,
-					'customerFullName' 		=> $customer_name,
-					'dob' 					=> $dob,
-					'gender' 				=> $gender,
-					'email' 				=> $email,
-					'loginYesId' 			=> $login_yes_id,
-					'planName' 				=> $plan_name,
-					'planType' 				=> $plan_type,
-					'securityType' 			=> $security_type,
-					'securityId' 			=> $security_id,
-					'schoolName' 			=> $school_name,
-					'schoolCode' 			=> $school_code,
-					'universityName' 		=> $university_name,
-					'dealerCode' 			=> $dealer_code,
-					'dealerLoginId' 		=> $dealer_login_id,
+					'alternatePhoneNumber' 	=> $phone_number, 
+					'customerFullName' 		=> $customer_name, 
+					'dob' 					=> $dob, 
+					'gender' 				=> $gender, 
+					'email' 				=> $email, 
+					'loginYesId' 			=> $login_yes_id, 
+					'planName' 				=> $plan_name, 
+					'planType' 				=> $plan_type, 
+					'securityType' 			=> $security_type, 
+					'securityId' 			=> $security_id, 
+					'schoolName' 			=> $school_name, 
+					'schoolCode' 			=> $school_code, 
+					'universityName' 		=> $university_name, 
+					'dealerCode' 			=> $dealer_code, 
+					'dealerLoginId' 		=> $dealer_login_id, 
 					'supportingDocUniqueId'	=> null
-				],
+				], 
 
 				'orderDetail' 			=> [
-					'planName' 			=> $plan_name,
-					'planType' 			=> $plan_type,
-					'productBundleId' 	=> $product_bundle_id,
-					'referralCode' 		=> $referral_code,
+					'planName' 			=> $plan_name, 
+					'planType' 			=> $plan_type, 
+					'productBundleId' 	=> $product_bundle_id, 
+					'referralCode' 		=> $referral_code, 
 					'addonName' 		=> $addon_name
-				],
+				], 
 
 				'deliveryAddress' 		=> [
-					'addressLine' 		=> $address_line,
-					'city' 				=> $city,
-					'cityCode' 			=> $city_code,
-					'postalCode' 		=> $postal_code,
-					'state' 			=> $state,
-					'stateCode' 		=> $state_code,
-					'country' 			=> $country
-				],
-
+					'addressLine' 		=> $address_line, 
+					'city' 				=> $city, 
+					'cityCode' 			=> $city_code, 
+					'postalCode' 		=> $postal_code, 
+					'state' 			=> $state, 
+					'stateCode' 		=> $state_code, 
+					'country' 			=> $country 
+				], 
+				
 				'paymentInfo' 			=> [
 					'paymentMethod' 	=> $payment_method,
 					'processName' 		=> $process_name,
@@ -1274,7 +1582,7 @@ class Ytl_Pull_Data_Public
 					'isAutoSubscribe' 	=> false,
 					'isSavedCard' 		=> false,
 					'ewalletType'       => $walletType
-				],
+				], 
 
 				'appVersion' 			=> $this->api_app_version,
 				'locale' 				=> $locale,
@@ -1289,7 +1597,7 @@ class Ytl_Pull_Data_Public
 				'data_format'   => 'body',
 				'timeout'     	=> $this->api_timeout
 			];
-
+			
 			$api_url 		= $this->api_domain . $this->path_create_yos_order_and_payment;
 			$request 		= wp_remote_post($api_url, $args);
 			$data 			= json_decode($request['body']);
@@ -1310,9 +1618,9 @@ class Ytl_Pull_Data_Public
 			$xpay_order_id 			= $data->xpayOrderId;
 			$yos_order_response 	= $data;
 			$yos_order_response_display = $data->displayResponseMessage;
-
+			
 			$this->record_new_order($session_key, $phone_number, $product_bundle_id, $yos_order_meta, $yos_order_id, $yos_order_display_id, $xpay_order_id, $yos_order_response, $yos_order_response_display);
-
+			
 			if ($data->responseCode > -1) {
 				$data->sessionId = $session_id;
 
@@ -1328,22 +1636,25 @@ class Ytl_Pull_Data_Public
 		return new WP_Error('error_creating_yos_order', "There's an error in creating YOS order.", array('status' => 400));
 	}
 
-
+	
 	public function ra_reg_get_wallet_rm_merchant()
 	{
 		register_rest_route('ywos/v1', 'get-rm-wallet-merchant', array(
-			'methods'	=> 'GET',
+			'methods'	=> 'GET', 
 			'callback' 	=> array($this, 'get_wallet_rm_merchant'),
 			'permission_callback' => '__return_true'
 		));
 	}
 
-	public function get_wallet_rm_merchant(WP_REST_Request $order_info)
+	public function get_wallet_rm_merchant(WP_REST_Request $order_info) 
 	{
 		return $this->ca_get_wallet_rm_merchant($order_info);
 	}
 
 	function ca_get_wallet_rm_merchant( $order_info ) {
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 } 
 		$session_id 	= $this->ca_generate_auth_token(true);
 		$params = ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'sessionId' => $session_id];
 		$args 	= [
@@ -1368,24 +1679,27 @@ class Ytl_Pull_Data_Public
 		return new WP_Error('error_getting_rm_wallet_list', "There's an error in Getting RM Wallet list.", array('status' => 400));
 	}
 
-	public function ra_reg_check_order_payment_status()
+	public function ra_reg_check_order_payment_status() 
 	{
 		register_rest_route('ywos/v1', 'check-order-payment-status', array(
-			'methods'	=> 'POST',
+			'methods'	=> 'POST', 
 			'callback' 	=> array($this, 'check_order_payment_status'),
 			'permission_callback' => '__return_true'
 		));
 	}
 
-	public function check_order_payment_status(WP_REST_Request $request)
+	public function check_order_payment_status(WP_REST_Request $request) 
 	{
 		$session_key	= $request['session_key'];
 		$yos_order_id 	= $request['yos_order_id'];
 		return $this->ca_check_order_payment_status($session_key, $yos_order_id);
 	}
 
-	public function ca_check_order_payment_status($session_key = null, $yos_order_id = 0)
+	public function ca_check_order_payment_status($session_key = null, $yos_order_id = 0) 
 	{
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 } 
 		$session_id 	= $this->ca_generate_auth_token(true);
 		if ($session_key != null && $yos_order_id && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params = ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'orderNumber' => $yos_order_id, 'sessionId' => $session_id];
@@ -1409,7 +1723,7 @@ class Ytl_Pull_Data_Public
 				$is_xpay_success = 2;
 			}
 			$this->update_order_record($session_key, $xpay_order_response, $is_xpay_success, $xpay_order_meta);
-
+			
 			if (is_wp_error($request)) {
 				return new WP_Error('error_checking_order_payment_status', $data, array('status' => 400));
 			} else {
@@ -1424,17 +1738,20 @@ class Ytl_Pull_Data_Public
 		return new WP_Error('error_checking_order_payment_status', "There's an error in checking order payment status.", array('status' => 400));
 	}
 
-	public function ra_reg_get_order_by_order_display_id()
+	public function ra_reg_get_order_by_order_display_id() 
 	{
 		register_rest_route('ywos/v1', 'get-order-by-display-id/(?P<order_display_id>[a-zA-Z0-9-]+)', array(
-			'methods' 	=> 'GET',
+			'methods' 	=> 'GET', 
 			'callback' 	=> array($this, 'get_order_by_display_id'),
 			'permission_callback' => '__return_true'
 		));
 	}
 
-	public function get_order_by_display_id($data)
+	public function get_order_by_display_id($data) 
 	{
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 } 
 		$order_display_id = $data['order_display_id'];
 		global $wpdb;
 		$table_name = $wpdb->prefix.'ywos_orders';
@@ -1447,10 +1764,10 @@ class Ytl_Pull_Data_Public
 
     /**
      * Function to register the rest API for targeted promo url check
-     *
+     * 
      * @since    1.1.0
      */
-	public function ra_reg_tp_url_check()
+	public function ra_reg_tp_url_check() 
 	{
 		register_rest_route('ywos/v1', 'tp-url-check', array(
 			'methods'	=> 'POST',
@@ -1462,17 +1779,20 @@ class Ytl_Pull_Data_Public
 
     /**
      * Function to register callback for the rest API for targeted promo url check
-     *
+     * 
 	 * @param	 $promo_id		The Promo ID given from URL's last path
 	 * @param	 $unique_id 	The unique User ID given
-	 *
+	 * 
      * @since    1.1.0
      */
-	public function rest_tp_url_check(WP_REST_Request $params)
+	public function rest_tp_url_check(WP_REST_Request $params) 
 	{
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 } 
 		$promo_id = $params['promo_id'];
 		$unique_id = $params['unique_id'];
-
+		
 		$data = ywos_tp_url_check($promo_id, $unique_id);
 		if ($data) {
 			$response = new WP_REST_Response($data);
@@ -1487,13 +1807,13 @@ class Ytl_Pull_Data_Public
 
     /**
      * Function to register the rest API to update the has_purchased flag for targeted promo
-     *
+     * 
      * @since    1.1.0
      */
-	public function ra_reg_tp_update_has_purchased_flag()
+	public function ra_reg_tp_update_has_purchased_flag() 
 	{
 		register_rest_route('ywos/v1', 'tp-update-purchase', array(
-			'methods' 	=> 'POST',
+			'methods' 	=> 'POST', 
 			'callback'	=> array($this, 'rest_tp_update_has_purchased_flag'),
 			'permission_callback' => '__return_true'
 		));
@@ -1502,14 +1822,17 @@ class Ytl_Pull_Data_Public
 
     /**
      * Function to register callback for the rest API to update the has_purchased flag for targeted promo
-     *
+     * 
 	 * @param	 $promo_id		The Promo ID given from URL's last path
 	 * @param	 $unique_id 	The unique User ID given
-	 *
+	 * 
      * @since    1.1.0
      */
-	public function rest_tp_update_has_purchased_flag(WP_REST_Request $params)
+	public function rest_tp_update_has_purchased_flag(WP_REST_Request $params) 
 	{
+		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 } 
 		$promo_id = $params['promo_id'];
 		$unique_id = $params['unique_id'];
 		$yos_order_id = $params['yos_order_id'];
@@ -1525,17 +1848,17 @@ class Ytl_Pull_Data_Public
 		return new WP_Error('error_tp_url_check', "Failed to update the has purchased flag by Unique ID and Promo ID provided.", array('status' => 400));
 	}
 
-	public function get_request_input($order_info = [], $input_name = '')
+	public function get_request_input($order_info = [], $input_name = '') 
 	{
 		return (isset($order_info[$input_name]) && !empty(trim($order_info[$input_name]))) ? $order_info[$input_name] : null;
 	}
 
-	public function get_float_number($amount = 0.00, $decimal_plance = 2)
+	public function get_float_number($amount = 0.00, $decimal_plance = 2) 
 	{
 		return number_format((float) $amount, $decimal_plance, '.', '');
 	}
 
-	public function record_new_order($session_key = '', $msisdn = '', $plan_id = 0, $yos_order_meta = [], $yos_order_id = '', $yos_order_display_id = '', $xpay_order_id = '', $yos_order_response = '', $yos_order_response_display = '')
+	public function record_new_order($session_key = '', $msisdn = '', $plan_id = 0, $yos_order_meta = [], $yos_order_id = '', $yos_order_display_id = '', $xpay_order_id = '', $yos_order_response = '', $yos_order_response_display = '') 
 	{
 		global $wpdb;
 		$table_name = $wpdb->prefix.'ywos_orders';
@@ -1543,22 +1866,22 @@ class Ytl_Pull_Data_Public
 		$checkIfExists 	= $wpdb->get_var("SELECT ID FROM $table_name WHERE session_key = '$session_key'");
 		$curTimestamp 	= current_time('mysql');
 		$params 		= array(
-			'session_key'	=> $session_key,
-			'msisdn' 		=> $msisdn,
-			'plan_id' 		=> $plan_id,
-			'yos_order_id' 	=> $yos_order_id,
-			'yos_order_display_id' 			=> $yos_order_display_id,
-			'yos_order_meta'				=> serialize($yos_order_meta),
-			'yos_order_response' 			=> serialize($yos_order_response),
-			'yos_order_response_display' 	=> $yos_order_response_display,
-			'xpay_order_id'	=> $xpay_order_id,
-			'order_created_at'				=> $curTimestamp,
-			'created_at' 	=> $curTimestamp,
-			'updated_at' 	=> $curTimestamp
+			'session_key'	=> $session_key, 
+			'msisdn' 		=> $msisdn, 
+			'plan_id' 		=> $plan_id, 
+			'yos_order_id' 	=> $yos_order_id, 
+			'yos_order_display_id' 			=> $yos_order_display_id, 
+			'yos_order_meta'				=> serialize($yos_order_meta), 
+			'yos_order_response' 			=> serialize($yos_order_response), 
+			'yos_order_response_display' 	=> $yos_order_response_display, 
+			'xpay_order_id'	=> $xpay_order_id, 
+			'order_created_at'				=> $curTimestamp, 
+			'created_at' 	=> $curTimestamp, 
+			'updated_at' 	=> $curTimestamp 
 		);
 		if ($checkIfExists == null) {
 			$wpdb->insert(
-				$table_name,
+				$table_name, 
 				$params
 			);
 		} else {
@@ -1566,7 +1889,7 @@ class Ytl_Pull_Data_Public
 			unset($params['created_at']);
 			$wpdb->update(
 				$table_name,
-				$params,
+				$params, 
 				array(
 					'ID' => $checkIfExists
 				)
@@ -1574,28 +1897,95 @@ class Ytl_Pull_Data_Public
 		}
 	}
 
-	public function update_order_record($session_key = '', $xpay_order_response = '', $is_xpay_success = 0, $xpay_order_meta = '')
+	public function update_order_record($session_key = '', $xpay_order_response = '', $is_xpay_success = 0, $xpay_order_meta) 
 	{
 		global $wpdb;
 		$table_name = $wpdb->prefix.'ywos_orders';
 
 		$getRecordID 	= $wpdb->get_var("SELECT ID FROM $table_name WHERE session_key = '$session_key'");
 		$curTimestamp 	= current_time('mysql');
-
+		
 		if ($getRecordID) {
 			$params = [
-				'xpay_order_response' 	=> $xpay_order_response,
+				'xpay_order_response' 	=> $xpay_order_response, 
 				'xpay_order_meta' 		=> serialize($xpay_order_meta),
-				'is_xpay_success' 		=> $is_xpay_success,
-				'updated_at' 			=> $curTimestamp
+				'is_xpay_success' 		=> $is_xpay_success, 
+				'updated_at' 			=> $curTimestamp 
 			];
 			$wpdb->update(
 				$table_name,
-				$params,
+				$params, 
 				array(
 					'ID' => $getRecordID
 				)
 			);
 		}
 	}
+	public function ra_new_reg_guest_otp()
+	{
+		register_rest_route('ywos/v1', 'api/app/SMS-notification/verify-oTP', array(
+			'methods' 	=> 'POST',
+			'callback'	=> array($this, 'validate_guest_login_otp'),
+			'args' 		=> [
+				'MobileNumber' => [
+					'validate_callback' => function ($param, $request, $key) {
+						return true;
+					}
+				],
+				'OTPValue' => [
+					'validate_callback' => function ($param, $request, $key) {
+						return true;
+					}
+				],
+				'locale' => [
+					'validate_callback' => function ($param, $request, $key) {
+						return true;
+					}
+				]
+				],
+				'permission_callback' => '__return_true'
+		));
+	}
+
+	public function validate_guest_login_otp(WP_REST_Request $request)
+	{
+		$MobileNumber = (trim($request['MobileNumber'])) ? $request['MobileNumber'] : null;
+		$otp_password = (trim($request['OTPValue'])) ? $request['OTPValue'] : null;
+		$locale = (trim($request['locale'])) ? $request['locale'] : null;
+		return $this->ca_validate_guest_login_otp($MobileNumber, $otp_password, $locale);
+	}
+
+	public function ca_validate_guest_login_otp($MobileNumber = null, $otp_password = null, $locale = 'EN')
+	{
+	
+		// $api_domain="https://ydbp-shoutout-kraken-dev.azurewebsites.net";
+		$guestLoginData=get_option('yes_gauest_login_token_data',true);
+		if(isset( $guestLoginData) && !empty($guestLoginData)){
+			$api_domain=$guestLoginData['set_token_data_guest_login']['otp_url'];
+		}
+		$session_id = $this->ca_generate_auth_token_new(true);
+		if ($MobileNumber != null && $otp_password != null && isset($api_domain) && $session_id) {
+			// $params 	= ['requestId' => $this->api_request_id, 'OTPValue' => $otp_password,'locale' => $locale, 'msisdn' => $msisdn, 'sessionId' => $session_id];
+			$params=['MobileNumber' => $MobileNumber,'OTPValue' => $otp_password];
+			$args 		= [
+				'headers'       => array('Authorization'=>"Bearer {$session_id}"),
+				'timeout'     	=> $this->api_timeout,
+				'methods'   => 'GET'
+			];
+			$api_url =$api_domain.$this->path_validate_login_new.'?'.http_build_query($params);
+			$request = wp_remote_get($api_url,$args);
+			$data 	= $request['body'];
+			if( (string)$data == 'true' || (string)$data == "true" ){
+				$response 	= new WP_REST_Response($data);
+				$response->set_status(200);
+				return $response;
+			}else if( (string)$data == 'false' || (string)$data == "false" ){
+				return new WP_Error('error_validating_guest_login', "OTP not valid", array('status' => 400));
+			}
+		} else {
+			return new WP_Error('error_validating_guest_login', 'Parameters not complete to validate login', array('status' => 400));
+		}
+		return new WP_Error('error_validating_guest_login', "There's an error in validating login.", array('status' => 400));
+	}
 }
+

@@ -3,6 +3,7 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        console.log('test');
         var url_string  = window.location.href;
         var url         = new URL(url_string);
         var paramPlanID = url.searchParams.get('planid');

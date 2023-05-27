@@ -22,6 +22,8 @@ add_action('admin_menu', 'my_register_google_sheet_setting_menu_page');
  */
 function google_sheet_setting_page_callback()
 {
+    every_two_hours_event_func();
+    
     if( isset($_GET['removeAccess']) && !empty($_GET['removeAccess']) && $_GET['removeAccess'] ) {
         update_option('my_google_sheet_refresh_token', '');
     }
@@ -419,6 +421,7 @@ function get_product_stock_data()
     $curl = curl_init();
     $url = get_site_url(null, '/wp-json/elevate/v1/check-stock', 'https');
     $url = 'https://yes.my/wp-json/elevate/v1/check-stock';
+    // print_r($url);
     curl_setopt_array($curl, array(
         CURLOPT_URL => $url,
         CURLOPT_RETURNTRANSFER => true,

@@ -235,6 +235,10 @@ class ElevateApi
 
     public static function getProduct(WP_REST_Request $request)
     {
+           
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		}  
         $code = $request['code'];
         $product = \Inc\Base\Model::refinde(self::pullBundleProduct($code));
 
@@ -283,6 +287,9 @@ class ElevateApi
 
     public static function getProductByCode(WP_REST_Request $request)
     {
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
         $code = $request['code'];
 		$product = self::pullBundleProductByCode($code);
         $product = \Inc\Base\Model::refinde(array($product));
@@ -334,6 +341,10 @@ class ElevateApi
 
     public static function verify_eligibility(WP_REST_Request $request)
     {
+       
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
 
         $token = self::mobileservice_generate_auth_token();
         $mykad = $request['mykad'];
@@ -395,6 +406,9 @@ class ElevateApi
     public static function ca_verification(WP_REST_Request $request)
     {
 
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
         $mykad = $request['mykad'];
         $name = $request['name'];
         $email = $request['email'];
@@ -468,7 +482,9 @@ class ElevateApi
     public static function verify_caeligibility(WP_REST_Request $request)
     {
 
-
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
         $token = self::get_token();
 
 		$params = array(
@@ -521,6 +537,10 @@ class ElevateApi
 
 	public static function check_active_contract(WP_REST_Request $request)
     {
+
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
 		$mykad = $request['mykad'];
 
         $token = self::get_token();
@@ -611,6 +631,9 @@ class ElevateApi
 
     public static function elevate_customer_insert(WP_REST_Request $request)
     {
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
 		if(!isset($request['referralCode'])) $request['referralCode'] = '';
 		if(!isset($request['dealerUID'])) $request['dealerUID'] = '';
 		if(!isset($request['dealerCode'])) $request['dealerCode'] = '';
@@ -699,6 +722,9 @@ class ElevateApi
 
     public static function elevate_customer_update(WP_REST_Request $request)
     {
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
 
 		if(!isset($request['addressMore'])) $request['addressMore'] = '';
 		if(!isset($request['msisdn'])) $request['msisdn'] = '';
@@ -825,6 +851,9 @@ class ElevateApi
     public static function elevate_contract(WP_REST_Request $request)
     {
 
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
         $params = array(
             "customerName" => $request['name'],
             "customerNRIC" => $request['mykad'],
@@ -897,6 +926,10 @@ class ElevateApi
 
     public static function elevate_order_create(WP_REST_Request $request)
     {
+
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
 
 		if(!isset($request['referralCode'])) $request['referralCode'] = '';
 		if(!isset($request['dealerUID'])) $request['dealerUID'] = '';
@@ -1005,6 +1038,9 @@ class ElevateApi
 
     public static function elevate_order_update(WP_REST_Request $request)
     {
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
 		if(!($request['referralCode'])) $request['referralCode'] = '';
 		if(!($request['dealerUID'])) $request['dealerUID'] = '';
 		if(!($request['dealerCode'])) $request['dealerCode'] = '';
@@ -1128,6 +1164,9 @@ class ElevateApi
 
 	public static function elevate_order_update_payment(WP_REST_Request $request)
     {
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
 
 		if(!isset($request['orderNumber'])) $request['orderNumber'] = '';
 		if(!isset($request['paymentRef'])) $request['paymentRef'] = '';
@@ -1180,6 +1219,9 @@ class ElevateApi
     }
 
 	public function elevate_delivery_qrcode_check(WP_REST_Request $request){
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
 		$qrcode = $request['qrcode'];
 		$return= array();
 		$return['qrcode'] = $qrcode;
@@ -1221,6 +1263,10 @@ class ElevateApi
 	}
 
 	public function elevate_delivery_qrcode_confirm(WP_REST_Request $request){
+
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
 		$orderNumber = $request['SONO'];
 
 		$order = ElevateApi::elevate_order_get_by_number($orderNumber);
@@ -1289,6 +1335,9 @@ class ElevateApi
 
     public static function ekyc_check(WP_REST_Request $request)
     {
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
         $uid = $request['uid'];
 		$apiSetting = \Inc\Base\Model::getAPISettings();
         $api_url =  $apiSetting['url'].self::ekyc_api_check . $uid;
@@ -1334,6 +1383,9 @@ class ElevateApi
     }
 
 	public static function get_pre_register_user(WP_REST_Request $request){
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
         $uid = $request['id'];
         $token = self::get_token();
         $params = array();
@@ -1372,6 +1424,9 @@ class ElevateApi
     }
 
 	public static function get_pre_register_completed(WP_REST_Request $request){
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
         $uid = $request['id'];
 		  
 		$token = self::get_token();
@@ -1414,6 +1469,10 @@ class ElevateApi
 
     public static function make_yos_order(WP_REST_Request $request){
         //$token = self::ydbp_identity_auth_token();
+
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
         $token = self::mobileservice_get_token();
 
         $phone_number 	= $request['phone_number'];
@@ -1580,8 +1639,11 @@ class ElevateApi
     }
 
     public static function make_yos_order_without_payment(WP_REST_Request $request){
+     
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
         $token = self::mobileservice_get_token();
-
 		$phone_number = $request['phone_number'];
 		$customer_name = $request['customer_name'];
 		$dob = $request['dob'];
@@ -1700,6 +1762,7 @@ class ElevateApi
     }
 	
 	public static function yos_check_order_status(WP_REST_Request $request){ 
+       
         $token = self::mobileservice_get_token();
 		$session_key  = $request['session_key'];
 		 
@@ -1761,6 +1824,9 @@ class ElevateApi
     }
 
 	public static function delete_prequalified_customer(WP_REST_Request $request){
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
 				$id = $request['id'];
 				if($id){
 					$params = array(
@@ -2050,6 +2116,10 @@ class ElevateApi
 
     public function check_stock() 
     {
+     
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+		// 	exit("Request not valid");
+		//  }  
         $token  = self::get_token();
         $args   = [
             'headers'   => [

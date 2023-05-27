@@ -471,6 +471,7 @@
                                     <p class="panel-btn"><a href="javascript:void(0)" class="btn btn-selectPlan" v-on:click="selectPlan(895)" data-productid="895">{{ renderText('select') }}</a></p>
                                 </div>
                             </div>
+
                             <!-- Upsell Products END -->
                         </div>
                     </div>
@@ -800,7 +801,7 @@
                     ajaxGetPlanData: function() {
                         var self = this;
                         toggleOverlay();
-                        axios.get(apiEndpointURL_elevate + '/getProductByCode/?code=' + self.productId)
+                        axios.get(apiEndpointURL_elevate + '/getProductByCode/?code=' + self.productId + '&nonce='+yesObj.nonce)
                             .then((response) => {
                                 var data = response.data;
                                 if (data.internetData == '∞') {
@@ -896,7 +897,7 @@
 
                         self.allowSelectCity = false;
 
-                        axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode)
+                        axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode + '?nonce='+yesObj.nonce)
                             .then((response) => {
                                 var options = [];
                                 var data = response.data;
@@ -990,7 +991,7 @@
 
                         //console.log(params);return;
 
-                        axios.post(apiEndpointURL_elevate + '/customer', params)
+                        axios.post(apiEndpointURL_elevate + '/customer' + '?nonce='+yesObj.nonce, params )
                             .then((response) => {
                                 var data = response.data;
                                 if (data.status == 1) {
@@ -1022,7 +1023,7 @@
                         params.dealerCode = "";
                         $('#status_mesage').html('Process order...');
                         toggleOverlay();
-                        axios.post(apiEndpointURL_elevate + '/order/create', params)
+                        axios.post(apiEndpointURL_elevate + '/order/create' + '?nonce='+yesObj.nonce, params)
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
@@ -1053,7 +1054,7 @@
 
                         param.orderNumber = self.orderResponse.orderNumber;
 
-                        axios.post(apiEndpointURL_elevate + '/order/update', param)
+                        axios.post(apiEndpointURL_elevate + '/order/update' + '?nonce='+yesObj.nonce, param)
                             .then((response) => {
                                 var data = response.data;
 
@@ -1081,7 +1082,7 @@
                         param.orderNumber = self.orderResponse.orderNumber;
                         param.error = error;
 
-                        axios.post(apiEndpointURL_elevate + '/order/cancel', param)
+                        axios.post(apiEndpointURL_elevate + '/order/cancel'+ '?nonce='+yesObj.nonce, param)
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
@@ -1115,7 +1116,7 @@
                         toggleOverlay();
                         $('#status_mesage').html('Process contract...');
 
-                        axios.post(apiEndpointURL_elevate + '/contract', params)
+                        axios.post(apiEndpointURL_elevate + '/contract' + '?nonce='+yesObj.nonce, params)
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
@@ -1156,7 +1157,7 @@
                         toggleOverlay();
                         $('#status_mesage').html('Remove data...');
 
-                        axios.post(apiEndpointURL_elevate + '/del-prequalified-customer', params)
+                        axios.post(apiEndpointURL_elevate + '/del-prequalified-customer' + '?nonce='+yesObj.nonce, params)
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
@@ -1231,7 +1232,7 @@
                         }
                         $('#status_mesage').html('Process payment...');
                         //console.log("params",params); return;
-                        axios.post(apiEndpointURL_elevate + '/create-yos-free-order', params)
+                        axios.post(apiEndpointURL_elevate + '/create-yos-free-order' + '?nonce='+yesObj.nonce, params)
                             .then((response) => {
                                 var data = response.data;
 

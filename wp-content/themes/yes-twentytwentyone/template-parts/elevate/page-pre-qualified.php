@@ -405,7 +405,7 @@
                             mykad: self.deliveryInfo.mykad,
                             fname: self.deliveryInfo.name
                         };
-                        axios.post(apiEndpointURL_elevate + '/ekyc-check', params)
+                        axios.post(apiEndpointURL_elevate + '/ekyc-check' + '?nonce='+yesObj.nonce, params)
                             .then((response) => {
                                 var data = response.data;
 
@@ -462,7 +462,7 @@
                         OCRConfidenceScore:response.sim,
                     };
 
-                    axios.post(apiEndpointURL_elevate + '/ca-verification', params)
+                    axios.post(apiEndpointURL_elevate + '/ca-verification' + '?nonce='+yesObj.nonce, params)
                         .then((response) => {
 
                             var data = response.data;
@@ -520,7 +520,7 @@
 
 					self.allowSelectCity = false;
 
-					axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode)
+					axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode + '?nonce='+yesObj.nonce)
 						.then((response) => {
 							var options = [];
 							var data = response.data;
@@ -588,7 +588,7 @@
 						self.guid = guid;
 
 						toggleOverlay();
-						axios.get(apiEndpointURL_elevate + '/getPreRegisterUser/?id=' + self.guid)
+						axios.get(apiEndpointURL_elevate + '/getPreRegisterUser/?id=' + self.guid + '&nonce='+yesObj.nonce)
 							.then((response) => {
 								toggleOverlay(false);
 								var data = response.data;

@@ -583,7 +583,7 @@
                         $('.form-select').selectpicker('refresh');
                     }, 100);
 
-                    axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode)
+                    axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode + '?nonce='+yesObj.nonce)
                         .then((response) => {
                             var options = [];
                             var data = response.data;
@@ -628,7 +628,7 @@
 
                     self.allowSelectCity = false;
 
-                    axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode)
+                    axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode + '?nonce='+yesObj.nonce)
                         .then((response) => {
                             var options = [];
                             var data = response.data;
@@ -742,7 +742,7 @@
                         toggleModalAlert('Error',this.renderText('alternate_phone_number_must_be_same'))
                     }
 
-                    var pattern =  /^[a-zA-Z,\.,\/,\',@,\s]+$/;
+                    var pattern =  /^[a-zA-Z,\.,\/,\',\’,\‘,@,\s]+$/;
                     if(self.deliveryInfo.alternative_name && !pattern.test(self.deliveryInfo.alternative_name)){
                         $('#alternative_name').addClass('input_error');
                         isFilled = false
@@ -786,7 +786,7 @@
                         param.dealerCode = "";
                     }
 
-                    axios.post(apiEndpointURL_elevate + '/customer/update', param)
+                    axios.post(apiEndpointURL_elevate + '/customer/update' + '?nonce='+yesObj.nonce, param)
                         .then((response) => {
                             var data = response.data;
                             if(data.status == 1){

@@ -24,6 +24,7 @@
         <a href="?page=ytl-pull-data-action" class="nav-tab">Pull Plans Action</a>
         <a href="?page=ytl-pull-data-promo" class="nav-tab">Promo Data Upload</a>
         <a href="?page=ytl-pull-device-bundle-plan-data" class="nav-tab">Device Bundle Plan</a>
+        <a href="?page=ytl-token-data-guest-login" class="nav-tab">Guest Login Token Details </a>
     </div>
     
     <div class="wrapper-ytlpdAdmin">
