@@ -1,4 +1,5 @@
 # blacklist all folders and files in root
+.htaccess
 .DS_Store
 .vscode
 .well-known
