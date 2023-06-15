@@ -1,7 +1,7 @@
 /*
     JavaScript Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : November  23, 2022, 03:52:31 PM
+    Last edited on  : June      15, 2023, 03:52:31 PM
     Author          : [YTL Digital Design] - AL
 */
 const yesLocalStorageName = 'yesSession';
@@ -36,6 +36,8 @@ $(document).ready(function() {
     AOS.init({
         once: true
     });
+
+    hideAnalyticsImage();
 });
 
 
@@ -412,4 +414,15 @@ function checkScrollHeaderSticky() {
     } else {
         $('body').removeClass('page-scrolled');
     }
+}
+
+
+/**
+ * Function hideAnalyticsImage()
+ * Function to hide the analytic images that causes the page to have whitespace at the bottom
+ * 
+ * @since    1.2.2
+ */
+function hideAnalyticsImage() {
+    $('img[src*="ad.doubleclick.net"]').hide();
 }
