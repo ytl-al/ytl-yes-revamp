@@ -4,9 +4,12 @@
 .vscode
 .well-known
 pdf
+.wp-configs
 .wp-configs_
 wp-config.php
+edmCamp
 edmCamp_
+nginx.conf
 
 # ignore everything in the root except the following files.
 !/README.md
