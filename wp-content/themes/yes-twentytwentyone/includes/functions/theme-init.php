@@ -885,3 +885,5 @@ function yes_menu($path)
             background-color: #FF0084 !important;
         }
 
+<?php
+    }
