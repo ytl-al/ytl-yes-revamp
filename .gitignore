@@ -10,6 +10,7 @@ wp-config.php
 edmCamp
 edmCamp_
 nginx.conf
+phpinfo.php
 
 # ignore everything in the root except the following files.
 !/README.md
