@@ -2156,7 +2156,7 @@ function yes_menu($path)
                                                 <p class="yes_text_menu_headline">Explore Our Plans</p>
                                             </li>
 <?php
-                                            $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fibre-5G");
+                                            $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fiber-5G");
                                             $WirelessNav = wp_get_nav_menu_items($Wireless_Fibre_menu);
 
                                             foreach ($WirelessNav as $wirelessItem) {
@@ -2302,7 +2302,7 @@ function yes_menu($path)
                                 <p class="yes_text_menu_headline">explore postpaid Plans</p>
                             </li>
 <?php
-                            $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fibre-5G");
+                            $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fiber-5G");
                             $WirelessNav = wp_get_nav_menu_items($Wireless_Fibre_menu);
 
                             foreach ($WirelessNav as $wirelessItem) {
