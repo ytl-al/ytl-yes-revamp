@@ -11,6 +11,7 @@ edmCamp
 edmCamp_
 nginx.conf
 phpinfo.php
+.github
 
 # ignore everything in the root except the following files.
 !/README.md
