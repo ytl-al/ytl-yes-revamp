@@ -1,0 +1,32 @@
+<script type="text/javascript">
+    $('#wdform_5_element15').on('keypress', function(event) {
+        event = (event) ? event : window.event;
+        var charCode = (event.which) ? event.which : event.keyCode;
+        var charNonNumeric = false;
+        var charSpace = (charCode == 32) ? true : false;
+        var valLength = $(this).val().length;
+        if (
+            (charCode > 31 && (charCode < 48 || charCode > 57)) // numeric (0-9)
+            || (valLength == 0 && charCode == 48)
+        ) {
+            charNonNumeric = true;
+        }
+        if (charNonNumeric) {
+            event.preventDefault();
+        } else if (charSpace) {
+            event.preventDefault();
+        } else if (valLength > 7) {
+            event.preventDefault();
+        } else {
+            return true;
+        }
+    });
+
+    $(document).ready(function() {
+        var labelTnC = $('label[for="wdform_7_element150"]');
+        var labelTnCText = $(labelTnC).text();
+        var newLabelTnC = labelTnCText.replace(/Terms and Conditions/, '<a href="https://www.yes.my/docs/tnc/general-terms-and-conditions/terms-of-use-of-website/" target="_blank"">Terms and Conditions</a>');
+            newLabelTnC = newLabelTnC.replace(/Privacy Policy/, '<a href="https://www.ytl.com/privacypolicy.asp" target="_blank">Privacy Policy</a>');
+        $(labelTnC).html(newLabelTnC);
+    });
+</script>

@@ -1,0 +1,227 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script type="text/javascript">
+    const arrSIMPlanIDs = [740, 741, 742];
+    const arrDevicePlanIDs = [743, 744, 745, 746, 747, 748, 749, 750, 751, 752, 753, 754, 755, 756, 771, 772, 773, 774, 775, 776, 777, 778, 779];
+    $(document).ready(function() {
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var paramDC = url.searchParams.get('dc');
+        var paramDUID = url.searchParams.get('duid');
+        if (paramDC !== null && paramDUID !== null) {
+            $('.btn-ypa').each(function() {
+                var href = $(this).attr('href');
+                var newHREF = href + '&dc=' + paramDC + '&duid=' + paramDUID;
+                $(this).attr('href', newHREF);
+            });
+        }
+        var paramNRIC = url.searchParams.get('nric');
+        var paramYesNumber = url.searchParams.get('msisdn');
+        if (paramNRIC !== null && paramYesNumber !== null) {
+            runEligibilityCheck(paramNRIC, paramYesNumber)
+        }
+
+        var formEligibility = $('.form-eligibilityCheck');
+        $(formEligibility).on('submit', function(event) {
+            submitEligibilityForm(event);
+
+            event.preventDefault();
+            return false;
+        });
+    });
+
+    function submitEligibilityForm(event) {
+        $('#section-plan').hide();
+        var inputValues = validateFields();
+
+        if (!inputValues) {
+            $('.form-control.has-error').first().focus();
+            return false;
+        } else {
+            runEligibilityCheck(inputValues.idNumber, inputValues.yesNumber);
+        }
+        event.preventDefault();
+        return false;
+    }
+
+    function runEligibilityCheck(idNumber = '', yesNumber = '') {
+        if (idNumber != '' && yesNumber != '') {
+            toggleOverlay();
+
+            updateYPALinks(idNumber, yesNumber);
+            checkCustomerEligibility(idNumber, yesNumber);
+        }
+    }
+
+    function validateFields() {
+        var inputIDNumber = $('#input-idNumber');
+        var inputYesNumber = $('#input-yesNumber');
+
+        var idNumber = $(inputIDNumber).val();
+        var yesNumber = $(inputYesNumber).val();
+        var validationCheck = true;
+        var fieldValues = [];
+
+        if (idNumber.length == 0) {
+            var errMessageIDNumber = $('.invalid-feedback#error-inputIdNumber');
+            $(inputIDNumber).addClass('has-error');
+            $(errMessageIDNumber).show();
+            $(inputIDNumber).on('keydown', function() {
+                $(inputIDNumber).removeClass('has-error');
+                $(errMessageIDNumber).hide();
+            });
+            validationCheck = false;
+        }
+        if (yesNumber.length == 0) {
+            var errMessageYesNumber = $('.invalid-feedback#error-inputYesNumber');
+            $(inputYesNumber).addClass('has-error');
+            $(errMessageYesNumber).show();
+            $(inputYesNumber).on('keydown', function() {
+                $(inputYesNumber).removeClass('has-error');
+                $(errMessageYesNumber).hide();
+            });
+            validationCheck = false;
+        }
+        fieldValues = {
+            'idNumber': idNumber,
+            'yesNumber': yesNumber
+        };
+        validationCheck = (!validationCheck) ? false : fieldValues;
+        return validationCheck;
+    }
+
+    function updateYPALinks(idNumber = '', yesNumber = '') {
+        if (idNumber.length > 0 && yesNumber.length > 0) {
+            $('.btn-ypa').each(function() {
+                var href = $(this).attr('href');
+                var curHref = href.indexOf('&n=');
+                if (curHref > -1) {
+                    var href = href.substring(0, curHref);
+                }
+                var newHREF = href + '&n=' + idNumber + '&m=' + yesNumber;
+                $(this).attr('href', newHREF);
+            });
+        }
+    }
+
+    function checkCustomerEligibility(idNumber = '', yesNumber = '') {
+        if (idNumber.length == 0 || yesNumber.length == 0) {
+            return false;
+        } else {
+            axios.post('/wp-json/yes/v1/5g-plan-upgrade-eligibility-check', {
+                    'nric': idNumber,
+                    'yes_number': yesNumber
+                })
+                .then((response) => {
+                    var data = response.data;
+                    var userInfo = data.user_info;
+                    var targetPlanList = data.target_plan_list;
+                    var showSIM = false;
+                    var showDevices = false;
+                    $('#step-userName').html(userInfo.name);
+
+                    togglePlanCards(targetPlanList);
+
+                    $('#section-plan').fadeIn('fast');
+                    jumpToSection('section-plan');
+                })
+                .catch((error) => {
+                    toggleForm(false);
+                })
+                .finally(() => {
+                    toggleOverlay(false);
+                });
+        }
+    }
+
+    function togglePlanCards(planList) {
+        $('.layer-planCard').hide();
+        $('#section-plan .nav-item .nav-link').removeClass('active');
+        $('#section-plan .tab-pane').removeClass('show active');
+
+        planList.map(function(plan, index) {
+            var planID = plan.target_plan_id;
+            if ($.inArray(arrSIMPlanIDs, planID)) {
+                showSIM = true;
+            }
+            if ($.inArray(arrDevicePlanIDs, planID)) {
+                showDevices = true;
+            }
+            $('.layer-planCard[data-plancardid="' + planID + '"]').show();
+        });
+
+        if (showSIM) {
+            $('.nav-item.item-nav-sim, .tab-pane.tab-sim').addClass('plangroup-active');
+            $('.item-nav-sim, .layer-showSIM').show();
+        } else {
+            $('.nav-item.item-nav-sim, .tab-pane.tab-sim').removeClass('plangroup-active');
+            $('.item-nav-sim, .layer-showSIM').hide();
+        }
+        if (showDevices) {
+            $('.nav-item.item-nav-devices, .tab-pane.tab-devices').addClass('plangroup-active');
+            $('.item-nav-devices, .layer-showDevices').show();
+        } else {
+            $('.nav-item.item-nav-devices, .tab-pane.tab-devices').removeClass('plangroup-active');
+            $('.item-nav-devices, .layer-showDevices').hide();
+        }
+
+        $('#section-plan .nav-item.plangroup-active').first().find('.nav-link').addClass('active');
+        $('#section-plan .tab-pane.plangroup-active').first().addClass('show active');
+    }
+
+    function toggleForm(toggleShow = true) {
+        var layerForm = $('.layer-formEligibility');
+        var layerIneligible = $('.layer-ineligible');
+        if (!toggleShow) {
+            $(layerForm).hide();
+            $(layerIneligible).fadeIn('fast');
+        } else {
+            $(layerForm).show();
+            $(layerIneligible).hide();
+            $('#section-plan').hide();
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        initPhoneModelsHeight();
+        $(window).on('resize', function() {
+            initPhoneModelsHeight();
+        });
+        $('.item-phoneColor').on('click', function() {
+            updatePhoneColorSelection(this);
+        });
+
+        $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function(event) {
+            setTimeout(function() {
+                initPhoneModelsHeight();
+            }, 1000);
+        });
+    });
+
+    function initPhoneModelsHeight() {
+        $('.layer-phoneModels').css('min-height', '');
+        setTimeout(function() {
+            $('.layer-phoneModels').each(function() {
+                $(this).css('min-height', $(this).height());
+            });
+        }, 100);
+    }
+
+    function updatePhoneColorSelection(el) {
+        var itemPhoneColor = $('.item-phoneColor');
+        var itemID = $(el).attr('data-target');
+
+        if ($('#' + itemID).length) {
+            var parentLayer = $(el).closest('.layer-phoneModels');
+            var activeModel = $('.layer-phoneModel.active', parentLayer);
+            $(activeModel).fadeOut(100, function() {
+                $(activeModel).removeClass('active');
+                setTimeout(function() {
+                    $('#' + itemID).fadeIn().addClass('active');
+                }, 100);
+            });
+        }
+    }
+</script>

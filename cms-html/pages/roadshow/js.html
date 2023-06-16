@@ -1,0 +1,257 @@
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places,visualization&v=weekly&client=gme-ytlcommunications3&channel=publicyes"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(window).scroll(function() {
+            var scroll = $(window).scrollTop();
+            var targetFilter = $('.sticky-top').offset().top;
+            if (scroll >= targetFilter) {
+                $('.sticky-top').addClass('filter-shadow');
+            } else {
+                $('.sticky-top').removeClass('filter-shadow');
+            }
+        });
+
+        initFilterCheckbox();
+
+        toggleOverlay();
+
+        getLocation();
+    });
+
+    const cardsState = $('[data-state]');
+    const cardsMonth = $('[data-month]');
+    const cardsCkbState = $('.cardCheckBox.state');
+    const cardsCkbMonth = $('.cardCheckBox.month');
+
+    const websiteLang = document.getElementsByTagName('html')[0].getAttribute('lang');
+    const objTranslate = {
+        'strNoState': { 'en-US': 'No State Selected', 'ms-MY': 'Tiada Negeri Dipilih', 'zh-hans': 'No State Selected' },
+        'strAllStates': { 'en-US': 'All States', 'ms-MY': 'Semua Negeri', 'zh-hans': 'All States' },
+        'strMultipleStates': { 'en-US': 'Multiple States', 'ms-MY': 'Beberapa Negeri', 'zh-hans': 'Multiple States' },
+
+        'strNoMonth': { 'en-US': 'No Month Selected', 'ms-MY': 'Tiada Bulan Dipilih', 'zh-hans': 'No Month Selected' },
+        'strAllMonths': { 'en-US': 'All Months', 'ms-MY': 'Semua Bulan', 'zh-hans': 'All Months' },
+        'strMultipleMonths': { 'en-US': 'Multiple Months', 'ms-MY': 'Beberapa Bulan', 'zh-hans': 'Multiple Months' }
+    };
+
+    function renderText(strID) {
+        var siteLang = (websiteLang) ? websiteLang : 'en-US';
+        if (siteLang && objTranslate) {
+            if (objTranslate[strID] && objTranslate[strID][siteLang]) {
+                return objTranslate[strID][siteLang];
+            } 
+        }
+        return;
+    }
+
+    function handleSelectAll(dropdown, calledFromFilter = false) {
+        var filterType = $(dropdown).data('filter-type') || $(dropdown).closest('[data-filter-type]').data('filter-type');
+        if (calledFromFilter) {
+            var cardsCkb = $('[data-filter-type="' + filterType + '"] .cardCheckBox');
+            var selectAll = cardsCkb.length === cardsCkb.filter(':checked').length;
+            $('[data-filter-type="' + filterType + '"] input.cardCheckBoxAll').prop('checked', selectAll);
+        } else {
+            $('[data-filter-type="' + filterType + '"] .cardCheckBox').prop('checked', $(dropdown).is(':checked')).change();
+        }
+    }
+
+    function checkIfNoResults() {
+        AOS.refresh();
+        var activeBoxStates = $('.layer-state').not('.is-hidden');
+        var boxNoResultsAll = $('#row-noResultsAll');
+        if (!$(activeBoxStates).length) {
+            $(boxNoResultsAll).removeClass('is-hidden');
+        } else {
+            var activeBoxMonths = $('.layer-listBox').not('.is-hidden');
+            $(activeBoxStates).each(function(idx, stateBox) {
+                var activeBoxMonths = $(stateBox).find('.layer-listBox').not('.is-hidden');
+                var noResultBoxMonths = $(stateBox).find('.layer-listBoxNoResults');
+                if (!$(activeBoxMonths).length) {
+                    $(noResultBoxMonths).removeClass('is-hidden');
+                } else {
+                    $(noResultBoxMonths).addClass('is-hidden');
+                }
+            });
+            $(boxNoResultsAll).addClass('is-hidden');
+        }
+    }
+
+    function changeState(e) {
+        var checkbox = $(e.target);
+        handleSelectAll(checkbox, true);
+
+        const arrCheckedStates = cardsCkbState.filter(':checked').get().map(el => el.value);
+        var selectedText = renderText('strNoState');
+        if (arrCheckedStates.length == cardsCkbState.length) {
+            selectedText = renderText('strAllStates');
+        } else if (arrCheckedStates.length > 1) {
+            selectedText = renderText('strMultipleStates');
+        } else if (arrCheckedStates.length == 1) {
+            selectedText = $('.cardCheckBox.state[value="' + arrCheckedStates[0] + '"]').closest('.form-check').find('span').html();
+        }
+        $('#dropdown-states').text(selectedText);
+
+        if (!arrCheckedStates.length) {
+            cardsState.addClass('is-hidden');
+            checkIfNoResults();
+            return;
+        }
+
+        cardsState.each(function() {
+            const state = $(this).data('state');
+            $(this).toggleClass('is-hidden', !arrCheckedStates.includes(state));
+        });
+
+        checkIfNoResults();
+    }
+
+    function changeMonth(e) {
+        var checkbox = $(e.target);
+        handleSelectAll(checkbox, true);
+
+        const arrCheckedMonths = cardsCkbMonth.filter(':checked').get().map(el => el.value);
+        switch (true) {
+            case arrCheckedMonths.length == cardsCkbMonth.length:
+                selectedText = renderText('strAllMonths');
+                break;
+            case (arrCheckedMonths.length > 1):
+                selectedText = renderText('strMultipleMonths');
+                break;
+            case (arrCheckedMonths.length == 1):
+                selectedText = $('.cardCheckBox.month[value="' + arrCheckedMonths[0] + '"]').closest('.form-check').find('span').html();
+                break;
+            default:
+                selectedText = renderText('strNoMonths');
+        }
+        $('#dropdown-months').text(selectedText);
+
+        if (!arrCheckedMonths.length) {
+            cardsMonth.addClass('is-hidden');
+            checkIfNoResults();
+            return;
+        }
+
+        cardsMonth.each(function(idx, target) {
+            const month = $(this).data('month');
+            $(target).addClass('is-hidden');
+            for (var i = 0; i < arrCheckedMonths.length; i++) {
+                if (month.indexOf(arrCheckedMonths[i]) > -1) {
+                    $(target).removeClass('is-hidden');
+                    break;
+                }
+            }
+
+        });
+
+        checkIfNoResults();
+    }
+
+    function initFilterCheckbox() {
+        $('.cardCheckBoxAll[data-filter-type="state"]').prop('checked', true).trigger('change');
+        $('.cardCheckBoxAll[data-filter-type="month"]').prop('checked', true).trigger('change');
+
+        $('ul.dropdown-menu').on('click', function(e) {
+            var events = $._data(document, 'events') || {};
+            events = events.click || [];
+            for (var i = 0; i < events.length; i++) {
+                if (events[i].selector) {
+                    if ($(e.target).is(events[i].selector)) {
+                        events[i].handler.call(event.target, event);
+                    }
+                    $(e.target).parents(events[i].selector).each(function() {
+                        events[i].handler.call(this, e);
+                    });
+                }
+            }
+            e.stopPropagation();
+        });
+
+        $('input.cardCheckBoxAll').each(function(index, dropdown) {
+            $(dropdown).on('change', function() {
+                handleSelectAll(dropdown);
+            });
+        });
+
+        $(cardsCkbState).on('change', function(event) {
+            changeState(event);
+        });
+
+        $(cardsCkbMonth).on('change', function(event) {
+            changeMonth(event);
+        });
+    }
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+        toggleOverlay(false);
+    }
+
+    function showPosition(position) {
+        lat = position.coords.latitude;
+        lon = position.coords.longitude;
+        displayLocation(lat, lon);
+    }
+
+    function showError(error) {
+        var errMsg = '';
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                errMsg = "User denied the request for Geolocation."
+                break;
+            case error.POSITION_UNAVAILABLE:
+                errMsg = "Location information is unavailable."
+                break;
+            case error.TIMEOUT:
+                errMsg = "The request to get user location timed out."
+                break;
+            case error.UNKNOWN_ERROR:
+                errMsg = "An unknown error occurred."
+                break;
+        }
+        console.log(errMsg);
+    }
+
+    function displayLocation(latitude, longitude) {
+        var geocoder;
+        geocoder = new google.maps.Geocoder();
+        var latlng = new google.maps.LatLng(latitude, longitude);
+
+        geocoder.geocode({
+                'latLng': latlng
+            },
+            function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        var indices = 0;
+                        var locState = '';
+                        for (var j = 0; j < results.length; j++) {
+                            if (results[j].types[0] == 'locality') {
+                                indice = j;
+                                break;
+                            }
+                        }
+                        for (var i = 0; i < results[j].address_components.length; i++) {
+                            if (results[j].address_components[i].types[0] == 'locality') {
+                                var locObj = results[j].address_components[i];
+                                locState = locObj.long_name;
+                                break;
+                            }
+                        }
+                        if (locState && $('.cardCheckBox.state[data-state-name="' + locState + '"]').length) {
+                            $('.cardCheckBoxAll[data-filter-type="state"]').prop('checked', false).trigger('change');
+                            $('.cardCheckBox.state[data-state-name="' + locState + '"]');
+                            $('.cardCheckBox.state[data-state-name="' + locState + '"]').prop('checked', true).trigger('change');
+                            AOS.refresh()
+                        }
+                    }
+                } else {
+                    console.log("Geocoder failed due to: " + status);
+                }
+            }
+        );
+    }
+</script>

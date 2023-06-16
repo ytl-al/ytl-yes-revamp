@@ -1,0 +1,197 @@
+<style type="text/css">
+    #location-top-banner {
+        background: linear-gradient(83.24deg, #FF0084 10.6%, #2F3BF5 89.86%);
+        padding: 90px 0px;
+        text-align: center;
+    }
+    
+    #location-top-banner h1 {
+        font-size: 48px;
+        font-weight: 800;
+        color: #FFF;
+    }
+    
+    #location-top-banner p {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: normal;
+        color: #FFF;
+    }
+    
+    #location-top-banner p.small {
+        font-size: 15px;
+    }
+    
+    #store-locations .filter-drop {
+        border: 1px solid #C4C4C4;
+        background-color: #FFF;
+        border-radius: 10px;
+        font-size: 17px;
+        color: #000;
+        font-weight: 400;
+        padding: 15px 16px;
+        text-align: left;
+        width: 100%;
+    }
+    
+    #store-locations .dropdown-toggle::after {
+        position: absolute;
+        right: 20px;
+        top: 26px;
+    }
+    
+    #store-locations .filter-drop:focus {
+        outline: none;
+        box-shadow: none;
+    }
+    
+    #store-locations .dropdown-menu {
+        border-radius: 10px;
+        border: 1px solid #C4C4C4;
+        background-color: #FFF;
+        width: 100%;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+    }
+    
+    #store-locations .dropdown-menu .form-check {
+        padding-left: 20px;
+        margin-bottom: 5px;
+    }
+    
+    #store-locations h1 {
+        color: #2B2B2B;
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: 24px;
+    }
+    
+    #store-locations .store-box {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        background-color: #FFF;
+        padding: 30px;
+        padding-bottom: 15px;
+        box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+    }
+    
+    #store-locations .store-box:hover {
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+    }
+    
+    #store-locations .store-box h2 {
+        padding: 10px;
+        border-radius: 0px;
+        display: inline-block;
+        background-color: #F5F5F5;
+        color: #2B2B2B;
+        font-size: 12px;
+        font-weight: 700;
+        /* text-transform: uppercase; */
+    }
+    
+    #store-locations .store-box h3 {
+        color: #000000;
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 23px;
+        text-transform: uppercase;
+    }
+    
+    #store-locations .store-box p {
+        color: #2B2B2B;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        padding-right: 20%;
+    }
+    
+    #store-locations .store-box p.time svg {
+        margin-top: -4px;
+        font-weight: 700;
+    }
+    
+    #store-locations .store-box p.phone,
+    #store-locations .store-box p.phone a {
+        color: #525252;
+        font-weight: 700;
+    }
+    
+    #store-locations .store-box .map-btn {
+        display: block;
+        color: #2F3BF5;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 600;
+        opacity: 60%;
+    }
+    
+    #store-locations .filter-container {
+        width: 100%;
+        background-color: #FFF;
+        padding: 15px 0px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    #store-locations .filter-shadow {
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15));
+    }
+    
+    #store-locations .store-box .map-btn:hover {
+        opacity: 100%;
+    }
+    
+    #store-locations .store-box .map-btn img {
+        vertical-align: middle;
+        display: inline;
+        margin-right: 10px;
+    }
+    
+    #store-locations .is-hidden {
+        display: none;
+    }
+    
+    #store-locations .store-box h2.red {
+        background-color: #D93832;
+    }
+    /* IPAD Portrait */
+    
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {}
+    
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+        #location-top-banner h1 {
+            font-size: 40px;
+        }
+        #location-top-banner p {
+            font-size: 20px;
+        }
+        #location-top-banner p.small {
+            font-size: 13px;
+        }
+    }
+    
+    .sticky-top {
+        z-index: 3;
+    }
+    
+    #store-locations .filter-shadow {
+        z-index: 1020;
+    }
+    
+    .layer-page {
+        overflow: unset;
+    }
+    
+    #store-locations .store-box h2.red {
+        background-color: #D93832;
+        color: #FFF;
+    }
+    
+    #store-locations .store-box h2.oem-color {
+        background-color: #2F3BF5;
+        color: #FFF;
+    }
+</style>

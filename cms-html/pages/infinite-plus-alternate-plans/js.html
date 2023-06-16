@@ -1,0 +1,82 @@
+<script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/js/ywos.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        // checkStockAPI();
+
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var paramDevice = url.searchParams.get('device');
+        var targetDevice = $('#device-' + paramDevice);
+        if ($(targetDevice)) {
+            var parentAccordionContent = $(targetDevice).closest('.accordion-collapse').siblings('.layer-accordionPlanDetails');
+            var btnAccordion = $(parentAccordionContent).find('.accordion-button');
+
+            $(btnAccordion).trigger('click');
+
+            setTimeout(function() {
+                var parentAccordionContentID = $(parentAccordionContent).closest('.layer-accordionPlan').attr('id');
+                var targetSection = $('#' + parentAccordionContentID);
+                if (targetSection.length > 0) {
+                    var targetOffset = $(targetSection).offset().top - 140;
+                    $('html, body').animate({
+                        scrollTop: targetOffset
+                    }, 100);
+                }
+            }, 1000);
+        }
+
+        $('.span-selectColor').on('click', function() {
+            selectDeviceColor(this);
+        });
+    });
+
+    function selectDeviceColor(el) {
+        var target = $(el).attr('data-target');
+        if (target) {
+            var targetDevice = $('.layer-deviceModels > .layer-deviceModel#' + target);
+            if (targetDevice) {
+                var colorName = $(el).attr('data-bs-original-title');
+                $(targetDevice).closest('.layer-planDevice').find('.span-deviceColorName').text(colorName);
+                $(el).closest('.panel-colors').find('.span-color.selected').removeClass('selected');
+                $(el).addClass('selected');
+                $(targetDevice).siblings('.layer-deviceModel.selected').removeClass('selected');
+                $(targetDevice).addClass('selected');
+            }
+        }
+    }
+
+    function checkStockAPI() {
+        toggleOverlay();
+        $.ajax({
+            url: '/wp-json/elevate/v1/check-stock', 
+            method: 'GET', 
+            success: function(data) {
+                Object.values(data).map(function(item) {
+                    var bundleID    = item.productBundleId;
+                    var balance     = item.balance;
+                    var layerPlanDevice = $('[data-planDevice="' + bundleID + '"]');
+                    if (balance <= 0 && $(layerPlanDevice)) {
+                        var phoneName   = $('h3', layerPlanDevice).text();
+                        var panelBtn    = $('.panel-btn', layerPlanDevice);
+                        var btnNotify   = '<a href="javascript:void(0)" onClick="triggerModalNotify(\'' + phoneName + '\')">Notify Me</a>';
+                        $(panelBtn).html(btnNotify);
+                        $('.span-oosDeviceText', layerPlanDevice).show();
+                    }
+                });
+            },
+            error: function(error) {
+                console.log(error);
+            },
+            complete: function() {
+                toggleOverlay(false);
+            }
+        });
+    }
+    function triggerModalNotify(phoneModel = '') {
+        var modalNotify = new bootstrap.Modal(document.getElementById('modal-notify'), {});
+
+        $('#span-phoneModel').html(phoneModel);
+        $('#wdform_4_element11').val(phoneModel);
+        modalNotify.show();
+    }
+</script>
