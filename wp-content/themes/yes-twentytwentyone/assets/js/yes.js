@@ -291,22 +291,22 @@ function pushAnalytics(eventType = '', data = {}) {
 function gaEEcommercePush(eventType = '', data = {}) {
     if (eventType && data) {
         switch (eventType) {
-            case 'impressions':                         // dataLayer push for 'Product Impressions' - product page on "Buy Now" btn clicked
+            case 'impressions': // dataLayer push for 'Product Impressions' - product page on "Buy Now" btn clicked
                 gtag('event', 'view_item', {
                     'items': data
                 });
                 break;
-            case 'addToCart':                           // dataLayer push for 'Add to Cart' - page-cart.php on load
+            case 'addToCart': // dataLayer push for 'Add to Cart' - page-cart.php on load
                 gtag('event', 'add_to_cart', {
                     'items': data
                 });
                 break;
-            case 'checkout':                            // dataLayer push for 'Initiate Checkout' - page-cart.php on redirect after login/proceed as guest
+            case 'checkout': // dataLayer push for 'Initiate Checkout' - page-cart.php on redirect after login/proceed as guest
                 gtag('event', 'begin_checkout', {
                     'items': data
                 });
                 break;
-            case 'purchase':                            // dataLayer push for 'Pay & Thank you' - page-PaymentMethodChangeEvent.php on complete transaction payment
+            case 'purchase': // dataLayer push for 'Pay & Thank you' - page-PaymentMethodChangeEvent.php on complete transaction payment
                 gtag('event', 'purchase', data);
                 gtag('event', 'conversion', {
                     'send_to': 'AW-10904758864/YQttCOib_9EDENDU5c8o',
@@ -472,7 +472,7 @@ function twPixelPush(eventType = '', data = {}) {
                 twq('event', 'tw-o5rd5-od4eb', objTrack);
                 break;
             case 'purchase':
-                const custom_email = JSON.parse(localStorage.getItem(ywosLSName)) ? .meta.customerDetails ? .email;
+                const custom_email = JSON.parse(localStorage.getItem(ywosLSName))?.meta.customerDetails?.email;
                 var objItems = [];
                 var total = 0;
                 var items = data.items;
