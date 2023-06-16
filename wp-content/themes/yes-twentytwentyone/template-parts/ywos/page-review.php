@@ -8,20 +8,44 @@
 <!-- Vue Wrapper STARTS -->
 <div id="main-vue" style="display: none;">
     <!-- Banner Start -->
-    <section id="grey-innerbanner">
+    <section id="grey-innerbanner" v-if='(upFrontPayment=="true")'>
+        <div class="container">
+            <ul class="wizard">
+                <li ui-sref="firstStep" class="completed">
+                    <span>1. {{ renderText('strVerification') }}</span>
+                </li>
+                <!-- <li ui-sref="secondStep" class="completed">
+                    <span>2. {{ renderText('strSelectSimType') }}</span>
+                </li> -->
+                <li ui-sref="secondStep" class="completed">
+                    <span>3. {{ renderText('strDelivery') }}</span>
+                </li>
+                <li ui-sref="thirdStep" class="completed"> 
+                    <span>4. {{ renderText('strReview') }}</span>
+                </li>
+                <li ui-sref="fourthStep">
+                    <span>5. {{ renderText('strPayment') }}</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section id="grey-innerbanner" v-else>
         <div class="container">
             <ul class="wizard">
                 <li ui-sref="firstStep" class="completed">
                     <span>1. {{ renderText('strVerification') }}</span>
                 </li>
                 <li ui-sref="secondStep" class="completed">
-                    <span>2. {{ renderText('strDelivery') }}</span>
+                    <span>2. {{ renderText('strSelectSimType') }}</span>
                 </li>
                 <li ui-sref="thirdStep" class="completed">
-                    <span>3. {{ renderText('strReview') }}</span>
+                    <span>3. {{ renderText('strDelivery') }}</span>
                 </li>
-                <li ui-sref="fourthStep">
-                    <span>4. {{ renderText('strPayment') }}</span>
+                <li ui-sref="fourthStep" class="completed">
+                    <span>4. {{ renderText('strReview') }}</span>
+                </li>
+                <li ui-sref="fifthStep">
+                    <span>5. {{ renderText('strPayment') }}</span>
                 </li>
             </ul>
         </div>
@@ -118,11 +142,13 @@
                                     <div class="col-6 pb-1 pt-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.taxesSST).toFixed(2) }}</p>
                                     </div>
-                                    <div class="col-6 pb-1 pt-1 border-bottom" v-if="orderSummary.due.foreignerDeposit > 0">
-                                        <p>{{ renderText('summaryForeignerDeposit') }}</p>
-                                    </div>
-                                    <div class="col-6 pb-1 pt-1 border-bottom text-end" v-if="orderSummary.due.foreignerDeposit > 0">
-                                        <p>RM{{ parseFloat(orderSummary.due.foreignerDeposit).toFixed(2) }}</p>
+                                    <div v-if="(ywos.lsData.meta.customerDetails.upFrontPayment=='!true')">
+                                        <div class="col-6 pb-1 pt-1 border-bottom"  v-if="orderSummary.due.foreignerDeposit > 0">
+                                            <p>{{ renderText('summaryForeignerDeposit') }}</p>
+                                        </div>
+                                        <div class="col-6 pb-1 pt-1 border-bottom text-end" v-if="orderSummary.due.foreignerDeposit > 0">
+                                            <p>RM{{ parseFloat(orderSummary.due.foreignerDeposit).toFixed(2) }}</p>
+                                        </div>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom">
                                         <p>{{ renderText('summaryShipping') }}</p>
@@ -142,7 +168,10 @@
                                         <p class="fw-bold">{{ renderText('summaryTotalDue') }}</p>
                                         <p class="small d-none">{{ renderText('summaryNotInvoice') }}</p>
                                     </div>
-                                    <div class="col-6 text-end">
+                                    <div class="col-6 text-end" v-if="(ywos.lsData.meta.customerDetails.upFrontPayment=='true')">
+                                        <p class="large">RM{{ formatPrice(parseFloat((orderSummary.due.total)-(orderSummary.due.foreignerDeposit)).toFixed(2)) }}</p>
+                                    </div>
+                                    <div class="col-6 text-end" v-else>
                                         <p class="large">RM{{ formatPrice(parseFloat(orderSummary.due.total).toFixed(2)) }}</p>
                                     </div>
                                 </div>
@@ -238,7 +267,9 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
-                currentStep: 3,
+                currentStep: 4,
+                simType :'',
+                upFrontPayment:'fasle',
                 pageValid: false,
                 orderSummary: {
                     plan: {},
@@ -283,6 +314,8 @@
                 apiLocale: 'EN', 
                 pageText: {
                     strVerification: { 'en-US': 'Verification', 'ms-MY': 'Pengesahan', 'zh-hans': 'Verification' },
+                    strSelectSimType: { 'en-US': 'Select Sim Type', 'ms-MY': 'Select Sim Type', 'zh-hans': 'Select Sim Type' },
+
                     strDelivery: { 'en-US': 'Delivery Details', 'ms-MY': 'Butiran Penghantaran', 'zh-hans': 'Delivery Details' },
                     strReview: { 'en-US': 'Review', 'ms-MY': 'Semak', 'zh-hans': 'Review' },
                     strPayment: { 'en-US': 'Payment Info', 'ms-MY': 'Maklumat Pembayaran', 'zh-hans': 'Payment Info' },
@@ -325,6 +358,8 @@
                         self.pageValid = true;
                         self.updateData();
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
+                        self.upFrontPayment = ywos.lsData.meta.customerDetails.upFrontPayment;
+                    
                         toggleOverlay(false);
                     } else {
                         ywos.redirectToPage('cart');

@@ -2,255 +2,341 @@
 
 
 <style type="text/css">
-    /* Cart Modal Styling START */
 
-    body {
-        background-color: #FFF;
+    /* updated Thankyou page CSS */
+    .tx_box_inner h1 {
+        font-weight: 800 !important;
+        font-size: 39px !important;
+        line-height: 47px !important;
+        letter-spacing: -0.02em !important;
+        color: #000000;
     }
 
-    .white-top {
-        width: 100%;
-        padding: 20px 0px;
-    }
-
-    .white-top h1 {
-        font-size: 32px;
-        color: #2B2B2B;
+    .tx_box_inner .tx {
         font-weight: 700;
-    }
-
-    .white-top .back-btn {
-        display: inline-block;
-        font-size: 20px;
-        color: #2B2B2B;
-    }
-
-    #grey-innerbanner {
-        background-color: #F9F7F4;
-        padding: 25px 0px;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.07);
-    }
-
-    #grey-innerbanner h1 {
-        font-size: 42px;
-        color: #2B2B2B;
-        font-weight: 800;
-    }
-
-    #cart-body {
-        padding: 0px 0px;
-        padding-bottom: 0px;
-    }
-
-    #cart-body h1 {
-        font-size: 50px;
-        color: #2B2B2B;
-        font-weight: 800;
-        margin-bottom: 20px;
-    }
-
-    #cart-body h2 {
-        font-size: 29px;
-        font-weight: 800;
-        color: #2B2B2B;
-    }
-
-    #cart-body p {
         font-size: 16px;
+        line-height: 24px;
         color: #525252;
     }
 
-    #cart-body .package-box {
-        width: 100%;
-        border: 0.5px solid #C5C5C5;
-        box-shadow: 0px 5px 15px rgba(112, 144, 176, 0.2);
-        border-radius: 8px;
-        padding: 15px;
+    .tx_box_inner p {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        color: #525252;
+    }
+
+    .tx-img {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
-    #cart-body .package-box h1 {
-        font-size: 24px;
-        color: #525252;
-        font-weight: 800;
-        margin-bottom: 25px;
+    .step_sec .content {
+        display: flex;
+        align-items: flex-start;
+        padding: 20px 0;
     }
 
-    #cart-body .package-box p {
-        font-size: 16px;
-        color: #525252;
-        width: 100%;
-    }
-
-    #cart-body .package-box h2 {
-        font-size: 32px;
-        font-weight: 800;
-        color: #00B4F0;
-    }
-
-    #cart-body .package-box h2 span {
-        font-size: 24px;
-    }
-
-    #cart-body .shopping-link {
-        color: #ED028C;
-        font-weight: 800;
-        font-size: 16px;
-        text-transform: uppercase;
-        display: inline-block;
-        margin-top: 5px;
-    }
-
-    #cart-body .shopping-link img {
-        vertical-align: middle;
-        margin-top: -2px;
-    }
-
-    #cart-body .container {
-        border: 0.5px solid #ebebeb;
-        border-radius: 10px;
-        padding-left: 6% !important;
-        padding-right: 6% !important;
-        background-image: url('/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/thankyou-bg.jpg');
-        background-position: top left;
-        background-size: 100%;
-        background-repeat: no-repeat;
-    }
-
-    #cart-body .offer-box {
-        border: 1px solid #C5C5C5;
-        width: 100%;
-        border-radius: 6px;
-        padding: 20px;
+    .step_sec span {
+        background: #1A1E47;
+        color: #fff;
+        padding: 1px 9px;
         text-align: center;
+        border-radius: 50%;
     }
 
-    #cart-body .offer-box p {
+    .step_sec p {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: left;
+        letter-spacing: -0.02em;
+        color: #000000;
+    }
+
+    .step_sec_inner {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .step_sec_inner p {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        padding: 0 0 0 8px;
+        width: 175px;
         color: #525252;
-        font-size: 17px;
+    }
+
+    .tx_box h1 {
+        font-weight: 800;
+        font-size: 28px;
+        line-height: 34px;
+        letter-spacing: -0.02em;
+        color: #000000;
+    }
+
+    .step_sec {
+        background: #FFFFFF;
+        box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
+        border-radius: 8px;
+        margin: 30px 0;
+        padding: 20px;
+    }
+
+    .viewall-btn {
+        display: inline-block;
+        text-transform: uppercase;
+        text-align: center;
+        text-decoration: none !important;
+        font-family: 'Montserrat', sans-serif;
+        color: #2F3BF5;
+        letter-spacing: 0.1em;
         font-weight: 700;
+        font-size: 18px;
+    }
+
+    .rs {
+        display: flex;
+        justify-content: space-between;
+        margin: 30px 0;
+    }
+
+    .list p {
+        display: inline;
+    }
+
+    .bottom_sec {
+        display: flex;
+        padding-top: 35px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .price-sec {
+        background: #FFFFFF;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
+    }
+
+    .list {
         margin-bottom: 15px;
     }
 
-    #cart-body .grey-link {
-        font-weight: 700;
-        color: #525252;
-        text-decoration: underline;
+    .list img {
+        padding-bottom: 3px;
     }
 
-    .footer {
-        background-color: #FFF;
-        padding-top: 0px;
+    .price-sec h3 {
+        font-weight: 800;
+        font-size: 23px;
+        line-height: 28px;
+        letter-spacing: -0.02em;
+        color: #2B2B2B;
+        margin-bottom: 20px;
     }
 
-    .footer .copyright {
-        margin-top: 0px;
-        padding: 20px 0px;
+    .bottom_sec h5 {
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 23px;
+        letter-spacing: -0.02em;
+        color: #1A1E47;
     }
 
-    .footer .copyright p {
-        color: #525252;
-        font-size: 20px;
-        font-weight: 600;
-    }
-
-    .footer .copyright p a {
-        color: #525252;
-        text-decoration: underline;
-    }
-
-    .col-orderResponse {
-        padding-bottom: 100px;
-    }
-
-    @media only screen and (min-device-width: 375px) and (max-device-width: 992px) {
-        #cart-body .container {
-            background-image: none;
+    @media only screen and (max-width: 991px) {
+        .step_sec_inner {
+            flex-direction: column;
         }
 
-        .col-orderResponse {
-            padding-bottom: 1.5rem !important;
+        .step_sec .content {
+            padding: 10px 0;
+        }
+
+        .price-sec {
+            margin-bottom: 10px;
         }
     }
 </style>
 
 
-<!-- Vue Wrapper STARTS -->
-<div id="main-vue" style="display: none;">
-    <!-- Cart Body STARTS -->
-    <section id="cart-body" v-if="pageValid">
-        <div class="container p-lg-5 p-3 thankyou-box">
-            <div class="row gx-5">
-                <div class="col-12 pb-4">
-                    <div class="row">
-                        <div class="col-lg-5 col-12 offset-lg-6 col-orderResponse">
-                            <h1>{{ renderText('strThankYou') }}</h1>
-                            <template v-if="paymentStatus == 2">
-                            <p class="mb-3">
-                                {{ renderText('strOrderNumber') }} <br />
-                                <a href="javascript:void(0)" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br />
-                                {{ renderText('strPlacedOn') }} {{ purchaseInfo.orderCreationDate }} <br /> <br />
-                                {{ renderText('strOrderPaymentPending') }}
-                            </p>
-                            </template>
-                            <template v-else>
-                            <p class="mb-3">
-                                {{ renderText('strOrderNumber') }} <br />
-                                <!-- <a v-bind:href="'/ywos/thank-you/?order_display_id=' + purchaseInfo.displayOrderNumber" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br /> -->
-                                <a href="javascript:void(0)" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br />
-                                {{ renderText('strPlacedOn') }} {{ purchaseInfo.orderCreationDate }} <br />
-                                <!-- Estimated Delivery: {{ purchaseInfo.deliveryFromDate }} - {{ purchaseInfo.deliveryToDate }} <br /><br /> -->
-                                {{ renderText('strOrderSummary') }}
-                            </p>
-                            </template>
-                            
-                            <div class="offer-box d-none">
-                                <p>Send me amazing Offers and Promotions</p>
-                                <a href="#" class="pink-btn d-block">Subscribe</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 mt-4 d-none">
-                    <h2>You may also like</h2>
-                </div>
-                <div class="col-6 mt-4 text-end d-none">
-                    <a href="/#popular-deals" class="shopping-link">Continue shopping <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/right-arrow.png" class="ms-2" alt=""></a>
-                </div>
-            </div>
-            <div class="row gx-5 row-highlightPlans" style="display: none;">
-                <template v-for="plan in highlightPlans">
-                    <div class="col-lg-4 col-12 mt-4">
-                        <div class="package-box">
-                            <h1>{{ plan.displayName }}</h1>
-                            <p class="mb-2" v-for="planInfo in plan.planInfos.slice(0, 3)"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png" class="me-1" alt="">{{ planInfo }}</p>
-                            <div class="row mt-4">
-                                <div class="col-10">
-                                    <h2 v-if="plan.planType == 'prepaid'">RM{{ plan.totalAmount }}</h2>
-                                    <h2 v-if="plan.planType == 'postpaid'">RM{{ plan.totalAmount }}<span>/month</span></h2>
-                                </div>
-                                <div class="col-2">
-                                    <a href="javascript:void(0)" v-on:click="buyPlan(plan.mobilePlanId)"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cart-pink-icon.png" alt=""></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </template>
+<div id="main-vue" class="container tx_box p-5 col-orderResponse">
+    <div class="row align-items-center ">
+        <div class="col-md-6 tx_box_inner" v-if="paymentStatus == 2">
+            <h1 class="mb-4">{{ renderText('strThankYou') }}</h1>
+            <p class="tx">{{ renderText('strOrderNumber') }}<br>
+            <a href="javascript:void(0)" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br /><br/>
+            {{ renderText('strPlacedOn') }} {{ purchaseInfo.orderCreationDate }}
+            {{ renderText('strEstimatedDelivery') }} {{ purchaseInfo.deliveryFromDate }}  - {{purchaseInfo.deliveryToDate}}<br /> <br />
+            <p> {{ renderText('strOrderSummary') }}</p>
+        </div>
+        <div class="col-md-6 tx_box_inner" v-else>
+            <h1 class="mb-4">{{ renderText('strThankYou') }}</h1>
+            <p class="tx">{{ renderText('strOrderNumber') }}<br>
+            <a href="javascript:void(0)" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br /><br/>
+            {{ renderText('strPlacedOn') }} {{ purchaseInfo.orderCreationDate }}
+            <p>{{ renderText('strEstimatedDelivery') }} {{ purchaseInfo.deliveryFromDate }}  - {{purchaseInfo.deliveryToDate}}</p><br /> <br />
+            <p> {{ renderText('strOrderSummary') }}</p>
+        </div>
+        <div class="col-md-6">
+            <div class="tx-img">
+                <img src="/wp-content/uploads/2023/06/banner-side.png" class="img-fluid" alt="...">
             </div>
         </div>
-    </section>
-    <!-- Cart Body ENDS -->
+    </div>
+
+    <div class="row" v-if="(simType=='false')">
+        <div class="step_sec">
+            <h1>{{ renderText('strPhysicalSimActivate') }}</h1>
+            <div class="step_sec_inner">
+                <div class="content">
+                    <span>1</span>
+                    <p>{{ renderText('strPhysicalSimActivateStepOne') }}</p>
+                </div>
+                <div class="content">
+                    <span>2</span>
+                    <p>{{ renderText('strPhysicalSimActivateStepTwo') }}</p>
+                </div>
+                <div class="content">
+                    <span>3</span>
+                    <p>{{ renderText('strPhysicalSimActivateStepThree') }}</p>
+                </div>
+                <div class="content">
+                    <span>4</span>
+                    <p>{{ renderText('strPhysicalSimActivateStepFour') }}</p>
+                </div>
+                <div class="content">
+                    <span>5</span>
+                    <p>{{ renderText('strPhysicalSimActivateStepFive') }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" v-else>
+        <div class="step_sec">
+            <h1>{{ renderText('strEsimActivate') }}</h1>
+            <div class="step_sec_inner">
+                <div class="content">
+                    <span>1</span>
+                    <p>{{ renderText('strEsimActivateStepOne') }}</p>
+                </div>
+                <div class="content">
+                    <span>2</span>
+                    <p>{{ renderText('strEsimActivateStepTwo') }}</p>
+                </div>
+                <div class="content">
+                    <span>3</span>
+                    <p>{{ renderText('strEsimActivateStepThree') }}</p>
+                </div>
+                <div class="content">
+                    <span>4</span>
+                    <p>{{ renderText('strEsimActivateStepFour') }}</p>
+                </div>
+                <div class="content">
+                    <span>5</span>
+                    <p>{{ renderText('strEsimActivateStepFive') }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row price">
+        <div class="rs">
+            <h1>
+                You may also like
+            </h1>
+            <a href="/#popular-deals" class="viewall-btn">continue shopping<svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="iconify iconify--akar-icons" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                    viewBox="0 0 24 24" data-icon="akar-icons:arrow-right">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M4 12h16m-7-7l7 7l-7 7"></path>
+                </svg></a>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-12">
+                <div class="price-sec">
+                    <h3>Kasi Up <br>
+                        Postpaid 30</h3>
+                    <div class="list">
+                        <img src="/wp-content/uploads/2023/05/check-circle-Regular.png" class="img-fluid" alt="...">
+                        <p>20GB for RM30</p>
+                    </div>
+                    <div class="list">
+                        <img src="/wp-content/uploads/2023/05/check-circle-Regular.png" class="img-fluid" alt="...">
+                        <p>Unlimited refferals and earnings</p>
+                    </div>
+                    <div class="list">
+                        <img src="/wp-content/uploads/2023/05/check-circle-Regular.png" class="img-fluid" alt="...">
+                        <p>Free Yes Altitude phone</p>
+                    </div>
+                    <div class="bottom_sec">
+                        <h5>RM30.00 /month</h5>
+                        <img src="/wp-content/uploads/2023/05/cards.png" class="img-fluid" alt="...">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="price-sec">
+                    <h3>Merdeka Device<br> Bundle</h3>
+                    <div class="list">
+                        <img src="/wp-content/uploads/2023/05/check-circle-Regular.png" class="img-fluid" alt="...">
+                        <p>20GB for RM30</p>
+                    </div>
+                    <div class="list">
+                        <img src="/wp-content/uploads/2023/05/check-circle-Regular.png" class="img-fluid" alt="...">
+                        <p>Unlimited refferals and earnings</p>
+                    </div>
+                    <div class="list">
+                        <img src="/wp-content/uploads/2023/05/check-circle-Regular.png" class="img-fluid" alt="...">
+                        <p>Free Yes Altitude phone</p>
+                    </div>
+                    <div class="bottom_sec">
+                        <h5>RM30.00 /month</h5>
+                        <img src="/wp-content/uploads/2023/05/cards.png" class="img-fluid" alt="...">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="price-sec">
+                    <h3>Kasi Up <br>
+                        Prepaid Unlimited 30</h3>
+                    <div class="list">
+                        <img src="/wp-content/uploads/2023/05/check-circle-Regular.png" class="img-fluid" alt="...">
+                        <p>20GB for RM30</p>
+                    </div>
+                    <div class="list">
+                        <img src="/wp-content/uploads/2023/05/check-circle-Regular.png" class="img-fluid" alt="...">
+                        <p>Unlimited refferals and earnings</p>
+                    </div>
+                    <div class="list">
+                        <img src="/wp-content/uploads/2023/05/check-circle-Regular.png" class="img-fluid" alt="...">
+                        <p>Free Yes Altitude phone</p>
+                    </div>
+                    <div class="bottom_sec">
+                        <h5>RM30.00 /month</h5>
+                        <img src="/wp-content/uploads/2023/05/cards.png" class="img-fluid" alt="...">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- Vue Wrapper ENDS -->
 
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         toggleOverlay();
 
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
+                simType:'',
                 highlightPlanIDs: [710, 759, 758],
                 highlightPlans: [],
                 orderDisplayID: '',
@@ -265,27 +351,113 @@
                 },
 
                 pageText: {
-                    strThankYou: { 'en-US': 'Thank you!', 'ms-MY': 'Terima kasih!', 'zh-hans': 'Thank you!' },
-                    strOrderNumber: { 'en-US': 'Order Number', 'ms-MY': 'Nombor Pesanan', 'zh-hans': 'Order Number' },
-                    strPlacedOn: { 'en-US': 'Placed on', 'ms-MY': 'Dipesan pada', 'zh-hans': 'Placed on' },
-                    strOrderSummary: { 'en-US': 'A summary of your order has been sent to your email', 'ms-MY': 'Ringkasan pesanan telah dihantar ke emel anda', 'zh-hans': 'A summary of your order has been sent to your email' },
-                    strOrderPaymentPending: { 'en-US': 'We have received your order and are waiting for payment clearance. You will receive confirmation email once payment is cleared.', 'ms-MY': 'Kami telah menerima pesanan anda dan menunggu pelepasan bayaran yang telah dibuat. Anda akan memerima emel pengesahan setelah pembayaran teleh diterima.', 'zh-hans': 'We have received your order and are waiting for payment clearance. You will receive confirmation email once payment is cleared.' },
+                    strThankYou: {
+                        'en-US': 'Thank you!',
+                        'ms-MY': 'Terima kasih!',
+                        'zh-hans': 'Thank you!'
+                    },
+                    strOrderNumber: {
+                        'en-US': 'Tracking number/Order number',
+                        'ms-MY': 'Tracking Number/Nombor Pesanan',
+                        'zh-hans':'Tracking Number/Order Number'
+                    },
+                    strPlacedOn: {
+                        'en-US': 'Placed on',
+                        'ms-MY': 'Dipesan pada',
+                        'zh-hans': 'Placed on'
+                    },
+                    strEstimatedDelivery: {
+                        'en-US': 'Estimated Delivery',
+                        'ms-MY': 'Estimated Delivery',
+                        'zh-hans': 'Estimated Delivery'
+                    },
+                    strOrderSummary: {
+                        'en-US': 'A summary of your order has been sent to your email',
+                        'ms-MY': 'Ringkasan pesanan telah dihantar ke emel anda',
+                        'zh-hans': 'A summary of your order has been sent to your email'
+                    },
+                    strOrderPaymentPending: {
+                        'en-US': 'We have received your order and are waiting for payment clearance. You will receive confirmation email once payment is cleared.',
+                        'ms-MY': 'Kami telah menerima pesanan anda dan menunggu pelepasan bayaran yang telah dibuat. Anda akan memerima emel pengesahan setelah pembayaran teleh diterima.',
+                        'zh-hans': 'We have received your order and are waiting for payment clearance. You will receive confirmation email once payment is cleared.'
+                    },
+                    strPhysicalSimActivate: {
+                        'en-US': 'How to activate SIM.',
+                        'ms-MY': 'How to activate SIM.',
+                        'zh-hans': 'How to activate SIM.'
+                    },
+                    strPhysicalSimActivateStepOne: {
+                        'en-US': "Open MyYes app, choose New User' & 'Activate SIM'..",
+                        'ms-MY': "Open MyYes app, choose 'New User' & 'Activate SIM'..",
+                        'zh-hans': "Open MyYes app, choose 'New User' & 'Activate SIM'.."
+                    },
+                    strPhysicalSimActivateStepTwo: {
+                        'en-US': "Scan barcode on the back of the SIM jacket or manually enter SIM serial.",
+                        'ms-MY': "Scan barcode on the back of the SIM jacket or manually enter SIM serial.",
+                        'zh-hans': "Scan barcode on the back of the SIM jacket or manually enter SIM serial."
+                    },
+                    strPhysicalSimActivateStepThree: {
+                        'en-US': "Select ID & key in personal information, then select preferred plan and number.",
+                        'ms-MY': "Select ID & key in personal information, then select preferred plan and number.",
+                        'zh-hans': "Select ID & key in personal information, then select preferred plan and number."
+                    },
+                    strPhysicalSimActivateStepFour: {
+                        'en-US': "Complete eKYC & create login password for MyYes app.",
+                        'ms-MY': "Complete eKYC & create login password for MyYes app.",
+                        'zh-hans': "Complete eKYC & create login password for MyYes app."
+                    },
+                    strPhysicalSimActivateStepFive: {
+                        'en-US': "A confirmation message of your activation will be sent.",
+                        'ms-MY': "A confirmation message of your activation will be sent.",
+                        'zh-hans': "A confirmation message of your activation will be sent."
+                    },
+                    strEsimActivate: {
+                        'en-US': "How to activate eSIM",
+                        'ms-MY': "How to activate eSIM",
+                        'zh-hans': "How to activate eSIM"
+                    },
+                    strEsimActivateStepOne: {
+                        'en-US': "Start your purchase journey by selecting your preferred plan.",
+                        'ms-MY': "Start your purchase journey by selecting your preferred plan.",
+                        'zh-hans': "Start your purchase journey by selecting your preferred plan."
+                    },
+                    strEsimActivateStepTwo: {
+                        'en-US': "You will receive an eSIM barcode in your email",
+                        'ms-MY': "You will receive an eSIM barcode in your email",
+                        'zh-hans': "You will receive an eSIM barcode in your email"
+                    },
+                    strEsimActivateStepThree: {
+                        'en-US': "Download MyYes App, available in App Store & Google Playstore.",
+                        'ms-MY': "Download MyYes App, available in App Store & Google Playstore.",
+                        'zh-hans': "Download MyYes App, available in App Store & Google Playstore."
+                    },
+                    strEsimActivateStepFour: {
+                        'en-US': "Click on ‘Activate SIM’ and scan the barcode. Upon activation success, you will be auto-logged in to MyYes App.",
+                        'ms-MY': "Click on ‘Activate SIM’ and scan the barcode. Upon activation success, you will be auto-logged in to MyYes App.",
+                        'zh-hans': "Click on ‘Activate SIM’ and scan the barcode. Upon activation success, you will be auto-logged in to MyYes App."
+                    },
+                    strEsimActivateStepFive: {
+                        'en-US': "Click on ‘Install’ to get your eSIM.",
+                        'ms-MY': "Click on ‘Install’ to get your eSIM.",
+                        'zh-hans': "Click on ‘Install’ to get your eSIM."
+                    },
+
                 }
             },
-            mounted: function() {},
-            created: function() {
+            mounted: function () { },
+            created: function () {
                 var self = this;
                 var url_string = window.location.href;
                 var url = new URL(url_string);
                 self.orderDisplayID = url.searchParams.get('order_display_id');
                 self.paymentStatus = url.searchParams.get('status');
 
-                setTimeout(function() {
+                setTimeout(function () {
                     self.pageInit();
                 }, 500);
             },
             methods: {
-                pageInit: function() {
+                pageInit: function () {
                     var self = this;
                     if (self.orderDisplayID) {
                         self.pageValid = true;
@@ -294,6 +466,7 @@
                         toggleOverlay(false);
                     } else if (ywos.validateSession(self.currentStep)) {
                         self.pageValid = true;
+                        self.simType=ywos.lsData.meta.esim;
                         self.updateData();
                         // self.getHighlightPlans();
                         toggleOverlay(false);
@@ -301,7 +474,7 @@
                         ywos.redirectToPage('cart');
                     }
                 },
-                ajaxGetOrderByDisplayID: function() {
+                ajaxGetOrderByDisplayID: function () {
                     var self = this;
                     axios.get(apiEndpointURL + '/get-order-by-display-id/' + self.orderDisplayID)
                         .then((response) => {
@@ -323,20 +496,20 @@
                             // console.log('finally');
                         });
                 },
-                ajaxGetHighlightPlan: function(planID) {
+                ajaxGetHighlightPlan: function (planID) {
                     var self = this;
-                    axios.get(apiEndpointURL + '/get-plan-by-id/' + planID + '/?nonce='+yesObj.nonce)
+                    axios.get(apiEndpointURL + '/get-plan-by-id/' + planID + '/?nonce=' + yesObj.nonce)
                         .then((response) => {
                             var planData = response.data;
                             if (planData.notes) {
                                 var arrNotes = planData.notes.split(',');
-                                planData.planInfos = arrNotes.sort(function(a, b) {
+                                planData.planInfos = arrNotes.sort(function (a, b) {
                                     return a.length - b.length;
                                 });
                             }
                             self.highlightPlans.push(planData);
                             if (self.highlightPlanIDs.length >= self.highlightPlans.length) {
-                                setTimeout(function() {
+                                setTimeout(function () {
                                     $('.row-highlightPlans').show();
                                     toggleOverlay(false);
                                 }, 1000);
@@ -346,25 +519,35 @@
                             console.log('error', error);
                         })
                 },
-                getHighlightPlans: function() {
+                getHighlightPlans: function () {
                     var self = this;
-                    self.highlightPlanIDs.map(function(planID) {
+                    self.highlightPlanIDs.map(function (planID) {
                         self.ajaxGetHighlightPlan(planID);
                     });
                 },
-                updateData: function() {
+                updateData: function () {
                     var self = this;
                     if (typeof ywos.lsData.meta.orderResponse != 'undefined') {
-                        self.purchaseInfo.displayOrderNumber = ywos.lsData.meta.orderResponse.displayOrderNumber;
-                        self.purchaseInfo.deliveryFromDate = ywos.lsData.meta.orderResponse.deliveryFromDate;
-                        self.purchaseInfo.deliveryToDate = ywos.lsData.meta.orderResponse.deliveryToDate;
-                        self.purchaseInfo.orderCreationDate = ywos.lsData.meta.orderResponse.orderCreationDate;
+                        self.purchaseInfo.displayOrderNumber = ywos.lsData.meta.orderResponse
+                            .displayOrderNumber;
+
+                       
+                        self.purchaseInfo.deliveryFromDate = moment(ywos.lsData.meta.orderResponse.deliveryFromDate,'DD-MM-YYYY').format('Do MMM').split(' ');
+                        self.purchaseInfo.deliveryFromDate= self.purchaseInfo.deliveryFromDate[0] + self.nthNumber(self.purchaseInfo.deliveryFromDate[0]) + ' ' + (self.purchaseInfo.deliveryFromDate[1]);
+
+                     
+                        self.purchaseInfo.deliveryToDate = moment(ywos.lsData.meta.orderResponse.deliveryToDate,'DD-MM-YYYY').format('Do MMM').split(' ');
+                        self.purchaseInfo.deliveryToDate= self.purchaseInfo.deliveryToDate[0] + self.nthNumber(self.purchaseInfo.deliveryToDate[0]) + ' ' + (self.purchaseInfo.deliveryToDate[1]);
+                         
+                        self.purchaseInfo.orderCreationDate =moment(ywos.lsData.meta.orderResponse
+                            .orderCreationDate,'dd-MM-yyyy hh:mm:ss').format("dddd, Do MMMM  YYYY").split(' ');
+                            self.purchaseInfo.orderCreationDate= self.purchaseInfo.orderCreationDate[0] +  (self.purchaseInfo.orderCreationDate[1] + self.nthNumber(self.purchaseInfo.orderCreationDate[1]))+ ' ' + (self.purchaseInfo.orderCreationDate[2]) 
                     } else if (ywos.lsData.meta.purchaseInfo) {
                         self.purchaseInfo = ywos.lsData.meta.purchaseInfo;
                     }
                     self.clearLocalData(ywos.lsData.meta.planID, ywos.lsData.meta.completedStep);
                 },
-                clearLocalData: function(planID = 0, completedStep = 0) {
+                clearLocalData: function (planID = 0, completedStep = 0) {
                     ywos.lsData.meta = {};
                     ywos.lsData.meta.planID = planID;
                     ywos.lsData.meta.completedStep = completedStep;
@@ -372,9 +555,17 @@
                     ywos.lsData.meta.purchaseCompleted = true;
                     ywos.updateYWOSLSData();
                 },
-                renderText: function(strID) {
+                renderText: function (strID) {
                     return ywos.renderText(strID, this.pageText);
-                }
+                },
+                nthNumber: function (number) {
+                    return number > 0
+                        ? ["th", "st", "nd", "rd"][
+                            (number > 3 && number < 21) || number % 10 > 3 ? 0 : number % 10
+                        ]
+                        : "";
+                },
+                
             }
         });
     });

@@ -23,6 +23,7 @@ if (!function_exists('yes_enqueue_scripts')) {
         wp_enqueue_script('iconify', get_template_directory_uri() . '/assets/js/iconify.min.js', array(), '2.0.0', true);
         wp_enqueue_script('aos', get_template_directory_uri() . '/assets/js/aos.js', array(), '2.3.1', true);
         wp_enqueue_script('slick', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.0/slick.min.js', array(), '1.8.0', true);
+        wp_enqueue_script('moment', 'https://momentjs.com/downloads/moment.min.js', array(), '1.8.0', true);
         wp_register_script('yes-js', get_template_directory_uri() . '/assets/js/yes.js', array(), '1.0.0', true);
         $data = array(
             'nonce' => wp_create_nonce("yes_nonce_key"),
@@ -876,7 +877,6 @@ function yes_menu($path)
 
         .nav-container .nav-link {
             color: #1A1E47;
-            outline: none !important;
         }
 
 
@@ -2053,8 +2053,8 @@ function yes_menu($path)
                                 <ul>
                                     <div class="cards">
                                         <div class="postpaid_card_box card-box">
-                                            <!-- <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2022/05/ft5g-simpack-new2.png"> -->
-                                            <img src="https://yesmy-dev.azurewebsites.net<?php echo $menu_image_postpaid  ?>">
+                                            <!-- <img src="/wp-content/uploads/2022/05/ft5g-simpack-new2.png"> -->
+                                            <img src="<?php echo $menu_image_postpaid  ?>">
 
                                         </div>
                                         <div class="postpaid_card_text card-body">
@@ -2113,7 +2113,7 @@ function yes_menu($path)
                             <li>
                                 <ul>
                                     <div class="cards">
-                                        <div class="prepaid_card_box card-box">
+                                        <div class="postpaid_card_box card-box">
                                             <!-- <img src="/wp-content/uploads/2022/05/ft5g-simpack-new2.png"> -->
                                             <img src="<?php echo $menu_image_prepaid  ?>">
 
@@ -2128,7 +2128,7 @@ function yes_menu($path)
                     <?php
                     }
                     ?>
-
+                    
                 </div>
 
 
@@ -2175,7 +2175,7 @@ function yes_menu($path)
                                                 <p class="yes_text_menu_headline">Explore Our Plans</p>
                                             </li>
                                             <?php
-                                            $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fiber-5G");
+                                            $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fibre-5G");
                                             $WirelessNav = wp_get_nav_menu_items($Wireless_Fibre_menu);
 
                                             foreach ($WirelessNav as $wirelessItem) {
@@ -2332,7 +2332,7 @@ function yes_menu($path)
                 </div>
                 <div class="tab-box overlap" id="tab-3">
                     <div class="back-btn" data-rel="tab-3">
-                        <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/arrow_back.svg"> Main Menu
+                        <img src="/wp-content/uploads/2023/03/arrow_back.svg"> Main Menu
                     </div>
                     <h2 class="menu-title">Wireless Fibre 5G</h2>
                     <li>
@@ -2410,7 +2410,7 @@ function yes_menu($path)
                 </div>
                 <div class="tab-box overlap" id="tab-4">
                     <div class="back-btn" data-rel="tab-4">
-                        <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/arrow_back.svg"> Main Menu
+                        <img src="/wp-content/uploads/2023/03/arrow_back.svg"> Main Menu
                     </div>
                     <h2 class="menu-title">4G Broadband</h2>
                     <div class="tab-box-inner">
@@ -2544,7 +2544,7 @@ function yes_menu($path)
                         <div class="row">
                             <div class="col-6 col-md-6">
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Coverage.svg" alt="...">
+                                    <img src="/wp-content/uploads/2023/03/Coverage.svg" alt="...">
                                     <div class="">
                                         <h6> <a href="<?php echo get_site_url() . '/coverage/' ?>"><?php echo esc_html__('Coverage Checker  ', 'yes.my'); ?></a></h6>
                                         <p>Check Yes network coverage in Malaysia.</p>
@@ -2554,7 +2554,7 @@ function yes_menu($path)
                             </div>
                             <div class="col-6 col-md-6">
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Speed.svg" alt="...">
+                                    <img src="/wp-content/uploads/2023/03/Speed.svg" alt="...">
                                     <div class="">
                                         <h6><a href="<?php echo get_site_url() . '/speed-test/' ?>"><?php echo esc_html__('Speed Test', 'yes.my'); ?></a></h6>
                                         <p>Measure your internet connection speed.</p>
@@ -2566,7 +2566,7 @@ function yes_menu($path)
                             <div class="col-6 col-md-6">
 
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Supported-Devices.svg" alt="...">
+                                    <img src="/wp-content/uploads/2023/03/Supported-Devices.svg" alt="...">
                                     <div class="">
                                         <h6><a href="<?php echo get_site_url() . '/supported-devices/' ?>"><?php echo esc_html__('Supported Devices', 'yes.my'); ?></a></h6>
                                         <p>Browse devices compatible with 4G LTE and 5G
@@ -2577,16 +2577,16 @@ function yes_menu($path)
                             </div>
                             <div class="col-6 col-md-6">
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Track-Order.svg" alt="...">
+                                    <img src="/wp-content/uploads/2023/03/Track-Order.svg" alt="...">
                                     <div class="">
                                         <h6><a href="<?php echo get_site_url() . '/trackorder/' ?>"><?php echo esc_html__('Track Order', 'yes.my'); ?></a></h6>
                                         <p>Check the status of a Yes order.</p>
                                     </div>
                                 </li>
                             </div>
-                            <div class="col-6 col-md-6" style="display:none !important;">
+                            <div class="col-6 col-md-6">
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Track-Order.svg" alt="...">
+                                    <img src="/wp-content/uploads/2023/03/Track-Order.svg" alt="...">
                                     <div class="">
                                         <h6><a href="<?php echo get_site_url() . '/a3-charger-replacement/' ?>"><?php echo esc_html__('Product Notice', 'yes.my'); ?></a></h6>
 
@@ -2600,7 +2600,7 @@ function yes_menu($path)
                             <div class="col-6 col-md-6">
 
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Store-Locator.svg" alt="...">
+                                    <img src="/wp-content/uploads/2023/03/Store-Locator.svg" alt="...">
                                     <div class="">
                                         <h6><a href="<?php echo get_site_url() . '/store-locator/' ?>"><?php echo esc_html__('Store Locator', 'yes.my'); ?></a></h6>
                                         <p>Find the nearest Yes store.</p>
@@ -2610,7 +2610,7 @@ function yes_menu($path)
                             </div>
                             <div class="col-6 col-md-6">
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Roadshow-Locations.svg" alt="...">
+                                    <img src="/wp-content/uploads/2023/03/Roadshow-Locations.svg" alt="...">
                                     <div class="">
                                         <h6><a href="<?php echo get_site_url() . '/roadshow/' ?>"><?php echo esc_html__('Roadshow Locations', 'yes.my'); ?></a></h6>
                                         <p>Location of the Yes Roadshow.</p>
@@ -2619,35 +2619,35 @@ function yes_menu($path)
                             </div>
                         </div>
                         <div class="box">
-                            <li><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> Email us</a></li>
-                            <li><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"> Chat to Support</a></li>
+                            <li><img src="/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> Email us</a></li>
+                            <li><img src="/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"> Chat to Support</a></li>
                         </div>
                     </div>
                     <div class="col-auto get_help-mobile dasktop-none">
                         <ul>
                             <li class="dropdown-header-mobile">tools & services</li>
-                            <li><a href="<?php echo get_site_url() . '/coverage/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Coverage.svg" alt="..."> Coverage Checker</a></li>
-                            <li><a href="<?php echo get_site_url() . '/speed-test/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Speed.svg" alt="..."> Speed Test</a></li>
-                            <li><a href="<?php echo get_site_url() . '/supported-devices/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Supported-Devices.svg" alt="..."> Supported Devices</a></li>
-                            <li><a href="<?php echo get_site_url() . '/trackorder/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Track Order</a></li>
-                            <li><a href="<?php echo get_site_url() . '/a3-charger-replacement/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Product Notice</a></li>
+                            <li><a href="<?php echo get_site_url() . '/coverage/' ?>"><img src="/wp-content/uploads/2023/03/Coverage.svg" alt="..."> Coverage Checker</a></li>
+                            <li><a href="<?php echo get_site_url() . '/speed-test/' ?>"><img src="/wp-content/uploads/2023/03/Speed.svg" alt="..."> Speed Test</a></li>
+                            <li><a href="<?php echo get_site_url() . '/supported-devices/' ?>"><img src="/wp-content/uploads/2023/03/Supported-Devices.svg" alt="..."> Supported Devices</a></li>
+                            <li><a href="<?php echo get_site_url() . '/trackorder/' ?>"><img src="/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Track Order</a></li>
+                            <li><a href="<?php echo get_site_url() . '/a3-charger-replacement/' ?>"><img src="/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Product Notice</a></li>
                         </ul>
                         <ul>
                             <li class="mt-3 dropdown-header-mobile">LOCATE us</li>
-                            <li><a href="<?php echo get_site_url() . '/store-locator/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Store-Locator.svg" alt="..."> Store Locator</a></li>
-                            <li><a href="<?php echo get_site_url() . '/roadshow/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Roadshow-Locations.svg" alt="..."> Roadshow Locations</a></li>
+                            <li><a href="<?php echo get_site_url() . '/store-locator/' ?>"><img src="/wp-content/uploads/2023/03/Store-Locator.svg" alt="..."> Store Locator</a></li>
+                            <li><a href="<?php echo get_site_url() . '/roadshow/' ?>"><img src="/wp-content/uploads/2023/03/Roadshow-Locations.svg" alt="..."> Roadshow Locations</a></li>
                         </ul>
                         <div class="box">
                             <ul>
-                                <li><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> Email us</a></li>
-                                <li><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"> Chat to Support</a></li>
+                                <li><img src="/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> Email us</a></li>
+                                <li><img src="/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"> Chat to Support</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-12 col-md-12 gethelp_right_sec">
                         <li class="dropdown-header">most asked questions</li>
                         <li class="mega-get-help img-box">
-                            <img src="/wp-content/uploads/2023/05/FT5G_banner-350x350@0.5x.png" alt="..." width="76" height="76" style="border-radius: 10px;">
+                            <img src="/wp-content/uploads/2023/03/Rectangle-1393.png" alt="...">
                             <div>
                                 <h6>Keep Your Number</h6>
                                 <p>Switch to Yes while keeping your number.</p>
@@ -2662,7 +2662,7 @@ function yes_menu($path)
                         <li class="mega-get-help">
                             <h6><a href="<?php echo get_site_url() . '/shop/existing-customers/how-to-get-databack/' ?>">Get databack</a></h6>
                         </li>
-                        <li class="mega-get-help"><a href="/faq">GO TO HELP CENTRE <i class="fas fa-chevron-right"></i></a></li>
+                        <li class="mega-get-help"><a href="#">GO TO HELP CENTRE <i class="fas fa-chevron-right"></i></a></li>
                     </div>
                 </div>
 
@@ -2766,47 +2766,9 @@ function yes_menu($path)
                 jQuery('.dropdown-menu.mega-dropdown-menu').removeClass('show')
             }
         });
-
-        jQuery(document).on('click', '.custom_menu_nuv', function () {
-            jQuery('.nav-link.dropdown-toggle').removeClass('show')
-        })
     </script>
 
 <?php
 }
 
 
-// function yes_image_allow($existing_mimes) {
-//     $existing_mimes['webp'] = 'image/webp';
-//     return $existing_mimes;
-// }
-// add_filter('mime_types', 'yes_image_allow');
-
-
-// function yes_is_displayable($result, $path) {
-//     if ($result === false) {
-//         $displayable_image_types = array( IMAGETYPE_WEBP );
-//         $info = @getimagesize( $path );
-
-//         if (empty($info)) {
-//             $result = false;
-//         } elseif (!in_array($info[2], $displayable_image_types)) {
-//             $result = false;
-//         } else {
-//             $result = true;
-//         }
-//     }
-
-//     return $result;
-// }
-// add_filter('file_is_displayable_image', 'yes_is_displayable', 10, 2);
-
-//add SVG to allowed file uploads
-function add_file_types_to_uploads($file_types)
-{
-    $new_filetypes = array();
-    $new_filetypes['svg'] = 'image/svg+xml';
-    $file_types = array_merge($file_types, $new_filetypes);
-    return $file_types;
-}
-add_filter('upload_mimes', 'add_file_types_to_uploads');

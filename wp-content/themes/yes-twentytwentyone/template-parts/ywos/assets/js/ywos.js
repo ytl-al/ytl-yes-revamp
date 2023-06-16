@@ -51,6 +51,12 @@ const ywos = {
         return '_' + Math.random().toString(36).substr(2, 9);
     },
     initLocalStorage: function(planID, isTargetedPromo = false, type = '') {
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        dc = url.searchParams.get('dc');
+        duid = url.searchParams.get('duid');
+        rc = url.searchParams.get('rc');
+
         var ywosLocalStorageData = ywosLSData;
         var storageData = {};
         var expiryLength = expiryYWOSCart * 60000;
@@ -85,6 +91,11 @@ const ywos = {
                 'planID': planID,
                 'sessionId': '',
                 'deviceID': deviceID,
+                'dealer': {
+                    'dealer_code': dc,
+                    'dealer_id': duid,
+                    'referral_code': rc
+                }
             },
             'siteLang': siteLang,
             'isTargetedPromo': false,
@@ -135,7 +146,7 @@ const ywos = {
             }
         });
     },
-    mapSessionData: function(planData = '') {
+   mapSessionData: function(planData = '') {
 
         var planPriceBreakdown = [];
         var planDevicePriceBreakdown = [];
@@ -164,6 +175,7 @@ const ywos = {
             if (key == keySimplifiedItemPricingList) {
                 planSimplifiedBreakdown = planData[keySimplifiedItemPricingList];
             }
+          
         };
         var priceBreakdown = {
             plan: planPriceBreakdown,
@@ -173,41 +185,43 @@ const ywos = {
 
         var storageData = JSON.parse(localStorage.getItem(ywosLSName));
         var yesElevate = JSON.parse(localStorage.getItem('yesElevate'));
-
         storageData.meta.loginType = 'guest';
-        const ElevateDate = new Date(yesElevate.customer.dob);
-        var day = ElevateDate.getDate();
-        day = day < 10 ? "0" + day : day;
-        var month = ElevateDate.getMonth() + 1;
-        month = month < 10 ? "0" + month : month;
-        var year = ElevateDate.getFullYear();
-        const newDateFormate = day + "/" + month + "/" + year;
-        console.log(newDateFormate);
+        const ElevateDate = yesElevate.eligibility.dob;
+
+        // var day = ElevateDate.getDate();
+        // day = day < 10 ? "0" + day : day;
+        // var month = ElevateDate.getMonth() + 1;
+        // month = month < 10 ? "0" + month : month;
+        // var year = ElevateDate.getFullYear();
+        // const newDateFormate = day + "/" + month + "/" + year;
+        // console.log(newDateFormate);
 
 
         storageData.meta.customerDetails = {
             'securityType' : 'nric',
-            'securityId' : yesElevate.customer.securityNumber,
-            'msisdn' : yesElevate.customer.mobileNumber,
-            'nric': yesElevate.customer.securityType,
-            'gender' : yesElevate.customer.gender,
-            'mobileNumber': yesElevate.customer.mobileNumber,
-            'homeNumber': yesElevate.customer.mobileNumber,
-            'officeNumber' : yesElevate.customer.mobileNumber,
-            'name' : yesElevate.customer.fullName,
-            'email': yesElevate.customer.email,
-            'address': yesElevate.customer.addressLine1,
-            'state' : yesElevate.customer.state,
-            'city' : yesElevate.customer.city,
-            'postcode' : yesElevate.customer.postCode,
-            'country': yesElevate.customer.country,
+            'securityId' : yesElevate.eligibility.mykad,
+            'msisdn' : yesElevate.eligibility.phone,
+            // 'nric': yesElevate.customer.securityType,
+            'gender' : '',
+            'mobileNumber': yesElevate.eligibility.inphone,
+            'homeNumber': yesElevate.eligibility.phone,
+            'officeNumber' : yesElevate.eligibility.phone,
+            'name' : yesElevate.eligibility.name,
+            'email': yesElevate.eligibility.email,
+            'address': '',
+            'state' : '',
+            'city' : '',
+            'postcode' :'',
+            'country': '',
             'citizenship': '',
             'yesId': '',
             'accountNumber': '',
-            'dateOfBirth': newDateFormate,
+            'dateOfBirth':yesElevate.eligibility.dob ,
             'salutation' : '',
-            'preferredLanguage' : ''
+            'preferredLanguage' : '',
+            'upFrontPayment':'true'
         },
+
         storageData.meta.orderSummary = {
             'plan' : planData,
             'due' : {
@@ -225,7 +239,7 @@ const ywos = {
         };
         // storageData.meta.orderSummary.plan = planData;
         storageData.meta.isLoggedIn = false;
-        storageData.meta.completedStep = 1;
+        storageData.meta.completedStep = 2;
         localStorage.setItem(ywosLSName, JSON.stringify(storageData));
         console.log(storageData);
     },

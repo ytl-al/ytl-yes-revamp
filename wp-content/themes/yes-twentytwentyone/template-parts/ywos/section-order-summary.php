@@ -46,10 +46,13 @@
         <!-- <h2>Due today after taxes and shipping</h2> -->
         <div class="row">
             <div class="col-7 py-2">
-                <p style="color: #00B4F0;">{{ renderSummaryText('strTotal') }}</p>
+                <h5 style="color: #000000;text-transform: uppercase;"><strong>{{ renderSummaryText('strTotal') }}</strong></h5>
             </div>
-            <div class="col-5 py-2 text-end">
-                <p class="large" style="color: #00B4F0;"><strong>RM{{ formatPrice(parseFloat(orderSummary.due.total).toFixed(2)) }}</strong></p>
+            <div class="col-5 py-2 text-end" v-if="(ywos.lsData.meta.customerDetails.upFrontPayment=='true')">
+                <h5 class="large" style="color: #000000;" ><strong>RM{{ formatPrice(parseFloat((orderSummary.due.total)-(orderSummary.due.foreignerDeposit)).toFixed(2)) }}</strong></h5>
+            </div>
+            <div class="col-5 py-2 text-end" v-else>
+                <h5 class="large" style="color: #000000;" ><strong>RM{{ formatPrice(parseFloat(orderSummary.due.total).toFixed(2)) }}</strong></h5>
             </div>
         </div>
         <div v-if="orderSummary.plan.planType != 'prepaid'">
@@ -90,6 +93,17 @@
                 </div>
                 <div class="col-4 text-end">
                     <p class="large"><strong>RM{{ price.value }}</strong></p>
+                </div>
+            </div>
+        </template>
+        
+        <template v-if="orderSummary?.due?.priceBreakdown?.device[1]?.name">
+            <div class="row" v-if='(upFrontPayment=="true")' >
+                <div class="col-8 pe-0">
+                    <p>{{ orderSummary.due.priceBreakdown.device[1].name.substring(orderSummary.due.priceBreakdown.device[1].name.indexOf(' ') + 1) }}</p>
+                </div>
+                <div class="col-4 text-end">
+                    <p class="large"><strong>RM{{ orderSummary.due.priceBreakdown.device[1].value }}</strong></p>
                 </div>
             </div>
         </template>
@@ -143,6 +157,14 @@
             </div>
             <div class="col-4 text-end">
                 <p class="large"><strong>{{ (orderSummary.due.rounding < 0) ? '-' : '' }}RM{{ parseFloat(orderSummary.due.rounding.replace('-', '')).toFixed(2) }}</strong></p>
+            </div>
+        </div>
+        <div class="row" v-if="(simType == 'eSIM' || ywos.lsData.meta.esim == 'true')">
+            <div class="col-8 pe-0">
+                <p class="large">{{ renderSummaryText('streSimtext') }}</p>
+            </div>
+            <div class="col-4 text-end">
+                <p class="large"><strong>{{ renderSummaryText('streSimtextVal') }}</strong></p>
             </div>
         </div>
     </template>
@@ -199,6 +221,9 @@
         strPaymentAdministration: { 'en-US': 'Administration Payment', 'ms-MY': 'Bayaran Pentadbiran', 'zh-hans': 'Administration Payment' },
         strPaymentEstimated: { 'en-US': 'Estimated Monthly Instalment', 'ms-MY': 'Anggaran Ansuran Bulanan', 'zh-hans': 'Estimated Monthly Instalment' },
         strPaymentNote: { 'en-US': 'The Monthly instalment payment amount generated is just an estimate. To confirm the exact amount, kindly get in touch with Maybank.', 'ms-MY': 'The Monthly instalment payment amount generated is just an estimate. To confirm the exact amount, kindly get in touch with Maybank.', 'zh-hans': 'The Monthly instalment payment amount generated is just an estimate. To confirm the exact amount, kindly get in touch with Maybank.' },
+        streSimtext: {'en-US':'eSim', 'ms-MY': 'eSim', 'zh-hans': 'eSim'},
+        streSimtextVal: {'en-US':'FREE', 'ms-MY': 'FREE', 'zh-hans': 'FREE'},
+        
     };
 
     function renderSummaryText(strID) {

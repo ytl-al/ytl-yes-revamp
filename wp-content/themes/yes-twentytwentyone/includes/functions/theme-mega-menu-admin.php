@@ -29,7 +29,7 @@ function my_admin_footer_function($menu_item_db_id)
 				</td>
 				<td id="ytl_img_td">
 					<a href="#" class="ytl_upload_img">
-						<img src="" width="70" id="ytl_img_id" />
+						<img src=""  id="ytl_img_id" />
 					</a>
 
 					<input type="hidden" id="ytl_upload_img_val" name="ytl_div_img_logo" width="70%" value="">
@@ -98,19 +98,7 @@ function my_admin_footer_function($menu_item_db_id)
 							display: "none"
 						});
 					}
-					if (obj.ytl_img2) {
-						document.getElementById("ytl_img_id2").src = obj.ytl_img2;
-						jQuery('[name="ytl_div_img_logo_2"]').val(obj.ytl_img2_id)
-						var remove_html = '<a href="#" class="ytl_img_remove"  id="ytl_img_remove_id2">Remove image</a>';
-						$('#ytl_img_td2').append(remove_html);
-						jQuery("#ytl_upload_img_id2").css({
-							display: "none"
-						});
-					}
-					if (obj.ytl_desc_2) {
-						var ytl_dec2 = document.getElementById('menu-item-desc_2');
-						ytl_dec2.value += obj.ytl_desc_2;
-					}
+				
 
 				}
 
@@ -202,11 +190,7 @@ add_action('admin_footer', 'my_admin_footer_function');
 function save_menu_item_desc($menu_id, $menu_item_db_id)
 {
 
-	// $ytl_img_data1 = get_post_meta($menu_item_db_id, 'ytl_img_div_data', true);
 
-
-
-	
 
 	if (isset($_POST['ytl_div_img_logo']) ) {
 		// $ytl_img_data1['ytl_div_img_logo'][0] = $_POST['ytl_div_img_logo'];
@@ -242,34 +226,22 @@ function ytl_add_custom_menu()
 	$post_id = $_POST['post_id'];
 	
 	$ytl_div_img_logo = get_post_meta($post_id, 'ytl_div_img_logo', true);
-	$ytl_div_img_logo_2 = get_post_meta($post_id, 'ytl_div_img_logo_2', true);
 	$menu_item_desc = get_post_meta($post_id, 'menu_item_desc', true);
-	$menu_item_desc_2 = get_post_meta($post_id, 'menu_item_desc_2', true);
+
 
 
 	if ($menu_item_desc) {
 		$ytl_desc = $menu_item_desc;
-	}
-	if ($menu_item_desc_2) {
-		$menu_item_desc_2 = $menu_item_desc_2;
 	}
 
 	if ($ytl_div_img_logo) {
 		$image = wp_get_attachment_image_url($ytl_div_img_logo);
 	}
 
-	if ($ytl_div_img_logo_2) {
-		$image2 = wp_get_attachment_image_url($ytl_div_img_logo_2);
-	}
-
 	$data = array(
 		'ytl_desc'         => $ytl_desc,
 		'ytl_img'       => $image,
 		'ytl_img_id' 		=> $ytl_div_img_logo,
-		'ytl_desc_2' => $menu_item_desc_2,
-		'ytl_img2'       => $image2,
-		'ytl_img2_id' 		=> $ytl_div_img_logo_2,
-
 	);
 	print_r(json_encode($data));
 

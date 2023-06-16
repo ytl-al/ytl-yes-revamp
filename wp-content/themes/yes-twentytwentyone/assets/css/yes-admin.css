@@ -57,3 +57,20 @@
 
 
 /* END Styles for Post Type Supported Device */
+
+/* Start Mega menu image upload css */
+
+.yes_mega_menu_image{
+    width: 205px;
+    display: inline-block;
+    margin: 20px 0;
+}
+.yes_mega_menu_upload_note
+{
+    margin: 0px;
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: underline;
+
+}
+/* End Mega menu image upload css */

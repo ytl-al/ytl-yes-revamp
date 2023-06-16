@@ -860,7 +860,7 @@
                         }
 
                         //console.log("params",params); return;
-                        axios.post(apiEndpointURL_elevate + '/create-yos-order' + '?nonce='+yesObj.nonce, params )
+                        axios.post(apiEndpointURL_elevate + '/create-yos-order' + '?nonce='+yesObj.nonce, params)
                             .then((response) => {
                                 var data = response.data.data;
                                 self.orderResponse = data;

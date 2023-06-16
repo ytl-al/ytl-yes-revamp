@@ -36,10 +36,16 @@
                             $back_page = 'Cart';
                             $back_page_id = 'cart';
                             break;
-                        case 'delivery': 
+                        case 'sim-type': 
                             $back_link = '/ywos/verification';
                             $back_page = 'Verification';
                             $back_page_id = 'verification';
+                            break;
+                        case 'delivery':
+                             
+                            $back_link = '/ywos/sim-type';
+                            $back_page = 'Sim Type';
+                            $back_page_id = 'sim type';
                             break;
                         case 'review': 
                             $back_link = '/ywos/delivery';
@@ -59,8 +65,8 @@
                 ?>
                 <a href="<?php echo $back_link; ?>" class="back-btn"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/back-icon.png" /> <span id="span-strBackTo"></span> <span id="span-pageTitle"></span></a>
             </div>
-            <div class="col-lg-4 col-6 text-lg-center text-end">
-                <h1 id="heading-titleCheckout"></h1>
+            <div class="col-lg-4 col-6 text-lg-center text-end1">
+                <h1 id="heading-"></h1>
             </div>
             <div class="col-lg-4">
 

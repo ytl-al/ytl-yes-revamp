@@ -1,6 +1,5 @@
 <?php include('header-no-menu.php'); ?>
 
-
 <style type="text/css">
     #grey-innerbanner {
         background-color: #F9F7F4;
@@ -947,7 +946,7 @@
                         .catch((error) => {
                             self.tpValidation = 'not_valid';
                             toggleOverlay(false);
-                            console.log(error);
+                            // console.log(error);
                         })
                         .finally(() => {
                             // console.log('finally');
@@ -955,9 +954,10 @@
                 }, 
                 ajaxGetPlanData: function() {
                     var self = this;
-                    axios.get(apiEndpointURL + '/get-plan-by-id/' + self.planID+'/?nonce='+yesObj.nonce)
+                    axios.get(apiEndpointURL + '/get-plan-by-id/' + self.planID + '/?nonce='+yesObj.nonce)
                         .then((response) => {
                             var data = response.data;
+                            // console.log(data);
                             if (data.internetData == '∞') {
                                 data.internetData = 'Unlimited';
                             }

@@ -30,7 +30,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link href="<?php echo get_template_directory_uri() . '/assets/css/fwm-style.css' ?>" rel="stylesheet" />
-	<link href="<?php echo get_template_directory_uri() . '/assets/css/fwm-style1.css' ?>" rel="stylesheet" />
     <link href="<?php echo get_template_directory_uri() . '/assets/js/bootstrap.bundle.js' ?>" rel="stylesheet" />
 
 	<?php wp_head(); ?>
@@ -38,6 +37,9 @@
 	<script type="text/javascript">var $ = jQuery.noConflict();</script>
 
 	<?php get_template_part('template-parts/header/tracking'); ?>
+	<?php 
+
+	?>
 </head>
 
 <body <?php body_class(); ?>>

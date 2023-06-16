@@ -10,6 +10,7 @@
         strBackTo: { 'en-US': 'Back to', 'ms-MY': 'Kembali ke', 'zh-hans': 'Back to' }, 
         pageTitleCart: { 'en-US': 'Cart', 'ms-MY': 'Kart', 'zh-hans': 'Cart' }, 
         pageTitleVerification: { 'en-US': 'Verification', 'ms-MY': 'Pengesahan', 'zh-hans': 'Verification' }, 
+        pageTitleSelectSimType:{ 'en-US': 'Select Sim Type', 'ms-MY': 'Select Sim Type', 'zh-hans': 'Select Sim Type' }, 
         pageTitleDeliveryDetails: { 'en-US': 'Delivery Details', 'ms-MY': 'Butiran Penghantaran', 'zh-hans': 'Delivery Details' }, 
         pageTitleReview: { 'en-US': 'Review', 'ms-MY': 'Semak', 'zh-hans': 'Review' }, 
 
@@ -20,6 +21,7 @@
         $('#span-strBackTo').html(getLayoutTranslation('strBackTo', layoutText));
 
         var backPageID = "<?php echo $back_page_id; ?>";
+        console.log(backPageID);
         var backPageStrID = '';
         switch (backPageID) {
             case 'cart':
@@ -28,6 +30,9 @@
             case 'verification': 
                 backPageStrID = 'pageTitleVerification';
                 break;
+            case 'sim type': 
+            backPageStrID = 'pageTitleSelectSimType';
+            break;
             case 'delivery': 
                 backPageStrID = 'pageTitleDeliveryDetails';
                 break;

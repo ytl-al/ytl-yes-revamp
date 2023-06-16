@@ -11,13 +11,16 @@
                     <span>1. {{ renderText('strVerification') }}</span>
                 </li>
                 <li ui-sref="secondStep">
-                    <span>2. {{ renderText('strDelivery') }}</span>
+                    <span>2. {{ renderText('strSelectSimType') }}</span>
                 </li>
                 <li ui-sref="thirdStep">
-                    <span>3. {{ renderText('strReview') }}</span>
+                    <span>3. {{ renderText('strDelivery') }}</span>
                 </li>
                 <li ui-sref="fourthStep">
-                    <span>4. {{ renderText('strPayment') }}</span>
+                    <span>4. {{ renderText('strReview') }}</span>
+                </li>
+                <li ui-sref="fifthStep">
+                    <span>5. {{ renderText('strPayment') }}</span>
                 </li>
             </ul>
         </div>
@@ -38,7 +41,7 @@
                 </div>
                 <form class="col-lg-7 col-12 order-lg-1 mt-4 mt-lg-0 needs-validation" @submit="verificationSubmit">
                     <div>
-                        <h1 class="d-none d-lg-block">{{ renderText('strVerification') }}</h1>
+                        <h1 class="d-none d-lg-block" >{{ renderText('strVerification') }}</h1>
                         <p class="sub mb-4">{{ renderText('strFillIn') }}</p>
                         <div>
                             <h2>{{ renderText('strIDVerification') }}</h2>
@@ -47,7 +50,7 @@
                                     <div class="form-group">
                                         <label class="form-label" for="select-securityType">* {{ renderText('strIDType') }}</label>
                                         <select class="form-select" id="select-securityType" v-model="customerDetails.securityType" @change="watchSecurityType" :disabled="!allowSecurityType">
-                                            <option value="" disabled="disabled" selected="selected">{{ renderText('strIDTypeSelect') }}</option>
+                                            <!-- <option value="" disabled="disabled" selected="selected">{{ renderText('strIDTypeSelect') }}</option> -->
                                             <option value="NRIC">{{ renderText('strIDNRIC') }}</option>
                                             <option value="PASSPORT">{{ renderText('strIDPassport') }}</option>
                                             <option v-if="isLoggedIn && customerDetails.securityType == 'BRN'" value="BRN">BRN</option>
@@ -87,7 +90,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-12" v-if="!isLoggedIn">
-                                    <button type="button" class="white-btn2 mt-3 mt-lg-0" v-on:click="ajaxGenerateOTPForGuestLoginNew  " :disabled="!allowRequestOTP">{{ requestOTPText }}</button>
+                                    <button type="button" class="white-btn3 mt-3 mt-lg-0" v-on:click="ajaxGenerateOTPForGuestLoginNew  " :disabled="!allowRequestOTP">{{ requestOTPText }}</button>
                                 </div>
                                 <div class="invalid-feedback mt-1" id="em-otpPhoneNumber"></div>
                             </div>
@@ -102,7 +105,7 @@
                                     <div class="form-group">
                                         <input type="password" class="form-control" id="input-otpPassword" v-model="verify.input.otpPassword" @input="watchAllowNext" maxlength="6" placeholder="******" />
                                     </div>
-                                <!-- <p class="mb-3 panel-otpMessage_error" style="display: none;"><span class="span-message"> <span class="span-timer">Try Again...!</span>.</p> -->
+                                <p class="mb-3 panel-otpMessage_error" style="display: none;"><span class="span-message"> <span class="span-timer">Try Again...!</span>.</p>
                                 </div>
                                 <p class="mb-3 panel-otpMessage" style="display: none;"><span class="span-message">Your TAC code has been sent.</span> {{ renderText('strTacCodeValid')}} <span class="span-timer">5:00</span>.</p>
                                 <div class="invalid-feedback mt-1" id="em-otpPassword"></div>
@@ -112,7 +115,7 @@
                         </div>
 
                         <div class="row mb-4">
-                            <div class="col-lg-6 col-12">
+                            <div class="col-lg-8 col-12">
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" value="" id="input-agree" v-model="isAgree" @change="watchAgree" />
                                     <label class="form-check-label label-small" for="input-agree" v-html="renderText('strAgree')"></label>
@@ -141,8 +144,10 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
+                simType: '',
                 currentStep: 1,
                 pageValid: false,
+                upFrontPayment:'false',
                 customerDetails: {
                     securityType: '',
                     securityId: '',
@@ -154,6 +159,7 @@
                 allowSecurityType: true,
                 allowSecurityId: true,
                 allowPhoneNumber: true,
+
                 orderSummary: {
                     plan: {},
                     due: {
@@ -195,6 +201,8 @@
                 apiLocale: 'EN', 
                 pageText: {
                     strVerification: { 'en-US': 'Verification', 'ms-MY': 'Pengesahan', 'zh-hans': 'Verification' },
+                    strSelectSimType: { 'en-US': 'Select Sim Type', 'ms-MY': 'Select Sim Type', 'zh-hans': 'Select Sim Type' },
+
                     strDelivery: { 'en-US': 'Delivery Details', 'ms-MY': 'Butiran Penghantaran', 'zh-hans': 'Delivery Details' },
                     strReview: { 'en-US': 'Review', 'ms-MY': 'Semak', 'zh-hans': 'Review' },
                     strPayment: { 'en-US': 'Payment Info', 'ms-MY': 'Maklumat Pembayaran', 'zh-hans': 'Payment Info' },
@@ -279,7 +287,7 @@
                             'locale': self.apiLocale
                         })
                         .then((response) => {
-                            console.log(response);
+                            // console.log(response);
                             self.redirectVerified();
                         })
                         .catch((error) => {
@@ -395,12 +403,12 @@
                         ywos.updateYWOSLSData();
                     }
 
-                    ywos.redirectToPage('delivery');
+                    ywos.redirectToPage('sim-type');
                 },
                 validateOTPNumber: function() {
                     var self = this;
                     var phoneNumber = self.verify.input.phoneNumber.trim();
-                    console.lg(phoneNumber);
+                    // console.lg(phoneNumber);
                     if (isNaN(phoneNumber) || phoneNumber.length == 0) {
                         var inputPhoneNumber = self.verify.input.inputPhoneNumber;
                         var emVerifyPhoneNumber = self.verify.errorMessage.phoneNumber;

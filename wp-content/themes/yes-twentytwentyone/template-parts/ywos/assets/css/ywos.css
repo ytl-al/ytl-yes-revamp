@@ -813,3 +813,42 @@ label.form-label, label.form-check-label { cursor: pointer; }
 .span-checkList { display: inline-block; margin: 0; padding: 0 0 0 20px; position: relative; }
 .span-checkList:before { background-image: url('/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/tickoutline.png'); content: ''; display: block; height: 16px; left: 0px; position: absolute; top: 3px; width: 15px; }
 .span-itemList { display: list-item; list-style-type: disc; margin: 0 0 0 15px; padding: 0 0 0 5px; }
+
+
+
+/* verification page  */
+/* ------------------------ */
+.white-btn3{
+    background-color: #FFF;
+    border-radius: 90px;
+    display: inline-block;
+    padding: 8px 12px;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: #2F3BF5;
+    border: solid 2px #2F3BF5;
+    text-align: center;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    color: #000;
+    text-decoration: none;
+    background-color: #C5C5C5 !important;
+}
+
+.dropdown-menu{
+    padding:0 !important;
+}
+
+.form-check a {
+    color: #2f3bf5 !important;
+}
+.bootstrap-select .dropdown-menu.inner{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)  !important;
+}
+
+
+
+

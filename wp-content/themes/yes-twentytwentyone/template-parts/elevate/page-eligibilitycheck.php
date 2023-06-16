@@ -60,7 +60,7 @@
                     </div>
                     <div class="col-md-7 p-5">
                         <form class="needs-validation" novalidate>
-                            <div class="mt-2 mb-2">
+                            <div>
                                 <h2 class="subtitle">{{ renderText('eligibility_check') }}</h2>
                                 <p class="sub mb-4" v-html="renderText('fill_in_mykad')"></p>
 
@@ -169,7 +169,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mt-2 mb-5">
+                                <div class="row mt-2">
                                     <div class="col-md-6">
                                         <button class="text-uppercase" @click="goNext"
                                                 :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">{{ renderText('check_eligibility') }}

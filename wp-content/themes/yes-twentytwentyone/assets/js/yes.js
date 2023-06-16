@@ -534,13 +534,13 @@ acc_btns.forEach((btn) => {
     btn.classList.toggle("active");
   });
 });
-jQuery(document).on('click', '.custom_menu_nuv', function (e) {
-    var obj = jQuery(this);
-    jQuery(".navbar").hide();
-   
-     })
 
+// jQuery(document).on('click', '.custom_menu_nuv', function (e) {
+//     var obj = jQuery(this);
+//     jQuery(".navbar").hide();
+   
      
+//      })
 
 //slider on e-sim page
 

@@ -88,7 +88,7 @@
 </main>
 </div>
 <?php require_once('includes/footer.php'); ?>
-<?php $apiSetting = \Inc\Base\Model::getAPISettings();?>
+<?php $apiSetting = ( new \Inc\Base\Model)->getAPISettings();?>
 <script type="text/javascript"
         src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/qrcodejs/qrcode.min.js"></script>
 <script type="text/javascript">

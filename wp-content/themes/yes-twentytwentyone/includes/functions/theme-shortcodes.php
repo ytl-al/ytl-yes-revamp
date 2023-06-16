@@ -278,7 +278,7 @@ if (!function_exists('generate_store_locations')) {
                
                 $services   = $data['Services'];
                 $services = str_replace(array('experience-stores','service-stores'),array('stores', 'stores'),$services);
-
+             
                 $store_type     = $data['Store Type'];
                 $store_type = str_replace(array('Experience Store','Store & Service Centre'),array('Store','Store'),$store_type);
                 $store_brand    = ($data['Brand']) ? $data['Brand'] : '';

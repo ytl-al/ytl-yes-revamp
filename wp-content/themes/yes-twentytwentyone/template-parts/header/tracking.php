@@ -1,4 +1,4 @@
-    <!-- <?php if (defined('SITE_ENV') && SITE_ENV == 'PDC') : ?> -->
+    <?php if (defined('SITE_ENV') && SITE_ENV == 'PDC') : ?>
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-71589028-2"></script>
@@ -49,7 +49,7 @@
         </noscript>
         <!-- End Facebook Pixel Code -->
 
-    <!-- <?php elseif (defined('SITE_ENV') && SITE_ENV == 'IOT' || SITE_ENV == 'LOCAL') : ?> -->
+    <?php elseif (defined('SITE_ENV') && SITE_ENV == 'IOT' || SITE_ENV == 'LOCAL') : ?>
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-W0E2SCW7Y0"></script>

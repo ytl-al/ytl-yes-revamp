@@ -49,20 +49,44 @@
 <!-- Vue Wrapper STARTS -->
 <div id="main-vue" style="display: none;">
     <!-- Banner Start -->
-    <section id="grey-innerbanner">
+    <section id="grey-innerbanner" v-if='(upFrontPayment=="true")'>
+        <div class="container">
+            <ul class="wizard">
+                <li ui-sref="firstStep" class="completed">
+                    <span>1. {{ renderText('strVerification') }}</span>
+                </li>
+                <!-- <li ui-sref="secondStep" class="completed">
+                    <span>2. {{ renderText('strSelectSimType') }}</span>
+                </li> -->
+                <li ui-sref="secondStep" class="completed">
+                    <span>3. {{ renderText('strDelivery') }}</span>
+                </li>
+                <li ui-sref="thirdStep" class="completed">
+                    <span>4. {{ renderText('strReview') }}</span>
+                </li>
+                <li ui-sref="fourthStep" class="completed">
+                    <span>5. {{ renderText('strPayment') }}</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section id="grey-innerbanner" v-else>
         <div class="container">
             <ul class="wizard">
                 <li ui-sref="firstStep" class="completed">
                     <span>1. {{ renderText('strVerification') }}</span>
                 </li>
                 <li ui-sref="secondStep" class="completed">
-                    <span>2. {{ renderText('strDelivery') }}</span>
+                    <span>2. {{ renderText('strSelectSimType') }}</span>
                 </li>
                 <li ui-sref="thirdStep" class="completed">
-                    <span>3. {{ renderText('strReview') }}</span>
+                    <span>3. {{ renderText('strDelivery') }}</span>
                 </li>
                 <li ui-sref="fourthStep" class="completed">
-                    <span>4. {{ renderText('strPayment') }}</span>
+                    <span>4. {{ renderText('strReview') }}</span>
+                </li>
+                <li ui-sref="fifthStep" class="completed">
+                    <span>5. {{ renderText('strPayment') }}</span>
                 </li>
             </ul>
         </div>
@@ -284,9 +308,12 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
-                currentStep: 4,
+                simType:'',
+                dealer: [],
+                currentStep: 5,
                 pageValid: false,
                 allowSubmit: false,
+                upFrontPayment:'false',
                 orderSummary: {
                     plan: {},
                     due: {
@@ -534,6 +561,8 @@
                 apiLocale: 'EN',
                 pageText: {
                     strVerification: { 'en-US': 'Verification', 'ms-MY': 'Pengesahan', 'zh-hans': 'Verification' },
+                    strSelectSimType: { 'en-US': 'Select Sim Type', 'ms-MY': 'Select Sim Type', 'zh-hans': 'Select Sim Type' },
+
                     strDelivery: { 'en-US': 'Delivery Details', 'ms-MY': 'Butiran Penghantaran', 'zh-hans': 'Delivery Details' },
                     strReview: { 'en-US': 'Review', 'ms-MY': 'Semak', 'zh-hans': 'Review' },
                     strPayment: { 'en-US': 'Payment Info', 'ms-MY': 'Maklumat Pembayaran', 'zh-hans': 'Payment Info' },
@@ -614,7 +643,6 @@
             methods: {
                 pageInit: function() {
                     var self = this;
-
                     if (ywos.validateSession(self.currentStep)) {
                         self.pageValid = true;
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
@@ -623,6 +651,11 @@
 
                         self.isTargetedPromo = ywos.lsData.isTargetedPromo;
                         self.tpMeta = ywos.lsData.tpMeta;
+                        self.dealer = ywos.lsData.meta.dealer;
+                        self.upFrontPayment = ywos.lsData.meta.customerDetails.upFrontPayment;
+                        
+                        
+
                     } else {
                         ywos.redirectToPage('cart');
                     }
@@ -742,7 +775,7 @@
                         'yos_order_id': self.orderResponse.orderNumber
                     };
                     // console.log(self.orderResponse);
-                    axios.post(apiEndpointURL + '/check-order-payment-status'+ '?nonce='+yesObj.nonce, params)
+                    axios.post(apiEndpointURL + '/check-order-payment-status' + '?nonce='+yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
                             var responseCode = data.responseCode;
@@ -845,6 +878,13 @@
                 },
                 ajaxCreateYOSOrder: function() {
                     var self = this;
+                     if(ywos.lsData.meta.customerDetails.upFrontPayment=='true'){
+                    self.upFontpayemtTotal=(self.paymentInfo.totalAmount)-(self.orderSummary.due.foreignerDeposit)
+                    }else{
+                        self.upFontpayemtTotal=self.paymentInfo.totalAmount
+                    }
+                    // alert(self.upFontpayemtTotal)
+                    // alert(self.paymentInfo.paymentMethod);
                     var params = {
                         'session_key'       : ywos.lsData.sessionKey,
 
@@ -854,13 +894,13 @@
                         'gender'            : self.deliveryInfo.gender,
                         'email'             : self.deliveryInfo.email,
                         'login_yes_id'      : '',
-                        'security_type'     : self.deliveryInfo.securityType,
+                        'security_type'     : self.deliveryInfo.securityType,   
                         'security_id'       : self.deliveryInfo.securityId,
                         'school_name'       : '',
                         'school_code'       : '',
                         'university_name'   : '',
-                        'dealer_code'       : '',
-                        'dealer_login_id'   : '',
+                        'dealer_code'       : self.dealer.dealer_code,
+                        'dealer_login_id'   : self.dealer.dealer_id,
 
                         'plan_name'         : self.orderSummary.plan.planName,
                         'plan_type'         : self.orderSummary.plan.planType,
@@ -879,7 +919,7 @@
                         'process_name'      : self.paymentInfo.processName,
                         'amount'            : roundAmount(self.paymentInfo.amount, 2),
                         'amount_sst'        : roundAmount(self.paymentInfo.sst, 2),
-                        'total_amount'      : roundAmount(self.paymentInfo.totalAmount, 2),
+                        'total_amount'      : roundAmount(self.upFontpayemtTotal, 2),
                         'bank_code'         : self.paymentInfo.bankCode,
                         'bank_name'         : self.paymentInfo.bankName,
                         'card_number'       : self.paymentInfo.cardNumber,
@@ -890,9 +930,11 @@
                         'card_expiry_year'  : self.paymentInfo.cardExpiryYear,
                         'ippType'           : self.paymentInfo.ippType,
                         'locale'            : self.apiLocale,
-                        'walletType'        : self.paymentInfo.walletType
+                        'walletType'        : self.paymentInfo.walletType,
+                        'esim'              : ywos.lsData.meta.esim,
+                        'applicationSource'  : "MYOS"
                     };
-                    axios.post(apiEndpointURL + '/create-yos-order'+ '?nonce='+yesObj.nonce, params)
+                    axios.post(apiEndpointURL + '/create-yos-order' + '?nonce='+yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
                             self.orderResponse = data;

@@ -1,10 +1,11 @@
+  
 <?php include('header-ywos.php'); ?>
 
 
 <!-- Vue Wrapper STARTS -->
 <div id="main-vue" style="display: none;">
     <!-- Banner Start -->
-    <section id="grey-innerbanner">
+    <section id="grey-innerbanner" v-if='(upFrontPayment=="true")'>
         <div class="container">
             <ul class="wizard">
                 <li ui-sref="firstStep" class="completed">
@@ -22,6 +23,28 @@
             </ul>
         </div>
     </section>
+    <section id="grey-innerbanner" v-else>
+        <div class="container">
+            <ul class="wizard">
+                <li ui-sref="firstStep" class="completed">
+                    <span>1. {{ renderText('strVerification') }}</span>
+                </li>
+                <li ui-sref="secondStep" class="completed">
+                    <span>2. {{ renderText('strSelectSimType') }}</span>
+                </li>
+                <li ui-sref="thirdStep" class="completed">
+                    <span>3. {{ renderText('strDelivery') }}</span>
+                </li>
+                <li ui-sref="fourthStep">
+                    <span>4. {{ renderText('strReview') }}</span>
+                </li>
+                <li ui-sref="fifthStep">
+                    <span>5. {{ renderText('strPayment') }}</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
     <!-- Banner End -->
 
     <!-- Body STARTS -->
@@ -54,12 +77,16 @@
                     <div class="row gx-5">
                         <div class="col-lg-7">
                             <div class="layer-delivery">
-                                <div class="d-none d-lg-block">
+                            <div class="d-none d-lg-block " v-if='(simType=="eSIM")' >
+                            <h1>{{ renderText('strDeliveryeSim') }}</h1>
+                                    
+                                </div>
+                                <div class="d-none d-lg-block" v-else='(simType=="physicalSIM")'>
                                     <h1>{{ renderText('strDelivery') }}</h1>
                                     <p class="sub mb-4">{{ renderText('strDeliverySub') }}</p>
                                 </div>
 
-                                <div class="form-group mb-4">
+                                <div class="form-group mb-4 mt-3">
                                     <label class="form-label" for="input-name">* {{ renderText('labelFullName') }}</label>
                                     <div class="input-group align-items-center">
                                         <input type="text" class="form-control" id="input-name" name="name" v-model="deliveryInfo.name" @input="watchAllowNext" placeholder="" required />
@@ -132,7 +159,7 @@
                                             <div class="invalid-feedback mt-1" id="em-postcode"></div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-4">
                                         <div class="form-group mb-4">
                                             <label class="form-label" for="select-state">* {{ renderText('labelState') }}</label>
                                             <div class="input-group align-items-center">
@@ -144,8 +171,8 @@
                                             <div class="invalid-feedback mt-1" id="em-state"></div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group mb-4">
+                                    <div class="col-lg-4">
+                                    <div class="form-group mb-4">
                                     <label class="form-label">* {{ renderText('labelCity') }}</label>
                                     <div class="input-group align-items-center">
                                         <select class="form-select" id="select-city" name="city" data-live-search="true" v-model="deliveryInfo.city" @change="watchAllowNext" :disabled="!allowSelectCity" required>
@@ -154,6 +181,10 @@
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-city"></div>
                                 </div>
+
+                                    </div>
+                                </div>
+                                
                                 <div class="form-group mb-4 d-none">
                                     <label class="form-label" for="textarea-deliveryNotes">Delivery Notes (optional)</label>
                                     <div class="input-group align-items-center">
@@ -162,7 +193,7 @@
                                     </div>
                                     <div class="invalid-feedback mt-1" id="em-deliveryNotes"></div>
                                 </div>
-                                <div class="address-accuracy mb-4">
+                                <div class="address-accuracy mb-4" v-if='(simType=="false")'>
                                     <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/info-red-icon.png" alt="" class="float-start me-3">
                                     <div class="ps-5">
                                         <h1>{{ renderText('strAddressNoteTitle') }}</h1>
@@ -320,9 +351,11 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
-                currentStep: 2,
+                currentStep: 3,
+                simType:'',
                 pageValid: false,
                 isBillingDifferent: false,
+                upFrontPayment:'false',
                 orderSummary: {
                     plan: {},
                     due: {
@@ -508,12 +541,18 @@
                 allowSelectCity: false,
                 allowSubmit: false,
                 allowDOB: false, 
-                allowGender: false, 
+                allowGender: false,
+            
 
                 apiLocale: 'EN', 
                 pageText: {
                     strVerification: { 'en-US': 'Verification', 'ms-MY': 'Pengesahan', 'zh-hans': 'Verification' },
+                    strSelectSimType: { 'en-US': 'Select Sim Type', 'ms-MY': 'Pengesahan', 'zh-hans': 'Select Sim Type' },
+
+
                     strDelivery: { 'en-US': 'Delivery Details', 'ms-MY': 'Butiran Penghantaran', 'zh-hans': 'Delivery Details' },
+                    strDeliveryeSim: { 'en-US': 'Billing  Details', 'ms-MY': 'Billing  Details', 'zh-hans': 'Billing  Details' },
+
                     strReview: { 'en-US': 'Review', 'ms-MY': 'Semak', 'zh-hans': 'Review' },
                     strPayment: { 'en-US': 'Payment Info', 'ms-MY': 'Maklumat Pembayaran', 'zh-hans': 'Payment Info' },
 
@@ -565,8 +604,11 @@
                     if (ywos.validateSession(self.currentStep)) {
                         self.pageValid = true;
                         self.orderSummary = ywos.lsData.meta.orderSummary;
+                        self.simType=(ywos.lsData.meta.esim == 'true')? 'eSIM': 'physicalSIM';
                         self.updateFields();
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
+                        self.upFrontPayment = ywos.lsData.meta.customerDetails.upFrontPayment;
+                        
                         // toggleOverlay(false);
                         
                         self.checkPreDefReferralCode();
@@ -862,6 +904,7 @@
                     self.deliveryInfo.stateCode = self.getStateCode(self.deliveryInfo.state);
 
                     ywos.lsData.meta.completedStep = self.currentStep;
+                    
                     ywos.lsData.meta.deliveryInfo = self.deliveryInfo;
                     ywos.updateYWOSLSData();
 

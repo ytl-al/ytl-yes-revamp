@@ -234,7 +234,8 @@
 <?php require_once('includes/footer.php'); ?>
 
 <?php
-    $file = dirname(__FILE__).'/'.'postcodes.json';
+
+    $file = dirname(__FILE__).'/'.'postcodes.json'; 
     $postcode = json_decode(file_get_contents($file));
 
     $code = [];
@@ -245,15 +246,15 @@
         $code[$item->code] = $item;
         if(!@in_array($item->state,$state)){
             $state[] = $item->state;
+			// $item->state='MALAYSIA';
         }
         if(!@in_array($item->city,$city)){
             $city[] = $item->city;
         }
-        if(!@in_array($item->city,$stateCity[$item->state])){
-            $stateCity[$item->state][] = $item->city;
+        if(!isset($stateCity[$item->state]) || !@in_array($item->city,$stateCity[$item->state])){
+            $stateCity[$item->state][]= $item->city;
         }
     }
-
 ?>
 
 <script type="text/javascript">
