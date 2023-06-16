@@ -221,135 +221,133 @@ $path = plugin_basename(__DIR__).'/menu.json';
                                     </li>
                                 </ul>
                                 <ul class="navbar-nav">
-        <li class="nav-item dropdown mega-dropdown">
-            <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Get Help', 'yes.my'); ?></a>
-            <ul class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown" id="gethelp">
+                                    <li class="nav-item dropdown mega-dropdown">
+                                        <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Get Help', 'yes.my'); ?></a>
+                                        <ul class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown" id="gethelp">
 
-                <div class="row mx-0">
-                    <div class="col-md-12 col-lg-8 get_help mobile-none">
-                        <li class="dropdown-header">tools & services</li>
-                        <div class="row">
-                            <div class="col-6 col-md-6">
-                                <li class="mega-get-help">
-                                    <img src="/wp-content/uploads/2023/03/vector-Icon.png" alt="...">
-                                    <div class="">
-                                        <h6>Coverage Checker</h6>
-                                        <p>Check Yes network coverage in Malaysia.</p>
-                                    </div>
-                                </li>
+                                            <div class="row mx-0">
+                                                <div class="col-md-12 col-lg-8 get_help mobile-none">
+                                                    <li class="dropdown-header">tools & services</li>
+                                                    <div class="row">
+                                                        <div class="col-6 col-md-6">
+                                                            <li class="mega-get-help">
+                                                                <img src="/wp-content/uploads/2023/03/vector-Icon.png" alt="...">
+                                                                <div class="">
+                                                                    <h6>Coverage Checker</h6>
+                                                                    <p>Check Yes network coverage in Malaysia.</p>
+                                                                </div>
+                                                            </li>
 
-                            </div>
-                            <div class="col-6 col-md-6">
-                                <li class="mega-get-help">
-                                    <img src="/wp-content/uploads/2023/03/Vector.png" alt="...">
-                                    <div class="">
-                                        <h6>Speed Test</h6>
-                                        <p>Measure your internet connection speed.</p>
-                                    </div>
-                                </li>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6 col-md-6">
+                                                        </div>
+                                                        <div class="col-6 col-md-6">
+                                                            <li class="mega-get-help">
+                                                                <img src="/wp-content/uploads/2023/03/Vector.png" alt="...">
+                                                                <div class="">
+                                                                    <h6>Speed Test</h6>
+                                                                    <p>Measure your internet connection speed.</p>
+                                                                </div>
+                                                            </li>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-6 col-md-6">
 
-                                <li class="mega-get-help">
-                                    <img src="/wp-content/uploads/2023/03/vector2-Icons.png" alt="...">
-                                    <div class="">
-                                        <h6>Supported Devices</h6>
-                                        <p>Browse devices compatible with 4G LTE and 5G
-                                            technology.</p>
-                                    </div>
-                                </li>
+                                                            <li class="mega-get-help">
+                                                                <img src="/wp-content/uploads/2023/03/vector2-Icons.png" alt="...">
+                                                                <div class="">
+                                                                    <h6>Supported Devices</h6>
+                                                                    <p>Browse devices compatible with 4G LTE and 5G
+                                                                        technology.</p>
+                                                                </div>
+                                                            </li>
 
-                            </div>
-                            <div class="col-6 col-md-6">
-                                <li class="mega-get-help">
-                                    <img src="/wp-content/uploads/2023/03/tracker_order-Icons.png" alt="...">
-                                    <div class="">
-                                        <h6>Track Order</h6>
-                                        <p>Check the status of a Yes order.</p>
-                                    </div>
-                                </li>
-                            </div>
-                        </div>
+                                                        </div>
+                                                        <div class="col-6 col-md-6">
+                                                            <li class="mega-get-help">
+                                                                <img src="/wp-content/uploads/2023/03/tracker_order-Icons.png" alt="...">
+                                                                <div class="">
+                                                                    <h6>Track Order</h6>
+                                                                    <p>Check the status of a Yes order.</p>
+                                                                </div>
+                                                            </li>
+                                                        </div>
+                                                    </div>
 
-                        <li class="dropdown-header">LOCATE us</li>
-                        <div class="row">
-                            <div class="col-6 col-md-6">
+                                                    <li class="dropdown-header">LOCATE us</li>
+                                                    <div class="row">
+                                                        <div class="col-6 col-md-6">
 
-                                <li class="mega-get-help">
-                                    <img src="/wp-content/uploads/2023/03/location_Icons.png" alt="...">
-                                    <div class="">
-                                        <h6>Store Locator</h6>
-                                        <p>Find the nearest Yes store.</p>
-                                    </div>
-                                </li>
+                                                            <li class="mega-get-help">
+                                                                <img src="/wp-content/uploads/2023/03/location_Icons.png" alt="...">
+                                                                <div class="">
+                                                                    <h6>Store Locator</h6>
+                                                                    <p>Find the nearest Yes store.</p>
+                                                                </div>
+                                                            </li>
 
-                            </div>
-                            <div class="col-6 col-md-6">
-                                <li class="mega-get-help">
-                                    <img src="/wp-content/uploads/2023/03/roadshow_Icons.png" alt="...">
-                                    <div class="">
-                                        <h6>Roadshow Locations</h6>
-                                        <p>Location of the Yes Roadshow.</p>
-                                    </div>
-                                </li>
-                            </div>
-                        </div>
-                        <div class="box">
-                            <li><img src="/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> Email us</a></li>
-                            <li><img src="/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"> Chat to Support</a></li>
-                            <li><img src="/wp-content/uploads/2023/04/message.svg" alt="..."><a href="/talk-to-us/"> Talk to Us</a></li></li>
-                        </div>
-                    </div>
-                    <div class="col-auto get_help-mobile dasktop-none">
-                        <ul>
-                           <li class="dropdown-header-mobile">tools & services</li>
-                           <li><a href="<?php echo get_site_url() . '/coverage/' ?>"><img src="/wp-content/uploads/2023/03/Coverage.svg" alt="..."> Coverage Checker</a></li>
-                           <li><a href="<?php echo get_site_url() . '/speed-test/' ?>"><img src="/wp-content/uploads/2023/03/Speed.svg" alt="..."> Speed Test</a></li>
-                           <li><a href="<?php echo get_site_url() . '/supported-devices/' ?>"><img src="/wp-content/uploads/2023/03/Supported-Devices.svg" alt="..."> Supported Devices</a></li>
-                           <li><a href="<?php echo get_site_url() . '/trackorder/' ?>"><img src="/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Track Order</a></li>
-                           <li><a href="<?php echo get_site_url() . '/a3-charger-replacement/' ?>"><img src="/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Product Notice</a></li>
-                        </ul>
-                        <ul>
-                            <li class="mt-3 dropdown-header-mobile">LOCATE us</li>
-                            <li><a href="<?php echo get_site_url() . '/store-locator/' ?>"><img src="/wp-content/uploads/2023/03/Store-Locator.svg" alt="..."> Store Locator</a></li>
-                            <li><a href="<?php echo get_site_url() . '/roadshow/' ?>"><img src="/wp-content/uploads/2023/03/Roadshow-Locations.svg" alt="..."> Roadshow Locations</a></li>
-                        </ul>
-                        <div class="box">
-                            <ul>
-                                <li><img src="/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> Email us</a></li>
-                                <li><img src="/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"> Chat to Support</a></li>
-                                <li><img src="/wp-content/uploads/2023/04/message.svg" alt="..."> Talk to Us</a></li></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-lg-4 gethelp_right_sec">
-                        <li class="dropdown-header">most asked questions</li>
-                        <li class="mega-get-help">
-                            <img src="/wp-content/uploads/2023/03/Rectangle-1393.png" alt="...">
-                            <div class="">
-                                <h6>Switch to Yes</h6>
-                                <p>Switch to Yes while keeping your number.</p>
-                            </div>
-                        </li>
-                        <li class="mega-get-help">
-                            <h6>Activate SIM card</h6>
-                        </li>
-                        <li class="mega-get-help">
-                            <h6>Payment method</h6>
-                        </li>
-                        <li class="mega-get-help">
-                            <h6>Get databack</h6>
-                        </li>
-                        <li class="mega-get-help"><a href="#">GO TO HELP CENTRE <i class="fas fa-chevron-right"></i></a></li>
-                    </div>
-                </div>
-
-
-            </ul>
-        </li>
-    </ul>
+                                                        </div>
+                                                        <div class="col-6 col-md-6">
+                                                            <li class="mega-get-help">
+                                                                <img src="/wp-content/uploads/2023/03/roadshow_Icons.png" alt="...">
+                                                                <div class="">
+                                                                    <h6>Roadshow Locations</h6>
+                                                                    <p>Location of the Yes Roadshow.</p>
+                                                                </div>
+                                                            </li>
+                                                        </div>
+                                                    </div>
+                                                    <div class="box">
+                                                        <li><img src="/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> Email us</a></li>
+                                                        <li><img src="/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"> Chat to Support</a></li>
+                                                        <li><img src="/wp-content/uploads/2023/04/message.svg" alt="..."><a href="/talk-to-us/"> Talk to Us</a></li></li>
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto get_help-mobile dasktop-none">
+                                                    <ul>
+                                                    <li class="dropdown-header-mobile">tools & services</li>
+                                                    <li><a href="<?php echo get_site_url() . '/coverage/' ?>"><img src="/wp-content/uploads/2023/03/Coverage.svg" alt="..."> Coverage Checker</a></li>
+                                                    <li><a href="<?php echo get_site_url() . '/speed-test/' ?>"><img src="/wp-content/uploads/2023/03/Speed.svg" alt="..."> Speed Test</a></li>
+                                                    <li><a href="<?php echo get_site_url() . '/supported-devices/' ?>"><img src="/wp-content/uploads/2023/03/Supported-Devices.svg" alt="..."> Supported Devices</a></li>
+                                                    <li><a href="<?php echo get_site_url() . '/trackorder/' ?>"><img src="/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Track Order</a></li>
+                                                    <li><a href="<?php echo get_site_url() . '/a3-charger-replacement/' ?>"><img src="/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Product Notice</a></li>
+                                                    </ul>
+                                                    <ul>
+                                                        <li class="mt-3 dropdown-header-mobile">LOCATE us</li>
+                                                        <li><a href="<?php echo get_site_url() . '/store-locator/' ?>"><img src="/wp-content/uploads/2023/03/Store-Locator.svg" alt="..."> Store Locator</a></li>
+                                                        <li><a href="<?php echo get_site_url() . '/roadshow/' ?>"><img src="/wp-content/uploads/2023/03/Roadshow-Locations.svg" alt="..."> Roadshow Locations</a></li>
+                                                    </ul>
+                                                    <div class="box">
+                                                        <ul>
+                                                            <li><img src="/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> Email us</a></li>
+                                                            <li><img src="/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"> Chat to Support</a></li>
+                                                            <li><img src="/wp-content/uploads/2023/04/message.svg" alt="..."> Talk to Us</a></li></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-lg-4 gethelp_right_sec">
+                                                    <li class="dropdown-header">most asked questions</li>
+                                                    <li class="mega-get-help">
+                                                        <img src="/wp-content/uploads/2023/03/Rectangle-1393.png" alt="...">
+                                                        <div class="">
+                                                            <h6>Switch to Yes</h6>
+                                                            <p>Switch to Yes while keeping your number.</p>
+                                                        </div>
+                                                    </li>
+                                                    <li class="mega-get-help">
+                                                        <h6>Activate SIM card</h6>
+                                                    </li>
+                                                    <li class="mega-get-help">
+                                                        <h6>Payment method</h6>
+                                                    </li>
+                                                    <li class="mega-get-help">
+                                                        <h6>Get databack</h6>
+                                                    </li>
+                                                    <li class="mega-get-help"><a href="#">GO TO HELP CENTRE <i class="fas fa-chevron-right"></i></a></li>
+                                                </div>
+                                            </div>
+                                        </ul>
+                                    </li>
+                                </ul>
                             </div>
                             <!-- <div class="d-flex align-items-center">
                                 <a href="/selfcare" class="pink-btn" target="_blank"><?php echo esc_html__('Get Started', 'yes.my'); ?></a>
