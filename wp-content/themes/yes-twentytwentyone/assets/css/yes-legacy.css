@@ -1,0 +1,137 @@
+.light,
+.light p,
+.light span,
+.light a,
+.light .shoutout,
+.light .shoutout-note,
+p.light,
+span.light,
+a.light,
+.shoutout.light,
+.shoutout-note.light {
+    color: #fff;
+}
+
+section.flexbox,
+.flexbox {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: block;
+    font-size: 16px;
+    position: relative;
+    width: 100%;
+}
+
+.flexbox>div {
+    display: flex;
+    width: 100%;
+}
+
+.flexbox>div>div {
+    width: 100%;
+}
+
+.flexbox .fullscreen {
+    height: auto;
+    min-height: 100vh;
+}
+
+.flexbox .centerize {
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.flexbox .center-text {
+    text-align: center;
+}
+
+.flexbox .fullscreen {
+    padding: 15px;
+}
+
+.flexbox .shoutout {
+    font-size: 2.5em;
+    line-height: 1.35;
+}
+
+.shoutout {
+    font-weight: 300;
+    color: #333;
+}
+
+.shoutout {
+    font-size: 2.5em;
+    line-height: 1.35;
+}
+
+.flexbox .shoutout {
+    font-size: 2.5em;
+    line-height: 1.35;
+}
+
+.shoutout.lg {
+    font-size: 2em;
+}
+
+.shoutout-note {
+    font-weight: 300;
+    color: #333;
+}
+
+.shoutout-note {
+    font-size: 1.5em;
+    line-height: 1.5;
+}
+
+.flexbox .shoutout-note {
+    font-size: 1.5em;
+    line-height: 1.35;
+}
+
+@media (min-width: 768px) {
+    .shoutout {
+        font-size: 3em;
+        line-height: 1.25;
+    }
+    .shoutout.lg {
+        font-size: 3.5em;
+    }
+}
+
+@media (min-width: 992px) {
+    .flexbox {
+        font-size: 16px;
+    }
+    .flexbox>div {
+        padding: 0px;
+    }
+    .shoutout {
+        font-size: 4em;
+        line-height: 1.25;
+    }
+    .shoutout.lg {
+        font-size: 3.8em;
+    }
+    .shoutout-note {
+        font-size: 1.5em;
+        line-height: 1.25;
+    }
+}
+
+@media (min-width: 1200px) {
+    .flexbox .fullscreen {
+        height: 100vh;
+        padding: 40px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .shoutout {
+        font-size: 4em;
+    }
+    .shoutout.lg {
+        font-size: 4.5em;
+    }
+}
