@@ -1897,7 +1897,7 @@ class Ytl_Pull_Data_Public
 		}
 	}
 
-	public function update_order_record($session_key = '', $xpay_order_response = '', $is_xpay_success = 0, $xpay_order_meta) 
+	public function update_order_record($session_key = '', $xpay_order_response = '', $is_xpay_success = 0, $xpay_order_meta = []) 
 	{
 		global $wpdb;
 		$table_name = $wpdb->prefix.'ywos_orders';
