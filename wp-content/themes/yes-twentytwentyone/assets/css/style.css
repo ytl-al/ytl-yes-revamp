@@ -1580,7 +1580,7 @@ body.show-overlay .layer-overlay {
 } */
 
 .top-tabs-container ul#tabNav li:first-child {
-    display: none !important;
+    /* display: none !important; */
 }
 .get_help-mobile .box ul {
     display: inline-block;
