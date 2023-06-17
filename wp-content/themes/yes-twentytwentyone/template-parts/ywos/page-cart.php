@@ -1,6 +1,5 @@
 <?php include('header-no-menu.php'); ?>
 
-
 <style type="text/css">
     #grey-innerbanner {
         background-color: #F9F7F4;
@@ -484,8 +483,6 @@
                                 </div>
                                 <div class="col-lg-6 col-12 pt-lg-4 pb-1 px-4 px-lg-5 ps-lg-4">
                                     <h3 class="mt-3 mt-lg-0">{{ orderSummary.plan.displayName }}</h3>
-                                    
-
                                     <p class="mb-3" v-if="orderSummary.plan.internetData">RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(0) }} for {{ orderSummary.plan.internetData }}</p>
                                     <div class="package-info" v-if="packageInfos.length">
                                         <div class="row">
@@ -923,7 +920,7 @@
                     var userID = self.tpMeta.userID;
                     var promoID = self.tpMeta.promoID;
 
-                    axios.post(apiEndpointURL + '/tp-url-check', {
+                    axios.post(apiEndpointURL + '/tp-url-check' + '?nonce='+yesObj.nonce, {
                             'unique_id': userID,
                             'promo_id': promoID
                         })
@@ -949,7 +946,7 @@
                         .catch((error) => {
                             self.tpValidation = 'not_valid';
                             toggleOverlay(false);
-                            console.log(error);
+                            // console.log(error);
                         })
                         .finally(() => {
                             // console.log('finally');
@@ -957,9 +954,10 @@
                 }, 
                 ajaxGetPlanData: function() {
                     var self = this;
-                    axios.get(apiEndpointURL + '/get-plan-by-id/' + self.planID)
+                    axios.get(apiEndpointURL + '/get-plan-by-id/' + self.planID + '/?nonce='+yesObj.nonce)
                         .then((response) => {
                             var data = response.data;
+                            // console.log(data);
                             if (data.internetData == '∞') {
                                 data.internetData = 'Unlimited';
                             }
@@ -1143,7 +1141,7 @@
                 },
                 ajaxValidateLogin: function() {
                     var self = this;
-                    axios.post(apiEndpointURL + '/validate-login', {
+                    axios.post(apiEndpointURL + '/validate-login' + '?nonce='+yesObj.nonce, {
                             'yes_number': self.loginInfo.yes_number,
                             'password': self.loginInfo.password,
                             'auth_type': self.loginInfo.type, 
@@ -1201,7 +1199,7 @@
                 },
                 ajaxGenerateOTPForLogin: function() {
                     var self = this;
-                    axios.post(apiEndpointURL + '/generate-otp-for-login', {
+                    axios.post(apiEndpointURL + '/generate-otp-for-login' +'?nonce='+yesObj.nonce, {
                             'yes_number': self.login.input.otp.yesNumber, 
                             'locale': self.apiLocale
                         })

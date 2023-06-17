@@ -11,13 +11,16 @@
                     <span>1. {{ renderText('strVerification') }}</span>
                 </li>
                 <li ui-sref="secondStep">
-                    <span>2. {{ renderText('strDelivery') }}</span>
+                    <span>2. {{ renderText('strSelectSimType') }}</span>
                 </li>
                 <li ui-sref="thirdStep">
-                    <span>3. {{ renderText('strReview') }}</span>
+                    <span>3. {{ renderText('strDelivery') }}</span>
                 </li>
                 <li ui-sref="fourthStep">
-                    <span>4. {{ renderText('strPayment') }}</span>
+                    <span>4. {{ renderText('strReview') }}</span>
+                </li>
+                <li ui-sref="fifthStep">
+                    <span>5. {{ renderText('strPayment') }}</span>
                 </li>
             </ul>
         </div>
@@ -38,7 +41,7 @@
                 </div>
                 <form class="col-lg-7 col-12 order-lg-1 mt-4 mt-lg-0 needs-validation" @submit="verificationSubmit">
                     <div>
-                        <h1 class="d-none d-lg-block">{{ renderText('strVerification') }}</h1>
+                        <h1 class="d-none d-lg-block" >{{ renderText('strVerification') }}</h1>
                         <p class="sub mb-4">{{ renderText('strFillIn') }}</p>
                         <div>
                             <h2>{{ renderText('strIDVerification') }}</h2>
@@ -47,7 +50,7 @@
                                     <div class="form-group">
                                         <label class="form-label" for="select-securityType">* {{ renderText('strIDType') }}</label>
                                         <select class="form-select" id="select-securityType" v-model="customerDetails.securityType" @change="watchSecurityType" :disabled="!allowSecurityType">
-                                            <option value="" disabled="disabled" selected="selected">{{ renderText('strIDTypeSelect') }}</option>
+                                            <!-- <option value="" disabled="disabled" selected="selected">{{ renderText('strIDTypeSelect') }}</option> -->
                                             <option value="NRIC">{{ renderText('strIDNRIC') }}</option>
                                             <option value="PASSPORT">{{ renderText('strIDPassport') }}</option>
                                             <option v-if="isLoggedIn && customerDetails.securityType == 'BRN'" value="BRN">BRN</option>
@@ -87,7 +90,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-12" v-if="!isLoggedIn">
-                                    <button type="button" class="white-btn2 mt-3 mt-lg-0" v-on:click="generateOTPForGuestLogin" :disabled="!allowRequestOTP">{{ requestOTPText }}</button>
+                                    <button type="button" class="white-btn3 mt-3 mt-lg-0" v-on:click="ajaxGenerateOTPForGuestLoginNew  " :disabled="!allowRequestOTP">{{ requestOTPText }}</button>
                                 </div>
                                 <div class="invalid-feedback mt-1" id="em-otpPhoneNumber"></div>
                             </div>
@@ -102,14 +105,17 @@
                                     <div class="form-group">
                                         <input type="password" class="form-control" id="input-otpPassword" v-model="verify.input.otpPassword" @input="watchAllowNext" maxlength="6" placeholder="******" />
                                     </div>
+                                <p class="mb-3 panel-otpMessage_error" style="display: none;"><span class="span-message"> <span class="span-timer">Try Again...!</span>.</p>
                                 </div>
                                 <p class="mb-3 panel-otpMessage" style="display: none;"><span class="span-message">Your TAC code has been sent.</span> {{ renderText('strTacCodeValid')}} <span class="span-timer">5:00</span>.</p>
+                                <div class="invalid-feedback mt-1" id="em-otpPassword"></div>
+                                <p class="mb-3 OTP_Message_not_genrated" style="display: none;"><span class="span-message">Invalid Details</p>
                                 <div class="invalid-feedback mt-1" id="em-otpPassword"></div>
                             </div>
                         </div>
 
                         <div class="row mb-4">
-                            <div class="col-lg-6 col-12">
+                            <div class="col-lg-8 col-12">
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input" value="" id="input-agree" v-model="isAgree" @change="watchAgree" />
                                     <label class="form-check-label label-small" for="input-agree" v-html="renderText('strAgree')"></label>
@@ -138,8 +144,10 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
+                simType: '',
                 currentStep: 1,
                 pageValid: false,
+                upFrontPayment:'false',
                 customerDetails: {
                     securityType: '',
                     securityId: '',
@@ -151,6 +159,7 @@
                 allowSecurityType: true,
                 allowSecurityId: true,
                 allowPhoneNumber: true,
+
                 orderSummary: {
                     plan: {},
                     due: {
@@ -192,6 +201,8 @@
                 apiLocale: 'EN', 
                 pageText: {
                     strVerification: { 'en-US': 'Verification', 'ms-MY': 'Pengesahan', 'zh-hans': 'Verification' },
+                    strSelectSimType: { 'en-US': 'Select Sim Type', 'ms-MY': 'Select Sim Type', 'zh-hans': 'Select Sim Type' },
+
                     strDelivery: { 'en-US': 'Delivery Details', 'ms-MY': 'Butiran Penghantaran', 'zh-hans': 'Delivery Details' },
                     strReview: { 'en-US': 'Review', 'ms-MY': 'Semak', 'zh-hans': 'Review' },
                     strPayment: { 'en-US': 'Payment Info', 'ms-MY': 'Maklumat Pembayaran', 'zh-hans': 'Payment Info' },
@@ -201,12 +212,12 @@
                     strIDVerification: { 'en-US': 'ID Verification', 'ms-MY': 'Pengesahan ID', 'zh-hans': 'ID Verification' },
                     strIDType: { 'en-US': 'ID Type', 'ms-MY': 'Jenis ID', 'zh-hans': 'ID Type' },
                     strIDTypeSelect: { 'en-US': 'Select ID Type', 'ms-MY': 'Pilih jenis ID', 'zh-hans': 'Select ID Type' },
-                    strIDNRIC: { 'en-US': 'NRIC', 'ms-MY': 'Kad Pengenalan', 'zh-hans': 'NRIC' },
+                    strIDNRIC: { 'en-US': 'MyKad ', 'ms-MY': 'Kad Pengenalan', 'zh-hans': 'MyKad ' },
                     strIDPassport: { 'en-US': 'Passport', 'ms-MY': 'Pasport', 'zh-hans': 'Passport' },
                     strIDNumber: { 'en-US': 'ID/Passport Number', 'ms-MY': 'Nombor KP/Pasport', 'zh-hans': 'ID/Passport Number' },
                     
                     strMobileVerification: { 'en-US': 'Mobile Verification', 'ms-MY': 'Pengesahan Nombor Mudah Alih', 'zh-hans': 'Mobile Verification' },
-                    strMobileStep1: { 'en-US': '<strong>Step 1</strong>: Key in your mobile number', 'ms-MY': '<strong>Langkah</strong> 1: Masukkan nombor telefon mudah alih anda', 'zh-hans': '<strong>Step 1:</strong>: Key in your mobile number' },
+                    strMobileStep1: { 'en-US': '<strong>Step 1</strong>: Key in your mobile number', 'ms-MY': '<strong>Langkah 1</strong>: Masukkan nombor telefon mudah alih anda', 'zh-hans': '<strong>Step 1</strong>: Key in your mobile number' },
                     strMobileStep2: { 'en-US': '<strong>Step 2</strong>: Insert your TAC code and verify', 'ms-MY': '<strong>Langkah 2</strong>: Masukkan TAC dan sahkan', 'zh-hans': '<strong>Step 2</strong>: Insert your TAC code and verify' },
                     strRequestTAC: { 'en-US': 'Request TAC', 'ms-MY': 'Minta TAC', 'zh-hans': 'Request TAC' },
                     strResendTAC: { 'en-US': 'Resend TAC', 'ms-MY': 'Minta Semula TAC', 'zh-hans': 'Resend TAC' },
@@ -216,7 +227,7 @@
 
                     strBtnSubmit: { 'en-US': 'Next: Insert delivery details', 'ms-MY': 'Seterusnya: Masukkan Butiran Penghantaran', 'zh-hans': 'Next: Insert delivery details' }, 
                     
-                    strErrorNRIC: { 'en-US': 'Please insert valid NRIC number', 'ms-MY': 'Sila masukkan nombor kad pengenalan yang sah', 'zh-hans': 'Please insert valid NRIC number' },
+                    strErrorNRIC: { 'en-US': 'Please insert valid MyKad  number', 'ms-MY': 'Sila masukkan nombor kad pengenalan yang sah', 'zh-hans': 'Please insert valid MyKad  number' },
                     strErrorPassport: { 'en-US': 'Please insert valid Passport number', 'ms-MY': 'Sila masukkan nombor passport yang sah', 'zh-hans': 'Please insert valid Passport number' },
                     strErrorPhoneNumber: { 'en-US': 'Please insert valid phone number', 'ms-MY': 'Sila masukkan nombor telefon bimbit yang sah', 'zh-hans': 'Please insert valid phone number' }, 
 
@@ -276,6 +287,7 @@
                             'locale': self.apiLocale
                         })
                         .then((response) => {
+                            // console.log(response);
                             self.redirectVerified();
                         })
                         .catch((error) => {
@@ -295,6 +307,43 @@
                             toggleOverlay(false);
                         });
                 },
+
+                ajaxVerifyGuestLoginNew: function() {
+                    toggleOverlay(true);
+                    var self = this;
+                    axios.post(apiEndpointURL + '/api/app/SMS-notification/verify-oTP', {
+                            'MobileNumber': '0' + self.verify.input.phoneNumber.trim(),
+                            'OTPValue': self.verify.input.otpPassword.trim(),
+                            'locale': self.apiLocale
+                        })
+                        
+                        .then((response) => {
+                            // console.log(response);
+                            if(response.data == "true"){
+                                self.redirectVerified();
+                            }
+                        })
+                        .catch((error) => {
+                            // console.log(error, "error");
+                            var response = error.response;
+                            var data = response.data;
+                            var errorMsg = '';
+                            if (error.response.status == 500 || error.response.status == 503) {
+                                errorMsg = self.renderText('errorValidating');
+                            } else {
+                                errorMsg = self.renderText('errorEligibilityCheck') + data.message;
+                            }
+                            
+                            $('.panel-otpMessage').hide();
+                            $(self.verify.errorMessage.form).html(errorMsg).show();
+                            toggleOverlay(false);
+                        })
+                        
+                },
+
+
+
+
                 validateSecurityID: function() {
                     var self = this;
                     if (self.customerDetails.securityType == 'NRIC') {
@@ -319,12 +368,11 @@
                 },
                 verificationSubmit: function(e) {
                     var self = this;
-
-                    toggleOverlay();
+                    toggleOverlay(true);
                     var validateSecurityID = self.validateSecurityID();
                     if (validateSecurityID) {
                         if (!ywos.lsData.meta.isLoggedIn) {
-                            self.ajaxVerifyGuestLogin();
+                            self.ajaxVerifyGuestLoginNew();
                         } else {
                             self.redirectVerified();
                         }
@@ -355,11 +403,12 @@
                         ywos.updateYWOSLSData();
                     }
 
-                    ywos.redirectToPage('delivery');
+                    ywos.redirectToPage('sim-type');
                 },
                 validateOTPNumber: function() {
                     var self = this;
                     var phoneNumber = self.verify.input.phoneNumber.trim();
+                    // console.lg(phoneNumber);
                     if (isNaN(phoneNumber) || phoneNumber.length == 0) {
                         var inputPhoneNumber = self.verify.input.inputPhoneNumber;
                         var emVerifyPhoneNumber = self.verify.errorMessage.phoneNumber;
@@ -398,7 +447,7 @@
                 },
                 ajaxGenerateOTPForGuestLogin: function() {
                     var self = this;
-                    axios.post(apiEndpointURL + '/generate-otp-for-guest-login', {
+                    axios.post(apiEndpointURL + '/generate-otp-for-guest-login' + '?nonce='+yesObj.nonce, {
                             'phone_number': '0' + self.verify.input.phoneNumber,
                             'locale': self.apiLocale
                         })
@@ -441,6 +490,54 @@
                         $(self.verify.errorMessage).hide().html('');
                     }
                 },
+
+                ajaxGenerateOTPForGuestLoginNew: function() {
+                    toggleOverlay(true);
+                    var self = this;
+                    axios.post(apiEndpointURL + '/api/app/sms-notification/generate-oTP', {
+                            'MobileNumber': '0' + self.verify.input.phoneNumber,
+                            'locale': self.apiLocale
+                        })
+                        .then((response) => {
+                            
+                            if(response.data != 'ERR1'){
+                                $('.panel-otpMessage').show();
+                                $('.panel-otpMessage .span-message').html(response.data.displayResponseMessage);
+                                $(self.verify.input.inputOTPPassword).focus();
+                                self.triggerOTPCountdown(response.data.otpExpiryTime);
+                            }
+                        })
+                        .catch((error) => {
+                            var response = error.response;
+                            var data = response.data;
+                            var errorMsg = '';
+                            if (error.response.status == 500 || error.response.status == 503) {
+                                errorMsg = "<p>There's an error in generating your TAC code.<br /> Please try again later.</p>";
+                            } else {
+                                errorMsg = data.message
+                            }
+                            
+                            $(self.verify.errorMessage.phoneNumber).html(errorMsg).show();
+                            $(self.verify.input.inputOTPPassword).focus();
+                            $(self.verify.input.inputOTPPassword).on('keydown', function() {
+                                $(self.verify.errorMessage.otpPassword).hide().html('');
+                            });
+                        })
+                        .finally(() => {
+                            toggleOverlay(false);
+                        });
+                },
+                generateOTPForGuestLoginNew: function() {
+                    var self = this;
+                    $(self.verify.errorMessage.phoneNumber).hide().html('');
+                    if (self.validateOTPNumber()) {
+                        toggleOverlay(true);
+                        self.ajaxGenerateOTPForGuestLoginNew();
+
+                        $(self.verify.errorMessage).hide().html('');
+                    }
+                },
+
                 checkForeignerDeposit: function() {
                     var self = this;
                     if (self.orderSummary.plan.planType == 'postpaid') {

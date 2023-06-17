@@ -29,15 +29,16 @@ if (!function_exists('generate_scheduled_network_maintenance')) {
                     } else if ($arr_keys[$key] == 'End Date') {
                         $end_date       = strtotime(str_replace('/', '-', $value));
                         $month          = date('F', $end_date);
+                        $year           = date('Y', $end_date);
                         $end_date_string = date('jS', $end_date);
                         $array[$i]['End Date Unix'] = $end_date;
                         if ($months != $month) {
-                            $date_string    .= " $months - $end_date_string $month";
+                            $date_string    .= " $months - $end_date_string $month, $year";
                             $months         .= ", $month";
                         } else if ($date_string != $end_date_string) {
-                            $date_string    .= " - $end_date_string $month";
+                            $date_string    .= " - $end_date_string $month, $year";
                         } else {
-                            $date_string    .= " $month";
+                            $date_string    .= " $month, $year";
                         }
                     }
                     if ($key != '0') $array[$i][$arr_keys[$key]] = $value;                // Remove "No" from array
@@ -59,7 +60,7 @@ if (!function_exists('generate_scheduled_network_maintenance')) {
         $arr_list = [];
         if ($array) {
             foreach ($array as $list) {
-                if ($list['State'] && $list['Area'] && $list['Service Type'] && $list['Start Date'] && $list['End Date'] && $list['Time']) {
+                if ($list['State'] && $list['Area'] && $list['Service Type'] && $list['Start Date'] && $list['End Date'] && $list['Time'] && $list['Show on Web'] == 'Yes') {
                     $arr_list[$list['State']][] = $list;
                 }
             }
@@ -67,12 +68,12 @@ if (!function_exists('generate_scheduled_network_maintenance')) {
         ksort($arr_list);                                                               // Sort by states alphabetically
 
         $lang           = get_bloginfo('language');
-        $str_box_time   = 'Time';
+        $str_box_time   = 'Downtime Between';
         $str_box_area   = 'Affected Area';
         $str_box_type   = 'Service Type';
         if ($lang == 'ms-MY') {
             $str_box_time   = 'Masa';
-            $str_box_area   = 'Kawasan';
+            $str_box_area   = 'Kawasan Terjejas';
             $str_box_type   = 'Jenis Servis';
         } else if ($lang == 'zh-CN') {
         }
@@ -231,14 +232,14 @@ if (!function_exists('generate_store_locations')) {
         $file_to_read = fopen(FP_STORE_LOCATIONS, 'r');
         if ($file_to_read !== FALSE) {
             while (($data = fgetcsv($file_to_read, 0, ',')) !== FALSE) {
-                if (empty($arr_keys)) {
+                if (empty($arr_keys)) 
+               {
                     $arr_keys = $data;
                     continue;
                 }
                 $service_string = '';
                 foreach ($data as $key => $value) {
                     $service_string = build_service_string($service_string, $arr_keys[$key], $value);
-
                     if ($key != '0') $array[$i][$arr_keys[$key]] = $value;
                 }
                 $array[$i]['Services'] = $service_string;
@@ -263,14 +264,23 @@ if (!function_exists('generate_store_locations')) {
 		if( isset($arr_list['KUALA LUMPUR']) ) {
             $new_value = $arr_list['KUALA LUMPUR'];
             $arr_list = array_merge(["KUALA LUMPUR"=>$new_value], $arr_list);
+        
         }
+     
         foreach ($arr_list as $state => $stores) {
             $state_name     = ucwords(strtolower($state));
             $html_list      .= '            <div class="col-12 mb-4 layer-state" data-state="' . strtolower($state) . '">
-                                                <h1 class="mb-4">' . $state_name . '</h1>';
-            foreach ($stores as $data) {
-                $services       = $data['Services'];
+            <h1 class="mb-4">' . $state_name . '</h1>';
+        
+
+            foreach ($stores as $data) 
+            {
+               
+                $services   = $data['Services'];
+                $services = str_replace(array('experience-stores','service-stores'),array('stores', 'stores'),$services);
+             
                 $store_type     = $data['Store Type'];
+                $store_type = str_replace(array('Experience Store','Store & Service Centre'),array('Store','Store'),$store_type);
                 $store_brand    = ($data['Brand']) ? $data['Brand'] : '';
                 $store_address  = $data['Address'];
                 $operating_hour = $data['Operation Hour'];
@@ -289,7 +299,7 @@ if (!function_exists('generate_store_locations')) {
                     default;
                 }
 
-                $$coming_soon = '';
+                $coming_soon = '';
                 switch ($store_brand) {
                     case 'VIVO':
                         $store_name = "<span class='font-normal'>vivo</span> Concept Store";
@@ -407,10 +417,7 @@ if (!function_exists('generate_store_locations')) {
                                                                 <ul class="dropdown-menu" aria-labelledby="dropdownStoreTypes" data-filter-type="store-type">
                                                                     <li><div class="form-check"><label><input class="cardCheckBoxAll" type="checkbox" value="All" data-filter-type="store-type" checked /> ' . esc_html__('All', 'yes.my') . '</label></div></li>
                                                                     <li><div class="form-check"><label><input class="cardCheckBox store-type" type="checkbox" value="yes-stores" data-storetype="Yes Stores" checked /> <span>Yes Stores</span></label></div></li>
-                                                                    <li><div class="form-check"><label><input class="cardCheckBox store-type" type="checkbox" value="yes-service-store" data-storetype="Yes Store & Service Centre" checked /> <span>Yes Stores & Service Centre</span></label></div></li>
                                                                     <li><div class="form-check"><label><input class="cardCheckBox store-type" type="checkbox" value="dealer-mynews" data-storetype="Dealer MyNews" checked /> <span>Dealer MyNews</span></label></div></li>
-                                                                    <li><div class="form-check"><label><input class="cardCheckBox store-type" type="checkbox" value="oem-stores" data-storetype="OEM Stores" checked /> <span>OEM Stores</span></label></div></li>
-																	<li><div class="form-check"><label><input class="cardCheckBox store-type" type="checkbox" value="yes-experience-stores" data-storetype="Yes Experience Stores" checked /> <span>Yes Experience Stores</span></label></div></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -450,6 +457,7 @@ if (!function_exists('generate_store_locations')) {
      */
     function build_service_string($service_string = '', $key = '', $value = '')
     {
+        // die();
         if (strpos($key, 'Service - ') !== false && $value == 'Yes') {
             switch ($key) {
                 case 'Service - Postpaid Activation':
@@ -509,7 +517,8 @@ if (!function_exists('generate_store_locations')) {
         }
 
         if ($key == 'Store Type') {
-            switch ($value) {
+
+                 switch ($value) {
                 case 'Yes Store':
                     if ($service_string != '') $service_string .= ',';
                     $service_string .= 'yes-stores';

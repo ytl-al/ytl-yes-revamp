@@ -69,6 +69,9 @@
                                     <a href="/infinite-phone-bundles/" class="pink-btn text-uppercase">{{ renderText('back_to_infinite') }}</a>
                                 </div>
                                 <div id="error" class="mt-3"></div>
+                                <div v-if="isUpFrontPlanAvailable" @click="buyPlan">
+                                    <button class="pink-btn text-uppercase">Buy plan using UpFront payment </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -155,7 +158,9 @@
                         orderItems:[]
                     },
                 },
-                allowSubmit: false
+                allowSubmit: false,
+                isUpFrontPlanAvailable : false,
+                upFrontPlanID : null
             },
 
             created: function () {
@@ -177,6 +182,36 @@
                             self.orderSummary.product  = elevate.lsData.product;
                         }
 
+                        if(self.orderSummary.product.selected.productCode) {
+                            const mapPlanId = {
+                                1097 : {
+                                    planID : 1127,
+                                    deviceID : 2,
+                                },
+                                1096 : {
+                                    planID : 1126,
+                                    deviceID : 2,
+                                },
+                                1095 : {
+                                    planID : 1125,
+                                    deviceID : 2,
+                                },
+                                1101 : {
+                                    planID : 1123,
+                                    deviceID : 3,
+                                },
+                                1093 : {
+                                    planID : 1131,
+                                    deviceID : 4,
+                                }
+                            };
+                            if( mapPlanId[self.orderSummary.product.selected.productCode] ) {
+                                self.isUpFrontPlanAvailable = true;
+                                self.upFrontPlanID = mapPlanId[self.orderSummary.product.selected.productCode].planID;
+                            }
+                            // ywos.creditCheckFailedPlan(planID);
+                        }
+
                         if (elevate.lsData.orderSummary) {
                             self.orderSummary = elevate.lsData.orderSummary;
                         }
@@ -193,7 +228,12 @@
                         elevate.redirectToPage('cart');
                     }
                 },
-
+                buyPlan: function() {
+                    var self = this;
+                    if(self.isUpFrontPlanAvailable) {
+                        ywos.creditCheckFailedPlan(self.upFrontPlanID);
+                    }
+                },
                 getNormalContract: function(){
                     var self = this;
                     var color = self.orderSummary.orderDetail.color;

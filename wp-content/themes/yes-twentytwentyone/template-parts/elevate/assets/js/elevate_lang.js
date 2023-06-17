@@ -5,7 +5,8 @@ Elevate_lang['zh-hans'] = [];
 
 Elevate_lang['en-US']['back'] = 'Back';
 Elevate_lang['en-US']['back_to_cart'] = 'Back to Cart';
-Elevate_lang['en-US']['back_to_infinite'] = 'Back to Infinite+';
+Elevate_lang['en-US']['back_to_infinite'] = 'CANCEL';
+// Elevate_lang['en-US']['back_to_infinite'] = 'Back to Infinite+';
 Elevate_lang['en-US']['continue'] = 'Continue';
 Elevate_lang['en-US']['help'] = 'Help';
 Elevate_lang['en-US']['checkout'] = 'Checkout';
@@ -51,7 +52,13 @@ Elevate_lang['en-US']['term_and_condition1'] = 'I here by agree to subscribe to 
 Elevate_lang['en-US']['term_and_condition2'] = 'I further give consent to YTLC to process my personal data in accordance with YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" style="word-break: break-all;" target="_blank">https://www.ytl.com/privacypolicy.asp</a>.';
 Elevate_lang['en-US']['check_eligibility'] = 'Check Eligibility';
 Elevate_lang['en-US']['phone_number'] = 'Phone number';
-Elevate_lang['en-US']['compasia_fail_error1'] = 'Sorry! We’ve checked and you currently do not qualify for the Yes Infinite+ contract option';
+Elevate_lang['en-US']['compasia_fail_error1_1'] = 'Uh-oh!';
+Elevate_lang['en-US']['compasia_fail_error1_2'] = ' You are ineligible for zero upfront payment.';
+Elevate_lang['en-US']['compasia_fail_error1_3'] = ' To proceed, you will be required to pay the device upfront payment, which will be rebated to you over 18 months.';
+Elevate_lang['en-US']['compasia_fail_error1_4'] = ' This amount will be rebated back to you over 18 months. Click “proceed” to complete your purchase!.';
+
+
+
 Elevate_lang['en-US']['compasia_fail_error2'] = 'Sorry, you do not qualify for the Yes Infinite+ contract option, please select another contract option:';
 
 Elevate_lang['en-US']['eligibility_check_unsuccessful'] = 'Eligibility check unsuccessful';
@@ -164,7 +171,8 @@ Elevate_lang['en-US']['product_not_existed'] = "Sorry, Your product does not exi
  
 Elevate_lang['ms-MY']['back'] = 'Kembali';
 Elevate_lang['ms-MY']['back_to_cart'] = 'Kembali ke Troli';
-Elevate_lang['ms-MY']['back_to_infinite'] = 'Kembali ke Infinite+';
+Elevate_lang['ms-MY']['back_to_infinite'] = 'CANCEL';
+// Elevate_lang['ms-MY']['back_to_infinite'] = 'Kembali ke Infinite+';
 Elevate_lang['ms-MY']['continue'] = 'Teruskan';
 Elevate_lang['ms-MY']['help'] = 'Tolong';
 Elevate_lang['ms-MY']['checkout'] = 'Terus ke Pembayaran';
@@ -324,7 +332,8 @@ Elevate_lang['ms-MY']['product_not_existed'] = "Maaf, Produk anda tidak wujud.";
 
 Elevate_lang['zh-hans']['back'] = '后退';
 Elevate_lang['zh-hans']['back_to_cart'] = '返回购物车';
-Elevate_lang['zh-hans']['back_to_infinite'] = '返回 Infinite+';
+Elevate_lang['zh-hans']['back_to_infinite'] = 'CANCEL';
+// Elevate_lang['zh-hans']['back_to_infinite'] = '返回 Infinite+';
 Elevate_lang['zh-hans']['continue'] = '继续';
 Elevate_lang['zh-hans']['help'] = '帮助';
 Elevate_lang['zh-hans']['checkout'] = '结帐';

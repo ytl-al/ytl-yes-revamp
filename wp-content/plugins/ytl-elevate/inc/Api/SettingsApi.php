@@ -40,11 +40,10 @@ class SettingsApi
 
 	public function AddAdminSubMenu(){
 		foreach( $this->admin_subpages as $subpage ){
-			$function = ($subpage['function']) ?? [];
 		    if(isset($subpage['menu_slug'])){
-                add_submenu_page( $subpage['parent_slug'], $subpage['page_title'], $subpage['menu_title'], $subpage['capability'], $subpage['menu_slug'], $function );
+                add_submenu_page( $subpage['parent_slug'], $subpage['page_title'], $subpage['menu_title'], $subpage['capability'], $subpage['menu_slug'], $subpage['function'] );
             }else{
-                add_submenu_page( $subpage['parent_slug'], $subpage['page_title'], $subpage['menu_title'], $subpage['capability'], $subpage['url'], $function );
+                add_submenu_page( $subpage['parent_slug'], $subpage['page_title'], $subpage['menu_title'], $subpage['capability'], $subpage['url'], $subpage['function'] );
             }
 
 		}

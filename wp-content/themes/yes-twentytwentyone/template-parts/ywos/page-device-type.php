@@ -338,6 +338,7 @@
                     return data;
                 },
                 changePlan: function(index) {
+                    console.log(index);
                     var self = this;
                     const selectedData = self.deviceData.planData[index];
                     const planDetails = self.deviceData.planData[index]?.data?.notes?.split(',').filter(elm => elm);

@@ -326,7 +326,6 @@ class Ytl_Pull_Data_Admin
         $field_id         = $args['label_for'];
         $field_default    = $args['default'];
         $field_desc        = esc_html($args['description']);
-
         $options     = get_option($this->prefix . "settings");
         $option     = $field_default;
 
@@ -531,6 +530,40 @@ class Ytl_Pull_Data_Admin
      *
      * @return void
      */
+
+
+
+     public function register_token_data_guest_login(): void
+     {
+         add_submenu_page(
+             'ytl-pull-data',                                                     // parent slug
+             __('guest Login API Details ', 'ytl-pull-data'),                           // page title
+             __('guest Login API Details', 'ytl-pull-data'),                              // menu title
+             'manage_options',                                                    // capability
+             'ytl-token-data-guest-login',                                  // menu_slug
+             array($this, 'display_token_data_guest_login')                          // callable function
+         );
+     }
+ 
+     /**
+      * This function is use for show the mapped infinity data
+      *
+      * @return void
+      */
+     public function display_token_data_guest_login(): Void
+     {
+         // $deviceData = $this->bundle_device_plan_data();
+         // $device_bundle_plans = unserialize(get_option('ywos_device_bundle_plans', array()));
+         require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/ytl-token-data-guest-login.php';
+     }
+ 
+ 
+ 
+
+
+
+
+
     public function register_device_bundle_plan_page(): void
     {
         add_submenu_page(
@@ -554,6 +587,41 @@ class Ytl_Pull_Data_Admin
         $device_bundle_plans = unserialize(get_option('ywos_device_bundle_plans', array()));
         require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/ytl-pull-device-bundle-plan-data.php';
     }
+
+
+
+   /**
+     * This function is use for register submenu for mapping infinity data1
+     *
+     * @return void
+     */
+
+
+    public function register_device_bundle_plan_page1(): void
+    {
+        add_submenu_page(
+            'ytl-pull-data',                                                     // parent slug
+            __('Device Bundle plan1', 'ytl-pull-data1'),                           // page title
+            __('Device Bundle plan1', 'ytl-pull-data1'),                              // menu title
+            'manage_options',                                                    // capability
+            'ytl-pull-device-bundle-plan-data1',                                  // menu_slug
+            array($this, 'display_map_infinity_data1')                          // callable function
+        );
+    }
+
+    /**
+     * This function is use for show the mapped infinity data1
+     *
+     * @return void
+     */
+    public function display_map_infinity_data1(): Void
+    {
+       //  $deviceData = $this->bundle_device_plan_data();
+       //  $device_bundle_plans = unserialize(get_option('ywos_device_bundle_plans', array()));
+        require_once plugin_dir_path(dirname(__FILE__)) . 'admin/partials/ytl-pull-device-bundle-plan-data1.php';
+    }
+
+
 
     /**
      * This function is use for save, update and delete bundle data

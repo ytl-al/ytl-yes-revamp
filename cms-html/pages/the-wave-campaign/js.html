@@ -1,0 +1,607 @@
+<style>
+.hero-banner-section{position: relative; background-color: #091061;}
+.slider-section {position: relative; background-color: #000;}
+.slider-section .content-section{position: absolute; top: 30%; left: 15%; z-index: 99;}
+.slider-section .content-section h1 {
+    font-family: Montserrat;
+    font-size: 40px;
+    line-height: 50px;
+    font-weight: 800;    
+    color: #fff;
+    text-align: left;
+}
+.slider-section .content-section p {
+font-family: Open Sans;
+font-size: 20px;
+font-weight: 400;
+line-height: 27px;
+color: #fff;
+letter-spacing: 0em;
+text-align: left;
+margin-bottom: 50px;
+}
+.slider-section .content-section .video-btn {
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 19px;
+    letter-spacing: 0.1em;
+    color: #fff;
+    padding:15px 38px;
+    text-align: left;
+    border: 2px solid;  
+    background: linear-gradient(203.11deg, rgba(255, 255, 255, 0) 7.41%, rgba(255, 255, 255, 0.2) 112.25%);
+backdrop-filter: blur(10px);
+border-radius: 50px;
+text-transform: uppercase;
+}
+.slider-section .carousel-indicators {display: block;text-align: center;}
+.slider-section .carousel-indicators [data-bs-target] {width: 6px !important;height: 6px !important; border-radius: 50px;  border: 1px solid transparent;}
+#wabe-about-sec-bg {
+        background-image: url('/wp-content/uploads/2023/06/city-yes_bg.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 50px 0px 300px;        
+        position: relative;
+        background-color: #000;
+}  
+.wabe-about-sec-inner {z-index: 99}
+#wabe-about-sec-bg .content-sec{margin: 0; padding: 0}
+#wabe-about-sec-bg .content-sec p {
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 24px;
+color: #FFFFFF;
+}
+.space-fill-bg {
+    position: absolute;
+    bottom: -162px;
+    left: 0;
+    z-index: 99;
+    width: 100%;
+}
+.space-fill-bg2 {
+    position: absolute;
+    top: -210px;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+}
+
+.about-sec-bottom-bg {
+    position: absolute;
+    top: -168px;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+}
+
+#mid-sec-bg {    
+    background: #091061 ;
+    padding: 50px 0;
+    position: relative; min-height:800px;   
+}
+#mid-sec-bg .left-bg{    
+    background: url(/wp-content/uploads/2023/06/left-bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 0%;
+    top: -140px;
+    z-index: 99;
+    width: 600px;
+    min-height: 1000px;
+}
+#mid-sec-bg .right-bg{    
+    background: url(/wp-content/uploads/2023/06/right-bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 0%;
+    top: -140px;
+    z-index: 99;
+    width: 600px;
+    min-height: 1000px;
+}
+#mid-sec-bg .bottom-bg{    
+    background: url(/wp-content/uploads/2023/06/bottom-bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;    
+    bottom: -400px;
+    z-index: 99;
+    width: 100%;
+    min-height: 1000px;
+}
+
+.mid-sec-inner{z-index: 999;}
+
+#mid-sec-bg .title-sec h2{
+    font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 800;
+            font-size: 40px;
+            line-height: 49px;
+            color: #fff;
+            text-align: left;
+            margin: 20px 20px 20px 40px; 
+}
+#mid-sec-bg .title-sec p{
+    font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 20px;
+            color: #fff;
+            text-align: left;
+            margin: 0px 0 0 40px;
+}
+#mid-sec-bg .title-sec p a {text-decoration: underline;color: #fff;}
+.plans-sec-box {
+    background-image: linear-gradient(320deg, #4c1a6f, #3a3680);
+    /* box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15); */
+    border-radius: 8px;
+    padding: 20px 30px 20px;
+    margin: 10px;
+    text-align: center;
+    border: 2px solid rgba(152, 134, 175, .3);
+}    
+.plans-sec-box .simimg h2 {    
+    font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 24px;
+            color: #fff;
+            border-bottom: 1px solid #fff;
+    padding: 0px 0 10px;
+}
+.plans-sec-box .content {padding:0px;  margin: 30px 0 0; text-align: center;}
+.plans-sec-box .content p{
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 64px;
+            line-height: 30px;           
+           letter-spacing: -0.02em;
+           color: #FF0084;
+ }
+ .plans-sec-box .content p span{
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 22px;           
+           letter-spacing: -0.02em;
+           color: #fff;
+ }
+
+.slick-next.slick-arrow {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-top: 4px solid #fff;
+    border-left: 4px solid #fff;
+    transform: rotate(135deg);
+    top: 45%; right: -15px;
+}
+.slick-prev.slick-arrow {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-top: 4px solid #fff;
+    border-left: 4px solid #fff;
+    transform: rotate(314deg);
+    top: 45%; left: -15px;
+}
+.slick-prev.slick-arrow.slick-disabled {
+    display: none !important;
+}
+.slick-next.slick-arrow.slick-disabled {
+    display: none !important;
+}
+.responsive .slick-next:before, .slick-prev:before{color: unset !important;}
+/* .responsive .slick-dots{display: none !important;} */
+.slick-dots li button:before{opacity: .5; color: #d9d9d9;}
+.slick-dots li.slick-active button:before {opacity: .75; color: #fff;}
+
+
+#plans-rewards {margin: 30px 0 0; padding: 0;}
+#plans-rewards h1 {color: #fff;font-size: 30px; line-height: 48px; font-weight: 800;}   
+.data_rwd img{border: 1px solid #808080;border-radius: 15px;}
+.data_rwd h2 {color: #fff; font-size: 18px; font-weight: 800;line-height: 20px; text-align: center;}
+.data_rwd p {color: #525252;font-size: 16px;line-height: 24px; text-align: center;}
+
+#wave-gallery-sec {margin: 50px 0 0; padding: 0; z-index: 999;}
+.img-sec-inner {display: flex;align-items: center; justify-content: center;}
+#wave-gallery-sec img {margin: 0px 2px 0; padding: 0; height: 439px; width: 100%;}
+#wave-gallery-sec img:first-child {margin: 0px 0px 0;}
+#wave-gallery-sec img:last-child {margin: 0px 0px 0;}
+
+.social-media-sec{margin: 50px 0 0; padding: 0;z-index: 999;text-align: center;}
+.social-media-sec .icon-list {width: auto; display: inline-block; margin: 0 auto; text-align: center;}
+.social-media-sec .icon-list li {list-style: none; float: left; margin-right: 20px;}
+.social-media-sec p{margin: 15px 0 0; padding: 0;color: #fff;font-size: 18px;line-height: 22px; font-weight: 600;text-align: center;}
+.footer {z-index: 99999; position: relative;}
+
+@media only screen and (max-width: 768px){
+.space-fill-bg {bottom: -50px; left: 0;}
+.space-fill-bg2 {top: -50px;left: 0;}
+.about-sec-bottom-bg {top: -48px; left: 0;}
+#mid-sec-bg .right-bg{top: 217px;  z-index: 99; width: 100%;  min-height: 1000px; background-position: bottom;}
+.slider-section {min-height: 560px; background: #000;}
+.slider-section .carousel-indicators {display: block;bottom: -180px;text-align: center;}
+.slider-section .carousel-indicators [data-bs-target] {width: 6px !important;height: 6px !important; border-radius: 50px;  border: 1px solid transparent;}
+.slider-section .content-section{top:70%; left: 10%;}
+.slider-section .content-section h1 {font-size: 28px;line-height: 30px;}
+.slider-section .content-section p {font-size: 16px;line-height: 22px; margin-bottom: 40px;}
+.slider-section .content-section .video-btn {font-size: 12px; font-weight: 700; line-height: 16px}
+.carousel-item img {height: 400px;}
+#wabe-about-sec-bg {
+    background-image: url(/wp-content/uploads/2023/06/city-yes_bg-mobile.png);
+    background-size: contain; background-repeat: no-repeat; padding: 50px 0px 30px;
+    min-height: 850px; background-position: bottom; background-color: #000;}
+#wabe-about-sec-bg .content-sec{margin-top: 10px; padding: 0 20px;}
+#wabe-about-sec-bg .content-sec h2 {font-family: 'Montserrat';font-style: normal;font-weight: 800;font-size: 28px;line-height: 30px;color: #FFFFFF;}
+#wabe-about-sec-bg p {font-size: 16px !important; padding-top: 15px;}
+#mid-sec-bg .left-bg{min-height: unset !important;}
+#mid-sec-bg .title-sec h2 {font-size: 28px; line-height: 30px; text-align: center; margin: 0px 0px 20px 0;}
+#mid-sec-bg .para{
+    font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 20px;
+            color: #fff;
+            text-align: center;
+            margin: 0px 0 30px 0;
+}
+#mid-sec-bg .para a {text-decoration: underline;color: #fff;}
+#plans-rewards h1 {font-size: 28px;line-height: 30px;padding: 0 15px;}
+.data_rwd{text-align: center; margin-bottom: 50px !important}
+.plans-sec-box {width:80%; padding: 20px 35px 20px; margin: 10px auto;  border: 3px solid rgba(152, 134, 175, .3); }
+.plans-sec-box .content {padding: 0px; margin: 25px 0 0;}
+.plans-sec-box .content p {font-size: 64px; line-height: 30px;}
+.slick-prev.slick-arrow,.slick-next.slick-arrow{display: none !important;}
+.slick-dots li button:before{opacity: .5; color: #d9d9d9;}
+.slick-dots li.slick-active button:before {opacity: .75; color: #fff;}
+.slick-dots {bottom: -10px;}
+.social-media-sec p {margin: 15px 0 0; padding: 0 50px; font-size: 16px;line-height: 19px;}
+#mid-sec-bg .bottom-bg {bottom: -400px; z-index: 99; width: 100%; min-height: 1000px;background-position: center;}
+#wave-gallery-sec-mob {margin: 50px 0 0; padding: 0; z-index: 999;}
+#wave-gallery-sec-mob img {width: 100%;}
+}
+
+
+</style>
+
+<!-- wp:code -->
+<!-- Hero banner Start -->
+<section class="hero-banner-section">
+<div class="hero-image-sec">    
+<img src="/wp-content/uploads/2023/06/hero-banner-1.png" class="w-100 d-none d-xl-bloc" alt="...">
+<img src="/wp-content/uploads/2023/06/hero-banner-1.png" class="w-100 d-block d-lg-block d-xl-none" alt="...">
+</div>
+<div class="space-fill-bg"> <img src="/wp-content/uploads/2023/06/space-fill-bg.png" class="w-100" alt="..."></div>
+</section>
+<!-- Hero banner End -->
+<!-- Slider Start -->
+<section class="slider-section">
+    <div id="slider-yes-home" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true" data-bs-interval="true">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#slider-yes-home" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#slider-yes-home" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#slider-yes-home" data-bs-slide-to="2" aria-label="Slide 3"></button>            
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="5000">
+            <a href="javascript:void(0)" class="link-jumpSection" data-targetsection="infinite-wireless-fibre-plans">
+            <img src="/wp-content/uploads/2023/06/wave-slide1.png" class="w-100 d-none d-xl-block" alt="...">
+            <img src="/wp-content/uploads/2023/06/wave-slide1.png" class="w-100 d-block d-lg-block d-xl-none" alt="...">
+            </a>    
+        </div>
+        <div class="carousel-item" data-bs-interval="5000">
+            <a href="javascript:void(0)" class="link-jumpSection" data-targetsection="infinite-wireless-fibre-plans">
+                <img src="/wp-content/uploads/2023/06/wave-slide1.png" class="w-100 d-none d-xl-block" alt="...">
+            <img src="/wp-content/uploads/2023/06/wave-slide1.png" class="w-100 d-block d-lg-block d-xl-none" alt="...">
+            </a>
+        </div>   
+        <div class="carousel-item" data-bs-interval="5000">
+            <a href="javascript:void(0)" class="link-jumpSection" data-targetsection="infinite-wireless-fibre-plans">
+                <img src="/wp-content/uploads/2023/06/wave-slide1.png" class="w-100 d-none d-xl-block" alt="...">
+            <img src="/wp-content/uploads/2023/06/wave-slide1.png" class="w-100 d-block d-lg-block d-xl-none" alt="...">
+        </a>    
+        </div>      
+        
+        <div class="content-section">  
+                <h1 class="mb-3 w-100">Yes 5G Wave is <br>
+                    taking over Malaysia </h1>
+                <p class="w-100">With Malaysia's Fastest Network with uncapped <br>
+                    speed and data.</p>
+                <a href="https://www.instagram.com/reel/Cspc-bsxSI1/?igshid=MzRlODBiNWFlZA%3D%3D" target="_blank" class="video-btn">Watch video&nbsp;&nbsp;<img src="http://localhost/wp-content/uploads/2023/06/play-icon.png" class="" alt="..."></a>
+            </div>
+            <button class="carousel-control-prev d-none" type="button" data-bs-target="#slider-yes-home" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+            <button class="carousel-control-next d-none" type="button" data-bs-target="#slider-yes-home" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+<!-- Slider End -->
+<!-- about section -->
+<section id="wabe-about-sec-bg">
+    <div class="container wabe-about-sec-inner">
+        <div class="row">
+            <div class="col-12 col-lg-5 d-flex offset-lg-6 align-items-center aos-init aos-animate" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                <div class="content-sec">  
+                    <h2 class="w-100 d-block d-lg-block d-xl-none">Yes 5G Coverage</h2>                  
+                    <p class="mb-3">As of May 2023, Communications and Digital Minister Fahmi Fadzil announced that 5G coverage in Malaysia has reached 60% of populated areas while Digital Nasional Bhd (DNB) targets to achieve 80% by end of this year. 
+                     <br><br>
+                        This means with Yes 5G coverage in your area, you can
+                        now experience uninterrupted streaming, gaming and video calls.</p>                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="space-fill-bg2"> 
+        <img src="/wp-content/uploads/2023/06/space-fill-bg2.png" class="w-100" alt="..."></div>    
+</section>
+<!-- about section End -->
+
+<!-- mid section -->
+<section id="mid-sec-bg">
+    <div class="left-bg"></div>
+    <div class="right-bg"></div>
+    <div class="container mid-sec-inner">
+        <div class="row">
+            <div class="col-lg-4 title-sec">
+                <h2>Yes 5G Speed <br>
+                    In These Area</h2>
+                <p class="w-100 d-none d-xl-block"><a href="https://www.yes.my/coverage/" target="_blank">
+                    Check out our coverage map </a></p>
+            </div>
+            <div class="col-lg-8" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                <div class="responsive">
+                    <div class="slick_slides">
+                    <div class="plans-sec-box card mb-3">
+                    <div class="simimg">
+                        <h2>
+                       Segambut
+                    </h2>
+                    </div>
+                    <div class="content">                    
+                    <p class="">1,165 <br>
+                    <span>Mbps</span>
+                    </p>                   
+                    </div>
+                    </div>
+                    </div>
+                    <div class="slick_slides">
+                    <div class="plans-sec-box card mb-3">
+                        <div class="simimg">
+                            <h2>
+                                KLCC
+                            </h2>
+                        </div>
+                        <div class="content">                    
+                        <p class="">847 <br>
+                        <span>Mbps</span>
+                        </p>                   
+                        </div>
+                    </div>
+                    </div>
+                    <div class="slick_slides">
+                    <div class="plans-sec-box card mb-3">
+                        <div class="simimg">
+                            <h2>
+                                Kepong
+                            </h2>
+                        </div>
+                        <div class="content">                    
+                        <p class="">965 <br>
+                        <span>Mbps</span>
+                        </p>                   
+                        </div>
+                    </div>
+                    </div>
+                    <div class="slick_slides">
+                    <div class="plans-sec-box card mb-3">
+                        <div class="simimg">
+                            <h2>
+                                Bangsar
+                            </h2>
+                        </div>
+                        <div class="content">                    
+                        <p class="">837 <br>
+                        <span>Mbps</span>
+                        </p>                   
+                        </div>
+                    </div>
+                    </div>
+                    <div class="slick_slides">
+                    <div class="plans-sec-box card mb-3">
+                        <div class="simimg">
+                            <h2>
+                                TTDI
+                            </h2>
+                        </div>
+                        <div class="content">                    
+                        <p class="">1,043 <br>
+                        <span>Mbps</span>
+                        </p>                   
+                        </div>
+                    </div>
+                    </div>
+                    <div class="slick_slides">
+                    <div class="plans-sec-box card mb-3">
+                        <div class="simimg">
+                            <h2>
+                                LDP
+                            </h2>
+                        </div>
+                        <div class="content">                    
+                        <p class="">953 <br>
+                        <span>Mbps</span>
+                        </p>                   
+                        </div>
+                    </div>
+                    </div> 
+
+                    <div class="slick_slides">
+                        <div class="plans-sec-box card mb-3">
+                            <div class="simimg">
+                                <h2>
+                                    SS2
+                                </h2>
+                            </div>
+                            <div class="content">                    
+                            <p class="">630 <br>
+                            <span>Mbps</span>
+                            </p>                   
+                            </div>
+                        </div>
+                        </div> 
+
+                        <div class="slick_slides">
+                            <div class="plans-sec-box card mb-3">
+                                <div class="simimg">
+                                    <h2>
+                                        Bukit Bintang
+                                    </h2>
+                                </div>
+                                <div class="content">                    
+                                <p class="">987 <br>
+                                <span>Mbps</span>
+                                </p>                   
+                                </div>
+                            </div>
+                            </div> 
+                        
+                            <div class="slick_slides">
+                            <div class="plans-sec-box card mb-3">
+                                <div class="simimg">
+                                    <h2>
+                                        Lot 10
+                                    </h2>
+                                </div>
+                                <div class="content">                    
+                                <p class="">870 <br>
+                                <span>Mbps</span>
+                                </p>                   
+                                </div>
+                            </div>
+                            </div> 
+
+                            <div class="slick_slides">
+                                <div class="plans-sec-box card mb-3">
+                                    <div class="simimg">
+                                        <h2>
+                                            Jalan Sungai Besi
+                                        </h2>
+                                    </div>
+                                    <div class="content">                    
+                                    <p class="">1007 <br>
+                                    <span>Mbps</span>
+                                    </p>                   
+                                    </div>
+                                </div>
+                                </div> 
+
+                                <div class="slick_slides">
+                                    <div class="plans-sec-box card mb-3">
+                                        <div class="simimg">
+                                            <h2>
+                                                Jalan Loke Yew
+                                            </h2>
+                                        </div>
+                                        <div class="content">                    
+                                        <p class="">701 <br>
+                                        <span>Mbps</span>
+                                        </p>                   
+                                        </div>
+                                    </div>
+                                    </div> 
+                    </div>                   
+            </div>
+            <p class="para w-100 d-block d-lg-block d-xl-none"><a href="https://www.yes.my/coverage/" target="_blank">
+                Check out our coverage map </a></p>
+        </div>
+
+        <div class="row" id="plans-rewards">
+            <div class="col-12 text-center">
+            <h1 class="mb-4 text-center">Experience Yes 5G today</h1>  
+           </div>          
+            <div class="col-12 col-xl-8 mx-auto">
+            <div class="row">
+            <div class="col-12 col-md-4 mb-4 data_rwd">
+            <img decoding="async" class="img-fluid mb-2" src="/wp-content/uploads/2023/05/power1.png">
+            <h2 class="my-3">Yes Power 35<br>Postpaid</h2>
+            <p><a class="btn pink-btn" href="https://www.yes.my/yes-postpaid-plans/" data-planid="707">
+                Learn more</a></p>
+            </div>
+            <div class="col-12 col-md-4 mb-4 data_rwd">
+            <img decoding="async" class="img-fluid mb-2" src="/wp-content/uploads/2023/05/power2.png">
+            <h2 class="my-3">Yes Infinite+ Basic<br>Postpaid</h2>
+            <p><a class="btn pink-btn" href="https://www.yes.my/yes-postpaid-plans/" data-planid="707">
+                Learn more</a></p>
+            </div>
+            <div class="col-12 col-md-4 mb-4 data_rwd">
+            <img decoding="async" class="img-fluid mb-2" src="/wp-content/uploads/2023/05/power3.png">
+            <h2 class="my-3">Yes FT5G Unlimited<br>Prepaid</h2>
+            <p><a class="btn pink-btn" href="https://www.yes.my/yes-prepaid-plans/" data-planid="707">
+            Learn more</a></p>
+            </div>
+            </div>
+            </div>
+        </div>              
+
+    </div>
+
+    <div id="wave-gallery-sec" class="w-100 d-none d-xl-block">    
+        <div class="img-sec-inner">    
+            <img decoding="async" class="img-fluid" src="/wp-content/uploads/2023/06/wave-g1.png">
+            <img decoding="async" class="img-fluid" src="/wp-content/uploads/2023/06/wave-g2.png">
+            <img decoding="async" class="img-fluid" src="/wp-content/uploads/2023/06/wave-g3.png">   
+        </div>     
+    </div>
+
+    <div id="wave-gallery-sec-mob" class="w-100 d-block d-lg-block d-xl-none">   
+            <div class="img-sec-inner">
+            <img decoding="async" class="img-fluid" src="/wp-content/uploads/2023/06/wave-mg.png">            
+        </div> 
+    </div>
+
+    <div class="social-media-sec">
+        <div class="container">
+
+        <ul class="icon-list">
+            <li><a href="https://www.facebook.com/Yes.5G/" target="_blank">
+                <img decoding="async" src="/wp-content/uploads/2023/06/facebook-icon.png"></a>
+            </li>
+                <li><a href="https://twitter.com/Yes_5G" target="_blank">
+                <img decoding="async" src="/wp-content/uploads/2023/06/twitter-icon.png"></a>
+            </li>
+                <li><a href="https://www.instagram.com/yes.5g/" target="_blank">
+                <img decoding="async" src="/wp-content/uploads/2023/06/instagram-icon.png"></a>
+            </li>  
+      </ul>
+      <p>Follow our socials for more updates on The Wave!</p>
+      </div>
+    </div>
+
+
+    <div class="about-sec-bottom-bg"> <img src="/wp-content/uploads/2023/06/about-sec-bottom-bg-1.png" class="w-100" alt="..."></div>
+
+        <div class="bottom-bg"> 
+            <img src="/wp-content/uploads/2023/06/bottom-bg.png" class="w-100" alt="..."></div>
+</section>
+<!-- mid section End -->
+
+
+<!-- /wp:code -->

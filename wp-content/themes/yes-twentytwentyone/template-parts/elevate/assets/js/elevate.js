@@ -110,7 +110,7 @@ const elevate = {
 
         this.initLocalStorage(productId, dc, duid, rc);
         $.ajax({
-            url: apiEndpointURL_elevate + '/getProduct/?code=' + productId,
+            url: apiEndpointURL_elevate + '/getProduct/?code=' + productId +'&nonce='+yesObj.nonce,
             method: 'GET',
             success: function(data) {
                 var pushData = [{

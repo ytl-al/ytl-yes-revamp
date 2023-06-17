@@ -213,8 +213,7 @@ if (!function_exists('ra_eligibility_check')) {
                         return is_numeric($param);
                     }
                 ]
-            ],
-            'permission_callback' => '__return_true'
+            ]
         ]);
     });
     add_filter("https_local_ssl_verify", "__return_false");

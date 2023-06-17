@@ -148,6 +148,7 @@ if (isset($_POST['trigger-select-promo-id']) && check_admin_referer('select_prom
         <a href="?page=ytl-pull-data-action" class="nav-tab">Pull Plans Action</a>
         <a href="javascript:void(0)" class="nav-tab nav-tab-active">Promo Data Upload</a>
         <a href="?page=ytl-pull-device-bundle-plan-data" class="nav-tab">Device Bundle Plan</a>
+        <a href="?page=ytl-token-data-guest-login" class="nav-tab">Guest Login Token Details </a>
     </div>
 
     <div class="wrapper-ytlpdAdmin">

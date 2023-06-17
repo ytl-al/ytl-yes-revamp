@@ -7,7 +7,7 @@
 		// var url = new URL(url_string);
 		// var planId = url.searchParams.get('planId');
 		// if(planId){
-			buyElevatePlan(21072);
+			buyElevatePlan(21107);
 		// }
 	});
 </script>

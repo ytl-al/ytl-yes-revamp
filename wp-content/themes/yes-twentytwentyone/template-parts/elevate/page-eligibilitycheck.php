@@ -60,7 +60,7 @@
                     </div>
                     <div class="col-md-7 p-5">
                         <form class="needs-validation" novalidate>
-                            <div class="mt-2 mb-2">
+                            <div>
                                 <h2 class="subtitle">{{ renderText('eligibility_check') }}</h2>
                                 <p class="sub mb-4" v-html="renderText('fill_in_mykad')"></p>
 
@@ -169,7 +169,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mt-2 mb-5">
+                                <div class="row mt-2">
                                     <div class="col-md-6">
                                         <button class="text-uppercase" @click="goNext"
                                                 :class="allowSubmit?'pink-btn':'pink-btn-disable'" type="button">{{ renderText('check_eligibility') }}
@@ -308,7 +308,7 @@
                     $('#status_mesage').html('Checking eligibility...');
 
                     toggleOverlay();
-                    axios.post(apiEndpointURL_elevate + '/verify-eligibility', params)
+                    axios.post(apiEndpointURL_elevate + '/verify-eligibility' + '?nonce='+yesObj.nonce, params)
                         .then((response) => {
 
                             var data = response.data;
@@ -351,7 +351,7 @@
                     };
                     toggleOverlay();
                     // $('#status_mesage').html('Checking compAsia...');
-                    axios.post(apiEndpointURL_elevate + '/verify-caeligibility', params)
+                    axios.post(apiEndpointURL_elevate + '/verify-caeligibility'+ '?nonce='+yesObj.nonce, params )
                         .then((response) => {
 
                             var data = response.data;
@@ -382,7 +382,7 @@
                     toggleOverlay();
                     $('#status_mesage').html('Checking contract...');
                     var t = new Date().getTime();
-                    axios.post(apiEndpointURL_elevate + '/check-active-contract?t='+t, params)
+                    axios.post(apiEndpointURL_elevate + '/check-active-contract?t='+t + '&nonce='+yesObj.nonce, params)
                         .then((response) => {
 
                             var data = response.data;
@@ -422,7 +422,7 @@
                     toggleOverlay();
                     $('#status_mesage').html('Checking customer...');
 
-                    axios.post(apiEndpointURL_elevate + '/customer', params)
+                    axios.post(apiEndpointURL_elevate + '/customer'+ '?nonce='+yesObj.nonce, params)
                         .then((response) => {
 
                             var data = response.data;

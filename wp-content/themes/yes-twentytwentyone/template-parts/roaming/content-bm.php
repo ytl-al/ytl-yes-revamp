@@ -203,7 +203,7 @@
 
 <!--Countries Section Start-->
 <section id="countries-section">
-    <h1>RM38/hari, sehingga 500MB di 20 negara.</h1>
+    <h1>RM38/hari, sehingga 500MB di 22 negara.</h1>
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -213,6 +213,11 @@
                             <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/australia.png">
                                 <h2>Australia</h2>
                                 <p>Telstra</p>
+                            </div>
+
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/austria.png">
+                                <h2>Austria</h2>
+                                <p>Hutchison - 3 (Drei)</p>
                             </div>
 
                             <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/bangladesh.png">
@@ -264,18 +269,23 @@
                                 <h2>Republic of Korea</h2>
                                 <p>SK Telecom (SKT)</p>
                             </div>
-							
-							<div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/macau.png">
-                                <h2>Macau</h2>
-                                <p>Hutchison (3)</p>
-                            </div>
                         </div>
                     </div>
                     <div>
                         <div class="row gy-5 row-roaming-country">
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/macau.png">
+                                <h2>Macau</h2>
+                                <p>Hutchison (3)</p>
+                            </div>
+
                             <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/maynmar.png">
                                 <h2>Myanmar</h2>
                                 <p>Telenor</p>
+                            </div>
+
+                            <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/saudi.png">
+                                <h2>Saudi Arabia</h2>
+                                <p>Zain SA</p>
                             </div>
 
                             <div class="col-6 col-md-4 col-lg-2"><img src="/wp-content/uploads/2022/06/singapore.png">

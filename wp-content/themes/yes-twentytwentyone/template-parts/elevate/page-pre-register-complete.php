@@ -532,7 +532,7 @@
 
                     self.allowSelectCity = false;
 
-                    axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode)
+                    axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode + '?nonce='+yesObj.nonce)
                         .then((response) => {
                             var options = [];
                             var data = response.data;
@@ -577,7 +577,7 @@
 						 self.guid = guid;
 
 						 toggleOverlay();
-						 axios.get(apiEndpointURL_elevate + '/getPreRegisterCompleted/?id=' + self.guid)
+						 axios.get(apiEndpointURL_elevate + '/getPreRegisterCompleted/?id=' + self.guid + '&nonce='+yesObj.nonce)
 							.then((response) => {
 								toggleOverlay(false);
 								var data = response.data;
@@ -717,7 +717,7 @@
 
 					//console.log(params);return;
 
-                    axios.post(apiEndpointURL_elevate + '/customer', params)
+                    axios.post(apiEndpointURL_elevate + '/customer' + '?nonce='+yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
                             if (data.status == 1) {
@@ -749,7 +749,7 @@
                     params.dealerCode = self.orderSummary.order.dealerCode;
 					$('#status_mesage').html('Process order...');
                     toggleOverlay();
-                    axios.post(apiEndpointURL_elevate + '/order/create', params)
+                    axios.post(apiEndpointURL_elevate + '/order/create' + '?nonce='+yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
                             if(data.status == 1){
@@ -780,7 +780,7 @@
 
                         param.orderNumber = self.orderResponse.orderNumber;
 
-                        axios.post(apiEndpointURL_elevate + '/order/update', param)
+                        axios.post(apiEndpointURL_elevate + '/order/update' + '?nonce='+yesObj.nonce, param ) 
                             .then((response) => {
                                 var data = response.data;
 
@@ -808,7 +808,7 @@
 					param.orderNumber = self.orderResponse.orderNumber;
 					param.error = error;
 
-					axios.post(apiEndpointURL_elevate + '/order/cancel', param)
+					axios.post(apiEndpointURL_elevate + '/order/cancel'+ '?nonce='+yesObj.nonce, param)
 						.then((response) => {
 							var data = response.data;
 							if(data.status == 1){

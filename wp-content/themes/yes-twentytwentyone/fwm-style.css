@@ -1,0 +1,1193 @@
+/*
+    Stylesheets Name : Yes-Wifi-Theme
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Montserrat;
+}
+
+:root {
+    --bg-maincolor: #ed028c;
+    --bg-grey: #f7f8f9;
+    --bg-normal-grey: #F5F5F5;
+}
+
+.entry-title {
+    display: none;
+}
+
+
+/* header css start */
+
+
+
+.language_main_btn_header_ytl ul li a {
+    margin: 0px 0px !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+color: #ed0888 !important;
+}
+
+.language_main_btn_header_ytl > a:focus{
+    box-shadow: 0px 0px 4px 3px transparent !important;
+}
+
+.language_main_btn_header_ytl > a {
+    color: #ff0084 !important;
+    background: transparent !important;
+    border: 0 !important;
+    font-weight: 600 !important;
+    margin: 0px 20px;
+    font-size: 15px;
+}
+
+.main_header_ytl_dev .navbar-nav .current_page_item a {
+    font-size: 18px !important;
+    color: #ed0888 !important;
+}
+
+.yes_main_header .navbar-toggler:focus {
+    box-shadow: 0px 0px 3px 3px transparent;
+}
+
+.yes_main_header {
+    position: fixed;
+    top: 0;
+    z-index: 10000;
+    width: 100%;
+    box-shadow: 0px 0px 40px rgba(255, 0, 132, 0.3);
+}
+
+.language_main_btn_header_ytl_list li a {
+    display: flex;
+    align-items: center;
+    margin: 0px !important;
+    color: #ff0084 !important;
+}
+
+.language_main_btn_header_ytl_list li a img {
+    width: 20px!important;
+    margin-right: 9px;
+}
+
+.main_header_ytl_dev .navbar-nav ul li a {
+    font-size: 15px;
+    font-weight: 600;
+    color: #000;
+    margin: 0px 20px;
+    text-decoration: none;
+}
+
+
+.main_header_ytl_dev .navbar-nav .nav-link:last-child {
+    color: var(--bg-maincolor) !important;
+}
+
+.main_header_ytl_dev .language_main_btn_header_ytl img {
+    width: 17px;
+}
+
+.language_main_btn_header_ytl {
+    color: #ff0084 !important;
+    background: transparent !important;
+    border: 0 !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+}
+
+
+.language_main_btn_header_ytl:focus {
+    box-shadow: 0px 0px 3px 2px transparent !important;
+}
+
+.language_main_btn_header_ytl_list li a {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.language_main_btn_header_ytl .dropdown-menu {
+    left: -30px !important;
+    border: 0;
+    margin-top: 0px !important;
+}
+.language_main_btn_header_ytl .dropdown-menu li {
+    margin: 0px !important;
+}
+
+.language_main_btn_header_ytl:focus:not(:focus-visible) {
+    outline: 0;
+    background-color: transparent;
+    color: #ff0084;
+}
+
+.language_main_btn_header_ytl{
+    background: transparent !important;
+    border: 0px !important;;
+}
+
+.language_main_btn_header_ytl:hover {
+    background-color: transparent !important;
+    color: #ff0084 !important;
+}
+
+/* header css end */
+
+
+/* home section css start */
+
+
+.yes_home_banner_main .carousel-item > img {
+    height: 700px;
+    object-fit: cover;
+}
+.yes_home_banner_main {
+    margin-top: 42px;
+}
+
+
+body .home_banner_btn_rounded [data-bs-target] {
+    height: 8px !important;
+    width: 8px !important;
+    border-radius: 50%;
+    background: transparent;
+    border: 2px solid #fff;
+}
+
+body .home_banner_btn_rounded .active {
+    background: #fff !important;
+}
+
+.yes_home_banner_main_content_ytl {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.yes_home_banner_main_content_ytl h1 {
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.yes_home_banner_main_content_ytl button {
+    background-color: transparent;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid #fff;
+}
+
+.yes_home_banner_main_content_ytl-2 {
+    justify-content: start;
+    padding-left: 12%;
+}
+
+.yes_home_banner_main_content_ytl-2 h3 {
+    font-weight: 600;
+    font-size: 23px;
+}
+
+.yes_home_banner_main_content_ytl-2 button {
+    font-size: 12px;
+}
+
+/* home section css end */
+
+/* about section css start */
+.yes_about_boxes_main_content img {
+    width: 100%;
+    max-width: 20%;
+}
+
+.yes_about_boxes_main_content p {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* iframe css start */
+.yes_iframe_main {
+    background: #272a47;;
+}
+
+body .home_banner_btn_rounded {
+    margin-bottom: 1.1rem !important;
+}
+
+
+.yes_iframe_main iframe{
+    height:630px;
+}
+
+.yes_iframe_main h1 {
+    color: var(--bg-maincolor) !important;
+}
+
+/* iframe css end */
+
+.yes_about_boxes_main_content h1 {
+    font-weight: 700;
+    font-size: 32px;
+}
+
+.yes_about_boxes_main_img {
+    border: 1px solid var(--bg-maincolor);
+    border-radius: 10px;
+}
+
+/* about section css end */
+
+
+/* description section css start */
+.yes_description_content_main p {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.yes_description_content_main button {
+    background: transparent;
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: underline;
+    color: var(--bg-maincolor);
+}
+
+.yes_description_img_main img {
+    width: 70%;
+}
+
+/* description section css end */
+
+/* our plans css start */
+
+.yes_main_heading_detail h1 {
+    font-weight: 700;
+    font-size: 32px;
+}
+
+.yes_main_heading_detail p {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.yes_our_plans_main_boxes {
+    background-color: var(--bg-normal-grey);
+    border-radius: 6px;
+    padding: 20px 20px;
+}
+
+.yes_our_plans_main_boxes img {
+    height: 225px;
+}
+
+.yes_our_plans_main_boxes h4 {
+    font-size: 15px;
+    /* color: var(--bg-maincolor); */
+    font-weight: 800;
+}
+
+.yes_our_plans_main_boxes h5 {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.yes_our_plans_main_boxes button {
+    border-radius: 20px;
+    padding: 9px 20px;
+    font-size: 12px;
+    background: var(--bg-maincolor);
+    font-weight: 800;
+}
+
+/* our plans css end */
+
+/* post win section css start  */
+.yes_post_win_boxes_main {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    padding: 40px 20px 20px 20px;
+    background-size: cover;
+}
+
+.yes_post_win_boxes_main-2 {
+    background-image: url(https://yes.my//wp-content/uploads/2022/12/location_img-1.png);
+    position: relative;
+}
+
+.yes_post_win_boxes_main-2 button {
+    position: absolute;
+    left: 0;
+    bottom: 20px;
+    right: 0;
+    width: max-content;
+    background: transparent !important;
+}
+
+.yes_post_win_boxes_main-2 p {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.yes_post_win_boxes_main h1 {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.yes_post_win_boxes_main h6 {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.yes_post_win_boxes_main button {
+    border-radius: 20px;
+    padding: 9px 20px;
+    font-size: 12px;
+    background: var(--bg-maincolor);
+    font-weight: 600;
+    border: 1px solid #fff;
+}
+
+.yes_your_business_boxes {
+    background: none;
+    padding: 0px 20px;
+}
+
+.yes_your_business_boxes h1 {
+    font-weight: 700;
+    font-size: 30px;
+    color: #000;
+}
+
+.yes_your_business_boxes p {
+    color: #000;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+/* post win section css end  */
+
+/* footer section css start */
+.footer_main_social_media_ytl_dev ul li {
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.footer_main_social_media_ytl_dev ul li a img {
+    width: 26px;
+}
+
+.footer_logo_main_ytl_dev img {
+    width: 45px;
+}
+
+footer {
+    position: relative;
+    z-index: 10;
+    margin-top: 100px;
+}
+
+footer .container-fluid {
+    position: relative;
+    z-index: 1000;
+    box-shadow: 0px 0px 40px rgb(255 0 132 / 30%);
+}
+
+footer:before {
+    position: absolute;
+    right: 12%;
+    top: -75px;
+    content: '';
+    background-image: url(https://yes.my/wp-content/uploads/2022/12/diamond-img.png);
+    width: 110px;
+    background-repeat: no-repeat;
+    height: 110px;
+    background-size: cover;
+    z-index: -100;
+}
+
+/* footer section css end */
+
+
+
+
+
+/* spots page css start */
+.yes_spots_main_banner {
+    position: relative;
+}
+
+.yes_spots_main_banner>img {
+    height: 700px;
+}
+
+.yes_main_accoring_heading {
+    background: var(--bg-maincolor) !important;
+    border-radius: 7px !important;
+}
+
+.yes_main_accoring_heading p {
+    font-size: 14px;
+    font-weight: 200;
+}
+
+.yes_main_accoring_heading h5 {
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.yes_finder_spot_main_accroding {
+    border-radius: 8px;
+    padding: 15px 20px;
+    border: 1px solid var(--bg-maincolor);
+}
+
+.yes_finder_spot_main_accroding p {
+    font-size: 14px;
+    font-weight: 500;
+    color: #000;
+}
+
+.yes_finder_spot_main_accroding h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+}
+
+.yes_finder_spot_main_accroding button a {
+    background: var(--bg-maincolor);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 8px 20px;
+    border-radius: 30px;
+}
+
+.yes_main_accoring_heading:after {
+    background: url(https://yes.my/wp-content/uploads/2022/12/up-btn.png) !important;
+    width: 17px;
+    height: 11px;
+    right: 15px;
+    position: absolute;
+    top: 26px;
+    bottom: 0;
+    border: 0 !important;
+}
+
+.yes_main_heading_main {
+    font-size: 32px;
+    font-weight: 700;
+    color: #000;
+}
+
+.yes_main_accoring_heading:focus {
+    box-shadow: 0px 0px 3px 4px #ff000000 !important;
+}
+
+/* spots page css end */
+
+
+/* win phone page css start */
+.yes_how_to_join_main_boxes h1 {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.yes_how_to_join_main_boxes p {
+    color: var(--bg-maincolor);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.yes_how_to_join_main_boxes p a {
+    color: var(--bg-maincolor);
+}
+
+.yes_how_to_join_mainlist li {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.yes_how_to_join_mainlist li .yes_how_to_join_number {
+    height: 30px !important;
+    max-width: 30px;
+    width: 30%;
+    border: 2px solid var(--bg-maincolor);
+    border-radius: 50%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    color: var(--bg-maincolor);
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+/* win phone page css end */
+
+
+/* our plans page css start */
+.yes_infinite_mainrow_boxes_ytl_rem {
+    background-color: #1A1E47;
+    border-radius: 8px;
+    padding: 20px 25px;
+}
+
+.yes_infinite_main_boxes_ytl_rem h4 {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.yes_infinite_main_boxes_ytl_rem ul li {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.yes_infinite_main_boxes_ytl_rem h6 {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--bg-maincolor);
+}
+
+.yes_infinite_main_boxes_ytl_rem button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background: var(--bg-maincolor);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.our_plans_main_heading_prepaid>h4 {
+    font-weight: 700;
+    font-size: 22px;
+    color: #000;
+}
+
+.yes_infinite_main_boxes_ytl_rem ul {
+    padding-left: 20px;
+}
+
+.yes_infinite_main_boxes_ytl_remimg img {
+    height: 200px;
+}
+
+/* our plans page css end */
+
+
+/* contact page css start */
+.yes_contact_main_banner_rem {
+    background-image: url(/site/wp-content/uploads/2023/01/business-visual-a-banner.jpg);
+    background-size: cover;
+    width: 100%;
+    margin-top: 80px;
+}
+
+.yes_contact_main_banner_content p {
+    font-size: 14px;
+}
+
+.yes_contact_main_banner_content h1 {
+    font-weight: 700;
+    font-size: 35px;
+}
+
+.yes_contact_main_banner_form form input {
+    font-size: 13px !important;
+    font-weight: 600;
+    color: #161616;
+    padding: 5px 15px !important;
+    height: 45px !important;
+}
+
+.yes_contact_main_banner_form form select {
+    font-size: 13px !important;
+    font-weight: 600;
+    color: #161616;
+    padding: 5px 15px !important;
+    height:48px !important;
+}
+
+.yes_contact_main_banner_rem .fm-form .wd-width-80 label{
+   display:none;
+}
+
+.yes_contact_main_banner_rem .fm-form .wd-width-20 label {
+   display:none;
+}
+
+.yes_contact_main_banner_rem .fm-form .wd-width-20 input {
+    font-size: 14px !important;
+    font-weight: 700;
+}
+
+.yes_contact_main_banner_rem .fm-form .wd-width-80{
+    width:90% !important;
+}
+
+.yes_contact_main_banner_rem .fm-form .wd-width-20 {
+    width: 10%;
+}
+
+.yes_contact_main_banner_rem .fm_empty_margin{
+    margin-top: 0px !important;
+}
+
+.yes_contact_main_banner_form form select:focus {
+    box-shadow: 0px 0px 3px 2px transparent !important;
+    border: 1px solid transparent !important;
+}
+
+.yes_contact_main_banner_form form input:focus {
+    box-shadow: 0px 0px 3px 2px transparent !important;
+    border: 1px solid transparent !important;
+}
+
+.yes_contact_main_banner_form form input::placeholder {
+    font-size: 13px;
+    color: #161616;
+}
+
+.yes_contact_main_banner_form .fm-form-container.fm-theme1{
+    width: 100%;
+}
+
+.yes_contact_main_banner_form button {
+    background-color: #ff0084 !important;
+    border: 1px solid #fff;
+    padding: 10px 10px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 30px;
+    width: 100%;
+    color:#fff;
+}
+
+.navbar-light .navbar-toggler-icon {
+    background-image: url(https://yes.my/wp-content/uploads/2022/12/bar-icon.png) !important;
+}
+
+.yes_wifi_conected {
+    background-color: #1A1E47;
+    color: #71D9AD;
+    position: absolute;
+    left: 0;
+    padding: 13px 0;
+    font-size: 13px;
+    display: none;
+}
+
+.yes_wifi_conected p {
+    z-index: 100;
+    position: relative;
+}
+
+.yes_contact_main_banner_content{
+    position: relative;
+}
+
+.yes_contact_main_banner_form{
+    position: relative;
+}
+
+footer:before {
+    content: none;
+}
+.home footer:before {
+    content:'' !important
+}
+
+.page-id-52 footer {
+    margin-top: 0px;
+}
+
+/* contact page css end */
+
+/* login page css start */
+.login_main_section_ytl_dev {
+    background-color: #1A1E47;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.login_main_section_ytl_dev:before {
+    content: '';
+    position: absolute;
+    right: 20%;
+    top: -8%;
+    background: url(https://yes.my/wp-content/uploads/2022/12/circel_rounded.png);
+    width: 12%;
+    height: 26%;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.login_main_section_ytl_dev:after {
+    content: '';
+    position: absolute;
+    right: 25%;
+    bottom: -14%;
+    background: url(https://yes.my/wp-content/uploads/2022/12/circel_rounded-2.png);
+    width: 12%;
+    height: 27%;
+    background-size: contain;
+}
+
+.main_login_form_ytl_dev {
+    position: relative;
+}
+
+.main_login_form_ytl_dev:before {
+    position: absolute;
+    left: -40%;
+    top: 0;
+    bottom: 0;
+    background: url(https://yes.my/wp-content/uploads/2022/12/clone-diamond.png);
+    width: 30%;
+    height: 40%;
+    background-size: contain;
+    content: '';
+    background-repeat: no-repeat;
+    margin: auto;
+
+}
+
+.facebook_btn_ytl_dev button {
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    background: #4267B2;
+    z-index: 1000;
+    position: relative;
+}
+
+.facebook_btn_ytl_dev button img {
+    height: 22px;
+    margin-right: 7px;
+}
+
+.main_btn_conncet_ytl_dev {
+    padding: 10px 20px;
+    background-color: var(--bg-maincolor);
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 30px;
+}
+
+.main_login_form_ytl_dev .mb-3 input {
+    background: transparent;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.main_login_form_ytl_dev .mb-3 input::placeholder {
+    color: #fff;
+}
+
+.main_login_form_ytl_dev .form-check-input {
+    border-color: #fff !important;
+    background: transparent !important;
+    padding: 9px;
+    border-radius: 6px;
+}
+
+.main_login_form_ytl_dev .form-check-input:checked[type=checkbox] {
+    background-image: url(https://yes.my/wp-content/uploads/2022/12/Icon.png) !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+}
+
+.main_login_form_ytl_dev .form-check-label {
+    font-size: 13px;
+    font-weight: 400;
+    position: relative;
+}
+
+/* login page css end */
+
+
+/* responsive design start */
+
+@media(max-width:767px) {
+    .language_main_btn_header_ytl > a{
+        margin: 0px 10px;
+    }
+    .yes_post_win_boxes_main-2 {
+        height: 520px;
+        margin-top: 20px;
+    }
+
+    .yes_post_win_boxes_main-2 p {
+        margin-top: 0px !important;
+        font-weight: 600 !important;
+    }
+
+    .yes_post_win_boxes_main-2 button {
+        position: inherit;
+        bottom: 0;
+    }
+
+    .yes_post_win_boxes_main .join_contest_btn {
+        position: absolute;
+        bottom: 30px;
+        left: 0;
+        right: 0;
+        width: fit-content;
+        border: 0;
+        font-size: 15px;
+        font-weight: 700;
+    }
+
+    .yes_post_win_boxes_main {
+        position: relative;
+    }
+
+    .yes_mobile_img_show {
+        position: relative;
+        top: 20px;
+    }
+
+    .yes_about_boxes_main_img {
+        height: 300px !important;
+    }
+
+    .yes_home_banner_main_content_ytl-2 {
+        justify-content: center;
+        padding: 0px;
+    }
+
+    /* .yes_home_banner_main_content_ytl-2:before {
+        position: absolute;
+        right: 0;
+        top: 0;
+        content: '';
+        background: url(https://yes.my/wp-content/uploads/2022/12/home-banner-3-circle-img-1.png);
+        width: 50%;
+        height: 24%;
+        background-repeat: no-repeat;
+        background-position: right;
+        background-size: contain;
+    }
+
+    .yes_home_banner_main_content_ytl-2:after {
+        position: absolute;
+        left: 0;
+        top: 25%;
+        content: '';
+        background: url(https://yes.my/wp-content/uploads/2022/12/home-banner-3-circle-img-2.png);
+        width: 30%;
+        height: 50%;
+        background-repeat: no-repeat;
+        background-position: left;
+        background-size: contain;
+    } */
+
+    .yes_home_banner_main_content_ytl-2 h6 {
+        position: relative;
+        z-index: 1000;
+    }
+
+    .yes_infinite_mainrow_boxes_ytl_rem {
+        position: relative;
+    }
+
+    .yes_infinite_main_boxes_ytl_remimg {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+    }
+
+    .yes_infinite_main_boxes_ytl_remimg img {
+        height: 150px;
+    }
+
+    .yes_contact_main_banner_content {
+        padding-top: 60px;
+    }
+
+    .yes_contact_main_banner_rem {
+        height: auto;
+        padding-bottom: 50px;
+        border-radius: 0px 0px 15px 15px;
+    }
+
+    .login_main_section_ytl_dev:before {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        content: '';
+        background: url(https://yes.my/wp-content/uploads/2022/12/circel_rounded.png);
+        width: 60%;
+        height: 39%;
+        background-repeat: no-repeat;
+        background-position: right;
+        top: inherit;
+    }
+
+    .login_main_section_ytl_dev:after {
+        position: absolute;
+        left: 0;
+        top: 0;
+        content: '';
+        background: url(https://yes.my/wp-content/uploads/2022/12/circel_rounded-2.png);
+        width: 100%;
+        height: 24%;
+        background-repeat: no-repeat;
+        background-position: left;
+        background-size: contain;
+    }
+
+
+    /* .mobile_screen_margin_ytl_rem:before {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        content: '';
+        background: url(https://yes.my/wp-content/uploads/2022/12/home-banner-3-circle-img-3.png);
+        width: 40%;
+        height: 50%;
+        background-repeat: no-repeat;
+        background-position: right;
+        background-size: contain;
+    } */
+
+    .yes_our_plans_main_banner .yes_spots_main_banner {
+        position: relative;
+    }
+
+    /* .yes_our_plans_main_banner .yes_spots_main_banner:after {
+        position: absolute;
+        left: 0;
+        top: 0;
+        content: '';
+        background: url(./images/home-banner-3-circle-img-2.png);
+        width: 40%;
+        height: 50%;
+        background-repeat: no-repeat;
+        background-position: left;
+        background-size: contain;
+        bottom: 0;
+        margin: auto;
+    } */
+
+    /* .yes_our_plans_main_banner .yes_spots_main_banner:before {
+        position: absolute;
+        right: 0;
+        top: 0;
+        content: '';
+        background: url(./images/home-banner-3-circle-img-1.png);
+        width: 43%;
+        height: 22%;
+        background-repeat: no-repeat;
+        background-position: right;
+        background-size: contain;
+    } */
+
+    .login_main_section_ytl_dev h1 {
+        z-index: 100;
+        position: relative;
+    }
+
+    .login_main_section_ytl_dev p {
+        z-index: 100;
+        position: relative;
+    }
+
+
+    .mobile_screen_margin_ytl_rem {
+        margin-top: 130px;
+        position: relative;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .mobile_screen_margin_ytl_rem .yes_mobile_img_bottom {
+        position: relative;
+        z-index: 1;
+        left: -25px;
+    }
+
+    .yes_our_plans_main_boxes_mobile {
+        background-color: var(--bg-normal-grey);
+    }
+
+    .yes_our_plans_main_boxes_mobile h4 {
+        font-weight: 800;
+    }
+
+    .yes_slider_mobile_screen_show .carousel-indicators {
+        margin-bottom: -4rem !important;
+    }
+
+    .yes_main_heading_detail h1 {
+        font-size: 25px;
+        color: #000;
+    }
+
+    .yes_slider_mobile_screen_show .carousel-indicators [data-bs-target] {
+        width: 8px !important;
+        height: 8px !important;
+        border-radius: 50%;
+        background: transparent;
+        border: 2px solid #eb028b;
+        opacity: 1;
+    }
+
+    .yes_slider_mobile_screen_show .carousel-indicators .active {
+        background: #eb028b;
+    }
+
+    .main_header_ytl_dev {
+        position: absolute;
+        top: 80px;
+        background: #fff;
+        width: 100%;
+        z-index: 1000;
+        left: 0;
+    }
+
+    .toggle_btn_bar_tyl:focus {
+        box-shadow: 0px 0px 3px 2px transparent !important;
+    }
+
+    .yes_mobile_img_bottom {
+        position: relative;
+        z-index: 1;
+    }
+
+    .phone_list_join_main_banner_ytl .yes_spots_main_banner>img {
+        border-radius: 0px 0px 20px 20px;
+        height: 600px;
+    }
+
+    .yes_our_plans_main_banner .yes_spots_main_banner>img {
+        border-radius: 0px 0px 20px 20px;
+        height: 600px;
+    }
+
+
+    .yes_our_plans_main_banner h1,
+    p {
+        z-index: 100;
+        position: relative;
+    }
+
+    .yes_our_plans_main_banner h1 br {
+        display: none;
+    }
+
+    .yes_location_main_text_content h1 {
+        color: #1A1E47 !important;
+        font-weight: 800;
+    }
+
+    .yes_location_main_text_content p {
+        color: #1A1E47 !important;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .yes_location_main_text_content button {
+        color: #1A1E47 !important;
+        border-color: #1A1E47 !important;
+        text-transform: uppercase;
+        font-size: 13px !important;
+        font-weight: 800;
+        border: 2px solid #1A1E47;
+    }
+
+   
+
+    .footer:before {
+        content: none !important;
+    }
+
+    footer .container-fluid {
+        box-shadow: 0px 0px 2px 2px transparent;
+    }
+
+    .yes_mobile_img_show {
+        width: 100%;
+    }
+
+    .footer_logo_main_ytl_dev {
+        display: none;
+    }
+
+    .footer_main_social_media_ytl_dev p {
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+   
+    .yes_home_banner_main .carousel-item > img{
+        margin-top: 0px;
+    }
+
+    .yes_contact_main_banner_content h1{
+        z-index:10;
+        position: relative;
+    }
+
+    .navbar{
+        z-index:10;
+        position: relative
+    }
+
+    .yes_location_main_text_content button a {
+        color: #1A1E47 !important;
+    }
+    .main_header_ytl_dev .navbar-nav ul {
+        margin-top: 20px;
+    }
+    
+}
+
+@media(max-width:640px) {
+
+    .yes_your_business_boxes {
+        padding: 0;
+    }
+}
+
+@media(max-width:400px) {
+    .yes_infinite_main_boxes_ytl_remimg img {
+        height: 90px;
+    }
+
+    .phone_list_join_main_banner_ytl .yes_spots_main_banner .yes_mobile_img_bottom {
+        width: 100%;
+    }
+}
+
+@media(min-width:992px) and (max-width:1183px){
+    .main_header_ytl_dev .navbar-nav ul li a{
+        font-size: 13px;
+        margin: 0px 10px;
+    }
+}
+
+@media(max-width:1182px){
+    .main_header_ytl_dev .navbar-nav ul {
+        margin-top: 20px;
+    }
+
+    .main_header_ytl_dev li {
+        margin-bottom: 20px;
+    }
+
+}
+
+/* responsive design end */

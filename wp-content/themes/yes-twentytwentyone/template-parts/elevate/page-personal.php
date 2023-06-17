@@ -234,7 +234,8 @@
 <?php require_once('includes/footer.php'); ?>
 
 <?php
-    $file = dirname(__FILE__).'/'.'postcodes.json';
+
+    $file = dirname(__FILE__).'/'.'postcodes.json'; 
     $postcode = json_decode(file_get_contents($file));
 
     $code = [];
@@ -245,15 +246,15 @@
         $code[$item->code] = $item;
         if(!@in_array($item->state,$state)){
             $state[] = $item->state;
+			// $item->state='MALAYSIA';
         }
         if(!@in_array($item->city,$city)){
             $city[] = $item->city;
         }
-        if(!@in_array($item->city,$stateCity[$item->state])){
-            $stateCity[$item->state][] = $item->city;
+        if(!isset($stateCity[$item->state]) || !@in_array($item->city,$stateCity[$item->state])){
+            $stateCity[$item->state][]= $item->city;
         }
     }
-
 ?>
 
 <script type="text/javascript">
@@ -608,7 +609,7 @@
                         $('.form-select').selectpicker('refresh');
                     }, 100);
 
-                    axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode)
+                    axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode + '?nonce='+yesObj.nonce)
                         .then((response) => {
                             var options = [];
                             var data = response.data;
@@ -653,7 +654,7 @@
 
                     self.allowSelectCity = false;
 
-                    axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode)
+                    axios.get(apiEndpointURL + '/get-cities-by-state/' + stateCode + '?nonce='+yesObj.nonce)
                         .then((response) => {
                             var options = [];
                             var data = response.data;
@@ -821,7 +822,7 @@
                     }
 
 
-                    axios.post(apiEndpointURL_elevate + '/customer/update', param)
+                    axios.post(apiEndpointURL_elevate + '/customer/update' + '?nonce='+yesObj.nonce, param)
                         .then((response) => {
                             var data = response.data;
                             if(data.status == 1){

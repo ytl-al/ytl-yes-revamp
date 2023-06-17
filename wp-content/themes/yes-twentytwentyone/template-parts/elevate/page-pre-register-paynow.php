@@ -57,10 +57,10 @@
                     </div>
                 </div>
                 <div class="row gx-5" v-if="pageValid">
-                    <div class="col-lg-5 col-12 order-lg-2">
+                    <div class="col-lg-4 col-12 order-lg-2">
                         <?php include('pre-order-summary.php'); ?>
                     </div>
-                    <form class="col-lg-7 col-12 order-lg-1 mt-3 mt-lg-0" autocomplete="off" @submit="paymentSubmit">
+                    <form class="col-lg-8 col-12 order-lg-1 mt-3 mt-lg-0" autocomplete="off" @submit="paymentSubmit">
                         <div>
                             <h1 class="mb-4 d-none d-lg-block">{{ renderText('payment_info') }}</h1>
                             <p class="sub mb-4 pe-5 d-none d-lg-block">{{ renderText('payment_info_label_1') }}</p>
@@ -559,7 +559,7 @@
                     },
                     ajaxGetFPXBankList: function() {
                         var self = this;
-                        axios.get(apiEndpointURL + '/get-fpx-bank-list')
+                        axios.get(apiEndpointURL + '/get-fpx-bank-list' + '?nonce='+yesObj.nonce)
                             .then((response) => {
                                 var data = response.data;
                                 if (!data.fpxServiceDown) {
@@ -591,7 +591,7 @@
                     ajaxGetMaybankIPPTenures: function() {
 
                         var self = this;
-                        axios.post(apiEndpointURL + '/get-ipp-tenures', {
+                        axios.post(apiEndpointURL + '/get-ipp-tenures' + '?nonce='+yesObj.nonce, {
                             'plan_name': self.orderSummary.plan.planName
                         })
                             .then((response) => {
@@ -613,7 +613,7 @@
                     ajaxGetMaybankIPPInstallments: function(totalAmount, tenure) {
                         var self = this;
                         var ippInstallment = {};
-                        axios.post(apiEndpointURL + '/get-ipp-monthly-installments', {
+                        axios.post(apiEndpointURL + '/get-ipp-monthly-installments' + '?nonce='+yesObj.nonce, {
                             'total_amount': totalAmount,
                             'tenure_type': tenure
                         })
@@ -668,7 +668,7 @@
                             'yos_order_id': self.orderResponse.orderNumber
                         };
                         // console.log(self.orderResponse);
-                        axios.post(apiEndpointURL + '/check-order-payment-status', params)
+                        axios.post(apiEndpointURL + '/check-order-payment-status' + '?nonce='+yesObj.nonce, params)
                             .then((response) => {
                                 var data = response.data;
                                 var responseCode = data.responseCode;
@@ -860,7 +860,7 @@
                         }
 
                         //console.log("params",params); return;
-                        axios.post(apiEndpointURL_elevate + '/create-yos-order', params)
+                        axios.post(apiEndpointURL_elevate + '/create-yos-order' + '?nonce='+yesObj.nonce, params)
                             .then((response) => {
                                 var data = response.data.data;
                                 self.orderResponse = data;
@@ -927,7 +927,7 @@
                         var param = elevate.lsData.orderInfo;
                         param.orderNumber = self.orderResponse.orderNumber;
 
-                        axios.post(apiEndpointURL_elevate + '/order/update', param)
+                        axios.post(apiEndpointURL_elevate + '/order/update' + '?nonce='+yesObj.nonce, param)
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
@@ -953,7 +953,7 @@
                         param.orderNumber = self.orderResponse.orderNumber;
                         param.error = error;
 
-                        axios.post(apiEndpointURL_elevate + '/order/cancel', param)
+                        axios.post(apiEndpointURL_elevate + '/order/cancel'+ '?nonce='+yesObj.nonce, param)
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
@@ -991,7 +991,7 @@
 						}
                         param.status = status.toString();
 
-                        axios.post(apiEndpointURL_elevate + '/order/updatePayment', param)
+                        axios.post(apiEndpointURL_elevate + '/order/updatePayment' + '?nonce='+yesObj.nonce, param )
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
@@ -1022,7 +1022,7 @@
 						toggleOverlay();
 						$('#status_mesage').html('Remove data...');
 
-						axios.post(apiEndpointURL_elevate + '/del-prequalified-customer', params)
+						axios.post(apiEndpointURL_elevate + '/del-prequalified-customer' + '?nonce='+yesObj.nonce, params)
 							.then((response) => {
 								var data = response.data;
 								if(data.status == 1){

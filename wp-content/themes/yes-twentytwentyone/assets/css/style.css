@@ -1567,17 +1567,100 @@ body.show-overlay .layer-overlay {
     height: 40px;
 }
 
-/*Remove Extra Spaces from footer  */
-#qm-icon-container {
-	 display: none !important;
+/* .page-header .navbar .dropdown-menu.postpaid_menu {
+    min-width: 60% !important;
 }
-.page-header .navbar .dropdown-menu { z-index: 1030; }
-.page-header.sticky-top { z-index: 1030; }
+
+.page-header .navbar .dropdown-menu.prepaid_menu {
+    min-width: 30% !important;
+}
+
+.page-header .navbar .dropdown-menu.broadband_menu {
+    min-width: 50% !important;
+} */
+
+.top-tabs-container ul#tabNav li:first-child {
+    display: none !important;
+}
+.get_help-mobile .box ul {
+    display: inline-block;
+    margin: 15px;
+}
+.page-header .navbar .dropdown-menu { z-index: 1030; width: auto;}
+.page-header.sticky-top { z-index: 1030;}
 body.page-scrolled .page-header.sticky-top { filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.15)); }
 .page-header.sticky-top .nav-container .navbar { transition: all 230ms ease-in-out; }
-body.page-scrolled .page-header.sticky-top .nav-container .navbar { padding-top: 0.3rem; padding-bottom: 0.3rem; }
 @media (max-width: 991px) {
     .page-header .nav-container .navbar .navbar-collapse .mega-dropdown-menu { box-shadow: 0 0 0 transparent; }
-    .page-header.sticky-top .nav-container .navbar .navbar-collapse { padding-top: .7rem; padding-bottom: .7rem; overflow-y: auto !important; max-height: 80vh !important; }
     body.page-scrolled .page-header.sticky-top.filter-shadow .nav-container .navbar { padding-top: 0; padding-bottom: 0px; }
+}
+
+
+@media(max-width: 781px) {
+    .widget.widget_nav_menu div{
+        display:none !important;
+    }
+
+    .widget.widget_nav_menu div.active{
+        display:block !important;
+    }
+
+    footer.footer .wp-block-columns .widget.widget_nav_menu {
+        margin-bottom: 0px !important;
+    }
+
+    footer.footer .wp-block-columns{
+        gap: 0 !important;
+        margin: 0 !important;
+    }
+
+    footer.footer .wp-block-columns .widget.widget_nav_menu h2.widgettitle {
+        margin: 0 !important;
+        border-bottom: 0.5px solid #dcdcdc;
+        padding: 8px 0;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: .2s;
+    }
+
+    footer.footer .wp-block-columns .widget.widget_nav_menu h2.widgettitle::after {
+        content: url('https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/05/expand.svg');
+    }
+
+    footer.footer .wp-block-columns .widget.widget_nav_menu h2.widgettitle.active::after {
+        transform: rotate(45deg);
+        transition: .2s;
+    }
+
+    footer.footer .ctm-logo {
+        margin: 24px 0 0 !important;
+    }
+
+    .footer .icon-list li {
+        margin-right: 30px !important;
+    }
+
+    .footer .icon-list li a img {
+        width: 35px !important;
+        height: 35px !important;
+        object-fit: contain !important;
+    }
+
+    .footer .icon-list.icon-appdownload {
+        max-width: 170px !important;
+    }
+
+    .footer .icon-list li a svg {
+        width: 25px !important;
+    }
+
+    footer.footer .wp-block-columns .widget.widget_nav_menu ul.menu {
+        padding: 8px 10px !important;
+    }
+
+    footer.footer .wp-block-columns .widget.widget_nav_menu ul.menu li a {
+        line-height: 22px !important;
+    }
 }

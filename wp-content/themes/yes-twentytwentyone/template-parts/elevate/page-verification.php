@@ -88,7 +88,7 @@
 </main>
 </div>
 <?php require_once('includes/footer.php'); ?>
-<?php $apiSetting = \Inc\Base\Model::getAPISettings();?>
+<?php $apiSetting = ( new \Inc\Base\Model)->getAPISettings();?>
 <script type="text/javascript"
         src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/qrcodejs/qrcode.min.js"></script>
 <script type="text/javascript">
@@ -215,7 +215,7 @@
                             fname: self.eligibility.name
                         };
 						var d = new Date();
-                        axios.post(apiEndpointURL_elevate + '/ekyc-check?t='+d.getTime(), params)
+                        axios.post(apiEndpointURL_elevate + '/ekyc-check?t='+d.getTime() + '&nonce='+yesObj.nonce, params)
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
@@ -264,7 +264,7 @@
                         OCRConfidenceScore:response.sim,
                     };
                     toggleOverlay();
-                    axios.post(apiEndpointURL_elevate + '/ca-verification', params)
+                    axios.post(apiEndpointURL_elevate + '/ca-verification' + '?nonce='+yesObj.nonce, params)
                         .then((response) => {
 
                             var data = response.data;
