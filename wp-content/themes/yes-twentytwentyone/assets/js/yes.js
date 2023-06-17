@@ -591,5 +591,5 @@ jQuery('.responsive').slick({
  */
 function hideAnalyticsImage() {
     $('img[src*="ad.doubleclick.net"]').hide();
-    $('img[src*=apis.adbro.me"]').hide();
+    $('img[src*="apis.adbro.me"]').hide();
 }
