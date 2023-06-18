@@ -1360,7 +1360,7 @@ footer.footer .wp-block-image {
 
 @media (max-width: 559px) {
     .wp-block-column:not(:first-child) {
-        flex-basis: 50% !important;
+        flex-basis: 55% !important;
     }
     footer.footer .copyright .size-full {
         margin-top: 10px;
