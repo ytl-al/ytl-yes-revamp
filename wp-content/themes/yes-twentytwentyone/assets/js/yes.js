@@ -14,6 +14,8 @@ const pageLoadTimestamp = Date.now();
 
 var scrolledAosRefresh = false;
 
+var checkScrollAnalytics = true;
+
 $(document).ready(function() {
     checkTopPageBannerExpiry();
     checkPageModalExpiry();
@@ -590,6 +592,15 @@ jQuery('.responsive').slick({
  * @since    1.2.2
  */
 function hideAnalyticsImage() {
-    $('img[src*="ad.doubleclick.net"]').hide();
-    $('img[src*="apis.adbro.me"]').hide();
+    if (checkScrollAnalytics) {
+        checkScrollAnalytics = false;
+        $(window).scroll(function () {
+            setTimeout(function() {
+                var trackingImgSrcs = ['ad.doubleclick.net', 'apis.adbro.me'];
+                for (let i = 0; i < trackingImgSrcs.length; i++) {
+                    $('img[src*="' + trackingImgSrcs[i] + '"]').hide();
+                }
+            }, 500);
+        });
+    }
 }
