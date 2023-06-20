@@ -83,11 +83,24 @@ class BetterDocs
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
         if (is_admin()) {
+			add_action( 'in_plugin_update_message-betterdocs/betterdocs.php', [$this, 'plugin_update_message'], 10, 2 );
             new Betterdocs_Role_Management_Lite();
         }
 		add_action('admin_init', array($this, 'redirect'));
 		add_action('wp_ajax_optin_wizard_action_betterdocs', array($this, 'wizard_action'));
 	}
+
+    public function plugin_update_message( $plugin_data, $response ) {
+        if ( isset( $response->upgrade_notice ) ) {
+            $new_version                = $plugin_data['new_version'];
+            $current_version            = $this->version;
+            $current_version_minor_part = explode( '.', $current_version )[0];
+            $new_version_minor_part     = explode( '.', $new_version )[0];
+			$major = ! ( $current_version_minor_part === $new_version_minor_part );
+
+			include BETTERDOCS_ADMIN_DIR_PATH . 'partials/upgrade.php';
+        }
+    }
 
 	/**
 	 * Load the required dependencies for this plugin.
@@ -258,7 +271,7 @@ class BetterDocs
                     if ( $keyword == NUll ) {
                         $insert = $wpdb->query(
                             $wpdb->prepare(
-                                "INSERT INTO {$wpdb->prefix}betterdocs_search_keyword 
+                                "INSERT INTO {$wpdb->prefix}betterdocs_search_keyword
                                 ( keyword )
                                 VALUES ( %s )",
                                 array(
