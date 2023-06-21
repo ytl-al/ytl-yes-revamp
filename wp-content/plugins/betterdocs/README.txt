@@ -3,9 +3,9 @@ Contributors: wpdevteam, re_enter_rupok, asif2bd, emsohel, priyomukul, manzuraha
 Donate link: https://wpdeveloper.com
 Tags:  knowledge base, docs, documentation, documents, wiki, faq page, doc, knowledge, knowledgebase, doc page, best documentation plugin, support ticket, customer support, instant answer bot, bot, help articles, better docs, document, faq, instant answers, elementor, chat, live search, external knowledgebase, multiple knowledge bases, faqs, help, chatbot, TOC, table of content, elementor doc, template, doc theme
 Requires at least: 4.0
-Tested up to: 6.2
+Tested up to: 6.1
 Requires PHP: 5.6
-Stable tag: 2.3.6
+Stable tag: 2.3.7
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,7 +15,7 @@ A better Documentation and Knowledgebase plugin for WordPress. Create better Doc
 
 Do you want to reduce your support pressure immediately? How about you creating a stunning and resourceful knowledge base for your customers? 🤔
 
-👨‍💻 82% of customers prefer to support through an online knowledge base and actually get annoyed to create support tickets as it’s a lengthy process. So creating an informative Documentation page can help to enhance your customer experience.
+👨‍💻 82% of customers prefer to support through an online knowledge base and actually get annoyed to create support tickets as it’sits a lengthy process. So creating an informative Documentation page can help to enhance your customer experience.
 
 But how do you create a stunning **docs** page easily on WordPress site without any coding? Well, we’ve got you covered. 😎
 
@@ -178,6 +178,11 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 2.3.7 - 19/06/2023 =
+- Fixed: FAQ Builder Loading Issue
+- Fixed: Security Enhancement Reported by Nathan Dawson
+- Few minor bug fixes & improvements
 
 = 2.3.6 - 08/02/2023 =
 - Fixed: Category Grid Elementor widget showing underlines

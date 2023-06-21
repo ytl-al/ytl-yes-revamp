@@ -64,7 +64,7 @@ class BetterDocs_Docs_Post_Type
         add_action('admin_enqueue_scripts', array(__CLASS__, 'load_media'));
         add_action('admin_footer', array(__CLASS__, 'add_script'));
         // add doc category image on rest api
-        add_action('rest_api_init', array(__CLASS__, 'add_doc_category_meta_rest_api'), 10, 2);
+        add_action('rest_api_init', array(__CLASS__, 'add_doc_category_meta_rest_api'), 10);
         // fires after a new doc_category is created
         add_action('created_doc_category', array(__CLASS__, 'action_created_doc_category'), 10, 2);
     }
@@ -485,11 +485,11 @@ class BetterDocs_Docs_Post_Type
                 <img src="' . BETTERDOCS_ADMIN_URL . 'assets/img/betterdocs-cat-icon.svg" alt="">
             </div>
             <p>
-                <input type="button" id="betterdocs_tax_media_button" 
-                    class="button button-secondary betterdocs_tax_media_button" 
+                <input type="button" id="betterdocs_tax_media_button"
+                    class="button button-secondary betterdocs_tax_media_button"
                     name="betterdocs_tax_media_button"
                     value="' . esc_html__('Add Image', 'betterdocs') . '" />
-                <input type="button" 
+                <input type="button"
                     id="doc_tax_media_remove"
                     class="button button-secondary doc_tax_media_remove"
                     name="doc_tax_media_remove"
@@ -783,15 +783,26 @@ class BetterDocs_Docs_Post_Type
         ]);
         // endpoint for single doc reactions, this code will be refactored in the future
         register_rest_route( 'betterdocs', '/feedback/(?P<id>\d+)', array(
-            'methods'   => [ 'PUT', 'POST' ],
+            'methods'   => 'POST',
             'callback'  => array( __CLASS__, 'save_response' ),
             'permission_callback' => '__return_true',
             'args'      => array(
                 'id' => array(
+					'type' => 'integer',
                     'validate_callback' => function($param, $request, $key) {
-                        return is_numeric( $param );
-                    }
+                        return !empty($param) && is_numeric($param) && get_post($param) !== null;
+                    },
+					'required' => false,
+					'default' => null,
                 ),
+				'feelings' => array(
+					'type' => 'string',
+					'validate_callback' => function($param, $request, $key) {
+						$allowed_feelings = array('happy', 'sad', 'normal');
+						return in_array($param, $allowed_feelings);
+					},
+					'required' => true
+				),
             ),
         ));
     }
@@ -800,13 +811,14 @@ class BetterDocs_Docs_Post_Type
     /**
      * Save Feedback for individual Docs(Migrated From Pro To Free Version)
      * @param WP_REST_Request $request
-     * @return void
+     * @return bool
      */
-    public static function save_response( WP_REST_Request $request ){
+    public static function save_response( WP_REST_Request $request ) {
         global $wpdb;
-        $docs_id = isset( $request['id'] ) ? intval( $request['id'] ) : null;
-        $feelings = isset( $request['feelings'] ) ? $request['feelings'] : 'happy';
-        if( $docs_id !== null && get_option('betterdocs_pro_db_version') == true ) {
+        $docs_id = isset( $request['id'] ) ? esc_sql( intval( $request['id'] ) ) : null;
+        $feelings = isset( $request['feelings'] ) ? esc_sql( $request['feelings'] ) : 'happy';
+
+        if( $docs_id !== null && get_post( $docs_id ) && get_option('betterdocs_pro_db_version') == true ) {
             $post_id = $wpdb->get_results(
                 $wpdb->prepare(
                     "SELECT *
@@ -821,7 +833,7 @@ class BetterDocs_Docs_Post_Type
                 $feelings_increment = $post_id[0]->{$feelings} + 1;
                 $insert = $wpdb->query(
                     $wpdb->prepare(
-                        "UPDATE {$wpdb->prefix}betterdocs_analytics 
+                        "UPDATE {$wpdb->prefix}betterdocs_analytics
                     SET ".$feelings." = ". $feelings_increment ."
                     WHERE created_at = %s AND post_id = %d",
                         array(
@@ -833,7 +845,7 @@ class BetterDocs_Docs_Post_Type
             } else {
                 $insert = $wpdb->query(
                     $wpdb->prepare(
-                        "INSERT INTO {$wpdb->prefix}betterdocs_analytics 
+                        "INSERT INTO {$wpdb->prefix}betterdocs_analytics
                         ( post_id, ".$request['feelings'].", created_at )
                         VALUES ( %d, %d, %s )",
                         array(
@@ -845,8 +857,9 @@ class BetterDocs_Docs_Post_Type
                 );
             }
 
-            if( $insert == true ) return true;
-
+            if( $insert == true ) {
+				return true;
+			}
         }
         return false;
     }

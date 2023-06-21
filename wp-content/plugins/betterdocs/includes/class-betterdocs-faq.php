@@ -45,6 +45,7 @@ class BetterDocs_FAQ
         // fires after a new betterdocs_faq_category is created
         add_action('created_betterdocs_faq_category', array($this, 'action_created_betterdocs_faq_category'), 10, 2);
         add_action('rest_api_init', array($this, 'register_api_endpoint'));
+        add_action('rest_betterdocs_faq_category_query', array($this, 'faq_category_orderby_meta'), 10, 2);
     }
 
     /**
@@ -336,7 +337,52 @@ class BetterDocs_FAQ
             'callback'  => array( $this, 'get_uncategorised_faq' ),
             'permission_callback' => '__return_true'
         ));
+
+		register_rest_route( $this->namespace, '/faq/category_search/', array(
+            'methods'   => [ 'GET' ],
+            'callback'  => array( $this, 'category_search' ),
+            'permission_callback' => '__return_true',
+			'args'      => array(
+				'title' => array(
+					'type' => 'string',
+					'required' => true
+				),
+            ),
+        ));
     }
+
+	public function category_search( $request ) {
+
+		$title = $request['title'];
+
+		// Perform the taxonomy search
+		$taxonomy_args = array(
+			'name__like' => $title,
+			'taxonomy' => 'betterdocs_faq_category',
+			'hide_empty' => false
+		);
+
+		$taxonomies = get_terms($taxonomy_args);
+
+		if (!empty($taxonomies)) {
+			$result = array();
+			foreach ($taxonomies as $taxonomy) {
+				$result[] = array(
+					'id' => $taxonomy->term_id,
+					'count' => $taxonomy->count,
+					'description' => $taxonomy->description,
+					'name' => $taxonomy->name,
+					'slug' => $taxonomy->slug
+					// Add more fields as needed
+				);
+			}
+			// Return the taxonomy data
+			return $result;
+		} else {
+			// Taxonomy not found
+			return new WP_Error('taxonomy_not_found', 'Taxonomy not found.', array('status' => 404));
+		}
+	}
 
     public function create_faq_sample( $params ) {
         $sample_data = json_decode($params->get_param('sample_data'), true);
@@ -373,7 +419,7 @@ class BetterDocs_FAQ
             'slug' => $slug,
             'description' => $description
         ) );
-        
+
         if ( is_wp_error( $update ) ) {
             return $update;
         } else {
@@ -382,8 +428,36 @@ class BetterDocs_FAQ
     }
 
     public function delete_faq_category( $params ) {
+		$taxomomy = 'betterdocs_faq_category';
         $term_id = $params->get_param('term_id');
-        $delete = wp_delete_term( $term_id, 'betterdocs_faq_category' );
+		$with_all_post = $params->get_param('with_all_post');
+
+		if ( $with_all_post ) {
+			$args = array(
+				'post_type' => 'betterdocs_faq',
+				'post_status' => 'any',
+				'tax_query' => array(
+					array(
+						'taxonomy' => $taxomomy,
+						'field' => 'term_id',
+						'terms' => $term_id,
+					),
+				),
+				'posts_per_page' => -1,
+			);
+
+			$posts = get_posts( $args );
+
+			// Delete the assigned posts
+			foreach ( $posts as $post ) {
+				wp_delete_post( $post->ID, true );
+			}
+
+			// Delete the term
+			$delete = wp_delete_term( $term_id, $taxomomy );
+		} else {
+			$delete = wp_delete_term( $term_id, $taxomomy );
+		}
 
         if( is_wp_error( $delete ) ) {
             return $delete;
@@ -413,7 +487,7 @@ class BetterDocs_FAQ
 	{
         $faq_category_order = $params->get_param('faq_category_order');
         $faq_category_order = json_decode($faq_category_order, true);
-        
+
 		foreach ($faq_category_order as $order_data) {
             if ((int) $order_data['current_position'] != (int) $order_data['updated_position']) {
                 update_term_meta($order_data['id'], 'order', ((int) $order_data['updated_position']));
@@ -547,7 +621,7 @@ class BetterDocs_FAQ
             $taxonomy_objects = get_terms( 'betterdocs_faq_category', array(
                 'hide_empty' => false,
             ) );
-            
+
             if ( $taxonomy_objects && !is_wp_error( $taxonomy_objects ) ) :
                 foreach ( $taxonomy_objects as $term ) :
                     $args = array(
@@ -562,15 +636,15 @@ class BetterDocs_FAQ
                             )
                         )
                     );
-                    
+
                     $posts = $this->faq_post_loop($args);
-    
+
                     $faq[$term->slug] = [
                         (array) $term,
                         'posts' => $posts
                     ];
                 endforeach;
-            endif; 
+            endif;
         } else {
             $args = array(
                 'post_type' => 'betterdocs_faq',
@@ -580,7 +654,7 @@ class BetterDocs_FAQ
             $posts = $this->faq_post_loop($args);
             $faq['posts'] = $posts;
         }
-        
+
         return $faq;
     }
 
@@ -607,6 +681,14 @@ class BetterDocs_FAQ
             ]
         ] );
     }
+
+	public function faq_category_orderby_meta($args, $request) {
+		if ($args['taxonomy'] === 'betterdocs_faq_category') {
+			$args['orderby'] = 'meta_value_num';
+			$args['meta_key'] = 'order';
+		}
+		return $args;
+	}
 
 }
 if (class_exists('BetterDocs_FAQ')) {
