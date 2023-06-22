@@ -2464,6 +2464,21 @@ function yes_menu($path)
         </li>
     </ul>
 
+    <ul class="navbar-nav relative">
+        <?php
+        $lang = get_bloginfo("language");
+        if ($lang == "en-US") {
+            $menu_link_5G_Gaming = 'http://www.cloudgaming.my';
+        } elseif ($lang == "ms-MY") {
+            $menu_link_5G_Gaming = 'http://www.cloudgaming.my';
+        }
+        ?>
+        <li id="menu-item-31215" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31215 nav-item">
+            <a href="<?php echo $menu_link_5G_Gaming ?>" target="_blank" class="nav-link flex"><?php echo esc_html__('Yes 5G Gaming', 'yes.my'); ?>
+            </a>
+        </li>
+    </ul>
+
     <ul class="navbar-nav">
         <li class="nav-item dropdown mega-dropdown">
             <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Get Help', 'yes.my'); ?></a>
