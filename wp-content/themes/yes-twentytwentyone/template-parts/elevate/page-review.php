@@ -24,9 +24,9 @@
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
-            <ul class="wizard">
+             <ul class="wizard">
                 <li ui-sref="firstStep" class="completed">
-                    <span>{{ renderText('elevate_step_1') }}</span>
+                <span>{{ renderText('elevate_step_1') }}</span>
                 </li>
                 <li ui-sref="secondStep" class="completed">
                     <span>{{ renderText('elevate_step_2') }}</span>
@@ -34,8 +34,14 @@
                 <li ui-sref="thirdStep" class="completed">
                     <span>{{ renderText('elevate_step_3') }}</span>
                 </li>
-                <li ui-sref="fourthStep" class="completed">
+                <li ui-sref="fourthStep" v-if="(simType=='true')" class="completed">
+                    <span>{{ renderText('elevate_step_4_1') }}</span>
+                </li>
+                <li ui-sref="fourthStep" class="completed" v-else>
                     <span>{{ renderText('elevate_step_4') }}</span>
+                </li>
+                <li ui-sref="fifthStep" class="completed">
+                    <span>{{ renderText('elevate_step_5') }}</span>
                 </li>
             </ul>
         </div>
@@ -140,6 +146,16 @@
                                         <p>RM{{item.price}}/ mth</p>
                                     </div>
                                 </div>
+                                <div class="summary-box-free" v-if="(simType == 'true')" >
+                                    <div class="row mt-2">
+                                        <div class="col-6">
+                                            <p>eSIM</p>
+                                        </div>
+                                        <div class="col-6 text-end">
+                                            <p>FREE</p>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row mt-3 ">
                                     <div class="col-12">
                                         <button class="pink-btn-disable d-block text-uppercase w-100" :class=" allowSubmit?'pink-btn':'pink-btn-disable'"  @click="goNext" type="button">{{ renderText('order') }}</button>
@@ -228,7 +244,8 @@
                     }
                 },
                 allowSelectCity: false,
-                allowSubmit: false
+                allowSubmit: false,
+                simType:'',
             },
 
             created: function () {
@@ -279,6 +296,7 @@
                         }
 
                         self.hasPlan = true;
+                        self.simType =elevate.lsData.meta.esim;
 
                         self.watchAllowNext();
                         toggleOverlay(false);

@@ -802,10 +802,12 @@ class Ytl_Pull_Data_Public
 		 
 		// $api_domain ="https://ydbp-shoutout-kraken-dev.azurewebsites.net";
 		$guestLoginData=get_option('yes_gauest_login_token_data');
+	
 		if(isset($guestLoginData) && !empty($guestLoginData)){
 			$api_domain=$guestLoginData['set_token_data_guest_login']['otp_url'];
 
 		}
+
 		$session_id = $this->ca_generate_auth_token_new(true);
 		if ($MobileNumber != null  && isset($api_domain) && $session_id) {
 			// $params 	= ['requestId' => $this->api_request_id, 'locale' => $locale, 'msisdn' => $MobileNumber, 'sessionId' => $session_id];
@@ -1960,6 +1962,7 @@ class Ytl_Pull_Data_Public
 	
 		// $api_domain="https://ydbp-shoutout-kraken-dev.azurewebsites.net";
 		$guestLoginData=get_option('yes_gauest_login_token_data',true);
+		
 		if(isset( $guestLoginData) && !empty($guestLoginData)){
 			$api_domain=$guestLoginData['set_token_data_guest_login']['otp_url'];
 		}

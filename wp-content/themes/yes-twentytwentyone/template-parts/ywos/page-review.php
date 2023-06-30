@@ -39,7 +39,9 @@
                     <span>2. {{ renderText('strSelectSimType') }}</span>
                 </li>
                 <li ui-sref="thirdStep" class="completed">
-                    <span>3. {{ renderText('strDelivery') }}</span>
+                    <span v-if="(simType == 'true')">3. {{ renderText('strDeliveryBilling') }}</span>
+                    <span v-else>3. {{ renderText('strDelivery') }}</span>
+
                 </li>
                 <li ui-sref="fourthStep" class="completed">
                     <span>4. {{ renderText('strReview') }}</span>
@@ -317,6 +319,7 @@
                     strSelectSimType: { 'en-US': 'Select Sim Type', 'ms-MY': 'Select Sim Type', 'zh-hans': 'Select Sim Type' },
 
                     strDelivery: { 'en-US': 'Delivery Details', 'ms-MY': 'Butiran Penghantaran', 'zh-hans': 'Delivery Details' },
+                    strDeliveryBilling: {'en-US': 'Billing Details','ms-MY': 'Billing Details','zh-hans': 'Billing Details'},
                     strReview: { 'en-US': 'Review', 'ms-MY': 'Semak', 'zh-hans': 'Review' },
                     strPayment: { 'en-US': 'Payment Info', 'ms-MY': 'Maklumat Pembayaran', 'zh-hans': 'Payment Info' },
 
@@ -359,6 +362,7 @@
                         self.updateData();
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
                         self.upFrontPayment = ywos.lsData.meta.customerDetails.upFrontPayment;
+                        self.simType=ywos.lsData.meta.esim;
                     
                         toggleOverlay(false);
                     } else {
