@@ -458,7 +458,7 @@ padding: 0 15px;
 #easy-steps #myTabContent {padding: 0px 0 0}
 
 #wfh .order-1 {order: unset;}
-#wfh .order-2 {order: unset;}
+#wfh .order-2 {order: unset !important;}
 
     @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
         #postpaid-top-banner {
@@ -592,6 +592,7 @@ padding: 0 15px;
             padding: 0 15px;
         }
         #wfh p{text-align: center;padding: 0 15px;}
+        #wfh img {margin-left: 20px; width: 70%;}
         
         /* #infinite-banner h1 {
             font-size: 38px;
@@ -723,7 +724,7 @@ margin-bottom: 20px;
     }
 
     .post-card-list ul li:before {
-        content: url('/wp-content/uploads/2023/05/list-check.png');
+        content: url('/wp-content/uploads/2023/06/list-check.png');
     }
 
     .post-card .post-card-detail a.btn.pink-btn {
@@ -838,13 +839,14 @@ margin-bottom: 20px;
 }
 #switch-banner h2 {font-size: 28px; line-height: 36px; text-align: center; letter-spacing: unset; color: #FFF;
     margin-bottom: 20px;}
+    #switch-banner h2 br {display: none;}
     #switch-banner p {font-size: 14px;font-weight: 400; line-height: 18px;}
     #switch-banner .pink-btn{font-size: 12px;font-weight: 700;line-height: 18px;padding: 0.7rem 1.3rem;letter-spacing: 0.1em;}
     #supplementary-section-m {margin: unset; background-color: #F7F8F9;}
     #supplementary-section {
     padding: 30px 15px 30px;
     background-color: #fff;
-    min-height: 915px;
+    min-height: 910px;
     position: relative;
     background-image: url(/wp-content/uploads/2023/06/supplementary-bg_mob.png);
     background-size: contain;
@@ -874,12 +876,21 @@ margin-bottom: 20px;
     .usp-section li:last-child {padding-top: 15px;border-right: 0px solid #E4E4E4;}
     .usp-section li br {display: block;}
     #easy-steps{background-color: #F7F8F9;}
-    .step-layer-sec-m {margin-top: 285px !important; border-top: 1px solid #E8F0FD;}
+    .step-layer-sec-m {margin-top: 275px !important; border-top: 1px solid #E8F0FD; background-color: #fff;}
     .step-layer-sec:nth-child(1) {margin: 30px 0;}      
     #easy-steps h1 {font-size: 28px; line-height: 36px; padding: 0px 20px;}
-    #easy-steps .content {padding: 0px 70px; text-align: left;}
+    #easy-steps h1 br{display: none;}
+    #easy-steps .content {padding: 20px 70px 0 !important; text-align: left;}
     #easy-steps .step-mob-visual {width: 80%;margin: 0 auto;}
     #easy-steps h3{display: unset;}
+
+    #easy-steps-sec .pink-btn {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 18px;
+    padding: 0.7rem 1.3rem;
+    letter-spacing: 0.1em;
+}
 
     #infinite-banner {
     background-image: url(/wp-content/uploads/2023/06/yesinfinite-banner_mobile.png);
@@ -890,12 +901,13 @@ margin-bottom: 20px;
     background-color: #27129b;
     }
     #infinite-banner h1 {
-    font-size: 28px;
+    font-size: 26px;
     line-height: 36px;
-    padding: 0 45px 0 0;
+    padding: 0 70px 0 0;
+    margin-bottom: 10px;
     }
     #infinite-banner h2 {
-    font-size: 16px;
+    font-size: 14px;
     font-family: 'Montserrat', sans-serif;
     line-height: 21px;
     font-weight: 700;
@@ -909,9 +921,9 @@ margin-bottom: 20px;
     line-height: 17px;
     color: #FFF;
 }
-#infinite-banner .pink-btn{padding: 0.7rem 1.2rem;}
+#infinite-banner .pink-btn{padding: 0.7rem 1.2rem; font-size: 12px;}
 
-    #faq-section h1, br{display: none;}
+    #faq-section h1 br{display: none;}
     #databck-rewards h1br{display: none;} 
     #wfh .col-12 {display: unset !important; margin-bottom: 35px;}
     #wfh .order-1 {order: 1!important;}

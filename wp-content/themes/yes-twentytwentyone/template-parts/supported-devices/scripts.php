@@ -21,14 +21,12 @@
 
         var render = function() {
             $storeitem.removeClass("show");
-
             //var n = 0;
 
             if (sCats.length == 0 && sLocs.length == 0) {
                 $storeitem.addClass("show");
                 //n = $storeitem.length;
-            }
-
+            }           
             $storeitem.each(function() {
                 var $this = $(this);
                 var title = $this.find('h2').first().text().toUpperCase();
@@ -37,24 +35,24 @@
                 var notMatchQ = q.length > 0 && title.indexOf(q) < 0;
 
                 var category = $this.attr("brand");
-                var location = $this.attr("type");
-
-                $.each(sCats, function(key, value) {
+                var location = $this.attr("type");                           
+                $.each(sCats, function(key, value) {                    
                     if (category.indexOf(value) > -1) {
                         catHit = true;
-                        return false;
+                        //console.log('false1');
+                        return true;
                     }
                 });
 
                 $.each(sLocs, function(key, value) {
                     if (location.indexOf(value) > -1) {
                         locHit = true;
-                        return false;
+                       // console.log('false2');
+                        return true;
                     }
                 });
 
-                var showItem = false;
-
+                var showItem = false;                
                 if ((sCats.length && sLocs.length)) {
                     if (locHit && catHit) showItem = true;
                 } else {
@@ -63,7 +61,8 @@
 
                 if (showItem) {
                     if(notMatchQ){
-                        return false;
+                        //console.log('false3');
+                        return true;
                     }
                     $this.addClass("show");
                 } else {

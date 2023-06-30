@@ -22,7 +22,7 @@ function check_child_page_template_elevate($template)
     return $template;
 }
 
-add_filter('page_template', 'check_child_page_template_elevate');
+//add_filter('page_template', 'check_child_page_template_elevate');
 
 
 function elevate_enqueue_scripts()
