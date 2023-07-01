@@ -184,9 +184,9 @@
                     </div>
                     <div class="form-group mb-4">
                         <div class=" grid main-card">
-                            <label class="card eSIM-button" v-bind:class="{ 'disable' : PlanSupportEsim != true}" >
+                            <label class="card" v-bind:class="{ 'disable' : PlanSupportEsim != true}" >
                                 <input name="plan" class="radio" type="radio" id="eSim"  :disabled="PlanSupportEsim != true" name="simType" value="eSIM"
-                                    v-model="simType">
+                                    v-model="simType" @click="showErrorEsimMsg()">
                                 <span class="plan-details">
                                     <div class="panel-img">
                                         <img src="/wp-content/uploads/2023/06/sim.png" alt="..." class="card-panal-img">
@@ -196,9 +196,9 @@
                                     </div>
                                 </span>
                             </label>
-                            <label class="card physical-button" >
+                            <label class="card                                                                                                      " >
                                 <input name="plan" class="radio" type="radio" name="simType" value="physicalSIM"
-                                    v-model="simType" checked>
+                                    v-model="simType" checked @click="hideErrorEsimMsg()">
                                 <span class="plan-details">
                                     <div class="panel-img">
                                         <img src="/wp-content/uploads/2023/06/Physical-sim.png" alt="..."
@@ -209,7 +209,7 @@
                                     </div>
                                 </span>
                             </label>
-                            <div class="eSIM d-none" v-if="(DeviceSupportEsim != true)" >
+                            <div class="eSIM d-none" id="eSIM_msg" v-if="(DeviceSupportEsim != true)" >
                                 <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png"
                                     alt="...">
                                 <div>
@@ -377,18 +377,17 @@
                 },
                 renderText: function (strID) {
                     return elevate.renderText(strID, Elevate_lang);
+                },                   
+                showErrorEsimMsg:function(){
+                    var element = document.getElementById("eSIM_msg");
+                    console.log(element);
+                    element.classList.remove("d-none");
+                },
+                hideErrorEsimMsg: function(){
+                    var element = document.getElementById("eSIM_msg");
+                    element.classList.add("d-none");       
                 }
             }
         });
     });
-</script>
-<script>
-    jQuery(document).ready(function () {
-    jQuery(".eSIM-button").on('click', function(e){
-        jQuery(this).parent().find('.eSIM').removeClass("d-none");
-    });
-    jQuery(".physical-button").on('click', function(e){
-        jQuery(this).parent().find('.eSIM').addClass("d-none");
-    });
-});
 </script>

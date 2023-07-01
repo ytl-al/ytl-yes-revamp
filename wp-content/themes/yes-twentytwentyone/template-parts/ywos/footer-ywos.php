@@ -29,16 +29,17 @@
                 backPageStrID = 'pageTitleCart';
                 break;
             case 'verification': 
-                backPageStrID = 'pageTitleVerification';
-                break;
-            case 'sim type': 
                 if(ywosLSData.meta.customerDetails.upFrontPayment=="true"){
                      backPageStrID = 'pageTitleEligibilityFailure';
                      break;
                 }else{
-                    backPageStrID = 'pageTitleSelectSimType';
+                    backPageStrID = 'pageTitleVerification';
                     break;   
                 }
+            case 'sim type': 
+
+                backPageStrID = 'pageTitleSelectSimType';
+                    break; 
             case 'delivery': 
                 backPageStrID = 'pageTitleDeliveryDetails';
                 break;
