@@ -554,12 +554,12 @@
         padding: 40px;
     }
 
-    .devices-supported ul {
+    .devices-supported .nav-pills ul {
         list-style: none;
         padding: 0;
     }
 
-    .devices-supported li {
+    .devices-supported .nav-pills li {
         font-family: 'Open Sans';
         font-style: normal;
         font-weight: 400;
@@ -568,6 +568,21 @@
         color: #000000;
         margin: 0 30px;
     }
+
+    .devices-supported .tab-pane ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;    
+     }
+    .devices-supported .tab-pane li {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 26px;
+    color: #000000;
+    margin: 0 8px 15px;   
+}
 
     .devices-supported .bottom-content {
         padding: 25px 0;
@@ -749,7 +764,7 @@
     /* New CSS start */
     @media only screen and (max-width: 768px) {
        .devices-supported h5{font-size: 28px; line-height: 36px; padding: 20px 30px;}
-       .devices-supported li {margin: 15px 0px;font-size: 14px;line-height: 26px; }
+       .devices-supported .tab-pane li {margin: 15px 0px;font-size: 14px;line-height: 26px; }
        .dropdown-toggle {width: 100%;}
         #datatabs h1{font-size: 28px; line-height: 36px;}
     }
