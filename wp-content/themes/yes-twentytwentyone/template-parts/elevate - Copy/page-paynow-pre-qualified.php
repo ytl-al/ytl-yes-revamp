@@ -1,17 +1,21 @@
 <?php require_once 'includes/header.php'; ?>
-    <div id="main-vue" style="display: none;">
+<style>
+	body{
+		background: url(/wp-content/uploads/2021/09/amazing-things-bg.png);
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+</style>
     <header class="white-top">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-6">
                     <div class="mt-4">
-                        <a href="/elevate/contract/" class="back-btn "><img
-                                    src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/back-icon.png"
-                                    alt=""> {{ renderText('back') }}</a>
+
                     </div>
                 </div>
                 <div class="col-lg-4 col-6 text-lg-center text-end">
-                    <h1 class="title_checkout p-3">{{ renderText('checkout') }}</h1>
+                    <h1 class="title_checkout p-3">Pre Qualified Checkout</h1>
                 </div>
                 <div class="col-lg-4">
 
@@ -21,28 +25,19 @@
     </header>
     <!-- Vue Wrapper STARTS -->
     <main class="clearfix site-main">
-    <div >
+    <div id="main-vue" style="display: none;">
         <!-- Banner Start -->
         <section id="grey-innerbanner">
             <div class="container">
-                 <ul class="wizard">
+                <ul class="wizard">
                     <li ui-sref="firstStep" class="completed">
-                    <span>{{ renderText('elevate_step_1') }}</span>
+                        <span>1. Verify</span>
+                    </li>
+                    <li ui-sref="firstStep" class="completed">
+                        <span>2. Select Plan</span>
                     </li>
                     <li ui-sref="secondStep" class="completed">
-                        <span>{{ renderText('elevate_step_2') }}</span>
-                    </li>
-                    <li ui-sref="thirdStep" class="completed">
-                        <span>{{ renderText('elevate_step_3') }}</span>
-                    </li>
-                    <li ui-sref="fourthStep" v-if="(simType=='true')">
-                        <span>{{ renderText('elevate_step_4_1') }}</span>
-                    </li>
-                    <li ui-sref="fourthStep" class="completed" v-else>
-                        <span>{{ renderText('elevate_step_4') }}</span>
-                    </li>
-                    <li ui-sref="fifthStep" class="completed">
-                        <span>{{ renderText('elevate_step_5') }}</span>
+                        <span>3. Complete Order</span>
                     </li>
                 </ul>
             </div>
@@ -55,20 +50,20 @@
             <div class="container p-lg-5 p-3">
                 <div class="row d-lg-none mb-3">
                     <div class="col">
-                        <h1>{{ renderText('payment_info') }}</h1>
-                        <p class="sub mb-4 pe-5">{{ renderText('payment_info_label_1') }}</p>
+                        <h1>Payment Info</h1>
+                        <p class="sub mb-4 pe-5">This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.</p>
                     </div>
                 </div>
                 <div class="row gx-5" v-if="pageValid">
-                    <div class="col-lg-5 col-12 order-lg-2">
+                    <div class="col-lg-4 col-12 order-lg-2">
                         <?php include('section-order-summary.php'); ?>
                     </div>
-                    <form class="col-lg-7 col-12 order-lg-1 mt-3 mt-lg-0" autocomplete="off" @submit="paymentSubmit">
+                    <form class="col-lg-8 col-12 order-lg-1 mt-3 mt-lg-0" autocomplete="off" @submit="paymentSubmit">
                         <div>
-                            <h1 class="mb-4 d-none d-lg-block">{{ renderText('payment_info') }}</h1>
-                            <p class="sub mb-4 pe-5 d-none d-lg-block">{{ renderText('payment_info_label_1') }}</p>
-                            <h2>{{ renderText('select_payment') }}</h2>
-                            <div class="alert alert-warning mb-4" role="alert">{{ renderText('payment_info_label_2') }}</div>
+                            <h1 class="mb-4 d-none d-lg-block">Payment Info</h1>
+                            <p class="sub mb-4 pe-5 d-none d-lg-block">This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.</p>
+                            <h2>Select payment</h2>
+                            <div class="alert alert-warning mb-4" role="alert">Please ensure your web browser and/or 3rd party software pop-up blocker is disabled before you proceed with your transactions.</div>
                             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <button type="button" class="nav-link" id="nav-creditcard" role="tab" data-paymentnav="CREDIT_CARD" data-bs-toggle="pill" data-bs-target="#tab-creditcard" aria-controls="tab-creditcard" aria-selected="false" v-on:click="selectPaymentMethod('CREDIT_CARD')">
@@ -92,9 +87,9 @@
                                         <template v-if="paymentInfo.paymentMethod == 'CREDIT_CARD'">
                                             <div class="row mb-4">
                                                 <div class="col-lg-6">
-                                                    <h4 class="my-3">{{ renderText('card_payment') }}</h4>
+                                                    <h4 class="my-3">Credit/Debit Card</h4>
                                                     <p class="panel-weaccept">
-                                                        {{ renderText('we_accept') }}
+                                                        We accept
                                                         <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/visa.png" />
                                                         <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" />
                                                         <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/mastercard.png" />
@@ -105,15 +100,15 @@
                                         <div v-bind:class="{ 'd-none': (maybankIPP.disabled || paymentInfo.paymentMethod != 'CREDIT_CARD_IPP') }">
                                             <div class="row mb-4">
                                                 <div class="col-lg-6">
-                                                    <h4 class="my-3">{{ renderText('instalment_payment') }}</h4>
+                                                    <h4 class="my-3">Maybank 0% EzyPay (Instalment Payment)</h4>
                                                 </div>
                                             </div>
                                             <div class="row mb-4">
                                                 <div class="col-lg-6">
-                                                    <label class="form-label" for="select-tenure">{{ renderText('instalment_type') }}</label>
+                                                    <label class="form-label" for="select-tenure">Installment Type</label>
                                                     <div class="form-group">
                                                         <select class="form-control form-select" id="select-tenure" data-live-search="false" name="ipp-tenure" v-model="paymentInfo.ippType" @change="watchTenureChange">
-                                                            <option value="" disabled="disabled" selected="selected">{{ renderText('select_instalment_type') }}</option>
+                                                            <option value="" disabled="disabled" selected="selected">Select Installment Type</option>
                                                             <option v-for="ippType in maybankIPP.ippTypeList" :value="ippType.ippTenureType">{{ ippType.ippTenureTypeDisplay }}</option>
                                                         </select>
                                                     </div>
@@ -122,7 +117,7 @@
                                         </div>
                                         <div class="row mb-4">
                                             <div class="col-lg-6 col-12">
-                                                <label class="form-label" for="input-chName">{{ renderText('cardholder_name') }}</label>
+                                                <label class="form-label" for="input-chName">* Cardholder Name</label>
                                                 <div class="input-group align-items-center">
                                                     <input type="text" class="form-control" id="input-chName" v-model="paymentInfo.nameOnCard" @input="watchAllowSubmit" placeholder="John Doe"  @keypress="checkInputFullName(event)" />
                                                 </div>
@@ -132,7 +127,7 @@
                                             <div class="col-12">
 												<div class="row">
                                                 <div class="col-lg-6 col-12">
-												<label class="form-label" for="input-chNumber1">{{ renderText('card_number') }}</label>
+												<label class="form-label" for="input-chNumber1">* Card Number</label>
 												<div class="float-end layer-selectedCard">
 													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/visa.png" height="15" v-if="paymentInfo.cardType == 'VISA'" />
 													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" height="25" v-if="paymentInfo.cardType == 'AMEX'" />
@@ -149,18 +144,18 @@
                                                     <input type="text" pattern="[0-9]+" class="form-control text-center" id="input-cardInput4" v-model="cardholder.number4" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(4, event)" @keypress="checkInputCharacters(event, 'numeric', false)" />
                                                 </div>
                                             </div>
-                                            <p class="info mb-3">{{ renderText('card_number_hint') }}</p>
+                                            <p class="info mb-3">Numbers must contain 16 digits</p>
                                         </div>
                                         <div class="row mb-4">
                                             <div class="col-lg-3 col-12">
-                                                <label class="form-label" for="input-cardInput5">{{ renderText('exp_date') }}</label>
+                                                <label class="form-label" for="input-cardInput5">* Exp Date</label>
                                                 <div class="input-group align-items-center">
 													<input type="text" pattern="[0-9]+" class="form-control text-center" id="input-cardInput5" autocomplete="off" v-model="paymentInfo.cardExpiryMonth" placeholder="MM" maxlength="2" @input="checkCardInputJump(5, event)" @keypress="checkInputCharacters(event, 'numeric', false)" /> <span class="mx-2">/</span>
                                                     <input type="text" pattern="[0-9]+" class="form-control text-center" id="input-cardInput6" autocomplete="off" v-model="paymentInfo.cardExpiryYear" placeholder="YYYY" maxlength="4" @input="checkCardInputJump(6, event)" @keypress="checkInputCharacters(event, 'numeric', false)" />
                                                 </div>
                                             </div>
                                             <div class="col-lg-3 col-12">
-                                                <label class="form-label" for="input-cardInput7">{{ renderText('cvv') }}</label>
+                                                <label class="form-label" for="input-cardInput7">* CVV</label>
                                                 <div class="input-group align-items-center">
                                                     <input type="password" class="form-control text-center" id="input-cardInput7" autocomplete="off" v-model="paymentInfo.cardCVV" @input="watchAllowSubmit" placeholder="***" maxlength="3" @keypress="checkInputCharacters(event, 'numeric', false)" />
                                                 </div>
@@ -173,7 +168,7 @@
                                     <div class="tab-paneContent">
                                         <div class="row mb-4">
                                             <div class="col-lg-6">
-                                                <h4 class="my-3">{{ renderText('online_bank') }}</h4>
+                                                <h4 class="my-3">Online Banking (FPX)</h4>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -187,7 +182,7 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <select class="form-control form-select" id="select-bank" data-live-search="true" name="fpx-bank" v-model="paymentInfo.bankCode" @change="watchBankSelect">
-                                                        <option value="" disabled="disabled" selected="selected">{{ renderText('select_bank') }}</option>
+                                                        <option value="" disabled="disabled" selected="selected">Select a Bank</option>
                                                         <option v-for="fpxBank in fpxBankList" :value="fpxBank.bankCode" :disabled="!fpxBank.available" :data-bankname="fpxBank.bankName">{{ fpxBank.bankName }}</option>
                                                     </select>
                                                 </div>
@@ -199,8 +194,9 @@
 
                             <div class="row">
                                 <div class="col-12 col-lg-6">
-                                    <button type="submit" class="w-100" :class="allowSubmit?'pink-btn':'pink-btn-disable'" :disabled="!allowSubmit">{{ renderText('pay') }}</button>
+                                    <button type="submit" class="pink-btn w-100" :disabled="!allowSubmit">Pay</button>
                                 </div>
+				<div id="error" style="color:red"></div>
                             </div>
                         </div>
                     </form>
@@ -210,9 +206,8 @@
         <!-- Body ENDS -->
     </div>
     </main>
-    </div>
     <!-- Vue Wrapper ENDS -->
-<?php require_once('includes/footer.php'); ?>
+
 
     <script type="text/javascript">
         var mainwin;
@@ -223,7 +218,6 @@
                 el: '#main-vue',
                 data: {
                     currentStep: 0,
-                    simType:'',
                     pageValid: false,
                     allowSubmit: false,
                     orderSummary: {
@@ -497,15 +491,13 @@
                     checkPaymentStatusCount: 0,
                     checkPaymentStatusCountLimit: 78, // times every 5 seconds (5000), total = 6.5 minutes, excluding 10 seconds before first check
                     paymentTimeout: false,
-                    paymentResponse: null,
-                    analyticItems: []
+                    paymentResponse: null
                 },
                 mounted: function() {},
                 created: function() {
                     var self = this;
-                    setTimeout(function() {
-                        self.pageInit();
-                    }, 500);
+
+                    self.pageInit();
                     self.initTabs();
                 },
                 computed: {
@@ -519,49 +511,44 @@
                     pageInit: function() {
                         var self = this;
 
-                        if (elevate.validateSession(self.currentStep)) {
-                            self.pageValid = true;
-                            if (elevate.lsData.eligibility) {
-                            self.eligibility = elevate.lsData.eligibility;
-							}else{
-								 elevate.redirectToPage('eligibilitycheck');
-							}
-							if (elevate.lsData.deliveryInfo) {
-								self.deliveryInfo = elevate.lsData.deliveryInfo;
-							}else{
-								 elevate.redirectToPage('personal');
-							}
-                            if (elevate.lsData.customer) {
-                                self.customer = elevate.lsData.customer;
-                            }
+                        elevate.checkExists();
 
-                            if (elevate.lsData.orderDetail) {
-                                self.orderSummary.orderDetail = elevate.lsData.orderDetail;
-                            }else{
-								 elevate.redirectToPage('contract');
-							}
-                            if (elevate.lsData.product) {
-                                self.orderSummary.product = elevate.lsData.product;
-                            }
+						self.pageValid = true;
 
-                            if (elevate.lsData.contract) {
-                                self.contract = elevate.lsData.contract;
-                                self.contractSigned = true;
-                            }
+						if (elevate.lsData.deliveryInfo) {
+							self.deliveryInfo = elevate.lsData.deliveryInfo;
+						}else{
+							 elevate.redirectToPage('pre-qualified/?id=error');
+						}
+						if (elevate.lsData.customer) {
+							self.customer = elevate.lsData.customer;
+						}else{
+							 elevate.redirectToPage('pre-qualified/?id='+self.deliveryInfo.id);
+						}
 
-                            if (elevate.lsData.analyticItems) {
-                                self.analyticItems = elevate.lsData.analyticItems;
-                            }
+						if (elevate.lsData.orderDetail) {
+							self.orderSummary.orderDetail = elevate.lsData.orderDetail;
+						}else{
+							elevate.redirectToPage('pre-qualified/?id='+self.deliveryInfo.id);
+						}
+						if (elevate.lsData.product) {
+							self.orderSummary.product = elevate.lsData.product;
+						}
 
-                            self.productId = elevate.lsData.product.selected.productCode;
-                            self.dealer = elevate.lsData.meta.dealer;
-                            self.simType =elevate.lsData.meta.esim;
+						if (elevate.lsData.contract) {
+							self.contract = elevate.lsData.contract;
+							self.contractSigned = true;
+						}
 
-                            self.ajaxGetFPXBankList();
-                            self.updateData();
-                        } else {
-                            elevate.redirectToPage('cart');
-                        }
+						self.productId = elevate.lsData.product.selected.productCode;
+
+						self.ajaxGetFPXBankList();
+						self.updateData();
+
+						setTimeout(function(){
+							$('#main-vue').show();
+							toggleOverlay(false);
+						},500);
                     },
                     ajaxGetFPXBankList: function() {
                         var self = this;
@@ -585,7 +572,7 @@
                                 }
                             })
                             .catch((error) => {
-                                console.log(error);
+                                // console.log(error);
                             })
                             .finally(() => {
                                 setTimeout(function() {
@@ -633,7 +620,7 @@
                                 self.maybankIPP.ippInstallments.push(ippInstallment);
                             })
                             .catch((error) => {
-                                console.log(error);
+                                console.log(error.response.data);
                             });
                     },
                     getMaybankIPPInstallments: function() {
@@ -673,7 +660,7 @@
                             'yos_order_id': self.orderResponse.orderNumber
                         };
                         // console.log(self.orderResponse);
-                        axios.post(apiEndpointURL + '/check-order-payment-status' +'?nonce='+yesObj.nonce, params)
+                        axios.post(apiEndpointURL + '/check-order-payment-status' + '?nonce='+yesObj.nonce, params )
                             .then((response) => {
                                 var data = response.data;
                                 var responseCode = data.responseCode;
@@ -738,7 +725,7 @@
                                     }, 5000);
                                 } else {
                                     toggleOverlay(false);
-                                    self.toggleModalAlert(this.renderText('error_payment'), this.renderText('error_processing_payment'));
+                                    self.toggleModalAlert(this.renderText('error_payment'), this.renderText('error_processing_payment') );
 
                                     clearTimeout(timeoutObj);
                                     self.paymentTimeout = true;
@@ -763,16 +750,15 @@
                                 mainwin.focus();
                                 mainwin.close();
                             }
-                             // self.redirectThankYou();
+                             //self.redirectThankYou();
 							 errorMsg = "Payment Timeout.";
 							//  self.cancelElevateOrder(errorMsg);
-							 self.updatePaymentStatus(3);
 
                             clearTimeout(timeoutObj);
                             self.paymentTimeout = true;
                             self.checkPaymentStatusCount = 0;
                             toggleOverlay(false);
-                            self.toggleModalAlert(this.renderText('error_payment'), this.renderText('error_processing_payment'));
+                            self.toggleModalAlert(this.renderText('error_payment'), this.renderText('payment_exceeds_time'));
                         }, 360000);
 
                         mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
@@ -785,8 +771,7 @@
                     },
                     getGender: function (){
                         var self = this;
-                        var genderDigit = self.eligibility.mykad.substring(11);
-                        //console.log(self.eligibility.mykad, genderDigit);
+                        var genderDigit = self.deliveryInfo.mykad.substring(11);
                         if (genderDigit % 2 == 0) //even
                         {
                             return "FEMALE"; //female
@@ -798,8 +783,8 @@
                     },
                     getDOB: function (){
                         var self = this;
-                        var dateString = self.eligibility.mykad.substring(0, 6);
-                        console.log(self.eligibility.mykad, dateString);
+                        var dateString = self.deliveryInfo.mykad.substring(0, 6);
+                        console.log(self.deliveryInfo.mykad, dateString);
 
                         var year = dateString.substring(0, 2); //year
                         var month = dateString.substring(2, 4); //month
@@ -831,14 +816,18 @@
                             "school_name": "",
                             "school_code": "",
                             "university_name": "",
-                            "dealer_code": self.dealer.dealer_code,
-                            "dealer_login_id": self.dealer.dealer_id,
+                            "dealer_code": "",
+                            "dealer_login_id": "",
                             "plan_name": self.orderSummary.product.selected.plan.planName,
                             "plan_type": self.orderSummary.product.selected.plan.planType,
                             "product_bundle_id": self.productId,
                             "referral_code": self.deliveryInfo.referralCode,
                             "addon_name": "",
-                            "address_line": (self.deliveryInfo.addressMore)?self.deliveryInfo.addressMore+', '+self.deliveryInfo.address:self.deliveryInfo.address,
+                            "conversion": self.deliveryInfo.isConversion,
+                            "existingMsisdn": self.deliveryInfo.msisdnToUpgrade,
+                            "existingPlanName": self.deliveryInfo.currentPlan,
+                            "existingPlanType": self.deliveryInfo.currentPlanType,
+                            "address_line": self.deliveryInfo.address,
                             "city": self.deliveryInfo.city,
                             "city_code": self.deliveryInfo.cityCode,
                             "postal_code": self.deliveryInfo.postcode,
@@ -858,9 +847,7 @@
                             "card_cvv": self.paymentInfo.cardCVV,
                             "card_expiry_month": self.paymentInfo.cardExpiryMonth,
                             'card_expiry_year'  : self.paymentInfo.cardExpiryYear,
-                            'ippType'       : self.paymentInfo.ippType,
-                            'esim'              : elevate.lsData.meta.esim,
-                            'applicationSource'  : "MYOS"
+                            'ippType'       : self.paymentInfo.ippType
                         }
 
                         //console.log("params",params); return;
@@ -868,20 +855,16 @@
                             .then((response) => {
                                 var data = response.data.data;
                                 self.orderResponse = data;
-                                if(response.data.status){
-                                    $('#displayOrderNumber').val(data.displayOrderNumber);
 
-                                    elevate.lsData.YOSOrder = data;
-                                    elevate.updateElevateLSData();
+                                $('#displayOrderNumber').val(data.displayOrderNumber);
 
-                                    self.initXpay();
-                                }else{
-                                    toggleOverlay(false);
-                                    toggleModalAlert('Error',this.renderText('dear_valued_customer')+',<br>'+this.renderText('unfortunately')+', '+response.data.error)
-                                }
+                                elevate.lsData.YOSOrder = data;
+                                elevate.updateElevateLSData();
 
+                                self.initXpay();
                             })
                             .catch((error) => {
+								toggleOverlay(false);
                                 var response = error.response;
                                 if (typeof response != 'undefined') {
                                     var data = response.data;
@@ -920,12 +903,7 @@
                         elevate.lsData.meta.paymentResponse = self.paymentResponse;
                         elevate.updateElevateLSData();
 
-                        setTimeout(function() {
-                            elevate.redirectToPage('thanks?status='+status+'&orderNumber='+$('#displayOrderNumber').val());
-                        }, 2000);
-                        if (status == 2 || status == 3) {
-                            self.sendAnalytics();
-                        }
+                        elevate.redirectToPage('thanks-pre-qualified?status='+status+'&orderNumber='+$('#displayOrderNumber').val());
                     },
                     updateElevateOrder: function (){
                         var self = this;
@@ -934,19 +912,20 @@
                         var param = elevate.lsData.orderInfo;
                         param.orderNumber = self.orderResponse.orderNumber;
 
-                        axios.post(apiEndpointURL_elevate + '/order/update' + '?nonce='+yesObj.nonce, param)
+                        axios.post(apiEndpointURL_elevate + '/order/update'+ '?nonce='+yesObj.nonce, param)
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
-
+									self.removePrequalifiedCustomer();
                                 }else{
                                     toggleOverlay(false);
-                                    toggleModalAlert('Error',this.renderText('system_currently_unavailable'))
+                                    $('#error').html(this.renderText('system_error'));
+                                    console.log(data);
                                 }
                             })
                             .catch((error) => {
                                 toggleOverlay(false);
-                                console.log(error);
+                                console.log(error, response);
                             });
 
                     },
@@ -966,7 +945,8 @@
 
                                 }else{
                                     toggleOverlay(false);
-                                    toggleModalAlert('Error',this.renderText('system_currently_unavailable'))
+                                    $('#error').html(this.renderText('system_error'));
+                                    console.log(data);
                                 }
                             })
                             .catch((error) => {
@@ -996,12 +976,12 @@
 						}
                         param.status = status.toString();
 
-                        axios.post(apiEndpointURL_elevate + '/order/updatePayment' + '?nonce='+yesObj.nonce, param)
+                        axios.post(apiEndpointURL_elevate + '/order/updatePayment' + '?nonce='+yesObj.nonce, param )
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
 									console.log(data);
-                                    if (redirect) {
+									if (redirect) {
                                         self.redirectThankYou(status);
                                     }
                                 }else{
@@ -1013,11 +993,39 @@
                             .catch((error) => {
                                 toggleOverlay(false);
 								$('#error').html(error);
-                                console.log(error);
+                                console.log(error, response);
                             });
 
                     },
 
+					removePrequalifiedCustomer: function () {
+						var self = this;
+						var params = {
+							id: self.deliveryInfo.id
+						};
+
+						toggleOverlay();
+						$('#status_mesage').html('Remove data...');
+
+						axios.post(apiEndpointURL_elevate + '/del-prequalified-customer' + '?nonce='+yesObj.nonce, params)
+							.then((response) => {
+								var data = response.data;
+								if(data.status == 1){
+
+								}else{
+									toggleOverlay(false);
+									$('#error').html("System error, please try again.");
+									$('#status_mesage').html('');
+									console.log(data);
+								}
+
+							})
+							.catch((error) => {
+								toggleOverlay(false);
+								console.log(error, response);
+							});
+
+					},
 
                     selectBank: function(bank, event) {
                         var self = this;
@@ -1087,16 +1095,11 @@
                         }
                         self.watchAllowSubmit();
                     },
-                    renderText: function(strID) {
-                        return elevate.renderText(strID, Elevate_lang);
-                    },
                     watchAllowSubmit: function() {
                         var self = this;
                         var isFilled = true;
                         var paymentInfo = self.paymentInfo;
                         var paymentMethod = self.paymentInfo.paymentMethod;
-
-                        $('.input_error').removeClass('input_error');
 
                         if (paymentMethod == 'CREDIT_CARD' || paymentMethod == 'CREDIT_CARD_IPP') {
                             if (
@@ -1107,13 +1110,6 @@
                                 self.paymentInfo.cardCVV.trim() == ''
                             ) {
                                 isFilled = false;
-                            }else{
-                                var pattern =  /^[a-zA-Z,\,/@,\s]+$/;
-                                if(self.paymentInfo.nameOnCard && !pattern.test(self.paymentInfo.nameOnCard)){
-                                    $('#input-chName').addClass('input_error');
-                                    isFilled = false
-                                }
-
                             }
                         } else if (paymentMethod == 'FPX') {
                             if (self.paymentInfo.bankCode.trim() == '' || self.paymentInfo.bankName.trim() == '') {
@@ -1140,21 +1136,8 @@
                         this.paymentInfo.paymentMethod = paymentMethod;
                         this.watchAllowSubmit();
                     },
-                    sendAnalytics: function() {
-                        var self = this;
-                        var eventType = 'purchase';
-                        var pushData = {
-                            'transaction_id': $('#displayOrderNumber').val(),
-                            'currency': 'MYR',
-                            'value': self.orderSummary.orderDetail.total,
-                            'tax': self.orderSummary.orderDetail.sstAmount,
-                            'shipping': 0,
-                            'foreigner_deposit': 0,
-                            'rounding_adjustment': self.orderSummary.orderDetail.roundingAdjustment,
-                            'payment_method': self.paymentInfo.paymentMethod,
-                            'items': self.analyticItems
-                        };
-                        pushAnalytics(eventType, pushData);
+                    renderText: function(strID) {
+                        return elevate.renderText(strID, Elevate_lang);
                     }
                 }
             });
@@ -1162,3 +1145,4 @@
     </script>
 
 
+<?php require_once('includes/footer.php'); ?>

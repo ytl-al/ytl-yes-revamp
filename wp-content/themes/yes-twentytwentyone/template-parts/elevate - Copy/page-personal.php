@@ -25,26 +25,20 @@
         <!-- Banner Start -->
         <section id="grey-innerbanner">
             <div class="container">
-            <ul class="wizard">
-                <li ui-sref="firstStep" class="completed">
-                <span>{{ renderText('elevate_step_1') }}</span>
-                </li>
-                <li ui-sref="secondStep" class="completed">
-                    <span>{{ renderText('elevate_step_2') }}</span>
-                </li>
-                <li ui-sref="thirdStep" class="completed">
-                    <span>{{ renderText('elevate_step_3') }}</span>
-                </li>
-                <li ui-sref="fourthStep" v-if="(simType=='true')">
-                    <span>{{ renderText('elevate_step_4_1') }}</span>
-                </li>
-                <li ui-sref="fourthStep" class="completed" v-else>
-                    <span>{{ renderText('elevate_step_4') }}</span>
-                </li>
-                <li ui-sref="fifthStep">
-                    <span>{{ renderText('elevate_step_5') }}</span>
-                </li>
-            </ul>
+                <ul class="wizard">
+                    <li ui-sref="firstStep" class="completed">
+                        <span>{{ renderText('elevate_step_1') }}</span>
+                    </li>
+                    <li ui-sref="secondStep" class="completed">
+                        <span>{{ renderText('elevate_step_2') }}</span>
+                    </li>
+                    <li ui-sref="thirdStep" class="completed">
+                        <span>{{ renderText('elevate_step_3') }}</span>
+                    </li>
+                    <li ui-sref="fourthStep">
+                        <span>{{ renderText('elevate_step_4') }}</span>
+                    </li>
+                </ul>
             </div>
         </section>
         <!-- Banner End -->
@@ -54,8 +48,7 @@
                 <div class=" gx-5">
                     <form class="row needs-validation" novalidate>
                         <div class="col-md-12">
-                            <h2 class="subtitle" v-if="(simType=='true')" >{{ renderText('Billing_details') }}</h2>
-                            <h2 class="subtitle" v-else>{{ renderText('delivery_details') }}</h2>
+                            <h2 class="subtitle">{{ renderText('personal_details') }}</h2>
                             <p class="sub mb-4" v-html="renderText('delivery_only_available_in_malaysia')"></p>
                             <div class="text-bold mb-3">{{ renderText('MyKAD_verification') }}</div>
                         </div>
@@ -476,8 +469,7 @@
                     note: '',
                 },
                 allowSelectCity: false,
-                allowSubmit: false,
-                simType:'',
+                allowSubmit: false
             },
 
             created: function () {
@@ -515,7 +507,6 @@
                         }
                         self.productId = elevate.lsData.product.selected.productCode;
                         self.dealer = elevate.lsData.meta.dealer;
-                        self.simType =elevate.lsData.meta.esim;
 
                         self.updateFields();
                         toggleOverlay(false);

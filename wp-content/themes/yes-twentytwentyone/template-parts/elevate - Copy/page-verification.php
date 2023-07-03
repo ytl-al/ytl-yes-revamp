@@ -24,7 +24,7 @@
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
-             <ul class="wizard">
+            <ul class="wizard">
                 <li ui-sref="firstStep" class="completed">
                     <span>{{ renderText('elevate_step_1') }}</span>
                 </li>
@@ -36,9 +36,6 @@
                 </li>
                 <li ui-sref="fourthStep">
                     <span>{{ renderText('elevate_step_4') }}</span>
-                </li>
-                <li ui-sref="fifthStep">
-                    <span>{{ renderText('elevate_step_5') }}</span>
                 </li>
             </ul>
         </div>
@@ -273,7 +270,7 @@
                             var data = response.data;
 
                             if (parseInt(data.status) == 1) {
-                                elevate.redirectToPage('select-sim-type');
+                                elevate.redirectToPage('personal');
                             } else {
                                 toggleOverlay(false);
                                 toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('/compasia-fail')")
