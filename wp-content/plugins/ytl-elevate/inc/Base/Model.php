@@ -10,12 +10,12 @@ use \Inc\Api\ElevateApi;
 
 class Model extends BaseController
 {
-    private static $wpdb;
+ private $wpdb;
 
     public function __construct()
     {
         global $wpdb;
-        self::$wpdb = $wpdb;
+        $this->wpdb = $wpdb;
     }
 
     /**
@@ -268,7 +268,7 @@ class Model extends BaseController
         return false;
     }
 
-    public static function refinde($products)
+    public  function refinde($products)
     {
 		
         foreach ($products as $k=>$v){
@@ -360,9 +360,9 @@ class Model extends BaseController
 
     }
 	
-	public static function apiLog($data)
+	public  function apiLog($data)
     {
-		$apiSetting = self::getAPISettings();
+		$apiSetting = $this->getAPISettings();
 		
 		
 		$type = $apiSetting['api_log'];
@@ -373,7 +373,7 @@ class Model extends BaseController
 		}
 		 
 		
-        $table = self::$wpdb->prefix . "api_log";
+        $table = $this->wpdb->prefix . "api_log";
 		
 		if(is_array( $data['response']) || is_object($data['response'])) 
 			{ $data['response'] = json_encode($data['response']); }
@@ -386,7 +386,7 @@ class Model extends BaseController
 		VALUES 
 		('" . $data['api'] . "','" . $data['payload'] . "','" . $data['response']. "','" . $data['body'] . "','" . $data['status'] . "','". date("Y-m-d H:i:s") . "')";
 
-        self::$wpdb->query($sql);
+        $this->wpdb->query($sql);
 
     }
 	

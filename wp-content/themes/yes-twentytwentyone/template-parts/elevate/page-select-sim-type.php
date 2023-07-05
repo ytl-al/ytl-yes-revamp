@@ -196,7 +196,11 @@
                                     </div>
                                 </span>
                             </label>
+<<<<<<< HEAD
                             <label class="card">
+=======
+                            <label class="card                                                                                                      " >
+>>>>>>> 54279ea2c9d968fff76f41c70a7534205ea22b15
                                 <input name="plan" class="radio" type="radio" name="simType" value="physicalSIM"
                                     v-model="simType" checked @click="hideErrorEsimMsg()">
                                 <span class="plan-details">

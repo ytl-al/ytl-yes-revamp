@@ -93,7 +93,7 @@
 <?php require_once('includes/footer.php'); ?>
 <?php $apiSetting = ( new \Inc\Base\Model)->getAPISettings();?>
 <script type="text/javascript"
-        src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/qrcodejs/qrcode.min.js"></script>
+        src="https://yesmy-dev.azurewebsites.net/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/qrcodejs/qrcode.min.js"></script>
 <script type="text/javascript">
  var windows = [];
  $(document).ready(function () {

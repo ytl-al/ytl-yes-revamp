@@ -503,15 +503,36 @@ main.site-main {
 .color-black a {
     background: #282524;
 }
+.color-red a {
+    background: #6b4a52;
+}
 
 .color-flora-green a {
     background: #91ad8b;
 }
-
+.color-f-green a {
+    background: #91ad8b;
+}
 .color-lavender a {
     background: #E6E6FA;
 }
 
+.color-ice-blue a {
+   background: #94c1e0;
+}
+.color-semporna-green a{
+    background: #80e3d8;
+}
+
+.color-lime a {
+    background: #dbefa2;
+}
+.color-mystic-black a{
+  background: #3c4043
+}
+.color-onyx-gray a {
+   background: #40434a;
+}
 .color-blue a {
     background: #ADBBDE;
 }

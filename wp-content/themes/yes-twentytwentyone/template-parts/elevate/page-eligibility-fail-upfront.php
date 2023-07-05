@@ -163,7 +163,11 @@
                     <span>{{ renderText('elevate_step_1') }}</span>
                 </li>
                 <li ui-sref="secondStep" class="completed">
+<<<<<<< HEAD
                     <span>2. UpFrontPayment</span>
+=======
+                    <span>upFrontPayment</span>
+>>>>>>> 54279ea2c9d968fff76f41c70a7534205ea22b15
                 </li>
                 <li ui-sref="thirdStep">
                     <span>{{ renderText('elevate_step_3') }}</span>
@@ -171,9 +175,12 @@
                 <li ui-sref="fourthStep">
                     <span>{{ renderText('elevate_step_4') }}</span>
                 </li>
+<<<<<<< HEAD
                 <li ui-sref="fourthStep">
                     <span>{{ renderText('elevate_step_5') }}</span>
                 </li>
+=======
+>>>>>>> 54279ea2c9d968fff76f41c70a7534205ea22b15
             </ul>
             <ul class="wizard"v-else>
                 <li ui-sref="firstStep" class="completed">

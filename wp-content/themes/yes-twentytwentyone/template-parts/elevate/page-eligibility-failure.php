@@ -475,6 +475,7 @@
     $(document).ready(function () {
         $(document).on('click', '.plan-item', function () {
             selectedPlan = $(this).data('planid');
+            alert(selectedPlan);
             $('#btnChoosePlan').removeClass('pink-btn-disable');
             $('#btnChoosePlan').addClass('pink-btn');
             $('.plan-item-selected').removeClass('plan-item-selected');

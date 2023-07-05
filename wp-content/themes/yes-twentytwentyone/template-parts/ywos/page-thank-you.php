@@ -171,17 +171,17 @@
             <h1 class="mb-4">{{ renderText('strThankYou') }}</h1>
             <p class="tx">{{ renderText('strOrderNumber') }}<br>
             <a href="javascript:void(0)" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br /><br/>
-            {{ renderText('strPlacedOn') }} {{ purchaseInfo.orderCreationDate }}
-            {{ renderText('strEstimatedDelivery') }} {{ purchaseInfo.deliveryFromDate }}  - {{purchaseInfo.deliveryToDate}}<br /> <br />
+            <div class="text-12 mt-2">Placed on <?php echo date("l, jS F Y")?></div>
+            <p v-if="(simType=='false' || simType=='')">{{ renderText('strEstimatedDelivery') }} {{ purchaseInfo.deliveryFromDate }}  - {{purchaseInfo.deliveryToDate}}</p><br /> <br />
             <p> {{ renderText('strOrderSummary') }}</p>
         </div>
         <div class="col-md-6 tx_box_inner" v-else>
             <h1 class="mb-4">{{ renderText('strThankYou') }}</h1>
             <p class="tx">{{ renderText('strOrderNumber') }}<br>
             <a href="javascript:void(0)" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br /><br/>
-            {{ renderText('strPlacedOn') }} {{ purchaseInfo.orderCreationDate }}
-            <p>{{ renderText('strEstimatedDelivery') }} {{ purchaseInfo.deliveryFromDate }}  - {{purchaseInfo.deliveryToDate}}</p><br /> <br />
-            <p> {{ renderText('strOrderSummary') }}</p>
+            <div class="text-12 mt-2">Placed on <?php echo date("l, jS F Y")?></div>
+            <p style="margin:3px 0" v-if="(simType=='false' || simType=='')">{{ renderText('strEstimatedDelivery') }} {{ purchaseInfo.deliveryFromDate }}  - {{purchaseInfo.deliveryToDate}}</p>
+            <p style="margin:3px 0"> {{ renderText('strOrderSummary') }}</p>
         </div>
         <div class="col-md-6">
             <div class="tx-img">
@@ -189,35 +189,7 @@
             </div>
         </div>
     </div>
-
-    <div class="row" v-if="(simType=='false')">
-        <div class="step_sec">
-            <h1>{{ renderText('strPhysicalSimActivate') }}</h1>
-            <div class="step_sec_inner">
-                <div class="content">
-                    <span>1</span>
-                    <p>{{ renderText('strPhysicalSimActivateStepOne') }}</p>
-                </div>
-                <div class="content">
-                    <span>2</span>
-                    <p>{{ renderText('strPhysicalSimActivateStepTwo') }}</p>
-                </div>
-                <div class="content">
-                    <span>3</span>
-                    <p>{{ renderText('strPhysicalSimActivateStepThree') }}</p>
-                </div>
-                <div class="content">
-                    <span>4</span>
-                    <p>{{ renderText('strPhysicalSimActivateStepFour') }}</p>
-                </div>
-                <div class="content">
-                    <span>5</span>
-                    <p>{{ renderText('strPhysicalSimActivateStepFive') }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row" v-else>
+    <div class="row" v-if="(simType=='true')">
         <div class="step_sec">
             <h1>{{ renderText('strEsimActivate') }}</h1>
             <div class="step_sec_inner">
@@ -244,6 +216,33 @@
             </div>
         </div>
     </div>
+    <div class="row" v-else>
+        <div class="step_sec">
+            <h1>{{ renderText('strPhysicalSimActivate') }}</h1>
+            <div class="step_sec_inner">
+                <div class="content">
+                    <span>1</span>
+                    <p>{{ renderText('strPhysicalSimActivateStepOne') }}</p>
+                </div>
+                <div class="content">
+                    <span>2</span>
+                    <p>{{ renderText('strPhysicalSimActivateStepTwo') }}</p>
+                </div>
+                <div class="content">
+                    <span>3</span>
+                    <p>{{ renderText('strPhysicalSimActivateStepThree') }}</p>
+                </div>
+                <div class="content">
+                    <span>4</span>
+                    <p>{{ renderText('strPhysicalSimActivateStepFour') }}</p>
+                </div>
+                <div class="content">
+                    <span>5</span>
+                    <p>{{ renderText('strPhysicalSimActivateStepFive') }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <hr>
     <div class="row price">
         <div class="rs">
@@ -265,20 +264,20 @@
                     <h3>Kasi Up <br>
                         Postpaid 30</h3>
                     <div class="list">
-                        <img src="/wp-content/uploads/2023/05/check-circle-Regular.png" class="img-fluid" alt="...">
+                        <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
                         <p>20GB for RM30</p>
                     </div>
                     <div class="list">
-                        <img src="/wp-content/uploads/2023/05/check-circle-Regular.png" class="img-fluid" alt="...">
+                        <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
                         <p>Unlimited refferals and earnings</p>
                     </div>
                     <div class="list">
-                        <img src="/wp-content/uploads/2023/05/check-circle-Regular.png" class="img-fluid" alt="...">
+                        <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
                         <p>Free Yes Altitude phone</p>
                     </div>
                     <div class="bottom_sec">
                         <h5>RM30.00 /month</h5>
-                        <img src="/wp-content/uploads/2023/05/cards.png" class="img-fluid" alt="...">
+                        <img src="/wp-content/uploads/2023/06/cards-1.png" class="img-fluid" alt="...">
                     </div>
                 </div>
             </div>
@@ -286,20 +285,20 @@
                 <div class="price-sec">
                     <h3>Merdeka Device<br> Bundle</h3>
                     <div class="list">
-                        <img src="/wp-content/uploads/2023/05/check-circle-Regular.png" class="img-fluid" alt="...">
+                        <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
                         <p>20GB for RM30</p>
                     </div>
                     <div class="list">
-                        <img src="/wp-content/uploads/2023/05/check-circle-Regular.png" class="img-fluid" alt="...">
+                        <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
                         <p>Unlimited refferals and earnings</p>
                     </div>
                     <div class="list">
-                        <img src="/wp-content/uploads/2023/05/check-circle-Regular.png" class="img-fluid" alt="...">
+                        <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
                         <p>Free Yes Altitude phone</p>
                     </div>
                     <div class="bottom_sec">
                         <h5>RM30.00 /month</h5>
-                        <img src="/wp-content/uploads/2023/05/cards.png" class="img-fluid" alt="...">
+                        <img src="/wp-content/uploads/2023/06/cards-1.png" class="img-fluid" alt="...">
                     </div>
                 </div>
             </div>
@@ -308,20 +307,20 @@
                     <h3>Kasi Up <br>
                         Prepaid Unlimited 30</h3>
                     <div class="list">
-                        <img src="/wp-content/uploads/2023/05/check-circle-Regular.png" class="img-fluid" alt="...">
+                        <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
                         <p>20GB for RM30</p>
                     </div>
                     <div class="list">
-                        <img src="/wp-content/uploads/2023/05/check-circle-Regular.png" class="img-fluid" alt="...">
+                        <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
                         <p>Unlimited refferals and earnings</p>
                     </div>
                     <div class="list">
-                        <img src="/wp-content/uploads/2023/05/check-circle-Regular.png" class="img-fluid" alt="...">
+                        <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
                         <p>Free Yes Altitude phone</p>
                     </div>
                     <div class="bottom_sec">
                         <h5>RM30.00 /month</h5>
-                        <img src="/wp-content/uploads/2023/05/cards.png" class="img-fluid" alt="...">
+                        <img src="/wp-content/uploads/2023/06/cards-1.png" class="img-fluid" alt="...">
                     </div>
                 </div>
             </div>
@@ -466,7 +465,8 @@
                         toggleOverlay(false);
                     } else if (ywos.validateSession(self.currentStep)) {
                         self.pageValid = true;
-                        self.simType=ywos.lsData.meta.esim;
+                        self.simType=ywos?.lsData?.meta?.esim;
+            
                         self.updateData();
                         // self.getHighlightPlans();
                         toggleOverlay(false);
@@ -528,24 +528,20 @@
                 updateData: function () {
                     var self = this;
                     if (typeof ywos.lsData.meta.orderResponse != 'undefined') {
-                        self.purchaseInfo.displayOrderNumber = ywos.lsData.meta.orderResponse
-                            .displayOrderNumber;
-
-                       
+                        self.purchaseInfo.displayOrderNumber = ywos.lsData.meta.orderResponse.displayOrderNumber;
                         self.purchaseInfo.deliveryFromDate = moment(ywos.lsData.meta.orderResponse.deliveryFromDate,'DD-MM-YYYY').format('Do MMM').split(' ');
                         self.purchaseInfo.deliveryFromDate= self.purchaseInfo.deliveryFromDate[0] + self.nthNumber(self.purchaseInfo.deliveryFromDate[0]) + ' ' + (self.purchaseInfo.deliveryFromDate[1]);
-
-                     
                         self.purchaseInfo.deliveryToDate = moment(ywos.lsData.meta.orderResponse.deliveryToDate,'DD-MM-YYYY').format('Do MMM').split(' ');
                         self.purchaseInfo.deliveryToDate= self.purchaseInfo.deliveryToDate[0] + self.nthNumber(self.purchaseInfo.deliveryToDate[0]) + ' ' + (self.purchaseInfo.deliveryToDate[1]);
                          
-                        self.purchaseInfo.orderCreationDate =moment(ywos.lsData.meta.orderResponse
-                            .orderCreationDate,'dd-MM-yyyy hh:mm:ss').format("dddd, Do MMMM  YYYY").split(' ');
-                            self.purchaseInfo.orderCreationDate= self.purchaseInfo.orderCreationDate[0] +  (self.purchaseInfo.orderCreationDate[1] + self.nthNumber(self.purchaseInfo.orderCreationDate[1]))+ ' ' + (self.purchaseInfo.orderCreationDate[2]) 
+                        // self.purchaseInfo.orderCreationDate =moment(ywos.lsData.meta.orderResponse
+                        //     .orderCreationDate,'dd-MM-yyyy hh:mm:ss').format("mm-yyyy").split(' ');
+                    // self.purchaseInfo.orderCreationDate=ywos.lsData.meta.orderResponse.orderCreationDate;
+                            // self.purchaseInfo.orderCreationDate= self.purchaseInfo.orderCreationDate[0] +  (self.purchaseInfo.orderCreationDate[1] + self.nthNumber(self.purchaseInfo.orderCreationDate[1]))+ ' ' + (self.purchaseInfo.orderCreationDate[2]) 
                     } else if (ywos.lsData.meta.purchaseInfo) {
                         self.purchaseInfo = ywos.lsData.meta.purchaseInfo;
                     }
-                    self.clearLocalData(ywos.lsData.meta.planID, ywos.lsData.meta.completedStep);
+                    // self.clearLocalData(ywos.lsData.meta.planID, ywos.lsData.meta.completedStep);
                 },
                 clearLocalData: function (planID = 0, completedStep = 0) {
                     ywos.lsData.meta = {};

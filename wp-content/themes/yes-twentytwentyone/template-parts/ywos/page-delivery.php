@@ -32,8 +32,10 @@
                 <li ui-sref="secondStep" class="completed">
                     <span>2. {{ renderText('strSelectSimType') }}</span>
                 </li>
-                <li ui-sref="thirdStep" class="completed">
-                    <span>3. {{ renderText('strDelivery') }}</span>
+                <li ui-sref="thirdStep">
+                    <span v-if="(simType == 'eSIM')">3. {{ renderText('strDeliveryBilling') }}</span>
+                    <span v-else>3. {{ renderText('strDelivery') }}</span>
+
                 </li>
                 <li ui-sref="fourthStep">
                     <span>4. {{ renderText('strReview') }}</span>
@@ -589,6 +591,11 @@
                     modalRCContinue: { 'en-US': 'Proceed without referral code', 'ms-MY': 'Teruskan tanpa kod rujukan', 'zh-hans': 'Proceed without referral code' },
                     modalRCVerify: { 'en-US': 'Please verify the referral code', 'ms-MY': 'Sila sahkan kod rujukan', 'zh-hans': 'Please verify the referral code' },
                     modalEligibilityTitle: { 'en-US': 'Eligibility Check', 'ms-MY': 'Pengesahan Kelayakan', 'zh-hans': 'Eligibility Check' },
+                    strDeliveryBilling: {
+                    'en-US': 'Billing Details',
+                    'ms-MY': 'Billing Details',
+                    'zh-hans': 'Billing Details'
+                },
                 }
             },
             mounted: function() {},

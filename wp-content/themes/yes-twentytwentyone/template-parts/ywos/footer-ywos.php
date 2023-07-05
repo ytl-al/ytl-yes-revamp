@@ -12,6 +12,7 @@
         pageTitleVerification: { 'en-US': 'Verification', 'ms-MY': 'Pengesahan', 'zh-hans': 'Verification' }, 
         pageTitleSelectSimType:{ 'en-US': 'Select Sim Type', 'ms-MY': 'Select Sim Type', 'zh-hans': 'Select Sim Type' }, 
         pageTitleDeliveryDetails: { 'en-US': 'Delivery Details', 'ms-MY': 'Butiran Penghantaran', 'zh-hans': 'Delivery Details' }, 
+        pageTitleEligibilityFailure: { 'en-US': 'Upfront Payment', 'ms-MY': 'Upfront Payment', 'zh-hans': 'Upfront Payment' }, 
         pageTitleReview: { 'en-US': 'Review', 'ms-MY': 'Semak', 'zh-hans': 'Review' }, 
 
         footerNeedHelp: { 'en-US': 'Need help? See <a href="/faq">Help Pages</a> or <a href="mailto:yescare@yes.my">Contact Us</a>', 'ms-MY': 'Perlukan bantuan? Lihat <a href="/faq">Help Pages</a> atau <a href="mailto:yescare@yes.my">Hubungi Kami</a>', 'zh-hans': 'Need help? See <a href="/faq">Help Pages</a> or <a href="mailto:yescare@yes.my">Contact Us</a>' }
@@ -28,11 +29,17 @@
                 backPageStrID = 'pageTitleCart';
                 break;
             case 'verification': 
-                backPageStrID = 'pageTitleVerification';
-                break;
+                if(ywosLSData.meta.customerDetails.upFrontPayment=="true"){
+                     backPageStrID = 'pageTitleEligibilityFailure';
+                     break;
+                }else{
+                    backPageStrID = 'pageTitleVerification';
+                    break;   
+                }
             case 'sim type': 
-            backPageStrID = 'pageTitleSelectSimType';
-            break;
+
+                backPageStrID = 'pageTitleSelectSimType';
+                    break; 
             case 'delivery': 
                 backPageStrID = 'pageTitleDeliveryDetails';
                 break;

@@ -801,11 +801,17 @@ class Ytl_Pull_Data_Public
 
 		 
 		// $api_domain ="https://ydbp-shoutout-kraken-dev.azurewebsites.net";
+<<<<<<< HEAD
 		$guestLoginData=get_option('yes_guest_login_token_data', true);
+=======
+		$guestLoginData=get_option('yes_gauest_login_token_data');
+	
+>>>>>>> 54279ea2c9d968fff76f41c70a7534205ea22b15
 		if(isset($guestLoginData) && !empty($guestLoginData)){
 			$api_domain=$guestLoginData['set_token_data_guest_login']['otp_url'];
 
 		}
+
 		$session_id = $this->ca_generate_auth_token_new(true);
 		if ($MobileNumber != null  && isset($api_domain) && $session_id) {
 			// $params 	= ['requestId' => $this->api_request_id, 'locale' => $locale, 'msisdn' => $MobileNumber, 'sessionId' => $session_id];
@@ -1959,7 +1965,12 @@ class Ytl_Pull_Data_Public
 	{
 	
 		// $api_domain="https://ydbp-shoutout-kraken-dev.azurewebsites.net";
+<<<<<<< HEAD
 		$guestLoginData=get_option('yes_guest_login_token_data',true);
+=======
+		$guestLoginData=get_option('yes_gauest_login_token_data',true);
+		
+>>>>>>> 54279ea2c9d968fff76f41c70a7534205ea22b15
 		if(isset( $guestLoginData) && !empty($guestLoginData)){
 			$api_domain=$guestLoginData['set_token_data_guest_login']['otp_url'];
 		}
