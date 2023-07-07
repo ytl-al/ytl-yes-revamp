@@ -1992,6 +1992,7 @@ function yes_menu($path)
         }
     </style>
 
+
     <ul class="navbar-nav">
         <li class="nav-item dropdown mega-dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Postpaid', 'yes.my'); ?></a>
@@ -2005,14 +2006,34 @@ function yes_menu($path)
                                     <p class="yes_text_menu_headline">explore
                                         postpaid Plans</p>
                                 </li>
+
 <?php
-                                $menu = wp_get_nav_menu_object("Postpaid-Explore Postpaid-Plans");
-                                $primaryNav = wp_get_nav_menu_items($menu);
-                                foreach ($primaryNav as $navItem) {
+ $menu = wp_get_nav_menu_object("Postpaid-Explore Postpaid-Plans");
+ $primaryNav = wp_get_nav_menu_items($menu);
+ foreach ($primaryNav as $navItem) {
 ?>
-                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $navItem->url; ?>"><?php echo $navItem->post_title; ?></a></li>
 <?php
-                                }
+$lang = get_bloginfo("language");
+//echo "value check". get_bloginfo('url');
+//echo get_site_url();
+$parse = parse_url($navItem->url);
+//print_r($parse);
+$url = rtrim(get_bloginfo('url'),"/");
+if ($lang == "en-US"){
+?>
+                    <li class="dropdown-header">
+                    <a class="custom_menu_nuv" href="<?php echo $url.$navItem->url; ?>">
+                    <?php echo $navItem->post_title; ?></a></li>                    
+<?php
+                    }else{
+                        ?>
+                        <li class="dropdown-header">
+                        <a class="custom_menu_nuv" href="<?php echo get_site_url().'/ms'.$parse['path']; ?>">
+                        <?php echo $navItem->post_title; ?> test</a></li>
+                    <?php
+                    }
+                
+                }
 ?>
                             </ul>
                         </li>
@@ -2460,6 +2481,21 @@ function yes_menu($path)
                 <div class="parent">
                     <button class="btn-gradient-2"><span class="badges">HOT</span></button>
                 </div>
+            </a>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav">
+        <?php
+        $lang = get_bloginfo("language");
+        if ($lang == "en-US") {
+            $menu_link_5G_Gaming = 'http://www.cloudgaming.my';
+        } elseif ($lang == "ms-MY") {
+            $menu_link_5G_Gaming = 'http://www.cloudgaming.my';
+        }
+        ?>
+        <li id="menu-item-31215" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31215 nav-item">
+            <a href="<?php echo $menu_link_5G_Gaming ?>" target="_blank" class="nav-link flex"><?php echo esc_html__('Yes 5G Gaming', 'yes.my'); ?>
             </a>
         </li>
     </ul>
