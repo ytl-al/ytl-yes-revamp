@@ -6,13 +6,29 @@
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
-            <ul class="wizard">
+            <ul class="wizard" v-if="(eSimSupportPlan != true)">
+                <li ui-sref="firstStep" class="completed">
+                    <span>1. {{ renderText('strVerification') }}</span>
+                </li>
+               
+                <li ui-sref="thirdStep">
+                    <span>2. {{ renderText('strDelivery') }}</span>
+                </li>
+                <li ui-sref="fourthStep">
+                    <span>3. {{ renderText('strReview') }}</span>
+                </li>
+                <li ui-sref="fifthStep">
+                    <span>4. {{ renderText('strPayment') }}</span>
+                </li>
+            </ul>
+            <ul class="wizard" v-else>
                 <li ui-sref="firstStep" class="completed">
                     <span>1. {{ renderText('strVerification') }}</span>
                 </li>
                 <li ui-sref="secondStep">
                     <span>2. {{ renderText('strSelectSimType') }}</span>
                 </li>
+				
                 <li ui-sref="thirdStep">
                     <span>3. {{ renderText('strDelivery') }}</span>
                 </li>
@@ -123,7 +139,12 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-5 col-12">
+						
+                            <div class="col-lg-5 col-12" v-if="(eSimSupportPlan != true)">
+                                <button class="pink-btn" type="submit" :disabled="!allowNext">{{ renderText('strBtnSubmitWithoutEsim') }}</button>
+                                <div class="invalid-feedback mt-2" id="em-verification"></div>
+                            </div>
+							<div class="col-lg-5 col-12" v-else>
                                 <button class="pink-btn" type="submit" :disabled="!allowNext">{{ renderText('strBtnSubmit') }}</button>
                                 <div class="invalid-feedback mt-2" id="em-verification"></div>
                             </div>
@@ -148,6 +169,7 @@
                 currentStep: 1,
                 pageValid: false,
                 upFrontPayment:'false',
+				eSimSupportPlan:'',
                 customerDetails: {
                     securityType: '',
                     securityId: '',
@@ -224,8 +246,9 @@
                     strTacCodeValid: { 'en-US': 'TAC code is valid for', 'ms-MY': 'Kod TAC sah untuk', 'zh-hans': 'TAC code is valid for' },
 
                     strAgree: { 'en-US': 'I hereby agree to subscribe to the YES postpaid/prepaid service as indicated in the online form submitted by me. I further give consent to YTLC to process my personal data in accordance with the YTL Group Privacy Policy available at <a href="http://www.ytl.com/privacypolicy.asp" target="_blank">http://www.ytl.com/privacypolicy.asp</a>.', 'ms-MY': 'Saya dengan ini bersetuju untuk melanggan pilihan Pelan Perkhidmatan Pascabayar/Prabayar dalam borang dalam talian yang saya hantar. <br />Saya selanjutnya memberi kebenaran kepada YTLC untuk memproses data peribadi saya mengikut Polisi Privasi Kumpulan YTL yang terkandung di <a href="http://www.ytl.com/privacypolicy.asp" target="_blank">http://www.ytl.com/privacypolicy.asp</a>.', 'zh-hans': 'I hereby agree to subscribe to the YES postpaid/prepaid service as indicated in the online form submitted by me. I further give consent to YTLC to process my personal data in accordance with the YTL Group Privacy Policy available at <a href="http://www.ytl.com/privacypolicy.asp" target="_blank">http://www.ytl.com/privacypolicy.asp</a>.' },
-
-                    strBtnSubmit: { 'en-US': 'Next: Select Sim Type', 'ms-MY': 'Seterusnya: Select Sim Type', 'zh-hans': 'Next: Select Sim Type' }, 
+	
+                    strBtnSubmit: { 'en-US': 'Next: Select Sim Type', 'ms-MY': 'Seterusnya: Select Sim Type', 'zh-hans': 'Next: Select Sim Type' },
+					strBtnSubmitWithoutEsim: { 'en-US': 'Next: Delivery', 'ms-MY': 'Seterusnya: Delivery', 'zh-hans': 'Next: Delivery' },
                     
                     strErrorNRIC: { 'en-US': 'Please insert valid MyKad  number', 'ms-MY': 'Sila masukkan nombor kad pengenalan yang sah', 'zh-hans': 'Please insert valid MyKad  number' },
                     strErrorPassport: { 'en-US': 'Please insert valid Passport number', 'ms-MY': 'Sila masukkan nombor passport yang sah', 'zh-hans': 'Please insert valid Passport number' },
@@ -402,8 +425,16 @@
                         }
                         ywos.updateYWOSLSData();
                     }
-
-                    ywos.redirectToPage('sim-type');
+				if(ywos.lsData.meta.orderSummary.plan.eSim != true){
+					self.eSimSupportPlan=ywos.lsData.meta.orderSummary.plan.eSim;
+					// alert(ywos.lsData.meta.orderSummary.plan.eSim);
+					ywos.lsData.meta.completedStep=2;
+					ywos.updateYWOSLSData();
+					ywos.redirectToPage('delivery');
+				}else{
+					ywos.redirectToPage('sim-type');
+				}
+                    
                 },
                 validateOTPNumber: function() {
                     var self = this;

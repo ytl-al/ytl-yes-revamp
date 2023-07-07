@@ -188,7 +188,18 @@
                         <h1 class="mb-4">{{ renderText('thank_you') }}</h1>
                         <p class="tx">Tracking number/Order number<br></p>
                         <div class="subtitle">
-                            <?php if (isset($_GET['orderNumber'])) { echo $_GET['orderNumber']; } ?>
+                            <?php 
+							
+							if (isset($_GET['orderNumber'])) {
+								$parts = explode('/', $_GET['orderNumber']);
+							
+								
+								$orderNumber = $parts[0];
+								echo $orderNumber; 
+								
+								} 
+								
+							?>
                         </div>
                         <div class="text-12 mt-2">Placed on
                             <?php echo date("l, jS F Y") ?>

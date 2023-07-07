@@ -784,6 +784,7 @@
                 isCartEmpty: false,
                 hasFetchPlan: false,
                 requestOTPText: '',
+				esimSupportPlan:'',
                 loginInfo: {
                     type: 'guest',
                     yes_number: '',
@@ -957,7 +958,8 @@
                     axios.get(apiEndpointURL + '/get-plan-by-id/' + self.planID + '/?nonce='+yesObj.nonce)
                         .then((response) => {
                             var data = response.data;
-                            // console.log(data);
+                            // console.log(typeof(data.eSim));
+							
                             if (data.internetData == '∞') {
                                 data.internetData = 'Unlimited';
                             }
