@@ -33,4 +33,5 @@ register_deactivation_hook( __FILE__, 'deactivate_elevate' );
 /* Shortcode*/
 \Inc\Base\Shortcode::register();
 /* API Enpoint*/
-\Inc\Api\ElevateApi::register();
+$elvate_api= new \Inc\Api\ElevateApi();
+$elvate_api->register();

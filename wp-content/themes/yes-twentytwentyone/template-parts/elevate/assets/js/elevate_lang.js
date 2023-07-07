@@ -34,8 +34,10 @@ Elevate_lang['en-US']['payment_note'] = 'The Monthly Instalment payment amount g
 
 Elevate_lang['en-US']['elevate_step_1'] = '1. Eligibility check';
 Elevate_lang['en-US']['elevate_step_2'] = '2. MyKAD verification';
-Elevate_lang['en-US']['elevate_step_3'] = '3. Delivery details';
-Elevate_lang['en-US']['elevate_step_4'] = '4. Review and order';
+Elevate_lang['en-US']['elevate_step_3'] = '3. Select Sim Type';
+Elevate_lang['en-US']['elevate_step_4'] = '4. Delivery details';
+Elevate_lang['en-US']['elevate_step_4_1'] = ' Billing details';
+Elevate_lang['en-US']['elevate_step_5'] = '5. Review and order';
 
 Elevate_lang['en-US']['if_you_are_eligible'] = 'Check if you are eligible for the Yes Infinite+ contract option';
 Elevate_lang['en-US']['eligibility_check'] = 'Eligibility Check';
@@ -52,11 +54,13 @@ Elevate_lang['en-US']['term_and_condition1'] = 'I here by agree to subscribe to 
 Elevate_lang['en-US']['term_and_condition2'] = 'I further give consent to YTLC to process my personal data in accordance with YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" style="word-break: break-all;" target="_blank">https://www.ytl.com/privacypolicy.asp</a>.';
 Elevate_lang['en-US']['check_eligibility'] = 'Check Eligibility';
 Elevate_lang['en-US']['phone_number'] = 'Phone number';
+Elevate_lang['en-US']['compasia_fail_error1'] = 'Sorry! We’ve checked and you currently do not qualify for the Yes Infinite+ contract option';
 Elevate_lang['en-US']['compasia_fail_error1_1'] = 'Uh-oh!';
 Elevate_lang['en-US']['compasia_fail_error1_2'] = ' You are ineligible for zero upfront payment.';
 Elevate_lang['en-US']['compasia_fail_error1_3'] = ' To proceed, you will be required to pay the device upfront payment, which will be rebated to you over 18 months.';
-Elevate_lang['en-US']['compasia_fail_error1_4'] = ' This amount will be rebated back to you over 18 months. Click “proceed” to complete your purchase!.';
-
+Elevate_lang['en-US']['compasia_fail_error1_4'] = ' This amount will be rebated back to you over 18 months. Click “proceed” to complete your purchase!';
+Elevate_lang['en-US']['Billing_details'] = 'Billing Details';
+Elevate_lang['en-US']['delivery_details'] = 'Delivery Details';
 
 
 Elevate_lang['en-US']['compasia_fail_error2'] = 'Sorry, you do not qualify for the Yes Infinite+ contract option, please select another contract option:';
@@ -149,6 +153,7 @@ Elevate_lang['en-US']['cancel'] = 'Cancel';
 Elevate_lang['en-US']['deviceContract'] = '(36 months installment)';
 Elevate_lang['en-US']['unfortunately'] = 'Unfortunately';
 Elevate_lang['en-US']['error_payment'] = 'Error Payment';
+Elevate_lang['en-US']['strBtnSubmit'] = 'Enter Address';
 
 
 Elevate_lang['en-US']['system_error'] = 'System error, please try again.';
@@ -201,8 +206,13 @@ Elevate_lang['ms-MY']['payment_note'] = 'Amaun bayaran Ansuran Bulanan yang dija
 
 Elevate_lang['ms-MY']['elevate_step_1'] = '1. Semakan kelayakan';
 Elevate_lang['ms-MY']['elevate_step_2'] = '2. Pengesahan MyKAD';
-Elevate_lang['ms-MY']['elevate_step_3'] = '3. Butiran penghantaran';
-Elevate_lang['ms-MY']['elevate_step_4'] = '4. Semak dan pesan';
+Elevate_lang['ms-MY']['elevate_step_3'] = '3. Select Sim Type';
+Elevate_lang['ms-MY']['elevate_step_4'] = '4. Butiran penghantaran';
+Elevate_lang['en-US']['elevate_step_4_1'] = '4. Billing details';
+Elevate_lang['ms-MY']['elevate_step_5'] = '5. Semak dan pesan';
+Elevate_lang['ms-MY']['strBtnSubmit'] = 'Enter Address';
+
+
 
 Elevate_lang['ms-MY']['if_you_are_eligible'] = 'Periksa jika anda layak untuk pilihan kontrak Yes Infinite+';
 Elevate_lang['ms-MY']['eligibility_check'] = 'Semakan Kelayakan';
@@ -219,8 +229,12 @@ Elevate_lang['ms-MY']['term_and_condition1'] = 'Saya dengan ini bersetuju untuk 
 Elevate_lang['ms-MY']['term_and_condition2'] = 'Saya selanjutnya memberi kebenaran kepada YTLC untuk memproses data peribadi saya mengikut Polisi Privasi Kumpulan YTL yang terkandung di <a href="https://www.ytl.com/privacypolicy.asp" style="word-break: break-all;" target="_blank">https://www.ytl.com/privacypolicy.asp</a>.';
 Elevate_lang['ms-MY']['check_eligibility'] = 'Semak Kelayakan';
 Elevate_lang['ms-MY']['phone_number'] = 'Nombor telefon';
-Elevate_lang['ms-MY']['compasia_fail_error1'] = 'Maaf! Kami telah menyemak dan anda pada masa ini tidak layak untuk pilihan kontrak Yes Infinite+';
-Elevate_lang['ms-MY']['compasia_fail_error2'] = 'Maaf, anda tidak layak untuk pilihan kontrak Yes Infinite+, sila pilih pilihan kontrak lain:';
+Elevate_lang['ms-MY']['compasia_fail_error1'] = 'Sorry! We’ve checked and you currently do not qualify for the Yes Infinite+ contract option';
+Elevate_lang['ms-MY']['compasia_fail_error1_1'] = 'Uh-oh!';
+Elevate_lang['ms-MY']['compasia_fail_error1_2'] = ' You are ineligible for zero upfront payment.';
+Elevate_lang['ms-MY']['compasia_fail_error1_3'] = ' To proceed, you will be required to pay the device upfront payment, which will be rebated to you over 18 months.';
+Elevate_lang['ms-MY']['compasia_fail_error1_4'] = ' This amount will be rebated back to you over 18 months. Click “proceed” to complete your purchase!';
+Elevate_lang['ms-MY']['Billing_details'] = 'Billing Details';
 
 Elevate_lang['ms-MY']['eligibility_check_unsuccessful'] = 'Semakan kelayakan tidak berjaya';
 Elevate_lang['ms-MY']['EKYC_check_unsuccessful'] = 'Semakan EKYC tidak berjaya';
@@ -359,11 +373,14 @@ Elevate_lang['zh-hans']['check_out'] = '结帐';
 Elevate_lang['zh-hans']['no_item_in_cart'] = '购物车中没有商品';
 Elevate_lang['zh-hans']['browse_plan_here'] = '您可以浏览可用的计划  <a href="/infinite-phone-bundles/">这里</a>.';
 Elevate_lang['zh-hans']['payment_note'] = '产生的每月分期付款金额只是一个估计值。 确认确切金额。 请与 Maybank 取得联系。';
+Elevate_lang['zh-hans']['strBtnSubmit'] = 'Enter Address';
 
 Elevate_lang['zh-hans']['elevate_step_1'] = '1. 资格审查';
 Elevate_lang['zh-hans']['elevate_step_2'] = '2. MyKAD 验证';
-Elevate_lang['zh-hans']['elevate_step_3'] = '3. 交货详情';
-Elevate_lang['zh-hans']['elevate_step_4'] = '4. 审查和订购';
+Elevate_lang['zh-hans']['elevate_step_3'] = '3. Select Sim Type';
+Elevate_lang['zh-hans']['elevate_step_4'] = '4. 交货详情';
+Elevate_lang['en-US']['elevate_step_4_1'] = '4. Billing details';
+Elevate_lang['zh-hans']['elevate_step_5'] = '5. 审查和订购';
 
 Elevate_lang['zh-hans']['if_you_are_eligible'] = '检查您是否有资格获得 Yes Infinite+ 合同选项';
 Elevate_lang['zh-hans']['eligibility_check'] = '资格检查';
@@ -380,8 +397,12 @@ Elevate_lang['zh-hans']['term_and_condition1'] = '我在此同意订阅我提交
 Elevate_lang['zh-hans']['term_and_condition2'] = '我进一步同意 YTLC 根据<a href="https://www.ytl.com/privacypolicy.asp" style="word-break: break-all;" target="_blank">https://www.ytl.com/privacypolicy.asp</a> 提供的 YTL 集团隐私政策处理我的个人数据。';
 Elevate_lang['zh-hans']['check_eligibility'] = '检查资格';
 Elevate_lang['zh-hans']['phone_number'] = '电话号码';
-Elevate_lang['zh-hans']['compasia_fail_error1'] = '对不起！ 我们已经检查，您目前不符合 Yes Infinite+ 合同选项的资格';
-Elevate_lang['zh-hans']['compasia_fail_error2'] = '抱歉，您不符合 Yes Infinite+ 合约选项的资格，请选择其他合约选项：';
+Elevate_lang['zh-hans']['compasia_fail_error1'] = 'Sorry! We’ve checked and you currently do not qualify for the Yes Infinite+ contract option';
+Elevate_lang['zh-hans']['compasia_fail_error1_1'] = 'Uh-oh!';
+Elevate_lang['zh-hans']['compasia_fail_error1_2'] = ' You are ineligible for zero upfront payment.';
+Elevate_lang['zh-hans']['compasia_fail_error1_3'] = ' To proceed, you will be required to pay the device upfront payment, which will be rebated to you over 18 months.';
+Elevate_lang['zh-hans']['compasia_fail_error1_4'] = ' This amount will be rebated back to you over 18 months. Click “proceed” to complete your purchase!';
+Elevate_lang['zh-hans']['Billing_details'] = 'Billing Details';
 
 Elevate_lang['zh-hans']['eligibility_check_unsuccessful'] = '资格审查不成功';
 Elevate_lang['zh-hans']['EKYC_check_unsuccessful'] = 'EKYC 检查不成功';

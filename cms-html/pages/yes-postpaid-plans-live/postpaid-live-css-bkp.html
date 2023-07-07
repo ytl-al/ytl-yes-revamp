@@ -1,0 +1,350 @@
+<style type="text/css">
+    #postpaid-top-banner {
+        background-image: url('/wp-content/uploads/2022/05/postpaid-banner-bg-new-scaled.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        overflow: hidden;
+    }
+    
+    #postpaid-top-banner h1 {
+        font-size: 50px;
+        font-family: 'Montserrat', sans-serif;
+        line-height: 50px;
+        font-weight: 700;
+        color: #FFF;
+        margin-bottom: 20px;
+    }
+    
+    #postpaid-top-banner p {
+        font-size: 20px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+        line-height: 24px;
+        color: #FFF;
+        padding-right: 16%;
+    }
+    
+    #postpaid-top-banner p span {
+        font-weight: 800;
+    }
+    /* Postpaid Plans styling */
+    
+    #postpaid-plans {
+        align-items: center;
+        justify-content: center;
+        padding: 70px 0px;
+        padding-top: 0px;
+        background-color: #F7F8F9;
+    }
+    
+    #postpaid-plans h1 {
+        font-size: 39px;
+        font-weight: 800;
+        line-height: 47px;
+        color: #000;
+        padding-top: 60px;
+    }
+    
+    #postpaid-plans .plan-table {
+        border-spacing: 8px 0px;
+        border-collapse: initial;
+    }
+    
+    #postpaid-plans .plan-table th {
+        padding: 9px;
+        vertical-align: middle;
+        background-color: #FFF;
+        border: none;
+        border-radius: 10px;
+        width: 200px;
+        text-align: center;
+       height: 100% !important;
+    }
+.plan-table .pink-btn{
+    white-space: nowrap;
+}
+    .plan-table h1{
+    white-space: nowrap;
+}
+
+    #postpaid-plans .plan-table th .pink-btn {
+        padding: .375rem .75rem;
+        display: inline-block;
+    }
+    
+    #postpaid-plans .plan-table th.visual {
+        background-color: transparent;
+        border: none;
+    }
+    
+    #postpaid-plans .plan-table th h1 {
+        color: #2B2B2B;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 400;
+        text-align: center;
+        margin-bottom: 15px;
+        padding-top: 0px;
+    }
+    
+    #postpaid-plans .plan-table th h2 {
+        color: #000;
+        font-size: 18px;
+        line-height: 23px;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    
+    #postpaid-plans .plan-table tr td {
+        padding: 20px;
+        text-align: center;
+        background-color: #FFF;
+        border-bottom: solid 1.5px #d5d5d5;
+        color: #2B2B2B;
+        font-size: 15px;
+        font-weight: 600;
+        vertical-align: middle;
+    }
+    
+    #postpaid-plans .plan-table tr:last-child td {
+        border-bottom: none;
+    }
+    
+    #postpaid-plans .plan-table tr td.blue-col {
+        background-color: #1A1E47;
+        border-bottom: none;
+        position: relative;
+        color: #F9F7F4;
+        text-align: left;
+    }
+    
+    #postpaid-plans .plan-table tr td.blue-col .info-icon {
+        /* position: absolute;
+        right: 22px;
+        top: 22px; */
+        float: right;
+    }
+    
+    #postpaid-plans .plan-table tr td.blue-col:after {
+        clear: both;
+        content: '';
+        display: block;
+    }
+    
+    #postpaid-plans .plan-table tr td.empty-row {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        height: 10px;
+    }
+    /* Switch Yes styling */
+    
+    #wfh {
+        background-color: #FFF;
+        background-image: url('/wp-content/uploads/2022/05/roaming-banner-bg2-scaled.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 96px 0px;
+    }
+    
+    #wfh h1 {
+        font-size: 60px;
+        font-weight: 800;
+        line-height: 72px;
+        color: #000;
+        text-align: left;
+    }
+    
+    #wfh p {
+        font-size: 16px;
+        line-height: 24px;
+        color: #525252;
+        text-align: left;
+    }
+    
+    #infinite-banner {
+        background-image: url('/wp-content/uploads/2022/05/infinite-postpaid-banner-bg.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 80px 0px;
+        overflow: hidden;
+    }
+    
+    #infinite-banner h1 {
+        font-size: 60px;
+        font-family: 'Montserrat', sans-serif;
+        line-height: 72px;
+        font-weight: 800;
+        color: #FFF;
+        margin-bottom: 20px;
+    }
+    
+    #infinite-banner h2 {
+        font-size: 26px;
+        font-family: 'Montserrat', sans-serif;
+        line-height: 34px;
+        font-weight: 700;
+        color: #FFF;
+        margin-bottom: 20px;
+    }
+    
+    #infinite-banner p {
+        font-size: 16px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+        line-height: 24px;
+        color: #FFF;
+    }
+    
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+        #postpaid-top-banner {
+            background-position: top right;
+        }
+        #postpaid-top-banner h1 {
+            font-size: 30px;
+            line-height: 30px;
+            text-align: left;
+        }
+        #postpaid-top-banner p {
+            line-height: 25px;
+            font-size: 17px;
+            text-align: left;
+            margin-bottom: 20px;
+            padding: 0;
+        }
+        #postpaid-top-banner {
+            padding-top: 20px;
+        }
+        #postpaid-top-banner .banner-visual {
+            text-align: center;
+        }
+        #postpaid-top-banner .banner-visual img {
+            margin: 0 auto;
+            margin-top: 20px;
+            width: 70% !important;
+            display: inline-block !important;
+        }
+        #easy-steps .content {
+            padding: 0px 13px !important;
+        }
+        #wfh {
+            padding: 56px 0px;
+        }
+        #wfh h1 {
+            font-size: 42px;
+            line-height: 38px;
+        }
+    }
+    /* Portrait */
+    
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
+        #wfh {
+            padding: 16px 0px;
+        }
+    }
+    
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+        #postpaid-plans h1 {
+            font-size: 30px;
+            line-height: 39px;
+            padding-top: 28px;
+        }
+        #postpaid-plans .plan-table tr td {
+            padding: 10px;
+        }
+        #postpaid-plans .plan-table th {
+            padding: 9px 13px;
+            min-width: 125px;
+        }
+        #postpaid-plans .plan-table th .pink-btn {
+            font-size: 12px;
+        }
+        #postpaid-plans .plan-table th h1 {
+            font-size: 12px;
+        }
+        #postpaid-plans .plan-table tr td.blue-col,
+        #postpaid-plans .plan-table tr.row-jumpSection th.bg-color {
+            min-width: 127px;
+            font-size: 12px;
+            position: sticky;
+            left: 0;
+        }
+        #postpaid-plans .plan-table th.visual {
+            background-color: #F7F8F9;
+            position: sticky;
+            left: 0;
+        }
+        #postpaid-plans .plan-table tr td.blue-col .info-icon {
+            display: none;
+        }
+        #postpaid-plans .plan-table tr td {
+            font-size: 12px;
+        }
+        #postpaid-plans .plan-table th h2 {
+            font-size: 14px;
+        }
+        #postpaid-top-banner {
+            background-position: top right;
+        }
+        #postpaid-top-banner h1 {
+            font-size: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+        #postpaid-top-banner p {
+            line-height: 25px;
+            padding: 0px 5%;
+            font-size: 17px;
+            text-align: center;
+        }
+        #postpaid-top-banner {
+            padding-top: 20px;
+        }
+        #postpaid-top-banner .banner-visual {
+            text-align: center;
+        }
+        #postpaid-top-banner .banner-visual img {
+            margin: 0 auto;
+            margin-top: 20px;
+            width: 70% !important;
+            display: inline-block !important;
+        }
+        #easy-steps h1,
+        #databck-rewards h1,
+        #switch-yes h1,
+        #wfh h1,
+        #faq-section h1 {
+            font-size: 30px;
+            line-height: 39px;
+        }
+        #wfh {
+            background-image: url('/wp-content/uploads/2022/05/roaming-banner-bg-mobile2.jpg');
+            padding: 54px 0px;
+        }
+        #wfh h1 {
+            font-size: 32px;
+            line-height: 38px;
+        }
+        #infinite-banner h1 {
+            font-size: 38px;
+            line-height: 52px;
+        }
+        #infinite-banner {
+            padding: 35px 0px;
+        }
+    }
+    
+    .bg-color {
+        background: linear-gradient(275.75deg, #2F3BF5 -0.54%, #FF0084 104.67%);
+        color: #fff;
+        text-align: left !important;
+        padding: 15px 30px !important;
+    }
+    
+    tr.row-jumpSection {
+        cursor: pointer;
+    }
+
+</style>

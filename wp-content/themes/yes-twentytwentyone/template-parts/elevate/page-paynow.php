@@ -25,9 +25,9 @@
         <!-- Banner Start -->
         <section id="grey-innerbanner">
             <div class="container">
-                <ul class="wizard">
+                 <ul class="wizard">
                     <li ui-sref="firstStep" class="completed">
-                        <span>{{ renderText('elevate_step_1') }}</span>
+                    <span>{{ renderText('elevate_step_1') }}</span>
                     </li>
                     <li ui-sref="secondStep" class="completed">
                         <span>{{ renderText('elevate_step_2') }}</span>
@@ -35,8 +35,14 @@
                     <li ui-sref="thirdStep" class="completed">
                         <span>{{ renderText('elevate_step_3') }}</span>
                     </li>
-                    <li ui-sref="fourthStep" class="completed">
+                    <li ui-sref="fourthStep" v-if="(simType=='true')">
+                        <span>{{ renderText('elevate_step_4_1') }}</span>
+                    </li>
+                    <li ui-sref="fourthStep" class="completed" v-else>
                         <span>{{ renderText('elevate_step_4') }}</span>
+                    </li>
+                    <li ui-sref="fifthStep" class="completed">
+                        <span>{{ renderText('elevate_step_5') }}</span>
                     </li>
                 </ul>
             </div>
@@ -217,6 +223,7 @@
                 el: '#main-vue',
                 data: {
                     currentStep: 0,
+                    simType:'',
                     pageValid: false,
                     allowSubmit: false,
                     orderSummary: {
@@ -548,6 +555,7 @@
 
                             self.productId = elevate.lsData.product.selected.productCode;
                             self.dealer = elevate.lsData.meta.dealer;
+                            self.simType =elevate.lsData.meta.esim;
 
                             self.ajaxGetFPXBankList();
                             self.updateData();
@@ -850,7 +858,9 @@
                             "card_cvv": self.paymentInfo.cardCVV,
                             "card_expiry_month": self.paymentInfo.cardExpiryMonth,
                             'card_expiry_year'  : self.paymentInfo.cardExpiryYear,
-                            'ippType'       : self.paymentInfo.ippType
+                            'ippType'       : self.paymentInfo.ippType,
+                            'esim'              : elevate.lsData.meta.esim,
+                            'applicationSource'  : "MYOS"
                         }
 
                         //console.log("params",params); return;
