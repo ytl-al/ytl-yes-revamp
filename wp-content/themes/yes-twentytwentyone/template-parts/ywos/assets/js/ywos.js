@@ -16,6 +16,17 @@ const expiryYWOSCart = 60; // in minute
 const apiEndpointURL = window.location.origin + '/wp-json/ywos/v1';
 
 $(document).ready(function() {
+    //backbuttom upfront payment page
+    if(window.location.pathname=='/ywos/sim-type/'){
+        let backButton = document.querySelector('.back-btn');
+        if (ywosLSData.meta.customerDetails.upFrontPayment == 'true') {
+            backButton.href  = '/elevate/eligibility-fail-upfront';
+        } else {
+            backButton.href  = '/ywos/sim-type';
+        }
+    }
+   
+
     $('.btn-buyplan').on('click', function() {
         var planID = $(this).attr('data-planid');
         ywos.buyPlan(planID);

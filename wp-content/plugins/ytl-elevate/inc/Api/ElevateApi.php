@@ -55,6 +55,7 @@ class ElevateApi
     const yos_order_username = 'ytldd';
     const yos_order_password = 'ytldd123$';
     const yos_order = '/mobileyos/mobile/ws/v1/json/createYOSOrderAndPaymentWithAddonAndReloads';
+    const yos_order_esim = '/mobileyos/mobile/ws/v1/json/createEsimOrderAndPaymentWithAddonAndReloads';
     const yos_order_without_payment = '/mobileyos/mobile/ws/v1/json/createeKYCOrder';
     const yos_check_order_status = '/mobileyos/mobile/ws/v1/json/orderPaymentStatus';
 
@@ -62,12 +63,13 @@ class ElevateApi
 
     public function __construct()
     {
-        $apiSetting = \Inc\Base\Model::getAPISettings();
+        $model= new \Inc\Base\Model();
+        $apiSetting = $model->getAPISettings();
 
     }
 
 
-    public static function register()
+    public  function register()
     {
         add_action('rest_api_init', function () {
             register_rest_route('/elevate/v1', '/test', array(
@@ -78,49 +80,49 @@ class ElevateApi
 
             register_rest_route('/elevate/v1', '/getProduct', array(
                 'methods' => 'GET',
-                'callback' => array('\Inc\Api\ElevateApi', 'getProduct'),
+                'callback' => array($this, 'getProduct'),
                 'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', '/getProductByCode', array(
                 'methods' => 'GET',
-                'callback' => array('\Inc\Api\ElevateApi', 'getProductByCode'),
+                'callback' => array($this, 'getProductByCode'),
                 'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', '/customer', array(
                 'methods' => 'POST',
-                'callback' => array('\Inc\Api\ElevateApi', 'elevate_customer_insert'),
+                'callback' => array($this, 'elevate_customer_insert'),
                 'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', 'customer/update', array(
                 'methods' => 'POST',
-                'callback' => array('\Inc\Api\ElevateApi', 'elevate_customer_update'),
+                'callback' => array($this, 'elevate_customer_update'),
                 'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', '/verify-eligibility', array(
                 'methods' => 'POST',
-                'callback' => array('\Inc\Api\ElevateApi', 'verify_eligibility'),
+                'callback' => array($this, 'verify_eligibility'),
                 'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', '/ca-verification', array(
                 'methods' => 'POST',
-                'callback' => array('\Inc\Api\ElevateApi', 'ca_verification'),
+                'callback' => array($this, 'ca_verification'),
                 'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', '/verify-caeligibility', array(
                 'methods' => 'POST',
-                'callback' => array('\Inc\Api\ElevateApi', 'verify_caeligibility'),
+                'callback' => array($this, 'verify_caeligibility'),
                 'permission_callback' => '__return_true'
             ));
 
 			register_rest_route('/elevate/v1', '/check-active-contract', array(
                 'methods' => 'POST',
-                'callback' => array('\Inc\Api\ElevateApi', 'check_active_contract'),
+                'callback' => array($this, 'check_active_contract'),
                 'permission_callback' => '__return_true'
             ));
 
@@ -132,91 +134,91 @@ class ElevateApi
 
             register_rest_route('/elevate/v1', '/ekyc-check', array(
                 'methods' => 'POST',
-                'callback' => array('\Inc\Api\ElevateApi', 'ekyc_check'),
+                'callback' => array($this, 'ekyc_check'),
                 'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', 'contract', array(
                 'methods' => 'POST',
-                'callback' => array('\Inc\Api\ElevateApi', 'elevate_contract'),
+                'callback' => array($this, 'elevate_contract'),
                 'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', 'order/create', array(
                 'methods' => 'POST',
-                'callback' => array('\Inc\Api\ElevateApi', 'elevate_order_create'),
+                'callback' => array($this, 'elevate_order_create'),
                 'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', 'order/update', array(
                 'methods' => 'POST',
-                'callback' => array('\Inc\Api\ElevateApi', 'elevate_order_update'),
+                'callback' => array($this, 'elevate_order_update'),
                 'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', 'order/cancel', array(
                 'methods' => 'POST',
-                'callback' => array('\Inc\Api\ElevateApi', 'elevate_order_cancel'),
+                'callback' => array($this, 'elevate_order_cancel'),
                 'permission_callback' => '__return_true'
             ));
 
 			register_rest_route('/elevate/v1', 'order/updatePayment', array(
                 'methods' => 'POST',
-                'callback' => array('\Inc\Api\ElevateApi', 'elevate_order_update_payment'),
+                'callback' => array($this, 'elevate_order_update_payment'),
                 'permission_callback' => '__return_true'
             ));
 
 			register_rest_route('/elevate/v1', 'qrcode/check', array(
                 'methods' => 'GET',
-                'callback' => array('\Inc\Api\ElevateApi', 'elevate_delivery_qrcode_check'),
+                'callback' => array($this, 'elevate_delivery_qrcode_check'),
                 'permission_callback' => '__return_true'
             ));
 
 			register_rest_route('/elevate/v1', 'qrcode/confirm', array(
                 'methods' => 'POST',
-                'callback' => array('\Inc\Api\ElevateApi', 'elevate_delivery_qrcode_confirm'),
+                'callback' => array($this, 'elevate_delivery_qrcode_confirm'),
                 'permission_callback' => '__return_true'
             ));
 
 			register_rest_route('/elevate/v1', 'getPreRegisterUser', array(
                 'methods' => 'GET',
-                'callback' => array('\Inc\Api\ElevateApi', 'get_pre_register_user'),
+                'callback' => array($this, 'get_pre_register_user'),
                 'permission_callback' => '__return_true'
             ));
 
 			register_rest_route('/elevate/v1', 'getPreRegisterCompleted', array(
                 'methods' => 'GET',
-                'callback' => array('\Inc\Api\ElevateApi', 'get_pre_register_completed'),
+                'callback' => array($this, 'get_pre_register_completed'),
                 'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', 'create-yos-order', array(
                 'methods' => 'POST',
-                'callback' => array('\Inc\Api\ElevateApi', 'make_yos_order'),
+                'callback' => array($this, 'make_yos_order'),
                 'permission_callback' => '__return_true'
             ));
 
 			register_rest_route('/elevate/v1', 'create-yos-free-order', array(
                 'methods' => 'POST',
-                'callback' => array('\Inc\Api\ElevateApi', 'make_yos_order_without_payment'),
+                'callback' => array($this, 'make_yos_order_without_payment'),
                 'permission_callback' => '__return_true'
             ));
 
 			register_rest_route('/elevate/v1', 'check-yos-order-status', array(
                 'methods' => 'POST',
-                'callback' => array('\Inc\Api\ElevateApi', 'yos_check_order_status'),
+                'callback' => array($this, 'yos_check_order_status'),
                 'permission_callback' => '__return_true'
             ));
 
 			register_rest_route('/elevate/v1', 'del-prequalified-customer', array(
                 'methods' => 'POST',
-                'callback' => array('\Inc\Api\ElevateApi', 'delete_prequalified_customer'),
+                'callback' => array($this, 'delete_prequalified_customer'),
                 'permission_callback' => '__return_true'
             ));
 
             register_rest_route('/elevate/v1', '/check-stock', array(
                 'methods' => 'GET',
-                'callback' => array('\Inc\Api\ElevateApi', 'check_stock'),
+                'callback' => array($this, 'check_stock'),
                 'permission_callback' => '__return_true'
             ));
 
@@ -233,25 +235,25 @@ class ElevateApi
     }
 
 
-    public static function getProduct(WP_REST_Request $request)
+    public  function getProduct(WP_REST_Request $request)
     {
            
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}  
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+		// 	exit("Request not valid");
+		// }  
         $code = $request['code'];
-        $product = \Inc\Base\Model::refinde(self::pullBundleProduct($code));
+        $product = (new \Inc\Base\Model)->refinde($this->pullBundleProduct($code));
 
         $response = new WP_REST_Response($product);
         $response->set_status(200);
         return $response;
     }
 
-    private static function pullBundleProduct($code){
+    private  function pullBundleProduct($code){
         $params = array(
             'productBundleId'=>$code
         );
-        $token = self::get_token();
+        $token = $this->get_token();
 
         $args = [
             'headers' => array(
@@ -262,10 +264,9 @@ class ElevateApi
             'body' => $params,
             'method' => 'GET'
         ];
-		$apiSetting = \Inc\Base\Model::getAPISettings();
+		$apiSetting = (new \Inc\Base\Model)->getAPISettings();
 
         $api_url = $apiSetting['url'] . self::api_product_bundle;
-
         $request = wp_remote_get($api_url, $args);
 
 		//print_r($request);die($api_url);
@@ -285,25 +286,25 @@ class ElevateApi
         return $return;
     }
 
-    public static function getProductByCode(WP_REST_Request $request)
+    public  function getProductByCode(WP_REST_Request $request)
     {
         if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
 			exit("Request not valid");
 		 }  
         $code = $request['code'];
-		$product = self::pullBundleProductByCode($code);
-        $product = \Inc\Base\Model::refinde(array($product));
+		$product = $this->pullBundleProductByCode($code);
+        $product = (new \Inc\Base\Model)->refinde(array($product));
 
         $response = new WP_REST_Response($product);
         $response->set_status(200);
         return $response;
     }
 
-    private static function pullBundleProductByCode($code){
+    private  function pullBundleProductByCode($code){
         $params = array(
             'productCode'=>$code
         );
-        $token = self::get_token();
+        $token =$this->get_token();
 
         $args = [
             'headers' => array(
@@ -314,8 +315,7 @@ class ElevateApi
             'body' => $params,
             'method' => 'GET'
         ];
-        $apiSetting = \Inc\Base\Model::getAPISettings();
-
+        $apiSetting = (new \Inc\Base\Model)->getAPISettings();
         $api_url = $apiSetting['url'] . self::api_product_bundle_by_code;
 
         $request = wp_remote_get($api_url, $args);
@@ -335,18 +335,18 @@ class ElevateApi
         }
 //        print_r($data);die();
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
         return $return;
     }
 
-    public static function verify_eligibility(WP_REST_Request $request)
+    public  function verify_eligibility(WP_REST_Request $request)
     {
        
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+		// 	exit("Request not valid");
+		//  }  
 
-        $token = self::mobileservice_generate_auth_token();
+        $token = $this->mobileservice_generate_auth_token();
         $mykad = $request['mykad'];
         $planType = $request['plan_type'];
         $bundleId = $request['bundleId'];
@@ -373,11 +373,10 @@ class ElevateApi
             'data_format' => 'body'
         ];
 
-		$serverSetting = \Inc\Base\Model::getAPISettings();
-        $api_url = $serverSetting['mobile_url'] . self::mobile_api_verify_eligbility;
+		$serverSetting = (new \Inc\Base\Model)->getAPISettings();
+        $api_url = $serverSetting['mobile_url'] .'mobileyos/mobile/ws/v1/json/verifyEligibility';
         $return['url'] = $api_url;
         $request = wp_remote_post($api_url, $args);
-
 		 //print_r($args);print_r($request);die($api_url);
 
         if (is_wp_error($request)) {
@@ -396,14 +395,14 @@ class ElevateApi
 
 		//print_r($return);die($api_url);
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
     }
 
-    public static function ca_verification(WP_REST_Request $request)
+    public  function ca_verification(WP_REST_Request $request)
     {
 
         if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
@@ -418,7 +417,7 @@ class ElevateApi
         $PartneReferenceID = $request['PartneReferenceID'];
         $OCRConfidenceScore = round($request['OCRConfidenceScore']/100,2);
 
-        $token = self::get_token();
+        $token = $this->get_token();
 
 		$params = array(
             'myKadNumber' => $mykad,
@@ -440,7 +439,7 @@ class ElevateApi
             'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
-		$apiSetting = \Inc\Base\Model::getAPISettings();
+		$apiSetting =(new \Inc\Base\Model)->getAPISettings();
         $api_url = $apiSetting['url'] . self::api_ca_verification;
 
         $request = wp_remote_post($api_url, $args);
@@ -472,20 +471,20 @@ class ElevateApi
         }
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 		
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
     }
 
-    public static function verify_caeligibility(WP_REST_Request $request)
+    public  function verify_caeligibility(WP_REST_Request $request)
     {
 
         if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
 			exit("Request not valid");
 		 }  
-        $token = self::get_token();
+        $token = $this->get_token();
 
 		$params = array(
             'myKadNumber' =>$request['mykad'],
@@ -505,11 +504,10 @@ class ElevateApi
             'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
-		$apiSetting = \Inc\Base\Model::getAPISettings();
-        $api_url = $apiSetting['url'] . self::api_caeligibility;
+		$apiSetting = ( new \Inc\Base\Model)->getAPISettings();
+        $api_url = $apiSetting['url'] .self::api_caeligibility;
 
         $request = wp_remote_post($api_url, $args);
-
         if (is_wp_error($request)) {
             $return['status'] = 0;
             $return['error'] = "Cannot connect to API server";
@@ -528,14 +526,14 @@ class ElevateApi
         }
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 		
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
     }
 
-	public static function check_active_contract(WP_REST_Request $request)
+	public  function check_active_contract(WP_REST_Request $request)
     {
 
         if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
@@ -543,7 +541,7 @@ class ElevateApi
 		 }  
 		$mykad = $request['mykad'];
 
-        $token = self::get_token();
+        $token = $this->get_token();
 
 		$params = array(
         );
@@ -558,11 +556,9 @@ class ElevateApi
             'method' => 'GET',
             'timeout' => self::API_TIMEOUT
         ];
-		$apiSetting = \Inc\Base\Model::getAPISettings();
-        $api_url = $apiSetting['url'] . self::api_customer_check_contract.'?customerNRIC='.$mykad;
-
+		$apiSetting = (new \Inc\Base\Model)->getAPISettings();
+        $api_url = $apiSetting['url'] .'api/Elevate/customer/CheckActiveContract'.'?customerNRIC='.$mykad;
         $request = wp_remote_get($api_url, $args);
-
         if (is_wp_error($request)) {
             $return['status'] = 0;
             $return['error'] = "Cannot connect to API server";
@@ -582,19 +578,19 @@ class ElevateApi
         }
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
     }
 
-    public static function elevate_customer_get($mykad)
+    public  function elevate_customer_get($mykad)
     {
         $params = array(
             'securityNumber' => $mykad
         );
-        $token = self::get_token();
+        $token = $this->get_token();
 
         $args = [
             'headers' => array(
@@ -604,7 +600,7 @@ class ElevateApi
             ),
             'body' => $params
         ];
-		$apiSetting = \Inc\Base\Model::getAPISettings();
+		$apiSetting = (new \Inc\Base\Model)->getAPISettings();
         $api_url = $apiSetting['url'] . self::api_customer;
         $return['status'] = 1;
         $return['api_url'] = $api_url;
@@ -624,12 +620,12 @@ class ElevateApi
         }
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 		
         return $return;
     }
 
-    public static function elevate_customer_insert(WP_REST_Request $request)
+    public  function elevate_customer_insert(WP_REST_Request $request)
     {
         if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
 			exit("Request not valid");
@@ -651,8 +647,8 @@ class ElevateApi
             "securityType" => $cardtype,
             "securityNumber" => $mykad,
             "fullName" => $name,
-            "gender" => self::getGender($mykad),
-            "dob" => self::getDOB($mykad),
+            "gender" => $this->getGender($mykad),
+            "dob" => $this->getDOB($mykad),
             "addressLine1" => isset($request['address'])?$request['address']:"",
             "addressLine2" => "",
             "state" => isset($request['state'])?$request['state']:"",
@@ -676,7 +672,7 @@ class ElevateApi
             "emailSent" => true
         );
 
-        $token = self::get_token();
+        $token = $this->get_token();
 
         $args = [
             'headers' => array(
@@ -690,7 +686,7 @@ class ElevateApi
             'data_format' => 'body'
         ];
 		//echo json_encode($params);die();
-		$apiSetting = \Inc\Base\Model::getAPISettings();
+		$apiSetting = ( new \Inc\Base\Model)->getAPISettings();
         $api_url = $apiSetting['url'] . self::api_customer;
 
         $request = wp_remote_post($api_url, $args);
@@ -713,14 +709,14 @@ class ElevateApi
         }
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		( new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
     }
 
-    public static function elevate_customer_update(WP_REST_Request $request)
+    public  function elevate_customer_update(WP_REST_Request $request)
     {
         if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
 			exit("Request not valid");
@@ -741,8 +737,8 @@ class ElevateApi
             "securityType" => 0,
             "securityNumber" => $request['mykad'],
             "fullName" => $request['name'],
-            "gender" => self::getGender($request['mykad']),
-            "dob" => self::getDOB($request['mykad']),
+            "gender" => $this->getGender($request['mykad']),
+            "dob" => $this->getDOB($request['mykad']),
             "addressLine1" => $request['addressMore'],
             "addressLine2" => $request['address'],
             "state" => $request['state'],
@@ -767,7 +763,7 @@ class ElevateApi
             "emailSent" => true,
             "lastModificationTime" => date("c")
         );
-        $token = self::get_token();
+        $token = $this->get_token();
 
         $args = [
             'headers' => array(
@@ -779,7 +775,7 @@ class ElevateApi
             'method' => 'PUT',
             'timeout' => self::API_TIMEOUT
         ];
-		$apiSetting = \Inc\Base\Model::getAPISettings();
+		$apiSetting = ( new \Inc\Base\Model)->getAPISettings();
         $api_url = $apiSetting['url'] . self::api_customer . '?id=' . $id;
 
         $request = wp_remote_request($api_url, $args);
@@ -800,20 +796,20 @@ class ElevateApi
         }
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
     }
 
-	public static function elevate_customer_get_by_uid($uid)
+	public  function elevate_customer_get_by_uid($uid)
     {
 
 
         $params = array(
         );
-        $token = self::get_token();
+        $token = $this->get_token();
 
         $args = [
             'headers' => array(
@@ -823,7 +819,7 @@ class ElevateApi
             ),
             'body' => json_encode($params),
         ];
-		$apiSetting = \Inc\Base\Model::getAPISettings();
+		$apiSetting = ( new \Inc\Base\Model)->getAPISettings();
         $api_url = $apiSetting['url'] . self::api_customer_get_by_guid . '/' . $uid;
 
         $request = wp_remote_get($api_url, $args);
@@ -843,12 +839,12 @@ class ElevateApi
         }
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		( new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         return $return;
     }
 
-    public static function elevate_contract(WP_REST_Request $request)
+    public  function elevate_contract(WP_REST_Request $request)
     {
 
         if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
@@ -883,7 +879,7 @@ class ElevateApi
             "alternateContactNumber" => $request['alternative_phone']
         );
 
-        $token = self::get_token();
+        $token = $this->get_token();
 
         $args = [
             'headers' => array(
@@ -898,8 +894,8 @@ class ElevateApi
         ];
 
 
-		$apiSetting = \Inc\Base\Model::getAPISettings();
-        $api_url = $apiSetting['url'] . self::api_contract;
+		$apiSetting = (new \Inc\Base\Model)->getAPISettings();
+        $api_url = $apiSetting['url'] .self::api_contract;
 
         $request = wp_remote_post($api_url, $args);
         if (is_wp_error($request)) {
@@ -917,14 +913,14 @@ class ElevateApi
         }
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		( new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
     }
 
-    public static function elevate_order_create(WP_REST_Request $request)
+    public  function elevate_order_create(WP_REST_Request $request)
     {
 
         if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
@@ -950,7 +946,7 @@ class ElevateApi
             "productSelected"=> $request['productSelected']
         );
 
-        $token = self::get_token();
+        $token = $this->get_token();
 
         $args = [
             'headers' => array(
@@ -963,7 +959,7 @@ class ElevateApi
             'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
-		$apiSetting = \Inc\Base\Model::getAPISettings();
+		$apiSetting = (new \Inc\Base\Model)->getAPISettings();
         $api_url = $apiSetting['url'] . self::api_order_create;
 
         $request = wp_remote_post($api_url, $args);
@@ -985,20 +981,20 @@ class ElevateApi
         }
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
     }
 
-	public static function elevate_order_get_by_number($orderNumber)
+	public  function elevate_order_get_by_number($orderNumber)
     {
 
         $params = array(
         );
 
-        $token = self::get_token();
+        $token = $this->get_token();
 
         $args = [
             'headers' => array(
@@ -1036,7 +1032,7 @@ class ElevateApi
        return $return;
     }
 
-    public static function elevate_order_update(WP_REST_Request $request)
+    public  function elevate_order_update(WP_REST_Request $request)
     {
         if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
 			exit("Request not valid");
@@ -1060,7 +1056,7 @@ class ElevateApi
             "customerQRCodeScanned"=> false
         );
 
-        $token = self::get_token();
+        $token = $this->get_token();
 
         $args = [
             'headers' => array(
@@ -1070,11 +1066,11 @@ class ElevateApi
             ),
             'body' => json_encode($params),
             'method' => 'PUT',
-            'timeout' => self::API_TIMEOUT,
+            'timeout' => $this->API_TIMEOUT,
             'data_format' => 'body'
         ];
 
-		$apiSetting = \Inc\Base\Model::getAPISettings();
+		$apiSetting = (new \Inc\Base\Model)->getAPISettings();
         $api_url = $apiSetting['url'] . self::api_order_create.'?id='.$request['id'];
 
         $request = wp_remote_request($api_url, $args);
@@ -1093,14 +1089,14 @@ class ElevateApi
         }
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		( new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
     }
 
-    public static function elevate_order_cancel(WP_REST_Request $request)
+    public  function elevate_order_cancel(WP_REST_Request $request)
     {
 
 		if(!isset($request['referralCode'])) $request['referralCode'] = '';
@@ -1123,7 +1119,7 @@ class ElevateApi
             "customerQRCodeScanned"=> false
         );
 
-        $token = self::get_token();
+        $token = $this->get_token();
 
         $args = [
             'headers' => array(
@@ -1136,7 +1132,7 @@ class ElevateApi
             'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
-		$apiSetting = \Inc\Base\Model::getAPISettings();
+		$apiSetting = (new \Inc\Base\Model)->getAPISettings();
         $api_url = $apiSetting['url'] . self::api_order_create.'?id='.$request['id'];
 
         $request = wp_remote_request($api_url, $args);
@@ -1155,14 +1151,14 @@ class ElevateApi
         }
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
     }
 
-	public static function elevate_order_update_payment(WP_REST_Request $request)
+	public  function elevate_order_update_payment(WP_REST_Request $request)
     {
         if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
 			exit("Request not valid");
@@ -1178,7 +1174,7 @@ class ElevateApi
             "status"=> $request['status'] //if APPROVED  then 2, COMPLETED 3, FAILED -1
         );
 
-        $token = self::get_token();
+        $token = $this->get_token();
 
         $args = [
             'headers' => array(
@@ -1191,7 +1187,7 @@ class ElevateApi
             'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
-		$apiSetting = \Inc\Base\Model::getAPISettings();
+		$apiSetting =(new \Inc\Base\Model)->getAPISettings();
         $api_url = $apiSetting['url'] . self::api_order_update_payment;
 
         $request = wp_remote_request($api_url, $args);
@@ -1211,7 +1207,7 @@ class ElevateApi
         }
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
@@ -1255,7 +1251,7 @@ class ElevateApi
 		}
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 		
 		$response = new WP_REST_Response($return);
         $response->set_status(200);
@@ -1269,7 +1265,7 @@ class ElevateApi
 		 }  
 		$orderNumber = $request['SONO'];
 
-		$order = ElevateApi::elevate_order_get_by_number($orderNumber);
+		$order = $this->elevate_order_get_by_number($orderNumber);
 
 		if($order['status']){
 			if( $order['data']['orderStatus']== "New" && $order['data']['customerQRCodeScanned']== false){
@@ -1290,7 +1286,7 @@ class ElevateApi
 					"customerQRCodeScanned"=> true
 				);
 
-				$token = self::get_token();
+				$token = $this->get_token();
 
 				$args = [
 					'headers' => array(
@@ -1303,7 +1299,7 @@ class ElevateApi
 					'timeout' => self::API_TIMEOUT,
 					'data_format' => 'body'
 				];
-				$apiSetting = \Inc\Base\Model::getAPISettings();
+				$apiSetting = (new \Inc\Base\Model)->getAPISettings();
 				$api_url = $apiSetting['url'] . self::api_order_create.'?id='.$order['data']['id'];
 
 				$request = wp_remote_request($api_url, $args);
@@ -1326,24 +1322,24 @@ class ElevateApi
 		}
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		( new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
 		$response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
 	}
 
-    public static function ekyc_check(WP_REST_Request $request)
+    public  function ekyc_check(WP_REST_Request $request)
     {
         if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
 			exit("Request not valid");
 		 }  
         $uid = $request['uid'];
-		$apiSetting = \Inc\Base\Model::getAPISettings();
-        $api_url =  $apiSetting['url'].self::ekyc_api_check . $uid;
+		$apiSetting = (new \Inc\Base\Model)->getAPISettings();
+        $api_url =  $apiSetting['url'].'api/EKYCProcessStatus/' . $uid;
         $params = array();
 
-        $token = self::get_token();
+        $token = $this->get_token();
 
         $args = [
             'headers' => array(
@@ -1374,7 +1370,7 @@ class ElevateApi
 		
 		if($request['response']['code'] != 204){
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		( new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 		}
         $response = new WP_REST_Response($return);
         $response->set_status(200);
@@ -1382,12 +1378,12 @@ class ElevateApi
 
     }
 
-	public static function get_pre_register_user(WP_REST_Request $request){
+	public  function get_pre_register_user(WP_REST_Request $request){
         if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
 			exit("Request not valid");
 		 }  
         $uid = $request['id'];
-        $token = self::get_token();
+        $token = $this->get_token();
         $params = array();
         $args = [
             'headers' => array(
@@ -1399,11 +1395,9 @@ class ElevateApi
             'method' => 'GET'
         ];
 
-		$apiSetting = \Inc\Base\Model::getAPISettings();
+		$apiSetting = (new \Inc\Base\Model)->getAPISettings();
         $api_url = $apiSetting['url'] . '/api/Elevate/Prequalifiedcustomer/'.$uid;
-
         $request = wp_remote_get($api_url, $args);
-
         $response = $request['response'];
         $res_code = $response['code'];
 
@@ -1417,19 +1411,19 @@ class ElevateApi
         }
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		( new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 		
 //        print_r($data);die();
         return $return;
     }
 
-	public static function get_pre_register_completed(WP_REST_Request $request){
+	public  function get_pre_register_completed(WP_REST_Request $request){
         if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
 			exit("Request not valid");
 		 }  
         $uid = $request['id'];
 		  
-		$token = self::get_token();
+		$token = $this->get_token();
 
         $args = [
             'headers' => array(
@@ -1441,7 +1435,7 @@ class ElevateApi
             'method' => 'GET'
         ];
 
-		$apiSetting = \Inc\Base\Model::getAPISettings();
+		$apiSetting = (new \Inc\Base\Model)->getAPISettings();
         $api_url = $apiSetting['url'] . self::api_customer_pre_complete.'/'.$uid;
 		
         $request = wp_remote_get($api_url, $args);
@@ -1460,20 +1454,20 @@ class ElevateApi
         //print_r($data);die();
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 		
         $response = new WP_REST_Response($return[0]);
         $response->set_status(200);
         return $response;
     }
 
-    public static function make_yos_order(WP_REST_Request $request){
+    public  function make_yos_order(WP_REST_Request $request){
         //$token = self::ydbp_identity_auth_token();
 
         if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
 			exit("Request not valid");
 		 }  
-        $token = self::mobileservice_get_token();
+        $token = $this->mobileservice_get_token();
 
         $phone_number 	= $request['phone_number'];
         $customer_name	= $request['customer_name'];
@@ -1515,6 +1509,8 @@ class ElevateApi
         $card_expiry_month 	= $request['card_expiry_month'];
         $card_expiry_year 	= $request['card_expiry_year'];
         $ippType 		= $request['ippType'];
+        $simType 		=  $request['esim'];
+        $applicationSource = $request['MYOS'];
 
         $conversion = ($request['conversion'])?$request['conversion']:"";
         $existingMsisdn= ($request['existingMsisdn'])?$request['existingMsisdn']:"";
@@ -1525,7 +1521,15 @@ class ElevateApi
         $ytlpd_api_domain_url =  $ytlpd_options['ytlpd_api_domain_url'];
         $ytlpd_api_request_id =  $ytlpd_options['ytlpd_api_request_id'];
 
-        $api_url =  $ytlpd_api_domain_url.self::yos_order;
+
+        if($simType =='true'){
+            $api_url =  $ytlpd_api_domain_url.self::yos_order_esim;
+        }else if($simType ==''){
+             $api_url =  $ytlpd_api_domain_url.self::yos_order;
+        }else{
+             $api_url =  $ytlpd_api_domain_url.self::yos_order;
+        }
+
         $params 	= [
             'eKYCCustomerDetail' 	=> [
                 'alternatePhoneNumber' 	=> $phone_number,
@@ -1554,6 +1558,8 @@ class ElevateApi
                 "existingMsisdn"=> $existingMsisdn,
                 "existingPlanName"=> $existingPlanName,
                 "existingPlanType"=> $existingPlanType,
+                'esim'              =>$simType,
+                'applicationSource' => $applicationSource,
             ],
 
             'deliveryAddress' 		=> [
@@ -1631,19 +1637,19 @@ class ElevateApi
         }
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
     }
 
-    public static function make_yos_order_without_payment(WP_REST_Request $request){
+    public  function make_yos_order_without_payment(WP_REST_Request $request){
      
         if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
 			exit("Request not valid");
 		 }  
-        $token = self::mobileservice_get_token();
+        $token = $this->mobileservice_get_token();
 		$phone_number = $request['phone_number'];
 		$customer_name = $request['customer_name'];
 		$dob = $request['dob'];
@@ -1754,16 +1760,16 @@ class ElevateApi
         }
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
     }
 	
-	public static function yos_check_order_status(WP_REST_Request $request){ 
+	public  function yos_check_order_status(WP_REST_Request $request){ 
        
-        $token = self::mobileservice_get_token();
+        $token = $this->mobileservice_get_token();
 		$session_key  = $request['session_key'];
 		 
         $ytlpd_options = get_option("ytlpd_settings");
@@ -1816,14 +1822,14 @@ class ElevateApi
         }
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         $response = new WP_REST_Response($return);
         $response->set_status(200);
         return $response;
     }
 
-	public static function delete_prequalified_customer(WP_REST_Request $request){
+	public  function delete_prequalified_customer(WP_REST_Request $request){
         if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
 			exit("Request not valid");
 		 }  
@@ -1832,7 +1838,7 @@ class ElevateApi
 					$params = array(
 					);
 
-					$token = self::get_token();
+					$token = $this->get_token();
 
 					$args = [
 						'headers' => array(
@@ -1844,7 +1850,7 @@ class ElevateApi
 						'method' => 'DELETE',
 						'timeout' => self::API_TIMEOUT
 					];
-					$apiSetting = \Inc\Base\Model::getAPISettings();
+					$apiSetting = (new \Inc\Base\Model)->getAPISettings();
 					$api_url = $apiSetting['url'] . self::api_prequalifiedcustomer.'?id='.$id;
 
 					$request = wp_remote_request($api_url, $args);
@@ -1875,7 +1881,7 @@ class ElevateApi
 				}
 				
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 		
 		$response = new WP_REST_Response($return);
         $response->set_status(200);
@@ -1885,7 +1891,7 @@ class ElevateApi
 
     public function get_token()
     {
-        $token = self::generate_auth_token();
+        $token = $this->generate_auth_token();
         return $token;
         /*
         $tokenOption = get_option('elevate_auth_token');
@@ -1910,7 +1916,7 @@ class ElevateApi
     {
         $return = false;
 
-        $apiSetting = \Inc\Base\Model::getAPISettings();
+        $apiSetting = (new \Inc\Base\Model)->getAPISettings();
 
         $params = [
             'Client_Id' => $apiSetting['client_id'],
@@ -1948,7 +1954,7 @@ class ElevateApi
 
     public function mobileservice_get_token()
     {
-        $token = self::mobileservice_generate_auth_token();
+        $token = $this->mobileservice_generate_auth_token();
         return $token;
         /*$tokenOption = get_option('mobileservice_auth_token');
 
@@ -1983,12 +1989,12 @@ class ElevateApi
             'headers' => array('Content-Type' => 'application/json; charset=utf-8', 'Authorization' => 'BASIC ' . $authorization_key),
             'body' => json_encode($params),
             'method' => 'POST',
-            'timeout' => self::API_TIMEOUT,
+            'timeout' =>  (isset($this->API_TIMEOUT) ? $this->API_TIMEOUT : 120),
             'data_format' => 'body'
         ];
 
-		$serverSetting = \Inc\Base\Model::getAPISettings();
-        $api_url = $serverSetting['mobile_url'] . self::mobile_auth_path_auth;
+		$serverSetting = (new \Inc\Base\Model)->getAPISettings();
+        $api_url = $serverSetting['mobile_url'] .'mobileyos/mobile/ws/v1/json/auth/getBasicAuth';
 
         $request = wp_remote_post($api_url, $args);
 
@@ -2011,7 +2017,7 @@ class ElevateApi
         return $return;
     }
 
-    public static function ydbp_identity_auth_token()
+    public  function ydbp_identity_auth_token()
     {
         $return = false;
 
@@ -2039,10 +2045,10 @@ class ElevateApi
         return $return;
     }
 
-    public static function pullProducts()
+    public  function pullProducts()
     {
         $params = array();
-        $token = self::get_token();
+        $token = $this->get_token();
 
         $args = [
             'headers' => array(
@@ -2054,7 +2060,7 @@ class ElevateApi
             'method' => 'GET'
         ];
 
-		$apiSetting = \Inc\Base\Model::getAPISettings();
+		$apiSetting = (new \Inc\Base\Model)->getAPISettings();
         $api_url = $apiSetting['url'] . self::api_product;
 
         $request = wp_remote_get($api_url, $args);
@@ -2075,12 +2081,12 @@ class ElevateApi
             $return = $data;
         }
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 		
         return $return;
     }
 
-    public static function getDOB($nric)
+    public  function getDOB($nric)
     {
         //get  the dob from NRIC
         $dateString = substr($nric, 0, 6); //first 6 digits for nric
@@ -2100,7 +2106,7 @@ class ElevateApi
         return $dob;
     }
 
-    public static function getGender($nric)
+    public  function getGender($nric)
     {
         $genderDigit = substr($nric, 11, 1);
 
@@ -2116,11 +2122,8 @@ class ElevateApi
 
     public function check_stock() 
     {
-     
-        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-		// 	exit("Request not valid");
-		//  }  
-        $token  = self::get_token();
+        
+        $token  = $this->get_token();
         $args   = [
             'headers'   => [
                 'Accept' => 'text/plan',
@@ -2130,7 +2133,7 @@ class ElevateApi
             'body'      => [],
             'method'    => 'GET'
         ];
-        $apiSetting = \Inc\Base\Model::getAPISettings();
+        $apiSetting = (new \Inc\Base\Model)->getAPISettings();
         $api_url    = $apiSetting['url'] . self::api_product_all . '?MaxResultCount=100';
 
         $request    = wp_remote_get($api_url, $args);
@@ -2140,7 +2143,7 @@ class ElevateApi
         $data 		= json_decode($request['body']);
 		
 		//Write api log
-		\Inc\Base\Model::apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
 
         if ($res_code == 200) {
             $arr_return = [];
