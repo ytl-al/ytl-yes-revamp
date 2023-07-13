@@ -277,16 +277,15 @@
                                             </div>
                                         </span>
                                     </label>
-                                    <div class="eSIM d-none" id="eSIM_msg">
-                                        <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png"
-                                            alt="...">
-                                        <div>
-                                            <p>Device eSIM Compatibility</p>
-                                            <p><span>The device you have selected is not eSIM compatible.</span></p>
-                                            <span class="esim-link">However, you can use the eSIM purchased with this
-                                                plan on an alternative compatible device.</span>
-                                        </div>
-                                    </div>
+                                    <div class="eSIM d-none" id="eSIM_msg" v-if="(DeviceSupportEsim != true)" >
+                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png"
+                                        alt="...">
+                                    <div>
+                                    <p>Device eSIM Compatibility</p>
+                                    <p><span>The device you have selected is not eSIM compatible.</span></p>
+                                    <span class="esim-link">However, you can use the eSIM purchased with this plan on an alternative compatible device.</span>
+                                </div>
+                            </div>
                                 </div>
                             </div>
                             <div class="input-group align-items-center">
@@ -417,66 +416,43 @@
 
                             self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
 
-                            // var data = JSON.parse(localStorage.getItem('yesElevate'));
 
-                            if(ywos.lsData.meta.completedStep==1){
-                                    localStorage.removeItem('yesElevate');
-                                
+                                var  data = JSON.parse(localStorage.getItem('yesElevate'));
+                                if(data){
+                                    if(!data.meta.isUpFrontPlanAvailable){
+                                self.isUpFrontPlanAvailable='false';
                             }
-                            var data = JSON.parse(localStorage.getItem('yesElevate'));
-                            if (data) {
-                                self.isUpFrontPlanAvailable=data.meta.isUpFrontPlanAvailable;
-                                // console.log(data);
-                               // console.log(self.isUpFrontPlanAvailable);
-                                if (data && self.isUpFrontPlanAvailable == 'true') {
-                                    // alert(self.isUpFrontPlanAvailable);
-                                    self.upFrontPlanID = data.meta.productId;
-                                    const apiEndpoint_elevate = window.location.origin + '/wp-json/elevate/v1';
-                                    axios.get(apiEndpoint_elevate + '/getProduct/?code=' + self.upFrontPlanID + '&nonce=' + yesObj.nonce)
-                                        .then((response) => {
-                                            toggleOverlay(true);
-                                            var data = response.data;
-
-                                            self.DeviceSupportEsim = data?.selected?.esim;
-                                            self.PlanSupportEsim = data?.selected?.plan.esim;
-                                            toggleOverlay(false);
-                                        })
-                                        .catch((error) => {
-                                            // console.log('error', error);
-                                        })
-                                }else{
-                                    self.planID = ywos.lsData.meta.planID;
-                                // console.log(self.planID);
-                                axios.get(apiEndpointURL + '/get-plan-by-id/' + self.planID + '/?nonce=' + yesObj.nonce)
+                            if (data && data.meta.isUpFrontPlanAvailable == 'true') {
+                                alert(self.isUpFrontPlanAvailable);
+                                self.upFrontPlanID = data.meta.productId;
+                                const apiEndpoint_elevate = window.location.origin + '/wp-json/elevate/v1';
+                                axios.get(apiEndpoint_elevate + '/getProduct/?code=' + self.upFrontPlanID + '&nonce=' + yesObj.nonce)
                                     .then((response) => {
                                         toggleOverlay(true);
-
                                         var data = response.data;
-                                        self.isUpFrontPlanAvailable='false',
-                                        self.disabled = data.eSim
-                                        // console.log(self.disabled,'<<<<<');
+                                        
+                                        self.DeviceSupportEsim = data?.selected?.esim;
+                                        self.PlanSupportEsim = data?.selected?.plan.esim;
                                         toggleOverlay(false);
                                     })
                                     .catch((error) => {
                                         // console.log('error', error);
                                     })
-                                }
                             }
+                                }
                             else {
                                 self.planID = ywos.lsData.meta.planID;
-                                console.log(self.planID);
-                                axios.get(apiEndpointURL + '/get-plan-by-id/' + self.planID + '/?nonce=' + yesObj.nonce)
-                                    .then((response) => {
-                                        toggleOverlay(true);
-                                        var data = response.data;
-                                        self.isUpFrontPlanAvailable='false',
-                                        self.disabled = data.eSim
-                                        // console.log(self.disabled,'>>>>>');
-                                        toggleOverlay(false);
-                                    })
-                                    .catch((error) => {
-                                        // console.log('error', error);
-                                    })
+                            axios.get(apiEndpointURL + '/get-plan-by-id/' + self.planID + '/?nonce=' + yesObj.nonce)
+                                .then((response) => {
+                                    toggleOverlay(true);
+                                    var data = response.data;
+                                    self.disabled = data.eSim
+                                    console.log(self.disabled);
+                                    toggleOverlay(false);
+                                })
+                                .catch((error) => {
+                                    // console.log('error', error);
+                                })
                             }
 
                         } else {
