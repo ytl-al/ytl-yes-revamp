@@ -209,7 +209,7 @@
                                     </div>
                                 </span>
                             </label>
-                            <div class="eSIM d-none" id="eSIM_msg" v-if="(DeviceSupportEsim != true)" >
+                            <div class="eSIM d-none" id="eSIM_msg" >
                                 <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png"
                                     alt="...">
                                 <div>

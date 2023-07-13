@@ -221,7 +221,7 @@
         strPaymentAdministration: { 'en-US': 'Administration Payment', 'ms-MY': 'Bayaran Pentadbiran', 'zh-hans': 'Administration Payment' },
         strPaymentEstimated: { 'en-US': 'Estimated Monthly Instalment', 'ms-MY': 'Anggaran Ansuran Bulanan', 'zh-hans': 'Estimated Monthly Instalment' },
         strPaymentNote: { 'en-US': 'The Monthly instalment payment amount generated is just an estimate. To confirm the exact amount, kindly get in touch with Maybank.', 'ms-MY': 'The Monthly instalment payment amount generated is just an estimate. To confirm the exact amount, kindly get in touch with Maybank.', 'zh-hans': 'The Monthly instalment payment amount generated is just an estimate. To confirm the exact amount, kindly get in touch with Maybank.' },
-        streSimtext: {'en-US':'eSim', 'ms-MY': 'eSim', 'zh-hans': 'eSim'},
+        streSimtext: {'en-US':'eSIM', 'ms-MY': 'eSIM', 'zh-hans': 'eSIM'},
         streSimtextVal: {'en-US':'FREE', 'ms-MY': 'FREE', 'zh-hans': 'FREE'},
         
     };

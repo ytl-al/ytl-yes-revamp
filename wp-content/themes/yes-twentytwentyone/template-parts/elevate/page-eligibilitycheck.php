@@ -314,7 +314,7 @@
                     axios.post(apiEndpointURL_elevate + '/verify-eligibility' + '?nonce='+yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
-
+							console.log(data,'>>>>>>>>>>>>>>>>>>>>');
                             if (data.data.eligibilityStatus == 'ALLOWED') {
                                 self.isEligibilityCheck = true;
                                 // self.elevateCustomer();      // Commented by AL

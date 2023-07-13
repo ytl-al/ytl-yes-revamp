@@ -35,7 +35,7 @@
                     <li ui-sref="thirdStep" class="completed">
                         <span>{{ renderText('elevate_step_3') }}</span>
                     </li>
-                    <li ui-sref="fourthStep" v-if="(simType=='true')">
+                    <li ui-sref="fourthStep" v-if="(simType=='true')"class="completed">
                         <span>{{ renderText('elevate_step_4_1') }}</span>
                     </li>
                     <li ui-sref="fourthStep" class="completed" v-else>
@@ -860,7 +860,7 @@
                             'card_expiry_year'  : self.paymentInfo.cardExpiryYear,
                             'ippType'       : self.paymentInfo.ippType,
                             'esim'              : elevate.lsData.meta.esim,
-                            'applicationSource'  : "MYOS"
+                            'applicationSource'  : "YOS"
                         }
 
                         //console.log("params",params); return;
