@@ -127,6 +127,9 @@
         cursor: not-allowed !important;
         opacity: 0.5 !important;
     }
+    .panel-body .content{
+        display:none;
+    }
     @media only screen and (max-width: 600px) {
      .grid{
         grid-template-rows:repeat(2, auto);
@@ -141,7 +144,7 @@
         min-height: auto;
         flex-direction: row;
         padding: 2px;
-        gap: 20px;
+        gap: 10px;
         align-items:center;
       }
       .panel-img{
@@ -149,11 +152,21 @@
       }
       .card-panal-img{
         position: unset;
+        height: auto;
+        width: 170px;
       }
       .panel-body{
         line-height: 1.5;
         text-align: left;
+        width: 100%;
       }
+    .panel-body .content{
+        display:block;
+    }
+    #cart-body h1 {
+    font-size: 18px !important;
+    margin-bottom: 20px;
+    }
     }
 </style>
 <!-- Vue Wrapper STARTS -->
@@ -198,7 +211,7 @@
                     <div class="row gx-5">
                         <div class="col-lg-7">
                             <div class="layer-delivery">
-                                <div class="d-none d-lg-block">
+                                <div class="d-lg-block">
                                     <h1>{{ renderText('strSelectSimType') }}</h1>
                                 </div>
                             </div>
@@ -215,7 +228,9 @@
                                             </div>
                                             <div class="panel-body">
                                                 eSIM
-                                                
+                                                <div class="content">
+                                                 <p>Embedded SIM built into your device</p>
+                                                </div>
                                             </div>
                                         </span>
 
@@ -230,15 +245,18 @@
                                             </div>
                                             <div class="panel-body">
                                                 Physical SIM
-                                               
+                                                <div class="content">
+                                                 <p>A removable card that connect you to network</p>
+                                                </div>
                                             </div>
+                                            
                                         </span>
                                     </label>                                    
                                     <div class="eSIM " v-if="(simType == 'eSIM')">
                                         <img src="/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png"
                                             alt="...">
                                            <div>
-                                           <p>eSim Compatibility </p>
+                                           <p>eSIM Compatibility </p>
                                            <p><span>Please ensure that your device is eSIM supported</span></p>
                                            <span class="esim-link">Learn more about eSIM <a href="/e-sim">here</a></span>
                                            </div>
@@ -260,6 +278,9 @@
                                             </div>
                                             <div class="panel-body">
                                                 eSIM 
+                                                <div class="content">
+                                                 <p>Embedded SIM built into your device</p>
+                                                </div>
                                             </div>
                                         </span>
 
@@ -274,18 +295,23 @@
                                             </div>
                                             <div class="panel-body">
                                                 Physical SIM
+                                                <div class="content">
+                                                 <p>A removable card that connect you to network</p>
+                                                </div>
                                             </div>
+                                            
                                         </span>
                                     </label>
-                                    <div class="eSIM d-none" id="eSIM_msg" v-if="(DeviceSupportEsim != true)" >
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png"
-                                        alt="...">
-                                    <div>
-                                    <p>Device eSIM Compatibility</p>
-                                    <p><span>The device you have selected is not eSIM compatible.</span></p>
-                                    <span class="esim-link">However, you can use the eSIM purchased with this plan on an alternative compatible device.</span>
-                                </div>
-                            </div>
+                                    <div class="eSIM d-none" id="eSIM_msg">
+                                        <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png"
+                                            alt="...">
+                                        <div>
+                                            <p>Device eSIM Compatibility</p>
+                                            <p><span>The device you have selected is not eSIM compatible.</span></p>
+                                            <span class="esim-link">However, you can use the eSIM purchased with this
+                                                plan on an alternative compatible device.</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="input-group align-items-center">
@@ -381,9 +407,9 @@
                             'zh-hans': 'Payment Info'
                         },
                         strBtnSubmit: {
-                            'en-US': 'Enter Address',
-                            'ms-MY': 'Enter Address',
-                            'zh-hans': 'Enter Address'
+                            'en-US': 'Next',
+                            'ms-MY': 'Next',
+                            'zh-hans': 'Next'
                         },
                         labeleSIM: {
                             'en-US': 'eSIM',
@@ -416,43 +442,66 @@
 
                             self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
 
+                            // var data = JSON.parse(localStorage.getItem('yesElevate'));
 
-                                var  data = JSON.parse(localStorage.getItem('yesElevate'));
-                                if(data){
-                                    if(!data.meta.isUpFrontPlanAvailable){
-                                self.isUpFrontPlanAvailable='false';
+                            if(ywos.lsData.meta.completedStep==1){
+                                    localStorage.removeItem('yesElevate');
+                                
                             }
-                            if (data && data.meta.isUpFrontPlanAvailable == 'true') {
-                                alert(self.isUpFrontPlanAvailable);
-                                self.upFrontPlanID = data.meta.productId;
-                                const apiEndpoint_elevate = window.location.origin + '/wp-json/elevate/v1';
-                                axios.get(apiEndpoint_elevate + '/getProduct/?code=' + self.upFrontPlanID + '&nonce=' + yesObj.nonce)
+                            var data = JSON.parse(localStorage.getItem('yesElevate'));
+                            if (data) {
+                                self.isUpFrontPlanAvailable=data.meta.isUpFrontPlanAvailable;
+                                // console.log(data);
+                               // console.log(self.isUpFrontPlanAvailable);
+                                if (data && self.isUpFrontPlanAvailable == 'true') {
+                                    // alert(self.isUpFrontPlanAvailable);
+                                    self.upFrontPlanID = data.meta.productId;
+                                    const apiEndpoint_elevate = window.location.origin + '/wp-json/elevate/v1';
+                                    axios.get(apiEndpoint_elevate + '/getProduct/?code=' + self.upFrontPlanID + '&nonce=' + yesObj.nonce)
+                                        .then((response) => {
+                                            toggleOverlay(true);
+                                            var data = response.data;
+
+                                            self.DeviceSupportEsim = data?.selected?.esim;
+                                            self.PlanSupportEsim = data?.selected?.plan.esim;
+                                            toggleOverlay(false);
+                                        })
+                                        .catch((error) => {
+                                            // console.log('error', error);
+                                        })
+                                }else{
+                                    self.planID = ywos.lsData.meta.planID;
+                                // console.log(self.planID);
+                                axios.get(apiEndpointURL + '/get-plan-by-id/' + self.planID + '/?nonce=' + yesObj.nonce)
                                     .then((response) => {
                                         toggleOverlay(true);
+
                                         var data = response.data;
-                                        
-                                        self.DeviceSupportEsim = data?.selected?.esim;
-                                        self.PlanSupportEsim = data?.selected?.plan.esim;
+                                        self.isUpFrontPlanAvailable='false',
+                                        self.disabled = data.eSim
+                                        // console.log(self.disabled,'<<<<<');
                                         toggleOverlay(false);
                                     })
                                     .catch((error) => {
                                         // console.log('error', error);
                                     })
-                            }
                                 }
+                            }
                             else {
                                 self.planID = ywos.lsData.meta.planID;
-                            axios.get(apiEndpointURL + '/get-plan-by-id/' + self.planID + '/?nonce=' + yesObj.nonce)
-                                .then((response) => {
-                                    toggleOverlay(true);
-                                    var data = response.data;
-                                    self.disabled = data.eSim
-                                    console.log(self.disabled);
-                                    toggleOverlay(false);
-                                })
-                                .catch((error) => {
-                                    // console.log('error', error);
-                                })
+                                console.log(self.planID);
+                                axios.get(apiEndpointURL + '/get-plan-by-id/' + self.planID + '/?nonce=' + yesObj.nonce)
+                                    .then((response) => {
+                                        toggleOverlay(true);
+                                        var data = response.data;
+                                        self.isUpFrontPlanAvailable='false',
+                                        self.disabled = data.eSim
+                                        // console.log(self.disabled,'>>>>>');
+                                        toggleOverlay(false);
+                                    })
+                                    .catch((error) => {
+                                        // console.log('error', error);
+                                    })
                             }
 
                         } else {

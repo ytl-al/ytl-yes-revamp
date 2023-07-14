@@ -17,8 +17,7 @@ const apiEndpointURL = window.location.origin + '/wp-json/ywos/v1';
 
 
 $(document).ready(function() {
-	
-	if(window.location.pathname=='/ywos/delivery/'){
+    	if(window.location.pathname=='/ywos/delivery/'){
         let backButton = document.querySelector('.back-btn');
         if (ywosLSData.meta.orderSummary.plan.eSim != true) {
             backButton.href  = '/ywos/verification';

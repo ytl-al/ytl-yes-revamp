@@ -1010,8 +1010,8 @@
                             }
                             self.orderSummary.plan.hasDevice = hasDevice;
 
-                            self.updateAddOns(data.addonListServiceTypes);
                             self.updatePlan(true);
+                            self.updateAddOns(data.addonListServiceTypes);
                         })
                         .catch((error) => {
                             // console.log('error', error);

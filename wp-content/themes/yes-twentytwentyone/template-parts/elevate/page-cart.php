@@ -1,5 +1,4 @@
 <?php require_once 'includes/header.php' ?>
-
 <style type="text/css">
     .nav-container .navbar { padding-top: 8px; padding-bottom: 8px; }
     .deviceContract-text{font-size: 14.5px !important;}

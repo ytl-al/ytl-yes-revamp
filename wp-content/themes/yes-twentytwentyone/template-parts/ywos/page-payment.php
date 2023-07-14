@@ -676,7 +676,6 @@
                         self.simType=ywos.lsData.meta.esim;
 						self.eSimSupportPlan=ywos.lsData.meta.orderSummary.plan.eSim;
                     
-						self.eSimSupportPlan=ywos.lsData.meta.orderSummary.plan.eSim;
                         
                         
 

@@ -12,6 +12,7 @@
         pageTitleVerification: { 'en-US': 'Verification', 'ms-MY': 'Pengesahan', 'zh-hans': 'Verification' }, 
         pageTitleSelectSimType:{ 'en-US': 'Select Sim Type', 'ms-MY': 'Select Sim Type', 'zh-hans': 'Select Sim Type' }, 
         pageTitleDeliveryDetails: { 'en-US': 'Delivery Details', 'ms-MY': 'Butiran Penghantaran', 'zh-hans': 'Delivery Details' }, 
+        pageTitleBillingDetails: { 'en-US': 'Billing Details', 'ms-MY': 'Billing Penghantaran', 'zh-hans': 'Billing Details' }, 
         pageTitleEligibilityFailure: { 'en-US': 'Upfront Payment', 'ms-MY': 'Upfront Payment', 'zh-hans': 'Upfront Payment' }, 
         pageTitleReview: { 'en-US': 'Review', 'ms-MY': 'Semak', 'zh-hans': 'Review' }, 
 
@@ -20,7 +21,6 @@
     $(document).ready(function() {
         $('#heading-titleCheckout').html(getLayoutTranslation('titleCheckout', layoutText));
         $('#span-strBackTo').html(getLayoutTranslation('strBackTo', layoutText));
-
         var backPageID = "<?php echo $back_page_id; ?>";
         console.log(backPageID);
         var backPageStrID = '';
@@ -45,8 +45,13 @@
 					break; 
 				}
             case 'delivery':
-					backPageStrID = 'pageTitleDeliveryDetails';
-					break; 						
+					 if(ywosLSData.meta.esim == 'true'){
+                    backPageStrID = 'pageTitleBillingDetails';
+					break;
+                } else{
+                    backPageStrID = 'pageTitleDeliveryDetails';
+					break;
+                }   						
             case 'review': 
                 backPageStrID = 'pageTitleReview';
                 break;

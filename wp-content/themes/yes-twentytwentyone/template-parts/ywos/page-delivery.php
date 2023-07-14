@@ -600,7 +600,7 @@
                     strAddressNoteTitle: { 'en-US': 'Address Accuracy', 'ms-MY': 'Ketepatan Alamat', 'zh-hans': 'Address Accuracy' },
                     strAddressNote: { 'en-US': 'Address that are entered incorrectly may delay your order, so please double-check for errors.', 'ms-MY': 'Alamat yang dimasukkan dengan tidak tepat mungkin melengahkan penghantaran anda, jadi sila semak untuk mengelakkan kesilapan.', 'zh-hans': 'Address that are entered incorrectly may delay your order, so please double-check for errors.' },
 
-                    strBtnSubmit: { 'en-US': 'Next: Review & Pay', 'ms-MY': 'Seterusnya: Semak & Bayar', 'zh-hans': 'Next: Review & Pay' },
+                    strBtnSubmit: { 'en-US': 'Next', 'ms-MY': 'Seterusnya', 'zh-hans': 'Next' },
 
                     placeholderReferral: { 'en-US': 'Enter referral code (if any)', 'ms-MY': 'Masukkan kod rujukan (jika ada)', 'zh-hans': 'Enter referral code (if any)' },
                     errorReferralCode: { 'en-US': 'Please fill in the referral code.', 'ms-MY': 'Sila masukkan kod rujukan.', 'zh-hans': 'Please fill in the referral code.' }, 

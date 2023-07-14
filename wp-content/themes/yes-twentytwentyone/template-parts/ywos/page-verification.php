@@ -248,7 +248,7 @@
 
                     strAgree: { 'en-US': 'I hereby agree to subscribe to the YES postpaid/prepaid service as indicated in the online form submitted by me. I further give consent to YTLC to process my personal data in accordance with the YTL Group Privacy Policy available at <a href="http://www.ytl.com/privacypolicy.asp" target="_blank">http://www.ytl.com/privacypolicy.asp</a>.', 'ms-MY': 'Saya dengan ini bersetuju untuk melanggan pilihan Pelan Perkhidmatan Pascabayar/Prabayar dalam borang dalam talian yang saya hantar. <br />Saya selanjutnya memberi kebenaran kepada YTLC untuk memproses data peribadi saya mengikut Polisi Privasi Kumpulan YTL yang terkandung di <a href="http://www.ytl.com/privacypolicy.asp" target="_blank">http://www.ytl.com/privacypolicy.asp</a>.', 'zh-hans': 'I hereby agree to subscribe to the YES postpaid/prepaid service as indicated in the online form submitted by me. I further give consent to YTLC to process my personal data in accordance with the YTL Group Privacy Policy available at <a href="http://www.ytl.com/privacypolicy.asp" target="_blank">http://www.ytl.com/privacypolicy.asp</a>.' },
 	
-                    strBtnSubmit: { 'en-US': 'Next: Select Sim Type', 'ms-MY': 'Seterusnya: Select Sim Type', 'zh-hans': 'Next: Select Sim Type' },
+                    strBtnSubmit: { 'en-US': 'Next', 'ms-MY': 'Seterusnya', 'zh-hans': 'Next' },
 					strBtnSubmitWithoutEsim: { 'en-US': 'Next: Delivery', 'ms-MY': 'Seterusnya: Delivery', 'zh-hans': 'Next: Delivery' },
                     
                     strErrorNRIC: { 'en-US': 'Please insert valid MyKad  number', 'ms-MY': 'Sila masukkan nombor kad pengenalan yang sah', 'zh-hans': 'Please insert valid MyKad  number' },
