@@ -3,7 +3,7 @@
 Plugin Name: WP Fastest Cache
 Plugin URI: http://wordpress.org/plugins/wp-fastest-cache/
 Description: The simplest and fastest WP Cache system
-Version: 1.1.6
+Version: 1.1.7
 Author: Emre Vona
 Author URI: https://www.wpfastestcache.com/
 Text Domain: wp-fastest-cache
@@ -1144,7 +1144,15 @@ GNU General Public License for more details.
 					}
 
 					if($this->isPluginActive('polylang/polylang.php')){
-						$path = preg_replace("/\/cache\/(all|wpfc-minified|wpfc-widget-cache|wpfc-mobile-cache)/", "/cache/".$_SERVER['HTTP_HOST']."/$1", $path);
+						$polylang_settings = get_option("polylang");
+
+						if(isset($polylang_settings["force_lang"])){
+							if($polylang_settings["force_lang"] == 2 || $polylang_settings["force_lang"] == 3){
+								// The language is set from the subdomain name in pretty permalinks
+								// The language is set from different domains
+								$path = preg_replace("/\/cache\/(all|wpfc-minified|wpfc-widget-cache|wpfc-mobile-cache)/", "/cache/".$_SERVER['HTTP_HOST']."/$1", $path);
+							}
+						}
 					}
 
 					if($this->isPluginActive('multiple-domain/multiple-domain.php')){
@@ -1950,36 +1958,34 @@ GNU General Public License for more details.
 		}
 
 		public function excludeAdminCookie(){
-			$rules = "";
+			$usernames = array();
 			$users_groups = array_chunk(get_users(array("role" => "administrator", "fields" => array("user_login"))), 5);
 
 			foreach ($users_groups as $group_key => $group) {
-				$tmp_users = "";
+				$tmp_user = "";
 				$tmp_rule = "";
 
 				foreach ($group as $key => $value) {
-					if($tmp_users){
-						$tmp_users = $tmp_users."|".sanitize_user(wp_unslash($value->user_login), true);
-					}else{
-						$tmp_users = sanitize_user(wp_unslash($value->user_login), true);
-					}
+					$tmp_user = sanitize_user(wp_unslash($value->user_login), true);
 
-					// to replace spaces with \s
-					$tmp_users = preg_replace("/\s/", "\s", $tmp_users);
+					/*
+						to replace spaces with %20
 
-					if(!next($group)){
-						$tmp_rule = "RewriteCond %{HTTP:Cookie} !wordpress_logged_in_[^\=]+\=".$tmp_users;
-					}
-				}
+						1. Empty space character causes 500 internal server error
+						2. "\s" is not detected by htaccess so we added "%20"
+					*/
 
-				if($rules){
-					$rules = $rules."\n".$tmp_rule;
-				}else{
-					$rules = $tmp_rule;
+					$tmp_user = preg_replace("/\s/", "%20", $tmp_user);
+					
+					array_push($usernames, $tmp_user);
 				}
 			}
 
-			return "# Start_WPFC_Exclude_Admin_Cookie\n".$rules."\n# End_WPFC_Exclude_Admin_Cookie\n";
+			$rule = "# Start_WPFC_Exclude_Admin_Cookie\n"; 
+			$rule = $rule."RewriteCond %{HTTP:Cookie} !wordpress_logged_in_[^\=]+\=".implode("|", $usernames);
+			$rule = $rule."\n# End_WPFC_Exclude_Admin_Cookie\n";
+
+			return $rule;
 		}
 
 		public function excludeRules(){

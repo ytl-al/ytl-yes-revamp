@@ -11,7 +11,7 @@
  */
 
 ?>
-
+	
 		<?php get_template_part('template-parts/footer/site-footer-elevate'); ?>
 	</div>
 	<!-- Layer Page ENDS -->

@@ -9,7 +9,6 @@
  */
 
 ?>
-
 <!-- Footer STARTS -->
 <footer class="page-footer footer-white footer-noMenu">
     <div class="copyright">

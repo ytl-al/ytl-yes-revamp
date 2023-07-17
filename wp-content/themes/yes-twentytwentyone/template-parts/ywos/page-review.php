@@ -31,7 +31,22 @@
     </section>
     <section id="grey-innerbanner" v-else>
         <div class="container">
-            <ul class="wizard">
+			<ul class="wizard" v-if="(eSimSupportPlan != true)">
+                <li ui-sref="firstStep" class="completed">
+                    <span>1. {{ renderText('strVerification') }}</span>
+                </li>
+               
+                <li ui-sref="secondStep" class="completed">
+                    <span>2. {{ renderText('strDelivery') }}</span>
+                </li>
+                <li ui-sref="threeStep" class="completed">
+                    <span>3. {{ renderText('strReview') }}</span>
+                </li>
+                <li ui-sref="fourthStep"> 
+                    <span>4. {{ renderText('strPayment') }}</span>
+                </li>
+            </ul>
+            <ul class="wizard" v-else>
                 <li ui-sref="firstStep" class="completed">
                     <span>1. {{ renderText('strVerification') }}</span>
                 </li>
@@ -272,6 +287,7 @@
                 currentStep: 4,
                 simType :'',
                 upFrontPayment:'fasle',
+				eSimSupportPlan:'',
                 pageValid: false,
                 orderSummary: {
                     plan: {},
@@ -344,7 +360,7 @@
                     strAgreeTerms: { 'en-US': 'I hereby agree to subscribe to the Postpaid/Prepaid Service Plan selected in the online form submitted by me, and to be bound by the terms and conditions available at <a href="/tnc/general-tnc" target="_blank">www.yes.my/tnc/general-tnc</a>.', 'ms-MY': 'Saya dengan ini bersetuju untuk melanggan pilihan Pelan Perkhidmatan Pascabayar/Prabayar dalam borang dalam talian yang saya hantar, dan akan terikat dengan terma dan syarat terkandung di <a href="/ms/tnc/general-tnc" target="_blank">www.yes.my/tnc/general-tnc</a>.', 'zh-hans': 'I hereby agree to subscribe to the Postpaid/Prepaid Service Plan selected in the online form submitted by me, and to be bound by the terms and conditions available at <a href="/zh-hans/tnc/general-tnc" target="_blank">www.yes.my/tnc/general-tnc</a>.' },
                     strAgreePrivacy: { 'en-US': 'I further give consent to YTLC to process my personal data in accordance with the YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a>.', 'ms-MY': 'Saya selanjutnya memberi kebenaran kepada YTLC untuk memproses data peribadi saya mengikut Polisi Privasi Kumpulan YTL yang terkandung di <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a>.', 'zh-hans': 'I further give consent to YTLC to process my personal data in accordance with the YTL Group Privacy Policy available at <a href="https://www.ytl.com/privacypolicy.asp" target="_blank">https://www.ytl.com/privacypolicy.asp</a>.' },
 
-                    strBtnPayNow: { 'en-US': 'Pay Now', 'ms-MY': 'Bayar Sekarang', 'zh-hans': 'Pay Now' } 
+                    strBtnPayNow: { 'en-US': 'Next', 'ms-MY': 'Next', 'zh-hans': 'Next' } 
                 }
             },
             mounted: function() {},
@@ -363,6 +379,7 @@
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
                         self.upFrontPayment = ywos.lsData.meta.customerDetails.upFrontPayment;
                         self.simType=ywos.lsData.meta.esim;
+						self.eSimSupportPlan=ywos.lsData.meta.orderSummary.plan.eSim;
                     
                         toggleOverlay(false);
                     } else {

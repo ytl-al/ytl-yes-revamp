@@ -171,7 +171,12 @@
             <h1 class="mb-4">{{ renderText('strThankYou') }}</h1>
             <p class="tx">{{ renderText('strOrderNumber') }}<br>
             <a href="javascript:void(0)" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br /><br/>
-            <div class="text-12 mt-2">Placed on <?php echo date("l, jS F Y")?></div>
+            <div class="text-12 mt-2">Placed on <?php 
+            date_default_timezone_set('Asia/Kuala_Lumpur');
+            echo date("l, jS F Y H:i:s");
+            ?>
+            
+        </div>
             <p v-if="(simType=='false' || simType=='')">{{ renderText('strEstimatedDelivery') }} {{ purchaseInfo.deliveryFromDate }}  - {{purchaseInfo.deliveryToDate}}</p><br /> <br />
             <p> {{ renderText('strOrderSummary') }}</p>
         </div>
@@ -179,7 +184,9 @@
             <h1 class="mb-4">{{ renderText('strThankYou') }}</h1>
             <p class="tx">{{ renderText('strOrderNumber') }}<br>
             <a href="javascript:void(0)" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br /><br/>
-            <div class="text-12 mt-2">Placed on <?php echo date("l, jS F Y")?></div>
+            <div class="text-12 mt-2">Placed on <?php   
+            date_default_timezone_set('Asia/Kuala_Lumpur');
+            echo date("l, jS F Y H:i:s");?></div>
             <p style="margin:3px 0" v-if="(simType=='false' || simType=='')">{{ renderText('strEstimatedDelivery') }} {{ purchaseInfo.deliveryFromDate }}  - {{purchaseInfo.deliveryToDate}}</p>
             <p style="margin:3px 0"> {{ renderText('strOrderSummary') }}</p>
         </div>

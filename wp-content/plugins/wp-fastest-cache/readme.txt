@@ -4,7 +4,7 @@ Donate link: https://profiles.wordpress.org/emrevona/
 Tags: cache, Optimize, performance, wp-cache, core web vitals
 Requires at least: 3.3
 Tested up to: 6.2
-Stable tag: 1.1.6
+Stable tag: 1.1.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,11 +80,11 @@ WP Fastest Cache is compatible with most popular plugins such as Contact Form 7,
 
 <h4>Supported Languages</h4>
 
-Although there are over 7000 languages spoken in the world today, we feel very lucky to support 26 languages for now.
+Although there are over 7000 languages spoken in the world today, we feel very lucky to support 27 languages for now.
 
 However, localizing or adapting a plugin to another language or culture is time consuming and a demanding task. That's where the amazing Translation Contributors team of WordPress comes into play. These selfless people spent their precious time without expecting anything in return so that other people can use the add-ons more easily. We sincerely thank all of them.
 
-Chinese Simplified (China), Chinese Traditional (Taiwan), Czech, Dutch (Belgium), Dutch (Netherlands), English (South Africa), English (UK), Finnish, French (France), Galician, German (Germany), Hungarian, Indonesian, Italian, Japanese, Persian, Russian, Slovak (Slovakia), Spanish (Argentina), Spanish (Colombia), Spanish (Ecuador), Spanish (Mexico), Spanish (Spain), Spanish (Venezuela), Swedish, Turkish
+Chinese Simplified (China), Chinese Traditional (Taiwan), Czech, Dutch (Belgium), Dutch (Netherlands), English (South Africa), English (UK), Finnish, French (France), Galician, German (Germany), Hungarian, Indonesian, Italian, Japanese, Korean (Korea), Persian, Russian, Slovak (Slovakia), Spanish (Argentina), Spanish (Colombia), Spanish (Ecuador), Spanish (Mexico), Spanish (Spain), Spanish (Venezuela), Swedish, Turkish
 
 == Installation ==
 
@@ -115,6 +115,13 @@ Chinese Simplified (China), Chinese Traditional (Taiwan), Czech, Dutch (Belgium)
 18. Database Cleanup
 
 == Changelog ==
+
+= 1.1.7 =
+* to change the cache path for the Polylang plugin
+* [FEATURE] to add Korean (Korea) language
+* to update translation files
+* refactoring of is_amp()
+* to replace empty char which exist in the admin cookie with %20 for RewriteCond
 
 = 1.1.6 =
 * to update translation files

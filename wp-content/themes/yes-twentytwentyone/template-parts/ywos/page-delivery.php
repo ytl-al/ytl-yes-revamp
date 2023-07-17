@@ -14,27 +14,47 @@
                 <li ui-sref="secondStep" class="completed">
                     <span>2. {{ renderText('strDelivery') }}</span>
                 </li>
+				 <li ui-sref="thirdStep"class="completed">
+                    <span v-if="(simType == 'eSIM')">3. {{ renderText('strDeliveryBilling') }}</span>
+                    <span v-else class="completed">3. {{ renderText('strDelivery') }}</span>
+
+                </li>
                 <li ui-sref="thirdStep">
-                    <span>3. {{ renderText('strReview') }}</span>
+                    <span>4. {{ renderText('strReview') }}</span>
                 </li>
                 <li ui-sref="fourthStep">
-                    <span>4. {{ renderText('strPayment') }}</span>
+                    <span>5. {{ renderText('strPayment') }}</span>
                 </li>
             </ul>
         </div>
     </section>
     <section id="grey-innerbanner" v-else>
         <div class="container">
-            <ul class="wizard">
+		<ul class="wizard" v-if="(eSimSupportPlan != true)">
+                <li ui-sref="firstStep" class="completed">
+                    <span>1. {{ renderText('strVerification') }}</span>
+                </li>
+               
+                <li ui-sref="secondStep"class="completed">
+                    <span>2. {{ renderText('strDelivery') }}</span>
+                </li>
+                <li ui-sref="threeStep">
+                    <span>3. {{ renderText('strReview') }}</span>
+                </li>
+                <li ui-sref="fourthStep"> 
+                    <span>4. {{ renderText('strPayment') }}</span>
+                </li>
+            </ul>
+            <ul class="wizard" v-else>
                 <li ui-sref="firstStep" class="completed">
                     <span>1. {{ renderText('strVerification') }}</span>
                 </li>
                 <li ui-sref="secondStep" class="completed">
                     <span>2. {{ renderText('strSelectSimType') }}</span>
                 </li>
-                <li ui-sref="thirdStep">
+                <li ui-sref="thirdStep"class="completed">
                     <span v-if="(simType == 'eSIM')">3. {{ renderText('strDeliveryBilling') }}</span>
-                    <span v-else>3. {{ renderText('strDelivery') }}</span>
+                    <span v-else class="completed">3. {{ renderText('strDelivery') }}</span>
 
                 </li>
                 <li ui-sref="fourthStep">
@@ -355,6 +375,7 @@
             data: {
                 currentStep: 3,
                 simType:'',
+				eSimSupportPlan:'',
                 pageValid: false,
                 isBillingDifferent: false,
                 upFrontPayment:'false',
@@ -579,7 +600,7 @@
                     strAddressNoteTitle: { 'en-US': 'Address Accuracy', 'ms-MY': 'Ketepatan Alamat', 'zh-hans': 'Address Accuracy' },
                     strAddressNote: { 'en-US': 'Address that are entered incorrectly may delay your order, so please double-check for errors.', 'ms-MY': 'Alamat yang dimasukkan dengan tidak tepat mungkin melengahkan penghantaran anda, jadi sila semak untuk mengelakkan kesilapan.', 'zh-hans': 'Address that are entered incorrectly may delay your order, so please double-check for errors.' },
 
-                    strBtnSubmit: { 'en-US': 'Next: Review & Pay', 'ms-MY': 'Seterusnya: Semak & Bayar', 'zh-hans': 'Next: Review & Pay' },
+                    strBtnSubmit: { 'en-US': 'Next', 'ms-MY': 'Seterusnya', 'zh-hans': 'Next' },
 
                     placeholderReferral: { 'en-US': 'Enter referral code (if any)', 'ms-MY': 'Masukkan kod rujukan (jika ada)', 'zh-hans': 'Enter referral code (if any)' },
                     errorReferralCode: { 'en-US': 'Please fill in the referral code.', 'ms-MY': 'Sila masukkan kod rujukan.', 'zh-hans': 'Please fill in the referral code.' }, 
@@ -615,6 +636,7 @@
                         self.updateFields();
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
                         self.upFrontPayment = ywos.lsData.meta.customerDetails.upFrontPayment;
+						self.eSimSupportPlan=ywos.lsData.meta.orderSummary.plan.eSim;
                         
                         // toggleOverlay(false);
                         

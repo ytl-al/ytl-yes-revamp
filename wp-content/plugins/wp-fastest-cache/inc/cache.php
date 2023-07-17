@@ -815,7 +815,7 @@
 			}else{
 				$content = $buffer;
 
-				if(defined('WPFC_ENABLE_DELAY_JS') && WPFC_ENABLE_DELAY_JS){
+				if(isset($this->options->wpFastestCacheDelayJS) && method_exists("WpFastestCachePowerfulHtml", "render_blocking")){
 					if(file_exists(WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium/pro/library/delay-js.php")){
 						if(!$this->is_amp($content)){
 							include_once WPFC_WP_PLUGIN_DIR."/wp-fastest-cache-premium/pro/library/delay-js.php";
@@ -1242,6 +1242,11 @@
 			}
 
 			if(preg_match("/\?amp\=1$/", $request_uri)){
+				$action = true;
+			}
+
+			if(preg_match("/web-stories\//", $request_uri)){
+				// https://wordpress.org/plugins/web-stories/
 				$action = true;
 			}
 

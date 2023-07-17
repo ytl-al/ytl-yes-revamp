@@ -72,7 +72,22 @@
     </section>
     <section id="grey-innerbanner" v-else>
         <div class="container">
-            <ul class="wizard">
+		<ul class="wizard" v-if="(eSimSupportPlan != true)">
+                <li ui-sref="firstStep" class="completed">
+                    <span>1. {{ renderText('strVerification') }}</span>
+                </li>
+               
+                <li ui-sref="secondStep" class="completed">
+                    <span>2. {{ renderText('strDelivery') }}</span>
+                </li>
+                <li ui-sref="threeStep" class="completed">
+                    <span>3. {{ renderText('strReview') }}</span>
+                </li>
+                <li ui-sref="fourthStep"class="completed"> 
+                    <span>4. {{ renderText('strPayment') }}</span>
+                </li>
+            </ul>
+            <ul class="wizard" v-else>
                 <li ui-sref="firstStep" class="completed">
                     <span>1. {{ renderText('strVerification') }}</span>
                 </li>
@@ -314,6 +329,7 @@
                 dealer: [],
                 currentStep: 5,
                 pageValid: false,
+				eSimSupportPlan:'',
                 allowSubmit: false,
                 upFrontPayment:'false',
                 orderSummary: {
@@ -658,8 +674,10 @@
                         self.dealer = ywos.lsData.meta.dealer;
                         self.upFrontPayment = ywos.lsData.meta.customerDetails.upFrontPayment;
                         self.simType=ywos.lsData.meta.esim;
+						self.eSimSupportPlan=ywos.lsData.meta.orderSummary.plan.eSim;
+                    
                         
-                        
+                        toggleOverlay(false);
 
                     } else {
                         ywos.redirectToPage('cart');
@@ -886,8 +904,15 @@
                      if(ywos.lsData.meta.customerDetails.upFrontPayment=='true'){
                     self.upFontpayemtTotal=(self.paymentInfo.totalAmount)-(self.orderSummary.due.foreignerDeposit)
                     }else{
-                        self.upFontpayemtTotal=self.paymentInfo.totalAmount
+                        self.upFontpayemtTotal=self.paymentInfo.totalAmount;
                     }
+                   
+                    if(ywos.lsData.meta.orderSummary.plan.bundleName == "Home Broadband"){
+                        self.eSIM=ywos.lsData.meta.orderSummary.plan.eSim;
+                    }else{
+                        self.eSIM= ywos.lsData.meta.esim;
+                    }
+                    console.log(self.eSIM);
                     // alert(self.upFontpayemtTotal)
                     // alert(self.paymentInfo.paymentMethod);
                     var params = {
@@ -936,8 +961,8 @@
                         'ippType'           : self.paymentInfo.ippType,
                         'locale'            : self.apiLocale,
                         'walletType'        : self.paymentInfo.walletType,
-                        'esim'              : ywos.lsData.meta.esim,
-                        'applicationSource'  : "MYOS"
+                        'esim'              : self.eSIM,
+                        'applicationSource'  : "YOS"
                     };
                     axios.post(apiEndpointURL + '/create-yos-order' + '?nonce='+yesObj.nonce, params)
                         .then((response) => {

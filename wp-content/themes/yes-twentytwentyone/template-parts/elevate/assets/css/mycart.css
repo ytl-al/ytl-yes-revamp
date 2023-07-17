@@ -495,7 +495,9 @@ main.site-main {
     margin: 5px;
     border-radius: 100%;
 }
-
+.color-violet a{
+background: #e8bcf0;	
+}
 .color-purple a {
     background: #e8bcf0;
 }
@@ -1211,13 +1213,12 @@ ul.wizard {
         height: auto;
     }
     ul.wizard span {
-        font-size: 8px;
+        font-size: 8px !important;
     }
 
     ul.wizard li.completed span {
-        font-size: 8px;
+        font-size: 8px !important;
     }
-
     ul.wizard span, ul.wizard li.completed span {
         font-size: 12px !important;
         text-align: center;
@@ -1364,5 +1365,6 @@ ul.wizard {
     border-top: 1px solid #000000;
 }
 
+   
 
 /* New-form-css-end */

@@ -757,10 +757,10 @@ ul.wizard li.completed::after {
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
     ul.wizard span {
-        font-size: 11px;
+        font-size: 11px !important;
     }
     ul.wizard li.completed span {
-        font-size: 11px;
+        font-size: 11px !important;
     }
 
     ul.wizard span, ul.wizard li.completed span {

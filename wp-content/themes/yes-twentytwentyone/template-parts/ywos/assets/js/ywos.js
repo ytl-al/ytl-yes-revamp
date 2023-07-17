@@ -15,7 +15,16 @@ const ywosLSData = JSON.parse(localStorage.getItem(ywosLSName));
 const expiryYWOSCart = 60; // in minute
 const apiEndpointURL = window.location.origin + '/wp-json/ywos/v1';
 
+
 $(document).ready(function() {
+    	if(window.location.pathname=='/ywos/delivery/'){
+        let backButton = document.querySelector('.back-btn');
+        if (ywosLSData.meta.orderSummary.plan.eSim != true) {
+            backButton.href  = '/ywos/verification';
+        } else {
+            backButton.href  = '/ywos/cart';
+        }
+    }
     //backbuttom upfront payment page
     if(window.location.pathname=='/ywos/sim-type/'){
         let backButton = document.querySelector('.back-btn');
@@ -273,7 +282,7 @@ const ywos = {
                 // pushAnalytics('impressions', pushData);
             },
             complete: function() {
-                self.redirectToYwosPage('delivery');
+                self.redirectToYwosPage('sim-type');
             }
         });
     },
