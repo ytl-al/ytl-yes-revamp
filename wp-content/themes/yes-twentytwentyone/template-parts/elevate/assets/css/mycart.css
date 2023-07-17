@@ -1365,6 +1365,37 @@ ul.wizard {
     border-top: 1px solid #000000;
 }
 
+button.button-submit{
+    background-color: #FF0084!important;
+    border-radius: 20px;
+    padding: 9px 30px;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: inherit;
+    color: #FFF !important;
+    border: none;
+    text-align: center;
+    margin: 12px 0px;
+    text-decoration: none!important;
+    cursor: pointer;
+}
+button.button-reset{
+    background-color: #FF0084!important;
+    border-radius: 20px;
+    padding: 9px 30px;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: inherit;
+    color: #FFF !important;
+    border: none;
+    text-align: center;
+    margin: 12px 0px;
+    text-decoration: none!important;
+    cursor: pointer;
+}
+/* New-form-css-end */
    
 
 /* New-form-css-end */
