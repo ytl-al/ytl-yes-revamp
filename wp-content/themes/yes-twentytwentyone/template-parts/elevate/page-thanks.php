@@ -202,7 +202,8 @@
 							?>
                         </div>
                         <div class="text-12 mt-2">Placed on
-                            <?php echo date("l, jS F Y") ?>
+                            <?php     date_default_timezone_set('Asia/Kuala_Lumpur');
+                                echo date("l, jS F Y H:i:s");?>
                         </div>
                         <!-- Estimated Delivery: 14th Feb - 28th Feb --></p> 
                         <div class="mt-5">{{ renderText('summary_sent') }}

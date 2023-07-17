@@ -314,7 +314,6 @@
                     axios.post(apiEndpointURL_elevate + '/verify-eligibility' + '?nonce='+yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
-							console.log(data,'>>>>>>>>>>>>>>>>>>>>');
                             if (data.data.eligibilityStatus == 'ALLOWED') {
                                 self.isEligibilityCheck = true;
                                 // self.elevateCustomer();      // Commented by AL
@@ -508,7 +507,6 @@
 
                             var data = response.data;
                             if (data.status == 1) {
-                                console.log(data.status);
                                 self.notActiveContract = true;
                                 // elevate.redirectToPage('verification');      // Commented by AL
 

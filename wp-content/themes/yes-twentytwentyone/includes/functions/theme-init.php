@@ -2547,7 +2547,7 @@ if ($lang == "en-US"){
                                     </div>
                                 </li>
                             </div>
-                            <div class="col-6 col-md-6">
+                            <div class="col-6 col-md-6 d-none">
                                 <li class="mega-get-help">
                                     <img src="/wp-content/uploads/2023/03/Track-Order.svg" alt="...">
                                     <div class="">
@@ -2590,7 +2590,7 @@ if ($lang == "en-US"){
                             <li><a href="<?php echo get_site_url() . '/speed-test/' ?>"><img src="/wp-content/uploads/2023/03/Speed.svg" alt="..."> Speed Test</a></li>
                             <li><a href="<?php echo get_site_url() . '/supported-devices/' ?>"><img src="/wp-content/uploads/2023/03/Supported-Devices.svg" alt="..."> Supported Devices</a></li>
                             <li><a href="<?php echo get_site_url() . '/trackorder/' ?>"><img src="/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Track Order</a></li>
-                            <li><a href="<?php echo get_site_url() . '/a3-charger-replacement/' ?>"><img src="/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Product Notice</a></li>
+                            <li class="d-none"><a href="<?php echo get_site_url() . '/a3-charger-replacement/' ?>"><img src="/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Product Notice</a></li>
                         </ul>
                         <ul>
                             <li class="mt-3 dropdown-header-mobile">LOCATE us</li>
