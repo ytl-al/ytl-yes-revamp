@@ -677,7 +677,7 @@
 						self.eSimSupportPlan=ywos.lsData.meta.orderSummary.plan.eSim;
                     
                         
-                        
+                        toggleOverlay(false);
 
                     } else {
                         ywos.redirectToPage('cart');
