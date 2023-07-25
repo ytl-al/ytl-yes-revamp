@@ -551,8 +551,14 @@
                     elevate.lsData.analyticItems =  pushData;
                     elevate.updateElevateLSData();
                 },
-             triggerModalNotify: function() {
+             triggerModalNotify: function(phoneModel='') {
+                
+                const modalBody = document.querySelector('.modal-body');
+                const paragraph = modalBody.querySelector('p.mb-3');
+                const DeviceName = paragraph.textContent.trim();
+                var  phoneModel = DeviceName.split('.').pop().trim();
                 var modalNotify = new bootstrap.Modal(document.getElementById('modal-notify'), {});
+                $('#wdform_3_element10').val(phoneModel);
                 modalNotify.show();
             }
 

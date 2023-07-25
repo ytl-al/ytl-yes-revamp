@@ -533,7 +533,7 @@ class ElevateApi
         return $response;
     }
 
-	public  function check_active_contract(WP_REST_Request $request)
+    public  function check_active_contract(WP_REST_Request $request)
     {
 
         if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
@@ -557,8 +557,9 @@ class ElevateApi
             'timeout' => self::API_TIMEOUT
         ];
 		$apiSetting = (new \Inc\Base\Model)->getAPISettings();
-        $api_url = $apiSetting['url'] .'api/Elevate/customer/CheckActiveContract'.'?customerNRIC='.$mykad;
+        $api_url = $apiSetting['url'] . self::api_customer_check_contract.'?customerNRIC='.$mykad;
         $request = wp_remote_get($api_url, $args);
+
         if (is_wp_error($request)) {
             $return['status'] = 0;
             $return['error'] = "Cannot connect to API server";
@@ -566,9 +567,9 @@ class ElevateApi
             $return['status'] = 0;
             $return['error'] = @$request['response'];
         } else {
-            $data = json_decode($request['body'], true);
-			//print_r($request);die( $api_url);
-            if (!$data) {
+            $data = $request['body'];
+
+            if ($data=='false') {
                 $return['status'] = 1;
             } else {
                 $return['status'] = 0;

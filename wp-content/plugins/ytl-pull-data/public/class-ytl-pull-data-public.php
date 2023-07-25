@@ -1231,7 +1231,6 @@ class Ytl_Pull_Data_Public
 			$api_url 	= $this->api_domain . $this->path_validate_customer_eligibilities;
 			$request 	= wp_remote_post($api_url, $args);
 			$data 		= json_decode($request['body']);
-			
 			if ($data->responseCode > -1) {
 				$data->sessionId = $session_id;
 
