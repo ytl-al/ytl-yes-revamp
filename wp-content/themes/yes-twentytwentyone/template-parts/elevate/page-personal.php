@@ -555,7 +555,6 @@
                     }
                     if (typeof self.deliveryInfo.state !== 'undefined' && self.deliveryInfo.state.length) {
                         self.postCode.city = self.postCode.stateCity[self.deliveryInfo.state];
-                        console.log(self.postCode.city);
                         setTimeout(function () {
                             $('.form-select').selectpicker('refresh');
                             if (self.deliveryInfo.city) {
@@ -687,7 +686,7 @@
                             }
                             elevate.lsData.deliveryInfo = self.deliveryInfo;
                             elevate.updateElevateLSData();
-                            console.log("self.deliveryInfo",self.deliveryInfo);
+                            
                         })
                         .catch((error) => {
                             console.log(error);

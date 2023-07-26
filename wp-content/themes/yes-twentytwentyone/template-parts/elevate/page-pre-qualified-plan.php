@@ -875,7 +875,7 @@
                         var self = this;
                         if(!self.orderSummary.product.selected.imageURL) return;
                         var url = self.orderSummary.product.selected.imageURL.split(';');
-                        console.log(url);
+                        
                         return url[0];
 
                     },
