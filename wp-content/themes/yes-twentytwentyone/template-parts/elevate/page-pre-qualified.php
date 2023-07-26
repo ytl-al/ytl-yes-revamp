@@ -592,7 +592,7 @@
 							.then((response) => {
 								toggleOverlay(false);
 								var data = response.data;
-								console.log(data);
+								
 								if(data){
 									self.deliveryInfo = data;
 									self.allowSubmit = true;

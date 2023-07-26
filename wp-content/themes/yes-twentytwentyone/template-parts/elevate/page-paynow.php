@@ -130,16 +130,16 @@
                                         </div>
                                         <div class="row mb-3 align-items-center g-2">
                                             <div class="col-12">
-												<div class="row">
+                                                <div class="row">
                                                 <div class="col-lg-6 col-12">
-												<label class="form-label" for="input-chNumber1">{{ renderText('card_number') }}</label>
-												<div class="float-end layer-selectedCard">
-													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/visa.png" height="15" v-if="paymentInfo.cardType == 'VISA'" />
-													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" height="25" v-if="paymentInfo.cardType == 'AMEX'" />
-													<img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/mastercard.png" height="30" v-if="paymentInfo.cardType == 'MASTERCARD'" />
-												</div>
-												</div>
-												</div>
+                                                <label class="form-label" for="input-chNumber1">{{ renderText('card_number') }}</label>
+                                                <div class="float-end layer-selectedCard">
+                                                    <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/visa.png" height="15" v-if="paymentInfo.cardType == 'VISA'" />
+                                                    <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" height="25" v-if="paymentInfo.cardType == 'AMEX'" />
+                                                    <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/mastercard.png" height="30" v-if="paymentInfo.cardType == 'MASTERCARD'" />
+                                                </div>
+                                                </div>
+                                                </div>
                                             </div>
                                             <div class="col-lg-6 col-12 mb-1">
                                                 <div class="input-group align-items-center">
@@ -155,7 +155,7 @@
                                             <div class="col-lg-3 col-12">
                                                 <label class="form-label" for="input-cardInput5">{{ renderText('exp_date') }}</label>
                                                 <div class="input-group align-items-center">
-													<input type="text" pattern="[0-9]+" class="form-control text-center" id="input-cardInput5" autocomplete="off" v-model="paymentInfo.cardExpiryMonth" placeholder="MM" maxlength="2" @input="checkCardInputJump(5, event)" @keypress="checkInputCharacters(event, 'numeric', false)" /> <span class="mx-2">/</span>
+                                                    <input type="text" pattern="[0-9]+" class="form-control text-center" id="input-cardInput5" autocomplete="off" v-model="paymentInfo.cardExpiryMonth" placeholder="MM" maxlength="2" @input="checkCardInputJump(5, event)" @keypress="checkInputCharacters(event, 'numeric', false)" /> <span class="mx-2">/</span>
                                                     <input type="text" pattern="[0-9]+" class="form-control text-center" id="input-cardInput6" autocomplete="off" v-model="paymentInfo.cardExpiryYear" placeholder="YYYY" maxlength="4" @input="checkCardInputJump(6, event)" @keypress="checkInputCharacters(event, 'numeric', false)" />
                                                 </div>
                                             </div>
@@ -201,6 +201,7 @@
                                 <div class="col-12 col-lg-6">
                                     <button type="submit" class="w-100" :class="allowSubmit?'pink-btn':'pink-btn-disable'" :disabled="!allowSubmit">{{ renderText('pay') }}</button>
                                 </div>
+                                <div id="status_mesage"></div>
                             </div>
                         </div>
                     </form>
@@ -523,14 +524,14 @@
                             self.pageValid = true;
                             if (elevate.lsData.eligibility) {
                             self.eligibility = elevate.lsData.eligibility;
-							}else{
-								 elevate.redirectToPage('eligibilitycheck');
-							}
-							if (elevate.lsData.deliveryInfo) {
-								self.deliveryInfo = elevate.lsData.deliveryInfo;
-							}else{
-								 elevate.redirectToPage('personal');
-							}
+                            }else{
+                                 elevate.redirectToPage('eligibilitycheck');
+                            }
+                            if (elevate.lsData.deliveryInfo) {
+                                self.deliveryInfo = elevate.lsData.deliveryInfo;
+                            }else{
+                                 elevate.redirectToPage('personal');
+                            }
                             if (elevate.lsData.customer) {
                                 self.customer = elevate.lsData.customer;
                             }
@@ -538,8 +539,8 @@
                             if (elevate.lsData.orderDetail) {
                                 self.orderSummary.orderDetail = elevate.lsData.orderDetail;
                             }else{
-								 elevate.redirectToPage('contract');
-							}
+                                 elevate.redirectToPage('contract');
+                            }
                             if (elevate.lsData.product) {
                                 self.orderSummary.product = elevate.lsData.product;
                             }
@@ -754,7 +755,7 @@
                         var self = this;
                         var xpayOrderId = self.orderResponse.xpayOrderId;
                         var encryptedValue = self.orderResponse.encryptedValue;
-                        console.log("orderResponse",self.orderResponse);
+                        
 
                         self.updateElevateOrder();
 
@@ -764,9 +765,9 @@
                                 mainwin.close();
                             }
                              // self.redirectThankYou();
-							 errorMsg = "Payment Timeout.";
-							//  self.cancelElevateOrder(errorMsg);
-							 self.updatePaymentStatus(3);
+                             errorMsg = "Payment Timeout.";
+                            //  self.cancelElevateOrder(errorMsg);
+                             self.updatePaymentStatus(3);
 
                             clearTimeout(timeoutObj);
                             self.paymentTimeout = true;
@@ -895,7 +896,7 @@
                                     self.toggleModalAlert('Error', errorMsg);
 
                                     self.cancelElevateOrder(errorMsg);
-									self.updatePaymentStatus(-1);
+                                    self.updatePaymentStatus(-1);
                                 }
                                 console.log(error, response);
                             })
@@ -907,7 +908,7 @@
                     },
                     paymentSubmit: function(e) {
                         toggleOverlay();
-                        this.ajaxCreateYOSOrder();
+                        this.checkActiveContract();
                         e.preventDefault();
                     },
                     redirectThankYou: function(status) {
@@ -927,6 +928,35 @@
                             self.sendAnalytics();
                         }
                     },
+
+                    checkActiveContract:function(){
+                        var self = this;
+                        var params = { mykad: self.eligibility.mykad };
+                        var t = new Date().getTime();
+                        axios.post(apiEndpointURL_elevate + '/check-active-contract?t='+t + '&nonce='+yesObj.nonce, params)
+                            .then((response) => {
+
+                                var data = response.data;
+                                if (data.status == 1) {
+                                    self.notActiveContract = true;
+                                    // elevate.redirectToPage('verification');      // Commented by AL
+
+                                    //check compAsia Eligibility
+                                    self.ajaxCreateYOSOrder();                           // Moved by AL
+                                } else {
+                                    toggleOverlay(false);
+                                    $('#status_mesage').html('');
+                                     toggleModalAlert('Error',this.renderText('fail_existing_installment_plan'),"elevate.redirectToPage('eligibility-fail-upfront')")
+                                    }
+                                
+                        })
+                        .catch((error) => {
+                            toggleOverlay(false);
+                            console.log(error);
+                        });
+                    },
+
+
                     updateElevateOrder: function (){
                         var self = this;
 
@@ -976,7 +1006,7 @@
 
                     },
 
-					updatePaymentStatus: function (status, redirect = true){
+                    updatePaymentStatus: function (status, redirect = true){
                         var self = this;
 
                         if (redirect) {
@@ -984,35 +1014,35 @@
                         }
                         var param = {};
 
-						if(self.orderResponse){
-							param.orderNumber = self.orderResponse.orderNumber;
-						}else{
-							return;
-						}
-						if(self.orderResponse && self.paymentResponse){
-							param.paymentRef = self.paymentResponse.referenceNo;
-						}else{
-							param.paymentRef = "";
-						}
+                        if(self.orderResponse){
+                            param.orderNumber = self.orderResponse.orderNumber;
+                        }else{
+                            return;
+                        }
+                        if(self.orderResponse && self.paymentResponse){
+                            param.paymentRef = self.paymentResponse.referenceNo;
+                        }else{
+                            param.paymentRef = "";
+                        }
                         param.status = status.toString();
 
                         axios.post(apiEndpointURL_elevate + '/order/updatePayment' + '?nonce='+yesObj.nonce, param)
                             .then((response) => {
                                 var data = response.data;
                                 if(data.status == 1){
-									console.log(data);
+                                   
                                     if (redirect) {
                                         self.redirectThankYou(status);
                                     }
                                 }else{
                                     toggleOverlay(false);
                                     $('#error').html(this.renderText('system_error'));
-                                    console.log(data);
+                                    
                                 }
                             })
                             .catch((error) => {
                                 toggleOverlay(false);
-								$('#error').html(error);
+                                $('#error').html(error);
                                 console.log(error);
                             });
 
