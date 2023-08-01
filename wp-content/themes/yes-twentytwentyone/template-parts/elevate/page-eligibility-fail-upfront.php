@@ -246,10 +246,6 @@
                                                 </table>
                                             </div>
                                             <div class="col-md-12">
-                                                <!-- <div class="mt-2 text-end">
-                                                    <a href="#" class="btn-cancel text-uppercase mr-2">Cancel</a>
-                                                    <a id="btnChoosePlan" class="pink-btn text-uppercase">Proceed</a>
-                                                </div> -->
 
                                                 <div class="mt-2 text-end">
                                                     <a href="/infinite-phone-bundles/"

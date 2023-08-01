@@ -1,6 +1,5 @@
 
 </main>
-
 <?php get_footer('ywos'); ?>
 
 <script type="text/javascript">
@@ -38,10 +37,12 @@
                 }
             case 'sim type': 
 				if(ywosLSData.meta.orderSummary.plan.eSim !=true){
-					 backPageStrID = 'pageTitleVerification';
+                 
+					 backPageStrID = 'pageTitleSelectSimType';
 					 break;
 				}else{
 				  backPageStrID = 'pageTitleSelectSimType';
+                  
 					break; 
 				}
             case 'delivery':

@@ -55,9 +55,9 @@
                 <li ui-sref="firstStep" class="completed">
                     <span>1. {{ renderText('strVerification') }}</span>
                 </li>
-                <!-- <li ui-sref="secondStep" class="completed">
+                <li ui-sref="secondStep" class="completed">
                     <span>2. {{ renderText('strSelectSimType') }}</span>
-                </li> -->
+                </li>
                 <li ui-sref="secondStep" class="completed">
                     <span>3. {{ renderText('strDelivery') }}</span>
                 </li>

@@ -127,46 +127,55 @@
         cursor: not-allowed !important;
         opacity: 0.5 !important;
     }
-    .panel-body .content{
-        display:none;
+
+    .panel-body .content {
+        display: none;
     }
+
     @media only screen and (max-width: 600px) {
-     .grid{
-        grid-template-rows:repeat(2, auto);
-        grid-template-columns: none;
-        margin: 0px auto;
-      }
-      .card{
-        min-height: auto;
-        
-      }
-      .plan-details{
-        min-height: auto;
-        flex-direction: row;
-        padding: 2px;
-        gap: 10px;
-        align-items:center;
-      }
-      .panel-img{
-        height: auto;
-      }
-      .card-panal-img{
-        position: unset;
-        height: auto;
-        width: 170px;
-      }
-      .panel-body{
-        line-height: 1.5;
-        text-align: left;
-        width: 100%;
-      }
-    .panel-body .content{
-        display:block;
-    }
-    #cart-body h1 {
-    font-size: 18px !important;
-    margin-bottom: 20px;
-    }
+        .grid {
+            grid-template-rows: repeat(2, auto);
+            grid-template-columns: none;
+            margin: 0px auto;
+        }
+
+        .card {
+            min-height: auto;
+
+        }
+
+        .plan-details {
+            min-height: auto;
+            flex-direction: row;
+            padding: 2px;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .panel-img {
+            height: auto;
+        }
+
+        .card-panal-img {
+            position: unset;
+            height: auto;
+            width: 170px;
+        }
+
+        .panel-body {
+            line-height: 1.5;
+            text-align: left;
+            width: 100%;
+        }
+
+        .panel-body .content {
+            display: block;
+        }
+
+        #cart-body h1 {
+            font-size: 18px !important;
+            margin-bottom: 20px;
+        }
     }
 </style>
 <!-- Vue Wrapper STARTS -->
@@ -229,7 +238,7 @@
                                             <div class="panel-body">
                                                 eSIM
                                                 <div class="content">
-                                                 <p>Embedded SIM built into your device</p>
+                                                    <p>Embedded SIM built into your device</p>
                                                 </div>
                                             </div>
                                         </span>
@@ -246,88 +255,89 @@
                                             <div class="panel-body">
                                                 Physical SIM
                                                 <div class="content">
-                                                 <p>A removable card that connect you to network</p>
+                                                    <p>A removable card that connect you to network</p>
                                                 </div>
                                             </div>
-                                            
+
                                         </span>
-                                    </label>                                    
+                                    </label>
                                     <div class="eSIM " v-if="(simType == 'eSIM')">
                                         <img src="/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png"
                                             alt="...">
-                                           <div>
-                                           <p>eSIM Compatibility </p>
-                                           <p><span>Please ensure that your device is eSIM supported</span></p>
-                                           <span class="esim-link">Learn more about eSIM <a href="/e-sim">here</a></span>
-                                           </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group mb-4" v-if="(isUpFrontPlanAvailable == 'true')">
-                                <div class=" grid main-card">
-                                    <label class="card" v-bind:class="{ 'disable' : PlanSupportEsim != true}">
-                                        <input name="plan" class="radio" type="radio" id="eSim" name="simType"
-                                            :disabled="PlanSupportEsim != true" value="eSIM" v-model="simType"
-                                            @click="showErrorEsimMsg()">
-                                        <span class="plan-details">
-                                            <div class="panel-img">
-                                                <img src="/wp-content/uploads/2023/06/sim.png" alt="..."
-                                                    class="card-panal-img">
-                                            </div>
-                                            <div class="panel-body">
-                                                eSIM 
-                                                <div class="content">
-                                                 <p>Embedded SIM built into your device</p>
-                                                </div>
-                                            </div>
-                                        </span>
-
-                                    </label>
-                                    <label class="card physical-button">
-                                        <input name="plan" class="radio" type="radio" id="physicalSIM" name="simType"
-                                            value="physicalSIM" v-model="simType" checked @click="hideErrorEsimMsg()">
-                                        <span class="plan-details">
-                                            <div class="panel-img">
-                                                <img src="/wp-content/uploads/2023/06/Physical-sim.png" alt="..."
-                                                    class="card-panal-img">
-                                            </div>
-                                            <div class="panel-body">
-                                                Physical SIM
-                                                <div class="content">
-                                                 <p>A removable card that connect you to network</p>
-                                                </div>
-                                            </div>
-                                            
-                                        </span>
-                                    </label>
-                                    <div class="eSIM d-none" id="eSIM_msg">
-                                        <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png"
-                                            alt="...">
                                         <div>
-                                            <p>Device eSIM Compatibility</p>
-                                            <p><span>The device you have selected is not eSIM compatible.</span></p>
-                                            <span class="esim-link">However, you can use the eSIM purchased with this
-                                                plan on an alternative compatible device.</span>
+                                            <p>eSIM Compatibility </p>
+                                            <p><span>Please ensure that your device is eSIM supported</span></p>
+                                            <span class="esim-link">Learn more about eSIM <a
+                                                    href="/e-sim">here</a></span>
                                         </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4" v-if="(isUpFrontPlanAvailable == 'true')">
+                            <div class=" grid main-card">
+                                <label class="card" v-bind:class="{ 'disable' : PlanSupportEsim != true}">
+                                    <input name="plan" class="radio" type="radio" id="eSim" name="simType"
+                                        :disabled="PlanSupportEsim != true" value="eSIM" v-model="simType"
+                                        @click="showErrorEsimMsg()">
+                                    <span class="plan-details">
+                                        <div class="panel-img">
+                                            <img src="/wp-content/uploads/2023/06/sim.png" alt="..."
+                                                class="card-panal-img">
+                                        </div>
+                                        <div class="panel-body">
+                                            eSIM
+                                            <div class="content">
+                                                <p>Embedded SIM built into your device</p>
+                                            </div>
+                                        </div>
+                                    </span>
+
+                                </label>
+                                <label class="card physical-button">
+                                    <input name="plan" class="radio" type="radio" id="physicalSIM" name="simType"
+                                        value="physicalSIM" v-model="simType" checked @click="hideErrorEsimMsg()">
+                                    <span class="plan-details">
+                                        <div class="panel-img">
+                                            <img src="/wp-content/uploads/2023/06/Physical-sim.png" alt="..."
+                                                class="card-panal-img">
+                                        </div>
+                                        <div class="panel-body">
+                                            Physical SIM
+                                            <div class="content">
+                                                <p>A removable card that connect you to network</p>
+                                            </div>
+                                        </div>
+
+                                    </span>
+                                </label>
+                                <div class="eSIM d-none" id="eSIM_msg">
+                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png"
+                                        alt="...">
+                                    <div>
+                                        <p>Device eSIM Compatibility</p>
+                                        <p><span>The device you have selected is not eSIM compatible.</span></p>
+                                        <span class="esim-link">However, you can use the eSIM purchased with this
+                                            plan on an alternative compatible device.</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="input-group align-items-center">
-                                <!-- <input type="radio" class="" id="simType" name="simType"
+                        </div>
+                        <div class="input-group align-items-center">
+                            <!-- <input type="radio" class="" id="simType" name="simType"
                                         v-model="deliveryInfo.simType" @input="" placeholder="" required />
                                     </div> -->
-                                <!-- <a href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="right" class="ms-2" title="Tooltip text here"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/info-icon.png" /></a> -->
-                                <div class="invalid-feedback mt-1" id="em-name"></div>
-                            </div>
+                            <!-- <a href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="right" class="ms-2" title="Tooltip text here"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/info-icon.png" /></a> -->
+                            <div class="invalid-feedback mt-1" id="em-name"></div>
                         </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <input type="submit" class="pink-btn" :value="renderText('strBtnSubmit')"
-                                    :disabled="!(simType != '')" />
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <input type="submit" class="pink-btn" :value="renderText('strBtnSubmit')"
+                                :disabled="!(simType != '')" />
                         </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -444,15 +454,15 @@
 
                             // var data = JSON.parse(localStorage.getItem('yesElevate'));
 
-                            if(ywos.lsData.meta.completedStep==1){
-                                    localStorage.removeItem('yesElevate');
-                                
+                            if (ywos.lsData.meta.completedStep == 1) {
+                                localStorage.removeItem('yesElevate');
+
                             }
                             var data = JSON.parse(localStorage.getItem('yesElevate'));
                             if (data) {
-                                self.isUpFrontPlanAvailable=data.meta.isUpFrontPlanAvailable;
+                                self.isUpFrontPlanAvailable = data.meta.isUpFrontPlanAvailable;
                                 // console.log(data);
-                               // console.log(self.isUpFrontPlanAvailable);
+                                // console.log(self.isUpFrontPlanAvailable);
                                 if (data && self.isUpFrontPlanAvailable == 'true') {
                                     // alert(self.isUpFrontPlanAvailable);
                                     self.upFrontPlanID = data.meta.productId;
@@ -469,22 +479,22 @@
                                         .catch((error) => {
                                             // console.log('error', error);
                                         })
-                                }else{
+                                } else {
                                     self.planID = ywos.lsData.meta.planID;
-                                // console.log(self.planID);
-                                axios.get(apiEndpointURL + '/get-plan-by-id/' + self.planID + '/?nonce=' + yesObj.nonce)
-                                    .then((response) => {
-                                        toggleOverlay(true);
+                                    // console.log(self.planID);
+                                    axios.get(apiEndpointURL + '/get-plan-by-id/' + self.planID + '/?nonce=' + yesObj.nonce)
+                                        .then((response) => {
+                                            toggleOverlay(true);
 
-                                        var data = response.data;
-                                        self.isUpFrontPlanAvailable='false',
-                                        self.disabled = data.eSim
-                                        // console.log(self.disabled,'<<<<<');
-                                        toggleOverlay(false);
-                                    })
-                                    .catch((error) => {
-                                        // console.log('error', error);
-                                    })
+                                            var data = response.data;
+                                            self.isUpFrontPlanAvailable = 'false',
+                                                self.disabled = data.eSim
+                                            // console.log(self.disabled,'<<<<<');
+                                            toggleOverlay(false);
+                                        })
+                                        .catch((error) => {
+                                            // console.log('error', error);
+                                        })
                                 }
                             }
                             else {
@@ -494,8 +504,8 @@
                                     .then((response) => {
                                         toggleOverlay(true);
                                         var data = response.data;
-                                        self.isUpFrontPlanAvailable='false',
-                                        self.disabled = data.eSim
+                                        self.isUpFrontPlanAvailable = 'false',
+                                            self.disabled = data.eSim
                                         // console.log(self.disabled,'>>>>>');
                                         toggleOverlay(false);
                                     })
@@ -543,5 +553,17 @@
                 }
             });
         });
+    </script>
+    <script>
+        $(document).ready(function () {
+            if (window.location.pathname == '/ywos/sim-type/') {
+                let backButton = document.querySelector('.back-btn');
+                if (ywosLSData.meta.customerDetails.upFrontPayment == 'true') {
+                    backButton.href = '/elevate/eligibility-fail-upfront';
+                } else {
+                    backButton.href = '/ywos/verification';
+                }
+            }
+        })
     </script>
     <?php include('footer-ywos.php'); ?>

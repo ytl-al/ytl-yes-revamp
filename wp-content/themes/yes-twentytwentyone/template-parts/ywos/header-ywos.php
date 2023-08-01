@@ -74,4 +74,3 @@
         </div>
 </header>
 <main class="clearfix site-main" id="primary" role="main">
-<script type="text/javascript" src="https://yesmy-dev.azurewebsites.net/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/js/ywos.js"></script>

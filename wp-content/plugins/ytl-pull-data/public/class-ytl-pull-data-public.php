@@ -673,6 +673,7 @@ class Ytl_Pull_Data_Public
 			{
 				// $api_domain="https://ydbp-identity-dev.azurewebsites.net";
 				$guestLoginData=get_option('yes_guest_login_token_data',true);
+
 				if(isset($guestLoginData)){
 					$api_domain=$guestLoginData['set_token_data_guest_login']['token_url'];
 					$client_id=$guestLoginData['set_token_data_guest_login']['client_id'];
@@ -802,6 +803,7 @@ class Ytl_Pull_Data_Public
 		 
 		// $api_domain ="https://ydbp-shoutout-kraken-dev.azurewebsites.net";
 		$guestLoginData=get_option('yes_guest_login_token_data', true);
+
 		if(isset($guestLoginData) && !empty($guestLoginData)){
 			$api_domain=$guestLoginData['set_token_data_guest_login']['otp_url'];
 
@@ -819,8 +821,9 @@ class Ytl_Pull_Data_Public
 				'timeout'     	=> $this->api_timeout
 			];
 			$api_url 	=  $api_domain.$this->path_generate_otp_for_login_new.'?MobileNumber='.$MobileNumber;
-			$request 	= wp_remote_post($api_url, $args);	
+			$request 	= wp_remote_post($api_url, $args);
 			$data = $request['body'];
+
 			if($data == 'ERR1'){
 				$data=FALSE;
 			}else{
@@ -1178,6 +1181,7 @@ class Ytl_Pull_Data_Public
 			exit("Request not valid");
 		 } 
 		$phone_number 	= (isset($order_info['phone_number']) && !empty(trim($order_info['phone_number']))) 	? $order_info['phone_number'] 	: null;
+
 		$customer_name 	= (isset($order_info['customer_name']) && !empty(trim($order_info['customer_name']))) 	? $order_info['customer_name'] 	: null;
 		$dob 			= (isset($order_info['dob']) && !empty(trim($order_info['dob']))) 						? $order_info['dob'] 			: null;
 		$email 			= (isset($order_info['email']) && !empty(trim($order_info['email']))) 					? $order_info['email'] 			: null;
@@ -1960,6 +1964,8 @@ class Ytl_Pull_Data_Public
 	
 		// $api_domain="https://ydbp-shoutout-kraken-dev.azurewebsites.net";
 		$guestLoginData=get_option('yes_guest_login_token_data',true);
+
+
 		if(isset( $guestLoginData) && !empty($guestLoginData)){
 			$api_domain=$guestLoginData['set_token_data_guest_login']['otp_url'];
 		}

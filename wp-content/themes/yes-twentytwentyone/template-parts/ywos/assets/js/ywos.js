@@ -17,24 +17,17 @@ const apiEndpointURL = window.location.origin + '/wp-json/ywos/v1';
 
 
 $(document).ready(function() {
+console.log(ywosLSData.meta.customerDetails.upFrontPayment);
     	if(window.location.pathname=='/ywos/delivery/'){
         let backButton = document.querySelector('.back-btn');
-        if (ywosLSData.meta.orderSummary.plan.eSim != true) {
+        if ( ywosLSData.meta.customerDetails.upFrontPayment=="true" && ywosLSData.meta.orderSummary.plan.eSim != true) {
+            backButton.href  = '/ywos/sim-type';
+        } else if(ywosLSData.meta.orderSummary.plan.eSim != true) {
             backButton.href  = '/ywos/verification';
-        } else {
-            backButton.href  = '/ywos/cart';
-        }
-    }
-    //backbuttom upfront payment page
-    if(window.location.pathname=='/ywos/sim-type/'){
-        let backButton = document.querySelector('.back-btn');
-        if (ywosLSData.meta.customerDetails.upFrontPayment == 'true') {
-            backButton.href  = '/elevate/eligibility-fail-upfront';
-        } else {
+        }else{
             backButton.href  = '/ywos/sim-type';
         }
     }
-   
 
     $('.btn-buyplan').on('click', function() {
         var planID = $(this).attr('data-planid');
@@ -207,15 +200,6 @@ const ywos = {
         var yesElevate = JSON.parse(localStorage.getItem('yesElevate'));
         storageData.meta.loginType = 'guest';
         const ElevateDate = yesElevate.eligibility.dob;
-
-        // var day = ElevateDate.getDate();
-        // day = day < 10 ? "0" + day : day;
-        // var month = ElevateDate.getMonth() + 1;
-        // month = month < 10 ? "0" + month : month;
-        // var year = ElevateDate.getFullYear();
-        // const newDateFormate = day + "/" + month + "/" + year;
-        // console.log(newDateFormate);
-
 
         storageData.meta.customerDetails = {
             'securityType' : 'nric',

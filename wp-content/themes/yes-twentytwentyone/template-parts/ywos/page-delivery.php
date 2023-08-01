@@ -12,7 +12,7 @@
                     <span>1. {{ renderText('strVerification') }}</span>
                 </li>
                 <li ui-sref="secondStep" class="completed">
-                    <span>2. {{ renderText('strDelivery') }}</span>
+                    <span>2. {{ renderText('strSelectSimType') }}</span>
                 </li>
 				 <li ui-sref="thirdStep"class="completed">
                     <span v-if="(simType == 'eSIM')">3. {{ renderText('strDeliveryBilling') }}</span>
