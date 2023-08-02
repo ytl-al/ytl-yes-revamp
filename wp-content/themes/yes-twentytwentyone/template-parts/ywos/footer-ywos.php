@@ -37,12 +37,16 @@
                     break;   
                 }
             case 'sim type': 
-
-                backPageStrID = 'pageTitleSelectSimType';
-                    break; 
-            case 'delivery': 
-                backPageStrID = 'pageTitleDeliveryDetails';
-                break;
+				if(ywosLSData.meta.orderSummary.plan.eSim !=true){
+					 backPageStrID = 'pageTitleVerification';
+					 break;
+				}else{
+				  backPageStrID = 'pageTitleSelectSimType';
+					break; 
+				}
+            case 'delivery':
+					backPageStrID = 'pageTitleDeliveryDetails';
+					break; 						
             case 'review': 
                 backPageStrID = 'pageTitleReview';
                 break;

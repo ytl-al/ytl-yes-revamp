@@ -163,11 +163,7 @@
                     <span>{{ renderText('elevate_step_1') }}</span>
                 </li>
                 <li ui-sref="secondStep" class="completed">
-<<<<<<< HEAD
                     <span>2. UpFrontPayment</span>
-=======
-                    <span>upFrontPayment</span>
->>>>>>> 54279ea2c9d968fff76f41c70a7534205ea22b15
                 </li>
                 <li ui-sref="thirdStep">
                     <span>{{ renderText('elevate_step_3') }}</span>
@@ -175,12 +171,9 @@
                 <li ui-sref="fourthStep">
                     <span>{{ renderText('elevate_step_4') }}</span>
                 </li>
-<<<<<<< HEAD
                 <li ui-sref="fourthStep">
                     <span>{{ renderText('elevate_step_5') }}</span>
                 </li>
-=======
->>>>>>> 54279ea2c9d968fff76f41c70a7534205ea22b15
             </ul>
             <ul class="wizard"v-else>
                 <li ui-sref="firstStep" class="completed">
@@ -223,7 +216,7 @@
                                             <div class="col-md-6">
                                                 <div class="device-detail">
                                                     <h2>{{deviceName}}</h2>
-                                                    <h2>{{PlanName}}</h2>
+                                                    <h2>{{PlanNameUpdated}}</h2>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -344,6 +337,7 @@
                 deviceName: '',
                 PlanImageUrl: '',
                 PlanName: '',
+				PlanNameUpdated:'',
                 sstAmount: '',
                 totalAmountWithoutSST: '',
                 totalSST: '',
@@ -383,6 +377,8 @@
                     if (elevate.lsData.product.selected.productCode) {
                         self.deviceName = elevate.lsData.product.selected.name;
                         self.PlanName = elevate.lsData.product.selected.contractName;
+						self.PlanNameUpdated=self.PlanName.replace(/_Y$/, "_U");
+						// console.log(self.PlanNameUpdated);
                         self.PlanImageUrl = elevate.lsData.product.selected.imageURL;
                         // self.planPerMonth = elevate.lsData.product.selected.planPerMonth;
                         self.sstAmount = elevate.lsData.product.selected.sstAmount;

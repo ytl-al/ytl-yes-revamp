@@ -214,7 +214,7 @@ const elevate = {
         return false;
     },
     redirectToPage: function (pageSlug) {
-        window.location.href = window.location.origin + '/elevate/' + pageSlug;
+        window.location.href = window.location.origin + '/elevate/' + pageSlug + '/?v=' + (Math.random() * 100);
     },
     validateSession: function (curStep = 0) {
         var isValid = true;

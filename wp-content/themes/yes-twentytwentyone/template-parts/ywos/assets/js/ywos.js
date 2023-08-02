@@ -17,6 +17,16 @@ const apiEndpointURL = window.location.origin + '/wp-json/ywos/v1';
 
 
 $(document).ready(function() {
+	
+	if(window.location.pathname=='/ywos/delivery/'){
+			alert(ywosLSData.meta.orderSummary.plan.eSim);
+        let backButton = document.querySelector('.back-btn');
+        if (ywosLSData.meta.orderSummary.plan.eSim != true) {
+            backButton.href  = '/ywos/verification';
+        } else {
+            backButton.href  = '/ywos/cart';
+        }
+    }
     //backbuttom upfront payment page
     if(window.location.pathname=='/ywos/sim-type/'){
         let backButton = document.querySelector('.back-btn');

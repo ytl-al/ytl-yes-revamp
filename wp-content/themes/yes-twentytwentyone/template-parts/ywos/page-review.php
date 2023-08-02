@@ -31,7 +31,22 @@
     </section>
     <section id="grey-innerbanner" v-else>
         <div class="container">
-            <ul class="wizard">
+			<ul class="wizard" v-if="(eSimSupportPlan != true)">
+                <li ui-sref="firstStep" class="completed">
+                    <span>1. {{ renderText('strVerification') }}</span>
+                </li>
+               
+                <li ui-sref="secondStep" class="completed">
+                    <span>2. {{ renderText('strDelivery') }}</span>
+                </li>
+                <li ui-sref="threeStep" class="completed">
+                    <span>3. {{ renderText('strReview') }}</span>
+                </li>
+                <li ui-sref="fourthStep"> 
+                    <span>4. {{ renderText('strPayment') }}</span>
+                </li>
+            </ul>
+            <ul class="wizard" v-else>
                 <li ui-sref="firstStep" class="completed">
                     <span>1. {{ renderText('strVerification') }}</span>
                 </li>
@@ -272,6 +287,7 @@
                 currentStep: 4,
                 simType :'',
                 upFrontPayment:'fasle',
+				eSimSupportPlan:'',
                 pageValid: false,
                 orderSummary: {
                     plan: {},
@@ -363,6 +379,7 @@
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
                         self.upFrontPayment = ywos.lsData.meta.customerDetails.upFrontPayment;
                         self.simType=ywos.lsData.meta.esim;
+						self.eSimSupportPlan=ywos.lsData.meta.orderSummary.plan.eSim;
                     
                         toggleOverlay(false);
                     } else {

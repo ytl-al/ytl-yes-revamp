@@ -377,7 +377,7 @@ class ElevateApi
         $api_url = $serverSetting['mobile_url'] .'mobileyos/mobile/ws/v1/json/verifyEligibility';
         $return['url'] = $api_url;
         $request = wp_remote_post($api_url, $args);
-		 //print_r($args);print_r($request);die($api_url);
+
 
         if (is_wp_error($request)) {
             $return['status'] = 0;

@@ -2080,6 +2080,7 @@ if ($lang == "en-US"){
             </ul>
         </li>
     </ul>
+
     <ul class="navbar-nav">
         <li class="nav-item dropdown mega-dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Prepaid', 'yes.my'); ?></a>
@@ -2098,11 +2099,28 @@ if ($lang == "en-US"){
                                 $prepaid_Nav = wp_get_nav_menu_items($prepaid_menu);
 
                                 foreach ($prepaid_Nav as $prepaid_navItem) {
-?>
-                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $prepaid_navItem->url; ?>"><?php echo $prepaid_navItem->post_title; ?></a></li>
-<?php
+                                    ?>
+                                    <?php
+                                    $lang = get_bloginfo("language");
+                                    //echo "value check". get_bloginfo('url');
+                                    //echo get_site_url();
+                                    $parse = parse_url($prepaid_navItem->url);
+                                    //print_r($parse);
+                                    $url = rtrim(get_bloginfo('url'),"/");
+                                    if ($lang == "en-US"){
+                                  ?>
+                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo  $url.$prepaid_navItem->url; ?>">
+                                <?php echo $prepaid_navItem->post_title; ?></a></li>
+                               <?php
+                                }else{
+                                    ?>
+                                    <li class="dropdown-header">
+                                    <a class="custom_menu_nuv" href="<?php echo get_site_url().'/ms'.$parse['path']; ?>">
+                                    <?php echo $prepaid_navItem->post_title; ?></a></li>
+                                <?php
                                 }
-?>
+                                }
+                              ?>
                             </ul>
                         </li>
                     </div>
@@ -2138,12 +2156,14 @@ if ($lang == "en-US"){
             </ul>
         </li>
     </ul>
+
+    
     <ul class="navbar-nav">
 <?php
         $lang = get_bloginfo("language");
         if ($lang == "en-US") {
             $menu_link = '/yes-postpaid-infinite-5g/';
-        } elseif ($lang == "ms-MY") {
+        } else {
             $menu_link = '/ms/yes-postpaid-infinite-5g/';
         }
 ?>
@@ -2182,7 +2202,8 @@ if ($lang == "en-US"){
 
                                             foreach ($WirelessNav as $wirelessItem) {
 ?>
-                                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $wirelessItem->url; ?>"><?php echo $wirelessItem->post_title; ?></a></li>
+                                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $wirelessItem->url; ?>">
+                                                <?php echo $wirelessItem->post_title; ?></a></li>
 <?php
                                             }
 ?>
