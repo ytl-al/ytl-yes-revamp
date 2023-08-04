@@ -963,7 +963,7 @@ class Ytl_Pull_Data_Public
 			$test = preg_match($exp_check_valid_mobile_number, $input_id);
 			if ($test) {
 				// $params['msisdn'] = $input_id;
-				$params['yesId'] = ($input_id != null && strpos(strtolower($input_id), '@yes.my') !== false) ? $input_id : $input_id . '@YES.MY';
+				$params['yesId'] = $input_id;
 			} else {
 				$params['yesId'] = ($input_id != null && strpos(strtolower($input_id), '@yes.my') !== false) ? $input_id : $input_id . '@YES.MY';
 			}
