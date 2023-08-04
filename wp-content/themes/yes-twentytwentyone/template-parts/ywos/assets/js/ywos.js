@@ -17,8 +17,7 @@ const apiEndpointURL = window.location.origin + '/wp-json/ywos/v1';
 
 
 $(document).ready(function() {
-console.log(ywosLSData.meta.customerDetails.upFrontPayment);
-    	if(window.location.pathname=='/ywos/delivery/'){
+    if(window.location.pathname=='/ywos/delivery/'){
         let backButton = document.querySelector('.back-btn');
         if ( ywosLSData.meta.customerDetails.upFrontPayment=="true" && ywosLSData.meta.orderSummary.plan.eSim != true) {
             backButton.href  = '/ywos/sim-type';
@@ -69,6 +68,8 @@ const ywos = {
         dc = url.searchParams.get('dc');
         duid = url.searchParams.get('duid');
         rc = url.searchParams.get('rc');
+        dt = (url.searchParams.get('dt') ?? null);
+        trxType = (url.searchParams.get('trx_type')) ?? null;
 
         var ywosLocalStorageData = ywosLSData;
         var storageData = {};
@@ -79,6 +80,7 @@ const ywos = {
         var url_string = window.location.href;
         var url = new URL(url_string);
         var refCode = '';
+
         if (url.searchParams.get('rc') != null) {
             refCode = url.searchParams.get('rc');
         } else if (url.searchParams.get('referralCode') != null) {
@@ -97,6 +99,7 @@ const ywos = {
             deviceID = planID;
             planID = '';
         }
+
         storageData = {
             'expiry': ywosCartExpiry,
             'sessionKey': sessionKey,
@@ -106,16 +109,17 @@ const ywos = {
                 'deviceID': deviceID,
                 'dealer': {
                     'dealer_code': dc,
+                    'dealer_type': dt, 
                     'dealer_id': duid,
-                    'referral_code': rc
+                    'referral_code': rc,
                 }
             },
             'siteLang': siteLang,
             'isTargetedPromo': false,
             'tpMeta': {},
-            'type' : type
+            'type' : type,
+            'trxType': trxType
         };
-        
 
         if (refCode) {
             storageData.meta.refCode = refCode;
@@ -130,6 +134,11 @@ const ywos = {
             storageData.isTargetedPromo = true;
             storageData.tpMeta = tpMeta;
         }
+
+        if (trxType == 'roving') {
+            storageData.meta.completedStep = 2;
+        }
+
         ywosLocalStorageData = storageData;
 
         localStorage.setItem(ywosLSName, JSON.stringify(ywosLocalStorageData));
@@ -155,11 +164,17 @@ const ywos = {
                 pushAnalytics('impressions', pushData);
             },
             complete: function() {
-                self.redirectToCart();
+                var storageData = JSON.parse(localStorage.getItem(ywosLSName));
+                var trxType = storageData.trxType;
+                if (trxType == 'roving') {
+                    self.redirectToPage('roving-delivery');
+                } else {
+                    self.redirectToCart();
+                }
             }
         });
     },
-   mapSessionData: function(planData = '') {
+    mapSessionData: function(planData = '') {
 
         var planPriceBreakdown = [];
         var planDevicePriceBreakdown = [];
@@ -374,6 +389,42 @@ const ywos = {
         }
         this.redirectToPage('cart');
     },
+    checkStepRoving: function (currentStep) {
+        if (typeof this.lsData.meta.completedStep !== 'undefined') {
+            if (
+                // currentStep == 0 ||
+                // (this.lsData.meta.completedStep == 0 && currentStep == 0) ||
+                // (this.lsData.meta.completedStep == 0 && currentStep == 1) ||
+                (this.lsData.meta.completedStep == currentStep) ||
+                (this.lsData.meta.completedStep == currentStep - 1) ||
+                (this.lsData.meta.completedStep > currentStep)
+            ) {
+                return true;
+            } else if (this.lsData.meta.completedStep < currentStep) {
+                switch (this.lsData.meta.completedStep) {
+                    case 0:
+                        toPage = 'cart';
+                        break;
+                    case 1:
+                        toPage = 'verification';
+                        break;
+                    case 2:
+                        toPage = 'delivery';
+                        break;
+                    case 3:
+                        toPage = 'review';
+                        break;
+                    default:
+                        toPage = 'cart';
+                }
+                (toPage != null) ? this.redirectToPage(toPage): '';
+                return false;
+            }
+        } else if (currentStep == 0) {
+            return true;
+        }
+        history.back();
+    },
     checkPurchaseCompleted: function(currentStep = 0) {
         if (
             typeof this.lsData.meta.purchaseCompleted != 'undefined' &&
@@ -387,7 +438,7 @@ const ywos = {
     redirectToPage: function(pageSlug) {
         window.location.href = window.location.origin + '/ywos/' + pageSlug;
     },
-    validateSession: function(curStep = 0) {
+    validateSession: function(curStep = 0, isSkipCart = false) {
         var isValid = true;
         if (!this.checkExists()) {
             console.log('Local storage data not found!');
@@ -401,10 +452,43 @@ const ywos = {
         } else if (this.checkPurchaseCompleted(curStep)) {
             console.log('Purchase has been completed!');
             isValid = false;
-        } else if (!this.checkStep(curStep)) {
+        } else if (!isSkipCart && !this.checkStep(curStep)) {
             console.log('Previous step not yet completed!');
             // isValid = false;
             // return false;
+        } else if (isSkipCart) {
+            if (!this.checkStepRoving(curStep)) {
+
+            }
+        }
+
+        $('#main-vue').show();
+        if (!isValid) {
+            this.removeYWOSLSData();
+            return false;
+        } else {
+            // setTimeout(function() {
+            //     toggleOverlay(false);
+            // }, 500);
+            return true;
+        }
+    },
+    validateSessionRoving: function (curStep = 0) {
+        var isValid = true;
+        if (!this.checkExists()) {
+            console.log('Local storage data not found!');
+            isValid = false;
+        } else if (!this.checkExpiryValid()) {
+            console.log('Local storage data is expired!');
+            isValid = false;
+        } else if (!this.checkItems()) {
+            console.log('Plan ID is not found!');
+            isValid = false;
+        } else if (this.checkPurchaseCompleted(curStep)) {
+            console.log('Purchase has been completed!');
+            isValid = false;
+        } else if (!this.checkStepRoving(curStep)) {
+            console.log('Previous step not yet completed!');
         }
 
         $('#main-vue').show();

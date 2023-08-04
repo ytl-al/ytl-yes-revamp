@@ -865,20 +865,29 @@ class Ytl_Pull_Data_Public
 
 	public function generate_otp_for_login(WP_REST_Request $request)
 	{
-		$yes_id	= (trim($request['yes_number'])) ? $request['yes_number'] : null;
-		$yes_id = ($yes_id != null && strpos(strtolower($yes_id), '@yes.my') !== false) ? $yes_id : $yes_id . '@YES.MY';
+		$input_id	= (trim($request['yes_number'])) ? $request['yes_number'] : null;
+		// $yes_id = ($yes_id != null && strpos(strtolower($yes_id), '@yes.my') !== false) ? $yes_id : $yes_id . '@YES.MY';
 		$locale	= (trim($request['locale'])) ? $request['locale'] : 'EN';
-		return $this->ca_generate_otp_for_login($yes_id, $locale);
+		return $this->ca_generate_otp_for_login($input_id, $locale);
 	}
 
-	public function ca_generate_otp_for_login($yes_id = null, $locale = 'EN')
+	public function ca_generate_otp_for_login($input_id = null, $locale = 'EN')
 	{
 		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
 			exit("Request not valid");
 		 } 
 		$session_id 	= $this->ca_generate_auth_token(true);
-		if ($yes_id != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
-			$params 	= ['requestId' => $this->api_request_id, 'yesId' => $yes_id, 'locale' => $locale, 'sessionId' => $session_id];
+		if ($input_id != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
+			$params 	= ['requestId' => $this->api_request_id, 'locale' => $locale, 'sessionId' => $session_id];
+
+			$exp_check_valid_mobile_number = '/^[0-9]{10,11}$/';
+			$test = preg_match($exp_check_valid_mobile_number, $input_id);
+			if ($test) {
+				$params['msisdn'] = $input_id;
+			} else {
+				$params['yesId'] = ($input_id != null && strpos(strtolower($input_id), '@yes.my') !== false) ? $input_id : $input_id . '@YES.MY';
+			}
+
 			$args 		= [
 				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
 				'body'          => json_encode($params),
@@ -930,29 +939,38 @@ class Ytl_Pull_Data_Public
 
 	public function login_basic(WP_REST_Request $request)
 	{
-		$yes_id		= (trim($request['yes_number'])) ? $request['yes_number'] : null;
-		$yes_id 	= ($yes_id != null && strpos(strtolower($yes_id), '@yes.my') !== false) ? $yes_id : $yes_id . '@YES.MY';
+		$input_id		= (trim($request['yes_number'])) ? $request['yes_number'] : null;
+		// $yes_id 	= ($yes_id != null && strpos(strtolower($yes_id), '@yes.my') !== false) ? $yes_id : $yes_id . '@YES.MY';
 		$password	= $request['password'];
 		$auth_type 	= $request['auth_type'];
 		$locale 	= $request['locale'];
-		return $this->ca_validate_login($yes_id, $password, $auth_type, $locale);
+		return $this->ca_validate_login($input_id, $password, $auth_type, $locale);
 	}
 
-	public function ca_validate_login($yes_id = null, $password = null, $auth_type = 'password', $locale = 'EN')
+	public function ca_validate_login($input_id = null, $password = null, $auth_type = 'password', $locale = 'EN')
 	{
 		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
 			exit("Request not valid");
 		 } 
 		$session_id 	= $this->ca_generate_auth_token(true);
-		if ($yes_id && $password && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
+		if ($input_id && $password && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params 	= [
 				'requestId'	=> $this->api_request_id,
 				'locale' 	=> $locale,
 				'sessionId' => $session_id,
-				'yesId' 	=> $yes_id,
 				'password' 	=> $password,
 				'authenticationType' => $auth_type
 			];
+
+			$exp_check_valid_mobile_number = '/^[0-9]{10,11}$/';
+			$test = preg_match($exp_check_valid_mobile_number, $input_id);
+			if ($test) {
+				// $params['msisdn'] = $input_id;
+				$params['yesId'] = $input_id;
+			} else {
+				$params['yesId'] = ($input_id != null && strpos(strtolower($input_id), '@yes.my') !== false) ? $input_id : $input_id . '@YES.MY';
+			}
+
 			$args 		= [
 				'headers'       => array('Content-Type' => 'application/json; charset=utf-8'),
 				'body'          => json_encode($params),
