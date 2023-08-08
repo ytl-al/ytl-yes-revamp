@@ -232,6 +232,23 @@
 </div>
 <!-- Vue Wrapper ENDS -->
 
+
+<div class="modal fade" id="modal-alert" tabindex="-1" aria-labelledby="modal-alert" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title" id="modal-titleLabel"></h5>
+            </div>
+            <div class="modal-body text-center">
+                <p id="modal-bodyText"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript">
     $(document).ready(function() {
         toggleOverlay();
@@ -435,7 +452,7 @@
                         self.updateData();
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
                         self.upFrontPayment = ywos.lsData.meta.customerDetails.upFrontPayment;
-                        self.simType = ywos.lsData.meta.esim;
+                        self.simType = ywos.lsData.meta.orderSummary.plan.eSim.toString();
                         self.eSimSupportPlan = ywos.lsData.meta.orderSummary.plan.eSim;
 
                         toggleOverlay(false);
@@ -465,8 +482,9 @@
                     var orderSummary = self.orderSummary;
                     var dealer = self.dealer;
                     var params = {
+                  
                         'mobileNumber'  : '0' + deliveryInfo.mobileNumber,
-                        'fullName'      : deliveryInfo.name,
+                        'fullname'  : deliveryInfo.name,
                         'dob'           : deliveryInfo.dob,
                         'gender'        : deliveryInfo.gender,
                         'email'         : deliveryInfo.email,
@@ -490,12 +508,50 @@
                         'stateCode'     : deliveryInfo.stateCode,
                         'country'       : deliveryInfo.country,
                         'locale'        : self.apiLocale,
-                        'source'        : 'YOS'
+                        'source'        : 'YOS',
+	
+
                     };
                     console.log(params);
                     
                     // axios.post()
+                    axios.post(apiEndpointURL + '/create-ywos-roving-order' + '?nonce=' + yesObj.nonce, params)
+                        .then((response) => {
+                            var data = response.data;
+                            self.validateReview();
+                        })
+                        .catch((error) => {
+                            var response = error.response;
+                            console.log(response);
+                            if (response != '') {
+                                var data = response.data;
+                                var errorMsg = '';
+                                if (error.response.status == 500 || error.response.status == 503) {
+                                    errorMsg = self.renderText('errorCreateOrder');
+                                } else {
+                                    errorMsg = data.message
+                                }
+                                toggleOverlay(false);
+                                self.toggleModalAlert(self.renderText('modalErrorTitle'), errorMsg);
+                            }
+                            // console.log(error, response);
+                        })
+                        .finally(() => {
+                            // console.log('finally');
+                        });
+
+                    // console.log(JSON.stringify(params));
                 },
+                toggleModalAlert: function(modalHeader = '', modalText = '') {
+                    $('#modal-titleLabel').html(modalHeader);
+                    $('#modal-bodyText').html(modalText);
+                    $('#modal-alert').modal('show');
+                    $('#modal-alert').on('hidden.bs.modal', function() {
+                        $('#modal-titleLabel').html('');
+                        $('#modal-bodyText').html('');
+                    });
+                },
+              
                 validateReview: function() {
                     var self = this;
                     toggleOverlay();
@@ -503,9 +559,8 @@
                     ywos.lsData.meta.completedStep = self.currentStep;
                     ywos.lsData.meta.agree = self.agree;
                     ywos.updateYWOSLSData();
-                    
                     self.ajaxCreateStagingYOSOrder();
-                    // ywos.redirectToPage('thank-you');
+                    ywos.redirectToPage('thank-you');
                 },
                 watchSubmit: function() {
                     var self = this;

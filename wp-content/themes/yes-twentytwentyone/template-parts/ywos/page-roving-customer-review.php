@@ -225,7 +225,7 @@
                     </div>
                     <div class="row mt-5">
                         <div class="col-lg-5 col-12">
-                            <button class="pink-btn d-block w-100" type="submit" v-on:click="validateReview" :disabled="!allowSubmit">{{ renderText('strBtnPayNow') }}</button>
+                            <button class="pink-btn d-block w-100" type="submit" v-on:click="validateStagingOrder" :disabled="!allowSubmit">{{ renderText('strBtnPayNow') }}</button>
                             <!-- <a href="checkout-payment.html" class="pink-btn d-block w-100">Pay Now</a> -->
                         </div>
                     </div>
@@ -236,7 +236,21 @@
     <!-- Body ENDS -->
 </div>
 <!-- Vue Wrapper ENDS -->
-
+<div class="modal fade" id="modal-alert" tabindex="-1" aria-labelledby="modal-alert" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title" id="modal-titleLabel"></h5>
+            </div>
+            <div class="modal-body text-center">
+                <p id="modal-bodyText"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
     $(document).ready(function() {
         toggleOverlay();
@@ -246,6 +260,7 @@
             data: {
                 currentStep: 4,
                 simType: '',
+                StagingOrderNumber:'',
                 upFrontPayment: 'fasle',
                 eSimSupportPlan: '',
                 pageValid: false,
@@ -420,7 +435,12 @@
                         'en-US': 'Next',
                         'ms-MY': 'Next',
                         'zh-hans': 'Next'
-                    }
+                    },
+                    modalCreateStagingError: {
+                        'en-US': 'Invalid Order Id',
+                        'ms-MY': 'Invalid Order Id',
+                        'zh-hans': 'Invalid Order Id'
+                    },
                 }
             },
             mounted: function() {},
@@ -437,14 +457,58 @@
                         self.pageValid = true;
                         self.updateData();
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
-                        self.upFrontPayment = ywos.lsData.meta.customerDetails.upFrontPayment;
-                        self.simType = ywos.lsData.meta.esim;
-                        self.eSimSupportPlan = ywos.lsData.meta.orderSummary.plan.eSim;
-
                         toggleOverlay(false);
                     } else {
                         ywos.redirectToPage('cart');
                     }
+                },
+
+                validateStagingOrder: function(){
+                    var self = this;
+                    var  currentUrl = window.location.href;
+                    var parsedUrl = new URL(currentUrl);
+                    var  orderId = parsedUrl.searchParams.get('orderId');
+                    toggleOverlay();
+                    var params = {
+                        'encStagingOrderNumber': orderId !== null ? orderId : null,
+                        'locale': self.apiLocale,
+                        'source': 'YOS'
+                    };
+                 
+                    axios.post(apiEndpointURL + '/validate-ywos-roving-order' + '?nonce=' + yesObj.nonce, params)
+                        .then((response) => {
+                            var data = response.data;
+                            var data1 = JSON.parse(localStorage.getItem('yesYWOS'))
+                            data1.meta.stagingOrderNumber=data.stagingOrderNumber;
+                            var stagingOrderNumber=JSON.stringify(data1);
+                            localStorage.setItem('yesYWOS',stagingOrderNumber);
+                         if(data.responseCode==0  ){
+                            ywos.redirectToPage('payment');
+                         }else{
+                            self.toggleModalAlert(self.renderText('modalCreateStagingError'), errorMsg);
+                         }
+                        })
+                        .catch((error) => {
+                            var response = error.response;
+                            if ( response != '') {
+                                var data = response.data;
+                                var errorMsg = '';
+                                if (error.response.status == 500 || error.response.status == 503) {
+                                    errorMsg = self.renderText('modalCreateStagingError');
+                                } else {
+                                    errorMsg = data.message
+                                    
+                                }
+                                toggleOverlay(false);
+                                self.toggleModalAlert(self.renderText('modalCreateStagingError'), errorMsg);
+                            }
+                           
+                            // console.log(error, response);
+                        })
+                        .finally(() => {
+                            // console.log('finally');
+                        });
+                    
                 },
                 updateData: function() {
                     var self = this;
@@ -461,15 +525,25 @@
                         });
                     }
                 },
-                validateReview: function() {
-                    var self = this;
-                    toggleOverlay();
+                // validateReview: function() {
+                //     var self = this;
+                //     toggleOverlay();
 
-                    ywos.lsData.meta.completedStep = self.currentStep;
-                    ywos.lsData.meta.agree = self.agree;
-                    ywos.updateYWOSLSData();
+                //     ywos.lsData.meta.completedStep = self.currentStep;
+                //     ywos.lsData.meta.agree = self.agree;
+                //     ywos.updateYWOSLSData();
 
-                    ywos.redirectToPage('payment');
+                //     ywos.redirectToPage('payment');
+                // },
+
+                toggleModalAlert: function(modalHeader = '', modalText = '') {
+                    $('#modal-titleLabel').html(modalHeader);
+                    $('#modal-bodyText').html(modalText);
+                    $('#modal-alert').modal('show');
+                    $('#modal-alert').on('hidden.bs.modal', function() {
+                        $('#modal-titleLabel').html('');
+                        $('#modal-bodyText').html('');
+                    });
                 },
                 watchSubmit: function() {
                     var self = this;

@@ -2,7 +2,6 @@
 
 
 <style type="text/css">
-
     /* updated Thankyou page CSS */
     .tx_box_inner h1 {
         font-weight: 800 !important;
@@ -162,172 +161,211 @@
             margin-bottom: 10px;
         }
     }
+
+    .check {
+        width: 70px;
+    height: 70px;
+    background: #78b13f;
+    border-radius: 50px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+    .check:after {
+        content: '';
+    display: inline-block;
+    transform: rotate(45deg);
+    height: 35PX;
+    width: 18PX;
+    border-bottom: 7px solid #fff;
+    border-right: 7px solid #fff;
+    position: relative;
+    margin: 0 0 10px;
+    }
 </style>
 
 
-<div id="main-vue" class="container tx_box p-5 col-orderResponse">
-    <div class="row align-items-center ">
-        <div class="col-md-6 tx_box_inner" v-if="paymentStatus == 2">
-            <h1 class="mb-4">{{ renderText('strThankYou') }}</h1>
-            <p class="tx">{{ renderText('strOrderNumber') }}<br>
-            <a href="javascript:void(0)" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br /><br/>
-            <div class="text-12 mt-2">Placed on <?php 
-            date_default_timezone_set('Asia/Kuala_Lumpur');
-            echo date("l, jS F Y H:i:s");
-            ?>
-            
-        </div>
-            <p v-if="(simType=='false' || simType=='')">{{ renderText('strEstimatedDelivery') }} {{ purchaseInfo.deliveryFromDate }}  - {{purchaseInfo.deliveryToDate}}</p><br /> <br />
-            <p> {{ renderText('strOrderSummary') }}</p>
-        </div>
-        <div class="col-md-6 tx_box_inner" v-else>
-            <h1 class="mb-4">{{ renderText('strThankYou') }}</h1>
-            <p class="tx">{{ renderText('strOrderNumber') }}<br>
-            <a href="javascript:void(0)" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a> <br /><br/>
-            <div class="text-12 mt-2">Placed on <?php   
-            date_default_timezone_set('Asia/Kuala_Lumpur');
-            echo date("l, jS F Y H:i:s");?></div>
-            <p style="margin:3px 0" v-if="(simType=='false' || simType=='')">{{ renderText('strEstimatedDelivery') }} {{ purchaseInfo.deliveryFromDate }}  - {{purchaseInfo.deliveryToDate}}</p>
-            <p style="margin:3px 0"> {{ renderText('strOrderSummary') }}</p>
-        </div>
-        <div class="col-md-6">
-            <div class="tx-img">
-                <img src="/wp-content/uploads/2023/06/banner-side.png" class="img-fluid" alt="...">
-            </div>
-        </div>
+<div id="main-vue"
+    class="container tx_box p-5 col-orderResponse h-100 d-flex align-items-center justify-content-center">
+    <div v-if="(ywos.lsData.trxType =='roving')" class="text-center">
+        <div class="check"></div>
+        <h1 class="mb-2">Thank You For Order</h1>
+        <p class="tx">we have send the mail for payment. Please check your email.<br></p>
     </div>
-    <div class="row" v-if="(simType=='true')">
-        <div class="step_sec">
-            <h1>{{ renderText('strEsimActivate') }}</h1>
-            <div class="step_sec_inner">
-                <div class="content">
-                    <span>1</span>
-                    <p>{{ renderText('strEsimActivateStepOne') }}</p>
-                </div>
-                <div class="content">
-                    <span>2</span>
-                    <p>{{ renderText('strEsimActivateStepTwo') }}</p>
-                </div>
-                <div class="content">
-                    <span>3</span>
-                    <p>{{ renderText('strEsimActivateStepThree') }}</p>
-                </div>
-                <div class="content">
-                    <span>4</span>
-                    <p>{{ renderText('strEsimActivateStepFour') }}</p>
-                </div>
-                <div class="content">
-                    <span>5</span>
-                    <p>{{ renderText('strEsimActivateStepFive') }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row" v-else>
-        <div class="step_sec">
-            <h1>{{ renderText('strPhysicalSimActivate') }}</h1>
-            <div class="step_sec_inner">
-                <div class="content">
-                    <span>1</span>
-                    <p>{{ renderText('strPhysicalSimActivateStepOne') }}</p>
-                </div>
-                <div class="content">
-                    <span>2</span>
-                    <p>{{ renderText('strPhysicalSimActivateStepTwo') }}</p>
-                </div>
-                <div class="content">
-                    <span>3</span>
-                    <p>{{ renderText('strPhysicalSimActivateStepThree') }}</p>
-                </div>
-                <div class="content">
-                    <span>4</span>
-                    <p>{{ renderText('strPhysicalSimActivateStepFour') }}</p>
-                </div>
-                <div class="content">
-                    <span>5</span>
-                    <p>{{ renderText('strPhysicalSimActivateStepFive') }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="row price">
-        <div class="rs">
-            <h1>
-                You may also like
-            </h1>
-            <a href="/#popular-deals" class="viewall-btn">continue shopping<svg xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
-                    class="iconify iconify--akar-icons" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
-                    viewBox="0 0 24 24" data-icon="akar-icons:arrow-right">
-                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" d="M4 12h16m-7-7l7 7l-7 7"></path>
-                </svg></a>
-        </div>
+    <div v-else>
+        <div class="row align-items-center">
+            <div class="col-md-6 tx_box_inner" v-if="paymentStatus == 2">
+                <h1 class="mb-4">{{ renderText('strThankYou') }}</h1>
+                <p class="tx">{{ renderText('strOrderNumber') }}<br>
+                    <a href="javascript:void(0)" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a>
+                    <br /><br />
+                <div class="text-12 mt-2">Placed on
+                    <?php
+                    date_default_timezone_set('Asia/Kuala_Lumpur');
+                    echo date("l, jS F Y H:i:s");
+                    ?>
 
-        <div class="row">
-            <div class="col-lg-4 col-md-12">
-                <div class="price-sec">
-                    <h3>Kasi Up <br>
-                        Postpaid 30</h3>
-                    <div class="list">
-                        <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
-                        <p>20GB for RM30</p>
+                </div>
+                <p v-if="(simType=='false' || simType=='')">{{ renderText('strEstimatedDelivery') }} {{
+                    purchaseInfo.deliveryFromDate }} - {{purchaseInfo.deliveryToDate}}</p><br /> <br />
+                <p> {{ renderText('strOrderSummary') }}</p>
+            </div>
+            <div class="col-md-6 tx_box_inner" v-else>
+                <h1 class="mb-4">{{ renderText('strThankYou') }}</h1>
+                <p class="tx">{{ renderText('strOrderNumber') }}<br>
+                    <a href="javascript:void(0)" class="grey-link">{{ purchaseInfo.displayOrderNumber }}</a>
+                    <br /><br />
+                <div class="text-12 mt-2">Placed on
+                    <?php
+                    date_default_timezone_set('Asia/Kuala_Lumpur');
+                    echo date("l, jS F Y H:i:s"); ?>
+                </div>
+                <p style="margin:3px 0" v-if="(simType=='false' || simType=='')">{{
+                    renderText('strEstimatedDelivery') }} {{ purchaseInfo.deliveryFromDate }} -
+                    {{purchaseInfo.deliveryToDate}}</p>
+                <p style="margin:3px 0"> {{ renderText('strOrderSummary') }}</p>
+            </div>
+            <div class="col-md-6">
+                <div class="tx-img">
+                    <img src="/wp-content/uploads/2023/06/banner-side.png" class="img-fluid" alt="...">
+                </div>
+            </div>
+        </div>
+        <div class="row" v-if="(simType=='true')">
+            <div class="step_sec">
+                <h1>{{ renderText('strEsimActivate') }}</h1>
+                <div class="step_sec_inner">
+                    <div class="content">
+                        <span>1</span>
+                        <p>{{ renderText('strEsimActivateStepOne') }}</p>
                     </div>
-                    <div class="list">
-                        <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
-                        <p>Unlimited refferals and earnings</p>
+                    <div class="content">
+                        <span>2</span>
+                        <p>{{ renderText('strEsimActivateStepTwo') }}</p>
                     </div>
-                    <div class="list">
-                        <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
-                        <p>Free Yes Altitude phone</p>
+                    <div class="content">
+                        <span>3</span>
+                        <p>{{ renderText('strEsimActivateStepThree') }}</p>
                     </div>
-                    <div class="bottom_sec">
-                        <h5>RM30.00 /month</h5>
-                        <img src="/wp-content/uploads/2023/06/cards-1.png" class="img-fluid" alt="...">
+                    <div class="content">
+                        <span>4</span>
+                        <p>{{ renderText('strEsimActivateStepFour') }}</p>
+                    </div>
+                    <div class="content">
+                        <span>5</span>
+                        <p>{{ renderText('strEsimActivateStepFive') }}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-12">
-                <div class="price-sec">
-                    <h3>Merdeka Device<br> Bundle</h3>
-                    <div class="list">
-                        <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
-                        <p>20GB for RM30</p>
+        </div>
+        <div class="row" v-else>
+            <div class="step_sec">
+                <h1>{{ renderText('strPhysicalSimActivate') }}</h1>
+                <div class="step_sec_inner">
+                    <div class="content">
+                        <span>1</span>
+                        <p>{{ renderText('strPhysicalSimActivateStepOne') }}</p>
                     </div>
-                    <div class="list">
-                        <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
-                        <p>Unlimited refferals and earnings</p>
+                    <div class="content">
+                        <span>2</span>
+                        <p>{{ renderText('strPhysicalSimActivateStepTwo') }}</p>
                     </div>
-                    <div class="list">
-                        <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
-                        <p>Free Yes Altitude phone</p>
+                    <div class="content">
+                        <span>3</span>
+                        <p>{{ renderText('strPhysicalSimActivateStepThree') }}</p>
                     </div>
-                    <div class="bottom_sec">
-                        <h5>RM30.00 /month</h5>
-                        <img src="/wp-content/uploads/2023/06/cards-1.png" class="img-fluid" alt="...">
+                    <div class="content">
+                        <span>4</span>
+                        <p>{{ renderText('strPhysicalSimActivateStepFour') }}</p>
+                    </div>
+                    <div class="content">
+                        <span>5</span>
+                        <p>{{ renderText('strPhysicalSimActivateStepFive') }}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-12">
-                <div class="price-sec">
-                    <h3>Kasi Up <br>
-                        Prepaid Unlimited 30</h3>
-                    <div class="list">
-                        <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
-                        <p>20GB for RM30</p>
+        </div>
+        <hr>
+        <div class="row price">
+            <div class="rs">
+                <h1>
+                    You may also like
+                </h1>
+                <a href="/#popular-deals" class="viewall-btn">continue shopping<svg xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                        class="iconify iconify--akar-icons" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+                        viewBox="0 0 24 24" data-icon="akar-icons:arrow-right">
+                        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" d="M4 12h16m-7-7l7 7l-7 7"></path>
+                    </svg></a>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-12">
+                    <div class="price-sec">
+                        <h3>Kasi Up <br>
+                            Postpaid 30</h3>
+                        <div class="list">
+                            <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
+                            <p>20GB for RM30</p>
+                        </div>
+                        <div class="list">
+                            <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
+                            <p>Unlimited refferals and earnings</p>
+                        </div>
+                        <div class="list">
+                            <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
+                            <p>Free Yes Altitude phone</p>
+                        </div>
+                        <div class="bottom_sec">
+                            <h5>RM30.00 /month</h5>
+                            <img src="/wp-content/uploads/2023/06/cards-1.png" class="img-fluid" alt="...">
+                        </div>
                     </div>
-                    <div class="list">
-                        <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
-                        <p>Unlimited refferals and earnings</p>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="price-sec">
+                        <h3>Merdeka Device<br> Bundle</h3>
+                        <div class="list">
+                            <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
+                            <p>20GB for RM30</p>
+                        </div>
+                        <div class="list">
+                            <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
+                            <p>Unlimited refferals and earnings</p>
+                        </div>
+                        <div class="list">
+                            <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
+                            <p>Free Yes Altitude phone</p>
+                        </div>
+                        <div class="bottom_sec">
+                            <h5>RM30.00 /month</h5>
+                            <img src="/wp-content/uploads/2023/06/cards-1.png" class="img-fluid" alt="...">
+                        </div>
                     </div>
-                    <div class="list">
-                        <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
-                        <p>Free Yes Altitude phone</p>
-                    </div>
-                    <div class="bottom_sec">
-                        <h5>RM30.00 /month</h5>
-                        <img src="/wp-content/uploads/2023/06/cards-1.png" class="img-fluid" alt="...">
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="price-sec">
+                        <h3>Kasi Up <br>
+                            Prepaid Unlimited 30</h3>
+                        <div class="list">
+                            <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
+                            <p>20GB for RM30</p>
+                        </div>
+                        <div class="list">
+                            <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
+                            <p>Unlimited refferals and earnings</p>
+                        </div>
+                        <div class="list">
+                            <img src="/wp-content/uploads/2023/06/check-circle.png" class="img-fluid" alt="...">
+                            <p>Free Yes Altitude phone</p>
+                        </div>
+                        <div class="bottom_sec">
+                            <h5>RM30.00 /month</h5>
+                            <img src="/wp-content/uploads/2023/06/cards-1.png" class="img-fluid" alt="...">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -342,7 +380,7 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
-                simType:'',
+                simType: '',
                 highlightPlanIDs: [710, 759, 758],
                 highlightPlans: [],
                 orderDisplayID: '',
@@ -365,7 +403,7 @@
                     strOrderNumber: {
                         'en-US': 'Tracking number/Order number',
                         'ms-MY': 'Tracking Number/Nombor Pesanan',
-                        'zh-hans':'Tracking Number/Order Number'
+                        'zh-hans': 'Tracking Number/Order Number'
                     },
                     strPlacedOn: {
                         'en-US': 'Placed on',
@@ -472,8 +510,9 @@
                         toggleOverlay(false);
                     } else if (ywos.validateSession(self.currentStep)) {
                         self.pageValid = true;
-                        self.simType=ywos?.lsData?.meta?.esim;
-            
+                        self.simType = ywos?.lsData?.meta?.esim;
+                        // console.log(ywos?.lsData?.trxType);
+
                         self.updateData();
                         // self.getHighlightPlans();
                         toggleOverlay(false);
@@ -536,15 +575,15 @@
                     var self = this;
                     if (typeof ywos.lsData.meta.orderResponse != 'undefined') {
                         self.purchaseInfo.displayOrderNumber = ywos.lsData.meta.orderResponse.displayOrderNumber;
-                        self.purchaseInfo.deliveryFromDate = moment(ywos.lsData.meta.orderResponse.deliveryFromDate,'DD-MM-YYYY').format('Do MMM').split(' ');
-                        self.purchaseInfo.deliveryFromDate= self.purchaseInfo.deliveryFromDate[0] + self.nthNumber(self.purchaseInfo.deliveryFromDate[0]) + ' ' + (self.purchaseInfo.deliveryFromDate[1]);
-                        self.purchaseInfo.deliveryToDate = moment(ywos.lsData.meta.orderResponse.deliveryToDate,'DD-MM-YYYY').format('Do MMM').split(' ');
-                        self.purchaseInfo.deliveryToDate= self.purchaseInfo.deliveryToDate[0] + self.nthNumber(self.purchaseInfo.deliveryToDate[0]) + ' ' + (self.purchaseInfo.deliveryToDate[1]);
-                         
+                        self.purchaseInfo.deliveryFromDate = moment(ywos.lsData.meta.orderResponse.deliveryFromDate, 'DD-MM-YYYY').format('Do MMM').split(' ');
+                        self.purchaseInfo.deliveryFromDate = self.purchaseInfo.deliveryFromDate[0] + self.nthNumber(self.purchaseInfo.deliveryFromDate[0]) + ' ' + (self.purchaseInfo.deliveryFromDate[1]);
+                        self.purchaseInfo.deliveryToDate = moment(ywos.lsData.meta.orderResponse.deliveryToDate, 'DD-MM-YYYY').format('Do MMM').split(' ');
+                        self.purchaseInfo.deliveryToDate = self.purchaseInfo.deliveryToDate[0] + self.nthNumber(self.purchaseInfo.deliveryToDate[0]) + ' ' + (self.purchaseInfo.deliveryToDate[1]);
+
                         // self.purchaseInfo.orderCreationDate =moment(ywos.lsData.meta.orderResponse
                         //     .orderCreationDate,'dd-MM-yyyy hh:mm:ss').format("mm-yyyy").split(' ');
-                    // self.purchaseInfo.orderCreationDate=ywos.lsData.meta.orderResponse.orderCreationDate;
-                            // self.purchaseInfo.orderCreationDate= self.purchaseInfo.orderCreationDate[0] +  (self.purchaseInfo.orderCreationDate[1] + self.nthNumber(self.purchaseInfo.orderCreationDate[1]))+ ' ' + (self.purchaseInfo.orderCreationDate[2]) 
+                        // self.purchaseInfo.orderCreationDate=ywos.lsData.meta.orderResponse.orderCreationDate;
+                        // self.purchaseInfo.orderCreationDate= self.purchaseInfo.orderCreationDate[0] +  (self.purchaseInfo.orderCreationDate[1] + self.nthNumber(self.purchaseInfo.orderCreationDate[1]))+ ' ' + (self.purchaseInfo.orderCreationDate[2]) 
                     } else if (ywos.lsData.meta.purchaseInfo) {
                         self.purchaseInfo = ywos.lsData.meta.purchaseInfo;
                     }
@@ -564,11 +603,11 @@
                 nthNumber: function (number) {
                     return number > 0
                         ? ["th", "st", "nd", "rd"][
-                            (number > 3 && number < 21) || number % 10 > 3 ? 0 : number % 10
+                        (number > 3 && number < 21) || number % 10 > 3 ? 0 : number % 10
                         ]
                         : "";
                 },
-                
+
             }
         });
     });
