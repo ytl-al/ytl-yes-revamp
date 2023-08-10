@@ -152,14 +152,15 @@
                 <p class="large"><strong>{{ (orderSummary.due.rounding < 0) ? '-' : '' }}RM{{ parseFloat(orderSummary.due.rounding.replace('-', '')).toFixed(2) }}</strong></p>
             </div>
         </div>
-        <!-- <div class="row" v-if="(simType == 'eSIM' || ywos.lsData.meta.esim == 'true')">
+      
+        <div class="row" v-if="((typeof simType != 'undefined' &&  simType == 'eSIM') || ywos?.lsData?.meta.esim == 'true')">
             <div class="col-8 pe-0">
                 <p class="large">{{ renderSummaryText('streSimtext') }}</p>
             </div>
             <div class="col-4 text-end">
                 <p class="large"><strong>{{ renderSummaryText('streSimtextVal') }}</strong></p>
             </div>
-        </div> -->
+        </div>
     </template>
 
 

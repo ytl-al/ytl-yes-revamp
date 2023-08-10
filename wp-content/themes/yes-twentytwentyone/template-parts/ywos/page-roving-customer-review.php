@@ -518,18 +518,10 @@
             methods: {
                 pageInit: function () {
                     var self = this;
-                    if (ywos.validateSession(self.currentStep)) {
-                         this.validateStagingOrder();
-                        self.pageValid = true;
-                        // self.updateData();
-                        self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
-                        toggleOverlay(false);
-                    } else {
-                        ywos.redirectToPage('cart');
-                    }
-                    // toggleOverlay(false);
-                    // self.pageValid = true;
-            
+                    this.validateStagingOrder();
+                    self.pageValid = true;
+                    self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
+
                 },
                 generateSessionKey: function () {
                     return '_' + Math.random().toString(36).substr(2, 9);
@@ -554,10 +546,10 @@
                             self.planID = data.bundleMapId;
                             self.ajaxGetPlanData()
                             if (data.responseCode == 0) {
-                                self.ajaxGetPlanData();
                                 self.deliveryInfo = {
                                     "name": data.fullName,
                                     "mobileNumber": data.mobileNumber,
+                                    "msisdn":"",
                                     "securityType": data.securityType,
                                     "securityId": data.securityNumber,
                                     "dob": data.dob,
@@ -687,18 +679,12 @@
                 updatePlan: function (closeOverlay = true) {
                     console.log('updatePlan');
                     var self = this;
-
-                    // self.hasFetchPlan = true;
                     self.updateSummary();
-
-                    // self.sendAnalytics('addToCart');
-
                     if (closeOverlay) {
                         setTimeout(function () {
                             toggleOverlay(false);
                         }, 500);
                     }
-
                     if (self.orderSummary.plan.notes) {
                         var arrNotes = self.orderSummary.plan.notes.split(',');
                         self.packageInfos = arrNotes.sort(function (a, b) {
@@ -709,7 +695,6 @@
                     self.updateData();
                 },
                 updateSummary: function () {
-                    console.log('updateSummary');
                     var self = this;
                     var total = 0;
                     self.orderSummary.due.addOns = (self.orderSummary.addOn != null) ? roundAmount(self.orderSummary.addOn.amount) : 0;
@@ -731,13 +716,14 @@
                         'isTargetedPromo': false,
                         meta: {
 
-                            planId: 1103,
+                            planID: self.planID,
                             'agree': {
                             "terms": true,
                             "privacy": true
                             },
                             'sessionId': '',
                             'deviceID': 0,
+                            esim:'true',
                             completedStep:4,
                             orderSummary: self.orderSummary,
                             deliveryInfo: self.deliveryInfo,
@@ -752,31 +738,18 @@
 
                     };
                     ywos.updateYWOSLSData();
+                    toggleOverlay(false);
                     $('#main-vue').attr('style', 'display:block !important;');
 
                     // self.pageInit();
                 },
-                // updateData: function() {
-                //     var self = this;
-                //     self.orderSummary = ywos.lsData.meta.orderSummary;
-                //     self.deliveryInfo = ywos.lsData.meta.deliveryInfo;
-                //     self.slicedMobileNumber = self.deliveryInfo.mobileNumber.slice(1);
-                //     self.agree = (ywos.lsData.meta.agree) ? ywos.lsData.meta.agree : self.agree;
-                //     self.watchSubmit();
 
-                //     if (self.orderSummary.plan.notes) {
-                //         var arrNotes = self.orderSummary.plan.notes.split(',');
-                //         self.packageInfos = arrNotes.sort(function(a, b) {
-                //             return a.length - b.length;
-                //         });
-                //     }
-                // },
                 validateReview: function() {
                     var self = this;
                     toggleOverlay();
-                    console.log(self.agree);
+
                     // self.watchSubmit();
-                    // ywos.lsData.meta.completedStep = self.currentStep;
+                    ywos.lsData.meta.completedStep = self.currentStep;
                     ywos.lsData.meta.agree = self.agree;
                     // ywos.updateYWOSLSData();
                     ywos.redirectToPage('payment'); 

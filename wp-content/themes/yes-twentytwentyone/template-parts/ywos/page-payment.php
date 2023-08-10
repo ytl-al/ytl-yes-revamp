@@ -374,11 +374,10 @@
     var mainwin;
     $(document).ready(function() {
         toggleOverlay();
+
         var pageDelivery = new Vue({
-            
             el: '#main-vue',
             data: {
-                ywos: null,
                 simType: '',
                 trxType: '',
                 dealer: [],
@@ -629,10 +628,10 @@
                 checkPaymentStatusCountLimit: 78, // times every 5 seconds (5000), total = 6.5 minutes, excluding 10 seconds before first check
                 paymentTimeout: false,
                 paymentResponse: null,
-                
+
                 isTargetedPromo: false,
                 tpMeta: {},
-                
+
                 apiLocale: 'EN',
                 pageText: {
                     strVerification: { 'en-US': 'Verification', 'ms-MY': 'Pengesahan', 'zh-hans': 'Verification' } ,
@@ -672,7 +671,7 @@
             created: function() {
                 var self = this;
                 axios.get(apiEndpointURL + '/get-rm-wallet-merchant' + '?nonce=' + yesObj.nonce)
-                .then((response) => {
+                    .then((response) => {
                         var data = response?.data?.rmEwalletList;
 
                         if (data) {
@@ -692,7 +691,6 @@
                         console.log('error', error);
                     });
                 setTimeout(function() {
-                   
                     self.pageInit();
                 }, 500);
                 self.initTabs();
@@ -713,9 +711,7 @@
                 pageInit: function() {
                     var self = this;
                     if (ywos.validateSession(self.currentStep)) {
-                        // alert(trxType);
                         self.pageValid = true;
-                        console.log(ywos.lsData);
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
                         self.ajaxGetFPXBankList();
                         self.updateData();
