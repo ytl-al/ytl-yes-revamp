@@ -597,7 +597,6 @@
 					// ywos.lsData.meta.isLoggedIn = true;
 					ywos.lsData.meta.orderSummary = self.orderSummary;
 					ywos.lsData.meta.customerDetails = self.customerDetails;
-					ywos.lsData.meta.esim = 'physicalSIM';
 					ywos.updateYWOSLSData();
 
 					self.pageInit();

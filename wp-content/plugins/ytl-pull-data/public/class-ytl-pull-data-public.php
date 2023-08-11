@@ -276,7 +276,27 @@ class Ytl_Pull_Data_Public
      * @access   private
      * @var      string   
      */
+	private $path_create_roving_staging_order;
 
+	/**
+	 * The api path to auth.
+	 *
+	 * @since    1.1.1
+	 * @access   private
+	 * @var      string   
+	 */
+
+	 
+	 private $path_validate_roving_staging_order;
+
+	 /**
+	  * The api path to auth.
+	  *
+	  * @since    1.1.1
+	  * @access   private
+	  * @var      string   
+	  */
+ 
 
     private $get_all_plans_with_addons_path;
 
@@ -315,6 +335,8 @@ class Ytl_Pull_Data_Public
 		$this->path_get_ipp_tenure_details		 = '/mobileyos/mobile/ws/v1/json/getIPPTenureDetails';
 		$this->path_get_ipp_monthly_installment  = '/mobileyos/mobile/ws/v1/json/getIPPMonthlyInstalment';
         $this->get_all_plans_with_addons_path = '/mobileyos/mobile/ws/v1/json/getAllPlansWithAddons';
+		$this->path_create_roving_staging_order = '/mobileyos/mobile/ws/v1/json/createStagingYosOrder';
+		$this->path_validate_roving_staging_order='/mobileyos/mobile/ws/v1/json/validateAndFetchStagingYosOrder';
 
 		$ytlpd_options				= get_option($this->prefix . "settings");
 		$this->api_domain 			= (!empty($ytlpd_options['ytlpd_api_domain_url'])) ? $ytlpd_options['ytlpd_api_domain_url'] : '';
@@ -396,6 +418,8 @@ class Ytl_Pull_Data_Public
 		$this-> ra_reg_get_auth_token_new();
 		$this->ra_reg_generate_otp_for_guest_login_new();
 		$this-> ra_new_reg_guest_otp();
+		$this->ra_create_staing_order();
+		$this->ra_validate_staing_order();
 	}
 
 	public function ra_reg_add_to_cart()
@@ -2005,6 +2029,187 @@ class Ytl_Pull_Data_Public
 			return new WP_Error('error_validating_guest_login', 'Parameters not complete to validate login', array('status' => 400));
 		}
 		return new WP_Error('error_validating_guest_login', "There's an error in validating login.", array('status' => 400));
+	}
+	public function ra_create_staing_order()
+	{
+
+		register_rest_route('ywos/v1', 'create-ywos-roving-order', array(
+			'methods' => 'POST',
+			'callback' => array($this, 'create_ywos_roving_order'),
+			'permission_callback' => '__return_true'
+		)
+		);
+	}
+	public function create_ywos_roving_order(WP_REST_Request $order_info)
+	{
+		return $this->ca_create_ywos_roving_order($order_info);
+	}
+
+	public function ca_create_ywos_roving_order($order_info = [])
+	{
+
+		// if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+		// 	exit("Request not valid");
+		//  } 
+
+		$mobileNumber = $this->get_request_input($order_info, 'mobileNumber');
+		$fullName = $this->get_request_input($order_info, 'fullname');
+		$dob = $this->get_request_input($order_info, 'dob');
+		$gender = $this->get_request_input($order_info, 'gender');
+		$email = $this->get_request_input($order_info, 'email');
+		$plan_name = $this->get_request_input($order_info, 'planName');
+		$plan_type = $this->get_request_input($order_info, 'planType');
+		$security_type = $this->get_request_input($order_info, 'securityType');
+		$security_id = $this->get_request_input($order_info, 'securityId');
+		$dealer_code = $this->get_request_input($order_info, 'dealerCode');
+		$dealer_login_id = $this->get_request_input($order_info, 'dealerLoginId');
+		$product_bundle_id = $this->get_request_input($order_info, 'bundleMapId');
+		$referral_code = $this->get_request_input($order_info, 'referral_code');
+		$addon_name = $this->get_request_input($order_info, 'addon_name');
+		$simType = $this->get_request_input($order_info, 'esim');
+		$emailPaymentUrl = $this->get_request_input($order_info, 'emailPaymentUrl');
+		$addressLine1 = $this->get_request_input($order_info, 'addressLine1');
+		$addressLine2 = $this->get_request_input($order_info, 'addressLine2');
+		$city = $this->get_request_input($order_info, 'city');
+		$city_code = $this->get_request_input($order_info, 'cityCode');
+		$postal_code = $this->get_request_input($order_info, 'postalCode');
+		$state = $this->get_request_input($order_info, 'state');
+		$state_code = $this->get_request_input($order_info, 'stateCode');
+		$country = $this->get_request_input($order_info, 'country');
+		$locale = $this->get_request_input($order_info, 'locale');
+		$source = $this->get_request_input($order_info, 'source');
+		$session_id = $this->ca_generate_auth_token(true);
+
+		if (
+			$mobileNumber != null && $fullName != null && $dob != null && $gender != null && $email != null && $security_type != null && $security_id != null &&
+			isset($this->api_domain) && isset($this->api_request_id) && $session_id
+		) {
+
+			$params = [
+
+				"mobileNumber" => $mobileNumber,
+				"fullName" => $fullName,
+				"dob" => $dob,
+				"email" => $email,
+				"planName" => $plan_name,
+				"planType" => $plan_type,
+				"securityId" => $security_id,
+				"securityType" => $security_type,
+				"gender" => $gender,
+				"dealerCode" => $dealer_code,
+				"dealerLoginId" => $dealer_login_id,
+				"bundleMapId" => $product_bundle_id,
+				"referralCode" => null,
+				"addonName" => null,
+				"esim" => $simType,
+				"emailPaymentUrl" => $emailPaymentUrl,
+				"addressLine1" => $addressLine1,
+				"addressLine2" => null,
+				"city" => $city,
+				"cityCode" => $city_code,
+				"postalCode" => $postal_code,
+				"state" => $state,
+				"stateCode" => $state_code,
+				"country" => $country,
+				"locale" => $locale,
+				"source" => "YOS",
+				"sessionId" => $session_id,
+				"requestId" => $this->api_request_id
+			];
+
+			$args = [
+				'headers' => array('Content-Type' => 'application/json'),
+				'body' => json_encode($params),
+				'method' => 'POST',
+				'data_format' => 'body',
+				'timeout' => $this->api_timeout
+			];
+			 $api_url 		= $this->api_domain . $this->path_create_roving_staging_order;
+		 
+			// $api_url = "https://mobileservicesiot.ytlcomms.my/mobileyos/mobile/ws/v1/json/createStagingYosOrder";
+			$request = wp_remote_post($api_url, $args);
+			$data = json_decode($request['body']);
+			if ($data->responseCode == 0) {
+				$response = new WP_REST_Response($data);
+				$response->set_status(200);
+				return $response;
+			} else if ($data->displayResponseMessage) {
+				return new WP_Error('error_creating_yos_order', $data->displayResponseMessage, array('status' => 400));
+			}
+		}
+		else {
+			return new WP_Error('error_creating_yos_order', "Parameters not complete to create roving agent order.", array('status' => 400));
+		}
+		return new WP_Error('error_creating_yos_order', "There's an error in creating Roving order.", array('status' => 400));
+	}
+	
+
+
+
+
+	public function ra_validate_staing_order()
+	{
+
+		register_rest_route('ywos/v1', 'validate-ywos-roving-order', array(
+			'methods' => 'POST',
+			'callback' => array($this, 'validate_ywos_roving_order'),
+			'permission_callback' => '__return_true'
+		)
+		);
+	}
+	public function validate_ywos_roving_order(WP_REST_Request $order_info)
+	{
+		return $this->ca_validate_ywos_roving_order($order_info);
+	}
+
+	public function ca_validate_ywos_roving_order($order_info = [])
+	{
+		// if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+		// 	exit("Request not valid");
+		//  } 
+
+		$encStagingOrderNumber = $this->get_request_input($order_info, 'encStagingOrderNumber');
+		$locale = $this->get_request_input($order_info, 'locale');
+		$source = $this->get_request_input($order_info, 'source');
+		$session_id = $this->ca_generate_auth_token(true);
+
+		if (
+			$encStagingOrderNumber != null &&
+			isset($this->api_domain) && isset($this->api_request_id) && $session_id
+		) {
+
+			$params = [
+
+				"encStagingOrderNumber" => $encStagingOrderNumber,
+				"locale" => $locale,
+				"source" => "YOS",
+				"sessionId" => $session_id,
+				"requestId" => $this->api_request_id
+			];
+			$args = [
+				'headers' => array('Content-Type' => 'application/json'),
+				'body' => json_encode($params),
+				'method' => 'POST',
+				'data_format' => 'body',
+				'timeout' => $this->api_timeout
+			];
+			 $api_url 		= $this->api_domain . $this->path_validate_roving_staging_order;
+		 
+			// $api_url = "https://mobileservicesiot.ytlcomms.my/mobileyos/mobile/ws/v1/json/createStagingYosOrder";
+			$request = wp_remote_post($api_url, $args);
+			$data = json_decode($request['body']);
+			if ($data->responseCode == 0) {
+				$response = new WP_REST_Response($data);
+				$response->set_status(200);
+				return $response;
+			} else if ($data->responseCode == -1){
+				return new WP_Error('error_creating_yos_order', $data->displayErrorMessage, array('status' => 400));
+			} 
+		}
+		else {
+			return new WP_Error('error_creating_yos_order', "Parameters not complete to create roving agent order.", array('status' => 400));
+		}
+		
 	}
 }
 

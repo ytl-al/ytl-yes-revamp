@@ -1,7 +1,7 @@
 <div class="summary-box">
     <h1>{{ renderSummaryText('strSummaryTitle') }}</h1>
-    <template v-if="orderSummary.due.priceBreakdown.simplified.length">
-        <template v-for="item in orderSummary.due.priceBreakdown.simplified">
+    <template v-if="orderSummary?.due?.priceBreakdown?.simplified?.length">
+        <template v-for="item in orderSummary?.due?.priceBreakdown?.simplified">
             <template v-if="item.parentFlag">
                 <div class="row" v-if="item.displayOrder > 1">
                     <div class="col-7 pe-0 ">
@@ -48,7 +48,7 @@
             <div class="col-7 py-2">
                 <h5 style="color: #000000;text-transform: uppercase;"><strong>{{ renderSummaryText('strTotal') }}</strong></h5>
             </div>
-            <div class="col-5 py-2 text-end" v-if="(ywos.lsData.meta.customerDetails.upFrontPayment=='true')">
+            <div class="col-5 py-2 text-end" v-if="(ywos?.lsData.meta?.customerDetails?.upFrontPayment=='true')">
                 <h5 class="large" style="color: #000000;" ><strong>RM{{ formatPrice(parseFloat((orderSummary.due.total)-(orderSummary.due.foreignerDeposit)).toFixed(2)) }}</strong></h5>
             </div>
             <div class="col-5 py-2 text-end" v-else>
@@ -98,17 +98,10 @@
         </template>
         
         <template v-if="orderSummary?.due?.priceBreakdown?.device[1]?.name">
-            <div class="row" v-if='(upFrontPayment=="true")' >
-                <div class="col-8 pe-0">
-                    <p>{{ orderSummary.due.priceBreakdown.device[1].name.substring(orderSummary.due.priceBreakdown.device[1].name.indexOf(' ') + 1) }}</p>
-                </div>
-                <div class="col-4 text-end">
-                    <p class="large"><strong>RM{{ orderSummary.due.priceBreakdown.device[1].value }}</strong></p>
-                </div>
-            </div>
+           
         </template>
 
-        <div class="row mt-2" v-if="orderSummary.plan.hasDevice">
+        <div class="row mt-2" v-if="orderSummary?.plan.hasDevice">
             <template v-for="(price, index) in orderSummary.due.priceBreakdown.device">
                 <div class="col-8 pe-0">
                     <p>{{ price.name }}</p>
@@ -159,7 +152,8 @@
                 <p class="large"><strong>{{ (orderSummary.due.rounding < 0) ? '-' : '' }}RM{{ parseFloat(orderSummary.due.rounding.replace('-', '')).toFixed(2) }}</strong></p>
             </div>
         </div>
-        <div class="row" v-if="(simType == 'eSIM' || ywos.lsData.meta.esim == 'true')">
+      
+        <div class="row" v-if="((typeof simType != 'undefined' &&  simType == 'eSIM') || ywos?.lsData?.meta.esim == 'true')">
             <div class="col-8 pe-0">
                 <p class="large">{{ renderSummaryText('streSimtext') }}</p>
             </div>
