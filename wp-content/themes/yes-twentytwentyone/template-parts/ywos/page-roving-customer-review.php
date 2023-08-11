@@ -695,17 +695,16 @@
                 },
                 updateData: function() {
                     var self = this;
-
-                    console.log('asd');
-
-                    ywos.lsData.meta.completedStep = self.currentStep;
-                    ywos.lsData.meta.orderSummary = self.orderSummary;
-                    ywos.lsData.meta.customerDetails = self.customerDetails;
-                    ywos.lsData.meta.dealer = self.dealer;
-                    ywos.updateYWOSLSData();
-
-                    console.log(ywos);
-
+                    var data =JSON.parse(localStorage.getItem('yesYWOS'))
+                    data.meta.completedStep = self.currentStep;
+                    data.meta.orderSummary = self.orderSummary;
+                    data.meta.customerDetails = self.customerDetails;
+                    data.meta.deliveryInfo= self.deliveryInfo; 
+                    data.meta.dealer = self.dealer;
+                    data.trxType='roving';
+                    localStorage.setItem('yesYWOS', JSON.stringify(data))
+                    $('#main-vue').show();
+                    // ywos.updateYWOSLSData();
                     self.pageInit();
                 },
                 pageInit: function() {
