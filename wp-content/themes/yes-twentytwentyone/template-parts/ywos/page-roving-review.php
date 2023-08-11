@@ -497,7 +497,7 @@
                         'bundleMapId'   : orderSummary.plan.mobilePlanId,
                         'referralCode'  : deliveryInfo.referralCode,
                         'addonName'     : (deliveryInfo.addOn && deliveryInfo.addOn.addonName) ? deliveryInfo.addOn.addonName : '',
-                        'esim'          : self.simType,
+                        'esim'          : false,
                         'emailPaymentUrl': self.curURL + '/ywos/roving-customer-review/?orderId=$$PARAM$$',
                         'addressLine1'  : deliveryInfo.address,
                         'addressLine2'  : deliveryInfo.addressMore,
@@ -519,6 +519,11 @@
                         .then((response) => {
                             var data = response.data;
                             self.validateReview();
+                            if(data.responseCode==0){
+                                self.validateReview();
+                                // ywos.redirectToPage('thank-you');
+                            }
+                            
                         })
                         .catch((error) => {
                             var response = error.response;
@@ -554,12 +559,12 @@
               
                 validateReview: function() {
                     var self = this;
-                    toggleOverlay();
-
+                    toggleOverlay()
                     ywos.lsData.meta.completedStep = self.currentStep;
                     ywos.lsData.meta.agree = self.agree;
                     ywos.updateYWOSLSData();
                     self.ajaxCreateStagingYOSOrder();
+                    
                     ywos.redirectToPage('thank-you');
                 },
                 watchSubmit: function() {

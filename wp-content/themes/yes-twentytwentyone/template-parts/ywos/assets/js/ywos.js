@@ -76,7 +76,6 @@ const ywos = {
         dc = url.searchParams.get('dc');
         duid = url.searchParams.get('duid');
         rc = url.searchParams.get('rc');
-        dt = (url.searchParams.get('dt') ?? null);
         trxType = (url.searchParams.get('trx_type')) ?? null;
 
         var ywosLocalStorageData = ywosLSData;
@@ -117,7 +116,6 @@ const ywos = {
                 'deviceID': deviceID,
                 'dealer': {
                     'dealer_code': dc,
-                    'dealer_type': dt, 
                     'dealer_id': duid,
                     'referral_code': rc,
                 }
@@ -224,14 +222,6 @@ const ywos = {
         storageData.meta.loginType = 'guest';
         const ElevateDate = yesElevate.eligibility.dob;
 
-        // var day = ElevateDate.getDate();
-        // day = day < 10 ? "0" + day : day;
-        // var month = ElevateDate.getMonth() + 1;
-        // month = month < 10 ? "0" + month : month;
-        // var year = ElevateDate.getFullYear();
-        // const newDateFormate = day + "/" + month + "/" + year;
-        // console.log(newDateFormate);
-
 
         storageData.meta.customerDetails = {
             'securityType' : 'nric',
@@ -331,6 +321,7 @@ const ywos = {
         });
     },
     checkExists: function() {
+
         if (ywosLSData === null) {
             return false;
         } else {
@@ -494,9 +485,11 @@ const ywos = {
         }
     },
     validateSessionRoving: function (curStep = 0) {
+        console.log(curStep, 'curStep');
+        // return false;
         var isValid = true;
         if (!this.checkExists()) {
-            console.log('Local storage data not found!');
+            console.log('Local storage data not found!1234555');
             isValid = false;
         } else if (!this.checkExpiryValid()) {
             console.log('Local storage data is expired!');
