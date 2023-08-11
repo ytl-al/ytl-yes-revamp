@@ -512,20 +512,25 @@
                     axios.post(apiEndpointURL + '/validate-ywos-roving-order' + '?nonce=' + yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
+                             var inputDate = data.dob; // Replace with your date
+                            // Split the input date into parts
+                            var parts = inputDate.split("-");
+                            // Reformat the date parts
+                            var formattedDate = parts[2] + "/" + parts[1] + "/" + parts[0];
+                   
                             self.planID = data.bundleMapId;
 
                             ywos.initLocalStorage(self.planID);
-
                             self.ajaxGetPlanData();
-
                             if (data.responseCode == 0) {
+                            
                                 self.deliveryInfo = {
                                     "name": data.fullName,
                                     "mobileNumber": data.mobileNumber.slice(1),
                                     "msisdn": data.mobileNumber,
                                     "securityType": data.securityType,
                                     "securityId": data.securityNumber,
-                                    "dob": "26-05-1998",
+                                    "dob": formattedDate,
                                     "gender": data.gender,
                                     "email": data.email,
                                     "emailConfirm": data.email,
@@ -553,7 +558,7 @@
                                     "securityType": data.securityType,
                                     "securityId": data.securityNumber,
                                     "msisdn": data.mobileNumber,
-                                    upFrontPayment: false
+                                    upFrontPayment: 'false'
                                 };
                                 self.dealer = {
                                     'dealer_code': data.dealerCode,
@@ -561,6 +566,7 @@
                                     'referral_code': data.referralCode,
                                 };
 
+                                 
                                 // self.validateReview();
                                 // ywos.redirectToPage('payment');
                             } else {
@@ -663,8 +669,8 @@
                         });
                     }
 
-                    // self.updateData();
-                    self.validateSession();
+                    self.updateData();
+                    // self.validateSession();  
                 },
                 updateSummary: function() {
                     var self = this;
@@ -678,6 +684,7 @@
                     self.orderSummary.due.total = (parseFloat(self.orderSummary.due.total) + parseFloat(self.orderSummary.due.rounding)).toFixed(2);
                 },
                 validateSession: function() {
+
                     var self = this;
                     ywos.validateSessionRoving(self.currentStep)
                     // if (ywos.validateSessionRoving(self.currentStep)) {
@@ -688,17 +695,16 @@
                 },
                 updateData: function() {
                     var self = this;
-
-                    console.log('asd');
-
-                    ywos.lsData.meta.completedStep = self.currentStep;
-                    ywos.lsData.meta.orderSummary = self.orderSummary;
-                    ywos.lsData.meta.customerDetails = self.customerDetails;
-                    ywos.lsData.meta.dealer = self.dealer;
-                    ywos.updateYWOSLSData();
-
-                    console.log(ywos);
-
+                    var data =JSON.parse(localStorage.getItem('yesYWOS'))
+                    data.meta.completedStep = self.currentStep;
+                    data.meta.orderSummary = self.orderSummary;
+                    data.meta.customerDetails = self.customerDetails;
+                    data.meta.deliveryInfo= self.deliveryInfo; 
+                    data.meta.dealer = self.dealer;
+                    data.trxType='roving';
+                    localStorage.setItem('yesYWOS', JSON.stringify(data))
+                    $('#main-vue').show();
+                    // ywos.updateYWOSLSData();
                     self.pageInit();
                 },
                 pageInit: function() {
@@ -706,18 +712,6 @@
 
                     self.pageValid = true;
                 },
-
-
-
-
-
-
-
-
-
-
-
-
 
                 pageInit_bak: function() {
                     var self = this;
@@ -730,104 +724,16 @@
                     return '_' + Math.random().toString(36).substr(2, 9);
                 },
 
-                // validateStagingOrder: function () {
-                //     var self = this;
-                //     var currentUrl = window.location.href;
-                //     var parsedUrl = new URL(currentUrl);
-                //     var orderId = parsedUrl.searchParams.get('orderId');
-                //     toggleOverlay();
-                //     var params = {
-                //         'encStagingOrderNumber': orderId !== null ? orderId : null,
-                //         'locale': self.apiLocale,
-                //         'source': 'YOS'
-                //     };
-
-                //     axios.post(apiEndpointURL + '/validate-ywos-roving-order' + '?nonce=' + yesObj.nonce, params)
-                //         .then((response) => {
-
-                //             var data = response.data;
-                //             self.planID = data.bundleMapId;
-                //             self.ajaxGetPlanData()
-                //             if (data.responseCode == 0) {
-                //                 self.deliveryInfo = {
-                //                     "name": data.fullName,
-                //                     "mobileNumber": data.mobileNumber.slice(1),
-                //                     "msisdn":data.mobileNumber,
-                //                     "securityType": data.securityType,
-                //                     "securityId": data.securityNumber,
-                //                     "dob": "26-05-1998",
-                //                     "gender": data.gender,
-                //                     "email": data.email,
-                //                     "emailConfirm": data.email,
-                //                     "address": data.addressLine1,
-                //                     "addressMore": data.addressLine2,
-                //                     "addressLine": data.addressLine1,
-                //                     "postcode": data.postalCode,
-                //                     "state": data.state,
-                //                     "stateCode": data.stateCode,
-                //                     "city": data.city,
-                //                     "cityCode": data.cityCode,
-                //                     "country": data.country,
-                //                     "deliveryNotes": "",
-                //                     "sanitize": {
-                //                         "address": data.addressLine1,
-                //                         "addressMore": "",
-                //                         "addressLine": data.addressLine1,
-                //                         "state": data.state,
-                //                         "city": data.city,
-                //                         "country": data.country,
-                //                     },
-                //                     "referralCode": data.referralCode,
-                //                 },
-                //                     self.customerDetails = {
-                //                         "securityType": data.securityType,
-                //                         "securityId": data.securityNumber,
-                //                         "msisdn": data.mobileNumber,
-                //                         upFrontPayment : false
-                //                     },
-                //                     self.dealer = {
-                //                         'dealer_code': data.dealerCode,
-                //                         'dealer_id': data.dealerLoginId,
-                //                         'referral_code': data.referralCode,
-                //                     }
-                //                 // self.validateReview();
-                //                 // ywos.redirectToPage('payment');
-                //             } else {
-                //                 self.toggleModalAlert(self.renderText('modalCreateStagingError'), errorMsg);
-                //             }
-                //         })
-                //         .catch((error) => {
-                //             var response = error.response;
-                //             if (response != '') {
-                //                 var data = response.data;
-                //                 var errorMsg = '';
-                //                 if (error.response.status == 500 || error.response.status == 503) {
-                //                     errorMsg = self.renderText('modalCreateStagingError');
-                //                 } else {
-                //                     errorMsg = data.message
-
-                //                 }
-                //                 toggleOverlay(false);
-                //                 self.toggleModalAlert(self.renderText('modalCreateStagingError'), errorMsg);
-                //             }
-
-                //             // console.log(error, response);
-                //         })
-                //         .finally(() => {
-                //             // console.log('finally');
-                //         });
-
-
-                // },
-
-
                 validateReview: function() {
                     var self = this;
                     toggleOverlay();
 
                     // self.watchSubmit();
-                    ywos.lsData.meta.completedStep = self.currentStep;
-                    ywos.lsData.meta.agree = self.agree;
+                    // ywos.lsData.meta.completedStep = self.currentStep;
+                    var data =JSON.parse(localStorage.getItem('yesYWOS'))
+                    data.meta.completedStep = self.currentStep;
+                    data.meta.agree = self.agree;
+                    localStorage.setItem('yesYWOS', JSON.stringify(data))
                     // ywos.updateYWOSLSData();
                     ywos.redirectToPage('payment');
                 },
