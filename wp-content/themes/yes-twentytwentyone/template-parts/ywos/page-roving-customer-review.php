@@ -62,15 +62,11 @@
                     <div class="accordion" id="cart-accordion">
                         <div class="packagebox mb-3">
                             <div class="row">
-                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center"
-                                    v-if="orderSummary.plan.planType == 'postpaid'">
-                                    <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid"
-                                        alt="" />
+                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="orderSummary.plan.planType == 'postpaid'">
+                                    <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid" alt="" />
                                 </div>
-                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
-                                    v-if="orderSummary.plan.planType == 'prepaid'">
-                                    <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid"
-                                        alt="" />
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center" v-if="orderSummary.plan.planType == 'prepaid'">
+                                    <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid" alt="" />
                                 </div>
                                 <div class="col-lg-6 col-12 pt-lg-4 pb-1 px-4 px-lg-5 ps-lg-4">
                                     <h3 class="mt-3 mt-lg-0">{{ orderSummary.plan.displayName }}</h3>
@@ -79,17 +75,14 @@
                                         orderSummary.plan.internetData }}</p>
                                     <div class="package-info" v-if="packageInfos.length">
                                         <div class="row">
-                                            <div class="col-6 mb-3"
-                                                v-for="(packageInfo, index) in packageInfos.slice(0, 4)">
+                                            <div class="col-6 mb-3" v-for="(packageInfo, index) in packageInfos.slice(0, 4)">
                                                 <span class="span-checkList">{{ packageInfo }}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div
-                                    class="col-lg-3 col-12 mt-3 mb-3 mt-lg-0 mb-lg-0 d-flex align-items-center justify-content-lg-end justify-content-center">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <div class="col-lg-3 col-12 mt-3 mb-3 mt-lg-0 mb-lg-0 d-flex align-items-center justify-content-lg-end justify-content-center">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                         <h3 class="price">RM{{ (orderSummary.plan.totalAmount % 1 != 0) ?
                                             parseFloat(orderSummary.plan.totalAmount).toFixed(2) :
                                             formatPrice(parseFloat(orderSummary.plan.totalAmount)) }}</h3>
@@ -97,15 +90,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-                            data-bs-parent="#cart-accordion">
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#cart-accordion">
                             <div class="accordion-body">
                                 <div v-if="packageInfos.slice(4).length">
                                     <h1>{{ renderText('summaryMoreBenefits') }}</h1>
                                     <div class="row mb-4">
-                                        <div class="col-lg-6 mb-3"
-                                            v-for="(packageInfo, index) in packageInfos.slice(4)"><span
-                                                class="span-itemList">{{ packageInfo }}</span></div>
+                                        <div class="col-lg-6 mb-3" v-for="(packageInfo, index) in packageInfos.slice(4)"><span class="span-itemList">{{ packageInfo }}</span></div>
                                     </div>
                                 </div>
 
@@ -122,10 +112,8 @@
                                         </div>
                                     </div>
                                 </template>
-                                <div class="mt-2 pt-2 border-top pb-2 border-bottom"
-                                    v-if="orderSummary.plan.bundleName || orderSummary.plan.hasDevice">
-                                    <p class="bold mb-0" v-if="orderSummary.plan.bundleName">Device Bundle: <span
-                                            class="fw-bold">{{ orderSummary.plan.bundleName }}</span></p>
+                                <div class="mt-2 pt-2 border-top pb-2 border-bottom" v-if="orderSummary.plan.bundleName || orderSummary.plan.hasDevice">
+                                    <p class="bold mb-0" v-if="orderSummary.plan.bundleName">Device Bundle: <span class="fw-bold">{{ orderSummary.plan.bundleName }}</span></p>
                                     <template v-for="(price, index) in orderSummary.due.priceBreakdown.device">
                                         <div class="row">
                                             <div class="col-6">
@@ -141,8 +129,8 @@
                                     <div class="col-6 pb-1 border-bottom">
                                         <p>{{ renderText('summaryAddOns') }}</p>
                                         <p v-if="orderSummary.addOn != null">{{ orderSummary.addOn.displayAddonName }}
-                                            <a href="javascript:void(0)" class="btn-sm pink-btn text-white mx-lg-3"
-                                                v-on:click="removeAddOn()">Remove</a></p>
+                                            <a href="javascript:void(0)" class="btn-sm pink-btn text-white mx-lg-3" v-on:click="removeAddOn()">Remove</a>
+                                        </p>
                                     </div>
                                     <div class="col-6 pb-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.addOns).toFixed(2) }}</p>
@@ -154,12 +142,10 @@
                                         <p>RM{{ parseFloat(orderSummary.due.taxesSST).toFixed(2) }}</p>
                                     </div>
                                     <div v-if="(ywos?.lsData?.meta?.customerDetails?.upFrontPayment=='!true')">
-                                        <div class="col-6 pb-1 pt-1 border-bottom"
-                                            v-if="orderSummary.due.foreignerDeposit > 0">
+                                        <div class="col-6 pb-1 pt-1 border-bottom" v-if="orderSummary.due.foreignerDeposit > 0">
                                             <p>{{ renderText('summaryForeignerDeposit') }}</p>
                                         </div>
-                                        <div class="col-6 pb-1 pt-1 border-bottom text-end"
-                                            v-if="orderSummary.due.foreignerDeposit > 0">
+                                        <div class="col-6 pb-1 pt-1 border-bottom text-end" v-if="orderSummary.due.foreignerDeposit > 0">
                                             <p>RM{{ parseFloat(orderSummary.due.foreignerDeposit).toFixed(2) }}</p>
                                         </div>
                                     </div>
@@ -181,8 +167,7 @@
                                         <p class="fw-bold">{{ renderText('summaryTotalDue') }}</p>
                                         <p class="small d-none">{{ renderText('summaryNotInvoice') }}</p>
                                     </div>
-                                    <div class="col-6 text-end"
-                                        v-if="(ywos?.lsData?.meta?.customerDetails?.upFrontPayment=='true')">
+                                    <div class="col-6 text-end" v-if="(ywos?.lsData?.meta?.customerDetails?.upFrontPayment=='true')">
                                         <p class="large">RM{{
                                             formatPrice(parseFloat((orderSummary.due.total)-(orderSummary.due.foreignerDeposit)).toFixed(2))
                                             }}</p>
@@ -203,12 +188,10 @@
                                             <p>RM{{ parseFloat(orderSummary.plan.monthlyCommitment).toFixed(2) }}</p>
                                         </div>
                                     </div>
-                                    <div class="mb-3"
-                                        v-if="orderSummary.plan.supplementaryBundlePlans && orderSummary.plan.supplementaryBundlePlans.length">
+                                    <div class="mb-3" v-if="orderSummary.plan.supplementaryBundlePlans && orderSummary.plan.supplementaryBundlePlans.length">
                                         <h4 style="font-size: 16px; font-weight: 700;">{{
                                             renderText('summarySupplimentaryBundleLines') }}</h4>
-                                        <div class="row mb-0"
-                                            v-for="(subPlan) in orderSummary.plan.supplementaryBundlePlans">
+                                        <div class="row mb-0" v-for="(subPlan) in orderSummary.plan.supplementaryBundlePlans">
                                             <div class="col-6">
                                                 <p class="mb-0 ps-2">{{ subPlan.planName }}</p>
                                             </div>
@@ -238,10 +221,10 @@
                             <p class="mb-3"><strong>{{ renderText('strTo') }}: {{ deliveryInfo.name }}</strong><br> {{
                                 deliveryInfo.email }}<br> +60 {{ deliveryInfo.mobileNumber }}</p>
                             <p><strong>{{ renderText('strShippingAddress') }}</strong><br> {{
-                                deliveryInfo.sanitize.address }} <br /><template
-                                    v-if="deliveryInfo.sanitize.addressMore">{{ deliveryInfo.sanitize.addressMore }}
+                                deliveryInfo.sanitize.address }} <br /><template v-if="deliveryInfo.sanitize.addressMore">{{ deliveryInfo.sanitize.addressMore }}
                                     <br /></template>{{ deliveryInfo.postcode }}, {{ deliveryInfo.sanitize.city }}
-                                <br />{{ deliveryInfo.sanitize.state }} <br /> {{ deliveryInfo.sanitize.country }}</p>
+                                <br />{{ deliveryInfo.sanitize.state }} <br /> {{ deliveryInfo.sanitize.country }}
+                            </p>
                         </div>
                     </div>
                     <div class="row mb-3 d-none">
@@ -264,23 +247,18 @@
                     <div class="row mb-3">
                         <div class="col">
                             <div class="form-check mb-3">
-                                <input type="checkbox" class="form-check-input" v-model="agree.terms"
-                                    id="checkbox-terms" @change="watchSubmit" />
-                                <label class="form-check-label" for="checkbox-terms"
-                                    v-html="renderText('strAgreeTerms')"></label>
+                                <input type="checkbox" class="form-check-input" v-model="agree.terms" id="checkbox-terms" @change="watchSubmit" />
+                                <label class="form-check-label" for="checkbox-terms" v-html="renderText('strAgreeTerms')"></label>
                             </div>
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" v-model="agree.privacy"
-                                    id="checkbox-privacy" @change="watchSubmit" />
-                                <label class="form-check-label" for="checkbox-privacy"
-                                    v-html="renderText('strAgreePrivacy')"></label>
+                                <input type="checkbox" class="form-check-input" v-model="agree.privacy" id="checkbox-privacy" @change="watchSubmit" />
+                                <label class="form-check-label" for="checkbox-privacy" v-html="renderText('strAgreePrivacy')"></label>
                             </div>
                         </div>
                     </div>
                     <div class="row mt-5">
                         <div class="col-lg-5 col-12">
-                            <button class="pink-btn d-block w-100" type="submit" v-on:click="validateReview"
-                                :disabled="!allowSubmit">{{ renderText('strBtnPayNow') }}</button>
+                            <button class="pink-btn d-block w-100" type="submit" v-on:click="validateReview" :disabled="!allowSubmit">{{ renderText('strBtnPayNow') }}</button>
                             <!-- <a href="checkout-payment.html" class="pink-btn d-block w-100">Pay Now</a> -->
                         </div>
                     </div>
@@ -291,8 +269,7 @@
     <!-- Body ENDS -->
 </div>
 <!-- Vue Wrapper ENDS -->
-<div class="modal fade" id="modal-alert" tabindex="-1" aria-labelledby="modal-alert" aria-hidden="true"
-    data-bs-backdrop="static">
+<div class="modal fade" id="modal-alert" tabindex="-1" aria-labelledby="modal-alert" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-center">
@@ -308,13 +285,13 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         toggleOverlay();
 
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
-                currentStep: 4,
+                currentStep: 3,
                 simType: '',
                 StagingOrderNumber: '',
                 upFrontPayment: false,
@@ -508,31 +485,24 @@
                     },
                 }
             },
-            mounted: function () { },
-            created: function () {
+            mounted: function() {},
+            created: function() {
                 var self = this;
-                setTimeout(function () {
-                    self.pageInit();
+                setTimeout(function() {
+                    // self.pageInit();
+                    self.validateStagingOrder();
                 }, 500);
             },
             methods: {
-                pageInit: function () {
+                validateStagingOrder: function() {
                     var self = this;
-                    this.validateStagingOrder();
-                    self.pageValid = true;
-                    self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
-
+                    self.ajaxValidateStagingOrder();
                 },
-                generateSessionKey: function () {
-                    return '_' + Math.random().toString(36).substr(2, 9);
-                },
-
-                validateStagingOrder: function () {
+                ajaxValidateStagingOrder: function() {
                     var self = this;
                     var currentUrl = window.location.href;
                     var parsedUrl = new URL(currentUrl);
                     var orderId = parsedUrl.searchParams.get('orderId');
-                    toggleOverlay();
                     var params = {
                         'encStagingOrderNumber': orderId !== null ? orderId : null,
                         'locale': self.apiLocale,
@@ -541,15 +511,18 @@
 
                     axios.post(apiEndpointURL + '/validate-ywos-roving-order' + '?nonce=' + yesObj.nonce, params)
                         .then((response) => {
-
                             var data = response.data;
                             self.planID = data.bundleMapId;
-                            self.ajaxGetPlanData()
+
+                            ywos.initLocalStorage(self.planID);
+
+                            self.ajaxGetPlanData();
+
                             if (data.responseCode == 0) {
                                 self.deliveryInfo = {
                                     "name": data.fullName,
                                     "mobileNumber": data.mobileNumber.slice(1),
-                                    "msisdn":data.mobileNumber,
+                                    "msisdn": data.mobileNumber,
                                     "securityType": data.securityType,
                                     "securityId": data.securityNumber,
                                     "dob": "26-05-1998",
@@ -575,18 +548,19 @@
                                         "country": data.country,
                                     },
                                     "referralCode": data.referralCode,
-                                },
-                                    self.customerDetails = {
-                                        "securityType": data.securityType,
-                                        "securityId": data.securityNumber,
-                                        "msisdn": data.mobileNumber,
-                                        upFrontPayment : false
-                                    },
-                                    self.dealer = {
-                                        'dealer_code': data.dealerCode,
-                                        'dealer_id': data.dealerLoginId,
-                                        'referral_code': data.referralCode,
-                                    }
+                                };
+                                self.customerDetails = {
+                                    "securityType": data.securityType,
+                                    "securityId": data.securityNumber,
+                                    "msisdn": data.mobileNumber,
+                                    upFrontPayment: false
+                                };
+                                self.dealer = {
+                                    'dealer_code': data.dealerCode,
+                                    'dealer_id': data.dealerLoginId,
+                                    'referral_code': data.referralCode,
+                                };
+
                                 // self.validateReview();
                                 // ywos.redirectToPage('payment');
                             } else {
@@ -608,15 +582,13 @@
                                 self.toggleModalAlert(self.renderText('modalCreateStagingError'), errorMsg);
                             }
 
-                            // console.log(error, response);
+                            // // console.log(error, response);
                         })
                         .finally(() => {
                             // console.log('finally');
                         });
-
-
                 },
-                ajaxGetPlanData: function () {
+                ajaxGetPlanData: function() {
                     var self = this;
                     axios.get(apiEndpointURL + '/get-plan-by-id/' + self.planID + '/?nonce=' + yesObj.nonce)
                         .then((response) => {
@@ -633,7 +605,7 @@
                                 var keyPricingComponentList = 'pricingComponentList';
                                 if (key == keyPricingComponentList) {
                                     var pricingComponentList = data[keyPricingComponentList];
-                                    pricingComponentList.map(function (pricingComponent) {
+                                    pricingComponentList.map(function(pricingComponent) {
                                         var componentName = pricingComponent.pricingComponentName;
                                         var componentValue = formatPrice(pricingComponent.pricingComponentValue);
                                         var objArr = {
@@ -676,25 +648,25 @@
                             // console.log('error', error);
                         })
                 },
-                updatePlan: function (closeOverlay = true) {
-                    console.log('updatePlan');
+                updatePlan: function(closeOverlay = true) {
                     var self = this;
                     self.updateSummary();
                     if (closeOverlay) {
-                        setTimeout(function () {
+                        setTimeout(function() {
                             toggleOverlay(false);
                         }, 500);
                     }
                     if (self.orderSummary.plan.notes) {
                         var arrNotes = self.orderSummary.plan.notes.split(',');
-                        self.packageInfos = arrNotes.sort(function (a, b) {
+                        self.packageInfos = arrNotes.sort(function(a, b) {
                             return a.length - b.length;
                         });
                     }
 
-                    self.updateData();
+                    // self.updateData();
+                    self.validateSession();
                 },
-                updateSummary: function () {
+                updateSummary: function() {
                     var self = this;
                     var total = 0;
                     self.orderSummary.due.addOns = (self.orderSummary.addOn != null) ? roundAmount(self.orderSummary.addOn.amount) : 0;
@@ -705,44 +677,149 @@
                     self.orderSummary.due.rounding = parseFloat(self.orderSummary.plan.roundingAdjustment).toFixed(2);
                     self.orderSummary.due.total = (parseFloat(self.orderSummary.due.total) + parseFloat(self.orderSummary.due.rounding)).toFixed(2);
                 },
-                updateData: function () {
+                validateSession: function() {
                     var self = this;
-                    console.log(self.deliveryInfo);
-                    var expiryLength = expiryYWOSCart * 60000;
-                    var ywosCartExpiry = Date.now() + expiryLength;
-                    var sessionKey = this.generateSessionKey();
-                    ywos.lsData = {
-                        'expiry': ywosCartExpiry,
-                        'isTargetedPromo': false,
-                        meta: {
-
-                            planID: self.planID,
-                            'agree': {
-                            "terms": true,
-                            "privacy": true
-                            },
-                            'sessionId': '',
-                            'deviceID': 0,
-                            esim:'true',
-                            completedStep:4,
-                            orderSummary: self.orderSummary,
-                            deliveryInfo: self.deliveryInfo,
-                            customerDetails: self.customerDetails,
-                            dealer: self.dealer
-                        },
-                        'sessionKey': sessionKey,
-                        siteLang: "en-US",
-                        tpMeta: {},
-                        trxType: 'roving',
-                        type: false
-
-                    };
-                    ywos.updateYWOSLSData();
-                    toggleOverlay(false);
-                    $('#main-vue').attr('style', 'display:block !important;');
-
-                    // self.pageInit();
+                    ywos.validateSessionRoving(self.currentStep)
+                    // if (ywos.validateSessionRoving(self.currentStep)) {
+                        self.updateData();
+                    // } else {
+                    //     // history.back();
+                    // }
                 },
+                updateData: function() {
+                    var self = this;
+
+                    console.log('asd');
+
+                    ywos.lsData.meta.completedStep = self.currentStep;
+                    ywos.lsData.meta.orderSummary = self.orderSummary;
+                    ywos.lsData.meta.customerDetails = self.customerDetails;
+                    ywos.lsData.meta.dealer = self.dealer;
+                    ywos.updateYWOSLSData();
+
+                    console.log(ywos);
+
+                    self.pageInit();
+                },
+                pageInit: function() {
+                    var self = this;
+
+                    self.pageValid = true;
+                },
+
+
+
+
+
+
+
+
+
+
+
+
+
+                pageInit_bak: function() {
+                    var self = this;
+                    this.validateStagingOrder();
+                    self.pageValid = true;
+                    self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
+
+                },
+                generateSessionKey: function() {
+                    return '_' + Math.random().toString(36).substr(2, 9);
+                },
+
+                // validateStagingOrder: function () {
+                //     var self = this;
+                //     var currentUrl = window.location.href;
+                //     var parsedUrl = new URL(currentUrl);
+                //     var orderId = parsedUrl.searchParams.get('orderId');
+                //     toggleOverlay();
+                //     var params = {
+                //         'encStagingOrderNumber': orderId !== null ? orderId : null,
+                //         'locale': self.apiLocale,
+                //         'source': 'YOS'
+                //     };
+
+                //     axios.post(apiEndpointURL + '/validate-ywos-roving-order' + '?nonce=' + yesObj.nonce, params)
+                //         .then((response) => {
+
+                //             var data = response.data;
+                //             self.planID = data.bundleMapId;
+                //             self.ajaxGetPlanData()
+                //             if (data.responseCode == 0) {
+                //                 self.deliveryInfo = {
+                //                     "name": data.fullName,
+                //                     "mobileNumber": data.mobileNumber.slice(1),
+                //                     "msisdn":data.mobileNumber,
+                //                     "securityType": data.securityType,
+                //                     "securityId": data.securityNumber,
+                //                     "dob": "26-05-1998",
+                //                     "gender": data.gender,
+                //                     "email": data.email,
+                //                     "emailConfirm": data.email,
+                //                     "address": data.addressLine1,
+                //                     "addressMore": data.addressLine2,
+                //                     "addressLine": data.addressLine1,
+                //                     "postcode": data.postalCode,
+                //                     "state": data.state,
+                //                     "stateCode": data.stateCode,
+                //                     "city": data.city,
+                //                     "cityCode": data.cityCode,
+                //                     "country": data.country,
+                //                     "deliveryNotes": "",
+                //                     "sanitize": {
+                //                         "address": data.addressLine1,
+                //                         "addressMore": "",
+                //                         "addressLine": data.addressLine1,
+                //                         "state": data.state,
+                //                         "city": data.city,
+                //                         "country": data.country,
+                //                     },
+                //                     "referralCode": data.referralCode,
+                //                 },
+                //                     self.customerDetails = {
+                //                         "securityType": data.securityType,
+                //                         "securityId": data.securityNumber,
+                //                         "msisdn": data.mobileNumber,
+                //                         upFrontPayment : false
+                //                     },
+                //                     self.dealer = {
+                //                         'dealer_code': data.dealerCode,
+                //                         'dealer_id': data.dealerLoginId,
+                //                         'referral_code': data.referralCode,
+                //                     }
+                //                 // self.validateReview();
+                //                 // ywos.redirectToPage('payment');
+                //             } else {
+                //                 self.toggleModalAlert(self.renderText('modalCreateStagingError'), errorMsg);
+                //             }
+                //         })
+                //         .catch((error) => {
+                //             var response = error.response;
+                //             if (response != '') {
+                //                 var data = response.data;
+                //                 var errorMsg = '';
+                //                 if (error.response.status == 500 || error.response.status == 503) {
+                //                     errorMsg = self.renderText('modalCreateStagingError');
+                //                 } else {
+                //                     errorMsg = data.message
+
+                //                 }
+                //                 toggleOverlay(false);
+                //                 self.toggleModalAlert(self.renderText('modalCreateStagingError'), errorMsg);
+                //             }
+
+                //             // console.log(error, response);
+                //         })
+                //         .finally(() => {
+                //             // console.log('finally');
+                //         });
+
+
+                // },
+
 
                 validateReview: function() {
                     var self = this;
@@ -752,19 +829,19 @@
                     ywos.lsData.meta.completedStep = self.currentStep;
                     ywos.lsData.meta.agree = self.agree;
                     // ywos.updateYWOSLSData();
-                    ywos.redirectToPage('payment'); 
+                    ywos.redirectToPage('payment');
                 },
 
-                toggleModalAlert: function (modalHeader = '', modalText = '') {
+                toggleModalAlert: function(modalHeader = '', modalText = '') {
                     $('#modal-titleLabel').html(modalHeader);
                     $('#modal-bodyText').html(modalText);
                     $('#modal-alert').modal('show');
-                    $('#modal-alert').on('hidden.bs.modal', function () {
+                    $('#modal-alert').on('hidden.bs.modal', function() {
                         $('#modal-titleLabel').html('');
                         $('#modal-bodyText').html('');
                     });
                 },
-                watchSubmit: function () {
+                watchSubmit: function() {
                     var self = this;
                     var isValid = true;
                     if (!self.agree.terms || !self.agree.privacy) {
@@ -776,7 +853,7 @@
                         self.allowSubmit = false;
                     }
                 },
-                renderText: function (strID) {
+                renderText: function(strID) {
                     return ywos.renderText(strID, this.pageText);
                 }
             }

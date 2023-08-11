@@ -430,9 +430,9 @@
                     },
 
                     strBtnPayNow: {
-                        'en-US': 'Next',
-                        'ms-MY': 'Next',
-                        'zh-hans': 'Next'
+                        'en-US': 'Create Order',
+                        'ms-MY': 'Cipta Pesanan',
+                        'zh-hans': 'Create Order'
                     }
                 },
                 curURL: "<?php echo get_site_url(); ?>"
@@ -452,7 +452,7 @@
                         self.updateData();
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
                         self.upFrontPayment = ywos.lsData.meta.customerDetails.upFrontPayment;
-                        self.simType = ywos.lsData.meta.orderSummary.plan.eSim.toString();
+                        self.simType = (ywos.lsData.meta.orderSummary.plan.eSim) ? ywos.lsData.meta.orderSummary.plan.eSim.toString() : 'physical';
                         self.eSimSupportPlan = ywos.lsData.meta.orderSummary.plan.eSim;
 
                         toggleOverlay(false);

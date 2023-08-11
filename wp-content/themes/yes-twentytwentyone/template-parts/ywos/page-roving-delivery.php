@@ -476,7 +476,7 @@
 				getPlanData: function() {
 					var self = this;
 
-					if (ywos.validateSessionRoving(self.currentStep, true)) {
+					if (ywos.validateSessionRoving(self.currentStep)) {
 						if (ywos.lsData.meta.completedStep == 3) {
 							self.deliveryInfo = ywos.lsData.meta.deliveryInfo;
 							self.orderSummary = ywos.lsData.meta.orderSummary;

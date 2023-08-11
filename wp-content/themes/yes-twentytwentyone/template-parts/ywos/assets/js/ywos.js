@@ -431,6 +431,9 @@ const ywos = {
                     case 3:
                         toPage = 'review';
                         break;
+                    case 4:
+                        toPage = 'payment';
+                        break;
                     default:
                         toPage = 'cart';
                 }
