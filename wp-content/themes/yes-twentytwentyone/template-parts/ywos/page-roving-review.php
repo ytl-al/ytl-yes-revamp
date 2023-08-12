@@ -433,7 +433,8 @@
                         'en-US': 'Create Order',
                         'ms-MY': 'Cipta Pesanan',
                         'zh-hans': 'Create Order'
-                    }
+                    }, 
+                    errorCreateOrder: { 'en-US': "There's an error in creating your order.<br />Please try again later.", 'ms-MY': 'Terdapat ralat dalam membuat pesanan.<br />Sila cuba lagi kemudian.', 'zh-hans': "There's an error in creating your order.<br />Please try again later." },
                 },
                 curURL: "<?php echo get_site_url(); ?>"
             },
@@ -518,16 +519,16 @@
                     axios.post(apiEndpointURL + '/create-ywos-roving-order' + '?nonce=' + yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
-                            self.validateReview();
                             if(data.responseCode==0){
-                                self.validateReview();
-                                // ywos.redirectToPage('thank-you');
+                                // self.validateReview();
+                                ywos.redirectToPage('thank-you');
+                            }else{
+                                errorMsg = self.renderText('errorCreateOrder');
                             }
                             
                         })
                         .catch((error) => {
                             var response = error.response;
-                            console.log(response);
                             if (response != '') {
                                 var data = response.data;
                                 var errorMsg = '';
@@ -565,7 +566,7 @@
                     ywos.updateYWOSLSData();
                     self.ajaxCreateStagingYOSOrder();
                     
-                    ywos.redirectToPage('thank-you');
+                    // ywos.redirectToPage('thank-you');
                 },
                 watchSubmit: function() {
                     var self = this;

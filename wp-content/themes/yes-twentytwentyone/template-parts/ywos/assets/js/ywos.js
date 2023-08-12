@@ -111,6 +111,7 @@ const ywos = {
             'expiry': ywosCartExpiry,
             'sessionKey': sessionKey,
             'meta': {
+                'completedStep' : 0,
                 'planID': planID,
                 'sessionId': '',
                 'deviceID': deviceID,
@@ -146,7 +147,6 @@ const ywos = {
         }
 
         ywosLocalStorageData = storageData;
-
         localStorage.setItem(ywosLSName, JSON.stringify(ywosLocalStorageData));
     },
     redirectToCart: function() {
@@ -320,18 +320,25 @@ const ywos = {
             }
         });
     },
-    checkExists: function() {
 
-        if (ywosLSData === null) {
+    checkExists: function(CheckLocalStorageData = false, curStep) {
+        if (CheckLocalStorageData) {
+            var ywosLocalStorageData =JSON.parse(localStorage.getItem('yesYWOS'));
+            if( ywosLocalStorageData !== null && typeof ywosLocalStorageData !== 'undefined' ) { 
+                this.lsData = ywosLocalStorageData;
+                this.lsData.meta.completedStep  = 4;
+                return true;
+            }
+        }else if(ywosLSData === null){
             return false;
         } else {
             this.lsData = ywosLSData;
             return true;
         }
     },
-    checkExpiryValid: function() {
-        if (ywosLSData !== null && typeof ywosLSData.expiry !== 'undefined') {
-            if (Date.now() > ywosLSData.expiry) {
+    checkExpiryValid: function(CheckLocalStorageData = false) {
+        if ((ywosLSData !== null && typeof ywosLSData.expiry !== 'undefined') || (CheckLocalStorageData && this.lsData !== null && typeof this.lsData.expiry !== 'undefined')) {
+            if ((Date.now() > ywosLSData?.expiry) && (!CheckLocalStorageData && (Date.now() > this.lsData.expiry))) {
                 return false;
             } else {
                 this.updateYWOSExpiry();
@@ -455,24 +462,29 @@ const ywos = {
             console.log('Local storage data not found!');
             isValid = false;
         } else if (!this.checkExpiryValid()) {
+            alert(1);
             console.log('Local storage data is expired!');
             isValid = false;
         } else if (!this.checkItems()) {
+            alert(2);
             console.log('Plan ID is not found!');
             isValid = false;
         } else if (this.checkPurchaseCompleted(curStep)) {
+            alert(3);
             console.log('Purchase has been completed!');
             isValid = false;
         } else if (!isSkipCart && !this.checkStep(curStep)) {
+            alert(4);
             console.log('Previous step not yet completed!');
             // isValid = false;
             // return false;
         } else if (isSkipCart) {
+            alert(5);
             if (!this.checkStepRoving(curStep)) {
-
+                
             }
         }
-
+        
         $('#main-vue').show();
         if (!isValid) {
             this.removeYWOSLSData();
@@ -484,14 +496,12 @@ const ywos = {
             return true;
         }
     },
-    validateSessionRoving: function (curStep = 0) {
-        console.log(curStep, 'curStep');
-        // return false;
+    validateSessionRoving: function (curStep = 0, CheckLocalStorageData = false) {
         var isValid = true;
-        if (!this.checkExists()) {
-            console.log('Local storage data not found!1234555');
+        if (!this.checkExists(CheckLocalStorageData)) {
+            console.log('Local storage data not found!');
             isValid = false;
-        } else if (!this.checkExpiryValid()) {
+        } else if (!this.checkExpiryValid(CheckLocalStorageData)) {
             console.log('Local storage data is expired!');
             isValid = false;
         } else if (!this.checkItems()) {
@@ -503,7 +513,7 @@ const ywos = {
         } else if (!this.checkStepRoving(curStep)) {
             console.log('Previous step not yet completed!');
         }
-
+        
         $('#main-vue').show();
         if (!isValid) {
             this.removeYWOSLSData();

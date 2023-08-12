@@ -279,7 +279,7 @@
                 <p id="modal-bodyText"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+                <button type="button" onclick="location.href = '/'" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
             </div>
         </div>
     </div>
@@ -291,7 +291,7 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
-                currentStep: 3,
+                currentStep: 4,
                 simType: '',
                 StagingOrderNumber: '',
                 upFrontPayment: false,
@@ -585,7 +585,7 @@
 
                                 }
                                 toggleOverlay(false);
-                                self.toggleModalAlert(self.renderText('modalCreateStagingError'), errorMsg);
+                                self.toggleModalAlert( self.renderText('modalCreateStagingError'), errorMsg, 'http://new-ytl.localhost/');
                             }
 
                             // // console.log(error, response);
@@ -669,8 +669,8 @@
                         });
                     }
 
-                    self.updateData();
-                    // self.validateSession();  
+                    // self.updateData();
+                    self.validateSession();  
                 },
                 updateSummary: function() {
                     var self = this;
@@ -686,25 +686,20 @@
                 validateSession: function() {
 
                     var self = this;
-                    ywos.validateSessionRoving(self.currentStep)
-                    // if (ywos.validateSessionRoving(self.currentStep)) {
+                    if (ywos.validateSessionRoving(self.currentStep, true)) {
                         self.updateData();
-                    // } else {
-                    //     // history.back();
-                    // }
+                    } else {
+                        // history.back();
+                    }
                 },
                 updateData: function() {
                     var self = this;
-                    var data =JSON.parse(localStorage.getItem('yesYWOS'))
-                    data.meta.completedStep = self.currentStep;
-                    data.meta.orderSummary = self.orderSummary;
-                    data.meta.customerDetails = self.customerDetails;
-                    data.meta.deliveryInfo= self.deliveryInfo; 
-                    data.meta.dealer = self.dealer;
-                    data.trxType='roving';
-                    localStorage.setItem('yesYWOS', JSON.stringify(data))
-                    $('#main-vue').show();
-                    // ywos.updateYWOSLSData();
+                    ywos.lsData.meta.orderSummary = self.orderSummary;
+                    ywos.lsData.meta.customerDetails = self.customerDetails;
+                    ywos.lsData.meta.dealer = self.dealer;
+                    ywos.lsData.meta.deliveryInfo= self.deliveryInfo; 
+                    ywos.lsData.trxType = 'roving';
+                    ywos.updateYWOSLSData();
                     self.pageInit();
                 },
                 pageInit: function() {
@@ -730,10 +725,12 @@
 
                     // self.watchSubmit();
                     // ywos.lsData.meta.completedStep = self.currentStep;
-                    var data =JSON.parse(localStorage.getItem('yesYWOS'))
-                    data.meta.completedStep = self.currentStep;
-                    data.meta.agree = self.agree;
-                    localStorage.setItem('yesYWOS', JSON.stringify(data))
+                    // var data =JSON.parse(localStorage.getItem('yesYWOS'))
+                    // data.meta.agree = self.agree;
+                    // localStorage.setItem('yesYWOS', JSON.stringify(data))
+                    ywos.lsData.meta.completedStep = self.currentStep;
+                    ywos.lsData.meta.agree = self.agree;
+                    ywos.updateYWOSLSData();
                     // ywos.updateYWOSLSData();
                     ywos.redirectToPage('payment');
                 },
@@ -747,6 +744,9 @@
                         $('#modal-bodyText').html('');
                     });
                 },
+
+        
+
                 watchSubmit: function() {
                     var self = this;
                     var isValid = true;
