@@ -236,6 +236,14 @@ class Ytl_Pull_Data_Public
 	 *
 	 * @since    1.0.0
 	 * @access   private
+	 * @var      string    $path_create_yos_order_and_payment_esim		The api path to check payment status.
+	 */
+	private $path_create_yos_order_and_payment_esim;
+	/**
+	 * The api path to check payment status.
+	 *
+	 * @since    1.0.0
+	 * @access   private
 	 * @var      string    $path_check_order_payment_status		The api path to check payment status.
 	 */
 	private $path_check_order_payment_status;
@@ -330,6 +338,7 @@ class Ytl_Pull_Data_Public
 		$this->path_verify_referral_code 	= '/mobileyos/mobile/ws/v1/json/verifyReferralCode';
 		$this->path_get_fpx_bank_list 		= '/mobileyos/mobile/ws/v1/json/getFpxBankList';
 		$this->path_create_yos_order_and_payment = '/mobileyos/mobile/ws/v1/json/createYOSOrderAndPaymentWithAddonAndReloads';
+		$this->path_create_yos_order_and_payment_esim = '/mobileyos/mobile/ws/v1/json/createEsimOrderAndPaymentWithAddonAndReloads';
 		$this->path_check_order_payment_status 	 = '/mobileyos/mobile/ws/v1/json/orderPaymentStatus';
 		$this->path_get_rm_wallet_merchant 	 = '/mobileyos/mobile/ws/v1/json/getRMEwalletList';
 		$this->path_get_ipp_tenure_details		 = '/mobileyos/mobile/ws/v1/json/getIPPTenureDetails';
@@ -1552,9 +1561,10 @@ class Ytl_Pull_Data_Public
 		$card_expiry_year 	= $this->get_request_input($order_info, 'card_expiry_year');
 		$ippType 		= $this->get_request_input($order_info, 'ippType');
 		$locale 		= $this->get_request_input($order_info, 'locale');
-
+		$simType		= $this->get_request_input($order_info, 'esim');
 		$session_id 	= $this->ca_generate_auth_token(true);
 		$walletType		= $this->get_request_input($order_info, 'walletType');
+		$stagingOrderNumber		= $this->get_request_input($order_info, 'stagingOrderNumber');
 		
 		if (
 			$phone_number != null && $customer_name != null && $dob != null && $gender != null && $email != null && $security_type != null && $security_id != null &&
@@ -1594,7 +1604,9 @@ class Ytl_Pull_Data_Public
 					'planType' 			=> $plan_type, 
 					'productBundleId' 	=> $product_bundle_id, 
 					'referralCode' 		=> $referral_code, 
-					'addonName' 		=> $addon_name
+					'addonName' 		=> $addon_name,
+					'esim'              =>$simType,
+					'stagingOrderNumber'=>$stagingOrderNumber,
 				], 
 
 				'deliveryAddress' 		=> [
@@ -1641,7 +1653,13 @@ class Ytl_Pull_Data_Public
 				'timeout'     	=> $this->api_timeout
 			];
 			
-			$api_url 		= $this->api_domain . $this->path_create_yos_order_and_payment;
+			if($simType =='true'){
+				$api_url 		= $this->api_domain . $this->path_create_yos_order_and_payment_esim;
+			}else if($simType ==''){
+				$api_url 		= $this->api_domain . $this->path_create_yos_order_and_payment;
+			}else{
+				$api_url 		= $this->api_domain . $this->path_create_yos_order_and_payment;
+			}
 			$request 		= wp_remote_post($api_url, $args);
 			$data 			= json_decode($request['body']);
 			$yos_order_meta = $params;

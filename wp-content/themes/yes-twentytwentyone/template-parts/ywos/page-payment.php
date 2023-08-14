@@ -418,7 +418,8 @@
                         city: '',
                         country: '',
                         state: ''
-                    }
+                    },
+                    StagingOrderNumber: '',
                 },
                 paymentInfo: {
                     paymentMethod: 'CREDIT_CARD',

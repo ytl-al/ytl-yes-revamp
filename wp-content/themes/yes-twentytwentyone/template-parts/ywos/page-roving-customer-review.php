@@ -530,6 +530,7 @@
                                     "msisdn": data.mobileNumber,
                                     "securityType": data.securityType,
                                     "securityId": data.securityNumber,
+                                    'stagingOrderNumber':data.stagingOrderNumber,
                                     "dob": formattedDate,
                                     "gender": data.gender,
                                     "email": data.email,
