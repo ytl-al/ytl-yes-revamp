@@ -521,7 +521,7 @@
                             var data = response.data;
                             if(data.responseCode==0){
                                 // self.validateReview();
-                                ywos.redirectToPage('thank-you');
+                                // ywos.redirectToPage('thank-you');
                             }else{
                                 errorMsg = self.renderText('errorCreateOrder');
                             }

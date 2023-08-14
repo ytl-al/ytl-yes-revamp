@@ -286,6 +286,7 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function() {
+    
         toggleOverlay();
 
         var pageDelivery = new Vue({
@@ -767,6 +768,5 @@
         });
     });
 </script>
-
 
 <?php include('footer-ywos.php'); ?>

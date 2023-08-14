@@ -1267,6 +1267,12 @@
         });
     });
 </script>
-
+<script>
+        var pageTitleElement = document.getElementsByClassName("rovingPageTitle");
+        // Add a click event listener to the element
+        pageTitleElement.addEventListener("click", function() {
+            location.reload();
+        });
+    </script>
 
 <?php include('footer-ywos.php'); ?>
