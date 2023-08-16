@@ -1,0 +1,147 @@
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+<script type="text/javascript">
+    /**
+     * @license
+     * Copyright 2019 Google LLC. All Rights Reserved.
+     * SPDX-License-Identifier: Apache-2.0
+     */
+    // @ts-nocheck TODO remove when fixed
+    // [START maps_places_searchbox]
+    // This example adds a search box to a map, using the Google Place Autocomplete
+    // feature. People can enter geographical searches. The search box will return a
+    // pick list containing a mix of places and predicted search terms.
+    // This example requires the Places library. Include the libraries=places
+    // parameter when you first load the API. For example: 
+    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+
+    function initAutocomplete() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: 4.3693217053098135, lng: 102.21470351336957 },
+            zoom: 7,
+            mapTypeId: "roadmap",
+        });
+        // Create the search box and link it to the UI element.
+        const input = document.getElementById("pac-input");
+        const searchBox = new google.maps.places.SearchBox(input);
+
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener("bounds_changed", () => {
+            searchBox.setBounds(map.getBounds());
+            //  alert(place);
+        });
+
+        let markers = [];
+
+        // [START maps_places_searchbox_getplaces]
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener("places_changed", () => {
+            const places = searchBox.getPlaces();
+            // alert(place);
+
+            if (places.length == 0) {
+                return;
+            }
+
+            // Clear out the old markers.
+            markers.forEach((marker) => {
+                marker.setMap(null);
+                //alert(marker);
+            });
+            markers = [];
+
+            // For each place, get the icon, name and location.
+            const bounds = new google.maps.LatLngBounds();
+
+            places.forEach((place) => {
+                if (!place.geometry || !place.geometry.location) {
+                    console.log("Returned place contains no geometry");
+                    return;
+                }
+
+                //console.log(place.geometry.location.lat(), place.geometry.location.lng());
+
+                $.ajax({
+                    url: "http://localhost/wp-json/elevate/v1/outage-details",
+                    data: {
+                        'Latitude': place.geometry.location.lat(),
+                        'Langitude': place.geometry.location.lng(),
+                    },
+                    type: 'GET',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (result) {
+                        var data = JSON.parse(result.body).Data;
+                       // console.log(obj);
+                        //return false;
+
+                        //var data = JSON.parse(obj).Data;
+                        
+                        for (var i = 0; i < data.length; i++) {
+                            var outages = data[i].Outages;
+                            for (var j = 0; j < outages.length; j++) {
+                                var severity = outages[j].Severity;
+                                console.log(severity);                                
+                                if (severity === "Customer complaint") {
+                                    console.log("Hello");
+                                } else {
+                                    console.log("Not Hello");
+                                }
+                            }
+                           // return false;
+
+                        }
+                        //else if Severity send in postman
+                        // console.log(result);
+                        // console.log(obj.Data[0].Outages[0].Severity, obj);
+                        // if (obj.Data[0].Outages[0].Severity == 'Unplanned' || obj.Data[0].Outages[0].Severity == 'Full' || obj.Data[0].Outages[0].Severity == 'S1 AC Fail' || obj.Data[0].Outages[0].Severity == 'S2 High Temperature' || obj.Data[0].Outages[0].Severity == 'S2MW') {
+                        //     $("#response_msg").append("Yes services are down in the area.")
+                        // } else if (obj.Data[0].Outages[0].Severity == 'S3') {
+                        //     $("#response_msg").append("Yes services are working partially in the area. If you are facing a network issue, please follow our self-troubleshooting steps.")
+                        // }
+                    },
+                    error: function (error) {
+
+                    }
+                });
+
+                // alert(place.geometry.location.lat());
+
+                const icon = {
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(25, 25),
+                };
+
+                // Create a marker for each place.
+                markers.push(
+                    new google.maps.Marker({
+                        map,
+                        icon,
+                        title: place.name,
+                        position: place.geometry.location,
+                    }),
+                );
+                if (place.geometry.viewport) {
+                    // Only geocodes have viewport.
+                    bounds.union(place.geometry.viewport);
+                } else {
+                    bounds.extend(place.geometry.location);
+                }
+            });
+            map.fitBounds(bounds);
+        });
+        // [END maps_places_searchbox_getplaces]
+    }
+
+    window.initAutocomplete = initAutocomplete;
+    // [END maps_places_searchbox]  AIzaSyDVy7AwttxREwuYckeUZAccZdnIm93RN6A
+</script>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlZr9PPEuI9PXnC_4pv_4FopDEIcPdGqI&callback=initAutocomplete&libraries=places&v=weekly"
+    defer></script>

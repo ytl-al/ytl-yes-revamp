@@ -1976,8 +1976,7 @@ class Ytl_Pull_Data_Public
 	}
 
 	public function ca_validate_guest_login_otp($MobileNumber = null, $otp_password = null, $locale = 'EN')
-	{
-	
+	{	
 		// $api_domain="https://ydbp-shoutout-kraken-dev.azurewebsites.net";
 		$guestLoginData=get_option('yes_gauest_login_token_data',true);
 		if(isset( $guestLoginData) && !empty($guestLoginData)){

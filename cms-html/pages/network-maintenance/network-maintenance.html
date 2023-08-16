@@ -5,15 +5,31 @@
             <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-7 col-sm-7 col-12">
                 <div class="banner-content-section" data-aos="fade-up">
                     <h1>
-                        Are you experiencing network issues?</h1>
-                    <p>
-                        Your area might be scheduled for maintenance.</p>
+                        Network Status Checker</h1>
+                    <p> Check for planned upgrades, maintenance, or outage affecting your mobile experience</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 <!-- /wp:html -->
+
+<!-- Map Start -->
+<section id="coverage-area">
+    <h2>Check the network status in your area</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+              <div class="search-bar">
+              <input id="pac-input" class="controls" type="text" placeholder="Search Box" />
+              </div>
+              <div id="response_msg">Yes services are down in the area.</div>
+              <div id="map"></div>                
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Map End -->
 
 <!-- wp:html -->
 <section class="mid-section">
@@ -42,7 +58,7 @@
                     </h3>
                 </div>
                 <div class="data-section-inner">
-                    <div class="left-section">
+                    <!-- <div class="left-section d-none">
                         <select class="form-select">
                             <option>All State</option>
                             <option>1</option>
@@ -51,13 +67,9 @@
                             <option>4</option>
                         </select>
                     </div>
-                    <div class="right-section">
-                        <p class="form-check">
-                            <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something"
-                                checked>
-                            <label class="form-check-label">Scheduled</label>
-                        </p>
-                    </div>
+                    <div class="right-section d-none">
+                        <p><span class="badge bg-secondary"></span> Scheduled</p>                        
+                    </div> -->
 
                     <div class="table-responsive data-table-section">
                         <table class="table table-bordered table-striped">
@@ -142,7 +154,7 @@
                                 <a href="#" class="viewall-btn mb-5">
                                     Call now&nbsp;<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
                             </div>
-                        </div>
+                        </div>                        
                     </div>
                     <div class="col-12 col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up">
                         <div class="card">
