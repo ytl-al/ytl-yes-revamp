@@ -80,9 +80,29 @@
             </div>
         </div>
 
-        <div class="row" v-if="orderSummary.plan.planType != 'prepaid'">
+        <div class="row" v-if="orderSummary.plan.planType != 'prepaid' && ywos?.lsData?.meta.planID != '1304' && ywos?.lsData?.meta.planID != '1306' ">
             <div class="col-12 mb-3">
                 <p class="large">{{ orderSummary.plan.displayName }}</p>
+            </div>
+        </div>
+        <div class="row" v-if="ywos?.lsData?.meta.planID == 1304">
+            <div class="col-12 mb-3">
+                <p class="large">Infinite Basic_18M Nubia NEO 5G Black</p>
+            </div>
+        </div>
+        <div class="row" v-if="ywos?.lsData?.meta.planID == 1306">
+            <div class="col-12 mb-3">
+                <p class="large">Infinite Basic_18M Nubia NEO 5G Yellow</p>
+            </div>
+        </div>
+        <div class="row" v-if="ywos?.lsData?.meta.planID == 1313">
+            <div class="col-12 mb-3">
+                <p class="large">Infinite Basic RAHMAH 1 Vivo Y27 5G Black</p>
+            </div>
+        </div>
+        <div class="row" v-if="ywos?.lsData?.meta.planID == 1315">
+            <div class="col-12 mb-3">
+                <p class="large">Infinite Basic RAHMAH 1 Vivo Y27 5G Purple</p>
             </div>
         </div>
 

@@ -31,10 +31,13 @@
     #cart-body .packagebox .visualbg {
         background: linear-gradient(16.65deg, #00B4F0 -123.85%, #CF5396 74.76%);
         text-align: center;
-        padding: 15px 12px;
+        padding: 0px 0px !important;
     }
-    
-    #cart-body .packagebox .visualbg .img-fluid { max-width: 50%; padding-left: 12px; }
+
+    #cart-body .packagebox .visualbg .img-fluid {
+        max-width: 50%;
+        padding-left: 12px;
+    }
 
     #cart-body .packagebox h3 {
         font-weight: 800;
@@ -398,14 +401,31 @@
     }
 
     @media (min-width: 922px) {
-        #cart-body .packagebox .visualbg .img-fluid { max-width: 100%; }
+        #cart-body .packagebox .visualbg .img-fluid {
+            max-width: 100%;
+        }
     }
 
-    .nav-container { background-color: #1A1E47; }
-    .nav-container .navbar { padding-top: 8px; padding-bottom: 8px; }
-    .nav-container .navbar-brand { padding-top: 0; padding-bottom: 0; }
-    .nav-container a, .nav-container .login-btn {}
-    .logo-top { width: 35px; }
+    .nav-container {
+        background-color: #1A1E47;
+    }
+
+    .nav-container .navbar {
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .nav-container .navbar-brand {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .nav-container a,
+    .nav-container .login-btn {}
+
+    .logo-top {
+        width: 35px;
+    }
 </style>
 
 
@@ -429,17 +449,21 @@
                         <div class="packagebox mb-3">
                             <div class="row align-items-center">
                                 <div class="col-lg-3 col-12 visualbg d-none">
-                                    <img src="/wp-content/uploads/2022/05/ft5g-cart-visual.jpg" class="img-fluid" alt="" />
+                                    <img src="/wp-content/uploads/2022/05/ft5g-cart-visual.jpg" class="img-fluid"
+                                        alt="" />
                                 </div>
                                 <div class="col-12 p-3 px-5">
                                     <template v-if="tpValidation == 'has_purchased'">
                                         <h3 class="mt-3 mt-lg-0">Link has expired!</h3>
-                                        <p class="mb-3">Your link has been redeemed. Only one purchase can be made per unique link.</p>
+                                        <p class="mb-3">Your link has been redeemed. Only one purchase can be made per
+                                            unique link.</p>
                                     </template>
 
                                     <template v-if="tpValidation == 'not_valid'">
                                         <h3 class="mt-3 mt-lg-0">Failed to add to cart!</h3>
-                                        <p class="mb-3">Your request is not valid. The Unique ID and Promo ID provided cannot be validated. Please <a href="javascript:void(0)" onClick="history.back();">go back</a> and try again.</p>
+                                        <p class="mb-3">Your request is not valid. The Unique ID and Promo ID provided
+                                            cannot be validated. Please <a href="javascript:void(0)"
+                                                onClick="history.back();">go back</a> and try again.</p>
                                     </template>
                                 </div>
                             </div>
@@ -456,11 +480,13 @@
                         <div class="packagebox mb-3">
                             <div class="row align-items-center">
                                 <div class="col-lg-3 col-12 visualbg d-none">
-                                    <img src="/wp-content/uploads/2022/05/ft5g-cart-visual.jpg" class="img-fluid" alt="" />
+                                    <img src="/wp-content/uploads/2022/05/ft5g-cart-visual.jpg" class="img-fluid"
+                                        alt="" />
                                 </div>
                                 <div class="col-12 p-3 px-5">
                                     <h3 class="mt-3 mt-lg-0">No item in the cart</h3>
-                                    <p class="mb-3">You may browse the plans available <a href="/#popular-deals">here</a>.</p>
+                                    <p class="mb-3">You may browse the plans available <a
+                                            href="/#popular-deals">here</a>.</p>
                                 </div>
                             </div>
                         </div>
@@ -475,36 +501,109 @@
                     <div class="accordion" id="cart-accordion">
                         <div class="packagebox mb-3">
                             <div class="row">
-                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center justify-content-center" v-if="orderSummary.plan.planType == 'postpaid'">
-                                    <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid" alt="" />
+                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center justify-content-center"
+                                    v-if="(orderSummary.plan.planType == 'postpaid' && orderSummary.plan.displayName !='Yes 5G Wireless Broadband Flexi' && orderSummary.plan.displayName !='Yes 5G Wireless Broadband Gateway' && orderSummary.plan.displayName !='Infinite Basic_18M' &&  orderSummary.plan.displayName !='Infinite Basic RAHMAH 1')">
+                                    <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid"
+                                        alt="" />
                                 </div>
-                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center" v-if="orderSummary.plan.planType == 'prepaid'">
-                                    <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid" alt="" />
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                    v-if="orderSummary.plan.planType == 'prepaid'">
+                                    <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid"
+                                        alt="" />
+                                </div>
+
+                              
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(orderSummary.plan.displayName=='Yes 5G Wireless Broadband Flexi')">
+                                    <img src="/wp-content/uploads/2023/08/wirelessbroadband-flexi-thumbnail.png" class="img-fluid m-auto"
+                                        alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(orderSummary.plan.displayName=='Yes 5G Wireless Broadband Gateway')">
+                                    <img src="/wp-content/uploads/2023/08/wirelessbroadband-thumbnail.png" class="img-fluid m-auto"
+                                        alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(planID == '1304')">
+                                    <img src="/wp-content/uploads/2023/08/Xiaomi-2-1-1.png" class="img-fluid m-auto"
+                                        alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(planID == '1306')">
+                                    <img src="/wp-content/uploads/2023/08/Xiaomi-2-1.jpg" class="img-fluid m-auto"
+                                        alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(planID == '1313')">
+                                    <img src="/wp-content/uploads/2023/08/Xiaomi-2-1-5.png" class="img-fluid m-auto"
+                                        alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(planID == '1315')">
+                                    <img src="/wp-content/uploads/2023/08/Xiaomi-2-1-5.png" class="img-fluid m-auto"
+                                        alt="" />
                                 </div>
                                 <div class="col-lg-6 col-12 pt-lg-4 pb-1 px-4 px-lg-5 ps-lg-4">
-                                    <h3 class="mt-3 mt-lg-0">{{ orderSummary.plan.displayName }}</h3>
-                                    <p class="mb-3" v-if="orderSummary.plan.internetData">RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(0) }} for {{ orderSummary.plan.internetData }}</p>
+                                    <h3 class="mt-3 mt-lg-0" v-if="(orderSummary.plan.displayName=='Yes Wireless Fibre 120Mbps_Raya Promo_2023')">
+                                        Yes Wireless Fibre 120Mbps</h3>
+                                        <h3 class="mt-3 mt-lg-0" v-else-if="planID == '1304'">
+                                        Infinite Basic_18M Nubia NEO 5G Black</h3>
+                                        <h3 class="mt-3 mt-lg-0" v-else-if="planID == '1306'">
+                                        Infinite Basic_18M Nubia NEO 5G Yellow</h3>
+                                        <h3 class="mt-3 mt-lg-0" v-else-if="planID == '1313'">
+                                        Infinite Basic RAHMAH 1 Vivo Y27 5G Black</h3>
+                                        <h3 class="mt-3 mt-lg-0" v-else-if="planID == '1315'">
+                                        Infinite Basic RAHMAH 1 Vivo Y27 5G Purple</h3>
+                                    <h3 class="mt-3 mt-lg-0" v-else>{{ orderSummary.plan.displayName }}</h3>
+                                    <p class="mb-3" v-if="orderSummary.plan.internetData">RM{{
+                                        parseFloat(orderSummary.plan.totalAmount).toFixed(0) }} for {{
+                                        orderSummary.plan.internetData }}</p>
                                     <div class="package-info" v-if="packageInfos.length">
                                         <div class="row">
-                                            <div class="col-6 mb-3" v-for="(packageInfo, index) in packageInfos.slice(0, 4)">
+                                            <div class="col-6 mb-3"
+                                                v-for="(packageInfo, index) in packageInfos.slice(0, 4)">
                                                 <span class="span-checkList">{{ packageInfo }}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-12 mt-3 mb-3 mt-lg-0 mb-lg-0 d-flex align-items-center justify-content-lg-end justify-content-center">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        <h3 class="price">RM{{ (orderSummary.plan.totalAmount % 1 != 0) ? parseFloat(orderSummary.plan.totalAmount).toFixed(2) : formatPrice(parseFloat(orderSummary.plan.totalAmount)) }}</h3>
+                                <!-- <div class="col-lg-6 col-12 pt-lg-4 pb-1 px-4 px-lg-5 ps-lg-4">
+                                    <h3 class="mt-3 mt-lg-0"
+                                        v-if="(orderSummary.plan.displayName=='Infinite Basic_18M')">
+                                                Nubia NEO 5G</h3>
+                                    <h3 class="mt-3 mt-lg-0" v-else>{{ orderSummary.plan.displayName }}</h3>
+                                    <p class="mb-3" v-if="orderSummary.plan.internetData">RM{{
+                                        parseFloat(orderSummary.plan.totalAmount).toFixed(0) }} for {{
+                                        orderSummary.plan.internetData }}</p>
+                                    <div class="package-info" v-if="packageInfos.length">
+                                        <div class="row">
+                                            <div class="col-6 mb-3"
+                                                v-for="(packageInfo, index) in packageInfos.slice(0, 4)">
+                                                <span class="span-checkList">{{ packageInfo }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div
+                                    class="col-lg-3 col-12 mt-3 mb-3 mt-lg-0 mb-lg-0 d-flex align-items-center justify-content-lg-end justify-content-center">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <h3 class="price">RM{{ (orderSummary.plan.totalAmount % 1 != 0) ?
+                                            parseFloat(orderSummary.plan.totalAmount).toFixed(2) :
+                                            formatPrice(parseFloat(orderSummary.plan.totalAmount)) }}</h3>
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#cart-accordion">
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                            data-bs-parent="#cart-accordion">
                             <div class="accordion-body">
                                 <div v-if="packageInfos.slice(4).length">
                                     <h1>{{ renderText('summaryMoreBenefits') }}</h1>
                                     <div class="row mb-4">
-                                        <div class="col-lg-6 mb-3" v-for="(packageInfo, index) in packageInfos.slice(4)"><span class="span-itemList">{{ packageInfo }}</span></div>
+                                        <div class="col-lg-6 mb-3"
+                                            v-for="(packageInfo, index) in packageInfos.slice(4)"><span
+                                                class="span-itemList">{{ packageInfo }}</span></div>
                                     </div>
                                 </div>
 
@@ -521,7 +620,8 @@
                                         </div>
                                     </div>
                                 </template>
-                                <div class="mt-2 pt-2 border-top pb-2 border-bottom" v-if="orderSummary.plan.bundleName || orderSummary.plan.hasDevice">
+                                <div class="mt-2 pt-2 border-top pb-2 border-bottom"
+                                    v-if="orderSummary.plan.bundleName || orderSummary.plan.hasDevice">
                                     <!-- <p class="bold mb-0" v-if="orderSummary.plan.bundleName">Device Bundle: <span class="fw-bold">{{ orderSummary.plan.bundleName }}</span></p> -->
                                     <template v-for="(price, index) in orderSummary.due.priceBreakdown.device">
                                         <div class="row">
@@ -537,7 +637,9 @@
                                 <div class="row mb-3 mt-5">
                                     <div class="col-8 pb-1 border-bottom">
                                         <p>{{ renderText('summaryAddOns') }}</p>
-                                        <p v-if="orderSummary.addOn != null">{{ orderSummary.addOn.displayAddonName }} <a href="javascript:void(0)" class="btn-sm pink-btn text-white mx-lg-3" v-on:click="removeAddOn()">Remove</a></p>
+                                        <p v-if="orderSummary.addOn != null">{{ orderSummary.addOn.displayAddonName }}
+                                            <a href="javascript:void(0)" class="btn-sm pink-btn text-white mx-lg-3"
+                                                v-on:click="removeAddOn()">Remove</a></p>
                                     </div>
                                     <div class="col-4 pb-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.addOns).toFixed(2) }}</p>
@@ -548,10 +650,12 @@
                                     <div class="col-6 pb-1 pt-1 border-bottom text-end">
                                         <p>RM{{ parseFloat(orderSummary.due.taxesSST).toFixed(2) }}</p>
                                     </div>
-                                    <div class="col-6 pb-1 pt-1 border-bottom" v-if="orderSummary.due.foreignerDeposit > 0">
+                                    <div class="col-6 pb-1 pt-1 border-bottom"
+                                        v-if="orderSummary.due.foreignerDeposit > 0">
                                         <p>{{ renderText('summaryForeignerDeposit') }}</p>
                                     </div>
-                                    <div class="col-6 pb-1 pt-1 border-bottom text-end" v-if="orderSummary.due.foreignerDeposit > 0">
+                                    <div class="col-6 pb-1 pt-1 border-bottom text-end"
+                                        v-if="orderSummary.due.foreignerDeposit > 0">
                                         <p>RM{{ parseFloat(orderSummary.due.foreignerDeposit).toFixed(2) }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom">
@@ -564,7 +668,9 @@
                                         <p>{{ renderText('summaryRounding') }}</p>
                                     </div>
                                     <div class="col-6 pb-1 pt-1 border-bottom text-end">
-                                        <p>{{ (orderSummary.due.rounding < 0) ? '-' : '' }}RM{{ parseFloat(orderSummary.due.rounding.replace('-', '')).toFixed(2) }}</p>
+                                        <p>{{ (orderSummary.due.rounding < 0) ? '-' : '' }}RM{{
+                                                parseFloat(orderSummary.due.rounding.replace('-', '' )).toFixed(2)
+                                                }}</p>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -573,23 +679,47 @@
                                         <p class="small d-none">{{ renderText('summaryNotInvoice') }}</p>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <p class="large">RM{{ formatPrice(parseFloat(orderSummary.due.total).toFixed(2)) }}</p>
+                                        <p class="large">RM{{ formatPrice(parseFloat(orderSummary.due.total).toFixed(2))
+                                            }}</p>
                                     </div>
                                 </div>
                                 <div v-if="orderSummary.plan.planType != 'prepaid'">
                                     <h1>{{ renderText('summaryMonthlyCharges') }}</h1>
                                     <h2>{{ renderText('summaryRatePlan') }}</h2>
                                     <div class="row mb-3">
-                                        <div class="col-6">
+                                        <div class="col-6"
+                                            v-if="(orderSummary.plan.displayName=='Yes Wireless Fibre 120Mbps_Raya Promo_2023')">
+                                            <p>Yes Wireless Fibre 120Mbps</p>
+                                        </div>
+                                        <div class="col-6"
+                                            v-if="(planID == '1304')">
+                                            <p>Infinite Basic_18M Nubia NEO 5G Black</p>
+                                        </div>
+                                        <div class="col-6"
+                                            v-else-if="(planID == '1306')">
+                                            <p>Infinite Basic_18M Nubia NEO 5G Yellow</p>
+                                        </div>
+                                        <div class="col-6"
+                                            v-else-if="(planID == '1313')">
+                                            <p>Infinite Basic RAHMAH 1 Vivo Y27 5G Black</p>
+                                        </div>
+                                        <div class="col-6"
+                                            v-else-if="(planID == '1315')">
+                                            <p>Infinite Basic RAHMAH 1 Vivo Y27 5G Purple</p>
+                                        </div>
+                                        <div class="col-6" v-else>
                                             <p>{{ orderSummary.plan.displayName }}</p>
                                         </div>
                                         <div class="col-6 text-end">
                                             <p>RM{{ parseFloat(orderSummary.plan.monthlyCommitment).toFixed(2) }}</p>
                                         </div>
                                     </div>
-                                    <div class="mb-3" v-if="orderSummary.plan.supplementaryBundlePlans && orderSummary.plan.supplementaryBundlePlans.length">
-                                        <h4 style="font-size: 16px; font-weight: 700;">{{ renderText('summarySupplimentaryBundleLines') }}</h4>
-                                        <div class="row mb-0" v-for="(subPlan) in orderSummary.plan.supplementaryBundlePlans">
+                                    <div class="mb-3"
+                                        v-if="orderSummary.plan.supplementaryBundlePlans && orderSummary.plan.supplementaryBundlePlans.length">
+                                        <h4 style="font-size: 16px; font-weight: 700;">{{
+                                            renderText('summarySupplimentaryBundleLines') }}</h4>
+                                        <div class="row mb-0"
+                                            v-for="(subPlan) in orderSummary.plan.supplementaryBundlePlans">
                                             <div class="col-6">
                                                 <p class="mb-0 ps-2">{{ subPlan.planName }}</p>
                                             </div>
@@ -603,14 +733,16 @@
                                             <p class="bold">{{ renderText('summaryTotalMonthly') }}</p>
                                         </div>
                                         <div class="col-6 text-end">
-                                            <p class="bold">RM{{ parseFloat(orderSummary.plan.monthlyCommitment).toFixed(2) }}</p>
+                                            <p class="bold">RM{{
+                                                parseFloat(orderSummary.plan.monthlyCommitment).toFixed(2) }}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <p v-if="orderSummary.plan.bundleName != 'Home Broadband'" v-html="renderText('keepNumberOption')"></p>
+                    <p v-if="orderSummary.plan.bundleName != 'Home Broadband'" v-html="renderText('keepNumberOption')">
+                    </p>
                 </div>
                 <div class="col-lg-4 col-12">
                     <div class="summary-box">
@@ -634,8 +766,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="referral-box mb-3 d-none"><input class="form-control referral" type="text" placeholder="Enter referral code (if any)"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/referral-tick.png" class="referral-check" alt=""></div>
-                        <a href="javascript:void(0)" class="pink-btn d-block" v-on:click="checkLoggedIn">{{ renderText('osCheckout') }}</a>
+                        <div class="referral-box mb-3 d-none"><input class="form-control referral" type="text"
+                                placeholder="Enter referral code (if any)"><img
+                                src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/referral-tick.png"
+                                class="referral-check" alt=""></div>
+                        <a href="javascript:void(0)" class="pink-btn d-block" v-on:click="checkLoggedIn">{{
+                            renderText('osCheckout') }}</a>
                     </div>
                 </div>
             </div>
@@ -653,8 +789,12 @@
                                     only*
                                 </p>
                             </div>
-                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/add-icon.png" alt="" v-if="orderSummary.addOn == null || orderSummary.addOn.addonName != addOn.addonName" />
-                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/icon-added.png" width="38" alt="" v-if="orderSummary.addOn != null && orderSummary.addOn.addonName == addOn.addonName" />
+                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/add-icon.png"
+                                alt=""
+                                v-if="orderSummary.addOn == null || orderSummary.addOn.addonName != addOn.addonName" />
+                            <img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/icon-added.png"
+                                width="38" alt=""
+                                v-if="orderSummary.addOn != null && orderSummary.addOn.addonName == addOn.addonName" />
                         </a>
                     </div>
                 </div>
@@ -672,7 +812,8 @@
                 <div class="modal-body pt-5 pb-5">
                     <div class="row justify-content-center mb-4">
                         <div class="col-lg-9 col-12 mb-lg-0 mb-2 align-self-center">
-                            <a href="javascript:void(0)" class="white-btn2 d-block" v-on:click="redirectLoggedIn('guest')">{{ renderText('checkoutGuest') }}</a>
+                            <a href="javascript:void(0)" class="white-btn2 d-block"
+                                v-on:click="redirectLoggedIn('guest')">{{ renderText('checkoutGuest') }}</a>
                         </div>
                     </div>
                     <div class="row justify-content-center">
@@ -685,26 +826,42 @@
                             <p class="bold text-center mb-3">{{ renderText('checkoutPreference') }}</p>
                             <ul class="nav justify-content-center nav-pills mb-3" id="pills-tab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="pills-loginTac-tab" data-bs-toggle="pill" data-bs-target="#pills-loginTac" type="button" role="tab" aria-controls="pills-loginTac" aria-selected="true">TAC</button>
+                                    <button class="nav-link active" id="pills-loginTac-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-loginTac" type="button" role="tab"
+                                        aria-controls="pills-loginTac" aria-selected="true">TAC</button>
                                 </li>
                                 <li class="nav-item" role="presentation" style="margin-left: -20px;">
-                                    <button class="nav-link" id="pills-loginPassword-tab" data-bs-toggle="pill" data-bs-target="#pills-loginPassword" type="button" role="tab" aria-controls="pills-loginPassword" aria-selected="false">{{ renderText('checkoutPassword') }}</button>
+                                    <button class="nav-link" id="pills-loginPassword-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-loginPassword" type="button" role="tab"
+                                        aria-controls="pills-loginPassword" aria-selected="false">{{
+                                        renderText('checkoutPassword') }}</button>
                                 </li>
                             </ul>
                             <div class="tab-content" id="pills-tabContent">
-                                <div class="tab-pane fade show active" id="pills-loginTac" role="tabpanel" aria-labelledby="pills-loginTac-tab">
+                                <div class="tab-pane fade show active" id="pills-loginTac" role="tabpanel"
+                                    aria-labelledby="pills-loginTac-tab">
                                     <form class="form-loginTac" @submit="otpLoginSubmit">
                                         <div class="input-box">
                                             <div class="w-100">
-                                                <input type="text" class="form-control userid" id="input-otpYesNumber" v-model="login.input.otp.yesNumber" @input="watchOTPLoginFields" :placeholder="renderText('checkoutYesID')" />
+                                                <input type="text" class="form-control userid" id="input-otpYesNumber"
+                                                    v-model="login.input.otp.yesNumber" @input="watchOTPLoginFields"
+                                                    :placeholder="renderText('checkoutYesID')" />
                                             </div>
-                                            <div class=" w-100 border-top item-otpPassword" id="box-otpPassword" style="display: none;">
-                                                <input type="password" class="form-control password" id="input-otpPassword" v-model="login.input.otp.password" @input="watchOTPLoginFields" placeholder="******" maxlength="6" />
+                                            <div class=" w-100 border-top item-otpPassword" id="box-otpPassword"
+                                                style="display: none;">
+                                                <input type="password" class="form-control password"
+                                                    id="input-otpPassword" v-model="login.input.otp.password"
+                                                    @input="watchOTPLoginFields" placeholder="******" maxlength="6" />
                                             </div>
                                         </div>
                                         <div class="w-100 text-center mb-4">
-                                            <p class="mb-3 text-center item-otpPassword panel-otpMessage" style="display: none;"><span class="span-message">Your TAC code has been sent.</span><br /> TAC code is valid for <span class="span-timer">5:00</span>.</p>
-                                            <button type="button" class="white-btn2 mt-3 mt-lg-0" v-on:click="generateOTPForLogin" :disabled="!allowRequestOTP">{{ requestOTPText }}</button>
+                                            <p class="mb-3 text-center item-otpPassword panel-otpMessage"
+                                                style="display: none;"><span class="span-message">Your TAC code has been
+                                                    sent.</span><br /> TAC code is valid for <span
+                                                    class="span-timer">5:00</span>.</p>
+                                            <button type="button" class="white-btn2 mt-3 mt-lg-0"
+                                                v-on:click="generateOTPForLogin" :disabled="!allowRequestOTP">{{
+                                                requestOTPText }}</button>
                                             <div class="invalid-feedback mt-1" id="em-otpLogin"></div>
                                         </div>
                                         <!-- <div class="form-check mb-4">
@@ -713,20 +870,27 @@
                                         </div> -->
                                         <div class="row">
                                             <div class="col-lg-10 offset-lg-1 mb-lg-0 mb-2 text-center">
-                                                <input type="submit" :value="renderText('checkoutLogin')" class="pink-btn d-block mb-3 w-100" :disabled="!login.submitButton.allowOtp" />
+                                                <input type="submit" :value="renderText('checkoutLogin')"
+                                                    class="pink-btn d-block mb-3 w-100"
+                                                    :disabled="!login.submitButton.allowOtp" />
                                                 <!-- <a href="https://selfcare.yes.my/myselfcare/doForgotPasswordLink.do" class="forgotpassword">FORGOT PASSWORD?</a> -->
                                             </div>
                                         </div>
                                     </form>
                                 </div>
-                                <div class="tab-pane fade" id="pills-loginPassword" role="tabpanel" aria-labelledby="pills-loginPassword-tab">
+                                <div class="tab-pane fade" id="pills-loginPassword" role="tabpanel"
+                                    aria-labelledby="pills-loginPassword-tab">
                                     <form class="form-loginPassword" @submit="basicLoginSubmit">
                                         <div class="input-box">
                                             <div class="w-100 border-bottom">
-                                                <input type="text" class="form-control userid" id="input-basicYesNumber" v-model="login.input.basic.yesNumber" @input="watchBasicLoginFields" :placeholder="renderText('checkoutYesID')" />
+                                                <input type="text" class="form-control userid" id="input-basicYesNumber"
+                                                    v-model="login.input.basic.yesNumber" @input="watchBasicLoginFields"
+                                                    :placeholder="renderText('checkoutYesID')" />
                                             </div>
                                             <div class="w-100">
-                                                <input type="password" class="form-control password" id="input-basicPassword" v-model="login.input.basic.password" @input="watchBasicLoginFields" placeholder="********" />
+                                                <input type="password" class="form-control password"
+                                                    id="input-basicPassword" v-model="login.input.basic.password"
+                                                    @input="watchBasicLoginFields" placeholder="********" />
                                             </div>
                                         </div>
                                         <div class="w-100 text-center">
@@ -738,7 +902,9 @@
                                         </div> -->
                                         <div class="row">
                                             <div class="col-lg-10 offset-lg-1 mb-lg-0 mb-2 text-center">
-                                                <input type="submit" :value="renderText('checkoutLogin')" class="pink-btn d-block mb-3 w-100" :disabled="!login.submitButton.allowBasic" />
+                                                <input type="submit" :value="renderText('checkoutLogin')"
+                                                    class="pink-btn d-block mb-3 w-100"
+                                                    :disabled="!login.submitButton.allowBasic" />
                                                 <!-- <a href="https://selfcare.yes.my/myselfcare/doForgotPasswordLink.do" class="forgotpassword">FORGOT PASSWORD?</a> -->
                                             </div>
                                         </div>
@@ -773,7 +939,7 @@
 <!-- Vue Wrapper ENDS -->
 
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         toggleOverlay();
 
         var pageCart = new Vue({
@@ -784,7 +950,6 @@
                 isCartEmpty: false,
                 hasFetchPlan: false,
                 requestOTPText: '',
-				esimSupportPlan:'',
                 loginInfo: {
                     type: 'guest',
                     yes_number: '',
@@ -840,26 +1005,26 @@
                     allowAddOn: true,
                     modalRemove: '#modal-addOnRemove'
                 },
-                isTargetedPromo: false, 
-                tpValidation: '', 
-                tpMeta: {}, 
+                isTargetedPromo: false,
+                tpValidation: '',
+                tpMeta: {},
 
-                apiLocale: 'EN', 
+                apiLocale: 'EN',
                 pageText: {
                     pageTitle: { 'en-US': 'Your Cart', 'ms-MY': 'Kart Anda', 'zh-hans': 'Your Cart' },
                     summaryMoreBenefits: { 'en-US': 'More Benefits', 'ms-MY': 'Lebih Manfaat', 'zh-hans': 'More Benefits' },
                     summaryOneTimeCharges: { 'en-US': 'Total Payable Now', 'ms-MY': 'Jumlah Perlu Dibayar Sekarang', 'zh-hans': 'Total Payable Now' },
                     summaryRatePlan: { 'en-US': 'Rate plan', 'ms-MY': 'Kadar pelan', 'zh-hans': 'Rate plan' },
-                    summaryAddOns: { 'en-US': 'Add-Ons', 'ms-MY': 'Tambahan', 'zh-hans': 'Add-Ons' }, 
-                    summaryTaxes: { 'en-US': 'SST @6%', 'ms-MY': 'SST @6%', 'zh-hans': 'SST @6%' }, 
-                    summaryForeignerDeposit: { 'en-US': 'Deposit for Foreigner', 'ms-MY': 'Deposit Warga Asing', 'zh-hans': 'Deposit for Foreigner' }, 
-                    summaryShipping: { 'en-US': 'Delivery Fee', 'ms-MY': 'Caj Penghantaran', 'zh-hans': 'Delivery Fee' }, 
-                    summaryRounding: { 'en-US': 'Rounding Adjustment', 'ms-MY': 'Penyelarasan Pembundaran', 'zh-hans': 'Rounding Adjustment' }, 
-                    summaryTotalDue: { 'en-US': 'Total charges due now', 'ms-MY': 'Jumlah perlu dibayar sekarang', 'zh-hans': 'Total charges due now' }, 
-                    summaryNotInvoice: { 'en-US': 'This summary is not an invoice', 'ms-MY': 'Ringkasan ini bukanlah invois', 'zh-hans': 'This summary is not an invoice' }, 
-                    summaryMonthlyCharges: { 'en-US': 'Monthly Charges', 'ms-MY': 'Caj Bulanan', 'zh-hans': 'Monthly Charges' }, 
-                    summarySupplimentaryBundleLines: { 'en-US': 'Supplementary Bundled Lines', 'ms-MY': 'Talian Tambahan Bundle', 'zh-hans': 'Supplementary Bundled Lines' }, 
-                    summaryTotalMonthly: { 'en-US': 'Total monthly charges', 'ms-MY': 'Jumlah caj bulanan', 'zh-hans': 'Total monthly charges' }, 
+                    summaryAddOns: { 'en-US': 'Add-Ons', 'ms-MY': 'Tambahan', 'zh-hans': 'Add-Ons' },
+                    summaryTaxes: { 'en-US': 'SST @6%', 'ms-MY': 'SST @6%', 'zh-hans': 'SST @6%' },
+                    summaryForeignerDeposit: { 'en-US': 'Deposit for Foreigner', 'ms-MY': 'Deposit Warga Asing', 'zh-hans': 'Deposit for Foreigner' },
+                    summaryShipping: { 'en-US': 'Delivery Fee', 'ms-MY': 'Caj Penghantaran', 'zh-hans': 'Delivery Fee' },
+                    summaryRounding: { 'en-US': 'Rounding Adjustment', 'ms-MY': 'Penyelarasan Pembundaran', 'zh-hans': 'Rounding Adjustment' },
+                    summaryTotalDue: { 'en-US': 'Total charges due now', 'ms-MY': 'Jumlah perlu dibayar sekarang', 'zh-hans': 'Total charges due now' },
+                    summaryNotInvoice: { 'en-US': 'This summary is not an invoice', 'ms-MY': 'Ringkasan ini bukanlah invois', 'zh-hans': 'This summary is not an invoice' },
+                    summaryMonthlyCharges: { 'en-US': 'Monthly Charges', 'ms-MY': 'Caj Bulanan', 'zh-hans': 'Monthly Charges' },
+                    summarySupplimentaryBundleLines: { 'en-US': 'Supplementary Bundled Lines', 'ms-MY': 'Talian Tambahan Bundle', 'zh-hans': 'Supplementary Bundled Lines' },
+                    summaryTotalMonthly: { 'en-US': 'Total monthly charges', 'ms-MY': 'Jumlah caj bulanan', 'zh-hans': 'Total monthly charges' },
                     keepNumberOption: { 'en-US': 'You have the option to <a href="/keep-your-number" target="_blank">Switch to Yes</a> during or after SIM activation.', 'ms-MY': 'Anda mempunyai pilihan untuk <a href="/ms/keep-your-number" target="_blank">Kekalkan Nombor Anda</a> semasa atau selepas pengaktifan SIM.', 'zh-hans': 'You have the option to <a href="/zh-hans/keep-your-number" target="_blank">Switch to Yes</a> during or after SIM activation.' },
                     osTitle: { 'en-US': 'Order summary', 'ms-MY': 'Ringkasan pesanan', 'zh-hans': 'Order summary' },
                     osDueToday: { 'en-US': 'Due today after taxes and shipping', 'ms-MY': 'Perlu dibayar hari ini selepas cukai dan penghantaran', 'zh-hans': 'Due today after taxes and shipping' },
@@ -878,15 +1043,16 @@
                     errorValidNumber: { 'en-US': 'Please insert valid Yes Number', 'ms-MY': 'Sila masukkan Nombor Yes yang sah', 'zh-hans': 'Please insert valid Yes Number' }
                 }
             },
-            created: function() {
+            created: function () {
                 var self = this;
-                setTimeout(function() {
+                setTimeout(function () {
                     ywos.init();
+
                     self.getPlanData();
                 }, 500);
             },
             methods: {
-                getPlanData: function() {
+                getPlanData: function () {
                     var self = this;
 
                     if (ywos.validateSession(self.currentStep)) {
@@ -907,24 +1073,24 @@
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
                     } else {
                         self.isCartEmpty = true;
-                        setTimeout(function() {
+                        setTimeout(function () {
                             toggleOverlay(false);
                         }, 1500);
                     }
 
                     self.requestOTPText = self.renderText('checkoutTACRequest');
                 },
-                initTargetedPromo: function() {
+                initTargetedPromo: function () {
                     var self = this;
                     self.isTargetedPromo = (ywos.lsData.isTargetedPromo) ? ywos.lsData.isTargetedPromo : false;
                     self.tpMeta = ywos.lsData.tpMeta;
                     var userID = self.tpMeta.userID;
                     var promoID = self.tpMeta.promoID;
 
-                    axios.post(apiEndpointURL + '/tp-url-check' + '?nonce='+yesObj.nonce, {
-                            'unique_id': userID,
-                            'promo_id': promoID
-                        })
+                    axios.post(apiEndpointURL + '/tp-url-check' + '?nonce=' + yesObj.nonce, {
+                        'unique_id': userID,
+                        'promo_id': promoID
+                    })
                         .then((response) => {
                             var data = response.data;
                             if (data.has_purchased == '1') {
@@ -947,19 +1113,19 @@
                         .catch((error) => {
                             self.tpValidation = 'not_valid';
                             toggleOverlay(false);
-                            // console.log(error);
+                            console.log(error);
                         })
                         .finally(() => {
                             // console.log('finally');
                         });
-                }, 
-                ajaxGetPlanData: function() {
+                },
+                ajaxGetPlanData: function () {
                     var self = this;
-                    axios.get(apiEndpointURL + '/get-plan-by-id/' + self.planID + '/?nonce='+yesObj.nonce)
+                    axios.get(apiEndpointURL + '/get-plan-by-id/' + self.planID + '/?nonce=' + yesObj.nonce)
                         .then((response) => {
+
                             var data = response.data;
-                            // console.log(typeof(data.eSim));
-							
+                            // console.log(data);
                             if (data.internetData == '∞') {
                                 data.internetData = 'Unlimited';
                             }
@@ -973,7 +1139,7 @@
                                 var keyPricingComponentList = 'pricingComponentList';
                                 if (key == keyPricingComponentList) {
                                     var pricingComponentList = data[keyPricingComponentList];
-                                    pricingComponentList.map(function(pricingComponent) {
+                                    pricingComponentList.map(function (pricingComponent) {
                                         var componentName = pricingComponent.pricingComponentName;
                                         var componentValue = formatPrice(pricingComponent.pricingComponentValue);
                                         var objArr = {
@@ -1010,18 +1176,18 @@
                             }
                             self.orderSummary.plan.hasDevice = hasDevice;
 
-                            self.updatePlan(true);
                             self.updateAddOns(data.addonListServiceTypes);
+                            self.updatePlan(true);
                         })
                         .catch((error) => {
                             // console.log('error', error);
                         })
                 },
-                updateAddOns: function(dataAddOns = {}) {
+                updateAddOns: function (dataAddOns = {}) {
                     var self = this;
                     if (dataAddOns) {
-                        dataAddOns.map(function(data) {
-                            data.addonPackageInfoList.map(function(addOn) {
+                        dataAddOns.map(function (data) {
+                            data.addonPackageInfoList.map(function (addOn) {
                                 // addOn.taxSST = addOn.totalAmount * self.taxRate.sst;
                                 var indPaymentDeduction = addOn.paymentDeductionInfoList.filter(paymentDeduction => {
                                     return paymentDeduction.type == 'SST';
@@ -1039,7 +1205,7 @@
                             self.orderSummary.due.taxesSST += planAddOn.taxSST;
                             self.orderSummary.due.total += planAddOn.taxSST;
 
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 self.addOn.allowAddOn = (self.orderSummary.addOn == null) ? true : false;
                                 if (self.addOn.allowAddOn) {
                                     $('.addon-box').removeClass('addon-box-disabled');
@@ -1051,7 +1217,7 @@
                     }
 
                 },
-                updatePlan: function(closeOverlay = true) {
+                updatePlan: function (closeOverlay = true) {
                     var self = this;
 
                     self.hasFetchPlan = true;
@@ -1061,19 +1227,19 @@
                     self.sendAnalytics('addToCart');
 
                     if (closeOverlay) {
-                        setTimeout(function() {
+                        setTimeout(function () {
                             toggleOverlay(false);
                         }, 500);
                     }
 
                     if (self.orderSummary.plan.notes) {
                         var arrNotes = self.orderSummary.plan.notes.split(',');
-                        self.packageInfos = arrNotes.sort(function(a, b) {
+                        self.packageInfos = arrNotes.sort(function (a, b) {
                             return a.length - b.length;
                         });
                     }
                 },
-                updateSummary: function() {
+                updateSummary: function () {
                     var self = this;
                     var total = 0;
                     // self.orderSummary.due.amount = (self.orderSummary.addOn != null) ? parseFloat(self.orderSummary.plan.totalAmount) + parseFloat(self.orderSummary.addOn.amount) : parseFloat(self.orderSummary.plan.totalAmount);
@@ -1107,14 +1273,14 @@
                     self.orderSummary.due.total = (parseFloat(self.orderSummary.due.total) + parseFloat(self.orderSummary.due.rounding)).toFixed(2);
                     // self.orderSummary.due.total = parseFloat(self.orderSummary.plan.totalAmountWithSST).toFixed(2);
                 },
-                checkLoggedIn: function() {
+                checkLoggedIn: function () {
                     var self = this;
                     if ((typeof ywos.lsData.meta.isLoggedIn === 'undefined' || !ywos.lsData.meta.isLoggedIn) && !ywos.lsData.isTargetedPromo) {
                         self.login.input.otp.password = '';
                         self.login.input.basic.yesNumber = '';
                         self.login.input.basic.password = '';
 
-                        $('#login-modal').on('hidden.bs.modal', function() {
+                        $('#login-modal').on('hidden.bs.modal', function () {
                             $('.invalid-feedback').hide();
                             $('#pills-loginTac-tab').trigger('click');
                             if (self.allowRequestOTP) {
@@ -1131,7 +1297,7 @@
                         self.redirectLoggedIn();
                     }
                 },
-                validateBasicLogin: function() {
+                validateBasicLogin: function () {
                     var self = this;
                     var yesNumber = self.login.input.basic.yesNumber.trim();
                     var password = self.login.input.basic.password;
@@ -1141,14 +1307,14 @@
                     }
                     return true;
                 },
-                ajaxValidateLogin: function() {
+                ajaxValidateLogin: function () {
                     var self = this;
-                    axios.post(apiEndpointURL + '/validate-login' + '?nonce='+yesObj.nonce, {
-                            'yes_number': self.loginInfo.yes_number,
-                            'password': self.loginInfo.password,
-                            'auth_type': self.loginInfo.type, 
-                            'locale': self.apiLocale
-                        })
+                    axios.post(apiEndpointURL + '/validate-login' + '?nonce=' + yesObj.nonce, {
+                        'yes_number': self.loginInfo.yes_number,
+                        'password': self.loginInfo.password,
+                        'auth_type': self.loginInfo.type,
+                        'locale': self.apiLocale
+                    })
                         .then((response) => {
                             var data = response.data;
                             ywos.lsData.meta.customerDetails = data.customerDetails;
@@ -1170,7 +1336,7 @@
                             toggleOverlay(false);
                         });
                 },
-                basicLoginSubmit: function(e) {
+                basicLoginSubmit: function (e) {
                     var self = this;
                     if (self.validateBasicLogin()) {
                         toggleOverlay();
@@ -1183,7 +1349,7 @@
                     }
                     e.preventDefault();
                 },
-                validateYesNumberOTP: function() {
+                validateYesNumberOTP: function () {
                     var self = this;
                     var otpYesNumber = self.login.input.otp.yesNumber.trim();
                     if (otpYesNumber.length == 0) {
@@ -1192,7 +1358,7 @@
 
                         $(emOTPForLogin).html(self.renderText('errorValidNumber')).show();
                         $(inputOTPYesNumber).focus();
-                        $(inputOTPYesNumber).on('keydown', function() {
+                        $(inputOTPYesNumber).on('keydown', function () {
                             $(emOTPForLogin).hide().html('');
                         });
                         return false;
@@ -1204,6 +1370,7 @@
                     axios.post(apiEndpointURL + '/generate-otp-for-login' +'?nonce='+yesObj.nonce, {
                             'yes_number': self.login.input.otp.yesNumber, 
                             'locale': self.apiLocale
+                       
                         })
                         .then((response) => {
                             $('.item-otpPassword').show();
@@ -1232,210 +1399,210 @@
                             toggleOverlay(false);
                         });
                 },
-                generateOTPForLogin: function(event) {
-                    var self = this;
-                    if (self.validateYesNumberOTP()) {
-                        toggleOverlay();
-                        self.ajaxGenerateOTPForLogin();
-
-                        $(self.login.errorMessage.otp).hide().html('');
-                    }
-                },
-                triggerOTPCountdown: function(timerMinute = 5) {
-                    var self = this;
-                    self.allowRequestOTP = false;
-
-                    var timer = timerMinute * 60,
-                        minutes, seconds;
-                    var interval = setInterval(function() {
-                        timer -= 1;
-
-                        minutes = parseInt(timer / 60, 10);
-                        seconds = parseInt(timer % 60, 10);
-
-                        minutes = minutes < 10 ? "0" + minutes : minutes;
-                        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                        $('.span-timer').html(minutes + ':' + seconds);
-                        if (timer == 0) {
-                            $('#input-otpPassword').hide();
-                            clearInterval(interval);
-                            self.allowRequestOTP = true;
-                            self.requestOTPText = self.renderText('checkoutTACResend');
-                        }
-                    }, 1000);
-                },
-                otpLoginSubmit: function(e) {
-                    var self = this;
+            generateOTPForLogin: function (event) {
+                var self = this;
+                if (self.validateYesNumberOTP()) {
                     toggleOverlay();
-                    self.loginInfo = {
-                        type: 'otp',
-                        yes_number: self.login.input.otp.yesNumber,
-                        password: self.login.input.otp.password
-                    };
-                    self.ajaxValidateLogin()
-                    e.preventDefault();
-                },
-                toggleErrorMessageLoginBasic: function(errorMessage) {
-                    var self = this;
-                    var loginType = self.loginInfo.type;
-                    var inputYesNumber = (loginType == 'otp') ? self.login.input.otp.inputYesNumber : self.login.input.basic.inputYesNumber;
-                    var inputPassword = (loginType == 'otp') ? self.login.input.otp.inputPassword : self.login.input.basic.inputPassword;
-                    var emBasicLogin = (loginType == 'otp') ? self.login.errorMessage.otp : self.login.errorMessage.basic;
+                    self.ajaxGenerateOTPForLogin();
 
-                    $(emBasicLogin).html(errorMessage).show();
-                    $(inputPassword).focus();
-                    $(inputYesNumber).on('keydown', function() {
-                        $(emBasicLogin).hide().html('');
-                    });
-                    $(inputPassword).on('keydown', function() {
-                        $(emBasicLogin).hide().html('');
-                    });
-                },
-                redirectLoggedIn: function() {
-                    var self = this;
-                    var toPage = 'verification';
-                    var isLoggedIn = (ywos.lsData.meta.isLoggedIn) ? ywos.lsData.meta.isLoggedIn : true;
-                    var currentStep = self.currentStep;
-                    var loginType = (ywos.lsData.meta.loginType) ? ywos.lsData.meta.loginType : self.loginInfo.type;
+                    $(self.login.errorMessage.otp).hide().html('');
+                }
+            },
+            triggerOTPCountdown: function (timerMinute = 5) {
+                var self = this;
+                self.allowRequestOTP = false;
 
-                    if (loginType == 'otp' || loginType == 'password') {
-                        toPage = 'verification';
-                        currentStep += 1;
+                var timer = timerMinute * 60,
+                    minutes, seconds;
+                var interval = setInterval(function () {
+                    timer -= 1;
 
-                        if (!ywos.lsData.meta.isLoggedIn && ywos.lsData.meta.customerDetails.securityType == 'PASSPORT' && self.orderSummary.plan.planType == 'postpaid' && self.orderSummary.due.foreignerDeposit == 0.00) {
-                            self.orderSummary.due.foreignerDeposit = self.orderSummary.plan.foreignerDeposit;
-                            self.updateSummary();
-                        }
-                    } else if (loginType == 'guest' || loginType == 'targetedPromo') {
-                        if (!ywos.lsData.meta.isLoggedIn) {
-                            isLoggedIn = false;
-                            ywos.lsData.meta.customerDetails = {
-                                securityType: '',
-                                securityId: '',
-                                msisdn: '',
-                                nric: '',
-                                gender: '',
-                                mobileNumber: '',
-                                homeNumber: '',
-                                officeNumber: '',
-                                name: '',
-                                email: '',
-                                address: '',
-                                state: '',
-                                city: '',
-                                postcode: '',
-                                country: '',
-                                citizenship: '',
-                                yesId: '',
-                                accountNumber: '',
-                                dateOfBirth: '',
-                                salutation: '',
-                                preferredLanguage: 0
-                            };
-                        }
+                    minutes = parseInt(timer / 60, 10);
+                    seconds = parseInt(timer % 60, 10);
+
+                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                    $('.span-timer').html(minutes + ':' + seconds);
+                    if (timer == 0) {
+                        $('#input-otpPassword').hide();
+                        clearInterval(interval);
+                        self.allowRequestOTP = true;
+                        self.requestOTPText = self.renderText('checkoutTACResend');
                     }
+                }, 1000);
+            },
+            otpLoginSubmit: function (e) {
+                var self = this;
+                toggleOverlay();
+                self.loginInfo = {
+                    type: 'otp',
+                    yes_number: self.login.input.otp.yesNumber,
+                    password: self.login.input.otp.password
+                };
+                self.ajaxValidateLogin()
+                e.preventDefault();
+            },
+            toggleErrorMessageLoginBasic: function (errorMessage) {
+                var self = this;
+                var loginType = self.loginInfo.type;
+                var inputYesNumber = (loginType == 'otp') ? self.login.input.otp.inputYesNumber : self.login.input.basic.inputYesNumber;
+                var inputPassword = (loginType == 'otp') ? self.login.input.otp.inputPassword : self.login.input.basic.inputPassword;
+                var emBasicLogin = (loginType == 'otp') ? self.login.errorMessage.otp : self.login.errorMessage.basic;
 
-                    if (ywos.lsData.meta.isLoggedIn) {
-                        ywos.lsData.meta.orderSummary.addOn = self.orderSummary.addOn;
-                        self.orderSummary = ywos.lsData.meta.orderSummary;
-                        currentStep = ywos.lsData.meta.completedStep;
-                    } else {
-                        self.sendAnalytics('checkout');
-                    }
+                $(emBasicLogin).html(errorMessage).show();
+                $(inputPassword).focus();
+                $(inputYesNumber).on('keydown', function () {
+                    $(emBasicLogin).hide().html('');
+                });
+                $(inputPassword).on('keydown', function () {
+                    $(emBasicLogin).hide().html('');
+                });
+            },
+            redirectLoggedIn: function () {
+                var self = this;
+                var toPage = 'verification';
+                var isLoggedIn = (ywos.lsData.meta.isLoggedIn) ? ywos.lsData.meta.isLoggedIn : true;
+                var currentStep = self.currentStep;
+                var loginType = (ywos.lsData.meta.loginType) ? ywos.lsData.meta.loginType : self.loginInfo.type;
 
-                    ywos.lsData.meta.loginType = loginType;
-                    ywos.lsData.meta.isLoggedIn = isLoggedIn;
-                    ywos.lsData.meta.completedStep = currentStep;
-                    ywos.lsData.meta.orderSummary = self.orderSummary;
-                    ywos.updateYWOSLSData();
+                if (loginType == 'otp' || loginType == 'password') {
+                    toPage = 'delivery';
+                    currentStep += 1;
 
-                    ywos.redirectToPage(toPage);
-                },
-                addAddOn: function(index) {
-                    var self = this;
-                    var addOn = self.planAddOns[index];
-                    if (self.addOn.allowAddOn && self.orderSummary.addOn == null && addOn) {
-                        self.addOn.allowAddOn = false;
-                        self.orderSummary.addOn = self.planAddOns[index];
-
+                    if (!ywos.lsData.meta.isLoggedIn && ywos.lsData.meta.customerDetails.securityType == 'PASSPORT' && self.orderSummary.plan.planType == 'postpaid' && self.orderSummary.due.foreignerDeposit == 0.00) {
+                        self.orderSummary.due.foreignerDeposit = self.orderSummary.plan.foreignerDeposit;
                         self.updateSummary();
-
-                        $('.addon-box').addClass('addon-box-disabled');
                     }
-                },
-                removeAddOn: function() {
-                    var self = this;
-                    $(self.addOn.modalRemove).modal('show');
-                },
-                alertAddOnRemove: function(remove = true) {
-                    var self = this;
-                    self.addOn.allowAddOn = true;
-                    self.orderSummary.addOn = null;
+                } else if (loginType == 'guest' || loginType == 'targetedPromo') {
+                    if (!ywos.lsData.meta.isLoggedIn) {
+                        isLoggedIn = false;
+                        ywos.lsData.meta.customerDetails = {
+                            securityType: '',
+                            securityId: '',
+                            msisdn: '',
+                            nric: '',
+                            gender: '',
+                            mobileNumber: '',
+                            homeNumber: '',
+                            officeNumber: '',
+                            name: '',
+                            email: '',
+                            address: '',
+                            state: '',
+                            city: '',
+                            postcode: '',
+                            country: '',
+                            citizenship: '',
+                            yesId: '',
+                            accountNumber: '',
+                            dateOfBirth: '',
+                            salutation: '',
+                            preferredLanguage: 0
+                        };
+                    }
+                }
+
+                if (ywos.lsData.meta.isLoggedIn) {
+                    ywos.lsData.meta.orderSummary.addOn = self.orderSummary.addOn;
+                    self.orderSummary = ywos.lsData.meta.orderSummary;
+                    currentStep = ywos.lsData.meta.completedStep;
+                } else {
+                    self.sendAnalytics('checkout');
+                }
+
+                ywos.lsData.meta.loginType = loginType;
+                ywos.lsData.meta.isLoggedIn = isLoggedIn;
+                ywos.lsData.meta.completedStep = currentStep;
+                ywos.lsData.meta.orderSummary = self.orderSummary;
+                ywos.updateYWOSLSData();
+
+                ywos.redirectToPage(toPage);
+            },
+            addAddOn: function (index) {
+                var self = this;
+                var addOn = self.planAddOns[index];
+                if (self.addOn.allowAddOn && self.orderSummary.addOn == null && addOn) {
+                    self.addOn.allowAddOn = false;
+                    self.orderSummary.addOn = self.planAddOns[index];
 
                     self.updateSummary();
 
-                    $('.addon-box').removeClass('addon-box-disabled');
-                    $(self.addOn.modalRemove).modal('hide');
-                },
-                watchOTPLoginFields: function() {
-                    var self = this;
-                    var yesNumber = self.login.input.otp.yesNumber;
-                    var password = self.login.input.otp.password;
-                    if (yesNumber.length && password.length) {
-                        self.login.submitButton.allowOtp = true;
-                    } else {
-                        self.login.submitButton.allowOtp = false;
-                    }
-                },
-                watchBasicLoginFields: function() {
-                    var self = this;
-                    var yesNumber = self.login.input.basic.yesNumber;
-                    var password = self.login.input.basic.password;
-                    if (yesNumber.length && password.length) {
-                        self.login.submitButton.allowBasic = true;
-                    } else {
-                        self.login.submitButton.allowBasic = false;
-                    }
-                },
-                sendAnalytics: function(eventType) {
-                    var self = this;
-                    var pushData = [];
-                    switch (eventType) {
-                        case 'addToCart': 
-                            pushData = [{
-                                'name': self.orderSummary.plan.planName, 
-                                'id': self.orderSummary.plan.mobilePlanId, 
-                                'category': self.orderSummary.plan.planType, 
-                                'price': self.orderSummary.plan.totalAmountWithoutSST
-                            }];
-                            break;
-                        case 'checkout':
-                            pushData = [{
-                                'name': self.orderSummary.plan.planName, 
-                                'id': self.orderSummary.plan.mobilePlanId, 
-                                'category': self.orderSummary.plan.planType, 
-                                'price': self.orderSummary.plan.totalAmountWithoutSST
-                            }];
-
-                            if (self.orderSummary.addOn) {
-                                pushData.push({
-                                    'name': self.orderSummary.addOn.addonName, 
-                                    'id': 0, 
-                                    'category': 'addOn', 
-                                    'price': self.orderSummary.addOn.amount
-                                });
-                            }
-                            break;
-                        default: 
-                            return;
-                    }
-                    pushAnalytics(eventType, pushData);
-                },
-                renderText: function(strID) {
-                    return ywos.renderText(strID, this.pageText);
+                    $('.addon-box').addClass('addon-box-disabled');
                 }
+            },
+            removeAddOn: function () {
+                var self = this;
+                $(self.addOn.modalRemove).modal('show');
+            },
+            alertAddOnRemove: function (remove = true) {
+                var self = this;
+                self.addOn.allowAddOn = true;
+                self.orderSummary.addOn = null;
+
+                self.updateSummary();
+
+                $('.addon-box').removeClass('addon-box-disabled');
+                $(self.addOn.modalRemove).modal('hide');
+            },
+            watchOTPLoginFields: function () {
+                var self = this;
+                var yesNumber = self.login.input.otp.yesNumber;
+                var password = self.login.input.otp.password;
+                if (yesNumber.length && password.length) {
+                    self.login.submitButton.allowOtp = true;
+                } else {
+                    self.login.submitButton.allowOtp = false;
+                }
+            },
+            watchBasicLoginFields: function () {
+                var self = this;
+                var yesNumber = self.login.input.basic.yesNumber;
+                var password = self.login.input.basic.password;
+                if (yesNumber.length && password.length) {
+                    self.login.submitButton.allowBasic = true;
+                } else {
+                    self.login.submitButton.allowBasic = false;
+                }
+            },
+            sendAnalytics: function (eventType) {
+                var self = this;
+                var pushData = [];
+                switch (eventType) {
+                    case 'addToCart':
+                        pushData = [{
+                            'name': self.orderSummary.plan.planName,
+                            'id': self.orderSummary.plan.mobilePlanId,
+                            'category': self.orderSummary.plan.planType,
+                            'price': self.orderSummary.plan.totalAmountWithoutSST
+                        }];
+                        break;
+                    case 'checkout':
+                        pushData = [{
+                            'name': self.orderSummary.plan.planName,
+                            'id': self.orderSummary.plan.mobilePlanId,
+                            'category': self.orderSummary.plan.planType,
+                            'price': self.orderSummary.plan.totalAmountWithoutSST
+                        }];
+
+                        if (self.orderSummary.addOn) {
+                            pushData.push({
+                                'name': self.orderSummary.addOn.addonName,
+                                'id': 0,
+                                'category': 'addOn',
+                                'price': self.orderSummary.addOn.amount
+                            });
+                        }
+                        break;
+                    default:
+                        return;
+                }
+                pushAnalytics(eventType, pushData);
+            },
+            renderText: function (strID) {
+                return ywos.renderText(strID, this.pageText);
             }
+        }
         });
     });
 </script>

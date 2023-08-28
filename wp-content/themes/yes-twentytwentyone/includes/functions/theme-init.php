@@ -1414,12 +1414,13 @@ function yes_menu($path)
                                     float: left;
                                 }
 
-                                .parent {
+                                    .parent {
                                     position: absolute;
                                     bottom: 20px;
                                     right: -27px;
                                 }
-                                
+                                                                }
+
                                 .btn-gradient-2 {
                                     background: linear-gradient(white, white) padding-box,
                                         linear-gradient(to right, #FF0084, #6F29D2) border-box;
@@ -2019,9 +2020,8 @@ function yes_menu($path)
                             .navbar-nav  .promlets{    
                                min-width: 230px;
                             }
-                              
                             .dropdown-menu .promo {
-                                    padding: 20px !important;
+                              padding: 20px !important;
                                 }
 
                                 .campagin {
@@ -2030,6 +2030,7 @@ function yes_menu($path)
                             .campaign_board {
                                 left: 550px !important;
                             }
+             
                         </style>
 
 
@@ -2567,7 +2568,7 @@ function yes_menu($path)
             
                         </ul> -->
 
-                        <ul class="navbar-nav  campagin">
+                        <ul class="navbar-nav campagin">
                             <li class="nav-item dropdown mega-dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Promo/Campaign', 'yes.my'); ?>
                                 <div class="parent">
