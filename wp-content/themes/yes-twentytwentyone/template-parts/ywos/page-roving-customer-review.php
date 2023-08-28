@@ -286,7 +286,6 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function() {
-    
         toggleOverlay();
 
         var pageDelivery = new Vue({
@@ -501,9 +500,17 @@
                 },
                 ajaxValidateStagingOrder: function() {
                     var self = this;
+                    // var currentUrl = window.location.href;
+                    // var parsedUrl = new URL(currentUrl);
+                    // var orderId = parsedUrl.searchParams.get('orderId');
+                    // console.log(parsedUrl);
+
                     var currentUrl = window.location.href;
-                    var parsedUrl = new URL(currentUrl);
-                    var orderId = parsedUrl.searchParams.get('orderId');
+                var parsedUrl = new URL(currentUrl);
+                var orderIdRaw = parsedUrl.search;
+                var orderId = orderIdRaw.split('=')[1];
+                // console.log(orderId);
+                    // return false;
                     var params = {
                         'encStagingOrderNumber': orderId !== null ? orderId : null,
                         'locale': self.apiLocale,
@@ -524,14 +531,13 @@
                             ywos.initLocalStorage(self.planID);
                             self.ajaxGetPlanData();
                             if (data.responseCode == 0) {
-                            
+                            console.log(data);
                                 self.deliveryInfo = {
                                     "name": data.fullName,
-                                    "mobileNumber": data.mobileNumber.slice(1),
+                                    "mobileNumber": data.mobileNumber,
                                     "msisdn": data.mobileNumber,
                                     "securityType": data.securityType,
                                     "securityId": data.securityNumber,
-                                    'stagingOrderNumber':data.stagingOrderNumber,
                                     "dob": formattedDate,
                                     "gender": data.gender,
                                     "email": data.email,
@@ -546,6 +552,7 @@
                                     "cityCode": data.cityCode,
                                     "country": data.country,
                                     "deliveryNotes": "",
+                                    'stagingOrderNumber':data.stagingOrderNumber,
                                     "sanitize": {
                                         "address": data.addressLine1,
                                         "addressMore": "",
@@ -587,7 +594,7 @@
 
                                 }
                                 toggleOverlay(false);
-                                self.toggleModalAlert( self.renderText('modalCreateStagingError'), errorMsg, 'http://new-ytl.localhost/');
+                                self.toggleModalAlert(self.renderText('modalCreateStagingError'), errorMsg);
                             }
 
                             // // console.log(error, response);
@@ -684,6 +691,7 @@
                     self.orderSummary.due.total = roundAmount(parseFloat(self.orderSummary.due.amount) + parseFloat(self.orderSummary.due.taxesSST) + parseFloat(self.orderSummary.due.shippingFees)) + parseFloat(self.orderSummary.due.foreignerDeposit);
                     self.orderSummary.due.rounding = parseFloat(self.orderSummary.plan.roundingAdjustment).toFixed(2);
                     self.orderSummary.due.total = (parseFloat(self.orderSummary.due.total) + parseFloat(self.orderSummary.due.rounding)).toFixed(2);
+
                 },
                 validateSession: function() {
 
@@ -701,9 +709,24 @@
                     ywos.lsData.meta.dealer = self.dealer;
                     ywos.lsData.meta.deliveryInfo= self.deliveryInfo; 
                     ywos.lsData.trxType = 'roving';
+                    self.checkForeignerDeposit();
                     ywos.updateYWOSLSData();
                     self.pageInit();
                 },
+                checkForeignerDeposit: function() {
+					var self = this;
+					if (self.orderSummary.plan.planType == 'postpaid') {
+                        var foreignerDeposit = parseFloat(self.orderSummary.plan.foreignerDeposit);
+                        console.log(foreignerDeposit);
+                        if (self.deliveryInfo.securityType == 'PASSPORT' && ywos.lsData.meta.orderSummary.due.foreignerDeposit == 0.00) {
+							self.orderSummary.due.foreignerDeposit = foreignerDeposit;
+                            self.orderSummary.due.total = parseFloat(self.orderSummary.due.total) + parseFloat(foreignerDeposit);
+                        } else if (self.deliveryInfo.securityType == 'NRIC' && ywos.lsData.meta.orderSummary.due.foreignerDeposit != 0.00) {
+                            self.orderSummary.due.foreignerDeposit = 0.00;
+                            self.orderSummary.due.total = parseFloat(self.orderSummary.due.total) - parseFloat(foreignerDeposit);
+                        }
+					}
+				},
                 pageInit: function() {
                     var self = this;
 
@@ -746,9 +769,6 @@
                         $('#modal-bodyText').html('');
                     });
                 },
-
-        
-
                 watchSubmit: function() {
                     var self = this;
                     var isValid = true;
@@ -768,5 +788,6 @@
         });
     });
 </script>
+
 
 <?php include('footer-ywos.php'); ?>
