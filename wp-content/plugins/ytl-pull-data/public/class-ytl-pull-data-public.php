@@ -485,9 +485,9 @@ class Ytl_Pull_Data_Public
 	public function get_plan_by_id($data)
 	{
 	
-		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }   
+		// if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+		// 	exit("Request not valid");
+		//  }   
 		$return 	= [];
 		$get_plans 	= get_option($this->prefix . 'plans_data');
 		if (empty($get_plans)) {
@@ -551,7 +551,7 @@ class Ytl_Pull_Data_Public
 		 } 
 		$devicePlan_id = $request->get_param( 'device_id' );
 		$return 	= [];
-		$get_plans 	= get_option('ywos_device_bundle_plans');
+		$get_plans 	= get_option($this->prefix . 'plans_data');
 		if (empty($get_plans)) {
 			return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
 		}
