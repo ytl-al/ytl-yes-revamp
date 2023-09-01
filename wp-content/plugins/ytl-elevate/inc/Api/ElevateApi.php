@@ -2157,11 +2157,11 @@ class ElevateApi
     $url="https://apigateway.yes.my/api/v1/ytlc/pnoc/4GOutageDetails";
     $body = array(
         'SessionID' => $session_id,
-        // 'Latitude' => $_GET['Latitude'],
-        // 'Langitude' => $_GET['Langitude'], 
+        'Latitude' => $_GET['Latitude'],
+        'Langitude' => $_GET['Langitude'], 
         //'Severity' => "Unplanned",    
-        'Latitude' => '3.11523888888889',
-        'Langitude' => '101.67936944444466', 
+        // 'Latitude' => '3.11523888888889',
+        // 'Langitude' => '101.67936944444466', 
     );
      $params = array(
         'method' => 'GET',

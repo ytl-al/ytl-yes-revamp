@@ -787,46 +787,48 @@ if (!function_exists('generate_outgoing_network_maintenance')) {
          return $list;
      }
 
-    //  function snm_5g_outage($session_id)
-    //  {   $url="https://apigateway.yes.my/api/v1/ytlc/pnoc/5GOutageDetails";
-    //     $body = array(
-    //         'SessionID' => $session_id,
-    //          'SiteID'   => "DBSEP1317",
-    //          'SiteName' => "DBSEP1317_DESARIAVILLACONDOMINIUM",
-    //          'Severity' => "Partial",
-    //          'Region'   => "MY DNB CENTRAL",
-    //     );
-    //      $params = array(
-    //         'method' => 'GET',
-    //         'body' => $body,           
-    //          'headers' => array(
-    //          'apikey' => 'jkweTq8hcOw5QxeWh8d13dfkjhdfsdgdd',
-    //              'Content-Type' => 'application/json'
-    //         )
-    //    );
-    //      //print_r($params); echo $url; echo "<br /><br /><br />";
-    //      $list = wp_remote_request($url, $params);
-    //      return $list;
-    //  }   
+     function snm_5g_outage($session_id)
+     {   $url="https://apigateway.yes.my/api/v1/ytlc/pnoc/5GOutageDetails";
+        $body = array(
+            'SessionID' => $session_id,
+             'SiteID'   => "DBSEP1317",
+             'SiteName' => "DBSEP1317_DESARIAVILLACONDOMINIUM",
+             'Severity' => "Partial",
+             'Region'   => "MY DNB CENTRAL",
+        );
+         $params = array(
+            'method' => 'GET',
+            'body' => $body,           
+             'headers' => array(
+             'apikey' => 'jkweTq8hcOw5QxeWh8d13dfkjhdfsdgdd',
+                 'Content-Type' => 'application/json'
+            )
+       );
+         //print_r($params); echo $url; echo "<br /><br /><br />";
+         $list = wp_remote_request($url, $params);
+         return $list;
+     }   
  
      function generate_outgoing_network_maintenance()
      {     
          $session_id = snm_get_session();
         //  print_r($session_id);
         //  die();
+        $json_res_4g = $json_res_5g = $json_res = [];
          $outage_4g = snm_4g_outage($session_id);
-         $json_res = json_decode($outage_4g['body']);         
-         // print_r($json_res);
-        //  die();
-        //$outage_5g = snm_5g_outage($session_id); 
-        //$json_res = json_decode($outage_5g['body']);
+         $json_res_4g = json_decode($outage_4g['body']);         
+         //  die();
+         $outage_5g = snm_5g_outage($session_id); 
+         $json_res_5g = json_decode($outage_5g['body']);
          $html_list = '';
+         $json_res= array_merge((array)$json_res_4g,(array)$json_res_5g);
+
          foreach ($json_res as $key=>$outage) {
             //print_r($outage->DynamicField_Area);
-             $DynamicField_DateTimeOccurred   = $outage->DynamicField_DateTimeOccurred;
-             $DynamicField_TargetTime         = $outage->DynamicField_TargetTime;
-             $DynamicField_SiteState          = $outage->DynamicField_SiteState;
-             $DynamicField_Area               = $outage->DynamicField_Area;
+             $DynamicField_DateTimeOccurred   = @$outage->DynamicField_DateTimeOccurred;
+             $DynamicField_TargetTime         = @$outage->DynamicField_TargetTime;
+             $DynamicField_SiteState          = @$outage->DynamicField_SiteState;
+             $DynamicField_Area               = @$outage->DynamicField_Area;
              $html_list  .= "<tr>
                                  <td>$DynamicField_DateTimeOccurred</td>
                                  <td>$DynamicField_TargetTime</td>
@@ -868,4 +870,5 @@ if (!function_exists('generate_outgoing_network_maintenance')) {
   
      add_shortcode('yes_network_maintenance_table', 'generate_outgoing_network_maintenance');
  }
+ 
 }

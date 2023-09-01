@@ -1,0 +1,552 @@
+<style type="text/css">
+    .hero-banner {
+        background: url('/wp-content/uploads/2023/08/5g-wirelessbroadband-banner-en.jpg');
+        /* background-size: cover; */
+        background-repeat: no-repeat;
+        background-color: #F2F2F2;
+        /* height: 450px;
+        background-position: center;*/
+        background-size: contain;
+        padding: 30% 0 0;
+    }
+
+    /* .banner {
+        transform: translateY(20%);
+    } */
+
+    .banner h1 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 72px;
+        line-height: 80px;
+        letter-spacing: -0.02em;
+        color: #FFFFFF;
+        margin-bottom: 30px;
+    }
+
+    .banner p {
+        font-family: 'Open Sans', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        text-align: left;
+        line-height: 24px;
+        letter-spacing: -0.02em;
+        margin-bottom: 40px;
+        color: #FFFFFF;
+    }
+
+    #best-solution {
+        background-color: #F2F2F2;
+        overflow: hidden;
+        padding: 50px 0;
+    }
+
+    #best-solution h2 {
+        font-size: 39px;
+        line-height: 47px;
+        color: #000;
+        font-weight: 800;
+        text-align: center;
+    }
+
+    #best-solution p {
+        padding: 0 12%;
+    }
+
+    #best-solution .layer-solutionBox {
+        text-align: center;
+    }
+
+    #best-solution .layer-solutionBox img {
+        margin-bottom: 20px;
+        width: 64px;
+    }
+
+    #best-solution .layer-solutionBox h2 {
+        font-size: 18px;
+        line-height: 25px;
+        color: #000;
+        font-weight: 800;
+        padding: 0px 20px;
+    }
+
+    #best-solution .layer-solutionBox h3 {
+        font-size: 16px;
+        color: #000;
+        font-weight: 400;
+    }
+
+    #wireles-broadband-mid-section {
+        background-color: #fff;
+        padding: 50px 0 0;
+        position: relative;
+    }
+
+    #wireles-broadband-banner {
+        background-image: url('/wp-content/uploads/2023/08/wirelessbroadband-Super-fast-banner.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 50px 0px 30px;
+        overflow: hidden;
+        text-align: left;
+        height: 407px;
+        border-radius: 15px;
+    }
+
+    #wireles-broadband-banner h2 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 48px;
+        line-height: 56px;
+        text-align: left;
+        letter-spacing: -0.02em;
+        color: #FFF;
+        margin-bottom: 20px;
+        width: 60%;
+        padding: 30px 0 0 70px;
+    }
+
+    #wireles-broadband-banner h2 span {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 36px;
+        font-weight: 700;
+        line-height: 56px;
+        color: #FFF;
+    }
+
+
+    .layer-steps {
+        padding: 60px 0;
+    }
+
+    .layer-steps h2 {
+        color: #000;
+        font-size: 39px;
+        font-weight: 800;
+        line-height: 47px;
+    }
+
+    .layer-step .panel-stepHeading {
+        font-size: 25px;
+        font-weight: 800;
+        text-transform: uppercase;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .layer-step .icon-stepHeading {
+        background-color: #FF0084;
+        border-radius: 100%;
+        display: inline-block;
+        margin: 0 12px 0 0;
+        height: 53px;
+        padding: 5px 0 0;
+        text-align: center;
+        vertical-align: middle;
+        width: 53px;
+    }
+
+    .layer-step p a {
+        color: #FF0084;
+        text-decoration: underline;
+    }
+
+    .layer-sectionGradient {
+        background-color: #F2F2F2;
+    }
+
+    .layer-plans {
+        padding: 60px 0;
+    }
+
+    .layer-plans h2 {
+        color: #000;
+        font-size: 39px;
+        font-weight: 800;
+        line-height: 47px;
+    }
+
+    .layer-plans .row-sectionHeader h2,
+    .layer-plans .row-sectionHeader p {
+        color: #000;
+    }
+
+    .layer-plans .row-sectionHeader p {
+        color: #000;
+        font-size: 20px;
+    }
+
+
+    .plan-section {
+        padding: 50px 0px 50px;
+        position: relative;
+        background-color: #F2F2F2;
+    }
+
+    .plan-section h2 {
+        font-family: 'Montserrat';
+        font-size: 40px;
+        line-height: 47px;
+        font-weight: 800;
+        color: #000000;
+        margin: 15px 0 10px 0;
+        letter-spacing: -1.5px;
+        text-align: center;
+    }
+
+    .plan-section p {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 21px;
+        color: #000;
+        text-align: center;
+    }
+
+    .plan-section .card {
+        border: none;
+        background-color: #fff;
+        padding: 0;
+        min-height: 265px;
+        box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+    }
+
+    .plan-section .card .card-body {
+        text-align: left;
+        padding: 25px 35px;
+        min-height: 430px;
+    }
+
+    .plan-section .card .card-body p {
+        font-size: 14px;
+        text-align: left;
+        font-weight: 400;
+        line-height: 18px;
+    }
+
+    .plan-section .plan-details-list {
+        border-top: 0px solid #E4E4E4;
+        padding: 0px 0 0;
+        margin: 5px 0 0;
+    }
+
+    .plan-section .plan-details-list p {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 400;
+        color: #000;
+        padding: 0;
+        margin: 0 0 10px;
+        letter-spacing: unset;
+        text-align: left;
+    }
+
+    .plan-section .plan-details-list h3 {
+        font-family: 'Montserrat';
+        font-size: 33px;
+        line-height: 40px;
+        font-weight: 800;
+        color: #2F3BF5;
+    }
+
+    .plan-section .plan-details-list ul {
+        padding: 0;
+        margin: 15px 0 0;
+        list-style: none;
+        height: 200px;
+    }
+
+    .plan-section .plan-details-list ul li {
+        font-family: 'Open Sans';
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+        margin: 0 0 8px;
+        color: #000;
+        display: block;
+        gap: 10px;
+    }
+
+    .plan-section .plan-details-list ul li:before {
+        content: url('/wp-content/uploads/2023/08/plan-list-type.png');
+        margin-right: 8px;
+    }
+
+    .plan-section .plan-details-list ul li:last-child {
+        height: 40px;
+    }
+
+
+    .plan-section .card .card-body .price-section {
+        display: flex;
+        align-items: center;
+        height: 40px
+    }
+
+    .plan-section .card .card-body .price-section h2 {
+        font-family: 'Montserrat';
+        font-size: 33px;
+        line-height: 40px;
+        font-weight: 800;
+        color: #1A1E47;
+        margin: 0px 0 0px 0;
+    }
+
+    .plan-section .card .card-body .price-section h2 span {
+        font-size: 20px;
+        line-height: 40px;
+        font-weight: 700;
+        padding-left: 2px;
+    }
+
+    .plan-section .card .card-body .price-section h4 {
+        font-family: 'Montserrat';
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 700;
+        color: #000;
+        margin: 0px 0 0px 0;
+        position: relative;
+    }
+
+    .plan-section .card .card-body .price-section h4:before {
+        content: " ";
+        display: block;
+        width: 100%;
+        border-top: 2px solid #000000;
+        height: 12px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transform: rotate(345deg);
+    }
+
+    .plan-section .card .card-body .price-section p {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 10px;
+        line-height: 27px;
+        font-weight: 400;
+        margin-top: -10px;
+    }
+
+    .plan-section .card .card-body .price-section .price-right {
+        margin-left: 20px;
+    }
+
+    .plan-section .card .card-body .pink-btn {
+        background-color: #FF0084;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        padding: 0.7rem 2.3rem;
+        /* display: block; */
+        color: #fff;
+        font-size: 12px;
+        line-height: 16px;
+        /* width: 65%; */
+    }
+
+    .plan-section .card .card-body .pink-btn:hover {
+        background-color: #D00072;
+    }
+
+    .plan-section .card .card-body .btn-grey {
+        background-color: #A8A8A8 !important;
+    }
+
+    .plan-section .plan-bottom-link p a {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 18px;
+        line-height: 20px;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #2F3BF5;
+        letter-spacing: 0.1em;
+
+    }
+
+    .plan-section .plan-bottom-link p {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 400;
+        color: #2B2B2B;
+        margin: 15px 0 0;
+    }
+
+    @media only screen and (min-device-width: 1600px){
+        .hero-banner {            
+            background-size: contain;
+            padding: 30% 0 0 !important;
+        }
+        /* .banner h1 {
+            margin-top: 70px;
+        } */
+    }
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: 640px) and (-webkit-min-device-pixel-ratio: 2){
+        .hero-banner {
+    background-image: url('/wp-content/uploads/2023/08/5g-wirelessbroadband-banner-en-mobile.jpg');
+    padding: 0px;
+    padding-top: 100%;
+    height: auto;
+    background-size: contain;
+}
+}
+
+    @media only screen and (max-width: 768px) {
+         /* .hero-banner {
+            background: url('/wp-content/uploads/2023/08/5g-wirelessbroadband-banner-en-mobile.jpg');
+            background-size: cover;
+            background-color: #fff;
+            height: 720px;
+            padding: 20px 0;
+        } */
+
+        /*.banner h1 {
+            margin-top: 70px;
+        } */
+
+        /* .banner {
+            transform: translateY(20%);
+            padding: 0 0 !important;
+            text-align: center
+        } */
+
+        .banner h1 {
+            font-size: 32px;
+            line-height: 40px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .banner p {
+            letter-spacing: -0.02em;
+            font-size: 14px;
+            line-height: 24px;
+            margin: 10px 0 0px 0;
+            text-align: center;
+        }
+
+        .layer-steps h2 {
+            font-size: 33px;
+            line-height: 40px;
+        }
+
+
+        #wireles-broadband-banner {
+            background-image: url('/wp-content/uploads/2023/08/wirelessbroadband-Super-fast-banner-mobile.png');
+            background-color: #2F3BF5;
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 45px 15px 30px;
+            overflow: hidden;
+            text-align: center;
+            border-radius: 16px;
+            background-position: center;
+        }
+
+        #wireles-broadband-banner h2 {
+            font-size: 28px;
+            line-height: 36px;
+            text-align: center;
+            letter-spacing: unset;
+            color: #FFF;
+            margin-bottom: 20px;
+            width: 100%;
+            padding: 0;
+        }
+
+        #wireles-broadband-banner h2 span {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 34px;
+        }
+
+        #best-solution h2 {
+            font-size: 33px;
+            line-height: 40px;
+        }
+
+        #best-solution p {
+            padding: 0 0;
+        }
+
+        .plan-section {
+            padding: 50px 0px 50px;
+        }
+
+        .plan-section h2 {
+            font-size: 33px;
+            line-height: 40px;
+        }
+
+        .plan-section p {
+            font-size: 16px;
+            padding: 0 10%;
+        }
+
+        .plan-section .card .card-body {
+            text-align: left;
+            padding: 25px 30px;
+            min-height: auto;
+        }
+
+
+        .plan-section .plan-details-list h3 {
+            font-size: 24px;
+            line-height: 30px;
+        }
+
+        .plan-section .plan-details-list ul {
+            height: unset;
+        }
+
+        .plan-section .plan-details-list ul li {
+            font-size: 13px;
+            line-height: 16px;
+        }
+
+        .plan-section .plan-details-list ul li:last-child {
+            height: unset;
+        }
+
+        .plan-section .card .card-body .price-section {
+            height: unset;
+        }
+
+        .plan-section .card .card-body .price-section h2 {
+            font-size: 36px;
+            line-height: 20px;
+            margin: 10px 0 0px 0;
+        }
+
+        .plan-section .card .card-body .price-section p {
+            font-size: 10px;
+        }
+
+        .plan-section .card .card-body .price-section h4 {
+            font-size: 14px;
+            line-height: 20px;
+            margin: 0px 0 0px 0;
+        }
+
+        .plan-section .plan-bottom-link p {
+            text-align: left;
+        }
+
+        .plan-section .plan-bottom-link p a {
+            font-size: 16px;
+        }
+
+        #faq-section h1 {
+            font-size: 33px;
+        }
+
+    }
+</style>

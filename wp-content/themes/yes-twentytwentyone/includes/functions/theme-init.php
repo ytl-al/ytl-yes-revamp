@@ -51,10 +51,10 @@ if (!function_exists('yes_twentytwentyone_setup')) {
             add_theme_support(
                 'custom-logo',
                 array(
-                    'height' => 52,
-                    'width' => 100,
-                    'flex-width' => true,
-                    'flex-height' => true,
+                    'height'               => 52,
+                    'width'                => 100,
+                    'flex-width'           => true,
+                    'flex-height'          => true,
                     'unlink-homepage-logo' => false,
                 )
             );
@@ -80,26 +80,19 @@ if (!function_exists('yes_twentytwentyone_setup')) {
         $new_setting_id = 'custom_top_logo';
         $wp_customize->add_setting($new_setting_id);
         // Add a control to upload the hover logo
-        $wp_customize->add_control(
-            new WP_Customize_Image_Control(
-                $wp_customize,
-                $new_setting_id,
-                array(
-                    'label' => esc_html__('Top Logo', 'yes.my'),
-                    'section' => 'title_tagline',
-                    //this is the section where the custom-logo from WordPress is
-                    'settings' => $new_setting_id,
-                    'priority' => 8 // show it just below the custom-logo
-                )
-            )
-        );
+        $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, $new_setting_id, array(
+            'label' => esc_html__('Top Logo', 'yes.my'),
+            'section' => 'title_tagline', //this is the section where the custom-logo from WordPress is
+            'settings' => $new_setting_id,
+            'priority' => 8 // show it just below the custom-logo
+        )));
     }
 
     add_action('customize_register', 'yes_twentytwentyone_customizer_setting');
 }
 
 
-$exclude_language_widgets = ['yes_widget_page_modal', 'yes_widget_footer_bottom'];
+$exclude_language_widgets   = ['yes_widget_page_modal', 'yes_widget_footer_bottom'];
 
 if (!function_exists('yes_register_widgets')) {
     /**
@@ -113,51 +106,45 @@ if (!function_exists('yes_register_widgets')) {
         global $exclude_language_widgets;
 
         if (function_exists('register_sidebar')) {
-            $arr_widgets = [
-                ['name' => 'Top Page Banner', 'id' => 'yes_widget_top_page_banner'],
-                ['name' => 'Page Modal', 'id' => 'yes_widget_page_modal'],
-                ['name' => 'Footer FAQ', 'id' => 'yes_widget_footer_faq'],
+            $arr_widgets    = [
+                ['name' => 'Top Page Banner',   'id' => 'yes_widget_top_page_banner'],
+                ['name' => 'Page Modal',        'id' => 'yes_widget_page_modal'],
+                ['name' => 'Footer FAQ',        'id' => 'yes_widget_footer_faq'],
                 ['name' => 'Footer Newsletter', 'id' => 'yes_widget_footer_newsletter'],
-                ['name' => 'Footer Top', 'id' => 'yes_widget_footer_top'],
-                ['name' => 'Footer Bottom', 'id' => 'yes_widget_footer_bottom'],
-                ['name' => 'Popular Deals', 'id' => 'yes_widget_popular_deals'],
-                ['name' => 'FWM Social Media', 'id' => 'yes_fwm_widget_social_media'],
+                ['name' => 'Footer Top',        'id' => 'yes_widget_footer_top'],
+                ['name' => 'Footer Bottom',     'id' => 'yes_widget_footer_bottom'],
+                ['name' => 'Popular Deals',     'id' => 'yes_widget_popular_deals'],
+                ['name' => 'FWM Social Media',      'id' => 'yes_fwm_widget_social_media'],
             ];
             foreach ($arr_widgets as $arr_widget) {
                 /** Register widget for all */
-                register_sidebar(
-                    array(
-                        'name' => $arr_widget['name'],
-                        'id' => $arr_widget['id'],
-                        'before_widget' => '',
-                        'after_widget' => '',
-                        'before_title' => '',
-                        'after_title' => ''
-                    )
-                );
+                register_sidebar(array(
+                    'name'          => $arr_widget['name'],
+                    'id'            => $arr_widget['id'],
+                    'before_widget' => '',
+                    'after_widget'  => '',
+                    'before_title'  => '',
+                    'after_title'   => ''
+                ));
                 if (!in_array($arr_widget['id'], $exclude_language_widgets)) {
                     /** Register widget for Bahasa Malaysia */
-                    register_sidebar(
-                        array(
-                            'name' => $arr_widget['name'] . ' (Bahasa Malaysia)',
-                            'id' => $arr_widget['id'] . '_ms',
-                            'before_widget' => '',
-                            'after_widget' => '',
-                            'before_title' => '',
-                            'after_title' => ''
-                        )
-                    );
+                    register_sidebar(array(
+                        'name'          => $arr_widget['name'] . ' (Bahasa Malaysia)',
+                        'id'            => $arr_widget['id'] . '_ms',
+                        'before_widget' => '',
+                        'after_widget'  => '',
+                        'before_title'  => '',
+                        'after_title'   => ''
+                    ));
                     /** Register widget for Simplified Chinese */
-                    register_sidebar(
-                        array(
-                            'name' => $arr_widget['name'] . ' (Simplified Chinese)',
-                            'id' => $arr_widget['id'] . '_ch',
-                            'before_widget' => '',
-                            'after_widget' => '',
-                            'before_title' => '',
-                            'after_title' => ''
-                        )
-                    );
+                    register_sidebar(array(
+                        'name'          => $arr_widget['name'] . ' (Simplified Chinese)',
+                        'id'            => $arr_widget['id'] . '_ch',
+                        'before_widget' => '',
+                        'after_widget'  => '',
+                        'before_title'  => '',
+                        'after_title'   => ''
+                    ));
                 }
             }
         }
@@ -198,9 +185,9 @@ if (!function_exists('yes_register_menus')) {
         if (function_exists('register_nav_menus')) {
             register_nav_menus(
                 array(
-                    'primary' => esc_html__('Primary', 'yes.my'),
+                    'primary'           => esc_html__('Primary', 'yes.my'),
                     'shop-mobile-plans' => esc_html__('Mobile Plans', 'yes.my'),
-                    'shop-broadband' => esc_html__('Broadband', 'yes.my'),
+                    'shop-broadband'    => esc_html__('Broadband', 'yes.my'),
                     'shop-existing-customers' => esc_html__('Existing Customers', 'yes.my'),
                     'shop-device-plans' => esc_html__('Device Plans', 'yes.my'),
                     'shop-wireless-fibre' => esc_html__('Wireless Fibre 5G', 'yes.my'),
@@ -210,8 +197,8 @@ if (!function_exists('yes_register_menus')) {
                     'support-contact-us' => esc_html__('Support - Contact Us', 'yes.my'),
                     'bs-support-contact-us' => esc_html__('Business - Support - Contact Us', 'yes.my'),
 
-                    'bs-internet-access' => esc_html__('Business - Internet Access', 'yes.my'),
-                    'bs-private-network' => esc_html__('Business - Private Network', 'yes.my'),
+                    'bs-internet-access'    => esc_html__('Business - Internet Access', 'yes.my'),
+                    'bs-private-network'    => esc_html__('Business - Private Network', 'yes.my'),
                     'bs-voice-communication' => esc_html__('Business - Voice Communication', 'yes.my'),
 
                     'fwm-header' => esc_html__('FWM Header Menu', 'yes.my'),
@@ -223,7 +210,7 @@ if (!function_exists('yes_register_menus')) {
                     // 'footer-column-4'   => esc_html__('Footer - Column 4', 'yes.my'),
 
 
-                    'prepaid-feb' => esc_html__('Prepaid Feb', 'yes.my')
+                    'prepaid-feb'   => esc_html__('Prepaid Feb', 'yes.my')
                 )
             );
         }
@@ -278,8 +265,8 @@ if (!function_exists('display_yes_logo')) {
     function display_yes_logo()
     {
         $custom_logo_id = get_theme_mod('custom_logo');
-        $logo = wp_get_attachment_image_src($custom_logo_id, 'full');
-        $site_url = get_home_url();
+        $logo       = wp_get_attachment_image_src($custom_logo_id, 'full');
+        $site_url   = get_home_url();
 
         if (has_custom_logo()) {
             echo '<a href="' . $site_url . '" class="navbar-brand d-block"><img src="' . esc_url($logo[0]) . '" alt="' . get_bloginfo('name') . '" title="' . get_bloginfo('name') . '" class="logo-top" /></a>';
@@ -300,7 +287,7 @@ if (!function_exists('display_yes_toplogo')) {
     {
         $custom_top_logo_url = get_theme_mod('custom_top_logo');
         if (!empty($custom_top_logo_url)) {
-            $site_url = get_home_url();
+            $site_url   = get_home_url();
             echo '<li class="text-center d-none d-lg-block"><a href="' . $site_url . '" class="navbar-brand" style="padding:8px"><img src="' . esc_url($custom_top_logo_url) . '" alt="' . get_bloginfo('name') . '" title="' . get_bloginfo('name') . '" class="logo-top" /></a></li>';
         }
     }
@@ -316,29 +303,29 @@ if (!function_exists('yes_language_switcher') && function_exists('icl_get_langua
      */
     function yes_language_switcher($classes = [], $type = '')
     {
-        $languages = icl_get_languages('skip_missing=0&orderby=custom&order=asc');
-        $langs = '';
-        $active_lang = '';
-        $flag_img_url = '';
+        $languages      = icl_get_languages('skip_missing=0&orderby=custom&order=asc');
+        $langs          = '';
+        $active_lang    = '';
+        $flag_img_url   = '';
         $active_lang_mobile = '';
         if (1 < count($languages)) {
             foreach ($languages as $language) {
                 if ($language['code'] != 'zh-hans') {
                     switch ($language['code']) {
                         case 'ms':
-                            $language_name = 'Bahasa Malaysia';
-                            $lang_name_mobile = 'BM';
+                            $language_name      = 'Bahasa Malaysia';
+                            $lang_name_mobile   = 'BM';
                             // $flag_img_url = '/wp-content/uploads/2022/12/united-kingdom-1.png';
                             break;
                         case 'zh-hans':
-                            $language_name = '中文';
-                            $lang_name_mobile = '中文';
+                            $language_name      = '中文';
+                            $lang_name_mobile   = '中文';
                             // $flag_img_url = '';
                             break;
                         default:
-                            $language_name = 'English';
-                            $lang_name_mobile = 'EN';
-                        // $flag_img_url = '/wp-content/uploads/2022/12/malaysia-flage.png';
+                            $language_name      = 'English';
+                            $lang_name_mobile   = 'EN';
+                            // $flag_img_url = '/wp-content/uploads/2022/12/malaysia-flage.png';
                     }
 
                     $flag_image = '';
@@ -346,15 +333,15 @@ if (!function_exists('yes_language_switcher') && function_exists('icl_get_langua
                         $language_name = $lang_name_mobile;
                         // $flag_image = '<img src="'.$flag_img_url.'" alt="'.$lang_name_mobile.'_flag_image" />';
                     }
-                    $langs .= '<li><a href="' . $language['url'] . '" language="' . $language['code'] . '" class="dropdown-item" >' . $flag_image . '' . $language_name . '</a></li>';
+                    $langs  .= '<li><a href="' . $language['url'] . '" language="' . $language['code'] . '" class="dropdown-item" >' . $flag_image . '' . $language_name . '</a></li>';
 
                     ($language['active']) ? $active_lang = $language_name : '';
                     ($language['active']) ? $active_lang_mobile = $lang_name_mobile : '';
                 }
             }
         }
-        $exp_class = join(' ', $classes);
-        $html = " <div class='dropdown language-drop float-end $exp_class'>
+        $exp_class  = join(' ', $classes);
+        $html       = " <div class='dropdown language-drop float-end $exp_class'>
                             <a class='btn btn-secondary btn-sm dropdown-toggle' href='javascript:void(0)' role='button' id='dropdownMenuLink' data-bs-toggle='dropdown' aria-expanded='false'><span class='iconify' data-icon='bi:globe'></span> <span class='d-lg-none'>$active_lang_mobile</span><span class='d-none d-lg-inline-block'>$active_lang</span></a>
                             <ul class='dropdown-menu dropdown-menu-start' aria-labelledby='dropdownMenuLink'>$langs</ul>
                         </div>";
@@ -376,12 +363,10 @@ if (!function_exists('get_menu_by_location')) {
      */
     function get_menu_by_location($location)
     {
-        if (empty($location))
-            return false;
+        if (empty($location)) return false;
 
         $locations = get_nav_menu_locations();
-        if (!isset($locations[$location]))
-            return false;
+        if (!isset($locations[$location])) return false;
 
         $menu_obj = get_term($locations[$location], 'nav_menu');
 
@@ -436,34 +421,34 @@ if (!function_exists('yes_custom_breadcrumbs')) {
     {
         global $post, $wp_query;
 
-        $html = null;
-        $show_home = true;
+        $html       = null;
+        $show_home  = true;
         $home_title = esc_html__('Home', 'yes.my');
 
         if (!is_front_page()) {
-            $html .= '<div class="layer-breadcrumb">
+            $html   .= '<div class="layer-breadcrumb">
                             <div class="container breadcrumb-section">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">';
 
             if ($show_home) {
-                $html .= '<li class="breadcrumb-item page-home"><a href="' . get_home_url() . '" title="' . $home_title . '">' . $home_title . '</a></li>';
+                $html   .= '<li class="breadcrumb-item page-home"><a href="' . get_home_url() . '" title="' . $home_title . '">' . $home_title . '</a></li>';
             }
 
             if (is_page()) {
                 if ($post->post_parent) {
-                    $ancestors = get_post_ancestors($post->ID);
-                    $ancestors = array_reverse($ancestors);
+                    $ancestors  = get_post_ancestors($post->ID);
+                    $ancestors  = array_reverse($ancestors);
 
                     foreach ($ancestors as $ancestor) {
-                        $parent_title = get_the_title($ancestor);
-                        $html .= '<li class="breadcrumb-item page-parent page-' . $ancestor . '"><a href="' . get_permalink($ancestor) . '" title="' . $parent_title . '">' . $parent_title . '</a></li>';
+                        $parent_title   = get_the_title($ancestor);
+                        $html   .= '<li class="breadcrumb-item page-parent page-' . $ancestor . '"><a href="' . get_permalink($ancestor) . '" title="' . $parent_title . '">' . $parent_title . '</a></li>';
                     }
                 }
-                $html .= '        <li class="breadcrumb-item active page-current page-' . get_the_ID() . '" aria-current="page">' . get_the_title() . '</li>';
+                $html   .= '        <li class="breadcrumb-item active page-current page-' . get_the_ID() . '" aria-current="page">' . get_the_title() . '</li>';
             }
 
-            $html .= '            </ol>
+            $html   .= '            </ol>
                                 </nav>
                             </div>
                         </div>';
@@ -510,12 +495,12 @@ if (!function_exists('display_widget_by_position')) {
         global $exclude_language_widgets;
 
         if ($widget_id !== null) {
-            $lang = get_bloginfo("language");
+            $lang   = get_bloginfo("language");
             if (!in_array($widget_id, $exclude_language_widgets)) {
                 if ($lang == 'ms-MY') {
-                    $widget_id = $widget_id . '_ms';
+                    $widget_id  = $widget_id . '_ms';
                 } else if ($lang == 'zh-CN') {
-                    $widget_id = $widget_id . '_ch';
+                    $widget_id  = $widget_id . '_ch';
                 }
             }
 
@@ -524,7 +509,7 @@ if (!function_exists('display_widget_by_position')) {
             } else if ($display_widget_content) {
                 return dynamic_sidebar($widget_id);
             } else {
-                if (is_active_sidebar($widget_id)):
+                if (is_active_sidebar($widget_id)) :
                     return dynamic_sidebar($widget_id);
                 endif;
             }
@@ -548,16 +533,16 @@ if (!function_exists('update_direction_list_domain')) {
     function update_direction_list_domain($old_domain = 'https://my.yes.my/', $new_domain = 'https://site.yes.my/', $redirection_group_id = 3)
     {
         global $wpdb;
-        $query = " SELECT * 
+        $query      = " SELECT * 
                         FROM yes_redirection_items
                         WHERE group_id = $redirection_group_id 
                             AND action_type = 'url'
                             AND action_data LIKE '" . $old_domain . "%'";
-        $results = $wpdb->get_results($query);
+        $results    = $wpdb->get_results($query);
 
         foreach ($results as $result) {
             $id = $result->id;
-            $action_data = $result->action_data;
+            $action_data     = $result->action_data;
             $new_action_data = str_replace($old_domain, $new_domain, $action_data);
             // echo '<pre>'; print_r($result); echo "$id <br />$action_data <br />$new_action_data"; echo '</pre>';
 
@@ -596,13 +581,13 @@ if (!function_exists('show_most_faq_viewed')) {
             ],
             'suppress_filters' => false
         ];
-        $html_faq = '';
+        $html_faq   = '';
         $post_count = 1;
         $faqs = new WP_Query($docsArgs);
         if ($faqs->have_posts()) {
             while ($faqs->have_posts()) {
                 $faqs->the_post();
-                $html_faq .= '            <div class="accordion-item">
+                $html_faq   .= '            <div class="accordion-item">
                                                 <h2 class="accordion-header" id="accordion-header-' . $post_count . '">
                                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-content-' . $post_count . '" aria-expanded="true" aria-controls="accordion-content-' . $post_count . '">' . get_the_title() . '</button>
                                                 </h2>
@@ -615,19 +600,19 @@ if (!function_exists('show_most_faq_viewed')) {
         }
         wp_reset_postdata();
 
-        $lang = get_bloginfo('language');
-        $faq_main_text = 'Most Searched Topics';
-        $faq_link_text = 'View All FAQ';
-        $faq_link = '/faq';
+        $lang           = get_bloginfo('language');
+        $faq_main_text  = 'Most Searched Topics';
+        $faq_link_text  = 'View All FAQ';
+        $faq_link       = '/faq';
         if ($lang == 'ms-MY') {
-            $faq_main_text = 'Topik Paling Dicari';
-            $faq_link_text = 'Lihat Semua Soalan Lazim';
-            $faq_link = '/ms' . $faq_link;
+            $faq_main_text  = 'Topik Paling Dicari';
+            $faq_link_text  = 'Lihat Semua Soalan Lazim';
+            $faq_link       = '/ms' . $faq_link;
         } else if ($lang == 'zh-CN') {
-            $faq_link = '/zh-hans' . $faq_link;
+            $faq_link       = '/zh-hans' . $faq_link;
         }
 
-        $html = ' <!-- FAQs Start -->
+        $html   = ' <!-- FAQs Start -->
                     <section id="faq-section" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                         <div class="container">
                             <div class="row">
@@ -750,16 +735,13 @@ if (!function_exists('generate_form_data_csv')) {
             $title = $params[1];
             if (!empty($data)) {
                 $sorted_label_names_original = $label_parameters[4];
-                $sorted_label_names_original = array_merge(
-                    array(
-                        'ID',
-                        "Submit date",
-                        "Submitter's IP",
-                        "Submitter's Username",
-                        "Submitter's Email Address",
-                    ),
-                    $sorted_label_names_original
-                );
+                $sorted_label_names_original = array_merge(array(
+                    'ID',
+                    "Submit date",
+                    "Submitter's IP",
+                    "Submitter's Username",
+                    "Submitter's Email Address",
+                ), $sorted_label_names_original);
 
                 if (($key = array_search('stripe', $sorted_label_names_original)) !== false) {
                     unset($sorted_label_names_original[$key]);
@@ -832,8 +814,8 @@ if (!function_exists('generate_form_data_csv')) {
 
 function yes_menu($path)
 {
-    ?>
-    <style>
+?>
+    <style type="text/css">
         .navbar-brand {
             display: inline-block;
             padding-top: 10px;
@@ -898,7 +880,6 @@ function yes_menu($path)
             outline: none !important;
         }
 
-
         .nav-container .pink-btn {
             background-color: #FF0084 !important;
         }
@@ -917,8 +898,6 @@ function yes_menu($path)
         .mega-dropdown-menu {
             box-shadow: 0px 3px 4px rgb(0 0 0 / 25%);
         }
-
-
 
         .top-tabs-container .language-drop {
             margin-top: 0px !important;
@@ -974,8 +953,6 @@ function yes_menu($path)
             float: right;
             margin-top: 12px;
         }
-
-
 
         .navbar-toggler:active,
         .navbar-toggler:focus {
@@ -1160,7 +1137,6 @@ function yes_menu($path)
 
         }
 
-
         #gethelp .dropdown-header {
             border-bottom: 1px solid #a1a1a14d;
             font-weight: 700;
@@ -1254,7 +1230,6 @@ function yes_menu($path)
         .relative {
             position: relative;
         }
-
 
         @media (max-width: 991px) {
             body .page-header .navbar .dropdown-menu {
@@ -1436,7 +1411,6 @@ function yes_menu($path)
             }
 
             .badges {
-
                 font-weight: 800;
                 border-width: 1px;
                 background: linear-gradient(80.9deg, #FF0084 16.48%, #6F29D2 85.6%, #2F3BF5 96.9%);
@@ -1450,7 +1424,6 @@ function yes_menu($path)
         }
 
         @media (min-width: 991px) and (max-width:1200px) {
-
             .mega-dropdown-menu .card {
                 width: 12rem;
                 /* margin:0; */
@@ -1707,13 +1680,11 @@ function yes_menu($path)
             .dropdown .show::after {
                 border-top: 0em solid;
                 border-bottom: 0.3em solid;
-
             }
 
             .mega-dropdown-menu.default-top-menu {
                 padding: 0px 15px !important;
             }
-
         }
 
         @media screen and (max-width: 480px) {
@@ -1927,7 +1898,6 @@ function yes_menu($path)
             .mega-dropdown-menu.default-top-menu {
                 padding: 0px 15px !important;
             }
-
         }
 
         .navbar-toggler:not(.collapsed) {
@@ -1936,8 +1906,7 @@ function yes_menu($path)
         }
 
         .navbar-toggler:not(.collapsed) .navbar-toggler-icon {
-            background-image: url(https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/cross.svg);
-
+            background-image: url(/wp-content/uploads/2023/03/cross.svg);
         }
 
         .back-btn {
@@ -2023,230 +1992,181 @@ function yes_menu($path)
         }
     </style>
 
-<ul class="navbar-nav">
 
-<li class="nav-item dropdown mega-dropdown">
+    <ul class="navbar-nav">
+        <li class="nav-item dropdown mega-dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Postpaid', 'yes.my'); ?></a>
 
-    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Postpaid', 'yes.my'); ?></a>
-
-
-
-    <ul class="dropdown-menu mega-dropdown-menu postpaid_menu" aria-labelledby="navbarDropdown">
-
-        <div class="row mx-0">
-
-            <div class="col-auto px-2 p-lg-4 py-lg-5">
-
-                <li>
-
-                    <ul>
-
-                        <li id="menu-item-31205" class="dropdown-header menu-item menu-item-type-post_type menu-item-object-page menu-item-31205">
-
-                            <p class="yes_text_menu_headline">explore
-
-                                postpaid Plans</p>
-
-                        </li>
-
-
+            <ul class="dropdown-menu mega-dropdown-menu postpaid_menu" aria-labelledby="navbarDropdown">
+                <div class="row mx-0">
+                    <div class="col-auto px-2 p-lg-4 py-lg-5">
+                        <li>
+                            <ul>
+                                <li id="menu-item-31205" class="dropdown-header menu-item menu-item-type-post_type menu-item-object-page menu-item-31205">
+                                    <p class="yes_text_menu_headline">explore
+                                        postpaid Plans</p>
+                                </li>
 
 <?php
-
-$menu = wp_get_nav_menu_object("Postpaid-Explore Postpaid-Plans");
-$primaryNav = wp_get_nav_menu_items($menu);
-foreach ($primaryNav as $navItem) {
-
+ $menu = wp_get_nav_menu_object("Postpaid-Explore Postpaid-Plans");
+ $primaryNav = wp_get_nav_menu_items($menu);
+ foreach ($primaryNav as $navItem) {
 ?>
-
 <?php
-
 $lang = get_bloginfo("language");
+//echo "value check". get_bloginfo('url');
+//echo get_site_url();
 $parse = parse_url($navItem->url);
+//print_r($parse);
 $url = rtrim(get_bloginfo('url'),"/");
 if ($lang == "en-US"){
-
 ?>
-
-            <li class="dropdown-header">
-            <a class="custom_menu_nuv" href="<?php echo $url.$navItem->url; ?>">
-            <?php echo $navItem->post_title; ?></a></li>     
+                    <li class="dropdown-header">
+                    <a class="custom_menu_nuv" href="<?php echo $url.$navItem->url; ?>">
+                    <?php echo $navItem->post_title; ?></a></li>                    
 <?php
-
-            }else{
-
-                ?>
-
-                <li class="dropdown-header">
-                <a class="custom_menu_nuv" href="<?php echo get_site_url().'/ms'.$parse['path']; ?>">
-                <?php echo $navItem->post_title; ?></a></li> 
-            </a></li>
-            <?php
-            }      
-
-        }
-?>
-
-                    </ul>
-
-                </li>
-
-            </div>
-
-<?php
-
-            $yes_menu_image_postpaid = get_post_meta($navItem->ID, 'ytl_div_img_logo', true);
-
-            if (isset($yes_menu_image_postpaid) && !empty(isset($yes_menu_image_postpaid))) {
-
-                $menu_image_postpaid = wp_get_attachment_image_url($yes_menu_image_postpaid);
-
-            }
-
-            // $dummy_image_url='http://yes.my.localhost/wp-content/uploads/2023/03/dummy_300x165_000000_cbcefd.png';
-
-            // $dummy_image_url=get_site_url().'/wp-content/uploads/2022/05/ft5g-simpack-new2.png';
-
-            // // $menu_image_postpaid= wp_get_attachment_image_url($dummy_image_url);
-
-            // $menu_image_postpaid=($dummy_image_url);
-
-
-
-            $yes_menu_desc_postpaid = get_post_meta($navItem->ID, 'menu_item_desc', true);
-
-            if (isset($yes_menu_desc_postpaid) && !empty(isset($yes_menu_desc_postpaid))) {
-
-                $menu_desc_postpaid = $yes_menu_desc_postpaid;
-
-            }
-
-            if ($menu_image_postpaid) {
-
-?>
-                <div class="col-auto px-2 p-lg-4 py-lg-5 d-lg-block d-none">
-                    <li>
-                        <ul>
-                            <div class="cards">
-                                <div class="postpaid_card_box card-box">
-                                    <!-- <img src="/wp-content/uploads/2022/05/ft5g-simpack-new2.png"> -->
-                                    <img src="<?php echo $menu_image_postpaid  ?>">
-                                </div>
-                                <div class="postpaid_card_text card-body">
-                                    <p class="card-text"><?php echo $menu_desc_postpaid ?></p>
-                                    <a href="#" style="display:none">LEARN MORE <i class="fas fa-chevron-right"></i></a>
-                                </div>
-                            </div>
-                        </ul>
-                    </li>
-                </div>
+                    }else{
+                        ?>
+                        <li class="dropdown-header">
+                        <a class="custom_menu_nuv" href="<?php echo get_site_url().'/ms'.$parse['path']; ?>">
+                        <?php echo $navItem->post_title; ?> test</a></li>
                     <?php
+                    }
+                
+                }
+?>
+                            </ul>
+                        </li>
+                    </div>
+<?php
+                    $yes_menu_image_postpaid = get_post_meta($navItem->ID, 'ytl_div_img_logo', true);
+                    if (isset($yes_menu_image_postpaid) && !empty(isset($yes_menu_image_postpaid))) {
+                        $menu_image_postpaid = wp_get_attachment_image_url($yes_menu_image_postpaid);
+                    }
+                    // $dummy_image_url='http://yes.my.localhost/wp-content/uploads/2023/03/dummy_300x165_000000_cbcefd.png';
+                    // $dummy_image_url=get_site_url().'/wp-content/uploads/2022/05/ft5g-simpack-new2.png';
+                    // // $menu_image_postpaid= wp_get_attachment_image_url($dummy_image_url);
+                    // $menu_image_postpaid=($dummy_image_url);
 
-            }
-                ?>
-        </div>
-    </ul>
-</li>
-</ul>
-    <ul class="navbar-nav">
+                    $yes_menu_desc_postpaid = get_post_meta($navItem->ID, 'menu_item_desc', true);
+                    if (isset($yes_menu_desc_postpaid) && !empty(isset($yes_menu_desc_postpaid))) {
+                        $menu_desc_postpaid = $yes_menu_desc_postpaid;
+                    }
+                    if ($menu_image_postpaid) {
+?>
+                        <div class="col-auto px-2 p-lg-4 py-lg-5 d-lg-block d-none">
+                            <li>
+                                <ul>
+                                    <div class="cards">
+                                        <div class="postpaid_card_box card-box">
+                                            <!-- <img src="/wp-content/uploads/2022/05/ft5g-simpack-new2.png"> -->
+                                            <img src="<?php echo $menu_image_postpaid  ?>">
 
-    <li class="nav-item dropdown mega-dropdown">
+                                        </div>
+                                        <div class="postpaid_card_text card-body">
 
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <?php echo esc_html__('Prepaid', 'yes.my'); ?>
-        </a>
+                                            <p class="card-text"><?php echo $menu_desc_postpaid ?></p>
+                                            <a href="#" style="display:none">LEARN MORE <i class="fas fa-chevron-right"></i></a>
+                                        </div>
+                                    </div>
 
-        <ul class="dropdown-menu mega-dropdown-menu prepaid_menu" aria-labelledby="navbarDropdown">
-
-            <div class="row mx-0">
-                <div class="col-auto px-2 p-lg-4 py-lg-5">
-                    <li>
-                        <ul>
-                            <li id="menu-item-31205"
-                                class="dropdown-header menu-item menu-item-type-post_type menu-item-object-page menu-item-31205">
-                                <p class="yes_text_menu_headline">explore
-                                    prepaid Plans</p>
+                                </ul>
                             </li>
-                            <?php
-                            $prepaid_menu = wp_get_nav_menu_object("Prepaid-explore prepaid Plans");
-                            $prepaid_Nav = wp_get_nav_menu_items($prepaid_menu);
-                            foreach ($prepaid_Nav as $prepaid_navItem) {
-                                ?>
-                                <?php
-                                $lang = get_bloginfo("language");  
-                                $parse = parse_url($prepaid_navItem->url);                            
-                                $url = rtrim(get_bloginfo('url'), "/");
-                                if ($lang == "en-US") {
+                        </div>
+<?php
+                    }
+?>
+                </div>
+            </ul>
+        </li>
+    </ul>
+
+    <ul class="navbar-nav">
+        <li class="nav-item dropdown mega-dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Prepaid', 'yes.my'); ?></a>
+
+            <ul class="dropdown-menu mega-dropdown-menu prepaid_menu" aria-labelledby="navbarDropdown">
+                <div class="row mx-0">
+                    <div class="col-auto px-2 p-lg-4 py-lg-5">
+                        <li>
+                            <ul>
+                                <li id="menu-item-31205" class="dropdown-header menu-item menu-item-type-post_type menu-item-object-page menu-item-31205">
+                                    <p class="yes_text_menu_headline">explore
+                                        prepaid Plans</p>
+                                </li>
+<?php
+                                $prepaid_menu = wp_get_nav_menu_object("Prepaid-explore prepaid Plans");
+                                $prepaid_Nav = wp_get_nav_menu_items($prepaid_menu);
+
+                                foreach ($prepaid_Nav as $prepaid_navItem) {
                                     ?>
-                                    <li class="dropdown-header"><a class="custom_menu_nuv"
-                                            href="<?php echo $url . $prepaid_navItem->url; ?>">
-                                            <?php echo $prepaid_navItem->post_title; ?></a></li>
                                     <?php
-                                } else {
+                                    $lang = get_bloginfo("language");
+                                    //echo "value check". get_bloginfo('url');
+                                    //echo get_site_url();
+                                    $parse = parse_url($prepaid_navItem->url);
+                                    //print_r($parse);
+                                    $url = rtrim(get_bloginfo('url'),"/");
+                                    if ($lang == "en-US"){
+                                  ?>
+                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo  $url.$prepaid_navItem->url; ?>">
+                                <?php echo $prepaid_navItem->post_title; ?></a></li>
+                               <?php
+                                }else{
                                     ?>
                                     <li class="dropdown-header">
-                                        <a class="custom_menu_nuv" href="<?php echo get_site_url() . '/ms' . $parse['path']; ?>">
-
-                                            <?php echo $prepaid_navItem->post_title; ?></a>
-                                    </li>
-
-                                    <?php
-
+                                    <a class="custom_menu_nuv" href="<?php echo get_site_url().'/ms'.$parse['path']; ?>">
+                                    <?php echo $prepaid_navItem->post_title; ?></a></li>
+                                <?php
                                 }
+                                }
+                              ?>
+                            </ul>
+                        </li>
+                    </div>
+<?php
+                    $yes_menu_image_prepaid = get_post_meta($prepaid_navItem->ID, 'ytl_div_img_logo', true);
+                    if (isset($yes_menu_image_prepaid) && !empty(isset($yes_menu_image_prepaid))) {
+                        $menu_image_prepaid = wp_get_attachment_image_url($yes_menu_image_prepaid, 'full');
+                    }
 
-                            }
-
-                            ?>
-
-                        </ul>
-
-                    </li>
-
-                </div>
-
-                <?php
-
-                $yes_menu_image_prepaid = get_post_meta($prepaid_navItem->ID, 'ytl_div_img_logo', true);
-
-                if (isset($yes_menu_image_prepaid) && !empty(isset($yes_menu_image_prepaid))) {
-
-                    $menu_image_prepaid = wp_get_attachment_image_url($yes_menu_image_prepaid, 'full');
-
-                }
-
-                if ($menu_image_prepaid) {
-                    ?>
+                    if ($menu_image_prepaid) {
+?>
                     <div class="col-auto px-2 p-lg-4 py-lg-5 d-lg-block d-none">
                         <li>
                             <ul>
                                 <div class="cards">
                                     <div class="postpaid_card_box card-box">
                                         <!-- <img src="/wp-content/uploads/2022/05/ft5g-simpack-new2.png"> -->
-                                        <img src="<?php echo $menu_image_prepaid ?>">
+                                        <img src="<?php echo $menu_image_prepaid  ?>">
+
                                     </div>
                                     <div class="postpaid_card_text card-body">
                                     </div>
                                 </div>
+
                             </ul>
                         </li>
                     </div>
-                    <?php
-                }
-                ?>
-            </div>
-        </ul>
-    </li>
-</ul>
+<?php
+                    }
+?>
+
+                </div>
+            </ul>
+        </li>
+    </ul>
+
+    
     <ul class="navbar-nav">
-        <?php
+<?php
         $lang = get_bloginfo("language");
         if ($lang == "en-US") {
             $menu_link = '/yes-postpaid-infinite-5g/';
-        } elseif ($lang == "ms-MY") {
+        } else {
             $menu_link = '/ms/yes-postpaid-infinite-5g/';
         }
-        ?>
+?>
         <li id="menu-item-20033" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20033 nav-item">
             <a href=<?php echo $menu_link ?> class="nav-link"><?php echo esc_html__('Infinite+', 'yes.my'); ?></a>
         </li>
@@ -2258,7 +2178,6 @@ if ($lang == "en-US"){
             <ul class="dropdown-menu mega-dropdown-menu broadband_menu" aria-labelledby="navbarDropdown">
                 <div class="row mx-0">
                     <div class="col-auto tab p-0">
-
                         <div class="tab-menu">
                             <ul>
                                 <li><a href="#" class="active dropdown-header" data-rel="tab-1">Wireless Fibre 5G</a></li>
@@ -2277,66 +2196,33 @@ if ($lang == "en-US"){
                                             <li id="menu-item-31205" class="dropdown-header menu-item menu-item-type-post_type menu-item-object-page menu-item-31205">
                                                 <p class="yes_text_menu_headline">Explore Our Plans</p>
                                             </li>
-                                            <?php
+<?php
                                             $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fiber-5G");
-                                            $WirelessNav = wp_get_nav_menu_items($Wireless_Fibre_menu);                                            
-                                            
+                                            $WirelessNav = wp_get_nav_menu_items($Wireless_Fibre_menu);
+
                                             foreach ($WirelessNav as $wirelessItem) {
-                                                ?>
-                                                <?php
-                                                $lang = get_bloginfo("language");                                                
-                                                $parse = parse_url($wirelessItem->url);
-                                                $url = rtrim(get_bloginfo('url'),"/");
-                                                if ($lang == "en-US"){
-                                              ?>
-                                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $url.$wirelessItem->url; ?>">
+?>
+                                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $wirelessItem->url; ?>">
                                                 <?php echo $wirelessItem->post_title; ?></a></li>
-                                            <?php
-                                            }else{
-                                                ?>
-                                                <li class="dropdown-header">
-                                                <a class="custom_menu_nuv" href="<?php echo get_site_url().'/ms'.$parse['path']; ?>">
-                                                <?php echo $wirelessItem->post_title; ?></a></li>
-                                            <?php
+<?php
                                             }
-                                            }
-                                            ?>
-
+?>
                                         </ul>
-
-
                                         <ul>
                                             <li id="menu-item-31205" class="dropdown-header menu-item menu-item-type-post_type menu-item-object-page menu-item-31205">
                                                 <p class="yes_text_menu_headline">quick options</p>
                                             </li>
-                                            <?php
+<?php
                                             $quick_menu = wp_get_nav_menu_object("Broadband - quick-options");
                                             $quick_menuNav = wp_get_nav_menu_items($quick_menu);
 
                                             foreach ($quick_menuNav as $quick_menusItem) {
-                                                ?>
-                                                <?php
-                                                $lang = get_bloginfo("language");
-                                                $parse = parse_url($quick_menusItem->url);
-                                                $url = rtrim(get_bloginfo('url'),"/");
-                                                if ($lang == "en-US"){
-                                                ?>
-                                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $url.$quick_menusItem->url; ?>">
-                                                <?php echo $quick_menusItem->post_title; ?></a></li>
-                                            <?php
-                                            }else{
-                                                ?>
-                                                <li class="dropdown-header">
-                                                <a class="custom_menu_nuv" href="<?php echo get_site_url().'/ms'.$parse['path']; ?>">
-                                                <?php echo $quick_menusItem->post_title; ?></a></li>
-                                            <?php
+?>
+                                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $quick_menusItem->url; ?>"><?php echo $quick_menusItem->post_title; ?></a></li>
+<?php
                                             }
-                                            }
-                                            ?>
-                                            <!-- <li class="dropdown-header">Device Manual
-                                        </li> -->
-
-
+?>
+                                            <!-- <li class="dropdown-header">Device Manual</li> -->
                                         </ul>
                                     </li>
                                 </div>
@@ -2346,66 +2232,33 @@ if ($lang == "en-US"){
                                     <li>
                                         <ul>
                                             <li id="menu-item-31205" class="dropdown-header menu-item menu-item-type-post_type menu-item-object-page menu-item-31205">
-                                                <p class="yes_text_menu_headline">Home Broadband</p>
+                                                <p class="yes_text_menu_headline">home broadband</p>
                                             </li>
-                                            <?php
+<?php
                                             $Broadband_menu = wp_get_nav_menu_object("Broadband - 4G-Broadband");
                                             $broadband_menuNav = wp_get_nav_menu_items($Broadband_menu);
                                             foreach ($broadband_menuNav as $broadband_menusItem) {
-                                                ?>
-                                                <?php
-                                                $lang = get_bloginfo("language");
-                                                $parse = parse_url($broadband_menusItem->url);
-                                                $url = rtrim(get_bloginfo('url'),"/");
-                                                if ($lang == "en-US"){
-
-                                                ?>
-                                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $url.$broadband_menusItem->url; ?>">
-                                                <?php echo $broadband_menusItem->post_title; ?></a></li>
-                                            <?php
-                                            }else{
-                                                ?>
-                                                <li class="dropdown-header">
-                                                <a class="custom_menu_nuv" href="<?php echo get_site_url().'/ms'.$parse['path']; ?>">
-                                                <?php echo $broadband_menusItem->post_title; ?></a></li>
-                                            <?php
+?>
+                                            <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $broadband_menusItem->url; ?>"><?php echo $broadband_menusItem->post_title; ?></a></li>
+<?php
                                             }
-                                            }
-                                            ?>
-
+?>
                                         </ul>
                                         <ul>
                                             <li id="menu-item-31205" class="dropdown-header menu-item menu-item-type-post_type menu-item-object-page menu-item-31205">
-                                                <p class="yes_text_menu_headline">Quick Options</p>
+                                                <p class="yes_text_menu_headline">quick options</p>
                                             </li>
-                                            <?php
+<?php
                                             $quick_menu = wp_get_nav_menu_object("Broadband - quick-options");
                                             $quick_menuNav = wp_get_nav_menu_items($quick_menu);
 
                                             foreach ($quick_menuNav as $quick_menusItem) {
-                                            ?>
-                                            <?php
-                                            $lang = get_bloginfo("language");                                            
-                                            $parse = parse_url($quick_menusItem->url);                                            
-                                            $url = rtrim(get_bloginfo('url'),"/");
-                                            if ($lang == "en-US"){    
-                                            ?>
-                                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $url.$quick_menusItem->url; ?>">
-                                                <?php echo $quick_menusItem->post_title; ?></a></li>
-                                            <?php
-                                            }else{
-                                                ?>
-                                                <li class="dropdown-header">
-                                                <a class="custom_menu_nuv" href="<?php echo get_site_url().'/ms'.$parse['path']; ?>">
-                                                <?php echo $quick_menusItem->post_title; ?></a></li>
-                                            <?php
+?>
+                                            <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $quick_menusItem->url; ?>"><?php echo $quick_menusItem->post_title; ?></a></li>
+<?php
                                             }
-                                             }
-                                            ?>
-                                            <!-- <li class="dropdown-header">Device Manual
-                                        </li> -->
-
-
+?>
+                                            <!-- <li class="dropdown-header">Device Manual</li> -->
                                         </ul>
                                     </li>
                                     <li>
@@ -2413,33 +2266,17 @@ if ($lang == "en-US"){
                                             <li id="menu-item-31205" class="dropdown-header menu-item menu-item-type-post_type menu-item-object-page menu-item-31205">
                                                 <p class="yes_text_menu_headline">on-the-go broadband</p>
                                             </li>
-                                            <?php
+<?php
                                             $on_the_go_broadband = wp_get_nav_menu_object("Broadband - 4G-Broadband-on-the-go");
                                             $on_the_goNav = wp_get_nav_menu_items($on_the_go_broadband);
 
                                             foreach ($on_the_goNav as $on_the_broadbandItem) {
-                                                ?>
-                                                <?php
-                                                $lang = get_bloginfo("language");
-                                                $parse = parse_url($on_the_broadbandItem->url);
-                                                $url = rtrim(get_bloginfo('url'),"/");
-                                                if ($lang == "en-US"){
-                                                ?>
-                                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $url.$on_the_broadbandItem->url; ?>">
-                                                <?php echo $on_the_broadbandItem->post_title; ?></a></li>
-                                            <?php
-                                            }else{
-                                                ?>
-                                                <li class="dropdown-header">
-                                                <a class="custom_menu_nuv" href="<?php echo get_site_url().'/ms'.$parse['path']; ?>">
-                                                <?php echo $on_the_broadbandItem->post_title; ?></a></li>
-                                            <?php
+?>
+                                            <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $on_the_broadbandItem->url; ?>"><?php echo $on_the_broadbandItem->post_title; ?></a></li>
+<?php
                                             }
-                                            }
-                                            ?>
-
+?>
                                         </ul>
-
                                     </li>
                                 </div>
                             </div>
@@ -2482,7 +2319,6 @@ if ($lang == "en-US"){
                             </ul>
                         </li>
                     </div> -->
-
                 </div>
             </ul>
         </li>
@@ -2494,13 +2330,12 @@ if ($lang == "en-US"){
                 <div class="tab-menu mobile">
                     <ul>
                         <li><a href="#" class="active dropdown-header" data-rel="tab-3">Wireless Fibre 5G</a></li>
-                        <li><a href="#" data-rel="tab-4" class="dropdown-header">4G Broadband</a>
-                        </li>
+                        <li><a href="#" data-rel="tab-4" class="dropdown-header">4G Broadband</a></li>
                     </ul>
                 </div>
                 <div class="tab-box overlap" id="tab-3">
                     <div class="back-btn" data-rel="tab-3">
-                        <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/arrow_back.svg"> Main Menu
+                        <img src="/wp-content/uploads/2023/03/arrow_back.svg" /> Main Menu
                     </div>
                     <h2 class="menu-title">Wireless Fibre 5G</h2>
                     <li>
@@ -2508,79 +2343,64 @@ if ($lang == "en-US"){
                             <li id="menu-item-31205" class="dropdown-header menu-item menu-item-type-post_type menu-item-object-page menu-item-31205">
                                 <p class="yes_text_menu_headline">explore postpaid Plans</p>
                             </li>
-                            <?php
-                            $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fibre-5G");
+<?php
+                            $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fiber-5G");
                             $WirelessNav = wp_get_nav_menu_items($Wireless_Fibre_menu);
 
-                            if ($WirelessNav) {
-                                foreach ($WirelessNav as $wirelessItem) {
-
-                            ?>
-                                    <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $wirelessItem->url; ?>"><?php echo $wirelessItem->post_title; ?></a></li>
-                            <?php
-                                }
+                            foreach ($WirelessNav as $wirelessItem) {
+?>
+                            <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $wirelessItem->url; ?>"><?php echo $wirelessItem->post_title; ?></a></li>
+<?php
                             }
-                            ?>
-
-
+?>
                         </ul>
                         <ul>
                             <li id="menu-item-31205" class="dropdown-header menu-item menu-item-type-post_type menu-item-object-page menu-item-31205">
                                 <p class="yes_text_menu_headline">quick options</p>
                             </li>
-                            <?php
+<?php
                             $quick_menu = wp_get_nav_menu_object("Broadband - quick-options");
                             $quick_menuNav = wp_get_nav_menu_items($quick_menu);
 
                             foreach ($quick_menuNav as $quick_menusItem) {
-
-                                ?>
-                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $quick_menusItem->url; ?>"><?php echo $quick_menusItem->post_title; ?></a></li>
-                            <?php
+?>
+                            <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $quick_menusItem->url; ?>"><?php echo $quick_menusItem->post_title; ?></a></li>
+<?php
                             }
-                            ?>
-                            <!-- <li class="dropdown-header">Device Manual
-                            </li> -->
-
-
+?>
+                            <!-- <li class="dropdown-header">Device Manual</li> -->
                         </ul>
                     </li>
                     <!-- <li>
                         <ul>
                             <div class="card">
-
                                 <div class="card-box"></div>
                                 <div class="card-body">
-
                                     <p class="card-text">Be the first in Malaysia to
                                         learn,
                                         play & discover 5G.</p>
                                     <a href="#">LEARN MORE <i class="fas fa-chevron-right"></i></a>
                                 </div>
                             </div>
-
                         </ul>
                     </li>
                     <li>
                         <ul>
                             <div class="card">
-
                                 <div class="card-box"></div>
                                 <div class="card-body">
-
                                     <p class="card-text">Be the first in Malaysia to
                                         learn,
                                         play & discover 5G.</p>
                                     <a href="#">LEARN MORE <i class="fas fa-chevron-right"></i></a>
                                 </div>
                             </div>
-
                         </ul>
                     </li> -->
                 </div>
                 <div class="tab-box overlap" id="tab-4">
                     <div class="back-btn" data-rel="tab-4">
-                        <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/arrow_back.svg"> Main Menu
+                        <img src="/wp-content/uploads/2023/03/arrow_back.svg"> Main Menu
                     </div>
                     <h2 class="menu-title">4G Broadband</h2>
                     <div class="tab-box-inner">
@@ -2589,38 +2409,31 @@ if ($lang == "en-US"){
                                 <li id="menu-item-31205" class="dropdown-header menu-item menu-item-type-post_type menu-item-object-page menu-item-31205">
                                     <p class="yes_text_menu_headline">home broadband</p>
                                 </li>
-                                <?php
+<?php
                                 $Broadband_menu = wp_get_nav_menu_object("Broadband - 4G-Broadband");
                                 $broadband_menuNav = wp_get_nav_menu_items($Broadband_menu);
                                 foreach ($broadband_menuNav as $broadband_menusItem) {
-
-                                    ?>
-                                    <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $broadband_menusItem->url; ?>"><?php echo $broadband_menusItem->post_title; ?></a></li>
-                                <?php
+?>
+                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $broadband_menusItem->url; ?>"><?php echo $broadband_menusItem->post_title; ?></a></li>
+<?php
                                 }
-                                ?>
-
-
+?>
                             </ul>
                             <ul>
                                 <li id="menu-item-31205" class="dropdown-header menu-item menu-item-type-post_type menu-item-object-page menu-item-31205">
                                     <p class="yes_text_menu_headline">quick options</p>
                                 </li>
-                                <?php
+<?php
                                 $quick_menu = wp_get_nav_menu_object("Broadband - quick-options");
                                 $quick_menuNav = wp_get_nav_menu_items($quick_menu);
 
                                 foreach ($quick_menuNav as $quick_menusItem) {
-
-                                    ?>
-                                    <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $quick_menusItem->url; ?>"><?php echo $quick_menusItem->post_title; ?></a></li>
-                                <?php
+?>
+                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $quick_menusItem->url; ?>"><?php echo $quick_menusItem->post_title; ?></a></li>
+<?php
                                 }
-                                ?>
-                                <!-- <li class="dropdown-header">Device Manual
-                            </li> -->
-
-
+?>
+                                <!-- <li class="dropdown-header">Device Manual</li> -->
                             </ul>
                         </li>
                         <li>
@@ -2628,26 +2441,21 @@ if ($lang == "en-US"){
                                 <li id="menu-item-31205" class="dropdown-header menu-item menu-item-type-post_type menu-item-object-page menu-item-31205">
                                     <p class="yes_text_menu_headline">on-the-go broadband</p>
                                 </li>
-                                <?php
+<?php
                                 $on_the_go_broadband = wp_get_nav_menu_object("Broadband - 4G-Broadband-on-the-go");
                                 $on_the_goNav = wp_get_nav_menu_items($on_the_go_broadband);
 
                                 foreach ($on_the_goNav as $on_the_broadbandItem) {
-
-                                    ?>
-                                    <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $on_the_broadbandItem->url; ?>"><?php echo $on_the_broadbandItem->post_title; ?></a></li>
-                                <?php
+?>
+                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $on_the_broadbandItem->url; ?>"><?php echo $on_the_broadbandItem->post_title; ?></a></li>
+<?php
                                 }
-                                ?>
-
-
+?>
                             </ul>
-
                         </li>
                         <!-- <li>
                             <ul>
                                 <div class="card">
-
                                     <div class="card-box"></div>
                                     <div class="card-body">
 
@@ -2657,23 +2465,19 @@ if ($lang == "en-US"){
                                         <a href="#">LEARN MORE <i class="fas fa-chevron-right"></i></a>
                                     </div>
                                 </div>
-
                             </ul>
                         </li>
                         <li>
                             <ul>
                                 <div class="card">
-
                                     <div class="card-box"></div>
                                     <div class="card-body">
-
                                         <p class="card-text">Be the first in Malaysia to
                                             learn,
                                             play & discover 5G.</p>
                                         <a href="#">LEARN MORE <i class="fas fa-chevron-right"></i></a>
                                     </div>
                                 </div>
-
                             </ul>
                         </li> -->
                     </div>
@@ -2684,25 +2488,24 @@ if ($lang == "en-US"){
     </ul>
     <!-- ----------for WEB------- -->
     <ul class="navbar-nav relative">
-        <?php
+<?php
         $lang = get_bloginfo("language");
         if ($lang == "en-US") {
             $menu_link_Wireless = '/wireless-fibre-5g/                    ';
         } elseif ($lang == "ms-MY") {
             $menu_link_Wireless = '/ms/wireless-fibre-5g/';
         }
-        ?>
+?>
         <li id="menu-item-31214" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31214 nav-item">
             <a href="<?php echo $menu_link_Wireless ?>" class="nav-link flex"><?php echo esc_html__('Wireless Fibre 5G', 'yes.my'); ?>
-                <!-- <span class="badges">
-                    HOT</span> -->
+                <!-- <span class="badges">HOT</span> -->
                 <div class="parent">
-                    <button class="btn-gradient-2"><span class="badges">
-                            HOT</span></button>
+                    <button class="btn-gradient-2"><span class="badges">HOT</span></button>
                 </div>
             </a>
         </li>
     </ul>
+
     <ul class="navbar-nav">
         <?php
         $lang = get_bloginfo("language");
@@ -2713,9 +2516,10 @@ if ($lang == "en-US"){
         }
         ?>
         <li id="menu-item-31215" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-31215 nav-item">
-            <a href="<?php echo $menu_link_5G_Gaming ?>" target="_blank" class="nav-link flex"><?php echo esc_html__('Yes 5G Gaming', 'yes.my'); ?> </a>
+            <a href="<?php echo $menu_link_5G_Gaming ?>" target="_blank" class="nav-link flex"><?php echo esc_html__('Yes 5G Gaming', 'yes.my'); ?>
+            </a>
         </li>
-     </ul>
+    </ul>
 
     <ul class="navbar-nav">
         <li class="nav-item dropdown mega-dropdown">
@@ -2727,35 +2531,18 @@ if ($lang == "en-US"){
                         <div class="row">
                             <div class="col-6 col-md-6">
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Coverage.svg" alt="...">
+                                    <img src="/wp-content/uploads/2023/03/Coverage.svg" alt="...">
                                     <div class="">
-                                 <?php
-                                    $lang = get_bloginfo("language");
-                                    if ($lang == "en-US") {
-                                        $site_url_menu = get_site_url();
-                                    } elseif ($lang == "ms-MY") {
-                                        $site_url_menu = get_site_url().'/ms';
-                                    }
-                                    ?>
-                                        <h6> <a href="<?php echo $site_url_menu. '/coverage/' ?>"><?php echo esc_html__('Coverage Checker  ', 'yes.my'); ?></a></h6>
+                                        <h6> <a href="<?php echo get_site_url() . '/coverage/' ?>"><?php echo esc_html__('Coverage Checker  ', 'yes.my'); ?></a></h6>
                                         <p>Check Yes network coverage in Malaysia.</p>
                                     </div>
                                 </li>
-
                             </div>
                             <div class="col-6 col-md-6">
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Speed.svg" alt="...">
+                                    <img src="/wp-content/uploads/2023/03/Speed.svg" alt="...">
                                     <div class="">
-                                    <?php
-                                    $lang = get_bloginfo("language");
-                                    if ($lang == "en-US") {
-                                        $site_url_menu = get_site_url();
-                                    } elseif ($lang == "ms-MY") {
-                                        $site_url_menu = get_site_url().'/ms';
-                                    }
-                                    ?>
-                                        <h6><a href="<?php echo $site_url_menu . '/speed-test/' ?>"><?php echo esc_html__('Speed Test', 'yes.my'); ?></a></h6>
+                                        <h6><a href="<?php echo get_site_url() . '/speed-test/' ?>"><?php echo esc_html__('Speed Test', 'yes.my'); ?></a></h6>
                                         <p>Measure your internet connection speed.</p>
                                     </div>
                                 </li>
@@ -2763,57 +2550,29 @@ if ($lang == "en-US"){
                         </div>
                         <div class="row">
                             <div class="col-6 col-md-6">
-
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Supported-Devices.svg" alt="...">
+                                    <img src="/wp-content/uploads/2023/03/Supported-Devices.svg" alt="...">
                                     <div class="">
-                                    <?php
-                                    $lang = get_bloginfo("language");
-                                    if ($lang == "en-US") {
-                                        $site_url_menu = get_site_url();
-                                    } elseif ($lang == "ms-MY") {
-                                        $site_url_menu = get_site_url().'/ms';
-                                    }
-                                    ?>
-                                        <h6><a href="<?php echo $site_url_menu. '/supported-devices/' ?>"><?php echo esc_html__('Supported Devices', 'yes.my'); ?></a></h6>
+                                        <h6><a href="<?php echo get_site_url() . '/supported-devices/' ?>"><?php echo esc_html__('Supported Devices', 'yes.my'); ?></a></h6>
                                         <p>Browse devices compatible with 4G LTE and 5G
                                             technology.</p>
                                     </div>
                                 </li>
-
                             </div>
                             <div class="col-6 col-md-6">
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Track-Order.svg" alt="...">
+                                    <img src="/wp-content/uploads/2023/03/Track-Order.svg" alt="...">
                                     <div class="">
-                                    <?php
-                                    $lang = get_bloginfo("language");
-                                    if ($lang == "en-US") {
-                                        $site_url_menu = get_site_url();
-                                    } elseif ($lang == "ms-MY") {
-                                        $site_url_menu = get_site_url().'/ms';
-                                    }
-                                    ?>
-                                        <h6><a href="<?php echo $site_url_menu . '/trackorder/' ?>"><?php echo esc_html__('Track Order', 'yes.my'); ?></a></h6>
+                                        <h6><a href="<?php echo get_site_url() . '/trackorder/' ?>"><?php echo esc_html__('Track Order', 'yes.my'); ?></a></h6>
                                         <p>Check the status of a Yes order.</p>
                                     </div>
                                 </li>
                             </div>
-                            <div class="col-6 col-md-6" style="display:none;">
+                            <div class="col-6 col-md-6">
                                 <li class="mega-get-help">
-                                    <img src="https://www.yes.my/wp-content/uploads/2023/06/Typefi_alert-triangle-Size24-ColorDark.svg " alt="..." style="
-    width: 25px;">
+                                    <img src="/wp-content/uploads/2023/03/Track-Order.svg" alt="...">
                                     <div class="">
-                                    <?php
-                                    $lang = get_bloginfo("language");
-                                    if ($lang == "en-US") {
-                                        $site_url_menu = get_site_url();
-                                    } elseif ($lang == "ms-MY") {
-                                        $site_url_menu = get_site_url().'/ms';
-                                    }
-                                    ?>
-                                        <h6 ><a href="<?php echo $site_url_menu . '/a3-charger-replacement/' ?>"><?php echo esc_html__('Product Notice', 'yes.my'); ?></a></h6>
-
+                                        <h6><a href="<?php echo get_site_url() . '/a3-charger-replacement/' ?>"><?php echo esc_html__('Product Notice', 'yes.my'); ?></a></h6>
                                     </div>
                                 </li>
                             </div>
@@ -2822,110 +2581,88 @@ if ($lang == "en-US"){
                         <li class="mt-3 dropdown-header">LOCATE us</li>
                         <div class="row">
                             <div class="col-6 col-md-6">
-
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Store-Locator.svg" alt="...">
+                                    <img src="/wp-content/uploads/2023/03/Store-Locator.svg" alt="...">
                                     <div class="">
-                                    <?php
-                                    $lang = get_bloginfo("language");
-                                    if ($lang == "en-US") {
-                                        $site_url_menu = get_site_url();
-                                    } elseif ($lang == "ms-MY") {
-                                        $site_url_menu = get_site_url().'/ms';
-                                    }
-                                    ?>
-                                        <h6><a href="<?php echo $site_url_menu . '/store-locator/' ?>"><?php echo esc_html__('Store Locator', 'yes.my'); ?></a></h6>
+                                        <h6><a href="<?php echo get_site_url() . '/store-locator/' ?>"><?php echo esc_html__('Store Locator', 'yes.my'); ?></a></h6>
                                         <p>Find the nearest Yes store.</p>
                                     </div>
                                 </li>
-
                             </div>
                             <div class="col-6 col-md-6">
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Roadshow-Locations.svg" alt="...">
+                                    <img src="/wp-content/uploads/2023/03/Roadshow-Locations.svg" alt="...">
                                     <div class="">
-                                    <?php
-                                    $lang = get_bloginfo("language");
-                                    if ($lang == "en-US") {
-                                        $site_url_menu = get_site_url();
-                                    } elseif ($lang == "ms-MY") {
-                                        $site_url_menu = get_site_url().'/ms';
-                                    }
-                                    ?>
-                                        <h6><a href="<?php echo $site_url_menu . '/roadshow/' ?>"><?php echo esc_html__('Roadshow Locations', 'yes.my'); ?></a></h6>
+                                        <h6><a href="<?php echo get_site_url() . '/roadshow/' ?>"><?php echo esc_html__('Roadshow Locations', 'yes.my'); ?></a></h6>
                                         <p>Location of the Yes Roadshow.</p>
                                     </div>
                                 </li>
                             </div>
                         </div>
                         <div class="box">
-                            <li><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> Email us</a></li>
-                            <li><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"> Chat to Support</a></li>
+                            <li><img src="/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> Email us</a></li>
+                            <li><img src="/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"> Chat to Support</a></li>
                         </div>
                     </div>
                     <div class="col-auto get_help-mobile dasktop-none">
                         <ul>
                             <li class="dropdown-header-mobile">tools & services</li>
-                            <li><a href="<?php echo $site_url_menu . '/coverage/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Coverage.svg" alt="..."> Coverage Checker</a></li>
-                            <li><a href="<?php echo $site_url_menu . '/speed-test/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Speed.svg" alt="..."> Speed Test</a></li>
-                            <li><a href="<?php echo $site_url_menu . '/supported-devices/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Supported-Devices.svg" alt="..."> Supported Devices</a></li>
-                            <li><a href="<?php echo $site_url_menu . '/trackorder/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Track Order</a></li>
-                            <li style="display:none;"><a href="<?php echo $site_url_menu . '/a3-charger-replacement/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Product Notice</a></li>
+                            <li><a href="<?php echo get_site_url() . '/coverage/' ?>"><img src="/wp-content/uploads/2023/03/Coverage.svg" alt="..."> Coverage Checker</a></li>
+                            <li><a href="<?php echo get_site_url() . '/speed-test/' ?>"><img src="/wp-content/uploads/2023/03/Speed.svg" alt="..."> Speed Test</a></li>
+                            <li><a href="<?php echo get_site_url() . '/supported-devices/' ?>"><img src="/wp-content/uploads/2023/03/Supported-Devices.svg" alt="..."> Supported Devices</a></li>
+                            <li><a href="<?php echo get_site_url() . '/trackorder/' ?>"><img src="/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Track Order</a></li>
+                            <li><a href="<?php echo get_site_url() . '/a3-charger-replacement/' ?>"><img src="/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Product Notice</a></li>
                         </ul>
                         <ul>
                             <li class="mt-3 dropdown-header-mobile">LOCATE us</li>
-                            <li><a href="<?php echo $site_url_menu . '/store-locator/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Store-Locator.svg" alt="..."> Store Locator</a></li>
-                            <li><a href="<?php echo $site_url_menu. '/roadshow/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Roadshow-Locations.svg" alt="..."> Roadshow Locations</a></li>
+                            <li><a href="<?php echo get_site_url() . '/store-locator/' ?>"><img src="/wp-content/uploads/2023/03/Store-Locator.svg" alt="..."> Store Locator</a></li>
+                            <li><a href="<?php echo get_site_url() . '/roadshow/' ?>"><img src="/wp-content/uploads/2023/03/Roadshow-Locations.svg" alt="..."> Roadshow Locations</a></li>
                         </ul>
                         <div class="box">
                             <ul>
-                                <li><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> Email us</a></li>
-                                <li><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"> Chat to Support</a></li>
+                                <li><img src="/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> Email us</a></li>
+                                <li><img src="/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"> Chat to Support</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-12 col-md-12 gethelp_right_sec">
                         <li class="dropdown-header">most asked questions</li>
                         <li class="mega-get-help img-box">
-                            <img src="/wp-content/uploads/2023/05/FT5G_banner-350x350@0.5x.png" alt="..." width="76" height="76" style="border-radius: 10px;">
+                            <img src="/wp-content/uploads/2023/03/Rectangle-1393.png" alt="...">
                             <div>
                                 <h6>Keep Your Number</h6>
                                 <p>Switch to Yes while keeping your number.</p>
                             </div>
                         </li>
                         <li class="mega-get-help">
-                            <h6><a href="<?php echo $site_url_menu . '/faq/howtoactivatesim/' ?>">Activate SIM card</a></h6>
+                            <h6><a href="<?php echo get_site_url() . '/faq/howtoactivatesim/' ?>">Activate SIM card</a></h6>
                         </li>
                         <li class="mega-get-help">
-                            <h6><a href="<?php echo $site_url_menu . '/support/payment-methods/' ?>">Payment method</a></h6>
+                            <h6><a href="<?php echo get_site_url() . '/support/payment-methods/' ?>">Payment method</a></h6>
                         </li>
                         <li class="mega-get-help">
-                            <h6><a href="<?php echo $site_url_menu . '/shop/existing-customers/how-to-get-databack/' ?>">Get databack</a></h6>
+                            <h6><a href="<?php echo get_site_url() . '/shop/existing-customers/how-to-get-databack/' ?>">Get databack</a></h6>
                         </li>
-                        <li class="mega-get-help"><a href="/faq">GO TO HELP CENTRE <i class="fas fa-chevron-right"></i></a></li>
+                        <li class="mega-get-help"><a href="#">GO TO HELP CENTRE <i class="fas fa-chevron-right"></i></a></li>
                     </div>
                 </div>
-
-
             </ul>
         </li>
     </ul>
-
     <div class="bottom-tabs mt-5">
         <div class="container-fluid g-0">
             <div class="row m-0">
                 <ul class="navbar-nav">
                     <li><a class="active" href="javascript:void(0)">Personal</a></li>
-                    <li><a href="<?php echo $site_url_menu . '/business/' ?>">Business</a></li>
-                    <li><a href="<?php echo $site_url_menu . '/learnfromhome/' ?>">Learning</a></li>
+                    <li><a href="<?php echo get_site_url() . '/business/' ?>">Business</a></li>
+                    <li><a href="<?php echo get_site_url() . '/learnfromhome/' ?>">Learning</a></li>
                 </ul>
                 <div class="languages-drop">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--bi" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16" data-icon="bi:globe">
                         <path fill="currentColor" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539a6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068c.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539a6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855c.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"></path>
                     </svg>
-                    <a class="active" href="<?php echo $site_url_menu . '/en/' ?>">EN</a><span>|</span>
-                    <a href="<?php echo $site_url_menu . '/ms/' ?>">BM</a>
-
+                    <a class="active" href="<?php echo get_site_url() . '/' ?>">EN</a><span>|</span>
+                    <a href="<?php echo get_site_url() . '/ms/' ?>">BM</a>
                 </div>
             </div>
         </div>
@@ -2972,7 +2709,6 @@ if ($lang == "en-US"){
         })
 
         jQuery('.yes_toggle').on('click', function(e) {
-
             if (jQuery('.yes_toggle').attr('aria-expanded') === "true") {
                 jQuery('body').css('overflow', 'hidden');
                 jQuery("<div class='yes_mobile_menu_overlay'></div>").appendTo("#overlay-section-div");
@@ -3006,24 +2742,6 @@ if ($lang == "en-US"){
                 jQuery('.dropdown-menu.mega-dropdown-menu').removeClass('show')
             }
         });
-
-        jQuery(document).on('click', '.custom_menu_nuv', function () {
-            jQuery('.nav-link.dropdown-toggle').removeClass('show');
-            jQuery('body').css('overflow', 'auto');
-            jQuery('.yes_toggle').attr('aria-expanded', 'true');
-        })
     </script>
-
 <?php
 }
-
-
-
-function add_file_types_to_uploads($file_types)
-{
-    $new_filetypes = array();
-    $new_filetypes['svg'] = 'image/svg+xml';
-    $file_types = array_merge($file_types, $new_filetypes);
-    return $file_types;
-}
-add_filter('upload_mimes', 'add_file_types_to_uploads');
