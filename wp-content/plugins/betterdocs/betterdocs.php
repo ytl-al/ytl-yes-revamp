@@ -4,7 +4,7 @@
  * Plugin Name:       BetterDocs
  * Plugin URI:        https://betterdocs.co/
  * Description:       Create stunning Knowledge base for your WordPress website and reduce support pressure with the help of BetterDocs. Get access to amazing templates and create fully customizable KB within minutes.
- * Version:           2.3.7
+ * Version:           2.5.3
  * Author:            WPDeveloper
  * Author URI:        https://wpdeveloper.com
  * License:           GPL-3.0+
@@ -14,101 +14,38 @@
  */
 
 // If this file is called directly, abort.
-if (!defined('WPINC')) {
-	die;
-}
+defined( 'ABSPATH' ) || exit;
 
-define('BETTERDOCS_VERSION', '2.3.7');
-define('BETTERDOCS_DB_VERSION', '1.0');
-define('BETTERDOCS_DIR_PATH', plugin_dir_path(__FILE__));
-define('BETTERDOCS_URL', plugin_dir_url(__FILE__));
-define('BETTERDOCS_PUBLIC_URL', BETTERDOCS_URL . 'public/');
-define('BETTERDOCS_ADMIN_URL', BETTERDOCS_URL . 'admin/');
-define('BETTERDOCS_FILE', __FILE__);
-define('BETTERDOCS_BASENAME', plugin_basename(__FILE__));
+define( 'BETTERDOCS_PLUGIN_FILE', __FILE__ );
 
-define('BETTERDOCS_ROOT_DIR_PATH', plugin_dir_path(__FILE__));
-define('BETTERDOCS_ADMIN_DIR_PATH', BETTERDOCS_ROOT_DIR_PATH . 'admin/');
-define('BETTERDOCS_PUBLIC_PATH', BETTERDOCS_ROOT_DIR_PATH . 'public/');
-define(
-	'BETTERDOCS_KSES_ALLOWED_HTML',
-	array(
-		'span' => array(
-			'class' => array(),
-			'style' => array()
-		),
-		'p' => array(
-			'class' => array(),
-			'style' => array()
-		),
-		'strong' => array(),
-		'a' => array(
-			'href' => array(),
-			'title' => array()
-		),
-		'h1' => array(),
-		'h2' => array(),
-		'h3' => array(),
-		'h4' => array(),
-		'h5' => array(),
-		'h6' => array(),
-		'div' => array(
-			'class' => array(),
-			'style' => array()
-		)
-	)
-);
+require_once __DIR__ . '/includes/v2x-compatibility.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 /**
- * WPML compatibility with Polylang
- */
-include_once(ABSPATH . 'wp-admin/includes/plugin.php');
-if (is_plugin_active('polylang/polylang.php')) {
-	define('PLL_WPML_COMPAT', false);
-}
-
-require_once plugin_dir_path(__FILE__) . 'includes/class-betterdocs-activator.php';
-/**
- * The code that runs during plugin activation.
- * This action is documented in includes/class-betterdocs-activator.php
- */
-function activate_betterdocs()
-{
-	BetterDocs_Activator::activate();
-}
-add_action('activate_' . plugin_basename(__FILE__), 'activate_betterdocs');
-
-/**
- * The code that runs during plugin deactivation.
- * This action is documented in includes/class-betterdocs-deactivator.php
- */
-function deactivate_betterdocs()
-{
-	require_once plugin_dir_path(__FILE__) . 'includes/class-betterdocs-deactivator.php';
-	BetterDocs_Deactivator::deactivate();
-}
-
-register_deactivation_hook(__FILE__, 'deactivate_betterdocs');
-
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-require plugin_dir_path(__FILE__) . 'includes/class-betterdocs.php';
-
-/**
- * Begins execution of the plugin.
+ * Intiate the BetterDocs Plugin
  *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    1.0.0
+ * @since 2.5.0
+ * @return \WPDeveloper\BetterDocs\Plugin
  */
-function run_betterdocs()
-{
-	$plugin = new BetterDocs();
-	$plugin->run();
-	do_action('betterdocs_init');
+function betterdocs() {
+    /**
+     * Remove PRO Functionalities if pro is not updated.
+     */
+    if( ! function_exists('betterdocs_pro') ){
+        remove_action( 'betterdocs_init', 'run_betterdocs_pro' );
+    }
+
+    return \WPDeveloper\BetterDocs\Plugin::get_instance();
 }
-run_betterdocs();
+
+/**
+ * Initialize BetterDocs (Free)
+ * Here, begins the execution of the plugin.
+ *
+ * Returns the main instance of BetterDocs.
+ *
+ * @since  3.0
+ * @return \WPDeveloper\BetterDocs\Plugin
+ */
+
+betterdocs();
