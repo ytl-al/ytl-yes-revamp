@@ -61,13 +61,18 @@
                             $back_page  = 'Delivery';
                             $back_page_id = 'roving-delivery';
                             break;
+                            case 'roving-customer-review': 
+                                $back_link  = '/ywos/roving-customer-review';
+                                $back_page  = 'Roving Delivery';
+                                $back_page_id = 'roving-customer-review';
+                                break;
                         default:
                             $back_link = '/ywos/cart';
                             $back_page = 'Cart';
                             $back_page_id = 'cart';
                     }
                 ?>
-                <a href="<?php echo $back_link; ?>" class="back-btn"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/back-icon.png" /> <span id="span-strBackTo"></span> <span id="span-pageTitle" class="pageTitle-Back"></span></a>
+                <a href="<?php echo $back_link; ?>" class="back-btn"><img src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/back-icon.png" /> <span id="span-strBackTo"></span> <span id="span-pageTitle"  class="rovingPageTitle"></span></a>
             </div>
             <div class="col-lg-4 col-6 text-lg-center text-end1">
                 <h1 id="heading-"></h1>
