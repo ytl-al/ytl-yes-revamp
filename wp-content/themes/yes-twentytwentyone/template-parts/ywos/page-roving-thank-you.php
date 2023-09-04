@@ -191,8 +191,8 @@
     class="container tx_box p-5 col-orderResponse h-100 d-flex align-items-center justify-content-center">
     <div  class="text-center">
         <div class="check"></div>
-        <h1 class="mb-2">Thank You For Order</h1>
-        <p class="tx">we have send the mail for payment. Please inform your customer to check their email and guide them on the payment process.<br></p>
+        <h1 class="mb-2">Thank you for the order</h1>
+        <p class="tx">We have sent an email to the customer with payment link. Please inform the customer to check the email and guide them to proceed with the payment process.<br></p>
     </div>
 </div>
 

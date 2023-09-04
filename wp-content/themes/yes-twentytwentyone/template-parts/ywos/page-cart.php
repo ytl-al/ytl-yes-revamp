@@ -502,7 +502,7 @@
                         <div class="packagebox mb-3">
                             <div class="row">
                                 <div class="col-lg-3 col-12 visualbg d-flex align-items-center justify-content-center"
-                                    v-if="(orderSummary.plan.planType == 'postpaid' && orderSummary.plan.displayName !='Yes 5G Wireless Broadband Flexi' && orderSummary.plan.displayName !='Yes 5G Wireless Broadband Gateway' && orderSummary.plan.displayName !='Infinite Basic_18M' &&  orderSummary.plan.displayName !='Infinite Basic RAHMAH 1')">
+                                    v-if="(orderSummary.plan.planType == 'postpaid' && orderSummary.plan.displayName !='Yes 5G Wireless BroadbandFlexi' && orderSummary.plan.displayName !='Yes 5G Wireless Broadband Gateway' && orderSummary.plan.displayName !='Infinite Basic_18M' &&  orderSummary.plan.displayName !='Infinite Basic RAHMAH 1')">
                                     <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid"
                                         alt="" />
                                 </div>
