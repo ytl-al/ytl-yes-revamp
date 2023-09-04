@@ -62,32 +62,62 @@
                     return;
                 }
 
-                //console.log(place.geometry.location.lat(), place.geometry.location.lng());
-
+                //console.log(place.geometry.location.lat(), place.geometry.location.lng());                
                 $.ajax({
                     url: "http://localhost/wp-json/elevate/v1/outage-details",
                     data: {
                         'Latitude': place.geometry.location.lat(),
-                        'Langitude': place.geometry.location.lng(),                        
+                        'Langitude': place.geometry.location.lng(),
                     },
-                    type: 'GET',                    
-                    dataType: 'json',                    
-                    contentType: 'application/json',                    
+                    type: 'GET',
+                    dataType: 'json',
+                    contentType: 'application/json',
                     success: function (result) {
+                        $("#response_msg").empty();
                         const obj = JSON.parse(result.body);
-                        // alert('HI');
-                       //else if Severity send in postman
-                        console.log(obj.Data[0].Outages[0].Severity, obj);
-                        if (obj.Data[0].Outages[0].Severity == 'Unplanned' || obj.Data[0].Outages[0].Severity == 'Full' || obj.Data[0].Outages[0].Severity == 'S1 AC Fail' || obj.Data[0].Outages[0].Severity == 'S2 High Temperature' || obj.Data[0].Outages[0].Severity == 'S2MW') {
-                            $("#response_msg").append("Yes services are down in the area.")
-                        } else if (obj.Data[0].Outages[0].Severity == 'S3') {
-                            $("#response_msg").append("Yes services are working partially in the area. If you are facing a network issue, please follow our self-troubleshooting steps.")
+                        console.log(obj.Data[0]);
+                        if (obj.Data[0] == undefined){
+                            $("#response_msg").append("<p class='msg_red'>Services not available</p>") 
+                            return false;
                         }
+                        var final_val = isEqual(result.body, obj.Data[0].Outages[0].Severity);
+                        console.log(final_val);
+                        // alert('HI');
+                        //else if Severity send in postman
+                        //console.log(obj.Data[0].Outages[0].Severity, obj);
+                    if (final_val == true){
+                        if (obj.Data[0].Outages[0].Severity == 'Unplanned' || obj.Data[0].Outages[0].Severity == 'Full' || obj.Data[0].Outages[0].Severity == 'S1 AC Fail' || obj.Data[0].Outages[0].Severity == 'S2 High Temperature' || obj.Data[0].Outages[0].Severity == 'S2MW') {
+                            $("#response_msg").append("<p class='msg_red'>Yes services are down in the area.</p>")
+                        } else if (obj.Data[0].Outages[0].Severity == 'S3') {
+                            $("#response_msg").append("<p class='msg_green'>Yes services are working partially in the area. If you are facing a network issue, please follow our self-troubleshooting steps.</p>")
+                        }
+
+                    }else{
+                        $("#response_msg").append("<p class='msg_orange'>Network is having intermittent issues</p>")
+                    }
+
                     },
                     error: function (error) {
 
                     }
                 });
+
+                function isEqual(obj, first_severity) {                    
+                    var data = JSON.parse(obj).Data;
+                    //console.log(data);
+                    for (var i = 0; i < data.length; i++) {
+                        var outages = data[i].Outages;
+                        for (var j = 0; j < outages.length; j++) {
+                            var severity = outages[j].Severity;
+                            //console.log(severity);
+                            if (severity !== first_severity) {
+                                //console.log("severity");
+                                return false;
+                            } 
+                        }
+                    }
+                    return true;
+                }
 
                 // alert(place.geometry.location.lat());
 

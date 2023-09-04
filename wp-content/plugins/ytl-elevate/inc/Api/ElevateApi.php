@@ -2159,9 +2159,9 @@ class ElevateApi
         'SessionID' => $session_id,
         'Latitude' => $_GET['Latitude'],
         'Langitude' => $_GET['Langitude'], 
-        //'Severity' => "Unplanned",    
+       // 'Severity' => "S3",    
         // 'Latitude' => '3.11523888888889',
-        // 'Langitude' => '101.67936944444466', 
+        // 'Langitude' => '101.67936944444466',
     );
      $params = array(
         'method' => 'GET',
