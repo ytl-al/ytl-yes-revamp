@@ -1,11 +1,12 @@
 === BetterDocs - Best Documentation & Knowledge Base Plugin ===
-Contributors: wpdevteam, re_enter_rupok, asif2bd, emsohel, priyomukul, manzurahammed, cu121, fencermonir
+Contributors: wpdevteam, re_enter_rupok, asif2bd, emsohel, priyomukul, cu121, fencermonir, sapanmozammel
 Donate link: https://wpdeveloper.com
 Tags:  knowledge base, docs, documentation, documents, wiki, faq page, doc, knowledge, knowledgebase, doc page, best documentation plugin, support ticket, customer support, instant answer bot, bot, help articles, better docs, document, faq, instant answers, elementor, chat, live search, external knowledgebase, multiple knowledge bases, faqs, help, chatbot, TOC, table of content, elementor doc, template, doc theme
+Tags:  knowledge base, docs, documentation, documents, wiki, faq page, doc, knowledge, knowledgebase, doc page, best documentation plugin, support ticket, customer support, instant answer bot, bot, help articles, better docs, document, faq, instant answers, elementor, chat, live search, external knowledgebase, multiple knowledge bases, faqs, help, chatbot, TOC, table of content, elementor doc, template, doc theme
 Requires at least: 4.0
-Tested up to: 6.1
-Requires PHP: 5.6
-Stable tag: 2.3.7
+Tested up to: 6.3
+Requires PHP: 7.0
+Stable tag: 2.5.3
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,7 +16,7 @@ A better Documentation and Knowledgebase plugin for WordPress. Create better Doc
 
 Do you want to reduce your support pressure immediately? How about you creating a stunning and resourceful knowledge base for your customers? 🤔
 
-👨‍💻 82% of customers prefer to support through an online knowledge base and actually get annoyed to create support tickets as it’sits a lengthy process. So creating an informative Documentation page can help to enhance your customer experience.
+👨‍💻 82% of customers prefer to support through an online knowledge base and actually get annoyed to create support tickets as it's a lengthy process. So creating an informative Documentation page can help to enhance your customer experience.
 
 But how do you create a stunning **docs** page easily on WordPress site without any coding? Well, we’ve got you covered. 😎
 
@@ -54,6 +55,10 @@ BetterDocs offer multiple ready templates to design your WordPress documentation
 Translate your BetterDocs Single Docs by using WPML quite easily.
 
 https://www.youtube.com/watch?v=db4FB2NUD-g
+
+## 💬 CREATE FAQ INSTANTLY ##
+
+Design FAQ sections for your Knowledge base easily with the help of BetterDocs FAQ Builder.
 
 ## 💬 CREATE FAQ INSTANTLY ##
 
@@ -122,7 +127,7 @@ Want to unlock the advanced features? [Upgrade to our Pro version](http://better
 
 ## 🚀 Backed By A Trusted Team ##
 
-This Documentation plugin is brought to you by the team behind [WPDeveloper](https://wpdeveloper.com/), a dedicated marketplace for WordPress, trusted by 3 Million+ happy users.
+This Documentation plugin is brought to you by the team behind [WPDeveloper](https://wpdeveloper.com/), a dedicated marketplace for WordPress, trusted by 5 Million+ happy users.
 
 ## 👨‍💻 DOCUMENTATION AND SUPPORT ##
 
@@ -178,6 +183,30 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 2.5.3 - 24/08/2023 =
+- Fixed: Throwing 404 page not found error when built-in documentation is active
+- Fixed: Shortcode not working properly
+- Fixed: Templates built with Elementor Theme Builder breaking
+- Fixed: Some styles like shadow color, full width grid, background color (live search) mismatching with the previous version
+- Fixed: Elementor Infinite Loading if Docs Root Slug is set as ‘/’
+- Fixed: Blog page categories loading BetterDocs archive page
+- Fixed: Database error with the new update in some cases
+- Few minor bug fixes & improvements
+
+= 2.5.2 - 20/08/2023 =
+- Fixed: Notice/Warning on PHP 8.1.*
+- Fixed: Permalink related issues
+- Few minor bug fixes & improvements
+
+= 2.5.1 - 15/08/2023 =
+- Fixed: Throwing Critical error if BetterDocs Pro v2.5 isn’t updated in some cases
+- Fixed: Conflict with third-party themes & plugins
+- Few minor bug fixes & improvements
+
+= 2.5.0 - 14/08/2023 =
+- Revamped: Code Structure for optimized performance
+- Few minor bug fixes & improvements
 
 = 2.3.7 - 19/06/2023 =
 - Fixed: FAQ Builder Loading Issue
@@ -240,9 +269,11 @@ Yes, it will work with any standard WordPress theme.
 - Few minor bug fixes & improvements
 
 = 2.1.5 - 22/08/2022 =
+= 2.1.5 - 22/08/2022 =
 - Fixed: HTML not rendering inside Category Description
 - Few minor bug fixes & improvements
 
+= 2.1.4 - 11/08/2022 =
 = 2.1.4 - 11/08/2022 =
 - Fixed: Elementor Deprecated functions error
 - Fixed: Category Box Masonry width not being equal in right side
@@ -250,11 +281,14 @@ Yes, it will work with any standard WordPress theme.
 
 
 = 2.1.3 - 08/08/2022 =
+= 2.1.3 - 08/08/2022 =
 - Fixed: Sanitized some missing strings
 
 = 2.1.2 - 26/07/2022 =
+= 2.1.2 - 26/07/2022 =
 - Fixed: Triggering fatal error during activation
 
+= 2.1.1 - 21/07/2022 =
 = 2.1.1 - 21/07/2022 =
 - Fixed: Font Awesome icons loading globally
 - Improved: Added option to show TOC Title in the anchor link
@@ -262,29 +296,37 @@ Yes, it will work with any standard WordPress theme.
 - Few minor bug fixes & improvements
 
 = 2.1.0 - 03/07/2022 =
+= 2.1.0 - 03/07/2022 =
 - Few minor bug fixes & improvements
 
 = 2.0.14 - 25/05/2022 =
+= 2.0.14 - 25/05/2022 =
 - Added: WordPress 6.0 Compatibility
+- Added: Background Image set option for Single Docs
 - Added: Background Image set option for Single Docs
 - Few minor bug fixes & improvements
 
+= 2.0.13 - 19/04/2022 =
 = 2.0.13 - 19/04/2022 =
 - Added: BetterDocs default order option for the Gutenberg blocks
 - Few minor bug fixes & improvements
 
 = 2.0.12 - 07/04/2022 =
+= 2.0.12 - 07/04/2022 =
 - Fixed: Fatal error if a default WordPress user role doesn't exist
 
+= 2.0.11 - 07/04/2022 =
 = 2.0.11 - 07/04/2022 =
 - Fixed: Default WordPress Role Management capabilities not working
 - Fixed: Fatal Error while processing Role Management migration
 - Few minor bug fixes & improvements
 
 = 2.0.10 - 29/03/2022 =
+= 2.0.10 - 29/03/2022 =
 - Fixed: Role management not migrating properly
 - Few minor bug fixes & improvements
 
+= 2.0.9 - 27/03/2022 =
 = 2.0.9 - 27/03/2022 =
 - Fixed: Ordering not working properly for Sub-categories
 - Fixed: Adding %knowledge_base% in the category page URL when WPML Language Switcher option is hit
@@ -293,16 +335,19 @@ Yes, it will work with any standard WordPress theme.
 - Few minor bug fixes & improvements
 
 = 2.0.8 - 06/03/2022 =
+= 2.0.8 - 06/03/2022 =
 - Fixed: Custom Post Type throwing 404 Page while Multiple KB is activated
 - Fixed: Fatal error related to Elementor Template Loader
 - Few minor bug fixes & improvements
 
+= 2.0.7 - 15/02/2022 =
 = 2.0.7 - 15/02/2022 =
 - Fixed: Category Creation not working from Gutenberg editor in WordPress 5.9
 - Fixed: Ready-made templates not loading inside Elementor Theme Builder
 - Fixed: Conflict with Phlox PRO theme
 - Few minor bug fixes & improvements
 
+= 2.0.6 - 02/02/2022 =
 = 2.0.6 - 02/02/2022 =
 - Fixed: Category Order not working for docs page
 - Fixed: Undefined index orderby on betterdocs_category_box shortcode
@@ -312,10 +357,12 @@ Yes, it will work with any standard WordPress theme.
 - Few minor bug fixes & improvements
 
 = 2.0.5 - 25/01/2022 =
+= 2.0.5 - 25/01/2022 =
 - Fixed: Child pages throwing 404 error when BetterDocs is enabled
 - Fixed: "Share this Article" text not being translatable in different layouts
 - Few minor bug fixes & improvements
 
+= 2.0.4 - 12/01/2022 =
 = 2.0.4 - 12/01/2022 =
 - Fixed: Built-in Docs order not working
 - Fixed: Option to change "Search" button placeholder
@@ -327,6 +374,7 @@ Yes, it will work with any standard WordPress theme.
 - Few minor bug fixes & improvements
 
 
+= 2.0.3 - 23/12/2021 =
 = 2.0.3 - 23/12/2021 =
 - Fixed: Few minor bug fix & improvements
 
@@ -715,3 +763,7 @@ Yes, it will work with any standard WordPress theme.
 
 == Upgrade Notice ==
 
+= 2.5.3 =
+Attention! Please Backup your site before updating.
+
+The latest version of **BetterDocs v2.5** includes massive changes across different areas of the plugin with revamped code structure for optimized performance. We would highly recommend you to [backup your entire site](https://wpdeveloper.com/backup-wordpress-site/) before updating the plugin & test it on your staging website. [Contact our Support](https://wpdeveloper.com/support/) if you encounter any kind of errors or if you need any kind of assistance.
