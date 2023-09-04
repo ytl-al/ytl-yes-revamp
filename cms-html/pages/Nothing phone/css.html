@@ -1,0 +1,1131 @@
+<style type="text/css">
+    .layer-breadcrumb {
+        display: none;
+    }
+
+    .section-banner {
+        position: relative;
+        height: auto;
+    }
+
+    /* .section-banner .video-bg {
+        background-size: cover;
+        width: 100%;
+        height: auto;
+    } */
+
+    .video-bg {
+        position: relative;
+        width: 100%;
+        /* height: 100vh; */
+        aspect-ratio: 16/9;
+        background: #000;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    /* .video-bg::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, .3);
+        background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
+    } */
+
+    .video-bg iframe {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+    }
+
+    .section-banner .bgBanner {
+        background-image: url('/wp-content/uploads/2023/07/nothing-phone-header-bg.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: #1b1d4a;
+        height: 100vh;
+        position: relative;
+    }
+
+    .section-banner .scroll-down-arrow {
+        display: inline-block;
+        position: absolute;
+        bottom: 30px;
+        z-index: 99;
+        left: 50%;
+        transform: translateX(-50%);
+        user-select: none;
+    }
+
+    .section-banner .scroll-down-arrow img {
+        -webkit-animation: mover 1s infinite alternate;
+        animation: mover 1s infinite alternate;
+    }
+
+    @-webkit-keyframes mover {
+        0% {
+            transform: translateY(2px);
+        }
+
+        100% {
+            transform: translateY(-2px);
+        }
+    }
+
+    #mob-dis-section {
+        background-image: url('/wp-content/uploads/2023/07/mob-dis-section-bg.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: #1b1d4a;
+        height: 746px;
+        position: relative;
+        padding: 50px 0 0;
+        display: inline-block;
+    }
+
+    #mob-dis-section .content-section {
+        margin: 0;
+        padding: 0;
+    }
+
+    #mob-dis-section .content-section h2 {
+        font-family: 'Montserrat';
+        font-size: 33px;
+        line-height: 40px;
+        font-weight: 600;
+        color: #fff;
+        margin: 15px 0 0px 0;
+        letter-spacing: -1.5px;
+    }
+
+    #mob-dis-section .content-section p {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 16px;
+        line-height: 30px;
+        font-weight: 400;
+        color: #fff;
+        padding-top: 15px;
+    }
+
+    .entry-content {
+        background: #f5f5f5;
+    }
+
+    .plan-section {
+        padding: 50px 0px 0;
+        position: relative;
+    }
+
+    .plan-section h2 {
+        font-family: 'Montserrat';
+        font-size: 32px;
+        line-height: 40px;
+        font-weight: 600;
+        color: #000000;
+        margin: 15px 0 0px 0;
+        letter-spacing: -1.5px;
+        text-align: center;
+    }
+
+    .plan-section .card {
+        border: none;
+        background-color: #F5F5F5;
+        padding: 0;
+        min-height: 265px;
+        box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
+        border-radius: 8px;
+    }
+
+    .plan-section .card img {
+        display: block;
+        width: 100%;
+        border-radius: 8px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .plan-section .card .card-body {
+        text-align: left;
+        padding: 25px 35px;
+        min-height: 435px;
+    }
+
+    .plan-section .plan-details-list {
+        border-top: 0px solid #E4E4E4;
+        padding: 0px 0 0;
+        margin: 5px 0 0;
+    }
+
+    .plan-section .plan-details-list h2 {
+        font-family: 'Montserrat';
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 700;
+        color: #FF0084;
+        border: 1px solid #FF0084;
+        border-radius: 50px;
+        padding: 5px 20px;
+        margin: 0 0 10px;
+        text-transform: uppercase;
+        display: inline-block;
+        letter-spacing: unset;
+    }
+
+    .plan-section .plan-details-list h3 {
+        font-family: 'Montserrat';
+        font-size: 24px;
+        line-height: 30px;
+        font-weight: 800;
+        color: #000;
+    }
+
+    .plan-section .plan-details-list ul {
+        padding: 0;
+        margin: 15px 0 0;
+        list-style: none;
+    }
+
+    .plan-section .plan-details-list ul li {
+        font-family: 'Open Sans';
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+        margin: 0 0 8px;
+        color: #000;
+        display: block;
+        gap: 10px;
+    }
+
+    .plan-section .plan-details-list ul li:before {
+        content: url(/wp-content/uploads/2023/07/plan-list-type.png);
+        margin-right: 8px;
+    }
+
+    .plan-section .plan-details-list ul li:last-child {
+        height: 40px;
+    }
+
+    /* .plan-section .card .card-body h2 {
+        font-family: 'Montserrat';
+        font-size: 36px;
+        line-height: 49px;
+        font-weight: 800;
+        color: #000;
+        margin: 15px 0 0px 0;
+    }
+
+    .plan-section .card .card-body h2 span {
+        font-size: 24px;
+        line-height: 40px;
+        font-weight: 700;
+        padding-left: 2px;
+    } */
+
+    .plan-section .card .card-body .price-section {
+        display: flex;
+        align-items: center;
+        height: 40px
+    }
+
+    .plan-section .card .card-body .price-section h2 {
+        font-family: 'Montserrat';
+        font-size: 36px;
+        line-height: 49px;
+        font-weight: 800;
+        color: #000;
+        margin: 0px 0 0px 0;
+    }
+
+    .plan-section .card .card-body .price-section h2 span {
+        font-size: 24px;
+        line-height: 40px;
+        font-weight: 700;
+        padding-left: 2px;
+    }
+
+    .plan-section .card .card-body .price-section h4 {
+        font-family: 'Montserrat';
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 700;
+        color: #000;
+        margin: 0px 0 0px 0;
+        position: relative;
+    }
+
+    .plan-section .card .card-body .price-section h4:before {
+        content: " ";
+        display: block;
+        width: 100%;
+        border-top: 2px solid #000000;
+        height: 12px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transform: rotate(345deg);
+    }
+
+    .plan-section .card .card-body .price-section p {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 10px;
+        line-height: 27px;
+        font-weight: 400;
+        margin-top: -10px;
+    }
+
+    .plan-section .card .card-body .price-section .price-right {
+        margin-left: 20px;
+    }
+
+    .plan-section .card .card-body .pink-btn {
+        background-color: #FF0084;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        padding: 0.7rem 2.3rem;
+        display: block;
+        color: #fff;
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    .plan-section .card .card-body .btn-grey {
+        background-color: #A8A8A8 !important;
+    }
+
+    .cta-section {
+        /*background-image: url('/wp-content/uploads/2023/07/signup-sec-bg.png'); 
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;       
+        background-color: #1b1d4a;*/
+        margin: 50px 0px 0;
+        position: relative;
+    }
+
+    .cta-section .container-fluid {
+        padding: 0;
+    }
+
+    .cta-section h2 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 33px;
+        line-height: 72px;
+        text-align: left;
+        letter-spacing: -0.02em;
+        color: #000000;
+        margin-bottom: 0px;
+        text-align: center;
+    }
+
+    /* .cta-section .cta-section-inner .content-sec {
+        position: absolute;
+        top: 20%;
+        margin: 0 auto;
+        text-align: center;
+        left: 30%;
+        z-index: 99;
+    }
+
+    .cta-section .cta-section-inner .content-sec p {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+    }
+    .cta-section .cta-section-inner .content-sec .pink-btn {
+        font-size: 12px;
+        line-height: 16px;
+        width: 270px;
+    } */
+
+    .cta-section .cta-section-inner-left {
+        background-image: url('/wp-content/uploads/2023/07/launch-edition.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 0 0px 0;
+        position: relative;
+        background-position: center;
+        background-color: #1b1d4a;
+        height: 710px;
+    }
+
+    .cta-section .cta-section-inner-left .content-sec {
+        margin: 0;
+        padding: 40px 0 0;
+        text-align: center;
+    }
+
+    .cta-section .cta-section-inner-left .content-sec img {
+        margin: 0;
+        padding: 0;
+    }
+
+    .cta-section .cta-section-inner-left .content-sec h2 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 33px;
+        line-height: 40px;
+        letter-spacing: -0.02em;
+        color: #FFF;
+        margin: 10px 0;
+    }
+
+    .cta-section .cta-section-inner-left .content-sec p {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        color: #ffffff;
+        margin-bottom: 15px;
+    }
+
+    .cta-section .cta-section-inner-left .content-sec p a {
+        text-decoration: underline;
+        color: #ffffff;
+    }
+
+    .cta-section .cta-section-inner-left .content-sec .pink-btn {
+        font-size: 12px;
+        line-height: 16px;
+        width: 270px;
+    }
+
+    .cta-section .cta-section-inner-right {
+        background-image: url('/wp-content/uploads/2023/07/exclusive-giveway.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 0 0px 0;
+        position: relative;
+        background-position: center;
+        background-color: #1b1d4a;
+        height: 710px;
+    }
+
+    .cta-section .cta-section-inner-right .content-sec {
+        margin: 0;
+        padding: 40px 0 0;
+        text-align: center;
+    }
+    .cta-section .cta-section-inner-right .content-sec img {
+        margin: 0;
+        padding: 0;
+    }
+
+    .cta-section .cta-section-inner-right .content-sec h2 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 33px;
+        line-height: 40px;
+        letter-spacing: -0.02em;
+        color: #FFF;
+        margin: 10px 0;
+    }
+    .cta-section .cta-section-inner-right .content-sec p {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        color: #ffffff;
+        margin-bottom: 15px;
+    }
+
+    .cta-section .cta-section-inner-right .content-sec p a {
+        text-decoration: underline;
+        color: #ffffff;
+    }
+
+    .cta-section .cta-section-inner-right .content-sec .pink-btn {
+        font-size: 12px;
+        line-height: 16px;
+        width: 270px;
+    }
+
+    /* .cta-section .cta-section-inner .content-sec {
+        margin: 15% 0 0 3%;
+        padding: 0 0 0 20px;
+        text-align: left;
+    }
+
+    .cta-section .cta-section-inner .content-sec h2 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 33px;
+        line-height: 50px;
+        text-align: left;
+        letter-spacing: -0.02em;
+        color: #FFF;
+        margin-bottom: 0px;
+        text-align: left;
+    }
+
+    .cta-section .cta-section-inner .content-sec p {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        color: #FFF;
+        text-align: left;
+    } 
+
+    .cta-section .cta-section-inner .content-sec .pink-btn {
+        font-size: 12px;
+        line-height: 16px;
+        width: 270px;
+    }*/
+
+    .social-media-sec {
+        background-image: linear-gradient(#DDE4E6, #C7D2D3);
+        margin: 0px 0 0;
+        padding: 50px 0;
+        z-index: 999;
+        text-align: center;
+    }
+
+    .unboxing-video-section {
+        /* background-image: url('/wp-content/uploads/2023/07/unboxing-bg.png'); */
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: -2px 0 0;
+        padding: 50px 0px;
+        position: relative;
+        background-position: bottom;
+        background-color: #f5f5f5;
+        height: 610px;
+    }
+
+    .unboxing-video-section .unboxing-video-section-inner {
+        padding: 0;
+        margin: 0;
+    }
+
+    .unboxing-video-section .unboxing-video-section-inner h2 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 33px;
+        line-height: 40px;
+        letter-spacing: -0.02em;
+        color: #000000;
+        margin-bottom: 30px;
+        padding: 0 22%;
+        text-align: center;
+    }
+
+    .unboxing-video-section .unboxing-video-section-inner iframe {
+        display: block;
+        /* position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); */
+        width: 800px;
+        height: 450px;
+        margin: 0 auto;
+    }
+
+    .social-media-sec p {
+        font-family: 'Montserrat';
+        margin: 15px 0 10px;
+        padding: 0;
+        color: #000;
+        font-size: 24px;
+        line-height: 72px;
+        font-weight: 600;
+        text-align: center;
+        letter-spacing: -0.02em;
+    }
+
+    .social-media-sec .icon-list {
+        width: auto;
+        display: inline-block;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .social-media-sec .icon-list li {
+        list-style: none;
+        float: left;
+        margin-right: 20px;
+    }
+
+    .offer-section {
+        margin: 70px 0px;
+        padding: 0;
+        position: relative;
+    }
+
+    .offer-section .offer-inner-section {
+        margin: 0;
+        padding: 0;
+        background: #fff;
+        box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .offer-section .offer-inner-section .left-content {
+        margin: 25px 50px 20px;
+    }
+
+    .offer-section .offer-inner-section .left-content h2 {
+        font-family: 'Montserrat';
+        margin: 0;
+        padding: 0;
+        font-size: 33px;
+        line-height: 42px;
+        font-weight: 600;
+        color: #000;
+        text-align: left;
+        letter-spacing: -0.02em;
+    }
+
+    .offer-section .offer-inner-section .left-content p {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 16px;
+        line-height: 30px;
+        font-weight: 400;
+        color: #000000;
+        opacity: 0.8;
+        text-align: left;
+    }
+
+    .offer-section .offer-inner-section .order-2 {
+        order: unset !important;
+    }
+
+    .offer-section .offer-inner-section .order-1 {
+        order: unset;
+    }
+
+    #faq-section {
+        align-items: center;
+        justify-content: center;
+        padding: 50px 0px;
+        background: #fff;
+    }
+
+    #faq-section h1 {
+        font-size: 33px;
+        font-weight: 600;
+        line-height: 72px;
+        color: #000;
+        text-align: center;
+    }
+
+    #faq-section .accordion-button {
+        border: none;
+        box-shadow: unset;
+        border-radius: 0;
+        font-size: 16px;
+        line-height: 32px;
+        color: #000;
+        font-weight: 400;
+        font-family: 'Open Sans', sans-serif;
+        border-bottom: 1px solid #000;
+    }
+
+    #faq-section .accordion-button::after {
+        opacity: 1;
+    }
+
+    #faq-section .accordion-button::after {
+        background-image: none;
+        background: url(/wp-content/themes/yes-twentytwentyone/assets/images/icon-plus.png) no-repeat center center / contain;
+    }
+
+    #faq-section .accordion-button:not(.collapsed)::after {
+        background-image: none;
+        background: url(/wp-content/themes/yes-twentytwentyone/assets/images/icon-minus.png) no-repeat center center / contain !important;
+    }
+
+    #faq-section .accordion-button:focus {
+        box-shadow: unset;
+    }
+
+    #faq-section .accordion-body {
+        font-size: 16px;
+        line-height: 32px;
+    }
+
+    #faq-section .accordion-body h4 {
+        font-size: 16px;
+        line-height: 32px;
+        font-weight: 800;
+    }
+
+    #faq-section .accordion-body ul {
+        margin: 15px 0 0 15px;
+        padding: 0;
+    }
+
+    #faq-section .accordion-body li {
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+        line-height: 32px;
+    }
+
+    #faq-section .accordion-body p {
+        font-size: 16px;
+        line-height: 32px;
+    }
+
+    #faq-section .viewall-btn {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 16px;
+        line-height: 32px;
+        font-weight: 400;
+        text-decoration: underline;
+        text-transform: none;
+    }
+
+    #store-locations {
+        background-color: #DDE4E6;
+        padding: 50px 0;
+        margin: 0;
+        position: relative;
+    }
+
+    #store-locations h2 {
+        font-size: 33px;
+        line-height: 72px;
+        font-weight: 600;
+        color: #000;
+    }
+
+    #store-locations .nav-tabs {
+        border-bottom: none;
+    }
+
+    #store-locations .nav-tabs .nav-link {
+        border: none;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 19px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #ff0084;
+        background-color: #fff;
+        border: 2px solid #ff0084;
+        border-top-left-radius: 0;
+        padding: 0.5rem 1.5rem;
+    }
+
+    #store-locations .nav {
+        justify-content: center;
+    }
+
+    #store-locations .nav-tabs .nav-link.active {
+        color: #fff;
+        background-color: #ff0084;
+        /*border: 2px solid #ff0084; */
+    }
+
+    #store-locations .nav-tabs .nav-item.show .nav-link {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 19px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #FF0084;
+    }
+
+    #store-locations .nav-tabs .left-tab {
+        border-top-left-radius: 1.25rem;
+        border-bottom-left-radius: 1.25rem;
+        border-top-right-radius: 0;
+    }
+
+    #store-locations .nav-tabs .right-tab {
+        border: 2px solid #ff0084;
+        border-top-right-radius: 1.25rem;
+        border-bottom-right-radius: 1.25rem;
+    }
+
+    #store-locations .nav .nav-item {
+        margin: 0 0px
+    }
+
+    #store-locations #myTabContent {
+        padding: 0px 0 0
+    }
+
+    #store-locations .content-part {
+        background: #fff;
+        box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 0 0 20px 0;
+        padding: 20px 30px;
+    }
+
+    #store-locations .content-part .content-part-left {
+        margin: 0;
+        padding: 0 50px 0 0;
+        width: 90%;
+    }
+
+    #store-locations .content-part .content-part-right {
+        margin: 0;
+        padding: 0px;
+        width: 10%;
+        display: flex;
+        align-items: center;
+    }
+
+    #store-locations .content-part .content-part-left h3 {
+        font-family: 'Montserrat';
+        font-size: 17px;
+        line-height: 23px;
+        font-weight: 800;
+        color: #000;
+        margin: 0 0 10px 0;
+        padding: 0;
+        text-transform: uppercase;
+    }
+
+    #store-locations .content-part .content-part-left p {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 400;
+        color: #2B2B2B;
+        padding: 0;
+    }
+
+    #store-locations .content-part .content-part-right img {
+        margin: 0;
+        padding: 0;
+    }
+
+    #store-locations .morelocation {
+        display: none;
+    }
+
+    #store-locations .moreless-button {
+        text-align: center;
+    }
+
+    .arrow-up {
+        display: none;
+    }
+
+    @media only screen and (max-width: 768px) {
+
+        .section-banner .bgBanner {
+            background-image: url(/wp-content/uploads/2023/07/nothing-phone-header-bg-mobile.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-color: #1b1d4a;
+            height: 665px;
+            position: relative;
+        }
+
+        /* .video-bg {
+            height: 40vh;
+        } */
+
+        .section-banner .scroll-down-arrow {
+            bottom: 15px;
+        }
+
+        #mob-dis-section {
+            background-image: url(/wp-content/uploads/2023/07/mob-dis-section-bg-mobile.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-color: #1b1d4a;
+            height: 930px;
+            position: relative;
+            padding: 50px 0 0;
+            background-position: center;
+        }
+
+        #mob-dis-section .content-section {
+            margin: 0 30px 0 15px;
+            padding: 0;
+        }
+
+        #mob-dis-section .content-section h2 {
+            font-size: 32px;
+            line-height: 40px;
+        }
+
+        #mob-dis-section .content-section p {
+            font-size: 13px;
+            line-height: 20px;
+            padding-top: 15px;
+        }
+
+        .plan-section {
+            padding: 50px 0px 0;
+        }
+
+        .plan-section .card .card-body {
+            text-align: left;
+            padding: 25px 30px;
+            min-height: auto;
+        }
+
+        .plan-section .plan-details-list h3 {
+            font-size: 24px;
+            line-height: 30px;
+        }
+
+        .plan-section .plan-details-list ul li {
+            font-size: 13px;
+            line-height: 16px;
+        }
+
+        .plan-section .plan-details-list ul li:last-child {
+            height: unset;
+        }
+
+        .plan-section .card .card-body .price-section {
+            height: unset;
+        }
+
+        .plan-section .card .card-body .price-section h2 {
+            font-size: 36px;
+            line-height: 20px;
+            margin: 10px 0 0px 0;
+        }
+
+        .plan-section .card .card-body .price-section p {
+            font-size: 10px;
+        }
+
+        .plan-section .card .card-body .price-section h4 {
+            font-size: 14px;
+            line-height: 20px;
+            margin: 0px 0 0px 0;
+        }
+
+        .pink-btn {
+            font-size: 12px !important;
+            line-height: 16px !important;
+        }
+
+        .cta-section {
+            /* background-image: url(/wp-content/uploads/2023/07/signup-sec-bg-mobile.png);  background-size: cover;
+            background-repeat: no-repeat;
+            height: 720px;
+            margin: 50px 0px 0; */
+            position: relative;
+            margin: 20px 0px 0;
+        }
+
+        .cta-section .cta-section-inner-left {
+            background-image: url('/wp-content/uploads/2023/07/launch-edition-mobile.jpg');
+            margin: 0 0px 0;
+            position: relative;
+            background-position: center;
+            height: 522px;
+        }
+
+        .cta-section .cta-section-inner-left .content-sec {
+            margin: 0;
+            padding: 30px 0 0;
+        }
+
+        .cta-section .cta-section-inner-left .content-sec p {
+            font-size: 10px;
+            line-height: 13px;
+            margin-bottom: 15px;
+        }
+
+        .cta-section .cta-section-inner-right {
+            background-image: url('/wp-content/uploads/2023/07/exclusive-giveway-mobile.jpg');
+            margin: 0 0px 0;
+            background-position: center;
+            height: 600px;
+        }
+
+        .cta-section .cta-section-inner-right .content-sec {
+            margin: 0;
+            padding: 30px 15px 0;
+        }
+
+        .cta-section .cta-section-inner-right .content-sec p {
+            font-size: 10px;
+            line-height: 13px;
+            margin-bottom: 15px;
+        }
+
+        /* .cta-section .cta-section-inner {
+            padding: 0;
+            height: 720px;
+        } */
+
+        /* .cta-section .cta-section-inner .content-sec {
+            margin: 0 auto;
+            padding: 0;
+            text-align: center;
+            bottom: 6%;
+            top: unset;
+            left: 15%;
+        }
+
+        .cta-section .cta-section-inner .content-sec h2 {
+            font-size: 32px;
+            line-height: 40px;
+        }
+
+        .cta-section .cta-section-inner .content-sec p {
+            font-size: 13px;
+            line-height: 20px;
+        } */
+
+        .cta-section .cta-section-inner .content-sec .pink-btn {
+            font-size: 12px;
+            line-height: 16px;
+        }
+
+        .unboxing-video-section {
+            /* background-image: url('/wp-content/uploads/2023/07/unboxing-bg.png'); */
+            margin: 0;
+            padding: 50px 0px 0;
+            height: auto;
+        }
+
+        .unboxing-video-section .unboxing-video-section-inner {
+            padding: 0;
+            margin: 0;
+        }
+
+        .unboxing-video-section .unboxing-video-section-inner h2 {
+            font-size: 18px;
+            line-height: 24px;
+            margin-bottom: 30px;
+            padding: 0 10%;
+        }
+
+        .unboxing-video-section .unboxing-video-section-inner iframe {
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+
+        .offer-section {
+            margin: 50px 0px;
+        }
+
+        .offer-section .offer-inner-section .left-content h2 {
+            font-size: 18px;
+            line-height: 24px;
+        }
+
+        .offer-section .offer-inner-section .left-content p {
+            font-size: 13px;
+            line-height: 20px;
+        }
+
+        .offer-section .offer-inner-section .order-1 {
+            order: 1 !important;
+        }
+
+        .offer-section .offer-inner-section .order-2 {
+            order: 2 !important;
+        }
+
+        #faq-section {
+            padding: 30px 0px !important;
+        }
+
+        #faq-section h1 {
+            font-size: 32px;
+            line-height: 40px;
+        }
+
+        #faq-section .accordion-button {
+            font-size: 13px;
+            line-height: 20px;
+        }
+
+        #faq-section .accordion-body h4 {
+            font-size: 13px;
+            line-height: 20px;
+            font-weight: 800;
+        }
+
+        #faq-section .accordion-body ul {
+            margin: 15px 0 0 15px;
+            padding: 0;
+        }
+
+        #faq-section .accordion-body li {
+            margin: 0;
+            padding: 0 0 5px;
+            font-size: 13px;
+            line-height: 20px;
+        }
+
+        #faq-section .accordion-body p {
+            font-size: 13px;
+            line-height: 20px;
+        }
+
+        #faq-section .viewall-btn {
+            font-size: 16px;
+        }
+
+        .social-media-sec p {
+            font-size: 32px;
+            line-height: 40px;
+        }
+
+        #store-locations h2 {
+            font-size: 32px;
+            line-height: 40px;
+        }
+
+        #store-locations .nav-tabs .nav-link {
+            font-size: 10px;
+            line-height: 19px;
+        }
+
+        #store-locations .content-part {
+            margin: 0 15px 20px;
+            padding: 20px 30px;
+        }
+
+        #store-locations .content-part .content-part-left {
+            margin: 0;
+            padding: 0 15px 0 0;
+            width: 90%;
+            text-align: left;
+        }
+
+        #store-locations .content-part .content-part-left p {
+            font-size: 13px;
+            line-height: 20px;
+        }
+
+        #store-locations .content-part .content-part-right {
+            width: 10%;
+            display: flex;
+            align-items: end;
+        }
+
+
+    }
+</style>

@@ -1,6 +1,4 @@
-
 </main>
-
 <?php get_footer('ywos'); ?>
 
 <script type="text/javascript">
@@ -21,46 +19,59 @@
     $(document).ready(function() {
         $('#heading-titleCheckout').html(getLayoutTranslation('titleCheckout', layoutText));
         $('#span-strBackTo').html(getLayoutTranslation('strBackTo', layoutText));
-        var backPageID = "<?php echo $back_page_id; ?>";
-        console.log(backPageID);
+
+        var backPageID = "<?php if(isset($back_page_id)) echo $back_page_id; ?>";
+        // console.log(backPageID);
         var backPageStrID = '';
         switch (backPageID) {
             case 'cart':
                 backPageStrID = 'pageTitleCart';
                 break;
-            case 'verification': 
-                if(ywosLSData.meta.customerDetails.upFrontPayment=="true"){
-                     backPageStrID = 'pageTitleEligibilityFailure';
-                     break;
-                }else{
+            case 'verification':
+                if (ywosLSData.meta.customerDetails.upFrontPayment == "true") {
+                    backPageStrID = 'pageTitleEligibilityFailure';
+                    break;
+                } else {
                     backPageStrID = 'pageTitleVerification';
-                    break;   
+                    break;
                 }
-            case 'sim type': 
-				if(ywosLSData.meta.orderSummary.plan.eSim !=true){
-					 backPageStrID = 'pageTitleVerification';
-					 break;
-				}else{
-				  backPageStrID = 'pageTitleSelectSimType';
-					break; 
-				}
+            case 'sim type':
+                if (ywosLSData.meta.orderSummary.plan.eSim != true) {
+                    backPageStrID = 'pageTitleVerification';
+                    break;
+                } else {
+                    backPageStrID = 'pageTitleSelectSimType';
+                    break;
+                }
             case 'delivery':
-					 if(ywosLSData.meta.esim == 'true'){
+                if (ywosLSData.meta.esim == 'true') {
                     backPageStrID = 'pageTitleBillingDetails';
-					break;
-                } else{
+                    break;
+                } else {
                     backPageStrID = 'pageTitleDeliveryDetails';
-					break;
-                }   						
-            case 'review': 
+                    break;
+                }
+            case 'review':
                 backPageStrID = 'pageTitleReview';
                 break;
-            default: 
+            case 'roving-delivery':
+                backPageStrID = 'pageTitleDeliveryDetails';
+                break;
+            default:
                 backPageStrID = 'pageTitleCart';
         }
         $('#span-pageTitle').html(getLayoutTranslation(backPageStrID, layoutText));
 
         $('#panel-footerNeedHelp').html(getLayoutTranslation('footerNeedHelp', layoutText));
+
+        if (backPageID == 'review') {
+            if (ywosLSData.trxType && ywosLSData.trxType == 'roving') {
+                $('a.back-btn').attr('href', 'javascript:void(0)');
+                $('a.back-btn').on('click', function() {
+                    history.back();
+                });
+            }
+        }
 
 
         function getLayoutTranslation(strID, objText) {
@@ -68,7 +79,7 @@
             if (siteLang && layoutText) {
                 if (layoutText[strID] && layoutText[strID][siteLang]) {
                     return layoutText[strID][siteLang];
-                } 
+                }
             }
             return;
         }

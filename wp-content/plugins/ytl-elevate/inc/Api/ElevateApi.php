@@ -122,7 +122,7 @@ class ElevateApi
 
 			register_rest_route('/elevate/v1', '/check-active-contract', array(
                 'methods' => 'POST',
-                'callback' => array($this, 'check_active_contract'),
+                'callback' => array($this, 'yt_check_active_contract'),
                 'permission_callback' => '__return_true'
             ));
 
@@ -224,14 +224,6 @@ class ElevateApi
 
 
         });
-    }
-
-
-    public static function do_test(WP_REST_Request $request)
-    {
-
-        return self::elevate_customer_get_by_uid($request['uid']);
-
     }
 
 
@@ -533,7 +525,7 @@ class ElevateApi
         return $response;
     }
 
-	public  function check_active_contract(WP_REST_Request $request)
+    public  function check_active_contract(WP_REST_Request $request)
     {
 
         if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
@@ -557,8 +549,9 @@ class ElevateApi
             'timeout' => self::API_TIMEOUT
         ];
 		$apiSetting = (new \Inc\Base\Model)->getAPISettings();
-        $api_url = $apiSetting['url'] .'api/Elevate/customer/CheckActiveContract'.'?customerNRIC='.$mykad;
+        $api_url = $apiSetting['url'] . self::api_customer_check_contract.'?customerNRIC='.$mykad;
         $request = wp_remote_get($api_url, $args);
+
         if (is_wp_error($request)) {
             $return['status'] = 0;
             $return['error'] = "Cannot connect to API server";
@@ -566,9 +559,9 @@ class ElevateApi
             $return['status'] = 0;
             $return['error'] = @$request['response'];
         } else {
-            $data = json_decode($request['body'], true);
-			//print_r($request);die( $api_url);
-            if (!$data) {
+            $data = $request['body'];
+
+            if ($data=='false') {
                 $return['status'] = 1;
             } else {
                 $return['status'] = 0;
@@ -1183,7 +1176,7 @@ class ElevateApi
                 'Content-Type' => 'application/json'
             ),
             'body' => json_encode($params),
-            'method' => 'PUT',
+            'method' => 'POST',
             'timeout' => self::API_TIMEOUT,
             'data_format' => 'body'
         ];
@@ -2159,6 +2152,44 @@ class ElevateApi
             return $response;
         }
         return false;
+    }
+
+
+    
+    public function yt_check_active_contract(WP_REST_Request $request){
+
+        $mykad = $request['mykad'];
+        $apiSetting = (new \Inc\Base\Model)->getAPISettings();
+        $api_url = $apiSetting['url'] .'api/Elevate/customer/CheckActiveContract'.'?customerNRIC='.$mykad;
+        $token = $this->get_token();
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => $api_url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_HTTPHEADER => array(
+            'Authorization: Bearer '.$token,
+            'Cookie: ARRAffinity=db7e7bf21bbdfb556bdf82b1fb67118b373ac34ca676a806883564f4d13394c1; ARRAffinitySameSite=db7e7bf21bbdfb556bdf82b1fb67118b373ac34ca676a806883564f4d13394c1'
+        ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+        if(is_wp_error($response)){
+            $ContractData="Cannot connect to API server";
+        }else if($response != "true"){
+            $ContractData=1;
+        }else{
+            $ContractData="User cannot buy more contract";
+        }
+        
+        return $ContractData;
+
     }
 
 }

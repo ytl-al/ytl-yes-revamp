@@ -21,11 +21,42 @@
     #cart-body .nav-pills .nav-item {
         margin-right: 30px;
     }
-    #cart-body .listing-quickSelectBanks li.nav-item,#cart-body .listing-quickSelectWallets li.nav-item { cursor: pointer; margin-right: 10px; max-width: 60px; text-align: center; }
-    .listing-quickSelectBanks li.nav-item .img-quickSelectBank, .listing-quickSelectWallets li.nav-item .img-quickSelectWallet { border: 1px solid #D9D9D9; border-radius: 4px; box-shadow: 2px 2px 12px rgb(112 144 176 / 25%); margin: 0 0 10px; padding: 3px; }
-    .listing-quickSelectBanks li.nav-item.selected .img-quickSelectBank, .listing-quickSelectWallets li.nav-item.selected .img-quickSelectWallet { border-color: rgb(61, 140, 255); }
-    .listing-quickSelectBanks li.nav-item img, .listing-quickSelectWallets li.nav-item img { height: 44px; margin: 0 auto; width: 44px; }
-    .listing-quickSelectBanks li.nav-item span, .listing-quickSelectWallets li.nav-item span { display: inline-block; font-size: 11px; line-height: 12px; }
+
+    #cart-body .listing-quickSelectBanks li.nav-item,
+    #cart-body .listing-quickSelectWallets li.nav-item {
+        cursor: pointer;
+        margin-right: 10px;
+        max-width: 60px;
+        text-align: center;
+    }
+
+    .listing-quickSelectBanks li.nav-item .img-quickSelectBank,
+    .listing-quickSelectWallets li.nav-item .img-quickSelectWallet {
+        border: 1px solid #D9D9D9;
+        border-radius: 4px;
+        box-shadow: 2px 2px 12px rgb(112 144 176 / 25%);
+        margin: 0 0 10px;
+        padding: 3px;
+    }
+
+    .listing-quickSelectBanks li.nav-item.selected .img-quickSelectBank,
+    .listing-quickSelectWallets li.nav-item.selected .img-quickSelectWallet {
+        border-color: rgb(61, 140, 255);
+    }
+
+    .listing-quickSelectBanks li.nav-item img,
+    .listing-quickSelectWallets li.nav-item img {
+        height: 44px;
+        margin: 0 auto;
+        width: 44px;
+    }
+
+    .listing-quickSelectBanks li.nav-item span,
+    .listing-quickSelectWallets li.nav-item span {
+        display: inline-block;
+        font-size: 11px;
+        line-height: 12px;
+    }
 
     @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
         #cart-body .nav-pills .nav-item {
@@ -39,25 +70,45 @@
         }
     }
 
-    .panel-weaccept { margin: 15px 0 10px; }
-    .panel-weaccept img { margin: 0 8px; }
+    .panel-weaccept {
+        margin: 15px 0 10px;
+    }
+
+    .panel-weaccept img {
+        margin: 0 8px;
+    }
 
     .layer-selectedCard {}
-    .layer-selectedCard img { display: none; }
+
+    .layer-selectedCard img {
+        display: none;
+    }
 </style>
 
 <!-- Vue Wrapper STARTS -->
 <div id="main-vue" style="display: none;">
     <!-- Banner Start -->
-    <section id="grey-innerbanner" v-if='(upFrontPayment=="true")'>
+    <section id="grey-innerbanner" v-if='trxType == "roving"'>
+        <div class="container">
+            <ul class="wizard">
+                <li ui-sref="firstStep" class="completed">
+                    <span>1. {{ renderText('strReview') }}</span>
+                </li>
+                <li ui-sref="secondStep" class="completed">
+                    <span>2. {{ renderText('strPayment') }}</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section id="grey-innerbanner" v-else-if='(upFrontPayment=="true")'>
         <div class="container">
             <ul class="wizard">
                 <li ui-sref="firstStep" class="completed">
                     <span>1. {{ renderText('strVerification') }}</span>
                 </li>
-                <!-- <li ui-sref="secondStep" class="completed">
+                <li ui-sref="secondStep" class="completed">
                     <span>2. {{ renderText('strSelectSimType') }}</span>
-                </li> -->
+                </li>
                 <li ui-sref="secondStep" class="completed">
                     <span>3. {{ renderText('strDelivery') }}</span>
                 </li>
@@ -72,18 +123,17 @@
     </section>
     <section id="grey-innerbanner" v-else>
         <div class="container">
-		<ul class="wizard" v-if="(eSimSupportPlan != true)">
+            <ul class="wizard" v-if="(eSimSupportPlan != true)">
                 <li ui-sref="firstStep" class="completed">
                     <span>1. {{ renderText('strVerification') }}</span>
                 </li>
-               
                 <li ui-sref="secondStep" class="completed">
                     <span>2. {{ renderText('strDelivery') }}</span>
                 </li>
                 <li ui-sref="threeStep" class="completed">
                     <span>3. {{ renderText('strReview') }}</span>
                 </li>
-                <li ui-sref="fourthStep"class="completed"> 
+                <li ui-sref="fourthStep" class="completed">
                     <span>4. {{ renderText('strPayment') }}</span>
                 </li>
             </ul>
@@ -97,7 +147,6 @@
                 <li ui-sref="thirdStep" class="completed">
                     <span v-if="(simType == 'true')">3. {{ renderText('strDeliveryBilling') }}</span>
                     <span v-else>3. {{ renderText('strDelivery') }}</span>
-
                 </li>
                 <li ui-sref="fourthStep" class="completed">
                     <span>4. {{ renderText('strReview') }}</span>
@@ -252,7 +301,9 @@
                                     <div class="row mb-4">
                                         <div class="col-lg-6">
                                             <ul class="nav nav-pills listing-quickSelectBanks">
-                                            <li class="nav-item" v-for="quickSelectBank in quickSelectBanks" v-on:click="selectBank(quickSelectBank.value, event)"><div class="img-quickSelectBank"><img :src="quickSelectBank.imgSrc" alt="{{ quickSelectBank.name }}" title="{{ quickSelectBank.name }}" /></div><span>{{ quickSelectBank.name }}</span></li>
+                                                <li class="nav-item" v-for="quickSelectBank in quickSelectBanks" v-on:click="selectBank(quickSelectBank.value, event)">
+                                                    <div class="img-quickSelectBank"><img :src="quickSelectBank.imgSrc" alt="{{ quickSelectBank.name }}" title="{{ quickSelectBank.name }}" /></div><span>{{ quickSelectBank.name }}</span>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -278,7 +329,9 @@
                                     <div class="row mb-4">
                                         <div class="col-lg-6">
                                             <ul class="nav nav-pills listing-quickSelectWallets">
-                                                <li class="nav-item" v-for="quickSelectWallet in rmWallets" :id="quickSelectWallet.eWalletMethodCode" v-on:click="selectWallet(quickSelectWallet.eWalletMethodCode, event)"><div class="img-quickSelectWallet"><img width="52" :src="quickSelectWallet.eWalletLogoUrl" :alt="quickSelectWallet.eWalletMethodName" :title="quickSelectWallet.eWalletMethodName" /></div><span>{{ quickSelectWallet.eWalletMethodName }}</span></li>
+                                                <li class="nav-item" v-for="quickSelectWallet in rmWallets" :id="quickSelectWallet.eWalletMethodCode" v-on:click="selectWallet(quickSelectWallet.eWalletMethodCode, event)">
+                                                    <div class="img-quickSelectWallet"><img width="52" :src="quickSelectWallet.eWalletLogoUrl" :alt="quickSelectWallet.eWalletMethodName" :title="quickSelectWallet.eWalletMethodName" /></div><span>{{ quickSelectWallet.eWalletMethodName }}</span>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -325,13 +378,14 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
-                simType:'',
+                simType: '',
+                trxType: '',
                 dealer: [],
                 currentStep: 5,
                 pageValid: false,
-				eSimSupportPlan:'',
+                eSimSupportPlan: '',
                 allowSubmit: false,
-                upFrontPayment:'false',
+                upFrontPayment: 'false',
                 orderSummary: {
                     plan: {},
                     due: {
@@ -364,7 +418,8 @@
                         city: '',
                         country: '',
                         state: ''
-                    }
+                    },
+                    StagingOrderNumber: '',
                 },
                 paymentInfo: {
                     paymentMethod: 'CREDIT_CARD',
@@ -384,30 +439,29 @@
                     isSaveMyCard: false,
                     ippType: ''
                 },
+
                 fpxBanks: [
                     { value: "alliance-bank", name: "Alliance Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/alliance.png" },
                     { value: "bank-islam", name: "Bank Islam", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/islam.png", quickSelect: false },
                     { value: "bank-muamalat", name: "Muamalat Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/muamalat.png", quickSelect: false },
                     { value: "bank-rakyat", name: "Bank Rakyat", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/rakyat.png", quickSelect: false },
                     { value: "bsn", name: "BSN", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/bsn.png", quickSelect: false },
-
                     { value: "BCBB0235", name: "CIMB Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/cimb.png", quickSelect: true },
                     { value: "HLB0224", name: "Hong Leong Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/hong-leong.png", quickSelect: true },
                     { value: "hsbc-bank", name: "HSBC Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/hsbc.png", quickSelect: false },
                     { value: "kfh", name: "KFH", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/kfh.png", quickSelect: false },
                     { value: "maybank-2e", name: "Maybank2E", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/maybank.png", quickSelect: false },
-
                     { value: "MB2U0227", name: "Maybank2U", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/maybank.png", quickSelect: true },
                     { value: "ocbc-bank", name: "OCBC Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/ocbc.png", quickSelect: false },
                     { value: "PBB0233", name: "Public Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/public.png", quickSelect: true },
                     { value: "rhb-bank", name: "RHB Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/rhb.png", quickSelect: false },
                     { value: "sbi-bank-a", name: "SBI Bank A", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/sbi.png", quickSelect: false },
-
                     { value: "sbi-bank-b", name: "SBI Bank B", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/sbi.png", quickSelect: false },
                     { value: "sbi-bank-c", name: "SBI Bank C", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/sbi.png", quickSelect: false },
                     { value: "standard-chartered", name: "Standard Chartered", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/standard-chartered.png", quickSelect: false },
                     { value: "uob-bank", name: "UOB Bank", imgSrc: "https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/bank-icons/uob.png", quickSelect: false }
                 ],
+
                 rmWallets: [],
                 fpxBankList: [],
                 cardholder: {
@@ -429,6 +483,7 @@
                         monthlyInstallment: ''
                     }
                 },
+
                 countries: [
                     { "value": "Malaysia", "name": "Malaysia" },
                     { "value": "Argentina", "name": "Argentina" },
@@ -550,8 +605,9 @@
                     { "value": "Vanuatu", "name": "Vanuatu" },
                     { "value": "Venezuela", "name": "Venezuela" },
                     { "value": "Vietnam", "name": "Vietnam" },
-                    { "value": "Zambia", "name": "Zambia"}
+                    { "value": "Zambia", "name": "Zambia" }
                 ],
+
                 orderResponse: {
                     orderNumber: '',
                     displayOrderNumber: '',
@@ -568,6 +624,7 @@
                     deliveryToData: '',
                     deliveryType: ''
                 },
+
                 checkPaymentStatusCount: 0,
                 checkPaymentStatusCountLimit: 78, // times every 5 seconds (5000), total = 6.5 minutes, excluding 10 seconds before first check
                 paymentTimeout: false,
@@ -578,61 +635,53 @@
 
                 apiLocale: 'EN',
                 pageText: {
-                    strVerification: { 'en-US': 'Verification', 'ms-MY': 'Pengesahan', 'zh-hans': 'Verification' },
-                    strSelectSimType: { 'en-US': 'Select Sim Type', 'ms-MY': 'Select Sim Type', 'zh-hans': 'Select Sim Type' },
-
-                    strDelivery: { 'en-US': 'Delivery Details', 'ms-MY': 'Butiran Penghantaran', 'zh-hans': 'Delivery Details' },
-                    strDeliveryBilling: {'en-US': 'Billing Details','ms-MY': 'Billing Details','zh-hans': 'Billing Details'},
-                    strReview: { 'en-US': 'Review', 'ms-MY': 'Semak', 'zh-hans': 'Review' },
-                    strPayment: { 'en-US': 'Payment Info', 'ms-MY': 'Maklumat Pembayaran', 'zh-hans': 'Payment Info' },
-
-                    strFillIn: { 'en-US': 'Please fill in your ID information and mobile number to proceed', 'ms-MY': 'Sila isikan maklumat ID dan nombor mudah alih untuk teruskan', 'zh-hans': 'Please fill in your ID information and mobile number to proceed' },
-                    strPaymentSub: { 'en-US': 'This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.', 'ms-MY': 'Maklumat ini diperlukan untuk pembelian dalam talian dan digunakan untuk mengesahkan dan melindungi identiti anda. Kami menyimpan maklumat ini dengan selamat dan tidak akan menggunakannya untuk tujuan lain.', 'zh-hans': 'This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.' },
-                    strPaymentSelect: { 'en-US': 'Select payment', 'ms-MY': 'Pilih bayaran', 'zh-hans': 'Select payment' },
-                    strPaymentInfo: { 'en-US': 'Please ensure your web browser and/or 3rd party software pop-up blocker is disabled before you proceed with your transactions.', 'ms-MY': 'Sila pastikan pelayar web dan/atau perisian penyekat jendela timbul pihak ketiga telah dilumpuhkan sebelum anda meneruskan transaksi.', 'zh-hans': 'Please ensure your web browser and/or 3rd party software pop-up blocker is disabled before you proceed with your transactions.' },
-
-                    strPaymentTypeCard: { 'en-US': 'Credit/Debit Card', 'ms-MY': 'Kad Kredit/Debit', 'zh-hans': 'Credit/Debit Card' },
-                    strWeAccept: { 'en-US': 'We accept', 'ms-MY': 'Kami terima', 'zh-hans': 'We accept' },
-
-                    strInstalmentPayment: { 'en-US': 'Instalment Payment', 'ms-MY': 'Bayaran Ansuran', 'zh-hans': 'Instalment Payment' },
-                    strInstalmentType: { 'en-US': 'Instalment Type', 'ms-MY': 'Jenis Ansuran', 'zh-hans': 'Instalment Type' },
-                    selectInstallmentType: { 'en-US': 'Select Installment Type', 'ms-MY': 'Pilih Jenis Ansuran', 'zh-hans': 'Select Installment Type' },
-
-                    labelCardName: { 'en-US': 'Cardholder Name', 'ms-MY': 'Nama Pemegang Kad', 'zh-hans': 'Cardholder Name' },
-                    labelCardNumber: { 'en-US': 'Card Number', 'ms-MY': 'Nombor Kad', 'zh-hans': 'Card Number' },
-                    infoCardNumber: { 'en-US': 'Numbers must contain 16 digits', 'ms-MY': 'Nombor mesti mempunyai 16 digit', 'zh-hans': 'Numbers must contain 16 digits' },
-                    labelCardExpiry: { 'en-US': 'Exp Date', 'ms-MY': 'Tarikh Luput', 'zh-hans': 'Exp Date' },
-
-                    strPaymentTypeFPX: { 'en-US': 'Online Banking (FPX)', 'ms-MY': 'Perbankan Dalam Talian (FPX)', 'zh-hans': 'Online Banking (FPX)' },
-                    strPaymentTypeRM: { 'en-US': 'E-Wallet', 'ms-MY': 'E-Wallet', 'zh-hans': 'E-Wallet' },
-                    selectSelectBank: { 'en-US': 'Select a Bank', 'ms-MY': 'Pilih Bank', 'zh-hans': 'Select a Bank' },
-
-                    strBtnPay: { 'en-US': 'Pay', 'ms-MY': 'Bayar', 'zh-hans': 'Pay' },
-
+                    strVerification: { 'en-US': 'Verification', 'ms-MY': 'Pengesahan', 'zh-hans': 'Verification' } ,
+                    strSelectSimType: { 'en-US': 'Select Sim Type', 'ms-MY': 'Select Sim Type', 'zh-hans': 'Select Sim Type' } ,
+                    strDelivery: { 'en-US': 'Delivery Details', 'ms-MY': 'Butiran Penghantaran', 'zh-hans': 'Delivery Details' } ,
+                    strDeliveryBilling: { 'en-US': 'Billing Details', 'ms-MY': 'Billing Details', 'zh-hans': 'Billing Details' } ,
+                    strReview: { 'en-US': 'Review', 'ms-MY': 'Semak', 'zh-hans': 'Review' } ,
+                    strPayment: { 'en-US': 'Payment Info', 'ms-MY': 'Maklumat Pembayaran', 'zh-hans': 'Payment Info' } ,
+                    strFillIn: { 'en-US': 'Please fill in your ID information and mobile number to proceed', 'ms-MY': 'Sila isikan maklumat ID dan nombor mudah alih untuk teruskan', 'zh-hans': 'Please fill in your ID information and mobile number to proceed' } ,
+                    strPaymentSub: { 'en-US': 'This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.', 'ms-MY': 'Maklumat ini diperlukan untuk pembelian dalam talian dan digunakan untuk mengesahkan dan melindungi identiti anda. Kami menyimpan maklumat ini dengan selamat dan tidak akan menggunakannya untuk tujuan lain.', 'zh-hans': 'This information is required for online purchases and is used to verify and protect your identity. We keep this information safe and will not use it for any other purposes.' } ,
+                    strPaymentSelect: { 'en-US': 'Select payment', 'ms-MY': 'Pilih bayaran', 'zh-hans': 'Select payment' } ,
+                    strPaymentInfo: { 'en-US': 'Please ensure your web browser and/or 3rd party software pop-up blocker is disabled before you proceed with your transactions.', 'ms-MY': 'Sila pastikan pelayar web dan/atau perisian penyekat jendela timbul pihak ketiga telah dilumpuhkan sebelum anda meneruskan transaksi.', 'zh-hans': 'Please ensure your web browser and/or 3rd party software pop-up blocker is disabled before you proceed with your transactions.' } ,
+                    strPaymentTypeCard: { 'en-US': 'Credit/Debit Card', 'ms-MY': 'Kad Kredit/Debit', 'zh-hans': 'Credit/Debit Card' } ,
+                    strWeAccept: { 'en-US': 'We accept', 'ms-MY': 'Kami terima', 'zh-hans': 'We accept' } ,
+                    strInstalmentPayment: { 'en-US': 'Instalment Payment', 'ms-MY': 'Bayaran Ansuran', 'zh-hans': 'Instalment Payment' } ,
+                    strInstalmentType: { 'en-US': 'Instalment Type', 'ms-MY': 'Jenis Ansuran', 'zh-hans': 'Instalment Type' } ,
+                    selectInstallmentType: { 'en-US': 'Select Installment Type', 'ms-MY': 'Pilih Jenis Ansuran', 'zh-hans': 'Select Installment Type' } ,
+                    labelCardName: { 'en-US': 'Cardholder Name', 'ms-MY': 'Nama Pemegang Kad', 'zh-hans': 'Cardholder Name' } ,
+                    labelCardNumber: { 'en-US': 'Card Number', 'ms-MY': 'Nombor Kad', 'zh-hans': 'Card Number' } ,
+                    infoCardNumber: { 'en-US': 'Numbers must contain 16 digits', 'ms-MY': 'Nombor mesti mempunyai 16 digit', 'zh-hans': 'Numbers must contain 16 digits' } ,
+                    labelCardExpiry: { 'en-US': 'Exp Date', 'ms-MY': 'Tarikh Luput', 'zh-hans': 'Exp Date' } ,
+                    strPaymentTypeFPX: { 'en-US': 'Online Banking (FPX)', 'ms-MY': 'Perbankan Dalam Talian (FPX)', 'zh-hans': 'Online Banking (FPX)' } ,
+                    strPaymentTypeRM: { 'en-US': 'E-Wallet', 'ms-MY': 'E-Wallet', 'zh-hans': 'E-Wallet' } ,
+                    selectSelectBank: { 'en-US': 'Select a Bank', 'ms-MY': 'Pilih Bank', 'zh-hans': 'Select a Bank' } ,
+                    strBtnPay: { 'en-US': 'Pay', 'ms-MY': 'Bayar', 'zh-hans': 'Pay' } ,
                     errorCreateOrder: { 'en-US': "There's an error in creating your order.<br />Please try again later.", 'ms-MY': 'Terdapat ralat dalam membuat pesanan.<br />Sila cuba lagi kemudian.', 'zh-hans': "There's an error in creating your order.<br />Please try again later." },
                     errorProcessingPayment: { 'en-US': "There's an error in processing your payment.<br />Please try again later.", 'ms-MY': 'Terdapat ralat dalam pemprosesan bayaran.<br />Sila cuba lagi kemudian.', 'zh-hans': "There's an error in processing your payment.<br />Please try again later." },
-                    errorPaymentNotSuccessful: { 'en-US': 'Your payment is not successful.<br />Please try again.', 'ms-MY': 'Pembayaran anda tidak berjaya.<br />Sila cuba lagi kemudian.', 'zh-hans': 'Your payment is not successful.<br />Please try again.' },
-                    errorPaymentExceed: { 'en-US': 'You have exceeds the time for payment window. Please try again.', 'ms-MY': 'Anda telah melebihi waktu pembayaran. Sila cuba lagi.', 'zh-hans': 'You have exceeds the time for payment window. Please try again.' },
-                    errorPromoLinkExpired: { 'en-US': 'Your unique link is expired as it is already been used for purchase.<br />You may reach out to Yes for more information.', 'ms-MY': 'Link unik anda telah tamat tempoh kerana ia telah digunakan untuk pembelian.<br />Sila hubungi Yes untuk tahu lebih lanjut.', 'zh-hans': 'Your unique link is expired as it is already been used for purchase.<br />You may reach out to Yes for more information.' },
-                    errorPromoLinkError: { 'en-US': 'Cannot verify your promo link. Please try again.', 'ms-MY': 'Promo link anda tidak dapat disahkan. Sila cuba lagi.', 'zh-hans': 'Cannot verify your promo link. Please try again.' },
-                    modalErrorPaymentTitle: { 'en-US': 'Payment Error', 'ms-MY': 'Ralat Pembayaran', 'zh-hans': 'Payment Error' },
-                    modalErrorTitle: { 'en-US': 'Error', 'ms-MY': 'Ralat', 'zh-hans': 'Error' },
+                    errorPaymentNotSuccessful: { 'en-US': 'Your payment is not successful.<br />Please try again.', 'ms-MY': 'Pembayaran anda tidak berjaya.<br />Sila cuba lagi kemudian.', 'zh-hans': 'Your payment is not successful.<br />Please try again.' } ,
+                    errorPaymentExceed: { 'en-US': 'You have exceeds the time for payment window. Please try again.', 'ms-MY': 'Anda telah melebihi waktu pembayaran. Sila cuba lagi.', 'zh-hans': 'You have exceeds the time for payment window. Please try again.' } ,
+                    errorPromoLinkExpired: { 'en-US': 'Your unique link is expired as it is already been used for purchase.<br />You may reach out to Yes for more information.', 'ms-MY': 'Link unik anda telah tamat tempoh kerana ia telah digunakan untuk pembelian.<br />Sila hubungi Yes untuk tahu lebih lanjut.', 'zh-hans': 'Your unique link is expired as it is already been used for purchase.<br />You may reach out to Yes for more information.' } ,
+                    errorPromoLinkError: { 'en-US': 'Cannot verify your promo link. Please try again.', 'ms-MY': 'Promo link anda tidak dapat disahkan. Sila cuba lagi.', 'zh-hans': 'Cannot verify your promo link. Please try again.' } ,
+                    modalErrorPaymentTitle: { 'en-US': 'Payment Error', 'ms-MY': 'Ralat Pembayaran', 'zh-hans': 'Payment Error' } ,
+                    modalErrorTitle: { 'en-US': 'Error', 'ms-MY': 'Ralat', 'zh-hans': 'Error' } 
                 }
             },
             mounted: function() {},
             created: function() {
                 var self = this;
-                axios.get(apiEndpointURL + '/get-rm-wallet-merchant' + '?nonce='+yesObj.nonce)
+                axios.get(apiEndpointURL + '/get-rm-wallet-merchant' + '?nonce=' + yesObj.nonce)
                     .then((response) => {
                         var data = response?.data?.rmEwalletList;
-                        
-                        if(data) {
+
+                        if (data) {
                             data.forEach((list, index) => {
-                                if( list['eWalletMethodCode'] == 'GRABPAY_MY' ) {
+                                if (list['eWalletMethodCode'] == 'GRABPAY_MY') {
                                     data[index].eWalletLogoUrl = '/wp-content/uploads/2022/11/GrabPayLogo.png'
-                                }else if( list['eWalletMethodCode'] == 'SHOPEEPAY_MY' ) {
+                                } else if (list['eWalletMethodCode'] == 'SHOPEEPAY_MY') {
                                     data[index].eWalletLogoUrl = '/wp-content/uploads/2022/11/shopeePayLogo.png';
-                                }else if( list['eWalletMethodCode'] == 'TNG_MY' ) {
+                                } else if (list['eWalletMethodCode'] == 'TNG_MY') {
                                     data[index].eWalletLogoUrl = '/wp-content/uploads/2022/11/TouchNGoLogo.png';
                                 }
                             });
@@ -640,7 +689,7 @@
                         }
                     })
                     .catch((error) => {
-                        console.log('error',error);
+                        console.log('error', error);
                     });
                 setTimeout(function() {
                     self.pageInit();
@@ -648,7 +697,6 @@
                 self.initTabs();
             },
             computed: {
-
                 quickSelectWallets: function() {
                     return this.rmWallets.filter(function(wallet) {
                         return wallet.quickSelect
@@ -673,21 +721,17 @@
                         self.tpMeta = ywos.lsData.tpMeta;
                         self.dealer = ywos.lsData.meta.dealer;
                         self.upFrontPayment = ywos.lsData.meta.customerDetails.upFrontPayment;
-                        self.simType=ywos.lsData.meta.esim;
-						self.eSimSupportPlan=ywos.lsData.meta.orderSummary.plan.eSim;
-                    
-                        
-                        toggleOverlay(false);
+                        self.simType = ywos.lsData.meta.esim;
+                        self.eSimSupportPlan = ywos.lsData.meta.orderSummary.plan.eSim;
 
+                        toggleOverlay(false);
                     } else {
                         ywos.redirectToPage('cart');
                     }
-
-
                 },
                 ajaxGetFPXBankList: function() {
                     var self = this;
-                    axios.get(apiEndpointURL + '/get-fpx-bank-list' + '?nonce='+yesObj.nonce)
+                    axios.get(apiEndpointURL + '/get-fpx-bank-list' + '?nonce=' + yesObj.nonce)
                         .then((response) => {
                             var data = response.data;
                             if (!data.fpxServiceDown) {
@@ -718,7 +762,7 @@
                 },
                 ajaxGetMaybankIPPTenures: function() {
                     var self = this;
-                    axios.post(apiEndpointURL + '/get-ipp-tenures' + '?nonce='+yesObj.nonce, {
+                    axios.post(apiEndpointURL + '/get-ipp-tenures' + '?nonce=' + yesObj.nonce, {
                             'plan_name': self.orderSummary.plan.planName
                         })
                         .then((response) => {
@@ -740,7 +784,7 @@
                 ajaxGetMaybankIPPInstallments: function(totalAmount, tenure) {
                     var self = this;
                     var ippInstallment = {};
-                    axios.post(apiEndpointURL + '/get-ipp-monthly-installments' + '?nonce='+yesObj.nonce, {
+                    axios.post(apiEndpointURL + '/get-ipp-monthly-installments' + '?nonce=' + yesObj.nonce, {
                             'total_amount': totalAmount,
                             'tenure_type': tenure
                         })
@@ -775,6 +819,7 @@
                     var self = this;
                     self.orderSummary = ywos.lsData.meta.orderSummary;
                     self.deliveryInfo = ywos.lsData.meta.deliveryInfo;
+                    self.trxType = (ywos.lsData.trxType) ?? '';
 
                     self.paymentInfo.amount = self.orderSummary.due.amount;
                     self.paymentInfo.sst = self.orderSummary.due.taxesSST;
@@ -798,7 +843,7 @@
                         'yos_order_id': self.orderResponse.orderNumber
                     };
                     // console.log(self.orderResponse);
-                    axios.post(apiEndpointURL + '/check-order-payment-status' + '?nonce='+yesObj.nonce, params)
+                    axios.post(apiEndpointURL + '/check-order-payment-status' + '?nonce=' + yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
                             var responseCode = data.responseCode;
@@ -806,7 +851,7 @@
                             var recheck = false;
                             var closePaymentWindow = false;
 
-                            if (responseCode == 0) {                        // Payment success
+                            if (responseCode == 0) { // Payment success
                                 self.paymentResponse = data;
                                 closePaymentWindow = true;
 
@@ -816,14 +861,14 @@
                                     self.redirectThankYou(1);
                                 }, 2000);
                             } else if (responseCode == -1) {
-                                if (paymentId == 'Not Available') {         // Payment in progress
+                                if (paymentId == 'Not Available') { // Payment in progress
                                     recheck = true;
-                                } else if (paymentId != 'Not Available') {  // Payment failed
+                                } else if (paymentId != 'Not Available') { // Payment failed
                                     closePaymentWindow = true;
                                     toggleOverlay(false);
                                     self.toggleModalAlert(self.renderText('modalErrorPaymentTitle'), self.renderText('errorPaymentNotSuccessful'));
                                 }
-                            } else if (responseCode == -2 && paymentId != 'Not Available') {   // No response from bank
+                            } else if (responseCode == -2 && paymentId != 'Not Available') { // No response from bank
                                 self.paymentResponse = data;
                                 closePaymentWindow = true;
                                 self.redirectThankYou(2);
@@ -891,7 +936,10 @@
                         self.toggleModalAlert(self.renderText('modalErrorPaymentTitle'), self.renderText('errorPaymentExceed'));
                     }, 360000);
 
-                    mainwin = postPayment({ order_id: xpayOrderId,  encrypted_string: encryptedValue });
+                    mainwin = postPayment({
+                        order_id: xpayOrderId,
+                        encrypted_string: encryptedValue
+                    });
 
                     setTimeout(function() {
                         self.paymentTimeout = false;
@@ -901,70 +949,77 @@
                 },
                 ajaxCreateYOSOrder: function() {
                     var self = this;
-                     if(ywos.lsData.meta.customerDetails.upFrontPayment=='true'){
-                    self.upFontpayemtTotal=(self.paymentInfo.totalAmount)-(self.orderSummary.due.foreignerDeposit)
-                    }else{
-                        self.upFontpayemtTotal=self.paymentInfo.totalAmount;
+                    if (ywos.lsData.meta.customerDetails.upFrontPayment == 'true') {
+                        self.upFontpayemtTotal = (self.paymentInfo.totalAmount) - (self.orderSummary.due.foreignerDeposit)
+                    } else {
+                        self.upFontpayemtTotal = self.paymentInfo.totalAmount;
+                    }
+
+                    if (ywos.lsData.meta.orderSummary.plan.bundleName == "Home Broadband") {
+                        self.eSIM = ywos.lsData.meta.orderSummary.plan.eSim;
+                    } else {
+                        self.eSIM = ywos.lsData.meta.esim;
                     }
                    
-                    if(ywos.lsData.meta.orderSummary.plan.bundleName == "Home Broadband"){
-                        self.eSIM=ywos.lsData.meta.orderSummary.plan.eSim;
+                    if(ywos.lsData.trxType=='roving'){
+                        console.log(self.deliveryInfo.mobileNumber);
+                        self.phone_number=self.deliveryInfo.mobileNumber
                     }else{
-                        self.eSIM= ywos.lsData.meta.esim;
+                        self.phone_number=self.deliveryInfo.msisdn;
                     }
-                    console.log(self.eSIM);
+                    console.log(self.phone_number);
                     // alert(self.upFontpayemtTotal)
                     // alert(self.paymentInfo.paymentMethod);
                     var params = {
-                        'session_key'       : ywos.lsData.sessionKey,
+                        'session_key': ywos.lsData.sessionKey,
 
-                        'phone_number'      : self.deliveryInfo.msisdn,
-                        'customer_name'     : self.deliveryInfo.name,
-                        'dob'               : self.deliveryInfo.dob,
-                        'gender'            : self.deliveryInfo.gender,
-                        'email'             : self.deliveryInfo.email,
-                        'login_yes_id'      : '',
-                        'security_type'     : self.deliveryInfo.securityType,   
-                        'security_id'       : self.deliveryInfo.securityId,
-                        'school_name'       : '',
-                        'school_code'       : '',
-                        'university_name'   : '',
-                        'dealer_code'       : self.dealer.dealer_code,
-                        'dealer_login_id'   : self.dealer.dealer_id,
+                        'phone_number': self.phone_number,
+                        'customer_name': self.deliveryInfo.name,
+                        'dob': self.deliveryInfo.dob,
+                        'gender': self.deliveryInfo.gender,
+                        'email': self.deliveryInfo.email,
+                        'login_yes_id': '',
+                        'security_type': self.deliveryInfo.securityType,
+                        'security_id': self.deliveryInfo.securityId,
+                        'school_name': '',
+                        'school_code': '',
+                        'university_name': '',
+                        'dealer_code': self.dealer.dealer_code,
+                        'dealer_login_id': self.dealer.dealer_id,
 
-                        'plan_name'         : self.orderSummary.plan.planName,
-                        'plan_type'         : self.orderSummary.plan.planType,
-                        'product_bundle_id' : self.orderSummary.plan.mobilePlanId,
-                        'referral_code'     : self.deliveryInfo.referralCode,
-                        'addon_name'        : (self.orderSummary.addOn && self.orderSummary.addOn.addonName) ? self.orderSummary.addOn.addonName : '',
+                        'plan_name': self.orderSummary.plan.planName,
+                        'plan_type': self.orderSummary.plan.planType,
+                        'product_bundle_id': self.orderSummary.plan.mobilePlanId,
+                        'referral_code': self.deliveryInfo.referralCode,
+                        'addon_name': (self.orderSummary.addOn && self.orderSummary.addOn.addonName) ? self.orderSummary.addOn.addonName : '',
 
-                        'address_line'      : self.deliveryInfo.sanitize.address + ' ' + self.deliveryInfo.sanitize.addressMore,
-                        'city'              : self.deliveryInfo.city,
-                        'city_code'         : self.deliveryInfo.cityCode,
-                        'postal_code'       : self.deliveryInfo.postcode,
-                        'state'             : self.deliveryInfo.state,
-                        'state_code'        : self.deliveryInfo.stateCode,
-                        'country'           : 'Malaysia',
-                        'payment_method'    : self.paymentInfo.paymentMethod,
-                        'process_name'      : self.paymentInfo.processName,
-                        'amount'            : roundAmount(self.paymentInfo.amount, 2),
-                        'amount_sst'        : roundAmount(self.paymentInfo.sst, 2),
-                        'total_amount'      : roundAmount(self.upFontpayemtTotal, 2),
-                        'bank_code'         : self.paymentInfo.bankCode,
-                        'bank_name'         : self.paymentInfo.bankName,
-                        'card_number'       : self.paymentInfo.cardNumber,
-                        'card_type'         : self.paymentInfo.cardType,
-                        'name_on_card'      : self.paymentInfo.nameOnCard,
-                        'card_cvv'          : self.paymentInfo.cardCVV,
-                        'card_expiry_month' : self.paymentInfo.cardExpiryMonth,
-                        'card_expiry_year'  : self.paymentInfo.cardExpiryYear,
-                        'ippType'           : self.paymentInfo.ippType,
-                        'locale'            : self.apiLocale,
-                        'walletType'        : self.paymentInfo.walletType,
-                        'esim'              : self.eSIM,
-                        'applicationSource'  : "YOS"
+                        'address_line': self.deliveryInfo.sanitize.address + ' ' + self.deliveryInfo.sanitize.addressMore,
+                        'city': self.deliveryInfo.city,
+                        'city_code': self.deliveryInfo.cityCode,
+                        'postal_code': self.deliveryInfo.postcode,
+                        'state': self.deliveryInfo.state,
+                        'state_code': self.deliveryInfo.stateCode,
+                        'country': 'Malaysia',
+                        'payment_method': self.paymentInfo.paymentMethod,
+                        'process_name': self.paymentInfo.processName,
+                        'amount': roundAmount(self.paymentInfo.amount, 2),
+                        'amount_sst': roundAmount(self.paymentInfo.sst, 2),
+                        'total_amount': roundAmount(self.upFontpayemtTotal, 2),
+                        'bank_code': self.paymentInfo.bankCode,
+                        'bank_name': self.paymentInfo.bankName,
+                        'card_number': self.paymentInfo.cardNumber,
+                        'card_type': self.paymentInfo.cardType,
+                        'name_on_card': self.paymentInfo.nameOnCard,
+                        'card_cvv': self.paymentInfo.cardCVV,
+                        'card_expiry_month': self.paymentInfo.cardExpiryMonth,
+                        'card_expiry_year': self.paymentInfo.cardExpiryYear,
+                        'ippType': self.paymentInfo.ippType,
+                        'locale': self.apiLocale,
+                        'walletType': self.paymentInfo.walletType,
+                        'esim': self.eSIM,
+                        'applicationSource': "YOS"
                     };
-                    axios.post(apiEndpointURL + '/create-yos-order' + '?nonce='+yesObj.nonce, params)
+                    axios.post(apiEndpointURL + '/create-yos-order' + '?nonce=' + yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
                             self.orderResponse = data;
@@ -995,7 +1050,7 @@
                     toggleOverlay();
                     var self = this;
                     if (self.isTargetedPromo) {
-                        axios.post(apiEndpointURL + '/tp-url-check' + '?nonce='+yesObj.nonce, {
+                        axios.post(apiEndpointURL + '/tp-url-check' + '?nonce=' + yesObj.nonce, {
                                 'promo_id': self.tpMeta.promoID,
                                 'unique_id': self.tpMeta.userID
                             })
@@ -1020,7 +1075,7 @@
                 ajaxUpdateTPPurchasedFlag: function() {
                     var self = this;
                     if (self.isTargetedPromo) {
-                        axios.post(apiEndpointURL + '/tp-update-purchase' + '?nonce='+yesObj.nonce, {
+                        axios.post(apiEndpointURL + '/tp-update-purchase' + '?nonce=' + yesObj.nonce, {
                                 'promo_id': self.tpMeta.promoID,
                                 'unique_id': self.tpMeta.userID,
                                 'yos_order_id': self.orderResponse.orderNumber,
@@ -1105,7 +1160,9 @@
                 },
                 watchTenureChange: function(e) {
                     var self = this;
-                    var selectedTenure = self.maybankIPP.ippInstallments.filter(installment => { return installment.tenure == self.paymentInfo.ippType });
+                    var selectedTenure = self.maybankIPP.ippInstallments.filter(installment => {
+                        return installment.tenure == self.paymentInfo.ippType
+                    });
                     if (selectedTenure) {
                         selectedTenure = selectedTenure[0];
                         self.maybankIPP.ippInstallmentSelected = {
@@ -1124,7 +1181,9 @@
                 },
                 watchBankSelect: function(e) {
                     var self = this;
-                    var bankListSelected = self.fpxBankList.filter(bank => { return bank.bankCode == self.paymentInfo.bankCode; });
+                    var bankListSelected = self.fpxBankList.filter(bank => {
+                        return bank.bankCode == self.paymentInfo.bankCode;
+                    });
                     if (bankListSelected) {
                         self.paymentInfo.bankName = bankListSelected[0].bankName;
                     }
@@ -1154,8 +1213,8 @@
                         if (self.paymentInfo.bankCode.trim() == '' || self.paymentInfo.bankName.trim() == '') {
                             isFilled = false;
                         }
-                    }else if( paymentMethod == 'REVENUE_M_YOS' ) {
-                        if ( self.paymentInfo.walletType.trim() == '' ) {
+                    } else if (paymentMethod == 'REVENUE_M_YOS') {
+                        if (self.paymentInfo.walletType.trim() == '') {
                             isFilled = false;
                         }
                     }
@@ -1215,6 +1274,12 @@
         });
     });
 </script>
-
+<script>
+        var pageTitleElement = document.getElementsByClassName("rovingPageTitle");
+        // Add a click event listener to the element
+        pageTitleElement.addEventListener("click", function() {
+            location.reload();
+        });
+    </script>
 
 <?php include('footer-ywos.php'); ?>

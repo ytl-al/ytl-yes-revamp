@@ -386,7 +386,7 @@ $customerQRCodeScanned = false;
 					dataType:'json',
                     success: function (response) {
                         toggleOverlay(false);
-						console.log(response);
+						// console.log(response);
 						location.reload();
                     },
                     error: function (e) {

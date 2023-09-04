@@ -17,7 +17,7 @@ const apiEndpointURL = window.location.origin + '/wp-json/ywos/v1';
 
 
 $(document).ready(function() {
-    	if(window.location.pathname=='/ywos/delivery/'){
+	if(window.location.pathname=='/ywos/delivery/'){
         let backButton = document.querySelector('.back-btn');
         if (ywosLSData.meta.orderSummary.plan.eSim != true) {
             backButton.href  = '/ywos/verification';
@@ -28,13 +28,14 @@ $(document).ready(function() {
     //backbuttom upfront payment page
     if(window.location.pathname=='/ywos/sim-type/'){
         let backButton = document.querySelector('.back-btn');
-        if (ywosLSData.meta.customerDetails.upFrontPayment == 'true') {
-            backButton.href  = '/elevate/eligibility-fail-upfront';
-        } else {
+        if (ywosLSData.meta.customerDetails.upFrontPayment=="true" && ywosLSData.meta.orderSummary.plan.eSim != true) {
+            backButton.href  = '/ywos/sim-type';
+        } else if(ywosLSData.meta.orderSummary.plan.eSim != true) {
+            backButton.href  = '/ywos/verification';
+        }else{
             backButton.href  = '/ywos/sim-type';
         }
     }
-   
 
     $('.btn-buyplan').on('click', function() {
         var planID = $(this).attr('data-planid');
@@ -47,20 +48,20 @@ $(document).ready(function() {
     });
 
     $('.btn-buyInfinityPlan').on('click', function() {
-        var planID = $(this).attr('data-planid');
-        const planType = $(this).attr('data-planType');
-        if( planType == "mixed" ) {
-            const deviceType = $(this).parents('.layer-planDevice').find('.deviceType:radio:checked').val();
-            planID = $(this).parents('.layer-planDevice').find('.deviceType:radio:checked').attr('data-planid');
-            console.log(deviceType);
-            console.log(planID);
-            if( deviceType == 'installment' ) {
-                return elevate.buyPlan(planID);
-            }else if( deviceType == 'upfront' ) {
-                return ywos.buyBundlePlan(planID);
-            }
-        }
-        ywos.buyBundlePlan(planID);
+        var bundleid = $(this).attr('data-bundleid');
+        ywos.buyBundlePlan(bundleid);
+        // const planType = $(this).attr('data-planType');
+        // if( planType == "mixed" ) {
+        //     const deviceType = $(this).parents('.layer-planDevice').find('.deviceType:radio:checked').val();
+        //     planID = $(this).parents('.layer-planDevice').find('.deviceType:radio:checked').attr('data-planid');
+        //     console.log(deviceType);
+        //     console.log(planID);
+        //     if( deviceType == 'installment' ) {
+        //         return elevate.buyPlan(planID);
+        //     }else if( deviceType == 'upfront' ) {
+        //         return ywos.buyBundlePlan(planID);
+        //     }
+        // }
     });
 });
 
@@ -76,6 +77,7 @@ const ywos = {
         dc = url.searchParams.get('dc');
         duid = url.searchParams.get('duid');
         rc = url.searchParams.get('rc');
+        trxType = (url.searchParams.get('trx_type')) ?? null;
 
         var ywosLocalStorageData = ywosLSData;
         var storageData = {};
@@ -86,6 +88,7 @@ const ywos = {
         var url_string = window.location.href;
         var url = new URL(url_string);
         var refCode = '';
+
         if (url.searchParams.get('rc') != null) {
             refCode = url.searchParams.get('rc');
         } else if (url.searchParams.get('referralCode') != null) {
@@ -104,25 +107,27 @@ const ywos = {
             deviceID = planID;
             planID = '';
         }
+
         storageData = {
             'expiry': ywosCartExpiry,
             'sessionKey': sessionKey,
             'meta': {
+                'completedStep' : 0,
                 'planID': planID,
                 'sessionId': '',
                 'deviceID': deviceID,
                 'dealer': {
                     'dealer_code': dc,
                     'dealer_id': duid,
-                    'referral_code': rc
+                    'referral_code': rc,
                 }
             },
             'siteLang': siteLang,
             'isTargetedPromo': false,
             'tpMeta': {},
-            'type' : type
+            'type' : type,
+            'trxType': trxType
         };
-        
 
         if (refCode) {
             storageData.meta.refCode = refCode;
@@ -137,8 +142,12 @@ const ywos = {
             storageData.isTargetedPromo = true;
             storageData.tpMeta = tpMeta;
         }
-        ywosLocalStorageData = storageData;
 
+        if (trxType == 'roving') {
+            storageData.meta.completedStep = 2;
+        }
+
+        ywosLocalStorageData = storageData;
         localStorage.setItem(ywosLSName, JSON.stringify(ywosLocalStorageData));
     },
     redirectToCart: function() {
@@ -162,11 +171,17 @@ const ywos = {
                 pushAnalytics('impressions', pushData);
             },
             complete: function() {
-                self.redirectToCart();
+                var storageData = JSON.parse(localStorage.getItem(ywosLSName));
+                var trxType = storageData.trxType;
+                if (trxType == 'roving') {
+                    self.redirectToPage('roving-delivery');
+                } else {
+                    self.redirectToCart();
+                }
             }
         });
     },
-   mapSessionData: function(planData = '') {
+    mapSessionData: function(planData = '') {
 
         var planPriceBreakdown = [];
         var planDevicePriceBreakdown = [];
@@ -207,14 +222,6 @@ const ywos = {
         var yesElevate = JSON.parse(localStorage.getItem('yesElevate'));
         storageData.meta.loginType = 'guest';
         const ElevateDate = yesElevate.eligibility.dob;
-
-        // var day = ElevateDate.getDate();
-        // day = day < 10 ? "0" + day : day;
-        // var month = ElevateDate.getMonth() + 1;
-        // month = month < 10 ? "0" + month : month;
-        // var year = ElevateDate.getFullYear();
-        // const newDateFormate = day + "/" + month + "/" + year;
-        // console.log(newDateFormate);
 
 
         storageData.meta.customerDetails = {
@@ -314,17 +321,25 @@ const ywos = {
             }
         });
     },
-    checkExists: function() {
-        if (ywosLSData === null) {
+
+    checkExists: function(CheckLocalStorageData = false, curStep) {
+        if (CheckLocalStorageData) {
+            var ywosLocalStorageData =JSON.parse(localStorage.getItem('yesYWOS'));
+            if( ywosLocalStorageData !== null && typeof ywosLocalStorageData !== 'undefined' ) { 
+                this.lsData = ywosLocalStorageData;
+                this.lsData.meta.completedStep  = 4;
+                return true;
+            }
+        }else if(ywosLSData === null){
             return false;
         } else {
             this.lsData = ywosLSData;
             return true;
         }
     },
-    checkExpiryValid: function() {
-        if (ywosLSData !== null && typeof ywosLSData.expiry !== 'undefined') {
-            if (Date.now() > ywosLSData.expiry) {
+    checkExpiryValid: function(CheckLocalStorageData = false) {
+        if ((ywosLSData !== null && typeof ywosLSData.expiry !== 'undefined') || (CheckLocalStorageData && this.lsData !== null && typeof this.lsData.expiry !== 'undefined')) {
+            if ((Date.now() > ywosLSData?.expiry) && (!CheckLocalStorageData && (Date.now() > this.lsData.expiry))) {
                 return false;
             } else {
                 this.updateYWOSExpiry();
@@ -390,6 +405,45 @@ const ywos = {
         }
         this.redirectToPage('cart');
     },
+    checkStepRoving: function (currentStep) {
+        if (typeof this.lsData.meta.completedStep !== 'undefined') {
+            if (
+                // currentStep == 0 ||
+                // (this.lsData.meta.completedStep == 0 && currentStep == 0) ||
+                // (this.lsData.meta.completedStep == 0 && currentStep == 1) ||
+                (this.lsData.meta.completedStep == currentStep) ||
+                (this.lsData.meta.completedStep == currentStep - 1) ||
+                (this.lsData.meta.completedStep > currentStep)
+            ) {
+                return true;
+            } else if (this.lsData.meta.completedStep < currentStep) {
+                switch (this.lsData.meta.completedStep) {
+                    case 0:
+                        toPage = 'cart';
+                        break;
+                    case 1:
+                        toPage = 'verification';
+                        break;
+                    case 2:
+                        toPage = 'delivery';
+                        break;
+                    case 3:
+                        toPage = 'review';
+                        break;
+                    case 4:
+                        toPage = 'payment';
+                        break;
+                    default:
+                        toPage = 'cart';
+                }
+                (toPage != null) ? this.redirectToPage(toPage): '';
+                return false;
+            }
+        } else if (currentStep == 0) {
+            return true;
+        }
+        history.back();
+    },
     checkPurchaseCompleted: function(currentStep = 0) {
         if (
             typeof this.lsData.meta.purchaseCompleted != 'undefined' &&
@@ -403,12 +457,52 @@ const ywos = {
     redirectToPage: function(pageSlug) {
         window.location.href = window.location.origin + '/ywos/' + pageSlug;
     },
-    validateSession: function(curStep = 0) {
+    validateSession: function(curStep = 0, isSkipCart = false) {
         var isValid = true;
         if (!this.checkExists()) {
             console.log('Local storage data not found!');
             isValid = false;
         } else if (!this.checkExpiryValid()) {
+            alert(1);
+            console.log('Local storage data is expired!');
+            isValid = false;
+        } else if (!this.checkItems()) {
+            alert(2);
+            console.log('Plan ID is not found!');
+            isValid = false;
+        } else if (this.checkPurchaseCompleted(curStep)) {
+            alert(3);
+            console.log('Purchase has been completed!');
+            isValid = false;
+        } else if (!isSkipCart && !this.checkStep(curStep)) {
+            alert(4);
+            console.log('Previous step not yet completed!');
+            // isValid = false;
+            // return false;
+        } else if (isSkipCart) {
+            alert(5);
+            if (!this.checkStepRoving(curStep)) {
+                
+            }
+        }
+        
+        $('#main-vue').show();
+        if (!isValid) {
+            this.removeYWOSLSData();
+            return false;
+        } else {
+            // setTimeout(function() {
+            //     toggleOverlay(false);
+            // }, 500);
+            return true;
+        }
+    },
+    validateSessionRoving: function (curStep = 0, CheckLocalStorageData = false) {
+        var isValid = true;
+        if (!this.checkExists(CheckLocalStorageData)) {
+            console.log('Local storage data not found!');
+            isValid = false;
+        } else if (!this.checkExpiryValid(CheckLocalStorageData)) {
             console.log('Local storage data is expired!');
             isValid = false;
         } else if (!this.checkItems()) {
@@ -417,12 +511,10 @@ const ywos = {
         } else if (this.checkPurchaseCompleted(curStep)) {
             console.log('Purchase has been completed!');
             isValid = false;
-        } else if (!this.checkStep(curStep)) {
+        } else if (!this.checkStepRoving(curStep)) {
             console.log('Previous step not yet completed!');
-            // isValid = false;
-            // return false;
         }
-
+        
         $('#main-vue').show();
         if (!isValid) {
             this.removeYWOSLSData();

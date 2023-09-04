@@ -158,7 +158,7 @@
                             } else {
                                 toggleOverlay(false);
                                 $('#error').html("System error, please try again.");
-                                console.log(data);
+                                // console.log(data);
                             }
                         })
                         .catch((error) => {

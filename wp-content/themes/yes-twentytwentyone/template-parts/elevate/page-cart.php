@@ -1,7 +1,34 @@
 <?php require_once 'includes/header.php' ?>
+
 <style type="text/css">
     .nav-container .navbar { padding-top: 8px; padding-bottom: 8px; }
     .deviceContract-text{font-size: 14.5px !important;}
+    .eSIM {
+        background: #FFFFFF;
+        box-shadow: 1px 1px 20px 0px rgba(112, 144, 176, 0.25);
+        border-radius: 8px;
+        padding: 32px 32px 20px 20px;
+        gap: 10px;
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        color: #525252;
+        display: flex;
+        align-items: start;
+    }
+
+    .eSIM  p {
+        font-weight: 700 !important;
+        font-size: 12px !important;
+        line-height: 20px !important;
+        color: #525252 !important;
+        margin-bottom: 9px !important;
+    }
+    .eSIM  h6{
+     font-size: 20px;
+    font-weight: 700;
+    line-height: 20px;
+    color:#525252;
+    }
 </style>
 <div id="main-vue" style="display: none">
 <header class="page-header">
@@ -166,9 +193,41 @@
                                 </div>
                             </div>
                         </div>
-
-                        <a href="javascript:void(0)" @click="goNext" class="pink-btn-disable text-uppercase d-block" :class="allowSubmit?'pink-btn':'pink-btn-disable'">{{ renderText('checkout') }}</a>
+                        <!-- Model Notify Me STARTS -->
+                        <div class="modal fade" tabindex="-1" id="modal-notify">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Notify Me!</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="mb-3">Enter your email address to get notified on the stock availability of this phone. {{orderSummary.product.selected.name}}</p>
+                                    <?php echo do_shortcode('[Form id="10"]'); ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                <!-- Model Notify Me ENDS -->
+                    <div class="eSIM" v-if="(StockBalance == 0)">
+                        <img src="/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png" alt="...">
+                     <div>
+                      <h6>This device is temporarily out of stock. </h6>
+                      <p>Click below to be notified of when this device is available.</p>
+                      </div>
+                    </div>
+
+                         <!-- ----------- -->
+                           <div>
+                                <div v-if="(StockBalance == 0)">
+                                    <a href="javascript:void(0)" @Click="triggerModalNotify" class="pink-btn text-uppercase d-block" >{{ renderText('Notify_me') }}</a>
+                                </div>
+                                <div v-else>
+                                    <a href="javascript:void(0)" @click="goNext" class="pink-btn text-uppercase d-block" >{{ renderText('checkout') }}</a>
+                                </div>
+                           </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -197,6 +256,7 @@
         var pageCart = new Vue({
             el: '#main-vue',
             data: {
+                StockBalance:1,
                 elevateLSData: null,
                 productId: null,
                 isCartEmpty: false,
@@ -288,16 +348,19 @@
                     axios.get(apiEndpointURL_elevate + '/getProduct/?code=' + self.productId + '&nonce='+yesObj.nonce)
                         .then((response) => {
                             var data = response.data;
+                            
                             if (data.internetData == '∞') {
                                 data.internetData = 'Unlimited';
                             }
 
-                            var filteredBalance = data.images.filter((image) => { return data.colors[image.color][0].balance > 0; })
+                            var filteredBalance = data.images.filter((image) => { return data.colors[image.color][0].balance >= 0; })
                             data.images = filteredBalance;
 
+                            
                             data = self.updateLang(data);
 
                             self.orderSummary.product = data;
+                                self.StockBalance=data.selected.balance;
 
                             self.updatePlan();
                             $('#container-hasItem').show();
@@ -383,7 +446,9 @@
                 },
                 changeColor: function (color){
                     var self = this;
-
+                    // self.StockBalance
+                    // console.log(self.orderSummary.product.selected.balance);
+                    // alert(self.orderSummary.product.selected.balance);
                     $('.selectColorWrap .selected').removeClass('selected');
                     $('.selectColorWrap .color-'+color).addClass('selected');
                     self.orderSummary.orderDetail.color = color;
@@ -402,7 +467,8 @@
 
                     self.orderSummary.orderDetail.productCode = contract;
                     self.orderSummary.product.selected = self.selectedProduct(self.orderSummary.orderDetail.color,contract);
-
+                    self.StockBalance = self.orderSummary.product.selected.balance;
+                    
                     self.orderSummary.product = self.updateLang(self.orderSummary.product);
 
                     self.updateSummary();
@@ -484,7 +550,17 @@
 
                     elevate.lsData.analyticItems =  pushData;
                     elevate.updateElevateLSData();
-                }
+                },
+             triggerModalNotify: function(phoneModel='') {
+                
+                const modalBody = document.querySelector('.modal-body');
+                const paragraph = modalBody.querySelector('p.mb-3');
+                const DeviceName = paragraph.textContent.trim();
+                var  phoneModel = DeviceName.split('.').pop().trim();
+                var modalNotify = new bootstrap.Modal(document.getElementById('modal-notify'), {});
+                $('#wdform_3_element10').val(phoneModel);
+                modalNotify.show();
+            }
 
             }
         });

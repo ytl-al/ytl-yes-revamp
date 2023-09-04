@@ -1,14 +1,14 @@
 <style type="text/css">
-    .hero-banner {        
-    background: url(/wp-content/uploads/2023/05/esim-herobanner.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-color: #1b1d4a; 
-    height: 600px;
+    .hero-banner {
+        background: url(/wp-content/uploads/2023/05/esim-herobanner.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: #ff0082;
+        height: 405px;
     }
 
     .banner {
-        transform: translateY(50%);
+        transform: translateY(25%);
 
     }
 
@@ -23,26 +23,43 @@
         margin-bottom: 30px;
     }
 
-    .banner p {
-        font-family: 'Montserrat';
+    .banner h5 {
+        font-family: 'Open Sans', sans-serif;
         font-style: normal;
         font-weight: 500;
-        font-size: 30px;
+        font-size: 20px;
         text-align: left;
         max-width: 500px;
-        line-height: 34px;
+        line-height: 24px;
         letter-spacing: -0.02em;
-        margin-bottom: 40px;
+        margin-bottom: 15px;
         color: #FFFFFF;
+    }
+
+    .banner p {
+        font-family: 'Open Sans', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        text-align: left;
+        max-width: 500px;
+        line-height: 24px;
+        letter-spacing: -0.02em;
+        margin-bottom: 15px;
+        color: #FFFFFF;
+    }
+
+    #datatabs .nav-item {
+        padding: 0 1.5em;
     }
 
     @media only screen and (max-width: 768px) {
         .hero-banner {
             background: url(/wp-content/uploads/2023/05/eSIM-herobanner-mobile.png);
             background-size: cover;
-            background-color: #1b1d4a; 
-            height: 400px;
-            background-position: 20% 100% !important;
+            background-color: #ff0082;
+            height: 500px;
+            background-position: center !important;
         }
 
         .banner {
@@ -54,13 +71,23 @@
             font-size: 30px;
             line-height: 40px;
             margin-bottom: 5px;
+            text-align: center
+        }
+
+        .banner h5 {
+            letter-spacing: -0.02em;
+            font-size: 16px;
+            margin-bottom: 10px;
+            line-height: 30px;
+            text-align: center;
         }
 
         .banner p {
             letter-spacing: -0.02em;
-            font-size: 17px;
-            margin-bottom: 15px;
-            line-height: 34px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            line-height: 30px;
+            text-align: center;
         }
 
         .blue-arrow {
@@ -84,10 +111,19 @@
         .device_img {
             min-height: 200px !important;
         }
+
         #datatabs {
-        padding-bottom: 20px;
-         height: auto;
-       }
+            padding-bottom: 20px;
+            height: auto;
+        }
+
+        #datatabs .nav-item {
+            padding: 0 0.5em;
+        }
+
+        #datatabs .nav-tabs .nav-link {
+            padding: 0.5rem 0.5rem;
+        }
     }
 
     .pink-btn {
@@ -112,7 +148,7 @@
         line-height: 47px;
         text-align: center;
         letter-spacing: -0.02em;
-        color: #1A1E47;
+        color: #000000;
     }
 
     .e-sim p {
@@ -120,7 +156,7 @@
         font-size: 16px;
         line-height: 24px;
         text-align: center;
-        color: #2B2B2B;
+        color: #000000;
     }
 
     .e-sim {
@@ -146,7 +182,6 @@
         font-weight: 800;
         font-size: 24px;
         line-height: 30px;
-        text-transform: capitalize;
         color: #000000;
     }
 
@@ -246,7 +281,9 @@
         font-weight: 800;
     }
 
-    #easy-steps .content {margin-left: 40px;}
+    #easy-steps .content {
+        margin-left: 40px;
+    }
 
     #easy-steps h3 {
         font-size: 18px;
@@ -306,7 +343,7 @@
     }
 
     #databck-rewards h1 {
-        color: #1A1E47;
+        color: #000000;
         font-size: 39px;
         line-height: 47px;
         font-weight: 800;
@@ -369,8 +406,9 @@
         padding: 0px 32px;
         text-align: center;
         text-transform: capitalize;
-        color: #1A1E47;
+        color: #000000;
     }
+
     #datatabs {
         padding: 50px 0;
         background: #EFEFEF;
@@ -387,8 +425,9 @@
         line-height: 47px;
         text-align: center;
         letter-spacing: -0.02em;
-        color: #1A1E47;
+        color: #000000;
     }
+
     .e-sim-box {
         background: #FFFFFF;
         box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
@@ -397,12 +436,13 @@
         margin: 10px;
         height: 430px;
     }
+
     .e-sim-box span {
 
         background: #1A1E47;
-        font-family: 'Montserrat';        
+        font-family: 'Montserrat';
         font-size: 16px;
-        font-weight: 800;
+        font-weight: 700;
         color: #fff;
         padding: 2px 9px;
         margin-right: 10px;
@@ -454,9 +494,7 @@
     #datatabs .nav-tabs {
         border-bottom: none;
     }
-    #datatabs .nav-item {
-    padding: 0 1.5em;
-}
+
 
     #datatabs .nav-tabs .nav-link {
         border: none;
@@ -526,16 +564,21 @@
         display: none;
     }
 
+    #faq-section .accordion-body p {
+        text-align: left;
+    }
+
     @media only screen and (max-width: 1024px) {
         .banner {
-            transform: translateY(30%);
+            transform: translateY(20%);
         }
     }
 
     .devices-supported {
         max-width: 1000px;
-        margin: 1.75rem auto;
-        padding: 50px 0; display: none;
+        margin: 0 auto;
+        padding: 0px 0;
+        display: none;
     }
 
     .devices-supported h5 {
@@ -547,19 +590,19 @@
         line-height: 47px;
         text-align: center;
         letter-spacing: -0.02em;
-        color: #1A1E47;
+        color: #000000;
     }
 
     #myTabContent {
         padding: 40px;
     }
 
-    .devices-supported ul {
+    .devices-supported .nav-pills ul {
         list-style: none;
         padding: 0;
     }
 
-    .devices-supported li {
+    .devices-supported .nav-pills li {
         font-family: 'Open Sans';
         font-style: normal;
         font-weight: 400;
@@ -567,6 +610,22 @@
         line-height: 48px;
         color: #000000;
         margin: 0 30px;
+    }
+
+    .devices-supported .tab-pane ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .devices-supported .tab-pane li {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 48px;
+        color: #000000;
+        margin: 0 8px;
     }
 
     .devices-supported .bottom-content {
@@ -648,20 +707,22 @@
     }
 
     .devices-supported .nav-tabs .nav-link.active {
-        color: #495057;
+        color: #000000;
         background-color: transparent;
         border-bottom: 3px solid #ff0084;
+        border-radius: 0;
     }
 
     .devices-supported .nav-tabs .nav-item.show .nav-link {
-        color: #495057;
+        color: #000000;
         background-color: transparent;
         border-bottom: 3px solid #ff0084;
+        border-radius: 0;
     }
 
     /*  Rahim CSS*/
 
-       /* @media only screen and (max-width: 560px) {
+    /* @media only screen and (max-width: 560px) {
         #databck-rewards {
             padding-top: 0px;
             padding-bottom: 0px;
@@ -748,10 +809,35 @@
 
     /* New CSS start */
     @media only screen and (max-width: 768px) {
-       .devices-supported h5{font-size: 28px; line-height: 36px; padding: 20px 30px;}
-       .devices-supported li {margin: 15px 0px;font-size: 14px;line-height: 26px; }
-       .dropdown-toggle {width: 100%;}
-        #datatabs h1{font-size: 28px; line-height: 36px;}
+        .devices-supported h5 {
+            font-size: 28px;
+            line-height: 36px;
+            padding: 20px 30px;
+        }
+
+        .devices-supported li {
+            margin: 15px 0px;
+            font-size: 14px;
+            line-height: 26px;
+        }
+
+        .dropdown-toggle {
+            width: 100%;
+        }
+
+        #datatabs h1 {
+            font-size: 28px;
+            line-height: 36px;
+        }
+
+        #myTabContent {
+            padding: 30px;
+        }
+
+        #easy-steps .content {
+            margin-left: 0px;
+        }
+
     }
 
     @media only screen and (max-width: 560px) {
@@ -840,40 +926,42 @@
 
     /* New CSS End */
 
-.tabs-to-dropdown .nav-pills li:not(:last-child) {
-  margin-right: 30px;
-}
+    .tabs-to-dropdown .nav-pills li:not(:last-child) {
+        margin-right: 30px;
+    }
 
-.tabs-to-dropdown .tab-content .container-fluid {
-  max-width: 1250px;
-  padding-top: 70px;
-  padding-bottom: 70px;
-}
+    .tabs-to-dropdown .tab-content .container-fluid {
+        max-width: 1250px;
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
 
-.tabs-to-dropdown .dropdown-menu {
-  border: none;
-  box-shadow: 0px 5px 14px rgba(0, 0, 0, 0.08);
-}
+    .tabs-to-dropdown .dropdown-menu {
+        border: none;
+        box-shadow: 0px 5px 14px rgba(0, 0, 0, 0.08);
+        min-width: 100%;
+    }
 
-.tabs-to-dropdown .dropdown-item {
-  padding: 14px 28px;
-}
+    .tabs-to-dropdown .dropdown-item {
+        padding: 14px 28px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
 
-.tabs-to-dropdown .dropdown-item:active {
-  color: var(--white);
-}
-.dropdown.d-md-none {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin: 0 30px;
-    text-align: center;
-}
+    .tabs-to-dropdown .dropdown-item:active {
+        color: var(--white);
+    }
 
-@media (min-width: 1280px) {
-  .tabs-to-dropdown .nav-wrapper {
-    padding: 15px 30px;
-  }
-}
+    .dropdown.d-md-none {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        margin: 0 30px;
+        text-align: center;
+    }
 
-    
+    @media (min-width: 1280px) {
+        .tabs-to-dropdown .nav-wrapper {
+            padding: 15px 30px;
+        }
+    }
 </style>

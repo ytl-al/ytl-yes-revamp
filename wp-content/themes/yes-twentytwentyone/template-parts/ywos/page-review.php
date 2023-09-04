@@ -14,9 +14,9 @@
                 <li ui-sref="firstStep" class="completed">
                     <span>1. {{ renderText('strVerification') }}</span>
                 </li>
-                <!-- <li ui-sref="secondStep" class="completed">
+                <li ui-sref="secondStep" class="completed">
                     <span>2. {{ renderText('strSelectSimType') }}</span>
-                </li> -->
+                </li>
                 <li ui-sref="secondStep" class="completed">
                     <span>3. {{ renderText('strDelivery') }}</span>
                 </li>
@@ -86,8 +86,26 @@
                     <div class="accordion" id="cart-accordion">
                         <div class="packagebox mb-3">
                             <div class="row">
-                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="orderSummary.plan.planType == 'postpaid'">
-                                    <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid" alt="" />
+                            <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="orderSummary.plan.planType == 'postpaid' && ywos?.lsData?.meta.planID != '1304' && ywos?.lsData?.meta.planID != '1306' && ywos?.lsData?.meta.planID != '1308' && ywos?.lsData?.meta.planID != '1310' && ywos?.lsData?.meta.planID != '1313' && ywos?.lsData?.meta.planID != '1315'  ">
+                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid" alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="ywos?.lsData?.meta.planID == '1304'">
+                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/08/Xiaomi-2-1-1.png" class="img-fluid m-auto" alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="ywos?.lsData?.meta.planID == '1306'">
+                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/08/Xiaomi-2-1.jpg" class="img-fluid m-auto" alt="" />
+                                </div>
+								 <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="ywos?.lsData?.meta.planID == '1308'">
+                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/08/wirelessbroadband-thumbnail.png" class="img-fluid m-auto" alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="ywos?.lsData?.meta.planID == '1310'">
+                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/08/wirelessbroadband-flexi-thumbnail.png" class="img-fluid m-auto" alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="ywos?.lsData?.meta.planID == '1313'">
+                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/08/Xiaomi-2-1-5.png" class="img-fluid m-auto" alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="ywos?.lsData?.meta.planID == '1315'">
+                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/08/Xiaomi-2-1-5.png" class="img-fluid m-auto" alt="" />
                                 </div>
                                 <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center" v-if="orderSummary.plan.planType == 'prepaid'">
                                     <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid" alt="" />
