@@ -158,7 +158,7 @@
                                         <h3>RM{{ selectedPlanData.totalAmount }}</h3>
                                     </div>
                                 </div>
-                                <div class="monthly mb-4">
+                                <div class="monthly mb-4 d-none">
                                     <div class="row mt-2">
                                         <div class="col-6 text-capitalize">
                                             <p>{{deviceData.device_name}} - {{selectedPlanData.color_name}}</p>
