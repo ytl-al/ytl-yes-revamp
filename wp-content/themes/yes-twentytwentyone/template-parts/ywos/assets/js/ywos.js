@@ -17,9 +17,18 @@ const apiEndpointURL = window.location.origin + '/wp-json/ywos/v1';
 
 
 $(document).ready(function() {
-    if(window.location.pathname=='/ywos/delivery/'){
+	if(window.location.pathname=='/ywos/delivery/'){
         let backButton = document.querySelector('.back-btn');
-        if ( ywosLSData.meta.customerDetails.upFrontPayment=="true" && ywosLSData.meta.orderSummary.plan.eSim != true) {
+        if (ywosLSData.meta.orderSummary.plan.eSim != true) {
+            backButton.href  = '/ywos/verification';
+        } else {
+            backButton.href  = '/ywos/cart';
+        }
+    }
+    //backbuttom upfront payment page
+    if(window.location.pathname=='/ywos/sim-type/'){
+        let backButton = document.querySelector('.back-btn');
+        if (ywosLSData.meta.customerDetails.upFrontPayment=="true" && ywosLSData.meta.orderSummary.plan.eSim != true) {
             backButton.href  = '/ywos/sim-type';
         } else if(ywosLSData.meta.orderSummary.plan.eSim != true) {
             backButton.href  = '/ywos/verification';
