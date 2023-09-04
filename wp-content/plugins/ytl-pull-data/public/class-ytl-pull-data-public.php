@@ -429,8 +429,8 @@ class Ytl_Pull_Data_Public
 		$this->ra_reg_get_auth_token_new();
 		$this->ra_reg_generate_otp_for_guest_login_new();
 		$this->ra_new_reg_guest_otp();
-		$this->ra_create_staing_order();
-		$this->ra_validate_staing_order();
+		$this->ra_create_staging_order();
+		$this->ra_validate_staging_order();
 	}
 
 	public function ra_reg_add_to_cart()
@@ -2111,7 +2111,7 @@ class Ytl_Pull_Data_Public
 		return new WP_Error('error_validating_guest_login', "There's an error in validating login.", array('status' => 400));
 	}
 
-	public function ra_create_staing_order()
+	public function ra_create_staging_order()
 	{
 
 		register_rest_route(
@@ -2226,7 +2226,7 @@ class Ytl_Pull_Data_Public
 		return new WP_Error('error_creating_yos_order', "There's an error in creating Roving order.", array('status' => 400));
 	}
 
-	public function ra_validate_staing_order()
+	public function ra_validate_staging_order()
 	{
 
 		register_rest_route(
