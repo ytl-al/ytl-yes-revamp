@@ -20,7 +20,8 @@
         $('#heading-titleCheckout').html(getLayoutTranslation('titleCheckout', layoutText));
         $('#span-strBackTo').html(getLayoutTranslation('strBackTo', layoutText));
 
-        var backPageID = "<?php echo $back_page_id ?>";
+        var backPageID = "<?php if(isset($back_page_id)) echo $back_page_id; ?>";
+        // console.log(backPageID);
         var backPageStrID = '';
         switch (backPageID) {
             case 'cart':

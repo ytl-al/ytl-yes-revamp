@@ -256,7 +256,7 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
-                currentStep: 4,
+                currentStep: 3,
                 simType: '',
                 upFrontPayment: 'fasle',
                 eSimSupportPlan: '',
@@ -430,10 +430,11 @@
                     },
 
                     strBtnPayNow: {
-                        'en-US': 'Next',
-                        'ms-MY': 'Next',
-                        'zh-hans': 'Next'
-                    }
+                        'en-US': 'Create Order',
+                        'ms-MY': 'Cipta Pesanan',
+                        'zh-hans': 'Create Order'
+                    }, 
+                    errorCreateOrder: { 'en-US': "There's an error in creating your order.<br />Please try again later.", 'ms-MY': 'Terdapat ralat dalam membuat pesanan.<br />Sila cuba lagi kemudian.', 'zh-hans': "There's an error in creating your order.<br />Please try again later." },
                 },
                 curURL: "<?php echo get_site_url(); ?>"
             },
@@ -452,7 +453,7 @@
                         self.updateData();
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
                         self.upFrontPayment = ywos.lsData.meta.customerDetails.upFrontPayment;
-                        self.simType = ywos.lsData.meta.orderSummary.plan.eSim.toString();
+                        self.simType = (ywos.lsData.meta.orderSummary.plan.eSim) ? ywos.lsData.meta.orderSummary.plan.eSim.toString() : 'physical';
                         self.eSimSupportPlan = ywos.lsData.meta.orderSummary.plan.eSim;
 
                         toggleOverlay(false);
@@ -497,7 +498,7 @@
                         'bundleMapId'   : orderSummary.plan.mobilePlanId,
                         'referralCode'  : deliveryInfo.referralCode,
                         'addonName'     : (deliveryInfo.addOn && deliveryInfo.addOn.addonName) ? deliveryInfo.addOn.addonName : '',
-                        'esim'          : self.simType,
+                        'esim'          : false,
                         'emailPaymentUrl': self.curURL + '/ywos/roving-customer-review/?orderId=$$PARAM$$',
                         'addressLine1'  : deliveryInfo.address,
                         'addressLine2'  : deliveryInfo.addressMore,
@@ -518,11 +519,16 @@
                     axios.post(apiEndpointURL + '/create-ywos-roving-order' + '?nonce=' + yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
-                            self.validateReview();
+                            if(data.responseCode==0){
+                                // self.validateReview();
+                                ywos.redirectToPage('roving-thank-you');
+                            }else{
+                                errorMsg = self.renderText('errorCreateOrder');
+                            }
+                            
                         })
                         .catch((error) => {
                             var response = error.response;
-                            console.log(response);
                             if (response != '') {
                                 var data = response.data;
                                 var errorMsg = '';
@@ -554,13 +560,13 @@
               
                 validateReview: function() {
                     var self = this;
-                    toggleOverlay();
-
+                    toggleOverlay()
                     ywos.lsData.meta.completedStep = self.currentStep;
                     ywos.lsData.meta.agree = self.agree;
                     ywos.updateYWOSLSData();
                     self.ajaxCreateStagingYOSOrder();
-                    ywos.redirectToPage('thank-you');
+                    
+                    // ywos.redirectToPage('thank-you');
                 },
                 watchSubmit: function() {
                     var self = this;

@@ -301,24 +301,87 @@
   					addOn: null
   				},
   				selectOptions: {
-  					states: [
-						{ 'stateCode': 'JHR', 'value': 'JOHOR', 'name': 'Johor' },
-  						{ 'stateCode': 'KDH', 'value': 'KEDAH', 'name': 'Kedah' },
-  						{ 'stateCode': 'KTN', 'value': 'KELANTAN', 'name': 'Kelantan' },
-  						{ 'stateCode': 'MLK', 'value': 'MELAKA', 'name': 'Melaka' },
-  						{ 'stateCode': 'NSN', 'value': 'NEGERI SEMBILAN', 'name': 'Negeri Sembilan' },
-  						{ 'stateCode': 'PHG', 'value': 'PAHANG', 'name': 'Pahang' },
-  						{ 'stateCode': 'PNG', 'value': 'PULAU PINANG', 'name': 'Pulau Pinang' },
-  						{ 'stateCode': 'PRK', 'value': 'PERAK', 'name': 'Perak' },
-  						{ 'stateCode': 'PLS', 'value': 'PERLIS', 'name': 'Perlis' },
-  						{ 'stateCode': 'SBH', 'value': 'SABAH', 'name': 'Sabah' },
-  						{ 'stateCode': 'SRW', 'value': 'SARAWAK', 'name': 'Sarawak' },
-  						{ 'stateCode': 'SGR', 'value': 'SELANGOR', 'name': 'Selangor' },
-  						{ 'stateCode': 'TRG', 'value': 'TERENGGANU', 'name': 'Terengganu' },
-  						{ 'stateCode': 'KUL', 'value': 'WILAYAH PERSEKUTUAN-KUALA LUMPUR', 'name': 'Wilayah Persekutuan Kuala Lumpur' },
-  						{ 'stateCode': 'PJY', 'value': 'PUTRAJAYA', 'name': 'Wilayah Persekutuan Putrajaya' },
-  						{ 'stateCode': 'LBN', 'value': 'LABUAN', 'name': 'Wilayah Persekutuan Labuan' }
-  					],
+					states: [{
+                            'stateCode': 'JHR',
+                            'value': 'JOHOR',
+                            'name': 'Johor'
+                        },
+                        {
+                            'stateCode': 'KDH',
+                            'value': 'KEDAH',
+                            'name': 'Kedah'
+                        },
+                        {
+                            'stateCode': 'KTN',
+                            'value': 'KELANTAN',
+                            'name': 'Kelantan'
+                        },
+                        {
+                            'stateCode': 'MLK',
+                            'value': 'MELAKA',
+                            'name': 'Melaka'
+                        },
+                        {
+                            'stateCode': 'NSN',
+                            'value': 'NEGERI SEMBILAN',
+                            'name': 'Negeri Sembilan'
+                        },
+                        {
+                            'stateCode': 'PHG',
+                            'value': 'PAHANG',
+                            'name': 'Pahang'
+                        },
+                        {
+                            'stateCode': 'PNG',
+                            'value': 'PULAU PINANG',
+                            'name': 'Pulau Pinang'
+                        },
+                        {
+                            'stateCode': 'PRK',
+                            'value': 'PERAK',
+                            'name': 'Perak'
+                        },
+                        {
+                            'stateCode': 'PLS',
+                            'value': 'PERLIS',
+                            'name': 'Perlis'
+                        },
+                        {
+                            'stateCode': 'SBH',
+                            'value': 'SABAH',
+                            'name': 'Sabah'
+                        },
+                        {
+                            'stateCode': 'SRW',
+                            'value': 'SARAWAK',
+                            'name': 'Sarawak'
+                        },
+                        {
+                            'stateCode': 'SGR',
+                            'value': 'SELANGOR',
+                            'name': 'Selangor'
+                        },
+                        {
+                            'stateCode': 'TRG',
+                            'value': 'TERENGGANU',
+                            'name': 'Terengganu'
+                        },
+                        {
+                            'stateCode': 'KUL',
+                            'value': 'WILAYAH PERSEKUTUAN-KUALA LUMPUR',
+                            'name': 'Wilayah Persekutuan Kuala Lumpur'
+                        },
+                        {
+                            'stateCode': 'PJY',
+                            'value': 'PUTRAJAYA',
+                            'name': 'Wilayah Persekutuan Putrajaya'
+                        },
+                        {
+                            'stateCode': 'LBN',
+                            'value': 'LABUAN',
+                            'name': 'Wilayah Persekutuan Labuan'
+                        }
+                    ],
   					cities: []
   				},
   				customerDetails: {

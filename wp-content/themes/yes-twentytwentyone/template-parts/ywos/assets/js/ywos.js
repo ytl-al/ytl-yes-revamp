@@ -39,20 +39,20 @@ $(document).ready(function() {
     });
 
     $('.btn-buyInfinityPlan').on('click', function() {
-        var planID = $(this).attr('data-planid');
-        const planType = $(this).attr('data-planType');
-        if( planType == "mixed" ) {
-            const deviceType = $(this).parents('.layer-planDevice').find('.deviceType:radio:checked').val();
-            planID = $(this).parents('.layer-planDevice').find('.deviceType:radio:checked').attr('data-planid');
-            console.log(deviceType);
-            console.log(planID);
-            if( deviceType == 'installment' ) {
-                return elevate.buyPlan(planID);
-            }else if( deviceType == 'upfront' ) {
-                return ywos.buyBundlePlan(planID);
-            }
-        }
-        ywos.buyBundlePlan(planID);
+        var bundleid = $(this).attr('data-bundleid');
+        ywos.buyBundlePlan(bundleid);
+        // const planType = $(this).attr('data-planType');
+        // if( planType == "mixed" ) {
+        //     const deviceType = $(this).parents('.layer-planDevice').find('.deviceType:radio:checked').val();
+        //     planID = $(this).parents('.layer-planDevice').find('.deviceType:radio:checked').attr('data-planid');
+        //     console.log(deviceType);
+        //     console.log(planID);
+        //     if( deviceType == 'installment' ) {
+        //         return elevate.buyPlan(planID);
+        //     }else if( deviceType == 'upfront' ) {
+        //         return ywos.buyBundlePlan(planID);
+        //     }
+        // }
     });
 });
 
@@ -68,7 +68,6 @@ const ywos = {
         dc = url.searchParams.get('dc');
         duid = url.searchParams.get('duid');
         rc = url.searchParams.get('rc');
-        dt = (url.searchParams.get('dt') ?? null);
         trxType = (url.searchParams.get('trx_type')) ?? null;
 
         var ywosLocalStorageData = ywosLSData;
@@ -104,12 +103,12 @@ const ywos = {
             'expiry': ywosCartExpiry,
             'sessionKey': sessionKey,
             'meta': {
+                'completedStep' : 0,
                 'planID': planID,
                 'sessionId': '',
                 'deviceID': deviceID,
                 'dealer': {
                     'dealer_code': dc,
-                    'dealer_type': dt, 
                     'dealer_id': duid,
                     'referral_code': rc,
                 }
@@ -140,7 +139,6 @@ const ywos = {
         }
 
         ywosLocalStorageData = storageData;
-
         localStorage.setItem(ywosLSName, JSON.stringify(ywosLocalStorageData));
     },
     redirectToCart: function() {
@@ -215,6 +213,7 @@ const ywos = {
         var yesElevate = JSON.parse(localStorage.getItem('yesElevate'));
         storageData.meta.loginType = 'guest';
         const ElevateDate = yesElevate.eligibility.dob;
+
 
         storageData.meta.customerDetails = {
             'securityType' : 'nric',
@@ -313,17 +312,25 @@ const ywos = {
             }
         });
     },
-    checkExists: function() {
-        if (ywosLSData === null) {
+
+    checkExists: function(CheckLocalStorageData = false, curStep) {
+        if (CheckLocalStorageData) {
+            var ywosLocalStorageData =JSON.parse(localStorage.getItem('yesYWOS'));
+            if( ywosLocalStorageData !== null && typeof ywosLocalStorageData !== 'undefined' ) { 
+                this.lsData = ywosLocalStorageData;
+                this.lsData.meta.completedStep  = 4;
+                return true;
+            }
+        }else if(ywosLSData === null){
             return false;
         } else {
             this.lsData = ywosLSData;
             return true;
         }
     },
-    checkExpiryValid: function() {
-        if (ywosLSData !== null && typeof ywosLSData.expiry !== 'undefined') {
-            if (Date.now() > ywosLSData.expiry) {
+    checkExpiryValid: function(CheckLocalStorageData = false) {
+        if ((ywosLSData !== null && typeof ywosLSData.expiry !== 'undefined') || (CheckLocalStorageData && this.lsData !== null && typeof this.lsData.expiry !== 'undefined')) {
+            if ((Date.now() > ywosLSData?.expiry) && (!CheckLocalStorageData && (Date.now() > this.lsData.expiry))) {
                 return false;
             } else {
                 this.updateYWOSExpiry();
@@ -414,6 +421,9 @@ const ywos = {
                     case 3:
                         toPage = 'review';
                         break;
+                    case 4:
+                        toPage = 'payment';
+                        break;
                     default:
                         toPage = 'cart';
                 }
@@ -444,24 +454,29 @@ const ywos = {
             console.log('Local storage data not found!');
             isValid = false;
         } else if (!this.checkExpiryValid()) {
+            alert(1);
             console.log('Local storage data is expired!');
             isValid = false;
         } else if (!this.checkItems()) {
+            alert(2);
             console.log('Plan ID is not found!');
             isValid = false;
         } else if (this.checkPurchaseCompleted(curStep)) {
+            alert(3);
             console.log('Purchase has been completed!');
             isValid = false;
         } else if (!isSkipCart && !this.checkStep(curStep)) {
+            alert(4);
             console.log('Previous step not yet completed!');
             // isValid = false;
             // return false;
         } else if (isSkipCart) {
+            alert(5);
             if (!this.checkStepRoving(curStep)) {
-
+                
             }
         }
-
+        
         $('#main-vue').show();
         if (!isValid) {
             this.removeYWOSLSData();
@@ -473,12 +488,12 @@ const ywos = {
             return true;
         }
     },
-    validateSessionRoving: function (curStep = 0) {
+    validateSessionRoving: function (curStep = 0, CheckLocalStorageData = false) {
         var isValid = true;
-        if (!this.checkExists()) {
+        if (!this.checkExists(CheckLocalStorageData)) {
             console.log('Local storage data not found!');
             isValid = false;
-        } else if (!this.checkExpiryValid()) {
+        } else if (!this.checkExpiryValid(CheckLocalStorageData)) {
             console.log('Local storage data is expired!');
             isValid = false;
         } else if (!this.checkItems()) {
@@ -490,7 +505,7 @@ const ywos = {
         } else if (!this.checkStepRoving(curStep)) {
             console.log('Previous step not yet completed!');
         }
-
+        
         $('#main-vue').show();
         if (!isValid) {
             this.removeYWOSLSData();

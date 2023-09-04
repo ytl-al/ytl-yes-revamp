@@ -186,9 +186,6 @@ class Ytl_Pull_Data_Public
 	 */
 	private $path_generate_otp_for_guest_login;
 
-
-
-	
 	/**
 	 * The api path to validate the guest login credentials.
 	 *
@@ -234,12 +231,12 @@ class Ytl_Pull_Data_Public
 	 */
 	private $path_create_yos_order_and_payment;
 
-		/**
-	 * The api path to record order with payment and addons.
+	/**
+	 * The api path to check payment status.
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $path_create_yos_order_and_payment		The api path to record order with payment and addons.
+	 * @var      string    $path_create_yos_order_and_payment_esim		The api path to check payment status.
 	 */
 	private $path_create_yos_order_and_payment_esim;
 	/**
@@ -287,7 +284,6 @@ class Ytl_Pull_Data_Public
 	 * @access   private
 	 * @var      string   
 	 */
-
 	private $path_create_roving_staging_order;
 
 	/**
@@ -299,18 +295,16 @@ class Ytl_Pull_Data_Public
 	 */
 
 
+	private $path_validate_roving_staging_order;
 
-	 private $path_validate_roving_staging_order;
+	/**
+	 * The api path to auth.
+	 *
+	 * @since    1.1.1
+	 * @access   private
+	 * @var      string   
+	 */
 
-	 /**
-	  * The api path to auth.
-	  *
-	  * @since    1.1.1
-	  * @access   private
-	  * @var      string   
-	  */
- 
- 
 
 	private $get_all_plans_with_addons_path;
 
@@ -323,7 +317,6 @@ class Ytl_Pull_Data_Public
 	 */
 	public function __construct($plugin_name, $version, $prefix)
 	{
-
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 		$this->prefix = $prefix;
@@ -345,11 +338,13 @@ class Ytl_Pull_Data_Public
 		$this->path_get_fpx_bank_list = '/mobileyos/mobile/ws/v1/json/getFpxBankList';
 		$this->path_create_yos_order_and_payment = '/mobileyos/mobile/ws/v1/json/createYOSOrderAndPaymentWithAddonAndReloads';
 		$this->path_create_yos_order_and_payment_esim = '/mobileyos/mobile/ws/v1/json/createEsimOrderAndPaymentWithAddonAndReloads';
-		$this->path_check_order_payment_status = '/mobileyos/mobile/ws/v1/json/orderPaymentStatus';
-		$this->path_get_rm_wallet_merchant = '/mobileyos/mobile/ws/v1/json/getRMEwalletList';
-		$this->path_get_ipp_tenure_details = '/mobileyos/mobile/ws/v1/json/getIPPTenureDetails';
-		$this->path_get_ipp_monthly_installment = '/mobileyos/mobile/ws/v1/json/getIPPMonthlyInstalment';
+		$this->path_check_order_payment_status 	 = '/mobileyos/mobile/ws/v1/json/orderPaymentStatus';
+		$this->path_get_rm_wallet_merchant 	 = '/mobileyos/mobile/ws/v1/json/getRMEwalletList';
+		$this->path_get_ipp_tenure_details		 = '/mobileyos/mobile/ws/v1/json/getIPPTenureDetails';
+		$this->path_get_ipp_monthly_installment  = '/mobileyos/mobile/ws/v1/json/getIPPMonthlyInstalment';
 		$this->get_all_plans_with_addons_path = '/mobileyos/mobile/ws/v1/json/getAllPlansWithAddons';
+		$this->path_create_roving_staging_order = '/mobileyos/mobile/ws/v1/json/createStagingYosOrder';
+		$this->path_validate_roving_staging_order = '/mobileyos/mobile/ws/v1/json/validateAndFetchStagingYosOrder';
 
 
 		$ytlpd_options = get_option($this->prefix . "settings");
@@ -357,7 +352,7 @@ class Ytl_Pull_Data_Public
 		$this->api_request_id = (!empty($ytlpd_options['ytlpd_api_request_id'])) ? $ytlpd_options['ytlpd_api_request_id'] : '';
 		$this->api_authorization_key = (!empty($ytlpd_options['ytlpd_api_authorization_key'])) ? $ytlpd_options['ytlpd_api_authorization_key'] : '';
 		$this->path_create_roving_staging_order = '/mobileyos/mobile/ws/v1/json/createStagingYosOrder';
-		$this->path_validate_roving_staging_order='/mobileyos/mobile/ws/v1/json/validateAndFetchStagingYosOrder';
+		$this->path_validate_roving_staging_order = '/mobileyos/mobile/ws/v1/json/validateAndFetchStagingYosOrder';
 	}
 
 	/**
@@ -441,11 +436,14 @@ class Ytl_Pull_Data_Public
 	public function ra_reg_add_to_cart()
 	{
 
-		register_rest_route('ywos/v1', 'add-to-cart', array(
-			'methods' => 'POST',
-			'callback' => array($this, 'ra_add_to_cart'),
-			'permission_callback' => '__return_true'
-		)
+		register_rest_route(
+			'ywos/v1',
+			'add-to-cart',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'ra_add_to_cart'),
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
 
@@ -475,30 +473,32 @@ class Ytl_Pull_Data_Public
 	public function ra_reg_get_plan_by_id()
 	{
 
-		register_rest_route('ywos/v1', '/get-plan-by-id/(?P<plan_id>\d+)', array(
-			'methods' => 'GET',
-			'callback' => array($this, 'get_plan_by_id'),
-			'args' => array(
-				'plan_id' => array(
-					'validate_callback' => function ($param, $request, $key) {
-						return is_numeric($param);
-					}
-				)
-			),
-			'permission_callback' => '__return_true'
-		)
+		register_rest_route(
+			'ywos/v1',
+			'/get-plan-by-id/(?P<plan_id>\d+)',
+			array(
+				'methods' => 'GET',
+				'callback' => array($this, 'get_plan_by_id'),
+				'args' => array(
+					'plan_id' => array(
+						'validate_callback' => function ($param, $request, $key) {
+							return is_numeric($param);
+						}
+					)
+				),
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
-
 
 	public function get_plan_by_id($data)
 	{
 
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
-		$return = [];
-		$get_plans = get_option($this->prefix . 'plans_data');
+		// if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+		// 	exit("Request not valid");
+		//  }   
+		$return 	= [];
+		$get_plans 	= get_option($this->prefix . 'plans_data');
 		if (empty($get_plans)) {
 			return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
 		}
@@ -532,19 +532,22 @@ class Ytl_Pull_Data_Public
 	 */
 	public function ra_reg_get_bundlePlan_by_id(): void
 	{
-		register_rest_route('ywos/v1', '/get-bundlePlan-by-id/(?P<device_id>\d+)', array(
-			'methods' => 'GET',
-			'callback' => array($this, 'get_bundlePlan_by_id'),
-			'args' => array(
-				'plan_id' => array(
-					'validate_callback' => function ($param, $request, $key) {
-						return is_numeric($param);
-					}
-				)
+		register_rest_route(
+			'ywos/v1',
+			'/get-bundlePlan-by-id/(?P<device_id>\d+)',
+			array(
+				'methods' => 'GET',
+				'callback' => array($this, 'get_bundlePlan_by_id'),
+				'args' => array(
+					'plan_id' => array(
+						'validate_callback' => function ($param, $request, $key) {
+							return is_numeric($param);
+						}
+					)
 
-			),
-			'permission_callback' => '__return_true'
-		)
+				),
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
 
@@ -629,11 +632,14 @@ class Ytl_Pull_Data_Public
 
 	public function ra_reg_get_add_ons_by_plan()
 	{
-		register_rest_route('ywos/v1', '/get-add-ons-by-plan', array(
-			'methods' => 'POST',
-			'callback' => array($this, 'get_add_ons_by_plan'),
-			'permission_callback' => '__return_true'
-		)
+		register_rest_route(
+			'ywos/v1',
+			'/get-add-ons-by-plan',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'get_add_ons_by_plan'),
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
 
@@ -698,16 +704,16 @@ class Ytl_Pull_Data_Public
 		return [];
 	}
 
-
 	/*new token Genration Code  start here */
-
-
 	public function ra_reg_get_auth_token_new()
 	{
-		register_rest_route('ywos/v1', 'connect/token', array(
-			'methods' => 'POST',
-			'callback' => array($this, 'get_auth_token_new')
-		)
+		register_rest_route(
+			'ywos/v1',
+			'connect/token',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'get_auth_token_new')
+			)
 		);
 	}
 	public function get_auth_token_new($get_token_only = false)
@@ -727,9 +733,6 @@ class Ytl_Pull_Data_Public
 			$grant_type = $guestLoginData['set_token_data_guest_login']['grant_type'];
 			$username = $guestLoginData['set_token_data_guest_login']['username'];
 			$password = $guestLoginData['set_token_data_guest_login']['password'];
-
-
-
 		}
 		// print_r($guestLoginData);
 		// die();
@@ -761,20 +764,16 @@ class Ytl_Pull_Data_Public
 		return new WP_Error('error_generating_auth_token', "There's an error in generating the auth token.", array('status' => 400));
 	}
 
-
-
-
-
-
-
-
 	public function ra_reg_get_auth_token()
 	{
-		register_rest_route('ywos/v1', 'get-auth-token', array(
-			'methods' => 'GET',
-			'callback' => array($this, 'get_auth_token'),
-			'permission_callback' => '__return_true'
-		)
+		register_rest_route(
+			'ywos/v1',
+			'get-auth-token',
+			array(
+				'methods' => 'GET',
+				'callback' => array($this, 'get_auth_token'),
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
 
@@ -812,27 +811,27 @@ class Ytl_Pull_Data_Public
 		return new WP_Error('error_generating_auth_token', "There's an error in generating the auth token.", array('status' => 400));
 	}
 
-
-
-
 	public function ra_reg_generate_otp_for_guest_login_new()
 	{
-		register_rest_route('ywos/v1', '/api/app/sms-notification/generate-oTP', array(
-			'methods' => 'POST',
-			'callback' => array($this, 'generate_otp_for_guest_login_new'),
-			'args' => [
-				'MobileNumber' => [
-					'validate_callback' => function ($param, $request, $key) {
-						return true;
-					}
-				],
-				'locale' => [
-					'validate_callback' => function ($param, $request, $key) {
-						return true;
-					}
+		register_rest_route(
+			'ywos/v1',
+			'/api/app/sms-notification/generate-oTP',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'generate_otp_for_guest_login_new'),
+				'args' => [
+					'MobileNumber' => [
+						'validate_callback' => function ($param, $request, $key) {
+							return true;
+						}
+					],
+					'locale' => [
+						'validate_callback' => function ($param, $request, $key) {
+							return true;
+						}
+					]
 				]
-			]
-		)
+			)
 		);
 	}
 
@@ -844,17 +843,13 @@ class Ytl_Pull_Data_Public
 		return $this->ca_generate_otp_for_guest_login_new($MobileNumber, $locale);
 	}
 
-
 	public function ca_generate_otp_for_guest_login_new($MobileNumber = null, $locale = 'EN')
 	{
-
-
 		// $api_domain ="https://ydbp-shoutout-kraken-dev.azurewebsites.net";
 		$guestLoginData = get_option('yes_guest_login_token_data', true);
 
 		if (isset($guestLoginData) && !empty($guestLoginData)) {
 			$api_domain = $guestLoginData['set_token_data_guest_login']['otp_url'];
-
 		}
 
 		$session_id = $this->ca_generate_auth_token_new(true);
@@ -890,25 +885,23 @@ class Ytl_Pull_Data_Public
 		return new WP_Error('error_generating_otp_for_guest_login', "There's an error in generating OTP for guest login.", array('status' => 400));
 	}
 
-
-
-
-
-
 	public function ra_reg_generate_otp_for_login()
 	{
-		register_rest_route('ywos/v1', 'generate-otp-for-login', array(
-			'methods' => 'POST',
-			'callback' => array($this, 'generate_otp_for_login'),
-			'args' => [
-				'yes_number' => [
-					'validate_callback' => function ($param, $request, $key) {
-						return true;
-					}
-				]
-			],
-			'permission_callback' => '__return_true'
-		)
+		register_rest_route(
+			'ywos/v1',
+			'generate-otp-for-login',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'generate_otp_for_login'),
+				'args' => [
+					'yes_number' => [
+						'validate_callback' => function ($param, $request, $key) {
+							return true;
+						}
+					]
+				],
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
 
@@ -1103,23 +1096,26 @@ class Ytl_Pull_Data_Public
 
 	public function ra_reg_generate_otp_for_guest_login()
 	{
-		register_rest_route('ywos/v1', 'generate-otp-for-guest-login', array(
-			'methods' => 'POST',
-			'callback' => array($this, 'generate_otp_for_guest_login'),
-			'args' => [
-				'phone_number' => [
-					'validate_callback' => function ($param, $request, $key) {
-						return true;
-					}
+		register_rest_route(
+			'ywos/v1',
+			'generate-otp-for-guest-login',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'generate_otp_for_guest_login'),
+				'args' => [
+					'phone_number' => [
+						'validate_callback' => function ($param, $request, $key) {
+							return true;
+						}
+					],
+					'locale' => [
+						'validate_callback' => function ($param, $request, $key) {
+							return true;
+						}
+					]
 				],
-				'locale' => [
-					'validate_callback' => function ($param, $request, $key) {
-						return true;
-					}
-				]
-			],
-			'permission_callback' => '__return_true'
-		)
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
 
@@ -1163,28 +1159,31 @@ class Ytl_Pull_Data_Public
 
 	public function ra_reg_guest_login()
 	{
-		register_rest_route('ywos/v1', 'validate-guest-login', array(
-			'methods' => 'POST',
-			'callback' => array($this, 'validate_guest_login'),
-			'args' => [
-				'phone_number' => [
-					'validate_callback' => function ($param, $request, $key) {
-						return true;
-					}
+		register_rest_route(
+			'ywos/v1',
+			'validate-guest-login',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'validate_guest_login'),
+				'args' => [
+					'phone_number' => [
+						'validate_callback' => function ($param, $request, $key) {
+							return true;
+						}
+					],
+					'otp_password' => [
+						'validate_callback' => function ($param, $request, $key) {
+							return true;
+						}
+					],
+					'locale' => [
+						'validate_callback' => function ($param, $request, $key) {
+							return true;
+						}
+					]
 				],
-				'otp_password' => [
-					'validate_callback' => function ($param, $request, $key) {
-						return true;
-					}
-				],
-				'locale' => [
-					'validate_callback' => function ($param, $request, $key) {
-						return true;
-					}
-				]
-			],
-			'permission_callback' => '__return_true'
-		)
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
 
@@ -1232,11 +1231,14 @@ class Ytl_Pull_Data_Public
 
 	public function ra_reg_validate_customer_eligibilities()
 	{
-		register_rest_route('ywos/v1', 'validate-customer-eligibilities', array(
-			'methods' => 'POST',
-			'callback' => array($this, 'validate_customer_eligibilities'),
-			'permission_callback' => '__return_true'
-		)
+		register_rest_route(
+			'ywos/v1',
+			'validate-customer-eligibilities',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'validate_customer_eligibilities'),
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
 
@@ -1326,11 +1328,14 @@ class Ytl_Pull_Data_Public
 
 	public function ra_reg_verify_referral_code()
 	{
-		register_rest_route('ywos/v1', 'verify-referral-code', array(
-			'methods' => 'POST',
-			'callback' => array($this, 'verify_referral_code'),
-			'permission_callback' => '__return_true'
-		)
+		register_rest_route(
+			'ywos/v1',
+			'verify-referral-code',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'verify_referral_code'),
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
 
@@ -1381,11 +1386,14 @@ class Ytl_Pull_Data_Public
 
 	public function ra_reg_get_fpx_bank_list()
 	{
-		register_rest_route('ywos/v1', 'get-fpx-bank-list', array(
-			'methods' => 'GET',
-			'callback' => array($this, 'get_fpx_bank_list'),
-			'permission_callback' => '__return_true'
-		)
+		register_rest_route(
+			'ywos/v1',
+			'get-fpx-bank-list',
+			array(
+				'methods' => 'GET',
+				'callback' => array($this, 'get_fpx_bank_list'),
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
 
@@ -1428,11 +1436,14 @@ class Ytl_Pull_Data_Public
 
 	public function ra_reg_get_ipp_tenures()
 	{
-		register_rest_route('ywos/v1', 'get-ipp-tenures', array(
-			'methods' => 'POST',
-			'callback' => array($this, 'get_ipp_tenures'),
-			'permission_callback' => '__return_true'
-		)
+		register_rest_route(
+			'ywos/v1',
+			'get-ipp-tenures',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'get_ipp_tenures'),
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
 
@@ -1476,11 +1487,14 @@ class Ytl_Pull_Data_Public
 
 	public function ra_reg_get_ipp_monthly_installments()
 	{
-		register_rest_route('ywos/v1', 'get-ipp-monthly-installments', array(
-			'methods' => 'POST',
-			'callback' => array($this, 'get_ipp_monthly_installments'),
-			'permission_callback' => '__return_true'
-		)
+		register_rest_route(
+			'ywos/v1',
+			'get-ipp-monthly-installments',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'get_ipp_monthly_installments'),
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
 
@@ -1527,24 +1541,24 @@ class Ytl_Pull_Data_Public
 	public function ra_reg_create_yos_order()
 	{
 		register_rest_route('ywos/v1', 'create-yos-order', array(
-			'methods'	=> 'POST', 
+			'methods'	=> 'POST',
 			'callback' 	=> array($this, 'create_yos_order'),
 			'permission_callback' => '__return_true'
 		));
 	}
 
-	public function create_yos_order(WP_REST_Request $order_info) 
+	public function create_yos_order(WP_REST_Request $order_info)
 	{
 		return $this->ca_create_yos_order($order_info);
 	}
 
-	public function ca_create_yos_order($order_info = []) 
+	public function ca_create_yos_order($order_info = [])
 	{
-		if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
 			exit("Request not valid");
-		 } 
+		}
 		$session_key 	= $this->get_request_input($order_info, 'session_key');
-		
+
 		$phone_number 	= $this->get_request_input($order_info, 'phone_number');
 
 		$customer_name	= $this->get_request_input($order_info, 'customer_name');
@@ -1556,9 +1570,9 @@ class Ytl_Pull_Data_Public
 		$security_id 	= $this->get_request_input($order_info, 'security_id');
 		$school_name 	= $this->get_request_input($order_info, 'school_name');
 		$school_code 	= $this->get_request_input($order_info, 'school_code');
-		$university_name= $this->get_request_input($order_info, 'university_name');
+		$university_name = $this->get_request_input($order_info, 'university_name');
 		$dealer_code 	= $this->get_request_input($order_info, 'dealer_code');
-		$dealer_login_id= $this->get_request_input($order_info, 'dealer_login_id');
+		$dealer_login_id = $this->get_request_input($order_info, 'dealer_login_id');
 
 		$plan_name 		= $this->get_request_input($order_info, 'plan_name');
 		$plan_type 		= $this->get_request_input($order_info, 'plan_type');
@@ -1573,7 +1587,7 @@ class Ytl_Pull_Data_Public
 		$state 			= $this->get_request_input($order_info, 'state');
 		$state_code 	= $this->get_request_input($order_info, 'state_code');
 		$country 		= $this->get_request_input($order_info, 'country');
-		
+
 		$payment_method	= $this->get_request_input($order_info, 'payment_method');
 		$process_name 	= $this->get_request_input($order_info, 'process_name');
 		$amount 		= $this->get_float_number($order_info['amount']);
@@ -1589,55 +1603,57 @@ class Ytl_Pull_Data_Public
 		$card_expiry_year 	= $this->get_request_input($order_info, 'card_expiry_year');
 		$ippType 		= $this->get_request_input($order_info, 'ippType');
 		$locale 		= $this->get_request_input($order_info, 'locale');
-
+		$simType		= $this->get_request_input($order_info, 'esim');
 		$session_id 	= $this->ca_generate_auth_token(true);
 		$walletType		= $this->get_request_input($order_info, 'walletType');
+		$stagingOrderNumber		= $this->get_request_input($order_info, 'stagingOrderNumber');
 		$simType		= $this->get_request_input($order_info, 'esim');
 
 		if (
-			$phone_number 
-		
+			$phone_number
+
 		) {
 			$params 	= [
 				'eKYCCustomerDetail' 	=> [
-					'alternatePhoneNumber' 	=> $phone_number, 
-					'customerFullName' 		=> $customer_name, 
-					'dob' 					=> $dob, 
-					'gender' 				=> $gender, 
-					'email' 				=> $email, 
-					'loginYesId' 			=> $login_yes_id, 
-					'planName' 				=> $plan_name, 
-					'planType' 				=> $plan_type, 
-					'securityType' 			=> $security_type, 
-					'securityId' 			=> $security_id, 
-					'schoolName' 			=> $school_name, 
-					'schoolCode' 			=> $school_code, 
-					'universityName' 		=> $university_name, 
-					'dealerCode' 			=> $dealer_code, 
-					'dealerLoginId' 		=> $dealer_login_id, 
+					'alternatePhoneNumber' 	=> $phone_number,
+					'customerFullName' 		=> $customer_name,
+					'dob' 					=> $dob,
+					'gender' 				=> $gender,
+					'email' 				=> $email,
+					'loginYesId' 			=> $login_yes_id,
+					'planName' 				=> $plan_name,
+					'planType' 				=> $plan_type,
+					'securityType' 			=> $security_type,
+					'securityId' 			=> $security_id,
+					'schoolName' 			=> $school_name,
+					'schoolCode' 			=> $school_code,
+					'universityName' 		=> $university_name,
+					'dealerCode' 			=> $dealer_code,
+					'dealerLoginId' 		=> $dealer_login_id,
 					'supportingDocUniqueId'	=> null
-				], 
+				],
 
 				'orderDetail' 			=> [
-					'planName' 			=> $plan_name, 
-					'planType' 			=> $plan_type, 
-					'productBundleId' 	=> $product_bundle_id, 
-					'referralCode' 		=> $referral_code, 
+					'planName' 			=> $plan_name,
+					'planType' 			=> $plan_type,
+					'productBundleId' 	=> $product_bundle_id,
+					'referralCode' 		=> $referral_code,
 					'addonName' 		=> $addon_name,
-					'esim'              =>$simType,
-					'applicationSource' => 'YOS' 
-				], 
+					'esim'              => $simType,
+					'applicationSource' => 'YOS',
+					'stagingOrderNumber' => $stagingOrderNumber,
+				],
 
 				'deliveryAddress' 		=> [
-					'addressLine' 		=> $address_line, 
-					'city' 				=> $city, 
-					'cityCode' 			=> $city_code, 
-					'postalCode' 		=> $postal_code, 
-					'state' 			=> $state, 
-					'stateCode' 		=> $state_code, 
-					'country' 			=> $country 
-				], 
-				
+					'addressLine' 		=> $address_line,
+					'city' 				=> $city,
+					'cityCode' 			=> $city_code,
+					'postalCode' 		=> $postal_code,
+					'state' 			=> $state,
+					'stateCode' 		=> $state_code,
+					'country' 			=> $country
+				],
+
 				'paymentInfo' 			=> [
 					'paymentMethod' 	=> $payment_method,
 					'processName' 		=> $process_name,
@@ -1656,7 +1672,7 @@ class Ytl_Pull_Data_Public
 					'isAutoSubscribe' 	=> false,
 					'isSavedCard' 		=> false,
 					'ewalletType'       => $walletType
-				], 
+				],
 
 				'appVersion' 			=> $this->api_app_version,
 				'locale' 				=> $locale,
@@ -1671,12 +1687,12 @@ class Ytl_Pull_Data_Public
 				'data_format'   => 'body',
 				'timeout'     	=> $this->api_timeout
 			];
-			
-			if($simType =='true'){
+
+			if ($simType == 'true') {
 				$api_url 		= $this->api_domain . $this->path_create_yos_order_and_payment_esim;
-			}else if($simType ==''){
+			} else if ($simType == '') {
 				$api_url 		= $this->api_domain . $this->path_create_yos_order_and_payment;
-			}else{
+			} else {
 				$api_url 		= $this->api_domain . $this->path_create_yos_order_and_payment;
 			}
 			$request 		= wp_remote_post($api_url, $args);
@@ -1698,9 +1714,9 @@ class Ytl_Pull_Data_Public
 			$xpay_order_id 			= $data->xpayOrderId;
 			$yos_order_response 	= $data;
 			$yos_order_response_display = $data->displayResponseMessage;
-			
+
 			$this->record_new_order($session_key, $phone_number, $product_bundle_id, $yos_order_meta, $yos_order_id, $yos_order_display_id, $xpay_order_id, $yos_order_response, $yos_order_response_display);
-			
+
 			if ($data->responseCode > -1) {
 				$data->sessionId = $session_id;
 
@@ -1711,7 +1727,7 @@ class Ytl_Pull_Data_Public
 				return new WP_Error('error_creating_yos_order', $data->displayResponseMessage, array('status' => 400));
 			}
 		} else {
-		
+
 			return new WP_Error('error_creating_yos_order1', "Parameters not complete to create YOS order.", array('status' => 400));
 		}
 		return new WP_Error('error_creating_yos_order', "There's an error in creating YOS order.", array('status' => 400));
@@ -1719,11 +1735,14 @@ class Ytl_Pull_Data_Public
 
 	public function ra_reg_get_wallet_rm_merchant()
 	{
-		register_rest_route('ywos/v1', 'get-rm-wallet-merchant', array(
-			'methods' => 'GET',
-			'callback' => array($this, 'get_wallet_rm_merchant'),
-			'permission_callback' => '__return_true'
-		)
+		register_rest_route(
+			'ywos/v1',
+			'get-rm-wallet-merchant',
+			array(
+				'methods' => 'GET',
+				'callback' => array($this, 'get_wallet_rm_merchant'),
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
 
@@ -1763,11 +1782,14 @@ class Ytl_Pull_Data_Public
 
 	public function ra_reg_check_order_payment_status()
 	{
-		register_rest_route('ywos/v1', 'check-order-payment-status', array(
-			'methods' => 'POST',
-			'callback' => array($this, 'check_order_payment_status'),
-			'permission_callback' => '__return_true'
-		)
+		register_rest_route(
+			'ywos/v1',
+			'check-order-payment-status',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'check_order_payment_status'),
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
 
@@ -1823,11 +1845,14 @@ class Ytl_Pull_Data_Public
 
 	public function ra_reg_get_order_by_order_display_id()
 	{
-		register_rest_route('ywos/v1', 'get-order-by-display-id/(?P<order_display_id>[a-zA-Z0-9-]+)', array(
-			'methods' => 'GET',
-			'callback' => array($this, 'get_order_by_display_id'),
-			'permission_callback' => '__return_true'
-		)
+		register_rest_route(
+			'ywos/v1',
+			'get-order-by-display-id/(?P<order_display_id>[a-zA-Z0-9-]+)',
+			array(
+				'methods' => 'GET',
+				'callback' => array($this, 'get_order_by_display_id'),
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
 
@@ -1853,11 +1878,14 @@ class Ytl_Pull_Data_Public
 	 */
 	public function ra_reg_tp_url_check()
 	{
-		register_rest_route('ywos/v1', 'tp-url-check', array(
-			'methods' => 'POST',
-			'callback' => array($this, 'rest_tp_url_check'),
-			'permission_callback' => '__return_true'
-		)
+		register_rest_route(
+			'ywos/v1',
+			'tp-url-check',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'rest_tp_url_check'),
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
 
@@ -1897,11 +1925,14 @@ class Ytl_Pull_Data_Public
 	 */
 	public function ra_reg_tp_update_has_purchased_flag()
 	{
-		register_rest_route('ywos/v1', 'tp-update-purchase', array(
-			'methods' => 'POST',
-			'callback' => array($this, 'rest_tp_update_has_purchased_flag'),
-			'permission_callback' => '__return_true'
-		)
+		register_rest_route(
+			'ywos/v1',
+			'tp-update-purchase',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'rest_tp_update_has_purchased_flag'),
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
 
@@ -2007,30 +2038,34 @@ class Ytl_Pull_Data_Public
 			);
 		}
 	}
+
 	public function ra_new_reg_guest_otp()
 	{
-		register_rest_route('ywos/v1', 'api/app/SMS-notification/verify-oTP', array(
-			'methods' => 'POST',
-			'callback' => array($this, 'validate_guest_login_otp'),
-			'args' => [
-				'MobileNumber' => [
-					'validate_callback' => function ($param, $request, $key) {
-						return true;
-					}
+		register_rest_route(
+			'ywos/v1',
+			'api/app/SMS-notification/verify-oTP',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'validate_guest_login_otp'),
+				'args' => [
+					'MobileNumber' => [
+						'validate_callback' => function ($param, $request, $key) {
+							return true;
+						}
+					],
+					'OTPValue' => [
+						'validate_callback' => function ($param, $request, $key) {
+							return true;
+						}
+					],
+					'locale' => [
+						'validate_callback' => function ($param, $request, $key) {
+							return true;
+						}
+					]
 				],
-				'OTPValue' => [
-					'validate_callback' => function ($param, $request, $key) {
-						return true;
-					}
-				],
-				'locale' => [
-					'validate_callback' => function ($param, $request, $key) {
-						return true;
-					}
-				]
-			],
-			'permission_callback' => '__return_true'
-		)
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
 
@@ -2044,7 +2079,6 @@ class Ytl_Pull_Data_Public
 
 	public function ca_validate_guest_login_otp($MobileNumber = null, $otp_password = null, $locale = 'EN')
 	{
-
 		// $api_domain="https://ydbp-shoutout-kraken-dev.azurewebsites.net";
 		$guestLoginData = get_option('yes_guest_login_token_data', true);
 
@@ -2077,17 +2111,20 @@ class Ytl_Pull_Data_Public
 		return new WP_Error('error_validating_guest_login', "There's an error in validating login.", array('status' => 400));
 	}
 
-
 	public function ra_create_staing_order()
 	{
 
-		register_rest_route('ywos/v1', 'create-ywos-roving-order', array(
-			'methods' => 'POST',
-			'callback' => array($this, 'create_ywos_roving_order'),
-			'permission_callback' => '__return_true'
-		)
+		register_rest_route(
+			'ywos/v1',
+			'create-ywos-roving-order',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'create_ywos_roving_order'),
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
+
 	public function create_ywos_roving_order(WP_REST_Request $order_info)
 	{
 		return $this->ca_create_ywos_roving_order($order_info);
@@ -2095,7 +2132,6 @@ class Ytl_Pull_Data_Public
 
 	public function ca_create_ywos_roving_order($order_info = [])
 	{
-
 		// if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
 		// 	exit("Request not valid");
 		//  } 
@@ -2172,8 +2208,8 @@ class Ytl_Pull_Data_Public
 				'data_format' => 'body',
 				'timeout' => $this->api_timeout
 			];
-			 $api_url 		= $this->api_domain . $this->path_create_roving_staging_order;
-		 
+			$api_url 		= $this->api_domain . $this->path_create_roving_staging_order;
+
 			// $api_url = "https://mobileservicesiot.ytlcomms.my/mobileyos/mobile/ws/v1/json/createStagingYosOrder";
 			$request = wp_remote_post($api_url, $args);
 			$data = json_decode($request['body']);
@@ -2184,27 +2220,26 @@ class Ytl_Pull_Data_Public
 			} else if ($data->displayResponseMessage) {
 				return new WP_Error('error_creating_yos_order', $data->displayResponseMessage, array('status' => 400));
 			}
-		}
-		else {
+		} else {
 			return new WP_Error('error_creating_yos_order', "Parameters not complete to create roving agent order.", array('status' => 400));
 		}
 		return new WP_Error('error_creating_yos_order', "There's an error in creating Roving order.", array('status' => 400));
 	}
-	
-
-
-
 
 	public function ra_validate_staing_order()
 	{
 
-		register_rest_route('ywos/v1', 'validate-ywos-roving-order', array(
-			'methods' => 'POST',
-			'callback' => array($this, 'validate_ywos_roving_order'),
-			'permission_callback' => '__return_true'
-		)
+		register_rest_route(
+			'ywos/v1',
+			'validate-ywos-roving-order',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'validate_ywos_roving_order'),
+				'permission_callback' => '__return_true'
+			)
 		);
 	}
+
 	public function validate_ywos_roving_order(WP_REST_Request $order_info)
 	{
 		return $this->ca_validate_ywos_roving_order($order_info);
@@ -2241,8 +2276,8 @@ class Ytl_Pull_Data_Public
 				'data_format' => 'body',
 				'timeout' => $this->api_timeout
 			];
-			 $api_url 		= $this->api_domain . $this->path_validate_roving_staging_order;
-		 
+			$api_url 		= $this->api_domain . $this->path_validate_roving_staging_order;
+
 			// $api_url = "https://mobileservicesiot.ytlcomms.my/mobileyos/mobile/ws/v1/json/createStagingYosOrder";
 			$request = wp_remote_post($api_url, $args);
 			$data = json_decode($request['body']);
@@ -2250,13 +2285,11 @@ class Ytl_Pull_Data_Public
 				$response = new WP_REST_Response($data);
 				$response->set_status(200);
 				return $response;
-			} else if ($data->responseCode == -1){
+			} else if ($data->responseCode == -1) {
 				return new WP_Error('error_creating_yos_order', $data->displayErrorMessage, array('status' => 400));
-			} 
-		}
-		else {
+			}
+		} else {
 			return new WP_Error('error_creating_yos_order', "Parameters not complete to create roving agent order.", array('status' => 400));
 		}
-		
 	}
 }
