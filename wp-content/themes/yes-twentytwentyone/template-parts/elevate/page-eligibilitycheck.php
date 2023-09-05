@@ -373,97 +373,101 @@
 
                                 if (self.orderSummary.product.selected.productCode) {
                                     const mapPlanId = {
-                                        1097: {
-                                            planID: 1127,
+                                      1125: {
+                                            planID: 1161,
+                                            deviceID: 1,
+                                        },
+                                        1127: {
+                                            planID: 1163,
+                                            deviceID: 1,
+                                        },
+                                        1129: {
+                                            planID: 1165,
                                             deviceID: 2,
                                         },
-                                        1096: {
-                                            planID: 1126,
+                                        1131: {
+                                            planID: 1167,
                                             deviceID: 2,
                                         },
-                                        1095: {
-                                            planID: 1125,
+                                        1133: {
+                                            planID: 1169,
                                             deviceID: 2,
                                         },
-                                        1101: {
-                                            planID: 1123,
+                                        1135: {
+                                            planID: 1171,
                                             deviceID: 3,
                                         },
-                                        1093: {
-                                            planID: 1131,
+                                        1137: {
+                                            planID: 1173,
+                                            deviceID: 3,
+                                        },
+                                        1139: {
+                                            planID: 1175,
+                                            deviceID: 3,
+                                        },
+                                        1141: {
+                                            planID: 1177,
                                             deviceID: 4,
                                         },
-                                        1198: {
-                                            planID: 1196,
+                                        1143: {
+                                            planID: 1179,
+                                            deviceID: 4,
+                                        },
+                                        1145: {
+                                            planID: 1181,
                                             deviceID: 5,
                                         },
-                                        1218: {
-                                            planID: 1248,
+                                        1147: {
+                                            planID: 1183,
                                             deviceID: 5,
                                         },
-                                        1194: {
-                                            planID: 1192,
+                                        1149: {
+                                            planID: 1185,
+                                            deviceID: 5,
+                                        },
+                                        1151: {
+                                            planID: 1187,
+                                            deviceID: 5,
+                                        },
+                                        1153: {
+                                            planID: 1189,
                                             deviceID: 6,
                                         },
-                                        1204: {
-                                            planID: 1234,
+                                        1155: {
+                                            planID: 1191,
                                             deviceID: 6,
                                         },
-                                        1202: {
-                                            planID: 1200,
+                                        1157: {
+                                            planID: 1193,
+                                            deviceID: 6,
+                                        },
+                                        1159: {
+                                            planID: 1195,
+                                            deviceID: 6,
+                                        },
+                                        1205: {
+                                            planID: 1209,
                                             deviceID: 7,
                                         },
-                                        1228: {
-                                            planID: 1258,
+                                        1207: {
+                                            planID: 1211,
                                             deviceID: 7,
                                         },
-                                        1230: {
-                                            planID: 1260,
-                                            deviceID: 7,
-                                        },
-                                        1232: {
-                                            planID: 1262,
-                                            deviceID: 7,
-                                        },
-                                        1206: {
-                                            planID: 1236,
+                                        1221: {
+                                            planID: 1225,
                                             deviceID: 8,
                                         },
-                                        1208: {
-                                            planID: 1238,
+                                        1223: {
+                                            planID: 1227,
                                             deviceID: 8,
                                         },
-                                        1210: {
-                                            planID: 1240,
+                                        1213: {
+                                            planID: 1217,
                                             deviceID: 8,
                                         },
-                                        1212: {
-                                            planID: 1242,
-                                            deviceID: 9,
-                                        },
-                                        1214: {
-                                            planID: 1244,
-                                            deviceID: 9,
-                                        },
-                                        1216: {
-                                            planID: 1246,
-                                            deviceID: 9,
-                                        },
-                                        1220: {
-                                            planID: 1250,
-                                            deviceID: 10,
-                                        },
-                                        1222: {
-                                            planID: 1252,
-                                            deviceID: 10,
-                                        },
-                                        1224: {
-                                            planID: 1254,
-                                            deviceID: 10,
-                                        },
-                                        1226: {
-                                            planID: 1256,
-                                            deviceID: 10,
+                                        1215: {
+                                            planID: 1219,
+                                            deviceID: 8,
                                         },
                                     };
 
@@ -506,7 +510,7 @@
                         .then((response) => {
 
                             var data = response.data;
-                            if (data.status == 1) {
+                            if (data == 1) {
                                 self.notActiveContract = true;
                                 // elevate.redirectToPage('verification');      // Commented by AL
 
@@ -523,97 +527,101 @@
 
                                 if (self.orderSummary.product.selected.productCode) {
                                     const mapPlanId = {
-                                        1097: {
-                                            planID: 1127,
+                                       1125: {
+                                            planID: 1161,
+                                            deviceID: 1,
+                                        },
+                                        1127: {
+                                            planID: 1163,
+                                            deviceID: 1,
+                                        },
+                                        1129: {
+                                            planID: 1165,
                                             deviceID: 2,
                                         },
-                                        1096: {
-                                            planID: 1126,
+                                        1131: {
+                                            planID: 1167,
                                             deviceID: 2,
                                         },
-                                        1095: {
-                                            planID: 1125,
+                                        1133: {
+                                            planID: 1169,
                                             deviceID: 2,
                                         },
-                                        1101: {
-                                            planID: 1123,
+                                        1135: {
+                                            planID: 1171,
                                             deviceID: 3,
                                         },
-                                        1093: {
-                                            planID: 1131,
+                                        1137: {
+                                            planID: 1173,
+                                            deviceID: 3,
+                                        },
+                                        1139: {
+                                            planID: 1175,
+                                            deviceID: 3,
+                                        },
+                                        1141: {
+                                            planID: 1177,
                                             deviceID: 4,
                                         },
-                                        1198: {
-                                            planID: 1196,
+                                        1143: {
+                                            planID: 1179,
+                                            deviceID: 4,
+                                        },
+                                        1145: {
+                                            planID: 1181,
                                             deviceID: 5,
                                         },
-                                        1218: {
-                                            planID: 1248,
+                                        1147: {
+                                            planID: 1183,
                                             deviceID: 5,
                                         },
-                                        1194: {
-                                            planID: 1192,
+                                        1149: {
+                                            planID: 1185,
+                                            deviceID: 5,
+                                        },
+                                        1151: {
+                                            planID: 1187,
+                                            deviceID: 5,
+                                        },
+                                        1153: {
+                                            planID: 1189,
                                             deviceID: 6,
                                         },
-                                        1204: {
-                                            planID: 1234,
+                                        1155: {
+                                            planID: 1191,
                                             deviceID: 6,
                                         },
-                                        1202: {
-                                            planID: 1200,
+                                        1157: {
+                                            planID: 1193,
+                                            deviceID: 6,
+                                        },
+                                        1159: {
+                                            planID: 1195,
+                                            deviceID: 6,
+                                        },
+                                        1205: {
+                                            planID: 1209,
                                             deviceID: 7,
                                         },
-                                        1228: {
-                                            planID: 1258,
+                                        1207: {
+                                            planID: 1211,
                                             deviceID: 7,
                                         },
-                                        1230: {
-                                            planID: 1260,
-                                            deviceID: 7,
-                                        },
-                                        1232: {
-                                            planID: 1262,
-                                            deviceID: 7,
-                                        },
-                                        1206: {
-                                            planID: 1236,
+                                        1221: {
+                                            planID: 1225,
                                             deviceID: 8,
                                         },
-                                        1208: {
-                                            planID: 1238,
+                                        1223: {
+                                            planID: 1227,
                                             deviceID: 8,
                                         },
-                                        1210: {
-                                            planID: 1240,
+                                        1213: {
+                                            planID: 1217,
                                             deviceID: 8,
                                         },
-                                        1212: {
-                                            planID: 1242,
-                                            deviceID: 9,
-                                        },
-                                        1214: {
-                                            planID: 1244,
-                                            deviceID: 9,
-                                        },
-                                        1216: {
-                                            planID: 1246,
-                                            deviceID: 9,
-                                        },
-                                        1220: {
-                                            planID: 1250,
-                                            deviceID: 10,
-                                        },
-                                        1222: {
-                                            planID: 1252,
-                                            deviceID: 10,
-                                        },
-                                        1224: {
-                                            planID: 1254,
-                                            deviceID: 10,
-                                        },
-                                        1226: {
-                                            planID: 1256,
-                                            deviceID: 10,
+                                        1215: {
+                                            planID: 1219,
+                                            deviceID: 8,
                                         },
                                     };
 

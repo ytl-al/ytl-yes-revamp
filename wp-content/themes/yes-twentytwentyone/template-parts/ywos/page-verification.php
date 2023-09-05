@@ -65,14 +65,14 @@
                                 <div class="col-lg-4 col-12 mb-3 mb-lg-0">
                                     <div class="form-group">
                                         <label class="form-label" for="select-securityType">* {{ renderText('strIDType') }}</label>
-                                        <select class="form-select" id="select-securityType" v-model="customerDetails.securityType" @change="watchSecurityType" :disabled="!allowSecurityType" v-if='orderSummary.plan.displayName == "Infinite Basic RAHMAH 1"'>
-                                            <!-- <option value="" disabled="disabled" selected="selected">{{ renderText('strIDTypeSelect') }}</option> -->
+                                         <select class="form-select" id="select-securityType" v-model="customerDetails.securityType" @change="watchSecurityType" :disabled="!allowSecurityType" v-if='orderSummary.plan.displayName == "Infinite Basic RAHMAH 1"  || orderSummary.plan.displayName == "Infinite Basic RAHMAH 2" || orderSummary.plan.displayName == "Infinite Basic RAHMAH 3"  || orderSummary.plan.displayName == "Power 35 RAHMAH"'>
+                                            <option value="" disabled="disabled" selected="selected">{{ renderText('strIDTypeSelect') }}</option>
                                             <option value="NRIC">{{ renderText('strIDNRIC') }}</option>
-                                            <option value="PASSPORT">{{ renderText('strIDPassport') }}</option>
+                                            <!-- <option value="PASSPORT">{{ renderText('strIDPassport') }}</option> -->
                                             <option v-if="isLoggedIn && customerDetails.securityType == 'BRN'" value="BRN">BRN</option>
                                         </select>
                                         <select class="form-select" id="select-securityType" v-model="customerDetails.securityType" @change="watchSecurityType" :disabled="!allowSecurityType" v-else>
-                                            <!-- <option value="" disabled="disabled" selected="selected">{{ renderText('strIDTypeSelect') }}</option> -->
+                                            <option value="" disabled="disabled" selected="selected">{{ renderText('strIDTypeSelect') }}</option>
                                             <option value="NRIC">{{ renderText('strIDNRIC') }}</option>
                                             <option value="PASSPORT">{{ renderText('strIDPassport') }}</option>
                                             <option v-if="isLoggedIn && customerDetails.securityType == 'BRN'" value="BRN">BRN</option>
@@ -112,7 +112,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-12" v-if="!isLoggedIn">
-                                    <button type="button" class="white-btn3 mt-3 mt-lg-0" v-on:click="ajaxGenerateOTPForGuestLoginNew  " :disabled="!allowRequestOTP">{{ requestOTPText }}</button>
+                                    <button type="button" class="white-btn2 mt-3 mt-lg-0" v-on:click="ajaxGenerateOTPForGuestLoginNew  " :disabled="!allowRequestOTP">{{ requestOTPText }}</button>
                                 </div>
                                 <div class="invalid-feedback mt-1" id="em-otpPhoneNumber"></div>
                             </div>
