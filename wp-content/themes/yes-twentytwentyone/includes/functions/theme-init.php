@@ -1936,7 +1936,7 @@ function yes_menu($path)
         }
 
         .navbar-toggler:not(.collapsed) .navbar-toggler-icon {
-            background-image: url(https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/cross.svg);
+            background-image: url(https://cdn.yes.my/site/wp-content/uploads/2023/03/cross.svg);
 
         }
 
@@ -2489,7 +2489,7 @@ if ($lang == "en-US"){
                 </div>
                 <div class="tab-box overlap" id="tab-3">
                     <div class="back-btn" data-rel="tab-3">
-                        <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/arrow_back.svg"> Main Menu
+                        <img src="https://cdn.yes.my/site/wp-content/uploads/2023/03/arrow_back.svg"> Main Menu
                     </div>
                     <h2 class="menu-title">5G Wireless Broadband</h2>
                     <li>
@@ -2576,7 +2576,7 @@ if ($lang == "en-US"){
                 </div>
                 <div class="tab-box overlap" id="tab-4">
                     <div class="back-btn" data-rel="tab-4">
-                        <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/arrow_back.svg"> Main Menu
+                        <img src="https://cdn.yes.my/site/wp-content/uploads/2023/03/arrow_back.svg"> Main Menu
                     </div>
                     <h2 class="menu-title">4G Broadband</h2>
                     <div class="tab-box-inner">
@@ -2760,10 +2760,11 @@ if ($lang == "en-US"){
                         <div class="row">
                             <div class="col-6 col-md-6">
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Coverage.svg" alt="...">
+                                    <img src="https://cdn.yes.my/site/wp-content/uploads/2023/03/Coverage.svg" alt="...">
                                     <div class="">
                                  <?php
                                     $lang = get_bloginfo("language");
+                                    $site_url_menu = get_site_url();
                                     if ($lang == "en-US") {
                                         $site_url_menu = get_site_url();
                                     } elseif ($lang == "ms-MY") {
@@ -2778,10 +2779,11 @@ if ($lang == "en-US"){
                             </div>
                             <div class="col-6 col-md-6">
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Speed.svg" alt="...">
+                                    <img src="https://cdn.yes.my/site/wp-content/uploads/2023/03/Speed.svg" alt="...">
                                     <div class="">
                                     <?php
                                     $lang = get_bloginfo("language");
+                                    $site_url_menu = get_site_url();
                                     if ($lang == "en-US") {
                                         $site_url_menu = get_site_url();
                                     } elseif ($lang == "ms-MY") {
@@ -2798,10 +2800,11 @@ if ($lang == "en-US"){
                             <div class="col-6 col-md-6">
 
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Supported-Devices.svg" alt="...">
+                                    <img src="https://cdn.yes.my/site/wp-content/uploads/2023/03/Supported-Devices.svg" alt="...">
                                     <div class="">
                                     <?php
                                     $lang = get_bloginfo("language");
+                                    $site_url_menu = get_site_url();
                                     if ($lang == "en-US") {
                                         $site_url_menu = get_site_url();
                                     } elseif ($lang == "ms-MY") {
@@ -2817,10 +2820,11 @@ if ($lang == "en-US"){
                             </div>
                             <div class="col-6 col-md-6">
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Track-Order.svg" alt="...">
+                                    <img src="https://cdn.yes.my/site/wp-content/uploads/2023/03/Track-Order.svg" alt="...">
                                     <div class="">
                                     <?php
                                     $lang = get_bloginfo("language");
+                                    $site_url_menu = get_site_url();
                                     if ($lang == "en-US") {
                                         $site_url_menu = get_site_url();
                                     } elseif ($lang == "ms-MY") {
@@ -2839,6 +2843,7 @@ if ($lang == "en-US"){
                                     <div class="">
                                     <?php
                                     $lang = get_bloginfo("language");
+                                    $site_url_menu = get_site_url();
                                     if ($lang == "en-US") {
                                         $site_url_menu = get_site_url();
                                     } elseif ($lang == "ms-MY") {
@@ -2857,10 +2862,11 @@ if ($lang == "en-US"){
                             <div class="col-6 col-md-6">
 
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Store-Locator.svg" alt="...">
+                                    <img src="https://cdn.yes.my/site/wp-content/uploads/2023/03/Store-Locator.svg" alt="...">
                                     <div class="">
                                     <?php
                                     $lang = get_bloginfo("language");
+                                    $site_url_menu = get_site_url();
                                     if ($lang == "en-US") {
                                         $site_url_menu = get_site_url();
                                     } elseif ($lang == "ms-MY") {
@@ -2875,7 +2881,7 @@ if ($lang == "en-US"){
                             </div>
                             <div class="col-6 col-md-6">
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Roadshow-Locations.svg" alt="...">
+                                    <img src="https://cdn.yes.my/site/wp-content/uploads/2023/03/Roadshow-Locations.svg" alt="...">
                                     <div class="">
                                     <?php
                                     $lang = get_bloginfo("language");
@@ -2893,28 +2899,28 @@ if ($lang == "en-US"){
                             </div>
                         </div>
                         <div class="box">
-                            <li><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> Email us</a></li>
-                            <li><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"> Chat to Support</a></li>
+                            <li><img src="https://cdn.yes.my/site/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> Email us</a></li>
+                            <li><img src="https://cdn.yes.my/site/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"> Chat to Support</a></li>
                         </div>
                     </div>
                     <div class="col-auto get_help-mobile dasktop-none">
                         <ul>
                             <li class="dropdown-header-mobile">tools & services</li>
-                            <li><a href="<?php echo $site_url_menu . '/coverage/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Coverage.svg" alt="..."> Coverage Checker</a></li>
-                            <li><a href="<?php echo $site_url_menu . '/speed-test/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Speed.svg" alt="..."> Speed Test</a></li>
-                            <li><a href="<?php echo $site_url_menu . '/supported-devices/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Supported-Devices.svg" alt="..."> Supported Devices</a></li>
-                            <li><a href="<?php echo $site_url_menu . '/trackorder/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Track Order</a></li>
-                            <li style="display:none;"><a href="<?php echo $site_url_menu . '/a3-charger-replacement/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Product Notice</a></li>
+                            <li><a href="<?php echo $site_url_menu . '/coverage/' ?>"><img src="https://cdn.yes.my/site/wp-content/uploads/2023/03/Coverage.svg" alt="..."> Coverage Checker</a></li>
+                            <li><a href="<?php echo $site_url_menu . '/speed-test/' ?>"><img src="https://cdn.yes.my/site/wp-content/uploads/2023/03/Speed.svg" alt="..."> Speed Test</a></li>
+                            <li><a href="<?php echo $site_url_menu . '/supported-devices/' ?>"><img src="https://cdn.yes.my/site/wp-content/uploads/2023/03/Supported-Devices.svg" alt="..."> Supported Devices</a></li>
+                            <li><a href="<?php echo $site_url_menu . '/trackorder/' ?>"><img src="https://cdn.yes.my/site/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Track Order</a></li>
+                            <li style="display:none;"><a href="<?php echo $site_url_menu . '/a3-charger-replacement/' ?>"><img src="https://cdn.yes.my/site/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Product Notice</a></li>
                         </ul>
                         <ul>
                             <li class="mt-3 dropdown-header-mobile">LOCATE us</li>
-                            <li><a href="<?php echo $site_url_menu . '/store-locator/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Store-Locator.svg" alt="..."> Store Locator</a></li>
-                            <li><a href="<?php echo $site_url_menu. '/roadshow/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Roadshow-Locations.svg" alt="..."> Roadshow Locations</a></li>
+                            <li><a href="<?php echo $site_url_menu . '/store-locator/' ?>"><img src="https://cdn.yes.my/site/wp-content/uploads/2023/03/Store-Locator.svg" alt="..."> Store Locator</a></li>
+                            <li><a href="<?php echo $site_url_menu. '/roadshow/' ?>"><img src="https://cdn.yes.my/site/wp-content/uploads/2023/03/Roadshow-Locations.svg" alt="..."> Roadshow Locations</a></li>
                         </ul>
                         <div class="box">
                             <ul>
-                                <li><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> Email us</a></li>
-                                <li><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"> Chat to Support</a></li>
+                                <li><img src="https://cdn.yes.my/site/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> Email us</a></li>
+                                <li><img src="https://cdn.yes.my/site/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"> Chat to Support</a></li>
                             </ul>
                         </div>
                     </div>
