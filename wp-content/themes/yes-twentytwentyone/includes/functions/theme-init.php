@@ -2872,6 +2872,7 @@ if ($lang == "en-US"){
                                     <div class="">
                                     <?php
                                     $lang = get_bloginfo("language");
+                                    $site_url_menu = get_site_url();
                                     if ($lang == "en-US") {
                                         $site_url_menu = get_site_url();
                                     } elseif ($lang == "ms-MY") {
