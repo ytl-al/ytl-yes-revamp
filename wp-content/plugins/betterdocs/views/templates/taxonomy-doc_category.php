@@ -47,7 +47,7 @@
                             $title_tag,
                             $current_category->name
                         );
-                        echo wp_sprintf( '<p>%s</p>', esc_attr( $current_category->description ) );
+                        echo wp_sprintf( '<p>%s</p>', wp_kses_post( $current_category->description ) );
                     ?>
                 </div>
 

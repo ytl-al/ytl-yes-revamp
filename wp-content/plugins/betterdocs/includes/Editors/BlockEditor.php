@@ -66,7 +66,6 @@ class BlockEditor extends BaseEditor {
         if ( $hook == 'post-new.php' || $hook == 'post.php' || $hook == 'site-editor.php' ) {
             $this->assets->enqueue( 'fontpicker-default-theme', 'vendor/css/fonticonpicker.base-theme.react.css' );
             $this->assets->enqueue( 'fontpicker-material-theme', 'vendor/css/fonticonpicker.material-theme.react.css' );
-            $this->assets->enqueue( 'betterdocs-admin-editor-css', 'admin/editor.css' );
         }
     }
 

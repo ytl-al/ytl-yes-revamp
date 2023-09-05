@@ -10,6 +10,7 @@ use WPDeveloper\BetterDocs\Utils\Base;
 use WPDeveloper\BetterDocs\Admin\Customizer\Sections\Sidebar;
 use WPDeveloper\BetterDocs\Admin\Customizer\Sections\DocsPage;
 use WPDeveloper\BetterDocs\Admin\Customizer\Sections\SingleDoc;
+use WPDeveloper\BetterDocs\Admin\Customizer\Sections\BreadCrumb;
 use WPDeveloper\BetterDocs\Admin\Customizer\Sections\FaqBuilder;
 use WPDeveloper\BetterDocs\Admin\Customizer\Sections\LiveSearch;
 use WPDeveloper\BetterDocs\Admin\Customizer\Sections\ArchivePage;
@@ -67,7 +68,8 @@ class Customizer extends Base {
             Sidebar::class,
             ArchivePage::class,
             LiveSearch::class,
-            FaqBuilder::class
+            FaqBuilder::class,
+            BreadCrumb::class
         ] );
 
         /**

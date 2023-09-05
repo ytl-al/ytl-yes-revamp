@@ -152,7 +152,6 @@ class Defaults extends Base {
             'betterdocs_post_title_tag'                                => 'h1',
             'betterdocs_single_doc_title_font_size'                    => '36',
             'betterdocs_single_doc_title_color'                        => '#3f5876',
-            'betterdocs_single_doc_breadcrumb'                         => '',
             'betterdocs_single_doc_breadcrumbs_font_size'              => '16',
             'betterdocs_single_doc_breadcrumb_color'                   => '#566e8b',
             'betterdocs_single_doc_breadcrumb_hover_color'             => '#566e8b',

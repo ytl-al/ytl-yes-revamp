@@ -162,7 +162,7 @@ $css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper:not(.better
 ], 'px' ) );
 
 //Doc Category Title Font Size for Layout 1, 2, 3, 5
-$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper:not(.betterdocs-category-layout-4):not(.betterdocs-category-layout-6) .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-title:not(:has(a))', $css->properties( [
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper:not(.betterdocs-category-layout-4):not(.betterdocs-category-layout-6) .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-title:not(a)', $css->properties( [
     'font-size' => 'betterdocs_doc_page_cat_title_font_size'
 ], 'px' ) );
 
@@ -177,7 +177,7 @@ $css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-
 ], 'px' ) );
 
 //DocCategory Title Color For Layout 1
-$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-1 .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-title:not(:has(a))', $css->properties( [
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-1 .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-title:not(a)', $css->properties( [
     'color' => 'betterdocs_doc_page_cat_title_color'
 ], '' ) );
 $css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-1 .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-title a', $css->properties( [
@@ -195,7 +195,7 @@ $css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper:not(.better
 ], '' ) );
 
 //DocCategory Title Hover Color
-$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-title:not(:has(a)):hover', $css->properties( [
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-title:not(a):hover', $css->properties( [
     'color' => 'betterdocs_doc_page_cat_title_hover_color'
 ], '' ) );
 $css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-title a:hover, .betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-6 .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header-inner .betterdocs-category-title-counts .betterdocs-category-title a:hover', $css->properties( [
@@ -2376,7 +2376,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sid
 // ] ) );
 
 //Sidebar Title Color Layout 1
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a)', $css->properties( [
     'color' => 'betterdocs_sidebar_title_color'
 ] ) );
 
@@ -2386,7 +2386,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sid
 // ] ) );
 
 //Sidebar Title Hover Color Layout 1
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a:hover', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a):hover', $css->properties( [
     'color' => 'betterdocs_sidebar_title_hover_color'
 ] ) );
 
@@ -2396,7 +2396,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sid
 // ] ) );
 
 //Sidebar Active Title Color Layout 1
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sidebar-content.betterdocs-category-sidebar .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sidebar-content.betterdocs-category-sidebar .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sidebar-content.betterdocs-category-sidebar .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a)', $css->properties( [
     'color' => 'betterdocs_sidebar_active_title_color'
 ] ) );
 
@@ -2406,7 +2406,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sid
 // ] ) );
 
 //Sidebar Title Hover Color Layout 1
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a:hover', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a):hover', $css->properties( [
     'color' => 'betterdocs_sidebar_title_hover_color'
 ] ) );
 
@@ -2416,7 +2416,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sid
 // ] ) );
 
 //Sidebar Title Font Size Layout 1
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a)', $css->properties( [
     'font-size' => 'betterdocs_sidebar_title_font_size'
 ], 'px' ) );
 
@@ -2607,7 +2607,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sid
 // ], 'px' ) );
 
 //Sidebar Title Color Layout 5
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a)', $css->properties( [
     'color' => 'betterdocs_sidebar_title_color'
 ] ) );
 
@@ -2637,7 +2637,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sid
 // ] ) );
 
 //Sidebar Title Hover Color Layout 5
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a:hover, .betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a:hover', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a):hover, .betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a):hover', $css->properties( [
     'color' => 'betterdocs_sidebar_title_hover_color'
 ] ) );
 
@@ -2647,7 +2647,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sid
 // ] ) );
 
 //Sidebar Active Title Color Layout 5
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a)', $css->properties( [
     'color' => 'betterdocs_sidebar_active_title_color'
 ] ) );
 
@@ -2657,7 +2657,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sid
 // ] ) );
 
 //Sidebar Title Font Size Layout 5
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a)', $css->properties( [
     'font-size' => 'betterdocs_sidebar_title_font_size'
 ], 'px' ) );
 
@@ -2814,7 +2814,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-4 .betterdocs-sid
 // ], 'px' ) );
 
 //Sidebar Title Color Layout 4
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-4 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-4 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-4 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a)', $css->properties( [
     'color' => 'betterdocs_sidebar_title_color'
 ] ) );
 
@@ -2844,7 +2844,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-4 .betterdocs-sid
 // ] ) );
 
 //Sidebar Title Hover Color Layout 4
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-4 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a:hover, .betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a:hover', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-4 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-4 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a):hover, .betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a):hover', $css->properties( [
     'color' => 'betterdocs_sidebar_title_hover_color'
 ] ) );
 
@@ -2854,7 +2854,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-4 .betterdocs-sid
 // ] ) );
 
 //Sidebar Active Title Color Layout 4
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-4 .betterdocs-sidebar-content .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-4 .betterdocs-sidebar-content .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-4 .betterdocs-sidebar-content .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a)', $css->properties( [
     'color' => 'betterdocs_sidebar_active_title_color'
 ] ) );
 
@@ -2864,7 +2864,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-4 .betterdocs-sid
 // ] ) );
 
 //Sidebar Title Font Size Layout 4
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-4 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-4 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-4 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a)', $css->properties( [
     'font-size' => 'betterdocs_sidebar_title_font_size'
 ], 'px' ) );
 
@@ -3011,7 +3011,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-2 .betterdocs-cat
 // ], 'px' ) );
 
 //Sidebar Title Color Layout 2
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-2 .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-2 .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-2 .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a)', $css->properties( [
     'color' => 'betterdocs_sidebar_title_color'
 ] ) );
 
@@ -3021,7 +3021,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-2 .betterdocs-sin
 // ] ) );
 
 //Sidebar Title Hover Color Layout 2
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-2 .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a:hover, .betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a:hover', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-2 .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-2 .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a):hover, .betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-5 .betterdocs-sidebar-content .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a):hover', $css->properties( [
     'color' => 'betterdocs_sidebar_title_hover_color'
 ] ) );
 
@@ -3031,7 +3031,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-2 .betterdocs-sin
 // ] ) );
 
 //Sidebar Active Title Color Layout 2
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-2 .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-2 .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-2 .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a)', $css->properties( [
     'color' => 'betterdocs_sidebar_active_title_color'
 ] ) );
 
@@ -3051,7 +3051,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-2 .betterdocs-sid
 // ] ) );
 
 //Sidebar Title Font Size Layout 2
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-2 .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-2 .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-2 .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a)', $css->properties( [
     'font-size' => 'betterdocs_sidebar_title_font_size'
 ], 'px' ) );
 
@@ -3220,7 +3220,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-3 .betterdocs-sid
 // ] ) );
 
 //Sidebar Title Color Layout 3
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-3 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-3 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-3 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a)', $css->properties( [
     'color' => 'betterdocs_sidebar_title_color'
 ] ) );
 
@@ -3230,7 +3230,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-3 .betterdocs-sid
 // ] ) );
 
 //Sidebar Title Hover Color Layout 3
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-3 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a:hover', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-3 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-3 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a):hover', $css->properties( [
     'color' => 'betterdocs_sidebar_title_hover_color'
 ] ) );
 
@@ -3240,7 +3240,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-3 .betterdocs-sid
 // ] ) );
 
 //Sidebar Active Title Color Layout 3
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-3 .betterdocs-sidebar-content .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-3 .betterdocs-sidebar-content .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-3 .betterdocs-sidebar-content .betterdocs-single-category-wrapper.active .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a)', $css->properties( [
     'color' => 'betterdocs_sidebar_active_title_color'
 ] ) );
 
@@ -3250,7 +3250,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-3 .betterdocs-sid
 // ] ) );
 
 //Sidebar Title Font Size Layout 3
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-3 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-3 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, .betterdocs-sidebar.betterdocs-sidebar-layout-3 .betterdocs-sidebar-content .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a)', $css->properties( [
     'font-size' => 'betterdocs_sidebar_title_font_size'
 ], 'px' ) );
 

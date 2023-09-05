@@ -51,7 +51,7 @@ class CategoryBox extends Block {
     }
 
     public function view_params() {
-        $attributes =  &$this->attributes;
+        $attributes = &$this->attributes;
 
         $terms_object = [
             'taxonomy'   => 'doc_category',
@@ -85,7 +85,7 @@ class CategoryBox extends Block {
         $_inner_wrapper_classes = [
             'betterdocs-category-box-inner-wrapper',
             'layout-flex',
-            $attributes['layout'],
+            $attributes['layout'] === 'default' ? 'layout-1' : $attributes['layout'],
             "betterdocs-column-" . $attributes['colRange'],
             "betterdocs-column-tablet-" . $attributes['TABcolRange'],
             "betterdocs-column-mobile-" . $attributes['MOBcolRange']
@@ -106,6 +106,8 @@ class CategoryBox extends Block {
             'inner_wrapper_attr' => $inner_wrapper_attr,
             'terms_query_args'   => $terms_object,
             'widget_type'        => 'category-box',
+            'multiple_knowledge_base' => false,
+            'kb_slug'                 => '',
             'nested_subcategory' => false,
             'show_header'        => true
         ];

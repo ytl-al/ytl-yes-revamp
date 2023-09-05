@@ -198,6 +198,36 @@ class Sidebar extends BaseWidget {
             ]
         );
 
+        $this->add_control(
+            'show_icon',
+            [
+                'label'        => __( 'Show Icon', 'betterdocs' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __( 'Show', 'betterdocs' ),
+                'label_off'    => __( 'Hide', 'betterdocs' ),
+                'return_value' => 'true',
+                'default'      => 'true',
+                'condition'    => [
+                    'betterdocs_sidebar_layout' => ['layout-1']
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'show_count',
+            [
+                'label'        => __( 'Show Count', 'betterdocs' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __( 'Show', 'betterdocs' ),
+                'label_off'    => __( 'Hide', 'betterdocs' ),
+                'return_value' => 'true',
+                'default'      => 'true',
+                'condition'    => [
+                    'betterdocs_sidebar_layout' => ['layout-1']
+                ]
+            ]
+        );
+
         $this->end_controls_section(); # end of 'Select Layout'
     }
 
@@ -351,39 +381,13 @@ class Sidebar extends BaseWidget {
             ['label' => esc_html__( 'Normal', 'betterdocs' )]
         );
 
-        $this->add_control(
-            'box_section_header',
-            [
-                'label'     => __( 'Header', 'betterdocs' ),
-                'type'      => Controls_Manager::HEADING,
-                'separator' => 'before'
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Background::get_type(),
-            [
-                'name'     => 'card_bg_normal_header',
-                'types'    => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header'
-            ]
-        );
-
-        $this->add_control(
-            'box_section_body',
-            [
-                'label'     => __( 'Body', 'betterdocs' ),
-                'type'      => Controls_Manager::HEADING,
-                'separator' => 'before'
-            ]
-        );
 
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
                 'name'     => 'card_bg_normal',
                 'types'    => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper .betterdocs-body'
+                'selector' => '{{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper .betterdocs-body, {{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-list-wrapper .betterdocs-single-category-inner .betterdocs-body'
             ]
         );
 
@@ -392,7 +396,7 @@ class Sidebar extends BaseWidget {
             [
                 'name'     => 'card_border_normal',
                 'label'    => esc_html__( 'Border', 'betterdocs' ),
-                'selector' => '{{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper .betterdocs-body'
+                'selector' => '{{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper .betterdocs-body, {{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-list-wrapper .betterdocs-single-category-inner .betterdocs-body'
             ]
         );
 
@@ -403,7 +407,8 @@ class Sidebar extends BaseWidget {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper .betterdocs-body' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                    '{{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper .betterdocs-body' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-list-wrapper .betterdocs-single-category-inner .betterdocs-body' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                 ]
             ]
         );
@@ -412,7 +417,7 @@ class Sidebar extends BaseWidget {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name'     => 'card_box_shadow_normal',
-                'selector' => '{{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper .betterdocs-body'
+                'selector' => '{{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper .betterdocs-body, {{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-list-wrapper .betterdocs-single-category-inner .betterdocs-body'
             ]
         );
 
@@ -446,23 +451,6 @@ class Sidebar extends BaseWidget {
             ]
         );
 
-        $this->add_control(
-            'box_section_header_hover',
-            [
-                'label'     => __( 'Header', 'betterdocs' ),
-                'type'      => Controls_Manager::HEADING,
-                'separator' => 'before'
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Background::get_type(),
-            [
-                'name'     => 'card_bg_hover_header',
-                'types'    => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header:hover'
-            ]
-        );
 
         $this->add_control(
             'box_section_body_hover',
@@ -478,7 +466,7 @@ class Sidebar extends BaseWidget {
             [
                 'name'     => 'card_bg_hover',
                 'types'    => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper .betterdocs-body:hover'
+                'selector' => '{{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper .betterdocs-body:hover, {{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-list-wrapper .betterdocs-single-category-inner .betterdocs-body:hover'
             ]
         );
 
@@ -487,7 +475,7 @@ class Sidebar extends BaseWidget {
             [
                 'name'     => 'card_border_hover',
                 'label'    => esc_html__( 'Border', 'betterdocs' ),
-                'selector' => '{{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper .betterdocs-body:hover'
+                'selector' => '{{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper .betterdocs-body:hover, {{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-list-wrapper .betterdocs-single-category-inner .betterdocs-body:hover'
             ]
         );
 
@@ -498,7 +486,8 @@ class Sidebar extends BaseWidget {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper .betterdocs-body:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                    '{{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper .betterdocs-body:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-list-wrapper .betterdocs-single-category-inner .betterdocs-body:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                 ]
             ]
         );
@@ -507,11 +496,10 @@ class Sidebar extends BaseWidget {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name'     => 'card_box_shadow_hover',
-                'selector' => '{{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper .betterdocs-body:hover'
+                'selector' => '{{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper .betterdocs-body:hover, {{WRAPPER}} .betterdocs-sidebar-content .betterdocs-category-list-wrapper .betterdocs-single-category-inner .betterdocs-body:hover'
             ]
         );
 
-        $this->end_controls_tab();
 
         $this->end_controls_tabs();
         $this->end_controls_section(); # end of 'Card Settings'
@@ -809,8 +797,17 @@ class Sidebar extends BaseWidget {
                 'label'     => esc_html__( 'Color', 'betterdocs' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a' => 'color: {{VALUE}};'
+                    '{{WRAPPER}} .betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, {{WRAPPER}} .betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a), {{WRAPPER}} .betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-category-list-wrapper .betterdocs-category-list-inner-wrapper .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a)' => 'color: {{VALUE}};'
                 ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'card_bg_normal_header',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header, {{WRAPPER}} .betterdocs-category-list-wrapper .betterdocs-category-list-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header'
             ]
         );
 
@@ -818,7 +815,7 @@ class Sidebar extends BaseWidget {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'cat_title_typography_normal',
-                'selector' => '{{WRAPPER}} .betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a'
+                'selector' => '{{WRAPPER}} .betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a, {{WRAPPER}} .betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a), {{WRAPPER}} .betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-category-list-wrapper .betterdocs-category-list-inner-wrapper .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:not(a)'
             ]
         );
 
@@ -829,7 +826,7 @@ class Sidebar extends BaseWidget {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors'  => [
-                    '{{WRAPPER}} .betterdocs-category-grid-wrapper .betterdocs-category-title a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                    '{{WRAPPER}} .betterdocs-category-grid-wrapper .betterdocs-category-title a, {{WRAPPER}} .betterdocs-category-grid-wrapper .betterdocs-category-title:not(a), {{WRAPPER}} .betterdocs-category-list-wrapper .betterdocs-category-title:not(a)' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                 ]
             ]
         );
@@ -841,7 +838,7 @@ class Sidebar extends BaseWidget {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors'  => [
-                    '{{WRAPPER}} .betterdocs-category-grid-wrapper .betterdocs-category-title a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                    '{{WRAPPER}} .betterdocs-category-grid-wrapper .betterdocs-category-title a, {{WRAPPER}} .betterdocs-category-grid-wrapper .betterdocs-category-title:not(a), {{WRAPPER}} .betterdocs-category-list-wrapper .betterdocs-category-title:not(a)' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                 ]
             ]
         );
@@ -860,8 +857,17 @@ class Sidebar extends BaseWidget {
                 'label'     => esc_html__( 'Color', 'betterdocs' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-category-header:hover .betterdocs-category-title a' => 'color: {{VALUE}};'
+                    '{{WRAPPER}} .betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-category-header:hover .betterdocs-category-title a, {{WRAPPER}} .betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-category-header:hover .betterdocs-category-title:not(a),  {{WRAPPER}} .betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-category-list-wrapper .betterdocs-category-list-inner-wrapper .betterdocs-category-header:hover .betterdocs-category-title:not(a)' => 'color: {{VALUE}};'
                 ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'card_bg_hover_header',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header:hover, {{WRAPPER}} .betterdocs-category-list-wrapper .betterdocs-category-list-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header:hover'
             ]
         );
 
@@ -884,6 +890,35 @@ class Sidebar extends BaseWidget {
                 'selectors'  => [
                     '{{WRAPPER}} .betterdocs-category-grid-wrapper .betterdocs-category-header' => 'transition: {{SIZE}}ms;'
                 ]
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab(
+            'card_active',
+            ['label' => esc_html__( 'Active', 'betterdocs' )]
+        );
+
+        $this->add_control(
+            'cat_title_active_color',
+            [
+                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper.active .betterdocs-category-header .betterdocs-category-title a, {{WRAPPER}} .betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper.active .betterdocs-category-header .betterdocs-category-title:not(a),  {{WRAPPER}} .betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-category-list-wrapper .betterdocs-category-list-inner-wrapper .betterdocs-category-header .betterdocs-category-title:not(a)' => 'color: {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'card_bg_active_header',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper.active .betterdocs-category-header'
             ]
         );
 
@@ -1340,6 +1375,11 @@ class Sidebar extends BaseWidget {
                 'title_tag'                => $settings['category_title_tag']
             ]
         ];
+
+        if( $settings['betterdocs_sidebar_layout'] == 'layout-1') {
+            $params['shortcode_attr'][ 'show_icon' ] = $settings['show_icon'];
+            $params['shortcode_attr'][ 'show_count' ] = $settings['show_count'];
+        }
 
         if( $settings['betterdocs_sidebar_layout'] == 'layout-4' || $settings['betterdocs_sidebar_layout'] == 'layout-3' ) {
             $params['shortcode_attr'][ 'show_icon' ] = false;

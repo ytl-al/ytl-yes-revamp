@@ -4,5 +4,12 @@
     }
 ?>
 <p class="betterdocs-category-description">
-    <?php echo esc_html($description); ?>
+    <?php
+    if ( $widget_type === 'category_box' ) {
+        $allowed_tags = ['strong', 'em', 'b', 'code', 'i'];
+        echo wp_kses($description, $allowed_tags);
+    } else {
+        echo wp_kses_post($description);
+    }
+    ?>
 </p>

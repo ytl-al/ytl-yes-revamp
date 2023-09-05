@@ -24,7 +24,7 @@ if ( $faqs->have_posts() ) {
                 ]
             ];
 
-            $GLOBALS['betterdocs_faq_schema'] = $faq_json;
+            $GLOBALS['betterdocs_faq_schema'][] = $faq_json;
         }
     endwhile;
     wp_reset_postdata();

@@ -575,7 +575,7 @@ class CategoryGrid extends BaseWidget {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'cat_list_typography',
-                'selector' => '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-title a'
+                'selector' => '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-title a, {{WRAPPER}} .betterdocs-elementor .betterdocs-category-title:not(a)'
             ]
         );
 
@@ -593,7 +593,7 @@ class CategoryGrid extends BaseWidget {
                 'label'     => esc_html__( 'Color', 'betterdocs' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-title a' => 'color: {{VALUE}};'
+                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-title a, {{WRAPPER}} .betterdocs-elementor .betterdocs-category-title:not(a)' => 'color: {{VALUE}};'
                 ]
             ]
         );
@@ -667,7 +667,7 @@ class CategoryGrid extends BaseWidget {
                 'label'     => esc_html__( 'Color', 'betterdocs' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-title a:hover' => 'color: {{VALUE}};'
+                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-title a:hover, {{WRAPPER}} .betterdocs-elementor .betterdocs-category-title:not(a):hover' => 'color: {{VALUE}};'
                 ]
             ]
         );
@@ -1632,6 +1632,9 @@ class CategoryGrid extends BaseWidget {
             ];
         }
 
+
+        $kb_slug = isset( $settings['selected_knowledge_base'] ) ? $settings['selected_knowledge_base'] : '';
+
         $params = wp_parse_args( [
             'wrapper_attr'           => $this->get_render_attributes( 'bd_category_grid_wrapper' ),
             'inner_wrapper_attr'     => $this->get_render_attributes( 'bd_category_grid_inner' ),
@@ -1642,7 +1645,9 @@ class CategoryGrid extends BaseWidget {
             'terms_query_args'       => $this->betterdocs( 'query' )->terms_query( $terms_query ),
             'list_icon_name'         => empty( $settings['list_icon']['value'] ) ? 'list' : $settings['list_icon'],
             'button_icon_position'   => $settings['icon_position'],
-            'term_icon_meta_key' => 'doc_category_image-id',
+            'term_icon_meta_key'     => 'doc_category_image-id',
+            'multiple_knowledge_base'=> $default_multiple_kb,
+            'kb_slug'                => $kb_slug,
             'docs_query_args'        => [
                 'posts_per_page'     => $settings['post_per_page'],
                 'orderby'            => $settings['post_orderby'],

@@ -1164,11 +1164,15 @@ class CategoryBox extends BaseWidget {
             ];
         }
 
+        $kb_slug = isset( $settings['selected_knowledge_base'] ) ? $settings['selected_knowledge_base'] : '';
+
         $params = wp_parse_args( [
             'wrapper_attr'       => $this->get_render_attributes( 'bd_category_box_wrapper' ),
             'inner_wrapper_attr' => $this->get_render_attributes( 'bd_category_box_inner' ),
             'layout'             => $settings['layout_template'],
             'widget_type'        => 'category-box',
+            'multiple_knowledge_base'=> $default_multiple_kb,
+            'kb_slug'            => $kb_slug,
             'is_edit_mode'       => $is_edit_mode,
             'term_icon_meta_key' => 'doc_category_image-id',
             'terms_query_args'   => $this->betterdocs( 'query' )->terms_query( $terms_query ),

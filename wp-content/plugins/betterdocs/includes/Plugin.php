@@ -136,7 +136,7 @@ final class Plugin {
      * Plugin Version
      * @var string
      */
-    public $version = '2.5.3';
+    public $version = '2.5.4';
 
     /**
      * Plugin DB Version
