@@ -2291,33 +2291,17 @@ if ($lang == "en-US"){
                                                 <p class="yes_text_menu_headline">Explore Our Plans</p>
                                             </li>
                                             <?php
+                       
+                                $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fiber-5G");
+								// print_r($Wireless_Fibre_menu);
 
-                                $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fibre-5G");
-// echo "<pre>";
-// print_r($Wireless_Fibre_menu);
-// echo "</pre>";                         
-                                            $WirelessNav = wp_get_nav_menu_items($Wireless_Fibre_menu);                                            
-                                            
-                                            foreach ($WirelessNav as $wirelessItem) {
-                                                ?>
-                                                <?php
-                                                $lang = get_bloginfo("language");                                                
-                                                $parse = parse_url($wirelessItem->url);
-                                                $url = rtrim(get_bloginfo('url'),"/");
-                                                if ($lang == "en-US"){
-                                              ?>
-                                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $url.$wirelessItem->url; ?>">
-                                                <?php echo $wirelessItem->post_title; ?></a></li>
-                                            <?php
-                                            }else{
-                                                ?>
-                                                <li class="dropdown-header">
-                                                <a class="custom_menu_nuv" href="<?php echo get_site_url().'/ms'.$parse['path']; ?>">
-                                                <?php echo $wirelessItem->post_title; ?></a></li>
-                                            <?php
-                                            }
-                                            }
-                                            ?>
+                                            $WirelessNav = wp_get_nav_menu_items($Wireless_Fibre_menu); 
+											// print_r($WirelessNav);                                            
+                                     foreach ($WirelessNav as $wirelessItem) {
+                        ?>
+                                    <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $wirelessItem->url; ?>"><?php echo $wirelessItem->title; ?></a></li>
+                                        <?php                    }
+                    ?>
 
                                         </ul>
 
@@ -2872,6 +2856,7 @@ if ($lang == "en-US"){
                                     <div class="">
                                     <?php
                                     $lang = get_bloginfo("language");
+                                    $site_url_menu = get_site_url();
                                     if ($lang == "en-US") {
                                         $site_url_menu = get_site_url();
                                     } elseif ($lang == "ms-MY") {

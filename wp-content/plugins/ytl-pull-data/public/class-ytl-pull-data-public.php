@@ -724,7 +724,7 @@ class Ytl_Pull_Data_Public
 	public function ca_generate_auth_token_new($get_token_only = false)
 	{
 		// $api_domain="https://ydbp-identity-dev.azurewebsites.net";
-		$guestLoginData = get_option('yes_guest_login_token_data', true);
+		$guestLoginData = get_option('yes_gauest_login_token_data', true);
 
 		if (isset($guestLoginData)) {
 			$api_domain = $guestLoginData['set_token_data_guest_login']['token_url'];
@@ -846,7 +846,7 @@ class Ytl_Pull_Data_Public
 	public function ca_generate_otp_for_guest_login_new($MobileNumber = null, $locale = 'EN')
 	{
 		// $api_domain ="https://ydbp-shoutout-kraken-dev.azurewebsites.net";
-		$guestLoginData = get_option('yes_guest_login_token_data', true);
+		$guestLoginData = get_option('yes_gauest_login_token_data', true);
 
 		if (isset($guestLoginData) && !empty($guestLoginData)) {
 			$api_domain = $guestLoginData['set_token_data_guest_login']['otp_url'];
@@ -2080,7 +2080,7 @@ class Ytl_Pull_Data_Public
 	public function ca_validate_guest_login_otp($MobileNumber = null, $otp_password = null, $locale = 'EN')
 	{
 		// $api_domain="https://ydbp-shoutout-kraken-dev.azurewebsites.net";
-		$guestLoginData = get_option('yes_guest_login_token_data', true);
+		$guestLoginData = get_option('yes_gauest_login_token_data', true);
 
 
 		if (isset($guestLoginData) && !empty($guestLoginData)) {
