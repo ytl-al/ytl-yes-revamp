@@ -222,7 +222,7 @@
                 </div>
                 <div class="col-md-6">
                 <div class="tx-img">
-                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/06/banner-side.png"
+                    <img src="/wp-content/uploads/2023/09/banner-side.png"
                         class="img-fluid" alt="...">
                 </div>
             </div>
@@ -283,7 +283,7 @@
                 </div>
 
                 <hr>
-                <div class="row price">
+                <div class="row price d-none">
                     <div class="rs">
                         <h1>
                             You may also like

@@ -386,6 +386,7 @@
                 eSimSupportPlan: '',
                 allowSubmit: false,
                 upFrontPayment: 'false',
+                trxType:'',
                 orderSummary: {
                     plan: {},
                     due: {

@@ -189,7 +189,7 @@
                                     v-model="simType" @click="showErrorEsimMsg()">
                                 <span class="plan-details">
                                     <div class="panel-img">
-                                        <img src="/wp-content/uploads/2023/06/sim.png" alt="..." class="card-panal-img">
+                                        <img src="/wp-content/uploads/2023/09/e-sim.png" alt="..." class="card-panal-img">
                                     </div>
                                     <div class="panel-body">
                                         eSIM
@@ -201,7 +201,7 @@
                                     v-model="simType" checked @click="hideErrorEsimMsg()">
                                 <span class="plan-details">
                                     <div class="panel-img">
-                                        <img src="/wp-content/uploads/2023/06/Physical-sim.png" alt="..."
+                                        <img src="/wp-content/uploads/2023/09/Visuals.png" alt="..."
                                             class="card-panal-img">
                                     </div>
                                     <div class="panel-body">
@@ -210,8 +210,6 @@
                                 </span>
                             </label>
                             <div class="eSIM d-none" id="eSIM_msg" >
-                                <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png"
-                                    alt="...">
                                 <div>
                                 <p>Device eSIM Compatibility</p>
                                 <p><span>The device you have selected is not eSIM compatible.</span></p>
