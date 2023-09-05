@@ -2076,6 +2076,7 @@ foreach ($primaryNav as $navItem) {
 
 $lang = get_bloginfo("language");
 $parse = parse_url($navItem->url);
+if (!isset($parse['path'])) $parse['path'] = '';
 $url = rtrim(get_bloginfo('url'),"/");
 if ($lang == "en-US"){
 
@@ -2189,6 +2190,7 @@ if ($lang == "en-US"){
                                 <?php
                                 $lang = get_bloginfo("language");  
                                 $parse = parse_url($prepaid_navItem->url);                            
+                                if (!isset($parse['path'])) $parse['path'] = '';
                                 $url = rtrim(get_bloginfo('url'), "/");
                                 if ($lang == "en-US") {
                                     ?>
@@ -2303,6 +2305,7 @@ if ($lang == "en-US"){
                                                 <?php
                                                 $lang = get_bloginfo("language");                                                
                                                 $parse = parse_url($wirelessItem->url);
+                                                if (!isset($parse['path'])) $parse['path'] = '';
                                                 $url = rtrim(get_bloginfo('url'),"/");
                                                 if ($lang == "en-US"){
                                               ?>
@@ -2335,6 +2338,7 @@ if ($lang == "en-US"){
                                                 <?php
                                                 $lang = get_bloginfo("language");
                                                 $parse = parse_url($quick_menusItem->url);
+                                                if (!isset($parse['path'])) $parse['path'] = '';
                                                 $url = rtrim(get_bloginfo('url'),"/");
                                                 if ($lang == "en-US"){
                                                 ?>
@@ -2373,6 +2377,7 @@ if ($lang == "en-US"){
                                                 <?php
                                                 $lang = get_bloginfo("language");
                                                 $parse = parse_url($broadband_menusItem->url);
+                                                if (!isset($parse['path'])) $parse['path'] = '';
                                                 $url = rtrim(get_bloginfo('url'),"/");
                                                 if ($lang == "en-US"){
 
@@ -2404,6 +2409,7 @@ if ($lang == "en-US"){
                                             <?php
                                             $lang = get_bloginfo("language");                                            
                                             $parse = parse_url($quick_menusItem->url);                                            
+                                            if (!isset($parse['path'])) $parse['path'] = '';
                                             $url = rtrim(get_bloginfo('url'),"/");
                                             if ($lang == "en-US"){    
                                             ?>
@@ -2439,6 +2445,7 @@ if ($lang == "en-US"){
                                     <?php
                                     $lang = get_bloginfo("language");
                                     $parse = parse_url($on_the_broadbandItem->url);
+                                    if (!isset($parse['path'])) $parse['path'] = '';
                                     $url = rtrim(get_bloginfo('url'),"/");
                                     if ($lang == "en-US"){
                                                 ?>
