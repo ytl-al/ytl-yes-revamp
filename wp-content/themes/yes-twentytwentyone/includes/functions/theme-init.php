@@ -2485,7 +2485,7 @@ if ($lang == "en-US"){
                         //  echo "<pre>";
                         // print_r($menus);
                         // echo '</pre>';
-                         $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fibre-5G");
+                         $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fiber-5G");
                          
                         //  print_r($Wireless_Fibre_menu);
                             
@@ -2495,7 +2495,7 @@ if ($lang == "en-US"){
                                 foreach ($WirelessNav as $wirelessItem) {
 
                             ?>
-                                    <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $wirelessItem->url; ?>"><?php echo $wirelessItem->post_title; ?></a></li>
+                                    <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $wirelessItem->url; ?>"><?php echo $wirelessItem->title; ?></a></li>
                             <?php
                                 }
                             }

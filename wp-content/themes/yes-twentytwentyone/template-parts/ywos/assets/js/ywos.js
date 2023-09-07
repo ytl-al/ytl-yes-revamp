@@ -463,24 +463,24 @@ const ywos = {
             console.log('Local storage data not found!');
             isValid = false;
         } else if (!this.checkExpiryValid()) {
-            alert(1);
+            // alert(1);
             console.log('Local storage data is expired!');
             isValid = false;
         } else if (!this.checkItems()) {
-            alert(2);
+            // alert(2);
             console.log('Plan ID is not found!');
             isValid = false;
         } else if (this.checkPurchaseCompleted(curStep)) {
-            alert(3);
+            // alert(3);
             console.log('Purchase has been completed!');
             isValid = false;
         } else if (!isSkipCart && !this.checkStep(curStep)) {
-            alert(4);
+            // alert(4);
             console.log('Previous step not yet completed!');
             // isValid = false;
             // return false;
         } else if (isSkipCart) {
-            alert(5);
+            // alert(5);
             if (!this.checkStepRoving(curStep)) {
                 
             }
