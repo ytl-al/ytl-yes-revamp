@@ -559,9 +559,9 @@ class Ytl_Pull_Data_Public
 	 */
 	public function get_bundlePlan_by_id(WP_REST_Request $request)
 	{
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+		// 	exit("Request not valid");
+		// }
 		$devicePlan_id = $request->get_param('device_id');
 		$return = [];
 		$get_plans = get_option('ywos_device_bundle_plans');
