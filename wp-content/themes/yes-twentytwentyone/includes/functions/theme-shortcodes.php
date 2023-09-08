@@ -743,8 +743,8 @@ if (!function_exists('generate_roadshow')) {
     add_shortcode('yessc_roadshow_list', 'generate_roadshow');
 }
 
+
 if (!function_exists('generate_outgoing_network_maintenance')) {
-    //echo "test2";
      function snm_get_session()
      {        
         $url="https://apigateway.yes.my/api/v1/ytlc/pnoc/tokenget";
@@ -847,7 +847,7 @@ if (!function_exists('generate_outgoing_network_maintenance')) {
                      </div>
                           
                          <div class="table-responsive data-table-section">
-         <table class="table table-bordered table-striped">
+         <table class="table table-bordered table-striped mb-0">
          <thead class="thead-bg">
                              <tr><th>Work Start</th>
                              <th>Work End</th>

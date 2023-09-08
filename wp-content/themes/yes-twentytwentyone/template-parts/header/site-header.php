@@ -170,10 +170,12 @@ $path = plugin_basename(__DIR__).'/menu.json';
                                     <li class="nav-item dropdown mega-dropdown">
                                         <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown-businessSolution" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Business Solutions', 'yes.my'); ?></a>
                                         <ul class="dropdown-menu mega-dropdown-menu default-top-menu" aria-labelledby="navbarDropdown">
-                                            <li>
-                                                <ul>
-                                                    <li class="dropdown-header"><?php echo esc_html__('Internet Access', 'yes.my'); ?></li>
-                                                    <?php if (has_nav_menu('bs-internet-access')) wp_nav_menu(['theme_location' => 'bs-internet-access', 'container' => false, 'items_wrap' => '%3$s']); ?>
+                                        
+                                        <li>
+                                                <ul>                                                    
+                                                    <li class="nav-item dropdown-header"><?php echo esc_html__('Internet Access', 'yes.my'); ?></li>
+                                                  <?php if (has_nav_menu('bs-internet-access')) wp_nav_menu(['theme_location' => 'bs-internet-access', 'container' => false, 'items_wrap' => '%3$s']); ?>
+                                                  
                                                 </ul>
                                             </li>
                                             <li class="nav-item dropdown mega-dropdown">
@@ -220,7 +222,7 @@ $path = plugin_basename(__DIR__).'/menu.json';
                                         </ul>
                                     </li>
                                 </ul>
-                                <ul class="navbar-nav">
+                                <ul class="navbar-nav d-none">
                                     <li class="nav-item dropdown mega-dropdown">
                                         <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Get Help', 'yes.my'); ?></a>
                                         <ul class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown" id="gethelp">

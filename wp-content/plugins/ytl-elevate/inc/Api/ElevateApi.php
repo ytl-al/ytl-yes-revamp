@@ -2159,9 +2159,9 @@ class ElevateApi
         'SessionID' => $session_id,
         'Latitude' => $_GET['Latitude'],
         'Langitude' => $_GET['Langitude'], 
-       // 'Severity' => "S3",    
-        // 'Latitude' => '3.11523888888889',
-        // 'Langitude' => '101.67936944444466',
+        //'Severity' => "S3",    
+      // 'Latitude' => '3.11523888888889',
+     // 'Langitude' => '101.67936944444466',
     );
      $params = array(
         'method' => 'GET',
@@ -2170,7 +2170,7 @@ class ElevateApi
         //'sslverify' => false,     
          'headers' => array(
          'apikey' => 'jkweTq8hcOw5QxeWh8d13dfkjhdfsdgdd',
-             'Content-Type' => 'application/json',
+         'Content-Type' => 'application/json',
         )
    );
      //print_r($params); echo $url; echo "<br /><br /><br />";
