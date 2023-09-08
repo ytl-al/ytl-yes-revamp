@@ -29,7 +29,7 @@
 #accordion-faqShortcode .accordion-body > ol > li::marker, #accordion-faqShortcode .accordion-body > ul > li::marker { font-weight: bold; }
 .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content > ol, .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content > ul, 
 .betterdocs-single-wraper .docs-single-main .betterdocs-content-inner-area .betterdocs-content > ol, .betterdocs-single-wraper .docs-single-main .betterdocs-content-inner-area .betterdocs-content > ul, 
-#accordion-faqShortcode .accordion-body > ol, #accordion-faqShortcode .accordion-body > ul { padding-left: 20px; }
+#accordion-faqShortcode .accordion-body > ol, #accordion-faqShortcode .accordion-body > ul { padding-left: 30px; }
 .betterdocs-single-wraper .doc-single-content-wrapper .betterdocs-content img, 
 .betterdocs-single-wraper .docs-single-main .betterdocs-content-inner-area .betterdocs-content img, 
 #accordion-faqShortcode .accordion-body img { display: block; margin: 20px auto; max-width: 100%; }
