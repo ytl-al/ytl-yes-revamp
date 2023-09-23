@@ -535,6 +535,11 @@
 					self.getPlanData();
 				}, 500);
 			},
+			watch: {
+				'deliveryInfo.securityId': function(value) {
+					this.deliveryInfo.securityId = value.replace('-', '');
+				},
+			},
 			methods: {
 				getPlanData: function() {
 					var self = this;
