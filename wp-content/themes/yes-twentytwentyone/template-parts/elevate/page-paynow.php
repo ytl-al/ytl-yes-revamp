@@ -908,7 +908,8 @@
                     },
                     paymentSubmit: function(e) {
                         toggleOverlay();
-                        this.checkActiveContract();
+                        // this.checkActiveContract();
+                        this.ajaxCreateYOSOrder();
                         e.preventDefault();
                     },
                     redirectThankYou: function(status) {
