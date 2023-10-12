@@ -1606,7 +1606,7 @@ class Ytl_Pull_Data_Public
 		$simType		= $this->get_request_input($order_info, 'esim');
 		$session_id 	= $this->ca_generate_auth_token(true);
 		$walletType		= $this->get_request_input($order_info, 'walletType');
-		$stagingOrderNumber		= $this->get_request_input($order_info, 'stagingOrderNumber');
+		$stagingOrderNumber	= $this->get_request_input($order_info, 'stagingOrderNumber');
 		$simType		= $this->get_request_input($order_info, 'esim');
 
 		if (
