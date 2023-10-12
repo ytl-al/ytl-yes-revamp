@@ -1018,7 +1018,8 @@
                         'locale': self.apiLocale,
                         'walletType': self.paymentInfo.walletType,
                         'esim': self.eSIM,
-                        'applicationSource': "YOS"
+                        'applicationSource': "YOS",
+                        'stagingOrderNumber':self.deliveryInfo.stagingOrderNumber,
                     };
                     axios.post(apiEndpointURL + '/create-yos-order' + '?nonce=' + yesObj.nonce, params)
                         .then((response) => {
