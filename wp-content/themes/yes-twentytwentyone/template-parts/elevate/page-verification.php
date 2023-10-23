@@ -228,7 +228,8 @@
 										for(var i = 0; i < windows.length; i++){
 											windows[i].close()
 										}
-                                        self.CAVerification(data.data);
+                                        // self.CAVerification(data.data);
+                                        self.OCVerification(data.data);
 										//elevate.redirectToPage('personal');
                                     }
 
@@ -284,7 +285,33 @@
                             console.log(error);
                         });
                 },
-                redirectYWOS:function (){
+
+                OCVerification: function (response) {
+                    var self = this;
+                    var params = {
+                        mykad: self.eligibility.mykad,
+                        name:self.eligibility.name,
+                        OCRConfidenceScore:response.sim,
+                    };
+
+                    toggleOverlay();
+                    axios.post(apiEndpointURL_elevate + '/orix-check' + '?nonce='+yesObj.nonce, params)
+                        .then((response) => {
+                            var data = response.data.data;
+                            console.log(data);
+                            if (data.result == 'Success') {
+                                elevate.redirectToPage('personal');
+                            } else {
+                                toggleOverlay(false);
+                                toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('/compasia-fail')")
+                            }
+                        })
+                        .catch((error) => {
+                            toggleOverlay(false);
+                            console.log(error);
+                        });
+                    },
+                                    redirectYWOS:function (){
                     var self = this;
                     toggleOverlay();
                     ywos.buyPlan(self.selectedPlan);
