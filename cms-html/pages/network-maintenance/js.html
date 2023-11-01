@@ -63,9 +63,10 @@
                     return;                    
                 }
 
-                //console.log(place.geometry.location.lat(), place.geometry.location.lng());                
+                //console.log(place.geometry.location.lat(), place.geometry.location.lng());   
+               // http://localhost/wp-json/elevate/v1/outage-details             
                 $.ajax({
-                    url: "http://localhost/wp-json/elevate/v1/outage-details",
+                    url: "/wp-json/outage/v1/outage-details",
                     data: {
                         'Latitude': place.geometry.location.lat(),
                         'Langitude': place.geometry.location.lng(),
