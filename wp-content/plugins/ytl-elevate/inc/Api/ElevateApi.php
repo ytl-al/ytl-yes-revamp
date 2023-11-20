@@ -32,7 +32,7 @@ class ElevateApi
     const  api_order_get_by_number = 'api/Elevate/order/orderNumber';
     const  api_order_yos_order = 'api/Elevate/createYOSOrder';
     const  api_order_update_payment = 'api/Elevate/order/UpdateOrderPayment';
-
+    const api_oc_verification='/api/app/orix-check/verification';
     const  api_contract = 'api/Elevate/contract';
     const  api_contract_get_by_id = 'api/Elevate/contract/Id';
     const  api_contract_get_by_nric = 'api/Elevate/contract/customerNRIC';
@@ -111,6 +111,11 @@ class ElevateApi
             register_rest_route('/elevate/v1', '/ca-verification', array(
                 'methods' => 'POST',
                 'callback' => array($this, 'ca_verification'),
+                'permission_callback' => '__return_true'
+            ));
+            register_rest_route('/elevate/v1', '/orix-check', array(
+                'methods' => 'POST',
+                'callback' => array($this, 'oc_verification'),
                 'permission_callback' => '__return_true'
             ));
 
@@ -469,6 +474,83 @@ class ElevateApi
         $response->set_status(200);
         return $response;
     }
+
+    public  function oc_verification(WP_REST_Request $request)
+    {
+
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
+        $mykad = $request['mykad'];
+        $name = $request['name'];
+        // $email = $request['email'];
+        // $phone = $request['phone'];
+        // $guid = $request['guid'];
+
+        // $PartneReferenceID = $request['PartneReferenceID'];
+        $OCRConfidenceScore = round($request['OCRConfidenceScore']/100,2);
+        $token = $this->get_token();
+
+		$params = array(
+            'securityId' => $mykad,
+            'fullName' => $name,
+			'ocrConfidenceScore' => $OCRConfidenceScore."",
+            'requestingSystem'=>'YOS',
+            // 'mobileNumber' => $phone,
+            // 'email' => $email,
+            
+            // 'partnerReferenceID' => $PartneReferenceID,
+        );
+
+        $args = [
+            'headers' => array(
+                'Accept' => 'text/plain',
+                'Authorization' => 'Bearer ' . $token,
+                'Content-Type' => 'application/json'
+            ),
+			'body' => json_encode($params),
+            'method' => 'POST',
+            'timeout' => self::API_TIMEOUT,
+            'data_format' => 'body'
+        ];
+		$apiSetting =(new \Inc\Base\Model)->getAPISettings();
+        $api_url = 'https://ydbp-creditcheck-api-dev.azurewebsites.net' . self::api_oc_verification;
+
+        $request = wp_remote_post($api_url, $args);
+		 //print_r($args);print_r($request);die($api_url);
+
+        if (is_wp_error($request)) {
+            $return['status'] = 0;
+            $return['error'] = "Cannot connect to API server";
+        } else if ($request['response']['code'] != 200) {
+            $return['status'] = 0;
+            $return['error'] = @$request['response'];
+        } else {
+            $data = json_decode($request['body'], true);
+
+            if ($data['response']) {
+				$res = json_decode($data['response']);
+
+				if($res->result == 'Success'){
+					$return['status'] = 1;
+				}else{
+					$return['status'] = 0;
+					$return['error'] = $res->reason;
+				}
+            } else {
+                $return['status'] = 0;
+            }
+            $return['data'] = $data;
+        }
+		
+		//Write api log
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		
+        $response = new WP_REST_Response($return);
+        $response->set_status(200);
+        return $response;
+    }
+	
 
     public  function verify_caeligibility(WP_REST_Request $request)
     {
