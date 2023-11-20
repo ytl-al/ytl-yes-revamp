@@ -115,7 +115,7 @@ if (!function_exists('generate_scheduled_network_maintenance')) {
                         <section class="layer-section" id="section-list">
                             <div class="layer-filter filter-container sticky-top" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                                 <div class="layer-filterToggle">
-                                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>'. esc_html__('Filter', 'yes.my') .'</span> <span class="navbar-toggler-icon"></span></button>
+                                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>' . esc_html__('Filter', 'yes.my') . '</span> <span class="navbar-toggler-icon"></span></button>
                                     <div class="navbar-collapse tab-content collapse justify-content-center" id="tab-storeLocatorFilter">
                                         <div class="container">
                                             <div class="row justify-content-lg-center">
@@ -232,8 +232,7 @@ if (!function_exists('generate_store_locations')) {
         $file_to_read = fopen(FP_STORE_LOCATIONS, 'r');
         if ($file_to_read !== FALSE) {
             while (($data = fgetcsv($file_to_read, 0, ',')) !== FALSE) {
-                if (empty($arr_keys)) 
-               {
+                if (empty($arr_keys)) {
                     $arr_keys = $data;
                     continue;
                 }
@@ -261,26 +260,24 @@ if (!function_exists('generate_store_locations')) {
         }
 
         $html_list  = '';
-		if( isset($arr_list['KUALA LUMPUR']) ) {
+        if (isset($arr_list['KUALA LUMPUR'])) {
             $new_value = $arr_list['KUALA LUMPUR'];
-            $arr_list = array_merge(["KUALA LUMPUR"=>$new_value], $arr_list);
-        
+            $arr_list = array_merge(["KUALA LUMPUR" => $new_value], $arr_list);
         }
-     
+
         foreach ($arr_list as $state => $stores) {
             $state_name     = ucwords(strtolower($state));
             $html_list      .= '            <div class="col-12 mb-4 layer-state" data-state="' . strtolower($state) . '">
             <h1 class="mb-4">' . $state_name . '</h1>';
-        
 
-            foreach ($stores as $data) 
-            {
-               
+
+            foreach ($stores as $data) {
+
                 $services   = $data['Services'];
-                $services = str_replace(array('experience-stores','service-stores'),array('stores', 'stores'),$services);
-             
+                $services = str_replace(array('experience-stores', 'service-stores'), array('stores', 'stores'), $services);
+
                 $store_type     = $data['Store Type'];
-                $store_type = str_replace(array('Experience Store','Store & Service Centre'),array('Store','Store'),$store_type);
+                $store_type = str_replace(array('Experience Store', 'Store & Service Centre'), array('Store', 'Store'), $store_type);
                 $store_brand    = ($data['Brand']) ? $data['Brand'] : '';
                 $store_address  = $data['Address'];
                 $operating_hour = $data['Operation Hour'];
@@ -305,17 +302,17 @@ if (!function_exists('generate_store_locations')) {
                         $store_name = "<span class='font-normal'>vivo</span> Concept Store";
                         break;
                     case 'OPPO':
-                        $coming_soon= ($data['Ready to Sell'] == 'No') ? ' (' . esc_html__('Available Soon', 'yes.my') .')' : '';
+                        $coming_soon = ($data['Ready to Sell'] == 'No') ? ' (' . esc_html__('Available Soon', 'yes.my') . ')' : '';
                         $store_name = "$store_brand Brand Store" . $coming_soon;
                         break;
                     case 'SAMSUNG':
-                        $coming_soon= ($data['Ready to Sell'] == 'No') ? ' (Available Soon)' : '';
+                        $coming_soon = ($data['Ready to Sell'] == 'No') ? ' (Available Soon)' : '';
                         $store_name = "$store_brand Experience Store" . $coming_soon;
                         break;
-                    case 'Xiaomi': 
+                    case 'Xiaomi':
                         $store_name = "<span class='font-normal'>Mi</span> Store";
                         break;
-                    default: 
+                    default:
                         $store_name = $data['Store Name'];
                 }
 
@@ -360,7 +357,7 @@ if (!function_exists('generate_store_locations')) {
                         <section id="store-locations">
                             <div class="filter-container sticky-top" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                                 <div class="layer-storeLocatorFilter">
-                                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>'. esc_html__('Filter', 'yes.my') .'</span> <span class="navbar-toggler-icon"></span></button>
+                                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>' . esc_html__('Filter', 'yes.my') . '</span> <span class="navbar-toggler-icon"></span></button>
                                     <div class="navbar-collapse tab-content collapse justify-content-center" id="tab-storeLocatorFilter">
                                         <div class="container">
                                             <div class="row justify-content-lg-center">
@@ -518,7 +515,7 @@ if (!function_exists('generate_store_locations')) {
 
         if ($key == 'Store Type') {
 
-                 switch ($value) {
+            switch ($value) {
                 case 'Yes Store':
                     if ($service_string != '') $service_string .= ',';
                     $service_string .= 'yes-stores';
@@ -527,7 +524,7 @@ if (!function_exists('generate_store_locations')) {
                     if ($service_string != '') $service_string .= ',';
                     $service_string .= 'yes-service-stores';
                     break;
-                case 'Yes Experience Store': 
+                case 'Yes Experience Store':
                     if ($service_string != '') $service_string .= ',';
                     $service_string .= 'yes-experience-stores';
                     break;
@@ -663,7 +660,7 @@ if (!function_exists('generate_roadshow')) {
                         <section class="layer-section" id="section-list">
                             <div class="layer-filter filter-container sticky-top" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                                 <div class="layer-filterToggle">
-                                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>'. esc_html__('Filter', 'yes.my') .'</span> <span class="navbar-toggler-icon"></span></button>
+                                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>' . esc_html__('Filter', 'yes.my') . '</span> <span class="navbar-toggler-icon"></span></button>
                                     <div class="navbar-collapse tab-content collapse justify-content-center" id="tab-storeLocatorFilter">
                                         <div class="container">
                                             <div class="row justify-content-lg-center">
@@ -741,4 +738,134 @@ if (!function_exists('generate_roadshow')) {
     }
 
     add_shortcode('yessc_roadshow_list', 'generate_roadshow');
+}
+
+
+if (!function_exists('generate_outgoing_network_maintenance')) {
+    function snm_get_session()
+    {
+        $url = "https://apigateway.yes.my/api/v1/ytlc/pnoc/tokenget";
+        $params = [
+            'method' => 'GET',
+            'headers' => array(
+                'apikey' => 'jkweTq8hcOw5QxeWh8d13dfkjhdfsdgdd',
+                'UserLogin' => 'otoborest',
+                'Password' => 'otobo_v1_345',
+                'Content-Type' => 'application/json'
+            )
+        ];
+        $token_list = wp_remote_request($url, $params);
+        //print_r($token_list['body']);
+        $json_res = json_decode($token_list['body']);
+        $final_res = $json_res->SessionID;
+        // return $json_res.message;  
+        return $final_res;
+    }
+
+    function snm_4g_outage($session_id)
+    {
+        $url = "https://apigateway.yes.my/api/v1/ytlc/pnoc/4GOutageDetails";
+        $body = array(
+            'SessionID' => $session_id,
+            'SiteID' => "LMCPT00421",
+            'SiteName' => "TM Cyberjaya",
+            'Severity' => "Unplanned",
+            'Region'   => "Central",
+        );
+        $params = array(
+            'method' => 'GET',
+            'body' => $body,
+            'headers' => array(
+                'apikey' => 'jkweTq8hcOw5QxeWh8d13dfkjhdfsdgdd',
+                'Content-Type' => 'application/json'
+            )
+        );
+        //print_r($params); echo $url; echo "<br /><br /><br />";
+        $list = wp_remote_request($url, $params);
+        return $list;
+    }
+
+    function snm_5g_outage($session_id)
+    {
+        $url = "https://apigateway.yes.my/api/v1/ytlc/pnoc/5GOutageDetails";
+        $body = array(
+            'SessionID' => $session_id,
+            'SiteID'   => "DBSEP1317",
+            'SiteName' => "DBSEP1317_DESARIAVILLACONDOMINIUM",
+            'Severity' => "Partial",
+            'Region'   => "MY DNB CENTRAL",
+        );
+        $params = array(
+            'method' => 'GET',
+            'body' => $body,
+            'headers' => array(
+                'apikey' => 'jkweTq8hcOw5QxeWh8d13dfkjhdfsdgdd',
+                'Content-Type' => 'application/json'
+            )
+        );
+        //print_r($params); echo $url; echo "<br /><br /><br />";
+        $list = wp_remote_request($url, $params);
+        return $list;
+    }
+
+    function generate_outgoing_network_maintenance()
+    {
+        $session_id = snm_get_session();
+        //  print_r($session_id);
+        //  die();
+        $json_res_4g = $json_res_5g = $json_res = [];
+        $outage_4g = snm_4g_outage($session_id);
+        $json_res_4g = json_decode($outage_4g['body']);
+        //  die();
+        $outage_5g = snm_5g_outage($session_id);
+        $json_res_5g = json_decode($outage_5g['body']);
+        $html_list = '';
+        $json_res = array_merge((array)$json_res_4g, (array)$json_res_5g);
+
+        foreach ($json_res as $key => $outage) {
+            //print_r($outage->DynamicField_Area);
+            $DynamicField_DateTimeOccurred   = @$outage->DynamicField_DateTimeOccurred;
+            $DynamicField_TargetTime         = @$outage->DynamicField_TargetTime;
+            $DynamicField_SiteState          = @$outage->DynamicField_SiteState;
+            $DynamicField_Area               = @$outage->DynamicField_Area;
+            $html_list  .= "<tr>
+                                 <td>$DynamicField_DateTimeOccurred</td>
+                                 <td>$DynamicField_TargetTime</td>
+                                 <td>$DynamicField_SiteState</td>
+                                 <td>$DynamicField_Area</td>
+                             </tr>";
+        }
+        $html   = '<section class="data-section">
+         <div class="container">
+             <div class="row">
+                 <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                     <div class="titile-section">
+                         <h3>
+                             Here is the latest information on the affected areas.
+                         </h3>
+                     </div>
+                          
+                         <div class="table-responsive data-table-section">
+         <table class="table table-bordered table-striped mb-0">
+         <thead class="thead-bg">
+                             <tr><th>Work Start</th>
+                             <th>Work End</th>
+                             <th>State</th>
+                             <th>Area</th></tr>
+                         </thead>
+                         <tbody>
+                             ' . $html_list . '
+                         </tbody>
+                     </table>
+                     </div>
+
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </section>';
+        return $html;
+    }
+
+    add_shortcode('yes_network_maintenance_table', 'generate_outgoing_network_maintenance');
 }

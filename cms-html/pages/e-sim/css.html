@@ -619,13 +619,13 @@
     }
 
     .devices-supported .tab-pane li {
-        font-family: 'Open Sans';
+        font-family: 'Open Sans', sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
         line-height: 48px;
         color: #000000;
-        margin: 0 8px;
+        margin: 0 0px;
     }
 
     .devices-supported .bottom-content {
@@ -838,6 +838,10 @@
             margin-left: 0px;
         }
 
+        .row-cols-2>* {
+            width: 100% !important;
+        }
+
     }
 
     @media only screen and (max-width: 560px) {
@@ -922,6 +926,10 @@
             width: 100% !important;
             max-width: 100%;
         }
+
+        .row-cols-2>* {
+            width: 100% !important;
+        }
     }
 
     /* New CSS End */
@@ -953,11 +961,32 @@
     }
 
     .dropdown.d-md-none {
-        border: 1px solid #ddd;
-        border-radius: 10px;
+        border: 1px solid #525252;
+        border-radius: 50px;
         margin: 0 30px;
         text-align: center;
     }
+
+    #dropdownMenuButton {
+        font-family: 'Open Sans', sans-serif;
+        font-style: normal;
+        font-size: 16px;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+
+    #dropdownMenuButton::after {
+    display: inline-block;
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.5em solid;
+    border-right: 0.5em solid transparent;
+    border-bottom: 0;
+    border-left: 0.5em solid transparent;
+    float: right;
+    margin: 8px 8px 0 0;
+}
 
     @media (min-width: 1280px) {
         .tabs-to-dropdown .nav-wrapper {

@@ -51,10 +51,10 @@ if (!function_exists('yes_twentytwentyone_setup')) {
             add_theme_support(
                 'custom-logo',
                 array(
-                    'height' => 52,
-                    'width' => 100,
-                    'flex-width' => true,
-                    'flex-height' => true,
+                    'height'               => 52,
+                    'width'                => 100,
+                    'flex-width'           => true,
+                    'flex-height'          => true,
                     'unlink-homepage-logo' => false,
                 )
             );
@@ -2256,6 +2256,7 @@ if ($lang == "en-US"){
     <ul class="navbar-nav">
         <?php
         $lang = get_bloginfo("language");
+        $menu_link = '/yes-postpaid-infinite-5g/';
         if ($lang == "en-US") {
             $menu_link = '/yes-postpaid-infinite-5g/';
         } elseif ($lang == "ms-MY") {
@@ -2391,8 +2392,8 @@ if ($lang == "en-US"){
                                             ?>
                                             <?php
                                             $lang = get_bloginfo("language");                                            
-                                            $parse = parse_url($quick_menusItem->url);                 
-                                            if (!isset($parse['path'])) $parse['path'] = '';                           
+                                            $parse = parse_url($quick_menusItem->url);                                            
+                                            if (!isset($parse['path'])) $parse['path'] = '';
                                             $url = rtrim(get_bloginfo('url'),"/");
                                             if ($lang == "en-US"){    
                                             ?>
@@ -2480,15 +2481,8 @@ if ($lang == "en-US"){
                             <li id="menu-item-31205" class="dropdown-header menu-item menu-item-type-post_type menu-item-object-page menu-item-31205">
                                 <p class="yes_text_menu_headline">explore postpaid Plans</p>
                             </li>
-                            <?php
-                         $menus = wp_get_nav_menus();
-                        //  echo "<pre>";
-                        // print_r($menus);
-                        // echo '</pre>';
-                         $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fiber-5G");
-                         
-                        //  print_r($Wireless_Fibre_menu);
-                            
+<?php
+                            $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fiber-5G");
                             $WirelessNav = wp_get_nav_menu_items($Wireless_Fibre_menu);
 
                             if ($WirelessNav) {
@@ -2722,6 +2716,7 @@ if ($lang == "en-US"){
     <ul class="navbar-nav">
         <?php
         $lang = get_bloginfo("language");
+        $menu_link_5G_Gaming = 'http://www.cloudgaming.my';
         if ($lang == "en-US") {
             $menu_link_5G_Gaming = 'http://www.cloudgaming.my';
         } elseif ($lang == "ms-MY") {

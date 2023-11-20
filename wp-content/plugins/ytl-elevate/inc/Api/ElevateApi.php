@@ -2195,6 +2195,61 @@ class ElevateApi
         return $gender;
     }
 
+
+//4Goutage details map
+    public function snm_get_session()
+    {        
+       $url="https://apigateway.yes.my/api/v1/ytlc/pnoc/tokenget";
+       $params = [
+          'method' => 'GET',
+          'headers' => array(
+           'apikey' => 'jkweTq8hcOw5QxeWh8d13dfkjhdfsdgdd',
+            'UserLogin' => 'otoborest',
+            'Password' => 'otobo_v1_345',
+            'Content-Type' => 'application/json'
+          )
+       ];
+       $token_list = wp_remote_request($url, $params);
+       //print_r($token_list['body']);
+       $json_res = json_decode($token_list['body']);
+       $final_res = $json_res->SessionID;
+       // return $json_res.message;  
+       return $final_res;
+    } 
+
+    public function outage_details() 
+    { 
+    $session_id = snm_get_session();
+    //print_r($_GET['Latitude']);              
+    set_time_limit(1000);
+    $url="https://apigateway.yes.my/api/v1/ytlc/pnoc/4GOutageDetails";
+    $body = array(
+        'SessionID' => $session_id,
+        'Latitude' => $_GET['Latitude'],
+        'Langitude' => $_GET['Langitude'], 
+        //'Severity' => "S3",    
+      // 'Latitude' => '3.11523888888889',
+     // 'Langitude' => '101.67936944444466',
+    );
+     $params = array(
+        'method' => 'GET',
+        'timeout' => 120,
+        'body' => $body,   
+        //'sslverify' => false,     
+         'headers' => array(
+         'apikey' => 'jkweTq8hcOw5QxeWh8d13dfkjhdfsdgdd',
+         'Content-Type' => 'application/json',
+        )
+   );
+     //print_r($params); echo $url; echo "<br /><br /><br />";
+     $list = wp_remote_get($url, $params);
+        return $list;
+       //print_r($list);
+    }  
+    
+//End 4Goutage details map    
+    
+
     public function check_stock() 
     {
         
