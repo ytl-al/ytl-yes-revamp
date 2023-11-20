@@ -25,6 +25,7 @@ class ElevateApi
     const  api_customer = 'api/Elevate/customer';
     const  api_customer_pre_complete = '/api/Elevate/customer/GetAllCustmerDetailsByID';
     const  api_customer_check_contract = 'api/Elevate/customer/CheckActiveContract';
+    const  api_customer_check_ddmf = 'api/app/d-dMFCheck/verification';
     const  api_ca_verification = 'api/Elevate/compAsia/Verification';
 
     const  api_order_create = 'api/Elevate/order';
@@ -176,6 +177,11 @@ class ElevateApi
 			register_rest_route('/elevate/v1', 'qrcode/check', array(
                 'methods' => 'GET',
                 'callback' => array($this, 'elevate_delivery_qrcode_check'),
+                'permission_callback' => '__return_true'
+            ));
+            register_rest_route('/elevate/v1', '/verify-ddmf', array(
+                'methods' => 'POST',
+                'callback' => array($this, 'ddmf_eligibility'),
                 'permission_callback' => '__return_true'
             ));
 
@@ -514,7 +520,7 @@ class ElevateApi
             'data_format' => 'body'
         ];
 		$apiSetting =(new \Inc\Base\Model)->getAPISettings();
-        $api_url = 'https://ydbp-creditcheck-api-dev.azurewebsites.net' . self::api_oc_verification;
+        $api_url =$apiSetting['creditcheck_url'] . self::api_oc_verification;
 
         $request = wp_remote_post($api_url, $args);
 		 //print_r($args);print_r($request);die($api_url);
@@ -537,6 +543,58 @@ class ElevateApi
 					$return['status'] = 0;
 					$return['error'] = $res->reason;
 				}
+            } else {
+                $return['status'] = 0;
+            }
+            $return['data'] = $data;
+        }
+		
+		//Write api log
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		
+        $response = new WP_REST_Response($return);
+        $response->set_status(200);
+        return $response;
+    }
+
+    public  function ddmf_eligibility(WP_REST_Request $request)
+    {
+
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
+        $token = $this->get_token();
+
+		$params = array(
+            'SecurityId' =>$request['mykad'],
+            'fullName' => $request['name'],
+        );
+
+        $args = [
+            'headers' => array(
+                'Accept' => 'text/plain',
+                'Authorization' => 'Bearer ' . $token,
+                'Content-Type' => 'application/json'
+            ),
+            'body' => json_encode($params),
+            'method' => 'POST',
+            'timeout' => self::API_TIMEOUT,
+            'data_format' => 'body'
+        ];
+		$apiSetting = ( new \Inc\Base\Model)->getAPISettings();
+        $api_url =$apiSetting['creditcheck_url'] .self::api_customer_check_ddmf;
+        $request = wp_remote_post($api_url, $args);
+        if (is_wp_error($request)) {
+            $return['status'] = 0;
+            $return['error'] = "Cannot connect to API server";
+        } else if ($request['response']['code'] != 200) {
+            $return['status'] = 0;
+            $return['error'] = @$request['response'];
+        } else {
+            $data = json_decode($request['body'], true);
+
+            if ($data['response']) {
+                $return['status'] = 1;
             } else {
                 $return['status'] = 0;
             }
