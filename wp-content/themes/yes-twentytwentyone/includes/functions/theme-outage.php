@@ -98,10 +98,10 @@ if (!function_exists('generate_outgoing_network_maintenance')) {
             //'Severity' => "Unplanned",
        );
         $params = array(
-           'method' => 'GET',
-           'body' => $body,           
+            'method' => 'GET',
+            'body' => $body,
             'headers' => array(
-            'apikey' => 'jkweTq8hcOw5QxeWh8d13dfkjhdfsdgdd',
+                'apikey' => 'jkweTq8hcOw5QxeWh8d13dfkjhdfsdgdd',
                 'Content-Type' => 'application/json'
            )
       );
@@ -143,30 +143,32 @@ if (!function_exists('generate_outgoing_network_maintenance')) {
 
         $outage_4g_planed = snm_4g_outage_planed($session_id);
         $json_res_4g_planed = json_decode($outage_4g_planed['body']);   
-        // die();
         $outage_5g = snm_5g_outage($session_id);
         $json_res_5g = json_decode($outage_5g['body']);
         $html_list = '';
         $json_res= array_merge((array)$json_res_4g,(array)$json_res_5g);
         if(!empty($json_res_4g_planed)){
           $json_res = array_merge($json_res,(array)$json_res_4g_planed);
-          //print_r($json_res_4g_planed);
         }
-
+       // print_r($json_res_4g_planed);
+        //print_r($json_res);
+        //die();
         foreach ($json_res as $key => $outage) {
-           // @$outage->DynamicField_DateTimeOccurred = @$outage->DynamicField_ActivityDateTime;
-          //  @$outage->DynamicField_TargetTime = @$outage->DynamicField_ActivityEndDateTime;
+        @$outage->DynamicField_DateTimeOccurred = $outage->DynamicField_ActivityDateTime?@$outage->DynamicField_ActivityDateTime:@$outage->DynamicField_DateTimeOccurred;
+        @$outage->DynamicField_TargetTime = $outage->DynamicField_ActivityEndDateTime?@$outage->DynamicField_ActivityEndDateTime:@$outage->DynamicField_TargetTime;
+        //   @$outage->DynamicField_SiteState = @$outage->DynamicField_SiteState;
+        //   @$outage->DynamicField_Area = @$outage->DynamicField_Area;
             //print_r($outage->DynamicField_Area);
             $DynamicField_DateTimeOccurred   = @$outage->DynamicField_DateTimeOccurred;
             $DynamicField_TargetTime         = @$outage->DynamicField_TargetTime ;
             $DynamicField_SiteState          = @$outage->DynamicField_SiteState;
-            $DynamicField_Area               = $outage->DynamicField_Area ?? '';            // $outage->DynamicField_Area ? $outage->DynamicField_Area : '';
+            $DynamicField_Area               = $outage->DynamicField_Area ?? '';     // $outage->DynamicField_Area ? $outage->DynamicField_Area : '';
                                                                                           
             $html_list  .= "                    <tr>
                                                     <td>$DynamicField_DateTimeOccurred</td>
                                                     <td>$DynamicField_TargetTime </td> 
                                                     <td>$DynamicField_SiteState</td>
-                                                    <td>$DynamicField_Area</td>
+                                                    <td>$DynamicField_Area</td>                                                                                                                                 
                                                 </tr>";
         }
         $html   = ' <section class="data-section">

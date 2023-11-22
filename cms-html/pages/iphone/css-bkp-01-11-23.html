@@ -240,9 +240,6 @@
         text-transform: uppercase;
         font-family: 'Montserrat';
     }
-.layer-planDevice p.panel-btn a:hover {
-        background-color: #D00072;        
-    }
 
     .usp-section {
         background-color: #F7F8F9;
@@ -344,19 +341,19 @@
     }
 
     .span-color.blue:after {
-        background-color: rgb(39, 103, 135);
+        background-color: #386784;
     }
 
     .span-color.lightblue:after {
-        background-color: rgb(213, 221, 224);
+        background-color: #DDF1EC;
     }
 
     .span-color.green:after {
-        background-color: rgb(57, 76, 56);
+        background-color: #0F5A20;
     }
 
     .span-color.lightgreen:after {
-        background-color: rgb(207, 217, 201);
+        background-color: #D9ECD2;
     }
 
     .span-color.starlight:after {
@@ -364,15 +361,11 @@
     }
 
     .span-color.midnight:after {
-        background-color: rgb(35, 42, 49);
+        background-color: #242930;
     }
 
     .span-color.pink:after {
-        background-color: rgb(235, 208, 210);
-    }
-
-    .span-color.yellow:after {
-        background-color: rgb(236, 230, 198);
+        background-color: #FFCFAC;
     }
 
     .span-color.red:after {
@@ -380,27 +373,27 @@
     }
 
     .span-color.purple:after {
-        background-color: rgb(230, 221, 235);
+        background-color: #E5DBEB;
     }
 
     .span-color.black:after {
-        background-color: rgb(60, 64, 66);
+        background-color: #6C6C6C;
     }
 
     .span-color.natural-titanium:after {
-        background-color: rgb(186, 180, 169);
+        background-color: #7D7F81;
     }
 
     .span-color.white-titanium:after {
-        background-color: rgb(242, 241, 235);
+        background-color: #F1EEDD;
     }
 
     .span-color.black-titanium:after {
-        background-color: rgb(63, 64, 66);
+        background-color: #242930;
     }
 
-    .span-color.blue-titanium:after {
-        background-color: rgb(61, 69, 85);
+    .span-color.Blue-titanium:after {
+        background-color: #3D3C67;
     }
 
     /* .span-color.apple-blue:after {
@@ -655,7 +648,7 @@
     .table-responsive {
         box-shadow: 0px 5px 14px rgba(0, 0, 0, 0.08);
         border-bottom: 0px solid #FF0084;
-       
+        overflow-x: hidden;
     }
 
     .thead-bg {
@@ -1271,10 +1264,73 @@
         tr,
         th,
         td {
-            font-size: 12px;
-            line-height: 16px;
+            font-size: 11px;
+            line-height: 15px;
             font-weight: 700;
+            height: 58px;
+            vertical-align: middle;
         }
+
+        .table-bordered>:not(caption)>*>* {
+            border-width: 1px 1px;
+        }
+
+        .myTable {
+            border-right: solid 1px #DDEFEF;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 11px;
+            line-height: 15px;
+        }
+
+        /* .myTable thead th {
+	background-color: #1A1E47;
+	border: none;
+	color: #fff;
+	padding: 10px;
+	text-align: left;
+	white-space: nowrap;
+} */
+
+        /* .myTable tbody td {
+	border-bottom: solid 1px #EEE;
+	color: #000;
+	padding: 10px;
+	text-shadow: 1px 1px 1px #fff;
+	white-space: nowrap;
+} */
+        .thead-bg tr th:first-child {
+            height: 58px;
+        }
+
+        .my-scroller {
+            margin-left: 118px;
+            overflow-x: scroll;
+            overflow-y: visible;
+            padding-bottom: 0px;
+            z-index: 999;
+        }
+
+        .my-sticky-col {
+            position: -webkit-sticky;
+            position: -moz-sticky;
+            position: -ms-sticky;
+            position: -o-sticky;
+            left: 0px;
+        }
+
+        .myTable .my-sticky-col {
+            /* border-left: solid 1px #DDEFEF;
+	           border-right: solid 1px #DDEFEF; */
+            left: 10px;
+            position: absolute;
+            top: auto;
+            width: 120px;
+            height: 58px;
+            z-index: 999;
+            background-color: #FF0084;
+        }
+
 
         .usp-section .row.p-5 {
             padding: 1rem !important;
@@ -1574,6 +1630,7 @@
             line-height: 15px;
             font-weight: 700;
             height: 58px;
+            vertical-align: middle;
         }
 
         .table-bordered>:not(caption)>*>* {
@@ -1609,22 +1666,32 @@
         }
 
         .my-scroller {
+            margin-left: 118px;
             overflow-x: scroll;
+            overflow-y: visible;
+            padding-bottom: 0px;
+            z-index: 999;
+        }
+
+        .my-sticky-col {
+            position: -webkit-sticky;
+            position: -moz-sticky;
+            position: -ms-sticky;
+            position: -o-sticky;
+            left: 0px;
         }
 
         .myTable .my-sticky-col {
             /* border-left: solid 1px #DDEFEF;
-	border-right: solid 1px #DDEFEF; */
-            left: 0px;
-            position: sticky;
+	        border-right: solid 1px #DDEFEF; */
+            left: 10px;
+            position: absolute;
             top: auto;
-            min-width: 130px;
-            background:#fff;
+            width: 120px;
             height: 58px;
-            z-index:1000;
+            z-index: 999;
+            background-color: #FF0084;
         }
-
-
 
         .usp-section h2 {
             display: none;

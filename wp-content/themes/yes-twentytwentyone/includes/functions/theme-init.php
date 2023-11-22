@@ -2358,9 +2358,8 @@ function yes_menu($path)
                                                 }
                                                 ?>
                                                 <!-- <li class="dropdown-header">Device Manual
-                                        </li> -->
-
-
+                                                </li> -->
+                                                
                                             </ul>
                                         </li>
                                     </div>

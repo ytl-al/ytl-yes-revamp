@@ -59,7 +59,7 @@
     }
 
     .usp-section .card img {
-        max-width: 110px;
+        max-width: 80px;
         margin: auto;
     }
 
@@ -151,6 +151,20 @@
         color: #000;
     }
 
+    .awards-content-section .year-bg{
+        background-color: #E8E9ED;
+        font-family: 'Montserrat';
+        font-size: 21px;
+        line-height: 19px;
+        font-weight: 700;
+        letter-spacing: -0.011em;
+        border-radius: 10px;
+        padding: 15px 30px;
+        margin: 0 auto 15px;
+        text-align: center;
+        width: fit-content;
+    }
+
     #our-awards-section .awards-content-section p {
         font-family: 'Open Sans', sans-serif;
         font-size: 16px;
@@ -165,7 +179,6 @@
         margin: 0 0 30px;
         position: relative;
         text-align: center;
-        display: contents;
     }
 
     #our-awards-section .awards-content-section p.panel-deviceImg img {
@@ -599,6 +612,28 @@
         text-decoration: none;
     }
 
+    .mega-dropdown-menu.default-top-menu {
+        background-color: #F5F6FA;
+        padding-left: 125px;
+    }
+
+    .mega-dropdown-menu>li>ul>li.dropdown-header a {
+        color: #1A1E47 !important;
+        font-size: 14px !important;
+        text-decoration: none !important;
+        text-transform: none !important;
+        padding: 0 !important;
+        font-weight: 700 !important;
+    }
+
+    .business-solution {
+        font-size: 12px !important;
+        font-weight: 400 !important;
+        line-height: 22px !important;
+        color: #888888 !important;
+        margin: 15px 0 10px !important;
+    }
+
 
     @media only screen and (min-device-width: 1600px) {}
 
@@ -750,6 +785,16 @@
             line-height: 18px;
             font-weight: 700;
         }
+
+        .mega-dropdown-menu.default-top-menu {
+            padding-left: unset;
+        }
+
+        .parent {
+            margin-top: -3px;
+        }
+
+
     }
 
     @media only screen and (min-device-width: 320px) and (max-device-width: 640px) and (-webkit-min-device-pixel-ratio: 2) {
@@ -834,22 +879,9 @@
             line-height: 18px;
             font-weight: 700;
         }
-    }
 
-    .mega-dropdown-menu>li>ul>li.dropdown-header a {
-        color: #1A1E47;
-        font-size: 14px;
-        text-decoration: none;
-        text-transform: none;
-        padding: 0;
-        font-weight: 700 !important;
-    }
-
-    .business-solution {
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 22px;
-        color: #888888;
-        margin: 15px 0 10px;
+        .mega-dropdown-menu.default-top-menu {
+            padding-left: unset;
+        }
     }
 </style>

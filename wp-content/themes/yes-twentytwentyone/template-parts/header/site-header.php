@@ -173,7 +173,7 @@ $path = plugin_basename(__DIR__).'/menu.json';
                                             <h2 class="business-solution">BUSINESS SOLUTION</h2>
                                             <li>
                                                <ul>
-                                                  <li class="dropdown-header"><a href="mobile-plan">Mobile Plans</a></li>                                                                                            
+                                                  <li class="dropdown-header"><a href="/mobile-plan/">Mobile Plans</a></li>                                                                                            
                                                </ul>
                                             </li>
                                             <li>
@@ -204,8 +204,8 @@ $path = plugin_basename(__DIR__).'/menu.json';
                                 </ul>
                                 <ul class="navbar-nav campagin">
                                     <li class="nav-itemn">
-                                    <a class="nav-link" href="#" >Yes 5G Biz Wireless Broadband <div class="parent">
-                                            <button class="btn-gradient-2"><span class="badges">HOT</span></button>
+                                    <a class="nav-link" href="/enterprise/yes-biz-wireless-broadband/" >Yes 5G Biz Wireless Broadband <div class="parent">
+                                            <button class="btn-gradient-2"><span class="badges">NEW</span></button>
                                         </div></a>
                                 </li>
                                 </ul>

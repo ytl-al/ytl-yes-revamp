@@ -171,8 +171,6 @@
         text-align: center;
         position: relative;
         border-radius: 15px;
-        box-shadow: 0 0 15px 0 rgba(0, 0, 0, .1);
-        -webkit-box-shadow: 0 0 15px 0 rgba(0, 0, 0, .1);
     }
 
     #latest-deals-section .latest-deals-inner img {
@@ -181,6 +179,8 @@
         display: block;
         width: 100%;
         height: auto;
+        /* box-shadow: 0 0 15px 0 rgba(0, 0, 0, .1);
+        -webkit-box-shadow: 0 0 15px 0 rgba(0, 0, 0, .1); */
     }
 
     /* #latest-deals-section .latest-deals-carousel .slick-slide div:first-child {
@@ -204,7 +204,7 @@
     } */
 
     #latest-deals-section .latest-deals-carousel .slick-slide {
-        margin: 15px 15px;
+        margin: 15px 0px;
     }
 
     #latest-deals-section .latest-deals-carousel .slick-dots {
@@ -391,7 +391,10 @@
         margin: 20px 0 0px;
         text-align: center;
     }
-    .color-b{color: #000000 !important;}
+
+    .color-b {
+        color: #000000 !important;
+    }
 
     #latest-devices-section .layer-planDevice p.panel-btn a {
         background-color: #FF0084;
@@ -453,7 +456,7 @@
         width: 17px;
         height: 17px;
         margin: 0 15px 0 0;
-        padding: 0;        
+        padding: 0;
     }
 
     .panel-colors .span-color:last-of-type,
@@ -471,46 +474,84 @@
     }
 
     .span-color.blue:after {
-        background-color: #386784;
+        background-color: rgb(39, 103, 135);
     }
+
     .span-color.lightblue:after {
-        background-color: #DDF1EC;
+        background-color: rgb(213, 221, 224);
     }
+
     .span-color.green:after {
-        background-color: #0F5A20;
+        background-color: rgb(57, 76, 56);
     }
+
     .span-color.lightgreen:after {
-        background-color: #D9ECD2;
+        background-color: rgb(207, 217, 201);
     }
+
     .span-color.starlight:after {
         background-color: #FFF7CC;
     }
+
     .span-color.midnight:after {
-        background-color: #242930;
+        background-color: rgb(35, 42, 49);
     }
+
     .span-color.pink:after {
-        background-color: #FFCFAC;
+        background-color: rgb(235, 208, 210);
     }
+
+    .span-color.yellow:after {
+        background-color: rgb(236, 230, 198);
+    }
+
     .span-color.red:after {
         background-color: #E83332;
     }
+
     .span-color.purple:after {
-        background-color: #E5DBEB;
+        background-color: rgb(230, 221, 235);
     }
+
     .span-color.black:after {
-        background-color: #6C6C6C;
+        background-color: rgb(60, 64, 66);
     }
+
     .span-color.natural-titanium:after {
-        background-color: #7D7F81;
+        background-color: rgb(186, 180, 169);
     }
+
     .span-color.white-titanium:after {
-        background-color: #F1EEDD;
+        background-color: rgb(242, 241, 235);
     }
+
     .span-color.black-titanium:after {
-        background-color: #242930;
+        background-color: rgb(63, 64, 66);
     }
-    .span-color.Blue-titanium:after {
-        background-color: #3D3C67;
+
+    .span-color.blue-titanium:after {
+        background-color: rgb(61, 69, 85);
+    }
+
+    .span-color.black:after {
+        background-color: #000000;
+    }
+
+    .span-color.white:after {
+        background-color: #ffffff;
+        border: 1px solid #dddddd;
+    }
+
+    .span-color.sunrise-orange:after {
+        background-color: #FF5733;
+    }
+
+    .span-color.t-silver:after {
+        background-color: #C0C0C0;
+    }
+
+    .span-color.alpine-blue:after {
+        background-color: #8ECDED;
     }
 
     /* .span-color.blue:after {
@@ -712,8 +753,8 @@
     }
 
     #faq-section .accordion-body {
-        font-size: 16px;
-        line-height: 32px;
+        font-size: 14px;
+        line-height: 26px;
     }
 
     #faq-section .accordion-body h4 {
@@ -730,13 +771,17 @@
     #faq-section .accordion-body li {
         margin: 0;
         padding: 0;
-        font-size: 16px;
-        line-height: 32px;
+        font-size: 14px;
+        line-height: 26px;
+    }
+
+    #faq-section .accordion-body ol {
+        padding-left: 0;
     }
 
     #faq-section .accordion-body p {
-        font-size: 16px;
-        line-height: 32px;
+        font-size: 14px;
+        line-height: 26px;
     }
 
     #faq-section .viewall-btn {
@@ -841,7 +886,7 @@
         }
 
         #latest-deals-section .latest-deals-carousel .slick-slide {
-            margin: 15px 13px;
+            margin: 15px 10px;
         }
 
         #latest-deals-section .latest-deals-carousel .slick-dots li.slick-active button:before {
@@ -1002,7 +1047,11 @@
     /*IPAD Air*/
     @media only screen and (min-device-width: 1024px) and (max-device-width: 1500px) and (orientation: landscape) {}
 
-
+    @media only screen and (min-device-width: 1600px) {
+        #faq-section {
+            margin-top: 330px !important;
+        }
+    }
 
     /* @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)  */
     @media only screen and (min-device-width: 320px) and (max-device-width: 640px) and (-webkit-min-device-pixel-ratio: 2) {
@@ -1084,7 +1133,7 @@
         }
 
         #latest-deals-section .latest-deals-carousel .slick-slide {
-            margin: 15px 13px;
+            margin: 15px 10px;
         }
 
         #latest-deals-section .latest-deals-carousel .slick-dots li.slick-active button:before {
@@ -1189,6 +1238,44 @@
 
         .network-usp-section .network-usp-carousel .slick-list {
             padding: 0 15% 0 0 !important;
+        }
+
+        #services-section .services-carousel .slick-slide {
+            padding: 20px 0px 10px;
+        }
+
+        #services-section {
+            padding-bottom: 0;
+        }
+
+        .slick-dots li {
+            margin: 0;
+        }
+
+        #latest-deals-section {
+            padding: 36px 0 !important;
+        }
+
+
+        #latest-deals-section .latest-deals-carousel .slick-slide {
+            margin: 0px 0 0;
+        }
+
+        #latest-deals-section .latest-deals-carousel .slick-slide:nth-child(1) {
+            margin-left: 20px;
+        }
+
+        #latest-devices-section,
+        #faq-section {
+            padding-bottom: 36px;
+        }
+
+        #faq-section {
+            padding-top: 0 !important;
+        }
+
+        .hero-slider .slick-dots li.slick-active button:before {
+            opacity: 1;
         }
 
 
