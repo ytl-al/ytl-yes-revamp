@@ -53,6 +53,85 @@
         padding: 0 1.5em;
     }
 
+    .info-section {
+        position: relative;
+        background-color: #F7F8F9;
+        margin: 0;
+        padding: 50px 0 50px;
+    }
+
+    .info-left-section {
+        /* background: url('/wp-content/uploads/2023/09/registration-sec-bg.png');
+        background-size: cover;
+        background-repeat: no-repeat; */
+        background-image: linear-gradient(to bottom, #d80173, #59002f);
+        background-color: #FF0084;
+        padding: 40px 50px 0;
+        margin: 0;
+        position: relative;
+        border-radius: 15px;
+    }
+
+    .info-left-section h3 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        padding: 0px 0 5px;
+        font-weight: 800;
+        font-size: 28px;
+        line-height: 34px;
+        text-align: center;
+        letter-spacing: -0.02em;
+        color: #fff;
+    }
+
+    .info-left-section img {
+        margin: 0 auto;
+        padding: 0;
+        width: 57%;
+    }
+
+    .info-right-section .card {
+        background: #EFEFEF;
+        /* box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15); */
+        border: none;
+        border-radius: 10px;
+        padding: 15px 15px;
+        margin: 0;
+        height: 220px;
+    }
+
+    .info-right-section .card .card-body h2 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        padding: 0px 0 10px;
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 23px;
+        text-align: center;
+        letter-spacing: -0.02em;
+        color: #000;
+    }
+
+    .info-right-section .card .card-body p {
+        font-family: 'Open Sans', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        text-align: center;
+        color: #2B2B2B;
+    }
+
+    .info-section-bottom p {
+        font-family: 'Open Sans', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        text-align: center;
+        color: #2B2B2B;
+    }
+
     @media only screen and (max-width: 768px) {
         .hero-banner {
             background: url(/wp-content/uploads/2023/05/eSIM-herobanner-mobile.png);
@@ -124,6 +203,32 @@
         #datatabs .nav-tabs .nav-link {
             padding: 0.5rem 0.5rem;
         }
+
+        .info-left-section {
+            padding: 30px 40px 0;
+            margin: 0;
+        }
+
+        .info-left-section h3 {
+            padding: 0px 0 5px;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 32px;
+            text-align: center;
+        }
+
+        .info-left-section h3 br {
+            display: none;
+        }
+
+        .info-right-section .card {
+            height: auto;
+        }
+
+        .info-left-section img {
+            width: 70%;
+        }
+
     }
 
     .pink-btn {
@@ -347,6 +452,7 @@
         font-size: 39px;
         line-height: 47px;
         font-weight: 800;
+        padding-top: 0;
     }
 
     #databck-rewards .viewall-btn {
@@ -438,7 +544,6 @@
     }
 
     .e-sim-box span {
-
         background: #1A1E47;
         font-family: 'Montserrat';
         font-size: 16px;
@@ -451,7 +556,6 @@
         width: 28px;
         height: 28px;
         line-height: 24px;
-
     }
 
     .e-sim-box_img {
@@ -495,7 +599,6 @@
         border-bottom: none;
     }
 
-
     #datatabs .nav-tabs .nav-link {
         border: none;
         font-family: 'Montserrat';
@@ -533,7 +636,6 @@
         text-align: center;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-
     }
 
     .blue-arrow a {
@@ -609,7 +711,7 @@
         font-size: 14px;
         line-height: 48px;
         color: #000000;
-        margin: 0 30px;
+        margin: 0 20px;
     }
 
     .devices-supported .tab-pane ul {
@@ -630,16 +732,28 @@
 
     .devices-supported .bottom-content {
         padding: 25px 0;
-        border-top: 1px solid #dee2e6;
+        border-top: 0px solid #dee2e6;
     }
 
     .devices-supported .bottom-content p {
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 28px;
+        font-family: 'Montserrat';
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 20px;
         text-align: center;
-        color: #525252;
+        color: #2F3BF5;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    .devices-supported .bottom-content a {
+        color: #2F3BF5;
+        text-decoration: none;
+    }
+
+    .devices-supported .bottom-content a:hover {
+        text-decoration: underline;
+        color: #2F3BF5;
     }
 
     @media only screen and (min-width: 600px) and (max-width: 991px) {
@@ -846,7 +960,7 @@
 
     @media only screen and (max-width: 560px) {
         #databck-rewards {
-            padding-top: 0px;
+            /* padding-top: 0px; */
             padding-bottom: 0px;
         }
 
@@ -930,12 +1044,37 @@
         .row-cols-2>* {
             width: 100% !important;
         }
+
+        .info-left-section {
+            padding: 30px 40px 0;
+            margin: 0;
+        }
+
+        .info-left-section h3 {
+            padding: 0px 0 5px;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 32px;
+            text-align: center;
+        }
+
+        .info-left-section h3 br {
+            display: none;
+        }
+
+        .info-right-section .card {
+            height: auto;
+        }
+
+        .info-left-section img {
+            width: 70%;
+        }
     }
 
     /* New CSS End */
 
     .tabs-to-dropdown .nav-pills li:not(:last-child) {
-        margin-right: 30px;
+        margin-right: 10px;
     }
 
     .tabs-to-dropdown .tab-content .container-fluid {

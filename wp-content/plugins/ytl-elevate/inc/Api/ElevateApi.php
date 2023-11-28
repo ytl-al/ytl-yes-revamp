@@ -73,6 +73,7 @@ class ElevateApi
     public  function register()
     {
         add_action('rest_api_init', function () {
+
             register_rest_route('/elevate/v1', '/test', array(
                 'methods' => 'GET',
                 'callback' => array('\Inc\Api\ElevateApi', 'do_test'),
@@ -231,8 +232,15 @@ class ElevateApi
                 'methods' => 'GET',
                 'callback' => array($this, 'check_stock'),
                 'permission_callback' => '__return_true'
-            ));
+            ));    
 
+            add_action('rest_api_init', function () {
+                register_rest_route('/elevate/v1', '/outage-details', array(
+                    'methods' => 'GET',
+                    'callback' => array($this, 'outage_details'),
+                    'permission_callback' => '__return_true'
+                ));
+            });
 
         });
     }

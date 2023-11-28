@@ -170,12 +170,16 @@ $path = plugin_basename(__DIR__).'/menu.json';
                                     <li class="nav-item dropdown mega-dropdown">
                                         <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown-businessSolution" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Business Solutions', 'yes.my'); ?></a>
                                         <ul class="dropdown-menu mega-dropdown-menu default-top-menu" aria-labelledby="navbarDropdown">
-                                        
-                                        <li>
-                                                <ul>                                                    
-                                                    <li class="nav-item dropdown-header"><?php echo esc_html__('Internet Access', 'yes.my'); ?></li>
-                                                  <?php if (has_nav_menu('bs-internet-access')) wp_nav_menu(['theme_location' => 'bs-internet-access', 'container' => false, 'items_wrap' => '%3$s']); ?>
-                                                  
+                                            <h2 class="business-solution">BUSINESS SOLUTION</h2>
+                                            <li>
+                                               <ul>
+                                                  <li class="dropdown-header"><a href="/mobile-plan/">Mobile Plans</a></li>                                                                                            
+                                               </ul>
+                                            </li>
+                                            <li>
+                                                <ul>
+                                                    <li class="dropdown-header"><?php echo esc_html__('Internet Access', 'yes.my'); ?></li>
+                                                    <?php if (has_nav_menu('bs-internet-access')) wp_nav_menu(['theme_location' => 'bs-internet-access', 'container' => false, 'items_wrap' => '%3$s']); ?>
                                                 </ul>
                                             </li>
                                             <li class="nav-item dropdown mega-dropdown">
@@ -190,10 +194,46 @@ $path = plugin_basename(__DIR__).'/menu.json';
                                                     <?php if (has_nav_menu('bs-voice-communication')) wp_nav_menu(['theme_location' => 'bs-voice-communication', 'container' => false, 'items_wrap' => '%3$s']); ?>
                                                 </ul>
                                             </li>
+                                            <li>
+                                               <ul>
+                                                  <li class="dropdown-header">Internet of Things</li>                                                                                            
+                                               </ul>
+                                            </li>
+                                            <li>
+                                               <ul>
+                                                  <li class="dropdown-header">Internet of Things</li>                                                                                            
+                                               </ul>
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>
+                                <ul class="navbar-nav campagin">
+                                    <li class="nav-itemn">
+                                    <?php
+                                        $lang = get_bloginfo("language");
+                                        $site_url_menu = get_site_url();
+                                        if ($lang == "en-US") {
+                                            $site_url_menu = get_site_url();
+                                        } elseif ($lang == "ms-MY") {
+                                            $site_url_menu = get_site_url() . '/ms';
+                                        }
+                                    ?>
+                                    <a class="nav-link" href="<?php echo $site_url_menu . '/enterprise/yes-biz-wireless-broadband/' ?>"><?php echo esc_html__('Yes 5G Biz Wireless Broadband', 'yes.my'); ?>
+                                    <div class="parent">
+                                            <button class="btn-gradient-2"><span class="badges">NEW</span></button>
+                                        </div>
+                                    </a>
+                                    <!-- <a class="nav-link" href="/enterprise/yes-biz-wireless-broadband/" >Yes 5G Biz Wireless Broadband <div class="parent">
+                                            <button class="btn-gradient-2"><span class="badges">NEW</span></button>
+                                        </div></a> -->
+                                </li>
+                                </ul>
                                 <ul class="navbar-nav">
+                                    <li class="nav-itemn">
+                                    <a class="nav-link" href="#" target="_blank">5G Coverage</a>
+                                </li>
+                                </ul>
+                                <ul class="navbar-nav d-none">
                                     <li class="nav-item dropdown mega-dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Support', 'yes.my'); ?></a>
                                         <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Support</a> -->

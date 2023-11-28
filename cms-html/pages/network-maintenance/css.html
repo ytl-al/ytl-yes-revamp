@@ -151,9 +151,11 @@
         border-collapse: separate;
         border-spacing: 0;
     }
-    tr, td{
-  border: 1px solid #FF0084;
-}
+
+    tr,
+    td {
+        border: 1px solid #FF0084;
+    }
 
     /* tr:first-child td:first-child {
         border-top-left-radius: 10px;
@@ -181,7 +183,7 @@
 
     .table-responsive {
         border-bottom: 2px solid #FF0084;
-        
+
     }
 
     .need-assistance-section {
@@ -246,7 +248,9 @@
         letter-spacing: 2px;
     }
 
-    #faq-section{display: none;}
+    #faq-section {
+        display: none;
+    }
 
 
     /* [START maps_places_searchbox] */
@@ -349,6 +353,13 @@
     }
 
     /* [END maps_places_searchbox] */
+    .need-assistance-section .order-1 {
+        order: unset !important;
+    }
+
+    .need-assistance-section .order-2 {
+        order: unset !important;
+    }
 
 
     @media only screen and (max-width: 768px) {
@@ -401,6 +412,14 @@
 
         .data-section .titile-section h3 {
             text-align: center;
+        }
+
+        .need-assistance-section .order-1 {
+            order: 1 !important;
+        }
+
+        .need-assistance-section .order-2 {
+            order: 2 !important;
         }
 
     }
