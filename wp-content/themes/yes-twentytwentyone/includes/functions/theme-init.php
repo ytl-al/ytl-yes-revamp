@@ -652,7 +652,6 @@ if (!function_exists('show_most_faq_viewed')) {
 }
 
 
-
 if (!function_exists('is_child_of_business')) {
     function is_child_of_business()
     {
@@ -2071,7 +2070,6 @@ function yes_menu($path)
     foreach ($primaryNav as $navItem) {
 
         ?>
-
         <?php
 
         $lang = get_bloginfo("language");
@@ -2103,41 +2101,26 @@ function yes_menu($path)
     ?>
 
                         </ul>
-
                     </li>
-
                 </div>
 
     <?php
 
     $yes_menu_image_postpaid = get_post_meta($navItem->ID, 'ytl_div_img_logo', true);
-
     if (isset($yes_menu_image_postpaid) && !empty(isset($yes_menu_image_postpaid))) {
-
         $menu_image_postpaid = wp_get_attachment_image_url($yes_menu_image_postpaid);
-
     }
 
     // $dummy_image_url='http://yes.my.localhost/wp-content/uploads/2023/03/dummy_300x165_000000_cbcefd.png';
-
     // $dummy_image_url=get_site_url().'/wp-content/uploads/2022/05/ft5g-simpack-new2.png';
-
     // // $menu_image_postpaid= wp_get_attachment_image_url($dummy_image_url);
-
     // $menu_image_postpaid=($dummy_image_url);
 
-
-
     $yes_menu_desc_postpaid = get_post_meta($navItem->ID, 'menu_item_desc', true);
-
     if (isset($yes_menu_desc_postpaid) && !empty(isset($yes_menu_desc_postpaid))) {
-
         $menu_desc_postpaid = $yes_menu_desc_postpaid;
-
     }
-
     if ($menu_image_postpaid) {
-
         ?>
                         <div class="col-auto px-2 p-lg-4 py-lg-5 d-lg-block d-none">
                             <li>
@@ -2359,7 +2342,7 @@ function yes_menu($path)
                                                 ?>
                                                 <!-- <li class="dropdown-header">Device Manual
                                                 </li> -->
-                                                
+
                                             </ul>
                                         </li>
                                     </div>
@@ -2802,7 +2785,6 @@ function yes_menu($path)
                             </div>
                             <div class="row">
                                 <div class="col-6 col-md-6">
-
                                     <li class="mega-get-help">
                                         <img src="https://cdn.yes.my/site/wp-content/uploads/2023/03/Supported-Devices.svg" alt="...">
                                         <div class="">
@@ -2820,7 +2802,6 @@ function yes_menu($path)
                                                 technology.</p>
                                         </div>
                                     </li>
-
                                 </div>
                                 <div class="col-6 col-md-6">
                                     <li class="mega-get-help">
@@ -2843,7 +2824,7 @@ function yes_menu($path)
                                 <div class="col-6 col-md-6" style="display:none;">
                                     <li class="mega-get-help">
                                         <img src="https://www.yes.my/wp-content/uploads/2023/06/Typefi_alert-triangle-Size24-ColorDark.svg " alt="..." style="
-    width: 25px;">
+                                        width: 25px;">
                                         <div class="">
                                         <?php
                                         $lang = get_bloginfo("language");
@@ -2881,7 +2862,6 @@ function yes_menu($path)
                                             <p>Find the nearest Yes store.</p>
                                         </div>
                                     </li>
-
                                 </div>
                                 <div class="col-6 col-md-6">
                                     <li class="mega-get-help">

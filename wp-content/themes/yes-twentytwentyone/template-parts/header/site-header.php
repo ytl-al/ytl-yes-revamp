@@ -204,14 +204,28 @@ $path = plugin_basename(__DIR__).'/menu.json';
                                 </ul>
                                 <ul class="navbar-nav campagin">
                                     <li class="nav-itemn">
-                                    <a class="nav-link" href="/enterprise/yes-biz-wireless-broadband/" >Yes 5G Biz Wireless Broadband <div class="parent">
+                                    <?php
+                                        $lang = get_bloginfo("language");
+                                        $site_url_menu = get_site_url();
+                                        if ($lang == "en-US") {
+                                            $site_url_menu = get_site_url();
+                                        } elseif ($lang == "ms-MY") {
+                                            $site_url_menu = get_site_url() . '/ms';
+                                        }
+                                    ?>
+                                    <a class="nav-link" href="<?php echo $site_url_menu . '/enterprise/yes-biz-wireless-broadband/' ?>"><?php echo esc_html__('Yes 5G Biz Wireless Broadband', 'yes.my'); ?>
+                                    <div class="parent">
                                             <button class="btn-gradient-2"><span class="badges">NEW</span></button>
-                                        </div></a>
+                                        </div>
+                                    </a>
+                                    <!-- <a class="nav-link" href="/enterprise/yes-biz-wireless-broadband/" >Yes 5G Biz Wireless Broadband <div class="parent">
+                                            <button class="btn-gradient-2"><span class="badges">NEW</span></button>
+                                        </div></a> -->
                                 </li>
                                 </ul>
                                 <ul class="navbar-nav">
                                     <li class="nav-itemn">
-                                    <a class="nav-link" href="#" >5G Coverage</a>
+                                    <a class="nav-link" href="#" target="_blank">5G Coverage</a>
                                 </li>
                                 </ul>
                                 <ul class="navbar-nav d-none">
