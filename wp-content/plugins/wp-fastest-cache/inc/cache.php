@@ -482,7 +482,9 @@
 				}
 			}
 
-			if(isset($username) && $username){			
+			if(isset($username) && $username){
+				$username = esc_sql($username);
+
 				$res = $wpdb->get_var("SELECT `$wpdb->users`.`ID`, `$wpdb->users`.`user_login`, `$wpdb->usermeta`.`meta_key`, `$wpdb->usermeta`.`meta_value` 
 									   FROM `$wpdb->users` 
 									   INNER JOIN `$wpdb->usermeta` 
@@ -807,7 +809,12 @@
 			}else if(isset($_GET["preview"])){
 				return $buffer."<!-- not cached -->";
 			}else if($this->checkHtml($buffer)){
-				return $buffer."<!-- html is corrupted -->";
+				if(preg_match("/^.*$/s", $buffer)){
+					// Check if the buffer has only one line (no line breaks)
+					return $buffer;
+				}else{
+					return $buffer."<!-- html is corrupted -->";
+				}
 			}else if((function_exists("http_response_code")) && (http_response_code() == 301 || http_response_code() == 302)){
 				return $buffer;
 			}else if(!$this->cacheFilePath){
@@ -1073,7 +1080,7 @@
 				return false;
 			}
 
-			if(preg_match('/<html[^\>]*>/si', $buffer) && preg_match('/<body[^\>]*>/si', $buffer) && preg_match('/<\/body>/si', $buffer)){
+			if(preg_match('/<\s*html[^\>]*>/si', $buffer) && preg_match('/<\s*body[^\>]*>/si', $buffer) && preg_match('/<\/body\s*>/si', $buffer)){
 				return false;
 			}
 			// if(strlen($buffer) > 10){

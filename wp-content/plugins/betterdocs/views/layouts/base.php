@@ -1,9 +1,10 @@
 <?php
-    $terms         = get_terms( $terms_query_args );
+    //var_dump($terms_query_args);
+    $terms = get_terms( apply_filters( 'betterdocs_base_terms_args', $terms_query_args ) );
     /**
      * Base Layout Before Wrapper
      */
-    do_action_ref_array( 'betterdocs_base_layout_wrapper_before', [ &$terms ] );
+    do_action_ref_array( 'betterdocs_base_layout_wrapper_before', [ & $terms] );
 ?>
 
 <div
@@ -12,7 +13,7 @@
     /**
      * Base Layout Before Inner Wrapper
      */
-    do_action_ref_array( 'betterdocs_base_layout_inner_wrapper_before', [ &$terms ] );
+    do_action_ref_array( 'betterdocs_base_layout_inner_wrapper_before', [ & $terms] );
 ?>
 	<div
         <?php echo $inner_wrapper_attr; ?>>
@@ -40,7 +41,7 @@
             }
 
             if ( ! is_wp_error( $terms ) ) {
-                do_action_ref_array( 'betterdocs_layout_base_loop_start', [ &$terms, &$_defined_vars] );
+                do_action_ref_array( 'betterdocs_layout_base_loop_start', [ & $terms, &$_defined_vars] );
 
                 $_docs_query_args = [
                     'posts_per_page' => isset( $_params['posts_per_page'] ) ? $_params['posts_per_page'] : 0,
@@ -74,8 +75,8 @@
                         get_term_link( $term->term_id, $term->taxonomy ), $term, 'doc_category', $_params
                     );
 
-                    $docs_query_args['term_id']   = $term->term_id;
-                    $docs_query_args['term_slug'] = $term->slug;
+                    $docs_query_args['term_id']            = $term->term_id;
+                    $docs_query_args['term_slug']          = $term->slug;
                     $docs_query_args['nested_subcategory'] = $nested_subcategory;
 
                     $_params = wp_parse_args( [
@@ -88,7 +89,6 @@
                         'ancestors'                 => $ancestors,
                         'query_args'                => betterdocs()->query->docs_query_args( $docs_query_args )
                     ], $_params );
-
 
                     $template_params = apply_filters( 'betterdocs_template_params', $_params, $layout, $term, $widget_type );
                     $layout_filename = apply_filters( 'betterdocs_layout_filename', $layout, $layout, $widget_type );
@@ -108,7 +108,7 @@
         /**
          * Base Layout After Inner Wrapper
          */
-        do_action_ref_array( 'betterdocs_base_layout_inner_wrapper_after', [ &$terms ] );
+        do_action_ref_array( 'betterdocs_base_layout_inner_wrapper_after', [ & $terms] );
     ?>
     <div class="clearfix"></div>
     <?php if ( isset( $is_edit_mode ) && $is_edit_mode && $widget_type == 'category-grid' ): ?>
@@ -141,5 +141,5 @@
     /**
      * Base Layout After Wrapper
      */
-    do_action_ref_array( 'betterdocs_base_layout_wrapper_after', [ &$terms ] );
+    do_action_ref_array( 'betterdocs_base_layout_wrapper_after', [ & $terms] );
 ?>

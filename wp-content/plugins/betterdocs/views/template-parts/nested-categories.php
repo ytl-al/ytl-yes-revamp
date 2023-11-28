@@ -10,7 +10,15 @@ $_terms_args = [
     'parent'     => $term_id,
     'hide_empty' => true
 ];
+
+if ( isset ($terms_exclude) ) {
+    $_terms_args['exclude'] = $terms_exclude;
+} else if ( isset ($exclude) ) {
+    $_terms_args['exclude'] = $exclude;
+}
+
 $nested_terms_query = isset( $nested_terms_query ) ? array_merge( $_terms_args, $nested_terms_query ) : $_terms_args;
+
 $_nested_categories = get_terms( betterdocs()->query->terms_query( apply_filters( 'betterdocs_nested_terms_args', $nested_terms_query ) ) );
 
 if ( empty( $_nested_categories ) ) {
@@ -28,8 +36,10 @@ if ( is_single() ) {
     $_is_single    = true;
     $_page_id      = get_the_ID();
     $_category_ids = wp_get_post_terms( $_page_id, 'doc_category', ["fields" => "ids"] );
-    $ancestors = get_ancestors( $_category_ids[0], 'doc_category' );
-    $_category_ids = array_merge( $_category_ids, $ancestors );
+    if ( !empty ($_category_ids) && ! is_wp_error( $_category_ids ) ) {
+        $ancestors = get_ancestors( $_category_ids[0], 'doc_category' );
+        $_category_ids = array_merge( $_category_ids, $ancestors );
+    }
 }
 
 $_multiple_kb = isset( $multiple_knowledge_base ) ? $multiple_knowledge_base : false;

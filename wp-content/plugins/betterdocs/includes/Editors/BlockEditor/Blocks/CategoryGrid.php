@@ -114,13 +114,16 @@ class CategoryGrid extends Block {
         }
 
         $_wrapper_classes = [
-            'betterdocs-category-grid-wrapper'
+            'betterdocs-category-grid-wrapper',
+            'betterdocs-blocks-grid'
         ];
+
+        $layout_class = ($attributes['layout'] === 'default') ? 'layout-1' : $attributes['layout'];
 
         $_inner_wrapper_classes = [
             'betterdocs-category-grid-inner-wrapper',
             'layout-flex',
-            $attributes['layout'],
+            $layout_class,
             $attributes['layoutMode'],
             "betterdocs-column-" . $attributes['colRange'],
             "betterdocs-column-tablet-" . $attributes['TABcolRange'],
@@ -144,8 +147,23 @@ class CategoryGrid extends Block {
         $docs_query = [
             'orderby'        => $attributes['postsOrderBy'],
             'order'          => $attributes['postsOrder'],
-            'posts_per_page' => $attributes['postsPerPage']
+            'posts_per_page' => $attributes['postsPerPage'],
+            'nested_subcategory' => $attributes['enableNestedSubcategory']
         ];
+
+        $default_multiple_kb = betterdocs()->settings->get( 'multiple_kb' );
+
+        if ( is_tax( 'knowledge_base' ) && $default_multiple_kb == 1 ) {
+            $object = get_queried_object();
+            $terms_object['meta_query'] = [
+                'relation' => 'OR',
+                [
+                    'key'     => 'doc_category_knowledge_base',
+                    'value'   => $object->slug,
+                    'compare' => 'LIKE'
+                ]
+            ];
+        }
 
         return [
             'wrapper_attr'            => $wrapper_attr,
@@ -153,7 +171,7 @@ class CategoryGrid extends Block {
             'terms_query_args'        => $terms_object,
             'docs_query_args'         => $docs_query,
             'widget_type'             => 'category-grid',
-            'multiple_knowledge_base' => false,
+            'multiple_knowledge_base' => $default_multiple_kb,
             'kb_slug'                 => '',
             'nested_docs_query_args'  => [
                 'orderby'        => $attributes['postsOrderBy'],

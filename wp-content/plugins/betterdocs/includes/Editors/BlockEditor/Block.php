@@ -8,11 +8,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use WPDeveloper\BetterDocs\Utils\Base;
 use WPDeveloper\BetterDocs\Traits\EditorHelper;
+use WPDeveloper\BetterDocs\Utils\Enqueue;
 
 /**
  * Description
  *
- * @method string render_callback($attributes, $content)
  * @method void register_scripts()
  * @property-read mixed $attributes
  *
@@ -20,9 +20,12 @@ use WPDeveloper\BetterDocs\Traits\EditorHelper;
  */
 abstract class Block extends Base {
     use EditorHelper;
+
+    public $is_pro = false;
+
     /**
      * Enqueue
-     * @var \WPDeveloper\BetterDocs\Utils\Enqueue
+     * @var Enqueue
      */
     protected $assets_manager = null;
 
@@ -62,7 +65,7 @@ abstract class Block extends Base {
 
     public function register_block_type( $name, ...$args ) {
         return register_block_type(
-            $this->path( $name ),
+            apply_filters_ref_array( 'betterdocs.blocks.path', [ $this->path( $name ), $name, &$this ] ),
             ...$args
         );
     }
@@ -155,13 +158,13 @@ abstract class Block extends Base {
         $this->attributes = wp_parse_args( $attributes, $this->get_default_attributes() );
         $this->attributes = $this->remove_deprecated_attributes( $this->attributes, false, false );
 
-        do_action_ref_array( 'betterdocs_before_render', [ &$this, 'blocks' ] );
+        do_action_ref_array( 'betterdocs_before_render', [ & $this, 'blocks'] );
 
         ob_start();
         $this->render( $this->attributes, $content );
         $content = ob_get_clean();
 
-        do_action_ref_array( 'betterdocs_after_render', [ &$this, 'blocks' ] );
+        do_action_ref_array( 'betterdocs_after_render', [ & $this, 'blocks'] );
 
         return $content;
     }

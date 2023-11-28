@@ -5,7 +5,7 @@ namespace WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\Block;
 
 class SearchForm extends Block {
-    public $view_wrapper = 'betterdocs-searchbox-wrapper';
+    public $view_wrapper = 'betterdocs-search-form-wrapper';
 
     protected $frontend_styles = [
         'betterdocs-search'

@@ -4,7 +4,7 @@
  * Plugin Name:       BetterDocs
  * Plugin URI:        https://betterdocs.co/
  * Description:       Create stunning Knowledge base for your WordPress website and reduce support pressure with the help of BetterDocs. Get access to amazing templates and create fully customizable KB within minutes.
- * Version:           2.5.4
+ * Version:           3.0.1
  * Author:            WPDeveloper
  * Author URI:        https://wpdeveloper.com
  * License:           GPL-3.0+
@@ -20,6 +20,18 @@ define( 'BETTERDOCS_PLUGIN_FILE', __FILE__ );
 
 require_once __DIR__ . '/includes/v2x-compatibility.php';
 require_once __DIR__ . '/vendor/autoload.php';
+
+// register_block_pattern(
+//     'betterdocs/doc-category-archive',
+//     array(
+//         'title'         => __( 'Doc Category Archive', 'textdomain' ),
+//         'description'   => _x( 'This is my first block pattern', 'Block pattern description', 'textdomain' ),
+//         'content'       => '<!-- wp:paragraph --><p>A Simple Doc Category Archive</p><!-- /wp:paragraph -->',
+//         'categories'    => array( 'text' ),
+//         'keywords'      => array( 'cta', 'demo', 'example' ),
+//         'viewportWidth' => 800,
+//     )
+// );
 
 /**
  * Intiate the BetterDocs Plugin

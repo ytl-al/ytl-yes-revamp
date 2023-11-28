@@ -103,7 +103,7 @@ class Install extends Base {
         $this->container->get( Roles::class )->setup();
 
         // Save default settings.
-        $this->container->get( Settings::class )->save_default_settings();
+        // $this->container->get( Settings::class )->save_default_settings();
 
         // Set redirect transient
         if ( current_user_can( 'delete_users' ) ) {

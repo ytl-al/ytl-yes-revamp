@@ -50,6 +50,9 @@ class CategoryGrid extends Shortcode {
             'terms'                    => '',
             'terms_orderby'            => '',
             'terms_order'              => '',
+            'terms_include'            => '',
+            'terms_exclude'            => '',
+            'terms_offset'             => '',
             'kb_slug'                  => '',
             'multiple_knowledge_base'  => false,
             'disable_customizer_style' => false,
@@ -136,6 +139,18 @@ class CategoryGrid extends Shortcode {
             'orderby'            => $this->attributes['terms_orderby'],
             'nested_subcategory' => $this->attributes['nested_subcategory']
         ] );
+
+        if ( $this->attributes['terms_include'] ) {
+            $terms_query['include'] = $this->attributes['terms_include'];
+        }
+
+        if ( $this->attributes['terms_exclude'] ) {
+            $terms_query['exclude'] = $this->attributes['terms_exclude'];
+        }
+
+        if ( $this->attributes['terms_offset'] ) {
+            $terms_query['offset'] = (int) $this->attributes['terms_offset'];
+        }
 
         $inner_wrapper_attr = $this->generate_attributes();
 

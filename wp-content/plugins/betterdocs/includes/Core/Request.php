@@ -55,6 +55,7 @@ class Request extends Base {
 
         $this->perma_structure = [
             'is_docs'          => trim( $this->rewrite->get_base_slug(), '/' ),
+            'is_docs_feed'     => trim( $this->rewrite->get_base_slug(), '/' ) . '/%feed%',
             'is_docs_category' => trim( $this->settings->get( 'category_slug', 'docs-category' ), '/' ) . '/%doc_category%',
             'is_docs_tag'      => trim( $this->settings->get( 'tag_slug', 'docs-tag' ), '/' ) . '/%doc_tag%',
             'is_single_docs'   => trim( $this->settings->get( 'permalink_structure', 'docs' ), '/' ) . '/%name%'
@@ -62,6 +63,7 @@ class Request extends Base {
 
         $this->query_vars = [
             'is_docs'          => ['post_type'],
+            'is_docs_feed'     => ['doc_category'],
             'is_docs_category' => ['doc_category'],
             'is_docs_tag'      => ['doc_tag'],
             'is_single_docs'   => ['name', 'docs', 'post_type']
@@ -74,7 +76,9 @@ class Request extends Base {
          */
         add_action( 'parse_request', [$this, 'backward_compability'], 11 );
 
-        //Make Compatible With Permalink Manager Plugin
+        /**
+         * Make Compatible With Permalink Manager Plugin
+         */
         add_filter( 'permalink_manager_detected_element_id', [$this, 'provide_compatibility'], 10, 3 );
     }
 
@@ -94,6 +98,11 @@ class Request extends Base {
         return $query_vars;
     }
 
+    public function is_docs_feed( $query_vars ) {
+        global $wp_rewrite;
+        return isset( $query_vars['feed'] ) && in_array( $query_vars['feed'], $wp_rewrite->feeds );
+    }
+
     protected function is_single_docs( $query_vars ) {
         if ( ! isset( $query_vars['name'] ) ) {
             return false;
@@ -104,8 +113,9 @@ class Request extends Base {
 
         $_post_id = (int) $wpdb->get_var(
             $wpdb->prepare(
-                "SELECT ID FROM {$wpdb->posts} WHERE post_name = %s LIMIT 1",
-                esc_sql( $name )
+                "SELECT ID FROM {$wpdb->posts} WHERE post_name = %s AND post_type = %s LIMIT 1",
+                esc_sql( $name ),
+                'docs'
             )
         );
 
@@ -131,6 +141,7 @@ class Request extends Base {
     public function set_perma_structure( $structures = [] ) {
         $this->perma_structure = array_merge( $this->perma_structure, $structures );
     }
+
     public function set_query_vars( $query_vars = [] ) {
         $this->query_vars = array_merge( $this->query_vars, $query_vars );
     }
@@ -158,9 +169,10 @@ class Request extends Base {
             foreach ( $this->perma_structure as $_type => $structure ) {
                 $_perma_vars = $this->is_perma_valid_for( $structure, $wp->request );
 
-                $_valid = empty( $_valid ) && $_perma_vars ? ['type' => $_type, 'query_vars' => $_perma_vars] : $_valid;
+                // $_valid = empty( $_valid ) && $_perma_vars ? [ 'type' => $_type, 'query_vars' => $_perma_vars ] : $_valid;
                 if (  ( $_perma_vars && method_exists( $this, $_type ) && call_user_func_array( [$this, $_type], [ & $_perma_vars] ) ) ) {
-                    if ( $_type === 'is_single_docs' ) {
+                    // dump( $_type, $_perma_vars );
+                    if ( $_type === 'is_single_docs' || $_type == 'is_docs_feed' ) {
                         $_perma_vars['post_type'] = 'docs';
                     }
                     $_valid = ['type' => $_type, 'query_vars' => $_perma_vars];
@@ -180,6 +192,11 @@ class Request extends Base {
             }
 
             $wp->query_vars = is_array( $query_vars ) ? array_merge( $wp->query_vars, $query_vars ) : $wp->query_vars;
+            //var_dump($_valid);
+            // Fallback
+            if( ! empty( $_valid ) ) {
+                unset( $wp->query_vars['attachment'] );
+            }
         }
     }
 

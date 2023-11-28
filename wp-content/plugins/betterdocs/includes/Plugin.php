@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use WPDeveloper\BetterDocs\Core\Admin;
 use WPDeveloper\BetterDocs\Core\Query;
 use WPDeveloper\BetterDocs\Core\Roles;
+use WPDeveloper\BetterDocs\Dependencies\DI\Container;
 use WPDeveloper\BetterDocs\Utils\Views;
 use WPDeveloper\BetterDocs\Core\BaseAPI;
 use WPDeveloper\BetterDocs\Core\Install;
@@ -17,6 +18,7 @@ use WPDeveloper\BetterDocs\Core\Rewrite;
 use WPDeveloper\BetterDocs\Core\Scripts;
 use WPDeveloper\BetterDocs\Utils\Helper;
 use WPDeveloper\BetterDocs\Core\Settings;
+use WPDeveloper\BetterDocs\Core\KBMigration;
 use WPDeveloper\BetterDocs\Utils\Enqueue;
 use WPDeveloper\BetterDocs\Editors\Editor;
 use WPDeveloper\BetterDocs\Utils\Database;
@@ -30,113 +32,89 @@ use WPDeveloper\BetterDocs\Dependencies\DI\ContainerBuilder;
 
 final class Plugin {
     private static $_instance = null;
-
-    /**
-     * Create a plugin instance.
-     *
-     * @since 2.5.0
-     * @param mixed ...$args
-     *
-     * @return static
-     *
-     * @suppress PHP0441
-     */
-    public static function get_instance() {
-        if ( static::$_instance == null ) {
-            static::$_instance = new self();
-
-            do_action( 'betterdocs_loaded' );
-        }
-
-        return static::$_instance;
-    }
-
     /**
      * Assets manager
      *
      * @var Enqueue
      */
     public $assets;
-
     /**
      * View manager
      *
      * @var Views
      */
     public $views;
-
     /**
      * Container Manager
      *
-     * @var \WPDeveloper\BetterDocs\Dependencies\DI\Container
+     * @var Container
      */
     public $container;
-
     /**
      * Editor Manager
      * @var Editor
      */
     public $editor;
-
     /**
      * Helper class
      * @var Helper
      */
     public $helper;
-
+    /**
+     * KBMigration class
+     * @var KBMigration
+     */
+    public $kbmigration;
+    /**
+     * KBMigration class
+     * @var Admin
+     */
+    public $admin;
     /**
      * Helper class
      * @var Database
      */
     public $database;
-
     /**
      * Helper class
      * @var Settings
      */
     public $settings;
-
     /**
      * Helper class
      * @var TemplateTags
      */
     public $template_helper;
-
     /**
      * Customizer class
      * @var Customizer
      */
     public $customizer;
-
     /**
      * Query class
      * @var Query
      */
     public $query;
-
     /**
      * Rewrite Class
      * @var Rewrite
      */
     public $rewrite;
-
     /**
      * Request Class
      * @var Request
      */
     public $request;
-
     /**
      * Analytics Class
      * @var Analytics
      */
     public $analytics;
-
     /**
      * Plugin Version
      * @var string
      */
-    public $version = '2.5.4';
+    public $version = '3.0.1';
 
     /**
      * Plugin DB Version
@@ -157,12 +135,12 @@ final class Plugin {
 
         $this->initialize();
 
-        add_action( 'init', [$this, 'init'], 0 );
+        add_action( 'init', [ $this, 'init' ], 0 );
 
         /**
          * For admin only
          */
-        add_action( 'admin_init', [$this, 'admin_init'], 0 );
+        add_action( 'admin_init', [ $this, 'admin_init' ], 0 );
 
         /**
          * For AJAX only
@@ -194,7 +172,7 @@ final class Plugin {
     /**
      * Define constant if not already set.
      *
-     * @param string      $name  Constant name.
+     * @param string $name Constant name.
      * @param string|bool $value Constant value.
      */
     private function define( $name, $value ) {
@@ -224,6 +202,8 @@ final class Plugin {
         $this->assets    = $this->container->get( Enqueue::class );
         $this->views     = $this->container->get( Views::class );
         $this->helper    = $this->container->get( Helper::class );
+        $this->kbmigration    = $this->container->get( KBMigration::class );
+        $this->admin    = $this->container->get( Admin::class );
         $this->database  = $this->container->get( Database::class );
         $this->settings  = $this->container->get( Settings::class );
         $this->analytics = $this->container->get( Analytics::class );
@@ -236,19 +216,19 @@ final class Plugin {
          * Initialize all editors.
          * Elementor, Gutenberg/BlockEditor
          */
-        add_action( 'init', [$this->editor, 'init'] );
+        add_action( 'init', [ $this->editor, 'init' ] );
 
         /**
          * Initialize API
          */
-        add_action( 'rest_api_init', [$this, 'api_initialization'] );
+        add_action( 'rest_api_init', [ $this, 'api_initialization' ] );
     }
 
     /**
      * Initialize the BetterDocs Plugin
      *
-     * @since 2.5.0
      * @return void
+     * @since 2.5.0
      */
     public function init() {
         /**
@@ -272,25 +252,6 @@ final class Plugin {
     }
 
     /**
-     * Hooked with `admin_init` action.
-     * @return void
-     */
-    public function admin_init() {
-        /**
-         * Maybe Redirect
-         * for setup related settings.
-         */
-        $this->maybe_redirect();
-    }
-
-    /**
-     * For AJAX Only
-     * @return void
-     */
-    public function ajax() {
-    }
-
-    /**
      * Load plugins textdomain `betterdocs` into actions.
      * @return void
      */
@@ -308,19 +269,42 @@ final class Plugin {
     }
 
     /**
-     * Is Pro Plugin Is Installed?
-     * @return bool
+     * For AJAX Only
+     * @return void
      */
-    public function is_pro_installed() {
-        return $this->helper->get_plugins( 'betterdocs-pro/betterdocs-pro.php' );
+    public function ajax() {
     }
 
     /**
-     * Is Pro Plugin Is Active?
-     * @return bool
+     * Create a plugin instance.
+     *
+     * @param mixed ...$args
+     *
+     * @return static
+     *
+     * @suppress PHP0441
+     * @since 2.5.0
      */
-    public function is_pro_active() {
-        return $this->helper->is_plugin_active( 'betterdocs-pro/betterdocs-pro.php' );
+    public static function get_instance() {
+        if ( static::$_instance == null ) {
+            static::$_instance = new self();
+
+            do_action( 'betterdocs_loaded' );
+        }
+
+        return static::$_instance;
+    }
+
+    /**
+     * Hooked with `admin_init` action.
+     * @return void
+     */
+    public function admin_init() {
+        /**
+         * Maybe Redirect
+         * for setup related settings.
+         */
+        $this->maybe_redirect();
     }
 
     /**
@@ -337,8 +321,29 @@ final class Plugin {
         $this->database->delete_transient( 'betterdocs_maybe_redirect' );
 
         if ( ! is_multisite() ) {
-            wp_safe_redirect( add_query_arg( ['page' => 'betterdocs-setup'], admin_url( 'admin.php' ) ) );
+            $betterdocs_settings = get_option('betterdocs_settings');
+            if ( $betterdocs_settings) {
+                wp_safe_redirect( add_query_arg( [ 'page' => 'betterdocs-settings' ], admin_url( 'admin.php' ) ) );
+            } else {
+                wp_safe_redirect( add_query_arg( [ 'page' => 'betterdocs-setup' ], admin_url( 'admin.php' ) ) );
+            }
         }
+    }
+
+    /**
+     * Is Pro Plugin Is Installed?
+     * @return bool
+     */
+    public function is_pro_installed() {
+        return $this->helper->get_plugins( 'betterdocs-pro/betterdocs-pro.php' );
+    }
+
+    /**
+     * Is Pro Plugin Is Active?
+     * @return bool
+     */
+    public function is_pro_active() {
+        return $this->helper->is_plugin_active( 'betterdocs-pro/betterdocs-pro.php' );
     }
 
     /**

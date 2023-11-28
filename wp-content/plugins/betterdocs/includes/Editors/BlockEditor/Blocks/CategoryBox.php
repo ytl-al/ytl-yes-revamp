@@ -79,6 +79,7 @@ class CategoryBox extends Block {
 
         $_wrapper_classes = [
             'betterdocs-category-box-wrapper',
+            'betterdocs-blocks-grid',
             'betterdocs-box-' . $attributes['layout']
         ];
 
@@ -101,12 +102,25 @@ class CategoryBox extends Block {
             'data-column_mobile'  => $attributes['MOBcolRange']
         ];
 
+        $default_multiple_kb = betterdocs()->settings->get( 'multiple_kb' );
+        if ( is_tax( 'knowledge_base' ) && $default_multiple_kb == 1 ) {
+            $object = get_queried_object();
+            $terms_object['meta_query'] = [
+                'relation' => 'OR',
+                [
+                    'key'     => 'doc_category_knowledge_base',
+                    'value'   => $object->slug,
+                    'compare' => 'LIKE'
+                ]
+            ];
+        }
+
         $_params = [
             'wrapper_attr'       => $wrapper_attr,
             'inner_wrapper_attr' => $inner_wrapper_attr,
             'terms_query_args'   => $terms_object,
             'widget_type'        => 'category-box',
-            'multiple_knowledge_base' => false,
+            'multiple_knowledge_base' => $default_multiple_kb,
             'kb_slug'                 => '',
             'nested_subcategory' => false,
             'show_header'        => true

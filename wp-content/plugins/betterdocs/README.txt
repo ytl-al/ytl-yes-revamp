@@ -4,9 +4,9 @@ Donate link: https://wpdeveloper.com
 Tags:  knowledge base, docs, documentation, documents, wiki, faq page, doc, knowledge, knowledgebase, doc page, best documentation plugin, support ticket, customer support, instant answer bot, bot, help articles, better docs, document, faq, instant answers, elementor, chat, live search, external knowledgebase, multiple knowledge bases, faqs, help, chatbot, TOC, table of content, elementor doc, template, doc theme
 Tags:  knowledge base, docs, documentation, documents, wiki, faq page, doc, knowledge, knowledgebase, doc page, best documentation plugin, support ticket, customer support, instant answer bot, bot, help articles, better docs, document, faq, instant answers, elementor, chat, live search, external knowledgebase, multiple knowledge bases, faqs, help, chatbot, TOC, table of content, elementor doc, template, doc theme
 Requires at least: 4.0
-Tested up to: 6.3
+Tested up to: 6.4
 Requires PHP: 7.0
-Stable tag: 2.5.4
+Stable tag: 3.0.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -45,6 +45,7 @@ Let the visitors instantly find the answers they are searching for without havin
 - WPML Certified Plugin
 - Gutenberg Blocks [BetterDocs Search Form](https://betterdocs.co/docs/betterdocs-search-box-gutenberg/), [BetterDocs Category Box](https://betterdocs.co/docs/betterdocs-category-grid-gutenberg/) & [BetterDocs Category Grid](https://betterdocs.co/docs/betterdocs-category-grid-gutenberg/) to easily create your Knowledgebase
 - Create [Advanced Search](https://betterdocs.co/docs/betterdocs-advanced-search/) & showcase [Popular Docs](https://betterdocs.co/docs/how-to-feature-popular-docs-on-knowledge-base-using-betterdocs/) with ready layouts (PRO)
+- FSE Compatible with 10+ Gutenberg Blocks & Patterns
 
 ## 🙌 STUNNING READY TEMPLATES FOR DOCS LANDING PAGE ##
 
@@ -60,9 +61,9 @@ https://www.youtube.com/watch?v=db4FB2NUD-g
 
 Design FAQ sections for your Knowledge base easily with the help of BetterDocs FAQ Builder.
 
-## 💬 CREATE FAQ INSTANTLY ##
+## 💬 Full Site Editor (FSE) Compatibility ##
 
-Design FAQ sections for your Knowledge base easily with the help of BetterDocs FAQ Builder.
+Design your documentation, single docs, archive pages effortlessly in Gutenberg Editor with the help of BetterDocs Blocks & Patterns for Gutenberg.
 
 ## 📋 INTERACTIVE TABLE OF CONTENTS (TOC) ##
 
@@ -183,6 +184,29 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 3.0.1 - 20/11/2023 =
+- Few minor bug fixes and improvements
+
+= 3.0.0 - 05/11/2023 =
+- Revamped: New UI/UX Interface
+- Added: FSE Compatibility
+- Added: New FSE Blocks for Gutenberg
+- Added: New FSE Patterns for Gutenberg
+- Revamped: Quick Setup
+- Few minor bug fixes and improvements
+
+= 2.5.6 - 21/09/2023 =
+- Fixed: Category images are scaled incorrectly when image optimization plugins are used
+- Few minor bug fixes and improvements
+
+= 2.5.5 - 11/09/2023 =
+- Improved: Customizer CSS now loading only on BetterDocs templates
+- Improved: Added Knowledge Bases, Include, Exclude, Offset, and Nested Subcategory filter options to the Elementor Doc Sidebar widget
+- Fixed: Permalink feed not working
+- Fixed: The Settings REST API returning null value
+- Fixed: FAQ Schema not working properly contain data for all displayed FAQs
+- Few minor bug fixes and improvements
 
 = 2.5.4 - 05/09/2023 =
 - Updated- Moved customizer controls for Breadcrumbs to a separate tab from the Single Doc tab
@@ -754,7 +778,7 @@ Yes, it will work with any standard WordPress theme.
 
 == Upgrade Notice ==
 
-= 2.5.4 =
+= 2.5.6 =
 Attention! Please Backup your site before updating.
 
 The latest version of **BetterDocs v2.5** includes massive changes across different areas of the plugin with revamped code structure for optimized performance. We would highly recommend you to [backup your entire site](https://wpdeveloper.com/backup-wordpress-site/) before updating the plugin & test it on your staging website. [Contact our Support](https://wpdeveloper.com/support/) if you encounter any kind of errors or if you need any kind of assistance.

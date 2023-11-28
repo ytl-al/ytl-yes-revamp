@@ -419,7 +419,7 @@ class CategoryGrid extends BaseWidget {
                 'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_icon'       => 'true',
-                    'layout_template' => 'Layout_Default'
+                    'layout_template' => 'default'
                 ]
             ]
         );
@@ -523,7 +523,7 @@ class CategoryGrid extends BaseWidget {
                     ]
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-icon' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};'
+                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-icon .betterdocs-category-icon-img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};'
                 ],
                 'separator'  => 'before'
             ]

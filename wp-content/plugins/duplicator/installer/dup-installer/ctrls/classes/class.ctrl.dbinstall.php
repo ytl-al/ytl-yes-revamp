@@ -14,6 +14,7 @@ use Duplicator\Installer\Core\Params\Descriptors\ParamDescUsers;
 use Duplicator\Installer\Core\Deploy\Database\DbCleanup;
 use Duplicator\Installer\Core\Deploy\Database\DbUserMode;
 use Duplicator\Installer\Core\Deploy\Database\QueryFixes;
+use Duplicator\Installer\Utils\LinkManager;
 use Duplicator\Installer\Utils\Log\Log;
 use Duplicator\Installer\Core\Params\PrmMng;
 use Duplicator\Libs\Snap\JsonSerialize\AbstractJsonSerializable;
@@ -858,9 +859,10 @@ class DUPX_DBInstall extends AbstractJsonSerializable
                     }
 
                     if (DUPX_ArchiveConfig::getInstance()->dbInfo->buildMode === self::BUILD_MODE_MYSQLDUMP) {
-                        $skipRegex[] = '/^\s*(?:\/\*!\d+\s)?\s*(?:CREATE|INSERT|ALTER|LOCK)\s.*(?:TABLE|INTO).*[`\s](' . implode('|', $subArray) . ')[`\s]/im';
+                        $skipRegex[] = '/^\s*(?:\/\*!\d+\s)?\s*(?:CREATE|INSERT|ALTER|LOCK)\s.*(?:TABLE|INTO).*[`\s](?-i)(' .
+                            implode('|', $subArray) . ')(?i)[`\s]/im';
                     } else {
-                        $skipRegex[] = '/^\s*(?:CREATE|INSERT)\s.*(?:TABLE|INTO).*[`\s](' . implode('|', $subArray) . ')[`\s]/im';
+                        $skipRegex[] = '/^\s*(?:CREATE|INSERT)\s.*(?:TABLE|INTO).*[`\s](?-i)(' . implode('|', $subArray) . ')(?i)[`\s]/im';
                     }
                 }
             }
@@ -877,7 +879,7 @@ class DUPX_DBInstall extends AbstractJsonSerializable
                         break;
                     }
 
-                    $skipRegex[] = '/^\s*CREATE\s.*TABLE.*[`\s](' . implode('|', $subArray) . ')[`\s]/im';
+                    $skipRegex[] = '/^\s*CREATE\s.*TABLE.*[`\s](?-i)(' . implode('|', $subArray) . ')(?i)[`\s]/im';
                 }
             }
 
@@ -1055,7 +1057,11 @@ class DUPX_DBInstall extends AbstractJsonSerializable
                 'longMsgMode' => DUPX_NOTICE_ITEM::MSG_MODE_PRE,
                 'sections'    => 'database',
                 'faqLink'     => array(
-                    'url'   => DUPX_Constants::FAQ_URL . 'how-to-fix-database-errors-or-general-warnings-on-the-install-report',
+                    'url'   => LinkManager::getDocUrl(
+                        'how-to-fix-database-errors-or-general-warnings-on-the-install-report',
+                        'install',
+                        'DB error notice'
+                    ),
                     'label' => 'FAQ Link'
                 )
                 ), DUPX_NOTICE_MANAGER::ADD_UNIQUE_APPEND, 'query-size-limit-msg');
@@ -1068,7 +1074,7 @@ class DUPX_DBInstall extends AbstractJsonSerializable
         if (($query_res = DUPX_DB::mysqli_query($this->dbh, $query)) === false) {
             $err    = mysqli_error($this->dbh);
             $errMsg = "DATABASE ERROR: '{$err}'\n\t[SQL=" . substr($query, 0, self::QUERY_ERROR_LOG_LEN) . "...]\n\n";
-            $url    = DUPX_Constants::FAQ_URL . 'how-to-fix-database-write-issues/';
+            $url    = LinkManager::getDocUrl('how-to-fix-database-write-issues', 'install', 'DB error notice');
 
             if (DUPX_U::contains($err, 'Unknown collation')) {
                 $nManager->addNextStepNotice(array(

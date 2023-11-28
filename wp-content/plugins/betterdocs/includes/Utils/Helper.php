@@ -33,24 +33,30 @@ class Helper extends Base {
             }
         } elseif ( is_tax( 'doc_category' ) ) {
             $tax = 'doc_category';
+        } elseif ( is_tax( 'doc_tag' ) ) {
+            $tax = 'doc_tag';
         }
 
         return $tax;
     }
 
     public function is_templates() {
+        $tax = $this->get_tax();
+        if ( is_post_type_archive( 'docs' ) || $tax === 'knowledge_base' || $tax === 'doc_category' || $tax === 'doc_tag' || is_singular( 'docs' ) ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function is_el_templates() {
         $_return_val = betterdocs()->editor->get( 'elementor' )->is_templates();
 
         if ( $_return_val !== null ) {
             return $_return_val;
         }
 
-        $tax = $this->get_tax();
-        if ( is_post_type_archive( 'docs' ) || $tax === 'knowledge_base' || $tax === 'doc_category' || is_singular( 'docs' ) ) {
-            return true;
-        }
-
-        return false;
+        $this->is_templates();
     }
 
     /**

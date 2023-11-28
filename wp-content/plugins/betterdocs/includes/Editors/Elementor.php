@@ -185,7 +185,7 @@ class Elementor extends BaseEditor {
                     'default' => '8'
                 ]
             );
-        } else {
+        } else if ( $wb->get_name() !== 'betterdocs-sidebar' ) {
             $wb->add_control(
                 'box_per_page',
                 [
@@ -205,39 +205,82 @@ class Elementor extends BaseEditor {
             ]
         );
 
-        $wb->add_control(
-            'orderby',
-            [
-                'label'   => __( 'Order By', 'betterdocs' ),
-                'type'    => Controls_Manager::SELECT,
-                'options' => [
-                    'none'             => __( 'No order', 'betterdocs' ),
-                    'name'             => __( 'Name', 'betterdocs' ),
-                    'slug'             => __( 'Slug', 'betterdocs' ),
-                    'term_group'       => __( 'Term Group', 'betterdocs' ),
-                    'term_id'          => __( 'Term ID', 'betterdocs' ),
-                    'id'               => __( 'ID', 'betterdocs' ),
-                    'description'      => __( 'Description', 'betterdocs' ),
-                    'parent'           => __( 'Parent', 'betterdocs' ),
-                    'betterdocs_order' => __( 'BetterDocs Order', 'betterdocs' )
-                ],
-                'default' => 'name'
-            ]
-        );
+        // difference between betterdocs-sidebar and betterdocs-category-grid is the default order
+        if ( $wb->get_name() === 'betterdocs-sidebar' ) {
+            $wb->add_control(
+                'orderby',
+                [
+                    'label'   => __( 'Order By', 'betterdocs' ),
+                    'type'    => Controls_Manager::SELECT,
+                    'options' => [
+                        'none'             => __( 'No order', 'betterdocs' ),
+                        'name'             => __( 'Name', 'betterdocs' ),
+                        'slug'             => __( 'Slug', 'betterdocs' ),
+                        'term_group'       => __( 'Term Group', 'betterdocs' ),
+                        'term_id'          => __( 'Term ID', 'betterdocs' ),
+                        'id'               => __( 'ID', 'betterdocs' ),
+                        'description'      => __( 'Description', 'betterdocs' ),
+                        'parent'           => __( 'Parent', 'betterdocs' ),
+                        'betterdocs_order' => __( 'BetterDocs Order', 'betterdocs' )
+                    ],
+                    'default' => $this->settings->get( 'terms_orderby', 'betterdocs_order' ),
+                ]
+            );
 
-        $wb->add_control(
-            'order',
-            [
-                'label'   => __( 'Order', 'betterdocs' ),
-                'type'    => Controls_Manager::SELECT,
-                'options' => [
-                    'ASC'  => 'Ascending',
-                    'DESC' => 'Descending'
-                ],
-                'default' => 'asc'
+            $wb->add_control(
+                'order',
+                [
+                    'label'   => __( 'Order', 'betterdocs' ),
+                    'type'    => Controls_Manager::SELECT,
+                    'options' => [
+                        'ASC'  => 'Ascending',
+                        'DESC' => 'Descending'
+                    ],
+                    'default' => $this->settings->get( 'terms_order', 'ASC' ),
+                    'condition' => [
+                        'orderby!' => 'betterdocs_order',
+                    ],
 
-            ]
-        );
+                ]
+            );
+        } else {
+            $wb->add_control(
+                'orderby',
+                [
+                    'label'   => __( 'Order By', 'betterdocs' ),
+                    'type'    => Controls_Manager::SELECT,
+                    'options' => [
+                        'none'             => __( 'No order', 'betterdocs' ),
+                        'name'             => __( 'Name', 'betterdocs' ),
+                        'slug'             => __( 'Slug', 'betterdocs' ),
+                        'term_group'       => __( 'Term Group', 'betterdocs' ),
+                        'term_id'          => __( 'Term ID', 'betterdocs' ),
+                        'id'               => __( 'ID', 'betterdocs' ),
+                        'description'      => __( 'Description', 'betterdocs' ),
+                        'parent'           => __( 'Parent', 'betterdocs' ),
+                        'betterdocs_order' => __( 'BetterDocs Order', 'betterdocs' )
+                    ],
+                    'default' => 'name'
+                ]
+            );
+
+            $wb->add_control(
+                'order',
+                [
+                    'label'   => __( 'Order', 'betterdocs' ),
+                    'type'    => Controls_Manager::SELECT,
+                    'options' => [
+                        'ASC'  => 'Ascending',
+                        'DESC' => 'Descending'
+                    ],
+                    'default' => 'asc',
+                    'condition' => [
+                        'orderby!' => 'betterdocs_order',
+                    ],
+
+                ]
+            );
+        }
 
         if ( $wb->get_name() === 'betterdocs-category-grid' ) {
             $wb->add_control(
@@ -316,6 +359,20 @@ class Elementor extends BaseEditor {
                     'label_off'    => __( 'No', 'betterdocs' ),
                     'return_value' => 'true',
                     'default'      => false
+                ]
+            );
+        }
+
+        if ( $wb->get_name() === 'betterdocs-sidebar' ) {
+            $wb->add_control(
+                'nested_subcategory',
+                [
+                    'label'        => __( 'Nested Subcategory', 'betterdocs' ),
+                    'type'         => Controls_Manager::SWITCHER,
+                    'label_on'     => __( 'Yes', 'betterdocs' ),
+                    'label_off'    => __( 'No', 'betterdocs' ),
+                    'return_value' => 'true',
+                    'default'      => ($this->settings->get( 'archive_nested_subcategory' ) == 1) ? 'true' : '',
                 ]
             );
         }
@@ -563,7 +620,7 @@ class Elementor extends BaseEditor {
          */
         $assets->register( 'betterdocs-el-category-grid', 'elementor/js/category-grid.js', ['jquery', 'betterdocs-category-toggler'] );
 
-        if ( betterdocs()->helper->is_templates() == true ) {
+        if ( betterdocs()->helper->is_el_templates() == true ) {
             $assets->enqueue( 'betterdocs-elementor-editor', 'elementor/css/betterdocs-el-edit.css' );
 
             if ( ! $this->is_pro_active ) {

@@ -61,6 +61,15 @@ class PostmanEmailLogs {
             $msg = $log['original_message'];
             $msg = preg_replace( "/<script\b[^>]*>(.*?)<\/script>/s", '', $msg );
 
+            // Strip <xml> and comment tags.
+            $msg = preg_replace( '/<xml\b[^>]*>(.*?)<\/xml>/is', '', $msg );
+            $msg = preg_replace( '/<!--(.*?)-->/', '', $msg );
+
+            $allowed_html = wp_kses_allowed_html( 'post' );
+            $allowed_html['style'][''] = true;
+
+            $msg = wp_kses( $msg, $allowed_html );
+
             echo '<pre>' . $msg . '</pre>';
 
             die;
@@ -247,7 +256,7 @@ class PostmanEmailLogs {
      * @version 1.0.0
      */
     public function save( $data, $id = '' ) {
-
+        
         $data['time'] = !isset( $data['time'] ) ? current_time( 'timestamp' ) : $data['time'];
 
         if( !empty( $id ) ) {
@@ -309,6 +318,13 @@ class PostmanEmailLogs {
             $query['end'] = sanitize_text_field( $_GET['length'] );
             $query['search'] = sanitize_text_field( $_GET['search']['value'] );
             $query['order'] = sanitize_text_field( $_GET['order'][0]['dir'] );
+            
+			//MainWP | Get Sites
+            if( isset( $_GET['site_id'] ) ) {
+
+                $query['site_id'] = sanitize_text_field( $_GET['site_id'] );
+
+            }
 
             //Column Name
             $query['order_by'] = sanitize_text_field( $_GET['columns'][$_GET['order'][0]['column']]['data'] );
@@ -367,6 +383,14 @@ class PostmanEmailLogs {
                 
         
                 $row->actions = '';
+				
+				/**
+                 * Filter the row data
+                 * 
+                 * @since 2.5.0
+                 * @version 1.0.0
+                 */
+                $row = apply_filters( 'ps_email_logs_row', $row );
 
                 //Escape HTML
                 $row->original_subject = esc_html( $row->original_subject );
@@ -653,11 +677,12 @@ class PostmanEmailLogs {
 
         if( isset( $_POST['action'] ) && $_POST['action'] == 'ps-resend-email' ) {
 
-            $id = sanitize_text_field( $_POST['id'] );
+            $id =  intval( $_POST['id'] );
             $response = '';
             $email_query_log = new PostmanEmailQueryLog();
             $log = $email_query_log->get_log( $id );
             $to = '';
+            $headers = '';
 
             if( $log ) {
 
@@ -673,6 +698,12 @@ class PostmanEmailLogs {
 
                 }
 
+                if( $log['original_headers'] ){
+
+					$headers = is_serialized( $log['original_headers'] ) ? unserialize( $log['original_headers'] ) : $log['original_headers'];
+
+				}
+
                 /**
                  * Fires before resending email
                  * 
@@ -682,7 +713,7 @@ class PostmanEmailLogs {
                  */
                 $attachments = apply_filters( 'post_smtp_resend_attachments', array(), $id );
 
-                $success = wp_mail( $to, $log['original_subject'], $log['original_message'], $log['original_headers'], $attachments );
+                $success = wp_mail( $to, $log['original_subject'], $log['original_message'], $headers, $attachments );
 
                 // Postman API: retrieve the result of sending this message from Postman
                 $result = apply_filters( 'postman_wp_mail_result', null );

@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'WPDeveloper\\BetterDocs\\' => array($baseDir . '/includes'),
+    'PriyoMukul\\WPNotice\\' => array($vendorDir . '/priyomukul/wp-notice/src'),
 );

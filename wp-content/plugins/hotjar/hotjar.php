@@ -4,7 +4,7 @@
  * Description: The fast & visual way to understand your users.
  * Author: Hotjar
  * Author URI: https://www.hotjar.com/?utm_source=wordpress&utm_medium=plugin
- * Version: 1.0.15
+ * Version: 1.0.16
  * License: GPLv3
  * License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
  * Text Domain: hotjar
@@ -26,7 +26,7 @@ function hotjar_plugin_init() {
 			/**
 			 * @var Const Plugin Version Number
 			 */
-			const VERSION = '1.0.15';
+			const VERSION = '1.0.16';
 
 			/**
 			 * @var Singleton The reference the *Singleton* instance of this class

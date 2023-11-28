@@ -3,7 +3,6 @@
 namespace WPDeveloper\BetterDocs\FrontEnd;
 
 use WPDeveloper\BetterDocs\Utils\Base;
-use WPDeveloper\BetterDocs\Utils\Views;
 use WPDeveloper\BetterDocs\Core\Settings;
 use WPDeveloper\BetterDocs\Utils\Enqueue;
 use WPDeveloper\BetterDocs\Utils\Database;
@@ -23,7 +22,7 @@ class FrontEnd extends Base {
      */
     private $settings;
     private $widget_attributes = [];
-    private $widget_type = '';
+    private $widget_type       = '';
 
     public function __construct( Container $container, Database $database, Settings $settings ) {
         $this->container = $container;
@@ -39,82 +38,98 @@ class FrontEnd extends Base {
 
         add_action( 'betterdocs_docs_before_social', [$this, 'article_reactions'] );
 
-        add_action('betterdocs_before_render', [ $this, 'before_render' ], 11, 2 );
-        add_action('betterdocs_after_render', [ $this, 'after_render' ], 11, 2 );
+        add_action( 'betterdocs_before_render', [$this, 'before_render'], 11, 2 );
+        add_action( 'betterdocs_after_render', [$this, 'after_render'], 11, 2 );
     }
 
     public function before_render( $widget, $widget_type ) {
         $this->widget_attributes = isset( $widget->attributes ) ? $widget->attributes : [];
-        $this->widget_type = $widget_type;
+        $this->widget_type       = $widget_type;
 
         /**
          * This line of code will run for reactions shortcode, elementor widget and blocks
          */
-        if( strpos( $widget->get_name(), 'reactions' ) !== false ) {
+        if ( strpos( $widget->get_name(), 'reactions' ) !== false ) {
             $this->localize_reactions_data();
         }
 
         /**
          * This line of code will run for Feedback form Shortcode, Elementor widget and blocks
          */
-        if( strpos( $widget->get_name(), 'feedback_form' ) ){
+        if ( strpos( $widget->get_name(), 'feedback_form' ) ) {
             $this->localize_feedback_form_data();
         }
 
-        add_filter('betterdocs_nested_terms_args', [$this, 'terms_args'], 11, 1);
-        add_filter('betterdocs_nested_docs_args', [$this, 'docs_args'], 11, 1);
+        add_filter( 'betterdocs_nested_terms_args', [$this, 'terms_args'], 11, 1 );
+        add_filter( 'betterdocs_nested_docs_args', [$this, 'docs_args'], 11, 1 );
     }
 
-    public function after_render( $widget, $widget_type ){
-        remove_filter('betterdocs_nested_terms_args', [$this, 'terms_args'], 11);
-        remove_filter('betterdocs_nested_docs_args', [$this, 'docs_args'], 11);
+    public function after_render( $widget, $widget_type ) {
+        remove_filter( 'betterdocs_nested_terms_args', [$this, 'terms_args'], 11 );
+        remove_filter( 'betterdocs_nested_docs_args', [$this, 'docs_args'], 11 );
 
         $this->widget_attributes = [];
-        $this->widget_type = '';
+        $this->widget_type       = '';
     }
 
-    public function terms_args( $args ){
-        switch( $this->widget_type ) {
+    public function terms_args( $args ) {
+        switch ( $this->widget_type ) {
             case 'shortcode':
-                if( isset( $this->widget_attributes['terms_orderby'] ) ) {
+                if ( isset( $this->widget_attributes['terms_orderby'] ) ) {
                     $args['orderby'] = $this->widget_attributes['terms_orderby'];
                 }
 
-                if( isset( $this->widget_attributes['terms_order'] ) ) {
+                if ( isset( $this->widget_attributes['terms_order'] ) ) {
                     $args['order'] = $this->widget_attributes['terms_order'];
                 }
                 break;
             case 'blocks':
-                $args['orderby'] = $this->widget_attributes['orderBy'];
-                $args['order'] = $this->widget_attributes['order'];
+                if ( isset( $this->widget_attributes['orderBy'] ) ) {
+                    $args['orderby'] = $this->widget_attributes['orderBy'];
+                }
+                if ( isset( $this->widget_attributes['order'] ) ) {
+                    $args['order'] = $this->widget_attributes['order'];
+                }
                 break;
             case 'elementor':
                 $args['orderby'] = $this->widget_attributes['orderby'];
-                $args['order'] = $this->widget_attributes['order'];
+                $args['order']   = $this->widget_attributes['order'];
                 break;
         }
 
         return $args;
     }
 
-    public function docs_args( $args ){
-        switch( $this->widget_type ) {
+    public function docs_args( $args ) {
+        switch ( $this->widget_type ) {
             case 'shortcode':
-                if( isset( $this->widget_attributes['orderby'] ) ) {
+                if ( isset( $this->widget_attributes['orderby'] ) ) {
                     $args['orderby'] = $this->widget_attributes['orderby'];
                 }
 
-                if( isset( $this->widget_attributes['order'] ) ) {
+                if ( isset( $this->widget_attributes['order'] ) ) {
                     $args['order'] = $this->widget_attributes['order'];
                 }
                 break;
             case 'blocks':
-                $args['orderby'] = $this->widget_attributes['postsOrderBy'];
-                $args['order'] = $this->widget_attributes['postsOrder'];
+                if ( isset( $this->widget_attributes['postsOrderBy'] ) ) {
+                    $args['orderby'] = $this->widget_attributes['postsOrderBy'];
+                }
+                if ( isset( $this->widget_attributes['postsOrder'] ) ) {
+                    $args['order'] = $this->widget_attributes['postsOrder'];
+                }
+
+                //This is for archive category block only
+                if ( isset( $this->widget_attributes['orderby'] ) ) {
+                    $args['orderby'] = $this->widget_attributes['orderby'];
+                }
+                if ( isset( $this->widget_attributes['order'] ) ) {
+                    $args['order'] = $this->widget_attributes['order'];
+                }
                 break;
             case 'elementor':
                 $args['orderby'] = $this->widget_attributes['post_orderby'];
-                $args['order'] = $this->widget_attributes['post_order'];
+                $args['order']   = $this->widget_attributes['post_order'];
                 break;
         }
 
@@ -128,26 +143,26 @@ class FrontEnd extends Base {
     }
 
     public function enqueue_scripts() {
-        if( is_singular( 'docs' ) ) {
+        if ( is_singular( 'docs' ) ) {
             wp_enqueue_style( 'betterdocs-single' );
             wp_enqueue_script( 'clipboard' );
         }
 
-        if( is_post_type_archive( 'docs' ) ) {
+        if ( is_post_type_archive( 'docs' ) ) {
             wp_enqueue_style( 'betterdocs-docs' );
         }
 
-        if( is_tax( 'doc_category' ) || is_tax( 'doc_tag') ) {
+        if ( is_tax( 'doc_category' ) || is_tax( 'doc_tag' ) ) {
             wp_enqueue_style( 'betterdocs-doc_category' );
         }
 
-        if( is_tax( 'doc_category' ) || is_tax( 'doc_tag') || is_singular( 'docs' ) ) {
+        if ( is_tax( 'doc_category' ) || is_tax( 'doc_tag' ) || is_singular( 'docs' ) ) {
             wp_enqueue_style( 'simplebar' );
             wp_enqueue_script( 'simplebar' );
             wp_enqueue_script( 'betterdocs-category-grid' );
         }
 
-        if( is_post_type_archive('docs') || is_singular( 'docs' ) || is_tax( 'doc_category') || is_tax( 'doc_tag') || is_tax( 'knowledge_base') ) {
+        if ( is_post_type_archive( 'docs' ) || is_singular( 'docs' ) || is_tax( 'doc_category' ) || is_tax( 'doc_tag' ) || is_tax( 'knowledge_base' ) ) {
             wp_enqueue_script( 'betterdocs' );
         }
     }
@@ -170,7 +185,7 @@ class FrontEnd extends Base {
 
         $post__in = betterdocs()->query->get_docs_order_by_terms( $term_id );
 
-        if( ! empty( $post__in ) ) {
+        if ( ! empty( $post__in ) ) {
             $args['orderby']  = 'post__in';
             $args['post__in'] = $post__in;
         }
@@ -178,23 +193,23 @@ class FrontEnd extends Base {
         return $args;
     }
 
-    public function localize_reactions_data(){
+    public function localize_reactions_data() {
         $this->assets->localize( 'betterdocs-reactions', 'betterdocsReactionsConfig', [
-            'post_id'             => get_the_ID(),
-            'FEEDBACK' => array(
+            'post_id'  => get_the_ID(),
+            'FEEDBACK' => [
                 'DISPLAY' => true,
-                'TEXT'    => esc_html__('How did you feel?', 'betterdocs'),
-                'SUCCESS' => esc_html__('Thanks for your feedback', 'betterdocs'),
-                'URL'     => get_rest_url(null, '/betterdocs/v1/feedback'),
-            ),
+                'TEXT'    => esc_html__( 'How did you feel?', 'betterdocs' ),
+                'SUCCESS' => esc_html__( 'Thanks for your feedback', 'betterdocs' ),
+                'URL'     => get_rest_url( null, '/betterdocs/v1/feedback' )
+            ]
         ] );
     }
 
     public function localize_feedback_form_data() {
         $this->assets->localize( 'betterdocs', 'betterdocsSubmitFormConfig', [
-            'ajax_url'            => admin_url( 'admin-ajax.php' ),
-            'post_id'             => get_the_ID(),
-            'nonce'               => wp_create_nonce( 'betterdocs_submit_data' )
+            'ajax_url' => admin_url( 'admin-ajax.php' ),
+            'post_id'  => get_the_ID(),
+            'nonce'    => wp_create_nonce( 'betterdocs_submit_data' )
         ] );
     }
 }

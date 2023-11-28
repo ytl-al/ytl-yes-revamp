@@ -130,12 +130,12 @@ $css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper .betterdocs
 ], 'px' ) );
 
 //Grid Category Icon without Layout 4
-$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper:not(.betterdocs-category-layout-4) .betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header .betterdocs-category-icon', $css->properties( [
-    'height' => 'betterdocs_doc_page_cat_icon_size_layout1'
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper:not(.betterdocs-category-layout-4) .betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header .betterdocs-category-icon .betterdocs-category-icon-img', $css->properties( [
+    'height' => 'betterdocs_doc_page_cat_icon_size_layout1',
 ], 'px' ) );
 
 //Box Category Icon without Layout 4
-$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-2 .betterdocs-category-box-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header .betterdocs-category-icon', $css->properties( [
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-2 .betterdocs-category-box-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header .betterdocs-category-icon .betterdocs-category-icon-img', $css->properties( [
     'height' => 'betterdocs_doc_page_cat_icon_size_layout2'
 ], 'px' ) );
 
@@ -525,120 +525,6 @@ $css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-
     'border-bottom-right-radius' => 'betterdocs_doc_page_explore_btn_borderr_bottomright',
     'border-bottom-left-radius'  => 'betterdocs_doc_page_explore_btn_borderr_bottomleft'
 ], 'px' ) );
-
-// TODO:
-// FIXME:
-
-// $css->add_rule( '.betterdocs-categories-wrap.single-kb .docs-single-cat-wrap .docs-cat-title-wrap', $css->properties( [
-//     'padding-top'             => 'betterdocs_doc_page_column_padding_top',
-//     'padding-right'           => 'betterdocs_doc_page_column_padding_right',
-//     'padding-left'            => 'betterdocs_doc_page_column_padding_left',
-//     'border-top-left-radius'  => 'betterdocs_doc_page_column_borderr_topleft',
-//     'border-top-right-radius' => 'betterdocs_doc_page_column_borderr_topright'
-// ], 'px' ) );
-
-// $css->add_rule( '.betterdocs-archive-main .docs-item-container', $css->properties( [
-//     'padding-right'  => 'betterdocs_doc_page_column_padding_right',
-//     'padding-left'   => 'betterdocs_doc_page_column_padding_left',
-//     'padding-bottom' => 'betterdocs_doc_page_column_padding_right'
-// ], 'px' ) );
-
-// $css->add_rule( '.betterdocs-categories-wrap.single-kb .docs-single-cat-wrap.docs-cat-list-2-box', $css->properties( [
-//     'padding-top'    => 'betterdocs_doc_page_column_padding_top',
-//     'padding-right'  => 'betterdocs_doc_page_column_padding_right',
-//     'padding-left'   => 'betterdocs_doc_page_column_padding_left',
-//     'padding-bottom' => 'betterdocs_doc_page_column_padding_bottom'
-// ], 'px' ) );
-
-// if ( $mods['betterdocs_doc_page_box_border_bottom'] ) {
-//     $css->add_rule( '.betterdocs-categories-wrap.betterdocs-category-box.border-bottom a.docs-single-cat-wrap:hover', $css->properties( [
-//         'border-bottom-style' => 'solid',
-//         'border-bottom-color' => 'betterdocs_doc_page_box_border_bottom_color'
-//     ] ) );
-
-// }
-
-// //Doc Layout 2
-// $css->add_rule( '.betterdocs-docs-archive-wrapper.betterdocs-category-layout-2 .betterdocs-content-wrapper .betterdocs-category-box-wrapper .betterdocs-category-box-inner-wrapper .betterdocs-single-category-wrapper:hover', $css->properties( [
-//     'background-color' => 'betterdocs_doc_page_column_hover_bg_color'
-// ] ) );
-
-// //Doc Layout 1 Column Padding Top
-// $css->add_rule( '.betterdocs-docs-archive-wrapper.betterdocs-category-layout-1 .betterdocs-content-wrapper .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header', $css->properties( [
-//     'padding-top' => 'betterdocs_doc_page_column_padding_top'
-// ] ) );
-
-// //Doc Layout 1 Column Padding Top
-// $css->add_rule( '.betterdocs-docs-archive-wrapper.betterdocs-category-layout-1 .betterdocs-content-wrapper .betterdocs-body', $css->properties( [
-//     'padding-top' => 'betterdocs_doc_page_column_padding_top'
-// ] ) );
-
-// //Doc Layout 1 Column Padding Right
-// $css->add_rule( '.betterdocs-docs-archive-wrapper.betterdocs-category-layout-1 .betterdocs-content-wrapper .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header', $css->properties( [
-//     'padding-right' => 'betterdocs_doc_page_column_padding_right'
-// ] ) );
-
-// //Doc Layout 1 Column Padding Right
-// $css->add_rule( '.betterdocs-docs-archive-wrapper.betterdocs-category-layout-1 .betterdocs-content-wrapper .betterdocs-body', $css->properties( [
-//     'padding-right' => 'betterdocs_doc_page_column_padding_right'
-// ] ) );
-
-// //Doc Layout 1 Column Padding Bottom
-// $css->add_rule( '.betterdocs-docs-archive-wrapper.betterdocs-category-layout-1 .betterdocs-content-wrapper .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header', $css->properties( [
-//     'padding-bottom' => 'betterdocs_doc_page_column_padding_bottom'
-// ] ) );
-
-// //Doc Layout 1 Column Padding Bottom
-// $css->add_rule( '.betterdocs-docs-archive-wrapper.betterdocs-category-layout-1 .betterdocs-content-wrapper .betterdocs-body', $css->properties( [
-//     'padding-bottom' => 'betterdocs_doc_page_column_padding_bottom'
-// ] ) );
-
-// //Doc Layout 1 Column Padding Left
-// $css->add_rule( '.betterdocs-docs-archive-wrapper.betterdocs-category-layout-1 .betterdocs-content-wrapper .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header', $css->properties( [
-//     'padding-left' => 'betterdocs_doc_page_column_padding_left'
-// ] ) );
-
-// //Doc Layout 1 Column Padding Left
-// $css->add_rule( '.betterdocs-docs-archive-wrapper.betterdocs-category-layout-1 .betterdocs-content-wrapper .betterdocs-body', $css->properties( [
-//     'padding-left' => 'betterdocs_doc_page_column_padding_left'
-// ] ) );
-
-// //Doc Layout 2 Column Padding Top
-// $css->add_rule( '.betterdocs-docs-archive-wrapper.betterdocs-category-layout-2 .betterdocs-content-wrapper .betterdocs-category-box-wrapper .betterdocs-category-box-inner-wrapper .betterdocs-single-category-wrapper', $css->properties( [
-//     'padding-top'                => 'betterdocs_doc_page_column_padding_top',
-//     'padding-right'              => 'betterdocs_doc_page_column_padding_right',
-//     'padding-bottom'             => 'betterdocs_doc_page_column_padding_bottom',
-//     'padding-left'               => 'betterdocs_doc_page_column_padding_left',
-//     'border-top-left-radius'     => 'betterdocs_doc_page_column_borderr_topleft',
-//     'border-top-right-radius'    => 'betterdocs_doc_page_column_borderr_topright',
-//     'border-bottom-right-radius' => 'betterdocs_doc_page_column_borderr_bottomright',
-//     'border-bottom-left-radius'  => 'betterdocs_doc_page_column_borderr_bottomleft'
-// ], 'px' ) );
-
-// // Doc Layout 1 Border Radius (Header)
-// $css->add_rule( '.betterdocs-docs-archive-wrapper.betterdocs-category-layout-1 .betterdocs-content-wrapper .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header', $css->properties( [
-//     'border-top-left-radius'     => 'betterdocs_doc_page_column_borderr_topleft',
-//     'border-top-right-radius'    => 'betterdocs_doc_page_column_borderr_topright',
-//     'border-bottom-right-radius' => 'betterdocs_doc_page_column_borderr_bottomright',
-//     'border-bottom-left-radius'  => 'betterdocs_doc_page_column_borderr_bottomleft'
-// ], 'px' ) );
-
-// //Doc Layout 1 Category Title Font Size
-// $css->add_rule( '.betterdocs-docs-archive-wrapper.betterdocs-category-layout-1 .betterdocs-content-wrapper .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title', $css->properties( [
-//     'font-size' => 'betterdocs_doc_page_cat_title_font_size'
-// ], 'px' ) );
-
-// //Doc Layout 1 To Centre The Item Count(can be removed later)
-// $css->add_rule( '.betterdocs-docs-archive-wrapper.betterdocs-category-layout-1 .betterdocs-content-wrapper .betterdocs-category-grid-wrapper .betterdocs-category-grid-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-items-counts span', $css->properties( [
-//     'display'         => 'inherit',
-//     'justify-content' => 'inherit',
-//     'align-items'     => 'inherit'
-// ], '' ) );
-
-// //Doc Layout 2 Item Count Font Size
-// $css->add_rule( '.betterdocs-docs-archive-wrapper.betterdocs-category-layout-2 .betterdocs-content-wrapper .betterdocs-category-box-wrapper .betterdocs-category-box-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-items-counts', $css->properties( [
-//     'font-size' => 'betterdocs_doc_page_item_count_font_size'
-// ], 'px' ) );
 
 //Doc Layout 1 Doc List Color Hover
 $css->add_rule( '.betterdocs-docs-archive-wrapper.betterdocs-category-layout-1 .betterdocs-content-wrapper .betterdocs-body .betterdocs-articles-list li a:hover', $css->properties( [
@@ -2344,7 +2230,7 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-sid
 // ], 'px' ) );
 
 //Sidebar Icon Size Layout 1
-$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-category-icon .betterdocs-category-icon-img', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-1 .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-icon .betterdocs-category-icon-img', $css->properties( [
     'height' => 'betterdocs_sidebar_icon_size'
 ], 'px' ) );
 
@@ -3560,18 +3446,6 @@ $css->add_rule( '.betterdocs-category-grid-layout-6 .betterdocs-term-info .bette
 $css->add_rule( '.betterdocs-category-grid-layout-6 .betterdocs-term-info .betterdocs-term-title:hover', $css->properties( [
     'color' => 'betterdocs_doc_page_cat_title_hover_color'
 ], '' ) );
-
-// $css->add_rule( '.docs-cat-title-inner .docs-item-count span', $css->properties( [
-//     'font-size' => 'betterdocs_doc_page_item_count_font_size'
-// ], 'px' ) );
-
-// $css->add_rule( '.betterdocs-categories-wrap.single-kb .docs-cat-title-wrap .docs-item-count span', $css->properties( [
-//     'font-size' => 'betterdocs_doc_page_item_count_font_size'
-// ], 'px' ) );
-
-// $css->add_rule( '.betterdocs-categories-wrap.single-kb .docs-item-container', $css->properties( [
-//     'background-color' => 'betterdocs_doc_page_article_list_bg_color'
-// ], '' ) );
 
 $css->add_rule( '.betterdocs-categories-wrap.single-kb .docs-item-container li', $css->properties( [
     'margin-top'     => 'betterdocs_doc_page_article_list_margin_top',

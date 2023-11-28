@@ -48,47 +48,11 @@ class Sidebar extends BaseWidget {
     }
 
     protected function register_controls() {
-        $this->start_controls_section(
-            'eael_section_post__filters',
-            [
-                'label' => __( 'Query', 'betterdocs' )
-            ]
-        );
-
-        $this->add_control(
-            'orderby',
-            [
-                'label'   => __( 'Order By', 'betterdocs' ),
-                'type'    => Controls_Manager::SELECT,
-                'options' => [
-                    'none'             => __( 'No order', 'betterdocs' ),
-                    'name'             => __( 'Name', 'betterdocs' ),
-                    'slug'             => __( 'Slug', 'betterdocs' ),
-                    'term_group'       => __( 'Term Group', 'betterdocs' ),
-                    'term_id'          => __( 'Term ID', 'betterdocs' ),
-                    'id'               => __( 'ID', 'betterdocs' ),
-                    'description'      => __( 'Description', 'betterdocs' ),
-                    'parent'           => __( 'Parent', 'betterdocs' ),
-                    'betterdocs_order' => __( 'BetterDocs Order', 'betterdocs' )
-                ],
-                'default' => 'betterdocs_order'
-            ]
-        );
-
-        $this->add_control(
-            'order',
-            [
-                'label'   => __( 'Order', 'betterdocs' ),
-                'type'    => Controls_Manager::SELECT,
-                'options' => [
-                    'ASC'  => 'Ascending',
-                    'DESC' => 'Descending'
-                ],
-                'default' => 'ASC'
-            ]
-        );
-
-        $this->end_controls_section();
+        /**
+         * Query  Controls!
+         * @source BaseWidget
+         */
+        $this->betterdocs_do_action();
 
         do_action( 'betterdocs_elementor_sidebar_layout_select', $this );
 
@@ -1361,6 +1325,8 @@ class Sidebar extends BaseWidget {
 
     public function view_params() {
         $settings = &$this->attributes;
+        $default_multiple_kb = (bool) betterdocs()->editor->get( 'elementor' )->multiple_kb_status();
+        $kb_slug = isset( $settings['selected_knowledge_base'] ) ? $settings['selected_knowledge_base'] : '';
 
         $params = [
             'wrapper_attr'  => [
@@ -1369,11 +1335,17 @@ class Sidebar extends BaseWidget {
             'shortcode_attr' => [
                 'terms_order'              => $settings['order'],
                 'terms_orderby'            => $settings['orderby'],
+                'terms_include'            => array_diff( $settings['include'], (array) $settings['exclude'] ),
+                'terms_exclude'            => $settings['exclude'],
+                'terms_offset'             => $settings['offset'],
+                'nested_subcategory'       => $settings['nested_subcategory'],
+                'multiple_knowledge_base'  => $default_multiple_kb,
+                'kb_slug'                  => $kb_slug,
                 'sidebar_list'             => true,
                 'disable_customizer_style' => true,
                 'posts_per_page'           => -1,
                 'title_tag'                => $settings['category_title_tag']
-            ]
+            ],
         ];
 
         if( $settings['betterdocs_sidebar_layout'] == 'layout-1') {

@@ -138,6 +138,8 @@ class Rewrite extends Base {
             return $carry;
         }, []);
 
+        $structure[] = '%docs%';
+
         $group = array_filter( $structure, function( $item ){
             return strpos($item, '%') === 0;
         });
@@ -158,7 +160,6 @@ class Rewrite extends Base {
     public function make_query( $segments ){
         $query = [];
         $matchId = 1;
-        $segments[] = 'docs';
 
         foreach( $segments as $segment ) {
             $query[] = trim($segment, '%') . '=$matches[' . $matchId . ']';
@@ -192,10 +193,21 @@ class Rewrite extends Base {
          */
         $_docs_perma_struct = betterdocs()->settings->get( 'permalink_structure', 'docs' );
         $_normalized_structure = $this->normalzie_doc_perma_structure($_docs_perma_struct);
+
+        $_feed_regex = $_normalized_structure['raw'];
+        $_feed_regex[] = '(feed|rdf|rss|rss2|atom)';
+        $_feed_group = $_normalized_structure['group'];
+        $_feed_group[] = '%feed%';
+
+        $this->add_rewrite_rule( $this->make_regex( $_feed_regex ), $this->make_query( $_feed_group ) );
+
         $this->add_rewrite_rule(
             $this->make_regex( $_normalized_structure['raw'] ),
             $this->make_query( $_normalized_structure['group'] )
         );
+
+        $base = $this->get_base_slug();
+        $this->add_rewrite_rule( $base . '/(feed|rdf|rss|rss2|atom)/?$', 'index.php?post_type=docs&feed=$matches[1]' );
     }
 
     public function add_rewrite_rule( $regex, $query, $after = 'top' ) {

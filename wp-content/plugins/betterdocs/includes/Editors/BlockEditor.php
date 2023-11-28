@@ -6,23 +6,64 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
+use WPDeveloper\BetterDocs\Editors\BlockEditor\Patterns\BasePattern;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\StyleHandler;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\TemplatesController;
 
 class BlockEditor extends BaseEditor {
 
     public function init() {
-        // TemplatesController::get_instance();
+        betterdocs()->container->get( TemplatesController::class );
 
-        add_action( 'admin_init', [$this, 'enqueue_styles'] );
-        add_action( 'admin_enqueue_scripts', [$this, 'enqueue_styles'] );
+        add_action( 'admin_init', [$this, 'enqueue'] );
+        add_action( 'admin_enqueue_scripts', [$this, 'enqueue'] );
 
         $_blocks_category_hook = version_compare( get_bloginfo( 'version' ), '5.8', '>=' ) ? 'block_categories_all' : 'block_categories';
-        add_filter( $_blocks_category_hook, [$this, 'register_category'], 9, 2 );
+        add_filter( $_blocks_category_hook, [$this, 'register_category'], 9, 1 );
 
         StyleHandler::get_instance();
 
         $this->register_blocks();
+
+        add_action( 'init', [$this, 'pattern_category'] );
+
+        $this->pattern_initialization();
+    }
+
+    /**
+     * Pattren category registration.
+     * @return void
+     */
+    public function pattern_category() {
+        register_block_pattern_category(
+            'batterdocs',
+            array( 'label' => __( 'BetterDocs', 'betterdocs' ) )
+        );
+    }
+
+    /**
+     * Get all the Pattrens initialized.
+     * @return void
+     */
+    public function pattern_initialization() {
+        $_api_classes = scandir( __DIR__ . DIRECTORY_SEPARATOR . 'BlockEditor' . DIRECTORY_SEPARATOR . 'Patterns' );
+
+        if ( ! empty( $_api_classes ) && is_array( $_api_classes ) ) {
+            foreach ( $_api_classes as $class ) {
+                if ( $class == '.' || $class == '..' || $class == 'BasePattern.php' ) {
+                    continue;
+                }
+
+                $classname  = basename( $class, '.php' );
+                $classname  = '\\' . __NAMESPACE__ . "\\BlockEditor\\Patterns\\$classname";
+                $patterns_class = betterdocs()->container->get( $classname );
+
+                if ( $patterns_class instanceof BasePattern ) {
+                    $patterns_class->pattern_category();
+                    $patterns_class->register();
+                }
+            }
+        }
     }
 
     public function admin_init() {
@@ -48,7 +89,7 @@ class BlockEditor extends BaseEditor {
     /**
      * Only for Admin Add/Edit Pages
      */
-    public function enqueue_styles( $hook ) {
+    public function enqueue( $hook ) {
         $editor = 'core/edit-post';
         if ( $hook == 'site-editor.php' || ( $hook == 'themes.php' && isset( $_GET['page'] ) && $_GET['page'] == 'gutenberg-edit-site' ) ) {
             $editor = 'core/edit-site';
@@ -69,14 +110,14 @@ class BlockEditor extends BaseEditor {
         }
     }
 
-/**
- * Add a block category
- *
- * @param array $categories Block categories.
- *
- * @return array
- */
-    public function register_category( $block_categories, $block_editor_context ) {
+    /**
+     * Add a block category
+     *
+     * @param $block_categories array
+     *
+     * @return array
+     */
+    public function register_category( array $block_categories ): array {
         $categories_slugs = wp_list_pluck( $block_categories, 'slug' );
 
         return in_array( 'betterdocs', $categories_slugs, true ) ? $block_categories : array_merge( [[

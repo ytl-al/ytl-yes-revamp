@@ -2,6 +2,8 @@
 
 namespace Duplicator\Core\Notifications;
 
+use DUP_LITE_Plugin_Upgrade;
+use DUP_Settings;
 use Duplicator\Ajax\ServicesNotifications;
 use Duplicator\Core\Views\TplMng;
 
@@ -52,21 +54,19 @@ class Notifications
      */
     public static function init()
     {
-        self::hooks();
+        // Delete data even if notifications are disabled.
+        add_action('deactivate_plugin', array(__CLASS__, 'delete'), 10, 2);
+
+        if (!DUP_Settings::Get('amNotices')) {
+            return;
+        }
+
         self::update();
+
+        add_action(self::DUPLICATOR_BEFORE_PACKAGES_HOOK, array(__CLASS__, 'output'));
+
         $notificationsService = new ServicesNotifications();
         $notificationsService->init();
-    }
-
-    /**
-     * Register hooks.
-     *
-     * @return void
-     */
-    public static function hooks()
-    {
-        add_action(self::DUPLICATOR_BEFORE_PACKAGES_HOOK, array(__CLASS__, 'output'));
-        add_action('deactivate_plugin', array(__CLASS__, 'delete'), 10, 2);
     }
 
     /**
@@ -333,11 +333,8 @@ class Notifications
      */
     private static function isExisted($notification)
     {
-        $activated = get_option(\DUP_LITE_Plugin_Upgrade::DUP_ACTIVATED_OPT_KEY, false);
-
-        return $activated['lite'] !== false &&
-            !empty($notification['start']) &&
-            $activated['lite'] > strtotime($notification['start']);
+        $installInfo = DUP_LITE_Plugin_Upgrade::getInstallInfo();
+        return (!empty($notification['start']) && $installInfo['time'] > strtotime($notification['start']));
     }
 
     /**
@@ -368,11 +365,7 @@ class Notifications
          */
         $data = (array)apply_filters('duplicator_admin_notifications_update_data', $data);
 
-        // Flush the cache after the option has been updated
-        // for the case when it earlier returns an old value without the new data from DB.
-        if (update_option(self::DUPLICATOR_NOTIFICATIONS_OPT_KEY, $data)) {
-            wp_cache_flush();
-        }
+        update_option(self::DUPLICATOR_NOTIFICATIONS_OPT_KEY, $data);
     }
 
     /**
