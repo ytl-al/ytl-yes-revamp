@@ -36,7 +36,7 @@
                 <li ui-sref="firstStep" class="completed">
                     <span>{{ renderText('elevate_step_1') }}</span>
                 </li>
-                <li ui-sref="secondStep">
+                <li ui-sref="secondStep" >
                     <span>{{ renderText('elevate_step_2') }}</span>
                 </li>
                 <li ui-sref="thirdStep">
@@ -44,6 +44,9 @@
                 </li>
                 <li ui-sref="fourthStep">
                     <span>{{ renderText('elevate_step_4') }}</span>
+                </li>
+                <li ui-sref="fifthStep">
+                    <span>{{ renderText('elevate_step_5') }}</span>
                 </li>
             </ul>
         </div>
