@@ -2062,11 +2062,11 @@ function yes_menu($path)
 
     <?php
     //  $menus = wp_get_nav_menus();
-//  echo "<pre>";
-//  print_r($menus);
-//  echo "</pre>";
     $menu = wp_get_nav_menu_object("Postpaid-Explore Postpaid-Plans");
     $primaryNav = wp_get_nav_menu_items($menu);
+    if(!$primaryNav){
+        $primaryNav=array();
+    }
     foreach ($primaryNav as $navItem) {
 
         ?>
@@ -2296,10 +2296,10 @@ function yes_menu($path)
                                                 <?php
 
                                                 $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fiber-5G");
-                                               //print_r($Wireless_Fibre_menu);
-                                            
                                                 $WirelessNav = wp_get_nav_menu_items($Wireless_Fibre_menu);
-                                               // print_r($WirelessNav);                                            
+                                               if( !$WirelessNav ) {
+                                                   $WirelessNav = array();
+                                               }
                                                 foreach ($WirelessNav as $wirelessItem) {                                                
                                              ?>
                                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $wirelessItem->url; ?>"><?php echo $wirelessItem->title; ?></a></li>

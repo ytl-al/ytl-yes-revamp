@@ -300,7 +300,7 @@
                             var data = response.data.data;
                             console.log(data);
                             if (data.result == 'Success') {
-                                elevate.redirectToPage('personal');
+                                elevate.redirectToPage('select-sim-type');
                             } else {
                                 toggleOverlay(false);
                                 toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('/compasia-fail')")
