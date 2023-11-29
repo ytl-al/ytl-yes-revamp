@@ -203,7 +203,7 @@
                 productId: null,
                 isCartEmpty: false,
                 isEligibilityCheck: false,
-                isCAEligibilityCheck: false,
+                isDDMFEligibilityCheck: false,
                 notActiveContract: false,
                 taxRate: {
                     sst: 0.06
@@ -358,7 +358,7 @@
                                
                             var data = response.data;
                             if (data.status == 1) {
-                                self.isCAEligibilityCheck = true;
+                                self.isDDMFEligibilityCheck = true;
                                 // self.checkActiveContract();      // Commented by AL
 
                                 self.elevateCustomer();             // Moved by AL
@@ -542,7 +542,7 @@
                             var data = response.data.data;
                          
                             if (data.result == "Success") {
-                                self.isCAEligibilityCheck = true;
+                                self.isDDMFEligibilityCheck = true;
                                 // self.checkActiveContract();      // Commented by AL
 
                                 self.elevateCustomer();             // Moved by AL
@@ -1007,7 +1007,7 @@
                     var error = new Array();
 
                     self.isEligibilityCheck = false;
-                    self.isCAEligibilityCheck = false;
+                    self.isDDMFEligibilityCheck = false;
 
                     self.eligibility.phone = '0'+self.eligibility.inphone;
 
@@ -1116,8 +1116,11 @@
                         elevate.updateElevateLSData();
                         if(!self.isEligibilityCheck){
                             self.eligibilityCheck();
-                        }else if(!self.isCAEligibilityCheck){
-                            self.CAEligibility();
+                        }else if(!self.notActiveContract){
+                            self.eligibilityCheck();
+                        }else if(!self.isDDMFEligibilityCheck){
+                            // self.CAEligibility();
+                            self.DDMFEligibility();
                         }else{
                             self.elevateCustomer();
                         }

@@ -725,14 +725,13 @@ class Ytl_Pull_Data_Public
 	{
 		// $api_domain="https://ydbp-identity-dev.azurewebsites.net";
 		$guestLoginData = get_option('yes_gauest_login_token_data', true);
-
 		if (isset($guestLoginData)) {
-			$api_domain = $guestLoginData['set_token_data_guest_login']['token_url'];
-			$client_id = $guestLoginData['set_token_data_guest_login']['client_id'];
-			$client_secret = $guestLoginData['set_token_data_guest_login']['client_secret'];
-			$grant_type = $guestLoginData['set_token_data_guest_login']['grant_type'];
-			$username = $guestLoginData['set_token_data_guest_login']['username'];
-			$password = $guestLoginData['set_token_data_guest_login']['password'];
+			$api_domain = $guestLoginData['set_token_data_gauest_login']['token_url'];
+			$client_id = $guestLoginData['set_token_data_gauest_login']['client_id'];
+			$client_secret = $guestLoginData['set_token_data_gauest_login']['client_secret'];
+			$grant_type = $guestLoginData['set_token_data_gauest_login']['grant_type'];
+			$username = $guestLoginData['set_token_data_gauest_login']['username'];
+			$password = $guestLoginData['set_token_data_gauest_login']['password'];
 		}
 		// print_r($guestLoginData);
 		// die();
@@ -849,7 +848,7 @@ class Ytl_Pull_Data_Public
 		$guestLoginData = get_option('yes_gauest_login_token_data', true);
 
 		if (isset($guestLoginData) && !empty($guestLoginData)) {
-			$api_domain = $guestLoginData['set_token_data_guest_login']['otp_url'];
+			$api_domain = $guestLoginData['set_token_data_gauest_login']['otp_url'];
 		}
 
 		$session_id = $this->ca_generate_auth_token_new(true);
@@ -2084,7 +2083,7 @@ class Ytl_Pull_Data_Public
 
 
 		if (isset($guestLoginData) && !empty($guestLoginData)) {
-			$api_domain = $guestLoginData['set_token_data_guest_login']['otp_url'];
+			$api_domain = $guestLoginData['set_token_data_gauest_login']['otp_url'];
 		}
 		$session_id = $this->ca_generate_auth_token_new(true);
 		if ($MobileNumber != null && $otp_password != null && isset($api_domain) && $session_id) {
