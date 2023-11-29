@@ -2382,15 +2382,23 @@ class ElevateApi
         ));
 
         $response = curl_exec($curl);
+        $http_status = curl_getinfo($curl, CURLINFO_HTTP_CODE); // Get HTTP status code
         curl_close($curl);
-        if(is_wp_error($response)){
-            $ContractData="Cannot connect to API server";
-        }else if($response != "true"){
-            $ContractData=1;
-        }else{
-            $ContractData="User cannot buy more contract";
+    
+        if ($http_status != 200) {
+            $ContractData = "Cannot connect to API server";
+        }else if($http_status == 404){
+            $ContractData = "Cannot connect to API server";
+        } else {
+            if (is_wp_error($response)) {
+                $ContractData = "Cannot connect to API server";
+            } else if ($response != "true") {
+                $ContractData = 1;
+            } else {
+                $ContractData = "User cannot buy more contract";
+            }
         }
-        
+    
         return $ContractData;
 
     }
