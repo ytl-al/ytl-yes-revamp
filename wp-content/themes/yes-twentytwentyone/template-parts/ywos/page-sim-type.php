@@ -349,6 +349,7 @@
             var pageSimType = new Vue({
                 el: '#main-vue',
                 data: {
+                    rahmahPlan :'',
                     isUpFrontPlanAvailable: 'false',
                     simType: '',
                     currentStep: 2,

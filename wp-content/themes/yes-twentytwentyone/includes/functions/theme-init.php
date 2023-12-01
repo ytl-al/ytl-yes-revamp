@@ -1,4 +1,3 @@
-<?php
 
 if (!function_exists('yes_enqueue_scripts')) {
     /**
@@ -2061,9 +2060,12 @@ function yes_menu($path)
 
 
     <?php
-    //  $menus = wp_get_nav_menus();
     $menu = wp_get_nav_menu_object("Postpaid-Explore Postpaid-Plans");
     $primaryNav = wp_get_nav_menu_items($menu);
+    $menus = wp_get_nav_menus();
+    // echo "<pre>";
+    // print_r($menus);
+    // echo "<pre>";
     if(!$primaryNav){
         $primaryNav=array();
     }

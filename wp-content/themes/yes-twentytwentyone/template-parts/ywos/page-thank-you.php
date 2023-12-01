@@ -380,6 +380,7 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
+                rahmahPlan :'',
                 simType: '',
                 highlightPlanIDs: [710, 759, 758],
                 highlightPlans: [],

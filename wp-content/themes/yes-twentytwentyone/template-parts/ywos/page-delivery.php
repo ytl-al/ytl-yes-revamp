@@ -365,7 +365,7 @@
     </div>
 </div>
 <!-- Vue Wrapper ENDS -->
-
+<script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/data/rahmah-plan.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         toggleOverlay();
@@ -373,6 +373,7 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
+                rahmahPlan:ywosDataRahmahPlans??'',
                 currentStep: 3,
                 simType:'',
 				eSimSupportPlan:'',
