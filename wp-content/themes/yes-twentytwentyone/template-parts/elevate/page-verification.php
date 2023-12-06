@@ -94,6 +94,7 @@
 <?php $apiSetting = ( new \Inc\Base\Model)->getAPISettings();?>
 <script type="text/javascript"
         src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/qrcodejs/qrcode.min.js"></script>
+ <script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/data/upfrontMap.js"></script>
 <script type="text/javascript">
  var windows = [];
  $(document).ready(function () {
@@ -102,6 +103,7 @@
             data: {
                 ekyc_url: '<?php echo $apiSetting["ekyc_url"]?>',
                 ekyc_uid: '',
+                mapPlanId:mapPlanIds,
                 totalAttempt:0,
                 maxAttempts:60,
                 interval: null,

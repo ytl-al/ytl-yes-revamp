@@ -194,12 +194,13 @@
 </main>
 </div>
 <?php require_once('includes/footer.php'); ?>
-
+<script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/data/upfrontMap.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         var pageCart = new Vue({
             el: '#main-vue',
             data: {
+                mapPlanId:mapPlanIds,
                 productId: null,
                 isCartEmpty: false,
                 isEligibilityCheck: false,
