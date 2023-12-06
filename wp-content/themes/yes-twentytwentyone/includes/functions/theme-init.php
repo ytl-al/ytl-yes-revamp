@@ -2688,31 +2688,32 @@ function yes_menu($path)
                         $menu = wp_get_nav_menu_object("Promo/Campaign");
                         $Campaign = wp_get_nav_menu_items($menu);
 
-
-                        foreach ($Campaign as $navItem) {
-                            // echo '<pre>';
-                            // print_r($navItem);
-                            // echo "</pre>";
-                            ?>
-                                                <?php
-                                                $lang = get_bloginfo("language");
-                                                $parse = parse_url($navItem->url);
-
-                                                $url = rtrim(get_bloginfo('url'), "/");
-                                                if ($lang == "en-US") {
-                                                    ?>
-                                                                                            <li class="dropdown-header">
-                                                                                            <a class="custom_menu_nuv" href="<?php echo $navItem->url; ?>">
-                                                                                            <?php echo $navItem->title; ?></a></li>                    
-                                                                        <?php
-                                                } else {
-                                                    ?>
+                        if ($Campaign) {
+                            foreach ($Campaign as $navItem) {
+                                // echo '<pre>';
+                                // print_r($navItem);
+                                // echo "</pre>";
+                                ?>
+                                                    <?php
+                                                    $lang = get_bloginfo("language");
+                                                    $parse = parse_url($navItem->url);
+    
+                                                    $url = rtrim(get_bloginfo('url'), "/");
+                                                    if ($lang == "en-US") {
+                                                        ?>
                                                                                                 <li class="dropdown-header">
-                                                                                                <a class="custom_menu_nuv" href="<?php echo $navItem->url ?>">
-                                                                                                <?php echo $navItem->title; ?></a></li>
-                                                                                            <?php
-                                                }
-
+                                                                                                <a class="custom_menu_nuv" href="<?php echo $navItem->url; ?>">
+                                                                                                <?php echo $navItem->title; ?></a></li>                    
+                                                                            <?php
+                                                    } else {
+                                                        ?>
+                                                                                                    <li class="dropdown-header">
+                                                                                                    <a class="custom_menu_nuv" href="<?php echo $navItem->url ?>">
+                                                                                                    <?php echo $navItem->title; ?></a></li>
+                                                                                                <?php
+                                                    }
+    
+                            }
                         }
                         ?>
                                                     </ul>
