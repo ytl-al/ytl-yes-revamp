@@ -378,6 +378,7 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
+                rahmahPlan :'',
                 simType: '',
                 trxType: '',
                 dealer: [],

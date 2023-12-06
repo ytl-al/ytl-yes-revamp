@@ -194,12 +194,13 @@
 </main>
 </div>
 <?php require_once('includes/footer.php'); ?>
-
+<script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/data/upfrontMap.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         var pageCart = new Vue({
             el: '#main-vue',
             data: {
+                mapPlanId:mapPlanIds,
                 productId: null,
                 isCartEmpty: false,
                 isEligibilityCheck: false,
@@ -554,118 +555,138 @@
                                 }
 
                                 if (self.orderSummary.product.selected.productCode) {
-                                    const mapPlanId = {
-                                      1125: {
-                                            planID: 1161,
-                                            deviceID: 1,
-                                        },
-                                        1127: {
-                                            planID: 1163,
-                                            deviceID: 1,
-                                        },
-                                        1129: {
-                                            planID: 1165,
-                                            deviceID: 2,
-                                        },
-                                        1131: {
-                                            planID: 1167,
-                                            deviceID: 2,
-                                        },
-                                        1133: {
-                                            planID: 1169,
-                                            deviceID: 2,
-                                        },
-                                        1135: {
-                                            planID: 1171,
-                                            deviceID: 3,
-                                        },
-                                        1137: {
-                                            planID: 1173,
-                                            deviceID: 3,
-                                        },
-                                        1139: {
-                                            planID: 1175,
-                                            deviceID: 3,
-                                        },
-                                        1141: {
-                                            planID: 1177,
-                                            deviceID: 4,
-                                        },
-                                        1143: {
-                                            planID: 1179,
-                                            deviceID: 4,
-                                        },
-                                        1145: {
-                                            planID: 1181,
-                                            deviceID: 5,
-                                        },
-                                        1147: {
-                                            planID: 1183,
-                                            deviceID: 5,
-                                        },
-                                        1149: {
-                                            planID: 1185,
-                                            deviceID: 5,
-                                        },
-                                        1151: {
-                                            planID: 1187,
-                                            deviceID: 5,
-                                        },
-                                        1153: {
-                                            planID: 1189,
-                                            deviceID: 6,
-                                        },
-                                        1155: {
-                                            planID: 1191,
-                                            deviceID: 6,
-                                        },
-                                        1157: {
-                                            planID: 1193,
-                                            deviceID: 6,
-                                        },
-                                        1159: {
-                                            planID: 1195,
-                                            deviceID: 6,
-                                        },
-                                        1205: {
-                                            planID: 1209,
-                                            deviceID: 7,
-                                        },
-                                        1207: {
-                                            planID: 1211,
-                                            deviceID: 7,
-                                        },
-                                        1221: {
-                                            planID: 1225,
-                                            deviceID: 8,
-                                        },
-                                        1223: {
-                                            planID: 1227,
-                                            deviceID: 8,
-                                        },
-                                        1213: {
-                                            planID: 1217,
-                                            deviceID: 8,
-                                        },
-                                        1215: {
-                                            planID: 1219,
-                                            deviceID: 8,
-                                        },
-                                    };
+                                //     const mapPlanId = {
+                                //       1125: {
+                                //             planID: 1161,
+                                //             deviceID: 1,
+                                //         },
+                                //         1127: {
+                                //             planID: 1163,
+                                //             deviceID: 1,
+                                //         },
+                                //         1129: {
+                                //             planID: 1165,
+                                //             deviceID: 2,
+                                //         },
+                                //         1131: {
+                                //             planID: 1167,
+                                //             deviceID: 2,
+                                //         },
+                                //         1133: {
+                                //             planID: 1169,
+                                //             deviceID: 2,
+                                //         },
+                                //         1135: {
+                                //             planID: 1171,
+                                //             deviceID: 3,
+                                //         },
+                                //         1137: {
+                                //             planID: 1173,
+                                //             deviceID: 3,
+                                //         },
+                                //         1139: {
+                                //             planID: 1175,
+                                //             deviceID: 3,
+                                //         },
+                                //         1141: {
+                                //             planID: 1177,
+                                //             deviceID: 4,
+                                //         },
+                                //         1143: {
+                                //             planID: 1179,
+                                //             deviceID: 4,
+                                //         },
+                                //         1145: {
+                                //             planID: 1181,
+                                //             deviceID: 5,
+                                //         },
+                                //         1147: {
+                                //             planID: 1183,
+                                //             deviceID: 5,
+                                //         },
+                                //         1149: {
+                                //             planID: 1185,
+                                //             deviceID: 5,
+                                //         },
+                                //         1151: {
+                                //             planID: 1187,
+                                //             deviceID: 5,
+                                //         },
+                                //         1153: {
+                                //             planID: 1189,
+                                //             deviceID: 6,
+                                //         },
+                                //         1155: {
+                                //             planID: 1191,
+                                //             deviceID: 6,
+                                //         },
+                                //         1157: {
+                                //             planID: 1193,
+                                //             deviceID: 6,
+                                //         },
+                                //         1159: {
+                                //             planID: 1195,
+                                //             deviceID: 6,
+                                //         },
+                                //         1205: {
+                                //             planID: 1209,
+                                //             deviceID: 7,
+                                //         },
+                                //         1207: {
+                                //             planID: 1211,
+                                //             deviceID: 7,
+                                //         },
+                                //         1221: {
+                                //             planID: 1225,
+                                //             deviceID: 8,
+                                //         },
+                                //         1223: {
+                                //             planID: 1227,
+                                //             deviceID: 8,
+                                //         },
+                                //         1213: {
+                                //             planID: 1217,
+                                //             deviceID: 8,
+                                //         },
+                                //         1215: {
+                                //             planID: 1219,
+                                //             deviceID: 8,
+                                //         },
+                                //     };
 
-                                    if (mapPlanId[self.orderSummary.product.selected.productCode]) {
-                                        self.upFrontPlanID = mapPlanId[self.orderSummary.product.selected.productCode].planID;
-                                        if(self.upFrontPlanID !=''){
-                                            var data = JSON.parse(localStorage.getItem('yesElevate'))
-                                            data.meta.isUpFrontPlanAvailable='true';
-                                            data.meta.upFrontPlanID=self.upFrontPlanID;
-                                            var upfrontData=JSON.stringify(data)
-                                            localStorage.setItem('yesElevate',upfrontData)
-                                            toggleModalAlert('Error',this.renderText('NRIC_is_not_d_dmfcheck'),"elevate.redirectToPage('eligibility-fail-upfront')");
-                                        }
-                                    }else{
+                                //     if (mapPlanId[self.orderSummary.product.selected.productCode]) {
+                                //         self.upFrontPlanID = mapPlanId[self.orderSummary.product.selected.productCode].planID;
+                                //         if(self.upFrontPlanID !=''){
+                                //             var data = JSON.parse(localStorage.getItem('yesElevate'))
+                                //             data.meta.isUpFrontPlanAvailable='true';
+                                //             data.meta.upFrontPlanID=self.upFrontPlanID;
+                                //             var upfrontData=JSON.stringify(data)
+                                //             localStorage.setItem('yesElevate',upfrontData)
+                                //             toggleModalAlert('Error',this.renderText('NRIC_is_not_d_dmfcheck'),"elevate.redirectToPage('eligibility-fail-upfront')");
+                                //         }
+                                //     }else{
                                         
-                                         toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('eligibility-failure')");
+                                //          toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('eligibility-failure')");
+                                //     }
+                                for (const productCode in self.mapPlanId) {
+                                            if (self.mapPlanId.hasOwnProperty(productCode)) {
+                                                const planInfo = self.mapPlanId[productCode];
+                                                
+                                                // Your existing logic here
+                                                if (planInfo) {
+                                                    self.upFrontPlanID = planInfo.planID;
+                                                    if (self.upFrontPlanID !== '') {
+                                                        var data = JSON.parse(localStorage.getItem('yesElevate'));
+                                                        data.meta.isUpFrontPlanAvailable = 'true';
+                                                        data.meta.upFrontPlanID = self.upFrontPlanID;
+                                                        var upfrontData = JSON.stringify(data);
+                                                        localStorage.setItem('yesElevate', upfrontData);
+                                                        toggleModalAlert('Error', this.renderText('NRIC_is_not_eligible'), "elevate.redirectToPage('eligibility-fail-upfront')");
+                                                    }
+                                                } else {
+                                                    toggleModalAlert('Error', this.renderText('NRIC_is_not_eligible'), "elevate.redirectToPage('eligibility-failure')");
+                                                }
+                                            }
                                     }
                             
                                 }
@@ -714,141 +735,160 @@
                                 }
 
                                 if (self.orderSummary.product.selected.productCode) {
-                                    const mapPlanId = {
-                                        1097: {
-                                            planID: 1127,
-                                            deviceID: 2,
-                                        },
-                                        1096: {
-                                            planID: 1126,
-                                            deviceID: 2,
-                                        },
-                                        1095: {
-                                            planID: 1125,
-                                            deviceID: 2,
-                                        },
-                                        1101: {
-                                            planID: 1123,
-                                            deviceID: 3,
-                                        },
-                                        1093: {
-                                            planID: 1131,
-                                            deviceID: 4,
-                                        },
-                                        1198: {
-                                            planID: 1196,
-                                            deviceID: 5,
-                                        },
-                                        1218: {
-                                            planID: 1248,
-                                            deviceID: 5,
-                                        },
-                                        1194: {
-                                            planID: 1192,
-                                            deviceID: 6,
-                                        },
-                                        1204: {
-                                            planID: 1234,
-                                            deviceID: 6,
-                                        },
-                                        1202: {
-                                            planID: 1200,
-                                            deviceID: 7,
-                                        },
-                                        1228: {
-                                            planID: 1258,
-                                            deviceID: 7,
-                                        },
-                                        1230: {
-                                            planID: 1260,
-                                            deviceID: 7,
-                                        },
-                                        1232: {
-                                            planID: 1262,
-                                            deviceID: 7,
-                                        },
-                                        1206: {
-                                            planID: 1236,
-                                            deviceID: 8,
-                                        },
-                                        1208: {
-                                            planID: 1238,
-                                            deviceID: 8,
-                                        },
-                                        1210: {
-                                            planID: 1240,
-                                            deviceID: 8,
-                                        },
-                                        1212: {
-                                            planID: 1242,
-                                            deviceID: 9,
-                                        },
-                                        1214: {
-                                            planID: 1244,
-                                            deviceID: 9,
-                                        },
-                                        1216: {
-                                            planID: 1246,
-                                            deviceID: 9,
-                                        },
-                                        1220: {
-                                            planID: 1250,
-                                            deviceID: 10,
-                                        },
-                                        1222: {
-                                            planID: 1252,
-                                            deviceID: 10,
-                                        },
-                                        1224: {
-                                            planID: 1254,
-                                            deviceID: 10,
-                                        },
-                                        1226: {
-                                            planID: 1256,
-                                            deviceID: 10,
-                                        },
-                                        1266: {
-                                            planID: 1270,
-                                            deviceID: 7,
-                                        },
-                                        1264: {
-                                            planID: 1268,
-                                            deviceID: 7,
-                                        },
-                                        1272: {
-                                            planID: 1284,
-                                            deviceID: 8,
-                                        },
-                                        1274: {
-                                            planID: 1286,
-                                            deviceID: 8,
-                                        },
-                                        1276: {
-                                            planID: 1280,
-                                            deviceID: 8,
-                                        },
-                                        1278: {
-                                            planID: 1282,
-                                            deviceID: 8,
-                                        },
+                                    // const mapPlanId = {
+                                    //     1097: {
+                                    //         planID: 1127,
+                                    //         deviceID: 2,
+                                    //     },
+                                    //     1096: {
+                                    //         planID: 1126,
+                                    //         deviceID: 2,
+                                    //     },
+                                    //     1095: {
+                                    //         planID: 1125,
+                                    //         deviceID: 2,
+                                    //     },
+                                    //     1101: {
+                                    //         planID: 1123,
+                                    //         deviceID: 3,
+                                    //     },
+                                    //     1093: {
+                                    //         planID: 1131,
+                                    //         deviceID: 4,
+                                    //     },
+                                    //     1198: {
+                                    //         planID: 1196,
+                                    //         deviceID: 5,
+                                    //     },
+                                    //     1218: {
+                                    //         planID: 1248,
+                                    //         deviceID: 5,
+                                    //     },
+                                    //     1194: {
+                                    //         planID: 1192,
+                                    //         deviceID: 6,
+                                    //     },
+                                    //     1204: {
+                                    //         planID: 1234,
+                                    //         deviceID: 6,
+                                    //     },
+                                    //     1202: {
+                                    //         planID: 1200,
+                                    //         deviceID: 7,
+                                    //     },
+                                    //     1228: {
+                                    //         planID: 1258,
+                                    //         deviceID: 7,
+                                    //     },
+                                    //     1230: {
+                                    //         planID: 1260,
+                                    //         deviceID: 7,
+                                    //     },
+                                    //     1232: {
+                                    //         planID: 1262,
+                                    //         deviceID: 7,
+                                    //     },
+                                    //     1206: {
+                                    //         planID: 1236,
+                                    //         deviceID: 8,
+                                    //     },
+                                    //     1208: {
+                                    //         planID: 1238,
+                                    //         deviceID: 8,
+                                    //     },
+                                    //     1210: {
+                                    //         planID: 1240,
+                                    //         deviceID: 8,
+                                    //     },
+                                    //     1212: {
+                                    //         planID: 1242,
+                                    //         deviceID: 9,
+                                    //     },
+                                    //     1214: {
+                                    //         planID: 1244,
+                                    //         deviceID: 9,
+                                    //     },
+                                    //     1216: {
+                                    //         planID: 1246,
+                                    //         deviceID: 9,
+                                    //     },
+                                    //     1220: {
+                                    //         planID: 1250,
+                                    //         deviceID: 10,
+                                    //     },
+                                    //     1222: {
+                                    //         planID: 1252,
+                                    //         deviceID: 10,
+                                    //     },
+                                    //     1224: {
+                                    //         planID: 1254,
+                                    //         deviceID: 10,
+                                    //     },
+                                    //     1226: {
+                                    //         planID: 1256,
+                                    //         deviceID: 10,
+                                    //     },
+                                    //     1266: {
+                                    //         planID: 1270,
+                                    //         deviceID: 7,
+                                    //     },
+                                    //     1264: {
+                                    //         planID: 1268,
+                                    //         deviceID: 7,
+                                    //     },
+                                    //     1272: {
+                                    //         planID: 1284,
+                                    //         deviceID: 8,
+                                    //     },
+                                    //     1274: {
+                                    //         planID: 1286,
+                                    //         deviceID: 8,
+                                    //     },
+                                    //     1276: {
+                                    //         planID: 1280,
+                                    //         deviceID: 8,
+                                    //     },
+                                    //     1278: {
+                                    //         planID: 1282,
+                                    //         deviceID: 8,
+                                    //     },
 
-                                    };
+                                    // };
 
-                                    if (mapPlanId[self.orderSummary.product.selected.productCode]) {
-                                        self.upFrontPlanID = mapPlanId[self.orderSummary.product.selected.productCode].planID;
-                                        if(self.upFrontPlanID !=''){
-                                            var data = JSON.parse(localStorage.getItem('yesElevate'))
-                                            data.meta.isUpFrontPlanAvailable='true';
-                                            data.meta.upFrontPlanID=self.upFrontPlanID;
-                                            var upfrontData=JSON.stringify(data)
-                                            localStorage.setItem('yesElevate',upfrontData)
-                                            toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('eligibility-fail-upfront')");
-                                        }
-                                    }else{
+                                    // if (mapPlanId[self.orderSummary.product.selected.productCode]) {
+                                    //     self.upFrontPlanID = mapPlanId[self.orderSummary.product.selected.productCode].planID;
+                                    //     if(self.upFrontPlanID !=''){
+                                    //         var data = JSON.parse(localStorage.getItem('yesElevate'))
+                                    //         data.meta.isUpFrontPlanAvailable='true';
+                                    //         data.meta.upFrontPlanID=self.upFrontPlanID;
+                                    //         var upfrontData=JSON.stringify(data)
+                                    //         localStorage.setItem('yesElevate',upfrontData)
+                                    //         toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('eligibility-fail-upfront')");
+                                    //     }
+                                    // }else{
                                         
-                                         toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('eligibility-failure')");
+                                    //      toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('eligibility-failure')");
+                                    // }
+                                    for (const productCode in self.mapPlanId) {
+                                            if (self.mapPlanId.hasOwnProperty(productCode)) {
+                                                const planInfo = self.mapPlanId[productCode];
+                                                
+                                                // Your existing logic here
+                                                if (planInfo) {
+                                                    self.upFrontPlanID = planInfo.planID;
+                                                    if (self.upFrontPlanID !== '') {
+                                                        var data = JSON.parse(localStorage.getItem('yesElevate'));
+                                                        data.meta.isUpFrontPlanAvailable = 'true';
+                                                        data.meta.upFrontPlanID = self.upFrontPlanID;
+                                                        var upfrontData = JSON.stringify(data);
+                                                        localStorage.setItem('yesElevate', upfrontData);
+                                                        toggleModalAlert('Error', this.renderText('NRIC_is_not_eligible'), "elevate.redirectToPage('eligibility-fail-upfront')");
+                                                    }
+                                                } else {
+                                                    toggleModalAlert('Error', this.renderText('NRIC_is_not_eligible'), "elevate.redirectToPage('eligibility-failure')");
+                                                }
+                                            }
                                     }
-                            
                                 }
                             }
                         })

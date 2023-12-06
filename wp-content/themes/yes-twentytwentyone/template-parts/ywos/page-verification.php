@@ -171,6 +171,7 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
+                rahmahPlan:'',
                 simType: '',
                 currentStep: 1,
                 pageValid: false,
