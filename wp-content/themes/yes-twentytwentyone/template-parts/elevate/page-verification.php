@@ -258,35 +258,35 @@
                     }
                 },
 
-                CAVerification: function (response) {
+                // CAVerification: function (response) {
 
-                    var self = this;
-                    var params = {
-                        mykad: self.eligibility.mykad,
-                        name:self.eligibility.name,
-                        email:self.eligibility.email,
-                        phone:self.eligibility.phone,
-                        PartneReferenceID:self.customer.id,
-                        OCRConfidenceScore:response.sim,
-                    };
-                    toggleOverlay();
-                    axios.post(apiEndpointURL_elevate + '/ca-verification' + '?nonce='+yesObj.nonce, params)
-                        .then((response) => {
+                //     var self = this;
+                //     var params = {
+                //         mykad: self.eligibility.mykad,
+                //         name:self.eligibility.name,
+                //         email:self.eligibility.email,
+                //         phone:self.eligibility.phone,
+                //         PartneReferenceID:self.customer.id,
+                //         OCRConfidenceScore:response.sim,
+                //     };
+                //     toggleOverlay();
+                //     axios.post(apiEndpointURL_elevate + '/ca-verification' + '?nonce='+yesObj.nonce, params)
+                //         .then((response) => {
 
-                            var data = response.data;
+                //             var data = response.data;
 
-                            if (parseInt(data.status) == 1) {
-                                elevate.redirectToPage('select-sim-type');
-                            } else {
-                                toggleOverlay(false);
-                                toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('/compasia-fail')")
-                            }
-                        })
-                        .catch((error) => {
-                            toggleOverlay(false);
-                            console.log(error);
-                        });
-                },
+                //             if (parseInt(data.status) == 1) {
+                //                 elevate.redirectToPage('select-sim-type');
+                //             } else {
+                //                 toggleOverlay(false);
+                //                 toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('/compasia-fail')")
+                //             }
+                //         })
+                //         .catch((error) => {
+                //             toggleOverlay(false);
+                //             console.log(error);
+                //         });
+                // },
 
                 OCVerification: function (response) {
 
@@ -302,7 +302,7 @@
                         .then((response) => {
                             var data = response.data.data;
                             if (data.result == 'Success') {
-                                elevate.redirectToPage('personal');
+                                elevate.redirectToPage('select-sim-type');
                             } else {
                                 
                                 if (elevate.lsData.product) {

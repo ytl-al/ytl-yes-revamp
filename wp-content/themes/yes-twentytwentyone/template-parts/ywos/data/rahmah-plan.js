@@ -141,54 +141,63 @@ var ywosDataRahmahPlans = [
         'planName': 'Infinite Basic_12M VIVO Y55+ Blue',
         'planImgURL': 'https://yesmy-dev.azurewebsites.net/wp-content/uploads/YWOS-device-images/vivo-y55.png',
         'sortName':'VIVO Y55+  Blue',
+       
     },
     {
         'planId': '1294',
         'planName': 'Infinite Basic_12M VIVO Y55+  Blue',
         'planImgURL': 'https://yesmy-dev.azurewebsites.net/wp-content/uploads/YWOS-device-images/vivo-y55.png',
         'sortName':'VIVO Y55+  Blue',
+       
     },
     {
         'planId': '1300',
         'planName': 'Infinite Basic_24M VIVO Y55+ Blue',
         'planImgURL': 'https://yesmy-dev.azurewebsites.net/wp-content/uploads/YWOS-device-images/vivo-y55.png',
         'sortName':'VIVO Y55+ Blue',
+        'stock'   : 'Out Of Stock'
     },
     {
         'planId': '1304',
         'planName': 'Infinite Basic_18M Nubia NEO 5G Black',
         'planImgURL': '/wp-content/uploads/2023/08/Xiaomi-2-1-1.png',
         'sortName':'Nubia NEO 5G Black',
+       
     },
     {
         'planId': '1306',
         'planName': 'Infinite Basic_18M Nubia NEO 5G Yellow',
         'planImgURL': '/wp-content/uploads/2023/08/Xiaomi-2-1.jpg',
         'sortName':'Nubia NEO 5G Yellow',
+       
     },
     {
         'planId': '1308',
         'planName': 'Yes 5G Wireless Broadband Gateway',
         'planImgURL': '/wp-content/uploads/2023/08/wirelessbroadband-thumbnail.png',
         'sortName':'Wireless Broadband Gateway',
+     
     },
     {
         'planId': '1310',
         'planName': 'Yes 5G Wireless Broadband Flexi',
         'planImgURL': '/wp-content/uploads/2023/08/wirelessbroadband-flexi-thumbnail.png',
         'sortName':'Wireless Broadband Flexi',
+     
     },
     {
         'planId': '1313',
         'planName': 'Infinite Basic RAHMAH 1 Vivo Y27 5G Black',
         'planImgURL': '/wp-content/uploads/2023/08/vivoY27-black-website-3.png',
         'sortName':'VIVO Y55+ Black',
+       
     },
     {
         'planId': '1315',
         'planName': 'Infinite Basic RAHMAH 1 Vivo Y27 5G Purple',
         'planImgURL': '/wp-content/uploads/2023/08/vivoY27-purple-website.png',
         'sortName':'Xiaomi Redmi 12 5G Black',
+    
     },
    
 ];

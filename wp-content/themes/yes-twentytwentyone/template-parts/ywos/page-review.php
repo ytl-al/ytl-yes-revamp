@@ -106,7 +106,7 @@
 
                                 <div v-for="plan in rahmahPlan" :key="plan.planId">
                                     <h3 class="mt-3 mt-lg-0" v-if="ywos?.lsData?.meta.planID == plan.planId">
-                                        {{ orderSummary.plan.displayName }} {{ plan.sortName }}
+                                         {{ plan.sortName }}
                                     </h3>
                                     </div>
 
@@ -465,10 +465,7 @@
                 renderText: function(strID) {
                     return ywos.renderText(strID, this.pageText);
                 },
-                shouldExcludePlan(planID) {
-                        const excludedPlanIDs = ['1229', '1231', '1233', '1235', '1236', '1238', '1240', '1242', '1244', '1246', '1248', '1250', '1252', '1254', '1256', '1258', '1260', '1262', '1264', '1266', '1268', '1272', '1290', '1292', '1294', '1300'];
-                        return !excludedPlanIDs.includes(planID);
-                    }
+               
             }
         });
     });

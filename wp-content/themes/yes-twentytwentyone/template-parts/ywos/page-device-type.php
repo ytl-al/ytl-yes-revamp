@@ -30,6 +30,14 @@
         align-items: center !important;
         gap: 5px !important;
     }
+    .device-type-stock{
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    }
+    .device-type-stock h6{
+        margin: 0;
+    }
 
     .accordion-body {
         margin: 10px 0 !important;
@@ -43,6 +51,7 @@
         height: auto !important;
     }
 
+    
      @media(max-width:768px){
         .page-footer .row {
             gap: 15px;
@@ -176,7 +185,19 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="javascript:void(0)" @click="goToCartPage" class="pink-btn-disable text-uppercase d-block pink-btn">{{renderText('add_to_cart')}}</a>
+                                <!-- <a href="javascript:void(0)" @click="goToCartPage" class="pink-btn-disable text-uppercase d-block pink-btn">{{renderText('add_to_cart')}}</a> -->
+
+                                <div v-if="isOutOfStock(selectedPlanData.plan_id)" class="device-type-stock">
+                                    <img src="/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png" alt="...">
+                                
+                                        <h6>Out of Stock.</h6>
+                                
+                                </div>
+                               
+                                <div v-else>
+                                    <a href="javascript:void(0)" @click="goToCartPage" class="pink-btn-disable text-uppercase d-block pink-btn">{{ renderText('add_to_cart') }}</a>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -187,6 +208,8 @@
 </main>
 <?php include(get_stylesheet_directory() . '/template-parts/elevate/includes/footer.php'); ?>
 </div>
+<script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/data/rahmah-plan.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         $('[data-render-text]').each(function() {
@@ -218,6 +241,7 @@
         var pageCart = new Vue({
             el: '#main-vue',
             data: {
+                rahmahPlan:ywosDataRahmahPlans??'',
                 deviceData: {
                     capacity: [],
                     details: [],
@@ -361,7 +385,12 @@
                 },
                 renderText: function(strID) {
                     return ywos.renderText(strID, this.pageText);
-                }
+                },
+
+                isOutOfStock(planId) {
+                    var self=this
+                       return self.rahmahPlan.some(plan => plan.planId == planId && plan.stock == 'Out Of Stock');
+                 },
             }
         });
     });
