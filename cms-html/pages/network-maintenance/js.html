@@ -16,65 +16,103 @@
     // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
 
-    function initAutocomplete() {
+    function initMap() {
         const map = new google.maps.Map(document.getElementById("map"), {
-            center: {
-                lat: 4.3693217053098135,
-                lng: 102.21470351336957
-            },
+            center: { lat: 4.3693217053098135,
+                lng: 102.21470351336957},
             zoom: 7,
-            mapTypeId: "roadmap",
         });
-        var options = {
-            componentRestrictions: {
-                country: 'my'
-            }
+        const card = document.getElementById("pac-card");
+
+       // map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+
+        const center = { lat: 4.3693217053098135, lng: 102.21470351336957 };
+        // Create a bounding box with sides ~10km away from the center point
+        const defaultBounds = {
+            north: center.lat + 0.1,
+            south: center.lat - 0.1,
+            east: center.lng + 0.1,
+            west: center.lng - 0.1,
         };
-        // Create the search box and link it to the UI element.
         const input = document.getElementById("pac-input");
-        // const searchBox = new google.maps.places.SearchBox(input);
-        const searchBox = new google.maps.places.Autocomplete(input, options);
+        const options = {
+            bounds: defaultBounds,
+            componentRestrictions: { country: "my" },
+            fields: ["address_components", "geometry", "icon", "name"],
+            strictBounds: false,
+        };
+        const autocomplete = new google.maps.places.Autocomplete(input, options);
 
-        // map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-        // Bias the SearchBox results towards current map's viewport.
-        map.addListener("bounds_changed", () => {
-            searchBox.setBounds(map.getBounds());
-            //  alert(place);
+        // Set initial restriction to the greater list of countries.
+        autocomplete.setComponentRestrictions({
+            country: ["my"],
         });
 
-        let markers = [];
+        const southwest = { lat: 5.6108, lng: 136.589326 };
+        const northeast = { lat: 61.179287, lng: 2.64325 };
+        const newBounds = new google.maps.LatLngBounds(southwest, northeast);
 
-        // [START maps_places_searchbox_getplaces]
-        // Listen for the event fired when the user selects a prediction and retrieve
-        // more details for that place.
-        searchBox.addListener("places_changed", () => {
-            const places = searchBox.getPlaces();
-            // alert(place);
-            toggleOverlay();
+        autocomplete.setBounds(newBounds);        
 
-            if (places.length == 0) {
+        const infowindow = new google.maps.InfoWindow();
+        const infowindowContent = document.getElementById("infowindow-content");
+
+        infowindow.setContent(infowindowContent);
+
+        const marker = new google.maps.Marker({
+            map,
+            anchorPoint: new google.maps.Point(0, -29),
+        });
+
+        autocomplete.addListener("place_changed", () => {
+            infowindow.close();
+            marker.setVisible(false);
+
+            const place = autocomplete.getPlace();
+
+            //console.log(place.geometry.location.lat(), place.geometry.location.lng());  
+            
+            
+
+            if (!place.geometry || !place.geometry.location) {
+                // User entered the name of a Place that was not suggested and
+                // pressed the Enter key, or the Place Details request failed.
+                window.alert("No details available for input: '" + place.name + "'");
                 return;
             }
+           
 
-            // Clear out the old markers.
-            markers.forEach((marker) => {
-                marker.setMap(null);
-                //alert(marker);
-            });
-            markers = [];
+            // If the place has a geometry, then present it on a map.
+            if (place.geometry.viewport) {
+                map.fitBounds(place.geometry.viewport);
+            } else {
+                map.setCenter(place.geometry.location);
+                map.setZoom(17); // Why 17? Because it looks good.
+            }
 
-            // For each place, get the icon, name and location.
-            const bounds = new google.maps.LatLngBounds();
+            marker.setPosition(place.geometry.location);
+            marker.setVisible(true);
 
-            places.forEach((place) => {
-                if (!place.geometry || !place.geometry.location) {
-                    console.log("Returned place contains no geometry");
-                    return;                    
-                }
+            let address = "";
 
-                //console.log(place.geometry.location.lat(), place.geometry.location.lng());   
-               // http://localhost/wp-json/elevate/v1/outage-details             
-                $.ajax({
+            if (place.address_components) {
+                address = [
+                    (place.address_components[0] &&
+                        place.address_components[0].short_name) ||
+                    "",
+                    (place.address_components[1] &&
+                        place.address_components[1].short_name) ||
+                    "",
+                    (place.address_components[2] &&
+                        place.address_components[2].short_name) ||
+                    "",
+                ].join(" ");
+            }
+
+           // console.log("test", place); 
+           //console.log(place.geometry.location.lat(), place.geometry.location.lng());   
+           // http://localhost/wp-json/elevate/v1/outage-details             
+           $.ajax({
                     url: "/wp-json/outage/outage-details",
                     data: {
                         'Latitude': place.geometry.location.lat(),
@@ -86,22 +124,22 @@
                     success: function(result) {
                         $("#response_msg").empty();
                         const obj = JSON.parse(result.body);
-                        //console.log(obj.Data[0]);
+                        //console.log(obj, "test1");
                         if (obj.Data[0] == undefined){
-                            $("#response_msg").append("<p class='msg_red'>Sorry, Yes services are temporarily unavailable in your area. Please try again later. We're actively fixing the issue and appreciate your understanding.</p>") 
+                            $("#response_msg").append("<p class='msg_red'>Yes services are operating smoothly in your area. However, If you encounter any network-related issues, please don't hesitate to inform us via email at yescare@yes.my.</p>") 
                             toggleOverlay(false);
                             return false;
                         }
                         var final_val = isEqual(result.body, obj.Data[0].Outages[0].Severity);
-                        console.log(final_val);
+                        //console.log(final_val);
                         toggleOverlay(false);
                         //else if Severity send in postman
                         //console.log(obj.Data[0].Outages[0].Severity, obj);
                     if (final_val == true){
                         if (obj.Data[0].Outages[0].Severity == 'Unplanned' || obj.Data[0].Outages[0].Severity == 'Full' || obj.Data[0].Outages[0].Severity == 'S1 AC Fail' || obj.Data[0].Outages[0].Severity == 'S2 High Temperature' || obj.Data[0].Outages[0].Severity == 'S2MW') {
-                            $("#response_msg").append("<p class='msg_green'>Yes services are operating smoothly in your area. However, If you encounter any network-related issues, please don't hesitate to inform us via email at yescare@yes.my.</p>")
+                            $("#response_msg").append("<p class='msg_green'>Sorry, Yes services are temporarily unavailable in your area. Please try again later. We're actively fixing the issue and appreciate your understanding.</p>")
                         } else if (obj.Data[0].Outages[0].Severity == 'Partial' || obj.Data[0].Outages[0].Severity == 'S3' || obj.Data[0].Outages[0].Severity == 'S3MW') {
-                            $("#response_msg").append("<p class='msg_green'>Yes services are operating smoothly in your area. However, If you encounter any network-related issues, please don't hesitate to inform us via email at yescare@yes.my.</p>")
+                            $("#response_msg").append("<p class='msg_green'>Sorry, Yes services are temporarily unavailable in your area. Please try again later. We're actively fixing the issue and appreciate your understanding.</p>")
                         }
 
                     }else{
@@ -133,42 +171,45 @@
 
                 // alert(place.geometry.location.lat());
 
-                const icon = {
-                    url: place.icon,
-                    size: new google.maps.Size(71, 71),
-                    origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(17, 34),
-                    scaledSize: new google.maps.Size(25, 25),
-                };
-
-                // Create a marker for each place.
-                markers.push(
-                    new google.maps.Marker({
-                        map,
-                        icon,
-                        title: place.name,
-                        position: place.geometry.location,
-                    }),
-                );
-                if (place.geometry.viewport) {
-                    // Only geocodes have viewport.
-                    bounds.union(place.geometry.viewport);
-                } else {
-                    bounds.extend(place.geometry.location);
-                }
-            });
-            map.fitBounds(bounds);
+            infowindowContent.children["place-icon"].src = place.icon;
+            infowindowContent.children["place-name"].textContent = place.name;
+            infowindowContent.children["place-address"].textContent = address;
+            infowindow.open(map, marker);
         });
-        // [END maps_places_searchbox_getplaces]
+
+        // Sets a listener on a given radio button. The radio buttons specify
+        // the countries used to restrict the autocomplete search.
+        // function setupClickListener(id, countries) {
+        //     const radioButton = document.getElementById(id);
+
+        //     radioButton.addEventListener("click", () => {
+        //         autocomplete.setComponentRestrictions({ country: countries });
+        //     });
+        // }
+
+        // setupClickListener("changecountry-usa", "us");
+        // setupClickListener("changecountry-usa-and-uot", [
+        //     "us",
+        //     "pr",
+        //     "vi",
+        //     "gu",
+        //     "mp",
+        // ]);
     }
 
-    window.initAutocomplete = initAutocomplete;
+    window.initMap = initMap;
     // [END maps_places_searchbox]  AIzaSyDVy7AwttxREwuYckeUZAccZdnIm93RN6A
 
-    
-      $(".viewall-btn").click(function(){        
+
+    $(".viewall-btn").click(function () {
         $("#faq-section").toggle();
-      });
+    });
 
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlZr9PPEuI9PXnC_4pv_4FopDEIcPdGqI&callback=initAutocomplete&libraries=places&v=weekly" defer></script>
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlZr9PPEuI9PXnC_4pv_4FopDEIcPdGqI&callback=initMap&libraries=places&v=weekly"
+      defer
+    ></script>
+<!-- <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlZr9PPEuI9PXnC_4pv_4FopDEIcPdGqI&callback=initAutocomplete&libraries=places&v=weekly"
+    defer></script> -->
