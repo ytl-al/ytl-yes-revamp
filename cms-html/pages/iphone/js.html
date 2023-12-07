@@ -50,9 +50,40 @@
       });
   });
 
+//table load data JS
+$(document).ready(function(){
+// $('table tr:nth-child(n+1):nth-child(-n+6)').addClass('active');
+// $('#songs-load').on('click', function(e) {
+//   e.preventDefault();  
+//   var $rows = $('.songs-table tr');
+//   var lastActiveIndex = $rows.filter('.active:last').index();
+//   $rows.filter(':lt(' + (lastActiveIndex + 10) + ')').addClass('active'); 
+
+// });
+
+var shownDefault = 5
+var numShown = shownDefault; // Initial rows shown & index
+var $table = $('.tbl').find('tbody');  // tbody containing all the rows
+var numRows = $table.find('tr').length; // Total # rows
+$(document).ready(function () {
+    $table.find('tr:gt(' + (numShown - 1) + ')').hide()                      
+    $('#btn-tbl').click(function() {
+        if (numShown === numRows) {
+          // since we show all rows node, hiding some
+        	numShown = shownDefault;
+          $table.find('tr:gt(' + (numShown - 1) + ')').hide()
+          $('#img-up-data').attr("src","/wp-content/uploads/2023/11/arrow-m.png");                               
+        } else {
+        	numShown = numRows;
+          $('#img-up-data').attr("src","/wp-content/uploads/2023/11/arrow-up.png");                    
+        }        
+        $table.find('tr:lt(' + numShown + ')').show();
+    });        
+});
+
+});
 
 //tab dropdown js
-
 $(document).ready(function(){
         
         const $tabsToDropdown = $(".tabs-to-dropdown");
