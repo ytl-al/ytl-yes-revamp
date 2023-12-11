@@ -70,17 +70,14 @@
 
             const place = autocomplete.getPlace();
 
-            //console.log(place.geometry.location.lat(), place.geometry.location.lng());  
-            
-            
+            //console.log(place.geometry.location.lat(), place.geometry.location.lng());     
 
             if (!place.geometry || !place.geometry.location) {
                 // User entered the name of a Place that was not suggested and
                 // pressed the Enter key, or the Place Details request failed.
                 window.alert("No details available for input: '" + place.name + "'");
                 return;
-            }
-           
+            }           
 
             // If the place has a geometry, then present it on a map.
             if (place.geometry.viewport) {
@@ -111,8 +108,11 @@
 
            // console.log("test", place); 
            //console.log(place.geometry.location.lat(), place.geometry.location.lng());   
-           // http://localhost/wp-json/elevate/v1/outage-details             
-           $.ajax({
+                     
+         // Show loading overlay
+                toggleOverlay(true);
+
+                $.ajax({
                     url: "/wp-json/outage/outage-details",
                     data: {
                         'Latitude': place.geometry.location.lat(),
@@ -124,33 +124,33 @@
                     success: function(result) {
                         $("#response_msg").empty();
                         const obj = JSON.parse(result.body);
-                        //console.log(obj, "test1");
-                        if (obj.Data[0] == undefined){
-                            $("#response_msg").append("<p class='msg_red'>Yes services are operating smoothly in your area. However, If you encounter any network-related issues, please don't hesitate to inform us via email at yescare@yes.my.</p>") 
-                            toggleOverlay(false);
-                            return false;
+
+                        if (obj.Data[0] == undefined) {
+                            $("#response_msg").append("<p class='msg_green'>Yes services are operating smoothly in your area. However, If you encounter any network-related issues, please don't hesitate to inform us via email at yescare@yes.my.</p>");
+                        } else {
+                            var final_val = isEqual(result.body, obj.Data[0].Outages[0].Severity);
+
+                            if (final_val == true) {
+                                if (obj.Data[0].Outages[0].Severity == 'Unplanned' || obj.Data[0].Outages[0].Severity == 'Full' || obj.Data[0].Outages[0].Severity == 'S1 AC Fail' || obj.Data[0].Outages[0].Severity == 'S2 High Temperature' || obj.Data[0].Outages[0].Severity == 'S2MW') {
+                                    $("#response_msg").append("<p class='msg_red'>Sorry, Yes services are temporarily unavailable in your area. Please try again later. We're actively fixing the issue and appreciate your understanding.</p>");
+                                } else if (obj.Data[0].Outages[0].Severity == 'Partial' || obj.Data[0].Outages[0].Severity == 'S3' || obj.Data[0].Outages[0].Severity == 'S3MW') {
+                                    $("#response_msg").append("<p class='msg_red'>Sorry, Yes services are temporarily unavailable in your area. Please try again later. We're actively fixing the issue and appreciate your understanding.</p>");
+                                }
+                            } else {
+                                $("#response_msg").append("<p class='msg_orange'>Yes services in your area may be a bit unstable right now. We're working to make things better based on your feedback. Thanks for your patience.</p>");
+                            }
                         }
-                        var final_val = isEqual(result.body, obj.Data[0].Outages[0].Severity);
-                        //console.log(final_val);
+
+                        // Hide loading overlay
                         toggleOverlay(false);
-                        //else if Severity send in postman
-                        //console.log(obj.Data[0].Outages[0].Severity, obj);
-                    if (final_val == true){
-                        if (obj.Data[0].Outages[0].Severity == 'Unplanned' || obj.Data[0].Outages[0].Severity == 'Full' || obj.Data[0].Outages[0].Severity == 'S1 AC Fail' || obj.Data[0].Outages[0].Severity == 'S2 High Temperature' || obj.Data[0].Outages[0].Severity == 'S2MW') {
-                            $("#response_msg").append("<p class='msg_green'>Sorry, Yes services are temporarily unavailable in your area. Please try again later. We're actively fixing the issue and appreciate your understanding.</p>")
-                        } else if (obj.Data[0].Outages[0].Severity == 'Partial' || obj.Data[0].Outages[0].Severity == 'S3' || obj.Data[0].Outages[0].Severity == 'S3MW') {
-                            $("#response_msg").append("<p class='msg_green'>Sorry, Yes services are temporarily unavailable in your area. Please try again later. We're actively fixing the issue and appreciate your understanding.</p>")
-                        }
-
-                    }else{
-                        $("#response_msg").append("<p class='msg_orange'>Yes services in your area may be a bit unstable right now. We're working to make things better based on your feedback. Thanks for your patience.</p>")
-                    }
-
                     },
                     error: function(error) {
-
+                        // Handle error if needed
+                        // Hide loading overlay
+                        toggleOverlay(false);
                     }
                 });
+
 
                 function isEqual(obj, first_severity) {
                     var data = JSON.parse(obj).Data;
@@ -210,6 +210,3 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlZr9PPEuI9PXnC_4pv_4FopDEIcPdGqI&callback=initMap&libraries=places&v=weekly"
       defer
     ></script>
-<!-- <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlZr9PPEuI9PXnC_4pv_4FopDEIcPdGqI&callback=initAutocomplete&libraries=places&v=weekly"
-    defer></script> -->
