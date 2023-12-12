@@ -537,20 +537,37 @@
         var $roamingTemplate = $("[data-template=roamingTemplate]");
         var $roamingTable = $("#roaming-table");
 
+        var $topupRoamingTemplate = $("[data-template=topupRoamingTemplate]");
+        var $topupRoamingTable = $("#topup-roaming-table");
+
         //modify in javascript way because revamp.yes.my is on and off
         $("[data-button=openRoaming]").off('click').click(function() {
             if ($("[name=roamingSelect]").val()) {
                 var cid = $("[name=roamingSelect]").val();
                 var sel = jsonRoaming[cid];
+                var topup = topupOprrators[cid];
+               var countryName= $("[data-name=countryName]").html(sel[0]['country_name']);
+                if(sel[0]['country_name']=="Singapore"){
+                    $("[data-country=Singapore]").css("display", "block");
+                    $("[data-country=OtherCountry]").css("display", "none");
 
-                $("[data-name=countryName]").html(sel[0]['country_name']);
 
+                }else if(sel[0]['country_name']=="Bahamas"){
+                $("[data-country=Singapore]").css("display", "none");
+                $("[data-country=OtherCountry]").css("display", "block");
+                }else{
+                    $("[data-country=Singapore]").css("display", "none");
+                    $("[data-country=OtherCountry]").css("display", "block");
+                }
+              
+
+            
                 $roamingTable.empty();
-
+                $topupRoamingTable.empty();
                 for (var i = 0; i < sel.length; i++) {
                     var cur = sel[i];
                     $newTpl = $roamingTemplate.clone();
-
+                    var telcoName =cur["operatorName"];
                     if (i > 0) {
                         $roamingTable.append("<hr/>");
                     }
@@ -586,6 +603,27 @@
 
                 $("[data-roaming=roaming-rates]").show();
                 $(document).scrollTop($("[data-fieldset=roaming]").offset().top);
+                $topupTpl = $topupRoamingTemplate.clone();
+                $("[data-name=topupTelcoName]", $topupTpl).html(telcoName);
+               
+                const topupAmounts = ["100", "150", "200", "300", "400", "500"];
+                topupAmounts.forEach(amount => {
+                    const dataName = `[data-name=topupPlanDayRateAmt_${amount}]`;
+                    if (topup[`topup_${amount}mb_per_day`] == 0 || topup[`topup_${amount}mb_per_day`] == "") {
+                        $(dataName, $topupTpl).parent().parent().parent().hide();
+                    }else {
+                        
+                        $(dataName, $topupTpl).html('<sub>RM </sub>' +topup[`topup_${amount}mb_per_day`]);
+
+                    }
+                });
+
+                // Append the modified template to the appropriate container
+                $("[data-country=OtherCountry]").append($topupTpl.show());
+                $("[data-country=OtherCountry] [data-template=topupRoamingTemplate]").replaceWith($topupTpl.show());
+                if(topup['topup_100mb_per_day']=="" && topup['topup_150mb_per_day']==""  &&  topup['topup_200mb_per_day']=="" && topup['topup_300mb_per_day']=="" && topup['topup_400mb_per_day']=="" && topup['topup_500mb_per_day']=="" ){
+                    $('#topUpRoamingTemp').css("display", "none"); 
+                }
             }
         });
 
@@ -644,5 +682,55 @@
                 }
             }
         });
+
+        $('.hero-slider').slick({
+          infinite: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,
+          fade: true,
+          dots: true,
+          autoplay: true,
+          autoplaySpeed: 3000,
+          responsive: [{
+              breakpoint: 1024,
+              settings: {
+                  slidesToShow: 2,
+                  slidesToScroll: 1,
+                  infinite: true,
+                  dots: true,
+                  arrows: false
+              }
+          }, {
+              breakpoint: 768,
+              settings: {
+                  slidesToShow: 1,
+                  arrows: false,
+                  infinite: true,
+                  dots: true,
+                  slidesToScroll: 1,
+              }
+          }, {
+              breakpoint: 600,
+              settings: {
+                  slidesToShow: 1,
+                  arrows: false,
+                  infinite: true,
+                  dots: true,
+                  slidesToScroll: 1
+              }
+          }, {
+              breakpoint: 480,
+              settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1,
+                  dots: true,
+                  infinite: true,
+                  dots: true,
+                  arrows: false
+              }
+          }]
+      });
+
     });
 </script>

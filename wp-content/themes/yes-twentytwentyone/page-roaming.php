@@ -21,12 +21,22 @@
     $loop                   = new WP_Query($args_roaming);
     $data_roaming           = [];
     $data_roaming_country   = [];
+    $data_roaming_topup    = [];
+    $topup_arr_operators  = [];
 
     if ($loop->have_posts()) :
         while ($loop->have_posts()) :
             $loop->the_post();
-
             $arr_operators  = get_post_meta($post->ID, 'yesmy_roaming_operator', true);
+            $topup_arr_operators[$post->ID] = array(
+                'topup_100mb_per_day' => get_post_meta($post->ID, 'yesmy_roaming_topup_100mb_per_day', true),
+                'topup_150mb_per_day' => get_post_meta($post->ID, 'yesmy_roaming_topup_150mb_per_day', true),
+                'topup_200mb_per_day' => get_post_meta($post->ID, 'yesmy_roaming_topup_200mb_per_day', true),
+                'topup_300mb_per_day' => get_post_meta($post->ID, 'yesmy_roaming_topup_300mb_per_day', true),
+                'topup_400mb_per_day' => get_post_meta($post->ID, 'yesmy_roaming_topup_400mb_per_day', true),
+                'topup_500mb_per_day' => get_post_meta($post->ID, 'yesmy_roaming_topup_500mb_per_day', true),
+            );
+
             if ($arr_operators) :
                 foreach ($arr_operators as $operator) :
                     $is_4g      = (isset($operator['yesmy_roaming_is_4g_lte'])) ? $operator['yesmy_roaming_is_4g_lte'] : '';
@@ -47,6 +57,8 @@
                         'smsRate'           => $operator['yesmy_roaming_sms']
                     ];
                     $data_roaming[$post->ID][]  = $data;
+
+                    // print_r( $topup_arr_operators );
                 endforeach;
             endif;
         endwhile;
@@ -93,6 +105,8 @@
 <script type="text/javascript">
     var jsonRoaming = JSON.parse(JSON.stringify(<?= json_encode($data_roaming) ?>));
     var jsonIdd = JSON.parse(JSON.stringify(<?= json_encode($data_idd) ?>));
+    var topupOprrators = JSON.parse(JSON.stringify(<?= json_encode($topup_arr_operators) ?>));
+    // console.log(topupOprrators);
 </script>
 
 <?php get_template_part($page_template_path, '', ['data_roaming' => $data_roaming, 'data_idd' => $data_idd]); ?>

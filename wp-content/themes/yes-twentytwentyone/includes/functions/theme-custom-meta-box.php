@@ -169,6 +169,38 @@ if (is_admin()) {
         add_action('init', 'add_meta_roaming_rates');
     }
 
+    if (!function_exists('add_meta_topup_roaming_rates')) {
+        /**
+         * Function to add custom meta boxes to idd postpaid rates post types
+         * 
+         * @since    1.2.0
+         */
+        function add_meta_topup_roaming_rates()
+        {
+            $prefix     = 'yesmy_roaming_topup_';
+            $config_custom_fields   = [
+                'id'            => 'roaming_topup_info',
+                'title'         => 'Roaming top Information',
+                'pages'         => ['roaming-rates'],
+                'context'       => 'normal',
+                'priority'      => 'high',
+                'fields'        => [],
+                'local_images'  => false,
+                'use_with_theme' => true
+            ];
+            $meta_custom    = new AT_Meta_Box($config_custom_fields);
+            $meta_custom->addNumber($prefix . "100mb_per_day",           ['name' => "100MB per day (MYR)"]);
+            $meta_custom->addNumber($prefix . "150mb_per_day",           ['name' => "150MB per day (MYR)"]);
+            $meta_custom->addNumber($prefix . "200mb_per_day",           ['name' => "200MB per day (MYR)"]);
+            $meta_custom->addNumber($prefix . "300mb_per_day",           ['name' => "300MB per day (MYR)"]);
+            $meta_custom->addNumber($prefix . "400mb_per_day",           ['name' => "400MB per day (MYR)"]);
+            $meta_custom->addNumber($prefix . "500mb_per_day",           ['name' => "500MB per day (MYR)"]);
+            $meta_custom->Finish();
+        }
+
+        add_action('init', 'add_meta_topup_roaming_rates');
+    }
+
     if (!function_exists('add_meta_idd_postpaid_rates')) {
         /**
          * Function to add custom meta boxes to idd postpaid rates post types
