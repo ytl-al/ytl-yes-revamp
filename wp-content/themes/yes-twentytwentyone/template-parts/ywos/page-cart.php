@@ -773,7 +773,7 @@
                             </div>
                         </div>
                     </div>
-                    <p v-if="!['Yes 5G Wireless Broadband_Flexi', 'Yes 5G Wireless Broadband Gateway'].includes(orderSummary.plan.planName)" v-html="renderText('keepNumberOption')"></p>
+                    <p v-if="!['Yes 5G Wireless Broadband_Flexi', 'Yes 5G Wireless Broadband Gateway', 'Yes 5G Wireless Broadband Gateway 12M'].includes(orderSummary.plan.planName)" v-html="renderText('keepNumberOption')"></p>
                     <!-- <p v-if="orderSummary.plan.bundleName != 'Home Broadband'" v-html="renderText('keepNumberOption')"></p> -->
                 </div>
                 <div class="col-lg-4 col-12">
