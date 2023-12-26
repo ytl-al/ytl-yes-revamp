@@ -3,7 +3,7 @@
 
 
 <!-- Vue Wrapper STARTS -->
-<div id="main-vue" style="display: none;">
+<div id="main-vue">
     <!-- Banner Start -->
     <section id="grey-innerbanner" v-if='(upFrontPayment=="true")'>
         <div class="container">
