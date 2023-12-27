@@ -30,7 +30,7 @@
     color:#525252;
     }
 </style>
-<div id="main-vue" style="display: none">
+<div id="main-vue">
 <header class="page-header">
     <div class="nav-container">
         <div class="container g-lg-0">
@@ -81,7 +81,7 @@
             </div>
         </section>
     </div>
-    <div id="container-hasItem" v-if="!isCartEmpty" style="display: none">
+    <div id="container-hasItem" v-if="!isCartEmpty">
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
@@ -124,6 +124,7 @@
                                     <div class="mt-3">
                                         <div class="text-bold">{{ renderText('capacity') }}</div>
                                         <div class="hlv_3">
+
                                             {{ orderSummary.product.selected.capacity }}
                                         </div>
                                     </div>
@@ -221,7 +222,7 @@
                          <!-- ----------- -->
                            <div>
                                 <div v-if="(StockBalance == 0)">
-                                    <a href="javascript:void(0)" @Click="triggerModalNotify" class="pink-btn text-uppercase d-block" >{{ renderText('Notify_me') }}</a>
+                                    <a href="javascript:void(0)" @Click="triggerModalNotify" class="pink-btn text-uppercase d-block" >NOTIFY ME</a>
                                 </div>
                                 <div v-else>
                                     <a href="javascript:void(0)" @click="goNext" class="pink-btn text-uppercase d-block" >{{ renderText('checkout') }}</a>

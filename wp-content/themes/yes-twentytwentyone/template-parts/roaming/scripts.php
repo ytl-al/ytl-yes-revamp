@@ -541,7 +541,20 @@
         var $topupRoamingTable = $("#topup-roaming-table");
 
         //modify in javascript way because revamp.yes.my is on and off
-        $("[data-button=openRoaming]").off('click').click(function() {
+
+    //   $("#roaming-rates-picker").on("change", function() {  
+    //         setTimeout(function() {
+    //             $("[data-button=openRoaming]").click();
+    //             console.log("Button clicked");
+    //         }, 100);
+    //     });
+    //     $("#roaming-idd-picker").on("change", function() {  
+    //         setTimeout(function() {
+    //             $("[data-button=openIdd]").click();
+    //             console.log("Button clicked");
+    //         }, 100);
+    //     });
+        $("[data-button=openRoaming]").click(function() {
             if ($("[name=roamingSelect]").val()) {
                 var cid = $("[name=roamingSelect]").val();
                 var sel = jsonRoaming[cid];
@@ -566,6 +579,7 @@
                 $topupRoamingTable.empty();
                 for (var i = 0; i < sel.length; i++) {
                     var cur = sel[i];
+                    console.log(cur);
                     $newTpl = $roamingTemplate.clone();
                     var telcoName =cur["operatorName"];
                     if (i > 0) {
@@ -581,17 +595,35 @@
                     }
                     $("[data-name=planDayRateAmt]", $newTpl).html(cur["roamingRate"].replace(".00", "").replace("RM", ""));
                     $("[data-name=planDayRateSubset]", $newTpl).html(cur["roamingType"]);
-                    $("[data-name=planDayRateQuota]", $newTpl).html(cur["quota"]);
+                    var langAttributeValue = $('html').attr('lang');
+                    if ((cur["quota"].trim() == '' && langAttributeValue == 'ms-MY') || langAttributeValue == 'ms-MY' ) {
+                        $("[data-name=planDayRateQuota]", $newTpl).html('Perayauan Data Tanpa Had');
+                        $("[data-name=planDayRateSubset]", $newTpl).html("/sehari");
+                        
+                    } else {
+                        $("[data-name=planDayRateQuota]", $newTpl).html(cur["quota"]);
+                        $("[data-name=planDayRateSubset]", $newTpl).html(cur["roamingType"]);
+                    }
 
                     var disclaimer = cur["quotaDisclaimer"];
 
-                    if (!disclaimer && cur["quota"]) {
+                    if (!disclaimer && cur["quota"] && langAttributeValue!='ms-MY') {
                         disclaimer = "Once the quota is finished, the data speed will be reduced until your day pass expires without additional cost.";
+                        // disclaimer = "(500MB data berkelajuan tinggi dan 64kbps kemudian).";
+                    }
+                    else if(cur["quota"] && langAttributeValue=="ms-MY"){
+                        var DataMB=cur["quota"].split(" ");
+                        var storageValue = DataMB[2];
+                        var disclaimer = "(" + storageValue + " data berkelajuan tinggi dan 64kbps kemudian).";
                     }
                     $("[data-name=planDayRateTnc]", $newTpl).html(disclaimer);
+                    if(langAttributeValue == "ms-MY"){
+                        var beforeCountryName="Panggilan dalam";
+                    }else{
+                        beforeCountryName="Call Within"
+                    }
 
-
-                    $("[data-name=planCallWithinCountryTxt]", $newTpl).html("Call Within " + sel[i]['country_name']);
+                    $("[data-name=planCallWithinCountryTxt]", $newTpl).html( beforeCountryName  + " "+  sel[i]['country_name']);
                     $("[data-name=planCallWithinCountryRate]", $newTpl).html(cur["callRate"]);
                     $("[data-name=planCallToOtherCountriesRate]", $newTpl).html(cur["callToOther"]);
                     $("[data-name=planCallToMalaysiRate]", $newTpl).html(cur["callToMalaysia"]);
@@ -621,9 +653,14 @@
                 // Append the modified template to the appropriate container
                 $("[data-country=OtherCountry]").append($topupTpl.show());
                 $("[data-country=OtherCountry] [data-template=topupRoamingTemplate]").replaceWith($topupTpl.show());
-                if(topup['topup_100mb_per_day']=="" && topup['topup_150mb_per_day']==""  &&  topup['topup_200mb_per_day']=="" && topup['topup_300mb_per_day']=="" && topup['topup_400mb_per_day']=="" && topup['topup_500mb_per_day']=="" ){
+                if((topup['topup_100mb_per_day']=="" || topup['topup_100mb_per_day']== 0 ) && (topup['topup_150mb_per_day']=="" || topup['topup_150mb_per_day']==0 )  &&  (topup['topup_200mb_per_day']=="" || topup['topup_200mb_per_day']==0)  && (topup['topup_300mb_per_day']=="" || topup['topup_300mb_per_day']==0)  && (topup['topup_400mb_per_day']=="" || topup['topup_400mb_per_day']==0) && (topup['topup_500mb_per_day']=="" || topup['topup_500mb_per_day']==0) ){
                     $('#topUpRoamingTemp').css("display", "none"); 
-                }
+                    $("h1 span[data-title='PAYU']").text("Pay As You Use");
+                    // if(sel[0]['country_name']=="Bahamas"){
+                    // }
+                }else{
+                        $("h1 span[data-title='PAYU']").text("Day Pass"); 
+                    }
             }
         });
 
@@ -691,7 +728,7 @@
           fade: true,
           dots: true,
           autoplay: true,
-          autoplaySpeed: 3000,
+          autoplaySpeed: 8000,
           responsive: [{
               breakpoint: 1024,
               settings: {

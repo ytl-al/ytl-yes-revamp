@@ -1,0 +1,7 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+	<title>list1_style-svg</title>
+	<style>
+		.s0 { fill: #2f3bf5;stroke: #00b4f0;stroke-linecap: round;stroke-linejoin: round;stroke-width: 2 } 
+	</style>
+	<path id="Layer" fill-rule="evenodd" class="s0" d="m13.3 4l-7.3 7.3-3.3-3.3"/>
+</svg>

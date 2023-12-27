@@ -434,7 +434,7 @@
 
 
 <!-- Vue Wrapper STARTS -->
-<div id="main-vue" style="display: none;">
+<div id="main-vue">
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">

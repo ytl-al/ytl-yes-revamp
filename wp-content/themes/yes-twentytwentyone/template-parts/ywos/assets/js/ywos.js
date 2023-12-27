@@ -485,7 +485,7 @@ const ywos = {
                 
             }
         }
-        
+        // this.mainVueVisible = isValid;
         $('#main-vue').show();
         if (!isValid) {
             this.removeYWOSLSData();
