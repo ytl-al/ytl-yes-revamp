@@ -16,7 +16,7 @@ function outage_details()
     $session_id = snm_get_session();
     //print_r($_GET['Latitude']);              
     set_time_limit(1000);
-    $url = NETWORK_MAINTENANCE_DOMAIN . "/api/v1/ytlc/pnocprod/4GOutageDetails";
+    $url = NETWORK_MAINTENANCE_DOMAIN . "/api/v1/ytlc/pnoc/4GOutageDetails";
     $body = array(
         'SessionID' => $session_id,
         'Latitude' => $_GET['Latitude'],
@@ -48,13 +48,13 @@ if (!function_exists('generate_outgoing_network_maintenance')) {
 
     function snm_get_session()
     {
-        $url = NETWORK_MAINTENANCE_DOMAIN . "/api/v1/ytlc/pnocprod/tokenget";
+        $url = NETWORK_MAINTENANCE_DOMAIN . "/api/v1/ytlc/pnoc/tokenget";
         $params = [
             'method' => 'GET',
             'headers' => array(
                 'apikey' => 'jkweTq8hcOw5QxeWh8d13dfkjhdfsdgdd',
                 'UserLogin' => 'otoborest',
-                'Password' => 'otobo_v1_345',
+                'Password' => 'otobo_v1_34',
                 'Content-Type' => 'application/json'
             )
         ];
@@ -68,7 +68,7 @@ if (!function_exists('generate_outgoing_network_maintenance')) {
 
     function snm_4g_outage($session_id)
     {
-        $url = NETWORK_MAINTENANCE_DOMAIN . "/api/v1/ytlc/pnocprod/4GOutageDetails";
+        $url = NETWORK_MAINTENANCE_DOMAIN . "/api/v1/ytlc/pnoc/4GOutageDetails";
         $body = array(
             //'SessionID' => $session_id,
             //'SiteID' => "LMCPT00421",
@@ -90,7 +90,7 @@ if (!function_exists('generate_outgoing_network_maintenance')) {
     }
 
     function snm_4g_outage_planed($session_id)   
-    { $url=NETWORK_MAINTENANCE_DOMAIN . "/api/v1/ytlc/pnocprod/WorkPermit4GDetailsOtobo";       
+    { $url=NETWORK_MAINTENANCE_DOMAIN . "/api/v1/ytlc/pnoc/WorkPermit4GDetailsOtobo";       
         //echo $session_id; die;
        $body = array(
            'SessionID' => $session_id,
@@ -113,7 +113,7 @@ if (!function_exists('generate_outgoing_network_maintenance')) {
 
     function snm_5g_outage($session_id)
     {
-        $url = NETWORK_MAINTENANCE_DOMAIN . "/api/v1/ytlc/pnocprod/5GOutageDetails";
+        $url = NETWORK_MAINTENANCE_DOMAIN . "/api/v1/ytlc/pnoc/5GOutageDetails";
         $body = array(
             'SessionID' => $session_id,
             //'SiteID'   => "DBSEP1317",
