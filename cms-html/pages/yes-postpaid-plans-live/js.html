@@ -5,7 +5,6 @@
      */
     function pageShown(evt) {
         if (evt.persisted) {
-            // $('h1.text-center span').html('from back button');
             toggleOverlay(false);
         }
     }
@@ -24,6 +23,60 @@
             }, 100);
         }
         return false;
-    }
+    }       
+      
+</script>
 
+<script>
+$(document).on('ready', function () {
+
+$('.hero-slider').slick({
+          infinite: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,
+          fade: true,
+          dots: true,
+          autoplay: true,
+          autoplaySpeed: 8000,
+          responsive: [{
+              breakpoint: 1024,
+              settings: {
+                  slidesToShow: 2,
+                  slidesToScroll: 1,
+                  infinite: true,
+                  dots: true,
+                  arrows: false
+              }
+          }, {
+              breakpoint: 768,
+              settings: {
+                  slidesToShow: 1,
+                  arrows: false,
+                  infinite: true,
+                  dots: true,
+                  slidesToScroll: 1,
+              }
+          }, {
+              breakpoint: 600,
+              settings: {
+                  slidesToShow: 1,
+                  arrows: false,
+                  infinite: true,
+                  dots: true,
+                  slidesToScroll: 1
+              }
+          }, {
+              breakpoint: 480,
+              settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1,
+                  dots: true,
+                  infinite: true,
+                  dots: true,
+                  arrows: false
+              }
+          }]
+      });   
+    });
 </script>

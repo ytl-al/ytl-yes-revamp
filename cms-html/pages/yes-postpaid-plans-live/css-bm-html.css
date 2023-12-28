@@ -167,7 +167,7 @@
     .hero-slider .inner-content-sec .pricing-2 h4 span {
         font-weight: 500;
         line-height: 18px;
-        font-size: 13px;
+        font-size: 15px;
         letter-spacing: 0;
         text-transform: uppercase;
     }
@@ -259,13 +259,13 @@
         background: #FF0084 !important;
     }
     #switch-yes h1{
-        font-size: 39px;
-        line-height: 47px;
+        font-size: 39px !important;
+        line-height: 47% !important;
     }
 
     #wfh h1{
-        font-size: 39px;
-        line-height: 47px;
+        font-size: 39px ;
+        line-height: 47px ;
     }
 
     /* Postpaid Plans styling */
@@ -400,7 +400,7 @@
     }
 
     #infinite-banner {
-        background-image: url('/wp-content/uploads/2023/12/yesinfinite-banner-bg.png');
+        background-image: url('/wp-content/uploads/2023/12/yesinfinite-banner-bg-bm.png');
         background-size: cover;
         background-repeat: no-repeat;
         padding: 80px 0px;
@@ -436,7 +436,7 @@
     #infinite-banner .pink-btn{background-color: #2F3BF5 !important;}
 
     #switch-banner {
-        background-image: url('/wp-content/uploads/2023/12/telco-capping-banner.png');
+        background-image: url('/wp-content/uploads/2023/12/telco-capping-banner-bm.png');
         background-color: #FF0084;
         background-size: cover;
         background-repeat: no-repeat;
@@ -709,6 +709,7 @@
         color: #FFF;
         background-color: #D00072;
     }
+    .pink-btn{ padding: 0.7rem 1.5rem !important;}
 
     #easy-steps .nav-tabs {
         border-bottom: none;
@@ -958,6 +959,7 @@
             line-height: 36px;
             text-align: center;
             padding: 0 15px;
+            margin-top: 15px;
         }
 
         #wfh p {
@@ -966,8 +968,9 @@
         }
 
         #wfh img {
-            margin-left: 20px;
-            width: 70%;
+            /* margin-left: 20px; */
+            width: 100%;
+            margin: 0 auto;
         }
 
         /* #infinite-banner h1 {
@@ -1235,6 +1238,7 @@
             font-weight: 800;
             line-height: 36px;
         }
+        #postpaid-plans-card .postpaid-heading br{display: none;}
 
         .term-condition-text {
             font-weight: 700;
@@ -1243,7 +1247,7 @@
         }
 
         #switch-banner {
-            background-image: url('/wp-content/uploads/2023/12/telco-capping-banner-mob.png');
+            background-image: url('/wp-content/uploads/2023/12/telco-capping-banner-mob-bm.png');
             background-color: #F9F7F4;
             background-size: cover;
             background-repeat: no-repeat;
@@ -1307,6 +1311,7 @@
             font-size: 28px;
             line-height: 36px;
         }
+        #supplementary-section .title-section h2 br{display: none;}
 
         #supplementary-section .title-section .pricing {
             width: 130px;
@@ -1349,11 +1354,11 @@
 
         .usp-section li {
             width: 50%;
-            padding: 15px 15px;
+            padding: 15px 7px;
             font-size: 14px;
-            line-height: 18px;
+            line-height: 16px;
             float: left;
-            height: 65px;
+            height: 80px;
         }
 
         .usp-section li:first-child {
@@ -1424,7 +1429,7 @@
         }
 
         #infinite-banner {
-            background-image: url(/wp-content/uploads/2023/12/yesinfinite-banner_mobile.png);
+            background-image: url(/wp-content/uploads/2023/12/yesinfinite-banner_mobile-bm.png);
             background-size: cover;
             background-repeat: no-repeat;
             padding: 50px 20px 130px;
