@@ -2,7 +2,7 @@
 
 
 <!-- Vue Wrapper STARTS -->
-<div id="main-vue">
+<div id="main-vue" >
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
