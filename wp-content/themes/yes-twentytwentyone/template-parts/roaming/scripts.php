@@ -596,15 +596,13 @@
                     $("[data-name=planDayRateAmt]", $newTpl).html(cur["roamingRate"].replace(".00", "").replace("RM", ""));
                     $("[data-name=planDayRateSubset]", $newTpl).html(cur["roamingType"]);
                     var langAttributeValue = $('html').attr('lang');
-                    if ((cur["quota"].trim() == '' && langAttributeValue == 'ms-MY') || langAttributeValue == 'ms-MY' ) {
-                        $("[data-name=planDayRateQuota]", $newTpl).html('Perayauan Data Tanpa Had');
-                        $("[data-name=planDayRateSubset]", $newTpl).html("/sehari");
+                    // if ((cur["quota"].trim() == '' && langAttributeValue == 'ms-MY') || langAttributeValue == 'ms-MY' ) {
+                    //     $("[data-name=planDayRateQuota]", $newTpl).html('Perayauan Data Tanpa Had');
+                    // } else {
                         
-                    } else {
+                        // }
+                        
                         $("[data-name=planDayRateQuota]", $newTpl).html(cur["quota"]);
-                        $("[data-name=planDayRateSubset]", $newTpl).html(cur["roamingType"]);
-                    }
-
                     var disclaimer = cur["quotaDisclaimer"];
 
                     if (!disclaimer && cur["quota"] && langAttributeValue!='ms-MY') {

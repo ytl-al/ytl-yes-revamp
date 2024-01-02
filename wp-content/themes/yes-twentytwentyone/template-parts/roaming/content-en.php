@@ -60,8 +60,8 @@
                 <img src="/wp-content/uploads/2023/12/hero-banner-bg2-mob.png" class="w-100 d-block d-md-block d-lg-none" alt="...">
 
                 <div class="inner-content-sec d-lg-block d-none">
-                    <div class="title-sec">
-                    <img decoding="async" src="/wp-content/uploads/2023/12/infinite-icon.png" class="" alt="...">
+                    <div class="title-sec mt-5">
+                    <!-- <img decoding="async" src="/wp-content/uploads/2023/12/infinite-icon.png" class="" alt="..."> -->
                         <h2>Stay connected anytime, anywhere with YesRoam</h2>
                         <p>Roam freely with our partnering operators when you’re travelling.</p>
                      </div>                        
@@ -364,7 +364,7 @@
                 <div class="col-12 mt-3" data-country="OtherCountry">
                 <div style="background:#fff; border-radius: 15px;">
                 <h1>
-                    YesRoam <span>Day Pass</span>
+                    YesRoam <span data-title="PAYU">Day Pass</span>
                 </h1>
 
                 <div class="row row-roaming">
@@ -604,26 +604,26 @@
             <div class="col-12 gx-5">
                 <div class="row">
                 <div class="col-12 col-lg-3 start-roaming-cont">
-                        <img src="/wp-content/uploads/2022/03/roaming-setting-icon.jpg" class="mb-4" alt="">
+                        <img src="/wp-content/uploads/2022/03/roaming-setting-icon.jpg" class="mb-4 d-none" alt="">
                         <!-- <p class="small">Step 1:</p> -->
                         <h2 class="num-box"><span>1</span> <strong>Launch MyYes App</strong></h2>
                         <p class="mt-3">Activate International Roaming service via MyYes app.</p>
                     </div>
-                    <div class="col-12 col-lg-3 start-roaming-cont">
-                        <img src="/wp-content/uploads/2022/03/roaming-setting-icon.jpg" class="mb-4" alt="">
+                    <div class="col-12 col-lg-2 start-roaming-cont">
+                        <img src="/wp-content/uploads/2022/03/roaming-setting-icon.jpg" class="mb-4 d-none" alt="">
                         <!-- <p class="small">Step 1:</p> -->
                         <h2 class="num-box"><span>2</span> <strong>Go to Settings.</strong></h2>
                         <p class="mt-3">Select “Mobile Network”.</p>
                     </div>
-                    <div class="col-12 col-lg-3 start-roaming-cont">
-                        <img src="/wp-content/uploads/2022/03/roaming-network-icon.jpg" class="mb-4" alt="">
+                    <div class="col-12 col-lg-4 start-roaming-cont">
+                        <img src="/wp-content/uploads/2022/03/roaming-network-icon.jpg" class="mb-4 d-none" alt="">
                         <!-- <p class="small">Step 2:</p> -->
                         <h2 class="num-box"><span>3</span> <strong>Click Network Operators.</strong></h2>
-                        <p class="mt-3">Upon the list of networks showed up, select our preferred roaming operator to connect.</p>
+                        <p class="mt-3">Upon the list of networks displayed, select our preferred roaming operator to connect.</p>
                         
                     </div>
                     <div class="col-12 col-lg-3 start-roaming-cont">
-                        <img src="/wp-content/uploads/2022/03/roaming-mobile-icon.jpg" class="mb-4" alt="">
+                        <img src="/wp-content/uploads/2022/03/roaming-mobile-icon.jpg" class="mb-4 d-none" alt="">
                         <!-- <p class="small">Step 3:</p> -->
                         <h2 class="num-box"><span>4</span> <strong>Go to Mobile Network.</strong></h2>
                         <p class="mt-3">Turn on your Data Roaming & Mobile Data in your phone setting if you wish to use data service while abroad.</p>

@@ -70,14 +70,17 @@
 
             const place = autocomplete.getPlace();
 
-            //console.log(place.geometry.location.lat(), place.geometry.location.lng());     
+            //console.log(place.geometry.location.lat(), place.geometry.location.lng());  
+            
+            
 
             if (!place.geometry || !place.geometry.location) {
                 // User entered the name of a Place that was not suggested and
                 // pressed the Enter key, or the Place Details request failed.
                 window.alert("No details available for input: '" + place.name + "'");
                 return;
-            }           
+            }
+           
 
             // If the place has a geometry, then present it on a map.
             if (place.geometry.viewport) {
@@ -108,7 +111,7 @@
 
            // console.log("test", place); 
            //console.log(place.geometry.location.lat(), place.geometry.location.lng());   
-                     
+           // http://localhost/wp-json/elevate/v1/outage-details             
          // Show loading overlay
                 toggleOverlay(true);
 
@@ -126,18 +129,18 @@
                         const obj = JSON.parse(result.body);
 
                         if (obj.Data[0] == undefined) {
-                            $("#response_msg").append("<p class='msg_green'>The Yes network service in your area is operating smoothly. If you encounter any issues, please reach out to us at yescare@yes.my for assistance.</p>");
+                            $("#response_msg").append("<p class='msg_green'>Perkhidmatan rangkaian Yes di kawasan anda beroperasi dengan lancar. Jika anda menghadapi sebarang masalah, sila naikkan tiket ke YesCare melalui aplikasi MyYes.</p>");
                         } else {
                             var final_val = isEqual(result.body, obj.Data[0].Outages[0].Severity);
 
                             if (final_val == true) {
                                 if (obj.Data[0].Outages[0].Severity == 'Unplanned' || obj.Data[0].Outages[0].Severity == 'Full' || obj.Data[0].Outages[0].Severity == 'S1 AC Fail' || obj.Data[0].Outages[0].Severity == 'S2 High Temperature' || obj.Data[0].Outages[0].Severity == 'S2MW') {
-                                    $("#response_msg").append("<p class='msg_red'>The Yes network service in your area is temporarily unavailable. Please try again later as we continue to resolve this issue for the time being. We appreciate your understanding, and apologise for any inconvenience caused.</p>");
+                                    $("#response_msg").append("<p class='msg_red'>Perkhidmatan rangkaian Yes di kawasan anda tidak tersedia buat sementara waktu. Sila cuba sebentar lagi kerana kami sedang menyelesaikan isu ini buat masa ini. Kami menghargai persefahaman anda dan memohon maaf atas sebarang kesulitan yang timbul.</p>");
                                 } else if (obj.Data[0].Outages[0].Severity == 'Partial' || obj.Data[0].Outages[0].Severity == 'S3' || obj.Data[0].Outages[0].Severity == 'S3MW') {
-                                    $("#response_msg").append("<p class='msg_red'>The Yes network service in your area is temporarily unavailable. Please try again later as we continue to resolve this issue for the time being. We appreciate your understanding, and apologise for any inconvenience caused.</p>");
+                                    $("#response_msg").append("<p class='msg_red'>Perkhidmatan rangkaian Yes di kawasan anda tidak tersedia buat sementara waktu. Sila cuba sebentar lagi kerana kami sedang menyelesaikan isu ini buat masa ini. Kami menghargai persefahaman anda dan memohon maaf atas sebarang kesulitan yang timbul.</p>");
                                 }
                             } else {
-                                $("#response_msg").append("<p class='msg_orange'>You may experience some issues with the Yes network service in your area. We are currently working to resolve these issues from your collective feedback, and we appreciate your patience in this matter.</p>");
+                                $("#response_msg").append("<p class='msg_orange'>Anda mungkin mengalami beberapa masalah dengan perkhidmatan rangkaian Yes di kawasan anda. Kami sedang berusaha untuk menyelesaikan isu ini daripada maklum balas kolektif anda, dan kami menghargai kesabaran anda dalam perkara ini.</p>");
                             }
                         }
 
@@ -206,9 +209,10 @@
     });
 
 </script>
-
-
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlZr9PPEuI9PXnC_4pv_4FopDEIcPdGqI&callback=initMap&libraries=places&v=weekly"
-      defer>
-</script>
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlZr9PPEuI9PXnC_4pv_4FopDEIcPdGqI&callback=initMap&libraries=places&v=weekly"
+      defer
+    ></script>
+<!-- <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlZr9PPEuI9PXnC_4pv_4FopDEIcPdGqI&callback=initAutocomplete&libraries=places&v=weekly"
+    defer></script> --></script>

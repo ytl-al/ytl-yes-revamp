@@ -387,9 +387,9 @@
                                 <div class="col-12 col-lg-3 border-b-sec">
                                     <h3>Kadar Internet</h3>                            
                                     <h4 class="internet-rates">
-                                        <span>RM</span><b data-name="planDayRateAmt">38</b><sub data-name="planDayRateSubsetbm">/sehari</sub>
+                                        <span>RM</span><b data-name="planDayRateAmt">38</b><sub data-name="planDayRateSubset">/MB</sub>
                                     </h4>
-                                    <p class="blue mt-3" data-name="planDayRateQuotabm">Perayauan Data Tanpa Had</p>
+                                    <p class="blue mt-3" data-name="planDayRateQuota">Perayauan Data Tanpa Had</p>
                                     <p class="small" data-name="planDayRateTnc">(500MB data berkelajuan tinggi dan 64kbps kemudian)</p>
                                 </div>
 
@@ -953,7 +953,7 @@
                                 Perayauan Yes (YesRoam) adalah tersedia untuk pelanggan Pascabayar Yes. Selepas mengaktifkan servis bagi langgan perayauan, sila pastikan perayauan anda diaktifkan melalui aplikasi MyYes > Perayauan Yes (YesRoam) > Pengaktifan Roaming. Deposit perayauan mungkin diperlukan. Anda akan dilanggan secara automatik sama ada bagi Perayauan Yes (YesRoam) Daily atau Perayauan Yes (YesRoam) Monthly apabila anda tiba di negara yang dilawati dan disambungkan ke operator perayauan pilihan.
                                 </p>
 
-                                <p><b>Nota:</b> Jika anda adalah pengguna talian utama, anda boleh membantu talian tambahan anda untuk mengaktifkan Perayauan Yes (YesRoam) dengan meningkatkan had kredit atau membayar deposit perayauan melalui aplikasi MyYes. Log masuk ke akaun utama > Pilih talian tambahan pada meny pilihan > Klik Lagi > Roaming > Aktifkan Langganan > Tambah Sekarang untuk tingkatkan had kredit atau bayar deposit > Pengaktifan Roaming.</p>
+                                <p><b>Nota:</b> <i>Jika anda adalah pengguna talian utama, anda boleh membantu talian tambahan anda untuk mengaktifkan Perayauan Yes (YesRoam) dengan meningkatkan had kredit atau membayar deposit perayauan melalui aplikasi MyYes. Log masuk ke akaun utama > Pilih talian tambahan pada meny pilihan > Klik Lagi > Roaming > Aktifkan Langganan > Tambah Sekarang untuk tingkatkan had kredit atau bayar deposit > Pengaktifan Roaming.</i></p>
                             </div>
                         </div>
                     </div>

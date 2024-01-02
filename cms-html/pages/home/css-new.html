@@ -6,6 +6,44 @@
     .hero-slider-section {
         position: relative;
     }
+    .hero-slider .inner-content-sec {
+        margin: 0 0 20px;
+        padding: 70px 0 0 4%;
+        position: absolute;
+        top: 10%;
+        left: 5%;
+        z-index: 99;
+    }
+
+    .hero-slider .inner-content-sec .title-sec {
+        position: relative;
+        display: block;
+        width: 65%
+    }
+
+    .hero-slider .inner-content-sec h2 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 39px;
+        line-height: 47px;
+        text-align: left;
+        letter-spacing: -0.02em;
+        color: #FFF;
+        margin-bottom: 15px;
+        padding: 0;
+    }
+
+    .hero-slider .inner-content-sec p {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 24px;
+        text-align: left;
+        color: #ffffff;
+        letter-spacing: -0.02em;
+    }
 
     .hero-slider .slick-dots {
         bottom: 10px;
@@ -171,6 +209,8 @@
         text-align: center;
         position: relative;
         border-radius: 15px;
+        box-shadow: 0 0 15px 0 rgba(0, 0, 0, .1);
+        -webkit-box-shadow: 0 0 15px 0 rgba(0, 0, 0, .1);
     }
 
     #latest-deals-section .latest-deals-inner img {
@@ -179,8 +219,6 @@
         display: block;
         width: 100%;
         height: auto;
-        /* box-shadow: 0 0 15px 0 rgba(0, 0, 0, .1);
-        -webkit-box-shadow: 0 0 15px 0 rgba(0, 0, 0, .1); */
     }
 
     /* #latest-deals-section .latest-deals-carousel .slick-slide div:first-child {
@@ -204,7 +242,7 @@
     } */
 
     #latest-deals-section .latest-deals-carousel .slick-slide {
-        margin: 15px 0px;
+        margin: 15px 15px;
     }
 
     #latest-deals-section .latest-deals-carousel .slick-dots {
@@ -270,6 +308,7 @@
         display: flex;
         align-items: center;
         margin-left: auto;
+        text-transform: uppercase;
     }
 
     .seemore-sec a:hover {
@@ -432,10 +471,8 @@
     #latest-devices-section .latest-devices-carousel .slick-dots {
         left: 0;
     }
-    #latest-devices-section .latest-devices-carousel .slick-dots li.slick-active button:before {
-        opacity: .75;
-        color: #ff0084;
-   }
+
+
     .panel-colors {
         padding: 15px 0 20px;
     }
@@ -458,7 +495,7 @@
         width: 17px;
         height: 17px;
         margin: 0 15px 0 0;
-        padding: 0;
+        padding: 0;        
     }
 
     .panel-colors .span-color:last-of-type,
@@ -476,19 +513,19 @@
     }
 
     .span-color.blue:after {
-        background-color: rgb(39, 103, 135);
+        background-color: #386784;
     }
 
     .span-color.lightblue:after {
-        background-color: rgb(213, 221, 224);
+        background-color: #DDF1EC;
     }
 
     .span-color.green:after {
-        background-color: rgb(57, 76, 56);
+        background-color: #0F5A20;
     }
 
     .span-color.lightgreen:after {
-        background-color: rgb(207, 217, 201);
+        background-color: #D9ECD2;
     }
 
     .span-color.starlight:after {
@@ -496,15 +533,11 @@
     }
 
     .span-color.midnight:after {
-        background-color: rgb(35, 42, 49);
+        background-color: #242930;
     }
 
     .span-color.pink:after {
-        background-color: rgb(235, 208, 210);
-    }
-
-    .span-color.yellow:after {
-        background-color: rgb(236, 230, 198);
+        background-color: #FFCFAC;
     }
 
     .span-color.red:after {
@@ -512,48 +545,27 @@
     }
 
     .span-color.purple:after {
-        background-color: rgb(230, 221, 235);
+        background-color: #E5DBEB;
     }
 
     .span-color.black:after {
-        background-color: rgb(60, 64, 66);
+        background-color: #6C6C6C;
     }
 
     .span-color.natural-titanium:after {
-        background-color: rgb(186, 180, 169);
+        background-color: #7D7F81;
     }
 
     .span-color.white-titanium:after {
-        background-color: rgb(242, 241, 235);
+        background-color: #F1EEDD;
     }
 
     .span-color.black-titanium:after {
-        background-color: rgb(63, 64, 66);
+        background-color: #242930;
     }
 
-    .span-color.blue-titanium:after {
-        background-color: rgb(61, 69, 85);
-    }
-
-    .span-color.black:after {
-        background-color: #000000;
-    }
-
-    .span-color.white:after {
-        background-color: #ffffff;
-        border: 1px solid #dddddd;
-    }
-
-    .span-color.sunrise-orange:after {
-        background-color: #FF5733;
-    }
-
-    .span-color.t-silver:after {
-        background-color: #C0C0C0;
-    }
-
-    .span-color.alpine-blue:after {
-        background-color: #8ECDED;
+    .span-color.Blue-titanium:after {
+        background-color: #3D3C67;
     }
 
     /* .span-color.blue:after {
@@ -618,8 +630,8 @@
         font-family: 'Montserrat';
         font-style: normal;
         font-weight: 800;
-        font-size: 55px;
-        line-height: 68px;
+        font-size: 50px;
+        line-height: 62px;
         letter-spacing: -0.02em;
         color: #FFFFFF;
         margin-bottom: 5px;
@@ -661,14 +673,14 @@
 
     .network-usp-section .card .card-body {
         text-align: center;
-        padding: 40px 10px 10px;
+        padding: 40px 0px 10px;
     }
 
     .network-usp-section h5 {
         font-family: 'Montserrat';
-        font-size: 22px;
+        font-size: 18px;
         font-weight: 800;
-        line-height: 28px;
+        line-height: 24px;
         letter-spacing: -0.011em;
         text-align: left;
     }
@@ -755,8 +767,8 @@
     }
 
     #faq-section .accordion-body {
-        font-size: 14px;
-        line-height: 26px;
+        font-size: 16px;
+        line-height: 32px;
     }
 
     #faq-section .accordion-body h4 {
@@ -773,17 +785,13 @@
     #faq-section .accordion-body li {
         margin: 0;
         padding: 0;
-        font-size: 14px;
-        line-height: 26px;
-    }
-
-    #faq-section .accordion-body ol {
-        padding-left: 0;
+        font-size: 16px;
+        line-height: 32px;
     }
 
     #faq-section .accordion-body p {
-        font-size: 14px;
-        line-height: 26px;
+        font-size: 16px;
+        line-height: 32px;
     }
 
     #faq-section .viewall-btn {
@@ -888,7 +896,7 @@
         }
 
         #latest-deals-section .latest-deals-carousel .slick-slide {
-            margin: 15px 10px;
+            margin: 15px 13px;
         }
 
         #latest-deals-section .latest-deals-carousel .slick-dots li.slick-active button:before {
@@ -1049,14 +1057,32 @@
     /*IPAD Air*/
     @media only screen and (min-device-width: 1024px) and (max-device-width: 1500px) and (orientation: landscape) {}
 
-    @media only screen and (min-device-width: 1600px) {
-        #faq-section {
-            margin-top: 330px !important;
-        }
-    }
+
 
     /* @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)  */
     @media only screen and (min-device-width: 320px) and (max-device-width: 640px) and (-webkit-min-device-pixel-ratio: 2) {
+        .hero-slider .inner-content-sec {
+            padding: 50px 0 0 4%;
+            position: absolute;
+            top: 0%;
+            left: 2%;
+        }
+
+        .hero-slider .inner-content-sec .title-sec {
+            position: relative;
+            display: block;
+            width: 95%
+        }
+
+        .hero-slider .inner-content-sec h2 {
+            font-size: 28px;
+            line-height: 32px;
+        }
+
+        .hero-slider .inner-content-sec p {
+            font-size: 16px;
+            line-height: 20px;
+        }
 
         .hero-slider .slick-dots {
             bottom: 10px;
@@ -1135,7 +1161,7 @@
         }
 
         #latest-deals-section .latest-deals-carousel .slick-slide {
-            margin: 15px 10px;
+            margin: 15px 13px;
         }
 
         #latest-deals-section .latest-deals-carousel .slick-dots li.slick-active button:before {
@@ -1242,49 +1268,8 @@
             padding: 0 15% 0 0 !important;
         }
 
-        #services-section .services-carousel .slick-slide {
-            padding: 20px 0px 10px;
-        }
 
-        #services-section {
-            padding-bottom: 0;
-        }
-
-        .slick-dots li {
-            margin: 0;
-        }
-
-        #latest-deals-section {
-            padding: 36px 0 !important;
-        }
-
-
-        #latest-deals-section .latest-deals-carousel .slick-slide {
-            margin: 0px 0 0;
-        }
-
-        #latest-deals-section .latest-deals-carousel .slick-slide:nth-child(1) {
-            margin-left: 20px;
-        }
-
-        #latest-devices-section,
-        #faq-section {
-            padding-bottom: 36px;
-        }
-
-        #faq-section {
-            padding-top: 0 !important;
-        }
-
-        .hero-slider .slick-dots li.slick-active button:before {
-            opacity: 1;
-        }
-
-
-
-
-
-
+        
         #faq-section {
             padding: 30px 0px !important;
             margin-top: 350px !important;
