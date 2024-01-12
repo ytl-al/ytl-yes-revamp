@@ -59,15 +59,6 @@ class Post_SMTP_Mobile {
             }
 			
 		}
-
-        //Mobile App Notice
-        if ( isset( $_GET['page'] ) && 'postman' === $_GET['page'] ) {
-	        if ( ! get_option( 'ps_dismissed_mobile_notice' ) ) {
-
-		        add_action( 'admin_notices', array( $this, 'mobile_app_notice' ) );
-
-	        }
-        }
         
     }
 
@@ -220,12 +211,14 @@ class Post_SMTP_Mobile {
 						
 						echo "<b>Connected Device:</b> ";
 						
+						$nonce = wp_create_nonce( 'ps-disconnect-app-nonce' );
+						
 						foreach( $this->app_connected as $device ) {
 							
-							$url = admin_url( "admin.php?action=post_smtp_disconnect_app&auth_token={$device['fcm_token']}" );
+							$url = admin_url( "admin.php?action=post_smtp_disconnect_app&auth_token={$device['fcm_token']}&ps_disconnect_app_nonce={$nonce}" );
 							$checked = $device['enable_notification'] == 1 ? 'checked="checked"' : '';
 							
-							echo "{$device['device']} <a href='{$url}' style='color: red'>Disconnect</a>";
+							echo  esc_html( $device['device'] ) . "<a href='{$url}' style='color: red'>Disconnect</a>";
 							echo '<br />';
 							echo sprintf(
 								'<label for="enable-app-notice">%s <input type="checkbox" id="enable-app-notice" name="postman_app_connection[%s]" %s /></label>',
@@ -306,7 +299,13 @@ class Post_SMTP_Mobile {
      * @version 1.0.0
      */
 	public function disconnect_app() {
-		
+
+		if( !isset( $_GET['ps_disconnect_app_nonce'] ) || !wp_verify_nonce( $_GET['ps_disconnect_app_nonce'], 'ps-disconnect-app-nonce' ) ) {
+			
+			die( 'Security Check' );
+			
+		}
+
 		if( isset( $_GET['action'] ) && $_GET['action'] == 'post_smtp_disconnect_app' ) {
 			
 			$connected_devices = get_option( 'post_smtp_mobile_app_connection' );
@@ -346,63 +345,6 @@ class Post_SMTP_Mobile {
 		}
 		
 	}
-
-    /**
-     * Shows mobile app notice | Action Call-back
-     * 
-     * @since 2.7.1
-     * @version 1.0.0
-     */
-    public function mobile_app_notice() {
-
-    ?>
-    <div class="notice is-dismissible ps-mobile-admin-notice">
-        <div class="ps-mobile-notice">
-            <input type="hidden" value="<?php echo esc_url( admin_url( 'admin-post.php?action=ps_dimiss_app_notice' ) ); ?>" class="ps-mobile-notice-hidden-url" />
-            <div class="ps-mobile-notice-img">
-                <img src="<?php echo esc_url( POST_SMTP_ASSETS . 'images/icons/mobile2.png' ) ?>" width="55px" />
-            </div>
-            <div class="ps-mobile-notice-content">
-                <h4><?php _e( 'Introducing NEW Post SMTP Mobile App' ); ?></h4>
-                <table width="100%">
-                    <tr>
-                        <td>
-                            <span class="dashicons dashicons-yes-alt"></span>
-                            Easy Email Tracking
-                        </td>
-                        <td>
-                            <span class="dashicons dashicons-yes-alt"></span>
-                            Quickly View Error Details
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="dashicons dashicons-yes-alt"></span>
-                            Get Instant Failure Notifications
-                        </td>
-                        <td>
-                            <span class="dashicons dashicons-yes-alt"></span>
-                            Get Email Preview
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span class="dashicons dashicons-yes-alt"></span>
-                            Resend Failed Emails
-                        </td>
-                        <td>
-                            <span class="dashicons dashicons-yes-alt"></span>
-                            Support For Multiple Sites (Coming Soon)
-                        </td>
-                    </tr>
-                </table>
-                <a href="https://postmansmtp.com/documentation/advance-functionality/postsmtp-mobile-app/?utm_source=plugin&utm_medium=notice" target="_blank">Learn More</a>
-            </div>
-        </div>
-    </div>
-    <?php
-        
-    }
 
     /**
      * Dismiss App Notice | Action Call-back
