@@ -373,7 +373,7 @@
         padding: 10px 10px;
         text-overflow: ellipsis;
         width: 65%;
-        border: 1px solid #E8E9ED;
+        border: 1px solid #E8E9ED !important;
         height: 50px;
         border-radius: 50px;
         margin: 0px 0 20px;
@@ -538,13 +538,13 @@
         }
 
         .para-sec {
-        font-size: 16px;
-        line-height: 20px;
-        text-align: center;
-        padding: 20px;
-        width: 100%;
-        margin: 0 auto;
-    }
+            font-size: 16px;
+            line-height: 20px;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            margin: 0 auto;
+        }
 
         .need-assistance-section .order-1 {
             order: 1 !important;
@@ -563,5 +563,35 @@
             line-height: 32px;
         }
 
+    }
+
+    #pac-input:focus-visible {
+        outline: unset;
+    }
+
+    input[type="search"].light {
+        background: #fff;
+        color: #222;
+        border: unset !important;
+    }
+
+    input[type="search"]::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+        height: 1em;
+        width: 1em;
+        border-radius: 50em;
+        background: url('/wp-content/uploads/2024/01/times-circle.svg') no-repeat 50% 50%;
+        background-size: contain;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    input[type="search"]:focus::-webkit-search-cancel-button {
+        opacity: .3;
+        pointer-events: all;
+    }
+
+    input[type="search"].dark::-webkit-search-cancel-button {
+        filter: invert(1);
     }
 </style>

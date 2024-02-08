@@ -1,6 +1,6 @@
 <!-- Hero Section -->
-<section class="hero-banner">
-    <!-- <div class="container">
+<!-- <section class="hero-banner">
+    <div class="container">
         <div class="row">
             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-6 col-12">
                 <div class="banner">
@@ -12,12 +12,43 @@
                 </div>
             </div>
         </div>
-    </div> -->
-</section>
+    </div>
+</section> -->
 <!-- Hero Section ENDS -->
 
+<!-- Slider Start -->
+<section class="hero-slider-section">
+    <div class="hero-slider slider">
+        <div>
+            <a href="https://www.99speedmart.com.my/Store">
+                <img src="/wp-content/uploads/2024/01/speedmart-banner-BM.png" class="w-100 d-none d-lg-block"
+                    alt="...">
+                <img src="/wp-content/uploads/2024/01/speedmart-banner-mob-BM.png"
+                    class="w-100 d-block d-md-block d-lg-none" alt="...">
+            </a>
+        </div>
+
+        <div>
+            <a href="#">
+                <img src="/wp-content/uploads/2024/01/prepaid-banner-bg-scaled.jpg" class="w-100 d-none d-lg-block" alt="...">
+                <img src="/wp-content/uploads/2024/01/prepaid-banner-bg-mob-bm.png"
+                    class="w-100 d-block d-md-block d-lg-none" alt="...">
+                <div class="inner-content-sec d-lg-block d-none">
+                    <div class="title-sec">
+                        <img decoding="async" src="/wp-content/uploads/2024/01/FT5G-pre-icon.png" class="" alt="...">
+                        <h2>Sembang tanpa henti dengan<br> pelan Prabayar terbaik dan<br> 5G tanpa batasan di Malaysia.
+                        </h2>
+                    </div>
+
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+<!-- Slider End -->
+
 <!-- offerline Section -->
-<section class="offerline-section aos-init aos-animate" data-aos="fade-up">
+<section class="offerline-section aos-init aos-animate d-none" data-aos="fade-up">
     <div class="container">
         <div class="row">
             <div class="col-10 mx-auto aos-init aos-animate" data-aos="fade-up">
@@ -30,24 +61,49 @@
 
 <!-- Mid-section -->
 <section id="device-main-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-xl-12 col-lg-12 col-md-12">
-                <div class="cap-search-box clearfix">
-                    <span class="">Devices</span>
-                    <div class="device_cat_search">
-                        <input type="text" class="form-control" id="search" placeholder="Search any Devices">
-                        <a href="javascript:void(0);" class="btn">
-                            <img decoding="async" src="/wp-content/uploads/2023/09/search-icon.png" alt="search"></a>
+    <div class="cap-search-box-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-xl-12 col-lg-12 col-md-12">
+                    <div class="cap-search-box clearfix">
+                        <span class="">Devices</span>
+                        <div class="mobile-filter">
+                            <ul>
+                                <li>
+                                    <a href="javascript:void(0);" class="filter">
+                                        Filter <img decoding="async" src="/wp-content/uploads/2024/01/filter-icon.png"
+                                            alt="filter">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" class="search">
+                                        <img decoding="async" src="/wp-content/uploads/2023/09/search-icon.png"
+                                            alt="search"></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="device_cat_search">
+                            <input type="text" class="form-control" id="search" placeholder="Search any Devices">
+                            <a href="javascript:void(0);" class="btn">
+                                <img decoding="async" src="/wp-content/uploads/2023/09/search-icon.png"
+                                    alt="search"></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="row mt-4">
+    <div class="container">
+        <div class="row mt-5">
             <div class="col col-lg-3" id="filter-section">
+                <a href="javascript:void(0);" class="cancel-btn">
+                    <img decoding="async" src="/wp-content/uploads/2024/01/cancel-icon.png" alt="cancel"></a>
 
                 <div class="filter-accordion">
+
+                    <h2 class="h2text">Filters</h2>
+
                     <div class="accordion-item">
                         <h2 id="regularHeadingFirst" class="accordion-header">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -67,18 +123,8 @@
                                     </li>
                                     <li class="checkbox">
                                         <label>
-                                            <input class="form-check-input" type="checkbox" 
-                                            name="fl-model" value="Apple" id="Apple" /> Apple</label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input class="form-check-input" type="checkbox" 
-                                            name="fl-model" value="Samsung" id="Samsung" /> Samsung</label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input class="form-check-input" type="checkbox" 
-                                            name="fl-model" value="Xiaomi" id="Xiaomi" /> Xiaomi</label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model"
+                                                value="Apple" id="Apple" /> Apple</label>
                                     </li>
                                     <li class="checkbox">
                                         <label>
@@ -87,13 +133,45 @@
                                     </li>
                                     <li class="checkbox">
                                         <label>
-                                            <input class="form-check-input" type="checkbox" 
-                                            name="fl-model" value="Nothing" id="Nothing" /> Nothing</label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model"
+                                                value="Redmi" id="Redmi" /> Redmi</label>
+                                    </li>
+
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model"
+                                                value="Honor" id="Honor" /> Honor</label>
                                     </li>
                                     <li class="checkbox">
                                         <label>
-                                            <input class="form-check-input" type="checkbox" 
-                                            name="fl-model" value="Huawei" id="Huawei" /> Huawei</label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model" value="Oppo"
+                                                id="Oppo" /> Oppo</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model"
+                                                value="Samsung" id="Samsung" /> Samsung</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model"
+                                                value="Xiaomi" id="Xiaomi" /> Xiaomi</label>
+                                    </li>
+
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model"
+                                                value="Nothing" id="Nothing" /> Nothing</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model" value="ZTE"
+                                                id="ZTE" /> ZTE</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model"
+                                                value="Nubia" id="Nubia" /> Nubia</label>
                                     </li>
                                 </ul>
                             </div>
@@ -101,6 +179,159 @@
                     </div>
 
                     <div class="accordion-item">
+                        <h2 id="regularHeadingSecond" class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#regularCollapseSecond" aria-expanded="true"
+                                aria-controls="regularCollapseSecond">
+                                Phone Model
+                            </button>
+                        </h2>
+                        <div id="regularCollapseSecond" class="accordion-collapse collapse"
+                            aria-labelledby="regularHeadingSecond" data-bs-parent="#regularAccordionRobots">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model" value="All"
+                                                id="All" checked /> All</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model"
+                                                value="Apple" id="iPhone 15" /> iPhone 15</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model"
+                                                value="Apple" id="iPhone 15 Plus" /> iPhone 15 Plus</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model"
+                                                value="Apple" id="iPhone 15 Pro" /> iPhone 15 Pro</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model"
+                                                value="Apple" id="iPhone 15 Pro Max" /> iPhone 15 Pro Max</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model"
+                                                value="Apple" id="iPhone14" /> iPhone 14</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model"
+                                                value="Apple" id="iPhone13" /> iPhone 13</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model" value="Y36"
+                                                id="Y36" />Y36</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model" value="Y29"
+                                                id="Y29" /> Y29</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model"
+                                                value="Note 14" id="Note 14" /> Note 14</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model"
+                                                value="90 Lite" id="90 Lite" /> 90 Lite</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model" value="X9B"
+                                                id="X9B" /> X9B</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model" value="90"
+                                                id="90" /> 90</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model"
+                                                value="Galaxy A34" id="Galaxy A34" /> Galaxy A34</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model"
+                                                value="Galaxy A54" id="Galaxy A54" /> Galaxy A54 </label>
+                                    </li>
+
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model" value="S23+"
+                                                id="S23+" /> S23+</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model" value="S23"
+                                                id="S23" /> S23</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model" value="13T"
+                                                id="13T" /> 13T</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model"
+                                                value="Nothing" id="Nothing" /> Nothing(2)</label>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 id="regularHeadingThird" class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#regularCollapseThird" aria-expanded="true"
+                                aria-controls="regularCollapseThird">
+                                Promotion
+                            </button>
+                        </h2>
+                        <div id="regularCollapseThird" class="accordion-collapse collapse"
+                            aria-labelledby="regularHeadingThird" data-bs-parent="#regularAccordionRobots">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model" value="All"
+                                                id="All" checked /> All</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model" value=""
+                                                id="Yes Power 35 Rahmah" /> Yes Power 35 Rahmah</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model" value=""
+                                                id="Yes Infinite Basic Rahmah" /> Yes Infinite Basic Rahmah</label>
+                                    </li>
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input" type="checkbox" name="fl-model" value=""
+                                                id="Infinite+ Standard Rahmah" /> Infinite+ Standard Rahmah</label>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="accordion-item">
                         <h2 class="accordion-header" id="regularHeadingSecond">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#regularCollapseSecond" aria-expanded="false"
@@ -120,25 +351,12 @@
                                     <span id="max-price-txt">RM7000</span>
                                     <input type="range" class="form-range" min="1" max="7000" id="max-price" step="1"
                                         value="7000">
-                                </form>
-                                <!-- <ul>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input class="form-check-input" type="checkbox" name="fl-price" value=""
-                                                id="" /> RRP RM 5,299</label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input class="form-check-input" type="checkbox" name="fl-price"
-                                                value="" id="" /> RRP RM 5,299</label>
-                                    </li>
-                                    
-                                </ul> -->
+                                </form>                                
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="accordion-item">
+                    <!-- <div class="accordion-item">
                         <h2 class="accordion-header" id="regularHeadingThird">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#regularCollapseThird" aria-expanded="false"
@@ -164,9 +382,9 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="accordion-item">
+                    <!-- <div class="accordion-item">
                         <h2 class="accordion-header" id="regularHeadingFourth">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#regularCollapseFourth" aria-expanded="false"
@@ -192,7 +410,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
 
@@ -200,18 +418,19 @@
 
             <div class="col col-lg-9" id="device-list-section">
 
-                <div class="row"> <!-- flex-nowrap flex-xl-wrap -->
+                <div class="row"> 
+                    <!-- flex-nowrap flex-xl-wrap -->
 
-                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-id="Apple"
-                    data-category="Apple 5G contract All" data-price="5299">
-                        <div class="layer-planDevice" id="device-oppo-a77" data-plandevice="9160">
+                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-aos="fade-right" >
+                        <div class="layer-planDevice">
+                            <div class="offer-label">Hot</div>
                             <p class="panel-deviceImg">
-                                <img decoding="async" src="/wp-content/uploads/2023/09/iphone-dev-img.png">
+                                <img decoding="async" src="/wp-content/uploads/2023/09/iphone15.png">
                             </p>
                             <h3 class="name">Apple</h3>
-                            <h2 class="sku">iPhone 14 Pro</h2>
-                            <p class="price">RRP RM 5,299</p>
-                            <p class="panel-colors d-flex align-items justify-content-center">
+                            <h2 class="sku">iPhone 15</h2>
+                            <p class="price">RRP RM 4,399</p>
+                            <!-- <p class="panel-colors d-flex align-items justify-content-center">
                                 <span class="span-color bright-grey" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="" data-bs-original-title="Bright Grey" aria-label="Bright Grey"></span>
                                 <span class="span-color gold" data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -220,26 +439,28 @@
                                     title="" data-bs-original-title="Silver" aria-label="Silver"></span>
                                 <span class="span-color space-black" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="" data-bs-original-title="Space Black" aria-label="Space Black"></span>
-                            </p>
-                            <p class="f-price"><span>From</span> RM 118<span>/mth</span></p>
-                            <p class="panel-btn">
-                                <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
-                                    data-productid="9160">Buy</a>
-                            </p>
+                            </p> -->
+                            <div class="bottom-section">
+                                <p class="f-price"><span>From</span><br> <b class="f-price-rm">RM</b>XX<sub>/mth</sub>
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
+                                        data-productid="9160">Buy<br>Now</a>
+                                </p>
+                            </div>
 
                         </div>
                     </div>
 
-                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-id="Apple"
-                    data-category="Apple 5G contract All" data-price="3000">
-                        <div class="layer-planDevice" id="device-oppo-a77" data-plandevice="9160">
+                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-aos="fade-right">
+                        <div class="layer-planDevice">
                             <p class="panel-deviceImg">
-                                <img decoding="async" src="/wp-content/uploads/2023/09/iphone-dev-img.png">
+                                <img decoding="async" src="/wp-content/uploads/2023/09/iphone15-plus.png">
                             </p>
                             <h3 class="name">Apple</h3>
-                            <h2 class="sku">iPhone 14 Plus</h2>
-                            <p class="price">RRP RM 3,199</p>
-                            <p class="panel-colors d-flex align-items justify-content-center">
+                            <h2 class="sku">iPhone 15 Plus</h2>
+                            <p class="price">RRP RM 4,899</p>
+                            <!-- <p class="panel-colors d-flex align-items justify-content-center">
                                 <span class="span-color bright-grey" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="" data-bs-original-title="Bright Grey" aria-label="Bright Grey"></span>
                                 <span class="span-color gold" data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -248,26 +469,28 @@
                                     title="" data-bs-original-title="Silver" aria-label="Silver"></span>
                                 <span class="span-color space-black" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="" data-bs-original-title="Space Black" aria-label="Space Black"></span>
-                            </p>
-                            <p class="f-price"><span>From</span> RM 118<span>/mth</span></p>
-                            <p class="panel-btn">
-                                <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
-                                    data-productid="9160">Buy</a>
-                            </p>
+                            </p> -->
+                            <div class="bottom-section">
+                                <p class="f-price"><span>From</span><br> <b class="f-price-rm">RM</b>XX<sub>/mth</sub>
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
+                                        data-productid="9160">Buy<br>Now</a>
+                                </p>
+                            </div>
 
                         </div>
                     </div>
 
-                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-id="Apple"
-                    data-category="Apple 5G contract All" data-price="500">
-                        <div class="layer-planDevice" id="device-oppo-a77" data-plandevice="9160">
+                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-aos="fade-right">
+                        <div class="layer-planDevice">
                             <p class="panel-deviceImg">
-                                <img decoding="async" src="/wp-content/uploads/2023/09/iphone-dev-img.png">
+                                <img decoding="async" src="/wp-content/uploads/2023/09/iphone15-pro.png">
                             </p>
                             <h3 class="name">Apple</h3>
-                            <h2 class="sku">iPhone 14 Pro Max</h2>
-                            <p class="price">RRP RM 4,199</p>
-                            <p class="panel-colors d-flex align-items justify-content-center">
+                            <h2 class="sku">iPhone 15 Pro</h2>
+                            <p class="price">RRP RM 4,499</p>
+                            <!-- <p class="panel-colors d-flex align-items justify-content-center">
                                 <span class="span-color bright-grey" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="" data-bs-original-title="Bright Grey" aria-label="Bright Grey"></span>
                                 <span class="span-color gold" data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -276,26 +499,288 @@
                                     title="" data-bs-original-title="Silver" aria-label="Silver"></span>
                                 <span class="span-color space-black" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="" data-bs-original-title="Space Black" aria-label="Space Black"></span>
-                            </p>
-                            <p class="f-price"><span>From</span> RM 118<span>/mth</span></p>
-                            <p class="panel-btn">
-                                <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
-                                    data-productid="9160">Buy</a>
-                            </p>
+                            </p> -->
+                            <div class="bottom-section">
+                                <p class="f-price"><span>From</span><br> <b class="f-price-rm">RM</b>XX<sub>/mth</sub>
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
+                                        data-productid="9160">Buy<br>Now</a>
+                                </p>
+                            </div>
 
                         </div>
                     </div>
-
-                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" 
-                    data-id="Samsung" data-category="Samsung 5G contract All" data-price="200">
-                        <div class="layer-planDevice" id="device-oppo-a77" data-plandevice="9160">
+                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-aos="fade-right">
+                        <div class="layer-planDevice">
                             <p class="panel-deviceImg">
-                                <img decoding="async" src="/wp-content/uploads/2023/09/samsung-img.png">
+                                <img decoding="async" src="/wp-content/uploads/2023/09/iphone15-promax.png">
+                            </p>
+                            <h3 class="name">Apple</h3>
+                            <h2 class="sku">iPhone 15 Pro Max</h2>
+                            <p class="price">RRP RM 6,499</p>
+                            <!-- <p class="panel-colors d-flex align-items justify-content-center">
+                            <span class="span-color bright-grey" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                title="" data-bs-original-title="Bright Grey" aria-label="Bright Grey"></span>
+                            <span class="span-color gold" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                title="" data-bs-original-title="Gold" aria-label="Gold"></span>
+                            <span class="span-color silver" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                title="" data-bs-original-title="Silver" aria-label="Silver"></span>
+                            <span class="span-color space-black" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                title="" data-bs-original-title="Space Black" aria-label="Space Black"></span>
+                        </p> -->
+                            <div class="bottom-section">
+                                <p class="f-price"><span>From</span><br> <b class="f-price-rm">RM</b>XX<sub>/mth</sub>
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
+                                        data-productid="9160">Buy<br>Now</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-aos="fade-right">
+                        <div class="layer-planDevice">
+                            <p class="panel-deviceImg">
+                                <img decoding="async" src="/wp-content/uploads/2023/09/iphone14.png">
+                            </p>
+                            <h3 class="name">Apple</h3>
+                            <h2 class="sku">iPhone 14</h2>
+                            <p class="price">RRP RM 3,799</p>
+                            <!-- <p class="panel-colors d-flex align-items justify-content-center">
+                        <span class="span-color bright-grey" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                            title="" data-bs-original-title="Bright Grey" aria-label="Bright Grey"></span>
+                        <span class="span-color gold" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                            title="" data-bs-original-title="Gold" aria-label="Gold"></span>
+                        <span class="span-color silver" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                            title="" data-bs-original-title="Silver" aria-label="Silver"></span>
+                        <span class="span-color space-black" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                            title="" data-bs-original-title="Space Black" aria-label="Space Black"></span>
+                    </p> -->
+                            <div class="bottom-section">
+                                <p class="f-price"><span>From</span><br> <b class="f-price-rm">RM</b>XX<sub>/mth</sub>
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
+                                        data-productid="9160">Buy<br>Now</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-aos="fade-right">
+                        <div class="layer-planDevice">
+                            <p class="panel-deviceImg">
+                                <img decoding="async" src="/wp-content/uploads/2023/09/iphone13.png">
+                            </p>
+                            <h3 class="name">Apple</h3>
+                            <h2 class="sku">iPhone 13</h2>
+                            <p class="price">RRP RM 3,299</p>
+                            <!-- <p class="panel-colors d-flex align-items justify-content-center">
+                                <span class="span-color bright-grey" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                    title="" data-bs-original-title="Bright Grey" aria-label="Bright Grey"></span>
+                                <span class="span-color gold" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                    title="" data-bs-original-title="Gold" aria-label="Gold"></span>
+                                <span class="span-color silver" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                    title="" data-bs-original-title="Silver" aria-label="Silver"></span>
+                                <span class="span-color space-black" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                    title="" data-bs-original-title="Space Black" aria-label="Space Black"></span>
+                            </p> -->
+                            <div class="bottom-section">
+                                <p class="f-price"><span>From</span><br> <b class="f-price-rm">RM</b>XX<sub>/mth</sub>
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
+                                        data-productid="9160">Buy<br>Now</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-aos="fade-right">
+                        <div class="layer-planDevice">
+                            <p class="panel-deviceImg">
+                                <img decoding="async" src="/wp-content/uploads/2024/01/vivo1.png">
+                            </p>
+                            <h3 class="name">Vivo</h3>
+                            <h2 class="sku"><span>FREE</span> Y36</h2>
+                            <p class="price">RRP RM 1,099</p>
+                            <!-- <p class="panel-colors d-flex align-items justify-content-center">
+                    <span class="span-color bright-grey" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Bright Grey" aria-label="Bright Grey"></span>
+                    <span class="span-color gold" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Gold" aria-label="Gold"></span>
+                    <span class="span-color silver" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Silver" aria-label="Silver"></span>
+                    <span class="span-color space-black" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Space Black" aria-label="Space Black"></span>
+                </p> -->
+                            <div class="bottom-section">
+                                <p class="f-price"><span>From</span><br> <b class="f-price-rm">RM</b>XX<sub>/mth</sub>
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
+                                        data-productid="9160">Buy<br>Now</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-aos="fade-right">
+                        <div class="layer-planDevice">
+                            <p class="panel-deviceImg">
+                                <img decoding="async" src="/wp-content/uploads/2024/01/vivo2.png">
+                            </p>
+                            <h3 class="name">Vivo</h3>
+                            <h2 class="sku"><span>FREE</span> Y29</h2>
+                            <p class="price">RRP RM 1,899</p>
+                            <!-- <p class="panel-colors d-flex align-items justify-content-center">
+                    <span class="span-color bright-grey" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Bright Grey" aria-label="Bright Grey"></span>
+                    <span class="span-color gold" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Gold" aria-label="Gold"></span>
+                    <span class="span-color silver" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Silver" aria-label="Silver"></span>
+                    <span class="span-color space-black" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Space Black" aria-label="Space Black"></span>
+                </p> -->
+                            <div class="bottom-section">
+                                <p class="f-price"><span>From</span><br> <b class="f-price-rm">RM</b>XX<sub>/mth</sub>
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
+                                        data-productid="9160">Buy<br>Now</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-aos="fade-right">
+                        <div class="layer-planDevice">
+                            <p class="panel-deviceImg">
+                                <img decoding="async" src="/wp-content/uploads/2024/01/redmi12-black.png">
+                            </p>
+                            <h3 class="name">Redmi</h3>
+                            <h2 class="sku"><span>FREE</span> Note 14</h2>
+                            <p class="price">RRP RM 1,099</p>
+                            <!-- <p class="panel-colors d-flex align-items justify-content-center">
+                    <span class="span-color bright-grey" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Bright Grey" aria-label="Bright Grey"></span>
+                    <span class="span-color gold" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Gold" aria-label="Gold"></span>
+                    <span class="span-color silver" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Silver" aria-label="Silver"></span>
+                    <span class="span-color space-black" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Space Black" aria-label="Space Black"></span>
+                </p> -->
+                            <div class="bottom-section">
+                                <p class="f-price"><span>From</span><br> <b class="f-price-rm">RM</b>XX<sub>/mth</sub>
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
+                                        data-productid="9160">Buy<br>Now</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-aos="fade-right">
+                        <div class="layer-planDevice">
+                            <p class="panel-deviceImg">
+                                <img decoding="async" src="/wp-content/uploads/2024/01/honor90lite-black.png">
+                            </p>
+                            <h3 class="name">Honor</h3>
+                            <h2 class="sku"><span>FREE</span> 90 Lite</h2>
+                            <p class="price">RRP RM 1,499</p>
+                            <!-- <p class="panel-colors d-flex align-items justify-content-center">
+                    <span class="span-color bright-grey" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Bright Grey" aria-label="Bright Grey"></span>
+                    <span class="span-color gold" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Gold" aria-label="Gold"></span>
+                    <span class="span-color silver" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Silver" aria-label="Silver"></span>
+                    <span class="span-color space-black" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Space Black" aria-label="Space Black"></span>
+                </p> -->
+                            <div class="bottom-section">
+                                <p class="f-price"><span>From</span><br> <b class="f-price-rm">RM</b>XX<sub>/mth</sub>
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
+                                        data-productid="9160">Buy<br>Now</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-aos="fade-right">
+                        <div class="layer-planDevice">
+                            <p class="panel-deviceImg">
+                                <img decoding="async" src="/wp-content/uploads/2024/01/HonorX9B-black 2.png">
+                            </p>
+                            <h3 class="name">Honor</h3>
+                            <h2 class="sku"><span>FREE</span> X9B</h2>
+                            <p class="price">RRP RM 1,499</p>
+                            <!-- <p class="panel-colors d-flex align-items justify-content-center">
+                    <span class="span-color bright-grey" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Bright Grey" aria-label="Bright Grey"></span>
+                    <span class="span-color gold" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Gold" aria-label="Gold"></span>
+                    <span class="span-color silver" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Silver" aria-label="Silver"></span>
+                    <span class="span-color space-black" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Space Black" aria-label="Space Black"></span>
+                </p> -->
+                            <div class="bottom-section">
+                                <p class="f-price"><span>From</span><br> <b class="f-price-rm">RM</b>XX<sub>/mth</sub>
+                                </p>
+                                <p class="panel-btn">
+                                    <a h ref="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
+                                        data-productid="9160">Buy<br>Now</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div> 
+                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-aos="fade-right">
+                        <div class="layer-planDevice">
+                            <p class="panel-deviceImg">
+                                <img decoding="async" src="/wp-content/uploads/2024/01/honor90-silver.png">
+                            </p>
+                            <h3 class="name">Honor</h3>
+                            <h2 class="sku"><span>FREE</span> 90</h2>
+                            <p class="price">RRP RM 1,499</p>
+                            <!-- <p class="panel-colors d-flex align-items justify-content-center">
+                    <span class="span-color bright-grey" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Bright Grey" aria-label="Bright Grey"></span>
+                    <span class="span-color gold" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Gold" aria-label="Gold"></span>
+                    <span class="span-color silver" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Silver" aria-label="Silver"></span>
+                    <span class="span-color space-black" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        title="" data-bs-original-title="Space Black" aria-label="Space Black"></span>
+                </p> -->
+                            <div class="bottom-section">
+                                <p class="f-price"><span>From</span><br> <b class="f-price-rm">RM</b>XX<sub>/mth</sub>
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
+                                        data-productid="9160">Buy<br>Now</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-aos="fade-right">
+                        <div class="layer-planDevice">
+                            <p class="panel-deviceImg">
+                                <img decoding="async" src="/wp-content/uploads/2024/01/galaxy-A34.png">
                             </p>
                             <h3 class="name">Samsung</h3>
-                            <h2 class="sku">Galaxy Z Fold5</h2>
-                            <p class="price">RRP RM 5,299</p>
-                            <p class="panel-colors d-flex align-items justify-content-center">
+                            <h2 class="sku"><span>FREE</span> Galaxy A34</h2>
+                            <p class="price">RRP RM 1,599</p>
+                            <!-- <p class="panel-colors d-flex align-items justify-content-center">
                                 <span class="span-color bright-grey" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="" data-bs-original-title="Bright Grey" aria-label="Bright Grey"></span>
                                 <span class="span-color gold" data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -304,26 +789,27 @@
                                     title="" data-bs-original-title="Silver" aria-label="Silver"></span>
                                 <span class="span-color space-black" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="" data-bs-original-title="Space Black" aria-label="Space Black"></span>
-                            </p>
-                            <p class="f-price"><span>From</span> RM 178<span>/mth</span></p>
-                            <p class="panel-btn">
-                                <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
-                                    data-productid="9160">Buy</a>
-                            </p>
+                            </p> -->
+                            <div class="bottom-section">
+                                <p class="f-price"><span>From</span><br> <b class="f-price-rm">RM</b>XX<sub>/mth</sub>
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
+                                        data-productid="9160">Buy<br>Now</a>
+                                </p>
+                            </div>
 
                         </div>
                     </div>
-
-                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" 
-                    data-id="Samsung" data-category="Samsung 5G contract All" data-price="500">
-                        <div class="layer-planDevice" id="device-oppo-a77" data-plandevice="9160">
+                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-aos="fade-right">
+                        <div class="layer-planDevice">
                             <p class="panel-deviceImg">
-                                <img decoding="async" src="/wp-content/uploads/2023/09/samsung-img.png">
+                                <img decoding="async" src="/wp-content/uploads/2024/01/galaxy-A54.png">
                             </p>
                             <h3 class="name">Samsung</h3>
-                            <h2 class="sku">Galaxy S23 Ultra</h2>
-                            <p class="price">RRP RM 3,199</p>
-                            <p class="panel-colors d-flex align-items justify-content-center">
+                            <h2 class="sku"><span>FREE</span> Galaxy A54</h2>
+                            <p class="price">RRP RM 1,899</p>
+                            <!-- <p class="panel-colors d-flex align-items justify-content-center">
                                 <span class="span-color bright-grey" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="" data-bs-original-title="Bright Grey" aria-label="Bright Grey"></span>
                                 <span class="span-color gold" data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -332,26 +818,27 @@
                                     title="" data-bs-original-title="Silver" aria-label="Silver"></span>
                                 <span class="span-color space-black" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="" data-bs-original-title="Space Black" aria-label="Space Black"></span>
-                            </p>
-                            <p class="f-price"><span>From</span> RM 178<span>/mth</span></p>
-                            <p class="panel-btn">
-                                <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
-                                    data-productid="9160">Buy</a>
-                            </p>
+                            </p> -->
+                            <div class="bottom-section">
+                                <p class="f-price"><span>From</span><br> <b class="f-price-rm">RM</b>118<sub>/mth</sub>
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
+                                        data-productid="9160">Buy<br>Now</a>
+                                </p>
+                            </div>
 
                         </div>
                     </div>
-
-                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" 
-                    data-id="Samsung" data-category="Samsung 5G no-contract All" data-price="500">
-                        <div class="layer-planDevice" id="device-oppo-a77" data-plandevice="9160">
+                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-aos="fade-right">
+                        <div class="layer-planDevice">
                             <p class="panel-deviceImg">
-                                <img decoding="async" src="/wp-content/uploads/2023/09/samsung-img.png">
+                                <img decoding="async" src="/wp-content/uploads/2024/01/SamsungS23.png">
                             </p>
                             <h3 class="name">Samsung</h3>
-                            <h2 class="sku">Galaxy S23</h2>
-                            <p class="price">RRP RM 4,199</p>
-                            <p class="panel-colors d-flex align-items justify-content-center">
+                            <h2 class="sku">S23+</h2>
+                            <p class="price">RRP RM x,xxx</p>
+                            <!-- <p class="panel-colors d-flex align-items justify-content-center">
                                 <span class="span-color bright-grey" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="" data-bs-original-title="Bright Grey" aria-label="Bright Grey"></span>
                                 <span class="span-color gold" data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -360,26 +847,27 @@
                                     title="" data-bs-original-title="Silver" aria-label="Silver"></span>
                                 <span class="span-color space-black" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="" data-bs-original-title="Space Black" aria-label="Space Black"></span>
-                            </p>
-                            <p class="f-price"><span>From</span> RM 88<span>/mth</span></p>
-                            <p class="panel-btn">
-                                <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
-                                    data-productid="9160">Buy</a>
-                            </p>
+                            </p> -->
+                            <div class="bottom-section">
+                                <p class="f-price"><span>From</span><br> <b class="f-price-rm">RM</b>XX<sub>/mth</sub>
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
+                                        data-productid="9160">Buy<br>Now</a>
+                                </p>
+                            </div>
 
                         </div>
                     </div>
-
-                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" 
-                    data-id="Samsung" data-category="Samsung 5G no-contract All" data-price="500">
-                        <div class="layer-planDevice" id="device-oppo-a77" data-plandevice="9160">
+                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-aos="fade-right">
+                        <div class="layer-planDevice">
                             <p class="panel-deviceImg">
-                                <img decoding="async" src="/wp-content/uploads/2023/09/samsung-img.png">
+                                <img decoding="async" src="/wp-content/uploads/2024/01/Samsung-S23-Ultra.png">
                             </p>
                             <h3 class="name">Samsung</h3>
-                            <h2 class="sku">Galaxy S23</h2>
-                            <p class="price">RRP RM 4,199</p>
-                            <p class="panel-colors d-flex align-items justify-content-center">
+                            <h2 class="sku">S23</h2>
+                            <p class="price">RRP RM 1,899</p>
+                            <!-- <p class="panel-colors d-flex align-items justify-content-center">
                                 <span class="span-color bright-grey" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="" data-bs-original-title="Bright Grey" aria-label="Bright Grey"></span>
                                 <span class="span-color gold" data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -388,26 +876,27 @@
                                     title="" data-bs-original-title="Silver" aria-label="Silver"></span>
                                 <span class="span-color space-black" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="" data-bs-original-title="Space Black" aria-label="Space Black"></span>
-                            </p>
-                            <p class="f-price"><span>From</span> RM 88<span>/mth</span></p>
-                            <p class="panel-btn">
-                                <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
-                                    data-productid="9160">Buy</a>
-                            </p>
+                            </p> -->
+                            <div class="bottom-section">
+                                <p class="f-price"><span>From</span><br> <b class="f-price-rm">RM</b>XX<sub>/mth</sub>
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
+                                        data-productid="9160">Buy<br>Now</a>
+                                </p>
+                            </div>
 
                         </div>
                     </div>
-
-                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" 
-                    data-id="Samsung" data-category="Samsung 5G no-contract All" data-price="500">
-                        <div class="layer-planDevice" id="device-oppo-a77" data-plandevice="9160">
+                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-aos="fade-right">
+                        <div class="layer-planDevice">
                             <p class="panel-deviceImg">
-                                <img decoding="async" src="/wp-content/uploads/2023/09/samsung-img.png">
+                                <img decoding="async" src="/wp-content/uploads/2024/01/xiaomuM12-black.png">
                             </p>
-                            <h3 class="name">Samsung</h3>
-                            <h2 class="sku">Galaxy S23</h2>
-                            <p class="price">RRP RM 4,199</p>
-                            <p class="panel-colors d-flex align-items justify-content-center">
+                            <h3 class="name">Xiao Mi</h3>
+                            <h2 class="sku"><span>FREE</span> 13T</h2>
+                            <p class="price">RRP RM 1,599</p>
+                            <!-- <p class="panel-colors d-flex align-items justify-content-center">
                                 <span class="span-color bright-grey" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="" data-bs-original-title="Bright Grey" aria-label="Bright Grey"></span>
                                 <span class="span-color gold" data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -416,26 +905,27 @@
                                     title="" data-bs-original-title="Silver" aria-label="Silver"></span>
                                 <span class="span-color space-black" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="" data-bs-original-title="Space Black" aria-label="Space Black"></span>
-                            </p>
-                            <p class="f-price"><span>From</span> RM 88<span>/mth</span></p>
-                            <p class="panel-btn">
-                                <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
-                                    data-productid="9160">Buy</a>
-                            </p>
+                            </p> -->
+                            <div class="bottom-section">
+                                <p class="f-price"><span>From</span><br> <b class="f-price-rm">RM</b>XX<sub>/mth</sub>
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
+                                        data-productid="9160">Buy<br>Now</a>
+                                </p>
+                            </div>
 
                         </div>
                     </div>
-
-                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" 
-                    data-id="Samsung" data-category="Samsung 5G no-contract All" data-price="500">
-                        <div class="layer-planDevice" id="device-oppo-a77" data-plandevice="9160">
+                    <div class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn" data-aos="fade-right">
+                        <div class="layer-planDevice">
                             <p class="panel-deviceImg">
-                                <img decoding="async" src="/wp-content/uploads/2023/09/samsung-img.png">
+                                <img decoding="async" src="/wp-content/uploads/2024/01/nothingphone-black.png">
                             </p>
-                            <h3 class="name">Samsung</h3>
-                            <h2 class="sku">Galaxy S23</h2>
-                            <p class="price">RRP RM 4,199</p>
-                            <p class="panel-colors d-flex align-items justify-content-center">
+                            <h3 class="name">Nothing Phone</h3>
+                            <h2 class="sku"><span>FREE</span> (2)</h2>
+                            <p class="price">RRP RM 1,599</p>
+                            <!-- <p class="panel-colors d-flex align-items justify-content-center">
                                 <span class="span-color bright-grey" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="" data-bs-original-title="Bright Grey" aria-label="Bright Grey"></span>
                                 <span class="span-color gold" data-bs-toggle="tooltip" data-bs-placement="bottom"
@@ -444,25 +934,29 @@
                                     title="" data-bs-original-title="Silver" aria-label="Silver"></span>
                                 <span class="span-color space-black" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                     title="" data-bs-original-title="Space Black" aria-label="Space Black"></span>
-                            </p>
-                            <p class="f-price"><span>From</span> RM 88<span>/mth</span></p>
-                            <p class="panel-btn">
-                                <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
-                                    data-productid="9160">Buy</a>
-                            </p>
+                            </p> -->
+                            <div class="bottom-section">
+                                <p class="f-price"><span>From</span><br> <b class="f-price-rm">RM</b>XX<sub>/mth</sub>
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="javascript:void(0)" class="btn btn-elevate-buyplan btn-getplan"
+                                        data-productid="9160">Buy<br>Now</a>
+                                </p>
+                            </div>
 
                         </div>
                     </div>
 
-                    <a href="javascript:void(0);" id="loadmore">Load More</a>
+                    <div class="col col-md-12 col-xl-12 mb-xl-12 mt-5">
+                        <a href="javascript:void(0);" id="scroll-top">Back To Top</a>
+                    </div>
 
                 </div>
             </div>
 
         </div>
-
-
     </div>
+
 </section>
 <!-- Mid-section ENDS -->
 
@@ -485,7 +979,7 @@
                             aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample" style="">
                             <div class="accordion-body">
                                 <p>Switch To Yes without changing your number, visit <a
-                                        href="https://yesmy-dev.azurewebsites.net/docs/faq/switch-to-yes/yes-mobile-number-portability-prepaid/">here</a>
+                                        href="/docs/faq/switch-to-yes/yes-mobile-number-portability-prepaid/">here</a>
                                     for more info.</p>
                             </div>
                         </div>
@@ -498,13 +992,12 @@
                         <div id="flush-collapseTwo" class="accordion-collapse collapse"
                             aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body">
-                                <p>To check out our 5G coverage areas, you can visit <a
-                                        href="https://yesmy-dev.azurewebsites.net/coverage/">here</a>.</p>
+                                <p>To check out our 5G coverage areas, you can visit <a href="/coverage/">here</a>.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <p class="text-center mb-0"><a href="/faq" class="viewall-btn">View All FAQ <span class="iconify"
+                <p class="text-center mb-0"><a href="/faq/" class="viewall-btn">View All FAQ <span class="iconify"
                             data-icon="akar-icons:arrow-right"></span></a></p>
             </div>
         </div>

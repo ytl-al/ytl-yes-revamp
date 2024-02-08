@@ -358,6 +358,25 @@
     }
 
     @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+
+        .hero-slider .slick-dots {
+            bottom: 10px;
+        }
+
+        .hero-slider .slick-dots li button:before {
+            font-size: 12px;
+            line-height: 16px;
+            color: #cbcbcb !important;
+        }
+
+        .hero-slider .slick-dots li.slick-active button:before {
+            opacity: .75;
+            color: #ff0084 !important;
+        }
+
+        .hero-slider.slick-dotted.slick-slider {
+            margin-bottom: 0px;
+        }
         #prepaid-top-banner {
             background-image: url('/wp-content/uploads/2023/12/prepaid-banner-bg-mob.jpg');
             background-size: cover;
