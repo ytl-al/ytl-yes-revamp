@@ -143,6 +143,11 @@ section {
         padding-left: 15px;
         padding-right: 15px;
     }
+        .top-tabs-container .row{
+        margin-top: 0 !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        }
 }
 
 
@@ -162,6 +167,7 @@ section {
     padding-top: .7rem;
     padding-bottom: .7rem;
 }
+
 
 .nav-container .navbar-brand {
     margin-right: 2.8rem;

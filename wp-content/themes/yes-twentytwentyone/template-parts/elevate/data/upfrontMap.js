@@ -116,5 +116,96 @@ var mapPlanIds = {
         deviceID: 8,
     },
 
+    2792: {
+        planID: 2800,
+        deviceID: 9,
+    },
+    2794: {
+        planID: 2802,
+        deviceID: 9,
+    },
+    2796: {
+        planID: 2804,
+        deviceID: 9,
+    },
+    2798: {
+        planID: 2806,
+        deviceID: 9,
+    },
+
+    2808: {
+        planID: 2814,
+        deviceID: 10,
+    },
+    2810: {
+        planID: 2816,
+        deviceID: 10,
+    },
+    2812: {
+        planID: 2818,
+        deviceID: 10,
+    },
+
+    2832: {
+        planID: 2838,
+        deviceID: 11,
+    },
+    2834: {
+        planID: 2840,
+        deviceID: 11,
+    },
+    2836: {
+        planID: 2842,
+        deviceID: 11,
+    },
+
+    2820: {
+        planID: 2826,
+        deviceID: 12,
+    },
+    2822: {
+        planID: 2828,
+        deviceID: 12,
+    },
+    2824: {
+        planID: 2830,
+        deviceID: 12,
+    },
+
+    2876: {
+        planID: 2880,
+        deviceID: 13,
+    },
+    2878: {
+        planID: 2882,
+        deviceID: 13,
+    },
+
+    2884: {
+        planID: 2888,
+        deviceID: 14,
+    },
+    2886: {
+        planID: 2890,
+        deviceID: 14,
+    },
+
+    2776: {
+        planID: 2780,
+        deviceID: 14,
+    },
+    2778: {
+        planID: 2782,
+        deviceID: 14,
+    },
+
+    2784: {
+        planID: 2788,
+        deviceID: 14,
+    },
+    2786: {
+        planID: 2790,
+        deviceID: 14,
+    },
 
 };

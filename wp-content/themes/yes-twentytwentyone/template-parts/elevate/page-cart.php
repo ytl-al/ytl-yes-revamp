@@ -134,8 +134,13 @@
                                             <div class="accordion-header" @click="showPlanDetail()"> {{orderSummary.product.selected.plan.name}} <i
                                                         class="icon icon_arrow_down"></i></div>
                                             <div class="text-description mt-3">{{orderSummary.product.selected.plan.shortDescription}}</div>
-                                            <ul class="accordion-body list-1 mt-3">
+                                          
+                                            <ul class="accordion-body list-1 mt-3" v-if="getLang!='ms-MY'" >
+                
                                                 <li v-for="(list, index) in orderSummary.product.selected.plan.longDescriptionEN">{{list}}</li>
+                                            </ul>
+                                            <ul class="accordion-body list-1 mt-3" v-else>
+                                                <li v-for="(list, index) in orderSummary.product.selected.plan.longDescriptionBM">{{list}}</li>
                                             </ul>
                                         </div>
                                         <div class="text-description mt-3">
@@ -162,9 +167,9 @@
                                     </div>
 									</div>
                                     <div class="hr_line"></div>
-                                    <div class="text-note" v-if="orderSummary.orderDetail.productCode">
+                                    <!-- <div class="text-note" v-if="orderSummary.orderDetail.productCode">
                                         <div v-for="(detail, index) in orderSummary.product.selected.productNote">{{detail | trim}}</div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -214,15 +219,15 @@
                     <div class="eSIM" v-if="(StockBalance == 0)">
                         <img src="/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png" alt="...">
                      <div>
-                      <h6>This device is temporarily out of stock. </h6>
-                      <p>Click below to be notified of when this device is available.</p>
+                      <h6><?php echo esc_html('This device is temporarily out of stock.','cart-yes.my')  ?> </h6>
+                      <p><?php echo esc_html('Click below to be notified of when this device is available.','cart-yes.my')  ?></p>
                       </div>
                     </div>
 
                          <!-- ----------- -->
                            <div>
                                 <div v-if="(StockBalance == 0)">
-                                    <a href="javascript:void(0)" @Click="triggerModalNotify" class="pink-btn text-uppercase d-block" >NOTIFY ME</a>
+                                    <a href="javascript:void(0)" @Click="triggerModalNotify" class="pink-btn text-uppercase d-block" ><?php echo esc_html('NOTIFY ME','cart-yes.my') ?></a>
                                 </div>
                                 <div v-else>
                                     <a href="javascript:void(0)" @click="goNext" class="pink-btn text-uppercase d-block" >{{ renderText('checkout') }}</a>
@@ -260,6 +265,7 @@
                 StockBalance:1,
                 elevateLSData: null,
                 productId: null,
+                getLang:null,
                 isCartEmpty: false,
                 hasFetchPlan: false,
                 ywos_contract:"Normal",
@@ -306,10 +312,13 @@
                 currentStep: 0,
                 elevate: null,
                 allowSubmit: false,
+                siteLang:'',
             },
             created: function() {
                 var self = this;
                 setTimeout(function() {
+                   
+              
                     elevate.init();
                     self.getPlanData();
                 }, 500);
@@ -318,8 +327,9 @@
                 getPlanData: function() {
                     var self = this;
                     if (elevate.validateSession(self.currentStep)) {
-
+                        self.getLang = elevate.lsData.siteLang;
                         self.productId = elevate.lsData.meta.productId;
+                        // console.log(self.getLang,'self.productId');
                         self.dealer = elevate.lsData.meta.dealer;
 
                         if(elevate.lsData.product){

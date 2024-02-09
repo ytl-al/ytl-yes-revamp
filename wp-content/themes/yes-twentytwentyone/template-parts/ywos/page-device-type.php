@@ -259,6 +259,7 @@
                     plan_id: '',
                     planDetails: []
                 },
+                currentStep:0,
                 ywos: null,
                 ywosLSName: 'yesYWOS',
                 pageText: {
@@ -320,7 +321,9 @@
                 getPlanData: function() {
                     var self = this;
                     if (ywos.validateSession(self.currentStep)) {
-                        self.productId = ywos.lsData.meta.deviceID;
+                        // self.productId = ywos.lsData.meta.deviceID;
+                        self.productId = '7';
+
                         self.ajaxGetPlanData();
                     }
                 },

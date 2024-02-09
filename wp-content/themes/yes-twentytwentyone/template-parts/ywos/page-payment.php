@@ -83,6 +83,48 @@
     .layer-selectedCard img {
         display: none;
     }
+
+
+
+/* ------------29/01/2024------------- */
+    .payment_radio  {
+  display: flex;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0.375em;
+}
+.payment_radio  input {
+  position: absolute;
+  left: -9999px;
+}
+
+.payment_radio  input:checked + label:before {
+  box-shadow: inset 0 0 0 0.4375em #FF0084;
+}
+.payment_radio  label {
+  display: flex;
+  align-items: center;
+  padding: 0.375em 0.75em 0.375em 0.375em;
+  border-radius: 99em;
+  transition: 0.25s ease;
+}
+
+.payment_radio  label:before {
+  display: flex;
+  flex-shrink: 0;
+  content: "";
+  background-color: #fff;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  margin-right: 0.375em;
+  transition: 0.25s ease;
+  box-shadow: inset 0 0 0 0.125em #FF0084;
+}
+
+    
 </style>
 
 <!-- Vue Wrapper STARTS -->
@@ -195,7 +237,7 @@
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation" v-if="!maybankIPP.disabled">
-                                <button type="button" class="nav-link" id="nav-creditcard" role="tab" data-paymentnav="CREDIT_CARD_IPP" data-bs-toggle="pill" data-bs-target="#tab-creditcard" aria-controls="tab-creditcard" aria-selected="false" v-on:click="selectPaymentMethod('CREDIT_CARD_IPP')">
+                                <button type="button" class="nav-link" id="nav-creditcard" role="tab" data-paymentnav="IPAY88_CC_IPP" data-bs-toggle="pill" data-bs-target="#tab-creditcard" aria-controls="tab-creditcard" aria-selected="false" v-on:click="selectPaymentMethod('IPAY88_CC_IPP')">
                                     <img src="/wp-content/uploads/2022/02/maybank-ipp-logo.png" />
                                 </button>
                             </li>
@@ -216,68 +258,111 @@
                                             </div>
                                         </div>
                                     </template>
-                                    <div v-bind:class="{ 'd-none': (maybankIPP.disabled || paymentInfo.paymentMethod != 'CREDIT_CARD_IPP') }">
+                        
+                                    <div v-bind:class="{ 'd-none': (maybankIPP.disabled ||  paymentInfo.paymentMethod != 'IPAY88_CC_IPP') }">
                                         <div class="row mb-4">
                                             <div class="col-lg-6">
-                                                <h4 class="my-3">Maybank 0% EzyPay ({{ renderText('strInstalmentPayment') }})</h4>
+                                                <h4 class="my-3">Instalment Payment Plan</h4>
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-8">
                                                 <label class="form-label" for="select-tenure">{{ renderText('strInstalmentType') }}</label>
                                                 <div class="form-group">
-                                                    <select class="form-control form-select" id="select-tenure" data-live-search="false" name="ipp-tenure" v-model="paymentInfo.ippType" @change="watchTenureChange">
+                                                    <div v-for="(ippType, index) in maybankIPP.ippTypeList">
+                                                        <div class="row mb-4">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <div class="payment_radio">
+                                                                        <input type="radio" :id="'input-pmCard-' + index" name="ippBankSelection" :value="index" v-on:click="ippBankSelection(index)">
+                                                                        <label class="form-label" :for="'input-pmCard-' + index" :id="'label-pmCard-' + index">{{index}}</label>
+                                                                    </div>
+                                                                     <div v-if="maybankIPP.ippSelection.ippBankSelection == index" class="mt-2 ms-4">
+                                                                         <select class="form-control form-select" id="select-tenure"
+                                                                            v-model="maybankIPP.ippSelection.installmentPlanId"
+                                                                             data-live-search="false" name="ipp-tenure">
+                                                                             <option value="" disabled="disabled" selected="selected">Select Installment Type</option>
+                                                                             <option :value="installmentData.installmentPlanId" 
+                                                                                v-for="installmentData in ippType">{{installmentData.displayInstallmentPlan}}</option>
+                                                                         </select>
+                                                                     </div>   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Your content goes here -->
+                                                        <!-- <div class="row mb-4" v-if="ipp.ippSelection.bank == index">
+                                                            <div class="col-lg-7">
+                                                                <div class="form-group">
+                                                                    <select class="form-control form-select" id="select-tenure"
+                                                                        data-live-search="false" name="ipp-tenure"
+                                                                        v-model="ipp.ippSelection.installmentID" @change="watchTenureChange">
+                                                                        <option value="" disabled="disabled"
+                                                                            selected="selected">Select
+                                                                            Installment Type</option>
+                                                                        <option v-for="intallmentData in ippType"
+                                                                            :value="intallmentData.installmentPlanId">@{{ intallmentData.displayInstallmentPlan }}
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div> -->
+                                                    </div>
+                                                    <!-- <select class="form-control form-select" id="select-tenure" data-live-search="false" name="ipp-tenure" v-model="paymentInfo.ippType" @change="">
                                                         <option value="" disabled="disabled" selected="selected">{{ renderText('selectInstallmentType') }}</option>
                                                         <option v-for="ippType in maybankIPP.ippTypeList" :value="ippType.ippTenureType">{{ ippType.ippTenureTypeDisplay }}</option>
-                                                    </select>
+                                                    </select> -->
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row mb-4">
-                                        <div class="col-lg-6 col-12">
-                                            <label class="form-label" for="input-chName">* {{ renderText('labelCardName') }}</label>
-                                            <div class="input-group align-items-center">
-                                                <input type="text" class="form-control" id="input-chName" v-model="paymentInfo.nameOnCard" @input="watchAllowSubmit" placeholder="John Doe" @keypress="checkInputCharacters(event, 'alpha')" />
+                                    <div v-if="(paymentInfo.paymentMethod == 'CREDIT_CARD') || (paymentInfo.paymentMethod == 'IPAY88_CC_IPP' && maybankIPP.ippSelection.installmentPlanId)">
+                                        <div class="row mb-4">
+                                            <div class="col-lg-6 col-12">
+                                                <label class="form-label" for="input-chName">* {{ renderText('labelCardName') }}</label>
+                                                <div class="input-group align-items-center">
+                                                    <input type="text" class="form-control" id="input-chName" v-model="paymentInfo.nameOnCard" @input="watchAllowSubmit" placeholder="John Doe" @keypress="checkInputCharacters(event, 'alpha')" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6 col-12">
+                                                <label class="form-label" for="input-chNumber1">* {{ renderText('labelCardNumber') }}</label>
+                                                <div class="float-end layer-selectedCard">
+                                                    <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/visa.png" height="15" v-bind:class="{ 'd-block': (paymentInfo.cardType == 'VISA') }" />
+                                                    <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" height="25" v-bind:class="{ 'd-block': (paymentInfo.cardType == 'AMEX') }" />
+                                                    <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/mastercard.png" height="30" v-bind:class="{ 'd-block': (paymentInfo.cardType == 'MASTERCARD') }" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3 align-items-center g-2">
+                                            <div class="col-lg-6 col-12 mb-1">
+                                                <div class="input-group align-items-center">
+                                                    <input type="text" class="form-control text-center" id="input-cardInput1" v-model="cardholder.number1" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(1, event)" @keypress="checkInputCharacters(event, 'numeric', false)" /><span class="mx-1">-</span>
+                                                    <input type="text" class="form-control text-center" id="input-cardInput2" v-model="cardholder.number2" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(2, event)" @keypress="checkInputCharacters(event, 'numeric', false)" /><span class="mx-1">-</span>
+                                                    <input type="text" class="form-control text-center" id="input-cardInput3" v-model="cardholder.number3" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(3, event)" @keypress="checkInputCharacters(event, 'numeric', false)" /><span class="mx-1">-</span>
+                                                    <input type="text" class="form-control text-center" id="input-cardInput4" v-model="cardholder.number4" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(4, event)" @keypress="checkInputCharacters(event, 'numeric', false)" />
+                                                </div>
+                                            </div>
+                                            <p class="info mb-3">{{ renderText('infoCardNumber') }}</p>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-lg-3 col-12">
+                                                <label class="form-label" for="input-cardInput5">* {{ renderText('labelCardExpiry') }}</label>
+                                                <div class="input-group align-items-center">
+                                                    <input type="text" class="form-control text-center" id="input-cardInput5" autocomplete="off" v-model="paymentInfo.cardExpiryMonth" placeholder="00" maxlength="2" @input="checkCardInputJump(5, event)" @keypress="checkInputCharacters(event, 'numeric', false)" /> <span class="mx-2">/</span>
+                                                    <input type="text" class="form-control text-center" id="input-cardInput6" autocomplete="off" v-model="paymentInfo.cardExpiryYear" placeholder="0000" maxlength="4" @input="checkCardInputJump(6, event)" @keypress="checkInputCharacters(event, 'numeric', false)" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 col-12">
+                                                <label class="form-label" for="input-cardInput7">* CVV</label>
+                                                <div class="input-group align-items-center">
+                                                    <input type="password" class="form-control text-center" id="input-cardInput7" autocomplete="off" v-model="paymentInfo.cardCVV" @input="watchAllowSubmit" placeholder="***" maxlength="3" @keypress="checkInputCharacters(event, 'numeric', false)" />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-lg-6 col-12">
-                                            <label class="form-label" for="input-chNumber1">* {{ renderText('labelCardNumber') }}</label>
-                                            <div class="float-end layer-selectedCard">
-                                                <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/visa.png" height="15" v-bind:class="{ 'd-block': (paymentInfo.cardType == 'VISA') }" />
-                                                <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/amex.png" height="25" v-bind:class="{ 'd-block': (paymentInfo.cardType == 'AMEX') }" />
-                                                <img src="https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cc-icons/mastercard.png" height="30" v-bind:class="{ 'd-block': (paymentInfo.cardType == 'MASTERCARD') }" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3 align-items-center g-2">
-                                        <div class="col-lg-6 col-12 mb-1">
-                                            <div class="input-group align-items-center">
-                                                <input type="text" class="form-control text-center" id="input-cardInput1" v-model="cardholder.number1" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(1, event)" @keypress="checkInputCharacters(event, 'numeric', false)" /><span class="mx-1">-</span>
-                                                <input type="text" class="form-control text-center" id="input-cardInput2" v-model="cardholder.number2" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(2, event)" @keypress="checkInputCharacters(event, 'numeric', false)" /><span class="mx-1">-</span>
-                                                <input type="text" class="form-control text-center" id="input-cardInput3" v-model="cardholder.number3" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(3, event)" @keypress="checkInputCharacters(event, 'numeric', false)" /><span class="mx-1">-</span>
-                                                <input type="text" class="form-control text-center" id="input-cardInput4" v-model="cardholder.number4" placeholder="xxxx" maxlength="4" @input="checkCardInputJump(4, event)" @keypress="checkInputCharacters(event, 'numeric', false)" />
-                                            </div>
-                                        </div>
-                                        <p class="info mb-3">{{ renderText('infoCardNumber') }}</p>
-                                    </div>
-                                    <div class="row mb-4">
-                                        <div class="col-lg-3 col-12">
-                                            <label class="form-label" for="input-cardInput5">* {{ renderText('labelCardExpiry') }}</label>
-                                            <div class="input-group align-items-center">
-                                                <input type="text" class="form-control text-center" id="input-cardInput5" autocomplete="off" v-model="paymentInfo.cardExpiryMonth" placeholder="00" maxlength="2" @input="checkCardInputJump(5, event)" @keypress="checkInputCharacters(event, 'numeric', false)" /> <span class="mx-2">/</span>
-                                                <input type="text" class="form-control text-center" id="input-cardInput6" autocomplete="off" v-model="paymentInfo.cardExpiryYear" placeholder="0000" maxlength="4" @input="checkCardInputJump(6, event)" @keypress="checkInputCharacters(event, 'numeric', false)" />
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 col-12">
-                                            <label class="form-label" for="input-cardInput7">* CVV</label>
-                                            <div class="input-group align-items-center">
-                                                <input type="password" class="form-control text-center" id="input-cardInput7" autocomplete="off" v-model="paymentInfo.cardCVV" @input="watchAllowSubmit" placeholder="***" maxlength="3" @keypress="checkInputCharacters(event, 'numeric', false)" />
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
+                                    
                                     <!-- <div class="row mb-4">
                                         <div class="col-lg-6 col-12">
                                             <label class="form-label" for="select-chCountry">Issuing Country</label>
@@ -483,6 +568,10 @@
                         duration: 0,
                         administrationPayment: 0.00,
                         monthlyInstallment: ''
+                    },
+                    ippSelection: {
+                        ippBankSelection: '',
+                        installmentPlanId: ''
                     }
                 },
 
@@ -717,6 +806,7 @@
                         self.pageValid = true;
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
                         self.ajaxGetFPXBankList();
+						self.ajaxGetMaybankIPP88();
                         self.updateData();
 
                         self.isTargetedPromo = ywos.lsData.isTargetedPromo;
@@ -762,16 +852,50 @@
                             }, 500);
                         });
                 },
-                ajaxGetMaybankIPPTenures: function() {
+                // ajaxGetMaybankIPPTenures: function() {
+                    // var self = this;
+                    // axios.post(apiEndpointURL + '/get-ipp-tenures' + '?nonce=' + yesObj.nonce, {
+                            // 'plan_name': self.orderSummary.plan.planName
+                        // })
+                        // .then((response) => {
+                            // var data = response.data;
+                            // self.maybankIPP.ippTypeList = data.ippTypList;
+
+                            // self.getMaybankIPPInstallments();
+                        // })
+                        // .catch((error) => {
+                            // // console.log(error.response.data);
+                        // })
+                        // .finally(() => {
+                            // setTimeout(function() {
+                                // $('.form-select#select-tenure').selectpicker('refresh');
+                                // toggleOverlay(false);
+                            // }, 500);
+                        // });
+                // },
+				
+				 ajaxGetMaybankIPP88: function() {
                     var self = this;
-                    axios.post(apiEndpointURL + '/get-ipp-tenures' + '?nonce=' + yesObj.nonce, {
-                            'plan_name': self.orderSummary.plan.planName
+                    var orderSummary = ywos.lsData.meta.orderSummary;
+                    // console.log(orderSummary.plan.planName, orderSummary.plan.mobilePlanId);
+                    axios.post(apiEndpointURL + '/get-ipp-88' + '?nonce=' + yesObj.nonce, {
+                            'plan_name': orderSummary.plan.planName,
+							'plan_id': orderSummary.plan.mobilePlanId,
                         })
                         .then((response) => {
+							// console.log(self.orderSummary.plan.planName);
                             var data = response.data;
-                            self.maybankIPP.ippTypeList = data.ippTypList;
+							 self.maybankIPP.ippTypeList = data.ipay88IPPInstallmentInfoList;
+                        if (data.ipay88IPPInstallmentInfoList) {
+                            const keys = Object.keys(data.ipay88IPPInstallmentInfoList);
+                            if (keys.length > 0) {
+                                self.maybankIPP.disabled = false;
+                            }
+                        }
+							
+                            // self.maybankIPP.ippTypeList = data.ippTypList;
 
-                            self.getMaybankIPPInstallments();
+                            // self.getMaybankIPPInstallments();
                         })
                         .catch((error) => {
                             // console.log(error.response.data);
@@ -804,19 +928,19 @@
                             // console.log(error.response.data);
                         });
                 },
-                getMaybankIPPInstallments: function() {
-                    var self = this;
-                    var totalAmount = self.orderSummary.due.total;
-                    var tenure = '';
+                // getMaybankIPPInstallments: function() {
+                    // var self = this;
+                    // var totalAmount = self.orderSummary.due.total;
+                    // var tenure = '';
 
-                    if (self.maybankIPP.ippTypeList.length) {
-                        self.maybankIPP.disabled = false;
-                        self.maybankIPP.ippTypeList.map(function(type) {
-                            tenure = type.ippTenureType;
-                            self.ajaxGetMaybankIPPInstallments(totalAmount, tenure);
-                        });
-                    }
-                },
+                    // if (self.maybankIPP.ippTypeList.length) {
+                        // self.maybankIPP.disabled = false;
+                        // self.maybankIPP.ippTypeList.map(function(type) {
+                            // tenure = type.ippTenureType;
+                            // self.ajaxGetMaybankIPPInstallments(totalAmount, tenure);
+                        // });
+                    // }
+                // },
                 updateData: function() {
                     var self = this;
                     self.orderSummary = ywos.lsData.meta.orderSummary;
@@ -827,7 +951,7 @@
                     self.paymentInfo.sst = self.orderSummary.due.taxesSST;
                     self.paymentInfo.totalAmount = self.orderSummary.due.total;
 
-                    self.ajaxGetMaybankIPPTenures();
+                    // self.ajaxGetMaybankIPPTenures();
                 },
                 toggleModalAlert: function(modalHeader = '', modalText = '') {
                     $('#modal-titleLabel').html(modalHeader);
@@ -951,6 +1075,9 @@
                 },
                 ajaxCreateYOSOrder: function() {
                     var self = this;
+					
+					console.log(self.maybankIPP.ippSelection.installmentPlanId,'self.maybankIPP.ippSelection.installmentID');
+					
                     if (ywos.lsData.meta.customerDetails.upFrontPayment == 'true') {
                         self.upFontpayemtTotal = (self.paymentInfo.totalAmount) - (self.orderSummary.due.foreignerDeposit)
                     } else {
@@ -969,7 +1096,12 @@
                     }else{
                         self.phone_number=self.deliveryInfo.msisdn;
                     }
-                    console.log(self.phone_number);
+                    
+					
+					let ipay88InstallmentPlanId = '';
+                if ( self.paymentInfo.paymentMethod == 'IPAY88_CC_IPP') {
+                    ipay88InstallmentPlanId = self.maybankIPP.ippSelection.installmentPlanId;
+                }
                     // alert(self.upFontpayemtTotal)
                     // alert(self.paymentInfo.paymentMethod);
                     var params = {
@@ -1021,7 +1153,9 @@
                         'esim': self.eSIM,
                         'applicationSource': "YOS",
                         'stagingOrderNumber':self.deliveryInfo.stagingOrderNumber,
+						'ipay88InstallmentPlanId': ipay88InstallmentPlanId,
                     };
+					
                     axios.post(apiEndpointURL + '/create-yos-order' + '?nonce=' + yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
@@ -1201,8 +1335,8 @@
                     var isFilled = true;
                     var paymentInfo = self.paymentInfo;
                     var paymentMethod = self.paymentInfo.paymentMethod;
-
-                    if (paymentMethod == 'CREDIT_CARD' || paymentMethod == 'CREDIT_CARD_IPP') {
+					if (paymentMethod == 'CREDIT_CARD' || paymentMethod =='IPAY88_CC_IPP') {
+						
                         if (
                             self.paymentInfo.nameOnCard.trim() == '' ||
                             self.paymentInfo.cardNumber.trim() == '' ||
@@ -1211,6 +1345,7 @@
                             self.paymentInfo.cardCVV.trim().length < 3
                         ) {
                             isFilled = false;
+							
                         }
                     } else if (paymentMethod == 'FPX') {
                         if (self.paymentInfo.bankCode.trim() == '' || self.paymentInfo.bankName.trim() == '') {
@@ -1222,8 +1357,9 @@
                         }
                     }
 
-                    if (paymentMethod == 'CREDIT_CARD_IPP' && self.paymentInfo.ippType == '') {
+                    if (paymentMethod == 'IPAY88_CC_IPP' && self.maybankIPP.ippSelection.installmentPlanId == '') {
                         isFilled = false;
+						
                     }
 
                     if (isFilled) {
@@ -1231,6 +1367,9 @@
                     } else {
                         self.allowSubmit = false;
                     }
+					
+					
+					
                 },
                 initTabs: function() {
                     var self = this;
@@ -1239,6 +1378,16 @@
                 },
                 selectPaymentMethod: function(paymentMethod) {
                     this.paymentInfo.paymentMethod = paymentMethod;
+					if (paymentMethod == 'CREDIT_CARD' || paymentMethod =='IPAY88_CC_IPP') {
+						
+                       
+                            self.paymentInfo.nameOnCard == '' ||
+                            self.paymentInfo.cardNumber == '' ||
+                            self.paymentInfo.cardExpiryMonth.trim().length < 2 ||
+                            self.paymentInfo.cardExpiryYear.trim().length < 4 ||
+                            self.paymentInfo.cardCVV.trim().length < 3
+                       
+                    }
                     this.watchAllowSubmit();
                 },
                 sendAnalytics: function() {
@@ -1268,10 +1417,15 @@
                             'price': self.orderSummary.addOn.amount
                         });
                     }
-                    pushAnalytics(eventType, pushData);
+                    pushAnalytics(eventType, pushData); 
                 },
                 renderText: function(strID) {
                     return ywos.renderText(strID, this.pageText);
+                },
+                ippBankSelection: function(ippBank) {
+                    var self = this;
+                    self.maybankIPP.ippSelection.ippBankSelection = ippBank;
+                    self.maybankIPP.ippSelection.installmentPlanId = '';
                 }
             }
         });

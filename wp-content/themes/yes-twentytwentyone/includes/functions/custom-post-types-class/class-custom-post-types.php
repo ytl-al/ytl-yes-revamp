@@ -197,6 +197,70 @@
             }
 
         }
+        // Register Brand Taxonomy
+        function register_brand_taxonomy() {
+            $labels = array(
+                'name'              => _x( 'Brands', 'taxonomy general name', 'textdomain' ),
+                'singular_name'     => _x( 'Brand', 'taxonomy singular name', 'textdomain' ),
+                'search_items'      => __( 'Search Brands', 'textdomain' ),
+                'all_items'         => __( 'All Brands', 'textdomain' ),
+                'parent_item'       => __( 'Parent Brand', 'textdomain' ),
+                'parent_item_colon' => __( 'Parent Brand:', 'textdomain' ),
+                'edit_item'         => __( 'Edit Brand', 'textdomain' ),
+                'update_item'       => __( 'Update Brand', 'textdomain' ),
+                'add_new_item'      => __( 'Add New Brand', 'textdomain' ),
+                'new_item_name'     => __( 'New Brand Name', 'textdomain' ),
+                'menu_name'         => __( 'Brands', 'textdomain' ),
+            );
+
+            $args = array(
+                'hierarchical'      => true,
+                'labels'            => $labels,
+                'show_ui'           => true,
+                'show_admin_column' => true,
+                'query_var'         => true,
+                'rewrite'           => array( 'slug' => 'brand' ),
+            );
+
+            register_taxonomy( 'brand', 'store-device', $args );
+        }
+
+        // Hook into the init action and call register_brand_taxonomy when it fires
+        add_action( 'init', 'register_brand_taxonomy', 0 );
+
+
+
+
+                // Register Brand Taxonomy
+                function register_promotion_taxonomy() {
+                    $labels = array(
+                        'name'              => _x( 'Promotions', 'taxonomy general name', 'textdomain' ),
+                        'singular_name'     => _x( 'Promotion', 'taxonomy singular name', 'textdomain' ),
+                        'search_items'      => __( 'Search Promotions', 'textdomain' ),
+                        'all_items'         => __( 'All Promotions', 'textdomain' ),
+                        'parent_item'       => __( 'Parent Promotion', 'textdomain' ),
+                        'parent_item_colon' => __( 'Parent Promotion:', 'textdomain' ),
+                        'edit_item'         => __( 'Edit Promotion', 'textdomain' ),
+                        'update_item'       => __( 'Update Promotion', 'textdomain' ),
+                        'add_new_item'      => __( 'Add New Promotion', 'textdomain' ),
+                        'new_item_name'     => __( 'New Promotion Name', 'textdomain' ),
+                        'menu_name'         => __( 'Promotions', 'textdomain' ),
+                    );
+        
+                    $args = array(
+                        'hierarchical'      => true,
+                        'labels'            => $labels,
+                        'show_ui'           => true,
+                        'show_admin_column' => true,
+                        'query_var'         => true,
+                        'rewrite'           => array( 'slug' => 'promotion' ),
+                    );
+        
+                    register_taxonomy( 'promotion', 'store-device', $args );
+                }
+        
+                // Hook into the init action and call register_brand_taxonomy when it fires
+                add_action( 'init', 'register_promotion_taxonomy', 0 );
 
     }
     

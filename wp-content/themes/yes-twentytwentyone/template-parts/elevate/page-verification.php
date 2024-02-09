@@ -24,7 +24,7 @@
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
-             <ul class="wizard">
+            <ul class="wizard">
                 <li ui-sref="firstStep" class="completed">
                     <span>{{ renderText('elevate_step_1') }}</span>
                 </li>
@@ -36,9 +36,6 @@
                 </li>
                 <li ui-sref="fourthStep">
                     <span>{{ renderText('elevate_step_4') }}</span>
-                </li>
-                <li ui-sref="fifthStep">
-                    <span>{{ renderText('elevate_step_5') }}</span>
                 </li>
             </ul>
         </div>
@@ -94,7 +91,7 @@
 <?php $apiSetting = ( new \Inc\Base\Model)->getAPISettings();?>
 <script type="text/javascript"
         src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/qrcodejs/qrcode.min.js"></script>
- <script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/data/upfrontMap.js"></script>
+        <script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/data/upfrontMap.js"></script>
 <script type="text/javascript">
  var windows = [];
  $(document).ready(function () {
@@ -103,8 +100,8 @@
             data: {
                 ekyc_url: '<?php echo $apiSetting["ekyc_url"]?>',
                 ekyc_uid: '',
-                mapPlanId:mapPlanIds,
                 totalAttempt:0,
+                mapPlanId:mapPlanIds,
                 maxAttempts:60,
                 interval: null,
                 qrcode: null,
@@ -168,6 +165,7 @@
             methods: {
                 pageInit: function () {
                     var self = this;
+                    // console.log(self.mapPlanId ,'mapPlanId ');
                     if (elevate.validateSession(self.currentStep)) {
                         if (elevate.lsData.eligibility) {
                             self.eligibility = elevate.lsData.eligibility;
@@ -231,7 +229,7 @@
 											windows[i].close()
 										}
                                         // self.CAVerification(data.data);
-                                        self.OCVerification(data.data);
+										self.OCVerification(data.data);
 										//elevate.redirectToPage('personal');
                                     }
 
@@ -258,37 +256,39 @@
                     }
                 },
 
-                // CAVerification: function (response) {
+                CAVerification: function (response) {
+					
 
-                //     var self = this;
-                //     var params = {
-                //         mykad: self.eligibility.mykad,
-                //         name:self.eligibility.name,
-                //         email:self.eligibility.email,
-                //         phone:self.eligibility.phone,
-                //         PartneReferenceID:self.customer.id,
-                //         OCRConfidenceScore:response.sim,
-                //     };
-                //     toggleOverlay();
-                //     axios.post(apiEndpointURL_elevate + '/ca-verification' + '?nonce='+yesObj.nonce, params)
-                //         .then((response) => {
+                    var self = this;
+                    var params = {
+                        mykad: self.eligibility.mykad,
+                        name:self.eligibility.name,
+                        email:self.eligibility.email,
+                        phone:self.eligibility.phone,
+                        PartneReferenceID:self.customer.id,
+                        OCRConfidenceScore:response.sim,
+                    };
+					
+                    toggleOverlay();
+                    axios.post(apiEndpointURL_elevate + '/ca-verification' + '?nonce='+yesObj.nonce, params)
+                        .then((response) => {
 
-                //             var data = response.data;
+                            var data = response.data;
 
-                //             if (parseInt(data.status) == 1) {
-                //                 elevate.redirectToPage('select-sim-type');
-                //             } else {
-                //                 toggleOverlay(false);
-                //                 toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('/compasia-fail')")
-                //             }
-                //         })
-                //         .catch((error) => {
-                //             toggleOverlay(false);
-                //             console.log(error);
-                //         });
-                // },
-
-                OCVerification: function (response) {
+                            if (parseInt(data.status) == 1) {
+                                elevate.redirectToPage('personal');
+                            } else {
+                                toggleOverlay(false);
+                                toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('/compasia-fail')")
+                            }
+                        })
+                        .catch((error) => {
+                            toggleOverlay(false);
+                            console.log(error);
+                        });
+                },
+				
+				OCVerification: function (response) {
 
                     var self = this;
                     var params = {
@@ -296,13 +296,13 @@
                         name:self.eligibility.name,
                         OCRConfidenceScore:response.sim,
                     };
-
+					
                     toggleOverlay();
                     axios.post(apiEndpointURL_elevate + '/orix-check' + '?nonce='+yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data.data;
                             if (data.result == 'Success') {
-                                elevate.redirectToPage('select-sim-type');
+                                elevate.redirectToPage('personal');
                             } else {
                                 
                                 if (elevate.lsData.product) {
@@ -445,27 +445,35 @@
                                         
                                 //          toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('eligibility-failure')");
                                 //     }
-                    // console.log(self.mapPlanId);
-                                for (const productCode in self.mapPlanId) {
-                                            if (self.mapPlanId.hasOwnProperty(productCode)) {
-                                                const planInfo = self.mapPlanId[productCode];
-                                                
-                                                // Your existing logic here
-                                                if (planInfo) {
-                                                    self.upFrontPlanID = planInfo.planID;
-                                                    if (self.upFrontPlanID !== '') {
-                                                        var data = JSON.parse(localStorage.getItem('yesElevate'));
-                                                        data.meta.isUpFrontPlanAvailable = 'true';
-                                                        data.meta.upFrontPlanID = self.upFrontPlanID;
-                                                        var upfrontData = JSON.stringify(data);
-                                                        localStorage.setItem('yesElevate', upfrontData);
-                                                        toggleModalAlert('Error', this.renderText('NRIC_is_not_eligible'), "elevate.redirectToPage('eligibility-fail-upfront')");
-                                                    }
-                                                } else {
-                                                    toggleModalAlert('Error', this.renderText('NRIC_is_not_eligible'), "elevate.redirectToPage('eligibility-failure')");
-                                                }
-                                            }
-                                    }
+// console.log(self.mapPlanId);
+const desiredKey = self.orderSummary.product.selected.productCode;
+
+for (const productCode in self.mapPlanId) {
+    if (self.mapPlanId.hasOwnProperty(productCode)) {
+        if (productCode === desiredKey) {
+            const planInfo = self.mapPlanId[productCode];
+
+            // Your existing logic here
+            if (planInfo) {
+                self.upFrontPlanID = planInfo.planID;
+                if (self.upFrontPlanID !== '') {
+                    var data = JSON.parse(localStorage.getItem('yesElevate'));
+                    data.meta.isUpFrontPlanAvailable = 'true';
+                    data.meta.upFrontPlanID = self.upFrontPlanID;
+                    var upfrontData = JSON.stringify(data);
+                    localStorage.setItem('yesElevate', upfrontData);
+                    toggleModalAlert('Error', this.renderText('NRIC_is_not_eligible'), "elevate.redirectToPage('eligibility-fail-upfront')");
+                }
+            } else {
+                toggleModalAlert('Error', this.renderText('NRIC_is_not_eligible'), "elevate.redirectToPage('eligibility-failure')");
+            }
+
+            // Break out of the loop since you found the desired key
+            break;
+        }
+    }
+}
+
                                 }
                             }
                         })
@@ -473,7 +481,8 @@
                             toggleOverlay(false);
                             console.log(error);
                         });
-                    },                                  redirectYWOS:function (){
+                },
+                redirectYWOS:function (){
                     var self = this;
                     toggleOverlay();
                     ywos.buyPlan(self.selectedPlan);
