@@ -255,6 +255,18 @@ class CategoryGrid extends BaseWidget {
         );
 
         $this->add_control(
+            'category_link',
+            [
+                'label'        => __( 'Category Title Link', 'betterdocs' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __( 'On', 'betterdocs' ),
+                'label_off'    => __( 'Off', 'betterdocs' ),
+                'return_value' => 'true',
+                'default'      =>  false
+            ]
+        );
+
+        $this->add_control(
             'button_text',
             [
                 'label'     => __( 'Button Text', 'betterdocs' ),
@@ -797,7 +809,7 @@ class CategoryGrid extends BaseWidget {
         $this->add_control(
             'count_color',
             [
-                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'label'     => esc_html__( 'Text Color', 'betterdocs' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper .betterdocs-category-items-counts span' => 'color: {{VALUE}};'
@@ -861,6 +873,35 @@ class CategoryGrid extends BaseWidget {
             ]
         );
 
+        $this->add_control(
+			'second_color_seperator',
+			[
+				'label' => esc_html__( 'Second Color', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'before',
+                'condition' => [
+                    'layout_template' => 'default'
+                ]
+			]
+		);
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'count_bg_second',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '
+                    {{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper .betterdocs-category-items-counts span
+                ',
+                'exclude'  => [
+                    'image'
+                ],
+                'condition' => [
+                    'layout_template' => 'default'
+                ]
+            ]
+        );
+
         $this->end_controls_tab();
 
         // Hover State Tab
@@ -896,10 +937,10 @@ class CategoryGrid extends BaseWidget {
         $this->add_control(
             'count_color_hover',
             [
-                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'label'     => esc_html__( 'Text Color', 'betterdocs' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper .betterdocs-category-items-counts:hover' => 'color: {{VALUE}};'
+                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper .betterdocs-category-items-counts:hover span' => 'color: {{VALUE}};'
                 ]
             ]
         );
@@ -953,6 +994,35 @@ class CategoryGrid extends BaseWidget {
                     '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper .layout-2 .betterdocs-category-items-count:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                 ],
                 'condition'  => [
+                    'layout_template' => 'default'
+                ]
+            ]
+        );
+
+        $this->add_control(
+			'hover_second_color_seperator',
+			[
+				'label' => esc_html__( 'Second Color', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'before',
+                'condition' => [
+                    'layout_template' => 'default'
+                ]
+			]
+		);
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'count_bg_second_hover',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '
+                    {{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper .betterdocs-category-items-counts:hover span
+                ',
+                'exclude'  => [
+                    'image'
+                ],
+                'condition' => [
                     'layout_template' => 'default'
                 ]
             ]
@@ -1658,7 +1728,8 @@ class CategoryGrid extends BaseWidget {
                 'orderby'        => $settings['post_orderby'],
                 'order'          => $settings['post_order'],
                 'posts_per_page' => $settings['post_per_subcat']
-            ]
+            ],
+            'category_title_link' => $settings['category_link']
         ], $settings );
 
         return $params;

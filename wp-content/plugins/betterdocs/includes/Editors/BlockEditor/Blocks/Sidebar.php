@@ -32,7 +32,8 @@ class Sidebar extends Block {
             'docs_order'              => 'asc',
             'enableNestedSubcategory' => false,
             'docs_per_subcategory'    => 10,
-            'titleTag'                => 'h1'
+            'titleTag'                => 'h1',
+            'enableStickyTOC'         => false
         ];
     }
 
@@ -48,6 +49,9 @@ class Sidebar extends Block {
 
         add_filter( 'betterdocs_base_terms_args', [$this, 'filter_base_args'], 10, 1 );
         $this->views( 'templates/sidebars/sidebar-' . $sidebar_layout );
+        if ( $this->attributes['enableStickyTOC'] && $sidebar_layout == 1 ) {
+            $this->views( 'widgets/sticky-toc-block' );
+        }
         remove_filter( 'betterdocs_base_terms_args', [$this, 'filter_base_args'], 10 );
     }
 

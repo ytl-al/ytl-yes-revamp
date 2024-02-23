@@ -24,6 +24,9 @@ class TemplatesController extends Base {
      * Initialization method.
      */
     protected function init() {
+        if (! betterdocs()->helper->current_theme_is_fse_theme() ) {
+            return;
+        }
         add_filter( 'pre_get_block_template', [ $this, 'get_block_template_fallback' ], 10, 3 );
         add_filter( 'pre_get_block_file_template', [ $this, 'get_block_file_template' ], 10, 3 );
         add_filter( 'get_block_templates', [ $this, 'add_block_templates' ], 10, 3 );

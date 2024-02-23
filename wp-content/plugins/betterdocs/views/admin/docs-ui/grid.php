@@ -25,7 +25,7 @@
     global $wpdb;
 
     $_post__not_in_query = $wpdb->prepare(
-        "SELECT ID as post_id from $wpdb->posts WHERE post_type = %s AND post_status != 'trash' AND ID NOT IN ( SELECT object_id as post_id FROM $wpdb->term_relationships WHERE term_taxonomy_id IN ( SELECT term_taxonomy_id FROM $wpdb->term_taxonomy WHERE taxonomy = %s ) )",
+        "SELECT ID as post_id from $wpdb->posts WHERE post_type = %s AND post_status != 'trash' AND post_status != 'auto-draft' AND ID NOT IN ( SELECT object_id as post_id FROM $wpdb->term_relationships WHERE term_taxonomy_id IN ( SELECT term_taxonomy_id FROM $wpdb->term_taxonomy WHERE taxonomy = %s ) )",
         'docs',
         'doc_category'
     );

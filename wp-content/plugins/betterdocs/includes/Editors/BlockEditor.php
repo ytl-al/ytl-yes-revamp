@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use WPDeveloper\BetterDocs\Editors\BlockEditor\Patterns\BasePattern;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\StyleHandler;
+use WPDeveloper\BetterDocs\Editors\BlockEditor\FontLoader;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\TemplatesController;
 
 class BlockEditor extends BaseEditor {
@@ -22,6 +23,7 @@ class BlockEditor extends BaseEditor {
         add_filter( $_blocks_category_hook, [$this, 'register_category'], 9, 1 );
 
         StyleHandler::get_instance();
+        FontLoader::get_instance();
 
         $this->register_blocks();
 
@@ -50,7 +52,7 @@ class BlockEditor extends BaseEditor {
 
         if ( ! empty( $_api_classes ) && is_array( $_api_classes ) ) {
             foreach ( $_api_classes as $class ) {
-                if ( $class == '.' || $class == '..' || $class == 'BasePattern.php' ) {
+                if ( $class == '.' || $class == '..' || $class == 'BasePattern.php' || strpos( $class, '.' ) === 0)  {
                     continue;
                 }
 
@@ -98,6 +100,7 @@ class BlockEditor extends BaseEditor {
         $this->assets->register( 'betterdocs-blocks-editor-controls', 'blocks/controls.css' );
         $this->assets->register( 'betterdocs-blocks-editor', 'blocks/style-editor.css', ['betterdocs-blocks-editor-controls'] );
         $this->assets->register( 'betterdocs-blocks-editor', 'blocks/editor.js', ['betterdocs-blocks-style-handler'] );
+        $this->assets->enqueue( 'betterdocs-blocks-actions', 'blocks/actions.js', [] );
         $this->assets->localize( 'betterdocs-blocks-editor', 'betterDocsBlocksHelper', [
             'is_pro_active' => betterdocs()->is_pro_active(),
             'resturl'       => get_rest_url(),

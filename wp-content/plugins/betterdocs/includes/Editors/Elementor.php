@@ -82,9 +82,16 @@ class Elementor extends BaseEditor {
 
         if ( $this->is_elementor_pro_active ) {
             add_action( 'elementor/dynamic_tags/register', [$this, 'register_basic_tags'] );
-            add_action( 'elementor/documents/register', [$this, 'register_documents'] );
             add_action( 'elementor/widgets/register', [$this, 'register_theme_builder_widgets'] );
             add_action( 'elementor/theme/register_conditions', [$this, 'register_conditions'] );
+
+            //(Conflict Fix)Solves the issue with plugin - Sticky Header Effects for Elementor(Plugin)
+            if ( ! did_action( 'elementor/documents/register' ) ) {
+                add_action( 'elementor/documents/register', [$this, 'register_documents'] );
+            } else {
+                $this->elementor->documents->register_document_type( 'docs', SingleDocs::get_class_full_name() );
+                $this->elementor->documents->register_document_type( 'doc-archive', DocsArchive::get_class_full_name() );
+            }
         }
 
         $this->betterdocs_init();
@@ -223,23 +230,23 @@ class Elementor extends BaseEditor {
                         'parent'           => __( 'Parent', 'betterdocs' ),
                         'betterdocs_order' => __( 'BetterDocs Order', 'betterdocs' )
                     ],
-                    'default' => $this->settings->get( 'terms_orderby', 'betterdocs_order' ),
+                    'default' => $this->settings->get( 'terms_orderby', 'betterdocs_order' )
                 ]
             );
 
             $wb->add_control(
                 'order',
                 [
-                    'label'   => __( 'Order', 'betterdocs' ),
-                    'type'    => Controls_Manager::SELECT,
-                    'options' => [
+                    'label'     => __( 'Order', 'betterdocs' ),
+                    'type'      => Controls_Manager::SELECT,
+                    'options'   => [
                         'ASC'  => 'Ascending',
                         'DESC' => 'Descending'
                     ],
-                    'default' => $this->settings->get( 'terms_order', 'ASC' ),
+                    'default'   => $this->settings->get( 'terms_order', 'ASC' ),
                     'condition' => [
-                        'orderby!' => 'betterdocs_order',
-                    ],
+                        'orderby!' => 'betterdocs_order'
+                    ]
 
                 ]
             );
@@ -267,16 +274,16 @@ class Elementor extends BaseEditor {
             $wb->add_control(
                 'order',
                 [
-                    'label'   => __( 'Order', 'betterdocs' ),
-                    'type'    => Controls_Manager::SELECT,
-                    'options' => [
+                    'label'     => __( 'Order', 'betterdocs' ),
+                    'type'      => Controls_Manager::SELECT,
+                    'options'   => [
                         'ASC'  => 'Ascending',
                         'DESC' => 'Descending'
                     ],
-                    'default' => 'asc',
+                    'default'   => 'asc',
                     'condition' => [
-                        'orderby!' => 'betterdocs_order',
-                    ],
+                        'orderby!' => 'betterdocs_order'
+                    ]
 
                 ]
             );
@@ -372,7 +379,7 @@ class Elementor extends BaseEditor {
                     'label_on'     => __( 'Yes', 'betterdocs' ),
                     'label_off'    => __( 'No', 'betterdocs' ),
                     'return_value' => 'true',
-                    'default'      => ($this->settings->get( 'archive_nested_subcategory' ) == 1) ? 'true' : '',
+                    'default'      => ( $this->settings->get( 'archive_nested_subcategory' ) == 1 ) ? 'true' : ''
                 ]
             );
         }

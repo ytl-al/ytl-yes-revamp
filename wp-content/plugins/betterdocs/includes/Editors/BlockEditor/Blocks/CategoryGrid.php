@@ -74,7 +74,8 @@ class CategoryGrid extends Block {
             'gridSpaceRange'          => 10,
             'TABgridSpaceRange'       => 10,
             'MOBgridSpaceRange'       => 10,
-            'buttonText'              => __( 'Explore More', 'betterdocs' )
+            'buttonText'              => __( 'Explore More', 'betterdocs' ),
+            'categoryTitleLink'       => false
         ];
     }
 
@@ -183,7 +184,8 @@ class CategoryGrid extends Block {
             ],
             'button_icon'             => [
                 'value' => $attributes['buttonIcon']
-            ]
+            ],
+            'category_title_link' => $attributes['categoryTitleLink']
         ];
     }
 }

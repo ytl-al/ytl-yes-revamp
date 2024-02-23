@@ -1,12 +1,12 @@
-=== BetterDocs - Best Documentation & Knowledge Base Plugin ===
-Contributors: wpdevteam, re_enter_rupok, asif2bd, emsohel, priyomukul, cu121, fencermonir, sapanmozammel
+=== BetterDocs – Best Documentation, FAQ & Knowledge Base Plugin with AI Support ===
+Contributors: wpdevteam, re_enter_rupok, asif2bd, emsohel, priyomukul, cu121, fencermonir, sapanmozammel, seakashdiu
 Donate link: https://wpdeveloper.com
 Tags:  knowledge base, docs, documentation, documents, wiki, faq page, doc, knowledge, knowledgebase, doc page, best documentation plugin, support ticket, customer support, instant answer bot, bot, help articles, better docs, document, faq, instant answers, elementor, chat, live search, external knowledgebase, multiple knowledge bases, faqs, help, chatbot, TOC, table of content, elementor doc, template, doc theme
 Tags:  knowledge base, docs, documentation, documents, wiki, faq page, doc, knowledge, knowledgebase, doc page, best documentation plugin, support ticket, customer support, instant answer bot, bot, help articles, better docs, document, faq, instant answers, elementor, chat, live search, external knowledgebase, multiple knowledge bases, faqs, help, chatbot, TOC, table of content, elementor doc, template, doc theme
 Requires at least: 4.0
 Tested up to: 6.4
 Requires PHP: 7.0
-Stable tag: 3.0.1
+Stable tag: 3.4.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -46,6 +46,12 @@ Let the visitors instantly find the answers they are searching for without havin
 - Gutenberg Blocks [BetterDocs Search Form](https://betterdocs.co/docs/betterdocs-search-box-gutenberg/), [BetterDocs Category Box](https://betterdocs.co/docs/betterdocs-category-grid-gutenberg/) & [BetterDocs Category Grid](https://betterdocs.co/docs/betterdocs-category-grid-gutenberg/) to easily create your Knowledgebase
 - Create [Advanced Search](https://betterdocs.co/docs/betterdocs-advanced-search/) & showcase [Popular Docs](https://betterdocs.co/docs/how-to-feature-popular-docs-on-knowledge-base-using-betterdocs/) with ready layouts (PRO)
 - FSE Compatible with 10+ Gutenberg Blocks & Patterns
+- Import and export CSV and XML files options to migrate essential documentation or back up your knowledge base
+- Generate advanced documentation instantly using Write With AI, the powerful AI auto writer feature
+- Generate Sample Data to make the knowledge base data creation process smooth
+- Seamless migration of knowledge base from any 3rd party plugin like Help Scout
+- Add attachments to any single doc to provide additional content to help readers (PRO)
+- Related doc embedding in any single doc to provide supporting documentation for more knowledge (PRO)
 
 ## 🙌 STUNNING READY TEMPLATES FOR DOCS LANDING PAGE ##
 
@@ -89,9 +95,24 @@ Design amazing single docs and docs archive page without any hassle with [Elemen
 
 Show off your creativity and create an amazing single doc template with advanced elements, and ready layouts with Elementor Theme Builder
 
+## 🤖 WRITE WITH AI AUTO WRITER ##
+
+Use the powerful Write With AI feature to quickly generate detailed documentation & FAQs in a few clicks without any hassle.
+
 ## 🚀 DOCS ARCHIVE TEMPLATE WITH ELEMENTOR ##
 
 Design stunning Docs page and Docs Category archive template with Elementor Theme Builder.
+
+## 🔄 IMPORT AND EXPORT OPTION ##
+
+Migrate your valuable content and back up your knowledge base with just a few clicks with easy import and export feature that seamlessly supports CSV and XML formats.
+
+## 📌 ONE CLICK GENERATE SAMPLE DATA ##
+Create Sample Data to streamline the knowledge base data creation process, ensuring efficiency and accuracy in populating the database.
+
+## 🔄  3RD PARTY MIGRATION ##
+Seamless migration of knowledge base from any 3rd party plugin like Help Scout with a single click to improve customer service capabilities.
+
 
 ## 🤖 INSTANT ANSWER BOT TO REDUCE SUPPORT TICKETS (PRO) ##
 
@@ -113,6 +134,12 @@ Restrict your knowledge base based on certain user roles and manage Internal Kno
 ## 📔 DESIGN STUNNING MULTIPLE KNOWLEDGE BASES WITH ELEMENTOR (PRO) ##
 
 Desgin spectacular multiple knowledge bases with absolute ease by using Multiple KB widget for Elementor.
+
+## 🔗 ADD ATTACHMENT IN SINGLE DOCUMENTATION (PRO) ##
+Include attachments within each document to offer supplementary content and extra details, enhancing comprehension and accessibility.
+
+## 📚 EMBED RELATED DOCS IN SINGLE DOCUMENTATION ##
+Incorporate relevant documentation into each document to promote supporting content and additional information.
 
 You don’t have to just take our word for it. See what one of the WordPress experts are saying:
 
@@ -184,6 +211,65 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 3.4.0 - 18/02/2024 =
+- Added: One-Click Generate Sample Data
+- Added: HelpScout Docs Migration
+- Improved: All Docs Grid View & List View Wrong Icon
+- Improved: Updated Quick Setup
+- Fixed: Miscalculation on Safari
+- Fixed: Sticky TOC Controller on (Sidebar Block)
+- Few minor bug fixes and improvements
+
+= 3.3.4 - 24/01/2024 =
+- Improved: Security Enhancement
+- Few minor bug fixes and improvements
+
+= 3.3.3 - 17/01/2024 =
+- Added: Migration from Third Party Documentation plugins in the Settings
+- Few minor bug fixes and improvements
+
+= 3.3.2 - 14/01/2024 =
+- Added: CSV Support for Import/Export Feature
+- Added: Option to hide Category Icon
+- Fixed: Docs Tag inconsistency issue
+- Improved: Added support to switch between BetterDocs UI & Classic UI
+- Improved: Single template Responsive support
+- Improved: Dashboard UI/UX
+- Fixed: Sticky TOC Scrolling issue in FSE
+- Fixed: Sidebar collapsing issue with Salient theme
+- Fixed: Dashboard string translation issue with WPML
+- Fixed: Flashing issue with the SVG icons in Documentation page
+- Fixed: Subcategory ordering issue
+- Few minor bug fixes and improvements
+
+= 3.3.1 - 11/01/2024 =
+- Fixed: Write with AI showing deprecated errors
+- Few minor bug fixes and improvements
+
+= 3.3.0 - 31/12/2023 =
+- Added: Write with AI Feature for FAQs
+- Few minor bug fixes and improvements
+
+= 3.2.0 - 14/12/2023 =
+- Added: Write with AI Feature for Documentation
+- Few minor bug fixes and improvements
+
+= 3.1.0 - 11/12/2023 =
+- Added: New Import/Export Docs Option
+- Few minor bug fixes and improvements
+
+= 3.0.2 - 03/12/2023 =
+- Added: Option to choose classic UI as default
+- Added: Advanced Search Block for Gutenberg
+- Fixed: Thrive theme builder not showing header and footer in Single Docs
+- Fixed: Category Grid Title is not linked in v2.5.6
+- Fixed: Copy #Url button doesn't seem to work in Divi Theme
+- Fixed: Search in Persian language not working Properly
+- Fixed: BetterDocs is conflicting with Sticky Header Effects for Elementor plugin
+- Fixed: Typography Font Family Not Loading On Front-End (For Blocks)
+- Few minor bug fixes and improvements
+
 
 = 3.0.1 - 20/11/2023 =
 - Few minor bug fixes and improvements

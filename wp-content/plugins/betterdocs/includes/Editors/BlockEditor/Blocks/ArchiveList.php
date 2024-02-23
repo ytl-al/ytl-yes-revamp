@@ -5,6 +5,9 @@ namespace WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\Block;
 
 class ArchiveList extends Block {
+
+    public $tax_query_block = [];
+
     public function get_name() {
         return 'doc-archive-list';
     }
@@ -37,13 +40,29 @@ class ArchiveList extends Block {
 
     public function view_params() {
         global $wp_query;
-
         $_term_slug = '';
         if ( isset( $wp_query->query ) && array_key_exists( 'doc_category', $wp_query->query ) ) {
             $_term_slug = $wp_query->query['doc_category'];
         }
 
-        $term = get_term_by( 'slug', $_term_slug, 'doc_category' );
+        if ( isset( $wp_query->query ) && array_key_exists( 'doc_tag', $wp_query->query ) ) {
+            $_term_slug = $wp_query->query['doc_tag'];
+            add_filter( 'betterdocs_docs_tax_query_args', function ( $tax_query, $_multiple_kb, $_term_slug, $_kb_slug, $_origin_args ) {
+                $tax_query[0]['taxonomy'] = 'doc_tag';
+                unset( $tax_query[0]['operator'] );
+                unset( $tax_query[0]['include_children'] );
+                $this->tax_query_block = $tax_query;
+                return $tax_query;
+            }, 10, 5 );
+            add_filter( 'betterdocs_articles_args', function ( $args, $_term_id, $_origin_args ) {
+                if( empty( $args['tax_query'] ) ) {
+                    $args['tax_query'] = $this->tax_query_block;
+                }
+                return $args;
+            }, 10, 3);
+        }
+
+        $term = ! empty( get_term_by( 'slug', $_term_slug, 'doc_category' ) ) ? get_term_by( 'slug', $_term_slug, 'doc_category' ) : get_term_by( 'slug', $_term_slug, 'doc_tag' );
 
         $_docs_query = [
             'term_id'        => isset( $term->term_id ) ? $term->term_id : 0,

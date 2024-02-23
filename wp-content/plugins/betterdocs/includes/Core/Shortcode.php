@@ -69,11 +69,11 @@ abstract class Shortcode extends Base {
     }
 
     public function enqueue_scripts() {
-        foreach( $this->get_style_depends() as $handle ) {
+        foreach ( $this->get_style_depends() as $handle ) {
             wp_enqueue_style( $handle );
         }
 
-        foreach( $this->get_script_depends() as $handle ) {
+        foreach ( $this->get_script_depends() as $handle ) {
             wp_enqueue_script( $handle );
         }
     }
@@ -99,27 +99,26 @@ abstract class Shortcode extends Base {
         // reset attributes;
         $this->reset_attributes();
 
-        do_action_ref_array( 'betterdocs_before_render', [ &$this, 'shortcode' ] );
-
+        do_action_ref_array( 'betterdocs_before_render', [ & $this, 'shortcode'] );
         ob_start();
         $this->render( $atts, $content = null );
         $content = ob_get_clean();
 
-        do_action_ref_array( 'betterdocs_after_render', [ &$this, 'shortcode' ] );
+        do_action_ref_array( 'betterdocs_after_render', [ & $this, 'shortcode'] );
 
         return $content;
     }
 
     protected function transform_attribute_types( &$atts ) {
-        if( is_array( $atts ) ) {
+        if ( is_array( $atts ) ) {
             $_default_attributes = $this->default_attributes();
 
-            foreach( $atts as $key => $value ) {
-                if( isset( $_default_attributes[ $key ] ) ) {
-                    $type = gettype( $_default_attributes[ $key ] );
+            foreach ( $atts as $key => $value ) {
+                if ( isset( $_default_attributes[$key] ) ) {
+                    $type = gettype( $_default_attributes[$key] );
 
-                    if( $type === 'boolean' ) {
-                        $atts[ $key ] = $atts[ $key ] == 'false' || $atts[ $key ] == '' ? false : true;
+                    if ( $type === 'boolean' ) {
+                        $atts[$key] = $atts[$key] == 'false' || $atts[$key] == '' ? false : true;
                     }
                 }
             }

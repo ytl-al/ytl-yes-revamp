@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use WPDeveloper\BetterDocs\Core\Admin;
 use WPDeveloper\BetterDocs\Core\Query;
 use WPDeveloper\BetterDocs\Core\Roles;
+use WPDeveloper\BetterDocs\Core\WriteWithAI;
 use WPDeveloper\BetterDocs\Dependencies\DI\Container;
 use WPDeveloper\BetterDocs\Utils\Views;
 use WPDeveloper\BetterDocs\Core\BaseAPI;
@@ -114,7 +115,13 @@ final class Plugin {
      * Plugin Version
      * @var string
      */
-    public $version = '3.0.1';
+    public $version = '3.4.0';
+
+    /**
+     * WriteWithAI Class
+     * @var string
+     */
+    public $ai_autowrtie;
 
     /**
      * Plugin DB Version
@@ -211,6 +218,7 @@ final class Plugin {
         $this->template_helper = $this->container->get( TemplateTags::class );
         $this->customizer      = $this->container->get( Customizer::class );
         $this->editor          = $this->container->get( Editor::class );
+        $this->ai_autowrtie          = $this->container->get( WriteWithAI::class );
 
         /**
          * Initialize all editors.
@@ -355,7 +363,7 @@ final class Plugin {
 
         if ( ! empty( $_api_classes ) && is_array( $_api_classes ) ) {
             foreach ( $_api_classes as $class ) {
-                if ( $class == '.' || $class == '..' ) {
+                if ( $class == '.' || $class == '..' || strpos( $class, '.' ) === 0)  {
                     continue;
                 }
 

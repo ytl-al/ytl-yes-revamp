@@ -37,6 +37,26 @@ class Query extends Base {
         add_filter( 'get_previous_post_where', [$this, 'previous_post_where'], 99, 5 );
 
         $this->init();
+
+        /**
+         * Modify Popular Docs Query (For Shortcode & Widget)
+         */
+        add_filter( 'posts_clauses', [$this, 'mod_query_popular_docs'], 10, 2 );
+    }
+
+    public function mod_query_popular_docs( $clauses, $wp_query ) {
+        if ( isset( $wp_query->query['meta_key'] ) ) {
+            if ( $wp_query->query['meta_key'] == '_betterdocs_meta_views' ) {
+                global $wpdb;
+                $order              = isset( $wp_query->query['order'] ) ? $wp_query->query['order'] : '';
+                $order_by_query     = ( $order == 'ASC' || $order == 'DESC' ) ? "SUM({$wpdb->prefix}betterdocs_analytics.impressions) {$order}" : ( $order == 'MODIFIED' ? "{$wpdb->prefix}posts.post_modified_gmt DESC" : "{$wpdb->prefix}posts.post_date_gmt DESC" );
+                $clauses['join']    = "JOIN {$wpdb->prefix}betterdocs_analytics ON {$wpdb->prefix}posts.ID = {$wpdb->prefix}betterdocs_analytics.post_id";
+                $clauses['where']   = "AND ( ( {$wpdb->prefix}posts.post_type = 'docs' ) AND ( {$wpdb->prefix}posts.post_status = 'publish' OR {$wpdb->prefix}posts.post_status = 'future' OR {$wpdb->prefix}posts.post_status = 'draft' OR {$wpdb->prefix}posts.post_status = 'pending' OR {$wpdb->prefix}posts.post_status = 'private' ) )";
+                $clauses['orderby'] = $order_by_query;
+                $clauses['groupby'] = "{$wpdb->prefix}betterdocs_analytics.post_id";
+            }
+        }
+        return $clauses;
     }
 
     public function init() {
