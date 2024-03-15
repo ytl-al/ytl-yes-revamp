@@ -163,7 +163,7 @@ class WPExporter {
 				}
 			}
 		}
-        //error_log(print_r($post_ids, 1));
+
         $filename = 'betterdocs.' . date( 'Y-m-d' ) . '.xml';
 		return [
             'success' => true,

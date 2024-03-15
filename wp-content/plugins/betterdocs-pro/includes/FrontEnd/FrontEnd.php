@@ -35,9 +35,30 @@ class FrontEnd extends Base {
         if ( $this->settings->get( 'enable_disable', false ) ) {
             $this->container->get( InstantAnswer::class );
         }
+
+        if ( $this->settings->get( 'show_attachment' ) ) {
+            add_action( 'betterdocs_docs_before_social', [$this, 'render_attachment_markup'], 11 );
+        }
+
+        if ( $this->settings->get( 'show_related_docs' ) ) {
+            add_action( 'betterdocs_docs_before_social', [$this, 'render_related_docs_shortcode'], 12 );
+        }
+    }
+
+    public function render_attachment_markup() {
+        echo do_shortcode( '[betterdocs_attachments]' );
+    }
+
+    public function render_related_docs_shortcode() {
+        echo do_shortcode( '[betterdocs_related_docs]' );
     }
 
     public function enqueue_scripts() {
+        if ( is_singular( 'docs' ) ) {
+            wp_enqueue_style( 'single-doc-attachments' );
+            wp_enqueue_style( 'single-doc-related-articles' );
+        }
+
         if ( is_tax( 'knowledge_base' ) ) {
             wp_enqueue_style( 'betterdocs-docs' );
         }
@@ -61,6 +82,11 @@ class FrontEnd extends Base {
                 $_template = 'templates/archives/mkb/' . $kb_layout;
             }
         } elseif ( is_tax( 'doc_category' ) ) {
+            global $wp_query;
+            $_kb_slug = isset( $wp_query->query['knowledge_base'] ) ? $wp_query->query['knowledge_base'] : null;
+            if ( $_kb_slug ) {
+                setcookie( 'last_knowledge_base', $_kb_slug, time() + ( YEAR_IN_SECONDS * 2 ), "/" );
+            }
             $category_layout = $this->database->get_theme_mod( 'betterdocs_archive_layout_select', 'layout-1' );
             $_template       = 'templates/archives/categories/' . $category_layout;
         }
@@ -74,7 +100,7 @@ class FrontEnd extends Base {
             $eligible_template = $views->path( $_template, $_default_template );
 
             if ( file_exists( $eligible_template ) ) {
-                $template =  &$eligible_template;
+                $template = &$eligible_template;
             }
         }
 

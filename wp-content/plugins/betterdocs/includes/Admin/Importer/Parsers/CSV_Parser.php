@@ -268,7 +268,7 @@ class CSV_Parser {
                 }
             }
         }
-        error_log(print_r($data, 1));
+
         return $data;
     }
 

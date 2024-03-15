@@ -2,6 +2,7 @@
 
 namespace WPDeveloper\BetterDocs\REST;
 
+use WPDeveloper\BetterDocs\Admin\ReportEmail;
 use WP_Query;
 use WP_User;
 use WP_REST_Request;
@@ -149,12 +150,6 @@ class Settings extends BaseAPI {
 
         $parser = new CSV_Parser();
 		$parsed = $parser->parse( $file );
-
-        // if ( $parsed['type'] == 'sample/csv' ) {
-        //     return [
-        //         'status' => 'success'
-        //     ];
-        // }
 
         if ( isset( $parsed['posts'] ) && is_array( $parsed['posts'] ) ) {
             $post_names = array_map(function ($post) {

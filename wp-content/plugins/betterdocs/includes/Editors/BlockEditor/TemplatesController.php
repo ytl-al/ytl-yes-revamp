@@ -156,7 +156,7 @@ class TemplatesController extends Base {
         if ( null !== $template_built ) {
             return $template_built;
         }
-        error_log(print_r($template, 1));
+
         // Hand back over to Gutenberg if we can't find a template.
         return $template;
     }

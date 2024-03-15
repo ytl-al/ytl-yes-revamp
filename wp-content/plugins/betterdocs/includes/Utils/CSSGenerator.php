@@ -311,7 +311,6 @@ class CSSGenerator {
             }
         }
         while ( $this->indent_level > 0 ) {
-            error_log( 'level = ' . $this->indent_level );
             $this->indent_level--;
             $output .= $this->tab() . $close;
         }
