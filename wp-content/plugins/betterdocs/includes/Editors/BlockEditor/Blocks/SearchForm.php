@@ -7,6 +7,10 @@ use WPDeveloper\BetterDocs\Editors\BlockEditor\Block;
 class SearchForm extends Block {
     public $view_wrapper = 'betterdocs-search-form-wrapper';
 
+    protected $editor_styles = [
+        'betterdocs-search'
+    ];
+
     protected $frontend_styles = [
         'betterdocs-search'
     ];

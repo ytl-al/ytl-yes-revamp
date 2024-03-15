@@ -758,6 +758,34 @@ class SingleDoc extends Section {
         );
     }
 
+    public function post_title_text_transform() {
+        $this->customizer->add_setting( 'betterdocs_post_title_text_transform', [
+            'default'           => $this->defaults['betterdocs_post_title_text_transform'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'select']
+        ] );
+
+        $this->customizer->add_control(
+            new WP_Customize_Control(
+                $this->customizer,
+                'betterdocs_post_title_text_transform',
+                [
+                    'label'    => __( 'Text Transform', 'betterdocs' ),
+                    'section'  => 'betterdocs_single_docs_settings',
+                    'settings' => 'betterdocs_post_title_text_transform',
+                    'type'     => 'select',
+                    'choices'  => [
+                        'uppercase'  => 'Uppercase',
+                        'lowercase'  => 'Lowercase',
+                        'capitalize' => 'Capitalize',
+                        'none'       => 'Normal'
+                    ],
+                    'priority' => 124
+                ]
+            )
+        );
+    }
+
     public function single_doc_title_font_size() {
         $this->customizer->add_setting( 'betterdocs_single_doc_title_font_size', [
             'default'           => $this->defaults['betterdocs_single_doc_title_font_size'],
@@ -2273,4 +2301,1685 @@ class SingleDoc extends Section {
         );
     }
 
+    public function attachments_heading() {
+        $this->customizer->add_setting( 'betterdocs_single_doc_attachment_heading', [
+            'default'           => '',
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control( new SeparatorControl(
+            $this->customizer, 'betterdocs_single_doc_attachment_heading', [
+                'label'    => __( 'Attachments', 'betterdocs' ),
+                'priority' => 163,
+                'settings' => 'betterdocs_single_doc_attachment_heading',
+                'section'  => 'betterdocs_single_docs_settings'
+            ] )
+        );
+    }
+
+    public function betterdocs_doc_single_attachment_content_bg_color() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_content_bg_color', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_content_bg_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_doc_single_attachment_content_bg_color',
+                [
+                    'label'    => __( 'Content Background Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_single_docs_settings',
+                    'settings' => 'betterdocs_doc_single_attachment_content_bg_color',
+                    'priority' => 163
+                ]
+            )
+        );
+    }
+
+    public function betterdocs_doc_single_attachment_content_padding() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_content_padding', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_content_padding'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_content_padding', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_content_padding',
+                'label'       => __( 'Content Padding', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'id'    => 'betterdocs_doc_single_attachment_content_padding',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_content_padding_top', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_content_padding_top'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_content_padding_top', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_content_padding_top',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_content_padding  betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_content_padding_right', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_content_padding_right'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_content_padding_right', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_content_padding_right',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_content_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_content_padding_bottom', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_content_padding_bottom'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_content_padding_bottom', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_content_padding_bottom',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_content_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_content_padding_left', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_content_padding_left'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_content_padding_left', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_content_padding_left',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_content_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
+
+    public function betterdocs_doc_single_attachment_content_margin() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_content_margin', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_content_margin'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_content_margin', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_content_margin',
+                'label'       => __( 'Content Margin', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'id'    => 'betterdocs_doc_single_attachment_content_margin',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_content_margin_top', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_content_margin_top'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_content_margin_top', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_content_margin_top',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_content_margin  betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_content_margin_right', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_content_margin_right'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_content_margin_right', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_content_margin_right',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_content_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_content_margin_bottom', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_content_margin_bottom'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_content_margin_bottom', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_content_margin_bottom',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_content_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_content_margin_left', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_content_margin_left'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_content_margin_left', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_content_margin_left',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_content_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
+
+    public function betterdocs_doc_single_attachment_label_color() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_label_color', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_label_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_doc_single_attachment_label_color',
+                [
+                    'label'    => __( 'Label Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_single_docs_settings',
+                    'settings' => 'betterdocs_doc_single_attachment_label_color',
+                    'priority' => 163
+                ]
+            )
+        );
+    }
+
+    public function betterdocs_doc_single_attachment_label_padding() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_label_padding', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_label_padding'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_label_padding', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_label_padding',
+                'label'       => __( 'Label Padding', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'id'    => 'betterdocs_doc_single_attachment_label_padding',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_label_padding_top', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_label_padding_top'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_label_padding_top', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_label_padding_top',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_label_padding  betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_label_padding_right', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_label_padding_right'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_label_padding_right', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_label_padding_right',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_label_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_label_padding_bottom', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_label_padding_bottom'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_label_padding_bottom', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_label_padding_bottom',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_label_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_label_padding_left', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_label_padding_left'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_label_padding_left', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_label_padding_left',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_label_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
+
+    public function betterdocs_doc_single_attachment_label_margin() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_label_margin', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_label_margin'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_label_margin', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_label_margin',
+                'label'       => __( 'Label Margin', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'id'    => 'betterdocs_doc_single_attachment_label_margin',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_label_margin_top', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_label_margin_top'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_label_margin_top', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_label_margin_top',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_label_margin  betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_label_margin_right', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_label_margin_right'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_label_margin_right', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_label_margin_right',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_label_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_label_margin_bottom', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_label_margin_bottom'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_label_margin_bottom', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_label_margin_bottom',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_label_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_label_margin_left', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_label_margin_left'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_label_margin_left', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_label_margin_left',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_label_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
+
+    public function betterdocs_doc_single_attachment_list_font_size() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_list_font_size', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_list_font_size'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_list_font_size', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_list_font_size',
+                'label'       => __( 'List Font Size', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' //optional suffix
+                ]
+            ] )
+        );
+    }
+
+    public function betterdocs_doc_single_attachment_list_font_weight() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_list_font_weight', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_list_font_weight'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'choices']
+        ] );
+
+        $this->customizer->add_control(
+            new WP_Customize_Control(
+                $this->customizer,
+                'betterdocs_doc_single_attachment_list_font_weight',
+                [
+                    'label'    => __( 'List Font Weight', 'betterdocs-pro' ),
+                    'section'  => 'betterdocs_single_docs_settings',
+                    'settings' => 'betterdocs_doc_single_attachment_list_font_weight',
+                    'type'     => 'select',
+                    'choices'  => [
+                        'normal' => 'Normal',
+                        '100'    => '100',
+                        '200'    => '200',
+                        '300'    => '300',
+                        '400'    => '400',
+                        '500'    => '500',
+                        '600'    => '600',
+                        '700'    => '700',
+                        '800'    => '800',
+                        '900'    => '900'
+                    ],
+                    'priority' => 163
+                ]
+            )
+        );
+    }
+
+    public function betterdocs_doc_single_attachment_list_extension_color() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_list_extension_color', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_list_extension_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_doc_single_attachment_list_extension_color',
+                [
+                    'label'    => __( 'Extension Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_single_docs_settings',
+                    'settings' => 'betterdocs_doc_single_attachment_list_extension_color',
+                    'priority' => 163
+                ]
+            )
+        );
+    }
+    public function betterdocs_doc_single_attachment_list_extension_font_size() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_list_extension_font_size', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_list_extension_font_size'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_list_extension_font_size', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_list_extension_font_size',
+                'label'       => __( 'Extension Font Size', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' //optional suffix
+                ]
+            ] )
+        );
+    }
+
+    public function betterdocs_doc_single_attachment_list_extension_font_weight() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_list_extension_font_weight', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_list_extension_font_weight'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'choices']
+        ] );
+
+        $this->customizer->add_control(
+            new WP_Customize_Control(
+                $this->customizer,
+                'betterdocs_doc_single_attachment_list_extension_font_weight',
+                [
+                    'label'    => __( 'Extension Font Weight', 'betterdocs-pro' ),
+                    'section'  => 'betterdocs_single_docs_settings',
+                    'settings' => 'betterdocs_doc_single_attachment_list_extension_font_weight',
+                    'type'     => 'select',
+                    'choices'  => [
+                        'normal' => 'Normal',
+                        '100'    => '100',
+                        '200'    => '200',
+                        '300'    => '300',
+                        '400'    => '400',
+                        '500'    => '500',
+                        '600'    => '600',
+                        '700'    => '700',
+                        '800'    => '800',
+                        '900'    => '900'
+                    ],
+                    'priority' => 163
+                ]
+            )
+        );
+    }
+
+    public function betterdocs_doc_single_attachment_list_color() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_list_color', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_list_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_doc_single_attachment_list_color',
+                [
+                    'label'    => __( 'List Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_single_docs_settings',
+                    'settings' => 'betterdocs_doc_single_attachment_list_color',
+                    'priority' => 163
+                ]
+            )
+        );
+    }
+
+    public function betterdocs_doc_single_attachment_list_background_color() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_list_background_color', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_list_background_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_doc_single_attachment_list_background_color',
+                [
+                    'label'    => __( 'List Background Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_single_docs_settings',
+                    'settings' => 'betterdocs_doc_single_attachment_list_background_color',
+                    'priority' => 163
+                ]
+            )
+        );
+    }
+
+    public function betterdocs_doc_single_attachment_list_padding() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_list_padding', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_list_padding'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_list_padding', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_list_padding',
+                'label'       => __( 'List Padding', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'id'    => 'betterdocs_doc_single_attachment_list_padding',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_list_padding_top', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_list_padding_top'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_list_padding_top', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_list_padding_top',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_list_padding  betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_list_padding_right', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_list_padding_right'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_list_padding_right', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_list_padding_right',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_list_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_list_padding_bottom', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_list_padding_bottom'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_list_padding_bottom', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_list_padding_bottom',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_list_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_list_padding_left', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_list_padding_left'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_list_padding_left', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_list_padding_left',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_list_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
+
+    public function betterdocs_doc_single_attachment_list_margin() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_list_margin', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_list_margin'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_list_margin', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_list_margin',
+                'label'       => __( 'List Margin', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'id'    => 'betterdocs_doc_single_attachment_list_margin',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_list_margin_top', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_list_margin_top'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_list_margin_top', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_list_margin_top',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_list_margin  betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_list_margin_right', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_list_margin_right'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_list_margin_right', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_list_margin_right',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_list_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_list_margin_bottom', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_list_margin_bottom'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_list_margin_bottom', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_list_margin_bottom',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_list_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_attachment_list_margin_left', [
+            'default'           => $this->defaults['betterdocs_doc_single_attachment_list_margin_left'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_attachment_list_margin_left', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_attachment_list_margin_left',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_attachment_list_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
+
+    public function betterdocs_doc_single_related_docs_heading() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_heading', [
+            'default'           => 'betterdocs_doc_single_related_docs_heading',
+            'sanitize_callback' => 'esc_html'
+        ] );
+
+        $this->customizer->add_control( new SeparatorControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_heading', [
+                'label'    => __( 'Related Docs', 'betterdocs' ),
+                'priority' => 163,
+                'settings' => 'betterdocs_doc_single_related_docs_heading',
+                'section'  => 'betterdocs_single_docs_settings'
+            ] )
+        );
+    }
+
+    public function betterdocs_doc_single_related_docs_content_bg_color() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_content_bg_color', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_content_bg_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_doc_single_related_docs_content_bg_color',
+                [
+                    'label'    => __( 'Content Background Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_single_docs_settings',
+                    'settings' => 'betterdocs_doc_single_related_docs_content_bg_color',
+                    'priority' => 163
+                ]
+            )
+        );
+    }
+
+    public function betterdocs_doc_single_related_docs_content_padding() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_content_padding', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_content_padding'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_content_padding', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_content_padding',
+                'label'       => __( 'Content Padding', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'id'    => 'betterdocs_doc_single_related_docs_content_padding',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_content_padding_top', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_content_padding_top'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_content_padding_top', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_content_padding_top',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_content_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_content_padding_right', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_content_padding_right'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_content_padding_right', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_content_padding_right',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_content_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_content_padding_bottom', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_content_padding_bottom'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_content_padding_bottom', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_content_padding_bottom',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_content_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_content_padding_left', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_content_padding_left'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_content_padding_left', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_content_padding_left',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_content_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
+
+    public function betterdocs_doc_single_related_docs_content_margin() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_content_margin', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_content_margin'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_content_margin', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_content_margin',
+                'label'       => __( 'Content Margin', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'id'    => 'betterdocs_doc_single_related_docs_content_margin',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_content_margin_top', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_content_margin_top'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_content_margin_top', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_content_margin_top',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_content_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_content_margin_right', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_content_margin_right'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_content_margin_right', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_content_margin_right',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_content_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_content_margin_bottom', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_content_margin_bottom'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_content_margin_bottom', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_content_margin_bottom',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_content_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_content_margin_left', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_content_margin_left'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_content_margin_left', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_content_margin_left',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_content_margin_left betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
+
+    public function betterdocs_doc_single_related_docs_label_color() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_label_color', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_label_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_doc_single_related_docs_label_color',
+                [
+                    'label'    => __( 'Label Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_single_docs_settings',
+                    'settings' => 'betterdocs_doc_single_related_docs_label_color',
+                    'priority' => 163
+                ]
+            )
+        );
+    }
+
+    public function betterdocs_doc_single_related_docs_label_padding() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_label_padding', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_label_padding'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_label_padding', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_label_padding',
+                'label'       => __( 'Label Padding', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'id'    => 'betterdocs_doc_single_related_docs_label_padding',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_label_padding_top', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_label_padding_top'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_label_padding_top', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_label_padding_top',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_label_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_label_padding_right', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_label_padding_right'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_label_padding_right', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_label_padding_right',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_label_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_label_padding_bottom', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_label_padding_bottom'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_label_padding_bottom', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_label_padding_bottom',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_label_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_label_padding_left', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_label_padding_left'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_label_padding_left', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_label_padding_left',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_label_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
+
+    public function betterdocs_doc_single_related_docs_label_margin() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_label_margin', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_label_margin'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_label_margin', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_label_margin',
+                'label'       => __( 'Label Margin', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'id'    => 'betterdocs_doc_single_related_docs_label_margin',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_label_margin_top', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_label_margin_top'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_label_margin_top', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_label_margin_top',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_label_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_label_margin_right', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_label_margin_right'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_label_margin_right', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_label_margin_right',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_label_margin_right betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_label_margin_bottom', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_label_margin_bottom'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_label_margin_bottom', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_label_margin_bottom',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_label_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_label_margin_left', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_label_margin_left'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_label_margin_left', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_label_margin_left',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_label_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
+
+    public function betterdocs_doc_related_docs_list_font_size() {
+        $this->customizer->add_setting( 'betterdocs_doc_related_docs_list_font_size', [
+            'default'           => $this->defaults['betterdocs_doc_related_docs_list_font_size'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new RangeValueControl(
+            $this->customizer, 'betterdocs_doc_related_docs_list_font_size', [
+                'type'        => 'betterdocs-range-value',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_related_docs_list_font_size',
+                'label'       => __( 'List Font Size', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'min'    => 0,
+                    'max'    => 50,
+                    'step'   => 1,
+                    'suffix' => 'px' //optional suffix
+                ]
+            ] )
+        );
+    }
+
+    public function betterdocs_doc_related_docs_list_font_weight() {
+        $this->customizer->add_setting( 'betterdocs_doc_related_docs_list_font_weight', [
+            'default'           => $this->defaults['betterdocs_doc_related_docs_list_font_weight'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'choices']
+        ] );
+
+        $this->customizer->add_control(
+            new WP_Customize_Control(
+                $this->customizer,
+                'betterdocs_doc_related_docs_list_font_weight',
+                [
+                    'label'    => __( 'List Font Weight', 'betterdocs-pro' ),
+                    'section'  => 'betterdocs_single_docs_settings',
+                    'settings' => 'betterdocs_doc_related_docs_list_font_weight',
+                    'type'     => 'select',
+                    'choices'  => [
+                        'normal' => 'Normal',
+                        '100'    => '100',
+                        '200'    => '200',
+                        '300'    => '300',
+                        '400'    => '400',
+                        '500'    => '500',
+                        '600'    => '600',
+                        '700'    => '700',
+                        '800'    => '800',
+                        '900'    => '900'
+                    ],
+                    'priority' => 163
+                ]
+            )
+        );
+    }
+
+
+    public function betterdocs_doc_single_related_docs_list_color() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_list_color', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_list_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_doc_single_related_docs_list_color',
+                [
+                    'label'    => __( 'List Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_single_docs_settings',
+                    'settings' => 'betterdocs_doc_single_related_docs_list_color',
+                    'priority' => 163
+                ]
+            )
+        );
+    }
+
+    public function betterdocs_doc_single_related_docs_list_background_color() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_list_background_color', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_list_background_color'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_doc_single_related_docs_list_background_color',
+                [
+                    'label'    => __( 'List Background Color', 'betterdocs' ),
+                    'section'  => 'betterdocs_single_docs_settings',
+                    'settings' => 'betterdocs_doc_single_related_docs_list_background_color',
+                    'priority' => 163
+                ]
+            )
+        );
+    }
+
+    public function betterdocs_doc_single_related_docs_list_padding() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_list_padding', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_list_padding'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_list_padding', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_list_padding',
+                'label'       => __( 'List Padding', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'id'    => 'betterdocs_doc_single_related_docs_list_padding',
+                    'class' => 'betterdocs_doc_single_related_docs_list_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_list_padding_top', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_list_padding_top'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_list_padding_top', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_list_padding_top',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_list_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_list_padding_right', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_list_padding_right'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_list_padding_right', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_list_padding_right',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_list_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_list_padding_bottom', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_list_padding_bottom'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_list_padding_bottom', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_list_padding_bottom',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_list_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_list_padding_left', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_list_padding_left'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_list_padding_left', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_list_padding_left',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_list_padding betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
+
+    public function betterdocs_doc_single_related_docs_list_margin() {
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_list_margin', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_list_margin'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new TitleControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_list_margin', [
+                'type'        => 'betterdocs-title',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_list_margin',
+                'label'       => __( 'List Margin', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'id'    => 'betterdocs_doc_single_related_docs_list_margin',
+                    'class' => 'betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_list_margin_top', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_list_margin_top'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_list_margin_top', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_list_margin_top',
+                'label'       => __( 'Top', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_list_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_list_margin_right', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_list_margin_right'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_list_margin_right', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_list_margin_right',
+                'label'       => __( 'Right', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_list_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_list_margin_bottom', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_list_margin_bottom'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_list_margin_bottom', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_list_margin_bottom',
+                'label'       => __( 'Bottom', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_list_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+
+        $this->customizer->add_setting( 'betterdocs_doc_single_related_docs_list_margin_left', [
+            'default'           => $this->defaults['betterdocs_doc_single_related_docs_list_margin_left'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'integer']
+        ] );
+
+        $this->customizer->add_control( new DimensionControl(
+            $this->customizer, 'betterdocs_doc_single_related_docs_list_margin_left', [
+                'type'        => 'betterdocs-dimension',
+                'section'     => 'betterdocs_single_docs_settings',
+                'settings'    => 'betterdocs_doc_single_related_docs_list_margin_left',
+                'label'       => __( 'Left', 'betterdocs' ),
+                'priority'    => 163,
+                'input_attrs' => [
+                    'class' => 'betterdocs_doc_single_related_docs_list_margin betterdocs-dimension'
+                ]
+            ] )
+        );
+    }
 }

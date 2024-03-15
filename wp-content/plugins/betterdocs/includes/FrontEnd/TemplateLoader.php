@@ -33,6 +33,24 @@ class TemplateLoader extends Base {
         }
     }
 
+    /**
+     * Render Thrive Header Markup
+     *
+     * @return void
+     */
+    public function render_thrive_header() {
+        echo '<div id="wrapper">'.thrive_template()->render_theme_hf_section( THRIVE_HEADER_SECTION ).'<div id="content"><div class="main-container">';
+    }
+
+    /**
+     * Render Thrive Footer Markup
+     *
+     * @return void
+     */
+    public function render_thrive_footer() {
+        echo '</div></div>'.thrive_template()->render_theme_hf_section( THRIVE_FOOTER_SECTION ).'</div>';
+    }
+
     public function archive_template( $template ) {
         if ( get_post_type() !== 'docs' ) {
             return $template;
@@ -56,6 +74,11 @@ class TemplateLoader extends Base {
 
         $eligible_template = $this->views->path( $_template, $_default_template );
 
+        //Render The Header Footer When Thrive Builder Theme Is Activated
+        if( wp_get_theme() == 'Thrive Theme Builder' ){
+            $this->render_thrive_header_footer();
+        }
+
         if ( file_exists( $eligible_template ) ) {
             $template = &$eligible_template;
         }
@@ -63,9 +86,24 @@ class TemplateLoader extends Base {
         return apply_filters( 'betterdocs_archives_template', $template, $layout, $_default_template, $this->views );
     }
 
+    /**
+     * Render Thriver Header Footer When Thrive Theme Is Activated
+     *
+     * @return void
+     */
+    public function render_thrive_header_footer() {
+        add_action( 'get_header', [$this, 'render_thrive_header'], 10 );
+        add_action( 'get_footer',  [$this, 'render_thrive_footer'], 10 );
+    }
+
     public function single_template( $template ) {
         if ( ! is_singular( 'docs' ) ) {
             return $template;
+        }
+
+        //Render The Header Footer When Thrive Builder Theme Is Activated
+        if( wp_get_theme() == 'Thrive Theme Builder' ){
+            $this->render_thrive_header_footer();
         }
 
         $_default_template = 'templates/single/layout-1';

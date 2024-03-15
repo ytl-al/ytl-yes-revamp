@@ -41,6 +41,10 @@ class Rewrite extends Base {
      * @return void
      */
     public function save_permalink_structure( $_saved, $_settings, $_old_settings ) {
+        if ( ! isset($_settings['permalink_structure']) ) {
+            return;
+        }
+
         $_permalink_structure = $_settings['permalink_structure'];
 
         /**

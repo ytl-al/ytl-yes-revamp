@@ -36,7 +36,7 @@ class SearchForm extends BaseWidget {
     }
 
     public function get_script_depends() {
-        return [ 'betterdocs-search' ];
+        return [ 'betterdocs-search', 'betterdocs-pro' ];
     }
 
     /**

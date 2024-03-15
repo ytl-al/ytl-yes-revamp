@@ -24,6 +24,7 @@
             <key name="feedback_link_text" />
             <key name="feedback_form_title" />
             <key name="search_button_text" />
+            <key name="breadcrumb_home_url" />
         </key>
     </admin-texts>
     <elementor-widgets>

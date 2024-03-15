@@ -78,7 +78,7 @@ foreach ( $_nested_categories as $_nested_category ) :
                 betterdocs()->template_helper->icon( 'arrow-right', true );
                 betterdocs()->template_helper->icon( 'arrow-down', true );
             ?>
-            <a href="#"><?php _e( $_nested_category->name );?></a>
+            <a href="#"><?php _e( $_nested_category->name, 'betterdocs' );?></a>
         </span>
         <ul class="<?php esc_attr_e( $classes );?>">
             <?php

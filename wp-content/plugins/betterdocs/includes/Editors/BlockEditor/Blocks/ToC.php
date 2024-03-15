@@ -60,9 +60,8 @@ class ToC extends Block {
             'list_number' => $this->attributes['toc_list_number']
         ];
 
-        if ( is_admin() ) {
-            set_transient( 'betterdocs_toc_setting', $toc_setting );
-        }
+        //set TOC data in Transient, whenever TOC(block) is called.
+        set_transient( 'betterdocs_toc_setting', $toc_setting );
 
         $htags = implode( ',', $htags );
 

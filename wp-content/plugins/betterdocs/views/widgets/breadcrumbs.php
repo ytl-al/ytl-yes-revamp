@@ -113,7 +113,7 @@
                 $li_classes = ['betterdocs-breadcrumb-item'];
                 $li_classes = ! empty( $breadcrumb['li_classes'] ) ? array_merge( $li_classes, $breadcrumb['li_classes'] ) : $li_classes;
             ?>
-	            <li class="<?php esc_attr_e( implode( ' ', $li_classes ) );?>">
+	            <li class="<?php esc_attr_e( implode( ' ', $li_classes ), 'betterdocs' );?>">
 	                <?php
                             if ( empty( $breadcrumb['url'] ) ) {
                                 echo wp_kses_post( '<span>' . $breadcrumb['text'] . '</span>' );

@@ -2,9 +2,9 @@
 /**
 * Plugin Name: Contact Form Entries
 * Description: Save form submissions to the database from <a href="https://wordpress.org/plugins/contact-form-7/">Contact Form 7</a>, <a href="https://wordpress.org/plugins/ninja-forms/">Ninja Forms</a>, <a href="https://elementor.com/widgets/form-widget/">Elementor Forms</a> and <a href="https://wordpress.org/plugins/wpforms-lite/">WP Forms</a>.
-* Version: 1.3.2
+* Version: 1.3.5
 * Requires at least: 3.8
-* Tested up to: 6.3
+* Tested up to: 6.4
 * Author URI: https://www.crmperks.com
 * Plugin URI: https://www.crmperks.com/plugins/contact-form-plugins/crm-perks-forms/
 * Author: CRM Perks
@@ -26,7 +26,7 @@ class vxcf_form {
   public static $type = "vxcf_form";
   public static $path = ''; 
 
-  public static  $version = '1.3.2';
+  public static  $version = '1.3.5';
   public static $upload_folder = 'crm_perks_uploads';
   public static $db_version='';  
   public static $base_url='';  
@@ -73,6 +73,7 @@ wp_register_script( 'vx-tablesorter-js', self::$base_url. 'js/jquery.tablesorter
 wp_register_script( 'vx-tablepager-js', self::$base_url. 'js/jquery.tablesorter.pager.js',array('jquery') );
 wp_register_script( 'vx-tablewidgets-js', self::$base_url. 'js/jquery.tablesorter.widgets.js',array('jquery') );
 
+//$this->get_form_fields('na_1'); die();
 if(!empty($_GET['vx_crm_form_action']) && $_GET['vx_crm_form_action'] == 'download_csv'){
   $key=$this->post('vx_crm_key');
    $form_ids=get_option('vx_crm_forms_ids'); 
@@ -85,7 +86,8 @@ if(!empty($_GET['vx_crm_form_action']) && $_GET['vx_crm_form_action'] == 'downlo
      }  
    } 
 }
-//$form=vxcf_form::get_form_fields('el_2669e21_5190');
+//$form=vxcf_form::get_form_fields('el_2669e21_5190'); var_dump($form);
+//$form=vxcf_form::get_form_fields('wp_5137'); var_dump($form); die();
 //$form=cfx_form::get_form('1'); var_dump($form); die();
 
 }
@@ -261,7 +263,7 @@ vxcf_form::$form_fields=$fields;
   
       $table_id='';
     if(!empty($atts['id'])){
-   $table_id='id="'.esc_attr($atts['font-size']).'"';   
+   $table_id='id="'.esc_attr($atts['id']).'"';   
   }
   //var_dump($fields);
   $limit='20';
@@ -598,7 +600,7 @@ if($track){
 $form_arr=array('id'=>$form_data['id'],'name'=>'WP Forms','fields'=>$form_data['fields']);
 if(!empty($form_data['fields']['settings']['form_title'])){
     $form_arr['name']=$form_data['fields']['settings']['form_title'];
-}
+} 
 $this->create_entry($lead,$form_arr,'wp','',$track); 
 }
 //var_dump($fields); die();
@@ -690,7 +692,7 @@ $form_title=$form->title();
 $tags=vxcf_form::get_form_fields('cf_'.$form_id); 
 $post_data=$submission->get_posted_data();
 //var_dump($post_data); die();
- $lead=array();
+ $lead=array(); 
 if(is_array($post_data)){
   foreach($post_data as $k=>$val){
     if(in_array($k,array('vx_width','vx_height','vx_url','g-recaptcha-response'))){ continue; } 
@@ -703,18 +705,20 @@ if(is_array($post_data)){
   $val=$uploaded_files[$name];
    }
 
-   if( !empty($val) && isset($v['basetype']) && $v['basetype'] == 'mfile' && function_exists('dnd_get_upload_dir') ){
+   //disabled it @feb-2024 , dnd plugin now uses correct file urls
+   if( !empty($val) && isset($v['type_']) && $v['type_'] == 'mfile' && function_exists('dnd_get_upload_dir') ){
       $dir=dnd_get_upload_dir(); 
      $f_arr=array();
       foreach($val as $file){
      $file_name=explode('/',$file);
-     if(count($file_name)>1){
+     if(count($file_name)>1){ var_dump($file_name,$file);  
       $f_arr[]=$dir['upload_url'].'/'.$file_name[1];    
      }
       }
-        
+       
    $val=$f_arr;   
-   }  
+   }
+   
     if(!isset($uploaded_files[$name])){
      $val=wp_unslash($val);   
     }        
@@ -1149,12 +1153,20 @@ if(is_array($fields)){
       
       $name=$v['name'];
      if(isset($detail[$name])){
-         $val=$detail[$name];
-     if($v['type'] == 'file'){
-          $val= wp_get_attachment_url($val) ;
-             $base_url=get_site_url();
-              $val=str_replace($base_url,trim(ABSPATH,'/'),$val);
-    $uploaded_files_form[$name]=$val;   
+         $val=maybe_unserialize($detail[$name]);
+     if($v['type'] == 'file'){ 
+         $base_url=get_site_url();   
+          if(!is_array($val)){
+              $val=array($val);
+          }
+          $files=array();
+          foreach($val as  $vv){
+              if(!empty($vv)){
+              $vv= wp_get_attachment_url($vv) ;     
+              $files[]=str_replace($base_url,trim(ABSPATH,'/'),$vv);
+          } }
+    $uploaded_files_form[$name]=$files;
+             
      }     
   $lead[$name]=$detail[$name];          
      }
@@ -1168,7 +1180,7 @@ if($track){
        $lead[$k]=$v;    
        }  
    } 
-}
+} //var_dump($lead,$uploaded_files_form); die();
 global $wpdb;
 $table=$wpdb->prefix.'frm_forms';
 $sql=$wpdb->prepare("Select name from $table where id=%d",$form_id);
@@ -1737,7 +1749,7 @@ $forms =cfx_form::get_forms();
     }
     if(defined('ELEMENTOR_PRO_VERSION') ){  //&& class_exists('ElementorPro\\Plugin')
     global $wpdb;
-$data = $wpdb->get_results( "SELECT m.post_id, m.meta_value,p.post_title FROM $wpdb->postmeta m inner join $wpdb->posts p on(m.post_id=p.ID) WHERE p.post_status='publish' and m.meta_key = '_elementor_data' limit 30" , ARRAY_A  ); //__elementor_forms_snapshot
+$data = $wpdb->get_results( "SELECT m.post_id, m.meta_value,p.post_title FROM $wpdb->postmeta m inner join $wpdb->posts p on(m.post_id=p.ID) WHERE p.post_status='publish' and m.meta_key = '_elementor_data' limit 70" , ARRAY_A  ); //__elementor_forms_snapshot
   $forms_arr=array();  
   
 foreach($data as $v){
@@ -1978,6 +1990,7 @@ if(is_array($tags)){
        $field['label']=ucwords(str_replace(array('-','_')," ",$tag['name']));
        $field['type_']=$tag['type'];
        $field['type']=$tag['basetype'];
+       if($tag['basetype'] == 'mfile'){ $field['type']='file'; }
        $field['req']=strpos($tag['type'],'*') !==false ? 'true' : '';
        
         if($field['type'] == 'select' && !empty($tag['options']) && array_search('multiple',$tag['options'])!== false){
@@ -2069,7 +2082,7 @@ break;
 case'na':
 if(class_exists('Ninja_Forms')){
 
-$form_fields = Ninja_Forms()->form( $id )->get_fields();
+$form_fields = Ninja_Forms()->form( $id )->get_fields(); //var_dump($form_fields); die('----------');
 foreach ($form_fields as $obj) {
 $field=array();
 if( is_object( $obj ) ) {
@@ -2082,7 +2095,7 @@ $arr=array('name'=>$field['id']);
  if($type == 'textbox'){ $type='text'; }
  if($type == 'starrating'){ $type='text'; }
  if($type == 'file_upload'){ $type='file'; }
- if(in_array($type,array('spam','confirm')) || !isset($field['required']) ){ continue; }
+ if(in_array($type,array('spam','confirm','submit','repeater','save','html','hr'))  ){ continue; } //|| !isset($field['required'])  // it is not set for hidden fields that is why removed it
   if($type == 'checkbox'){
  $arr['values']=array(array('text'=>$field['label'],'value'=>'1'));     
  }
@@ -2535,7 +2548,7 @@ $label=isset($v['label']) ? $v['label'] : $type;
   $field['req']=!empty($v['required']) ? true : false; 
         if(in_array($type,array('radio','checkbox','select'))){
         $is_val=false;
-        if(in_array($v['type'],array('payment-select','payment-multiple'))){ $is_val=true; }
+        if(in_array($v['type'],array('payment-select','payment-multiple'))  ){ $is_val=true; } //|| (isset($v['show_values'])&& $v['show_values'] ='1' ) front form submission always sends label , not value , we will have to find value from form fields and store real value 
     $choices=array();
     if(!empty($v['choices'])){
      foreach($v['choices'] as $c){

@@ -3,7 +3,7 @@
 Plugin Name: WP Fastest Cache
 Plugin URI: http://wordpress.org/plugins/wp-fastest-cache/
 Description: The simplest and fastest WP Cache system
-Version: 1.2.2
+Version: 1.2.4
 Author: Emre Vona
 Author URI: https://www.wpfastestcache.com/
 Text Domain: wp-fastest-cache
@@ -1351,10 +1351,14 @@ GNU General Public License for more details.
 
 						if(is_dir($path)){
 							rename($path, $this->getWpContentDir("/cache/tmpWpfc/").time());
+						}else if(is_file($path)){
+							@unlink($path);
 						}
 
 						if(is_dir($mobile_path)){
 							rename($mobile_path, $this->getWpContentDir("/cache/tmpWpfc/mobile_").time());
+						}else if(is_file($mobile_path)){
+							@unlink($mobile_path);
 						}
 						
 					}
@@ -2064,20 +2068,28 @@ GNU General Public License for more details.
 		}
 
 		public function getABSPATH(){
-			$path = ABSPATH;
-			$siteUrl = site_url();
-			$homeUrl = home_url();
-			$diff = str_replace($homeUrl, "", $siteUrl);
-			$diff = trim($diff,"/");
+			return get_home_path();
 
-		    $pos = strrpos($path, $diff);
+			// 10.02.2024
+			
+			// $path = ABSPATH;
+			// $siteUrl = site_url();
+			// $homeUrl = home_url();
+			// $diff = str_replace($homeUrl, "", $siteUrl);
+			// $diff = trim($diff,"/");
 
-		    if($pos !== false){
-		    	$path = substr_replace($path, "", $pos, strlen($diff));
-		    	$path = trim($path,"/");
-		    	$path = "/".$path."/";
-		    }
-		    return $path;
+		 //    $pos = strrpos($path, $diff);
+
+		 //    if($pos !== false){
+		 //    	$path = substr_replace($path, "", $pos, strlen($diff));
+		 //    	$path = trim($path,"/");
+		 //    	$path = "/".$path."/";
+		 //    }
+		 //    return $path;
+
+
+
+
 		}
 
 		public function rm_folder_recursively($dir, $i = 1) {

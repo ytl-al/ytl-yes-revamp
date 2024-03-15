@@ -4,8 +4,213 @@ namespace WPDeveloper\BetterDocs\Core;
 
 use WPDeveloper\BetterDocs\Utils\Base;
 use WPDeveloper\BetterDocs\Utils\Helper;
+use WPDeveloper\BetterDocs\Admin\Builder\Rules;
 
 class KBMigration extends Base {
+    private $existing_plugins;
+    private $migrated_plugins;
+    private $active = 'helpscout';
+
+    public function __construct() {
+        $this->existing_plugins  = $this->knowledge_base_plugins();
+        $this->migrated_plugins  = $this->get_migrated_plugins();
+
+        add_filter( 'betterdocs_settings_tabs', [ $this, 'migration_settings' ], 10, 1 );
+        if ( ! $this->existing_plugins || ( $this->existing_plugins && in_array( $this->existing_plugins[0][0], $this->migrated_plugins )) ) {
+            return;
+        }
+        $this->active = 'kb-migration';
+        add_filter( 'admin_notices', [ $this, 'migration_notice' ], 10, 1 );
+        add_filter( 'betterdocs_migration_tab_sections', [ $this, 'kb_migration_settings' ], 10, 1 );
+    }
+
+    public function migration_notice() {
+        $screen = get_current_screen()->id;
+        if ( $screen === 'betterdocs_page_betterdocs-setup' ) {
+            return;
+        }
+        ?>
+        <div class="notice notice-success is-dismissible">
+            <?php
+            printf(
+                '<p>%s<a class="button button-primary betterdocs-migration-notice" href="%s">%s</a></p>',
+                __(
+                    sprintf(
+                        'Whoops! You are already using %s on your website. To migrate your %s data to BetterDocs, click here ',
+                        '<strong>'. esc_html($this->existing_plugins[0][1]) .'</strong>',
+                        '<strong>'. esc_html($this->existing_plugins[0][1]) .'</strong>'
+                    ),
+                    'betterdocs'
+                ),
+                esc_url(admin_url('admin.php?page=betterdocs-settings&tab=tab-migration')),
+                esc_html__('Start Migration', 'betterdocs')
+            );
+            ?>
+        </div>
+        <?php
+    }
+
+    public function migration_settings( $args ) {
+        /**
+         * License Tab
+         */
+        $args['tab-migration'] = apply_filters( 'betterdocs_settings_tab_migration', [
+            'id'       => 'tab-migration',
+            'name'     => 'tab-migration',
+            'classes'  => 'tab-migration',
+            'label'    => __( 'Migration', 'betterdocs' ),
+            'priority' => 80,
+            'fields'   => [
+                'sections-migration' => [
+                    'name'     => 'sections-migration',
+                    'type'     => 'section',
+                    'label'    => __( 'Migration', 'betterdocs' ),
+                    'priority' => 30,
+                    'fields'   => [
+                        'all-migration' => [
+                            'id'              => 'all-tab-migration',
+                            'name'            => 'all-tab-migration',
+                            'label'           => __( 'Migration Settings', 'betterdocs' ),
+                            'classes'         => 'tab-layout',
+                            'type'            => "tab",
+                            'active'          => $this->active,
+                            'completionTrack' => true,
+                            'sidebar'         => false,
+                            'save'            => false,
+                            'title'           => false,
+                            'config'          => [
+                                'active'  => $this->active,
+                                'sidebar' => false,
+                                'title'   => false
+                            ],
+                            'submit'          => [
+                                'show' => false
+                            ],
+                            'step'            => [
+                                'show' => false
+                            ],
+                            'priority'        => 20,
+                            'fields'          => apply_filters( 'betterdocs_migration_tab_sections', [
+                                'helpscout' => [
+                                    'id'       => 'helpscout',
+                                    'name'     => 'helpscout',
+                                    'type'     => 'section',
+                                    'label'    => __( 'Help Scout', 'betterdocs' ),
+                                    'priority' => 2,
+                                    'fields'   => [
+                                        'helpscout_api_key'      => [
+                                            'name'     => 'helpscout_api_key',
+                                            'type'     => 'text',
+                                            'label'    => __('Docs API Key', 'betterdocs'),
+                                            'label_subtitle'    => __('Check out this <a target="_blank" href="'.esc_url('https://betterdocs.co/docs/help-scout-migration-feature-with-betterdocs/').'">documentation</a> to retrieve your Help Scout Docs API Key', 'betterdocs'),
+                                            'default'  => '',
+                                            'priority' => 1,
+                                        ],
+                                        'helpscout_collection_id'      => [
+                                            'name'     => 'helpscout_collection_id',
+                                            'type'     => 'text',
+                                            'label'    => __('Collection ID', 'betterdocs'),
+                                            'label_subtitle'    => __('Check out this <a target="_blank" href="'.esc_url('https://betterdocs.co/docs/help-scout-migration-feature-with-betterdocs/').'">documentation</a> to retrieve your Help Scout Collection ID', 'betterdocs'),
+                                            'default'  => '',
+                                            'priority' => 2,
+                                        ],
+                                        'helpscout_action' => [
+                                            'name'     => 'helpscout_action',
+                                            'text'     => [
+                                                'normal'  => __('Migrate Help Scout Docs', 'betterdocs'),
+                                                'saved'   => __('Migrated', 'betterdocs'),
+                                                'loading' => __('Migrating...', 'betterdocs'),
+                                            ],
+                                            'type'     => 'button',
+                                            'priority' => 3,
+                                            'ajax'     => [
+                                                'on'   => 'click',
+                                                'api'  => '/betterdocs/v1/helpscout-migration',
+                                                'data' => [
+                                                    'helpscout_api_key'       => '@helpscout_api_key',
+                                                    'helpscout_collection_id' => '@helpscout_collection_id'
+                                                ],
+                                                'swal' => [
+                                                    'text'      => __( 'Help Scout Docs are successfully migrated to your site.', 'betterdocs' ),
+                                                    'icon'      => 'success',
+                                                    'autoClose' => 2000
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ])
+                        ]
+                    ]
+                ]
+            ]
+        ] );
+
+        return $args;
+    }
+
+    public function kb_migration_settings( $args ) {
+        /**
+         * License Tab
+         */
+        $args['kb-migration'] = [
+            'id'       => 'kb-migration',
+            'name'     => 'kb-migration',
+            'type'     => 'section',
+            'label'    => $this->existing_plugins[0][1],
+            'priority' => 1,
+            'fields'   => [
+                'kb-migration-section' => [
+                    'name'     => 'kb-migration-section',
+                    'classes'  => 'kb-migration-section',
+                    'type'     => 'section',
+                    'priority' => 0,
+                    'save' => false,
+                    'fields'   => apply_filters( 'betterdocs_migration_fields', [
+                        'migration_header'      => [
+                            'name'           => 'migration_header',
+                            'type'           => 'header',
+                            'title'          => __( 'Migration', 'betterdocs' ),
+                            'direction' => 'column',
+                            'description'    => wp_sprintf(
+                                __( 'We found that there is another Knowledge Base plugin, %s, installed on this website. To migrate your knowledge base to BetterDocs from %s, click the "Start Migration" button and all the documentation will be migrated to BetterDocs.', 'betterdocs' ),
+                                $this->existing_plugins[0][1],
+                                $this->existing_plugins[0][1]
+                            ),
+                            'icon' => '<img src="' . betterdocs()->assets->icon( 'icons/migration.svg', true ) . '"/>',
+                            'priority'       => 1,
+                        ],
+                        'migration_action' => [
+                            'name'     => 'migration_action',
+                            'type'     => 'button',
+                            'text'     => [
+                                'normal'  => __('Start Migration', 'betterdocs'),
+                                'saved'   => __('Migrated', 'betterdocs'),
+                                'loading' => __('Migrating...', 'betterdocs'),
+                            ],
+                            'ajax' => [
+                                'on'   => 'click',
+                                'api'  => '/betterdocs/v1/migrate',
+                                'data' => [
+                                    'existing_plugins'   => $this->existing_plugins[0][1],
+                                ],
+                                'swal' => [
+                                    'text'      => __('Migration completed successfully.', 'betterdocs'),
+                                    'icon'      => 'success',
+                                    'autoClose' => 1000
+                                ],
+                                'reload' => admin_url('admin.php?page=betterdocs-settings'),
+                            ],
+                            'priority' => 2,
+                        ]
+                    ])
+                ]
+            ]
+        ];
+
+        return $args;
+    }
+
     public function migrate() {
         $existing_plugins = $this->knowledge_base_plugins();
         $existing_plugins_data = $this->existing_plugins_data( $existing_plugins[0][0] );
@@ -14,7 +219,10 @@ class KBMigration extends Base {
                 $this->eco_knowledgebase_migration();
             } elseif ( $existing_plugins_data['name'] === 'pressapps-knowledge-base' ) {
                 $this->pressapps_migration();
+            } elseif ( $existing_plugins_data['name'] === 'wedocs' ) {
+                $this->wedocs_migration();
             }
+            $this->update_option( $existing_plugins_data['name'] );
             deactivate_plugins( $existing_plugins_data['url'] );
         }
     }
@@ -168,6 +376,135 @@ class KBMigration extends Base {
     public function pressapps_migration() {
         $this->insert_terms_hierarchically( 'knowledgebase_category', 'doc_category' );
         $this->insert_terms_hierarchically( 'knowledgebase_tags', 'doc_tag' );
-        $this->insert_posts( 'knowledgebase', 'knowledgebase_category', 'knowledgebase_tags' );;
+        $this->insert_posts( 'knowledgebase', 'knowledgebase_category', 'knowledgebase_tags' );
+    }
+
+    public function wedocs_migration() {
+        // Step 1: Get posts with no parent (main posts)
+        $args_step1 = array(
+            'post_type'      => 'docs',
+            'post_status'    => 'publish',
+            'posts_per_page' => -1,
+            'post_parent'    => 0,
+        );
+
+        $posts_step1 = get_posts( $args_step1 );
+
+        // Multidimensional array to store posts
+        $nested_posts = array();
+
+        // First Dimension key: 'multiple_kb'
+        foreach ( $posts_step1 as $post_step1 ) {
+            $nested_posts['multiple_kb'][$post_step1->ID] = array(
+                'post' => $post_step1,
+                'doc_category' => array(), // Initialize the second dimension
+            );
+
+            // Step 2: 'doc_category'
+            $args_step2 = array(
+                'post_type'      => 'docs',
+                'post_status'    => 'publish',
+                'posts_per_page' => -1,
+                'post_parent'    => $post_step1->ID,
+            );
+
+            $posts_step2 = get_posts($args_step2);
+
+            foreach ( $posts_step2 as $post_step2 ) {
+                $nested_posts['multiple_kb'][$post_step1->ID]['doc_category'][$post_step2->ID] = array(
+                    'post' => $post_step2,
+                    'docs' => array(), // Initialize the third dimension
+                );
+
+                // Step 3: 'docs'
+                $args_step3 = array(
+                    'post_type'      => 'docs', // Replace with your actual post type
+                    'post_status'    => 'publish',
+                    'posts_per_page' => -1,
+                    'post_parent'    => $post_step2->ID,
+                );
+
+                $posts_step3 = get_posts($args_step3);
+
+                foreach ( $posts_step3 as $post_step3 ) {
+                    $nested_posts['multiple_kb'][$post_step1->ID]['doc_category'][$post_step2->ID]['docs'][$post_step3->ID] = array(
+                        'post' => $post_step3,
+                    );
+                    // Continue with additional dimensions if needed
+                }
+            }
+        }
+
+        // Now, $nested_posts contains the posts organized in a multidimensional array with the specified key names
+
+        foreach ( $nested_posts['multiple_kb'] as $multiple_kb_id => $multiple_kb_data ) {
+            // Step 1: Insert posts as terms under 'knowledge_base'
+            $knowledge_base_id = wp_insert_term($multiple_kb_data['post']->post_title, 'knowledge_base');
+
+            if ( ! is_wp_error($knowledge_base_id) ) {
+                wp_delete_post($multiple_kb_data['post']->ID, true);
+                $knowledge_base_term = get_term($knowledge_base_id['term_id'], 'knowledge_base');
+            }
+
+            foreach ( $multiple_kb_data['doc_category'] as $doc_category_id => $doc_category_data ) {
+
+                // Step 2: Insert posts as terms under 'doc_category' and set term meta
+                $doc_category_id = wp_insert_term($doc_category_data['post']->post_title, 'doc_category');
+
+                if (!is_wp_error($doc_category_id)) {
+                    $doc_category_term = get_term($doc_category_id['term_id'], 'doc_category');
+                    wp_delete_post($doc_category_data['post']->ID, true);
+                    $doc_category_kb = rest_sanitize_array( array($knowledge_base_term->slug) );
+                    // Set term meta for 'knowledge_base_doc_category'
+                    update_term_meta($doc_category_id['term_id'], 'doc_category_knowledge_base', $doc_category_kb);
+                }
+
+                foreach ( $doc_category_data['docs'] as $docs_id => $docs_data ) {
+                    wp_set_post_terms($docs_data['post']->ID, array($knowledge_base_term->term_id), 'knowledge_base');
+                    wp_set_post_terms($docs_data['post']->ID, array($doc_category_term->term_id), 'doc_category');
+                    // // Step 3: Update posts to assign correct parent terms
+                    // wp_update_post(array(
+                    //     'ID' => $docs_data['post']->ID,
+                    //     'post_parent' => 0,
+                    // ));
+                }
+            }
+        }
+    }
+
+    /**
+     * Updates the 'betterdocs_migration' option with migrated knowledge base plugin names.
+     *
+     * This function checks if the option exists and is a serialized array. If the option exists,
+     * it unserializes the current value, merges it with the new values, serializes the merged array,
+     * and updates the option. If the option doesn't exist or is not a serialized array, it creates
+     * a new option with the serialized format.
+     *
+     * @param string $kb_name The name of the knowledge base to be added or updated.
+     *
+     * @return void
+     */
+    public function update_option( $kb_name ) {
+        $existing_value = get_option( 'betterdocs_migration' );
+        $new_values = array( $kb_name );
+
+        if ($existing_value !== false && is_serialized( $existing_value )) {
+            $existing_values_array = unserialize($existing_value);
+            $merged_values = array_merge($existing_values_array, $new_values);
+
+            update_option('betterdocs_migration', serialize($merged_values));
+        } else {
+            update_option('betterdocs_migration', serialize($new_values));
+        }
+    }
+
+    public function get_migrated_plugins() {
+        $existing_value = get_option( 'betterdocs_migration' );
+
+        if ( $existing_value ) {
+            return unserialize($existing_value);
+        }
+
+        return [];
     }
 }

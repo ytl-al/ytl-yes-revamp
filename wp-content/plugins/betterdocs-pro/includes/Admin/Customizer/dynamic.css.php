@@ -82,7 +82,7 @@ $css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-
 ], 'px' ) );
 
 //Box Category Icon for Layout 4
-$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-3 .betterdocs-category-box-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header .betterdocs-category-icon, .betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-4 .betterdocs-category-box-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header .betterdocs-category-icon, .betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-5 .betterdocs-category-box-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header .betterdocs-category-icon', $css->properties( [
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-3 .betterdocs-category-box-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header .betterdocs-category-icon .betterdocs-category-icon-img, .betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-4 .betterdocs-category-box-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header .betterdocs-category-icon .betterdocs-category-icon-img, .betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-5 .betterdocs-category-box-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header .betterdocs-category-icon .betterdocs-category-icon-img', $css->properties( [
     'height' => 'betterdocs_doc_page_cat_icon_size_l_3_4'
 ], 'px' ) );
 
@@ -405,7 +405,7 @@ $css->add_rule( '.betterdocs-mkb-wrapper.betterdocs-mkb-layout-1 .betterdocs-cat
 
 //MKB Layout 1 Icon Size
 $css->add_rule( '.betterdocs-mkb-wrapper.betterdocs-mkb-layout-1 .betterdocs-category-icon .betterdocs-category-icon-img', $css->properties( [
-    'max-height' => 'betterdocs_mkb_cat_icon_size'
+    'height' => 'betterdocs_mkb_cat_icon_size'
 ], 'px' ) );
 
 //MKB Layout 1 Column Border Radius
@@ -493,7 +493,7 @@ $css->add_rule( '.betterdocs-mkb-wrapper.betterdocs-mkb-layout-2 .betterdocs-cat
 
 //MKB Layout 2 Icon Size
 $css->add_rule( '.betterdocs-mkb-wrapper.betterdocs-mkb-layout-2 .betterdocs-category-icon .betterdocs-category-icon-img', $css->properties( [
-    'max-height' => 'betterdocs_mkb_cat_icon_size'
+    'height' => 'betterdocs_mkb_cat_icon_size'
 ], 'px' ) );
 
 //MKB Layout 2 Column Border Radius
@@ -581,7 +581,7 @@ $css->add_rule( '.betterdocs-mkb-wrapper.betterdocs-mkb-layout-3 .betterdocs-cat
 
 //MKB Layout 3 Icon Size
 $css->add_rule( '.betterdocs-mkb-wrapper.betterdocs-mkb-layout-3 .betterdocs-category-icon .betterdocs-category-icon-img', $css->properties( [
-    'max-height' => 'betterdocs_mkb_cat_icon_size'
+    'height' => 'betterdocs_mkb_cat_icon_size'
 ], 'px' ) );
 
 //MKB Layout 3 Column Border Radius
@@ -745,7 +745,6 @@ $css->add_rule( '.betterdocs-mkb-wrapper.betterdocs-mkb-layout-4 .betterdocs-foo
 
 //MKB Layout 4 Icon Size
 $css->add_rule( '.betterdocs-mkb-wrapper.betterdocs-mkb-layout-4 .betterdocs-category-icon .betterdocs-category-icon-img', $css->properties( [
-    'max-height' => 'betterdocs_mkb_cat_icon_size',
     'height'     => 'betterdocs_mkb_cat_icon_size'
 ], 'px' ) );
 
@@ -804,7 +803,7 @@ $css->add_rule( '.betterdocs-mkb-wrapper.betterdocs-mkb-layout-4 .betterdocs-cat
 ], 'px' ) );
 
 //MKB Layout 4 Title Font Size
-$css->add_rule( '.betterdocs-mkb-wrapper.betterdocs-mkb-layout-4 .betterdocs-category-grid-wrapper .betterdocs-category-title:not(:has(a))', $css->properties( [
+$css->add_rule( '.betterdocs-mkb-wrapper.betterdocs-mkb-layout-4 .betterdocs-category-grid-wrapper .betterdocs-category-title:not(a)', $css->properties( [
     'font-size' => 'betterdocs_mkb_cat_title_font_size'
 ], 'px' ) );
 $css->add_rule( '.betterdocs-mkb-wrapper.betterdocs-mkb-layout-4 .betterdocs-category-grid-wrapper .betterdocs-category-title a', $css->properties( [
@@ -812,7 +811,7 @@ $css->add_rule( '.betterdocs-mkb-wrapper.betterdocs-mkb-layout-4 .betterdocs-cat
 ], 'px' ) );
 
 //MKB Layout 4 Title Color
-$css->add_rule( '.betterdocs-mkb-wrapper.betterdocs-mkb-layout-4 .betterdocs-category-grid-wrapper .betterdocs-category-title:not(:has(a))', $css->properties( [
+$css->add_rule( '.betterdocs-mkb-wrapper.betterdocs-mkb-layout-4 .betterdocs-category-grid-wrapper .betterdocs-category-title:not(a)', $css->properties( [
     'color' => 'betterdocs_mkb_cat_title_color'
 ] ) );
 
@@ -822,7 +821,7 @@ $css->add_rule( '.betterdocs-mkb-wrapper.betterdocs-mkb-layout-4 .betterdocs-cat
 ] ) );
 
 //MKB Layout 4 Title Hover Color
-$css->add_rule( '.betterdocs-mkb-wrapper.betterdocs-mkb-layout-4 .betterdocs-category-grid-wrapper .betterdocs-category-title:not(:has(a)):hover', $css->properties( [
+$css->add_rule( '.betterdocs-mkb-wrapper.betterdocs-mkb-layout-4 .betterdocs-category-grid-wrapper .betterdocs-category-title:not(a):hover', $css->properties( [
     'color' => 'betterdocs_mkb_cat_title_hover_color'
 ] ) );
 

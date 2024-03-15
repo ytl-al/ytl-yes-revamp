@@ -28,6 +28,7 @@ class SearchForm extends Shortcode {
         global $wpdb;
         $search_input = isset( $_POST['search_input'] ) ? sanitize_text_field( $_POST['search_input'] ) : '';
         $search_cat   = isset( $_POST['search_cat'] ) ? wp_strip_all_tags( $_POST['search_cat'] ) : '';
+        $lang   = isset( $_POST['lang'] ) ? wp_strip_all_tags( $_POST['lang'] ) : '';
         $search_input = preg_replace( '/[^A-Za-z0-9_\- ][]]/', '', strtolower( $search_input ) );
 
         $tax_query = [];
@@ -45,15 +46,23 @@ class SearchForm extends Shortcode {
 
         $term = get_term_by( 'slug', $search_cat );
 
-        $search_results = $this->query->get_posts( [
+        $args = [
             'term_id'          => isset( $term->term_id ) ? $term->term_id : 0,
             'post_type'        => 'docs',
             'post_status'      => 'publish',
             'posts_per_page'   => -1,
             'suppress_filters' => true,
             's'                => $search_input,
-            'tax_query'        => $tax_query,
-        ] );
+            'orderby'          => 'relevance',
+            'tax_query'        => $tax_query
+        ];
+
+        if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
+            $args['suppress_filters'] = false;
+            $args['lang'] = ICL_LANGUAGE_CODE;
+        }
+
+        $search_results = $this->query->get_posts( $args );
 
         $response = [];
 

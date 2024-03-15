@@ -1,0 +1,8 @@
+{
+    "apiVersion": 2,
+    "title": "BetterDocs Attachment",
+    "name": "betterdocs/attachment",
+    "category": "betterdocs",
+    "description": "Add attachments such as .pdf, .jpeg, .zip etc files in your docs and show them on your Single Docs page with the Add Attachment Block.",
+    "textdomain": "betterdocs-pro"
+}

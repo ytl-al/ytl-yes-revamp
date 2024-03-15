@@ -5,7 +5,7 @@ Tags: knowledge base, docs, documentation, documents, faq page, doc, knowledge, 
 Requires at least: 4.0
 Tested up to: 6.3
 Requires PHP: 7.0
-Stable tag: 2.5.4
+Stable tag: 3.1.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -91,6 +91,56 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 3.1.0 - 18/02/2023 =
+
+- Added: Show Related Docs in Single Docs
+- Added: Add Attachments in Single Docs
+- Few minor bug fixes & improvements
+
+= 3.0.3 - 14/01/2023 =
+
+- Improved: Added CSV Support for Import/Export feature
+- Improved: Added an option to change the docs order on the Instant Answer
+- Fixed: Instant Answer Search Results not showing properly on FAQs & Docs respectively
+- Fixed: When FAQ is disabled inside Instant Answer, it still shows the search result from FAQs in the Instant Answer
+- Few minor bug fixes & improvements
+
+= 3.0.2 - 11/12/2023 =
+
+- Few Minor Bug Fixes & Improvements
+
+= 3.0.1 - 03/12/2023 =
+
+- Fixed: Instant Answers Showing different color for Homepage and Docs page
+- Fixed: Instant Answers Select Docs - All not showing any docs
+- Fixed: Multiple KB translation URL doesn't work
+- Added: Advanced Search Block
+- Few minor bug fixes & improvements
+
+= 3.0.0 - 05/11/2023 =
+
+- Revamped: Instant Answers Interface
+- Few Minor Bug Fixes & Improvements
+
+= 2.5.7 - 21/09/2023 =
+
+- Fixed: Permalink issue for a certain use-case
+- Fixed: Role management issue for shop manager
+- Few minor bug fixes & improvements
+
+
+= 2.5.6 - 11/09/2023 =
+
+- Fixed: Permalink feed not working
+- Improved: Customizer CSS loading only on BetterDocs templates
+- Few minor bug fixes & improvements
+
+= 2.5.5 - 05/09/2023 =
+
+- Fixed- IA single doc reaction does not work for the ‘plain’ permalink type
+- Fixed- ‘Order By BetterDocs Order’ not working on the Elementor Multiple KB widget
+- Few minor bug fixes & improvements
 
 = 2.5.4 - 24/08/2023 =
 

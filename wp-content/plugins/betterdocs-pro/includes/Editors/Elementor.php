@@ -5,9 +5,11 @@ namespace WPDeveloper\BetterDocsPro\Editors;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Border as Group_Control_Border;
 use WPDeveloper\BetterDocs\Editors\Elementor as FreeElementor;
+use WPDeveloper\BetterDocsPro\Editors\Elementor\Widget\Attachment;
 use WPDeveloper\BetterDocsPro\Editors\Elementor\Widget\MultipleKB;
 use Elementor\Group_Control_Typography as Group_Control_Typography;
 use WPDeveloper\BetterDocsPro\Editors\Elementor\Widget\PopularView;
+use WPDeveloper\BetterDocsPro\Editors\Elementor\Widget\RelatedDocs;
 use WPDeveloper\BetterDocsPro\Editors\Elementor\Widget\TabViewList;
 
 class Elementor extends FreeElementor {
@@ -342,7 +344,8 @@ class Elementor extends FreeElementor {
         $widgets['betterdocs-elementor-multiple-kb']   = MultipleKB::class;
         $widgets['betterdocs-elementor-popular-view']  = PopularView::class;
         $widgets['betterdocs-elementor-tab-view-list'] = TabViewList::class;
-
+        $widgets['betterdocs-elementor-attachment']    = Attachment::class;
+        $widgets['betterdocs-elementor-related-docs']  = RelatedDocs::class;
         return $widgets;
     }
 }

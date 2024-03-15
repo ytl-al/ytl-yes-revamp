@@ -131,7 +131,7 @@ $css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper .betterdocs
 
 //Grid Category Icon without Layout 4
 $css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper:not(.betterdocs-category-layout-4) .betterdocs-category-grid-wrapper .betterdocs-single-category-wrapper .betterdocs-category-header .betterdocs-category-icon .betterdocs-category-icon-img', $css->properties( [
-    'height' => 'betterdocs_doc_page_cat_icon_size_layout1',
+    'height' => 'betterdocs_doc_page_cat_icon_size_layout1'
 ], 'px' ) );
 
 //Box Category Icon without Layout 4
@@ -610,6 +610,11 @@ $css->add_rule( '.betterdocs-wrapper.betterdocs-single-wrapper.betterdocs-single
     'padding-bottom' => 'betterdocs_doc_single_2_post_content_padding_bottom',
     'padding-left'   => 'betterdocs_doc_single_2_post_content_padding_left'
 ], 'px' ) );
+
+//Single Doc Text Transform
+$css->add_rule( '.betterdocs-single-wrapper .docs-single-title .betterdocs-entry-title', $css->properties( [
+    'text-transform' => 'betterdocs_post_title_text_transform'
+] ) );
 
 //Single Doc Layout 1 Post Title Font Size
 $css->add_rule( '.betterdocs-single-wrapper.betterdocs-single-layout-1 .docs-single-title .betterdocs-entry-title', $css->properties( [
@@ -3253,6 +3258,178 @@ $css->add_rule( '.betterdocs-sidebar.betterdocs-sidebar-layout-3 .betterdocs-sin
 //     'color' => 'betterdocs_sidebar_active_list_item_color'
 // ] ) );
 /** SideBar Controls End **/
+
+//Attachment Content Background Color (Single Doc)
+$css->add_rule( '.betterdocs-attachment-wrapper', $css->properties( [
+    'background-color' => 'betterdocs_doc_single_attachment_content_bg_color'
+] ) );
+
+//Attachment Content Padding Top | Right | Bottom | Left (Single Doc)
+$css->add_rule( '.betterdocs-attachment-wrapper', $css->properties( [
+    'padding-top'    => 'betterdocs_doc_single_attachment_content_padding_top',
+    'padding-right'  => 'betterdocs_doc_single_attachment_content_padding_right',
+    'padding-bottom' => 'betterdocs_doc_single_attachment_content_padding_bottom',
+    'padding-left'   => 'betterdocs_doc_single_attachment_content_padding_left'
+], 'px' ) );
+
+//Attachment Content Margin Top | Right | Bottom | Left (Single Doc)
+$css->add_rule( '.betterdocs-attachment-wrapper', $css->properties( [
+    'margin-top'    => 'betterdocs_doc_single_attachment_content_margin_top',
+    'margin-right'  => 'betterdocs_doc_single_attachment_content_margin_right',
+    'margin-bottom' => 'betterdocs_doc_single_attachment_content_margin_bottom',
+    'margin-left'   => 'betterdocs_doc_single_attachment_content_margin_left'
+], 'px' ) );
+
+//Attachment Label Color (Single Doc)
+$css->add_rule( '.betterdocs-attachment-wrapper .betterdocs-attachment-heading', $css->properties( [
+    'color' => 'betterdocs_doc_single_attachment_label_color'
+], 'px' ) );
+
+//Attachment Label Padding (Single Doc)
+$css->add_rule( '.betterdocs-attachment-wrapper .betterdocs-attachment-heading', $css->properties( [
+    'padding-top'    => 'betterdocs_doc_single_attachment_label_padding_top',
+    'padding-right'  => 'betterdocs_doc_single_attachment_label_padding_right',
+    'padding-bottom' => 'betterdocs_doc_single_attachment_label_padding_bottom',
+    'padding-left'   => 'betterdocs_doc_single_attachment_label_padding_left'
+], 'px' ) );
+
+//Attachment Label Margin (Single Doc)
+$css->add_rule( '.betterdocs-attachment-wrapper .betterdocs-attachment-heading', $css->properties( [
+    'margin-top'    => 'betterdocs_doc_single_attachment_label_margin_top',
+    'margin-right'  => 'betterdocs_doc_single_attachment_label_margin_right',
+    'margin-bottom' => 'betterdocs_doc_single_attachment_label_margin_bottom',
+    'margin-left'   => 'betterdocs_doc_single_attachment_label_margin_left'
+], 'px' ) );
+
+//Attachment List Font Size
+$css->add_rule( '.betterdocs-attachment-wrapper .attachment-list .attachment-details a .attachment-name', $css->properties( [
+    'font-size' => 'betterdocs_doc_single_attachment_list_font_size'
+], 'px' ) );
+
+//Attachment List Font Weight
+$css->add_rule( '.betterdocs-attachment-wrapper .attachment-list .attachment-details a .attachment-name', $css->properties( [
+    'font-weight' => 'betterdocs_doc_single_attachment_list_font_weight'
+] ) );
+
+//Attachment List Extension Font Size
+$css->add_rule( '.betterdocs-attachment-wrapper .attachment-list .attachment-details a .attachment-size', $css->properties( [
+    'font-size' => 'betterdocs_doc_single_attachment_list_extension_font_size'
+], 'px' ) );
+
+//Attachment List Extension Font Weight
+$css->add_rule( '.betterdocs-attachment-wrapper .attachment-list .attachment-details a .attachment-size', $css->properties( [
+    'font-weight' => 'betterdocs_doc_single_attachment_list_extension_font_weight'
+] ) );
+
+//Attachment List Extension Color
+$css->add_rule( '.betterdocs-attachment-wrapper .attachment-list .attachment-details a .attachment-name, .betterdocs-attachment-wrapper .attachment-list .attachment-details a .attachment-size', $css->properties( [
+    'color' => 'betterdocs_doc_single_attachment_list_extension_color'
+] ) );
+
+//Attachment List Color
+$css->add_rule( '.betterdocs-attachment-wrapper .attachment-list .attachment-details a .attachment-name', $css->properties( [
+    'color' => 'betterdocs_doc_single_attachment_list_color'
+] ) );
+
+//Attachment List Background Color
+$css->add_rule( '.betterdocs-attachment-wrapper .attachment-list .attachment-details', $css->properties( [
+    'background-color' => 'betterdocs_doc_single_attachment_list_background_color'
+] ) );
+
+//Attachment List Padding
+$css->add_rule( '.betterdocs-attachment-wrapper .attachment-list .attachment-details', $css->properties( [
+    'padding-top'    => 'betterdocs_doc_single_attachment_list_padding_top',
+    'padding-right'  => 'betterdocs_doc_single_attachment_list_padding_right',
+    'padding-bottom' => 'betterdocs_doc_single_attachment_list_padding_bottom',
+    'padding-left'   => 'betterdocs_doc_single_attachment_list_padding_left'
+], 'px' ) );
+
+//Attachment List Margin
+$css->add_rule( '.betterdocs-attachment-wrapper .attachment-list .attachment-details', $css->properties( [
+    'margin-top'    => 'betterdocs_doc_single_attachment_list_margin_top',
+    'margin-right'  => 'betterdocs_doc_single_attachment_list_margin_right',
+    'margin-bottom' => 'betterdocs_doc_single_attachment_list_margin_bottom',
+    'margin-left'   => 'betterdocs_doc_single_attachment_list_margin_left'
+], 'px' ) );
+
+//Related Docs Content Background Color (Single Doc)
+$css->add_rule( '.betterdocs-related-articles-container-front', $css->properties( [
+    'background-color' => 'betterdocs_doc_single_related_docs_content_bg_color'
+] ) );
+
+//Related Docs Content Padding Top | Right | Bottom | Left (Single Doc)
+$css->add_rule( '.betterdocs-related-articles-container-front', $css->properties( [
+    'padding-top' => 'betterdocs_doc_single_related_docs_content_padding_top',
+    'padding-right' => 'betterdocs_doc_single_related_docs_content_padding_right',
+    'padding-bottom' => 'betterdocs_doc_single_related_docs_content_padding_bottom',
+    'padding-left' => 'betterdocs_doc_single_related_docs_content_padding_left'
+], 'px' ) );
+
+//Related Docs Content Margin Top | Right | Bottom | Left (Single Doc)
+$css->add_rule( '.betterdocs-related-articles-container-front', $css->properties( [
+    'margin-top' => 'betterdocs_doc_single_related_docs_content_margin_top',
+    'margin-right' => 'betterdocs_doc_single_related_docs_content_margin_right',
+    'margin-bottom' => 'betterdocs_doc_single_related_docs_content_margin_bottom',
+    'margin-left' => 'betterdocs_doc_single_related_docs_content_margin_left'
+], 'px' ) );
+
+//Related Docs Label Color (Single Doc)
+$css->add_rule( '.betterdocs-related-articles-container-front .related-articles-title', $css->properties( [
+    'color' => 'betterdocs_doc_single_related_docs_label_color'
+] ) );
+
+//Related Docs Label Padding Top | Right | Bottom | Left
+$css->add_rule( '.betterdocs-related-articles-container-front .related-articles-title', $css->properties( [
+    'padding-top' => 'betterdocs_doc_single_related_docs_label_padding_top',
+    'padding-right' => 'betterdocs_doc_single_related_docs_label_padding_right',
+    'padding-bottom' => 'betterdocs_doc_single_related_docs_label_padding_bottom',
+    'padding-left' => 'betterdocs_doc_single_related_docs_label_padding_left',
+], 'px' ) );
+
+//Related Docs Label Margin Top | Right | Bottom | Left
+$css->add_rule( '.betterdocs-related-articles-container-front .related-articles-title', $css->properties( [
+    'margin-top' => 'betterdocs_doc_single_related_docs_label_margin_top',
+    'margin-right' => 'betterdocs_doc_single_related_docs_label_margin_right',
+    'margin-bottom' => 'betterdocs_doc_single_related_docs_label_margin_bottom',
+    'margin-left' => 'betterdocs_doc_single_related_docs_label_margin_left',
+], 'px' ) );
+
+//Related Docs List Font Size
+$css->add_rule( '.betterdocs-related-articles-container-front .related-articles-list li a', $css->properties( [
+    'font-size' => 'betterdocs_doc_related_docs_list_font_size'
+], 'px' ) );
+
+//Related Docs List Font Weight
+$css->add_rule( '.betterdocs-related-articles-container-front .related-articles-list li a', $css->properties( [
+    'font-weight' => 'betterdocs_doc_related_docs_list_font_weight'
+] ) );
+
+//Related Docs List Color
+$css->add_rule( '.betterdocs-related-articles-container-front .related-articles-list li a', $css->properties( [
+    'color' => 'betterdocs_doc_single_related_docs_list_color'
+] ) );
+
+//Related Docs List Background Color
+$css->add_rule( '.betterdocs-related-articles-container-front .related-articles-list li', $css->properties( [
+    'background-color' => 'betterdocs_doc_single_related_docs_list_background_color'
+] ) );
+
+//Related Docs List Padding Top | Right | Bottom | Left
+$css->add_rule( '.betterdocs-related-articles-container-front .related-articles-list li', $css->properties( [
+    'padding-top' => 'betterdocs_doc_single_related_docs_list_padding_top',
+    'padding-right' => 'betterdocs_doc_single_related_docs_list_padding_right',
+    'padding-bottom' => 'betterdocs_doc_single_related_docs_list_padding_bottom',
+    'padding-left' => 'betterdocs_doc_single_related_docs_list_padding_left'
+], 'px' ) );
+
+//Related Docs List Margin Top | Right | Bottom | Left
+$css->add_rule( '.betterdocs-related-articles-container-front .related-articles-list li', $css->properties( [
+    'margin-top' => 'betterdocs_doc_single_related_docs_list_margin_top',
+    'margin-right' => 'betterdocs_doc_single_related_docs_list_margin_right',
+    'margin-bottom' => 'betterdocs_doc_single_related_docs_list_margin_bottom',
+    'margin-left' => 'betterdocs_doc_single_related_docs_list_margin_left'
+], 'px' ) );
+
 
 /** Archive Page Controls Start **/
 

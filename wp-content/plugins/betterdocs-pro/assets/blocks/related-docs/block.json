@@ -1,0 +1,8 @@
+{
+    "apiVersion": 2,
+    "title": "BetterDocs Related Docs",
+    "name": "betterdocs/related-docs",
+    "category": "betterdocs",
+    "description": "Add relevant docs related to any particular doc and show it on your Single Docs page with the Related Docs block.",
+    "textdomain": "betterdocs-pro"
+}

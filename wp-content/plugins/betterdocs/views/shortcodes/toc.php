@@ -24,7 +24,7 @@
     }
 ?>
 
-<div class="<?php esc_attr_e( implode( ' ', $wrapper_classes ) );?>">
+<div class="<?php esc_attr_e( implode( ' ', $wrapper_classes ), 'betterdocs' );?>">
     <span class="toc-title">
         <?php echo $toc_title . $collapsible_arrow; ?>
     </span>

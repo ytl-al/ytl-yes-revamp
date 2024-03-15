@@ -711,6 +711,24 @@ class DocsPage extends Section {
         ) );
     }
 
+    public function show_category_icon() {
+        $this->customizer->add_setting( 'betterdocs_doc_page_show_category_icon', [
+            'default'           => $this->defaults['betterdocs_doc_page_show_category_icon'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'checkbox']
+        ] );
+
+        $this->customizer->add_control( new ToggleControl(
+            $this->customizer, 'betterdocs_doc_page_show_category_icon', [
+                'label'    => __( 'Show Category Icon', 'betterdocs' ),
+                'section'  => 'betterdocs_doc_page_settings',
+                'settings' => 'betterdocs_doc_page_show_category_icon',
+                'type'     => 'light', // light, ios, flat
+                'priority' => 23
+            ]
+        ) );
+    }
+
     public function category_icon_size() {
         $this->customizer->add_setting( 'betterdocs_doc_page_cat_icon_size_layout1', [
             'default'           => $this->defaults['betterdocs_doc_page_cat_icon_size_layout1'],

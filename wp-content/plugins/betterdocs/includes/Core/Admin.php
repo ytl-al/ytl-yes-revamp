@@ -12,6 +12,7 @@ use WPDeveloper\BetterDocs\Utils\Base;
 use WPDeveloper\BetterDocs\Utils\Enqueue;
 use WPDeveloper\BetterDocs\Utils\Helper;
 use WPDeveloper\BetterDocs\Utils\Insights;
+use WPDeveloper\BetterDocs\Core\KBMigration;
 
 class Admin extends Base {
     /**
@@ -60,6 +61,7 @@ class Admin extends Base {
         $this->container = $container;
         $this->assets    = $assets;
         $this->settings  = $settings;
+        $this->slug      = 'betterdocs-admin';
 
         add_action( 'init', [ $type, 'register' ], 9 );
 
@@ -73,11 +75,13 @@ class Admin extends Base {
         }
 
         $this->plugin_insights();
-        add_action( 'admin_notices', [ $this, 'compatibility_notices' ] );
+        add_action( 'admin_notices', [$this, 'compatibility_notices'] );
         // add_action( 'admin_init', [$this, 'notices'], 9 );
+        add_filter( 'admin_init', [$this, 'save_admin_page'], 99 );
 
-        add_action( 'admin_menu', [ $this, 'menus' ] );
-        add_filter( 'plugin_action_links_' . BETTERDOCS_PLUGIN_BASENAME, [ $this, 'insert_plugin_links' ] );
+        add_action( 'admin_menu', [$this, 'menus'] );
+        add_action( 'admin_menu', [$this, 'reset_submenu'] );
+        add_filter( 'plugin_action_links_' . BETTERDOCS_PLUGIN_BASENAME, [$this, 'insert_plugin_links'] );
 
         // $this->container->get( SetupWizard::class )->init();
 
@@ -163,7 +167,7 @@ class Admin extends Base {
         $message = __( 'We hope you\'re enjoying BetterDocs! Could you please do us a BIG favor and give it a 5-star rating on WordPress to help us spread the word and boost our motivation?', 'betterdocs' );
 
         $_review_notice = [
-            'thumbnail' => $this->assets->icon( 'betterdocs-icon.svg', true ),
+            'thumbnail' => $this->assets->icon( 'betterdocs-logo.svg', true ),
             'html'      => '<p>' . $message . '</p>',
             'links'     => [
                 'later'            => [
@@ -274,6 +278,7 @@ class Admin extends Base {
         foreach ( $columns as $key => $value ) {
             if ( $key == 'date' ) {
                 $new_columns['betterdocs_word_count'] = __( 'Word Count', 'betterdocs' ); // put the tags column before it
+                $new_columns['betterdocs_reaction'] = __( 'Reactions', 'betterdocs' );
             }
             $new_columns[ $key ] = $value;
         }
@@ -282,10 +287,69 @@ class Admin extends Base {
     }
 
     public function manage_custom_columns( $column, $post_id ) {
+        global $wpdb;
         switch ( $column ) {
             case 'betterdocs_word_count':
                 $word_count = str_word_count( trim( strip_tags( get_post_field( 'post_content', $post_id ) ) ) );
                 echo '<span>' . $word_count . '</span>';
+                break;
+            case 'betterdocs_reaction' :
+                $where = "WHERE post_id='" . esc_sql($post_id) . "'";
+                $analytics = $wpdb->get_results(
+                    "SELECT
+                        sum(impressions) as totalViews,
+                        sum(unique_visit) as totalUniqueViews,
+                        sum(happy + sad + normal) as totalReactions,
+                        sum(happy) as totalHappy,
+                        sum(normal) as totalNormal,
+                        sum(sad) as totalSad
+                    FROM {$wpdb->prefix}betterdocs_analytics
+                    $where"
+                );
+                //echo '<span>'. ($analytics[0]->totalHappy != NULL ? $analytics[0]->totalHappy : 0) .'</span>';
+                // var_dump($analytics);
+                echo '<ul class="reactions-count">
+                    <li>
+                        <a title="happy" class="betterdocs-feelings happy" data-feelings="happy" href="#">
+                            <svg width="15" height="15" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
+                                <path class="st0" d="M10,0.1c-5.4,0-9.9,4.4-9.9,9.8c0,5.4,4.4,9.9,9.8,9.9c5.4,0,9.9-4.4,9.9-9.8C19.9,4.5,15.4,0.1,10,0.1z
+                            M13.3,6.4c0.8,0,1.5,0.7,1.5,1.5c0,0.8-0.7,1.5-1.5,1.5c-0.8,0-1.5-0.7-1.5-1.5C11.8,7.1,12.5,6.4,13.3,6.4z M6.7,6.4
+                            c0.8,0,1.5,0.7,1.5,1.5c0,0.8-0.7,1.5-1.5,1.5c-0.8,0-1.5-0.7-1.5-1.5C5.2,7.1,5.9,6.4,6.7,6.4z M10,16.1c-2.6,0-4.9-1.6-5.8-4
+                            l1.2-0.4c0.7,1.9,2.5,3.2,4.6,3.2s3.9-1.3,4.6-3.2l1.2,0.4C14.9,14.5,12.6,16.1,10,16.1z" />
+                                <path class="st1" d="M-6.6-119.7c-7.1,0-12.9,5.8-12.9,12.9s5.8,12.9,12.9,12.9s12.9-5.8,12.9-12.9S0.6-119.7-6.6-119.7z
+                            M-2.3-111.4c1.1,0,2,0.9,2,2c0,1.1-0.9,2-2,2c-1.1,0-2-0.9-2-2C-4.3-110.5-3.4-111.4-2.3-111.4z M-10.9-111.4c1.1,0,2,0.9,2,2
+                            c0,1.1-0.9,2-2,2c-1.1,0-2-0.9-2-2C-12.9-110.5-12-111.4-10.9-111.4z M-6.6-98.7c-3.4,0-6.4-2.1-7.6-5.3l1.6-0.6
+                            c0.9,2.5,3.3,4.2,6,4.2s5.1-1.7,6-4.2L1-104C-0.1-100.8-3.2-98.7-6.6-98.7z" />
+                            </svg>
+                            <span>'. ($analytics[0]->totalHappy != NULL ? $analytics[0]->totalHappy : 0) .'</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a title="normal" class="betterdocs-feelings normal" data-feelings="normal" href="#">
+                            <svg width="15" height="15" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
+                                <path class="st0" d="M10,0.2c-5.4,0-9.8,4.4-9.8,9.8s4.4,9.8,9.8,9.8s9.8-4.4,9.8-9.8S15.4,0.2,10,0.2z M6.7,6.5
+                        c0.8,0,1.5,0.7,1.5,1.5c0,0.8-0.7,1.5-1.5,1.5C5.9,9.5,5.2,8.9,5.2,8C5.2,7.2,5.9,6.5,6.7,6.5z M14.2,14.3H5.9
+                        c-0.3,0-0.6-0.3-0.6-0.6c0-0.3,0.3-0.6,0.6-0.6h8.3c0.3,0,0.6,0.3,0.6,0.6C14.8,14,14.5,14.3,14.2,14.3z M13.3,9.5
+                        c-0.8,0-1.5-0.7-1.5-1.5c0-0.8,0.7-1.5,1.5-1.5c0.8,0,1.5,0.7,1.5,1.5C14.8,8.9,14.1,9.5,13.3,9.5z" />
+                            </svg>
+                            <span>'. ($analytics[0]->totalNormal != NULL ? $analytics[0]->totalNormal : 0) .'</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a title="sad" class="betterdocs-feelings sad" data-feelings="sad" href="#">
+                            <svg width="15" height="15" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 20 20" style="enable-background:new 0 0 20 20;" xml:space="preserve">
+                                <circle class="st0" cx="27.5" cy="0.6" r="1.9" />
+                                <circle class="st0" cx="36" cy="0.6" r="1.9" />
+                                <path class="st1" d="M10,0.3c-5.4,0-9.8,4.4-9.8,9.8s4.4,9.8,9.8,9.8s9.8-4.4,9.8-9.8S15.4,0.3,10,0.3z M13.3,6.6
+                            c0.8,0,1.5,0.7,1.5,1.5c0,0.8-0.7,1.5-1.5,1.5c-0.8,0-1.5-0.7-1.5-1.5C11.8,7.3,12.4,6.6,13.3,6.6z M6.7,6.6c0.8,0,1.5,0.7,1.5,1.5
+                            c0,0.8-0.7,1.5-1.5,1.5C5.9,9.6,5.2,9,5.2,8.1C5.2,7.3,5.9,6.6,6.7,6.6z M14.1,15L14.1,15c-0.2,0-0.4-0.1-0.5-0.2
+                            c-0.9-1-2.2-1.7-3.7-1.7s-2.8,0.6-3.7,1.7C6.2,14.9,6,15,5.9,15h0c-0.6,0-0.8-0.6-0.5-1.1c1.1-1.3,2.8-2.1,4.6-2.1
+                            c1.8,0,3.5,0.8,4.6,2.1C15,14.3,14.7,15,14.1,15z" />
+                            </svg>
+                            <span>'. ($analytics[0]->totalSad != NULL ? $analytics[0]->totalSad : 0) .'</span>
+                        </a>
+                    </li>
+                </ul>';
                 break;
         }
     }
@@ -311,6 +375,7 @@ class Admin extends Base {
 
         $this->assets->enqueue( 'betterdocs-select2', 'vendor/css/select2.min.css', [], 'all' );
         $this->assets->enqueue( 'betterdocs-daterangepicker', 'vendor/css/daterangepicker.css', [], 'all' );
+        $this->assets->enqueue( 'betterdocs-icons', 'admin/btd-icon/style.css' );
         $this->assets->enqueue( 'betterdocs', 'admin/css/betterdocs.css', [], 'all' );
     }
 
@@ -338,7 +403,9 @@ class Admin extends Base {
             'dark_mode'                  => ! empty( $dark_mode ) ? boolval( $dark_mode ) : false,
             'text'                       => __( 'Copied!', 'betterdocs' ),
             'test_report'                => __( 'Test Report!', 'betterdocs' ),
-            'sending'                    => __( 'Sending...', 'betterdocs' )
+            'sending'                    => __( 'Sending...', 'betterdocs' ),
+            'generate_data_url'          => get_rest_url( null, '/betterdocs/v1/create-sample-docs' ),
+            'nonce'                      => wp_create_nonce( 'wp_rest' )
         ] );
 
         if ( ( $hook === 'edit.php' || $hook === 'toplevel_page_betterdocs-admin' ) && get_post_type() == 'docs' ) {
@@ -395,6 +462,18 @@ class Admin extends Base {
      * @return void
      * @since 1.0.0
      */
+    // public function menus() {
+    //     add_menu_page(
+    //         'BetterDocs',
+    //         'BetterDocs',
+    //         'edit_posts',
+    //         $this->slug,
+    //         [$this, 'output'],
+    //         betterdocs()->assets->icon( 'betterdocs-icon-white.svg', true ),
+    //         5 // Position on the menu (use a unique number)
+    //     );
+    // }
+
     public function menus() {
         $default_args = [
             'page_title' => 'BetterDocs',
@@ -422,7 +501,7 @@ class Admin extends Base {
 
             $_menu_position++;
 
-            $hookname = call_user_func_array( $callable, $value );
+            call_user_func_array( $callable, $value );
         }
     }
 
@@ -471,22 +550,36 @@ class Admin extends Base {
                 'icon_url'   => betterdocs()->assets->icon( 'betterdocs-icon-white.svg', true ),
                 'position'   => 5
             ],
-            'all_docs'   => $this->normalize_menu( __( 'All Docs', 'betterdocs' ), $this->slug ),
-            'add_new'    => $this->normalize_menu( __( 'Add New', 'betterdocs' ), 'post-new.php?post_type=docs' ),
-            'categories' => $this->normalize_menu( __( 'Categories', 'betterdocs' ), 'edit-tags.php?taxonomy=doc_category&post_type=docs', 'manage_doc_terms' ),
-            'tags'       => $this->normalize_menu( __( 'Tags', 'betterdocs' ), 'edit-tags.php?taxonomy=doc_tag&post_type=docs', 'manage_doc_terms' ),
-            'settings'   => $this->normalize_menu( __( 'Settings', 'betterdocs' ), 'betterdocs-settings', 'edit_docs_settings', [
-                $this->container->get( Settings::class ),
-                'views'
-            ] ),
-            'analytics'  => $this->normalize_menu( __( 'Analytics', 'betterdocs' ), 'betterdocs-analytics', 'read_docs_analytics', [
-                $this->container->get( Analytics::class ),
-                'views'
-            ] ),
-            'faq'        => $this->normalize_menu( __( 'FAQ Builder', 'betterdocs' ), 'betterdocs-faq', 'read_docs_analytics', [
-                $this->faq_builder,
-                'output'
-            ] )
+            'all_docs'    => $this->normalize_menu( __( 'All Docs', 'betterdocs' ), $this->ui_slug() ),
+            'add_new'     => $this->normalize_menu( __( 'Add New', 'betterdocs' ), 'post-new.php?post_type=docs' ),
+            'categories'  => $this->normalize_menu(
+                __( 'Categories', 'betterdocs' ),
+                'edit-tags.php?taxonomy=doc_category&post_type=docs',
+                'manage_doc_terms'
+            ),
+            'tags'        => $this->normalize_menu(
+                __( 'Tags', 'betterdocs' ),
+                'edit-tags.php?taxonomy=doc_tag&post_type=docs',
+                'manage_doc_terms'
+            ),
+            'settings'    => $this->normalize_menu(
+                __( 'Settings', 'betterdocs' ),
+                'betterdocs-settings',
+                'edit_docs_settings',
+                [$this->container->get( Settings::class ), 'views']
+            ),
+            'analytics'   => $this->normalize_menu(
+                __( 'Analytics', 'betterdocs' ),
+                'betterdocs-analytics',
+                'read_docs_analytics',
+                [$this->container->get( Analytics::class ), 'views']
+            ),
+            'faq'         => $this->normalize_menu(
+                __( 'FAQ Builder', 'betterdocs' ),
+                'betterdocs-faq',
+                'read_docs_analytics',
+                [$this->faq_builder, 'output']
+            )
         ];
 
         return apply_filters( 'betterdocs_admin_menu', $betterdocs_admin_pages );
@@ -540,5 +633,59 @@ class Admin extends Base {
             'title'  => __( 'Visit Documentation', 'betterdocs' ),
             'href'   => $docs_url
         ] );
+    }
+    /**
+     * Save last visited admin ui
+     *
+     * @since 3.0.1
+     *
+     */
+    public function save_admin_page() {
+        if (isset($_GET['post_type']) && $_GET['post_type'] === 'docs' && isset($_GET['bdocs_view']) && $_GET['bdocs_view'] === 'classic') {
+            update_user_meta( get_current_user_id(), 'last_visited_docs_admin_page', 'classic_ui' );
+        } elseif (isset($_GET['page']) && $_GET['page'] === 'betterdocs-admin') {
+            update_user_meta( get_current_user_id(), 'last_visited_docs_admin_page', 'modern_ui' );
+        }
+    }
+
+    /**
+     * Return last visited admin ui slug
+     *
+     * @since 3.0.1
+     * @return string
+     */
+    public function ui_slug() {
+        $last_visited = get_user_meta( get_current_user_id(), 'last_visited_docs_admin_page', true);
+        $docs = get_posts( ['post_type'  => 'docs', 'post_status'  => 'any', 'numberposts' => -1] );
+
+        if ($last_visited === 'modern_ui' || count($docs) == 0 ) {
+            $slug = 'betterdocs-admin';
+        } else {
+            $slug = admin_url('edit.php?post_type=docs&bdocs_view=classic');
+        }
+
+        return $slug;
+    }
+
+    /**
+     * Resets a duplicate submenu in WordPress if the parent main menu and the first submenu permalink are not the same.
+     *
+     * @since 3.0.1
+     * @return string
+     */
+    public function reset_submenu() {
+        global $submenu;
+
+        $docs = get_posts( ['post_type'  => 'docs'] );
+        if ( count($docs) == 0 ) {
+            return;
+        }
+
+        $last_visited = get_user_meta( get_current_user_id(), 'last_visited_docs_admin_page', true);
+
+        if ($last_visited === 'classic_ui' && isset($submenu['betterdocs-admin']) && in_array("betterdocs-admin", $submenu['betterdocs-admin'][0])) {
+            unset($submenu['betterdocs-admin'][0]);
+            $submenu['betterdocs-admin'] = array_values($submenu['betterdocs-admin']);
+        }
     }
 }
