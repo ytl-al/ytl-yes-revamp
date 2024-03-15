@@ -40,6 +40,8 @@ $(document).ready(function() {
     $('.btn-buyplan').on('click', function() {
         var planID = $(this).attr('data-planid');
         ywos.buyPlan(planID);
+        // alert(planID);
+        PushCTanalytics(planID,this);
     });
 
     $('.btn-buytpplan').on('click', function() {
@@ -50,18 +52,7 @@ $(document).ready(function() {
     $('.btn-buyInfinityPlan').on('click', function() {
         var bundleid = $(this).attr('data-bundleid');
         ywos.buyBundlePlan(bundleid);
-        // const planType = $(this).attr('data-planType');
-        // if( planType == "mixed" ) {
-        //     const deviceType = $(this).parents('.layer-planDevice').find('.deviceType:radio:checked').val();
-        //     planID = $(this).parents('.layer-planDevice').find('.deviceType:radio:checked').attr('data-planid');
-        //     console.log(deviceType);
-        //     console.log(planID);
-        //     if( deviceType == 'installment' ) {
-        //         return elevate.buyPlan(planID);
-        //     }else if( deviceType == 'upfront' ) {
-        //         return ywos.buyBundlePlan(planID);
-        //     }
-        // }
+
     });
 });
 
@@ -176,7 +167,7 @@ const ywos = {
                 if (trxType == 'roving') {
                     self.redirectToPage('roving-delivery');
                 } else {
-                    self.redirectToCart();
+                    self.redirectToCart();   
                 }
             }
         });
@@ -654,5 +645,34 @@ function checkInputCharacters(event, type = 'alphanumeric', withSpace = true) {
         event.preventDefault();
     } else {
         return true;
+    }
+}
+
+function PushCTanalytics(planID, clickedButton) {
+    if (planID) {
+        var cardTitle;
+        var eventType;
+        if ($(clickedButton).closest('.post-card').length > 0) {
+            cardTitle = $(clickedButton).closest('.post-card').find('.post-card-title').text();
+            eventType = "Postpaid - Buy Now";
+        } else if ($(clickedButton).closest('.prepaid-card').length > 0) {
+            cardTitle = $(clickedButton).closest('.prepaid-card').find('.prepaid-card-title').text();
+            $(clickedButton).closest('.prepaid-card-detail').find('.plan-details-list').text(cardTitle);
+            eventType = "Prepaid - Buy Now";
+        } else if ($(clickedButton).closest('.card').length > 0) {
+            cardTitle = $(clickedButton).closest('.card-body').find('.plan-details-list > h3').text();
+            // $(clickedButton).closest('.card-body').find('.plan-details-list').text(cardTitle);
+            eventType = "Rahmah/Broadband - Get Plan";
+            console.log(cardTitle,'cardTitle');
+        }
+
+        // Push CleverTap event
+        if (cardTitle && eventType) {
+            clevertap.event.push(eventType, {
+                "Package Chosen": cardTitle
+            });
+        }
+    } else {
+        console.log('Something Wrong');
     }
 }

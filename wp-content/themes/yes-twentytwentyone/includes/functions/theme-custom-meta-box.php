@@ -110,26 +110,26 @@ if (is_admin()) {
                 'context'       => 'normal',
                 'revision'      => true,
                 'fields' => [
+
                     
                     [
                         'type' => 'text',
                         'id'   => $prefix . 'device_id',
                         'name' => 'Device Id<sup>*</sup>',
+                        'placeholder' => 'Device ID',
                     ],
-                    // [
-                    //     'type' => 'text',
-                    //     'id'   => $prefix . 'device_name',
-                    //     'name' => 'Device Name <sup>*</sup>',
-                    // ],
+                   
                     [
                         'type' => 'number',
                         'id'   => $prefix . 'device_price_mth',
                         'name' => 'Device Price Monthly<sup>*</sup>',
+                        'placeholder' => 'XX/mth',
                     ],
                     [
                         'type' => 'number',
                         'id'   => $prefix . 'device_rrp',
                         'name' => 'Device RRP<sup>*</sup>',
+                        'placeholder' => 'XXX',
                     ],
                    
                     [
@@ -142,6 +142,14 @@ if (is_admin()) {
                             'ywos'     => 'Ywos',
                             'store'  => 'Store',
                         ],
+                    ],
+                    [
+                        'type'    => 'text',
+                        'id'      => $prefix . 'device_promotion_label',
+                        'name'    => 'Promotion Label <sup>*</sup>',
+                        'placeholder' => 'Enter Promotion Label',
+                        'default'      => ' Yes 5G RAHMAH', 
+                        
                     ],
                      [
                         'type'    => 'checkbox',

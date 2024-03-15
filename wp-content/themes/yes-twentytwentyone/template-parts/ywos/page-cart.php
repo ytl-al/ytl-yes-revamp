@@ -505,23 +505,22 @@
                     <div class="accordion" id="cart-accordion">
                         <div class="packagebox mb-3">
                                 <div class="row">
-                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center justify-content-center" v-if="(orderSummary.plan.planType == 'postpaid' && orderSummary.plan.displayName !='Yes 5G Wireless Broadband_Flexi' && orderSummary.plan.displayName !='Yes 5G Wireless Broadband Gateway' && orderSummary.plan.displayName !='Infinite Basic_18M' && orderSummary.plan.displayName !='Infinite Basic RAHMAH 1' && orderSummary.plan.displayName !='Infinite Basic RAHMAH 2' && orderSummary.plan.displayName !='Infinite Basic RAHMAH 3' && orderSummary.plan.displayName !='Power 35 RAHMAH' && orderSummary.plan.displayName !='Infinite Basic_24M')">
+                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center justify-content-center" v-if="(orderSummary.plan.planType == 'postpaid' && orderSummary.plan.displayName !='Yes 5G Wireless Broadband_Flexi' && orderSummary.plan.displayName !='Yes 5G Wireless Broadband Gateway' && orderSummary.plan.displayName !='Infinite Basic_18M' && orderSummary.plan.displayName !='Infinite Basic RAHMAH 1' && orderSummary.plan.displayName !='Infinite Basic RAHMAH 2' && orderSummary.plan.displayName !='Infinite Basic RAHMAH 3' && orderSummary.plan.displayName !='Power 35 RAHMAH' && orderSummary.plan.displayName !='Infinite Basic_24M' && orderSummary.plan.displayName !='Yes Power 35')">
                                     <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid" alt="" />
                                 </div>
                                 <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center" v-if="orderSummary.plan.planType == 'prepaid'">
                                     <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid" alt="" />
                                 </div>
-                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                <!-- <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
                                 v-if="(orderSummary.plan.displayName=='Yes 5G Wireless Broadband_Flexi')">
                                     <img src="/wp-content/uploads/2023/08/wirelessbroadband-flexi-thumbnail.png" class="img-fluid m-auto"
                                         alt="" />
-                                </div>
-
+                                </div> -->
                                 <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
                                     v-for="plan in rahmahPlan" :key="plan.planId"
                                     v-if="(plan.planId == planID)">
                                     <img :src="plan.planImgURL" class="img-fluid m-auto"
-                                        alt="" style="max-width: 50% !important;" />
+                                        alt="" style="" />
                                   
                                 </div>
                                
@@ -649,7 +648,7 @@
                                 <div v-if="orderSummary.plan.planType != 'prepaid'">
                                     <h1>{{ renderText('summaryMonthlyCharges') }}</h1>
                                     <h2>{{ renderText('summaryRatePlan') }}</h2>
-                                                                   <div class="row mb-3">
+                                    <div class="row mb-3">
                                          <div class="col-6" v-if="(orderSummary.plan.displayName=='Yes Wireless Fibre 120Mbps_Raya Promo_2023')">
                                             <p>Yes Wireless Fibre 120Mbps</p>
                                         </div>
@@ -773,8 +772,8 @@
                             </div>
                         </div>
                     </div>
-                    <p v-if="!['Yes 5G Wireless Broadband_Flexi', 'Yes 5G Wireless Broadband Gateway', 'Yes 5G Wireless Broadband Gateway 12M'].includes(orderSummary.plan.planName)" v-html="renderText('keepNumberOption')"></p>
-                    <!-- <p v-if="orderSummary.plan.bundleName != 'Home Broadband'" v-html="renderText('keepNumberOption')"></p> -->
+                    <p v-if="orderSummary.plan.bundleName != 'Home Broadband'" v-html="renderText('keepNumberOption')">
+                    </p>
                 </div>
                 <div class="col-lg-4 col-12">
                     <div class="summary-box">

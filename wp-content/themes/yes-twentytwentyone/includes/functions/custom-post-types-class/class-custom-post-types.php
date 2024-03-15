@@ -231,7 +231,7 @@
 
 
 
-                // Register Brand Taxonomy
+                // Register Promotion Taxonomy
                 function register_promotion_taxonomy() {
                     $labels = array(
                         'name'              => _x( 'Promotions', 'taxonomy general name', 'textdomain' ),
@@ -261,6 +261,38 @@
         
                 // Hook into the init action and call register_brand_taxonomy when it fires
                 add_action( 'init', 'register_promotion_taxonomy', 0 );
+
+
+			// Register plan Taxonomy
+                function register_plan_taxonomy() {
+                    $labels = array(
+                        'name'              => _x( 'Plans', 'taxonomy general name', 'textdomain' ),
+                        'singular_name'     => _x( 'Plan', 'taxonomy singular name', 'textdomain' ),
+                        'search_items'      => __( 'Search Plans', 'textdomain' ),
+                        'all_items'         => __( 'All Promotions', 'textdomain' ),
+                        'parent_item'       => __( 'Parent Plan', 'textdomain' ),
+                        'parent_item_colon' => __( 'Parent Plan:', 'textdomain' ),
+                        'edit_item'         => __( 'Edit Plan', 'textdomain' ),
+                        'update_item'       => __( 'Update plan', 'textdomain' ),
+                        'add_new_item'      => __( 'Add New Plan', 'textdomain' ),
+                        'new_item_name'     => __( 'New Plan Name', 'textdomain' ),
+                        'menu_name'         => __( 'Plans', 'textdomain' ),
+                    );
+        
+                    $args = array(
+                        'hierarchical'      => true,
+                        'labels'            => $labels,
+                        'show_ui'           => true,
+                        'show_admin_column' => true,
+                        'query_var'         => true,
+                        'rewrite'           => array( 'slug' => 'plan' ),
+                    );
+        
+                    register_taxonomy( 'plan', 'store-device', $args );
+                }
+        
+                // Hook into the init action and call register_brand_taxonomy when it fires
+                add_action( 'init', 'register_plan_taxonomy', 0 );
 
     }
     

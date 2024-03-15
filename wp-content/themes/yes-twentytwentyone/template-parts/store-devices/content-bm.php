@@ -1,8 +1,8 @@
 <?php get_template_part('template-parts/store-devices/styles'); ?>
 
 <!-- Hero Section -->
-<section class="hero-banner">
-    <!-- <div class="container">
+<!-- <section class="hero-banner">
+    <div class="container">
         <div class="row">
             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-sm-6 col-12">
                 <div class="banner">
@@ -14,10 +14,40 @@
                 </div>
             </div>
         </div>
-    </div> -->
-</section>
+    </div>
+</section> -->
 <!-- Hero Section ENDS -->
+<!-- Slider Start -->
+<section class="hero-slider-section">
+    <div class="hero-slider slider">
+        <div>
+            <a href="javascript:void(0);">
+            <img src="/wp-content/uploads/2024/02/BM_Infinite-Banner-Desktop.jpg" class="w-100 d-none d-lg-block" alt="...">
+                <img src="/wp-content/uploads/2024/02/BM_Infinite-Banner-Mobile.jpg"
+                    class="w-100 d-block d-md-block d-lg-none" alt="...">
+            </a>
+        </div>
 
+        <div>
+            <a href="javascript:void(0);">
+            <img src="/wp-content/uploads/2024/02/iPhone-CNY_WebBanners_Desktop-BM-1.jpg" class="w-100 d-none d-lg-block" alt="...">
+                <img src="/wp-content/uploads/2024/02/iPhone-CNY_WebBanners_Mobile-BM-1.jpg"
+                    class="w-100 d-block d-md-block d-lg-none" alt="...">
+            </a>
+        </div>
+
+        <div>
+            <a href="javascript:void(0);">
+            <img src="/wp-content/uploads/2024/02/RAHMAH-PWR35-BannerBM.png" class="w-100 d-none d-lg-block"
+                    alt="...">
+                <img src="/wp-content/uploads/2024/02/RAHMAH-PWR35-BannerBM-Mob.png"
+                    class="w-100 d-block d-md-block d-lg-none" alt="...">
+            </a>
+        </div>
+        
+    </div>
+</section>
+<!-- Slider End -->
 
 
 <!-- Mid-section -->
@@ -77,7 +107,7 @@
                                 <ul>
                                     <li class="checkbox">
                                         <label>
-                                            <input class="form-check-input" type="checkbox" name="fl-model" value="All" id="All" checked />
+                                            <input class="form-check-input filter_option filter_fl-brand_option_all" type="checkbox" name="fl-brand" value="All" id="All" checked />
                                             All
                                         </label>
                                     </li>
@@ -95,7 +125,7 @@
                                     ?>
                                         <li class="checkbox">
                                         <label>
-                                            <input class="form-check-input" type="checkbox" name="fl-model" value="<?= $brand->slug ?>" id="<?= $brand->slug ?>"  />
+                                            <input class="form-check-input filter_option" type="checkbox" name="fl-brand" value="<?= $brand->slug ?>" id="<?= $brand->slug ?>"  />
                                             <?= $brand->name ?>
                                         </label>
                                     </li>
@@ -110,7 +140,7 @@
 
                     <div class="accordion-item">
                         <h2 id="regularHeadingTwo" class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#regularCollapseTwo" aria-expanded="true" aria-controls="regularCollapseTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#regularCollapseTwo" aria-expanded="true" aria-controls="regularCollapseTwo">
                                 Promosi
                             </button>
                         </h2>
@@ -119,7 +149,7 @@
                             <ul>
                                     <li class="checkbox">
                                         <label>
-                                            <input class="form-check-input" type="checkbox" name="fl-model1" value="All" id="All" checked />
+                                            <input class="form-check-input promotion_filter filter_option filter_promotion_option_all" type="checkbox" name="promotion" value="All" id="All" checked />
                                             All
                                         </label>
                                     </li>
@@ -137,7 +167,7 @@
                                     ?>
                                         <li class="checkbox">
                                             <label>
-                                                <input class="form-check-input" type="checkbox" name="fl-model1" value="<?= $promotion->slug ?>" id="<?= $promotion->slug ?>" />
+                                                <input class="form-check-input promotion_filter filter_option" type="checkbox" name="promotion" value="<?= $promotion->slug ?>" id="<?= $promotion->slug ?>" />
                                                 <?= $promotion->name ?>
                                             </label>
                                         </li>
@@ -150,10 +180,15 @@
                     </div>
                 </div>
             </div>
+          
+
             <div class="col col-lg-9">
                 <div class="row filter-storeitem storeitem-supported-devices" id="device-list-section">
                     <?php get_template_part('template-parts/store-devices/devices-bm'); ?>
-
+                    <div id="noResultMessage" style="display: none; text-align:center">
+                        <h3>Uh Oh! We couldn't find any result</h3>
+                        <p>We cannot find any matches for selected filter</p>
+                    </div>
                     <div class="col col-md-12 col-xl-12 mb-xl-12 mt-5">
                         <a href="javascript:void(0);" id="scroll-top">Back To Top</a>
                     </div>

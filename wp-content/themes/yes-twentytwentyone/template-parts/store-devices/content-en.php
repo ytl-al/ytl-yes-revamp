@@ -20,7 +20,31 @@
 <!-- Slider Start -->
 <section class="hero-slider-section">
     <div class="hero-slider slider">
-        <div>
+
+    <div>
+    <a href="/promo/pakej-yes-5g-rahmah/">
+        <img src="/wp-content/uploads/2024/03/raya-rahmah-desktopbanner-en.webp" width="1440" height="405"
+            class="w-100 d-none d-lg-block" alt="...">
+        <img src="/wp-content/uploads/2024/03/raya2024-rahmahbanner-mobile.webp" width="750" height="698"
+            class="w-100 d-block d-md-block d-lg-none" alt="...">
+        <div class="inner-content-sec raya-banner">
+            <div class="title-sec">
+                <img decoding="async" src="/wp-content/uploads/2024/03/raya-h-tag.webp" style="margin:0 0 15px; width:200px" alt="...">
+                <h1 style="color: #ffffff; text-transform: uppercase;">The Most Affordable Plan</h1>
+            </div>
+            <div class="btn-sec d-flex align-items-center">
+                <div class="pricing-2 mt-0 mt-lg-0 align-items-center">
+                    <div class="mt-0">
+                        <h4 class="d-block">
+                            <sup><span>From<br><b>RM</b></span></sup>35<span class="month-sec">/mth</span>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+        <div class="slick-slide">
             <a href="javascript:void(0);">
                 <img src="/wp-content/uploads/2024/02/Infinite-Banner-Desktop.jpg" class="w-100 d-none d-lg-block"
                     alt="...">
@@ -29,14 +53,14 @@
             </a>
         </div>
 
-        <div>
+        <div class="slick-slide"> 
             <a href="javascript:void(0);">
                 <img src="/wp-content/uploads/2024/02/iPhone-CNY_WebBanners_Desktop-ENG.jpg" class="w-100 d-none d-lg-block" alt="...">
                 <img src="/wp-content/uploads/2024/02/iPhone-CNY_WebBanners_Mobile-ENG.jpg"
                     class="w-100 d-block d-md-block d-lg-none" alt="...">                
             </a>
         </div>
-        <div>
+        <div class="slick-slide">
             <a href="javascript:void(0);">
                 <img src="/wp-content/uploads/2024/02/RAHMAH-PWR35-BannerENG.png" class="w-100 d-none d-lg-block" alt="...">
                 <img src="/wp-content/uploads/2024/02/RAHMAH-PWR35-BannerENG-Mob.png"
@@ -86,7 +110,7 @@
 
 
 
-    <div class="container">
+    <div class="container" id="filter__container">
         <div class="row mt-5">
             <div class="col col-lg-3" id="filter-section">
                 <a href="javascript:void(0);" class="cancel-btn">
@@ -99,12 +123,13 @@
                                 Brand
                             </button>
                         </h2>
+                    
                         <div id="regularCollapseFirst" class="accordion-collapse collapse show" aria-labelledby="regularHeadingFirst" data-bs-parent="#regularAccordionRobots">
                             <div class="accordion-body px-2">
                                 <ul>
                                     <li class="checkbox">
                                         <label>
-                                            <input class="form-check-input" type="checkbox" name="fl-model" value="All" id="All" checked />
+                                            <input class="form-check-input filter_option filter_fl-brand_option_all" type="checkbox" name="fl-brand" value="All" id="All" checked />
                                             All
                                         </label>
                                     </li>
@@ -122,7 +147,7 @@
                                     ?>
                                         <li class="checkbox">
                                             <label>
-                                                <input class="form-check-input" type="checkbox" name="fl-model" value="<?= $brand->slug ?>" id="<?= $brand->slug ?>" />
+                                                <input class="form-check-input filter_option" type="checkbox" name="fl-brand" value="<?= $brand->slug ?>" id="<?= $brand->slug ?>" />
                                                 <?= $brand->name ?>
                                             </label>
                                         </li>
@@ -180,15 +205,57 @@
                     <div class="accordion-item">
                         <h2 id="regularHeadingTwo" class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#regularCollapseTwo" aria-expanded="true" aria-controls="regularCollapseTwo">
-                                Promotion
+                                Plans
                             </button>
                         </h2>
                         <div id="regularCollapseTwo" class="accordion-collapse collapse" aria-labelledby="regularHeadingTwo" data-bs-parent="#regularAccordionRobots">
                             <div class="accordion-body px-2">
+                                <ul id="check-all-device">
+                                    <li class="checkbox">
+                                        <label>
+                                            <input class="form-check-input plan_filter filter_option filter_plan_option_all device-class" type="checkbox" name="plan" value="All" id="All" checked />
+                                            All
+                                        </label>
+                                    </li>
+                                    <?php
+                                    $args_plan   = [
+                                        'hide_empty' => false,
+                                        'taxonomy'  => 'plan',
+                                        'type'      => 'plan',
+                                        'exclude'   => [],
+                                        'orderby'   => 'name',
+                                        'order'     => 'asc'
+                                    ];
+                                    $plans = get_categories($args_plan);
+                                    foreach ($plans as $plan) :
+                                    ?>
+                                        <li class="checkbox">
+                                            <label>
+                                                <input class="form-check-input promotion_filter filter_option device-class" type="checkbox" name="plan" value="<?= $plan->name ?>" id="<?= $plan->slug ?>" />
+                                                <?= $plan->name ?>
+                                            </label>
+                                        </li>
+                                    <?php
+                                    endforeach;
+                                    ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+					
+					
+					<div class="accordion-item">
+                        <h2 id="regularHeadingThree" class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#regularCollapseThree" aria-expanded="true" aria-controls="regularCollapseThree">
+                                Promotion
+                            </button>
+                        </h2>
+                        <div id="regularCollapseThree" class="accordion-collapse collapse" aria-labelledby="regularHeadingThree" data-bs-parent="#regularAccordionRobots">
+                            <div class="accordion-body px-2">
                                 <ul>
                                     <li class="checkbox">
                                         <label>
-                                            <input class="form-check-input" type="checkbox" name="fl-model1" value="All" id="All" checked />
+                                            <input class="form-check-input promotion_filter filter_option filter_promotion_option_all" type="checkbox" name="promotion" value="All" id="All" checked />
                                             All
                                         </label>
                                     </li>
@@ -206,7 +273,7 @@
                                     ?>
                                         <li class="checkbox">
                                             <label>
-                                                <input class="form-check-input" type="checkbox" name="fl-model1" value="<?= $promotion->name ?>" id="<?= $promotion->slug ?>" />
+                                                <input class="form-check-input promotion_filter filter_option" type="checkbox" name="promotion" value="<?= $promotion->name ?>" id="<?= $promotion->slug ?>" />
                                                 <?= $promotion->name ?>
                                             </label>
                                         </li>

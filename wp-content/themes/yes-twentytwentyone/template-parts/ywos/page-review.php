@@ -447,7 +447,10 @@
                     ywos.lsData.meta.completedStep = self.currentStep;
                     ywos.lsData.meta.agree = self.agree;
                     ywos.updateYWOSLSData();
-
+                //      self.sendAnalytics(function() {
+                //     ywos.redirectToPage('payment');
+                // });
+                    self.sendAnalytics();
                     ywos.redirectToPage('payment');
                 },
                 watchSubmit: function() {
@@ -465,7 +468,18 @@
                 renderText: function(strID) {
                     return ywos.renderText(strID, this.pageText);
                 },
-               
+                sendAnalytics:function(){
+                    var self = this;
+                    var eventType = 'review & pay';
+                    var planType= self.orderSummary.plan.planType;
+                    var planName = self.orderSummary.plan.planName;
+                    if (planName !== null && planName !== undefined) {
+                        pushData = {
+                            // Add any additional data you need to send
+                        };
+                    }
+                    pushAnalytics(eventType, pushData, planType, planName); 
+                }
             }
         });
     });

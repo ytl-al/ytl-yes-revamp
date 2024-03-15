@@ -463,6 +463,9 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
+                paymentSuccess : false,
+                paymentFailure : false,
+                win:'',
                 rahmahPlan :'',
                 simType: '',
                 trxType: '',
@@ -574,7 +577,7 @@
                         installmentPlanId: ''
                     }
                 },
-
+                
                 countries: [
                     { "value": "Malaysia", "name": "Malaysia" },
                     { "value": "Argentina", "name": "Argentina" },
@@ -720,7 +723,6 @@
                 checkPaymentStatusCountLimit: 78, // times every 5 seconds (5000), total = 6.5 minutes, excluding 10 seconds before first check
                 paymentTimeout: false,
                 paymentResponse: null,
-
                 isTargetedPromo: false,
                 tpMeta: {},
 
@@ -962,87 +964,94 @@
                         $('#modal-bodyText').html('');
                     });
                 },
-                ajaxCheckOrderPaymentStatus(timeoutObj) {
-                    var self = this;
-                    var params = {
-                        'session_key': ywos.lsData.sessionKey,
-                        'yos_order_id': self.orderResponse.orderNumber
-                    };
-                    // console.log(self.orderResponse);
-                    axios.post(apiEndpointURL + '/check-order-payment-status' + '?nonce=' + yesObj.nonce, params)
-                        .then((response) => {
-                            var data = response.data;
-                            var responseCode = data.responseCode;
-                            var paymentId = data.paymentId;
-                            var recheck = false;
-                            var closePaymentWindow = false;
 
-                            if (responseCode == 0) { // Payment success
-                                self.paymentResponse = data;
-                                closePaymentWindow = true;
 
-                                self.ajaxUpdateTPPurchasedFlag();
+                    ajaxCheckOrderPaymentStatus(timeoutObj) {
+                        var self = this;
+                        var params = {
+                            'session_key': ywos.lsData.sessionKey,
+                            'yos_order_id': self.orderResponse.orderNumber
+                        };
 
-                                setTimeout(function() {
-                                    self.redirectThankYou(1);
-                                }, 2000);
-                            } else if (responseCode == -1) {
-                                if (paymentId == 'Not Available') { // Payment in progress
-                                    recheck = true;
-                                } else if (paymentId != 'Not Available') { // Payment failed
+                        axios.post(apiEndpointURL + '/check-order-payment-status' + '?nonce=' + yesObj.nonce, params)
+                            .then((response) => {
+                                var data = response.data;
+                                var responseCode = data.responseCode;
+                                var paymentId = data.paymentId;
+                                var recheck = false;
+                                var closePaymentWindow = false;
+
+                                if (responseCode == 0) { // Payment success
+                                    self.paymentResponse = data;
                                     closePaymentWindow = true;
-                                    toggleOverlay(false);
-                                    self.toggleModalAlert(self.renderText('modalErrorPaymentTitle'), self.renderText('errorPaymentNotSuccessful'));
-                                }
-                            } else if (responseCode == -2 && paymentId != 'Not Available') { // No response from bank
-                                self.paymentResponse = data;
-                                closePaymentWindow = true;
-                                self.redirectThankYou(2);
-                            }
+                                    paymentSuccess = true;
 
-                            if (recheck) {
+                                    self.ajaxUpdateTPPurchasedFlag();
+                                   
+                                    self.sendAnalytics('payment-info-end');
+
+                                    setTimeout(function() {
+                                        // self.redirectThankYou(1);
+                                    }, 2000);
+                                } else if (responseCode == -1) {
+                                    if (paymentId == 'Not Available') { // Payment in progress
+                                        recheck = true;
+                                    } else if (paymentId != 'Not Available') { // Payment failed
+                                        closePaymentWindow = true;
+                                        toggleOverlay(false);
+                                        self.toggleModalAlert(self.renderText('modalErrorPaymentTitle'), self.renderText('errorPaymentNotSuccessful'));
+                                        paymentFailure = true; // Set global variable
+                                    }
+                                } else if (responseCode == -2 && paymentId != 'Not Available') { // No response from bank
+                                    self.paymentResponse = data;
+                                    closePaymentWindow = true;
+                                    // self.redirectThankYou(2);
+                                }
+
+                                if (recheck) {
+                                    if (self.checkPaymentStatusCount <= self.checkPaymentStatusCountLimit) {
+                                        self.checkPaymentStatusCount++;
+                                        setTimeout(function() {
+                                            if (!self.paymentTimeout) self.ajaxCheckOrderPaymentStatus(timeoutObj);
+                                        }, 5000);
+                                    } else {
+                                        toggleOverlay(false);
+                                        self.toggleModalAlert(self.renderText('modalErrorPaymentTitle'), self.renderText('errorPaymentNotSuccessful'));
+                                        closePaymentWindow = true;
+                                    }
+                                }
+
+                                if (closePaymentWindow) {
+                                    clearTimeout(timeoutObj);
+                                    self.paymentTimeout = true;
+                                    self.checkPaymentStatusCount = 0;
+                                    if (mainwin != null && !mainwin.closed) {
+                                        mainwin.focus();
+                                        mainwin.close();
+                                    }
+                                }
+                            })
+                            .catch((error) => {
                                 if (self.checkPaymentStatusCount <= self.checkPaymentStatusCountLimit) {
                                     self.checkPaymentStatusCount++;
                                     setTimeout(function() {
-                                        if (!self.paymentTimeout) self.ajaxCheckOrderPaymentStatus(timeoutObj);
+                                        self.ajaxCheckOrderPaymentStatus(timeoutObj);
                                     }, 5000);
                                 } else {
                                     toggleOverlay(false);
-                                    self.toggleModalAlert(self.renderText('modalErrorPaymentTitle'), self.renderText('errorPaymentNotSuccessful'));
-                                    closePaymentWindow = true;
-                                }
-                            }
+                                    self.toggleModalAlert(self.renderText('modalErrorPaymentTitle'), self.renderText('errorProcessingPayment'));
 
-                            if (closePaymentWindow) {
-                                clearTimeout(timeoutObj);
-                                self.paymentTimeout = true;
-                                self.checkPaymentStatusCount = 0;
-                                if (mainwin != null && !mainwin.closed) {
-                                    mainwin.focus();
-                                    mainwin.close();
+                                    clearTimeout(timeoutObj);
+                                    self.paymentTimeout = true;
+                                    self.checkPaymentStatusCount = 0;
+                                    if (mainwin != null && !mainwin.closed) {
+                                        mainwin.focus();
+                                        mainwin.close();
+                                    }
                                 }
-                            }
-                        })
-                        .catch((error) => {
-                            if (self.checkPaymentStatusCount <= self.checkPaymentStatusCountLimit) {
-                                self.checkPaymentStatusCount++;
-                                setTimeout(function() {
-                                    self.ajaxCheckOrderPaymentStatus(timeoutObj);
-                                }, 5000);
-                            } else {
-                                toggleOverlay(false);
-                                self.toggleModalAlert(self.renderText('modalErrorPaymentTitle'), self.renderText('errorProcessingPayment'));
+                            });
+                    },
 
-                                clearTimeout(timeoutObj);
-                                self.paymentTimeout = true;
-                                self.checkPaymentStatusCount = 0;
-                                if (mainwin != null && !mainwin.closed) {
-                                    mainwin.focus();
-                                    mainwin.close();
-                                }
-                            }
-                        });
-                },
                 initXpay: function() {
                     var self = this;
                     var xpayOrderId = self.orderResponse.xpayOrderId;
@@ -1062,11 +1071,19 @@
                         self.toggleModalAlert(self.renderText('modalErrorPaymentTitle'), self.renderText('errorPaymentExceed'));
                     }, 360000);
 
-                    mainwin = postPayment({
-                        order_id: xpayOrderId,
-                        encrypted_string: encryptedValue
-                    });
+                    // mainwin = postPayment({
+                    //     order_id: xpayOrderId,
+                    //     encrypted_string: encryptedValue
+                    // });
 
+
+                    // var win = openXpayPopup();
+                    mainwin = postPaymentPopup({
+                        order_id: xpayOrderId,
+                        encrypted_string: encryptedValue,
+                        popup_window:self.win
+
+                    })
                     setTimeout(function() {
                         self.paymentTimeout = false;
                         self.checkPaymentStatusCount = 0;
@@ -1075,8 +1092,7 @@
                 },
                 ajaxCreateYOSOrder: function() {
                     var self = this;
-					
-					console.log(self.maybankIPP.ippSelection.installmentPlanId,'self.maybankIPP.ippSelection.installmentID');
+
 					
                     if (ywos.lsData.meta.customerDetails.upFrontPayment == 'true') {
                         self.upFontpayemtTotal = (self.paymentInfo.totalAmount) - (self.orderSummary.due.foreignerDeposit)
@@ -1161,6 +1177,7 @@
                             var data = response.data;
                             self.orderResponse = data;
                             self.initXpay();
+                            self.sendAnalytics('payment-info');
                         })
                         .catch((error) => {
                             var response = error.response;
@@ -1241,7 +1258,7 @@
                     setTimeout(function() {
                         ywos.redirectToPage('thank-you?status=' + paymentStatus);
                     }, 2000);
-                    self.sendAnalytics();
+                    self.sendAnalytics('purchase');
                 },
                 selectBank: function(bank, event) {
                     var self = this;
@@ -1390,35 +1407,93 @@
                     }
                     this.watchAllowSubmit();
                 },
-                sendAnalytics: function() {
+                // sendAnalytics: function() {
+                //     var self = this;
+                //     var eventType = 'purchase';
+                //     var pushData = {
+                //         'transaction_id': self.orderResponse.displayOrderNumber,
+                //         'currency': 'MYR',
+                //         'value': self.orderSummary.due.total,
+                //         'tax': self.orderSummary.due.taxesSST,
+                //         'shipping': self.orderSummary.due.shippingFees,
+                //         'foreigner_deposit': self.orderSummary.due.foreignerDeposit,
+                //         'payment_method': self.paymentInfo.paymentMethod,
+                //         'rounding_adjustment': self.orderSummary.due.rounding,
+                //         'items': [{
+                //             'name': self.orderSummary.plan.planName,
+                //             'id': self.orderSummary.plan.mobilePlanId,
+                //             'category': self.orderSummary.plan.planType,
+                //             'price': self.orderSummary.plan.totalAmountWithoutSST
+                //         }]
+                //     };
+                //     if (self.orderSummary.addOn) {
+                //         pushData.items.push({
+                //             'name': self.orderSummary.addOn.addonName,
+                //             'id': 0,
+                //             'category': 'addOn',
+                //             'price': self.orderSummary.addOn.amount
+                //         });
+                //     }
+                //     pushAnalytics(eventType, pushData); 
+                // },
+                sendAnalytics: function(eventType) {
                     var self = this;
-                    var eventType = 'purchase';
-                    var pushData = {
-                        'transaction_id': self.orderResponse.displayOrderNumber,
-                        'currency': 'MYR',
-                        'value': self.orderSummary.due.total,
-                        'tax': self.orderSummary.due.taxesSST,
-                        'shipping': self.orderSummary.due.shippingFees,
-                        'foreigner_deposit': self.orderSummary.due.foreignerDeposit,
-                        'payment_method': self.paymentInfo.paymentMethod,
-                        'rounding_adjustment': self.orderSummary.due.rounding,
-                        'items': [{
-                            'name': self.orderSummary.plan.planName,
-                            'id': self.orderSummary.plan.mobilePlanId,
-                            'category': self.orderSummary.plan.planType,
-                            'price': self.orderSummary.plan.totalAmountWithoutSST
-                        }]
-                    };
-                    if (self.orderSummary.addOn) {
-                        pushData.items.push({
-                            'name': self.orderSummary.addOn.addonName,
-                            'id': 0,
-                            'category': 'addOn',
-                            'price': self.orderSummary.addOn.amount
-                        });
+                    var pushData;
+                    var planType = self.orderSummary.plan.planType;
+                    var planName = self.orderSummary.plan.planName;
+
+                    switch (eventType) {
+                        case 'purchase':
+                            pushData = {
+                                'transaction_id': self.orderResponse.displayOrderNumber,
+                                'currency': 'MYR',
+                                'value': self.orderSummary.due.total,
+                                'tax': self.orderSummary.due.taxesSST,
+                                'shipping': self.orderSummary.due.shippingFees,
+                                'foreigner_deposit': self.orderSummary.due.foreignerDeposit,
+                                'payment_method': self.paymentInfo.paymentMethod,
+                                'rounding_adjustment': self.orderSummary.due.rounding,
+                                'items': [{
+                                    'name': self.orderSummary.plan.planName,
+                                    'id': self.orderSummary.plan.mobilePlanId,
+                                    'category': self.orderSummary.plan.planType,
+                                    'price': self.orderSummary.plan.totalAmountWithoutSST
+                                }]
+                            };
+                            if (self.orderSummary.addOn) {
+                                pushData.items.push({
+                                    'name': self.orderSummary.addOn.addonName,
+                                    'id': 0,
+                                    'category': 'addOn',
+                                    'price': self.orderSummary.addOn.amount
+                                });
+                            }
+                            break;
+
+                        case 'payment-info':
+                            if (planName !== null && planName !== undefined) {
+                                pushData = {
+                                    'Payment Type': self.paymentInfo.paymentMethod,
+                                    'Total Payment': self.orderSummary.due.total
+                                };
+                            }
+                            break;
+                        case 'payment-info-end':
+                            console.log(paymentSuccess,'paymentSuccess');
+                            if (planName !== null && planName !== undefined) {
+                                pushData = {
+                                    'Success or Failure': paymentSuccess ? 1 : 0
+                                };
+                            }
+                            break;
                     }
-                    pushAnalytics(eventType, pushData); 
+
+                    // Call the function to push analytics data
+                    pushAnalytics(eventType, pushData, planType, planName); 
                 },
+
+
+
                 renderText: function(strID) {
                     return ywos.renderText(strID, this.pageText);
                 },

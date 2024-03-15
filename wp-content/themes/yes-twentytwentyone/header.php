@@ -29,7 +29,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
+<script src="/wp-content/themes/yes-twentytwentyone/assets/js/clevertap-script.js"></script>
 	<?php wp_head(); ?>
 	
 	<script type="text/javascript">var $ = jQuery.noConflict();</script>

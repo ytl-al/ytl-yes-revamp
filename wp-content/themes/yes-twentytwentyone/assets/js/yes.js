@@ -1,7 +1,7 @@
 /*
     JavaScript Name : Yes TwentyTwentyOne
     Created on      : September 09, 2021, 03:04:23 PM
-    Last edited on  : June      15, 2023, 03:52:31 PM
+    Last edited on  : November  30, 2022, 03:52:31 PM
     Author          : [YTL Digital Design] - AL
 */
 const yesLocalStorageName = 'yesSession';
@@ -277,10 +277,11 @@ function initBetterDocsSearch5G() {
  * 
  * @since    1.2.1
  */
-function pushAnalytics(eventType = '', data = {}) {
+function pushAnalytics(eventType = '', data = {}, planType={},planName) {
     gaEEcommercePush(eventType, data);
     fbPixelPush(eventType, data);
     twPixelPush(eventType, data);
+    ctpushAnalytics(eventType, data,planType, planName);
 }
 
 
@@ -293,22 +294,22 @@ function pushAnalytics(eventType = '', data = {}) {
 function gaEEcommercePush(eventType = '', data = {}) {
     if (eventType && data) {
         switch (eventType) {
-            case 'impressions': // dataLayer push for 'Product Impressions' - product page on "Buy Now" btn clicked
+            case 'impressions':                         // dataLayer push for 'Product Impressions' - product page on "Buy Now" btn clicked
                 gtag('event', 'view_item', {
                     'items': data
                 });
                 break;
-            case 'addToCart': // dataLayer push for 'Add to Cart' - page-cart.php on load
+            case 'addToCart':                           // dataLayer push for 'Add to Cart' - page-cart.php on load
                 gtag('event', 'add_to_cart', {
                     'items': data
                 });
                 break;
-            case 'checkout': // dataLayer push for 'Initiate Checkout' - page-cart.php on redirect after login/proceed as guest
+            case 'checkout':                            // dataLayer push for 'Initiate Checkout' - page-cart.php on redirect after login/proceed as guest
                 gtag('event', 'begin_checkout', {
                     'items': data
                 });
                 break;
-            case 'purchase': // dataLayer push for 'Pay & Thank you' - page-PaymentMethodChangeEvent.php on complete transaction payment
+            case 'purchase':                            // dataLayer push for 'Pay & Thank you' - page-PaymentMethodChangeEvent.php on complete transaction payment
                 gtag('event', 'purchase', data);
                 gtag('event', 'conversion', {
                     'send_to': 'AW-10904758864/YQttCOib_9EDENDU5c8o',
@@ -333,19 +334,19 @@ function gaEEcommercePush(eventType = '', data = {}) {
 function fbPixelPush(eventType = '', data = {}) {
     if (typeof fbq === 'function' && eventType && data) {
         switch (eventType) {
-            case 'impressions':
+            case 'impressions': 
                 var objItems = [];
                 data.map(function(item) {
                     var objItem = { 'id': item.id, 'quantity': 1 };
                     objItems.push(objItem);
                 });
                 var objTrack = {
-                    'content_type': 'product',
+                    'content_type': 'product', 
                     'contents': objItems
                 };
                 fbq('track', 'ViewContent', objTrack);
                 break;
-            case 'addToCart':
+            case 'addToCart': 
                 var objItems = [];
                 var total = 0;
                 data.map(function(item) {
@@ -370,9 +371,9 @@ function fbPixelPush(eventType = '', data = {}) {
                     total = parseFloat(total) + parseFloat(item.price);
                 });
                 var objTrack = {
-                    'currency': 'MYR',
+                    'currency': 'MYR', 
                     'value': total.toFixed(2),
-                    'contents': objItems,
+                    'contents': objItems, 
                     'num_items': objItems.length
                 };
                 fbq('track', 'InitiateCheckout', objTrack);
@@ -385,8 +386,8 @@ function fbPixelPush(eventType = '', data = {}) {
                     objItems.push(objItem);
                 });
                 var objTrack = {
-                    'content_type': 'product',
-                    'currency': data.currency,
+                    'content_type': 'product', 
+                    'currency': data.currency, 
                     'value': data.value,
                     'contents': objItems
                 };
@@ -404,12 +405,12 @@ function fbPixelPush(eventType = '', data = {}) {
  * 
  * @since    1.2.1
  */
-function twPixelPush(eventType = '', data = {}) {
+ function twPixelPush(eventType = '', data = {}) {
     if (typeof twq === 'function' && eventType && data) {
         let conversion_id;
         if (localStorage.getItem('ywosLSName') !== null) {
             conversion_id = JSON.parse(localStorage.getItem('ywosLSName')).sessionKey;
-        } else if (localStorage.getItem('yesElevate') !== null) {
+        }else if (localStorage.getItem('yesElevate') !== null) {
             conversion_id = JSON.parse(localStorage.getItem('yesElevate')).sessionKey;
         }
         switch (eventType) {
@@ -425,17 +426,17 @@ function twPixelPush(eventType = '', data = {}) {
             //     };
             //     twq('track', 'ViewContent', objTrack);
             //     break;
-            case 'addToCart':
+            case 'addToCart': 
                 var objItems = [];
                 var total = 0;
                 data.map(function(item) {
-                    var objItem = {
-                        'content_type': 'product',
-                        'content_id': item.id,
-                        'content_name': item.name,
-                        'content_price': item.price,
-                        'num_items': 1,
-                        'content_group_id': null
+                    var objItem = { 
+                        'content_type'      : 'product',
+                        'content_id'        : item.id, 
+                        'content_name'      : item.name,
+                        'content_price'     : item.price,
+                        'num_items'         : 1,
+                        'content_group_id'  : null
                     };
                     objItems.push(objItem);
                     total = parseFloat(total) + parseFloat(item.price);
@@ -444,8 +445,8 @@ function twPixelPush(eventType = '', data = {}) {
                     'currency': 'MYR',
                     'value': total.toFixed(2),
                     'contents': objItems,
-                    'conversion_id': conversion_id,
-                    'email_address': null
+                    'conversion_id' : conversion_id,
+                    'email_address' : null
                 };
                 twq('event', 'tw-o5rd5-od4e9', objTrack);
                 break;
@@ -453,13 +454,13 @@ function twPixelPush(eventType = '', data = {}) {
                 var objItems = [];
                 var total = 0;
                 data.map(function(item) {
-                    var objItem = {
-                        'content_type': 'product',
-                        'content_id': item.id,
-                        'content_name': item.name,
-                        'content_price': item.price,
-                        'num_items': 1,
-                        'content_group_id': null
+                    var objItem = { 
+                        'content_type'      : 'product',
+                        'content_id'        : item.id, 
+                        'content_name'      : item.name,
+                        'content_price'     : item.price,
+                        'num_items'         : 1,
+                        'content_group_id'  : null
                     };
                     objItems.push(objItem);
                     total = parseFloat(total) + parseFloat(item.price);
@@ -468,8 +469,8 @@ function twPixelPush(eventType = '', data = {}) {
                     'currency': 'MYR',
                     'value': total.toFixed(2),
                     'contents': objItems,
-                    'conversion_id': conversion_id,
-                    'email_address': null
+                    'conversion_id' : conversion_id,
+                    'email_address' : null
                 };
                 twq('event', 'tw-o5rd5-od4eb', objTrack);
                 break;
@@ -479,24 +480,24 @@ function twPixelPush(eventType = '', data = {}) {
                 var total = 0;
                 var items = data.items;
                 items.map(function(item) {
-                    var objItem = {
-                        'content_type': 'product',
-                        'content_id': item.id,
-                        'content_name': item.name,
-                        'content_price': item.price,
-                        'num_items': 1,
-                        'content_group_id': null
+                    var objItem = { 
+                        'content_type'      : 'product',
+                        'content_id'        : item.id, 
+                        'content_name'      : item.name,
+                        'content_price'     : item.price,
+                        'num_items'         : 1,
+                        'content_group_id'  : null
                     };
                     objItems.push(objItem);
                     total = parseFloat(total) + parseFloat(item.price);
                 });
-
+                
                 var objTrack = {
                     'currency': 'MYR',
                     'value': total.toFixed(2),
                     'contents': objItems,
-                    'conversion_id': conversion_id,
-                    'email_address': custom_email
+                    'conversion_id' : conversion_id,
+                    'email_address' : custom_email
                 };
                 twq('event', 'tw-o5rd5-od4ed', objTrack);
                 break;
@@ -506,6 +507,84 @@ function twPixelPush(eventType = '', data = {}) {
     }
 }
 
+
+function ctpushAnalytics(eventType = '', data = {}, planType= {},planName){
+    console.log(data,'data');
+    switch (eventType) {
+        case 'CT checkout':
+            if (planType == 'postpaid') {
+                const searchWords = ["RAHMAH", "Wireless", "Infinite Basic_18M"];
+                const foundWord = planName && searchWords.some(word => planName.includes(word));
+                eventName = foundWord ? 'Rahmah/Broadband - Get Plan - Checkout ' : 'postpaid - Buy Now- Checkout';
+            } else {
+                eventName = 'Prepaid - Buy Now - Checkout';
+            }
+            break;
+
+        case 'verification':
+            if (planType == 'postpaid') {
+                const searchWords = ["RAHMAH", "Wireless", "Infinite Basic_18M"];
+                const foundWord = planName && searchWords.some(word => planName.includes(word));
+                eventName = foundWord ? 'Rahmah/Broadband - Get Plan - Checkout - Verification' : 'postpaid - Checkout - Verification';
+            } else {
+                eventName = 'Prepaid - Checkout - Verification';
+            }
+            break;
+        case 'simType':
+            if (planType == 'postpaid') {
+                const searchWords = ["RAHMAH", "Wireless", "Infinite Basic_18M"];
+                const foundWord = planName && searchWords.some(word => planName.includes(word));
+                eventName = foundWord ? '' : 'Postpaid  - Checkout - Verification - SIM Type';
+            } else {
+                eventName = 'Prepaid  - Checkout - Verification - SIM Type';
+            }
+            break;
+        case 'delivery details':
+            if (planType == 'postpaid') {
+                const searchWords = ["RAHMAH", "Wireless", "Infinite Basic_18M"];
+                const foundWord = searchWords.some(word => planName.includes(word));
+                eventName = foundWord ? 'Rahmah/Broadband - Get Plan - Checkout - Verification - Delivery Details' : 'Postpaid - Checkout - Verification - SIM Type - Delivery Details/Address';
+            } else {
+                eventName = 'Prepaid - Checkout - Verification - SIM Type - Delivery Details/Address';
+            }
+            break;
+        case 'review & pay':
+            console.log(planType);
+            console.log(planName);
+            console.log(data);
+            if (planType == 'postpaid') {
+                const searchWords = ["RAHMAH", "Wireless", "Infinite Basic_18M"];
+                const foundWord = searchWords.some(word => planName.includes(word));
+                eventName = foundWord ? 'Rahmah/Broadband - Get Plan - Checkout - Verification - Delivery Details - Review & Order' : 'Postpaid - Checkout - Verification - SIM Type - Delivery Details/Address - Review & Pay';
+            } else {
+                eventName = 'Prepaid - Checkout - Verification - SIM Type - Delivery Details/Address - Review & Pay';
+            }
+            break;
+         case 'payment-info':
+                if (planType == 'postpaid') {
+                    const searchWords = ["RAHMAH", "Wireless", "Infinite Basic_18M"];
+                    const foundWord = searchWords.some(word => planName.includes(word));
+                    eventName = foundWord ? 'Rahmah/Broadband - Get Plan- Payment Info' : 'Postpaid - Buy Now- Payment Info';
+                } else {
+                    eventName = 'Prepaid - Buy Now- Payment Info';
+                }
+                break;
+            case 'payment-info-end':
+                if (planType == 'postpaid') {
+                    const searchWords = ["RAHMAH", "Wireless", "Infinite Basic_18M"];
+                    const foundWord = searchWords.some(word => planName.includes(word));
+                    eventName = foundWord ? 'Rahmah/Broadband - Get Plan- Payment Info - End' : 'Postpaid - Buy Now- Payment Info - End';
+                } else {
+                    eventName = 'Prepaid - Buy Now- Payment Info - End';
+                }
+                break;
+        default:
+            return;
+    }
+    
+    clevertap.event.push(eventName, data);
+    
+}
 
 /**
  * Function checkScrollHeaderSticky()
@@ -517,7 +596,7 @@ function checkScrollHeaderSticky() {
     var scroll = $(window).scrollTop();
     if (scroll >= 5) {
         $('body').addClass('page-scrolled');
-
+    
         if (!scrolledAosRefresh && $('.sticky-top').length) {
             AOS.refresh();
             scrolledAosRefresh = true;
@@ -532,19 +611,15 @@ const acc_btns = document.querySelectorAll(".widgettitle");
 const acc_contents = document.querySelectorAll(".widget.widget_nav_menu div");
 
 acc_btns.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-        const panel = btn.nextElementSibling;
-        panel.classList.toggle("active");
-        btn.classList.toggle("active");
-    });
+  btn.addEventListener("click", (e) => {
+    const panel = btn.nextElementSibling;
+    panel.classList.toggle("active");
+    btn.classList.toggle("active");
+  });
 });
 
-// jQuery(document).on('click', '.custom_menu_nuv', function (e) {
-//     var obj = jQuery(this);
-//     jQuery(".navbar").hide();
 
-
-//      })
+     
 
 //slider on e-sim page
 
@@ -555,34 +630,36 @@ jQuery('.responsive').slick({
     speed: 300,
     slidesToShow: 3,
     slidesToScroll: 3,
-    responsive: [{
-            breakpoint: 1024,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
-                infinite: true,
-                dots: true
-            }
-        },
-        {
-            breakpoint: 600,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-        },
-        {
-            breakpoint: 480,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: true,
+          dots: true
         }
-        // You can unslick at a given breakpoint now by adding:
-        // settings: "unslick"
-        // instead of a settings object
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+      // You can unslick at a given breakpoint now by adding:
+      // settings: "unslick"
+      // instead of a settings object
     ]
-});
+  });
+  
 
 
 /**
@@ -604,3 +681,4 @@ function hideAnalyticsImage() {
         });
     }
 }
+

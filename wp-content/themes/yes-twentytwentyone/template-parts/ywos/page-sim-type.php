@@ -533,7 +533,8 @@
                         var self = this;
                         var validSubmit = true;
                         this.redirectVerified();
-                        ywos.redirectToPage('delivery');
+                        self.sendAnalytics();
+                         ywos.redirectToPage('delivery');
                         e.preventDefault();
                         toggleOverlay(false);
                     },
@@ -548,7 +549,18 @@
                     hideErrorEsimMsg: function () {
                         var element = document.getElementById("eSIM_msg");
                         element.classList.add("d-none");
-                    }
+                    },
+
+                    sendAnalytics:function(){
+                    var self = this;
+                    var eventType = 'simType';
+                    var planType= self.orderSummary.plan.planType;
+                    var planName = self.orderSummary.plan.planName;
+                    var pushData = {
+                        "eSIM or Physical SIM": self.simType,
+                    };
+                    pushAnalytics(eventType, pushData, planType, planName); 
+                },
                 }
             });
         });

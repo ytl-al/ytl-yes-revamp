@@ -2,7 +2,7 @@
 
 
 <!-- Vue Wrapper STARTS -->
-<div id="main-vue" >
+<div id="main-vue">
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
@@ -256,7 +256,7 @@
                     strAgree: { 'en-US': 'I hereby agree to subscribe to the YES postpaid/prepaid service as indicated in the online form submitted by me. I further give consent to YTLC to process my personal data in accordance with the YTL Group Privacy Policy available at <a href="http://www.ytl.com/privacypolicy.asp" target="_blank">http://www.ytl.com/privacypolicy.asp</a>.', 'ms-MY': 'Saya dengan ini bersetuju untuk melanggan pilihan Pelan Perkhidmatan Pascabayar/Prabayar dalam borang dalam talian yang saya hantar. <br />Saya selanjutnya memberi kebenaran kepada YTLC untuk memproses data peribadi saya mengikut Polisi Privasi Kumpulan YTL yang terkandung di <a href="http://www.ytl.com/privacypolicy.asp" target="_blank">http://www.ytl.com/privacypolicy.asp</a>.', 'zh-hans': 'I hereby agree to subscribe to the YES postpaid/prepaid service as indicated in the online form submitted by me. I further give consent to YTLC to process my personal data in accordance with the YTL Group Privacy Policy available at <a href="http://www.ytl.com/privacypolicy.asp" target="_blank">http://www.ytl.com/privacypolicy.asp</a>.' },
 	
                     strBtnSubmit: { 'en-US': 'Next', 'ms-MY': 'Seterusnya', 'zh-hans': 'Next' },
-					strBtnSubmitWithoutEsim: { 'en-US': 'Next: Delivery', 'ms-MY': 'Seterusnya: Delivery', 'zh-hans': 'Next: Delivery' },
+					strBtnSubmitWithoutEsim: { 'en-US': 'Next', 'ms-MY': 'Seterusnya', 'zh-hans': 'Next' },
                     
                     strErrorNRIC: { 'en-US': 'Please insert valid MyKad  number', 'ms-MY': 'Sila masukkan nombor kad pengenalan yang sah', 'zh-hans': 'Please insert valid MyKad  number' },
                     strErrorPassport: { 'en-US': 'Please insert valid Passport number', 'ms-MY': 'Sila masukkan nombor passport yang sah', 'zh-hans': 'Please insert valid Passport number' },
@@ -410,6 +410,14 @@
                         } else {
                             self.redirectVerified();
                         }
+
+                        //CleverTap
+                        //  self.pushCleverTapEvent("Rahmah/Broadband - Get Plan - Checkout - Verification", {
+                        //         "ID Type": self.customerDetails.securityType,
+                        //         "Security ID Number": self.customerDetails.securityId,
+                        //         "Phone Number": self.customerDetails.mobileNumber
+                        //     });
+                        self.sendAnalytics();
                     }
                     e.preventDefault();
                 },
@@ -648,7 +656,24 @@
                 },
                 renderText: function(strID) {
                     return ywos.renderText(strID, this.pageText);
+                },
+
+
+                sendAnalytics:function(){
+                    var self = this;
+                    var eventType = 'verification';
+                    var planType= self.orderSummary.plan.planType;
+                    var planName = self.orderSummary.plan.planName;
+                    var pushData = {
+                        "ID Type": self.customerDetails.securityType,
+                        "Security ID Number": self.customerDetails.securityId,
+                        "Phone Number": self.customerDetails.mobileNumber
+                    };
+                    pushAnalytics(eventType, pushData, planType,planName); 
                 }
+                // pushCleverTapEvent(eventName, eventData) {
+                // clevertap.event.push(eventName, eventData);
+                //  },
             }
         });
     });

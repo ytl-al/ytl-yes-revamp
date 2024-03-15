@@ -1006,6 +1006,8 @@
                         } else {
                             self.checkCustomerEligibility();
                         }
+                        
+                        self.sendAnalytics();
                     }
                     e.preventDefault();
                 },
@@ -1051,7 +1053,23 @@
                 watchBillingDifferent: function() {},
                 renderText: function(strID) {
                     return ywos.renderText(strID, this.pageText);
-                }
+                },
+                sendAnalytics:function(){
+                    var self = this;
+                    var eventType = 'delivery details';
+                    var planType= self.orderSummary.plan.planType;
+                    var planName = self.orderSummary.plan.planName;
+                    var pushData = {
+                        "Full Name": self.deliveryInfo.name,
+                        "Date of Birth": self.deliveryInfo.dob,
+                        "Email Address": self.deliveryInfo.email,
+                        "Gender":  self.deliveryInfo.gender,
+                        "State": self.deliveryInfo.state,
+                        "City": self.deliveryInfo.city,
+                        "Postcode": self.deliveryInfo.postcode,
+                    };
+                    pushAnalytics(eventType, pushData, planType, planName); 
+                },
             }
         });
     });
