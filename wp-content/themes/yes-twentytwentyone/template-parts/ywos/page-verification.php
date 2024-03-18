@@ -667,7 +667,7 @@
                     var pushData = {
                         "ID Type": self.customerDetails.securityType,
                         "Security ID Number": self.customerDetails.securityId,
-                        "Phone Number": self.customerDetails.mobileNumber
+                        "Phone Number": self.verify.input.phoneNumber.trim(),
                     };
                     pushAnalytics(eventType, pushData, planType,planName); 
                 }

@@ -1600,21 +1600,23 @@
             },
             sendAnalytics: function (eventType) {
                 var self = this;
+                var ctplanName=self.orderSummary.plan.planName;
+                var ctPlanType = self.orderSummary.plan.planType;
                 var pushData = [];
                 switch (eventType) {
                     case 'addToCart':
                         pushData = [{
-                            'name': self.orderSummary.plan.planName,
+                            'name': ctplanName,
                             'id': self.orderSummary.plan.mobilePlanId,
-                            'category': self.orderSummary.plan.planType,
+                            'category': ctPlanType,
                             'price': self.orderSummary.plan.totalAmountWithoutSST
                         }];
                         break;
                     case 'checkout':
                         pushData = [{
-                            'name': self.orderSummary.plan.planName,
+                            'name': ctplanName,
                             'id': self.orderSummary.plan.mobilePlanId,
-                            'category': self.orderSummary.plan.planType,
+                            'category': ctPlanType,
                             'price': self.orderSummary.plan.totalAmountWithoutSST
                         }];
 
@@ -1627,10 +1629,16 @@
                             });
                         }
                         break;
+                        case 'ctCheckout':
+                        pushData = [{
+                            'Package Chosen': self.orderSummary.plan.planName,
+                        }];
+                        break;
+
                     default:
                         return;
                 }
-                pushAnalytics(eventType, pushData);
+                pushAnalytics(eventType, pushData,ctplanName, ctplanName);
             },
             renderText: function (strID) {
                 return ywos.renderText(strID, this.pageText);
