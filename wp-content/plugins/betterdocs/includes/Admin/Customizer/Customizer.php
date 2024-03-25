@@ -39,7 +39,10 @@ class Customizer extends Base {
         add_action( 'customize_preview_init', [$this, 'customize_preview_init'] );
 
         add_action( 'customize_controls_print_styles', [$this, 'controls_print_styles'], 999 );
-        add_action( 'wp_head', [$this, 'dynamic_css'] );
+
+        if( ! wp_is_block_theme() ) {
+            add_action( 'wp_head', [$this, 'dynamic_css'] );
+        }
     }
 
     /**

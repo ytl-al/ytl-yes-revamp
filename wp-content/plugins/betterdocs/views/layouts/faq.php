@@ -13,3 +13,6 @@ if ( $enable && $have_posts && ! empty( $faq_terms ) ) {
         echo do_shortcode( '[betterdocs_faq_list_classic ' . $attributes . ']' );
     }
 }
+
+
+

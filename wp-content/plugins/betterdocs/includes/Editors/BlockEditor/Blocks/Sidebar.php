@@ -6,12 +6,19 @@ use WPDeveloper\BetterDocs\Editors\BlockEditor\Block;
 
 class Sidebar extends Block {
 
+    public $view_wrapper = 'betterdocs-toc-block';
+
     protected $editor_styles = [
         'betterdocs-sidebar'
     ];
 
     protected $frontend_styles = [
         'betterdocs-sidebar'
+    ];
+
+    protected $frontend_scripts = [
+        'betterdocs',
+        'betterdocs-category-grid'
     ];
 
     public function get_name() {
@@ -33,6 +40,7 @@ class Sidebar extends Block {
             'enableNestedSubcategory' => false,
             'docs_per_subcategory'    => 10,
             'titleTag'                => 'h1',
+            'show_count'              => false,
             'enableStickyTOC'         => false
         ];
     }
@@ -40,10 +48,17 @@ class Sidebar extends Block {
     public function render( $attributes, $content ) {
         $layout = isset( $this->attributes['sidebar_layout'] ) ? $this->attributes['sidebar_layout'] : 'layout-1';
         $layout = str_replace( 'layout-', '', $layout );
+        $layout_mapper = [
+            1 => 1,
+            2 => 4,
+            3 => 5,
+            4 => 2,
+            5 => 3,
+            6 => 6
+        ];
+        $sidebar_layout = $layout_mapper[$layout];
 
-        $sidebar_layout = $layout;
-
-        if ( ! betterdocs()->is_pro_active() && ( $sidebar_layout == 2 || $sidebar_layout == 3 ) ) {
+        if ( ! betterdocs()->is_pro_active() ) {
             $sidebar_layout = 1;
         }
 
@@ -68,6 +83,11 @@ class Sidebar extends Block {
 
         $default_multiple_kb = betterdocs()->settings->get( 'multiple_kb' );
         $kb_slug             = isset( $settings['selected_knowledge_base'] ) ? $settings['selected_knowledge_base'] : '';
+
+        if( $settings['sidebar_layout'] == 'layout-1' || $settings['sidebar_layout'] == 'layout-6' ) {
+            $settings['show_count'] = true;
+        }
+
         return [
             'shortcode_attr' => [
                 'terms_order'              => $settings['terms_order'],
@@ -80,7 +100,8 @@ class Sidebar extends Block {
                 'sidebar_list'             => true,
                 'disable_customizer_style' => true,
                 'posts_per_page'           => -1,
-                'title_tag'                => $settings['titleTag']
+                'title_tag'                => $settings['titleTag'],
+                'show_count'               => $settings['show_count']
             ]
         ];
     }

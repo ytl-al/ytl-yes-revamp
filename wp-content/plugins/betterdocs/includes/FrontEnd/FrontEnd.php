@@ -42,12 +42,19 @@ class FrontEnd extends Base {
         add_action( 'betterdocs_after_render', [$this, 'after_render'], 11, 2 );
 
         //Removes Divi Script On Betterdocs Single Doc #1130, issue title -> ( Bug Fix | With the DIVI theme copy #Url button doesn't seem to work )
-        add_action( 'wp_enqueue_scripts', [$this, 'dequeue_divi_script'], 99999 );
+        // add_action( 'wp_enqueue_scripts', [$this, 'dequeue_divi_script'], 99999 );
 
         //Remove Saliant Theme Script For (Delay Javascript Exection), which causes issue with betterdocs sidebar toggle, issue number (#1234)
         add_action( 'nectar_hook_before_body_close', [$this, 'dequeue_saliant_theme_script'], 99999 );
+
+        //Remove our search selector from from Searchanise plugin for woocommerce, conflicts with betterdocs search (Bug Fix Card -> https://trello.com/c/lXzrtv2f/1313-client-issue-betterdocs-is-conflicting-with-the-searchanise-plugin)
+        add_filter( 'se_load_search_widgets', [$this, 'exclude_betterdocs_search'], 10, 1 );
     }
 
+    public function exclude_betterdocs_search( $options ) {
+        $options['search_input'] = $options['search_input'].':not(.betterdocs-search-field)';
+        return $options;
+    }
     public function before_render( $widget, $widget_type ) {
         $this->widget_attributes = isset( $widget->attributes ) ? $widget->attributes : [];
         $this->widget_type       = $widget_type;

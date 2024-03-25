@@ -17,6 +17,9 @@ class Scripts extends FreeScripts {
         $pro_assets->register( 'betterdocs-pro-mkb-tab-grid', 'public/js/mkb-tab-grid.js', ['betterdocs-category-grid'] );
         $pro_assets->register( 'betterdocs-related-categories', 'public/js/related-categories.js' );
 
+        //handbook css for block edit mode & frontend
+        $pro_assets->register('betterdocs-handbook-block', 'blocks/handbook/handbook.css');
+
         $pro_assets->register( 'betterdocs-pro', 'public/js/betterdocs.js' );
 
         $pro_assets->register( 'single-doc-attachments', 'public/css/attachment.css' );

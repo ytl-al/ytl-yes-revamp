@@ -5,6 +5,9 @@ namespace WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\Block;
 
 class ToC extends Block {
+
+    public $view_wrapper = 'betterdocs-toc-block';
+
     public function get_name() {
         return 'table-of-contents';
     }
