@@ -1,18 +1,13 @@
 <?php
 namespace WPDeveloper\BetterDocsPro\Editors;
 
-use WPDeveloper\BetterDocs\Dependencies\DI\DependencyException;
-use WPDeveloper\BetterDocs\Dependencies\DI\NotFoundException;
-use WPDeveloper\BetterDocsPro\Utils\BlockTemplate;
+use WPDeveloper\BetterDocs\Editors\BlockEditor\Patterns\BasePattern;
 use WPDeveloper\BetterDocs\Editors\BlockEditor as BlockEditorFree;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-use WPDeveloper\BetterDocs\Editors\BlockEditor\StyleHandler;
-use WPDeveloper\BetterDocs\Editors\BlockEditor\TemplatesController;
-use WPDeveloper\BetterDocsPro\Utils\Enqueue;
 
 class BlockEditor extends BlockEditorFree {
 
@@ -124,6 +119,32 @@ class BlockEditor extends BlockEditorFree {
                 }
 
                 $block_object->register( $assets );
+            }
+        }
+    }
+
+    /**
+     * Get all the Pattrens initialized.
+     * @return void
+     */
+    public function pattern_initialization() {
+        parent::pattern_initialization();
+        $_api_classes = scandir( __DIR__ . DIRECTORY_SEPARATOR . 'BlockEditor' . DIRECTORY_SEPARATOR . 'Patterns' );
+
+        if ( ! empty( $_api_classes ) && is_array( $_api_classes ) ) {
+            foreach ( $_api_classes as $class ) {
+                if ( $class == '.' || $class == '..' || $class == 'BasePattern.php' || strpos( $class, '.' ) === 0)  {
+                    continue;
+                }
+
+                $classname  = basename( $class, '.php' );
+                $classname  = '\\' . __NAMESPACE__ . "\\BlockEditor\\Patterns\\$classname";
+                $patterns_class = betterdocs()->container->get( $classname );
+
+                if ( $patterns_class instanceof BasePattern ) {
+                    $patterns_class->pattern_category();
+                    $patterns_class->register();
+                }
             }
         }
     }

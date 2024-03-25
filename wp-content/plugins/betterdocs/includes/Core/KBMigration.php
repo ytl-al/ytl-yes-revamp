@@ -7,9 +7,9 @@ use WPDeveloper\BetterDocs\Utils\Helper;
 use WPDeveloper\BetterDocs\Admin\Builder\Rules;
 
 class KBMigration extends Base {
-    private $existing_plugins;
-    private $migrated_plugins;
-    private $active = 'helpscout';
+    public $existing_plugins;
+    public $migrated_plugins;
+    public $active = 'helpscout';
 
     public function __construct() {
         $this->existing_plugins  = $this->knowledge_base_plugins();
@@ -20,7 +20,7 @@ class KBMigration extends Base {
             return;
         }
         $this->active = 'kb-migration';
-        add_filter( 'admin_notices', [ $this, 'migration_notice' ], 10, 1 );
+        //add_filter( 'admin_notices', [ $this, 'migration_notice' ], 10, 1 );
         add_filter( 'betterdocs_migration_tab_sections', [ $this, 'kb_migration_settings' ], 10, 1 );
     }
 
@@ -33,7 +33,7 @@ class KBMigration extends Base {
         <div class="notice notice-success is-dismissible">
             <?php
             printf(
-                '<p>%s<a class="button button-primary betterdocs-migration-notice" href="%s">%s</a></p>',
+                '<p>%s<a class="button button-primary betterdocs-migration-notice" href="%s">%s</a><a class="button" href="">Maybe Later</a><a class="button" href="">Never Show Again</a></p>',
                 __(
                     sprintf(
                         'Whoops! You are already using %s on your website. To migrate your %s data to BetterDocs, click here ',

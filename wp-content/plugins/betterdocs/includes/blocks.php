@@ -18,6 +18,8 @@ use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\SocialShare;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\CategoryGrid;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\FeedbackForm;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\BetterdocsPrint;
+use WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks\FAQ;
+
 
 return [
     'categorygrid'      => [
@@ -131,5 +133,13 @@ return [
         'object'     => BetterdocsPrint::class,
         'demo'       => '',
         'docs'       => ''
-    ]
+    ],
+    'faq'       => [
+        'label'      => __( 'BetterDocs FAQ', 'betterdocs-pro' ),
+        'value'      => 'faq',
+        'visibility' => true,
+        'object'     => FAQ::class,
+        'demo'       => '',
+        'docs'       => ''
+    ],
 ];

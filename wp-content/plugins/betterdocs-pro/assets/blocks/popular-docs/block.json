@@ -1,0 +1,8 @@
+{
+    "apiVersion": 2,
+    "title": "BetterDocs Popular Docs",
+    "name": "betterdocs/popular-docs",
+    "category": "betterdocs",
+    "description": "Display your popular docs",
+    "textdomain": "betterdocs-pro"
+}

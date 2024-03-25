@@ -46,6 +46,13 @@ class Admin extends Base {
     private $settings;
 
     /**
+     * KBMigration
+     *
+     * @var KBMigration
+     */
+    private $kbmigration;
+
+    /**
      * Enqueue
      * @var Enqueue
      */
@@ -57,10 +64,11 @@ class Admin extends Base {
      */
     private $faq_builder;
 
-    public function __construct( Container $container, PostType $type, Enqueue $assets, Settings $settings ) {
+    public function __construct( Container $container, PostType $type, Enqueue $assets, Settings $settings, KBMigration $kbmigration ) {
         $this->container = $container;
         $this->assets    = $assets;
         $this->settings  = $settings;
+        $this->kbmigration  = $kbmigration;
         $this->slug      = 'betterdocs-admin';
 
         add_action( 'init', [ $type, 'register' ], 9 );
@@ -103,7 +111,8 @@ class Admin extends Base {
 
         self::$cache_bank = CacheBank::get_instance();
         try {
-            $this->notices();
+            // $this->notices();
+            add_action('admin_init', [$this, 'notices']);
         } catch ( Exception $e ) {
             unset( $e );
         }
@@ -213,12 +222,52 @@ class Admin extends Base {
             'start'       => $notices->strtotime( '+10 days' ),
             'recurrence'  => 30,
             'dismissible' => true
-            // 'screens'     => [
-            //     'dashboard', 'plugins', 'themes', 'edit-page',
-            //     'edit-post', 'users', 'tools', 'options-general',
-            //     'nav-menus', 'toplevel_page_betterdocs-admin', 'betterdocs_page_betterdocs-settings', 'betterdocs_page_betterdocs-analytics', 'betterdocs_page_betterdocs-faq', 'edit-doc_tag', 'edit-doc_category'
-            // ]
         ] );
+
+        if ( $this->kbmigration->existing_plugins && ! in_array( $this->kbmigration->existing_plugins[0][0], $this->kbmigration->migrated_plugins ) ) {
+            $migration_message = sprintf(
+                '<p class="migration-message">%s</p><a class="button button-primary betterdocs-migration-notice" href="%s">%s</a>',
+                __(
+                    sprintf(
+                        'Already using %s? Power up your Knowledge Base by migrating all your docs, settings to BetterDocs with just 1 click.',
+                        '<strong>' . esc_html($this->kbmigration->existing_plugins[0][1]) . '</strong>',
+                        '<strong>' . esc_html($this->kbmigration->existing_plugins[0][1]) . '</strong>'
+                    ),
+                    'betterdocs'
+                ),
+                esc_url(admin_url('admin.php?page=betterdocs-settings&tab=tab-migration')),
+                __('Start Migration', 'betterdocs')
+            );
+
+            $_migration_notice = [
+                'thumbnail' => '',
+                'html'      => $migration_message,
+                'links'     => [
+                    'maybe_later'      => [
+                        'label'      => __( 'Maybe Later', 'betterdocs' ),
+                        'icon_class' => 'dashicons dashicons-calendar-alt',
+                        'attributes' => [
+                            'data-later' => true,
+                            'class'      => 'dismiss-btn'
+                        ]
+                    ],
+                    'never_show_again' => [
+                        'label'      => __( 'Never show again', 'betterdocs' ),
+                        'icon_class' => 'dashicons dashicons-dismiss',
+                        'attributes' => [
+                            'data-dismiss' => true
+                        ]
+                    ]
+                ]
+            ];
+
+            $notices->add( 'migration', $_migration_notice, [
+                'start'       => $notices->time(),
+                'recurrence'  => false,
+                'dismissible' => true,
+                'display_if'  => current_user_can( 'delete_users' )
+            ] );
+        }
 
         /**
          * Opt-In Notice

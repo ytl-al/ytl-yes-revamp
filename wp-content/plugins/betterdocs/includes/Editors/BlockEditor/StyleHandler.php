@@ -179,7 +179,7 @@ final class StyleHandler extends Base {
             if ( file_exists( $style_css_path ) ) {
                 wp_enqueue_style(
                     'betterdocs-block-style-' . $post->ID,
-                    $style_css_url, [], betterdocs()->version, 'all'
+                    $style_css_url, ['betterdocs-faq'], betterdocs()->version, 'all'
                 );
             }
             if ( function_exists( 'wp_is_block_theme' ) && wp_is_block_theme() && file_exists( $upload_dir['basedir'] . '/betterdocs-style/betterdocs-style-edit-site.min.css' ) ) {
