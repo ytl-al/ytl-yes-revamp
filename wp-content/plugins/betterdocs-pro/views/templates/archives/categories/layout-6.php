@@ -14,7 +14,7 @@
 
     $view_object            = betterdocs()->views;
     $layout                 = betterdocs()->customizer->defaults->get( 'betterdocs_archive_layout_select', 'layout-1' );
-    $title_tag              = betterdocs()->customizer->defaults->get( 'betterdocs_archive_title_tag', 'h2' );
+    $title_tag              = betterdocs()->customizer->defaults->get( 'betterdocs_archive_title_tag_layout2', 'h2' );
     $title_tag              = betterdocs()->template_helper->is_valid_tag( $title_tag );
     $related_categories     = betterdocs()->customizer->defaults->get( 'betterdocs_archive_other_categories_heading_text', __( 'Related Categories', 'betterdocs-pro' ) );
     $related_categories_btn = betterdocs()->customizer->defaults->get( 'betterdocs_archive_other_categories_load_more_text', __( 'Load More', 'betterdocs-pro' ) );

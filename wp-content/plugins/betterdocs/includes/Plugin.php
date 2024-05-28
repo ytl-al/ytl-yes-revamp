@@ -29,6 +29,7 @@ use WPDeveloper\BetterDocs\FrontEnd\FrontEnd;
 use WPDeveloper\BetterDocs\Core\ShortcodeFactory;
 use WPDeveloper\BetterDocs\FrontEnd\TemplateTags;
 use WPDeveloper\BetterDocs\Admin\Customizer\Customizer;
+use WPDeveloper\BetterDocs\Admin\HelpScoutMigration;
 use WPDeveloper\BetterDocs\Dependencies\DI\ContainerBuilder;
 
 final class Plugin {
@@ -115,13 +116,14 @@ final class Plugin {
      * Plugin Version
      * @var string
      */
-    public $version = '3.5.0';
+    public $version = '3.5.7';
 
     /**
      * WriteWithAI Class
      * @var string
      */
     public $ai_autowrtie;
+    public $backgroundProccessor;
 
     /**
      * Plugin DB Version
@@ -202,6 +204,8 @@ final class Plugin {
         $this->rewrite = $this->container->get( Rewrite::class );
         $this->request = $this->container->get( Request::class );
         $this->query   = $this->container->get( Query::class );
+        // Initialize background process
+        $this->backgroundProccessor = $this->container->get( HelpScoutMigration::class );
 
         $this->rewrite->init();
         $this->request->init();

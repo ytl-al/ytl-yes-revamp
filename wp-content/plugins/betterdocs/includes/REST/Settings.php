@@ -52,13 +52,13 @@ class Settings extends BaseAPI {
     }
 
     public function export_docs( WP_REST_Request $request ) {
+        $data = $request->get_params();
         $args = [
             'include_post_featured_image_as_attachment' => true,
             'status'                                    => 'publish',
-            'content'                                   => 'docs'
+            'content'                                   => 'docs',
+            'selected_docs'                             => $data['export_docs']
         ];
-
-        $data = $request->get_params();
 
         if ( $data['export_type'] == 'docs' && $data['export_docs'][0] != 'all' ) {
             $args['post__in'] = $data['export_docs'];
@@ -191,90 +191,31 @@ class Settings extends BaseAPI {
             'Content-Type'  => 'application/json',
         );
 
-        $response = wp_remote_get($api_endpoint, array('headers' => $headers));
+        $initial_response = wp_remote_get($api_endpoint, array('headers' => $headers));
 
-        if ( is_wp_error( $response ) ) {
+        if ( $initial_response['response']['code'] == '401' ) {
             return [
                 'status' => 'error',
-                'message' => $response
+                'message' => esc_html__('Unauthorized API Key or Collection ID', 'betterdocs')
             ];
-        } else {
-            $body = wp_remote_retrieve_body($response);
-            $data = json_decode($body, true);
-
-            // Check if "articles" key exists in the response
-            if (isset($data['articles']) && isset($data['articles']['items'])) {
-                // Extract the articles
-                $articles = $data['articles']['items'];
-
-                // Fetch detailed information for each article
-                $detailedArticles = [];
-
-                foreach ($articles as $article) {
-                    $articleId = $article['id'];
-                    $articleNumber = $article['number'];
-
-                    // Make request to get detailed information for each article
-                    $articleEndpoint = "https://docsapi.helpscout.net/v1/articles/{$articleNumber}";
-                    $articleResponse = wp_remote_get($articleEndpoint, array('headers' => $headers));
-
-                    if (!is_wp_error($articleResponse)) {
-                        $articleBody = wp_remote_retrieve_body($articleResponse);
-                        $articleData = json_decode($articleBody, true);
-
-                        if (isset($articleData['article']) && isset($articleData['article']['text'])) {
-                            // Extract the article text
-                            $article['text'] = $articleData['article']['text'];
-
-                            // Extract category details
-                            $categories = $articleData['article']['categories'];
-                            $categoryDetails = [];
-
-                            foreach ($categories as $categoryId) {
-                                $categoryEndpoint = "https://docsapi.helpscout.net/v1/categories/{$categoryId}";
-                                $categoryResponse = wp_remote_get($categoryEndpoint, array('headers' => $headers));
-
-                                if (!is_wp_error($categoryResponse)) {
-                                    $categoryBody = wp_remote_retrieve_body($categoryResponse);
-                                    $categoryData = json_decode($categoryBody, true);
-
-                                    if (isset($categoryData['category']['name']) && isset($categoryData['category']['slug'])) {
-                                        // Add category details to the article
-                                        $categoryDetails[] = [
-                                            'name' => $categoryData['category']['name'],
-                                            'slug' => $categoryData['category']['slug'],
-                                        ];
-                                    }
-                                }
-                            }
-
-                            // Add category details to the article
-                            $article['categories'] = $categoryDetails;
-
-                            // Add the article to the detailed articles array
-                            $detailedArticles[] = $article;
-                        }
-                    }
-                }
-
-                $wp_importer = new WPImport('');
-
-		        $result = $wp_importer->import_helpscout_data( $detailedArticles );
-
-                return [
-                    'status' => 'success',
-                    'articles' => $result
-                ];
-            } else {
-                return [
-                    'status' => 'error',
-                    'message' => esc_html__('Invalid API response format', 'betterdocs')
-                ];
-            }
         }
+
+        // Enqueue migration task
+        betterdocs()->backgroundProccessor->push_to_queue( array(
+            'headers' => $headers,
+            'initial_response' => $initial_response,
+            'api_key' => $api_key,
+            'collection_id' => $collection_id
+        ) )->save();
+
+        // Start processing the queue
+        betterdocs()->backgroundProccessor->dispatch();
+
+        return [
+            'status' => 'success',
+            'message' => esc_html__('Migration process has started in the background.', 'betterdocs')
+        ];
     }
-
-
 
     public function get_existing_slugs( $slugs ) {
         // Initialize the array for existing post slugs

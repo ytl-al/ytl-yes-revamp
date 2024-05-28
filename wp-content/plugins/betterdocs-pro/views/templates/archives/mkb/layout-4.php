@@ -29,7 +29,9 @@
             $_shortcode_attributes = [
                 'terms_order'   => $terms_order,
                 'terms_orderby' => $terms_orderby,
-                'show_icon'     => betterdocs()->customizer->defaults->get( 'betterdocs_mkb_page_show_category_icon' )
+                'show_icon'     => betterdocs()->customizer->defaults->get( 'betterdocs_mkb_page_show_category_icon' ),
+                'layout_type'   => 'template',
+                'list_icon_url' => ! empty( betterdocs()->customizer->defaults->get( 'betterdocs_mkb_column_list_icon' ) ) ? betterdocs()->customizer->defaults->get( 'betterdocs_mkb_column_list_icon' ) : ( ! empty ( betterdocs()->settings->get( 'docs_list_icon' ) ) ? betterdocs()->settings->get( 'docs_list_icon' )['url'] : '' )
             ];
 
             $attributes = betterdocs()->template_helper->shortcode_atts( $_shortcode_attributes, 'betterdocs_multiple_kb_tab_grid', 'layout-4' );

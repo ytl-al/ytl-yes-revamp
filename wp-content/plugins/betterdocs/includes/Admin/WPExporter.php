@@ -434,6 +434,16 @@ class WPExporter {
 		return $result;
 	}
 
+    public function get_parent_terms_slug( $terms, $term_id ) {
+        $key = array_search( $term_id, array_column( $terms, 'term_id' ));
+
+        if ( $key !== false ) {
+            return $terms[$key]->slug;
+        }
+
+        return null;
+    }
+
 	/**
 	 * Return list of terms.
 	 *
@@ -443,14 +453,15 @@ class WPExporter {
 	 */
 	private function wxr_terms_list( array $terms ): string {
 		$result = '';
-
-		foreach ( $terms as $t ) {
+		foreach ( $terms as $key => $t ) {
 			$result .= $this->indent( 2 ) . '<wp:term>' . PHP_EOL;
 
 			$result .= $this->indent( 3 ) . '<wp:term_id>' . $this->wxr_cdata( $t->term_id ) . '</wp:term_id>' . PHP_EOL;
 			$result .= $this->indent( 3 ) . '<wp:term_taxonomy>' . $this->wxr_cdata( $t->taxonomy ) . '</wp:term_taxonomy>' . PHP_EOL;
 			$result .= $this->indent( 3 ) . '<wp:term_slug>' . $this->wxr_cdata( $t->slug ) . '</wp:term_slug>' . PHP_EOL;
-			$result .= $this->indent( 3 ) . '<wp:term_parent>' . $this->wxr_cdata( $t->parent ? $terms[ $t->parent ]->slug : '' ) . '</wp:term_parent>' . PHP_EOL;
+			if ( $t->parent ) {
+                $result .= $this->indent( 3 ) . '<wp:term_parent>' . $this->wxr_cdata( $this->get_parent_terms_slug( $terms, $t->parent ) ) . '</wp:term_parent>' . PHP_EOL;
+            }
 			$result .= $this->wxr_term_name( $t ) . $this->wxr_term_description( $t ) . $this->wxr_term_meta( $t );
 
 			$result .= $this->indent( 2 ) . '</wp:term>' . PHP_EOL;
@@ -459,9 +470,72 @@ class WPExporter {
 		return $result;
 	}
 
-	private function get_terms( array $post_ids ) {
-		return wp_get_object_terms( $post_ids, get_object_taxonomies( $this->args['content'] ) );
+    /**
+     * Retrieve terms associated with the specified object IDs and sort them based on term meta.
+     *
+     * @param array $post_ids An array of object IDs.
+     * @return array An array of WP_Term objects sorted based on term meta.
+     */
+	public function get_terms( array $post_ids ) {
+        // Get the object taxonomies
+        $taxonomies = get_object_taxonomies( $this->args['content'] );
+
+        if ( $this->args['selected_docs'][0] == 'all' ) {
+            $terms = get_terms( [
+                'taxonomy'   => $taxonomies,
+                'hide_empty' => false,
+            ] );
+        } else {
+            $terms = wp_get_object_terms( $post_ids, $taxonomies);
+        }
+
+        usort( $terms, array( $this, 'compare_terms_by_meta' ) );
+
+		return $terms;
 	}
+
+    /**
+     * Compare terms based on their associated term meta values.
+     *
+     * @param WP_Term $a The first term object.
+     * @param WP_Term $b The second term object.
+     * @return int Returns a negative value if $a is less than $b,
+     *             a positive value if $a is greater than $b, or 0 if they are equal.
+     *             Additionally, prioritize sorting terms by taxonomy order,
+     *             with 'doc_category' terms appearing before other taxonomy terms.
+     */
+    public function compare_terms_by_meta($a, $b) {
+        // Define the order of taxonomies
+        $taxonomy_order = array(
+            'doc_category' => 0,
+            'knowledge_base' => 1,
+            'doc_tag' => 2,
+        );
+
+        // Get the taxonomy order for terms $a and $b
+        $order_a = isset($taxonomy_order[$a->taxonomy]) ? $taxonomy_order[$a->taxonomy] : PHP_INT_MAX;
+        $order_b = isset($taxonomy_order[$b->taxonomy]) ? $taxonomy_order[$b->taxonomy] : PHP_INT_MAX;
+
+        // If the taxonomies have different order, sort by order
+        if ($order_a !== $order_b) {
+            return $order_a - $order_b;
+        }
+
+        // If the taxonomies have the same order, sort by meta value
+        $taxonomy_order_meta = array(
+            'doc_category' => 'doc_category_order',
+            'knowledge_base' => 'kb_order'
+        );
+
+        if (isset($taxonomy_order_meta[$a->taxonomy]) && isset($taxonomy_order_meta[$b->taxonomy])) {
+            $meta_a = intval(get_term_meta($a->term_id, $taxonomy_order_meta[$a->taxonomy], true));
+            $meta_b = intval(get_term_meta($b->term_id, $taxonomy_order_meta[$b->taxonomy], true));
+
+            return $meta_a - $meta_b;
+        }
+
+        return 0; // Default to no sorting if meta keys are not defined
+    }
 
 	/**
 	 * Return list of posts, by requested `$post_ids`.

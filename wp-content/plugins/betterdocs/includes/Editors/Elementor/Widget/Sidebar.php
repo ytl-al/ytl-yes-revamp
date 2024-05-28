@@ -28,7 +28,7 @@ class Sidebar extends BaseWidget {
     }
 
     public function get_categories() {
-        return ['betterdocs-elements', 'docs-archive'];
+        return ['betterdocs-elements', 'docs-archive', 'betterdocs-elements-single'];
     }
 
     public function get_keywords() {
@@ -36,7 +36,7 @@ class Sidebar extends BaseWidget {
     }
 
     public function get_style_depends() {
-        return ['betterdocs-sidebar'];
+        return ['betterdocs-sidebar', 'betterdocs-fontawesome'];
     }
 
     public function get_script_depends() {
@@ -1247,12 +1247,25 @@ class Sidebar extends BaseWidget {
         );
 
         $this->add_control(
+            'list_icon',
+            [
+                'label'   => __( 'Icon', 'betterdocs' ),
+                'type'    => Controls_Manager::ICONS,
+                'default' => [
+                    'value'   => 'far fa-file-alt',
+                    'library' => 'fa-regular'
+                ]
+            ]
+        );
+
+        $this->add_control(
             'list_icon_color',
             [
                 'label'     => esc_html__( 'Color', 'betterdocs' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li svg' => 'fill: {{VALUE}};'
+                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li svg' => 'fill: {{VALUE}};',
+                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li i' => 'color: {{VALUE}};'
                 ]
             ]
         );
@@ -1271,7 +1284,11 @@ class Sidebar extends BaseWidget {
                 ],
                 'selectors'  => [
                     '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li svg' => 'width: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li .betterdocs-nested-category-title svg' => 'font-size: {{SIZE}}{{UNIT}};'
+                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li .betterdocs-nested-category-title svg' => 'width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li i' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li .betterdocs-nested-category-title i' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li img' => 'width: {{SIZE}}{{UNIT}}; height:{{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li .betterdocs-nested-category-title img' => 'width: {{SIZE}}{{UNIT}}; height:{{SIZE}}{{UNIT}};',
                 ]
             ]
         );
@@ -1283,7 +1300,8 @@ class Sidebar extends BaseWidget {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li i' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                 ]
             ]
         );
@@ -1410,6 +1428,9 @@ class Sidebar extends BaseWidget {
                 'class' => [ 'betterdocs-elementor-single-sidebar' ]
             ],
             'shortcode_attr' => [
+                'layout_type'              => 'widget',
+                'list_icon_url'            => '',
+                'list_icon_name'           => is_array( $settings['list_icon']['value'] ) ? $settings['list_icon']['value']['url'] : $settings['list_icon']['value'],
                 'terms_order'              => $settings['order'],
                 'terms_orderby'            => $settings['orderby'],
                 'terms_include'            => array_diff( $settings['include'], (array) $settings['exclude'] ),
@@ -1421,7 +1442,8 @@ class Sidebar extends BaseWidget {
                 'sidebar_list'             => true,
                 'disable_customizer_style' => true,
                 'posts_per_page'           => -1,
-                'title_tag'                => $settings['category_title_tag']
+                'title_tag'                => $settings['category_title_tag'],
+                'sidebar_layout'           => $settings['betterdocs_sidebar_layout']
             ],
         ];
 

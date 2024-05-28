@@ -3,8 +3,8 @@ Contributors: emrevona
 Donate link: https://profiles.wordpress.org/emrevona/
 Tags: cache, Optimize, performance, PageSpeed, core web vitals
 Requires at least: 3.3
-Tested up to: 6.4
-Stable tag: 1.2.4
+Tested up to: 6.5
+Stable tag: 1.2.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -116,6 +116,19 @@ Chinese Simplified (China), Chinese Traditional (Taiwan), Czech, Dutch (Belgium)
 18. Database Cleanup
 
 == Changelog ==
+
+= 1.2.7 =
+* to fix the issue of backslashes being removed in the &lt;pre&gt; tag after minifying HTML
+
+= 1.2.6 =
+* refactoring for getABSPATH()
+* to prevent clearing cache after deleting coupon which was created by YITH WooCommerce Coupon Email System Premium
+* to check the REDIRECT_QUERY_STRING for the gtranslate plugin
+
+= 1.2.5 =
+* to fix the creation of cache for URLs that end with .xml
+* to use the native WordPress function current_time() instead of the date() function
+* refactoring the purge_cache() function of Varnish Cache
 
 = 1.2.4 =
 * refactoring for getABSPATH()

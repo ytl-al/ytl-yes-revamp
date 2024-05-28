@@ -52,13 +52,19 @@ class BlockEditor extends BlockEditorFree {
             $editor = 'core/edit-site';
         }
 
+        $this->pro_assets->enqueue( 'betterdocs-kbselect', 'blocks/kbselect/kbselect.js' );
+
         $this->pro_assets->register( 'betterdocs-blocks-editor-controls-pro', 'blocks/controls.css' );
         $this->pro_assets->register( 'betterdocs-pro-blocks-editor', 'blocks/style-editor.css', [ 'betterdocs-blocks-editor-controls-pro' ] );
         $this->pro_assets->register( 'betterdocs-pro-blocks-editor', 'blocks/editor.js', ['betterdocs-blocks-editor'] );
         $this->pro_assets->localize( 'betterdocs-pro-blocks-editor', 'betterDocsProBlocksHelper', [
             'is_pro_active' => betterdocs()->is_pro_active(),
             'resturl'       => get_rest_url(),
-            'editorType'    => $editor
+            'editorType'    => $editor,
+            'totalCategories' => wp_count_terms( [
+                'taxonomy' => 'doc_category',
+                'hide_empty' => true
+            ])
         ] );
     }
 

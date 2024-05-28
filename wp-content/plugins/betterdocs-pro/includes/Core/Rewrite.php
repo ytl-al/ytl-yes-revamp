@@ -45,8 +45,10 @@ class Rewrite extends FreeRewrite {
          * Flush happens after register the post type.
          */
 
+        $old_mkb_setting = isset( $_old_settings['multiple_kb'] ) ? $_old_settings['multiple_kb'] : '';
+        $new_mkb_setting = isset( $_settings['multiple_kb'] ) ? $_settings['multiple_kb'] : '';
         switch ( true ) {
-            case isset($_settings['multiple_kb']) && isset($_old_settings['multiple_kb']) && $_settings['multiple_kb'] !== $_old_settings['multiple_kb']:
+            case $new_mkb_setting !==  $old_mkb_setting:
                 $this->database->set_transient( 'betterdocs_flush_rewrite_rules', true );
                 break;
         }

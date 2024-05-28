@@ -1,8 +1,10 @@
 {
-  "apiVersion": 2,
-  "title": "BetterDocs Search Form",
-  "name": "betterdocs/searchbox",
-  "category": "betterdocs",
-  "description": "Showcase your Knowledgebase Live Search Box anywhere on your WordPress site & display instant results",
-  "textdomain": "betterdocs"
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "title": "BetterDocs Search Form",
+    "name": "betterdocs/searchbox",
+    "category": "betterdocs",
+    "description": "Simple search forms for easy user guidance for your knowledge base.",
+    "textdomain": "betterdocs",
+    "editorScript":"betterdocs-blocks-editor"
 }

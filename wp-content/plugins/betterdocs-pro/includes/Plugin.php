@@ -2,6 +2,7 @@
 
 namespace WPDeveloper\BetterDocsPro;
 
+use BetterDocs;
 use WPDeveloper\BetterDocs\Core\BaseAPI;
 use WPDeveloper\BetterDocsPro\Core\Admin;
 use WPDeveloper\BetterDocsPro\Core\Query;
@@ -13,6 +14,7 @@ use WPDeveloper\BetterDocsPro\Core\Installer;
 use WPDeveloper\BetterDocsPro\Core\MultipleKB;
 use WPDeveloper\BetterDocsPro\FrontEnd\FrontEnd;
 use WPDeveloper\BetterDocsPro\Shortcodes\ListView;
+use WPDeveloper\BetterDocsPro\Shortcodes\BetterdocsEncyclopedia;
 use WPDeveloper\BetterDocs\Utils\Views as FreeViews;
 use WPDeveloper\BetterDocsPro\Shortcodes\SidebarList;
 use WPDeveloper\BetterDocsPro\Shortcodes\MultipleKBTwo;
@@ -34,7 +36,7 @@ final class Plugin {
      * Plugin Version
      * @var string
      */
-    public $version = '3.2.0';
+    public $version = '3.3.2';
 
     /**
      * Plugin DB Version
@@ -223,7 +225,10 @@ final class Plugin {
     }
 
     public function pro_shortcodes( $shortcodes ) {
-        return array_merge( $shortcodes, [
+
+        $is_enable_encyclopedia = betterdocs()->settings->get('enable_encyclopedia');
+
+        $shortcodeClasses = [
             Attachment::class,
             CategoryBoxTwo::class,
             ListView::class,
@@ -237,7 +242,13 @@ final class Plugin {
             SidebarList::class,
             RelatedCategories::class,
             RelatedDocs::class
-        ] );
+        ];
+
+        if ($is_enable_encyclopedia) {
+            $shortcodeClasses[] = BetterdocsEncyclopedia::class;
+        }
+
+        return array_merge($shortcodes, $shortcodeClasses);
     }
 
     /**

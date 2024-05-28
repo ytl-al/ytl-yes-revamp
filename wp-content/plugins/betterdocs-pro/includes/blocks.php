@@ -4,16 +4,22 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-use WPDeveloper\BetterDocsPro\Editors\BlockEditor\Blocks\MultipleKBTab;
 use WPDeveloper\BetterDocsPro\Editors\BlockEditor\Blocks\Attachment;
 use WPDeveloper\BetterDocsPro\Editors\BlockEditor\Blocks\MultipleKB;
 use WPDeveloper\BetterDocsPro\Editors\BlockEditor\Blocks\PopularDocs;
 use WPDeveloper\BetterDocsPro\Editors\BlockEditor\Blocks\AdvancedSearch;
 use WPDeveloper\BetterDocsPro\Editors\BlockEditor\Blocks\Handbook;
 use WPDeveloper\BetterDocsPro\Editors\BlockEditor\Blocks\RelatedDocs;
+use WPDeveloper\BetterDocsPro\Editors\BlockEditor\Blocks\PopularView;
+use WPDeveloper\BetterDocsPro\Editors\BlockEditor\Blocks\MultipleKBTab;
+use WPDeveloper\BetterDocsPro\Editors\BlockEditor\Blocks\ArchiveHandBookList;
+use WPDeveloper\BetterDocsPro\Editors\BlockEditor\Blocks\RelatedCategories;
+use WPDeveloper\BetterDocsPro\Editors\BlockEditor\Blocks\Encyclopedia;
+use WPDeveloper\BetterDocsPro\Editors\BlockEditor\Blocks\GlossarySingleTemplate;
 
 add_filter( 'betterdocs_pro_blocks_config', function ( $blocks ) {
-    $blocks['searchform']['object'] = AdvancedSearch::class;
+    $blocks['doc-archive-list']['object'] = ArchiveHandBookList::class;
+    $blocks['searchform']['object']       = AdvancedSearch::class;
     return $blocks;
 } );
 
@@ -34,7 +40,7 @@ return [
         'demo'       => '',
         'docs'       => ''
     ],
-    'multiple-kb'      => [
+    'multiple-kb'     => [
         'label'      => __( 'BetterDocs Multiple KB', 'betterdocs-pro' ),
         'value'      => 'multiple-kb',
         'visibility' => true,
@@ -65,5 +71,30 @@ return [
         'object'     => Handbook::class,
         'demo'       => '',
         'docs'       => ''
+    ],
+    'related-categories' => [
+        'label'      => __( 'Betterdocs Related Categories', 'betterdocs-pro' ),
+        'value'      => 'related-categories',
+        'visibility' => true,
+        'object'     => RelatedCategories::class,
+        'demo'       => '',
+        'docs'       => ''
+    ],
+    'betterdocs-encyclopedia' => [
+        'label'      => __( 'BetterDocs Encyclopedia', 'betterdocs-pro' ),
+        'value'      => 'betterdocs-encyclopedia',
+        'visibility' => true,
+        'object'     => Encyclopedia::class,
+        'demo'       => '',
+        'docs'       => ''
+    ],
+    'glossary-single-template' => [
+        'label'      => __( 'Glossary Single Template', 'betterdocs-pro' ),
+        'value'      => 'glossary-single-template',
+        'visibility' => true,
+        'object'     => GlossarySingleTemplate::class,
+        'demo'       => '',
+        'docs'       => ''
     ]
+
 ];

@@ -89,6 +89,7 @@ class Handbook extends Block {
         $attributes = &$this->attributes;
 
         $default_multiple_kb = betterdocs()->settings->get( 'multiple_kb', false );
+        $kb_slug             = ! empty( $attributes['selectKB'] ) && isset( $attributes['selectKB'] ) ? json_decode( $attributes['selectKB'] )->value : '';
 
         $terms_query = [
             'taxonomy'   => 'doc_category',
@@ -131,6 +132,17 @@ class Handbook extends Block {
             ];
         }
 
+        if( ! empty( $kb_slug ) ) {
+            $terms_query['meta_query'] = [
+                'relation' => 'OR',
+                [
+                    'key'     => 'doc_category_knowledge_base',
+                    'value'   => $kb_slug,
+                    'compare' => 'LIKE'
+                ]
+            ];
+        }
+
         $docs_query = [
             'orderby'            => $this->attributes['postsOrderBy'],
             'order'              => $this->attributes['postsOrder'],
@@ -146,7 +158,7 @@ class Handbook extends Block {
             'kb_slug'                 => is_tax( 'knowledge_base' ) && $default_multiple_kb == 1 ? $object->slug : '',
             'multiple_knowledge_base' => $default_multiple_kb == 1 ? $default_multiple_kb : false,
 
-            'terms_query_args'        => $terms_query,
+            'terms_query_args'        => betterdocs()->query->terms_query( $terms_query ),
             'docs_query_args'         => $docs_query,
 
             'image_size'              => 'full',

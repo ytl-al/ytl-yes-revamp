@@ -17,18 +17,30 @@ class SearchForm extends Shortcode {
     }
 
     public function get_style_depends() {
-        return ['betterdocs-search'];
+        $handlers = ['betterdocs-search'];
+
+        if(is_tax()){
+            $handlers[] = 'betterdocs-encyclopedia';
+            $handlers[] = 'betterdocs-single';
+            $handlers[] = 'betterdocs-glossaries';
+        }
+        return $handlers;
     }
 
     public function get_script_depends() {
-        return ['betterdocs-search'];
+        $handlers = ['betterdocs-search'];
+
+        if(is_tax()){
+            $handlers[] = 'betterdocs-glossaries';
+        }
+        return $handlers;
     }
 
     public function get_search_results() {
         global $wpdb;
         $search_input = isset( $_POST['search_input'] ) ? sanitize_text_field( $_POST['search_input'] ) : '';
         $search_cat   = isset( $_POST['search_cat'] ) ? wp_strip_all_tags( $_POST['search_cat'] ) : '';
-        $lang   = isset( $_POST['lang'] ) ? wp_strip_all_tags( $_POST['lang'] ) : '';
+        $lang         = isset( $_POST['lang'] ) ? wp_strip_all_tags( $_POST['lang'] ) : '';
         $search_input = preg_replace( '/[^A-Za-z0-9_\- ][]]/', '', strtolower( $search_input ) );
 
         $tax_query = [];
@@ -59,7 +71,7 @@ class SearchForm extends Shortcode {
 
         if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) {
             $args['suppress_filters'] = false;
-            $args['lang'] = ICL_LANGUAGE_CODE;
+            $args['lang']             = ICL_LANGUAGE_CODE;
         }
 
         $search_results = $this->query->get_posts( $args );
@@ -206,6 +218,10 @@ class SearchForm extends Shortcode {
     }
 
     public function render( $atts, $content = null ) {
+        betterdocs()->assets->localize( 'betterdocs-search', 'betterdocsSearchConfigTwo', [
+            'is_post_type_archive' => is_post_type_archive( 'docs' ),
+        ] );
+
         $this->views( 'shortcodes/search' );
     }
 }

@@ -25,6 +25,7 @@ class ContentRestrictions extends Base {
         }
 
         add_filter( 'betterdocs_terms_query_args', [$this, 'exclude_terms'], 11, 1 );
+        add_filter( 'betterdocs_articles_args', [$this, 'exclude_posts'], 20, 3 );
         add_filter( 'betterdocs_tag_tax_query', [$this, 'tag_template_tax_query'], 11, 1 );
         add_filter( 'betterdocs_docs_tax_query_args', [$this, 'live_search_tax_query'], 20, 5 );
         add_action( 'template_redirect', [$this, 'template_redirect'], 99 );
@@ -187,16 +188,72 @@ class ContentRestrictions extends Base {
     }
 
     public function exclude_terms( $query_args ) {
-        $_taxonomy = $query_args['taxonomy'];
-        $_taxonomy = empty( $_taxonomy ) ? 'doc_category' : $_taxonomy;
-        $_is_kb    = $_taxonomy === 'knowledge_base' ? true : false;
+        $_taxonomy             = $query_args['taxonomy'];
+        $_taxonomy             = empty( $_taxonomy ) ? 'doc_category' : $_taxonomy;
+        $_is_kb                = $_taxonomy === 'knowledge_base' ? true : false;
+        $_restricted_docs_page = (array) $this->settings->get( 'restrict_template', ['all'] ); // $restrict_template
+        $_restricted_kb        = $this->settings->get( 'restrict_kb', ['all'] );
 
         $_restricted_terms = $this->get_restricted_categories( $_taxonomy, $_is_kb );
         if ( ! $this->is_visible_by_role() && ! empty( $_restricted_terms ) ) {
             $query_args['exclude'] = $_restricted_terms;
+        } elseif ( ! $this->is_visible_by_role() && in_array( 'knowledge_base', $_restricted_docs_page ) && ! empty( $_restricted_kb ) && is_tax('doc_category') ) { //exclude terms when knowledge_base template & kb's are selected from advanced ikb settings
+            global $wp_query;
+            $current_mkb = isset( $wp_query->query['knowledge_base'] ) ? $wp_query->query['knowledge_base'] : '';
+            $query_args['exclude'] = in_array( $current_mkb, $_restricted_kb ) ? array_merge( $this->fetch_categories_based_on_kb( $_restricted_kb ), [get_queried_object_id()] ) : ( in_array( get_queried_object_id(), $this->fetch_categories_based_on_kb( $_restricted_kb ) ) ? array_diff( $this->fetch_categories_based_on_kb( $_restricted_kb ), [get_queried_object_id()] ) : $this->fetch_categories_based_on_kb( $_restricted_kb ) ); // if a category is assigned to 2 mkb or more, remove the current category from terms based the kb restriction on doc category page
         }
 
         return $query_args;
+    }
+
+    //exclude posts when knowledge_base template & kb's are selected from advanced ikb settings
+    public function exclude_posts( $post_args ) {
+        $_restricted_docs_page = (array) $this->settings->get( 'restrict_template', ['all'] ); // $restrict_template
+        $_restricted_kb        = $this->settings->get( 'restrict_kb', ['all'] );
+        if ( ! $this->is_visible_by_role() && in_array( 'knowledge_base', $_restricted_docs_page ) && ! empty( $_restricted_kb ) && is_tax('doc_category') ) {
+            global $wp_query;
+            $current_mkb              = isset( $wp_query->query['knowledge_base'] ) ? $wp_query->query['knowledge_base'] : '';
+            $post_args['tax_query'][] = [
+                'taxonomy'         => 'doc_category',
+                'field'            => 'term_id',
+                'terms'            => in_array( $current_mkb, $_restricted_kb ) ? array_merge( $this->fetch_categories_based_on_kb( $_restricted_kb ), [get_queried_object_id()] ) : ( in_array( get_queried_object_id(), $this->fetch_categories_based_on_kb( $_restricted_kb ) ) ? array_diff( $this->fetch_categories_based_on_kb( $_restricted_kb ), [get_queried_object_id()] ) : $this->fetch_categories_based_on_kb( $_restricted_kb ) ),
+                'include_children' => true,
+                'operator'         => 'NOT IN'
+            ];
+        }
+        return $post_args;
+    }
+
+    public function fetch_categories_based_on_kb( $restricted_kb ) {
+        if ( in_array( 'all', $restricted_kb ) ) {
+            $kb_terms_args = [
+                'taxonomy'   => 'doc_category',
+                'hide_empty' => true,
+                'fields'     => 'ids'
+            ];
+            $kb_terms = get_terms( $kb_terms_args );
+            return $kb_terms;
+        } else {
+            $kb_terms_args = [
+                'taxonomy'   => 'doc_category',
+                'hide_empty' => true,
+                'meta_query' => [
+                    'relation' => 'OR'
+                ],
+                'fields'     => 'ids'
+            ];
+
+            foreach ( $restricted_kb as $term ) {
+                $kb_terms_args['meta_query'][] = [
+                    'key'     => 'doc_category_knowledge_base',
+                    'value'   => $term,
+                    'compare' => 'LIKE'
+                ];
+            }
+
+            $kb_terms = get_terms( $kb_terms_args );
+            return $kb_terms;
+        }
     }
 
     /**

@@ -478,7 +478,8 @@ class DocsPage extends Section {
                         'h3' => 'h3',
                         'h4' => 'h4',
                         'h5' => 'h5',
-                        'h6' => 'h6'
+                        'h6' => 'h6',
+                        'p' => 'p'
                     ],
                     'priority' => 16
                 ]
@@ -1583,6 +1584,25 @@ class DocsPage extends Section {
                     'settings' => 'betterdocs_doc_page_article_list_button_bg_color',
                     'priority' => 34
                 ] )
+        );
+    }
+
+    public function doc_page_article_list_icon() {
+        $this->customizer->add_setting( 'betterdocs_doc_page_article_list_icon', [
+            'default'    => $this->defaults['betterdocs_doc_page_article_list_icon'],
+            'capability' => 'edit_theme_options',
+
+        ] );
+
+        $this->customizer->add_control(
+            new WP_Customize_Image_Control(
+                $this->customizer, 'betterdocs_doc_page_article_list_icon', [
+                    'section'  => 'betterdocs_doc_page_settings',
+                    'settings' => 'betterdocs_doc_page_article_list_icon',
+                    'label'    => __( 'List Icon', 'betterdocs' ),
+                    'priority' => 34
+                ]
+            )
         );
     }
 

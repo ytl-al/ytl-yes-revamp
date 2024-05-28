@@ -54,6 +54,9 @@ class CategoryGridTwo extends CategoryGrid {
             'multiple_knowledge_base'  => false,
             'disable_customizer_style' => false,
             'title_tag'                => 'h2',
+            'layout_type'              => '',
+            'list_icon_url'            => '',
+            'list_icon_name'           => 'list'
         ];
     }
 

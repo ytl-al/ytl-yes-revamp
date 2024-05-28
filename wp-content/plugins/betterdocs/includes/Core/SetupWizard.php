@@ -76,7 +76,7 @@ class SetupWizard extends Base {
             'is_pro_active' => betterdocs()->is_pro_active(),
             'logoURL'       => betterdocs()->assets->icon( 'betterdocs-icon.svg', true ),
             'layout'        => 'vertical',
-            'values'        => betterdocs()->settings->get_all(),
+            'values'        => array_merge(betterdocs()->settings->get_all(), ['enable_credit' => true]),
             'config'        => [
                 'save_locally'    => true,
                 'save'            => true,
@@ -199,8 +199,9 @@ class SetupWizard extends Base {
                                     'name'     => 'breadcrumb_doc_title',
                                     'type'     => 'text',
                                     'label'    => __( 'Documentation Page Title', 'betterdocs' ),
-                                    'default'  => 'Docs',
+                                    'default'  => __( 'Docs', 'betterdocs' ),
                                     'priority' => 3,
+                                    'rules'    => Rules::is( 'builtin_doc_page', true )
                                 ],
                                 'docs_slug'             => [
                                     'name'     => 'docs_slug',
@@ -222,13 +223,41 @@ class SetupWizard extends Base {
                                     ] ),
                                     'label_subtitle' => __( 'Make sure to keep Docs Root Slug in the Single Docs Permalink. You are not able to keep it blank. You can use the available tags from below.', 'betterdocs' )
                                 ],
+
+                                'enable_glossaries' =>  [
+                                    'name'                       => 'enable_glossaries',
+                                    'type'                       => 'toggle',
+                                    'label'                      => __( 'Show Glossary', 'betterdocs' ),
+                                    'label_subtitle'             => __( 'Enable the glossary feature to allow users to look up definitions for terms used within your encyclopedia or glossaries themselves.', 'betterdocs' ),
+                                    'enable_disable_text_active' => true,
+                                    'default'                    => false,
+                                    'priority'                   => 5,
+                                    'is_pro'                     => true
+                                ],
+                                'enable_encyclopedia' =>  [
+                                    'name'                       => 'enable_encyclopedia',
+                                    'type'                       => 'toggle',
+                                    'label'                      => __( 'Built-in Encyclopedia Page', 'betterdocs' ),
+                                    'enable_disable_text_active' => true,
+                                    'default'                    => false,
+                                    'priority'                   => 6,
+                                    'is_pro'                     => true
+                                ],    
+                                'enable_credit'                  => [
+                                    'name'                       => 'enable_credit',
+                                    'type'                       => 'toggle',
+                                    'label'                      => __( 'Show Powered by BetterDocs', 'betterdocs' ),
+                                    'enable_disable_text_active' => true,
+                                    'default'                    => true,
+                                    'priority'                   => 7
+                                ],
                                 'enable_faq_schema'    => [
                                     'name'                       => 'enable_faq_schema',
                                     'type'                       => 'toggle',
                                     'label'                      => __( 'FAQ Schema', 'betterdocs' ),
                                     'enable_disable_text_active' => true,
                                     'default'                    => '',
-                                    'priority'                   => 5
+                                    'priority'                   => 8
                                 ],
                                 'advance_search'       => apply_filters( 'betterdocs_advance_search_settings', [
                                     'name'                       => 'advance_search',
@@ -236,13 +265,13 @@ class SetupWizard extends Base {
                                     'label'                      => __( 'Advanced Search', 'betterdocs' ),
                                     'enable_disable_text_active' => true,
                                     'default'                    => true,
-                                    'priority'                   => 6,
+                                    'priority'                   => 9,
                                     'is_pro'                     => true
                                 ] ),
                                 'enable_disable'       => [
                                     'name'                       => 'enable_disable',
                                     'type'                       => 'toggle',
-                                    'priority'                   => 7,
+                                    'priority'                   => 10,
                                     'label'                      => __( 'Instant Answer', 'betterdocs' ),
                                     'enable_disable_text_active' => true,
                                     'default'                    => true,

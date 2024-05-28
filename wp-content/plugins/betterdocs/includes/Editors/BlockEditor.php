@@ -6,10 +6,11 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-use WPDeveloper\BetterDocs\Editors\BlockEditor\Patterns\BasePattern;
-use WPDeveloper\BetterDocs\Editors\BlockEditor\StyleHandler;
+use WPDeveloper\BetterDocs\Utils\Helper;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\FontLoader;
+use WPDeveloper\BetterDocs\Editors\BlockEditor\StyleHandler;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\TemplatesController;
+use WPDeveloper\BetterDocs\Editors\BlockEditor\Patterns\BasePattern;
 
 class BlockEditor extends BaseEditor {
 
@@ -39,7 +40,7 @@ class BlockEditor extends BaseEditor {
     public function pattern_category() {
         register_block_pattern_category(
             'batterdocs',
-            array( 'label' => __( 'BetterDocs', 'betterdocs' ) )
+            [ 'label' => __( 'BetterDocs', 'betterdocs' ) ]
         );
     }
 
@@ -52,12 +53,12 @@ class BlockEditor extends BaseEditor {
 
         if ( ! empty( $_api_classes ) && is_array( $_api_classes ) ) {
             foreach ( $_api_classes as $class ) {
-                if ( $class == '.' || $class == '..' || $class == 'BasePattern.php' || strpos( $class, '.' ) === 0)  {
+                if ( $class == '.' || $class == '..' || $class == 'BasePattern.php' || strpos( $class, '.' ) === 0 ) {
                     continue;
                 }
 
-                $classname  = basename( $class, '.php' );
-                $classname  = '\\' . __NAMESPACE__ . "\\BlockEditor\\Patterns\\$classname";
+                $classname      = basename( $class, '.php' );
+                $classname      = '\\' . __NAMESPACE__ . "\\BlockEditor\\Patterns\\$classname";
                 $patterns_class = betterdocs()->container->get( $classname );
 
                 if ( $patterns_class instanceof BasePattern ) {
@@ -102,9 +103,11 @@ class BlockEditor extends BaseEditor {
         $this->assets->register( 'betterdocs-blocks-editor', 'blocks/editor.js', ['betterdocs-blocks-style-handler'] );
         $this->assets->enqueue( 'betterdocs-blocks-actions', 'blocks/actions.js', [] );
         $this->assets->localize( 'betterdocs-blocks-editor', 'betterDocsBlocksHelper', [
-            'is_pro_active' => betterdocs()->is_pro_active(),
-            'resturl'       => get_rest_url(),
-            'editorType'    => $editor
+            'is_pro_active'         => betterdocs()->is_pro_active(),
+            'resturl'               => get_rest_url(),
+            'editorType'            => $editor,
+            'betterdocs_glossaries' => Helper::get_glossaries(),
+            'docsIcon'              => isset( betterdocs()->settings->get( 'docs_list_icon' )['url'] ) ? betterdocs()->settings->get( 'docs_list_icon' )['url'] : ''
         ] );
 
         if ( $hook == 'post-new.php' || $hook == 'post.php' || $hook == 'site-editor.php' ) {

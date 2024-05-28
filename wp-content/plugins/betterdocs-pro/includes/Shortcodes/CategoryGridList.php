@@ -96,6 +96,7 @@ class CategoryGridList extends Shortcode {
             'widget_type'          => 'category-grid-list',
 
             'terms_query_args'     => $terms_query,
+            'list_icon_url'        => '',
 
             'image_size'           => 'full',
             'show_header'          => true,

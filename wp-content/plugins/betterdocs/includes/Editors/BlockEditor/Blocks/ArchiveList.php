@@ -27,10 +27,14 @@ class ArchiveList extends Block {
 
     public function get_default_attributes() {
         return [
-            'blockId'            => '',
-            'nested_subcategory' => false,
-            'order'              => 'asc',
-            'orderby'            => 'title'
+            'blockId'               => '',
+            'nested_subcategory'    => false,
+            'order'                 => 'asc',
+            'orderby'               => 'title',
+            'layout'                => 'layout-1',
+            'list_icon'             => 'far fa-file-alt',
+            'postsPerPageLayoutTwo' => -1,
+            'listIconImageUrl'      => ''
         ];
     }
 
@@ -55,11 +59,11 @@ class ArchiveList extends Block {
                 return $tax_query;
             }, 10, 5 );
             add_filter( 'betterdocs_articles_args', function ( $args, $_term_id, $_origin_args ) {
-                if( empty( $args['tax_query'] ) ) {
+                if ( empty( $args['tax_query'] ) ) {
                     $args['tax_query'] = $this->tax_query_block;
                 }
                 return $args;
-            }, 10, 3);
+            }, 10, 3 );
         }
 
         $term = ! empty( get_term_by( 'slug', $_term_slug, 'doc_category' ) ) ? get_term_by( 'slug', $_term_slug, 'doc_category' ) : get_term_by( 'slug', $_term_slug, 'doc_tag' );
@@ -78,8 +82,13 @@ class ArchiveList extends Block {
         return [
             'term'               => $term,
             'nested_subcategory' => (bool) $this->attributes['nested_subcategory'],
+            'list_icon_name'     =>! empty( $this->attributes['listIconImageUrl'] ) ? ['value' => ['url' => str_replace( 'blob:', '', $this->attributes['listIconImageUrl'] )]] : ( ! empty( $this->attributes['list_icon'] ) ? ['value' => ['url' => $this->attributes['list_icon']]] : ( ! empty( betterdocs()->settings->get( 'docs_list_icon' ) ) ? ['value' => ['url' => betterdocs()->settings->get( 'docs_list_icon' )['url']]] : [] ) ),
             'query_args'         => betterdocs()->query->docs_query_args( $_docs_query ),
-            'title_tag'          => 'h2'
+            'title_tag'          => 'h2',
+            'layout'             => betterdocs()->is_pro_active() ? $this->attributes['layout'] : 'layout-1',
+            'posts_per_page'     => $this->attributes['postsPerPageLayoutTwo'],
+            'list_icon_url'      => '',
+            'layout_type'        => 'block'
         ];
     }
 }

@@ -37,10 +37,10 @@ Class TabViewList extends BaseWidget {
     }
 
     public function get_style_depends() {
-        return ['betterdocs-category-tab-grid'];
+        return ['betterdocs-category-tab-grid', 'betterdocs-fontawesome'];
     }
 
-    public function get_script_depends(){
+    public function get_script_depends() {
         return ['betterdocs-pro-mkb-tab-grid'];
     }
 
@@ -59,14 +59,115 @@ Class TabViewList extends BaseWidget {
     protected function register_controls() {
         $this->betterdocs_do_action();
 
+        $this->container_section();
         $this->tab_view_list_layout();
         $this->tab_view_list_tabs();
+        $this->all_category_title();
         $this->all_category_boxes();
         $this->tab_view_buttons();
         $this->all_cat_box_icons();
         $this->all_box_cat_list();
     }
 
+    public function container_section() {
+        $this->start_controls_section(
+            'tabview_container_section',
+            [
+                'label' => __( 'Container Section', 'betterdocs-pro' ),
+                'tab'   => Controls_Manager::TAB_STYLE
+            ]
+        );
+
+        $this->add_responsive_control(
+            'tabview_container_padding',
+            [
+                'label'      => __( 'Padding', 'betterdocs-pro' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-tab-grid-wrapper.betterdocs-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'tabview_container_margin',
+            [
+                'label'      => __( 'Margin', 'betterdocs-pro' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-tab-grid-wrapper.betterdocs-wrapper' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'tabview_list_tabs_colors_normal',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .betterdocs-category-tab-grid-wrapper.betterdocs-wrapper'
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
+    public function all_category_title() {
+        $this->start_controls_section(
+            'tabview_category_title_section',
+            [
+                'label' => __( 'Category Title', 'betterdocs-pro' ),
+                'tab'   => Controls_Manager::TAB_STYLE
+            ]
+        );
+
+        $this->add_responsive_control(
+            'tabview_category_title_section_padding',
+            [
+                'label'      => __( 'Padding', 'betterdocs-pro' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-grid-wrapper .betterdocs-category-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'tabview_category_title_section_margin',
+            [
+                'label'      => __( 'Margin', 'betterdocs-pro' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-grid-wrapper .betterdocs-category-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'tabview_category_title_section_color',
+            [
+                'label'     => __( 'Color', 'betterdocs-pro' ),
+                'type'      => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .betterdocs-category-grid-wrapper .betterdocs-category-title' => 'color : {{VALUE}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name'     => 'tabview_category_title_section_typo',
+                'selector' => '{{WRAPPER}} .betterdocs-category-grid-wrapper .betterdocs-category-title'
+            ]
+        );
+
+        $this->end_controls_section();
+    }
 
     /**
      * ----------------------------------------------------------
@@ -257,7 +358,7 @@ Class TabViewList extends BaseWidget {
         $this->add_group_control(
             Group_Control_Background::get_type(),
             [
-                'name'     => 'tabview_list_tabs_colors_normal',
+                'name'     => 'tabview_list_tabs_colors_normal_navbar',
                 'types'    => ['classic', 'gradient'],
                 'selector' => '{{WRAPPER}} .betterdocs-tab-list a'
             ]
@@ -284,8 +385,11 @@ Class TabViewList extends BaseWidget {
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name'     => 'tabview_list_tabs_font_typo_normal',
-                'selector' => '{{WRAPPER}} .betterdocs-tab-list a'
+                'name'           => 'tabview_list_tabs_font_typo_normal',
+                'selector'       => '{{WRAPPER}} .betterdocs-tab-list a',
+                'fields_options' => [
+                    'text_decoration' => ['default' => 'none']
+                ]
             ]
         );
 
@@ -940,23 +1044,25 @@ Class TabViewList extends BaseWidget {
         );
 
         $this->add_control(
-            'tabview_list_icon_color',
+            'list_icon',
             [
-                'label'     => __( 'Icon Color', 'betterdocs-pro' ),
-                'type'      => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li svg' => 'fill:{{VALUE}}'
+                'label'   => __( 'Icon', 'betterdocs' ),
+                'type'    => Controls_Manager::ICONS,
+                'default' => [
+                    'value'   => 'far fa-file-alt',
+                    'library' => 'fa-regular'
                 ]
             ]
         );
 
         $this->add_control(
-            'tabview_list_icon_hover_color',
+            'tabview_list_icon_color',
             [
-                'label'     => __( 'Icon Hover Color', 'betterdocs-pro' ),
+                'label'     => __( 'Icon Color', 'betterdocs-pro' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li svg:hover' => 'fill:{{VALUE}};'
+                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li svg' => 'fill:{{VALUE}}',
+                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li i' => 'color:{{VALUE}}'
                 ]
             ]
         );
@@ -974,7 +1080,9 @@ Class TabViewList extends BaseWidget {
                     ]
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li svg' => 'height:{{SIZE}}{{UNIT}}; width:auto;'
+                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li svg' => 'width:{{SIZE}}{{UNIT}}; height:auto;',
+                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li i' => 'font-size:{{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li img' => 'width:{{SIZE}}{{UNIT}}; height:auto;'
                 ]
             ]
         );
@@ -986,7 +1094,8 @@ Class TabViewList extends BaseWidget {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-articles-list li i' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                 ]
             ]
         );
@@ -1027,13 +1136,15 @@ Class TabViewList extends BaseWidget {
             'wrapper_attr'       => [
                 'class' => ['betterdocs-category-tab-grid-wrapper betterdocs-wrapper betterdocs-wraper']
             ],
+            'list_icon_url'      => '',
+            'layout_type'        => 'widget',
+            'list_icon_name'     => $settings['list_icon'],
             'kb_terms'           => get_terms( $kb_terms_query ),
 
             'show_header'        => true,
             'show_title'         => $settings['show_title_button_tab_list'],
             'title_tag'          => $settings['tabview-list-title'],
             'show_list'          => true,
-
             'show_count'         => false,
             'show_button'        => $settings['explore_more_button_tab_list'],
             'button_text'        => $settings['explore_more_button_tab_list_text'],
@@ -1089,11 +1200,10 @@ Class TabViewList extends BaseWidget {
         }
     }
 
-    public function reset_attributes(){
+    public function reset_attributes() {
         $this->attributes['post_orderby'] = $this->attributes['tab_list_posts_orderby'];
         $this->attributes['post_order']   = $this->attributes['tab_list_order'];
     }
-
 
     public function render_editor_script() {
         $this->views( 'layouts/tab-grid/editor' );

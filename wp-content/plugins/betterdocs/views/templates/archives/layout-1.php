@@ -34,7 +34,9 @@
                 'terms_order'         => $terms_order,
                 'terms_orderby'       => esc_html( $terms_orderby ),
                 'category_title_link' => $category_title_link,
-                'show_icon'           => betterdocs()->customizer->defaults->get( 'betterdocs_doc_page_show_category_icon' )
+                'show_icon'           => betterdocs()->customizer->defaults->get( 'betterdocs_doc_page_show_category_icon' ),
+                'layout_type'         => 'template',
+                'list_icon_url'       => ! empty( betterdocs()->customizer->defaults->get( 'betterdocs_doc_page_article_list_icon' ) ) ?  betterdocs()->customizer->defaults->get( 'betterdocs_doc_page_article_list_icon' ) : ( ! empty( betterdocs()->settings->get( 'docs_list_icon' ) ) ? betterdocs()->settings->get( 'docs_list_icon' )['url'] : '' )
             ], 'betterdocs_category_grid', 'layout-1' );
 
             echo do_shortcode( '[betterdocs_category_grid ' . $attributes . ']' );

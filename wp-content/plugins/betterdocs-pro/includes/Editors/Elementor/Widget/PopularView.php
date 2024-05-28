@@ -30,7 +30,7 @@ class PopularView extends BaseWidget {
     }
 
     public function get_style_depends() {
-        return ['betterdocs-el-articles-list'];
+        return ['betterdocs-el-articles-list', 'betterdocs-fontawesome'];
     }
 
     public function get_custom_help_url() {
@@ -329,12 +329,25 @@ class PopularView extends BaseWidget {
         );
 
         $this->add_control(
+            'list_icon',
+            [
+                'label'   => __( 'Icon', 'betterdocs' ),
+                'type'    => Controls_Manager::ICONS,
+                'default' => [
+                    'value'   => '',
+                    'library' => ''
+                ]
+            ]
+        );
+
+        $this->add_control(
             'popular_list_icon_color',
             [
                 'label'     => __( 'Icon Color', 'betterdocs-pro' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .betterdocs-popular-articles-wrapper .betterdocs-articles-list li svg path' => 'fill: {{VALUE}}!important;'
+                    '{{WRAPPER}} .betterdocs-popular-articles-wrapper .betterdocs-articles-list li svg' => 'fill: {{VALUE}}!important;',
+                    '{{WRAPPER}} .betterdocs-popular-articles-wrapper .betterdocs-articles-list li i'   => 'color: {{VALUE}}!important;'
                 ],
                 'default'   => '#000000'
             ]
@@ -357,7 +370,9 @@ class PopularView extends BaseWidget {
                     'unit' => 'px'
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .betterdocs-popular-articles-wrapper .betterdocs-articles-list li svg' => 'width: {{SIZE}}{{UNIT}}; min-width:1px'
+                    '{{WRAPPER}} .betterdocs-popular-articles-wrapper .betterdocs-articles-list li svg' => 'width: {{SIZE}}{{UNIT}}; min-width:1px',
+                    '{{WRAPPER}} .betterdocs-popular-articles-wrapper .betterdocs-articles-list li i'   => 'font-size: {{SIZE}}{{UNIT}}; min-width:1px',
+                    '{{WRAPPER}} .betterdocs-popular-articles-wrapper .betterdocs-articles-list li img'   => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}};'
                 ]
             ]
         );
@@ -369,7 +384,8 @@ class PopularView extends BaseWidget {
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors'  => [
-                    '{{WRAPPER}} .betterdocs-popular-articles-wrapper .betterdocs-articles-list li svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                    '{{WRAPPER}} .betterdocs-popular-articles-wrapper .betterdocs-articles-list li svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .betterdocs-popular-articles-wrapper .betterdocs-articles-list li i'   => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                 ]
             ]
         );
@@ -394,7 +410,9 @@ class PopularView extends BaseWidget {
                 'class' => $class
             ],
             'nested_subcategory' => false,
-            'list_icon_name'     => 'list',
+            'list_icon_url'      => '',
+            'list_icon_name'     => $settings['list_icon'],
+            'layout_type'        => 'widget',
             'title_tag'          => $settings['popular-layout-title-tag'],
             'title'              => $settings['popular_docs_name'],
             'query_args'         => $this->betterdocs( 'query' )->docs_query_args( [

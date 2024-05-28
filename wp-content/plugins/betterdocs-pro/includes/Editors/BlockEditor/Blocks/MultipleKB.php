@@ -110,7 +110,7 @@ class MultipleKB extends Block {
         $_params = [
             'wrapper_attr'            => $wrapper_attr,
             'inner_wrapper_attr'      => $inner_wrapper_attr,
-            'terms_query_args'        => $terms_object,
+            'terms_query_args'        => betterdocs()->query->terms_query( $terms_object ),
             'widget_type'             => 'category-box',
             'multiple_knowledge_base' => false,
             'kb_slug'                 => '',

@@ -43,12 +43,14 @@ class CSV_Parser {
     }
 
     public function parse( $file ) {
-        $data = [];
+        $data = [
+            'terms' => []
+        ];
 
         $csv_data = [];
         if (($handle = fopen($file, "r")) !== false) {
-            while (($data = fgetcsv($handle, 1000, ",")) !== false) {
-                $csv_data[] = $data;
+            while (($row = fgetcsv($handle, 1000, ",")) !== false) {
+                $csv_data[] = $row;
             }
             fclose($handle);
         }
@@ -58,7 +60,6 @@ class CSV_Parser {
 
         // return data from sample csv file
         if ( $headers['0'] == 'Docs Title' ) {
-
             // update Docs Slug to post_name to check if post exists
             $replacementMap = array(
                 'Docs Slug' => 'post_name'
@@ -97,8 +98,6 @@ class CSV_Parser {
                 }
 
                 $term_data = array_combine($term_headers, $term_row);
-
-
                 $taxonomy = $term_data['Taxonomy'];
                 $term_id = $term_data['Term ID'];
                 $name = $term_data['Term name'];
@@ -120,7 +119,7 @@ class CSV_Parser {
                     'term_id' => $term_id,
                     'term_taxonomy' => $taxonomy,
                     'slug' => $slug,
-                    'parent' => $parent,
+                    'term_parent' => $parent,
                     'term_name' => $name,
                     'description' => $description,
                     'term_group' => $term_group,
@@ -232,20 +231,26 @@ class CSV_Parser {
                 // Check if 'Doc Categories' is set and has data
                 if (isset($post_data['Doc Categories']) && $data['terms']) {
                     $termsDocCategories = $this->searchTermsByIds($data['terms'], $post_data['Doc Categories']);
+                } else {
+                    $termsDocCategories = [];
                 }
 
                 // Check if 'Doc Tags' is set and has data
                 if (isset($post_data['Doc Tags']) && $data['terms']) {
                     $termsDocTags = $this->searchTermsByIds($data['terms'], $post_data['Doc Tags']);
+                } else {
+                    $termsDocTags = [];
                 }
 
                 // Check if 'Knowledge Bases' is set and has data
                 if (isset($post_data['Knowledge Bases']) && $data['terms']) {
                     $termsKnowledgeBases = $this->searchTermsByIds($data['terms'], $post_data['Knowledge Bases']);
+                } else {
+                    $termsKnowledgeBases = [];
                 }
 
                 // Combine the results if needed
-                $combinedTerms = array_merge($termsDocCategories ?? [], $termsDocTags ?? [], $termsKnowledgeBases ?? []);
+                $combinedTerms = array_merge($termsDocCategories, $termsDocTags, $termsKnowledgeBases);
 
                 $post_args['terms'] = $combinedTerms;
 

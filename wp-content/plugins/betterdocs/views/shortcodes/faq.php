@@ -1,6 +1,6 @@
 <div
     <?php echo $wrapper_attr; ?>>
-    <h2 class="<?php esc_attr_e( $faq_heading_class );?> betterdocs-faq-section-title">
+    <h2 class="<?php echo esc_attr( $faq_heading_class );?> betterdocs-faq-section-title">
         <?php echo $faq_heading; ?>
     </h2>
 

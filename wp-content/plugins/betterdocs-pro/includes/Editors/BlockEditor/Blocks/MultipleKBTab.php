@@ -13,11 +13,13 @@ class MultipleKBTab extends Block {
 
     protected $editor_styles = [
         'betterdocs-pro-blocks-editor',
+        'betterdocs-fontawesome',
         'betterdocs-category-tab-grid'
     ];
 
     protected $frontend_styles = [
-        'betterdocs-category-tab-grid'
+        'betterdocs-category-tab-grid',
+        'betterdocs-fontawesome'
     ];
 
     protected $frontend_scripts = [
@@ -84,7 +86,9 @@ class MultipleKBTab extends Block {
             'subCategoryOrder'        => 'asc',
             'subCategoryOrderBy'      => 'title',
             'showButton'              => true,
-            'buttonText'              => __( "Explore Button", "betterdocs-pro" )
+            'buttonText'              => __( "Explore Button", "betterdocs-pro" ),
+            'listIcon'                => '',
+            'listIconImageUrl'        => ''
         ];
     }
 
@@ -134,12 +138,14 @@ class MultipleKBTab extends Block {
             'show_title'         => $attributes['showTitle'],
             'title_tag'          => $attributes['titleTag'],
             'show_list'          => true,
-
+            'list_icon_name'     => ! empty( $this->attributes['listIconImageUrl'] ) ? ['value' => ['url' => str_replace( 'blob:', '', $this->attributes['listIconImageUrl'] )]] : ( ! empty( $this->attributes['listIcon'] ) ? ['value' => ['url' => $this->attributes['listIcon']]] : ( ! empty( betterdocs()->settings->get( 'docs_list_icon' ) ) ? ['value' => ['url' => betterdocs()->settings->get( 'docs_list_icon' )['url']]] : 'list' ) ),
             'show_count'         => false,
             'show_button'        => $attributes['showButton'],
             'button_text'        => $attributes['buttonText'],
             'nested_subcategory' => $attributes['enableNestedSubcategory'],
-            'show_icon'          => $attributes['showIcon']
+            'show_icon'          => $attributes['showIcon'],
+            'list_icon_url'      => '',
+            'layout_type'        => 'block'
         ];
     }
 }

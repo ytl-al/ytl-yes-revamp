@@ -13,7 +13,8 @@ class Sidebar extends Block {
     ];
 
     protected $frontend_styles = [
-        'betterdocs-sidebar'
+        'betterdocs-sidebar',
+        'betterdocs-fontawesome'
     ];
 
     protected $frontend_scripts = [
@@ -29,6 +30,7 @@ class Sidebar extends Block {
         return [
             'blockId'                 => '',
             'sidebar_layout'          => 'layout-1',
+            'selectKB'                => '',
             'includeCategories'       => '',
             'excludeCategories'       => '',
             'terms_per_page'          => -1,
@@ -41,7 +43,9 @@ class Sidebar extends Block {
             'docs_per_subcategory'    => 10,
             'titleTag'                => 'h1',
             'show_count'              => false,
-            'enableStickyTOC'         => false
+            'enableStickyTOC'         => false,
+            'listIcon'                => '',
+            'listIconImageUrl'       => ''
         ];
     }
 
@@ -82,7 +86,7 @@ class Sidebar extends Block {
         $settings = &$this->attributes;
 
         $default_multiple_kb = betterdocs()->settings->get( 'multiple_kb' );
-        $kb_slug             = isset( $settings['selected_knowledge_base'] ) ? $settings['selected_knowledge_base'] : '';
+        $kb_slug             = ! empty( $settings['selectKB'] ) && isset( $settings['selectKB'] ) ? json_decode( $settings['selectKB'] )->value : '';
 
         if( $settings['sidebar_layout'] == 'layout-1' || $settings['sidebar_layout'] == 'layout-6' ) {
             $settings['show_count'] = true;
@@ -91,17 +95,20 @@ class Sidebar extends Block {
         return [
             'shortcode_attr' => [
                 'terms_order'              => $settings['terms_order'],
-                'terms_orderby'            => $settings['terms_orderby'],
+                'terms_orderby'            => $settings['terms_orderby'] == 'doc_category_order' ? 'betterdocs_order' : $settings['terms_orderby'],
                 'terms_include'            => array_diff( $this->string_to_array( $settings['includeCategories'] ), $this->string_to_array( $settings['excludeCategories'] ) ),
                 'terms_exclude'            => isset( $settings['excludeCategories'] ) ? $this->string_to_array( $settings['excludeCategories'] ) : '',
                 'nested_subcategory'       => $settings['enableNestedSubcategory'],
                 'multiple_knowledge_base'  => $default_multiple_kb,
                 'kb_slug'                  => $kb_slug,
                 'sidebar_list'             => true,
+                'list_icon_url'            =>  '',
+                'list_icon_name'           => $settings['sidebar_layout'] == 'layout-4' ? '' : ( ! empty( $this->attributes['listIconImageUrl'] ) ? $this->attributes['listIconImageUrl'] : ( ! empty( $this->attributes['listIcon'] ) ? $this->attributes['listIcon'] : ( ! empty( betterdocs()->settings->get( 'docs_list_icon' ) ) ? betterdocs()->settings->get( 'docs_list_icon' )['url']: 'list' ) ) ),
+                'layout_type'              => 'block',
                 'disable_customizer_style' => true,
                 'posts_per_page'           => -1,
                 'title_tag'                => $settings['titleTag'],
-                'show_count'               => $settings['show_count']
+                'show_count'               => $settings['show_count'],
             ]
         ];
     }

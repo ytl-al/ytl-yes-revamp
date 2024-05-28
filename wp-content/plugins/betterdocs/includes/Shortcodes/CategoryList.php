@@ -36,7 +36,11 @@ class CategoryList extends Shortcode {
             'terms_order'             => '',
             'kb_slug'                 => '',
             'multiple_knowledge_base' => false,
-            'title_tag'               => 'h2'
+            'title_tag'               => 'h2',
+            'layout_type'             => '',
+            'list_icon_url'           => '',
+            'sidebar_layout'          => '',
+            'list_icon_name'          => ''
         ];
     }
 
@@ -79,7 +83,11 @@ class CategoryList extends Shortcode {
             'count_suffix_singular' => '',
             'count_suffix'          => '',
             'show_title'            => true,
-            'show_icon'             => false
+            'show_icon'             => false,
+            'layout_type'           => $this->attributes['layout_type'],
+            'list_icon_url'         => $this->attributes['list_icon_url'],
+            'sidebar_layout'        => $this->attributes['sidebar_layout'],
+            'list_icon_name'        => $this->attributes['list_icon_name']
         ];
     }
 

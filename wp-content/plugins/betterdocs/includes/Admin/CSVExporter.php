@@ -147,9 +147,66 @@ class CSVExporter {
         ];
     }
 
-    public function get_terms( array $post_ids ) {
-		return wp_get_object_terms( $post_ids, get_object_taxonomies( 'docs' ) );
+    /**
+     * Retrieve terms associated with the specified object IDs and sort them based on term meta.
+     *
+     * @param array $post_ids An array of object IDs.
+     * @return array An array of WP_Term objects sorted based on term meta.
+     */
+	private function get_terms( array $post_ids ) {
+        // Get the object taxonomies
+        $taxonomies = get_object_taxonomies( 'docs' );
+
+        // Get the object terms with parent terms coming before their child terms
+        $terms = wp_get_object_terms( $post_ids, $taxonomies);
+
+        usort( $terms, array( $this, 'compare_terms_by_meta' ) );
+
+		return $terms;
 	}
+
+    /**
+     * Compare terms based on their associated term meta values.
+     *
+     * @param WP_Term $a The first term object.
+     * @param WP_Term $b The second term object.
+     * @return int Returns a negative value if $a is less than $b,
+     *             a positive value if $a is greater than $b, or 0 if they are equal.
+     *             Additionally, prioritize sorting terms by taxonomy order,
+     *             with 'doc_category' terms appearing before other taxonomy terms.
+     */
+    public function compare_terms_by_meta($a, $b) {
+        // Define the order of taxonomies
+        $taxonomy_order = array(
+            'doc_category' => 0,
+            'knowledge_base' => 1,
+            'doc_tag' => 2,
+        );
+
+        // Get the taxonomy order for terms $a and $b
+        $order_a = isset($taxonomy_order[$a->taxonomy]) ? $taxonomy_order[$a->taxonomy] : PHP_INT_MAX;
+        $order_b = isset($taxonomy_order[$b->taxonomy]) ? $taxonomy_order[$b->taxonomy] : PHP_INT_MAX;
+
+        // If the taxonomies have different order, sort by order
+        if ($order_a !== $order_b) {
+            return $order_a - $order_b;
+        }
+
+        // If the taxonomies have the same order, sort by meta value
+        $taxonomy_order_meta = array(
+            'doc_category' => 'doc_category_order',
+            'knowledge_base' => 'kb_order'
+        );
+
+        if (isset($taxonomy_order_meta[$a->taxonomy]) && isset($taxonomy_order_meta[$b->taxonomy])) {
+            $meta_a = intval(get_term_meta($a->term_id, $taxonomy_order_meta[$a->taxonomy], true));
+            $meta_b = intval(get_term_meta($b->term_id, $taxonomy_order_meta[$b->taxonomy], true));
+
+            return $meta_a - $meta_b;
+        }
+
+        return 0; // Default to no sorting if meta keys are not defined
+    }
 
     /**
      * Sorting function for sorting term data.
@@ -168,7 +225,7 @@ class CSVExporter {
         return ($parentComparison === 0) ? strcmp($a[2], $b[2]) : $parentComparison;
     }
 
-    private function get_terms_csv_data($post_ids) {
+    private function get_terms_csv_data( $post_ids ) {
         $csv_data_terms = [];
 
         // Add CSV headers for terms
@@ -187,9 +244,8 @@ class CSVExporter {
             'KB order', // Add additional term meta headers here
         ];
 
-        $terms = $this->get_terms($post_ids);
-
-        foreach ($terms as $term) {
+        $terms = $this->get_terms( $post_ids );
+        foreach ( $terms as $term ) {
             $term_meta = '';
 
             // Add term meta based on taxonomy
@@ -216,6 +272,7 @@ class CSVExporter {
                     break;
             }
 
+            $parent = $term->parent ? get_term_by('id', $term->parent, $term->taxonomy) : '';
             // Add CSV row for term
             $csv_data_terms[] = [
                 'Term',
@@ -225,7 +282,7 @@ class CSVExporter {
                 $term->slug,
                 $term->term_group,
                 $term->description,
-                $term->parent,
+                $parent ? $parent->slug : '',
                 isset($term_meta['_docs_order']) ? $term_meta['_docs_order'] : '',
                 isset($term_meta['doc_category_knowledge_base']) ? $term_meta['doc_category_knowledge_base'] : '',
                 isset($term_meta['doc_category_order']) ? $term_meta['doc_category_order'] : '',

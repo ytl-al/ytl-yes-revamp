@@ -2,7 +2,7 @@
 
 namespace WPDeveloper\BetterDocs\Admin\Customizer;
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
     exit;
 }
 
@@ -12,14 +12,16 @@ use WPDeveloper\BetterDocs\Utils\Database;
 /**
  * Customizer Defaults
  */
-class Defaults extends Base {
+class Defaults extends Base
+{
     /**
      * Summary of Database
      * @var Database
      */
     protected $database;
 
-    public function __construct( Database $database ) {
+    public function __construct(Database $database)
+    {
         $this->database = $database;
     }
 
@@ -30,7 +32,8 @@ class Defaults extends Base {
      *
      * @return array
      */
-    public function defaults( $key = '' ) {
+    public function defaults($key = '')
+    {
         $betterdocs_defaults = [
             'betterdocs_docs_layout_select'                               => 'layout-1',
             'betterdocs_single_layout_select'                             => 'layout-1',
@@ -93,6 +96,7 @@ class Defaults extends Base {
             'betterdocs_doc_page_article_list_color'                      => '#566e8b',
             'betterdocs_doc_page_article_list_hover_color'                => '#566e8b',
             'betterdocs_doc_page_article_list_bg_color'                   => '#ffffff',
+            'betterdocs_doc_page_article_list_icon'                       => '',
             'betterdocs_doc_page_article_list_button_bg_color'            => 'rgba(255,255,255,0)',
             'betterdocs_doc_page_article_list_font_size'                  => '15',
             'betterdocs_doc_page_list_icon_color'                         => '#566e8b',
@@ -128,6 +132,22 @@ class Defaults extends Base {
             'betterdocs_doc_page_explore_btn_hover_bg_color'              => '#528ffe',
             'betterdocs_doc_page_explore_btn_hover_color'                 => '#fff',
             'betterdocs_doc_page_explore_btn_hover_border_color'          => '#528ffe',
+            'betterdocs_doc_estimate_reading_time_section'                => '',
+            'betterdocs_doc_single_content_est_reading_border_radius'     => '43',
+            'betterdocs_doc_single_content_est_reading_bg_color'          => '#FFFFFF',
+            'betterdocs_doc_single_content_est_reading_font_weight'       => 'normal',
+            'betterdocs_doc_single_content_est_reading_color'             => '#667085',
+            'betterdocs_doc_single_content_est_reading_font_size'         => '14',
+            'betterdocs_doc_single_content_est_reading_margin'            => '',
+            'betterdocs_doc_single_content_est_reading_margin_top'        => '0',
+            'betterdocs_doc_single_content_est_reading_margin_right'      => '0',
+            'betterdocs_doc_single_content_est_reading_margin_bottom'     => '20',
+            'betterdocs_doc_single_content_est_reading_margin_left'       => '0',
+            'betterdocs_doc_single_content_est_reading_padding'           => '',
+            'betterdocs_doc_single_content_est_reading_padding_top'       => '10',
+            'betterdocs_doc_single_content_est_reading_padding_right'     => '20',
+            'betterdocs_doc_single_content_est_reading_padding_bottom'    => '10',
+            'betterdocs_doc_single_content_est_reading_padding_left'      => '20',
             'betterdocs_doc_single_content_area_bg_color'                 => 'rgba(255,255,255,0)',
             'betterdocs_doc_single_content_area_padding'                  => '',
             'betterdocs_doc_single_content_area_padding_top'              => '30',
@@ -189,7 +209,7 @@ class Defaults extends Base {
             'betterdocs_doc_single_entry_footer'                          => '',
             'betterdocs_social_share_title'                               => '',
             'betterdocs_post_social_share'                                => true,
-            'betterdocs_social_sharing_text'                              => __( 'Share This Article :', 'betterdocs' ),
+            'betterdocs_social_sharing_text'                              => __('Share This Article :', 'betterdocs'),
             'betterdocs_post_social_share_text_color'                     => '#566e8b',
             'betterdocs_post_social_share_facebook'                       => true,
             'betterdocs_post_social_share_twitter'                        => true,
@@ -246,6 +266,7 @@ class Defaults extends Base {
             'betterdocs_sidebar_title_margin_left'                        => '0',
             'betterdocs_sidebar_content'                                  => '',
             'betterdocs_sidbebar_item_list_bg_color'                      => '#ffffff',
+            'betterdocs_sidbebar_item_list_icon'                          => '',
             'betterdocs_sidebar_item_counter_title'                       => '',
             'betterdocs_sidbebar_item_count_bg_color'                     => '#528ffe',
             'betterdocs_sidbebar_item_count_inner_bg_color'               => 'rgba(82, 143, 255, 0.2)',
@@ -306,6 +327,7 @@ class Defaults extends Base {
             'betterdocs_archive_description_margin_bottom'                => '20',
             'betterdocs_archive_description_margin_left'                  => '0',
             'betterdocs_archive_description_font_size'                    => '14',
+            'betterdocs_archive_list_icon'                                => '',
             'betterdocs_archive_list_icon_color'                          => '#566e8b',
             'betterdocs_archive_list_icon_font_size'                      => '16',
             'betterdocs_archive_list_item_color'                          => '#566e8b',
@@ -387,7 +409,7 @@ class Defaults extends Base {
             'betterdocs_search_result_item_border_color'                  => '#f5f5f5',
             'betterdocs_search_result_item_hover_font_color'              => '#444444',
             'betterdocs_search_result_item_hover_background_color'        => '#f5f5f5',
-            'betterdocs_popular_docs_text'                                => __( 'Popular Docs', 'betterdocs' ),
+            'betterdocs_popular_docs_text'                                => __('Popular Docs', 'betterdocs'),
             'betterdocs_popular_docs_number'                              => '10',
             'betterdocs_live_search_margin'                               => '0',
             'betterdocs_live_search_margin_top'                           => '0',
@@ -432,9 +454,10 @@ class Defaults extends Base {
             'betterdocs_doc_single_content_bg_property_repeat'            => '',
             'betterdocs_doc_single_content_bg_property_attachment'        => '',
             'betterdocs_doc_single_content_bg_property_position'          => '',
+            'reactions_background_color'                                  => '#fff',
             'betterdocs_reactions_title'                                  => '',
             'betterdocs_post_reactions'                                   => true,
-            'betterdocs_post_reactions_text'                              => __( 'What are your feelings', 'betterdocs' ),
+            'betterdocs_post_reactions_text'                              => __('What are your feelings', 'betterdocs'),
             'betterdocs_post_reactions_text_color'                        => '#566e8b',
             'betterdocs_post_reactions_icon_color'                        => '#00b88a',
             'betterdocs_post_reactions_icon_hover_bg_color'               => '#fff',
@@ -443,7 +466,7 @@ class Defaults extends Base {
             'betterdocs_faq_switch'                                       => true,
             'betterdocs_select_specific_faq'                              => 'all',
             'betterdocs_select_faq_template'                              => 'layout-1',
-            'betterdocs_faq_title_text'                                   => __( 'Frequently Asked Questions', 'betterdocs' ),
+            'betterdocs_faq_title_text'                                   => __('Frequently Asked Questions', 'betterdocs'),
             'betterdocs_faq_title_margin'                                 => [
                 'input1' => 0,
                 'input2' => 0,
@@ -570,55 +593,90 @@ class Defaults extends Base {
             'betterdocs_doc_single_attachment_list_font_weight'           => '400',
             'betterdocs_doc_related_docs_list_font_weight'                => '400',
             'betterdocs_doc_single_attachment_list_extension_font_size'   => '14',
-            'betterdocs_doc_single_attachment_list_extension_font_weight' => '400'
+            'betterdocs_doc_single_attachment_list_extension_font_weight' => '400',
 
+            'encyclopedia_doc_style'                                   => 'doc-grid',
+            'encyclopedia_letter_style'                                => 'alphabet-big-round-view',
+            'encyclopedia_alphabet_list_style'                         => 'box',
+            'encyclopedia_dictionary_loadmore'                         => 'true',
+            'encyclopedia_dictionary_docs_loadmore'                    => 'true',
+            'encyclopedia_dictionary_per_page'                         => '5',
+            'encyclopedia_dictionary_loadmore_button_text'             => 'Load More',
+            'encyclopedia_dictionary_learn_more_text'                  => 'Learn More',
+            'encyclopedia_dictionary_docs_per_page'                    => '10',
+            'alphabets_background_color'                               => '#fff',
+            'alphabets_link_color'                                     => '#667085',
+            'alphabets_link_bg_color'                                  => '#fff',
+            'alphabets_link_active_bg_color'                                  => '#f5f5f5',
+            'alphabets_link_active_color'                                  => '#fff',
+            'start_letter_color'                                       => '#667085',
+            'start_letter_bg_color'                                    => '#fff',
+            'start_letter_inner_bg_color'                                    => '#f8f8f8',
+            'item_title_color'                                         => '#344054',
+            'item_excerpt_color'                                       => '#667085',
+            'item_excerpt_bg_color'                                       => '#000',
+            'item_excerpt_border_color'                                       => '#12B76A',
+            'item_link_color'                                          => '#667085',
+            'explore_more_text_color'                                  => '#667085',
+            'loadmore_button_text_color'                               => '#ffffff',
+            'loadmore_button_bg_color'                               => '#475467',
+            'alphabets_link_font_size'                                 => '20',
+            'start_letter_font_size'                                   => '96',
+            'item_title_font_size'                                     => '20',
+            'item_excerpt_font_size'                                   => '16',
+            'item_link_font_size'                                   => '16',
+            'explore_more_font_size'                                   => '18',
+            'loadmore_button_text_font_size'                                   => '14',
         ];
 
-        if ( ! empty( $key ) ) {
-            return isset( $betterdocs_defaults[$key] ) ? $betterdocs_defaults[$key] : '';
+        if (!empty($key)) {
+            return isset($betterdocs_defaults[$key]) ? $betterdocs_defaults[$key] : '';
         }
 
-        return apply_filters( 'betterdocs_option_defaults', $betterdocs_defaults );
+        return apply_filters('betterdocs_option_defaults', $betterdocs_defaults);
     }
 
-    public function get( $key, $default = '' ) {
-        if ( empty( $key ) ) {
-            throw new \InvalidArgumentException( '#1 args needed as string.' );
+    public function get($key, $default = '')
+    {
+        if (empty($key)) {
+            throw new \InvalidArgumentException('#1 args needed as string.');
         }
 
-        if ( empty( $default ) ) {
-            $default = $this->defaults( $key );
+        if (empty($default)) {
+            $default = $this->defaults($key);
         }
 
         // $_options = wp_parse_args( $this->generate_defaults(), $this->defaults() );
         // return isset( $_options[$key] ) ? $_options[$key] : $default;
 
-        return get_theme_mod( $key, $default );
+        return get_theme_mod($key, $default);
     }
 
-    public function generate_defaults() {
+    public function generate_defaults()
+    {
         $_return_values = [];
-        foreach ( $this->defaults() as $key => $default ) {
-            $_return_values[$key] = get_theme_mod( $key, $default );
+        foreach ($this->defaults() as $key => $default) {
+            $_return_values[$key] = get_theme_mod($key, $default);
         }
 
         return $_return_values;
     }
 
-    public function theme_mods() {
-        $values = wp_cache_get( 'betterdocs-theme-mods', 'betterdocs', true ); // getting the mods values from cache
+    public function theme_mods()
+    {
+        $values = wp_cache_get('betterdocs-theme-mods', 'betterdocs', true); // getting the mods values from cache
 
-        if ( false !== $values ) {
+        if (false !== $values) {
             return $values;
         }
 
         $default_options = $this->defaults();
         $values          = [];
-        foreach ( $default_options as $key => $default ) {
-            $values[$key] = get_theme_mod( $key, $default );
+        foreach ($default_options as $key => $default) {
+            $values[$key] = get_theme_mod($key, $default);
         }
 
-        wp_cache_set( 'betterdocs-theme-mods', $values, 'betterdocs' ); // set the value in cache.
+        wp_cache_set('betterdocs-theme-mods', $values, 'betterdocs'); // set the value in cache.
         return $values;
     }
 }

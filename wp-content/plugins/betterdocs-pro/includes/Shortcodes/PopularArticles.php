@@ -28,7 +28,9 @@ class PopularArticles extends Shortcode {
             'title'                    => __( 'Popular Docs', 'betterdocs-pro' ),
             'title_tag'                => 'h2',
             'multiple_knowledge_base'  => false,
-            'disable_customizer_style' => false
+            'disable_customizer_style' => false,
+            'list_icon_url'            => '',
+            'layout_type'              => ''
         ];
     }
 
@@ -48,6 +50,7 @@ class PopularArticles extends Shortcode {
             'wrapper_attr' => [
                 'class' => ['betterdocs-popular-articles-wrapper']
             ],
+            'list_icon_url'=> $this->attributes['list_icon_url'],
             'query_args'   => $this->query->docs_query_args( [
                 'post_type'      => 'docs',
                 'posts_per_page' => $this->attributes['post_per_page'],

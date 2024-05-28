@@ -20,6 +20,10 @@ class Settings extends FreeSettings {
         add_filter( 'betterdocs_settings_args', [$this, '_args'], 11 );
         add_filter( 'betterdocs_single_doc_attachments', [$this, 'insert_attachments_settings'], 10, 1 );
         add_filter( 'betterdocs_single_doc_related_docs', [$this, 'unlock_related_docs_settings'], 10, 1 );
+
+        add_filter( 'betterdocs_encyclopedia_settings', [$this, 'encyclopedia_fields'] );
+        add_filter( 'betterdocs_encyclopedia_settings', [$this, 'glossary_fields'] );
+
     }
 
     public function get_raw_field( $key, $default = null ) {
@@ -145,6 +149,8 @@ class Settings extends FreeSettings {
         $_pro_defaults = [
             'multiple_kb'                               => false,
             'disable_root_slug_mkb'                     => false,
+            'collect_analytics_data'                      => true,
+            'unique_visitor_count'                      => true,
             'advance_search'                            => false,
             'child_category_exclude'                    => false,
             'betterdocs_popular_docs_text'              => __( 'Popular Docs', 'betterdocs' ),
@@ -188,6 +194,7 @@ class Settings extends FreeSettings {
             'search_visibility_switch'                  => false,
             'search_placeholder_text'                   => __( 'Search...', 'betterdocs-pro' ),
             'chat_tab_visibility_switch'                => true,
+            'chat_tab_file_upload_switch'               => true,
             'chat_tab_icon'                             => [],
             'chat_tab_title'                            => __( 'Ask', 'betterdocs-pro' ),
             'chat_subtitle_one'                         => __( 'Need a hand? Shoot us a message.', 'betterdocs-pro' ),
@@ -320,7 +327,15 @@ class Settings extends FreeSettings {
             'attachment_audio_icon'                     => [],
             'attachment_video_icon'                     => [],
             'attachment_text_icon'                      => [],
-            'attachment_default_icon'                   => []
+            'attachment_default_icon'                   => [],
+
+            'encyclopedia_page'                         => 'encyclopedia',
+            'encyclopedia_page_title'                   => 'Encyclopedia',
+            'encyclopedia_root_slug'                    => 'encyclopedia',
+            'encyclopedia_source'                    => 'glossaries',
+            'glossary_suggestion'                    => true,
+
+
         ];
         return array_merge( $defaults, $_pro_defaults );
     }
@@ -982,7 +997,7 @@ class Settings extends FreeSettings {
                             'default'  => 'docs',
                             'options'  => GlobalFields::normalize_fields( [
                                 'docs'            => __( 'Docs', 'betterdocs-pro' ),
-                                'docs_categories' => __( 'Docs Categories', 'betterdocs-pro' )
+                                'docs_categories' => __( 'Doc Categories', 'betterdocs-pro' )
                             ] )
                         ],
                         'docs_list'               => [
@@ -997,7 +1012,7 @@ class Settings extends FreeSettings {
                         ],
                         'doc_category_list'       => [
                             'name'     => 'doc_category_list',
-                            'label'    => __( 'Select Docs Categories', 'betterdocs-pro' ),
+                            'label'    => __( 'Select Doc Categories', 'betterdocs-pro' ),
                             'type'     => 'checkbox-select',
                             'priority' => 3,
                             'multiple' => true,
@@ -1132,11 +1147,20 @@ class Settings extends FreeSettings {
                                             'default'                    => true,
                                             'priority'                   => 1
                                         ],
+                                        'chat_tab_file_upload_switch' => [
+                                            'name'                       => 'chat_tab_file_upload_switch',
+                                            'type'                       => 'toggle',
+                                            'label'                      => __( 'File Upload', 'betterdocs-pro' ),
+                                            'enable_disable_text_active' => true,
+                                            'default'                    => true,
+                                            'priority'                   => 2,
+                                            'rules'                      => Rules::is( 'chat_tab_visibility_switch', true )
+                                        ],
                                         'chat_tab_title'             => [
                                             'name'     => 'chat_tab_title',
                                             'type'     => 'text',
                                             'label'    => __( 'Instant Ask Tab Title', 'betterdocs-pro' ),
-                                            'priority' => 2,
+                                            'priority' => 3,
                                             'default'  => __( 'Ask', 'betterdocs-pro' ),
                                             'rules'    => Rules::is( 'chat_tab_visibility_switch', true )
                                         ],
@@ -1144,7 +1168,7 @@ class Settings extends FreeSettings {
                                             'name'     => 'chat_subtitle_one',
                                             'type'     => 'text',
                                             'label'    => __( 'Ask Tab Subtitle One', 'betterdocs-pro' ),
-                                            'priority' => 3,
+                                            'priority' => 4,
                                             'default'  => __( 'Need a hand? Shoot us a message.', 'betterdocs-pro' ),
                                             'rules'    => Rules::is( 'chat_tab_visibility_switch', true )
                                         ],
@@ -1152,7 +1176,7 @@ class Settings extends FreeSettings {
                                             'name'     => 'chat_subtitle_two',
                                             'type'     => 'text',
                                             'label'    => __( 'Ask Tab Subtitle Two', 'betterdocs-pro' ),
-                                            'priority' => 4,
+                                            'priority' => 5,
                                             'default'  => __( 'We typically respond within 24-48 hours. Your solution is just a message away.', 'betterdocs-pro' ),
                                             'rules'    => Rules::is( 'chat_tab_visibility_switch', true )
                                         ]
@@ -1797,6 +1821,7 @@ class Settings extends FreeSettings {
         return $args;
     }
 
+
     /**
      * Get all docs
      */
@@ -1997,5 +2022,83 @@ class Settings extends FreeSettings {
             }
         }
         return $taxonomies;
+    }
+
+    public function custom_get_pages() {
+        // Retrieve existing pages
+        $existing_pages = get_pages();
+        $result = array();
+
+        // Iterate through existing pages
+        foreach ($existing_pages as $page) {
+            $page_id = $page->ID;
+            $page_title = $page->post_title;
+            $page_slug = $page->post_name; // Use post_name for slug
+            $result["$page_id"] = !empty($page_title) ? $page_title : '(no title)';
+
+        }
+
+        return $result;
+    }
+
+
+
+
+    public function encyclopedia_fields($args) {
+
+        $args['fields']['encyclopedia_page_title'] = [
+            'name'                       => 'encyclopedia_page_title',
+            'type'                       => 'text',
+            'label'                      => __( 'Encyclopedia Page Title', 'betterdocs' ),
+            'default'                    => 'Encyclopedia',
+            'priority'                   => 11,
+            'rules'    => Rules::is('enable_encyclopedia', true)
+        ];
+
+        $args['fields']['encyclopedia_root_slug'] = [
+            'name'                       => 'encyclopedia_root_slug',
+            'type'                       => 'text',
+            'label'                      => __( 'Encyclopedia Root Slug', 'betterdocs' ),
+            'label_subtitle'                      => __( 'Modify this option to change the root slug for your Encyclopedia. For example, this will be the default URL: https://example.com/encyclopedia', 'betterdocs' ),
+            'default'                    => 'encyclopedia',
+            'priority'                   => 12,
+            'rules'    => Rules::is('enable_encyclopedia', true)
+        ];
+
+        $args['fields']['encyclopedia_source'] = [
+            'name'     => 'encyclopedia_source',
+            'type'     => 'select',
+            'label'    => __( 'Encyclopedia Source', 'betterdocs' ),
+            'options'  => $this->normalize_options( [
+                'docs'         => __( 'Docs', 'betterdocs' ),
+                'glossaries'           => __( 'Glossaries', 'betterdocs' ),
+            ] ),
+            'default'  => 'glossaries',
+            'priority' => 11,
+            'rules'    =>  Rules::logicalRule( [
+                Rules::is('enable_encyclopedia', true),
+                Rules::is('enable_glossaries', true),
+            ] )
+        ];
+
+        return $args;
+    }
+
+
+    public function glossary_fields($args) {
+
+        $args['fields']['show_glossary_suggestions'] = [
+            'name'                       => 'show_glossary_suggestions',
+            'type'                       => 'toggle',
+            'is_pro'                     => false,
+            'priority'                   => 10,
+            'label'                      => __( 'Show Glossary Suggestions', 'betterdocs-pro' ),
+            'label_subtitle'             => __( 'Enable this option to show Glossary suggestions inside your Gutenberg Editor', 'betterdocs' ),
+            'enable_disable_text_active' => true,
+            'default'                    => true,
+            'rules'    => Rules::is('enable_glossaries', true)
+        ];
+
+        return $args;
     }
 }

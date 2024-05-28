@@ -2,6 +2,10 @@
     <taxonomies>
         <taxonomy translate="1">knowledge_base</taxonomy>
     </taxonomies>
+    <custom-term-fields>
+        <custom-term-field action="copy">kb_order</custom-term-field>
+        <custom-term-field action="copy">knowledge_base-image-id</custom-term-field>
+    </custom-term-fields>
     <admin-texts>
         <key name="theme_mods_*">
             <key name="betterdocs_post_reactions_text" />

@@ -12,7 +12,7 @@
     <span class="popular-search-title"><?php echo esc_html( $popular_search_title ); ?></span>
     <?php
         foreach ( betterdocs_pro()->query->popular_search_keyword() as $keyword ) {
-            echo '<span class="popular-keyword">' . $keyword . '</span>';
+            echo '<span class="popular-keyword">' . esc_html( $keyword ) . '</span>';
         }
     ?>
 </div>

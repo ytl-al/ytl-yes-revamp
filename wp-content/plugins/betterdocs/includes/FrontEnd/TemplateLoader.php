@@ -18,6 +18,7 @@ class TemplateLoader extends Base {
         $this->container = $container;
         $this->database  = $this->container->get( Database::class );
         $this->views     = $this->container->get( Views::class );
+
     }
 
     public function init() {
@@ -51,13 +52,42 @@ class TemplateLoader extends Base {
         echo '</div></div>'.thrive_template()->render_theme_hf_section( THRIVE_FOOTER_SECTION ).'</div>';
     }
 
+    /**
+     * Returns the archive template for the 'docs' custom post type.
+     * If the post type is not 'docs' or it's an embed request, returns the original template.
+     * If custom archive templates are found in the theme, returns the appropriate template.
+     * Otherwise, returns the default archive template based on the selected layout.
+     * @param string $template The original template.
+     * @return string The archive template.
+     */
     public function archive_template( $template ) {
+
+        if (is_tax('glossaries')) {
+            // Use a custom taxonomy template for your custom taxonomy
+
+            $_default_template = 'templates/single/layout-1';
+            $layout            = 'templates/single/layout-7'; 
+    
+            $eligible_template = $this->views->path( $layout, $_default_template );
+    
+            if ( file_exists( $eligible_template ) ) {
+                $template = &$eligible_template;
+            }
+
+            return apply_filters( 'betterdocs_archives_template', $template, $layout, $_default_template, $this->views );
+
+        }
+
         if ( get_post_type() !== 'docs' ) {
             return $template;
         }
 
         if ( is_embed() ) {
             return $template;
+        }
+
+        if ( $this->locate_archives() ) {
+            return $this->locate_archives();
         }
 
         $_default_template = 'templates/archives/layout-1';
@@ -87,6 +117,31 @@ class TemplateLoader extends Base {
     }
 
     /**
+     * Locates custom archive templates from the theme.
+     * Checks for 'archive-docs.php', 'taxonomy-doc_category.php', 'taxonomy-doc_tag.php', and 'taxonomy-knowledge_base.php'.
+     * Returns the template path if found, otherwise returns false.
+     * @return string|false The template path or false if not found.
+     */
+    public function locate_archives() {
+        $archive_docs = locate_template('archive-docs.php');
+        $doc_category = locate_template('taxonomy-doc_category.php');
+        $doc_tag = locate_template('taxonomy-doc_tag.php');
+        $knowledge_base = locate_template('taxonomy-knowledge_base.php');
+
+        if ( is_post_type_archive( 'docs' ) && $archive_docs ) {
+            return $archive_docs;
+        } elseif ( is_tax( 'doc_category' ) && $doc_category ) {
+            return $doc_category;
+        } elseif ( is_tax( 'doc_tag' ) && $doc_tag ) {
+            return $doc_tag;
+        } elseif ( is_tax( 'knowledge_base' ) && $archive_docs ) {
+            return $knowledge_base;
+        }
+
+        return false;
+    }
+
+    /**
      * Render Thriver Header Footer When Thrive Theme Is Activated
      *
      * @return void
@@ -96,9 +151,23 @@ class TemplateLoader extends Base {
         add_action( 'get_footer',  [$this, 'render_thrive_footer'], 10 );
     }
 
+    /**
+     * Returns the template for single 'docs' custom post type.
+     * If the current post type is not 'docs', returns the original template.
+     * If 'single-docs.php' exists in the theme, returns it.
+     * Otherwise, returns the default single template based on the selected layout.
+     * @param string $template The original template.
+     * @return string The single template.
+     */
     public function single_template( $template ) {
         if ( ! is_singular( 'docs' ) ) {
             return $template;
+        }
+
+        // If 'single-docs.php' exists in the theme, return it
+        $theme_template = locate_template('single-docs.php');
+        if ( $theme_template ) {
+            return $theme_template;
         }
 
         //Render The Header Footer When Thrive Builder Theme Is Activated

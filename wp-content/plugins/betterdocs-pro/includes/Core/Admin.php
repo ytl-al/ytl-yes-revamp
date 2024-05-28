@@ -259,6 +259,8 @@ class Admin extends Base {
                     'related_articles_data' => $parsed_related_articles
                 ]
             );
+
+
         }
 
         // @todo: check the hook condition.
@@ -283,6 +285,8 @@ class Admin extends Base {
         betterdocs_pro()->assets->enqueue( 'betterdocs-pro-admin', 'admin/css/betterdocs-admin.css' );
         betterdocs_pro()->assets->enqueue( 'betterdocs-pro-admin', 'admin/js/betterdocs.js', ['jquery'] );
         betterdocs_pro()->assets->localize( 'betterdocs-pro-admin', 'betterdocs_pro_admin', $_params );
+
+
     }
 
     public function add_knowledge_base_filter() {

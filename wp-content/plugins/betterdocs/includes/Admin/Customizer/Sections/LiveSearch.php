@@ -97,7 +97,8 @@ class LiveSearch extends Section {
                         'h3' => 'h3',
                         'h4' => 'h4',
                         'h5' => 'h5',
-                        'h6' => 'h6'
+                        'h6' => 'h6',
+                        'p'  => 'p'
                     ],
                     'priority' => 502
                 ]
@@ -305,7 +306,8 @@ class LiveSearch extends Section {
                         'h3' => 'h3',
                         'h4' => 'h4',
                         'h5' => 'h5',
-                        'h6' => 'h6'
+                        'h6' => 'h6',
+                        'p'  => 'p'
                     ],
                     'priority' => 507
                 ]

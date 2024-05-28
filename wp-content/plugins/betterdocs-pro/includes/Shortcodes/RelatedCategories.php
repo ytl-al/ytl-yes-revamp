@@ -24,6 +24,9 @@ class RelatedCategories extends Shortcode {
 
     public function __construct( Settings $settings, Query $query, Helper $helper, Defaults $defaults ) {
         parent::__construct( $settings, $query, $helper, $defaults );
+        //gutenberg ajax request
+        add_action( 'wp_ajax_nopriv_load_more_terms_gutenberg', [$this, 'load_more_terms'] );
+        add_action( 'wp_ajax_load_more_terms_gutenberg', [$this, 'load_more_terms'] );
 
         add_action( 'wp_ajax_nopriv_load_more_terms', [$this, 'load_more_terms'] );
         add_action( 'wp_ajax_load_more_terms', [$this, 'load_more_terms'] );
@@ -37,7 +40,7 @@ class RelatedCategories extends Shortcode {
         return 'betterdocs_related_categories';
     }
 
-    public function get_style_depends(){
+    public function get_style_depends() {
         return ['betterdocs-related-categories'];
     }
 
@@ -58,14 +61,14 @@ class RelatedCategories extends Shortcode {
     }
 
     public function load_more_button( $terms ) {
-        if( empty( $terms ) || count( $terms ) < 4 ) {
+        if ( empty( $terms ) || count( $terms ) < 4 ) {
             return;
         }
         $this->views( 'layouts/related-categories/load-more' );
     }
 
     public function heading( $terms ) {
-        if( empty( $terms ) ) {
+        if ( empty( $terms ) ) {
             return;
         }
 
@@ -92,6 +95,16 @@ class RelatedCategories extends Shortcode {
         $nested_subcategory = $this->settings->get( 'nested_subcategory' );
         $per_page           = 4;
         $offset             = $per_page * ( $page - 1 );
+
+        $block_attributes = ! empty( $_GET['block_attributes'] ) ? $_GET['block_attributes'] : [];
+
+        //check if block attributes exist, based on these props, perform ajax request for "Load More"(Only For Gutenberg)
+        if ( ! empty( $block_attributes ) ) {
+            $multiple_kb        = isset( $block_attributes['multipleKnowledgeBase'] ) ? $block_attributes['multipleKnowledgeBase'] : '';
+            $terms_order        = isset( $block_attributes['termsOrder'] ) ? $block_attributes['termsOrder'] : '';
+            $terms_orderby      = isset( $block_attributes['termsOrderBy'] ) ? $block_attributes['termsOrderBy'] : '';
+            $nested_subcategory = isset( $block_attributes['nestedSubCategory'] ) ? $block_attributes['nestedSubCategory'] : '';
+        }
 
         $_term_query_args = $this->query->terms_query( [
             'taxonomy'           => 'doc_category',
@@ -127,16 +140,16 @@ class RelatedCategories extends Shortcode {
 
                 $permalink = apply_filters(
                     'betterdocs_term_permalink',
-                    get_term_link( $term->term_id, $term->taxonomy ), $term, 'doc_category'
+                    get_term_link( $term->term_id, $term->taxonomy ), $term, 'doc_category', $_term_query_args
                 );
 
                 betterdocs()->views->get( 'layouts/related-categories/default', [
-                    'term'          => $term,
-                    'title_tag'     => $title_tag,
+                    'term'            => $term,
+                    'title_tag'       => $title_tag,
                     'show_term_image' => true,
-                    'permalink'     => $permalink,
-                    'widget_type'   => 'related-categories',
-                    'counts' => $_counts
+                    'permalink'       => $permalink,
+                    'widget_type'     => 'related-categories',
+                    'counts'          => $_counts
                 ] );
 
                 $output .= ob_get_clean();

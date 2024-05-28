@@ -2,12 +2,15 @@
 
 namespace WPDeveloper\BetterDocsPro\FrontEnd;
 
+use Elementor\Plugin;
 use WPDeveloper\BetterDocs\Utils\Base;
 use WPDeveloper\BetterDocs\Core\Settings;
 use WPDeveloper\BetterDocs\Utils\Database;
 use WPDeveloper\BetterDocsPro\Core\InstantAnswer;
+use WPDeveloper\BetterDocsPro\Core\Encyclopedia;
 use WPDeveloper\BetterDocs\Dependencies\DI\Container;
 use WPDeveloper\BetterDocsPro\Core\ContentRestrictions;
+use WPDeveloper\BetterDocsPro\Core\Glossaries;    
 
 class FrontEnd extends Base {
     private $container;
@@ -20,6 +23,10 @@ class FrontEnd extends Base {
         $this->settings  = $this->container->get( Settings::class );
 
         add_action( 'wp_enqueue_scripts', [$this, 'enqueue_scripts'] );
+
+        if( is_plugin_active('elementor/elementor.php') ) {
+            add_action( 'template_redirect', [$this, 'set_cookie_for_last_kb'], 10 );
+        }
 
         // add_filter( 'betterdocs_not_eligible_archive', [$this, 'is_archive'] );
         add_filter( 'betterdocs_archives_template', [$this, 'archives_template'], 10, 4 );
@@ -43,6 +50,16 @@ class FrontEnd extends Base {
         if ( $this->settings->get( 'show_related_docs' ) ) {
             add_action( 'betterdocs_docs_before_social', [$this, 'render_related_docs_shortcode'], 12 );
         }
+
+        if ( $this->settings->get( 'enable_encyclopedia', false ) ) {
+            $this->container->get( Encyclopedia::class );
+        }
+        if ( $this->settings->get( 'enable_glossaries', false ) ) {
+            $this->container->get( Glossaries::class );
+        }
+
+        add_filter('the_content', [$this, 'wrap_glossaries']);
+
     }
 
     public function render_attachment_markup() {
@@ -51,6 +68,39 @@ class FrontEnd extends Base {
 
     public function render_related_docs_shortcode() {
         echo do_shortcode( '[betterdocs_related_docs]' );
+    }
+
+    public function set_cookie_for_last_kb() {
+        $post_type = get_post_type( get_the_ID() );
+        if ( $post_type != 'docs' ) {
+            $document = Plugin::$instance->documents->get( get_the_ID() ) != false ? Plugin::$instance->documents->get( get_the_ID() ) : [];
+            $document_element_data = ! empty( $document ) ? $document->get_elements_data() : [];
+            $kb_slug  = $this->recursively_search_for_kb_slug_in_elementor_content( $document_element_data, 'selected_knowledge_base', 'betterdocs-category-grid' );
+            if ( $kb_slug != false ) {
+                setcookie( 'last_knowledge_base', $kb_slug, time() + ( YEAR_IN_SECONDS * 2 ), "/" );
+            }
+        }
+    }
+
+    /**
+     * Recursively Search For Betterdocs Elementor Widget Key On Elementor Post Content
+     *
+     * @param array   $element_data
+     * @param string  $key
+     * @param string  $widget_type
+     * @param boolean $accumulator
+     *
+     * @return string
+     */
+    public function recursively_search_for_kb_slug_in_elementor_content( $element_data, $key, $widget_type, $accumulator = false ) {
+        foreach ( $element_data as $data ) {
+            if ( array_key_exists( $key, $data['settings'] ) && $data['widgetType'] == $widget_type ) {
+                $accumulator = $data['settings'][$key];
+            } else {
+                $accumulator = $this->recursively_search_for_kb_slug_in_elementor_content( $data['elements'], $key, $widget_type, $accumulator );
+            }
+        }
+        return $accumulator;
     }
 
     public function enqueue_scripts() {
@@ -169,5 +219,83 @@ class FrontEnd extends Base {
 
     public function popular_search_keyword( $attr ) {
         return betterdocs()->views->get( 'template-parts/search/popular-keyword', $attr['params'] );
+    }
+
+
+    public function fetch_glossaries($letter = '') {
+        global $wpdb;
+    
+        // Get settings
+        $encyclopedia_source = betterdocs()->settings->get('encyclopedia_source', 'docs');
+        $enable_glossaries = betterdocs()->settings->get('enable_glossaries', false);
+    
+        // Check if glossaries are enabled and the source is 'glossaries'
+        if (betterdocs()->is_pro_active() && $enable_glossaries && $encyclopedia_source === 'glossaries') {
+            // Prepare the base query
+            $query = "
+                SELECT t.term_id, t.name, t.slug, '' AS post_excerpt, CONCAT('" . get_home_url() . "/glossaries/', t.slug) AS permalink, tt.description
+                FROM {$wpdb->terms} t
+                INNER JOIN {$wpdb->term_taxonomy} tt ON t.term_id = tt.term_id
+                WHERE tt.taxonomy = 'glossaries'
+            ";
+    
+            // Add letter filtering if a letter is specified
+            if (!empty($letter)) {
+                $query .= $wpdb->prepare(" AND LEFT(t.name, 1) = %s", $letter);
+            }
+    
+            // Append the ordering clause
+            $query .= " ORDER BY t.name ASC";
+    
+            // Execute the query
+            $results = $wpdb->get_results($query, ARRAY_A);
+    
+            // Retrieve meta data for each term
+            $current_glossaries = [];
+            foreach ($results as $result) {
+                $term_id = $result['term_id'];
+                $meta_data = get_term_meta($term_id);
+    
+                // Include meta data in the result
+                $result['meta_data'] = $meta_data;
+                $current_glossaries[] = $result;
+            }
+    
+            return $current_glossaries;
+        }
+    
+        return []; // Return an empty array if glossaries are not enabled or source is not 'glossaries'
+    }
+    
+    
+
+    public function wrap_glossaries($content) {
+
+        if ( is_singular( 'docs' ) ) {
+            // Fetch glossary terms from the database or any other source
+            $glossaries = $this->fetch_glossaries();
+            
+            // Initialize an array to store glossary terms and their wrapped HTML versions
+            $glossary_terms = [];
+            foreach ($glossaries as $glossary) {
+                $glossary_terms[strtolower($glossary['name'])] = '<span class="glossary-tooltip-container" data-tooltip="' . esc_attr($glossary['description']) . '"><a href="' . esc_url(get_term_link($glossary['slug'], 'glossaries')) . '" target="_blank">' . esc_html($glossary['name']) . '</a></span>';
+            }
+        
+            // Prepare the regex pattern to match glossary terms outside of HTML attributes
+            $pattern = '/\b(' . implode('|', array_map('preg_quote', array_keys($glossary_terms))) . ')\b(?![^<>]*>)(?=(?:[^<]*<[^>]*>)*[^<]*$)/i';
+        
+            // Callback function to replace matched terms
+            $callback = function($matches) use ($glossary_terms) {
+                $term = strtolower($matches[1]); // Convert matched term to lowercase for lookup
+                return isset($glossary_terms[$term]) ? $glossary_terms[$term] : $matches[0];
+            };
+        
+            // Perform the replacement
+            $content = preg_replace_callback($pattern, $callback, $content);
+        
+            return $content;
+        }
+
+        return $content;
     }
 }

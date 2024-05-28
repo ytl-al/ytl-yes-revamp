@@ -4,10 +4,11 @@
     "title": "BetterDocs FAQ",
     "name": "betterdocs/faq",
     "category": "widgets",
-    "description": "Display your Knowledgebase in an amazing Handbook layout and style it any way you want.",
+    "description": "Use the FAQ block to easily create a knowledge base section of frequently asked questions.",
     "textdomain": "betterdocs",
     "editorStyle": [
         "betterdocs-faq",
         "file:./default.css"
-    ]
+    ],
+    "editorScript":"betterdocs-blocks-editor"
 }

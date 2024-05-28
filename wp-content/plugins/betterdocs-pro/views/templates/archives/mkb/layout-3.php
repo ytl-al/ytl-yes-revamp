@@ -39,11 +39,15 @@
             </div>
             <?php
                 if ( $popular_docs ) {
-                    $popular_doc_text       = betterdocs()->settings->get( 'betterdocs_popular_docs_text', __( 'Popular Docs', 'betterdocs-pro' ) );
-                    $popular_posts_per_page = betterdocs()->settings->get( 'betterdocs_popular_docs_number' );
+                    $attributes = betterdocs()->template_helper->shortcode_atts( [
+                        'title'         => betterdocs()->settings->get( 'betterdocs_popular_docs_text', __( 'Popular Docs', 'betterdocs-pro' ) ),
+                        'post_per_page' => betterdocs()->settings->get( 'betterdocs_popular_docs_number' ),
+                        'list_icon_url' => ! empty( betterdocs()->customizer->defaults->get( 'betterdocs_mkb_popular_list_icon' ) ) ? betterdocs()->customizer->defaults->get( 'betterdocs_mkb_popular_list_icon' ) : ( ! empty( betterdocs()->settings->get( 'docs_list_icon' ) ) ? betterdocs()->settings->get( 'docs_list_icon' )['url'] : '' ),
+                        'layout_type'   => 'template'
+                    ], 'betterdocs_popular_articles', '' );
 
                     echo '<div class="betterdocs-popular-article-list-wrapper">';
-                    echo do_shortcode( '[betterdocs_popular_articles multiple_knowledge_base=true title="' . $popular_doc_text . '" post_per_page="' . $popular_posts_per_page . '"]' );
+                    echo do_shortcode( '[betterdocs_popular_articles ' . $attributes . ']' );
                     echo '</div>';
                 }
             ?>

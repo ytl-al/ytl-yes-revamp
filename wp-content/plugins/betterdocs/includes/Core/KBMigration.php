@@ -114,11 +114,11 @@ class KBMigration extends Base {
                                             'default'  => '',
                                             'priority' => 2,
                                         ],
-                                        'helpscout_action' => [
+                                        'helpscout_action' => apply_filters( 'betterdocs_helpscout_migration_action',[
                                             'name'     => 'helpscout_action',
                                             'text'     => [
                                                 'normal'  => __('Migrate Help Scout Docs', 'betterdocs'),
-                                                'saved'   => __('Migrated', 'betterdocs'),
+                                                'saved'   => __('Migrate Help Scout Docs', 'betterdocs'),
                                                 'loading' => __('Migrating...', 'betterdocs'),
                                             ],
                                             'type'     => 'button',
@@ -131,12 +131,12 @@ class KBMigration extends Base {
                                                     'helpscout_collection_id' => '@helpscout_collection_id'
                                                 ],
                                                 'swal' => [
-                                                    'text'      => __( 'Help Scout Docs are successfully migrated to your site.', 'betterdocs' ),
+                                                    'text'      => __( 'Migration process has started in the background.', 'betterdocs' ),
                                                     'icon'      => 'success',
                                                     'autoClose' => 2000
                                                 ]
                                             ]
-                                        ]
+                                        ])
                                     ]
                                 ]
                             ])

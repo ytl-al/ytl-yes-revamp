@@ -80,7 +80,7 @@ class Settings extends Base {
         if ( $hook !== 'betterdocs_page_betterdocs-settings' ) {
             return;
         }
-
+        wp_enqueue_media();
         wp_enqueue_script( 'betterdocs-admin' );
         betterdocs()->assets->enqueue( 'betterdocs-settings', 'admin/css/settings.css' );
         betterdocs()->assets->enqueue( 'betterdocs-icons', 'admin/btd-icon/style.css' );
@@ -176,6 +176,7 @@ class Settings extends Base {
             'search_not_found_text'      => __( 'Sorry, no docs were found.', 'betterdocs' ),
             'search_result_image'        => true,
             'masonry_layout'             => true,
+            'docs_list_icon'             => [],
             'category_title_link'        => false,
             'terms_orderby'              => 'betterdocs_order',
             'alphabetically_order_term'  => false,
@@ -212,13 +213,14 @@ class Settings extends Base {
             'enable_tags'                => true,
             'email_feedback'             => true,
             'feedback_link_text'         => __( 'Still stuck? How can we help?', 'betterdocs' ),
+            'reaction_feedback_text'     => __( 'Thanks for your feedback', 'betterdocs'),
             'feedback_url'               => '',
             'feedback_form_title'        => __( 'How can we help?', 'betterdocs' ),
             'email_address'              => get_option( 'admin_email' ),
             'show_last_update_time'      => true,
             'enable_navigation'          => true,
             'enable_comment'             => true,
-            'enable_credit'              => true,
+            'enable_credit'              => false,
             'enable_archive_sidebar'     => true,
             'archive_nested_subcategory' => true,
             'enable_content_restriction' => false,
@@ -229,7 +231,13 @@ class Settings extends Base {
             'enable_write_with_ai'       => true,
             'enable_faq_write_with_ai'   => true,
             'ai_autowrite_api_key'       => '',
-            'ai_autowrite_max_token'     => 1500
+            'ai_autowrite_max_token'     => 1500,
+            'enable_estimated_reading_time' => false,
+            'enable_encyclopedia'        => false,
+            'enable_glossaries'        => false,
+            'show_glossary_suggestions'        => true,
+            'estimated_reading_time_title' => __('', 'betterdocs'),
+            'estimated_reading_time_text'  => __('min read', 'betterdocs')
         ];
 
         $_default = apply_filters( 'betterdocs_default_settings', $_default );
@@ -519,7 +527,7 @@ class Settings extends Base {
                     'classes'  => 'tab-general',
                     'priority' => 10,
                     'fields'   => [
-                        'title-general' => [
+                        'title-general' =>  apply_filters( 'betterdocs_encyclopedia_settings', [
                             'name'     => 'title-general-tab',
                             'type'     => 'section',
                             'label'    => __( 'General Settings', 'betterdocs' ),
@@ -540,15 +548,15 @@ class Settings extends Base {
                                     'label'                      => __( 'Built-in Documentation Page', 'betterdocs' ),
                                     'enable_disable_text_active' => true,
                                     'default'                    => 1,
-                                    'priority'                   => 2,
-                                    'label_subtitle'             => __( 'If you disable root slug for KB Archives, your individual knowledge base URL will be like this: https://example.com/knowledgebase-1', 'betterdocs' )
+                                    'priority'                   => 2
                                 ],
                                 'breadcrumb_doc_title'  => [
                                     'name'     => 'breadcrumb_doc_title',
                                     'type'     => 'text',
                                     'label'    => __( 'Documentation Page Title', 'betterdocs' ),
-                                    'default'  => 'Docs',
-                                    'priority' => 3
+                                    'default'  => __( 'Docs', 'betterdocs' ),
+                                    'priority' => 3,
+                                    'rules'    => Rules::is( 'builtin_doc_page', true )
                                 ],
                                 'docs_slug'             => [
                                     'name'     => 'docs_slug',
@@ -569,6 +577,7 @@ class Settings extends Base {
                                     'label_subtitle' => __( 'You will need to insert BetterDocs Shortcode inside the page. This page will be used as docs permalink.', 'betterdocs' ),
                                     'rules'          => Rules::is( 'builtin_doc_page', false )
                                 ],
+
                                 'category_slug'         => [
                                     'name'     => 'category_slug',
                                     'type'     => 'text',
@@ -588,12 +597,31 @@ class Settings extends Base {
                                     'type'           => 'permalink_structure',
                                     'label'          => __( 'Single Docs Permalink', 'betterdocs' ),
                                     'default'        => PostType::permalink_structure(),
-                                    'priority'       => 9,
+                                    'priority'       => 8,
                                     'tags'           => $this->normalize_options( [
                                         '%doc_category%'   => '%doc_category%',
                                         '%knowledge_base%' => '%knowledge_base%'
                                     ] ),
                                     'label_subtitle' => __( 'Make sure to keep Docs Root Slug in the Single Docs Permalink. You are not able to keep it blank. You can use the available tags from below.', 'betterdocs' )
+                                ],
+                                'enable_glossaries' =>  [
+                                    'name'                       => 'enable_glossaries',
+                                    'type'                       => 'toggle',
+                                    'label'                      => __( 'Show Glossary', 'betterdocs' ),
+                                    'label_subtitle'             => __( 'Enable the glossary feature to allow users to look up definitions for terms used within your encyclopedia or glossaries themselves.', 'betterdocs' ),
+                                    'enable_disable_text_active' => true,
+                                    'default'                    => false,
+                                    'priority'                   => 9,
+                                    'is_pro'                     => true
+                                ],
+                                'enable_encyclopedia' =>  [
+                                    'name'                       => 'enable_encyclopedia',
+                                    'type'                       => 'toggle',
+                                    'label'                      => __( 'Built-in Encyclopedia Page', 'betterdocs' ),
+                                    'enable_disable_text_active' => true,
+                                    'default'                    => false,
+                                    'priority'                   => 10,
+                                    'is_pro'                     => true
                                 ],
                                 'enable_faq_schema'     => [
                                     'name'                       => 'enable_faq_schema',
@@ -601,7 +629,7 @@ class Settings extends Base {
                                     'label'                      => __( 'FAQ Schema', 'betterdocs' ),
                                     'enable_disable_text_active' => true,
                                     'default'                    => '',
-                                    'priority'                   => 10
+                                    'priority'                   => 14
                                 ],
                                 'analytics_from'        => [
                                     'name'     => 'analytics_from',
@@ -613,8 +641,17 @@ class Settings extends Base {
                                         'registered_users' => __( 'Registered Users Only', 'betterdocs' )
                                     ] ),
                                     'default'  => 'everyone',
-                                    'priority' => 11,
+                                    'priority' => 15,
                                     'is_pro'   => true
+                                ],
+                                'unique_visitor_count' => [
+                                    'name'                       => 'unique_visitor_count',
+                                    'type'                       => 'toggle',
+                                    'label'                      => __( 'Unique Visitor Count', 'betterdocs' ),
+                                    'enable_disable_text_active' => true,
+                                    'default'                    => true,
+                                    'priority'                   => 16,
+                                    'is_pro'                     => true
                                 ],
                                 'exclude_bot_analytics' => [
                                     'name'                       => 'exclude_bot_analytics',
@@ -622,11 +659,13 @@ class Settings extends Base {
                                     'label'                      => __( 'Exclude Bot Analytics', 'betterdocs' ),
                                     'enable_disable_text_active' => true,
                                     'default'                    => true,
-                                    'priority'                   => 12,
+                                    'priority'                   => 17,
                                     'is_pro'                     => true
-                                ]
+                                ],
+
+
                             ]
-                        ]
+                        ])
                     ]
                 ] ),
                 'tab-layout'           => apply_filters( 'betterdocs_settings_tab_layout', [
@@ -703,6 +742,14 @@ class Settings extends Base {
                                                             'label'    => __( 'General', 'betterdocs' ),
                                                             'priority' => 1,
                                                             'fields'   => [
+                                                                'docs_list_icon'  => [
+                                                                    'name'                       => 'docs_list_icon',
+                                                                    'type'                       => 'media',
+                                                                    'value'                      => '',
+                                                                    'label'                      => __( 'Docs List Icon', 'betterdocs' ),
+                                                                    'label_subtitle'             => __( 'Upload your own preferred document list icon', 'betterdocs' ),
+                                                                    'priority'                   => 0
+                                                                ],
                                                                 'category_title_link'            => [
                                                                     'name'                       => 'category_title_link',
                                                                     'type'                       => 'toggle',
@@ -796,7 +843,7 @@ class Settings extends Base {
                                                                     'default'  => 10,
                                                                     'priority' => 11,
                                                                     "is_pro"   => true
-                                                                ]
+                                                                ],
                                                             ]
                                                         ],
                                                         'layout_documentation_page_search'   => [
@@ -826,7 +873,7 @@ class Settings extends Base {
                                                                 'child_category_exclude' => apply_filters( 'child_category_exclude', [
                                                                     'name'                       => 'child_category_exclude',
                                                                     'type'                       => 'toggle',
-                                                                    'label'                      => __( 'Category Search', 'betterdocs' ),
+                                                                    'label'                      => __( 'Exclude Child Terms In Category Search', 'betterdocs' ),
                                                                     'enable_disable_text_active' => true,
                                                                     'default'                    => '',
                                                                     'priority'                   => 3,
@@ -923,7 +970,8 @@ class Settings extends Base {
                                                                         'ASC'  => 'Ascending',
                                                                         'DESC' => 'Descending'
                                                                     ] ),
-                                                                    'priority' => 3
+                                                                    'priority' => 3,
+                                                                    'rules'    => Rules::includes( 'terms_orderby', 'betterdocs_order', true ),
                                                                 ],
                                                                 'alphabetically_order_post' => [
                                                                     'name'     => 'alphabetically_order_post',
@@ -954,7 +1002,8 @@ class Settings extends Base {
                                                                         'ASC'  => 'Ascending',
                                                                         'DESC' => 'Descending'
                                                                     ] ),
-                                                                    'priority' => 5
+                                                                    'priority' => 5,
+                                                                    'rules'    => Rules::includes( 'alphabetically_order_post', 'betterdocs_order', true ),
                                                                 ]
                                                             ]
                                                         ]
@@ -1000,7 +1049,7 @@ class Settings extends Base {
                                                             'label'    => __( 'General', 'betterdocs' ),
                                                             'priority' => 5,
                                                             'fields'   => [
-                                                                'enable_post_title'       => [
+                                                                'enable_post_title'              => [
                                                                     'name'                       => 'enable_post_title',
                                                                     'type'                       => 'toggle',
                                                                     'label'                      => __( 'Doc Title', 'betterdocs' ),
@@ -1008,7 +1057,7 @@ class Settings extends Base {
                                                                     'default'                    => 1,
                                                                     'priority'                   => 1
                                                                 ],
-                                                                'enable_sidebar_cat_list' => [
+                                                                'enable_sidebar_cat_list'        => [
                                                                     'name'                       => 'enable_sidebar_cat_list',
                                                                     'type'                       => 'toggle',
                                                                     'label'                      => __( 'Sidebar Category List', 'betterdocs' ),
@@ -1016,7 +1065,7 @@ class Settings extends Base {
                                                                     'default'                    => 1,
                                                                     'priority'                   => 2
                                                                 ],
-                                                                'enable_print_icon'       => [
+                                                                'enable_print_icon'              => [
                                                                     'name'                       => 'enable_print_icon',
                                                                     'type'                       => 'toggle',
                                                                     'label'                      => __( 'Print Icon', 'betterdocs' ),
@@ -1024,7 +1073,7 @@ class Settings extends Base {
                                                                     'default'                    => 1,
                                                                     'priority'                   => 3
                                                                 ],
-                                                                'enable_tags'             => [
+                                                                'enable_tags'                    => [
                                                                     'name'                       => 'enable_tags',
                                                                     'type'                       => 'toggle',
                                                                     'label'                      => __( 'Tags', 'betterdocs' ),
@@ -1032,7 +1081,7 @@ class Settings extends Base {
                                                                     'default'                    => 1,
                                                                     'priority'                   => 4
                                                                 ],
-                                                                'show_last_update_time'   => [
+                                                                'show_last_update_time'          => [
                                                                     'name'                       => 'show_last_update_time',
                                                                     'type'                       => 'toggle',
                                                                     'label'                      => __( 'Last Update Time', 'betterdocs' ),
@@ -1040,7 +1089,7 @@ class Settings extends Base {
                                                                     'default'                    => 1,
                                                                     'priority'                   => 5
                                                                 ],
-                                                                'enable_navigation'       => [
+                                                                'enable_navigation'              => [
                                                                     'name'                       => 'enable_navigation',
                                                                     'type'                       => 'toggle',
                                                                     'label'                      => __( 'Navigation', 'betterdocs' ),
@@ -1048,7 +1097,7 @@ class Settings extends Base {
                                                                     'default'                    => 1,
                                                                     'priority'                   => 6
                                                                 ],
-                                                                'enable_comment'          => [
+                                                                'enable_comment'                 => [
                                                                     'name'                       => 'enable_comment',
                                                                     'type'                       => 'toggle',
                                                                     'label'                      => __( 'Comment', 'betterdocs' ),
@@ -1056,14 +1105,45 @@ class Settings extends Base {
                                                                     'default'                    => '',
                                                                     'priority'                   => 7
                                                                 ],
-                                                                'enable_credit'           => [
+                                                                'enable_credit'                  => [
                                                                     'name'                       => 'enable_credit',
                                                                     'type'                       => 'toggle',
-                                                                    'label'                      => __( 'Credit', 'betterdocs' ),
+                                                                    'label'                      => __( 'Show Powered by BetterDocs', 'betterdocs' ),
                                                                     'enable_disable_text_active' => true,
-                                                                    'default'                    => 1,
+                                                                    'default'                    => '',
                                                                     'priority'                   => 8
-                                                                ]
+                                                                ],
+                                                                'enable_estimated_reading_time'  => [
+                                                                    'name'                       => 'enable_estimated_reading_time',
+                                                                    'type'                       => 'toggle',
+                                                                    'label'                      => __( 'Estimated Reading Time', 'betterdocs' ),
+                                                                    'enable_disable_text_active' => true,
+                                                                    'default'                    => 0,
+                                                                    'priority'                   => 9
+                                                                ],
+                                                                'reaction_feedback_text'  => [
+                                                                    'name'     => 'reaction_feedback_text',
+                                                                    'type'     => 'text',
+                                                                    'label'    => __( 'Reaction Feedback Text', 'betterdocs' ),
+                                                                    'default'  => __( 'Thanks for your feedback', 'betterdocs' ),
+                                                                    'priority' => 10,
+                                                                ],
+                                                                'estimated_reading_time_title'       => [
+                                                                    'name'     => 'estimated_reading_time_title',
+                                                                    'type'     => 'text',
+                                                                    'label'    => __( 'Estimated Reading Time Title', 'betterdocs' ),
+                                                                    'default'  => __( '', 'betterdocs' ),
+                                                                    'priority' => 11,
+                                                                    'rules'    => Rules::is( 'enable_estimated_reading_time', true )
+                                                                ],
+                                                                'estimated_reading_time_text'       => [
+                                                                    'name'     => 'estimated_reading_time_text',
+                                                                    'type'     => 'text',
+                                                                    'label'    => __( 'Estimated Reading Time Text', 'betterdocs' ),
+                                                                    'default'  => __( 'min read', 'betterdocs' ),
+                                                                    'priority' => 12,
+                                                                    'rules'    => Rules::is( 'enable_estimated_reading_time', true )
+                                                                ],
                                                             ]
                                                         ],
                                                         'layout_single_doc_TOC'            => [

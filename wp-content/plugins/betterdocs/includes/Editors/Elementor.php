@@ -28,9 +28,11 @@ use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Reactions;
 use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Navigation;
 use WPDeveloper\BetterDocs\Editors\Elementor\Widget\ArchiveList;
 use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Breadcrumbs;
+use WPDeveloper\BetterDocs\Editors\Elementor\Widget\ReadingTime;
 use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Basic\SearchForm;
 use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Basic\CategoryBox;
 use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Basic\CategoryGrid;
+// use WPDeveloper\BetterDocs\Editors\Elementor\Widget\Basic\BetterdocsEncyclopedia;
 use WPDeveloper\BetterDocs\Editors\Elementor\Conditions\ArchiveCondition;
 
 class Elementor extends BaseEditor {
@@ -344,6 +346,18 @@ class Elementor extends BaseEditor {
             );
 
             $wb->add_control(
+                'subcategory_per_grid',
+                [
+                    'label'     => __( 'Subcategory Per Grid', 'betterdocs' ),
+                    'type'      => Controls_Manager::NUMBER,
+                    'default'   => '2',
+                    'condition' => [
+                        'nested_subcategory' => 'true'
+                    ]
+                ]
+            );
+
+            $wb->add_control(
                 'post_per_subcat',
                 [
                     'label'     => __( 'Post Per Subcategory', 'betterdocs' ),
@@ -559,7 +573,8 @@ class Elementor extends BaseEditor {
             'betterdocs-elementor-search-form'   => SearchForm::class,
             'betterdocs-elementor-category-grid' => CategoryGrid::class,
             'betterdocs-elementor-category-box'  => CategoryBox::class,
-            'betterdocs-faq-widget'              => FAQ::class
+            'betterdocs-faq-widget'              => FAQ::class,
+            // 'betterdocs-encyclopedia-widget'     => BetterdocsEncyclopedia::class
         ];
 
         return $widget_arr;
@@ -664,7 +679,8 @@ class Elementor extends BaseEditor {
             'betterdocs-elementor-reactions'             => Reactions::class,
             'betterdocs-elementor-navigation'            => Navigation::class,
             'betterdocs-elementor-breadcrumbs'           => Breadcrumbs::class,
-            'betterdocs-elementor-category-archive-list' => ArchiveList::class
+            'betterdocs-elementor-category-archive-list' => ArchiveList::class,
+            'betteredocs-elementor-reading-time'         => ReadingTime::class
         ] );
     }
 

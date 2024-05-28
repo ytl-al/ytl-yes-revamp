@@ -22,10 +22,13 @@ class FontLoader extends Base {
         'betterdocs/social-share',
         'betterdocs/table-of-contents',
         'betterdocs/multiple-kb',
+        'betterdocs/betterdocs-encyclopedia',
+        'betterdocs/glossary-single-template',
         'betterdocs/faq',
         'betterdocs/multiple-kb-tab',
         'betterdocs/categoryhandbook',
-        'betterdocs/popular-docs'
+        'betterdocs/popular-docs',
+        'betterdocs/related-categories'
     ];
 
     public static $retrieved_fonts = [];

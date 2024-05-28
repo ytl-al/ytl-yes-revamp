@@ -2,10 +2,10 @@
 Contributors: wpdevteam, re_enter_rupok
 Donate link: https://wpdeveloper.com
 Tags: knowledge base, docs, documentation, documents, faq page, doc, knowledge, table of content, TOC, knowledgebase, faqs, doc page, best documentation plugin, support, customer support
-Requires at least: 4.0
+Requires at least: 5.0
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 3.2.0
+Stable tag: 3.3.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -92,19 +92,12 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 3.2.0 - 25/03/2024 =
-
-- Added: Multiple KB Tabbed layout block
-- Added: Category Handbook layout block
-- Added: Popular Docs block
-- Added: Layout 2, 3, 4, 5, 6 for sidebar layout
-- Added: Multiple KB Card layout pattern
-- Added: Multiple KB Tabbed layout pattern
-- Added: Docs Page Handbook layout pattern
-- Added: Single Docs Abstract layout pattern
-- Added: Single Docs Modern layout pattern
-- Added: Single Docs Minimalist layout
-- Few minor bug fixes and improvements
+= 3.3.2 - 27/05/2024 =
+- Added: Customizer options for the counter in the sidebar Bohemian Layout.
+- Improvement: Updated controllers for Elementor Tab Grid Widgets.
+- Improvement: Glossary/Encyclopedia performance.
+- Fixed: Header and footer is broken on the Glossary details page for block-based themes.
+- Few minor bug fixes and improvements.
 
 [See changelog for all versions](https://betterdocs.co/changelog/).
 

@@ -1609,6 +1609,25 @@ class MultipleKB extends Section {
         );
     }
 
+    public function column_list_icon() {
+        $this->customizer->add_setting( 'betterdocs_mkb_column_list_icon', [
+            'default'    => $this->defaults['betterdocs_mkb_column_list_icon'],
+            'capability' => 'edit_theme_options',
+
+        ] );
+
+        $this->customizer->add_control(
+            new WP_Customize_Image_Control(
+                $this->customizer, 'betterdocs_mkb_column_list_icon', [
+                    'section'  => 'betterdocs_mkb_settings',
+                    'settings' => 'betterdocs_mkb_column_list_icon',
+                    'label'    => __( 'Docs List Icon', 'betterdocs' ),
+                    'priority' => 33
+                ]
+            )
+        );
+    }
+
     public function column_list_color() {
         $this->customizer->add_setting( 'betterdocs_mkb_column_list_color', [
             'default'           => $this->defaults['betterdocs_mkb_column_list_color'],
@@ -2359,6 +2378,25 @@ class MultipleKB extends Section {
                     'label'    => __( 'Popular Title Color Hover', 'betterdocs-pro' ),
                     'section'  => 'betterdocs_mkb_settings',
                     'settings' => 'betterdocs_mkb_popular_title_color_hover',
+                    'priority' => 38
+                ]
+            )
+        );
+    }
+
+    public function popular_list_icon() {
+        $this->customizer->add_setting( 'betterdocs_mkb_popular_list_icon', [
+            'default'    => $this->defaults['betterdocs_mkb_popular_list_icon'],
+            'capability' => 'edit_theme_options',
+
+        ] );
+
+        $this->customizer->add_control(
+            new WP_Customize_Image_Control(
+                $this->customizer, 'betterdocs_mkb_popular_list_icon', [
+                    'section'  => 'betterdocs_mkb_settings',
+                    'settings' => 'betterdocs_mkb_popular_list_icon',
+                    'label'    => __( 'Popular List Icon', 'betterdocs' ),
                     'priority' => 38
                 ]
             )

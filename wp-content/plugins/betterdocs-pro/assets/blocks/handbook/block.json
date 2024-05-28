@@ -9,5 +9,6 @@
     "editorStyle": [
         "betterdocs-category-handbook",
         "file:./default.css"
-    ]
+    ],
+    "editorScript":"betterdocs-pro-blocks-editor"
 }

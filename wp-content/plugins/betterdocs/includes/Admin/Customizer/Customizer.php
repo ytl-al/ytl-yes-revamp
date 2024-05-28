@@ -72,7 +72,7 @@ class Customizer extends Base {
             ArchivePage::class,
             LiveSearch::class,
             FaqBuilder::class,
-            BreadCrumb::class
+            BreadCrumb::class,
         ] );
 
         /**

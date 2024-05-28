@@ -1,12 +1,11 @@
 === BetterDocs – Best Documentation, FAQ & Knowledge Base Plugin with AI Support & Instant Answer for Elementor & Gutenberg ===
 Contributors: wpdevteam, re_enter_rupok, asif2bd, emsohel, priyomukul, cu121, fencermonir, sapanmozammel, seakashdiu
 Donate link: https://wpdeveloper.com
-Tags:  knowledge base, docs, documentation, documents, wiki, faq page, doc, knowledge, knowledgebase, doc page, best documentation plugin, support ticket, customer support, instant answer bot, bot, help articles, better docs, document, faq, instant answers, elementor, chat, live search, external knowledgebase, multiple knowledge bases, faqs, help, chatbot, TOC, table of content, elementor doc, template, doc theme
-Tags:  knowledge base, docs, documentation, faq, faq page, doc, knowledge, knowledgebase, doc page, best documentation plugin, support ticket, customer support, instant answer bot, bot, help articles, better docs, document, faq, instant answers, elementor, chat, chatgpt ai writer, live search, external knowledgebase, multiple knowledge bases, faqs, help, chatbot, TOC, table of content, elementor doc, template, doc theme
-Requires at least: 4.0
+Tags:  docs, documentation, knowledge base, faq, chatgpt ai writer
+Requires at least: 5.0
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 3.5.0
+Stable tag: 3.5.7
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -50,8 +49,12 @@ Let the visitors instantly find the answers they are searching for without havin
 - Generate advanced documentation instantly using Write With AI, the powerful AI auto writer feature by integrating ChatGPT
 - Generate Sample Data to make the knowledge base data creation process smooth
 - Seamless migration of knowledge base from any 3rd party solution like Help Scout
+- Estimated Reading Time for Single Docs
 - Add attachments to any single doc to provide additional content to help readers (PRO)
 - Related doc embedding in any single doc to provide supporting documentation for more knowledge (PRO)
+- Add glossaries to help readers understand the frequently used terms or technical jargon easily with tooltips. (PRO)
+- Showcase your glossary or documentation alphabetically so that users can find what they need easily. (PRO)
+
 
 ## 🙌 STUNNING READY TEMPLATES FOR DOCS LANDING PAGE ##
 
@@ -107,9 +110,6 @@ Design stunning Docs page and Docs Category archive template with Elementor Them
 
 Migrate your valuable content and back up your knowledge base with just a few clicks with easy import and export feature that seamlessly supports CSV and XML formats.
 
-## 📌 ONE CLICK GENERATE SAMPLE DATA ##
-Create Sample Data to streamline the knowledge base data creation process, ensuring efficiency and accuracy in populating the database.
-
 ## 🔄  3RD PARTY MIGRATION SUCH AS HELP SCOUT ##
 Seamless migration of knowledge base from any 3rd party plugin solution like Help Scout with a single click to improve customer service capabilities.
 
@@ -140,6 +140,13 @@ Include attachments within each document to offer supplementary content and extr
 
 ## 📚 EMBED RELATED DOCS IN SINGLE DOCUMENTATION ##
 Incorporate relevant documentation into each document to promote supporting content and additional information.
+
+##  📙GLOSSARY (PRO) ##
+Create glossaries for frequently used terms or technical jargon and showcase them as tooltips so readers can easily understand them.
+
+## ENCYCLOPEDIA (PRO) ##
+Create an Encyclopedia page to display your glossary or documentation in alphabetical order and help readers easily find what they are looking for.
+
 
 You don’t have to just take our word for it. See what one of the WordPress experts are saying:
 
@@ -212,13 +219,34 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 3.5.0 - 25/03/2024 =
-- Added: FAQ block
-- Added: Docs Page Modern layout pattern
-- Added: Docs Page Classic layout pattern
-- Updated: Single Docs Classic layout pattern
-- Updated: Category Archive layout pattern
-- Improved: Security Enhancement
+= 3.5.7 - 27/05/2024 =
+- Added: Option to change the feedback icon for the Elementor widget.
+- Added: Docs list icon change option.
+- Fixed: Category hierarchy malfunctioning during import/export.
+- Few minor bug fixes and improvements
+
+= 3.5.6 - 13/05/2024 =
+- Improvement: Added an option to select the number of sub-categories to display in the Gutenberg Category Grid block.
+- Improvement: Enhanced customizable estimated reading time feature.
+- Improvement: HelpScout migration in the Background Process.
+- Improvement: Implemented template overrides from the theme.
+- Improvement: Improved performance by reducing additional JS files.
+- Improvement: Removed server-side object caching when creating new docs.
+- Fixed: Resolved an issue where including or excluding FAQ groups resulted in an error.
+- Fixed: Corrected the word count display issue for Persian language in docs.
+- Fixed: Resolved the issue where the Sidebar Elementor Widget was not displaying in translations.
+- Fixed: Addressed the problem where deleting a document did not delete its analytical data.
+- Fixed: Removed the Ascending/Descending order option for BetterDocs Order.
+- Few minor bug fixes and improvements
+
+
+= 3.5.2 - 18/04/2024 =
+- Added: Customizer options for Single Docs reaction sections.
+- Added: P tag select option in customizer where there are options to change HTML tags.
+- Improvement: Elementor Search Form styling options.
+- Fixed: BetterDocs is conflicting with the Searchanise plugin.
+- Fixed: Estimated reading time for Single Docs is not working with the Persian language.
+- Fixed: TOC URL not showing properly for the Persian language.
 - Few minor bug fixes and improvements
 
 [See changelog for all versions](https://betterdocs.co/changelog/).

@@ -63,6 +63,7 @@ class Admin extends Base {
      * @var FAQBuilder
      */
     private $faq_builder;
+    private $glossaries;
 
     public function __construct( Container $container, PostType $type, Enqueue $assets, Settings $settings, KBMigration $kbmigration ) {
         $this->container = $container;
@@ -77,6 +78,7 @@ class Admin extends Base {
         $type->admin_init();
 
         $this->faq_builder = $this->container->get( FAQBuilder::class );
+        $this->glossaries = $this->container->get( Glossaries::class );
 
         if ( ! is_admin() ) {
             return;
@@ -109,6 +111,10 @@ class Admin extends Base {
         add_filter( 'manage_docs_posts_columns', [ $this, 'set_custom_edit_action_columns' ] );
         add_filter( 'manage_docs_posts_custom_column', [ $this, 'manage_custom_columns' ], 10, 2 );
 
+        if( $this->settings->get('enable_estimated_reading_time') ) {
+            add_action( 'add_meta_boxes', [$this, 'reading_meta_box_'], 10 );
+        }
+
         self::$cache_bank = CacheBank::get_instance();
         try {
             // $this->notices();
@@ -118,6 +124,14 @@ class Admin extends Base {
         }
         // Remove OLD notice from 1.0.0 (if other WPDeveloper plugin has notice)
         NoticeRemover::get_instance( '1.0.0' );
+    }
+
+    public function reading_meta_box_() {
+        add_meta_box( 'betterdocs_estimated_time_metabox', __( 'Estimated Reading Time', 'betterdocs' ), [$this, 'render_estimated_time_markup'], 'docs' );
+    }
+
+    public function render_estimated_time_markup() {
+        betterdocs()->views->get('admin/metabox/estimated-reading-box');
     }
 
     public function compatibility_notices() {
@@ -339,7 +353,10 @@ class Admin extends Base {
         global $wpdb;
         switch ( $column ) {
             case 'betterdocs_word_count':
-                $word_count = str_word_count( trim( strip_tags( get_post_field( 'post_content', $post_id ) ) ) );
+                $content_without_html_tags = trim( strip_tags( get_post_field( 'post_content', $post_id ) ) );
+                preg_match_all('/<[^>]*>|[\p{L}\p{M}]+/u', $content_without_html_tags, $matches );
+                $total_words = ! empty( $matches[0] ) ? count( $matches[0] ) : count( [] );
+                $word_count = $total_words;
                 echo '<span>' . $word_count . '</span>';
                 break;
             case 'betterdocs_reaction' :
@@ -355,8 +372,7 @@ class Admin extends Base {
                     FROM {$wpdb->prefix}betterdocs_analytics
                     $where"
                 );
-                //echo '<span>'. ($analytics[0]->totalHappy != NULL ? $analytics[0]->totalHappy : 0) .'</span>';
-                // var_dump($analytics);
+
                 echo '<ul class="reactions-count">
                     <li>
                         <a title="happy" class="betterdocs-feelings happy" data-feelings="happy" href="#">
@@ -469,10 +485,11 @@ class Admin extends Base {
             ] );
         }
 
-        if ( ! in_array( $hook, [ 'toplevel_page_betterdocs-admin', 'betterdocs_page_betterdocs-analytics' ] ) ) {
+        if ( ! in_array( $hook, ['term.php', 'edit-tags.php','toplevel_page_betterdocs-admin', 'betterdocs_page_betterdocs-analytics' ] ) ) {
             return;
         }
 
+        wp_enqueue_script('wp-editor'); //enqueued on betterdocs-term pages to show SEO data from Yoast
         wp_enqueue_script( 'wp-color-picker' );
 
         $this->assets->enqueue( 'betterdocs-select2', 'vendor/js/select2.min.js', [] );
@@ -628,8 +645,19 @@ class Admin extends Base {
                 'betterdocs-faq',
                 'read_docs_analytics',
                 [$this->faq_builder, 'output']
-            )
+            ),
         ];
+
+        $is_enable_glossary = betterdocs()->settings->get('enable_glossaries', false);
+        if( $is_enable_glossary && betterdocs()->is_pro_active() ){
+            $betterdocs_admin_pages['glossaries'] = $this->normalize_menu(
+                __( 'Glossaries', 'betterdocs' ),
+                'betterdocs-glossaries',
+                'read_docs_analytics',
+                [$this->glossaries, 'output']
+            );
+        }
+
 
         return apply_filters( 'betterdocs_admin_menu', $betterdocs_admin_pages );
     }
@@ -665,6 +693,7 @@ class Admin extends Base {
         }
 
         $docs_url = '';
+        $encyclopedia_url = '';
 
         if ( $this->settings->get( 'builtin_doc_page' ) ) {
             $docs_url = get_post_type_archive_link( 'docs' );
@@ -676,12 +705,29 @@ class Admin extends Base {
             return;
         }
 
+        $slug = $this->settings->get( 'encyclopedia_root_slug' );
+
+        $encyclopedia_url = home_url( $slug );
+
+
         $admin_bar->add_node( [
             'parent' => 'site-name',
             'id'     => 'view-docs',
             'title'  => __( 'Visit Documentation', 'betterdocs' ),
             'href'   => $docs_url
         ] );
+
+        $is_enable_encyclopedia = betterdocs()->settings->get('enable_encyclopedia');
+
+        if( $is_enable_encyclopedia && betterdocs()->is_pro_active() ){
+            $admin_bar->add_node( [
+                'parent' => 'site-name',
+                'id'     => 'view-encyclopedia',
+                'title'  => __( 'Visit Encyclopedia', 'betterdocs' ),
+                'href'   => $encyclopedia_url
+            ] );
+        }
+
     }
     /**
      * Save last visited admin ui
@@ -705,7 +751,7 @@ class Admin extends Base {
      */
     public function ui_slug() {
         $last_visited = get_user_meta( get_current_user_id(), 'last_visited_docs_admin_page', true);
-        $docs = get_posts( ['post_type'  => 'docs', 'post_status'  => 'any', 'numberposts' => -1] );
+        $docs = get_posts( ['post_type'  => 'docs', 'post_status'  => 'any', 'numberposts' => 2] );
 
         if ($last_visited === 'modern_ui' || count($docs) == 0 ) {
             $slug = 'betterdocs-admin';

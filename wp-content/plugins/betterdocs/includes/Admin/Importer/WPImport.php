@@ -754,7 +754,6 @@ class WPImport extends WP_Importer {
 		];
 
         foreach ( $posts as $post ) {
-            error_log(print_r($post , 1));
             $post_title = isset($post['name']) ? $post['name'] : '';
             $post_slug = isset($post['slug']) ? $post['slug'] : '';
             $post_content = isset($post['text']) ? $post['text'] : '';
@@ -764,7 +763,7 @@ class WPImport extends WP_Importer {
             // Check if the category and knowledge base term exist, if not, create them
             $category_ids = [];
             foreach ( $categories as $category ) {
-                $category_id = term_exists($category['name'], 'doc_category');
+                $category_id = term_exists($category['slug'], 'doc_category');
                 if (!$category_id) {
                     $category_id = wp_insert_term($category['name'], 'doc_category', array('slug' => $category['slug']));
                     $category_ids[] = $category_id['term_id'];
@@ -786,12 +785,8 @@ class WPImport extends WP_Importer {
             );
 
             // Insert the post
-            $post_id = wp_insert_post($post_data);
+            wp_insert_post($post_data);
 
-            // Set the featured image
-            // if ($featured_image_url) {
-            //     $this->set_post_thumbnail( $post_id, $featured_image_url );
-            // }
         }
 
         return $result;

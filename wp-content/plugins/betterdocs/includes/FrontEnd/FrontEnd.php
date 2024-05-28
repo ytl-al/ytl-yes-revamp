@@ -41,9 +41,6 @@ class FrontEnd extends Base {
         add_action( 'betterdocs_before_render', [$this, 'before_render'], 11, 2 );
         add_action( 'betterdocs_after_render', [$this, 'after_render'], 11, 2 );
 
-        //Removes Divi Script On Betterdocs Single Doc #1130, issue title -> ( Bug Fix | With the DIVI theme copy #Url button doesn't seem to work )
-        // add_action( 'wp_enqueue_scripts', [$this, 'dequeue_divi_script'], 99999 );
-
         //Remove Saliant Theme Script For (Delay Javascript Exection), which causes issue with betterdocs sidebar toggle, issue number (#1234)
         add_action( 'nectar_hook_before_body_close', [$this, 'dequeue_saliant_theme_script'], 99999 );
 
@@ -77,20 +74,8 @@ class FrontEnd extends Base {
         add_filter( 'betterdocs_nested_docs_args', [$this, 'docs_args'], 11, 1 );
     }
 
-    public function dequeue_divi_script() {
-        if ( is_singular( 'docs' ) ) {
-            wp_dequeue_script( 'divi-custom-script' );
-        }
-    }
-
     public function dequeue_saliant_theme_script() {
-        if ( is_singular( 'docs' ) ) {
-            wp_dequeue_script( 'salient-delay-js' );
-        }
-        if ( is_tax( 'doc_category' ) ) {
-            wp_dequeue_script( 'salient-delay-js' );
-        }
-        if ( is_tax( 'doc_tag' ) ) {
+        if ( is_singular( 'docs' ) || is_tax( 'doc_category' ) || is_tax( 'doc_tag' ) ) {
             wp_dequeue_script( 'salient-delay-js' );
         }
     }
@@ -181,7 +166,10 @@ class FrontEnd extends Base {
     public function enqueue_scripts() {
         if ( is_singular( 'docs' ) ) {
             wp_enqueue_style( 'betterdocs-single' );
+            wp_enqueue_style( 'betterdocs-encyclopedia' );
+            wp_enqueue_style( 'betterdocs-glossaries' );
             wp_enqueue_script( 'clipboard' );
+            wp_enqueue_script( 'betterdocs-glossaries');
         }
 
         if ( is_post_type_archive( 'docs' ) ) {
@@ -236,7 +224,7 @@ class FrontEnd extends Base {
             'FEEDBACK' => [
                 'DISPLAY' => true,
                 'TEXT'    => esc_html__( 'How did you feel?', 'betterdocs' ),
-                'SUCCESS' => esc_html__( 'Thanks for your feedback', 'betterdocs' ),
+                'SUCCESS' => betterdocs()->settings->get( 'reaction_feedback_text', __( 'Thanks for your feedback', 'betterdocs') ),
                 'URL'     => get_rest_url( null, '/betterdocs/v1/feedback' )
             ]
         ] );

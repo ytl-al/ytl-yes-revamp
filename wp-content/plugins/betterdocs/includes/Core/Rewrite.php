@@ -41,7 +41,7 @@ class Rewrite extends Base {
      * @return void
      */
     public function save_permalink_structure( $_saved, $_settings, $_old_settings ) {
-        if ( ! isset($_settings['permalink_structure']) ) {
+        if ( ! isset( $_settings['permalink_structure'] ) ) {
             return;
         }
 
@@ -58,6 +58,9 @@ class Rewrite extends Base {
             $this->settings->save( 'permalink_structure', $this->permalink_structure( $_permalink_structure ) );
         }
 
+        $old_docs_page     = isset( $_old_settings['docs_page'] ) ? $_old_settings['docs_page'] : '';
+        $current_docs_page = isset( $_settings['docs_page'] ) ? $_settings['docs_page'] : '';
+
         /**
          * This block of code decides whether it needs to be flushed or not.
          * Flush happens after register the post type.
@@ -66,7 +69,7 @@ class Rewrite extends Base {
             case $_permalink_structure !== $_old_settings['permalink_structure']:
             case $_settings['docs_slug'] !== $_old_settings['docs_slug']:
             case $_settings['builtin_doc_page'] !== $_old_settings['builtin_doc_page']:
-            case $_settings['docs_page'] !== $_old_settings['docs_page']:
+            case $current_docs_page !== $old_docs_page:
             case $_settings['tag_slug'] !== $_old_settings['tag_slug']:
             case $_settings['category_slug'] !== $_old_settings['category_slug']:
                 $this->database->set_transient( 'betterdocs_flush_rewrite_rules', true );
@@ -126,51 +129,51 @@ class Rewrite extends Base {
         return $docs_slug;
     }
 
-    public function normalzie_doc_perma_structure( $structure ){
+    public function normalzie_doc_perma_structure( $structure ) {
         $structure = $this->permalink_structure( $structure, 'arraywithpercent' );
-        $structure = array_reduce( $structure, function( $carry, $item ){
-            if( strpos( $item, '%' ) !== false ) {
+        $structure = array_reduce( $structure, function ( $carry, $item ) {
+            if ( strpos( $item, '%' ) !== false ) {
                 $carry[] = $item;
             } else {
-                if ($carry && strpos(end($carry), '%') === false) {
-                    $carry[count($carry) - 1] .= "/$item";
+                if ( $carry && strpos( end( $carry ), '%' ) === false ) {
+                    $carry[count( $carry ) - 1] .= "/$item";
                 } else {
                     $carry[] = $item;
                 }
             }
 
             return $carry;
-        }, []);
+        }, [] );
 
         $structure[] = '%docs%';
 
-        $group = array_filter( $structure, function( $item ){
-            return strpos($item, '%') === 0;
-        });
+        $group = array_filter( $structure, function ( $item ) {
+            return strpos( $item, '%' ) === 0;
+        } );
 
         return [
-            'raw' => $structure,
+            'raw'   => $structure,
             'group' => $group
         ];
     }
 
-    public function make_regex( $segments ){
-        return array_reduce( $segments, function( $carry, $item ){
+    public function make_regex( $segments ) {
+        return array_reduce( $segments, function ( $carry, $item ) {
             $carry .= ( strpos( $item, '%' ) !== false ? "([^/]+)" : $item ) . '/';
             return $carry;
-        }, '') . '?$';
+        }, '' ) . '?$';
     }
 
-    public function make_query( $segments ){
-        $query = [];
+    public function make_query( $segments ) {
+        $query   = [];
         $matchId = 1;
 
-        foreach( $segments as $segment ) {
-            $query[] = trim($segment, '%') . '=$matches[' . $matchId . ']';
+        foreach ( $segments as $segment ) {
+            $query[] = trim( $segment, '%' ) . '=$matches[' . $matchId . ']';
             $matchId++;
         }
 
-        return 'index.php?' . implode('&', $query) . '&post_type=docs';
+        return 'index.php?' . implode( '&', $query ) . '&post_type=docs';
     }
 
     public function rules() {
@@ -195,12 +198,12 @@ class Rewrite extends Base {
         /**
          * This code of blocks used to determine single docs permalink.
          */
-        $_docs_perma_struct = betterdocs()->settings->get( 'permalink_structure', 'docs' );
-        $_normalized_structure = $this->normalzie_doc_perma_structure($_docs_perma_struct);
+        $_docs_perma_struct    = betterdocs()->settings->get( 'permalink_structure', 'docs' );
+        $_normalized_structure = $this->normalzie_doc_perma_structure( $_docs_perma_struct );
 
-        $_feed_regex = $_normalized_structure['raw'];
+        $_feed_regex   = $_normalized_structure['raw'];
         $_feed_regex[] = '(feed|rdf|rss|rss2|atom)';
-        $_feed_group = $_normalized_structure['group'];
+        $_feed_group   = $_normalized_structure['group'];
         $_feed_group[] = '%feed%';
 
         $this->add_rewrite_rule( $this->make_regex( $_feed_regex ), $this->make_query( $_feed_group ) );
@@ -231,7 +234,7 @@ class Rewrite extends Base {
         }
 
         return apply_filters( 'betterdocs_docs_rewrite', [
-            'slug' => trim( $permalink, '/' ),
+            'slug'       => trim( $permalink, '/' ),
             'with_front' => false
         ], $slug );
     }

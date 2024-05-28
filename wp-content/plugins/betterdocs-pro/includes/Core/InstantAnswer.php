@@ -208,7 +208,6 @@ class InstantAnswer extends Base {
         betterdocs_pro()->assets->enqueue(
             'betterdocs-instant-answer',
             'public/js/instant-answer.js',
-            ['wp-i18n', 'wp-element', 'wp-hooks', 'wp-util', 'wp-components']
         );
 
         betterdocs_pro()->assets->localize( 'betterdocs-instant-answer', 'betterdocs', $this->localize_settings() );
@@ -465,9 +464,9 @@ class InstantAnswer extends Base {
 
         $css->add_rule(
             '.betterdocs-ia-single-docs-wrapper .betterdocs-ia-singleDoc-header.on-scroll h2',
-            $css->properties([
+            $css->properties( [
                 'color' => 'ia_single_title_header_font_color'
-            ])
+            ] )
         );
 
         $css->add_rule(
@@ -901,8 +900,8 @@ class InstantAnswer extends Base {
     public static function snippet() {
         ob_start();
         betterdocs_pro()->views->get( 'admin/ia-snippet', [
-            'styles'       => self::inline_style( betterdocs()->settings ),
-            'scripts'      => self::get_instance( betterdocs()->settings )->localize_settings(),
+            'styles'  => self::inline_style( betterdocs()->settings ),
+            'scripts' => self::get_instance( betterdocs()->settings )->localize_settings()
             // 'dependencies' => ['react', 'react-dom', 'wp-hooks', 'wp-i18n', 'wp-url', 'wp-api-fetch', 'wp-escape-html', 'wp-element', 'wp-html-entities']
         ] );
         return ob_get_clean();
@@ -976,7 +975,7 @@ class InstantAnswer extends Base {
         }
 
         $instant_answer = [
-            'IA_NONCE'            => wp_create_nonce('rest-nonce'),
+            'IA_NONCE'            => wp_create_nonce( 'rest-nonce' ),
             'BASE_URL'            => get_rest_url( null ),
             'CHAT'                => $chat_settings,
             'ANSWER'              => $answer_settings,
@@ -990,19 +989,20 @@ class InstantAnswer extends Base {
             ],
             'RESPONSE'            => $response_settings,
             'ASKFORM'             => [
-                'NAME'       => __( 'Name', 'betterdocs-pro' ),
-                'EMAIL'      => __( 'Email Address', 'betterdocs-pro' ),
-                'SUBJECT'    => __( 'Subject', 'betterdocs-pro' ),
-                'TEXTAREA'   => __( 'How can we help?', 'betterdocs-pro' ),
-                'ATTACHMENT' => __( 'Accepts .gif, .jpeg, png, pdf, jpg and .png', 'betterdocs-pro' ),
-                'SENDING'    => __( 'Sending', 'betterdocs-pro' ),
-                'SEND'       => __( 'Send', 'betterdocs-pro' )
+                'NAME'               => __( 'Name', 'betterdocs-pro' ),
+                'EMAIL'              => __( 'Email Address', 'betterdocs-pro' ),
+                'SUBJECT'            => __( 'Subject', 'betterdocs-pro' ),
+                'TEXTAREA'           => __( 'How can we help?', 'betterdocs-pro' ),
+                'ATTACHMENT'         => __( 'Accepts .gif, .jpeg, png, pdf, jpg and .png', 'betterdocs-pro' ),
+                'SENDING'            => __( 'Sending', 'betterdocs-pro' ),
+                'SEND'               => __( 'Send', 'betterdocs-pro' ),
+                'FILE_UPLOAD_SWITCH' => $this->settings->get( 'chat_tab_file_upload_switch' )
             ],
             'ASK_URL'             => get_rest_url( null, '/betterdocs/v1/ask' ),
             'FAQ'                 => [
-                'faq-title'        => $this->settings->get( 'ia_resources_faq_title' ),
-                'faq-switch'       => $this->settings->get( 'ia_resources_faq_switch' ),
-                'faq_content_type' => $this->settings->get( 'ia_resources_faq_content_type' ),
+                'faq-title'          => $this->settings->get( 'ia_resources_faq_title' ),
+                'faq-switch'         => $this->settings->get( 'ia_resources_faq_switch' ),
+                'faq_content_type'   => $this->settings->get( 'ia_resources_faq_content_type' ),
                 // 'faq-group-number' => $this->settings->get( 'ia_resources_faq_group_number' ),
                 // 'faq-list-number'  => $this->settings->get( 'ia_resources_faq_list_number' ),
                 'faq-terms'          => $this->settings->get( 'ia_resources_faq_group' ),
@@ -1017,7 +1017,7 @@ class InstantAnswer extends Base {
                 'doc-terms'           => $this->settings->get( 'ia_resources_doc_categories' ),
                 'doc-category-switch' => $this->settings->get( 'ia_resources_doc_categories_switch' ),
                 'doc-terms-order'     => $this->settings->get( 'ia_terms_order' ),
-                'doc-terms-order-by'  => $this->settings->get( 'ia_terms_orderby' ),
+                'doc-terms-order-by'  => $this->settings->get( 'ia_terms_orderby' )
                 // 'docs-orderby'        => $this->settings->get('ia_docs_order_by'),
                 // 'docs-order'           => $this->settings->get('ia_docs_order')
                 // 'doc-categories-number' => $this->settings->get( 'ia_resources_doc_categories_number' )

@@ -24,8 +24,7 @@
     if ( isset( $widget ) && $widget instanceof \WPDeveloper\BetterDocs\Editors\Elementor\Widget\Feedback ) {
         $flink_url_href = '#betterdocs-form-modal';
         $flink_url      = false;
-        $feedback_icon  = '';
-
+        $feedback_icon  = isset( $settings['feedback_form_icon_image']['url'] ) ? $settings['feedback_form_icon_image']['url'] : '';
         $feedback_title_tag = 'h2';
         $feedback_title     = $settings['feedback_form_title'];
 

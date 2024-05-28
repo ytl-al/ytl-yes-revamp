@@ -314,7 +314,7 @@ class TemplateTags extends Base {
             $content = preg_replace_callback( '#<(h[' . $supported_tags . '])(.*?)>(.*?)</\1>#si', function ( $matches ) use ( &$index ) {
                 $tag          = $matches[1];
                 $heading_name = preg_replace( '/<[^<]+?>/', '', $matches[0] );
-                $heading_name = ! empty( $heading_name ) ? strtolower( str_replace( " ", '-', preg_replace( '/<[^>]+>|[^a-zA-Z\s\d]+/', "", html_entity_decode( $heading_name ) ) ) ) : '';
+                $heading_name = ! empty( $heading_name ) ? strtolower( str_replace( " ", '-', preg_replace( '/[^\p{L}\p{N}\s]/u', "", $heading_name ) ) ) : '';
                 preg_match( '/id="(.+?)"/', $matches[0], $matched_ids );
 
                 if ( isset( $matched_ids[1] ) ) {
@@ -352,7 +352,7 @@ class TemplateTags extends Base {
         return '';
     }
 
-    public function sidebar( $layout ) {
+    public function sidebar( $layout, $layout_type = '' ) {
         if ( ! $this->settings->get( 'enable_archive_sidebar' ) ) {
             return;
         }
@@ -373,7 +373,8 @@ class TemplateTags extends Base {
         $_template_path = apply_filters( 'betterdocs_archive_sidebar_template', $_template_path, $layout );
 
         betterdocs()->views->get( $_template_path, [
-            'force' => true
+            'force' => true,
+            'layout_type' => $layout_type
         ] );
     }
 

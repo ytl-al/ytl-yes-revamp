@@ -192,7 +192,6 @@ class Request extends Base {
             }
 
             $wp->query_vars = is_array( $query_vars ) ? array_merge( $wp->query_vars, $query_vars ) : $wp->query_vars;
-            //var_dump($_valid);
             // Fallback
             if( ! empty( $_valid ) ) {
                 unset( $wp->query_vars['attachment'] );

@@ -1,5 +1,4 @@
 <?php
-    //var_dump($terms_query_args);
     $terms = get_terms( apply_filters( 'betterdocs_base_terms_args', $terms_query_args ) );
     /**
      * Base Layout Before Wrapper

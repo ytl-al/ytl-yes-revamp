@@ -19,7 +19,7 @@ $css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-
 ], 'px' ) );
 
 //Doc Category Title Font Size for Layout 6
-$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper.betterdocs-category-layout-6 .betterdocs-category-grid-list-wrapper .betterdocs-category-grid-list-inner-wrapper .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-wrapper.betterdocs-docs-archive-wrapper:not(.betterdocs-category-layout-1) .betterdocs-single-category-wrapper .betterdocs-single-category-inner .betterdocs-category-title', $css->properties( [
     'font-size' => 'betterdocs_doc_page_cat_title_font_size_layout6'
 ], 'px' ) );
 
@@ -1190,28 +1190,28 @@ $css->add_rule( '.betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-sid
 ] ) );
 
 //Sidebar Bohemian Layout Title Color
-$css->add_rule( '.betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-sidebar-list-wrapper .betterdocs-sidebar-list-inner .betterdocs-sidebar-list.betterdocs-sidebar-layout-6 .betterdocs-sidebar-list-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-sidebar-list-wrapper .betterdocs-sidebar-list-inner .betterdocs-sidebar-list.betterdocs-sidebar-layout-6 .betterdocs-sidebar-list-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title', $css->properties( [
     'color' => 'betterdocs_sidebar_title_color_layout6'
 ] ) );
 
 //Sidebar Bohemian Layout Title Hover Color
-$css->add_rule( '.betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-sidebar-list-wrapper .betterdocs-sidebar-list-inner .betterdocs-sidebar-list.betterdocs-sidebar-layout-6 .betterdocs-sidebar-list-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a:hover', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-sidebar-list-wrapper .betterdocs-sidebar-list-inner .betterdocs-sidebar-list.betterdocs-sidebar-layout-6 .betterdocs-sidebar-list-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title:hover', $css->properties( [
     'color' => 'betterdocs_sidebar_title_hover_color_layout6'
 ] ) );
 
 //Sidebar Bohemian Layout Title Font Size | Font Line Height
-$css->add_rule( '.betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-sidebar-list-wrapper .betterdocs-sidebar-list-inner .betterdocs-sidebar-list.betterdocs-sidebar-layout-6 .betterdocs-sidebar-list-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-sidebar-list-wrapper .betterdocs-sidebar-list-inner .betterdocs-sidebar-list.betterdocs-sidebar-layout-6 .betterdocs-sidebar-list-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title', $css->properties( [
     'font-size'   => 'betterdocs_sidebar_title_font_size_layout6',
     'line-height' => 'betterdocs_sidebar_title_font_line_height_layout6'
 ], 'px' ) );
 
 //Sidebar Bohemian Layout Title Font Weight
-$css->add_rule( '.betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-sidebar-list-wrapper .betterdocs-sidebar-list-inner .betterdocs-sidebar-list.betterdocs-sidebar-layout-6 .betterdocs-sidebar-list-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-sidebar-list-wrapper .betterdocs-sidebar-list-inner .betterdocs-sidebar-list.betterdocs-sidebar-layout-6 .betterdocs-sidebar-list-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title', $css->properties( [
     'font-weight' => 'betterdocs_sidebar_title_font_weight_layout6'
 ] ) );
 
 //Sidebar Bohemian Layout Title Padding | Title Margin
-$css->add_rule( '.betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-sidebar-list-wrapper .betterdocs-sidebar-list-inner .betterdocs-sidebar-list.betterdocs-sidebar-layout-6 .betterdocs-sidebar-list-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title a', $css->properties( [
+$css->add_rule( '.betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-sidebar-list-wrapper .betterdocs-sidebar-list-inner .betterdocs-sidebar-list.betterdocs-sidebar-layout-6 .betterdocs-sidebar-list-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-title', $css->properties( [
     'padding-top'    => 'betterdocs_sidebar_title_padding_top_layout6',
     'padding-right'  => 'betterdocs_sidebar_title_padding_right_layout6',
     'padding-bottom' => 'betterdocs_sidebar_title_padding_bottom_layout6',
@@ -1226,6 +1226,26 @@ $css->add_rule( '.betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-sid
 $css->add_rule( '.betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-sidebar-list-wrapper .betterdocs-sidebar-list-inner .betterdocs-sidebar-list.betterdocs-sidebar-layout-6', $css->properties( [
     'border-style' => 'betterdocs_sidebar_term_list_border_type_layout6',
     'border-color' => 'betterdocs_sidebar_term_border_width_color_layout6'
+] ) );
+
+// Sidebar Term List Border Counter Color Layout 6(For Single Doc Layout 6)
+$css->add_rule( '.betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-sidebar-list-wrapper .betterdocs-sidebar-list-inner .betterdocs-sidebar-list.betterdocs-sidebar-layout-6 .betterdocs-sidebar-list-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-items-counts', $css->properties( [
+    'border-color' => 'betterdocs_sidebar_term_border_color_counter_layout6'
+] ) );
+
+// Sidebar Term List Active Border Counter Color Layout 6(For Single Doc Layout 6)
+$css->add_rule( '.betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-sidebar-list-wrapper .betterdocs-sidebar-list-inner .betterdocs-sidebar-list.betterdocs-sidebar-layout-6.active .betterdocs-sidebar-list-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-items-counts', $css->properties( [
+    'border-color' => 'betterdocs_sidebar_term_border_active_color_counter_layout6'
+] ) );
+
+// Sidebar Term List Active Background Counter Color Layout 6(For Single Doc Layout 6)
+$css->add_rule( '.betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-sidebar-list-wrapper .betterdocs-sidebar-list-inner .betterdocs-sidebar-list.betterdocs-sidebar-layout-6.active .betterdocs-sidebar-list-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-items-counts', $css->properties( [
+    'background-color' => 'betterdocs_sidebar_term_active_background_counter_color_layout6'
+] ) );
+
+// Sidebar Term List Active Counter Text Color Layout 6(For Single Doc Layout 6)
+$css->add_rule( '.betterdocs-sidebar .betterdocs-sidebar-content .betterdocs-sidebar-list-wrapper .betterdocs-sidebar-list-inner .betterdocs-sidebar-list.betterdocs-sidebar-layout-6.active .betterdocs-sidebar-list-inner .betterdocs-category-header .betterdocs-category-header-inner .betterdocs-category-items-counts span', $css->properties( [
+    'color' => 'betterdocs_sidebar_term_active_counter_text_color_layout6'
 ] ) );
 
 //Sidebar Bohemian Layout Term List Border Width (Top | Right | Bottom | Left)
@@ -1782,27 +1802,27 @@ $css->add_rule( '.betterdocs-content-wrapper.doc-category-layout-6 .betterdocs-c
 //Other Categories Start (Pro)
 
 // Archive Page Category Other Categories Title Color(Archive Page Layout 2)
-$css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper .betterdocs-single-related-category-inner .betterdocs-category-header .betterdocs-category-title', $css->properties( [
+$css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper .betterdocs-single-related-category-inner .betterdocs-category-header .betterdocs-category-title a', $css->properties( [
     'color' => 'betterdocs_archive_other_categories_title_color'
 ] ) );
 
 // Archive Page Category Other Categories Hover Title Color(Archive Page Layout 2)
-$css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper .betterdocs-single-related-category-inner .betterdocs-category-header .betterdocs-category-title:hover', $css->properties( [
+$css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper .betterdocs-single-related-category-inner .betterdocs-category-header .betterdocs-category-title a:hover', $css->properties( [
     'color' => 'betterdocs_archive_other_categories_title_hover_color'
 ] ) );
 
 // Archive Page Category Other Categories Title Font Style(Archive Page Layout 2)
-$css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper .betterdocs-single-related-category-inner .betterdocs-category-header .betterdocs-category-title', $css->properties( [
+$css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper .betterdocs-single-related-category-inner .betterdocs-category-header .betterdocs-category-title a', $css->properties( [
     'font-weight' => 'betterdocs_archive_other_categories_title_font_weight'
 ] ) );
 
 // Archive Page Category Other Categories Title Font Size(Archive Page Layout 2)
-$css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper .betterdocs-single-related-category-inner .betterdocs-category-header .betterdocs-category-title', $css->properties( [
+$css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper .betterdocs-single-related-category-inner .betterdocs-category-header .betterdocs-category-title a', $css->properties( [
     'font-size' => 'betterdocs_archive_other_categories_title_font_size'
 ], 'px' ) );
 
 // Archive Page Category Other Categories Title Line Height(Archive Page Layout 2)
-$css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper .betterdocs-single-related-category-inner .betterdocs-category-header .betterdocs-category-title', $css->properties( [
+$css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper .betterdocs-single-related-category-inner .betterdocs-category-header .betterdocs-category-title a', $css->properties( [
     'line-height' => 'betterdocs_archive_other_categories_title_line_height'
 ], 'px' ) );
 
@@ -1812,7 +1832,7 @@ $css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper .betterdocs-sin
 ], '%' ) );
 
 // Archive Page Category Other Categories Title Padding(Archive Page Layout 2)
-$css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper .betterdocs-single-related-category-inner .betterdocs-category-header .betterdocs-category-title', $css->properties( [
+$css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper .betterdocs-single-related-category-inner .betterdocs-category-header .betterdocs-category-title a', $css->properties( [
     'padding-top'    => 'betterdocs_archive_other_categories_title_padding_top',
     'padding-right'  => 'betterdocs_archive_other_categories_title_padding_right',
     'padding-bottom' => 'betterdocs_archive_other_categories_title_padding_bottom',
@@ -1820,7 +1840,7 @@ $css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper .betterdocs-sin
 ], 'px' ) );
 
 // Archive Page Category Other Categories Title Margin(Archive Page Layout 2)
-$css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper .betterdocs-single-related-category-inner .betterdocs-category-header .betterdocs-category-title', $css->properties( [
+$css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper .betterdocs-single-related-category-inner .betterdocs-category-header .betterdocs-category-title a', $css->properties( [
     'margin-top'    => 'betterdocs_archive_other_categories_title_margin_top',
     'margin-right'  => 'betterdocs_archive_other_categories_title_margin_right',
     'margin-bottom' => 'betterdocs_archive_other_categories_title_margin_bottom',
@@ -1956,3 +1976,189 @@ $css->add_rule( '.betterdocs-wrapper.betterdocs-taxonomy-wrapper .betterdocs-loa
 ], 'px' ) );
 
 //Other Categories End (Pro)
+
+
+// Encyclopedia
+
+
+$css->add_rule( '.betterdocs-encyclopedia-wrapper .encyclopedia-alphabets', $css->properties( [
+    'padding' => 'alphabets_padding'
+], 'px' ) );
+$css->add_rule( '.betterdocs-encyclopedia-wrapper .encyclopedia-alphabets', $css->properties( [
+    'margin' => 'alphabets_margin'
+], 'px' ) );
+
+$css->add_rule( 'body .betterdocs-encyclopedia-wrapper ', $css->properties( [
+    'padding' => 'encyclopedia_padding'
+], 'px' ) );
+
+$css->add_rule( 'body .betterdocs-encyclopedia-wrapper ', $css->properties( [
+    'margin' => 'encyclopedia_margin'
+], 'px' ) );
+
+$css->add_rule( 'body .betterdocs-encyclopedia-wrapper ', $css->properties( [
+    'border-radius' => 'encyclopedia_border_radius'
+], 'px' ) );
+
+
+
+$css->add_rule( '.betterdocs-encyclopedia-wrapper .encyclopedia-alphabets, .betterdocs-encyclopedia-wrapper .encyclopedia-alphabets.alphabets-style-box', $css->properties( [
+    'background-color' => 'alphabets_background_color'
+] ) );
+
+$css->add_rule( '.betterdocs-encyclopedia-wrapper ul.encyclopedia-alphabet-list a', $css->properties( [
+    'color' => 'alphabets_link_color'
+] ) );
+
+$css->add_rule( '.betterdocs-encyclopedia-wrapper ul.encyclopedia-alphabet-list a.letter-has-no-docs', $css->properties( [
+    'color' => 'alphabets_link_disabled_color'
+] ) );
+
+
+$css->add_rule( 'body .betterdocs-encyclopedia-wrapper', $css->properties( [
+    'background-color' => 'encyclopedia_background_color'
+] ) );
+$css->add_rule( 'body .encyclopedia-item', $css->properties( [
+    'background-color' => 'encyclopedia_item_background_color'
+] ) );
+
+
+$css->add_rule( '.betterdocs-encyclopedia-wrapper ul.encyclopedia-alphabet-list a', $css->properties( [
+    'font-size' => 'alphabets_link_font_size'
+], 'px' ) );
+
+
+// Background-color properties
+$css->add_rule('.betterdocs-encyclopedia-wrapper', $css->properties([
+    'background-color' => 'encyclopedia_background_color'
+]));
+
+$css->add_rule('.encyclopedia-item', $css->properties([
+    'background-color' => 'encyclopedia_item_background_color'
+]));
+
+$css->add_rule('.betterdocs-encyclopedia-wrapper .encyclopedia-alphabets', $css->properties([
+    'background-color' => 'alphabets_background_color'
+]));
+
+$css->add_rule('ul.encyclopedia-alphabet-list a', $css->properties([
+    'background-color' => 'alphabets_link_bg_color',
+]));
+$css->add_rule('.betterdocs-encyclopedia-wrapper .encyclopedia-alphabets li.alphabet-list-item.active, .betterdocs-encyclopedia-wrapper .encyclopedia-alphabets.alphabets-style-box li.alphabet-list-item.active', $css->properties([
+    'background' => 'alphabets_link_active_bg_color',
+]));
+
+$css->add_rule('.betterdocs-encyclopedia-wrapper .encyclopedia-alphabets li.alphabet-list-item.active a, .betterdocs-encyclopedia-wrapper .encyclopedia-alphabets.alphabets-style-box li.alphabet-list-item.active a', $css->properties([
+    'color' => 'alphabets_link_active_color',
+]));
+
+$css->add_rule('.betterdocs-encyclopedia-wrapper .letter-start, .betterdocs-encyclopedia-wrapper .letter-start.alphabet-big-round-view', $css->properties([
+    'background-color' => 'start_letter_bg_color'
+]));
+$css->add_rule('.betterdocs-encyclopedia-wrapper .letter-start.alphabet-big-round-view span', $css->properties([
+    'background-color' => 'start_letter_inner_bg_color'
+]));
+
+$css->add_rule('.loadmoreBtn-container .encyclopedia-loadmore-btn', $css->properties([
+    'background-color' => 'loadmore_button_bg_color'
+]));
+$css->add_rule('.glossary-tooltip-overlay', $css->properties([
+    'background-color' => 'glossaries_tooltip_background_color'
+]));
+
+$css->add_rule('.glossary-tooltip-overlay::before', $css->properties([
+    'border-top-color' => 'glossaries_tooltip_background_color'
+]));
+
+$css->add_rule('.glossary-tooltip-overlay', $css->properties([
+    'color' => 'glossaries_tooltip_text_color'
+]));
+
+$css->add_rule('.glossary-tooltip-overlay a', $css->properties([
+    'color' => 'glossaries_tooltip_text_link_color'
+]));
+
+$css->add_rule('.glossary-tooltip-container', $css->properties([
+    'color' => 'glossaries_color'
+]));
+$css->add_rule('.glossary-tooltip-container:hover', $css->properties([
+    'color' => 'glossaries_hover_color'
+]));
+$css->add_rule('.glossary-tooltip-overlay', $css->properties([
+    'font-size' => 'glossaries_tooltip_font_size'
+], 'px'));
+
+// Color properties
+$css->add_rule('ul.encyclopedia-alphabet-list a', $css->properties([
+    'color' => 'alphabets_link_color'
+]));
+
+$css->add_rule('.betterdocs-encyclopedia-wrapper .letter-start span, .betterdocs-encyclopedia-wrapper .letter-start.alphabet-big-round-view span', $css->properties([
+    'color' => 'start_letter_color'
+]));
+
+$css->add_rule('ul.encyclopedia-alphabet-list a.letter-has-no-docs', $css->properties([
+    'color' => 'alphabets_link_disabled_color'
+]));
+
+$css->add_rule('.betterdocs-encyclopedia-wrapper .tools-card__title-text.heading-small, .betterdocs-encyclopedia-wrapper .layout-doc-list .heading-small.tools-card__title-text', $css->properties([
+    'color' => 'item_title_color'
+]));
+
+$css->add_rule('.betterdocs-encyclopedia-wrapper .tools-card__sample-text.text-size-small', $css->properties([
+    'color' => 'item_excerpt_color'
+]));
+
+$css->add_rule('.betterdocs-encyclopedia-wrapper .layout-doc-list .top-tools-card', $css->properties([
+    'background-color' => 'item_excerpt_bg_color',
+]));
+
+$css->add_rule('.betterdocs-encyclopedia-wrapper .layout-doc-list .top-tools-card::before', $css->properties([
+    'border-top-color' => 'item_excerpt_bg_color',
+]));
+
+$css->add_rule('.betterdocs-encyclopedia-wrapper .layout-doc-list .top-tools-card', $css->properties([
+    'border-top-color' => 'item_excerpt_border_color'
+]));
+
+$css->add_rule('.betterdocs-encyclopedia .tools-card_link-container .text-style-link', $css->properties([
+    'color' => 'item_link_color'
+]));
+$css->add_rule('.betterdocs-encyclopedia .encyclopedia-item.explore-more-docs a span', $css->properties([
+    'color' => 'explore_more_text_color'
+]));
+$css->add_rule('.loadmoreBtn-container .encyclopedia-loadmore-btn', $css->properties([
+    'color' => 'loadmore_button_text_color'
+]));
+
+// Font-size properties
+$css->add_rule('ul.encyclopedia-alphabet-list a', $css->properties([
+    'font-size' => 'alphabets_link_font_size'
+], 'px'));
+
+$css->add_rule('.betterdocs-encyclopedia-wrapper .letter-start span, .betterdocs-encyclopedia-wrapper .letter-start.alphabet-big-round-view span', $css->properties([
+    'font-size' => 'start_letter_font_size'
+], 'px'));
+
+$css->add_rule('.betterdocs-encyclopedia-wrapper .tools-card__title-text.heading-small', $css->properties([
+    'font-size' => 'item_title_font_size'
+], 'px'));
+
+$css->add_rule('.betterdocs-encyclopedia-wrapper .tools-card__sample-text.text-size-small', $css->properties([
+    'font-size' => 'item_excerpt_font_size'
+], 'px'));
+
+$css->add_rule('.betterdocs-encyclopedia .tools-card_link-container .text-style-link', $css->properties([
+    'font-size' => 'item_link_font_size'
+], 'px'));
+
+$css->add_rule('.encyclopedia-item.explore-more-docs a span', $css->properties([
+    'font-size' => 'explore_more_font_size'
+], 'px'));
+
+$css->add_rule('.loadmoreBtn-container .encyclopedia-loadmore-btn', $css->properties([
+    'font-size' => 'loadmore_button_text_font_size'
+], 'px'));
+
+
+

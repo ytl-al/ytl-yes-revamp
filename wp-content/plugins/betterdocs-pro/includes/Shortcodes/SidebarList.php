@@ -41,7 +41,10 @@ class SidebarList extends Shortcode {
             'order'                   => $this->settings->get( 'docs_order' ),
             'title_tag'               => 'h2',
             'terms'                   => '',
-            'kb_slug'                 => ''
+            'kb_slug'                 => '',
+            'list_icon_url'           => '',
+            'layout_type'             => '',
+            'list_icon_name'          => 'list'
         ];
     }
 
@@ -79,10 +82,14 @@ class SidebarList extends Shortcode {
             'terms_query_args'   => $terms_query,
             'widget_type'        => 'sidebar-list',
 
+            'list_icon_name'     => $this->attributes['list_icon_name'] == 'list' ? 'list' : ['value' => $this->attributes['list_icon_name']],
+
             'show_header'        => true,
             'show_title'         => true,
             'show_count'         => true,
-            'show_list'          => true
+            'show_list'          => true,
+            'layout_type'        => $this->attributes['layout_type'],
+            'list_icon_url'      => $this->attributes['list_icon_url']
         ];
     }
 }

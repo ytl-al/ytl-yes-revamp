@@ -526,6 +526,13 @@ class Query extends Base {
         return apply_filters( 'betterdocs_breadcrumb_archive_lists', $_lists, $origin_term );
     }
 
+    public function is_inner_templates() {
+        if ( is_tax( 'knowledge_base' ) || is_tax( 'doc_category' ) || is_tax( 'doc_tag' ) || is_singular( 'docs' ) ) {
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Summary of docs_query_args
      * @param mixed $args
@@ -625,9 +632,11 @@ class Query extends Base {
             $tax_query = $args['tax_query'];
         }
 
+
+
         $args['tax_query'] = apply_filters(
             'betterdocs_docs_tax_query_args',
-            $tax_query, $_multiple_kb, $_term_slug, $_kb_slug, $_origin_args
+            $tax_query, $_multiple_kb, $_term_slug, $_kb_slug, $_origin_args, $this->is_inner_templates()
         );
         /**
          * Final parse args

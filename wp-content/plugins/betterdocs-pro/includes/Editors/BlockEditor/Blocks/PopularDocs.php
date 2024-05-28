@@ -17,6 +17,7 @@ class PopularDocs extends Block {
 
     protected $frontend_styles = [
         'betterdocs-popular-articles',
+        'betterdocs-fontawesome'
     ];
 
     public function get_name() {
@@ -29,7 +30,9 @@ class PopularDocs extends Block {
             'numberOfDocs'    => 8,
             'popularDocsText' => __( 'Popular Docs', 'betterdocs' ),
             'titleTag'        => 'h2',
-            'sortDocs'        => 'DESC'
+            'sortDocs'        => 'DESC',
+            'listIcon'        => '',
+            'listIconImageUrl' => ''
         ];
     }
 
@@ -43,9 +46,11 @@ class PopularDocs extends Block {
                 'class' => $class
             ],
             'nested_subcategory' => false,
-            'list_icon_name'     => 'list',
+            'list_icon_name'     =>! empty( $this->attributes['listIconImageUrl'] ) ? ['value' => ['url' => str_replace( 'blob:', '', $this->attributes['listIconImageUrl'] )]] : ( ! empty( $this->attributes['listIcon'] ) ? ['value' => ['url' => $this->attributes['listIcon']]] : ( ! empty( betterdocs()->settings->get( 'docs_list_icon' ) ) ? ['value' => ['url' => betterdocs()->settings->get( 'docs_list_icon' )['url']]] : [] ) ),
             'title_tag'          => $attributes['titleTag'],
             'title'              => $attributes['popularDocsText'],
+            'list_icon_url'      => '',
+            'layout_type'        => 'block',
             'query_args'         => $this->betterdocs( 'query' )->docs_query_args( [
                 'post_type'      => 'docs',
                 'posts_per_page' => $attributes['numberOfDocs'],

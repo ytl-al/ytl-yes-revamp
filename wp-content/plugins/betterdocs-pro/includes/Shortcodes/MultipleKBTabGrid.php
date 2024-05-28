@@ -38,7 +38,9 @@ class MultipleKBTabGrid extends Shortcode {
             'order'                    => $this->settings->get( 'docs_order' ),
             'posts_per_page'           => '',
             'show_icon'                => true,
-            'nested_subcategory'       => $this->settings->get( 'nested_subcategory', false )
+            'nested_subcategory'       => $this->settings->get( 'nested_subcategory', false ),
+            'layout_type'              => '',
+            'list_icon_url'            => ''
         ];
     }
 
@@ -106,7 +108,9 @@ class MultipleKBTabGrid extends Shortcode {
             'show_list'    => true,
             'show_title'   => true,
             'show_button'  => $show_button,
-            'button_text'  => $button_text
+            'button_text'  => $button_text,
+            'layout_type'=> $this->attributes['layout_type'],
+            'list_icon_url'=> $this->attributes['list_icon_url']
         ];
 
         return $this->merge( parent::view_params(), $_view_params );

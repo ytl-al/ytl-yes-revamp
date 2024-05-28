@@ -6,6 +6,10 @@
         <taxonomy translate="1">doc_category</taxonomy>
         <taxonomy translate="1">doc_tag</taxonomy>
     </taxonomies>
+    <custom-term-fields>
+        <custom-term-field action="copy">doc_category_order</custom-term-field>
+        <custom-term-field action="copy">doc_category_image-id</custom-term-field>
+    </custom-term-fields>
     <admin-texts>
         <key name="theme_mods_*">
             <key name="betterdocs_social_sharing_text" />

@@ -29,7 +29,11 @@
 <div class="betterdocs-wrapper betterdocs-fluid-wrapper betterdocs-single-wrapper betterdocs-single-layout-3 betterdocs-single-artisan-layout betterdocs-single-wraper">
     <?php betterdocs()->template_helper->search();?>
     <div class="<?php echo implode( ' ', $wrapper_class ); ?>">
-        <?php $view_object->get( 'templates/sidebars/sidebar-3' );?>
+        <?php
+            betterdocs()->views->get( 'templates/sidebars/sidebar-3', [
+                'layout_type' => 'template'
+            ] );
+        ?>
         <div id="betterdocs-single-main" class="betterdocs-content-area docs-single-main docs-content-full-main">
             <div class="betterdocs-content-inner-area">
                 <?php

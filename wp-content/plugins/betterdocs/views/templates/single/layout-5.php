@@ -30,7 +30,11 @@
     <?php betterdocs()->template_helper->search();?>
     <div class="<?php echo implode( ' ', $wrapper_class ); ?>">
         <div class="betterdocs-content-wrapper betterdocs-display-flex">
-            <?php $view_object->get( 'templates/sidebars/sidebar-5' );?>
+            <?php
+                betterdocs()->views->get( 'templates/sidebars/sidebar-5', [
+                    'layout_type' => 'template'
+                ] );
+            ?>
             <div id="betterdocs-single-main" class="betterdocs-content-area">
                 <div class="betterdocs-content-inner-area">
                     <div class="doc-single-content-wrapper">
