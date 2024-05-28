@@ -258,6 +258,15 @@ class Ytl_Pull_Data_Public
 	private $path_get_ipp_tenure_details;
 
 	/**
+	 * The api path to get iPay88 IPP tenure details.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $path_get_ipp_tenure_details_ipay88		The api path to get Maybank IPP tenure details.
+	 */
+	private $path_get_ipp_tenure_details_ipay88;
+
+	/**
 	 * The api path to get Maybank IPP monthly installment details.
 	 *
 	 * @since    1.0.0
@@ -341,6 +350,7 @@ class Ytl_Pull_Data_Public
 		$this->path_check_order_payment_status 	 = '/mobileyos/mobile/ws/v1/json/orderPaymentStatus';
 		$this->path_get_rm_wallet_merchant 	 = '/mobileyos/mobile/ws/v1/json/getRMEwalletList';
 		$this->path_get_ipp_tenure_details		 = '/mobileyos/mobile/ws/v1/json/getIPPTenureDetails';
+		$this->path_get_ipp_tenure_details_ipay88= '/mobileyos/mobile/ws/v1/json/getIpay88IPPInstallmentList';
 		$this->path_get_ipp_monthly_installment  = '/mobileyos/mobile/ws/v1/json/getIPPMonthlyInstalment';
 		$this->get_all_plans_with_addons_path = '/mobileyos/mobile/ws/v1/json/getAllPlansWithAddons';
 		$this->path_create_roving_staging_order = '/mobileyos/mobile/ws/v1/json/createStagingYosOrder';
@@ -419,6 +429,7 @@ class Ytl_Pull_Data_Public
 		$this->ra_reg_verify_referral_code();
 		$this->ra_reg_get_fpx_bank_list();
 		$this->ra_reg_get_ipp_tenures();
+		$this->ra_reg_get_ipp_tenures_ipay88();
 		$this->ra_reg_get_ipp_monthly_installments();
 		$this->ra_reg_create_yos_order();
 		$this->ra_reg_get_wallet_rm_merchant();
@@ -449,9 +460,9 @@ class Ytl_Pull_Data_Public
 
 	public function ra_add_to_cart(WP_REST_Request $request)
 	{
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		// }
 		global $wpdb;
 
 		$table_name = $wpdb->prefix . 'ywos_cart';
@@ -493,36 +504,37 @@ class Ytl_Pull_Data_Public
 
 	public function get_plan_by_id($data)
 	{
+		return $this->ca_get_plan_by_id($data['plan_id'], true);
 
 		// if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
 		// 	exit("Request not valid");
 		//  }   
-		$return 	= [];
-		$get_plans 	= get_option($this->prefix . 'plans_data');
-		if (empty($get_plans)) {
-			return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
-		}
-		$plans_obj = unserialize($get_plans);
-		foreach ($plans_obj as $plans) {
-			foreach ($plans as $plan_id => $plan) {
-				if ($plan_id == $data['plan_id']) {
-					$return = $plan;
-					break;
-				}
-			}
-		}
+		// $return 	= [];
+		// $get_plans 	= get_option($this->prefix . 'plans_data');
+		// if (empty($get_plans)) {
+		// 	return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
+		// }
+		// $plans_obj = unserialize($get_plans);
+		// foreach ($plans_obj as $plans) {
+		// 	foreach ($plans as $plan_id => $plan) {
+		// 		if ($plan_id == $data['plan_id']) {
+		// 			$return = $plan;
+		// 			break;
+		// 		}
+		// 	}
+		// }
 
-		if (empty($return) || !is_array($return)) {
-			// $return= $this->ca_get_plan_by_id($data['plan_id'], true);
-			// print_r($return);
-			// die();
+		// if (empty($return) || !is_array($return)) {
+			
+		// 	// print_r($return);
+		// 	// die();
 
-		}
-		if (empty($return)) {
-			return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
-		}
+		// }
+		// if (empty($return)) {
+		// 	return new WP_Error('no_plan', 'Invalid plan ID', array('status' => 404));
+		// }
 
-		return $return;
+		// return $return;
 	}
 
 	/**
@@ -560,7 +572,7 @@ class Ytl_Pull_Data_Public
 	public function get_bundlePlan_by_id(WP_REST_Request $request)
 	{
 		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-		// 	exit("Request not valid");
+			// exit("Request not valid");
 		// }
 		$devicePlan_id = $request->get_param('device_id');
 		$return = [];
@@ -584,9 +596,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_get_plan_by_id($plan_id, $returnPlanDetail = false)
 	{
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		// }
 		$session_id = $this->ca_generate_auth_token(true);
 		if ($plan_id && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params = [
@@ -645,9 +657,9 @@ class Ytl_Pull_Data_Public
 
 	public function get_add_ons_by_plan(WP_REST_Request $request)
 	{
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		// }
 		$plan_name = (isset($request['plan_name']) && $request['plan_name'] != null) ? $request['plan_name'] : null;
 		$plan_type = (isset($request['plan_type']) && $request['plan_type'] != null) ? $request['plan_type'] : null;
 
@@ -664,9 +676,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_get_add_ons_by_plan($plan_name = null, $plan_type = null)
 	{
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		// }
 		$session_id = $this->ca_generate_auth_token(true);
 		if ($plan_name && $plan_type && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params = [
@@ -725,13 +737,14 @@ class Ytl_Pull_Data_Public
 	{
 		// $api_domain="https://ydbp-identity-dev.azurewebsites.net";
 		$guestLoginData = get_option('yes_gauest_login_token_data', true);
+
 		if (isset($guestLoginData)) {
-			$api_domain = $guestLoginData['set_token_data_gauest_login']['token_url'];
-			$client_id = $guestLoginData['set_token_data_gauest_login']['client_id'];
-			$client_secret = $guestLoginData['set_token_data_gauest_login']['client_secret'];
-			$grant_type = $guestLoginData['set_token_data_gauest_login']['grant_type'];
-			$username = $guestLoginData['set_token_data_gauest_login']['username'];
-			$password = $guestLoginData['set_token_data_gauest_login']['password'];
+			$api_domain = $guestLoginData['set_token_data_guest_login']['token_url'];
+			$client_id = $guestLoginData['set_token_data_guest_login']['client_id'];
+			$client_secret = $guestLoginData['set_token_data_guest_login']['client_secret'];
+			$grant_type = $guestLoginData['set_token_data_guest_login']['grant_type'];
+			$username = $guestLoginData['set_token_data_guest_login']['username'];
+			$password = $guestLoginData['set_token_data_guest_login']['password'];
 		}
 		// print_r($guestLoginData);
 		// die();
@@ -846,9 +859,8 @@ class Ytl_Pull_Data_Public
 	{
 		// $api_domain ="https://ydbp-shoutout-kraken-dev.azurewebsites.net";
 		$guestLoginData = get_option('yes_gauest_login_token_data', true);
-
 		if (isset($guestLoginData) && !empty($guestLoginData)) {
-			$api_domain = $guestLoginData['set_token_data_gauest_login']['otp_url'];
+			$api_domain = $guestLoginData['set_token_data_guest_login']['otp_url'];
 		}
 
 		$session_id = $this->ca_generate_auth_token_new(true);
@@ -869,7 +881,7 @@ class Ytl_Pull_Data_Public
 			if ($data == 'ERR1') {
 				$data = FALSE;
 			} else {
-				$data;
+				$data='true';
 			}
 			if (!empty($data)) {
 				$response = new WP_REST_Response($data);
@@ -914,9 +926,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_generate_otp_for_login($input_id = null, $locale = 'EN')
 	{
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		// }
 		$session_id = $this->ca_generate_auth_token(true);
 		if ($input_id != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params = ['requestId' => $this->api_request_id, 'locale' => $locale, 'sessionId' => $session_id];
@@ -990,9 +1002,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_validate_login($input_id = null, $password = null, $auth_type = 'password', $locale = 'EN')
 	{
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		// }
 		$session_id = $this->ca_generate_auth_token(true);
 		if ($input_id && $password && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params = [
@@ -1063,9 +1075,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_get_cities_by_state($state_code = null)
 	{
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		// }
 		$session_id = $this->ca_generate_auth_token(true);
 		if ($state_code && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params = ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'sessionId' => $session_id, 'stateCode' => $state_code];
@@ -1248,9 +1260,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_validate_customer_eligibilities($order_info = [])
 	{
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		// }
 		$phone_number = (isset($order_info['phone_number']) && !empty(trim($order_info['phone_number']))) ? $order_info['phone_number'] : null;
 
 		$customer_name = (isset($order_info['customer_name']) && !empty(trim($order_info['customer_name']))) ? $order_info['customer_name'] : null;
@@ -1349,9 +1361,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_verify_referral_code($referral_code = null, $security_type = null, $security_id = null, $locale = 'EN')
 	{
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		// }
 		$session_id = $this->ca_generate_auth_token(true);
 		if ($referral_code != null && $security_type != null && $security_id != null && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params = ['requestId' => $this->api_request_id, 'locale' => $locale, 'referralCode' => $referral_code, 'refereeSecurityType' => $security_type, 'refereeSecurityID' => $security_id, 'sessionId' => $session_id];
@@ -1403,9 +1415,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_get_fpx_bank_list()
 	{
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		// }
 		$session_id = $this->ca_generate_auth_token(true);
 		if (isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params = ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'sessionId' => $session_id];
@@ -1454,9 +1466,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_get_ipp_tenures($plan_name = '')
 	{
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		// }
 		$session_id = $this->ca_generate_auth_token(true);
 		if ($plan_name && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params = ['planName' => $plan_name, 'requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'sessionId' => $session_id];
@@ -1468,6 +1480,58 @@ class Ytl_Pull_Data_Public
 				'timeout' => $this->api_timeout
 			];
 			$api_url = $this->api_domain . $this->path_get_ipp_tenure_details;
+			$request = wp_remote_post($api_url, $args);
+			$data = json_decode($request['body']);
+
+			if ($data->responseCode > -1) {
+				$response = new WP_REST_Response($data);
+				$response->set_status(200);
+				return $response;
+			} else {
+				return new WP_Error('error_getting_ipp_tenure', "There's an error in retrieving the Maybank IPP tenure details.", array('status' => 400));
+			}
+		} else {
+			return new WP_Error('error_getting_ipp_tenure', "Parameters not complete to retrieve Maybank IPP tenure details.", array('status' => 400));
+		}
+		return new WP_Error('error_getting_ipp_tenure', "There's an error in retrieving the Maybank IPP tenure details.", array('status' => 400));
+	}
+
+	public function ra_reg_get_ipp_tenures_ipay88()
+	{
+		register_rest_route(
+			'ywos/v1',
+			'get-ipp-tenures-ipay88',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'get_ipp_tenures_ipay88'),
+				'permission_callback' => '__return_true'
+			)
+		);
+	}
+
+	public function get_ipp_tenures_ipay88(WP_REST_Request $request)
+	{
+		$plan_name 		= $request['plan_name'];
+		$plan_bundle_id	= $request['plan_id'];
+		return $this->ca_get_ipp_tenures_ipay88($plan_name, $plan_bundle_id);
+	}
+
+	public function ca_get_ipp_tenures_ipay88($plan_name = '', $plan_bundle_id = '')
+	{
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		// }
+		$session_id = $this->ca_generate_auth_token(true);
+		if ($plan_name && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
+			$params = ['planName' => $plan_name, 'bundleId' => $plan_bundle_id, 'requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'sessionId' => $session_id];
+			$args = [
+				'headers' => array('Content-Type' => 'application/json; charset=utf-8'),
+				'body' => json_encode($params),
+				'method' => 'POST',
+				'data_format' => 'body',
+				'timeout' => $this->api_timeout
+			];
+			$api_url = $this->api_domain . $this->path_get_ipp_tenure_details_ipay88;
 			$request = wp_remote_post($api_url, $args);
 			$data = json_decode($request['body']);
 
@@ -1506,9 +1570,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_get_ipp_monthly_installments($total_amount = 0, $tenure_type = 0)
 	{
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		// }
 		$session_id = $this->ca_generate_auth_token(true);
 		if ($total_amount && $tenure_type && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params = ['planAmount' => $total_amount, 'ippTenureType' => $tenure_type, 'requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'sessionId' => $session_id];
@@ -1553,9 +1617,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_create_yos_order($order_info = [])
 	{
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		// }
 		$session_key 	= $this->get_request_input($order_info, 'session_key');
 
 		$phone_number 	= $this->get_request_input($order_info, 'phone_number');
@@ -1605,11 +1669,22 @@ class Ytl_Pull_Data_Public
 		$simType		= $this->get_request_input($order_info, 'esim');
 		$session_id 	= $this->ca_generate_auth_token(true);
 		$walletType		= $this->get_request_input($order_info, 'walletType');
-		$stagingOrderNumber	= $this->get_request_input($order_info, 'stagingOrderNumber');
+		$stagingOrderNumber		= $this->get_request_input($order_info, 'stagingOrderNumber');
 		$simType		= $this->get_request_input($order_info, 'esim');
+		$ipay88InstallmentPlanId = $this->get_request_input($order_info, 'ipay88InstallmentPlanId');
 
 		if (
-			$phone_number
+				$phone_number != null && $customer_name != null && $dob != null && $gender != null && $email != null && $security_type != null && $security_id != null &&
+			$plan_name != null && $plan_type != null && $product_bundle_id != null && 
+			$address_line != null && $city != null && $city_code != null && $postal_code != null && $state != null && $state_code != null && $country != null &&
+			$payment_method != null && $process_name != null && $amount != null && $amount_sst != null && $total_amount != null && 
+			(
+				($payment_method == 'FPX' && ($bank_code != null && $bank_name != null)) || 
+				($payment_method == 'REVENUE_M_YOS' && ($walletType != null )) || 
+				($payment_method == 'CREDIT_CARD' && ($card_number != null  && $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null)) || 
+				($payment_method == 'IPAY88_CC_IPP' && ($card_number != null &&  $name_on_card != null && $card_cvv != null && $card_expiry_month != null && $card_expiry_year != null))
+			) &&
+			isset($this->api_domain) && isset($this->api_request_id) && $session_id
 
 		) {
 			$params 	= [
@@ -1653,24 +1728,25 @@ class Ytl_Pull_Data_Public
 					'country' 			=> $country
 				],
 
-				'paymentInfo' 			=> [
-					'paymentMethod' 	=> $payment_method,
-					'processName' 		=> $process_name,
-					'amount' 			=> $amount,
-					'sst' 				=> $amount_sst,
-					'totalAmount' 		=> $total_amount,
-					'bankCode' 			=> $bank_code,
-					'bankName' 			=> $bank_name,
-					'cardNumber' 		=> $card_number,
-					'cardType' 			=> $card_type,
-					'nameOnCard' 		=> $name_on_card,
-					'cardCVV' 			=> $card_cvv,
-					'cardExpiryMonth' 	=> $card_expiry_month,
-					'cardExpiryYear' 	=> $card_expiry_year,
-					'ippType' 			=> $ippType,
-					'isAutoSubscribe' 	=> false,
-					'isSavedCard' 		=> false,
-					'ewalletType'       => $walletType
+			'paymentInfo' 				 => [
+				'paymentMethod' 		 => $payment_method,
+				'processName' 			 => $process_name,
+				'amount' 				 => $amount,
+				'sst' 					 => $amount_sst,
+				'totalAmount' 			 => $total_amount,
+				'bankCode' 				 => $bank_code,
+				'bankName' 				 => $bank_name,
+				'cardNumber' 			 => $card_number,
+				'cardType' 				 => $card_type,
+				'nameOnCard' 			 => $name_on_card,
+				'cardCVV' 				 => $card_cvv,
+				'cardExpiryMonth' 		 => $card_expiry_month,
+				'cardExpiryYear' 		 => $card_expiry_year,
+				'ippType' 				 => $ippType,
+				'isAutoSubscribe' 		 => false,
+				'isSavedCard' 			 => false,
+				'ewalletType'       	 => $walletType,
+				'ipay88InstallmentPlanId' => $ipay88InstallmentPlanId,
 				],
 
 				'appVersion' 			=> $this->api_app_version,
@@ -1695,6 +1771,7 @@ class Ytl_Pull_Data_Public
 				$api_url 		= $this->api_domain . $this->path_create_yos_order_and_payment;
 			}
 			$request 		= wp_remote_post($api_url, $args);
+
 			$data 			= json_decode($request['body']);
 			$yos_order_meta = $params;
 
@@ -1752,9 +1829,9 @@ class Ytl_Pull_Data_Public
 
 	function ca_get_wallet_rm_merchant($order_info)
 	{
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		// }
 		$session_id = $this->ca_generate_auth_token(true);
 		$params = ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'sessionId' => $session_id];
 		$args = [
@@ -1801,9 +1878,9 @@ class Ytl_Pull_Data_Public
 
 	public function ca_check_order_payment_status($session_key = null, $yos_order_id = 0)
 	{
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		// }
 		$session_id = $this->ca_generate_auth_token(true);
 		if ($session_key != null && $yos_order_id && isset($this->api_domain) && isset($this->api_request_id) && $session_id) {
 			$params = ['requestId' => $this->api_request_id, 'locale' => $this->api_locale, 'orderNumber' => $yos_order_id, 'sessionId' => $session_id];
@@ -1857,9 +1934,9 @@ class Ytl_Pull_Data_Public
 
 	public function get_order_by_display_id($data)
 	{
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		// }
 		$order_display_id = $data['order_display_id'];
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'ywos_orders';
@@ -1899,9 +1976,9 @@ class Ytl_Pull_Data_Public
 	 */
 	public function rest_tp_url_check(WP_REST_Request $params)
 	{
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		// }
 		$promo_id = $params['promo_id'];
 		$unique_id = $params['unique_id'];
 
@@ -1946,9 +2023,9 @@ class Ytl_Pull_Data_Public
 	 */
 	public function rest_tp_update_has_purchased_flag(WP_REST_Request $params)
 	{
-		if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		}
+		// if (!wp_verify_nonce($_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		// }
 		$promo_id = $params['promo_id'];
 		$unique_id = $params['unique_id'];
 		$yos_order_id = $params['yos_order_id'];
@@ -2083,7 +2160,7 @@ class Ytl_Pull_Data_Public
 
 
 		if (isset($guestLoginData) && !empty($guestLoginData)) {
-			$api_domain = $guestLoginData['set_token_data_gauest_login']['otp_url'];
+			$api_domain = $guestLoginData['set_token_data_guest_login']['otp_url'];
 		}
 		$session_id = $this->ca_generate_auth_token_new(true);
 		if ($MobileNumber != null && $otp_password != null && isset($api_domain) && $session_id) {

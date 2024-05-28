@@ -1,6 +1,6 @@
 <?php
 
-$apiSetting = (new \Inc\Base\Model)->getAPISettings();
+$apiSetting =  (new \Inc\Base\Model)->getAPISettings();
 ?>
 
     <!-- This file should primarily consist of HTML with a little bit of PHP. -->
@@ -38,6 +38,7 @@ $apiSetting = (new \Inc\Base\Model)->getAPISettings();
                         <td><label>Mobile API URL</label></td>
                         <td><input type="text" name="mobile_url" class="form-control" value="<?= @$apiSetting['mobile_url']; ?>" size="50"></td>
                     </tr>
+                    
 					<tr>
                         <td><label>eKYC URL</label></td>
                         <td><input type="text" name="ekyc_url" class="form-control" value="<?= @$apiSetting['ekyc_url']; ?>" size="50"></td>
