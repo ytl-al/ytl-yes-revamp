@@ -36,7 +36,8 @@ if (is_admin()) {
                         'desc'  => esc_html__('Additional JavaScript code for this page', 'yes.my'),
                         'rows'  => 10,
                         'sanitize_callback' => 'none'
-                    ]
+                    ],
+
                 ]
             ];
 
@@ -99,6 +100,84 @@ if (is_admin()) {
             //     ]
             // ];
 
+
+
+
+            $meta_boxes[] = [
+                'title'         => esc_html__('Device Configuration', 'yes.my'),
+                'id'            => 'yes_store_device_meta',
+                'post_types'    => ['store-device'],
+                'context'       => 'normal',
+                'revision'      => true,
+                'fields' => [
+                    
+                    [
+                        'type' => 'text',
+                        'id'   => $prefix . 'device_id',
+                        'name' => 'Device Id<sup>*</sup>',
+                    ],
+                    // [
+                    //     'type' => 'text',
+                    //     'id'   => $prefix . 'device_name',
+                    //     'name' => 'Device Name <sup>*</sup>',
+                    // ],
+                    [
+                        'type' => 'text',
+                        'id'   => $prefix . 'device_price_mth',
+                        'name' => 'Device Price Monthly<sup>*</sup>',
+                    ],
+                    [
+                        'type' => 'number',
+                        'id'   => $prefix . 'device_rrp',
+                        'name' => 'Device RRP<sup>*</sup>',
+                    ],
+                   
+                    [
+                        'type'    => 'select',
+                        'id'      => $prefix . 'device_target',
+                        'name'    => 'Device Target <sup>*</sup>',
+                        'options' => [
+                            ''          => 'Select Type',
+                            'elevate'  => 'Elevate',
+                            'ywos'     => 'Ywos',
+                            'store'  => 'Store',
+                        ],
+                    ],
+					[
+                        'type'    => 'text',
+                        'id'      => $prefix . 'device_promotion_label',
+                        'name'    => 'Promotion Label <sup>*</sup>',
+                        'placeholder' => 'Enter Promotion Label',
+                        
+                    ],
+                    [
+                        'type'    => 'checkbox',
+                        'id'      => $prefix . 'device_features_free',
+                        'name'    => 'Device Features Free <sup>*</sup>',
+                        'options' => [
+                            'free'  => 'Free',
+                        ],
+                    ],
+                    [
+                        'type'    => 'checkbox',
+                        'id'      => $prefix . 'device_features_hot',
+                        'name'    => 'Device Features Hot <sup>*</sup>',
+                        'options' => [
+                            'hot'  => 'Hot',
+                        ],
+                    ],
+
+                    [
+                        'type'    => 'checkbox',
+                        'id'      => $prefix . 'featured_device',
+                        'name'    => 'Featured Device <sup>*</sup>',
+                        // 'options' => [
+                        //     'hot'  => 'Hot',
+                        // ],
+                    ],
+
+                ],
+            ];
             return $meta_boxes;
         }
 
@@ -260,4 +339,71 @@ if (is_admin()) {
 
         add_action('init', 'add_meta_idd_prepaid_rates');
     }
+
+
+    if (!function_exists('add_meta_devices')) {
+        /**
+         * Function to add custom meta boxes to devices
+         * 
+         * @since    1.2.0
+         */
+        function add_meta_devices()
+        {
+            $prefix     = 'yesmy_devices_';
+            $config_custom_fields   = [
+                'id'            => 'devices',
+                'title'         => 'Device Configuration',
+                'post_types'    => ['devices'],
+                'context'       => 'normal',
+                'priority'      => 'high',
+                'fields'        => [],
+                'local_images'  => false,
+                'use_with_theme' => true
+            ];
+            $meta_custom    = new AT_Meta_Box($config_custom_fields);
+            $meta_fields    = [
+                ['type' => 'text',      'id' => $prefix . "device_id",          'name' => 'Device Id<sup>*</sup>'],
+                ['type' => 'text',      'id' => $prefix . "device_name",          'name' => 'Device Name <sup>*</sup>'],
+                ['type' => 'text',      'id' => $prefix . "device_price",        'name' => 'Device Price<sup>*</sup>'],
+                ['type' => 'text',      'id' => $prefix . "device_type",          'name' => 'Device Type <sup>*</sup>'],
+                ['type' => 'select',    'id' => $prefix . "device_source",        'name' => 'Device Source <sup>*</sup>', 'options' => ['' => 'Select Type', '/elevate' => 'Elevate', '/ywos' => 'Ywos']],
+
+                // ['type' => 'checkbox',  'id' => $prefix . "is_4g_lte",            'name' => 'Roaming Is 4G LTE', 'desc' => 'Roaming is in 4G LTE'],
+                // ['type' => 'text',      'id' => $prefix . "call_rate",            'name' => 'Roaming Call Rate <sup>*</sup>'],
+                // ['type' => 'text',      'id' => $prefix . "call_back",            'name' => 'Roaming Call Back to Malaysia <sup>*</sup>'],
+                // ['type' => 'text',      'id' => $prefix . "call_other_country",   'name' => 'Roaming Call to Other Country <sup>*</sup>'],
+                // ['type' => 'text',      'id' => $prefix . "receiving_calls",      'name' => 'Roaming Receiving Calls <sup>*</sup>'],
+                // ['type' => 'text',      'id' => $prefix . "sms",                  'name' => 'Roaming SMS <sup>*</sup>'],
+            ];
+
+            foreach ($meta_fields as $field) {
+                switch ($field['type']) {
+                    case 'text':
+                        $block_fields[] = $meta_custom->addText($field['id'], ['name' => $field['name']], true);
+                        break;
+                    case 'textarea':
+                        $field_attrs    = ['name' => $field['name']];
+                        if (isset($field['desc'])) $field_attrs['desc'] = $field['desc'];
+                        $block_fields[] = $meta_custom->addTextarea($field['id'], $field_attrs, true);
+                        break;
+                    case 'select':
+                        $block_fields[] = $meta_custom->addSelect($field['id'], $field['options'], ['name' => $field['name']], true);
+                        break;
+                    case 'checkbox':
+                        $field_attrs    = ['name' => $field['name']];
+                        // if (isset($field['desc'])) $field_attrs['desc'] = $field['desc'];
+                        $block_fields[] = $meta_custom->addCheckbox($field['id'], $field_attrs, true);
+                        break;
+                    default:
+                }
+            }
+
+            $meta_custom->addRepeaterBlock($prefix . "operator", ['name' => 'Telcos', 'fields' => $block_fields]);
+
+            $meta_custom->Finish();
+        }
+
+        add_action('init', 'add_meta_devices');
+    }
+
 }

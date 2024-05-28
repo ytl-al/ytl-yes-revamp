@@ -20,11 +20,11 @@
     <div class="hero-slider slider">
 
         <div>
-            <a href="#">
-                <img src="/wp-content/uploads/2023/12/hero-banner-bg1.png" class="w-100 d-none d-lg-block" alt="...">
-                <img src="/wp-content/uploads/2023/12/hero-banner-bg1-mob.png" class="w-100 d-block d-md-block d-lg-none"
+            <a href="/yes-postpaid-plans/#postpaid-plans/">
+                <img src="/wp-content/uploads/2024/01/SGRoaming-EN-v3.png" class="w-100 d-none d-lg-block" alt="...">
+                <img src="/wp-content/uploads/2024/01/SGRoaming-EN-v3-mob.png" class="w-100 d-block d-md-block d-lg-none"
                     alt="...">
-                    <div class="inner-content-sec d-lg-block d-none">
+                    <!-- <div class="inner-content-sec d-lg-block d-none">
                     <div class="title-sec">
                     <img decoding="async" src="/wp-content/uploads/2023/12/infinite-icon.png" class="" alt="...">
                         <h2>FREE unlimited 5G roaming in Singapore </h2>
@@ -48,9 +48,8 @@
                             <div class="content-sec">
                                 Unlimited<br> Calls
                             </div>
-                        </div>
-                        
-                    </div>
+                        </div>                        
+                    </div> -->
             </a>
         </div>
         
@@ -123,7 +122,7 @@
                                     <div class="col-12 col-lg-3 border-b-sec">
                                         <h3>Roaming Operator</h3>
                                         <p class="brand">
-                                        <h4 class="blue">SIMBA</h4>
+                                        <h4 class="blue">SIMBA/TPG</h4>
                                         </p>
                                     </div>
 
@@ -207,7 +206,7 @@
                                     <div class="col-12 col-lg-3 border-b-sec">
                                         <h3>Roaming Operator</h3>
                                         <p class="brand">
-                                        <h4 class="blue">SIMBA</h4>
+                                        <h4 class="blue">SIMBA/TPG</h4>
                                         </p>
                                     </div>
 
@@ -270,9 +269,7 @@
                     </div>
 
                 </div>
-            </div>
-
-            
+            </div>            
 
             <div class="col-12 mt-3" data-country="Singapore" style="display: block;">
                 <div style="background:#fff; border-radius: 15px;" >
@@ -917,7 +914,7 @@
             <div class="col-8 m-auto text-left idd-rate" >&nbsp;
                 <p>• Prices shown above are subject to 6% service tax.</p>
 
-                <p>• IDD calls are charged at 30 seconds block.</p>
+                <p>• IDD calls are charged at 60 seconds block.</p>
 
                 <p>• Rates are subject to change without prior notice.</p>
                 <a href="#" data-button="closeIdd" class="pink-btn mt-5">Close <span class="iconify" data-icon="carbon:close-filled"></span></a>

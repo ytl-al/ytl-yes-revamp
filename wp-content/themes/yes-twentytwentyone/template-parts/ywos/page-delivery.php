@@ -3,7 +3,7 @@
 
 
 <!-- Vue Wrapper STARTS -->
-<div id="main-vue">
+<div id="main-vue" style="display:none">
     <!-- Banner Start -->
     <section id="grey-innerbanner" v-if='(upFrontPayment=="true")'>
         <div class="container">
@@ -365,7 +365,7 @@
     </div>
 </div>
 <!-- Vue Wrapper ENDS -->
-<script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/data/rahmah-plan.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         toggleOverlay();
@@ -373,7 +373,6 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
-                rahmahPlan:ywosDataRahmahPlans??'',
                 currentStep: 3,
                 simType:'',
 				eSimSupportPlan:'',
@@ -623,6 +622,7 @@
             mounted: function() {},
             created: function() {
                 var self = this;
+                $('#main-vue').show();
                 setTimeout(function() {
                     self.pageInit();
                 }, 500);
@@ -1006,6 +1006,8 @@
                         } else {
                             self.checkCustomerEligibility();
                         }
+						self.sendAnalytics();
+                        self.sendUserLoginToCleverTap();
                     }
                     e.preventDefault();
                 },
@@ -1051,8 +1053,63 @@
                 watchBillingDifferent: function() {},
                 renderText: function(strID) {
                     return ywos.renderText(strID, this.pageText);
-                }
+                },
+				sendAnalytics:function(){
+                    var self = this;
+                    var planType= self.orderSummary.plan.planType;
+                    var planName = self.orderSummary.plan.planName;
+                    var dobString = self.deliveryInfo.dob; // Example DOB string
+                    var dobParts = dobString.split('/');
+                    var dob = new Date(dobParts[2], dobParts[1] - 1, dobParts[0]);
+                    var eventType = 'delivery details';
+                    var pushData = {
+                        "Name": self.deliveryInfo.name,
+                        "DOB": dob,
+                        "Email": self.deliveryInfo.email,
+                        "Gender":  self.deliveryInfo.gender,
+                        "Delivery State": self.deliveryInfo.state,
+                        "Delivery City": self.deliveryInfo.city,
+                        "Delivery Postcode": self.deliveryInfo.postcode,
+                    };
+                    pushAnalytics(eventType, pushData,planType,planName); 
+                },
+                sendUserLoginToCleverTap:function() {
+                    var self = this;
+                    var mobileNumber = self.deliveryInfo.mobileNumber;
+                    var formattedNumber = '+60' + mobileNumber.slice(1);
+
+                    var MSISDNNumber = self.deliveryInfo.msisdn;
+                    var formattedMSISDNNumber = '60' + MSISDNNumber.slice(1);
+
+                    var genderMap = {
+                            'MALE': 'M',
+                            'FEMALE': 'F'
+                        };
+
+                    var gender = genderMap[self.deliveryInfo.gender.toUpperCase()];
+                    var dobString = self.deliveryInfo.dob; // Example DOB string
+                    var dobParts = dobString.split('/');
+                    var dob = new Date(dobParts[2], dobParts[1] - 1, dobParts[0]);
+                    // console.log(dob);
+                    var userLoginData = {
+                        "Site": {
+                            "Name": self.deliveryInfo.name,
+                            "Identity": self.deliveryInfo.securityId,
+                            "Email": self.deliveryInfo.email,
+                            "Phone": formattedNumber,
+                            "MSISDN":formattedMSISDNNumber,
+                            "Gender": gender,
+                            "DOB": dob,
+                            "MSG-email": true,
+                            "MSG-push": true,
+                            "MSG-sms": true,
+                            "MSG-whatsapp": true
+                        }
+                    };
+                    clevertap.onUserLogin.push(userLoginData);
+                },
             }
+            
         });
     });
 </script>

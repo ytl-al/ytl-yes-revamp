@@ -295,8 +295,6 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/data/rahmah-plan.js"></script>
-
 <script type="text/javascript">
     $(document).ready(function () {
         toggleOverlay();
@@ -304,7 +302,6 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
-                rahmahPlan:ywosDataRahmahPlans??'',
                 currentStep: 4,
                 simType: '',
                 StagingOrderNumber: '',
@@ -534,6 +531,7 @@
                     axios.post(apiEndpointURL + '/validate-ywos-roving-order' + '?nonce=' + yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
+                            console.log(data);
                              var inputDate = data.dob; // Replace with your date
                             // Split the input date into parts
                             var parts = inputDate.split("-");

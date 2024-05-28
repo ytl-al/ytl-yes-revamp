@@ -96,6 +96,7 @@ const elevate = {
     redirectToCart: function () {
         window.location.href = window.location.origin + "/elevate/cart";
     },
+    
     buyPlan: function (productId) {
         toggleOverlay();
 
@@ -215,6 +216,10 @@ const elevate = {
     },
     redirectToPage: function (pageSlug) {
         window.location.href = window.location.origin + '/elevate/' + pageSlug + '/?v=' + (Math.random() * 100);
+    },
+
+    ywos_redirectToPage: function (pageSlug) {
+        window.location.href = window.location.origin + '/promo/' + pageSlug;
     },
     validateSession: function (curStep = 0) {
         var isValid = true;

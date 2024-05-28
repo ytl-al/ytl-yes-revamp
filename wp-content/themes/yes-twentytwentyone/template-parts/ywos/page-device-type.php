@@ -30,14 +30,6 @@
         align-items: center !important;
         gap: 5px !important;
     }
-    .device-type-stock{
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    }
-    .device-type-stock h6{
-        margin: 0;
-    }
 
     .accordion-body {
         margin: 10px 0 !important;
@@ -50,8 +42,51 @@
     .main-content.page-main-content-loaded{
         height: auto !important;
     }
+    .device-type-stock{
+    border-radius: 8px;
+    gap: 10px;
+    color: #525252;
+    display: flex;
+    align-items: center;
+     }
+     .device-type-stock h6{
+        margin-bottom: 0;
+     }
+     #productSlide {
+    margin-bottom: 100px;
+}
+     #productSlide .carousel-item {
+    padding: 50px;
+}
+#productSlide .carousel-indicators {
+    bottom: -80px;
+}
+#productSlide .carousel-indicators button.active {
+    opacity: 1 !important;
+    cursor: pointer;
+}
 
-    
+#productSlide .carousel-indicators [data-bs-target] {
+    width: 60px !important;
+    height: 70px !important;
+    border-radius: 50%;
+    opacity: 1;
+    background-color: transparent !important;
+}
+.icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.icon_arrow_down {
+    background-image: url(/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/images/icon_arrow_down.svg);
+}
+.active .accordion-header .icon_arrow_down {
+    transform: rotateX(180deg);
+}
      @media(max-width:768px){
         .page-footer .row {
             gap: 15px;
@@ -185,19 +220,19 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <a href="javascript:void(0)" @click="goToCartPage" class="pink-btn-disable text-uppercase d-block pink-btn">{{renderText('add_to_cart')}}</a> -->
-
-                                <div v-if="isOutOfStock(selectedPlanData.plan_id)" class="device-type-stock">
-                                    <img src="/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png" alt="...">
-                                
-                                        <h6>Out of Stock.</h6>
-                                
+                                <div class="hr_line"></div>
+                                <div v-if="selectedPlanData.plan_id==1246 || selectedPlanData.plan_id==1258 || selectedPlanData.plan_id==1260 || selectedPlanData.plan_id==1266 || selectedPlanData.plan_id==1268 || selectedPlanData.plan_id==1274 || selectedPlanData.plan_id==1278 || selectedPlanData.plan_id==1276 || selectedPlanData.plan_id==1280 || selectedPlanData.plan_id==1254 || selectedPlanData.plan_id==1256"  class="device-type-stock">
+                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png" alt="...">
+                                    <div v-if="siteLang=='ms-MY'"> <h6 > KEHABISAN STOK. </h6></div>
+                                        <div v-else> <h6> Out of Stock. </h6></div>
                                 </div>
-                               
+                                <!-- <div v-else-if="selectedPlanData.plan_id==1250 || selectedPlanData.plan_id==1252"  class="device-type-stock">
+                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png" alt="...">
+                                        <div> <h6> Temporary Out of Stocks. </h6></div>
+                                </div> -->
                                 <div v-else>
-                                    <a href="javascript:void(0)" @click="goToCartPage" class="pink-btn-disable text-uppercase d-block pink-btn">{{ renderText('add_to_cart') }}</a>
+                                <a href="javascript:void(0)" @click="goToCartPage" class="pink-btn-disable text-uppercase d-block pink-btn">{{renderText('add_to_cart')}}</a>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -208,8 +243,6 @@
 </main>
 <?php include(get_stylesheet_directory() . '/template-parts/elevate/includes/footer.php'); ?>
 </div>
-<script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/data/rahmah-plan.js"></script>
-
 <script type="text/javascript">
     $(document).ready(function() {
         $('[data-render-text]').each(function() {
@@ -241,7 +274,7 @@
         var pageCart = new Vue({
             el: '#main-vue',
             data: {
-                rahmahPlan:ywosDataRahmahPlans??'',
+                siteLang:'',
                 deviceData: {
                     capacity: [],
                     details: [],
@@ -314,6 +347,7 @@
                 setTimeout(function() {
                     ywos.init();
                     self.getPlanData();
+                    self.siteLang=ywos.lsData.siteLang;
                 }, 500);
             },
             methods: {
@@ -362,8 +396,8 @@
                     return data;
                 },
                 changePlan: function(index) {
-                    console.log(index);
                     var self = this;
+					console.log(self.deviceData.planData);
                     const selectedData = self.deviceData.planData[index];
                     const planDetails = self.deviceData.planData[index]?.data?.notes?.split(',').filter(elm => elm);
                     self.selectedPlanData = {
@@ -385,12 +419,7 @@
                 },
                 renderText: function(strID) {
                     return ywos.renderText(strID, this.pageText);
-                },
-
-                isOutOfStock(planId) {
-                    var self=this
-                       return self.rahmahPlan.some(plan => plan.planId == planId && plan.stock == 'Out Of Stock');
-                 },
+                }
             }
         });
     });

@@ -1,5 +1,5 @@
 <?php require_once 'includes/header.php'; ?>
-    <div id="main-vue" >
+    <div id="main-vue">
     <header class="white-top">
         <div class="container">
             <div class="row">
@@ -908,8 +908,8 @@
                     },
                     paymentSubmit: function(e) {
                         toggleOverlay();
-                        // this.checkActiveContract();
-                        this.ajaxCreateYOSOrder();
+                        this.checkActiveContract();
+                        // this.ajaxCreateYOSOrder();
                         e.preventDefault();
                     },
                     redirectThankYou: function(status) {

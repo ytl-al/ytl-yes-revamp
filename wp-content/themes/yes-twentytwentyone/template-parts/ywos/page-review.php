@@ -6,7 +6,7 @@
 
 
 <!-- Vue Wrapper STARTS -->
-<div id="main-vue">
+<div id="main-vue" style="display:none">
     <!-- Banner Start -->
     <section id="grey-innerbanner" v-if='(upFrontPayment=="true")'>
         <div class="container">
@@ -86,33 +86,170 @@
                     <div class="accordion" id="cart-accordion">
                         <div class="packagebox mb-3">
                             <div class="row">
-                                <!-- <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="orderSummary.plan.planType == 'postpaid' && !shouldExcludePlan(ywos?.lsData?.meta.planID)"> -->
-                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center justify-content-center" v-if="(orderSummary.plan.planType == 'postpaid' && orderSummary.plan.displayName !='Yes 5G Wireless Broadband_Flexi' && orderSummary.plan.displayName !='Yes 5G Wireless Broadband Gateway' && orderSummary.plan.displayName !='Infinite Basic_18M' && orderSummary.plan.displayName !='Infinite Basic RAHMAH 1' && orderSummary.plan.displayName !='Infinite Basic RAHMAH 2' && orderSummary.plan.displayName !='Infinite Basic RAHMAH 3' && orderSummary.plan.displayName !='Power 35 RAHMAH' && orderSummary.plan.displayName !='Infinite Basic_24M')">
+                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="orderSummary.plan.planType == 'postpaid' && ywos?.lsData?.meta.planID != '1229' && ywos?.lsData?.meta.planID != '1231' && ywos?.lsData?.meta.planID != '1233' && ywos?.lsData?.meta.planID != '4550' && ywos?.lsData?.meta.planID != '1235' && ywos?.lsData?.meta.planID != '1236' && ywos?.lsData?.meta.planID != '1238' && ywos?.lsData?.meta.planID != '1240' && ywos?.lsData?.meta.planID != '1242' && ywos?.lsData?.meta.planID != '1244' && ywos?.lsData?.meta.planID != '1246' && ywos?.lsData?.meta.planID != '1248' && ywos?.lsData?.meta.planID != '1250' && ywos?.lsData?.meta.planID != '1252' && ywos?.lsData?.meta.planID != '1254' && ywos?.lsData?.meta.planID != '1256' && ywos?.lsData?.meta.planID != '1258' && ywos?.lsData?.meta.planID != '1260' && ywos?.lsData?.meta.planID != '1262' && ywos?.lsData?.meta.planID != '1264' && ywos?.lsData?.meta.planID != '1266' && ywos?.lsData?.meta.planID != '1268' && ywos?.lsData?.meta.planID != '1272' && ywos?.lsData?.meta.planID != '4546' && ywos?.lsData?.meta.planID != '4548'  && ywos?.lsData?.meta.planID != '7477' && ywos?.lsData?.meta.planID != '7479'  &&
+								ywos?.lsData?.meta.planID != '7481' && ywos?.lsData?.meta.planID != '7483' && ywos?.lsData?.meta.planID != '7485' && ywos?.lsData?.meta.planID != '7487' && ywos?.lsData?.meta.planID != '7489' && ywos?.lsData?.meta.planID != '7491' && ywos?.lsData?.meta.planID != '7493' && ywos?.lsData?.meta.planID != '7495' && ywos?.lsData?.meta.planID != '7497' && ywos?.lsData?.meta.planID != '7499' && ywos?.lsData?.meta.planID != '7501' && ywos?.lsData?.meta.planID != '7503' && ywos?.lsData?.meta.planID != '7517' && ywos?.lsData?.meta.planID != '7519' ">
                                     <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid" alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="ywos?.lsData?.meta.planID == '1229'">
+                                    <img src="/wp-content/uploads/2023/08/Xiaomi-2-1-1.png" class="img-fluid m-auto" alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="ywos?.lsData?.meta.planID == '4546' || ywos?.lsData?.meta.planID == '7485' ">
+                                    <img src="/wp-content/uploads/2023/12/oppoA79-black.png" class="img-fluid m-auto" alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="ywos?.lsData?.meta.planID == '4548' || ywos?.lsData?.meta.planID == '7487' ">
+                                    <img src="/wp-content/uploads/2023/12/oppoA79-purple.png" class="img-fluid m-auto" alt="" />
+                                </div>
+                                <!-- <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="ywos?.lsData?.meta.planID == '1231'">
+                                    <img src="/wp-content/uploads/2023/08/Xiaomi-2-1.jpg" class="img-fluid m-auto" alt="" />
+                                </div> -->
+								 <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="ywos?.lsData?.meta.planID == '1233' || ywos?.lsData?.meta.planID == '4550'">
+                                    <img src="/wp-content/uploads/2023/08/wirelessbroadband-thumbnail.png" class="img-fluid m-auto" alt="" />
+                                </div>
+                               <!-- <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="ywos?.lsData?.meta.planID == '4550'">
+                                    <img src="/wp-content/uploads/2023/12/wireless-christmus-1.png" class="img-fluid m-auto" alt="" />
+                                </div> -->
+                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center" v-if="ywos?.lsData?.meta.planID == '1235'">
+                                    <img src="/wp-content/uploads/2023/08/wirelessbroadband-flexi-thumbnail.png" class="img-fluid m-auto" alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1236' || ywos?.lsData?.meta.planID == '7497')">
+                                    <img src="/wp-content/uploads/2023/08/vivoY27-black-website.png" class="img-fluid m-auto"
+                                        alt=""  style="max-width:50% !important;"/>
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1238' || ywos?.lsData?.meta.planID == '7499')">
+                                    <img src="/wp-content/uploads/2023/08/vivoY27-purple-website.png" class="img-fluid m-auto"
+                                        alt="" style="max-width:50% !important;" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1240')">
+                                    <img src="/wp-content/uploads/2023/08/samsungA14-black.png" class="img-fluid m-auto"
+                                        alt="" style="max-width:50% !important;"/>
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1242')">
+                                    <img src="/wp-content/uploads/2023/08/samsungA14-darkred.png" class="img-fluid m-auto"
+                                        alt="" style="max-width:50% !important;" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1244')">
+                                    <img src="/wp-content/uploads/2023/08/samsungA14-black.png" class="img-fluid m-auto"
+                                        alt=""  style="max-width:50% !important;" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1246')">
+                                    <img src="/wp-content/uploads/2023/08/oppoA78-black.png" class="img-fluid m-auto"
+                                        alt="" style="max-width:50% !important;" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1248')">
+                                    <img src="/wp-content/uploads/2023/08/oppoA78-black.png" class="img-fluid m-auto"
+                                        alt="" style="max-width:50% !important;" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1250' || ywos?.lsData?.meta.planID == '7481')">
+                                    <img src="/wp-content/uploads/2023/08/honor90lite-cyan-webasset.png" class="img-fluid m-auto"
+                                        alt="" style="max-width:50% !important;" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1252' || ywos?.lsData?.meta.planID == '7483' )">
+                                    <img src="/wp-content/uploads/2023/08/honor90lite-black-webasset.png" class="img-fluid m-auto"
+                                        alt="" style="max-width:50% !important;" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1254')">
+                                    <img src="/wp-content/uploads/2023/08/redmi12-black.png" class="img-fluid m-auto"
+                                        alt="" style="max-width:50% !important;" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1256')">
+                                    <img src="/wp-content/uploads/2023/08/redmi12-blue.png" class="img-fluid m-auto"
+                                        alt="" style="max-width:50% !important;" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1258')">
+                                    <img src="/wp-content/uploads/2023/08/vivo-y55.png" class="img-fluid m-auto"
+                                        alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1260')">
+                                    <img src="/wp-content/uploads/2023/08/vivoY55-black.png" class="img-fluid m-auto"
+                                        alt="" style="max-width:50% !important;" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1262' || ywos?.lsData?.meta.planID == '7489' || ywos?.lsData?.meta.planID == '7491' )">
+                                    <img src="/wp-content/uploads/2023/08/ZTE-blade.png" class="img-fluid m-auto"
+                                        alt="" style="max-width:50% !important;" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1264' || ywos?.lsData?.meta.planID == '7493' || ywos?.lsData?.meta.planID == '7495')">
+                                    <img src="/wp-content/uploads/2023/08/ZTE-blade.png" class="img-fluid m-auto"
+                                        alt=""  style="max-width:50% !important;" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1266')">
+                                    <img src="/wp-content/uploads/2023/08/vivo-y55.png" class="img-fluid m-auto"
+                                        alt=""  style="max-width:50% !important;" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1268')">
+                                    <img src="/wp-content/uploads/2023/08/vivoY55-black.png" class="img-fluid m-auto"
+                                        alt=""  style="max-width:50% !important;" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1272')">
+                                    <img src="/wp-content/uploads/2023/08/ZTE-blade.png" class="img-fluid m-auto"
+                                        alt=""  style="max-width:50% !important;" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1274' || ywos?.lsData?.meta.planID == '1278')">
+                                    <img src="/wp-content/uploads/YWOS-device-images/samsungm14-blue.png" class="img-fluid m-auto"
+                                        alt=""  style="max-width:50% !important;" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1276' || ywos?.lsData?.meta.planID == '1280')">
+                                    <img src="/wp-content/uploads/YWOS-device-images/samsungM14-5.png" class="img-fluid m-auto"
+                                        alt=""  style="max-width:50% !important;" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '1122')">
+                                    <img src="/wp-content/uploads/2024/01/PWR35productthumbnail.png" class="img-fluid m-auto" alt=""   />
+                                </div>
+
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '7477' || ywos?.lsData?.meta.planID == '7517')">
+                                    <img src="/wp-content/uploads/YWOS-device-images/vivoY27-black-website-11-5-1.png" class="img-fluid m-auto"
+                                        alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '7479' || ywos?.lsData?.meta.planID == '7519')">
+                                    <img src="/wp-content/uploads/YWOS-device-images/vivoY27-purple-website-3-1.png" class="img-fluid m-auto"
+                                        alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(ywos?.lsData?.meta.planID == '7501')">
+                                    <img src="/wp-content/uploads/YWOS-device-images/realMe_purlple11x5g-3-2.png" class="img-fluid m-auto"
+                                        alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                 v-if="(ywos?.lsData?.meta.planID == '7503')">
+                                    <img src="/wp-content/uploads/YWOS-device-images/realMe_blue11x5g-3-3.png" class="img-fluid m-auto"
+                                        alt="" />
                                 </div>
 
                                 <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center" v-if="orderSummary.plan.planType == 'prepaid'">
                                     <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid" alt="" />
                                 </div>
 
-                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
-                                    v-for="plan in rahmahPlan" :key="plan.planId"
-                                    v-if="plan.planId ==ywos?.lsData?.meta.planID">
-                                    <img :src="plan.planImgURL" class="img-fluid m-auto"
-                                        alt="" style="max-width:50% !important;" />
-                                </div>
+
 
                                 <div class="col-lg-6 col-12 pt-lg-2 pb-1 px-4 px-lg-1 ps-lg-4">
-
-                                <div v-for="plan in rahmahPlan" :key="plan.planId">
-                                    <h3 class="mt-3 mt-lg-0" v-if="ywos?.lsData?.meta.planID == plan.planId">
-                                         {{ plan.sortName }}
-                                    </h3>
-                                    </div>
-
-                                <!-- <h3 class="mt-3 mt-lg-0" v-if="ywos?.lsData?.meta.planID == '1229'">{{ orderSummary.plan.displayName }} Nubia NEO 5G Black</h3> -->
-
-                                <!-- <h3 class="mt-3 mt-lg-0" v-else-if="ywos?.lsData?.meta.planID == '1231'">{{ orderSummary.plan.displayName }} Nubia NEO 5G Yellow</h3>
+                                <h3 class="mt-3 mt-lg-0" v-if="ywos?.lsData?.meta.planID == '1229'">{{ orderSummary.plan.displayName }} Nubia NEO 5G Black</h3>
+								
+                                <h3 class="mt-3 mt-lg-0" v-else-if="ywos?.lsData?.meta.planID == '1231'">{{ orderSummary.plan.displayName }} Nubia NEO 5G Yellow</h3>
+								                                    <h3 class="mt-3 mt-lg-0" v-else-if="ywos?.lsData?.meta.planID == '1231'">{{ orderSummary.plan.displayName }} Nubia NEO 5G Yellow</h3>
+                                                                    <h3 class="mt-3 mt-lg-0" v-else-if="ywos?.lsData?.meta.planID == '4546'">{{ orderSummary.plan.displayName }}  Oppo A79 Black</h3>
+                                                                    <h3 class="mt-3 mt-lg-0" v-else-if="ywos?.lsData?.meta.planID == '4548'">{{ orderSummary.plan.displayName }}  Oppo A79 Purple</h3>
                                     <h3 class="mt-3 mt-lg-0" v-else-if="ywos?.lsData?.meta.planID == '1236'">{{ orderSummary.plan.displayName }}  Vivo Y27 5G Black</h3>
                                     <h3 class="mt-3 mt-lg-0" v-else-if="ywos?.lsData?.meta.planID == '1238'">{{ orderSummary.plan.displayName }}  Vivo Y27 5G Purple</h3>
                                     <h3 class="mt-3 mt-lg-0" v-else-if="ywos?.lsData?.meta.planID == '1240'">{{ orderSummary.plan.displayName }}  Samsung Galaxy A14 5G Black</h3>
@@ -126,11 +263,11 @@
                                     <h3 class="mt-3 mt-lg-0" v-else-if="ywos?.lsData?.meta.planID == '1256'">{{ orderSummary.plan.displayName }}  Xiaomi Redmi 12 5G Blue</h3>
                                     <h3 class="mt-3 mt-lg-0" v-else-if="ywos?.lsData?.meta.planID == '1258'">{{ orderSummary.plan.displayName }}  VIVO Y55+ Blue</h3>
                                     <h3 class="mt-3 mt-lg-0" v-else-if="ywos?.lsData?.meta.planID == '1260'">{{ orderSummary.plan.displayName }}  VIVO Y55+ Black</h3>
-                                    <h3 class="mt-3 mt-lg-0" v-else-if="ywos?.lsData?.meta.planID == '1262'">{{ orderSummary.plan.displayName }}  ZTE Blade A73 Blue</h3>
+                                    <!-- <h3 class="mt-3 mt-lg-0" v-else-if="ywos?.lsData?.meta.planID == '1262'">{{ orderSummary.plan.displayName }}  ZTE Blade A73 Blue</h3> -->
                                     <h3 class="mt-3 mt-lg-0" v-else-if="ywos?.lsData?.meta.planID == '1264'"> {{ orderSummary.plan.displayName }} ZTE Blade A73 Grey</h3>
                                     <h3 class="mt-3 mt-lg-0" v-else-if="ywos?.lsData?.meta.planID == '1266'">{{ orderSummary.plan.displayName }}  VIVO Y55+ Blue</h3>
                                     <h3 class="mt-3 mt-lg-0" v-else-if="ywos?.lsData?.meta.planID == '1268'">{{ orderSummary.plan.displayName }}  VIVO Y55+ Black</h3>
-                                    <h3 class="mt-3 mt-lg-0" v-else-if="ywos?.lsData?.meta.planID == '1272'">{{ orderSummary.plan.displayName }}  ZTE Blade A73 Grey</h3> -->
+                                    <h3 class="mt-3 mt-lg-0" v-else-if="ywos?.lsData?.meta.planID == '1272'">{{ orderSummary.plan.displayName }}  ZTE Blade A73 Grey</h3>
                                     <h3 class="mt-3 mt-lg-0" v-else>{{ orderSummary.plan.displayName }}</h3>
                                     <div v-if="orderSummary.plan.displayName !='Power 35 RAHMAH'"> <p class="mb-3" v-if="orderSummary.plan.internetData">RM{{ parseFloat(orderSummary.plan.totalAmount).toFixed(0) }} for {{ orderSummary.plan.internetData }}</p></div>
                                     <div class="package-info" v-if="packageInfos.length">
@@ -314,7 +451,7 @@
     <!-- Body ENDS -->
 </div>
 <!-- Vue Wrapper ENDS -->
-<script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/data/rahmah-plan.js"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         toggleOverlay();
@@ -322,7 +459,6 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
-                rahmahPlan:ywosDataRahmahPlans??'',
                 currentStep: 4,
                 simType :'',
                 upFrontPayment:'fasle',
@@ -405,6 +541,7 @@
             mounted: function() {},
             created: function() {
                 var self = this;
+                $('#main-vue').show();
                 setTimeout(function() {
                     self.pageInit();
                 }, 500);
@@ -419,7 +556,6 @@
                         self.upFrontPayment = ywos.lsData.meta.customerDetails.upFrontPayment;
                         self.simType=ywos.lsData.meta.esim;
 						self.eSimSupportPlan=ywos.lsData.meta.orderSummary.plan.eSim;
-                    
                         toggleOverlay(false);
                     } else {
                         ywos.redirectToPage('cart');
@@ -429,7 +565,9 @@
                     var self = this;
                     self.orderSummary = ywos.lsData.meta.orderSummary;
                     self.deliveryInfo = ywos.lsData.meta.deliveryInfo;
-                    self.slicedMobileNumber = self.deliveryInfo.mobileNumber.slice(1);
+                    // self.slicedMobileNumber = self.deliveryInfo.mobileNumber.slice(1);
+                    self.slicedMobileNumber = self.deliveryInfo.mobileNumber;
+
                     self.agree = (ywos.lsData.meta.agree) ? ywos.lsData.meta.agree : self.agree;
                     self.watchSubmit();
                     
@@ -447,7 +585,8 @@
                     ywos.lsData.meta.completedStep = self.currentStep;
                     ywos.lsData.meta.agree = self.agree;
                     ywos.updateYWOSLSData();
-
+					
+					self.sendAnalytics();
                     ywos.redirectToPage('payment');
                 },
                 watchSubmit: function() {
@@ -465,7 +604,18 @@
                 renderText: function(strID) {
                     return ywos.renderText(strID, this.pageText);
                 },
-               
+				  sendAnalytics:function(){
+                    var self = this;
+                    var eventType = 'review & pay';
+                    var planType= self.orderSummary.plan.planType;
+                    var planName = self.orderSummary.plan.planName;
+                    if (planName !== null && planName !== undefined) {
+                        pushData = {
+                            // Add any additional data you need to send
+                        };
+                    }
+                    pushAnalytics(eventType, pushData, planType, planName); 
+                }
             }
         });
     });

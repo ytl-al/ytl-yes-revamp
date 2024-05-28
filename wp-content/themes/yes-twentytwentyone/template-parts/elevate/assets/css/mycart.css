@@ -505,6 +505,13 @@ background: #e8bcf0;
 .color-black a {
     background: #282524;
 }
+.color-ocean-teal a {
+    background: #29777B;
+}
+.color-yellow a{
+background: #f7f6a5;
+}
+
 .color-red a {
     background: #6b4a52;
 }
@@ -535,10 +542,16 @@ background: #e8bcf0;
 .color-onyx-gray a {
    background: #40434a;
 }
-.color-blue a {
+/*.color-blue a {
     background: #ADBBDE;
+}/*
+.color-blue a {
+    background: #232641;
 }
 
+.color-v_blue a {
+    background: #a7c9d2;
+}
 .color-nordic-blue a {
     background: #679AAF;
 }
@@ -561,6 +574,9 @@ background: #e8bcf0;
 
 .color-silver a {
     background: #878a8f;
+}
+.color-orange a{
+    background: #FF5733 !important;
 }
 
 .color-pink a {
@@ -637,7 +653,6 @@ background: #e8bcf0;
 .list-1 {
     list-style: url("../images/list1_style.png");
 }
-
 .accordion-header {
     cursor: pointer;
 }

@@ -27,4 +27,3 @@ require_once(THEME_FUNCTIONS_PATH . '/theme-google-sheet.php');
 require_once(THEME_FUNCTIONS_PATH . '/theme-mega-menu-admin.php');
 require_once(THEME_FUNCTIONS_PATH . '/theme-outage.php');
 
-

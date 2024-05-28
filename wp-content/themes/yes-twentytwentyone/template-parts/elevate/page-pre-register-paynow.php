@@ -7,7 +7,7 @@
 	}
 </style>
 <input type="hidden" value="" id="guid"/>
-<div id="main-vue">
+<div id="main-vue" style="display: none;">
     <header class="white-top">
         <div class="container">
             <div class="row">

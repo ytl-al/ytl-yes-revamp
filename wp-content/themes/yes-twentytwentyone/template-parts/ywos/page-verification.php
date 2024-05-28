@@ -2,7 +2,7 @@
 
 
 <!-- Vue Wrapper STARTS -->
-<div id="main-vue" >
+<div id="main-vue" style="display: none;">
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
@@ -171,7 +171,6 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
-                rahmahPlan:'',
                 simType: '',
                 currentStep: 1,
                 pageValid: false,
@@ -269,6 +268,7 @@
             mounted: function() {},
             created: function() {
                 var self = this;
+                $('#main-vue').show();
                 setTimeout(function() {
                     self.pageInit();
                 }, 500);
@@ -410,6 +410,7 @@
                         } else {
                             self.redirectVerified();
                         }
+						self.sendAnalytics('verification');
                     }
                     e.preventDefault();
                 },
@@ -648,7 +649,19 @@
                 },
                 renderText: function(strID) {
                     return ywos.renderText(strID, this.pageText);
-                }
+                },
+				sendAnalytics:function(){
+                    var self = this;
+                    var eventType = 'verification';
+                    var planType= self.orderSummary.plan.planType;
+                    var planName = self.orderSummary.plan.planName;
+                    var pushData = {
+                        "Security ID": self.customerDetails.securityType,
+                        "Security ID Number": self.customerDetails.securityId,
+                        "Phone": self.verify.input.phoneNumber.trim()
+                    };
+                    pushAnalytics(eventType, pushData, planType,planName); 
+                },
             }
         });
     });

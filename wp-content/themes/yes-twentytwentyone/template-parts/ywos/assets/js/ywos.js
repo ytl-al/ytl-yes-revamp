@@ -17,6 +17,7 @@ const apiEndpointURL = window.location.origin + '/wp-json/ywos/v1';
 
 
 $(document).ready(function() {
+    console.log('test');
 	if(window.location.pathname=='/ywos/delivery/'){
         let backButton = document.querySelector('.back-btn');
         if (ywosLSData.meta.orderSummary.plan.eSim != true) {
@@ -40,6 +41,7 @@ $(document).ready(function() {
     $('.btn-buyplan').on('click', function() {
         var planID = $(this).attr('data-planid');
         ywos.buyPlan(planID);
+        PushCTanalytics(planID,this);
     });
 
     $('.btn-buytpplan').on('click', function() {
@@ -485,8 +487,8 @@ const ywos = {
                 
             }
         }
-        // this.mainVueVisible = isValid;
-        $('#main-vue').show();
+        
+        // $('#main-vue').show();
         if (!isValid) {
             this.removeYWOSLSData();
             return false;
@@ -654,5 +656,34 @@ function checkInputCharacters(event, type = 'alphanumeric', withSpace = true) {
         event.preventDefault();
     } else {
         return true;
+    }
+}
+
+function PushCTanalytics(planID, clickedButton) {
+    if (planID) {
+        var cardTitle;
+        var eventType;
+        if ($(clickedButton).closest('.post-card').length > 0) {
+            cardTitle = $(clickedButton).closest('.post-card').find('.post-card-title').text();
+            eventType = "Postpaid - Buy Now";
+        } else if ($(clickedButton).closest('.prepaid-card').length > 0) {
+            cardTitle = $(clickedButton).closest('.prepaid-card').find('.prepaid-card-title').text();
+            $(clickedButton).closest('.prepaid-card-detail').find('.plan-details-list').text(cardTitle);
+            eventType = "Prepaid - Buy Now";
+        } else if ($(clickedButton).closest('.card').length > 0) {
+            cardTitle = $(clickedButton).closest('.card-body').find('.plan-details-list > h3').text();
+            // $(clickedButton).closest('.card-body').find('.plan-details-list').text(cardTitle);
+            eventType = "Rahmah/Broadband - Get Plan";
+            console.log(cardTitle,'cardTitle');
+        }
+
+        // Push CleverTap event
+        if (cardTitle && eventType) {
+            clevertap.event.push(eventType, {
+                "Package Chosen": cardTitle
+            });
+        }
+    } else {
+        console.log('Something Wrong');
     }
 }
