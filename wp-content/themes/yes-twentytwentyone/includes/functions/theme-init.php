@@ -2951,7 +2951,7 @@ if ($lang == "en-US"){
                             <li class="dropdown-header-mobile">tools & services</li>
                             <li><a href="<?php echo $site_url_menu . '/coverage/' ?>"><img src="/wp-content/uploads/2024/04/check-coverage.svg" alt="..."> Check Coverage </a></li>
                             <li><a href="<?php echo $site_url_menu . '/speed-test/' ?>"><img src="/wp-content/uploads/2024/04/speed-test.svg" alt="..."> Speed Test</a></li>
-                            <li><a href="<?php echo $site_url_menu . '/supported-devices/' ?>"><img src="/wp-content/uploads/2024/04/dupported-devices.svg" alt="..."> Supported Devices</a></li>
+                            <li><a href="<?php echo $site_url_menu . '/supported-devices/' ?>"><img src="/wp-content/uploads/2024/04/supported-devices.svg" alt="..."> Supported Devices</a></li>
                             <li><a href="<?php echo $site_url_menu . '/network-maintenance/' ?>"><img src="/wp-content/uploads/2024/04/network-status.svg" alt="..."> Network Status</a></li>
                             <li><a href="<?php echo $site_url_menu . '/trackorder/' ?>"><img src="/wp-content/uploads/2024/04/track-order.svg" alt="..."> Track Order</a></li>
                             <li><a href="<?php echo $site_url_menu . '/roaming/' ?>"><img src="/wp-content/uploads/2024/04/roaming.svg" alt="..."> Roaming</a></li>
