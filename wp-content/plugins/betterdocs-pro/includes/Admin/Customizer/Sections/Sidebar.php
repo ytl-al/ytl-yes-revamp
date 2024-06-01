@@ -984,6 +984,94 @@ class Sidebar extends FreeSidebar {
         );
     }
 
+    public function border_color_counter_layout_6() {
+        $this->customizer->add_setting( 'betterdocs_sidebar_term_border_color_counter_layout6', [
+            'default'           => $this->defaults['betterdocs_sidebar_term_border_color_counter_layout6'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_sidebar_term_border_color_counter_layout6',
+                [
+                    'label'    => __( 'Border Counter Color', 'betterdocs-pro' ),
+                    'section'  => 'betterdocs_sidebar_settings',
+                    'settings' => 'betterdocs_sidebar_term_border_color_counter_layout6',
+                    'priority' => 339
+                ]
+            )
+        );
+    }
+
+    public function border_color_active_counter_layout_6() {
+        $this->customizer->add_setting( 'betterdocs_sidebar_term_border_active_color_counter_layout6', [
+            'default'           => $this->defaults['betterdocs_sidebar_term_border_active_color_counter_layout6'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_sidebar_term_border_active_color_counter_layout6',
+                [
+                    'label'    => __( 'Active Border Counter Color', 'betterdocs-pro' ),
+                    'section'  => 'betterdocs_sidebar_settings',
+                    'settings' => 'betterdocs_sidebar_term_border_active_color_counter_layout6',
+                    'priority' => 339
+                ]
+            )
+        );
+    }
+
+    public function term_background_active_counter_color_layout_6() {
+        $this->customizer->add_setting( 'betterdocs_sidebar_term_active_background_counter_color_layout6', [
+            'default'           => $this->defaults['betterdocs_sidebar_term_active_background_counter_color_layout6'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_sidebar_term_active_background_counter_color_layout6',
+                [
+                    'label'    => __( 'Active Background Counter Color', 'betterdocs-pro' ),
+                    'section'  => 'betterdocs_sidebar_settings',
+                    'settings' => 'betterdocs_sidebar_term_active_background_counter_color_layout6',
+                    'priority' => 339
+                ]
+            )
+        );
+    }
+
+    public function term_counter_active_text_color_layout_6() {
+        $this->customizer->add_setting( 'betterdocs_sidebar_term_active_counter_text_color_layout6', [
+            'default'           => $this->defaults['betterdocs_sidebar_term_active_counter_text_color_layout6'],
+            'capability'        => 'edit_theme_options',
+            'transport'         => 'postMessage',
+            'sanitize_callback' => [$this->sanitizer, 'rgba']
+        ] );
+
+        $this->customizer->add_control(
+            new AlphaColorControl(
+                $this->customizer,
+                'betterdocs_sidebar_term_active_counter_text_color_layout6',
+                [
+                    'label'    => __( 'Active Counter Text Color', 'betterdocs-pro' ),
+                    'section'  => 'betterdocs_sidebar_settings',
+                    'settings' => 'betterdocs_sidebar_term_active_counter_text_color_layout6',
+                    'priority' => 339
+                ]
+            )
+        );
+    }
+
     public function border_width_color_layout6() {
         $this->customizer->add_setting( 'betterdocs_sidebar_term_border_width_color_layout6', [
             'default'           => $this->defaults['betterdocs_sidebar_term_border_width_color_layout6'],

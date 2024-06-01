@@ -82,6 +82,17 @@ class Feedback extends Widget_Base {
             ]
         );
 
+		$this->add_control(
+			'feedback_form_icon_image',
+			[
+				'label' => esc_html__( 'Choose Feedback Icon Image', 'textdomain' ),
+				'type' => Controls_Manager::MEDIA,
+				'default' => [
+					'url' => '',
+				],
+			]
+		);
+
         $this->end_controls_section();
 
         $this->start_controls_section(
@@ -148,7 +159,8 @@ class Feedback extends Widget_Base {
                     ]
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .feedback-form-icon svg' => 'width: {{SIZE}}px;height: {{SIZE}}px;'
+                    '{{WRAPPER}} .feedback-form-icon svg' => 'width: {{SIZE}}px;height: {{SIZE}}px;',
+                    '{{WRAPPER}} .feedback-form-icon img' => 'width: {{SIZE}}px;height: {{SIZE}}px;'
                 ]
             ]
         );

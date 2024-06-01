@@ -21,17 +21,27 @@
     <?php betterdocs()->template_helper->search();?>
 
     <div class="betterdocs-content-wrapper">
-        <?php $view_object->get( 'templates/sidebars/sidebar-6' );?>
+        <?php
+            betterdocs()->views->get( 'templates/sidebars/sidebar-6', [
+                'layout_type' => 'template'
+            ] );
+        ?>
         <div id="betterdocs-single-main" class="betterdocs-content-area betterdocs-single-main">
             <?php
-                while ( have_posts() ): the_post();
-                    $view_object->get( 'templates/headers/layout-6' );
-                    $view_object->get( 'templates/contents/layout-1' );
-                    $view_object->get( 'templates/footer' );
-                endwhile;
-                $view_object->get( 'templates/parts/navigation' );
-                $view_object->get( 'templates/parts/credit' );
-                $view_object->get( 'templates/parts/comment' );
+                if (is_tax('glossaries')) {
+                    $view_object->get('templates/headers/layout-7');
+                    $view_object->get('templates/glossary-single/layout-1');
+                } else {
+                    while ( have_posts() ): the_post();
+                        $view_object->get( 'templates/headers/layout-6' );
+                        $view_object->get( 'templates/contents/layout-1' );
+                        $view_object->get( 'templates/footer' );
+                    endwhile;
+                    $view_object->get( 'templates/parts/navigation' );
+                    $view_object->get( 'templates/parts/credit' );
+                    $view_object->get( 'templates/parts/comment' );
+                }
+                
             ?>
         </div> <!-- #main -->
     </div>

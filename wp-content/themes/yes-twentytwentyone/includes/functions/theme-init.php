@@ -24,7 +24,8 @@ if (!function_exists('yes_enqueue_scripts')) {
         wp_enqueue_script('aos', get_template_directory_uri() . '/assets/js/aos.js', array(), '2.3.1', true);
         wp_enqueue_script('slick', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.0/slick.min.js', array(), '1.8.0', true);
         wp_enqueue_script('moment', 'https://momentjs.com/downloads/moment.min.js', array(), '1.8.0', true);
-        wp_register_script('yes-js', get_template_directory_uri() . '/assets/js/yes.js', array(), '1.0.0', true);
+        // wp_register_script('yes-js', get_template_directory_uri() . '/assets/js/yes.js', array(), '1.0.0', true);
+		wp_register_script('yes-js','https://www.yes.my/wp-content/themes/yes-twentytwentyone/assets/js/yes.js', array(), '1.0.0', true);
         $data = array(
             'nonce' => wp_create_nonce("yes_nonce_key"),
         );
@@ -1936,7 +1937,7 @@ function yes_menu($path)
         }
 
         .navbar-toggler:not(.collapsed) .navbar-toggler-icon {
-            background-image: url(https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/cross.svg);
+            background-image: url(https://cdn.yes.my/site/wp-content/uploads/2023/03/cross.svg);
 
         }
 
@@ -2029,7 +2030,10 @@ function yes_menu($path)
             padding: 0 25px 0 0;
         }
         .campaign_board {
-            left: 550px !important;
+            left: 529px !important;
+        }
+        ul.navbar-nav:nth-child(4) ul.dropdown-menu.mega-dropdown-menu {
+            left: 314px;
         }
     </style>
 
@@ -2051,13 +2055,9 @@ function yes_menu($path)
 
                     <ul>
 
-                        <li id="menu-item-31205" class="dropdown-header menu-item menu-item-type-post_type menu-item-object-page menu-item-31205">
-
-                            <p class="yes_text_menu_headline">explore
-
-                                postpaid Plans</p>
-
-                        </li>
+                        <!-- <li id="menu-item-31205" class="dropdown-header menu-item menu-item-type-post_type menu-item-object-page menu-item-31205">
+                        <p class="yes_text_menu_headline">explore postpaid Plans</p>
+                        </li> -->
 
 
 
@@ -2076,6 +2076,7 @@ foreach ($primaryNav as $navItem) {
 
 $lang = get_bloginfo("language");
 $parse = parse_url($navItem->url);
+if (!isset($parse['path'])) $parse['path'] = '';
 $url = rtrim(get_bloginfo('url'),"/");
 if ($lang == "en-US"){
 
@@ -2189,6 +2190,7 @@ if ($lang == "en-US"){
                                 <?php
                                 $lang = get_bloginfo("language");  
                                 $parse = parse_url($prepaid_navItem->url);                            
+                                if (!isset($parse['path'])) $parse['path'] = '';
                                 $url = rtrim(get_bloginfo('url'), "/");
                                 if ($lang == "en-US") {
                                     ?>
@@ -2251,19 +2253,33 @@ if ($lang == "en-US"){
         </ul>
     </li>
 </ul>
-    <ul class="navbar-nav">
-        <?php
-        $lang = get_bloginfo("language");
-        if ($lang == "en-US") {
-            $menu_link = '/yes-postpaid-infinite-5g/';
-        } elseif ($lang == "ms-MY") {
-            $menu_link = '/ms/yes-postpaid-infinite-5g/';
-        }
-        ?>
-        <li id="menu-item-20033" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-20033 nav-item">
-            <a href=<?php echo $menu_link ?> class="nav-link"><?php echo esc_html__('Infinite+', 'yes.my'); ?></a>
+
+<ul class="navbar-nav">
+        <li class="nav-item dropdown mega-dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Devices', 'yes.my'); ?></a>
+            <ul class="dropdown-menu mega-dropdown-menu devices_menu" aria-labelledby="navbarDropdown">
+                <div class="row mx-0">
+                    <div class="col-auto px-2 p-lg-4 py-lg-5">
+                        <li>
+                            <ul>
+                                <?php
+                                $devices_menu = wp_get_nav_menu_object("Devices");
+                                $devices_Nav = wp_get_nav_menu_items($devices_menu);
+                                foreach ($devices_Nav as $devices_navItem) {
+                                    // print_r($devices_navItem);
+                                ?>
+                                    <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $devices_navItem->url; ?>"><?php echo $devices_navItem->post_title; ?></a></li>
+                                <?php
+                                }
+                                ?>
+                            </ul>
+                        </li>
+                    </div>
+                </div>
+            </ul>
         </li>
     </ul>
+   
     <ul class="navbar-nav">
         <li class="nav-item dropdown mega-dropdown mobile-none">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Broadband', 'yes.my'); ?></a>
@@ -2291,33 +2307,17 @@ if ($lang == "en-US"){
                                                 <p class="yes_text_menu_headline">Explore Our Plans</p>
                                             </li>
                                             <?php
+                       
+                                $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fiber-5G");
+								// print_r($Wireless_Fibre_menu);
 
-                                $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fibre-5G");
-// echo "<pre>";
-// print_r($Wireless_Fibre_menu);
-// echo "</pre>";                         
-                                            $WirelessNav = wp_get_nav_menu_items($Wireless_Fibre_menu);                                            
-                                            
-                                            foreach ($WirelessNav as $wirelessItem) {
-                                                ?>
-                                                <?php
-                                                $lang = get_bloginfo("language");                                                
-                                                $parse = parse_url($wirelessItem->url);
-                                                $url = rtrim(get_bloginfo('url'),"/");
-                                                if ($lang == "en-US"){
-                                              ?>
-                                                <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $url.$wirelessItem->url; ?>">
-                                                <?php echo $wirelessItem->post_title; ?></a></li>
-                                            <?php
-                                            }else{
-                                                ?>
-                                                <li class="dropdown-header">
-                                                <a class="custom_menu_nuv" href="<?php echo get_site_url().'/ms'.$parse['path']; ?>">
-                                                <?php echo $wirelessItem->post_title; ?></a></li>
-                                            <?php
-                                            }
-                                            }
-                                            ?>
+                                            $WirelessNav = wp_get_nav_menu_items($Wireless_Fibre_menu); 
+											// print_r($WirelessNav);                                            
+                                     foreach ($WirelessNav as $wirelessItem) {
+                        ?>
+                                    <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $wirelessItem->url; ?>"><?php echo $wirelessItem->title; ?></a></li>
+                                        <?php                    }
+                    ?>
 
                                         </ul>
 
@@ -2335,6 +2335,7 @@ if ($lang == "en-US"){
                                                 <?php
                                                 $lang = get_bloginfo("language");
                                                 $parse = parse_url($quick_menusItem->url);
+                                                if (!isset($parse['path'])) $parse['path'] = '';
                                                 $url = rtrim(get_bloginfo('url'),"/");
                                                 if ($lang == "en-US"){
                                                 ?>
@@ -2373,6 +2374,7 @@ if ($lang == "en-US"){
                                                 <?php
                                                 $lang = get_bloginfo("language");
                                                 $parse = parse_url($broadband_menusItem->url);
+                                                if (!isset($parse['path'])) $parse['path'] = '';
                                                 $url = rtrim(get_bloginfo('url'),"/");
                                                 if ($lang == "en-US"){
 
@@ -2404,6 +2406,7 @@ if ($lang == "en-US"){
                                             <?php
                                             $lang = get_bloginfo("language");                                            
                                             $parse = parse_url($quick_menusItem->url);                                            
+                                            if (!isset($parse['path'])) $parse['path'] = '';
                                             $url = rtrim(get_bloginfo('url'),"/");
                                             if ($lang == "en-US"){    
                                             ?>
@@ -2439,6 +2442,7 @@ if ($lang == "en-US"){
                                     <?php
                                     $lang = get_bloginfo("language");
                                     $parse = parse_url($on_the_broadbandItem->url);
+                                    if (!isset($parse['path'])) $parse['path'] = '';
                                     $url = rtrim(get_bloginfo('url'),"/");
                                     if ($lang == "en-US"){
                                                 ?>
@@ -2482,7 +2486,7 @@ if ($lang == "en-US"){
                 </div>
                 <div class="tab-box overlap" id="tab-3">
                     <div class="back-btn" data-rel="tab-3">
-                        <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/arrow_back.svg"> Main Menu
+                        <img src="https://cdn.yes.my/site/wp-content/uploads/2023/03/arrow_back.svg"> Main Menu
                     </div>
                     <h2 class="menu-title">5G Wireless Broadband</h2>
                     <li>
@@ -2491,11 +2495,9 @@ if ($lang == "en-US"){
                                 <p class="yes_text_menu_headline">explore postpaid Plans</p>
                             </li>
                             <?php
-                         $menus = wp_get_nav_menus();
-                        //  echo "<pre>";
-                        // print_r($menus);
-                        // echo '</pre>';
-                         $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fibre-5G");
+                        //  $menus = wp_get_nav_menus();
+                        
+                         $Wireless_Fibre_menu = wp_get_nav_menu_object("Broadband - Wireless-Fiber-5G");
                          
                         //  print_r($Wireless_Fibre_menu);
                             
@@ -2505,7 +2507,7 @@ if ($lang == "en-US"){
                                 foreach ($WirelessNav as $wirelessItem) {
 
                             ?>
-                                    <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $wirelessItem->url; ?>"><?php echo $wirelessItem->post_title; ?></a></li>
+                                    <li class="dropdown-header"><a class="custom_menu_nuv" href="<?php echo $wirelessItem->url; ?>"><?php echo $wirelessItem->title; ?></a></li>
                             <?php
                                 }
                             }
@@ -2569,7 +2571,7 @@ if ($lang == "en-US"){
                 </div>
                 <div class="tab-box overlap" id="tab-4">
                     <div class="back-btn" data-rel="tab-4">
-                        <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/arrow_back.svg"> Main Menu
+                        <img src="https://cdn.yes.my/site/wp-content/uploads/2023/03/arrow_back.svg"> Main Menu
                     </div>
                     <h2 class="menu-title">4G Broadband</h2>
                     <div class="tab-box-inner">
@@ -2732,6 +2734,7 @@ if ($lang == "en-US"){
     <ul class="navbar-nav">
         <?php
         $lang = get_bloginfo("language");
+        $menu_link_5G_Gaming = 'http://www.cloudgaming.my';
         if ($lang == "en-US") {
             $menu_link_5G_Gaming = 'http://www.cloudgaming.my';
         } elseif ($lang == "ms-MY") {
@@ -2749,32 +2752,37 @@ if ($lang == "en-US"){
             <ul class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown" id="gethelp">
                 <div class="row mx-0">
                     <div class="col-xl-8 col-lg-12 col-md-12 get_help mobile-none">
-                        <li class="dropdown-header">tools & services</li>
+                        <li class="dropdown-header">
+                        <?php echo esc_html__('tools & services', 'yes.my'); ?>    
+                        </li>
                         <div class="row">
                             <div class="col-6 col-md-6">
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Coverage.svg" alt="...">
+                                    <img src="/wp-content/uploads/2024/04/check-coverage.svg" alt="...">
                                     <div class="">
                                  <?php
                                     $lang = get_bloginfo("language");
+                                    $site_url_menu = get_site_url();
                                     if ($lang == "en-US") {
                                         $site_url_menu = get_site_url();
                                     } elseif ($lang == "ms-MY") {
                                         $site_url_menu = get_site_url().'/ms';
                                     }
                                     ?>
-                                        <h6> <a href="<?php echo $site_url_menu. '/coverage/' ?>"><?php echo esc_html__('Coverage Checker  ', 'yes.my'); ?></a></h6>
-                                        <p>Check Yes network coverage in Malaysia.</p>
+                                        <h6> <a href="<?php echo $site_url_menu. '/coverage/' ?>"><?php echo esc_html__('Check Coverage ', 'yes.my'); ?></a></h6>
+                                        <p><?php echo esc_html__('Check Yes network coverage in Malaysia.', 'yes.my'); ?> 
+                                            </p>
                                     </div>
                                 </li>
 
                             </div>
                             <div class="col-6 col-md-6">
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Speed.svg" alt="...">
+                                    <img src="/wp-content/uploads/2024/04/speed-test.svg" alt="...">
                                     <div class="">
                                     <?php
                                     $lang = get_bloginfo("language");
+                                    $site_url_menu = get_site_url();
                                     if ($lang == "en-US") {
                                         $site_url_menu = get_site_url();
                                     } elseif ($lang == "ms-MY") {
@@ -2782,7 +2790,8 @@ if ($lang == "en-US"){
                                     }
                                     ?>
                                         <h6><a href="<?php echo $site_url_menu . '/speed-test/' ?>"><?php echo esc_html__('Speed Test', 'yes.my'); ?></a></h6>
-                                        <p>Measure your internet connection speed.</p>
+                                        <p><?php echo esc_html__('Measure your internet connection speed.', 'yes.my'); ?>  
+                                            </p>
                                     </div>
                                 </li>
                             </div>
@@ -2791,10 +2800,11 @@ if ($lang == "en-US"){
                             <div class="col-6 col-md-6">
 
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Supported-Devices.svg" alt="...">
+                                    <img src="/wp-content/uploads/2024/04/supported-devices.svg" alt="...">
                                     <div class="">
                                     <?php
                                     $lang = get_bloginfo("language");
+                                    $site_url_menu = get_site_url();
                                     if ($lang == "en-US") {
                                         $site_url_menu = get_site_url();
                                     } elseif ($lang == "ms-MY") {
@@ -2802,18 +2812,19 @@ if ($lang == "en-US"){
                                     }
                                     ?>
                                         <h6><a href="<?php echo $site_url_menu. '/supported-devices/' ?>"><?php echo esc_html__('Supported Devices', 'yes.my'); ?></a></h6>
-                                        <p>Browse devices compatible with 4G LTE and 5G
-                                            technology.</p>
+                                        <p><?php echo esc_html__('Browse devices compatible with 4G LTE and 5G technology.', 'yes.my'); ?>
+                                            </p>
                                     </div>
                                 </li>
 
                             </div>
                             <div class="col-6 col-md-6">
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Track-Order.svg" alt="...">
+                                    <img src="/wp-content/uploads/2024/04/track-order.svg" alt="...">
                                     <div class="">
                                     <?php
                                     $lang = get_bloginfo("language");
+                                    $site_url_menu = get_site_url();
                                     if ($lang == "en-US") {
                                         $site_url_menu = get_site_url();
                                     } elseif ($lang == "ms-MY") {
@@ -2821,17 +2832,58 @@ if ($lang == "en-US"){
                                     }
                                     ?>
                                         <h6><a href="<?php echo $site_url_menu . '/trackorder/' ?>"><?php echo esc_html__('Track Order', 'yes.my'); ?></a></h6>
-                                        <p>Check the status of a Yes order.</p>
+                                        <p><?php echo esc_html__('Check the status of a Yes order.', 'yes.my'); ?>
+                                            </p>
                                     </div>
                                 </li>
                             </div>
+                            <div class="col-6 col-md-6" >
+                                <li class="mega-get-help">
+                                    <img src="/wp-content/uploads/2024/04/network-status.svg" alt="...">
+                                        <div class="">
+                                    <?php
+                                    $lang = get_bloginfo("language");
+                                    $site_url_menu = get_site_url();
+                                    if ($lang == "en-US") {
+                                        $site_url_menu = get_site_url();
+                                    } elseif ($lang == "ms-MY") {
+                                        $site_url_menu = get_site_url().'/ms';
+                                    }
+                                    ?>
+                                        <h6><a href="<?php echo $site_url_menu . '/network-maintenance/' ?>"><?php echo esc_html__('Network Status', 'yes.my'); ?></a></h6>
+                                        <p><?php echo esc_html__('Check Yes network maintenance in Malaysia.', 'yes.my'); ?>
+                                           </p>
+                                    </div>
+                                </li>
+                            </div>
+                            <div class="col-6 col-md-6" >
+                                <li class="mega-get-help">
+                                    <img src="/wp-content/uploads/2024/04/roaming.svg" alt="...">
+                                        <div class="">
+                                    <?php
+                                    $lang = get_bloginfo("language");
+                                    $site_url_menu = get_site_url();
+                                    if ($lang == "en-US") {
+                                        $site_url_menu = get_site_url();
+                                    } elseif ($lang == "ms-MY") {
+                                        $site_url_menu = get_site_url().'/ms';
+                                    }
+                                    ?>
+                                        <h6><a href="<?php echo $site_url_menu . '/roaming/' ?>"><?php echo esc_html__('Roaming', 'yes.my'); ?></a></h6>
+                                        <p><?php echo esc_html__('Check International Roaming Rates', 'yes.my'); ?>
+                                            </p>
+                                    </div>
+                                </li>
+                            </div>
+
                             <div class="col-6 col-md-6" style="display:none;">
                                 <li class="mega-get-help">
-                                    <img src="https://www.yes.my/wp-content/uploads/2023/06/Typefi_alert-triangle-Size24-ColorDark.svg " alt="..." style="
+                                    <img src="/wp-content/uploads/2023/06/Typefi_alert-triangle-Size24-ColorDark.svg " alt="..." style="
     width: 25px;">
                                     <div class="">
                                     <?php
                                     $lang = get_bloginfo("language");
+                                    $site_url_menu = get_site_url();
                                     if ($lang == "en-US") {
                                         $site_url_menu = get_site_url();
                                     } elseif ($lang == "ms-MY") {
@@ -2845,15 +2897,17 @@ if ($lang == "en-US"){
                             </div>
                         </div>
 
-                        <li class="mt-3 dropdown-header">LOCATE us</li>
+                        <li class="mt-3 dropdown-header"><?php echo esc_html__('LOCATE us', 'yes.my'); ?>
+                            </li>
                         <div class="row">
                             <div class="col-6 col-md-6">
 
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Store-Locator.svg" alt="...">
+                                    <img src="/wp-content/uploads/2024/04/store-locator.svg" alt="...">
                                     <div class="">
                                     <?php
                                     $lang = get_bloginfo("language");
+                                    $site_url_menu = get_site_url();
                                     if ($lang == "en-US") {
                                         $site_url_menu = get_site_url();
                                     } elseif ($lang == "ms-MY") {
@@ -2861,17 +2915,19 @@ if ($lang == "en-US"){
                                     }
                                     ?>
                                         <h6><a href="<?php echo $site_url_menu . '/store-locator/' ?>"><?php echo esc_html__('Store Locator', 'yes.my'); ?></a></h6>
-                                        <p>Find the nearest Yes store.</p>
+                                        <p><?php echo esc_html__('Find the nearest Yes store.', 'yes.my'); ?>
+                                            </p>
                                     </div>
                                 </li>
 
                             </div>
                             <div class="col-6 col-md-6">
                                 <li class="mega-get-help">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Roadshow-Locations.svg" alt="...">
+                                    <img src="/wp-content/uploads/2024/04/roadshow-locations.svg" alt="...">
                                     <div class="">
                                     <?php
                                     $lang = get_bloginfo("language");
+                                    $site_url_menu = get_site_url();
                                     if ($lang == "en-US") {
                                         $site_url_menu = get_site_url();
                                     } elseif ($lang == "ms-MY") {
@@ -2879,56 +2935,60 @@ if ($lang == "en-US"){
                                     }
                                     ?>
                                         <h6><a href="<?php echo $site_url_menu . '/roadshow/' ?>"><?php echo esc_html__('Roadshow Locations', 'yes.my'); ?></a></h6>
-                                        <p>Location of the Yes Roadshow.</p>
+                                        <p><?php echo esc_html__('Location of the Yes Roadshow.', 'yes.my'); ?>
+                                            </p>
                                     </div>
                                 </li>
                             </div>
                         </div>
                         <div class="box">
-                            <li><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> Email us</a></li>
-                            <li><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"> Chat to Support</a></li>
+                            <li><img src="/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> <?php echo esc_html__('Email us', 'yes.my'); ?></a></li>
+                            <li><img src="/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"><?php echo esc_html__(' Chat to Support', 'yes.my'); ?></a></li>
                         </div>
                     </div>
                     <div class="col-auto get_help-mobile dasktop-none">
                         <ul>
                             <li class="dropdown-header-mobile">tools & services</li>
-                            <li><a href="<?php echo $site_url_menu . '/coverage/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Coverage.svg" alt="..."> Coverage Checker</a></li>
-                            <li><a href="<?php echo $site_url_menu . '/speed-test/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Speed.svg" alt="..."> Speed Test</a></li>
-                            <li><a href="<?php echo $site_url_menu . '/supported-devices/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Supported-Devices.svg" alt="..."> Supported Devices</a></li>
-                            <li><a href="<?php echo $site_url_menu . '/trackorder/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Track Order</a></li>
-                            <li style="display:none;"><a href="<?php echo $site_url_menu . '/a3-charger-replacement/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Product Notice</a></li>
+                            <li><a href="<?php echo $site_url_menu . '/coverage/' ?>"><img src="/wp-content/uploads/2024/04/check-coverage.svg" alt="..."> Check Coverage </a></li>
+                            <li><a href="<?php echo $site_url_menu . '/speed-test/' ?>"><img src="/wp-content/uploads/2024/04/speed-test.svg" alt="..."> Speed Test</a></li>
+                            <li><a href="<?php echo $site_url_menu . '/supported-devices/' ?>"><img src="/wp-content/uploads/2024/04/supported-devices.svg" alt="..."> Supported Devices</a></li>
+                            <li><a href="<?php echo $site_url_menu . '/network-maintenance/' ?>"><img src="/wp-content/uploads/2024/04/network-status.svg" alt="..."> Network Status</a></li>
+                            <li><a href="<?php echo $site_url_menu . '/trackorder/' ?>"><img src="/wp-content/uploads/2024/04/track-order.svg" alt="..."> Track Order</a></li>
+                            <li><a href="<?php echo $site_url_menu . '/roaming/' ?>"><img src="/wp-content/uploads/2024/04/roaming.svg" alt="..."> Roaming</a></li>
+                            <li style="display:none;"><a href="<?php echo $site_url_menu . '/a3-charger-replacement/' ?>"><img src="/wp-content/uploads/2023/03/Track-Order.svg" alt="..."> Product Notice</a></li>
                         </ul>
                         <ul>
-                            <li class="mt-3 dropdown-header-mobile">LOCATE us</li>
-                            <li><a href="<?php echo $site_url_menu . '/store-locator/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Store-Locator.svg" alt="..."> Store Locator</a></li>
-                            <li><a href="<?php echo $site_url_menu. '/roadshow/' ?>"><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/03/Roadshow-Locations.svg" alt="..."> Roadshow Locations</a></li>
+                            <li class="mt-3 dropdown-header-mobile"><?php echo esc_html__('LOCATE us', 'yes.my'); ?></li>
+                            <li><a href="<?php echo $site_url_menu . '/store-locator/' ?>"><img src="/wp-content/uploads/2024/04/store-locator.svg" alt="..."> Store Locator</a></li>
+                            <li><a href="<?php echo $site_url_menu. '/roadshow/' ?>"><img src="/wp-content/uploads/2024/04/roadshow-locations.svg" alt="..."> Roadshow Locations</a></li>
                         </ul>
                         <div class="box">
                             <ul>
-                                <li><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> Email us</a></li>
-                                <li><img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"> Chat to Support</a></li>
+                                <li><img src="/wp-content/uploads/2023/04/email.svg" alt="..."><a href="mailto:yescare@yes.my"> <?php echo esc_html__('Email us', 'yes.my'); ?></a></li>
+                                <li><img src="/wp-content/uploads/2023/04/message.svg" alt="..."><a href="https://www.facebook.com/messages/t/242365937676/"> <?php echo esc_html__('Chat to Support', 'yes.my'); ?></a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-12 col-md-12 gethelp_right_sec">
-                        <li class="dropdown-header">most asked questions</li>
+                        <li class="dropdown-header"><?php echo esc_html__('most asked questions', 'yes.my'); ?>
+                            </li>
                         <li class="mega-get-help img-box">
-                            <img src="/wp-content/uploads/2023/05/FT5G_banner-350x350@0.5x.png" alt="..." width="76" height="76" style="border-radius: 10px;">
+                            <img src="/wp-content/uploads/2024/02/FT5G_banner-350x350@0.5x.webp" alt="..." width="76" height="76" style="border-radius: 10px;">
                             <div>
-                                <h6>Keep Your Number</h6>
-                                <p>Switch to Yes while keeping your number.</p>
+                                <h6><?php echo esc_html__('Keep Your Number', 'yes.my'); ?></h6>
+                                <p><?php echo esc_html__('Switch to Yes while keeping your number.', 'yes.my'); ?></p>
                             </div>
                         </li>
                         <li class="mega-get-help">
-                            <h6><a href="<?php echo $site_url_menu . '/faq/howtoactivatesim/' ?>">Activate SIM card</a></h6>
+                            <h6><a href="<?php echo $site_url_menu . '/faq/howtoactivatesim/' ?>"><?php echo esc_html__('Activate SIM card', 'yes.my'); ?></a></h6>
                         </li>
                         <li class="mega-get-help">
-                            <h6><a href="<?php echo $site_url_menu . '/support/payment-methods/' ?>">Payment method</a></h6>
+                            <h6><a href="<?php echo $site_url_menu . '/support/payment-methods/' ?>"><?php echo esc_html__('Payment method', 'yes.my'); ?></a></h6>
                         </li>
                         <li class="mega-get-help">
-                            <h6><a href="<?php echo $site_url_menu . '/shop/existing-customers/how-to-get-databack/' ?>">Get databack</a></h6>
+                            <h6><a href="<?php echo $site_url_menu . '/shop/existing-customers/how-to-get-databack/' ?>"><?php echo esc_html__('Get databack', 'yes.my'); ?></a></h6>
                         </li>
-                        <li class="mega-get-help"><a href="/faq">GO TO HELP CENTRE <i class="fas fa-chevron-right"></i></a></li>
+                        <li class="mega-get-help"><a href="/faq"><?php echo esc_html__('GO TO HELP CENTRE', 'yes.my'); ?> <i class="fas fa-chevron-right"></i></a></li>
                     </div>
                 </div>
 
@@ -2995,6 +3055,10 @@ if ($lang == "en-US"){
 
             if ((jQuery('body.page-template-default').hasClass('page-id-20027')) || jQuery('body.page-template-default').hasClass('page-id-19782')) {
                 jQuery('#menu-item-20033 a').addClass('active');
+            }
+
+            if ((jQuery('body.page-template-default').hasClass('page-id-48121')) || jQuery('body.page-template-default').hasClass('page-id-48122')) {
+                jQuery('#menu-item-20034 a').addClass('active');
             }
 
             if ((jQuery('body.page-template-default').hasClass('page-id-31004')) || jQuery('body.page-template-default').hasClass('page-id-31006')) {

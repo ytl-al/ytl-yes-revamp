@@ -10,14 +10,29 @@ $_terms_args = [
     'parent'     => $term_id,
     'hide_empty' => true
 ];
+
+if ( isset ($terms_exclude) ) {
+    $_terms_args['exclude'] = $terms_exclude;
+} else if ( isset ($exclude) ) {
+    $_terms_args['exclude'] = $exclude;
+}
+
 $nested_terms_query = isset( $nested_terms_query ) ? array_merge( $_terms_args, $nested_terms_query ) : $_terms_args;
+
 $_nested_categories = get_terms( betterdocs()->query->terms_query( apply_filters( 'betterdocs_nested_terms_args', $nested_terms_query ) ) );
 
 if ( empty( $_nested_categories ) ) {
     return;
 }
 
-
+// if there have list icon url from customizer or shortcodes attribites format it to $list_icon_name
+if ( $layout_type == 'template' && isset ( $list_icon_url ) && $list_icon_url) {
+    $list_icon_name = array(
+        'value' => array(
+            'url' => $list_icon_url
+        )
+    );
+}
 
 $_page_id      = null;
 $_category_ids = [];
@@ -28,8 +43,10 @@ if ( is_single() ) {
     $_is_single    = true;
     $_page_id      = get_the_ID();
     $_category_ids = wp_get_post_terms( $_page_id, 'doc_category', ["fields" => "ids"] );
-    $ancestors = get_ancestors( $_category_ids[0], 'doc_category' );
-    $_category_ids = array_merge( $_category_ids, $ancestors );
+    if ( !empty ($_category_ids) && ! is_wp_error( $_category_ids ) ) {
+        $ancestors = get_ancestors( $_category_ids[0], 'doc_category' );
+        $_category_ids = array_merge( $_category_ids, $ancestors );
+    }
 }
 
 $_multiple_kb = isset( $multiple_knowledge_base ) ? $multiple_knowledge_base : false;
@@ -68,9 +85,9 @@ foreach ( $_nested_categories as $_nested_category ) :
                 betterdocs()->template_helper->icon( 'arrow-right', true );
                 betterdocs()->template_helper->icon( 'arrow-down', true );
             ?>
-            <a href="#"><?php _e( $_nested_category->name );?></a>
+            <a href="#"><?php _e( $_nested_category->name, 'betterdocs' );?></a>
         </span>
-        <ul class="<?php esc_attr_e( $classes );?>">
+        <ul class="<?php echo esc_attr( $classes );?>">
             <?php
                 $_nested_docs_args['term_id'] = $_nested_category->term_id;
                 $_nested_docs_args['term_slug'] = $_nested_category->slug;

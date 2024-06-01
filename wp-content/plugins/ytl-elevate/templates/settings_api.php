@@ -1,6 +1,6 @@
 <?php
 
-$apiSetting =  \Inc\Base\Model::getAPISettings();
+$apiSetting =  (new \Inc\Base\Model)->getAPISettings();
 ?>
 
     <!-- This file should primarily consist of HTML with a little bit of PHP. -->
@@ -30,10 +30,15 @@ $apiSetting =  \Inc\Base\Model::getAPISettings();
                         <td><label>WEB API URL</label></td>
                         <td><input type="text" name="url" class="form-control" value="<?= @$apiSetting['url']; ?>" size="50"></td>
                     </tr>
+                    <tr>
+                        <td><label>CreditCheck API URL</label></td>
+                        <td><input type="text" name="creditcheck_url" class="form-control" value="<?= @$apiSetting['creditcheck_url']; ?>" size="50"></td>
+                    </tr>
 					<tr>
                         <td><label>Mobile API URL</label></td>
                         <td><input type="text" name="mobile_url" class="form-control" value="<?= @$apiSetting['mobile_url']; ?>" size="50"></td>
                     </tr>
+                    
 					<tr>
                         <td><label>eKYC URL</label></td>
                         <td><input type="text" name="ekyc_url" class="form-control" value="<?= @$apiSetting['ekyc_url']; ?>" size="50"></td>

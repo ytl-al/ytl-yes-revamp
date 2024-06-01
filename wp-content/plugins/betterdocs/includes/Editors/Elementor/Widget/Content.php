@@ -89,7 +89,6 @@ class Content extends ContentBaseWidget {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'betterdocs_content_typography',
-                'scheme'   => Schemes\Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .betterdocs-content'
             ]
         );
@@ -99,10 +98,6 @@ class Content extends ContentBaseWidget {
             [
                 'label'     => __( 'Doc Content Color', 'betterdocs' ),
                 'type'      => Controls_Manager::COLOR,
-                'scheme'    => [
-                    'type'  => Schemes\Color::get_type(),
-                    'value' => Schemes\Color::COLOR_1
-                ],
                 'selectors' => [
                     '{{WRAPPER}} .betterdocs-content' => 'color: {{VALUE}}'
                 ]
@@ -114,10 +109,6 @@ class Content extends ContentBaseWidget {
             [
                 'label'     => __( 'Content Title Color', 'plugin-domain' ),
                 'type'      => Controls_Manager::COLOR,
-                'scheme'    => [
-                    'type'  => Schemes\Color::get_type(),
-                    'value' => Schemes\Color::COLOR_1
-                ],
                 'selectors' => [
                     '{{WRAPPER}} .betterdocs-content .betterdocs-content-heading' => 'color: {{VALUE}}'
                 ]
@@ -128,7 +119,6 @@ class Content extends ContentBaseWidget {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'betterdocs_content_title_typography',
-                'scheme'   => Schemes\Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .betterdocs-content .betterdocs-content-heading'
             ]
         );

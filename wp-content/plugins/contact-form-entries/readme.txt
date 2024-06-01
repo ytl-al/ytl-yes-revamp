@@ -1,26 +1,26 @@
-=== Contact Form Entries - Contact Form 7, WPforms and more ===
+=== Database for Contact Form 7, WPforms, Elementor forms ===
 Contributors: crmperks, sbazzi
-Tags: contact form 7, contact form 7 database, contact form db, save contact form, wpforms database
+Tags: contact form 7, contact form 7 database, Elementor forms database, contact form entries, wpforms database
 Requires at least: 3.8
-Tested up to: 6.2
-Stable tag: 1.3.1
-Version: 1.3.1
+Tested up to: 6.5
+Stable tag: 1.3.9
+Version: 1.3.9
 Requires PHP: 5.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Saves Contact Form 7, WPforms, CRM Perks Forms and many other contact form submissions to database.
+Saves Contact Form 7, WPforms,Elementor Forms, CRM Perks Forms and many other contact form submissions to database.
 
 == Description ==
 
-Contact Form 7 Entries Plugin automatically saves form submissions from Contact Form 7, WPforms, CRM Perks Forms and many other popular contact form plugins to wordpress database when anyone submits a form. Learn more our forms builder and entries at [crmperks.com](https://www.crmperks.com/plugins/contact-form-plugins/crm-perks-forms/?utm_source=wordpress&utm_medium=directory&utm_campaign=readme)
+Contact Form 7 Entries Plugin automatically saves form submissions from Contact Form 7, WPforms, Elementor Forms, CRM Perks Forms and many other popular contact form plugins to wordpress database when anyone submits a form. Learn more our forms builder and entries at [crmperks.com](https://www.crmperks.com/plugins/contact-form-plugins/crm-perks-forms/?utm_source=wordpress&utm_medium=directory&utm_campaign=readme)
 
 == Supported Contact Forms ==
 
 * [Contact Form 7](https://wordpress.org/plugins/contact-form-7/)
 * [CRM Perks Forms](https://wordpress.org/plugins/crm-perks-forms/)
 * [WPForms](https://wordpress.org/plugins/wpforms-lite/)
-* [Elementor Forms](https://elementor.com/widgets/form-widget/) (Premium feature)
+* [Elementor Forms](https://elementor.com/widgets/form-widget/) 
 
 == Contact form 7 entries features ==
 
@@ -72,7 +72,6 @@ You can add notes to any contact form entry and you can edit old notes. Also you
 <p>Following features are available in premium add-ons <a href="https://www.crmperks.com/plugins/contact-form-plugins/crm-forms/?utm_source=wordpress&utm_medium=directory&utm_campaign=readme">Get all add-ons and CRM Perks forms</a>.</p>
 <ul>
 <li>Don't miss out on any potential leads. Collect data in real time as it is entered on your forms.</li>
-<li>Save Elementor Forms submissions in database.</li>
 <li>Search field and Download CSV button for front end entries table.</li>
 <li>Complete clickable links for file fields in front end entries table.</li>
 <li>Google Analytics Parameters and Geolocation of a visitor who submitted the form.</li>
@@ -86,6 +85,8 @@ You can add notes to any contact form entry and you can edit old notes. Also you
 == Want to send data to crm ==
 We have Premium Extensions for 20+ CRMs.[View All CRM Extensions](https://www.crmperks.com/plugin-category/contact-form-plugins/?utm_source=wordpress&utm_medium=directory&utm_campaign=readme)
 
+* [Contact Form Klaviyo Plugin](https://www.crmperks.com/plugins/contact-form-plugins/klaviyo-for-contact-form-7-elementor-wpforms-formidable-and-ninja-forms/?utm_medium=referral&utm_source=wordpress&utm_campaign=Entries+Readme&utm_content=WP)
+* [Contact Form Google Sheets Plugin](https://www.crmperks.com/plugins/contact-form-plugins/contact-form-google-sheets-integration?utm_medium=referral&utm_source=wordpress&utm_campaign=Entries+Readme&utm_content=WP)
 * [Contact Form Streak Plugin](https://www.crmperks.com/plugins/contact-form-plugins/contact-form-streak-plugin/?utm_medium=referral&utm_source=wordpress&utm_campaign=Entries+Readme&utm_content=WP)
 * [Contact Form Freshdesk Plugin](https://www.crmperks.com/plugins/contact-form-plugins/contact-form-freshdesk-plugin/?utm_medium=referral&utm_source=wordpress&utm_campaign=Entries+Readme&utm_content=WP)
 * [Contact Form 7 Pardot](https://www.crmperks.com/plugins/contact-form-plugins/contact-form-pardot-plugin/?utm_medium=referral&utm_source=wordpress&utm_campaign=Entries+Readme&utm_content=WP)
@@ -121,7 +122,7 @@ Simply add a "GDPR Agreement" checkbox in contact form 7 and make it a required 
 * You can add notes and send emails to elementor forms entries. 
 
 
-= WP Forms database =
+= WPForms database =
 
 * Simply install our Contact form entries plugin.
 * Submit any wp form, it will saved in wordpress database.
@@ -166,6 +167,31 @@ Contact form 7 entries plugin allows you to save contact form 7 entries to local
 
 
 == Changelog ==
+
+= 1.3.9 =
+* fixed "mfile field xss" issue.
+
+= 1.3.8 =
+* fixed "mfile field xss" issue.
+
+= 1.3.7 =
+* fixed "mfile field" issue.
+
+= 1.3.6 =
+* fixed "mfile field" issue.
+
+= 1.3.5 =
+* fixed "one link for multiple files in leads table" issue.
+
+= 1.3.4 =
+* fixed "xss issue with font-size attribute of table".
+
+= 1.3.3 =
+* fixed "ninja forms hidden fields" issue.
+* fixed "php file type not allowed".
+
+= 1.3.2 =
+* fixed "null to wp_post_kses" issue.
 
 = 1.3.1 =
 * fixed "csv file file url incomplete" issue.

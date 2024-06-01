@@ -33,7 +33,7 @@
 	<?php wp_head(); ?>
 	
 	<script type="text/javascript">var $ = jQuery.noConflict();</script>
-
+<script src="/wp-content/themes/yes-twentytwentyone/assets/js/clevertap-script.js"></script>
 	<?php get_template_part('template-parts/header/tracking'); ?>
 </head>
 

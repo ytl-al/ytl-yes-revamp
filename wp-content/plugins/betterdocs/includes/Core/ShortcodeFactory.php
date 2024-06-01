@@ -13,6 +13,7 @@ use WPDeveloper\BetterDocs\Shortcodes\SocialShare;
 use WPDeveloper\BetterDocs\Shortcodes\CategoryGrid;
 use WPDeveloper\BetterDocs\Shortcodes\CategoryList;
 use WPDeveloper\BetterDocs\Shortcodes\FeedbackForm;
+use WPDeveloper\BetterDocs\Shortcodes\ReadingTime;
 use WPDeveloper\BetterDocs\Dependencies\DI\Container;
 
 class ShortcodeFactory extends Base {
@@ -44,7 +45,8 @@ class ShortcodeFactory extends Base {
             FeedbackForm::class,
             FaqClassic::class,
             FaqList::class,
-            Reactions::class
+            Reactions::class,
+            ReadingTime::class
         ]);
     }
 

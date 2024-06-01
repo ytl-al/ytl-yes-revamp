@@ -3,6 +3,7 @@
 namespace WPDeveloper\BetterDocs\Core;
 
 use WP_Query;
+use WP_Error;
 use WPDeveloper\BetterDocs\Utils\Base;
 
 class FAQBuilder extends Base {

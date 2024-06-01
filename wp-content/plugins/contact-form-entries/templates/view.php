@@ -432,7 +432,7 @@ color: #666;
         $fields[$k]=array('name'=>$k,'label'=>str_replace(array('_','-'),' ',$k),'type'=>'text');   
        }   
       }
-  foreach($fields as $field){ //var_dump($field['basetype']); 
+  foreach($fields as $field){ //var_dump($field['type']); 
   
   if(!isset($field['name']) || !empty($field['vx_skip_edit'])){  continue; }
   $field_id=(string)$field['name'];
@@ -470,9 +470,10 @@ if(is_array($value)){
    $value=nl2br($value);
 }
 else if(in_array($type,array('checkbox','radio'))){  
-    $is_key=true;
+   
 
    if(!empty($field['values']) && is_array($field['values'])){
+        $is_key=true;
    foreach($field['values']  as $v){
    $val=$text=$v;
    if(is_array($v)){
@@ -517,7 +518,7 @@ else if(in_array($type,array('select','multiselect','state','country'))){
 ?>
 <select name="<?php echo esc_html($i_name) ?>" id="vx_<?php echo esc_html($field['name']); ?>" <?php  echo esc_html($multiple)  ?> class="vx_input vx_input_100" <?php echo esc_html($req) ?>>
 <?php
- if(!empty($field['values']) && is_array($field['values'])){
+ if(!empty($field['values']) && is_array($field['values'])){ 
  foreach($field['values'] as $v){
         $val=$text=$v;
    if(is_array($v)){
@@ -543,18 +544,18 @@ else if(in_array($type,array('select','multiselect','state','country'))){
 </select>
 <?php
 }
-else if($type == 'file'){
+else if($type == 'file'){ 
     if(!is_array($value)){
      $files_arr=array($value);   
     }else{
         $files_arr=$value;
     } 
-    $value='';
+    $value=''; 
 foreach($files_arr as $k=>$val){
 $value.=$file_value=vxcf_form::file_link($val);
     ?>
 <div class="vx_file_single">
-<?php echo wp_kses_post($file_value); ?>  
+<?php echo esc_url($file_value); ?>  
   <div>
   <input type="hidden" name="files_<?php echo esc_html($f_name.'['.$k.']') ?>" value="<?php echo esc_html($val) ?>" />
   <input type="file" id="vx_<?php echo esc_html($field['name']); ?>" <?php echo esc_html($req) ?> class="vx_input" name="<?php echo esc_html($f_name).'[]' ?>" autocomplete="off">
@@ -594,7 +595,7 @@ $value=is_array($value) ? implode(', ',$value) : $value;
 </div>
 <div class="vx_value">
   <?php
-    if($is_key){$value=$key_val;}
+    if($is_key && !empty($key_val)){$value=$key_val;}  
 //      
   if($type == 'email' && filter_var($value, FILTER_VALIDATE_EMAIL)){ //it is a url    
   ?>

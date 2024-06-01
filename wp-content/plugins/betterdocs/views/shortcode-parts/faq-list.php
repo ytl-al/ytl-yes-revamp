@@ -15,7 +15,7 @@ if ( $faqs->have_posts() ) {
         echo '</li>';
 
         if ( $faq_schema ) {
-            $faq_json['mainEntity'][] = [
+            $faq_json = [
                 '@type'          => 'Question',
                 'name'           => get_the_title(),
                 'acceptedAnswer' => [
@@ -23,8 +23,7 @@ if ( $faqs->have_posts() ) {
                     'text'  => get_the_content()
                 ]
             ];
-
-            $GLOBALS['betterdocs_faq_schema'] = $faq_json;
+            $GLOBALS['betterdocs_faq_schema_main_entity'][] = $faq_json;
         }
     endwhile;
     wp_reset_postdata();

@@ -2,9 +2,9 @@
 /**
 * Plugin Name: Contact Form Entries
 * Description: Save form submissions to the database from <a href="https://wordpress.org/plugins/contact-form-7/">Contact Form 7</a>, <a href="https://wordpress.org/plugins/ninja-forms/">Ninja Forms</a>, <a href="https://elementor.com/widgets/form-widget/">Elementor Forms</a> and <a href="https://wordpress.org/plugins/wpforms-lite/">WP Forms</a>.
-* Version: 1.3.1
+* Version: 1.3.9
 * Requires at least: 3.8
-* Tested up to: 6.2
+* Tested up to: 6.5
 * Author URI: https://www.crmperks.com
 * Plugin URI: https://www.crmperks.com/plugins/contact-form-plugins/crm-perks-forms/
 * Author: CRM Perks
@@ -26,7 +26,7 @@ class vxcf_form {
   public static $type = "vxcf_form";
   public static $path = ''; 
 
-  public static  $version = '1.3.1';
+  public static  $version = '1.3.9';
   public static $upload_folder = 'crm_perks_uploads';
   public static $db_version='';  
   public static $base_url='';  
@@ -73,6 +73,7 @@ wp_register_script( 'vx-tablesorter-js', self::$base_url. 'js/jquery.tablesorter
 wp_register_script( 'vx-tablepager-js', self::$base_url. 'js/jquery.tablesorter.pager.js',array('jquery') );
 wp_register_script( 'vx-tablewidgets-js', self::$base_url. 'js/jquery.tablesorter.widgets.js',array('jquery') );
 
+//$this->get_form_fields('na_1'); die();
 if(!empty($_GET['vx_crm_form_action']) && $_GET['vx_crm_form_action'] == 'download_csv'){
   $key=$this->post('vx_crm_key');
    $form_ids=get_option('vx_crm_forms_ids'); 
@@ -85,7 +86,8 @@ if(!empty($_GET['vx_crm_form_action']) && $_GET['vx_crm_form_action'] == 'downlo
      }  
    } 
 }
-//$form=vxcf_form::get_form_fields('el_2669e21_5190');
+//$form=vxcf_form::get_form_fields('el_2669e21_5190'); var_dump($form);
+//$form=vxcf_form::get_form_fields('wp_5137'); var_dump($form); die();
 //$form=cfx_form::get_form('1'); var_dump($form); die();
 
 }
@@ -261,7 +263,7 @@ vxcf_form::$form_fields=$fields;
   
       $table_id='';
     if(!empty($atts['id'])){
-   $table_id='id="'.esc_attr($atts['font-size']).'"';   
+   $table_id='id="'.esc_attr($atts['id']).'"';   
   }
   //var_dump($fields);
   $limit='20';
@@ -598,13 +600,13 @@ if($track){
 $form_arr=array('id'=>$form_data['id'],'name'=>'WP Forms','fields'=>$form_data['fields']);
 if(!empty($form_data['fields']['settings']['form_title'])){
     $form_arr['name']=$form_data['fields']['settings']['form_title'];
-}
+} 
 $this->create_entry($lead,$form_arr,'wp','',$track); 
 }
 //var_dump($fields); die();
 }
 public function create_entry_el( $record){
-    if(empty(self::$is_pr)){ return; }
+
     $data=$record->get_formatted_data();
     $form_id_p=$this->post('form_id');
     $post_id_p=$this->post('post_id');
@@ -626,7 +628,7 @@ if($v['type'] == 'upload'){
 }
 $lead[$v['id']]=$val;
 }    } }
-if($track){
+if($track ){ //&& !empty(self::$is_pr)
   $upload_files=$this->copy_files($upload_files); 
 }  
        if(is_array($upload_files)){
@@ -689,39 +691,47 @@ $uploaded_files=$this->copy_files($uploaded_files);
 $form_title=$form->title();
 $tags=vxcf_form::get_form_fields('cf_'.$form_id); 
 $post_data=$submission->get_posted_data();
-
- $lead=array();
+//var_dump($post_data); die();
+ $lead=array(); 
 if(is_array($post_data)){
   foreach($post_data as $k=>$val){
-    if(in_array($k,array('vx_width','vx_height','vx_url'))){ continue; } 
+    if(in_array($k,array('vx_width','vx_height','vx_url','g-recaptcha-response'))){ continue; } 
        if(isset($tags[$k])){
           $v=$tags[$k];  //$v is empty for non form fields 
       }
      $name=$k;  //$v['name'] //if empty then $v is old
-
+//var_dump($v);
  if(isset($uploaded_files[$name])){
   $val=$uploaded_files[$name];
    }
 
-   if( !empty($val) && isset($v['basetype']) && $v['basetype'] == 'mfile' && function_exists('dnd_get_upload_dir') ){
+   //disabled it @feb-2024 , dnd plugin now uses correct file urls because it converts normal file url to http://localhost/wp6/wp-content/uploads/wp_dndcf7_uploads/wpcf7-files/
+ /*  if( !empty($val) && isset($v['type_']) && $v['type_'] == 'mfile' && function_exists('dnd_get_upload_dir') ){
       $dir=dnd_get_upload_dir(); 
      $f_arr=array();
       foreach($val as $file){
      $file_name=explode('/',$file);
-     if(count($file_name)>1){
+     if(count($file_name)>1){ //var_dump($file_name,$file);  
       $f_arr[]=$dir['upload_url'].'/'.$file_name[1];    
      }
       }
-        
+       
    $val=$f_arr;   
-   }  
+   }*/
+if( !empty($val) && is_array($val) && isset($v['type_']) && $v['type_'] == 'mfilea'){ //escape wpcf7-files/testt'"><img src=x onerror=alert(1).jpg
+   $temp_val=array();
+    foreach($val as $kk=>$vv){
+     $temp_val[$kk]=sanitize_url($vv);   
+    }
+$val=$temp_val;
+}
     if(!isset($uploaded_files[$name])){
      $val=wp_unslash($val);   
     }        
   $lead[$k]=$val;          
   }  
 }
-
+//var_dump($lead,$post_data); die('-----------');
 
 $form_arr=array('id'=>$form_id,'name'=>$form_title,'fields'=>$tags);
 $this->create_entry($lead,$form_arr,'cf','',$track);
@@ -1149,12 +1159,20 @@ if(is_array($fields)){
       
       $name=$v['name'];
      if(isset($detail[$name])){
-         $val=$detail[$name];
-     if($v['type'] == 'file'){
-          $val= wp_get_attachment_url($val) ;
-             $base_url=get_site_url();
-              $val=str_replace($base_url,trim(ABSPATH,'/'),$val);
-    $uploaded_files_form[$name]=$val;   
+         $val=maybe_unserialize($detail[$name]);
+     if($v['type'] == 'file'){ 
+         $base_url=get_site_url();   
+          if(!is_array($val)){
+              $val=array($val);
+          }
+          $files=array();
+          foreach($val as  $vv){
+              if(!empty($vv)){
+              $vv= wp_get_attachment_url($vv) ;     
+              $files[]=str_replace($base_url,trim(ABSPATH,'/'),$vv);
+          } }
+    $uploaded_files_form[$name]=$files;
+             
      }     
   $lead[$name]=$detail[$name];          
      }
@@ -1168,7 +1186,7 @@ if($track){
        $lead[$k]=$v;    
        }  
    } 
-}
+} //var_dump($lead,$uploaded_files_form); die();
 global $wpdb;
 $table=$wpdb->prefix.'frm_forms';
 $sql=$wpdb->prepare("Select name from $table where id=%d",$form_id);
@@ -1413,12 +1431,12 @@ $upload=vxcf_form::get_upload_dir();
     $base_url=$upload['url'];
             }   
   $file_url=$base_url.$file_url;     
-    } 
+    }  
      if(filter_var($file_url,FILTER_VALIDATE_URL)){
           $file_arr=explode('/',$file_url);
     $file_name=$file_arr[count($file_arr)-1];
-$file_url="<div><a href='$file_url' target='_blank'>".$file_name."</a></div>";
-     }
+$file_url='<div><a href="'.esc_url($file_url).'" target="_blank">'.esc_html($file_name)."</a></div>";
+     } 
      return $file_url;
 }
 public function get_ip(){
@@ -1735,10 +1753,32 @@ $forms =cfx_form::get_forms();
     } 
  ///////   
     }
-    
-    if(!empty($all_forms_db['el'])){
-        $all_forms['el']=$all_forms_db['el'];
+    if(defined('ELEMENTOR_PRO_VERSION') ){  //&& class_exists('ElementorPro\\Plugin')
+    global $wpdb;
+$data = $wpdb->get_results( "SELECT m.post_id, m.meta_value,p.post_title FROM $wpdb->postmeta m inner join $wpdb->posts p on(m.post_id=p.ID) WHERE p.post_status='publish' and m.meta_key = '_elementor_data' limit 70" , ARRAY_A  ); //__elementor_forms_snapshot
+  $forms_arr=array();  
+  
+foreach($data as $v){
+    $elforms=json_decode($v['meta_value'],true); 
+    $elforms=self::find_el_forms($elforms);   
+    foreach($elforms as $form){
+        $id=$form['id'].'_'.$v['post_id'];
+   
+    $forms_arr[$id]=$form['settings']['form_name'].' - '.substr($v['post_title'],0,200); 
+         
     }
+}
+if(!empty($all_forms_db['el']['forms'])){ 
+ foreach($all_forms_db['el']['forms'] as $k=>$v){
+   if(!isset($forms_arr[$k])){ $forms_arr[$k]=$v; }
+ }   
+    
+}  
+if(!empty($forms_arr)){
+$all_forms['el']=array('label'=>'Elementor Forms','forms'=>$forms_arr); }
+//   
+} 
+ 
    if(class_exists('GFFormsModel')){
      $gf_forms=GFFormsModel::get_forms();
       $forms_arr=array();
@@ -1946,7 +1986,7 @@ if(isset($_GET['vx_crm_key'])){
     
 }
 if(is_array($tags)){
-  foreach($tags as $tag){
+  foreach($tags as $tag){ //var_dump($tag);
      if(is_object($tag)){ $tag=(array)$tag; }
      
    if(!empty($tag['name'])){
@@ -1956,6 +1996,7 @@ if(is_array($tags)){
        $field['label']=ucwords(str_replace(array('-','_')," ",$tag['name']));
        $field['type_']=$tag['type'];
        $field['type']=$tag['basetype'];
+       if($tag['basetype'] == 'mfile'){ $field['type']='file'; }
        $field['req']=strpos($tag['type'],'*') !==false ? 'true' : '';
        
         if($field['type'] == 'select' && !empty($tag['options']) && array_search('multiple',$tag['options'])!== false){
@@ -1973,7 +2014,7 @@ if(is_array($tags)){
                }
            }
          $field['values']=$ops;  
-       }
+       } //var_dump($field);
    $fields[$id]=$field;    
    }   
   }  
@@ -2047,7 +2088,7 @@ break;
 case'na':
 if(class_exists('Ninja_Forms')){
 
-$form_fields = Ninja_Forms()->form( $id )->get_fields();
+$form_fields = Ninja_Forms()->form( $id )->get_fields(); //var_dump($form_fields); die('----------');
 foreach ($form_fields as $obj) {
 $field=array();
 if( is_object( $obj ) ) {
@@ -2060,7 +2101,7 @@ $arr=array('name'=>$field['id']);
  if($type == 'textbox'){ $type='text'; }
  if($type == 'starrating'){ $type='text'; }
  if($type == 'file_upload'){ $type='file'; }
- if(in_array($type,array('spam','confirm')) || !isset($field['required']) ){ continue; }
+ if(in_array($type,array('spam','confirm','submit','repeater','save','html','hr'))  ){ continue; } //|| !isset($field['required'])  // it is not set for hidden fields that is why removed it
   if($type == 'checkbox'){
  $arr['values']=array(array('text'=>$field['label'],'value'=>'1'));     
  }
@@ -2094,7 +2135,7 @@ if(count($fields_arr)>0){
         if(!empty($field['options'])){
            $field['values']=maybe_unserialize($field['options']); 
         }
-        $fields[]=$field;
+        $fields[$field['id']]=$field;
     }
 }
 break;
@@ -2258,34 +2299,41 @@ foreach($be_fields as $k=>$v){
 break;
 case'vxad':
  global $vxcf_crm;
-  if(method_exists($vxcf_crm,'get_form_fields')){
+ if(method_exists($vxcf_crm,'get_form_fields')){
  $fields=$vxcf_crm->get_form_fields(true);
   }
-  
-
 break;
-case'el':
+case'el_new':
 
 if(isset($form_arr[2])){
 $post_id=$form_arr[2];
-$forms=get_post_meta($post_id,'_elementor_data',true);
-$forms=json_decode($forms,true);
-if(!empty($forms)){
-$form=self::find_el_form($forms,$id);   
+
+  $formsp=get_post_meta($post_id,'__elementor_forms_snapshot',true);
+  $form=array();
+  if(!empty($formsp)){
+  $forms=json_decode($formsp,true);    
+  foreach($forms as $v){
+    if($v['id'] == $id){
+     $form=$v;   
+    }  
+  }
 $fields=array();
-if(!empty($form['form_fields'])){
-  foreach($form['form_fields'] as $tag){
-   if(!empty($tag['custom_id']) && !in_array($tag['field_type'],array('html','step','honeypot','recaptcha','recaptcha_v3'))){
-       $field=array('id'=>$tag['custom_id']);
-       $field['name']=$tag['custom_id'];
-       $field['label']=$tag['field_label'];
-       $field['type']=$tag['field_type'];
+if(!empty($form['form'])){
+  foreach($form['form'] as $tag){ 
+   if(!empty($tag['id']) ){
+       if(empty($tag['type'])){ $tag['type']=$tag['id']; }
+       if(!in_array($tag['type'],array('html','step','honeypot','recaptcha','recaptcha_v3'))){
+       $field=array('id'=>$tag['id']);
+       $field['name']=$tag['id'];
+       $field['label']=$tag['label'];
+       $field['type']=$tag['type'];
        $field['req']=!empty($tag['required']) ? 'true' : '';
   if(!empty($tag['allow_multiple']) ){
   $field['type']='multiselect';   
   }
-  if($field['type'] == 'acceptance'){
+  if($field['type'] == 'acceptance'){ 
       $field['type']='checkbox';
+      $field['values']=array(array('label'=>$tag['acceptance_text'],'value'=>'on'));
   }
   if($field['type'] == 'upload'){
       $field['type']='file';
@@ -2301,7 +2349,53 @@ $ops[]=array('label'=>$v_arr[0],'value'=>$v_arr[1]);
 $field['values']=$ops;  
    }
    $fields[$tag['custom_id']]=$field;    
-   }   
+   }   }
+  }  
+} 
+}
+
+}
+break;
+case'el':
+if(isset($form_arr[2])){
+$post_id=$form_arr[2];
+$forms=get_post_meta($post_id,'_elementor_data',true);
+$forms=json_decode($forms,true);
+if(!empty($forms)){
+$form=self::find_el_form($forms,$id); 
+
+if(!empty($form['form_fields'])){
+  foreach($form['form_fields'] as $tag){ 
+   if(!empty($tag['custom_id']) ){
+       if(empty($tag['field_type'])){ $tag['field_type']=$tag['custom_id']; }
+       if(!in_array($tag['field_type'],array('html','step','honeypot','recaptcha','recaptcha_v3'))){
+       $field=array('id'=>$tag['custom_id']);
+       $field['name']=$tag['custom_id'];
+       $field['label']=$tag['field_label'];
+       $field['type']=$tag['field_type'];
+       $field['req']=!empty($tag['required']) ? 'true' : '';
+  if(!empty($tag['allow_multiple']) ){
+  $field['type']='multiselect';   
+  }
+  if($field['type'] == 'acceptance'){ 
+      $field['type']='checkbox';
+      $field['values']=array(array('label'=>$tag['acceptance_text'],'value'=>'on'));
+  }
+  if($field['type'] == 'upload'){
+      $field['type']='file';
+  }
+if(!empty($tag['field_options'])){
+$opts_array=explode("\n",$tag['field_options']);
+$ops=array();
+foreach($opts_array as $v){
+$v_arr=explode('|',$v); 
+if(!isset($v_arr[1])){ $v_arr[1]=$v_arr[0]; }
+$ops[]=array('label'=>$v_arr[0],'value'=>$v_arr[1]);  
+}
+$field['values']=$ops;  
+   }
+   $fields[$tag['custom_id']]=$field;    
+   }   }
   }  
 } 
 }
@@ -2436,7 +2530,7 @@ case'wc':
   }
 
 break;
-case'wp':
+case'wp': 
 if(function_exists('wpforms') && method_exists(wpforms()->form,'get')){
 $forms_arr=wpforms()->form->get( $id ); 
 if(!empty($forms_arr)){
@@ -2458,7 +2552,7 @@ $label=isset($v['label']) ? $v['label'] : $type;
   $field['req']=!empty($v['required']) ? true : false; 
         if(in_array($type,array('radio','checkbox','select'))){
         $is_val=false;
-        if(in_array($v['type'],array('payment-select','payment-multiple'))){ $is_val=true; }
+        if(in_array($v['type'],array('payment-select','payment-multiple'))  ){ $is_val=true; } //|| (isset($v['show_values'])&& $v['show_values'] ='1' ) front form submission always sends label , not value , we will have to find value from form fields and store real value 
     $choices=array();
     if(!empty($v['choices'])){
      foreach($v['choices'] as $c){
@@ -2468,7 +2562,7 @@ $label=isset($v['label']) ? $v['label'] : $type;
     }   
   $field['values']=$choices;   
         }
-        $fields[]=$field; 
+        $fields[$v['id']]=$field; 
   //  }
     
 }
@@ -2659,7 +2753,7 @@ public static function post($key, $arr="") {
 }
 public static function clean($var){
     if ( is_array( $var ) ) {
-        return array_map( array('self','clean'), $var );
+        return array_map( array('vxcf_form','clean'), $var );
     } else {
         return  sanitize_text_field(wp_unslash($var));
     }
@@ -2869,6 +2963,22 @@ if(is_array($var) && isset($var[0]) ){
     }
     
 } 
+}
+public static function find_el_forms($var,&$forms=array()){
+
+if(is_array($var) && isset($var[0]) ){        
+    foreach($var as $v){ 
+    if(isset($v['widgetType']) && $v['widgetType'] == 'form'){  
+          $forms[]= $v;  
+        }  
+     if (!empty($v['elements']) &&  is_array( $v['elements'] ) ) { 
+  self::find_el_forms($v['elements'],$forms); 
+    } 
+         
+    }
+    
+}
+return $forms; 
 }
 public static function esc_data( $data ) {
         $xls_chars = array( '=', '+', '-', '@' );

@@ -170,10 +170,17 @@ $path = plugin_basename(__DIR__).'/menu.json';
                                     <li class="nav-item dropdown mega-dropdown">
                                         <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown-businessSolution" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Business Solutions', 'yes.my'); ?></a>
                                         <ul class="dropdown-menu mega-dropdown-menu default-top-menu" aria-labelledby="navbarDropdown">
-                                            <li>
+                                        <h2 class="business-solution"><?php echo esc_html__('BUSINESS SOLUTION', 'yes.my'); ?></h2>
+                                        <li>
+                                               <ul>
+                                                  <li class="dropdown-header">
+                                                    <a href="/business/mobile-plans/"><?php echo esc_html__('Mobile Plans', 'yes.my'); ?></a></li>                                                                                            
+                                               </ul>
+                                            </li>
+                                        <li>
                                                 <ul>
-                                                    <li class="dropdown-header"><?php echo esc_html__('Internet Access', 'yes.my'); ?></li>
-                                                    <?php if (has_nav_menu('bs-internet-access')) wp_nav_menu(['theme_location' => 'bs-internet-access', 'container' => false, 'items_wrap' => '%3$s']); ?>
+                                                    <li class="nav-item dropdown-header"><?php echo esc_html__('Internet Access', 'yes.my'); ?></li>
+                                                  <?php if (has_nav_menu('bs-internet-access')) wp_nav_menu(['theme_location' => 'bs-internet-access', 'container' => false, 'items_wrap' => '%3$s']); ?>
                                                 </ul>
                                             </li>
                                             <li class="nav-item dropdown mega-dropdown">
@@ -188,10 +195,27 @@ $path = plugin_basename(__DIR__).'/menu.json';
                                                     <?php if (has_nav_menu('bs-voice-communication')) wp_nav_menu(['theme_location' => 'bs-voice-communication', 'container' => false, 'items_wrap' => '%3$s']); ?>
                                                 </ul>
                                             </li>
+                                            <!-- <li>
+                                               <ul>
+                                                  <li class="dropdown-header"><?php echo esc_html__('Internet of Things', 'yes.my'); ?></li>                                                                                            
+                                               </ul>
+                                            </li> -->
                                         </ul>
                                     </li>
                                 </ul>
+                                <ul class="navbar-nav campagin">
+                                    <li class="nav-itemn">
+                                    <a class="nav-link" href="/enterprise/yes-biz-wireless-broadband/"><?php echo esc_html__('Yes 5G Biz Wireless Broadband', 'yes.my'); ?> <div class="parent">
+                                            <button class="btn-gradient-2"><span class="badges">NEW</span></button>
+                                        </div></a>
+                                </li>
+                                </ul>
                                 <ul class="navbar-nav">
+                                    <li class="nav-itemn">
+                                    <a class="nav-link" href="/coverage/" ><?php echo esc_html__('5G Coverage', 'yes.my'); ?></a>
+                                </li>
+                                </ul>
+                                <ul class="navbar-nav d-none">
                                     <li class="nav-item dropdown mega-dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Support', 'yes.my'); ?></a>
                                         <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Support</a> -->
@@ -220,7 +244,7 @@ $path = plugin_basename(__DIR__).'/menu.json';
                                         </ul>
                                     </li>
                                 </ul>
-                                <ul class="navbar-nav">
+                                <ul class="navbar-nav d-none">
                                     <li class="nav-item dropdown mega-dropdown">
                                         <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo esc_html__('Get Help', 'yes.my'); ?></a>
                                         <ul class="dropdown-menu mega-dropdown-menu" aria-labelledby="navbarDropdown" id="gethelp">

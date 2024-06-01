@@ -47,6 +47,7 @@ class CategoryGrid extends Block {
             'includeCategories'       => '',
             'excludeCategories'       => '',
             'gridPerPage'             => 9,
+            'subCategoryPerGrid'      => 2,
             'orderBy'                 => 'name',
             'order'                   => 'asc',
             'layout'                  => 'default',
@@ -74,7 +75,10 @@ class CategoryGrid extends Block {
             'gridSpaceRange'          => 10,
             'TABgridSpaceRange'       => 10,
             'MOBgridSpaceRange'       => 10,
-            'buttonText'              => __( 'Explore More', 'betterdocs' )
+            'buttonText'              => __( 'Explore More', 'betterdocs' ),
+            'categoryTitleLink'       => false,
+            'selectKB'                => '',
+            'listIconImageUrl'        => ''
         ];
     }
 
@@ -83,7 +87,7 @@ class CategoryGrid extends Block {
     }
 
     public function view_params() {
-        $attributes =  &$this->attributes;
+        $attributes = &$this->attributes;
 
         $terms_object = [
             'taxonomy'   => 'doc_category',
@@ -114,13 +118,16 @@ class CategoryGrid extends Block {
         }
 
         $_wrapper_classes = [
-            'betterdocs-category-grid-wrapper'
+            'betterdocs-category-grid-wrapper',
+            'betterdocs-blocks-grid'
         ];
+
+        $layout_class = ( $attributes['layout'] === 'default' ) ? 'layout-1' : $attributes['layout'];
 
         $_inner_wrapper_classes = [
             'betterdocs-category-grid-inner-wrapper',
             'layout-flex',
-            $attributes['layout'],
+            $layout_class,
             $attributes['layoutMode'],
             "betterdocs-column-" . $attributes['colRange'],
             "betterdocs-column-tablet-" . $attributes['TABcolRange'],
@@ -142,30 +149,60 @@ class CategoryGrid extends Block {
         ];
 
         $docs_query = [
-            'orderby'        => $attributes['postsOrderBy'],
-            'order'          => $attributes['postsOrder'],
-            'posts_per_page' => $attributes['postsPerPage']
+            'orderby'            => $attributes['postsOrderBy'],
+            'order'              => $attributes['postsOrder'],
+            'posts_per_page'     => $attributes['postsPerPage'],
+            'nested_subcategory' => $attributes['enableNestedSubcategory']
         ];
+
+        $default_multiple_kb = betterdocs()->settings->get( 'multiple_kb' );
+        $kb_slug             = ! empty( $attributes['selectKB'] ) && isset( $attributes['selectKB'] ) ? json_decode( $attributes['selectKB'] )->value : '';
+
+        if ( is_tax( 'knowledge_base' ) && $default_multiple_kb == 1 ) {
+            $object                     = get_queried_object();
+            $terms_object['meta_query'] = [
+                'relation' => 'OR',
+                [
+                    'key'     => 'doc_category_knowledge_base',
+                    'value'   => $object->slug,
+                    'compare' => 'LIKE'
+                ]
+            ];
+        }
+
+        if ( ! empty( $kb_slug ) ) {
+            $terms_object['meta_query'] = [
+                'relation' => 'OR',
+                [
+                    'key'     => 'doc_category_knowledge_base',
+                    'value'   => $kb_slug,
+                    'compare' => 'LIKE'
+                ]
+            ];
+        }
 
         return [
             'wrapper_attr'            => $wrapper_attr,
             'inner_wrapper_attr'      => $inner_wrapper_attr,
-            'terms_query_args'        => $terms_object,
+            'terms_query_args'        => betterdocs()->query->terms_query( $terms_object ),
             'docs_query_args'         => $docs_query,
             'widget_type'             => 'category-grid',
-            'multiple_knowledge_base' => false,
-            'kb_slug'                 => '',
+            'multiple_knowledge_base' => $default_multiple_kb,
+            'nested_terms_query'      => [
+                'number' => $attributes['subCategoryPerGrid']
+            ],
+            'list_icon_url'           => '', // not needed for blocks, provided the prop for formality
+            'layout_type'             => 'block',
             'nested_docs_query_args'  => [
                 'orderby'        => $attributes['postsOrderBy'],
                 'order'          => $attributes['postsOrder'],
                 'posts_per_page' => $attributes['postPerSubcategory']
             ],
-            'list_icon_name'          => [
-                'value' => $attributes['listIcon']
-            ],
+            'list_icon_name'          => ! empty( $attributes['listIconImageUrl'] ) ? ['value' => ['url' => str_replace( 'blob:', '', $attributes['listIconImageUrl'] )]] : ( ! empty( $attributes['listIcon'] ) ? ['value' => ['url' => $attributes['listIcon']]] : ( ! empty( betterdocs()->settings->get( 'docs_list_icon' ) ) ? ['value' => ['url' => betterdocs()->settings->get( 'docs_list_icon' )['url']]] : [] ) ),
             'button_icon'             => [
                 'value' => $attributes['buttonIcon']
-            ]
+            ],
+            'category_title_link'     => $attributes['categoryTitleLink'],
         ];
     }
 }

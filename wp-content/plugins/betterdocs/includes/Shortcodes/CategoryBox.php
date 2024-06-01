@@ -102,6 +102,7 @@ class CategoryBox extends Shortcode {
             'class' => $classes,
             'style' => $styles,
         ];
+        
 
         return [
             'wrapper_attr'          => ['class' => ['betterdocs-category-box-wrapper']],

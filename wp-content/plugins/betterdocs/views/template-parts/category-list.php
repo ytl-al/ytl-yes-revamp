@@ -12,24 +12,67 @@
     if ( is_single() ) {
         $_page_id = get_the_ID();
     }
+
+    // if there have list icon url from settings or customizer or shortcodes attribites format it to $list_icon_name
+    $settings_list_icon = betterdocs()->settings->get( 'docs_list_icon' );
+
+    #for elementor if icon is not selected from settings, and icon attributes are empty, then look for settings, if settings is empty show default icon, else show from settings. If svg from list is selected, then show svg, else show from settings, if settings is empty then show default. Not applicable for sidebar layout-2 elementor
+    if ( isset( $layout_type ) && $layout_type == 'widget' ) {
+        if ( isset( $sidebar_layout ) && $sidebar_layout == 'layout-2' ) { #done to avoid warning for elementor sidebar layout-2
+            $list_icon_name = [];
+        }
+        $list_icon_name = ( array_key_exists( 'value', $list_icon_name ) && array_key_exists( 'library', $list_icon_name ) || array_key_exists( 'value', $list_icon_name ) ) ? ( empty( $list_icon_name['value'] ) && empty( $list_icon_name['library'] ) || empty( $list_icon_name['value'] ) ? ( isset( $settings_list_icon['url'] ) ? ['value' => ['url' => $settings_list_icon['url']]] : [] ) : $list_icon_name ) : ( isset( $list_icon_name['url'] ) ? ['value' => ['url' => $list_icon_name['url']]] : ( isset( $settings_list_icon['url'] ) ? $settings_list_icon['url'] : [] ) );
+    }
+
+    // #for blocks if $list_icon_name is empty, but for category grid block
+    if ( isset( $layout_type ) && $layout_type == 'block' ) {
+        if( empty( $list_icon_name ) && isset( $widget_type ) && $widget_type == 'category-grid' ) {
+            $list_icon_name = [
+                'value'
+            ];
+        }
+    }
+
+
+    #for blocks if $sidebar_layout is passed, then remove the list icon for layout-4
+    if ( isset( $layout_type ) && $layout_type == 'block' ) {
+        if ( isset( $sidebar_layout ) && $sidebar_layout == 'layout-4' ) {
+            $list_icon_name = [
+                'value' => [
+                    'url' => 'list'
+                ]
+            ];
+        }
+    }
+
+    if ( isset( $layout_type ) && ! empty( $layout_type ) && $layout_type == 'template' && isset( $list_icon_url ) && $list_icon_url ) {
+        if ( isset( $list_icon_url ) && $list_icon_url ) {
+            $list_icon_name = [
+                'value' => [
+                    'url' => $list_icon_url
+                ]
+            ];
+        }
+    }
 ?>
 
 <ul class="betterdocs-articles-list">
     <?php
-        if ( $query_args['posts_per_page'] === '' ) $query_args['posts_per_page'] = get_option('posts_per_page');
+        if ( $query_args['posts_per_page'] === '' ) {
+            $query_args['posts_per_page'] = get_option( 'posts_per_page' );
+        }
 
         if ( $query_args['posts_per_page'] == -1 || $query_args['posts_per_page'] > 0 ) {
-            $pos = 'left';
+            $pos  = 'left';
             $icon = 'list';
-            if( ! empty ( $list_icon_position ) ) {
-                if( $list_icon_position == 'right' ) {
+            if ( ! empty( $list_icon_position ) ) {
+                if ( $list_icon_position == 'right' ) {
                     $pos = 'right';
                 }
             }
-            if( ! empty ( $list_icon_name ) ) {
+            if ( ! empty( $list_icon_name ) ) {
                 $icon = $list_icon_name;
             }
-
 
             while ( $posts->have_posts() ): $posts->the_post();
                 $_link_attributes = [
@@ -60,7 +103,10 @@
         if ( (bool) $nested_subcategory && $term instanceof \WP_Term ) {
             $_params = get_defined_vars();
             $_params = isset( $_params['params'] ) ? $_params['params'] : [];
-            $_params = wp_parse_args( ['term_id' => $term->term_id], $_params );
+            $_params = wp_parse_args( ['term_id' => $term->term_id, 'list_icon_url' => $list_icon_url], $_params );
+            if ( $layout_type == 'widget' || $layout_type == 'block' ) {
+                $_params['list_icon_name'] = $list_icon_name;
+            }
             $view_object->get( 'template-parts/nested-categories', $_params );
         }
     ?>

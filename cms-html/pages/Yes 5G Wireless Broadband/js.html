@@ -9,4 +9,22 @@
         }
     }
     window.addEventListener("pageshow", pageShown, false);
+
+    $(document).ready(function() {
+        var url = new URL(window.location.href);
+        if (url.searchParams.get('trx_type') != null && url.searchParams.get('trx_type') == 'roving') {
+            $('a.btn-roving').removeClass('d-none');
+        } else {
+            $('a.btn-store').removeClass('d-none');
+        }
+
+        var urlParams = url.search || ''; // Use empty string as default if url.search is falsy
+        if (urlParams !== '') {
+            $('a.btn-getplan').each(function() { // Removed space between "a." and "btn-getApplePlan"
+                var attrHref = $(this).attr('href');
+                var attrHrefNew = attrHref + urlParams;
+                $(this).attr('href', attrHrefNew);
+            });
+        }
+    });
 </script>

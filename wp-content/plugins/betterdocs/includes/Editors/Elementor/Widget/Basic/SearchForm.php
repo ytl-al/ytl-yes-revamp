@@ -36,7 +36,7 @@ class SearchForm extends BaseWidget {
     }
 
     public function get_script_depends() {
-        return [ 'betterdocs-search' ];
+        return [ 'betterdocs-search', 'betterdocs-pro' ];
     }
 
     /**
@@ -229,6 +229,28 @@ class SearchForm extends BaseWidget {
                 'selectors'  => [
                     '{{WRAPPER}} .betterdocs-searchform' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                 ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'advanced_search_padding',
+            [
+                'label'      => __( 'Search Box Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-searchform' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name'     => 'advanced_search_border',
+                'label'    => esc_html__( 'Search Box Border', 'betterdocs' ),
+                'selector' => '{{WRAPPER}} .betterdocs-searchform'
             ]
         );
 
@@ -440,7 +462,7 @@ class SearchForm extends BaseWidget {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'result_box_item_typography',
-                'selector' => '{{WRAPPER}} .betterdocs-live-search .docs-search-result li a'
+                'selector' => '{{WRAPPER}} .betterdocs-live-search .docs-search-result li a .betterdocs-search-title'
             ]
         );
 
@@ -450,7 +472,7 @@ class SearchForm extends BaseWidget {
                 'label'     => esc_html__( 'Item Color', 'betterdocs' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .betterdocs-live-search .docs-search-result li a' => 'color: {{VALUE}};'
+                    '{{WRAPPER}} .betterdocs-live-search .docs-search-result li a .betterdocs-search-title' => 'color: {{VALUE}};'
                 ]
             ]
         );
@@ -489,7 +511,7 @@ class SearchForm extends BaseWidget {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'result_box_item_category_typography',
-                'selector' => '{{WRAPPER}} .betterdocs-live-search .docs-search-result li span'
+                'selector' => '{{WRAPPER}} .betterdocs-live-search .docs-search-result li span.betterdocs-search-category'
             ]
         );
 
@@ -499,7 +521,7 @@ class SearchForm extends BaseWidget {
                 'label'     => esc_html__( 'Color', 'betterdocs' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .betterdocs-live-search .docs-search-result li span' => 'color: {{VALUE}};'
+                    '{{WRAPPER}} .betterdocs-live-search .docs-search-result li span.betterdocs-search-category' => 'color: {{VALUE}};'
                 ]
             ]
         );

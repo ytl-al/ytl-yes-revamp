@@ -1400,8 +1400,10 @@ footer.footer .wp-block-image {
     display: none;
 }
 
+/*https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/assets/images/img-loading.svg*/
+
 .layer-overlay {
-    background: rgba(0, 0, 0, 0.7) url('https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/assets/images/img-loading.svg') center center no-repeat;
+    background: rgba(0, 0, 0, 0.7) url('https://ytlmarketing.blob.core.windows.net/site/wp-content/themes/yes-twentytwentyone/assets/images/img-loading.svg') center center no-repeat;
     background-size: 200px;
     display: none;
     height: 100%;

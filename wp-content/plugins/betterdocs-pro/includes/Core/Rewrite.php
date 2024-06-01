@@ -2,8 +2,10 @@
 
 namespace WPDeveloper\BetterDocsPro\Core;
 use WPDeveloper\BetterDocs\Core\Rewrite as FreeRewrite;
+use WPDeveloper\BetterDocsPro\Traits\MKB;
 
 class Rewrite extends FreeRewrite {
+    use MKB;
     public function init() {
         parent::init();
 
@@ -32,7 +34,7 @@ class Rewrite extends FreeRewrite {
      * @return void
      */
     public function save_permalink_structure( $_saved, $_settings, $_old_settings ) {
-        if ( $_settings['multiple_kb'] == false ) {
+        if ( isset( $_settings['multiple_kb'] ) && $_settings['multiple_kb'] == false ) {
             $_settings['permalink_structure'] = $this->remove_knowledge_base_placeholder( $_settings['permalink_structure'] );
         }
 
@@ -42,8 +44,11 @@ class Rewrite extends FreeRewrite {
          * This block of code decides whether it needs to be flushed or not.
          * Flush happens after register the post type.
          */
+
+        $old_mkb_setting = isset( $_old_settings['multiple_kb'] ) ? $_old_settings['multiple_kb'] : '';
+        $new_mkb_setting = isset( $_settings['multiple_kb'] ) ? $_settings['multiple_kb'] : '';
         switch ( true ) {
-            case $_settings['multiple_kb'] !== $_old_settings['multiple_kb']:
+            case $new_mkb_setting !==  $old_mkb_setting:
                 $this->database->set_transient( 'betterdocs_flush_rewrite_rules', true );
                 break;
         }
@@ -53,7 +58,19 @@ class Rewrite extends FreeRewrite {
         $base = $this->get_base_slug();
 
         if ( betterdocs()->settings->get( 'multiple_kb', false ) ) {
+            $this->add_rewrite_rule( $base . '/(feed|rdf|rss|rss2|atom)/?$', 'index.php?post_type=docs&feed=$matches[1]' );
+            $this->add_rewrite_rule(
+                $base . '/([^/]+)/(feed|rdf|rss|rss2|atom)/?$',
+                'index.php?knowledge_base=$matches[1]&feed=$matches[2]'
+            );
+
+            $this->add_rewrite_rule(
+                $base . '/([^/]+)/([^/]+)/(feed|rdf|rss|rss2|atom)/?$',
+                'index.php?knowledge_base=$matches[1]&doc_category=$matches[2]&feed=$matches[3]'
+            );
+
             $this->add_rewrite_rule( $base . '/([^/]+)/?$', 'index.php?knowledge_base=$matches[1]' );
+
             $this->add_rewrite_rule(
                 $base . '/([^/]+)/([^/]+)/?$',
                 'index.php?knowledge_base=$matches[1]&doc_category=$matches[2]'
@@ -68,17 +85,11 @@ class Rewrite extends FreeRewrite {
             return $termlink;
         }
 
+        $_kb_terms = $this->kb_terms($term, $taxonomy);
         $_kb_slug = betterdocs_pro()->multiple_kb->get_kb_slug();
 
-        if ( empty( $_kb_slug ) ) {
-            $current_term = get_term_by( 'slug', $term->slug, $taxonomy, OBJECT );
-            $_term_attr   = get_term_meta( $current_term->term_id, 'doc_category_knowledge_base', true );
-
-            if ( empty( $_term_attr[0] ) ) {
-                $_kb_slug = 'non-knowledgebase';
-            } else {
-                $_kb_slug = $_term_attr[0];
-            }
+        if ( empty( $_kb_slug ) || ( is_array( $_kb_terms) && ! in_array( $_kb_slug, $_kb_terms )) ) {
+            $_kb_slug = $this->get_first_kb_slug( $term, $taxonomy );
         }
 
         return str_replace( '%knowledge_base%', $_kb_slug, $termlink );

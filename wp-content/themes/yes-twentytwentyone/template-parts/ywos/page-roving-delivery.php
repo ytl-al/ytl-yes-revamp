@@ -11,7 +11,7 @@
 
 
 <!-- Vue Wrapper STARTS -->
-<div id="main-vue" style="display: none;">
+<div id="main-vue">
 	<!-- Banner Start -->
 	<section id="grey-innerbanner">
 		<div class="container">
@@ -534,6 +534,11 @@
 				setTimeout(function() {
 					self.getPlanData();
 				}, 500);
+			},
+			watch: {
+				'deliveryInfo.securityId': function(value) {
+					this.deliveryInfo.securityId = value.replace('-', '');
+				},
 			},
 			methods: {
 				getPlanData: function() {

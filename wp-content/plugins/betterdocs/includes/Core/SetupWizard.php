@@ -3,8 +3,8 @@
 namespace WPDeveloper\BetterDocs\Core;
 
 use WPDeveloper\BetterDocs\Utils\Base;
-use WPDeveloper\BetterDocs\Utils\Helper;
-use WPDeveloper\BetterDocs\SetupWizard\SetupWizard as SetupWizardHelper;
+use WPDeveloper\BetterDocs\Admin\Builder\Rules;
+use WPDeveloper\BetterDocs\Admin\Builder\GlobalFields;
 
 class SetupWizard extends Base {
     private $settings;
@@ -12,11 +12,6 @@ class SetupWizard extends Base {
         $this->settings = $settings;
 
         add_action( 'admin_enqueue_scripts', [$this, 'enqueue'] );
-        add_action( 'admin_init', [$this, 'load'] );
-    }
-
-    public function load() {
-        SetupWizardHelper::load( $this->settings );
     }
 
     public function enqueue( $hook ) {
@@ -24,9 +19,14 @@ class SetupWizard extends Base {
             return;
         }
 
+        betterdocs()->assets->enqueue( 'betterdocs-quick-setup', 'admin/js/quick-setup.js' );
+        betterdocs()->assets->localize( 'betterdocs-quick-setup', 'betterdocsQuickSetup', GlobalFields::normalize( $this->quickbuilder_setup() ) );
         betterdocs()->assets->enqueue( 'betterdocs-sweetalert', 'vendor/js/sweetalert.min.js', [] );
-        betterdocs()->assets->enqueue( 'betterdocs-setup-wizard', 'admin/css/setup-wizard.css' );
-        betterdocs()->assets->enqueue( 'betterdocs-setup-wizard', 'admin/js/setup-wizard.js', ['jquery', 'betterdocs-sweetalert'] );
+        betterdocs()->assets->enqueue( 'betterdocs-icons', 'admin/btd-icon/style.css' );
+        betterdocs()->assets->enqueue( 'betterdocs-setup-wizard-qb-css', 'admin/css/quick-setup.css' );
+        betterdocs()->assets->enqueue( 'betterdocs-setup-wizard-new-css', 'admin/css/setup-wizard.css' );
+        betterdocs()->assets->enqueue( 'betterdocs-icons', 'admin//style.css' );
+        betterdocs()->assets->enqueue( 'betterdocs-setup-wizard-default-js', 'admin/js/setup-wizard.js', ['jquery', 'betterdocs-sweetalert'] );
 
         // Localize the script with new data
         betterdocs()->assets->localize( 'betterdocs-setup-wizard', 'bdquicksetup', [
@@ -34,41 +34,358 @@ class SetupWizard extends Base {
             'next_txt'      => __( 'Next', 'betterdocs' ),
             'customizerurl' => $this->customizer_settings_url(),
             'docspageurl'   => $this->docs_page_url(),
-            'currentslug'   => $this->settings->get( 'docs_slug' )
+            'currentslug'   => $this->settings->get( 'docs_slug' ),
+            'redirecturl'   => admin_url( '/admin.php?page=betterdocs-settings' )
         ] );
     }
 
-    public function init() {
-        SetupWizardHelper::setSection( [
-            'id'     => 'betterdocs_getting_started_settings',
-            'title'  => __( 'Getting Started', 'betterdocs' ),
-            'fields' => [
-                [
-                    'id'        => 'getting_started',
-                    'title'     => __( 'Getting Started', 'betterdocs' ),
-                    'sub_title' => __( 'Easily get started with this easy setup wizard and complete setting up your Knowledge Base.', 'betterdocs' ),
-                    'type'      => 'welcome',
-                    'video_url' => 'https://www.youtube.com/embed/57BioKfROlo'
-                ]
-            ]
+    public function normalize_options( $options ) {
+        return GlobalFields::normalize_fields( $options );
+    }
+
+    public function get_pages() {
+        $_pages = betterdocs()->query->get_posts( [
+            'post_type'      => 'page',
+            'numberposts'    => -1,
+            'post_status'    => 'publish',
+            'posts_per_page' => -1
         ] );
 
-        $existing_plugins = $this->knowledge_base_plugins();
+        $__pages = [];
+
+        if ( ! empty( $_pages ) ) {
+            $__pages[0] = __( 'Select a Page', 'betterdocs' );
+            foreach ( $_pages->posts as $page ) {
+                $__pages[$page->ID] = esc_html( $page->post_title );
+            }
+        }
+
+        return $__pages;
+    }
+
+    public function quickbuilder_setup() {
+        $existing_plugins = betterdocs()->kbmigration->knowledge_base_plugins();
+        $quick_setup      = [
+            'id'            => 'betterdocs_quick_setup_metabox_wrapper',
+            'title'         => __( 'Betterdocs Quick Setup', 'betterdocs' ),
+            'object_types'  => ['betterdocs'],
+            'context'       => 'normal',
+            'priority'      => 'high',
+            'show_header'   => false,
+            'tab_number'    => true,
+            'is_pro_active' => betterdocs()->is_pro_active(),
+            'logoURL'       => betterdocs()->assets->icon( 'betterdocs-icon.svg', true ),
+            'layout'        => 'vertical',
+            'values'        => array_merge(betterdocs()->settings->get_all(), ['enable_credit' => true]),
+            'config'        => [
+                'save_locally'    => true,
+                'save'            => true,
+                'active'          => 'getting-started',
+                'sidebar'         => false,
+                'title'           => false,
+                'tab_number'      => true,
+                'clickable'       => false,
+                'completionTrack' => true,
+                'content_heading' => [],
+                'step'            => [
+                    'show'    => true,
+                    'buttons' => [
+                        'skip'                  => __( 'Skip This Step', 'betterdocs' ),
+                        'prev'                  => __( 'Previous', 'betterdocs' ),
+                        'next'                  => [
+                            'name'       => 'Next',
+                            'type'       => 'customize',
+                            'customName' => 'Proceed to Next Step',
+                            'condition'  => 'getting-started',
+                            // 'ajax'       => [
+                            //     'api'      => "/betterdocs/v1/plugin_insights",
+                            //     'data'     => [
+                            //         'type'   => "@type",
+                            //         'source' => "@source",
+                            //         'field'  => "product_list"
+                            //     ],
+                            //     'rules'    => Rules::is( 'config.active', 'getting-started', false ),
+                            //     'hideSwal' => true
+                            // ]
+                        ],
+                        'quick-builder-publish' => [
+                            'name'   => 'quick-builder-publish',
+                            'type'   => 'action',
+                            'action' => 'btd_quick_build_launch'
+                        ]
+                    ],
+                    'rules'   => Rules::is( 'config.active', 'getting-started', true )
+                ]
+            ],
+            'submit'        => [
+                'show' => false
+            ],
+            'tabs'          => apply_filters( 'betterdocs_quick_setup_tabs', [
+                'getting-started' => apply_filters( 'betterdocs_quick_setup_tab_getting_started', [
+                    'id'       => 'getting-started',
+                    'label'    => __( 'Getting Started', 'betterdocs' ),
+                    'classes'  => 'getting-started',
+                    'priority' => 10,
+                    'fields'   => [
+                        'getting_started_header'       => [
+                            'name'        => 'getting_started_header',
+                            'type'        => 'header',
+                            'title'       => __( 'Quick Launch', 'betterdocs' ),
+                            'direction'   => 'column',
+                            'description' => __( 'Start your Knowledge Base configuration process with an easy-to-follow setup wizard.', 'betterdocs' ),
+                            'icon'        => '<img src="' . betterdocs()->assets->icon( 'icons/rocket.svg', true ) . '"/>',
+                            'priority'    => 1
+                        ],
+                        'betterdocs-quick-setup-start' => [
+                            'name'      => 'betterdocs-quick-setup-start',
+                            'type'      => 'section',
+                            'priority'  => 2,
+                            'showSteps' => true,
+                            'fields'    => [
+                                'betterdocs-quick-setup-start-collapse' => [
+                                    'name'             => 'betterdocs-quick-setup-start-collapse',
+                                    'type'             => 'collapse',
+                                    'priority'         => 2,
+                                    'label'            => __( 'By clicking this button, you are allowing this app to collect your information.', 'betterdocs' ),
+                                    'collapse_title'   => __( 'What We Collect?', 'betterdocs' ),
+                                    'collapse_message' => __( 'We collect non-sensitive diagnostic data and plugin usage information. Your site URL, WordPress & PHP version, plugins & themes and email address to send you the discount coupon. This data lets us make sure this plugin always stays compatible with the most popular plugins and themes. No spam, we promise.', 'betterdocs' )
+                                ]
+                            ]
+                        ]
+                    ]
+                ] ),
+
+                'setup-page'      => apply_filters( 'betterdocs_quick_setup_tab_setup_page', [
+                    'id'       => 'setup-page',
+                    'label'    => __( 'Setup Page', 'betterdocs' ),
+                    'classes'  => 'setup-page',
+                    'priority' => 30,
+                    'fields'   => [
+                        'setup_page_header'             => [
+                            'name'        => 'setup_page_header',
+                            'type'        => 'header',
+                            'title'       => __( 'Page Setup Magic', 'betterdocs' ),
+                            'direction'   => 'row',
+                            'description' => __( 'Configure the structure and layout of your documentation pages to match your preferences for an organized Knowledge Base.', 'betterdocs' ),
+                            'icon'        => '<img src="' . betterdocs()->assets->icon( 'icons/content-setting.svg', true ) . '"/>',
+                            'priority'    => 1
+                        ],
+                        'betterdocs-quick-setup-fields' => [
+                            'name'     => 'betterdocs-quick-setup-fields',
+                            'type'     => 'section',
+                            'priority' => 2,
+                            'fields'   => [
+                                'builtin_doc_page'     => [
+                                    'name'                       => 'builtin_doc_page',
+                                    'type'                       => 'toggle',
+                                    'label'                      => __( 'Built-in Documentation Page', 'betterdocs' ),
+                                    'enable_disable_text_active' => true,
+                                    'default'                    => 1,
+                                    'priority'                   => 1,
+                                    'label_subtitle'             => __( 'If you disable root slug for KB Archives, your individual knowledge base URL will be like this: https://example.com/knowledgebase-1', 'betterdocs' )
+                                ],
+                                'docs_page'             => [
+                                    'name'           => 'docs_page',
+                                    'label'          => __( 'Docs Page', 'betterdocs' ),
+                                    'type'           => 'select',
+                                    'default'        => 0,
+                                    'priority'       => 2,
+                                    'search'         => true,
+                                    'options'        => $this->normalize_options( $this->get_pages() ),
+                                    'label_subtitle' => __( 'You will need to insert BetterDocs Shortcode inside the page. This page will be used as docs permalink.', 'betterdocs' ),
+                                    'rules'          => Rules::is( 'builtin_doc_page', false )
+                                ],
+                                'breadcrumb_doc_title' => [
+                                    'name'     => 'breadcrumb_doc_title',
+                                    'type'     => 'text',
+                                    'label'    => __( 'Documentation Page Title', 'betterdocs' ),
+                                    'default'  => __( 'Docs', 'betterdocs' ),
+                                    'priority' => 3,
+                                    'rules'    => Rules::is( 'builtin_doc_page', true )
+                                ],
+                                'docs_slug'             => [
+                                    'name'     => 'docs_slug',
+                                    'type'     => 'text',
+                                    'label'    => __( 'BetterDocs Root Slug', 'betterdocs' ),
+                                    'default'  => 'docs',
+                                    'priority' => 4,
+                                    'rules'    => Rules::is( 'builtin_doc_page', true )
+                                ],
+                                'permalink_structure'  => [
+                                    'name'           => 'permalink_structure',
+                                    'type'           => 'permalink_structure',
+                                    'label'          => __( 'Single Docs Permalink', 'betterdocs' ),
+                                    'default'        => PostType::permalink_structure(),
+                                    'priority'       => 4,
+                                    'tags'           => $this->normalize_options( [
+                                        '%doc_category%'   => '%doc_category%',
+                                        '%knowledge_base%' => '%knowledge_base%'
+                                    ] ),
+                                    'label_subtitle' => __( 'Make sure to keep Docs Root Slug in the Single Docs Permalink. You are not able to keep it blank. You can use the available tags from below.', 'betterdocs' )
+                                ],
+
+                                'enable_glossaries' =>  [
+                                    'name'                       => 'enable_glossaries',
+                                    'type'                       => 'toggle',
+                                    'label'                      => __( 'Show Glossary', 'betterdocs' ),
+                                    'label_subtitle'             => __( 'Enable the glossary feature to allow users to look up definitions for terms used within your encyclopedia or glossaries themselves.', 'betterdocs' ),
+                                    'enable_disable_text_active' => true,
+                                    'default'                    => false,
+                                    'priority'                   => 5,
+                                    'is_pro'                     => true
+                                ],
+                                'enable_encyclopedia' =>  [
+                                    'name'                       => 'enable_encyclopedia',
+                                    'type'                       => 'toggle',
+                                    'label'                      => __( 'Built-in Encyclopedia Page', 'betterdocs' ),
+                                    'enable_disable_text_active' => true,
+                                    'default'                    => false,
+                                    'priority'                   => 6,
+                                    'is_pro'                     => true
+                                ],    
+                                'enable_credit'                  => [
+                                    'name'                       => 'enable_credit',
+                                    'type'                       => 'toggle',
+                                    'label'                      => __( 'Show Powered by BetterDocs', 'betterdocs' ),
+                                    'enable_disable_text_active' => true,
+                                    'default'                    => true,
+                                    'priority'                   => 7
+                                ],
+                                'enable_faq_schema'    => [
+                                    'name'                       => 'enable_faq_schema',
+                                    'type'                       => 'toggle',
+                                    'label'                      => __( 'FAQ Schema', 'betterdocs' ),
+                                    'enable_disable_text_active' => true,
+                                    'default'                    => '',
+                                    'priority'                   => 8
+                                ],
+                                'advance_search'       => apply_filters( 'betterdocs_advance_search_settings', [
+                                    'name'                       => 'advance_search',
+                                    'type'                       => 'toggle',
+                                    'label'                      => __( 'Advanced Search', 'betterdocs' ),
+                                    'enable_disable_text_active' => true,
+                                    'default'                    => true,
+                                    'priority'                   => 9,
+                                    'is_pro'                     => true
+                                ] ),
+                                'enable_disable'       => [
+                                    'name'                       => 'enable_disable',
+                                    'type'                       => 'toggle',
+                                    'priority'                   => 10,
+                                    'label'                      => __( 'Instant Answer', 'betterdocs' ),
+                                    'enable_disable_text_active' => true,
+                                    'default'                    => true,
+                                    'is_pro'                     => true
+                                ]
+                            ]
+                        ]
+                    ]
+                ] ),
+                'create-content'  => apply_filters( 'betterdocs_quick_setup_tab_create-content', [
+                    'id'       => 'create-content',
+                    'label'    => __( 'Create Content', 'betterdocs' ),
+                    'classes'  => 'create-content',
+                    'priority' => 40,
+                    'fields'   => [
+                        'create_content_header' => [
+                            'name'        => 'create_content_header',
+                            'type'        => 'header',
+                            'title'       => __( 'Content Crafting', 'betterdocs' ),
+                            'direction'   => 'row',
+                            'description' => __( 'Craft categories & articles for your Knowledge Base to efficiently organize and manage your repository with respective categories.', 'betterdocs' ),
+                            'icon'        => '<img src="' . betterdocs()->assets->icon( 'icons/create-content.svg', true ) . '"/>',
+                            'priority'    => 1
+                        ],
+                        'create_content_video'  => [
+                            'name'     => 'create_content_video',
+                            'type'     => 'image',
+                            'media'    => [
+                                'url' => betterdocs()->assets->icon( 'setup-wizard/DocCreate.gif', true )
+                            ],
+                            'priority' => 2
+                        ]
+                    ]
+                ] ),
+                'customize'       => apply_filters( 'betterdocs_quick_setup_tab_customize', [
+                    'id'       => 'customize',
+                    'label'    => __( 'Customize', 'betterdocs' ),
+                    'classes'  => 'customize',
+                    'priority' => 50,
+                    'fields'   => [
+                        'customize_header' => [
+                            'name'        => 'customize_header',
+                            'type'        => 'header',
+                            'title'       => __( 'Style Your Documentation', 'betterdocs' ),
+                            'direction'   => 'row',
+                            'description' => __( 'Personalize the appearance of your documentation page, articles, and archive pages using the power of this Customizer.', 'betterdocs' ),
+                            'icon'        => '<img src="' . betterdocs()->assets->icon( 'icons/customize.svg', true ) . '"/>',
+                            'priority'    => 1
+                        ],
+                        'customize_video'  => [
+                            'name'     => 'customize_video',
+                            'type'     => 'image',
+                            'media'    => [
+                                'url' => betterdocs()->assets->icon( 'setup-wizard/Customizer.gif', true )
+                            ],
+                            'priority' => 2
+                        ]
+                    ]
+                ] ),
+                'finalize'        => apply_filters( 'betterdocs_quick_setup_tab_finalize', [
+                    'id'       => 'finalize',
+                    'label'    => __( 'Finalize', 'betterdocs' ),
+                    'classes'  => 'finalize',
+                    'priority' => 60,
+                    'fields'   => [
+                        'finalize_header' => [
+                            'name'        => 'finalize_header',
+                            'type'        => 'header',
+                            'title'       => __( 'Congratulations!', 'betterdocs' ),
+                            'direction'   => 'row',
+                            'description' => __( 'Your documentation page is now ready for use. Enrich it with more articles to ensure proper categorization and valuable resources.', 'betterdocs' ),
+                            'icon'        => '<img src="' . betterdocs()->assets->icon( 'icons/thumbs-up.svg', true ) . '"/>',
+                            'priority'    => 1
+                        ],
+                        'finalize_video'  => [
+                            'name'     => 'finalize_video',
+                            'type'     => 'image',
+                            'media'    => [
+                                'url' => betterdocs()->assets->icon( 'setup-wizard/ThankYou.gif', true )
+                            ],
+                            'priority' => 2
+                        ]
+                    ]
+                ] )
+            ] )
+        ];
+
         if ( $existing_plugins ) {
-            SetupWizardHelper::setSection( [
-                'id'     => 'betterdocs_migration_settings',
-                'title'  => __( 'Migration', 'betterdocs' ),
-                'fields' => [
-                    [
-                        'id'        => 'migration_step',
-                        'sub_title' => __( 'We detected another Knowledge Base Plugin installed in this site. For BetterDocs to work efficiently, we will migrate the data from the plugin listed below, and deactivate the plgugin, to avoid conflict.', 'betterdocs' ),
-                        'type'      => 'migration',
-                        'options'   => [
-                            [
-                                'id'      => $existing_plugins[0][0],
-                                'title'   => 'Migrate ' . $existing_plugins[0][1],
-                                'type'    => 'checkbox',
-                                'default' => 1
+            $quick_setup['tabs']['migration'] = apply_filters( 'betterdocs_quick_setup_tab_migration', [
+                'id'       => 'migration',
+                'label'    => __( 'Migration', 'betterdocs' ),
+                'classes'  => 'migration',
+                'priority' => 20,
+                'fields'   => [
+                    'migration_header'      => [
+                        'name'           => 'migration_header',
+                        'type'           => 'header',
+                        'title'          => __( 'Migration', 'betterdocs' ),
+                        'direction' => 'column',
+                        'description'    => __( 'We detected another Knoledge Base Plugin installed in this site. For BetterDocs to work efficiently, we will migrate the data from the plugin listed below, and deactivate the plugins, to avoid conflict.', 'betterdocs' ),
+                        'icon' => '<img src="' . betterdocs()->assets->icon( 'icons/migration.svg', true ) . '"/>',
+                        'priority'       => 1,
+                    ],
+                    'betterdocs-quick-setup-migrate' => [
+                        'name'     => 'betterdocs-quick-setup-migrate',
+                        'type'     => 'section',
+                        'priority' => 2,
+                        'fields'   => [
+                            'migration_step' => [
+                                'name'     => "migration_step",
+                                'type'     => 'migration',
+                                'kb'       => $existing_plugins[0][0],
+                                'label'    => __( 'Migrate ' . $existing_plugins[0][1], 'betterdocs' ),
+                                'priority' => 10
                             ]
                         ]
                     ]
@@ -76,111 +393,7 @@ class SetupWizard extends Base {
             ] );
         }
 
-        // Setup Pages
-        SetupWizardHelper::setSection( [
-            'id'     => 'betterdocs_setup_page_settings',
-            'title'  => __( 'Setup Pages', 'betterdocs' ),
-            'fields' => [
-                [
-                    'id'    => 'builtin_doc_page',
-                    'title' => __( 'Enable Built-in Documentation Page', 'betterdocs' ),
-                    'type'  => 'checkbox'
-                ],
-                [
-                    'id'          => 'docs_slug',
-                    'title'       => __( 'Page Slug', 'betterdocs' ),
-                    'type'        => 'text',
-                    'placeholder' => 'Page Slug',
-                    'default'     => 'docs'
-                ],
-                [
-                    'id'    => 'enable_disable',
-                    'title' => __( 'Enable Instant Answer', 'betterdocs' ),
-                    'type'  => 'checkbox_pro_feature'
-                ]
-            ]
-        ] );
-
-        // Create Content
-        SetupWizardHelper::setSection( [
-            'id'     => 'betterdocs_create_content_settings',
-            'title'  => __( 'Create Content', 'betterdocs' ),
-            'fields' => [
-                [
-                    'id'        => 'content_step',
-                    'title'     => __( 'Create Documentation Content', 'betterdocs' ),
-                    'sub_title' => __( 'Let\'s create some categories and articles. And then assign the articles to proper categories.', 'betterdocs' ),
-                    'type'      => 'link',
-                    'image_url' => betterdocs()->assets->icon( 'setup-wizard/setup-articles.png', true ),
-                    'options'   => [
-                        [
-                            'title'           => __( 'Create Categories', 'betterdocs' ),
-                            'url'             => admin_url( 'edit-tags.php?taxonomy=doc_category&post_type=docs' ),
-                            'feature_title'   => __( 'Create Categories', 'betterdocs' ),
-                            'feature_content' => sprintf( '%s %s &gt; <strong>%s</strong>', __( 'You can create Categories from', 'betterdocs' ), '<strong>BetterDocs</strong>', __( 'Categories', 'betterdocs' ) )
-                        ],
-                        [
-                            'title'           => __( 'Create Docs', 'betterdocs' ),
-                            'url'             => admin_url( 'post-new.php?post_type=docs' ),
-                            'feature_title'   => __( 'Create Docs', 'betterdocs' ),
-                            'feature_content' => sprintf( '%1$s %2$s %3$s', __( 'You can create Docs from ', 'betterdocs' ), '<strong>BetterDocs &gt;</strong>', __( 'Add New', 'betterdocs' ) )
-                        ]
-                    ]
-                ]
-            ]
-        ] );
-
-        // Customize
-        SetupWizardHelper::setSection( [
-            'id'     => 'betterdocs_customize_settings',
-            'title'  => __( 'Customize', 'betterdocs' ),
-            'fields' => [
-                [
-                    'id'        => 'customize_step',
-                    'title'     => __( 'Customize Everything', 'betterdocs' ),
-                    'sub_title' => __( 'Take control of your settings and customize your documentation page, articles and archive pages live, with the power of Customizer', 'betterdocs' ),
-                    'type'      => 'link',
-                    'image_url' => betterdocs()->assets->icon( 'customizer/setup-customizer.png', true ),
-                    'options'   => [
-                        [
-                            'id'              => 'bdgotocustomize',
-                            'title'           => __( 'Go To Customizer', 'betterdocs' ),
-                            'url'             => $this->customizer_settings_url(),
-                            'feature_title'   => __( 'Easy To Customize', 'betterdocs' ),
-                            'feature_content' => __( 'Customize Docs page, Docs, Archive page Live', 'betterdocs' )
-                        ],
-                        [
-                            'title'           => __( 'Go To Settings', 'betterdocs' ),
-                            'url'             => $this->settings->url(),
-                            'feature_title'   => __( 'Extensive Options Panel', 'betterdocs' ),
-                            'feature_content' => __( 'Take control of your pages with extensive settings options', 'betterdocs' )
-                        ]
-                    ]
-                ]
-            ]
-        ] );
-
-        // Finalize
-        SetupWizardHelper::setSection( [
-            'id'     => 'betterdocs_finalize_settings',
-            'title'  => __( 'Finalize', 'betterdocs' ),
-            'fields' => [
-                [
-                    'id'        => 'finnilize_step',
-                    'title'     => __( 'Great Job!', 'betterdocs' ),
-                    'sub_title' => __( 'Your documentation page is ready! Make sure to add more articles and assign them to proper categories and you are good to go.', 'betterdocs' ),
-                    'type'      => 'final_step',
-                    'image_url' => betterdocs()->assets->icon( 'setup-wizard/setup-finalize.svg', true ),
-                    'options'   => [
-                        [
-                            'id'    => 'bdgotodocspage',
-                            'title' => __( 'Visit Your Documentation Page', 'betterdocs' ),
-                            'url'   => $this->docs_page_url()
-                        ]
-                    ]
-                ]
-            ]
-        ] );
+        return $quick_setup;
     }
 
     public function views() {
@@ -204,27 +417,5 @@ class SetupWizard extends Base {
 
     public function docs_page_url() {
         return esc_url( site_url( '/' . $this->settings->get( 'docs_slug', 'docs' ) ) );
-    }
-
-    public function knowledge_base_plugins() {
-        $plugins = [];
-
-        if ( Helper::is_plugin_active( 'wedocs/wedocs.php' ) ) {
-            $plugins[] = ['wedocs', 'weDocs'];
-        }
-        if ( Helper::is_plugin_active( 'bsf-docs/bsf-docs.php' ) ) {
-            $plugins[] = ['bsf-docs', 'BSF docs'];
-        }
-        if ( Helper::is_plugin_active( 'documentor-lite/documentor-lite.php' ) ) {
-            $plugins[] = ['documentor-lite', 'Documentor'];
-        }
-        if ( Helper::is_plugin_active( 'echo-knowledge-base/echo-knowledge-base.php' ) ) {
-            $plugins[] = ['echo-knowledge-base', 'Echo Knowledge Base'];
-        }
-        if ( Helper::is_plugin_active( 'pressapps-knowledge-base/pressapps-knowledge-base.php' ) ) {
-            $plugins[] = ['pressapps-knowledge-base', 'PressApps Knowledge Base'];
-        }
-
-        return $plugins;
     }
 }

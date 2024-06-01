@@ -1,0 +1,100 @@
+<script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/elevate/assets/js/elevate.js"></script>
+<script type="text/javascript" src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/js/ywos.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+       
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var paramDevice = url.searchParams.get('device');
+        var targetDevice = $('#device-' + paramDevice);
+        if ($(targetDevice)) {
+            $('body').addClass('page-scrolled');
+            var parentAccordionContent = $(targetDevice).closest('.accordion-collapse').siblings('.layer-accordionPlanDetails');
+            var btnAccordion = $(parentAccordionContent).find('.accordion-button');
+
+            $(btnAccordion).trigger('click');
+
+            setTimeout(function() {
+                var parentAccordionContentID = $(parentAccordionContent).closest('.layer-accordionPlan').attr('id');
+                var targetSection = $('#' + parentAccordionContentID);
+                if (targetSection.length > 0) {
+                    var headerHeight = $('.page-header').outerHeight();
+                        headerHeight = ($('body').hasClass('page-scrolled')) ? headerHeight + 45 : (headerHeight * 2) + 35;
+                    var targetOffset = $(targetSection).offset().top - headerHeight;
+                    $('html, body').animate({
+                        scrollTop: targetOffset
+                    }, 100);
+                }
+            }, 1000);
+        }
+
+        var paramPlan = url.searchParams.get('plan');
+        var targetPlan = $('#plan-' + paramPlan);
+        if ($(targetPlan)) {
+            var btnPlanAccordion = $(targetPlan).find('.accordion-button');
+            
+            $(btnPlanAccordion).trigger('click');
+
+            setTimeout(function() {
+                var headerHeight = $('.page-header').outerHeight();
+                    headerHeight = ($('body').hasClass('page-scrolled')) ? headerHeight + 45 : (headerHeight * 2) + 35;
+                var targetOffset = $(targetPlan).offset().top - headerHeight;
+                    $('html, body').animate({
+                        scrollTop: targetOffset
+                    }, 100);
+            }, 1000);
+        }
+    });
+    function checkStockAPI() {
+        toggleOverlay();
+        $.ajax({
+            url: '/wp-json/elevate/v1/check-stock' +"?nonce="+yesObj.nonce, 
+            method: 'GET', 
+            success: function(data) {
+                Object.values(data).map(function(item) {
+                    var bundleID    = item.productBundleId;
+                    var balance     = item.balance;
+                    var layerPlanDevice = $('[data-planDevice="' + bundleID + '"]');
+                    if (balance <= 0 && $(layerPlanDevice)) {
+                        var phoneName   = $('h3', layerPlanDevice).text();
+                        var panelBtn    = $('.panel-btn', layerPlanDevice);
+                        var btnNotify   = '<a href="javascript:void(0)" onClick="triggerModalNotify(\'' + phoneName + '\')">Notify Me</a>';
+                        $(panelBtn).html(btnNotify);
+                        $('.span-oosDeviceText', layerPlanDevice).show();
+                    }
+                });
+            },
+            error: function(error) {
+                console.log(error);
+            },
+            complete: function() {
+                toggleOverlay(false);
+            }
+        });
+    }
+    function triggerModalNotify(phoneModel = '') {
+        var modalNotify = new bootstrap.Modal(document.getElementById('modal-notify'), {});
+
+        $('#span-phoneModel').html(phoneModel);
+        $('#wdform_3_element10').val(phoneModel);
+        modalNotify.show();
+    }
+</script>
+<script>
+$('.moreless-button').click(function() {
+  $('.morelocation').slideToggle();
+var imgv = $('.arrow-down').attr('val');
+//console.log(imgv);
+  if ($('.arrow-down').attr('val') == "More Location") {
+    $('.arrow-up').show();
+ $('.arrow-down').hide();
+ $('.arrow-down').attr('val', 'sec');
+//console.log("first");
+  } else {
+  $('.arrow-up').hide();
+ $('.arrow-down').show();
+ $('.arrow-down').attr('val', 'More Location');
+//console.log("second");
+  }
+});
+</script>

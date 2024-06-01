@@ -31,6 +31,7 @@ class CategoryBox extends Block {
         return [
             'blockId'           => '',
             'categories'        => [],
+            'selectKB'          => '',
             'includeCategories' => '',
             'excludeCategories' => '',
             'boxPerPage'        => 9,
@@ -51,7 +52,7 @@ class CategoryBox extends Block {
     }
 
     public function view_params() {
-        $attributes =  &$this->attributes;
+        $attributes = &$this->attributes;
 
         $terms_object = [
             'taxonomy'   => 'doc_category',
@@ -79,13 +80,14 @@ class CategoryBox extends Block {
 
         $_wrapper_classes = [
             'betterdocs-category-box-wrapper',
+            'betterdocs-blocks-grid',
             'betterdocs-box-' . $attributes['layout']
         ];
 
         $_inner_wrapper_classes = [
             'betterdocs-category-box-inner-wrapper',
             'layout-flex',
-            $attributes['layout'],
+            $attributes['layout'] === 'default' ? 'layout-1' : $attributes['layout'],
             "betterdocs-column-" . $attributes['colRange'],
             "betterdocs-column-tablet-" . $attributes['TABcolRange'],
             "betterdocs-column-mobile-" . $attributes['MOBcolRange']
@@ -101,13 +103,41 @@ class CategoryBox extends Block {
             'data-column_mobile'  => $attributes['MOBcolRange']
         ];
 
+        $default_multiple_kb = betterdocs()->settings->get( 'multiple_kb' );
+        $kb_slug             = ! empty( $attributes['selectKB'] ) && isset( $attributes['selectKB'] ) ? json_decode( $attributes['selectKB'] )->value : '';
+
+        if ( is_tax( 'knowledge_base' ) && $default_multiple_kb == 1 ) {
+            $object                     = get_queried_object();
+            $terms_object['meta_query'] = [
+                'relation' => 'OR',
+                [
+                    'key'     => 'doc_category_knowledge_base',
+                    'value'   => $object->slug,
+                    'compare' => 'LIKE'
+                ]
+            ];
+        }
+
+        if( ! empty( $kb_slug ) ) {
+            $terms_object['meta_query'] = [
+                'relation' => 'OR',
+                [
+                    'key'     => 'doc_category_knowledge_base',
+                    'value'   => $kb_slug,
+                    'compare' => 'LIKE'
+                ]
+            ];
+        }
+
         $_params = [
-            'wrapper_attr'       => $wrapper_attr,
-            'inner_wrapper_attr' => $inner_wrapper_attr,
-            'terms_query_args'   => $terms_object,
-            'widget_type'        => 'category-box',
-            'nested_subcategory' => false,
-            'show_header'        => true
+            'wrapper_attr'            => $wrapper_attr,
+            'inner_wrapper_attr'      => $inner_wrapper_attr,
+            'terms_query_args'        => betterdocs()->query->terms_query( $terms_object ),
+            'widget_type'             => 'category-box',
+            'multiple_knowledge_base' => $default_multiple_kb,
+            'nested_subcategory'      => false,
+            'show_header'             => true,
+            'show_description'        => false
         ];
 
         if ( $attributes['layout'] === 'layout-2' ) {

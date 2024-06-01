@@ -33,18 +33,6 @@ if (!function_exists('register_custom_post_types')) {
                     'delete_post' => 'delete_supported-device'
                 ),
             ],
-            // [
-            //     'name'          => 'News Room',
-            //     'singular_name' => 'News Room',
-            //     'slug'          => 'news-room',
-            //     'menu_icon'     => 'dashicons-media-document',
-            //     'supports'      => ['title', 'excerpt', 'thumbnail', 'editor'],
-            //     'reg_taxonomy'  => ['Events', 'Announcement'],
-            //     'reg_tags'      => ['US', 'Malaysia'],
-            //     'rewrite'       => 'news-room-category',
-            //     'category_names' => ['plural' => 'Categories', 'singular' => 'Category'],
-            //     'tag_names'     => ['plural' => 'Locations', 'singular' => 'Location']
-            // ],
             [
                 'name'          => 'Roaming Rates',
                 'singular_name' => 'Roaming Rate',
@@ -63,12 +51,25 @@ if (!function_exists('register_custom_post_types')) {
                 'singular_name' => 'IDD Rate',
                 'slug'          => 'idd-rates',
                 'menu_icon'     => 'dashicons-phone',
-                'supports'      => ['title'],
+                'supports'      => ['title','thumbnail'],
                 'reg_taxonomy'  => null,
                 'reg_tags'      => null,
                 'rewrite'       => null,
                 'category_names' => null,
                 'tag_names'     => null,
+                'capabilities' => []
+            ],
+            [
+                'name'          => 'Store Devices',
+                'singular_name' => 'store device',
+                'slug'          => 'store-device',
+                'menu_icon'     => 'dashicons-smartphone',
+                'supports'      => ['title','thumbnail'],
+                'reg_taxonomy2'  => ['Uncategorized', 'Yes', 'Alcatel', 'Black Shark', 'Google', 'Huawei', 'Leagoo', 'Nokia', 'Oppo', 'Samsung', 'Realme', 'Sony', 'Xiaomi', 'Vivo'],
+                // 'reg_tags'      => ['Data Only', 'Data + Voice over LTE', '5G'],
+                'rewrite'       => 'device-category',
+                'category_names' => ['plural' => 'Brands', 'singular' => 'Brand'],
+                'tag_names'     => ['plural' => 'Devices', 'singular' => 'Device'],
                 'capabilities' => []
             ],
         ];

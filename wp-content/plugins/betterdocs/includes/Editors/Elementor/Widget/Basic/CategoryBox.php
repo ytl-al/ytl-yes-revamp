@@ -38,7 +38,7 @@ class CategoryBox extends BaseWidget {
     public function get_style_depends() {
         return [
             'betterdocs-category-box',
-            'betterdocs-el-category-box',
+            'betterdocs-el-category-box'
         ];
     }
 
@@ -98,7 +98,7 @@ class CategoryBox extends BaseWidget {
                 'condition'          => [
                     'layout_template' => ['layout-2', 'default']
                 ],
-                'selectors'   => [
+                'selectors'          => [
                     '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-box-inner-wrapper' => "--column: {{VALUE}};"
                 ]
             ]
@@ -216,6 +216,51 @@ class CategoryBox extends BaseWidget {
                     'show_count'      => 'true',
                     'layout_template' => ['default', 'layout-3']
                 ]
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
+    protected function container_section() {
+        $this->start_controls_section(
+            'section_card_container_section',
+            [
+                'label'     => __( 'Container Section', 'betterdocs' ),
+                'tab'       => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_responsive_control(
+            'section_card_container_padding',
+            [
+                'label'      => __( 'Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-inner-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'section_card_container_margin', // Legacy control id but new control
+            [
+                'label'      => __( 'Margin', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-inner-wrapper' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'section_card_container_background',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-inner-wrapper'
             ]
         );
 
@@ -561,8 +606,8 @@ class CategoryBox extends BaseWidget {
                     ]
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .betterdocs-elementor:not(.layout-2) .betterdocs-category-icon, .betterdocs-elementor:not(.layout-3) .betterdocs-category-icon img' => 'width: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}}.layout-2 .betterdocs-category-icon img, .layout-3 .betterdocs-category-icon img'                                                    => 'width: {{SIZE}}{{UNIT}};'
+                    '{{WRAPPER}} .betterdocs-elementor:not(.layout-2) .betterdocs-category-icon, .betterdocs-elementor:not(.layout-3) .betterdocs-category-icon .betterdocs-category-icon-img' => 'width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}}.layout-2 .betterdocs-category-icon .betterdocs-category-icon-img, .layout-3 .betterdocs-category-icon .betterdocs-category-icon-img'                          => 'width: {{SIZE}}{{UNIT}};'
                 ]
             ]
         );
@@ -1032,6 +1077,13 @@ class CategoryBox extends BaseWidget {
 
         /**
          * ----------------------------------------------------------
+         * Section: Container Section
+         * ----------------------------------------------------------
+         */
+        $this->container_section();
+
+        /**
+         * ----------------------------------------------------------
          * Section: Box Styles
          * ----------------------------------------------------------
          */
@@ -1069,7 +1121,7 @@ class CategoryBox extends BaseWidget {
     }
 
     protected function render_callback() {
-        $settings         = &$this->attributes;
+        $settings = &$this->attributes;
 
         if ( $settings['layout_template'] == 'Layout_Default' ) {
             $settings['layout_template'] = 'default';
@@ -1164,15 +1216,19 @@ class CategoryBox extends BaseWidget {
             ];
         }
 
+        $kb_slug = isset( $settings['selected_knowledge_base'] ) ? $settings['selected_knowledge_base'] : '';
+
         $params = wp_parse_args( [
-            'wrapper_attr'       => $this->get_render_attributes( 'bd_category_box_wrapper' ),
-            'inner_wrapper_attr' => $this->get_render_attributes( 'bd_category_box_inner' ),
-            'layout'             => $settings['layout_template'],
-            'widget_type'        => 'category-box',
-            'is_edit_mode'       => $is_edit_mode,
-            'term_icon_meta_key' => 'doc_category_image-id',
-            'terms_query_args'   => $this->betterdocs( 'query' )->terms_query( $terms_query ),
-            'show_description'   => $show_description
+            'wrapper_attr'            => $this->get_render_attributes( 'bd_category_box_wrapper' ),
+            'inner_wrapper_attr'      => $this->get_render_attributes( 'bd_category_box_inner' ),
+            'layout'                  => $settings['layout_template'],
+            'widget_type'             => 'category-box',
+            'multiple_knowledge_base' => $default_multiple_kb,
+            'kb_slug'                 => $kb_slug,
+            'is_edit_mode'            => $is_edit_mode,
+            'term_icon_meta_key'      => 'doc_category_image-id',
+            'terms_query_args'        => $this->betterdocs( 'query' )->terms_query( $terms_query ),
+            'show_description'        => $show_description
         ], $settings );
 
         return $params;
@@ -1586,7 +1642,7 @@ class CategoryBox extends BaseWidget {
                     ]
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .betterdocs-category-icon' => 'width: {{SIZE}}{{UNIT}}; height: auto;'
+                    '{{WRAPPER}} .betterdocs-category-icon .betterdocs-category-icon-img' => 'width: {{SIZE}}{{UNIT}}; height: auto;'
                 ]
             ]
         );
@@ -1875,8 +1931,8 @@ class CategoryBox extends BaseWidget {
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name'     => 'cat_boxex_articles_show_desc_typo_normal',
-                'selector' => '{{WRAPPER}} .betterdocs-category-description',
+                'name'      => 'cat_boxex_articles_show_desc_typo_normal',
+                'selector'  => '{{WRAPPER}} .betterdocs-category-description',
                 'condition' => [
                     'layout_template' => [
                         'layout-3'
@@ -1934,8 +1990,8 @@ class CategoryBox extends BaseWidget {
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
-                'name'     => 'cat_boxex_articles_show_desc_typo_hover',
-                'selector' => '{{WRAPPER}} .betterdocs-category-description:hover',
+                'name'      => 'cat_boxex_articles_show_desc_typo_hover',
+                'selector'  => '{{WRAPPER}} .betterdocs-category-description:hover',
                 'condition' => [
                     'layout_template' => [
                         'layout-3'

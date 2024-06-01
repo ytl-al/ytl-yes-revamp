@@ -179,7 +179,7 @@
     }
 </style>
 <!-- Vue Wrapper STARTS -->
-<div id="main-vue" style="display: none;">
+<div id="main-vue" style="display:none">
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
@@ -232,7 +232,7 @@
                                             value="eSIM" v-model="simType" :disabled="disabled !== true">
                                         <span class="plan-details">
                                             <div class="panel-img">
-                                                <img src="/wp-content/uploads/2023/06/sim.png" alt="..."
+                                                <img src="/wp-content/uploads/2023/09/e-sim.png" alt="..."
                                                     class="card-panal-img">
                                             </div>
                                             <div class="panel-body">
@@ -249,7 +249,7 @@
                                             value="physicalSIM" v-model="simType" checked>
                                         <span class="plan-details">
                                             <div class="panel-img">
-                                                <img src="/wp-content/uploads/2023/06/Physical-sim.png" alt="..."
+                                                <img src="/wp-content/uploads/2023/09/Visuals.png" alt="..."
                                                     class="card-panal-img">
                                             </div>
                                             <div class="panel-body">
@@ -262,12 +262,11 @@
                                         </span>
                                     </label>
                                     <div class="eSIM " v-if="(simType == 'eSIM')">
-                                        <img src="/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png"
-                                            alt="...">
+
                                         <div>
                                             <p>eSIM Compatibility </p>
                                             <p><span>Please ensure that your device is eSIM supported</span></p>
-                                            <span class="esim-link">Learn more about eSIM <a
+                                            <span target="_blank" class="esim-link">Learn more about eSIM <a
                                                     href="/e-sim">here</a></span>
                                         </div>
                                     </div>
@@ -283,7 +282,7 @@
                                         @click="showErrorEsimMsg()">
                                     <span class="plan-details">
                                         <div class="panel-img">
-                                            <img src="/wp-content/uploads/2023/06/sim.png" alt="..."
+                                            <img src="/wp-content/uploads/2023/09/e-sim.png" alt="..."
                                                 class="card-panal-img">
                                         </div>
                                         <div class="panel-body">
@@ -300,7 +299,7 @@
                                         value="physicalSIM" v-model="simType" checked @click="hideErrorEsimMsg()">
                                     <span class="plan-details">
                                         <div class="panel-img">
-                                            <img src="/wp-content/uploads/2023/06/Physical-sim.png" alt="..."
+                                            <img src="/wp-content/uploads/2023/09/Visuals.png" alt="..."
                                                 class="card-panal-img">
                                         </div>
                                         <div class="panel-body">
@@ -313,8 +312,7 @@
                                     </span>
                                 </label>
                                 <div class="eSIM d-none" id="eSIM_msg">
-                                    <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png"
-                                        alt="...">
+                                    
                                     <div>
                                         <p>Device eSIM Compatibility</p>
                                         <p><span>The device you have selected is not eSIM compatible.</span></p>
@@ -438,6 +436,7 @@
                 mounted: function () { },
                 created: function () {
                     var self = this;
+                    $('#main-vue').show();
                     setTimeout(function () {
                         self.pageInit();
                     }, 500);
@@ -474,6 +473,7 @@
 
                                             self.DeviceSupportEsim = data?.selected?.esim;
                                             self.PlanSupportEsim = data?.selected?.plan.esim;
+                                            console.log(self.PlanSupportEsim, data, data.selected, data.selected.plan);
                                             toggleOverlay(false);
                                         })
                                         .catch((error) => {
@@ -533,6 +533,7 @@
                         toggleOverlay(true);
                         var self = this;
                         var validSubmit = true;
+						self.sendAnalytics();
                         this.redirectVerified();
                         ywos.redirectToPage('delivery');
                         e.preventDefault();
@@ -549,7 +550,17 @@
                     hideErrorEsimMsg: function () {
                         var element = document.getElementById("eSIM_msg");
                         element.classList.add("d-none");
-                    }
+                    },
+					sendAnalytics:function(){
+                        var self = this;
+                        var eventType = 'simType';
+                        var planType= self.orderSummary.plan.planType;
+                        var planName = self.orderSummary.plan.planName;
+                        var pushData = {
+                            "SIM Type": self.simType,
+                        };
+                        pushAnalytics(eventType, pushData, planType, planName); 
+					},
                 }
             });
         });

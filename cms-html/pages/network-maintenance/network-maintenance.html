@@ -1,37 +1,42 @@
-<!-- wp:html -->
+<!-- header banner section-->
 <section class="network-m-top-banner">
     <div class="container">
         <div class="row">
             <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-7 col-sm-7 col-12">
                 <div class="banner-content-section" data-aos="fade-up">
-                    <h1>
-                        Network Status Checker</h1>
-                    <p> Check for planned upgrades, maintenance, or outage affecting your mobile experience</p>
+                    <h1>Are you experiencing<br> network issues?</h1>
+                    <p>Your area might be scheduled for maintenance.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- /wp:html -->
+<!-- End header banner section -->
 
-<!-- Map Start -->
+<!-- Map Section -->
 <section id="coverage-area">
     <h2>Check the network status in your area</h2>
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-              <div class="search-bar">
-              <input id="pac-input" class="controls" type="text" placeholder="Search Box" />
-              </div>
-              <div id="response_msg"></div>
-              <div id="map"></div>                
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="search-bar">
+                    <!-- <h3>Enter Address</h3> -->
+                    <input id="pac-input" class="controls" type="text" placeholder="Enter a location" />
                 </div>
+                <div id="response_msg"></div>
+                <div id="map"></div>
+                <div id="infowindow-content">
+                    <img src="" width="16" height="16" id="place-icon" />
+                    <span id="place-name" class="title"></span><br />
+                    <span id="place-address"></span>
+                  </div>
             </div>
         </div>
-    </section>
-    <!-- Map End -->
+    </div>
+</section>
+<!-- Map Section End -->
 
-<!-- wp:html -->
+<!-- table section -->
 <section class="mid-section">
     <div class="container">
         <div class="row">
@@ -54,7 +59,7 @@
             <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="titile-section">
                     <h3>
-                        Here is the latest information on the affected areas.
+                        Here is the latest information<br> on the affected areas.
                     </h3>
                 </div>
                 <div class="data-section-inner">
@@ -72,7 +77,7 @@
                     </div> -->
 
                     <div class="table-responsive data-table-section">
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped mb-0">
                             <thead class="thead-bg">
                                 <tr>
                                     <th>Work Start</th>
@@ -121,50 +126,179 @@
         </div>
     </div>
 </section>
-<!-- /wp:html -->
+<!-- End table section -->
 
-<!-- wp:html -->
+<!-- CTA section -->
 <section class="need-assistance-section aos-init aos-animate" data-aos="fade-up">
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto aos-init aos-animate" data-aos="fade-up">
-                <h2 class="mb-3">Need assistance? Here are some possible solutions.</h2>
+                <h2 class="mb-2">Need assistance?</h2>
+                <p class="mb-4">Here are some possible solutions.</p>
             </div>
-            <div class="col-12 col-xl-10 mx-auto">
+            <div class="col-12 col-xl-8 mx-auto">
                 <div class="row mt-3">
-                    <div class="col-12 col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up">
+                    <!-- <div class="col-12 col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up">
+                        &nbsp;
+                    </div> -->
+                    <div class="col-12 col-md-6 mb-4 order-2 aos-init aos-animate" data-aos="fade-up">
                         <div class="card">
                             <div class="card-body">
                                 <img decoding="async" class="" src="/wp-content/uploads/2023/07/self-help-icon.png"
                                     alt="img-fluid">
-                                <h5 class="mb-1">Self Help</h5>
+                                <h5 class="">Self Help</h5>
                                 <p>Here is some useful information that may solve your problem.</p>
-                                <a href="#" class="viewall-btn mb-5">
-                                    Read More&nbsp;<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                                <a href="javascript:void(0)" class="viewall-btn mb-5">
+                                    READ MORE&nbsp;<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up">
+                    <div class="col-12 col-md-6 mb-4 order-1 aos-init aos-animate" data-aos="fade-up">
                         <div class="card">
                             <div class="card-body">
-                                <img decoding="async" class="" src="/wp-content/uploads/2023/07/call-us-icon.png"
+                                <img decoding="async" class="" src="/wp-content/uploads/2023/08/mail-icon-e.png"
                                     alt="img-fluid">
-                                <h5 class="mb-1">Call us</h5>
-                                <p>We are just a call away.</p>
-                                <a href="#" class="viewall-btn mb-5">
-                                    Call now&nbsp;<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                                <h5 class="mb-1">Email us</h5>
+                                <p>We are just a Email away.</p>
+                                <a href="mailto:yescare@yes.my" class="viewall-btn mb-5">
+                                    Email us&nbsp;<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
-                    <div class="col-12 col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up">
+                    <!-- <div class="col-12 col-md-4 mb-4 order-2 aos-init aos-animate" data-aos="fade-up">
                         <div class="card">
                             <div class="card-body">
-                                <img decoding="async" class="" src="/wp-content/uploads/2023/07/yes-twitter-icon.png"
+                                <img decoding="async" class="" src="/wp-content/uploads/2023/12/twitter-icon.png"
                                     alt="img-fluid">
-                                <h5 class="mb-1">@yes.5g</h5>
+                                <h5 class="">@yes.5g</h5>
                                 <p>DM us on Twitter and we will reply as soon as we can.</p>
-                                <a href="#" class="viewall-btn mb-5">
-                                    DM us&nbsp;<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                                <a href="https://twitter.com/Yes_5G" target="_blank" class="viewall-btn mb-5">
+                                    DM US&nbsp;<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end CTA section -->
+
+<!-- Footer FAQs STARTS -->
+<section class="layer-footerFAQ mt-4 mt-lg-0" id="faq-section" data-aos="fade-up">
+    <div class="container">
+        <div class="row">
+            <h1 class="mb-5">Got a Question for Us?</h1>
+        </div>
+        <div class="row justify-content-lg-center">
+            <div class="col-12 col-lg-9">
+                <div class="accordion accordion-flush mb-3" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne"><button class="accordion-button collapsed"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+                                aria-expanded="false" aria-controls="flush-collapseOne">
+                                What is the network status checker? </button></h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse"
+                            aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample" style="">
+                            <div class="accordion-body">
+                                <p>The network status checker is a network outage map that provides you with a view of all network outages on our network. You can also use the address search feature to see if there is an active network outage in your area. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingTwo"><button class="accordion-button collapsed"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
+                                aria-expanded="false" aria-controls="flush-collapseTwo">
+                                How long does it take to resolve a network outage?  </button></h2>
+                        <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                            aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <p>The time taken to resolve a network outage may differ on a case to case basis. However, please be assured that our engineers are working to restore the service as soon as possible. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingThree"><button class="accordion-button collapsed"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"
+                                aria-expanded="false" aria-controls="flush-collapseThree">
+                                What can I do if there is a network outage and I don’t have service?   </button></h2>
+                        <div id="flush-collapseThree" class="accordion-collapse collapse"
+                            aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <p>During a network outage we recommend you connect to any other available Wi-Fi network for a data connection.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingFour"><button class="accordion-button collapsed"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour"
+                                aria-expanded="false" aria-controls="flush-collapseFour">
+                                Do I need to manually reconnect my device to the network after a network outage?  </button></h2>
+                        <div id="flush-collapseFour" class="accordion-collapse collapse"
+                            aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <p>No, once network service is restored, your device will automatically receive a signal again. If you’re still experiencing issues after service is restored, please switch the flight mode on and off on your device or restart your device to refresh the network connectivity. </p>
+                            </div>
+                        </div>
+                    </div>                    
+
+                </div>
+                <p class="text-center mb-0"><a href="/faq" class="viewall-btn">View All FAQ <span class="iconify"
+                            data-icon="akar-icons:arrow-right"></span></a></p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer FAQs ENDS -->
+
+
+
+<!-- CTA section -->
+<section class="need-assistance-section aos-init aos-animate" data-aos="fade-up">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto aos-init aos-animate" data-aos="fade-up">
+                <h2 class="mb-2">Need assistance?</h2>
+                <p class="mb-4">Here are some possible solutions.</p>
+            </div>
+            <div class="col-12 col-xl-10 mx-auto">
+                <div class="row mt-3">
+                    <!-- <div class="col-12 col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up">
+                        &nbsp;
+                    </div> -->
+                    <div class="col-12 col-md-4 mb-4 order-3 aos-init aos-animate" data-aos="fade-up">
+                        <div class="card">
+                            <div class="card-body">
+                                <img decoding="async" class="" src="/wp-content/uploads/2023/07/self-help-icon.png"
+                                    alt="img-fluid">
+                                <h5 class="">Self Help</h5>
+                                <p>Here is some useful information that may solve your problem.</p>
+                                <a href="javascript:void(0)" class="viewall-btn mb-5">
+                                    READ MORE&nbsp;<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 mb-4 order-1 aos-init aos-animate" data-aos="fade-up">
+                        <div class="card">
+                            <div class="card-body">
+                                <img decoding="async" class="" src="/wp-content/uploads/2023/12/call-icon.png"
+                                    alt="img-fluid">
+                                <h5 class="">Call us</h5>
+                                <p>We are just a call away.</p>
+                                <a href="mailto:yescare@yes.my" target="_blank" rel="noopener" class="viewall-btn mb-5">
+                                    CALL NOW&nbsp;<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 mb-4 order-2 aos-init aos-animate" data-aos="fade-up">
+                        <div class="card">
+                            <div class="card-body">
+                                <img decoding="async" class="" src="/wp-content/uploads/2023/12/twitter-icon.png"
+                                    alt="img-fluid">
+                                <h5 class="">@yes.5g</h5>
+                                <p>DM us on Twitter and we will reply as soon as we can.</p>
+                                <a href="https://twitter.com/Yes_5G" target="_blank" class="viewall-btn mb-5" rel="noopener">
+                                    DM US&nbsp;<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
                             </div>
                         </div>
                     </div>
@@ -173,4 +307,4 @@
         </div>
     </div>
 </section>
-<!-- /wp:html -->
+<!-- end CTA section -->

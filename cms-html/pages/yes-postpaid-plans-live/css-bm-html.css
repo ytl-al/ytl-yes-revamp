@@ -1,0 +1,1555 @@
+<style type="text/css">
+    #postpaid-top-banner {
+        background-image: url('/wp-content/uploads/2022/05/postpaid-banner-bg-new-scaled.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        overflow: hidden;
+    }
+
+    #postpaid-top-banner h1 {
+        font-size: 50px;
+        font-family: 'Montserrat', sans-serif;
+        line-height: 50px;
+        font-weight: 700;
+        color: #FFF;
+        margin-bottom: 20px;
+    }
+
+    #postpaid-top-banner p {
+        font-size: 20px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+        line-height: 24px;
+        color: #FFF;
+        padding-right: 16%;
+    }
+
+    #postpaid-top-banner p span {
+        font-weight: 800;
+    }
+
+    .hero-slider-section {
+        position: relative;
+        background-color: #1A1E47;
+    }
+
+    .hero-slider .slick-dots {
+        bottom: 10px;
+    }
+
+    .hero-slider .slick-dots li button:before {
+        font-size: 12px;
+        line-height: 16px;
+        color: #cbcbcb !important;
+    }
+
+    .hero-slider .slick-dots li.slick-active button:before {
+        opacity: .75;
+        color: #ff0084 !important;
+    }
+
+    .hero-slider.slick-dotted.slick-slider {
+        margin-bottom: 0px;
+    }
+
+    .slick-dots li button:before {
+        font-size: 8px;
+    }
+
+    .hero-slider .inner-content-sec {
+        margin: 0 0 20px;
+        padding: 10px 0 0 4%;
+        position: absolute;
+        top: 10%;
+        left: 5%;
+        z-index: 99;
+    }
+
+    .hero-slider .inner-content-sec .title-sec {
+        position: relative;
+        display: block;
+        width: 56%
+    }
+
+    .title-sec img {
+        width: 150px;
+        margin-bottom: 20px;
+    }
+
+    .hero-slider .inner-content-sec h2 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 39px;
+        line-height: 42px;
+        text-align: left;
+        letter-spacing: -0.02em;
+        color: #FFF;
+        margin-bottom: 5px;
+        padding: 0;
+    }
+
+    .hero-slider .inner-content-sec p {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 24px;
+        text-align: left;
+        color: #ffffff;
+        letter-spacing: -0.02em;
+    }
+
+    .hero-slider .inner-content-sec .pricing {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background-color: #2F3BF5;
+        display: flex;
+        position: absolute;
+        top: 20%;
+        right: 20%;
+    }
+
+    .hero-slider .inner-content-sec .pricing h4 {
+        color: #FFF;
+        font-weight: 800;
+        font-size: 50px;
+        line-height: 50px;
+        padding-top: 5px;
+        letter-spacing: -0.02em;
+    }
+
+    .hero-slider .inner-content-sec .pricing h4 sup {
+        font-size: 30px;
+    }
+
+    .hero-slider .inner-content-sec .pricing p {
+        color: #FFF;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        margin: -15px 0;
+        padding: 0;
+    }
+
+    .hero-slider .inner-content-sec .pricing .month-sec {
+        color: #FFF;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: -0.02em;
+        text-transform: none;
+        text-align: right;
+        padding: 0;
+        margin: 0;
+    }
+
+    .hero-slider .inner-content-sec .pricing-2 {
+        width: 190px;       
+        display: flex;
+        margin-top: 15px;
+    }
+
+    .hero-slider .inner-content-sec .pricing-2 h4 {
+        color: #FFF;
+        font-weight: 800;
+        font-size: 70px;
+        line-height: 50px;
+        padding-top: 5px;
+        letter-spacing: -0.02em;
+        position: relative;
+        margin-left: 38px;
+    }
+
+    .hero-slider .inner-content-sec .pricing-2 h4 span {
+        font-weight: 500;
+        line-height: 18px;
+        font-size: 15px;
+        letter-spacing: 0;
+        text-transform: uppercase;
+    }
+
+    .hero-slider .inner-content-sec .pricing-2 h4 span b {
+        font-size: 24px;
+    }
+
+    .hero-slider .inner-content-sec .pricing-2 h4 sup {
+        font-size: 24px;
+    line-height: 24px;
+    display: flex;
+    height: 40px;
+    position: absolute;
+    left: -38px;
+    top: 0px;
+    }
+
+    .hero-slider .inner-content-sec .pricing-2 p {
+        color: #FFF;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: -0.02em;
+        text-transform:none;
+        margin: -15px 0;
+        padding: 0;
+    }
+
+    .hero-slider .inner-content-sec .pricing-2 .month-sec {
+        color: #FFF;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 16px;
+        letter-spacing: 0;
+        text-transform: none;
+        text-align: right;
+        padding: 0;
+        margin: 0;
+    }
+
+    .hero-slider .inner-content-sec .btn-sec {
+        margin: 20px 0 0;
+        padding: 0;
+    }
+
+    .hero-slider .inner-content-sec .pink-btn {
+        background-color: #2F3BF5 !important;
+        border: 0px solid #2F3BF5;
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: normal;
+        text-transform:none;
+        padding: 0.7rem 1.8rem;
+    }
+
+    .content-section-mid {
+        margin: 20px 0 30px;
+        padding: 0 30px 0 0;
+    }
+
+    .content-section-mid .content-sec {
+        margin: 0 30px 0 0;
+        padding: 0 30px 0 0;
+        font-family: 'Montserrat';
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: left;
+        color: #ffffff;
+        border-right: 1px solid #fff;
+        width: 18%;
+    }
+
+    .content-section-mid .content-sec:nth-child(3) {
+        border-right: 0px;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .content-section-mid .content-sec img {
+        float: left;
+        margin: 0 10px 0 0;
+    }
+
+    #switch-yes {
+        background: #FF0084 !important;
+    }
+    #switch-yes h1{
+        font-size: 39px !important;
+        line-height: 47% !important;
+    }
+
+    #wfh h1{
+        font-size: 39px ;
+        line-height: 47px ;
+    }
+
+    /* Postpaid Plans styling */
+
+    #postpaid-plans {
+        align-items: center;
+        justify-content: center;
+        padding: 70px 0px;
+        padding-top: 0px;
+        background-color: #F7F8F9;
+    }
+
+    #postpaid-plans h1 {
+        font-size: 39px;
+        font-weight: 800;
+        line-height: 47px;
+        color: #000;
+        padding-top: 60px;
+    }
+
+    #postpaid-plans .plan-table {
+        border-spacing: 8px 0px;
+        border-collapse: initial;
+    }
+
+    #postpaid-plans .plan-table th {
+        padding: 9px 30px;
+        vertical-align: middle;
+        background-color: #FFF;
+        border: none;
+        border-radius: 10px;
+        width: 20%;
+        text-align: center;
+    }
+
+    #postpaid-plans .plan-table th .pink-btn {
+        padding: .375rem .75rem;
+        display: inline-block;
+    }
+
+    #postpaid-plans .plan-table th.visual {
+        background-color: transparent;
+        border: none;
+    }
+
+    #postpaid-plans .plan-table th h1 {
+        color: #2B2B2B;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 400;
+        text-align: center;
+        margin-bottom: 15px;
+        padding-top: 0px;
+    }
+
+    #postpaid-plans .plan-table th h2 {
+        color: #000;
+        font-size: 18px;
+        line-height: 23px;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    #postpaid-plans .plan-table tr td {
+        padding: 20px;
+        text-align: center;
+        background-color: #FFF;
+        border-bottom: solid 1.5px #d5d5d5;
+        color: #2B2B2B;
+        font-size: 15px;
+        font-weight: 600;
+        vertical-align: middle;
+    }
+
+    #postpaid-plans .plan-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    #postpaid-plans .plan-table tr td.blue-col {
+        background-color: #1A1E47;
+        border-bottom: none;
+        position: relative;
+        color: #F9F7F4;
+        text-align: left;
+    }
+
+    #postpaid-plans .plan-table tr td.blue-col .info-icon {
+        /* position: absolute;
+        right: 22px;
+        top: 22px; */
+        float: right;
+    }
+
+    #postpaid-plans .plan-table tr td.blue-col:after {
+        clear: both;
+        content: '';
+        display: block;
+    }
+
+    #postpaid-plans .plan-table tr td.empty-row {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        height: 10px;
+    }
+
+    /* Switch Yes styling */
+
+    #wfh {
+        background-color: #F7F8F9;
+        /* background-image: url('/wp-content/uploads/2022/05/roaming-banner-bg2-scaled.jpg');
+        background-size: cover;
+        background-repeat: no-repeat; */
+        padding: 96px 0px;
+    }
+
+    #wfh h1 {
+        font-size: 39px;
+        font-weight: 800;
+        line-height: 47px;
+        color: #000;
+        text-align: left;
+    }
+
+    #wfh p {
+        font-size: 16px;
+        line-height: 24px;
+        color: #525252;
+        text-align: left;
+    }
+
+    #infinite-banner {
+        background-image: url('/wp-content/uploads/2023/12/yesinfinite-banner-bg-bm.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 80px 0px;
+        overflow: hidden;
+    }
+
+    #infinite-banner h1 {
+        font-size: 39px;
+        font-family: 'Montserrat', sans-serif;
+        line-height: 47px;
+        font-weight: 800;
+        color: #FFF;
+        margin-bottom: 20px;
+    }
+
+    #infinite-banner h2 {
+        font-size: 26px;
+        font-family: 'Montserrat', sans-serif;
+        line-height: 34px;
+        font-weight: 700;
+        color: #FFF;
+        margin-bottom: 20px;
+    }
+
+    #infinite-banner p {
+        font-size: 16px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+        line-height: 24px;
+        color: #FFF;
+    }
+
+    #infinite-banner .pink-btn{background-color: #2F3BF5 !important;}
+
+    #switch-banner {
+        background-image: url('/wp-content/uploads/2023/12/telco-capping-banner-bm.png');
+        background-color: #FF0084;
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 45px 0px 30px;
+        overflow: hidden;
+        text-align: center;
+        border-radius: 16px;
+        height: 308px;
+    }
+
+    #switch-banner h2 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 40px;
+        line-height: 46px;
+        text-align: center;
+        letter-spacing: -0.02em;
+        color: #FFF;
+        margin-bottom: 20px;
+    }
+
+    #switch-banner p {
+        font-size: 16px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 400;
+        line-height: 34px;
+        color: #FFF;
+        text-shadow: -2px 2px 3px rgba(0, 0, 0, 0.25);
+    }
+
+    #supplementary-section-m {
+        margin: 70px 0 0
+    }
+
+    #supplementary-section {
+        background-image: url('/wp-content/uploads/2023/06/supplementary-sec-bg.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        padding: 45px 100px 30px;
+        overflow: hidden;
+        border-radius: 16px;
+        border: 1px solid #E8E9ED;
+    }
+
+    #supplementary-section .title-section {
+        display: flex;
+        align-items: center;
+    }
+
+    #supplementary-section .title-section h2 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 39px;
+        line-height: 47px;
+        letter-spacing: -0.02em;
+        color: #000;
+    }
+
+    #supplementary-section .title-section h2 span {
+        color: #FF0084
+    }
+
+    #supplementary-section .title-section .pricing {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background-color: #FF0084;
+        display: flex;
+    }
+
+    #supplementary-section .title-section .pricing h4 {
+        color: #FFF;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 24px;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+    }
+
+    #supplementary-section .title-section .pricing h5 {
+        color: #FFF;
+        font-weight: 700;
+        font-size: 39px;
+        line-height: 24px;
+        padding-top: 5px;
+        letter-spacing: -0.02em;
+    }
+
+    #supplementary-section .title-section .pricing p {
+        color: #FFF;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+        font-family: 'Montserrat', sans-serif;
+        font-style: normal;
+        letter-spacing: -0.02em;
+        text-align: right;
+        margin: 5px 0 0;
+    }
+
+    .usp-section {
+        background: none;
+        border: 0px solid #2F3BF5;
+        border-radius: 15px;
+        padding: 20px;
+        width: 68%;
+    }
+
+    .usp-section ul {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .usp-section li {
+        width: 33.33%;
+        padding: 0 15px;
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 17px;
+        line-height: 18px;
+        text-align: center;
+        color: #2B2B2B;
+        border-right: 1px solid #E4E4E4;
+    }
+
+    .usp-section li:first-child {
+        padding: 0 15px 0 0;
+    }
+
+    .usp-section li:last-child {
+        border-right: 0px solid #E4E4E4;
+        padding: 0 0 0 15px;
+    }
+
+    .step-layer-sec .panel-stepHeading {
+        font-size: 18px;
+        line-height: 23px;
+        font-weight: 800;
+        text-transform: uppercase;
+        font-family: 'Montserrat', sans-serif;
+        color: #1A1E47;
+    }
+
+    .step-layer-sec .icon-stepHeading {
+        background: #1A1E47;
+        border-radius: 100%;
+        display: inline-block;
+        margin: 0 12px 0 0;
+        padding: 5px 0 0;
+        text-align: center;
+        vertical-align: middle;
+        height: 28px;
+        width: 28px;
+        line-height: 16px;
+    }
+
+    .step-layer-sec p {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 24px;
+        color: #525252;
+    }
+
+    #alternative-supp-plans {
+        align-items: center;
+        justify-content: center;
+        padding: 70px 0px 0;
+        padding-top: 0px;
+    }
+
+    #alternative-supp-plans .alternative-supp-heading {
+        font-size: 39px;
+        font-weight: 800;
+        line-height: 47px;
+        color: #000;
+        padding-top: 60px;
+    }
+
+    .alternative-supp-card {
+        background: #FFFFFF;
+        border: 1px solid #2F3BF5;
+        border-radius: 20px;
+        padding: 32px 20px;
+        height: 100%;
+    }
+
+    .alternative-supp-card-detail {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-between;
+    }
+
+    .alternative-supp-card .alternative-supp-card-detail h5 {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
+        color: #2F3BF5;
+        padding: 0 15px;
+    }
+
+    .alternative-supp-card .alternative-supp-card-detail h2 {
+        font-size: 21px;
+        line-height: 24px;
+        font-weight: 800;
+        color: #000;
+        text-align: center;
+        padding-top: 10px;
+    }
+
+    .alternative-supp-card .alternative-supp-card-detail .alternative-supp-card-list {
+        border-top: 1px solid #E4E4E4;
+        padding: 20px 0 0;
+        margin: 20px 0 0;
+    }
+
+    .alternative-supp-card-list ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .alternative-supp-card-list ul li {
+        font-family: 'Open Sans';
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 0 8px;
+        color: #2B2B2B;
+        display: flex;
+        gap: 10px;
+    }
+
+    .alternative-supp-card-list ul li:before {
+        content: url(/wp-content/uploads/2023/05/list-check.png);
+    }
+
+    .alternative-supp-card .alternative-supp-card-detail a.btn.pink-btn {
+        width: 100%;
+        margin: 36px 0 0;
+    }
+
+    #alternative-supp-plans .pink-btn {
+        background-color: #FF0084;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        padding: 1rem 2rem;
+        color: #FFF;
+        text-align: center;
+        text-transform: uppercase;
+        border-radius: 50px;
+    }
+
+    #alternative-supp-plans .pink-btn:hover {
+        color: #FFF;
+        background-color: #D00072;
+    }
+    .pink-btn{ padding: 0.7rem 1.5rem !important;}
+
+    #easy-steps .nav-tabs {
+        border-bottom: none;
+    }
+
+    #easy-steps .nav-tabs .nav-link {
+        border: none;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 19px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #ff0084;
+        background-color: #fff;
+        border: 2px solid #ff0084;
+        /* border-top-right-radius: 1.25rem;
+    border-bottom-right-radius: 1.25rem; */
+        border-top-left-radius: 0;
+        padding: 0.5rem 2rem;
+
+    }
+
+    #easy-steps .nav {
+        justify-content: center;
+    }
+
+    #easy-steps .nav-tabs .nav-link.active {
+        color: #fff;
+        background-color: #ff0084;
+        /*border: 2px solid #ff0084; */
+    }
+
+    #easy-steps .nav-tabs .nav-item.show .nav-link {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 19px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #FF0084;
+    }
+
+    #easy-steps .nav-tabs .left-tab {
+        border-top-left-radius: 1.25rem;
+        border-bottom-left-radius: 1.25rem;
+        border-top-right-radius: 0;
+    }
+
+    #easy-steps .nav-tabs .right-tab {
+        border: 2px solid #ff0084;
+        border-top-right-radius: 1.25rem;
+        border-bottom-right-radius: 1.25rem;
+    }
+
+    #easy-steps .nav .nav-item {
+        margin: 0 0px
+    }
+
+    #easy-steps #myTabContent {
+        padding: 0px 0 0
+    }
+
+    #wfh .order-1 {
+        order: unset;
+    }
+
+    #wfh .order-2 {
+        order: unset !important;
+    }
+
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+        .hero-slider .slick-dots {
+            bottom: 10px;
+        }
+
+        .hero-slider .slick-dots li button:before {
+            font-size: 12px;
+            line-height: 16px;
+            color: #cbcbcb !important;
+        }
+
+        .hero-slider .slick-dots li.slick-active button:before {
+            opacity: .75;
+            color: #ff0084 !important;
+        }
+
+        .hero-slider.slick-dotted.slick-slider {
+            margin-bottom: 0px;
+        }
+
+        #postpaid-top-banner {
+            background-position: top right;
+        }
+
+        #postpaid-top-banner h1 {
+            font-size: 30px;
+            line-height: 30px;
+            text-align: left;
+        }
+
+        #postpaid-top-banner p {
+            line-height: 25px;
+            font-size: 17px;
+            text-align: left;
+            margin-bottom: 20px;
+            padding: 0;
+        }
+
+        #postpaid-top-banner {
+            padding-top: 20px;
+        }
+
+        #postpaid-top-banner .banner-visual {
+            text-align: center;
+        }
+
+        #postpaid-top-banner .banner-visual img {
+            margin: 0 auto;
+            margin-top: 20px;
+            width: 70% !important;
+            display: inline-block !important;
+        }
+
+        #easy-steps .content {
+            padding: 0px 13px !important;
+        }
+
+        #wfh {
+            padding: 56px 0px;
+        }
+
+        #wfh h1 {
+            font-size: 39px;
+            line-height: 47px;
+        }
+    }
+
+    /* Portrait */
+
+    @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
+        #wfh {
+            padding: 16px 0px;
+        }
+    }
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+        #postpaid-plans h1 {
+            font-size: 30px;
+            line-height: 39px;
+            padding-top: 28px;
+        }
+
+        #postpaid-plans .plan-table tr td {
+            padding: 10px;
+        }
+
+        #postpaid-plans .plan-table th {
+            padding: 9px 13px;
+            min-width: 125px;
+        }
+
+        #postpaid-plans .plan-table th .pink-btn {
+            font-size: 12px;
+        }
+
+        #postpaid-plans .plan-table th h1 {
+            font-size: 12px;
+        }
+
+        #postpaid-plans .plan-table tr td.blue-col,
+        #postpaid-plans .plan-table tr td.row-jumpSection {
+            min-width: 127px;
+            font-size: 12px;
+            position: sticky;
+            left: 0;
+        }
+
+        #postpaid-plans .plan-table th.visual {
+            background-color: #F7F8F9;
+            position: sticky;
+            left: 0;
+        }
+
+        #postpaid-plans .plan-table tr td.blue-col .info-icon {
+            display: none;
+        }
+
+        #postpaid-plans .plan-table tr td {
+            font-size: 12px;
+        }
+
+        #postpaid-plans .plan-table th h2 {
+            font-size: 14px;
+        }
+
+        #postpaid-top-banner {
+            background-position: top right;
+        }
+
+        #postpaid-top-banner h1 {
+            font-size: 28px;
+            line-height: 36px;
+            text-align: center;
+        }
+
+        #postpaid-top-banner p {
+            line-height: 25px;
+            padding: 0px 5%;
+            font-size: 17px;
+            text-align: center;
+        }
+
+        #postpaid-top-banner {
+            padding-top: 20px;
+        }
+
+        #postpaid-top-banner .banner-visual {
+            text-align: center;
+        }
+
+        #postpaid-top-banner .banner-visual img {
+            margin: 0 auto;
+            margin-top: 20px;
+            width: 70% !important;
+            display: inline-block !important;
+        }
+
+        #easy-steps h1,
+        #databck-rewards h1,
+        #switch-yes h1,
+        #wfh h1,
+        #faq-section h1 {
+            font-size: 28px;
+            line-height: 36px;
+        }
+
+        #wfh {
+            /* background-image: url('/wp-content/uploads/2022/05/roaming-banner-bg-mobile2.jpg'); */
+            padding: 50px 0px;
+        }
+
+        #wfh h1 {
+            font-size: 28px;
+            line-height: 36px;
+            text-align: center;
+            padding: 0 15px;
+            margin-top: 15px;
+        }
+
+        #wfh p {
+            text-align: center;
+            padding: 0 15px;
+        }
+
+        #wfh img {
+            /* margin-left: 20px; */
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* #infinite-banner h1 {
+            font-size: 38px;
+            line-height: 52px;
+        }
+        #infinite-banner {
+            padding: 35px 0px;
+        } */
+    }
+
+    .bg-color {
+        background: linear-gradient(275.75deg, #2F3BF5 -0.54%, #FF0084 104.67%);
+        color: #fff;
+        text-align: left !important;
+        padding: 15px 30px !important;
+    }
+
+    tr.row-jumpSection {
+        cursor: pointer;
+    }
+
+    .yt_postpaid_plan_label {
+        white-space: nowrap;
+        padding: 10px;
+    }
+
+    .yt_postpaid_plan_prize {
+        margin-bottom: 20px;
+    }
+
+    /* postpaid-plans-card-start */
+
+    #postpaid-plans-card {
+        align-items: center;
+        justify-content: center;
+        padding: 70px 0px;
+        padding-top: 0px;
+        background-color: #F7F8F9;
+    }
+
+    #postpaid-plans-card .postpaid-heading {
+        font-size: 39px;
+        font-weight: 800;
+        line-height: 47px;
+        color: #000;
+        padding-top: 60px;
+    }
+
+    .post-paid-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-column-gap: 12px;
+        margin: 40px 0;
+    }
+
+    .post-card {
+        background: #FFFFFF;
+        border: 1px solid #F7F8F9;
+        border-radius: 20px;
+        padding: 32px 18px;
+        height: 100%;
+    }
+
+    .post-card-detail {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-between;
+    }
+
+    .post-card .post-card-detail h5 {
+        /*background: linear-gradient(80.9deg, #FF0084 16.48%, #6F29D2 85.6%, #2F3BF5 96.9%);*/
+        background: #FF0084;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 800;
+        font-size: 23px;
+        line-height: 28px;
+        letter-spacing: -0.02em;
+    }
+
+    .post-card .post-card-detail h1 {
+        font-weight: 800;
+        font-size: 45px;
+        line-height: 56px;
+        color: #000;
+    }
+
+    .post-card .post-card-detail h1 span {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 40px;
+        padding-left: 2px;
+    }
+
+    .post-card .post-card-detail h6 {
+        font-weight: 700;
+        font-size: 21px;
+        line-height: 28px;
+        margin: 0;
+    }
+
+    .post-card .post-card-detail .post-card-list {
+        border-top: 1px solid #E4E4E4;
+        padding: 20px 0 0;
+        margin: 20px 0 0;
+    }
+
+    .post-card-list p {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 22px;
+        color: #1A1E47;
+        margin: 0 0 8px;
+    }
+
+    .post-card-list ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .post-card-list ul li {
+        font-family: 'Open Sans';
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0 0 8px;
+        color: #2B2B2B;
+        display: flex;
+        gap: 10px;
+    }
+
+    .post-card-list ul li:before {
+        content: url('/wp-content/uploads/2023/06/list-check.png');
+    }
+
+    .post-card-list ul li span {
+        color: #ff0084;
+        margin-top: 10px;
+        font-size: 12px;
+    }
+
+    .post-card .post-card-detail a.btn.pink-btn {
+        width: 100%;
+        margin: 36px 0 0;
+    }
+
+    .term-condition-text {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 24px;
+        text-align: center;
+    }
+
+    .more-information {
+        background: #1A1E47;
+        padding: 34px 32px;
+        margin: 48px 0 0;
+    }
+
+    .more-information p {
+        font-weight: 800;
+        font-size: 23px;
+        line-height: 28px;
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .more-information .learn-more-btn {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 16px;
+        text-transform: uppercase;
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        border: 2px solid #fff;
+        padding: 0.7rem 2.3rem;
+        border-radius: 50px;
+        display: block;
+        text-align: center;
+    }
+
+    #post-plan-card {
+        margin: 20px 30px 50px;
+    }
+
+    #post-plan-card .carousel-indicators {
+        bottom: -55px;
+    }
+
+    #post-plan-card .carousel-indicators button {
+        background-color: #aaa !important;
+    }
+
+    #post-plan-card .carousel-indicators button.active {
+        background-color: #888 !important;
+    }
+
+    #post-plan-card .carousel-buttons .carousel-control-next {
+        right: -45px !important;
+    }
+
+    #post-plan-card .carousel-buttons .carousel-control-next span {
+        background-image: none !important;
+        display: block;
+        width: 20px;
+        height: 20px;
+        border-top: 2px solid #1A1E47;
+        border-left: 2px solid #1A1E47;
+        transform: rotate(135deg);
+    }
+
+    #post-plan-card .carousel-buttons .carousel-control-prev {
+        left: -45px !important;
+    }
+
+    #post-plan-card .carousel-buttons .carousel-control-prev span {
+        background-image: none !important;
+        display: block;
+        width: 20px;
+        height: 20px;
+        border-top: 2px solid #1A1E47;
+        border-left: 2px solid #1A1E47;
+        transform: rotate(-45deg);
+    }
+
+    @media(max-width:768px) {
+        .more-information .learn-more-btn {
+            width: fit-content !important;
+            margin: 20px 0 0 !important;
+        }
+
+        .more-information {
+            margin: 0 !important;
+        }
+
+        #postpaid-top-banner {
+            background-image: url(/wp-content/uploads/2023/06/p-top-banner-bg-mob.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-color: #1c1e45
+        }
+
+        #postpaid-top-banner h1 {
+            font-size: 28px;
+            line-height: 36px;
+        }
+
+        #postpaid-top-banner p {
+            line-height: 25px;
+            padding: 0px 5%;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        #post-plan-card .carousel-indicators button.active {
+            background-color: #1A1E47 !important;
+        }
+
+        #postpaid-plans-card .postpaid-heading {
+            font-size: 28px;
+            font-weight: 800;
+            line-height: 36px;
+        }
+        #postpaid-plans-card .postpaid-heading br{display: none;}
+
+        .term-condition-text {
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 17px;
+        }
+
+        #switch-banner {
+            background-image: url('/wp-content/uploads/2023/12/telco-capping-banner-mob-bm.png');
+            background-color: #F9F7F4;
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 45px 15px 30px;
+            overflow: hidden;
+            text-align: center;
+            border-radius: 16px;
+            background-position: bottom left;
+        }
+
+        #switch-banner h2 {
+            font-size: 28px;
+            line-height: 36px;
+            text-align: center;
+            letter-spacing: unset;
+            color: #FFF;
+            margin-bottom: 20px;
+        }
+
+        #switch-banner h2 br {
+            display: none;
+        }
+
+        #switch-banner p {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 18px;
+        }
+
+        #switch-banner .pink-btn {
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 18px;
+            padding: 0.7rem 1.3rem;
+            letter-spacing: 0.1em;
+        }
+
+        #supplementary-section-m {
+            margin: unset;
+            background-color: #F7F8F9;
+        }
+
+        #supplementary-section {
+            padding: 30px 15px 30px;
+            background-color: #fff;
+            min-height: 910px;
+            position: relative;
+            background-image: url(/wp-content/uploads/2023/06/supplementary-bg_mob.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center right;
+        }
+
+        #supplementary-section .title-section {
+            display: block;
+            align-items: unset;
+            text-align: center;
+        }
+
+        #supplementary-section .title-section h2 {
+            font-size: 28px;
+            line-height: 36px;
+        }
+        #supplementary-section .title-section h2 br{display: none;}
+
+        #supplementary-section .title-section .pricing {
+            width: 130px;
+            height: 130px;
+            border-radius: 100%;
+            padding: 15px;
+            position: absolute;
+            top: 37%;
+            left: 8%;
+        }
+
+        #supplementary-section .title-section .pricing h4 {
+            font-size: 16px;
+            line-height: 24px;
+        }
+
+        #supplementary-section .title-section .pricing h5 {
+            font-size: 30px;
+            line-height: 15px;
+            padding-top: 5px;
+        }
+
+        #supplementary-section .title-section .pricing p {
+            font-size: 16px;
+            line-height: 24px;
+        }
+
+        .usp-section {
+            padding: 15px;
+            width: 100%;
+            display: inline-block;
+            overflow: auto;
+        }
+
+        .usp-section ul {
+            list-style-type: none;
+            display: unset;
+            align-items: unset;
+        }
+
+        .usp-section li {
+            width: 50%;
+            padding: 15px 7px;
+            font-size: 14px;
+            line-height: 16px;
+            float: left;
+            height: 80px;
+        }
+
+        .usp-section li:first-child {
+            padding-top: 0;
+            border-right: 1px solid #E4E4E4;
+            border-bottom: 1px solid #E4E4E4;
+        }
+
+        .usp-section li:nth-child(2) {
+            padding-top: 0;
+            border-right: 0px solid #E4E4E4;
+            border-bottom: 1px solid #E4E4E4;
+        }
+
+        .usp-section li:last-child {
+            padding-top: 15px;
+            border-right: 0px solid #E4E4E4;
+        }
+
+        .usp-section li br {
+            display: block;
+        }
+
+        #easy-steps {
+            background-color: #F7F8F9;
+        }
+
+        .step-layer-sec-m {
+            margin-top: 275px !important;
+            border-top: 1px solid #E8F0FD;
+            background-color: #fff;
+        }
+
+        .step-layer-sec:nth-child(1) {
+            margin: 30px 0;
+        }
+
+        #easy-steps h1 {
+            font-size: 28px;
+            line-height: 36px;
+            padding: 0px 20px;
+        }
+
+        #easy-steps h1 br {
+            display: none;
+        }
+
+        #easy-steps .content {
+            padding: 20px 70px 0 !important;
+            text-align: left;
+        }
+
+        #easy-steps .step-mob-visual {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        #easy-steps h3 {
+            display: unset;
+        }
+
+        #easy-steps-sec .pink-btn {
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 18px;
+            padding: 0.7rem 1.3rem;
+            letter-spacing: 0.1em;
+        }
+
+        #infinite-banner {
+            background-image: url(/wp-content/uploads/2023/12/yesinfinite-banner_mobile-bm.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 50px 20px 130px;
+            background-position: bottom right;
+            background-color: #27129b;
+            height: 480px;
+        }
+
+        #infinite-banner h1 {
+            font-size: 26px;
+            line-height: 36px;
+            padding: 0 70px 0 0;
+            margin-bottom: 10px;
+        }
+
+        #infinite-banner h2 {
+            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 21px;
+            font-weight: 700;
+            color: #FFF;
+            margin-bottom: 20px;
+        }
+
+        #infinite-banner p {
+            font-size: 12px;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 400;
+            line-height: 17px;
+            color: #FFF;
+        }
+
+        #infinite-banner .pink-btn {
+            padding: 0.7rem 1.2rem;
+            font-size: 12px;
+        }
+
+        #faq-section h1 br {
+            display: none;
+        }
+
+        #databck-rewards h1br {
+            display: none;
+        }
+
+        #wfh .col-12 {
+            display: unset !important;
+            margin-bottom: 35px;
+        }
+
+        #wfh .order-1 {
+            order: 1 !important;
+        }
+
+        #wfh .order-2 {
+            order: 2 !important;
+        }
+
+        #switch-yes {
+            margin-bottom: 0px;
+        }
+    }
+
+    @media(min-width:992px) {
+        #post-plan-card .carousel-buttons {
+            display: none;
+        }
+
+        #post-plan-card .carousel-indicators {
+            display: none;
+        }
+
+        #post-plan-card .carousel-inner .carousel-item {
+            width: 20%;
+            margin-right: 0px !important;
+            display: block !important;
+            padding: 0 5px;
+        }
+
+        #post-plan-card .carousel-inner {
+            display: flex !important;
+        }
+
+        #post-plan-card {
+            margin: 20px 0px 40px;
+        }
+    }
+
+    /* postpaid-plans-card-end */
+    @media only screen and (min-width: 992px) and (max-width: 1380px) {
+
+        /*#post-plan-card .post-card .post-card-detail h1 {
+    font-size: 28px;
+    line-height: 44px;
+}*/
+        #post-plan-card .post-card .pink-btn {
+            padding: 1rem;
+            font-size: 14px;
+        }
+
+        #post-plan-card.post-card-list ul li {
+            font-size: 13px;
+        }
+
+        #post-plan-card .post-card .post-card-detail h5 {
+            font-size: 18px;
+            line-height: 24px;
+        }
+
+        .post-card-list p {
+            font-size: 14px;
+        }
+
+        #post-plan-card .post-card .post-card-detail h6 {
+            font-size: 14px;
+            line-height: 28px;
+        }
+
+        #post-plan-card .post-card .post-card-detail h1 span {
+            font-size: 16px;
+        }
+    }
+</style>

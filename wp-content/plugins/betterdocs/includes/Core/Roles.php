@@ -83,6 +83,11 @@ class Roles extends Base {
             'contributor'   => [
                 'edit_docs',
                 'delete_docs'
+            ],
+            'other'         => [
+                // post type related caps
+                'edit_docs',
+                'delete_docs'
             ]
         ];
 
@@ -98,7 +103,7 @@ class Roles extends Base {
 
         $capabilities = $this->defaults_capabilities();
 
-        if( $remove ) {
+        if ( $remove ) {
             unset( $capabilities['administrator'] );
         }
 

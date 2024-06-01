@@ -7,6 +7,7 @@
  * @copyright (c) 2022, Snap Creek LLC
  */
 
+use Duplicator\Installer\Utils\LinkManager;
 use Duplicator\Libs\Snap\SnapIO;
 use Duplicator\Utils\Upsell;
 
@@ -36,9 +37,9 @@ $packageComponentsTooltip = wp_kses(
     )
 );
 $pathFiltersTooltip       = __("File filters allow you to exclude files and folders from the package. To enable path and extension filters check the " .
-    "checkbox. Enter the full path of the files and folders you want to exclude from the package as a semicolon (;) seperated list.");
+    "checkbox. Enter the full path of the files and folders you want to exclude from the package as a semicolon (;) seperated list.", "duplicator");
 $extensionFilterTooltip   = __("File extension filters allow you to exclude files with certain file extensions from the package e.g. zip;rar;pdf etc. " .
-    "Enter the file extensions you want to exclude from the package as a semicolon (;) seperated list.");
+    "Enter the file extensions you want to exclude from the package as a semicolon (;) seperated list.", "duplicator");
 ?>
 
 <div class="dup-package-components">
@@ -132,18 +133,22 @@ $extensionFilterTooltip   = __("File extension filters allow you to exclude file
             <div class="section-title">
                 <span><?php _e('Filters', 'duplicator'); ?> (<label><input id="filter-on"
                                name="filter-on"
-                               type="checkbox" <?php checked($tplData['package']->Archive->FilterOn); ?>> Enable</label>)
+                               type="checkbox" <?php checked($tplData['package']->Archive->FilterOn); ?>> <?php esc_html_e('Enable', 'duplicator') ?></label>)
                     <i class="fas fa-question-circle fa-sm" 
                         data-tooltip-title="<?php _e('Path Filters', 'duplicator'); ?>" 
                         data-tooltip="<?php echo $pathFiltersTooltip;?>" 
                         aria-expanded="false"></i>
                 </span>
                 <div class="filter-links">
-                    <a href="#" data-filter-path="<?php echo SnapIO::trailingslashit(DUP_Archive::getOriginalPaths('home')); ?>">[root path]</a>
+                    <a href="#" data-filter-path="<?php echo SnapIO::trailingslashit(DUP_Archive::getOriginalPaths('home')); ?>">
+                        [<?php esc_html_e('root path', 'duplicator') ?>]
+                    </a>
                     <a href="#" data-filter-path="<?php echo SnapIO::trailingslashit(DUP_Archive::getOriginalPaths('wpcontent')); ?>">[wp-content]</a>
                     <a href="#" data-filter-path="<?php echo SnapIO::trailingslashit(DUP_Archive::getOriginalPaths('uploads')); ?>">[wp-uploads]</a>
-                    <a href="#" data-filter-path="<?php echo SnapIO::trailingslashit(DUP_Archive::getOriginalPaths('wpcontent')) . 'cache/'; ?>">[cache]</a>
-                    <a href="#" id="clear-path-filters">(clear)</a>
+                    <a href="#" data-filter-path="<?php echo SnapIO::trailingslashit(DUP_Archive::getOriginalPaths('wpcontent')) . 'cache/'; ?>">
+                        [<?php esc_html_e('cache', 'duplicator') ?>]
+                    </a>
+                    <a href="#" id="clear-path-filters">(<?php esc_html_e('clear', 'duplicator') ?>)</a>
                 </div>
             </div>
             <textarea
@@ -160,9 +165,9 @@ $extensionFilterTooltip   = __("File extension filters allow you to exclude file
                     aria-expanded="false"></i>
             </span>
                 <div class="filter-links">
-                    <a href="#" data-filter-exts="avi;mov;mp4;mpeg;mpg;swf;wmv;aac;m3u;mp3;mpa;wav;wma">[media]</a>
-                    <a href="#" data-filter-exts="zip;rar;tar;gz;bz2;7z">[archive]</a>
-                    <a href="#" id="clear-extension-filters">(clear)</a>
+                    <a href="#" data-filter-exts="avi;mov;mp4;mpeg;mpg;swf;wmv;aac;m3u;mp3;mpa;wav;wma">[<?php esc_html_e('media', 'duplicator') ?>]</a>
+                    <a href="#" data-filter-exts="zip;rar;tar;gz;bz2;7z">[<?php esc_html_e('archive', 'duplicator') ?>]</a>
+                    <a href="#" id="clear-extension-filters">(<?php esc_html_e('clear', 'duplicator') ?>)</a>
                 </div>
             </div>
             <textarea id="filter-exts" name="filter-exts" placeholder="ext1;ext2;ext3;" readonly><?php echo $archiveFilterExtensions; ?></textarea>
@@ -215,7 +220,10 @@ $extensionFilterTooltip   = __("File extension filters allow you to exclude file
                 )
             );
             ?>
-            <a href="<?php echo DUPLICATOR_DOCS_URL; ?>database-install" target="_blank">
+            <a 
+                href="<?php echo esc_url(LinkManager::getDocUrl('database-install', 'backup_step_1', 'db only quick start')); ?>" 
+                target="_blank"
+            >
                 <?php esc_html_e('database only quick start', 'duplicator'); ?>
             </a>
         </div>

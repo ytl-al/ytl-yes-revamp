@@ -3,6 +3,7 @@
 namespace WPDeveloper\BetterDocsPro\Admin\Customizer\Sections;
 
 use WP_Customize_Control;
+use WP_Customize_Image_Control;
 use WPDeveloper\BetterDocs\Admin\Customizer\Controls\TitleControl;
 use WPDeveloper\BetterDocs\Admin\Customizer\Controls\ToggleControl;
 use WPDeveloper\BetterDocs\Admin\Customizer\Controls\DimensionControl;
@@ -2577,6 +2578,25 @@ class DocsPage extends FreeDocsPage {
                     'label'    => __( 'Popular Title Hover Color', 'betterdocs-pro' ),
                     'section'  => 'betterdocs_doc_page_settings',
                     'settings' => 'betterdocs_doc_page_article_title_color_hover_2',
+                    'priority' => 38
+                ]
+            )
+        );
+    }
+
+    public function popular_list_icon() {
+        $this->customizer->add_setting( 'betterdocs_doc_page_popular_list_icon', [
+            'default'    => $this->defaults['betterdocs_doc_page_popular_list_icon'],
+            'capability' => 'edit_theme_options',
+
+        ] );
+
+        $this->customizer->add_control(
+            new WP_Customize_Image_Control(
+                $this->customizer, 'betterdocs_doc_page_popular_list_icon', [
+                    'section'  => 'betterdocs_doc_page_settings',
+                    'settings' => 'betterdocs_doc_page_popular_list_icon',
+                    'label'    => __( 'Popular List Icon', 'betterdocs' ),
                     'priority' => 38
                 ]
             )

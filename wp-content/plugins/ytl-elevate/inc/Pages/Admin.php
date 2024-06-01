@@ -65,7 +65,7 @@ class Admin extends BaseController
 	public function elevate_setting()
 	{
         if (isset($_POST['submit'])) {
-            \Inc\Base\Model::updateAPISettings($_POST);
+            (new \Inc\Base\Model)->updateAPISettings($_POST);
         }
         require_once WP_PLUGIN_DIR .'/ytl-elevate/templates/settings_api.php';
 	}
@@ -73,7 +73,7 @@ class Admin extends BaseController
 	public function elevate_pull()
 	{
         if (isset($_POST['submit'])) {
-            \Inc\Base\Model::pullProductData();
+            (new \Inc\Base\Model)->pullProductData();
         }
 
         require_once WP_PLUGIN_DIR .'/ytl-elevate/templates/settings_pull.php';

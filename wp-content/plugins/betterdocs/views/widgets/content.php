@@ -7,9 +7,11 @@
 <div
     <?php echo $wrapper_attr; ?>>
     <?php
-        betterdocs()->views->get( 'templates/parts/print-icon', [
-            'enable' => (bool) $enable
-        ] );
+        if( $widget_type != 'blocks' ) {
+            betterdocs()->views->get( 'templates/parts/print-icon', [
+                'enable' => (bool) $enable
+            ] );
+        }
 
         // The Content For A Docs
         $view_object->get( 'templates/parts/content', [

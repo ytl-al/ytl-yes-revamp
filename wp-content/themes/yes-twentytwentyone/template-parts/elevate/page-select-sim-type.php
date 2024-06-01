@@ -125,6 +125,10 @@
         cursor: not-allowed !important;
         opacity: 0.5 !important;
     }
+    @media only screen and (min-device-width: 320px) and (max-device-width: 640px) and (-webkit-min-device-pixel-ratio: 2) {
+    .grid {    
+    grid-template-columns: unset;
+}}
 </style>
 <div id="main-vue">
     <header class="white-top">
@@ -189,7 +193,7 @@
                                     v-model="simType" @click="showErrorEsimMsg()">
                                 <span class="plan-details">
                                     <div class="panel-img">
-                                        <img src="/wp-content/uploads/2023/06/sim.png" alt="..." class="card-panal-img">
+                                        <img src="/wp-content/uploads/2023/09/e-sim.png" alt="..." class="card-panal-img">
                                     </div>
                                     <div class="panel-body">
                                         eSIM
@@ -201,7 +205,7 @@
                                     v-model="simType" checked @click="hideErrorEsimMsg()">
                                 <span class="plan-details">
                                     <div class="panel-img">
-                                        <img src="/wp-content/uploads/2023/06/Physical-sim.png" alt="..."
+                                        <img src="/wp-content/uploads/2023/09/Visuals.png" alt="..."
                                             class="card-panal-img">
                                     </div>
                                     <div class="panel-body">
@@ -210,12 +214,10 @@
                                 </span>
                             </label>
                             <div class="eSIM d-none" id="eSIM_msg" >
-                                <img src="https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png"
-                                    alt="...">
                                 <div>
                                 <p>Device eSIM Compatibility</p>
                                 <p><span>The device you have selected is not eSIM compatible.</span></p>
-                                <span class="esim-link">However, you can use the eSIM purchased with this plan on an alternative compatible device.</span>
+                                <span target="_blank" class="esim-link">However, you can use the eSIM purchased with this plan on an alternative compatible device.</span>
                                 </div>
                             </div>
                         </div>
@@ -342,9 +344,7 @@
                             var data = response.data;
                             self.DeviceSupportEsim=data?.selected?.esim;
                             console.log(self.DeviceSupportEsim);
-                            self.PlanSupportEsim=data?.selected?.plan.esim;
-                            console.log(self.PlanSupportEsim);
-                            
+                            self.PlanSupportEsim=data?.selected?.plan.esim;  
                             toggleOverlay(false);
 
                         })

@@ -39,10 +39,9 @@ class Hotjar {
 
 	public static function hotjar_script()
 	{
-		$hotjar_site_id = get_option( 'hotjar_site_id' );
+		$hotjar_site_id = filter_var(get_option( 'hotjar_site_id' ), FILTER_SANITIZE_NUMBER_INT);
 		$is_admin = is_admin();
 
-		$hotjar_site_id = trim($hotjar_site_id);
 		if (!$hotjar_site_id) {
 			return;
 		}

@@ -47,7 +47,7 @@ class CategoryGrid extends BaseWidget {
     }
 
     public function get_style_depends() {
-        return ['betterdocs-category-grid', 'betterdocs-el-category-grid'];
+        return ['betterdocs-category-grid', 'betterdocs-el-category-grid', 'betterdocs-fontawesome'];
     }
 
     public function get_script_depends() {
@@ -123,7 +123,7 @@ class CategoryGrid extends BaseWidget {
                 'render_type'        => 'template',
                 'frontend_available' => true,
                 'label_block'        => true,
-                'selectors'   => [
+                'selectors'          => [
                     '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper' => "--column: {{VALUE}};"
                 ]
             ]
@@ -144,7 +144,7 @@ class CategoryGrid extends BaseWidget {
                 'render_type' => 'template',
                 'selectors'   => [
                     '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper>.betterdocs-single-category-wrapper' => 'margin-bottom: {{VALUE}}px;',
-                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper' => "--gap: {{VALUE}};"
+                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper'                                     => "--gap: {{VALUE}};"
                 ]
             ]
         );
@@ -255,6 +255,18 @@ class CategoryGrid extends BaseWidget {
         );
 
         $this->add_control(
+            'category_link',
+            [
+                'label'        => __( 'Category Title Link', 'betterdocs' ),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __( 'On', 'betterdocs' ),
+                'label_off'    => __( 'Off', 'betterdocs' ),
+                'return_value' => 'true',
+                'default'      => false
+            ]
+        );
+
+        $this->add_control(
             'button_text',
             [
                 'label'     => __( 'Button Text', 'betterdocs' ),
@@ -270,6 +282,54 @@ class CategoryGrid extends BaseWidget {
         );
 
         $this->end_controls_section(); #end of section 'Layout Options'
+
+        /**
+         * ----------------------------------------------------------
+         * Section: Container Section Settings
+         * ----------------------------------------------------------
+         */
+        $this->start_controls_section(
+            'section_grid_container_section',
+            [
+                'label' => __( 'Container Section', 'betterdocs' ),
+                'tab'   => Controls_Manager::TAB_STYLE
+            ]
+        );
+
+        $this->add_responsive_control(
+            'section_grid_container_section_padding',
+            [
+                'label'      => __( 'Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-grid-inner-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'section_grid_container_section_margin', // Legacy control id but new control
+            [
+                'label'      => __( 'Margin', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-grid-inner-wrapper' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'section_card_container_background',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .betterdocs-category-grid-inner-wrapper'
+            ]
+        );
+
+        $this->end_controls_section();
 
         /**
          * ----------------------------------------------------------
@@ -419,7 +479,7 @@ class CategoryGrid extends BaseWidget {
                 'tab'       => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_icon'       => 'true',
-                    'layout_template' => 'Layout_Default'
+                    'layout_template' => 'default'
                 ]
             ]
         );
@@ -523,7 +583,7 @@ class CategoryGrid extends BaseWidget {
                     ]
                 ],
                 'selectors'  => [
-                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-icon' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};'
+                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-icon .betterdocs-category-icon-img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};'
                 ],
                 'separator'  => 'before'
             ]
@@ -575,7 +635,7 @@ class CategoryGrid extends BaseWidget {
             Group_Control_Typography::get_type(),
             [
                 'name'     => 'cat_list_typography',
-                'selector' => '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-title a'
+                'selector' => '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-title a, {{WRAPPER}} .betterdocs-elementor .betterdocs-category-title:not(a)'
             ]
         );
 
@@ -593,7 +653,7 @@ class CategoryGrid extends BaseWidget {
                 'label'     => esc_html__( 'Color', 'betterdocs' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-title a' => 'color: {{VALUE}};'
+                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-title a, {{WRAPPER}} .betterdocs-elementor .betterdocs-category-title:not(a)' => 'color: {{VALUE}};'
                 ]
             ]
         );
@@ -667,7 +727,7 @@ class CategoryGrid extends BaseWidget {
                 'label'     => esc_html__( 'Color', 'betterdocs' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-title a:hover' => 'color: {{VALUE}};'
+                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-title a:hover, {{WRAPPER}} .betterdocs-elementor .betterdocs-category-title:not(a):hover' => 'color: {{VALUE}};'
                 ]
             ]
         );
@@ -797,7 +857,7 @@ class CategoryGrid extends BaseWidget {
         $this->add_control(
             'count_color',
             [
-                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'label'     => esc_html__( 'Text Color', 'betterdocs' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper .betterdocs-category-items-counts span' => 'color: {{VALUE}};'
@@ -861,6 +921,35 @@ class CategoryGrid extends BaseWidget {
             ]
         );
 
+        $this->add_control(
+            'second_color_seperator',
+            [
+                'label'     => esc_html__( 'Second Color', 'textdomain' ),
+                'type'      => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before',
+                'condition' => [
+                    'layout_template' => 'default'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'      => 'count_bg_second',
+                'types'     => ['classic', 'gradient'],
+                'selector'  => '
+                    {{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper .betterdocs-category-items-counts span
+                ',
+                'exclude'   => [
+                    'image'
+                ],
+                'condition' => [
+                    'layout_template' => 'default'
+                ]
+            ]
+        );
+
         $this->end_controls_tab();
 
         // Hover State Tab
@@ -896,10 +985,10 @@ class CategoryGrid extends BaseWidget {
         $this->add_control(
             'count_color_hover',
             [
-                'label'     => esc_html__( 'Color', 'betterdocs' ),
+                'label'     => esc_html__( 'Text Color', 'betterdocs' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper .betterdocs-category-items-counts:hover' => 'color: {{VALUE}};'
+                    '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper .betterdocs-category-items-counts:hover span' => 'color: {{VALUE}};'
                 ]
             ]
         );
@@ -953,6 +1042,35 @@ class CategoryGrid extends BaseWidget {
                     '{{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper .layout-2 .betterdocs-category-items-count:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                 ],
                 'condition'  => [
+                    'layout_template' => 'default'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'hover_second_color_seperator',
+            [
+                'label'     => esc_html__( 'Second Color', 'textdomain' ),
+                'type'      => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before',
+                'condition' => [
+                    'layout_template' => 'default'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'      => 'count_bg_second_hover',
+                'types'     => ['classic', 'gradient'],
+                'selector'  => '
+                    {{WRAPPER}} .betterdocs-elementor .betterdocs-category-grid-inner-wrapper .betterdocs-category-items-counts:hover span
+                ',
+                'exclude'   => [
+                    'image'
+                ],
+                'condition' => [
                     'layout_template' => 'default'
                 ]
             ]
@@ -1555,7 +1673,7 @@ class CategoryGrid extends BaseWidget {
     }
 
     public function view_params() {
-        $settings =  &$this->attributes;
+        $settings = &$this->attributes;
 
         $this->add_render_attribute(
             'bd_category_grid_wrapper',
@@ -1575,12 +1693,12 @@ class CategoryGrid extends BaseWidget {
                 ],
                 'data-layout-mode'          => $settings['layout_mode'],
                 'data-column_space_desktop' => $settings['grid_space'],
-                'data-column_space_tab'     => isset($settings['grid_space_tablet']) ? $settings['grid_space_tablet'] : $settings['grid_space'],
-                'data-column_space_mobile'  => isset($settings['grid_space_mobile']) ? $settings['grid_space_mobile'] : $settings['grid_space'],
+                'data-column_space_tab'     => isset( $settings['grid_space_tablet'] ) ? $settings['grid_space_tablet'] : $settings['grid_space'],
+                'data-column_space_mobile'  => isset( $settings['grid_space_mobile'] ) ? $settings['grid_space_mobile'] : $settings['grid_space'],
                 'data-column'               => $settings['grid_column'],
                 'data-column_desktop'       => $settings['grid_column'],
-                'data-column_tab'           => isset($settings['grid_column_tablet']) ? $settings['grid_column_tablet'] : $settings['grid_column'],
-                'data-column_mobile'        => isset($settings['grid_column_mobile']) ? $settings['grid_column_mobile'] : $settings['grid_column']
+                'data-column_tab'           => isset( $settings['grid_column_tablet'] ) ? $settings['grid_column_tablet'] : $settings['grid_column'],
+                'data-column_mobile'        => isset( $settings['grid_column_mobile'] ) ? $settings['grid_column_mobile'] : $settings['grid_column']
             ]
         );
 
@@ -1632,28 +1750,37 @@ class CategoryGrid extends BaseWidget {
             ];
         }
 
-        $params = wp_parse_args( [
-            'wrapper_attr'           => $this->get_render_attributes( 'bd_category_grid_wrapper' ),
-            'inner_wrapper_attr'     => $this->get_render_attributes( 'bd_category_grid_inner' ),
-            'widget_type'            => 'category-grid',
-            'layout'                 => $settings['layout_template'],
+        $kb_slug = isset( $settings['selected_knowledge_base'] ) ? $settings['selected_knowledge_base'] : '';
 
-            'is_edit_mode'           => $is_edit_mode,
-            'terms_query_args'       => $this->betterdocs( 'query' )->terms_query( $terms_query ),
-            'list_icon_name'         => empty( $settings['list_icon']['value'] ) ? 'list' : $settings['list_icon'],
-            'button_icon_position'   => $settings['icon_position'],
-            'term_icon_meta_key' => 'doc_category_image-id',
-            'docs_query_args'        => [
+        $params = wp_parse_args( [
+            'wrapper_attr'            => $this->get_render_attributes( 'bd_category_grid_wrapper' ),
+            'inner_wrapper_attr'      => $this->get_render_attributes( 'bd_category_grid_inner' ),
+            'widget_type'             => 'category-grid',
+            'layout'                  => $settings['layout_template'],
+            'is_edit_mode'            => $is_edit_mode,
+            'terms_query_args'        => $this->betterdocs( 'query' )->terms_query( $terms_query ),
+            'list_icon_name'          => $settings['list_icon'],
+            'button_icon_position'    => $settings['icon_position'],
+            'term_icon_meta_key'      => 'doc_category_image-id',
+            'multiple_knowledge_base' => $default_multiple_kb,
+            'kb_slug'                 => $kb_slug,
+            'docs_query_args'         => [
                 'posts_per_page'     => $settings['post_per_page'],
                 'orderby'            => $settings['post_orderby'],
                 'order'              => $settings['post_order'],
                 'nested_subcategory' => $settings['nested_subcategory']
             ],
-            'nested_docs_query_args' => [
+            'nested_terms_query'      => [
+                'number' => $settings['subcategory_per_grid']
+            ],
+            'nested_docs_query_args'  => [
                 'orderby'        => $settings['post_orderby'],
                 'order'          => $settings['post_order'],
                 'posts_per_page' => $settings['post_per_subcat']
-            ]
+            ],
+            'category_title_link'     => $settings['category_link'],
+            'layout_type'             => 'widget',
+            'list_icon_url'           => ''
         ], $settings );
 
         return $params;

@@ -265,7 +265,7 @@ class Insights {
      * @since 2.5.0
      * @param $is_allowed   Boolean  true if is allowed.
      */
-    protected function set_is_tracking_allowed( $is_allowed, $plugin = null ) {
+    public function set_is_tracking_allowed( $is_allowed, $plugin = null ) {
         if ( empty( $plugin ) ) {
             $plugin = $this->plugin_name;
         }

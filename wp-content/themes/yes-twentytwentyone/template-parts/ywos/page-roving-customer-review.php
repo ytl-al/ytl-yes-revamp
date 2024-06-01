@@ -29,7 +29,7 @@
 
 
 <!-- Vue Wrapper STARTS -->
-<div id="main-vue" style="display: none;">
+<div id="main-vue">
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
@@ -531,6 +531,7 @@
                     axios.post(apiEndpointURL + '/validate-ywos-roving-order' + '?nonce=' + yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
+                            console.log(data);
                              var inputDate = data.dob; // Replace with your date
                             // Split the input date into parts
                             var parts = inputDate.split("-");

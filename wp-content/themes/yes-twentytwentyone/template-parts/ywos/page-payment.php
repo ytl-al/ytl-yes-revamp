@@ -83,10 +83,47 @@
     .layer-selectedCard img {
         display: none;
     }
+
+    .payment_radio  {
+  display: flex;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0.375em;
+}
+.payment_radio  input {
+  position: absolute;
+  left: -9999px;
+}
+
+.payment_radio  input:checked + label:before {
+  box-shadow: inset 0 0 0 0.4375em #FF0084;
+}
+.payment_radio  label {
+  display: flex;
+  align-items: center;
+  padding: 0.375em 0.75em 0.375em 0.375em;
+  border-radius: 99em;
+  transition: 0.25s ease;
+}
+
+.payment_radio  label:before {
+  display: flex;
+  flex-shrink: 0;
+  content: "";
+  background-color: #fff;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  margin-right: 0.375em;
+  transition: 0.25s ease;
+  box-shadow: inset 0 0 0 0.125em #FF0084;
+}
 </style>
 
 <!-- Vue Wrapper STARTS -->
-<div id="main-vue" style="display: none;">
+<div id="main-vue" style="display:none">
     <!-- Banner Start -->
     <section id="grey-innerbanner" v-if='trxType == "roving"'>
         <div class="container">
@@ -195,7 +232,7 @@
                                 </button>
                             </li>
                             <li class="nav-item" role="presentation" v-if="!maybankIPP.disabled">
-                                <button type="button" class="nav-link" id="nav-creditcard" role="tab" data-paymentnav="CREDIT_CARD_IPP" data-bs-toggle="pill" data-bs-target="#tab-creditcard" aria-controls="tab-creditcard" aria-selected="false" v-on:click="selectPaymentMethod('CREDIT_CARD_IPP')">
+                                <button type="button" class="nav-link" id="nav-creditcard" role="tab" data-paymentnav="IPAY88_CC_IPP" data-bs-toggle="pill" data-bs-target="#tab-creditcard" aria-controls="tab-creditcard" aria-selected="false" v-on:click="selectPaymentMethod('IPAY88_CC_IPP')">
                                     <img src="/wp-content/uploads/2022/02/maybank-ipp-logo.png" />
                                 </button>
                             </li>
@@ -216,7 +253,7 @@
                                             </div>
                                         </div>
                                     </template>
-                                    <div v-bind:class="{ 'd-none': (maybankIPP.disabled || paymentInfo.paymentMethod != 'CREDIT_CARD_IPP') }">
+                                    <!-- <div v-bind:class="{ 'd-none': (maybankIPP.disabled || paymentInfo.paymentMethod != 'IPAY88_CC_IPP') }">
                                         <div class="row mb-4">
                                             <div class="col-lg-6">
                                                 <h4 class="my-3">Maybank 0% EzyPay ({{ renderText('strInstalmentPayment') }})</h4>
@@ -233,7 +270,46 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div> -->
+
+                                    <div v-bind:class="{ 'd-none': (maybankIPP.disabled ||  paymentInfo.paymentMethod != 'IPAY88_CC_IPP') }">
+                                        <div class="row mb-4">
+                                            <div class="col-lg-6">
+                                                <h4 class="my-3">Instalment Payment Plan</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-lg-8">
+                                                <label class="form-label" for="select-tenure">{{ renderText('strInstalmentType') }}</label>
+                                                <div class="form-group">
+                                                    <div v-for="(ippType, index) in maybankIPP.ippTypeList">
+                                                        <div class="row mb-4">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <div class="payment_radio">
+                                                                        <input type="radio" :id="'input-pmCard-' + index" name="ippBankSelection" :value="index" v-on:click="ippBankSelection(index)">
+                                                                        <label class="form-label" :for="'input-pmCard-' + index" :id="'label-pmCard-' + index">{{index}}</label>
+                                                                    </div>
+                                                                     <div v-if="maybankIPP.ippSelection.ippBankSelection == index" class="mt-2 ms-4">
+                                                                         <select class="form-control form-select" id="select-tenure"
+                                                                            v-model="maybankIPP.ippSelection.installmentPlanId"
+                                                                             data-live-search="false" name="ipp-tenure">
+                                                                             <option value="" disabled="disabled" selected="selected">Select Installment Type</option>
+                                                                             <option :value="installmentData.installmentPlanId" 
+                                                                                v-for="installmentData in ippType">{{installmentData.displayInstallmentPlan}}</option>
+                                                                         </select>
+                                                                     </div>   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+
+                                 <div v-if="(paymentInfo.paymentMethod == 'CREDIT_CARD') || (paymentInfo.paymentMethod == 'IPAY88_CC_IPP' && maybankIPP.ippSelection.installmentPlanId)">
                                     <div class="row mb-4">
                                         <div class="col-lg-6 col-12">
                                             <label class="form-label" for="input-chName">* {{ renderText('labelCardName') }}</label>
@@ -278,6 +354,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                 </div>
                                     <!-- <div class="row mb-4">
                                         <div class="col-lg-6 col-12">
                                             <label class="form-label" for="select-chCountry">Issuing Country</label>
@@ -378,6 +455,8 @@
         var pageDelivery = new Vue({
             el: '#main-vue',
             data: {
+                paymentSuccess : false,
+                win:'',
                 simType: '',
                 trxType: '',
                 dealer: [],
@@ -481,6 +560,10 @@
                         duration: 0,
                         administrationPayment: 0.00,
                         monthlyInstallment: ''
+                    },
+                    ippSelection: {
+                        ippBankSelection: '',
+                        installmentPlanId: ''
                     }
                 },
 
@@ -671,6 +754,7 @@
             mounted: function() {},
             created: function() {
                 var self = this;
+                $('#main-vue').show();
                 axios.get(apiEndpointURL + '/get-rm-wallet-merchant' + '?nonce=' + yesObj.nonce)
                     .then((response) => {
                         var data = response?.data?.rmEwalletList;
@@ -715,6 +799,7 @@
                         self.pageValid = true;
                         self.apiLocale = (ywos.lsData.siteLang == 'ms-MY') ? 'MY' : 'EN';
                         self.ajaxGetFPXBankList();
+                        self.ajaxGetMaybankIPP88();
                         self.updateData();
 
                         self.isTargetedPromo = ywos.lsData.isTargetedPromo;
@@ -724,7 +809,7 @@
                         self.simType = ywos.lsData.meta.esim;
                         self.eSimSupportPlan = ywos.lsData.meta.orderSummary.plan.eSim;
 
-                        toggleOverlay(false);
+                        // toggleOverlay(false);
                     } else {
                         ywos.redirectToPage('cart');
                     }
@@ -760,6 +845,37 @@
                             }, 500);
                         });
                 },
+                ajaxGetMaybankIPP88: function() {
+                    var self = this;
+                    var orderSummary = ywos.lsData.meta.orderSummary;
+                    axios.post(apiEndpointURL + '/get-ipp-tenures-ipay88' + '?nonce=' + yesObj.nonce, {
+                            'plan_name': orderSummary.plan.planName,
+							'plan_id': orderSummary.plan.mobilePlanId,
+                        })
+                        .then((response) => {
+                            var data = response.data;
+							 self.maybankIPP.ippTypeList = data.ipay88IPPInstallmentInfoList;
+                        if (data.ipay88IPPInstallmentInfoList) {
+                            const keys = Object.keys(data.ipay88IPPInstallmentInfoList);
+                            if (keys.length > 0) {
+                                self.maybankIPP.disabled = false;
+                            }
+                        }
+							
+                            // self.maybankIPP.ippTypeList = data.ippTypList;
+                            // self.getMaybankIPPInstallments();
+                        })
+                        .catch((error) => {
+                            // console.log(error.response.data);
+                        })
+                        .finally(() => {
+                            setTimeout(function() {
+                                toggleOverlay(false);
+                                $('.form-select#select-tenure').selectpicker('refresh');
+                            }, 500);
+                        });
+                },
+
                 ajaxGetMaybankIPPTenures: function() {
                     var self = this;
                     axios.post(apiEndpointURL + '/get-ipp-tenures' + '?nonce=' + yesObj.nonce, {
@@ -825,7 +941,7 @@
                     self.paymentInfo.sst = self.orderSummary.due.taxesSST;
                     self.paymentInfo.totalAmount = self.orderSummary.due.total;
 
-                    self.ajaxGetMaybankIPPTenures();
+                    // self.ajaxGetMaybankIPPTenures();
                 },
                 toggleModalAlert: function(modalHeader = '', modalText = '') {
                     $('#modal-titleLabel').html(modalHeader);
@@ -936,10 +1052,19 @@
                         self.toggleModalAlert(self.renderText('modalErrorPaymentTitle'), self.renderText('errorPaymentExceed'));
                     }, 360000);
 
-                    mainwin = postPayment({
+                    // mainwin = postPayment({
+                    //     order_id: xpayOrderId,
+                    //     encrypted_string: encryptedValue
+                    // });
+
+                     
+                    mainwin = postPaymentPopup({
                         order_id: xpayOrderId,
-                        encrypted_string: encryptedValue
-                    });
+                        encrypted_string: encryptedValue,
+                        popup_window:self.win
+
+                    })
+
 
                     setTimeout(function() {
                         self.paymentTimeout = false;
@@ -962,12 +1087,15 @@
                     }
                    
                     if(ywos.lsData.trxType=='roving'){
-                        console.log(self.deliveryInfo.mobileNumber);
                         self.phone_number=self.deliveryInfo.mobileNumber
                     }else{
                         self.phone_number=self.deliveryInfo.msisdn;
                     }
-                    console.log(self.phone_number);
+                    
+                    let ipay88InstallmentPlanId = '';
+                if ( self.paymentInfo.paymentMethod == 'IPAY88_CC_IPP') {
+                    ipay88InstallmentPlanId = self.maybankIPP.ippSelection.installmentPlanId;
+                }
                     // alert(self.upFontpayemtTotal)
                     // alert(self.paymentInfo.paymentMethod);
                     var params = {
@@ -1017,23 +1145,32 @@
                         'locale': self.apiLocale,
                         'walletType': self.paymentInfo.walletType,
                         'esim': self.eSIM,
-                        'applicationSource': "YOS"
+                        'applicationSource': "YOS",
+                        'stagingOrderNumber':self.deliveryInfo.stagingOrderNumber,
+                        'ipay88InstallmentPlanId': ipay88InstallmentPlanId,
                     };
+                    self.win = openXpayPopup();
                     axios.post(apiEndpointURL + '/create-yos-order' + '?nonce=' + yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
                             self.orderResponse = data;
                             self.initXpay();
+							self.sendAnalytics('payment-info');
                         })
                         .catch((error) => {
                             var response = error.response;
                             if (typeof response != 'undefined') {
                                 var data = response.data;
                                 var errorMsg = '';
-                                if (error.response.status == 500 || error.response.status == 503) {
-                                    errorMsg = self.renderText('errorCreateOrder');
+                                if (error.response.status === 500 || error.response.status === 503 || error.response.status === 400) {
+                                    if (error.response.status === 400 && self.win) {
+                                        self.win.close();
+                                        errorMsg = data.message;
+                                    } else {
+                                        errorMsg = self.renderText('errorCreateOrder');
+                                    }
                                 } else {
-                                    errorMsg = data.message
+                                    errorMsg = data.message;
                                 }
                                 toggleOverlay(false);
                                 self.toggleModalAlert(self.renderText('modalErrorTitle'), errorMsg);
@@ -1100,7 +1237,13 @@
                     ywos.lsData.meta.orderResponse = self.orderResponse;
                     ywos.lsData.meta.paymentResponse = self.paymentResponse;
                     ywos.updateYWOSLSData();
-
+					if(paymentStatus==1){
+                        paymentSuccess = true;
+                        self.sendAnalytics('payment-info-end');
+                    }else{
+                        paymentSuccess = false;
+                        self.sendAnalytics('payment-info-end');
+                    }
                     setTimeout(function() {
                         ywos.redirectToPage('thank-you?status=' + paymentStatus);
                     }, 2000);
@@ -1199,7 +1342,7 @@
                     var paymentInfo = self.paymentInfo;
                     var paymentMethod = self.paymentInfo.paymentMethod;
 
-                    if (paymentMethod == 'CREDIT_CARD' || paymentMethod == 'CREDIT_CARD_IPP') {
+                    if (paymentMethod == 'CREDIT_CARD' || paymentMethod == 'IPAY88_CC_IPP') {
                         if (
                             self.paymentInfo.nameOnCard.trim() == '' ||
                             self.paymentInfo.cardNumber.trim() == '' ||
@@ -1219,7 +1362,7 @@
                         }
                     }
 
-                    if (paymentMethod == 'CREDIT_CARD_IPP' && self.paymentInfo.ippType == '') {
+                    if (paymentMethod == 'IPAY88_CC_IPP' && self.maybankIPP.ippSelection.installmentPlanId == '') {
                         isFilled = false;
                     }
 
@@ -1238,37 +1381,108 @@
                     this.paymentInfo.paymentMethod = paymentMethod;
                     this.watchAllowSubmit();
                 },
-                sendAnalytics: function() {
+                // sendAnalytics: function() {
+                    // var self = this;
+                    // var eventType = 'purchase';
+                    // var pushData = {
+                        // 'transaction_id': self.orderResponse.displayOrderNumber,
+                        // 'currency': 'MYR',
+                        // 'value': self.orderSummary.due.total,
+                        // 'tax': self.orderSummary.due.taxesSST,
+                        // 'shipping': self.orderSummary.due.shippingFees,
+                        // 'foreigner_deposit': self.orderSummary.due.foreignerDeposit,
+                        // 'payment_method': self.paymentInfo.paymentMethod,
+                        // 'rounding_adjustment': self.orderSummary.due.rounding,
+                        // 'items': [{
+                            // 'name': self.orderSummary.plan.planName,
+                            // 'id': self.orderSummary.plan.mobilePlanId,
+                            // 'category': self.orderSummary.plan.planType,
+                            // 'price': self.orderSummary.plan.totalAmountWithoutSST
+                        // }]
+                    // };
+                    // if (self.orderSummary.addOn) {
+                        // pushData.items.push({
+                            // 'name': self.orderSummary.addOn.addonName,
+                            // 'id': 0,
+                            // 'category': 'addOn',
+                            // 'price': self.orderSummary.addOn.amount
+                        // });
+                    // }
+                    // pushAnalytics(eventType, pushData);
+                // },
+				
+				sendAnalytics: function(eventType) {
                     var self = this;
-                    var eventType = 'purchase';
-                    var pushData = {
-                        'transaction_id': self.orderResponse.displayOrderNumber,
-                        'currency': 'MYR',
-                        'value': self.orderSummary.due.total,
-                        'tax': self.orderSummary.due.taxesSST,
-                        'shipping': self.orderSummary.due.shippingFees,
-                        'foreigner_deposit': self.orderSummary.due.foreignerDeposit,
-                        'payment_method': self.paymentInfo.paymentMethod,
-                        'rounding_adjustment': self.orderSummary.due.rounding,
-                        'items': [{
-                            'name': self.orderSummary.plan.planName,
-                            'id': self.orderSummary.plan.mobilePlanId,
-                            'category': self.orderSummary.plan.planType,
-                            'price': self.orderSummary.plan.totalAmountWithoutSST
-                        }]
-                    };
-                    if (self.orderSummary.addOn) {
-                        pushData.items.push({
-                            'name': self.orderSummary.addOn.addonName,
-                            'id': 0,
-                            'category': 'addOn',
-                            'price': self.orderSummary.addOn.amount
-                        });
+                    var pushData;
+                    var planType = self.orderSummary.plan.planType;
+                    var planName = self.orderSummary.plan.planName;
+                    let successData = {};
+                    var pushData = {};
+                    let failureData = {};
+                    console.log('payment');
+                    console.log(eventType);
+                    switch (eventType) {
+                        case 'purchase':
+                            pushData = {
+                                'transaction_id': self.orderResponse.displayOrderNumber,
+                                'currency': 'MYR',
+                                'value': self.orderSummary.due.total,
+                                'tax': self.orderSummary.due.taxesSST,
+                                'shipping': self.orderSummary.due.shippingFees,
+                                'foreigner_deposit': self.orderSummary.due.foreignerDeposit,
+                                'payment_method': self.paymentInfo.paymentMethod,
+                                'rounding_adjustment': self.orderSummary.due.rounding,
+                                'items': [{
+                                    'name': self.orderSummary.plan.planName,
+                                    'id': self.orderSummary.plan.mobilePlanId,
+                                    'category': self.orderSummary.plan.planType,
+                                    'price': self.orderSummary.plan.totalAmountWithoutSST
+                                }]
+                            };
+                            if (self.orderSummary.addOn) {
+                                pushData.items.push({
+                                    'name': self.orderSummary.addOn.addonName,
+                                    'id': 0,
+                                    'category': 'addOn',
+                                    'price': self.orderSummary.addOn.amount
+                                });
+                            }
+                            break;
+
+                        case 'payment-info':
+                            if (planName !== null && planName !== undefined) {
+                                pushData = {
+                                    'Payment Type': self.paymentInfo.paymentMethod,
+                                    'Total Payment Amount': self.orderSummary.due.total
+                                }; 
+                            }
+                            break;
+                        case 'payment-info-end':
+                              if (planName !== null && planName !== undefined) {
+                                   if (paymentSuccess) {
+                                       pushData['Success'] = true;
+                                       successData = Object.assign(successData, pushData);
+                                   } else {
+                                       pushData['Failure'] = true; // Store 0 for failure
+                                       failureData = Object.assign(failureData, pushData);
+                                   }
+                               }
+                         break;
                     }
-                    pushAnalytics(eventType, pushData);
+                        console.log(pushData);
+                    pushAnalytics(eventType, pushData, planType, planName); 
                 },
+				
+				
+				
+				
                 renderText: function(strID) {
                     return ywos.renderText(strID, this.pageText);
+                },
+                ippBankSelection: function(ippBank) {
+                    var self = this;
+                    self.maybankIPP.ippSelection.ippBankSelection = ippBank;
+                    self.maybankIPP.ippSelection.installmentPlanId = '';
                 }
             }
         });

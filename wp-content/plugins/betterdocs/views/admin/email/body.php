@@ -55,8 +55,6 @@
                             ] );
                         },
                         'search-keyword' => function () use ( $frequency, $args ) {
-                            error_log(print_r('body.php', 1));
-                            error_log(print_r($args, 1));
                             betterdocs()->views->get( 'admin/email/analytics/search-keyword', [
                                 'frequency' => $frequency,
                                 'keywords'  => $args['search']['keywords']

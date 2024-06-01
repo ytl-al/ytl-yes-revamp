@@ -11,11 +11,13 @@ class PostType extends Base {
     public $post_type = 'docs';
     public $position  = 5;
     public $category  = 'doc_category';
+    public $glossaries  = 'glossaries';
     public $tag       = 'doc_tag';
 
     public $docs_archive;
     public $docs_slug;
     public $cat_slug;
+    public $glossaries_slug;
     /**
      * Database
      * @var Database
@@ -48,6 +50,8 @@ class PostType extends Base {
         $this->docs_archive = $this->docs_slug();
         $this->docs_slug    = $this->docs_slug();
         $this->cat_slug     = $this->category_slug();
+        $this->glossaries_slug     = $this->glossaries_slug();
+
     }
 
     public static function permalink_structure() {
@@ -59,6 +63,7 @@ class PostType extends Base {
         add_filter( 'rest_docs_collection_params', [$this, 'add_rest_orderby_params'], 10, 1 );
         add_filter( 'rest_doc_category_collection_params', [$this, 'add_rest_orderby_params_on_doc_category'], 10, 1 );
         add_filter( 'rest_doc_category_query', [$this, 'modify_doc_category_rest_query'], 10, 2 );
+        add_action( 'before_delete_post', [$this, 'delete_analytics_rows_on_post_delete'], 10, 1);
     }
 
     /**
@@ -130,6 +135,7 @@ class PostType extends Base {
             return;
         }
 
+        add_action( 'transition_post_status', [$this, 'clear_docs_object_cache'], 10, 3 );
         add_action( 'doc_category_add_form_fields', [$this, 'add_form_fields'], 10, 2 );
         add_action( 'doc_category_edit_form_fields', [$this, 'edit_form_fields'], 10, 2 );
         add_action( 'created_doc_category', [$this, 'save_category_meta'], 11, 2 );
@@ -159,6 +165,15 @@ class PostType extends Base {
         ] );
     }
 
+    /**
+     * Function to clear object cache when a new 'docs' post is published.
+     */
+    public function clear_docs_object_cache( $new_status, $old_status, $post ) {
+        if ( $post->post_type === 'docs' && $new_status === 'publish' ) {
+            wp_cache_flush();
+        }
+    }
+
     public function add_form_fields( $taxonomy ) {
         betterdocs()->views->get( 'admin/taxonomy/add' );
     }
@@ -176,6 +191,14 @@ class PostType extends Base {
         ] );
     }
 
+    /**
+     * Save custom meta data for the category when a term is added.
+     * Meta data is saved from $_POST['term_meta'] array.
+     * If 'doc_category_kb' is set in $_POST, it updates 'doc_category_knowledge_base' meta data.
+     * It also sets the term order using set_term_order function.
+     * @param int $term_id The ID of the term being saved.
+     * @param int $tt_id The term taxonomy ID.
+     */
     public function save_category_meta( $term_id, $tt_id ) {
         if ( isset( $_POST['term_meta'] ) ) {
             $cat_keys = array_keys( $_POST['term_meta'] );
@@ -196,46 +219,105 @@ class PostType extends Base {
         $this->set_term_order( $term_id, $tt_id );
     }
 
+    /**
+     * Set the term order when a new term is created.
+     * If the term has a parent, updates the doc_category_order based on the parent's order.
+     * Otherwise, assigns the maximum doc_category_order among all terms plus one.
+     */
     public function set_term_order( $term_id, $tt_id ) {
-        $order = $this->get_max_taxonomy_order( 'doc_category' );
-        update_term_meta( $term_id, 'doc_category_order', $order++ );
+        $term = get_term( $term_id, 'doc_category' );
+        if ( $term->parent !== 0 ) {
+            $this->update_doc_category_order_by_parent( $term_id, $term->parent );
+        } else {
+            $max_order = $this->get_max_taxonomy_order( 'doc_category' );
+            update_term_meta( $term_id, 'doc_category_order', $max_order++ );
+        }
+    }
+
+    /**
+     * Update category meta data when a term is updated.
+     * Updates custom term meta data such as 'doc_category_kb'.
+     * If the parent term is changed, updates the doc_category_order based on the new parent's order.
+     * @param int $term_id The ID of the term being updated.
+     */
+    public function updated_category_meta( $term_id ) {
+        $term = get_term($term_id, 'doc_category');
+        $current_parent_id = $term->parent;
+        // Update custom meta data from $_POST['term_meta'] array
+        if ( isset( $_POST['term_meta'] ) ) {
+            $cat_keys = array_keys($_POST['term_meta']);
+            foreach ($cat_keys as $key) {
+                if (isset($_POST['term_meta'][$key])) {
+                    update_term_meta($term_id, "doc_category_$key", $_POST['term_meta'][$key]);
+                }
+            }
+        }
+
+        // Update 'doc_category_knowledge_base' meta data if 'doc_category_kb' is set in $_POST
+        if ( isset( $_POST['doc_category_kb'] ) ) {
+            $doc_category_kb = rest_sanitize_array($_POST['doc_category_kb']);
+            update_term_meta($term_id, "doc_category_knowledge_base", $doc_category_kb);
+        }
+
+        // Check if the parent term is changed
+        // if ( isset( $_POST['parent'] ) ) {
+        //     $new_parent_id = (int) $_POST['parent'];
+        //     if ( $current_parent_id !== $new_parent_id ) {
+        //         $this->update_doc_category_order_by_parent($term_id, $new_parent_id);
+        //     }
+        // }
+
+    }
+
+    /**
+     * Update the doc_category_order for a term based on its parent's order.
+     */
+    public function update_doc_category_order_by_parent( $term_id, $term_parent_id ) {
+        $parent_order = (int) $this->get_max_taxonomy_order( 'doc_category', $term_parent_id );
+
+        if ( $parent_order === 1 ) {
+            $parent_order = get_term_meta($term_parent_id, 'doc_category_order', true);
+        }
+
+        $order = intval($parent_order) + 1;
+        update_term_meta( $term_id, 'doc_category_order', (int) $order );
     }
 
     /**
      * Get the maximum doc_category_order for this taxonomy.
-     * This will be applied to terms that don't have a tax position.
+     * If $parent_term_id is provided, it retrieves the maximum order under that parent.
+     * Otherwise, it retrieves the maximum order among all terms.
+     * @param string $tax_slug The taxonomy slug.
+     * @param int|null $parent_term_id The parent term ID (optional).
+     * @return int The maximum doc_category_order.
      */
-    private function get_max_taxonomy_order( $tax_slug ) {
+    private function get_max_taxonomy_order( $tax_slug, $parent_term_id = null ) {
         global $wpdb;
 
-        $max_term_order = $wpdb->get_col(
-            $wpdb->prepare(
-                "SELECT MAX( CAST( tm.meta_value AS UNSIGNED ) )
-				FROM $wpdb->terms t
-				JOIN $wpdb->term_taxonomy tt ON t.term_id = tt.term_id AND tt.taxonomy = '%s'
-				JOIN $wpdb->termmeta tm ON tm.term_id = t.term_id WHERE tm.meta_key = 'doc_category_order'",
+        if ( $parent_term_id !== null ) {
+            $query = $wpdb->prepare(
+                "SELECT MAX(CAST(tm.meta_value AS UNSIGNED))
+                FROM $wpdb->terms t
+                JOIN $wpdb->term_taxonomy tt ON t.term_id = tt.term_id AND tt.taxonomy = %s
+                JOIN $wpdb->termmeta tm ON tm.term_id = t.term_id
+                WHERE tm.meta_key = 'doc_category_order' AND tt.parent = %d",
+                $tax_slug,
+                $parent_term_id
+            );
+        } else {
+            $query = $wpdb->prepare(
+                "SELECT MAX(CAST(tm.meta_value AS UNSIGNED))
+                FROM $wpdb->terms t
+                JOIN $wpdb->term_taxonomy tt ON t.term_id = tt.term_id AND tt.taxonomy = %s
+                JOIN $wpdb->termmeta tm ON tm.term_id = t.term_id
+                WHERE tm.meta_key = 'doc_category_order'",
                 $tax_slug
-            )
-        );
+            );
+        }
 
-        $max_term_order = is_array( $max_term_order ) ? current( $max_term_order ) : 0;
+        $max_term_order = $wpdb->get_var($query);
 
         return (int) $max_term_order === 0 || empty( $max_term_order ) ? 1 : (int) $max_term_order + 1;
-    }
-
-    public function updated_category_meta( $term_id ) {
-        if ( isset( $_POST['term_meta'] ) ) {
-            $cat_keys = array_keys( $_POST['term_meta'] );
-            foreach ( $cat_keys as $key ) {
-                if ( isset( $_POST['term_meta'][$key] ) ) {
-                    update_term_meta( $term_id, "doc_category_$key", $_POST['term_meta'][$key] );
-                }
-            }
-        }
-        if ( isset( $_POST['doc_category_kb'] ) ) {
-            $doc_category_kb = rest_sanitize_array( $_POST['doc_category_kb'] );
-            update_term_meta( $term_id, "doc_category_knowledge_base", $doc_category_kb );
-        }
     }
 
     /**
@@ -442,6 +524,11 @@ class PostType extends Base {
 
         $term_list = wp_get_post_terms( $post_id, 'doc_category', ['fields' => 'ids'] );
 
+        //save estimated reading text in post
+        $est_reading_text = isset( $_POST['estimated_reading_text'] ) ? $_POST['estimated_reading_text'] : '';
+
+        update_post_meta( $post_id, '_betterdocs_est_reading_text', $est_reading_text );
+
         if ( ! empty( $term_list ) ) {
             foreach ( $term_list as $term_id ) {
                 $term_meta = get_term_meta( $term_id, '_docs_order', true );
@@ -473,6 +560,13 @@ class PostType extends Base {
 
         $this->register_post_type();
         $this->register_category_taxonomy();
+
+        $is_enable_glossary = betterdocs()->settings->get('enable_glossaries', false);
+        if( $is_enable_glossary && betterdocs()->is_pro_active() ){
+            $this->register_glossaries_taxonomy();
+        }
+
+
         $this->register_tag_taxonomy();
     }
 
@@ -581,6 +675,50 @@ class PostType extends Base {
         register_taxonomy( $this->category, [$this->post_type], $category_args );
     }
 
+    public function register_glossaries_taxonomy() {
+        $labels = [
+            'name'              => __( 'Glossaries Terms', 'betterdocs' ),
+            'singular_name'     => __( 'Glossaries Term', 'betterdocs' ),
+            'all_items'         => __( 'Glossaries Terms', 'betterdocs' ),
+            'parent_item'       => __( 'Parent Glossaries Term', 'betterdocs' ),
+            'parent_item_colon' => __( 'Parent Glossaries Term:', 'betterdocs' ),
+            'edit_item'         => __( 'Edit Term', 'betterdocs' ),
+            'update_item'       => __( 'Update Glossary', 'betterdocs' ),
+            'add_new_item'      => __( 'Add New Glossaries Term', 'betterdocs' ),
+            'new_item_name'     => __( 'New Glossaries Term Name', 'betterdocs' ),
+            'menu_name'         => __( 'Glossaries', 'betterdocs' )
+        ];
+
+        $args = [
+            'hierarchical'      => true,
+            'public'            => true,
+            'labels'            => $labels,
+            'show_ui'           => false,
+            'show_in_menu'      => true,
+            'show_admin_column' => true,
+            'query_var'         => true,
+            'show_in_rest'      => true,
+            'has_archive'       => true,
+            'rewrite'           => array(
+                'slug'       => $this->glossaries,
+                'with_front' => false,
+            ),
+            'capabilities'      => [
+                'manage_terms' => 'manage_doc_terms',
+                'edit_terms'   => 'edit_doc_terms',
+                'delete_terms' => 'delete_doc_terms',
+                'assign_terms' => 'edit_docs'
+            ]
+        ];
+
+        register_taxonomy( $this->glossaries, [$this->post_type], $args );
+
+        // Change the rewrite rules for the custom taxonomy
+        global $wp_rewrite;
+        $wp_rewrite->extra_permastructs[$this->glossaries]['struct'] = '/'.$this->glossaries.'/%glossaries%';
+    }
+
+
     /**
      * Register the taxonomy for Tags.
      *
@@ -651,6 +789,9 @@ class PostType extends Base {
     private function category_slug() {
         return $this->settings->get( 'category_slug', 'docs-category' );
     }
+    private function glossaries_slug() {
+        return 'glossaries';
+    }
 
     public function highlight_admin_menu( $parent_file ) {
         global $current_screen;
@@ -701,4 +842,26 @@ class PostType extends Base {
 
         return apply_filters( 'betterdocs_highlight_admin_submenu', $submenu_file, $current_screen, $pagenow );
     }
+
+    /**
+     * Deletes rows from the analytics table when a 'docs' post is deleted from trash.
+     *
+     * This function is hooked into the 'wp_trash_post' action in WordPress. It checks
+     * if the deleted post is of type 'docs'. If so, it deletes the corresponding rows
+     * from the analytics table where the post_id matches the ID of the deleted post.
+     *
+     * @param int $post_id The ID of the deleted post.
+     * @return void
+     */
+    public function delete_analytics_rows_on_post_delete( $post_id ) {
+        // Check if the deleted post is of type 'docs'
+        if ( get_post_type( $post_id ) === 'docs' ) {
+            global $wpdb;
+            $analytics_table = $wpdb->prefix . 'betterdocs_analytics';
+
+            // Delete the entire row from the analytics table where post_id matches the deleted post
+            $wpdb->query($wpdb->prepare("DELETE FROM $analytics_table WHERE post_id = %d", $post_id));
+        }
+    }
+
 }

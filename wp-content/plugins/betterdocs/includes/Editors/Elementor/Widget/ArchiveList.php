@@ -31,7 +31,7 @@ class ArchiveList extends BaseWidget {
     }
 
     public function get_style_depends() {
-        return ['betterdocs-el-articles-list'];
+        return ['betterdocs-el-articles-list', 'betterdocs-fontawesome'];
     }
 
     public function get_keywords() {
@@ -44,6 +44,7 @@ class ArchiveList extends BaseWidget {
 
     protected function register_controls() {
         $this->section_content();
+        $this->container_wrapper_section();
         $this->list_settings();
         $this->subcat_list_settings();
     }
@@ -108,6 +109,42 @@ class ArchiveList extends BaseWidget {
                 'type'            => Controls_Manager::RAW_HTML,
                 'raw'             => __( 'Note: This is the preview only for Elementor Editor. You will see the real view in the archive page itself.', 'betterdocs' ),
                 'content_classes' => 'betterdocs-elementor-note elementor-panel-alert elementor-panel-alert-info'
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
+    public function container_wrapper_section() {
+        $this->start_controls_section(
+            'archive_list_container_section',
+            [
+                'label' => __( 'Container Section', 'betterdocs' ),
+                'tab'   => Controls_Manager::TAB_STYLE
+            ]
+        );
+
+        $this->add_responsive_control(
+            'archive_list_container_padding',
+            [
+                'label'      => __( 'Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-articles-list' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'archive_list_container_margin',
+            [
+                'label'      => __( 'Margin', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-articles-list' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
             ]
         );
 
@@ -199,12 +236,25 @@ class ArchiveList extends BaseWidget {
         );
 
         $this->add_control(
+            'list_icon',
+            [
+                'label'   => __( 'Icon', 'betterdocs' ),
+                'type'    => Controls_Manager::ICONS,
+                'default' => [
+                    'value'   => 'far fa-file-alt',
+                    'library' => 'fa-regular'
+                ]
+            ]
+        );
+
+        $this->add_control(
             'list_icon_color',
             [
                 'label'     => esc_html__( 'Color', 'betterdocs' ),
                 'type'      => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .betterdocs-articles-list li svg' => 'fill: {{VALUE}};'
+                    '{{WRAPPER}} .betterdocs-articles-list li svg' => 'fill: {{VALUE}};',
+                    '{{WRAPPER}} .betterdocs-articles-list li i' => 'color: {{VALUE}};'
                 ]
             ]
         );
@@ -223,7 +273,11 @@ class ArchiveList extends BaseWidget {
                 ],
                 'selectors'  => [
                     '{{WRAPPER}} .betterdocs-articles-list li svg' => 'width: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .betterdocs-articles-list .betterdocs-nested-category-title svg' => 'font-size: {{SIZE}}{{UNIT}};'
+                    '{{WRAPPER}} .betterdocs-articles-list .betterdocs-nested-category-title svg' => 'width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .betterdocs-articles-list li i' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .betterdocs-articles-list .betterdocs-nested-category-title i' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .betterdocs-articles-list li img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .betterdocs-articles-list .betterdocs-nested-category-title img' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};'
                 ]
             ]
         );
@@ -234,8 +288,17 @@ class ArchiveList extends BaseWidget {
                 'label'      => esc_html__( 'Spacing', 'betterdocs' ),
                 'type'       => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
+                'default' => [
+					'top' => 0,
+					'right' => 5,
+					'bottom' => 0,
+					'left' => 0,
+					'unit' => 'px',
+					'isLinked' => false,
+				],
                 'selectors'  => [
-                    '{{WRAPPER}} .betterdocs-articles-list li svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                    '{{WRAPPER}} .betterdocs-articles-list li svg' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .betterdocs-articles-list li i' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
                 ]
             ]
         );
@@ -483,7 +546,9 @@ class ArchiveList extends BaseWidget {
 
         return [
             'term'                   => $term,
+            'list_icon_url'          => '',
             'nested_subcategory'     => (bool) $this->attributes['nested_subcategory'],
+            'list_icon_name'         => $this->attributes['list_icon'],
             'query_args'             => betterdocs()->query->docs_query_args( $_docs_query ),
             'nested_docs_query_args' => [
                 'orderby' => $this->attributes['alphabetic_order'],
@@ -492,7 +557,8 @@ class ArchiveList extends BaseWidget {
             'nested_terms_query'     => [
                 'orderby' => $this->attributes['alphabetic_order'],
                 'order'   => $this->attributes['order']
-            ]
+            ],
+            'layout_type' => 'widget',
         ];
     }
 

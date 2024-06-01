@@ -17,6 +17,7 @@ const apiEndpointURL = window.location.origin + '/wp-json/ywos/v1';
 
 
 $(document).ready(function() {
+    console.log('test');
 	if(window.location.pathname=='/ywos/delivery/'){
         let backButton = document.querySelector('.back-btn');
         if (ywosLSData.meta.orderSummary.plan.eSim != true) {
@@ -40,6 +41,7 @@ $(document).ready(function() {
     $('.btn-buyplan').on('click', function() {
         var planID = $(this).attr('data-planid');
         ywos.buyPlan(planID);
+        PushCTanalytics(planID,this);
     });
 
     $('.btn-buytpplan').on('click', function() {
@@ -463,30 +465,30 @@ const ywos = {
             console.log('Local storage data not found!');
             isValid = false;
         } else if (!this.checkExpiryValid()) {
-            alert(1);
+            // alert(1);
             console.log('Local storage data is expired!');
             isValid = false;
         } else if (!this.checkItems()) {
-            alert(2);
+            // alert(2);
             console.log('Plan ID is not found!');
             isValid = false;
         } else if (this.checkPurchaseCompleted(curStep)) {
-            alert(3);
+            // alert(3);
             console.log('Purchase has been completed!');
             isValid = false;
         } else if (!isSkipCart && !this.checkStep(curStep)) {
-            alert(4);
+            // alert(4);
             console.log('Previous step not yet completed!');
             // isValid = false;
             // return false;
         } else if (isSkipCart) {
-            alert(5);
+            // alert(5);
             if (!this.checkStepRoving(curStep)) {
                 
             }
         }
         
-        $('#main-vue').show();
+        // $('#main-vue').show();
         if (!isValid) {
             this.removeYWOSLSData();
             return false;
@@ -654,5 +656,34 @@ function checkInputCharacters(event, type = 'alphanumeric', withSpace = true) {
         event.preventDefault();
     } else {
         return true;
+    }
+}
+
+function PushCTanalytics(planID, clickedButton) {
+    if (planID) {
+        var cardTitle;
+        var eventType;
+        if ($(clickedButton).closest('.post-card').length > 0) {
+            cardTitle = $(clickedButton).closest('.post-card').find('.post-card-title').text();
+            eventType = "Postpaid - Buy Now";
+        } else if ($(clickedButton).closest('.prepaid-card').length > 0) {
+            cardTitle = $(clickedButton).closest('.prepaid-card').find('.prepaid-card-title').text();
+            $(clickedButton).closest('.prepaid-card-detail').find('.plan-details-list').text(cardTitle);
+            eventType = "Prepaid - Buy Now";
+        } else if ($(clickedButton).closest('.card').length > 0) {
+            cardTitle = $(clickedButton).closest('.card-body').find('.plan-details-list > h3').text();
+            // $(clickedButton).closest('.card-body').find('.plan-details-list').text(cardTitle);
+            eventType = "Rahmah/Broadband - Get Plan";
+            console.log(cardTitle,'cardTitle');
+        }
+
+        // Push CleverTap event
+        if (cardTitle && eventType) {
+            clevertap.event.push(eventType, {
+                "Package Chosen": cardTitle
+            });
+        }
+    } else {
+        console.log('Something Wrong');
     }
 }

@@ -1092,14 +1092,14 @@ public function format_admin_field($row,$name){
     $field_label='';
    if( $name == 'url' && isset($row[$name]) && filter_var($row[$name],FILTER_VALIDATE_URL)){
        $url=trim($row[$name],'/');
- $field_label='<a href="'.$row[$name].'" target="_blank">...'.substr($url,strrpos($url,'/')).'</a>';   
+ $field_label='<a href="'.esc_url($row[$name]).'" target="_blank">...'.esc_attr(substr($url,strrpos($url,'/'))).'</a>';   
 }
 if($name == 'browser'){
 if(!empty($row['browser']) ){
-$field_label.='<img src="'.vxcf_form::$base_url.'images/'.$row['browser'].'.png" class="icon_s"  title="'.$row['browser'].'">';
+$field_label.='<img src="'.vxcf_form::$base_url.'images/'.esc_attr($row['browser']).'.png" class="icon_s"  title="'.esc_attr($row['browser']).'">';
 }
 if(!empty($row['os'])){
-$field_label.='<img src="'.vxcf_form::$base_url."images/".$row['os'].'.png" class="icon_s"  title="'.$row['os'].'">';
+$field_label.='<img src="'.vxcf_form::$base_url."images/".esc_attr($row['os']).'.png" class="icon_s"  title="'.esc_attr($row['os']).'">';
 } } 
 return $field_label;
 } 
@@ -1152,9 +1152,9 @@ if($tab == 'entries'){
    $form_id=$form_key.'_'.$form_i;   
   }     
    $fields=vxcf_form::get_form_fields($form_id); 
-
+//var_dump($fields);
 $detail= $this->data->get_lead_detail($id);
-   }          
+   }        
    //updating meta information
 if(!empty($_POST[vxcf_form::$id.'_submit']) && !empty($_POST['lead'])  && !empty($form_id)){
    
@@ -1198,7 +1198,7 @@ if(!isset($_POST['files_'.$name][$k])){
           }
           }
 }
-
+$not_allowed_files = array( 'js', 'jse', 'jar', 'php', 'php3', 'php4', 'php5', 'phtml', 'svg', 'swf', 'exe', 'html', 'htm', 'shtml', 'xhtml', 'xml', 'css', 'asp', 'aspx', 'jsp', 'sql', 'hta', 'dll', 'bat', 'com', 'sh', 'bash', 'py', 'pl', 'dfxp' );
 if(!empty($_FILES)){
               if(isset($_FILES[$field['name']]['name']) && is_array($_FILES[$field['name']]['name'])){
           foreach($_FILES[$field['name']]['name'] as $k=>$file_name){
@@ -1209,12 +1209,18 @@ if(!empty($_FILES)){
     $filename = wp_unique_filename( $upload_path, $filename );
 
     $new_file = trailingslashit( $upload_path ) . $filename;
-
+    $ext = pathinfo($filename, PATHINFO_EXTENSION);
+    if(in_array($ext,$not_allowed_files)){
+       $is_valid=false;
+      $msgs['file']=array('class'=>'error','msg'=>__("File not allowed.", 'contact-form-entries'));
+      break;   
+    }
     if ( false === @move_uploaded_file( $tmp_file, $new_file ) ) {
     $is_valid=false;
       $msgs['file']=array('class'=>'error','msg'=>__("File not uploaded.", 'contact-form-entries'));
       break;
     }else{
+    
      $files[]=$folder.'/'.$filename;      
     }
       }

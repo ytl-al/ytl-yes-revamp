@@ -7,11 +7,6 @@
                 <div class="betterdocs-settings-form-wrapper">
                     <div id="betterdocsQuickBuilder"></div>
                 </div>
-                <?php
-                    if ( ! betterdocs()->is_pro_active() ) {
-                        betterdocs()->views->get( 'admin/settings/sidebar' );
-                    }
-                ?>
             </div>
             <?php betterdocs()->views->get( 'admin/settings/blocks' );?>
         </div>

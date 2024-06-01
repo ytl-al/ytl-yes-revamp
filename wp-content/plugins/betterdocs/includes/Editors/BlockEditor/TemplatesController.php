@@ -2,7 +2,7 @@
 
 namespace WPDeveloper\BetterDocs\Editors\BlockEditor;
 use WPDeveloper\BetterDocs\Utils\Base;
-use WPDeveloper\BetterDocs\Utils\BlockTemplateUtils;
+use WPDeveloper\BetterDocs\Utils\BlockTemplate;
 
 /**
  * BlockTypesController class.
@@ -10,19 +10,13 @@ use WPDeveloper\BetterDocs\Utils\BlockTemplateUtils;
  * @internal
  */
 class TemplatesController extends Base {
-
-    /**
-     * Holds the path for the directory where the block templates will be kept.
-     *
-     * @var string
-     */
-    private $templates_directory;
+    protected $blockTemplate;
 
     /**
      * Constructor.
      */
-    public function __construct() {
-        $this->templates_directory = BETTERDOCS_FSE_TEMPLATES_PATH . DIRECTORY_SEPARATOR;
+    public function __construct( BlockTemplate $blockTemplate ) {
+        $this->blockTemplate = $blockTemplate;
         $this->init();
     }
 
@@ -30,6 +24,9 @@ class TemplatesController extends Base {
      * Initialization method.
      */
     protected function init() {
+        if (! betterdocs()->helper->current_theme_is_fse_theme() ) {
+            return;
+        }
         add_filter( 'pre_get_block_template', [ $this, 'get_block_template_fallback' ], 10, 3 );
         add_filter( 'pre_get_block_file_template', [ $this, 'get_block_file_template' ], 10, 3 );
         add_filter( 'get_block_templates', [ $this, 'add_block_templates' ], 10, 3 );
@@ -51,7 +48,7 @@ class TemplatesController extends Base {
         $template_name_parts = explode( '//', $id );
         list( $theme, $slug )  = $template_name_parts;
 
-        if ( ! BlockTemplateUtils::template_is_eligible_for_docs_archive_fallback( $slug ) ) {
+        if ( ! $this->blockTemplate->template_is_eligible_for_docs_archive_fallback( $slug ) ) {
             return null;
         }
 
@@ -83,14 +80,13 @@ class TemplatesController extends Base {
             if ( ! is_wp_error( $template ) ) {
                 $template->id          = $theme . '//' . $slug;
                 $template->slug        = $slug;
-                $template->title       = BlockTemplateUtils::get_block_template_title( $slug );
-                $template->description = BlockTemplateUtils::get_block_template_description( $slug );
+                $template->title       = $this->blockTemplate->get_block_template_title( $slug );
+                $template->description = $this->blockTemplate->get_block_template_description( $slug );
                 unset( $template->source );
 
                 return $template;
             }
         }
-
         return $template;
     }
 
@@ -108,7 +104,7 @@ class TemplatesController extends Base {
 
         $templates_eligible_for_fallback = array_filter(
             $template_slugs,
-            [ BlockTemplateUtils::class, 'template_is_eligible_for_docs_archive_fallback' ]
+            [ $this->blockTemplate, 'template_is_eligible_for_docs_archive_fallback' ]
         );
 
         if ( count( $templates_eligible_for_fallback ) > 0 ) {
@@ -130,6 +126,7 @@ class TemplatesController extends Base {
      * @return mixed|\WP_Block_Template|\WP_Error
      */
     public function get_block_file_template( $template, $id, $template_type ) {
+
         $template_name_parts = explode( '//', $id );
 
         if ( count( $template_name_parts ) < 2 ) {
@@ -139,7 +136,7 @@ class TemplatesController extends Base {
         list( $template_id, $template_slug ) = $template_name_parts;
 
         // If we are not dealing with a BetterDocs template let's return early and let it continue through the process.
-        if ( BlockTemplateUtils::PLUGIN_SLUG !== $template_id ) {
+        if ( BlockTemplate::PLUGIN_SLUG !== $template_id ) {
             return $template;
         }
 
@@ -148,10 +145,13 @@ class TemplatesController extends Base {
             return $template;
         }
 
-        $directory          = $this->get_templates_directory( $template_type );
+        $directory          = $this->blockTemplate->get_templates_directory( $template_type );
+
         $template_file_path = $directory . '/' . $template_slug . '.html';
-        $template_object    = BlockTemplateUtils::create_new_block_template_object( $template_file_path, $template_type, $template_slug );
-        $template_built     = BlockTemplateUtils::build_template_result_from_file( $template_object, $template_type );
+
+        $template_object    = $this->blockTemplate->create_new_block_template_object( $template_file_path, $template_type, $template_slug );
+
+        $template_built     = $this->blockTemplate->build_template_result_from_file( $template_object, $template_type );
 
         if ( null !== $template_built ) {
             return $template_built;
@@ -170,7 +170,7 @@ class TemplatesController extends Base {
      * @return array
      */
     public function add_block_templates( $query_result, $query, $template_type ) {
-        if ( ! BlockTemplateUtils::supports_block_templates() ) {
+        if ( ! $this->blockTemplate->supports_block_templates() ) {
             return $query_result;
         }
 
@@ -184,7 +184,7 @@ class TemplatesController extends Base {
             // If we have a template which is eligible for a fallback, we need to explicitly tell Gutenberg that
             // it has a theme file (because it is using the fallback template file). And then `continue` to avoid
             // adding duplicates.
-            if ( BlockTemplateUtils::set_has_theme_file_if_fallback_is_available( $query_result, $template_file ) ) {
+            if ( $this->blockTemplate->set_has_theme_file_if_fallback_is_available( $query_result, $template_file ) ) {
                 continue;
             }
 
@@ -201,10 +201,10 @@ class TemplatesController extends Base {
             // It would be custom if the template was modified in the editor, so if it's not custom we can load it from
             // the filesystem.
             if ( 'custom' !== $template_file->source ) {
-                $template = BlockTemplateUtils::build_template_result_from_file( $template_file, $template_type );
+                $template = $this->blockTemplate->build_template_result_from_file( $template_file, $template_type );
             } else {
-                $template_file->title       = BlockTemplateUtils::get_block_template_title( $template_file->slug );
-                $template_file->description = BlockTemplateUtils::get_block_template_description( $template_file->slug );
+                $template_file->title       = $this->blockTemplate->get_block_template_title( $template_file->slug );
+                $template_file->description = $this->blockTemplate->get_block_template_description( $template_file->slug );
                 $query_result[]             = $template_file;
                 continue;
             }
@@ -226,7 +226,7 @@ class TemplatesController extends Base {
 
         // We need to remove theme (i.e. filesystem) templates that have the same slug as a customised one.
         // This only affects saved templates that were saved BEFORE a theme template with the same slug was added.
-        $query_result = BlockTemplateUtils::remove_theme_templates_with_custom_alternative( $query_result );
+        $query_result = BlockTemplate::remove_theme_templates_with_custom_alternative( $query_result );
 
         /**
          * WC templates from theme aren't included in `$this->get_block_templates()` but are handled by Gutenberg.
@@ -239,10 +239,10 @@ class TemplatesController extends Base {
                     return $template;
                 }
                 if ( $template->title === $template->slug ) {
-                    $template->title = BlockTemplateUtils::get_block_template_title( $template->slug );
+                    $template->title = $this->blockTemplate->get_block_template_title( $template->slug );
                 }
                 if ( ! $template->description ) {
-                    $template->description = BlockTemplateUtils::get_block_template_description( $template->slug );
+                    $template->description = $this->blockTemplate->get_block_template_description( $template->slug );
                 }
                 return $template;
             },
@@ -269,7 +269,7 @@ class TemplatesController extends Base {
                 [
                     'taxonomy' => 'wp_theme',
                     'field'    => 'name',
-                    'terms'    => [ BlockTemplateUtils::PLUGIN_SLUG, get_stylesheet() ]
+                    'terms'    => [ BlockTemplate::PLUGIN_SLUG, get_stylesheet() ]
                 ]
             ]
         ];
@@ -283,55 +283,10 @@ class TemplatesController extends Base {
 
         return array_map(
             function ( $saved_betterdocs_template ) {
-                return BlockTemplateUtils::build_template_result_from_post( $saved_betterdocs_template );
+                return $this->blockTemplate->build_template_result_from_post( $saved_betterdocs_template );
             },
             $saved_betterdocs_templates
         );
-    }
-
-    /**
-     * Gets the templates from the BetterDocs blocks directory
-     *
-     * @param string[] $slugs An array of slugs to filter templates by. Templates whose slug does not match will not be returned.
-     * @param array    $already_found_templates Templates that have already been found, these are customised templates that are loaded from the database.
-     * @param string   $template_type wp_template or wp_template_part.
-     *
-     * @return array Templates from the BetterDocs blocks plugin directory.
-     */
-    public function get_block_templates_from_betterdocs( $slugs, $already_found_templates, $template_type = 'wp_template' ) {
-        $directory      = $this->get_templates_directory( $template_type );
-        $template_files = BlockTemplateUtils::get_template_paths( $directory );
-
-        $templates = [];
-
-        foreach ( $template_files as $template_file ) {
-            $template_slug = BlockTemplateUtils::generate_template_slug_from_path( $template_file );
-
-            // This template does not have a slug we're looking for. Skip it.
-            if ( is_array( $slugs ) && count( $slugs ) > 0 && ! in_array( $template_slug, $slugs, true ) ) {
-                continue;
-            }
-
-            // If the the template is already in the list (i.e. it came from the
-            // database) then we should not overwrite it with the one from the filesystem.
-            if (
-                count(
-                    array_filter(
-                        $already_found_templates,
-                        function ( $template ) use ( $template_slug ) {
-                            $template_obj = (object) $template; //phpcs:ignore WordPress.CodeAnalysis.AssignmentInCondition.Found
-                            return $template_obj->slug === $template_slug;
-                        }
-                    )
-                ) > 0 ) {
-                continue;
-            }
-
-            // At this point the template only exists in the Blocks filesystem and has not been saved in the DB,
-            // or superseded by the theme.
-            $templates[] = BlockTemplateUtils::create_new_block_template_object( $template_file, $template_type, $template_slug );
-        }
-        return $templates;
     }
 
     /**
@@ -344,20 +299,9 @@ class TemplatesController extends Base {
      */
     public function get_block_templates( $slugs = [], $template_type = 'wp_template' ) {
         $templates_from_db         = $this->get_block_templates_from_db( $slugs, $template_type );
-        $templates_from_betterdocs = $this->get_block_templates_from_betterdocs( $slugs, $templates_from_db, $template_type );
+        $templates_from_betterdocs = $this->blockTemplate->get_block_templates_from_betterdocs( $slugs, $templates_from_db, $template_type );
         $templates                 = array_merge( $templates_from_db, $templates_from_betterdocs );
         return $templates;
-    }
-
-    /**
-     * Gets the directory where templates of a specific template type can be found.
-     *
-     * @param string $template_type wp_template or wp_template_part.
-     *
-     * @return string
-     */
-    protected function get_templates_directory( $template_type = 'wp_template' ) {
-        return $this->templates_directory;
     }
 
     /**
@@ -372,7 +316,7 @@ class TemplatesController extends Base {
         if ( ! $template_name ) {
             return false;
         }
-        $directory = $this->get_templates_directory( $template_type ) . '/' . $template_name . '.html';
+        $directory = $this->blockTemplate->get_templates_directory( $template_type ) . '/' . $template_name . '.html';
 
         return is_readable( $directory ) || $this->get_block_templates( [ $template_name ], $template_type );
     }

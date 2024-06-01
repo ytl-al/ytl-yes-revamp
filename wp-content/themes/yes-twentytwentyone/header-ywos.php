@@ -30,9 +30,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
 
 	<?php wp_head(); ?>
-	
+	<script src="/wp-content/themes/yes-twentytwentyone/assets/js/clevertap-script.js"></script>
 	<script type="text/javascript">var $ = jQuery.noConflict();</script>
-
 	<?php get_template_part('template-parts/header/tracking'); ?>
 </head>
 

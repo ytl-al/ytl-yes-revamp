@@ -9,6 +9,8 @@ use WPDeveloper\BetterDocsPro\Admin\Customizer\Sections\DocsPage;
 use WPDeveloper\BetterDocsPro\Admin\Customizer\Sections\LiveSearch;
 use WPDeveloper\BetterDocsPro\Admin\Customizer\Sections\MultipleKB;
 use WPDeveloper\BetterDocsPro\Admin\Customizer\Sections\ArchivePage;
+use WPDeveloper\BetterDocsPro\Admin\Customizer\Sections\Encyclopedia;
+use WPDeveloper\BetterDocsPro\Admin\Customizer\Sections\Glossaries;
 
 class Customizer extends Base {
     /**
@@ -72,6 +74,8 @@ class Customizer extends Base {
         $_new_settings[] = DocsPage::class;
         $_new_settings[] = Sidebar::class;
         $_new_settings[] = ArchivePage::class;
+        $_new_settings[] = Encyclopedia::class;
+        $_new_settings[] = Glossaries::class;
         if ( betterdocs()->settings->get( 'advance_search' ) == 1 ) {
             $_new_settings[] = LiveSearch::class;
         }
@@ -80,6 +84,9 @@ class Customizer extends Base {
     }
 
     public function dynamic_css() {
+        if ( ! betterdocs()->helper->is_templates() ) {
+            return false;
+        }
         /**
          * Don't remove this line, it's used in dynamic.css.php file.
          */

@@ -28,8 +28,8 @@
 <div class="betterdocs-wrapper betterdocs-taxonomy-wrapper betterdocs-category-archive-wrapper betterdocs-wraper">
     <?php betterdocs()->template_helper->search();?>
 
-    <div class="<?php esc_attr_e( implode( ' ', $content_area_classes ) );?>">
-        <?php betterdocs()->template_helper->sidebar( $layout );?>
+    <div class="<?php echo esc_attr( implode( ' ', $content_area_classes ) ); ?>">
+        <?php betterdocs()->template_helper->sidebar( $layout, 'template' );?>
 
         <div id="main" class="betterdocs-content-area">
             <div class="betterdocs-content-inner-area">
@@ -47,7 +47,7 @@
                             $title_tag,
                             $current_category->name
                         );
-                        echo wp_sprintf( '<p>%s</p>', esc_attr( $current_category->description ) );
+                        echo wp_sprintf( '<p>%s</p>', wp_kses_post( $current_category->description ) );
                     ?>
                 </div>
 
@@ -59,16 +59,28 @@
                                 'term_slug'      => $current_category->slug,
                                 'posts_per_page' => -1,
                                 'orderby'        => betterdocs()->settings->get( 'alphabetically_order_post', 'betterdocs_order' ),
-                                'order'          => betterdocs()->settings->get( 'docs_order', 'ASC' ),
+                                'order'          => betterdocs()->settings->get( 'docs_order', 'ASC' )
                             ] );
+
+
+                            $custom_icon = betterdocs()->customizer->defaults->get( 'betterdocs_archive_list_icon' );
+                            $settings_list_icon = betterdocs()->settings->get( 'docs_list_icon' );
+                            if ( ! $custom_icon && $settings_list_icon ) {
+                                $custom_icon = $settings_list_icon["url"];
+                            }
 
                             $post_query = new WP_Query( $args );
 
                             if ( $post_query->have_posts() ):
                                 while ( $post_query->have_posts() ): $post_query->the_post();
+                                    if ( $custom_icon ) {
+                                        $icon = '<img src="' . esc_url( $custom_icon ) . '" />';
+                                    } else {
+                                        $icon = betterdocs()->template_helper->icon();
+                                    }
                                     echo wp_sprintf(
                                         '<li>%s<a href="%s">%s</a></li>',
-                                        betterdocs()->template_helper->icon(),
+                                        $icon,
                                         esc_attr( esc_url( get_the_permalink() ) ),
                                         betterdocs()->template_helper->kses( get_the_title() )
                                     );
@@ -77,17 +89,19 @@
                             endif; // $post_query->have_posts()
 
                             betterdocs()->views->get( 'template-parts/nested-categories', [
-                                'term_id'            => $current_category->term_id,
-                                'widget'             => null,
-                                'nested_subcategory' => betterdocs()->settings->get( 'archive_nested_subcategory' ),
+                                'term_id'                => $current_category->term_id,
+                                'widget'                 => null,
+                                'nested_subcategory'     => betterdocs()->settings->get( 'archive_nested_subcategory' ),
                                 'nested_docs_query_args' => [
-                                    'orderby'        => betterdocs()->settings->get( 'alphabetically_order_post', 'betterdocs_order' ),
-                                    'order'          => betterdocs()->settings->get( 'docs_order', 'ASC' ),
+                                    'orderby' => betterdocs()->settings->get( 'alphabetically_order_post', 'betterdocs_order' ),
+                                    'order'   => betterdocs()->settings->get( 'docs_order', 'ASC' )
                                 ],
-                                'nested_terms_query' => [
-                                    'orderby'        => betterdocs()->settings->get( 'terms_orderby', 'betterdocs_order' ),
-                                    'order'          => betterdocs()->settings->get( 'terms_order', 'ASC' ),
+                                'nested_terms_query'     => [
+                                    'orderby' => betterdocs()->settings->get( 'terms_orderby', 'betterdocs_order' ),
+                                    'order'   => betterdocs()->settings->get( 'terms_order', 'ASC' )
                                 ],
+                                'list_icon_url'          => $custom_icon,
+                                'layout_type'            => 'template'
                             ] );
                         ?>
                     </ul>

@@ -1,0 +1,218 @@
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+<script type="text/javascript">
+    /**
+     * @license
+     * Copyright 2019 Google LLC. All Rights Reserved.
+     * SPDX-License-Identifier: Apache-2.0
+     */
+    // @ts-nocheck TODO remove when fixed
+    // [START maps_places_searchbox]
+    // This example adds a search box to a map, using the Google Place Autocomplete
+    // feature. People can enter geographical searches. The search box will return a
+    // pick list containing a mix of places and predicted search terms.
+    // This example requires the Places library. Include the libraries=places
+    // parameter when you first load the API. For example: 
+    // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+
+    function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: 4.3693217053098135,
+                lng: 102.21470351336957},
+            zoom: 7,
+        });
+        const card = document.getElementById("pac-card");
+
+       // map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+
+        const center = { lat: 4.3693217053098135, lng: 102.21470351336957 };
+        // Create a bounding box with sides ~10km away from the center point
+        const defaultBounds = {
+            north: center.lat + 0.1,
+            south: center.lat - 0.1,
+            east: center.lng + 0.1,
+            west: center.lng - 0.1,
+        };
+        const input = document.getElementById("pac-input");
+        const options = {
+            bounds: defaultBounds,
+            componentRestrictions: { country: "my" },
+            fields: ["address_components", "geometry", "icon", "name"],
+            strictBounds: false,
+        };
+        const autocomplete = new google.maps.places.Autocomplete(input, options);
+
+        // Set initial restriction to the greater list of countries.
+        autocomplete.setComponentRestrictions({
+            country: ["my"],
+        });
+
+        const southwest = { lat: 5.6108, lng: 136.589326 };
+        const northeast = { lat: 61.179287, lng: 2.64325 };
+        const newBounds = new google.maps.LatLngBounds(southwest, northeast);
+
+        autocomplete.setBounds(newBounds);        
+
+        const infowindow = new google.maps.InfoWindow();
+        const infowindowContent = document.getElementById("infowindow-content");
+
+        infowindow.setContent(infowindowContent);
+
+        const marker = new google.maps.Marker({
+            map,
+            anchorPoint: new google.maps.Point(0, -29),
+        });
+
+        autocomplete.addListener("place_changed", () => {
+            infowindow.close();
+            marker.setVisible(false);
+
+            const place = autocomplete.getPlace();
+
+            //console.log(place.geometry.location.lat(), place.geometry.location.lng());  
+            
+            
+
+            if (!place.geometry || !place.geometry.location) {
+                // User entered the name of a Place that was not suggested and
+                // pressed the Enter key, or the Place Details request failed.
+                window.alert("No details available for input: '" + place.name + "'");
+                return;
+            }
+           
+
+            // If the place has a geometry, then present it on a map.
+            if (place.geometry.viewport) {
+                map.fitBounds(place.geometry.viewport);
+            } else {
+                map.setCenter(place.geometry.location);
+                map.setZoom(17); // Why 17? Because it looks good.
+            }
+
+            marker.setPosition(place.geometry.location);
+            marker.setVisible(true);
+
+            let address = "";
+
+            if (place.address_components) {
+                address = [
+                    (place.address_components[0] &&
+                        place.address_components[0].short_name) ||
+                    "",
+                    (place.address_components[1] &&
+                        place.address_components[1].short_name) ||
+                    "",
+                    (place.address_components[2] &&
+                        place.address_components[2].short_name) ||
+                    "",
+                ].join(" ");
+            }
+
+           // console.log("test", place); 
+           //console.log(place.geometry.location.lat(), place.geometry.location.lng());   
+           // http://localhost/wp-json/elevate/v1/outage-details             
+         // Show loading overlay
+                toggleOverlay(true);
+
+                $.ajax({
+                    url: "/wp-json/outage/outage-details",
+                    data: {
+                        'Latitude': place.geometry.location.lat(),
+                        'Langitude': place.geometry.location.lng(),
+                    },
+                    type: 'GET',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function(result) {
+                        $("#response_msg").empty();
+                        const obj = JSON.parse(result.body);
+
+                        if (obj.Data[0] == undefined) {
+                            $("#response_msg").append("<p class='msg_green'>Perkhidmatan rangkaian Yes di kawasan anda beroperasi dengan lancar. Jika anda menghadapi sebarang masalah, sila naikkan tiket ke YesCare melalui aplikasi MyYes.</p>");
+                        } else {
+                            var final_val = isEqual(result.body, obj.Data[0].Outages[0].Severity);
+
+                            if (final_val == true) {
+                                if (obj.Data[0].Outages[0].Severity == 'Unplanned' || obj.Data[0].Outages[0].Severity == 'Full' || obj.Data[0].Outages[0].Severity == 'S1 AC Fail' || obj.Data[0].Outages[0].Severity == 'S2 High Temperature' || obj.Data[0].Outages[0].Severity == 'S2MW') {
+                                    $("#response_msg").append("<p class='msg_red'>Perkhidmatan rangkaian Yes di kawasan anda tidak tersedia buat sementara waktu. Sila cuba sebentar lagi kerana kami sedang menyelesaikan isu ini buat masa ini. Kami menghargai persefahaman anda dan memohon maaf atas sebarang kesulitan yang timbul.</p>");
+                                } else if (obj.Data[0].Outages[0].Severity == 'Partial' || obj.Data[0].Outages[0].Severity == 'S3' || obj.Data[0].Outages[0].Severity == 'S3MW') {
+                                    $("#response_msg").append("<p class='msg_red'>Perkhidmatan rangkaian Yes di kawasan anda tidak tersedia buat sementara waktu. Sila cuba sebentar lagi kerana kami sedang menyelesaikan isu ini buat masa ini. Kami menghargai persefahaman anda dan memohon maaf atas sebarang kesulitan yang timbul.</p>");
+                                }
+                            } else {
+                                $("#response_msg").append("<p class='msg_orange'>Anda mungkin mengalami beberapa masalah dengan perkhidmatan rangkaian Yes di kawasan anda. Kami sedang berusaha untuk menyelesaikan isu ini daripada maklum balas kolektif anda, dan kami menghargai kesabaran anda dalam perkara ini.</p>");
+                            }
+                        }
+
+                        // Hide loading overlay
+                        toggleOverlay(false);
+                    },
+                    error: function(error) {
+                        // Handle error if needed
+                        // Hide loading overlay
+                        toggleOverlay(false);
+                    }
+                });
+
+
+                function isEqual(obj, first_severity) {
+                    var data = JSON.parse(obj).Data;
+                    //console.log(data);
+                    for (var i = 0; i < data.length; i++) {
+                        var outages = data[i].Outages;
+                        for (var j = 0; j < outages.length; j++) {
+                            var severity = outages[j].Severity;
+                            console.log(severity);
+                            if (severity !== first_severity) {
+                                //console.log("severity");
+                                return false;
+                            }
+                        }
+                    }
+                    return true;
+                }
+
+                // alert(place.geometry.location.lat());
+
+            infowindowContent.children["place-icon"].src = place.icon;
+            infowindowContent.children["place-name"].textContent = place.name;
+            infowindowContent.children["place-address"].textContent = address;
+            infowindow.open(map, marker);
+        });
+
+        // Sets a listener on a given radio button. The radio buttons specify
+        // the countries used to restrict the autocomplete search.
+        // function setupClickListener(id, countries) {
+        //     const radioButton = document.getElementById(id);
+
+        //     radioButton.addEventListener("click", () => {
+        //         autocomplete.setComponentRestrictions({ country: countries });
+        //     });
+        // }
+
+        // setupClickListener("changecountry-usa", "us");
+        // setupClickListener("changecountry-usa-and-uot", [
+        //     "us",
+        //     "pr",
+        //     "vi",
+        //     "gu",
+        //     "mp",
+        // ]);
+    }
+
+    window.initMap = initMap;
+    // [END maps_places_searchbox]  AIzaSyDVy7AwttxREwuYckeUZAccZdnIm93RN6A
+
+
+    $(".viewall-btn").click(function () {
+        $("#faq-section").toggle();
+    });
+
+</script>
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlZr9PPEuI9PXnC_4pv_4FopDEIcPdGqI&callback=initMap&libraries=places&v=weekly"
+      defer
+    ></script>
+<!-- <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlZr9PPEuI9PXnC_4pv_4FopDEIcPdGqI&callback=initAutocomplete&libraries=places&v=weekly"
+    defer></script> --></script>

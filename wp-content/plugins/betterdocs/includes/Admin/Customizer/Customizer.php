@@ -10,6 +10,7 @@ use WPDeveloper\BetterDocs\Utils\Base;
 use WPDeveloper\BetterDocs\Admin\Customizer\Sections\Sidebar;
 use WPDeveloper\BetterDocs\Admin\Customizer\Sections\DocsPage;
 use WPDeveloper\BetterDocs\Admin\Customizer\Sections\SingleDoc;
+use WPDeveloper\BetterDocs\Admin\Customizer\Sections\BreadCrumb;
 use WPDeveloper\BetterDocs\Admin\Customizer\Sections\FaqBuilder;
 use WPDeveloper\BetterDocs\Admin\Customizer\Sections\LiveSearch;
 use WPDeveloper\BetterDocs\Admin\Customizer\Sections\ArchivePage;
@@ -38,7 +39,10 @@ class Customizer extends Base {
         add_action( 'customize_preview_init', [$this, 'customize_preview_init'] );
 
         add_action( 'customize_controls_print_styles', [$this, 'controls_print_styles'], 999 );
-        add_action( 'wp_head', [$this, 'dynamic_css'] );
+
+        if( ! wp_is_block_theme() ) {
+            add_action( 'wp_head', [$this, 'dynamic_css'] );
+        }
     }
 
     /**
@@ -67,7 +71,8 @@ class Customizer extends Base {
             Sidebar::class,
             ArchivePage::class,
             LiveSearch::class,
-            FaqBuilder::class
+            FaqBuilder::class,
+            BreadCrumb::class,
         ] );
 
         /**
@@ -107,6 +112,9 @@ class Customizer extends Base {
      * @return void
      */
     public function dynamic_css() {
+        if ( ! betterdocs()->helper->is_templates() ) {
+            return false;
+        }
         /**
          * Don't remove this line, it's used in dynamic.css.php file.
          */

@@ -1,6 +1,6 @@
 <div
     <?php echo $wrapper_attr; ?>>
-    <h2 class="<?php esc_attr_e( $faq_heading_class );?> betterdocs-faq-section-title">
+    <h2 class="<?php echo esc_attr( $faq_heading_class );?> betterdocs-faq-section-title">
         <?php echo $faq_heading; ?>
     </h2>
 
@@ -18,7 +18,7 @@
                         'mainEntity' => []
                     ];
 
-                    $GLOBALS['betterdocs_faq_schema'] = $faq_json;
+                    $GLOBALS['betterdocs_faq_schema_main_entity'] = $faq_json['mainEntity'];
                 }
 
                 foreach ( $terms as $term ) {
@@ -35,12 +35,13 @@
                     $view_object->get( 'shortcode-parts/faq-list', [
                         'term'       => $term,
                         'faq_schema' => $faq_schema,
-                        'faq_json'   => $faq_json
+                        'faq_json'   => $faq_schema ? $faq_json['mainEntity'] : ''
                     ] );
                 }
 
                 if ( $faq_schema ) {
-                    echo '<script type="application/ld+json">' . wp_json_encode( $GLOBALS['betterdocs_faq_schema'] ) . '</script>';
+                    $faq_json['mainEntity'] = $GLOBALS['betterdocs_faq_schema_main_entity'];
+                    echo '<script type="application/ld+json">' . wp_json_encode( $faq_json ) . '</script>';
                 }
             }
         ?>

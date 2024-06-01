@@ -11,12 +11,20 @@ class ComposerStaticInit3ce4b42d4553d2813f3c2fc3abece7bf
         array (
             'WPDeveloper\\BetterDocs\\' => 23,
         ),
+        'P' => 
+        array (
+            'PriyoMukul\\WPNotice\\' => 20,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'WPDeveloper\\BetterDocs\\' => 
         array (
             0 => __DIR__ . '/../..' . '/includes',
+        ),
+        'PriyoMukul\\WPNotice\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/priyomukul/wp-notice/src',
         ),
     );
 

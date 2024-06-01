@@ -5,8 +5,10 @@ namespace WPDeveloper\BetterDocs\Shortcodes;
 use WPDeveloper\BetterDocs\Core\Shortcode;
 
 class FaqList extends Shortcode {
-    protected $layout = 'modern';
+    protected $layout    = 'modern';
     protected $icon_hook = 'betterdocs_faq_post_after';
+
+    public $icon_position = 'after';
 
     public function get_name() {
         return 'betterdocs_faq_list_modern';
@@ -30,23 +32,47 @@ class FaqList extends Shortcode {
      */
     public function default_attributes() {
         return [
-            'groups'        => '',
-            'class'         => '',
-            'group_exclude' => '',
-            'faq_heading'   => __( 'Frequently Asked Questions', 'betterdocs' ),
-            'faq_schema'	=> false
+            'groups'                      => '',
+            'class'                       => '',
+            'group_exclude'               => '',
+            'faq_heading'                 => __( 'Frequently Asked Questions', 'betterdocs' ),
+            'faq_schema'                  => false,
+            'faq_layout'                  => 'layout-1',
+            'faq_section_title_color'     => null,
+            'include_faq_group'           => '',
+            'exclude_faq_group'           => '',
+            'faq_group_title_color'       => null,
+            'faq_group_title_hover_color' => null,
+            'faq_list_color'              => null,
+            'faq_content_color'           => null,
+            'faq_icon_color'              => null,
+            'faq_group_title_typography'  => null,
+            'faq_per_page'                => 9,
+            'show_button_icon'            => true,
+            'button_icon_position'        => 'after',
+            'button_color'                => '#528ffe',
+            'is_gutenberg'                => false
         ];
     }
 
     public function icons() {
-        $faq_markup = '<svg class="betterdocs-faq-iconminus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2"><g fill="none" stroke="#528ffe" stroke-linecap="round" stroke-miterlimit="10" stroke-linejoin="round"><path d="M17 12H7"></path><circle cx="12" cy="12" r="11"></circle></g></svg>';
-        $faq_markup .= '<svg class="betterdocs-faq-iconplus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-width="2" fill="none" stroke="#528ffe" stroke-linecap="square" stroke-miterlimit="10"><path d="M12 7v10M17 12H7"></path><circle cx="12" cy="12" r="11"></circle></g></svg>';
+        $faq_markup = '<svg class="betterdocs-faq-iconminus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2"><g fill="none" stroke="' . esc_attr( $this->attributes['button_color'] ) . '" stroke-linecap="round" stroke-miterlimit="10" stroke-linejoin="round"><path d="M17 12H7"></path><circle cx="12" cy="12" r="11"></circle></g></svg>';
+        $faq_markup .= '<svg class="betterdocs-faq-iconplus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-width="2" fill="none" stroke="' . esc_attr( $this->attributes['button_color'] ) . '" stroke-linecap="square" stroke-miterlimit="10"><path d="M12 7v10M17 12H7"></path><circle cx="12" cy="12" r="11"></circle></g></svg>';
 
         echo $faq_markup;
     }
 
     public function render( $atts, $content = null ) {
-        add_action( $this->icon_hook, [$this, 'icons'] );
+
+        $this->icon_position = isset( $this->atts['button_icon_position'] ) ? $this->atts['button_icon_position'] : '';
+
+        if ( $this->attributes['is_gutenberg'] && $this->attributes['button_icon_position'] == 'before' && $this->attributes['show_button_icon'] ) {
+            add_action( 'betterdocs_faq_post_before', [$this, 'icons'] );
+        } else if ( $this->attributes['is_gutenberg'] && $this->attributes['button_icon_position'] == 'after' && $this->attributes['show_button_icon'] ) {
+            add_action( 'betterdocs_faq_post_after', [$this, 'icons'] );
+        } else {
+            add_action( $this->icon_hook, [$this, 'icons'] );
+        }
 
         $this->views( 'shortcodes/faq' );
 
@@ -60,7 +86,8 @@ class FaqList extends Shortcode {
             'class' => [
                 'betterdocs-faq-wrapper',
                 'layout-' . $this->layout,
-                $this->attributes['class'],
+                'icon-' . $this->attributes['button_icon_position'],
+                $this->attributes['class']
             ]
         ];
 

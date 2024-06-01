@@ -26,8 +26,8 @@
 <div class="betterdocs-wrapper betterdocs-taxonomy-wrapper betterdocs-category-archive-wrapper betterdocs-wraper">
     <?php betterdocs()->template_helper->search();?>
 
-    <div class="<?php esc_attr_e( implode( ' ', $content_area_classes ) ); ?>">
-        <?php betterdocs()->template_helper->sidebar( $layout );?>
+    <div class="<?php echo esc_attr( implode( ' ', $content_area_classes ) ); ?>">
+        <?php betterdocs()->template_helper->sidebar( $layout, 'template' ); ?>
 
         <div id="main" class="betterdocs-content-area">
             <div class="betterdocs-content-inner-area">
@@ -58,14 +58,25 @@
                             'tax_query'      => apply_filters( 'betterdocs_tag_tax_query', $_tax_query, $current_category )
                         ] );
 
+                        $custom_icon = betterdocs()->customizer->defaults->get( 'betterdocs_archive_list_icon' );
+                        $settings_list_icon = betterdocs()->settings->get( 'docs_list_icon' );
+                        if ( ! $custom_icon && $settings_list_icon ) {
+                            $custom_icon = $settings_list_icon["url"];
+                        }
+
                         if ( $post_query->have_posts() ) :
                     ?>
                     <ul>
                         <?php
                             while ( $post_query->have_posts() ): $post_query->the_post();
+                                if ( $custom_icon ) {
+                                    $icon = '<img src="'. esc_url( $custom_icon ) .'" />';
+                                } else {
+                                    $icon = betterdocs()->template_helper->icon();
+                                }
                                 echo wp_sprintf(
                                     '<li>%s<a href="%s">%s</a></li>',
-                                    betterdocs()->template_helper->icon(),
+                                    $icon,
                                     esc_attr( esc_url( get_the_permalink() ) ),
                                     betterdocs()->template_helper->kses( get_the_title() )
                                 );
