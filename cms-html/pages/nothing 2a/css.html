@@ -1,0 +1,770 @@
+<style type="text/css">
+    .slider-content {
+        margin: 0 0 20px;
+        padding: 50px 0 0 4%;
+        position: absolute;
+        top: 15%;
+        left: 5%;
+        z-index: 99;
+        width: 50%;
+    }
+
+    .slider-content h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 48px;
+        line-height: 56px;
+        font-weight: 800;
+        color: #000000;
+        letter-spacing: -0.02em;
+        margin-bottom: 15px;
+    }
+
+    .slider-content p {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 32px;
+        color: #000000;
+        letter-spacing: -0.02em;
+    }
+
+    .slider-content .btn-sec {
+        margin: 20px 0 0;
+        padding: 0;
+    }
+
+    .slider-content .btn-sec .pink-btn {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 30px;
+        letter-spacing: 0.1em;
+        background-color: #FF0084;
+        border: 1px solid #FF0084;
+    }
+
+    #slider-iphone .carousel-indicators [data-bs-target] {
+        height: 10px !important;
+        width: 10px !important;
+        border-radius: 100%;
+        border-top: 0;
+        border-bottom: 0;
+        background-color: #cbcbcb;
+    }
+
+    #slider-iphone .carousel-indicators .active {
+        background: #ff0084;
+    }
+
+    .preorder-sec {
+        margin: 0;
+        padding: 50px 0;
+    }
+
+    /* #preorder-banner {
+        background-image: url('/wp-content/uploads/2024/03/pre-order-banner.webp');
+        background-color: #fff;
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 45px 0px 30px;
+        overflow: hidden;
+        text-align: center;
+        border-radius: 16px;
+        height: 410px;
+    } */
+
+    .devices-section {
+        position: relative;
+        background-color: #F5F6FA;
+        margin: 0;
+        padding: 50px 0;
+    }
+
+    .devices-section h2 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 39px;
+        line-height: 47px;
+        text-align: center;
+        letter-spacing: -0.02em;
+        color: #000;
+    }
+
+    #device-list-section .layer-planDevice {
+        background-color: #FFF;
+        border-radius: 15px;
+        box-shadow: 0 7px 25px 6px rgba(0, 0, 0, .1);
+        -webkit-box-shadow: 0 7px 25px 6px rgba(0, 0, 0, .1);
+        height: 390px;
+        margin-top: 4px;
+        padding: 40px 25px 20px;
+        border-width: 0;
+        position: relative;
+        transition: all 1s;
+        text-align: center;
+    }
+
+    #device-list-section .layer-planDevice:before {
+        border: 3px solid #FF0084;
+        border-radius: 15px;
+        content: "";
+        height: 100%;
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+
+    #device-list-section .layer-planDevice:hover {
+        -webkit-transform: translateY(-6px);
+        transform: translateY(-6px);
+        transition: all .4s ease-in-out;
+    }
+
+    #device-list-section .layer-planDevice:hover:before {
+        opacity: 1;
+        transition: all .4s ease-in-out
+    }
+
+    .offer-label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 15px 0px;
+        padding: 8px 15px;
+        background-color: #2F3BF5;
+        font-family: 'Open Sans';
+        font-size: 12px;
+        line-height: 18px;
+        font-weight: 700;
+        letter-spacing: -0.011em;
+        color: #fff;
+    }
+
+    .offer-label-bm {
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 15px 0px;
+        padding: 10px 10px;
+        background-color: #2F3BF5;
+        font-family: 'Open Sans';
+        font-size: 13px;
+        line-height: 14px;
+        font-weight: 600;
+        letter-spacing: -0.011em;
+        color: #fff;
+    }
+
+    .layer-planDevice p.panel-deviceImg {
+        margin: 0 0 20px;
+        position: relative;
+        text-align: center;
+    }
+
+    .layer-planDevice p.panel-deviceImg img {
+        max-height: 131px;
+    }
+
+    .layer-planDevice h3 {
+        font-family: 'Montserrat';
+        font-size: 14px;
+        line-height: 21px;
+        font-weight: 500;
+        letter-spacing: 0em;
+        margin: 0;
+        text-align: center;
+    }
+
+    .layer-planDevice h2 {
+        font-family: 'Montserrat';
+        font-size: 20px;
+        line-height: 28px;
+        font-weight: 700;
+        letter-spacing: 0em;
+        text-align: center;
+        /* margin-bottom: 10px; */
+        position: relative;
+    }
+
+    .layer-planDevice span {
+        font-family: 'Montserrat';
+        font-weight: 700;
+        color: #ff0084;
+    }
+
+    .layer-planDevice p.price {
+        font-family: 'Montserrat';
+        font-size: 14px;
+        line-height: 21px;
+        font-weight: 500;
+        letter-spacing: 0em;
+        margin: 0 0 10px;
+        text-align: center;
+        color: #888888;
+    }
+
+    .bottom-section {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        display: flex !important;
+        align-items: end;
+    }
+
+    .layer-planDevice p .f-price-rm {
+        font-family: 'Montserrat';
+        font-size: 18px;
+        line-height: 18px;
+        font-weight: 700;
+        letter-spacing: 0em;
+        color: #000000;
+    }
+
+    .layer-planDevice p.f-price {
+        font-family: 'Montserrat';
+        font-size: 28px;
+        line-height: 28px;
+        font-weight: 800;
+        letter-spacing: 0em;
+        color: #000000;
+        margin-left: 25px;
+        text-align: left;
+        padding-bottom: 10px;
+    }
+
+    .layer-planDevice p.f-price span {
+        font-family: 'Montserrat';
+        font-size: 14px;
+        line-height: 14px;
+        font-weight: 600;
+        letter-spacing: 0em;
+        color: #888888;
+        bottom: 0;
+    }
+
+    .layer-planDevice p.f-price sub {
+        font-family: 'Montserrat';
+        font-size: 16px;
+        line-height: 16px;
+        font-weight: 600;
+        letter-spacing: 0em;
+        color: #888888;
+        bottom: 0;
+    }
+
+    .bottom-section .free-tag {
+        margin-left: 25px;
+        padding-bottom: 10px;
+        line-height: 20px;
+        text-align: left;
+    }
+
+    .bottom-section .free-tag b {
+        margin: 0;
+        padding: 0;
+        font-family: 'Montserrat';
+        font-size: 28px;
+        font-weight: 700;
+        line-height: 28px;
+        color: #000000;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+
+    .offer-block {
+        font-family: 'Montserrat';
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 15px;
+        letter-spacing: 0em;
+        text-align: center;
+        color: #2F3BF5;
+        border: 1px solid #2F3BF5;
+        border-radius: 5px;
+        display: inline-block;
+        padding: 5px 10px;
+        margin: 0 0 15px;
+    }
+
+    .bottom-section .free-tag span {
+        margin: 0;
+        padding: 0;
+        font-family: 'Montserrat';
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 14px;
+        color: #888888;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+
+    .bottom-section .free-tag-bm {
+        margin-left: 25px;
+        padding-bottom: 10px;
+        line-height: 20px;
+        text-align: left;
+    }
+
+    .bottom-section .free-tag-bm b {
+        margin: 0;
+        padding: 0;
+        font-family: 'Montserrat';
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 18px;
+        color: #FF0084;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+
+    .bottom-section .free-tag-bm span {
+        margin: 0;
+        padding: 0;
+        font-family: 'Montserrat';
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 14px;
+        color: #888888;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+
+    .layer-planDevice p.panel-btn {
+        padding: 0;
+        margin-left: auto;
+    }
+
+    .layer-planDevice p.panel-btn a {
+        background-color: #FF0084;
+        border-radius: 15px 0px;
+        color: #FFF;
+        display: inline-block;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        padding: 18px 10px;
+        text-transform: uppercase;
+        font-family: 'Montserrat';
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+
+
+    .visitus-sec {
+        margin: 0;
+        padding: 50px 0;
+    }
+
+    .visitus-sec h2 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 33px;
+        line-height: 40px;
+        font-weight: 800;
+        color: #000000;
+        letter-spacing: -0.02em;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .visitus-sec p {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 30px;
+        color: #000000;
+        letter-spacing: -0.02em;
+        text-align: center;
+    }
+
+    /* #visitus-banner {
+        background-image: url('/wp-content/uploads/2024/03/visitus-banner.webp');
+        background-color: #fff;
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding: 45px 0px 30px;
+        overflow: hidden;
+        text-align: center;
+        border-radius: 16px;
+        height: 410px;
+    } */
+
+    #faq-section {
+        align-items: center;
+        justify-content: center;
+        padding: 0px 0px 70px;
+        background: #fff;
+    }
+
+    #faq-section h1 {
+        font-size: 33px;
+        font-weight: 600;
+        line-height: 72px;
+        color: #000;
+        text-align: center;
+    }
+
+    #faq-section .accordion-button {
+        border: none;
+        box-shadow: unset;
+        border-radius: 0;
+        font-size: 16px;
+        line-height: 32px;
+        color: #000;
+        font-weight: 400;
+        font-family: 'Open Sans', sans-serif;
+        border-bottom: 1px solid #000;
+    }
+
+    #faq-section .accordion-button::after {
+        opacity: 1;
+    }
+
+    #faq-section .accordion-button::after {
+        background-image: none;
+        background: url(/wp-content/uploads/2023/09/icon-open.png) no-repeat center center / contain;
+    }
+
+    #faq-section .accordion-button:not(.collapsed)::after {
+        background-image: none;
+        background: url(/wp-content/uploads/2023/09/icon-hide.png) no-repeat center center / contain !important;
+    }
+
+    #faq-section .accordion-button:focus {
+        box-shadow: unset;
+    }
+
+    #faq-section .accordion-body {
+        font-size: 16px;
+        line-height: 32px;
+    }
+
+    #faq-section .accordion-body h4 {
+        font-size: 16px;
+        line-height: 32px;
+        font-weight: 800;
+    }
+
+    #faq-section .accordion-body ul {
+        margin: 15px 0 0 15px;
+        padding: 0;
+    }
+
+    #faq-section .accordion-body li {
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+        line-height: 32px;
+    }
+
+    #faq-section .accordion-body p {
+        font-size: 16px;
+        line-height: 32px;
+    }
+
+    #faq-section .viewall-btn {
+        font-family: 'Montserrat';
+        font-size: 14px;
+        line-height: 19px;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+
+    @media only screen and (min-device-width: 1600px) {}
+
+    @media only screen and (max-width: 768px) {
+        .slider-content {
+            left: 0;
+            top: 1%;
+            width: 95%;
+            padding: 15px 0 0 0;
+        }        
+
+        .slider-content h1 {
+            font-size: 24px;
+            line-height: 32px;
+            margin-top: 0px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .slider-content p {
+            font-size: 14px;
+            line-height: 18px;
+            text-align: center;
+        }
+
+        .slider-content p br {
+            display: unset;
+        }
+
+        .slider-content h1 br {
+            display: none;
+        }
+
+        .slider-content .btn-sec {
+            margin: 10px auto;
+            padding: 0;
+            text-align: center;
+        }
+
+        .slider-content .btn-sec .pink-btn {
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 16px;
+        }
+
+        /* #preorder-banner {
+            background-image: url('/wp-content/uploads/2024/03/pre-order-banner-mob.webp');
+            padding: 45px 15px 30px;
+            overflow: hidden;
+            text-align: center;
+            border-radius: 16px;
+            background-position: bottom left;
+        } */
+
+        .devices-section h2 {
+            font-size: 24px;
+            line-height: 28px;
+            padding: 0 20px;
+            margin-bottom: 3rem;
+        }
+
+        /*#device-list-section .layer-planDevice {
+            height: 280px;
+            margin-top: 0;
+            padding: 0 20px 20px;
+             display: flex;
+            align-items: center;
+            gap: 15px; 
+        }*/
+
+        /* .content-sec {
+            display: flex;
+            flex-direction: column;
+        } */
+
+        .layer-planDevice h2 {
+            font-size: 20px;
+            line-height: 28px;
+            margin-bottom: 0;
+        }
+
+        .visitus-sec h2 {
+            font-size: 24px;
+            line-height: 28px;
+            padding: 0 15px;
+        }
+
+        .visitus-sec p {
+            font-size: 16px;
+            line-height: 18px;
+            padding: 0 15px;
+            margin-bottom: 3rem;
+        }
+
+        /* #visitus-banner {
+            background-image: url('/wp-content/uploads/2024/03/visitus-banner-mob.webp');
+            background-color: #fff;
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 45px 0px 30px;
+            overflow: hidden;
+            text-align: center;
+            border-radius: 16px;
+            height: 350px;
+        } */
+
+        .panel-deviceImg .offer-img {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            z-index: 99;
+        }
+
+        .panel-deviceImg .offer-img img {
+            width: 65px;
+        }
+
+        .panel-deviceImg .offer-img-ultra {
+            position: absolute;
+            top: -20px;
+            right: -27px;
+            z-index: 99;
+        }
+
+        .panel-deviceImg .offer-img-ultra img {
+            width: 65px;
+        }
+
+
+    }
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: 640px) and (-webkit-min-device-pixel-ratio: 2) {
+
+        .slider-content {
+            left: 0;
+            top: 1%;
+            width: 95%;
+            padding: 15px 0 0 0;
+        }        
+
+        .slider-content h1 {
+            font-size: 24px;
+            line-height: 32px;
+            margin-top: 0px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .slider-content p {
+            font-size: 14px;
+            line-height: 18px;
+            text-align: center;
+        }
+
+        .slider-content p br {
+            display: unset;
+        }
+
+        .slider-content h1 br {
+            display: none;
+        }
+
+        .slider-content .btn-sec {
+            margin: 10px auto;
+            padding: 0;
+            text-align: center;
+        }
+
+        .slider-content .btn-sec .pink-btn {
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 16px;
+        }
+
+        /* #preorder-banner {
+            background-image: url('/wp-content/uploads/2024/03/pre-order-banner-mob.webp');
+            padding: 45px 15px 30px;
+            overflow: hidden;
+            text-align: center;
+            border-radius: 16px;
+            background-position: bottom left;
+        } */
+
+        .devices-section h2 {
+            font-size: 24px;
+            line-height: 28px;
+            padding: 0 20px;
+            margin-bottom: 3rem;
+        }
+
+        .layer-planDevice h2 {
+            font-size: 20px;
+            line-height: 28px;
+            margin-bottom: 0;
+        }
+
+        .visitus-sec h2 {
+            font-size: 24px;
+            line-height: 28px;
+            padding: 0 15px;
+        }
+
+        .visitus-sec p {
+            font-size: 16px;
+            line-height: 18px;
+            padding: 0 15px;
+            margin-bottom: 3rem;
+        }
+
+        /* #visitus-banner {
+            background-image: url('/wp-content/uploads/2024/03/visitus-banner-mob.webp');
+            background-color: #fff;
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 45px 0px 30px;
+            overflow: hidden;
+            text-align: center;
+            border-radius: 16px;
+            height: 350px;
+        } */
+
+        .panel-deviceImg .offer-img {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            z-index: 99;
+        }
+
+        .panel-deviceImg .offer-img img {
+            width: 65px;
+        }
+
+        .panel-deviceImg .offer-img-ultra {
+            position: absolute;
+            top: -20px;
+            right: -27px;
+            z-index: 99;
+        }
+
+        .panel-deviceImg .offer-img-ultra img {
+            width: 65px;
+        }
+
+
+
+        #faq-section {
+            padding: 50px 0px !important;
+        }
+
+        #faq-section h1 {
+            font-size: 26px;
+            line-height: 34px;
+            font-weight: 700;
+        }
+
+        #faq-section .accordion-item {
+            margin-bottom: 15px;
+        }
+
+        #faq-section .accordion-button {
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 700;
+        }
+
+        #faq-section .accordion-body h4 {
+            font-size: 13px;
+            line-height: 20px;
+            font-weight: 800;
+        }
+
+        #faq-section .accordion-body ul {
+            margin: 15px 0 0 15px;
+            padding: 0;
+        }
+
+        #faq-section .accordion-body li {
+            margin: 0;
+            padding: 0 0 5px;
+            font-size: 13px;
+            line-height: 20px;
+        }
+
+        #faq-section .accordion-body p {
+            font-size: 13px;
+            line-height: 20px;
+        }
+
+        #faq-section .viewall-btn {
+            font-size: 14px;
+            line-height: 18px;
+            font-weight: 700;
+        }
+    }
+</style>

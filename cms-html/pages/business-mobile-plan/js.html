@@ -1,0 +1,105 @@
+<script type="text/javascript">
+    $(document).ready(function() {   
+        
+        $('.hero-slider').slick({
+          infinite: true,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,
+          fade: true,
+          dots: true,
+          autoplay: true,
+          autoplaySpeed: 3000,
+          responsive: [{
+              breakpoint: 1024,
+              settings: {
+                  slidesToShow: 2,
+                  slidesToScroll: 1,
+                  infinite: true,
+                  dots: true,
+                  arrows: false
+              }
+          }, {
+              breakpoint: 768,
+              settings: {
+                  slidesToShow: 1,
+                  arrows: false,
+                  infinite: true,
+                  dots: true,
+                  slidesToScroll: 1,
+              }
+          }, {
+              breakpoint: 600,
+              settings: {
+                  slidesToShow: 1,
+                  arrows: false,
+                  infinite: true,
+                  dots: true,
+                  slidesToScroll: 1
+              }
+          }, {
+              breakpoint: 480,
+              settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1,
+                  dots: true,
+                  infinite: true,
+                  dots: true,
+                  arrows: false
+              }
+          }]
+      });
+           
+        
+        // $('.latest-plan-carousel').slick({            
+        //     infinite: false,
+        //     slidesToShow: 5,
+        //     slidesToScroll: 1,
+        //     autoplay: false,
+        //     autoplaySpeed: 3000,
+        //     dots: false,
+        //     arrows: false,
+        //     responsive: [{
+        //         breakpoint: 1024,
+        //         settings: {
+        //             slidesToShow: 4,
+        //             slidesToScroll: 1,
+        //             infinite: true,
+        //             dots: true,
+        //             arrows: false
+        //         }
+        //     }, {
+        //         breakpoint: 768,
+        //         settings: {
+        //             slidesToShow: 1,
+        //             arrows: false,
+        //             infinite: true,
+        //             dots: true,
+        //             slidesToScroll: 1,
+        //         }
+        //     }, {
+        //         breakpoint: 600,
+        //         settings: {
+        //             slidesToShow: 1,
+        //             arrows: false,
+        //             infinite: true,
+        //             dots: true,
+        //             slidesToScroll: 1
+        //         }
+        //     }, {
+        //         breakpoint: 480,
+        //         settings: {
+        //             slidesToShow: 1,
+        //             slidesToScroll: 1,
+        //             dots: true,
+        //             infinite: true,
+        //             dots: true,
+        //             arrows: false
+        //         }
+        //     }]
+        // });
+
+         
+  
+    });
+  </script>

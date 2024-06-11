@@ -767,5 +767,59 @@
           }]
       });
 
+     
+
+      $('.destinations-slider').slick({    
+        prevArrow: '<a href="#" class="slide-arrow prev-arrow slick-arrow"><span class="iconify slick-prev" data-icon="eva:arrow-ios-back-fill"></span></a>',
+            nextArrow: '<a href="#" class="slide-arrow next-arrow slick-arrow"><span class="iconify slick-next" data-icon="eva:arrow-ios-forward-fill"></span></a>',        
+            infinite: false,
+            slidesToShow: 8,
+            slidesToScroll: 1,
+            autoplay: false,
+            autoplaySpeed: 3000,
+            centerMode: false,
+            dots: false,
+            responsive: [{
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true,
+                    arrows: false
+                }
+            }, {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3,
+                    arrows: false,
+                    infinite: true,
+                    dots: true,
+                    slidesToScroll: 1,
+                }
+            }, {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 3,
+                    arrows: false,
+                    infinite: true,
+                    dots: true,
+                    slidesToScroll: 3,
+                }
+            }, {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    dots: true,
+                    infinite: true,
+                    dots: true,
+                    arrows: false,
+                    centerMode: false,
+                }
+            }]
+        });
+
+
     });
 </script>
