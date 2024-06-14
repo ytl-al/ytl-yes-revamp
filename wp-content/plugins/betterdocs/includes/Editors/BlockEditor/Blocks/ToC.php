@@ -5,6 +5,9 @@ namespace WPDeveloper\BetterDocs\Editors\BlockEditor\Blocks;
 use WPDeveloper\BetterDocs\Editors\BlockEditor\Block;
 
 class ToC extends Block {
+
+    public $view_wrapper = 'betterdocs-toc-block';
+
     public function get_name() {
         return 'table-of-contents';
     }
@@ -60,9 +63,8 @@ class ToC extends Block {
             'list_number' => $this->attributes['toc_list_number']
         ];
 
-        if ( is_admin() ) {
-            set_transient( 'betterdocs_toc_setting', $toc_setting );
-        }
+        //set TOC data in Transient, whenever TOC(block) is called.
+        set_transient( 'betterdocs_toc_setting', $toc_setting );
 
         $htags = implode( ',', $htags );
 

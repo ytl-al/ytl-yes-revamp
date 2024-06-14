@@ -115,6 +115,54 @@ class FAQ extends Widget_Base {
 
         $this->end_controls_section();
 
+        /**
+         * ----------------------------------------------------------
+         * Section: Container Section Settings
+         * ----------------------------------------------------------
+         */
+        $this->start_controls_section(
+            'section_faq_container_section',
+            [
+                'label'     => __( 'Container Section', 'betterdocs' ),
+                'tab'       => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_responsive_control(
+            'section_faq_container_section_padding',
+            [
+                'label'      => __( 'Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-faq-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'section_faq_container_section_margin', // Legacy control id but new control
+            [
+                'label'      => __( 'Margin', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-faq-wrapper' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'section_faq_container_section_background',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .betterdocs-faq-wrapper'
+            ]
+        );
+
+        $this->end_controls_section();
+
         /******* Common Section Style For Both Layouts *******/
 
         $this->start_controls_section(

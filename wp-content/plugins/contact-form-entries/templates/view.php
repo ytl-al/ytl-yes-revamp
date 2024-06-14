@@ -432,7 +432,7 @@ color: #666;
         $fields[$k]=array('name'=>$k,'label'=>str_replace(array('_','-'),' ',$k),'type'=>'text');   
        }   
       }
-  foreach($fields as $field){ //var_dump($field['basetype']); 
+  foreach($fields as $field){ //var_dump($field['type']); 
   
   if(!isset($field['name']) || !empty($field['vx_skip_edit'])){  continue; }
   $field_id=(string)$field['name'];
@@ -544,18 +544,18 @@ else if(in_array($type,array('select','multiselect','state','country'))){
 </select>
 <?php
 }
-else if($type == 'file'){
+else if($type == 'file'){ 
     if(!is_array($value)){
      $files_arr=array($value);   
     }else{
         $files_arr=$value;
     } 
-    $value='';
+    $value=''; 
 foreach($files_arr as $k=>$val){
 $value.=$file_value=vxcf_form::file_link($val);
     ?>
 <div class="vx_file_single">
-<?php echo wp_kses_post($file_value); ?>  
+<?php echo esc_url($file_value); ?>  
   <div>
   <input type="hidden" name="files_<?php echo esc_html($f_name.'['.$k.']') ?>" value="<?php echo esc_html($val) ?>" />
   <input type="file" id="vx_<?php echo esc_html($field['name']); ?>" <?php echo esc_html($req) ?> class="vx_input" name="<?php echo esc_html($f_name).'[]' ?>" autocomplete="off">

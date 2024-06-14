@@ -29,8 +29,26 @@
     line-height: 20px;
     color:#525252;
     }
+    .color-orange a{
+    background: #FF5733 !important;
+}
+.color-yellow a{
+	background: #f9f7aa !important;
+}
+.color-light-blue a{
+background: #4d5166;
+}
+.color-v_blue a {
+    background: #a7c9d2;
+}
+.color-v-blue a {
+    background: #a7c9d2;
+}
+.color-ocean-teal a {
+    background: #29777B;
+}
 </style>
-<div id="main-vue" style="display: none">
+<div id="main-vue">
 <header class="page-header">
     <div class="nav-container">
         <div class="container g-lg-0">
@@ -81,7 +99,7 @@
             </div>
         </section>
     </div>
-    <div id="container-hasItem" v-if="!isCartEmpty" style="display: none">
+    <div id="container-hasItem" v-if="!isCartEmpty">
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
@@ -133,8 +151,15 @@
                                             <div class="accordion-header" @click="showPlanDetail()"> {{orderSummary.product.selected.plan.name}} <i
                                                         class="icon icon_arrow_down"></i></div>
                                             <div class="text-description mt-3">{{orderSummary.product.selected.plan.shortDescription}}</div>
-                                            <ul class="accordion-body list-1 mt-3">
+                                            <!-- <ul class="accordion-body list-1 mt-3">
                                                 <li v-for="(list, index) in orderSummary.product.selected.plan.longDescriptionEN">{{list}}</li>
+                                            </ul> -->
+                                            <ul class="accordion-body list-1 mt-3" v-if="getLang!='ms-MY'" >
+                
+                                                <li v-for="(list, index) in orderSummary.product.selected.plan.longDescriptionEN">{{list}}</li>
+                                            </ul>
+                                            <ul class="accordion-body list-1 mt-3" v-else>
+                                                <li v-for="(list, index) in orderSummary.product.selected.plan.longDescriptionBM">{{list}}</li>
                                             </ul>
                                         </div>
                                         <div class="text-description mt-3">
@@ -161,9 +186,9 @@
                                     </div>
 									</div>
                                     <div class="hr_line"></div>
-                                    <div class="text-note" v-if="orderSummary.orderDetail.productCode">
+                                    <!-- <div class="text-note" v-if="orderSummary.orderDetail.productCode">
                                         <div v-for="(detail, index) in orderSummary.product.selected.productNote">{{detail | trim}}</div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -211,7 +236,7 @@
 
                 <!-- Model Notify Me ENDS -->
                     <div class="eSIM" v-if="(StockBalance == 0)">
-                        <img src="/wp-content/uploads/2023/06/exclamation-circle-Regular-1.png" alt="...">
+                        <img src="/wp-content/uploads/2023/09/exclamation-circle-Regular-1.png" alt="...">
                      <div>
                       <h6>This device is temporarily out of stock. </h6>
                       <p>Click below to be notified of when this device is available.</p>
@@ -221,7 +246,7 @@
                          <!-- ----------- -->
                            <div>
                                 <div v-if="(StockBalance == 0)">
-                                    <a href="javascript:void(0)" @Click="triggerModalNotify" class="pink-btn text-uppercase d-block" >{{ renderText('Notify_me') }}</a>
+                                    <a href="javascript:void(0)" @Click="triggerModalNotify" class="pink-btn text-uppercase d-block" >NOTIFY ME</a>
                                 </div>
                                 <div v-else>
                                     <a href="javascript:void(0)" @click="goNext" class="pink-btn text-uppercase d-block" >{{ renderText('checkout') }}</a>
@@ -259,6 +284,7 @@
                 StockBalance:1,
                 elevateLSData: null,
                 productId: null,
+                getLang:null,
                 isCartEmpty: false,
                 hasFetchPlan: false,
                 ywos_contract:"Normal",
@@ -317,7 +343,7 @@
                 getPlanData: function() {
                     var self = this;
                     if (elevate.validateSession(self.currentStep)) {
-
+                        self.getLang = elevate.lsData.siteLang;
                         self.productId = elevate.lsData.meta.productId;
                         self.dealer = elevate.lsData.meta.dealer;
 

@@ -25,7 +25,14 @@ if ( empty( $_nested_categories ) ) {
     return;
 }
 
-
+// if there have list icon url from customizer or shortcodes attribites format it to $list_icon_name
+if ( $layout_type == 'template' && isset ( $list_icon_url ) && $list_icon_url) {
+    $list_icon_name = array(
+        'value' => array(
+            'url' => $list_icon_url
+        )
+    );
+}
 
 $_page_id      = null;
 $_category_ids = [];
@@ -78,9 +85,9 @@ foreach ( $_nested_categories as $_nested_category ) :
                 betterdocs()->template_helper->icon( 'arrow-right', true );
                 betterdocs()->template_helper->icon( 'arrow-down', true );
             ?>
-            <a href="#"><?php _e( $_nested_category->name );?></a>
+            <a href="#"><?php _e( $_nested_category->name, 'betterdocs' );?></a>
         </span>
-        <ul class="<?php esc_attr_e( $classes );?>">
+        <ul class="<?php echo esc_attr( $classes );?>">
             <?php
                 $_nested_docs_args['term_id'] = $_nested_category->term_id;
                 $_nested_docs_args['term_slug'] = $_nested_category->slug;

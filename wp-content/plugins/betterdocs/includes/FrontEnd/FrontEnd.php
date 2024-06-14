@@ -40,8 +40,18 @@ class FrontEnd extends Base {
 
         add_action( 'betterdocs_before_render', [$this, 'before_render'], 11, 2 );
         add_action( 'betterdocs_after_render', [$this, 'after_render'], 11, 2 );
+
+        //Remove Saliant Theme Script For (Delay Javascript Exection), which causes issue with betterdocs sidebar toggle, issue number (#1234)
+        add_action( 'nectar_hook_before_body_close', [$this, 'dequeue_saliant_theme_script'], 99999 );
+
+        //Remove our search selector from from Searchanise plugin for woocommerce, conflicts with betterdocs search (Bug Fix Card -> https://trello.com/c/lXzrtv2f/1313-client-issue-betterdocs-is-conflicting-with-the-searchanise-plugin)
+        add_filter( 'se_load_search_widgets', [$this, 'exclude_betterdocs_search'], 10, 1 );
     }
 
+    public function exclude_betterdocs_search( $options ) {
+        $options['search_input'] = $options['search_input'].':not(.betterdocs-search-field)';
+        return $options;
+    }
     public function before_render( $widget, $widget_type ) {
         $this->widget_attributes = isset( $widget->attributes ) ? $widget->attributes : [];
         $this->widget_type       = $widget_type;
@@ -62,6 +72,12 @@ class FrontEnd extends Base {
 
         add_filter( 'betterdocs_nested_terms_args', [$this, 'terms_args'], 11, 1 );
         add_filter( 'betterdocs_nested_docs_args', [$this, 'docs_args'], 11, 1 );
+    }
+
+    public function dequeue_saliant_theme_script() {
+        if ( is_singular( 'docs' ) || is_tax( 'doc_category' ) || is_tax( 'doc_tag' ) ) {
+            wp_dequeue_script( 'salient-delay-js' );
+        }
     }
 
     public function after_render( $widget, $widget_type ) {
@@ -85,7 +101,12 @@ class FrontEnd extends Base {
                 break;
             case 'blocks':
                 if ( isset( $this->widget_attributes['orderBy'] ) ) {
-                    $args['orderby'] = $this->widget_attributes['orderBy'];
+                    if ( $this->widget_attributes['orderBy'] == 'doc_category_order' ) {
+                        $args['orderby']  = 'meta_value_num';
+                        $args['meta_key'] = $this->widget_attributes['orderBy'];
+                    } else {
+                        $args['orderby'] = $this->widget_attributes['orderBy'];
+                    }
                 }
                 if ( isset( $this->widget_attributes['order'] ) ) {
                     $args['order'] = $this->widget_attributes['order'];
@@ -145,10 +166,14 @@ class FrontEnd extends Base {
     public function enqueue_scripts() {
         if ( is_singular( 'docs' ) ) {
             wp_enqueue_style( 'betterdocs-single' );
+            wp_enqueue_style( 'betterdocs-encyclopedia' );
+            wp_enqueue_style( 'betterdocs-glossaries' );
             wp_enqueue_script( 'clipboard' );
+            wp_enqueue_script( 'betterdocs-glossaries');
         }
 
         if ( is_post_type_archive( 'docs' ) ) {
+            wp_enqueue_style( 'betterdocs-category-grid' ); //category grid shortcode is supposed to enqueue this style, but this is called again to fix flicking of UI on Docs Page
             wp_enqueue_style( 'betterdocs-docs' );
         }
 
@@ -199,7 +224,7 @@ class FrontEnd extends Base {
             'FEEDBACK' => [
                 'DISPLAY' => true,
                 'TEXT'    => esc_html__( 'How did you feel?', 'betterdocs' ),
-                'SUCCESS' => esc_html__( 'Thanks for your feedback', 'betterdocs' ),
+                'SUCCESS' => betterdocs()->settings->get( 'reaction_feedback_text', __( 'Thanks for your feedback', 'betterdocs') ),
                 'URL'     => get_rest_url( null, '/betterdocs/v1/feedback' )
             ]
         ] );

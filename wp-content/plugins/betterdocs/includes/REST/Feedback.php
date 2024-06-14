@@ -33,7 +33,7 @@ class Feedback extends BaseAPI {
         global $wpdb;
         $docs_id  = isset( $request['id'] ) ? esc_sql( intval( $request['id'] ) ) : null;
         $feelings = isset( $request['feelings'] ) ? esc_sql( $request['feelings'] ) : 'happy';
-        if ( $docs_id !== null && get_post( $docs_id ) && get_option( 'betterdocs_pro_db_version' ) == true ) {
+        if ( $docs_id !== null && get_post( $docs_id ) && get_option( 'betterdocs_db_version' ) == true ) {
             $post_id = $wpdb->get_results(
                 $wpdb->prepare(
                     "SELECT *

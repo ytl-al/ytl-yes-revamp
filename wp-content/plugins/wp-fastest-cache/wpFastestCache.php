@@ -3,7 +3,7 @@
 Plugin Name: WP Fastest Cache
 Plugin URI: http://wordpress.org/plugins/wp-fastest-cache/
 Description: The simplest and fastest WP Cache system
-Version: 1.2.2
+Version: 1.2.7
 Author: Emre Vona
 Author URI: https://www.wpfastestcache.com/
 Text Domain: wp-fastest-cache
@@ -1293,6 +1293,12 @@ GNU General Public License for more details.
 				}
 
 				if($new_status == "trash" && $old_status == "publish"){
+
+					if($post->post_type == "shop_coupon"){
+						// YITH WooCommerce Coupon Email System Premium
+						return;
+					}
+
 					$this->singleDeleteCache(false, $post->ID);
 				}else if(($new_status == "draft" || $new_status == "pending" || $new_status == "private") && $old_status == "publish"){
 					$this->deleteCache();
@@ -1333,6 +1339,11 @@ GNU General Public License for more details.
 
 					if(preg_match("/https?:\/\/[^\/]+\/(.+)/", $value->url, $out)){
 
+						if(preg_match("/\.{2,}/", $out[1])){
+							// to prevent Directory Traversal Attack
+							continue;
+						}
+
 						if(preg_match("/\/\(\.\*\)/", $out[1])){
 							$out[1] = str_replace("(.*)", "", $out[1]);
 
@@ -1351,10 +1362,14 @@ GNU General Public License for more details.
 
 						if(is_dir($path)){
 							rename($path, $this->getWpContentDir("/cache/tmpWpfc/").time());
+						}else if(is_file($path)){
+							@unlink($path);
 						}
 
 						if(is_dir($mobile_path)){
 							rename($mobile_path, $this->getWpContentDir("/cache/tmpWpfc/mobile_").time());
+						}else if(is_file($mobile_path)){
+							@unlink($mobile_path);
 						}
 						
 					}
@@ -2064,20 +2079,28 @@ GNU General Public License for more details.
 		}
 
 		public function getABSPATH(){
-			$path = ABSPATH;
-			$siteUrl = site_url();
-			$homeUrl = home_url();
-			$diff = str_replace($homeUrl, "", $siteUrl);
-			$diff = trim($diff,"/");
 
-		    $pos = strrpos($path, $diff);
+			if(function_exists("get_home_path")){
+				return get_home_path();
+			}else{
 
-		    if($pos !== false){
-		    	$path = substr_replace($path, "", $pos, strlen($diff));
-		    	$path = trim($path,"/");
-		    	$path = "/".$path."/";
-		    }
-		    return $path;
+				$path = ABSPATH;
+				$siteUrl = site_url();
+				$homeUrl = home_url();
+				$diff = str_replace($homeUrl, "", $siteUrl);
+				$diff = trim($diff,"/");
+
+			    $pos = strrpos($path, $diff);
+
+			    if($pos !== false){
+			    	$path = substr_replace($path, "", $pos, strlen($diff));
+			    	$path = trim($path,"/");
+			    	$path = "/".$path."/";
+			    }
+			    return $path;
+
+			}
+			
 		}
 
 		public function rm_folder_recursively($dir, $i = 1) {

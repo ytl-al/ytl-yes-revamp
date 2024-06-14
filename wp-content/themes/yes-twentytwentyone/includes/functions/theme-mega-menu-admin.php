@@ -69,8 +69,17 @@ function my_admin_footer_function($menu_item_db_id)
 	</div>
 	<script type="text/javascript">
 		(function($) {
-			var html = $('#custom_add_field').html();
-			$('#post-body-content').append(html);
+			// var html = $('#custom_add_field').html();
+			// $('#post-body-content').append(html);
+
+			var menuManagementElement = $('#menu-management');
+
+			if (menuManagementElement.length > 0) {
+					var html = $('#custom_add_field').html();
+					$('#post-body-content').append(html);
+				} else {
+					console.log("Element with ID 'menu-management' not found.");
+	}
 			var post_id = document.getElementsByClassName('menu-item-data-db-id')[0].value;
 			var data = {
 				action: 'ytl_add_custom_menu',

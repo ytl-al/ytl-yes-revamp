@@ -14,6 +14,10 @@ class Analytics extends FreeAnalytics {
     }
 
     public function set_cookies() {
+        if ( betterdocs()->settings->get('unique_visitor_count') == false ) {
+            return;
+        }
+
         if ( is_singular( 'docs' ) && $this->is_eligible_visits() == true ) {
             $post_id = get_the_ID();
             if ( ! isset( $_COOKIE["docs_visited_{$post_id}"] ) ) {
@@ -51,34 +55,37 @@ class Analytics extends FreeAnalytics {
             )
         );
 
-        if ( ! empty( $result ) ) {
-            $impressions_increment = $result[0]->impressions + 1;
-            if ( ! isset( $_COOKIE['docs_visited_' . $post->ID] ) ) {
-                $unique_visit = $result[0]->unique_visit + 1;
+        if ( betterdocs()->settings->get('unique_visitor_count') != false ) {
+            if ( ! empty( $result ) ) {
+                $impressions_increment = $result[0]->impressions + 1;
+                if ( ! isset( $_COOKIE['docs_visited_' . $post->ID] ) ) {
+                    $unique_visit = $result[0]->unique_visit + 1;
+                } else {
+                    $unique_visit = $result[0]->unique_visit;
+                }
+                $wpdb->query(
+                    $wpdb->prepare(
+                        "UPDATE {$wpdb->prefix}betterdocs_analytics
+                                SET impressions = " . $impressions_increment . ", unique_visit = " . $unique_visit . "
+                                WHERE created_at = %s AND post_id = %d",
+                        [date( 'Y-m-d' ), $post_id]
+                    )
+                );
             } else {
-                $unique_visit = $result[0]->unique_visit;
+                $unique_visit = ( ! isset( $_COOKIE['docs_visited_' . $post->ID] ) ) ? 1 : 0;
+                $wpdb->query(
+                    $wpdb->prepare(
+                        "INSERT INTO {$wpdb->prefix}betterdocs_analytics
+                                ( post_id, impressions, unique_visit, created_at )
+                                VALUES ( %d, %d, %d, %s )",
+                        [$post_id, 1, $unique_visit, date( 'Y-m-d' )]
+                    )
+                );
             }
-            $wpdb->query(
-                $wpdb->prepare(
-                    "UPDATE {$wpdb->prefix}betterdocs_analytics
-                            SET impressions = " . $impressions_increment . ", unique_visit = " . $unique_visit . "
-                            WHERE created_at = %s AND post_id = %d",
-                    [date( 'Y-m-d' ), $post_id]
-                )
-            );
-        } else {
-            $unique_visit = ( ! isset( $_COOKIE['docs_visited_' . $post->ID] ) ) ? 1 : 0;
-            $wpdb->query(
-                $wpdb->prepare(
-                    "INSERT INTO {$wpdb->prefix}betterdocs_analytics
-                            ( post_id, impressions, unique_visit, created_at )
-                            VALUES ( %d, %d, %d, %s )",
-                    [$post_id, 1, $unique_visit, date( 'Y-m-d' )]
-                )
-            );
         }
 
         $views = get_post_meta( $post_id, '_betterdocs_meta_views', true );
+        $views = is_string( $views ) ? (int) $views : $views;
 
         if ( $views === null ) {
             add_post_meta( $post_id, '_betterdocs_meta_views', 1 );

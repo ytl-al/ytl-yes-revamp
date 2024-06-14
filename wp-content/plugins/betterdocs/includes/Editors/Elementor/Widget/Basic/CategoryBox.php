@@ -222,6 +222,51 @@ class CategoryBox extends BaseWidget {
         $this->end_controls_section();
     }
 
+    protected function container_section() {
+        $this->start_controls_section(
+            'section_card_container_section',
+            [
+                'label'     => __( 'Container Section', 'betterdocs' ),
+                'tab'       => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_responsive_control(
+            'section_card_container_padding',
+            [
+                'label'      => __( 'Padding', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', 'em', '%'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-inner-wrapper' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'section_card_container_margin', // Legacy control id but new control
+            [
+                'label'      => __( 'Margin', 'betterdocs' ),
+                'type'       => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em'],
+                'selectors'  => [
+                    '{{WRAPPER}} .betterdocs-category-box-inner-wrapper' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name'     => 'section_card_container_background',
+                'types'    => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .betterdocs-category-box-inner-wrapper'
+            ]
+        );
+
+        $this->end_controls_section();
+    }
+
     protected function box_style() {
         $this->start_controls_section(
             'section_card_settings',
@@ -1029,6 +1074,13 @@ class CategoryBox extends BaseWidget {
          * ----------------------------------------------------------
          */
         $this->layout_options();
+
+        /**
+         * ----------------------------------------------------------
+         * Section: Container Section
+         * ----------------------------------------------------------
+         */
+        $this->container_section();
 
         /**
          * ----------------------------------------------------------

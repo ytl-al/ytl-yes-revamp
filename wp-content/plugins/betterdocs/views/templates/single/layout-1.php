@@ -21,7 +21,11 @@
     <?php betterdocs()->template_helper->search();?>
 
     <div class="betterdocs-content-wrapper betterdocs-display-flex">
-        <?php $view_object->get( 'templates/sidebars/sidebar-1' );?>
+        <?php
+            betterdocs()->views->get( 'templates/sidebars/sidebar-1', [
+                'layout_type' => 'template'
+            ] );
+        ?>
 
         <div id="betterdocs-single-main" class="betterdocs-content-area">
             <?php

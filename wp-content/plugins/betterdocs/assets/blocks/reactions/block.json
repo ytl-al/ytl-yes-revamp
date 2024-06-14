@@ -1,8 +1,10 @@
 {
+    "$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion":2,
 	"title":"BetterDocs Reactions",
 	"name":"betterdocs/reactions",
 	"category":"betterdocs",
-	"description":"Display BetterDocs Reaction In FSE Single Docs",
-	"textdomain":"betterdocs"
+	"description":"Collect user reactions for your documentation.",
+	"textdomain":"betterdocs",
+    "editorScript":"betterdocs-blocks-editor"
 }

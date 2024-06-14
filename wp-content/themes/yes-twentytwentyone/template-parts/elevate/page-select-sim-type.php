@@ -125,6 +125,10 @@
         cursor: not-allowed !important;
         opacity: 0.5 !important;
     }
+    @media only screen and (min-device-width: 320px) and (max-device-width: 640px) and (-webkit-min-device-pixel-ratio: 2) {
+    .grid {    
+    grid-template-columns: unset;
+}}
 </style>
 <div id="main-vue">
     <header class="white-top">
@@ -213,7 +217,7 @@
                                 <div>
                                 <p>Device eSIM Compatibility</p>
                                 <p><span>The device you have selected is not eSIM compatible.</span></p>
-                                <span class="esim-link">However, you can use the eSIM purchased with this plan on an alternative compatible device.</span>
+                                <span target="_blank" class="esim-link">However, you can use the eSIM purchased with this plan on an alternative compatible device.</span>
                                 </div>
                             </div>
                         </div>
@@ -340,9 +344,7 @@
                             var data = response.data;
                             self.DeviceSupportEsim=data?.selected?.esim;
                             console.log(self.DeviceSupportEsim);
-                            self.PlanSupportEsim=data?.selected?.plan.esim;
-                            console.log(self.PlanSupportEsim);
-                            
+                            self.PlanSupportEsim=data?.selected?.plan.esim;  
                             toggleOverlay(false);
 
                         })

@@ -32,7 +32,8 @@
                 'title_tag'     => "$title_tag",
                 'terms_order'   => "$terms_order",
                 'terms_orderby' => esc_html( $terms_orderby ),
-                'border_bottom' => "$border_bottom"
+                'border_bottom' => "$border_bottom",
+                'show_icon'     => betterdocs()->customizer->defaults->get( 'betterdocs_doc_page_show_category_icon' )
             ], 'betterdocs_category_box', 'layout-2' );
 
             echo do_shortcode( '[betterdocs_category_box ' . $attributes . ']' );

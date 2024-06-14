@@ -1,7 +1,6 @@
 <?php
 namespace WPDeveloper\BetterDocs\FrontEnd;
 
-use Exception;
 use WPDeveloper\BetterDocs\Core\Query;
 use WPDeveloper\BetterDocs\Utils\Base;
 use WPDeveloper\BetterDocs\Utils\Views;
@@ -99,7 +98,7 @@ class TemplateTags extends Base {
 
     public function icon( $name = 'list', $echo = false ) {
         if ( is_array( $name ) ) {
-            if( $echo ) {
+            if ( $echo ) {
                 $this->icon_as_markup( $name, $echo );
                 return;
             }
@@ -129,7 +128,7 @@ class TemplateTags extends Base {
             }
         }
 
-        if( empty( $icon ) ) {
+        if ( empty( $icon ) ) {
             return;
         }
 
@@ -151,7 +150,7 @@ class TemplateTags extends Base {
             );
         }
 
-        if( $echo ) {
+        if ( $echo ) {
             echo wp_kses_post( $_markup );
         }
 
@@ -230,7 +229,7 @@ class TemplateTags extends Base {
 
     public function get_html_attributes( $attributes = [] ) {
         if ( ! is_array( $attributes ) ) {
-            if( is_string( $attributes ) ) {
+            if ( is_string( $attributes ) ) {
                 return $attributes;
             }
 
@@ -256,16 +255,16 @@ class TemplateTags extends Base {
         }
 
         $search_heading = $search_subheading = '';
-        $heading_tag = 'h2';
+        $heading_tag    = 'h2';
         $subheading_tag = 'h3';
 
         $search_placeholder = $this->settings->get( 'search_placeholder' );
 
-        if ( $this->defaults->get('betterdocs_live_search_heading_switch', false) ) {
-            $search_heading        = $this->defaults->get('betterdocs_live_search_heading');
-            $search_subheading     = $this->defaults->get('betterdocs_live_search_subheading');
-            $heading_tag           = $this->defaults->get('betterdocs_live_search_heading_tag');
-            $subheading_tag        = $this->defaults->get('betterdocs_live_search_subheading_tag');
+        if ( $this->defaults->get( 'betterdocs_live_search_heading_switch', false ) ) {
+            $search_heading    = $this->defaults->get( 'betterdocs_live_search_heading' );
+            $search_subheading = $this->defaults->get( 'betterdocs_live_search_subheading' );
+            $heading_tag       = $this->defaults->get( 'betterdocs_live_search_heading_tag' );
+            $subheading_tag    = $this->defaults->get( 'betterdocs_live_search_subheading_tag' );
         }
 
         $_shortcode_license = apply_filters( 'betterdocs_search_shortcode_attributes', [
@@ -313,14 +312,14 @@ class TemplateTags extends Base {
 
             $index   = 0;
             $content = preg_replace_callback( '#<(h[' . $supported_tags . '])(.*?)>(.*?)</\1>#si', function ( $matches ) use ( &$index ) {
-                $tag = $matches[1];
-                $heading_name = preg_replace('/<[^<]+?>/', '', $matches[0]);
-				$heading_name = ! empty( $heading_name ) ? strtolower( str_replace( " ", '-', preg_replace('/<[^>]+>|[^a-zA-Z\s\d]+/', "", html_entity_decode( $heading_name ) ) ) ) : '';
-                preg_match('/id="(.+?)"/', $matches[0], $matched_ids);
+                $tag          = $matches[1];
+                $heading_name = preg_replace( '/<[^<]+?>/', '', $matches[0] );
+                $heading_name = ! empty( $heading_name ) ? strtolower( str_replace( " ", '-', preg_replace( '/[^\p{L}\p{N}\s]/u', "", $heading_name ) ) ) : '';
+                preg_match( '/id="(.+?)"/', $matches[0], $matched_ids );
 
                 if ( isset( $matched_ids[1] ) ) {
                     $id = strtolower( $matched_ids[1] );
-                } elseif ( ! empty ($heading_name ) && $this->settings->get('toc_dynamic_title') !== false) {
+                } elseif ( ! empty( $heading_name ) && $this->settings->get( 'toc_dynamic_title' ) !== false ) {
                     $id = $heading_name;
                 } else {
                     $id = $index . '-toc-title';
@@ -330,14 +329,14 @@ class TemplateTags extends Base {
                 $hash_link      = '';
                 $title_link_ctc = $this->settings->get( 'title_link_ctc' );
                 if ( $title_link_ctc ) {
-                    $hash_link = '<a href="#' . $id . '" class="batterdocs-anchor" data-clipboard-text="' . get_permalink() . '#' . $id . '" data-title="' . __( 'Copy URL', 'betterdocs' ) . '">#</a>';
+                    $hash_link = '<a href="#' . $id . '" class="batterdocs-anchor" data-clipboard-text="' . urldecode( get_permalink() ) . '#' . $id . '" data-title="' . __( 'Copy URL', 'betterdocs' ) . '">#</a>';
                 }
 
                 // Get The Class Names Using REGEX
-				preg_match('/class="([^"]*)"/', $matches[2], $class_matches );
-				$classes = isset( $class_matches[1] ) ?  strtolower( $class_matches[1] )  : '';
+                preg_match( '/class="([^"]*)"/', $matches[2], $class_matches );
+                $classes = isset( $class_matches[1] ) ? strtolower( $class_matches[1] ) : '';
 
-				$class   = ! empty( $classes ) ? $classes . ' betterdocs-content-heading' : 'betterdocs-content-heading';
+                $class = ! empty( $classes ) ? $classes . ' betterdocs-content-heading' : 'betterdocs-content-heading';
 
                 return sprintf(
                     '<%1$s class="%2$s" id="%3$s">%4$s %5$s</%1$s>',
@@ -346,14 +345,14 @@ class TemplateTags extends Base {
             }, $content );
         }
 
-        if( ! empty( $content ) ) {
+        if ( ! empty( $content ) ) {
             return '<div id="betterdocs-single-content" class="betterdocs-content">' . $content . '</div>';
         }
 
         return '';
     }
 
-    public function sidebar( $layout ) {
+    public function sidebar( $layout, $layout_type = '' ) {
         if ( ! $this->settings->get( 'enable_archive_sidebar' ) ) {
             return;
         }
@@ -374,7 +373,8 @@ class TemplateTags extends Base {
         $_template_path = apply_filters( 'betterdocs_archive_sidebar_template', $_template_path, $layout );
 
         betterdocs()->views->get( $_template_path, [
-            'force' => true
+            'force' => true,
+            'layout_type' => $layout_type
         ] );
     }
 
@@ -482,7 +482,7 @@ class TemplateTags extends Base {
      */
     public function shortcode_atts( $atts, $shortcode, $layout, ...$args ) {
         $tagname = 'betterdocs_archive_template_shortcode_params';
-        if( strpos($layout, 'sidebar-') === 0 ) {
+        if ( strpos( $layout, 'sidebar-' ) === 0 ) {
             $tagname = 'betterdocs_sidebar_template_shortcode_params';
         }
 

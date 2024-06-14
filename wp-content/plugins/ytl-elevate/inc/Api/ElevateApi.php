@@ -25,15 +25,16 @@ class ElevateApi
     const  api_customer = 'api/Elevate/customer';
     const  api_customer_pre_complete = '/api/Elevate/customer/GetAllCustmerDetailsByID';
     const  api_customer_check_contract = 'api/Elevate/customer/CheckActiveContract';
-    const  api_customer_check_ddmf = 'api/app/d-dMFCheck/verification';
     const  api_ca_verification = 'api/Elevate/compAsia/Verification';
+    const  api_customer_check_ddmf = '/api/app/d-dMFCheck/verification';
+    const api_oc_verification='/api/app/orix-check/verification';
 
     const  api_order_create = 'api/Elevate/order';
     const  api_order_get_by_id = 'api/Elevate/order/Id';
     const  api_order_get_by_number = 'api/Elevate/order/orderNumber';
     const  api_order_yos_order = 'api/Elevate/createYOSOrder';
     const  api_order_update_payment = 'api/Elevate/order/UpdateOrderPayment';
-    const api_oc_verification='/api/app/orix-check/verification';
+
     const  api_contract = 'api/Elevate/contract';
     const  api_contract_get_by_id = 'api/Elevate/contract/Id';
     const  api_contract_get_by_nric = 'api/Elevate/contract/customerNRIC';
@@ -73,7 +74,6 @@ class ElevateApi
     public  function register()
     {
         add_action('rest_api_init', function () {
-
             register_rest_route('/elevate/v1', '/test', array(
                 'methods' => 'GET',
                 'callback' => array('\Inc\Api\ElevateApi', 'do_test'),
@@ -115,12 +115,19 @@ class ElevateApi
                 'callback' => array($this, 'ca_verification'),
                 'permission_callback' => '__return_true'
             ));
+
+
+            register_rest_route('/elevate/v1', '/verify-ddmf', array(
+                'methods' => 'POST',
+                'callback' => array($this, 'ddmf_eligibility'),
+                'permission_callback' => '__return_true'
+            ));
+
             register_rest_route('/elevate/v1', '/orix-check', array(
                 'methods' => 'POST',
                 'callback' => array($this, 'oc_verification'),
                 'permission_callback' => '__return_true'
             ));
-
             register_rest_route('/elevate/v1', '/verify-caeligibility', array(
                 'methods' => 'POST',
                 'callback' => array($this, 'verify_caeligibility'),
@@ -180,11 +187,6 @@ class ElevateApi
                 'callback' => array($this, 'elevate_delivery_qrcode_check'),
                 'permission_callback' => '__return_true'
             ));
-            register_rest_route('/elevate/v1', '/verify-ddmf', array(
-                'methods' => 'POST',
-                'callback' => array($this, 'ddmf_eligibility'),
-                'permission_callback' => '__return_true'
-            ));
 
 			register_rest_route('/elevate/v1', 'qrcode/confirm', array(
                 'methods' => 'POST',
@@ -232,15 +234,8 @@ class ElevateApi
                 'methods' => 'GET',
                 'callback' => array($this, 'check_stock'),
                 'permission_callback' => '__return_true'
-            ));    
+            ));
 
-            add_action('rest_api_init', function () {
-                register_rest_route('/elevate/v1', '/outage-details', array(
-                    'methods' => 'GET',
-                    'callback' => array($this, 'outage_details'),
-                    'permission_callback' => '__return_true'
-                ));
-            });
 
         });
     }
@@ -299,9 +294,9 @@ class ElevateApi
 
     public  function getProductByCode(WP_REST_Request $request)
     {
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		 // }  
         $code = $request['code'];
 		$product = $this->pullBundleProductByCode($code);
         $product = (new \Inc\Base\Model)->refinde(array($product));
@@ -413,12 +408,143 @@ class ElevateApi
         return $response;
     }
 
-    public  function ca_verification(WP_REST_Request $request)
+    public  function ddmf_eligibility(WP_REST_Request $request)
     {
 
         if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
 			exit("Request not valid");
 		 }  
+        $token = $this->get_token();
+
+		$params = array(
+            'SecurityId' =>$request['mykad'],
+            'fullName' => $request['name'],
+        );
+
+        $args = [
+            'headers' => array(
+                'Accept' => 'text/plain',
+                'Authorization' => 'Bearer ' . $token,
+                'Content-Type' => 'application/json'
+            ),
+            'body' => json_encode($params),
+            'method' => 'POST',
+            'timeout' => self::API_TIMEOUT,
+            'data_format' => 'body'
+        ];
+		$apiSetting = ( new \Inc\Base\Model)->getAPISettings();
+
+        $api_url = $apiSetting['creditcheck_url'].self::api_customer_check_ddmf;
+        $request = wp_remote_post($api_url, $args);
+
+        if (is_wp_error($request)) {
+            $return['status'] = 0;
+            $return['error'] = "Cannot connect to API server";
+        } else if ($request['response']['code'] != 200) {
+            $return['status'] = 0;
+            $return['error'] = @$request['response'];
+        } else {
+            $data = json_decode($request['body'], true);
+
+            if ($data['response']) {
+                $return['status'] = 1;
+            } else {
+                $return['status'] = 0;
+            }
+            $return['data'] = $data;
+        }
+		
+		//Write api log
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		
+        $response = new WP_REST_Response($return);
+        $response->set_status(200);
+        return $response;
+    }
+
+
+
+    public  function oc_verification(WP_REST_Request $request)
+    {
+
+        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			exit("Request not valid");
+		 }  
+        $mykad = $request['mykad'];
+        $name = $request['name'];
+        // $email = $request['email'];
+        // $phone = $request['phone'];
+        // $guid = $request['guid'];
+
+        // $PartneReferenceID = $request['PartneReferenceID'];
+        $OCRConfidenceScore = round($request['OCRConfidenceScore']/100,2);
+        $token = $this->get_token();
+
+		$params = array(
+            'securityId' => $mykad,
+            'fullName' => $name,
+			'ocrConfidenceScore' => $OCRConfidenceScore."",
+            'requestingSystem'=>'YOS',
+            // 'mobileNumber' => $phone,
+            // 'email' => $email,
+            
+            // 'partnerReferenceID' => $PartneReferenceID,
+        );
+
+        $args = [
+            'headers' => array(
+                'Accept' => 'text/plain',
+                'Authorization' => 'Bearer ' . $token,
+                'Content-Type' => 'application/json'
+            ),
+			'body' => json_encode($params),
+            'method' => 'POST',
+            'timeout' => self::API_TIMEOUT,
+            'data_format' => 'body'
+        ];
+		$apiSetting =(new \Inc\Base\Model)->getAPISettings();
+        $api_url = $apiSetting['creditcheck_url'].self::api_oc_verification;
+
+        $request = wp_remote_post($api_url, $args);
+		 //print_r($args);print_r($request);die($api_url);
+
+        if (is_wp_error($request)) {
+            $return['status'] = 0;
+            $return['error'] = "Cannot connect to API server";
+        } else if ($request['response']['code'] != 200) {
+            $return['status'] = 0;
+            $return['error'] = @$request['response'];
+        } else {
+            $data = json_decode($request['body'], true);
+
+            if ($data['response']) {
+				$res = json_decode($data['response']);
+
+				if($res->result == 'Success'){
+					$return['status'] = 1;
+				}else{
+					$return['status'] = 0;
+					$return['error'] = $res->reason;
+				}
+            } else {
+                $return['status'] = 0;
+            }
+            $return['data'] = $data;
+        }
+		
+		//Write api log
+		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
+		
+        $response = new WP_REST_Response($return);
+        $response->set_status(200);
+        return $response;
+    }
+    public  function ca_verification(WP_REST_Request $request)
+    {
+
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		 // }  
         $mykad = $request['mykad'];
         $name = $request['name'];
         $email = $request['email'];
@@ -489,141 +615,12 @@ class ElevateApi
         return $response;
     }
 
-    public  function oc_verification(WP_REST_Request $request)
-    {
-
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
-        $mykad = $request['mykad'];
-        $name = $request['name'];
-        // $email = $request['email'];
-        // $phone = $request['phone'];
-        // $guid = $request['guid'];
-
-        // $PartneReferenceID = $request['PartneReferenceID'];
-        $OCRConfidenceScore = round($request['OCRConfidenceScore']/100,2);
-        $token = $this->get_token();
-
-		$params = array(
-            'securityId' => $mykad,
-            'fullName' => $name,
-			'ocrConfidenceScore' => $OCRConfidenceScore."",
-            'requestingSystem'=>'YOS',
-            // 'mobileNumber' => $phone,
-            // 'email' => $email,
-            
-            // 'partnerReferenceID' => $PartneReferenceID,
-        );
-
-        $args = [
-            'headers' => array(
-                'Accept' => 'text/plain',
-                'Authorization' => 'Bearer ' . $token,
-                'Content-Type' => 'application/json'
-            ),
-			'body' => json_encode($params),
-            'method' => 'POST',
-            'timeout' => self::API_TIMEOUT,
-            'data_format' => 'body'
-        ];
-		$apiSetting =(new \Inc\Base\Model)->getAPISettings();
-        $api_url =$apiSetting['creditcheck_url'] . self::api_oc_verification;
-
-        $request = wp_remote_post($api_url, $args);
-		 //print_r($args);print_r($request);die($api_url);
-
-        if (is_wp_error($request)) {
-            $return['status'] = 0;
-            $return['error'] = "Cannot connect to API server";
-        } else if ($request['response']['code'] != 200) {
-            $return['status'] = 0;
-            $return['error'] = @$request['response'];
-        } else {
-            $data = json_decode($request['body'], true);
-
-            if ($data['response']) {
-				$res = json_decode($data['response']);
-
-				if($res->result == 'Success'){
-					$return['status'] = 1;
-				}else{
-					$return['status'] = 0;
-					$return['error'] = $res->reason;
-				}
-            } else {
-                $return['status'] = 0;
-            }
-            $return['data'] = $data;
-        }
-		
-		//Write api log
-		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
-		
-        $response = new WP_REST_Response($return);
-        $response->set_status(200);
-        return $response;
-    }
-
-    public  function ddmf_eligibility(WP_REST_Request $request)
-    {
-
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
-        $token = $this->get_token();
-
-		$params = array(
-            'SecurityId' =>$request['mykad'],
-            'fullName' => $request['name'],
-        );
-
-        $args = [
-            'headers' => array(
-                'Accept' => 'text/plain',
-                'Authorization' => 'Bearer ' . $token,
-                'Content-Type' => 'application/json'
-            ),
-            'body' => json_encode($params),
-            'method' => 'POST',
-            'timeout' => self::API_TIMEOUT,
-            'data_format' => 'body'
-        ];
-		$apiSetting = ( new \Inc\Base\Model)->getAPISettings();
-        $api_url =$apiSetting['creditcheck_url'] .self::api_customer_check_ddmf;
-        $request = wp_remote_post($api_url, $args);
-        if (is_wp_error($request)) {
-            $return['status'] = 0;
-            $return['error'] = "Cannot connect to API server";
-        } else if ($request['response']['code'] != 200) {
-            $return['status'] = 0;
-            $return['error'] = @$request['response'];
-        } else {
-            $data = json_decode($request['body'], true);
-
-            if ($data['response']) {
-                $return['status'] = 1;
-            } else {
-                $return['status'] = 0;
-            }
-            $return['data'] = $data;
-        }
-		
-		//Write api log
-		(new \Inc\Base\Model)->apiLog(array('api'=>$api_url,'payload'=>json_encode($args),'response'=>$request['response'],'body'=>$request['body'],'status'=>$request['response']['code']));
-		
-        $response = new WP_REST_Response($return);
-        $response->set_status(200);
-        return $response;
-    }
-	
-
     public  function verify_caeligibility(WP_REST_Request $request)
     {
 
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		 // }  
         $token = $this->get_token();
 
 		$params = array(
@@ -676,9 +673,9 @@ class ElevateApi
     public  function check_active_contract(WP_REST_Request $request)
     {
 
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		 // }  
 		$mykad = $request['mykad'];
 
         $token = $this->get_token();
@@ -768,9 +765,9 @@ class ElevateApi
 
     public  function elevate_customer_insert(WP_REST_Request $request)
     {
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		 // }  
 		if(!isset($request['referralCode'])) $request['referralCode'] = '';
 		if(!isset($request['dealerUID'])) $request['dealerUID'] = '';
 		if(!isset($request['dealerCode'])) $request['dealerCode'] = '';
@@ -859,9 +856,9 @@ class ElevateApi
 
     public  function elevate_customer_update(WP_REST_Request $request)
     {
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		 // }  
 
 		if(!isset($request['addressMore'])) $request['addressMore'] = '';
 		if(!isset($request['msisdn'])) $request['msisdn'] = '';
@@ -988,9 +985,9 @@ class ElevateApi
     public  function elevate_contract(WP_REST_Request $request)
     {
 
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		 // }  
         $params = array(
             "customerName" => $request['name'],
             "customerNRIC" => $request['mykad'],
@@ -1064,9 +1061,9 @@ class ElevateApi
     public  function elevate_order_create(WP_REST_Request $request)
     {
 
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		 // }  
 
 		if(!isset($request['referralCode'])) $request['referralCode'] = '';
 		if(!isset($request['dealerUID'])) $request['dealerUID'] = '';
@@ -1175,9 +1172,9 @@ class ElevateApi
 
     public  function elevate_order_update(WP_REST_Request $request)
     {
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		 // }  
 		if(!($request['referralCode'])) $request['referralCode'] = '';
 		if(!($request['dealerUID'])) $request['dealerUID'] = '';
 		if(!($request['dealerCode'])) $request['dealerCode'] = '';
@@ -1301,9 +1298,9 @@ class ElevateApi
 
 	public  function elevate_order_update_payment(WP_REST_Request $request)
     {
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		 // }  
 
 		if(!isset($request['orderNumber'])) $request['orderNumber'] = '';
 		if(!isset($request['paymentRef'])) $request['paymentRef'] = '';
@@ -1356,9 +1353,9 @@ class ElevateApi
     }
 
 	public function elevate_delivery_qrcode_check(WP_REST_Request $request){
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		 // }  
 		$qrcode = $request['qrcode'];
 		$return= array();
 		$return['qrcode'] = $qrcode;
@@ -1401,9 +1398,9 @@ class ElevateApi
 
 	public function elevate_delivery_qrcode_confirm(WP_REST_Request $request){
 
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		 // }  
 		$orderNumber = $request['SONO'];
 
 		$order = $this->elevate_order_get_by_number($orderNumber);
@@ -1472,9 +1469,9 @@ class ElevateApi
 
     public  function ekyc_check(WP_REST_Request $request)
     {
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		 // }  
         $uid = $request['uid'];
 		$apiSetting = (new \Inc\Base\Model)->getAPISettings();
         $api_url =  $apiSetting['url'].'api/EKYCProcessStatus/' . $uid;
@@ -1520,9 +1517,9 @@ class ElevateApi
     }
 
 	public  function get_pre_register_user(WP_REST_Request $request){
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		 // }  
         $uid = $request['id'];
         $token = $this->get_token();
         $params = array();
@@ -1559,9 +1556,9 @@ class ElevateApi
     }
 
 	public  function get_pre_register_completed(WP_REST_Request $request){
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		 // }  
         $uid = $request['id'];
 		  
 		$token = $this->get_token();
@@ -1605,9 +1602,9 @@ class ElevateApi
     public  function make_yos_order(WP_REST_Request $request){
         //$token = self::ydbp_identity_auth_token();
 
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		 // }  
         $token = $this->mobileservice_get_token();
 
         $phone_number 	= $request['phone_number'];
@@ -1787,9 +1784,9 @@ class ElevateApi
 
     public  function make_yos_order_without_payment(WP_REST_Request $request){
      
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		 // }  
         $token = $this->mobileservice_get_token();
 		$phone_number = $request['phone_number'];
 		$customer_name = $request['customer_name'];
@@ -1971,9 +1968,9 @@ class ElevateApi
     }
 
 	public  function delete_prequalified_customer(WP_REST_Request $request){
-        if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
-			exit("Request not valid");
-		 }  
+        // if ( !wp_verify_nonce( $_REQUEST['nonce'], "yes_nonce_key")) {
+			// exit("Request not valid");
+		 // }  
 				$id = $request['id'];
 				if($id){
 					$params = array(
@@ -2261,61 +2258,6 @@ class ElevateApi
         return $gender;
     }
 
-
-//4Goutage details map
-    public function snm_get_session()
-    {        
-       $url="https://apigateway.yes.my/api/v1/ytlc/pnoc/tokenget";
-       $params = [
-          'method' => 'GET',
-          'headers' => array(
-           'apikey' => 'jkweTq8hcOw5QxeWh8d13dfkjhdfsdgdd',
-            'UserLogin' => 'otoborest',
-            'Password' => 'otobo_v1_345',
-            'Content-Type' => 'application/json'
-          )
-       ];
-       $token_list = wp_remote_request($url, $params);
-       //print_r($token_list['body']);
-       $json_res = json_decode($token_list['body']);
-       $final_res = $json_res->SessionID;
-       // return $json_res.message;  
-       return $final_res;
-    } 
-
-    public function outage_details() 
-    { 
-    $session_id = snm_get_session();
-    //print_r($_GET['Latitude']);              
-    set_time_limit(1000);
-    $url="https://apigateway.yes.my/api/v1/ytlc/pnoc/4GOutageDetails";
-    $body = array(
-        'SessionID' => $session_id,
-        'Latitude' => $_GET['Latitude'],
-        'Langitude' => $_GET['Langitude'], 
-        //'Severity' => "S3",    
-      // 'Latitude' => '3.11523888888889',
-     // 'Langitude' => '101.67936944444466',
-    );
-     $params = array(
-        'method' => 'GET',
-        'timeout' => 120,
-        'body' => $body,   
-        //'sslverify' => false,     
-         'headers' => array(
-         'apikey' => 'jkweTq8hcOw5QxeWh8d13dfkjhdfsdgdd',
-         'Content-Type' => 'application/json',
-        )
-   );
-     //print_r($params); echo $url; echo "<br /><br /><br />";
-     $list = wp_remote_get($url, $params);
-        return $list;
-       //print_r($list);
-    }  
-    
-//End 4Goutage details map    
-    
-
     public function check_stock() 
     {
         
@@ -2359,6 +2301,43 @@ class ElevateApi
 
 
     
+    // public function yt_check_active_contract(WP_REST_Request $request){
+
+    //     $mykad = $request['mykad'];
+    //     $apiSetting = (new \Inc\Base\Model)->getAPISettings();
+    //     $api_url = $apiSetting['url'] .'api/Elevate/customer/CheckActiveContract'.'?customerNRIC='.$mykad;
+    //     $token = $this->get_token();
+    //     $curl = curl_init();
+    //     curl_setopt_array($curl, array(
+    //     CURLOPT_URL => $api_url,
+    //     CURLOPT_RETURNTRANSFER => true,
+    //     CURLOPT_ENCODING => '',
+    //     CURLOPT_MAXREDIRS => 10,
+    //     CURLOPT_TIMEOUT => 0,
+    //     CURLOPT_FOLLOWLOCATION => true,
+    //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //     CURLOPT_CUSTOMREQUEST => 'GET',
+    //     CURLOPT_HTTPHEADER => array(
+    //         'Authorization: Bearer '.$token,
+    //         'Cookie: ARRAffinity=db7e7bf21bbdfb556bdf82b1fb67118b373ac34ca676a806883564f4d13394c1; ARRAffinitySameSite=db7e7bf21bbdfb556bdf82b1fb67118b373ac34ca676a806883564f4d13394c1'
+    //     ),
+    //     ));
+
+    //     $response = curl_exec($curl);
+
+    //     curl_close($curl);
+    //     if(is_wp_error($response)){
+    //         $ContractData="Cannot connect to API server";
+    //     }else if($response != "true"){
+    //         $ContractData=1;
+    //     }else{
+    //         $ContractData="User cannot buy more contract";
+    //     }
+
+    //     return $ContractData;
+
+    // }
+
     public function yt_check_active_contract(WP_REST_Request $request){
 
         $mykad = $request['mykad'];
@@ -2367,27 +2346,27 @@ class ElevateApi
         $token = $this->get_token();
         $curl = curl_init();
         curl_setopt_array($curl, array(
-        CURLOPT_URL => $api_url,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'GET',
-        CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer '.$token,
-            'Cookie: ARRAffinity=db7e7bf21bbdfb556bdf82b1fb67118b373ac34ca676a806883564f4d13394c1; ARRAffinitySameSite=db7e7bf21bbdfb556bdf82b1fb67118b373ac34ca676a806883564f4d13394c1'
-        ),
+            CURLOPT_URL => $api_url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer '.$token,
+                'Cookie: ARRAffinity=db7e7bf21bbdfb556bdf82b1fb67118b373ac34ca676a806883564f4d13394c1; ARRAffinitySameSite=db7e7bf21bbdfb556bdf82b1fb67118b373ac34ca676a806883564f4d13394c1'
+            ),
         ));
-
+    
         $response = curl_exec($curl);
         $http_status = curl_getinfo($curl, CURLINFO_HTTP_CODE); // Get HTTP status code
         curl_close($curl);
     
         if ($http_status != 200) {
             $ContractData = "Cannot connect to API server";
-        }else if($http_status == 404){
+        } else if ($http_status == 404) {
             $ContractData = "Cannot connect to API server";
         } else {
             if (is_wp_error($response)) {
@@ -2400,7 +2379,7 @@ class ElevateApi
         }
     
         return $ContractData;
-
     }
+    
 
 }

@@ -3,10 +3,12 @@
 
     use DateTime;
     use WP_Post;
-use WP_Query;
-use WP_Posts_List_Table;
+    use WP_Query;
+    use WP_Posts_List_Table;
 
     class PostsTable extends WP_Posts_List_Table {
+        // Declare the is_trash property
+        public $is_trash = false;
 
         public function __construct( $args = [] ) {
             parent::__construct( $args );

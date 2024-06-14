@@ -95,7 +95,7 @@ class ToC extends Shortcode {
                 $current_tag        = isset( $number[1] ) ? $number[1] : '';
 
                 $heading_name = preg_replace( '/<[^<]+?>/', '', $current_title );
-                $heading_name = ! empty( $heading_name ) ? strtolower( str_replace( " ", '-', preg_replace('/<[^>]+>|[^a-zA-Z\s\d]+/', "", html_entity_decode( $heading_name ) ) ) ) : '';
+                $heading_name = ! empty( $heading_name ) ? strtolower( str_replace( " ", '-', preg_replace( '/[^\p{L}\p{N}\s]/u', "",  $heading_name ) ) ) : '';
                 preg_match('/id="(.+?)"/', $current_title, $matches_id);
                 $heading_id   = isset( $matches_id[1] ) ? strtolower( $matches_id[1] ) : '';
                 $tag_number   = ! empty( $heading_id ) ? $heading_id : ( ! empty( $heading_name ) && $this->settings->get( 'toc_dynamic_title' ) ? $heading_name : $tag_counter . '-toc-title' );

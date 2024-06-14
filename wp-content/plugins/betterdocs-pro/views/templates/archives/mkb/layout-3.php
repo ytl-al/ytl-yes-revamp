@@ -12,9 +12,9 @@
 
     get_header();
 
-    $title_tag     = betterdocs()->customizer->defaults->get( 'betterdocs_category_title_tag' );
-    $title_tag     = betterdocs()->template_helper->is_valid_tag( $title_tag );
-    $popular_docs  = betterdocs()->customizer->defaults->get( 'betterdocs_mkb_popular_docs_switch', true );
+    $title_tag    = betterdocs()->customizer->defaults->get( 'betterdocs_category_title_tag' );
+    $title_tag    = betterdocs()->template_helper->is_valid_tag( $title_tag );
+    $popular_docs = betterdocs()->customizer->defaults->get( 'betterdocs_mkb_popular_docs_switch', true );
 ?>
 
 <div class="betterdocs-wrapper betterdocs-mkb-wrapper betterdocs-mkb-layout-3 betterdocs-classic-layout betterdocs-wraper">
@@ -25,7 +25,8 @@
             <div class="betterdocs-article-list-wrapper">
                 <?php
                     $_shortcode_attributes = [
-                        'title_tag'     => $title_tag,
+                        'title_tag' => $title_tag,
+                        'show_icon' => betterdocs()->customizer->defaults->get( 'betterdocs_mkb_page_show_category_icon' )
                     ];
 
                     if ( is_tax( 'knowledge_base' ) ) {
@@ -38,11 +39,15 @@
             </div>
             <?php
                 if ( $popular_docs ) {
-                    $popular_doc_text       = betterdocs()->settings->get( 'betterdocs_popular_docs_text', __( 'Popular Docs', 'betterdocs-pro' ) );
-                    $popular_posts_per_page = betterdocs()->settings->get( 'betterdocs_popular_docs_number' );
+                    $attributes = betterdocs()->template_helper->shortcode_atts( [
+                        'title'         => betterdocs()->settings->get( 'betterdocs_popular_docs_text', __( 'Popular Docs', 'betterdocs-pro' ) ),
+                        'post_per_page' => betterdocs()->settings->get( 'betterdocs_popular_docs_number' ),
+                        'list_icon_url' => ! empty( betterdocs()->customizer->defaults->get( 'betterdocs_mkb_popular_list_icon' ) ) ? betterdocs()->customizer->defaults->get( 'betterdocs_mkb_popular_list_icon' ) : ( ! empty( betterdocs()->settings->get( 'docs_list_icon' ) ) ? betterdocs()->settings->get( 'docs_list_icon' )['url'] : '' ),
+                        'layout_type'   => 'template'
+                    ], 'betterdocs_popular_articles', '' );
 
                     echo '<div class="betterdocs-popular-article-list-wrapper">';
-                        echo do_shortcode( '[betterdocs_popular_articles multiple_knowledge_base=true title="' . $popular_doc_text . '" post_per_page="' . $popular_posts_per_page . '"]' );
+                    echo do_shortcode( '[betterdocs_popular_articles ' . $attributes . ']' );
                     echo '</div>';
                 }
             ?>

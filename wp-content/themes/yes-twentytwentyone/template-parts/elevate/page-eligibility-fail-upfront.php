@@ -197,12 +197,20 @@
             <div>
                 <div class="border-box">
                     <div class="row">
-                        <div class="col-md-5 p-5 flex-column bg-checkout3" style="display: flex;justify-content: center;">
-                            <div class="title text-white">{{ renderText('compasia_fail_error1_1') }}</div>
+                        <div class="col-md-5 p-5 flex-column bg-checkout3" style="display: flex;justify-content: center; background-image: url('https://yesmy-dev.azurewebsites.net//wp-content/uploads/2023/06/Checkout-1.png')">
+                            <!-- <div class="title text-white">{{ renderText('compasia_fail_error1_1') }}</div>
                             <br>
                             <div class="title text-white">{{ renderText('compasia_fail_error1_2') }}</div><br>
                             <div class="subtitle3 text-white">{{ renderText('compasia_fail_error1_3') }}</div><br>
-                            <div class="subtitle3 text-white">{{ renderText('compasia_fail_error1_4') }}</div>
+                            <div class="subtitle3 text-white">{{ renderText('compasia_fail_error1_4') }}</div><br>
+                            <div class="subtitle3 text-white">{{ renderText('compasia_fail_error1_5') }}</div> -->
+
+                            <div class="title text-white">Uh-oh!</div>
+                            <br>
+                            <div class="title text-white">You are ineligible for zero upfront payment.</div><br>
+                            <div class="subtitle3 text-white">Upon assessment of your application, we regret to inform you that we are unable to proceed with your request because your application did not meet all of our requirements.</div><br>
+                            <div class="subtitle3 text-white">To proceed, kindly pay the device upfront payment which will be fully rebated to you over 18 months. Enjoy 0% interest-free instalment payment up to 12 months on major banks’ credit cards</div><br>
+                            <div class="subtitle3 text-white">Click “Proceed” to complete your purchase!</div>
                         </div>
                         <div class="col-md-7  p-5">
                             <div class="flex-container mt-3">
@@ -373,6 +381,7 @@
                     if (elevate.lsData.product.selected.productCode) {
                         self.deviceName = elevate.lsData.product.selected.name;
                         self.PlanName = elevate.lsData.product.selected.contractName;
+                        // console.log(self.PlanName);
 						self.PlanNameUpdated=self.PlanName.replace(/_Y$/, "_U");
 						// console.log(self.PlanNameUpdated);
                         self.PlanImageUrl = elevate.lsData.product.selected.imageURL;

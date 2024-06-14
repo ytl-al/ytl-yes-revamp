@@ -2,6 +2,7 @@
 
 namespace WPDeveloper\BetterDocsPro;
 
+use BetterDocs;
 use WPDeveloper\BetterDocs\Core\BaseAPI;
 use WPDeveloper\BetterDocsPro\Core\Admin;
 use WPDeveloper\BetterDocsPro\Core\Query;
@@ -13,16 +14,19 @@ use WPDeveloper\BetterDocsPro\Core\Installer;
 use WPDeveloper\BetterDocsPro\Core\MultipleKB;
 use WPDeveloper\BetterDocsPro\FrontEnd\FrontEnd;
 use WPDeveloper\BetterDocsPro\Shortcodes\ListView;
+use WPDeveloper\BetterDocsPro\Shortcodes\BetterdocsEncyclopedia;
 use WPDeveloper\BetterDocs\Utils\Views as FreeViews;
 use WPDeveloper\BetterDocsPro\Shortcodes\SidebarList;
 use WPDeveloper\BetterDocsPro\Shortcodes\MultipleKBTwo;
 use WPDeveloper\BetterDocsPro\Shortcodes\CategoryBoxTwo;
+use WPDeveloper\BetterDocsPro\Shortcodes\Attachment;
 use WPDeveloper\BetterDocsPro\Shortcodes\MultipleKBList;
 use WPDeveloper\BetterDocsPro\Shortcodes\CategoryGridTwo;
 use WPDeveloper\BetterDocsPro\Shortcodes\PopularArticles;
 use WPDeveloper\BetterDocsPro\Admin\Customizer\Customizer;
 use WPDeveloper\BetterDocsPro\Shortcodes\CategoryGridList;
 use WPDeveloper\BetterDocsPro\Shortcodes\MultipleKBTabGrid;
+use WPDeveloper\BetterDocsPro\Shortcodes\RelatedDocs;
 use WPDeveloper\BetterDocsPro\Shortcodes\RelatedCategories;
 use WPDeveloper\BetterDocsPro\Shortcodes\MultipleKB as MultipleKBShortcode;
 use WPDeveloper\BetterDocsPro\Dependencies\WPDeveloper\Licensing\LicenseManager;
@@ -32,7 +36,7 @@ final class Plugin {
      * Plugin Version
      * @var string
      */
-    public $version = '2.5.4';
+    public $version = '3.3.2';
 
     /**
      * Plugin DB Version
@@ -151,7 +155,8 @@ final class Plugin {
         $this->define( 'BETTERDOCS_PRO_ABSPATH', dirname( BETTERDOCS_PRO_FILE ) . '/' );
         $this->define( 'BETTERDOCS_PRO_ABSURL', plugin_dir_url( BETTERDOCS_PRO_FILE ) );
         $this->define( 'BETTERDOCS_PRO_PLUGIN_BASENAME', plugin_basename( BETTERDOCS_PRO_FILE ) );
-        // $this->define( 'BETTERDOCS_PRO_BLOCKS_DIRECTORY', BETTERDOCS_PRO_ABSPATH . 'react-src/gutenberg/blocks/' );
+        $this->define( 'BETTERDOCS_PRO_BLOCKS_DIRECTORY', BETTERDOCS_PRO_ABSPATH . 'assets/blocks/' );
+        $this->define( 'BETTERDOCS_PRO_FSE_TEMPLATES_PATH', BETTERDOCS_PRO_ABSPATH . 'views/templates/fse/' );
 
         $this->define( 'BETTERDOCS_PRO_STORE_URL', 'https://api.wpdeveloper.com/' );
         $this->define( 'BETTERDOCS_PRO_SL_ITEM_ID', 342422 );
@@ -171,7 +176,7 @@ final class Plugin {
         $_betterdocs_installed = Helper::get_plugins( $plugin );
         $button_text           = $_betterdocs_installed ? __( 'Activate Now', 'betterdocs-pro' ) : __( 'Install Now', 'betterdocs-pro' );
 
-        $button_url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=elementor' ), 'install-plugin_elementor' );
+        $button_url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=betterdocs' ), 'install-plugin_betterdocs' );
         if ( $_betterdocs_installed ) {
             $button_url = wp_nonce_url(
                 'plugins.php?action=activate&amp;plugin=' . $plugin . '&amp;plugin_status=all&amp;paged=1&amp;s',
@@ -220,7 +225,11 @@ final class Plugin {
     }
 
     public function pro_shortcodes( $shortcodes ) {
-        $shortcodes = array_merge( $shortcodes, [
+
+        $is_enable_encyclopedia = betterdocs()->settings->get('enable_encyclopedia');
+
+        $shortcodeClasses = [
+            Attachment::class,
             CategoryBoxTwo::class,
             ListView::class,
             MultipleKBTabGrid::class,
@@ -231,10 +240,15 @@ final class Plugin {
             CategoryGridTwo::class,
             CategoryGridList::class,
             SidebarList::class,
-            RelatedCategories::class
-        ] );
+            RelatedCategories::class,
+            RelatedDocs::class
+        ];
 
-        return $shortcodes;
+        if ($is_enable_encyclopedia) {
+            $shortcodeClasses[] = BetterdocsEncyclopedia::class;
+        }
+
+        return array_merge($shortcodes, $shortcodeClasses);
     }
 
     /**
@@ -296,7 +310,7 @@ final class Plugin {
 
         if ( ! empty( $_api_classes ) && is_array( $_api_classes ) ) {
             foreach ( $_api_classes as $class ) {
-                if ( $class == '.' || $class == '..' ) {
+                if ( $class == '.' || $class == '..' || strpos( $class, '.' ) === 0)  {
                     continue;
                 }
 

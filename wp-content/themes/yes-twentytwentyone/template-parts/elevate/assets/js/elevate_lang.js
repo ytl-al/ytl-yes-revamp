@@ -31,7 +31,7 @@ Elevate_lang['en-US']['check_out'] = 'Check out';
 Elevate_lang['en-US']['no_item_in_cart'] = 'No item in the cart';
 Elevate_lang['en-US']['browse_plan_here'] = 'You may browse the plans available <a href="/infinite-phone-bundles/">here</a>.';
 Elevate_lang['en-US']['payment_note'] = 'The Monthly Instalment payment amount generated is just an estimate. To confirm the exact amount. Kindly get in touch with Maybank.';
-
+Elevate_lang['en-US']['NRIC_is_not_d_dmfcheck'] = 'Dear valued customer,<br> Unfortunately we cannot proceed with your request as you are blacklisted.';
 Elevate_lang['en-US']['elevate_step_1'] = '1. Eligibility check';
 Elevate_lang['en-US']['elevate_step_2'] = '2. MyKAD verification';
 Elevate_lang['en-US']['elevate_step_3'] = '3. Select Sim Type';
@@ -56,9 +56,10 @@ Elevate_lang['en-US']['check_eligibility'] = 'Next';
 Elevate_lang['en-US']['phone_number'] = 'Phone number';
 Elevate_lang['en-US']['compasia_fail_error1'] = 'Sorry! We’ve checked and you currently do not qualify for the Yes Infinite+ contract option';
 Elevate_lang['en-US']['compasia_fail_error1_1'] = 'Uh-oh!';
-Elevate_lang['en-US']['compasia_fail_error1_2'] = ' You are ineligible for zero upfront payment.';
-Elevate_lang['en-US']['compasia_fail_error1_3'] = ' To proceed, you will be required to pay the device upfront payment, which will be rebated to you over 18 months.';
-Elevate_lang['en-US']['compasia_fail_error1_4'] = ' This amount will be rebated back to you over 18 months. Click “proceed” to complete your purchase!';
+Elevate_lang['en-US']['compasia_fail_error1_2'] = 'You are ineligible for zero upfront payment.';
+Elevate_lang['en-US']['compasia_fail_error1_3'] = 'Upon assessment of your application, we regret to inform you that we are unable to proceed with your request because your application did not meet all of our requirements.';
+Elevate_lang['en-US']['compasia_fail_error1_4'] = 'To proceed, kindly pay the device upfront payment which will be fully rebated to you over 18 months <br> <br> Click "Proceed" to complete your purchase!';
+// Elevate_lang['en-US']['compasia_fail_error1_5'] = 'Click "Proceed" to complete your purchase!';
 Elevate_lang['en-US']['Billing_details'] = 'Billing Details';
 Elevate_lang['en-US']['delivery_details'] = 'Delivery Details';
 
@@ -230,10 +231,10 @@ Elevate_lang['ms-MY']['term_and_condition2'] = 'Saya selanjutnya memberi kebenar
 Elevate_lang['ms-MY']['check_eligibility'] = 'NEXT';
 Elevate_lang['ms-MY']['phone_number'] = 'Nombor telefon';
 Elevate_lang['ms-MY']['compasia_fail_error1'] = 'Sorry! We’ve checked and you currently do not qualify for the Yes Infinite+ contract option';
-Elevate_lang['ms-MY']['compasia_fail_error1_1'] = 'Uh-oh!';
-Elevate_lang['ms-MY']['compasia_fail_error1_2'] = ' You are ineligible for zero upfront payment.';
-Elevate_lang['ms-MY']['compasia_fail_error1_3'] = ' To proceed, you will be required to pay the device upfront payment, which will be rebated to you over 18 months.';
-Elevate_lang['ms-MY']['compasia_fail_error1_4'] = ' This amount will be rebated back to you over 18 months. Click “proceed” to complete your purchase!';
+Elevate_lang['en-US']['compasia_fail_error1_1'] = 'Uh-oh!';
+Elevate_lang['en-US']['compasia_fail_error1_2'] = 'You are ineligible for zero upfront payment.';
+Elevate_lang['en-US']['compasia_fail_error1_3'] = 'Upon assessment of your application, we regret to inform you that we are unable to proceed with your request because your application did not meet all of our requirements.';
+Elevate_lang['en-US']['compasia_fail_error1_4'] = 'To proceed, kindly pay the device upfront payment which will be fully rebated to you over 18 months <br> <br> Click "Proceed" to complete your purchase!';
 Elevate_lang['ms-MY']['Billing_details'] = 'Billing Details';
 
 Elevate_lang['ms-MY']['eligibility_check_unsuccessful'] = 'Semakan kelayakan tidak berjaya';
@@ -398,10 +399,10 @@ Elevate_lang['zh-hans']['term_and_condition2'] = '我进一步同意 YTLC 根据
 Elevate_lang['zh-hans']['check_eligibility'] = 'NEXT';
 Elevate_lang['zh-hans']['phone_number'] = '电话号码';
 Elevate_lang['zh-hans']['compasia_fail_error1'] = 'Sorry! We’ve checked and you currently do not qualify for the Yes Infinite+ contract option';
-Elevate_lang['zh-hans']['compasia_fail_error1_1'] = 'Uh-oh!';
-Elevate_lang['zh-hans']['compasia_fail_error1_2'] = ' You are ineligible for zero upfront payment.';
-Elevate_lang['zh-hans']['compasia_fail_error1_3'] = ' To proceed, you will be required to pay the device upfront payment, which will be rebated to you over 18 months.';
-Elevate_lang['zh-hans']['compasia_fail_error1_4'] = ' This amount will be rebated back to you over 18 months. Click “proceed” to complete your purchase!';
+Elevate_lang['en-US']['compasia_fail_error1_1'] = 'Uh-oh!';
+Elevate_lang['en-US']['compasia_fail_error1_2'] = 'You are ineligible for zero upfront payment.';
+Elevate_lang['en-US']['compasia_fail_error1_3'] = 'Upon assessment of your application, we regret to inform you that we are unable to proceed with your request because your application did not meet all of our requirements.';
+Elevate_lang['en-US']['compasia_fail_error1_4'] = 'To proceed, kindly pay the device upfront payment which will be fully rebated to you over 18 months <br> <br> Click "Proceed" to complete your purchase!';
 Elevate_lang['zh-hans']['Billing_details'] = 'Billing Details';
 
 Elevate_lang['zh-hans']['eligibility_check_unsuccessful'] = '资格审查不成功';

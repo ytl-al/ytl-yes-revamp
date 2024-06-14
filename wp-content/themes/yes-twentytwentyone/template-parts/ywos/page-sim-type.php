@@ -179,7 +179,7 @@
     }
 </style>
 <!-- Vue Wrapper STARTS -->
-<div id="main-vue" style="display: none;">
+<div id="main-vue" style="display:none">
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
@@ -266,7 +266,7 @@
                                         <div>
                                             <p>eSIM Compatibility </p>
                                             <p><span>Please ensure that your device is eSIM supported</span></p>
-                                            <span class="esim-link">Learn more about eSIM <a
+                                            <span target="_blank" class="esim-link">Learn more about eSIM <a
                                                     href="/e-sim">here</a></span>
                                         </div>
                                     </div>
@@ -436,6 +436,7 @@
                 mounted: function () { },
                 created: function () {
                     var self = this;
+                    $('#main-vue').show();
                     setTimeout(function () {
                         self.pageInit();
                     }, 500);
@@ -472,6 +473,7 @@
 
                                             self.DeviceSupportEsim = data?.selected?.esim;
                                             self.PlanSupportEsim = data?.selected?.plan.esim;
+                                            console.log(self.PlanSupportEsim, data, data.selected, data.selected.plan);
                                             toggleOverlay(false);
                                         })
                                         .catch((error) => {
@@ -531,6 +533,7 @@
                         toggleOverlay(true);
                         var self = this;
                         var validSubmit = true;
+						self.sendAnalytics();
                         this.redirectVerified();
                         ywos.redirectToPage('delivery');
                         e.preventDefault();
@@ -547,7 +550,17 @@
                     hideErrorEsimMsg: function () {
                         var element = document.getElementById("eSIM_msg");
                         element.classList.add("d-none");
-                    }
+                    },
+					sendAnalytics:function(){
+                        var self = this;
+                        var eventType = 'simType';
+                        var planType= self.orderSummary.plan.planType;
+                        var planName = self.orderSummary.plan.planName;
+                        var pushData = {
+                            "SIM Type": self.simType,
+                        };
+                        pushAnalytics(eventType, pushData, planType, planName); 
+					},
                 }
             });
         });

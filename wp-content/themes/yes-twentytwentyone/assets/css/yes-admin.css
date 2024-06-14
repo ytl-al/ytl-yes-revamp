@@ -55,6 +55,10 @@
     max-width: 190px;
 }
 
+#the-list .column-device_image img {
+    max-height: 100px;
+    max-width: 190px;
+}
 
 /* END Styles for Post Type Supported Device */
 

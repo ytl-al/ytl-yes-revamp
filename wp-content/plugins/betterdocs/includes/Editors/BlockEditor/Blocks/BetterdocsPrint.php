@@ -10,11 +10,12 @@ class BetterdocsPrint extends Block {
     ];
 
     protected $frontend_styles = [
-        'betterdocs-single'
+        'betterdocs-single',
+        'betterdocs-encyclopedia'
     ];
 
     protected $frontend_scripts = [
-        'betterdocs'
+        'betterdocs',
     ];
 
     public function get_name() {

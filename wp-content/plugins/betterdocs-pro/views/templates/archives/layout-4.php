@@ -31,7 +31,9 @@
             $_shortcode_attributes = [
                 'title_tag'     => $title_tag,
                 'terms_order'   => $terms_order,
-                'terms_orderby' => esc_html( $terms_orderby )
+                'terms_orderby' => esc_html( $terms_orderby ),
+                'layout_type'   => 'template',
+                'list_icon_url' => ! empty( betterdocs()->customizer->defaults->get( 'betterdocs_doc_page_article_list_icon' ) ) ?  betterdocs()->customizer->defaults->get( 'betterdocs_doc_page_article_list_icon' ) : ( ! empty( betterdocs()->settings->get( 'docs_list_icon' ) ) ? betterdocs()->settings->get( 'docs_list_icon' )['url'] : '' )
             ];
 
             if ( is_tax( 'knowledge_base' ) ) {

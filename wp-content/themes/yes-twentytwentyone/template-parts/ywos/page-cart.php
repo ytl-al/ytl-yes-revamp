@@ -377,9 +377,13 @@
     .addon-content {
         padding-right: 38px;
     }
-    .accordion-button:not(.collapsed)::after {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
-    /* background: url('../images/icon-minus.png') no-repeat center center / contain !important; */
+
+    .packagebox .accordion-button:not(.collapsed)::after {
+    background: url(https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cart-drop-icon-up.png) no-repeat center center / contain !important;
+    transform: rotate(0deg);
+}
+.packagebox .accordion-button::after {
+    background: url(https://cdn.yes.my/site/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/images/cart-drop-icon.png) no-repeat center center / contain !important;
 }
 
     @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
@@ -434,7 +438,7 @@
 
 
 <!-- Vue Wrapper STARTS -->
-<div id="main-vue" style="display: none;">
+<div id="main-vue" style="display:none;">
     <!-- Banner Start -->
     <section id="grey-innerbanner">
         <div class="container">
@@ -505,7 +509,18 @@
                     <div class="accordion" id="cart-accordion">
                         <div class="packagebox mb-3">
                                 <div class="row">
-                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center justify-content-center" v-if="(orderSummary.plan.planType == 'postpaid' && orderSummary.plan.displayName !='Yes 5G Wireless Broadband_Flexi' && orderSummary.plan.displayName !='Yes 5G Wireless Broadband Gateway' && orderSummary.plan.displayName !='Infinite Basic_18M' && orderSummary.plan.displayName !='Infinite Basic RAHMAH 1' && orderSummary.plan.displayName !='Infinite Basic RAHMAH 2' && orderSummary.plan.displayName !='Infinite Basic RAHMAH 3' && orderSummary.plan.displayName !='Power 35 RAHMAH' )">
+                                <div class="col-lg-3 col-12 visualbg d-flex align-items-center justify-content-center" v-if="(orderSummary.plan.planType == 'postpaid' && orderSummary.plan.displayName !='Yes 5G Wireless Broadband_Flexi' && orderSummary.plan.displayName !='Yes 5G Wireless Broadband Gateway' && orderSummary.plan.displayName !='Yes 5G Wireless Broadband Gateway 12M' && orderSummary.plan.displayName !='Infinite Basic_18M' && orderSummary.plan.displayName !='Infinite Basic RAHMAH 1' && orderSummary.plan.displayName !='Infinite Basic RAHMAH 2' && orderSummary.plan.displayName !='Infinite Basic RAHMAH 2' && orderSummary.plan.displayName !='Infinite Basic RAHMAH 3'  && orderSummary.plan.displayName !='Power 35 RAHMAH' && orderSummary.plan.displayName !='Yes Power 35' && orderSummary.plan.mobilePlanId !='7477' &&  orderSummary.plan.mobilePlanId !='7479' &&
+								orderSummary.plan.mobilePlanId !='7481' &&
+								orderSummary.plan.mobilePlanId !='7483' &&
+								orderSummary.plan.mobilePlanId !='7485' &&
+								orderSummary.plan.mobilePlanId !='7487' &&
+								orderSummary.plan.mobilePlanId !='7489' &&
+								orderSummary.plan.mobilePlanId !='7491' &&
+								orderSummary.plan.mobilePlanId !='7493' &&
+								orderSummary.plan.mobilePlanId !='7495' &&
+								orderSummary.plan.mobilePlanId !='7497' &&
+								orderSummary.plan.mobilePlanId !='7499' &&
+								orderSummary.plan.mobilePlanId !='7501' && orderSummary.plan.mobilePlanId !='7503' && orderSummary.plan.mobilePlanId !='7517' && orderSummary.plan.mobilePlanId !='7519')">
                                     <img src="/wp-content/uploads/2022/06/ft5g-cart-visual.png" class="img-fluid" alt="" />
                                 </div>
                                 <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center" v-if="orderSummary.plan.planType == 'prepaid'">
@@ -517,9 +532,24 @@
                                         alt="" />
                                 </div>
                                 <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
-                                v-if="(orderSummary.plan.displayName=='Yes 5G Wireless Broadband Gateway')">
-                                    <img src="/wp-content/uploads/2023/08/wirelessbroadband-thumbnail.png" class="img-fluid m-auto"
+                                v-if="(orderSummary.plan.displayName=='Yes 5G Wireless Broadband Gateway' || orderSummary.plan.displayName=='Yes 5G Wireless Broadband Gateway 12M' )">
+                                    <img src="/wp-content/uploads/2024/02/BB_router_thumb.png" class="img-fluid m-auto"
                                         alt="" />
+                                </div>
+                                <!-- <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(orderSummary.plan.displayName=='Yes 5G Wireless Broadband Gateway 12M')">
+                                    <img src="/wp-content/uploads/2023/12/wireless-christmus-1.png" class="img-fluid m-auto"
+                                        alt="" />
+                                </div> -->
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(planID == '4546' || planID == '7485' )">
+                                    <img src="/wp-content/uploads/2023/12/oppoA79-black.png" class="img-fluid m-auto"
+                                        alt="" style="max-width:50% !important;"  />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(planID == '4548' || planID == '7487')">
+                                    <img src="/wp-content/uploads/2023/12/oppoA79-purple.png" class="img-fluid m-auto"
+                                        alt=""  style="max-width:50% !important;" />
                                 </div>
                                 <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
                                 v-if="(planID == '1229')">
@@ -533,12 +563,12 @@
                                 </div>
 
                                 <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
-                                v-if="(planID == '1236')">
+                                v-if="(planID == '1236' || planID == '7497' )">
                                     <img src="/wp-content/uploads/2023/08/vivoY27-black-website.png" class="img-fluid m-auto"
                                         alt=""  style="max-width:50% !important;"/>
                                 </div>
                                 <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
-                                v-if="(planID == '1238')">
+                                v-if="(planID == '1238' || planID == '7499')">
                                     <img src="/wp-content/uploads/2023/08/vivoY27-purple-website.png" class="img-fluid m-auto"
                                         alt="" style="max-width:50% !important;" />
                                 </div>
@@ -568,12 +598,12 @@
                                         alt="" style="max-width:50% !important;" />
                                 </div>
                                 <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
-                                v-if="(planID == '1250')">
+                                v-if="(planID == '1250' || planID == '7481' )">
                                     <img src="/wp-content/uploads/2023/08/honor90lite-cyan-webasset.png" class="img-fluid m-auto"
                                         alt="" style="max-width:50% !important;" />
                                 </div>
                                 <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
-                                v-if="(planID == '1252')">
+                                v-if="(planID == '1252' || planID == '7483' )">
                                     <img src="/wp-content/uploads/2023/08/honor90lite-black-webasset.png" class="img-fluid m-auto"
                                         alt="" style="max-width:50% !important;" />
                                 </div>
@@ -598,12 +628,12 @@
                                         alt="" style="max-width:50% !important;" />
                                 </div>
                                 <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
-                                v-if="(planID == '1262')">
+                                v-if="(planID == '1262' || planID == '7489'  || planID == '7491' )">
                                     <img src="/wp-content/uploads/2023/08/ZTE-blade.png" class="img-fluid m-auto"
                                         alt="" style="max-width:50% !important;" />
                                 </div>
                                 <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
-                                v-if="(planID == '1264')">
+                                v-if="(planID == '1264' || planID == '7493' ||  planID == '7495' )">
                                     <img src="/wp-content/uploads/2023/08/ZTE-blade.png" class="img-fluid m-auto"
                                         alt=""  style="max-width:50% !important;" />
                                 </div>
@@ -622,6 +652,46 @@
                                     <img src="/wp-content/uploads/2023/08/ZTE-blade.png" class="img-fluid m-auto"
                                         alt=""  style="max-width:50% !important;" />
                                 </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(planID == '1274' || planID == '1278')">
+                                    <img src="/wp-content/uploads/YWOS-device-images/samsungm14-blue.png" class="img-fluid m-auto"
+                                        alt=""  style="max-width:50% !important;" />
+                                </div>  
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(planID == '1276' || planID == '1280')">
+                                    <img src="/wp-content/uploads/YWOS-device-images/samsungM14-5.png" class="img-fluid m-auto"
+                                        alt=""  style="max-width:50% !important;" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(planID == '1122')">
+                                    <img src="/wp-content/uploads/2024/01/PWR35productthumbnail.png" class="img-fluid m-auto"
+                                        alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(planID == '7477' || planID == '7517')">
+                                    <img src="/wp-content/uploads/YWOS-device-images/vivoY27-black-website-11-5-1.png" class="img-fluid m-auto"
+                                        alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(planID == '7479' || planID == '7519')">
+                                    <img src="/wp-content/uploads/YWOS-device-images/vivoY27-purple-website-3-1.png" class="img-fluid m-auto"
+                                        alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                v-if="(planID == '7501')">
+                                    <img src="/wp-content/uploads/YWOS-device-images/realMe_purlple11x5g-3-2.png" class="img-fluid m-auto"
+                                        alt="" />
+                                </div>
+                                <div class="col-lg-3 col-12 visualbg prepaid d-flex align-items-center"
+                                 v-if="(planID == '7503')">
+                                    <img src="/wp-content/uploads/YWOS-device-images/realMe_blue11x5g-3-3.png" class="img-fluid m-auto"
+                                        alt="" />
+                                </div>
+
+
+
+
+
                                 <div class="col-lg-6 col-12 pt-lg-4 pb-1 px-4 px-lg-5 ps-lg-4">
                                     <h3 class="mt-3 mt-lg-0" v-if="(orderSummary.plan.displayName=='Yes Wireless Fibre 120Mbps_Raya Promo_2023')">Yes Wireless Fibre 120Mbps</h3>
                                     <h3 class="mt-3 mt-lg-0" v-else-if="planID == '1229'">
@@ -656,6 +726,10 @@
                                             Infinite Basic RAHMAH 1 Samsung Galaxy A14 5G Silver</h3>
 											<h3 class="mt-3 mt-lg-0" v-else-if="planID == '1236'">
                                             Infinite Basic RAHMAH 1 Vivo Y27 5G Black</h3>
+                                            <h3 class="mt-3 mt-lg-0" v-else-if="planID == '4546'">
+                                            Infinite Basic RAHMAH 2 Oppo A79 5G Black</h3>
+                                            <h3 class="mt-3 mt-lg-0" v-else-if="planID == '4548'">
+                                            Infinite Basic RAHMAH 2 Oppo A79 purple</h3>
 											<h3 class="mt-3 mt-lg-0" v-else-if="planID == '1238'">
                                             Infinite Basic RAHMAH 1 Vivo Y27 5G Purple</h3>
                                             <h3 class="mt-3 mt-lg-0" v-else-if="planID == '1266'">
@@ -664,6 +738,7 @@
                                             Power 35 RAHMAH  VIVO Y55+ Black</h3>
                                             <h3 class="mt-3 mt-lg-0" v-else-if="planID == '1272'">
                                             Power 35 RAHMAH  ZTE Blade A73 Grey</h3>
+
                                             <h3 class="mt-3 mt-lg-0" v-else>{{ orderSummary.plan.displayName }}</h3>
                                     <p class="mb-3" v-if="orderSummary.plan.internetData">RM{{
                                         parseFloat(orderSummary.plan.totalAmount).toFixed(0) }} for {{
@@ -824,6 +899,14 @@
                                             v-else-if="(planID == '1238')">
                                             <p>Infinite Basic RAHMAH 1 Vivo Y27 5G Purple</p>
                                         </div>
+                                        <div class="col-6"
+                                            v-else-if="(planID == '4546')">
+                                            <p>Infinite Basic RAHMAH 2 Oppo A79 Black</p>
+                                        </div>
+                                        <div class="col-6"
+                                            v-else-if="(planID == '4548')">
+                                            <p>Infinite Basic RAHMAH 2 Oppo A79 5G Purple</p>
+                                        </div>
 										 <div class="col-6"
                                             v-else-if="(planID == '1240')">
                                             <p>Infinite Basic RAHMAH 1 Samsung Galaxy A14 5G Black</p>
@@ -854,7 +937,7 @@
                                         </div>
 										 <div class="col-6"
                                             v-else-if="(planID == '1254')">
-                                            <p>Infinite Basic RAHMAH 2 Xiaomi Redmi 12 5G Blak</p>
+                                            <p>Infinite Basic RAHMAH 2 Xiaomi Redmi 12 5G Black</p>
                                         </div>
 										<div class="col-6"
                                             v-else-if="(planID == '1256')">
@@ -915,8 +998,8 @@
                             </div>
                         </div>
                     </div>
-                    <p v-if="orderSummary.plan.bundleName != 'Home Broadband'" v-html="renderText('keepNumberOption')">
-                    </p>
+                    <p v-if="!['Yes 5G Wireless Broadband_Flexi', 'Yes 5G Wireless Broadband Gateway', 'Yes 5G Wireless Broadband Gateway 12M'].includes(orderSummary.plan.planName)" v-html="renderText('keepNumberOption')"></p>
+                    <!-- <p v-if="orderSummary.plan.bundleName != 'Home Broadband'" v-html="renderText('keepNumberOption')"></p> -->
                 </div>
                 <div class="col-lg-4 col-12">
                     <div class="summary-box">
@@ -1022,7 +1105,7 @@
                                                     :placeholder="renderText('checkoutYesID')" />
                                             </div>
                                             <div class=" w-100 border-top item-otpPassword" id="box-otpPassword"
-                                                style="display: none;">
+                                            v-show="showOtpPassword">
                                                 <input type="password" class="form-control password"
                                                     id="input-otpPassword" v-model="login.input.otp.password"
                                                     @input="watchOTPLoginFields" placeholder="******" maxlength="6" />
@@ -1121,6 +1204,7 @@
             data: {
                 ywosLSData: null,
                 planID: null,
+                showOtpPassword:false,
                 isCartEmpty: false,
                 hasFetchPlan: false,
                 requestOTPText: '',
@@ -1219,6 +1303,7 @@
             },
             created: function () {
                 var self = this;
+                $('#main-vue').show();
                 setTimeout(function () {
                     ywos.init();
 
@@ -1464,7 +1549,7 @@
                                 self.login.input.otp.yesNumber = '';
                             }
                         });
-
+						self.sendAnalytics('ctCheckout');
                         $('#login-modal').modal('show');
                     } else {
                         toggleOverlay();
@@ -1548,7 +1633,8 @@
                         })
                         .then((response) => {
                             $('.item-otpPassword').show();
-                            $('#input-otpPassword').show();
+                            // $('#input-otpPassword').show();
+                            self.showOtpPassword=true,
                             $('.panel-otpMessage .span-message').html(response.data.displayResponseMessage);
                             $(self.login.input.otp.inputPassword).focus();
                             self.triggerOTPCountdown(response.data.otpExpiryTime);
@@ -1599,7 +1685,8 @@
 
                     $('.span-timer').html(minutes + ':' + seconds);
                     if (timer == 0) {
-                        $('#input-otpPassword').hide();
+                        // $('#input-otpPassword').hide();
+                        self.showOtpPassword=false,
                         clearInterval(interval);
                         self.allowRequestOTP = true;
                         self.requestOTPText = self.renderText('checkoutTACResend');
@@ -1642,7 +1729,7 @@
 
                 if (loginType == 'otp' || loginType == 'password') {
                     toPage = 'delivery';
-                    currentStep += 1;
+                    currentStep = 2;
 
                     if (!ywos.lsData.meta.isLoggedIn && ywos.lsData.meta.customerDetails.securityType == 'PASSPORT' && self.orderSummary.plan.planType == 'postpaid' && self.orderSummary.due.foreignerDeposit == 0.00) {
                         self.orderSummary.due.foreignerDeposit = self.orderSummary.plan.foreignerDeposit;
@@ -1739,23 +1826,60 @@
                     self.login.submitButton.allowBasic = false;
                 }
             },
-            sendAnalytics: function (eventType) {
+            // sendAnalytics: function (eventType) {
+                // var self = this;
+                // var pushData = [];
+                // switch (eventType) {
+                    // case 'addToCart':
+                        // pushData = [{
+                            // 'name': self.orderSummary.plan.planName,
+                            // 'id': self.orderSummary.plan.mobilePlanId,
+                            // 'category': self.orderSummary.plan.planType,
+                            // 'price': self.orderSummary.plan.totalAmountWithoutSST
+                        // }];
+                        // break;
+                    // case 'checkout':
+                        // pushData = [{
+                            // 'name': self.orderSummary.plan.planName,
+                            // 'id': self.orderSummary.plan.mobilePlanId,
+                            // 'category': self.orderSummary.plan.planType,
+                            // 'price': self.orderSummary.plan.totalAmountWithoutSST
+                        // }];
+
+                        // if (self.orderSummary.addOn) {
+                            // pushData.push({
+                                // 'name': self.orderSummary.addOn.addonName,
+                                // 'id': 0,
+                                // 'category': 'addOn',
+                                // 'price': self.orderSummary.addOn.amount
+                            // });
+                        // }
+                        // break;
+                    // default:
+                        // return;
+                // }
+                // pushAnalytics(eventType, pushData);
+            // },
+				
+				sendAnalytics: function (eventType) {
                 var self = this;
+                var ctplanName=self.orderSummary.plan.planName;
+                var ctPlanType = self.orderSummary.plan.planType;
                 var pushData = [];
                 switch (eventType) {
                     case 'addToCart':
                         pushData = [{
-                            'name': self.orderSummary.plan.planName,
+                            'name': ctplanName,
                             'id': self.orderSummary.plan.mobilePlanId,
-                            'category': self.orderSummary.plan.planType,
+                            'category': ctPlanType,
                             'price': self.orderSummary.plan.totalAmountWithoutSST
                         }];
                         break;
                     case 'checkout':
                         pushData = [{
-                            'name': self.orderSummary.plan.planName,
+                            'name': ctplanName,
                             'id': self.orderSummary.plan.mobilePlanId,
-                            'category': self.orderSummary.plan.planType,
+                            'category': ctPlanType,
                             'price': self.orderSummary.plan.totalAmountWithoutSST
                         }];
 
@@ -1768,11 +1892,18 @@
                             });
                         }
                         break;
+                        case 'ctCheckout':
+                        pushData = {
+                            'Package Name': ctplanName,
+                        };
+                        break;
+
                     default:
                         return;
                 }
-                pushAnalytics(eventType, pushData);
+                pushAnalytics(eventType, pushData,ctPlanType,ctplanName);
             },
+			
             renderText: function (strID) {
                 return ywos.renderText(strID, this.pageText);
             }

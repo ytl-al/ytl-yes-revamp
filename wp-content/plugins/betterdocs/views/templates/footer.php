@@ -4,10 +4,13 @@
          * Tags
          */
         $view_object->get( 'templates/parts/tags' );
+
         /**
          * Social Share
          */
         $view_object->get( 'templates/parts/social' );
+
+
         /**
          * Feedback Form
          */

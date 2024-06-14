@@ -23,7 +23,7 @@
 			<input type="hidden" name="submitted" value="1">
 			<input
                 type="submit" name="submit" class="button" id="feedback_form_submit_btn"
-                value="<?php esc_attr_e( $button_text );?>"
+                value="<?php echo esc_attr( $button_text );?>"
             />
 		</div>
     </form>

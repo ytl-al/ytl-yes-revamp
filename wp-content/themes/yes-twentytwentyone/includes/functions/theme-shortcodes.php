@@ -115,7 +115,7 @@ if (!function_exists('generate_scheduled_network_maintenance')) {
                         <section class="layer-section" id="section-list">
                             <div class="layer-filter filter-container sticky-top" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                                 <div class="layer-filterToggle">
-                                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>' . esc_html__('Filter', 'yes.my') . '</span> <span class="navbar-toggler-icon"></span></button>
+                                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>'. esc_html__('Filter', 'yes.my') .'</span> <span class="navbar-toggler-icon"></span></button>
                                     <div class="navbar-collapse tab-content collapse justify-content-center" id="tab-storeLocatorFilter">
                                         <div class="container">
                                             <div class="row justify-content-lg-center">
@@ -232,7 +232,8 @@ if (!function_exists('generate_store_locations')) {
         $file_to_read = fopen(FP_STORE_LOCATIONS, 'r');
         if ($file_to_read !== FALSE) {
             while (($data = fgetcsv($file_to_read, 0, ',')) !== FALSE) {
-                if (empty($arr_keys)) {
+                if (empty($arr_keys)) 
+               {
                     $arr_keys = $data;
                     continue;
                 }
@@ -260,24 +261,26 @@ if (!function_exists('generate_store_locations')) {
         }
 
         $html_list  = '';
-        if (isset($arr_list['KUALA LUMPUR'])) {
+		if( isset($arr_list['KUALA LUMPUR']) ) {
             $new_value = $arr_list['KUALA LUMPUR'];
-            $arr_list = array_merge(["KUALA LUMPUR" => $new_value], $arr_list);
+            $arr_list = array_merge(["KUALA LUMPUR"=>$new_value], $arr_list);
+        
         }
-
+     
         foreach ($arr_list as $state => $stores) {
             $state_name     = ucwords(strtolower($state));
             $html_list      .= '            <div class="col-12 mb-4 layer-state" data-state="' . strtolower($state) . '">
             <h1 class="mb-4">' . $state_name . '</h1>';
+        
 
-
-            foreach ($stores as $data) {
-
+            foreach ($stores as $data) 
+            {
+               
                 $services   = $data['Services'];
-                $services = str_replace(array('experience-stores', 'service-stores'), array('stores', 'stores'), $services);
-
+                $services = str_replace(array('experience-stores','service-stores'),array('stores', 'stores'),$services);
+             
                 $store_type     = $data['Store Type'];
-                $store_type = str_replace(array('Experience Store', 'Store & Service Centre'), array('Store', 'Store'), $store_type);
+                $store_type = str_replace(array('Experience Store','Store & Service Centre'),array('Store','Store'),$store_type);
                 $store_brand    = ($data['Brand']) ? $data['Brand'] : '';
                 $store_address  = $data['Address'];
                 $operating_hour = $data['Operation Hour'];
@@ -302,17 +305,17 @@ if (!function_exists('generate_store_locations')) {
                         $store_name = "<span class='font-normal'>vivo</span> Concept Store";
                         break;
                     case 'OPPO':
-                        $coming_soon = ($data['Ready to Sell'] == 'No') ? ' (' . esc_html__('Available Soon', 'yes.my') . ')' : '';
+                        $coming_soon= ($data['Ready to Sell'] == 'No') ? ' (' . esc_html__('Available Soon', 'yes.my') .')' : '';
                         $store_name = "$store_brand Brand Store" . $coming_soon;
                         break;
                     case 'SAMSUNG':
-                        $coming_soon = ($data['Ready to Sell'] == 'No') ? ' (Available Soon)' : '';
+                        $coming_soon= ($data['Ready to Sell'] == 'No') ? ' (Available Soon)' : '';
                         $store_name = "$store_brand Experience Store" . $coming_soon;
                         break;
-                    case 'Xiaomi':
+                    case 'Xiaomi': 
                         $store_name = "<span class='font-normal'>Mi</span> Store";
                         break;
-                    default:
+                    default: 
                         $store_name = $data['Store Name'];
                 }
 
@@ -357,7 +360,7 @@ if (!function_exists('generate_store_locations')) {
                         <section id="store-locations">
                             <div class="filter-container sticky-top" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                                 <div class="layer-storeLocatorFilter">
-                                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>' . esc_html__('Filter', 'yes.my') . '</span> <span class="navbar-toggler-icon"></span></button>
+                                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>'. esc_html__('Filter', 'yes.my') .'</span> <span class="navbar-toggler-icon"></span></button>
                                     <div class="navbar-collapse tab-content collapse justify-content-center" id="tab-storeLocatorFilter">
                                         <div class="container">
                                             <div class="row justify-content-lg-center">
@@ -515,7 +518,7 @@ if (!function_exists('generate_store_locations')) {
 
         if ($key == 'Store Type') {
 
-            switch ($value) {
+                 switch ($value) {
                 case 'Yes Store':
                     if ($service_string != '') $service_string .= ',';
                     $service_string .= 'yes-stores';
@@ -524,7 +527,7 @@ if (!function_exists('generate_store_locations')) {
                     if ($service_string != '') $service_string .= ',';
                     $service_string .= 'yes-service-stores';
                     break;
-                case 'Yes Experience Store':
+                case 'Yes Experience Store': 
                     if ($service_string != '') $service_string .= ',';
                     $service_string .= 'yes-experience-stores';
                     break;
@@ -660,7 +663,7 @@ if (!function_exists('generate_roadshow')) {
                         <section class="layer-section" id="section-list">
                             <div class="layer-filter filter-container sticky-top" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
                                 <div class="layer-filterToggle">
-                                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>' . esc_html__('Filter', 'yes.my') . '</span> <span class="navbar-toggler-icon"></span></button>
+                                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tab-storeLocatorFilter" aria-controls="tab-storeLocatorFilter" aria-expanded="false" alria-label="Filter"><span>'. esc_html__('Filter', 'yes.my') .'</span> <span class="navbar-toggler-icon"></span></button>
                                     <div class="navbar-collapse tab-content collapse justify-content-center" id="tab-storeLocatorFilter">
                                         <div class="container">
                                             <div class="row justify-content-lg-center">
@@ -738,4 +741,439 @@ if (!function_exists('generate_roadshow')) {
     }
 
     add_shortcode('yessc_roadshow_list', 'generate_roadshow');
+}
+
+if (!function_exists('yes_business_slider_callback')) {
+    /**
+     * Function yes_business_slider_callback()
+     * Function to register shortcode to display the slider on the bussiness page
+     * 
+     * @since    1.2.0
+     */
+    function yes_business_slider_callback()
+    {
+        ob_start();
+?>
+
+        <style>
+            #business-solutions-section {
+                padding: 110px 0px 50px;
+                width: 100%;
+                background-color: #f7f8f9;
+                overflow: hidden;
+            }
+
+            #business-solutions-section h2 {
+                font-family: "Montserrat";
+                font-size: 39px;
+                font-weight: 600;
+                line-height: 47px;
+                letter-spacing: -0.02em;
+                text-align: left;
+                color: #1a1e47;
+                max-width: 500px;
+            }
+
+            #business-solutions-section .business-solutions-carousel {
+                padding-top: 30px;
+            }
+
+            #business-solutions-section .layer-planDevice {
+                background-color: #fff;
+                margin: 0;
+                padding: 40px 0px 0px;
+                position: relative;
+                border-radius: 15px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+                display: flex;
+                -webkit-align-items: stretch;
+                align-items: stretch;
+                -webkit-justify-content: stretch;
+                justify-content: stretch;
+                justify-content: stretch;
+                height: auto !important;
+                overflow: hidden;
+            }
+
+            .box-margin {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            #business-solutions-section .layer-planDevice .box-inner {
+                padding: 0 40px;
+            }
+
+            #business-solutions-section .layer-planDevice h2 {
+                font-family: "Montserrat";
+                font-size: 28px;
+                font-weight: 600;
+                line-height: 34px;
+                letter-spacing: -0.011em;
+                text-align: left;
+                margin-bottom: 10px;
+                color: #000;
+                height: 70px;
+                padding: 0;
+            }
+
+            #business-solutions-section .layer-planDevice p {
+                font-family: "Open Sans", sans-serif;
+                font-size: 16px;
+                line-height: 24px;
+                font-weight: 400;
+                margin: 0 0 10px;
+                text-align: left;
+                color: #000;
+                height: 100px;
+                max-width: 210px;
+            }
+
+            #business-solutions-section .layer-planDevice p.panel-deviceImg {
+                margin: 0 0 30px;
+                position: relative;
+                text-align: center;
+                display: contents;
+            }
+
+            #business-solutions-section .layer-planDevice p.panel-deviceImg img {
+                max-height: 220px;
+                margin: 0px 0 0 auto;
+                object-fit: contain;
+            }
+
+            #business-solutions-section .layer-planDevice p.panel-btn {
+                margin: 0px 0 0px;
+                text-align: left;
+                height: auto;
+            }
+
+            #business-solutions-section .layer-planDevice p.panel-btn a {
+                color: #2f3bf5;
+                display: inline-block;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                font-family: Montserrat;
+                font-size: 14px;
+                font-weight: 700;
+                line-height: 19px;
+                letter-spacing: 0.1em;
+                text-align: left;
+                text-decoration: none;
+            }
+
+            #business-solutions-section .layer-planDevice p.panel-btn a:hover {
+                text-decoration: underline;
+            }
+
+            #business-solutions-section .business-solutions-carousel .slick-track {
+                display: flex !important;
+                width: auto;
+            }
+
+            #business-solutions-section .business-solutions-carousel .slick-disabled {
+                opacity: 0.3 !important;
+            }
+
+            #business-solutions-section .business-solutions-carousel .slick-slide {
+                margin: 15px 15px;
+            }
+
+            #business-solutions-section .business-solutions-carousel .slick-list {
+                overflow: visible;
+            }
+
+            #business-solutions-section .business-solutions-carousel .slick-dots {
+                left: 0;
+            }
+
+            #business-solutions-section .business-solutions-carousel .slick-dots li.slick-active button:before {
+                opacity: 0.75;
+                color: #ff0084;
+            }
+
+            #business-solutions-section .business-solutions-carousel .slick-prev {
+                left: unset;
+                right: 80px;
+            }
+
+            #business-solutions-section .business-solutions-carousel .slick-next {
+                right: 40px;
+            }
+
+            #business-solutions-section .business-solutions-carousel .slick-next,
+            .slick-prev {
+                top: -4%;
+            }
+
+            #business-solutions-section .business-solutions-carousel .prev-arrow svg,
+            #business-solutions-section .business-solutions-carousel .next-arrow svg {
+                width: 40px !important;
+                height: 40px !important;
+                color: #2f3bf5;
+                background-color: #fff;
+                border-radius: 50px;
+                border: 1px solid #2f3bf5;
+            }
+            #business-solutions-section .business-solutions-carousel .prev-arrow svg{
+                margin-right: 30px;
+            }
+
+            @media only screen and (max-width: 768px) {
+                #business-solutions-section .layer-planDevice p.panel-deviceImg img {
+                    max-height: 140px !important;
+                }
+
+                #business-solutions-section {
+                    padding: 50px 0px 50px;
+                }
+
+                .business_inner_img {
+                    height: 60px !important;
+                }
+
+
+                #business-solutions-section h2 {
+                    font-size: 24px;
+                    line-height: 28px;
+                    text-align: center;
+                    padding: 0 20px;
+                }
+
+                #business-solutions-section .layer-planDevice h2 {
+                    font-size: 20px;
+                    font-weight: 700;
+                    line-height: 26px;
+                    height: auto;
+                }
+
+                #business-solutions-section .layer-planDevice p {
+                    font-size: 12px;
+                    line-height: 18px;
+                    height: auto;
+                }
+            }
+
+            @media only screen and (max-width: 768px) {
+                #business-solutions-section .business-solutions-carousel .slick-list {
+                    overflow: hidden;
+                    padding-right: 20%;
+                }
+
+                .slick-dots li button:before {
+                    font-size: 15px !important;
+                    top: 5px !important;
+                }
+
+                .comman_btn, .hero_bottom-section .button-submit {
+                    max-width: 55%;
+                }
+            }
+        </style>
+
+        <!-- business solutions​ section -->
+        <section id="business-solutions-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h2>Other 5G solutions that you might be interested​</h2>
+                    </div>
+                </div>
+
+                <!-- <div class="col-12"> -->
+                <div class="business-solutions-carousel">
+                    <div class="layer-planDevice">
+                        <div class="box-margin">
+                            <div class="box-inner">
+                                <h2>Yes 5G Biz Wireless Broadband</h2>
+                                <p>
+                                    With unlimited & Uncapped 5G, this is unbeatably the fastest
+                                    connectivity to take your business a step ahead.​
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="/business/yes-biz-wireless-broadband/" class="">Learn More
+                                        <span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                                </p>
+                            </div>
+                            <p class="panel-deviceImg">
+                                <img decoding="async" src="/wp-content/uploads/2024/01/solutions_section1.png" />
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="layer-planDevice">
+                        <div class="box-margin">
+                            <div class="box-inner">
+                                <h2>Yes 5G Mobile Plans​</h2>
+                                <p>
+                                    Malaysia's Most Affordable Unlimited 5G Mobile Plans to stay
+                                    connected anytime, anywhere.​​
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="/mobile-plan/" class="">Learn More
+                                        <span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                                </p>
+                            </div>
+
+                            <p class="panel-deviceImg">
+                                <img decoding="async" src="/wp-content/uploads/2024/01/solutions_section2.png" />
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="layer-planDevice">
+                        <div class="box-margin">
+                            <div class="box-inner">
+                                <h2>Yes Dedicated Internet Access​</h2>
+                                <p>
+                                    Dedicated connectivity supporting point-to-point line and data
+                                    links.​​
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="/business/internet-access/yes-dia/" class="">Learn More
+                                        <span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                                </p>
+                            </div>
+
+                            <p class="panel-deviceImg">
+                                <img decoding="async" src="/wp-content/uploads/2024/01/solutions_section3.png" />
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="layer-planDevice">
+                        <div class="box-margin">
+                            <div class="box-inner">
+                                <h2>Yes Dedicated Lease Line​</h2>
+                                <p>
+                                    Dedicated fixed bandwidth data connection with high network
+                                    availability.​​
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="/business/private-network/yes-dedicated-leased-line/" class="">Learn More
+                                        <span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                                </p>
+                            </div>
+
+                            <p class="panel-deviceImg">
+                                <img decoding="async" src="/wp-content/uploads/2024/01/solutions_section4.png" />
+                            </p>
+                        </div>
+                    </div>
+                    <div class="layer-planDevice">
+                        <div class="box-margin">
+                            <div class="box-inner">
+                                <h2>Yes SIPconnect​</h2>
+                                <p>
+                                    Voice over IP (VolP) service to handle high call volume with
+                                    ease.​​
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="/business/voice-communication/yes-sipconnect/" class="">Learn More
+                                        <span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                                </p>
+                            </div>
+
+                            <p class="panel-deviceImg">
+                                <img decoding="async" src="/wp-content/uploads/2024/01/solutions_section5.png" />
+                            </p>
+                        </div>
+                    </div>
+                    <div class="layer-planDevice">
+                        <div class="box-margin">
+                            <div class="box-inner">
+                                <h2>Yes 5G Private Network​</h2>
+                                <p>Secure data sharing for your business at all times.​</p>
+                                <p class="panel-btn">
+                                    <a href="/business/private-network/private-5g/" class="">Learn More
+                                        <span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                                </p>
+                            </div>
+
+                            <p class="panel-deviceImg">
+                                <img decoding="async" src="/wp-content/uploads/2024/01/solutions_section6.png" />
+                            </p>
+                        </div>
+                    </div>
+                    <div class="layer-planDevice">
+                        <div class="box-margin">
+                            <div class="box-inner">
+                                <h2>Yes Virtual Private Network (VPN)​</h2>
+                                <p>
+                                    Dedicated private network for your business to stay connected
+                                    wirelessly 24/7.​​​
+                                </p>
+                                <p class="panel-btn">
+                                    <a href="/business/private-network/yes-vpn/" class="">Learn More
+                                        <span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                                </p>
+                            </div>
+
+                            <p class="panel-deviceImg">
+                                <img decoding="async" src="/wp-content/uploads/2024/01/solutions_section7.png" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- </div> -->
+            </div>
+        </section>
+        <!--  business solutions​ section End -->
+        <script>
+            $('.business-solutions-carousel').slick({
+                prevArrow: '<a href="#" class="slide-arrow prev-arrow slick-arrow"><span class="iconify slick-prev" data-icon="eva:arrow-ios-back-fill"></span></a>',
+                nextArrow: '<a href="#" class="slide-arrow next-arrow slick-arrow"><span class="iconify slick-next" data-icon="eva:arrow-ios-forward-fill"></span></a>',
+                infinite: false,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                autoplay: false,
+                autoplaySpeed: 3000,
+                dots: false,
+                responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        infinite: true,
+                        dots: true,
+                        arrows: false
+                    }
+                }, {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1,
+                        arrows: false,
+                        infinite: true,
+                        dots: true,
+                        slidesToScroll: 1,
+                    }
+                }, {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1,
+                        arrows: false,
+                        infinite: true,
+                        dots: true,
+                        slidesToScroll: 1
+                    }
+                }, {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        dots: true,
+                        infinite: true,
+                        dots: true,
+                        arrows: false,
+                    }
+                }]
+            });
+        </script>
+
+<?php
+        return ob_get_clean();
+    }
+    add_shortcode('yes_business_slider', 'yes_business_slider_callback');
 }

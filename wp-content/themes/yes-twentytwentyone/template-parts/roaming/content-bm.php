@@ -20,11 +20,11 @@
     <div class="hero-slider slider">
 
         <div>
-            <a href="#">
-                <img src="/wp-content/uploads/2023/12/hero-banner-bg1.png" class="w-100 d-none d-lg-block" alt="...">
-                <img src="/wp-content/uploads/2023/12/hero-banner-bg1-mob-bm.png" class="w-100 d-block d-md-block d-lg-none"
+            <a href="/ms/yes-postpaid-plans/#postpaid-plans/">
+                <img src="/wp-content/uploads/2024/01/SGRoaming-BM-v3.png" class="w-100 d-none d-lg-block" alt="...">
+                <img src="/wp-content/uploads/2024/01/SGRoaming-BM-v3-mob.png" class="w-100 d-block d-md-block d-lg-none"
                     alt="...">
-                    <div class="inner-content-sec-bm d-lg-block d-none">
+                    <!-- <div class="inner-content-sec-bm d-lg-block d-none">
                     <div class="title-sec">
                     <img decoding="async" src="/wp-content/uploads/2023/12/infinite-icon.png" class="" alt="...">
                         <h2>Perayauan 5G tanpa had di<br> Singapura secara PERCUMA </h2>
@@ -48,9 +48,8 @@
                             <div class="content-sec">
                             Panggilan<br> Tanpa Had
                             </div>
-                        </div>
-                        
-                    </div>
+                        </div>                        
+                    </div> -->
             </a>
         </div>
         
@@ -123,7 +122,7 @@
                                     <div class="col-12 col-lg-3 border-b-sec">
                                         <h3>Operator Perayauan</h3>
                                         <p class="brand">
-                                        <h4 class="blue">SIMBA</h4>
+                                        <h4 class="blue">SIMBA/TPG</h4>
                                         </p>
                                     </div>
 
@@ -207,7 +206,7 @@
                                     <div class="col-12 col-lg-3 border-b-sec">
                                         <h3>Operator Perayauan</h3>
                                         <p class="brand">
-                                        <h4 class="blue">SIMBA</h4>
+                                        <h4 class="blue">SIMBA/TPG</h4>
                                         </p>
                                     </div>
 
@@ -907,7 +906,7 @@
         <div class="row">
             <div class="col-8 m-auto text-left idd-rate">&nbsp;
                 <p>• Harga yang tertera tertakluk kepada cukai perkhidmatan 6%.</p>
-                <p>• Panggilan IDD dicaj mengikut blok 30 saat.</p>
+                <p>• Panggilan IDD dicaj mengikut blok 60 saat.</p>
                 <p>• Kadar adalah tertakluk kepada perubahan tanpa notis terlebih dahulu.</p>
                 <a href="#" data-button="closeIdd" class="pink-btn mt-5">Close <span class="iconify" data-icon="carbon:close-filled"></span></a>
             </div>

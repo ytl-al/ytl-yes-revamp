@@ -3,6 +3,7 @@
 namespace WPDeveloper\BetterDocs\Admin\Customizer\Sections;
 
 use WP_Customize_Control;
+use WP_Customize_Image_Control;
 use WPDeveloper\BetterDocs\Admin\Customizer\Controls\TitleControl;
 use WPDeveloper\BetterDocs\Admin\Customizer\Controls\SelectControl;
 use WPDeveloper\BetterDocs\Admin\Customizer\Controls\DimensionControl;
@@ -294,7 +295,8 @@ class Sidebar extends Section {
                         'h3' => 'h3',
                         'h4' => 'h4',
                         'h5' => 'h5',
-                        'h6' => 'h6'
+                        'h6' => 'h6',
+                        'p' => 'p'
                     ]
                 ]
             )
@@ -908,6 +910,24 @@ class Sidebar extends Section {
                     'suffix' => 'px' //optional suffix
                 ]
             ] )
+        );
+    }
+
+    public function list_icon() {
+        $this->customizer->add_setting( 'betterdocs_sidbebar_item_list_icon', [
+            'default'    => $this->defaults['betterdocs_sidbebar_item_list_icon'],
+            'capability' => 'edit_theme_options',
+
+        ] );
+
+        $this->customizer->add_control(
+            new WP_Customize_Image_Control(
+                $this->customizer, 'betterdocs_sidbebar_item_list_icon', [
+                    'section'  => 'betterdocs_sidebar_settings',
+                    'settings' => 'betterdocs_sidbebar_item_list_icon',
+                    'label'    => __( 'List Icon', 'betterdocs' )
+                ]
+            )
         );
     }
 

@@ -260,7 +260,6 @@ class BlockTemplate {
     public function get_templates_fils_from_betterdocs( $template_type ) {
         $directory      = $this->get_templates_directory( $template_type );
         $template_files = $this->get_template_paths( $directory );
-        // var_dump($template_files);
         return $template_files;
     }
 

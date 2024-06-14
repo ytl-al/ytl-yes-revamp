@@ -700,7 +700,8 @@ class ArchivePage extends Section {
                         'h3' => 'h3',
                         'h4' => 'h4',
                         'h5' => 'h5',
-                        'h6' => 'h6'
+                        'h6' => 'h6',
+                        'p' => 'p'
                     ]
                 ]
             )
@@ -998,6 +999,24 @@ class ArchivePage extends Section {
                     'class' => 'betterdocs_archive_description_margin betterdocs-dimension'
                 ]
             ] )
+        );
+    }
+
+    public function list_icon() {
+        $this->customizer->add_setting( 'betterdocs_archive_list_icon', [
+            'default'    => $this->defaults['betterdocs_archive_list_icon'],
+            'capability' => 'edit_theme_options',
+
+        ] );
+
+        $this->customizer->add_control(
+            new WP_Customize_Image_Control(
+                $this->customizer, 'betterdocs_archive_list_icon', [
+                    'section'  => 'betterdocs_archive_page_settings',
+                    'settings' => 'betterdocs_archive_list_icon',
+                    'label'    => __( 'List Icon', 'betterdocs' )
+                ]
+            )
         );
     }
 

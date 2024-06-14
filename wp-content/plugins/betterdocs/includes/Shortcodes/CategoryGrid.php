@@ -56,7 +56,12 @@ class CategoryGrid extends Shortcode {
             'kb_slug'                  => '',
             'multiple_knowledge_base'  => false,
             'disable_customizer_style' => false,
-            'title_tag'                => 'h2'
+            'title_tag'                => 'h2',
+            'category_title_link'      => false,
+            'layout_type'              => '',
+            'list_icon_url'            => '',
+            'list_icon_name'           => 'list',
+            'sidebar_layout'           => ''
         ];
     }
 
@@ -90,15 +95,14 @@ class CategoryGrid extends Shortcode {
                 $_column_val = $this->settings->get( 'column_number' );
             }
 
-            $attributes['class'][]                   = 'docs-col-' . $_column_val;
-            $attributes['data-column_desktop']       = esc_html( $_column_val );
-            $attributes['style'] = "--column: $_column_val;";
+            $attributes['class'][]             = 'docs-col-' . $_column_val;
+            $attributes['data-column_desktop'] = esc_html( $_column_val );
+            $attributes['style']               = "--column: $_column_val;";
 
             if ( $this->isset( 'disable_customizer_style', false ) ) {
                 $attributes['class'][] = 'single-kb';
             }
         }
-
 
         return $attributes;
     }
@@ -120,8 +124,9 @@ class CategoryGrid extends Shortcode {
     }
 
     public function view_params() {
-        $exploremore_btn = $this->settings->get( 'exploremore_btn' );
-        $button_text     = $this->settings->get( 'exploremore_btn_txt' );
+        $exploremore_btn     = $this->settings->get( 'exploremore_btn' );
+        $button_text         = $this->settings->get( 'exploremore_btn_txt' );
+        $category_title_link = isset( $this->attributes['category_title_link'] ) ? $this->attributes['category_title_link'] : '';
 
         $show_button = false;
         if ( $this->attributes['posts_per_page'] == -1 ) {
@@ -169,7 +174,7 @@ class CategoryGrid extends Shortcode {
             'terms_query_args'       => $terms_query,
             'docs_query_args'        => $docs_query,
             'nested_docs_query_args' => $docs_query,
-
+            'list_icon_name'         => $this->attributes['list_icon_name'] == 'list' ? 'list' : ['value' => $this->attributes['list_icon_name']],
             'show_header'            => true,
             'show_list'              => true,
             'show_title'             => true,
@@ -177,7 +182,11 @@ class CategoryGrid extends Shortcode {
             'button_text'            => $button_text,
             'show_button_icon'       => true,
             'button_icon_position'   => true,
-            'button_icon'            => true
+            'button_icon'            => true,
+            'category_title_link'    => $category_title_link,
+            'layout_type'            => $this->attributes['layout_type'],
+            'list_icon_url'          => $this->attributes['list_icon_url'],
+            'sidebar_layout'        => $this->attributes['sidebar_layout']
         ];
     }
 }

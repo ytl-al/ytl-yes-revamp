@@ -257,27 +257,241 @@
                 },
 
                 CAVerification: function (response) {
-
                     var self = this;
                     var params = {
                         mykad: self.eligibility.mykad,
-                        name:self.eligibility.name,
-                        email:self.eligibility.email,
-                        phone:self.eligibility.phone,
-                        PartneReferenceID:self.customer.id,
-                        OCRConfidenceScore:response.sim,
+                        name: self.eligibility.name,
+                        email: self.eligibility.email,
+                        phone: self.eligibility.phone,
+                        PartneReferenceID: self.customer.id,  // Corrected the property name "PartneReferenceID" to "PartnerReferenceID"
+                        OCRConfidenceScore: response.sim,
                     };
                     toggleOverlay();
-                    axios.post(apiEndpointURL_elevate + '/ca-verification' + '?nonce='+yesObj.nonce, params)
+                    axios.post(apiEndpointURL_elevate + '/ca-verification' + '?nonce=' + yesObj.nonce, params)
                         .then((response) => {
-
                             var data = response.data;
-
-                            if (parseInt(data.status) == 1) {
+                            if (parseInt(data.status) === 1) {  // Corrected the comparison operator from "==" to "==="
                                 elevate.redirectToPage('select-sim-type');
                             } else {
-                                toggleOverlay(false);
-                                toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('/compasia-fail')")
+                                if (elevate.lsData.product) {
+                                    self.orderSummary.product = elevate.lsData.product;
+                                }
+
+                                if (self.orderSummary.product.selected.productCode) {
+                                    const mapPlanId = {
+                                        1125: {
+                                            planID: 1161,
+                                            deviceID: 1,
+                                        },
+                                        1127: {
+                                            planID: 1163,
+                                            deviceID: 1,
+                                        },
+                                        1129: {
+                                            planID: 1165,
+                                            deviceID: 2,
+                                        },
+                                        1131: {
+                                            planID: 1167,
+                                            deviceID: 2,
+                                        },
+                                        1133: {
+                                            planID: 1169,
+                                            deviceID: 2,
+                                        },
+                                        1135: {
+                                            planID: 1171,
+                                            deviceID: 3,
+                                        },
+                                        1137: {
+                                            planID: 1173,
+                                            deviceID: 3,
+                                        },
+                                        1139: {
+                                            planID: 1175,
+                                            deviceID: 3,
+                                        },
+                                        1141: {
+                                            planID: 1177,
+                                            deviceID: 4,
+                                        },
+                                        1143: {
+                                            planID: 1179,
+                                            deviceID: 4,
+                                        },
+                                        1145: {
+                                            planID: 1181,
+                                            deviceID: 5,
+                                        },
+                                        1147: {
+                                            planID: 1183,
+                                            deviceID: 5,
+                                        },
+                                        1149: {
+                                            planID: 1185,
+                                            deviceID: 5,
+                                        },
+                                        1151: {
+                                            planID: 1187,
+                                            deviceID: 5,
+                                        },
+                                        1153: {
+                                            planID: 1189,
+                                            deviceID: 6,
+                                        },
+                                        1155: {
+                                            planID: 1191,
+                                            deviceID: 6,
+                                        },
+                                        1157: {
+                                            planID: 1193,
+                                            deviceID: 6,
+                                        },
+                                        1159: {
+                                            planID: 1195,
+                                            deviceID: 6,
+                                        },
+                                        1205: {
+                                            planID: 1209,
+                                            deviceID: 7,
+                                        },
+                                        1207: {
+                                            planID: 1211,
+                                            deviceID: 7,
+                                        },
+                                        1221: {
+                                            planID: 1225,
+                                            deviceID: 8,
+                                        },
+                                        1223: {
+                                            planID: 1227,
+                                            deviceID: 8,
+                                        },
+                                        1213: {
+                                            planID: 1217,
+                                            deviceID: 8,
+                                        },
+                                        1215: {
+                                            planID: 1219,
+                                            deviceID: 8,
+                                        },
+                                        4514:{
+                                            planID:4520,
+                                            deviceId:9,
+                                        },
+                                        4516:{
+                                            planID:4522,
+                                            deviceId:9,
+                                        },
+                                        4518:{
+                                            planID:4524,
+                                            deviceId:9,
+                                        },
+                                        4526:{
+                                            planID:4530,
+                                            deviceId:9,
+                                        },
+                                        4528:{
+                                            planID:4532,
+                                            deviceId:9,
+                                        },
+                                        4534:{
+                                            planID:4538,
+                                            deviceId:9,
+                                        },
+                                        4536:{
+                                            planID:4540,
+                                            deviceId:9,
+                                        },
+                                        4829:{
+                                            planID:4837,
+                                            deviceId:10,
+                                        },
+                                        4831:{
+                                            planID:4839,
+                                            deviceId:10,
+                                        },
+                                        4533:{
+                                            planID:4841,
+                                            deviceId:10,
+                                        },
+                                        4535:{
+                                            planID:4843,
+                                            deviceId:10,
+                                        },
+                                        4869:{
+                                            planID:4875,
+                                            deviceId:11,
+                                        },
+                                        4871:{
+                                            planID:4877,
+                                            deviceId:11,
+                                        },
+                                        4573:{
+                                            planID:4879,
+                                            deviceId:11,
+                                        },
+                                        4813:{
+                                            planID:4817,
+                                            deviceId:11,
+                                        },
+                                        4815:{
+                                            planID:4819,
+                                            deviceId:11,
+                                        },
+                                        4821:{
+                                            planID:4825,
+                                            deviceId:11,
+                                        },
+                                        4823:{
+                                            planID:4827,
+                                            deviceId:11,
+                                        },
+
+
+                                        4845:{
+                                            planID:4851,
+                                            deviceId:11,
+                                        },
+                                        4847:{
+                                            planID:4853,
+                                            deviceId:11,
+                                        },
+                                        4849:{
+                                            planID:4855,
+                                            deviceId:11,
+                                        },
+                                        
+                                        4857:{
+                                            planID:4863,
+                                            deviceId:11,
+                                        },
+                                        4859:{
+                                            planID:4865,
+                                            deviceId:11,
+                                        },
+                                        4861:{
+                                            planID:4867,
+                                            deviceId:11,
+                                        },
+
+                                       
+                                    };
+
+                                    if (mapPlanId[self.orderSummary.product.selected.productCode]) {
+                                        self.upFrontPlanID = mapPlanId[self.orderSummary.product.selected.productCode].planID;
+                                        if (self.upFrontPlanID !== '') {  // Corrected the comparison operator from "!=" to "!=="
+                                            var data = JSON.parse(localStorage.getItem('yesElevate'));
+                                            data.meta.isUpFrontPlanAvailable = 'true';
+                                            data.meta.upFrontPlanID = self.upFrontPlanID;
+                                            var upfrontData = JSON.stringify(data);
+                                            localStorage.setItem('yesElevate', upfrontData);
+                                            toggleModalAlert('Error', this.renderText('NRIC_is_not_eligible'), "elevate.redirectToPage('eligibility-fail-upfront')");
+                                        }
+                                    } else {
+                                        toggleModalAlert('Error', this.renderText('NRIC_is_not_eligible'), "elevate.redirectToPage('eligibility-failure')");
+                                    }
+                                }
                             }
                         })
                         .catch((error) => {
@@ -286,32 +500,252 @@
                         });
                 },
 
-                OCVerification: function (response) {
-                    var self = this;
-                    var params = {
-                        mykad: self.eligibility.mykad,
-                        name:self.eligibility.name,
-                        OCRConfidenceScore:response.sim,
-                    };
 
-                    toggleOverlay();
-                    axios.post(apiEndpointURL_elevate + '/orix-check' + '?nonce='+yesObj.nonce, params)
-                        .then((response) => {
-                            var data = response.data.data;
-                            console.log(data);
-                            if (data.result == 'Success') {
-                                elevate.redirectToPage('select-sim-type');
-                            } else {
-                                toggleOverlay(false);
-                                toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('/compasia-fail')")
+            OCVerification: function (response) {
+                var self = this;
+                var params = {
+                    mykad: self.eligibility.mykad,
+                    name:self.eligibility.name,
+                    OCRConfidenceScore:response.sim,
+                };
+
+                toggleOverlay();
+                axios.post(apiEndpointURL_elevate + '/orix-check' + '?nonce='+yesObj.nonce, params)
+                    .then((response) => {
+                        var data = response.data.data;
+                        if (data.result == 'Success') {
+                            elevate.redirectToPage('select-sim-type');
+                        } else {
+                            
+                            if (elevate.lsData.product) {
+                                self.orderSummary.product = elevate.lsData.product;
                             }
-                        })
-                        .catch((error) => {
-                            toggleOverlay(false);
-                            console.log(error);
-                        });
-                    },
-                                    redirectYWOS:function (){
+
+                            if (self.orderSummary.product.selected.productCode) {
+                                const mapPlanId = {
+                                    1125: {
+                                            planID: 1161,
+                                            deviceID: 1,
+                                        },
+                                        1127: {
+                                            planID: 1163,
+                                            deviceID: 1,
+                                        },
+                                        1129: {
+                                            planID: 1165,
+                                            deviceID: 2,
+                                        },
+                                        1131: {
+                                            planID: 1167,
+                                            deviceID: 2,
+                                        },
+                                        1133: {
+                                            planID: 1169,
+                                            deviceID: 2,
+                                        },
+                                        1135: {
+                                            planID: 1171,
+                                            deviceID: 3,
+                                        },
+                                        1137: {
+                                            planID: 1173,
+                                            deviceID: 3,
+                                        },
+                                        1139: {
+                                            planID: 1175,
+                                            deviceID: 3,
+                                        },
+                                        1141: {
+                                            planID: 1177,
+                                            deviceID: 4,
+                                        },
+                                        1143: {
+                                            planID: 1179,
+                                            deviceID: 4,
+                                        },
+                                        1145: {
+                                            planID: 1181,
+                                            deviceID: 5,
+                                        },
+                                        1147: {
+                                            planID: 1183,
+                                            deviceID: 5,
+                                        },
+                                        1149: {
+                                            planID: 1185,
+                                            deviceID: 5,
+                                        },
+                                        1151: {
+                                            planID: 1187,
+                                            deviceID: 5,
+                                        },
+                                        1153: {
+                                            planID: 1189,
+                                            deviceID: 6,
+                                        },
+                                        1155: {
+                                            planID: 1191,
+                                            deviceID: 6,
+                                        },
+                                        1157: {
+                                            planID: 1193,
+                                            deviceID: 6,
+                                        },
+                                        1159: {
+                                            planID: 1195,
+                                            deviceID: 6,
+                                        },
+                                        1205: {
+                                            planID: 1209,
+                                            deviceID: 7,
+                                        },
+                                        1207: {
+                                            planID: 1211,
+                                            deviceID: 7,
+                                        },
+                                        1221: {
+                                            planID: 1225,
+                                            deviceID: 8,
+                                        },
+                                        1223: {
+                                            planID: 1227,
+                                            deviceID: 8,
+                                        },
+                                        1213: {
+                                            planID: 1217,
+                                            deviceID: 8,
+                                        },
+                                        1215: {
+                                            planID: 1219,
+                                            deviceID: 8,
+                                        },
+                                        4514:{
+                                            planID:4520,
+                                            deviceId:9,
+                                        },
+                                        4516:{
+                                            planID:4522,
+                                            deviceId:9,
+                                        },
+                                        4518:{
+                                            planID:4524,
+                                            deviceId:9,
+                                        },
+                                        4526:{
+                                            planID:4530,
+                                            deviceId:9,
+                                        },
+                                        4528:{
+                                            planID:4532,
+                                            deviceId:9,
+                                        },
+                                        4534:{
+                                            planID:4538,
+                                            deviceId:9,
+                                        },
+                                        4536:{
+                                            planID:4540,
+                                            deviceId:9,
+                                        },
+//SamsungA15
+4829:{
+                                            planID:4837,
+                                            deviceId:10,
+                                        },
+                                        4831:{
+                                            planID:4839,
+                                            deviceId:10,
+                                        },
+                                        4533:{
+                                            planID:4841,
+                                            deviceId:10,
+                                        },
+                                        4535:{
+                                            planID:4843,
+                                            deviceId:10,
+                                        },
+                                        4869:{
+                                            planID:4875,
+                                            deviceId:11,
+                                        },
+                                        4871:{
+                                            planID:4877,
+                                            deviceId:11,
+                                        },
+                                        4573:{
+                                            planID:4879,
+                                            deviceId:11,
+                                        },
+                                        4813:{
+                                            planID:4817,
+                                            deviceId:11,
+                                        },
+                                        4815:{
+                                            planID:4819,
+                                            deviceId:11,
+                                        },
+                                        4821:{
+                                            planID:4825,
+                                            deviceId:11,
+                                        },
+                                        4823:{
+                                            planID:4827,
+                                            deviceId:11,
+                                        },
+                                       4845:{
+                                            planID:4851,
+                                            deviceId:11,
+                                        },
+                                        4847:{
+                                            planID:4853,
+                                            deviceId:11,
+                                        },
+                                        4849:{
+                                            planID:4855,
+                                            deviceId:11,
+                                        },
+                                        
+                                        4857:{
+                                            planID:4863,
+                                            deviceId:11,
+                                        },
+                                        4859:{
+                                            planID:4865,
+                                            deviceId:11,
+                                        },
+                                        4861:{
+                                            planID:4867,
+                                            deviceId:11,
+                                        },
+
+
+
+                                };
+
+                                if (mapPlanId[self.orderSummary.product.selected.productCode]) {
+                                    self.upFrontPlanID = mapPlanId[self.orderSummary.product.selected.productCode].planID;
+                                    if(self.upFrontPlanID !=''){
+                                        var data = JSON.parse(localStorage.getItem('yesElevate'))
+                                        data.meta.isUpFrontPlanAvailable='true';
+                                        data.meta.upFrontPlanID=self.upFrontPlanID;
+                                        var upfrontData=JSON.stringify(data)
+                                        localStorage.setItem('yesElevate',upfrontData)
+                                        toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('eligibility-fail-upfront')");
+                                    }
+                                }else{
+                                    
+                                    toggleModalAlert('Error',this.renderText('NRIC_is_not_eligible'),"elevate.redirectToPage('eligibility-failure')");
+                                }
+                            }
+                        }
+                    })
+                    .catch((error) => {
+                        toggleOverlay(false);
+                        console.log(error);
+                    });
+                },
+
+                redirectYWOS:function (){
                     var self = this;
                     toggleOverlay();
                     ywos.buyPlan(self.selectedPlan);

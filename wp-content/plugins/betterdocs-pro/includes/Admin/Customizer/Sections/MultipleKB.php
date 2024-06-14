@@ -4,7 +4,6 @@ namespace WPDeveloper\BetterDocsPro\Admin\Customizer\Sections;
 
 use WP_Customize_Control;
 use WP_Customize_Image_Control;
-use WP_Customize_Media_Control;
 use WPDeveloper\BetterDocs\Admin\Customizer\Controls\TitleControl;
 use WPDeveloper\BetterDocs\Admin\Customizer\Controls\SelectControl;
 use WPDeveloper\BetterDocs\Admin\Customizer\Controls\ToggleControl;
@@ -101,9 +100,9 @@ class MultipleKB extends Section {
 
     public function content_area_bg_image() {
         $this->customizer->add_setting( 'betterdocs_mkb_background_image', [
-            'default'           => $this->defaults['betterdocs_mkb_background_image'],
-            'capability'        => 'edit_theme_options',
-            'transport'         => 'postMessage',
+            'default'    => $this->defaults['betterdocs_mkb_background_image'],
+            'capability' => 'edit_theme_options',
+            'transport'  => 'postMessage'
         ] );
 
         $this->customizer->add_control(
@@ -1156,6 +1155,24 @@ class MultipleKB extends Section {
         );
     }
 
+    public function show_category_icon() {
+        $this->customizer->add_setting( 'betterdocs_mkb_page_show_category_icon', [
+            'default'           => $this->defaults['betterdocs_mkb_page_show_category_icon'],
+            'capability'        => 'edit_theme_options',
+            'sanitize_callback' => [$this->sanitizer, 'checkbox']
+        ] );
+
+        $this->customizer->add_control( new ToggleControl(
+            $this->customizer, 'betterdocs_mkb_page_show_category_icon', [
+                'label'    => __( 'Show Category Icon', 'betterdocs' ),
+                'section'  => 'betterdocs_mkb_settings',
+                'settings' => 'betterdocs_mkb_page_show_category_icon',
+                'type'     => 'light', // light, ios, flat
+                'priority' => 24
+            ]
+        ) );
+    }
+
     public function cat_icon_size() {
         $this->customizer->add_setting( 'betterdocs_mkb_cat_icon_size', [
             'default'           => $this->defaults['betterdocs_mkb_cat_icon_size'],
@@ -1589,6 +1606,25 @@ class MultipleKB extends Section {
                 'section'  => 'betterdocs_mkb_settings',
                 'priority' => 33
             ] )
+        );
+    }
+
+    public function column_list_icon() {
+        $this->customizer->add_setting( 'betterdocs_mkb_column_list_icon', [
+            'default'    => $this->defaults['betterdocs_mkb_column_list_icon'],
+            'capability' => 'edit_theme_options',
+
+        ] );
+
+        $this->customizer->add_control(
+            new WP_Customize_Image_Control(
+                $this->customizer, 'betterdocs_mkb_column_list_icon', [
+                    'section'  => 'betterdocs_mkb_settings',
+                    'settings' => 'betterdocs_mkb_column_list_icon',
+                    'label'    => __( 'Docs List Icon', 'betterdocs' ),
+                    'priority' => 33
+                ]
+            )
         );
     }
 
@@ -2342,6 +2378,25 @@ class MultipleKB extends Section {
                     'label'    => __( 'Popular Title Color Hover', 'betterdocs-pro' ),
                     'section'  => 'betterdocs_mkb_settings',
                     'settings' => 'betterdocs_mkb_popular_title_color_hover',
+                    'priority' => 38
+                ]
+            )
+        );
+    }
+
+    public function popular_list_icon() {
+        $this->customizer->add_setting( 'betterdocs_mkb_popular_list_icon', [
+            'default'    => $this->defaults['betterdocs_mkb_popular_list_icon'],
+            'capability' => 'edit_theme_options',
+
+        ] );
+
+        $this->customizer->add_control(
+            new WP_Customize_Image_Control(
+                $this->customizer, 'betterdocs_mkb_popular_list_icon', [
+                    'section'  => 'betterdocs_mkb_settings',
+                    'settings' => 'betterdocs_mkb_popular_list_icon',
+                    'label'    => __( 'Popular List Icon', 'betterdocs' ),
                     'priority' => 38
                 ]
             )

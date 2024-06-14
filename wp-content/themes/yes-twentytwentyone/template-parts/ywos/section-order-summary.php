@@ -48,6 +48,7 @@
             <div class="col-7 py-2">
                 <h5 style="color: #000000;text-transform: uppercase;"><strong>{{ renderSummaryText('strTotal') }}</strong></h5>
             </div>
+     
             <div class="col-5 py-2 text-end" v-if="(ywos?.lsData.meta?.customerDetails?.upFrontPayment=='true')">
                 <h5 class="large" style="color: #000000;" ><strong>RM{{ formatPrice(parseFloat((orderSummary.due.total)-(orderSummary.due.foreignerDeposit)).toFixed(2)) }}</strong></h5>
             </div>
@@ -72,7 +73,7 @@
             <p>{{ renderSummaryText('strSupplimentaryBundledLines') }}</p>
             <div class="row mb-0" v-for="(subPlan) in orderSummary.plan.supplementaryBundlePlans">
                 <div class="col-8">
-                    <p class="mb-0 ps-2">{{ subPlan.planName }}</p>
+                    <p class="mb-0 ps-2">{{  }}</p>
                 </div>
                 <div class="col-4 text-end">
                     <p class="large"><strong>RM{{ parseFloat(subPlan.planPrice).toFixed(2) }}</strong></p>
@@ -83,6 +84,16 @@
 <div class="row" v-if="orderSummary.plan.planType != 'prepaid' && ywos?.lsData?.meta.planID != '1229' && ywos?.lsData?.meta.planID != '1231' && ywos?.lsData?.meta.orderSummary.plan.displayName !='Infinite Basic RAHMAH 1' && ywos?.lsData?.meta.orderSummary.plan.displayName !='Infinite Basic RAHMAH 2' && ywos?.lsData?.meta.orderSummary.plan.displayName !='Infinite Basic RAHMAH 3' && ywos?.lsData?.meta.orderSummary.plan.displayName !='Power 35 RAHMAH'">
             <div class="col-12 mb-3">
                 <p class="large">{{ orderSummary.plan.displayName }}</p>
+            </div>
+        </div>
+        <div class="row" v-if="ywos?.lsData?.meta.planID == 4546">
+            <div class="col-12 mb-3">
+                <p class="large">Infinite Basic RAHMAH 2 Oppo A79 Black</p>
+            </div>
+        </div>
+        <div class="row" v-if="ywos?.lsData?.meta.planID == 4548">
+            <div class="col-12 mb-3">
+                <p class="large">Infinite Basic RAHMAH 2 Oppo A79 Purple</p>
             </div>
         </div>
          <div class="row" v-if="ywos?.lsData?.meta.planID == 1229">
@@ -182,7 +193,7 @@
         </div>
         <div class="row" v-if="ywos?.lsData?.meta.planID == 1272">
             <div class="col-12 mb-3">
-                <p class="large">Infinite Basic RAHMAH 1 Vivo Y27 5G Purple</p>
+                <p class="large">Power 35 RAHMAH ZTE Blade A73 Grey</p>
             </div>
         </div>
 

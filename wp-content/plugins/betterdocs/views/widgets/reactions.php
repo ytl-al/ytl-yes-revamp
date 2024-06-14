@@ -2,7 +2,7 @@
     <?php echo $wrapper_attr; ?>>
     <?php
         if ( $reactions_text ) {
-            echo '<div class="betterdocs-article-reactions-heading"><h5>' . esc_html( $reactions_text ) . '</h5></div>';
+            echo '<div class="betterdocs-article-reactions-heading"><h5>' . esc_html__( $reactions_text ) . '</h5></div>';
         }
     ?>
     <ul class="betterdocs-article-reaction-links">

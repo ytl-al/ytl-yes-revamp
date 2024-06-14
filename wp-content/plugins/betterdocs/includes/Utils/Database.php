@@ -34,7 +34,12 @@ class Database {
             $this->cache[ $key ] = get_option( $key, $default );
         }
 
-        return $this->cache[ $key ];
+        // update the cache when new values are updated(for wpml specifically, other usecase might be available)
+        if ( $this->cache[$key] != get_option( $key, $default ) ) {
+            $this->cache[$key] = get_option( $key, $default );
+        }
+
+        return $this->cache[$key];
     }
 
     /**

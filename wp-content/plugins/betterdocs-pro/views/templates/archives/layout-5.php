@@ -34,7 +34,8 @@
                     $_shortcode_attributes = [
                         'title_tag'     => $title_tag,
                         'terms_order'   => $terms_order,
-                        'terms_orderby' => esc_html( $terms_orderby )
+                        'terms_orderby' => esc_html( $terms_orderby ),
+                        'show_icon'     => betterdocs()->customizer->defaults->get( 'betterdocs_doc_page_show_category_icon' )
                     ];
 
                     if ( is_tax( 'knowledge_base' ) ) {
@@ -47,14 +48,19 @@
             </div>
             <?php
                 if ( $popular_docs ) {
-                    $popular_doc_text       = betterdocs()->settings->get( 'betterdocs_popular_docs_text', __( 'Popular Docs', 'betterdocs-pro' ) );
-                    $popular_posts_per_page = betterdocs()->settings->get( 'betterdocs_popular_docs_number', 10 );
+                    $attributes = betterdocs()->template_helper->shortcode_atts( [
+                        'title'               => betterdocs()->settings->get( 'betterdocs_popular_docs_text', __( 'Popular Docs', 'betterdocs-pro' ) ),
+                        'post_per_page'       => betterdocs()->settings->get( 'betterdocs_popular_docs_number' ),
+                        'list_icon_url'       => ! empty ( betterdocs()->customizer->defaults->get( 'betterdocs_doc_page_popular_list_icon' ) ) ? betterdocs()->customizer->defaults->get( 'betterdocs_doc_page_popular_list_icon' ) : ( ! empty( betterdocs()->settings->get( 'docs_list_icon' ) ) ? betterdocs()->settings->get( 'docs_list_icon' )['url'] : '' ),
+                        'layout_type'        => 'template'
+                    ], 'betterdocs_popular_articles', '' );
 
                     echo '<div class="betterdocs-popular-article-list-wrapper">';
-                        echo do_shortcode( '[betterdocs_popular_articles title="' . $popular_doc_text . '" post_per_page="' . $popular_posts_per_page . '"]' );
+                    echo do_shortcode( '[betterdocs_popular_articles ' . $attributes . ']' );
                     echo '</div>';
                 }
             ?>
+
         </div>
     </div>
     <?php betterdocs()->views->get( 'templates/faq' );?>

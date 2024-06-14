@@ -73,7 +73,7 @@ class Admin extends BaseController
 	public function elevate_pull()
 	{
         if (isset($_POST['submit'])) {
-           (new \Inc\Base\Model)->pullProductData();
+            (new \Inc\Base\Model)->pullProductData();
         }
 
         require_once WP_PLUGIN_DIR .'/ytl-elevate/templates/settings_pull.php';

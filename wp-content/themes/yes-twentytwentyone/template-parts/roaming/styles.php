@@ -749,7 +749,7 @@
 
 #roaming-rates-section .row-roaming h4.internet-rates sub {
     font-size: 20px;
-    bottom: 0;
+    bottom:0;
 }
 
 #roaming-rates-section .row-roaming p.small {

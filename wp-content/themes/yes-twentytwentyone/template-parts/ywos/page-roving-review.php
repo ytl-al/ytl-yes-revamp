@@ -8,7 +8,7 @@
 
 
 <!-- Vue Wrapper STARTS -->
-<div id="main-vue" style="display: none;">
+<div id="main-vue">
     <!-- Banner Start -->
 	<section id="grey-innerbanner">
 		<div class="container">
@@ -519,6 +519,7 @@
                     axios.post(apiEndpointURL + '/create-ywos-roving-order' + '?nonce=' + yesObj.nonce, params)
                         .then((response) => {
                             var data = response.data;
+                            console.log(data);
                             if(data.responseCode==0){
                                 // self.validateReview();
                                 ywos.redirectToPage('roving-thank-you');

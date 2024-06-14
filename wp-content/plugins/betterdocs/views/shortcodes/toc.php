@@ -1,10 +1,14 @@
 <?php
     /** @var \WPDeveloper\BetterDocs\Shortcodes\ToC $widget */
-    $toc_data = $widget->format_toc_data( $post->post_content, $htags, $hierarchy );
-
-    if ( empty( $toc_data->items ) ) {
+    if ($post !== null) {
+        $toc_data = $widget->format_toc_data($post->post_content, $htags, $hierarchy);
+        if (empty($toc_data->items)) {
+            return;
+        }
+    } else {
         return;
     }
+    
 
     $collapsible_arrow = '';
     $wrapper_classes   = ['betterdocs-toc'];
@@ -24,7 +28,7 @@
     }
 ?>
 
-<div class="<?php esc_attr_e( implode( ' ', $wrapper_classes ) );?>">
+<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) );?>">
     <span class="toc-title">
         <?php echo $toc_title . $collapsible_arrow; ?>
     </span>

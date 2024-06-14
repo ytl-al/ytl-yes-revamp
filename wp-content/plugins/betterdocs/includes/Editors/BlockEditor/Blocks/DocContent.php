@@ -10,7 +10,9 @@ class DocContent extends Block {
     }
 
     protected $editor_styles = [
-        'betterdocs-single'
+        'betterdocs-single',
+        'betterdocs-encyclopedia'
+
     ];
 
     public function get_default_attributes() {

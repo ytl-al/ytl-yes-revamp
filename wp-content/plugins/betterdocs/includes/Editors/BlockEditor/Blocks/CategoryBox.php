@@ -31,6 +31,7 @@ class CategoryBox extends Block {
         return [
             'blockId'           => '',
             'categories'        => [],
+            'selectKB'          => '',
             'includeCategories' => '',
             'excludeCategories' => '',
             'boxPerPage'        => 9,
@@ -103,8 +104,10 @@ class CategoryBox extends Block {
         ];
 
         $default_multiple_kb = betterdocs()->settings->get( 'multiple_kb' );
+        $kb_slug             = ! empty( $attributes['selectKB'] ) && isset( $attributes['selectKB'] ) ? json_decode( $attributes['selectKB'] )->value : '';
+
         if ( is_tax( 'knowledge_base' ) && $default_multiple_kb == 1 ) {
-            $object = get_queried_object();
+            $object                     = get_queried_object();
             $terms_object['meta_query'] = [
                 'relation' => 'OR',
                 [
@@ -115,15 +118,26 @@ class CategoryBox extends Block {
             ];
         }
 
+        if( ! empty( $kb_slug ) ) {
+            $terms_object['meta_query'] = [
+                'relation' => 'OR',
+                [
+                    'key'     => 'doc_category_knowledge_base',
+                    'value'   => $kb_slug,
+                    'compare' => 'LIKE'
+                ]
+            ];
+        }
+
         $_params = [
-            'wrapper_attr'       => $wrapper_attr,
-            'inner_wrapper_attr' => $inner_wrapper_attr,
-            'terms_query_args'   => $terms_object,
-            'widget_type'        => 'category-box',
+            'wrapper_attr'            => $wrapper_attr,
+            'inner_wrapper_attr'      => $inner_wrapper_attr,
+            'terms_query_args'        => betterdocs()->query->terms_query( $terms_object ),
+            'widget_type'             => 'category-box',
             'multiple_knowledge_base' => $default_multiple_kb,
-            'kb_slug'                 => '',
-            'nested_subcategory' => false,
-            'show_header'        => true
+            'nested_subcategory'      => false,
+            'show_header'             => true,
+            'show_description'        => false
         ];
 
         if ( $attributes['layout'] === 'layout-2' ) {

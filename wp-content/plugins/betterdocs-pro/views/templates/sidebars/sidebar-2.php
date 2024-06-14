@@ -41,8 +41,16 @@
                 'show_icon'      => false,
                 'show_count'     => false,
                 'posts_per_page' => -1,
-                'title_tag'      => betterdocs()->template_helper->is_valid_tag( $title_tag )
+                'title_tag'      => betterdocs()->template_helper->is_valid_tag( $title_tag ),
+                'layout_type'    => isset( $layout_type ) ? $layout_type : '',
             ];
+
+            // if ( isset( $layout_type ) && $layout_type == 'template' ) {
+            //     $_shortcode_attr['list_icon_url'] = ! empty( betterdocs()->customizer->defaults->get( 'betterdocs_sidbebar_item_list_icon' ) ) ? betterdocs()->customizer->defaults->get( 'betterdocs_sidbebar_item_list_icon' ) : ( ! empty( betterdocs()->settings->get( 'docs_list_icon' ) ) ? betterdocs()->settings->get( 'docs_list_icon' )['url'] : '' );
+            // }
+            if( isset( $layout_type ) && $layout_type == 'block' ) {
+                $_shortcode_attr['sidebar_layout'] = '';
+            }
 
             if ( $multiple_kb ) {
                 $_shortcode_attr['multiple_knowledge_base'] = true;
