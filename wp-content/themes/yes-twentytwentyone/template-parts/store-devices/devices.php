@@ -117,7 +117,7 @@ foreach ($mergedProductData as $product) {
             <!-- <h3 class="name"><?= esc_html(ucfirst($product['post_promotion'])) ?></h3> -->
            
 			<!-- <h3><?= esc_html(($product['post_brand']) === 'zte' ? 'ZTE' : ucfirst($product['post_brand'])) ?></h3> -->
-            <h3>
+            <h3 class="device-brand">
                 <?php if(strtolower($product['post_brand']) === 'zte'){
                     echo "ZTE";
                     
@@ -139,7 +139,7 @@ foreach ($mergedProductData as $product) {
                 }  ?>
             </h3>
             
-                <h2> <?= esc_html($product['device_name']) ?></h2>
+                <h2 class="device-title"> <?= esc_html($product['device_name']) ?></h2>
           
 
             <p class="price">RRP RM <?= esc_html(number_format($product['device_rrp'])) ?></p>
@@ -159,7 +159,8 @@ foreach ($mergedProductData as $product) {
 } else {
     $device_price = isset($product['device_price_mth']) ? $product['device_price_mth'] : '0';
    // $brnd= array('apple','samsung');
-    if($product['post_promotion'] == "Yes 5G RAHMAH" || $product['device_id']== '30' || $product['device_id']== '24'){
+   //if($product['post_promotion'] == "Pakej SuperJimat" || $product['device_id']== '30' || $product['device_id']== '24'){
+    if($product['post_promotion'] == "Pakej SuperJimat"){
         echo '<p class="f-price"><span>Device</span><br><b class="f-price-rm">RM</b>' . (strpos($device_price, '/mth') !== false ? str_replace('/mth', '<sub>/mth</sub>', esc_html($device_price)) : esc_html($device_price)) . '</p>';
     }else{
         echo '<p class="f-price"><span>From</span><br><b class="f-price-rm">RM</b>' . (strpos($device_price, '/mth') !== false ? str_replace('/mth', '<sub>/mth</sub>', esc_html($device_price)) : esc_html($device_price)) . '</p>';

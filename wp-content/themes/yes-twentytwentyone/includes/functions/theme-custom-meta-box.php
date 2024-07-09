@@ -110,26 +110,26 @@ if (is_admin()) {
                 'context'       => 'normal',
                 'revision'      => true,
                 'fields' => [
+
                     
                     [
                         'type' => 'text',
                         'id'   => $prefix . 'device_id',
                         'name' => 'Device Id<sup>*</sup>',
+                        'placeholder' => 'Device ID',
                     ],
-                    // [
-                    //     'type' => 'text',
-                    //     'id'   => $prefix . 'device_name',
-                    //     'name' => 'Device Name <sup>*</sup>',
-                    // ],
+                   
                     [
                         'type' => 'text',
                         'id'   => $prefix . 'device_price_mth',
                         'name' => 'Device Price Monthly<sup>*</sup>',
+                        'placeholder' => 'XX/mth',
                     ],
                     [
                         'type' => 'number',
                         'id'   => $prefix . 'device_rrp',
                         'name' => 'Device RRP<sup>*</sup>',
+                        'placeholder' => 'XXX',
                     ],
                    
                     [
@@ -143,14 +143,15 @@ if (is_admin()) {
                             'store'  => 'Store',
                         ],
                     ],
-					[
+                    [
                         'type'    => 'text',
                         'id'      => $prefix . 'device_promotion_label',
                         'name'    => 'Promotion Label <sup>*</sup>',
                         'placeholder' => 'Enter Promotion Label',
+                        'default'      => ' Yes 5G RAHMAH', 
                         
                     ],
-                    [
+                     [
                         'type'    => 'checkbox',
                         'id'      => $prefix . 'device_features_free',
                         'name'    => 'Device Features Free <sup>*</sup>',
@@ -206,6 +207,7 @@ if (is_admin()) {
             $meta_custom    = new AT_Meta_Box($config_custom_fields);
             $meta_fields    = [
                 ['type' => 'text',      'id' => $prefix . "operator_name",        'name' => 'Roaming Operator Name <sup>*</sup>'],
+                ['type' => 'select',    'id' => $prefix . "internet_asean_plus",  'name' => 'Roaming Internet Asean plus<sup>*</sup>', 'options' => ['' => 'Select Type', 'NoDay' => 'No Day', '1Day' => '1 Day', '3Day' => '3 Day', '7Day' => '7 Day']],
                 ['type' => 'text',      'id' => $prefix . "internet_rate",        'name' => 'Roaming Internet Rate <sup>*</sup>'],
                 ['type' => 'select',    'id' => $prefix . "internet_rate_type",   'name' => 'Roaming Internet Rate Type <sup>*</sup>', 'options' => ['' => 'Select Type', '/MB' => 'MB', '/Day' => 'Day', '/Week' => 'Week', '/Month' => 'Month']],
                 ['type' => 'text',      'id' => $prefix . "daily_quota",          'name' => 'Roaming Daily Quota'],
@@ -239,9 +241,8 @@ if (is_admin()) {
                     default:
                 }
             }
-
+            
             $meta_custom->addRepeaterBlock($prefix . "operator", ['name' => 'Telcos', 'fields' => $block_fields]);
-
             $meta_custom->Finish();
         }
 

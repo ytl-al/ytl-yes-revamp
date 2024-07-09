@@ -54,8 +54,10 @@
                         'callToMalaysia'    => $operator['yesmy_roaming_call_back'],
                         'callToOther'       => $operator['yesmy_roaming_call_other_country'],
                         'receivingCallRate' => $operator['yesmy_roaming_receiving_calls'],
-                        'smsRate'           => $operator['yesmy_roaming_sms']
+                        'smsRate'           => $operator['yesmy_roaming_sms'],
+                        'aseanPlusCountries' => isset($operator['yesmy_roaming_internet_asean_plus']) ? $operator['yesmy_roaming_internet_asean_plus'] : '',    
                     ];
+                    // die();
                     $data_roaming[$post->ID][]  = $data;
 
                     // print_r( $topup_arr_operators );

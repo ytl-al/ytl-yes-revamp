@@ -674,7 +674,7 @@ function PushCTanalytics(planID, clickedButton) {
             cardTitle = $(clickedButton).closest('.card-body').find('.plan-details-list > h3').text();
             // $(clickedButton).closest('.card-body').find('.plan-details-list').text(cardTitle);
             eventType = "Rahmah/Broadband - Get Plan";
-            console.log(cardTitle,'cardTitle');
+           // console.log(cardTitle,'cardTitle');
         }
 
         // Push CleverTap event
@@ -684,6 +684,105 @@ function PushCTanalytics(planID, clickedButton) {
             });
         }
     } else {
-        console.log('Something Wrong');
+        //console.log('Something Wrong');
     }
 }
+//function for device page
+function extractDevicesData(planElement) {
+    var data = {
+        planName: planElement.data('plan')+ ' ' + planElement.data('displaydevicename'),
+        planID: planElement.find('.btn-getplan')?.attr('href')?.split('/')?.pop(),
+        totalAmountWithoutSST: planElement.find('.price').text().replace('RRP RM ', '')
+    };
+    return data;
+} 
+ 
+$('.btn-getplan').on('click', function(event) {
+    event.preventDefault();
+    var planElement = $(this).closest('.storegrid');
+    // console.log(planElement,'planElement');
+    var data = extractDevicesData(planElement);
+    var pushData = [{
+        'name': data.planName,
+        'id': data.planID,
+        'price': data.totalAmountWithoutSST,
+        'list_name': 'Product Page'
+    }];
+   // console.log(pushData, 'pushData');
+    pushAnalytics('impressions', pushData);
+    window.location.href = $(this).attr('href');
+});
+
+// function for postpaid, prepaid & broadband
+function extractData(element, planType) {
+    var data = {};
+ 
+    switch (planType) {
+        case 'postpaid':
+            data = {
+                planName: element.find('.post-card-title').text().trim(),
+                planID: element.find('a')?.attr('href')?.split('/')?.pop(),
+                totalAmountWithoutSST: element.find('h1').text().replace('RM', '').replace('/mth', '').trim(),
+            };
+            break;
+        case 'prepaid':
+            data = {
+                planName: element.find('.prepaid-card-title').text().trim(),
+                planID: element.find('a').attr('href')?.split('/')?.pop(),
+                totalAmountWithoutSST: element.find('h2').text().replace('RM', '').trim(),
+            };
+            break;
+        case 'broadband':
+            data = {
+                planName: element.find('.plan-details-list p').text().trim(),
+                planID: element.find('a').attr('href').split('/').pop(),
+                totalAmountWithoutSST: element.find('.price-left h2').text().replace('RM', '').replace('/mth', '').trim(),
+            };
+            break;
+    }
+ 
+    return data;
+}
+ 
+$(document).ready(function() {
+    // Event listeners for each type of plan
+    $('.btn-postpaid').on('click', function(event) {
+        event.preventDefault();
+        var data = extractData($(this), 'postpaid');
+        var pushData = [{
+            'name': data.planName,
+            'id': data.planID,
+            'price': data.totalAmountWithoutSST,
+            'list_name': 'Product Page'
+        }];
+        pushAnalytics('impressions', pushData);
+        window.location.href = $(this).find('a').attr('href');
+    });
+ 
+    $('.btn-prepaid').on('click', function(event) {
+        event.preventDefault();
+        var data = extractData($(this), 'prepaid');
+        var pushData = [{
+            'name': data.planName,
+            'id': data.planID,
+            'price': data.totalAmountWithoutSST,
+            'list_name': 'Product Page'
+        }];
+        pushAnalytics('impressions', pushData);
+        window.location.href = $(this).find('a').attr('href');
+    });
+ 
+    $('.btn-broadband').on('click', function(event) {
+        event.preventDefault();
+        var data = extractData($(this), 'broadband');
+        var pushData = [{
+            'name': data.planName,
+            'id': data.planID,
+            'price': data.totalAmountWithoutSST,
+            'list_name': 'Product Page'
+        }];
+        pushAnalytics('impressions', pushData);
+        window.location.href = $(this).find('a').attr('href');
+    });
+});
+

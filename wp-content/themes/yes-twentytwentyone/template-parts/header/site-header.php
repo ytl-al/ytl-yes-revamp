@@ -195,11 +195,12 @@ $path = plugin_basename(__DIR__).'/menu.json';
                                                     <?php if (has_nav_menu('bs-voice-communication')) wp_nav_menu(['theme_location' => 'bs-voice-communication', 'container' => false, 'items_wrap' => '%3$s']); ?>
                                                 </ul>
                                             </li>
-                                            <!-- <li>
+                                            <li class="nav-item dropdown mega-dropdown">
                                                <ul>
-                                                  <li class="dropdown-header"><?php echo esc_html__('Internet of Things', 'yes.my'); ?></li>                                                                                            
+                                                  <li class="dropdown-header"><?php echo esc_html__('Internet of Things', 'yes.my'); ?></li>     
+                                                  <?php if (has_nav_menu('bs-internet-of-things')) wp_nav_menu(['theme_location' => 'bs-internet-of-things', 'container' => false, 'items_wrap' => '%3$s']); ?>                                                                               
                                                </ul>
-                                            </li> -->
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>

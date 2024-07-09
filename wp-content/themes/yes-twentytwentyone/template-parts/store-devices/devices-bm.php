@@ -157,7 +157,7 @@ foreach ($mergedProductData as $product) {
 
 					if (!empty($product['device_features_free'])) {
 						if ($product['device_features_free'] == 1) {
-							echo '<p class="free-tag"><span>Peranti</span><br><b>PERCUMA</b></p>';
+							echo '<p class="free-tag-bm"><span>Peranti</span><br><b>PERCUMA</b></p>';
 						} else {
 							$device_price = isset($product['device_price_mth']) ? $product['device_price_mth'] : '0';
 							echo '<p class="free-tag">' . (strpos($device_price, '/mth') !== false ? str_replace('/mth', '<sub>/mth</sub>', esc_html($device_price)) : esc_html($device_price)) . '</p>';

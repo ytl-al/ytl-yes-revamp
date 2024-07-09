@@ -4,22 +4,47 @@
 <section class="hero-slider-section">
     <div class="hero-slider slider">
 
-<div>
+<!-- <div>
  <img src="/wp-content/uploads/2024/05/lightningspeed-honorx7b-web-scaled.webp" class="w-100 d-none d-lg-block" alt="...">
  <img src="/wp-content/uploads/2024/05/lightningspeed-honorx7b-mobile.webp" class="w-100 d-block d-md-block d-lg-none" alt="...">           
-</div>
-   
-<div class="slick-slide">  
-            <img src="/wp-content/uploads/2024/05/superjimat-power35webbanner-mayupdate-desktop-scaled.webp" class="w-100 d-none d-lg-block"
+</div> -->
+
+<div>  
+            <img src="/wp-content/uploads/2024/07/4phones-desktopbanner-en-scaled.webp" class="w-100 d-none d-lg-block"
                 alt="...">
-            <img src="/wp-content/uploads/2024/05/superjimat-power35webbanner-mayupdate-mobile.webp"
+            <img src="/wp-content/uploads/2024/07/4phones-mob-banner-en.webp"
                 class="w-100 d-block d-md-block d-lg-none" alt="...">
 
             <div class="inner-content-sec">
-                <h1 style="text-align:left">5G plans with<br>
-                    BIG savings!</h1>
+            <div class="title-sec">
+                <img decoding="async" src="/wp-content/uploads/2024/07/yes-infinite-logo.webp" style="margin:0 0 15px; width:150px" alt="...">
+                
+            </div>
+            <h1 style="color:#000 !important">Get the latest <br>
+            5G smartphones</h1>
                 <div class="btn-sec d-flex align-items-center">
-                    <div class="pricing-2" style="margin:0">
+                    <div class="pricing-2" style="">
+                        <h4 class="d-block" style="color:#000 !important">
+                            <sup><span>From<br><b>RM</b></span></sup>58<span class="month-sec" style="color:#000 !important"> / mth</span>
+                        </h4>
+                    </div>
+                </div>
+                <!-- <div class="btn-sec" style="text-align: left;">
+                    <a href="/promo/pakej-super-jimat/" class="btn pink-btn">Buy Now</a>
+                </div> -->
+            </div>
+</div>
+   
+<div class="slick-slide">  
+<img src="/wp-content/uploads/2024/07/superjimat-desktopbanner-p35-scaled.webp" class="w-100 d-none d-lg-block" alt="...">
+<img src="/wp-content/uploads/2024/07/superjimat-mobilebanner-p35.webp" class="w-100 d-block d-md-block d-lg-none" alt="...">
+
+            <div class="inner-content-sec">
+            <h1 style="">5G plans with<br>
+            BIG savings!</h1>
+               
+                <div class="btn-sec d-flex align-items-center">
+                    <div class="pricing-2" style="">
                         <h4 class="d-block">
                             <sup><span>From<br><b>RM</b></span></sup>35<span class="month-sec"> / mth</span>
                         </h4>

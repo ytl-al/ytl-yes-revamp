@@ -214,6 +214,7 @@ if (!function_exists('yes_register_menus')) {
                     'bs-internet-access' => esc_html__('Business - Internet Access', 'yes.my'),
                     'bs-private-network' => esc_html__('Business - Private Network', 'yes.my'),
                     'bs-voice-communication' => esc_html__('Business - Voice Communication', 'yes.my'),
+                    'bs-internet-of-things' => esc_html__('Business - Internet of Things', 'yes.my'),
 
                     'fwm-header' => esc_html__('FWM Header Menu', 'yes.my'),
                     'fwm-ms2-header' => esc_html__('FWM Header Menu 2', 'yes.my'),
@@ -2034,6 +2035,14 @@ function yes_menu($path)
         }
         ul.navbar-nav:nth-child(4) ul.dropdown-menu.mega-dropdown-menu {
             left: 314px;
+        }
+        @media only screen and (min-device-width: 280px) and (max-device-width: 640px) and (-webkit-min-device-pixel-ratio: 2) {
+        .logo-top {
+        width: 35px !important;
+        }
+        .page-scrolled .logo-top{
+            width: 35px !important;
+        }
         }
     </style>
 
