@@ -571,7 +571,7 @@ class FMViewForm_submissions {
 							<?php if ( $form_fields ) { ?>
 								<td align="center" class="submitid_fc" <?php if ( !(strpos($lists['hide_label_list'], '@submitid@') === FALSE) || in_array('submit_id', $checked_ids) ) { echo 'style="display:none;"'; } ?>>
 								<?php echo $f->group_id; ?>
-								</th>
+								</td>
 							<?php } ?>
 							<?php
 							if ( $submit_date ) {

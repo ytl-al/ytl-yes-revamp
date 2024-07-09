@@ -47,7 +47,7 @@
 
                 $params = $widget->normalize_attributes( $params, $widget->map_view_vars );
             ?>
-            <div data-tab_target="<?php esc_attr_e( $term->term_id );?>" class="<?php esc_attr_e( $term->slug );?> betterdocs-tabgrid-content-wrapper">
+            <div data-tab_target="<?php esc_attr_e( $term->term_id );?>" class="<?php esc_attr_e( $term->slug );?> betterdocs-tabgrid-content-wrapper" data-mkb-slug="<?php echo esc_attr_e( $term->slug ); ?>">
                 <div class="betterdocs-tabgrid-content-inner-wrapper">
                     <?php betterdocs()->views->get( 'layouts/base', $params );?>
                 </div>

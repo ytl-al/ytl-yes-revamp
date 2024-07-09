@@ -5,7 +5,7 @@ Tags: knowledge base, docs, documentation, documents, faq page, doc, knowledge, 
 Requires at least: 5.0
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 3.3.2
+Stable tag: 3.4.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -92,12 +92,16 @@ Yes, it will work with any standard WordPress theme.
 
 == Changelog ==
 
-= 3.3.2 - 27/05/2024 =
-- Added: Customizer options for the counter in the sidebar Bohemian Layout.
-- Improvement: Updated controllers for Elementor Tab Grid Widgets.
-- Improvement: Glossary/Encyclopedia performance.
-- Fixed: Header and footer is broken on the Glossary details page for block-based themes.
-- Few minor bug fixes and improvements.
+= 3.4.0 - 08/07/2024 =
+- Revamped: Dashboard UI/UX for Drag & Drop Builder and Advanced List View
+- Few minor bug fixes and improvements
+
+= 3.3.4 - 01/07/2024 =
+- Improvement: Enhanced relevance order in Instant Answer search results.
+- Fixed: All Docs Category from settings showed a blank screen in the Instant Answer home tab.
+- Fixed: Sidebar was displaying all Knowledge Bases instead of the selected Knowledge Base.
+- Fixed: Doc Category permalinks were not working properly outside the BetterDocs templates when Multiple KB was enabled.
+- Few minor bug fixes and improvements
 
 [See changelog for all versions](https://betterdocs.co/changelog/).
 

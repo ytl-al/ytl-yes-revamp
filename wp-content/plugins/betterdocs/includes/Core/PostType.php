@@ -426,6 +426,8 @@ class PostType extends Base {
             wp_send_json_error( __( 'You don\'t have permission to manage docs term.', 'betterdocs' ) );
         }
 
+        wp_cache_flush();
+
         $taxonomy_ordering_data = filter_var_array( wp_unslash( $_POST['data'] ), FILTER_SANITIZE_NUMBER_INT );
         $base_index             = filter_var( wp_unslash( $_POST['base_index'] ), FILTER_SANITIZE_NUMBER_INT );
 
@@ -454,6 +456,8 @@ class PostType extends Base {
         if( ! current_user_can('edit_docs') ) {
             wp_send_json_error( __( 'You don\'t have permission to update docs term.', 'betterdocs' ) );
         }
+
+        wp_cache_flush();
 
         $docs_ordering_data = isset( $_POST['docs_ordering_data'] ) ? implode( ',', filter_var_array( $_POST['docs_ordering_data'], FILTER_SANITIZE_NUMBER_INT ) ) : '';
         $term_id            = intval( $_POST['list_term_id'] );
@@ -713,9 +717,11 @@ class PostType extends Base {
 
         register_taxonomy( $this->glossaries, [$this->post_type], $args );
 
+        $slug = $this->settings->get( 'encyclopedia_root_slug' );
+
         // Change the rewrite rules for the custom taxonomy
         global $wp_rewrite;
-        $wp_rewrite->extra_permastructs[$this->glossaries]['struct'] = '/'.$this->glossaries.'/%glossaries%';
+        $wp_rewrite->extra_permastructs[$this->glossaries]['struct'] = '/'.$slug.'/%glossaries%';
     }
 
 
@@ -834,6 +840,10 @@ class PostType extends Base {
 
         if ( 'betterdocs_page_betterdocs-analytics' == $current_screen->id ) {
             $submenu_file = 'betterdocs-analytics';
+        }
+
+        if ( 'betterdocs_page_betterdocs-glossaries' == $current_screen->id ) {
+            $submenu_file = 'betterdocs-glossaries';
         }
 
         if ( 'betterdocs_page_betterdocs-setup' == $current_screen->id ) {

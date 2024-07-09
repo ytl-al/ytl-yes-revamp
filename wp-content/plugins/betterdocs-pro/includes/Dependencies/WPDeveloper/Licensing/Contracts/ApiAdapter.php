@@ -11,6 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 use Exception;
 use WPDeveloper\BetterDocsPro\Dependencies\WPDeveloper\Licensing\LicenseManager;
 
+/**
+ * @property array|string $screen_id
+ * @property string       $handle
+ * @property int          $item_id
+ */
 #[\AllowDynamicProperties]
 abstract class ApiAdapter {
 	protected $config = null;
@@ -28,6 +33,8 @@ abstract class ApiAdapter {
 		$this->config['item_id']   = $this->license_manager->get_args( 'item_id' );
 
 		$this->register();
+
+		// add_action( 'init', [$this, 'register'] );
 
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue' ], 11 );
 	}
@@ -66,7 +73,7 @@ abstract class ApiAdapter {
 	}
 
 	public function __isset( $name ) {
-		return isset( $this->config[ $name ] );
+		return isset( $this->config[ $name ] ) || isset( $this->license_manager->{$name} );
 	}
 
 	protected function verify_nonce( $nonce ) {
@@ -81,9 +88,50 @@ abstract class ApiAdapter {
 		return current_user_can( isset( $this->permission ) ? $this->permission : 'delete_users' );
 	}
 
+	/**
+	 * This method has to be implemented by each subclass based on their needs.
+	 *
+	 * i.e:
+	 * For REST API this method can have route registration functionalities.
+	 * For AJAX API this method can have actions in placed.
+	 *
+	 * @return mixed
+	 */
 	abstract public function register();
 
+	/**
+	 * How to activate license in each sub API.
+	 *
+	 * @param $request
+	 *
+	 * @return mixed
+	 */
 	abstract public function activate( $request );
 
+	/**
+	 * How to de-activate license in each sub API.
+	 *
+	 * @param $request
+	 *
+	 * @return mixed
+	 */
 	abstract public function deactivate( $request );
+
+	/**
+	 * Submit License Verification Code
+	 *
+	 * @param $request
+	 *
+	 * @return mixed
+	 */
+	abstract public function submit_otp( $request );
+
+	/**
+	 * Re-SEND License Verification Code.
+	 *
+	 * @param $request
+	 *
+	 * @return mixed
+	 */
+	abstract public function resend_otp( $request );
 }

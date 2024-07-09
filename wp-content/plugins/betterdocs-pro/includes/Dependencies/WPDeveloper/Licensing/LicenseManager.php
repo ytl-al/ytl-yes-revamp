@@ -11,22 +11,36 @@ use Exception;
 use WP_Error;
 
 /**
- * @property int    $item_id
- * @property string $version
- * @property string $storeURL
- * @property string $db_prefix
- * @property string $textdomain
- * @property string $item_name
+ * @property int             $item_id
+ * @property string          $version
+ * @property string          $storeURL
+ * @property string          $db_prefix
+ * @property string          $textdomain
+ * @property string          $item_name
+ * @property string          $plugin_file
+ * @property string          $page_slug
+ * @property string|string[] $screen_id
+ * @property string          $scripts_handle
+ * @property bool            $dev_mode
+ * @property string          $api
+ * @property string          $namespace
  */
 #[\AllowDynamicProperties]
 class LicenseManager {
+	private        $_version     = '2.0.0';
 	private static $_instance    = null;
 	protected      $license      = '';
 	protected      $license_data = null;
-	protected      $args         = [
+
+	/**
+	 * @var array
+	 */
+	protected $args = [
 		'version'        => '',
 		// 'author'         => '',
 		// 'beta'           => '',
+		// 'activation_notice' => '',
+		// 'revalidation_notice' => '',
 		'plugin_file'    => '',
 		'item_id'        => 0,
 		'item_name'      => '',
@@ -40,12 +54,36 @@ class LicenseManager {
 		'api'            => ''
 	];
 
+	/**
+	 * @var array
+	 */
+	private $error = [];
+
+	/**
+	 * @throws Exception
+	 */
 	public static function get_instance( $args ) {
 		if ( self::$_instance === null ) {
 			self::$_instance = new self( $args );
 		}
 
 		return self::$_instance;
+	}
+
+	public function __get( $name ) {
+		if ( property_exists( $this, $name ) ) {
+			return $this->$name;
+		}
+
+		if ( isset( $this->args[ $name ] ) ) {
+			return $this->args[ $name ];
+		}
+
+		return null;
+	}
+
+	public function __isset( $name ) {
+		return isset( $this->args[ $name ] );
 	}
 
 	/**
@@ -58,14 +96,18 @@ class LicenseManager {
 			}
 		}
 
-		$this->args         = wp_parse_args( $args, $this->args );
-		$this->license_data = $this->get_license_data();
+		$this->args = wp_parse_args( $args, $this->args );
 
-		if ( ( empty( $this->license_data ) ) && current_user_can( 'activate_plugins' ) ) {
-			add_action( 'admin_notices', [ $this, 'admin_notices' ] );
+		if ( $this->dev_mode === true ) {
+			add_filter( 'http_request_host_is_external', '__return_true' );
 		}
 
-		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue' ], 11 );
+		$this->license_data = $this->get_license_data();
+
+		add_action( 'admin_notices', [ $this, 'admin_notices' ] );
+
+
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue' ], 999 );
 
 		if ( isset( $this->args['api'] ) ) {
 			switch ( strtolower( $this->args['api'] ) ) {
@@ -88,7 +130,25 @@ class LicenseManager {
 	}
 
 	public function admin_notices() {
-		$message = sprintf( __( 'Please %1$sactivate your license%2$s key to enable updates for %3$s.', $this->textdomain ), '<a style="text-decoration: none;" href="' . admin_url( 'admin.php?page=' . $this->page_slug ) . '&tab=tab-license">', '</a>', '<strong>' . $this->item_name . '</strong>' );
+		$this->error = $this->get_error();
+
+		if ( ! empty( $this->error ) ) {
+			$notice = sprintf( '<div style="padding: 10px;" class="%1$s-notice wpdeveloper-licensing-notice notice notice-error">%2$s</div>', $this->textdomain, $this->error['message'] );
+
+			echo wp_kses_post( $notice );
+
+			return;
+		}
+
+		if ( ! ( ( empty( $this->license_data ) ) && current_user_can( 'activate_plugins' ) ) ) {
+			return;
+		}
+
+		$message = sprintf( __( '%1$sActivate your %3$s License Key%2$s to receive regular updates and secure your WordPress website.' ), '<a style="text-decoration: underline; font-weight: bold;" href="' . admin_url( 'admin.php?page=' . $this->page_slug ) . '">', '</a>', $this->item_name );
+
+		if ( isset( $this->args['activation_notice'] ) ) {
+			$message = $this->args['activation_notice'];
+		}
 
 		$notice = sprintf( '<div style="padding: 10px;" class="%1$s-notice wpdeveloper-licensing-notice notice notice-error">%2$s</div>', $this->textdomain, $message );
 
@@ -96,14 +156,21 @@ class LicenseManager {
 	}
 
 	public function plugin_updater() {
-		$_license = get_option( "{$this->db_prefix}_license" );
+		$doing_cron = defined( 'DOING_CRON' ) && DOING_CRON;
+
+		if ( ! current_user_can( 'manage_options' ) && ! $doing_cron ) {
+			return;
+		}
+
+		$_license = $this->get_license();
 
 		new PluginUpdater( $this->storeURL, $this->plugin_file, [
-			'version' => $this->version, // current version number
-			'license' => $_license, // license key (used get_option above to retrieve from DB)
-			'item_id' => $this->item_id, // ID of the product
-			'author'  => empty( $this->author ) ? 'WPDeveloper' : $this->author, // author of this plugin
-			'beta'    => isset( $this->beta ) ? $this->beta : false
+			'sdk_version' => $this->_version,
+			'version'     => $this->version, // current version number
+			'license'     => $_license, // license key (used get_option above to retrieve from DB)
+			'item_id'     => $this->item_id, // ID of the product
+			'author'      => empty( $this->author ) ? 'WPDeveloper' : $this->author, // author of this plugin
+			'beta'        => isset( $this->beta ) ? $this->beta : false
 		] );
 	}
 
@@ -124,15 +191,15 @@ class LicenseManager {
 	}
 
 	public function get_license_data() {
-		$_license        = get_option( "{$this->db_prefix}_license" );
-		$_license_status = get_option( "{$this->db_prefix}_license_status" );
-		$_license_data   = get_transient( "{$this->db_prefix}_license_data" );
+		$_license        = $this->get_license();
+		$_license_status = $this->get_status();
+		$_license_data   = $this->get_license_data_raw();
 
 		if ( $_license_data !== false ) {
 			$_license_data = (array) $_license_data;
 		}
 
-		if ( $_license_data == false || empty( $_license_data ) ) {
+		if ( empty( $_license_data ) ) {
 			$response = $this->check();
 			if ( is_wp_error( $response ) ) {
 				return [];
@@ -149,10 +216,9 @@ class LicenseManager {
 	}
 
 	public function hide_license_key( $_license ) {
-		$length   = mb_strlen( $_license ) - 10;
-		$_license = substr_replace( $_license, mb_substr( preg_replace( '/\S/', '*', $_license ), 5, $length ), 5, $length );
+		$length = mb_strlen( $_license ) - 10;
 
-		return $_license;
+		return substr_replace( $_license, mb_substr( preg_replace( '/\S/', '*', $_license ), 5, $length ), 5, $length );
 	}
 
 	public function activate( $args = [] ) {
@@ -170,24 +236,22 @@ class LicenseManager {
 			return $response;
 		}
 
-		update_option( "{$this->db_prefix}_license", $this->license, 'no' );
-		update_option( "{$this->db_prefix}_license_status", $response->license, 'no' );
-		set_transient( "{$this->db_prefix}_license_data", $response, MONTH_IN_SECONDS * 3 );
+		$this->remove_error();
+
+		$this->addData( $response );
 
 		return $response;
 	}
 
-	public function deactivate( $args = [] ) {
-		$this->license = get_option( "{$this->db_prefix}_license", '' );
+	public function deactivate() {
+		$this->license = $this->get_license();
 		$response      = $this->remote_post( 'deactivate_license' );
 
 		if ( is_wp_error( $response ) ) {
 			return $response;
 		}
 
-		delete_option( "{$this->db_prefix}_license" );
-		delete_option( "{$this->db_prefix}_license_status" );
-		delete_transient( "{$this->db_prefix}_license_data" );
+		$this->removeData();
 
 		return $response;
 	}
@@ -200,9 +264,7 @@ class LicenseManager {
 			return $response;
 		}
 
-		update_option( "{$this->db_prefix}_license", $this->license, 'no' );
-		update_option( "{$this->db_prefix}_license_status", $response->license, 'no' );
-		set_transient( "{$this->db_prefix}_license_data", $response, MONTH_IN_SECONDS * 3 );
+		$this->addData( $response );
 
 		return $response;
 	}
@@ -213,9 +275,9 @@ class LicenseManager {
 		return $this->remote_post( 'resend_otp_for_license', $args );
 	}
 
-	public function check( $args = [] ) {
-		$this->license = get_option( "{$this->db_prefix}_license", '' );
-		$_license_data = get_transient( "{$this->db_prefix}_license_data" );
+	public function check() {
+		$this->license = $this->get_license();
+		$_license_data = $this->get_license_data_raw();
 
 		if ( $_license_data !== false ) {
 			$_license_data = (array) $_license_data;
@@ -228,12 +290,13 @@ class LicenseManager {
 		$response = $this->remote_post( 'check_license' );
 
 		if ( is_wp_error( $response ) ) {
-			delete_transient( "{$this->db_prefix}_license_data" );
+			$this->remove_license_data();
 
 			return $response;
 		}
 
-		set_transient( "{$this->db_prefix}_license_data", $response, MONTH_IN_SECONDS * 3 );
+		$this->set_license_data( $response );
+		$this->remove_error();
 
 		return $response;
 	}
@@ -241,16 +304,18 @@ class LicenseManager {
 	/**
 	 * 'activate_license'
 	 *
+	 * @param       $action
 	 * @param mixed $args
 	 *
 	 * @return mixed
 	 */
 	public function remote_post( $action, $args = [] ) {
 		if ( empty( $this->license ) ) {
-			return new WP_Error( 'empty_license', __( 'Invalid License.', $this->textdomain ) );
+			return new WP_Error( 'empty_license', __( 'Please provide a valid license.', $this->textdomain ) );
 		}
 
 		$defaults = [
+			'sdk_version' => $this->_version,
 			'edd_action'  => $action,
 			'license'     => $this->license,
 			'item_id'     => $this->item_id,
@@ -270,16 +335,32 @@ class LicenseManager {
 
 		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
 			if ( is_wp_error( $response ) ) {
+				$this->set_error( [
+					'code'    => $response->get_error_code(),
+					'message' => $response->get_error_message()
+				] );
+
 				return $response;
 			}
+
+			$this->set_error( [
+				'code'    => 'unknown',
+				'message' => __( 'An error occurred, please try again.', $this->textdomain )
+			] );
 
 			return new WP_Error( 'unknown', __( 'An error occurred, please try again.', $this->textdomain ) );
 		}
 
 		$license_data = $this->maybe_error( json_decode( wp_remote_retrieve_body( $response ) ) );
 
-		if ( ! is_wp_error( $license_data ) ) {
+		if ( is_wp_error( $license_data ) ) {
+			$this->set_error( [
+				'code'    => $license_data->get_error_code(),
+				'message' => $license_data->get_error_message()
+			] );
+		} else {
 			$license_data->license_key = $this->hide_license_key( $this->license );
+			$this->remove_error();
 		}
 
 		return $license_data;
@@ -287,8 +368,13 @@ class LicenseManager {
 
 	private function maybe_error( $license_data ) {
 		if ( false === $license_data->success ) {
-			$message = '';
-			$error_code = isset($license_data->error) ? $license_data->error : 'unknown';
+			$error_code = 'unknown';
+
+			if ( isset( $license_data->error ) ) {
+				$error_code = $license_data->error;
+			} elseif ( isset( $license_data->license ) ) {
+				$error_code = $license_data->license;
+			}
 
 			switch ( $error_code ) {
 				case 'expired':
@@ -296,20 +382,24 @@ class LicenseManager {
 					break;
 
 				case 'invalid_otp':
-					$message = __( 'Invalid License Verification.', $this->textdomain );
+					$message = __( 'Your license confirmation code is invalid.', $this->textdomain );
 					break;
 
 				case 'expired_otp':
-					$message = __( 'Verification Code Expired.', $this->textdomain );
+					$message = __( 'Your license confirmation code has been expired.', $this->textdomain );
+					break;
+
+				case 'revalidate_license':
+					$message = sprintf( __( '%1$sAttention:%2$s Please %3$sVerify your %5$s License Key%4$s to get regular updates & secure your WordPress website.' ), '<strong>', '</strong>', '<a style="text-decoration: underline; font-weight: bold;" href="' . admin_url( 'admin.php?page=' . $this->page_slug ) . '">', '</a>', $this->item_name );
 					break;
 
 				case 'disabled':
 				case 'revoked':
-					$message = __( 'License Key Disabled.', $this->textdomain );
+					$message = sprintf( __( 'Your %s license key has been disabled.', $this->textdomain ), $this->item_name );
 					break;
 
 				case 'missing':
-					$message = __( 'Invalid License.', $this->textdomain );
+					$message = __( 'Invalid license.', $this->textdomain );
 					break;
 
 				case 'invalid':
@@ -318,11 +408,15 @@ class LicenseManager {
 					break;
 
 				case 'item_name_mismatch':
-					/* translators: the plugin name */ $message = __( 'Invalid License key.', $this->textdomain );
+					/* translators: the plugin name */ $message = sprintf( __( 'This appears to be an invalid license key for %s.', $this->textdomain ), $this->item_name );
 					break;
 
 				case 'no_activations_left':
 					$message = __( 'Your license key has reached its activation limit.', $this->textdomain );
+					break;
+
+				case 'custom':
+					$message = ! empty( $license_data->message ) ? $license_data->message : __( 'Something went wrong.', $this->textdomain );
 					break;
 
 				default:
@@ -336,11 +430,88 @@ class LicenseManager {
 		return $license_data;
 	}
 
-	public function __get( $name ) {
-		if ( isset( $this->args[ $name ] ) ) {
-			return $this->args[ $name ];
+	public function get_license( $default = '' ) {
+		return get_option( "{$this->db_prefix}_license", $default );
+	}
+
+	public function set_license() {
+		return update_option( "{$this->db_prefix}_license", $this->license, 'no' );
+	}
+
+	public function get_license_data_raw() {
+		return get_transient( "{$this->db_prefix}_license_data" );
+	}
+
+	public function set_license_data( $response, $expiration = null ) {
+		if ( null === $expiration ) {
+			$expiration = MONTH_IN_SECONDS * 3;
 		}
 
-		return null;
+		set_transient( "{$this->db_prefix}_license_data", $response, $expiration );
+	}
+
+	public function remove_license_data() {
+		return delete_transient( "{$this->db_prefix}_license_data" );
+	}
+
+	private function set_error( $error ) {
+		update_option( "{$this->db_prefix}license_data_error", $error );
+	}
+
+	private function get_error() {
+		if ( $this->license_data ) {
+			$this->remove_error();
+
+			return '';
+		}
+
+		return get_option( "{$this->db_prefix}license_data_error", '' );
+	}
+
+	private function remove_error() {
+		delete_option( "{$this->db_prefix}license_data_error" );
+	}
+
+	public function get_status() {
+		return get_option( "{$this->db_prefix}_license_status" );
+	}
+
+	public function set_status( $status = 'valid' ) {
+		return update_option( "{$this->db_prefix}_license_status", $status, 'no' );
+	}
+
+	public function removeData( $withError = true ) {
+		delete_option( "{$this->db_prefix}_license" );
+		delete_option( "{$this->db_prefix}_license_status" );
+
+		$this->remove_license_data();
+
+		if ( $withError ) {
+			$this->remove_error();
+		}
+	}
+
+	public function addData( $response ) {
+		$this->set_license();
+		$this->set_status( $response->license );
+		$this->set_license_data( $response );
+	}
+
+	private function get( $key, $default = false ) {
+		$option_key = $this->db_prefix . '_' . $key;
+
+		return get_option( $option_key, $default );
+	}
+
+	private function set( $key, $value ) {
+		$option = "{$this->db_prefix}_{$key}";
+
+		return update_option( $option, $value, 'no' );
+	}
+
+	private function delete( $key ) {
+		$option = "{$this->db_prefix}_{$key}";
+
+		return delete_option( $option );
 	}
 }

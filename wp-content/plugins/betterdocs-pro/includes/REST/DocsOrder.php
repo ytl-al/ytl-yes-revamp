@@ -13,6 +13,7 @@ class DocsOrder extends BaseAPI {
     public function register() {
         $this->get( '/docs_order', [$this, 'docs_order'], ['orderby' => [], "order" => [], "per_page" => [], "doc_category" => []] );
         $this->get( '/knowledge_base', [$this, 'fetch_kb_doc_category'] );
+        $this->get( '/doc_category', [$this, 'docs_order'], ['orderby' => [], "order" => [], "per_page" => [], "doc_category" => []] );
     }
 
     /**
@@ -157,5 +158,18 @@ class DocsOrder extends BaseAPI {
             array_push( $new_kb_terms, $kb );
         }
         return $new_kb_terms;
+    }
+
+    public function get_ordered_doc_categories( $data ) {
+        $args = array(
+            'taxonomy' => 'doc_category',
+            'meta_key' => 'doc_category_order',
+            'orderby' => 'meta_value_num',
+            'order' => 'ASC', // Order from lowest to highest
+        );
+
+        $doc_categories = get_terms( $args );
+
+        return rest_ensure_response( $doc_categories );
     }
 }

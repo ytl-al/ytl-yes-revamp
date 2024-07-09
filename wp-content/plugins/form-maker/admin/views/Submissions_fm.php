@@ -374,7 +374,7 @@ class  FMViewSubmissions_fm extends FMAdminView {
 				<tr id="fm-fields-filter" style="display: none;">
 					<th class="fm-column-not-hide"></th>
 					<th class="submitid_fc" <?php echo $style_id; ?> >
-						<input type="text" name="id_search" id="id_search" value="<?php echo $lists['id_search'] ?>" style="width:30px" />
+						<input type="text" name="id_search" id="id_search" value="<?php echo esc_html($lists['id_search']); ?>" style="width:30px" />
 						<input type="hidden" name="fm_is_search" id="fm_is_search" value="0" />
 					</th>
 					<th class="submitdate_fc fm-column-not-hide" <?php echo $style_date; ?>>
@@ -382,25 +382,25 @@ class  FMViewSubmissions_fm extends FMAdminView {
 						  <tr class="simple_table">
 							<td class="simple_table fm-column-not-hide" style="text-align: left;">From:</td>
 							<td  class="simple_table fm-column-not-hide" style="text-align: center;">
-							  <input class="inputbox" type="text" name="startdate" id="startdate" size="10" maxlength="10" value="<?php echo $lists['startdate']; ?>" />
+							  <input class="inputbox" type="text" name="startdate" id="startdate" size="10" maxlength="10" value="<?php echo esc_html($lists['startdate']); ?>" />
 							</td>
 						  </tr>
 						  <tr class="simple_table">
 							<td class="simple_table fm-column-not-hide" style="text-align: left;">To:</td>
 							<td class="simple_table fm-column-not-hide" style="text-align: center;">
-							  <input class="inputbox" type="text" name="enddate" id="enddate" size="10" maxlength="10" value="<?php echo $lists['enddate']; ?>" />
+							  <input class="inputbox" type="text" name="enddate" id="enddate" size="10" maxlength="10" value="<?php echo esc_html($lists['enddate']); ?>" />
 							</td>
 						  </tr>
 						</table>
 					</th>
 					<th class="submitterip_fc" <?php echo $style_ip; ?>>
-						<input type="text" name="ip_search" id="ip_search" value="<?php echo $lists['ip_search']; ?>" />
+						<input type="text" name="ip_search" id="ip_search" value="<?php echo esc_html($lists['ip_search']); ?>" />
 					</th>
 					<th class="submitterusername_fc" <?php echo $style_username; ?>>
-						<input type="text" name="username_search" id="username_search" value="<?php echo $lists['username_search']; ?>" />
+						<input type="text" name="username_search" id="username_search" value="<?php echo esc_html($lists['username_search']); ?>" />
 					</th>
 					<th class="submitteremail_fc" <?php echo $style_useremail; ?>>
-						<input type="text" name="useremail_search" id="useremail_search" value="<?php echo $lists['useremail_search']; ?>" />
+						<input type="text" name="useremail_search" id="useremail_search" value="<?php echo esc_html($lists['useremail_search']); ?>" />
 					</th>
 					<?php
 						$column_count = 0;

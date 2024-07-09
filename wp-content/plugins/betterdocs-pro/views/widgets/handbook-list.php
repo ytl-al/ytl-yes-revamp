@@ -1,4 +1,4 @@
-<div class="<?php echo $blockId; ?> betterdocs-entry-body betterdocs-taxonomy-doc-category">
+<div class="<?php echo esc_attr($blockId); ?> betterdocs-entry-body betterdocs-taxonomy-doc-category">
     <div class="layout-6 betterdocs-category-grid-list-inner-wrapper">
         <div class="betterdocs-single-category-inner">
             <?php

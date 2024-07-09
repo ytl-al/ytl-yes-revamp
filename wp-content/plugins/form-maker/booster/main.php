@@ -105,7 +105,9 @@ class TenWebBooster {
 
   public function check_score() {
     $twb_nonce = isset($_POST['twb_nonce']) ? sanitize_text_field($_POST['twb_nonce']) : '';
-    if ( !wp_verify_nonce($twb_nonce, 'twb_nonce') ){
+    if ( !wp_verify_nonce($twb_nonce, 'twb_nonce')
+      || !function_exists('current_user_can')
+      || !current_user_can('manage_options') ) {
       die('Permission Denied.');
     }
 
@@ -202,9 +204,9 @@ class TenWebBooster {
       }";
       wp_add_inline_style(self::PREFIX . '-global', $cutom_css);
     }
+    wp_register_script(self::PREFIX . '-circle', $this->plugin_url . '/assets/js/circle-progress.js', $required_scripts, '1.2.2');
     array_push($required_scripts, self::PREFIX . '-circle');
     wp_register_script(self::PREFIX . '-global', $this->plugin_url . '/assets/js/global.js', $required_scripts, self::VERSION);
-    wp_register_script(self::PREFIX . '-circle', $this->plugin_url . '/assets/js/circle-progress.js', 'jquery', '1.2.2');
     wp_localize_script(self::PREFIX . '-global', 'twb', array(
       'nonce' => wp_create_nonce('twb_nonce'),
       'ajax_url' => admin_url('admin-ajax.php'),
@@ -344,9 +346,9 @@ class TenWebBooster {
     wp_register_style('twb-open-sans', 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800&display=swap');
     wp_register_style(self::PREFIX . '-global', $this->plugin_url . '/assets/css/global.css', $required_styles, self::VERSION);
 
+    wp_register_script(self::PREFIX . '-circle', $this->plugin_url . '/assets/js/circle-progress.js', $required_scripts, '1.2.2');
     array_push($required_scripts, self::PREFIX . '-circle');
     wp_register_script(self::PREFIX . '-global', $this->plugin_url . '/assets/js/global.js', $required_scripts, self::VERSION);
-    wp_register_script(self::PREFIX . '-circle', $this->plugin_url . '/assets/js/circle-progress.js', 'jquery', '1.2.2');
     wp_localize_script(self::PREFIX . '-global', 'twb', array(
       'nonce' => wp_create_nonce('twb_nonce'),
       'ajax_url' => admin_url('admin-ajax.php'),

@@ -13,7 +13,7 @@ class InstantAnswer extends Base {
         $this->settings = $settings;
 
         if ( is_admin() ) {
-            add_action( 'admin_enqueue_scripts', [$this, 'scripts'] );
+            add_action( 'admin_enqueue_scripts', [$this, 'preview_scripts'] );
             add_action( 'admin_footer', [$this, 'add_preview'] );
         }
 
@@ -39,16 +39,33 @@ class InstantAnswer extends Base {
         return $style_handles;
     }
 
+    public function preview_scripts() {
+        betterdocs_pro()->assets->enqueue( 'betterdocs-instant-answer', 'public/css/instant-answer.css' );
+        wp_add_inline_style( 'betterdocs-instant-answer', self::inline_style( $this->settings ) );
+
+        betterdocs_pro()->assets->enqueue(
+            'betterdocs-instant-answer',
+            'public/js/instant-answer.js'
+        );
+
+        betterdocs_pro()->assets->localize( 'betterdocs-instant-answer', 'betterdocs', $this->localize_settings() );
+    }
+
     public function add_preview() {
-        static $printed = false;
-        $screen         = get_current_screen();
-        if ( $screen->id !== 'betterdocs_page_betterdocs-settings' || $printed ) {
-            return;
+        $preview_visiable      = $this->settings->get( 'ia_enable_preview', false );
+        $preview_visiable_main =   $this->settings->get( 'enable_disable', false );
+
+        $style = '';
+
+        if ( $preview_visiable === false || $preview_visiable_main == false ) {
+            $style = 'style="display: none"';
         }
 
-        $preview_visiable = $this->settings->get( 'ia_enable_preview', false );
-        $this->add_ia( $preview_visiable );
-        $printed = true;
+        echo wp_sprintf(
+            '<div id="betterdocs-ia" class="betterdocs-ia %s" %s"></div>',
+            'betterdocs-' . $this->settings->get( 'chat_position', 'right' ),
+            $style
+        );
     }
 
     private function is_page( $conditions = [] ) {
@@ -192,10 +209,6 @@ class InstantAnswer extends Base {
     }
 
     public function scripts( $hook ) {
-        if ( is_admin() && $hook !== 'betterdocs_page_betterdocs-settings' ) {
-            return;
-        }
-
         $this->is_visible = $this->ia_conditions();
 
         if ( ! is_admin() && ! $this->is_visible ) {
@@ -207,7 +220,7 @@ class InstantAnswer extends Base {
 
         betterdocs_pro()->assets->enqueue(
             'betterdocs-instant-answer',
-            'public/js/instant-answer.js',
+            'public/js/instant-answer.js'
         );
 
         betterdocs_pro()->assets->localize( 'betterdocs-instant-answer', 'betterdocs', $this->localize_settings() );
@@ -999,6 +1012,10 @@ class InstantAnswer extends Base {
                 'FILE_UPLOAD_SWITCH' => $this->settings->get( 'chat_tab_file_upload_switch' )
             ],
             'ASK_URL'             => get_rest_url( null, '/betterdocs/v1/ask' ),
+            'HOME_FAQ'             => [
+                'FAQ_URL'               => $this->get_faq_rest_url(),
+                'HOME_FAQ_CONTENT_TYPE' => $this->settings->get('ia_home_faq_content_type')
+            ],
             'FAQ'                 => [
                 'faq-title'          => $this->settings->get( 'ia_resources_faq_title' ),
                 'faq-switch'         => $this->settings->get( 'ia_resources_faq_switch' ),
@@ -1013,26 +1030,26 @@ class InstantAnswer extends Base {
                 'faq-list-order'     => $this->settings->get( 'ia_faq_list_order' )
             ],
             'DOC_CATEGORY'        => [
-                'doc-title'           => $this->settings->get( 'ia_resources_doc_category_title_text' ),
-                'doc-terms'           => $this->settings->get( 'ia_resources_doc_categories' ),
-                'doc-category-switch' => $this->settings->get( 'ia_resources_doc_categories_switch' ),
-                'doc-terms-order'     => $this->settings->get( 'ia_terms_order' ),
-                'doc-terms-order-by'  => $this->settings->get( 'ia_terms_orderby' )
-                // 'docs-orderby'        => $this->settings->get('ia_docs_order_by'),
-                // 'docs-order'           => $this->settings->get('ia_docs_order')
-                // 'doc-categories-number' => $this->settings->get( 'ia_resources_doc_categories_number' )
+                'doc-title'              => $this->settings->get( 'ia_resources_doc_category_title_text' ),
+                'doc-terms'              => $this->settings->get( 'ia_resources_doc_categories' ),
+                'doc-category-switch'    => $this->settings->get( 'ia_resources_doc_categories_switch' ),
+                'doc-terms-order'        => $this->settings->get( 'ia_terms_order' ),
+                'doc-terms-order-by'     => $this->settings->get( 'ia_terms_orderby' ),
+                'doc-subcategory-switch' => $this->settings->get( 'ia_resources_doc_subcategories_switch' )
             ],
-            'HOME_TAB_TITLE'      => $this->settings->get( 'home_tab_title' ),
-            'HOME_CONTENT'        => $this->settings->get( 'content_type', 'docs' ),
-            'HOME_TITLE'          => $this->settings->get( 'home_content_title' ),
-            'HOME_SUBTITLE'       => $this->settings->get( 'home_content_subtitle' ),
-            'RESOURCES_TITLE'     => $this->settings->get( 'ia_resources_general_content_title' ),
-            'RESOURCES_TAB_TITLE' => $this->settings->get( 'ia_resource_general_tab_title' ),
-            'HEADER_ICON'         => $this->settings->get( 'header_background_image', [] ),
-            'HEADER_LOGO'         => $this->settings->get( 'upload_header_logo', [] ),
-            'TAB_HOME_ICON'       => $this->settings->get( 'upload_home_icon', [] ),
-            'TAB_MESSAGE_ICON'    => $this->settings->get( 'upload_sendmessage_icon', [] ),
-            'TAB_RESOURCE_ICON'   => $this->settings->get( 'upload_resource_icon', [] )
+            'HOME_TAB_TITLE'                  => $this->settings->get( 'home_tab_title' ),
+            'HOME_CONTENT'                    => $this->settings->get( 'content_type', 'docs' ),
+            'HOME_CONTENT_DOC_CATEGORY_TITLE' => $this->settings->get('home_doc_category_text', 'Doc Categories'),
+            'HOME_CONTENT_DOCS_TITLE'         => $this->settings->get('home_docs_text', 'Docs'),
+            'HOME_TITLE'                      => $this->settings->get( 'home_content_title' ),
+            'HOME_SUBTITLE'                   => $this->settings->get( 'home_content_subtitle' ),
+            'RESOURCES_TITLE'                 => $this->settings->get( 'ia_resources_general_content_title' ),
+            'RESOURCES_TAB_TITLE'             => $this->settings->get( 'ia_resource_general_tab_title' ),
+            'HEADER_ICON'                     => $this->settings->get( 'header_background_image', [] ),
+            'HEADER_LOGO'                     => $this->settings->get( 'upload_header_logo', [] ),
+            'TAB_HOME_ICON'                   => $this->settings->get( 'upload_home_icon', [] ),
+            'TAB_MESSAGE_ICON'                => $this->settings->get( 'upload_sendmessage_icon', [] ),
+            'TAB_RESOURCE_ICON'               => $this->settings->get( 'upload_resource_icon', [] )
         ];
 
         /**
@@ -1113,7 +1130,7 @@ class InstantAnswer extends Base {
                 if ( ! empty( $_content_list ) && in_array( 'all', $_content_list ) ) {
                     $_cats_list = implode( ',', $_content_list );
 
-                    $_query_strings_array[$is_search ? 'doc_category' : 'per_page'] = -1;
+                    $_query_strings_array['per_page'] = 100;
                 }
                 if ( empty( $_content_list ) ) {
                     $limit                            = $this->settings->get( 'doc_category_limit', 10 );
@@ -1136,6 +1153,52 @@ class InstantAnswer extends Base {
         }
 
         return $this->unparse_url( $_parsed_url );
+    }
+
+    public function get_faq_rest_url() {
+        $faq_base_url = '';
+        $param        = '?';
+        $content_type = $this->settings->get( 'ia_home_faq_content_type' );
+        if ( $content_type == 'faq-list' ) {
+            $faq_base_url = 'wp/v2/betterdocs_faq';
+            $faq_list     = $this->settings->get( 'ia_home_faq_list' );
+            if ( in_array( 'all', $faq_list ) ) {
+                $param .= 'per_page=100';
+                $faq_base_url .= $param;
+            } else {
+                foreach ( $faq_list as $index => $faq_id ) {
+                    if ( $index == 0 ) {
+                        $param .= "include[]={$faq_id}";
+                    } else {
+                        $param .= "&include[]={$faq_id}";
+                    }
+                }
+                $faq_base_url .= $param;
+            }
+        } else {
+            $faq_base_url = 'wp/v2/betterdocs_faq_category';
+            $faq_group    = $this->settings->get( 'ia_home_faq_group' );
+            if ( in_array( 'all', $faq_group ) ) {
+                $param .= 'per_page=100';
+                $faq_base_url .= $param;
+            } else {
+                foreach ( $faq_group as $index => $faq_id ) {
+                    if ( $index == 0 ) {
+                        $param .= "include={$faq_id}";
+                    } else {
+                        $param .= ",{$faq_id}";
+                    }
+                }
+                $faq_base_url .= $param;
+            }
+        }
+        if ( has_filter( 'wpml_current_language' ) ) { // get wpml language
+            $lang = apply_filters( 'wpml_current_language', NULL );
+            if ( $lang ) {
+                $faq_base_url .= '&lang=' . $lang;
+            }
+        }
+        return get_rest_url( null, $faq_base_url );
     }
 
     /**

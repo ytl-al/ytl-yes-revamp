@@ -441,20 +441,23 @@ class WDW_FM_Library {
    * @param int $length
    * @param bool $type
    *
-   * @return string|bool  return 'String' if $type is false, and 'Number' when $type is true
+   * @return string return 'String' if $type is string, 'Number' when $type is number, php unique id when $type is mixed
    */
-  public static function generateRandomStrOrNum($length=6, $type=false) {
+  public static function generateRandomStrOrNum( $length=6, $type = 'string' ) {
     $randomStrOrNum = '';
   	$characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
 
-    for ( $i = 0; $i < $length; $i++ ) {
-    	if($type){
-	   		$randomStrOrNum .= rand(0, 9);
-			}
-	 		else {
-	   		$randomStrOrNum .= $characters[rand(0, $charactersLength - 1)];
-			}
+    if( $type == "mixed" )  {
+        $randomStrOrNum = uniqid();
+    } else {
+        for ($i = 0; $i < $length; $i++) {
+            if ( $type == 'number' ) {
+                $randomStrOrNum .= rand(0, 9);
+            } else {
+                $randomStrOrNum .= $characters[rand(0, $charactersLength - 1)];
+            }
+        }
     }
     return $randomStrOrNum;
   }
@@ -1879,7 +1882,28 @@ class WDW_FM_Library {
                 $change .= '#wdform_' . $params_value[0] . '_element' . $form_id . '0, #wdform_' . $params_value[0] . '_element' . $form_id . '1, ';
                 $documentOn .= '"click", ".wdform_row[wdid=' . $params_value[0] . '] .ui-spinner .ui-widget.ui-spinner-button"';
                 break;
+              case "type_date_fields":
+                if($params_value[1] == "==") {
+                  $if .= ' fm_html_entities( jQuery("#wdform_' . $params_value[0] . '_day' . $form_id . '").val() ).padStart(2, "0") + "/" +
+                    fm_html_entities( jQuery("#wdform_' . $params_value[0] . '_month' . $form_id . '").val() ).padStart(2, "0") + "/" +
+                    fm_html_entities( jQuery("#wdform_' . $params_value[0] . '_year' . $form_id . '").val() ).padStart(4, "0")' . $params_value[1] . '"' . $params_value[2]. '"';
+                } else if ($params_value[1] == "!=") {
+                  $if .= ' fm_html_entities( jQuery("#wdform_' . $params_value[0] . '_day' . $form_id . '").val() ).padStart(2, "0") + "/" +
+                    fm_html_entities( jQuery("#wdform_' . $params_value[0] . '_month' . $form_id . '").val() ).padStart(2, "0") + "/" +
+                    fm_html_entities( jQuery("#wdform_' . $params_value[0] . '_year' . $form_id . '").val() ).padStart(4, "0")' . $params_value[1] . '"' . $params_value[2]. '"';
+                } else if($params_value[1] == "=") {
+                  $if .= ' (fm_html_entities( jQuery("#wdform_' . $params_value[0] . '_day' . $form_id . '").val() ) == "" && ' . '
+                    fm_html_entities( jQuery("#wdform_' . $params_value[0] . '_month' . $form_id . '").val() ) == "" && ' . '
+                    fm_html_entities( jQuery("#wdform_' . $params_value[0] . '_year' . $form_id . '").val() ) == "")';
+                } else if($params_value[1] == "!"){
+                  $if .= ' (fm_html_entities( jQuery("#wdform_' . $params_value[0] . '_day' . $form_id . '").val() ) != "" && ' . '
+                    fm_html_entities( jQuery("#wdform_' . $params_value[0] . '_month' . $form_id . '").val() ) != "" && ' . '
+                    fm_html_entities( jQuery("#wdform_' . $params_value[0] . '_year' . $form_id . '").val() ) != "")';
+                }
+                $change .= '#wdform_' . $params_value[0] . '_day' . $form_id . ', ' . '#wdform_' . $params_value[0] . '_month' . $form_id . ', '. '#wdform_' . $params_value[0] . '_year' . $form_id . ', ';
+                break;
             }
+
             if ( $m != count($cond_params) - 1 ) {
               $params_value_next = explode('***', $cond_params[$m + 1]);
               if ( strpos($params_value_next[0], '_address_') > 0 ) {

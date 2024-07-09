@@ -453,6 +453,7 @@ class FMViewForm_maker {
                            id="wdform_' . $id1 . '_element' . $form_id . '"
                            name="wdform_' . $id1 . '_element' . $form_id . '"
                            value="' . $param['w_first_val'] . '"
+                           data-value="' . $param['w_first_val'] . '"
                            title="' . $param['w_title'] . '"
                            placeholder="' . $param['w_title'] . '"
                            ' . $readonly . '
@@ -512,6 +513,7 @@ class FMViewForm_maker {
                      id="wdform_' . $id1 . '_element' . $form_id . '"
                      name="wdform_' . $id1 . '_element' . $form_id . '"
                      value="' . $param['w_first_val'] . '"
+                     data-value="' . $param['w_first_val'] . '"
                      title="' . $param['w_title'] . '"
                      ' . $param['attributes'] . '>
               </div>';
@@ -658,6 +660,7 @@ class FMViewForm_maker {
                       id="wdform_' . $id1 . '_element' . $form_id . '"
                       name="wdform_' . $id1 . '_element' . $form_id . '"
                       placeholder="' . $param['w_title']. '"
+                      data-value="' . $textarea_value . '"
                       maxlength="' . $param['w_characters_limit']. '"
                       style="height: ' . $param['w_size_h'] . 'px;"
                       ' . $param['attributes'] . '>' . $textarea_value . '</textarea>';
@@ -769,6 +772,7 @@ class FMViewForm_maker {
                        id="wdform_' . $id1 . '_element' . $form_id . '"
                        name="wdform_' . $id1 . '_element' . $form_id . '"
                        value="' . $param['w_first_val'] . '"
+                       data-value="' . $param['w_first_val'] . '"
                        placeholder="" ' . $param['attributes'] . ' />';
 
             // Generate field.
@@ -870,8 +874,13 @@ class FMViewForm_maker {
             $w_first_val = explode('***', $param['w_first_val']);
             if ( $param['w_autofill'] == 'yes' && $wp_username ) {
               $user_display_name = explode(' ', $wp_username);
-              $w_first_val[0] = $user_display_name[0];
-              $w_first_val[1] = isset($user_display_name[1]) ? $user_display_name[1] : $w_first_val[1];
+              $w_first_val[0] = sanitize_text_field($user_display_name[0]);
+              $w_first_val[1] = isset($user_display_name[1]) ? sanitize_text_field($user_display_name[1]) : sanitize_text_field($w_first_val[1]);
+                $w_first_val[0] = str_replace('"', "", $w_first_val[0]);
+                $w_first_val[0] = str_replace("'", "", $w_first_val[0]);
+                $w_first_val[1] = str_replace('"', "", $w_first_val[1]);
+                $w_first_val[1] = str_replace("'", "", $w_first_val[1]);
+
             }
 
             $first_field_id = 'wdform_' . $id1 . '_element_first' . $form_id;
@@ -879,26 +888,26 @@ class FMViewForm_maker {
             if ( $w_name_fields[0] == 'yes' ) {
               $first_field_id = 'wdform_' . $id1 . '_element_title' . $form_id;
               $html .= '<div class="wd-flex wd-flex-column wd-width-10">';
-              $html .= '<input type="text" id="wdform_' . $id1 . '_element_title' . $form_id . '" name="wdform_' . $id1 . '_element_title' . $form_id . '" value="' . $w_first_val[2]. '" title="' . $w_title[2] . '" placeholder="' . $w_title[2] . '" />';
-              $html .= '<label class="mini_label" for="wdform_' . $id1 . '_element_title' . $form_id . '">' . $w_mini_labels[0] . '</label>';
+              $html .= '<input type="text" id="wdform_' . $id1 . '_element_title' . $form_id . '" name="wdform_' . $id1 . '_element_title' . $form_id . '" data-value="' . $w_first_val[2]. '" value="' . $w_first_val[2]. '" title="' . $w_title[2] . '" placeholder="' . $w_title[2] . '" />';
+              $html .= '<label class="mini_label" for="wdform_' . $id1 . '_element_title' . $form_id . '">' . esc_html($w_mini_labels[0]) . '</label>';
               $html .= '</div>';
               $html .= '<div class="wd-flex wd-flex-column wd-name-separator"></div>';
             }
             $html .= '<div class="wd-flex wd-flex-column wd-width-50">';
-            $html .= '<input type="text" class="wd-width-100" id="wdform_' . $id1 . '_element_first' . $form_id . '" name="wdform_' . $id1 . '_element_first' . $form_id . '" value="' . $w_first_val[0] . '" title="' . $w_title[0] . '" placeholder="' . $w_title[0] . '" ' . $param['attributes'] . ' />';
-            $html .= '<label class="mini_label" for="wdform_' . $id1 . '_element_first' . $form_id . '">' . $w_mini_labels[1] . '</label>';
+            $html .= '<input type="text" class="wd-width-100" id="wdform_' . $id1 . '_element_first' . $form_id . '" name="wdform_' . $id1 . '_element_first' . $form_id . '" data-value="' . esc_attr($w_first_val[0]) . '" value="' .  esc_attr($w_first_val[0]) . '" title="' . esc_attr($w_title[0]) . '" placeholder="' . esc_attr($w_title[0]) . '" ' . $param['attributes'] . ' />';
+            $html .= '<label class="mini_label" for="wdform_' . $id1 . '_element_first' . $form_id . '">' . esc_html($w_mini_labels[1]) . '</label>';
             $html .= '</div>';
             $html .= '<div class="wd-flex wd-flex-column wd-name-separator"></div>';
             $html .= '<div class="wd-flex wd-flex-column wd-width-50">';
-            $html .= '<input type="text" class="wd-width-100" id="wdform_' . $id1 . '_element_last' . $form_id . '" name="wdform_' . $id1 . '_element_last' . $form_id . '" value="' . $w_first_val[1] . '" title="' . $w_title[1] . '" placeholder="' . $w_title[1] . '" ' . $param['attributes'] . ' />';
-            $html .= '<label class="mini_label" for="wdform_' . $id1 . '_element_last' . $form_id . '">' . $w_mini_labels[2] . '</label>';
+            $html .= '<input type="text" class="wd-width-100" id="wdform_' . $id1 . '_element_last' . $form_id . '" name="wdform_' . $id1 . '_element_last' . $form_id . '" data-value="' .  esc_attr($w_first_val[1]) . '" value="' .  esc_attr($w_first_val[1]) . '" title="' . esc_attr($w_title[1]) . '" placeholder="' . esc_attr($w_title[1]) . '" ' . $param['attributes'] . ' />';
+            $html .= '<label class="mini_label" for="wdform_' . $id1 . '_element_last' . $form_id . '">' . esc_html($w_mini_labels[2]) . '</label>';
             $html .= '</div>';
 
             if ( $w_name_fields[1] == 'yes' ) {
               $html .= '<div class="wd-flex wd-flex-column wd-name-separator"></div>';
               $html .= '<div class="wd-flex wd-flex-column wd-width-50">';
-              $html .= '<input type="text" class="wd-width-100" id="wdform_' . $id1 . '_element_middle' . $form_id . '" name="wdform_' . $id1 . '_element_middle' . $form_id . '" value="' . $w_first_val[3] . '" title="' . $w_title[3] . '" placeholder="' . $w_title[3] . '" />';
-              $html .= '<label class="mini_label" for="wdform_' . $id1 . '_element_middle' . $form_id . '">' . $w_mini_labels[3] . '</label>';
+              $html .= '<input type="text" class="wd-width-100" id="wdform_' . $id1 . '_element_middle' . $form_id . '" name="wdform_' . $id1 . '_element_middle' . $form_id . '" data-value="' . esc_attr($w_first_val[3]) . '" value="' . esc_attr($w_first_val[3]) . '" title="' . esc_attr($w_title[3]) . '" placeholder="' . esc_attr($w_title[3]) . '" />';
+              $html .= '<label class="mini_label" for="wdform_' . $id1 . '_element_middle' . $form_id . '">' . esc_html($w_mini_labels[3]) . '</label>';
               $html .= '</div>';
             }
 
@@ -1121,7 +1130,7 @@ class FMViewForm_maker {
             $message_check_email = addslashes(__('This is not a valid email address.', WDFMInstance(self::PLUGIN)->prefix));
             $onchange = (isset($param['w_verification']) && $param['w_verification'] == "yes") ? '; wd_check_confirmation_email(\'' . $id1 . '\', \'' . $form_id . '\', \'' . $message_confirm . '\')' : '';
 
-            $html = '<input type="text" class="wd-width-100" id="wdform_' . $id1 . '_element' . $form_id . '" name="wdform_' . $id1 . '_element' . $form_id . '" value="' . $param['w_first_val'] . '" title="' . $param['w_title'] . '" placeholder="' . $param['w_title'] . '"  ' . $param['attributes'] . ' onchange="wd_check_email(\'' . $id1 . '\', \'' . $form_id . '\', \'' . $message_check_email . '\')' . $onchange . '" />';
+            $html = '<input type="text" class="wd-width-100" id="wdform_' . $id1 . '_element' . $form_id . '" name="wdform_' . $id1 . '_element' . $form_id . '" data-value="' . $param['w_first_val'] . '" value="' . $param['w_first_val'] . '" title="' . $param['w_title'] . '" placeholder="' . $param['w_title'] . '"  ' . $param['attributes'] . ' onchange="wd_check_email(\'' . $id1 . '\', \'' . $form_id . '\', \'' . $message_check_email . '\')' . $onchange . '" />';
 
             // Generate field.
             $rep = $this->wdform_field($type, $param, $row, $html);
@@ -1218,7 +1227,7 @@ class FMViewForm_maker {
             }
 
             $rep .= '<div class="' . implode(' ', $classes) . '">
-            <input type="text" autocomplete="off" value="' . $param['w_date'] . '" class="wdform-date wd-datepicker" data-format="' . $param['w_format'] . '" id="wdform_' . $id1 . '_element' . $form_id . '" name="wdform_' . $id1 . '_element' . $form_id . '" maxlength="10" ' . $param['attributes'] . ' /></div></div>';
+            <input type="text" autocomplete="off" data-value="' . $param['w_date'] . '" value="' . $param['w_date'] . '" class="wdform-date wd-datepicker" data-format="' . $param['w_format'] . '" id="wdform_' . $id1 . '_element' . $form_id . '" name="wdform_' . $id1 . '_element' . $form_id . '" maxlength="10" ' . $param['attributes'] . ' /></div></div>';
             break;
           }
           case 'type_date_new': {
@@ -1436,7 +1445,7 @@ class FMViewForm_maker {
 
             // todo: remove hidden input label
             // $rep .= '<div class="wdform-label-section" class="wd-table-cell"></div>';
-            $html = '<input type="hidden" value="' . $param['w_value'] . '" id="wdform_' . $id1 . '_element' . $form_id . '" name="' . $param['w_name'] . '" ' . $param['attributes'] . ' />';
+            $html = '<input type="hidden" data-value="' . $param['w_value'] . '" value="' . $param['w_value'] . '" id="wdform_' . $id1 . '_element' . $form_id . '" name="' . $param['w_name'] . '" ' . $param['attributes'] . ' />';
 
             // Generate field.
             $rep = $this->wdform_field($type, $param, $row, $html, FALSE);
@@ -1827,8 +1836,15 @@ class FMViewForm_maker {
     $fm_script_url = $front_urls['upload_url'] . $frontend_dir . 'js/fm-script-' . $form_id . '.js';
     if ( WDFMInstance(self::PLUGIN)->fm_settings['fm_file_read'] == '1' || !file_exists($fm_script_dir) ) {
       $fm_js_content = WDW_FM_Library(self::PLUGIN)->get_fm_js_content($form_id);
-      if (function_exists('wp_add_inline_script') ) {
-        wp_add_inline_script('jquery', $fm_js_content);
+      $handle = "";
+      if ( wp_script_is(WDFMInstance(self::PLUGIN)->handle_prefix . '-frontend', 'registered') ) {
+        $handle = WDFMInstance(self::PLUGIN)->handle_prefix . '-frontend';
+      }
+      elseif ( wp_script_is('jquery', 'registered') ) {
+        $handle = "jquery";
+      }
+      if ( function_exists('wp_add_inline_script') && $handle ) {
+        wp_add_inline_script($handle, $fm_js_content);
       }
       else {
         echo '<script id="'. WDFMInstance(self::PLUGIN)->handle_prefix . '-frontend-inline-js">' . $fm_js_content . '</script>';
@@ -2132,12 +2148,28 @@ class FMViewForm_maker {
         break;
       }
     }
-    $frontend_dir ='/form-maker-frontend/';
-    $wp_upload_dir = wp_upload_dir();
-    $fm_script_dir = $wp_upload_dir['basedir'] . $frontend_dir . 'js/fm-script-' . $id . '.js';
 
-    if ( function_exists('wp_add_inline_script') ) { // Since WordPress 4.5.0
-      wp_add_inline_script('jquery', $onload_js);
+    $wp_upload_dir = wp_upload_dir();
+    $fm_script_dir = $wp_upload_dir['basedir'] . '/form-maker-frontend/js/fm-script-' . $id . '.js';
+    if ( WDFMInstance(self::PLUGIN)->fm_settings['fm_file_read'] == '1'
+      || !file_exists($fm_script_dir) ) {
+      $handle = WDFMInstance(self::PLUGIN)->handle_prefix . '-frontend';
+    }
+    else {
+      $handle = WDFMInstance(self::PLUGIN)->handle_prefix . '-script-' . $id;
+    }
+
+    if ( !wp_script_is($handle, 'registered') ) {
+      if ( wp_script_is('jquery', 'registered') ) {
+        $handle = 'jquery';
+      }
+      else {
+        $handle = '';
+      }
+    }
+
+    if ( function_exists('wp_add_inline_script') && $handle ) {
+      wp_add_inline_script($handle, $onload_js);
     }
     else {
       echo '<script>' . $onload_js . '</script>';
@@ -2292,7 +2324,7 @@ class FMViewForm_maker {
     $html .= '<input type="hidden" value="' . $param['w_range_max'] . '" name="wdform_' . $id1 . '_range_max' . $form_id . '" id="wdform_' . $id1 . '_range_max' . $form_id . '" />';
     $html .= '<span class="wdform_colon">&nbsp;' . $currency_symbol . '&nbsp;</span>';
     $html .= '<span class="wdform_colon">' . $symbol_begin_paypal . '</span>';
-    $html .= '<input type="text" id="wdform_' . $id1 . '_element' . $form_id . '" name="wdform_' . $id1 . '_element' . $form_id . '" value="' . $param['w_first_val'] . '" title="' . $param['w_title'] . '" placeholder="' . $param['w_title'] . '" ' . $readonly . ' onkeypress="return check_isnum(event)" style="width: ' . $param['w_size'] . 'px;" ' . $param['attributes'] . ' />';
+    $html .= '<input type="text" id="wdform_' . $id1 . '_element' . $form_id . '" name="wdform_' . $id1 . '_element' . $form_id . '" data-value="' . $param['w_first_val'] . '" value="' . $param['w_first_val'] . '" title="' . $param['w_title'] . '" placeholder="' . $param['w_title'] . '" ' . $readonly . ' onkeypress="return check_isnum(event)" style="width: ' . $param['w_size'] . 'px;" ' . $param['attributes'] . ' />';
     $html .= '<span class="wdform_colon wd-vertical-middle">' . $symbol_end_paypal . '</span>';
 
     // Generate field.
@@ -3850,7 +3882,7 @@ class FMViewForm_maker {
     $param['id'] = $id1;
     $param['w_class'] .= ' wd-flex-row';
 
-    $html = '<input class="wd-width-100" autocomplete="off" onchange="wd_validate(this)" data-form-id="' . $form_id . '" data-wdid="' . $id1 . '" data-valid-type="date" type="text" id="wdform_' . $id1 . '_element' . $form_id . '" value="' . $default_date . '" name="wdform_' . $id1 . '_element' . $form_id . '"  ' . $param['attributes'] . ' />';
+    $html = '<input class="wd-width-100" autocomplete="off" onchange="wd_validate(this)" data-form-id="' . $form_id . '" data-wdid="' . $id1 . '" data-valid-type="date" type="text" id="wdform_' . $id1 . '_element' . $form_id . '" data-value="' . $default_date . '" value="' . $default_date . '" name="wdform_' . $id1 . '_element' . $form_id . '"  ' . $param['attributes'] . ' />';
     $html .= '<span id="fm-calendar-' . $id1 . '" class="dashicons dashicons-calendar-alt wd-calendar-button ' . ($param['w_show_image'] == "yes" ? "wd-inline-block" : "wd-hidden") . '"></span>';
     $html .= '<input type="hidden" class="hidden_date" data-format="' . $param['w_format'] . '" data-min="' . $param['w_min_date'] . '" data-max="' . $param['w_max_date'] . '" id="wdform_' . $id1 . '_button' . $form_id . '" value="' . $default_date . '" />';
 
@@ -4241,6 +4273,7 @@ class FMViewForm_maker {
                            data-valid-type="' . ($param['w_time_type'] == '12' ? 'hour12' : 'hour24') . '"
                            data-form-id="' . $form_id . '"
                            data-wdid="' . $id1 . '"
+                           data-value="' . stripslashes( WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . "_hh" . $form_id, $param['w_hh'], 'esc_html' ) ) . '"
                            value="' . stripslashes( WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . "_hh" . $form_id, $param['w_hh'], 'esc_html' ) ) . '"
                            ' . $param['attributes'] . ' />';
     $html .= '<label for="wdform_' . $id1 . '_hh' . $form_id . '" class="mini_label">' . $w_mini_labels[0] . '</label>';
@@ -4256,6 +4289,7 @@ class FMViewForm_maker {
                            data-valid-type="minute"
                            data-form-id="' . $form_id . '"
                            data-wdid="' . $id1 . '"
+                           data-value="' . stripslashes( WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . "_mm" . $form_id, $param['w_mm'], 'esc_html' ) ) . '"
                            value="' . stripslashes( WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . "_mm" . $form_id, $param['w_mm'], 'esc_html' ) ) . '"
                            ' . $param['attributes'] . ' />';
     $html .= '<label for="wdform_' . $id1 . '_mm' . $form_id . '" class="mini_label">' . $w_mini_labels[1] . '</label>';
@@ -4272,6 +4306,7 @@ class FMViewForm_maker {
                        data-valid-type="second"
                        data-form-id="' . $form_id . '"
                        data-wdid="' . $id1 . '"
+                       data-value="' . stripslashes( WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . "_ss" . $form_id, $param['w_ss'], 'esc_html' ) ) . '"
                        value="' . stripslashes( WDW_FM_Library(self::PLUGIN)->get( 'wdform_' . $id1 . "_ss" . $form_id, $param['w_ss'], 'esc_html' ) ) . '"
                        ' . $param['attributes'] . ' />';
       $html .= '<label for="wdform_' . $id1 . '_ss' . $form_id . '" class="mini_label">' . $w_mini_labels[2] . '</label>';
@@ -4433,6 +4468,7 @@ class FMViewForm_maker {
                             data-form-id="' . $form_id . '"
                             data-wdid="' . $id1 . '"
                             style="width: ' . $param['w_field_width'] . 'px;"
+                            data-value="' . ($param['w_field_value'] != 'null' ? $param['w_field_value'] : '') . '"
                             value="' . ($param['w_field_value'] != 'null' ? $param['w_field_value'] : '') . '"
                             ' . $param['attributes'] . ' />';
 

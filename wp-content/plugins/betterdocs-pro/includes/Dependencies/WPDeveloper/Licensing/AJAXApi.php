@@ -49,7 +49,7 @@ class AJAXApi extends ApiAdapter {
 		] );
 	}
 
-	private function nonce_permission_check(  ) {
+	private function nonce_permission_check() {
 		if ( ! isset( $_POST['_nonce'] ) || ! $this->verify_nonce( $_POST['_nonce'] ) ) {
 			$this->error( 'nonce_error', __( 'Nonce Verifications Failed.', $this->textdomain ) );
 		}
@@ -97,7 +97,7 @@ class AJAXApi extends ApiAdapter {
 		$this->nonce_permission_check();
 
 		$args = [
-			'otp' => sanitize_text_field( $_POST['otp'] ),
+			'otp'         => sanitize_text_field( $_POST['otp'] ),
 			'license_key' => sanitize_text_field( $_POST['license'] )
 		];
 

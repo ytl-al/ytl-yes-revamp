@@ -417,6 +417,7 @@ if (!function_exists('generate_store_locations')) {
                                                                 <ul class="dropdown-menu" aria-labelledby="dropdownStoreTypes" data-filter-type="store-type">
                                                                     <li><div class="form-check"><label><input class="cardCheckBoxAll" type="checkbox" value="All" data-filter-type="store-type" checked /> ' . esc_html__('All', 'yes.my') . '</label></div></li>
                                                                     <li><div class="form-check"><label><input class="cardCheckBox store-type" type="checkbox" value="yes-stores" data-storetype="Yes Stores" checked /> <span>Yes Stores</span></label></div></li>
+                                                                    <li><div class="form-check"><label><input class="cardCheckBox store-type" type="checkbox" value="yes-exclusive-stores" data-storetype="Yes Exclusive Stores" checked /> <span>Yes Exclusive Stores</span></label></div></li>
                                                                     <li><div class="form-check"><label><input class="cardCheckBox store-type" type="checkbox" value="dealer-mynews" data-storetype="Dealer MyNews" checked /> <span>Dealer MyNews</span></label></div></li>
                                                                 </ul>
                                                             </div>
@@ -530,6 +531,10 @@ if (!function_exists('generate_store_locations')) {
                 case 'Yes Experience Store': 
                     if ($service_string != '') $service_string .= ',';
                     $service_string .= 'yes-experience-stores';
+                    break;
+                case 'Yes Exclusive Store': 
+                    if ($service_string != '') $service_string .= ',';
+                    $service_string .= 'yes-exclusive-stores';
                     break;
                 case 'MyNews':
                     if ($service_string != '') $service_string .= ',';
