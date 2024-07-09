@@ -39,7 +39,11 @@ class InstantAnswer extends Base {
         return $style_handles;
     }
 
-    public function preview_scripts() {
+    public function preview_scripts( $hook ) {
+        if ( method_exists( betterdocs(), 'is_betterdocs_screen' ) && betterdocs()->is_betterdocs_screen( $hook ) ) {
+            return;
+        }
+
         betterdocs_pro()->assets->enqueue( 'betterdocs-instant-answer', 'public/css/instant-answer.css' );
         wp_add_inline_style( 'betterdocs-instant-answer', self::inline_style( $this->settings ) );
 
