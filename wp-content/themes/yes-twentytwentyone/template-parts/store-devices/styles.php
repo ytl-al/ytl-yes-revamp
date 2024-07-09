@@ -562,14 +562,14 @@
 
     .layer-planDevice p.f-price {
         font-family: 'Montserrat';
-        font-size: 28px;
+        font-size: 26px;
         line-height: 28px;
         font-weight: 800;
         letter-spacing: 0em;
         color: #000000;
-        margin-left: 25px;
+        margin-left: 20px;
         text-align: left;
-        padding-bottom: 10px;
+        padding-bottom: 8px;
     }
 
     .layer-planDevice p.f-price span {
@@ -593,8 +593,8 @@
     }
 
     .bottom-section .free-tag {
-        margin-left: 25px;
-        padding-bottom: 10px;
+        margin-left: 20px;
+        padding-bottom: 8px;
         line-height: 20px;
         text-align: left;
     }
@@ -609,6 +609,11 @@
         color: #000000;
         letter-spacing: 0em;
         text-align: left;
+    }
+    .bottom-section .free-tag-bm b{
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 20px;
     }
 .offer-block {
         font-family: 'Montserrat';
@@ -637,13 +642,13 @@
     }
 
     .bottom-section .free-tag-bm {
-        margin-left: 25px;
+        margin-left: 20px;
         padding-bottom: 10px;
         line-height: 20px;
         text-align: left;
     }
 
-    .bottom-section .free-tag-bm b {
+    /* .bottom-section .free-tag-bm b {
         margin: 0;
         padding: 0;
         font-family: 'Montserrat';
@@ -653,13 +658,13 @@
         color: #FF0084;
         letter-spacing: 0em;
         text-align: left;
-    }
+    } */
 
     .bottom-section .free-tag-bm span {
         margin: 0;
         padding: 0;
         font-family: 'Montserrat';
-        font-size: 14px;
+        font-size: 16px;
         font-weight: 600;
         line-height: 14px;
         color: #888888;
@@ -872,7 +877,7 @@
 
 
     .layer-planDevice-bm p.f-price span {
-        font-size: 20px !important;
+        font-size: 16px !important;
     }
 
 
@@ -1347,6 +1352,19 @@
             padding: 30px;
             margin: 0 15px;
         }
+        .bottom-section .free-tag{
+            margin-left: 20px;
+        }
+        .layer-planDevice p.f-price{
+            margin-left: 20px;
+        }
+
+        .layer-planDevice p.panel-btn a{
+            padding: 15px 20px;
+        }
+        .bottom-section .free-tag b{
+            font-size: 24px;
+        }
     }
 
     .phone-box {
@@ -1408,6 +1426,6 @@
         line-height: 150%;
     }
 
-    offer-label
+    
     /* store-device-css-end */
 </style>

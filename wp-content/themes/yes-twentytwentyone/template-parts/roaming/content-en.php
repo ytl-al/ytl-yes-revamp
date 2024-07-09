@@ -20,53 +20,74 @@
     <div class="hero-slider slider">
 
         <div>
-            <a href="/yes-postpaid-plans/#postpaid-plans/">
-                <img src="/wp-content/uploads/2024/01/SGRoaming-EN-v3.png" class="w-100 d-none d-lg-block" alt="...">
-                <img src="/wp-content/uploads/2024/01/SGRoaming-EN-v3-mob.png" class="w-100 d-block d-md-block d-lg-none"
-                    alt="...">
-                    <!-- <div class="inner-content-sec d-lg-block d-none">
+            <img src="/wp-content/uploads/2024/06/roam-banner-web.webp" class="w-100 d-none d-lg-block" alt="...">
+            <img src="/wp-content/uploads/2024/06/roam-banner-mob.webp" class="w-100 d-block d-md-block d-lg-none" alt="...">
+
+            <div class="inner-content-sec">
+                <h1>There's more <br>
+                    to <i>SEA</i> with<br>
+                    Yes Roam ASEAN Plus</h1>
+                <div class="btn-sec d-flex align-items-center">
+                    <div class="pricing-2">
+                        <h4 class="d-block">
+                            <sup><span>From<br><b>RM</b></span></sup>10<span class="month-sec"> / mth</span>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div>
+            <a href="#">
+                <img src="/wp-content/uploads/2023/12/hero-banner-bg1.png" class="w-100 d-none d-lg-block" alt="...">
+                <img src="/wp-content/uploads/2023/12/hero-banner-bg1-mob.png"
+                    class="w-100 d-block d-md-block d-lg-none" alt="...">
+                <div class="inner-content-sec d-lg-block d-none">
                     <div class="title-sec">
-                    <img decoding="async" src="/wp-content/uploads/2023/12/infinite-icon.png" class="" alt="...">
+                        <img decoding="async" src="/wp-content/uploads/2023/12/infinite-icon.png" class="" alt="...">
                         <h2>FREE unlimited 5G roaming in Singapore </h2>
                         <p>with Yes Infinite Postpaid Plan</p>
-                     </div>
-                        <div class="pricing mt-4 mt-lg-0 align-items-center justify-content-center">
-                            <div class="mt-3">
+                    </div>
+                    <div class="pricing mt-4 mt-lg-0 align-items-center justify-content-center">
+                        <div class="mt-3">
                             <p>From </p>
-                                <h4 class="d-block">
-                               <sup><b>RM</b></sup>58</h4>
-                                <p class="month-sec">/mth</p>
-                            </div>
+                            <h4 class="d-block">
+                                <sup><b>RM</b></sup>58
+                            </h4>
+                            <p class="month-sec">/mth</p>
                         </div>
-                        <div class="d-flex content-section-mid">
-                            <div class="content-sec">                                
+                    </div>
+                    <div class="d-flex content-section-mid">
+                        <div class="content-sec">
                             Uncapped 5G<br> Data & Speed
-                            </div>
-                            <div class="content-sec">                                
-                                Up to 110GB<br> Hotspot
-                            </div>
-                            <div class="content-sec">
-                                Unlimited<br> Calls
-                            </div>
-                        </div>                        
-                    </div> -->
+                        </div>
+                        <div class="content-sec">
+                            Up to 110GB<br> Hotspot
+                        </div>
+                        <div class="content-sec">
+                            Unlimited<br> Calls
+                        </div>
+                    </div>
+
+                </div>
             </a>
-        </div>
-        
-        <div>
+        </div> -->
+
+        <!-- <div class="slick-slide">
             <a href="#">
                 <img src="/wp-content/uploads/2023/12/hero-banner-bg2.png" class="w-100 d-none d-lg-block" alt="...">
-                <img src="/wp-content/uploads/2023/12/hero-banner-bg2-mob.png" class="w-100 d-block d-md-block d-lg-none" alt="...">
+                <img src="/wp-content/uploads/2023/12/hero-banner-bg2-mob.png"
+                    class="w-100 d-block d-md-block d-lg-none" alt="...">
 
                 <div class="inner-content-sec d-lg-block d-none">
-                    <div class="title-sec mt-5">
-                    <!-- <img decoding="async" src="/wp-content/uploads/2023/12/infinite-icon.png" class="" alt="..."> -->
+                    <div class="title-sec">
+                        <img decoding="async" src="/wp-content/uploads/2023/12/infinite-icon.png" class="" alt="...">
                         <h2>Stay connected anytime, anywhere with YesRoam</h2>
                         <p>Roam freely with our partnering operators when you’re travelling.</p>
-                     </div>                        
                     </div>
+                </div>
             </a>
-        </div>       
+       </div> -->
 
     </div>
 </section>
@@ -78,13 +99,16 @@
         <div class="row justify-content-center">
             <div class="col-11 col-lg-8 d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                 <div class="m-auto">
-                    <h1>Where are you travelling to?</h1>
-                    <p>Find all our roaming rates for your upcoming destination.</p>
+                    <h1>Choose a destination</h1>
+                    <p>Check our Data Roaming or Pay-as-you-use rates for your next trip.</p>
                     <div class="search-box dropdown">
                         <?php get_template_part('template-parts/roaming/dropdown-roaming', '', ['data_roaming' => $args['data_roaming']]); ?>
                         <input id="roamingSelect" name="roamingSelect" type="hidden" />
-                        <button class="btn" data-button="openRoaming" >Check roaming rates</button>
+                        <button class="btn" data-button="openRoaming">Check roaming rates</button>
                     </div>
+                    <p class="text-center mt-3 browse-btn">
+                        <a href="#pass-section">Browse Roaming Passes <span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -99,9 +123,10 @@
 
             <!--Singapore -->
             <div class="col-12 mt-0" data-country="Singapore" style="display: block;">
-                <div style="background:#fff; border-radius: 15px;" >
-                    <h1>
-                        YesRoam <span>SG Monthly</span>
+                <div style="background:#fff; border-radius: 15px;">
+                    <h1 class="raom-logo">
+                        <img class="mb-0" src="/wp-content/uploads/2024/06/YesRoam-logo.png" alt="YesRoam" /> <span>SG
+                            Monthly</span>
                     </h1>
 
                     <div class="row row-roaming">
@@ -109,9 +134,9 @@
                             <div class="row">
                                 <div class="col-12 border-b-sec">
                                     <h3>Plans</h3>
-                                    <h4><span style="font-weight:500">Only in Singapore 
-                                    with any<span> <strong>Yes Infinite Plan</strong> or 
-                                    <strong>Yes Infinite+ Plan</strong></h4>
+                                    <h4><span style="font-weight:500">Only in Singapore
+                                            with any<span> <strong>Yes Infinite Plan</strong> or
+                                                <strong>Yes Infinite+ Plan</strong></h4>
                                 </div>
                             </div>
                         </div>
@@ -127,21 +152,22 @@
                                     </div>
 
                                     <div class="col-12 col-lg-3">
-                                    <div class="border-b-sec">
-                                        <h3>Internet Rates</h3>   
-                                        <p class="blue">Free Unlimited Data Roaming</p>
-                                        <p class="small">(10GB highspeed data and 512kbps thereafter)</p>
-                                        <p class="blue mt-3">
-                                        <a href="/yes-postpaid-plans/#postpaid-plans" target="_blank" style="text-decoration: underline; font-weight: normal;color: #000;">
-                                        Check out our plans</a>.</p>
-                                      </div>
-                                      <div class="border-b-sec">
-                                        <p class="blue mt-3 pt-3">Add-On Availability</p>
-                                        <p class="blue mt-2">YesRoam SG Daily Top-Up</p>
-                                        <p class="blue mt-2">Unlimited</p>   
-                                        <p class="small">(1GB highspeed data and 512Kbps thereafter)</p> 
-                                        <h4 class="blue mt-2">RM8 /<span>day</span></h4>
-                                       </div>
+                                        <div class="border-b-sec">
+                                            <h3>Internet Rates</h3>
+                                            <p class="blue">Free Unlimited Data Roaming</p>
+                                            <p class="small">(10GB highspeed data and 512kbps thereafter)</p>
+                                            <p class="blue mt-3">
+                                                <a href="/yes-postpaid-plans/#postpaid-plans" target="_blank" style="text-decoration: underline; font-weight: normal;color: #000;">
+                                                    Check out our plans</a>.
+                                            </p>
+                                        </div>
+                                        <div class="border-b-sec">
+                                            <p class="blue mt-3 pt-3">Add-On Availability</p>
+                                            <p class="blue mt-2">YesRoam SG Daily Top-Up</p>
+                                            <p class="blue mt-2">Unlimited</p>
+                                            <p class="small">(1GB highspeed data and 512Kbps thereafter)</p>
+                                            <h4 class="blue mt-2">RM8 /<span>day</span></h4>
+                                        </div>
                                     </div>
 
                                     <div class="col-12 col-lg-6">
@@ -151,28 +177,28 @@
                                             </div>
 
                                             <div class="col-6 col-lg-6">
-                                                <p class="ctitle">Call to any SG number</p>
+                                                <p class="ctitle">Calls to any SG number</p>
                                                 <h4 class="blue">RM3.00 /min</h4>
-                                            </div>  
+                                            </div>
                                             <div class="col-6 col-lg-6 mt-2">
-                                                <p class="ctitle">Call to other country’s number</p>
+                                                <p class="ctitle">Calls to other country’s number</p>
                                                 <h4 class="blue">RM28.00 /min</h4>
                                             </div>
                                             <div class="col-6 col-lg-6 mt-2">
-                                                <p class="ctitle">Call to any MY number</p>
+                                                <p class="ctitle">Calls to any MY number</p>
                                                 <h4 class="blue">FREE</h4>
-                                            </div> 
-                                        
+                                            </div>
+
                                             <div class="col-6 col-lg-6 mt-2">
-                                                <p class="ctitle">Receiving Calls</p>
+                                                <p class="ctitle">Receiving calls</p>
                                                 <h4 class="blue">FREE</h4>
-                                            </div>  
+                                            </div>
 
                                             <div class="col-6 col-lg-6 mt-2">
                                                 <p class="ctitle">SMS</p>
                                                 <h4 class="blue">RM1.00 /SMS</h4>
-                                            </div>     
-                                            
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -186,8 +212,8 @@
 
             <div class="col-12 mt-3" data-country="Singapore" style="display: block;">
                 <div style="background:#fff; border-radius: 15px;">
-                    <h1>
-                        YesRoam <span>SG Daily</span>
+                    <h1 class="raom-logo">
+                        <img class="mb-0" src="/wp-content/uploads/2024/06/YesRoam-logo.png" alt="YesRoam" /> <span>SG Daily</span>
                     </h1>
 
                     <div class="row row-roaming">
@@ -211,23 +237,23 @@
                                     </div>
 
                                     <div class="col-12 col-lg-3">
-                                    <div class="border-b-sec">
-                                        <h3>Internet Rates</h3>
-                                        <h4 class="internet-rates">
-                                            <span>RM</span>8<sub>/day</sub>
-                                        </h4>
-                                      </div>
-                                      <div class="border-b-sec">
-                                        <p class="blue">Unlimited Data Roaming</p>
-                                        <p class="small">(1GB highspeed data and 512kbps thereafter)</p>
-                                       </div>
-                                       <div class="border-b-sec">
-                                        <p class="blue mt-3 pt-3">Add-On Availability</p>
-                                        <p class="blue mt-2">YesRoam SG Daily Top-Up</p>
-                                        <p class="blue mt-2">Unlimited</p>   
-                                        <p class="small">(1GB highspeed data and 512Kbps thereafter)</p> 
-                                        <h4 class="blue mt-2">RM8 /<span>day</span></h4>
-                                       </div>
+                                        <div class="border-b-sec">
+                                            <h3>Internet Rates</h3>
+                                            <h4 class="internet-rates">
+                                                <span>RM</span>8<sub>/day</sub>
+                                            </h4>
+                                        </div>
+                                        <div class="border-b-sec">
+                                            <p class="blue">Unlimited Data Roaming</p>
+                                            <p class="small">(1GB highspeed data and 512kbps thereafter)</p>
+                                        </div>
+                                        <div class="border-b-sec">
+                                            <p class="blue mt-3 pt-3">Add-On Availability</p>
+                                            <p class="blue mt-2">YesRoam SG Daily Top-Up</p>
+                                            <p class="blue mt-2">Unlimited</p>
+                                            <p class="small">(1GB highspeed data and 512Kbps thereafter)</p>
+                                            <h4 class="blue mt-2">RM8 /<span>day</span></h4>
+                                        </div>
                                     </div>
 
                                     <div class="col-12 col-lg-6">
@@ -237,29 +263,29 @@
                                             </div>
 
                                             <div class="col-6 col-lg-6">
-                                                <p class="ctitle">Call to any SG number</p>
+                                                <p class="ctitle">Calls to any SG number</p>
                                                 <h4 class="blue">RM3.00 /min</h4>
-                                            </div>  
+                                            </div>
                                             <div class="col-6 col-lg-6 mt-2">
-                                                <p class="ctitle">Call to other country’s number</p>
+                                                <p class="ctitle">Calls to other country’s number</p>
                                                 <h4 class="blue">RM28.00 /min</h4>
                                             </div>
                                             <div class="col-6 col-lg-6 mt-2">
-                                                <p class="ctitle">Call to any MY number</p>
+                                                <p class="ctitle">Calls to any MY number</p>
                                                 <h4 class="blue">FREE</h4>
-                                            </div> 
-                                        
+                                            </div>
+
                                             <div class="col-6 col-lg-6 mt-2">
-                                                <p class="ctitle">Receiving Calls</p>
+                                                <p class="ctitle">Receiving calls</p>
                                                 <h4 class="blue">FREE</h4>
-                                            </div>  
+                                            </div>
 
                                             <div class="col-6 col-lg-6 mt-2">
                                                 <p class="ctitle">SMS</p>
                                                 <h4 class="blue">RM1.00 /SMS</h4>
                                             </div>
 
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -269,12 +295,12 @@
                     </div>
 
                 </div>
-            </div>            
+            </div>
 
-            <div class="col-12 mt-3" data-country="Singapore" style="display: block;">
-                <div style="background:#fff; border-radius: 15px;" >
-                    <h1>
-                        YesRoam <span>Pay As You Use</span>
+            <!-- <div class="col-12 mt-3" data-country="Singapore" style="display: none;">
+                <div style="background:#fff; border-radius: 15px;">
+                    <h1 class="raom-logo">
+                    <img class="mb-0" src="/wp-content/uploads/2024/05/YesRoam-logo.png" alt="YesRoam" /> <span>Pay As You Use</span>
                     </h1>
 
                     <div class="row row-roaming">
@@ -297,24 +323,6 @@
                                         </p>
                                     </div>
 
-                                    <!-- <div class="col-12 col-lg-3">
-                                    <div class="border-b-sec">
-                                        <h3>Internet Rates</h3>  
-                                        <p class="blue">Unlimited Data Roaming</p>
-                                        <p class="small">(1GB highspeed data and 512kbps thereafter)</p>
-                                        <p class="blue mt-3">
-                                        <a href="/yes-postpaid-plans/#postpaid-plans" target="_blank" style="text-decoration: underline; font-weight: normal;color: #000;">
-                                        Check out our plans</a>.</p>
-                                      </div>
-                                      <div class="border-b-sec">
-                                        <p class="blue mt-3 pt-3">Add-On Availability</p>
-                                        <p class="blue mt-2">YesRoam SG Daily Top-Up</p>
-                                        <p class="blue mt-2">Unlimited</p>   
-                                        <p class="small">(1GB highspeed data and 512Kbps thereafter)</p> 
-                                        <h4 class="blue mt-2">RM8 /<span>day</span></h4>
-                                       </div>
-                                    </div> -->
-
                                     <div class="col-12 col-lg-6">
                                         <div class="row">
                                             <div class="col-12">
@@ -324,7 +332,7 @@
                                             <div class="col-6 col-lg-6">
                                                 <p class="ctitle">Call to any SG number</p>
                                                 <h4 class="blue">RM3.00 /Min</h4>
-                                            </div>  
+                                            </div>
                                             <div class="col-6 col-lg-6 mt-2">
                                                 <p class="ctitle"> Call to other country’s number</p>
                                                 <h4 class="blue">RM28.00 /min</h4>
@@ -332,18 +340,122 @@
                                             <div class="col-6 col-lg-6 mt-2">
                                                 <p class="ctitle">Call to any MY number</p>
                                                 <h4 class="blue">RM1.80/min</h4>
-                                            </div> 
-                                        
+                                            </div>
+
                                             <div class="col-6 col-lg-6 mt-2">
                                                 <p class="ctitle">Receiving Calls</p>
                                                 <h4 class="blue">RM1.40/min</h4>
-                                            </div>  
+                                            </div>
 
                                             <div class="col-6 col-lg-6 mt-2">
                                                 <p class="ctitle">SMS</p>
                                                 <h4 class="blue">RM1.00 /SMS</h4>
-                                            </div>     
-                                            
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div> -->
+
+            <!--end Singapore -->
+
+            <!--Asean Roam section data-country="AseanCountry"-->
+            <div data-country="aseanPlusCountry" style="display:none;">
+                <div class="row mt-3" id="asian-roam-section">
+                    <ul id="myTab" class="nav nav-tabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button id="dayone-tab" class="nav-link right-tab active" role="tab" type="button" data-bs-toggle="tab" data-bs-target="#dayone" aria-controls="dayone" aria-selected="false">1 Day</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button id="daythree-tab" class="nav-link left-tab" role="tab" type="button" data-bs-toggle="tab" data-bs-target="#daythree" aria-controls="daythree" aria-selected="true">
+                                3 Days</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button id="dayseven-tab" class="nav-link left-tab" role="tab" type="button" data-bs-toggle="tab" data-bs-target="#dayseven" aria-controls="dayseven" aria-selected="true">
+                                7 Days</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <!--other country -->
+            <div class="col-12 mt-3" data-country="OtherCountry">
+                <div style="background:#fff; border-radius: 15px;">
+                    <h1 id="header" class="raom-logo">
+                        <img class="mb-0" src="/wp-content/uploads/2024/06/YesRoam-logo.png" alt="YesRoam" /> <span data-countrytitle="aseanCountryTitle">Day
+                            Pass</span>
+                    </h1>
+
+                    <div class="row row-roaming">
+                        <div class="col-12 col-lg-2">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3>Plans</h3>
+                                    <h4 data-name="planName">Yes Postpaid Plans</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-10">
+                            <fieldset id="roaming-table">
+                                <div class="row" data-template="roamingTemplate" data-asianCountriesDays="NoDay">
+                                    <div class="col-12 col-lg-3 border-b-sec">
+                                        <h3>Roaming Operator</h3>
+                                        <p class="brand">
+                                        <h4 data-name="telcoName" class="blue">Personal</h4>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-12 col-lg-3 border-b-sec">
+                                        <h3>Internet Rates</h3>
+                                        <h4 class="internet-rates">
+                                            <span>RM</span><b data-name="planDayRateAmt">38</b><sub data-name="planDayRateSubset">/Day</sub>
+                                        </h4>
+                                        <p class="blue mt-3" data-name="planDayRateQuota">Up to 100MB Data</p>
+                                        <p class="small asean-storage-val" data-name="planDayRateTnc">Once the quota is finished, the data
+                                            speed will
+                                            be reduced until your day pass expires without additional cost.</p>
+                                    </div>
+
+                                    <div class="col-12 col-lg-6">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h3>Call &amp; SMS Rates</h3>
+                                            </div>
+
+                                            <div class="col-6 col-lg-6 mt-2">
+                                                <p class="ctitle" data-name="planCallWithinCountryTxt">Calls within
+                                                    Argentina</p>
+                                                <h4 class="blue" data-name="planCallWithinCountryRate">RM6.00 /Min</h4>
+                                            </div>
+
+                                            <div class="col-6 col-lg-6 mt-2">
+                                                <p class="ctitle">Calls to other countries</p>
+                                                <h4 class="blue" data-name="planCallToOtherCountriesRate">RM9.00 /Min
+                                                </h4>
+                                            </div>
+
+                                            <div class="col-6 col-lg-6 mt-2">
+                                                <p class="ctitle">Calls to Malaysia</p>
+                                                <h4 class="blue" data-name="planCallToMalaysiRate">RM6.00 /Min</h4>
+                                            </div>
+
+                                            <div class="col-6 col-lg-6 mt-2">
+                                                <p class="ctitle">Receiving calls</p>
+                                                <h4 class="blue" data-name="planReceivingCallRate">RM5.00 /Min</h4>
+                                            </div>
+
+                                            <div class="col-6 col-lg-6 mt-2">
+                                                <p class="ctitle">SMS</p>
+                                                <h4 class="blue" data-name="planSmsRate">RM1.00 /SMS</h4>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -354,166 +466,88 @@
 
                 </div>
             </div>
+            <!--end other country -->
 
-            <!--end Singapore -->
-
-            <!--other country -->
-                <div class="col-12 mt-3" data-country="OtherCountry">
-                <div style="background:#fff; border-radius: 15px;">
-                <h1>
-                    YesRoam <span data-title="PAYU">Day Pass</span>
-                </h1>
-
-                <div class="row row-roaming">
-                    <div class="col-12 col-lg-2">
-                        <div class="row">
-                            <div class="col-12">
-                                <h3>Plans</h3>
-                                <h4 data-name="planName">Yes Postpaid Plans</h4>
+            <!-- section roam top-up -->
+            <fieldset id="topup-roaming-table" data-name="topUp">
+                <div class="col-12 mt-3" data-template="topupRoamingTemplate" style="display: none;">
+                    <div class="row roam-topup" id="topUpRoamingTemp">
+                        <div class="col-12 col-lg-2">
+                            <h2 data-name="topuptitle" class="raom-logo">
+                                <img class="mb-0" src="/wp-content/uploads/2024/06/YesRoam-logo.png" alt="YesRoam" />
+                            </h2>
+                            <h3>Top-up</h3>
+                            <div class="operator-sec">
+                                <h3>Roaming Operator</h3>
+                                <h4 data-name="topupTelcoName">Telstra</h4>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-12 col-lg-10">
-                        <fieldset id="roaming-table">
-                            <div class="row" data-template="roamingTemplate" style="display: none;">
-                                <div class="col-12 col-lg-3 border-b-sec">
-                                    <h3>Roaming Operator</h3>
-                                    <p class="brand">
-                                    <h4 data-name="telcoName" class="blue">Personal</h4>
-                                    </p>
-                                </div>
-
-                                <div class="col-12 col-lg-3 border-b-sec">
-                                    <h3>Internet Rates</h3>                            
-                                    <h4 class="internet-rates">
-                                        <span>RM</span><b data-name="planDayRateAmt">38</b><sub data-name="planDayRateSubset">/Day</sub>
-                                    </h4>
-                                    <p class="blue mt-3" data-name="planDayRateQuota">Up to 100MB Data</p>
-                                    <p class="small" data-name="planDayRateTnc">Once the quota is finished, the data speed will
-                                        be reduced until your day pass expires without additional cost.</p>
-                                </div>
-
-                                <div class="col-12 col-lg-6">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <h3>Call &amp; SMS Rates</h3>
-                                        </div>
-
-                                        <div class="col-6 col-lg-6 mt-2">
-                                            <p class="ctitle" data-name="planCallWithinCountryTxt">Call Within Argentina</p>
-                                            <h4 class="blue" data-name="planCallWithinCountryRate">RM6.00 /Min</h4>
-                                        </div>
-
-                                        <div class="col-6 col-lg-6 mt-2">
-                                            <p class="ctitle">Call To Other Countries</p>
-                                            <h4 class="blue" data-name="planCallToOtherCountriesRate">RM9.00 /Min</h4>
-                                        </div>
-
-                                        <div class="col-6 col-lg-6 mt-2">
-                                            <p class="ctitle">Call To Malaysia</p>
-                                            <h4 class="blue" data-name="planCallToMalaysiRate">RM6.00 /Min</h4>
-                                        </div>
-
-                                        <div class="col-6 col-lg-6 mt-2">
-                                            <p class="ctitle">Receiving Calls</p>
-                                            <h4 class="blue" data-name="planReceivingCallRate">RM5.00 /Min</h4>
-                                        </div>
-
-                                        <div class="col-6 col-lg-6 mt-2">
-                                            <p class="ctitle">SMS</p>
-                                            <h4 class="blue" data-name="planSmsRate">RM1.00 /SMS</h4>
+                        <div class="col-12 col-lg-10">
+                            <fieldset id="roaming-table">
+                                <div class="row d-flex" style="display: block;">
+                                    <div class="col-12 col-lg-4 mb-3">
+                                        <div class="inner-sec-bg">
+                                            <h4 data-name="topupPlanDayRateQuota">100MB<br>
+                                                <span data-name="topupPlanDayRateSubset">per day</span>
+                                            </h4>
+                                            <h5 class="internet-rates">
+                                                <span data-name="topupPlanDayRateAmt_100"><sub>RM</sub>0</span>
+                                            </h5>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </div>
+                                    <div class="col-12 col-lg-4 mb-3">
+                                        <div class="inner-sec-bg">
+                                            <h4 data-name="topupPlanDayRateQuota">150MB<br>
+                                                <span data-name="topupPlanDayRateSubset">per day</span>
+                                            </h4>
+                                            <h5 class="internet-rates">
+                                                <span data-name="topupPlanDayRateAmt_150"><sub>RM</sub>0</span>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-4 mb-3">
+                                        <div class="inner-sec-bg">
+                                            <h4 data-name="topupPlanDayRateQuota">200MB<br>
+                                                <span data-name="topupPlanDayRateSubset">per day</span>
+                                            </h4>
+                                            <h5 class="internet-rates">
+                                                <span data-name="topupPlanDayRateAmt_200"><sub>RM</sub>0</span>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-4 mb-3">
+                                        <div class="inner-sec-bg">
+                                            <h4 data-name="topupPlanDayRateQuota">300MB<br>
+                                                <span data-name="topupPlanDayRateSubset">per day</span>
+                                            </h4>
+                                            <h5 class="internet-rates">
+                                                <span data-name="topupPlanDayRateAmt_300"><sub>RM</sub>0</span>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-4 mb-3">
+                                        <div class="inner-sec-bg">
+                                            <h4 data-name="topupPlanDayRateQuota">400MB<br>
+                                                <span data-name="topupPlanDayRateSubset">per day</span>
+                                            </h4>
+                                            <h5 class="internet-rates">
+                                                <span data-name="topupPlanDayRateAmt_400"><sub>RM</sub>0</span>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-4 mb-3">
+                                        <div class="inner-sec-bg">
+                                            <h4 data-name="topupPlanDayRateQuota">500MB<br>
+                                                <span data-name="topupPlanDayRateSubset">per day</span>
+                                            </h4>
+                                            <h5 class="internet-rates">
+                                                <span data-name="topupPlanDayRateAmt_500"><sub>RM</sub>0</span>
+                                            </h5>
+                                        </div>
+                                    </div>
 
-                        </div>
-
-                    </div>
-                </div>
-         <!--end other country -->
-
-           <!-- section roam top-up -->
-           <fieldset id="topup-roaming-table" data-name="topUp">
-            <div class="col-12 mt-3"  data-template="topupRoamingTemplate" style="display: none;" >
-                <div class="row roam-topup" id="topUpRoamingTemp">
-                    <div class="col-12 col-lg-2">
-                        <h2 data-name="topuptitle">YesRoam</h2>
-                        <h3>Top-up</h3>
-                        <div class="operator-sec">
-                            <h3>Roaming Operator</h3>
-                            <h4 data-name="topupTelcoName">Telstra</h4>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-lg-10">
-                        <fieldset id="roaming-table">
-                            <div class="row d-flex" style="display: block;">
-                                <div class="col-12 col-lg-4 mb-3">
-                                    <div class="inner-sec-bg">
-                                        <h4 data-name="topupPlanDayRateQuota">100MB<br>
-                                            <span data-name="topupPlanDayRateSubset">per day</span>
-                                        </h4>
-                                        <h5 class="internet-rates">
-                                            <span data-name="topupPlanDayRateAmt_100"><sub>RM</sub>0</span>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-4 mb-3">
-                                    <div class="inner-sec-bg">
-                                        <h4 data-name="topupPlanDayRateQuota">150MB<br>
-                                            <span data-name="topupPlanDayRateSubset">per day</span>
-                                        </h4>
-                                        <h5 class="internet-rates">
-                                            <span data-name="topupPlanDayRateAmt_150"><sub>RM</sub>0</span>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-4 mb-3">
-                                    <div class="inner-sec-bg">
-                                        <h4 data-name="topupPlanDayRateQuota">200MB<br>
-                                            <span data-name="topupPlanDayRateSubset">per day</span>
-                                        </h4>
-                                        <h5 class="internet-rates">
-                                            <span data-name="topupPlanDayRateAmt_200"><sub>RM</sub>0</span>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-4 mb-3">
-                                    <div class="inner-sec-bg">
-                                        <h4 data-name="topupPlanDayRateQuota">300MB<br>
-                                            <span data-name="topupPlanDayRateSubset">per day</span>
-                                        </h4>
-                                        <h5 class="internet-rates">
-                                            <span data-name="topupPlanDayRateAmt_300"><sub>RM</sub>0</span>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-4 mb-3">
-                                    <div class="inner-sec-bg">
-                                        <h4 data-name="topupPlanDayRateQuota">400MB<br>
-                                            <span data-name="topupPlanDayRateSubset">per day</span>
-                                        </h4>
-                                        <h5 class="internet-rates">
-                                            <span data-name="topupPlanDayRateAmt_400"><sub>RM</sub>0</span>
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-4 mb-3">
-                                    <div class="inner-sec-bg">
-                                        <h4 data-name="topupPlanDayRateQuota">500MB<br>
-                                            <span data-name="topupPlanDayRateSubset">per day</span>
-                                        </h4>
-                                        <h5 class="internet-rates">
-                                            <span data-name="topupPlanDayRateAmt_500"><sub>RM</sub>0</span>
-                                        </h5>
-                                    </div>
-                                </div>
-
-                                <!-- <div class="col-12 col-lg-4 mb-3">
+                                    <!-- <div class="col-12 col-lg-4 mb-3">
                                     <div class="inner-sec-bg">
                                         <h4>300MB<br>
                                             <span>per day</span>
@@ -534,103 +568,297 @@
                                         </h5>
                                     </div>
                                 </div> -->
-                            </div>
-                        </fieldset>
+                                </div>
+                            </fieldset>
+                        </div>
                     </div>
                 </div>
-            </div>
-         </fieldset>
+            </fieldset>
 
             <!-- end section roam top-up -->
 
             <div class="col-12 text-left" style="font-size:12px;">&nbsp;
                 <p>• Prices shown above are subject to 6% service tax.</p>
-                <p>• The call rates shown above are not applicable for calls to Premium Numbers, Satellites and special services.</p>
+                <!-- <p>• The call rates shown above are not applicable for calls to Premium Numbers, Satellites and special
+                    services.</p> -->
+                <p>• The call rates shown above are not applicable for calls to premium numbers, satellites, or special services.</p>
                 <p>• For more information, please contact YesCare via email <a href="mailto:yescare@yes.my">yescare@yes.my</a>.</p>
                 <h3 class="text-center questions-head mt-3">
-                Got questions?
+                    Got questions?
                 </h3>
-                 <p class="text-center mt-3 mb-0"><a href="/faq/roaming" class="viewall-btn">Click here to View FAQs 
+                <p class="text-center mt-3 mb-0"><a href="/faq/roaming" class="viewall-btn">Click here to View FAQs
                         <span class="iconify" data-icon="akar-icons:arrow-right"></span> </a></p>
             </div>
-         </div>
+        </div>
         <div class="col-12 mt-5 text-center">
-     <a href="#" data-link="closeRoaming" class="pink-btn">Close <span class="iconify" data-icon="carbon:close-filled"></span></a>
+            <a href="#" data-link="closeRoaming" class="pink-btn">Close <span class="iconify" data-icon="carbon:close-filled"></span></a>
         </div>
     </div>
 </section>
 <!--Roaming Rates Section End-->
 
 <!--Roaming Tips Start data-roaming="roaming-rates"-->
-<!--<section id="roaming-tips"  style="display:none;">
+<section id="roaming-tips">
     <div class="container">
         <div class="row">
-            <div class="col">&nbsp;
-                <h1>Roaming Tips</h1>
-                <div class="row gx-5 row-roaming-step">
-                    <div class="col-12 col-md-6 col-xl-3 text-center">
-                        <img alt="selfcare" class="mb-4" src="/wp-content/uploads/2023/12/yes-icon.png">
-                        <p>Activate International Roaming service via MyYes app.</p>
-                    </div>
-                    <div class="col-12 col-md-6 col-xl-3 text-center">
-                        <img alt="credit-limit" class="mb-4" src="/wp-content/uploads/2023/12/credit-icon.png">
-                        <p>Increase your credit limit via MyYes app to avoid any service disruption.</p>
-                    </div>
 
-                    <div class="col-12 col-md-6 col-xl-3 text-center">
-                        <img alt="deactivate" class="mb-4" src="/wp-content/uploads/2023/12/roaming-icon.png">
-                        <p>Turn off your Data Roaming &amp; Mobile Data in your phone setting if you don't wish to use data service while abroad.
-                        </p>
-                    </div>
-                    <div class="col-12 col-md-6 col-xl-3 text-center">
-                        <img alt="bills" class="mb-4" src="/wp-content/uploads/2023/12/bill-icon.png">
-                        <p>Settle all outstanding bills.</p>
+            <ul id="myTab" class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button id="s-month-tab" class="nav-link1 right-tab active" role="tab" type="button" data-bs-toggle="tab" data-bs-target="#s-month" aria-controls="s-month" aria-selected="false">ASEAN PLUS</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button id="f-month-tab" class="nav-link1 left-tab" role="tab" type="button" data-bs-toggle="tab" data-bs-target="#f-month" aria-controls="f-month" aria-selected="true">
+                        SINGAPORE</button>
+                </li>
+            </ul>
+
+            <div id="myTabContent" class="tab-content">
+                <!-- 24-Month plans -->
+                <div id="s-month" class="tab-pane fade active show" role="tabpanel" aria-labelledby="s-month-tab">
+                    <div class="col">
+                        <h1>ASEAN Plus Roaming</h1>
+                        <p>The biggest savings on ASEAN data roaming from only RM10!</p>
+
+                        <div class="row gx-5 mt-5">
+                            <div class="col-12 col-md-6 col-xl-4 text-center row-roaming-step">
+                                <img alt="selfcare" class="mb-4" src="/wp-content/uploads/2024/06/data-roaming.png">
+                                <h2>Unlimited Data Roaming</h2>
+                                <p>The most affordable roaming pass with no data cap.</p>
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-4 text-center row-roaming-step">
+                                <img alt="credit-limit" class="mb-4" src="/wp-content/uploads/2024/06/roaming-passes.png">
+                                <h2>Flexible Roaming Passes</h2>
+                                <p>Get the best rates based on the duration of your trips.</p>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-xl-4 text-center row-roaming-step">
+                                <img alt="deactivate" class="mb-4" src="/wp-content/uploads/2024/06/destinations.png">
+                                <h2>Across 11 Destinations</h2>
+                                <p>Enjoy the same rate for various ASEAN Plus countries.</p>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
+
+                <!-- 12-Month plans -->
+                <div id="f-month" class="tab-pane fade" role="tabpanel" aria-labelledby="f-month-tab">
+                    <div class="col">
+                        <h1>Singapore Roaming</h1>
+                        <p>Enjoy the best of data roaming in Singapore with Yes Infinite.</p>
+
+                        <div class="row gx-5 mt-5">
+                            <div class="col-12 col-md-6 col-xl-4 text-center row-roaming-step">
+                                <img alt="selfcare" class="mb-4" src="/wp-content/uploads/2024/06/unlimited-roaming.png">
+                                <h2>Unlimited 5G Roaming</h2>
+                                <p>The most affordable roaming plan with no data cap.</p>
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-4 text-center row-roaming-step">
+                                <img alt="credit-limit" class="mb-4" src="/wp-content/uploads/2024/06/incoming-calls.png">
+                                <h2>FREE Incoming Calls</h2>
+                                <p>With FREE outgoing calls to any Malaysian number.</p>
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-4 text-center row-roaming-step">
+                                <img alt="deactivate" class="mb-4" src="/wp-content/uploads/2024/06/infinite-postpaid.png">
+                                <h2>FREE with Infinite Postpaid</h2>
+                                <p>Get uncapped 5G data & speed while in Malaysia.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-</section>-->
+    </div>
+</section>
 <!--Roaming Tips End-->
+
+<!-- Pass section -->
+<section class="pass-section" id="pass-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-0">
+                <h2>
+                    More ways to stay connected with <br>
+                    <img src="/wp-content/uploads/2024/06/roam-asian-logo.png" alt="...">
+                </h2>
+                <p>Pre-book your Data Roaming Pass with the MyYes App.</p>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12 col-xl-12 col-md-12 mx-auto">
+                <div class="row flex-nowrap flex-xl-wrap getway layer-plans">
+                    <div class="col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="plan-details-list">
+                                    <h3>1 Day Pass</h3>
+                                    <p>1 GB</p>
+                                    <ul>
+                                        <li>1GB high-speed data, 512kbps thereafter.</li>
+                                        <li>Customise your activation date up to 30 days in advance.</li>
+                                        <li>Free cancellation 24 hours before activation.</li>
+                                    </ul>
+                                </div>
+                                <div class="price-section">
+                                    <div class="price-left">
+                                        <h2>RM10</h2>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="plan-details-list">
+                                    <h3>3 Days Pass</h3>
+                                    <p>5 GB</p>
+                                    <ul>
+                                        <li>5GB high-speed data, 512kbps thereafter.</li>
+                                        <li>Customise your activation date up to 30 days in advance.</li>
+                                        <li>Free cancellation 24 hours before activation.</li>
+                                    </ul>
+                                </div>
+                                <div class="price-section">
+                                    <div class="price-left">
+                                        <h2>RM20</h2>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up">
+                        <div class="card">
+                            <!-- <h4>RECOMMENDED</h4> -->
+                            <div class="card-body">
+                                <div class="plan-details-list">
+                                    <h3>7 Days Pass</h3>
+                                    <p>10 GB</p>
+                                    <ul>
+                                        <li>10GB high-speed data, 512kbps thereafter.</li>
+                                        <li>Customise your activation date up to 30 days in advance.</li>
+                                        <li>Free cancellation 24 hours before activation.</li>
+                                    </ul>
+                                </div>
+                                <div class="price-section">
+                                    <div class="price-left">
+                                        <h2>RM30</h2>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12 col-xl-12 col-md-12 mt-0" id="destinations-slider-sec">
+
+                <h3 class="line-b background"><span>Applicable ASEAN Plus destinations</span></h3>
+
+                <div class="destinations-slider">
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/06/Brunei.png">
+                        <h2>Brunei</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/06/Cambodia.png">
+                        <h2>Cambodia</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/06/China.png">
+                        <h2>China</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/06/Hong-Kong.png">
+                        <h2>Hong Kong</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/06/Indonesia.png">
+                        <h2>Indonesia</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/06/Laos.png">
+                        <h2>Laos</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/06/Macau.png">
+                        <h2>Macau</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/06/Philippines.png">
+                        <h2>Philippines</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/06/Taiwan.png">
+                        <h2>Taiwan</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/06/Thailand.png">
+                        <h2>Thailand</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/06/Vietnam.png">
+                        <h2>Vietnam</h2>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Pass section End-->
 
 <!--Start Roaming Start data-roaming="roaming-rates"-->
 <section id="start-roaming" style="display:block;">
     <div class="container">
-        <h1>How to start roaming on your device?</h1>
+        <!-- <h1>How to start roaming on your device?</h1> -->
         <div class="row justify-content-center">
             <div class="col-12 gx-5">
                 <div class="row">
-                <div class="col-12 col-lg-3 start-roaming-cont">
-                        <img src="/wp-content/uploads/2022/03/roaming-setting-icon.jpg" class="mb-4 d-none" alt="">
-                        <!-- <p class="small">Step 1:</p> -->
-                        <h2 class="num-box"><span>1</span> <strong>Launch MyYes App</strong></h2>
-                        <p class="mt-3">Activate International Roaming service via MyYes app.</p>
+                    <div class="col-12 col-lg-5 start-roaming-cont-m">
+                        <h2 class="num-box">Steps to start roaming on your device​</h2>
+                        <img src="/wp-content/uploads/2024/06/roaming-device.png" class="mb-0" alt="">
                     </div>
-                    <div class="col-12 col-lg-2 start-roaming-cont">
-                        <img src="/wp-content/uploads/2022/03/roaming-setting-icon.jpg" class="mb-4 d-none" alt="">
-                        <!-- <p class="small">Step 1:</p> -->
-                        <h2 class="num-box"><span>2</span> <strong>Go to Settings.</strong></h2>
-                        <p class="mt-3">Select “Mobile Network”.</p>
+
+                    <div class="col-12 col-lg-7 start-roaming-cont-r">
+                        <div class="row row-cols-2">
+                            <div class="col start-roaming-cont">
+                                <h2 class="num-box"><span>1</span> <strong>Launch the MyYes App</strong></h2>
+                                <p class="mt-3">Activate 'International Roaming Service' from the YesRoam quick access.
+                                </p>
+                            </div>
+                            <div class="col start-roaming-cont">
+                                <h2 class="num-box"><span>2</span> <strong>Go to 'Settings' on your device</strong></h2>
+                                <p class="mt-3">Select 'Mobile Network', then 'Network Operators', and connect to our
+                                    preferred roaming operator.</p>
+
+                            </div>
+                            <div class="col start-roaming-cont">
+                                <h2 class="num-box"><span>3</span> <strong>Go to 'Mobile Network' on your
+                                        device</strong></h2>
+                                <p class="mt-3">Turn on 'Data Roaming & Mobile Data' to enable data service while
+                                    abroad.</p>
+                            </div>
+
+                        </div>
                     </div>
-                    <div class="col-12 col-lg-4 start-roaming-cont">
-                        <img src="/wp-content/uploads/2022/03/roaming-network-icon.jpg" class="mb-4 d-none" alt="">
-                        <!-- <p class="small">Step 2:</p> -->
-                        <h2 class="num-box"><span>3</span> <strong>Click Network Operators.</strong></h2>
-                        <p class="mt-3">Upon the list of networks displayed, select our preferred roaming operator to connect.</p>
-                        
-                    </div>
-                    <div class="col-12 col-lg-3 start-roaming-cont">
-                        <img src="/wp-content/uploads/2022/03/roaming-mobile-icon.jpg" class="mb-4 d-none" alt="">
-                        <!-- <p class="small">Step 3:</p> -->
-                        <h2 class="num-box"><span>4</span> <strong>Go to Mobile Network.</strong></h2>
-                        <p class="mt-3">Turn on your Data Roaming & Mobile Data in your phone setting if you wish to use data service while abroad.</p>
-                        <p class="mt-3">On some Android phones, you may need to select your SIM to turn on Data Roaming.</p>
-                    </div>
-                    <!-- <div class="col-12 mt-5 start-roaming-cont">
-                        <p class="small"><strong>Tip:</strong> For Partnering Operators who do not have 4G LTE roaming service, kindly select the mobile network mode to 2G/3G in your phone setting to avoid any connection or compatibility issue.</p>
-                        <a href="/faq/roaming" class="viewall-btn mt-5">Have problems connecting? Click here<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
-                    </div> -->
-                    
+
+
+
                 </div>
             </div>
         </div>
@@ -774,8 +1002,8 @@
         <div class="row justify-content-center">
             <div class="col-11 col-lg-8 d-flex align-items-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                 <div class="m-auto">
-                    <h1>Making an overseas call?</span></h1>
-                    <p>Here are the affordable International Direct Dailing (IDD) rates you’ll like.</p>
+                    <h1>Overseas calls made affordable</span></h1>
+                    <p>Check our International Direct Dialling (IDD) rates for the country you’re calling.</p>
                     <div class="search-box dropdown">
                         <?php get_template_part('template-parts/roaming/dropdown-idd', '', ['data_idd' => $args['data_idd']]); ?>
                         <input id="iddSelect" name="iddSelect" type="hidden" />
@@ -848,7 +1076,7 @@
                         <h4 data-name="iddPostpaidMobile" class="price-color">1.80</h4>
                     </div>
                     <div class="col-3 text-center">
-                        <h4  data-name="iddPostpaidSms" class="price-color">0.28</h4>
+                        <h4 data-name="iddPostpaidSms" class="price-color">0.28</h4>
                     </div>
                 </div>
 
@@ -869,7 +1097,7 @@
                     </div>
                 </div>
 
-               
+
 
 
 
@@ -911,10 +1139,10 @@
             </div> -->
         </div>
         <div class="row">
-            <div class="col-8 m-auto text-left idd-rate" >&nbsp;
+            <div class="col-8 m-auto text-left idd-rate">&nbsp;
                 <p>• Prices shown above are subject to 6% service tax.</p>
 
-                <p>• IDD calls are charged at 60 seconds block.</p>
+                <p>• IDD calls are charged at 30 seconds block.</p>
 
                 <p>• Rates are subject to change without prior notice.</p>
                 <a href="#" data-button="closeIdd" class="pink-btn mt-5">Close <span class="iconify" data-icon="carbon:close-filled"></span></a>
@@ -923,6 +1151,23 @@
     </div>
 </section>
 <!--Roaming Rates Section End-->
+
+
+<!-- benefits section -->
+<section class="benefits-section mt-4 mt-lg-0" data-aos="fade-up">
+    <div class="container">
+        <div class="row">
+            <h4 class="mb-4">More roaming benefits<br> with Yes Infinite Plans</h4>
+        </div>
+        <div class="row justify-content-lg-center">
+            <div class="col-12 col-lg-12">
+                <img src="/wp-content/uploads/2024/06/roaming-benefits-banner.webp" class="w-100 d-none d-lg-block" alt="...">
+                <img src="/wp-content/uploads/2024/06/roaming-benefits-banner-mob.webp" class="w-100 d-block d-md-block d-lg-none" alt="...">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- benefits section End-->
 
 <!-- Footer FAQs STARTS -->
 <section class="layer-footerFAQ mt-4 mt-lg-0" id="faq-section" data-aos="fade-up">
@@ -934,56 +1179,61 @@
             <div class="col-12 col-lg-12">
                 <div class="accordion accordion-flush mb-3" id="accordionFlushExample">
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingOne"><button class="accordion-button collapsed"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
-                                aria-expanded="false" aria-controls="flush-collapseOne">
+                        <h2 class="accordion-header" id="flush-headingOne"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                 What is YesRoam?
                             </button></h2>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse"
-                            aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body">
-                                <p>YesRoam provides customers unlimited data roaming when you connect to our preferred roaming partner while traveling overseas. 
-                                    YesRoam is available in certain designated countries. 
+                                <p>YesRoam provides customers unlimited data roaming when you connect to our preferred
+                                    roaming partner while traveling overseas.
+                                    YesRoam is available in certain designated countries.
                                     For the full list of eligible countries and information on pricing,
-                                     please visit<a href="/roaming/"> yes.my/roaming</a>.</p>
+                                    please visit<a href="/roaming/"> yes.my/roaming</a>.</p>
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingTwo"><button class="accordion-button collapsed"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
-                                aria-expanded="false" aria-controls="flush-collapseTwo">
+                        <h2 class="accordion-header" id="flush-headingTwo"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
                                 How do I subscribe to YesRoam?
                             </button></h2>
                         <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush- 
                              headingTwo" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body">
                                 <p>
-                                YesRoam is available to our Postpaid customers. After enabling the roaming service, please ensure your roaming is activated via MyYes app > YesRoam > Activate Roaming. 
-                                A roaming deposit may be required. You will be auto subscribed to either YesRoam Daily or YesRoam Monthly when you arrive at the designated country and connect to the preferred roaming operator. 
-                                Note: If you are a principal line user, you may assist your supplementary lines to activate YesRoam by increasing the credit limit or paying additional roaming deposit via MyYes app to activate YesRoam. Login to primary account > Switch to supplementary line in account dropdown > Click More > Roaming > Activate Roaming > Increase credit limit or pay deposit > Activate roaming.
+                                    YesRoam is available to our Postpaid customers. After enabling the roaming service,
+                                    please ensure your roaming is activated via MyYes app > YesRoam > Activate Roaming.
+                                    A roaming deposit may be required. You will be auto subscribed to either YesRoam
+                                    Daily or YesRoam Monthly when you arrive at the designated country and connect to
+                                    the preferred roaming operator.
+                                    Note: If you are a principal line user, you may assist your supplementary lines to
+                                    activate YesRoam by increasing the credit limit or paying additional roaming deposit
+                                    via MyYes app to activate YesRoam. Login to primary account > Switch to
+                                    supplementary line in account dropdown > Click More > Roaming > Activate Roaming >
+                                    Increase credit limit or pay deposit > Activate roaming.
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingThree"><button class="accordion-button collapsed"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"
-                                aria-expanded="false" aria-controls="flush-collapseThree">
+                        <h2 class="accordion-header" id="flush-headingThree"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
                                 What is YesRoam Monthly?</button></h2>
-                        <div id="flush-collapseThree" class="accordion-collapse collapse"
-                            aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body">
-                                <p>YesRoam Monthly offers free unlimited data roaming with our Yes Infinite and Yes Infinite+ Postpaid Plans. 
-                                    It also includes free incoming calls from any Malaysian number and free outgoing calls to any Malaysian number while in the roaming country. SMS is charged as per roaming rates at <a href="/roaming/"> yes.my/roaming</a>. 
-                                    Customers will enjoy unlimited data roaming starting with 10GB high speed data, followed by unlimited data roaming at 512kbps.</p>
+                                <p>YesRoam Monthly offers free unlimited data roaming with our Yes Infinite and Yes
+                                    Infinite+ Postpaid Plans.
+                                    It also includes free incoming calls from any Malaysian number and free outgoing
+                                    calls to any Malaysian number while in the roaming country. SMS is charged as per
+                                    roaming rates at <a href="/roaming/"> yes.my/roaming</a>.
+                                    Customers will enjoy unlimited data roaming starting with 10GB high speed data,
+                                    followed by unlimited data roaming at 512kbps.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <p class="text-center mb-0"><a href="/docs/faq/roaming-idd/" class="viewall-btn">View All FAQs 
-                    <!-- <img src="/wp-content/uploads/2023/10/next-arrow-icon.png" alt="..." style="width: 10px;"> -->
-                        <span class="iconify" data-icon="akar-icons:arrow-right"></span> </a></p>
+                <p class="text-center mb-0"><a href="/docs/faq/roaming-idd/" class="viewall-btn">View All FAQs
+                        <!-- <img src="/wp-content/uploads/2023/10/next-arrow-icon.png" alt="..." style="width: 10px;"> -->
+                        <span class="iconify" data-icon="akar-icons:arrow-right"></span>
+                    </a></p>
             </div>
         </div>
     </div>

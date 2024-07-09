@@ -2496,7 +2496,7 @@ function create_label(i, w_field_label) {
 }
 
 function change_label(id, label, type) {
-  label = label.replace(/<\/?(?!(?:\/*b|\/*p|\/*a|\/*strong|\/*span|\/*br|\/*ul|\/*ol|\/*li|\/*i)\b)(?:[^>"']|"[^"]*"|'[^']*')*>/ig, "");
+  label = label.replace(/(<([^>]+)>)/ig, '');
   if (!type) {
     var label_value = label.replace(/[\'\"]/g, "");
     document.getElementById(id).innerHTML = label;
@@ -3279,6 +3279,7 @@ function create_class(i, w_class) {
 }
 
 function change_class(x,id) {
+  x = x.replace(/[|&;$%@"<>=()+,]/g, "");
   if (document.getElementById(id + '_label_sectionform_id_temp')) {
     document.getElementById(id + '_label_sectionform_id_temp').setAttribute("class", x);
   }

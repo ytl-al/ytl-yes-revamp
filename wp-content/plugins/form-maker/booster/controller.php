@@ -17,7 +17,11 @@ class BoosterController {
     'AIzaSyAgXPc9Yp0auiap8L6BsHWoSVzkSYgHdrs',
     'AIzaSyCftPiteYkBsC2hamGbGax5D9JQ4CzexPU',
     'AIzaSyC-6oKLqdvufJnysAxd0O56VgZrCgyNMHg',
-    'AIzaSyB1QHYGZZ6JIuUUce4VyBt5gF_-LwI5Xsk'
+    'AIzaSyB1QHYGZZ6JIuUUce4VyBt5gF_-LwI5Xsk',
+    'AIzaSyDZLf5UpZ914NoCZF16ad0PrspINs6ak0g',
+    'AIzaSyDvLQHgtF94eha7sDCLIUiQ0lmfsIOR_sw',
+    'AIzaSyAh8baU4m_C1qgSNsGiYU6q4iMDe6q_dSY',
+    'AIzaSyCjwzqteBYBPdYxyXPrcQGNtoQ20U89G2A',
   );
 
   public function __construct($booster) {
@@ -33,10 +37,15 @@ class BoosterController {
     require_once($this->booster->plugin_dir . '/view.php');
     $this->view = new BoosterView();
     if ( !$task ) {
-      $task = isset($_GET['task']) ? sanitize_text_field($_GET['task']) : (isset($_POST['task']) ? sanitize_text_field($_POST['task']) : '');
+      $task = isset($_POST['task']) ? sanitize_text_field($_POST['task']) : '';
     }
-    if ( $task != 'display' && method_exists($this, $task) ) {
-      $this->$task($params);
+    if ( $task != 'display' && method_exists($this, $task) && $task != 'execute' && $task != '__construct' ) {
+        $speed_ajax_nonce = isset($_POST['speed_ajax_nonce']) ? sanitize_text_field($_POST['speed_ajax_nonce']) : '';
+        if ( !wp_verify_nonce($speed_ajax_nonce, 'speed_ajax_nonce') ) {
+            die('Permission Denied.');
+        }
+
+        $this->$task($params);
     }
     else {
       $this->display();

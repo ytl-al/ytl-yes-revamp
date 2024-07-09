@@ -33,6 +33,17 @@ if ((stripQueryParameters(currentURL) === homepageURL) ) {
     // console.log(page);
 
 }
+
+// Get the language of the document
+var documentLanguage = document.documentElement.lang;
+clevertap.profile.push({
+  "Site": {
+    "Prefered Language": documentLanguage
+  }
+});
+
+
+
 // if (window.location.href.indexOf("devices") > -1) {
 //   document.addEventListener('DOMContentLoaded', function () {
   

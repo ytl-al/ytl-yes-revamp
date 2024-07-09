@@ -4,22 +4,46 @@
 <section class="hero-slider-section">
     <div class="hero-slider slider">
 
-    <div>
+    <!-- <div>
  <img src="/wp-content/uploads/2024/05/lightningspeed-honorx7b-web-bm-scaled.webp" class="w-100 d-none d-lg-block" alt="...">
  <img src="/wp-content/uploads/2024/05/lightningspeed-honorx7b-mobile-bm.webp" class="w-100 d-block d-md-block d-lg-none" alt="...">           
+</div> -->
+
+<div>  
+            <img src="/wp-content/uploads/2024/07/4phones-desktopbanner-bm-scaled.webp" class="w-100 d-none d-lg-block"
+                alt="...">
+            <img src="/wp-content/uploads/2024/07/4phones-mob-banner-bm.webp"
+                class="w-100 d-block d-md-block d-lg-none" alt="...">
+
+            <div class="inner-content-sec">
+            <div class="title-sec">
+                <img decoding="async" src="/wp-content/uploads/2024/07/yes-infinite-logo.webp" style="margin:0 0 15px; width:150px" alt="...">
+                
+            </div>
+            <h1 style=" color:#000 !important">Dapatkan<br>
+            Telefon 5G Baru!</h1>
+                <div class="btn-sec d-flex align-items-center">
+                    <div class="pricing-2" style="">
+                        <h4 class="d-block" style="color:#000 !important">
+                            <sup><span>Dari<br><b>RM</b></span></sup>58<span class="month-sec" style="color:#000 !important"> / bln</span>
+                        </h4>
+                    </div>
+                </div>
+                <!-- <div class="btn-sec" style="text-align: left;">
+                    <a href="/promo/pakej-super-jimat/" class="btn pink-btn">Buy Now</a>
+                </div> -->
+            </div>
 </div>
 
     
     <div class="slick-slide"> 
-            <img src="/wp-content/uploads/2024/05/superjimat-power35webbanner-mayupdate-desktop-scaled.webp" class="w-100 d-none d-lg-block"
-                alt="...">
-            <img src="/wp-content/uploads/2024/05/superjimat-power35webbanner-mayupdate-mobile.webp"
-                class="w-100 d-block d-md-block d-lg-none" alt="...">
+    <img src="/wp-content/uploads/2024/07/superjimat-desktopbanner-p35-scaled.webp" class="w-100 d-none d-lg-block" alt="...">
+    <img src="/wp-content/uploads/2024/07/superjimat-mobilebanner-p35.webp" class="w-100 d-block d-md-block d-lg-none" alt="...">
 
             <div class="inner-content-sec">
-                <h1 style="text-align:left">Pelan 5G dengan<br> simpanan BESAR!</h1>
+                <h1 style="">Pelan 5G dengan<br> simpanan BESAR!</h1>
                 <div class="btn-sec">
-                    <div class="pricing-2" style="margin:0">
+                    <div class="pricing-2" style="">
                         <h4 class="d-block">
                             <sup><span>Dari<br><b>RM</b></span></sup>35<span class="month-sec"> / bln</span>
                         </h4>

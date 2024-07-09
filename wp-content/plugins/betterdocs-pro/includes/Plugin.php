@@ -2,41 +2,41 @@
 
 namespace WPDeveloper\BetterDocsPro;
 
-use BetterDocs;
+use Exception;
 use WPDeveloper\BetterDocs\Core\BaseAPI;
+use WPDeveloper\BetterDocs\Utils\Views as FreeViews;
+use WPDeveloper\BetterDocsPro\Admin\Customizer\Customizer;
 use WPDeveloper\BetterDocsPro\Core\Admin;
-use WPDeveloper\BetterDocsPro\Core\Query;
-use WPDeveloper\BetterDocsPro\Core\Roles;
 use WPDeveloper\BetterDocsPro\Core\Install;
-use WPDeveloper\BetterDocsPro\Utils\Helper;
-use WPDeveloper\BetterDocsPro\Utils\Enqueue;
 use WPDeveloper\BetterDocsPro\Core\Installer;
 use WPDeveloper\BetterDocsPro\Core\MultipleKB;
-use WPDeveloper\BetterDocsPro\FrontEnd\FrontEnd;
-use WPDeveloper\BetterDocsPro\Shortcodes\ListView;
-use WPDeveloper\BetterDocsPro\Shortcodes\BetterdocsEncyclopedia;
-use WPDeveloper\BetterDocs\Utils\Views as FreeViews;
-use WPDeveloper\BetterDocsPro\Shortcodes\SidebarList;
-use WPDeveloper\BetterDocsPro\Shortcodes\MultipleKBTwo;
-use WPDeveloper\BetterDocsPro\Shortcodes\CategoryBoxTwo;
-use WPDeveloper\BetterDocsPro\Shortcodes\Attachment;
-use WPDeveloper\BetterDocsPro\Shortcodes\MultipleKBList;
-use WPDeveloper\BetterDocsPro\Shortcodes\CategoryGridTwo;
-use WPDeveloper\BetterDocsPro\Shortcodes\PopularArticles;
-use WPDeveloper\BetterDocsPro\Admin\Customizer\Customizer;
-use WPDeveloper\BetterDocsPro\Shortcodes\CategoryGridList;
-use WPDeveloper\BetterDocsPro\Shortcodes\MultipleKBTabGrid;
-use WPDeveloper\BetterDocsPro\Shortcodes\RelatedDocs;
-use WPDeveloper\BetterDocsPro\Shortcodes\RelatedCategories;
-use WPDeveloper\BetterDocsPro\Shortcodes\MultipleKB as MultipleKBShortcode;
+use WPDeveloper\BetterDocsPro\Core\Query;
+use WPDeveloper\BetterDocsPro\Core\Roles;
 use WPDeveloper\BetterDocsPro\Dependencies\WPDeveloper\Licensing\LicenseManager;
+use WPDeveloper\BetterDocsPro\FrontEnd\FrontEnd;
+use WPDeveloper\BetterDocsPro\Shortcodes\Attachment;
+use WPDeveloper\BetterDocsPro\Shortcodes\BetterdocsEncyclopedia;
+use WPDeveloper\BetterDocsPro\Shortcodes\CategoryBoxTwo;
+use WPDeveloper\BetterDocsPro\Shortcodes\CategoryGridList;
+use WPDeveloper\BetterDocsPro\Shortcodes\CategoryGridTwo;
+use WPDeveloper\BetterDocsPro\Shortcodes\ListView;
+use WPDeveloper\BetterDocsPro\Shortcodes\MultipleKB as MultipleKBShortcode;
+use WPDeveloper\BetterDocsPro\Shortcodes\MultipleKBList;
+use WPDeveloper\BetterDocsPro\Shortcodes\MultipleKBTabGrid;
+use WPDeveloper\BetterDocsPro\Shortcodes\MultipleKBTwo;
+use WPDeveloper\BetterDocsPro\Shortcodes\PopularArticles;
+use WPDeveloper\BetterDocsPro\Shortcodes\RelatedCategories;
+use WPDeveloper\BetterDocsPro\Shortcodes\RelatedDocs;
+use WPDeveloper\BetterDocsPro\Shortcodes\SidebarList;
+use WPDeveloper\BetterDocsPro\Utils\Enqueue;
+use WPDeveloper\BetterDocsPro\Utils\Helper;
 
 final class Plugin {
     /**
      * Plugin Version
      * @var string
      */
-    public $version = '3.3.2';
+    public $version = '3.4.2';
 
     /**
      * Plugin DB Version
@@ -44,17 +44,18 @@ final class Plugin {
      */
     public $db_version = '1.0.1';
 
-    private static $_instance = null;
+    private static          $_instance = null;
+    private ?LicenseManager $licenseManager;
 
     /**
      * Create a plugin instance.
      *
-     * @since 2.5.0
      * @param mixed ...$args
      *
      * @return static
      *
      * @suppress PHP0441
+     * @since 2.5.0
      */
     public static function get_instance() {
         if ( static::$_instance == null ) {
@@ -121,22 +122,22 @@ final class Plugin {
         new Install;
 
         // Admin Notices
-        add_action( 'admin_notices', [$this, 'required_plugin'] );
-        add_action( 'admin_notices', [$this, 'compatibility_notices'] );
+        add_action( 'admin_notices', [ $this, 'required_plugin' ] );
+        add_action( 'admin_notices', [ $this, 'compatibility_notices' ] );
 
-        add_action( 'betterdocs_init_before', [$this, 'before_init'] );
+        add_action( 'betterdocs_init_before', [ $this, 'before_init' ] );
 
-        add_action( 'betterdocs_loaded', [$this, 'initialize'] );
+        add_action( 'betterdocs_loaded', [ $this, 'initialize' ] );
 
         /**
          * After Setup Theme
          */
-        add_action( 'after_setup_theme', [$this, 'setup_theme'] );
+        add_action( 'after_setup_theme', [ $this, 'setup_theme' ] );
 
         /**
          * After Plugins Loaded
          */
-        add_action( 'admin_init', [$this, 'admin_init'] );
+        add_action( 'admin_init', [ $this, 'admin_init' ] );
 
         /**
          * Plugin Licensing
@@ -178,10 +179,7 @@ final class Plugin {
 
         $button_url = wp_nonce_url( self_admin_url( 'update.php?action=install-plugin&plugin=betterdocs' ), 'install-plugin_betterdocs' );
         if ( $_betterdocs_installed ) {
-            $button_url = wp_nonce_url(
-                'plugins.php?action=activate&amp;plugin=' . $plugin . '&amp;plugin_status=all&amp;paged=1&amp;s',
-                'activate-plugin_' . $plugin
-            );
+            $button_url = wp_nonce_url( 'plugins.php?action=activate&amp;plugin=' . $plugin . '&amp;plugin_status=all&amp;paged=1&amp;s', 'activate-plugin_' . $plugin );
         }
 
         include BETTERDOCS_PRO_ABSPATH . 'views/admin/notices/activate.php';
@@ -190,9 +188,9 @@ final class Plugin {
     public function compatibility_notices() {
         $plugin      = 'betterdocs/betterdocs.php';
         $plugins     = Helper::get_plugins();
-        $plugin_data = $plugins[$plugin];
+        $plugin_data = $plugins[ $plugin ];
 
-        if( isset( $plugin_data['Version'] ) && version_compare( $plugin_data['Version'], '2.5.0', '>=' ) ) {
+        if ( isset( $plugin_data['Version'] ) && version_compare( $plugin_data['Version'], '2.5.0', '>=' ) ) {
             return;
         }
 
@@ -200,7 +198,7 @@ final class Plugin {
     }
 
     public function initialize() {
-        add_action( 'init', [$this, 'init'], 1 );
+        add_action( 'init', [ $this, 'init' ], 1 );
 
         $this->container = betterdocs()->container;
 
@@ -216,17 +214,17 @@ final class Plugin {
         $this->multiple_kb = $this->container->get( MultipleKB::class );
         $this->query       = $this->container->get( Query::class );
 
-        add_filter( 'betterdocs_shortcodes', [$this, 'pro_shortcodes'] );
+        add_filter( 'betterdocs_shortcodes', [ $this, 'pro_shortcodes' ] );
 
         /**
          * Initialize API
          */
-        add_action( 'rest_api_init', [$this, 'api_initialization'] );
+        add_action( 'rest_api_init', [ $this, 'api_initialization' ] );
     }
 
     public function pro_shortcodes( $shortcodes ) {
 
-        $is_enable_encyclopedia = betterdocs()->settings->get('enable_encyclopedia');
+        $is_enable_encyclopedia = betterdocs()->settings->get( 'enable_encyclopedia' );
 
         $shortcodeClasses = [
             Attachment::class,
@@ -244,11 +242,11 @@ final class Plugin {
             RelatedDocs::class
         ];
 
-        if ($is_enable_encyclopedia) {
+        if ( $is_enable_encyclopedia ) {
             $shortcodeClasses[] = BetterdocsEncyclopedia::class;
         }
 
-        return array_merge($shortcodes, $shortcodeClasses);
+        return array_merge( $shortcodes, $shortcodeClasses );
     }
 
     /**
@@ -262,7 +260,7 @@ final class Plugin {
     /**
      * Define constant if not already set.
      *
-     * @param string      $name  Constant name.
+     * @param string      $name Constant name.
      * @param string|bool $value Constant value.
      */
     private function define( $name, $value ) {
@@ -286,10 +284,11 @@ final class Plugin {
     }
 
     public function before_init() {
-        add_filter( 'betterdocs_container_config', [$this, 'container_config'] );
+        add_filter( 'betterdocs_container_config', [ $this, 'container_config' ] );
     }
 
-    public function scripts( $hook ) {}
+    public function scripts( $hook ) {
+    }
 
     public function container_config( $configs ) {
         $config_array = require_once BETTERDOCS_PRO_ABSPATH . 'includes/config.php';
@@ -310,7 +309,7 @@ final class Plugin {
 
         if ( ! empty( $_api_classes ) && is_array( $_api_classes ) ) {
             foreach ( $_api_classes as $class ) {
-                if ( $class == '.' || $class == '..' || strpos( $class, '.' ) === 0)  {
+                if ( $class == '.' || $class == '..' || strpos( $class, '.' ) === 0 ) {
                     continue;
                 }
 
@@ -325,32 +324,43 @@ final class Plugin {
         }
     }
 
+    /**
+     * @throws Exception
+     */
     public function license() {
         add_action( 'plugins_loaded', function () {
             if ( ! did_action( 'betterdocs_loaded' ) ) {
                 return;
             }
 
-            LicenseManager::get_instance( [
-                'plugin_file'    => BETTERDOCS_PRO_FILE,
-                'version'        => $this->version,
-                'item_id'        => BETTERDOCS_PRO_SL_ITEM_ID,
-                'item_name'      => BETTERDOCS_PRO_SL_ITEM_NAME,
-                'item_slug'      => BETTERDOCS_PRO_SL_ITEM_SLUG,
-                'storeURL'       => BETTERDOCS_PRO_STORE_URL,
-                'textdomain'     => 'betterdocs-pro',
-                'db_prefix'      => BETTERDOCS_PRO_SL_DB_PREFIX,
-                'page_slug'      => 'betterdocs-settings',
+            $this->licenseManager = LicenseManager::get_instance( [
+                'plugin_file' => BETTERDOCS_PRO_FILE,
+                'version'     => $this->version,
+                'item_id'     => BETTERDOCS_PRO_SL_ITEM_ID,
+                'item_name'   => BETTERDOCS_PRO_SL_ITEM_NAME,
+                'item_slug'   => BETTERDOCS_PRO_SL_ITEM_SLUG,
+                'storeURL'    => BETTERDOCS_PRO_STORE_URL,
+                'textdomain'  => 'betterdocs-pro',
+                'db_prefix'   => BETTERDOCS_PRO_SL_DB_PREFIX,
+                'page_slug'   => 'betterdocs-settings&tab=tab-license',
 
                 'scripts_handle' => 'betterdocs-pro-settings',
                 'screen_id'      => "betterdocs_page_betterdocs-settings",
 
-                'api'            => 'rest',
-                'rest'           => [
+                'api'      => 'rest',
+                'dev_mode' => true,
+                'rest'     => [
                     'namespace'  => 'betterdocs-pro',
                     'permission' => 'delete_users'
                 ]
             ] );
         } );
+    }
+
+    /**
+     * @return LicenseManager|null
+     */
+    public function get_license_manager() {
+        return $this->licenseManager;
     }
 }

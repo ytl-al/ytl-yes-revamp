@@ -8,4 +8,4 @@ $shortcode_atts = betterdocs()->template_helper->shortcode_atts( [
     'show_attachments'            => true
 ], '', '' );
 
-echo '<div class="betterdocs-attachment-root ' . $blockId . '">' . do_shortcode( "[betterdocs_attachments $shortcode_atts]" ) . '</div>';
+echo '<div class="betterdocs-attachment-root ' . esc_attr( $blockId ) . '">' . do_shortcode( "[betterdocs_attachments $shortcode_atts]" ) . '</div>';

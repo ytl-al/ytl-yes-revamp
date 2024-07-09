@@ -59,6 +59,7 @@ class RelatedCategories extends Block {
     public function render( $attributes, $content ) {
         $block_id = explode( '-', $attributes['blockId'] );
         $block_id = $block_id[count( $block_id ) - 1];
+        $block_id = preg_replace("/[^a-zA-Z0-9]/", "", $block_id);
 
         unset($attributes['blockMeta']); //remove styles of block
 

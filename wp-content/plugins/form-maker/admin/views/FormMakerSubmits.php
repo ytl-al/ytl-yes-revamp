@@ -88,7 +88,7 @@ class FMViewFormMakerSubmits extends FMAdminView {
               }
               else if( $labels_type[$key] == 'type_textarea' ) {
                 ?>
-                <td class="field_value"><?php echo html_entity_decode( str_replace("***br***", '<br>', wpautop(esc_html($element_value))) ); ?></td>
+                <td class="field_value"><?php echo str_replace("***br***", '<br>', wpautop(esc_html($element_value))); ?></td>
                 <?php
               }
               else if ( $labels_type[$key] != 'type_matrix' ) {

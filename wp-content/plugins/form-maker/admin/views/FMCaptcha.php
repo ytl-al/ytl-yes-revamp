@@ -14,6 +14,9 @@ class FMViewFormmakerwdcaptcha extends FMAdminView {
 			$rrr = WDW_FM_Library(self::PLUGIN)->get( "rrr", 0, 'intval' );
 			$randNum = 0 + $r2 + $rrr;
 			$digit = WDW_FM_Library(self::PLUGIN)->get( "digit", 6, 'intval' );
+            if( $digit == 0 || $digit == '' ) {
+                $digit = 6;
+            }
 			$cap_width = $digit * 10 + 15;
 			$cap_height = 26;
 			$cap_quality = 100;

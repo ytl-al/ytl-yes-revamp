@@ -2,7 +2,7 @@
 if ( !defined('ABSPATH') ) {
   exit;
 }
-
+#[\AllowDynamicProperties]
 class TenWebNewLibConfig {
   public static $instance;
   public $prefix = NULL;
@@ -17,6 +17,7 @@ class TenWebNewLibConfig {
   public $video_youtube_id = NULL;
   public $plugin_wd_url = NULL;
   public $plugin_wd_demo_link = NULL;
+  public $plugin_wd_docs_link = NULL;
   public $plugin_wd_addons_link = NULL;
   public $plugin_wizard_link = NULL;
   public $after_subscribe = NULL;
