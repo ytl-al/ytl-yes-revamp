@@ -643,7 +643,7 @@
                     if (cur['aseanPlusCountries'] !== 'NoDay') {
                         $('#header').html('<img class="mb-0" src="/wp-content/uploads/2024/06/roam-asian-logo.png" alt="YesRoam" /> <span data-countrytitle="aseanCountryTitle">' + cur['country_name'] + ' ' +'Daily Pass</span>');
                     } else {
-                        $('#header').html('<img class="mb-0" src="/wp-content/uploads/2024/06/YesRoam-logo.png" alt="YesRoam" /> <span data-countrytitle="aseanCountryTitle">Day Pass</span>');
+                        $('#header').html('<img class="mb-0" src="/wp-content/uploads/2024/06/YesRoam-logo.png" alt="YesRoam" /> <span data-title="PAYU">Day Pass</span>');
                     }
                  
                 }

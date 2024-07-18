@@ -1,6 +1,6 @@
 <style>
 
-/* .hero-slider-section {
+/*.hero-slider-section {
     position: relative;
     background-color: #1A1E47;
 }
@@ -118,7 +118,7 @@
     padding: 0;
     margin: 0;
 } */
-/*hn*/
+
 .hero-slider-section {
     position: relative;
     overflow: hidden;
@@ -248,9 +248,9 @@
 .hero-slider .inner-content-sec .pricing-2 h4 span {
     font-weight: 500;
     line-height: 18px;
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 0;
-    /* text-transform: uppercase; */
+    text-transform: uppercase;
 }
 
 .hero-slider .inner-content-sec .pricing-2 h4 span b {
@@ -290,8 +290,6 @@
     padding: 0;
     margin: 0;
 }
-
-/*end HN */
 
 /* .hero-slider .inner-content-sec {
     margin: 0 0 20px;
@@ -967,7 +965,7 @@
 
 #roaming-tips .nav {
     justify-content: space-between;
-    margin: 0px auto 0px;
+    margin: 35px auto 15px;
     border: 2px solid #2F3BF5;
     width: auto;
     border-radius: 100px;
@@ -1061,29 +1059,11 @@
     height: 100%;
     box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
-    position: relative;
-}
-
-.pass-section .card h4 {
-    background: #2F3BF5;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    line-height:24px;
-    letter-spacing: -0.011em;
-    position: absolute;
-    left: 0;
-    top: 0;
-    padding: 10px 25px;
-    border-top-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    text-transform: uppercase;
-    color: #fff;
 }
 
 .pass-section .card .card-body {
     text-align: left;
-    padding: 50px 35px 35px;
+    padding: 25px 35px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -1521,8 +1501,8 @@
     color: #000;
     font-family: 'Montserrat';
     font-weight: 800;
-    font-size: 34px;
-    line-height: 48px;
+    font-size: 36px;
+    line-height: 50px;
     margin-bottom: 15px;
     padding: 0 30px 0 0;
 }
@@ -1898,7 +1878,7 @@ text-align: center;
     }
 
     #roaming-tips {
-        padding: 40px 15px 0;
+        padding: 60px 15px 0;
         overflow: hidden;
     }
 
@@ -2320,8 +2300,6 @@ text-align: center;
     p.ctitle {
         font-size: 13px;
     }
-    .browse-btn a{font-size:14px}
-    #roaming-tips .nav-tabs .nav-link1{font-size:14px}
 
     #roaming-rates-section .roam-topup h3 {
         font-size: 18px;
@@ -2334,7 +2312,7 @@ text-align: center;
 
     #roaming-banner {
         background-position: top;
-        padding: 50px 0px 30px;
+        padding: 50px 0px;
     }
 
     #roaming-banner h1 {
@@ -2411,9 +2389,9 @@ text-align: center;
 
     .row-roaming-step img {
         float: left;
-        margin-right: 15px;
-        width: 50px;
-        height: 50px;
+        margin-right: 10px;
+        width: 70px;
+        height: 70px;
     }
 
     .row-roaming-step h2 {
@@ -2432,7 +2410,6 @@ text-align: center;
         line-height: 24px;
         font-weight: 400;
         margin-top: 15px;
-        margin-left:65px
     }
 
     #roaming-rates-section .roam-topup .operator-sec {
@@ -2504,7 +2481,7 @@ text-align: center;
 
     /* #start-roaming{padding: 0px 0px;} */
     #roaming-tips {
-        padding: 50px 15px 0;
+        padding: 60px 15px 0;
         overflow: hidden;
     }
 
