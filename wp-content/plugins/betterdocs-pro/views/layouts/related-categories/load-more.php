@@ -1,6 +1,8 @@
-<?php $block_id_attr = ! empty( $block_id ) ? "block_id=".$block_id."" : ''; $block_id = ! empty( $block_id ) ? ' '.$block_id : ''; ?>
+<?php
+$block_id_attr = ! empty( $block_id ) ? "block_id='" . esc_attr($block_id) . "'" : '';
+$block_id = ! empty( $block_id ) ? ' '.esc_attr($block_id) : ''; ?>
 <div class="betterdocs-load-more-wrapper">
-    <button class="betterdocs-load-more-button<?php echo $block_id; ?>" type="button" data-page="2" <?php echo $block_id_attr; ?> data-current_term_id="<?php esc_attr_e( get_queried_object_id() ); ?>">
+    <button class="betterdocs-load-more-button<?php echo esc_attr($block_id); ?>" type="button" data-page="2" <?php echo $block_id_attr; ?> data-current_term_id="<?php esc_attr_e( get_queried_object_id() ); ?>">
         <p class="load-more-text"><?php echo betterdocs()->template_helper->kses( $load_more_text );?></p>
         <svg
             class="betterdocs-load-more-loader"

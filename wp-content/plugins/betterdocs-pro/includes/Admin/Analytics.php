@@ -8,9 +8,10 @@ use WPDeveloper\BetterDocs\Admin\Analytics as FreeAnalytics;
 class Analytics extends FreeAnalytics {
     public function __construct( Database $database ) {
         parent::__construct( $database );
-
+        
         add_action( 'template_redirect', [$this, 'set_cookies'] );
         add_action( 'wp_head', [$this, 'update_analytics'] );
+
     }
 
     public function set_cookies() {
@@ -184,12 +185,14 @@ class Analytics extends FreeAnalytics {
             return;
         }
 
+        wp_dequeue_script( 'betterdocs-admin' );
         betterdocs_pro()->assets->enqueue( 'betterdocs-analytics', 'admin/css/analytics.css' );
         betterdocs_pro()->assets->enqueue( 'betterdocs-analytics', 'admin/js/analytics.js' );
+        wp_enqueue_script( 'betterdocs-admin' );
 
         betterdocs_pro()->assets->localize(
             'betterdocs-analytics',
-            'betterdocs',
+            'betterdocs_pro',
             [
                 'dir_url'      => BETTERDOCS_PRO_ABSURL,
                 'rest_url'     => get_rest_url(),
@@ -201,6 +204,7 @@ class Analytics extends FreeAnalytics {
     }
 
     public function views() {
-        betterdocs()->views->get( 'admin/analytics-pro' );
+        betterdocs()->admin->output();
     }
+
 }

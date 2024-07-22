@@ -68,7 +68,7 @@ class FMControllerSubmissions_fm extends FMAdminController {
 		if ( !empty($user) && !empty($screen) ) {
 			$option = $screen->get_option('per_page', 'option');
 			$per_page = get_user_meta($user, $option, true);
-			if ( $per_page ) {
+			if ( $per_page && !is_array($per_page) ) {
 				$this->page_per_num = $per_page;
 			}
 		}

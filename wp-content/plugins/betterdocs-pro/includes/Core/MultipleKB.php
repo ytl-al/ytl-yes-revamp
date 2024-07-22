@@ -46,7 +46,6 @@ class MultipleKB extends Base {
         add_action( 'init', [$this, 'register_taxonomy'] );
         add_filter( 'betterdocs_category_rewrite', [$this, 'category_rewrite'], 10, 2 );
         add_filter( 'betterdocs_term_permalink', [$this, 'term_permalink'], 21, 4 );
-        add_filter( 'pre_term_link', [$this, 'update_term_permalink'], 10, 2 ); //update term link when betterdocs terms are used outside of betterdocs pages(applicable for doc categories only, but not for knowledebase terms)
 
         add_filter( 'betterdocs_nested_terms_args', [$this, 'nested_terms_args'], 11 );
         add_filter( 'betterdocs_post_type_link', [$this, 'post_type_link'], 1, 3 );
@@ -62,7 +61,24 @@ class MultipleKB extends Base {
         add_filter( 'rest_knowledge_base_query', [$this, 'modify_knowledge_base_rest_query'], 10, 2 );
         add_filter( 'betterdocs_export_type_options', [$this, 'export_type_options'], 10, 1 );
         add_filter( 'betterdocs_export_fields', [$this, 'export_fields'], 10, 1 );
+        add_filter( 'rest_doc_category_query', [$this, 'modify_doc_category_rest_query'], 11, 2 );
         add_filter( 'rest_doc_category_query', [$this, 'filter_category_mkb'], 10, 2 );
+    }
+
+    public function modify_doc_category_rest_query( $args, $request ) {
+        $params = ! empty( $request->get_params() ) ? $request->get_params() : [];
+        if ( array_key_exists( 'knowledge_base', $params ) ) {
+            $args['meta_query'] = [
+                'relation' => 'AND',
+                [
+                    'key'     => 'doc_category_knowledge_base',
+                    'value'   => $params['knowledge_base'],
+                    'compare' => 'LIKE'
+                ]
+            ];
+            $argc['order'] = 'ASC';
+        }
+        return $args;
     }
 
     public function filter_category_mkb( $prepared_args, $request ) {
@@ -81,14 +97,6 @@ class MultipleKB extends Base {
         return $prepared_args;
     }
 
-    public function update_term_permalink($termlink, $term) {
-        $term_tax = isset( $term->taxonomy ) ? $term->taxonomy : '';
-        if( ! is_post_type_archive( 'docs' ) && ! is_singular( 'docs' ) && ! is_tax( 'doc_category' ) && ! is_tax( 'doc_tag' ) && ! is_tax( 'knowledge_base' ) && $term_tax == 'doc_category' ) {
-            $termlink = $this->settings->get('category_slug') . '/%doc_category%';
-        }
-        return $termlink;
-    }
-
     public function modify_knowledge_base_rest_query( $args, $request ) {
         $order_by = $request->get_param( 'orderby' );
         if ( isset( $order_by ) && 'kb_order' === $order_by ) {
@@ -104,6 +112,11 @@ class MultipleKB extends Base {
     }
 
     public function term_permalink( $permalink, $term, $taxonomy, $params ) {
+        if ( ( $term->taxonomy == 'doc_category' ) && empty( $params['kb_slug'] ) && $this->get_first_kb_slug( $term, $taxonomy ) === 'non-knowledgebase' ) {
+            $_kb_slug = $this->get_kb_slug();
+            return str_replace( [$_kb_slug, '%knowledge_base%'], trim( 'non-knowledgebase' ), $permalink );
+        }
+
         if ( ! empty( $params['kb_slug'] ) ) {
             $_kb_slug = $this->get_kb_slug();
             if ( empty( $_kb_slug ) ) {
@@ -292,6 +305,10 @@ class MultipleKB extends Base {
     public function get_kb_slug( $_kb_slug = '' ) {
         global $wp_query;
 
+        if ( ! betterdocs()->helper->is_templates() && ! empty( $_kb_slug ) ) {
+            return $_kb_slug;
+        }
+
         if ( empty( $_kb_slug ) && ! empty( $wp_query->query_vars['knowledge_base'] ) ) {
             $_kb_slug = $wp_query->query_vars['knowledge_base'];
             return $_kb_slug;
@@ -306,7 +323,7 @@ class MultipleKB extends Base {
 
     public function docs_tax_query_args( $tax_query, $_multiple_kb, $_term_slug, $_kb_slug, $_origin_args ) {
         global $wp_query;
-        $is_post_type_archive = isset( $_POST['is_post_type_archive'] ) ? $_POST['is_post_type_archive']:'';
+        $is_post_type_archive = isset( $_POST['is_post_type_archive'] ) ? $_POST['is_post_type_archive'] : '';
         if ( isset( $_origin_args['s'] ) && $this->settings->get( 'kb_based_search', false ) && ! $is_post_type_archive ) {
             $tax_query[] = [
                 'taxonomy'         => 'knowledge_base',
@@ -680,6 +697,8 @@ class MultipleKB extends Base {
         if ( ! check_ajax_referer( 'knowledge_base_order_nonce', 'nonce', false ) ) {
             wp_send_json_error();
         }
+
+        wp_cache_flush();
 
         $kb_ordering_data = filter_var_array( wp_unslash( $_POST['data'] ), FILTER_SANITIZE_NUMBER_INT );
         $kb_index         = filter_var( wp_unslash( $_POST['base_index'] ), FILTER_SANITIZE_NUMBER_INT );

@@ -2,11 +2,12 @@
 
 namespace WPDeveloper\BetterDocsPro\Core;
 
+use WPDeveloper\BetterDocs\Core\Settings;
+use WPDeveloper\BetterDocs\Dependencies\DI\Container;
 use WPDeveloper\BetterDocs\Utils\Base;
 use WPDeveloper\BetterDocs\Utils\Helper;
-use WPDeveloper\BetterDocs\Core\Settings;
 use WPDeveloper\BetterDocsPro\Admin\Analytics;
-use WPDeveloper\BetterDocs\Dependencies\DI\Container;
+use WPDeveloper\BetterDocsPro\Dependencies\WPDeveloper\Licensing\LicenseManager;
 
 class Admin extends Base {
 
@@ -21,69 +22,102 @@ class Admin extends Base {
             return;
         }
 
+        add_action( 'in_admin_header', function ( $hook ) {
+            global $current_screen;
+
+            $screens = [
+                'toplevel_page_betterdocs-admin',
+                'betterdocs_page_betterdocs-admin',
+                'betterdocs_page_betterdocs-settings',
+                'betterdocs_page_betterdocs-faq',
+                'betterdocs_page_betterdocs-analytics',
+                'betterdocs_page_betterdocs-glossaries',
+                'edit-doc_category',
+                'edit-doc_tag'
+            ];
+
+            if ( ! in_array( $current_screen->id, $screens ) ) {
+                return;
+            }
+
+            if ( betterdocs_pro()->get_license_manager() instanceof LicenseManager ) {
+                add_action( 'admin_notices', [ betterdocs_pro()->get_license_manager(), 'admin_notices' ] );
+            }
+        }, 999 );
+
         /**
          * Restrict Users To View This Column If They Do Not Have Analytics Capability
          */
         if ( current_user_can( 'read_docs_analytics' ) ) {
-            add_filter( 'manage_docs_posts_columns', [$this, 'views_columns'] );
-            add_filter( 'manage_docs_posts_custom_column', [$this, 'manage_views_columns'], 10, 2 );
+            add_filter( 'manage_docs_posts_columns', [ $this, 'views_columns' ] );
+            add_filter( 'manage_docs_posts_custom_column', [ $this, 'manage_views_columns' ], 10, 2 );
         }
 
         // add_filter( 'plugin_action_links_betterdocs/betterdocs.php', [$this, 'insert_plugin_links'] );
-        add_filter( 'admin_body_class', [$this, 'admin_body_classes'] );
+        add_filter( 'admin_body_class', [ $this, 'admin_body_classes' ] );
 
-        add_action( 'admin_enqueue_scripts', [$this, 'enqueue'] );
+        add_action( 'admin_enqueue_scripts', [ $this, 'enqueue' ] );
 
         /**
          * doc_category extra meta fields
          */
 
-        add_action( 'betterdocs_doc_category_add_form_after', [$this, 'handbook_layout_cover_image'] );
-        add_action( 'betterdocs_doc_category_update_form_after', [$this, 'update_handbook_layout_cover_image'], 10, 1 );
+        add_action( 'betterdocs_doc_category_add_form_after', [ $this, 'handbook_layout_cover_image' ] );
+        add_action( 'betterdocs_doc_category_update_form_after', [
+            $this,
+            'update_handbook_layout_cover_image'
+        ], 10, 1 );
 
         //save attachments
-        add_action( 'save_post_docs', [$this, 'save_docs_attachments'], 10, 1 );
+        add_action( 'save_post_docs', [ $this, 'save_docs_attachments' ], 10, 1 );
 
-        add_action( 'save_post_docs', [$this, 'save_related_articles'], 11, 1 );
+        add_action( 'save_post_docs', [ $this, 'save_related_articles' ], 11, 1 );
 
         if ( $this->settings->get( 'show_attachment' ) ) {
             //create meta-box for attachments
-            add_action( 'add_meta_boxes', [$this, 'attachment_meta_box_'], 10 );
+            add_action( 'add_meta_boxes', [ $this, 'attachment_meta_box_' ], 10 );
         }
 
         if ( $this->settings->get( 'show_related_docs' ) ) {
             //create meta-box for related articles
-            add_action( 'add_meta_boxes', [$this, 'related_articles_meta_box_'], 10 );
+            add_action( 'add_meta_boxes', [ $this, 'related_articles_meta_box_' ], 10 );
         }
 
         if ( $this->settings->get( 'multiple_kb' ) ) {
             /**
              * Add Multiple KB Menu on Dashboad Sidebar
              */
-            add_filter( 'betterdocs_admin_menu', [$this, 'menu'] );
+            add_filter( 'betterdocs_admin_menu', [ $this, 'menu' ] );
 
             if ( ! isset( $_GET['mode'] ) || trim( $_GET['mode'] ) != 'list' ) {
-                add_action( 'betterdocs_admin_header_before_end', [$this, 'add_knowledge_base_filter'] );
+                add_action( 'betterdocs_admin_header_before_end', [ $this, 'add_knowledge_base_filter' ] );
             }
             if ( isset( $_GET['mode'] ) && trim( $_GET['mode'] ) == 'list' ) {
-                add_action( 'betterdocs_admin_filter_after_category', [$this, 'filter_by_kb'] );
+                add_action( 'betterdocs_admin_filter_after_category', [ $this, 'filter_by_kb' ] );
             }
         }
 
         if ( isset( $_GET['mode'] ) && trim( $_GET['mode'] ) == 'list' ) {
-            add_action( 'betterdocs_admin_filter_before_submit', [$this, 'filter_by_view'] );
+            add_action( 'betterdocs_admin_filter_before_submit', [ $this, 'filter_by_view' ] );
         }
     }
 
     public function attachment_meta_box_() {
-        add_meta_box( 'betterdocs_attachment_metabox', __( 'Attachments', 'betterdocs' ), [$this, 'render_attchments_markup'], 'docs' );
+        add_meta_box( 'betterdocs_attachment_metabox', __( 'Attachments', 'betterdocs' ), [
+            $this,
+            'render_attchments_markup'
+        ], 'docs' );
     }
+
     public function render_attchments_markup() {
         betterdocs_pro()->views->get( 'admin/attachments/attachment' );
     }
 
     public function related_articles_meta_box_() {
-        add_meta_box( 'betterdocs_related_articles_metabox', __( 'Related Docs', 'betterdocs-pro' ), [$this, 'render_related_articles_markup'], 'docs' );
+        add_meta_box( 'betterdocs_related_articles_metabox', __( 'Related Docs', 'betterdocs-pro' ), [
+            $this,
+            'render_related_articles_markup'
+        ], 'docs' );
     }
 
     public function render_related_articles_markup() {
@@ -121,7 +155,7 @@ class Admin extends Base {
             if ( $key == 'date' ) {
                 $new_columns['betterdocs_views'] = __( 'Views', 'betterdocs-pro' );
             }
-            $new_columns[$key] = $value;
+            $new_columns[ $key ] = $value;
         }
 
         return $new_columns;
@@ -161,11 +195,7 @@ class Admin extends Base {
     }
 
     public function menu( $menus ) {
-        $menus['multiple_kb'] = Helper::normalize_menu(
-            __( 'Multiple KB', 'betterdocs-pro' ),
-            'edit-tags.php?taxonomy=knowledge_base&post_type=docs',
-            'manage_knowledge_base_terms'
-        );
+        $menus['multiple_kb'] = Helper::normalize_menu( __( 'Multiple KB', 'betterdocs-pro' ), 'edit-tags.php?taxonomy=knowledge_base&post_type=docs', 'manage_knowledge_base_terms' );
 
         return $menus;
     }
@@ -176,7 +206,7 @@ class Admin extends Base {
             $parsed_array    = [];
             $attachment_meta = count( (array) get_post_meta( get_the_ID(), '_betterdocs_attachments', true ) ) > 0 ? get_post_meta( get_the_ID(), '_betterdocs_attachments', true ) : [];
 
-            if( is_array( $attachment_meta ) ) {
+            if ( is_array( $attachment_meta ) ) {
                 //Parse JSON Attachments
                 foreach ( $attachment_meta as $attachment ) {
                     array_push( $parsed_array, json_decode( $attachment ) );
@@ -227,8 +257,12 @@ class Admin extends Base {
                 ]
             ];
 
-            betterdocs_pro()->assets->enqueue( 'betterdocs-attachments', 'admin/css/attachment.css', ['betterdocs-fontawesome'], 'all' );
-            betterdocs_pro()->assets->enqueue( 'betterdocs-attachments', 'admin/js/attachment.js', ['jquery', 'jquery-ui-draggable', 'jquery-ui-droppable'] );
+            betterdocs_pro()->assets->enqueue( 'betterdocs-attachments', 'admin/css/attachment.css', [ 'betterdocs-fontawesome' ], 'all' );
+            betterdocs_pro()->assets->enqueue( 'betterdocs-attachments', 'admin/js/attachment.js', [
+                'jquery',
+                'jquery-ui-draggable',
+                'jquery-ui-droppable'
+            ] );
             betterdocs_pro()->assets->localize( 'betterdocs-attachments', 'betterdocsAttachments', [
                 'attachment_data'     => $parsed_array,
                 'attachment_icons'    => $icon_obj,
@@ -243,22 +277,18 @@ class Admin extends Base {
             $parsed_related_articles = [];
             $related_articles_meta   = count( (array) get_post_meta( get_the_ID(), '_betterdocs_related_articles', true ) ) > 0 ? get_post_meta( get_the_ID(), '_betterdocs_related_articles', true ) : [];
 
-            if( is_array( $related_articles_meta ) ) {
+            if ( is_array( $related_articles_meta ) ) {
                 //Parse JSON Related Articles
                 foreach ( $related_articles_meta as $related_article ) {
                     array_push( $parsed_related_articles, json_decode( $related_article ) );
                 }
             }
 
-            betterdocs_pro()->assets->enqueue( 'betterdocs-related-articles', 'admin/css/related-articles.css', ['betterdocs-fontawesome'], 'all' );
+            betterdocs_pro()->assets->enqueue( 'betterdocs-related-articles', 'admin/css/related-articles.css', [ 'betterdocs-fontawesome' ], 'all' );
             betterdocs_pro()->assets->enqueue( 'betterdocs-related-articles', 'admin/js/related-articles.js', [] );
-            betterdocs_pro()->assets->localize(
-                'betterdocs-related-articles',
-                'betterdocsRelatedArticles',
-                [
-                    'related_articles_data' => $parsed_related_articles
-                ]
-            );
+            betterdocs_pro()->assets->localize( 'betterdocs-related-articles', 'betterdocsRelatedArticles', [
+                'related_articles_data' => $parsed_related_articles
+            ] );
 
 
         }
@@ -283,7 +313,7 @@ class Admin extends Base {
         }
 
         betterdocs_pro()->assets->enqueue( 'betterdocs-pro-admin', 'admin/css/betterdocs-admin.css' );
-        betterdocs_pro()->assets->enqueue( 'betterdocs-pro-admin', 'admin/js/betterdocs.js', ['jquery'] );
+        betterdocs_pro()->assets->enqueue( 'betterdocs-pro-admin', 'admin/js/betterdocs.js', [ 'jquery' ] );
         betterdocs_pro()->assets->localize( 'betterdocs-pro-admin', 'betterdocs_pro_admin', $_params );
 
 

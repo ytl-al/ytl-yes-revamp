@@ -116,7 +116,8 @@ class MultipleKB extends Block {
             'kb_slug'                 => '',
             'nested_subcategory'      => false,
             'show_header'             => true,
-            'show_description'        => false
+            'show_description'        => false,
+            'term_icon_meta_key'      => 'knowledge_base_image-id'
         ];
 
         return $_params;

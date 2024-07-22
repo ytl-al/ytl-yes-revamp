@@ -19,12 +19,29 @@
 <section class="hero-slider-section">
     <div class="hero-slider slider">
 
-        <div>
-            <a href="/ms/yes-postpaid-plans/#postpaid-plans/">
-                <img src="/wp-content/uploads/2024/01/SGRoaming-BM-v3.png" class="w-100 d-none d-lg-block" alt="...">
-                <img src="/wp-content/uploads/2024/01/SGRoaming-BM-v3-mob.png" class="w-100 d-block d-md-block d-lg-none"
+    <div class="slick-slide">
+    <img src="/wp-content/uploads/2024/06/roam-banner-web.webp" class="w-100 d-none d-lg-block" alt="...">
+    <img src="/wp-content/uploads/2024/06/roam-banner-mob.webp" class="w-100 d-block d-md-block d-lg-none" alt="...">
+    <div class="inner-content-sec">
+        <h1>Lebih lagi untuk dinikmati<br>
+         di Asia Tenggara dengan<br>
+         YesRoam ASEAN Plus
+        <div class="btn-sec d-flex align-items-center">
+            <div class="pricing-2">
+                <h4 class="d-block">
+                    <sup><span>Dari<br><b>RM</b></span></sup>10<span class="month-sec"> / bln</span>
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- <div>
+            <a href="#">
+                <img src="/wp-content/uploads/2023/12/hero-banner-bg1.png" class="w-100 d-none d-lg-block" alt="...">
+                <img src="/wp-content/uploads/2023/12/hero-banner-bg1-mob-bm.png" class="w-100 d-block d-md-block d-lg-none"
                     alt="...">
-                    <!-- <div class="inner-content-sec-bm d-lg-block d-none">
+                    <div class="inner-content-sec-bm d-lg-block d-none">
                     <div class="title-sec">
                     <img decoding="async" src="/wp-content/uploads/2023/12/infinite-icon.png" class="" alt="...">
                         <h2>Perayauan 5G tanpa had di<br> Singapura secara PERCUMA </h2>
@@ -48,25 +65,25 @@
                             <div class="content-sec">
                             Panggilan<br> Tanpa Had
                             </div>
-                        </div>                        
-                    </div> -->
+                        </div>
+                        
+                    </div>
             </a>
-        </div>
+        </div> -->
         
-        <div>
+        <!-- <div>
             <a href="#">
                 <img src="/wp-content/uploads/2023/12/hero-banner-bg2.png" class="w-100 d-none d-lg-block" alt="...">
                 <img src="/wp-content/uploads/2023/12/hero-banner-bg2-mob-bm.png" class="w-100 d-block d-md-block d-lg-none" alt="...">
 
                 <div class="inner-content-sec-bm d-lg-block d-none">
                     <div class="title-sec mt-5">
-                    <!-- <img decoding="async" src="/wp-content/uploads/2023/12/infinite-icon.png" class="" alt="..."> -->
                         <h2>Kekal terhubung bila-bila masa,<br> di mana jua dengan YesRoam</h2>
                         <p>Rayau dengan bebas bersama operator rakan<br> kongsi kami apabila anda di luar negara.</p>
                      </div>                        
                     </div>
             </a>
-        </div>       
+        </div> -->
 
     </div>
 </section>
@@ -101,7 +118,7 @@
          <div class="col-12 mt-0" data-country="Singapore" style="display: block;">
                 <div style="background:#fff; border-radius: 15px;" >
                     <h1>
-                        YesRoam <span>SG Monthly</span>
+                    <img class="mb-0" src="/wp-content/uploads/2024/05/YesRoam-logo.png" alt="YesRoam" /> <span>SG Monthly</span>
                     </h1>
 
                     <div class="row row-roaming">
@@ -122,7 +139,7 @@
                                     <div class="col-12 col-lg-3 border-b-sec">
                                         <h3>Operator Perayauan</h3>
                                         <p class="brand">
-                                        <h4 class="blue">SIMBA/TPG</h4>
+                                        <h4 class="blue">SIMBA</h4>
                                         </p>
                                     </div>
 
@@ -206,7 +223,7 @@
                                     <div class="col-12 col-lg-3 border-b-sec">
                                         <h3>Operator Perayauan</h3>
                                         <p class="brand">
-                                        <h4 class="blue">SIMBA/TPG</h4>
+                                        <h4 class="blue">SIMBA</h4>
                                         </p>
                                     </div>
 
@@ -271,7 +288,7 @@
                 </div>
             </div>            
 
-            <div class="col-12 mt-3" data-country="Singapore" style="display: block;">
+            <!-- <div class="col-12 mt-3" data-country="Singapore" style="display: block;">
                 <div style="background:#fff; border-radius: 15px;" >
                     <h1>
                         YesRoam <span>Pay As You Use</span>
@@ -296,24 +313,6 @@
                                         <h4 class="blue">StarHub / M1</h4>
                                         </p>
                                     </div>
-
-                                    <!-- <div class="col-12 col-lg-3">
-                                    <div class="border-b-sec">
-                                        <h3>Internet Rates</h3>  
-                                        <p class="blue">Unlimited Data Roaming</p>
-                                        <p class="small">(1GB highspeed data and 512kbps thereafter)</p>
-                                        <p class="blue mt-3">
-                                        <a href="/yes-postpaid-plans/#postpaid-plans" target="_blank" style="text-decoration: underline; font-weight: normal;color: #000;">
-                                        Check out our plans</a>.</p>
-                                      </div>
-                                      <div class="border-b-sec">
-                                        <p class="blue mt-3 pt-3">Add-On Availability</p>
-                                        <p class="blue mt-2">YesRoam SG Daily Top-Up</p>
-                                        <p class="blue mt-2">Unlimited</p>   
-                                        <p class="small">(1GB highspeed data and 512Kbps thereafter)</p> 
-                                        <h4 class="blue mt-2">RM8 /<span>day</span></h4>
-                                       </div>
-                                    </div> -->
 
                                     <div class="col-12 col-lg-6">
                                         <div class="row">
@@ -353,15 +352,40 @@
                     </div>
 
                 </div>
-            </div>
+            </div> -->
 
             <!--end Singapore -->
 
-            <!--other country -->
-                <div class="col-12 mt-3" data-country="OtherCountry">
-                <div style="background:#fff; border-radius: 15px;">
+            <!--Asean Roam section data-country="AseanCountry"-->
+            <div data-country="aseanPlusCountry" style="display:none;">
+                <div class="row mt-3" id="asian-roam-section">
+                    <ul id="myTab" class="nav nav-tabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button id="dayone-tab" class="nav-link right-tab active" role="tab" type="button"
+                                data-bs-toggle="tab" data-bs-target="#dayone" aria-controls="dayone"
+                                aria-selected="false">1 HARI</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button id="daythree-tab" class="nav-link left-tab" role="tab" type="button"
+                                data-bs-toggle="tab" data-bs-target="#daythree" aria-controls="daythree"
+                                aria-selected="true">
+                                3 HARI</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button id="dayseven-tab" class="nav-link left-tab" role="tab" type="button"
+                                data-bs-toggle="tab" data-bs-target="#dayseven" aria-controls="dayseven"
+                                aria-selected="true">
+                                7 HARI</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+    <!--other country -->
+        <div class="col-12 mt-3" data-country="OtherCountry">
+            <div style="background:#fff; border-radius: 15px;">
                 <h1>
-                    YesRoam <span data-title="PAYU">Day Pass</span>
+                <img class="mb-0" src="/wp-content/uploads/2024/05/YesRoam-logo.png" alt="YesRoam" /> <span data-title="PAYU">Day Pass</span>
                 </h1>
                 <div class="row row-roaming">
                     <div class="col-12 col-lg-2">
@@ -386,9 +410,9 @@
                                 <div class="col-12 col-lg-3 border-b-sec">
                                     <h3>Kadar Internet</h3>                            
                                     <h4 class="internet-rates">
-                                        <span>RM</span><b data-name="planDayRateAmt">38</b><sub data-name="planDayRateSubset">/MB</sub>
+                                        <span>RM</span><b data-name="planDayRateAmt">38</b><sub data-name="planDayRateSubsetbm">/sehari</sub>
                                     </h4>
-                                    <p class="blue mt-3" data-name="planDayRateQuota">Perayauan Data Tanpa Had</p>
+                                    <p class="blue mt-3" data-name="planDayRateQuotabm">Perayauan Data Tanpa Had</p>
                                     <p class="small" data-name="planDayRateTnc">(500MB data berkelajuan tinggi dan 64kbps kemudian)</p>
                                 </div>
 
@@ -434,12 +458,13 @@
                 </div>
          <!--end other country -->
 
-        <!-- section roam top-up -->
+    <!-- section roam top-up -->
            <fieldset id="topup-roaming-table" data-name="topUp">
             <div class="col-12 mt-3"  data-template="topupRoamingTemplate" style="display: none;" >
                 <div class="row roam-topup" id="topUpRoamingTemp">
                     <div class="col-12 col-lg-2">
-                        <h2 data-name="topuptitle">YesRoam</h2>
+                        <h2 data-name="topuptitle" class="raom-logo">
+                        <img class="mb-0" src="/wp-content/uploads/2024/05/YesRoam-logo.png" alt="YesRoam" /></h2>
                         <h3>Top-up</h3>
                         <div class="operator-sec">
                             <h3>Operator Perayauan</h3>
@@ -543,7 +568,7 @@
 
             <div class="col-12 text-left" style="font-size:12px;">&nbsp;
                 <p>• Harga yang tertera adalah tertakluk kepada cukai perkhidmatan 6%.</p>
-                <p>• Kadar panggilan tertera tidak tertakluk kepada panggilan ke Nombor Premium, Satelit dan Perkhidmatan Khas.</p>
+                <p>• Kadar panggilan tertera tidak tertakluk kepada panggilan ke nombor premium, satelit, dan perkhidmatan khas.</p>
                 <p>• Untuk maklumat lanjut, sila hubungi YesCare melalui e-mel <a href="mailto:yescare@yes.my">yescare@yes.my</a>.</p>
                 <h3 class="text-center questions-head mt-3">
                 Pertanyaan?
@@ -559,76 +584,271 @@
 </section>
 <!--Roaming Rates Section End-->
 
-<!--Roaming Tips Start-->
-<!-- <section id="roaming-tips" data-roaming="roaming-rates" style="display:none;">
+<!--Roaming Tips Start data-roaming="roaming-rates"-->
+<section id="roaming-tips">
     <div class="container">
         <div class="row">
-            <div class="col">&nbsp;
-                <h1>Roaming Tips</h1>
-                <div class="row gx-5 row-roaming-step">
-                    <div class="col-12 col-md-6 col-xl-3 text-center">
-                        <img alt="selfcare" class="mb-4" src="/wp-content/uploads/2022/08/yes-selfcare.png">
-                        <p>Activate International Roaming service via Selfcare</p>
-                    </div>
-                    <div class="col-12 col-md-6 col-xl-3 text-center">
-                        <img alt="credit-limit" class="mb-4" src="/wp-content/uploads/2022/08/credit-limit.png">
-                        <p>Increase your credit limit via Selfcare to avoid any service distruption.</p>
-                    </div>
 
-                    <div class="col-12 col-md-6 col-xl-3 text-center">
-                        <img alt="deactivate" class="mb-4" src="/wp-content/uploads/2022/08/deactivate.png">
-                        <p>Turn off your Data Roaming &amp; Mobile Data in your phone setting if you don't wish to use data service while abroad
-                        </p>
-                    </div>
-                    <div class="col-12 col-md-6 col-xl-3 text-center">
-                        <img alt="bills" class="mb-4" src="/wp-content/uploads/2022/08/bills.png">
-                        <p>Settle all outstanding bills.</p>
+            <ul id="myTab" class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button id="s-month-tab" class="nav-link1 right-tab active" role="tab" type="button"
+                        data-bs-toggle="tab" data-bs-target="#s-month" aria-controls="s-month"
+                        aria-selected="false">ASEAN PLUS</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button id="f-month-tab" class="nav-link1 left-tab" role="tab" type="button" data-bs-toggle="tab"
+                        data-bs-target="#f-month" aria-controls="f-month" aria-selected="true">
+                        SINGAPORE</button>
+                </li>
+            </ul>
+
+            <div id="myTabContent" class="tab-content">
+                <!-- 24-Month plans -->
+                <div id="s-month" class="tab-pane fade active show" role="tabpanel" aria-labelledby="s-month-tab">
+                    <div class="col">
+                        <h1>Perayauan ASEAN Plus​</h1>
+                        <p>Penjimatan terbesar untuk perayauan ASEAN daripada hanya RM10.​</p>
+
+                        <div class="row gx-5 mt-5">
+                            <div class="col-12 col-md-6 col-xl-4 text-center row-roaming-step">
+                                <img alt="selfcare" class="mb-4" src="/wp-content/uploads/2024/05/data-roaming.png">
+                                <h2>Perayauan Data Tanpa Had</h2>
+                                <p>Pas perayauan paling berbaloi tanpa had data.​</p>
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-4 text-center row-roaming-step">
+                                <img alt="credit-limit" class="mb-4"
+                                    src="/wp-content/uploads/2024/05/roaming-passes.png">
+                                <h2>Pas Perayauan Fleksibel</h2>
+                                <p>Dapatkan kadar terbaik berdasarkan tempoh pelancongan anda​</p>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-xl-4 text-center row-roaming-step">
+                                <img alt="deactivate" class="mb-4" src="/wp-content/uploads/2024/05/destinations.png">
+                                <h2>Meliputi 11 Destinasi</h2>
+                                <p>Nikmati kadar ASEAN Plus yang sama untuk 11 destinasi.</p>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
+
+                <!-- 12-Month plans -->
+                <div id="f-month" class="tab-pane fade" role="tabpanel" aria-labelledby="f-month-tab">
+                    <div class="col">
+                        <h1>Perayauan Singapura​</h1>
+                        <p>Nikmati perayauan data terbaik di Singapura dengan Yes Infinite.​</p>
+
+                        <div class="row gx-5 mt-5">
+                            <div class="col-12 col-md-6 col-xl-4 text-center row-roaming-step">
+                                <img alt="selfcare" class="mb-4"
+                                    src="/wp-content/uploads/2024/05/unlimited-roaming.png">
+                                <h2>Perayauan 5G Tanpa Had​</h2>
+                                <p>Pelan perayauan paling berbaloi tanpa had data.​</p>
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-4 text-center row-roaming-step">
+                                <img alt="credit-limit" class="mb-4"
+                                    src="/wp-content/uploads/2024/05/incoming-calls.png">
+                                <h2>Panggilan Masuk PERCUMA</h2>
+                                <p>Dengan panggilan keluar PERCUMA ke nombor Malaysia.​</p>
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-4 text-center row-roaming-step">
+                                <img alt="deactivate" class="mb-4"
+                                    src="/wp-content/uploads/2024/05/infinite-postpaid.png">
+                                <h2>PERCUMA dengan Infinite Postpaid​</h2>
+                                <p>Dapatkan data & kelajuan 5G tanpa batasan semasa berada di Malaysia.​</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-</section> -->
+    </div>
+</section>
 <!--Roaming Tips End-->
+
+<!-- Pass section -->
+<section class="pass-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-0">
+                <h2>
+                Kekalkan rangkaian anda dengan <br>
+                    <img src="/wp-content/uploads/2024/05/roam-asian-logo.png" alt="...">
+                </h2>
+                <p>Pra-tempah Pas Perayauan Data anda dengan MyYes App.​</p>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12 col-xl-12 col-md-12 mx-auto">
+                <div class="row flex-nowrap flex-xl-wrap getway layer-plans">
+                    <div class="col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="plan-details-list">
+                                    <h3>1 Day Pass​</h3>
+                                    <p>1 GB</p>
+                                    <ul>
+                                        <li>Data berkelajuan tinggi 1GB, 512kbps selepas habis kuota.​</li>
+                                        <li>Pilih pendahuluan tarikh pengaktifan anda sehingga 30 hari.​</li>
+                                        <li>Pembatalan percuma sehingga 24 jam sebelum pengaktifan.​</li>
+                                    </ul>
+                                </div>
+                                <div class="price-section">
+                                    <div class="price-left">
+                                        <h2>RM10</h2>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="plan-details-list">
+                                    <h3>3 Days Pass</h3>
+                                    <p>5 GB</p>
+                                    <ul>
+                                    <li>Data berkelajuan tinggi 5GB, 512kbps selepas habis kuota.​</li>
+                                        <li>Pilih pendahuluan tarikh pengaktifan anda sehingga 30 hari.​</li>
+                                        <li>Pembatalan percuma sehingga 24 jam sebelum pengaktifan.​</li>
+                                    </ul>
+                                </div>
+                                <div class="price-section">
+                                    <div class="price-left">
+                                        <h2>RM20</h2>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="plan-details-list">
+                                    <h3>7 Days Pass</h3>
+                                    <p>10 GB</p>
+                                    <ul>
+                                    <li>Data berkelajuan tinggi 10GB, 512kbps selepas habis kuota.​</li>
+                                        <li>Pilih pendahuluan tarikh pengaktifan anda sehingga 30 hari.​</li>
+                                        <li>Pembatalan percuma sehingga 24 jam sebelum pengaktifan.​</li>
+                                    </ul>
+                                </div>
+                                <div class="price-section">
+                                    <div class="price-left">
+                                        <h2>RM30</h2>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12 col-xl-12 col-md-12 mt-0" id="destinations-slider-sec">
+
+                <h3 class="line-b">Destinasi yang boleh digunakan​</h3>
+
+                <div class="destinations-slider">
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/05/Brunei.png">
+                        <h2>Brunei</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/05/Cambodia.png">
+                        <h2>Cambodia</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/05/China.png">
+                        <h2>China</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/05/Hong-Kong.png">
+                        <h2>Hong Kong</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/05/Indonesia.png">
+                        <h2>Indonesia</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/05/Laos.png">
+                        <h2>Laos</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/05/Macau.png">
+                        <h2>Macau</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/05/Philippines.png">
+                        <h2>Philippines</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/05/Taiwan.png">
+                        <h2>Taiwan</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/05/Thailand.png">
+                        <h2>Thailand</h2>
+                    </div>
+                    <div class="services-inner">
+                        <img src="/wp-content/uploads/2024/05/Vietnam.png">
+                        <h2>Vietnam</h2>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- Pass section End-->
 
 <!--Start Roaming Start data-roaming="roaming-rates"-->
 <section id="start-roaming" style="display:block;">
     <div class="container">
-        <h1>Cara memulakan perayauan<br> pada peranti anda?</h1>
+        <!-- <h1>How to start roaming on your device?</h1> -->
         <div class="row justify-content-center">
             <div class="col-12 gx-5">
                 <div class="row">
-                <div class="col-12 col-lg-3 start-roaming-cont">
-                        <img src="/wp-content/uploads/2022/03/roaming-setting-icon.jpg" class="mb-4 d-none" alt="">
-                        <!-- <p class="small">Step 1:</p> -->
-                        <h2 class="num-box"><span>1</span> <strong>Buka Aplikasi MyYes</strong></h2>
-                        <p class="mt-3">Aktifkan servis Perayauan antarabangsa menerusi aplikasi MyYes.</p>
+                    <div class="col-12 col-lg-5 start-roaming-cont-m">
+                        <h2 class="num-box">How to start roaming<br> on your device?</h2>
+                        <img src="/wp-content/uploads/2024/05/roaming-device.png" class="mb-0" alt="">
                     </div>
-                    <div class="col-12 col-lg-3 start-roaming-cont">
-                        <img src="/wp-content/uploads/2022/03/roaming-setting-icon.jpg" class="mb-4 d-none" alt="">
-                        <!-- <p class="small">Step 1:</p> -->
-                        <h2 class="num-box"><span>2</span> <strong>Pergi ke Tetapan</strong></h2>
-                        <p class="mt-3">Pilih Rangkaian Mudah Alih.</p>
+
+                    <div class="col-12 col-lg-7 start-roaming-cont-r">
+                        <div class="row row-cols-2">
+                            <div class="col start-roaming-cont">
+                                <h2 class="num-box"><span>1</span> <strong>Launch the MyYes App</strong></h2>
+                                <p class="mt-3">Activate 'International Roaming Service' from the YesRoam quick access.
+                                </p>
+                            </div>
+                            <div class="col start-roaming-cont">
+                                <h2 class="num-box"><span>2</span> <strong>Go to 'Settings' on your device</strong></h2>
+                                <p class="mt-3">Select 'Mobile Network', then 'Network Operators', and connect to our
+                                    preferred roaming operator.</p>
+
+                            </div>
+                            <div class="col start-roaming-cont">
+                                <h2 class="num-box"><span>3</span> <strong>Go to 'Mobile Network' on your
+                                        device</strong></h2>
+                                <p class="mt-3">Turn on 'Data Roaming & Mobile Data' to enable data service while
+                                    abroad.</p>
+                            </div>
+
+                        </div>
                     </div>
-                    <div class="col-12 col-lg-3 start-roaming-cont">
-                        <img src="/wp-content/uploads/2022/03/roaming-network-icon.jpg" class="mb-4 d-none" alt="">
-                        <!-- <p class="small">Step 2:</p> -->
-                        <h2 class="num-box"><span>3</span> <strong>Klik pada Operator Rangkaian</strong></h2>
-                        <p class="mt-3">Setelah senarai rangkaian dipaparkan, pilih operator perayauan pilihan untuk sambungan.</p>
-                        
-                    </div>
-                    <div class="col-12 col-lg-3 start-roaming-cont">
-                        <img src="/wp-content/uploads/2022/03/roaming-mobile-icon.jpg" class="mb-4 d-none" alt="">
-                        <!-- <p class="small">Step 3:</p> -->
-                        <h2 class="num-box"><span>4</span> <strong>Pergi ke Rangkaian Mudah Alih</strong></h2>
-                        <p class="mt-3">Aktifkan Data Perayauan dan Data Mudah Alih mengikut tetapan pada peranti mudah alih anda.</p>
-                        <p class="mt-3">Untuk sesetengah telefon Android, anda mungkin perlu memilih SIM anda untuk mengaktifkan Data Perayauan.</p>
-                    </div>
-                    <!-- <div class="col-12 mt-5 start-roaming-cont">
-                        <p class="small"><strong>Tip:</strong> For Partnering Operators who do not have 4G LTE roaming service, kindly select the mobile network mode to 2G/3G in your phone setting to avoid any connection or compatibility issue.</p>
-                        <a href="/faq/roaming" class="viewall-btn mt-5">Have problems connecting? Click here<span class="iconify" data-icon="akar-icons:arrow-right"></span></a>
-                    </div> -->
-                    
+
                 </div>
             </div>
         </div>
@@ -906,7 +1126,7 @@
         <div class="row">
             <div class="col-8 m-auto text-left idd-rate">&nbsp;
                 <p>• Harga yang tertera tertakluk kepada cukai perkhidmatan 6%.</p>
-                <p>• Panggilan IDD dicaj mengikut blok 60 saat.</p>
+                <p>• Panggilan IDD dicaj mengikut blok 30 saat.</p>
                 <p>• Kadar adalah tertakluk kepada perubahan tanpa notis terlebih dahulu.</p>
                 <a href="#" data-button="closeIdd" class="pink-btn mt-5">Close <span class="iconify" data-icon="carbon:close-filled"></span></a>
             </div>
@@ -916,6 +1136,23 @@
 </section>
 <!--Roaming Rates Section End-->
 
+<!-- benefits section -->
+<section class="benefits-section mt-4 mt-lg-0" data-aos="fade-up">
+    <div class="container">
+        <div class="row">
+            <h4 class="mb-4">More roaming benefits<br> with Yes Infinite Plans</h4>
+        </div>
+        <div class="row justify-content-lg-center">
+            <div class="col-12 col-lg-12">
+                <img src="/wp-content/uploads/2024/05/roaming-benefits-banner.webp" class="w-100 d-none d-lg-block"
+                    alt="...">
+                <img src="/wp-content/uploads/2024/05/roaming-benefits-banner-mob.webp"
+                    class="w-100 d-block d-md-block d-lg-none" alt="...">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- benefits section End-->
 
 <!-- Footer FAQs STARTS -->
 <section class="layer-footerFAQ mt-4 mt-lg-0" id="faq-section" data-aos="fade-up">
@@ -952,7 +1189,7 @@
                                 Perayauan Yes (YesRoam) adalah tersedia untuk pelanggan Pascabayar Yes. Selepas mengaktifkan servis bagi langgan perayauan, sila pastikan perayauan anda diaktifkan melalui aplikasi MyYes > Perayauan Yes (YesRoam) > Pengaktifan Roaming. Deposit perayauan mungkin diperlukan. Anda akan dilanggan secara automatik sama ada bagi Perayauan Yes (YesRoam) Daily atau Perayauan Yes (YesRoam) Monthly apabila anda tiba di negara yang dilawati dan disambungkan ke operator perayauan pilihan.
                                 </p>
 
-                                <p><b>Nota:</b> <i>Jika anda adalah pengguna talian utama, anda boleh membantu talian tambahan anda untuk mengaktifkan Perayauan Yes (YesRoam) dengan meningkatkan had kredit atau membayar deposit perayauan melalui aplikasi MyYes. Log masuk ke akaun utama > Pilih talian tambahan pada meny pilihan > Klik Lagi > Roaming > Aktifkan Langganan > Tambah Sekarang untuk tingkatkan had kredit atau bayar deposit > Pengaktifan Roaming.</i></p>
+                                <p><b>Nota:</b> Jika anda adalah pengguna talian utama, anda boleh membantu talian tambahan anda untuk mengaktifkan Perayauan Yes (YesRoam) dengan meningkatkan had kredit atau membayar deposit perayauan melalui aplikasi MyYes. Log masuk ke akaun utama > Pilih talian tambahan pada meny pilihan > Klik Lagi > Roaming > Aktifkan Langganan > Tambah Sekarang untuk tingkatkan had kredit atau bayar deposit > Pengaktifan Roaming.</p>
                             </div>
                         </div>
                     </div>

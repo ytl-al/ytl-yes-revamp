@@ -31,6 +31,7 @@
             <key name="reaction_title" />
             <key name="response_title" />
             <key name="chat_subtitle_two" />
+            <key name="home_docs_text"/>
         </key>
     </admin-texts>
     <elementor-widgets>

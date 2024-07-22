@@ -46,6 +46,13 @@ class Scripts extends FreeScripts {
             $pro_assets->register( 'betterdocs-glossary-suggestion', 'public/js/glossary-suggestion.js', [ 'wp-editor' ] );
         }
 
+        /**
+         * Localize This In Order To Know If This Block Is Arriving From Betterdocs Templates Or Not
+         */
+        betterdocs()->assets->localize('betterdocs-pro-mkb-tab-grid', 'betterdocsCategoryGridConfig', [
+            'is_betterdocs_templates' => betterdocs()->helper->is_templates() ? true : false
+        ]);
+
         $pro_assets->localize( 'betterdocs-encyclopedia', 'betterdocsEncyclopedia', [
             'site_url'            => site_url(),
             'ajax_url'            => admin_url( 'admin-ajax.php' ),

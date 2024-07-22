@@ -548,6 +548,9 @@ function supported_is_select_conditions_of_type( type ) {
 		case 'type_slider':
 			available_conditions = [ true, true, false, false, false ];
 			break;
+		case 'type_date_fields':
+			available_conditions = [ true, false, true, false, false ];
+			break;
 		default:
 			available_conditions = [ true, true, true, false, false ];
 	}

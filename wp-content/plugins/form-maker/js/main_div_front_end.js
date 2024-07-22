@@ -607,7 +607,7 @@ function min_max_date_with_operator( date_min_max, date_format ) {
             break;
           default:
             if( myArray[i].indexOf('+') === 0 ) {
-                obj['days'] = -count;
+                obj['days'] = count;
             } else if( myArray[i].indexOf('-') === 0) {
                 obj['days'] = -count;
             }
@@ -1368,15 +1368,9 @@ function wd_check_regExp(form_id, regExpObj) {
     var rules = unescape(exp[0]);
     var wdform_row = x.find(jQuery("div[wdid='"+wdid+"']"));
     (exp[1].length <= 0) ?  RegExpression = new RegExp(rules) : RegExpression = new RegExp(rules, exp[1]);
-    if(x.find(jQuery("div[wdid='"+wdid+"']")).length != 0 && x.find(jQuery("div[wdid='"+wdid+"']")).css("display") != "none") {
+    if (x.find(jQuery("div[wdid='"+wdid+"']")).length != 0 && x.find(jQuery("div[wdid='"+wdid+"']")).css("display") != "none") {
       jQuery("#form"+form_id+" #wd_exp_"+wdid).remove();
-      if ( jQuery(element).val() == '' && wdform_row.find('.wdform-required').length == 0 ) {
-        find_wrong_exp = true;
-        x.find(jQuery("div[wdid='"+wdid+"'] .wdform-element-section")).parent().parent().append("<div id='wd_exp_"+wdid+"' class='fm-not-filled'>" + exp[2] + "</div>");
-        jQuery("#form"+form_id+ " div[wdid='"+wdid+"'] .wdform-label-section:first .wdform-label").addClass("error_label_exp");
-        scroll_on_element(form_id);
-      }
-      else if ( jQuery(element).val() != jQuery(element).attr('title') ) {
+      if ( jQuery(element).val() != '' && jQuery(element).val() != jQuery(element).attr('title') ) {
         if ( RegExpression.test(jQuery(element).val()) != true ) {
           x.find(jQuery("div[wdid='"+wdid+"'] .wdform-element-section")).parent().parent().append("<div  id='wd_exp_"+wdid+"' class='fm-not-filled'>" + exp[2] + "</div>");
           jQuery("#form"+form_id+ " div[wdid='"+wdid+"'] .wdform-label-section:first .wdform-label").addClass("error_label_exp");
@@ -2157,6 +2151,9 @@ function fm_submit_form(form_id) {
   if ( window['checkStripe' + form_id] == 1 ) {
     var jq_mainForm = jQuery("form[id='form"+form_id+"']");
     if (jq_mainForm.find(".StripeElement").first().parents(".wdform_row").css('display') != 'none') {
+      if (jQuery("#form"+form_id).find('.g-recaptcha[data-size=invisible]').length > 0) {
+        grecaptcha.execute();
+      }
       wdfm_call_stripe(true);
     }
     else {
@@ -2315,11 +2312,15 @@ function fm_reset_form(form_id) {
       case 'type_paypal_price_new':
       case 'type_phone_new':
       case 'type_time':
-        jQuery("#wdform_" + index + "_element" + form_id).val('');
+        var field = jQuery("#wdform_" + index + "_element" + form_id);
+        var default_value = typeof field.data("value") != "undefined" ? field.data("value") : "";
+        jQuery("#wdform_" + index + "_element" + form_id).val(default_value);
         break;
       case 'type_submitter_mail':
       case 'type_password':
-        jQuery("#wdform_" + index + "_element" + form_id).val('');
+        var field = jQuery("#wdform_" + index + "_element" + form_id);
+        var default_value = typeof field.data("value") != "undefined" ? field.data("value") : "";
+        jQuery("#wdform_" + index + "_element" + form_id).val(default_value);
         if(jQuery("#wdform_" + index + "_1_element" + form_id)){
           jQuery("#wdform_"+index+"_1_element" + form_id).val('');
 
@@ -2343,7 +2344,10 @@ function fm_reset_form(form_id) {
         break;
 
       case 'type_name':
-        jQuery("#wdform_"+index+"_element_first"+form_id+", #wdform_"+index+"_element_last"+form_id+", #wdform_"+index+"_element_title"+form_id+", #wdform_"+index+"_element_middle"+form_id).val('');
+        jQuery("#wdform_"+index+"_element_first"+form_id+", #wdform_"+index+"_element_last"+form_id+", #wdform_"+index+"_element_title"+form_id+", #wdform_"+index+"_element_middle"+form_id).each(function () {
+          var default_value = typeof jQuery(this).data("value") != "undefined" ? jQuery(this).data("value") : "";
+          jQuery(this).val(default_value);
+        });
         break;
 
       case 'type_address':
@@ -2445,6 +2449,7 @@ function fm_reset_form(form_id) {
         break;
     }
   });
+  window["condition_js" + form_id]();
 }
 
 function fm_save_form(form_id) {

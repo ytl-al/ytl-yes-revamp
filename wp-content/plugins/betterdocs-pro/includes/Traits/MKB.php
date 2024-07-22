@@ -22,7 +22,7 @@ trait MKB {
         $current_term = get_term_by( 'slug', $term->slug, $taxonomy, OBJECT );
         $_term_attr   = get_term_meta( $current_term->term_id, 'doc_category_knowledge_base', true );
 
-        if ( ! is_wp_error( $_term_attr ) ) {
+        if ( is_wp_error( $_term_attr ) ) {
             return '';
         }
 

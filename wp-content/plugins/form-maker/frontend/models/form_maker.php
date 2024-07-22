@@ -1218,7 +1218,7 @@ class FMModelForm_maker {
         $captcha_input = WDW_FM_Library(self::PLUGIN)->get('captcha_input');
         $_wd_captcha_code = Cookie_fm::getCookieByKey($id, '_wd_captcha_code');
         $session_wd_captcha_code = isset( $_wd_captcha_code ) ? $_wd_captcha_code : '-';
-        if ( md5($captcha_input) == $session_wd_captcha_code ) {
+        if ( $captcha_input != '' && md5($captcha_input) == $session_wd_captcha_code ) {
           $success = TRUE;
         }
         else {
@@ -1231,7 +1231,7 @@ class FMModelForm_maker {
         $arithmetic_captcha_input = WDW_FM_Library(self::PLUGIN)->get('arithmetic_captcha_input');
         $_wd_arithmetic_captcha_code = Cookie_fm::getCookieByKey($id, '_wd_arithmetic_captcha_code');
         $session_wd_arithmetic_captcha_code = isset($_wd_arithmetic_captcha_code) ? $_wd_arithmetic_captcha_code : '-';
-        if ( md5($arithmetic_captcha_input) == $session_wd_arithmetic_captcha_code ) {
+        if ( $arithmetic_captcha_input != '' && md5($arithmetic_captcha_input) == $session_wd_arithmetic_captcha_code ) {
           $success = TRUE;
         }
         else {
@@ -1520,7 +1520,7 @@ class FMModelForm_maker {
       "all" => '',
       "ip" => $ip,
       "subid" => $group_id,
-      "subdate" => date('Y-m-d H:i:s'),
+      "subdate" => get_date_from_gmt(date('Y-m-d H:i:s')),
       'adminemail' => $adminemail,
       "userid" => $wp_userid,
       "useremail" => $wp_useremail,
@@ -1728,7 +1728,7 @@ class FMModelForm_maker {
                       $max_size = $untilupload[0];
                       $untilupload = $untilupload[1];
                       $fileName = explode(".", $files[ 'name' ][ $file_key ]);
-                      $fileName = WDW_FM_Library(self::PLUGIN)->generateRandomStrOrNum(10) . '.' . end($fileName);
+                      $fileName = WDW_FM_Library(self::PLUGIN)->generateRandomStrOrNum(10, 'string') . '.' . end($fileName);
                       $fileSize = $files[ 'size' ][ $file_key ];
                       if ( $fileSize > $max_size * 1024 ) {
                         $this->run_stripe_cancel_hook( $form, $stripeToken, $id );
@@ -2425,7 +2425,16 @@ class FMModelForm_maker {
             $destination = str_replace( $upload_dir['baseurl'], '', $destination );
             $destination = ltrim( $destination, '/' );
             $destination = rtrim( $destination, '/' );
-            if ( !file_exists( $upload_dir[ 'basedir' ] . '/' . $destination . '/signatures' ) ) {
+            if ( file_exists( $upload_dir[ 'basedir' ] . '/' . $destination . '/signatures' ) ) {
+                /* Create empty index.html/htaccess files */
+                if ( !file_exists( $upload_dir[ 'basedir' ] . '/' . $destination . '/signatures/index.html' ) ) {
+                    $indexfile = fopen($upload_dir[ 'basedir' ] . '/' . $destination . "/signatures/index.html", "w");
+                    fclose($indexfile);
+                    $htaccessfile = fopen($upload_dir[ 'basedir' ] . '/' . $destination . "/signatures/.htaccess", "w");
+                    fwrite($htaccessfile, "deny from all");
+                    fclose($htaccessfile);
+                }
+            } else {
               $array_dir = explode( '/', $destination . '/signatures');
               if ( !empty( $array_dir ) ) {
                 $dirTmp = $upload_dir[ 'basedir' ] . '/';
@@ -2433,7 +2442,13 @@ class FMModelForm_maker {
                   if ( !empty( $dir ) ) {
                     $dirTmp .= $dir . '/';
                     if ( !is_dir( $dirTmp ) ) {
-                      mkdir( $dirTmp, 0777 );
+                        mkdir( $dirTmp, 0777 );
+                        /* Create empty index.html/htaccess files */
+                        $indexfile = fopen($dirTmp."/index.html", "w");
+                        fclose($indexfile);
+                        $htaccessfile = fopen($dirTmp . "/.htaccess", "w");
+                        fwrite($htaccessfile, "deny from all");
+                        fclose($htaccessfile);
                     }
                   }
                 }
@@ -2444,17 +2459,24 @@ class FMModelForm_maker {
             if (preg_match('/^data:image\/(\w+);base64,/', $base64_data, $type)) {
               $base64_data = substr($base64_data, strpos($base64_data, ',') + 1);
               $type = strtolower($type[1]);
-              $base64_data = str_replace( ' ', '+', $base64_data );
-              $base64_data = base64_decode($base64_data);
+              if ( $type == 'png' || $type == 'jpg' ) {
+                  $base64_data = str_replace(' ', '+', $base64_data);
+                  $base64_data = base64_decode($base64_data);
 
-              $file_name = 'signature-'. WDW_FM_Library(self::PLUGIN)->generateRandomStrOrNum(10, true) . '.' . $type;
-              $file_path = $upload_dir['basedir'] . '/' . $destination . '/signatures/' . $file_name;
+                  $file_name = 'signature-' . WDW_FM_Library(self::PLUGIN)->generateRandomStrOrNum(10, 'mixed') . '.' . $type;
+                  $file_path = $upload_dir['basedir'] . '/' . $destination . '/signatures/' . $file_name;
 
-              if ( !empty($base64_data) ) {
-                $save_signature_file = file_put_contents($file_path, $base64_data);
-                if ( $save_signature_file ) {
-                  $value = str_replace($upload_dir['basedir'], $upload_dir['baseurl'], $file_path);
-                }
+                  if (!empty($base64_data)) {
+                      $save_signature_file = file_put_contents($file_path, $base64_data);
+                      if ($save_signature_file) {
+                          $info = getimagesize($file_path);
+                          if ( isset($info['mime']) && ($info['mime'] == 'image/png' || $info['mime'] == 'image/jpg') ) {
+                              $value = str_replace($upload_dir['basedir'], $upload_dir['baseurl'], $file_path);
+                          } else {
+                              unlink($file_path);
+                          }
+                      }
+                  }
               }
             }
             $key_values[$i] = $value;
@@ -2817,7 +2839,7 @@ class FMModelForm_maker {
       $custom_fields = array(
         "ip" => $ip,
         "subid" => $group_id,
-        "subdate" => date('Y-m-d H:i:s'),
+        "subdate" => get_date_from_gmt(date('Y-m-d H:i:s')),
         'adminemail' => $adminemail,
         "useremail" => $wp_useremail,
         "username" => $wp_username,
@@ -3016,7 +3038,7 @@ class FMModelForm_maker {
 	    "all" => $all,
       "ip" => $ip,
       "subid" => $group_id,
-      "subdate" => date('Y-m-d H:i:s'),
+      "subdate" => get_date_from_gmt(date('Y-m-d H:i:s')),
       "userid" => $userid,
       'adminemail' => $adminemail,
       "useremail" => $useremail,
@@ -3531,7 +3553,7 @@ class FMModelForm_maker {
     }
     $this->custom_fields['ip'] = $ip;
     $this->custom_fields['subid'] = $group_id;
-    $this->custom_fields['subdate'] = date('Y-m-d H:i:s');
+    $this->custom_fields['subdate'] = get_date_from_gmt(date('Y-m-d H:i:s'));
     $this->custom_fields['adminemail'] = $adminemail;
     $this->custom_fields['useremail'] = $useremail;
     $this->custom_fields['username'] = $username;

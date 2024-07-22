@@ -33,8 +33,8 @@ class TWBElementor {
     wp_enqueue_style(TenWebBooster::PREFIX . '-global', $this->booster->plugin_url . '/assets/css/global.css', array( 'twb-open-sans' ), TenWebBooster::VERSION);
 
     $required_scripts = array( 'jquery' );
+    wp_enqueue_script(TenWebBooster::PREFIX . '-circle', $this->booster->plugin_url . '/assets/js/circle-progress.js', $required_scripts, '1.2.2');
     wp_enqueue_script(TenWebBooster::PREFIX . '-global', $this->booster->plugin_url . '/assets/js/global.js', array('jquery'), TenWebBooster::VERSION);
-    wp_enqueue_script(TenWebBooster::PREFIX . '-circle', $this->booster->plugin_url . '/assets/js/circle-progress.js', array('jquery'), '1.2.2');
     wp_localize_script(TenWebBooster::PREFIX . '-global', 'twb', array(
       'title' => $this->booster->cta_button['section_label'],
       'nonce' => wp_create_nonce('twb_nonce'),

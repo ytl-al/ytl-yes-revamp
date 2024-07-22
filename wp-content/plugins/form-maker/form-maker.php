@@ -3,14 +3,14 @@
  * Plugin Name: Form Maker Pro
  * Plugin URI: https://10web.io/plugins/wordpress-form-maker/?utm_source=form_maker&utm_medium=free_plugin
  * Description: This plugin is a modern and advanced tool for easy and fast creating of a WordPress Form. The backend interface is intuitive and user friendly which allows users far from scripting and programming to create WordPress Forms.
- * Version: 2.15.11
+ * Version: 2.15.26
  * Author: 10Web Form Builder Team
  * Author URI: https://10web.io/plugins/?utm_source=form_maker&utm_medium=free_plugin
  * License: GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 
 defined('ABSPATH') || die('Access Denied');
-
+#[\AllowDynamicProperties]
 final class WDFM {
   /**
    * PLUGIN = 2 points to Contact Form Maker
@@ -22,43 +22,19 @@ final class WDFM {
    */
   protected static $_instance = null;
   public $abspath;
-  /**
-   * Plugin directory path.
-   */
   public $plugin_dir = '';
-  /**
-   * Plugin directory url.
-   */
   public $plugin_url = '';
-  /**
-   * Plugin front urls.
-   */
   public $front_urls = array();
-  /**
-   * Plugin main file.
-   */
   public $main_file = '';
-  /**
-   * Plugin version.
-   */
-  public $plugin_version = '';
-  /**
-   * Plugin database version.
-   */
-  public $db_version = '';
-  /**
-   * Plugin menu slug.
-   */
+  public $plugin_version = '2.15.26';
+  public $db_version = '2.15.26';
+  public $menu_postfix = '_fm';
+  public $plugin_postfix = '';
+  public $handle_prefix = 'fm';
+  public $slug = 'form-maker';
+  public $nicename = 'Form Maker';
   public $menu_slug = '';
-  /**
-   * Plugin menu slug.
-   */
   public $prefix = '';
-  public $handle_prefix = '';
-  public $css_prefix = '';
-  public $js_prefix = '';
-
-  public $nicename = '';
   public $nonce = 'nonce_fm';
   public $fm_form_nonce = 'fm_form_nonce';
   public $is_free = 0;
@@ -103,17 +79,15 @@ final class WDFM {
     $this->plugin_url = plugins_url(plugin_basename(dirname(__FILE__)));
     $this->front_urls = $this->get_front_urls();
     $this->main_file = plugin_basename(__FILE__);
-    $this->plugin_version = '2.15.11';
-    $this->db_version = '2.15.11';
-    $this->menu_postfix = ($this->is_free == 2 ? '_fmc' : '_fm');
-    $this->plugin_postfix = ($this->is_free == 2 ? '_fmc' : '');
+    if ( $this->is_free == 2 ) {
+      $this->menu_postfix = '_fmc';
+      $this->plugin_postfix = $this->menu_postfix;
+      $this->handle_prefix = 'fmc';
+      $this->slug = 'contact-form-maker';
+      $this->nicename = 'Contact Form';
+    }
     $this->menu_slug = 'manage' . $this->menu_postfix;
     $this->prefix = 'form_maker' . $this->plugin_postfix;
-    $this->css_prefix = 'fm_';
-    $this->js_prefix  = 'fm_';
-    $this->handle_prefix  = ($this->is_free == 2 ? 'fmc' : 'fm');
-    $this->nicename = ($this->is_free == 2 ? __('Contact Form', $this->prefix) : __('Form Maker', $this->prefix));
-    $this->slug = ($this->is_free == 2 ? 'contact-form-maker' : 'form-maker');
     $this->fm_settings = get_option( $this->handle_prefix . '_settings' );
     if ( empty($this->fm_settings['fm_advanced_layout']) ) {
       $this->fm_settings['fm_advanced_layout'] = 0;
@@ -142,9 +116,7 @@ final class WDFM {
   }
 
   /**
-   * get ABSPATH from WP_CONTENT_DIR.
-   *
-   * @param string $dirpath
+   * Get ABSPATH from WP_CONTENT_DIR.
    *
    * @return string
    */
@@ -156,7 +128,6 @@ final class WDFM {
     }
     return ABSPATH;
   }
-
 
   /**
    * Add actions.

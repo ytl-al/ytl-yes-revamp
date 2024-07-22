@@ -79,12 +79,18 @@ class FMElementor extends \Elementor\Widget_Base {
    * Render widget output on the frontend.
    */
   protected function render() {
-    $font_class = new \Elementor\Core\Schemes\Typography();
-    $font = $font_class->get_scheme_value();
-    $color_class = new \Elementor\Core\Schemes\Color();
-    $color = $color_class->get_scheme();
-    if ( isset($font[3]) && isset($font[3]["font_family"]) && isset($font[3]["font_weight"]) && isset($color[3]) && isset($color[3]["value"]) ) {
-      echo '<style>.elementor-widget-container .fm-form-container, .elementor-widget-container .fm-form-container label, .elementor-widget-container .fm-form-container input, .elementor-widget-container .fm-form-container textarea, .elementor-widget-container .fm-form-container select, .elementor-widget-container .fm-form-container button, .elementor-widget-container .fm-form-container  .fm-message { font-family: ' . $font[3]["font_family"] . '; font-weight: ' . $font[3]["font_weight"] . '; color: ' . $color[3]["value"] . '}</style>';
+    if ( class_exists("\Elementor\Core\Schemes\Typography")
+      && method_exists("\Elementor\Core\Schemes\Typography", "get_scheme_value")
+      && class_exists("\Elementor\Core\Schemes\Color")
+      && method_exists("\Elementor\Core\Schemes\Color", "get_scheme")
+    ) {
+      $font_class = new \Elementor\Core\Schemes\Typography();
+      $font = $font_class->get_scheme_value();
+      $color_class = new \Elementor\Core\Schemes\Color();
+      $color = $color_class->get_scheme();
+      if ( isset($font[3]) && isset($font[3]["font_family"]) && isset($font[3]["font_weight"]) && isset($color[3]) && isset($color[3]["value"]) ) {
+        echo '<style>.elementor-widget-container .fm-form-container, .elementor-widget-container .fm-form-container label, .elementor-widget-container .fm-form-container input, .elementor-widget-container .fm-form-container textarea, .elementor-widget-container .fm-form-container select, .elementor-widget-container .fm-form-container button, .elementor-widget-container .fm-form-container  .fm-message { font-family: ' . $font[3]["font_family"] . '; font-weight: ' . $font[3]["font_weight"] . '; color: ' . $color[3]["value"] . '}</style>';
+      }
     }
     $settings = $this->get_settings_for_display();
 
