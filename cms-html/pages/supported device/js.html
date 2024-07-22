@@ -1,0 +1,195 @@
+<script type="text/javascript">
+
+  //filter section
+  var $filterCheckboxes = $('input[type="checkbox"]');
+  var filterFunc = function () {
+
+    var selectedFilters = {};
+
+    $filterCheckboxes.filter(':checked').each(function () {
+
+      if (!selectedFilters.hasOwnProperty(this.name)) {
+        selectedFilters[this.name] = [];
+      }
+
+      selectedFilters[this.name].push(this.value);
+    });
+
+    // create a collection containing all of the filterable elements
+    var $filteredResults = $('.filter-btn');
+
+    // loop over the selected filter name -> (array) values pairs
+    $.each(selectedFilters, function (name, filterValues) {
+
+      // filter each .filter-btn element
+      $filteredResults = $filteredResults.filter(function () {
+
+        var matched = false,
+          currentFilterValues = $(this).data('category').split(' ');
+
+        // loop over each category value in the current .filter-btn's data-category
+        $.each(currentFilterValues, function (_, currentFilterValue) {
+
+          // if the current category exists in the selected filters array
+          // set matched to true, and stop looping. as we're ORing in each
+          // set of filters, we only need to match once
+
+          if ($.inArray(currentFilterValue, filterValues) != -1) {
+            matched = true;
+            return false;
+          }
+        });
+
+        // if matched is true the current .filter-btn element is returned
+        return matched;
+
+      });
+    });
+
+    $('.filter-btn').hide().filter($filteredResults).show();
+  }
+  $filterCheckboxes.on('change', filterFunc);
+
+  /*more product load section*/
+  // $(function () {
+  //   "use strict";
+  //   $('#device-list-section .row div').slice(0, 12).show();
+  //   $('#loadmore').on('click', function (e) {
+  //     e.preventDefault();
+  //     $('#device-list-section .row div:hidden').slice(0, 8).slideDown();
+  //     if ($('div:hidden').length === 0) {
+  //       $('#loadmore').replaceWith("<p class='p'>No More</p>");
+  //     }
+  //   });
+  // });
+
+  // search section
+  // var $btns = $('.btn').click(function() {
+  //         if (this.id == 'all') {
+  //           $('#brand-list > diQv').fadeIn(600);
+  //         } else {
+  //           var $el = $('.' + this.id).fadeIn(600);
+  //           $('#brand-list > div').not($el).hide();
+  //         }
+  //         $btns.removeClass('active');
+  //         $(this).addClass('active');
+  // })
+
+  var $search = $("#search").on('input', function () {
+    //$btns.removeClass('active');
+    var matcher = new RegExp($(this).val(), 'gi');
+    $('.box-sec').show().not(function () {
+      return matcher.test($(this).find('.name, .sku').text())
+    }).hide();
+  })
+
+
+  //price filter
+  let min_price = 0;
+  let max_price = 10000;
+
+  $(document).ready(function () {
+    //showAllItems(); //Display all items with no filter applied
+  });
+
+  $("#min-price").on("change mousemove", function () {
+    min_price = parseInt($("#min-price").val());
+    $("#min-price-txt").text("RM" + min_price);
+    showItemsFiltered();
+  });
+
+  $("#max-price").on("change mousemove", function () {
+    max_price = parseInt($("#max-price").val());
+    $("#max-price-txt").text("RM" + max_price);
+    showItemsFiltered();
+  });
+
+  function showItemsFiltered() {
+    $(".box-sec").each(function (index) {
+      var planPrice = $(this).data('price');
+      console.log(planPrice);
+      if (planPrice > min_price && planPrice < max_price) {
+        $(this).show();
+      } else {
+        $(this).hide();
+      }
+    });
+  }
+
+ 
+
+  $(document).ready(function() {
+  $(window).scroll(function() {
+    // if ($(this).scrollTop() > 100) {
+    //   $("#scroll-top").fadeIn();
+    // } else {
+    //   $("#scroll-top").fadeOut();
+    // }
+  });
+  $("#scroll-top").click(function() {
+    $("html, body").animate({ scrollTop: 0 }, 500);
+    return false;
+  });
+
+  $(".filter").click(function(){
+    $("#filter-section").toggle();
+  });
+  $(".cancel-btn").click(function(){
+    $("#filter-section").hide();
+  });
+  $(".search").click(function(){
+    $(".device_cat_search").toggle();
+  });
+
+  $('.hero-slider').slick({
+              infinite: true,
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              arrows: false,
+              fade: true,
+              dots: true,
+              autoplay: true,
+              autoplaySpeed: 8000,
+              responsive: [{
+                  breakpoint: 1024,
+                  settings: {
+                      slidesToShow: 2,
+                      slidesToScroll: 1,
+                      infinite: true,
+                      dots: true,
+                      arrows: false
+                  }
+              }, {
+                  breakpoint: 768,
+                  settings: {
+                      slidesToShow: 1,
+                      arrows: false,
+                      infinite: true,
+                      dots: true,
+                      slidesToScroll: 1,
+                  }
+              }, {
+                  breakpoint: 600,
+                  settings: {
+                      slidesToShow: 1,
+                      arrows: false,
+                      infinite: true,
+                      dots: true,
+                      slidesToScroll: 1
+                  }
+              }, {
+                  breakpoint: 480,
+                  settings: {
+                      slidesToShow: 1,
+                      slidesToScroll: 1,
+                      dots: true,
+                      infinite: true,
+                      dots: true,
+                      arrows: false
+                  }
+              }]
+          });  
+
+});
+
+</script>

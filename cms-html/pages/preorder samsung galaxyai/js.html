@@ -1,0 +1,23 @@
+<script type="text/javascript">
+  /**
+   * Function to check if page is loaded from back button
+  */
+  function pageShown(evt) {
+      if (evt.persisted) {
+          toggleOverlay(false);
+      }
+  }
+  window.addEventListener("pageshow", pageShown, false);
+
+$(document).ready(function() {
+  var url = new URL(window.location.href);
+  var urlParams = url.search || ''; // Use empty string as default if url.search is falsy
+  if (urlParams !== '') {
+      $('a.btn-getApplePlan').each(function() { // Removed space between "a." and "btn-getApplePlan"
+          var attrHref = $(this).attr('href');
+          var attrHrefNew = attrHref + urlParams;
+          $(this).attr('href', attrHrefNew);
+      });
+  }
+});
+</script>
