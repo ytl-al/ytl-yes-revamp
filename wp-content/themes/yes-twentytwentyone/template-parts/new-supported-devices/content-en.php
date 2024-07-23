@@ -9,10 +9,10 @@
             <img src="https://cdn.yes.my/site/wp-content/uploads/2024/05/superjimat-power35webbanner-mayupdate-mobile.webp" class="w-100 d-block d-md-block d-lg-none" alt="...">
 
             <div class="inner-content-sec">
-                <h1 style="text-align:left">5G plans with<br>
+                <h1>5G plans with<br>
                     BIG savings!</h1>
                 <div class="btn-sec d-flex align-items-center">
-                    <div class="pricing-2" style="margin:0">
+                    <div class="pricing-2">
                         <h4 class="d-block">
                             <sup><span>From<br><b>RM</b></span></sup>35<span class="month-sec"> / mth</span>
                         </h4>
@@ -51,7 +51,7 @@
                         </div>
                         <div class="device_cat_search">
                             <input type="text" class="form-control" id="search" placeholder="Search any Devices">
-                            <a href="javascript:void(0);" class="search-btn" @click="performSearch">
+                            <a href="javascript:void(0);" class="search-btn btn" @click="performSearch">
                                 <img decoding="async" src="/wp-content/uploads/2023/09/search-icon.png" alt="search"></a>
                         </div>
                     </div>
@@ -63,6 +63,7 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col col-lg-3" id="filter-section">
+                <div id="bar-fixed">
                 <a href="javascript:void(0);" class="cancel-btn">
                     <img decoding="async" src="/wp-content/uploads/2024/01/cancel-icon.png" alt="cancel"></a>
 
@@ -75,7 +76,7 @@
                                 Brand
                             </button>
                         </h2>
-                        <div id="regularCollapseFirst" class="accordion-collapse collapse show" aria-labelledby="regularHeadingFirst" data-bs-parent="#regularAccordionRobots">
+                        <div id="regularCollapseFirst" class="accordion-collapse collapse show brand-h" aria-labelledby="regularHeadingFirst" data-bs-parent="#regularAccordionRobots">
                             <div class="accordion-body">
                                 <label>
                                     <input class="form-check-input brand-checkbox" type="checkbox" :value="'All'" id="All" @change="onBrandChange" checked /> All
@@ -156,11 +157,13 @@
                         </div>
                     </div>
                 </div>
+                </div>
+
             </div>
 
             <div class="col col-lg-9 sd-device-section" id="device-list-section" v-if="deviceSection" >
                 <div class="row">
-                    <div v-for="device in devices" :key="device.id" class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn">
+                    <div v-for="device in devices" :key="device.id" class="col col-md-5 col-xl-4 mb-xl-4 mb-4 aos-init aos-animate" data-aos="fade-right" >
                         <div class="layer-planDevice">
                             <p class="panel-deviceImg">
                                 <img decoding="async" :src="device.image_path" :alt="device.title">
@@ -174,7 +177,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row mb-5">
                     <div class="col-12 text-center mt-4" v-if="currentPage < totalPages">
                         <button class="btn load_more_btn" @click="loadMoreDevices">Load More</button>
                     </div>
@@ -377,5 +380,28 @@
 
             }
         });
+        
+        $(".filter").click(function() {           
+            $("#filter-section").toggle();
+        });
+        $(".cancel-btn").click(function() {
+            $("#filter-section").hide();
+        });
+        $(".search").click(function() {
+            $(".device_cat_search").toggle();
+        });
     });
+</script>
+
+<script>
+/* it seems javascript..*/
+var topLimit = $('#bar-fixed').offset().top;
+$(window).scroll(function() {
+  //console.log(topLimit <= $(window).scrollTop())
+  if (topLimit <= $(window).scrollTop()) {
+    $('#bar-fixed').addClass('stickIt')
+  } else {
+    $('#bar-fixed').removeClass('stickIt')
+  }
+})
 </script>
