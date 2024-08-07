@@ -402,7 +402,7 @@
     }
 
     #device-list-section .layer-planDevice:before {
-        border: 3px solid #FF0084;
+        border: 0px solid #FF0084;
         border-radius: 15px;
         content: "";
         height: 100%;
@@ -849,6 +849,104 @@
         font-size: 20px !important;
     }
 
+    #faq-section {
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0px;
+    background: #fff;
+    margin-top: 0px !important;
+}
+
+#faq-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 39px;
+    font-weight: 800;
+    line-height: 47px;
+    letter-spacing: -0.02em;
+    text-align: center;
+    font-display: swap;
+}
+
+#faq-section .accordion-button {
+    border: none;
+    box-shadow: unset;
+    border-radius: 0;
+    font-size: 16px;
+    line-height: 25px;
+    color: #000;
+    font-weight: 700;
+    font-family: 'Open Sans', sans-serif;
+    border-bottom: 1px solid #000;
+    font-display: swap;
+}
+
+#faq-section .accordion-button::after {
+    opacity: 1;
+}
+
+#faq-section .accordion-button::after {
+    background-image: none;
+    background: url(/wp-content/uploads/2024/02/icon-open.webp) no-repeat center center / contain;
+}
+
+#faq-section .accordion-button:not(.collapsed)::after {
+    background-image: none;
+    background: url(/wp-content/uploads/2024/02/icon-hide.webp) no-repeat center center / contain !important;
+
+}
+
+#faq-section .accordion-button:focus {
+    box-shadow: unset;
+}
+
+#faq-section .accordion-body {
+    font-size: 14px;
+    line-height: 26px;
+}
+
+#faq-section .accordion-body h4 {
+    font-size: 16px;
+    line-height: 32px;
+    font-weight: 800;
+}
+
+#faq-section .accordion-body ul {
+    margin: 15px 0 0 15px;
+    padding: 0;
+}
+
+#faq-section .accordion-body li {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 26px;
+}
+
+#faq-section .accordion-body ol {
+    padding-left: 0;
+}
+
+#faq-section .accordion-body p {
+    font-size: 14px;
+    line-height: 26px;
+}
+
+#faq-section .viewall-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 19px;
+    letter-spacing: 0.1em;
+    text-align: left;
+    text-decoration: none;
+    color: #2F3BF5;
+    font-display: swap;
+}
+
+#faq-section .viewall-btn svg {
+    color: #FF0084
+}
+
     @media only screen and (min-device-width: 1600px) {
         .hero-banner {
             /* background: url('/wp-content/uploads/2023/09/ookla-hero-banner-large.png'); */
@@ -859,6 +957,21 @@
     }
 
     @media only screen and (max-width: 768px) {
+        .accordion-button{
+            padding: 1rem;
+        }
+         #bar-fixed.stickIt {
+            top: 20px !important;
+            width: 100% !important;
+        }
+        #bar-fixed{
+            position: relative;
+        }
+        .cancel-btn{
+            position: absolute;
+            top:0px !important;
+            right:0px !important;
+        }
         .hero-banner {
             background: url('/wp-content/uploads/2024/02/device-page-hero-banner-mob.png');
             padding: 30px 0 30px;
@@ -1017,7 +1130,7 @@
         }
 
         #device-list-section .layer-planDevice {
-            height: 340px;
+            height: auto;
             padding: 30px;
             margin: 0 15px;
         }
@@ -1025,6 +1138,50 @@
         /* .row {
             display: unset;
         } */
+
+        #faq-section {
+        padding: 30px 0px !important;
+        margin-top: 0px !important;
+    }
+
+    #faq-section h2 {
+        font-size: 32px;
+        line-height: 36px;
+    }
+
+    #faq-section .accordion-button {
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 700;
+    }
+
+    #faq-section .accordion-body h4 {
+        font-size: 13px;
+        line-height: 20px;
+        font-weight: 800;
+    }
+
+    #faq-section .accordion-body ul {
+        margin: 15px 0 0 15px;
+        padding: 0;
+    }
+
+    #faq-section .accordion-body li {
+        margin: 0;
+        padding: 0 0 5px;
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    #faq-section .accordion-body p {
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    #faq-section .viewall-btn {
+        font-size: 16px;
+    }
+
     }
 
     #filter-section {
@@ -1260,6 +1417,14 @@
             position: relative;
             z-index: 1000;
         }
+        .accordion-body{margin-left: 10px;}
+        #bar-fixed.stickIt {
+            top: 20px !important;
+            width: 100% !important;
+        }
+        #bar-fixed{
+            position: relative;
+        }
 
         .cancel-btn {
             display: block;
@@ -1330,7 +1495,7 @@
         }
 
         #device-list-section .layer-planDevice {
-            height: 340px;
+            height: auto;
             padding: 30px;
             margin: 0 15px;
         }
@@ -1350,6 +1515,49 @@
         .bottom-section .free-tag b {
             font-size: 24px;
         }
+
+        #faq-section {
+        padding: 30px 0px !important;
+        margin-top: 0px !important;
+    }
+
+    #faq-section h2 {
+        font-size: 32px;
+        line-height: 36px;
+    }
+
+    #faq-section .accordion-button {
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 700;
+    }
+
+    #faq-section .accordion-body h4 {
+        font-size: 13px;
+        line-height: 20px;
+        font-weight: 800;
+    }
+
+    #faq-section .accordion-body ul {
+        margin: 15px 0 0 15px;
+        padding: 0;
+    }
+
+    #faq-section .accordion-body li {
+        margin: 0;
+        padding: 0 0 5px;
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    #faq-section .accordion-body p {
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    #faq-section .viewall-btn {
+        font-size: 16px;
+    }
     }
 
     .phone-box {
@@ -1440,9 +1648,9 @@
 
 
 #bar-fixed.stickIt {
-  position: fixed;
+  position: sticky;
   top: 100px;
-  width: 20%;
+  width: 100%;
 }
 
 .brand-h{
@@ -1454,7 +1662,7 @@
     overflow-y: scroll;
 }
 .form-check-input:checked[type=radio] {
-    background-image: url('data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e') !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e") !important;
 }
 
 

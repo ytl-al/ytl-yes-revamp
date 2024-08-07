@@ -9,10 +9,10 @@
             <img src="https://cdn.yes.my/site/wp-content/uploads/2024/05/superjimat-power35webbanner-mayupdate-mobile.webp" class="w-100 d-block d-md-block d-lg-none" alt="...">
 
             <div class="inner-content-sec">
-                <h1>5G plans with<br>
+                <h1 style="text-align:left">5G plans with<br>
                     BIG savings!</h1>
                 <div class="btn-sec d-flex align-items-center">
-                    <div class="pricing-2">
+                    <div class="pricing-2" style="margin:0">
                         <h4 class="d-block">
                             <sup><span>From<br><b>RM</b></span></sup>35<span class="month-sec"> / mth</span>
                         </h4>
@@ -40,19 +40,19 @@
                             <ul>
                                 <li>
                                     <a href="javascript:void(0);" class="filter">
-                                        Filter <img decoding="async" src="/wp-content/uploads/2024/01/filter-icon.png" alt="filter">
+                                        Filter <img decoding="async" src="/wp-content/uploads/2024/07/filter-icon.png" alt="filter">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="javascript:void(0);" class="search">
-                                        <img decoding="async" src="/wp-content/uploads/2023/09/search-icon.png" alt="search"></a>
+                                        <img decoding="async" src="/wp-content/uploads/2024/07/search-icon.png" alt="search"></a>
                                 </li>
                             </ul>
                         </div>
                         <div class="device_cat_search">
                             <input type="text" class="form-control" id="search" placeholder="Search any Devices">
                             <a href="javascript:void(0);" class="search-btn btn" @click="performSearch">
-                                <img decoding="async" src="/wp-content/uploads/2023/09/search-icon.png" alt="search"></a>
+                                <img decoding="async" src="/wp-content/uploads/2024/07/search-icon.png" alt="search"></a>
                         </div>
                     </div>
                 </div>
@@ -63,9 +63,9 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col col-lg-3" id="filter-section">
-                <div id="bar-fixed">
-                <a href="javascript:void(0);" class="cancel-btn">
-                    <img decoding="async" src="/wp-content/uploads/2024/01/cancel-icon.png" alt="cancel"></a>
+            <a href="javascript:void(0);" class="cancel-btn">
+            <img decoding="async" src="/wp-content/uploads/2024/07/cancel-icon.png" alt="cancel"></a>
+            <div id="bar-fixed">               
 
                 <div class="filter-accordion sd-filter-section" v-if="brandsSection">
                     <h2 class="h2text">Filters</h2>
@@ -113,12 +113,12 @@
                                     </li>
                                     <li class="checkbox">
                                         <label>
-                                            <input class="form-check-input network-checkbox" type="checkbox" :value="'data-only'" id="DataOnly" @change="onNetworkChange" /> Data Only
+                                            <input class="form-check-input network-checkbox" type="checkbox" :value="'data only'" id="DataOnly" @change="onNetworkChange" /> Data Only
                                         </label>
                                     </li>
                                     <li class="checkbox">
                                         <label>
-                                            <input class="form-check-input network-checkbox" type="checkbox" :value="'data-volte'" id="DataVoLTE" @change="onNetworkChange" /> Data + VoLTE
+                                            <input class="form-check-input network-checkbox" type="checkbox" :value="'data + volte'" id="DataVoLTE" @change="onNetworkChange" /> Data + VoLTE
                                         </label>
                                     </li>
                                     <li class="checkbox">
@@ -144,7 +144,7 @@
                                 <ul>
                                     <li class="radio">
                                         <label>
-                                            <input class="form-check-input" type="radio" name="sequence" :value="'desc'" id="Latest" @change="onSequenceChange" /> Latest
+                                            <input class="form-check-input" type="radio" name="sequence" :value="'desc'" id="Latest" @change="onSequenceChange" checked/> Latest
                                         </label>
                                     </li>
                                     <li class="radio">
@@ -158,12 +158,11 @@
                     </div>
                 </div>
                 </div>
-
             </div>
 
             <div class="col col-lg-9 sd-device-section" id="device-list-section" v-if="deviceSection" >
                 <div class="row">
-                    <div v-for="device in devices" :key="device.id" class="col col-md-5 col-xl-4 mb-xl-4 mb-4 aos-init aos-animate" data-aos="fade-right" >
+                    <div v-for="device in devices" :key="device.id" class="col col-md-5 col-xl-4 mb-xl-4 flex-column mb-4 box-sec filter-btn aos-init aos-animate" data-aos="fade-right" >
                         <div class="layer-planDevice">
                             <p class="panel-deviceImg">
                                 <img decoding="async" :src="device.image_path" :alt="device.title">
@@ -177,7 +176,7 @@
                     </div>
                 </div>
 
-                <div class="row mb-5">
+                <div class="row mb-5" v-if="">
                     <div class="col-12 text-center mt-4" v-if="currentPage < totalPages">
                         <button class="btn load_more_btn" @click="loadMoreDevices">Load More</button>
                     </div>
@@ -190,218 +189,44 @@
 
 <!-- Mid-section ENDS -->
 
-
+<!-- Footer FAQs STARTS -->
+<section class="layer-footerFAQ mt-4 mt-lg-0" id="faq-section" data-aos="fade-up">
+    <div class="container">
+        <div class="row">
+            <h2 class="mb-5">Frequently Asked Questions</h2>
+        </div>
+        <div class="row justify-content-lg-center">
+            <div class="col-12 col-lg-9">
+                <div class="accordion accordion-flush mb-3" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">How do I keep my number?</button></h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <p>Switch To Yes without changing your number, visit <a href="https://www.yes.my/docs/faq/switch-to-yes/yes-mobile-number-portability-prepaid/">here</a> for more info.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingTwo"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">Where are the Yes 5G coverage areas in Malaysia?</button></h2>
+                        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <p>To check out our 5G coverage areas, you can visit <a href="https://www.yes.my/coverage/">here</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingThree"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">Is there any contract period if I subscribe to Yes Infinite Postpaid Service Plans?</button></h2>
+                        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <p>There is no contract for Yes Infinite Postpaid Plans.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-center mb-0"><a href="/faq" class="viewall-btn">View All FAQs <span class="iconify" data-icon="akar-icons:arrow-right"></span></a></p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer FAQs ENDS -->
 <?php get_template_part('template-parts/new-supported-devices/scripts'); ?>
-
-<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        const apiEndpointURL = window.location.origin + '/wp-json/ywos/v1';
-
-        // Initialize Vue instance
-        var pageDelivery = new Vue({
-            el: '#main-app',
-            data: {
-                apiLocale: 'EN',
-                devices: [],
-                brands: [],
-                currentPage: 1,
-                totalPages: 1,
-                perPage: 3,
-                selectedBrands: [],
-                selectedNetworks: [],
-                selectedSequences: [],
-                networks: [],
-                sequences: [],
-                searchQuery: '' ,
-                deviceSection:false,
-                brandsSection:false,
-            },
-            mounted: function() {},
-            created: function() {
-                this.pageInit();
-                setTimeout(function() {
-                    toggleOverlay(true);
-                }, 500);
-  
-            },
-            methods: {
-                // Initialize the page
-                pageInit: function() {
-                    this.fetchSupportedBrands();
-                    this.fetchSupportedDevices();
-                },
-
-                // Fetch supported brands from the API
-                fetchSupportedBrands: function() {
-                    var self = this;
-                    toggleOverlay(true);
-                    axios.post(apiEndpointURL + '/fetch-supported-brands')
-                        .then((response) => {
-                            self.brands = response.data;
-                            self.brandsSection=true;
-                            ('#sd-filter-section').show();
-                            toggleOverlay(false);
-                        })
-                        .catch((error) => {
-
-                        });
-                },
-
-                
-
-
-                // Fetch supported devices from the API
-                fetchSupportedDevices: function(page = 1, filters = {}) {
-                    var self = this;
-                    toggleOverlay(true);
-                    filters.page = page;
-                    axios.post(apiEndpointURL + '/fetch-supported-devices', filters)
-                        .then((response) => {
-                            self.deviceSection=true;
-
-                            toggleOverlay(false);
-                            if (page === 1) {
-                                self.devices = response.data.data;
-                            } else {
-                                self.devices = [...self.devices, ...response.data.data];
-                            }
-                            self.currentPage = response.data.current_page;
-                            self.totalPages = response.data.last_page;
-                            self.scrollToTop(); 
-                        })
-                        .catch((error) => {
-                            toggleOverlay(false);
-                            // Handle the error appropriately
-                        });
-                },
-
-
-                // Load more devices
-                loadMoreDevices: function() {
-                    var self = this;
-                    if (self.currentPage < self.totalPages) {
-                        self.fetchSupportedDevices(self.currentPage + 1, {
-                            brand: self.selectedBrands.join(','),
-                            device_supports: self.selectedNetworks.join(','),
-                            order: self.selectedSequences[0] || '',
-                        });
-                    }
-                },
-
-                 // Method to perform search action
-                 performSearch: function() {
-                    var self = this;
-                    self.searchQuery = document.getElementById('search').value;
-                    self.updateDevices();
-                },
-
-
-                onBrandChange(event) {
-                    var self = this;
-                    const brand = event.target.value;
-
-                    if (brand === 'All' && event.target.checked) {
-                        self.selectedBrands = ['All'];
-                        document.querySelectorAll('.brand-checkbox').forEach(checkbox => {
-                            if (checkbox.value !== 'All') {
-                                checkbox.checked = false;
-                            }
-                        });
-                    } else if (brand !== 'All' && event.target.checked) {
-                        self.selectedBrands = self.selectedBrands.filter(b => b !== 'All');
-                        self.selectedBrands.push(brand);
-                        document.getElementById('All').checked = false;
-                    } else {
-                        const index = self.selectedBrands.indexOf(brand);
-                        if (index > -1) {
-                            self.selectedBrands.splice(index, 1);
-                        }
-                    }
-
-                    self.updateDevices();
-                },
-
-                onNetworkChange(event) {
-                    var self = this;
-                    const network = event.target.value;
-
-                    if (network === 'All' && event.target.checked) {
-                        self.selectedNetworks = ['All'];
-                        document.querySelectorAll('.network-checkbox').forEach(checkbox => {
-                            if (checkbox.value !== 'All') {
-                                checkbox.checked = false;
-                            }
-                        });
-                    } else if (network !== 'All' && event.target.checked) {
-                        self.selectedNetworks = self.selectedNetworks.filter(n => n !== 'All');
-                        self.selectedNetworks.push(network);
-                        document.getElementById('AllNetwork').checked = false; // Ensure the 'All' network checkbox is unchecked
-                    } else {
-                        const index = self.selectedNetworks.indexOf(network);
-                        if (index > -1) {
-                            self.selectedNetworks.splice(index, 1);
-                        }
-                    }
-
-                    self.updateDevices();
-                },
-
-
-                onSequenceChange(event) {
-                    var self = this;
-                    const sequence = event.target.value;
-                    if (event.target.checked) {
-                        self.selectedSequences = [sequence];
-                    } else {
-                        self.selectedSequences = [];
-                    }
-                    self.updateDevices();
-                },
-
-                updateDevices() {
-                    var self = this;
-                    self.devices = [];
-                    self.currentPage = 1;
-                    self.fetchSupportedDevices(1, {
-                        brand: self.selectedBrands.join(','),
-                        device_supports: self.selectedNetworks.join(','),
-                        order: self.selectedSequences[0] || '',
-                        device_name: self.searchQuery
-                    });
-                },
-                scrollToTop() {
-                    var self = this;
-                    if (self.$refs.cardContainer) {
-                        self.$refs.cardContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }
-
-            }
-        });
-        
-        $(".filter").click(function() {           
-            $("#filter-section").toggle();
-        });
-        $(".cancel-btn").click(function() {
-            $("#filter-section").hide();
-        });
-        $(".search").click(function() {
-            $(".device_cat_search").toggle();
-        });
-    });
-</script>
-
-<script>
-/* it seems javascript..*/
-var topLimit = $('#bar-fixed').offset().top;
-$(window).scroll(function() {
-  //console.log(topLimit <= $(window).scrollTop())
-  if (topLimit <= $(window).scrollTop()) {
-    $('#bar-fixed').addClass('stickIt')
-  } else {
-    $('#bar-fixed').removeClass('stickIt')
-  }
-})
-</script>
