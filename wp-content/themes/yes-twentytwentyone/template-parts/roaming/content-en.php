@@ -882,11 +882,6 @@
                         <h4 data-name="iddPrepaidSms" class="price-color">0.28</h4>
                     </div>
                 </div>
-
-
-
-
-
             </div>
 
             <!-- <div class="col-12 col-lg-2 d-none">
@@ -927,9 +922,7 @@
         <div class="row">
             <div class="col-8 m-auto text-left idd-rate">&nbsp;
                 <p>• Prices shown above are subject to 6% service tax.</p>
-
-                <p>• IDD calls are charged at 30 seconds block.</p>
-
+                <p>• IDD calls are charged at 60 seconds block.</p>
                 <p>• Rates are subject to change without prior notice.</p>
                 <a href="#" data-button="closeIdd" class="pink-btn mt-5">Close <span class="iconify"
                         data-icon="carbon:close-filled"></span></a>

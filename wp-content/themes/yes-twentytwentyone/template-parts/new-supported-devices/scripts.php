@@ -57,9 +57,7 @@
                         .catch((error) => {
 
                         });
-                },
-
-                
+                },                
 
 
                 fetchSupportedDevices: function(page = 1, filters = {}) {
@@ -99,9 +97,7 @@
                         // Handle the error appropriately
                         console.error(error);
                     });
-                },
-
-                  
+                },                 
  
  
  
