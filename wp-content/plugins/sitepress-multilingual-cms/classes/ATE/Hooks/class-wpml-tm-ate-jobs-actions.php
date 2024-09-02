@@ -128,7 +128,7 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
      * @param int|null $sentFrom
      * @param \WPML_TM_Translation_Batch $batch
 	 *
-	 * @return bool|void
+	 * @return void
 	 * @throws \InvalidArgumentException
 	 * @throws \RuntimeException
 	 */
@@ -169,9 +169,10 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 				$this->ate_jobs->store( $wpml_job_id, [ JobRecords::FIELD_ATE_JOB_ID => $ate_job_id ] );
 				$oldEditor->set( $wpml_job_id, WPML_TM_Editors::ATE );
 				$translationJob = wpml_tm_load_job_factory()->get_translation_job( $wpml_job_id, false, 0, true );
-				$jobType        = $this->getJobType( $translationJob, $translationModeSetInDashboard );
-
-				Jobs::setAutomaticStatus( $wpml_job_id, $jobType === 'auto' );
+                if ( $translationJob ) {
+	                $jobType = $this->getJobType( $translationJob, $translationModeSetInDashboard );
+	                Jobs::setAutomaticStatus( $wpml_job_id, $jobType === 'auto' );
+                }
 
 				if ( $sentFrom === Jobs::SENT_RETRY ) {
 					Jobs::setStatus( $wpml_job_id, ICL_TM_WAITING_FOR_TRANSLATOR );
@@ -180,6 +181,8 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 
 			$message = __( '%1$s jobs added to the Advanced Translation Editor.', 'wpml-translation-management' );
 			$this->add_message( 'updated', sprintf( $message, count( $created_jobs ) ), 'wpml_tm_ate_create_job' );
+
+			do_action( 'wpml_tm_ate_jobs_created', $created_jobs );
 		} else {
 			if ( Lst::includes( $sentFrom, [ Jobs::SENT_AUTOMATICALLY, Jobs::SENT_RETRY ] ) ) {
 				if ( $sentFrom === Jobs::SENT_RETRY ) {
@@ -192,12 +195,14 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 						$this->logError( $jobId );
 
 						$translationJob = wpml_tm_load_job_factory()->get_translation_job( $jobId, false, 0, true );
-						$jobType        = $this->getJobType( $translationJob, $translationModeSetInDashboard );
-						if ( $jobType === 'auto' ) {
-							Jobs::setStatus( $jobId, ICL_TM_ATE_NEEDS_RETRY );
-							$oldEditor->set( $jobId, WPML_TM_Editors::ATE );
-							wpml_tm_load_job_factory()->update_job_data( $jobId, [ 'automatic' => 1 ] );
-						}
+						if ( $translationJob ) {
+                            $jobType        = $this->getJobType( $translationJob, $translationModeSetInDashboard );
+                            if ( $jobType === 'auto' ) {
+                                Jobs::setStatus( $jobId, ICL_TM_ATE_NEEDS_RETRY );
+                                $oldEditor->set( $jobId, WPML_TM_Editors::ATE );
+                                wpml_tm_load_job_factory()->update_job_data( $jobId, [ 'automatic' => 1 ] );
+                            }
+                        }
 					};
 				}
 
@@ -296,9 +301,9 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 		// Start of possibly dead code.
 		if (
 			! $this->is_second_attempt_to_get_jobs_data &&
-			$ate_jobs_to_create &&
-			$this->added_translation_jobs( array( 'local' => $ate_jobs_to_create ) )
+			$ate_jobs_to_create
 		) {
+			$this->added_translation_jobs( array( 'local' => $ate_jobs_to_create ) );
 			$ate_jobs_data                            = $this->get_ate_jobs_data( $translation_jobs );
 			$this->is_second_attempt_to_get_jobs_data = true;
 		}
@@ -365,10 +370,10 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 			$message = $response->get_error_message();
 			if ( $response->error_data && is_array( $response->error_data ) ) {
 				foreach ( $response->error_data as $http_code => $error_data ) {
-					$code    = $error_data[0]['status'];
+					$code    = (int) Obj::pathOr(0, [0, 'status'], $error_data );
 					$message = '';
 
-					switch ( (int) $code ) {
+					switch ( $code ) {
 						case self::RESPONSE_ATE_NOT_ACTIVE_ERROR:
 							$wp_admin_url  = admin_url( 'admin.php' );
 							$mcsetup_page  = add_query_arg(
@@ -514,7 +519,8 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 	 */
 	private function logRetryError( $jobId ) {
 		$job = Jobs::get( $jobId );
-		if ( $job && $job->ate_comm_retry_count ) {
+
+		if ( isset( $job->ate_comm_retry_count ) && $job->ate_comm_retry_count ) {
 			Storage::add( Entry::retryJob( $jobId,
 				[
 					'retry_count' => $job->ate_comm_retry_count
@@ -545,7 +551,7 @@ class WPML_TM_ATE_Jobs_Actions implements IWPML_Action {
 	 */
 	private function getJobType( $translationJob, $translationModeSetInDashboard ) {
 		$document = $translationJob->get_original_document();
-		if ( ! $document || $document instanceof WPML_Package ) {
+		if ( ! $document ) {
 			return 'manual';
 		} elseif ( $translationModeSetInDashboard ) {
 			return $translationModeSetInDashboard;

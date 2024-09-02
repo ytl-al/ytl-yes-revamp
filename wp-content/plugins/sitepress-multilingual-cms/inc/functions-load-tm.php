@@ -12,6 +12,7 @@ use WPML\TM\Jobs\Query\StringsBatchQuery;
 use WPML\FP\Obj;
 use function WPML\Container\make;
 use \WPML\Setup\Option as SetupOptions;
+use WPML\TM\ATE\TranslateEverything\TranslatableData\Calculate;
 
 if ( ! \WPML\Plugins::isTMActive() && ( ! wpml_is_setup_complete() || false !== SetupOptions::isTMAllowed() ) ) {
 
@@ -21,7 +22,7 @@ if ( ! \WPML\Plugins::isTMActive() && ( ! wpml_is_setup_complete() || false !== 
 	function wpml_tm_load_element_translations() {
 		global $wpml_tm_element_translations, $wpdb, $wpml_post_translations, $wpml_term_translations;
 
-		if ( ! isset( $wpml_tm_element_translations ) ) {
+		if ( ! isset( $wpml_tm_element_translations ) && defined( 'WPML_TM_PATH' ) ) {
 			require_once WPML_TM_PATH . '/inc/core/wpml-tm-element-translations.class.php';
 			$tm_records                   = new WPML_TM_Records( $wpdb, $wpml_post_translations, $wpml_term_translations );
 			$wpml_tm_element_translations = new WPML_TM_Element_Translations( $tm_records );
@@ -180,6 +181,10 @@ if ( ! \WPML\Plugins::isTMActive() && ( ! wpml_is_setup_complete() || false !== 
 	function wpml_tm_load_basket_networking() {
 		global $iclTranslationManagement, $wpdb;
 
+		if ( ! defined( 'WPML_TM_PATH' ) ) {
+			return null;
+		}
+
 		require_once WPML_TM_PATH . '/inc/translation-proxy/wpml-translationproxy-basket-networking.class.php';
 
 		$basket = new WPML_Translation_Basket( $wpdb );
@@ -241,7 +246,7 @@ if ( ! \WPML\Plugins::isTMActive() && ( ! wpml_is_setup_complete() || false !== 
 			$wp_api = new WPML_WP_API();
 		}
 
-		if ( is_admin() ) {
+		if ( is_admin() && defined( 'WPML_TM_PATH' ) ) {
 			$blog_translators            = wpml_tm_load_blog_translators();
 			$email_twig_factory          = new WPML_TM_Email_Twig_Template_Factory();
 			$batch_report                = new WPML_TM_Batch_Report( $blog_translators );
@@ -316,7 +321,7 @@ if ( ! \WPML\Plugins::isTMActive() && ( ! wpml_is_setup_complete() || false !== 
 	function wpml_tm_load_tm_dashboard_ajax() {
 		global $wpml_tm_dashboard_ajax, $sitepress;
 
-		if ( ! isset( $wpml_tm_dashboard_ajax ) ) {
+		if ( ! isset( $wpml_tm_dashboard_ajax ) && defined( 'WPML_TM_PATH' ) ) {
 			require_once WPML_TM_PATH . '/menu/dashboard/wpml-tm-dashboard-ajax.class.php';
 			$wpml_tm_dashboard_ajax = new WPML_Dashboard_Ajax( );
 
@@ -417,7 +422,7 @@ if ( ! \WPML\Plugins::isTMActive() && ( ! wpml_is_setup_complete() || false !== 
 	function tm_after_load() {
 		global $wpml_tm_translation_status, $wpdb, $wpml_post_translations, $wpml_term_translations;
 
-		if ( ! isset( $wpml_tm_translation_status ) ) {
+		if ( ! isset( $wpml_tm_translation_status ) && defined( 'WPML_TM_PATH' ) ) {
 			require_once WPML_TM_PATH . '/inc/translation-proxy/translationproxy.class.php';
 			require_once WPML_TM_PATH . '/inc/ajax.php';
 
@@ -499,6 +504,33 @@ if ( ! \WPML\Plugins::isTMActive() && ( ! wpml_is_setup_complete() || false !== 
 			$job->target_language->name = $translation_job->get_language_code( true );
 			$job->deadline              = strtotime( $translation_job->get_deadline_date() );
 			$job->apply_memory          = $apply_memory;
+
+			/*
+			 * wpmldev-1840
+			 *
+			 * With wpmldev-1730 WPML estimates the credits, which the site will
+			 * require by fetching post content, title and excerpt.
+			 * In the future this estimation should happen on ATE, but for that
+			 * they need to get the WPML calculated chars per job to compare
+			 * with the real costs for the translation.
+			 * Once ATE is providing the calculation and does no longer need
+			 * the `wpml_chars_count` parameter, the following block
+			 * until "END" can be deleted.
+			 *
+			 * Also the property "wpml_chars_count" can be removed from
+			 * ./classes/ATE/models/class-wpml-tm-ate-models-job-create.php
+			 */
+			$calculate = new Calculate();
+			$fields    = $translation_job->get_original_fields();
+			foreach ( $fields as $key => $value ) {
+				if (
+					! empty( $value ) &&
+					in_array( $key, [ 'title', 'body', 'excerpt' ], true )
+				) {
+					$job->wpml_chars_count += $calculate->chars( $value );
+				}
+			}
+			/* END */
 
 			$job->permalink = '#';
 			if ( 'Post' === $translation_job->get_type() ) {
@@ -646,7 +678,10 @@ if ( ! \WPML\Plugins::isTMActive() && ( ! wpml_is_setup_complete() || false !== 
 				wpml_tm_get_tp_api_client(),
 				wpml_tm_get_tp_project(),
 				new WPML_TM_Log(),
-				new WPML_TP_Xliff_Parser()
+				new WPML_TP_Xliff_Parser(
+					new \WPML_TM_Validate_HTML()
+				),
+				wpml_tm_get_tp_jobs_api()
 			);
 		}
 
@@ -730,7 +765,7 @@ if ( ! \WPML\Plugins::isTMActive() && ( ! wpml_is_setup_complete() || false !== 
 		static $instance;
 
 		if ( ! $instance ) {
-			return new WPML_TM_ATE_Job_Repository( wpml_tm_get_jobs_repository() );
+			return new WPML_TM_ATE_Job_Repository( wpml_tm_get_jobs_repository(), new \WPML\TM\ATE\Jobs() );
 		}
 
 		return $instance;
