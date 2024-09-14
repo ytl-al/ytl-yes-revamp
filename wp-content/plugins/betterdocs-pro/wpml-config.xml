@@ -43,5 +43,21 @@
                 <field type="Doc Reactions: Text" editor_type="LINE">reaction_text</field>
             </fields>
         </widget>
+        <widget name="betterdocs-attachment">
+            <conditions>
+                <condition key="widgetType">betterdocs-attachment</condition>
+            </conditions>
+            <fields>
+                <field type="Betterdocs Attachment: Label Text" editor_type="LINE">attachment_label_text</field>
+            </fields>
+        </widget>
+        <widget name="betterdocs-related-docs">
+            <conditions>
+                <condition key="widgetType">betterdocs-related-docs</condition>
+            </conditions>
+            <fields>
+                <field type="Betterdocs Related Docs: Text Heading" editor_type="LINE">related_docs_heading</field>
+            </fields>
+        </widget>
     </elementor-widgets>
 </wpml-config>

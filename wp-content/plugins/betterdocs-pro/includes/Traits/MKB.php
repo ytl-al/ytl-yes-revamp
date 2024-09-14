@@ -20,6 +20,11 @@ trait MKB {
 
     public function kb_terms( $term, $taxonomy ) {
         $current_term = get_term_by( 'slug', $term->slug, $taxonomy, OBJECT );
+
+        if ( ! $current_term || is_wp_error( $current_term ) ) {
+            return '';
+        }
+
         $_term_attr   = get_term_meta( $current_term->term_id, 'doc_category_knowledge_base', true );
 
         if ( is_wp_error( $_term_attr ) ) {

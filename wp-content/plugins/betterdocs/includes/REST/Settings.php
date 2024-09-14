@@ -34,6 +34,12 @@ class Settings extends BaseAPI {
         $this->post( 'parse-csv', [ $this, 'parse_csv' ] );
         $this->post( 'migrate', [ $this, 'migrate_plugins' ] );
         $this->post( 'helpscout-migration', [$this, 'helpscout_migration'] );
+        $this->post( 'dashboard-mode', [$this, 'dashboard_mode'] );
+    }
+
+    public function dashboard_mode( WP_REST_Request $request ) {
+        $mode = $request->get_param( 'dashboard_mode' );
+        return update_option('dashboard_mode', $mode);
     }
 
     public function dark_mode( WP_REST_Request $request ): bool {
@@ -67,8 +73,9 @@ class Settings extends BaseAPI {
         $args = [
             'include_post_featured_image_as_attachment' => true,
             'status'                                    => 'publish',
-            'content'                                   => 'docs',
-            'selected_docs'                             => $data['export_docs']
+            'content'                                   => $data['export_type'] == 'glossaries' ? 'glossaries' : 'docs',
+            'selected_docs'                             => $data['export_docs'],
+            'include_faq'                               => $data['enable_export_faq'],
         ];
 
         if ( $data['export_type'] == 'docs' && $data['export_docs'][0] != 'all' ) {
@@ -81,6 +88,11 @@ class Settings extends BaseAPI {
 
         if ( $data['export_type'] == 'knowledge_base' && $data['export_kbs'][0] != 'all' ) {
             $args['kb_terms'] = $data['export_kbs'];
+        }
+
+        if( $data['export_type'] == 'glossaries' && $data['export_glossaries'][0] != 'all' ) {
+            $args['glossary_terms'] = $data['export_glossaries'];
+            unset( $args['selected_docs'] );
         }
 
         if ( $data['file_type'] == 'xml' ) {
@@ -242,7 +254,7 @@ class Settings extends BaseAPI {
 
         // Initialize the query arguments
         $args = [
-            'post_type'      => 'docs', // Change 'post' to your custom post type if applicable
+            'post_type'      => ['docs', 'betterdocs_faq'], // Change 'post' to your custom post type if applicable
             'post_status'    => 'publish',
             'posts_per_page' => -1, // Retrieve all posts
             'fields'         => 'ids', // Retrieve only post IDs to reduce memory usage

@@ -3,9 +3,9 @@ Contributors: wpdevteam, re_enter_rupok, asif2bd, emsohel, priyomukul, cu121, fe
 Donate link: https://wpdeveloper.com
 Tags:  docs, documentation, knowledge base, faq, chatgpt ai writer
 Requires at least: 5.0
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 3.6.1
+Stable tag: 3.6.6
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -218,6 +218,31 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 3.6.6 - 12/09/2024 =
+
+- Updated: OpenAI GPT model for 'Write with AI'.
+- Added: FAQ and Glossaries in Import/Export.
+- Added: BetterDocs Order option for the Docs Order in the BetterDocs Category Grid block.
+- Fixed: Related Docs Elementor widget | heading not changing.
+- Few minor bug fixes and improvements
+
+= 3.6.5 - 13/08/2024 =
+
+- Fixed: "Write with AI" button missing in the Docs editor
+- Fixed: Labels on TOC and Single Docs email feedback forms are not translatable
+- Fixed: Broken styles in the Single Docs print view
+- Fixed: Creating a new FAQ group does not refetch newly created data in the FAQ Dashboard
+- Few minor bug fixes and improvements
+
+= 3.6.4 - 25/07/2024 =
+- Fixed: Throwing Error message related to Single Docs feedback
+- Fixed: "failed to open stream: No such file or directory" error
+- Few minor bug fixes and improvements
+
+= 3.6.3 - 16/07/2024 =
+- Fixed: Unequal height issue in 'Grid' layout mode for BetterDocs Category Grid Elementor widget.
+- Few minor bug fixes and improvements
 
 = 3.6.2 - 09/07/2024 =
 - Improved: Added active and active hover color options for the Elementor widget "Docs Breadcrumb".

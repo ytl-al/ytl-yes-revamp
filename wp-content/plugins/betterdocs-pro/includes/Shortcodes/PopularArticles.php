@@ -53,6 +53,7 @@ class PopularArticles extends Shortcode {
             'list_icon_url'=> $this->attributes['list_icon_url'],
             'query_args'   => $this->query->docs_query_args( [
                 'post_type'      => 'docs',
+                'post_status'    => 'publish',
                 'posts_per_page' => $this->attributes['post_per_page'],
                 'meta_key'       => '_betterdocs_meta_views',
                 'orderby'        => 'meta_value_num',
