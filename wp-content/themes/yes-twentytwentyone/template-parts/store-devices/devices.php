@@ -45,6 +45,7 @@ while ($loop->have_posts()) :
 
     $post_promotions       = get_the_terms($post_id, 'promotion');
     $post_promotion        = '';
+    $post_promotion_slug   = '';
     if ($post_promotions) {
         foreach ($post_promotions as $promotion) {
             if ($promotion->slug != 'uncategorized') {

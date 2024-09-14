@@ -417,6 +417,7 @@ class PopularView extends BaseWidget {
             'title'              => $settings['popular_docs_name'],
             'query_args'         => $this->betterdocs( 'query' )->docs_query_args( [
                 'post_type'      => 'docs',
+                'post_status'    => 'publish',
                 'posts_per_page' => $settings['popular_posts_number'],
                 'meta_key'       => '_betterdocs_meta_views',
                 'orderby'        => 'meta_value_num',

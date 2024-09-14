@@ -6,8 +6,16 @@
     $term = get_queried_object();
 
     // Display the term description
-    if (!empty($term->description)) {
-        echo '<div class="term-description">' . $term->description . '</div>';
+    $custom_description = get_term_meta( $term->term_id, 'glossary_term_description', true );
+
+    if (!empty($term->description) || !empty($custom_description)) {
+        $description = $term->description; 
+        if(!empty($custom_description)) {
+            $description = $custom_description;
+        }
+
+        echo '<div class="term-description">' . wp_kses_post(wpautop($description)) . '</div>';
+
     }
     ?>
 </div>

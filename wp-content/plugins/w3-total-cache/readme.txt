@@ -1,9 +1,9 @@
 === W3 Total Cache ===
 Contributors: boldgrid, fredericktownes, maxicusc, gidomanders, bwmarkle, harryjackson1221, joemoto, vmarko, jacobd91
-Tags: seo, cache, CDN, pagespeed, caching, performance, compression, optimize, cloudflare, nginx, apache, varnish, redis, aws, amazon web services, s3, cloudfront, azure
+Tags: CDN, pagespeed, caching, performance, optimize
 Requires at least: 5.3
-Tested up to: 6.5
-Stable tag: 2.7.3
+Tested up to: 6.6
+Stable tag: 2.7.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,86 @@ W3TC is the **only** web host agnostic Web Performance Optimization (WPO) framew
 * Extension framework for customization or extensibility for Cloudflare, WPML and much more
 * Reverse proxy integration via Nginx or Varnish
 * WebP Converter extension provides WebP image format conversion from common image formats (on upload and on demand)
+
+<h3>W3 Total Cache Pro Features</h3>
+
+With over a million active installs, W3 Total Cache is the most comprehensive WordPress caching plugin available and has robust premium features that help deliver an exceptional user experience.
+
+* Full Site Delivery: Serve your entire site from a Content Delivery Network (CDN), ensuring faster load times worldwide.
+* Fragment Cache: Optimize the caching of dynamic content while still improving performance.
+* REST API Caching: Speed up your headless WordPress site by caching REST API calls.
+* Eliminate Render-Blocking CSS: Ensure your CSS doesn't hold up page loading, providing faster initial paint.
+* Delay Scripts: Improve performance by delaying the loading of non-essential scripts until they are needed.
+* Preload Requests: Boost page performance by preloading critical resources before they're requested.
+* Remove CSS/JS: Clean up unnecessary CSS and JavaScript files that slow down your pages.
+* Lazy Load Google Maps: Load Google Maps only when it's visible, reducing unnecessary requests.
+* WPML Extension: Optimize performance on multilingual sites powered by WPML.
+* Caching Statistics: Get detailed insights on cache usage and performance improvements.
+* Purge Logs: Keep your site clean by automatically purging unnecessary cache logs.
+
+<h3>30-Day Money-Back Guarantee</h3>
+
+Try [W3 Total Cache Pro](https://www.boldgrid.com/w3-total-cache/) risk-free with our 30-day money-back guarantee. If you're not satisfied, we will refund your purchase.
+
+<h3>PAGESPEED SCORE IMPROVEMENTS</h3>
+
+To help you understand the impact of individual features on your website's performance, we've tested each feature separately to see its effect on Google PageSpeed scores. While optimal results come from configuring several different caching tools together, the following individual features also show significant improvements on their own:
+
+<h4>Remove Unused CSS/JS</h4>
+
+This feature removes CSS and JavaScript files that are not needed for the current page, reducing the load time.
+
+* Added over 27 points to the Google PageSpeed score (Before: 57.2 / After: 86.7)
+* Reduced the Potential Savings From Unused JavaScript from 127.5 KiB to 84 KiB
+* [View the test results](https://www.boldgrid.com/support/w3-total-cache/pagespeed-tests/remove-scripts/)
+
+<h4>Full Site Delivery</h4>
+
+Full Site Delivery optimizes the delivery of your entire site, enhancing the server response time.
+
+* Added a 99% performance enhancement  to the Average Server Response Time (Before: 3413 ms / After: 34 ms)
+* [View the test results](https://www.boldgrid.com/support/w3-total-cache/pagespeed-tests/fsd-full-site-delivery/)
+
+<h4>Eliminate Render Blocking CSS</h4>
+
+This feature eliminates CSS that blocks the rendering of your page, speeding up the initial load time.
+
+* Added over 17 points to the Google PageSpeed score (Before: 53.75 / After: 71)
+* Reduced the Potential Savings From Render-Blocking Resources by over 94% (Before: 2432.5 ms / After: 125 ms)
+* Improved the Largest Contentful Paint time by over 56% (Before: 7s / After: 3.04s)
+* [View the test results](https://www.boldgrid.com/support/w3-total-cache/pagespeed-tests/eliminate-render-blocking-css/)
+
+<h4>Delay Scripts</h4>
+
+Delay Scripts postpones the loading of certain scripts until they are needed, reducing initial load times.
+
+* Added 14 points to the Google PageSpeed Performance score (Before: 54.25 / After: 68.5)
+* Reduced the Time Third-Party Code Blocked The Main Thread For by 62% (Before: 825 ms / After: 197.5 ms)
+* [View the test results](https://www.boldgrid.com/support/w3-total-cache/pagespeed-tests/delay-scripts-test/)
+
+<h4>Rest API Caching</h4>
+
+This feature caches API responses, reducing server load and speeding up API interactions.
+
+* Reduced the Average Server Load by 40% (Before: 0.62 / After: 0.37)
+* Sped up API Responses by 84.5% (Before: 968ms / After: 150ms)
+* Reduced the Average Server Load by 24% under during a major traffic spike (Before: 34.55 / After: 26.19)
+* [View the test results](https://www.boldgrid.com/support/w3-total-cache/pagespeed-tests/rest-api-testing/)
+
+<h4>WebP Images</h4>
+
+Converts images to the WebP format, which is more efficient and faster to load.
+
+* Added over 9 points to the Google PageSpeed score (Before: 84.67 / After: 93.83)
+* [View the test results](https://www.boldgrid.com/support/w3-total-cache/pagespeed-tests/webp/)
+
+<h4>Lazy Load Google Maps</h4>
+
+Delays the loading of Google Maps until the user interacts with them, reducing initial load time.
+
+* Added 10 points to the Google PageSpeed score (Before: 66 / After: 76)
+* Reduced the Total Blocking Time Performance score by 72% (Before: 287.5 ms / After: 80 ms)
+* [View the test results](https://www.boldgrid.com/support/w3-total-cache/pagespeed-tests/lazy-load-maps/)
 
 Speed up your site tremendously, improve core web vitals and the overall user experience for your visitors without having to change your WordPress host, theme, plugins or your content production workflow.
 
@@ -280,6 +360,28 @@ It's quite difficult to recall all of the innovators that have shared their thou
 Please reach out to all of these people and support their projects if you're so inclined.
 
 == Changelog ==
+
+= 2.7.5 =
+* Feature: Added dismissible notifications
+* Fix: PHP error in Page Cache when deleting media
+* Fix: PHP warning in Page Cache when modifying an attachment
+* Update: Added additional default query strings for page cache exemptions
+* Update: Removed obsolete Google PageSpeed metrics
+* Update: Condensed Google PageSpeed proof block format for certain settings/features
+* Update: Added missing Google PageSpeed score block for PageCache Lazy Loading Google Maps setting on General Settings page
+
+= 2.7.4 =
+* Fix: WP-CLI get option output for array type
+* Fix: Remove CSS/JS URL matching
+* Fix: Nginx rules for feature and permission policies
+* Fix: Redis connect port for unix sockets error
+* Update: Newsletter in footer is now a link to a working form
+* Update: Added JSON type for WP-CLI get/set option
+* Update: Added config export for WP-CLI
+* Update: Added content matching option for Remove CSS/JS individual entries
+* Update: Updated Google PageSpeed score block appearance for cleaner UI
+* Update: Added Google PageSpeed score block for PageCache Lazy Loading Google Maps setting
+* Update: Added Google PageSpeed score block for Minify Eliminate Render Blocking CSS option
 
 = 2.7.3 =
 * Fix: Page Cache: File Cleaner now uses the correct expiration setting

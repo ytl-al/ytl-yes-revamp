@@ -36,7 +36,7 @@ final class Plugin {
      * Plugin Version
      * @var string
      */
-    public $version = '3.4.2';
+    public $version = '3.4.5';
 
     /**
      * Plugin DB Version
@@ -45,7 +45,7 @@ final class Plugin {
     public $db_version = '1.0.1';
 
     private static          $_instance = null;
-    private ?LicenseManager $licenseManager;
+    private LicenseManager $licenseManager;
 
     /**
      * Create a plugin instance.

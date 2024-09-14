@@ -517,7 +517,7 @@ class Settings extends FreeSettings {
             'default'             => '[betterdocs_category_box_2]',
             'readOnly'            => true,
             'priority'            => 6,
-            'description'         => __( '[betterdocs_category_box_2 column="" nested_subcategory="" terms="" terms_orderby="" kb_slug="" multiple_knowledge_base="false" title_tag="h2"]', 'betterdocs-pro' ),
+            'description'         => '[betterdocs_category_box_2 column="" nested_subcategory="" terms="" terms_orderby="" kb_slug="" multiple_knowledge_base="false" title_tag="h2"]',
             'descriptionLabel'    => __( 'Example with parameters:', 'betterdocs-pro' ),
             'descriptionCopyable' => true
         ];
@@ -528,7 +528,7 @@ class Settings extends FreeSettings {
             'default'             => '[betterdocs_category_grid_2]',
             'readOnly'            => true,
             'priority'            => 7,
-            'description'         => __( '[betterdocs_category_grid_2 orderby="" order="" masonry="" column="" posts="" nested_subcategory="" terms="" kb_slug="" terms_orderby="" terms_order="" multiple_knowledge_base="false" title_tag="h2"]', 'betterdocs-pro' ),
+            'description'         => '[betterdocs_category_grid_2 orderby="" order="" masonry="" column="" posts="" nested_subcategory="" terms="" kb_slug="" terms_orderby="" terms_order="" multiple_knowledge_base="false" title_tag="h2"]',
             'descriptionLabel'    => __( 'Example with parameters:', 'betterdocs-pro' ),
             'descriptionCopyable' => true
         ];
@@ -539,7 +539,7 @@ class Settings extends FreeSettings {
             'default'             => '[betterdocs_multiple_kb]',
             'readOnly'            => true,
             'priority'            => 8,
-            'description'         => __( '[betterdocs_multiple_kb column="" terms="" title_tag="h2"]', 'betterdocs-pro' ),
+            'description'         => '[betterdocs_multiple_kb column="" terms="" title_tag="h2"]',
             'descriptionLabel'    => __( 'Example with parameters:', 'betterdocs-pro' ),
             'descriptionCopyable' => true
         ];
@@ -550,8 +550,8 @@ class Settings extends FreeSettings {
             'default'             => '[betterdocs_multiple_kb_2]',
             'readOnly'            => true,
             'priority'            => 9,
-            'description'         => __( '[betterdocs_multiple_kb_2 column="" terms="" title_tag="h2"]', 'betterdocs-pro' ),
-            'descriptionLabel'    => __( 'Example with parameters:', 'betterdocs-pro' ),
+            'description'         => '[betterdocs_multiple_kb_2 column="" terms="" title_tag="h2" terms_order="" terms_orderby=""]',
+            'descriptionLabel'    => __( 'Example with parameters:', 'betterdocs' ),
             'descriptionCopyable' => true
         ];
         $args['multiple_kb_3_shortcode'] = [
@@ -561,7 +561,7 @@ class Settings extends FreeSettings {
             'default'             => '[betterdocs_multiple_kb_list]',
             'readOnly'            => true,
             'priority'            => 10,
-            'description'         => __( '[betterdocs_multiple_kb_list terms="" title_tag="h2"]', 'betterdocs-pro' ),
+            'description'         => '[betterdocs_multiple_kb_list terms="" title_tag="h2"]',
             'descriptionLabel'    => __( 'Example with parameters:', 'betterdocs-pro' ),
             'descriptionCopyable' => true
         ];
@@ -572,7 +572,7 @@ class Settings extends FreeSettings {
             'default'             => '[betterdocs_multiple_kb_tab_grid]',
             'readOnly'            => true,
             'priority'            => 11,
-            'description'         => __( '[betterdocs_multiple_kb_tab_grid terms="" terms_orderby="" terms_order="" orderby="" order="" posts_per_page="" title_tag="h2"]', 'betterdocs-pro' ),
+            'description'         => '[betterdocs_multiple_kb_tab_grid terms="" terms_orderby="" terms_order="" orderby="" order="" posts_per_page="" title_tag="h2"]',
             'descriptionLabel'    => __( 'Example with parameters:', 'betterdocs-pro' ),
             'descriptionCopyable' => true
         ];
@@ -583,7 +583,7 @@ class Settings extends FreeSettings {
             'default'             => '[betterdocs_popular_articles]',
             'readOnly'            => true,
             'priority'            => 12,
-            'description'         => __( '[betterdocs_popular_articles post_per_page="" title="Popular Docs" title_tag="h2" multiple_knowledge_base="false"]', 'betterdocs-pro' ),
+            'description'         => '[betterdocs_popular_articles post_per_page="" title="Popular Docs" title_tag="h2" multiple_knowledge_base="false"]',
             'descriptionLabel'    => __( 'Example with parameters:', 'betterdocs-pro' ),
             'descriptionCopyable' => true
         ];

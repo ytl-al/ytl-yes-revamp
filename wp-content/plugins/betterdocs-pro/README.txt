@@ -5,7 +5,7 @@ Tags: knowledge base, docs, documentation, documents, faq page, doc, knowledge, 
 Requires at least: 5.0
 Tested up to: 6.5
 Requires PHP: 7.0
-Stable tag: 3.4.2
+Stable tag: 3.4.5
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -91,6 +91,26 @@ Yes, it will work with any standard WordPress theme.
 
 
 == Changelog ==
+
+= 3.4.5 - 13/08/2024 =
+- Fixed: Popular Docs widget displays drafted docs in the list.
+- Improvement: Added advanced search to the search block.
+- Improvement: Added "Box Per Tabs" option to the BetterDocs Tab View List Elementor widget.
+- Fixed: Admin Dashboard “Select Knowledge Base” not displaying KBs after 10 KBs.
+- Fixed: Restricted Internal KB categories appearing in the advanced search Category dropdown.
+- Fixed: Restricted Internal KB categories appearing in Instant Answer.
+- Fixed: Formatting issues in BetterDocs Glossary.
+- Few minor bug fixes and improvements
+
+= 3.4.4 - 25/07/2024 =
+- Fixed - Uncaught TypeError: array_merge(): Argument #1 must be of type array in ContentRestrictions.php
+- Few minor bug fixes and improvements
+
+= 3.4.3 - 16/07/2024 =
+- Fixed: Restricted docs from the Internal Knowledgebase showing a preview on third-party search bars.
+- Fixed: Restricted doc categories from the Internal Knowledgebase showing on Advanced Search.
+- Fixed: Terms order not working properly for the [betterdocs_multiple_kb_2] shortcode.
+- Few minor bug fixes and improvements
 
 = 3.4.2 - 09/07/2024 =
 - Few minor bug fixes and improvements

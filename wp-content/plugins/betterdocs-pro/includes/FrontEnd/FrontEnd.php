@@ -24,9 +24,6 @@ class FrontEnd extends Base {
 
         add_action( 'wp_enqueue_scripts', [$this, 'enqueue_scripts'] );
 
-        if ( is_plugin_active( 'elementor/elementor.php' ) ) {
-            add_action( 'template_redirect', [$this, 'set_cookie_for_last_kb'], 10 );
-        }
 
         // add_filter( 'betterdocs_not_eligible_archive', [$this, 'is_archive'] );
         add_filter( 'betterdocs_archives_template', [$this, 'archives_template'], 10, 4 );
@@ -57,10 +54,8 @@ class FrontEnd extends Base {
         }
         if ( $this->settings->get( 'enable_glossaries', false ) ) {
             $this->container->get( Glossaries::class );
+            add_filter('the_content', [$this, 'wrap_glossaries']);
         }
-
-        add_filter('the_content', [$this, 'wrap_glossaries']);
-
     }
 
     public function render_attachment_markup() {
@@ -69,18 +64,6 @@ class FrontEnd extends Base {
 
     public function render_related_docs_shortcode() {
         echo do_shortcode( '[betterdocs_related_docs]' );
-    }
-
-    public function set_cookie_for_last_kb() {
-        $post_type = get_post_type( get_the_ID() );
-        if ( $post_type != 'docs' ) {
-            $document              = Plugin::$instance->documents->get( get_the_ID() ) != false ? Plugin::$instance->documents->get( get_the_ID() ) : [];
-            $document_element_data = ! empty( $document ) ? $document->get_elements_data() : [];
-            $kb_slug               = $this->recursively_search_for_kb_slug_in_elementor_content( $document_element_data, 'selected_knowledge_base', 'betterdocs-category-grid' );
-            if ( $kb_slug != false ) {
-                setcookie( 'last_knowledge_base', $kb_slug, time() + ( YEAR_IN_SECONDS * 2 ), "/" );
-            }
-        }
     }
 
     /**
@@ -95,8 +78,9 @@ class FrontEnd extends Base {
      */
     public function recursively_search_for_kb_slug_in_elementor_content( $element_data, $key, $widget_type, $accumulator = false ) {
         foreach ( $element_data as $data ) {
-            $data = ( is_null( $data ) || empty( $data ) ) ? ['settings' => [], 'widgetType' => ''] : $data;
-            if ( array_key_exists( $key, $data['settings'] ) && $data['widgetType'] == $widget_type ) {
+            $data     = ( is_null( $data ) || empty( $data ) ) ? ['settings' => [], 'widgetType' => ''] : $data;
+            $settings = isset( $data['settings'] ) ? $data['settings'] : [];
+            if ( array_key_exists( $key, $settings ) && $data['widgetType'] == $widget_type ) {
                 $accumulator = $data['settings'][$key];
             } else {
                 $accumulator = $this->recursively_search_for_kb_slug_in_elementor_content( $data['elements'], $key, $widget_type, $accumulator );
@@ -277,13 +261,25 @@ class FrontEnd extends Base {
 
             $glossary_terms = [];
             foreach ($glossaries as $glossary) {
-                $glossary_terms[mb_strtolower($glossary['name'], 'UTF-8')] = '<span class="glossary-tooltip-container" data-tooltip="' . esc_attr($glossary['description']) . '"><a href="' . esc_url(get_term_link($glossary['slug'], 'glossaries')) . '" target="_blank">' . esc_html($glossary['name']) . '</a></span>';
+                if (function_exists('mb_strtolower')) {
+                    $lowercase_glossary_name = mb_strtolower($glossary['name'], 'UTF-8');
+                } else {
+                    $lowercase_glossary_name = strtolower($glossary['name']);
+                }
+                
+                $glossary_terms[$lowercase_glossary_name] = '<span class="glossary-tooltip-container" data-tooltip="' . esc_attr($glossary['description']) . '"><a href="' . esc_url(get_term_link($glossary['slug'], 'glossaries')) . '" target="_blank">' . esc_html($glossary['name']) . '</a></span>';
+                
             }
 
             $pattern = '/\b(' . implode('|', array_map('preg_quote', array_keys($glossary_terms), array_fill(0, count($glossary_terms), '/'))) . ')\b(?![^<>]*>)/iu';
 
             $callback = function($matches) use ($glossary_terms) {
-                $term = mb_strtolower($matches[1], 'UTF-8');
+                if (function_exists('mb_strtolower')) {
+                    $term = mb_strtolower($matches[1], 'UTF-8');
+                } else {
+                    $term = strtolower($matches[1]);
+                }
+                
                 return isset($glossary_terms[$term]) ? $glossary_terms[$term] : $matches[0];
             };
 
