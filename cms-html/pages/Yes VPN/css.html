@@ -1,0 +1,742 @@
+<style type="text/css">
+    .hero_header-section {
+    background-image: url("/wp-content/uploads/2024/01/Header.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+    min-height: 450px;
+    justify-content: center;
+  }
+  
+  .hero_header-section-content h1 {
+    color: #d1b380;
+    font-family: Montserrat;
+    font-size: 39px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 56px;
+    letter-spacing: -0.78px;
+    max-width: 380px;
+    margin: 0 0 40px;
+  }
+  
+  .hero_header-section-content span {
+    color: #d1b380;
+    font-family: Montserrat;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 40px;
+    letter-spacing: -0.46px;
+  }
+  
+  .hero_header-section-content p {
+    color: #fff;
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+  }
+  
+  .hero_bottom-section {
+    padding: 80px 0px;
+    background-color: #f7f8f9;
+  }
+  
+  .hero_bottom-section-content h1 {
+    color: #1a1e47;
+    font-family: Montserrat;
+    font-size: 38px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 56px;
+    letter-spacing: -0.76px;
+  }
+  
+  .hero_bottom-section-content p {
+    color: #2b2b2b;
+    font-family: Open Sans;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px;
+  }
+  
+  .hero_bottom-section .button-submit {
+    background: #2f3bf5;
+    border: 0px;
+    padding: 0.7rem 2.3rem !important;
+    color: #fff;
+    border-radius: 32px;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: "Montserrat", sans-serif;
+    width: 100%;
+    max-width: 320px;
+    margin: 50px auto 0 !important;
+    display: block;
+  text-align: center;
+  }
+  .hero_bottom-section .button-submit:hover{color: #fff;}
+  .grid-section {
+    padding: 100px 0;
+  }
+  
+  .grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 220px);
+    justify-content: space-between;
+  }
+  
+  @media screen and (max-width: 992px) {
+    .grid-wrapper {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 50px;
+    }
+  }
+  
+  @media screen and (max-width: 640px) {
+    .grid-wrapper {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  
+    .hero_bottom-section-content {
+      text-align: center;
+    }
+  
+    .hero_header-section{
+      background-image: url('/wp-content/uploads/2024/01/mobile-header.png') !important;
+      background-size: 100% 100% !important;
+      min-height: auto !important;
+      padding: 100% 0 0 !important;
+    }
+  
+    .hero_header-section .hero_header-section-content{
+      display: none !important;
+    }
+  
+    .desktop_show{
+      display: none !important;
+    }
+  
+    body .mboile_show{
+      display: block !important;
+      max-width: 150px;
+      margin: auto;
+    }
+  
+    .hero_bottom-section-content h1{
+      font-size: 24px !important;
+      line-height:32px !important;
+    }
+  }
+  
+  .mboile_show{
+    display: none !important;
+  }
+  
+  .grid-wrapper .grid-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .grid-wrapper .grid-item img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin: 0 0 50px;
+  }
+  
+  .grid-wrapper .grid-item h1 {
+    color: #000;
+    font-family: Montserrat;
+    font-size: 21px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 30px;
+    letter-spacing: -0.42px;
+    text-transform: capitalize;
+    margin: 0 0 20px;
+  }
+  
+  .grid-wrapper .grid-item p {
+    color: #2b2b2b;
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+  }
+  
+  #business-solutions-section {
+    padding: 110px 0px 50px;
+    width: 100%;
+    background-color: #f7f8f9;
+    overflow: hidden;
+  }
+  
+  #business-solutions-section h2 {
+    font-family: "Montserrat";
+    font-size: 39px;
+    font-weight: 600;
+    line-height: 47px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    color: #1a1e47;
+    max-width: 500px;
+  }
+  
+  #business-solutions-section .business-solutions-carousel {
+    padding-top: 30px;
+  }
+  
+  #business-solutions-section .layer-planDevice {
+    background-color: #fff;
+    margin: 0;
+    padding: 40px 30px 30px;
+    position: relative;
+    border-radius: 15px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+  }
+  
+  #business-solutions-section .layer-planDevice h2 {
+    font-family: "Montserrat";
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 34px;
+    letter-spacing: -0.011em;
+    text-align: left;
+    margin-bottom: 10px;
+    color: #000;
+    height: 70px;
+    padding: 0;
+  }
+  
+  #business-solutions-section .layer-planDevice p {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    margin: 0 0 10px;
+    text-align: left;
+    color: #000;
+    height: 100px;
+  }
+  
+  #business-solutions-section .layer-planDevice p.panel-deviceImg {
+    margin: 0 0 30px;
+    position: relative;
+    text-align: center;
+    display: contents;
+  }
+  
+  #business-solutions-section .layer-planDevice p.panel-deviceImg img {
+    max-height: 150px;
+    margin: 50px 0 0 auto;
+  }
+  
+  #business-solutions-section .layer-planDevice p.panel-btn {
+    margin: 50px 0 0px;
+    text-align: left;
+    height: auto;
+  }
+  
+  #business-solutions-section .layer-planDevice p.panel-btn a {
+    color: #2f3bf5;
+    display: inline-block;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 19px;
+    letter-spacing: 0.1em;
+    text-align: left;
+    text-decoration: none;
+  }
+  
+  #business-solutions-section .layer-planDevice p.panel-btn a:hover {
+    text-decoration: underline;
+  }
+  
+  #business-solutions-section .business-solutions-carousel .slick-track {
+    display: flex !important;
+    width: auto;
+  }
+  
+  #business-solutions-section .business-solutions-carousel .slick-disabled {
+    opacity: 0.3 !important;
+  }
+  
+  #business-solutions-section .business-solutions-carousel .slick-slide {
+    margin: 15px 15px;
+  }
+  
+  #business-solutions-section .business-solutions-carousel .slick-list {
+    overflow: visible;
+  }
+  
+  #business-solutions-section .business-solutions-carousel .slick-dots {
+    left: 0;
+  }
+  
+  #business-solutions-section
+    .business-solutions-carousel
+    .slick-dots
+    li.slick-active
+    button:before {
+    opacity: 0.75;
+    color: #ff0084;
+  }
+  
+  #business-solutions-section .business-solutions-carousel .slick-prev {
+    left: unset;
+    right: 80px;
+  }
+  
+  #business-solutions-section .business-solutions-carousel .slick-next {
+    right: 40px;
+  }
+  
+  #business-solutions-section .business-solutions-carousel .slick-next,
+  .slick-prev {
+    top: -4%;
+  }
+  
+  #business-solutions-section .business-solutions-carousel .prev-arrow svg,
+  #business-solutions-section .business-solutions-carousel .next-arrow svg {
+    width: 30px;
+    height: 30px;
+    color: #2f3bf5;
+    background-color: #fff;
+    border-radius: 50px;
+    border: 1px solid #2f3bf5;
+  }
+  
+  .talk_form {
+    background: #1a1e47;
+  }
+  
+  .talk_form .fm-form-container.fm-theme1 {
+    width: 100%;
+  }
+  .wdform-field {
+      display: none;
+  }
+  .search-content {
+    color: #fff;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+  }
+  
+  html body .talk_form .fm-form-container.fm-theme1 .fm-form input[type="text"],
+  body .talk_form .fm-form-container.fm-theme1 .fm-form .ui-corner-all,
+  body .talk_form .fm-form-container.fm-theme1 .fm-form input[type="number"],
+  body .talk_form .fm-form-container.fm-theme1 .fm-form input[type="password"],
+  body .talk_form .fm-form-container.fm-theme1 .fm-form input[type="url"],
+  body .talk_form .fm-form-container.fm-theme1 .fm-form input[type="email"],
+  body .talk_form .fm-form-container.fm-theme1 .fm-form .StripeElement,
+  body .talk_form .fm-form-container.fm-theme1 .fm-form .ui-spinner-input,
+  body .talk_form .fm-form-container.fm-theme1 .fm-form .file-upload-status,
+  body .talk_form .fm-form-container.fm-theme1 .fm-form .country-name,
+  html body .talk_form .fm-form-container.fm-theme1 .fm-form select {
+    font-size: 16px !important;
+    color: #888888;
+    border-radius: 50px !important;
+    height: 50px;
+    text-align: center;
+    text-transform: none;
+  }
+  
+  html body .talk_form .fm-form-container.fm-theme1 .fm-form select {
+    border-right: 16px solid transparent !important;
+  }
+  
+  html body .talk_form .fm-form-container.fm-theme1 .fm-form textarea {
+    font-size: 16px !important;
+    text-transform: none;
+  }
+  
+  html
+    body
+    .talk_form
+    .fm-form-container.fm-theme1
+    .fm-form
+    textarea::placeholder {
+    color: #888888 !important;
+  }
+  
+  .form_control input::placeholder {
+    font-size: 16px !important;
+    color: #888888 !important;
+  }
+  
+  body .talk_form .fm-form-container.fm-theme1 .fm-form textarea {
+    border-radius: 20px !important;
+    border: none !important;
+    text-align: center;
+  }
+  
+  .form_control input {
+    display: block;
+    width: 100% !important;
+    text-align: center;
+    padding: 25px 25px !important;
+    font-size: 16px !important;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #888888;
+    background-color: #fff;
+    outline: none !important;
+    letter-spacing: 0.2px;
+    margin: 15px 15px 0 0;
+    border: none !important;
+  }
+  
+  .form_control textarea {
+    display: block;
+    width: 100% !important;
+    padding: 8px 20px !important;
+    font-size: 16px !important;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #888888;
+    background-color: #fff;
+    border-radius: 5px !important;
+    outline: none !important;
+    letter-spacing: 0.2px;
+    margin: 15px 15px 0 0;
+    border: none !important;
+  }
+  
+  .form_control input::placeholder,
+  .form_control textarea::placeholder {
+    color: #888888;
+  }
+  
+  .form_control input,
+  .form_control select,
+  .form_control textarea {
+    margin: 10px 5px 0 !important;
+  }
+  
+  #form19 .wdform_column {
+    padding: 0 !important;
+  }
+  
+  .submit button {
+    margin: 20px auto 0 !important;
+    background: #2f3bf5;
+    border: 0px;
+    padding: 0.7rem 2.3rem !important;
+    color: #fff;
+    border-radius: 32px;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  #faq-section {
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0px;
+    background: #fff;
+  }
+  
+  #faq-section h1 {
+    font-size: 33px;
+    font-weight: 600;
+    line-height: 72px;
+    color: #000;
+    text-align: center;
+  }
+  
+  #faq-section .accordion-button {
+    border: none;
+    box-shadow: unset;
+    border-radius: 0;
+    font-size: 16px;
+    line-height: 32px;
+    color: #000;
+    font-weight: 400;
+    font-family: "Open Sans", sans-serif;
+    border-bottom: 1px solid #000;
+  }
+  
+  #faq-section .accordion-button::after {
+    opacity: 1;
+  }
+  
+  #faq-section .accordion-button::after {
+    background-image: none;
+    background: url(/wp-content/uploads/2023/10/faq-show.png) no-repeat center
+      center / contain;
+  }
+  
+  #faq-section .accordion-button:not(.collapsed)::after {
+    background-image: none;
+    background: url(/wp-content/uploads/2023/10/faq-hide.png) no-repeat center
+      center / contain !important;
+  }
+  
+  #faq-section .accordion-button:focus {
+    box-shadow: unset;
+  }
+  
+  #faq-section .accordion-body {
+    font-size: 16px;
+    line-height: 32px;
+  }
+  
+  #faq-section .accordion-body h4 {
+    font-size: 16px;
+    line-height: 32px;
+    font-weight: 800;
+  }
+  
+  #faq-section .accordion-body ul {
+    margin: 15px 0 0 15px;
+    padding: 0;
+  }
+  
+  #faq-section .accordion-body li {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 32px;
+  }
+  
+  #faq-section .accordion-body p {
+    font-size: 16px;
+    line-height: 32px;
+  }
+  
+  #faq-section .viewall-btn {
+    font-family: "Montserrat";
+    font-size: 14px;
+    line-height: 19px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  
+  .mega-dropdown-menu.default-top-menu {
+    background-color: #f5f6fa;
+    padding-left: 125px;
+  }
+  
+  .mega-dropdown-menu > li > ul > li.dropdown-header a {
+    color: #1a1e47 !important;
+    font-size: 14px !important;
+    text-decoration: none !important;
+    text-transform: none !important;
+    padding: 0 !important;
+    font-weight: 700 !important;
+  }
+  
+  .business-solution {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    line-height: 22px !important;
+    color: #888888 !important;
+    margin: 15px 0 10px !important;
+  }
+
+  .fs-webform-container .fserv-container {
+    max-width: 100% !important;
+    margin: 0 auto 30px;
+    padding: 20px 0;
+}
+.fs-webform-container .fserv-form {
+    display: flex !important;
+    flex-wrap: wrap !important;
+}
+
+.fs-webform-container .fserv-form-name {
+    font-size: 24px !important;    
+    font-weight: 700;
+}
+
+.fs-webform-container .fserv-field {
+    padding: 0 20px;
+    width: 50%;
+}
+
+.fs-webform-container .fserv-field+.fserv-field {
+    margin-top: 0 !important;
+}
+
+.fs-webform-container .fserv-field+div:not(.fserv-field) {    
+    text-align: center !important;
+    width: 100%;
+}
+.fs-webform-container .fserv-container button[type=submit].fserv-button-submit {   
+    border-radius: 50px;
+}
+
+.fs-webform-container .powered-by{
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+.fs-webform-container .fserv-container {
+    max-width: auto;
+    margin: 0 auto 30px;
+    padding: 20px 0;
+}
+.fs-webform-container .fserv-field {
+    padding: 0 20px;
+    width: 100% !important;
+}
+.fs-webform-container .fserv-form {
+    display: unset;
+    flex-wrap: unset;
+}
+
+}
+  
+  @media only screen and (max-width: 768px) {
+    #business-solutions-section h2 {
+      font-size: 24px;
+      line-height: 28px;
+      text-align: center;
+      padding: 0 20px;
+    }
+  
+    #business-solutions-section .layer-planDevice h2 {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 26px;
+      height: auto;
+    }
+  
+    #business-solutions-section .layer-planDevice p {
+      font-size: 12px;
+      line-height: 18px;
+      height: auto;
+    }
+  
+    #faq-section {
+      padding: 30px 0px !important;
+    }
+  
+    #faq-section h1 {
+      font-size: 26px;
+      line-height: 34px;
+      font-weight: 700;
+    }
+  
+    #faq-section .accordion-item {
+      margin-bottom: 15px;
+    }
+  
+    #faq-section .accordion-button {
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 700;
+    }
+  
+    #faq-section .accordion-body h4 {
+      font-size: 13px;
+      line-height: 20px;
+      font-weight: 800;
+    }
+  
+    #faq-section .accordion-body ul {
+      margin: 15px 0 0 15px;
+      padding: 0;
+    }
+  
+    #faq-section .accordion-body li {
+      margin: 0;
+      padding: 0 0 5px;
+      font-size: 13px;
+      line-height: 20px;
+    }
+  
+    #faq-section .accordion-body p {
+      font-size: 13px;
+      line-height: 20px;
+    }
+  
+    #faq-section .viewall-btn {
+      font-size: 14px;
+      line-height: 18px;
+      font-weight: 700;
+    }
+    .mega-dropdown-menu.default-top-menu {
+      padding-left: unset;
+    }
+  
+    .hero_bottom-section, .grid-section{
+      padding: 50px 0 !important;
+    }
+  
+    .grid-wrapper .grid-item img{
+      margin: 0 0 20px !important;
+    }
+  }
+  
+  @media only screen and (min-device-width: 320px) and (max-device-width: 640px) and (-webkit-min-device-pixel-ratio: 2) {
+    #faq-section {
+      padding: 30px 0px !important;
+    }
+  
+    #faq-section h1 {
+      font-size: 26px;
+      line-height: 34px;
+      font-weight: 700;
+    }
+  
+    #faq-section .accordion-item {
+      margin-bottom: 15px;
+    }
+  
+    #faq-section .accordion-button {
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 700;
+    }
+  
+    #faq-section .accordion-body h4 {
+      font-size: 13px;
+      line-height: 20px;
+      font-weight: 800;
+    }
+  
+    #faq-section .accordion-body ul {
+      margin: 15px 0 0 15px;
+      padding: 0;
+    }
+  
+    #faq-section .accordion-body li {
+      margin: 0;
+      padding: 0 0 5px;
+      font-size: 13px;
+      line-height: 20px;
+    }
+  
+    #faq-section .accordion-body p {
+      font-size: 13px;
+      line-height: 20px;
+    }
+  
+    #faq-section .viewall-btn {
+      font-size: 14px;
+      line-height: 18px;
+      font-weight: 700;
+    }
+    .mega-dropdown-menu.default-top-menu {
+      padding-left: unset;
+    }
+  }
+  
+    
+    </style>

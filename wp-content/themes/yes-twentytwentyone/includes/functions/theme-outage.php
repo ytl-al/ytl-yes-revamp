@@ -16,7 +16,7 @@ function outage_details()
     $session_id = snm_get_session();
     //print_r($_GET['Latitude']);              
     set_time_limit(1000);
-    $url = NETWORK_MAINTENANCE_DOMAIN . "/api/v1/ytlc/pnoc/4GOutageDetails";
+    $url = NETWORK_MAINTENANCE_DOMAIN . NETWORK_MAINTENANCE_4GOutageDetails;
     $body = array(
         'SessionID' => $session_id,
         'Latitude' => $_GET['Latitude'],
@@ -31,7 +31,7 @@ function outage_details()
         'body' => $body,
         //'sslverify' => false,     
         'headers' => array(
-            'apikey' => 'jkweTq8hcOw5QxeWh8d13dfkjhdfsdgdd',
+            'apikey' => NETWORK_MAINTENANCE_API_TOKEN_KEY,
             'Content-Type' => 'application/json',
         )
     );
@@ -48,13 +48,13 @@ if (!function_exists('generate_outgoing_network_maintenance')) {
 
     function snm_get_session()
     {
-        $url = NETWORK_MAINTENANCE_DOMAIN . "/api/v1/ytlc/pnoc/tokenget";
+        $url = NETWORK_MAINTENANCE_DOMAIN . NETWORK_MAINTENANCE_API_TOKEN_ENDPOIT;
         $params = [
             'method' => 'GET',
             'headers' => array(
-                'apikey' => 'jkweTq8hcOw5QxeWh8d13dfkjhdfsdgdd',
-                'UserLogin' => 'otoborest',
-                'Password' => 'otobo_v1_34',
+                'apikey' => NETWORK_MAINTENANCE_API_TOKEN_KEY,
+                'UserLogin' => NETWORK_MAINTENANCE_API_TOKEN_USERNAME,
+                'Password' => NETWORK_MAINTENANCE_API_TOKEN_PASSWORD,
                 'Content-Type' => 'application/json'
             )
         ];
@@ -68,7 +68,7 @@ if (!function_exists('generate_outgoing_network_maintenance')) {
 
     function snm_4g_outage($session_id)
     {
-        $url = NETWORK_MAINTENANCE_DOMAIN . "/api/v1/ytlc/pnoc/4GOutageDetails";
+        $url = NETWORK_MAINTENANCE_DOMAIN . NETWORK_MAINTENANCE_4GOutageDetails;
         $body = array(
             //'SessionID' => $session_id,
             //'SiteID' => "LMCPT00421",
@@ -80,7 +80,7 @@ if (!function_exists('generate_outgoing_network_maintenance')) {
             'method' => 'GET',
             'body' => $body,
             'headers' => array(
-                'apikey' => 'jkweTq8hcOw5QxeWh8d13dfkjhdfsdgdd',
+                'apikey' => NETWORK_MAINTENANCE_API_TOKEN_KEY,
                 'Content-Type' => 'application/json'
             )
         );
@@ -90,7 +90,7 @@ if (!function_exists('generate_outgoing_network_maintenance')) {
     }
 
     function snm_4g_outage_planed($session_id)   
-    { $url=NETWORK_MAINTENANCE_DOMAIN . "/api/v1/ytlc/pnoc/WorkPermit4GDetailsOtobo";       
+    { $url=NETWORK_MAINTENANCE_DOMAIN . NETWORK_MAINTENANCE_4WorkPermit4GDetailsOtobo;       
         //echo $session_id; die;
        $body = array(
            'SessionID' => $session_id,
@@ -103,7 +103,7 @@ if (!function_exists('generate_outgoing_network_maintenance')) {
             'body' => $body,
             'timeout' => 6,
             'headers' => array(
-                'apikey' => 'jkweTq8hcOw5QxeWh8d13dfkjhdfsdgdd',
+                'apikey' => NETWORK_MAINTENANCE_API_TOKEN_KEY,
                 'Content-Type' => 'application/json'
            )
       );
@@ -111,28 +111,27 @@ if (!function_exists('generate_outgoing_network_maintenance')) {
         return $list;
     }
 
-    function snm_5g_outage($session_id)
-    {
-        $url = NETWORK_MAINTENANCE_DOMAIN . "/api/v1/ytlc/pnoc/5GOutageDetails";
-        $body = array(
-            'SessionID' => $session_id,
-            //'SiteID'   => "DBSEP1317",
-            //'SiteName' => "DBSEP1317_DESARIAVILLACONDOMINIUM",
-            'Severity' => "Partial",
-            //'Region'   => "MY DNB CENTRAL",
-        );
-        $params = array(
-            'method' => 'GET',
-            'body' => $body,
-            'headers' => array(
-                'apikey' => 'jkweTq8hcOw5QxeWh8d13dfkjhdfsdgdd',
-                'Content-Type' => 'application/json'
-            )
-        );
-        //print_r($params); echo $url; echo "<br /><br /><br />";
-        $list = wp_remote_request($url, $params);
-        return $list;
-    }
+    // function snm_5g_outage($session_id)
+    // {
+    //     $url = NETWORK_MAINTENANCE_DOMAIN . "/api/v1/ytlc/pnoc/5GOutageDetails";
+    //     $body = array(
+    //         'SessionID' => $session_id,
+    //         //'SiteID'   => "DBSEP1317",
+    //         //'SiteName' => "DBSEP1317_DESARIAVILLACONDOMINIUM",
+    //         'Severity' => "Partial",
+    //         //'Region'   => "MY DNB CENTRAL",
+    //     );
+    //     $params = array(
+    //         'method' => 'GET',
+    //         'body' => $body,
+    //         'headers' => array(
+    //             'apikey' => NETWORK_MAINTENANCE_API_TOKEN_KEY,
+    //             'Content-Type' => 'application/json'
+    //         )
+    //     );
+    //     $list = wp_remote_request($url, $params);
+    //     return $list;
+    // }
 
     function generate_outgoing_network_maintenance()
     {

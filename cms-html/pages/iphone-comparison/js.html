@@ -1,0 +1,114 @@
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('.latest-devices-carousel').slick({
+            infinite: false,
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            autoplay: false,
+            autoplaySpeed: 3000,
+            dots: false,
+            arrows: false,
+            responsive: [{
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    infinite: true,
+                    dots: true,
+                    arrows: false
+                }
+            }, {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    arrows: false,
+                    infinite: true,
+                    dots: true,
+                }
+            }, {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    arrows: false,
+                    infinite: true,
+                    dots: true,
+                }
+            }, {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    dots: true,
+                    infinite: true,
+                    arrows: false
+                }
+            }]
+        });
+
+        // $('.popular-extras-carousel').slick({
+        //     infinite: false,
+        //     slidesToShow: 3,
+        //     slidesToScroll: 3,
+        //     autoplay: false,
+        //     autoplaySpeed: 3000,
+        //     dots: false,
+        //     responsive: [{
+        //         breakpoint: 1024,
+        //         settings: {
+        //             slidesToShow: 3,
+        //             slidesToScroll: 3,
+        //             infinite: true,
+        //             dots: true,
+        //             arrows: false
+        //         }
+        //     }, {
+        //         breakpoint: 768,
+        //         settings: {
+        //             slidesToShow: 1,
+        //             arrows: false,
+        //             infinite: true,
+        //             dots: true,
+        //             slidesToScroll: 1,
+        //         }
+        //     }, {
+        //         breakpoint: 600,
+        //         settings: {
+        //             slidesToShow: 1,
+        //             arrows: false,
+        //             infinite: true,
+        //             dots: true,
+        //             slidesToScroll: 1
+        //         }
+        //     }, {
+        //         breakpoint: 480,
+        //         settings: {
+        //             slidesToShow: 1,
+        //             slidesToScroll: 1,
+        //             dots: true,
+        //             infinite: true,
+        //             dots: true,
+        //             arrows: false
+        //         }
+        //     }]
+        // });
+
+    });
+</script>
+
+<script type="text/javascript">
+    /**
+     * Function to check if page is loaded from back button
+    */
+    function pageShown(evt) {
+        if (evt.persisted) {
+            toggleOverlay(false);
+        }
+    }
+    window.addEventListener("pageshow", pageShown, false);
+</script>
+
+

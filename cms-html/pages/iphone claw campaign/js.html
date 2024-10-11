@@ -1,0 +1,33 @@
+<script src="https://pbutcher.uk/flipdown/js/flipdown/flipdown.js"></script>
+ 
+<script type="text/javascript">
+// The End Of Year Date To Countdown Date
+document.addEventListener('DOMContentLoaded', () => {
+    // Define the target date and time in Malaysia timezone (UTC+8)
+    var targetDate = new Date("Sep 20, 2024 23:59:59 GMT+0800");
+ 
+    // Convert target date to Unix timestamp (in seconds)
+    var toDayFromNow = Math.floor(targetDate.getTime() / 1000);
+ 
+    // Set Up FlipDown
+    var flipdown = new FlipDown(toDayFromNow)
+    // Start The Count Down
+    .start()
+    // Do Something When The Countdown Ends
+    .ifEnded(() => {
+        document.querySelector(".flipdown").innerHTML = `<h2>Timer is ended</h2>`;
+    });
+});
+</script>
+
+<script type="text/javascript">
+    /**
+     * Function to check if page is loaded from back button
+    */
+    function pageShown(evt) {
+        if (evt.persisted) {
+            toggleOverlay(false);
+        }
+    }
+    window.addEventListener("pageshow", pageShown, false);
+</script>

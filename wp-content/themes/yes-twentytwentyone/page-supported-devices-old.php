@@ -2,7 +2,7 @@
     get_header(); 
 
     $lang               = get_bloginfo('language');
-    $abs_path           = 'template-parts/new-supported-devices';
+    $abs_path           = 'template-parts/supported-devices';
     $page_template_path = "$abs_path/content-en";
 
     if ($lang == 'ms-MY') {

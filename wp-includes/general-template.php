@@ -3409,6 +3409,9 @@ function wp_site_icon() {
 		$icon_32 = '/favicon.ico'; // Serve default favicon URL in customizer so element can be updated for preview.
 	}
 	if ( $icon_32 ) {
+		$meta_tags[] = sprintf( '<link rel="shortcut icon" type="image/x-icon" sizes="32x32" href="/wp-content/uploads/2024/08/favicon.ico" />');
+	}
+	if ( $icon_32 ) {
 		$meta_tags[] = sprintf( '<link rel="icon" href="%s" sizes="32x32" />', esc_url( $icon_32 ) );
 	}
 	$icon_192 = get_site_icon_url( 192 );

@@ -66,7 +66,7 @@
                 <a href="javascript:void(0);" class="cancel-btn">
                     <img decoding="async" src="/wp-content/uploads/2024/02/cancel-icon.png" alt="cancel"></a>
 
-                    <div id="bar-fixed">     
+            <div id="bar-fixed">     
 
                 <div class="filter-accordion sd-filter-section" v-if="brandsSection">
                     <h2 class="h2text">Saring</h2>

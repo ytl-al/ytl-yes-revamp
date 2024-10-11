@@ -1454,6 +1454,12 @@
             font-size: 18px;
             line-height: 20px;
         }
+        .accordion-body label{
+        padding-left: 5px;
+        }
+        .filter-accordion ul li label{
+            padding-left: 5px;
+        }
 
         .filter-accordion ul li {
             font-size: 16px;
