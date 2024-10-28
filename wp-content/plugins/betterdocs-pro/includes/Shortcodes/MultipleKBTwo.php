@@ -42,8 +42,8 @@ class MultipleKBTwo extends CategoryBoxTwo {
 
         $this->attributes['taxonomy']                = 'knowledge_base';
         $this->attributes['nested_subcategory']      = false;
-        $this->attributes['terms_order']             = 'ASC';
-        $this->attributes['terms_orderby']           = $this->settings->get( 'alphabetically_order_term' ) ? 'name' : 'slug';
+        $this->attributes['terms_order']             = isset( $atts['terms_order'] ) ? $atts['terms_order'] : 'ASC';
+        $this->attributes['terms_orderby']           = isset( $atts['terms_orderby'] ) ?  $atts['terms_orderby'] : ( $this->settings->get( 'alphabetically_order_term' ) ? 'name' : 'slug' );
         $this->attributes['multiple_knowledge_base'] = true;
         $this->attributes['kb_slug']                 = '';
         $this->attributes['show_description']        = false;

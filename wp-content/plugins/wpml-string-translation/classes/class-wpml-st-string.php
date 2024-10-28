@@ -179,12 +179,12 @@ class WPML_ST_String {
 	}
 
 	/**
-	 * @param string          $language
-	 * @param string|null     $value
-	 * @param int|bool|false  $status
-	 * @param int|null        $translator_id
-	 * @param string|int|null $translation_service
-	 * @param int|null        $batch_id
+	 * @param string           $language
+	 * @param string|null|bool $value
+	 * @param int|bool|false   $status
+	 * @param int|null         $translator_id
+	 * @param string|int|null  $translation_service
+	 * @param int|null         $batch_id
 	 *
 	 * @return bool|int id of the translation
 	 */
@@ -261,7 +261,7 @@ class WPML_ST_String {
 		}
 
 		if ( $ICL_Pro_Translation ) {
-			$ICL_Pro_Translation->fix_links_to_translated_content( $st_id, $language, 'string' );
+			$ICL_Pro_Translation->fix_links_to_translated_content( $st_id, $language, 'string', [ 'value' => $value, 'string_id' => $this->string_id ] );
 		}
 
 		icl_update_string_status( $this->string_id );

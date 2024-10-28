@@ -33,6 +33,96 @@
         font-weight: 800;
     }
 
+
+    .hero-slider-section {
+        position: relative;
+        background-color: #1A1E47;
+    }
+
+    .hero-slider .slick-dots {
+        bottom: 10px;
+    }
+
+    .hero-slider .slick-dots li button:before {
+        font-size: 12px;
+        line-height: 16px;
+        color: #cbcbcb !important;
+    }
+
+    .hero-slider .slick-dots li.slick-active button:before {
+        opacity: .75;
+        color: #ff0084 !important;
+    }
+
+    .hero-slider.slick-dotted.slick-slider {
+        margin-bottom: 0px;
+    }
+
+    .slick-dots li button:before {
+        font-size: 8px;
+    }
+
+    .hero-slider .inner-content-sec {
+        margin: 0 0 20px;
+        padding: 10px 0 0 4%;
+        position: absolute;
+        top: 15%;
+        left: 5%;
+        z-index: 99;
+    }
+
+    .hero-slider .inner-content-sec .title-sec {
+        position: relative;
+        display: block;
+        width: 100%
+    }
+
+    .title-sec img {
+        width: 220px;
+        margin-bottom: 30px;
+    }
+
+    .hero-slider .inner-content-sec h2 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 800;
+        font-size: 39px;
+        line-height: 42px;
+        text-align: left;
+        letter-spacing: -0.02em;
+        color: #FFF;
+        margin-bottom: 5px;
+        padding: 0;
+    }
+
+    .hero-slider .inner-content-sec p {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 24px;
+        text-align: left;
+        color: #ffffff;
+        letter-spacing: -0.02em;
+    }
+
+     .hero-slider .inner-content-sec .btn-sec {
+        margin: 20px 0 0;
+        padding: 0;
+    }
+
+    .hero-slider .inner-content-sec .pink-btn {
+        background-color: #2F3BF5 !important;
+        border: 0px solid #2F3BF5;
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: normal;
+        text-transform:none;
+        padding: 0.7rem 1.8rem;
+    }
+
     /* Postpaid Plans styling */
 
     #prepaid-plans {
@@ -269,13 +359,18 @@
 
     @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
         #prepaid-top-banner {
+            background-image: url('/wp-content/uploads/2023/12/prepaid-banner-bg-mob.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            overflow: hidden;
             background-position: top right;
         }
 
         #prepaid-top-banner h1 {
-            font-size: 30px;
-            line-height: 30px;
+            font-size: 23px;
+            line-height: 28px;
             text-align: left;
+            width: 65%;
         }
 
         #prepaid-top-banner p {
@@ -287,6 +382,11 @@
 
         #prepaid-top-banner {
             padding-top: 20px;
+        }
+
+        #prepaid-top-banner img {
+            width: 35%;
+            padding: 20px 0 20px;
         }
 
         #prepaid-top-banner .banner-visual {
@@ -322,9 +422,46 @@
     }
 
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
-        #prepaid-plans h1 {
+
+        .hero-slider .slick-dots {
+            bottom: 10px;
+        }
+
+        .hero-slider .slick-dots li button:before {
+            font-size: 12px;
+            line-height: 16px;
+            color: #cbcbcb !important;
+        }
+
+        .hero-slider .slick-dots li.slick-active button:before {
+            opacity: .75;
+            color: #ff0084 !important;
+        }
+
+        .hero-slider.slick-dotted.slick-slider {
+            margin-bottom: 0px;
+        }
+
+        #postpaid-top-banner {
+            background-position: top right;
+        }
+
+        #postpaid-top-banner h1 {
             font-size: 30px;
-            line-height: 39px;
+            line-height: 30px;
+            text-align: left;
+        }
+
+        #postpaid-top-banner p {
+            line-height: 25px;
+            font-size: 17px;
+            text-align: left;
+            margin-bottom: 20px;
+            padding: 0;
+        }
+        #prepaid-plans h1 {
+            font-size: 28px;
+            line-height: 36px;
             padding-top: 28px;
         }
 
@@ -372,20 +509,30 @@
         }
 
         #prepaid-top-banner {
+            background-image: url('/wp-content/uploads/2023/12/prepaid-banner-bg-mob.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            overflow: hidden;
             background-position: top right;
+        }
+        #prepaid-top-banner img {
+            width: 35%;
+            padding: 20px 0 20px;
         }
 
         #prepaid-top-banner h1 {
-            font-size: 30px;
-            line-height: 30px;
-            text-align: center;
+            font-size: 23px;
+            line-height: 28px;
+            letter-spacing: -0.02em;
+            text-align: left;
+            width: 65%;
         }
 
         #prepaid-top-banner p {
             line-height: 25px;
             padding: 0px 5%;
             font-size: 17px;
-            text-align: center;
+            text-align: left;
         }
 
         #prepaid-top-banner {
@@ -408,8 +555,8 @@
         #switch-yes h1,
         #wfh h1,
         #faq-section h1 {
-            font-size: 30px;
-            line-height: 39px;
+            font-size: 28px;
+            line-height: 36px;
         }
 
         #wfh {

@@ -629,6 +629,7 @@
                     $("[data-name=planReceivingCallRate]", $newTpl).html(cur["receivingCallRate"]);
                     $("[data-name=planSmsRate]", $newTpl).html(cur["smsRate"]);
                     $newTpl.attr('data-asiancountriesdays', cur['aseanPlusCountries']);
+                    // console.log(cur['aseanPlusCountries']);
 
                     // $newTpl.attr('data-countrytitle', cur['aseanPlusCountries']);
                     $("[data-countrytitle=aseanCountryTitle]", $newTpl).html(cur['aseanPlusCountries']);
@@ -643,7 +644,7 @@
                     if (cur['aseanPlusCountries'] !== 'NoDay') {
                         $('#header').html('<img class="mb-0" src="/wp-content/uploads/2024/06/roam-asian-logo.png" alt="YesRoam" /> <span data-countrytitle="aseanCountryTitle">' + cur['country_name'] + ' ' +'Daily Pass</span>');
                     } else {
-                        $('#header').html('<img class="mb-0" src="/wp-content/uploads/2024/06/YesRoam-logo.png" alt="YesRoam" /> <span data-countrytitle="aseanCountryTitle">Day Pass</span>');
+                        $('#header').html('<img class="mb-0" src="/wp-content/uploads/2024/06/YesRoam-logo.png" alt="YesRoam" /> <span data-title="PAYU">Day Pass</span>');
                     }
                  
                 }
@@ -795,7 +796,7 @@
           slidesToScroll: 1,
           arrows: false,
           fade: true,
-          dots: true,
+          dots: false,
           autoplay: true,
           autoplaySpeed: 8000,
           responsive: [{
@@ -887,6 +888,13 @@
                     centerMode: false,
                 }
             }]
+        });
+
+        $(".right-tab").click(function(){
+            $(".pass-section").show();
+        });
+        $(".left-tab").click(function(){
+            $(".pass-section").hide();
         });
 
 

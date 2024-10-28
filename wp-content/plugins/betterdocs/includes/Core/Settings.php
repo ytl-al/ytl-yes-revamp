@@ -78,9 +78,10 @@ class Settings extends Base {
      * @since 2.5.0
      */
     public function enqueue( $hook ) {
-        if ( $hook !== 'betterdocs_page_betterdocs-settings' ) {
+        if ( ! betterdocs()->is_betterdocs_screen( $hook ) ) {
             return;
         }
+
         wp_enqueue_media();
         wp_enqueue_script( 'betterdocs-admin' );
         betterdocs()->assets->localize( 'betterdocs-admin', 'betterdocsAdminSettings', GlobalFields::normalize( $this->settings_args() ) );
@@ -92,6 +93,9 @@ class Settings extends Base {
 
     public function enqueue_old( $hook ) {
         // FREE & Pro Version Compatibility Check
+        if ( ! betterdocs()->is_betterdocs_screen( $hook ) ) {
+            return;
+        }
 
         $this->enqueue( 'betterdocs_page_betterdocs-settings' );
     }
@@ -168,6 +172,7 @@ class Settings extends Base {
     public function get_default() {
         $_default = [
             'multiple_kb'                   => '',
+            'enable_export_faq'             => true,
             'builtin_doc_page'              => true,
             'breadcrumb_doc_title'          => __( 'Docs', 'betterdocs' ),
             'docs_slug'                     => 'docs',
@@ -195,15 +200,15 @@ class Settings extends Base {
             'column_number'                 => 3,
             'posts_number'                  => 10,
             'post_count'                    => true,
-            'count_text'                    => __( 'docs', 'betterdocs' ),
-            'count_text_singular'           => __( 'doc', 'betterdocs' ),
+            'count_text'                    => __( 'Docs', 'betterdocs' ),
+            'count_text_singular'           => __( 'Doc', 'betterdocs' ),
             'exploremore_btn'               => true,
             'exploremore_btn_txt'           => __( 'Explore More', 'betterdocs' ),
             'doc_single'                    => 1,
             'enable_toc'                    => true,
             'toc_title'                     => __( 'Table of Contents', 'betterdocs' ),
             'toc_hierarchy'                 => true,
-            'toc_list_number'               => true,
+            'toc_list_number'               => false,
             'toc_dynamic_title'             => false,
             'enable_sticky_toc'             => true,
             'sticky_toc_offset'             => 100,
@@ -240,7 +245,7 @@ class Settings extends Base {
             'enable_faq_write_with_ai'      => true,
             'ai_autowrite_api_key'          => '',
             'ai_autowrite_max_token'        => 1500,
-            'enable_estimated_reading_time' => false,
+            'enable_estimated_reading_time' => true,
             'enable_encyclopedia'           => false,
             'enable_glossaries'             => false,
             'show_glossary_suggestions'     => true,
@@ -850,6 +855,7 @@ class Settings extends Base {
                                                                     'name'     => 'column_number',
                                                                     'type'     => 'number',
                                                                     'label'    => __( 'Number Of Columns', 'betterdocs' ),
+                                                                    'label_subtitle' => __( 'This setting is not applicable for sleek layout.', 'betterdocs' ),
                                                                     'default'  => 3,
                                                                     'priority' => 3
                                                                 ],
@@ -873,14 +879,14 @@ class Settings extends Base {
                                                                     'name'     => 'count_text',
                                                                     'type'     => 'text',
                                                                     'label'    => __( 'Count Text', 'betterdocs' ),
-                                                                    'default'  => __( 'docs', 'betterdocs' ),
+                                                                    'default'  => __( 'Docs', 'betterdocs' ),
                                                                     'priority' => 6
                                                                 ],
                                                                 'count_text_singular'            => [
                                                                     'name'     => 'count_text_singular',
                                                                     'type'     => 'text',
                                                                     'label'    => __( 'Count Text Singular', 'betterdocs' ),
-                                                                    'default'  => __( 'doc', 'betterdocs' ),
+                                                                    'default'  => __( 'Doc', 'betterdocs' ),
                                                                     'priority' => 7
                                                                 ],
                                                                 'exploremore_btn'                => [
@@ -1184,20 +1190,20 @@ class Settings extends Base {
                                                                     'default'                    => '',
                                                                     'priority'                   => 8
                                                                 ],
+                                                                'reaction_feedback_text'        => [
+                                                                    'name'     => 'reaction_feedback_text',
+                                                                    'type'     => 'text',
+                                                                    'label'    => __( 'Reaction Feedback Text', 'betterdocs' ),
+                                                                    'default'  => __( 'Thanks for your feedback.', 'betterdocs' ),
+                                                                    'priority' => 9
+                                                                ],
                                                                 'enable_estimated_reading_time' => [
                                                                     'name'                       => 'enable_estimated_reading_time',
                                                                     'type'                       => 'toggle',
                                                                     'label'                      => __( 'Estimated Reading Time', 'betterdocs' ),
                                                                     'enable_disable_text_active' => true,
                                                                     'default'                    => 0,
-                                                                    'priority'                   => 9
-                                                                ],
-                                                                'reaction_feedback_text'        => [
-                                                                    'name'     => 'reaction_feedback_text',
-                                                                    'type'     => 'text',
-                                                                    'label'    => __( 'Reaction Feedback Text', 'betterdocs' ),
-                                                                    'default'  => __( 'Thanks for your feedback', 'betterdocs' ),
-                                                                    'priority' => 10
+                                                                    'priority'                   => 10
                                                                 ],
                                                                 'estimated_reading_time_title'  => [
                                                                     'name'     => 'estimated_reading_time_title',
@@ -2128,7 +2134,8 @@ class Settings extends Base {
                                                             'search'         => true,
                                                             'options'        => $this->normalize_options( apply_filters( 'betterdocs_export_type_options', [
                                                                 'docs'         => __( 'Docs', 'betterdocs' ),
-                                                                'doc_category' => __( 'Docs Category', 'betterdocs' )
+                                                                'doc_category' => __( 'Docs Category', 'betterdocs' ),
+                                                                'glossaries'   => __(  'Glossaries', 'betterdocs')
                                                             ] ) )
                                                         ],
                                                         'export_docs'       => [
@@ -2164,18 +2171,42 @@ class Settings extends Base {
                                                             'filterValue'    => 'all',
                                                             'rules'          => Rules::is( 'export_type', 'doc_category' )
                                                         ],
+                                                        'export_glossaries' => [
+                                                            'name'           => 'export_glossaries',
+                                                            'type'           => 'checkbox-select',
+                                                            'label'          => __( 'Select Glossaries', 'betterdocs' ),
+                                                            'label_subtitle' => __( 'Selected glossary terms will be exported.', 'betterdocs' ),
+                                                            'priority'       => 7,
+                                                            'multiple'       => true,
+                                                            'search'         => true,
+                                                            'default'        => ['all'],
+                                                            'placeholder'    => __( 'Select any', 'betterdocs' ),
+                                                            'options'        => $this->get_terms( 'glossaries' ),
+                                                            'filterValue'    => 'all',
+                                                            'rules'          => Rules::is( 'export_type', 'glossaries' )
+                                                        ],
                                                         'file_type'         => [
                                                             'name'           => 'file_type',
                                                             'label'          => __( 'Select File Type', 'betterdocs' ),
                                                             'label_subtitle' => __( 'Choose a file type', 'betterdocs' ),
                                                             'type'           => 'select',
                                                             'default'        => 'xml',
-                                                            'priority'       => 7,
+                                                            'priority'       => 8,
                                                             'search'         => true,
                                                             'options'        => $this->normalize_options( apply_filters( 'betterdocs_export_file_type_options', [
                                                                 'xml' => __( '.xml', 'betterdocs' ),
                                                                 'csv' => __( '.csv', 'betterdocs' )
                                                             ] ) )
+                                                        ],
+                                                        'enable_export_faq'  => [
+                                                            'name'                       => 'enable_export_faq',
+                                                            'type'                       => 'toggle',
+                                                            'priority'                   => 9,
+                                                            'label'                      => __( 'Export FAQ', 'betterdocs' ),
+                                                            'label_subtitle'             => __( 'Export FAQ Related Terms & Posts', 'betterdocs' ),
+                                                            'enable_disable_text_active' => true,
+                                                            'default'                    => true,
+                                                            'rules'                      => Rules::is( 'export_type', 'glossaries', true )
                                                         ],
                                                         'export_docs_btn'   => [
                                                             'name'     => 'export_docs_btn',
@@ -2185,7 +2216,7 @@ class Settings extends Base {
                                                                 'loading' => __( 'Exporting...', 'betterdocs' )
                                                             ],
                                                             'type'     => 'button',
-                                                            'priority' => 8,
+                                                            'priority' => 10,
                                                             'ajax'     => [
                                                                 'on'   => 'click',
                                                                 'api'  => '/betterdocs/v1/export-docs',
@@ -2194,7 +2225,9 @@ class Settings extends Base {
                                                                     'export_docs'       => '@export_docs',
                                                                     'export_kbs'        => '@export_kbs',
                                                                     'export_categories' => '@export_categories',
-                                                                    'file_type'         => '@file_type'
+                                                                    'export_glossaries' => '@export_glossaries',
+                                                                    'file_type'         => '@file_type',
+                                                                    'enable_export_faq' => '@enable_export_faq'
                                                                 ],
                                                                 'swal' => [
                                                                     'text'      => __( 'Exported Successfully.', 'betterdocs' ),
@@ -2202,7 +2235,7 @@ class Settings extends Base {
                                                                     'autoClose' => 2000
                                                                 ]
                                                             ]
-                                                        ]
+                                                        ],
                                                     ] )
                                                 ],
 

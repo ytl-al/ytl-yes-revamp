@@ -16,7 +16,7 @@
 <!-- Breadcrumb End -->
 
 <!-- Slider Start -->
-<section class="hero-slider-section">
+<!-- <section class="hero-slider-section">
     <div class="hero-slider slider">
 
         <div>
@@ -37,28 +37,63 @@
             </div>
         </div>
 
-        <!-- <div>
-            <a href="/ms/yes-postpaid-plans/#postpaid-plans/">
-                <img src="/wp-content/uploads/2024/01/SGRoaming-BM-v3.png" class="w-100 d-none d-lg-block" alt="...">
-                <img src="/wp-content/uploads/2024/01/SGRoaming-BM-v3-mob.png" class="w-100 d-block d-md-block d-lg-none"
-                    alt="...">                    
-            </a>
-        </div> -->
+    </div>
+</section> -->
+<!-- Slider End -->
 
-        <!-- <div class="slick-slide">
-            <a href="#">
-                <img src="/wp-content/uploads/2023/12/hero-banner-bg2.png" class="w-100 d-none d-lg-block" alt="...">
-                <img src="/wp-content/uploads/2023/12/hero-banner-bg2-mob-bm.png" class="w-100 d-block d-md-block d-lg-none" alt="...">
 
-                <div class="inner-content-sec-bm d-lg-block d-none">
-                    <div class="title-sec mt-5">
-                        <h2>Kekal terhubung bila-bila masa,<br> di mana jua dengan YesRoam</h2>
-                        <p>Rayau dengan bebas bersama operator rakan<br> kongsi kami apabila anda di luar negara.</p>
-                     </div>                        
+
+<!-- Slider Start -->
+<section class="hero-slider-section">
+    <div id="hero-slider" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true" data-bs-interval="true">
+        <div class="carousel-indicators">
+            <!--<button type="button" data-bs-target="#hero-slider" data-bs-slide-to="0" class="active" aria-current="true"
+                aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#hero-slider" data-bs-slide-to="1" aria-label="Slide 2"></button>
+             <button type="button" data-bs-target="#hero-slider" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#hero-slider" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#hero-slider" data-bs-slide-to="4" aria-label="Slide 5"></button> -->
+
+        </div>
+
+        <div class="carousel-inner">  
+            <div class="carousel-item active" data-bs-interval="5000">
+            <img src="/wp-content/uploads/2024/06/roam-banner-web.webp" class="w-100 d-none d-lg-block" alt="...">
+            <img src="/wp-content/uploads/2024/06/roam-banner-mob.webp" class="w-100 d-block d-md-block d-lg-none" alt="...">
+                <article>
+                    <div class="container">
+                        <div class="inner-content-sec">
+                            <div>
+                            <h1>Lebih lagi untuk dinikmati<br>
+                    di Asia Tenggara dengan<br>
+                    YesRoam ASEAN Plus</h1>
+                                <div class="btn-sec d-flex align-items-center">
+                                    <div class="pricing-2 align-items-center">                                        
+                                            <h4 class="d-block">
+                                                <sup><span>Dari<br><b>RM</b></span></sup>10<span class="month-sec">/bln</span>
+                                            </h4>                                        
+                                    </div>                
+                                    
+                                </div>
+                                
+                            </div>
+                        </div>
                     </div>
-            </a>
-        </div>        -->
+                </article>
+            </div>                 
 
+            <!-- <button class="carousel-control-prev d-none" type="button" data-bs-target="#hero-slider"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next d-none" type="button" data-bs-target="#hero-slider"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button> -->
+
+        </div>
     </div>
 </section>
 <!-- Slider End -->
@@ -263,12 +298,11 @@
                 </div>
             </div>
 
-            <!-- <div class="col-12 mt-3" data-country="Singapore" style="display: block;">
+            <div class="col-12 mt-3" data-country="Singapore" style="display: none;">
                 <div style="background:#fff; border-radius: 15px;" >
-                    <h1>
-                        YesRoam <span>Pay As You Use</span>
+                <h1 class="raom-logo">
+                    <img class="mb-0" src="/wp-content/uploads/2024/06/YesRoam-logo.png" alt="YesRoam" /> <span>Pay As You Use</span>
                     </h1>
-
                     <div class="row row-roaming">
                         <div class="col-12 col-lg-2">
                             <div class="row">
@@ -327,7 +361,7 @@
                     </div>
 
                 </div>
-            </div> -->
+            </div>
 
             <!--end Singapore -->
 
@@ -587,6 +621,7 @@
 <!--Roaming Tips End-->
 
 
+
 <!--Roaming Tips Start data-roaming="roaming-rates"-->
 <section id="roaming-tips">
     <div class="container">
@@ -628,7 +663,94 @@
                             </div>
 
                         </div>
+
+                        <div class="row" id="roaming-tips-title">
+                            <div class="col-12 mt-0">
+                                <h2>
+                                    Kekalkan rangkaian anda dengan <br>
+                                    <img src="/wp-content/uploads/2024/06/roam-asian-logo.png" alt="...">
+                                </h2>
+                                <p>Pra-tempah Pas Perayauan Data anda dengan MyYes App.​</p>
+                            </div>
+                        </div>
+                
+                        <div class="row mt-5" id="roaming-tips-inner">
+                            <div class="col-12 col-xl-12 col-md-12 mx-auto">
+                                <div class="row flex-nowrap flex-xl-wrap getway layer-plans">
+                                    <div class="col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="plan-details-list">
+                                                    <h3>Daily Pass​</h3>
+                                                    <p>1 GB</p>
+                                                    <ul>
+                                                        <li>Data berkelajuan tinggi 1GB, 512kbps selepas habis kuota.​</li>
+                                                        <li>Pilih pendahuluan tarikh pengaktifan anda sehingga 30 hari.​</li>
+                                                        <li>Pembatalan percuma sehingga 24 jam sebelum pengaktifan.​</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="price-section">
+                                                    <div class="price-left">
+                                                        <h2>RM10</h2>
+                                                    </div>
+                                                </div>
+                
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <div class="col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="plan-details-list">
+                                                    <h3>3 Days Pass</h3>
+                                                    <p>5 GB</p>
+                                                    <ul>
+                                                        <li>Data berkelajuan tinggi 5GB, 512kbps selepas habis kuota.​</li>
+                                                        <li>Pilih pendahuluan tarikh pengaktifan anda sehingga 30 hari.​</li>
+                                                        <li>Pembatalan percuma sehingga 24 jam sebelum pengaktifan.​</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="price-section">
+                                                    <div class="price-left">
+                                                        <h2>RM20</h2>
+                                                    </div>
+                                                </div>
+                
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <div class="col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="plan-details-list">
+                                                    <h3>7 Days Pass</h3>
+                                                    <p>10 GB</p>
+                                                    <ul>
+                                                        <li>Data berkelajuan tinggi 10GB, 512kbps selepas habis kuota.​</li>
+                                                        <li>Pilih pendahuluan tarikh pengaktifan anda sehingga 30 hari.​</li>
+                                                        <li>Pembatalan percuma sehingga 24 jam sebelum pengaktifan.​</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="price-section">
+                                                    <div class="price-left">
+                                                        <h2>RM30</h2>
+                                                    </div>
+                                                </div>
+                
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
+
+
                 </div>
 
                 <!-- 12-Month plans -->
@@ -655,6 +777,98 @@
                             </div>
                         </div>
 
+
+                        <div class="row" id="roaming-tips-title">
+                            <div class="col-12 mt-0">
+                                <h2>
+                                    Layan internet lancar di Singapura<br>dengan YesRoam SG
+                                </h2>
+                                <p>Dapatkan kadarter baik untuk perayauan tanpa had
+                                    dengan pas harian kami.</p>
+                            </div>
+                        </div>
+                
+                        <div class="row mt-5" id="roaming-tips-inner">
+                            <div class="col-12 col-xl-12 col-md-12 mx-auto">
+                                <div class="row flex-nowrap flex-xl-wrap getway layer-plans">
+                                    <div class="col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="plan-details-list">
+                                                    <h3>1 Day Pass​</h3>
+                                                    <p>1 GB</p>
+                                                    <ul>
+                                                        <li>Data 5G + 4G tanpa had 
+                                                            selama 24 jam.</li>
+                                                        <li>Data berkelajuan tinggi 1GB, 512kbps selepas ahabis kuota.</li>
+                                                        <li>Untuk pelanggan tanpa pelan
+                                                            Infinite Postpaid.</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="price-section">
+                                                    <div class="price-left">
+                                                        <h2>RM8</h2>
+                                                    </div>
+                                                </div>
+                
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <div class="col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="plan-details-list">
+                                                    <h3>3 Days Pass</h3>
+                                                    <p>5 GB</p>
+                                                    <ul>
+                                                        <li>Data 5G + 4G tanpa had
+                                                        selama 72 jam.</li>
+                                                        <li>Data berkelajuan tinggi 5GB,
+                                                        512kbps selepas habis kuota.​</li>
+                                                        <li>Untuk pelanggan tanpa pelan
+                                                        Infinite Postpaid.​</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="price-section">
+                                                    <div class="price-left">
+                                                        <h2>RM12</h2>
+                                                    </div>
+                                                </div>
+                
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <div class="col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="plan-details-list">
+                                                    <h3>7 Days Pass</h3>
+                                                    <p>10 GB</p>
+                                                    <ul>
+                                                        <li>Data 5G + 4G tanpa had
+                                                        selama 168 jam.</li>
+                                                        <li>Data berkelajuan tinggi 10GB,
+                                                        512kbps selepas habis kuota.​</li>
+                                                        <li>Untuk pelanggan tanpa pelan
+                                                        Infinite Postpaid.​</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="price-section">
+                                                    <div class="price-left">
+                                                        <h2>RM20</h2>
+                                                    </div>
+                                                </div>
+                
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -668,7 +882,8 @@
 <!-- Pass section -->
 <section class="pass-section">
     <div class="container">
-        <div class="row">
+
+        <!-- <div class="row">
             <div class="col-12 mt-0">
                 <h2>
                     Kekalkan rangkaian anda dengan <br>
@@ -676,9 +891,9 @@
                 </h2>
                 <p>Pra-tempah Pas Perayauan Data anda dengan MyYes App.​</p>
             </div>
-        </div>
+        </div> -->
 
-        <div class="row mt-5">
+        <!-- <div class="row mt-5">
             <div class="col-12 col-xl-12 col-md-12 mx-auto">
                 <div class="row flex-nowrap flex-xl-wrap getway layer-plans">
                     <div class="col-md-4 mb-4 aos-init aos-animate" data-aos="fade-up">
@@ -749,9 +964,9 @@
 
                 </div>
             </div>
-        </div>
+        </div> -->
 
-        <div class="row mt-5">
+        <div class="row mt-o">
             <div class="col-12 col-xl-12 col-md-12 mt-0" id="destinations-slider-sec">
 
                 <h3 class="line-b">Destinasi yang boleh digunakan​</h3>

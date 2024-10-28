@@ -1549,7 +1549,7 @@
                                 self.login.input.otp.yesNumber = '';
                             }
                         });
-						self.sendAnalytics('ctCheckout');
+						// self.sendAnalytics('ctCheckout');
                         $('#login-modal').modal('show');
                     } else {
                         toggleOverlay();

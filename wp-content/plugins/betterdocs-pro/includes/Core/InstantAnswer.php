@@ -40,7 +40,7 @@ class InstantAnswer extends Base {
     }
 
     public function preview_scripts( $hook ) {
-        if ( method_exists( betterdocs(), 'is_betterdocs_screen' ) && betterdocs()->is_betterdocs_screen( $hook ) ) {
+        if ( method_exists( betterdocs(), 'is_betterdocs_screen' ) && ! betterdocs()->is_betterdocs_screen( $hook ) ) {
             return;
         }
 

@@ -87,7 +87,7 @@
         color: #fff;
     }
 
-    .unboxing-video-section {
+    /* .unboxing-video-section {
         margin: 0 0 0;
         padding: 0px 0px;
         position: relative;
@@ -104,12 +104,38 @@
         width: 800px;
         height: 450px;
         margin: 0 auto;
+    } */
+
+    .video-section {
+        background-color: #fff;
+        padding: 0px 0px 50px;
+        margin: 0px 0 0;
+        position: relative;
+    }
+
+    .unboxing-video-section {
+        margin: 0 0 0;
+        padding: 0px 0px;
+        position: relative;
+        height: auto;
+    }
+
+    .unboxing-video-section .unboxing-video-section-inner {
+        padding: 0;
+        margin: 0;
+    }
+
+    .unboxing-video-section .unboxing-video-section-inner iframe {
+        display: block;
+        width: 100%;
+        height: 850px;
+        margin: 0 auto;
     }
 
     #our-awards-section {
         /* align-items: center;
         justify-content: center; */
-        padding: 50px 0px 50px;
+        padding: 50px 0px 0px;
         width: 100%;
         background-color: #ffffff;
         /* display: flex;
@@ -151,8 +177,8 @@
         color: #000;
     }
 
-    #our-awards-section .awards-content-section .year-bg{
-        background-color: #E8E9ED;
+    #our-awards-section .awards-content-section .year-bg {
+        background-color: #fff; /*E8E9ED*/
         font-family: 'Montserrat';
         font-size: 21px;
         line-height: 19px;
@@ -234,7 +260,7 @@
 
     #our-awards-section .awards-carousel .slick-prev {
         left: unset;
-        right: 80px;
+        right: 100px;
     }
 
     #our-awards-section .awards-carousel .slick-next {
@@ -248,13 +274,142 @@
 
     #our-awards-section .awards-carousel .prev-arrow svg,
     #our-awards-section .awards-carousel .next-arrow svg {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
         color: #2F3BF5;
         background-color: #fff;
         border-radius: 50px;
         border: 1px solid #2F3BF5;
     }
+
+    /* ------------------------------------- */
+
+    #our-solutions-section {
+        /* align-items: center;
+        justify-content: center; */
+        padding: 0px 0px 50px;
+        width: 100%;
+        background-color: #ffffff;
+        /* display: flex;
+        flex-direction: column; */
+        overflow: hidden;
+    }
+
+    #our-solutions-section h2 {
+        font-family: 'Montserrat';
+        font-size: 39px;        
+        line-height: 49px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        text-align: center;
+        color: #1A1E47;
+    }
+
+    #our-solutions-section .business-solutions-carousel {
+        padding-top: 30px;
+    }
+
+    #our-solutions-section .content-inner-sec-first {
+        background: url('/wp-content/uploads/2024/05/meets-connectivity-img.webp');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: #14193d;
+        background-position: center;
+        min-height: 262px;
+        border-radius: 15px;
+        padding: 40px;
+    }
+
+    #our-solutions-section .content-inner-sec-first h2 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 33px;
+        font-weight: 600;
+        line-height: 40px;
+        letter-spacing: -0.02em;
+        text-align: left;
+        color: #ffffff;
+    }
+
+    #our-solutions-section .content-inner-sec-first p {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 26px;
+        text-align: left;
+        margin-top: 25px;
+        color: #ffffff;
+    }
+
+    #our-solutions-section .content-inner-sec {
+        background-color: #F5F6FA;
+        margin: 0;
+        padding: 30px 30px 30px;
+        position: relative;
+        border-radius: 15px;
+        height: 265px;
+        /* box-shadow: 0 0 15px 0 rgba(0, 0, 0, .1);
+        -webkit-box-shadow: 0 0 15px 0 rgba(0, 0, 0, .1); */
+    }
+
+    #our-solutions-section .content-inner-sec h2 {
+        font-family: 'Montserrat';
+        font-size: 28px;
+        font-weight: 600;
+        line-height: 34px;
+        letter-spacing: -0.011em;
+        text-align: left;
+        margin-bottom: 10px;
+        color: #000;
+        padding: 0;
+    }
+
+    #our-solutions-section .content-inner-sec p {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 400;
+        margin: 0 0 10px;
+        text-align: left;
+        color: #000;
+    }
+
+    #our-solutions-section .content-inner-sec .panel-deviceImg {
+        margin: 0;
+        position: relative;
+        text-align: left;
+        display: contents;
+    }
+
+    #our-solutions-section .content-inner-sec .panel-deviceImg img {
+        height: 65px;
+        margin: 0 0 50px;
+    }
+
+    #our-solutions-section .content-inner-sec .panel-btn {
+        margin: 50px 0 0px;
+        text-align: left;
+        height: auto;
+        margin-left: auto;
+    }
+
+    #our-solutions-section .content-inner-sec .panel-btn a {
+        color: #2F3BF5;
+        display: inline-block;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-size: 25px;
+        font-weight: 700;
+        line-height: 19px;
+        letter-spacing: 0.1em;
+        text-align: left;
+        text-decoration: none;
+    }
+
+    #our-solutions-section .content-inner-sec .panel-btn a:hover {
+        text-decoration: underline;
+    }
+
+    /* -------------------------------- */
 
 
 
@@ -295,7 +450,7 @@
 
     #business-solutions-section .layer-planDevice h2 {
         font-family: 'Montserrat';
-        font-size: 28px;
+        font-size: 26px;
         font-weight: 600;
         line-height: 34px;
         letter-spacing: -0.011em;
@@ -414,10 +569,12 @@
     }
 
     .search-content {
+        font-size: 39px;
+        font-weight: 600;
+        line-height: 47px;
+        letter-spacing: -0.02em;
         color: #fff;
         text-align: center;
-        font-size: 40px;
-        font-weight: 700;
     }
 
     html body .talk_form .fm-form-container.fm-theme1 .fm-form input[type="text"],
@@ -691,7 +848,7 @@
             text-align: center;
         }
 
-        .unboxing-video-section {
+        /* .unboxing-video-section {
             margin: 0;
             padding: 50px 0px 0;
             height: auto;
@@ -713,8 +870,143 @@
             width: 100%;
             height: 450px;
             margin: 0 auto;
+        } */
+        .video-section {
+            background-color: #fff;
+            padding: 0px 0px 0px;
+            margin: 0px 0 0;
+            position: relative;
         }
 
+        .video-section .container-fluid {
+            margin: 0;
+            padding: 0;
+        }
+
+        .unboxing-video-section {
+            margin: 0;
+            padding: 0px 0px 0;
+            height: auto;
+        }
+
+        .unboxing-video-section .unboxing-video-section-inner {
+            padding: 0;
+            margin: 0 0px;
+        }
+
+        .unboxing-video-section .unboxing-video-section-inner h2 {
+            font-size: 18px;
+            line-height: 24px;
+            margin-bottom: 30px;
+            padding: 0 10%;
+        }
+
+        .unboxing-video-section .unboxing-video-section-inner iframe {
+            width: 100%;
+            height: 235px;
+            margin: 0 auto;
+        }
+        #our-awards-section
+        {
+            padding: 50px 0px 50px;
+        }
+
+        /* ------------------------------------- */
+
+    #our-solutions-section {
+        /* align-items: center;
+        justify-content: center; */
+        padding: 0px 0px 50px;
+        width: 100%;
+        background-color: #ffffff;
+        /* display: flex;
+        flex-direction: column; */
+        overflow: hidden;
+    }
+
+    #our-solutions-section h2 {
+        font-size: 26px;        
+        line-height: 36px;
+    }
+
+    #our-solutions-section .business-solutions-carousel {
+        padding-top: 30px;
+    }
+
+    #our-solutions-section .content-inner-sec-first {
+        background: url('/wp-content/uploads/2024/05/meets-connectivity-img.webp');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: #14193d;
+        background-position: center;
+        min-height: 262px;
+        border-radius: 15px;
+        padding: 40px;
+    }
+
+    #our-solutions-section .content-inner-sec-first h2 {
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    #our-solutions-section .content-inner-sec-first p {        
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    #our-solutions-section .content-inner-sec {
+        background-color: #F5F6FA;
+        margin: 0;
+        padding: 30px 30px 30px;
+        position: relative;
+        border-radius: 15px;
+        height: auto;
+        /* box-shadow: 0 0 15px 0 rgba(0, 0, 0, .1);
+        -webkit-box-shadow: 0 0 15px 0 rgba(0, 0, 0, .1); */
+    }
+
+    #our-solutions-section .content-inner-sec h2 {
+        font-size: 22px;
+        line-height: 34px;
+        margin-bottom: 0px;
+    }
+
+    #our-solutions-section .content-inner-sec p {
+        font-size: 14px;
+        line-height: 22px;
+        margin: 0 0 0px;
+    }
+
+    #our-solutions-section .content-inner-sec .panel-deviceImg {
+        margin: 0;
+        position: relative;
+        text-align: left;
+        display: contents;
+    }
+
+    #our-solutions-section .content-inner-sec .panel-deviceImg img {
+        height: 50px;
+        margin: 0 0 30px;
+    }
+
+    #our-solutions-section .content-inner-sec .panel-btn {
+        margin: 50px 0 0px;
+        text-align: left;
+        height: auto;
+        margin-left: auto;
+    }
+
+    #our-solutions-section .content-inner-sec .panel-btn a {       
+        font-size: 25px;
+        font-weight: 700;
+        line-height: 19px;
+    }
+
+    #our-solutions-section .content-inner-sec .panel-btn a:hover {
+        text-decoration: underline;
+    }
+
+    /* -------------------------------- */
 
         #business-solutions-section h2 {
             font-size: 24px;
@@ -789,12 +1081,6 @@
         .mega-dropdown-menu.default-top-menu {
             padding-left: unset;
         }
-
-        .parent {
-            margin-top: -3px;
-        }
-
-
     }
 
     @media only screen and (min-device-width: 320px) and (max-device-width: 640px) and (-webkit-min-device-pixel-ratio: 2) {
@@ -826,9 +1112,6 @@
             padding: 1rem !important;
             padding-top: 3rem !important;
         }
-
-
-
 
 
         #faq-section {

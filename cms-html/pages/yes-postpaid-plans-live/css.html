@@ -33,29 +33,6 @@
         background-color: #1A1E47;
     }
 
-    .hero-slider .slick-dots {
-        bottom: 10px;
-    }
-
-    .hero-slider .slick-dots li button:before {
-        font-size: 12px;
-        line-height: 16px;
-        color: #cbcbcb !important;
-    }
-
-    .hero-slider .slick-dots li.slick-active button:before {
-        opacity: .75;
-        color: #ff0084 !important;
-    }
-
-    .hero-slider.slick-dotted.slick-slider {
-        margin-bottom: 0px;
-    }
-
-    .slick-dots li button:before {
-        font-size: 8px;
-    }
-
     .hero-slider .inner-content-sec {
         margin: 0 0 20px;
         padding: 10px 0 0 4%;
@@ -73,6 +50,7 @@
 
     .title-sec img {
         width: 150px;
+        height: auto !important;
         margin-bottom: 20px;
     }
 
@@ -148,7 +126,7 @@
     }
 
     .hero-slider .inner-content-sec .pricing-2 {
-        width: 190px;       
+        width: 190px;
         display: flex;
         margin-top: 15px;
     }
@@ -178,12 +156,12 @@
 
     .hero-slider .inner-content-sec .pricing-2 h4 sup {
         font-size: 24px;
-    line-height: 24px;
-    display: flex;
-    height: 40px;
-    position: absolute;
-    left: -38px;
-    top: 0px;
+        line-height: 24px;
+        display: flex;
+        height: 40px;
+        position: absolute;
+        left: -38px;
+        top: 0px;
     }
 
     .hero-slider .inner-content-sec .pricing-2 p {
@@ -192,7 +170,7 @@
         font-size: 16px;
         line-height: 24px;
         letter-spacing: -0.02em;
-        text-transform:none;
+        text-transform: none;
         margin: -15px 0;
         padding: 0;
     }
@@ -222,9 +200,48 @@
         font-weight: 700;
         color: #fff;
         letter-spacing: normal;
-        text-transform:none;
+        text-transform: none;
         padding: 0.7rem 1.8rem;
     }
+
+    .hero-slider-section img {
+        display: block;
+        height: 405px;
+        -o-object-fit: cover;
+        object-fit: cover;
+    }
+
+    .hero-slider-section .slick-slide img {
+        display: block;
+        height: 405px;
+        -o-object-fit: cover;
+        object-fit: cover;
+    }
+
+    .hero-slider .slick-dots {
+        bottom: 10px;
+    }
+
+    .hero-slider .slick-dots li button:before {
+        font-size: 12px;
+        line-height: 16px;
+        color: #cbcbcb !important;
+    }
+
+    .hero-slider .slick-dots li.slick-active button:before {
+        opacity: .75;
+        color: #ff0084 !important;
+    }
+
+    .hero-slider.slick-dotted.slick-slider {
+        margin-bottom: 0px;
+    }
+
+    .slick-dots li button:before {
+        font-size: 8px;
+    }
+
+
 
     .content-section-mid {
         margin: 20px 0 30px;
@@ -258,12 +275,13 @@
     #switch-yes {
         background: #FF0084 !important;
     }
-    #switch-yes h1{
+
+    #switch-yes h1 {
         font-size: 39px;
         line-height: 47px;
     }
 
-    #wfh h1{
+    #wfh h1 {
         font-size: 39px;
         line-height: 47px;
     }
@@ -356,8 +374,8 @@
 
     #postpaid-plans .plan-table tr td.blue-col .info-icon {
         /* position: absolute;
-        right: 22px;
-        top: 22px; */
+            right: 22px;
+            top: 22px; */
         float: right;
     }
 
@@ -379,15 +397,15 @@
     #wfh {
         background-color: #F7F8F9;
         /* background-image: url('/wp-content/uploads/2022/05/roaming-banner-bg2-scaled.jpg');
-        background-size: cover;
-        background-repeat: no-repeat; */
+            background-size: cover;
+            background-repeat: no-repeat; */
         padding: 96px 0px;
     }
 
     #wfh h1 {
         font-size: 39px;
-        font-weight: 800;
         line-height: 47px;
+        font-weight: 800;
         color: #000;
         text-align: left;
     }
@@ -433,7 +451,9 @@
         color: #FFF;
     }
 
-    #infinite-banner .pink-btn{background-color: #2F3BF5 !important;}
+    #infinite-banner .pink-btn {
+        background-color: #2F3BF5 !important;
+    }
 
     #switch-banner {
         background-image: url('/wp-content/uploads/2023/12/telco-capping-banner.png');
@@ -727,7 +747,7 @@
         background-color: #fff;
         border: 2px solid #ff0084;
         /* border-top-right-radius: 1.25rem;
-    border-bottom-right-radius: 1.25rem; */
+        border-bottom-right-radius: 1.25rem; */
         border-top-left-radius: 0;
         padding: 0.5rem 2rem;
 
@@ -783,6 +803,20 @@
     }
 
     @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+
+        .hero-slider-section img {
+            height: auto;
+            -o-object-fit: unset;
+            object-fit: unset;
+        }
+
+        .hero-slider-section .slick-slide img {
+            width: auto;
+            height: auto;
+            -o-object-fit: unset;
+            object-fit: unset;
+        }
+
         .hero-slider .slick-dots {
             bottom: 10px;
         }
@@ -834,6 +868,10 @@
             width: 70% !important;
             display: inline-block !important;
         }
+        #postpaid-plans-card .nav-tabs .nav-link {           
+            font-size: 12px !important;
+            padding: 0.5rem 1.2rem !important;
+        }
 
         #easy-steps .content {
             padding: 0px 13px !important;
@@ -858,10 +896,28 @@
     }
 
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+        .hero-slider-section img {
+            height: auto;
+            -o-object-fit: unset;
+            object-fit: unset;
+        }
+
+        .hero-slider-section .slick-slide img {
+            width: 100%;
+            height: auto;
+            -o-object-fit: unset;
+            object-fit: unset;
+        }
+
         #postpaid-plans h1 {
             font-size: 30px;
             line-height: 39px;
             padding-top: 28px;
+        }
+
+        #postpaid-plans-card .nav-tabs .nav-link {           
+            font-size: 12px !important;
+            padding: 0.5rem 1.2rem !important;
         }
 
         #postpaid-plans .plan-table tr td {
@@ -971,12 +1027,12 @@
         }
 
         /* #infinite-banner h1 {
-            font-size: 38px;
-            line-height: 52px;
-        }
-        #infinite-banner {
-            padding: 35px 0px;
-        } */
+                font-size: 38px;
+                line-height: 52px;
+            }
+            #infinite-banner {
+                padding: 35px 0px;
+            } */
     }
 
     .bg-color {
@@ -1051,10 +1107,17 @@
     }
 
     .post-card .post-card-detail h1 {
+        font-family: 'Montserrat';
         font-weight: 800;
-        font-size: 45px;
-        line-height: 56px;
+        font-size: 39px;
+        line-height: 47px;
         color: #000;
+    }
+
+    .post-card .post-card-detail h1 b {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 40px;
     }
 
     .post-card .post-card-detail h1 span {
@@ -1157,6 +1220,97 @@
         margin: 20px 30px 50px;
     }
 
+    #postpaid-plans-card .nav-tabs {
+        /* border-bottom: none; */
+    }
+
+    #postpaid-plans-card .nav-tabs .nav-link {
+        border: none;
+        font-family: 'Montserrat', sans-serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #2F3BF5;
+        background-color: #fff;
+        /* border: 2px solid #ff0084; */
+        /* border-top-left-radius: 0; */
+        padding: 0.5rem 1.5rem;
+        border-radius: 100px;
+    }
+
+    #postpaid-plans-card .nav {
+        justify-content: space-between;
+        margin: 35px auto 15px;
+        border: 2px solid #2F3BF5;
+        width: auto;
+        border-radius: 100px;
+        align-items: center;
+        padding: 5px 5px 6px;
+    }
+
+    #postpaid-plans-card .nav-tabs .nav-link.active {
+        color: #fff;
+        background-color: #2F3BF5;
+        /*border: 2px solid #ff0084; */
+    }
+
+    #postpaid-plans-card .nav-tabs .nav-item.show .nav-link {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 19px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #FF0084;
+    }
+
+    #postpaid-plans-card .nav-tabs .left-tab {
+        /* border-top-left-radius: 1.25rem;
+        border-bottom-left-radius: 1.25rem;
+        border-top-right-radius: 0; */
+    }
+
+    #postpaid-plans-card .nav-tabs .right-tab {
+        /* border: 2px solid #ff0084;
+        border-top-right-radius: 1.25rem;
+        border-bottom-right-radius: 1.25rem; */
+    }
+
+    #postpaid-plans-card .nav .nav-item {
+        margin: 0 0px
+    }
+
+    #postpaid-plans-card #myTabContent {
+        padding: 0px 0 0
+    }
+
+    #postpaid-plans-card .content-part {
+        background: #fff;
+        box-shadow: 0px 4px 10px 3px rgba(0, 0, 0, 0.15);
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 0 0 20px 0;
+        padding: 20px 30px;
+    }
+
+    #postpaid-plans-card .content-part .content-part-left {
+        margin: 0;
+        padding: 0 50px 0 0;
+        width: 90%;
+    }
+
+    #postpaid-plans-card .content-part .content-part-right {
+        margin: 0;
+        padding: 0px;
+        width: 10%;
+        display: flex;
+        align-items: center;
+    }
+
     #post-plan-card .carousel-indicators {
         bottom: -55px;
     }
@@ -1240,6 +1394,11 @@
             font-weight: 700;
             font-size: 12px;
             line-height: 17px;
+        }
+
+        #store-locations .nav-tabs .nav-link {
+            font-size: 10px;
+            line-height: 19px;
         }
 
         #switch-banner {
@@ -1506,6 +1665,7 @@
 
         #post-plan-card .carousel-inner {
             display: flex !important;
+            justify-content: center;
         }
 
         #post-plan-card {
@@ -1517,9 +1677,9 @@
     @media only screen and (min-width: 992px) and (max-width: 1380px) {
 
         /*#post-plan-card .post-card .post-card-detail h1 {
-    font-size: 28px;
-    line-height: 44px;
-}*/
+        font-size: 28px;
+        line-height: 44px;
+    }*/
         #post-plan-card .post-card .pink-btn {
             padding: 1rem;
             font-size: 14px;

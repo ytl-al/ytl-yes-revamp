@@ -38,6 +38,8 @@ use Duplicator\Core\Notifications\Notifications;
 use Duplicator\Core\Notifications\Review;
 use Duplicator\Core\Views\TplMng;
 use Duplicator\Utils\CronUtils;
+use Duplicator\Utils\ExtraPlugins\CrossPromotion;
+use Duplicator\Utils\ExtraPlugins\ExtraPluginsMng;
 use Duplicator\Utils\Upsell;
 use Duplicator\Views\DashboardWidget;
 use Duplicator\Views\EducationElements;
@@ -116,6 +118,7 @@ class Bootstrap
             Notifications::init();
             EmailSummaryPreviewPageController::init();
             HelpPageController::init();
+            CrossPromotion::init();
             $dashboardService = new ServicesDashboard();
             $dashboardService->init();
             $extraPlugin = new ServicesExtraPlugins();
@@ -260,8 +263,8 @@ class Bootstrap
         return array(
             array(
                 'parent_slug' => 'duplicator',
-                'page_title'  => __('Packages', 'duplicator'),
-                'menu_title'  => __('Packages', 'duplicator'),
+                'page_title'  => __('Backups', 'duplicator'),
+                'menu_title'  => __('Backups', 'duplicator'),
                 'capability'  => 'export',
                 'menu_slug'   => ControllersManager::MAIN_MENU_SLUG,
                 'callback'    => function () {
@@ -270,8 +273,8 @@ class Bootstrap
             ),
             array(
                 'parent_slug'            => 'duplicator',
-                'page_title'             => __('Import', 'duplicator'),
-                'menu_title'             => __('Import', 'duplicator'),
+                'page_title'             => __('Import Backups', 'duplicator'),
+                'menu_title'             => __('Import Backups', 'duplicator'),
                 'capability'             => 'export',
                 'menu_slug'              => ControllersManager::IMPORT_SUBMENU_SLUG,
                 'callback'               => function () {
@@ -281,8 +284,8 @@ class Bootstrap
             ),
             array(
                 'parent_slug'            => 'duplicator',
-                'page_title'             => __('Schedules', 'duplicator'),
-                'menu_title'             => __('Schedules', 'duplicator') . $dupMenuNew,
+                'page_title'             => __('Schedule Backups', 'duplicator'),
+                'menu_title'             => __('Schedule Backups', 'duplicator') . $dupMenuNew,
                 'capability'             => 'export',
                 'menu_slug'              => ControllersManager::SCHEDULES_SUBMENU_SLUG,
                 'callback'               => function () {
@@ -531,7 +534,7 @@ class Bootstrap
         $plugin = plugin_basename(DUPLICATOR_LITE_FILE);
         // create link
         if ($file == $plugin) {
-            $links[] = '<a href="admin.php?page=duplicator" title="' . esc_attr__('Manage Packages', 'duplicator') . '" style="">' .
+            $links[] = '<a href="admin.php?page=duplicator" title="' . esc_attr__('Manage Backups', 'duplicator') . '" style="">' .
                 esc_html__('Manage', 'duplicator') .
                 '</a>';
             return $links;

@@ -1,0 +1,534 @@
+<style type="text/css">
+    /* reuse-class-css-start */
+    .showBtn {
+    display: block;
+  }
+
+  .hideme {
+    display: none;
+  }
+    .fleet__section-padding {
+        padding: 50px 0;
+    }
+
+    .fleet__section-color {
+        background: #f5f6fa;
+    }
+
+    .fleet__header_heading {
+        color: #1a1e47;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 39px;
+        font-style: normal;
+        font-weight: 600;
+    }
+
+    .fleet__btn-container {
+        display: flex;
+        align-items: center;
+        /* justify-content: center; */
+    }
+
+    .talk_us_btn {
+        display: block;
+        background: #2f3bf5;
+        border: 0px;
+        padding: 0.7rem 0.3rem;
+        color: #fff;
+        border-radius: 32px;
+        font-weight: 700;
+        font-size: 16px;
+        text-transform: uppercase;
+        text-align: center;
+        letter-spacing: 0.1em;
+        font-family: "Montserrat", sans-serif;
+        max-width: 240px;
+        width: 100%;
+        text-decoration: none;
+    }
+
+    .talk_us_btn:hover {
+        color: #fff;
+    }
+
+    .no-bg-btn {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 19px;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        text-decoration: none;
+        text-align: center;
+        color: #2f3bf5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        max-width: 200px;
+        width: 100%;
+    }
+
+    /* reuse-class-css-end */
+
+    .fleet__hero__section {
+        background: url("/wp-content/uploads/2024/04/yes-vision-hero-bg.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-color: #14193d;
+        background-position: center;
+        min-height: 560px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .fleet__hero__content {
+        max-width: 650px;
+        margin: auto;
+        text-align: center;
+    }
+
+    .fleet__hero__content img {
+        width: 90px;
+        height: auto;
+        display: block;
+        margin: auto;
+    }
+
+    .fleet__hero__content h1 {
+        margin: 50px 0;
+        color: #1a1e47;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 39px;
+        font-style: normal;
+        font-weight: 600;
+    }
+
+    .fleet__hero__content .fleet__btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+    .fleet__section-2 h2 {
+        color: #1a1e47;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 33px;
+        font-style: normal;
+        font-weight: 600;
+    }
+
+    .fleet__section-2 p {
+        color: #191919;
+        font-family: "Open Sans";
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+    }
+
+    .usp-section-m {
+        margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    counter-reset: item;
+    flex-wrap: wrap;
+    }
+
+    .usp-section-m .layer-solutionBox {
+        text-align: center;
+        margin: 20px 30px;
+        
+    }
+
+    .usp-section-m .layer-solutionBox img {
+        margin-bottom: 30px;
+        width: auto;
+        height: 60px;
+        object-fit: contain;
+    }
+
+    .usp-section-m .layer-solutionBox h2 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 26px;
+        letter-spacing: -0.02em;
+        text-align: center;
+        color: #000;
+        height: 73px;
+    }
+
+
+
+    .fleet__inner-content {
+        max-width: 500px;
+    }
+
+    .fleet__inner-content span {
+        color: #1a1e47;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 21px;
+        font-style: normal;
+        font-weight: 600;
+    }
+
+    .fleet__inner-content h2 {
+        color: #1a1e47;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 39px;
+        font-style: normal;
+        font-weight: 600;
+        margin: 15px 0 0;
+    }
+
+    .fleet__inner-content p {
+        color: #191919;
+        font-family: "Open Sans", sans-serif;;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        margin: 32px 0;
+    }
+
+    .fleet__video-box {
+        position: relative;
+    }
+
+    .fleet__video-box .play__icon {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        display: block;
+    }
+
+    /* fleet-accordion-css-start */
+
+    .fleet__accordion .accordion-item {
+        border: none !important;
+        border-bottom: 1px solid #888 !important;
+        background-color: unset !important;
+    }
+
+    .fleet__accordion .accordion-item button {
+        box-shadow: unset;
+        border-radius: 0;
+        border: none !important;
+        padding: 18px 0;
+        color: #1a1e47;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 21px;
+        letter-spacing: -0.4px;
+        background-color: unset !important;
+    }
+
+    .fleet__accordion .accordion-item .accordion-header {
+        margin: 0 !important;
+    }
+
+    .fleet__accordion .accordion-item button.accordion-button:not(.collapsed) {
+        background-color: transparent !important;
+    }
+
+    .fleet__accordion .accordion-item .accordion-button::after {
+        background-image: none;
+        background: url(https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/10/faq-show.png) no-repeat center center / contain;
+    }
+
+    .fleet__accordion .accordion-item button.accordion-button:not(.collapsed)::after {
+        background-image: none;
+        background: url(https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/10/faq-hide.png) no-repeat center center / contain;
+    }
+
+    .fleet__accordion .accordion-item .accordion-body {
+        padding: 0;
+    }
+
+    .fleet__accordion .accordion-item .accordion-body p {
+        margin: 0 0 10px;
+        color: #1a1e47;
+        font-family: "Open Sans";
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+    }
+
+    /* fleet-accordion-css-end */
+
+    /* video popup*/
+  .lightbox {
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow: scroll;
+  position: fixed;
+  display: none;
+  z-index: 9999;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  margin: 0;
+}
+.lightbox-container {
+  position: relative;
+  max-width: 800px;
+  margin: 7% auto;
+  display: block;
+  padding: 0 3%;
+  height: auto;
+  z-index: 10;
+}
+@media screen and (max-width: 768px) {
+  .lightbox-container {
+    margin-top: 10%;
+  }
+}
+@media screen and (max-width: 414px) {
+  .lightbox-container {
+    margin-top: 13%;
+  }
+}
+.lightbox-content {
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
+}
+.lightbox-close {
+  text-transform: uppercase;
+  background: transparent;
+  position: absolute;
+  font-weight: 300;
+  font-size: 12px;
+  display: block;
+  border: none;
+  color: white;
+  top: -22px;
+  right: 3%;
+}
+.video-container {
+  padding-bottom: 56.25%;
+  position: relative;
+  padding-top: 30px;
+  overflow: hidden;
+  height: 0;
+}
+.video-container iframe,
+.video-container object,
+.video-container embed {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+/* IGNORE FORM THIS POINT ON */
+/* body {
+  background: #efefef;
+}
+#container {
+  border-radius: 4px;
+  max-width: 300px;
+  height: auto;
+  padding: 50px;
+  background: white;
+  margin: 100px auto;
+}
+#playme {
+  background: #007fed;
+  text-transform: uppercase;
+  font-weight: 300;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  display: inline-block;
+  font-size: 14px;
+  margin: 0;
+} */
+
+
+/* IGNORE FORM THIS POINT ON */
+
+/* video popup*/
+
+    @media (max-width: 768px) {
+        .fleet__hero__section {
+            /* background: url("/wp-content/uploads/2024/04/yes-fleet-banner-1-mob.png"); */
+            background-position: -250px center;
+        }
+
+        .fleet__hero__section .fleet__btn-container {
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .fleet__section-2 h2,
+        .fleet__section-2 p {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .fleet__section-2 img.d-block.d-md-none {
+            max-width: 200px;
+            margin: auto;
+        }
+
+        .fleet__header_heading {
+            text-align: center;
+            font-size: 32px;
+        }
+
+        .fleet__inner-content h2 {
+            font-size: 32px !important;
+        }
+
+        .fleet__video-box {
+            margin: 20px 0 0 !important;
+        }
+
+        .fleet__accordion {
+            margin-top: 20px;
+        }
+
+        .usp-section-m {
+        display: unset;
+    }
+    .fleet__video-box .play__icon{
+        width: 80px;
+        height: auto;
+    }
+
+    }
+
+    
+    /* form-css-start */
+
+    .talk_form {
+        background: #1a1e47;
+    }
+
+    .talk_form .fm-form-container.fm-theme1 {
+        width: 100%;
+    }
+
+    .search-content {
+        font-size: 39px;
+    font-weight: 600;
+    line-height: 47px;
+    letter-spacing: -0.02em;
+    color: #fff;
+    text-align: center;
+    }
+
+    html body .talk_form .fm-form-container.fm-theme1 .fm-form input[type="text"],
+    body .talk_form .fm-form-container.fm-theme1 .fm-form .ui-corner-all,
+    body .talk_form .fm-form-container.fm-theme1 .fm-form input[type="number"],
+    body .talk_form .fm-form-container.fm-theme1 .fm-form input[type="password"],
+    body .talk_form .fm-form-container.fm-theme1 .fm-form input[type="url"],
+    body .talk_form .fm-form-container.fm-theme1 .fm-form input[type="email"],
+    body .talk_form .fm-form-container.fm-theme1 .fm-form .StripeElement,
+    body .talk_form .fm-form-container.fm-theme1 .fm-form .ui-spinner-input,
+    body .talk_form .fm-form-container.fm-theme1 .fm-form .file-upload-status,
+    body .talk_form .fm-form-container.fm-theme1 .fm-form .country-name,
+    html body .talk_form .fm-form-container.fm-theme1 .fm-form select {
+        font-size: 16px !important;
+        color: #888888;
+        border-radius: 50px !important;
+        height: 50px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    html body .talk_form .fm-form-container.fm-theme1 .fm-form select {
+        border-right: 16px solid transparent !important;
+    }
+
+    html body .talk_form .fm-form-container.fm-theme1 .fm-form textarea {
+        font-size: 16px !important;
+        text-transform: uppercase;
+    }
+
+    html body .talk_form .fm-form-container.fm-theme1 .fm-form textarea::placeholder {
+        color: #888888 !important;
+    }
+
+    .form_control input::placeholder {
+        font-size: 16px !important;
+        color: #888888 !important;
+    }
+
+    body .talk_form .fm-form-container.fm-theme1 .fm-form textarea {
+        border-radius: 20px !important;
+        border: none !important;
+        text-align: center;
+    }
+
+    .form_control input {
+        display: block;
+        width: 100% !important;
+        text-align: center;
+        padding: 25px 25px !important;
+        font-size: 16px !important;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #888888;
+        background-color: #fff;
+        outline: none !important;
+        letter-spacing: 0.2px;
+        margin: 15px 15px 0 0;
+        border: none !important;
+    }
+
+    .form_control textarea {
+        display: block;
+        width: 100% !important;
+        padding: 8px 20px !important;
+        font-size: 16px !important;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #888888;
+        background-color: #fff;
+        border-radius: 5px !important;
+        outline: none !important;
+        letter-spacing: 0.2px;
+        margin: 15px 15px 0 0;
+        border: none !important;
+    }
+
+    .form_control input::placeholder,
+    .form_control textarea::placeholder {
+        color: #888888;
+    }
+
+    .form_control input,
+    .form_control select,
+    .form_control textarea {
+        margin: 10px 5px 0 !important;
+    }
+
+    #form19 .wdform_column {
+        padding: 0 !important;
+    }
+
+    .submit button {
+        margin: 20px auto 0 !important;
+        background: #2f3bf5;
+        border: 0px;
+        padding: 0.7rem 2.3rem !important;
+        color: #fff;
+        border-radius: 32px;
+        font-weight: 700;
+        font-size: 16px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-family: "Montserrat", sans-serif;
+    }
+
+    /* form-css-end */
+</style>

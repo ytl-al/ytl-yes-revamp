@@ -117,7 +117,7 @@ final class Plugin {
      * Plugin Version
      * @var string
      */
-    public $version = '3.6.2';
+    public $version = '3.7.3';
 
     /**
      * WriteWithAI Class
@@ -360,8 +360,30 @@ final class Plugin {
      * Is Pro Plugin Is Active?
      * @return bool
      */
+    public function pro_file() {
+        return WP_PLUGIN_DIR . '/betterdocs-pro/betterdocs-pro.php';
+    }
+
     public function is_pro_active() {
-        return $this->helper->is_plugin_active( 'betterdocs-pro/betterdocs-pro.php' );
+        if ( file_exists( $this->pro_file() ) ) {
+            return $this->helper->is_plugin_active( 'betterdocs-pro/betterdocs-pro.php' );
+        }
+
+        return false;
+    }
+
+    public function pro_version() {
+        if ( ! $this->is_pro_active() ) {
+            return false;
+        }
+
+        if ( ! function_exists( 'get_plugin_data' ) ) {
+            require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+        }
+
+        $plugin_data = get_plugin_data( $this->pro_file() );
+
+        return $plugin_data['Version'];
     }
 
     /**
@@ -405,10 +427,23 @@ final class Plugin {
             return false;
         }
 
-        // $common = [
-        //     'edit.php' => get_post_type() == 'docs',
-        //     'edit-tags.php',
-        // ];
+        return false;
+    }
+
+    public function get_betterdocs_screen() {
+        $registered_screens = [
+            'toplevel_page_betterdocs-admin',
+            'betterdocs_page_betterdocs-settings',
+            'betterdocs_page_betterdocs-analytics',
+            'betterdocs_page_betterdocs-faq',
+            'betterdocs_page_betterdocs-glossaries'
+        ];
+
+        $current_screen_id  = get_current_screen() != null ? get_current_screen()->id : '';
+
+        if ( in_array( $current_screen_id, $registered_screens ) ) {
+            return $current_screen_id;
+        }
 
         return false;
     }

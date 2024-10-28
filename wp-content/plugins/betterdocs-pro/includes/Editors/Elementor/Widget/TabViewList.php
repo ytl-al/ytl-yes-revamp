@@ -1140,7 +1140,7 @@ Class TabViewList extends BaseWidget {
             'layout_type'        => 'widget',
             'list_icon_name'     => $settings['list_icon'],
             'kb_terms'           => get_terms( $kb_terms_query ),
-
+            'number'             => isset( $settings['tab_box_per_tabs'] ) ? $settings['tab_box_per_tabs'] : -1,
             'show_header'        => true,
             'show_title'         => $settings['show_title_button_tab_list'],
             'title_tag'          => $settings['tabview-list-title'],

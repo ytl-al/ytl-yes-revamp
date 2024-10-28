@@ -29,7 +29,6 @@ class Scripts extends FreeScripts {
 
         $pro_assets->register( 'single-doc-related-articles', 'public/css/related-articles.css' );
 
-        $pro_assets->register( 'advanced-search', 'blocks/advanced-search/advanced-search.js', ['betterdocs-blocks-editor'] );
         $pro_assets->register( 'archive-list-handbook', 'blocks/doc-archive-list-handbook/doc-archive-list-handbook.js', ['betterdocs-blocks-editor'] );
 
 

@@ -40,7 +40,7 @@ class Customizer extends Base {
 
         add_action( 'customize_controls_print_styles', [$this, 'controls_print_styles'], 999 );
 
-        if( ! wp_is_block_theme() ) {
+        if ( function_exists( 'wp_is_block_theme' ) && ! wp_is_block_theme() ) {
             add_action( 'wp_head', [$this, 'dynamic_css'] );
         }
     }
@@ -95,6 +95,15 @@ class Customizer extends Base {
     public function enqueue() {
         betterdocs()->assets->enqueue( 'betterdocs-cutomizer-styles', 'customizer/css/customizer-controls.css' );
         betterdocs()->assets->enqueue( 'betterdocs-customize-condition', 'customizer/js/customizer-condition.js' );
+        betterdocs()->assets->localize( 'betterdocs-customize-condition', 'betterdocsCustomizer', [
+            'isFSETheme' => betterdocs()->helper->current_theme_is_fse_theme(),
+            'betterdocsBlockThemeNotification' => sprintf(
+                /* translators: 1: Link to your documentation, 2: Link to Site Editor */
+                __( 'BetterDocs Customizer options are not compatible with block-based themes and will not function as expected. Please use the <a href="%2$s">Site Editor</a> to customize your site. <a href="%1$s">Learn more</a>', 'betterdocs' ),
+                esc_url( 'https://betterdocs.co/docs/betterdocs-provides-full-site-editor-support/' ), // Learn more link
+                esc_url( admin_url( 'site-editor.php' ) ) // Site Editor link
+            )
+        ] );
     }
 
     public function customize_preview_init() {

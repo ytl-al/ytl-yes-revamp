@@ -57,6 +57,7 @@ class BlockEditor extends BlockEditorFree {
         $this->pro_assets->register( 'betterdocs-blocks-editor-controls-pro', 'blocks/controls.css' );
         $this->pro_assets->register( 'betterdocs-pro-blocks-editor', 'blocks/style-editor.css', [ 'betterdocs-blocks-editor-controls-pro' ] );
         $this->pro_assets->register( 'betterdocs-pro-blocks-editor', 'blocks/editor.js', ['betterdocs-blocks-editor'] );
+        $this->pro_assets->enqueue( 'advanced-search', 'blocks/advanced-search/advanced-search.js' );
         $this->pro_assets->localize( 'betterdocs-pro-blocks-editor', 'betterDocsProBlocksHelper', [
             'is_pro_active' => betterdocs()->is_pro_active(),
             'resturl'       => get_rest_url(),
