@@ -1,0 +1,68 @@
+/** General **/
+.ohdear-ask-for-review {
+  vertical-align: middle;
+}
+
+.ohdear-ask-for-review .dashicons {
+  color: gold;
+  vertical-align: -17%;
+}
+
+/** Api Status **/
+
+.ohdear-api-status {
+  font-weight: bold;
+}
+
+/** Multiselect **/
+
+select[name="ohdear_settings[user_roles_access][]"] {
+  min-height: 150px;
+}
+
+.ohdear-api-status.connected {
+  color: green;
+}
+
+.ohdear-api-status.disconnected {
+  color: red;
+}
+
+/** Monitoring Dashboard Section **/
+
+.ohdear-dashboard__section {
+  margin: 20px 0;
+  padding: 15px 30px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.ohdear-dashboard__section .community-events-footer p {
+  color: #444;
+}
+
+.ohdear-dashboard__section .community-events-footer .bold {
+  padding-right: 5px;
+  font-weight: bold;
+}
+
+
+/** Charts **/
+
+#ohdear-uptime_chart,
+#ohdear-perf_chart {
+  margin: 35px 10px;
+}
+
+/** Dashboard Widgets **/
+#dashboard-widgets .ohdear-dashboard__section {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+#dashboard-widgets #ohdear-uptime_chart,
+#dashboard-widgets #ohdear-perf_chart {
+  margin: 0;
+}
