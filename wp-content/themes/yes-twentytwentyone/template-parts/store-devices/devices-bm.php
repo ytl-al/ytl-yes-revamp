@@ -27,7 +27,7 @@ while ($loop->have_posts()) :
     $device_features_free    = get_post_meta($post_id, $prefix . 'device_features_free', true);
     $device_target = get_post_meta($post_id, $prefix . 'device_target', true);
     $featured_device = get_post_meta($post_id, $prefix . 'featured_device', true);
- $promotion_label = get_post_meta($post_id, $prefix . 'device_promotion_label', true);
+    $promotion_label = get_post_meta($post_id, $prefix . 'device_promotion_label', true);
     // Additional variables for your reference
     $post_release_date = get_post_meta($post_id, 'yes_release_date', true);
     $post_thumbnail    = wp_get_attachment_image_src(get_post_thumbnail_id($post_id), 'full');
@@ -81,10 +81,10 @@ while ($loop->have_posts()) :
         'device_features_hot' => $device_features_hot,
         'device_features_free' => $device_features_free,
         'device_target' => $device_target,
-		 'device_promotion_label' => $promotion_label,
+        'device_promotion_label' => $promotion_label,
     );
 
-    if (isset($featured_device) && !empty($featured_device) && ($featured_device==='1')) {
+    if (isset($featured_device) && !empty($featured_device) && ($featured_device === '1')) {
         $featuredProductData[] = $productData;
     } else {
         $deviceData[] = $productData;
@@ -93,7 +93,7 @@ endwhile;
 wp_reset_postdata();
 
 // Sort featuredProductData in descending order based on modification date
-usort($featuredProductData, function($a, $b) {
+usort($featuredProductData, function ($a, $b) {
     $date_a = get_the_modified_time('U', $a['post_id']);
     $date_b = get_the_modified_time('U', $b['post_id']);
     return $date_b <=> $date_a;
@@ -105,12 +105,26 @@ $mergedProductData = array_merge($featuredProductData, $deviceData);
 // Output HTML for merged data
 foreach ($mergedProductData as $product) {
 
-    ?>
-    <div class="col-lg-4 col-xl-4 col-md-12 mb-4 storegrid" data-brand= "<?= $product['post_brand'] ?>" data-displaydevicename="<?= $product['post_brand'].' '. $product['device_name'] ?>" data-promotion="<?= $product['post_promotion'] ?>" data-plan="<?= $product['post_plan_name'] ?>" data-promotionlabel="<?= $product['device_promotion_label'] ?>">
+?>
+    <div class="col-lg-4 col-xl-4 col-md-12 mb-4 storegrid" data-brand="<?= $product['post_brand'] ?>" data-displaydevicename="<?= $product['post_brand'] . ' ' . $product['device_name'] ?>" data-promotion="<?= $product['post_promotion'] ?>" data-plan="<?= $product['post_plan_name'] ?>" data-promotionlabel="<?= $product['device_promotion_label'] ?>">
         <div class="layer-planDevice layer-planDevice-bm">
             <?php if (!empty($product['device_features_hot'])) : ?>
-                <div class="offer-label-bm"><?= $product['device_features_hot'] == 1 ? 'Tawaran Hangat' : '' ?></div>
+                <?php
+                // Define the device IDs for "NEW" label
+                $newDeviceIds = [84, 85, 86, 87];
+
+                // Check if the device ID is in the array for "NEW"
+                if (in_array($product['device_id'], $newDeviceIds)) {
+                    $label = 'Baharu';
+                } else {
+                    $label = $product['device_features_hot'] == 1 ? 'Tawaran Hangat' : '';
+                }
+                ?>
+                <?php if ($label) : ?>
+                    <div class="offer-label"><?= $label ?></div>
+                <?php endif; ?>
             <?php endif; ?>
+
             <p class="panel-deviceImg">
                 <img src="<?= $product['post_thumbnail'] ?>" alt="">
             </p>
@@ -124,72 +138,69 @@ foreach ($mergedProductData as $product) {
 
             <!-- <h3><?= esc_html(($product['post_brand']) === 'zte' ? 'ZTE' : ucfirst($product['post_brand'])) ?></h3> -->
             <h3>
-                <?php if(strtolower($product['post_brand']) === 'zte'){
+                <?php if (strtolower($product['post_brand']) === 'zte') {
                     echo "ZTE";
-                    
-                }elseif(strtolower($product['post_brand']) === 'oppo'){
-                    
+                } elseif (strtolower($product['post_brand']) === 'oppo') {
+
                     echo "OPPO";
-                }elseif(strtolower($product['post_brand']) === 'honor'){
-                    
+                } elseif (strtolower($product['post_brand']) === 'honor') {
+
                     echo "HONOR";
-                }elseif(strtolower($product['post_brand']) === 'vivo'){
-                    
+                } elseif (strtolower($product['post_brand']) === 'vivo') {
+
                     echo "vivo";
-                }elseif(strtolower($product['post_brand']) === 'realme'){
-                    
+                } elseif (strtolower($product['post_brand']) === 'realme') {
+
                     echo "realme";
-                }else{
-                      echo ucfirst($product['post_brand']);
+                } else {
+                    echo ucfirst($product['post_brand']);
                 }  ?>
             </h3>
-            
-                <h2> <?= esc_html($product['device_name']) ?></h2>
+
+            <h2> <?= esc_html($product['device_name']) ?></h2>
 
             <p class="price">RRP RM <?= esc_html(number_format($product['device_rrp'])) ?></p>
-			 <?php if (!empty($product['device_promotion_label'])): ?>
-					<div class="offer-block"><?= esc_html(strtoupper($product['device_promotion_label'])) ?></div>
-				<?php endif; ?>
+            <?php if (!empty($product['device_promotion_label'])): ?>
+                <div class="offer-block"><?= esc_html(strtoupper($product['device_promotion_label'])) ?></div>
+            <?php endif; ?>
             <div class="bottom-section">
 
-            <?php
-				  $lang = get_bloginfo('language');
-					$mth = ($lang == 'ms-MY') ? '/bln' : '/mth';
+                <?php
+                $lang = get_bloginfo('language');
+                $mth = ($lang == 'ms-MY') ? '/bln' : '/mth';
 
-					if (!empty($product['device_features_free'])) {
-						if ($product['device_features_free'] == 1) {
-							echo '<p class="free-tag-bm"><span>Peranti</span><br><b>PERCUMA</b></p>';
-						} else {
-							$device_price = isset($product['device_price_mth']) ? $product['device_price_mth'] : '0';
-							echo '<p class="free-tag">' . (strpos($device_price, '/mth') !== false ? str_replace('/mth', '<sub>/mth</sub>', esc_html($device_price)) : esc_html($device_price)) . '</p>';
-						}
-					} else {
-						$device_price = isset($product['device_price_mth']) ? $product['device_price_mth'] : '0';
-						$device_price_display = ($lang == 'ms-MY') ? str_replace('/mth', '<sub>/bln</sub>', $device_price) : $device_price;
-						
-						// // Check if the device ID is in the specified list
-						// $device_id = isset($product['device_id']) ? $product['device_id'] : 0;
-						// $device_ids_to_change = [0, 13, 6, 14, 3, 8];
-						
-						// if (in_array($device_id, $device_ids_to_change)) {
-						// 	echo '<p class="f-price"><span>Peranti</span><br><b class="f-price-rm">RM</b>' . (strpos($device_price, '/mth') !== false ? str_replace('/mth', '<sub>/mth</sub>', $device_price_display) : $device_price_display) . '</p>';
-						// } else {
-						// 	echo '<p class="f-price"><span>Dari</span><br><b class="f-price-rm">RM</b>' . (strpos($device_price, '/mth') !== false ? str_replace('/mth', '<sub>/mth</sub>', $device_price_display) : $device_price_display) . '</p>';
-						// }
-
+                if (!empty($product['device_features_free'])) {
+                    if ($product['device_features_free'] == 1) {
+                        echo '<p class="free-tag-bm"><span>Peranti</span><br><b>PERCUMA</b></p>';
+                    } else {
                         $device_price = isset($product['device_price_mth']) ? $product['device_price_mth'] : '0';
-                        //$brnd= array('apple','samsung');
-                        if($product['post_promotion'] == "Yes 5G RAHMAH" || $product['device_id']== '30' || $product['device_id']== '24'){
-                            echo '<p class="f-price"><span>Peranti</span><br><b class="f-price-rm">RM</b>' . (strpos($device_price, '/mth') !== false ? str_replace('/mth', '<sub>/mth</sub>', $device_price_display) : $device_price_display) . '</p>';
-                        }else{
-                            echo '<p class="f-price"><span>Dari</span><br><b class="f-price-rm">RM</b>' . (strpos($device_price, '/mth') !== false ? str_replace('/mth', '<sub>/mth</sub>', $device_price_display) : $device_price_display) . '</p>';
-                        }
-					}
+                        echo '<p class="free-tag">' . (strpos($device_price, '/mth') !== false ? str_replace('/mth', '<sub>/mth</sub>', esc_html($device_price)) : esc_html($device_price)) . '</p>';
+                    }
+                } else {
+                    $device_price = isset($product['device_price_mth']) ? $product['device_price_mth'] : '0';
+                    $device_price_display = ($lang == 'ms-MY') ? str_replace('/mth', '<sub>/bln</sub>', $device_price) : $device_price;
 
+                    // // Check if the device ID is in the specified list
+                    // $device_id = isset($product['device_id']) ? $product['device_id'] : 0;
+                    // $device_ids_to_change = [0, 13, 6, 14, 3, 8];
 
-			
-			?>
-                
+                    // if (in_array($device_id, $device_ids_to_change)) {
+                    // 	echo '<p class="f-price"><span>Peranti</span><br><b class="f-price-rm">RM</b>' . (strpos($device_price, '/mth') !== false ? str_replace('/mth', '<sub>/mth</sub>', $device_price_display) : $device_price_display) . '</p>';
+                    // } else {
+                    // 	echo '<p class="f-price"><span>Dari</span><br><b class="f-price-rm">RM</b>' . (strpos($device_price, '/mth') !== false ? str_replace('/mth', '<sub>/mth</sub>', $device_price_display) : $device_price_display) . '</p>';
+                    // }
+
+                    $device_price = isset($product['device_price_mth']) ? $product['device_price_mth'] : '0';
+                    //$brnd= array('apple','samsung');
+                    if ($product['post_promotion'] == "Yes 5G RAHMAH" || $product['device_id'] == '30' || $product['device_id'] == '24') {
+                        echo '<p class="f-price"><span>Peranti</span><br><b class="f-price-rm">RM</b>' . (strpos($device_price, '/mth') !== false ? str_replace('/mth', '<sub>/mth</sub>', $device_price_display) : $device_price_display) . '</p>';
+                    } else {
+                        echo '<p class="f-price"><span>Dari</span><br><b class="f-price-rm">RM</b>' . (strpos($device_price, '/mth') !== false ? str_replace('/mth', '<sub>/mth</sub>', $device_price_display) : $device_price_display) . '</p>';
+                    }
+                }
+
+                ?>
+
 
                 <?php if (isset($product['device_target']) && !empty($product['device_target']) && ($product['device_target'] == 'ywos')) : ?>
                     <p class="panel-btn">
@@ -198,55 +209,69 @@ foreach ($mergedProductData as $product) {
                         </a>
                     </p>
                 <?php else : ?>
-                    <p class="panel-btn">
-                        <a href="<?= $store_url.'/'.$product['device_id'] ?>" class="btn btn-elevate-buyplan btn-getplan" onclick="toggleOverlay()">
+                    <!-- <p class="panel-btn">
+                        <a href="<?= $store_url . '/' . $product['device_id'] ?>" class="btn btn-elevate-buyplan btn-getplan" onclick="toggleOverlay()">
                             DAPATKAn
                         </a>
-                    </p>
-                    <!-- <p class="panel-btn">
-                    <a href="<?= $store_url.'/'.$product['device_id'] ?>" class="btn btn-elevate-buyplan btn-getplan" onclick="toggleOverlay()">
+                    </p> -->
+                    <p class="panel-btn">
+                        <!-- <a href="<?= $store_url . '/' . $product['device_id'] ?>" class="btn btn-elevate-buyplan btn-getplan" onclick="toggleOverlay()">
                         <?= $product['device_id'] == 31 ? 'Pra-pesan' : 'DAPATKAn' ?>
-                    </a>
-                </p> -->
+                    </a> -->
+
+                        <a href="<?= $store_url . '/' . $product['device_id'] ?>"
+                            class="btn btn-elevate-buyplan"
+                            onclick="toggleOverlay()">
+                            <?php
+                            // Check for specific device IDs and set the button text accordingly
+                            if (in_array($product['device_id'], [84, 85, 86, 87])) {
+                                echo 'Pra Tempah';
+                            } else {
+                                echo 'DAPATKAn';
+                            }
+                            ?>
+                        </a>
+                    </p>
+
                 <?php endif; ?>
             </div>
         </div>
     </div>
-    <?php
+<?php
 }
 ?>
 <script src="/wp-content/themes/yes-twentytwentyone/template-parts/ywos/assets/js/ywos.js"></script>
- 
- <script>
- $(document).ready(function() {
-    $("#search").keyup(function() {
-    var searchTerms = $(this).val().toLowerCase().split(/\s+/).filter(term => term.trim() !== ''); // Split search term into individual words and remove empty terms
-    var anyDeviceFound = false;
 
-    $(".storegrid").each(function() {
-        var displayDeviceName = $(this).attr("data-displaydevicename").toLowerCase().replace(/\s+/g, ''); // Remove spaces from the display device name
-        var brand = $(this).attr("data-brand").toLowerCase().replace(/\s+/g, ''); // Remove spaces from the brand
-        var promotion = $(this).attr("data-promotion").toLowerCase().replace(/\s+/g, ''); // Remove spaces from the promotion
-        var plan = $(this).attr("data-plan").toLowerCase().replace(/\s+/g, ''); // Remove spaces from the promotion
-        var promotionlabel = $(this).attr("data-promotionlabel").toLowerCase().replace(/\s+/g, ''); // Remove spaces from the promotion label
-        var combinedSearchString = displayDeviceName + brand + promotion + promotionlabel + plan;
+<script>
+    $(document).ready(function() {
+        $("#search").keyup(function() {
+            var searchTerms = $(this).val().toLowerCase().split(/\s+/).filter(term => term.trim() !== ''); // Split search term into individual words and remove empty terms
+            var anyDeviceFound = false;
 
-        var allTermsPresent = searchTerms.every(term => combinedSearchString.includes(term));
-        if (allTermsPresent) {
-            $(this).removeClass("hide").addClass("show");
-            anyDeviceFound = true;
-        } else {
-            $(this).removeClass("show").addClass("hide");
-        }
+            $(".storegrid").each(function() {
+                var displayDeviceName = $(this).attr("data-displaydevicename").toLowerCase().replace(/\s+/g, ''); // Remove spaces from the display device name
+                var brand = $(this).attr("data-brand").toLowerCase().replace(/\s+/g, ''); // Remove spaces from the brand
+                var promotion = $(this).attr("data-promotion").toLowerCase().replace(/\s+/g, ''); // Remove spaces from the promotion
+                var plan = $(this).attr("data-plan").toLowerCase().replace(/\s+/g, ''); // Remove spaces from the promotion
+                var promotionlabel = $(this).attr("data-promotionlabel").toLowerCase().replace(/\s+/g, ''); // Remove spaces from the promotion label
+                var combinedSearchString = displayDeviceName + brand + promotion + promotionlabel + plan;
+
+                var allTermsPresent = searchTerms.every(term => combinedSearchString.includes(term));
+                if (allTermsPresent) {
+                    $(this).removeClass("hide").addClass("show");
+                    anyDeviceFound = true;
+                } else {
+                    $(this).removeClass("show").addClass("hide");
+                }
+            });
+
+            if (anyDeviceFound) {
+                $("#noResultMessage").hide();
+                $('#scroll-top').show(); // Hide scroll-top div
+            } else {
+                $("#noResultMessage").show();
+                $('#scroll-top').hide(); // Hide scroll-top div
+            }
+        });
     });
-
-    if (anyDeviceFound) {
-        $("#noResultMessage").hide();
-        $('#scroll-top').show(); // Hide scroll-top div
-    } else {
-        $("#noResultMessage").show();
-        $('#scroll-top').hide(); // Hide scroll-top div
-    }
-});
-});
- </script>
+</script>

@@ -1628,7 +1628,7 @@ body.page-scrolled .page-header.sticky-top { filter: drop-shadow(0px 4px 4px rgb
     }
 
     footer.footer .wp-block-columns .widget.widget_nav_menu h2.widgettitle::after {
-        content: url('https://yesmy-dev.azurewebsites.net/wp-content/uploads/2023/05/expand.svg');
+        content: url('https://www.yes.my/wp-content/uploads/2023/05/expand.svg');
     }
 
     footer.footer .wp-block-columns .widget.widget_nav_menu h2.widgettitle.active::after {

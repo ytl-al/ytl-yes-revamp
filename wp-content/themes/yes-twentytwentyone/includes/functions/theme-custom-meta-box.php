@@ -120,7 +120,7 @@ if (is_admin()) {
                     ],
                    
                     [
-                        'type' => 'number',
+                        'type' => 'text',
                         'id'   => $prefix . 'device_price_mth',
                         'name' => 'Device Price Monthly<sup>*</sup>',
                         'placeholder' => 'XX/mth',

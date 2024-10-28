@@ -31,7 +31,7 @@
         <!-- End Google Tag Manager -->
 
         <!-- Facebook Pixel Code -->
-        <script>
+        <!-- <script>
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
             n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -46,7 +46,7 @@
         <noscript>
         <img height="1" width="1" style="display:none" 
             src="https://www.facebook.com/tr?id=255543333392474&ev=PageView&noscript=1"/>
-        </noscript>
+        </noscript> -->
         <!-- End Facebook Pixel Code -->
 
         <!-- Twitter conversion tracking base and event code -->

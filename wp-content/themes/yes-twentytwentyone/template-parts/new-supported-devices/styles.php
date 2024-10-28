@@ -7,15 +7,18 @@
         display: none !important;
     }
 
-    /* .raya-banner{display:none}
+    .raya-banner {
+        display: none
+    }
 
-        .hero-slider-section {
+    .hero-slider-section {
         position: relative;
         overflow: hidden;
         width: 100%;
         height: auto;
         background: #d1d5de
     }
+
     .hero-slider img {
         width: 100%;
         height: 405px;
@@ -23,6 +26,7 @@
         -o-object-fit: cover;
         object-fit: cover;
     }
+
     .hero-slider .slick-slide img {
         width: 100%;
         height: 405px;
@@ -191,219 +195,7 @@
         top: 15%;
         left: 5%;
         z-index: 99;
-    } */
-
-    .hero-slider-section {
-        position: relative;
-        overflow: hidden;
-        width: 100%;
-        height: auto;
-        background: #d1d5de
-    }
-
-    #hero-slider .carousel-item .container {
-        height: 100%;
-    }
-
-    #hero-slider .carousel-item img {
-        width: 100%;
-        height: 405px;
-        /*405*/
-        min-height: 100%;
-        -o-object-fit: cover;
-        object-fit: cover;
-    }
-
-    #hero-slider .carousel-item .inner-content-sec.raya-h-tag {
-        margin-top: 0;
-    }
-
-    #hero-slider .carousel-item article {
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-    }
-
-    #hero-slider .carousel-item .inner-content-sec {
-        margin: 0;
-        padding: 0px 0 0 0%;
-        /* position: absolute;
-    top: 15%;
-    left: 5%;
-    z-index: 99; */
-        width: 53%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-    }
-
-    #hero-slider .carousel-item .inner-content-sec .title-sec {
-        position: relative;
-        display: block;
-        width: 100%;
-        text-align: left;
-    }
-
-    .raya-banner {
-        margin-top: 30px;
-        font-size: 85px !important;
-        line-height: 76px !important;
-    }
-
-    #hero-slider .carousel-item .inner-content-sec .title-sec .infinite-logo {
-        width: 50% !important;
-        height: auto !important;
-    }
-
-    #hero-slider .carousel-item .inner-content-sec .title-sec .xiaomi14t-logo {
-        width: 60% !important;
-        height: auto !important;
-    }
-
-    #hero-slider .carousel-item .inner-content-sec .title-sec img {
-        width: 150px;
-        height: auto !important;
-        margin: 0 0 20px;
-        display: block;
-    }
-
-    #hero-slider .carousel-item .inner-content-sec h1 {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 46px;
-        line-height: 54px;
-        font-weight: 800;
-        color: #ffffff;
-        letter-spacing: -0.02em;
-        margin-bottom: 15px;
-        font-display: swap;
-    }
-
-    #hero-slider .carousel-item .inner-content-sec p {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 600;
-        font-size: 24px;
-        line-height: 32px;
-        color: #ffffff;
-        letter-spacing: -0.02em;
-        font-display: swap;
-    }
-
-    #hero-slider .carousel-item .inner-content-sec p span {
-        font-weight: 700;
-    }
-
-    #hero-slider .carousel-item .inner-content-sec p b {
-        font-weight: 700;
-        font-size: 40px;
-    }
-
-    #hero-slider .carousel-item .inner-content-sec .btn-sec {
-        margin: 20px 0 0;
-        padding: 0;
-    }
-
-    #hero-slider .carousel-item .inner-content-sec .btn-sec img {
-        width: auto;
-        height: 60px;
-    }
-
-    /* #hero-slider .carousel-item .inner-content-sec .btn-sec .pink-btn {
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    background-color: #FF0084;
-    border: 1px solid #FF0084;
-}
-
-#hero-slider .carousel-item .inner-content-sec .btn-sec .blue-btn {
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    background-color: #2F3BF5;
-    border: 1px solid #2F3BF5;
-} */
-
-    #hero-slider .carousel-item .inner-content-sec .pricing-2 {
-        width: 190px;
-        display: flex;
-        margin-top: 15px;
-    }
-
-    #hero-slider .carousel-item .inner-content-sec .pricing-2 h4 {
-        color: #FFF;
-        font-weight: 800;
-        font-size: 48px;
-        line-height: 44px;
-        padding-top: 0px;
-        letter-spacing: -0.02em;
-        position: relative;
-        margin-left: 48px;
-    }
-
-    #hero-slider .carousel-item .inner-content-sec .pricing-2 h4 span {
-        font-weight: 500;
-        line-height: 18px;
-        font-size: 13px;
-        letter-spacing: 0;
-        text-transform: uppercase;
-    }
-
-    #hero-slider .carousel-item .inner-content-sec .pricing-2 h4 span b {
-        font-size: 24px;
-        font-weight: 600;
-    }
-
-    #hero-slider .carousel-item .inner-content-sec .pricing-2 h4 sup {
-        font-size: 24px;
-        line-height: 24px;
-        display: flex;
-        height: 40px;
-        position: absolute;
-        left: -45px;
-        top: 0px;
-    }
-
-    #hero-slider .carousel-item .inner-content-sec .pricing-2 p {
-        color: #FFF;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 24px;
-        letter-spacing: -0.02em;
-        text-transform: none;
-        margin: -15px 0;
-        padding: 0;
-    }
-
-    #hero-slider .carousel-item .inner-content-sec .pricing-2 .month-sec {
-        color: #FFF;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 16px;
-        letter-spacing: 0;
-        text-transform: none;
-        text-align: right;
-        padding: 0;
-        margin: 0;
-    }
-
-    #hero-slider .carousel-indicators [data-bs-target] {
-        height: 10px !important;
-        width: 10px !important;
-        border-radius: 100%;
-        border-top: 0;
-        border-bottom: 0;
-        background-color: #fff;
-        margin-right: 5px;
-        margin-left: 5px;
-        opacity: .7;
-    }
-
-    #hero-slider .carousel-indicators .active {
-        background: #ff0084;
-    }
+    }    
 
     .offerline-section {
         background-color: #FF0084;
@@ -586,14 +378,23 @@
         transition-duration: 1.5s !important;
     }
 
+    [data-aos^=fade][data-aos^=fade].aos-animate {
+    opacity: 1;
+    transform: translateZ(0);
+}
+    
+    [data-aos=fade-right] {
+    animation-delay: 1s;
+    transform: translate(-25px);
+}
     #device-list-section .layer-planDevice {
         background-color: #FFF;
         border-radius: 15px;
         box-shadow: 0 7px 25px 6px rgba(0, 0, 0, .1);
         -webkit-box-shadow: 0 7px 25px 6px rgba(0, 0, 0, .1);
-        height: 390px;
+        height: 320px;
         margin-top: 4px;
-        padding: 40px 25px 20px;
+        padding: 20px 20px 20px;
         border-width: 0;
         position: relative;
         transition: all 1s;
@@ -601,7 +402,7 @@
     }
 
     #device-list-section .layer-planDevice:before {
-        border: 3px solid #FF0084;
+        border: 0px solid #FF0084;
         border-radius: 15px;
         content: "";
         height: 100%;
@@ -666,22 +467,22 @@
 
     .layer-planDevice h3 {
         font-family: 'Montserrat';
-        font-size: 14px;
-        line-height: 21px;
+        font-size: 16px;
+        line-height: 24px;
         font-weight: 500;
-        letter-spacing: 0em;
-        margin: 0;
+        letter-spacing: -0.011em;
+        margin: 0 0 5px;
         text-align: center;
     }
 
     .layer-planDevice h2 {
         font-family: 'Montserrat';
         font-size: 20px;
-        line-height: 28px;
+        line-height: 32px;
         font-weight: 700;
-        letter-spacing: 0em;
+        letter-spacing: -0.011em;
         text-align: center;
-        /* margin-bottom: 10px; */
+        margin-bottom: 5px;
         position: relative;
     }
 
@@ -693,11 +494,11 @@
 
     .layer-planDevice p.price {
         font-family: 'Montserrat';
-        font-size: 14px;
-        line-height: 21px;
-        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 400;
         letter-spacing: 0em;
-        margin: 0 0 10px;
+        margin: 0 0 0px;
         text-align: center;
         color: #888888;
     }
@@ -871,22 +672,22 @@
         padding: 18px 10px;
         text-transform: uppercase;
         font-family: 'Montserrat';
-        font-size: 15px;
+        font-size: 16px;
         line-height: 16px;
     }
 
     /* .layer-planDevice p.panel-btn span.span-oos {
-        background-color: transparent;
-        color: #333;
-        cursor: text;
-        display: inline-block;
-        font-style: italic;
-        font-weight: 800;
-        letter-spacing: 0.1em;
-        line-height: 1.5;
-        padding: 9px 40px;
-        text-transform: uppercase;
-    } */
+            background-color: transparent;
+            color: #333;
+            cursor: text;
+            display: inline-block;
+            font-style: italic;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            line-height: 1.5;
+            padding: 9px 40px;
+            text-transform: uppercase;
+        } */
 
 
     .panel-colors {
@@ -1048,420 +849,133 @@
         font-size: 20px !important;
     }
 
+    #faq-section {
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0px;
+    background: #fff;
+    margin-top: 0px !important;
+}
 
-    @media only screen and (min-device-width: 1600px) and (max-device-width: 2880px) {
-        /* #hero-slider .carousel-item img {
-            width: 100%;
-            height: 620px;
-            min-height: 100%;
-            -o-object-fit: cover;
-            object-fit: cover;
-        } */
+#faq-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 39px;
+    font-weight: 800;
+    line-height: 47px;
+    letter-spacing: -0.02em;
+    text-align: center;
+    font-display: swap;
+}
 
-        #hero-slider .carousel-item .inner-content-sec.raya-h-tag {
-            margin-top: 0;
+#faq-section .accordion-button {
+    border: none;
+    box-shadow: unset;
+    border-radius: 0;
+    font-size: 16px;
+    line-height: 25px;
+    color: #000;
+    font-weight: 700;
+    font-family: 'Open Sans', sans-serif;
+    border-bottom: 1px solid #000;
+    font-display: swap;
+}
+
+#faq-section .accordion-button::after {
+    opacity: 1;
+}
+
+#faq-section .accordion-button::after {
+    background-image: none;
+    background: url(/wp-content/uploads/2024/02/icon-open.webp) no-repeat center center / contain;
+}
+
+#faq-section .accordion-button:not(.collapsed)::after {
+    background-image: none;
+    background: url(/wp-content/uploads/2024/02/icon-hide.webp) no-repeat center center / contain !important;
+
+}
+
+#faq-section .accordion-button:focus {
+    box-shadow: unset;
+}
+
+#faq-section .accordion-body {
+    font-size: 14px;
+    line-height: 26px;
+}
+
+#faq-section .accordion-body h4 {
+    font-size: 16px;
+    line-height: 32px;
+    font-weight: 800;
+}
+
+#faq-section .accordion-body ul {
+    margin: 15px 0 0 15px;
+    padding: 0;
+}
+
+#faq-section .accordion-body li {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 26px;
+}
+
+#faq-section .accordion-body ol {
+    padding-left: 0;
+}
+
+#faq-section .accordion-body p {
+    font-size: 14px;
+    line-height: 26px;
+}
+
+#faq-section .viewall-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 19px;
+    letter-spacing: 0.1em;
+    text-align: left;
+    text-decoration: none;
+    color: #2F3BF5;
+    font-display: swap;
+}
+
+#faq-section .viewall-btn svg {
+    color: #FF0084
+}
+
+    @media only screen and (min-device-width: 1600px) {
+        .hero-banner {
+            /* background: url('/wp-content/uploads/2023/09/ookla-hero-banner-large.png'); */
+            padding: 10% 0 10% !important;
+            /* height: unset; */
         }
 
-        #hero-slider .carousel-item .inner-content-sec {
-            margin: 0;
-            padding: 0px 0 0 0%;
-            /* position: absolute;
-            top: 15%;
-            left: 5%;
-            z-index: 99; */
-            width: 53%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .title-sec {
-            position: relative;
-            display: block;
-            width: 100%;
-            text-align: left;
-        }
-
-        .raya-banner {
-            margin-top: 30px;
-            font-size: 85px !important;
-            line-height: 76px !important;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .title-sec .cimb-bank-logo {
-            width: auto !important;
-            height: 60px !important;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .title-sec img {
-            width: 150px;
-            height: auto !important;
-            margin: 0 0 20px;
-            display: block;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 56px;
-            line-height: 62px;
-            font-weight: 800;
-            color: #ffffff;
-            letter-spacing: -0.02em;
-            margin-bottom: 15px;
-            font-display: swap;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec p {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 30px;
-            line-height: 36px;
-            color: #ffffff;
-            letter-spacing: -0.02em;
-            font-display: swap;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .btn-sec {
-            margin: 30px 0 0;
-            padding: 0;
-        }
-
-        .pink-btn {
-            font-size: 24px !important;
-        }
-
-        .blue-btn {
-            font-size: 24px !important;
-        }
-
-        #faq-section {
-            margin-top: 330px !important;
-        }
-    }
-
-    @media only screen and (max-device-width: 992px) {
-
-        #hero-slider .carousel-item img {
-            width: 100%;
-            height: auto;
-            min-height: 100%;
-            -o-object-fit: cover;
-            object-fit: cover;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec.raya-h-tag {
-            margin-top: 0;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec {
-            margin: 35px auto;
-            padding: 0px 0 0 0%;
-            /* position: absolute;
-            top: 15%;
-            left: 5%;
-            z-index: 99; */
-            width: 95%;
-            height: auto;
-            display: block;
-            align-items: center;
-            text-align: center;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .title-sec {
-            position: relative;
-            display: block;
-            width: 100%;
-            text-align: center;
-        }
-
-        .raya-banner {
-            margin-top: 30px;
-            font-size: 85px !important;
-            line-height: 76px !important;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .title-sec .cimb-bank-logo {
-            width: auto !important;
-            height: 60px !important;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .title-sec img {
-            width: 150px;
-            height: auto !important;
-            margin: 0 auto 20px;
-            display: block;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 46px;
-            line-height: 54px;
-            font-weight: 800;
-            color: #ffffff;
-            letter-spacing: -0.02em;
-            margin-bottom: 15px;
-            font-display: swap;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec p {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 30px;
-            line-height: 36px;
-            color: #ffffff;
-            letter-spacing: -0.02em;
-            font-display: swap;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .btn-sec {
-            margin: 30px 0 0;
-            padding: 0;
-        }
-
-        .carousel-indicators {
-            margin-bottom: 1rem;
-        }
-
-    }
-
-    @media only screen and (min-device-width: 768px) and (max-device-width: 990px) and (-webkit-min-device-pixel-ratio: 2) {
-
-        #hero-slider .carousel-item .inner-content-sec {
-            margin: 35px auto;
-            padding: 0;
-            /* position: absolute;
-            top: 0%;
-            left: 2%; */
-            width: 95%;
-            display: block;
-            height: unset;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec.raya-h-tag {
-            margin-top: 70px;
-        }
-
-        #hero-slider .carousel-item img {
-            height: auto;
-            -o-object-fit: unset;
-            object-fit: unset;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .title-sec {
-            position: relative;
-            display: block;
-            width: 95%
-        }
-
-        .raya-banner {
-            margin-top: 30px !important;
-            font-size: 75px !important;
-            line-height: 64px !important;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .title-sec .infinite-logo {
-            width: 30% !important;
-            height: auto !important;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .title-sec .xiaomi14t-logo {
-            width: 55% !important;
-            height: auto !important;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .title-sec img {
-            width: 150px;
-            margin: 0 auto 15px;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec h1 {
-            font-size: 48px;
-            line-height: 56px;
-            margin-top: 0px;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec p {
-            font-size: 24px;
-            line-height: 30px;
-            text-align: center;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec p br {
-            display: unset;
-        }
-
-
-        #hero-slider .carousel-item .inner-content-sec .btn-sec {
-            margin: 20px auto;
-            padding: 0;
-            text-align: center;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .btn-sec .pink-btn,
-        #hero-slider .carousel-item .inner-content-sec .btn-sec .blue-btn {
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 18px;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .btn-sec img {
-            width: auto !important;
-            height: 35px !important;
-            margin: 0px auto;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .pricing-2 {
-            width: auto;
-            display: flex;
-            margin-top: 15px;
-            margin: 0 auto;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .pricing-2 h4 {
-            font-weight: 800;
-            font-size: 48px;
-            line-height: 31px;
-            padding-top: 5px;
-            position: relative;
-            margin-left: 48px;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .pricing-2 h4 sup {
-            font-size: 24px;
-            line-height: 24px;
-            height: 40px;
-            left: -45px;
-            top: 0px;
-        }
-
-        .carousel-indicators {
-            margin-bottom: 0.5rem;
-        }
-    }
-
-    @media only screen and (min-device-width: 280px) and (max-device-width: 767px) and (-webkit-min-device-pixel-ratio: 2) {
-
-
-        #hero-slider .carousel-item .inner-content-sec {
-            margin: 20px auto;
-            padding: 0;
-            /* position: absolute;
-            top: 0%;
-            left: 2%; */
-            width: 95%;
-            display: block;
-            height: unset;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec.raya-h-tag {
-            margin-top: 70px;
-        }
-
-        #hero-slider .carousel-item img {
-            height: auto;
-            -o-object-fit: unset;
-            object-fit: unset;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .title-sec {
-            position: relative;
-            display: block;
-            width: 95%
-        }
-
-        .raya-banner {
-            margin-top: 20px !important;
-            font-size: 50px !important;
-            line-height: 64px !important;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .title-sec .infinite-logo {
-            width: 30% !important;
-            height: auto !important;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .title-sec .xiaomi14t-logo {
-            width: 50% !important;
-            height: auto !important;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .title-sec img {
-            width: 100px;
-            margin: 0 auto 10px;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec h1 {
-            font-size: 24px;
-            line-height: 28px;
-            margin-top: 0px;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec p {
-            font-size: 14px;
-            line-height: 18px;
-            text-align: center;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec p br {
-            display: unset;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec h1 br {
-            display: none;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .btn-sec {
-            margin: 10px auto;
-            padding: 0;
-            text-align: center;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .btn-sec .pink-btn,
-        #hero-slider .carousel-item .inner-content-sec .btn-sec .blue-btn {
-            font-size: 12px;
-            font-weight: 700;
-            line-height: 16px;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .btn-sec img {
-            width: auto !important;
-            height: 35px !important;
-            margin: 0px auto;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .pricing-2 {
-            width: auto;
-            display: flex;
-            margin-top: 15px;
-            margin: 0 auto;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .pricing-2 h4 {
-            font-weight: 800;
-            font-size: 40px;
-            line-height: 31px;
-            padding-top: 5px;
-            position: relative;
-            margin-left: 48px;
-        }
-
-        #hero-slider .carousel-item .inner-content-sec .pricing-2 h4 sup {
-            font-size: 24px;
-            line-height: 24px;
-            height: 40px;
-            left: -45px;
-            top: 0px;
-        }
     }
 
     @media only screen and (max-width: 768px) {
-        /* .hero-banner {
+        .accordion-button{
+            padding: 1rem;
+        }
+         #bar-fixed.stickIt {
+            top: 20px !important;
+            width: 100% !important;
+        }
+        #bar-fixed{
+            position: relative;
+        }
+        .cancel-btn{
+            position: absolute;
+            top:0px !important;
+            right:0px !important;
+        }
+        .hero-banner {
             background: url('/wp-content/uploads/2024/02/device-page-hero-banner-mob.png');
             padding: 30px 0 30px;
+            /* padding-top: 100%; */
             height: 400px;
         }
 
@@ -1478,7 +992,7 @@
             -o-object-fit: unset;
             object-fit: unset;
         }
-        
+
         .hero-slider .slick-slide img {
             width: auto !important;
             height: 100%;
@@ -1491,9 +1005,10 @@
             display: block;
             width: 95%
         }
-        .hero-slider .inner-content-sec .title-sec img {       
-            width: 100px !important; 
-            margin: 0 0 10px !important;        
+
+        .hero-slider .inner-content-sec .title-sec img {
+            width: 100px !important;
+            margin: 0 0 10px !important;
         }
 
         .hero-slider .inner-content-sec h1 {
@@ -1514,13 +1029,18 @@
             display: unset;
         }
 
+        /* .hero-slider .inner-content-sec h1 br {
+        display: none;
+    } */
+
         .hero-slider .inner-content-sec .btn-sec {
             margin: 20px auto;
             padding: 0;
             text-align: center;
         }
 
-        .hero-slider .inner-content-sec .btn-sec .pink-btn,  .hero-slider .inner-content-sec .btn-sec .blue-btn {
+        .hero-slider .inner-content-sec .btn-sec .pink-btn,
+        .hero-slider .inner-content-sec .btn-sec .blue-btn {
             font-size: 16px;
             font-weight: 700;
             line-height: 18px;
@@ -1548,7 +1068,7 @@
             height: 40px;
             left: -45px;
             top: 0px;
-        }    
+        }
 
         .hero-slider .slick-dots {
             bottom: 10px;
@@ -1570,7 +1090,7 @@
 
         .slick-dots li button:before {
             font-size: 8px;
-        } */
+        }
 
         .offerline-section {
             padding: 10px 0px;
@@ -1610,7 +1130,7 @@
         }
 
         #device-list-section .layer-planDevice {
-            height: 360px;
+            height: auto;
             padding: 30px;
             margin: 0 15px;
         }
@@ -1618,6 +1138,50 @@
         /* .row {
             display: unset;
         } */
+
+        #faq-section {
+        padding: 30px 0px !important;
+        margin-top: 0px !important;
+    }
+
+    #faq-section h2 {
+        font-size: 32px;
+        line-height: 36px;
+    }
+
+    #faq-section .accordion-button {
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 700;
+    }
+
+    #faq-section .accordion-body h4 {
+        font-size: 13px;
+        line-height: 20px;
+        font-weight: 800;
+    }
+
+    #faq-section .accordion-body ul {
+        margin: 15px 0 0 15px;
+        padding: 0;
+    }
+
+    #faq-section .accordion-body li {
+        margin: 0;
+        padding: 0 0 5px;
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    #faq-section .accordion-body p {
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    #faq-section .viewall-btn {
+        font-size: 16px;
+    }
+
     }
 
     #filter-section {
@@ -1635,20 +1199,22 @@
 
 
     @media only screen and (min-device-width: 280px) and (max-device-width: 640px) and (-webkit-min-device-pixel-ratio: 2) {
-        /* .hero-slider .inner-content-sec {
+        .hero-slider .inner-content-sec {
             padding: 15px 5% 0 5%;
             position: absolute;
             top: 0%;
             left: 0%;
             width: 100%;
         }
+
         .hero-slider img {
             height: auto;
             -o-object-fit: unset;
             object-fit: unset;
         }
+
         .hero-slider .slick-slide img {
-            width:100% !important;
+            width: 100% !important;
             height: auto;
             -o-object-fit: unset;
             object-fit: unset;
@@ -1659,9 +1225,10 @@
             display: block;
             width: 100%
         }
-        .hero-slider .inner-content-sec .title-sec img {       
-            width: 100px !important; 
-            margin: 0 0 10px !important;        
+
+        .hero-slider .inner-content-sec .title-sec img {
+            width: 100px !important;
+            margin: 0 0 10px !important;
         }
 
         .hero-slider .inner-content-sec h1 {
@@ -1692,7 +1259,8 @@
             text-align: center;
         }
 
-        .hero-slider .inner-content-sec .btn-sec .pink-btn,  .hero-slider .inner-content-sec .btn-sec .blue-btn {
+        .hero-slider .inner-content-sec .btn-sec .pink-btn,
+        .hero-slider .inner-content-sec .btn-sec .blue-btn {
             font-size: 12px;
             font-weight: 700;
             line-height: 16px;
@@ -1721,7 +1289,10 @@
             left: -45px;
             top: 0px;
         }
-        .raya-banner{display:block}
+
+        .raya-banner {
+            display: block
+        }
 
         .hero-slider .slick-dots {
             bottom: 10px;
@@ -1740,7 +1311,7 @@
 
         .hero-slider.slick-dotted.slick-slider {
             margin-bottom: 0px;
-        } */
+        }
 
         .offerline-section {
             padding: 10px 0px;
@@ -1834,9 +1405,25 @@
             box-shadow: 0 7px 25px 6px rgba(0, 0, 0, .25);
         }
 
+        .cap-search-box-main {
+            padding: 20px 0px
+        }
+
+        .cap-search-box span {
+            font-size: 20px;
+        }
+
         .filter-accordion {
             position: relative;
             z-index: 1000;
+        }
+        .accordion-body{margin-left: 10px;}
+        #bar-fixed.stickIt {
+            top: 20px !important;
+            width: 100% !important;
+        }
+        #bar-fixed{
+            position: relative;
         }
 
         .cancel-btn {
@@ -1866,6 +1453,12 @@
             padding: 1rem 0rem;
             font-size: 18px;
             line-height: 20px;
+        }
+        .accordion-body label{
+        padding-left: 5px;
+        }
+        .filter-accordion ul li label{
+            padding-left: 5px;
         }
 
         .filter-accordion ul li {
@@ -1908,7 +1501,7 @@
         }
 
         #device-list-section .layer-planDevice {
-            height: 360px;
+            height: auto;
             padding: 30px;
             margin: 0 15px;
         }
@@ -1928,6 +1521,49 @@
         .bottom-section .free-tag b {
             font-size: 24px;
         }
+
+        #faq-section {
+        padding: 30px 0px !important;
+        margin-top: 0px !important;
+    }
+
+    #faq-section h2 {
+        font-size: 32px;
+        line-height: 36px;
+    }
+
+    #faq-section .accordion-button {
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 700;
+    }
+
+    #faq-section .accordion-body h4 {
+        font-size: 13px;
+        line-height: 20px;
+        font-weight: 800;
+    }
+
+    #faq-section .accordion-body ul {
+        margin: 15px 0 0 15px;
+        padding: 0;
+    }
+
+    #faq-section .accordion-body li {
+        margin: 0;
+        padding: 0 0 5px;
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    #faq-section .accordion-body p {
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    #faq-section .viewall-btn {
+        font-size: 16px;
+    }
     }
 
     .phone-box {
@@ -1988,6 +1624,53 @@
         font-weight: 400;
         line-height: 150%;
     }
+
+.load_more_btn{
+    border: 1px solid #888888;
+    background: transparent;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 700;
+    line-height: 26px;
+    text-align: center;
+    color: #888888;
+    height: 50px;
+    width: 300px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    transition: all .4s ease;
+}
+
+.load_more_btn:hover{
+    transition: all .4s ease-in-out;
+    color: #FF0084;
+    letter-spacing: 0.5px !important;
+    border: 1px solid #FF0084;
+}
+
+.load_more_btn:focus{
+    box-shadow:none;
+}
+
+
+#bar-fixed.stickIt {
+  position: sticky;
+  top: 100px;
+  width: 100%;
+}
+
+.brand-h{
+    height: 350px;
+    overflow: hidden;
+    /* overflow-x: hidden; */
+}
+.brand-h:hover {
+    overflow-y: scroll;
+}
+.form-check-input:checked[type=radio] {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e") !important;
+}
+
 
     /* store-device-css-end */
 </style>

@@ -1155,7 +1155,7 @@
                             var data = response.data;
                             self.orderResponse = data;
                             self.initXpay();
-							self.sendAnalytics('payment-info');
+							// self.sendAnalytics('payment-info');
                         })
                         .catch((error) => {
                             var response = error.response;
@@ -1237,13 +1237,13 @@
                     ywos.lsData.meta.orderResponse = self.orderResponse;
                     ywos.lsData.meta.paymentResponse = self.paymentResponse;
                     ywos.updateYWOSLSData();
-					if(paymentStatus==1){
-                        paymentSuccess = true;
-                        self.sendAnalytics('payment-info-end');
-                    }else{
-                        paymentSuccess = false;
-                        self.sendAnalytics('payment-info-end');
-                    }
+					// if(paymentStatus==1){
+                    //     // paymentSuccess = true;
+                    //     // self.sendAnalytics('payment-info-end');
+                    // }else{
+                    //     // paymentSuccess = false;
+                    //     // self.sendAnalytics('payment-info-end');
+                    // }
                     setTimeout(function() {
                         ywos.redirectToPage('thank-you?status=' + paymentStatus);
                     }, 2000);
@@ -1419,8 +1419,6 @@
                     let successData = {};
                     var pushData = {};
                     let failureData = {};
-                    console.log('payment');
-                    console.log(eventType);
                     switch (eventType) {
                         case 'purchase':
                             pushData = {
@@ -1449,27 +1447,26 @@
                             }
                             break;
 
-                        case 'payment-info':
-                            if (planName !== null && planName !== undefined) {
-                                pushData = {
-                                    'Payment Type': self.paymentInfo.paymentMethod,
-                                    'Total Payment Amount': self.orderSummary.due.total
-                                }; 
-                            }
-                            break;
-                        case 'payment-info-end':
-                              if (planName !== null && planName !== undefined) {
-                                   if (paymentSuccess) {
-                                       pushData['Success'] = true;
-                                       successData = Object.assign(successData, pushData);
-                                   } else {
-                                       pushData['Failure'] = true; // Store 0 for failure
-                                       failureData = Object.assign(failureData, pushData);
-                                   }
-                               }
-                         break;
+                        // case 'payment-info':
+                        //     if (planName !== null && planName !== undefined) {
+                        //         pushData = {
+                        //             'Payment Type': self.paymentInfo.paymentMethod,
+                        //             'Total Payment Amount': self.orderSummary.due.total
+                        //         }; 
+                        //     }
+                        //     break;
+                        // case 'payment-info-end':
+                        //       if (planName !== null && planName !== undefined) {
+                        //            if (paymentSuccess) {
+                        //                pushData['Success'] = true;
+                        //                successData = Object.assign(successData, pushData);
+                        //            } else {
+                        //                pushData['Failure'] = true; // Store 0 for failure
+                        //                failureData = Object.assign(failureData, pushData);
+                        //            }
+                        //        }
+                        //  break;
                     }
-                        console.log(pushData);
                     pushAnalytics(eventType, pushData, planType, planName); 
                 },
 				

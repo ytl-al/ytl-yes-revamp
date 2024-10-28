@@ -2,134 +2,233 @@
 
 <!-- Slider Start -->
 <section class="hero-slider-section">
-    <div class="hero-slider slider">
+    <div id="hero-slider" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true" data-bs-interval="true">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#hero-slider" data-bs-slide-to="0" class="active" aria-current="true"
+                aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#hero-slider" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#hero-slider" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#hero-slider" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#hero-slider" data-bs-slide-to="4" aria-label="Slide 5"></button>
 
-    <!-- <div>
- <img src="/wp-content/uploads/2024/05/lightningspeed-honorx7b-web-bm-scaled.webp" class="w-100 d-none d-lg-block" alt="...">
- <img src="/wp-content/uploads/2024/05/lightningspeed-honorx7b-mobile-bm.webp" class="w-100 d-block d-md-block d-lg-none" alt="...">           
-</div> -->
-
-<div>  
-            <img src="/wp-content/uploads/2024/07/4phones-desktopbanner-bm-scaled.webp" class="w-100 d-none d-lg-block"
-                alt="...">
-            <img src="/wp-content/uploads/2024/07/4phones-mob-banner-bm.webp"
-                class="w-100 d-block d-md-block d-lg-none" alt="...">
-
-            <div class="inner-content-sec">
-            <div class="title-sec">
-                <img decoding="async" src="/wp-content/uploads/2024/07/yes-infinite-logo.webp" style="margin:0 0 15px; width:150px" alt="...">
-                
-            </div>
-            <h1 style=" color:#000 !important">Dapatkan<br>
-            Telefon 5G Baru!</h1>
-                <div class="btn-sec d-flex align-items-center">
-                    <div class="pricing-2" style="">
-                        <h4 class="d-block" style="color:#000 !important">
-                            <sup><span>Dari<br><b>RM</b></span></sup>58<span class="month-sec" style="color:#000 !important"> / bln</span>
-                        </h4>
-                    </div>
-                </div>
-                <!-- <div class="btn-sec" style="text-align: left;">
-                    <a href="/promo/pakej-super-jimat/" class="btn pink-btn">Buy Now</a>
-                </div> -->
-            </div>
-</div>
-
-    
-    <div class="slick-slide"> 
-    <img src="/wp-content/uploads/2024/07/superjimat-desktopbanner-p35-scaled.webp" class="w-100 d-none d-lg-block" alt="...">
-    <img src="/wp-content/uploads/2024/07/superjimat-mobilebanner-p35.webp" class="w-100 d-block d-md-block d-lg-none" alt="...">
-
-            <div class="inner-content-sec">
-                <h1 style="">Pelan 5G dengan<br> simpanan BESAR!</h1>
-                <div class="btn-sec">
-                    <div class="pricing-2" style="">
-                        <h4 class="d-block">
-                            <sup><span>Dari<br><b>RM</b></span></sup>35<span class="month-sec"> / bln</span>
-                        </h4>
-                    </div>
-                </div>
-                <!-- <div class="btn-sec" style="text-align: left;">
-                    <a href="/ms/promo/pakej-super-jimat/" class="btn pink-btn">Buy Now</a>
-                </div> -->
-            </div>
         </div>
 
-<!-- <div class="slick-slide">    
-        <img src="/wp-content/uploads/2024/04/raya-infintephonelaunch-march-desktop-scaled.webp" width="3841" height="810"
-            class="w-100 d-none d-lg-block" alt="...">
-        <img src="/wp-content/uploads/2024/04/raya-infintephonelaunch-march-mobile.webp" width="750" height="700"
-            class="w-100 d-block d-md-block d-lg-none" alt="...">            
-        <div class="inner-content-sec">
-            <div class="title-sec">
-                <img decoding="async" src="/wp-content/uploads/2024/03/infinite-plus-icon.webp" style="margin:0 0 15px; width:150px" alt="...">
-                <h1 style="color: #ffffff;">Raikan Raya dengan Telefon 5G!</h1>
-            </div>
-            <div class="btn-sec d-flex align-items-center">
-                <div class="pricing-2 mt-0 mt-lg-0 align-items-center">
-                    <div class="mt-0">
-                        <h4 class="d-block">
-                            <sup><span>From<br><b>RM</b></span></sup>58<span class="month-sec">/bln</span>
-                        </h4>
+        <div class="carousel-inner">
+
+            <!--<div class="carousel-item active" data-bs-interval="5000">
+        <img src="/wp-content/uploads/2024/08/web-Merdeka-Promo-BM-scaled.webp" class="w-100 d-none d-lg-block" alt="...">
+        <img src="/wp-content/uploads/2024/08/mob-Merdeka-Promo-BM.webp"
+            class="w-100 d-block d-md-block d-lg-none" alt="...">
+
+        <article>
+            <div class="container">
+                <div class="inner-content-sec">
+                    <div>
+                        <p style="color:#fff">23 Ogos - 6 September</p>
+                        <h1 style="color:#fff">Berpeluang<br>
+                            MEMENANGI<br>
+                            vivo V40 baharu!​</h1>
+                        <div class="btn-sec">
+                            <a href="/ms/promo/merdeka-promo/" class="btn blue-btn" onclick="toggleOverlay()">
+                                Sertai Sekarang</a>
+                        </div>
                     </div>
                 </div>
             </div>
+        </article>
+    </div>-->
+
+            <div class="carousel-item active" data-bs-interval="5000">
+                <img src="/wp-content/uploads/2024/10/honor200smart-webbanner-desktop.webp" class="w-100 d-none d-lg-block"
+                    alt="...">
+                <img src="/wp-content/uploads/2024/10/honor200smart-webbanner-mobile.webp"
+                    class="w-100 d-block d-md-block d-lg-none" alt="...">
+                <article>
+                    <div class="container">
+                        <div class="inner-content-sec">
+                            <div>
+                                <div class="title-sec">
+                                    <img decoding="async" src="/wp-content/uploads/2024/07/yes-infinite-logo.webp" alt="...">
+                                    <h1 style="color:#000 !important">Telefon 5G
+                                        PERCUMA</h1>
+                                </div>
+
+                                <div class="btn-sec d-flex align-items-center">
+                                    <div class="pricing-2 align-items-center">
+                                        <h4 class="d-block" style="color:#000 !important">
+                                            <sup><span>DARI<br><b>RM</b></span></sup>58<span class="month-sec" style="color:#000 !important"> /BLN</span>
+                                        </h4>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="carousel-item" data-bs-interval="5000">
+                <img src="/wp-content/uploads/2024/09/xiaomi14t-desktop-bm-n.webp" class="w-100 d-none d-lg-block"
+                    alt="...">
+                <img src="/wp-content/uploads/2024/09/xiaomi14t-mob-bm-n.webp"
+                    class="w-100 d-block d-md-block d-lg-none" alt="...">
+                <article>
+                    <div class="container">
+                        <div class="inner-content-sec">
+                            <div>
+                                <div class="title-sec">
+                                    <img decoding="async" src="/wp-content/uploads/2024/07/yes-infinite-logo.webp" alt="..." class="infinite-logo">
+                                    <p class="mt-3">
+                                        <img decoding="async" src="/wp-content/uploads/2024/09/xiaomi14t-logo.png" alt="..." class="xiaomi14t-logo">
+                                    </p>
+                                    <h1 style="color:#000 !important">Gambar benar,<br>
+                                        malam bersinar</h1>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="carousel-item" data-bs-interval="5000">
+                <img src="/wp-content/uploads/2024/09/realme-honor-magic-desktop-bm.webp" class="w-100 d-none d-lg-block"
+                    alt="...">
+                <img src="/wp-content/uploads/2024/09/realme-honor-magic-mob-bm.webp"
+                    class="w-100 d-block d-md-block d-lg-none" alt="...">
+                <article>
+                    <div class="container">
+                        <div class="inner-content-sec">
+                            <div>
+                                <div class="title-sec">
+                                    <img decoding="async" src="/wp-content/uploads/2024/07/yes-infinite-logo.webp" alt="...">
+                                    <p style="color:#000 !important" class="mt-4">
+                                        Beli Telefon 5G dan dapatkan
+                                    </p>
+                                    <h1 style="color:#000 !important">Hadiah Premium<br> <span style="color:#FF0084 !important">PERCUMA</span></h1>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="carousel-item" data-bs-interval="5000">
+                <img src="/wp-content/uploads/2024/08/july26phonelaunch-desktopbanner-bm-scaled.webp" class="w-100 d-none d-lg-block"
+                    alt="...">
+                <img src="/wp-content/uploads/2024/08/july26phonelaunch-mobilebanner-bm.webp"
+                    class="w-100 d-block d-md-block d-lg-none" alt="...">
+                <article>
+                    <div class="container">
+                        <div class="inner-content-sec">
+                            <div>
+                                <div class="title-sec">
+                                    <img decoding="async" src="/wp-content/uploads/2024/07/yes-infinite-logo.webp" alt="...">
+                                    <h1 style="color:#000 !important">Dapatkan<br>
+                                        Telefon 5G Baru!</h1>
+                                </div>
+
+                                <div class="btn-sec d-flex align-items-center">
+                                    <div class="pricing-2 align-items-center">
+                                        <h4 class="d-block" style="color:#000 !important">
+                                            <sup><span>Dari<br><b>RM</b></span></sup>58<span class="month-sec" style="color:#000 !important"> / bln</span>
+                                        </h4>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="carousel-item" data-bs-interval="5000">
+                <img src="/wp-content/uploads/2024/09/superjimat-power35-desktopbanner-scaled.webp" class="w-100 d-none d-lg-block" alt="...">
+                <img src="/wp-content/uploads/2024/09/superjimat-power35-mobilebanner.webp" class="w-100 d-block d-md-block d-lg-none" alt="...">
+                <article>
+                    <div class="container">
+                        <div class="inner-content-sec">
+                            <div>
+                                <h1 style="">Pelan 5G dengan<br> simpanan BESAR!</h1>
+                                <div class="btn-sec d-flex align-items-center">
+                                    <div class="pricing-2 align-items-center">
+                                        <h4 class="d-block">
+                                            <sup><span>Dari<br><b>RM</b></span></sup>35<span class="month-sec">/bln</span>
+                                        </h4>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- <button class="carousel-control-prev d-none" type="button" data-bs-target="#hero-slider"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next d-none" type="button" data-bs-target="#hero-slider"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button> -->
+
         </div>
-   </div> -->
-
-
-       
     </div>
 </section>
 <!-- Slider End -->
 
-
 <!-- Mid-section -->
 <section id="device-main-section">
-<div class="cap-search-box-main">
-    <div class="container">
+    <div class="cap-search-box-main">
+        <div class="container">
 
-        <div class="row">
-            <div class="col-12 col-xl-12 col-lg-12 col-md-12">
-                <div class="cap-search-box clearfix">
-                    <span class="">Peranti-Peranti</span>
-                    <div class="mobile-filter">
-                        <ul>
-                        <li>
-                            <a href="javascript:void(0);" class="filter">
-                            Filter <img decoding="async" src="/wp-content/uploads/2024/02/filter-icon.png" alt="filter">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);" class="search">
+            <div class="row">
+                <div class="col-12 col-xl-12 col-lg-12 col-md-12">
+                    <div class="cap-search-box clearfix">
+                        <span class="">Peranti-Peranti</span>
+                        <div class="mobile-filter">
+                            <ul>
+                                <li>
+                                    <a href="javascript:void(0);" class="filter">
+                                        Filter <img decoding="async" src="/wp-content/uploads/2024/02/filter-icon.png" alt="filter">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" class="search">
+                                        <img decoding="async" src="/wp-content/uploads/2024/02/search-icon.png" alt="search"></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="device_cat_search">
+                            <input type="text" class="form-control" id="search" placeholder="Cari sebarang peranti">
+                            <a href="javascript:void(0);" class="btn">
                                 <img decoding="async" src="/wp-content/uploads/2024/02/search-icon.png" alt="search"></a>
-                        </li>
-                    </ul>
-                    </div>
-                    <div class="device_cat_search">
-                        <input type="text" class="form-control" id="search" placeholder="Cari sebarang peranti">
-                        <a href="javascript:void(0);" class="btn">
-                            <img decoding="async" src="/wp-content/uploads/2024/02/search-icon.png" alt="search"></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-        
-</div>
 
-<!-- <div id="noResultMessage" style="display: none; text-align:center">
+    </div>
+
+    <!-- <div id="noResultMessage" style="display: none; text-align:center">
 <h3>Uh Oh! We couldn't find any result</h3>
 <p>We cannot find any matches for selected filter</p>
 </div> -->
 
-<div class="container">
+    <div class="container">
         <div class="row mt-5">
             <div class="col col-lg-3" id="filter-section">
-            <a href="javascript:void(0);" class="cancel-btn">
-            <img decoding="async" src="/wp-content/uploads/2024/01/cancel-icon.png" alt="cancel"></a>
-             <div class="filter-accordion">
-                <h2 class="h2text">Filters</h2>
+                <a href="javascript:void(0);" class="cancel-btn">
+                    <img decoding="async" src="/wp-content/uploads/2024/01/cancel-icon.png" alt="cancel"></a>
+                <div class="filter-accordion">
+                    <h2 class="h2text">Filters</h2>
                     <div class="accordion-item">
                         <h2 id="regularHeadingFirst" class="accordion-header">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#regularCollapseFirst" aria-expanded="true" aria-controls="regularCollapseFirst">
@@ -137,11 +236,11 @@
                             </button>
                         </h2>
                         <div id="regularCollapseFirst" class="accordion-collapse collapse show" aria-labelledby="regularHeadingFirst" data-bs-parent="#regularAccordionRobots">
-                            <div class="accordion-body px-2">                              
+                            <div class="accordion-body px-2">
                                 <ul>
                                     <li class="checkbox">
                                         <label>
-                                            <input class="form-check-input filter_option filter_fl-brand_option_all" type="checkbox" name="fl-brand" value="All" id="All" checked  />
+                                            <input class="form-check-input filter_option filter_fl-brand_option_all" type="checkbox" name="fl-brand" value="All" id="All" checked />
                                             All
                                         </label>
                                     </li>
@@ -158,11 +257,11 @@
                                     foreach ($brands as $brand) :
                                     ?>
                                         <li class="checkbox">
-                                        <label>
-                                            <input class="form-check-input filter_option" type="checkbox" name="fl-brand" value="<?= $brand->slug ?>" id="<?= $brand->slug ?>"  />
-                                            <?= $brand->name ?>
-                                        </label>
-                                    </li>
+                                            <label>
+                                                <input class="form-check-input filter_option" type="checkbox" name="fl-brand" value="<?= $brand->slug ?>" id="<?= $brand->slug ?>" />
+                                                <?= $brand->name ?>
+                                            </label>
+                                        </li>
                                     <?php
                                     endforeach;
                                     ?>
@@ -211,7 +310,7 @@
                             </div>
                         </div>
                     </div>
-                
+
 
                     <div class="accordion-item">
                         <h2 id="regularHeadingThree" class="accordion-header">
@@ -221,10 +320,10 @@
                         </h2>
                         <div id="regularCollapseThree" class="accordion-collapse collapse" aria-labelledby="regularHeadingThree" data-bs-parent="#regularAccordionRobots">
                             <div class="accordion-body px-2">
-                            <ul>
+                                <ul>
                                     <li class="checkbox">
                                         <label>
-                                            <input class="form-check-input promotion_filter filter_option filter_promotion_option_all" type="checkbox" name="promotion" value="All" id="All" checked  />
+                                            <input class="form-check-input promotion_filter filter_option filter_promotion_option_all" type="checkbox" name="promotion" value="All" id="All" checked />
                                             All
                                         </label>
                                     </li>
@@ -242,7 +341,7 @@
                                     ?>
                                         <li class="checkbox">
                                             <label>
-                                                <input class="form-check-input promotion_filter filter_option" type="checkbox" name="promotion"value="<?= $promotion->name ?>" id="<?= $promotion->slug ?>" />
+                                                <input class="form-check-input promotion_filter filter_option" type="checkbox" name="promotion" value="<?= $promotion->name ?>" id="<?= $promotion->slug ?>" />
                                                 <?= $promotion->name ?>
                                             </label>
                                         </li>
