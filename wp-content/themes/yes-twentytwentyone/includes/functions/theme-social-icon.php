@@ -9,6 +9,7 @@ function add_whatsapp_icon_to_footer()
     $whatsapp_icon_url = 'https://ytlmarketing.blob.core.windows.net/site/wp-content/uploads/2024/08/sofia-icon.png';
     // $icon_message = "Ask Sofia";
     $lang = get_bloginfo("language");
+    $icon_message = 'Ask Sofia';
     if ($lang == "en-US") {
         $icon_message = 'Ask Sofia';
     } elseif ($lang == "ms-MY") {
